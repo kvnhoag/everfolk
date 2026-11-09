@@ -156,6 +156,7 @@
 .admin-preview-stats>div{padding:12px 15px;background:#f0f3e8;border:1px solid #d9e1cb;border-radius:3px}
 .admin-preview-stats span{font-size:9px;color:#91a17e}
 .admin-preview-stats strong{display:block;font-size:22px;line-height:1.4;color:#6d8557;margin-top:4px;font-weight:550}
+.admin-preview-percentile{display:block;font-size:10px;line-height:1.6;color:#766343;margin-top:6px}
 .admin-preview-decision{background:#f5eddc;border:1px solid #dcc8a6;border-left:3px solid #b79569;border-radius:4px;padding:22px;margin:24px 0}
 .admin-preview-decision h3{font-family:"Libre Caslon Display",Georgia,serif;font-size:29px;line-height:1.2;font-weight:400;color:#96764f;margin:0 0 12px}
 .admin-preview-decision p{font-size:12px;line-height:1.9;color:#a08b68;margin:0 0 19px}

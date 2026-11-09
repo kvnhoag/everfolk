@@ -156,7 +156,7 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
       const moneyValue = getNetWorth(world, life);
       const moneyRange = { min: range.min * world.economy.unitsPerPoint, max: range.max * world.economy.unitsPerPoint };
       const hasDirectFinance = birthEffects.some(effect => effect.type === "cash" || effect.type === "debt" || effect.type === "asset");
-      return { id, label: "Wealth", value: moneyValue, currency: world.economy.currency.short,
+      return { id, label: "Total wealth", value: moneyValue, currency: world.economy.currency.short,
         ...(isBirthValue && !hasDirectFinance && moneyValue >= moneyRange.min && moneyValue <= moneyRange.max ? { range: moneyRange } : {}) };
     }
     return { id, label: definition.label, value, ...(isBirthValue ? { range } : {}) };

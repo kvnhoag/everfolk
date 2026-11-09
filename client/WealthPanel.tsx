@@ -2,6 +2,7 @@ import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import { practiceBlockReason } from "./skill-tree.ts";
 import { formatMoney, getWealthSummary } from "./wealth.ts";
+import { formatWealthPercentile, formatWealthStanding } from "./wealth-comparison.ts";
 import MoneylenderPanel from "./MoneylenderPanel.tsx";
 import { isLoanAction } from "./loan-summary.ts";
 import { activityLoanOffer } from "./loan-access.ts";
@@ -18,7 +19,11 @@ export default function WealthPanel({ life, world, activities, onActivity }: {
   const hasFreePayments = finance.some(activity => activity.usesYearlyActivity === false);
   return <section className="wealth-panel" aria-label="Your household wealth">
     <div className="character-section-heading"><span>{life.age < 18 ? "Household funds" : "Finances"}</span><h3>Wealth</h3><p>{life.age < 18 ? "Your family manages these funds while you grow up." : "Your household’s cash, possessions and debts."}</p></div>
-    <div className="wealth-net-worth"><span>ESTIMATED NET WORTH</span><strong className={summary.netWorth < 0 ? "wealth-negative" : ""}>{money(summary.netWorth)}</strong><p>Cash + possessions − debt</p></div>
+    <div className="wealth-overview">
+      <div className="wealth-net-worth"><span>TOTAL WEALTH</span><strong className={summary.netWorth < 0 ? "wealth-negative" : ""}>{money(summary.netWorth)}</strong><p>Estimated net worth · Cash + possessions − debt</p></div>
+      {summary.comparison && <div className="wealth-comparison"><span>SOCIETY PERCENTILE</span><strong>{formatWealthStanding(summary.comparison.percentile)}</strong><p>Wealthier than {formatWealthPercentile(summary.comparison.percentile)} of households.</p><div className="wealth-percentile-track" role="meter" aria-label="Society wealth percentile" aria-valuemin={0} aria-valuemax={100} aria-valuenow={summary.comparison.percentile} aria-valuetext={`${formatWealthStanding(summary.comparison.percentile)} · Wealthier than ${formatWealthPercentile(summary.comparison.percentile)} of benchmark households`}><span style={{ width: `${summary.comparison.percentile}%` }} /></div><small>Game estimate</small></div>}
+    </div>
+    {summary.comparison && <div className="wealth-benchmark"><p>Median household wealth <strong>{money(summary.comparison.medianWealth)}</strong><span>{summary.netWorth === summary.comparison.medianWealth ? "You are at the median." : `${money(Math.abs(summary.netWorth - summary.comparison.medianWealth))} ${summary.netWorth > summary.comparison.medianWealth ? "above" : "below"} the median.`}</span></p><small>Compared with this world’s starting households, weighted by background. A fixed game benchmark; household wealth does not evolve with your age or year. Equal wealth is not counted below yours.</small></div>}
     <dl className="wealth-breakdown"><div><dt>Available cash</dt><dd>{money(summary.cash)}</dd><p>Ready to spend</p></div><div><dt>Possessions</dt><dd>{money(summary.assetTotal)}</dd><p>Estimated sale value</p></div><div><dt>Debt</dt><dd className={summary.debt ? "wealth-negative" : ""}>{money(summary.debt)}</dd><p>{life.economy?.loan ? `Includes ${money(summary.normalDebt)} household debt` : "Still owed"}</p></div></dl>
     <p className="wealth-muted">{world.economy.autoDebtRepayment ? world.economy.moneylender ? "Each year, spare cash repays ordinary household debt. Moneylender loans have their own payment controls below." : "Each year, cash left after regular living costs automatically repays debt. Possessions are kept." : "Debt payments are manual in this life."}</p>
     <MoneylenderPanel life={life} world={world} activities={activities} onActivity={onActivity} />

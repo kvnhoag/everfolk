@@ -22,8 +22,8 @@ import LoanOfferDialog from "./LoanOfferDialog.tsx";
 import type { LoanRequest } from "./LoanOfferDialog.tsx";
 import LoanDeadlineDialog from "./LoanDeadlineDialog.tsx";
 import YearlyFocus from "./YearlyFocus.tsx";
-import { getNetWorth } from "../src/economy.ts";
 import { formatMoney } from "./wealth.ts";
+import { formatWealthStanding, getWealthComparison } from "./wealth-comparison.ts";
 import PixelIcon from "./PixelIcon.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
@@ -137,6 +137,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
   const world = lifeEngine.world;
+  const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life]);
   const place = worldPlace(world, life.year);
   const birthplace = worldPlace(world, world.startYear);
   const characterName = life.character?.name ?? "Damon";
@@ -170,6 +171,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
   const chronicleName = chronicleLife.character?.name ?? "Damon";
   const chronicleNameKnown = viewedLife !== null || game.hasRevealedStats;
   const chronicleWorld = engineForLife(chronicleLife).world;
+  const chronicleWealthComparison = useMemo(() => chronicleLife === life ? wealthComparison : getWealthComparison(chronicleWorld, chronicleLife), [chronicleLife, life, wealthComparison, chronicleWorld]);
   const chronicleCause = chronicleWorld.character?.deathCauses.find(item => item.id === chronicleLife.deathCauseId);
   const chronicleEnding = chronicleWorld.endings.find(item => item.id === chronicleLife.endingId);
   const stage = lifeStage(life.age);
@@ -417,7 +419,11 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           </div>}
           <div className="stats" aria-label="Life attributes" aria-busy={!game.hasRevealedStats}>
             {Object.entries(world.stats).map(([id, definition]) => world.economy?.stat === id && life.economy ? <div className={`stat stat-${id} stat-financial`} key={id}>
-              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label="Open wealth details" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}><div className="stat-heading"><span><Icon name="coin" size={16} />Wealth</span><strong>{game.hasRevealedStats ? formatMoney(getNetWorth(world, life), world) : "—"}</strong></div><span className="stat-wealth-cash"><span>{game.hasRevealedStats ? `Cash ${formatMoney(life.economy.cash, world)}` : "Money not yet revealed"}</span><span aria-hidden="true">Details ↗</span></span></button>
+              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label="Open total wealth and society comparison" title="Total wealth is cash + possessions − debt. Society percentile compares your wealth with the game's starting households." onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>
+                <div className="stat-heading"><span><Icon name="coin" size={16} />Total wealth</span><strong>{game.hasRevealedStats && wealthComparison ? formatMoney(wealthComparison.netWorth, world) : "—"}</strong></div>
+                <span className="stat-wealth-percentile"><span>Society percentile</span><strong>{game.hasRevealedStats && wealthComparison ? formatWealthStanding(wealthComparison.percentile) : "—"}</strong></span>
+                <span className="stat-wealth-cash"><span>{game.hasRevealedStats ? `Cash ${formatMoney(life.economy.cash, world)}` : "Money not yet revealed"}</span><span aria-hidden="true">Details ↗</span></span>
+              </button>
             </div> : <div className={`stat stat-${id}`} key={id}>
               <div className="stat-heading"><span><Icon name={statIcons[id] ?? "sun"} size={16} />{definition.label}</span><strong key={life.stats[id]}>{game.hasRevealedStats ? <>{Number(life.stats[id].toFixed(1))}<small> / {definition.max}</small></> : "—"}</strong></div>
               <div className="stat-track" role={game.hasRevealedStats ? "meter" : undefined} aria-label={game.hasRevealedStats ? definition.label : `${definition.label} not yet revealed`} aria-valuemin={game.hasRevealedStats ? definition.min : undefined} aria-valuemax={game.hasRevealedStats ? definition.max : undefined} aria-valuenow={game.hasRevealedStats ? life.stats[id] : undefined}><span style={{ width: game.hasRevealedStats ? `${(life.stats[id] - definition.min) / (definition.max - definition.min) * 100}%` : "0%" }} /></div>
@@ -489,7 +495,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           <p className="eyebrow">{chronicleNameKnown ? chronicleName.toLocaleUpperCase() : "CHRONICLE"}</p><h2 id="dialog-title">Life history</h2>
           <p className="dialog-subtitle">{chronicleLife.phase === "ended" ? `${formatYear(chronicleWorld.startYear)} — ${formatYear(chronicleLife.year)} · ${yearsLived(chronicleLife.age)}` : "Every recorded year, event and decision."}</p>
           {chronicleLife.deathCauseContext && <p><strong>{chronicleLife.deathCauseKind === "condition" ? "Health history:" : "What led to it:"}</strong> {chronicleLife.deathCauseContext}</p>}{chronicleCause ? <p><strong>Cause of death: {chronicleCause.title}.</strong> {chronicleCause.text}</p> : chronicleEnding && <p>{chronicleEnding.text}</p>}
-          {chronicleNameKnown && chronicleWorld.economy && chronicleLife.economy && <p className="wealth-summary-line"><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Wealth at record end" : "Wealth at death" : "Current wealth"}:</strong> {formatMoney(getNetWorth(chronicleWorld, chronicleLife), chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p>}
+          {chronicleNameKnown && chronicleWealthComparison && chronicleLife.economy && <div className="wealth-summary-line"><p><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Total wealth at record end" : "Total wealth at death" : "Total wealth"}:</strong> {formatMoney(chronicleWealthComparison.netWorth, chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p><p><strong>Society percentile:</strong> {formatWealthStanding(chronicleWealthComparison.percentile)} · Median household wealth {formatMoney(chronicleWealthComparison.medianWealth, chronicleWorld)}. Game estimate against this world’s fixed starting-household benchmark.</p></div>}
           {chronicleNameKnown ? <LifeJournal life={chronicleLife} /> : <p>Your starting stats are still being revealed. Return to your life to finish the reveal.</p>}
           <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `${chronicleName.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "historical"}-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
         </> : panel === "legacy" ? <>

@@ -1,6 +1,7 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../src/types.ts";
 import { financeActivityReason, getNetWorth, previewEconomyEffects } from "../src/economy.ts";
 import { matchesCondition } from "../src/engine.ts";
+import { getWealthComparison } from "./wealth-comparison.ts";
 
 export function formatMoney(amount: number, world: WorldPack, full = false): string {
   const currency = world.economy?.currency;
@@ -77,7 +78,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
     cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets),
-    netWorth: getNetWorth(world, life), job, jobCash, fixedYearlyCash, conditionalCosts,
+    netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), job, jobCash, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),
     lessonPrices, affordableLessons: lessonPrices.length ? Math.floor(life.economy.cash / lessonPrices[0]) : 0,

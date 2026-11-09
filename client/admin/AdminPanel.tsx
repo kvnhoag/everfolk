@@ -10,7 +10,7 @@ import BirthRollPopover from "../BirthRollPopover.tsx";
 import SkillTree from "../SkillTree.tsx";
 import WealthPanel from "../WealthPanel.tsx";
 import { formatMoney } from "../wealth.ts";
-import { getNetWorth } from "../../src/economy.ts";
+import { formatWealthStanding, getWealthComparison } from "../wealth-comparison.ts";
 import StartingStatsEditor from "./StartingStatsEditor.tsx";
 import PlayerNamesEditor from "./PlayerNamesEditor.tsx";
 import LoanEffectEditor from "./LoanEffectEditor.tsx";
@@ -159,6 +159,7 @@ function PreviewPanel({ world }: { world: ManagedWorld }) {
   const nextRunId = useRef(0);
   const [error, setError] = useState("");
   const current = preview?.life;
+  const wealthComparison = useMemo(() => current && preview ? getWealthComparison(preview.engine.world, current) : null, [current, preview?.engine]);
   function start(lifeSeed = seed) {
     try {
       const engine = createEngine(compileWorld(world));
@@ -197,7 +198,7 @@ function PreviewPanel({ world }: { world: ManagedWorld }) {
       <div className="admin-preview-status"><div><span>CURRENT YEAR</span><strong>{formatYear(current.year)}</strong></div><div><span>AGE</span><strong>{current.age}</strong></div><div><span>STATE</span><strong>{current.phase === "choice" ? "A decision" : current.phase === "ended" ? "Complete" : "Life continues"}</strong></div></div>
       <p className="admin-preview-origin"><span>ORIGIN</span><strong>{preview.engine.world.origins.find(origin => origin.id === current.originId)?.title ?? current.originId}</strong></p>
       <p className="admin-preview-background">{preview.engine.world.origins.find(origin => origin.id === current.originId)?.text}</p>
-      <div className="admin-preview-stats">{Object.entries(preview.engine.world.stats).map(([id, stat]) => <div key={id}><span>{stat.label}</span><strong>{preview.engine.world.economy?.stat === id && current.economy ? formatMoney(getNetWorth(preview.engine.world, current), preview.engine.world) : Number(current.stats[id].toFixed(1))}</strong></div>)}</div>
+      <div className="admin-preview-stats">{Object.entries(preview.engine.world.stats).map(([id, stat]) => preview.engine.world.economy?.stat === id && wealthComparison ? <div key={id}><span>Total wealth</span><strong>{formatMoney(wealthComparison.netWorth, preview.engine.world)}</strong><small className="admin-preview-percentile">Society percentile · {formatWealthStanding(wealthComparison.percentile)}</small></div> : <div key={id}><span>{stat.label}</span><strong>{Number(current.stats[id].toFixed(1))}</strong></div>)}</div>
       <PaperScene life={current} compact world={preview.engine.world} eventVisuals={world.eventVisuals} />
       {current.pendingEventId && <div className="admin-preview-decision"><h3>{preview.engine.world.events.find(event => event.id === current.pendingEventId)?.title}</h3><p>{preview.engine.world.events.find(event => event.id === current.pendingEventId)?.text}</p>{preview.engine.getChoices(current).map(choice => <button className="admin-button admin-button-quiet" type="button" key={choice.id} onClick={() => run((engine, life) => engine.choose(life, choice.id))}><span>{choice.text} →</span><ChoiceImpact choice={choice} life={current} world={preview.engine.world} hideSkills={false} /></button>)}</div>}
       {preview.engine.world.character && <details className="admin-preview-skill-tree"><summary>Skill tree</summary><SkillTree life={current} world={preview.engine.world} activities={preview.engine.getActivities(current)} onActivity={id => run((engine, life) => engine.act(life, id))} /></details>}
