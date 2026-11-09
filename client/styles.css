@@ -175,4 +175,7 @@
 .memorial-cause > span { font-size: .65rem; letter-spacing: .12em; }
 .memorial-cause > strong { font-family: var(--font-display, Georgia, serif); font-size: 1.5rem; }
 .death-context { display: grid; gap: .5rem; padding: 1rem; background: #eee2d2; border: 1px solid #cfb598; }
+.streamlined-decision{grid-template-columns:1fr;gap:0;padding:18px 0}.streamlined-decision .choice-list{gap:10px}.streamlined-decision .choice-impact-note{margin:0 0 2px}.life-clock{flex-wrap:wrap;margin-top:18px}.life-clock .playback-label{flex:1;min-width:160px}.life-clock .year-clock-track{flex-basis:100%;margin:0;height:3px}.life-clock .turning-point-button{font-size:11px;white-space:nowrap}.life-clock .play-button,.life-clock .speed-button{min-width:32px;min-height:32px}.streamlined-decision+.life-clock{margin-top:0}
+@media(max-width:760px){.another-life{display:inline-flex;grid-column:1/-1;justify-self:start;margin-top:12px}}
+@media(max-width:600px){.life-clock{gap:10px}.life-clock .turning-point-button{order:3;margin-left:auto}.life-clock .year-clock-track{order:4}.life-clock .playback-label{min-width:120px}.life-clock .playback-controls{gap:0}}
 @media(max-width:760px) { .character-open { grid-column: 1 / -1; margin-top: .9rem; } }

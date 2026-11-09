@@ -77,6 +77,7 @@ test("legacy fixed starts include origin offsets in their displayed range", () =
 test("birth effect clamping is reflected without mutating the pack ranges", () => {
   const world = structuredClone(pack) as WorldPack;
   world.origins = [world.origins[0]];
+  world.events = world.events.filter(event => !event.id.startsWith("background-"));
   world.origins[0].statRanges = { health: { min: 90, max: 99 } };
   world.origins[0].effects = [{ type: "stat", stat: "health", delta: 8 }];
   const engine = createEngine(world);
@@ -86,10 +87,10 @@ test("birth effect clamping is reflected without mutating the pack ranges", () =
   assert.deepEqual(world.origins[0].statRanges.health, { min: 90, max: 99 });
 });
 
-test("later choices do not receive a misleading birth range", () => {
+test("later progression does not receive a misleading birth range", () => {
   const engine = createEngine(pack);
   const born = engine.start("later-birth-range");
-  const life = engine.choose(born, "family-care");
+  const life = engine.advance(born);
   assert.ok(getBirthRollStats(engine.world, life).every(stat => stat.range === undefined));
 });
 

@@ -12,6 +12,121 @@ export interface BirthRollStat {
 export type BirthRollPhase = "waiting" | "rolling" | "settled";
 export const BIRTH_ROLL_DURATION_MS = 3_200;
 export const BIRTH_ORIGIN_REVEAL_MS = 420;
+export const BIRTH_DIGIT_FRAME_MS = 120;
+
+export interface BirthRollDigit {
+  digit: number;
+  previous: number;
+  direction: "up" | "down";
+}
+
+export interface BirthReelLayout {
+  integerPlaces: number;
+  fractionPlaces: number;
+  hasSign: boolean;
+  digitCount: number;
+}
+
+export interface BirthDigitReel {
+  direction: "up" | "down";
+  /** Unwrapped digit position: increasing travels up, decreasing travels down. */
+  position: number;
+  /** The fractional offset within the current adjacent pair of digits. */
+  fraction: number;
+  /** Previous, current and next rows of the virtual strip, from top to bottom. */
+  glyphs: [number, number, number];
+  /** Read only when the card settles; never an additional simulation draw. */
+  finalDigit: number;
+}
+
+function cosmeticHash(key: string): number {
+  let hash = 2166136261;
+  for (let index = 0; index < key.length; index++) hash = Math.imul(hash ^ key.charCodeAt(index), 16777619);
+  return hash >>> 0;
+}
+
+function mod10(value: number): number { return ((value % 10) + 10) % 10; }
+
+function decimalPlaces(value: number): number {
+  const [coefficient, exponent = "0"] = String(value).toLowerCase().split("e");
+  return Math.max(0, (coefficient.split(".")[1]?.length ?? 0) - Number(exponent));
+}
+
+/** Reserve the same geometry throughout the reveal using public bounds only. */
+export function getBirthReelLayout(stat: BirthRollStat): BirthReelLayout {
+  const largest = stat.range ? Math.max(Math.abs(stat.range.min), Math.abs(stat.range.max)) : 999;
+  const places = Number.isFinite(largest) && largest >= 1 ? Math.floor(Math.log10(largest)) + 1 : 1;
+  const integerPlaces = Math.max(2, Math.min(16, places));
+  const fractionPlaces = stat.range
+    ? Math.min(16 - integerPlaces, Math.max(decimalPlaces(stat.range.min), decimalPlaces(stat.range.max)))
+    : 0;
+  return { integerPlaces, fractionPlaces, hasSign: !stat.range || stat.range.min < 0, digitCount: integerPlaces + fractionPlaces };
+}
+
+/** Unusual imported values may need the existing exact-value formatter instead. */
+export function canRepresentBirthReelValue(stat: BirthRollStat, layout = getBirthReelLayout(stat)): boolean {
+  const magnitude = Math.abs(stat.value);
+  if (!Number.isFinite(magnitude) || (stat.value < 0 && !layout.hasSign)) return false;
+  const integer = String(Math.trunc(magnitude));
+  return !integer.includes("e") && integer.length <= layout.integerPlaces &&
+    Number(magnitude.toFixed(layout.fractionPlaces)) === magnitude;
+}
+
+function reelIdentity(stat: BirthRollStat, seed: string, place: number) {
+  const key = `${seed}:birth-digit:${stat.id}:${place}`;
+  const direction = cosmeticHash(`${key}:direction`) % 2 === 0 ? "up" as const : "down" as const;
+  return { key, direction, sign: direction === "up" ? 1 : -1, start: cosmeticHash(`${key}:start`) % 10 };
+}
+
+/** Cosmetic reels have no knowledge of the chosen final value. Public range
+ * bounds only reserve room; fixed starts and zero still get moving digits. */
+export function getCosmeticBirthDigits(stat: BirthRollStat, seed: string, frame: number): BirthRollDigit[] {
+  const count = getBirthReelLayout(stat).digitCount;
+  const currentFrame = Number.isFinite(frame) ? Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, Math.floor(frame))) : 0;
+  return Array.from({ length: count }, (_, place) => {
+    const { direction, sign, start } = reelIdentity(stat, seed, place);
+    return {
+      digit: mod10(start + sign * (currentFrame % 10)),
+      previous: mod10(start + sign * ((currentFrame - 1) % 10)),
+      direction,
+    };
+  });
+}
+
+export function getBirthRollTiming(statIndex: number, statCount: number): { startsAt: number; settlesAt: number } {
+  const count = Math.max(1, Number.isFinite(statCount) ? Math.floor(statCount) : 1);
+  const index = Math.max(0, Math.min(count - 1, Number.isFinite(statIndex) ? Math.floor(statIndex) : 0));
+  return {
+    startsAt: BIRTH_ORIGIN_REVEAL_MS + index * Math.min(180, 2_000 / count),
+    settlesAt: 900 + (index + 1) * (2_300 / count),
+  };
+}
+
+/**
+ * A continuous reel turns in one direction, then slows into the selected value.
+ * Only the virtual three-row strip is rendered; full turns never grow the DOM.
+ */
+export function getBirthDigitReels(stat: BirthRollStat, seed: string, elapsedMs: number, statIndex: number, statCount: number): BirthDigitReel[] {
+  const layout = getBirthReelLayout(stat);
+  const { startsAt, settlesAt } = getBirthRollTiming(statIndex, statCount);
+  const elapsed = Number.isNaN(elapsedMs) ? 0 : elapsedMs;
+  const progress = Math.max(0, Math.min(1, (elapsed - startsAt) / (settlesAt - startsAt)));
+  const eased = 1 - (1 - progress) ** 3;
+  const formatted = canRepresentBirthReelValue(stat, layout)
+    ? Math.abs(stat.value).toFixed(layout.fractionPlaces).replace(".", "")
+    : String(Math.trunc(Math.abs(stat.value))).replace(/\D/g, "");
+  const targets = formatted.padStart(layout.digitCount, "0").slice(-layout.digitCount);
+  return Array.from({ length: layout.digitCount }, (_, place) => {
+    const { key, direction, sign, start } = reelIdentity(stat, seed, place);
+    const finalDigit = Number(targets[place]);
+    const turns = 2 + cosmeticHash(`${key}:turns`) % 2;
+    const remainder = direction === "up" ? mod10(finalDigit - start) : mod10(start - finalDigit);
+    const distance = turns * 10 + remainder;
+    const position = progress === 1 ? start + sign * distance : start + sign * distance * eased;
+    const base = Math.floor(position);
+    return { direction, position, fraction: position - base, glyphs: [mod10(base - 1), mod10(base), mod10(base + 1)], finalDigit };
+  });
+}
 
 /** A display model only: the simulation has already chosen all these values. */
 export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollStat[] {
@@ -57,8 +172,7 @@ export function getBirthRollFrame(elapsedMs: number, statCount: number): {
     originRevealed: elapsed >= BIRTH_ORIGIN_REVEAL_MS,
     complete,
     phases: Array.from({ length: count }, (_, index) => {
-      const startsAt = BIRTH_ORIGIN_REVEAL_MS + index * Math.min(180, 2_000 / Math.max(1, count));
-      const settlesAt = 900 + (index + 1) * (2_300 / Math.max(1, count));
+      const { startsAt, settlesAt } = getBirthRollTiming(index, count);
       return elapsed >= settlesAt ? "settled" : elapsed >= startsAt ? "rolling" : "waiting";
     }),
   };

@@ -32,6 +32,20 @@ export function syncEconomyStat(world: WorldPack, state: LifeState): void {
   state.stats[world.economy.stat] = Math.max(definition.min, Math.min(definition.max, getNetWorth(world, state) / world.economy.unitsPerPoint));
 }
 
+/** Settle debt only at the engine's annual boundary, after ordinary costs.
+ * Repayment transfers existing cash; it never borrows or sells possessions. */
+export function repayDebtAutomatically(world: WorldPack, state: LifeState): number {
+  if (!world.economy?.autoDebtRepayment || !state.economy || state.phase === "ended") return 0;
+  const cash = amount(state.economy.cash, "Cash"), debt = amount(state.economy.debt, "Debt");
+  const repaid = Math.min(cash, debt);
+  if (repaid === 0) return 0;
+  const remainingCash = amount(cash - repaid, "Cash"), remainingDebt = amount(debt - repaid, "Debt");
+  state.economy.cash = remainingCash;
+  state.economy.debt = remainingDebt;
+  syncEconomyStat(world, state);
+  return repaid;
+}
+
 /** Apply one ledger effect. Insufficient mandatory cash expenses become unpaid debt. */
 export function applyEconomyEffect(world: WorldPack, state: LifeState, effect: Effect): boolean {
   if (!world.economy || !state.economy) return false;

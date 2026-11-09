@@ -1,4 +1,5 @@
 import type { ActivityAvailability, CharacterActivity, Condition, JobDefinition, LifeState, SkillDefinition, WorldPack } from "../src/types.ts";
+import { formatYear } from "../src/calendar.ts";
 
 export type SkillState = "locked" | "ready" | "learning" | "mastered";
 export interface SkillRequirement { id: string; label: string; value: number; required: number; met: boolean }
@@ -7,7 +8,7 @@ export interface SkillNode {
   id: string; label: string; description: string; branch: string; tier: number;
   value: number; min: number; max: number; progress: number; state: SkillState;
   requirements: SkillRequirement[]; minAge: number; ageMet: boolean;
-  training: ActivityAvailability[]; canPractice: boolean; careers: SkillCareer[];
+  training: ActivityAvailability[]; canPractice: boolean; careers: SkillCareer[]; paidWork: ActivityAvailability[];
 }
 export interface SkillEdge { from: string; to: string; threshold: number; met: boolean }
 export interface SkillTreeModel { nodes: SkillNode[]; edges: SkillEdge[]; branches: string[]; otherTraining: ActivityAvailability[] }
@@ -57,6 +58,53 @@ function trains(activity: CharacterActivity, id: string): boolean {
   return activity.category === "training" && activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "skill" && effect.skill === id && effect.delta > 0));
 }
 
+function gainsSkill(effects: CharacterActivity["outcomes"][number]["effects"], id: string): boolean {
+  return effects.some(effect => effect.type === "skill" && effect.skill === id && effect.delta > 0);
+}
+
+/** Paid tasks never include accepting, leaving or changing an occupation. */
+function isPaidWork(activity: CharacterActivity, world: WorldPack): boolean {
+  if (activity.category !== "career" || activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job"))) return false;
+  return activity.outcomes.some(outcome => {
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type === "cash" && effect.delta > 0 ||
+        effect.type === "stat" && effect.stat === (world.economy?.stat ?? "wealth") && effect.delta > 0) return true;
+    }
+    return false;
+  });
+}
+
+/** Display only requirements shared by every route; availability stays in the engine. */
+export function skillActionRequirements(activity: CharacterActivity, world: WorldPack): string[] {
+  const describe = (condition?: Condition): string[] => {
+    if (!condition) return [];
+    if (condition.type === "all") return [...new Set(condition.conditions.flatMap(describe))];
+    if (condition.type === "any") {
+      const alternatives = condition.conditions.map(describe);
+      return alternatives.length ? alternatives[0].filter(note => alternatives.every(notes => notes.includes(note))) : [];
+    }
+    if (condition.type === "skill" && (condition.op === "gte" || condition.op === "eq") && condition.value > 0) {
+      return [`${world.character?.skills[condition.skill]?.label ?? condition.skill} ${condition.value}`];
+    }
+    if (condition.type === "asset" && (condition.op === "gte" || condition.op === "eq") && condition.value > 0) {
+      const asset = world.economy?.assets.find(asset => asset.id === condition.asset);
+      return [`Own ${asset?.title.toLocaleLowerCase() ?? condition.asset}${condition.value > 1 ? ` (${condition.value})` : ""}`];
+    }
+    if (condition.type === "cash" && condition.op === "gte" && condition.value > 0) return [`Cash at least ${condition.value} ${world.economy?.currency.short ?? ""}`.trim()];
+    if (condition.type === "year" && condition.value !== 0) {
+      const relation = { gte: "From", gt: "After", lt: "Before", lte: "Through", eq: "In", ne: undefined }[condition.op];
+      return relation ? [`${relation} ${formatYear(condition.value)}`] : [];
+    }
+    return [];
+  };
+  return [
+    ...(activity.minAge ? [`Age ${activity.minAge}+`] : []),
+    ...describe(activity.when),
+    ...((activity.cooldownYears ?? 1) > 1 ? [`Every ${activity.cooldownYears} years`] : []),
+  ];
+}
+
 /** Canonical training avoids mistaking a secondary skill gain for a separate route. */
 function trainingFor(id: string, definition: SkillDefinition, activities: readonly ActivityAvailability[]): ActivityAvailability[] {
   const exact = definition.trainingActivity && activities.find(activity => activity.id === definition.trainingActivity);
@@ -66,9 +114,9 @@ function trainingFor(id: string, definition: SkillDefinition, activities: readon
 
 export function practiceBlockReason(activity: ActivityAvailability, life: LifeState): string | undefined {
   if (life.phase === "ended") return "This life has ended.";
-  if (life.phase === "choice") return "Resolve the current decision first.";
-  if (life.character?.lastActivityAge === life.age) return "Your personal activity is complete. Practice again next year.";
-  return activity.available ? undefined : activity.reason ?? "This practice is unavailable right now.";
+  if (life.phase === "choice") return "Make the pending choice first.";
+  if (activity.usesYearlyActivity !== false && life.character?.lastActivityAge === life.age) return "Action used. Available next year.";
+  return activity.available ? undefined : activity.reason ?? "Unavailable right now.";
 }
 
 /** A read-only projection of the current rules and engine-supplied availability. */
@@ -88,7 +136,7 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
     const value = current[id] ?? definition.min;
     const ageMet = life.age >= minAge;
     const unlocked = ageMet && requirements.every(item => item.met);
-    const careers = world.character!.jobs.filter(job => id in (job.requirements ?? {})).map((job): SkillCareer => {
+    const careers = world.character!.jobs.filter(job => id in (job.requirements ?? {}) || gainsSkill(job.yearlyEffects, id)).map((job): SkillCareer => {
       const requirements = Object.entries(job.requirements ?? {}).map(([skill, threshold]) => requirement(skill, threshold));
       return {
         job, requirements, ageMet: life.age >= job.minAge,
@@ -101,6 +149,9 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
       branch: definition.branch ?? knownBranches[id] ?? "Other studies", tier: definition.tier ?? 0,
       value, min: definition.min, max: definition.max, progress: Math.max(0, Math.min(1, (value - definition.min) / (definition.max - definition.min || 1))),
       requirements, minAge, ageMet, training, careers,
+      paidWork: activities.filter(activity => isPaidWork(activity, world) &&
+        (id in guaranteedSkillRequirements(activity.when) || activity.outcomes.some(outcome => gainsSkill(outcome.effects, id))))
+        .sort((left, right) => Number(right.available) - Number(left.available)),
       state: value >= definition.max ? "mastered" : !unlocked ? "locked" : value > definition.min ? "learning" : "ready",
       canPractice: unlocked && value < definition.max && training.some(activity => !practiceBlockReason(activity, life)),
     };

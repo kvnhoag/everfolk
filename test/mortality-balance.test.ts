@@ -6,7 +6,9 @@ import type { WorldPack } from "../src/types.ts";
 import source from "../research/mortality-model.json" with { type: "json" };
 import balance from "../research/game-balance.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.6.0.json" with { type: "json" };
-import current from "../worlds/alexandria-sample.json" with { type: "json" };
+// The 0.14 age-band profile remains a retained comparison and replay contract.
+// New causal-health lives have their own condition-based integration coverage.
+import current from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 
 function comparisonProbability(age: number): number {
   const interval = source.intervals.find(row => row.minAge <= age && age < row.nextAge);
@@ -46,7 +48,7 @@ function cohortWorld(curve: "previous" | "current"): WorldPack {
   };
 }
 
-test("the longer-life profile applies bounded factors at every authored age boundary", () => {
+test("the retained 0.14 longer-life profile applies bounded factors at every authored age boundary", () => {
   assert.equal(balance.mortality.id, "longer-lives-v2");
   assert.equal(balance.mortality.defaultMultiplier, 1);
   let previousEnd = -1;

@@ -122,7 +122,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge"], worldFields);
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -204,7 +204,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     if (Object.hasOwn(definition, "initialRange")) statRange(definition.initialRange, `${path}.initialRange`, definition);
   }
   const economy = Object.hasOwn(world, "economy") ? object(world.economy, "world.economy",
-    ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
+    ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets", "autoDebtRepayment"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
   const moneyLimit = 1_000_000_000_000;
   const assets = economy ? array(economy.assets, "world.economy.assets", 0, 128) : [];
   const assetIds = unique(assets, "world.economy.assets");
@@ -212,6 +212,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     reference(economy.stat, "world.economy.stat", statIds, "stat");
     const scale = integer(economy.unitsPerPoint, "world.economy.unitsPerPoint", 1, 1_000_000);
     string(economy.description, "world.economy.description");
+    if (Object.hasOwn(economy, "autoDebtRepayment")) bool(economy.autoDebtRepayment, "world.economy.autoDebtRepayment");
     const currency = object(economy.currency, "world.economy.currency", ["singular", "plural", "short"]);
     for (const field of ["singular", "plural", "short"]) string(currency[field], `world.economy.currency.${field}`, 100);
     if (Object.hasOwn(economy, "sourceIds")) sourceReferences(economy.sourceIds, "world.economy.sourceIds");
@@ -248,13 +249,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const origins = array(world.origins, "world.origins", 1, 256);
   const originIds = unique(origins, "world.origins");
   const events = array(world.events, "world.events");
-  unique(events, "world.events");
+  const eventIds = unique(events, "world.events");
   const endings = array(world.endings, "world.endings", 1, 256);
   const endingIds = unique(endings, "world.endings");
   reference(world.defaultEnding, "world.defaultEnding", endingIds, "ending");
 
   const character = Object.hasOwn(world, "character") ? object(world.character, "world.character",
-    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions"],
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship"],
     ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription"]) : undefined;
   const skills = character ? object(character.skills, "world.character.skills") : {};
   const skillIds = new Set(Object.keys(skills));
@@ -310,6 +311,38 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const requireCharacter = (path: string): void => {
     if (!character) fail(path, "requires a character definition");
   };
+  const health = Object.hasOwn(world, "health") ? object(world.health, "world.health", ["description", "sourceIds", "stat", "criticalHealth", "declineCondition", "careDecision", "incidenceBands", "declineBands", "supportRecoveryBonus", "conditions"]) : undefined;
+  const healthConditions = health ? array(health.conditions, "world.health.conditions", 1, 64) : [];
+  const healthConditionIds = unique(healthConditions, "world.health.conditions");
+  if (Object.hasOwn(world, "knowledge")) {
+    const model = object(world.knowledge, "world.knowledge", ["stat", "minAge", "idleGraceYears", "idleLoss", "ageBands", "description"]);
+    reference(model.stat, "world.knowledge.stat", statIds, "stat");
+    if (model.stat === economy?.stat || model.stat === health?.stat) fail("world.knowledge.stat", "knowledge must use a separate stat from health and economy");
+    string(model.description, "world.knowledge.description");
+    integer(model.minAge, "world.knowledge.minAge", 0, maxAge - 1);
+    integer(model.idleGraceYears, "world.knowledge.idleGraceYears", 0, maxAge);
+    const definition = stats[model.stat as string] as DataObject;
+    const span = (definition.max as number) - (definition.min as number);
+    const loss = (value: unknown, path: string): void => {
+      const result = number(value, path);
+      if (result < 0 || result > span) fail(path, "loss must be within the stat span");
+    };
+    loss(model.idleLoss, "world.knowledge.idleLoss");
+    let nextAge = 0;
+    array(model.ageBands, "world.knowledge.ageBands", 1, 128).forEach((entry, i) => {
+      const path = `world.knowledge.ageBands[${i}]`;
+      const band = object(entry, path, ["minAge", "maxAge", "loss"]);
+      const min = integer(band.minAge, `${path}.minAge`, 0, maxAge - 1);
+      const max = integer(band.maxAge, `${path}.maxAge`, min, maxAge - 1);
+      if (min !== nextAge) fail(`${path}.minAge`, "knowledge bands must be ordered and contiguous from age zero");
+      nextAge = max + 1;
+      loss(band.loss, `${path}.loss`);
+    });
+    if (nextAge !== maxAge) fail("world.knowledge.ageBands", "knowledge bands must cover every age below maxAge");
+  }
+  const relationships = Object.hasOwn(world, "relationships") ? object(world.relationships, "world.relationships", ["description", "initialCloseness", "childCloseness", "decayAfterYears", "yearlyDecay", "marriageMinimum", "supportThreshold", "maxHealthSupport"]) : undefined;
+  const requireHealth = (path: string): void => { if (!health) fail(path, "requires a health definition"); };
+  const requireRelationships = (path: string): void => { if (!relationships) fail(path, "requires a relationship definition"); };
 
   const condition = (value: unknown, path: string, depth = 0): void => {
     if (depth > 32) fail(path, "condition nesting exceeds 32 levels");
@@ -379,6 +412,19 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
         integer(rule.value, `${path}.value`, 0, 8);
         break;
+      case "has-condition":
+        object(rule, path, ["type", "condition"], ["type"]);
+        requireHealth(path);
+        if (Object.hasOwn(rule, "condition")) reference(rule.condition, `${path}.condition`, healthConditionIds, "health condition");
+        break;
+      case "closeness":
+        object(rule, path, ["type", "partner", "op", "value"], ["type", "op", "value"]);
+        requireCharacter(path);
+        requireRelationships(path);
+        if (Object.hasOwn(rule, "partner")) reference(rule.partner, `${path}.partner`, partnerIds, "partner");
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        integer(rule.value, `${path}.value`, 0, 100);
+        break;
       case "all":
       case "any":
         object(rule, path, ["type", "conditions"]);
@@ -443,14 +489,39 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           requireCharacter(location);
           reference(effect.partner, `${location}.partner`, partnerIds, "partner");
           break;
+        case "end-courtship":
         case "divorce":
         case "child":
           object(effect, location, ["type"]);
           requireCharacter(location);
           break;
+        case "condition":
+          object(effect, location, ["type", "condition"]);
+          requireHealth(location);
+          reference(effect.condition, `${location}.condition`, healthConditionIds, "health condition");
+          break;
+        case "care": {
+          object(effect, location, ["type", "amount"]);
+          requireHealth(location);
+          const amount = number(effect.amount, `${location}.amount`);
+          if (amount <= 0 || amount > 1) fail(`${location}.amount`, "expected care in (0, 1]");
+          break;
+        }
+        case "closeness":
+          object(effect, location, ["type", "target", "partner", "delta"], ["type", "target", "delta"]);
+          requireCharacter(location);
+          requireRelationships(location);
+          if (effect.target !== "partner" && effect.target !== "children") fail(`${location}.target`, "expected partner or children");
+          if (Object.hasOwn(effect, "partner")) {
+            if (effect.target !== "partner") fail(`${location}.partner`, "a children effect cannot target a partner");
+            reference(effect.partner, `${location}.partner`, partnerIds, "partner");
+          }
+          integer(effect.delta, `${location}.delta`, -100, 100);
+          break;
         case "end":
           object(effect, location, ["type", "ending", "deathCause"], ["type", "ending"]);
           reference(effect.ending, `${location}.ending`, endingIds, "ending");
+          if (health && deathEndingIds.has(effect.ending as string) && !Object.hasOwn(effect, "deathCause")) fail(`${location}.deathCause`, "health worlds require an explicit cause for fatal authored effects");
           if (Object.hasOwn(effect, "deathCause")) {
             requireCharacter(location);
             reference(effect.deathCause, `${location}.deathCause`, deathCauseIds, "death cause");
@@ -465,6 +536,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
 
   if (character) {
     if (Object.hasOwn(character, "requireIntroductions")) bool(character.requireIntroductions, "world.character.requireIntroductions");
+    if (Object.hasOwn(character, "exclusiveCourtship")) bool(character.exclusiveCourtship, "world.character.exclusiveCourtship");
     if (Object.hasOwn(character, "playerNames")) {
       const playerNames = array(character.playerNames, "world.character.playerNames", 1, 128);
       playerNames.forEach((entry, i) => {
@@ -509,11 +581,12 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     const activityIds = unique(activities, "world.character.activities");
     activities.forEach((entry, i) => {
       const path = `world.character.activities[${i}]`;
-      const activity = object(entry, path, ["id", "text", "when", "outcomes", "category", "minAge", "cooldownYears"], ["id", "text", "outcomes", "category"]);
+      const activity = object(entry, path, ["id", "text", "when", "outcomes", "category", "minAge", "cooldownYears", "usesYearlyActivity"], ["id", "text", "outcomes", "category"]);
       string(activity.text, `${path}.text`);
       if (!["training", "career", "relationship", "family", "finance"].includes(activity.category as string)) fail(`${path}.category`, "unknown activity category");
       if (Object.hasOwn(activity, "minAge")) integer(activity.minAge, `${path}.minAge`, 0, maxAge);
       if (Object.hasOwn(activity, "cooldownYears")) integer(activity.cooldownYears, `${path}.cooldownYears`, 1, maxAge);
+      if (Object.hasOwn(activity, "usesYearlyActivity")) bool(activity.usesYearlyActivity, `${path}.usesYearlyActivity`);
       if (Object.hasOwn(activity, "when")) condition(activity.when, `${path}.when`);
       const outcomes = array(activity.outcomes, `${path}.outcomes`, 1, 64);
       unique(outcomes, `${path}.outcomes`);
@@ -644,13 +717,81 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     evidence(ending, path);
     if (Object.hasOwn(ending, "kind") && ending.kind !== "death" && ending.kind !== "chapter") fail(`${path}.kind`, "unknown ending kind");
     if (Object.hasOwn(ending, "when")) condition(ending.when, `${path}.when`);
+    if (health && ending.kind === "death" && Object.hasOwn(ending, "when")) fail(`${path}.when`, "health-driven deaths must come from a recorded condition or explicit end effect");
   });
+  if (relationships) {
+    requireCharacter("world.relationships");
+    string(relationships.description, "world.relationships.description");
+    for (const key of ["initialCloseness", "childCloseness", "yearlyDecay", "marriageMinimum", "supportThreshold"]) integer(relationships[key], `world.relationships.${key}`, 0, 100);
+    integer(relationships.decayAfterYears, "world.relationships.decayAfterYears", 0, 100);
+    const support = number(relationships.maxHealthSupport, "world.relationships.maxHealthSupport");
+    if (support < 0 || support > 1) fail("world.relationships.maxHealthSupport", "expected support in 0..1");
+  }
+  if (health) {
+    requireCharacter("world.health");
+    string(health.description, "world.health.description");
+    sourceReferences(health.sourceIds, "world.health.sourceIds");
+    reference(health.stat, "world.health.stat", statIds, "stat");
+    const healthStat = stats[health.stat as string] as DataObject;
+    if (economy && economy.stat === health.stat) fail("world.health.stat", "health cannot use the economy stat");
+    const critical = number(health.criticalHealth, "world.health.criticalHealth");
+    if (critical < (healthStat.min as number) || critical > (healthStat.max as number)) fail("world.health.criticalHealth", "must be within health stat bounds");
+    reference(health.declineCondition, "world.health.declineCondition", healthConditionIds, "health condition");
+    const decline = healthConditions.find(entry => (entry as DataObject).id === health.declineCondition) as DataObject;
+    if (decline.kind !== "frailty" || decline.weight !== 0) fail("world.health.declineCondition", "critical health requires an explicit-only frailty condition");
+    reference(health.careDecision, "world.health.careDecision", eventIds, "event");
+    const careEvent = events.find(entry => (entry as DataObject).id === health.careDecision) as DataObject;
+    if (careEvent.mode === "automatic" || !(careEvent.choices as DataObject[]).some(choice => !choice.when)) fail("world.health.careDecision", "requires a decision with at least one unconditional option");
+    if (!(endings.some(entry => (entry as DataObject).kind === "death"))) fail("world.health", "requires at least one death ending");
+    if (!(endings.some(entry => (entry as DataObject).id === world.defaultEnding && (entry as DataObject).kind === "chapter"))) fail("world.defaultEnding", "health worlds require a non-death administrative cap ending");
+    const support = number(health.supportRecoveryBonus, "world.health.supportRecoveryBonus");
+    if (support < 0 || support > 1) fail("world.health.supportRecoveryBonus", "expected recovery support in 0..1");
+    const checkHealthBands = (value: unknown, field: string, probability: boolean): void => {
+      const bands = array(value, `world.health.${field}`, 1, 128);
+      let nextAge = 0;
+      bands.forEach((entry, i) => {
+        const path = `world.health.${field}[${i}]`;
+        const key = probability ? "annualProbability" : "healthLoss";
+        const band = object(entry, path, ["minAge", "maxAge", key]);
+        const min = integer(band.minAge, `${path}.minAge`, 0, maxAge - 1);
+        const max = integer(band.maxAge, `${path}.maxAge`, min, maxAge - 1);
+        if (min !== nextAge) fail(`${path}.minAge`, "health bands must be ordered and contiguous from age zero");
+        nextAge = max + 1;
+        const amount = number(band[key], `${path}.${key}`);
+        if (amount < 0 || amount > (probability ? 1 : (healthStat.max as number) - (healthStat.min as number))) fail(`${path}.${key}`, "value is outside its allowed range");
+      });
+      if (nextAge !== maxAge) fail(`world.health.${field}`, "health bands must cover every age below maxAge");
+    };
+    checkHealthBands(health.incidenceBands, "incidenceBands", true);
+    checkHealthBands(health.declineBands, "declineBands", false);
+    let totalIncidentWeight = 0;
+    healthConditions.forEach((entry, i) => {
+      const path = `world.health.conditions[${i}]`;
+      const definition = object(entry, path, ["id", "title", "deathCause", "kind", "weight", "when", "healthLoss", "recoveryChance", "careRecoveryBonus", "fatalHealthThreshold"], ["id", "title", "deathCause", "kind", "weight", "healthLoss", "recoveryChance", "careRecoveryBonus", "fatalHealthThreshold"]);
+      string(definition.title, `${path}.title`, 300);
+      reference(definition.deathCause, `${path}.deathCause`, deathCauseIds, "death cause");
+      if (!["illness", "injury", "frailty"].includes(definition.kind as string)) fail(`${path}.kind`, "unknown health condition kind");
+      const loss = number(definition.healthLoss, `${path}.healthLoss`);
+      if (loss < 0 || loss > (healthStat.max as number) - (healthStat.min as number)) fail(`${path}.healthLoss`, "must be within the health stat span");
+      const incidentWeight = number(definition.weight, `${path}.weight`);
+      if (incidentWeight < 0 || incidentWeight > Number.MAX_SAFE_INTEGER) fail(`${path}.weight`, "expected a nonnegative finite weight");
+      totalIncidentWeight += incidentWeight;
+      for (const key of ["recoveryChance", "careRecoveryBonus"]) {
+        const chance = number(definition[key], `${path}.${key}`);
+        if (chance < 0 || chance > 1) fail(`${path}.${key}`, "expected a probability in 0..1");
+      }
+      const fatal = number(definition.fatalHealthThreshold, `${path}.fatalHealthThreshold`);
+      if (fatal < (healthStat.min as number) || fatal > critical) fail(`${path}.fatalHealthThreshold`, "must be between minimum and critical health");
+      if (Object.hasOwn(definition, "when")) condition(definition.when, `${path}.when`);
+    });
+    if (!Number.isFinite(totalIncidentWeight) || totalIncidentWeight > Number.MAX_SAFE_INTEGER) fail("world.health.conditions", "combined weights exceed Number.MAX_SAFE_INTEGER");
+  }
   if (Object.hasOwn(world, "mortality")) {
     const model = object(world.mortality, "world.mortality", ["description", "sourceIds", "bands"]);
     string(model.description, "world.mortality.description");
     sourceReferences(model.sourceIds, "world.mortality.sourceIds");
     const deathIds = new Set(endings.filter(entry => (entry as DataObject).kind === "death").map(entry => (entry as DataObject).id as string));
-    if (!deathIds.has(world.defaultEnding as string)) fail("world.defaultEnding", "a mortality-enabled world requires a death ending at maximum age");
+    if (!health && !deathIds.has(world.defaultEnding as string)) fail("world.defaultEnding", "a mortality-enabled world requires a death ending at maximum age");
     const bands = array(model.bands, "world.mortality.bands", 1, 128);
     let nextAge = 0;
     bands.forEach((entry, i) => {

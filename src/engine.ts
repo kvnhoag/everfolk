@@ -6,7 +6,10 @@ import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, initialEconomy, yearlyAssetIncome } from "./economy.ts";
+import { applyEconomyEffect, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
+import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
+import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
+import { initialRelationships, introduceRelationship, addChildRelationship, applyCloseness, advanceRelationships, relationshipSupport, relationshipOutcomeWeight } from "./relationships.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -47,6 +50,11 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
       (condition.partner === undefined || state.character.partnerId === condition.partner);
     case "known-partner": return state.character?.knownPartnerIds?.includes(condition.partner) === true || state.character?.partnerId === condition.partner;
     case "children": return state.character !== undefined && compare(state.character.children.length, condition.op, condition.value);
+    case "has-condition": return Boolean(state.health?.conditions.some(item => condition.condition === undefined || item.id === condition.condition));
+    case "closeness": {
+      const tie = state.character?.relationships?.partners[condition.partner ?? state.character.partnerId ?? ""];
+      return tie !== undefined && compare(tie.closeness, condition.op, condition.value);
+    }
     case "all": return condition.conditions.every(child => matchesCondition(child, state));
     case "any": return condition.conditions.some(child => matchesCondition(child, state));
     case "not": return !matchesCondition(condition.condition, state);
@@ -98,11 +106,17 @@ function mutableSnapshot(state: LifeState): LifeState {
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
     ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets } } } : {}),
+    ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
+    ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
       children: state.character.children.map(child => ({ ...child })),
       lastActivityAges: { ...state.character.lastActivityAges },
       ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
+      ...(state.character.relationships ? { relationships: {
+        partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie }])),
+        children: Object.fromEntries(Object.entries(state.character.relationships.children).map(([id, tie]) => [id, { ...tie }])),
+      } } : {}),
     } } : {}),
   };
 }
@@ -120,7 +134,7 @@ export function createEngine(input: unknown): LifeEngine {
     state.journal.push({ type, id, text, age: state.age, year: state.year });
   }
 
-  function finish(state: LifeState, id: string, explicitCause?: string, decisionContext?: string): void {
+  function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
@@ -130,18 +144,31 @@ export function createEngine(input: unknown): LifeEngine {
       // causes govern random attribution, not deliberate exposure to a hazard.
       const cause = explicitCause
         ? world.character.deathCauses.find(candidate => candidate.id === explicitCause)!
-        : pick(world.character.deathCauses.filter(cause => !cause.choiceOnly && matches(cause.when, state)), candidate => candidate.weight, state);
-      state.deathCauseId = cause.id;
-      causeText = ` Cause of death: ${cause.title}. ${cause.text}`;
-      if (explicitCause && decisionContext) {
-        state.deathCauseContext = decisionContext;
-        causeText += ` Decision leading to death: ${decisionContext}`;
+        : world.health ? undefined : pick(world.character.deathCauses.filter(cause => !cause.choiceOnly && matches(cause.when, state)), candidate => candidate.weight, state);
+      if (!cause && world.health) throw new Error("A health-driven death requires a recorded condition or explicit cause.");
+      if (cause) {
+        state.deathCauseId = cause.id;
+        causeText = ` Cause of death: ${cause.title}. ${cause.text}`;
+      }
+      if (explicitCause && causeContext) {
+        state.deathCauseContext = causeContext;
+        if (world.health) state.deathCauseKind = causeKind;
+        causeText += causeKind === "condition" ? ` Health history: ${causeContext}` : ` Decision leading to death: ${causeContext}`;
       }
     }
     state.phase = "ended";
     state.endingId = id;
     state.pendingEventId = null;
     journal(state, "ending", id, `${ending.title}: ${ending.text}${causeText}`);
+  }
+
+  function healthHooks(state: LifeState) {
+    return {
+      random: () => { const draw = nextRandom(state.rngState); state.rngState = draw.state; return draw.value; },
+      matches: (condition: Condition | undefined) => matches(condition, state),
+      journal: (id: string, text: string) => journal(state, "event", id, text),
+      support: relationshipSupport(world, state),
+    };
   }
 
   function syncCharacterFlags(state: LifeState): void {
@@ -160,6 +187,7 @@ export function createEngine(input: unknown): LifeEngine {
           const definition = world.stats[effect.stat];
           state.stats[effect.stat] = Math.max(definition.min,
             Math.min(definition.max, state.stats[effect.stat] + effect.delta));
+          recordKnowledgePractice(world, state, effect);
           break;
         }
         case "flag": state.flags[effect.flag] = effect.value; break;
@@ -170,6 +198,9 @@ export function createEngine(input: unknown): LifeEngine {
           break;
         }
         case "job": state.character!.jobId = effect.job; break;
+        case "condition": addHealthCondition(world, state, effect.condition, decisionContext, healthHooks(state)); break;
+        case "care": provideHealthCare(world, state, effect.amount); break;
+        case "closeness": applyCloseness(world, state, effect); break;
         case "relationship":
           state.character!.partnerId = effect.partner;
           state.character!.relationshipStatus = effect.status;
@@ -182,8 +213,13 @@ export function createEngine(input: unknown): LifeEngine {
             const person = world.character!.partners.find(partner => partner.id === effect.partner)!;
             journal(state, "activity", `met-${person.id}`, `You meet ${person.name}.`);
           }
+          introduceRelationship(world, state, effect.partner);
           break;
         }
+        case "end-courtship":
+          state.character!.partnerId = null;
+          state.character!.relationshipStatus = "single";
+          break;
         case "divorce":
           state.character!.partnerId = null;
           state.character!.relationshipStatus = "divorced";
@@ -194,6 +230,7 @@ export function createEngine(input: unknown): LifeEngine {
           const names = world.character!.childNames.filter(name => !used.has(name));
           const name = names.length ? pick(names, () => 1, state) : `${world.character!.childNames[0]} ${character.children.length + 1}`;
           character.children.push({ id: `child-${character.children.length + 1}`, name, birthAge: state.age, otherParentId: character.partnerId! });
+          addChildRelationship(world, state, `child-${character.children.length}`);
           journal(state, "activity", `child-${character.children.length}`, `${name} joins your family.`);
           break;
         }
@@ -201,6 +238,9 @@ export function createEngine(input: unknown): LifeEngine {
       }
     }
     syncCharacterFlags(state);
+    if (world.health && state.phase !== "ended" && state.health?.conditions.length === 0 && state.stats[world.health.stat] <= world.health.criticalHealth) {
+      addHealthCondition(world, state, world.health.declineCondition, "Your health has fallen to a critical level.", healthHooks(state));
+    }
   }
 
   function checkEndings(state: LifeState): void {
@@ -215,6 +255,9 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
+    // Medical decisions are interrupts from the health lifecycle, never an
+    // unrelated random story or a repeat after care was already chosen.
+    if (world.health?.careDecision === event.id) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
     if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
@@ -255,6 +298,16 @@ export function createEngine(input: unknown): LifeEngine {
     checkEndings(state);
   }
 
+  function offerMedicalDecision(state: LifeState): boolean {
+    if (state.phase === "ended" || !world.health || !state.health?.needsCareDecision || !state.health.conditions.length) return false;
+    state.health.needsCareDecision = false;
+    const previousChoiceAge = state.nextChoiceAge;
+    offer(state, eventById.get(world.health.careDecision)!);
+    if (previousChoiceAge === undefined) delete state.nextChoiceAge;
+    else state.nextChoiceAge = previousChoiceAge;
+    return true;
+  }
+
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
@@ -262,6 +315,7 @@ export function createEngine(input: unknown): LifeEngine {
           candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) return false;
         automaticEvent(state, event);
+        if (offerMedicalDecision(state)) return true;
       }
       return true;
     };
@@ -273,6 +327,7 @@ export function createEngine(input: unknown): LifeEngine {
         event.trigger.type === "random" && eligible(event, state));
       if (background.length > 0) {
         automaticEvent(state, pick(background, event => event.trigger.type === "random" ? event.trigger.weight : 0, state));
+        if (offerMedicalDecision(state)) return;
         if (drainAutomatic()) return;
       }
     }
@@ -296,6 +351,7 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function resolveEvents(state: LifeState, allowRandom: boolean): void {
+    if (offerMedicalDecision(state)) return;
     if (world.eventPacing) { resolvePacedEvents(state, allowRandom); return; }
     let randomAvailable = allowRandom;
     // Scheduled events queue in declaration order. Automatic entries drain without
@@ -304,7 +360,7 @@ export function createEngine(input: unknown): LifeEngine {
       const scheduled = world.events.find(event => event.trigger.type !== "random" && eligible(event, state));
       if (scheduled) {
         randomAvailable = false;
-        if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); continue; }
+        if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
         offer(state, scheduled);
         return;
       }
@@ -313,7 +369,7 @@ export function createEngine(input: unknown): LifeEngine {
         const random = world.events.filter(event => event.trigger.type === "random" && eligible(event, state));
         if (random.length > 0) {
           const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
-          if (event.mode === "automatic") { automaticEvent(state, event); continue; }
+          if (event.mode === "automatic") { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
           offer(state, event);
           return;
         }
@@ -325,6 +381,7 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function mortalityCheck(state: LifeState): boolean {
+    if (world.health) return false;
     if (!world.mortality) return false;
     const band = world.mortality.bands.find(candidate => state.age >= candidate.minAge && state.age <= candidate.maxAge);
     if (!band) throw new Error("The mortality model does not cover the current age.");
@@ -356,6 +413,8 @@ export function createEngine(input: unknown): LifeEngine {
     if (state.commands.length >= MAX_COMMANDS) throw new Error("Life command limit reached.");
     if (world.character && !state.character) throw new Error("State is missing its character record.");
     if (world.economy && !state.economy) throw new Error("State is missing its economy record.");
+    if (world.health && !state.health) throw new Error("State is missing its health record.");
+    if (world.knowledge && !state.knowledge) throw new Error("State is missing its knowledge record.");
   }
 
   function start(seed: string): LifeState {
@@ -372,7 +431,10 @@ export function createEngine(input: unknown): LifeEngine {
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
+      ...(world.health ? { health: initialHealth(world)! } : {}),
+      ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
     };
+    if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
     for (const [id, definition] of Object.entries(world.stats)) {
@@ -383,6 +445,7 @@ export function createEngine(input: unknown): LifeEngine {
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) state.economy = initialEconomy(world, state)!;
+    if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
     return freeze(state);
@@ -392,9 +455,19 @@ export function createEngine(input: unknown): LifeEngine {
     assertPlayable(next);
     if (next.phase === "choice") throw new Error("Resolve the pending choice before advancing time.");
     next.commands.push({ type: "advance" });
+    if (world.health) {
+      const healthResult = progressHealth(world, next, healthHooks(next));
+      if (healthResult.deathCause) {
+        const deathEnding = next.age === 0 ? "death-in-infancy" : next.age < 15 ? "death-in-childhood" : next.age < 60 ? "death-in-adulthood" : "death-in-later-life";
+        const ending = endingById.has(deathEnding) ? deathEnding : world.endings.find(item => item.kind === "death")!.id;
+        finish(next, ending, healthResult.deathCause, healthResult.context, "condition");
+        return;
+      }
+    }
     // The interval [age, age + 1) belongs to the current completed age. A death
     // before the first birthday is therefore recorded at age zero, not age one.
     if (mortalityCheck(next)) return;
+    progressKnowledge(world, next, (id, text) => journal(next, "event", id, text));
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
@@ -421,6 +494,10 @@ export function createEngine(input: unknown): LifeEngine {
       if (matches(rule.when, next)) apply(next, rule.effects);
     }
     if (!world.economy) annualIncome();
+    const repaid = repayDebtAutomatically(world, next);
+    if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
+    if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
+    if (world.health) developHealthIncident(world, next, healthHooks(next));
     checkEndings(next);
     resolveEvents(next, true);
   }
@@ -435,7 +512,7 @@ export function createEngine(input: unknown): LifeEngine {
     next.phase = "ready";
     next.pendingEventId = null;
     journal(next, "choice", choice.id, choice.text);
-    const outcome = pick(choice.outcomes, candidate => candidate.weight, next);
+    const outcome = pick(choice.outcomes, candidate => relationshipOutcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
     apply(next, outcome.effects, `${choice.text} — ${outcome.text}`);
     checkEndings(next);
@@ -486,10 +563,10 @@ export function createEngine(input: unknown): LifeEngine {
     const reason = activityReason(world, next, activity, matches);
     if (reason) throw new Error(`Activity is unavailable: ${reason}`);
     next.commands.push({ type: "act", activity: activityId });
-    next.character!.lastActivityAge = next.age;
+    if (activity.usesYearlyActivity !== false) next.character!.lastActivityAge = next.age;
     next.character!.lastActivityAges[activityId] = next.age;
     journal(next, "activity", activity.id, activity.text);
-    const outcome = pick(activity.outcomes, candidate => candidate.weight, next);
+    const outcome = pick(activity.outcomes, candidate => relationshipOutcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
     apply(next, outcome.effects, `${activity.text} — ${outcome.text}`);
     checkEndings(next);

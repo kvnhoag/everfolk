@@ -1,0 +1,11 @@
+.yearly-focus{padding:16px 0;border-bottom:1px solid var(--line,#d7dacd)}
+.yearly-focus h2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.01em}.yearly-focus h2 small{font-size:9px;color:#8b927e;font-weight:400}
+.yearly-focus-options{display:flex;flex-wrap:wrap;gap:7px}
+.yearly-focus-options button{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:7px 12px;border:1px solid #cbd1bf;border-radius:5px;background:transparent;color:inherit;font-size:12px}
+.yearly-focus-options button[aria-pressed=true]{background:#e0e7d5;border-color:#859774;color:#365036}
+.yearly-focus-options button:disabled{opacity:.5;cursor:default}
+.yearly-focus-options button span{font-size:10px;color:#7c8472}
+.yearly-focus-note{margin:9px 0 0;font-size:11px;line-height:1.55;color:#717965}
+.yearly-focus-impact{margin-top:9px}
+.yearly-focus-decay{margin:5px 0 0;font-size:10px;line-height:1.5;color:#8a7561}
+@media(max-width:600px){.yearly-focus-options{gap:6px}.yearly-focus-options button{padding:7px 10px}.yearly-focus-note{font-size:10px}}

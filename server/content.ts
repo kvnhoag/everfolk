@@ -10,6 +10,13 @@ import originRangesAlexandria from "../worlds/alexandria-0.6.0.json" with { type
 import longerLivesAlexandria from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 import peopleAlexandria from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import skillTreeAlexandria from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import moneyAlexandria from "../worlds/alexandria-0.9.0.json" with { type: "json" };
+import variedAlexandria from "../worlds/alexandria-0.10.0.json" with { type: "json" };
+import birthAlexandria from "../worlds/alexandria-0.11.0.json" with { type: "json" };
+import coherentAlexandria from "../worlds/alexandria-0.12.0.json" with { type: "json" };
+import workTimelineAlexandria from "../worlds/alexandria-0.13.0.json" with { type: "json" };
+import interestCareersAlexandria from "../worlds/alexandria-0.14.0.json" with { type: "json" };
+import causalHealthAlexandria from "../worlds/alexandria-0.15.0.json" with { type: "json" };
 import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
 import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
 
@@ -249,7 +256,7 @@ export function getPreviousWorld(): PublishedWorld {
 
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria]) {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria]) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -258,7 +265,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

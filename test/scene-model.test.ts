@@ -3,12 +3,15 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import legacyPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual, resolveLifeScenes } from "../client/scene-model.ts";
 
 function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prepare?: (engine: LifeEngine, life: LifeState) => LifeState) {
   const world = structuredClone(pack) as WorldPack;
   delete world.mortality;
   delete world.eventPacing;
+  world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   // Visual tests isolate accepted commands from the cost of reaching the scene.
   world.stats.wealth.initial = 80;
   world.stats.wealth.initialRange = { min: 80, max: 80 };
@@ -22,7 +25,11 @@ function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prep
   change?.(event);
   // Keep the real introduction in this scene fixture so later family actions
   // still meet their character prerequisites through accepted events.
-  world.events = [event, ...world.events.filter(item => item.id === "meet-demetria" && item.id !== id)];
+  world.events = [event, ...world.events.filter(item => ["meet-demetria", world.health!.careDecision].includes(item.id) && item.id !== id)];
+  if (id === world.health!.careDecision) world.events.push({
+    id: "fixture-health-onset", title: "An illness begins", text: "You develop pneumonia.", mode: "automatic",
+    trigger: { type: "age", at: age }, effects: [{ type: "condition", condition: "pneumonia" }], choices: [],
+  });
   const engine = createEngine(world);
   let life = engine.start(`scene-${id}`);
   while (life.age < age) {
@@ -42,16 +49,16 @@ test("every shipped event has an authored visual rather than a text-keyword gues
 });
 
 test("illness shows the actual event and keeps a care scene after accepting help", () => {
-  const { engine, life, world } = fixture("an-unwell-week");
+  const { engine, life, world } = fixture("medical-care-needed");
   const before = structuredClone(life);
   const pending = resolveLifeScenes(life, world)[0];
   assert.equal(pending.kind, "pending");
-  assert.equal(pending.title, "An unwell week");
+  assert.equal(pending.title, "Care is needed");
   assert.equal(pending.scene, "rest");
   assert.equal(pending.motion, "rest");
   assert.equal(pending.caption, world.events[0].text);
   assert.deepEqual(life, before, "presentation cannot consume random draws or mutate a life");
-  const next = engine.choose(life, "accept-care");
+  const next = engine.choose(life, "rest-and-care");
   const chosen = resolveLifeScenes(next, world)[0];
   assert.equal(chosen.kind, "outcome");
   assert.equal(chosen.scene, "rest");
@@ -77,16 +84,38 @@ test("career images follow the accepted route instead of committing an unchosen 
   }
 });
 
-test("declining a shared household does not depict a partner or child as an accepted fact", () => {
+test("an adolescent worker's fallback scene reflects their job while children and later life keep their age context", () => {
+  const engine = createEngine(pack);
+  const life = structuredClone(engine.start("working-youth-visual"));
+  life.age = 14;
+  life.year = -52;
+  life.journal = [];
+  life.phase = "ready";
+  life.pendingEventId = null;
+  for (const [job, scene] of [["porter", "work"], ["sailor", "sea"], ["copyist", "learning"], [null, "learning"]] as const) {
+    life.character!.jobId = job;
+    const context = resolveLifeScenes(life, engine.world)[0];
+    assert.equal(context.kind, "fallback");
+    assert.equal(context.scene, scene);
+  }
+  life.character!.jobId = "porter";
+  life.age = 9;
+  assert.equal(resolveLifeScenes(life, engine.world)[0].scene, "childhood");
+  life.age = 65;
+  assert.equal(resolveLifeScenes(life, engine.world)[0].scene, "later-life");
+});
+
+test("the automatic marriage reminder does not depict a partner or child as an accepted fact", () => {
   const { engine, life, world } = fixture("a-shared-household", 25);
   assert.notEqual(resolveLifeScenes(life, world)[0].scene, "family");
-  const next = engine.choose(life, "remain-independent");
-  const context = resolveLifeScenes(next, world)[0];
-  assert.equal(next.flags.partnered, false);
-  assert.equal(next.flags.parent, false);
+  assert.equal(life.phase, "ready");
+  assert.deepEqual(engine.getChoices(life), []);
+  const context = resolveLifeScenes(life, world)[0];
+  assert.equal(life.flags.partnered, false);
+  assert.equal(life.flags.parent, false);
   assert.equal(context.scene, "history-city");
   assert.equal(context.motion, "reflect");
-  assert.equal(context.caption, next.journal.findLast(entry => entry.type === "outcome")!.text);
+  assert.equal(context.caption, world.events.find(event => event.id === "a-shared-household")!.text);
 });
 
 test("only a real child activity depicts parenthood, while childhood care keeps its accepted context", () => {
@@ -97,7 +126,8 @@ test("only a real child activity depicts parenthood, while childhood care keeps 
     return activity ? engine.act(state, activity.id) : state;
   });
   assert.equal(life.character!.relationshipStatus, "married");
-  let parent = engine.choose(life, "share-parenting");
+  let parent = life;
+  assert.equal(parent.phase, "ready");
   assert.equal(parent.character!.children.length, 0, "Talking about care must not create a child.");
   assert.equal(parent.flags.parent, false);
   assert.equal(resolveLifeScenes(parent, world)[0].scene, "history-city");
@@ -124,6 +154,8 @@ test("dated history and the annual event remain available beside a pending decis
   const world = structuredClone(pack) as WorldPack;
   delete world.mortality;
   delete world.eventPacing;
+  world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   const history = structuredClone(world.events.find(event => event.id === "caesar-in-alexandria")!);
   const background = structuredClone(world.events.find(event => event.id === "adult-work-and-return")!);
   background.trigger = { type: "age", at: 18 };
@@ -131,7 +163,8 @@ test("dated history and the annual event remain available beside a pending decis
   delete background.maxOccurrences;
   delete background.cooldownYears;
   const decision = structuredClone(world.events.find(event => event.id === "a-place-on-the-manifest")!);
-  world.events = [history, background, decision];
+  decision.trigger = { type: "age", at: 18 };
+  world.events = [history, background, decision, world.events.find(event => event.id === world.health!.careDecision)!];
   const engine = createEngine(world);
   let life = engine.start("same-year-scenes");
   while (life.age < 18) life = engine.advance(life);
@@ -159,10 +192,22 @@ test("explicit event visuals override defaults and unknown events fall back from
 
 test("death before the first birthday shows the actual selected cause in the memorial", () => {
   const world = structuredClone(pack) as WorldPack;
-  world.mortality!.bands[0].annualProbability = 1;
+  world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
+  world.health!.criticalHealth = 5;
+  world.health!.supportRecoveryBonus = 0;
+  const pneumonia = world.health!.conditions.find(condition => condition.id === "pneumonia")!;
+  pneumonia.healthLoss = 100;
+  pneumonia.recoveryChance = 0;
+  pneumonia.careRecoveryBonus = 0;
+  for (const origin of world.origins) {
+    origin.statRanges = { ...origin.statRanges, health: { min: 6, max: 6 } };
+    origin.effects.push({ type: "condition", condition: "pneumonia" });
+  }
   const engine = createEngine(world);
   let life = engine.start("infant-scene");
-  life = engine.choose(life, engine.getChoices(life)[0].id);
+  assert.equal(life.pendingEventId, "medical-care-needed");
+  life = engine.choose(life, "rest-and-care");
   life = engine.advance(life);
   assert.equal(life.age, 0);
   assert.equal(life.phase, "ended");
@@ -172,13 +217,14 @@ test("death before the first birthday shows the actual selected cause in the mem
   assert.equal(contexts[0].motion, "still");
   const cause = engine.world.character!.deathCauses.find(cause => cause.id === life.deathCauseId);
   assert.ok(cause, "A character world must retain the selected specific cause of death.");
+  assert.equal(cause.id, "early-illness", "The memorial must name the actual active pneumonia episode.");
   assert.equal(contexts[0].title, cause.title);
   assert.equal(contexts[0].caption, cause.text);
   assert.deepEqual(engine.load(engine.save(life)), life);
 });
 
 test("a legacy world without character mechanics retains its original ending caption", () => {
-  const world = structuredClone(pack) as WorldPack;
+  const world = structuredClone(legacyPack) as WorldPack;
   delete world.character;
   world.events = [];
   world.mortality!.bands[0].annualProbability = 1;

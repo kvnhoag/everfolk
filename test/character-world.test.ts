@@ -21,16 +21,19 @@ test("specific cause names preserve the previous life mechanics and mortality ou
 
 test("the authored night cargo risk can cause its exact death and replays that decision", () => {
   const engine = createEngine(pack);
-  let state = engine.start("night-cargo-browser-18");
-  for (let commands = 0; commands < 160 && (state.age < 25 || state.phase === "choice"); commands++) {
+  let state = engine.start("coherent-night-cargo-240");
+  for (let commands = 0; commands < 160 && state.phase !== "ended" && (state.age < 25 || state.phase === "choice"); commands++) {
     state = state.phase === "choice" ? engine.choose(state, engine.getChoices(state)[0].id) : engine.advance(state);
   }
   assert.equal(state.phase, "ready");
   assert.equal(state.age, 25);
+  const nightWork = engine.getActivities(state).find(activity => activity.id === "take-night-cargo-work")!;
+  assert.equal(nightWork.available, true, nightWork.reason);
   const dead = engine.act(state, "take-night-cargo-work");
   assert.equal(dead.phase, "ended");
   assert.equal(dead.deathCauseId, "cargo-crush");
   assert.match(dead.deathCauseContext!, /Move heavy cargo at night/);
+  assert.deepEqual(engine.replay(dead.seed, dead.commands), dead);
   assert.deepEqual(engine.load(engine.save(dead)), dead);
 });
 
@@ -49,6 +52,9 @@ test("every dangerous narrative decision offers a safe alternative and names its
 function safeEngine(): LifeEngine {
   const copy = structuredClone(pack);
   copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  copy.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  copy.health.declineBands.forEach(band => { band.healthLoss = 0; });
+  copy.yearlyEffects.push({ type: "stat", stat: "health", delta: 100 });
   // A well-resourced controlled household keeps these route checks focused on
   // skill and family transitions; the unmodified pack is exercised separately.
   copy.stats.wealth.initial = 80;
@@ -60,7 +66,10 @@ function safeEngine(): LifeEngine {
 function settle(engine: LifeEngine, state: LifeState): LifeState {
   while (state.phase === "choice") {
     const choices = engine.getChoices(state);
-    const choice = choices.find(candidate => candidate.id === "learn-letters") ?? choices.find(candidate => candidate.id === "practice-reading") ?? choices[0];
+    const choice = choices.find(candidate => candidate.id === "learn-letters")
+      ?? choices.find(candidate => candidate.id === "practice-reading")
+      ?? choices.find(candidate => candidate.id === "keep-regular-job")
+      ?? choices[0];
     assert.ok(choice, `No offered choice at ${state.pendingEventId}.`);
     state = engine.choose(state, choice.id);
   }
@@ -78,14 +87,16 @@ test("Alexandria training visibly unlocks authored job and narrative career requ
   let state = ageTo(engine, engine.start("alexandria-training"), 14);
   const locked = engine.getActivities(state).find(activity => activity.id === "work-copyist")!;
   assert.equal(locked.available, false);
-  assert.throws(() => engine.act(state, "work-copyist"), /age 18/);
+  assert.throws(() => engine.act(state, "work-copyist"), /Requires Literacy 30/);
+  const seamanshipBeforeTraining = state.character!.skills.seamanship;
   state = engine.act(state, "train-seamanship");
   state = engine.act(ageTo(engine, state, 15), "train-seamanship");
-  assert.equal(state.character!.skills.seamanship, 20);
+  assert.ok(state.character!.skills.seamanship >= seamanshipBeforeTraining + 20, "Both accepted lessons add skill alongside any narrative or job gains.");
   while (state.age < 18) state = settle(engine, engine.advance(state));
   // The narrative may be paced beyond the birthday; check actual skill gates,
   // rather than relying on a fixed global decision schedule.
   state = ageTo(engine, state, 20);
+  assert.notEqual(state.character!.jobId, "sailor", "Keep the earlier job so this test exercises the voluntary career unlock.");
   const sailor = engine.getActivities(state).find(activity => activity.id === "work-sailor")!;
   assert.equal(sailor.available, true, sailor.reason);
   state = engine.act(state, "work-sailor");
@@ -97,7 +108,7 @@ test("Alexandria training visibly unlocks authored job and narrative career requ
   assert.deepEqual(engine.load(engine.save(state)), state);
 });
 
-test("Alexandria supports chosen marriages, named children, care, divorce, remarriage and a replayable specific death", () => {
+test("Alexandria supports chosen marriages, named children, care, divorce, remarriage and a replayable completed record", () => {
   const engine = safeEngine();
   let state = ageTo(engine, engine.start("alexandria-character-smoke"), 20);
   for (let attempts = 0; state.character!.relationshipStatus !== "courting" && attempts < 6; attempts++) {
@@ -135,10 +146,9 @@ test("Alexandria supports chosen marriages, named children, care, divorce, remar
   assert.deepEqual(engine.load(engine.save(state)), state);
   state = ageTo(engine, state, 100);
   assert.equal(state.phase, "ended");
-  const cause = engine.world.character!.deathCauses.find(cause => cause.id === state.deathCauseId);
-  assert.ok(cause);
-  assert.match(state.journal.at(-1)!.text, /Cause of death:/);
-  assert.ok(state.journal.at(-1)!.text.includes(cause.title));
+  assert.equal(state.endingId, "end-of-record");
+  assert.equal(state.deathCauseId, undefined);
+  assert.equal(state.deathCauseContext, undefined);
   assert.deepEqual(engine.load(engine.save(state)), state);
 });
 
@@ -157,7 +167,8 @@ test("varied complete Alexandria lives can exercise available activities without
       }
     }
     assert.equal(state.phase, "ended", state.seed);
-    assert.ok(state.deathCauseId, state.seed);
+    if (engine.world.endings.find(ending => ending.id === state.endingId)?.kind === "death") assert.ok(state.deathCauseId, state.seed);
+    else assert.equal(state.deathCauseId, undefined, state.seed);
     assert.deepEqual(engine.replay(state.seed, state.commands), state);
   }
 });

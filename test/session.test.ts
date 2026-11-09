@@ -13,6 +13,11 @@ import originRangesPack from "../worlds/alexandria-0.6.0.json" with { type: "jso
 import longerLivesPack from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 import pooledPeoplePack from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import skillTreePack from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import economyPack from "../worlds/alexandria-0.9.0.json" with { type: "json" };
+import variedPack from "../worlds/alexandria-0.10.0.json" with { type: "json" };
+import coherentPack from "../worlds/alexandria-0.12.0.json" with { type: "json" };
+import workTimelinePack from "../worlds/alexandria-0.13.0.json" with { type: "json" };
+import interestCareersPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 
 function memoryStorage(): StorageLike {
   const items = new Map<string, string>();
@@ -22,6 +27,66 @@ function memoryStorage(): StorageLike {
     removeItem: key => { items.delete(key); },
   };
 }
+
+test("0.14 saves preserve their original age-band mortality after causal health is introduced", () => {
+  const original = createEngine(interestCareersPack);
+  const life = original.start("situation-death-110");
+  assert.equal(life.health, undefined);
+  assert.ok(life.stats.health >= 60);
+  const restored = loadAnyLife(original.save(life));
+  assert.deepEqual(restored, life);
+  const continued = original.advance(restored);
+  assert.equal(continued.phase, "ended");
+  assert.equal(continued.age, 0);
+  assert.equal(continued.health, undefined);
+  assert.ok(continued.deathCauseId);
+  assert.deepEqual(continued, original.replay(life.seed, continued.commands));
+  assert.deepEqual(loadAnyLife(original.save(continued)), continued);
+});
+
+test("0.12.0 lives retain their later work timeline and exact continuation after the historical-age update", () => {
+  const original = createEngine(coherentPack);
+  let life = original.start("old-work-timeline");
+  while (life.age < 16 && life.phase !== "ended") {
+    life = life.phase === "choice" ? original.choose(life, original.getChoices(life)[0].id) : original.advance(life);
+  }
+  assert.equal(life.age, 16);
+  assert.notEqual(life.phase, "ended");
+  if (life.phase === "choice") life = original.choose(life, original.getChoices(life)[0].id);
+  const restored = loadAnyLife(original.save(life));
+  assert.deepEqual(restored, life);
+  assert.equal(original.world.character!.jobs.find(job => job.id === "copyist")!.minAge, 18);
+  assert.deepEqual(original.world.events.find(event => event.id === "a-place-on-the-manifest")!.trigger, { type: "age", at: 18 });
+  const continued = advanceToTurningPoint(restored);
+  assert.ok(continued.commands.length > restored.commands.length, "Continuation must exercise the retained engine beyond the imported save.");
+  assert.ok(continued.age >= 18, "The retained job-offer event keeps its original later age.");
+  assert.deepEqual(continued, original.replay(life.seed, continued.commands));
+  assert.notEqual(restored.worldFingerprint, builtinEngine.fingerprint);
+});
+
+test("0.13.0 apprenticeship saves keep their original commissions and continue through exact replay", () => {
+  const original = createEngine(workTimelinePack);
+  let life = original.start("legacy-interest-career");
+  while (life.age < 12 && life.phase !== "ended") {
+    life = life.phase === "choice" ? original.choose(life, original.getChoices(life)[0].id) : original.advance(life);
+  }
+  while (life.phase === "choice") life = original.choose(life, original.getChoices(life)[0].id);
+  assert.equal(life.age, 12);
+  assert.equal(life.phase, "ready");
+  life = original.act(life, "work-apprentice");
+  const restored = loadAnyLife(original.save(life));
+  assert.deepEqual(restored, life);
+  assert.equal(restored.character!.jobId, "apprentice");
+  assert.equal(original.world.character!.activities.length, 81);
+  assert.deepEqual(original.world.character!.activities.find(activity => activity.id === "carve-door-fitting")!.when, {
+    type: "all", conditions: [{ type: "job", job: "wood-carver" }, { type: "skill", skill: "carving", op: "gte", value: 35 }],
+  });
+  const continued = advanceToTurningPoint(restored);
+  assert.ok(continued.commands.length > restored.commands.length);
+  assert.ok(continued.character!.skills.craft > restored.character!.skills.craft);
+  assert.deepEqual(continued, original.replay(life.seed, continued.commands));
+  assert.notEqual(restored.worldFingerprint, builtinEngine.fingerprint);
+});
 
 test("the controller begins at birth without simulating childhood in advance", () => {
   const life = createSampleLife("a-newborn-life");
@@ -139,13 +204,44 @@ test("0.8.0 skill-tree lives retain abstract Resources and exact replay after th
   assert.deepEqual(continued, original.replay(life.seed, continued.commands));
 });
 
+test("0.9.0 lives retain their original identity, household and money after varied backgrounds", () => {
+  const original = createEngine(economyPack);
+  const life = original.choose(original.start("before-varied-backgrounds"), "family-care");
+  assert.equal(original.world.origins.length, 3);
+  assert.equal(original.world.character!.playerNames!.length, 16);
+  const saved = original.save(life);
+  const restored = loadAnyLife(saved);
+  assert.deepEqual(restored, life);
+  assert.deepEqual(restored.economy, life.economy);
+  const continued = advanceToTurningPoint(restored);
+  assert.deepEqual(continued, original.replay(life.seed, continued.commands));
+  assert.equal(original.save(restored), saved);
+});
+
+test("0.10.0 saves preserve their original birth decision after birth becomes automatic", () => {
+  const original = createEngine(variedPack);
+  const born = original.start("before-automatic-birth");
+  assert.equal(born.pendingEventId, "the-first-household");
+  assert.equal(born.phase, "choice");
+  const saved = original.save(born);
+  const restored = loadAnyLife(saved);
+  assert.deepEqual(restored, born);
+  const chosen = original.choose(restored, "family-care");
+  assert.equal(chosen.commands[0].type, "choose");
+  assert.deepEqual(loadAnyLife(original.save(chosen)), chosen);
+  assert.deepEqual(advanceToTurningPoint(chosen), original.replay(chosen.seed, advanceToTurningPoint(chosen).commands));
+  assert.equal(original.save(restored), saved);
+});
+
 function completedLife(seed: string, openingChoice = 0) {
   let life = createSampleLife(seed);
+  let chose = false;
   for (let commands = 0; commands < 1500; commands++) {
     if (life.phase === "ended") return life;
-    life = life.phase === "choice"
-      ? sampleEngine.choose(life, sampleEngine.getChoices(life)[life.age === 0 ? openingChoice : 0].id)
-      : sampleEngine.advance(life);
+    if (life.phase === "choice") {
+      life = sampleEngine.choose(life, sampleEngine.getChoices(life)[chose ? 0 : openingChoice].id);
+      chose = true;
+    } else life = sampleEngine.advance(life);
   }
   assert.fail("A full life did not terminate within the controller safety bound.");
 }
@@ -225,7 +321,7 @@ test("already begun, progressed and ended lives skip the new stat reveal", () =>
   const newborn = createSampleLife("already-begun-stat-reveal");
   persistBirthPresentation(storage, newborn, true);
   assert.equal(hasBirthStatsBeenRevealed(storage, newborn), true);
-  const progressed = sampleEngine.choose(createSampleLife("progressed-stat-reveal"), "family-care");
+  const progressed = sampleEngine.advance(createSampleLife("progressed-stat-reveal"));
   const ended = completedLife("ended-stat-reveal");
   const unreadable: StorageLike = { getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); }, removeItem() {} };
   assert.equal(hasBirthStatsBeenRevealed(unreadable, progressed), true);

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { BIRTH_ROLL_DURATION_MS, getBirthRollFrame, getBirthRollStats, getCosmeticBirthValue } from "./birth-stat-roll.ts";
+import { BIRTH_ROLL_DURATION_MS, canRepresentBirthReelValue, getBirthDigitReels, getBirthReelLayout, getBirthRollFrame, getBirthRollStats } from "./birth-stat-roll.ts";
 import "./birth-stat-roll.css";
 
 export interface BirthStatRollProps {
@@ -12,7 +12,7 @@ export interface BirthStatRollProps {
   autoStart?: boolean;
 }
 
-function BirthStatRollSession({ life, world, revealed, onComplete, paused = false, autoStart = false }: BirthStatRollProps) {
+function BirthStatRollSession({ life, world, revealed, onComplete, paused = false, autoStart = true }: BirthStatRollProps) {
   const stats = useMemo(() => getBirthRollStats(world, life), [world, life]);
   const origin = world.origins.find(item => item.id === life.originId);
   const characterName = life.character?.name ?? "Damon";
@@ -66,13 +66,15 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
     if (!started || finished || revealed || paused || hidden) return;
     if (reducedMotion) { finish(); return; }
     let previous = performance.now();
-    const timer = window.setInterval(() => {
-      const now = performance.now();
+    let animationFrame = 0;
+    const tick = (now: number) => {
       const delta = Math.max(0, Math.min(160, now - previous));
       previous = now;
       setElapsed(value => Math.min(BIRTH_ROLL_DURATION_MS, value + delta));
-    }, 60);
-    return () => window.clearInterval(timer);
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+    animationFrame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [started, finished, revealed, paused, hidden, reducedMotion, finish]);
 
   useEffect(() => { if (started && elapsed >= BIRTH_ROLL_DURATION_MS) finish(); }, [elapsed, started, finish]);
@@ -81,26 +83,42 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
   const frame = getBirthRollFrame(settled ? BIRTH_ROLL_DURATION_MS : elapsed, stats.length);
   const running = started && !settled;
   const summary = settled ? `Starting stats ready. ${characterName}. ${origin?.title ?? "Origin selected"}. ${stats.map(stat => `${stat.label} ${stat.value}${stat.currency ? ` ${stat.currency}` : ""}`).join(", ")}.`
-    : running ? "Rolling starting stats." : "Reveal your name, household and starting stats.";
+    : running ? "Rolling starting stats. Final values are hidden until each roll finishes." : autoStart ? "Starting the stat roll automatically." : "Reveal your name, household and starting stats.";
 
   return <section className={`birth-stat-roll ${running ? "is-rolling" : ""} ${settled ? "is-complete" : ""} ${paused || hidden ? "is-paused" : ""}`} aria-label="Starting stat roll" aria-busy={running}>
-    <div className="birth-roll-heading"><div><span className="birth-roll-eyebrow">YOUR BEGINNING</span><h3>{settled ? "Your starting stats." : "A different start for every life."}</h3></div><span className="birth-roll-seal" aria-hidden="true">{settled ? "✓" : "✦"}</span></div>
-    <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>HOUSEHOLD</span><strong>{frame.originRevealed || settled ? origin?.title ?? "Your household" : running ? "Finding your origin…" : "To be revealed"}</strong></div>
-    <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>NAME</span><strong>{frame.originRevealed || settled ? characterName : "To be revealed"}</strong></div>
+    <div className="birth-roll-heading"><div><span className="birth-roll-eyebrow">NEW LIFE</span><h3>{settled ? "Starting stats" : "Rolling stats…"}</h3></div><span className="birth-roll-seal" aria-hidden="true">{settled ? "✓" : "✦"}</span></div>
+    <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>BACKGROUND</span><strong>{frame.originRevealed || settled ? origin?.title ?? "Your household" : running ? "Rolling…" : "Unrevealed"}</strong></div>
+    <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>NAME</span><strong>{frame.originRevealed || settled ? characterName : "Unrevealed"}</strong></div>
     <div className="birth-roll-cards" aria-hidden="true">{stats.map((stat, index) => {
       const phase = settled ? "settled" : frame.phases[index];
-      const display = phase === "waiting" ? "—" : phase === "settled" ? stat.value : getCosmeticBirthValue(stat, life.seed, Math.floor(elapsed / 60));
+      const layout = getBirthReelLayout(stat);
+      const digits = getBirthDigitReels(stat, life.seed, settled ? BIRTH_ROLL_DURATION_MS : elapsed, index, stats.length);
+      const exactReels = canRepresentBirthReelValue(stat, layout);
+      const integerDigits = Math.max(1, String(Math.trunc(Math.abs(stat.value))).length);
+      const rawFinal = phase === "settled" && !exactReels;
       return <div className={`birth-roll-card birth-roll-${stat.id} is-${phase}`} key={stat.id}>
-        <span className="birth-roll-stat-name">{stat.label}</span><strong className="birth-roll-number">{display}{stat.currency && <small>{stat.currency}</small>}</strong>
-        <span className="birth-roll-range">{stat.range ? `${stat.range.min} - ${stat.range.max}${stat.currency ? ` ${stat.currency}` : ""}` : "Starting value"}</span>
+        <span className="birth-roll-stat-name">{stat.label}</span><strong className="birth-roll-number">
+          {phase === "waiting" ? <span className="birth-roll-waiting">—</span> : <span className={`birth-roll-digits${phase === "settled" ? " birth-roll-final" : ""}`} data-final-value={phase === "settled" ? String(stat.value) : undefined} style={digits.length > 4 ? { fontSize: Math.max(8, 126 / digits.length) } : undefined}>
+            {layout.hasSign && <span className="birth-digit-sign" style={{ visibility: phase === "settled" && stat.value < 0 && !rawFinal ? "visible" : "hidden" }}>−</span>}
+            {digits.map((digit, place) => <span className="birth-digit-place" key={place}>
+              {layout.fractionPlaces > 0 && place === layout.integerPlaces && <span className="birth-digit-decimal" style={rawFinal ? { visibility: "hidden" } : undefined}>.</span>}
+              <span className="birth-digit-window" style={{ visibility: rawFinal || phase === "settled" && place < layout.integerPlaces - integerDigits ? "hidden" : "visible" }}><span className={`birth-digit-reel rolls-${digit.direction}`} data-direction={digit.direction} data-position={digit.position} style={{ transform: `translate3d(0, ${-1.1 * (1 + digit.fraction)}em, 0)` }}>
+                {digit.glyphs.map((glyph, row) => <span key={row}>{glyph}</span>)}
+              </span></span>
+            </span>)}
+            {rawFinal && <span className="birth-roll-raw-final" style={{ fontSize: `${Math.min(100, layout.digitCount / String(stat.value).length * 115)}%` }}>{stat.value}</span>}
+          </span>}
+          {stat.currency && <small>{stat.currency}</small>}
+        </strong>
+        <span className="birth-roll-range">{phase === "settled" ? stat.range ? `${stat.range.min} - ${stat.range.max}${stat.currency ? ` ${stat.currency}` : ""}` : "Starting value" : "Final value hidden"}</span>
         <span className="birth-roll-card-state">{phase === "settled" ? "Set" : phase === "rolling" ? "Rolling" : "Waiting"}<i /></span>
       </div>;
     })}</div>
     <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{summary}</p>
-    <div className="birth-roll-footer"><p>{settled ? "Ready to begin." : running ? paused || hidden ? "The reveal is paused." : "Your starting stats are being revealed…" : "Roll once to see the stats for this life."}</p>
-      {!started && !settled && <button type="button" className="birth-roll-button" disabled={paused || hidden} onClick={start}>Roll starting stats <span aria-hidden="true">↗</span></button>}
+    {(!autoStart || running) && <div className="birth-roll-footer">{!autoStart && <p>{settled ? "Ready." : paused || hidden ? "Paused." : running ? "Rolling…" : "Starting stats"}</p>}
+      {!autoStart && !started && !settled && <button type="button" className="birth-roll-button" disabled={paused || hidden} onClick={start}>Roll starting stats <span aria-hidden="true">↗</span></button>}
       {running && <button type="button" className="birth-roll-skip" onClick={finish}>Skip animation</button>}
-    </div>
+    </div>}
   </section>;
 }
 

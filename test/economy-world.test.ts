@@ -7,15 +7,18 @@ import { createEngine } from "../src/index.ts";
 import { getAssetValue, getNetWorth } from "../src/economy.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import economyRelease from "../worlds/alexandria-0.9.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 
 function controlledWorld(): WorldPack {
   const world = structuredClone(pack) as WorldPack;
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
+  world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.stats.wealth.initial = 80;
   world.stats.wealth.initialRange = { min: 80, max: 80 };
   for (const origin of world.origins) origin.statRanges!.wealth = { min: 80, max: 80 };
-  world.events = [world.events.find(event => event.id === "the-first-household")!];
+  world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.yearlyEffects = [];
   world.yearlyRules = [];
   return world;
@@ -35,14 +38,14 @@ function ageTo(engine: LifeEngine, life: LifeState, target: number): LifeState {
 }
 
 test("the economy release retains all earlier life content and discloses its authored prices", () => {
-  const stripped = structuredClone(pack) as WorldPack;
+  const stripped = structuredClone(economyRelease) as WorldPack;
   delete stripped.economy;
   stripped.version = previous.version;
   stripped.stats.wealth.label = previous.stats.wealth.label;
   stripped.character!.activities = stripped.character!.activities.filter(activity => activity.category !== "finance");
   stripped.sources = stripped.sources!.filter(source => source.id !== "ucl-ptolemaic-coins");
   assert.deepEqual(stripped, previous);
-  assert.equal(pack.version, "0.9.0");
+  assert.equal(economyRelease.version, "0.9.0");
   assert.equal(pack.economy.unitsPerPoint, 10);
   assert.deepEqual(pack.economy.currency, { singular: "drachma", plural: "drachmas", short: "dr" });
   assert.match(pack.economy.description, /not reconstructed historical prices or wages/);
@@ -53,7 +56,7 @@ test("the economy release retains all earlier life content and discloses its aut
 });
 
 test("household money inherits origin rolls without consuming a new birth draw", () => {
-  const before = createEngine(previous), engine = createEngine(pack);
+  const before = createEngine(previous), engine = createEngine(economyRelease);
   const origins = new Set<string>();
   const balances = new Set<number>();
   for (let index = 0; index < 128; index++) {
@@ -66,7 +69,7 @@ test("household money inherits origin rolls without consuming a new birth draw",
     assert.equal(life.economy!.debt, 0);
     assert.equal(getAssetValue(engine.world, life), 0);
     assert.equal(getNetWorth(engine.world, life), life.economy!.cash);
-    const range = pack.origins.find(origin => origin.id === life.originId)!.statRanges.wealth;
+    const range = economyRelease.origins.find(origin => origin.id === life.originId)!.statRanges.wealth;
     assert.ok(life.economy!.cash >= range.min * 10 && life.economy!.cash <= range.max * 10);
     origins.add(life.originId);
     balances.add(life.economy!.cash);
@@ -138,6 +141,8 @@ test("the tool chest turns cash into a possession without creating unadvertised 
 
 test("unpaid household costs can be repaid with the authored finance activity", () => {
   const world = controlledWorld();
+  // This fixture exercises the optional manual-payment route specifically.
+  world.economy!.autoDebtRepayment = false;
   world.yearlyRules = [
     { id: "large-bill", when: { type: "age", op: "eq", value: 18 }, effects: [{ type: "cash", delta: -810 }] },
     { id: "later-payment", when: { type: "age", op: "eq", value: 19 }, effects: [{ type: "cash", delta: 30 }] },

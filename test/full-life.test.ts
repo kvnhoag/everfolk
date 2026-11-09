@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import comparisonPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import registry from "../research/sources.json" with { type: "json" };
 import mortalityModel from "../research/mortality-model.json" with { type: "json" };
 import gameBalance from "../research/game-balance.json" with { type: "json" };
@@ -13,8 +14,10 @@ function complete(engine: LifeEngine, seed: string, career = "stay", manageFamil
     if (state.phase === "choice") {
       const choices = engine.getChoices(state);
       const choice = state.pendingEventId === "a-place-on-the-manifest"
-        ? choices.find(choice => choice.id === career)
-        : choices.find(choice => choice.id === "learn-letters") ?? choices[0];
+        ? choices.find(choice => choice.id === (career === "stay" && state.character?.jobId === "porter" ? "keep-regular-job" : career))
+        : choices.find(choice => choice.id === "learn-letters")
+          ?? choices.find(choice => choice.outcomes.every(outcome => outcome.effects.every(effect => effect.type !== "end")))
+          ?? choices[0];
       assert.ok(choice, "Every offered decision needs an available choice.");
       state = engine.choose(state, choice.id);
     } else {
@@ -39,6 +42,17 @@ function complete(engine: LifeEngine, seed: string, career = "stay", manageFamil
 function safeEngine(): LifeEngine {
   const copy = structuredClone(pack);
   copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  copy.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  copy.health.declineBands.forEach(band => { band.healthLoss = 0; });
+  // This fixture covers every authored stage, rather than health progression.
+  // Keep the current health-enabled state and record ending while ensuring
+  // incidental narrative stat losses cannot end the content-coverage run.
+  copy.yearlyEffects.push({ type: "stat", stat: "health", delta: 100 });
+  // These fixtures isolate stage coverage and career qualifications from cash
+  // scarcity; the unmodified economy is exercised in its own integration runs.
+  copy.stats.wealth.initial = 80;
+  copy.stats.wealth.initialRange = { min: 80, max: 80 };
+  for (const origin of copy.origins) origin.statRanges.wealth = { min: 80, max: 80 };
   return createEngine(copy);
 }
 
@@ -63,21 +77,21 @@ test("only the four dated political anchors are classified as documented persona
   assert.ok(pack.events.filter(event => event.choices.length > 0).every(event => event.evidence !== "documented-history"));
 });
 
-test("raw conversion preserves the source while the active curve explicitly reduces childhood and adult mortality", () => {
-  assert.equal(pack.mortality.bands.length, mortalityModel.intervals.length + 2);
+test("the retained 0.14 comparison conversion preserves the source and its reduced age-band probabilities", () => {
+  assert.equal(comparisonPack.mortality.bands.length, mortalityModel.intervals.length + 2);
   for (const row of mortalityModel.intervals) {
     const sourceAnnual = 1 - (1 - row.deathProbability) ** (1 / (row.nextAge - row.minAge));
     const recoveredIntervalProbability = 1 - (1 - sourceAnnual) ** (row.nextAge - row.minAge);
     assert.ok(Math.abs(recoveredIntervalProbability - row.deathProbability) < 1e-12);
     for (let age = row.minAge; age < row.nextAge; age++) {
-      const band = pack.mortality.bands.find(band => age >= band.minAge && age <= band.maxAge);
+      const band = comparisonPack.mortality.bands.find(band => age >= band.minAge && age <= band.maxAge);
       assert.ok(band);
       const factor = gameBalance.mortality.ageMultipliers.find(range => age >= range.minAge && age <= range.maxAge)?.multiplier ?? gameBalance.mortality.defaultMultiplier;
       assert.ok(Math.abs(band.annualProbability - sourceAnnual * factor) < 1e-12);
       assert.ok(factor > 0 && factor < 1, `Age ${age} retains a reduced, nonzero background risk.`);
     }
   }
-  const tail = pack.mortality.bands.at(-1)!;
+  const tail = comparisonPack.mortality.bands.at(-1)!;
   assert.equal(tail.minAge, mortalityModel.oldestAgeTail.minAge);
   assert.equal(tail.maxAge, mortalityModel.oldestAgeTail.maxAge);
   assert.ok(tail.annualProbability > 0 && tail.annualProbability < 1, "An open-ended source interval must not become a guaranteed annual death.");
@@ -104,14 +118,15 @@ test("historical anchors occur in their documented calendar years and the correc
   assert.ok(life.journal.every(entry => entry.year !== 0));
 });
 
-test("zero-risk coverage runs reach all life stages and a death ending at the computational cap", () => {
+test("controlled content coverage reaches all life stages and ends the record without inventing a death", () => {
   const engine = safeEngine();
   for (const career of ["stay", "sail", "study"]) {
     const life = complete(engine, `full-stage-${career}`, career, true);
     assert.equal(life.age, 100);
     assert.equal(life.phase, "ended");
     assert.equal(life.endingId, pack.defaultEnding);
-    assert.equal(engine.world.endings.find(ending => ending.id === life.endingId)?.kind, "death");
+    assert.equal(engine.world.endings.find(ending => ending.id === life.endingId)?.kind, "chapter");
+    assert.equal(life.deathCauseId, undefined);
     for (const id of ["the-first-household", "first-steps", "the-first-letters", "a-place-to-learn", "a-place-on-the-manifest", "a-new-generation", "care-between-generations", "stepping-back", "putting-things-in-order", "the-small-pleasures", "an-extraordinary-age", "a-quiet-room"]) {
       assert.ok(life.journal.some(entry => entry.type === "event" && entry.id === id), `Missing ${id} on ${career} path.`);
     }
@@ -128,7 +143,9 @@ test("zero-risk coverage runs reach all life stages and a death ending at the co
       assert.ok(life.commands.some(command => command.type === "act" && command.activity === activity), `Missing explicit ${activity} command.`);
     }
     assert.equal(life.flags.retired, true);
-    assert.equal(life.flags[career === "stay" ? "stayed" : career === "sail" ? "sailed" : "studied"], true);
+    if (career === "stay") {
+      assert.ok(life.journal.some(entry => entry.type === "choice" && entry.id === "keep-regular-job"), "An existing porter can keep the job rather than being hired twice.");
+    } else assert.equal(life.flags[career === "sail" ? "sailed" : "studied"], true);
     assert.deepEqual(engine.load(engine.save(life)), life);
   }
 });
@@ -136,7 +153,8 @@ test("zero-risk coverage runs reach all life stages and a death ending at the co
 test("household milestone conversations never invent a partner or child", () => {
   const engine = safeEngine();
   const life = complete(engine, "independent-household");
-  assert.ok(life.journal.some(entry => entry.type === "choice" && entry.id === "share-life"));
+  assert.ok(life.journal.some(entry => entry.type === "event" && entry.id === "a-shared-household"));
+  assert.equal(life.journal.some(entry => entry.type === "choice" && ["share-life", "remain-independent", "share-parenting", "ask-kin"].includes(entry.id)), false);
   assert.equal(life.character!.relationshipStatus, "single");
   assert.equal(life.character!.partnerId, null);
   assert.deepEqual(life.character!.children, []);
@@ -149,8 +167,7 @@ test("household milestone conversations never invent a partner or child", () => 
 test("a zero-risk infancy interval advances exactly one birthday and records a yearly brief", () => {
   const engine = safeEngine();
   const born = engine.start("zero-risk-birth");
-  const caredFor = engine.choose(born, "family-care");
-  const firstBirthday = engine.advance(caredFor);
+  const firstBirthday = engine.advance(born);
   assert.equal(firstBirthday.age, 1);
   assert.equal(firstBirthday.year, -65);
   assert.equal(firstBirthday.phase, "ready");
@@ -159,15 +176,15 @@ test("a zero-risk infancy interval advances exactly one birthday and records a y
   assert.ok(firstBirthday.journal.every(entry => entry.type !== "ending"));
 });
 
-test("seeded complete lives include infant, child, adult and old-age deaths without forced age-23 endings", () => {
-  const engine = createEngine(pack);
+test("retained 0.14 seeded lives preserve infant, child, adult and old-age death outcomes", () => {
+  const engine = createEngine(comparisonPack);
   // Fixed seeds found with a bounded search, rather than assuming every run
   // survives to a chosen milestone or treating test frequencies as evidence.
   const cases = [
-    { seed: "people-coverage-35", minAge: 0, maxAge: 0, ending: "death-in-infancy" },
-    { seed: "people-coverage-1", minAge: 1, maxAge: 14, ending: "death-in-childhood" },
-    { seed: "people-coverage-2", minAge: 15, maxAge: 59, ending: "death-in-adulthood" },
-    { seed: "people-coverage-0", minAge: 60, maxAge: 100, ending: "death-in-later-life" },
+    { seed: "situation-death-110", minAge: 0, maxAge: 0, ending: "death-in-infancy" },
+    { seed: "situation-death-17", minAge: 1, maxAge: 14, ending: "death-in-childhood" },
+    { seed: "situation-death-0", minAge: 15, maxAge: 59, ending: "death-in-adulthood" },
+    { seed: "situation-death-2", minAge: 60, maxAge: 100, ending: "death-in-later-life" },
   ];
   for (const item of cases) {
     const life = complete(engine, item.seed);
@@ -206,7 +223,7 @@ test("the shipped personal decision pools sustain two-to-three-year gaps through
   for (let seed = 0; seed < 12; seed++) {
     const life = complete(engine, `cadence-${seed}`);
     const decisions = life.journal.filter(entry => entry.type === "choice");
-    assert.equal(decisions[0].age, 0);
+    assert.equal(decisions[0].age, 3);
     for (let i = 1; i < decisions.length; i++) {
       const gap = decisions[i].age - decisions[i - 1].age;
       assert.ok(gap >= 2 && gap <= 3, `Decision gap at age ${decisions[i].age} was ${gap} years.`);

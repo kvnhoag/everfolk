@@ -10,13 +10,13 @@ type Career = "stay" | "sail" | "study";
 function choiceFor(engine: LifeEngine, state: LifeState, career: Career): string {
   const choices = engine.getChoices(state);
   if (state.pendingEventId === "a-place-on-the-manifest") {
-    const chosen = choices.find(choice => choice.id === career);
+    const chosen = choices.find(choice => choice.id === (career === "stay" && state.character?.jobId === "porter" ? "keep-regular-job" : career));
     assert.ok(chosen, `The ${career} career must be available after its required training.`);
     return chosen.id;
   }
   if (state.pendingEventId === "the-first-letters") return "learn-letters";
   assert.ok(choices.length > 0, "An offered decision must have a way forward.");
-  return choices[0].id;
+  return (choices.find(choice => choice.outcomes.every(outcome => outcome.effects.every(effect => effect.type !== "end"))) ?? choices[0]).id;
 }
 
 function until(engine: LifeEngine, seed: string, career: Career, stop: (state: LifeState) => boolean, trainSkills = true): LifeState {
@@ -46,13 +46,13 @@ function withoutMortality(): LifeEngine {
   return createEngine(copy);
 }
 
-test("Alexandria begins with birth and a household-care decision in 66 BCE", () => {
+test("Alexandria records birth automatically in 66 BCE without a household-care decision", () => {
   const state = engine.start("birth-screen");
   assert.equal(state.age, 0);
   assert.equal(state.year, -66);
-  assert.equal(state.phase, "choice");
-  assert.equal(state.pendingEventId, "the-first-household");
-  assert.deepEqual(engine.getChoices(state).map(choice => choice.id), ["family-care", "seek-help"]);
+  assert.equal(state.phase, "ready");
+  assert.equal(state.pendingEventId, null);
+  assert.deepEqual(engine.getChoices(state), []);
   assert.equal(state.commands.length, 0);
   assert.equal(state.journal[0].type, "birth");
   assert.equal(state.journal.some(entry => entry.age > 0), false);
@@ -63,7 +63,7 @@ test("Alexandria newborns vary within their household's configured starting rang
   for (let index = 0; index < 128; index++) {
     const life = engine.start(`alexandria-origin-cohort-${index}`);
     const origin = engine.world.origins.find(origin => origin.id === life.originId)!;
-    assert.equal(life.pendingEventId, "the-first-household");
+    assert.equal(life.pendingEventId, null);
     assert.equal(life.age, 0);
     for (const [stat, definition] of Object.entries(engine.world.stats)) {
       const range = origin.statRanges?.[stat] ?? definition.initialRange;
@@ -76,14 +76,14 @@ test("Alexandria newborns vary within their household's configured starting rang
   for (const [origin, variations] of households) assert.ok(variations.size > 1, `${origin} produces different individuals`);
 });
 
-test("a birth decision and its continuation survive save/load without skipping childhood", () => {
+test("an automatic birth and its continuation survive save/load without skipping childhood", () => {
   const state = engine.start("birth-save");
   const restored = engine.load(engine.save(state));
   assert.deepEqual(restored, state);
-  const afterChoice = engine.choose(restored, "family-care");
-  assert.equal(afterChoice.age, 0);
-  assert.equal(afterChoice.phase, "ready");
-  assert.deepEqual(afterChoice, engine.choose(state, "family-care"));
+  const nextYear = engine.advance(restored);
+  assert.equal(nextYear.age, 1);
+  assert.equal(nextYear.phase, "ready");
+  assert.deepEqual(nextYear, engine.advance(state));
 });
 
 test("all three careers can pass the former age-23 boundary and end in old-age death", () => {
@@ -95,7 +95,9 @@ test("all three careers can pass the former age-23 boundary and end in old-age d
     assert.ok(state.age >= 70 && state.age <= pack.maxAge);
     assert.equal(engine.world.endings.find(ending => ending.id === state.endingId)?.kind, "death");
     assert.equal(state.endingId, "death-in-later-life");
-    assert.equal(state.flags[career === "stay" ? "stayed" : career === "sail" ? "sailed" : "studied"], true);
+    if (career === "stay") {
+      assert.ok(state.journal.some(entry => entry.type === "choice" && entry.id === "keep-regular-job"));
+    } else assert.equal(state.flags[career === "sail" ? "sailed" : "studied"], true);
     assert.ok(state.commands.some(command => command.type === "act" && command.activity === "train-seamanship"));
     assert.ok(state.commands.some(command => command.type === "act" && command.activity === "train-literacy"));
     assert.ok(state.journal.some(entry => entry.age > 23));
@@ -115,15 +117,23 @@ test("graded childhood training opens careers and the selected named job receive
   const followups = { sail: "letters-across-the-water", study: "the-unfamiliar-page", stay: "the-neighbors-request" };
   for (const career of ["stay", "sail", "study"] as const) {
     const adult = until(safeEngine, `training-${career}`, career, state => state.pendingEventId === "a-place-on-the-manifest");
-    assert.ok(adult.age >= 18 && adult.age <= 21, "The personal milestone may wait for the next decision interval.");
+    assert.ok(adult.age >= 16 && adult.age <= 19, "The personal milestone may wait for the next decision interval.");
     assert.equal(adult.flags.literate, true);
     assert.ok(adult.character!.skills.literacy >= 30);
     assert.ok(adult.character!.skills.seamanship >= 15);
-    assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["stay", "sail", "study"]);
-    let next = safeEngine.choose(adult, career);
+    assert.equal(adult.character!.jobId, "porter", "The earlier work milestone already started this occupation.");
+    assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["sail", "study", "keep-regular-job"]);
+    let next = safeEngine.choose(adult, career === "stay" ? "keep-regular-job" : career);
     assert.equal(next.character!.jobId, career === "stay" ? "porter" : career === "sail" ? "sailor" : "copyist");
-    while (next.phase === "ready") next = safeEngine.advance(next);
-    assert.ok(next.age - adult.age >= 2 && next.age - adult.age <= 3);
+    // The new household opportunity can take one decision slot before the
+    // named occupation's follow-up; it must not replace that follow-up.
+    while (next.phase !== "ended" && next.pendingEventId !== followups[career] && next.age <= adult.age + 6) {
+      if (next.phase === "choice") {
+        assert.ok(next.pendingEventId?.startsWith("background-"), `Unexpected intervening story: ${next.pendingEventId}`);
+        next = safeEngine.choose(next, safeEngine.getChoices(next)[0].id);
+      } else next = safeEngine.advance(next);
+    }
+    assert.ok(next.age - adult.age >= 2 && next.age - adult.age <= 6);
     assert.equal(next.pendingEventId, followups[career]);
   }
 });
@@ -134,7 +144,8 @@ test("a literacy flag alone does not bypass graded copyist and sailor requiremen
   assert.equal(adult.flags.literate, true);
   assert.ok(adult.character!.skills.literacy < 30);
   assert.ok(adult.character!.skills.seamanship < 15);
-  assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["stay"]);
+  assert.equal(adult.character!.jobId, "porter");
+  assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["keep-regular-job"]);
   const before = structuredClone(adult);
   assert.throws(() => safeEngine.choose(adult, "study"), /unavailable/);
   assert.throws(() => safeEngine.choose(adult, "sail"), /unavailable/);

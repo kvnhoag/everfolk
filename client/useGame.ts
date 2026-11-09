@@ -1,99 +1,158 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../src/types.ts";
-import { advanceToTurningPoint, archiveLife, createSampleLife, engineForLife, hasBirthStatsBeenRevealed, hasLifeBegun, loadAnyLife, persistBirthPresentation, persistBirthStatsReveal, persistLife, readArchivedLives, readSavedLife } from "./session.ts";
+import { archiveLife, createDifferentSampleLife, createSampleLife, engineForLife, hasBirthStatsBeenRevealed, hasLifeBegun, loadAnyLife, persistBirthPresentation, persistBirthStatsReveal, persistLife, readArchivedLives, readSavedLife } from "./session.ts";
 import type { ArchivedLife } from "./session.ts";
+import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, persistYearlyFocus, readYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "./yearly-focus.ts";
+import type { YearlyFocusId } from "./yearly-focus.ts";
+import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "./pause-state.ts";
+import type { PauseState } from "./pause-state.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
-export type PlaybackSpeed = 1 | 2 | 4 | 8;
+export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
 const YEAR_DURATION_MS = 25_000;
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : "Something interrupted this action. Please try again.";
 }
 
-function initialSession(startFresh = false): { life: LifeState; notice: string; hasBegun: boolean; hasRevealedStats: boolean } {
+function savedFocus(life: LifeState): YearlyFocusId {
+  if (typeof window === "undefined") return "everyday";
+  try { return readYearlyFocus(window.localStorage, life, engineForLife(life).world); }
+  catch { return "everyday"; }
+}
+
+function initialSession(startFresh = false, startFreshFrom?: LifeState): { life: LifeState; notice: string; hasBegun: boolean; hasRevealedStats: boolean } {
   try {
     if (!startFresh && typeof window !== "undefined") {
       const restored = readSavedLife(window.localStorage);
       if (restored) return {
-        life: restored, notice: "Your life has been restored.",
+        life: restored, notice: "",
         hasBegun: hasLifeBegun(window.localStorage, restored),
         hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
       };
     }
-    return { life: createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
+    return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
   } catch (error) {
     return { life: createSampleLife(), notice: `${message(error)} A fresh sample is ready.`, hasBegun: false, hasRevealedStats: false };
   }
 }
 
 /** Bridge React to one authoritative engine snapshot; UI pacing stays outside the core. */
-export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverlayOpen?: boolean; startFresh?: boolean } = {}) {
-  const [initial] = useState(() => initialSession(startFresh));
+export function useGame({ isOverlayOpen = false, startFresh = false, startFreshFrom }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState } = {}) {
+  const [initial] = useState(() => initialSession(startFresh, startFreshFrom));
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
+  const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
+  const focusId = focusSelection.key === yearlyFocusStorageKey(life) ? focusSelection.id : "everyday";
+  const focusIdRef = useRef(focusId);
+  focusIdRef.current = focusId;
   const [hasBegun, setHasBegun] = useState(initial.hasBegun);
+  const hasBegunRef = useRef(hasBegun);
+  hasBegunRef.current = hasBegun;
   const [hasRevealedStats, setHasRevealedStats] = useState(initial.hasRevealedStats);
   const [notice, setNotice] = useState(initial.notice);
-  // Playback is player intent; decisions, panels and hidden tabs only suspend it.
-  const [isPlaying, setPlaybackIntent] = useState(initial.hasBegun && initial.life.phase !== "ended");
+  // A restored or interrupted life waits at Continue / Be reborn.
+  const [pauseState, setPauseState] = useState(() => initialPauseState({ hasBegun: initial.hasBegun, phase: initial.life.phase }));
+  const pauseStateRef = useRef(pauseState);
+  const isPlaying = pauseState.playing;
   const playbackIntentRef = useRef(isPlaying);
   const clockAllowedRef = useRef(false);
+  const [autoDecisions, setAutoDecisionsState] = useState(false);
+  const autoIntentRef = useRef(false);
+  const autoAllowedRef = useRef(false);
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [clockElapsedMs, setClockElapsedMs] = useState(0);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
   const yearDurationMs = YEAR_DURATION_MS / speed;
-  const isClockRunning = hasBegun && isPlaying && isVisible && !isOverlayOpen && life.phase === "ready";
+  const pauseContext = { hasBegun, phase: life.phase };
+  const isClockRunning = canRunLifeClock(pauseState, pauseContext, isVisible, isOverlayOpen);
   clockAllowedRef.current = isClockRunning;
+  autoAllowedRef.current = canRunAutomaticDecision(pauseState, pauseContext, isVisible, isOverlayOpen, autoDecisions);
+
+  const commitPauseState = useCallback((next: PauseState) => {
+    pauseStateRef.current = next;
+    playbackIntentRef.current = next.playing;
+    if (next.screenOpen || !next.playing) {
+      clockAllowedRef.current = false;
+      autoAllowedRef.current = false;
+    }
+    setPauseState(next);
+  }, []);
+
+  const setFocus = useCallback((id: YearlyFocusId) => {
+    if (pauseStateRef.current.screenOpen || lifeRef.current !== life || life.phase === "ended") return;
+    const world = engineForLife(life).world;
+    const next = normalizeYearlyFocus(id, world);
+    const activity = focusActivity(world, next);
+    if (activity && life.age < (activity.minAge ?? 0)) return;
+    focusIdRef.current = next;
+    setFocusSelection({ key: yearlyFocusStorageKey(life), id: next });
+  }, [life]);
+
+  const setAutoDecisions = useCallback((value: SetStateAction<boolean>) => {
+    const next = typeof value === "function" ? value(autoIntentRef.current) : value;
+    if (next && pauseStateRef.current.screenOpen) return;
+    autoIntentRef.current = next;
+    setAutoDecisionsState(next);
+  }, []);
 
   const setPlaying = useCallback((value: SetStateAction<boolean>) => {
     const next = typeof value === "function" ? value(playbackIntentRef.current) : value;
-    playbackIntentRef.current = next;
-    if (!next) clockAllowedRef.current = false;
-    setPlaybackIntent(next);
-  }, []);
+    commitPauseState(updatePauseState(pauseStateRef.current, { type: "playback", playing: next }, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }));
+  }, [commitPauseState]);
 
-  const commit = useCallback((next: LifeState) => {
+  const pauseLife = useCallback(() => {
+    commitPauseState(updatePauseState(pauseStateRef.current, { type: "show" }, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }));
+  }, [commitPauseState]);
+
+  const continueLife = useCallback(() => {
+    if (typeof document !== "undefined" && document.hidden) return;
+    commitPauseState(updatePauseState(pauseStateRef.current, { type: "continue" }, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }));
+    setNotice("");
+  }, [commitPauseState]);
+
+  const commit = useCallback((next: LifeState, fresh = false) => {
+    if (fresh || next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
+      setFocusSelection({ key: yearlyFocusStorageKey(next), id: fresh ? "everyday" : savedFocus(next) });
+    }
     lifeRef.current = next;
     setLife(next);
     setSaveStatus("saving");
-    if (next.phase === "ended") setPlaying(false);
-  }, [setPlaying]);
+    if (next.phase === "ended" || fresh) commitPauseState(updatePauseState(pauseStateRef.current, { type: next.phase === "ended" ? "ended" : "fresh" }, { hasBegun: hasBegunRef.current, phase: next.phase }));
+  }, [commitPauseState]);
 
   const choose = useCallback((choiceId: string) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
-    if (!hasBegun || lifeRef.current !== life) return;
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
     try {
       const current = life;
       const next = engineForLife(current).choose(current, choiceId);
-      const outcome = next.journal.slice(current.journal.length).find(entry => entry.type === "outcome");
       commit(next);
-      setNotice(outcome?.text ?? "Your choice has been recorded.");
+      setNotice("");
     } catch (error) {
       setNotice(message(error));
     }
   }, [commit, hasBegun, life]);
 
   const act = useCallback((activityId: string) => {
-    if (!hasBegun || lifeRef.current !== life) return;
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
     try {
       const current = life;
       const next = engineForLife(current).act(current, activityId);
-      const outcome = next.journal.slice(current.journal.length).find(entry => entry.type === "outcome");
       commit(next);
-      setNotice(outcome?.text ?? "Your activity has been recorded in your chronicle.");
+      setNotice("");
     } catch (error) {
       setNotice(message(error));
     }
   }, [commit, hasBegun, life]);
 
   const advance = useCallback(() => {
-    if (!hasBegun || lifeRef.current !== life) return;
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
     try {
-      commit(engineForLife(life).advance(life));
+      commit(advanceYearWithFocus(engineForLife(life), life, focusIdRef.current));
       setNotice("");
     } catch (error) {
       setNotice(message(error));
@@ -101,9 +160,9 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
   }, [commit, hasBegun, life]);
 
   const nextTurningPoint = useCallback(() => {
-    if (!hasBegun || lifeRef.current !== life || life.phase !== "ready") return;
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life || life.phase !== "ready") return;
     try {
-      const next = advanceToTurningPoint(life);
+      const next = advanceToDecisionWithFocus(engineForLife(life), life, focusIdRef.current);
       commit(next);
       setNotice("");
     } catch (error) { setNotice(message(error)); }
@@ -115,7 +174,8 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
   }, [life]);
 
   const beginLife = useCallback(() => {
-    if (!hasRevealedStats || lifeRef.current !== life) return;
+    if (hasBegunRef.current || pauseStateRef.current.screenOpen || !hasRevealedStats || lifeRef.current !== life) return;
+    hasBegunRef.current = true;
     setHasBegun(true);
     setPlaying(true);
     setNotice("");
@@ -123,28 +183,41 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
 
   const restart = useCallback(() => {
     setPlaying(false);
+    setAutoDecisions(false);
+    hasBegunRef.current = false;
     setHasBegun(false);
     setHasRevealedStats(false);
-    commit(createSampleLife());
+    commit(createDifferentSampleLife(lifeRef.current), true);
     setNotice("");
-  }, [commit, setPlaying]);
+  }, [commit, setPlaying, setAutoDecisions]);
 
   const importLife = useCallback((json: string) => {
     try {
       const restored = loadAnyLife(json);
-      const begun = restored.commands.length > 0 || restored.phase === "ended";
+      let begun = restored.commands.length > 0 || restored.phase === "ended";
+      if (!begun && typeof window !== "undefined") {
+        try { begun = hasLifeBegun(window.localStorage, restored); }
+        catch { /* Unmarked age-zero imports retain the normal birth introduction. */ }
+      }
       let revealed = begun;
       try {
         if (!revealed && typeof window !== "undefined") revealed = hasBirthStatsBeenRevealed(window.localStorage, restored);
       } catch { /* Keep the stat reveal available when browser storage is blocked. */ }
-      setPlaying(begun && restored.phase !== "ended");
+      hasBegunRef.current = begun;
+      commitPauseState(initialPauseState({ hasBegun: begun, phase: restored.phase }));
+      setAutoDecisions(false);
       setHasBegun(begun);
       setHasRevealedStats(revealed);
       commit(restored);
       setNotice("The imported life is ready.");
       return true;
     } catch (error) { setNotice(message(error)); return false; }
-  }, [commit, setPlaying]);
+  }, [commit, commitPauseState, setAutoDecisions]);
+
+  useEffect(() => {
+    try { persistYearlyFocus(window.localStorage, life, focusId); }
+    catch { /* A blocked preference store does not prevent playing this life. */ }
+  }, [focusId, life.worldFingerprint, life.seed]);
 
   useEffect(() => {
     try { setArchivedLives(readArchivedLives(window.localStorage)); }
@@ -177,10 +250,13 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
   }, [life]);
 
   useEffect(() => {
-    const updateVisibility = () => setVisible(!document.hidden);
+    const updateVisibility = () => {
+      if (document.hidden) pauseLife();
+      setVisible(!document.hidden);
+    };
     document.addEventListener("visibilitychange", updateVisibility);
     return () => document.removeEventListener("visibilitychange", updateVisibility);
-  }, []);
+  }, [pauseLife]);
 
   useEffect(() => {
     // Holds and speed changes begin a fresh interval. No missed years catch up.
@@ -192,7 +268,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
     }, Math.min(100, yearDurationMs / 10));
     const timer = window.setTimeout(() => {
       // A pause, overlay or state change can precede effect cleanup in the same turn.
-      if (!document.hidden && clockAllowedRef.current && playbackIntentRef.current &&
+      if (!document.hidden && !pauseStateRef.current.screenOpen && clockAllowedRef.current && playbackIntentRef.current &&
         lifeRef.current === life && lifeRef.current.phase === "ready") {
         setClockElapsedMs(yearDurationMs);
         advance();
@@ -203,6 +279,16 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
       window.clearInterval(countdown);
     };
   }, [advance, isClockRunning, life, yearDurationMs]);
+
+  useEffect(() => {
+    if (!canRunAutomaticDecision(pauseState, { hasBegun, phase: life.phase }, isVisible, isOverlayOpen, autoDecisions)) return;
+    const choice = selectAutomaticChoice(engineForLife(life).getChoices(life), engineForLife(life).world);
+    if (!choice) return;
+    const timer = window.setTimeout(() => {
+      if (!document.hidden && !pauseStateRef.current.screenOpen && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id);
+    }, 700);
+    return () => window.clearTimeout(timer);
+  }, [autoDecisions, hasBegun, pauseState, isVisible, isOverlayOpen, life, choose]);
 
   return {
     life,
@@ -215,9 +301,16 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
     revealStats,
     beginLife,
     nextTurningPoint,
+    focusId,
+    setFocus,
+    autoDecisions,
+    setAutoDecisions,
     importLife,
     archivedLives,
     isPlaying,
+    resumeScreenOpen: pauseState.screenOpen,
+    pauseLife,
+    continueLife,
     isClockRunning,
     clockRemainingMs: Math.max(0, yearDurationMs - clockElapsedMs),
     clockProgress: Math.min(1, clockElapsedMs / yearDurationMs),

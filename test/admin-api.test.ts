@@ -7,11 +7,15 @@ import { MAX_CATALOG_BYTES, compileWorld, getBuiltinCatalog, getBuiltinWorld, ge
 import type { ContentDatabase, D1Statement, StatementResult } from "../server/store.ts";
 import type { ApiEnvironment } from "../server/api.ts";
 import { createEngine } from "../src/index.ts";
+import type { LifeEvent, WorldPack } from "../src/types.ts";
 import namedCausesPack from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 import originRangesPack from "../worlds/alexandria-0.6.0.json" with { type: "json" };
 import longerLivesPack from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 import pooledPeoplePack from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import skillTreePack from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import economyPack from "../worlds/alexandria-0.9.0.json" with { type: "json" };
+import variedPack from "../worlds/alexandria-0.10.0.json" with { type: "json" };
+import birthPack from "../worlds/alexandria-0.11.0.json" with { type: "json" };
 import { contentFingerprint } from "../src/random.ts";
 
 const OWNER = "owner@example.test";
@@ -202,6 +206,8 @@ test("origin stat ranges survive draft persistence and publication and determine
   pack.stats.knowledge.initialRange = { min: 3, max: 4 };
   pack.stats.bonds.initialRange = { min: 51, max: 52 };
   pack.origins = [{ ...pack.origins[0], statRanges: { health: { min: 41, max: 43 }, wealth: { min: 10, max: 12 } }, effects: [] }];
+  // This isolated one-origin fixture excludes the other households' stories.
+  pack.events = pack.events.filter(event => !event.id.startsWith("background-"));
   const response = await call("/api/admin/catalog", "PUT", draft);
   assert.equal(response.status, 200);
   const saved = await response.json();
@@ -220,6 +226,52 @@ test("origin stat ranges survive draft persistence and publication and determine
     assert.deepEqual(engine.load(engine.save(life)), life);
   }
   assert.ok(new Set(births.map(life => JSON.stringify(life.stats))).size > 1);
+});
+
+test("health, relationships and their event rules survive admin draft and publication", async t => {
+  const { call } = setup(t);
+  const draft = getBuiltinCatalog();
+  const pack = draft.worlds[0].pack;
+  pack.health!.conditions[0].recoveryChance = 0.82;
+  pack.health!.supportRecoveryBonus = 0.14;
+  pack.relationships!.initialCloseness = 53;
+  const person = pack.character!.partners[0].id;
+  const condition = pack.health!.conditions[0].id;
+  const event: LifeEvent = {
+    id: "admin-care-check", title: "Help at home", text: "Someone you know helps while you recover.",
+    trigger: { type: "random", weight: 1 }, mode: "automatic", choices: [], maxOccurrences: 1, cooldownYears: 1,
+    when: { type: "all", conditions: [{ type: "has-condition", condition }, { type: "closeness", partner: person, op: "gte", value: 40 }] },
+    effects: [{ type: "condition", condition }, { type: "care", amount: 0.65 }, { type: "closeness", target: "partner", partner: person, delta: 4 }],
+  };
+  pack.events.push(structuredClone(event));
+  const response = await call("/api/admin/catalog", "PUT", draft);
+  assert.equal(response.status, 200);
+  const saved = await response.json();
+  const reread = (await (await call("/api/admin/catalog")).json()).worlds[0].pack;
+  assert.deepEqual(reread.health, pack.health);
+  assert.deepEqual(reread.relationships, pack.relationships);
+  assert.deepEqual(reread.events.find((item: { id: string }) => item.id === event.id), event);
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
+  const published = (await (await call("/api/worlds/alexandria-sample")).json()).pack;
+  assert.deepEqual(published.health, pack.health);
+  assert.deepEqual(published.relationships, pack.relationships);
+  assert.deepEqual(published.events.find((item: { id: string }) => item.id === event.id), event);
+});
+
+test("invalid health and relationship edits cannot overwrite the admin draft", async t => {
+  const { call } = setup(t);
+  const original = await (await call("/api/admin/catalog")).json();
+  for (const mutate of [
+    (pack: WorldPack) => { pack.health!.conditions[0].recoveryChance = 1.1; },
+    (pack: WorldPack) => { pack.health!.declineBands.pop(); },
+    (pack: WorldPack) => { pack.relationships!.initialCloseness = 101; },
+    (pack: WorldPack) => { pack.events[0].when = { type: "has-condition", condition: "missing-condition" }; },
+  ]) {
+    const draft = getBuiltinCatalog();
+    mutate(draft.worlds[0].pack);
+    assert.equal((await call("/api/admin/catalog", "PUT", draft)).status, 422);
+    assert.deepEqual(await (await call("/api/admin/catalog")).json(), original);
+  }
 });
 
 test("invalid starting ranges are rejected before any admin draft write", async t => {
@@ -336,6 +388,48 @@ test("the pinned 0.8.0 world retains its skill tree and abstract Resources witho
   assert.deepEqual(restored.advance(life), original.advance(life));
 });
 
+test("the pinned 0.9.0 world retains its original names, origins and exact money continuation", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(economyPack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, economyPack);
+  const original = createEngine(economyPack), restored = createEngine(archived.pack);
+  assert.equal(restored.world.origins.length, 3);
+  assert.equal(restored.world.character!.playerNames!.length, 16);
+  const life = original.choose(original.start("pinned-0.9.0-api"), "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
+});
+
+test("the pinned 0.10.0 world preserves the original birth choice and exact continuation", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(variedPack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, variedPack);
+  const original = createEngine(variedPack), restored = createEngine(archived.pack);
+  const born = original.start("pinned-0.10.0-api");
+  assert.equal(born.phase, "choice");
+  assert.equal(born.pendingEventId, "the-first-household");
+  const life = original.choose(born, "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
+});
+
+test("the pinned 0.11.0 world retains automatic birth and exact continuation after the consistency update", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(birthPack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, birthPack);
+  const original = createEngine(birthPack), restored = createEngine(archived.pack);
+  const life = original.advance(original.start("pinned-0.11.0-api"));
+  assert.equal(original.world.character!.exclusiveCourtship, undefined);
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.replay(life.seed, life.commands), life);
+});
+
 test("disabled routes and events affect only the next published pack", async t => {
   const { call } = setup(t);
   const draft = getBuiltinCatalog();
@@ -374,7 +468,13 @@ test("invalid catalogs, references and empty route outcomes are rejected before 
     (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].enabled = false; },
     (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].pack.id = "mismatch"; },
     (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].routes[0].flag = "missing"; },
-    (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].routes.forEach(route => { route.enabled = false; }); },
+    (draft: ReturnType<typeof getBuiltinCatalog>) => {
+      draft.worlds[0].routes.forEach(route => { route.enabled = false; });
+      // Isolate the three route entries: specialist offers and keeping the
+      // current job are independent choices in the full authored event.
+      const event = draft.worlds[0].pack.events.find(event => event.id === "a-place-on-the-manifest")!;
+      event.choices = event.choices.filter(choice => ["stay", "sail", "study"].includes(choice.id));
+    },
     (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].pack.events[0].sourceIds = ["missing"]; },
   ]) {
     const draft = getBuiltinCatalog();

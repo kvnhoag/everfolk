@@ -4,15 +4,79 @@ import ImpactValue from "./ImpactValue.tsx";
 import { getMoneyImpact } from "./wealth.ts";
 import "./choice-impact.css";
 
+/** Only existing people are named. Preview deltas use the same sequential bounds as play. */
+function closenessEffects(choice: Choice, life: LifeState, world: WorldPack): { label: string; min: number; max: number }[] {
+  const ties = life.character?.relationships;
+  if (!world.relationships || !life.character || !ties) return [];
+  const initial = Object.fromEntries(Object.entries(ties.partners).map(([id, tie]) => [id, tie.closeness]));
+  const results = choice.outcomes.map(outcome => {
+    const partners = { ...initial };
+    const children = Object.fromEntries(Object.entries(ties.children).map(([id, tie]) => [id, tie.closeness]));
+    let current = life.character!.partnerId;
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type === "relationship") current = effect.partner;
+      if (effect.type === "divorce" || effect.type === "end-courtship") current = null;
+      if (effect.type !== "closeness") continue;
+      if (effect.target === "partner") {
+        const id = effect.partner ?? current;
+        if (id && partners[id] !== undefined) partners[id] = Math.max(0, Math.min(100, partners[id] + effect.delta));
+      } else for (const id of Object.keys(children)) children[id] = Math.max(0, Math.min(100, children[id] + effect.delta));
+    }
+    return { partners, children };
+  });
+  const changes = Object.keys(initial).flatMap(id => {
+    const deltas = results.map(result => result.partners[id] - initial[id]);
+    const min = Math.min(...deltas), max = Math.max(...deltas);
+    const person = world.character?.partners.find(partner => partner.id === id);
+    return min === 0 && max === 0 ? [] : [{ label: `${person?.name ?? "Partner"} · closeness`, min, max }];
+  });
+  const childDeltas = results.flatMap(result => Object.entries(ties.children).map(([id, tie]) => result.children[id] - tie.closeness));
+  if (childDeltas.length) {
+    const min = Math.min(...childDeltas), max = Math.max(...childDeltas);
+    if (min !== 0 || max !== 0) changes.push({ label: "Children · closeness", min, max });
+  }
+  return changes;
+}
+
+function healthEffects(choice: Choice, life: LifeState, world: WorldPack): { text: string; gain: boolean }[] {
+  if (!world.health || !life.health) return [];
+  const initial = new Map(life.health.conditions.map(condition => [condition.id, condition.care]));
+  const branches = choice.outcomes.map(outcome => {
+    const active = new Map(initial);
+    const added = new Set<string>();
+    let helped = false;
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type === "condition" && !active.has(effect.condition)) { active.set(effect.condition, 0); added.add(effect.condition); }
+      if (effect.type === "care") for (const [id, care] of active) {
+        const value = Math.max(0, Math.min(1, care + effect.amount));
+        if (value > care) helped = true;
+        active.set(id, value);
+      }
+    }
+    return { added, helped };
+  });
+  const changes = world.health.conditions.flatMap(condition => {
+    const count = branches.filter(branch => branch.added.has(condition.id)).length;
+    return count ? [{ text: `${count === branches.length ? "Condition" : "Risk"}: ${condition.title}`, gain: false }] : [];
+  });
+  const helped = branches.filter(branch => branch.helped).length;
+  if (helped) changes.push({ text: helped === branches.length ? "Recovery support" : "Possible recovery support", gain: true });
+  return changes;
+}
+
 /** Immediate outcome effects only: reading a preview never advances the simulation. */
 export default function ChoiceImpact({ choice, life, world }: { choice: Choice; life: LifeState; world: WorldPack }) {
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
-  const hasRange = changedStats.some(stat => stat.variable) || moneyImpact.some(item => item.min !== item.max);
-  if (changedStats.length === 0 && moneyImpact.length === 0 && !impact.canEndLife) return null;
+  const connections = closenessEffects(choice, life, world);
+  const health = healthEffects(choice, life, world);
+  const hasRange = changedStats.some(stat => stat.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
+  if (changedStats.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife) return null;
   return <span className="choice-impact">
-    <span className="sr-only">Direct stat effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
+    <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
       {changedStats.map(stat => {
         return <span className="impact-stat" key={stat.id}>
@@ -20,6 +84,8 @@ export default function ChoiceImpact({ choice, life, world }: { choice: Choice; 
         </span>;
       })}
       {moneyImpact.map(item => <span className="impact-stat" key={`money-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} inverse={item.inverse} suffix={world.economy!.currency.short} /></span>)}
+      {connections.map(item => <span className="impact-stat" key={`closeness-${item.label}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
+      {health.map(item => <span className={`impact-stat impact-${item.gain ? "gain" : "loss"}`} key={item.text}>{item.text}</span>)}
     </span>
     {impact.canEndLife && <span className="choice-impact-ending">{impact.deathRisk > 0 ? `Risk of death: ${impact.deathRisk < .0001 ? "less than 0.01" : Number((impact.deathRisk * 100).toFixed(2))}%.` : "A possible outcome ends this life."}</span>}
   </span>;

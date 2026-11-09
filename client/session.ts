@@ -11,6 +11,13 @@ import originRangesWorld from "../worlds/alexandria-0.6.0.json" with { type: "js
 import longerLivesWorld from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 import peopleWorld from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import skillTreeWorld from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import economyWorld from "../worlds/alexandria-0.9.0.json" with { type: "json" };
+import variedWorld from "../worlds/alexandria-0.10.0.json" with { type: "json" };
+import birthWorld from "../worlds/alexandria-0.11.0.json" with { type: "json" };
+import coherentWorld from "../worlds/alexandria-0.12.0.json" with { type: "json" };
+import workTimelineWorld from "../worlds/alexandria-0.13.0.json" with { type: "json" };
+import interestCareersWorld from "../worlds/alexandria-0.14.0.json" with { type: "json" };
+import causalHealthWorld from "../worlds/alexandria-0.15.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -23,8 +30,20 @@ const originRangesEngine = createEngine(originRangesWorld);
 const longerLivesEngine = createEngine(longerLivesWorld);
 const peopleEngine = createEngine(peopleWorld);
 const skillTreeEngine = createEngine(skillTreeWorld);
+const economyEngine = createEngine(economyWorld);
+const variedEngine = createEngine(variedWorld);
+const birthEngine = createEngine(birthWorld);
+const coherentEngine = createEngine(coherentWorld);
+const workTimelineEngine = createEngine(workTimelineWorld);
+const interestCareersEngine = createEngine(interestCareersWorld);
+const causalHealthEngine = createEngine(causalHealthWorld);
 export let sampleEngine = builtinEngine;
-const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine]]);
+const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
+engines.set(birthEngine.fingerprint, birthEngine);
+engines.set(coherentEngine.fingerprint, coherentEngine);
+engines.set(workTimelineEngine.fingerprint, workTimelineEngine);
+engines.set(interestCareersEngine.fingerprint, interestCareersEngine);
+engines.set(causalHealthEngine.fingerprint, causalHealthEngine);
 const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
@@ -89,6 +108,21 @@ export function newLifeSeed(): string {
 /** Begin at birth. A presentation gate holds progression until the player starts. */
 export function createSampleLife(seed = newLifeSeed()): LifeState {
   return sampleEngine.start(seed);
+}
+
+/** A deliberate new-life request looks for a fresh name and household.
+ * Only seed selection changes: the chosen seed still reproduces the exact life.
+ * A finite best-match fallback supports worlds with just one name or origin. */
+export function createDifferentSampleLife(previous: LifeState, seedFactory: () => string = newLifeSeed): LifeState {
+  let best: LifeState | undefined;
+  let bestScore = -1;
+  for (let attempt = 0; attempt < 16; attempt++) {
+    const candidate = createSampleLife(seedFactory());
+    const score = Number(candidate.character?.name !== previous.character?.name) + Number(candidate.originId !== previous.originId);
+    if (score > bestScore) { best = candidate; bestScore = score; }
+    if (score === 2) return candidate;
+  }
+  return best!;
 }
 
 /** Skip quiet years without making any decisions on the player's behalf. */

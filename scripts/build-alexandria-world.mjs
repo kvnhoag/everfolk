@@ -1,6 +1,10 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { applySpecialists } from "./alexandria-specialists.mjs";
+import { applyBackgroundVariety } from "./alexandria-backgrounds.mjs";
+import { applyWorkTimeline } from "./alexandria-work-timeline.mjs";
+import { applyInterestCareers } from "./alexandria-interest-careers.mjs";
+import { applyCausalLife } from "./alexandria-causal-life.mjs";
 
 const root = new URL("../", import.meta.url);
 const sources = JSON.parse(readFileSync(new URL("research/sources.json", root), "utf8"));
@@ -44,6 +48,7 @@ const recurring = (id, title, text, minAge, maxAge, choices, when) => ({
   when: all(age("gte", minAge), age("lt", maxAge), ...(when ? [when] : [])),
   maxOccurrences: 8, cooldownYears: 9,
 });
+const physicalWork = any(...["porter", "potter", "sailor", "ceramic-decorator", "wood-carver", "sculptor", "soldier"].map(job));
 
 const events = [
   // Political anchors are ordered before personal events due in the same year.
@@ -72,26 +77,28 @@ const events = [
     one("help-household", "Give more of your time to the household", "Your work makes an immediate difference at home, even while other opportunities remain out of reach.", [stat("bonds", 6), stat("wealth", 3)]),
   ], ["education-apprenticeship"]),
   at("the-first-wages", "The first work of your own", "You are old enough to be trusted with more demanding tasks. The people around you begin to see both what you can do and what you still need to learn.", 16, [
-    one("steady-work", "Take porter work on the quays", "You take a porter's place carrying and sorting loads. The work is modest and tiring, but it is a beginning you can build on.", [job("porter"), stat("wealth", 4), stat("bonds", 2)]),
+    one("steady-work", "Take porter work on the quays", "You take a porter's place carrying and sorting loads. The work is modest and tiring, but it is a beginning you can build on.", [job("porter"), stat("wealth", 4), stat("bonds", 2)], not(job("porter"))),
     one("seek-experience", "Look for a task that teaches you more", "You choose a demanding beginning. Some days bring more experience than pay.", [skill("craft", 5), stat("knowledge", 6), stat("wealth", 1)]),
+    one("keep-first-job", "Keep your current job", "You turn down the offer and continue your current work.", [], not(job(null))),
   ], ["augustan-alexandria-documents", "education-apprenticeship"]),
   at("a-place-on-the-manifest", "A name on the manifest", "Porter work is available close to home. With Seamanship 15, a merchant ship offers a sailor's place; with Literacy 30, a copyist's workshop offers another possibility. Training in Your life can prepare you for these routes. Which way will you go?", 18, [
-    option("stay", "Take porter work close to home", [result("a-familiar-door", "You choose porter work in familiar streets. Useful introductions begin to give your days a shape.", [flag("stayed"), job("porter"), stat("bonds", 7), stat("wealth", 4)], 3), result("a-slow-beginning", "You take porter work close to home, though the first payments are small. Your household makes room while you settle in.", [flag("stayed"), job("porter"), stat("bonds", 5), stat("wealth", -2)])]),
-    option("sail", "Take a sailor's place with the ship's crew", [result("beyond-the-breakwater", "Your name goes onto the manifest. As the harbor slips behind you, excitement and homesickness arrive together.", [flag("sailed"), job("sailor"), skill("seamanship", 3), stat("knowledge", 6), stat("wealth", 5), stat("bonds", -5)], 3), result("a-hard-first-crossing", "The first crossing is tiring. You learn the work slowly and depend on the patience of the crew.", [flag("sailed"), job("sailor"), skill("seamanship", 4), stat("knowledge", 7), stat("health", -4), stat("bonds", -3)])], trained("seamanship", 15)),
-    option("study", "Become a copyist in the workshop", [result("a-new-bench", "You find a place at a long workbench. The pay is small, but each page offers something to learn.", [flag("studied"), job("copyist"), skill("literacy", 3), stat("knowledge", 10), stat("wealth", -3)])], trained("literacy", 30)),
+    option("stay", "Take porter work close to home", [result("a-familiar-door", "You choose porter work in familiar streets. Useful introductions begin to give your days a shape.", [flag("stayed"), job("porter"), stat("bonds", 7), stat("wealth", 4)], 3), result("a-slow-beginning", "You take porter work close to home, though the first payments are small. Your household makes room while you settle in.", [flag("stayed"), job("porter"), stat("bonds", 5), stat("wealth", -2)])], not(job("porter"))),
+    option("sail", "Take a sailor's place with the ship's crew", [result("beyond-the-breakwater", "Your name goes onto the manifest. As the harbor slips behind you, excitement and homesickness arrive together.", [flag("sailed"), job("sailor"), skill("seamanship", 3), stat("knowledge", 6), stat("wealth", 5), stat("bonds", -5)], 3), result("a-hard-first-crossing", "The first crossing is tiring. You learn the work slowly and depend on the patience of the crew.", [flag("sailed"), job("sailor"), skill("seamanship", 4), stat("knowledge", 7), stat("health", -4), stat("bonds", -3)])], all(trained("seamanship", 15), not(job("sailor")))),
+    option("study", "Become a copyist in the workshop", [result("a-new-bench", "You find a place at a long workbench. The pay is small, but each page offers something to learn.", [flag("studied"), job("copyist"), skill("literacy", 3), stat("knowledge", 10), stat("wealth", -3)])], all(trained("literacy", 30), not(job("copyist")))),
+    one("keep-regular-job", "Keep your current job", "You pass on the offers and continue your current job.", [], not(job(null))),
   ], ["strabo-alexandria", "education-apprenticeship", "augustan-alexandria-documents"]),
   at("letters-across-the-water", "Letters across the water", "A returning sailor can carry a message to your household. You can ask a writer to help if you need one. There is room for a few words and a small parcel.", 19, [
     one("write-home", "Send a long message home", "You describe ordinary things: the light, the work, the people you miss. A thread between two parts of your life stays unbroken.", [flag("kept-letters"), stat("bonds", 7), stat("wealth", -1)]),
     one("learn-port", "Spend the day learning the port", "You follow the quays and listen to unfamiliar voices. The place becomes a little easier to navigate.", [stat("knowledge", 5), stat("bonds", -2)]),
-  ], ["alexandrian-letter", "strabo-alexandria"], has("sailed")),
+  ], ["alexandrian-letter", "strabo-alexandria"], job("sailor")),
   at("the-unfamiliar-page", "The unfamiliar page", "A damaged page arrives at the workshop. Some words are beyond you, but someone must begin the patient work.", 19, [
     one("work-together", "Work beside an experienced copyist", "Looking carefully and asking questions teaches you more than working in silence.", [stat("knowledge", 7), stat("bonds", 2)]),
     one("extra-work", "Take paid work instead", "Extra work puts a little money aside. Your own learning waits for quieter hours.", [stat("wealth", 5), stat("health", -2)]),
-  ], ["education-apprenticeship"], has("studied")),
+  ], ["education-apprenticeship"], job("copyist")),
   at("the-neighbors-request", "The neighbor's request", "A neighbor asks for help arranging a small piece of work. You are beginning to be known as someone who can be relied upon.", 19, [
     one("help-neighbor", "Make time for your neighbor", "A small kindness becomes part of the trust people place in you.", [stat("bonds", 6), stat("knowledge", 2)]),
     one("fair-payment", "Agree on a fair payment", "You find a way to help while being paid for your time.", [stat("wealth", 5), stat("bonds", 2)]),
-  ], ["augustan-alexandria-documents"], has("stayed")),
+  ], ["augustan-alexandria-documents"], all(not(job(null)), not(job("sailor")), not(job("copyist")))),
   at("room-for-one-more", "Room for one more", "A traveler needs a little help finding their feet. Your time and money are limited, but you remember starting out.", 20, [
     one("share-meal", "Share a meal and a little time", "An unhurried meal turns a stranger into someone you may meet again.", [stat("bonds", 6), stat("wealth", -2)]),
     one("share-skill", "Teach something useful", "Explaining your work makes you understand it more clearly.", [stat("knowledge", 4), stat("bonds", 3)]),
@@ -102,14 +109,8 @@ const events = [
     one("seek-mediator", "Ask someone trusted to help settle it", "A familiar voice helps both sides find an arrangement they can accept.", [stat("bonds", 4), stat("wealth", 1)]),
     one("walk-away", "Leave the work and keep your time", "You give up the payment rather than a longer dispute.", [stat("health", 2), stat("wealth", -2)]),
   ], ["alexandrian-bakery-lease", "augustan-alexandria-documents"]),
-  at("a-shared-household", "The possibility of a shared life", "A shared life would mean affection, responsibility and conversations about property and obligations. Whether to seek it, and with whom, remains your decision. Open Your life to meet people, court someone or plan a wedding.", 25, [
-    one("share-life", "Make room in your life to meet people", "You leave some time for company and conversation. No partner is chosen for you; that possibility remains yours to pursue.", [stat("bonds", 3), stat("wealth", -1)]),
-    one("remain-independent", "Keep your independence for now", "You keep your attention on your work and friendships. You can reconsider a shared household later.", [stat("knowledge", 3), stat("wealth", 2)]),
-  ], ["alexandrian-marriage"], not(relationship("married"))),
-  at("a-new-generation", "Thinking about another generation", "Your household considers whether to make room for a child. Care, resources and the wishes of both partners matter. Open Your life if you choose to try to grow your household; this conversation does not create a child.", 28, [
-    one("share-parenting", "Talk through the work of care", "You discuss how care could fit around the work and obligations you already share.", [stat("bonds", 3), stat("wealth", -1)]),
-    one("ask-kin", "Keep your current household arrangements", "You decide that your present responsibilities deserve your attention. The future remains open.", [stat("health", 1), stat("wealth", 1)]),
-  ], ["alexandrian-wetnursing", "family-care"], all(relationship("married"), children("eq", 0), age("lte", 43))),
+  { ...note("a-shared-household", "Talk of marriage", "Friends mention people you might like to meet. You have room to start a relationship if you want one.", 25, [], ["alexandrian-marriage"]), when: any(relationship("single"), relationship("divorced")) },
+  { ...note("a-new-generation", "Family plans", "You and your spouse talk about having a child and how you would share the care.", 28, [], ["alexandrian-wetnursing", "family-care"]), when: all(relationship("married"), children("eq", 0), age("lte", 43)) },
   at("a-younger-friend", "Someone beginning again", "A younger friend asks you how to find their place. You recognize the uncertainty in the question.", 28, [
     one("be-a-guide", "Offer time and practical guidance", "You become one of the people whose experience helps someone else begin.", [stat("bonds", 6), stat("knowledge", 3)]),
     one("make-space", "Give them a chance to work beside you", "A small opportunity becomes a beginning for another person.", [stat("bonds", 4), stat("wealth", 1)]),
@@ -130,7 +131,7 @@ const events = [
   at("a-different-kind-of-work", "A different kind of work", "You notice that some tasks take longer than they once did. Experience still helps, even when strength and patience need to be spent more carefully.", 49, [
     one("work-with-experience", "Take work that depends on experience", "What you know begins to matter more than how much you can carry.", [stat("knowledge", 4), stat("health", 2)]),
     one("keep-pace", "Keep the familiar pace for now", "Familiar work continues to provide, though you feel its cost more clearly.", [stat("wealth", 4), stat("health", -3)]),
-  ], ["family-care", "education-apprenticeship"]),
+  ], ["family-care", "education-apprenticeship"], physicalWork),
   at("a-trade-to-pass-on", "A trade to pass on", "Someone younger asks to learn from you. A skill can travel further than the hands that first practised it. You remember the people who once had patience for your own uncertain hands.", 53, [
     one("teach-patiently", "Make room for a learner", "You repeat lessons you once struggled to understand. Another person begins to carry the work forward.", [stat("knowledge", 4), stat("bonds", 7), stat("wealth", -1)]),
     one("keep-independent", "Keep working independently", "You continue the work in your own way, making a record of what you know when time permits.", [stat("wealth", 4), stat("knowledge", 2)]),
@@ -138,11 +139,11 @@ const events = [
   at("the-cost-of-rest", "The cost of rest", "Recovery takes longer than it once did. You must decide how much work to exchange for a little more time and ease.", 58, [
     one("take-rest", "Make more room for rest", "The days grow less crowded. You have a little less income and a little more energy for the people around you.", [stat("health", 5), stat("wealth", -3), stat("bonds", 2)]),
     one("reduce-a-little", "Reduce the work a little at a time", "You keep a place in familiar work while allowing yourself to slow down.", [stat("health", 2), stat("wealth", 1)]),
-  ], ["family-care"]),
+  ], ["family-care"], not(job(null))),
   at("stepping-back", "Stepping back", "Decades of work have made some things easier to understand and others harder to do. There is no modern pension waiting here; stepping back depends on resources, relationships and help.", 60, [
     one("step-back", "Leave your regular job and let others carry more work", "You leave regular employment and accept a different place in the household, with more time for advice, company and the smaller tasks.", [flag("retired"), job(null), stat("health", 4), stat("wealth", -4), stat("bonds", 4)]),
     one("continue-light-work", "Keep a little regular work", "A lighter rhythm keeps you involved without pretending the years have not changed you.", [stat("wealth", 2), stat("health", -1)]),
-  ], ["family-care"]),
+  ], ["family-care"], not(job(null))),
   at("putting-things-in-order", "Putting things in order", "You think about the belongings, obligations and knowledge that others may one day need to sort out. Some things can be written down; others need a conversation.", 65, [
     one("write-arrangements", "Arrange for your wishes to be recorded", "A careful conversation leaves fewer questions for the people who may have to act for you.", [flag("legacy-arranged"), stat("bonds", 5), stat("wealth", -2)]),
     one("speak-with-household", "Talk through what matters with your household", "People hear what you hope will be remembered, and what should happen to the things you leave.", [flag("legacy-arranged"), stat("bonds", 6)]),
@@ -428,7 +429,7 @@ const characterActivities = [
     { ...option(`court-${partner.id}`, `Ask ${partner.name} to begin a courtship`, [
       result(`court-${partner.id}-accepted`, `${partner.name} agrees to begin a courtship. You arrange to spend more time together.`, [{ type: "relationship", status: "courting", partner: partner.id }, stat("bonds", 3), stat("wealth", -1)], 3),
       result(`court-${partner.id}-declined`, `${partner.name} declines the courtship. You return home without making plans together.`, [stat("bonds", -1), stat("wealth", -1)]),
-    ], all(knownPartner(partner.id), not(relationship("married")), not(relationship("courting", partner.id)))), category: "relationship", minAge: 20, cooldownYears: 2 },
+    ], all(knownPartner(partner.id), any(relationship("single"), relationship("divorced")))), category: "relationship", minAge: 20, cooldownYears: 2 },
     activity(`marry-${partner.id}`, `Plan a wedding with ${partner.name}`, "relationship", 20,
       `You and ${partner.name} marry. You pay for a modest meal and set up a shared household.`,
       [{ type: "relationship", status: "married", partner: partner.id }, stat("bonds", 5), stat("wealth", -3)], all(knownPartner(partner.id), relationship("courting", partner.id), enoughResources(3)), 5),
@@ -436,9 +437,10 @@ const characterActivities = [
       `You and ${partner.name} share a meal and talk about the past few days.`,
       [stat("bonds", 3), stat("wealth", -1), stat("health", 1)], all(knownPartner(partner.id), any(relationship("courting", partner.id), relationship("married", partner.id)), enoughResources(1)), 2),
   ]),
+  activity("end-courtship", "End your courtship", "relationship", 18, "You agree to stop courting and go your separate ways.", [{ type: "end-courtship" }, stat("bonds", -2)], relationship("courting")),
   activity("divorce", "Agree to end your marriage", "relationship", 20, "You and your spouse separate and divide the household belongings. Any children you have remain listed as your children.", [{ type: "divorce" }, stat("bonds", -6), stat("wealth", -3), stat("health", 1)], relationship("married"), 5),
   { ...option("grow-household", "Try to grow your household", [
-    result("grow-household-birth", "A child is born. You choose a name, buy supplies and take turns with the care.", [{ type: "child" }, stat("bonds", 5), stat("wealth", -4), stat("health", -2)], 3),
+    result("grow-household-birth", "A child is born. Your household buys supplies and shares the care.", [{ type: "child" }, stat("bonds", 5), stat("wealth", -4), stat("health", -2)], 3),
     result("grow-household-wait", "You do not have a child this year. You spend a little on preparations.", [stat("wealth", -1), stat("bonds", 1)]),
   ], all(relationship("married"), age("lte", 43), enoughResources(4), children("lt", 8))), category: "family", minAge: 20, cooldownYears: 2 },
   activity("family-time", "Spend an evening with the household", "family", 18, "You put the remaining tasks aside and share a meal with the household.", [stat("bonds", 3), stat("health", 1), stat("wealth", -1)], all(any(relationship("married"), children("gte", 1)), enoughResources(1)), 2),
@@ -469,6 +471,7 @@ const character = {
   // Fictional name choices for the setting, not population frequencies.
   playerNames: ["Damon", "Apollonios", "Demetrios", "Dionysios", "Herakleides", "Isidoros", "Kallias", "Leon", "Lysimachos", "Menandros", "Nikandros", "Ptolemaios", "Sarapion", "Soter", "Theon", "Tryphon"],
   requireIntroductions: true,
+  exclusiveCourtship: true,
   jobs: characterJobs, partners: characterPartners, activities: characterActivities,
   childNames: ["Dion", "Myrine", "Heron", "Niko", "Philainis", "Heliodoros", "Eirene", "Sarapion", "Kleio", "Ptolemais", "Isidora", "Apollonios", "Melas", "Charis", "Theron", "Doris"],
   deathCauseDescription: "Specific disease and injury labels are modern names authored for clarity; they are not diagnoses inferred from the mortality sources. Natural-death cause labels are fictional explanations selected after the comparative all-cause mortality draw; they add no extra annual hazard. Causes marked choiceOnly are used only when an explicitly dangerous choice or activity draws its fatal outcome. Those outcome weights are authored game risks, not measured historical rates. Neither cause labels nor risk weights come from the cited mortality sources. Family-planning ages, job returns and skill thresholds are also authored game balances.",
@@ -492,7 +495,7 @@ const character = {
 };
 
 const world = {
-  schemaVersion: 1, id: "alexandria-sample", version: "0.9.0", title: "A life in Alexandria",
+  schemaVersion: 1, id: "alexandria-sample", version: "0.16.0", title: "A life in Alexandria",
   description: "A fictional life born in Alexandria in 66 BCE. Learn a trade, study, build a household or try rare military and court careers. Childhood and adult background death risks are reduced for playability from a disclosed later Roman Egyptian female comparison model. Personal events, career odds and stat effects are authored game rules, not measured historical frequencies.",
   startYear: -66, maxAge: model.maxAge,
   stats: {
@@ -549,15 +552,15 @@ const plainEventCopy = {
   "the-first-letters": ["Learning a few letters", "A neighbor offers to teach you a few letters. Lessons cost time and a little money, and your household still needs help with its work."],
   "the-shape-of-the-city": ["Around the neighborhood", "You learn the routes to nearby shops, workshops and quays. You can now finish a few errands without asking for directions."],
   "a-place-to-learn": ["Training for work", "Your household looks for someone to teach you. Reading, workshop training and helping at home are the options available."],
-  "the-first-wages": ["Your first paid work", "Someone offers you work carrying loads on the quays. You can take the pay or look for a task that gives you more practice."],
-  "a-place-on-the-manifest": ["Choosing a regular job", "You can take porter work nearby. A sailor's job needs Seamanship 15, and a copyist's job needs Literacy 30. Training in Your life can help you qualify."],
+  "the-first-wages": ["A work offer", "A crew on the quays is looking for help. You can take porter work, try a short paid task or keep any work you already have."],
+  "a-place-on-the-manifest": ["Job offers", "You hear about jobs on the quays, aboard a merchant ship and in a copyist's workshop. You can take an offer or keep your current work."],
   "letters-across-the-water": ["A message home", "A returning sailor can carry a message home. You can pay a writer to help or spend the day looking around the port."],
   "the-unfamiliar-page": ["A damaged page", "A damaged page reaches the workshop. An experienced copyist offers to work through it with you, but other paid work is also available."],
   "the-neighbors-request": ["A neighbor needs help", "A neighbor asks you to arrange a small job. You can help for free or agree on a payment."],
   "room-for-one-more": ["A traveler needs help", "A traveler asks for help finding work. You can offer a meal, teach a task or introduce them to someone hiring."],
   "the-uneven-accounts": ["An agreement does not add up", "The payment in an agreement is lower than you expected. Someone wants you to accept it quickly."],
-  "a-shared-household": ["Thinking about marriage", "You consider looking for a partner. Open Your life to meet people, ask someone to court you or plan a wedding."],
-  "a-new-generation": ["Thinking about a child", "You and your spouse discuss having a child. Open Your life to try to grow your household; this conversation does not create a child."],
+  "a-shared-household": ["Talk of marriage", "Friends mention people you might like to meet. You have room to start a relationship if you want one."],
+  "a-new-generation": ["Family plans", "You and your spouse talk about having a child and how you would share the care."],
   "a-younger-friend": ["A friend asks about work", "A younger friend wants help finding work. You could explain a few tasks or let them work beside you."],
   "an-unreliable-season": ["A poor harvest", "Reports of a poor harvest reach the city. Your household decides whether to store more food or share some supplies with relatives."],
   "after-the-transition": ["New rules for work", "Roman officials have changed some arrangements for work and agreements. You can ask about the new rules or get help from neighbors."],
@@ -643,11 +646,13 @@ const plainOutcomeCopy = {
   "help-household-result": "You take over more errands and household tasks. The extra help saves money.",
   "steady-work-result": "You start carrying and sorting cargo on the quays. You are paid, but the loads leave you tired.",
   "seek-experience-result": "You help with an unfamiliar task. The pay is small, but you get more practice.",
+  "keep-first-job-result": "You turn down the offer and continue your current work.",
   "a-familiar-door": "You take regular porter work nearby. A few useful contacts help you find more jobs.",
   "a-slow-beginning": "You take porter work nearby. The first payments are lower than you expected.",
   "beyond-the-breakwater": "You join the crew and sail out of the harbor. The work pays, but you spend less time at home.",
   "a-hard-first-crossing": "You join the crew. The first crossing leaves you tired, and other sailors help you learn the tasks.",
   "a-new-bench": "You start at a copyist's workshop. You copy short passages and check them with another worker.",
+  "keep-regular-job-result": "You pass on the offers and continue your current job.",
   "write-home-result": "You send news about the work, the port and the people you have met.",
   "learn-port-result": "You walk the quays and find the shops and landing places you need.",
   "work-together-result": "The copyist shows you how to check the damaged words. You finish part of the page together.",
@@ -802,8 +807,8 @@ world.economy = {
   description: "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified unit continues after Roman rule.",
   sourceIds: ["ucl-ptolemaic-coins"],
   assets: [
-    { id: "tool-chest", title: "Tool chest", description: "A small set of tools you own. Buying this asset does not replace a skill or job requirement. Its resale value is fixed for this POC.", value: 30, maxOwned: 1, yearlyIncome: 0 },
-    { id: "workshop-share", title: "Workshop share", description: "A small share in a working workshop. It pays 10 drachmas per survived year while you own it. Both the value and return are authored game rules, not historical investment data.", value: 120, maxOwned: 1, yearlyIncome: 10 },
+    { id: "tool-chest", title: "Tool chest", description: "Unlocks small repair jobs at Craft 15. Sell for 30 drachmas.", value: 30, maxOwned: 1, yearlyIncome: 0 },
+    { id: "workshop-share", title: "Workshop share", description: "Earn 10 drachmas each year you survive. Sell for 120 drachmas.", value: 120, maxOwned: 1, yearlyIncome: 10 },
   ],
 };
 const cashAtLeast = value => ({ type: "cash", op: "gte", value });
@@ -820,10 +825,77 @@ for (const asset of world.economy.assets) {
       assetAmount(asset.id, "gte", 1)),
   );
 }
-world.character.activities.push(activity("repay-household-debt", "Repay 10 drachmas of debt", "finance", 18,
+world.character.activities.push({ ...activity("repay-household-debt", "Repay 10 drachmas of debt", "finance", 18,
   "You pay 10 drachmas toward the household's unpaid costs. Cash and debt both fall by the same amount.",
   [{ type: "cash", delta: -10 }, { type: "debt", delta: -10 }],
-  all(cashAtLeast(10), { type: "debt", op: "gte", value: 10 })));
+  all(cashAtLeast(10), { type: "debt", op: "gte", value: 10 })), usesYearlyActivity: false });
+world.character.activities.push(activity("take-small-repair-jobs", "Take small repair jobs", "career", 18,
+  "You use your tools to repair hinges, straps and small household fittings. The customers pay when the work is done.",
+  [stat("wealth", 2), skill("craft", 2), stat("health", -1)],
+  all(assetAmount("tool-chest", "gte", 1), trained("craft", 15))));
+applyBackgroundVariety(world);
+applyWorkTimeline(world);
+applyInterestCareers(world);
+applyCausalLife(world);
+// Real accepted learning refreshes Knowledge; a literacy flag alone no longer
+// creates permanent annual increases. These rates are authored game balance.
+world.yearlyRules = world.yearlyRules.filter(rule => !["practical-experience", "learning-through-words"].includes(rule.id));
+world.economy.autoDebtRepayment = true;
+const continuedReading = world.character.activities.find(activity => activity.id === "train-literacy");
+// Mastering the skill does not prevent continued reading or the Study focus.
+continuedReading.when = { type: "cash", op: "gte", value: 20 };
+continuedReading.text = "Read and practise writing";
+continuedReading.outcomes[0].text = "You spend time reading and writing with a reader. The practice keeps your knowledge fresh.";
+world.knowledge = {
+  stat: "knowledge", minAge: 12, idleGraceYears: 2, idleLoss: 1,
+  ageBands: [
+    { minAge: 0, maxAge: 49, loss: 0 },
+    { minAge: 50, maxAge: 64, loss: 0.5 },
+    { minAge: 65, maxAge: 79, loss: 1 },
+    { minAge: 80, maxAge: 99, loss: 1.5 },
+  ],
+  description: "Knowledge needs continued use. From age 12, two full years without a recorded learning gain lead to a loss of 1 point per year. Lessons, research, work and events with positive Knowledge effects refresh practice, including at the stat cap. Ageing also reduces Knowledge by 0.5 per year from 50, 1 from 65 and 1.5 from 80. These are authored game rules, not measured cognitive ageing rates. Skill proficiencies are separate.",
+};
+
+// Paid actions use cash, not the net-worth index retained for legacy stat effects.
+// This also prevents debt or an illiquid possession from misreporting affordability.
+function cashRequirement(condition) {
+  if (!condition) return condition;
+  if (condition.type === "stat" && condition.stat === world.economy.stat) {
+    return { type: "cash", op: condition.op, value: condition.value * world.economy.unitsPerPoint };
+  }
+  if (condition.type === "all" || condition.type === "any") return { ...condition, conditions: condition.conditions.map(cashRequirement) };
+  if (condition.type === "not") return { ...condition, condition: cashRequirement(condition.condition) };
+  return condition;
+}
+for (const item of [...world.events, ...world.events.flatMap(event => event.choices), ...world.character.activities, ...world.character.deathCauses, ...world.endings, ...world.yearlyRules]) {
+  if (item.when) item.when = cashRequirement(item.when);
+}
+
+// Main attributes open a few specialist opportunities. Basic learning, ordinary
+// work, social activities and recovery remain available without these thresholds.
+const statAtLeast = (stat, value) => ({ type: "stat", stat, op: "gte", value });
+function requireAttribute(ids, statId, value) {
+  for (const id of ids) {
+    const action = world.character.activities.find(activity => activity.id === id);
+    if (!action) throw new Error(`Missing activity for ${statId} requirement: ${id}`);
+    action.when = all(...(action.when ? [action.when] : []), statAtLeast(statId, value));
+  }
+}
+requireAttribute(["take-day-cargo-work", "take-night-cargo-work", "shipboard-watch", "drill-a-unit"], "health", 20);
+requireAttribute(["train-philosophy", "train-astronomy", "train-astrology"], "knowledge", 15);
+requireAttribute(["research-astrological-readings"], "knowledge", 25);
+requireAttribute(["seek-officer-commission", "seek-court-appointment", "present-a-district-petition"], "bonds", 20);
+world.description = "Live a fictional life in Alexandria, starting in 66 BCE. Learn a trade, start a family or pursue a career in scholarship, the army or the royal court.";
+// Birth is a recorded situation, not a decision made by the newborn player.
+const birthEvent = world.events.find(event => event.id === "the-first-household");
+Object.assign(birthEvent, {
+  title: "You are born",
+  text: "You are born in Alexandria. Your household looks after you.",
+  mode: "automatic",
+  choices: [],
+  effects: [],
+});
 const output = new URL("worlds/alexandria-sample.json", root);
 writeFileSync(output, `${JSON.stringify(world, null, 2)}\n`);
 console.log(`Built ${world.events.length} events, ${world.sources.length} sources, ${bands.length} mortality bands and ${world.character.activities.length} character activities: ${fileURLToPath(output)}`);

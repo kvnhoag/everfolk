@@ -4,6 +4,7 @@ import App from "./App";
 import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
 import { selectWorldPack } from "./session.ts";
+import type { LifeState } from "../src/types.ts";
 
 const SELECTION_KEY = "historical-lives:selected-world:v1";
 
@@ -15,7 +16,7 @@ async function readApi<T>(path: string): Promise<T> {
 }
 
 export default function GameClient() {
-  const [active, setActive] = useState<{ world: PublishedWorld; key: number; fresh: boolean } | null>(null);
+  const [active, setActive] = useState<{ world: PublishedWorld; key: number; fresh: boolean; previousLife?: LifeState } | null>(null);
   const [isAdmin, setAdmin] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [worlds, setWorlds] = useState<WorldSummary[]>([]);
@@ -53,6 +54,12 @@ export default function GameClient() {
     else if (!pickerOpen && dialog.current?.open) dialog.current?.close();
   }, [pickerOpen]);
 
+  useEffect(() => {
+    const holdWorldPicker = () => { if (document.hidden) setPickerOpen(false); };
+    document.addEventListener("visibilitychange", holdWorldPicker);
+    return () => document.removeEventListener("visibilitychange", holdWorldPicker);
+  }, []);
+
   async function openWorlds() {
     setPickerOpen(true);
     setError("");
@@ -62,14 +69,14 @@ export default function GameClient() {
     finally { setBusy(false); }
   }
 
-  async function enterWorld(id: string, fresh: boolean) {
+  async function enterWorld(id: string, fresh: boolean, previousLife?: LifeState) {
     setBusy(true);
     setError("");
     try {
       const world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
       selectWorldPack(world.pack);
       try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* Per-life saves still report their storage status. */ }
-      setActive(current => ({ world, key: (current?.key ?? 0) + 1, fresh }));
+      setActive(current => ({ world, key: (current?.key ?? 0) + 1, fresh, ...(fresh && previousLife ? { previousLife } : {}) }));
       setPickerOpen(false);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "This world could not be opened.");
@@ -79,9 +86,9 @@ export default function GameClient() {
 
   if (!active) return <main className="page-shell"><p>Opening your life…</p></main>;
   return <>
-    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={() => { void enterWorld(active.world.id, true); }} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
+    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
-      <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">ANOTHER PLACE. ANOTHER POSSIBILITY.</p><h2 id="world-picker-title">Choose a world.</h2><p>Enter a published world, or return to the life you saved there. Each world revision keeps its own saved life.</p>
+      <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}
         {busy && <p role="status">Opening the world library…</p>}
         <div className="world-library">{worlds.map(world => <article key={world.id}><span className="eyebrow">{world.id === active.world.id ? "YOUR CURRENT WORLD" : "A WORLD TO EXPLORE"}</span><h3>{world.title}</h3><p>{world.description}</p><div className="world-route-tags">{world.routes.filter(route => route.enabled).map(route => <span key={route.id}>{route.title}</span>)}</div><button className="primary-button" disabled={busy} onClick={() => { void enterWorld(world.id, false); }}>Enter this world →</button></article>)}</div>

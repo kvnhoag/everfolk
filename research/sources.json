@@ -298,5 +298,41 @@
     "summary": "Introduces Ptolemaic coin circulation, drachma denominations, bronze and silver coinage, and debt settlement as part of the economy.",
     "limitations": "An overview of money and denominations, not an Alexandrian household budget or price series. It does not support the game's prices, wages, asset valuations, fixed returns or a constant currency standard across Roman rule; these remain disclosed gameplay assumptions.",
     "accessed": "2026-11-06"
+  },
+  {
+    "id": "oxford-lgpn-egypt",
+    "title": "LGPN-Egypt: personal names in Egypt",
+    "url": "https://lgpn.web.ox.ac.uk/search-lgpn-egypt-online",
+    "publisher": "University of Oxford, Lexicon of Greek Personal Names",
+    "kind": "scholarship",
+    "period": "Current completed coverage: Lower Egypt and the Fayum from the seventh century BCE to 30 BCE; the wider project extends into Roman Egypt",
+    "geography": "Egypt, with current database coverage focused on Lower Egypt and the Fayum",
+    "summary": "Introduces a source-based naming database that records personal names alongside attested occupations, dates, family connections and provenance. It supports a varied Greek-language and Egyptian-rendered naming context for fictional characters.",
+    "limitations": "The game does not reproduce database individuals or claim that every selected name is attested in Alexandria in 66 BCE. Names are not demographic weights, ethnic labels, gender rules or evidence that an occupation belonged to a particular community. Household profiles and event rewards remain authored fiction.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "diodorus-childhood-work",
+    "title": "Diodorus Siculus, Library of History 1.81.7: childhood learning and livelihood",
+    "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/1D%2A.html#81",
+    "publisher": "LacusCurtius, University of Chicago; C. H. Oldfather, Loeb translation (1933)",
+    "kind": "primary",
+    "period": "First-century BCE literary account of Egyptian customs",
+    "geography": "Egypt generally; not an Alexandrian household survey",
+    "summary": "Describes children learning livelihood skills from fathers and relatives, alongside limited and uneven access to literacy instruction.",
+    "limitations": "A generalizing literary account without numerical starting ages. It supports learning and work overlapping in childhood, not the game's exact age gates, wage amounts, universal schooling or an identical experience across households.",
+    "accessed": "2026-11-07"
+  },
+  {
+    "id": "alexandrian-minor-apprentice",
+    "title": "BGU 4.1124: cancellation of a nailsmith's apprenticeship",
+    "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1124.pdf",
+    "publisher": "University of Cincinnati, Ancient Alexandria documentary translations",
+    "kind": "primary",
+    "period": "After June/July 18 BCE, under early Roman rule",
+    "geography": "Alexandria",
+    "summary": "Records Hermaiskos, a son not yet of age, being trained in nailsmithing; cancelling the agreement permits his father to place him with another master.",
+    "limitations": "The apprentice's numerical age is unstated. The document postdates the cohort's Ptolemaic childhood and does not establish age 12 as a norm, free access to an apprenticeship or the game's pay and skill gains.",
+    "accessed": "2026-11-07"
   }
 ]

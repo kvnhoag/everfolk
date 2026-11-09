@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, matchesCondition, validateWorld } from "../src/index.ts";
-import { financeActivityReason, getAssetValue, getNetWorth, previewEconomyEffects } from "../src/economy.ts";
+import { financeActivityReason, getAssetValue, getNetWorth, previewEconomyEffects, repayDebtAutomatically } from "../src/economy.ts";
 import type { CharacterActivity, Effect, LifeState, WorldPack } from "../src/types.ts";
 import legacy from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 
@@ -86,6 +86,68 @@ test("mandatory expenses record unpaid debt; future income does not secretly rep
   const paid = engine.act(expense, "earn");
   assert.equal(paid.economy!.cash, 20); assert.equal(paid.economy!.debt, 20);
   assert.equal(getNetWorth(world, paid), 0);
+});
+
+test("automatic settlement repays only existing cash while preserving net worth and possessions", () => {
+  const world = pack(), life = structuredClone(createEngine(world).start("automatic-settlement"));
+  world.economy!.autoDebtRepayment = true;
+  life.economy = { cash: 25, debt: 40, assets: { tools: 1, share: 0 } };
+  const beforeWorth = getNetWorth(world, life), beforeCommands = structuredClone(life.commands), beforeRng = life.rngState;
+  assert.equal(repayDebtAutomatically(world, life), 25);
+  assert.deepEqual(life.economy, { cash: 0, debt: 15, assets: { tools: 1, share: 0 } });
+  assert.equal(getNetWorth(world, life), beforeWorth);
+  assert.equal(life.stats.wealth, beforeWorth / world.economy!.unitsPerPoint);
+  assert.deepEqual(life.commands, beforeCommands);
+  assert.equal(life.rngState, beforeRng);
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  life.economy.cash = 50;
+  const nextWorth = getNetWorth(world, life);
+  assert.equal(repayDebtAutomatically(world, life), 15);
+  assert.equal(life.economy.cash, 35);
+  assert.equal(life.economy.debt, 0);
+  assert.equal(getNetWorth(world, life), nextWorth);
+});
+
+test("automatic repayment is opt-in and cannot touch ended lives or sell illiquid assets", () => {
+  const world = pack(), life = structuredClone(createEngine(world).start("settlement-opt-in"));
+  life.economy = { cash: 50, debt: 30, assets: { tools: 1, share: 1 } };
+  const before = structuredClone(life);
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  assert.deepEqual(life, before);
+  world.economy!.autoDebtRepayment = false;
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  assert.deepEqual(life, before);
+  world.economy!.autoDebtRepayment = true;
+  life.phase = "ended";
+  const ended = structuredClone(life);
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  assert.deepEqual(life, ended);
+  life.phase = "ready";
+  life.economy.cash = 0;
+  const illiquid = structuredClone(life);
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  assert.deepEqual(life, illiquid);
+  delete life.economy;
+  assert.equal(repayDebtAutomatically(world, life), 0);
+  delete world.economy;
+  assert.equal(repayDebtAutomatically(world, life), 0);
+});
+
+test("automatic settlement rejects invalid ledger amounts before changing either balance", () => {
+  const world = pack(), life = structuredClone(createEngine(world).start("settlement-limits"));
+  world.economy!.autoDebtRepayment = true;
+  for (const cash of [-1, 0.5, Infinity, 1_000_000_000_001]) {
+    life.economy!.cash = cash;
+    life.economy!.debt = 20;
+    const before = structuredClone(life);
+    assert.throws(() => repayDebtAutomatically(world, life), /Cash must stay/);
+    assert.deepEqual(life, before);
+  }
+  life.economy!.cash = 20;
+  life.economy!.debt = -1;
+  const before = structuredClone(life);
+  assert.throws(() => repayDebtAutomatically(world, life), /Debt must stay/);
+  assert.deepEqual(life, before);
 });
 
 test("borrowing and explicit repayment preserve net worth and enforce outstanding debt", () => {
@@ -211,6 +273,7 @@ test("origin fractional index arithmetic removes only binary rounding residue", 
 });
 
 const invalid: [string, (world: WorldPack) => void, RegExp][] = [
+  ["nonboolean automatic repayment", world => { (world.economy as unknown as Record<string, unknown>).autoDebtRepayment = "yes"; }, /autoDebtRepayment/],
   ["unknown economy stat", world => { world.economy!.stat = "missing"; }, /unknown stat/],
   ["fractional scale", world => { world.economy!.unitsPerPoint = 1.5; }, /safe integer/],
   ["negative starting wealth", world => { world.stats.wealth.min = -10; }, /nonnegative/],

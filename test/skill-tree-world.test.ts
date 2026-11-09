@@ -23,7 +23,7 @@ const expectedPaths = {
 
 test("Alexandria authors twelve connected skill nodes with real training routes and no cycles", () => {
   const skills = createEngine(pack).world.character!.skills;
-  assert.equal(pack.version, "0.9.0");
+  assert.equal(pack.version, "0.16.0");
   assert.deepEqual(Object.keys(skills).sort(), Object.keys(expectedPaths).sort());
   const visited = new Set<string>();
   function visit(id: string, path = new Set<string>()) {
@@ -73,6 +73,8 @@ test("skill paths add no birth draws and preserve the existing life content and 
 function controlledEngine(): LifeEngine {
   const world = structuredClone(pack);
   world.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  world.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health.declineBands.forEach(band => { band.healthLoss = 0; });
   world.stats.wealth.initial = 80;
   world.stats.wealth.initialRange = { min: 80, max: 80 };
   for (const origin of world.origins) origin.statRanges.wealth = { min: 80, max: 80 };

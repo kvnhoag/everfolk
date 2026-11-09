@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.9.0",
+  "version": "0.16.0",
   "title": "A life in Alexandria",
-  "description": "A fictional life born in Alexandria in 66 BCE. Learn a trade, study, build a household or try rare military and court careers. Childhood and adult background death risks are reduced for playability from a disclosed later Roman Egyptian female comparison model. Personal events, career odds and stat effects are authored game rules, not measured historical frequencies.",
+  "description": "Live a fictional life in Alexandria, starting in 66 BCE. Learn a trade, start a family or pursue a career in scholarship, the army or the royal court.",
   "startYear": -66,
   "maxAge": 100,
   "stats": {
@@ -142,7 +142,7 @@
     {
       "id": "merchant-household",
       "title": "A merchant household",
-      "text": "You are born into a household that runs a small shop near the harbor. Relatives and neighbors help with your care.",
+      "text": "You are born above a small shop near the harbor. Your family sells goods downstairs and sleeps in rooms above it. A relative watches you while the shop is open.",
       "weight": 2,
       "statRanges": {
         "health": {
@@ -171,8 +171,8 @@
     },
     {
       "id": "artisan-household",
-      "title": "An artisan household",
-      "text": "You are born into a household of craft workers. The family shares workspace, tools and the care of a new child.",
+      "title": "A pottery-worker household",
+      "text": "You are born into a family of pottery workers. Your home shares a courtyard with their workshop. Adults take turns caring for you while clay dries and orders are finished.",
       "weight": 3,
       "statRanges": {
         "health": {
@@ -200,8 +200,8 @@
     },
     {
       "id": "harbor-household",
-      "title": "A harbor household",
-      "text": "You are born into a household that earns money from work on the quays. Adults fit your care around shifts and deliveries.",
+      "title": "A quay-laborer household",
+      "text": "You are born into a family of quay laborers. Your household rents crowded rooms a few streets from the water. Neighbors help with your care when several adults are called to unload a ship.",
       "weight": 3,
       "statRanges": {
         "health": {
@@ -225,6 +225,154 @@
       "evidence": "historically-inspired",
       "sourceIds": [
         "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "fishing-household",
+      "title": "A fishing household",
+      "text": "You are born near the shore into a family that catches and sells fish. Nets hang outside the doorway. A grandparent cares for you during the early morning trips.",
+      "weight": 2,
+      "statRanges": {
+        "health": {
+          "min": 61,
+          "max": 81
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 2
+        },
+        "wealth": {
+          "min": 1,
+          "max": 7
+        },
+        "bonds": {
+          "min": 62,
+          "max": 82
+        }
+      },
+      "effects": [],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "bakery-household",
+      "title": "A bakery household",
+      "text": "You are born into a family working in a rented bakery. The ovens are lit before dawn. You sleep in a quieter room with an aunt while the first loaves are made.",
+      "weight": 2,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 80
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 3
+        },
+        "wealth": {
+          "min": 4,
+          "max": 12
+        },
+        "bonds": {
+          "min": 57,
+          "max": 77
+        }
+      },
+      "effects": [],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-bakery-lease"
+      ]
+    },
+    {
+      "id": "clerk-household",
+      "title": "A clerk's household",
+      "text": "You are born into a household supported by paid writing and record keeping. Work tablets and documents are kept out of your reach. Your parents share your care with a nearby relative.",
+      "weight": 1,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 80
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 5
+        },
+        "wealth": {
+          "min": 8,
+          "max": 20
+        },
+        "bonds": {
+          "min": 52,
+          "max": 72
+        }
+      },
+      "effects": [],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "augustan-alexandria-documents",
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "weaver-household",
+      "title": "A weaving household",
+      "text": "You are born into a household that prepares thread and weaves cloth for customers. Work fills part of the main room. Older relatives care for you while the adults finish orders.",
+      "weight": 2,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 80
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 2
+        },
+        "wealth": {
+          "min": 2,
+          "max": 9
+        },
+        "bonds": {
+          "min": 60,
+          "max": 80
+        }
+      },
+      "effects": [],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "education-apprenticeship",
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "delta-newcomers",
+      "title": "Newcomers from the Delta",
+      "text": "You are born in Alexandria shortly after your family moves from a Delta village. They rent a room with relatives and look for steady city work. Food and childcare are shared while they settle in.",
+      "weight": 2,
+      "statRanges": {
+        "health": {
+          "min": 62,
+          "max": 82
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 2
+        },
+        "wealth": {
+          "min": 2,
+          "max": 8
+        },
+        "bonds": {
+          "min": 64,
+          "max": 84
+        }
+      },
+      "effects": [],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria",
+        "augustan-alexandria-documents"
       ]
     }
   ],
@@ -260,61 +408,6 @@
       ]
     },
     {
-      "id": "practical-experience",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "age",
-            "op": "gte",
-            "value": 12
-          },
-          {
-            "type": "age",
-            "op": "lt",
-            "value": 50
-          }
-        ]
-      },
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "knowledge",
-          "delta": 1
-        }
-      ]
-    },
-    {
-      "id": "learning-through-words",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "age",
-            "op": "gte",
-            "value": 6
-          },
-          {
-            "type": "age",
-            "op": "lt",
-            "value": 60
-          },
-          {
-            "type": "flag",
-            "flag": "literate",
-            "value": true
-          }
-        ]
-      },
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "knowledge",
-          "delta": 1
-        }
-      ]
-    },
-    {
       "id": "adult-household-cost",
       "when": {
         "type": "age",
@@ -325,21 +418,6 @@
         {
           "type": "stat",
           "stat": "wealth",
-          "delta": -1
-        }
-      ]
-    },
-    {
-      "id": "later-life-strength",
-      "when": {
-        "type": "age",
-        "op": "gte",
-        "value": 45
-      },
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "health",
           "delta": -1
         }
       ]
@@ -361,7 +439,7 @@
     }
   ],
   "mortality": {
-    "description": "Background death risks begin with the Roman Egyptian female comparison table in Zakrzewski (2015), Table 1. The source's stated life expectancy at birth of 22.5 years describes that comparison, not this easier game curve or a male born in Alexandria in 66 BCE. Background death probabilities are reduced to give players more time with work, family and specialist paths. After annual conversion, age 0 uses 6% of the historical comparison probability, ages 1-4 use 3%, ages 5-17 use 6%, ages 18-59 use 35%, ages 60-79 use 55%, and ages 80-94 use 80%. Ages 95-99 retain the comparison-derived tail assumption. These are authored game-balance settings, not reconstructed Alexandrian mortality rates. For new lives, about 2.00% die before their first birthday; 96.28% reach age 18, 82.40% reach age 40, and 65.13% reach age 60. These calculated gameplay probabilities describe background mortality only and exclude optional fatal choices. The 95+ tail assumption and age-100 cap retain the prior rules. Health and Resources do not alter background risk. Explicitly dangerous choices can add their stated fatal outcome.",
+    "description": "These age bands preserve the earlier game's Roman-Egyptian female comparison and easier-play conversion for inspection and legacy context. The source is not a measured life table for a Ptolemaic Alexandrian man. New 0.15.0 lives use active health conditions and explicit dangerous outcomes rather than independently sampling these death probabilities. Earlier survival percentages therefore do not describe the new causal-health model. Reaching the age-100 record limit does not itself assign a death.",
     "sourceIds": [
       "life-expectancy-egyptology",
       "demography-evidence-limits"
@@ -668,15 +746,55 @@
       "Sarapion",
       "Soter",
       "Theon",
-      "Tryphon"
+      "Tryphon",
+      "Ammonios",
+      "Andronikos",
+      "Athenodoros",
+      "Diodoros",
+      "Doros",
+      "Eirenaios",
+      "Epimachos",
+      "Hermias",
+      "Horus",
+      "Imouthes",
+      "Pachrates",
+      "Panebchounis",
+      "Petosiris",
+      "Psenamounis",
+      "Psais",
+      "Tesenouphis"
     ],
     "requireIntroductions": true,
+    "exclusiveCourtship": true,
     "jobs": [
+      {
+        "id": "apprentice",
+        "title": "Workshop apprentice",
+        "minAge": 12,
+        "description": "Prepare materials and learn a trade under a craft worker. Your work contributes a small amount to the household while you train.",
+        "yearlyEffects": [
+          {
+            "type": "stat",
+            "stat": "wealth",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "craft",
+            "delta": 4
+          },
+          {
+            "type": "stat",
+            "stat": "knowledge",
+            "delta": 1
+          }
+        ]
+      },
       {
         "id": "porter",
         "title": "Quay porter",
         "description": "Carry and sort cargo near the harbor. Open to a beginner, with tiring work and a modest return.",
-        "minAge": 16,
+        "minAge": 14,
         "yearlyEffects": [
           {
             "type": "stat",
@@ -699,7 +817,7 @@
         "id": "potter",
         "title": "Potter",
         "description": "Shape and finish everyday vessels in a workshop. Practical training brings steadier work.",
-        "minAge": 16,
+        "minAge": 14,
         "requirements": {
           "craft": 15
         },
@@ -730,7 +848,7 @@
         "id": "clerk",
         "title": "Merchant's clerk",
         "description": "Keep lists and check small accounts. Reading and practical numeracy both matter.",
-        "minAge": 18,
+        "minAge": 14,
         "requirements": {
           "literacy": 20,
           "reckoning": 20
@@ -762,7 +880,7 @@
         "id": "copyist",
         "title": "Workshop copyist",
         "description": "Copy and check written work patiently. There is more learning than immediate wealth.",
-        "minAge": 18,
+        "minAge": 14,
         "requirements": {
           "literacy": 30
         },
@@ -788,7 +906,7 @@
         "id": "sailor",
         "title": "Merchant sailor",
         "description": "Work aboard a merchant ship. The return comes with hard work and time away from familiar people.",
-        "minAge": 18,
+        "minAge": 16,
         "requirements": {
           "seamanship": 15
         },
@@ -819,7 +937,7 @@
         "id": "shopkeeper",
         "title": "Small-shop keeper",
         "description": "Manage goods, customers and accounts. Experience helps, but responsibilities leave less time for company.",
-        "minAge": 22,
+        "minAge": 18,
         "requirements": {
           "reckoning": 35,
           "craft": 10
@@ -846,7 +964,7 @@
         "id": "ceramic-decorator",
         "title": "Ceramic decorator",
         "description": "Finish and decorate pots and mould-made figures in a workshop.",
-        "minAge": 16,
+        "minAge": 14,
         "requirements": {
           "craft": 15,
           "pottery": 20
@@ -878,7 +996,7 @@
         "id": "wood-carver",
         "title": "Wood carver",
         "description": "Carve small figures, fittings and patterns in wood.",
-        "minAge": 16,
+        "minAge": 14,
         "requirements": {
           "craft": 15,
           "carving": 20
@@ -905,7 +1023,7 @@
         "id": "sculptor",
         "title": "Sculptor",
         "description": "Make small figures and carved reliefs for customers. Larger commissions need more experience.",
-        "minAge": 18,
+        "minAge": 16,
         "requirements": {
           "carving": 15,
           "sculpture": 25
@@ -937,7 +1055,7 @@
         "id": "philosophy-tutor",
         "title": "Philosophy tutor",
         "description": "Teach small groups, read arguments and help pupils explain their reasoning.",
-        "minAge": 22,
+        "minAge": 18,
         "requirements": {
           "literacy": 20,
           "philosophy": 30,
@@ -970,7 +1088,7 @@
         "id": "sky-table-calculator",
         "title": "Sky-table calculator",
         "description": "Copy observation tables and check calendar calculations. Access to texts depends on personal contacts.",
-        "minAge": 22,
+        "minAge": 18,
         "requirements": {
           "literacy": 25,
           "reckoning": 25,
@@ -1003,7 +1121,7 @@
         "id": "astrologer",
         "title": "Astrologer",
         "description": "Prepare charts and explain traditional interpretations. These are historical beliefs, not reliable predictions.",
-        "minAge": 22,
+        "minAge": 18,
         "requirements": {
           "literacy": 25,
           "reckoning": 20,
@@ -1188,29 +1306,54 @@
     ],
     "activities": [
       {
-        "id": "train-literacy",
-        "text": "Practise letters with a reader",
+        "id": "work-apprentice",
+        "text": "Start a workshop apprenticeship",
+        "category": "career",
+        "minAge": 12,
+        "cooldownYears": 1,
         "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "stat",
-              "stat": "wealth",
-              "op": "gte",
-              "value": 2
-            },
-            {
-              "type": "skill",
-              "skill": "literacy",
-              "op": "lt",
-              "value": 100
-            }
-          ]
+          "type": "not",
+          "condition": {
+            "type": "job",
+            "job": "apprentice"
+          }
+        },
+        "outcomes": [
+          {
+            "id": "work-apprentice-result",
+            "text": "You start an apprenticeship. A craft worker shows you how to prepare materials and check your work.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "apprentice"
+              },
+              {
+                "type": "flag",
+                "flag": "apprenticed",
+                "value": true
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "train-literacy",
+        "text": "Read and practise writing",
+        "when": {
+          "type": "cash",
+          "op": "gte",
+          "value": 20
         },
         "outcomes": [
           {
             "id": "train-literacy-result",
-            "text": "You pay for time with a patient reader and practise the marks until they become a little more familiar.",
+            "text": "You spend time reading and writing with a reader. The practice keeps your knowledge fresh.",
             "weight": 1,
             "effects": [
               {
@@ -1247,10 +1390,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 2
+              "value": 20
             },
             {
               "type": "skill",
@@ -1295,10 +1437,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -1353,10 +1494,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -1396,7 +1536,7 @@
           }
         ],
         "category": "training",
-        "minAge": 14,
+        "minAge": 12,
         "cooldownYears": 1
       },
       {
@@ -1443,7 +1583,7 @@
           }
         ],
         "category": "career",
-        "minAge": 16,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -1496,7 +1636,7 @@
           }
         ],
         "category": "career",
-        "minAge": 16,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -1555,7 +1695,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -1608,7 +1748,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -1661,7 +1801,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 1
       },
       {
@@ -1720,7 +1860,7 @@
           }
         ],
         "category": "career",
-        "minAge": 22,
+        "minAge": 18,
         "cooldownYears": 1
       },
       {
@@ -1766,7 +1906,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 3
       },
       {
@@ -1821,7 +1961,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 3
       },
       {
@@ -1867,7 +2007,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 3
       },
       {
@@ -1877,14 +2017,25 @@
           "type": "all",
           "conditions": [
             {
-              "type": "job",
-              "job": "sailor"
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "sailor"
+                },
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "seamanship",
+              "type": "stat",
+              "stat": "health",
               "op": "gte",
-              "value": 40
+              "value": 20
             }
           ]
         },
@@ -1913,7 +2064,7 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 3
       },
       {
@@ -1955,7 +2106,7 @@
           }
         ],
         "category": "career",
-        "minAge": 16,
+        "minAge": 12,
         "cooldownYears": 1
       },
       {
@@ -1969,19 +2120,17 @@
               "partner": "demetria"
             },
             {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "married"
-              }
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "courting",
-                "partner": "demetria"
-              }
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "relationship",
+                  "status": "single"
+                },
+                {
+                  "type": "relationship",
+                  "status": "divorced"
+                }
+              ]
             }
           ]
         },
@@ -2005,6 +2154,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "demetria",
+                "delta": 5
               }
             ]
           },
@@ -2022,6 +2177,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "demetria",
+                "delta": -3
               }
             ]
           }
@@ -2046,10 +2207,9 @@
               "partner": "demetria"
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 3
+              "value": 30
             }
           ]
         },
@@ -2073,6 +2233,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "demetria",
+                "delta": 5
               }
             ]
           }
@@ -2107,10 +2273,9 @@
               ]
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             }
           ]
         },
@@ -2134,6 +2299,12 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": 1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "demetria",
+                "delta": 6
               }
             ]
           }
@@ -2153,19 +2324,17 @@
               "partner": "thais"
             },
             {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "married"
-              }
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "courting",
-                "partner": "thais"
-              }
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "relationship",
+                  "status": "single"
+                },
+                {
+                  "type": "relationship",
+                  "status": "divorced"
+                }
+              ]
             }
           ]
         },
@@ -2189,6 +2358,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "thais",
+                "delta": 5
               }
             ]
           },
@@ -2206,6 +2381,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "thais",
+                "delta": -3
               }
             ]
           }
@@ -2230,10 +2411,9 @@
               "partner": "thais"
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 3
+              "value": 30
             }
           ]
         },
@@ -2257,6 +2437,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "thais",
+                "delta": 5
               }
             ]
           }
@@ -2291,10 +2477,9 @@
               ]
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             }
           ]
         },
@@ -2318,6 +2503,12 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": 1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "thais",
+                "delta": 6
               }
             ]
           }
@@ -2337,19 +2528,17 @@
               "partner": "berenike"
             },
             {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "married"
-              }
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "courting",
-                "partner": "berenike"
-              }
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "relationship",
+                  "status": "single"
+                },
+                {
+                  "type": "relationship",
+                  "status": "divorced"
+                }
+              ]
             }
           ]
         },
@@ -2373,6 +2562,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "berenike",
+                "delta": 5
               }
             ]
           },
@@ -2390,6 +2585,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "berenike",
+                "delta": -3
               }
             ]
           }
@@ -2414,10 +2615,9 @@
               "partner": "berenike"
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 3
+              "value": 30
             }
           ]
         },
@@ -2441,6 +2641,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "berenike",
+                "delta": 5
               }
             ]
           }
@@ -2475,10 +2681,9 @@
               ]
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             }
           ]
         },
@@ -2502,6 +2707,12 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": 1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "berenike",
+                "delta": 6
               }
             ]
           }
@@ -2521,19 +2732,17 @@
               "partner": "tyche"
             },
             {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "married"
-              }
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "relationship",
-                "status": "courting",
-                "partner": "tyche"
-              }
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "relationship",
+                  "status": "single"
+                },
+                {
+                  "type": "relationship",
+                  "status": "divorced"
+                }
+              ]
             }
           ]
         },
@@ -2557,6 +2766,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "tyche",
+                "delta": 5
               }
             ]
           },
@@ -2574,6 +2789,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "tyche",
+                "delta": -3
               }
             ]
           }
@@ -2598,10 +2819,9 @@
               "partner": "tyche"
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 3
+              "value": 30
             }
           ]
         },
@@ -2625,6 +2845,12 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "tyche",
+                "delta": 5
               }
             ]
           }
@@ -2659,10 +2885,9 @@
               ]
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             }
           ]
         },
@@ -2686,6 +2911,12 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": 1
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "tyche",
+                "delta": 6
               }
             ]
           }
@@ -2693,6 +2924,34 @@
         "category": "relationship",
         "minAge": 20,
         "cooldownYears": 2
+      },
+      {
+        "id": "end-courtship",
+        "text": "End your courtship",
+        "when": {
+          "type": "relationship",
+          "status": "courting"
+        },
+        "outcomes": [
+          {
+            "id": "end-courtship-result",
+            "text": "You agree to stop courting and go your separate ways.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "end-courtship"
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": -2
+              }
+            ]
+          }
+        ],
+        "category": "relationship",
+        "minAge": 18,
+        "cooldownYears": 1
       },
       {
         "id": "divorce",
@@ -2748,10 +3007,9 @@
               "value": 43
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 4
+              "value": 40
             },
             {
               "type": "children",
@@ -2763,7 +3021,7 @@
         "outcomes": [
           {
             "id": "grow-household-birth",
-            "text": "A child is born. You choose a name, buy supplies and take turns with the care.",
+            "text": "A child is born. Your household buys supplies and shares the care.",
             "weight": 3,
             "effects": [
               {
@@ -2829,10 +3087,9 @@
               ]
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             }
           ]
         },
@@ -2876,10 +3133,9 @@
               "value": 1
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 2
+              "value": 20
             }
           ]
         },
@@ -2898,6 +3154,11 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -2
+              },
+              {
+                "type": "closeness",
+                "target": "children",
+                "delta": 4
               }
             ]
           }
@@ -2918,10 +3179,9 @@
               "value": 1
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 3
+              "value": 30
             }
           ]
         },
@@ -2945,6 +3205,11 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "closeness",
+                "target": "children",
+                "delta": 4
               }
             ]
           }
@@ -3009,10 +3274,9 @@
         "id": "visit-a-friend",
         "text": "Visit the neighbors",
         "when": {
-          "type": "stat",
-          "stat": "wealth",
+          "type": "cash",
           "op": "gte",
-          "value": 1
+          "value": 10
         },
         "outcomes": [
           {
@@ -3065,7 +3329,7 @@
           }
         ],
         "category": "career",
-        "minAge": 16,
+        "minAge": 12,
         "cooldownYears": 2
       },
       {
@@ -3139,17 +3403,16 @@
           }
         ],
         "category": "training",
-        "minAge": 14,
+        "minAge": 10,
         "cooldownYears": 2
       },
       {
         "id": "cook-a-shared-meal",
         "text": "Cook a meal for the household",
         "when": {
-          "type": "stat",
-          "stat": "wealth",
+          "type": "cash",
           "op": "gte",
-          "value": 2
+          "value": 20
         },
         "outcomes": [
           {
@@ -3183,10 +3446,9 @@
         "id": "clean-the-water-jars",
         "text": "Clean and refill the water jars",
         "when": {
-          "type": "stat",
-          "stat": "wealth",
+          "type": "cash",
           "op": "gte",
-          "value": 1
+          "value": 10
         },
         "outcomes": [
           {
@@ -3218,22 +3480,33 @@
           "type": "all",
           "conditions": [
             {
-              "type": "age",
-              "op": "lt",
-              "value": 60
-            },
-            {
-              "type": "any",
+              "type": "all",
               "conditions": [
                 {
-                  "type": "job",
-                  "job": "porter"
+                  "type": "age",
+                  "op": "lt",
+                  "value": 60
                 },
                 {
-                  "type": "job",
-                  "job": "sailor"
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "porter"
+                    },
+                    {
+                      "type": "job",
+                      "job": "sailor"
+                    }
+                  ]
                 }
               ]
+            },
+            {
+              "type": "stat",
+              "stat": "health",
+              "op": "gte",
+              "value": 20
             }
           ]
         },
@@ -3257,17 +3530,16 @@
           }
         ],
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 2
       },
       {
         "id": "join-an-evening-song",
         "text": "Join an evening of songs",
         "when": {
-          "type": "stat",
-          "stat": "wealth",
+          "type": "cash",
           "op": "gte",
-          "value": 1
+          "value": 10
         },
         "outcomes": [
           {
@@ -3304,22 +3576,45 @@
           "type": "all",
           "conditions": [
             {
-              "type": "age",
-              "op": "lt",
-              "value": 60
-            },
-            {
-              "type": "any",
+              "type": "all",
               "conditions": [
                 {
-                  "type": "job",
-                  "job": "porter"
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "age",
+                      "op": "lt",
+                      "value": 60
+                    },
+                    {
+                      "type": "any",
+                      "conditions": [
+                        {
+                          "type": "job",
+                          "job": "porter"
+                        },
+                        {
+                          "type": "job",
+                          "job": "sailor"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "type": "job",
-                  "job": "sailor"
+                  "type": "not",
+                  "condition": {
+                    "type": "has-condition",
+                    "condition": "open-leg-fracture"
+                  }
                 }
               ]
+            },
+            {
+              "type": "stat",
+              "stat": "health",
+              "op": "gte",
+              "value": 20
             }
           ]
         },
@@ -3348,7 +3643,7 @@
           },
           {
             "id": "night-cargo-injury",
-            "text": "A load shifts in the dark and injures your leg. You miss work while it heals.",
+            "text": "A shifting cargo load causes an open tibial fracture. You cannot finish the shift and need care.",
             "weight": 2,
             "effects": [
               {
@@ -3360,6 +3655,10 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -3
+              },
+              {
+                "type": "condition",
+                "condition": "open-leg-fracture"
               }
             ]
           },
@@ -3476,10 +3775,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3529,10 +3827,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3582,10 +3879,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 2
+              "value": 20
             },
             {
               "type": "skill",
@@ -3636,16 +3932,26 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
-              "op": "gte",
-              "value": 1
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "cash",
+                  "op": "gte",
+                  "value": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "op": "lt",
+                  "value": 100
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "philosophy",
-              "op": "lt",
-              "value": 100
+              "type": "stat",
+              "stat": "knowledge",
+              "op": "gte",
+              "value": 15
             }
           ]
         },
@@ -3694,16 +4000,26 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
-              "op": "gte",
-              "value": 1
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "cash",
+                  "op": "gte",
+                  "value": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "astronomy",
+                  "op": "lt",
+                  "value": 100
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "astronomy",
-              "op": "lt",
-              "value": 100
+              "type": "stat",
+              "stat": "knowledge",
+              "op": "gte",
+              "value": 15
             }
           ]
         },
@@ -3742,33 +4058,43 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
-              "op": "gte",
-              "value": 1
-            },
-            {
-              "type": "skill",
-              "skill": "astrology",
-              "op": "lt",
-              "value": 100
-            },
-            {
               "type": "all",
               "conditions": [
                 {
-                  "type": "skill",
-                  "skill": "astronomy",
+                  "type": "cash",
                   "op": "gte",
                   "value": 10
                 },
                 {
                   "type": "skill",
-                  "skill": "reckoning",
-                  "op": "gte",
-                  "value": 10
+                  "skill": "astrology",
+                  "op": "lt",
+                  "value": 100
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "astronomy",
+                      "op": "gte",
+                      "value": 10
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 10
+                    }
+                  ]
                 }
               ]
+            },
+            {
+              "type": "stat",
+              "stat": "knowledge",
+              "op": "gte",
+              "value": 15
             }
           ]
         },
@@ -3807,10 +4133,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3865,10 +4190,9 @@
           "type": "all",
           "conditions": [
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3919,10 +4243,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3939,7 +4262,7 @@
           ]
         },
         "category": "career",
-        "minAge": 16,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -3979,10 +4302,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -3999,7 +4321,7 @@
           ]
         },
         "category": "career",
-        "minAge": 16,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -4039,10 +4361,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -4059,7 +4380,7 @@
           ]
         },
         "category": "career",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 1
       },
       {
@@ -4099,10 +4420,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -4125,7 +4445,7 @@
           ]
         },
         "category": "career",
-        "minAge": 22,
+        "minAge": 18,
         "cooldownYears": 1
       },
       {
@@ -4165,10 +4485,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -4191,7 +4510,7 @@
           ]
         },
         "category": "career",
-        "minAge": 22,
+        "minAge": 18,
         "cooldownYears": 1
       },
       {
@@ -4231,10 +4550,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 1
+              "value": 10
             },
             {
               "type": "skill",
@@ -4262,7 +4580,7 @@
           ]
         },
         "category": "career",
-        "minAge": 22,
+        "minAge": 18,
         "cooldownYears": 1
       },
       {
@@ -4383,25 +4701,36 @@
           "type": "all",
           "conditions": [
             {
-              "type": "year",
-              "op": "lt",
-              "value": -30
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "year",
+                  "op": "lt",
+                  "value": -30
+                },
+                {
+                  "type": "job",
+                  "job": "soldier"
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 35
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 15
+                }
+              ]
             },
             {
-              "type": "job",
-              "job": "soldier"
-            },
-            {
-              "type": "skill",
-              "skill": "warfare",
+              "type": "stat",
+              "stat": "bonds",
               "op": "gte",
-              "value": 35
-            },
-            {
-              "type": "skill",
-              "skill": "oratory",
-              "op": "gte",
-              "value": 15
+              "value": 20
             }
           ]
         },
@@ -4524,34 +4853,45 @@
           "type": "all",
           "conditions": [
             {
-              "type": "year",
-              "op": "lt",
-              "value": -30
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "year",
+                  "op": "lt",
+                  "value": -30
+                },
+                {
+                  "type": "not",
+                  "condition": {
+                    "type": "job",
+                    "job": "court-adviser"
+                  }
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 35
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "op": "gte",
+                  "value": 25
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 35
+                }
+              ]
             },
             {
-              "type": "not",
-              "condition": {
-                "type": "job",
-                "job": "court-adviser"
-              }
-            },
-            {
-              "type": "skill",
-              "skill": "literacy",
+              "type": "stat",
+              "stat": "bonds",
               "op": "gte",
-              "value": 35
-            },
-            {
-              "type": "skill",
-              "skill": "philosophy",
-              "op": "gte",
-              "value": 25
-            },
-            {
-              "type": "skill",
-              "skill": "oratory",
-              "op": "gte",
-              "value": 35
+              "value": 20
             }
           ]
         },
@@ -4850,27 +5190,37 @@
           "type": "all",
           "conditions": [
             {
-              "type": "skill",
-              "skill": "astrology",
-              "op": "gte",
-              "value": 25
-            },
-            {
-              "type": "skill",
-              "skill": "astronomy",
-              "op": "gte",
-              "value": 20
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "astrology",
+                  "op": "gte",
+                  "value": 25
+                },
+                {
+                  "type": "skill",
+                  "skill": "astronomy",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "cash",
+                  "op": "gte",
+                  "value": 10
+                }
+              ]
             },
             {
               "type": "stat",
-              "stat": "wealth",
+              "stat": "knowledge",
               "op": "gte",
-              "value": 1
+              "value": 25
             }
           ]
         },
         "category": "training",
-        "minAge": 18,
+        "minAge": 16,
         "cooldownYears": 3
       },
       {
@@ -4909,26 +5259,37 @@
           "type": "all",
           "conditions": [
             {
-              "type": "year",
-              "op": "lt",
-              "value": -30
-            },
-            {
-              "type": "any",
+              "type": "all",
               "conditions": [
                 {
-                  "type": "job",
-                  "job": "soldier"
+                  "type": "year",
+                  "op": "lt",
+                  "value": -30
                 },
                 {
-                  "type": "job",
-                  "job": "officer"
-                },
-                {
-                  "type": "job",
-                  "job": "general"
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "soldier"
+                    },
+                    {
+                      "type": "job",
+                      "job": "officer"
+                    },
+                    {
+                      "type": "job",
+                      "job": "general"
+                    }
+                  ]
                 }
               ]
+            },
+            {
+              "type": "stat",
+              "stat": "health",
+              "op": "gte",
+              "value": 20
             }
           ]
         },
@@ -5091,10 +5452,9 @@
               }
             },
             {
-              "type": "stat",
-              "stat": "wealth",
+              "type": "cash",
               "op": "gte",
-              "value": 2
+              "value": 20
             }
           ]
         },
@@ -5133,22 +5493,32 @@
           "type": "all",
           "conditions": [
             {
-              "type": "skill",
-              "skill": "oratory",
-              "op": "gte",
-              "value": 25
-            },
-            {
-              "type": "skill",
-              "skill": "philosophy",
-              "op": "gte",
-              "value": 15
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 25
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "op": "gte",
+                  "value": 15
+                },
+                {
+                  "type": "cash",
+                  "op": "gte",
+                  "value": 10
+                }
+              ]
             },
             {
               "type": "stat",
-              "stat": "wealth",
+              "stat": "bonds",
               "op": "gte",
-              "value": 1
+              "value": 20
             }
           ]
         },
@@ -5194,7 +5564,7 @@
           }
         ],
         "category": "finance",
-        "minAge": 18,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -5225,7 +5595,7 @@
           }
         ],
         "category": "finance",
-        "minAge": 18,
+        "minAge": 14,
         "cooldownYears": 1
       },
       {
@@ -5336,6 +5706,749 @@
           }
         ],
         "category": "finance",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "take-small-repair-jobs",
+        "text": "Take small repair jobs",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "asset",
+              "asset": "tool-chest",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 15
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "take-small-repair-jobs-result",
+            "text": "You use your tools to repair hinges, straps and small household fittings. The customers pay when the work is done.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "stat",
+                "stat": "wealth",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 2
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": -1
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1
+      },
+      {
+        "id": "help-household-work",
+        "text": "Help with household tasks",
+        "category": "training",
+        "minAge": 6,
+        "cooldownYears": 1,
+        "outcomes": [
+          {
+            "id": "help-household-work-result",
+            "text": "You sort small supplies and carry messages close to home. An older relative checks what you have done.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "small-pottery-order",
+        "text": "Make a small pottery order",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "pottery",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "small-pottery-order-result",
+            "text": "You use a workshop's kiln to finish a few small vessels. After paying for clay and firing, you earn 20 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "cash",
+                "delta": 30
+              },
+              {
+                "type": "skill",
+                "skill": "pottery",
+                "delta": 2
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": -1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "small-carving-order",
+        "text": "Carve a small wooden fitting",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "carving",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "small-carving-order-result",
+            "text": "You borrow bench space, shape the fitting and check it against the measurements. After materials and tool use, you earn 20 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "cash",
+                "delta": 30
+              },
+              {
+                "type": "skill",
+                "skill": "carving",
+                "delta": 2
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": -1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "small-figure-order",
+        "text": "Make a small figure for a customer",
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "sculpture",
+              "op": "gte",
+              "value": 25
+            },
+            {
+              "type": "skill",
+              "skill": "carving",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "small-figure-order-result",
+            "text": "You finish a small figure to the customer's design. After materials and workshop use, you earn 30 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "cash",
+                "delta": 50
+              },
+              {
+                "type": "skill",
+                "skill": "sculpture",
+                "delta": 2
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": -1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "teach-a-reading-lesson",
+        "text": "Teach a reading and discussion lesson",
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "philosophy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "teach-a-reading-lesson-result",
+            "text": "You read a short passage with a learner and help them explain its argument. The household pays you 20 drachmas for the lesson.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": 20
+              },
+              {
+                "type": "skill",
+                "skill": "philosophy",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "knowledge",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "copy-a-sky-table",
+        "text": "Copy and check a sky table",
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "astronomy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "copy-a-sky-table-result",
+            "text": "You copy a table and check the positions and arithmetic with an experienced reader. After writing materials, you earn 20 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "cash",
+                "delta": 30
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "knowledge",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "prepare-a-chart-reading",
+        "text": "Prepare a traditional chart reading",
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 2,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "astrology",
+              "op": "gte",
+              "value": 25
+            },
+            {
+              "type": "skill",
+              "skill": "astronomy",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "year",
+              "op": "gte",
+              "value": -29
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "prepare-a-chart-reading-result",
+            "text": "You prepare the chart and explain its traditional interpretation. After writing materials, you earn 20 drachmas. The reading records a belief, not a reliable prediction.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "cash",
+                "delta": 30
+              },
+              {
+                "type": "skill",
+                "skill": "astrology",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rest-for-recovery",
+        "text": "Rest while recovering",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "has-condition"
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "rest-for-recovery-result",
+            "text": "You make time for rest and practical help while you recover.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "care",
+                "amount": 0.5
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": 3
+              }
+            ]
+          }
+        ],
+        "category": "family",
+        "minAge": 0,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "seek-a-healer",
+        "text": "Ask a healer for care — 10 drachmas",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "has-condition"
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "seek-a-healer-result",
+            "text": "You arrange a healer's visit and make time for care. You may still need further recovery.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "care",
+                "amount": 0.9
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": 5
+              }
+            ]
+          }
+        ],
+        "category": "family",
+        "minAge": 0,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "ask-household-care",
+        "text": "Ask the household for help with care",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "has-condition"
+            },
+            {
+              "type": "stat",
+              "stat": "bonds",
+              "op": "gte",
+              "value": 30
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "ask-household-care-result",
+            "text": "You make time for rest and practical help while you recover.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "care",
+                "amount": 0.7
+              },
+              {
+                "type": "stat",
+                "stat": "health",
+                "delta": 4
+              }
+            ]
+          }
+        ],
+        "category": "family",
+        "minAge": 0,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "talk-with-demetria",
+        "text": "Spend time talking with Demetria",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "known-partner",
+              "partner": "demetria"
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "talk-with-demetria-result",
+            "text": "You and Demetria share a meal and talk about work and home. You learn a little more about each other.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "demetria",
+                "delta": 6
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "relationship",
+        "minAge": 18,
+        "cooldownYears": 1
+      },
+      {
+        "id": "talk-with-thais",
+        "text": "Spend time talking with Thais",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "known-partner",
+              "partner": "thais"
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "talk-with-thais-result",
+            "text": "You and Thais share a meal and talk about work and home. You learn a little more about each other.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "thais",
+                "delta": 6
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "relationship",
+        "minAge": 18,
+        "cooldownYears": 1
+      },
+      {
+        "id": "talk-with-berenike",
+        "text": "Spend time talking with Berenike",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "known-partner",
+              "partner": "berenike"
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "talk-with-berenike-result",
+            "text": "You and Berenike share a meal and talk about work and home. You learn a little more about each other.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "berenike",
+                "delta": 6
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "relationship",
+        "minAge": 18,
+        "cooldownYears": 1
+      },
+      {
+        "id": "talk-with-tyche",
+        "text": "Spend time talking with Tyche",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "known-partner",
+              "partner": "tyche"
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "talk-with-tyche-result",
+            "text": "You and Tyche share a meal and talk about work and home. You learn a little more about each other.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "closeness",
+                "target": "partner",
+                "partner": "tyche",
+                "delta": 6
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "relationship",
         "minAge": 18,
         "cooldownYears": 1
       }
@@ -5358,7 +6471,7 @@
       "Theron",
       "Doris"
     ],
-    "deathCauseDescription": "Specific disease and injury labels are modern names authored for clarity; they are not diagnoses inferred from the mortality sources. Natural-death cause labels are fictional explanations selected after the comparative all-cause mortality draw; they add no extra annual hazard. Causes marked choiceOnly are used only when an explicitly dangerous choice or activity draws its fatal outcome. Those outcome weights are authored game risks, not measured historical rates. Neither cause labels nor risk weights come from the cited mortality sources. Family-planning ages, job returns and skill thresholds are also authored game balances.",
+    "deathCauseDescription": "For new causal-health lives, a natural death names the actual unresolved condition that depleted Health. Explicit dangerous choices retain their authored fatal outcomes and record the choice that caused death. Disease and injury names are modern labels for clarity, not diagnoses reconstructed from ancient individuals or calibrated cause-specific rates. Condition onset, progression, recovery, care and relationship effects are authored gameplay. The comparative mortality data does not supply these values.",
     "deathCauses": [
       {
         "id": "early-illness",
@@ -5519,6 +6632,18 @@
         "text": "A spear strikes your abdomen while you hold the forward post. Blood loss from the wound proves fatal.",
         "weight": 1,
         "choiceOnly": true
+      },
+      {
+        "id": "fracture-sepsis",
+        "title": "Sepsis following an open tibial fracture",
+        "text": "The open fracture becomes infected. Sepsis develops, and the injury becomes fatal.",
+        "weight": 1
+      },
+      {
+        "id": "physical-decline-failure",
+        "title": "Multiple organ failure following prolonged physical decline",
+        "text": "Your health has steadily deteriorated. Prolonged physical decline leads to multiple organ failure.",
+        "weight": 1
       }
     ]
   },
@@ -5608,9 +6733,469 @@
       "evidence": "documented-history"
     },
     {
+      "id": "background-merchant-household-childhood",
+      "title": "Under the shop counter",
+      "text": "You play with a basket of empty containers while a relative serves customers. They bring you upstairs when the shop gets crowded.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "merchant-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "background-merchant-household-practice",
+      "title": "Counting a small delivery",
+      "text": "Your family lets you count a delivery of jars. You check the total twice and point out one that is cracked.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "merchant-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-artisan-household-childhood",
+      "title": "Clay in the courtyard",
+      "text": "A relative gives you a lump of spare clay. You flatten it, start again and leave the small shape beside the workshop wall.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "artisan-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-terracottas"
+      ]
+    },
+    {
+      "id": "background-artisan-household-practice",
+      "title": "A row of small pots",
+      "text": "You help smooth the rims of small pots. A worker checks each one before it goes onto the drying shelf.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "artisan-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 2
+        },
+        {
+          "type": "skill",
+          "skill": "pottery",
+          "delta": 3
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship",
+        "alexandrian-terracottas"
+      ]
+    },
+    {
+      "id": "background-harbor-household-childhood",
+      "title": "Waiting by the doorway",
+      "text": "You wait with a neighbor while your caregivers finish unloading a ship. They return dusty and bring you something to eat.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "harbor-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "background-harbor-household-practice",
+      "title": "Knots on a spare rope",
+      "text": "A relative shows you a simple knot using a short piece of rope. You practise at home, away from the moving cargo.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "harbor-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "seamanship",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria",
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-fishing-household-childhood",
+      "title": "Nets outside the door",
+      "text": "You sit beside a grandparent while they mend a net. They keep the needles away from you and let you gather the loose pieces of cord.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "fishing-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "background-fishing-household-practice",
+      "title": "Sorting the morning catch",
+      "text": "You help sort fish on shore and count the baskets for sale. A relative shows you which damaged net sections need repair.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "fishing-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "seamanship",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria",
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-bakery-household-childhood",
+      "title": "The first loaves of the day",
+      "text": "You wake while the bakery is already working. An aunt takes you into the courtyard with breakfast while the ovens are busy.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "bakery-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-bakery-lease"
+      ]
+    },
+    {
+      "id": "background-bakery-household-practice",
+      "title": "Counting loaves on a tray",
+      "text": "You count finished loaves and help clear a cool work surface. The adults keep you away from the hot oven.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "bakery-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 2
+        },
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-bakery-lease",
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-clerk-household-childhood",
+      "title": "A space beside the writing table",
+      "text": "You sit beside a relative working on a document. They give you a blank scrap to draw on and move the finished pages out of reach.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "clerk-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "background-clerk-household-practice",
+      "title": "Copying a short list",
+      "text": "A relative writes a short list for you to copy. They check the letters and let you try again when you reverse one.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "clerk-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "literacy",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-weaver-household-childhood",
+      "title": "Thread across the room",
+      "text": "You watch a relative prepare thread. They give you a short offcut to play with and lift you away when you reach for the working loom.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "weaver-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-weaver-household-practice",
+      "title": "Preparing the next bundle",
+      "text": "You help sort thread and wind a small bundle. A relative checks the tension and shows you how to undo a tangle without pulling it tight.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "weaver-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-delta-newcomers-childhood",
+      "title": "Relatives arriving from the Delta",
+      "text": "Relatives visit from your family's old village. The rented room fills with bags, food and people finding places to sit. You stay close to the adults you know.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "delta-newcomers"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "background-delta-newcomers-practice",
+      "title": "Learning the city errands",
+      "text": "An older cousin takes you to the market and the quays. On the return trip, they let you lead the way and check a small purchase.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "delta-newcomers"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 2
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
       "id": "the-first-household",
       "title": "You are born",
-      "text": "You are born in Alexandria in 66 BCE. The adults in your household decide how to share your care.",
+      "text": "You are born in Alexandria. Your household looks after you.",
       "trigger": {
         "type": "age",
         "at": 0
@@ -5619,49 +7204,9 @@
       "sourceIds": [
         "alexandrian-wetnursing"
       ],
-      "choices": [
-        {
-          "id": "family-care",
-          "text": "Share the care within the family",
-          "outcomes": [
-            {
-              "id": "family-care-result",
-              "text": "Your relatives take turns feeding, holding and settling you.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "bonds",
-                  "delta": 4
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "seek-help",
-          "text": "Ask a trusted neighbor to help",
-          "outcomes": [
-            {
-              "id": "seek-help-result",
-              "text": "A trusted neighbor helps with feeding and care. Your household pays for a few supplies.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "bonds",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": -1
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "choices": [],
+      "mode": "automatic",
+      "effects": []
     },
     {
       "id": "first-steps",
@@ -5842,15 +7387,17 @@
     },
     {
       "id": "a-place-to-learn",
-      "title": "Training for work",
-      "text": "Your household looks for someone to teach you. Reading, workshop training and helping at home are the options available.",
+      "title": "Learning a trade",
+      "text": "You already help with everyday tasks. Your household can arrange more lessons, a workshop apprenticeship or more work at home. Learning and earning can go together.",
       "trigger": {
         "type": "age",
         "at": 12
       },
       "evidence": "historically-inspired",
       "sourceIds": [
-        "education-apprenticeship"
+        "education-apprenticeship",
+        "diodorus-childhood-work",
+        "alexandrian-minor-apprentice"
       ],
       "choices": [
         {
@@ -5893,11 +7440,11 @@
         },
         {
           "id": "join-workbench",
-          "text": "Learn beside an experienced craft worker",
+          "text": "Start a workshop apprenticeship",
           "outcomes": [
             {
               "id": "join-workbench-result",
-              "text": "You spend time at a workbench, preparing materials and practising basic tasks.",
+              "text": "You begin an apprenticeship, preparing materials and practising tasks with a craft worker.",
               "weight": 1,
               "effects": [
                 {
@@ -5919,10 +7466,21 @@
                   "type": "stat",
                   "stat": "wealth",
                   "delta": 2
+                },
+                {
+                  "type": "job",
+                  "job": "apprentice"
                 }
               ]
             }
-          ]
+          ],
+          "when": {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "apprentice"
+            }
+          }
         },
         {
           "id": "help-household",
@@ -5951,21 +7509,30 @@
     },
     {
       "id": "the-first-wages",
-      "title": "Your first paid work",
-      "text": "Someone offers you work carrying loads on the quays. You can take the pay or look for a task that gives you more practice.",
+      "title": "Regular work",
+      "text": "A quay crew is taking on workers. You can take regular porter work, do a short paid task or keep the work you already have. Lessons can continue alongside work.",
       "trigger": {
         "type": "age",
-        "at": 16
+        "at": 14
       },
       "evidence": "historically-inspired",
       "sourceIds": [
         "augustan-alexandria-documents",
-        "education-apprenticeship"
+        "education-apprenticeship",
+        "diodorus-childhood-work",
+        "alexandrian-minor-apprentice"
       ],
       "choices": [
         {
           "id": "steady-work",
           "text": "Take porter work on the quays",
+          "when": {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "porter"
+            }
+          },
           "outcomes": [
             {
               "id": "steady-work-result",
@@ -6017,27 +7584,55 @@
               ]
             }
           ]
+        },
+        {
+          "id": "keep-first-job",
+          "text": "Keep your current job",
+          "when": {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
+          },
+          "outcomes": [
+            {
+              "id": "keep-first-job-result",
+              "text": "You turn down the offer and continue your current work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "id": "a-place-on-the-manifest",
-      "title": "Choosing a regular job",
-      "text": "You can take porter work nearby. A sailor's job needs Seamanship 15, and a copyist's job needs Literacy 30. Training in Your life can help you qualify.",
+      "title": "Job offers",
+      "text": "Workshops, merchant crews and local teachers are looking for help. Your skills decide which offers you can take. You can also keep your current work.",
       "trigger": {
         "type": "age",
-        "at": 18
+        "at": 16
       },
       "evidence": "historically-inspired",
       "sourceIds": [
         "strabo-alexandria",
         "education-apprenticeship",
-        "augustan-alexandria-documents"
+        "augustan-alexandria-documents",
+        "diodorus-childhood-work",
+        "alexandrian-minor-apprentice"
       ],
       "choices": [
         {
           "id": "stay",
           "text": "Take porter work close to home",
+          "when": {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "porter"
+            }
+          },
           "outcomes": [
             {
               "id": "a-familiar-door",
@@ -6097,10 +7692,22 @@
           "id": "sail",
           "text": "Take a sailor's place with the ship's crew",
           "when": {
-            "type": "skill",
-            "skill": "seamanship",
-            "op": "gte",
-            "value": 15
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "job",
+                  "job": "sailor"
+                }
+              }
+            ]
           },
           "outcomes": [
             {
@@ -6181,10 +7788,22 @@
           "id": "study",
           "text": "Become a copyist in the workshop",
           "when": {
-            "type": "skill",
-            "skill": "literacy",
-            "op": "gte",
-            "value": 30
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "op": "gte",
+                "value": 30
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "job",
+                  "job": "copyist"
+                }
+              }
+            ]
           },
           "outcomes": [
             {
@@ -6219,7 +7838,1184 @@
               ]
             }
           ]
+        },
+        {
+          "id": "keep-regular-job",
+          "text": "Keep your current job",
+          "when": {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
+          },
+          "outcomes": [
+            {
+              "id": "keep-regular-job-result",
+              "text": "You pass on the offers and continue your current job.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        },
+        {
+          "id": "interest-career-ceramic-decorator",
+          "text": "Make pottery decoration your regular work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 14
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "ceramic-decorator"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "craft",
+                    "op": "gte",
+                    "value": 15
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "pottery",
+                    "op": "gte",
+                    "value": 20
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-ceramic-decorator-work-ceramic-decorator-result",
+              "text": "You arrange work as a ceramic decorator and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "ceramic-decorator"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "interest-career-wood-carver",
+          "text": "Make wood carving your regular work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 14
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "wood-carver"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "craft",
+                    "op": "gte",
+                    "value": 15
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "carving",
+                    "op": "gte",
+                    "value": 20
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-wood-carver-work-wood-carver-result",
+              "text": "You arrange work as a wood carver and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "wood-carver"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "interest-career-sculptor",
+          "text": "Make sculpture your regular work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 16
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "sculptor"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "carving",
+                    "op": "gte",
+                    "value": 15
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "sculpture",
+                    "op": "gte",
+                    "value": 25
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-sculptor-work-sculptor-result",
+              "text": "You arrange work as a sculptor and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "sculptor"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "interest-career-philosophy-tutor",
+          "text": "Make teaching philosophy your regular work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "philosophy-tutor"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "literacy",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "philosophy",
+                    "op": "gte",
+                    "value": 30
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "oratory",
+                    "op": "gte",
+                    "value": 15
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-philosophy-tutor-work-philosophy-tutor-result",
+              "text": "You arrange work as a philosophy tutor and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "philosophy-tutor"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "interest-career-sky-table-calculator",
+          "text": "Make sky-table work your regular occupation",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "sky-table-calculator"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "literacy",
+                    "op": "gte",
+                    "value": 25
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "reckoning",
+                    "op": "gte",
+                    "value": 25
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "astronomy",
+                    "op": "gte",
+                    "value": 30
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-sky-table-calculator-work-sky-table-calculator-result",
+              "text": "You arrange work as a sky-table calculator and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "sky-table-calculator"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "interest-career-astrologer",
+          "text": "Make chart reading your regular work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "all",
+                "conditions": [
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "job",
+                      "job": "astrologer"
+                    }
+                  },
+                  {
+                    "type": "cash",
+                    "op": "gte",
+                    "value": 10
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "literacy",
+                    "op": "gte",
+                    "value": 25
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "reckoning",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "astrology",
+                    "op": "gte",
+                    "value": 30
+                  },
+                  {
+                    "type": "year",
+                    "op": "gte",
+                    "value": -29
+                  }
+                ]
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "interest-career-astrologer-work-astrologer-result",
+              "text": "You arrange work as a astrologer and buy a few supplies.",
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "astrologer"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ],
+              "weight": 1
+            }
+          ]
         }
+      ]
+    },
+    {
+      "id": "background-merchant-household-opportunity",
+      "title": "A busy week at the family shop",
+      "text": "A relative expects more customers than usual and asks for help. They can pay you for covering the counter or checking deliveries. You can also keep your usual plans.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "merchant-household"
+      },
+      "choices": [
+        {
+          "id": "cover-counter",
+          "text": "Cover the counter for extra pay",
+          "outcomes": [
+            {
+              "id": "cover-counter-result",
+              "text": "You serve customers through the busy part of the day and receive 30 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "check-deliveries",
+          "text": "Check the deliveries and accounts",
+          "outcomes": [
+            {
+              "id": "check-deliveries-result",
+              "text": "You compare the delivered goods with the records. Your relative pays you 10 drachmas and shows you how they keep the accounts.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "visit-after-work",
+          "text": "Keep your plans and visit afterward",
+          "outcomes": [
+            {
+              "id": "visit-after-work-result",
+              "text": "Your relative finds someone else to help. You stop by after closing and share a meal.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "background-artisan-household-opportunity",
+      "title": "A pottery order at home",
+      "text": "The family workshop has an order of plain vessels to finish. Your relatives offer paid preparation work or a chance to learn more careful finishing. Neither option changes your regular occupation.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "artisan-household"
+      },
+      "choices": [
+        {
+          "id": "prepare-clay",
+          "text": "Prepare the clay for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "prepare-clay-result",
+              "text": "You prepare material and clean the benches. The family pays you 30 drachmas for the extra work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "finish-vessels",
+          "text": "Learn to finish the vessels",
+          "outcomes": [
+            {
+              "id": "finish-vessels-result",
+              "text": "You work beside an experienced potter, correcting rims and handles. Most of the time goes into practice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 6
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-current-work",
+          "text": "Keep to your current work",
+          "outcomes": [
+            {
+              "id": "keep-current-work-result",
+              "text": "You cannot fit in the order. You help put the tools away when you visit later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship",
+        "alexandrian-terracottas"
+      ]
+    },
+    {
+      "id": "background-harbor-household-opportunity",
+      "title": "An extra unloading shift",
+      "text": "A relative knows a crew that needs help with a delivery. You can carry loads for pay, learn the tally work or turn down the extra shift.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "harbor-household"
+      },
+      "choices": [
+        {
+          "id": "carry-loads",
+          "text": "Carry the loads for 40 drachmas",
+          "outcomes": [
+            {
+              "id": "carry-loads-result",
+              "text": "You finish the unloading shift and receive 40 drachmas. It leaves less time for your household that day.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 40
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "check-cargo",
+          "text": "Help check the cargo tallies",
+          "outcomes": [
+            {
+              "id": "check-cargo-result",
+              "text": "You compare marks and quantities with an experienced worker. You earn 10 drachmas while learning the task.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 4
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "decline-shift",
+          "text": "Decline the shift and stay home",
+          "outcomes": [
+            {
+              "id": "decline-shift-result",
+              "text": "You decline the extra work and finish several jobs around the household.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria",
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "background-fishing-household-opportunity",
+      "title": "The family's fish delivery",
+      "text": "Your family has a large catch to sell. They offer you a share for helping at the stall, or you can stay near home and work on the nets.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "fishing-household"
+      },
+      "choices": [
+        {
+          "id": "sell-catch",
+          "text": "Help sell the catch for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "sell-catch-result",
+              "text": "You sort baskets and serve customers until the fish are sold. Your share is 30 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mend-nets",
+          "text": "Mend the nets with a relative",
+          "outcomes": [
+            {
+              "id": "mend-nets-result",
+              "text": "You replace damaged cord and practise the knots that keep the net even.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-plans",
+          "text": "Keep your existing plans",
+          "outcomes": [
+            {
+              "id": "keep-plans-result",
+              "text": "The family divides the work among the people already available. You visit after the delivery.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    },
+    {
+      "id": "background-bakery-household-opportunity",
+      "title": "A larger bakery order",
+      "text": "The bakery has accepted a larger order. A relative offers you paid delivery work or a slower session learning how quantities and orders are checked.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "bakery-household"
+      },
+      "choices": [
+        {
+          "id": "deliver-loaves",
+          "text": "Deliver the loaves for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "deliver-loaves-result",
+              "text": "You make several deliveries and return the baskets. The bakery pays you 30 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "check-orders",
+          "text": "Learn the measurements and order lists",
+          "outcomes": [
+            {
+              "id": "check-orders-result",
+              "text": "You compare measures and quantities with a relative, then help check the written orders.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "share-meal",
+          "text": "Visit after the order is finished",
+          "outcomes": [
+            {
+              "id": "share-meal-result",
+              "text": "You keep your usual work and join the family for food after the bakery closes.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-bakery-lease"
+      ]
+    },
+    {
+      "id": "background-clerk-household-opportunity",
+      "title": "Extra documents at home",
+      "text": "A relative has more documents to prepare than they can finish alone. You can help carry completed pages, practise checking a simple copy or leave them to arrange other help.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "clerk-household"
+      },
+      "choices": [
+        {
+          "id": "deliver-documents",
+          "text": "Deliver the documents for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "deliver-documents-result",
+              "text": "You deliver the pages to the named recipients and bring back acknowledgments. Your relative pays you 20 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "check-copy",
+          "text": "Practise checking a simple copy",
+          "outcomes": [
+            {
+              "id": "check-copy-result",
+              "text": "You compare two short copies with a relative. They explain the mistakes you missed.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "keep-own-work-result",
+              "text": "Your relative asks another reader for help. You bring food when you visit in the evening.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "augustan-alexandria-documents",
+        "education-apprenticeship"
+      ]
+    },
+    {
+      "id": "background-weaver-household-opportunity",
+      "title": "A cloth order to finish",
+      "text": "Your relatives have cloth to prepare for a customer. They offer paid finishing work, or you can spend time learning how the pieces are measured and checked.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "weaver-household"
+      },
+      "choices": [
+        {
+          "id": "finish-order",
+          "text": "Help finish the order for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "finish-order-result",
+              "text": "You trim loose threads, fold the finished cloth and prepare it for delivery. Your share is 30 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "measure-cloth",
+          "text": "Practise measuring and checking the cloth",
+          "outcomes": [
+            {
+              "id": "measure-cloth-result",
+              "text": "A relative helps you measure the pieces and find flaws before they are packed.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-time-home",
+          "text": "Keep the time for your household",
+          "outcomes": [
+            {
+              "id": "keep-time-home-result",
+              "text": "Your relatives arrange other help. You use the time for repairs and errands at home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "education-apprenticeship",
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "background-delta-newcomers-opportunity",
+      "title": "A delivery for relatives",
+      "text": "Relatives from the Delta need help getting a delivery to a city buyer. They offer a payment for handling the sale, or you can use the visit to learn their delivery records.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "delta-newcomers"
+      },
+      "choices": [
+        {
+          "id": "handle-delivery",
+          "text": "Help complete the delivery for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "handle-delivery-result",
+              "text": "You meet the buyer, check the delivered goods and return the containers. Your relatives give you 30 drachmas.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "learn-records",
+          "text": "Help with the delivery records",
+          "outcomes": [
+            {
+              "id": "learn-records-result",
+              "text": "A relative explains the measures and marks used for the shipment. You practise checking the quantities.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "host-relatives",
+          "text": "Help host the visiting relatives",
+          "outcomes": [
+            {
+              "id": "host-relatives-result",
+              "text": "Someone else handles the delivery. You find sleeping space, collect food and spend the evening with the visitors.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "strabo-alexandria",
+        "augustan-alexandria-documents"
       ]
     },
     {
@@ -6228,7 +9024,7 @@
       "text": "A returning sailor can carry a message home. You can pay a writer to help or spend the day looking around the port.",
       "trigger": {
         "type": "age",
-        "at": 19
+        "at": 17
       },
       "evidence": "historically-inspired",
       "sourceIds": [
@@ -6236,9 +9032,8 @@
         "strabo-alexandria"
       ],
       "when": {
-        "type": "flag",
-        "flag": "sailed",
-        "value": true
+        "type": "job",
+        "job": "sailor"
       },
       "choices": [
         {
@@ -6300,16 +9095,15 @@
       "text": "A damaged page reaches the workshop. An experienced copyist offers to work through it with you, but other paid work is also available.",
       "trigger": {
         "type": "age",
-        "at": 19
+        "at": 17
       },
       "evidence": "historically-inspired",
       "sourceIds": [
         "education-apprenticeship"
       ],
       "when": {
-        "type": "flag",
-        "flag": "studied",
-        "value": true
+        "type": "job",
+        "job": "copyist"
       },
       "choices": [
         {
@@ -6366,16 +9160,37 @@
       "text": "A neighbor asks you to arrange a small job. You can help for free or agree on a payment.",
       "trigger": {
         "type": "age",
-        "at": 19
+        "at": 17
       },
       "evidence": "historically-inspired",
       "sourceIds": [
         "augustan-alexandria-documents"
       ],
       "when": {
-        "type": "flag",
-        "flag": "stayed",
-        "value": true
+        "type": "all",
+        "conditions": [
+          {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "sailor"
+            }
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "copyist"
+            }
+          }
+        ]
       },
       "choices": [
         {
@@ -6597,85 +9412,49 @@
     },
     {
       "id": "a-shared-household",
-      "title": "Thinking about marriage",
-      "text": "You consider looking for a partner. Open Your life to meet people, ask someone to court you or plan a wedding.",
+      "title": "Talk of marriage",
+      "text": "Friends mention people you might like to meet. You have room to start a relationship if you want one.",
       "trigger": {
         "type": "age",
         "at": 25
       },
-      "evidence": "historically-inspired",
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
       "sourceIds": [
         "alexandrian-marriage"
       ],
+      "evidence": "historically-inspired",
       "when": {
-        "type": "not",
-        "condition": {
-          "type": "relationship",
-          "status": "married"
-        }
-      },
-      "choices": [
-        {
-          "id": "share-life",
-          "text": "Make room in your life to meet people",
-          "outcomes": [
-            {
-              "id": "share-life-result",
-              "text": "You set aside time to meet people. You have not started a courtship yet.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "bonds",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": -1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "remain-independent",
-          "text": "Keep your independence for now",
-          "outcomes": [
-            {
-              "id": "remain-independent-result",
-              "text": "You decide against looking for a partner for now and focus on work and friends.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "knowledge",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": 2
-                }
-              ]
-            }
-          ]
-        }
-      ]
+        "type": "any",
+        "conditions": [
+          {
+            "type": "relationship",
+            "status": "single"
+          },
+          {
+            "type": "relationship",
+            "status": "divorced"
+          }
+        ]
+      }
     },
     {
       "id": "a-new-generation",
-      "title": "Thinking about a child",
-      "text": "You and your spouse discuss having a child. Open Your life to try to grow your household; this conversation does not create a child.",
+      "title": "Family plans",
+      "text": "You and your spouse talk about having a child and how you would share the care.",
       "trigger": {
         "type": "age",
         "at": 28
       },
-      "evidence": "historically-inspired",
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
       "sourceIds": [
         "alexandrian-wetnursing",
         "family-care"
       ],
+      "evidence": "historically-inspired",
       "when": {
         "type": "all",
         "conditions": [
@@ -6694,55 +9473,7 @@
             "value": 43
           }
         ]
-      },
-      "choices": [
-        {
-          "id": "share-parenting",
-          "text": "Talk through the work of care",
-          "outcomes": [
-            {
-              "id": "share-parenting-result",
-              "text": "You and your spouse discuss feeding, care and how to divide the work.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "bonds",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": -1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "ask-kin",
-          "text": "Keep your current household arrangements",
-          "outcomes": [
-            {
-              "id": "ask-kin-result",
-              "text": "You decide not to try for a child now and keep your current household plans.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "health",
-                  "delta": 1
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": 1
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "id": "a-younger-friend",
@@ -7028,6 +9759,39 @@
         "family-care",
         "education-apprenticeship"
       ],
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "job",
+            "job": "porter"
+          },
+          {
+            "type": "job",
+            "job": "potter"
+          },
+          {
+            "type": "job",
+            "job": "sailor"
+          },
+          {
+            "type": "job",
+            "job": "ceramic-decorator"
+          },
+          {
+            "type": "job",
+            "job": "wood-carver"
+          },
+          {
+            "type": "job",
+            "job": "sculptor"
+          },
+          {
+            "type": "job",
+            "job": "soldier"
+          }
+        ]
+      },
       "choices": [
         {
           "id": "work-with-experience",
@@ -7156,6 +9920,13 @@
       "sourceIds": [
         "family-care"
       ],
+      "when": {
+        "type": "not",
+        "condition": {
+          "type": "job",
+          "job": null
+        }
+      },
       "choices": [
         {
           "id": "take-rest",
@@ -7222,6 +9993,13 @@
       "sourceIds": [
         "family-care"
       ],
+      "when": {
+        "type": "not",
+        "condition": {
+          "type": "job",
+          "job": null
+        }
+      },
       "choices": [
         {
           "id": "step-back",
@@ -7658,83 +10436,41 @@
     {
       "id": "an-unwell-week",
       "title": "An unwell week",
-      "text": "You feel ill and have trouble finishing your work. You can ask someone to cover your tasks or do less until you recover.",
+      "text": "You are still recovering from an illness or injury. Everyday tasks take longer, and some work has to wait.",
       "trigger": {
         "type": "random",
         "weight": 1
       },
       "evidence": "fictional",
       "sourceIds": [],
-      "choices": [
-        {
-          "id": "accept-care",
-          "text": "Accept help and rest",
-          "outcomes": [
-            {
-              "id": "accept-care-result",
-              "text": "Someone covers your tasks while you rest. You miss some pay but start to recover.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "health",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": -2
-                },
-                {
-                  "type": "stat",
-                  "stat": "bonds",
-                  "delta": 2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "work-more-slowly",
-          "text": "Do what you can at a slower pace",
-          "outcomes": [
-            {
-              "id": "work-more-slowly-result",
-              "text": "You finish a few smaller tasks and leave the rest until you feel better.",
-              "weight": 1,
-              "effects": [
-                {
-                  "type": "stat",
-                  "stat": "health",
-                  "delta": -1
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": 1
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      "choices": [],
       "when": {
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 15
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 75
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 75
+            "type": "has-condition"
           }
         ]
       },
       "maxOccurrences": 2,
-      "cooldownYears": 18
+      "cooldownYears": 18,
+      "mode": "automatic",
+      "effects": []
     },
     {
       "id": "small-familiar-voices",
@@ -8134,8 +10870,8 @@
     },
     {
       "id": "youth-stronger-hands",
-      "title": "Heavier loads",
-      "text": "You can carry more than you could last year. People start asking you to help with heavier loads.",
+      "title": "More to do",
+      "text": "You take on a few more tasks this year. An experienced worker checks the parts you are still learning.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -8165,8 +10901,8 @@
     },
     {
       "id": "youth-learning-patience",
-      "title": "Trying again",
-      "text": "You get a task wrong several times. After someone shows you slowly, you manage to finish it.",
+      "title": "Practice at work",
+      "text": "A task takes several tries. Someone shows you where it went wrong, and you try again.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -8202,8 +10938,8 @@
     },
     {
       "id": "youth-evening-conversation",
-      "title": "Talk after work",
-      "text": "You listen while adults discuss prices and work. You ask about one detail and get a long explanation.",
+      "title": "Work and expenses",
+      "text": "People at home discuss work and the cost of supplies. You help check what needs doing tomorrow.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -8349,7 +11085,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -8387,7 +11123,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -8424,7 +11160,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -8455,7 +11191,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -8486,7 +11222,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -8517,7 +11253,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10338,7 +13074,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10369,7 +13105,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10400,7 +13136,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10437,7 +13173,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10468,7 +13204,7 @@
           {
             "type": "age",
             "op": "gte",
-            "value": 18
+            "value": 14
           },
           {
             "type": "age",
@@ -10961,10 +13697,9 @@
           "id": "buy-used-tool",
           "text": "Buy and repair it",
           "when": {
-            "type": "stat",
-            "stat": "wealth",
+            "type": "cash",
             "op": "gte",
-            "value": 2
+            "value": 20
           },
           "outcomes": [
             {
@@ -11522,7 +14257,7 @@
             },
             {
               "id": "dirty-water-illness",
-              "text": "You fall ill after using the water and miss several days of work.",
+              "text": "You develop dysentery after drinking the stored water. Diarrhoea and dehydration stop you working, and you need care.",
               "weight": 5,
               "effects": [
                 {
@@ -11534,6 +14269,10 @@
                   "type": "stat",
                   "stat": "wealth",
                   "delta": -2
+                },
+                {
+                  "type": "condition",
+                  "condition": "dysentery"
                 }
               ]
             },
@@ -11556,14 +14295,26 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 60
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 60
+            "type": "not",
+            "condition": {
+              "type": "has-condition",
+              "condition": "dysentery"
+            }
           }
         ]
       },
@@ -12697,6 +15448,205 @@
       "evidence": "historically-inspired",
       "mode": "automatic",
       "choices": []
+    },
+    {
+      "id": "medical-care-needed",
+      "title": "Care is needed",
+      "text": "An illness or injury is affecting your health. You and the people caring for you must decide what extra help to arrange.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "has-condition"
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 1,
+      "evidence": "fictional",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "rest-and-care",
+          "text": "Rest and ask for help",
+          "outcomes": [
+            {
+              "id": "rest-and-care-result",
+              "text": "The household makes time for rest and helps with water, food and everyday tasks. Recovery is not certain.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "care",
+                  "amount": 0.55
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "consult-healer",
+          "text": "Consult a healer for 10 drachmas",
+          "when": {
+            "type": "cash",
+            "op": "gte",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "consult-healer-result",
+              "text": "You arrange a healer's visit and set aside time for care. The visit does not guarantee recovery.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -10
+                },
+                {
+                  "type": "care",
+                  "amount": 0.9
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "carry-on",
+          "text": "Keep the usual routine",
+          "outcomes": [
+            {
+              "id": "carry-on-result",
+              "text": "The household keeps to its usual routine without arranging extra care. Your health suffers.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relationship-strain",
+      "title": "Time to talk",
+      "text": "You and your spouse argue over work, time and household responsibilities. You need to decide what to do.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "relationship",
+            "status": "married"
+          },
+          {
+            "type": "closeness",
+            "op": "lte",
+            "value": 35
+          }
+        ]
+      },
+      "maxOccurrences": 20,
+      "cooldownYears": 5,
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-marriage",
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "repair-relationship",
+          "text": "Listen and arrange a meal together",
+          "when": {
+            "type": "cash",
+            "op": "gte",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "repair-relationship-result",
+              "text": "You discuss what has been difficult and agree on a few changes at home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -10
+                },
+                {
+                  "type": "closeness",
+                  "target": "partner",
+                  "delta": 8
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "make-time-for-partner",
+          "text": "Set aside time to talk",
+          "outcomes": [
+            {
+              "id": "make-time-for-partner-result",
+              "text": "You put other tasks aside and talk through the household responsibilities together.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "closeness",
+                  "target": "partner",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "discuss-separation",
+          "text": "Agree to end the marriage",
+          "outcomes": [
+            {
+              "id": "discuss-separation-result",
+              "text": "You agree to separate and divide the household belongings. Your children and their other-parent records remain.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "divorce"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -5
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "endings": [
@@ -12743,9 +15693,17 @@
         "life-expectancy-egyptology",
         "funerary-rituals"
       ]
+    },
+    {
+      "id": "end-of-record",
+      "title": "Record complete",
+      "kind": "chapter",
+      "text": "The record stops at age 100. This is the end of the simulation record, not a recorded death.",
+      "evidence": "fictional",
+      "sourceIds": []
     }
   ],
-  "defaultEnding": "death-in-later-life",
+  "defaultEnding": "end-of-record",
   "sources": [
     {
       "id": "strabo-alexandria",
@@ -13046,6 +16004,42 @@
       "summary": "Introduces Ptolemaic coin circulation, drachma denominations, bronze and silver coinage, and debt settlement as part of the economy.",
       "limitations": "An overview of money and denominations, not an Alexandrian household budget or price series. It does not support the game's prices, wages, asset valuations, fixed returns or a constant currency standard across Roman rule; these remain disclosed gameplay assumptions.",
       "accessed": "2026-11-06"
+    },
+    {
+      "id": "oxford-lgpn-egypt",
+      "title": "LGPN-Egypt: personal names in Egypt",
+      "url": "https://lgpn.web.ox.ac.uk/search-lgpn-egypt-online",
+      "publisher": "University of Oxford, Lexicon of Greek Personal Names",
+      "kind": "scholarship",
+      "period": "Current completed coverage: Lower Egypt and the Fayum from the seventh century BCE to 30 BCE; the wider project extends into Roman Egypt",
+      "geography": "Egypt, with current database coverage focused on Lower Egypt and the Fayum",
+      "summary": "Introduces a source-based naming database that records personal names alongside attested occupations, dates, family connections and provenance. It supports a varied Greek-language and Egyptian-rendered naming context for fictional characters.",
+      "limitations": "The game does not reproduce database individuals or claim that every selected name is attested in Alexandria in 66 BCE. Names are not demographic weights, ethnic labels, gender rules or evidence that an occupation belonged to a particular community. Household profiles and event rewards remain authored fiction.",
+      "accessed": "2026-11-06"
+    },
+    {
+      "id": "diodorus-childhood-work",
+      "title": "Diodorus Siculus, Library of History 1.81.7: childhood learning and livelihood",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/1D%2A.html#81",
+      "publisher": "LacusCurtius, University of Chicago; C. H. Oldfather, Loeb translation (1933)",
+      "kind": "primary",
+      "period": "First-century BCE literary account of Egyptian customs",
+      "geography": "Egypt generally; not an Alexandrian household survey",
+      "summary": "Describes children learning livelihood skills from fathers and relatives, alongside limited and uneven access to literacy instruction.",
+      "limitations": "A generalizing literary account without numerical starting ages. It supports learning and work overlapping in childhood, not the game's exact age gates, wage amounts, universal schooling or an identical experience across households.",
+      "accessed": "2026-11-07"
+    },
+    {
+      "id": "alexandrian-minor-apprentice",
+      "title": "BGU 4.1124: cancellation of a nailsmith's apprenticeship",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1124.pdf",
+      "publisher": "University of Cincinnati, Ancient Alexandria documentary translations",
+      "kind": "primary",
+      "period": "After June/July 18 BCE, under early Roman rule",
+      "geography": "Alexandria",
+      "summary": "Records Hermaiskos, a son not yet of age, being trained in nailsmithing; cancelling the agreement permits his father to place him with another master.",
+      "limitations": "The apprentice's numerical age is unstated. The document postdates the cohort's Ptolemaic childhood and does not establish age 12 as a norm, free access to an apprenticeship or the game's pay and skill gains.",
+      "accessed": "2026-11-07"
     }
   ],
   "economy": {
@@ -13064,7 +16058,7 @@
       {
         "id": "tool-chest",
         "title": "Tool chest",
-        "description": "A small set of tools you own. Buying this asset does not replace a skill or job requirement. Its resale value is fixed for this POC.",
+        "description": "Unlocks small repair jobs at Craft 15. Sell for 30 drachmas.",
         "value": 30,
         "maxOwned": 1,
         "yearlyIncome": 0
@@ -13072,11 +16066,213 @@
       {
         "id": "workshop-share",
         "title": "Workshop share",
-        "description": "A small share in a working workshop. It pays 10 drachmas per survived year while you own it. Both the value and return are authored game rules, not historical investment data.",
+        "description": "Earn 10 drachmas each year you survive. Sell for 120 drachmas.",
         "value": 120,
         "maxOwned": 1,
         "yearlyIncome": 10
       }
+    ],
+    "autoDebtRepayment": true
+  },
+  "health": {
+    "description": "Deaths in new lives follow an active named illness, injury or prolonged physical decline, or an explicitly dangerous choice. There is no separate age-band death roll. Condition onset, recovery, Health loss and care effects are authored gameplay values, not measured Ptolemaic disease rates or clinical advice. Annual steps organize playable episodes; they do not claim that an acute infection went untreated for a full year. Historical comparison mortality bands remain recorded separately.",
+    "sourceIds": [
+      "family-care",
+      "alexandrian-wetnursing",
+      "roman-model-life-table",
+      "demography-evidence-limits"
+    ],
+    "stat": "health",
+    "criticalHealth": 20,
+    "declineCondition": "physical-decline",
+    "careDecision": "medical-care-needed",
+    "supportRecoveryBonus": 0.15,
+    "incidenceBands": [
+      {
+        "minAge": 0,
+        "maxAge": 4,
+        "annualProbability": 0.01
+      },
+      {
+        "minAge": 5,
+        "maxAge": 14,
+        "annualProbability": 0.008
+      },
+      {
+        "minAge": 15,
+        "maxAge": 44,
+        "annualProbability": 0.02
+      },
+      {
+        "minAge": 45,
+        "maxAge": 64,
+        "annualProbability": 0.035
+      },
+      {
+        "minAge": 65,
+        "maxAge": 79,
+        "annualProbability": 0.05
+      },
+      {
+        "minAge": 80,
+        "maxAge": 99,
+        "annualProbability": 0.06
+      }
+    ],
+    "declineBands": [
+      {
+        "minAge": 0,
+        "maxAge": 44,
+        "healthLoss": 0
+      },
+      {
+        "minAge": 45,
+        "maxAge": 64,
+        "healthLoss": 1
+      },
+      {
+        "minAge": 65,
+        "maxAge": 79,
+        "healthLoss": 2
+      },
+      {
+        "minAge": 80,
+        "maxAge": 94,
+        "healthLoss": 3
+      },
+      {
+        "minAge": 95,
+        "maxAge": 99,
+        "healthLoss": 5
+      }
+    ],
+    "conditions": [
+      {
+        "id": "pneumonia",
+        "title": "Pneumonia",
+        "deathCause": "early-illness",
+        "kind": "illness",
+        "weight": 3,
+        "healthLoss": 8,
+        "recoveryChance": 0.35,
+        "careRecoveryBonus": 0.4,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "malaria",
+        "title": "Malaria",
+        "deathCause": "severe-fever",
+        "kind": "illness",
+        "weight": 2,
+        "healthLoss": 6,
+        "recoveryChance": 0.4,
+        "careRecoveryBonus": 0.35,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "dysentery",
+        "title": "Dysentery",
+        "deathCause": "abdominal-illness",
+        "kind": "illness",
+        "weight": 2,
+        "healthLoss": 10,
+        "recoveryChance": 0.35,
+        "careRecoveryBonus": 0.4,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "tuberculosis",
+        "title": "Tuberculosis",
+        "deathCause": "breathing-illness",
+        "kind": "illness",
+        "weight": 1,
+        "when": {
+          "type": "age",
+          "op": "gte",
+          "value": 15
+        },
+        "healthLoss": 7,
+        "recoveryChance": 0.1,
+        "careRecoveryBonus": 0.2,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "infected-wound",
+        "title": "An infected wound",
+        "deathCause": "sudden-illness",
+        "kind": "illness",
+        "weight": 1,
+        "when": {
+          "type": "age",
+          "op": "gte",
+          "value": 12
+        },
+        "healthLoss": 12,
+        "recoveryChance": 0.25,
+        "careRecoveryBonus": 0.4,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "open-leg-fracture",
+        "title": "An open tibial fracture",
+        "deathCause": "fracture-sepsis",
+        "kind": "injury",
+        "weight": 0,
+        "healthLoss": 12,
+        "recoveryChance": 0.25,
+        "careRecoveryBonus": 0.35,
+        "fatalHealthThreshold": 5
+      },
+      {
+        "id": "physical-decline",
+        "title": "Prolonged physical decline",
+        "deathCause": "physical-decline-failure",
+        "kind": "frailty",
+        "weight": 0,
+        "healthLoss": 5,
+        "recoveryChance": 0,
+        "careRecoveryBonus": 0,
+        "fatalHealthThreshold": 0
+      }
     ]
+  },
+  "relationships": {
+    "description": "Each introduced partner and born child has an individual closeness score. Contact can improve it, conflict can reduce it and prolonged neglect slowly erodes it. Close household members can help with recovery. These values and their effects are authored gameplay, not historical relationship measurements.",
+    "initialCloseness": 50,
+    "childCloseness": 65,
+    "decayAfterYears": 3,
+    "yearlyDecay": 2,
+    "marriageMinimum": 40,
+    "supportThreshold": 60,
+    "maxHealthSupport": 1
+  },
+  "knowledge": {
+    "stat": "knowledge",
+    "minAge": 12,
+    "idleGraceYears": 2,
+    "idleLoss": 1,
+    "ageBands": [
+      {
+        "minAge": 0,
+        "maxAge": 49,
+        "loss": 0
+      },
+      {
+        "minAge": 50,
+        "maxAge": 64,
+        "loss": 0.5
+      },
+      {
+        "minAge": 65,
+        "maxAge": 79,
+        "loss": 1
+      },
+      {
+        "minAge": 80,
+        "maxAge": 99,
+        "loss": 1.5
+      }
+    ],
+    "description": "Knowledge needs continued use. From age 12, two full years without a recorded learning gain lead to a loss of 1 point per year. Lessons, research, work and events with positive Knowledge effects refresh practice, including at the stat cap. Ageing also reduces Knowledge by 0.5 per year from 50, 1 from 65 and 1.5 from 80. These are authored game rules, not measured cognitive ageing rates. Skill proficiencies are separate."
   }
 }

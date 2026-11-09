@@ -14,6 +14,8 @@ export type Condition =
   | { type: "relationship"; status: RelationshipStatus; partner?: string }
   | { type: "known-partner"; partner: string }
   | { type: "children"; op: Comparison; value: number }
+  | { type: "has-condition"; condition?: string }
+  | { type: "closeness"; partner?: string; op: Comparison; value: number }
   | { type: "all" | "any"; conditions: Condition[] }
   | { type: "not"; condition: Condition };
 
@@ -26,8 +28,13 @@ export type Effect =
   | { type: "job"; job: string | null }
   | { type: "relationship"; partner: string; status: "courting" | "married" }
   | { type: "introduce"; partner: string }
+  | { type: "end-courtship" }
   | { type: "divorce" }
   | { type: "child" }
+  | { type: "condition"; condition: string }
+  | { type: "care"; amount: number }
+  | { type: "closeness"; target: "partner"; partner?: string; delta: number }
+  | { type: "closeness"; target: "children"; delta: number }
   | { type: "end"; ending: string; deathCause?: string };
 
 /** Inclusive whole-number bounds for a randomized starting attribute. */
@@ -151,6 +158,53 @@ export interface MortalityModel {
   bands: MortalityBand[];
 }
 
+/** Optional causal-health rules; all rates and recovery effects are authored. */
+export interface HealthConditionDefinition {
+  id: string;
+  title: string;
+  deathCause: string;
+  kind: "illness" | "injury" | "frailty";
+  weight: number;
+  when?: Condition;
+  healthLoss: number;
+  recoveryChance: number;
+  careRecoveryBonus: number;
+  fatalHealthThreshold: number;
+}
+export interface HealthDefinition {
+  description: string;
+  sourceIds: string[];
+  stat: string;
+  criticalHealth: number;
+  declineCondition: string;
+  careDecision: string;
+  incidenceBands: { minAge: number; maxAge: number; annualProbability: number }[];
+  declineBands: { minAge: number; maxAge: number; healthLoss: number }[];
+  supportRecoveryBonus: number;
+  conditions: HealthConditionDefinition[];
+}
+export interface ActiveHealthCondition {
+  id: string;
+  sinceAge: number;
+  lastProgressAge: number;
+  care: number;
+  source?: string;
+}
+export interface HealthState { conditions: ActiveHealthCondition[]; needsCareDecision: boolean; lastCareAge?: number }
+
+export interface RelationshipDefinition {
+  description: string;
+  initialCloseness: number;
+  childCloseness: number;
+  decayAfterYears: number;
+  yearlyDecay: number;
+  marriageMinimum: number;
+  supportThreshold: number;
+  maxHealthSupport: number;
+}
+export interface RelationshipTie { closeness: number; lastContactAge: number }
+export interface RelationshipState { partners: Record<string, RelationshipTie>; children: Record<string, RelationshipTie> }
+
 export type RelationshipStatus = "single" | "courting" | "married" | "divorced";
 
 export interface JobDefinition {
@@ -175,6 +229,8 @@ export interface CharacterActivity extends Choice {
   category: "training" | "career" | "relationship" | "family" | "finance";
   minAge?: number;
   cooldownYears?: number;
+  /** Minor actions can retain their own cooldown without spending the annual activity. */
+  usesYearlyActivity?: boolean;
 }
 
 export interface ActivityAvailability extends CharacterActivity {
@@ -199,6 +255,8 @@ export interface CharacterDefinition {
   playerNames?: string[];
   /** People must be introduced before courtship or marriage when enabled. */
   requireIntroductions?: boolean;
+  /** Require an explicit breakup before courting another person. Older packs keep their rules. */
+  exclusiveCourtship?: boolean;
   skills: Record<string, SkillDefinition>;
   jobs: JobDefinition[];
   partners: PartnerDefinition[];
@@ -218,6 +276,7 @@ export interface CharacterState {
   children: { id: string; name: string; birthAge: number; otherParentId: string }[];
   lastActivityAge: number | null;
   lastActivityAges: Record<string, number>;
+  relationships?: RelationshipState;
 }
 
 export interface EconomyDefinition {
@@ -226,6 +285,8 @@ export interface EconomyDefinition {
   unitsPerPoint: number;
   description: string;
   sourceIds?: string[];
+  /** Settle outstanding debt from remaining cash after regular yearly costs. */
+  autoDebtRepayment?: boolean;
   assets: { id: string; title: string; description: string; value: number; maxOwned: number; yearlyIncome?: number }[];
 }
 
@@ -234,6 +295,17 @@ export interface EconomyState {
   debt: number;
   assets: Record<string, number>;
 }
+
+/** Optional, authored retention and age-related Knowledge loss. */
+export interface KnowledgeDefinition {
+  stat: string;
+  minAge: number;
+  idleGraceYears: number;
+  idleLoss: number;
+  ageBands: { minAge: number; maxAge: number; loss: number }[];
+  description: string;
+}
+export interface KnowledgeState { lastPracticeAge: number | null }
 
 export interface WorldPack {
   schemaVersion: 1;
@@ -252,8 +324,11 @@ export interface WorldPack {
   /** Separate annual background stories from decisions with a seeded global gap. */
   eventPacing?: { minChoiceGapYears: number; maxChoiceGapYears: number };
   mortality?: MortalityModel;
+  health?: HealthDefinition;
+  relationships?: RelationshipDefinition;
   character?: CharacterDefinition;
   economy?: EconomyDefinition;
+  knowledge?: KnowledgeDefinition;
   sources?: HistoricalSource[];
   events: LifeEvent[];
   endings: Ending[];
@@ -295,6 +370,9 @@ export interface LifeState {
   deathCauseId?: string;
   /** The accepted decision and outcome when they explicitly end life with an authored cause. */
   deathCauseContext?: string;
+  deathCauseKind?: "choice" | "condition";
+  health?: HealthState;
+  knowledge?: KnowledgeState;
   journal: JournalEntry[];
   commands: Command[];
 }

@@ -1,0 +1,26 @@
+import { useEffect, useRef } from "react";
+import { formatYear } from "../src/calendar.ts";
+import type { LifeState, WorldPack } from "../src/types.ts";
+import "./pause-screen.css";
+
+export default function PauseScreen({ life, world, onContinue, onReborn }: {
+  life: LifeState;
+  world: WorldPack;
+  onContinue(): void;
+  onReborn(): void;
+}) {
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { heading.current?.focus({ preventScroll: true }); }, []);
+  return <main className="pause-screen" aria-labelledby="pause-screen-title">
+    <header className="pause-brand">Historical Lives<span>{world.title}</span></header>
+    <section className="pause-card">
+      <div className="pause-art"><img src="/assets/alexandria-harbor.webp" alt="Illustrated harbor of Alexandria" /></div>
+      <div className="pause-content">
+        <h1 ref={heading} id="pause-screen-title" tabIndex={-1}>Game paused</h1>
+        <div className="pause-life"><strong>{life.character?.name ?? "Your character"}</strong><span>Age {life.age} · {formatYear(life.year)}</span></div>
+        <p>Continue where you left off, or begin a new life.</p>
+        <div className="pause-actions"><button className="pause-continue" type="button" onClick={onContinue}>Continue <span aria-hidden="true">→</span></button><button className="pause-reborn" type="button" onClick={onReborn}>Be reborn</button></div>
+      </div>
+    </section>
+  </main>;
+}

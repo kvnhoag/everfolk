@@ -102,7 +102,11 @@
 .skill-career summary::-webkit-details-marker{display:none}.skill-career summary>span+span{font-size:8px;color:#9a8969;text-align:right;flex-shrink:0}
 .skill-career summary:hover{background:#eeefe1}.skill-career>p{font-size:10px;line-height:1.8;color:#7b816b;margin:0;padding:0 9px 9px}
 .skill-career>.skill-requirement-list{padding:0 9px 10px}
-.skill-career>p.skill-career-action{padding:9px;border-top:1px solid #dedfcd;background:#f0eee1}.skill-career-action>strong,.skill-career-action>span{display:block}.skill-career-action>strong{font-size:10px;font-weight:600;color:#647954;margin-bottom:4px}.skill-career-action>span{font-size:10px;color:#8c7c60}
+.skill-work-action{min-width:0;margin-top:10px;background:#edf0e1;border:1px solid #d1dbc1;border-radius:4px;padding:11px}
+.skill-work-action.unavailable{background:#f0eee1;border-color:#ded9c5}
+.skill-work-requirements{font-size:9px;line-height:1.7;color:#827d65;margin:0 0 8px;overflow-wrap:anywhere}
+.skill-work-action>.choice-impact{font-size:10px;line-height:1.6;margin:0 0 9px}
+.skill-career>.skill-work-action{margin:0;padding:10px 9px;border:0;border-top:1px solid #dedfcd;border-radius:0}
 .skill-other-practice{margin-top:20px;border:1px solid #d1d5bf;border-radius:4px;background:#f7f3e7;padding:0 14px}
 .skill-other-practice>summary{font-size:11px;color:#647855;cursor:pointer;padding:12px 0}.skill-other-practice>summary>span{font-size:10px;color:#9a8d72;margin-left:8px}
 .skill-other-practice>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 0 14px}.skill-other-practice .skill-practice{margin:0}

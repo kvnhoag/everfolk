@@ -45,6 +45,12 @@ const visual = (scene: SceneId, motion = DEFAULT_MOTIONS[scene]): EventVisual =>
 
 /** Authored event IDs, not text matching, connect the shipped stories to their art. */
 export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
+  // Background scenes at four and nine keep children at home or learning safely.
+  ...["background-merchant-household-childhood", "background-artisan-household-childhood", "background-harbor-household-childhood", "background-fishing-household-childhood", "background-bakery-household-childhood", "background-clerk-household-childhood", "background-weaver-household-childhood", "background-delta-newcomers-childhood"].map(id => [id, visual("childhood", "play")]),
+  ...["background-artisan-household-practice", "background-harbor-household-practice", "background-fishing-household-practice", "background-bakery-household-practice", "background-weaver-household-practice", "background-delta-newcomers-practice"].map(id => [id, visual("childhood", "work")]),
+  ...["background-merchant-household-practice", "background-clerk-household-practice"].map(id => [id, visual("learning", "write")]),
+  // A family contact's offer does not imply the player has a spouse or children.
+  ...["background-merchant-household-opportunity", "background-artisan-household-opportunity", "background-harbor-household-opportunity", "background-fishing-household-opportunity", "background-bakery-household-opportunity", "background-clerk-household-opportunity", "background-weaver-household-opportunity", "background-delta-newcomers-opportunity"].map(id => [id, visual("history-city", "gather")]),
   ...["meet-demetria", "meet-thais", "meet-berenike", "meet-tyche"].map(id => [id, visual("history-city", "gather")]),
   ...["specialist-kiln-load", "specialist-carved-repair", "specialist-sculpture-detail"].map(id => [id, visual("work")]),
   ...["specialist-philosophy-objection", "specialist-sky-record", "specialist-conflicting-charts", "specialist-dendera-chart"].map(id => [id, visual("learning")]),
@@ -66,9 +72,9 @@ export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
   ...["child-useful-hands", "child-watching-work"].map(id => [id, visual("childhood", "work")]),
   ...["letters-across-the-water", "path-a-port-remembered"].map(id => [id, visual("sea")]),
   // Household possibilities are shown as company in the city until a child is actually present.
-  ...["room-for-one-more", "a-shared-household", "a-younger-friend", "youth-evening-conversation", "youth-changing-friendships", "adult-shared-meal", "middle-household-rearranged", "middle-an-old-acquaintance", "family-shared-routines", "adult-an-invitation"].map(id => [id, visual("history-city", "gather")]),
+  ...["room-for-one-more", "a-shared-household", "a-younger-friend", "youth-evening-conversation", "youth-changing-friendships", "adult-shared-meal", "middle-household-rearranged", "middle-an-old-acquaintance", "family-shared-routines", "adult-an-invitation", "relationship-strain"].map(id => [id, visual("history-city", "gather")]),
   ...["a-new-generation", "care-between-generations", "family-a-child-growing"].map(id => [id, visual("family")]),
-  ...["the-cost-of-rest", "an-unwell-week", "middle-a-slower-morning", "a-quiet-room"].map(id => [id, visual("rest")]),
+  ...["the-cost-of-rest", "an-unwell-week", "middle-a-slower-morning", "a-quiet-room", "medical-care-needed"].map(id => [id, visual("rest")]),
   ...["the-weight-of-years", "stepping-back", "putting-things-in-order", "what-you-will-keep", "the-people-who-return", "the-small-pleasures", "names-remembered", "a-later-season", "an-extraordinary-age", "middle-a-younger-voice", "middle-the-long-view", "later-company-at-the-door", "later-familiar-things", "later-a-helpful-hand", "later-news-from-outside", "later-an-old-story", "later-the-light-changes", "later-a-question-of-energy", "later-a-memory-to-share", "later-a-small-outing", "later-the-useful-belonging"].map(id => [id, visual("later-life")]),
 ]);
 
@@ -85,6 +91,7 @@ function factsVisual(effects: readonly Effect[]): EventVisual | undefined {
 }
 
 function effectsVisual(effects: readonly Effect[]): EventVisual | undefined {
+  if (effects.some(effect => effect.type === "care" || effect.type === "condition")) return visual("rest");
   const fact = factsVisual(effects);
   if (fact) return fact;
   if (effects.some(effect => effect.type === "stat" && effect.stat === "health" && effect.delta < 0)) return visual("rest");
@@ -96,6 +103,7 @@ function effectsVisual(effects: readonly Effect[]): EventVisual | undefined {
 
 /** Default used by the editor before a life exists; explicit sidecars override it. */
 export function defaultEventVisual(event: LifeEvent): EventVisual {
+  if (event.id === "medical-care-needed") return visual("rest");
   const authored = ALEXANDRIA_EVENT_VISUALS[event.id];
   if (authored) return { ...authored };
   if (event.trigger.type === "year" && event.evidence === "documented-history") return visual("history-city");
@@ -107,7 +115,7 @@ export function defaultEventVisual(event: LifeEvent): EventVisual {
   return effectsVisual(outcomes.flatMap(outcome => outcome.effects)) ?? visual("history-city");
 }
 
-export type SceneKind = "pending" | "outcome" | "event" | "history" | "birth" | "ending" | "fallback";
+export type SceneKind = "pending" | "outcome" | "event" | "history" | "birth" | "ending" | "record" | "fallback";
 export interface SceneContext extends EventVisual {
   id: string;
   key: string;
@@ -120,18 +128,29 @@ export interface SceneContext extends EventVisual {
   sourceIds?: string[];
 }
 
+/** Keep automatic events separate from decisions the player can make. */
+export function sceneContextLabel(context: Pick<SceneContext, "kind" | "eventId">): string {
+  if (context.eventId === "the-first-household") return "Birth";
+  const labels: Record<SceneKind, string> = {
+    pending: "Decision", outcome: "Outcome", event: "Life event",
+    history: "World event", birth: "Background", ending: "Cause of death", record: "Record complete", fallback: "Daily life",
+  };
+  return labels[context.kind];
+}
+
 function ageVisual(life: LifeState): EventVisual {
   if (life.age === 0) return visual("birth");
   if (life.age < 12) return visual("childhood");
-  if (life.age < 18) return visual("learning");
   if (life.age >= 60 || life.flags.retired) return visual("later-life");
   if (life.character) {
     if (life.character.jobId === "sailor") return visual("sea");
     if (["clerk", "copyist", "philosophy-tutor", "sky-table-calculator", "astrologer"].includes(life.character.jobId ?? "")) return visual("learning");
     if (["soldier", "officer", "general", "court-adviser"].includes(life.character.jobId ?? "")) return visual("history-city");
     if (life.character.jobId) return visual("work");
+    if (life.age < 18) return visual("learning");
     return life.character.children.length ? visual("family") : visual("history-city");
   }
+  if (life.age < 18) return visual("learning");
   if (life.flags.sailed) return visual("sea");
   if (life.flags.studied) return visual("learning");
   if (life.flags.parent) return visual("family");
@@ -140,7 +159,7 @@ function ageVisual(life: LifeState): EventVisual {
 
 function outcomeVisual(event: LifeEvent, outcome: Outcome, life: LifeState): EventVisual {
   // Illness remains a care scene even after accepting help improves health.
-  if (event.id === "an-unwell-week" || event.id === "the-cost-of-rest") return visual("rest");
+  if (event.id === "an-unwell-week" || event.id === "the-cost-of-rest" || event.id === "medical-care-needed") return visual("rest");
   if (event.id === "a-shared-household" && !life.flags.partnered) return visual("history-city", "reflect");
   if (event.id === "the-first-letters" && outcome.effects.some(effect => effect.type === "flag" && effect.flag === "apprenticed" && effect.value)) return visual("childhood", "work");
   const selected = factsVisual(outcome.effects);
@@ -180,6 +199,7 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
   if (life.phase === "ended") {
     const ending = world.endings.find(item => item.id === life.endingId);
     const cause = world.character?.deathCauses.find(item => item.id === life.deathCauseId);
+    if (ending?.kind === "chapter") return [makeContext(`record-${life.age}-${life.endingId}`, "record", visual("history-city", "still"), ending.title, ending.text)];
     return [makeContext(`ending-${life.age}-${life.endingId}`, "ending", visual("memorial"), cause?.title ?? ending?.title ?? "A life remembered.", cause?.text ?? ending?.text ?? sceneDefinitions.memorial.caption)];
   }
   const result: SceneContext[] = [];
@@ -207,6 +227,7 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
       if (activity) {
         const outcome = activity.outcomes.find(item => item.id === entry.id);
         const activityScenes: EventVisuals = {
+          "rest-for-recovery": visual("rest"), "seek-a-healer": visual("rest"), "ask-household-care": visual("rest"),
           "take-a-rest-day": visual("rest"), "take-an-easy-walk": visual("history-city", "reflect"),
           "visit-a-friend": visual("history-city", "gather"), "take-market-errands": visual("work"),
           "mend-household-sandals": visual("work"), "help-count-stock": visual("learning"),
@@ -234,7 +255,14 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
     }
     if (entry.type === "event") {
       const event = events.get(entry.id);
-      if (event?.mode === "automatic") automatic.push(makeContext(`event-${life.age}-${index}-${event.id}`, event.trigger.type === "year" ? "history" : "event", eventVisuals[event.id] ?? defaultEventVisual(event), event.title, event.text, event));
+      if (event?.mode === "automatic") {
+        // A family reminder describes a possibility, not an accepted marriage
+        // or birth. Keep its artwork consistent with actual relationships.
+        let assignment = defaultEventVisual(event);
+        if (event.id === "a-shared-household" && !life.flags.partnered) assignment = visual("history-city", "reflect");
+        if (event.id === "a-new-generation" && !life.flags.parent) assignment = visual("history-city", "gather");
+        automatic.push(makeContext(`event-${life.age}-${index}-${event.id}`, event.trigger.type === "year" ? "history" : "event", eventVisuals[event.id] ?? assignment, event.title, event.text, event));
+      }
     }
   }
   result.push(...outcomes.reverse(), ...automatic.reverse());

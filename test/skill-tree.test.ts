@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import type { CharacterActivity, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacy from "../worlds/alexandria-0.4.0.json" with { type: "json" };
-import { buildSkillTree, guaranteedSkillRequirements, layoutSkillTree, practiceBlockReason, trainingSkillChanges } from "../client/skill-tree.ts";
+import { buildSkillTree, guaranteedSkillRequirements, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "../client/skill-tree.ts";
 
 const main = pack as WorldPack;
 function adult(world = main): { engine: ReturnType<typeof createEngine>; life: LifeState } {
@@ -56,6 +56,7 @@ test("locked, ready, learning and mastered describe progression, independently o
   life.phase = "ready";
   life.pendingEventId = null;
   life.stats.wealth = 0;
+  life.economy = { ...life.economy!, cash: 0 };
   assert.equal(read().nodes.find(node => node.id === "craft")!.state, "ready");
   assert.equal(read().nodes.find(node => node.id === "craft")!.canPractice, false);
 });
@@ -149,4 +150,87 @@ test("building, laying out and previewing are read-only and preserve the RNG and
   assert.deepEqual(changes.find(change => change.id === "literacy"), { id: "literacy", label: "Literacy", min: 1, max: 1 });
   assert.equal(practiceBlockReason(practice, life), undefined);
   assert.equal(JSON.stringify({ life, world: main, activities }), before);
+});
+
+test("a skill lists occupations that develop it as well as those requiring it", () => {
+  const { engine, life } = adult();
+  const model = buildSkillTree(main, life, engine.getActivities(life));
+  const pottery = model.nodes.find(node => node.id === "pottery")!;
+  const potter = pottery.careers.find(career => career.job.id === "potter")!;
+  assert.ok(potter, "A pottery interest must show the ordinary potter occupation.");
+  assert.deepEqual(potter.requirements.map(requirement => [requirement.id, requirement.required]), [["craft", 15]], "A display connection does not invent a new job requirement.");
+  assert.ok(pottery.careers.some(career => career.job.id === "ceramic-decorator"));
+  assert.ok(model.nodes.find(node => node.id === "craft")!.careers.some(career => career.job.id === "apprentice"));
+  assert.equal(life.character!.jobId, null, "Opening career options never starts an occupation.");
+});
+
+function paidWorkFixture(): WorldPack {
+  const world = tinyWorld();
+  const paid = (id: string, effects: CharacterActivity["outcomes"][number]["effects"], when?: CharacterActivity["when"]): CharacterActivity => ({
+    id, text: id, category: "career", minAge: 6, cooldownYears: 3, ...(when ? { when } : {}),
+    outcomes: [{ id: `${id}-done`, text: "A task is completed.", weight: 1, effects }],
+  });
+  world.character!.activities.push(
+    paid("craft-commission", [{ type: "stat", stat: "wealth", delta: 2 }], { type: "skill", skill: "craft", op: "gte", value: 10 }),
+    paid("sculpture-commission", [{ type: "stat", stat: "wealth", delta: 2 }, { type: "skill", skill: "sculpture", delta: 2 }]),
+    paid("unpaid-craft", [{ type: "stat", stat: "wealth", delta: -1 }, { type: "skill", skill: "craft", delta: 2 }]),
+    paid("occupation-with-payment", [{ type: "stat", stat: "wealth", delta: 2 }, { type: "skill", skill: "pottery", delta: 1 }, { type: "job", job: "sculptor" }]),
+    paid("unrelated-income", [{ type: "stat", stat: "wealth", delta: 2 }]),
+    paid("alternative-skills", [{ type: "stat", stat: "wealth", delta: 2 }], { type: "any", conditions: [
+      { type: "skill", skill: "craft", op: "gte", value: 10 }, { type: "skill", skill: "pottery", op: "gte", value: 10 },
+    ] }),
+    paid("no-income-after-death", [{ type: "skill", skill: "craft", delta: 2 }, { type: "end", ending: "death" }, { type: "stat", stat: "wealth", delta: 2 }]),
+  );
+  return world;
+}
+
+test("paid skill work is connected by genuine skill use and excludes occupation changes and unrelated income", () => {
+  const world = paidWorkFixture(), { engine, life } = adult(world);
+  const activities = engine.getActivities(life);
+  const before = JSON.stringify({ world, life, activities });
+  const model = buildSkillTree(world, life, activities);
+  assert.deepEqual(model.nodes.find(node => node.id === "craft")!.paidWork.map(activity => activity.id), ["craft-commission"]);
+  assert.deepEqual(model.nodes.find(node => node.id === "sculpture")!.paidWork.map(activity => activity.id), ["sculpture-commission"]);
+  assert.deepEqual(model.nodes.find(node => node.id === "pottery")!.paidWork, []);
+  const allWork = model.nodes.flatMap(node => node.paidWork);
+  for (const id of ["unpaid-craft", "occupation-with-payment", "unrelated-income", "alternative-skills", "no-income-after-death"]) assert.equal(allWork.some(activity => activity.id === id), false, id);
+  assert.equal(JSON.stringify({ world, life, activities }), before, "Projecting earning paths cannot consume RNG, accept work or alter a life.");
+});
+
+test("paid-work projections retain engine availability and the same annual, decision and cooldown guards", () => {
+  const world = paidWorkFixture(), engine = createEngine(world);
+  let life = engine.start("paid-work-availability");
+  while (life.age < 6) life = engine.advance(life);
+  const work = () => buildSkillTree(world, life, engine.getActivities(life)).nodes.find(node => node.id === "craft")!.paidWork[0];
+  assert.equal(work().available, false);
+  assert.match(practiceBlockReason(work(), life)!, /Craft.*10/);
+  life = engine.act(life, "train-craft");
+  assert.equal(work().available, false);
+  assert.match(practiceBlockReason(work(), life)!, /Action used/);
+  life = engine.advance(life);
+  const candidates = engine.getActivities(life), model = buildSkillTree(world, life, candidates);
+  assert.equal(model.nodes.find(node => node.id === "craft")!.paidWork[0], candidates.find(activity => activity.id === "craft-commission"), "The model retains the engine's exact activity and availability.");
+  assert.equal(practiceBlockReason(work(), { ...life, phase: "choice" }), "Make the pending choice first.");
+  assert.equal(practiceBlockReason(work(), { ...life, phase: "ended" }), "This life has ended.");
+  assert.equal(practiceBlockReason(work(), life), undefined);
+  life = engine.act(life, "craft-commission");
+  life = engine.advance(life);
+  assert.equal(work().available, false);
+  assert.match(practiceBlockReason(work(), life)!, /Available again at age 10/);
+});
+
+test("action notes explain shared material and era gates without presenting one alternative as mandatory", () => {
+  const activity: CharacterActivity = { id: "noted-work", text: "A paid task", category: "career", minAge: 14, cooldownYears: 2,
+    when: { type: "all", conditions: [
+      { type: "skill", skill: "pottery", op: "gte", value: 20 },
+      { type: "asset", asset: "tool-chest", op: "gte", value: 1 },
+      { type: "cash", op: "gte", value: 10 },
+      { type: "year", op: "gte", value: -29 },
+      { type: "any", conditions: [
+        { type: "skill", skill: "craft", op: "gte", value: 15 },
+        { type: "skill", skill: "carving", op: "gte", value: 15 },
+      ] },
+    ] }, outcomes: [{ id: "done", text: "Done.", weight: 1, effects: [] }] };
+  assert.deepEqual(skillActionRequirements(activity, main), ["Age 14+", "Pottery 20", "Own tool chest", "Cash at least 10 dr", "From 29 BCE", "Every 2 years"]);
+  assert.deepEqual(skillActionRequirements({ ...activity, when: { type: "year", op: "gte", value: 0 } }, main), ["Age 14+", "Every 2 years"], "A valid year comparison at the BCE/CE boundary must not render a nonexistent year zero.");
 });

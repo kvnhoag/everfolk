@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import peopleRelease from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 
 function settle(engine: LifeEngine, life: LifeState): LifeState {
@@ -31,7 +32,7 @@ test("Alexandria draws varied player names while leaving newborn relationships u
     assert.deepEqual(engine.load(engine.save(life)), life);
     names.add(name);
   }
-  assert.ok(names.size >= 12, "Repeated births should draw broadly from the authored 16-name pool.");
+  assert.ok(names.size >= 24, "Repeated births should draw broadly from the current authored name pool.");
 });
 
 test("recorded introductions reveal adults one at a time without creating a courtship", () => {
@@ -64,5 +65,5 @@ test("meeting scenes are fictional community encounters and retain the prior mor
   assert.ok(meetings.every(event => event.mode === "automatic" && event.choices.length === 0 && event.evidence === "fictional" && event.sourceIds.length === 0));
   assert.deepEqual(pack.mortality.bands, previous.mortality.bands);
   assert.deepEqual({ ...pack.stats, wealth: { ...pack.stats.wealth, label: previous.stats.wealth.label } }, previous.stats);
-  assert.deepEqual(pack.origins, previous.origins);
+  assert.deepEqual(peopleRelease.origins, previous.origins, "The original pooled-people release keeps its prior backgrounds.");
 });
