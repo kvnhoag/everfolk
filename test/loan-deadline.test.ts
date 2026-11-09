@@ -34,7 +34,7 @@ test("deadline warning begins one year before repayment and quotes the outstandi
   assert.equal(warning.urgency, "soon");
   assert.equal(warning.balance, 120, "ordinary debt is not quoted as the lender balance");
   assert.equal(warning.cash, 47);
-  assert.equal(warning.dueYear, "45 BCE");
+  assert.equal(warning.dueYear, "329 BCE");
   assert.equal(warning.dueAge, 21);
   assert.equal(getLoanSummary(engine.world, life)!.dueSoon, true);
   assert.deepEqual(life, before, "reading a reminder cannot pay, advance or draw randomness");
@@ -70,7 +70,7 @@ test("extension moves the warning to the actual new deadline and resets its iden
   life.age = 22;
   const revised = loanDeadlineWarning(engine.world, life)!;
   assert.notEqual(revised.key, original.key);
-  assert.equal(revised.dueYear, "43 BCE");
+  assert.equal(revised.dueYear, "327 BCE");
   assert.equal(revised.balance, 140);
   assert.equal(revised.threatened, false);
   const key = revised.key;
@@ -118,14 +118,14 @@ test("the real reminder dialog and persistent notice expose the due year and man
   assert.match(html, /manual repayment/);
   assert.match(html, /120 dr/);
   assert.match(html, /47 dr/);
-  assert.match(html, /45 BCE/);
+  assert.match(html, /329 BCE/);
   assert.match(html, /Manage loan/);
   assert.match(html, /Got it/);
   assert.equal(renderToStaticMarkup(createElement(LoanDeadlineDialog, { ...props, open: false })), "");
   const notice = renderToStaticMarkup(createElement(MoneylenderNotice, { life, world: engine.world, onManage() {} }));
   assert.match(notice, /role="status"/);
   assert.match(notice, /Repayment next year/);
-  assert.match(notice, /Deadline 45 BCE/);
+  assert.match(notice, /Deadline 329 BCE/);
   assert.equal(dismissed, 0);
   assert.equal(managed, 0);
   assert.deepEqual(life, before);

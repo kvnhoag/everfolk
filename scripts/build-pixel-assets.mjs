@@ -90,12 +90,13 @@ function boat(s, x, y, size = 1, sailColor = P.cream) {
   s.line(x + 9 * size, y - 14 * size, x + 17 * size, y, P.stone);
 }
 function sea(s, y = 27) { s.rect(0, y, 64, 48 - y, P.sea); s.rect(0, y, 64, 2, P.teal); for (let yy = y + 5; yy < 48; yy += 5) for (let x = (yy % 3) * 4; x < 64; x += 18) s.rect(x, yy, 8, 1, yy % 2 ? P.teal : P.mist); }
-function lighthouse(s, x, y) { s.rect(x, y + 10, 7, 16, P.pale); s.rect(x + 1, y + 3, 5, 10, P.cream); s.rect(x + 2, y, 3, 5, P.sand); s.rect(x - 1, y + 10, 9, 2, P.stone); s.rect(x + 2, y + 6, 2, 3, P.navy); s.rect(x + 2, y + 19, 2, 4, P.navy); s.put(x + 3, y - 1, P.gold); }
+// Shared coastal art must also fit the years before the Pharos was built.
+function coastalStorehouses(s, x, y) { s.rect(x, y + 2, 10, 6, P.pale); s.rect(x - 1, y, 12, 2, P.cream); s.rect(x + 4, y + 4, 2, 4, P.brown); s.rect(x + 11, y + 4, 8, 4, P.sand); s.rect(x + 10, y + 2, 10, 2, P.cream); }
 function harbor() {
   const s = surface(); clouds(s, true); sea(s, 26);
   s.rect(0, 21, 23, 8, P.stone); s.rect(4, 17, 12, 5, P.pale); s.rect(2, 20, 18, 2, P.cream);
   for (const x of [3, 9, 15]) { s.rect(x, 23, 3, 6, P.cream); s.rect(x + 1, 24, 1, 4, P.navy); }
-  lighthouse(s, 49, 2); s.rect(43, 27, 20, 2, P.stone); boat(s, 24, 32); boat(s, 2, 35);
+  coastalStorehouses(s, 43, 19); s.rect(43, 27, 20, 2, P.stone); boat(s, 24, 32); boat(s, 2, 35);
   s.rect(0, 42, 64, 6, P.pale); s.rect(0, 42, 64, 1, P.cream); s.rect(0, 46, 64, 1, P.stone);
   for (const x of [12, 28, 44, 59]) s.rect(x, 43, 1, 3, P.sand);
   s.rect(0, 39, 14, 3, P.sand); person(s, 9, 43, { child: true, tunic: P.navy }); palm(s, 59, 38); pot(s, 18, 38);
@@ -111,7 +112,7 @@ function makeScene(id) {
     s.line(30, 27, 35, 29, P.skin); person(s, 12, 43, { seated: true, tunic: P.clay }); person(s, 43, 43, { seated: true, tunic: P.olive, facing: -1 }); plant(s, 57, 37); s.rect(17, 42, 2, 3, P.wood); return s;
   }
   if (["sea", "history-war", "history-city"].includes(id)) {
-    clouds(s, id === "history-city"); sea(s, 28); lighthouse(s, 49, 1);
+    clouds(s, id === "history-city"); sea(s, 28); coastalStorehouses(s, 43, 20);
     s.rect(0, 19, 20, 12, P.stone); s.rect(0, 18, 23, 2, P.cream);
     for (const x of [2, 8, 14]) { s.rect(x, 22, 3, 7, P.pale); s.rect(x + 1, 23, 1, 4, P.navy); }
     if (id === "sea") { boat(s, 13, 37, 2); person(s, 30, 39, { child: true, tunic: P.navy }); s.rect(0, 45, 64, 3, P.teal); }

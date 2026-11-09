@@ -3,13 +3,16 @@ import type { LifeState, WorldPack } from "../src/types.ts";
 import { engineForLife } from "./session.ts";
 import { resolveLifeScenes, sceneContextLabel } from "./scene-model.ts";
 import type { EventVisuals, MotionId } from "./scene-model.ts";
+import { resolveLifeBanner } from "./banner-state.ts";
+import { bannerActorSource } from "./banner-actor.ts";
+import { formatYear } from "../src/calendar.ts";
 import "./paper-motion.css";
+import "./life-banner.css";
 
 const MOTION_KEY = "historical-lives:scene-motion:v1";
 
 /** Discrete pixel props add atmosphere without distorting the scene artwork. */
-function PixelAtmosphere({ motion, front = false }: { motion: MotionId; front?: boolean }) {
-  const water = motion === "sail" || motion === "unrest";
+function PixelAtmosphere({ motion, front = false, water = false }: { motion: MotionId; front?: boolean; water?: boolean }) {
   return <svg className={`paper-atmosphere pixel-atmosphere ${front ? "atmosphere-front" : "atmosphere-back"}`} viewBox="0 0 64 48" shapeRendering="crispEdges" aria-hidden="true" focusable="false">
     {!front && <>
       {motion === "write" && <g className="pixel-twinkle" data-loop="stars" fill="#fff2d1"><rect x="46" y="10" width="1" height="1"/><rect x="51" y="14" width="1" height="1"/></g>}
@@ -56,18 +59,23 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   }, []);
 
   if (!scene) return null;
-  const running = motionEnabled && !reducedMotion && !paused && visible && inView && scene.motion !== "still";
-  const motionState = reducedMotion ? "reduced" : !motionEnabled ? "off" : scene.motion === "still" ? "still" : paused ? "paused" : !visible || !inView ? "resting" : "running";
+  const banner = resolveLifeBanner(life, world, scene, { eventVisuals, birthReveal });
+  const actorSrc = bannerActorSource(life, banner);
+  const running = motionEnabled && !reducedMotion && !paused && visible && inView && banner.motion !== "still";
+  const motionState = reducedMotion ? "reduced" : !motionEnabled ? "off" : banner.motion === "still" ? "still" : paused ? "paused" : !visible || !inView ? "resting" : "running";
   const toggleMotion = () => {
     const next = !motionEnabled;
     setMotionEnabled(next);
     try { window.localStorage.setItem(MOTION_KEY, next ? "on" : "off"); } catch { /* The control still works for this visit. */ }
   };
 
-  return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-motion={scene.motion} data-motion-state={motionState}>
-    <div className="paper-scene-copy">{scene.eventId !== "the-first-household" && <span className="paper-scene-kicker">{sceneContextLabel(scene)}</span>}<h2>{scene.title}</h2>{!dashboard && scene.eventId !== "the-first-household" && <p className="paper-event-caption">{scene.caption}</p>}</div>
-    <div className={`paper-illustration-wrap motion-${scene.motion}`} key={`${scene.scene}-${scene.motion}`}>
-      <PixelAtmosphere motion={scene.motion} /><div className="paper-character-layer"><img src={`/assets/pixel/scenes/${scene.scene === "rest" && life.age < 18 ? "rest-child" : scene.scene}.svg`} alt={scene.alt} fetchPriority="high" /></div><PixelAtmosphere motion={scene.motion} front />
+  return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-motion={banner.motion} data-motion-state={motionState}>
+    <div className="paper-scene-copy"><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
+    <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.situation}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
+      <img className="life-banner-background" src={banner.assetSrc} alt="" width={240} height={112} fetchPriority="high" />
+      <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
+      {actorSrc && <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}><img src={actorSrc} alt="" width={240} height={112} /></div>}
+      <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} front />
     </div>
     <div className="paper-scene-bottom">
       {!dashboard && contexts.length > 1 && <div className="scene-context-list" role="group" aria-label="Scenes from this year">{contexts.map(context => <button type="button" key={context.key} className={context.key === scene.key ? "is-active" : ""} aria-pressed={context.key === scene.key} aria-label={`Show scene: ${context.title}`} title={context.title} onClick={() => setSelectedKey(context.key)}><span>{sceneContextLabel(context)}</span><strong>{context.title}</strong></button>)}</div>}

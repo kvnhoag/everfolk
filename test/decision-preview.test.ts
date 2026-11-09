@@ -36,7 +36,7 @@ function option(...branches: Effect[][]): Choice {
   })) };
 }
 
-test("choice effects keep bounded stat ranges, money and fatal risk while concealing skills and interests", () => {
+test("choice preview shows skills alongside bounded stat ranges, money and fatal risk while concealing growth modifiers", () => {
   const { world, life } = sample();
   // Explicit display fixture: normal play still owns all changes to saved lives.
   life.stats.knowledge = 95;
@@ -57,7 +57,8 @@ test("choice effects keep bounded stat ranges, money and fatal risk while concea
   const before = structuredClone(life), beforeWorld = structuredClone(world);
   const html = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice, previewOnly: true }));
   assert.match(html, /aria-label="Choice preview"/);
-  assert.match(html, /Choice effects/);
+  assert.match(html, /CHOICE PREVIEW/);
+  assert.doesNotMatch(html, /Choice effects|<h3>/);
   assert.match(html, /Knowledge/);
   assert.match(html, /increase by 0\.2 to 1/);
   assert.match(html, /Bonds/);
@@ -65,12 +66,13 @@ test("choice effects keep bounded stat ranges, money and fatal risk while concea
   assert.match(html, /Cash/);
   assert.match(html, /decrease by 2 to 12 dr/);
   assert.match(html, /Risk of death: 50%/);
-  assert.doesNotMatch(html, /Tool handling|Sculpture|Early interest|Future practice|Possible change|cap 100|compact-skill-node|<meter/);
+  assert.match(html, /Tool handling/);
+  assert.doesNotMatch(html, /Early interest|Future practice|Possible change|cap 100|compact-skill-node|<meter/);
   assert.deepEqual(life, before);
   assert.deepEqual(world, beforeWorld);
 });
 
-test("hiding skill effects also hides mastery and early interests in inline choice summaries", () => {
+test("direct skill changes in the preview do not reveal mastery metadata or early-interest growth bonuses", () => {
   const { world, life } = sample();
   const choice = option([
     { type: "skill", skill: "craft", delta: 4 },
@@ -84,8 +86,14 @@ test("hiding skill effects also hides mastery and early interests in inline choi
   assert.match(authored, /Sculpture cap 100/);
   assert.match(authored, /Early interest/);
   const preview = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice, previewOnly: true }));
-  assert.match(preview, /No immediate change\./);
-  assert.doesNotMatch(preview, /Tool handling|Sculpture|Early interest|Future practice|Possible change|cap 100/);
+  assert.match(preview, /Tool handling/);
+  assert.match(preview, /increase by 4/);
+  assert.match(preview, /Sculpture/);
+  assert.doesNotMatch(preview, /No immediate change|Early interest|Future practice|Possible change|cap 100/);
+  const growthOnly = option([{ type: "flag", flag: "early-interest-sculpture", value: true }]);
+  const hidden = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice: growthOnly, previewOnly: true }));
+  assert.match(hidden, /No immediate change\./);
+  assert.doesNotMatch(hidden, /Early interest|Future practice|Sculpture/);
 });
 
 test("the preview works without a skill system and gives a neutral empty state", () => {
@@ -100,6 +108,22 @@ test("the preview works without a skill system and gives a neutral empty state",
   const emptyHtml = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice: empty, previewOnly: true }));
   assert.match(emptyHtml, /No immediate change\./);
   assert.equal(renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, previewOnly: true })), "");
+});
+
+test("skill previews show bounded gain and loss ranges without exposing the growth curve", () => {
+  const { world, life } = sample();
+  world.character!.skills.craft.gainCurve = [{ from: 0, multiplier: 1 }, { from: 90, multiplier: .1 }];
+  life.character!.skills.craft = 99;
+  const choice = option([{ type: "skill", skill: "craft", delta: 20 }], [{ type: "skill", skill: "craft", delta: -6 }]);
+  const before = structuredClone(life), beforeWorld = structuredClone(world);
+  const html = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice, previewOnly: true }));
+  assert.match(html, /Tool handling/);
+  assert.match(html, /decrease by 6 to increase by 1/);
+  assert.match(html, /impact-loss/);
+  assert.match(html, /impact-gain/);
+  assert.doesNotMatch(html, /No immediate change|Learning pace|Future practice|multiplier|10%/);
+  assert.deepEqual(life, before);
+  assert.deepEqual(world, beforeWorld);
 });
 
 test("the progress sidebar shows observed skills and does not reveal a hovered choice's branch", () => {
@@ -132,10 +156,13 @@ test("the decision dialog starts with the first choice's visible effects and has
     onChoose() { chosen++; }, onSetAside() {}, onEnableAuto() {},
   }));
   assert.match(html, /life-choice-commit is-previewed/);
-  assert.match(html, /Choice effects/);
+  assert.match(html, /CHOICE PREVIEW/);
+  assert.doesNotMatch(html, /Choice effects/);
   assert.match(html, /compact-skill-preview-label">Take the offered work/);
   assert.match(html, /Knowledge/);
-  assert.doesNotMatch(html, /life-option-preview|aria-pressed=|Preview skills|>Preview[ <]|Tool handling|Early interest|Future practice|compact-skill-node/);
+  assert.match(html, /Tool handling/);
+  assert.equal((html.match(/Tool handling/g) ?? []).length, 1, "skills appear in the shared preview without duplicating inline summaries");
+  assert.doesNotMatch(html, /life-option-preview|aria-pressed=|Preview skills|>Preview[ <]|Early interest|Future practice|compact-skill-node/);
   assert.equal(chosen, 0);
 });
 
@@ -151,6 +178,9 @@ test("opportunity odds include hidden influences without explaining the internal
   const visible = renderToStaticMarkup(createElement(ChoiceImpact, { world, life, choice }));
   assert.match(visible, /Complete the work: 54.5%/);
   assert.doesNotMatch(visible, /remembered early interest|choice-opportunity-factors/);
+  const preview = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, choice, previewOnly: true }));
+  assert.match(preview, /Complete the work: 54.5%/);
+  assert.doesNotMatch(preview, /remembered early interest|choice-opportunity-factors|Future practice/);
   const admin = renderToStaticMarkup(createElement(ChoiceImpact, { world, life, choice, hideSkills: false }));
   assert.match(admin, /remembered early interest/);
   assert.match(admin, /Complete the work: 54.5%/);

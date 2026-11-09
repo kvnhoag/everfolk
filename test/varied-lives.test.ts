@@ -73,7 +73,7 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
 
 test("new lives draw broadly from both name pools and eight distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.31.0");
+  assert.equal(pack.version, "0.32.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 8);
@@ -193,11 +193,14 @@ test("every household opportunity follows the core trade decisions without a lon
     const dueAge = Math.max(14, life.nextChoiceAge ?? 14);
     assert.ok(dueAge >= life.age + 2 && dueAge <= life.age + 3);
     assert.ok(dueAge <= 23, "The earlier training and work queue must still reach the household offer without a long delay.");
+    const intervening = new Set<string>();
     for (let commands = 0; commands < 30 && life.age <= 23 && life.pendingEventId !== opportunity.id; commands++) {
+      if (life.phase === "choice" && life.pendingEventId) intervening.add(life.pendingEventId);
       life = life.phase === "choice" ? settle(engine, life) : engine.advance(life);
     }
     assert.equal(life.pendingEventId, opportunity.id, `${born.originId} must not wait behind decades of generic milestones.`);
-    assert.equal(life.age, dueAge, opportunity.id);
+    assert.ok(life.age >= dueAge && life.age <= 23, `${opportunity.id} remains in early adulthood`);
+    if (life.age !== dueAge) assert.ok([...intervening].some(id => id.startsWith("classical-")), "Only a dated historical choice can defer this isolated household opportunity.");
     assert.deepEqual(engine.load(engine.save(life)), life);
   }
 });

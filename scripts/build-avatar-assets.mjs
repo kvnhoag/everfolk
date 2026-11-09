@@ -2,21 +2,14 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { deflateSync } from "node:zlib";
+import { resolve } from "node:path";
+import { AVATAR_APPEARANCE_ORIGINS, getAvatarAppearance } from "../client/avatar-appearance.ts";
 
 const base = new URL("../public/assets/pixel/", import.meta.url);
 const P = JSON.parse(readFileSync(new URL("manifest.json", base), "utf8")).palette;
 const STAGES = ["infant", "child", "youth", "adult", "middle", "elder"];
 const SEXES = ["male", "female"];
-const ORIGINS = [
-  { id: "merchant-household", title: "Merchant household", background: P.sand, accent: P.gold, motif: "accounts" },
-  { id: "artisan-household", title: "Pottery-worker household", background: P.pale, accent: P.clay, motif: "pots" },
-  { id: "harbor-household", title: "Quay-laborer household", background: P.mist, accent: P.navy, motif: "quay" },
-  { id: "fishing-household", title: "Fishing household", background: P.teal, accent: P.sea, motif: "net" },
-  { id: "bakery-household", title: "Bakery household", background: P.pale, accent: P.red, motif: "oven" },
-  { id: "clerk-household", title: "Clerk's household", background: P.cream, accent: P.navy, motif: "papyrus" },
-  { id: "weaver-household", title: "Weaving household", background: P.mist, accent: P.red, motif: "loom" },
-  { id: "delta-newcomers", title: "Newcomers from the Delta", background: P.mist, accent: P.olive, motif: "reeds" },
-];
+const ORIGINS = AVATAR_APPEARANCE_ORIGINS;
 
 function surface(width = 32, height = 40, fill = P.cream) {
   const pixels = Array.from({ length: height }, () => Array(width).fill(fill));
@@ -77,18 +70,25 @@ function backdrop(s, origin) {
 
 /** The variant's skin, face proportions and hair arrangement stay fixed for life. */
 function portrait(origin, sex, stage, variant) {
-  const s = surface(), skin = [P.skin, P.light, P.deep][variant];
-  const cloth = [P.navy, P.olive, P.clay][variant];
-  const baseHair = [P.hair, P.brown, P.hair][variant];
+  const appearance = getAvatarAppearance({ originId: origin.id, sex, stage, variant });
+  const s = surface(), skin = appearance.skin;
+  const cloth = appearance.robe, baseHair = appearance.baseHair;
   const elder = stage === "elder", middle = stage === "middle", child = stage === "child", youth = stage === "youth";
-  const hair = elder ? P.grey : baseHair;
+  const hair = appearance.hair;
   backdrop(s, origin);
   if (stage === "infant") {
     s.rect(10, 12, 12, 11, skin); s.rect(12, 10, 8, 3, skin);
     s.rect(12, 11, variant === 1 ? 6 : 4, 1, baseHair); s.put(12, 16, P.ink); s.put(19, 16, P.ink);
     s.rect(15, 20, 2, 1, P.brown); if (variant === 2) s.put(16, 11, baseHair);
     s.rect(8, 22, 16, 10, cloth); s.rect(10, 31, 12, 4, cloth);
-    s.line(9, 23, 23, 31, P.cream); s.line(10, 31, 22, 23, origin.accent);
+    s.line(9, 23, 23, 31, P.cream);
+    if (appearance.infantBinding === "cross") {
+      s.line(10, 31, 22, 23, appearance.mantle);
+      s.rect(14, 26, 4, 2, appearance.mantle);
+    } else {
+      s.rect(9, 27, 14, 2, appearance.mantle);
+      s.rect(20, 24, 2, 5, P.cream);
+    }
     s.rect(6, 34, 20, 2, P.wood); s.rect(6, 30, 2, 7, P.wood); s.rect(24, 30, 2, 7, P.wood);
     // A swaddled infant's sex is recorded in the birth UI, rather than encoded
     // through colour. The tiny arrangement difference keeps the set distinct.
@@ -98,8 +98,8 @@ function portrait(origin, sex, stage, variant) {
     const neck = top + 16, shoulder = top + 19;
     // Hair behind the face: variants are bun, side braid and short rounded hair.
     if (sex === "female") {
-      if (variant === 0) { s.rect(x - 2, top + 1, w + 4, 14, hair); s.rect(x + 3, top - 2, 6, 4, hair); }
-      else if (variant === 1) { s.rect(x - 1, top + 1, w + 3, 14, hair); s.rect(x + w, top + 8, 2, child ? 10 : 14, hair); s.put(x + w, top + 18, P.cream); }
+      if (appearance.hairStyle === "bun") { s.rect(x - 2, top + 1, w + 4, 14, hair); s.rect(x + 3, top - 2, 6, 4, hair); }
+      else if (appearance.hairStyle === "side-braid") { s.rect(x - 1, top + 1, w + 3, 14, hair); s.rect(x + w, top + 8, 2, child ? 10 : 14, hair); s.put(x + w, top + 18, P.cream); }
       else { s.rect(x - 1, top, w + 2, 11, hair); s.rect(x - 2, top + 3, 2, 8, hair); s.rect(x + w, top + 3, 2, 8, hair); }
     }
     s.rect(x + 2, neck - 1, w - 4, 5, skin);
@@ -109,25 +109,30 @@ function portrait(origin, sex, stage, variant) {
     s.line(x + 1, shoulder, 16, shoulder + 7, P.cream); s.line(x + w - 2, shoulder, 16, shoulder + 7, P.cream);
     s.rect(16, shoulder + 7, 1, Math.max(0, 37 - shoulder - 7), origin.accent);
     s.rect(child ? 8 : 6, 34, child ? 16 : 20, 1, origin.accent);
+    // The same origin-coloured mantle appears on the full-body scene actor.
+    s.line(x + 1, shoulder + 2, 17, Math.min(35, shoulder + 10), appearance.mantle);
+    s.line(x + 2, shoulder + 2, 18, Math.min(35, shoulder + 10), appearance.mantle);
+    s.rect(child ? 8 : 6, 35, child ? 16 : 20, 2, appearance.robeDark);
     s.rect(x, top + 3, w, 12, skin); s.rect(x + 2, top + 1, w - 4, 3, skin);
     s.rect(x + 1, top, w - 2, 3, hair); s.rect(x, top + 2, w, 3, hair);
     if (sex === "male") {
-      if (variant === 0) { s.rect(x, top + 4, 2, 3, hair); s.rect(x + w - 2, top + 4, 2, 3, hair); s.put(x + 3, top - 1, hair); }
-      if (variant === 1) { s.rect(x + 1, top + 3, 5, 2, hair); s.rect(x, top + 4, 1, 5, hair); s.rect(x + w - 1, top + 4, 1, 4, hair); }
-      if (variant === 2) { s.rect(x, top - 1, w, 4, hair); s.rect(x - 1, top + 2, 2, 5, hair); s.rect(x + w - 1, top + 2, 2, 5, hair); }
+      if (appearance.hairStyle === "short-curls") { s.rect(x, top + 4, 2, 3, hair); s.rect(x + w - 2, top + 4, 2, 3, hair); s.put(x + 3, top - 1, hair); }
+      if (appearance.hairStyle === "side-part") { s.rect(x + 1, top + 3, 5, 2, hair); s.rect(x, top + 4, 1, 5, hair); s.rect(x + w - 1, top + 4, 1, 4, hair); }
+      if (appearance.hairStyle === "rounded-crop") { s.rect(x, top - 1, w, 4, hair); s.rect(x - 1, top + 2, 2, 5, hair); s.rect(x + w - 1, top + 2, 2, 5, hair); }
     } else {
-      if (variant === 0) { s.rect(x, top + 3, 2, 5, hair); s.rect(x + w - 2, top + 3, 2, 5, hair); }
-      if (variant === 1) { s.rect(x + 1, top + 3, 5, 2, hair); s.rect(x + w - 2, top + 3, 2, 8, hair); }
-      if (variant === 2) { s.rect(x, top + 2, w, 2, origin.accent); s.rect(x, top + 4, 2, 5, hair); s.rect(x + w - 2, top + 4, 2, 5, hair); }
+      if (appearance.hairStyle === "bun") { s.rect(x, top + 3, 2, 5, hair); s.rect(x + w - 2, top + 3, 2, 5, hair); }
+      if (appearance.hairStyle === "side-braid") { s.rect(x + 1, top + 3, 5, 2, hair); s.rect(x + w - 2, top + 3, 2, 8, hair); }
+      if (appearance.hairStyle === "headband") { s.rect(x, top + 2, w, 2, appearance.accent); s.rect(x, top + 4, 2, 5, hair); s.rect(x + w - 2, top + 4, 2, 5, hair); }
     }
     s.rect(x - 1, top + 8, 1, 3, skin); s.rect(x + w, top + 8, 1, 3, skin);
-    const eyeShift = variant === 1 ? 1 : 0;
+    const eyeShift = appearance.eyeOffset;
     s.put(x + 3, top + 8 + eyeShift, P.ink); s.put(x + w - 4, top + 8 + eyeShift, P.ink);
     s.rect(x + (variant === 2 ? 5 : 6), top + 9, 1, 2, variant === 2 ? P.brown : P.deep);
     s.rect(x + 4, top + 13, w - 8 || 2, 1, P.brown);
-    if (!child && !youth && sex === "male" && variant !== 1) {
+    if (appearance.facialHair !== "none") {
       s.rect(x + 2, top + 12, 2, 2, hair); s.rect(x + w - 4, top + 12, 2, 2, hair);
-      if (variant === 0) { s.rect(x + 3, top + 14, w - 6, elder ? 3 : 2, hair); s.rect(x + 4, top + 13, w - 8, 1, P.brown); }
+      if (appearance.facialHair === "full") { s.rect(x + 3, top + 14, w - 6, elder ? 3 : 2, hair); s.rect(x + 4, top + 13, w - 8, 1, P.brown); }
+      else s.rect(x + 4, top + 14, w - 8, 1, hair);
     }
     if (middle) { s.put(x, top + 4, P.grey); s.put(x + w - 1, top + 4, P.grey); if (sex === "female" && variant === 1) s.put(x + w, top + 12, P.grey); }
     if (elder) { s.rect(x + 1, top + 7, 3, 1, P.stone); s.rect(x + w - 4, top + 7, 3, 1, P.stone); s.put(x + 2, top + 11, P.stone); s.put(x + w - 3, top + 11, P.stone); }
@@ -136,7 +141,7 @@ function portrait(origin, sex, stage, variant) {
   return s;
 }
 
-function svg(s, title) {
+function svg(s, title, appearance) {
   const rects = [], active = new Map();
   for (let y = 0; y < s.height; y++) {
     const seen = new Set();
@@ -149,13 +154,24 @@ function svg(s, title) {
     }
     for (const key of active.keys()) if (!seen.has(key)) active.delete(key);
   }
-  const groups = [...new Set(Object.values(P))].map(color => {
+  const groups = [...new Set(s.pixels.flat())].map(color => {
     const cells = rects.filter(rect => rect.color === color);
     return cells.length ? `<g fill="${color}">${cells.map(rect => `<rect x="${rect.x}" y="${rect.y}" width="${rect.w}" height="${rect.h}"/>`).join("")}</g>` : "";
   }).join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40" shape-rendering="crispEdges" role="img"><title>${title}</title>${groups}</svg>\n`;
+  const metadata = `data-origin="${appearance.originId}" data-sex="${appearance.sex}" data-avatar-variant="${appearance.variant}" data-life-stage="${appearance.stage}" data-appearance-key="${appearance.identityKey}" data-skin="${appearance.skin}" data-hair="${appearance.hair}" data-hair-style="${appearance.hairStyle}" data-facial-hair="${appearance.facialHair}" data-robe="${appearance.robe}" data-accent="${appearance.accent}"`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40" shape-rendering="crispEdges" role="img" ${metadata}><title>${title}</title>${groups}</svg>\n`;
 }
 
+/** Read-only drawing entry for tests and other authoring tools. */
+export function renderAvatarPortrait({ originId, sex, stage, variant }) {
+  const origin = ORIGINS.find(origin => origin.id === originId);
+  if (!origin) throw new Error(`Unknown portrait origin ${originId}`);
+  const appearance = getAvatarAppearance({ originId, sex, stage, variant });
+  const title = `Fictional ${sex} ${stage} portrait, ${origin.title.toLowerCase()}, avatar ${variant + 1}`;
+  return svg(portrait(origin, sex, stage, variant), title, appearance);
+}
+
+export function buildAvatarAssets() {
 const assets = [];
 for (const origin of ORIGINS) for (const sex of SEXES) for (let variant = 0; variant < 3; variant++) for (const stage of STAGES) {
   const path = `portraits/${origin.id}/${sex}/${stage}-${variant}.svg`;
@@ -163,8 +179,9 @@ for (const origin of ORIGINS) for (const sex of SEXES) for (let variant = 0; var
   const title = `Fictional ${sex} ${stage} portrait, ${origin.title.toLowerCase()}, avatar ${variant + 1}`;
   const destination = fileURLToPath(new URL(path, base));
   mkdirSync(fileURLToPath(new URL(`portraits/${origin.id}/${sex}/`, base)), { recursive: true });
-  writeFileSync(destination, svg(s, title));
-  assets.push({ path: `/assets/pixel/${path}`, title, originId: origin.id, sex, stage, variant, width: 32, height: 40, surface: s });
+  const appearance = getAvatarAppearance({ originId: origin.id, sex, stage, variant });
+  writeFileSync(destination, svg(s, title, appearance));
+  assets.push({ path: `/assets/pixel/${path}`, title, originId: origin.id, sex, stage, variant, width: 32, height: 40, appearance, surface: s });
 }
 writeFileSync(new URL("avatar-manifest.json", base), `${JSON.stringify({ generator: "scripts/build-avatar-assets.mjs", origins: ORIGINS.map(({ id, title }) => ({ id, title })), sexes: SEXES, variants: [0, 1, 2], stages: STAGES, assets: assets.map(({ surface: _surface, ...asset }) => asset) }, null, 2)}\n`);
 
@@ -193,3 +210,6 @@ const adults = surface(ORIGINS.length * 36 + 4, 6 * 44 + 4, P.ink);
 for (const item of assets.filter(item => item.stage === "adult")) draw(adults, item, 4 + ORIGINS.findIndex(origin => origin.id === item.originId) * 36, 4 + (SEXES.indexOf(item.sex) * 3 + item.variant) * 44);
 writeFileSync(new URL("avatar-adult-pool.png", previewRoot), png(adults));
 console.log(`Generated ${assets.length} origin/sex/variant/stage pixel SVGs. Legacy portraits unchanged. Contact sheets saved under artifacts/.`);
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) buildAvatarAssets();

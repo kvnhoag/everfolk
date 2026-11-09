@@ -1,6 +1,7 @@
 import type { CharacterActivity, Effect, EvidenceKind, JournalEntry, LifeEvent, LifeState, Outcome, WorldPack } from "../src/types.ts";
 import { ALEXANDRIA_VARIETY_VISUALS } from "./alexandria-variety-visuals.ts";
 import { personText } from "../src/people.ts";
+import currentWorld from "../worlds/alexandria-sample.json" with { type: "json" };
 
 export const SCENE_IDS = ["birth", "childhood", "learning", "work", "sea", "family", "later-life", "memorial", "rest", "history-war", "history-city", "music"] as const;
 export type SceneId = typeof SCENE_IDS[number];
@@ -31,8 +32,8 @@ export const motionOptions = [
 ] satisfies { value: MotionId; label: string }[];
 
 export const sceneDefinitions: Record<SceneId, { file: string; title: string; caption: string; alt: string; defaultMotion: MotionId }> = {
-  birth: { file: "birth", title: "A newborn at home.", caption: "Your household takes care of you.", alt: "Pixel artwork of a newborn and caregiver in an Alexandrian household", defaultMotion: "cradle" },
-  childhood: { file: "childhood", title: "Playing in the courtyard.", caption: "You play with other children near home.", alt: "Pixel artwork of children in an Alexandrian courtyard", defaultMotion: "play" },
+  birth: { file: "birth", title: "A newborn at home.", caption: "Your household takes care of you.", alt: "Pixel artwork of a newborn and caregiver in an ancient Egyptian household", defaultMotion: "cradle" },
+  childhood: { file: "childhood", title: "Playing in the courtyard.", caption: "You play with other children near home.", alt: "Pixel artwork of children in an ancient coastal courtyard", defaultMotion: "play" },
   learning: { file: "learning", title: "Something to learn.", caption: "There is time to watch, practise and ask a question.", alt: "Pixel artwork of a young learner with a teacher and tablet", defaultMotion: "write" },
   work: { file: "work", title: "At work.", caption: "You work, run errands and help with daily tasks.", alt: "Pixel artwork of a craft worker at a workbench", defaultMotion: "work" },
   sea: { file: "sea", title: "Aboard a merchant ship.", caption: "You work with the crew and travel between ports.", alt: "Pixel artwork of a sailor aboard an ancient merchant ship", defaultMotion: "sail" },
@@ -48,7 +49,7 @@ export const sceneDefinitions: Record<SceneId, { file: string; title: string; ca
 const visual = (scene: SceneId, motion = DEFAULT_MOTIONS[scene]): EventVisual => ({ scene, motion });
 
 /** Authored event IDs, not text matching, connect the shipped stories to their art. */
-export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
+const ALL_ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
   ...Object.entries(ALEXANDRIA_VARIETY_VISUALS),
   ...["sculpture", "philosophy", "seafaring", "military", "commerce", "astronomy-calendar", "music-performance"].flatMap(route => {
     const scene: SceneId = route === "sculpture" ? "work" : route === "philosophy" || route === "astronomy-calendar" ? "learning" : route === "seafaring" ? "sea" : route === "music-performance" ? "music" : "history-city";
@@ -148,6 +149,22 @@ export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
   ...["the-weight-of-years", "stepping-back", "putting-things-in-order", "what-you-will-keep", "the-people-who-return", "the-small-pleasures", "names-remembered", "a-later-season", "an-extraordinary-age", "middle-a-younger-voice", "middle-the-long-view", "later-company-at-the-door", "later-familiar-things", "later-a-helpful-hand", "later-news-from-outside", "later-an-old-story", "later-the-light-changes", "later-a-question-of-energy", "later-a-memory-to-share", "later-a-small-outing", "later-the-useful-belonging"].map(id => [id, visual("later-life")]),
 ]);
 
+// Keep the earlier authored assignments for archived lives while exposing an
+// exact current-world map to the editor and completeness checks.
+Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries([
+  ...["classical-persian-reconquest", "classical-alexander-accession", "classical-alexander-crossing", "classical-alexander-egypt", "classical-alexandria-founded", "classical-alexander-death", "classical-aristotle-death", "classical-ptolemy-kingship", "classical-pharos-completed"].map(id => [id, visual("history-city")]),
+  ...["classical-euclid-teaching", "classical-scholarly-households", "classical-euclid-demonstration"].map(id => [id, visual("learning")]),
+  ["classical-aristotle-journey", visual("sea")],
+  ["classical-alexander-shore-work", visual("work")],
+  ["classical-succession-guard", visual("history-war")],
+  ["classical-garrison-account", visual("history-city", "work")],
+]));
+export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries(currentWorld.events.map(event => {
+  const assignment = ALL_ALEXANDRIA_EVENT_VISUALS[event.id];
+  if (!assignment) throw new Error(`Missing authored visual for ${event.id}`);
+  return [event.id, assignment];
+}));
+
 function factsVisual(effects: readonly Effect[]): EventVisual | undefined {
   const facts = effects.filter(effect => effect.type === "flag");
   if (facts.some(effect => effect.flag === "parent" && effect.value)) return visual("family");
@@ -177,7 +194,7 @@ export function defaultEventVisual(event: LifeEvent): EventVisual {
   // Retained fixed-name worlds keep their original meeting artwork, outside
   // the current pack's complete authored map.
   if (["meet-demetria", "meet-thais", "meet-berenike", "meet-tyche"].includes(event.id)) return visual("history-city", "gather");
-  const authored = ALEXANDRIA_EVENT_VISUALS[event.id];
+  const authored = ALL_ALEXANDRIA_EVENT_VISUALS[event.id];
   if (authored) return { ...authored };
   if (event.trigger.type === "year" && event.evidence === "documented-history") return visual("history-city");
   if (event.mode === "automatic") return effectsVisual(event.effects ?? []) ?? visual("history-city");

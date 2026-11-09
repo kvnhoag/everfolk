@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import App from "./App";
-import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
+import { getArchivedBuiltinWorld, getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
-import { engineForLife, selectWorldPack } from "./session.ts";
+import { engineForLife, hasLifeBegun, readSavedLife, selectWorldPack } from "./session.ts";
 import type { LifeState } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
 
@@ -33,7 +33,22 @@ export default function GameClient() {
       let restored = false;
       try {
         const saved = window.localStorage.getItem(SELECTION_KEY);
-        if (saved) { world = JSON.parse(saved) as PublishedWorld; selectWorldPack(world.pack); restored = true; }
+        if (saved) {
+          world = JSON.parse(saved) as PublishedWorld;
+          selectWorldPack(world.pack);
+          restored = true;
+          // Keep lives already begun in their original era. An untouched pending
+          // factory birth may use the new setting, including its Reborn button.
+          if (world.id === builtin.id && world.pack.startYear !== builtin.pack.startYear) {
+            const archived = getArchivedBuiltinWorld(world.revisionId);
+            const currentLife = readSavedLife(window.localStorage);
+            if (archived && contentFingerprint(archived.pack) === contentFingerprint(world.pack) &&
+              (!currentLife || !hasLifeBegun(window.localStorage, currentLife))) {
+              world = builtin;
+              restored = false;
+            }
+          }
+        }
         else if (window.localStorage.getItem("historical-lives:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
       if (!restored) {
@@ -44,6 +59,7 @@ export default function GameClient() {
       }
       if (cancelled) return;
       selectWorldPack(world.pack);
+      try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* In-memory play still works. */ }
       setActive({ world, key: 0, fresh: false });
     })();
     void readApi<{ isAdmin: boolean }>("/api/session").then(session => { if (!cancelled) setAdmin(session.isAdmin); }).catch(() => {});

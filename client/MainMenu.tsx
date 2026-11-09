@@ -68,7 +68,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
             <span>Ottoman Empire</span>
           </div>
           <figure className="main-menu-landscape">
-            <div className="main-menu-image"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined ancient Alexandrian harbor, with merchant sails, a lighthouse and a waterfront terrace" fetchPriority="high" /></div>
+            <div className="main-menu-image"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined ancient Egyptian coast, with merchant sails and low waterfront buildings" fetchPriority="high" /></div>
             <figcaption><span>{worldTitle}</span><span>{formatYear(world.startYear)}</span></figcaption>
           </figure>
         </div>

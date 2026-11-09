@@ -18,6 +18,8 @@ import variedPack from "../worlds/alexandria-0.10.0.json" with { type: "json" };
 import coherentPack from "../worlds/alexandria-0.12.0.json" with { type: "json" };
 import workTimelinePack from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 import interestCareersPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
+import narrativePack from "../worlds/alexandria-0.31.0.json" with { type: "json" };
+import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 
 function memoryStorage(): StorageLike {
   const items = new Map<string, string>();
@@ -27,6 +29,25 @@ function memoryStorage(): StorageLike {
     removeItem: key => { items.delete(key); },
   };
 }
+
+test("the 66 BCE 0.31 world remains available for exact saved identities, continuation and customized drafts", () => {
+  const engine = createEngine(narrativePack);
+  assert.equal(engine.fingerprint, "fnv1a64-083e29e83c70fe61");
+  const born = engine.start("retained-before-classical-era"), saved = engine.save(born);
+  const restored = loadAnyLife(saved);
+  assert.deepEqual(restored, born);
+  assert.equal(restored.year, -66);
+  const continued = engine.advance(restored);
+  assert.deepEqual(engine.replay(continued.seed, continued.commands), continued);
+  assert.deepEqual(loadAnyLife(engine.save(continued)), continued);
+  assert.equal(continued.character!.name, born.character!.name);
+  assert.equal(engine.save(born), saved);
+  assert.deepEqual(getArchivedBuiltinWorld(`pack-${engine.fingerprint}`)!.pack, narrativePack);
+  const catalog = getBuiltinCatalog(narrativePack);
+  assert.equal(isLegacyFactoryDraft(catalog.worlds), true);
+  catalog.worlds[0].pack.title = "An editor's own 66 BCE world";
+  assert.equal(isLegacyFactoryDraft(catalog.worlds), false);
+});
 
 test("0.14 saves preserve their original age-band mortality after causal health is introduced", () => {
   const original = createEngine(interestCareersPack);
@@ -91,7 +112,7 @@ test("0.13.0 apprenticeship saves keep their original commissions and continue t
 test("the controller begins at birth without simulating childhood in advance", () => {
   const life = createSampleLife("a-newborn-life");
   assert.equal(life.age, 0);
-  assert.equal(life.year, -66);
+  assert.equal(life.year, sampleEngine.world.startYear);
   assert.equal(life.commands.length, 0);
   assert.deepEqual(life, sampleEngine.start("a-newborn-life"));
   assert.equal(life.journal[0].type, "birth");
@@ -351,7 +372,7 @@ test("completed lives enter the local archive once and retain an exact replayabl
   const first = archiveLife(storage, life);
   assert.equal(first.length, 1);
   assert.equal(first[0].age, life.age);
-  assert.equal(first[0].birthYear, -66);
+  assert.equal(first[0].birthYear, sampleEngine.world.startYear);
   assert.equal(first[0].year, life.year);
   assert.deepEqual(sampleEngine.load(first[0].save), life);
   assert.equal(archiveLife(storage, life).length, 1);

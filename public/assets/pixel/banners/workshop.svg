@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="112" viewBox="0 0 240 112">
+  <title>Historical Lives — workshop</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Atmosphere_and_light" data-name="01 Atmosphere and light">
+    <rect id="_01_Atmosphere_and_light___pixels_1" data-name="01 Atmosphere and light · pixels 1" x="0" y="0" width="240" height="112" fill="#f5e6bf"/>
+  </g>
+  <g id="_02_Buildings_landscape_and_ground" data-name="02 Buildings landscape and ground">
+    <rect id="_02_Buildings_landscape_and_ground___pixels_1" data-name="02 Buildings landscape and ground · pixels 1" x="0" y="0" width="240" height="8" fill="#ddc79b"/>
+    <path id="_02_Buildings_landscape_and_ground___pixels_2" data-name="02 Buildings landscape and ground · pixels 2" d="M0 8 L7 8 L7 88 L0 88 Z M233 8 L240 8 L240 88 L233 88 Z" fill="#cbb58b"/>
+    <rect id="_02_Buildings_landscape_and_ground___pixels_3" data-name="02 Buildings landscape and ground · pixels 3" x="0" y="76" width="240" height="12" fill="#ddc79b"/>
+    <rect id="_02_Buildings_landscape_and_ground___pixels_4" data-name="02 Buildings landscape and ground · pixels 4" x="0" y="88" width="240" height="24" fill="#c9b184"/>
+  </g>
+  <g id="_03_Architectural_details" data-name="03 Architectural details">
+    <path id="_03_Architectural_details___pixels_1" data-name="03 Architectural details · pixels 1" d="M103 14 L233 14 L233 15 L103 15 Z M110 15 L111 15 L111 22 L110 22 Z M131 15 L132 15 L132 22 L131 22 Z M152 15 L153 15 L153 22 L152 22 Z M173 15 L174 15 L174 22 L173 22 Z M194 15 L195 15 L195 22 L194 22 Z M215 15 L216 15 L216 22 L215 22 Z M103 23 L233 23 L233 24 L103 24 Z M116 24 L117 24 L117 31 L116 31 Z M137 24 L138 24 L138 31 L137 31 Z M158 24 L159 24 L159 31 L158 31 Z M179 24 L180 24 L180 31 L179 31 Z M200 24 L201 24 L201 31 L200 31 Z M221 24 L222 24 L222 31 L221 31 Z M103 32 L233 32 L233 33 L103 33 Z M110 33 L111 33 L111 40 L110 40 Z M131 33 L132 33 L132 40 L131 40 Z M152 33 L153 33 L153 40 L152 40 Z M173 33 L174 33 L174 40 L173 40 Z M194 33 L195 33 L195 40 L194 40 Z M215 33 L216 33 L216 40 L215 40 Z M103 41 L233 41 L233 42 L103 42 Z M116 42 L117 42 L117 49 L116 49 Z M137 42 L138 42 L138 49 L137 49 Z M158 42 L159 42 L159 49 L158 49 Z M179 42 L180 42 L180 49 L179 49 Z M200 42 L201 42 L201 49 L200 49 Z M221 42 L222 42 L222 49 L221 49 Z M103 50 L233 50 L233 51 L103 51 Z M110 51 L111 51 L111 58 L110 58 Z M131 51 L132 51 L132 58 L131 58 Z M152 51 L153 51 L153 58 L152 58 Z M173 51 L174 51 L174 58 L173 58 Z M194 51 L195 51 L195 58 L194 58 Z M215 51 L216 51 L216 58 L215 58 Z M103 59 L233 59 L233 60 L103 60 Z M116 60 L117 60 L117 67 L116 67 Z M137 60 L138 60 L138 67 L137 67 Z M158 60 L159 60 L159 67 L158 67 Z M179 60 L180 60 L180 67 L179 67 Z M200 60 L201 60 L201 67 L200 67 Z M221 60 L222 60 L222 67 L221 67 Z M103 68 L233 68 L233 69 L103 69 Z M110 69 L111 69 L111 76 L110 76 Z M131 69 L132 69 L132 76 L131 76 Z M152 69 L153 69 L153 76 L152 76 Z M173 69 L174 69 L174 76 L173 76 Z M194 69 L195 69 L195 76 L194 76 Z M215 69 L216 69 L216 76 L215 76 Z" fill="#ddc79b"/>
+    <rect id="_03_Architectural_details___pixels_2" data-name="03 Architectural details · pixels 2" x="0" y="88" width="240" height="2" fill="#e9d6ac"/>
+    <rect id="_03_Architectural_details___pixels_3" data-name="03 Architectural details · pixels 3" x="0" y="94" width="240" height="1" fill="#baa47a"/>
+    <path id="_03_Architectural_details___pixels_4" data-name="03 Architectural details · pixels 4" d="M0 95 L1 95 L1 101 L0 101 Z M25 95 L26 95 L26 101 L25 101 Z M50 95 L51 95 L51 101 L50 101 Z M75 95 L76 95 L76 101 L75 101 Z M100 95 L101 95 L101 101 L100 101 Z M125 95 L126 95 L126 101 L125 101 Z M150 95 L151 95 L151 101 L150 101 Z M175 95 L176 95 L176 101 L175 101 Z M200 95 L201 95 L201 101 L200 101 Z M225 95 L226 95 L226 101 L225 101 Z" fill="#cbb58b"/>
+    <rect id="_03_Architectural_details___pixels_5" data-name="03 Architectural details · pixels 5" x="0" y="101" width="240" height="1" fill="#baa47a"/>
+    <path id="_03_Architectural_details___pixels_6" data-name="03 Architectural details · pixels 6" d="M12 102 L13 102 L13 108 L12 108 Z M37 102 L38 102 L38 108 L37 108 Z M62 102 L63 102 L63 108 L62 108 Z M87 102 L88 102 L88 108 L87 108 Z M112 102 L113 102 L113 108 L112 108 Z M137 102 L138 102 L138 108 L137 108 Z M162 102 L163 102 L163 108 L162 108 Z M187 102 L188 102 L188 108 L187 108 Z M212 102 L213 102 L213 108 L212 108 Z M237 102 L238 102 L238 108 L237 108 Z" fill="#cbb58b"/>
+    <path id="_03_Architectural_details___pixels_7" data-name="03 Architectural details · pixels 7" d="M0 108 L240 108 L240 109 L0 109 Z M187 12 L221 12 L221 55 L187 55 Z" fill="#baa47a"/>
+    <rect id="_03_Architectural_details___pixels_8" data-name="03 Architectural details · pixels 8" x="190" y="14" width="28" height="38" fill="#b8d2c4"/>
+    <rect id="_03_Architectural_details___pixels_9" data-name="03 Architectural details · pixels 9" x="190" y="39" width="28" height="13" fill="#76b5b1"/>
+    <path id="_03_Architectural_details___pixels_10" data-name="03 Architectural details · pixels 10" d="M196 41 L206 41 L206 52 L196 52 Z M210 36 L218 36 L218 52 L210 52 Z" fill="#ddc79b"/>
+    <path id="_03_Architectural_details___pixels_11" data-name="03 Architectural details · pixels 11" d="M202 14 L204 14 L204 52 L202 52 Z M190 32 L218 32 L218 34 L190 34 Z" fill="#886447"/>
+    <rect id="_03_Architectural_details___pixels_12" data-name="03 Architectural details · pixels 12" x="185" y="52" width="38" height="3" fill="#e9d6ac"/>
+    <rect id="_03_Architectural_details___pixels_13" data-name="03 Architectural details · pixels 13" x="116" y="25" width="45" height="4" fill="#886447"/>
+  </g>
+  <g id="_04_Story_objects_and_company" data-name="04 Story objects and company">
+    <rect id="_04_Story_objects_and_company___pixels_1" data-name="04 Story objects and company · pixels 1" x="182" y="70" width="44" height="4" fill="#886447"/>
+    <rect id="_04_Story_objects_and_company___pixels_2" data-name="04 Story objects and company · pixels 2" x="182" y="70" width="44" height="1" fill="#edcf91"/>
+    <path id="_04_Story_objects_and_company___pixels_3" data-name="04 Story objects and company · pixels 3" d="M185 74 L188 74 L188 96 L185 96 Z M220 74 L223 74 L223 96 L220 96 Z" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_4" data-name="04 Story objects and company · pixels 4" x="185" y="65" width="35" height="5" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_5" data-name="04 Story objects and company · pixels 5" x="186" y="65" width="34" height="1" fill="#f5e6bf"/>
+    <rect id="_04_Story_objects_and_company___pixels_6" data-name="04 Story objects and company · pixels 6" x="212" y="63" width="3" height="8" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_7" data-name="04 Story objects and company · pixels 7" x="208" y="62" width="10" height="3" fill="#263b43"/>
+    <rect id="_04_Story_objects_and_company___pixels_8" data-name="04 Story objects and company · pixels 8" x="193" y="62" width="14" height="2" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_9" data-name="04 Story objects and company · pixels 9" x="195" y="60" width="2" height="5" fill="#263b43"/>
+    <rect id="_04_Story_objects_and_company___pixels_10" data-name="04 Story objects and company · pixels 10" x="122" y="29" width="2" height="16" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_11" data-name="04 Story objects and company · pixels 11" x="119" y="43" width="8" height="3" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_12" data-name="04 Story objects and company · pixels 12" x="122" y="46" width="2" height="2" fill="#f5e6bf"/>
+    <rect id="_04_Story_objects_and_company___pixels_13" data-name="04 Story objects and company · pixels 13" x="135" y="29" width="2" height="16" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_14" data-name="04 Story objects and company · pixels 14" x="132" y="43" width="8" height="3" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_15" data-name="04 Story objects and company · pixels 15" x="135" y="46" width="2" height="2" fill="#f5e6bf"/>
+    <rect id="_04_Story_objects_and_company___pixels_16" data-name="04 Story objects and company · pixels 16" x="149" y="29" width="2" height="16" fill="#65503e"/>
+    <rect id="_04_Story_objects_and_company___pixels_17" data-name="04 Story objects and company · pixels 17" x="146" y="43" width="8" height="3" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_18" data-name="04 Story objects and company · pixels 18" x="149" y="46" width="2" height="2" fill="#f5e6bf"/>
+    <rect id="_04_Story_objects_and_company___pixels_19" data-name="04 Story objects and company · pixels 19" x="112" y="65" width="4" height="26" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_20" data-name="04 Story objects and company · pixels 20" x="113" y="67" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_21" data-name="04 Story objects and company · pixels 21" x="117" y="68" width="4" height="26" fill="#886447"/>
+    <rect id="_04_Story_objects_and_company___pixels_22" data-name="04 Story objects and company · pixels 22" x="118" y="70" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_23" data-name="04 Story objects and company · pixels 23" x="122" y="65" width="4" height="26" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_24" data-name="04 Story objects and company · pixels 24" x="123" y="67" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_25" data-name="04 Story objects and company · pixels 25" x="127" y="68" width="4" height="26" fill="#886447"/>
+    <rect id="_04_Story_objects_and_company___pixels_26" data-name="04 Story objects and company · pixels 26" x="128" y="70" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_27" data-name="04 Story objects and company · pixels 27" x="132" y="65" width="4" height="26" fill="#baa47a"/>
+    <rect id="_04_Story_objects_and_company___pixels_28" data-name="04 Story objects and company · pixels 28" x="133" y="67" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_29" data-name="04 Story objects and company · pixels 29" x="137" y="68" width="4" height="26" fill="#886447"/>
+    <rect id="_04_Story_objects_and_company___pixels_30" data-name="04 Story objects and company · pixels 30" x="138" y="70" width="1" height="21" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_31" data-name="04 Story objects and company · pixels 31" x="220" y="93" width="5" height="2" fill="#65503e"/>
+    <path id="_04_Story_objects_and_company___pixels_32" data-name="04 Story objects and company · pixels 32" d="M221 95 L224 95 L224 97 L221 97 Z M219 97 L226 97 L226 103 L219 103 Z M220 103 L225 103 L225 105 L220 105 Z" fill="#6b8051"/>
+    <rect id="_04_Story_objects_and_company___pixels_33" data-name="04 Story objects and company · pixels 33" x="220" y="98" width="1" height="4" fill="#edcf91"/>
+    <rect id="_04_Story_objects_and_company___pixels_34" data-name="04 Story objects and company · pixels 34" x="225" y="98" width="1" height="4" fill="#886447"/>
+  </g>
+  <g id="_05_Foreground_rugs_and_shadows" data-name="05 Foreground rugs and shadows">
+    <path id="_05_Foreground_rugs_and_shadows___pixels_1" data-name="05 Foreground rugs and shadows · pixels 1" d="M126 99 L138 99 L138 100 L126 100 Z M192 99 L204 99 L204 100 L192 100 Z M219 99 L231 99 L231 100 L219 100 Z" fill="#9b8a6b"/>
+  </g>
+  <g id="_06_Small_atmospheric_details" data-name="06 Small atmospheric details">
+    <path id="_06_Small_atmospheric_details___pixels_1" data-name="06 Small atmospheric details · pixels 1" d="M7 107 L14 107 L14 108 L7 108 Z M41 94 L46 94 L46 95 L41 95 Z M68 105 L72 105 L72 106 L68 106 Z M116 102 L122 102 L122 103 L116 103 Z M202 108 L210 108 L210 109 L202 109 Z M229 98 L233 98 L233 99 L229 99 Z" fill="#e9d6ac"/>
+    <path id="_06_Small_atmospheric_details___pixels_2" data-name="06 Small atmospheric details · pixels 2" d="M186 99 L190 99 L190 100 L186 100 Z M197 103 L201 103 L201 104 L197 104 Z M209 98 L213 98 L213 99 L209 99 Z M219 101 L223 101 L223 102 L219 102 Z M178 106 L182 106 L182 107 L178 107 Z" fill="#f5e6bf"/>
+  </g>
+</svg>

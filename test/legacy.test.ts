@@ -3,12 +3,13 @@ import test from "node:test";
 import { createEngine, getAccomplishments, getLegacyRoutes, matchesCondition, validateWorld } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import romanEra from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.24.0.json" with { type: "json" };
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import { contentFingerprint } from "../src/random.ts";
 
-function controlled(prestige?: string): WorldPack {
-  const world = structuredClone(current) as WorldPack;
+function controlled(prestige?: string, source = current): WorldPack {
+  const world = structuredClone(source) as WorldPack;
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
@@ -44,7 +45,7 @@ test("only accepted work awards a named record, one per achievement, with exact 
   assert.deepEqual(record.people, ["Philista", "Menon"]);
   assert.equal(record.sourceId, "small-figure-order");
   assert.equal(record.outcomeId, "small-figure-order-result");
-  assert.equal(record.age, 16); assert.equal(record.year, -50);
+  assert.equal(record.age, 16); assert.equal(record.year, engine.world.startYear + 16);
   assert.equal(before.accomplishments!.length, 0, "The previous public snapshot stays unchanged.");
   const again = engine.act(ageTo(engine, after, 18), "small-figure-order");
   assert.equal(again.accomplishments!.length, 1, "Repeat commissions do not duplicate earned credit.");
@@ -115,8 +116,8 @@ test("all seven routes award real ordinary work, both callbacks and a replayable
   }
 });
 
-test("royal awards close at the transition while memories of accepted service remain valid", () => {
-  const engine = createEngine(controlled());
+test("retained Roman-era royal awards close at annexation while memories of accepted service remain valid", () => {
+  const engine = createEngine(controlled(undefined, romanEra));
   let life = ageTo(engine, engine.start("royal-service-transition"), 18);
   life = ageTo(engine, engine.act(life, "enlist-royal-army"), 35);
   life = engine.act(life, "complete-service-assignment");
@@ -146,7 +147,7 @@ test("legacy validation rejects forged references, passive awards and contacts a
 
 test("new content has seven ordinary career paths, seven rare prestige paths, fourteen callbacks and unchanged mortality", () => {
   const world = current as WorldPack;
-  assert.equal(world.version, "0.31.0");
+  assert.equal(world.version, "0.32.0");
   assert.equal(world.legacy!.routes.length, 7); assert.equal(world.legacy!.achievements.length, 14);
   assert.equal(world.events.filter(event => event.id.includes("-callback-")).length, 14);
   for (const route of world.legacy!.routes) {
@@ -154,8 +155,12 @@ test("new content has seven ordinary career paths, seven rare prestige paths, fo
     assert.ok(world.character!.activities.some(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === ordinary))), route.id);
     assert.ok(world.events.some(event => event.rarity === "rare" && event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === prestige)))), route.id);
   }
-  assert.deepEqual(current.health, previous.health);
-  assert.deepEqual(current.mortality, previous.mortality);
+  const { description: currentHealthNote, ...healthRules } = current.health;
+  const { description: previousHealthNote, ...previousHealthRules } = previous.health;
+  const { description: currentMortalityNote, ...mortalityRules } = current.mortality;
+  const { description: previousMortalityNote, ...previousMortalityRules } = previous.mortality;
+  assert.deepEqual(healthRules, previousHealthRules);
+  assert.deepEqual(mortalityRules, previousMortalityRules);
   assert.deepEqual(current.yearlyEffects, previous.yearlyEffects);
   assert.equal(Object.keys(current.character.skills).length, 13);
   assert.ok(current.character.jobs.some(job => job.id === "performer"));

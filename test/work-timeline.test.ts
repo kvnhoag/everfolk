@@ -80,8 +80,11 @@ test("ordinary and specialist job ages move earlier without bypassing their exis
   const astrologer = engine.world.character!.jobs.find(job => job.id === "astrologer")!;
   assert.equal(astrologer.minAge, 18);
   assert.deepEqual(astrologer.requirements, previous.character.jobs.find(job => job.id === "astrologer")!.requirements);
-  assert.equal(activity(engine, qualifiedLife(engine, 18), "work-astrologer").available, false, "The separately authored 29 BCE evidence gate remains in force.");
-  assert.equal(activity(engine, qualifiedLife(engine, 37), "work-astrologer").available, true);
+  assert.equal(activity(engine, qualifiedLife(engine, 17), "work-astrologer").available, false);
+  assert.equal(activity(engine, qualifiedLife(engine, 18), "work-astrologer").available, true, "The revised profession concerns traditional sky omens rather than later natal horoscopes.");
+  const retained = createEngine(controlledWorld(namedCatalog));
+  assert.equal(activity(retained, qualifiedLife(retained, 18), "work-astrologer").available, false, "Retained Roman-era lives keep their separately authored 29 BCE gate.");
+  assert.equal(activity(retained, qualifiedLife(retained, 37), "work-astrologer").available, true);
 });
 
 test("an apprenticeship earns a small return and skill through work, then permits a qualified regular job", () => {

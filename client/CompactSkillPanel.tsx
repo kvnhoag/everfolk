@@ -11,15 +11,15 @@ export default function CompactSkillPanel({ life, world, activities = [], choice
   life: LifeState; world: WorldPack; activities?: readonly ActivityAvailability[]; choice?: Choice | null;
   previewOnly?: boolean; onOpenTree?: () => void;
 }) {
-  // Decision consequences stay hidden; the sidebar shows observed proficiency.
+  // The sidebar shows observed proficiency without revealing a choice's growth modifiers.
   const model = useMemo(() => compactSkillPreview(world, life, undefined, activities), [world, life, activities]);
   const [selection, setSelection] = useState<{ lifeKey: string; branch: string } | null>(null);
   const selectorId = useId();
   const lifeKey = JSON.stringify([life.worldFingerprint, life.seed]);
   if (previewOnly) return choice ? <aside className="compact-skills is-preview is-single-branch" aria-label="Choice preview">
-    <header><div><span className="eyebrow">CHOICE PREVIEW</span><h3>Choice effects</h3></div></header>
+    <header><span className="eyebrow">CHOICE PREVIEW</span></header>
     <p className="compact-skill-preview-label">{choice.text}</p>
-    <section className="choice-preview-effects" aria-label="Stat and other effects"><ChoiceImpact choice={choice} life={life} world={world} hideSkills emptyText="No immediate change." /></section>
+    <section className="choice-preview-effects" aria-label="Stat, skill and other effects"><ChoiceImpact choice={choice} life={life} world={world} showSkillChanges emptyText="No immediate change." /></section>
   </aside> : null;
   if (!model.nodes.length) return null;
   const { branch: activeBranch, nodes, branches } = compactSkillView(model, life, selection?.lifeKey === lifeKey ? selection.branch : undefined);

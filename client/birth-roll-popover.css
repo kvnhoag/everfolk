@@ -18,8 +18,11 @@
 .birth-popover-continue{display:inline-flex;justify-content:center;align-items:center;gap:20px;min-height:43px;flex-shrink:0;border:1px solid #4c6750;border-radius:4px;background:#4c6750;color:#fbf8ef;padding:11px 17px;font-size:12px;font-weight:500;cursor:pointer}
 .birth-popover-continue:hover:not(:disabled){background:#3c5741;border-color:#3c5741;color:#fff}
 .birth-popover-continue:disabled{background:#d9dfcd;border-color:#cdd6bf;color:#94a187;cursor:default}
-.birth-popover-close:focus-visible,.birth-popover-continue:focus-visible{outline:2px solid #a48258;outline-offset:3px}
+.birth-popover-reborn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:11px 17px;border:1px solid #aebb9e;border-radius:4px;background:transparent;color:#536b50;font-size:12px;font-weight:500;cursor:pointer}
+.birth-popover-reborn:hover{background:#e9eddf;border-color:#74816b}
+.birth-popover-close:focus-visible,.birth-popover-continue:focus-visible,.birth-popover-reborn:focus-visible{outline:2px solid #a48258;outline-offset:3px}
 body:has(.birth-roll-popover[open]){overflow:hidden}
 @media(min-width:601px){.birth-roll-popover .birth-roll-cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:600px){.birth-roll-popover{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:7px}.birth-popover-heading{padding:20px 18px 15px;gap:12px}.birth-popover-heading h2{font-size:31px}.birth-popover-heading p{font-size:11px}.birth-popover-content{padding:0 13px}.birth-roll-popover .birth-stat-roll{padding:13px}.birth-roll-popover .birth-roll-origin>strong{font-size:11px}.birth-roll-popover .birth-roll-card{padding:12px 10px 9px}.birth-roll-popover .birth-roll-number{font-size:36px;min-height:43px}.birth-popover-footer{position:sticky;bottom:0;z-index:1;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:15px 18px 18px;border-top:1px solid #d9dfcc}.birth-popover-footer>p{max-width:none;font-size:9px}.birth-popover-continue{width:100%;min-height:44px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.birth-roll-popover::backdrop{backdrop-filter:none}}
+@media(max-width:600px){.birth-popover-reborn{width:100%;min-height:44px}}

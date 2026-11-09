@@ -34,6 +34,7 @@ import { choiceProgressFeedback } from "./compact-skill.ts";
 import type { ProgressFeedback } from "./compact-skill.ts";
 import { personText, resolvePartner } from "../src/people.ts";
 import { romanticPartnerLabel } from "./relationship-labels.ts";
+import { worldBeginning, worldPlace } from "./world-era.ts";
 import "./birth-intro.css";
 import "./life-dashboard.css";
 import "./life-info-sidebar.css";
@@ -133,6 +134,8 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
   const world = lifeEngine.world;
+  const place = worldPlace(world, life.year);
+  const birthplace = worldPlace(world, world.startYear);
   const characterName = life.character?.name ?? "Damon";
   const displayName = game.hasRevealedStats ? characterName : "Your life";
   const deathCause = world.character?.deathCauses.find(item => item.id === life.deathCauseId);
@@ -382,11 +385,11 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           <h1>{isDead ? "Life ended" : world.title}<span>.</span></h1>
           <p className="chapter-subtitle">{isDead ? "Your life story, from birth to death." : "Grow up, find work and build a life in ancient Egypt."}</p>
         </div>
-        <div className="chapter-date" aria-label={`Current year ${formatYear(life.year)}`}><span className="date-label">{isDead ? "FINAL YEAR" : "CURRENT YEAR"}</span><span className="date-value">{Math.abs(life.year)} <small>{life.year < 0 ? "BCE" : "CE"}</small></span><p><Icon name="pin" size={14} /> Alexandria, Egypt</p></div>
+        <div className="chapter-date" aria-label={`Current year ${formatYear(life.year)}`}><span className="date-label">{isDead ? "FINAL YEAR" : "CURRENT YEAR"}</span><span className="date-value">{Math.abs(life.year)} <small>{life.year < 0 ? "BCE" : "CE"}</small></span><p><Icon name="pin" size={14} /> {place}, Egypt</p></div>
       </section>}
 
       {game.hasBegun && <section className="life-session-bar" aria-label="Time controls">
-        <div className="life-session-age">Age <strong>{life.age}</strong></div><div className="life-session-year">{formatYear(life.year)} · Alexandria</div>
+        <div className="life-session-age">Age <strong>{life.age}</strong></div><div className="life-session-year">{formatYear(life.year)} · {place}</div>
         <div className="playback-bar life-clock">
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else game.continueLife(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
@@ -400,7 +403,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
       <div className={`life-layout ${isDead ? "life-has-ended" : ""}`}>
         <aside className="character-panel" aria-label="Your character">
           <div className="portrait-frame"><PixelPortrait age={life.age} name={displayName} seed={life.seed} sex={life.character?.sex} originId={life.originId} avatarVariant={life.character?.avatarVariant} /><span className="portrait-label">{isDead ? "DECEASED" : "YOUR LIFE"}</span></div>
-          <h2>{displayName}</h2><p className="character-origin">Of Alexandria</p>
+          <h2>{displayName}</h2><p className="character-origin">Of {place}</p>
           <div className="age-line"><span>{isDead && life.age === 0 ? "Died in infancy" : <>Age <strong>{life.age}</strong></>}</span><span className="tiny-divider" /><span>{isDead ? "Life ended" : stage}</span></div>
           {!game.hasBegun && <div className="character-details">
             <div><span>BACKGROUND</span><p>{game.hasRevealedStats ? origin.title : "Not revealed yet"}</p></div>
@@ -428,8 +431,8 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           {!game.hasBegun ? <section className="birth-record birth-intro-record" aria-labelledby="birth-title">
             <div className="birth-intro-art"><img src="/assets/pixel/scenes/birth.svg" alt="Pixel illustration of a newborn and caregiver" /></div>
             <h2 id="birth-title">{game.hasRevealedStats ? `${characterName} is born.` : "A new life begins."}</h2>
-            <p>{game.hasRevealedStats ? origin.text : "A new life in Alexandria."}</p>
-            <dl className="birth-facts"><div><dt>PLACE</dt><dd>Alexandria, Egypt</dd></div><div><dt>BORN</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>HOUSEHOLD</dt><dd>{game.hasRevealedStats ? origin.title : "Not revealed yet"}</dd></div></dl>
+            <p>{game.hasRevealedStats ? origin.text : `A new life on Egypt's coast.`}</p>
+            <dl className="birth-facts"><div><dt>PLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BORN</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>HOUSEHOLD</dt><dd>{game.hasRevealedStats ? origin.title : "Not revealed yet"}</dd></div></dl>
             {game.hasRevealedStats && <SourceLinks ids={origin.sourceIds} />}
             <div className="birth-actions"><button className="primary-button" onClick={() => setBirthPopoverOpen(true)}>Start a new life <Icon name="arrow" size={20} /></button><button className="text-button" onClick={() => setPanel("sources")}>History &amp; sources <Icon name="book" size={15} /></button></div>
             <p className="birth-note">A year takes 25 seconds at 1×.</p>
@@ -457,9 +460,9 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
 
-    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Historical Lives · Alexandria</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
+    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Historical Lives · {place}</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
     </div>
-    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={() => { if (!game.hasRevealedStats) return; setBirthPopoverOpen(false); setMenuOpen(false); game.beginLife(); }} />}
+    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={() => { if (!game.hasRevealedStats) return; setBirthPopoverOpen(false); setMenuOpen(false); game.beginLife(); }} />}
     {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} />}
     <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : panel === "legacy" ? "legacy-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
@@ -494,9 +497,9 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           <div className="evidence-key"><span>Documented history</span><span>Historical context · fictional story</span><span>Fictional personal story</span></div>
           <div className="sources-list">{world.sources?.map(source => <article key={source.id} id={`source-${source.id}`}><span className="eyebrow">{source.kind} · {source.publisher}</span><h3><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></h3><p className="source-period">{source.period} · {source.geography}</p><p>{source.summary}</p><p className="source-limits"><strong>Scope:</strong> {source.limitations}</p></article>)}</div>
         </> : panel === "world" ? <>
-          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">Alexandria, Egypt.</h2><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of ancient Alexandria harbor" />
-          <p>Your life begins in Alexandria in 66 BCE. If you live long enough, the city and the government around it will change as your own life unfolds.</p><p>You can work at the harbor, learn a trade or study writing. Choose a job, meet a partner and decide whether to have children.</p>
-          <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>Alexandria, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
+          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">{world.title}</h2><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
+          <p>{worldBeginning(world)}</p><p>You can work at the harbor, learn a trade or study writing. Choose a job, meet a partner and decide whether to have children.</p>
+          <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
           <p className="fine-print">The setting has documented historical anchors; the individual life is fiction. The illustration is evocative rather than an archaeological reconstruction. Evidence from other periods and places is identified under Sources.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>
         </> : <>
           <p className="eyebrow">HISTORICAL LIVES</p><h2 id="dialog-title">One life. Another age.</h2>

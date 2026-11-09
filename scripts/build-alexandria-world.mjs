@@ -21,6 +21,7 @@ import { applyPeople } from "./alexandria-people.mjs";
 import { applySocialRoles } from "./alexandria-social-roles.mjs";
 import { applyLifeProse } from "./alexandria-prose-life.mjs";
 import { applyCareerProse } from "./alexandria-prose-careers.mjs";
+import { applyClassicalEra } from "./alexandria-classical-era.mjs";
 
 const root = new URL("../", import.meta.url);
 const sources = JSON.parse(readFileSync(new URL("research/sources.json", root), "utf8"));
@@ -956,5 +957,6 @@ applyCareerProse(world);
 world.version = "0.31.0";
 world.eventPacing.variety = { recentWindow: 6, recentWeight: 0.08, repeatWeight: 0.35 };
 world.eventPacing.rareEvents = { annualChance: 0.012, cooldownYears: 12 };
+applyClassicalEra(world);
 writeFileSync(output, `${JSON.stringify(world, null, 2)}\n`);
 console.log(`Built ${world.events.length} events, ${world.sources.length} sources, ${bands.length} mortality bands and ${world.character.activities.length} character activities: ${fileURLToPath(output)}`);

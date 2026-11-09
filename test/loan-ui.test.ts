@@ -11,14 +11,14 @@ const engine = createEngine(current);
 const action = (id: string) => engine.world.character!.activities.find(activity => activity.id === id)!;
 function adult(): LifeState {
   const life = structuredClone(engine.start("loan-ui"));
-  life.age = 18; life.year = -48; life.phase = "ready"; life.pendingEventId = null;
+  life.age = 18; life.year = engine.world.startYear + 18; life.phase = "ready"; life.pendingEventId = null;
   life.economy!.cash = 40; life.economy!.debt = 0;
   return life;
 }
 
 test("loan quotes show the actual cash and total debt while keeping the life immutable", () => {
   const life = adult(), before = structuredClone(life);
-  assert.deepEqual(loanEffectNotes(action("borrow-moneylender"), life, engine.world), ["Due 45 BCE"]);
+  assert.deepEqual(loanEffectNotes(action("borrow-moneylender"), life, engine.world), ["Due 329 BCE"]);
   assert.deepEqual(getMoneyImpact(action("borrow-moneylender"), life, engine.world), [
     { id: "cash", label: "Cash", min: 100, max: 100, inverse: false },
     { id: "debt", label: "Debt", min: 130, max: 130, inverse: true },
@@ -33,7 +33,7 @@ test("loan quotes show the actual cash and total debt while keeping the life imm
   assert.equal(partial.find(item => item.id === "debt")!.min, -10);
   assert.equal(getWealthSummary(engine.world, life)!.normalDebt, 20);
   assert.deepEqual(loanEffectNotes(action("repay-moneylender"), life, engine.world), ["Loan settled"]);
-  assert.deepEqual(loanEffectNotes(action("extend-moneylender"), life, engine.world), ["New deadline 43 BCE"]);
+  assert.deepEqual(loanEffectNotes(action("extend-moneylender"), life, engine.world), ["New deadline 327 BCE"]);
   assert.deepEqual(life, activeBefore);
   assert.deepEqual(before.economy?.loan, undefined);
 });
@@ -43,7 +43,7 @@ test("the loan reminder follows its exact deadline, escalation and settlement", 
   life.economy!.loan = { balance: 130, borrowedAge: 18, dueAge: 21, extensions: 0 };
   life.economy!.debt = 130;
   assert.equal(getLoanSummary(engine.world, life)!.status, "Due in 3 years");
-  assert.equal(getLoanSummary(engine.world, life)!.dueYear, "45 BCE");
+  assert.equal(getLoanSummary(engine.world, life)!.dueYear, "329 BCE");
   life.age = 21;
   assert.equal(getLoanSummary(engine.world, life)!.status, "Payment due this year");
   life.age = 22;

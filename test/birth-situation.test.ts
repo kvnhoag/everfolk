@@ -25,7 +25,7 @@ test("birth is recorded without asking the player to choose being born or househ
   for (let index = 0; index < 128; index++) {
     const life = engine.start(`automatic-birth-${index}`);
     assert.equal(life.age, 0);
-    assert.equal(life.year, -66);
+    assert.equal(life.year, pack.startYear);
     assert.equal(life.phase, "ready");
     assert.equal(life.pendingEventId, null);
     assert.deepEqual(engine.getChoices(life), []);

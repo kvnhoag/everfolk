@@ -4,6 +4,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import romanEraPack from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import legacyPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import retainedRelationshipsPack from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual, resolveLifeScenes } from "../client/scene-model.ts";
@@ -48,7 +49,7 @@ test("every shipped event has an authored visual rather than a text-keyword gues
   const renamed = { ...pack.events.find(event => event.id === "an-unwell-week")!, title: "A changed heading", text: "Edited story text." } as LifeEvent;
   assert.equal(defaultEventVisual(renamed).scene, "rest");
   assert.equal(defaultEventVisual(pack.events.find(event => event.id === "a-place-on-the-manifest")! as LifeEvent).scene, "history-city");
-  assert.equal(defaultEventVisual(pack.events.find(event => event.id === "news-of-actium")! as LifeEvent).scene, "history-city", "news must not invent local fighting");
+  assert.equal(defaultEventVisual(romanEraPack.events.find(event => event.id === "news-of-actium")! as LifeEvent).scene, "history-city", "retained news must not invent local fighting");
   assert.equal(defaultEventVisual(pack.events.find(event => event.id === "child-useful-hands")! as LifeEvent).scene, "childhood", "a child's tasks must not show an adult craft worker");
 });
 
@@ -227,7 +228,8 @@ test("only a real child activity depicts parenthood, while childhood care keeps 
 });
 
 test("dated history and the annual event remain available beside a pending decision", () => {
-  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  // This fixture checks an actual retained Roman-era event beside its age-18 decision.
+  const world = withoutMoneylender(structuredClone(romanEraPack) as WorldPack);
   delete world.mortality;
   delete world.health!.mortalityCalibration;
   delete world.eventPacing;

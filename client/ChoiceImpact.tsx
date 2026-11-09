@@ -1,6 +1,7 @@
 import type { Choice, LifeState, WorldPack } from "../src/types.ts";
 import { getChoiceImpact } from "./choice-impact.ts";
 import ImpactValue from "./ImpactValue.tsx";
+import PixelIcon from "./PixelIcon.tsx";
 import { getMoneyImpact } from "./wealth.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
 import { severeHealthRisk, formatHealthRisk } from "./health-risk.ts";
@@ -76,7 +77,7 @@ function healthEffects(choice: Choice, life: LifeState, world: WorldPack): { tex
 }
 
 /** Immediate outcome effects only: reading a preview never advances the simulation. */
-export default function ChoiceImpact({ choice, life, world, hideSkills = true, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; emptyText?: string }) {
+export default function ChoiceImpact({ choice, life, world, hideSkills = true, showSkillChanges = false, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; showSkillChanges?: boolean; emptyText?: string }) {
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
@@ -86,7 +87,8 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, e
   const severeRisk = severeHealthRisk(life, world, choice);
   const loanNotes = loanEffectNotes(choice, life, world);
   const mastery = hideSkills ? [] : getMasteryPreviews(choice, life, world);
-  const skillImpact = hideSkills ? [] : getSkillImpact(choice, life, world);
+  // Immediate proficiency changes can be shown without exposing future growth modifiers.
+  const skillImpact = showSkillChanges || !hideSkills ? getSkillImpact(choice, life, world) : [];
   const early = hideSkills ? [] : previewEarlyInfluences(choice, world, life);
   const social = socialRoleImpact(choice, life, world);
   const hasRange = changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
@@ -95,12 +97,12 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, e
     <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
       {changedStats.map(stat => {
-        return <span className="impact-stat" key={stat.id}>
-          <span className="impact-stat-label">{stat.label}</span>{" "}<ImpactValue min={stat.min} max={stat.max} />
+        return <span className={`impact-stat impact-attribute stat-${stat.id}`} key={stat.id}>
+          <span className="impact-stat-label"><PixelIcon name={stat.id} size={12} />{stat.label}</span>{" "}<ImpactValue min={stat.min} max={stat.max} />
         </span>;
       })}
-      {moneyImpact.map(item => <span className="impact-stat" key={`money-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} inverse={item.inverse} suffix={world.economy!.currency.short} /></span>)}
-      {skillImpact.map(item => <span className="impact-stat" key={`skill-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
+      {moneyImpact.map(item => <span className={`impact-stat impact-attribute stat-${world.economy!.stat}`} key={`money-${item.id}`}><span className="impact-stat-label"><PixelIcon name="coin" size={12} />{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} inverse={item.inverse} suffix={world.economy!.currency.short} /></span>)}
+      {skillImpact.map(item => <span className="impact-stat impact-skill" key={`skill-${item.id}`}><span className="impact-stat-label"><PixelIcon name={item.id} size={14} />{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
       {mastery.map(item => <span className="impact-stat impact-gain" key={`mastery-${item.target}-${item.id}`}>{item.label} cap {item.cap}{!opportunity && ` · ${Number((item.probability * 100).toFixed(1))}% chance`}</span>)}
       {connections.map(item => <span className="impact-stat" key={`closeness-${item.label}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
       {health.map(item => <span className={`impact-stat impact-${item.gain ? "gain" : "loss"}`} key={item.text}>{item.text}</span>)}

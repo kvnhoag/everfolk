@@ -7,6 +7,7 @@ import { contentFingerprint } from "../src/random.ts";
 import { selectAutomaticChoice } from "../client/yearly-focus.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import raw from "../worlds/alexandria-sample.json" with { type: "json" };
+import socialRelease from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import archived from "../worlds/alexandria-0.29.0.json" with { type: "json" };
 
 const world = raw as WorldPack, previous = archived as WorldPack;
@@ -19,7 +20,8 @@ function withoutProse<T>(value: T): T {
 
 test("all sixteen encountered identities offer explicit friendship and bounded shared work", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.31.0"); assert.equal(world.events.length, 471);
+  assert.equal(world.version, "0.32.0");
+  assert.equal(world.events.filter(event => event.id.startsWith("meet-person-")).length, 16);
   assert.equal(world.character!.activities.length, 256);
   assert.equal(world.character!.socialRelationships, true);
   const engine = createEngine(world), birth = engine.start("social-content-inventory");
@@ -58,6 +60,8 @@ test("all sixteen encountered identities offer explicit friendship and bounded s
 });
 
 test("social ties leave the economy, skills, household care and earlier story rules unchanged", () => {
+  // Compare the original social release independently of the later era rewrite.
+  const world = socialRelease as WorldPack;
   for (const key of ["stats", "health", "mortality", "economy", "knowledge", "origins", "flags", "legacy", "sources", "yearlyEffects", "yearlyRules", "eventPacing"] as const) assert.deepEqual(withoutProse(world[key]), withoutProse(previous[key]), key);
   for (const key of ["skills", "jobs", "identity", "partners", "childNames", "deathCauses", "encounterPacing"] as const) assert.deepEqual(world.character![key], previous.character![key], key);
   const { description: oldDescription, ...oldRelationships } = previous.relationships!;

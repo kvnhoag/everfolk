@@ -10,7 +10,7 @@ const engine = createEngine(pack);
 function lifeAt(age: number): LifeState {
   const life = structuredClone(engine.start("progressive-character-ui"));
   life.age = age;
-  life.year = -66 + age;
+  life.year = pack.startYear + age;
   life.phase = "ready";
   life.pendingEventId = null;
   return life;

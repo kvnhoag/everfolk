@@ -1,14 +1,15 @@
 import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createEngine, yearAtAge } from "../src/index.ts";
+import { createEngine } from "../src/index.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
-import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
+import type { Condition, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import romanEra from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.18.0.json" with { type: "json" };
 
-function fixture(): WorldPack {
-  const world = withoutMoneylender(structuredClone(current) as WorldPack);
+function fixture(source = current): WorldPack {
+  const world = withoutMoneylender(structuredClone(source) as WorldPack);
   // This fixture isolates career qualifications from all illness onset paths.
   delete world.health!.mortalityCalibration;
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
@@ -108,7 +109,7 @@ test("an earned workshop recommendation opens explicit leadership work through a
   assert.ok(successful, "An ordinary origin can earn the opening through training.");
 });
 
-test("recommendations never bypass job skills, current service or the end of royal rule", () => {
+test("recommendations never bypass job skills or service, and retained Roman-era appointments close at annexation", () => {
   const engine = createEngine(fixture());
   const life = structuredClone(ageTo(engine, engine.start("appointment-gates"), 28));
   for (const id of ["court-recommendation", "officer-recommendation", "scholar-recommendation", "workshop-recommendation"]) life.flags[id] = true;
@@ -122,14 +123,17 @@ test("recommendations never bypass job skills, current service or the end of roy
   life.character!.jobId = "officer";
   assert.equal(available(engine, life, "seek-general-command").available, true);
   assert.equal(available(engine, life, "seek-court-appointment").available, true);
-  life.age = 36;
-  life.year = yearAtAge(engine.world.startYear, 36);
-  assert.equal(life.year, -30);
+  const historical = createEngine(fixture(romanEra));
+  const closing = structuredClone(ageTo(historical, historical.start("retained-appointment-gates"), 36));
+  for (const id of Object.keys(closing.character!.skills)) closing.character!.skills[id] = 80;
+  for (const id of ["court-recommendation", "officer-recommendation", "scholar-recommendation", "workshop-recommendation", "officer-commission"]) closing.flags[id] = true;
+  closing.character!.jobId = "officer";
+  assert.equal(closing.year, -30);
   for (const id of ["seek-officer-commission", "seek-general-command", "seek-court-appointment", "prepare-official-petition", "organise-unit-supplies"]) {
-    assert.equal(available(engine, life, id).available, false, id);
+    assert.equal(available(historical, closing, id).available, false, id);
   }
-  assert.equal(available(engine, life, "work-patron-supported-reader").available, true);
-  assert.equal(available(engine, life, "work-pottery-workshop-lead").available, true);
+  assert.equal(available(historical, closing, "work-patron-supported-reader").available, true);
+  assert.equal(available(historical, closing, "work-pottery-workshop-lead").available, true);
 });
 
 test("rare appointments keep skill requirements and older lives keep their authored fixed chances", () => {
@@ -139,7 +143,7 @@ test("rare appointments keep skill requirements and older lives keep their autho
   const command = engine.world.character!.activities.find(item => item.id === "seek-general-command")!;
   assert.ok(Math.abs(getOpportunityPreview(engine.world, life, command)!.probability - .02) < 1e-12);
   life.flags["officer-recommendation"] = true;
-  life.flags["joined-alexandrian-war"] = true;
+  life.flags["served-during-succession"] = true;
   life.character!.skills.warfare = 80;
   life.character!.skills.oratory = 50;
   const improved = getOpportunityPreview(engine.world, life, command)!.probability;
@@ -148,7 +152,18 @@ test("rare appointments keep skill requirements and older lives keep their autho
     const retained = previous.character.activities.find(item => item.id === id)!;
     assert.equal("weightModifiers" in retained.outcomes[0], false);
     assert.equal("opportunity" in retained, false);
-    assert.deepEqual(engine.world.character!.activities.find(item => item.id === id)!.when, retained.when);
+    const expected = structuredClone(retained.when) as Condition;
+    let calendars = 0;
+    function rebase(condition: Condition) {
+      if (condition.type === "year" && condition.op === "lt" && condition.value === -30) {
+        condition.value = engine.world.startYear + engine.world.maxAge;
+        calendars++;
+      } else if (condition.type === "all" || condition.type === "any") condition.conditions.forEach(rebase);
+      else if (condition.type === "not") rebase(condition.condition);
+    }
+    rebase(expected);
+    assert.equal(calendars, 1);
+    assert.deepEqual(engine.world.character!.activities.find(item => item.id === id)!.when, expected, "Only the calendar horizon changes; skill, age, job and resource guards remain exact.");
   }
 });
 

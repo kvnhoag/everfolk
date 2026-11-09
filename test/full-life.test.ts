@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState } from "../src/types.ts";
-import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+// Retain the original Roman-era chronology and evidence audit under its exact release.
+import pack from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import comparisonPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import registry from "../research/sources.json" with { type: "json" };
@@ -66,7 +67,7 @@ function safeEngine(originalOpening = false, source = pack): LifeEngine {
   return createEngine(copy);
 }
 
-test("the shipped world embeds the exact research registry and all evidence references resolve", () => {
+test("the retained 0.31 world embeds its exact research registry and all evidence references resolve", () => {
   assert.deepEqual(pack.sources, registry);
   const ids = new Set(registry.map(source => source.id));
   assert.equal(ids.size, registry.length);
@@ -80,7 +81,7 @@ test("the shipped world embeds the exact research registry and all evidence refe
   assert.ok(registry.every(source => source.limitations.length > 0 && source.period.length > 0 && source.geography.length > 0));
 });
 
-test("only the four dated political anchors are classified as documented personal-world history", () => {
+test("the retained 0.31 world classifies only its four Roman-era anchors as documented history", () => {
   const documented = pack.events.filter(event => event.evidence === "documented-history");
   assert.deepEqual(documented.map(event => event.id).sort(), ["caesar-in-alexandria", "news-of-actium", "roman-rule", "water-and-war"].sort());
   assert.ok(documented.every(event => event.mode === "automatic" && event.choices.length === 0));
@@ -108,7 +109,7 @@ test("the retained 0.14 comparison conversion preserves the source and its reduc
   assert.ok(Math.abs(tail.annualProbability - -Math.expm1(-1 / mortalityModel.oldestAgeTail.sourceRemainingLifeExpectancy)) < 1e-12);
 });
 
-test("historical anchors occur in their documented calendar years and the correct lived ages", () => {
+test("retained Roman-era anchors occur in their documented calendar years and the correct lived ages", () => {
   const engine = safeEngine();
   const life = complete(engine, "calendar-full-life");
   for (const [id, year, age] of [
@@ -227,7 +228,7 @@ test("every completed living year has its own background brief alongside histori
     "A decision year should still retain its background brief.");
 });
 
-test("the shipped personal decision pools sustain two-to-three-year gaps through a full life", () => {
+test("the retained 0.31 personal decision pools sustain two-to-three-year gaps through a full life", () => {
   const engine = safeEngine();
   assert.equal(pack.eventPacing.minChoiceGapYears, 2);
   assert.equal(pack.eventPacing.maxChoiceGapYears, 3);

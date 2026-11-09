@@ -1,0 +1,110 @@
+[
+  {
+    "id": "classical-rhakotis",
+    "title": "Strabo, Geography 17.1.6–8: Rhakotis and Alexandria",
+    "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/17A1*.html",
+    "publisher": "LacusCurtius, University of Chicago; H. L. Jones, Loeb translation (1932)",
+    "kind": "primary",
+    "period": "Augustan-era account describing the earlier settlement and Alexander's foundation",
+    "geography": "Egyptian Mediterranean coast, Rhakotis and Alexandria",
+    "summary": "Describes Rhakotis as a settlement preceding Alexandria, the suitability of the harbor and the tradition of Alexander directing the city's foundation.",
+    "limitations": "Written centuries after the foundation. Its later urban description is not a map of the coast in 350 BCE. The settlement's extent, inhabitants and individual household experiences are not established by this account.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-rhakotis-archaeology",
+    "title": "Alexandria, Egypt, before Alexander the Great: A multidisciplinary approach yields rich discoveries",
+    "url": "https://www.geosociety.org/gsatoday/archive/17/8/pdf/i1052-5173-17-8-4.pdf",
+    "publisher": "Jean-Daniel Stanley and colleagues, GSA Today 17(8), 2007; doi:10.1130/GSAT01708A.1",
+    "kind": "scholarship",
+    "period": "Pre-Alexandrian activity, with sediment-core evidence extending to about 1000 BCE",
+    "geography": "Alexandria's East Harbor and adjacent mainland coast",
+    "summary": "Archaeological, sedimentary and geochemical indicators support human activity on the coast long before Alexander and a pre-existing settlement beneath the later city.",
+    "limitations": "The exact location, size and organization of Rhakotis remain uncertain. This evidence does not supply a detailed 350 BCE city plan or demographic rates. The paper uses 332 BCE for Alexandria's foundation; the game adopts the conventional 331 BCE year from its separate chronology source.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-egypt-transitions",
+    "title": "Egypt in the Ptolemaic Period",
+    "url": "https://www.metmuseum.org/essays/egypt-in-the-ptolemaic-period",
+    "publisher": "Marsha Hill, Department of Egyptian Art, The Metropolitan Museum of Art (2016)",
+    "kind": "museum",
+    "period": "Egypt before Alexander and the Ptolemaic period, including 343, 332 and 305 BCE",
+    "geography": "Egypt and the western Nile Delta",
+    "summary": "Places Persian reconquest in 343 BCE, Alexander's takeover in 332 BCE and Ptolemy's kingship in 305 BCE. It also describes earlier Greek-Egyptian trade through Delta ports and Naukratis.",
+    "limitations": "An institutional overview rather than a household history. Political dates do not establish every local response, equal access to professions or the game's numerical rewards. Ptolemy governing after Alexander's death must be distinguished from his later adoption of kingship.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-alexander",
+    "title": "The Rise of Macedon and the Conquests of Alexander the Great",
+    "url": "https://www.metmuseum.org/essays/the-rise-of-macedonia-and-the-conquests-of-alexander-the-great",
+    "publisher": "Colette Hemingway and Seán Hemingway, The Metropolitan Museum of Art (2004)",
+    "kind": "museum",
+    "period": "Fourth-century BCE Macedon; Alexander's reign of 336–323 BCE and Asian campaign from 334 BCE",
+    "geography": "Macedon, Greece, Asia and Egypt",
+    "summary": "Provides the accession and campaign sequence for Alexander, including his crossing into Asia in 334 BCE and the succession crisis following his death.",
+    "limitations": "A broad political and art-historical account, not evidence that the fictional player met Alexander. Personal conversations, access to his entourage, recruitment outcomes and civilian consequences are authored situations.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-foundation-chronology",
+    "title": "Pergamon and the Hellenistic Kingdoms of the Ancient World: chronology",
+    "url": "https://resources.metmuseum.org/resources/metpublications/pdf/Pergamon_and_the_Hellenistic_Kingdoms_of_the_Ancient_World.pdf",
+    "publisher": "The Metropolitan Museum of Art, exhibition catalogue (2016)",
+    "kind": "museum",
+    "period": "Late Classical and Hellenistic chronology, including Alexandria's foundation in 331 BCE",
+    "geography": "Mediterranean and Hellenistic kingdoms",
+    "summary": "The catalogue chronology dates the foundation of Alexandria to 331 BCE and places it within Alexander's wider campaigns and the emergence of the successor kingdoms.",
+    "limitations": "A year-level chronology. The game's precise annual ordering is a calendar convention, not a reconstruction of exact foundation ceremonies, building completion dates or individual participation.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-aristotle",
+    "title": "Aristotle, section 1: Aristotle's Life",
+    "url": "https://plato.stanford.edu/entries/aristotle/",
+    "publisher": "Christopher Shields, Stanford Encyclopedia of Philosophy; substantive revision 2020",
+    "kind": "scholarship",
+    "period": "Aristotle, 384–322 BCE; Macedonian tuition from 343 and the Athenian Lyceum from 335 BCE",
+    "geography": "Stagira, Athens, Assos, Lesbos, Macedon and Chalcis",
+    "summary": "Reconstructs Aristotle's movements, the invitation to teach Alexander in 343 BCE and his return to Athens to establish the Lyceum in 335 BCE.",
+    "limitations": "The duration and substance of Alexander's tuition are uncertain. It provides no basis for placing Aristotle in Alexandria. A player's visit, lesson, dialogue or scholarly recognition is fictional and needs an explicit journey to the appropriate place and a compatible date.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-euclid",
+    "title": "Euclid of Alexandria: biography and evidence",
+    "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/",
+    "publisher": "J. J. O'Connor and E. F. Robertson, MacTutor History of Mathematics, University of St Andrews",
+    "kind": "scholarship",
+    "period": "Euclid's approximate activity around 300 BCE under Ptolemy I",
+    "geography": "Alexandria, Egypt",
+    "summary": "Discusses Euclid's Alexandrian teaching, the Elements and the sparse later testimony linking him to the first Ptolemy.",
+    "limitations": "His precise birth, death, birthplace and career chronology are uncertain. Circa 300 BCE is an approximate scholarly setting, not an exact publication or appointment date. Anecdotes and a player's personal encounter must not be represented as verified biographical incidents.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-library",
+    "title": "Intellectual Pursuits of the Hellenistic Age",
+    "url": "https://www.metmuseum.org/essays/intellectual-pursuits-of-the-hellenistic-age",
+    "publisher": "The Metropolitan Museum of Art, Heilbrunn Timeline of Art History (2007)",
+    "kind": "museum",
+    "period": "Early Hellenistic intellectual patronage and later developments",
+    "geography": "Athens, Alexandria and other Hellenistic centers",
+    "summary": "Describes Ptolemaic patronage of scholarship and Alexandria's Library and Mouseion as an early Hellenistic intellectual center, with copying, criticism and learned collaboration.",
+    "limitations": "It does not establish an exact foundation year or prove that particular careers were available before the institutions developed. The game uses an approximate early-third-century opening for its institution-specific opportunities. Later scholars discussed in the overview require their own chronological guards.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "classical-pharos",
+    "title": "Reconstructions: The Pharos of Alexandria",
+    "url": "https://www.bibalex.org/en/Project/Details?DocumentID=1301",
+    "publisher": "Alexandria and Mediterranean Research Center, Bibliotheca Alexandrina",
+    "kind": "museum",
+    "period": "Pharos erection during 283–279 BCE under Ptolemy II; later monuments have separate dates",
+    "geography": "Alexandria and its Mediterranean coast",
+    "summary": "Dates the lighthouse to the reign of Ptolemy II, between 283 and 279 BCE, and explains the use of archaeological and historical evidence in modern reconstructions.",
+    "limitations": "A reconstruction overview, not a fully recovered original building. A completed lighthouse must not appear at the 350 BCE birth or 331 BCE city foundation. Pharos Island existed earlier; its name alone need not imply the lighthouse. The page's Ptolemy III Serapeum belongs after this cohort's age-100 record.",
+    "accessed": "2026-11-08"
+  }
+]

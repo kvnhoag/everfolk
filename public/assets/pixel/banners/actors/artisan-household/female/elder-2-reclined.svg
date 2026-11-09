@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg shape-rendering="crispEdges" data-appearance-key="artisan-household:female:2" data-origin="artisan-household" data-sex="female" data-avatar-variant="2" data-life-stage="elder" data-skin="#91644c" data-hair="#adb4a6" data-hair-style="headband" data-facial-hair="none" data-robe="#ba704c" data-accent="#ba704c" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="112" viewBox="0 0 240 112">
+  <title>Historical Lives — artisan-household/female/elder-2-reclined</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Contact_shadow" data-name="01 Contact shadow">
+    <rect id="_01_Contact_shadow___pixels_1" data-name="01 Contact shadow · pixels 1" x="148" y="90" width="47" height="2" fill="#a18c68"/>
+  </g>
+  <g id="_02_Limbs" data-name="02 Limbs">
+    <rect id="_02_Limbs___pixels_1" data-name="02 Limbs · pixels 1" x="148" y="83" width="12" height="7" fill="#f5e6bf"/>
+    <rect id="_02_Limbs___pixels_2" data-name="02 Limbs · pixels 2" x="150" y="82" width="8" height="1" fill="#fff2d1"/>
+  </g>
+  <g id="_03_Tunic_and_mantle" data-name="03 Tunic and mantle">
+    <rect id="_03_Tunic_and_mantle___pixels_1" data-name="03 Tunic and mantle · pixels 1" x="159" y="84" width="32" height="7" fill="#ba704c"/>
+    <path id="_03_Tunic_and_mantle___pixels_2" data-name="03 Tunic and mantle · pixels 2" d="M161 83 L188 83 L188 84 L161 84 Z M159 89 L191 89 L191 91 L159 91 Z" fill="#8e4e3b"/>
+    <path id="_03_Tunic_and_mantle___pixels_3" data-name="03 Tunic and mantle · pixels 3" d="M162 84 L164 84 L164 89 L162 89 Z M164 88 L187 88 L187 89 L164 89 Z" fill="#ba704c"/>
+  </g>
+  <g id="_04_Face_and_neck" data-name="04 Face and neck">
+    <rect id="_04_Face_and_neck___pixels_1" data-name="04 Face and neck · pixels 1" x="151" y="82" width="7" height="5" fill="#91644c"/>
+    <rect id="_04_Face_and_neck___pixels_2" data-name="04 Face and neck · pixels 2" x="152" y="87" width="5" height="1" fill="#6d4a3a"/>
+    <rect id="_04_Face_and_neck___pixels_3" data-name="04 Face and neck · pixels 3" x="150" y="84" width="1" height="2" fill="#91644c"/>
+    <rect id="_04_Face_and_neck___pixels_4" data-name="04 Face and neck · pixels 4" x="158" y="84" width="1" height="2" fill="#6d4a3a"/>
+    <rect id="_04_Face_and_neck___pixels_5" data-name="04 Face and neck · pixels 5" x="158" y="85" width="3" height="2" fill="#91644c"/>
+  </g>
+  <g id="_05_Hair_and_age_marks" data-name="05 Hair and age marks">
+    <path id="_05_Hair_and_age_marks___pixels_1" data-name="05 Hair and age marks · pixels 1" d="M151 81 L158 81 L158 83 L151 83 Z M150 82 L159 82 L159 84 L150 84 Z M150 84 L152 84 L152 89 L150 89 Z M157 84 L159 84 L159 89 L157 89 Z" fill="#adb4a6"/>
+    <rect id="_05_Hair_and_age_marks___pixels_2" data-name="05 Hair and age marks · pixels 2" x="151" y="83" width="7" height="1" fill="#ba704c"/>
+  </g>
+  <g id="_06_Sandals_and_small_details" data-name="06 Sandals and small details">
+    <rect id="_06_Sandals_and_small_details___pixels_1" data-name="06 Sandals and small details · pixels 1" x="154" y="85" width="2" height="1" fill="#263b43"/>
+    <rect id="_06_Sandals_and_small_details___pixels_2" data-name="06 Sandals and small details · pixels 2" x="154" y="86" width="1" height="1" fill="#6d4a3a"/>
+    <path id="_06_Sandals_and_small_details___pixels_3" data-name="06 Sandals and small details · pixels 3" d="M152 84 L154 84 L154 85 L152 85 Z M155 84 L157 84 L157 85 L155 85 Z" fill="#f5e6bf"/>
+    <rect id="_06_Sandals_and_small_details___pixels_4" data-name="06 Sandals and small details · pixels 4" x="164" y="84" width="5" height="2" fill="#91644c"/>
+    <rect id="_06_Sandals_and_small_details___pixels_5" data-name="06 Sandals and small details · pixels 5" x="165" y="86" width="3" height="1" fill="#6d4a3a"/>
+    <rect id="_06_Sandals_and_small_details___pixels_6" data-name="06 Sandals and small details · pixels 6" x="188" y="87" width="3" height="2" fill="#ba704c"/>
+  </g>
+</svg>

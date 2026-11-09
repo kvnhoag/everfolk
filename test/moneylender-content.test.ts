@@ -6,6 +6,7 @@ import { getNetWorth } from "../src/economy.ts";
 import { getChoiceImpact } from "../client/choice-impact.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import retained from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 
 /** Isolate lending from unrelated mortality, income and personal decisions. */
@@ -51,6 +52,8 @@ function defaultsToConfrontation(engine: LifeEngine, seed: string): LifeState {
 }
 
 test("the new loan route preserves adult mortality, childhood and old credit-free packs", () => {
+  // Original lending-release invariants predate the historical setting rewrite.
+  const current = retained;
   assert.equal(current.version, "0.31.0");
   assert.deepEqual(current.health, previous.health);
   assert.deepEqual(current.mortality, previous.mortality);

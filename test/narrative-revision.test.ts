@@ -7,7 +7,8 @@ import { engineForLife, loadAnyLife } from "../client/session.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import { selectAutomaticChoice } from "../client/yearly-focus.ts";
 import previous from "../worlds/alexandria-0.30.0.json" with { type: "json" };
-import current from "../worlds/alexandria-sample.json" with { type: "json" };
+// This comparison certifies the literary-only 0.31 release, before the era revision.
+import current from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 
 // These are the only authored copy fields this release is permitted to change.
 // Conditions, IDs, references, weights and effects are compared in full.

@@ -80,6 +80,8 @@ dialog.birth-roll-popover .birth-roll-card-state i{border-radius:0}
 dialog.birth-roll-popover .birth-popover-continue{border:2px solid #263b43;border-radius:0;background:#41637b;color:#fff2d1;box-shadow:3px 3px 0 #88644735}
 dialog.birth-roll-popover .birth-popover-continue:hover:not(:disabled){background:#293c58;border-color:#263b43}
 dialog.birth-roll-popover .birth-popover-continue:disabled{background:#e5dbc1;border-color:#cdbb95;color:#727562;box-shadow:none}
+dialog.birth-roll-popover .birth-popover-reborn{border:2px solid #baa47a;border-radius:0;background:#f5e6bf;color:var(--ink);box-shadow:3px 3px 0 #88644735}
+dialog.birth-roll-popover .birth-popover-reborn:hover{background:#edcf91;border-color:#886447}
 dialog.birth-roll-popover .birth-roll-skip{color:#41637b;border-color:#41637b}
 dialog.detail-dialog :is(input,select,textarea){border-radius:0;border-color:#baa47a;background:#fff2d1;color:var(--ink)}
 .birth-roll-grid,.birth-roll-stat,.birth-roll-number,.birth-roll-origin,.digit-reel,.digit-reel-window{border-radius:0}

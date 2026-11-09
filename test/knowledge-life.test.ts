@@ -107,7 +107,7 @@ test("continued study limits forgetting but does not cancel advanced-age loss", 
 
 test("new packs remove passive blanket gains while older lives keep their original rules", () => {
   assert.ok(current.knowledge);
-  assert.equal(current.version, "0.31.0");
+  assert.equal(current.version, "0.32.0");
   assert.equal(current.yearlyRules.some(rule => rule.id === "practical-experience" || rule.id === "learning-through-words"), false);
   const engine = createEngine(legacy);
   let life = engine.start("legacy-retention-replay");

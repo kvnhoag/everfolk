@@ -12,6 +12,23 @@ const bonds = delta => ({ type: "stat", stat: "bonds", delta });
 const close = (partner, delta) => ({ type: "closeness", target: "partner", partner, delta });
 const one = (id, text, result, effects = [], when) => ({ id, text, ...(when ? { when } : {}), outcomes: [{ id: `${id}-result`, text: result, weight: 1, effects }] });
 
+// Authored identity pools are independent of the older unsexed playerNames field.
+// Preserve their order: seeded births and introductions depend on the draw index.
+export const ALEXANDRIA_NAME_POOLS = Object.freeze({
+  male: Object.freeze([
+    "Damon", "Apollonios", "Demetrios", "Dionysios", "Herakleides", "Isidoros", "Kallias", "Leon",
+    "Lysimachos", "Menandros", "Nikandros", "Ptolemaios", "Sarapion", "Soter", "Theon", "Tryphon",
+    "Ammonios", "Andronikos", "Athenodoros", "Diodoros", "Doros", "Eirenaios", "Epimachos", "Hermias",
+    "Horus", "Imouthes", "Pachrates", "Panebchounis", "Petosiris", "Psenamounis", "Psais", "Tesenouphis",
+  ]),
+  female: Object.freeze([
+    "Demetria", "Thais", "Berenike", "Tyche", "Isidora", "Apollonia", "Dionysia", "Kleopatra",
+    "Artemisia", "Eirene", "Myrine", "Philainis", "Kleio", "Ptolemais", "Charis", "Doris",
+    "Herais", "Thermuthis", "Taesis", "Tanouphis", "Senamounis", "Taphis", "Didyme", "Heliodora",
+    "Theodora", "Timarete", "Melitta", "Philista", "Kallisto", "Nikaia", "Olympias", "Sostrata",
+  ]),
+});
+
 export const PEOPLE_ENCOUNTERS = [
   ["harbor", "A pause on the quay", "A harbor worker shares the shade while a load is being checked. The conversation turns from the waiting boats to the errands that brought you both here.", "Harbor worker", "Keeps a steady eye on the quay and enjoys quiet conversation between loads.", 1],
   ["market", "The last place beneath the awning", "A market seller makes room beneath an awning during a brief shower. You compare the goods you were looking for while the lane clears.", "Market seller", "Knows the market's regular customers and likes hearing about unfamiliar places.", 2],
@@ -41,8 +58,8 @@ export function applyPeople(world) {
   world.events = world.events.filter(event => !referencesOldPerson(event));
   world.character.activities = world.character.activities.filter(activity => !referencesOldPerson(activity));
   world.character.identity = { namePools: {
-    male: [...world.character.playerNames],
-    female: ["Demetria", "Thais", "Berenike", "Tyche", "Isidora", "Apollonia", "Dionysia", "Kleopatra", "Artemisia", "Eirene", "Myrine", "Philainis", "Kleio", "Ptolemais", "Charis", "Doris", "Herais", "Thermuthis", "Taesis", "Tanouphis", "Senamounis", "Taphis", "Didyme", "Heliodora", "Theodora", "Timarete", "Melitta", "Philista", "Kallisto", "Nikaia", "Olympias", "Sostrata"],
+    male: [...ALEXANDRIA_NAME_POOLS.male],
+    female: [...ALEXANDRIA_NAME_POOLS.female],
   }, avatarVariants: 3 };
   world.character.proceduralPartners = true;
   world.character.encounterPacing = { firstMeetingChance: 0.7, meetingChance: 0.3, dateChance: 0.75, cooldownYears: 2 };

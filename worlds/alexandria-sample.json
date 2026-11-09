@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.31.0",
-  "title": "A life in Alexandria",
-  "description": "Live a fictional life in Alexandria, starting in 66 BCE. Learn a trade, start a family or pursue a career in scholarship, the army or the royal court.",
-  "startYear": -66,
+  "version": "0.32.0",
+  "title": "From Rhakotis to Alexandria",
+  "description": "Begin a fictional life near Rhakotis on Egypt's Mediterranean coast in 350 BCE. Grow up before Alexandria is founded, then live through Alexander's arrival and the first generations of the new city. Work, learn and build a household; chosen journeys and skilled work may bring you into the worlds of Aristotle, Alexander and Euclid.",
+  "startYear": -350,
   "maxAge": 100,
   "stats": {
     "health": {
@@ -140,11 +140,7 @@
       "initial": false
     },
     "experienced-war": {
-      "label": "Lived during the Alexandrian War",
-      "initial": false
-    },
-    "roman-rule": {
-      "label": "Lived under Roman rule",
+      "label": "Lived through the Persian reconquest of Egypt",
       "initial": false
     },
     "legacy-arranged": {
@@ -181,14 +177,6 @@
     },
     "escorted-supplies": {
       "label": "Assigned troops to escort supplies",
-      "initial": false
-    },
-    "royal-service-ended": {
-      "label": "Royal service ended under Roman rule",
-      "initial": false
-    },
-    "joined-alexandrian-war": {
-      "label": "Took part in the Alexandrian War",
       "initial": false
     },
     "court-recommendation": {
@@ -246,6 +234,42 @@
     "early-interest-music-performance": {
       "label": "Rhythms and voices",
       "initial": false
+    },
+    "served-during-succession": {
+      "label": "Handled military supplies during the succession struggles",
+      "initial": false
+    },
+    "alexander-in-egypt": {
+      "label": "Lived through Alexander's arrival in Egypt",
+      "initial": false
+    },
+    "alexandria-founded": {
+      "label": "Lived through the foundation of Alexandria",
+      "initial": false
+    },
+    "ptolemy-governs-egypt": {
+      "label": "Lived under Ptolemy's administration in Egypt",
+      "initial": false
+    },
+    "ptolemy-king": {
+      "label": "Lived through Ptolemy's adoption of kingship",
+      "initial": false
+    },
+    "heard-aristotle": {
+      "label": "Traveled to Athens and heard Aristotle teach",
+      "initial": false
+    },
+    "assisted-alexander-foundation": {
+      "label": "Worked on supply preparations around Alexandria's foundation",
+      "initial": false
+    },
+    "met-alexander": {
+      "label": "Briefly addressed Alexander during his Egyptian stay",
+      "initial": false
+    },
+    "studied-euclidean-proof": {
+      "label": "Had a geometrical demonstration checked in Euclid's circle",
+      "initial": false
     }
   },
   "origins": [
@@ -275,8 +299,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "strabo-alexandria",
-        "augustan-alexandria-documents"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -305,7 +329,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "alexandrian-bakery-lease"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -334,7 +359,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "strabo-alexandria"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -363,7 +389,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "strabo-alexandria"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -392,7 +419,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "alexandrian-bakery-lease"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -421,8 +449,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "augustan-alexandria-documents",
-        "education-apprenticeship"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
@@ -451,14 +479,14 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "education-apprenticeship",
-        "augustan-alexandria-documents"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     },
     {
       "id": "delta-newcomers",
       "title": "Newcomers from the Delta",
-      "text": "You are born in Alexandria shortly after your family moves from a Delta village. They rent a room with relatives and look for steady city work. Food and childcare are shared while they settle in.",
+      "text": "You are born near Rhakotis after your family moves from a Delta village. They share rooms with relatives and look for steady work along the coast. Food and childcare are shared while they settle in.",
       "weight": 2,
       "statRanges": {
         "health": {
@@ -481,8 +509,8 @@
       "effects": [],
       "evidence": "historically-inspired",
       "sourceIds": [
-        "strabo-alexandria",
-        "augustan-alexandria-documents"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ]
     }
   ],
@@ -584,7 +612,7 @@
     }
   ],
   "mortality": {
-    "description": "The adult baseline uses 100% of the annual probabilities converted from Zakrzewski (2015), Table 1, after Bagnall and Frier's Roman Egyptian female model. The former discounts at ages 18-94 are removed. Only the comparison bands below 18 retain early-play discounts; childhood still uses the existing causal-health system. In health-enabled lives these adult probabilities calibrate warned serious illness episodes, with a neutral reference of Health 50, household rest/care 0.55 and no family recovery bonus. They are not a second independent death roll. Actual play varies with Health, care, existing conditions and risky choices. This is a later-period female proxy, not observed Ptolemaic Alexandrian mortality. The 95+ tail and within-band annual interpolation remain assumptions; age 100 closes the record without assigning death.",
+    "description": "The adult baseline uses 100% of the annual probabilities converted from Zakrzewski (2015), Table 1, after Bagnall and Frier's Roman Egyptian female model. The former discounts at ages 18-94 are removed. Only the comparison bands below 18 retain early-play discounts; childhood still uses the existing causal-health system. In health-enabled lives these adult probabilities calibrate warned serious illness episodes, with a neutral reference of Health 50, household rest/care 0.55 and no family recovery bonus. They are not a second independent death roll. Actual play varies with Health, care, existing conditions and risky choices. This is a later-period female proxy, not observed fourth-century BCE coastal Egyptian mortality. The 95+ tail and within-band annual interpolation remain assumptions; age 100 closes the record without assigning death.",
     "sourceIds": [
       "life-expectancy-egyptology",
       "demography-evidence-limits"
@@ -1069,7 +1097,7 @@
         ]
       },
       "astrology": {
-        "label": "Astrology",
+        "label": "Sky-omen reading",
         "min": 0,
         "max": 100,
         "initial": 0,
@@ -1079,7 +1107,7 @@
           "astronomy": 10,
           "reckoning": 10
         },
-        "description": "Study traditional chart interpretations after learning observation and arithmetic. These beliefs do not provide reliable predictions.",
+        "description": "Compare traditional readings of observed sky signs after learning observation and arithmetic. The interpretations are beliefs, not reliable predictions; no later natal-horoscope system is assumed.",
         "trainingActivity": "train-astrology",
         "gainCurve": [
           {
@@ -1612,8 +1640,8 @@
       },
       {
         "id": "astrologer",
-        "title": "Astrologer",
-        "description": "Prepare charts and explain traditional interpretations. These are historical beliefs, not reliable predictions.",
+        "title": "Sky-omen interpreter",
+        "description": "Discuss traditional interpretations of sky signs and seasonal observations. These are beliefs, not reliable predictions; this livelihood does not assume later Egyptian natal-horoscope techniques.",
         "minAge": 18,
         "requirements": {
           "literacy": 25,
@@ -1641,7 +1669,7 @@
       {
         "id": "soldier",
         "title": "Royal army soldier",
-        "description": "Drill, guard stores and carry out orders in the Ptolemaic army. Service is available before Roman rule.",
+        "description": "Drill, guard stores and carry out orders in royal service. Officials and rulers change during your lifetime; your post belongs to the administration you actually serve.",
         "minAge": 18,
         "requirements": {
           "warfare": 10
@@ -4064,11 +4092,11 @@
       },
       {
         "id": "train-astrology",
-        "text": "Compare zodiac signs and traditional readings",
+        "text": "Compare sky signs and traditional omen readings",
         "outcomes": [
           {
             "id": "train-astrology-result",
-            "text": "You copy a sky diagram and compare several traditional interpretations. The exercise does not establish that the predictions work.",
+            "text": "You compare recorded sky signs with several traditional interpretations. Observation and interpretation stay in separate columns; no prediction is established by the exercise.",
             "effects": [
               {
                 "type": "skill",
@@ -4195,7 +4223,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             }
           ]
         },
@@ -4571,11 +4599,11 @@
       },
       {
         "id": "work-astrologer",
-        "text": "Become a astrologer",
+        "text": "Seek work interpreting sky omens",
         "outcomes": [
           {
             "id": "work-astrologer-result",
-            "text": "You arrange work as a astrologer and buy a few supplies.",
+            "text": "You arrange paid work discussing traditional sky signs and buy writing materials. The work records beliefs rather than established predictions.",
             "effects": [
               {
                 "type": "job",
@@ -4631,7 +4659,7 @@
             {
               "type": "year",
               "op": "gte",
-              "value": -29
+              "value": -350
             }
           ]
         },
@@ -4681,7 +4709,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             },
             {
               "type": "not",
@@ -4782,7 +4810,7 @@
               {
                 "when": {
                   "type": "flag",
-                  "flag": "joined-alexandrian-war",
+                  "flag": "served-during-succession",
                   "value": true
                 },
                 "multiplier": 1.25,
@@ -4833,7 +4861,7 @@
                 {
                   "type": "year",
                   "op": "lt",
-                  "value": -30
+                  "value": -250
                 },
                 {
                   "type": "job",
@@ -4928,7 +4956,7 @@
               {
                 "when": {
                   "type": "flag",
-                  "flag": "joined-alexandrian-war",
+                  "flag": "served-during-succession",
                   "value": true
                 },
                 "multiplier": 1.5,
@@ -4976,7 +5004,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             },
             {
               "type": "job",
@@ -5167,7 +5195,7 @@
                 {
                   "type": "year",
                   "op": "lt",
-                  "value": -30
+                  "value": -250
                 },
                 {
                   "type": "not",
@@ -5486,11 +5514,11 @@
       },
       {
         "id": "research-astrological-readings",
-        "text": "Compare conflicting astrological readings",
+        "text": "Compare conflicting sky-omen readings",
         "outcomes": [
           {
             "id": "research-astrological-readings-result",
-            "text": "You compare two readings with the same chart. Their claims differ, and you record the disagreement rather than treating either as a proven prediction.",
+            "text": "You compare two interpretations of the same observed signs. Their claims differ, and you record the disagreement without treating either as a proven prediction.",
             "effects": [
               {
                 "type": "skill",
@@ -5594,7 +5622,7 @@
                 {
                   "type": "year",
                   "op": "lt",
-                  "value": -30
+                  "value": -250
                 },
                 {
                   "type": "any",
@@ -5629,15 +5657,15 @@
       },
       {
         "id": "organise-war-supplies",
-        "text": "Help organise wartime supplies",
+        "text": "Help organise supplies during the succession struggles",
         "outcomes": [
           {
             "id": "organise-war-supplies-result",
-            "text": "You check loads and direct carts to the right stores while other troops guard the route.",
+            "text": "You check loads and direct carts to the assigned stores while your unit guards the route. The work answers an immediate order; it does not settle who will rule.",
             "effects": [
               {
                 "type": "flag",
-                "flag": "joined-alexandrian-war",
+                "flag": "served-during-succession",
                 "value": true
               },
               {
@@ -5673,12 +5701,12 @@
                 {
                   "type": "year",
                   "op": "eq",
-                  "value": -48
+                  "value": -322
                 },
                 {
                   "type": "year",
                   "op": "eq",
-                  "value": -47
+                  "value": -321
                 }
               ]
             },
@@ -5812,7 +5840,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             },
             {
               "type": "job",
@@ -6514,7 +6542,7 @@
       },
       {
         "id": "prepare-a-chart-reading",
-        "text": "Prepare a traditional chart reading",
+        "text": "Prepare a traditional sky-omen reading",
         "category": "career",
         "minAge": 18,
         "cooldownYears": 2,
@@ -6553,14 +6581,14 @@
             {
               "type": "year",
               "op": "gte",
-              "value": -29
+              "value": -350
             }
           ]
         },
         "outcomes": [
           {
             "id": "prepare-a-chart-reading-result",
-            "text": "You prepare the chart and explain its traditional interpretation. After writing materials, you earn 20 drachmas. The reading records a belief, not a reliable prediction.",
+            "text": "You set down the observed signs and explain their traditional interpretations. After writing materials, you earn 20 drachmas. The reading records a belief, not a reliable prediction.",
             "weight": 1,
             "effects": [
               {
@@ -6711,7 +6739,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             },
             {
               "type": "skill",
@@ -6896,7 +6924,7 @@
             {
               "type": "year",
               "op": "lt",
-              "value": -30
+              "value": -250
             },
             {
               "type": "any",
@@ -6993,7 +7021,7 @@
               {
                 "when": {
                   "type": "flag",
-                  "flag": "joined-alexandrian-war",
+                  "flag": "served-during-succession",
                   "value": true
                 },
                 "multiplier": 1.5,
@@ -7976,7 +8004,7 @@
                 {
                   "type": "year",
                   "op": "lt",
-                  "value": -30
+                  "value": -250
                 },
                 {
                   "type": "skill",
@@ -17667,22 +17695,12 @@
       {
         "id": "war-violence",
         "title": "Penetrating chest wound",
-        "text": "You suffer a penetrating chest wound during the fighting in Alexandria. The injury is fatal.",
+        "text": "During the disorder around the Persian reconquest of Egypt, you suffer a penetrating chest wound. The injury is fatal.",
         "weight": 2,
         "when": {
-          "type": "any",
-          "conditions": [
-            {
-              "type": "year",
-              "op": "eq",
-              "value": -48
-            },
-            {
-              "type": "year",
-              "op": "eq",
-              "value": -47
-            }
-          ]
+          "type": "year",
+          "op": "eq",
+          "value": -343
         }
       },
       {
@@ -17745,7 +17763,7 @@
         "choiceOnly": true
       },
       {
-        "id": "alexandrian-battle-wound",
+        "id": "campaign-spear-wound",
         "title": "Spear wound to the abdomen",
         "text": "A spear strikes your abdomen while you hold the forward post. Blood loss from the wound proves fatal.",
         "weight": 1,
@@ -17869,12 +17887,12 @@
   },
   "events": [
     {
-      "id": "caesar-in-alexandria",
-      "title": "War at the harbor",
-      "text": "Caesar arrives in Alexandria in 48 BCE, drawn into the struggle for Egypt's throne. Fighting reaches the harbor and nearby streets; the quarrel over the kingdom is now a danger close to home.",
+      "id": "classical-persian-reconquest",
+      "title": "Egypt changes hands",
+      "text": "In 343 BCE, Persian forces reconquer Egypt. News travels along the coast with officials, traders and people looking for relatives. Your household hears that authority has changed again.",
       "trigger": {
         "type": "year",
-        "at": -48
+        "at": -343
       },
       "mode": "automatic",
       "effects": [
@@ -17882,75 +17900,200 @@
           "type": "flag",
           "flag": "experienced-war",
           "value": true
-        },
-        {
-          "type": "stat",
-          "stat": "wealth",
-          "delta": -2
         }
       ],
       "choices": [],
       "sourceIds": [
-        "alexandrian-war",
-        "caesar-chronology"
+        "classical-egypt-transitions"
       ],
       "evidence": "documented-history"
     },
     {
-      "id": "water-and-war",
-      "title": "Water under siege",
-      "text": "The fighting continues into 47 BCE. A Roman account tells of efforts to spoil Caesar's water supply and of wells dug in response. Amid the struggle for the city, even drinking water has become a weapon.",
+      "id": "classical-alexander-accession",
+      "title": "A young king in Macedon",
+      "text": "News from the Greek world names Alexander as king of Macedon after Philip II's death in 336 BCE. For a household on the Egyptian coast, the name first arrives as distant news.",
       "trigger": {
         "type": "year",
-        "at": -47
+        "at": -336
       },
       "mode": "automatic",
       "effects": [],
       "choices": [],
       "sourceIds": [
-        "alexandrian-war",
-        "caesar-chronology"
+        "classical-alexander"
       ],
       "evidence": "documented-history"
     },
     {
-      "id": "news-of-actium",
-      "title": "Word from Actium",
-      "text": "Word reaches Alexandria of defeat at Actium in 31 BCE. Antony and Cleopatra have lost to Octavian; the kingdom must now reckon with his victory.",
+      "id": "classical-alexander-crossing",
+      "title": "An army crosses into Asia",
+      "text": "In 334 BCE, Alexander takes his army across into Asia. Sailors compare the reports with the routes they know; the war is moving through lands connected to Egypt by trade and imperial rule.",
       "trigger": {
         "type": "year",
-        "at": -31
+        "at": -334
       },
       "mode": "automatic",
       "effects": [],
       "choices": [],
       "sourceIds": [
-        "ptolemaic-period"
+        "classical-alexander"
       ],
       "evidence": "documented-history"
     },
     {
-      "id": "roman-rule",
-      "title": "The kingdom ends",
-      "text": "In 30 BCE, Egypt passes from Ptolemaic to Roman rule. Augustus will count it among his conquests. For the people who live here, the change brings a new authority over the same homes and livelihoods.",
+      "id": "classical-alexander-egypt",
+      "title": "Alexander arrives in Egypt",
+      "text": "Alexander enters Egypt in 332 BCE and replaces Persian authority. His arrival brings new officials and military demands, though it is not a battle fought in your own street. People begin asking what the king intends for this coast.",
       "trigger": {
         "type": "year",
-        "at": -30
+        "at": -332
       },
       "mode": "automatic",
       "effects": [
         {
           "type": "flag",
-          "flag": "roman-rule",
+          "flag": "alexander-in-egypt",
           "value": true
         }
       ],
       "choices": [],
       "sourceIds": [
-        "ptolemaic-period",
-        "augustus-res-gestae"
+        "classical-egypt-transitions",
+        "classical-alexander"
       ],
       "evidence": "documented-history"
+    },
+    {
+      "id": "classical-alexandria-founded",
+      "title": "Lines for a new city",
+      "text": "In 331 BCE, Alexander founds Alexandria beside the older settlement of Rhakotis. Marked lines and plans are a beginning: streets, houses and institutions will take years to grow around the people already living here.",
+      "trigger": {
+        "type": "year",
+        "at": -331
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "alexandria-founded",
+          "value": true
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "classical-foundation-chronology",
+        "classical-rhakotis"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "classical-alexander-death",
+      "title": "The king is dead; Egypt has a governor",
+      "text": "News arrives of Alexander's death at Babylon in 323 BCE. His commanders divide responsibilities while the succession remains unsettled. Ptolemy takes charge of Egypt as governor; he has not yet adopted the title of king.",
+      "trigger": {
+        "type": "year",
+        "at": -323
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "ptolemy-governs-egypt",
+          "value": true
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "classical-alexander",
+        "classical-egypt-transitions"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "classical-aristotle-death",
+      "title": "News from Euboea",
+      "text": "A traveler brings news that Aristotle has died in 322 BCE, after leaving Athens for Chalcis. Readers who know his arguments continue to discuss them; hearing his name is now different from having the chance to hear him teach.",
+      "trigger": {
+        "type": "year",
+        "at": -322
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "classical-aristotle"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "classical-ptolemy-kingship",
+      "title": "Ptolemy takes the royal title",
+      "text": "In 305 BCE, Ptolemy adopts the title of king. The man who governed Egypt after Alexander now rules in his own royal name. Accounts and commissions begin to carry the authority of a new dynasty.",
+      "trigger": {
+        "type": "year",
+        "at": -305
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "ptolemy-king",
+          "value": true
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "classical-egypt-transitions"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "classical-euclid-teaching",
+      "title": "A proof must hold at every step",
+      "text": "Around 300 BCE, Euclid is associated with mathematical teaching in Alexandria. His exact life dates are uncertain. Readers here begin speaking of demonstrations whose steps must follow from agreed definitions, rather than from a convincing sketch alone.",
+      "trigger": {
+        "type": "year",
+        "at": -300
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "classical-euclid"
+      ],
+      "evidence": "historically-inspired"
+    },
+    {
+      "id": "classical-scholarly-households",
+      "title": "Patrons make room for readers",
+      "text": "In the early third century BCE, royal support helps Alexandria's scholarly institutions develop. Their beginnings and organization are uncertain. Collections, readers and teaching circles grow over time; the finished Library of later accounts did not stand here when you were born.",
+      "trigger": {
+        "type": "year",
+        "at": -295
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "classical-library"
+      ],
+      "evidence": "historically-inspired"
+    },
+    {
+      "id": "classical-pharos-completed",
+      "title": "A tower above the harbor",
+      "text": "Around 280 BCE, the great lighthouse on Pharos becomes part of Alexandria's harbor. Accounts differ on its precise completion year. Its height now gives returning crews a landmark that did not exist along the coast of your childhood.",
+      "trigger": {
+        "type": "year",
+        "at": -280
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "classical-pharos"
+      ],
+      "evidence": "historically-inspired"
     },
     {
       "id": "background-merchant-household-childhood",
@@ -17975,7 +18118,7 @@
       "choices": [],
       "evidence": "fictional",
       "sourceIds": [
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -18206,7 +18349,7 @@
       "choices": [],
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-bakery-lease"
+        "classical-rhakotis"
       ]
     },
     {
@@ -18237,7 +18380,7 @@
       "choices": [],
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-bakery-lease",
+        "classical-rhakotis",
         "education-apprenticeship"
       ]
     },
@@ -18264,7 +18407,7 @@
       "choices": [],
       "evidence": "fictional",
       "sourceIds": [
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -18383,7 +18526,7 @@
     },
     {
       "id": "background-delta-newcomers-practice",
-      "title": "Learning the city errands",
+      "title": "Learning the neighborhood errands",
       "text": "An older cousin takes you to the market and the quays. On the return trip, they let you lead the way and check a small purchase.",
       "trigger": {
         "type": "age",
@@ -18414,15 +18557,16 @@
     },
     {
       "id": "the-first-household",
-      "title": "You are born",
-      "text": "You are born in Alexandria. For now, the city is no larger than the room where someone lifts you, feeds you and settles you to sleep.",
+      "title": "You are born near Rhakotis",
+      "text": "You are born near Rhakotis in 350 BCE, on the Egyptian coast where Alexandria will later grow. For now, your world is a room, familiar hands and the sounds of work outside.",
       "trigger": {
         "type": "age",
         "at": 0
       },
       "evidence": "historically-inspired",
       "sourceIds": [
-        "alexandrian-wetnursing"
+        "classical-rhakotis",
+        "classical-rhakotis-archaeology"
       ],
       "choices": [],
       "mode": "automatic",
@@ -19128,7 +19272,7 @@
     {
       "id": "the-shape-of-the-city",
       "title": "Beyond the familiar turning",
-      "text": "You can now name the streets that once needed an adult to explain them. A workshop doorway, a seller's usual place, the turn towards the quays: the city is becoming a set of errands you can manage.",
+      "text": "You can now name the streets that once needed an adult to explain them. A workshop doorway, a seller's usual place, the turn towards the quays: the neighborhood is becoming a set of errands you can manage.",
       "trigger": {
         "type": "age",
         "at": 9
@@ -19763,7 +19907,7 @@
       },
       "evidence": "historically-inspired",
       "sourceIds": [
-        "augustan-alexandria-documents",
+        "classical-rhakotis",
         "education-apprenticeship",
         "diodorus-childhood-work",
         "alexandrian-minor-apprentice"
@@ -20338,7 +20482,7 @@
       "sourceIds": [
         "strabo-alexandria",
         "education-apprenticeship",
-        "augustan-alexandria-documents",
+        "classical-rhakotis",
         "diodorus-childhood-work",
         "alexandrian-minor-apprentice"
       ],
@@ -20972,7 +21116,7 @@
         },
         {
           "id": "interest-career-astrologer",
-          "text": "Make chart reading your regular work",
+          "text": "Take work interpreting traditional sky signs",
           "when": {
             "type": "all",
             "conditions": [
@@ -21017,7 +21161,7 @@
                   {
                     "type": "year",
                     "op": "gte",
-                    "value": -29
+                    "value": -350
                   }
                 ]
               }
@@ -21026,7 +21170,7 @@
           "outcomes": [
             {
               "id": "interest-career-astrologer-work-astrologer-result",
-              "text": "You arrange work as a astrologer and buy a few supplies.",
+              "text": "You arrange work interpreting traditional sky signs. Your notes separate recorded observations from beliefs about what they mean.",
               "effects": [
                 {
                   "type": "job",
@@ -21664,7 +21808,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -21849,7 +21993,7 @@
       "evidence": "fictional",
       "sourceIds": [
         "strabo-alexandria",
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -22033,7 +22177,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-bakery-lease"
+        "classical-rhakotis"
       ]
     },
     {
@@ -22125,7 +22269,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "augustan-alexandria-documents",
+        "classical-rhakotis",
         "education-apprenticeship"
       ]
     },
@@ -22219,7 +22363,7 @@
       "evidence": "fictional",
       "sourceIds": [
         "education-apprenticeship",
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -22312,7 +22456,7 @@
       "evidence": "fictional",
       "sourceIds": [
         "strabo-alexandria",
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ]
     },
     {
@@ -22461,7 +22605,7 @@
       },
       "evidence": "historically-inspired",
       "sourceIds": [
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ],
       "when": {
         "type": "all",
@@ -22632,8 +22776,7 @@
       },
       "evidence": "historically-inspired",
       "sourceIds": [
-        "alexandrian-bakery-lease",
-        "augustan-alexandria-documents"
+        "classical-rhakotis"
       ],
       "choices": [
         {
@@ -22841,7 +22984,7 @@
     {
       "id": "an-unreliable-season",
       "title": "A poor harvest",
-      "text": "Reports of a poor harvest reach the city. Your household decides whether to store more food or share some supplies with relatives.",
+      "text": "Reports of a poor harvest reach the neighborhood. Your household decides whether to store more food or share some supplies with relatives.",
       "trigger": {
         "type": "age",
         "at": 32
@@ -22902,16 +23045,15 @@
     },
     {
       "id": "after-the-transition",
-      "title": "New rules for work",
-      "text": "Roman officials have changed some arrangements for work and agreements. You can ask about the new rules or get help from neighbors.",
+      "title": "A different hand receives the accounts",
+      "text": "A local office asks for accounts in a revised arrangement. Familiar work still has to be done, but the clerk receiving the papers has changed. You can learn the new procedure or ask neighbors who have already used it.",
       "trigger": {
         "type": "age",
         "at": 36
       },
-      "evidence": "historically-inspired",
+      "evidence": "fictional",
       "sourceIds": [
-        "augustan-alexandria-documents",
-        "augustus-res-gestae"
+        "classical-egypt-transitions"
       ],
       "choices": [
         {
@@ -27955,7 +28097,7 @@
       ],
       "sourceIds": [
         "strabo-alexandria",
-        "plutarch-antony-areius"
+        "classical-aristotle"
       ],
       "trigger": {
         "type": "random",
@@ -27997,14 +28139,12 @@
           "delta": 1
         }
       ],
-      "sourceIds": [
-        "louvre-dendera-zodiac"
-      ],
+      "sourceIds": [],
       "trigger": {
         "type": "random",
         "weight": 1
       },
-      "evidence": "historically-inspired",
+      "evidence": "fictional",
       "mode": "automatic",
       "choices": [],
       "maxOccurrences": 3,
@@ -28013,7 +28153,7 @@
     {
       "id": "specialist-conflicting-charts",
       "title": "The same sky, two accounts",
-      "text": "Two readers lay their sky diagrams beside each other and give different interpretations. One points to a position; the other insists on the rule used to read it. You can test the arithmetic or ask each to explain the rule.",
+      "text": "Two readers compare records of the same sky signs and give different interpretations. One points to an observed position; the other insists on a traditional rule. You can check the arithmetic or ask each to explain the rule.",
       "when": {
         "type": "all",
         "conditions": [
@@ -28037,7 +28177,7 @@
           "outcomes": [
             {
               "id": "compare-chart-calculations-result",
-              "text": "You find a copied position that differs between the charts and record the correction.",
+              "text": "You find a copied position that differs between the observation records and set down the correction.",
               "effects": [
                 {
                   "type": "skill",
@@ -28088,197 +28228,14 @@
           ]
         }
       ],
-      "sourceIds": [
-        "louvre-dendera-zodiac",
-        "berlin-early-horoscope"
-      ],
+      "sourceIds": [],
       "trigger": {
         "type": "random",
         "weight": 1
       },
-      "evidence": "historically-inspired",
+      "evidence": "fictional",
       "maxOccurrences": 5,
       "cooldownYears": 8
-    },
-    {
-      "id": "royal-campaign-muster",
-      "title": "Orders during the Alexandrian War",
-      "text": "Fighting has reached Alexandria. Your unit needs people to protect stores and a smaller group for a forward post. The forward post carries a risk of death.",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "any",
-            "conditions": [
-              {
-                "type": "job",
-                "job": "soldier"
-              },
-              {
-                "type": "job",
-                "job": "officer"
-              },
-              {
-                "type": "job",
-                "job": "general"
-              }
-            ]
-          },
-          {
-            "type": "year",
-            "op": "eq",
-            "value": -48
-          }
-        ]
-      },
-      "choices": [
-        {
-          "id": "guard-army-stores",
-          "text": "Guard the stores and move supplies",
-          "outcomes": [
-            {
-              "id": "guard-army-stores-result",
-              "text": "You guard the stores and help move supplies away from a threatened lane.",
-              "effects": [
-                {
-                  "type": "flag",
-                  "flag": "joined-alexandrian-war",
-                  "value": true
-                },
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "delta": 3
-                },
-                {
-                  "type": "stat",
-                  "stat": "health",
-                  "delta": -2
-                },
-                {
-                  "type": "stat",
-                  "stat": "wealth",
-                  "delta": 1
-                }
-              ],
-              "weight": 1
-            }
-          ]
-        },
-        {
-          "id": "volunteer-forward-post",
-          "text": "Volunteer for the forward post (risk of death)",
-          "outcomes": [
-            {
-              "id": "forward-post-return",
-              "text": "You return from the post with a damaged shield and a better understanding of the unit's movements.",
-              "effects": [
-                {
-                  "type": "flag",
-                  "flag": "joined-alexandrian-war",
-                  "value": true
-                },
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "delta": 7
-                },
-                {
-                  "type": "skill",
-                  "skill": "oratory",
-                  "delta": 1
-                },
-                {
-                  "type": "stat",
-                  "stat": "health",
-                  "delta": -7
-                }
-              ],
-              "weight": 98
-            },
-            {
-              "id": "forward-post-fatal",
-              "text": "A spear strikes your abdomen while you hold the forward post. Blood loss from the wound proves fatal.",
-              "effects": [
-                {
-                  "type": "end",
-                  "ending": "death-in-adulthood",
-                  "deathCause": "alexandrian-battle-wound"
-                }
-              ],
-              "weight": 2
-            }
-          ]
-        }
-      ],
-      "sourceIds": [
-        "alexandrian-war",
-        "caesar-chronology"
-      ],
-      "trigger": {
-        "type": "year",
-        "at": -48
-      },
-      "evidence": "historically-inspired"
-    },
-    {
-      "id": "royal-garrison-reorganisation",
-      "title": "The unit checks its equipment",
-      "text": "During the continuing fighting, your unit guards a storehouse. You check equipment and count incoming supply loads.",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "any",
-            "conditions": [
-              {
-                "type": "job",
-                "job": "soldier"
-              },
-              {
-                "type": "job",
-                "job": "officer"
-              },
-              {
-                "type": "job",
-                "job": "general"
-              }
-            ]
-          },
-          {
-            "type": "year",
-            "op": "eq",
-            "value": -47
-          }
-        ]
-      },
-      "effects": [
-        {
-          "type": "flag",
-          "flag": "joined-alexandrian-war",
-          "value": true
-        },
-        {
-          "type": "skill",
-          "skill": "warfare",
-          "delta": 2
-        },
-        {
-          "type": "skill",
-          "skill": "reckoning",
-          "delta": 1
-        }
-      ],
-      "sourceIds": [
-        "alexandrian-war"
-      ],
-      "trigger": {
-        "type": "year",
-        "at": -47
-      },
-      "evidence": "historically-inspired",
-      "mode": "automatic",
-      "choices": []
     },
     {
       "id": "royal-officer-first-orders",
@@ -28290,7 +28247,7 @@
           {
             "type": "year",
             "op": "lt",
-            "value": -30
+            "value": -250
           },
           {
             "type": "flag",
@@ -28312,7 +28269,7 @@
         }
       ],
       "sourceIds": [
-        "alexandrian-war"
+        "classical-egypt-transitions"
       ],
       "trigger": {
         "type": "age",
@@ -28332,7 +28289,7 @@
           {
             "type": "year",
             "op": "lt",
-            "value": -30
+            "value": -250
           },
           {
             "type": "job",
@@ -28404,13 +28361,13 @@
         }
       ],
       "sourceIds": [
-        "alexandrian-war"
+        "classical-egypt-transitions"
       ],
       "trigger": {
         "type": "year",
-        "at": -66
+        "at": -350
       },
-      "evidence": "historically-inspired"
+      "evidence": "fictional"
     },
     {
       "id": "royal-grain-order-carried-out",
@@ -28422,7 +28379,7 @@
           {
             "type": "year",
             "op": "lt",
-            "value": -30
+            "value": -250
           },
           {
             "type": "flag",
@@ -28449,128 +28406,6 @@
       "trigger": {
         "type": "age",
         "at": 0
-      },
-      "evidence": "historically-inspired",
-      "mode": "automatic",
-      "choices": []
-    },
-    {
-      "id": "royal-service-transition",
-      "title": "Your royal appointment ends",
-      "text": "Roman rule replaces the Ptolemaic administration. Your royal army or court appointment ends. You keep your training and contacts, but must find other work.",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "year",
-            "op": "gte",
-            "value": -30
-          },
-          {
-            "type": "any",
-            "conditions": [
-              {
-                "type": "any",
-                "conditions": [
-                  {
-                    "type": "job",
-                    "job": "soldier"
-                  },
-                  {
-                    "type": "job",
-                    "job": "officer"
-                  },
-                  {
-                    "type": "job",
-                    "job": "general"
-                  }
-                ]
-              },
-              {
-                "type": "job",
-                "job": "court-adviser"
-              }
-            ]
-          }
-        ]
-      },
-      "effects": [
-        {
-          "type": "job",
-          "job": null
-        },
-        {
-          "type": "flag",
-          "flag": "royal-service-ended",
-          "value": true
-        },
-        {
-          "type": "stat",
-          "stat": "wealth",
-          "delta": -2
-        }
-      ],
-      "sourceIds": [
-        "ptolemaic-period",
-        "augustus-res-gestae"
-      ],
-      "trigger": {
-        "type": "year",
-        "at": -30
-      },
-      "evidence": "historically-inspired",
-      "mode": "automatic",
-      "choices": []
-    },
-    {
-      "id": "specialist-dendera-chart",
-      "title": "The signs on a copied diagram",
-      "text": "A copied temple sky diagram is unrolled for study. You set your notes beside its zodiacal signs and record where the arrangements differ.",
-      "when": {
-        "type": "all",
-        "conditions": [
-          {
-            "type": "year",
-            "op": "eq",
-            "value": -50
-          },
-          {
-            "type": "any",
-            "conditions": [
-              {
-                "type": "skill",
-                "skill": "astronomy",
-                "op": "gte",
-                "value": 10
-              },
-              {
-                "type": "skill",
-                "skill": "astrology",
-                "op": "gte",
-                "value": 10
-              }
-            ]
-          }
-        ]
-      },
-      "effects": [
-        {
-          "type": "skill",
-          "skill": "astronomy",
-          "delta": 1
-        },
-        {
-          "type": "skill",
-          "skill": "astrology",
-          "delta": 1
-        }
-      ],
-      "sourceIds": [
-        "louvre-dendera-zodiac"
-      ],
-      "trigger": {
-        "type": "year",
-        "at": -50
       },
       "evidence": "historically-inspired",
       "mode": "automatic",
@@ -28797,7 +28632,7 @@
               {
                 "type": "year",
                 "op": "lt",
-                "value": -30
+                "value": -250
               },
               {
                 "type": "skill",
@@ -28822,8 +28657,8 @@
       "evidence": "historically-inspired",
       "sourceIds": [
         "strabo-alexandria",
-        "plutarch-antony-areius",
-        "augustan-alexandria-documents"
+        "classical-aristotle",
+        "classical-rhakotis"
       ],
       "choices": [
         {
@@ -28835,7 +28670,7 @@
               {
                 "type": "year",
                 "op": "lt",
-                "value": -30
+                "value": -250
               },
               {
                 "type": "skill",
@@ -29044,7 +28879,7 @@
               {
                 "type": "year",
                 "op": "lt",
-                "value": -30
+                "value": -250
               },
               {
                 "type": "any",
@@ -29085,7 +28920,7 @@
       "cooldownYears": 5,
       "evidence": "historically-inspired",
       "sourceIds": [
-        "alexandrian-war"
+        "classical-egypt-transitions"
       ],
       "choices": [
         {
@@ -29097,7 +28932,7 @@
               {
                 "type": "year",
                 "op": "lt",
-                "value": -30
+                "value": -250
               },
               {
                 "type": "any",
@@ -29194,7 +29029,7 @@
                 {
                   "when": {
                     "type": "flag",
-                    "flag": "joined-alexandrian-war",
+                    "flag": "served-during-succession",
                     "value": true
                   },
                   "multiplier": 1.5,
@@ -29331,8 +29166,7 @@
       "cooldownYears": 5,
       "evidence": "historically-inspired",
       "sourceIds": [
-        "strabo-alexandria",
-        "louvre-dendera-zodiac"
+        "strabo-alexandria"
       ],
       "choices": [
         {
@@ -33145,7 +32979,7 @@
     {
       "id": "variety-trade-astrology-question",
       "title": "A client asks again",
-      "text": "A client asks you to repeat part of a traditional chart interpretation. You explain what the reading claims and where you cannot give a definite answer.",
+      "text": "A client asks you to repeat part of a traditional sky-omen reading. You explain what the tradition claims and where observation does not support a definite answer.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -33174,7 +33008,7 @@
               {
                 "type": "year",
                 "op": "gte",
-                "value": -29
+                "value": -350
               },
               {
                 "type": "any",
@@ -33719,7 +33553,7 @@
     {
       "id": "variety-tie-sibling-news",
       "title": "News carried by a relative",
-      "text": "A relative brings household news from across the city. You ask them to take a short reply when they next visit.",
+      "text": "A relative brings household news from across the neighborhood. You ask them to take a short reply when they next visit.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -39414,7 +39248,7 @@
     {
       "id": "early-year-delta-word",
       "title": "A word from the old village",
-      "text": "A visiting relative uses a word your household knows from the Delta. You repeat it until someone explains what it means in the city.",
+      "text": "A visiting relative uses a word your household knows from the Delta. You repeat it until someone explains what it means in the neighborhood.",
       "trigger": {
         "type": "random",
         "weight": 1
@@ -39687,7 +39521,7 @@
       },
       "evidence": "fictional",
       "sourceIds": [
-        "bonazzi-2013-eudorus"
+        "classical-aristotle"
       ],
       "choices": [
         {
@@ -39803,7 +39637,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "bonazzi-2013-eudorus"
+        "classical-aristotle"
       ]
     },
     {
@@ -39835,7 +39669,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "bonazzi-2013-eudorus"
+        "classical-aristotle"
       ]
     },
     {
@@ -40077,7 +39911,7 @@
               {
                 "type": "year",
                 "op": "lt",
-                "value": -30
+                "value": -250
               }
             ]
           }
@@ -40085,7 +39919,7 @@
       },
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-war",
+        "classical-egypt-transitions",
         "fischer-bovet-2013-army"
       ],
       "choices": [
@@ -40202,14 +40036,14 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-war",
+        "classical-egypt-transitions",
         "fischer-bovet-2013-army"
       ]
     },
     {
       "id": "legacy-military-callback-2",
       "title": "Stores to check in a different household",
-      "text": "A household needs someone to check its stores, and Herakleides gives them your name. Dion points to {work:military-first-work} as evidence that you can keep an account. You are paid for the civilian work, under whichever government now rules the city.",
+      "text": "A household needs someone to check its stores, and Herakleides gives them your name. Dion points to {work:military-first-work} as evidence that you can keep an account. You are paid for the civilian work, under whichever government now rules the neighborhood.",
       "trigger": {
         "type": "age",
         "at": 0
@@ -40235,7 +40069,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "alexandrian-war",
+        "classical-egypt-transitions",
         "fischer-bovet-2013-army"
       ]
     },
@@ -40484,8 +40318,7 @@
       },
       "evidence": "fictional",
       "sourceIds": [
-        "post-2025-calendars",
-        "fanelli-jones-2019-almanac"
+        "post-2025-calendars"
       ],
       "choices": [
         {
@@ -40601,8 +40434,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "post-2025-calendars",
-        "fanelli-jones-2019-almanac"
+        "post-2025-calendars"
       ]
     },
     {
@@ -40634,8 +40466,7 @@
       ],
       "evidence": "fictional",
       "sourceIds": [
-        "post-2025-calendars",
-        "fanelli-jones-2019-almanac"
+        "post-2025-calendars"
       ]
     },
     {
@@ -51554,6 +51385,609 @@
           ]
         }
       ]
+    },
+    {
+      "id": "classical-succession-guard",
+      "title": "An order during the succession struggles",
+      "text": "Your unit is ordered to guard a supply route while rival commanders dispute authority after Alexander's death. The assignment is local and uncertain: one post covers the stores; another stands farther along an exposed approach.",
+      "trigger": {
+        "type": "year",
+        "at": -322
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "job",
+                "job": "soldier"
+              },
+              {
+                "type": "job",
+                "job": "officer"
+              },
+              {
+                "type": "job",
+                "job": "general"
+              }
+            ]
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -320
+          }
+        ]
+      },
+      "sourceIds": [
+        "classical-alexander"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "classical-guard-stores",
+          "text": "Guard the stores and move supplies",
+          "outcomes": [
+            {
+              "id": "classical-guard-stores-result",
+              "text": "You guard the stores and help move loads into a protected yard.",
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "served-during-succession",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "classical-forward-post",
+          "text": "Volunteer for the exposed post (risk of death)",
+          "outcomes": [
+            {
+              "id": "classical-forward-return",
+              "text": "You return from the post with a damaged shield and a clearer understanding of the unit's movements.",
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "served-during-succession",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 7
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -7
+                }
+              ],
+              "weight": 98
+            },
+            {
+              "id": "classical-forward-fatal",
+              "text": "A spear strikes your abdomen during the assignment. Blood loss from the wound proves fatal.",
+              "effects": [
+                {
+                  "type": "end",
+                  "ending": "death-in-adulthood",
+                  "deathCause": "campaign-spear-wound"
+                }
+              ],
+              "weight": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "classical-garrison-account",
+      "title": "The loads and the equipment",
+      "text": "The unit checks a storehouse and compares its equipment list with the incoming loads. The names at the head of the orders may change; every missing item still has to be explained.",
+      "trigger": {
+        "type": "year",
+        "at": -321
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "job",
+                "job": "soldier"
+              },
+              {
+                "type": "job",
+                "job": "officer"
+              },
+              {
+                "type": "job",
+                "job": "general"
+              }
+            ]
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -320
+          }
+        ]
+      },
+      "mode": "automatic",
+      "choices": [],
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "served-during-succession",
+          "value": true
+        },
+        {
+          "type": "skill",
+          "skill": "warfare",
+          "delta": 2
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "sourceIds": [
+        "classical-alexander"
+      ],
+      "evidence": "fictional"
+    },
+    {
+      "id": "classical-aristotle-journey",
+      "title": "A passage to Athens",
+      "text": "A returning trader offers to arrange a passage to Athens and a place to stay with readers there. Aristotle is teaching at the Lyceum. Taking the journey would mean a season away from your household; a place in a discussion is not promised.",
+      "trigger": {
+        "type": "year",
+        "at": -332
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -324
+          },
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "op": "gte",
+            "value": 10
+          },
+          {
+            "type": "skill",
+            "skill": "philosophy",
+            "op": "gte",
+            "value": 8
+          }
+        ]
+      },
+      "sourceIds": [
+        "classical-aristotle"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "classical-aristotle-stay",
+          "text": "Stay with your household and local teacher",
+          "outcomes": [
+            {
+              "id": "classical-aristotle-stay-result",
+              "text": "You ask for a copied argument instead and keep your work near home. This time you do not travel to Athens.",
+              "effects": [],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "classical-aristotle-travel",
+          "text": "Pay 30 drachmas for the round trip to Athens",
+          "when": {
+            "type": "cash",
+            "op": "gte",
+            "value": 30
+          },
+          "opportunity": {
+            "label": "Hear Aristotle teach",
+            "outcomeIds": [
+              "classical-aristotle-heard"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "classical-aristotle-heard",
+              "text": "In Athens, a reader brings you into a discussion at the Lyceum. Aristotle asks the group to distinguish what a thing is from why it changes. You return to Egypt with a checked set of notes and a question your own teacher cannot dismiss.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -30
+                },
+                {
+                  "type": "flag",
+                  "flag": "heard-aristotle",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ],
+              "weight": 65
+            },
+            {
+              "id": "classical-aristotle-missed",
+              "text": "The passage reaches Athens late, and the promised introduction does not materialize. Other readers help you examine an argument before you return to Egypt. You have made the journey, but have not heard Aristotle himself.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -30
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                }
+              ],
+              "weight": 35
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "classical-alexander-shore-work",
+      "title": "Supplies for the king's party",
+      "text": "Alexander's party is inspecting the Egyptian coast. An officer needs local hands to check boat loads and clear a landing. Helping could put you near the king, but a paid task is not an introduction to him.",
+      "trigger": {
+        "type": "year",
+        "at": -332
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -331
+          },
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "craft",
+                "op": "gte",
+                "value": 8
+              },
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "op": "gte",
+                "value": 8
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "op": "gte",
+                "value": 8
+              }
+            ]
+          }
+        ]
+      },
+      "sourceIds": [
+        "classical-alexander",
+        "classical-rhakotis"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "classical-alexander-keep-work",
+          "text": "Keep to your existing work",
+          "outcomes": [
+            {
+              "id": "classical-alexander-keep-work-result",
+              "text": "You leave the officer to find other hands. The party's plans reach you through the people who took the work.",
+              "effects": [],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "classical-alexander-supply",
+          "text": "Check the loads and help prepare the landing",
+          "outcomes": [
+            {
+              "id": "classical-alexander-supply-result",
+              "text": "You count the loads, clear the landing and receive the agreed payment. The officer keeps your name with the supply account; the work becomes part of the preparations around the new city.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 15
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "delta": 2
+                },
+                {
+                  "type": "flag",
+                  "flag": "assisted-alexander-foundation",
+                  "value": true
+                }
+              ],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "classical-alexander-approach",
+          "text": "Take the work and ask to present the checked account",
+          "when": {
+            "type": "skill",
+            "skill": "oratory",
+            "op": "gte",
+            "value": 8
+          },
+          "opportunity": {
+            "label": "Briefly address Alexander",
+            "outcomeIds": [
+              "classical-alexander-met"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "classical-alexander-met",
+              "text": "After the loads are checked, an officer calls you forward with the account. Alexander asks whether boats can use the landing in a contrary wind. You answer from the shore you know. The exchange is brief; afterward you return to the workers and collect your pay.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 15
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 3
+                },
+                {
+                  "type": "flag",
+                  "flag": "assisted-alexander-foundation",
+                  "value": true
+                },
+                {
+                  "type": "flag",
+                  "flag": "met-alexander",
+                  "value": true
+                }
+              ],
+              "weight": 35
+            },
+            {
+              "id": "classical-alexander-not-met",
+              "text": "The officer accepts the account and pays you, but the king's party moves on before you are called. Your work is recorded; you have not spoken to Alexander.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 15
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "flag",
+                  "flag": "assisted-alexander-foundation",
+                  "value": true
+                }
+              ],
+              "weight": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "classical-euclid-demonstration",
+      "title": "The line that the sketch cannot prove",
+      "text": "A reader connected with Euclid's teaching brings you a geometrical construction. A neat drawing will not answer the question: you must explain why the steps hold. Ten drachmas would cover materials and time in the working circle.",
+      "trigger": {
+        "type": "year",
+        "at": -305
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -290
+          },
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "op": "gte",
+            "value": 20
+          }
+        ]
+      },
+      "sourceIds": [
+        "classical-euclid"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "classical-euclid-keep-work",
+          "text": "Keep to the calculations you already use",
+          "outcomes": [
+            {
+              "id": "classical-euclid-keep-work-result",
+              "text": "You return the construction and finish the accounts waiting on your own table.",
+              "effects": [],
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "classical-euclid-work-proof",
+          "text": "Pay 10 drachmas and work through the demonstration",
+          "when": {
+            "type": "cash",
+            "op": "gte",
+            "value": 10
+          },
+          "opportunity": {
+            "label": "Have the demonstration accepted",
+            "outcomeIds": [
+              "classical-euclid-proof-accepted"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "classical-euclid-proof-accepted",
+              "text": "In the teaching circle, Euclid stops at the step you thought was obvious. You rebuild it from the agreed definitions and earlier results. When the demonstration is accepted, you take home a corrected copy whose margin records the point you had to prove.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -10
+                },
+                {
+                  "type": "flag",
+                  "flag": "studied-euclidean-proof",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ],
+              "weight": 70
+            },
+            {
+              "id": "classical-euclid-proof-revised",
+              "text": "The readers find a step your explanation does not justify. You leave with a correction to work through, rather than an accepted demonstration. The fee and the failed attempt have still bought a clearer question.",
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": -10
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ],
+              "weight": 30
+            }
+          ]
+        }
+      ]
     }
   ],
   "endings": [
@@ -52119,6 +52553,114 @@
       "summary": "Connections between ports, supply, water, military needs and civilian activity. Read scope: Abstract and introduction/methods/geographical sections pp.247–251.",
       "limitations": "Berenike is on the Red Sea, not Alexandria. These networks inspire authored voyage-linked stories; a new playable location is not implied. Characters, accomplishment titles, wages, prices and probabilities in the game are authored fiction.",
       "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-rhakotis",
+      "title": "Strabo, Geography 17.1.6–8: Rhakotis and Alexandria",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/17A1*.html",
+      "publisher": "LacusCurtius, University of Chicago; H. L. Jones, Loeb translation (1932)",
+      "kind": "primary",
+      "period": "Augustan-era account describing the earlier settlement and Alexander's foundation",
+      "geography": "Egyptian Mediterranean coast, Rhakotis and Alexandria",
+      "summary": "Describes Rhakotis as a settlement preceding Alexandria, the suitability of the harbor and the tradition of Alexander directing the city's foundation.",
+      "limitations": "Written centuries after the foundation. Its later urban description is not a map of the coast in 350 BCE. The settlement's extent, inhabitants and individual household experiences are not established by this account.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-rhakotis-archaeology",
+      "title": "Alexandria, Egypt, before Alexander the Great: A multidisciplinary approach yields rich discoveries",
+      "url": "https://www.geosociety.org/gsatoday/archive/17/8/pdf/i1052-5173-17-8-4.pdf",
+      "publisher": "Jean-Daniel Stanley and colleagues, GSA Today 17(8), 2007; doi:10.1130/GSAT01708A.1",
+      "kind": "scholarship",
+      "period": "Pre-Alexandrian activity, with sediment-core evidence extending to about 1000 BCE",
+      "geography": "Alexandria's East Harbor and adjacent mainland coast",
+      "summary": "Archaeological, sedimentary and geochemical indicators support human activity on the coast long before Alexander and a pre-existing settlement beneath the later city.",
+      "limitations": "The exact location, size and organization of Rhakotis remain uncertain. This evidence does not supply a detailed 350 BCE city plan or demographic rates. The paper uses 332 BCE for Alexandria's foundation; the game adopts the conventional 331 BCE year from its separate chronology source.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-egypt-transitions",
+      "title": "Egypt in the Ptolemaic Period",
+      "url": "https://www.metmuseum.org/essays/egypt-in-the-ptolemaic-period",
+      "publisher": "Marsha Hill, Department of Egyptian Art, The Metropolitan Museum of Art (2016)",
+      "kind": "museum",
+      "period": "Egypt before Alexander and the Ptolemaic period, including 343, 332 and 305 BCE",
+      "geography": "Egypt and the western Nile Delta",
+      "summary": "Places Persian reconquest in 343 BCE, Alexander's takeover in 332 BCE and Ptolemy's kingship in 305 BCE. It also describes earlier Greek-Egyptian trade through Delta ports and Naukratis.",
+      "limitations": "An institutional overview rather than a household history. Political dates do not establish every local response, equal access to professions or the game's numerical rewards. Ptolemy governing after Alexander's death must be distinguished from his later adoption of kingship.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-alexander",
+      "title": "The Rise of Macedon and the Conquests of Alexander the Great",
+      "url": "https://www.metmuseum.org/essays/the-rise-of-macedonia-and-the-conquests-of-alexander-the-great",
+      "publisher": "Colette Hemingway and Seán Hemingway, The Metropolitan Museum of Art (2004)",
+      "kind": "museum",
+      "period": "Fourth-century BCE Macedon; Alexander's reign of 336–323 BCE and Asian campaign from 334 BCE",
+      "geography": "Macedon, Greece, Asia and Egypt",
+      "summary": "Provides the accession and campaign sequence for Alexander, including his crossing into Asia in 334 BCE and the succession crisis following his death.",
+      "limitations": "A broad political and art-historical account, not evidence that the fictional player met Alexander. Personal conversations, access to his entourage, recruitment outcomes and civilian consequences are authored situations.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-foundation-chronology",
+      "title": "Pergamon and the Hellenistic Kingdoms of the Ancient World: chronology",
+      "url": "https://resources.metmuseum.org/resources/metpublications/pdf/Pergamon_and_the_Hellenistic_Kingdoms_of_the_Ancient_World.pdf",
+      "publisher": "The Metropolitan Museum of Art, exhibition catalogue (2016)",
+      "kind": "museum",
+      "period": "Late Classical and Hellenistic chronology, including Alexandria's foundation in 331 BCE",
+      "geography": "Mediterranean and Hellenistic kingdoms",
+      "summary": "The catalogue chronology dates the foundation of Alexandria to 331 BCE and places it within Alexander's wider campaigns and the emergence of the successor kingdoms.",
+      "limitations": "A year-level chronology. The game's precise annual ordering is a calendar convention, not a reconstruction of exact foundation ceremonies, building completion dates or individual participation.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-aristotle",
+      "title": "Aristotle, section 1: Aristotle's Life",
+      "url": "https://plato.stanford.edu/entries/aristotle/",
+      "publisher": "Christopher Shields, Stanford Encyclopedia of Philosophy; substantive revision 2020",
+      "kind": "scholarship",
+      "period": "Aristotle, 384–322 BCE; Macedonian tuition from 343 and the Athenian Lyceum from 335 BCE",
+      "geography": "Stagira, Athens, Assos, Lesbos, Macedon and Chalcis",
+      "summary": "Reconstructs Aristotle's movements, the invitation to teach Alexander in 343 BCE and his return to Athens to establish the Lyceum in 335 BCE.",
+      "limitations": "The duration and substance of Alexander's tuition are uncertain. It provides no basis for placing Aristotle in Alexandria. A player's visit, lesson, dialogue or scholarly recognition is fictional and needs an explicit journey to the appropriate place and a compatible date.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-euclid",
+      "title": "Euclid of Alexandria: biography and evidence",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/",
+      "publisher": "J. J. O'Connor and E. F. Robertson, MacTutor History of Mathematics, University of St Andrews",
+      "kind": "scholarship",
+      "period": "Euclid's approximate activity around 300 BCE under Ptolemy I",
+      "geography": "Alexandria, Egypt",
+      "summary": "Discusses Euclid's Alexandrian teaching, the Elements and the sparse later testimony linking him to the first Ptolemy.",
+      "limitations": "His precise birth, death, birthplace and career chronology are uncertain. Circa 300 BCE is an approximate scholarly setting, not an exact publication or appointment date. Anecdotes and a player's personal encounter must not be represented as verified biographical incidents.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-library",
+      "title": "Intellectual Pursuits of the Hellenistic Age",
+      "url": "https://www.metmuseum.org/essays/intellectual-pursuits-of-the-hellenistic-age",
+      "publisher": "The Metropolitan Museum of Art, Heilbrunn Timeline of Art History (2007)",
+      "kind": "museum",
+      "period": "Early Hellenistic intellectual patronage and later developments",
+      "geography": "Athens, Alexandria and other Hellenistic centers",
+      "summary": "Describes Ptolemaic patronage of scholarship and Alexandria's Library and Mouseion as an early Hellenistic intellectual center, with copying, criticism and learned collaboration.",
+      "limitations": "It does not establish an exact foundation year or prove that particular careers were available before the institutions developed. The game uses an approximate early-third-century opening for its institution-specific opportunities. Later scholars discussed in the overview require their own chronological guards.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "classical-pharos",
+      "title": "Reconstructions: The Pharos of Alexandria",
+      "url": "https://www.bibalex.org/en/Project/Details?DocumentID=1301",
+      "publisher": "Alexandria and Mediterranean Research Center, Bibliotheca Alexandrina",
+      "kind": "museum",
+      "period": "Pharos erection during 283–279 BCE under Ptolemy II; later monuments have separate dates",
+      "geography": "Alexandria and its Mediterranean coast",
+      "summary": "Dates the lighthouse to the reign of Ptolemy II, between 283 and 279 BCE, and explains the use of archaeological and historical evidence in modern reconstructions.",
+      "limitations": "A reconstruction overview, not a fully recovered original building. A completed lighthouse must not appear at the 350 BCE birth or 331 BCE city foundation. Pharos Island existed earlier; its name alone need not imply the lighthouse. The page's Ptolemy III Serapeum belongs after this cohort's age-100 record.",
+      "accessed": "2026-11-08"
     }
   ],
   "economy": {
@@ -52129,7 +52671,7 @@
       "short": "dr"
     },
     "unitsPerPoint": 10,
-    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified unit continues after Roman rule. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan.",
+    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified accounting unit is used across this lifetime's changes of ruler; it does not imply a fixed exchange rate or uniform historical coinage. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan.",
     "sourceIds": [
       "ucl-ptolemaic-coins"
     ],
@@ -52170,7 +52712,7 @@
     }
   },
   "health": {
-    "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for Ptolemaic Alexandria is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules.",
+    "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for the Egyptian coast in this era is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules.",
     "sourceIds": [
       "family-care",
       "alexandrian-wetnursing",
@@ -52562,7 +53104,7 @@
         "description": "Kleio can explain your argument about agreements in her own words. Apollonios keeps the checked outline for another lesson.",
         "evidence": "fictional",
         "sourceIds": [
-          "bonazzi-2013-eudorus"
+          "classical-aristotle"
         ]
       },
       {
@@ -52578,7 +53120,7 @@
         "description": "Kleio and Apollonios return with objections to your collected discussions. The revised text becomes the basis of regular meetings.",
         "evidence": "fictional",
         "sourceIds": [
-          "bonazzi-2013-eudorus"
+          "classical-aristotle"
         ]
       },
       {
@@ -52628,7 +53170,7 @@
         "description": "Dion and Herakleides check the unit's stores against your record and enter your name beside the completed assignment.",
         "evidence": "fictional",
         "sourceIds": [
-          "alexandrian-war",
+          "classical-egypt-transitions",
           "fischer-bovet-2013-army"
         ]
       },
@@ -52645,7 +53187,7 @@
         "description": "Dion and Herakleides record your handling of a difficult unit assignment. Their commendation can support an application for further responsibility.",
         "evidence": "fictional",
         "sourceIds": [
-          "alexandrian-war",
+          "classical-egypt-transitions",
           "fischer-bovet-2013-army"
         ]
       },
@@ -52698,8 +53240,7 @@
         "description": "Heron checks your arithmetic. Isidora keeps the corrected seasonal table, including the distinction between calculated entries and uncertain expectations.",
         "evidence": "fictional",
         "sourceIds": [
-          "post-2025-calendars",
-          "fanelli-jones-2019-almanac"
+          "post-2025-calendars"
         ]
       },
       {
@@ -52715,8 +53256,7 @@
         "description": "Heron and Isidora credit the corrections in your compared tables. Your notes show how each calculation was checked and where uncertainty remains.",
         "evidence": "fictional",
         "sourceIds": [
-          "post-2025-calendars",
-          "fanelli-jones-2019-almanac"
+          "post-2025-calendars"
         ]
       },
       {

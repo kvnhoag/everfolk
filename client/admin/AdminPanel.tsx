@@ -180,6 +180,11 @@ function PreviewPanel({ world }: { world: ManagedWorld }) {
     try { setPreview({ ...preview, life: action(preview.engine, preview.life) }); setError(""); }
     catch (error) { setError(errorText(error)); }
   }
+  function choosePreviewAvatar(variant: number) {
+    if (!preview || preview.ready) return;
+    try { setPreview({ ...preview, life: preview.engine.chooseAvatar(preview.life, variant) }); setError(""); }
+    catch (error) { setError(errorText(error)); }
+  }
   return <section className="admin-preview">
     <div className="admin-section-title"><p className="admin-eyebrow">TRY THE DRAFT</p><h2>A life before publication.</h2><p>Test this world's enabled events and routes. The live game and your current player's life are unaffected.</p></div>
     <div className="admin-preview-start"><Field label="Life seed" hint="The same seed and choices reproduce the same person, background and life."><input value={seed} onChange={event => setSeed(event.target.value)} /></Field><button className="admin-button" type="button" onClick={() => start()}>Start a draft life</button><button className="admin-button admin-button-quiet" type="button" onClick={() => { const nextSeed = `draft-${crypto.randomUUID()}`; setSeed(nextSeed); start(nextSeed); }}>Random draft life</button></div>
@@ -201,7 +206,7 @@ function PreviewPanel({ world }: { world: ManagedWorld }) {
       <div className="admin-button-row"><button className="admin-button" type="button" disabled={current.phase !== "ready"} onClick={() => run((engine, life) => engine.advance(life))}>Advance one year</button><button className="admin-button admin-button-quiet" type="button" disabled={current.phase !== "ready"} onClick={() => run((engine, life) => { let next = life; for (let count = 0; count <= engine.world.maxAge && next.phase === "ready"; count++) next = engine.advance(next); return next; })}>Next decision or ending</button></div>
       <ol className="admin-preview-log">{current.journal.filter(entry => entry.type !== "year").slice(-20).reverse().map((entry, index) => <li key={index}><span>{formatYear(entry.year)} · AGE {entry.age} · {entry.type}</span><p>{entry.text}</p></li>)}</ol>
     </>)}
-    {current && preview && <BirthRollPopover key={preview.runId} open={birthRollOpen} life={current} world={preview.engine.world} revealed={preview.revealed} onReveal={() => reveal(preview.runId)} onContinue={() => continuePreview(preview.runId)} onClose={() => setBirthRollOpen(false)} />}
+    {current && preview && <BirthRollPopover key={preview.runId} open={birthRollOpen} life={current} world={preview.engine.world} revealed={preview.revealed} onReveal={() => reveal(preview.runId)} onContinue={() => continuePreview(preview.runId)} onChooseAvatar={choosePreviewAvatar} onClose={() => setBirthRollOpen(false)} />}
   </section>;
 }
 

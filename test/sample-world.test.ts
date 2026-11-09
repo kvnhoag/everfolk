@@ -40,9 +40,9 @@ function withoutMortality(includeSocialEncounters = true): LifeEngine {
   const copy = structuredClone(pack) as WorldPack;
   if (!includeSocialEncounters) {
     // This qualification fixture isolates the selected occupation's follow-up.
-    // Meeting/dating pacing is exercised in the current people integration tests.
+    // Meeting/dating pacing and dated historical offers have their own integration tests.
     delete copy.character!.encounterPacing;
-    copy.events = copy.events.filter(event => !event.id.startsWith("meet-person-") && !event.id.startsWith("date-person-"));
+    copy.events = copy.events.filter(event => !event.id.startsWith("meet-person-") && !event.id.startsWith("date-person-") && !(event.id.startsWith("classical-") && event.mode !== "automatic"));
   }
   // These controlled qualification checks deliberately take the original
   // opening route. The unmodified opening groups are covered separately; a
@@ -63,10 +63,10 @@ function withoutMortality(includeSocialEncounters = true): LifeEngine {
   return createEngine(copy);
 }
 
-test("Alexandria records birth automatically in 66 BCE without a household-care decision", () => {
+test("the coastal setting records birth automatically in 350 BCE without a household-care decision", () => {
   const state = engine.start("birth-screen");
   assert.equal(state.age, 0);
-  assert.equal(state.year, -66);
+  assert.equal(state.year, -350);
   assert.equal(state.phase, "ready");
   assert.equal(state.pendingEventId, null);
   assert.deepEqual(engine.getChoices(state), []);

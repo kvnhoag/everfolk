@@ -74,7 +74,7 @@ test("every new commission pays without changing employment or granting an appoi
   }
 });
 
-test("commissions enforce training, material cash, age, and the historical chart-reading gate", () => {
+test("commissions enforce training, material cash and age while sky-omen work uses its revised period", () => {
   const engine = createEngine(controlledWorld());
   const life = structuredClone(ageTo(engine, engine.start("commission-requirements"), 14));
   assert.equal(availability(engine, life, "small-pottery-order").available, false);
@@ -89,13 +89,13 @@ test("commissions enforce training, material cash, age, and the historical chart
   life.age = 13;
   life.year = yearAtAge(pack.startYear, 13);
   assert.equal(availability(engine, life, "small-pottery-order").available, false);
-  life.age = 36;
-  life.year = -30;
+  life.age = 17;
+  life.year = yearAtAge(pack.startYear, 17);
   life.economy!.cash = 100;
   for (const skill of Object.keys(life.character!.skills)) life.character!.skills[skill] = 100;
   assert.equal(availability(engine, life, "prepare-a-chart-reading").available, false);
-  life.age = 37;
-  life.year = -29;
+  life.age = 18;
+  life.year = yearAtAge(pack.startYear, 18);
   assert.equal(availability(engine, life, "prepare-a-chart-reading").available, true);
 });
 
