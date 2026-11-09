@@ -362,9 +362,9 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
     <div hidden={game.resumeScreenOpen || menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
-      <a className="brand" href="#" aria-label="Historical Lives main menu" onClick={e => { e.preventDefault(); openMainMenu(); }}>
+      <a className="brand" href="#" aria-label="Everfolk main menu" onClick={e => { e.preventDefault(); openMainMenu(); }}>
         <span className="brand-mark"><Icon name="hourglass" size={26} /></span>
-        <span>Historical Lives<span className="brand-caption">ONE LIFE. ANOTHER AGE.</span></span>
+        <span>Everfolk<span className="brand-caption">LIVE ANOTHER STORY</span></span>
       </a>
       <nav className="main-nav" aria-label="Main navigation">
         <button className={!panel ? "nav-link active" : "nav-link"} onClick={closeDialog}><span className="small-dot" />Your life</button>
@@ -387,7 +387,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
     <main className={`page-shell${game.hasBegun ? " game-dashboard" : ""}`} id="life-scene">
       {!game.hasBegun && <section className="chapter-heading" aria-label="Current world">
         <div>
-          <p className="eyebrow"><span className="section-number">I</span> THE ANCIENT MEDITERRANEAN</p>
+          <p className="eyebrow">WORLD · THE ANCIENT MEDITERRANEAN</p>
           <h1>{isDead ? "Life ended" : world.title}<span>.</span></h1>
           <p className="chapter-subtitle">{isDead ? "Your life story, from birth to death." : "Grow up, find work and build a life in ancient Egypt."}</p>
         </div>
@@ -470,7 +470,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
 
-    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Historical Lives · {place}</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
+    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Everfolk · {place}</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
     </div>
     {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={() => { if (!game.hasRevealedStats) return; setBirthPopoverOpen(false); setMenuOpen(false); game.beginLife(); }} />}
     {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} />}
@@ -518,7 +518,7 @@ function App({ isAdmin = false, onChooseWorld, onNewLife, onImportedLife, worldP
           <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
           <p className="fine-print">The setting has documented historical anchors; the individual life is fiction. The illustration is evocative rather than an archaeological reconstruction. Evidence from other periods and places is identified under Sources.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>
         </> : <>
-          <p className="eyebrow">HISTORICAL LIVES</p><h2 id="dialog-title">One life. Another age.</h2>
+          <p className="eyebrow">EVERFOLK</p><h2 id="dialog-title">Live another story</h2>
           <p>Begin as a newborn, live through childhood and adulthood if you survive, and reach the end of one person’s life. The clock starts when you begin and runs between decisions. Time waits while you choose, then continues automatically unless you have paused it. You can change the speed or skip quiet years to the next turning point.</p><p>{world.health?.mortalityCalibration ? "Early life has easier health rules. From age 18, serious illness uses the full historical comparison baseline. Illness appears before it can become fatal; Health, care and family support affect recovery. Read Sources for the model and its limits." : world.health ? "Illnesses and injuries appear before they can become fatal. Care and help from close family can improve recovery; dangerous choices can also cause death. These rates and effects are authored gameplay rules. Read Sources for the historical context." : "Early deaths are possible. The demographic model is an exploratory comparison, not a precise reconstruction of a person born in Ptolemaic Alexandria. The model and each event’s historical basis can be inspected under Sources."}</p><p>Your life saves in this browser when storage is available. Completed lives are kept in a local archive of up to ten, and JSON saves can be downloaded or imported.</p>
           <div className="dialog-actions"><button className="secondary-button" onClick={() => importRef.current?.click()}>Import a saved life <Icon name="book" size={17} /></button><button className="primary-button" onClick={closeDialog}>Return to your life <Icon name="arrow" /></button></div><p className="fine-print">Original pixel scenes, portraits and collectible artwork. The illustrations are imagined settings, not archaeological reconstructions.</p>
         </>}

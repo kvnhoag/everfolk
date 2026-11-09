@@ -1,9 +1,9 @@
 {
-  "name": "historical-lives-engine",
+  "name": "everfolk",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Historical life simulation with sourced context, a complete lifecycle and a React/Vite client.",
+  "description": "Everfolk — Live another story. A historical life simulation with sourced context, a complete lifecycle and a React/Vite client.",
   "engines": {
     "node": ">=24"
   },

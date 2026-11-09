@@ -124,7 +124,7 @@ export default function GameClient() {
     setActive(current => current ? { ...current, world } : current);
   }
 
-  if (!active) return <main className="page-shell"><p>Loading Historical Lives…</p></main>;
+  if (!active) return <main className="page-shell"><p>Loading Everfolk…</p></main>;
   return <>
     <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">

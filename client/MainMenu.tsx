@@ -38,9 +38,9 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
       <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><PixelIcon name="hourglass" size={18} /></span><span>A historical life simulator</span>{isAdmin && <a href="/admin">World editor <span aria-hidden="true">↗</span></a>}</header>
       <div className="main-menu-layout">
         <section className="main-menu-content">
-          <p className="main-menu-kicker">One life in another age.</p>
-          <h1 id={headingId} ref={heading} tabIndex={-1}>Historical<br />Lives<span>.</span></h1>
-          <p className="main-menu-world">{worldTitle}</p>
+          <p className="main-menu-kicker">Live another story</p>
+          <h1 id={headingId} ref={heading} tabIndex={-1}>Everfolk<span>.</span></h1>
+          <p className="main-menu-world">World: {worldTitle}</p>
           {hasBegun && <div className="main-menu-save" id={saveId}>
             <span className="main-menu-save-label">{ended ? "Last life" : "Your saved life"}</span>
             <strong>{life.character?.name ?? "Your character"}</strong>

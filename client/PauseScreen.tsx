@@ -13,7 +13,7 @@ export default function PauseScreen({ life, world, onContinue, onReborn, onMainM
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => { heading.current?.focus({ preventScroll: true }); }, []);
   return <main className="pause-screen" aria-labelledby="pause-screen-title">
-    <header className="pause-brand">Historical Lives<span>{world.title}</span></header>
+    <header className="pause-brand">Everfolk<span>{world.title}</span></header>
     <section className="pause-card">
       <div className="pause-art"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined Alexandrian harbor" /></div>
       <div className="pause-content">
