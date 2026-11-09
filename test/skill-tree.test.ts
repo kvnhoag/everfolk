@@ -147,7 +147,10 @@ test("building, laying out and previewing are read-only and preserve the RNG and
   layoutSkillTree(model);
   const practice = model.nodes.find(node => node.id === "literacy")!.training[0];
   const changes = trainingSkillChanges(practice, main, life);
-  assert.deepEqual(changes.find(change => change.id === "literacy"), { id: "literacy", label: "Literacy", min: 1, max: 1 });
+  const literacy = changes.find(change => change.id === "literacy")!;
+  assert.equal(literacy.label, "Literacy");
+  assert.ok(Math.abs(literacy.min - 0.3) < 1e-10);
+  assert.equal(literacy.max, literacy.min);
   assert.equal(practiceBlockReason(practice, life), undefined);
   assert.equal(JSON.stringify({ life, world: main, activities }), before);
 });

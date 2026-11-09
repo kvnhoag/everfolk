@@ -245,3 +245,7 @@ dialog.admin-publish-review::backdrop{background:#263b2d66;backdrop-filter:blur(
 .admin-player-names{margin:25px 0;padding:18px;border:1px solid #d1dbc6;border-radius:5px;background:#f3f4eb}.admin-player-names>summary{font-size:12px;color:#526d45;cursor:pointer}.admin-player-names>p{font-size:11px;line-height:1.8;color:#7d8c71;margin:13px 0}.admin-player-names textarea{font-size:12px;line-height:1.7}.admin-player-names>.admin-button{margin-top:14px}
 
 .admin-preview-background{font-size:12px;line-height:1.8;color:#748065;margin:0 0 20px}
+.admin-opportunity-outcomes{display:flex;flex-wrap:wrap;gap:8px 16px;border:1px solid #d8d8ca;padding:12px;margin:14px 0;font-size:12px}
+.admin-opportunity-outcomes legend{padding:0 5px;color:#617354}
+.admin-opportunity-outcomes label{display:flex;align-items:center;gap:6px;overflow-wrap:anywhere}
+.admin-opportunity-outcomes input{width:auto;flex:none}

@@ -1,4 +1,5 @@
-import type { CharacterActivity, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
+import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
+import { applyLoanEffect } from "./loans.ts";
 
 /** Deliberate numeric ceiling keeps all ledger arithmetic safely below 2^53. */
 export const ECONOMY_LIMIT = 1_000_000_000_000;
@@ -37,7 +38,8 @@ export function syncEconomyStat(world: WorldPack, state: LifeState): void {
 export function repayDebtAutomatically(world: WorldPack, state: LifeState): number {
   if (!world.economy?.autoDebtRepayment || !state.economy || state.phase === "ended") return 0;
   const cash = amount(state.economy.cash, "Cash"), debt = amount(state.economy.debt, "Debt");
-  const repaid = Math.min(cash, debt);
+  const ordinaryDebt = amount(debt - (state.economy.loan?.balance ?? 0), "Ordinary debt");
+  const repaid = Math.min(cash, ordinaryDebt);
   if (repaid === 0) return 0;
   const remainingCash = amount(cash - repaid, "Cash"), remainingDebt = amount(debt - repaid, "Debt");
   state.economy.cash = remainingCash;
@@ -50,6 +52,11 @@ export function repayDebtAutomatically(world: WorldPack, state: LifeState): numb
 export function applyEconomyEffect(world: WorldPack, state: LifeState, effect: Effect): boolean {
   if (!world.economy || !state.economy) return false;
   const economy = state.economy;
+  if (effect.type === "loan") {
+    applyLoanEffect(world, state, effect);
+    syncEconomyStat(world, state);
+    return true;
+  }
   const cashDelta = effect.type === "cash" ? effect.delta
     : effect.type === "stat" && effect.stat === world.economy.stat ? effect.delta * world.economy.unitsPerPoint : undefined;
   if (cashDelta !== undefined) {
@@ -58,6 +65,7 @@ export function applyEconomyEffect(world: WorldPack, state: LifeState, effect: E
     if (remaining < 0) { economy.debt = amount(economy.debt - remaining, "Debt"); economy.cash = 0; }
     else economy.cash = amount(remaining, "Cash");
   } else if (effect.type === "debt") {
+    if (economy.loan && economy.debt + effect.delta < economy.loan.balance) throw new Error("Use a moneylender loan payment to reduce that loan balance.");
     economy.debt = amount(economy.debt + effect.delta, "Debt");
   } else if (effect.type === "asset") {
     const asset = world.economy.assets.find(candidate => candidate.id === effect.asset)!;
@@ -72,7 +80,7 @@ export function applyEconomyEffect(world: WorldPack, state: LifeState, effect: E
 /** Exact, detached projection; no accepted command, random draw or life mutation. */
 export function previewEconomyEffects(world: WorldPack, life: LifeState, effects: readonly Effect[]): EconomyState | undefined {
   if (!world.economy || !life.economy) return;
-  const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets } } };
+  const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets }, ...(life.economy.loan ? { loan: { ...life.economy.loan } } : {}) } };
   for (const effect of effects) {
     if (effect.type === "end") break;
     applyEconomyEffect(world, state, effect);
@@ -81,16 +89,17 @@ export function previewEconomyEffects(world: WorldPack, life: LifeState, effects
 }
 
 /** Every possible voluntary outcome must be affordable in effect order. */
-export function financeActivityReason(world: WorldPack, life: LifeState, activity: CharacterActivity): string | undefined {
+export function financeActivityReason(world: WorldPack, life: LifeState, activity: Pick<Choice, "outcomes">): string | undefined {
   if (!world.economy || !life.economy) return;
   for (const outcome of activity.outcomes) {
-    const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets } } };
+    const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets }, ...(life.economy.loan ? { loan: { ...life.economy.loan } } : {}) } };
     for (const effect of outcome.effects) {
       if (effect.type === "end") break;
       const delta = effect.type === "cash" ? effect.delta
         : effect.type === "stat" && effect.stat === world.economy.stat ? effect.delta * world.economy.unitsPerPoint : 0;
       if (delta < 0 && state.economy.cash < -delta) return `Needs ${-delta} ${world.economy.currency.short} in cash (you have ${state.economy.cash}).`;
       if (effect.type === "debt" && state.economy.debt + effect.delta < 0) return `You do not owe that much debt (currently ${state.economy.debt} ${world.economy.currency.short}).`;
+      if (effect.type === "debt" && state.economy.loan && state.economy.debt + effect.delta < state.economy.loan.balance) return "This payment covers household debt only. Use the moneylender loan payment for the remaining balance.";
       if (effect.type === "asset") {
         const asset = world.economy.assets.find(candidate => candidate.id === effect.asset)!;
         const next = (state.economy.assets[effect.asset] ?? 0) + effect.delta;

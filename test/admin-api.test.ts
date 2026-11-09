@@ -7,7 +7,7 @@ import { MAX_CATALOG_BYTES, compileWorld, getBuiltinCatalog, getBuiltinWorld, ge
 import type { ContentDatabase, D1Statement, StatementResult } from "../server/store.ts";
 import type { ApiEnvironment } from "../server/api.ts";
 import { createEngine } from "../src/index.ts";
-import type { LifeEvent, WorldPack } from "../src/types.ts";
+import type { Condition, LifeEvent, WorldPack } from "../src/types.ts";
 import namedCausesPack from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 import originRangesPack from "../worlds/alexandria-0.6.0.json" with { type: "json" };
 import longerLivesPack from "../worlds/alexandria-0.6.1.json" with { type: "json" };
@@ -68,6 +68,23 @@ function setup(t: { after(fn: () => void): void }) {
   t.after(() => db.close());
   const env: ApiEnvironment = { DB: db, ADMIN_EMAIL: OWNER };
   return { db, env, call: (path: string, method = "GET", value?: unknown) => handleApi(request(path, method, value), env) };
+}
+
+/** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
+function pruneRemovedOriginModifiers(world: WorldPack): void {
+  const retained = new Set(world.origins.map(origin => origin.id));
+  const hasRemovedOrigin = (condition: Condition): boolean => {
+    if (condition.type === "origin") return !retained.has(condition.origin);
+    if (condition.type === "all" || condition.type === "any") return condition.conditions.some(hasRemovedOrigin);
+    return condition.type === "not" && hasRemovedOrigin(condition.condition);
+  };
+  for (const choice of [...world.events.flatMap(event => event.choices), ...(world.character?.activities ?? [])]) {
+    for (const outcome of choice.outcomes) {
+      if (!outcome.weightModifiers) continue;
+      outcome.weightModifiers = outcome.weightModifiers.filter(modifier => !hasRemovedOrigin(modifier.when));
+      if (!outcome.weightModifiers.length) delete outcome.weightModifiers;
+    }
+  }
 }
 
 test("admin APIs deny anonymous users and invited players, even when they know the URLs", async t => {
@@ -208,6 +225,7 @@ test("origin stat ranges survive draft persistence and publication and determine
   pack.origins = [{ ...pack.origins[0], statRanges: { health: { min: 41, max: 43 }, wealth: { min: 10, max: 12 } }, effects: [] }];
   // This isolated one-origin fixture excludes the other households' stories.
   pack.events = pack.events.filter(event => !event.id.startsWith("background-"));
+  pruneRemovedOriginModifiers(pack);
   const response = await call("/api/admin/catalog", "PUT", draft);
   assert.equal(response.status, 200);
   const saved = await response.json();

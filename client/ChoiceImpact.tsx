@@ -2,6 +2,9 @@ import type { Choice, LifeState, WorldPack } from "../src/types.ts";
 import { getChoiceImpact } from "./choice-impact.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import { getMoneyImpact } from "./wealth.ts";
+import { getOpportunityPreview } from "../src/outcomes.ts";
+import { severeHealthRisk, formatHealthRisk } from "./health-risk.ts";
+import { loanEffectNotes } from "./loan-summary.ts";
 import "./choice-impact.css";
 
 /** Only existing people are named. Preview deltas use the same sequential bounds as play. */
@@ -73,8 +76,11 @@ export default function ChoiceImpact({ choice, life, world }: { choice: Choice; 
   const moneyImpact = getMoneyImpact(choice, life, world);
   const connections = closenessEffects(choice, life, world);
   const health = healthEffects(choice, life, world);
+  const opportunity = getOpportunityPreview(world, life, choice);
+  const severeRisk = severeHealthRisk(life, world, choice);
+  const loanNotes = loanEffectNotes(choice, life, world);
   const hasRange = changedStats.some(stat => stat.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
-  if (changedStats.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife) return null;
+  if (changedStats.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0) return null;
   return <span className="choice-impact">
     <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
@@ -86,7 +92,10 @@ export default function ChoiceImpact({ choice, life, world }: { choice: Choice; 
       {moneyImpact.map(item => <span className="impact-stat" key={`money-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} inverse={item.inverse} suffix={world.economy!.currency.short} /></span>)}
       {connections.map(item => <span className="impact-stat" key={`closeness-${item.label}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
       {health.map(item => <span className={`impact-stat impact-${item.gain ? "gain" : "loss"}`} key={item.text}>{item.text}</span>)}
+      {loanNotes.map(note => <span className="impact-stat" key={note}>{note}</span>)}
     </span>
+    {opportunity && <span className="choice-opportunity"><strong>{opportunity.label}: {Number((opportunity.probability * 100).toFixed(1))}%</strong>{opportunity.factors.length > 0 && <span className="choice-opportunity-factors">{opportunity.factors.map((factor, index) => <span className={factor.multiplier >= 1 ? "opportunity-help" : "opportunity-hinder"} key={`${factor.reason}-${index}`}>{factor.reason}</span>)}</span>}</span>}
     {impact.canEndLife && <span className="choice-impact-ending">{impact.deathRisk > 0 ? `Risk of death: ${impact.deathRisk < .0001 ? "less than 0.01" : Number((impact.deathRisk * 100).toFixed(2))}%.` : "A possible outcome ends this life."}</span>}
+    {severeRisk && <span className="choice-impact-ending">Risk of death from severe illness: {formatHealthRisk(severeRisk)} before the next birthday.</span>}
   </span>;
 }

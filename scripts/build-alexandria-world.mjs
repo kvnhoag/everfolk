@@ -5,11 +5,15 @@ import { applyBackgroundVariety } from "./alexandria-backgrounds.mjs";
 import { applyWorkTimeline } from "./alexandria-work-timeline.mjs";
 import { applyInterestCareers } from "./alexandria-interest-careers.mjs";
 import { applyCausalLife } from "./alexandria-causal-life.mjs";
+import { applyStrictProgression } from "./alexandria-strict-progression.mjs";
+import { applyCareerOpportunities } from "./alexandria-opportunities.mjs";
+import { applyAdultMortality } from "./alexandria-adult-mortality.mjs";
+import { applyMoneylender } from "./alexandria-moneylender.mjs";
 
 const root = new URL("../", import.meta.url);
 const sources = JSON.parse(readFileSync(new URL("research/sources.json", root), "utf8"));
 const model = JSON.parse(readFileSync(new URL("research/mortality-model.json", root), "utf8"));
-const balance = JSON.parse(readFileSync(new URL("research/game-balance.json", root), "utf8")).mortality;
+const balance = JSON.parse(readFileSync(new URL("research/adult-mortality-balance.json", root), "utf8")).mortality;
 const stat = (id, delta) => ({ type: "stat", stat: id, delta });
 const flag = (id, value = true) => ({ type: "flag", flag: id, value });
 const skill = (id, delta) => ({ type: "skill", skill: id, delta });
@@ -495,7 +499,7 @@ const character = {
 };
 
 const world = {
-  schemaVersion: 1, id: "alexandria-sample", version: "0.16.0", title: "A life in Alexandria",
+  schemaVersion: 1, id: "alexandria-sample", version: "0.18.0", title: "A life in Alexandria",
   description: "A fictional life born in Alexandria in 66 BCE. Learn a trade, study, build a household or try rare military and court careers. Childhood and adult background death risks are reduced for playability from a disclosed later Roman Egyptian female comparison model. Personal events, career odds and stat effects are authored game rules, not measured historical frequencies.",
   startYear: -66, maxAge: model.maxAge,
   stats: {
@@ -857,6 +861,30 @@ world.knowledge = {
   description: "Knowledge needs continued use. From age 12, two full years without a recorded learning gain lead to a loss of 1 point per year. Lessons, research, work and events with positive Knowledge effects refresh practice, including at the stat cap. Ageing also reduces Knowledge by 0.5 per year from 50, 1 from 65 and 1.5 from 80. These are authored game rules, not measured cognitive ageing rates. Skill proficiencies are separate.",
 };
 
+// Name the material and task instead of presenting every practical activity as
+// generic Craft. The foundation still covers tool use across several trades.
+world.character.skills.craft.label = "Tool handling";
+world.character.skills.craft.description = "Measure materials, control hand tools and repair everyday objects. These basics support several trades.";
+world.character.skills.carving.label = "Wood carving";
+function specificCraftCopy(id, text, outcomeText) {
+  const action = world.character.activities.find(activity => activity.id === id);
+  if (!action || action.outcomes.length !== 1) throw new Error(`Expected one craft outcome for ${id}`);
+  action.text = text;
+  if (outcomeText) action.outcomes[0].text = outcomeText;
+}
+specificCraftCopy("train-craft", "Practise cutting and joining wood",
+  "You measure a piece of wood, cut a joint and fit the pieces together. A workshop worker checks your work.");
+specificCraftCopy("train-pottery", "Shape and fire clay pots",
+  "You shape small clay pots, leave them to dry and help load a kiln.");
+specificCraftCopy("train-carving", "Carve a wooden fitting",
+  "You mark a pattern on wood and carve the fitting. A worker checks the cuts and helps you correct uneven parts.");
+specificCraftCopy("train-sculpture", "Carve a small stone relief",
+  "You mark a design on a scrap of stone and cut a shallow relief. A sculptor checks the depth and shape.");
+specificCraftCopy("take-small-repair-jobs", "Repair hinges, straps and household fittings");
+specificCraftCopy("pottery-order", "Finish a large order of clay pots",
+  "You shape and finish the clay pots for a large order. The customer pays when the work is done, but the long hours leave you tired.");
+world.economy.assets.find(asset => asset.id === "tool-chest").description = "Unlocks hinge, strap and fitting repairs at Tool handling 15. Sell for 30 drachmas.";
+
 // Paid actions use cash, not the net-worth index retained for legacy stat effects.
 // This also prevents debt or an illiquid possession from misreporting affordability.
 function cashRequirement(condition) {
@@ -897,5 +925,9 @@ Object.assign(birthEvent, {
   effects: [],
 });
 const output = new URL("worlds/alexandria-sample.json", root);
+applyStrictProgression(world);
+applyCareerOpportunities(world);
+applyAdultMortality(world);
+applyMoneylender(world);
 writeFileSync(output, `${JSON.stringify(world, null, 2)}\n`);
 console.log(`Built ${world.events.length} events, ${world.sources.length} sources, ${bands.length} mortality bands and ${world.character.activities.length} character activities: ${fileURLToPath(output)}`);

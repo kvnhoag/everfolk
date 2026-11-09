@@ -1,15 +1,21 @@
 import type {
-  ActivityAvailability, Choice, Command, Comparison, Condition, Effect, JournalEntry,
+  ActivityAvailability, Choice, Command, Condition, Effect, JournalEntry,
   LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
 } from "./types.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
-import { yearAtAge } from "./calendar.ts";
+import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
+import { loanCollectionEventId } from "./loans.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
+import { applyStatDelta } from "./progression.ts";
 import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
-import { initialRelationships, introduceRelationship, addChildRelationship, applyCloseness, advanceRelationships, relationshipSupport, relationshipOutcomeWeight } from "./relationships.ts";
+import { initialRelationships, introduceRelationship, addChildRelationship, applyCloseness, advanceRelationships, relationshipSupport } from "./relationships.ts";
+
+import { matchesCondition } from "./conditions.ts";
+import { outcomeWeight } from "./outcomes.ts";
+export { matchesCondition } from "./conditions.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -22,44 +28,6 @@ function freeze<T>(value: T): T {
   return value;
 }
 
-function compare(left: number, op: Comparison, right: number): boolean {
-  switch (op) {
-    case "eq": return left === right;
-    case "ne": return left !== right;
-    case "gt": return left > right;
-    case "gte": return left >= right;
-    case "lt": return left < right;
-    case "lte": return left <= right;
-  }
-}
-
-export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
-  if (!condition) return true;
-  switch (condition.type) {
-    case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);
-    case "debt": return state.economy !== undefined && compare(state.economy.debt, condition.op, condition.value);
-    case "asset": return state.economy !== undefined && compare(state.economy.assets[condition.asset] ?? 0, condition.op, condition.value);
-    case "stat": return compare(state.stats[condition.stat], condition.op, condition.value);
-    case "flag": return state.flags[condition.flag] === condition.value;
-    case "age": return compare(state.age, condition.op, condition.value);
-    case "year": return compare(state.year, condition.op, condition.value);
-    case "origin": return state.originId === condition.origin;
-    case "skill": return state.character !== undefined && compare(state.character.skills[condition.skill], condition.op, condition.value);
-    case "job": return state.character !== undefined && state.character.jobId === condition.job;
-    case "relationship": return state.character !== undefined && state.character.relationshipStatus === condition.status &&
-      (condition.partner === undefined || state.character.partnerId === condition.partner);
-    case "known-partner": return state.character?.knownPartnerIds?.includes(condition.partner) === true || state.character?.partnerId === condition.partner;
-    case "children": return state.character !== undefined && compare(state.character.children.length, condition.op, condition.value);
-    case "has-condition": return Boolean(state.health?.conditions.some(item => condition.condition === undefined || item.id === condition.condition));
-    case "closeness": {
-      const tie = state.character?.relationships?.partners[condition.partner ?? state.character.partnerId ?? ""];
-      return tie !== undefined && compare(tie.closeness, condition.op, condition.value);
-    }
-    case "all": return condition.conditions.every(child => matchesCondition(child, state));
-    case "any": return condition.conditions.some(child => matchesCondition(child, state));
-    case "not": return !matchesCondition(condition.condition, state);
-  }
-}
 
 const matches = matchesCondition;
 
@@ -105,7 +73,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     stats: { ...state.stats }, flags: { ...state.flags },
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
-    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets } } } : {}),
+    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.character ? { character: {
@@ -179,22 +147,29 @@ export function createEngine(input: unknown): LifeEngine {
 
   function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string): void {
     for (const effect of effects) {
-      if (applyEconomyEffect(world, state, effect)) continue;
+      const beforeLoanBalance = effect.type === "loan" ? state.economy?.loan?.balance ?? 0 : 0;
+      if (applyEconomyEffect(world, state, effect)) {
+        if (effect.type === "loan") {
+          const currency = world.economy!.currency.short, loan = state.economy!.loan;
+          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          else if (effect.action === "repay") journal(state, "activity", "moneylender-loan-payment", `You pay ${beforeLoanBalance - (loan?.balance ?? 0)} ${currency} toward the moneylender loan.${loan ? ` ${loan.balance} ${currency} remains.` : " The loan is fully repaid."}`);
+          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+        }
+        continue;
+      }
       const reason = characterEffectReason(world, state, effect, true);
       if (reason) throw new Error(`Character effect is unavailable: ${reason}`);
       switch (effect.type) {
         case "stat": {
           const definition = world.stats[effect.stat];
-          state.stats[effect.stat] = Math.max(definition.min,
-            Math.min(definition.max, state.stats[effect.stat] + effect.delta));
+          state.stats[effect.stat] = applyStatDelta(definition, state.stats[effect.stat], effect.delta);
           recordKnowledgePractice(world, state, effect);
           break;
         }
         case "flag": state.flags[effect.flag] = effect.value; break;
         case "skill": {
           const definition = world.character!.skills[effect.skill];
-          state.character!.skills[effect.skill] = Math.max(definition.min,
-            Math.min(definition.max, state.character!.skills[effect.skill] + effect.delta));
+          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], effect.delta);
           break;
         }
         case "job": state.character!.jobId = effect.job; break;
@@ -251,13 +226,15 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function choicesFor(event: LifeEvent, state: LifeState): Choice[] {
-    return event.choices.filter(choice => matches(choice.when, state));
+    return event.choices.filter(choice => matches(choice.when, state) &&
+      (!choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan")) || !financeActivityReason(world, state, choice)));
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
     // Medical decisions are interrupts from the health lifecycle, never an
     // unrelated random story or a repeat after care was already chosen.
     if (world.health?.careDecision === event.id) return false;
+    if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
     if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
@@ -308,6 +285,19 @@ export function createEngine(input: unknown): LifeEngine {
     return true;
   }
 
+  function offerLoanCollection(state: LifeState): boolean {
+    const id = loanCollectionEventId(world, state);
+    if (!id) return false;
+    const event = eventById.get(id)!;
+    if (!choicesFor(event, state).length) throw new Error("A moneylender collection must have an available fallback choice.");
+    state.economy!.loan!.lastCollectionAge = state.age;
+    const previousChoiceAge = state.nextChoiceAge;
+    offer(state, event);
+    if (previousChoiceAge === undefined) delete state.nextChoiceAge;
+    else state.nextChoiceAge = previousChoiceAge;
+    return true;
+  }
+
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
@@ -331,6 +321,7 @@ export function createEngine(input: unknown): LifeEngine {
         if (drainAutomatic()) return;
       }
     }
+    if (offerLoanCollection(state)) return;
     const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
@@ -354,6 +345,26 @@ export function createEngine(input: unknown): LifeEngine {
     if (offerMedicalDecision(state)) return;
     if (world.eventPacing) { resolvePacedEvents(state, allowRandom); return; }
     let randomAvailable = allowRandom;
+    if (loanCollectionEventId(world, state)) {
+      // A due contract drains historical/automatic entries before interrupting
+      // personal decisions, including worlds without separate paced lanes.
+      while (state.phase !== "ended") {
+        const event = world.events.find(candidate => candidate.mode === "automatic" && candidate.trigger.type !== "random" && eligible(candidate, state));
+        if (!event) break;
+        automaticEvent(state, event);
+        if (offerMedicalDecision(state)) return;
+      }
+      if (state.phase === "ended") return;
+      if (randomAvailable && state.age > 0) {
+        const background = world.events.filter(event => event.mode === "automatic" && event.trigger.type === "random" && eligible(event, state));
+        if (background.length) {
+          randomAvailable = false;
+          automaticEvent(state, pick(background, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state));
+          if (offerMedicalDecision(state)) return;
+        }
+      }
+      if (offerLoanCollection(state)) return;
+    }
     // Scheduled events queue in declaration order. Automatic entries drain without
     // inventing a player choice, and any scheduled activity takes this year's slot.
     while (state.phase !== "ended") {
@@ -512,7 +523,7 @@ export function createEngine(input: unknown): LifeEngine {
     next.phase = "ready";
     next.pendingEventId = null;
     journal(next, "choice", choice.id, choice.text);
-    const outcome = pick(choice.outcomes, candidate => relationshipOutcomeWeight(world, next, candidate), next);
+    const outcome = pick(choice.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
     apply(next, outcome.effects, `${choice.text} — ${outcome.text}`);
     checkEndings(next);
@@ -566,7 +577,7 @@ export function createEngine(input: unknown): LifeEngine {
     if (activity.usesYearlyActivity !== false) next.character!.lastActivityAge = next.age;
     next.character!.lastActivityAges[activityId] = next.age;
     journal(next, "activity", activity.id, activity.text);
-    const outcome = pick(activity.outcomes, candidate => relationshipOutcomeWeight(world, next, candidate), next);
+    const outcome = pick(activity.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
     apply(next, outcome.effects, `${activity.text} — ${outcome.text}`);
     checkEndings(next);

@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import App from "./App";
 import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
-import { selectWorldPack } from "./session.ts";
+import { engineForLife, selectWorldPack } from "./session.ts";
 import type { LifeState } from "../src/types.ts";
+import { contentFingerprint } from "../src/random.ts";
 
 const SELECTION_KEY = "historical-lives:selected-world:v1";
 
@@ -84,9 +85,22 @@ export default function GameClient() {
     } finally { setBusy(false); }
   }
 
-  if (!active) return <main className="page-shell"><p>Opening your life…</p></main>;
+  function keepImportedWorld(life: LifeState) {
+    const pack = engineForLife(life).world;
+    const samePack = active && contentFingerprint(active.world.pack) === life.worldFingerprint;
+    const world: PublishedWorld = {
+      id: life.worldId, revisionId: `pack-${life.worldFingerprint}`, pack,
+      routes: active?.world.id === life.worldId ? active.world.routes.filter(route => Object.hasOwn(pack.flags, route.flag)) : [],
+      ...(samePack && active.world.eventVisuals ? { eventVisuals: active.world.eventVisuals } : {}),
+    };
+    selectWorldPack(world.pack);
+    try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* The life controller reports save availability. */ }
+    setActive(current => current ? { ...current, world } : current);
+  }
+
+  if (!active) return <main className="page-shell"><p>Loading Historical Lives…</p></main>;
   return <>
-    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
+    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}

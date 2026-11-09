@@ -1,0 +1,25 @@
+{
+  "id": "alexandria-early-life-only-v3",
+  "version": "3.0.0",
+  "purpose": "Protect early play while restoring the full adult historical comparison baseline.",
+  "mortality": {
+    "id": "early-life-only-v3",
+    "description": "Only ages below 18 retain discounted comparison bands: age 0 uses 6%, ages 1-4 use 3%, and ages 5-17 use 6%. From completed age 18, the baseline uses 100% of the converted Roman Egyptian female comparison probability. In causal-health play, adult bands calibrate serious illness episodes; Health, care, household support and dangerous choices can change an individual's outcome. Childhood keeps its existing causal-health rules, so the discounted childhood bands are reference settings rather than a promised observed survival rate.",
+    "defaultMultiplier": 1,
+    "ageMultipliers": [
+      { "minAge": 0, "maxAge": 0, "multiplier": 0.06 },
+      { "minAge": 1, "maxAge": 4, "multiplier": 0.03 },
+      { "minAge": 5, "maxAge": 17, "multiplier": 0.06 }
+    ]
+  },
+  "notes": [
+    "The original mortality-model.json and legacy game-balance.json remain unchanged.",
+    "Age 18 is a gameplay boundary for this adjustment, not a claim about a universal ancient adulthood threshold.",
+    "Exact Ptolemaic Alexandrian rates are unavailable. The later Roman Egyptian female model is a disclosed comparison.",
+    "Calibrated neutral reference: Health 50, care 0.55, no household support. Adult severe-episode incidence times case fatality equals the unreduced annual comparison probability.",
+    "Illness selection, severity, Health and care responses are authored mechanics, not measured ancient cause-specific or treatment probabilities.",
+    "Source life expectancy at birth does not describe a cohort with protected childhood or an individual player's expected death age.",
+    "The 95+ annual tail remains an assumption derived from remaining life expectancy. Age 100 completes the record and does not itself cause death."
+  ],
+  "updated": "2026-11-07"
+}

@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import beforeBalance from "../worlds/alexandria-0.17.0.json" with { type: "json" };
 import treeRelease from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 
@@ -23,7 +24,7 @@ const expectedPaths = {
 
 test("Alexandria authors twelve connected skill nodes with real training routes and no cycles", () => {
   const skills = createEngine(pack).world.character!.skills;
-  assert.equal(pack.version, "0.16.0");
+  assert.equal(pack.version, "0.21.0");
   assert.deepEqual(Object.keys(skills).sort(), Object.keys(expectedPaths).sort());
   const visited = new Set<string>();
   function visit(id: string, path = new Set<string>()) {
@@ -71,7 +72,9 @@ test("skill paths add no birth draws and preserve the existing life content and 
 });
 
 function controlledEngine(): LifeEngine {
-  const world = structuredClone(pack);
+  // These established route schedules predate the stricter balance. Current
+  // career entry under the new rewards is exercised in strict-progression-life.
+  const world = structuredClone(beforeBalance);
   world.mortality.bands.forEach(band => { band.annualProbability = 0; });
   world.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health.declineBands.forEach(band => { band.healthLoss = 0; });
@@ -134,7 +137,7 @@ test("workshop training reaches sculpture through pottery and carving before qua
   const engine = controlledEngine();
   let life = ageTo(engine, engine.start("skill-tree-workshop"), 10);
   assert.equal(available(engine, life, "train-pottery").available, false);
-  assert.match(available(engine, life, "train-pottery").reason!, /Craft 15/);
+  assert.match(available(engine, life, "train-pottery").reason!, /Tool handling 15/);
   for (const [age, skill] of [[10, "craft"], [11, "craft"], [12, "pottery"], [13, "pottery"], [14, "carving"], [15, "carving"], [16, "carving"]] as const) life = train(engine, life, age, skill);
   life = ageTo(engine, life, 17);
   assert.equal(available(engine, life, "train-sculpture").available, true);

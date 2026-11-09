@@ -59,11 +59,13 @@ test("recorded introductions reveal adults one at a time without creating a cour
   assert.deepEqual(engine.load(engine.save(later)), later);
 });
 
-test("meeting scenes are fictional community encounters and retain the prior mortality curve", () => {
+test("meeting scenes are fictional community encounters and their original release retains its mortality curve", () => {
   const meetings = pack.events.filter(event => event.id.startsWith("meet-"));
   assert.equal(meetings.length, 4);
   assert.ok(meetings.every(event => event.mode === "automatic" && event.choices.length === 0 && event.evidence === "fictional" && event.sourceIds.length === 0));
-  assert.deepEqual(pack.mortality.bands, previous.mortality.bands);
-  assert.deepEqual({ ...pack.stats, wealth: { ...pack.stats.wealth, label: previous.stats.wealth.label } }, previous.stats);
+  assert.deepEqual(peopleRelease.mortality.bands, previous.mortality.bands);
+  const birthStats = structuredClone(pack.stats) as WorldPack["stats"];
+  for (const stat of Object.values(birthStats)) delete stat.gainCurve;
+  assert.deepEqual({ ...birthStats, wealth: { ...birthStats.wealth, label: previous.stats.wealth.label } }, previous.stats, "Birth ranges remain independent of later progression rules.");
   assert.deepEqual(peopleRelease.origins, previous.origins, "The original pooled-people release keeps its prior backgrounds.");
 });

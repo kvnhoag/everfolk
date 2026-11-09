@@ -1,3 +1,4 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
@@ -6,7 +7,7 @@ import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusStatus, normalizeYearlyFocus, persistYearlyFocus, readYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../client/yearly-focus.ts";
 
 function controlledWorld(): WorldPack {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
@@ -48,7 +49,7 @@ test("a paid yearly focus accepts one normal activity before advancing and repla
   const next = advanceYearWithFocus(engine, life, "study");
   assert.deepEqual(next, engine.advance(engine.act(life, "train-literacy")));
   assert.deepEqual(next.commands.slice(life.commands.length), [{ type: "act", activity: "train-literacy" }, { type: "advance" }]);
-  assert.equal(next.character!.skills.literacy, 10);
+  assert.equal(next.character!.skills.literacy, 6);
   assert.equal(next.economy!.cash, life.economy!.cash - 20);
   assert.deepEqual(engine.load(engine.save(next)), next);
   assert.deepEqual(engine.replay(next.seed, next.commands), next);

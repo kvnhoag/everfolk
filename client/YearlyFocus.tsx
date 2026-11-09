@@ -2,6 +2,8 @@ import { useId, useMemo } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { engineForLife } from "./session.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
+import ImpactValue from "./ImpactValue.tsx";
+import { trainingSkillChanges } from "./skill-tree.ts";
 import { focusActivity, focusStatus, yearlyDeclineNotes, YEARLY_FOCUSES } from "./yearly-focus.ts";
 import type { YearlyFocusId } from "./yearly-focus.ts";
 import "./yearly-focus.css";
@@ -17,6 +19,7 @@ export default function YearlyFocus({ life, world, focusId, onChange }: {
   }));
   if (life.age < firstAge || life.phase === "ended") return null;
   const selected = activities.find(activity => activity.id === focusActivity(world, focusId)?.id);
+  const skillChanges = selected ? trainingSkillChanges(selected, world, life) : [];
   return <section className="yearly-focus" aria-labelledby={`${id}-title`}>
     <h2 id={`${id}-title`}>This year’s focus <small>Change anytime</small></h2>
     <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{YEARLY_FOCUSES.map(focus => {
@@ -28,7 +31,11 @@ export default function YearlyFocus({ life, world, focusId, onChange }: {
         {focus.label}{ageLocked && <span>Age {activity!.minAge}+</span>}
       </button>;
     })}</div>
-    {selected && <div className="yearly-focus-impact"><ChoiceImpact choice={selected} life={life} world={world} /></div>}
+    {selected && <div className="yearly-focus-impact">
+      <p className="yearly-focus-action">{selected.text}</p>
+      {skillChanges.length > 0 && <div className="yearly-focus-skills" aria-label="Possible skill changes">{skillChanges.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
+      <ChoiceImpact choice={selected} life={life} world={world} />
+    </div>}
     <p className="yearly-focus-note" aria-live="polite">{focusStatus(life, world, focusId, activities)}</p>
     {yearlyDeclineNotes(life, world).map(note => <p className="yearly-focus-decay" key={note}>{note}</p>)}
   </section>;

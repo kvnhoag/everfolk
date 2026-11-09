@@ -2,6 +2,7 @@ import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
 import { activityPartnerIds } from "../src/character.ts";
+import { applyStatDelta } from "../src/progression.ts";
 import { engineForLife } from "./session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
@@ -9,6 +10,7 @@ import SkillTree from "./SkillTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "./character-panel-model.ts";
+import { careerOpeningNotes } from "./career-openings.ts";
 import type { CharacterSection } from "./character-panel-model.ts";
 import "./character-panel.css";
 
@@ -25,7 +27,7 @@ function skillEffects(activity: ActivityAvailability, life: LifeState, world: Wo
       for (const effect of outcome.effects) {
         if (effect.type === "end") break;
         if (effect.type === "skill" && effect.skill === id) {
-          value = Math.max(definition.min, Math.min(definition.max, value + effect.delta));
+          value = applyStatDelta(definition, value, effect.delta);
         }
       }
       return value - initial;
@@ -39,6 +41,7 @@ function ActivityButton({ activity, life, world, onActivity }: {
   activity: ActivityAvailability; life: LifeState; world: WorldPack; onActivity: (id: string) => void;
 }) {
   const changes = skillEffects(activity, life, world);
+  const openings = careerOpeningNotes(activity, world);
   const actionUsed = activity.usesYearlyActivity !== false && life.character?.lastActivityAge === life.age;
   const unavailable = life.phase !== "ready" || actionUsed;
   const reason = life.phase === "choice" ? "Make the pending choice first."
@@ -48,6 +51,7 @@ function ActivityButton({ activity, life, world, onActivity }: {
   const disabled = !activity.available || unavailable;
   return <button type="button" className="personal-activity" disabled={disabled} onClick={() => onActivity(activity.id)}>
     <span className="personal-activity-heading"><strong>{activity.text}</strong><span className="personal-activity-state">{disabled ? "Locked" : "Choose"}</span></span>
+    {openings.map(note => <span className="personal-opening-note" key={note}>{note}</span>)}
     {changes.length > 0 && <span className="personal-skill-effects">{changes.map(change => <span className="impact-stat" key={change.label}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</span>}
     {reason && <span className="personal-activity-reason">{reason}</span>}
     <ChoiceImpact choice={activity} life={life} world={world} />
@@ -195,7 +199,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
           <p>{job.description}</p>
           <ul className="character-requirements" aria-label={`${job.title} requirements`}>
             <li className={life.age >= job.minAge ? "requirement-met" : ""}>Age {job.minAge}+ <span>{life.age >= job.minAge ? "met" : `you are ${life.age}`}</span></li>
-            {Object.entries(job.requirements ?? {}).map(([id, value]) => <li key={id} className={character.skills[id] >= value ? "requirement-met" : ""}>{definition.skills[id].label} {value} <span>{character.skills[id] >= value ? "met" : `you have ${character.skills[id]}`}</span></li>)}
+            {Object.entries(job.requirements ?? {}).map(([id, value]) => <li key={id} className={character.skills[id] >= value ? "requirement-met" : ""}>{definition.skills[id].label} {value} <span>{character.skills[id] >= value ? "met" : `you have ${Math.floor(character.skills[id] * 100) / 100}`}</span></li>)}
           </ul>
           <ActivityList activities={jobActions} {...props} />
           </div>

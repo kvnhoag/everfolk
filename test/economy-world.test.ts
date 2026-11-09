@@ -1,3 +1,4 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { execFileSync } from "node:child_process";
@@ -11,7 +12,7 @@ import economyRelease from "../worlds/alexandria-0.9.0.json" with { type: "json"
 import previous from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 
 function controlledWorld(): WorldPack {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
@@ -85,7 +86,7 @@ test("lessons and work use readable monetary amounts while retaining the annual 
   assert.equal(life.economy!.cash, 800);
   life = engine.act(life, "train-literacy");
   assert.equal(life.economy!.cash, 780, "A two-point lesson costs 20 drachmas.");
-  assert.equal(life.character!.skills.literacy, 10);
+  assert.equal(life.character!.skills.literacy, 6);
   assert.throws(() => engine.act(life, "train-literacy"), /major activity/);
   life = ageTo(engine, life, 10);
   life = engine.act(life, "train-craft");

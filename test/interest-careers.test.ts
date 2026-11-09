@@ -1,3 +1,4 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, yearAtAge } from "../src/index.ts";
@@ -8,7 +9,7 @@ import interestRelease from "../worlds/alexandria-0.14.0.json" with { type: "jso
 
 const commissionIds = ["small-pottery-order", "small-carving-order", "small-figure-order", "teach-a-reading-lesson", "copy-a-sky-table", "prepare-a-chart-reading"];
 function controlledWorld(): WorldPack {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -34,9 +35,10 @@ test("a practiced interest earns alongside a day job and can become the regular 
   let life = ageTo(engine, engine.start("pottery-from-an-interest"), 10);
   life = engine.act(life, "train-craft");
   life = engine.act(ageTo(engine, life, 11), "train-craft");
-  for (const age of [12, 13, 14]) life = engine.act(ageTo(engine, life, age), "train-pottery");
-  life = engine.act(ageTo(engine, life, 15), "work-porter");
-  life = ageTo(engine, life, 16);
+  life = engine.act(ageTo(engine, life, 12), "train-craft");
+  for (const age of [13, 14, 15, 16]) life = engine.act(ageTo(engine, life, age), "train-pottery");
+  life = engine.act(ageTo(engine, life, 17), "work-porter");
+  life = ageTo(engine, life, 18);
   const before = life.economy!.cash;
   const pottery = life.character!.skills.pottery;
   assert.equal(availability(engine, life, "small-pottery-order").available, true);
@@ -45,8 +47,8 @@ test("a practiced interest earns alongside a day job and can become the regular 
   assert.equal(life.character!.skills.pottery, pottery + 2);
   assert.equal(life.character!.jobId, "porter", "A commission does not silently replace the main job.");
   assert.throws(() => engine.act(life, "small-carving-order"), /activity.*year|already/i);
-  assert.equal(availability(engine, ageTo(engine, life, 17), "small-pottery-order").available, false, "The two-year commission cooldown remains in force.");
-  life = engine.act(ageTo(engine, life, 17), "work-ceramic-decorator");
+  assert.equal(availability(engine, ageTo(engine, life, 19), "small-pottery-order").available, false, "The two-year commission cooldown remains in force.");
+  life = engine.act(ageTo(engine, life, 19), "work-ceramic-decorator");
   assert.equal(life.character!.jobId, "ceramic-decorator");
   const startCash = life.economy!.cash;
   life = engine.advance(life);

@@ -1,0 +1,15 @@
+.moneylender-panel{padding:18px;margin:21px 0;border:1px solid #ccb994;border-left:3px solid #a58248;background:#f5efdf;border-radius:4px}
+.moneylender-panel>header>span{font-size:9px;letter-spacing:1px;color:#947648}
+.moneylender-panel>header>h4{margin:6px 0 11px;font-size:25px}
+.moneylender-panel>p{font-size:12px;line-height:1.7;color:#6d725c;margin:9px 0}
+.moneylender-panel>p.lender-risk{font-size:11px;color:#92543b}
+.lender-balance{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
+.lender-balance>strong{font:400 30px/1.3 var(--serif,Georgia,serif);font-variant-numeric:tabular-nums;color:#7f5536}
+.lender-balance>span{font-size:10px;color:#88806b}
+.lender-balance>b{font-size:11px;font-weight:500;color:#966040;margin-left:auto}
+.moneylender-notice{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 16px;margin-bottom:16px;background:#f4eedf;border:1px solid #d1c4a6;border-left:3px solid #ac8a4e;border-radius:4px}
+.moneylender-notice>div{display:grid;gap:4px}.moneylender-notice strong{font-size:12px;font-weight:600;color:#6f6443}.moneylender-notice>div>span{font-size:10px;color:#8f7a55}
+.moneylender-notice>button{font-size:11px;white-space:nowrap;color:#785b35;padding:7px 0}
+.moneylender-notice>button:focus-visible{outline:2px solid #9a7247;outline-offset:4px}
+.lender-overdue{border-left-color:#a7513f;background:#f5eadd}.lender-overdue .lender-balance>b,.lender-overdue.moneylender-notice strong{color:#a04d37}
+@media(max-width:600px){.moneylender-panel{padding:15px}.moneylender-notice{padding:11px 12px;gap:10px}.moneylender-notice strong{font-size:11px}.moneylender-notice>button{font-size:10px}.lender-balance>b{flex-basis:100%;margin:2px 0 3px}}

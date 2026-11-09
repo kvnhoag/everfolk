@@ -2,10 +2,27 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { getNetWorth } from "../src/economy.ts";
-import type { WorldPack } from "../src/types.ts";
+import type { Condition, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacy from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 import { BIRTH_ORIGIN_REVEAL_MS, BIRTH_ROLL_DURATION_MS, getBirthRollFrame, getBirthRollStats, getCosmeticBirthValue } from "../client/birth-stat-roll.ts";
+
+/** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
+function pruneRemovedOriginModifiers(world: WorldPack): void {
+  const retained = new Set(world.origins.map(origin => origin.id));
+  const hasRemovedOrigin = (condition: Condition): boolean => {
+    if (condition.type === "origin") return !retained.has(condition.origin);
+    if (condition.type === "all" || condition.type === "any") return condition.conditions.some(hasRemovedOrigin);
+    return condition.type === "not" && hasRemovedOrigin(condition.condition);
+  };
+  for (const choice of [...world.events.flatMap(event => event.choices), ...(world.character?.activities ?? [])]) {
+    for (const outcome of choice.outcomes) {
+      if (!outcome.weightModifiers) continue;
+      outcome.weightModifiers = outcome.weightModifiers.filter(modifier => !hasRemovedOrigin(modifier.when));
+      if (!outcome.weightModifiers.length) delete outcome.weightModifiers;
+    }
+  }
+}
 
 test("the origin is revealed before the starting stats settle in order", () => {
   assert.equal(getBirthRollFrame(0, 4).originRevealed, false);
@@ -78,6 +95,7 @@ test("birth effect clamping is reflected without mutating the pack ranges", () =
   const world = structuredClone(pack) as WorldPack;
   world.origins = [world.origins[0]];
   world.events = world.events.filter(event => !event.id.startsWith("background-"));
+  pruneRemovedOriginModifiers(world);
   world.origins[0].statRanges = { health: { min: 90, max: 99 } };
   world.origins[0].effects = [{ type: "stat", stat: "health", delta: 8 }];
   const engine = createEngine(world);

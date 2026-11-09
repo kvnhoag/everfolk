@@ -22,13 +22,19 @@ export function getMoneyImpact(choice: Choice, life: LifeState, world: WorldPack
   const quoted = "category" in choice && Boolean(financeActivityReason(world, life, choice as CharacterActivity));
   const previews = choice.outcomes.map(outcome => {
     if (!quoted) return previewEconomyEffects(world, life, outcome.effects) ?? current;
-    const next = { ...current, assets: { ...current.assets } };
+    const next = { ...current, assets: { ...current.assets }, ...(current.loan ? { loan: { ...current.loan } } : {}) };
     for (const effect of outcome.effects) {
       if (effect.type === "end") break;
       if (effect.type === "cash") next.cash += effect.delta;
       if (effect.type === "stat" && effect.stat === world.economy!.stat) next.cash += effect.delta * world.economy!.unitsPerPoint;
       if (effect.type === "asset") next.assets[effect.asset] = (next.assets[effect.asset] ?? 0) + effect.delta;
       if (effect.type === "debt") next.debt += effect.delta;
+      if (effect.type === "loan" && world.economy!.moneylender) {
+        const lender = world.economy!.moneylender;
+        if (effect.action === "borrow") { next.cash += lender.principal; next.debt += lender.principal + lender.fee; }
+        if (effect.action === "repay") { const payment = effect.amount ?? current.loan?.balance ?? 0; next.cash -= payment; next.debt -= payment; }
+        if (effect.action === "extend") next.debt += lender.extensionFee;
+      }
     }
     return next;
   });
@@ -70,7 +76,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .flatMap(activity => activity.outcomes.map(outcome => -directMoneyDelta(outcome.effects, world)))
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
-    cash: life.economy.cash, debt: life.economy.debt, assets, assetTotal: assetValue(world, life.economy.assets),
+    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets),
     netWorth: getNetWorth(world, life), job, jobCash, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),

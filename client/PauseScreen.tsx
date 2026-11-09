@@ -3,11 +3,12 @@ import { formatYear } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import "./pause-screen.css";
 
-export default function PauseScreen({ life, world, onContinue, onReborn }: {
+export default function PauseScreen({ life, world, onContinue, onReborn, onMainMenu }: {
   life: LifeState;
   world: WorldPack;
   onContinue(): void;
   onReborn(): void;
+  onMainMenu?(): void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => { heading.current?.focus({ preventScroll: true }); }, []);
@@ -20,6 +21,7 @@ export default function PauseScreen({ life, world, onContinue, onReborn }: {
         <div className="pause-life"><strong>{life.character?.name ?? "Your character"}</strong><span>Age {life.age} · {formatYear(life.year)}</span></div>
         <p>Continue where you left off, or begin a new life.</p>
         <div className="pause-actions"><button className="pause-continue" type="button" onClick={onContinue}>Continue <span aria-hidden="true">→</span></button><button className="pause-reborn" type="button" onClick={onReborn}>Be reborn</button></div>
+        {onMainMenu && <button className="pause-to-menu" type="button" onClick={onMainMenu}>Main menu</button>}
       </div>
     </section>
   </main>;

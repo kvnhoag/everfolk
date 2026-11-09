@@ -334,5 +334,17 @@
     "summary": "Records Hermaiskos, a son not yet of age, being trained in nailsmithing; cancelling the agreement permits his father to place him with another master.",
     "limitations": "The apprentice's numerical age is unstated. The document postdates the cohort's Ptolemaic childhood and does not establish age 12 as a norm, free access to an apprenticeship or the game's pay and skill gains.",
     "accessed": "2026-11-07"
+  },
+  {
+    "id": "alexandrian-loan-contract",
+    "title": "BGU 4.1151.2: Loan agreement",
+    "url": "https://classics.uc.edu/users/vanminnen/Alexandria/BGU_4.1151.2.html",
+    "publisher": "University of Cincinnati; Peter van Minnen translation",
+    "kind": "primary",
+    "period": "12 April 13 BCE, early Roman period",
+    "geography": "Alexandria",
+    "summary": "Records a money loan with scheduled instalments, default penalties and enforcement claims against debtors and workshop property.",
+    "limitations": "One early Roman contract, later than the Ptolemaic beginning of the game. Contractual enforcement clauses do not establish how frequently they were exercised or support violent collectors, murder, or the game's loan terms and risks.",
+    "accessed": "2026-11-07"
   }
 ]

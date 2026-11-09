@@ -1,12 +1,14 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, matchesCondition, yearAtAge } from "../src/index.ts";
 import type { Condition, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.11.0.json" with { type: "json" };
+import timelineRelease from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 
 function fixture(eventIds: string[] = []): LifeEngine {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.events = world.events.filter(event => eventIds.includes(event.id) || event.id === world.health!.careDecision);
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -118,7 +120,7 @@ test("cash-funded lessons remain affordable when debt reduces net worth to zero"
   const learned = engine.act(life, lesson.id);
   assert.equal(learned.economy!.cash, 480);
   assert.equal(learned.economy!.debt, 500);
-  assert.equal(learned.character!.skills.literacy, 60);
+  assert.equal(learned.character!.skills.literacy, 53, "The paid lesson remains usable; its high-level reward follows the stricter curve.");
 
   const visit = (condition: Condition | undefined): void => {
     if (!condition) return;
@@ -171,15 +173,15 @@ test("attributes unlock forgiving specialist opportunities while basic practice 
   assert.equal(available("visit-a-friend").available, true);
 });
 
-test("timeline changes preserve earlier source records, death rates and explicit fatal odds", () => {
+test("timeline changes preserve source records and fatal odds, and their retained release keeps its death rates", () => {
   assert.deepEqual(pack.sources.slice(0, previous.sources.length), previous.sources);
-  assert.deepEqual(pack.sources.slice(previous.sources.length).map(source => source.id), ["diodorus-childhood-work", "alexandrian-minor-apprentice"]);
-  assert.deepEqual(pack.mortality.bands, previous.mortality.bands);
+  assert.deepEqual(timelineRelease.sources.slice(previous.sources.length).map(source => source.id), ["diodorus-childhood-work", "alexandrian-minor-apprentice"]);
+  assert.deepEqual(timelineRelease.mortality.bands, previous.mortality.bands);
   assert.deepEqual(pack.mortality.sourceIds, previous.mortality.sourceIds);
   assert.match(pack.mortality.description, /comparison|legacy/);
   const fatalOdds = (world: WorldPack) => [
     ...world.events.flatMap(event => event.choices), ...world.character!.activities,
   ].filter(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end")))
     .map(choice => ({ id: choice.id, weights: choice.outcomes.map(outcome => outcome.weight) }));
-  assert.deepEqual(fatalOdds(pack as WorldPack), fatalOdds(previous as WorldPack));
+  assert.deepEqual(fatalOdds(timelineRelease as WorldPack), fatalOdds(previous as WorldPack));
 });

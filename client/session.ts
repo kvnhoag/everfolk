@@ -18,6 +18,11 @@ import coherentWorld from "../worlds/alexandria-0.12.0.json" with { type: "json"
 import workTimelineWorld from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 import interestCareersWorld from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import causalHealthWorld from "../worlds/alexandria-0.15.0.json" with { type: "json" };
+import statDecayWorld from "../worlds/alexandria-0.16.0.json" with { type: "json" };
+import specificCraftWorld from "../worlds/alexandria-0.17.0.json" with { type: "json" };
+import strictProgressionWorld from "../worlds/alexandria-0.18.0.json" with { type: "json" };
+import careerOpeningsWorld from "../worlds/alexandria-0.19.0.json" with { type: "json" };
+import adultMortalityWorld from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -37,6 +42,11 @@ const coherentEngine = createEngine(coherentWorld);
 const workTimelineEngine = createEngine(workTimelineWorld);
 const interestCareersEngine = createEngine(interestCareersWorld);
 const causalHealthEngine = createEngine(causalHealthWorld);
+const statDecayEngine = createEngine(statDecayWorld);
+const specificCraftEngine = createEngine(specificCraftWorld);
+const strictProgressionEngine = createEngine(strictProgressionWorld);
+const careerOpeningsEngine = createEngine(careerOpeningsWorld);
+const adultMortalityEngine = createEngine(adultMortalityWorld);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -44,6 +54,11 @@ engines.set(coherentEngine.fingerprint, coherentEngine);
 engines.set(workTimelineEngine.fingerprint, workTimelineEngine);
 engines.set(interestCareersEngine.fingerprint, interestCareersEngine);
 engines.set(causalHealthEngine.fingerprint, causalHealthEngine);
+engines.set(statDecayEngine.fingerprint, statDecayEngine);
+engines.set(specificCraftEngine.fingerprint, specificCraftEngine);
+engines.set(strictProgressionEngine.fingerprint, strictProgressionEngine);
+engines.set(careerOpeningsEngine.fingerprint, careerOpeningsEngine);
+engines.set(adultMortalityEngine.fingerprint, adultMortalityEngine);
 const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

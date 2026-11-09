@@ -3,6 +3,8 @@ export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
   | { type: "cash" | "debt"; op: Comparison; value: number }
+  | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
+  | { type: "loan-overdue"; op: Comparison; value: number }
   | { type: "asset"; asset: string; op: Comparison; value: number }
   | { type: "stat"; stat: string; op: Comparison; value: number }
   | { type: "flag"; flag: string; value: boolean }
@@ -21,6 +23,7 @@ export type Condition =
 
 export type Effect =
   | { type: "cash" | "debt"; delta: number }
+  | { type: "loan"; action: "borrow" | "repay" | "extend"; amount?: number }
   | { type: "asset"; asset: string; delta: number }
   | { type: "stat"; stat: string; delta: number }
   | { type: "flag"; flag: string; value: boolean }
@@ -50,6 +53,8 @@ export interface StatDefinition {
   initial: number;
   /** Optional starting range for main stats; fixed initial values remain replay-compatible. */
   initialRange?: StatRange;
+  /** Optional diminishing multipliers for positive gains, ordered from min. */
+  gainCurve?: { from: number; multiplier: number }[];
 }
 
 /** Skill-tree metadata is optional so older packs keep their original rules. */
@@ -96,11 +101,20 @@ export interface Origin extends EvidenceMetadata {
   statRanges?: Record<string, StatRange>;
 }
 
+export interface OutcomeWeightModifier {
+  when: Condition;
+  multiplier: number;
+  /** Short explanation shown when this circumstance changes the odds. */
+  reason: string;
+}
+
 export interface Outcome {
   id: string;
   text: string;
   weight: number;
   effects: Effect[];
+  /** Conditional relative-weight changes; no additional random draw. */
+  weightModifiers?: OutcomeWeightModifier[];
 }
 
 export interface Choice {
@@ -108,6 +122,8 @@ export interface Choice {
   text: string;
   when?: Condition;
   outcomes: Outcome[];
+  /** Outcomes counted as the advertised opportunity, rather than guaranteed work. */
+  opportunity?: { label: string; outcomeIds: string[] };
 }
 
 export interface LifeEvent extends EvidenceMetadata {
@@ -182,6 +198,17 @@ export interface HealthDefinition {
   declineBands: { minAge: number; maxAge: number; healthLoss: number }[];
   supportRecoveryBonus: number;
   conditions: HealthConditionDefinition[];
+  /** Optional source-based baseline, decomposed into authored severe episodes. */
+  mortalityCalibration?: {
+    minAge: number;
+    referenceHealth: number;
+    referenceCare: number;
+    caseFatality: number;
+    onsetHealth: number;
+    convalescenceLoss: number;
+    healthInfluence: number;
+    careInfluence: number;
+  };
 }
 export interface ActiveHealthCondition {
   id: string;
@@ -189,6 +216,8 @@ export interface ActiveHealthCondition {
   lastProgressAge: number;
   care: number;
   source?: string;
+  /** Health immediately before a warned severe episode; care cannot erase it. */
+  severe?: { healthBefore: number };
 }
 export interface HealthState { conditions: ActiveHealthCondition[]; needsCareDecision: boolean; lastCareAge?: number }
 
@@ -287,6 +316,19 @@ export interface EconomyDefinition {
   sourceIds?: string[];
   /** Settle outstanding debt from remaining cash after regular yearly costs. */
   autoDebtRepayment?: boolean;
+  /** An explicitly accepted risky contract, distinct from unpaid household bills. */
+  moneylender?: {
+    title: string;
+    principal: number;
+    fee: number;
+    termYears: number;
+    threatAfterYears: number;
+    attackAfterYears: number;
+    extensionYears: number;
+    extensionFee: number;
+    maxExtensions: number;
+    events: { due: string; threat: string; attack: string };
+  };
   assets: { id: string; title: string; description: string; value: number; maxOwned: number; yearlyIncome?: number }[];
 }
 
@@ -294,6 +336,8 @@ export interface EconomyState {
   cash: number;
   debt: number;
   assets: Record<string, number>;
+  /** Its balance is included once in debt. No entry exists before accepting a loan. */
+  loan?: { balance: number; borrowedAge: number; dueAge: number; extensions: number; lastCollectionAge?: number };
 }
 
 /** Optional, authored retention and age-related Knowledge loss. */

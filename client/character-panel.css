@@ -92,6 +92,7 @@
 .character-activity-group-title+.personal-activity-list{margin-top:0}
 .character-search-empty{font-size:11px;line-height:1.8;color:#758168;background:#ecefe1;border:1px dashed #cbd4bd;border-radius:3px;margin:14px 0 20px;padding:12px 14px}
 .character-skill-grid-expanded{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.personal-opening-note{display:block;color:#69775c;font-size:11px;line-height:1.6;margin:4px 0}
 .character-skill-grid-expanded .character-skill{padding:11px}
 .character-skill-grid-expanded .character-skill-heading strong{font-size:18px}
 .character-skill-grid-expanded .character-skill-heading label{font-size:10px}

@@ -7,6 +7,11 @@ import { buildSkillTree, layoutSkillTree, practiceBlockReason, skillActionRequir
 import type { SkillNode, SkillRequirement } from "./skill-tree.ts";
 import "./skill-tree.css";
 
+function skillNumber(value: number, boundary = Infinity): number {
+  const rounded = Number(value.toFixed(2));
+  return value < boundary && rounded >= boundary ? Math.floor(value * 100) / 100 : rounded;
+}
+
 function SkillIcon({ id }: { id: string }) {
   const paths: Record<string, ReactNode> = {
     craft: <><path d="m6 19 10-10M13 5l2-2 6 6-2 2zM3 18l3 3 3-3-3-3z" /></>,
@@ -29,7 +34,7 @@ function Requirement({ requirement, onSelect }: { requirement: SkillRequirement;
   return <li className={requirement.met ? "skill-requirement met" : "skill-requirement missing"}>
     <span className="skill-requirement-mark" aria-hidden="true">{requirement.met ? "✓" : "○"}</span>
     {onSelect ? <button type="button" onClick={() => onSelect(requirement.id)}>{requirement.label}</button> : <span>{requirement.label}</span>}
-    <span className="skill-requirement-numbers">{requirement.value} <span>/ {requirement.required}</span><span className="sr-only"> {requirement.met ? "requirement met" : "required"}</span></span>
+    <span className="skill-requirement-numbers">{skillNumber(requirement.value, requirement.required)} <span>/ {requirement.required}</span><span className="sr-only"> {requirement.met ? "requirement met" : "required"}</span></span>
   </li>;
 }
 
@@ -136,11 +141,11 @@ export default function SkillTree({ life, world, activities, onActivity }: {
             return <button type="button" key={node.id} ref={element => { nodeRefs.current[node.id] = element; }}
               className={`skill-tree-node is-${node.state}${node.id === selected.id ? " is-selected" : ""}${related ? " is-connected" : ""}${query && matches(node) ? " is-search-match" : ""}${query && !matches(node) ? " is-search-muted" : ""}`}
               style={{ left: position.x, top: position.y, width: layout.cardWidth, height: layout.cardHeight }}
-              aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} aria-label={`${node.label}, ${node.value} of ${node.max}, ${node.state}${node.requirements.length ? `, requires ${node.requirements.map(item => `${item.label} ${item.required}`).join(", ")}` : ""}`}
+              aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} aria-label={`${node.label}, ${skillNumber(node.value, node.max)} of ${node.max}, ${node.state}${node.requirements.length ? `, requires ${node.requirements.map(item => `${item.label} ${item.required}`).join(", ")}` : ""}`}
               onClick={() => select(node.id)} onKeyDown={event => navigate(event, node)}>
               <span className="skill-node-heading"><span className="skill-node-icon"><SkillIcon id={node.id} /></span><span className="skill-node-name">{node.label}</span></span>
               <span className="skill-node-progress" aria-hidden="true"><span style={{ width: `${node.progress * 100}%` }} /></span>
-              <span className="skill-node-bottom"><span className="skill-node-state">{node.state === "locked" && <svg viewBox="0 0 10 12" width="7" height="9" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><rect x="1" y="5" width="8" height="6" rx="1" /><path d="M3 5V3a2 2 0 0 1 4 0v2" /></svg>}{node.state}</span><span className="skill-node-value">{node.value}<small> / {node.max}</small></span></span>
+              <span className="skill-node-bottom"><span className="skill-node-state">{node.state === "locked" && <svg viewBox="0 0 10 12" width="7" height="9" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><rect x="1" y="5" width="8" height="6" rx="1" /><path d="M3 5V3a2 2 0 0 1 4 0v2" /></svg>}{node.state}</span><span className="skill-node-value">{skillNumber(node.value, node.max)}<small> / {node.max}</small></span></span>
             </button>;
           })}
         </div>
@@ -148,7 +153,7 @@ export default function SkillTree({ life, world, activities, onActivity }: {
       <aside className={`skill-tree-detail is-${selected.state}`} id={`${instanceId}-detail`} aria-label={`${selected.label} details`}>
         <div className="skill-detail-title"><span className="skill-detail-icon"><SkillIcon id={selected.id} /></span><div><span className="skill-detail-branch">{selected.branch}</span><h4>{selected.label}</h4></div><span className="skill-detail-state">{selected.state}</span></div>
         <p className="skill-detail-description">{selected.description}</p>
-        <div className="skill-detail-proficiency"><label htmlFor={`${instanceId}-proficiency`}>Proficiency <strong>{selected.value}<span> / {selected.max}</span></strong></label><meter id={`${instanceId}-proficiency`} min={selected.min} max={selected.max} value={selected.value} /></div>
+        <div className="skill-detail-proficiency"><label htmlFor={`${instanceId}-proficiency`}>Proficiency <strong>{skillNumber(selected.value, selected.max)}<span> / {selected.max}</span></strong></label><meter id={`${instanceId}-proficiency`} min={selected.min} max={selected.max} value={selected.value} /></div>
         <section className="skill-detail-section"><h5>Requirements</h5><ul className="skill-requirement-list">
           {selected.minAge > 0 && <li className={`skill-requirement ${selected.ageMet ? "met" : "missing"}`}><span className="skill-requirement-mark" aria-hidden="true">{selected.ageMet ? "✓" : "○"}</span><span>Age {selected.minAge} or older</span><span className="skill-requirement-numbers">{selected.ageMet ? "Met" : `Age ${life.age}`}</span></li>}
           {selected.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}
@@ -164,6 +169,6 @@ export default function SkillTree({ life, world, activities, onActivity }: {
       </aside>
     </div>
     {model.otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{model.otherTraining.length}</span></summary><div>{model.otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} />)}</div></details>}
-    <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.</p>
+    <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.{world.character?.skills[selected.id]?.gainCurve && " Gains get smaller at higher proficiency."}</p>
   </div>;
 }

@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import beforeBalance from "../worlds/alexandria-0.17.0.json" with { type: "json" };
 
 const engine = createEngine(pack);
 type Career = "stay" | "sail" | "study";
@@ -87,6 +88,7 @@ test("an automatic birth and its continuation survive save/load without skipping
 });
 
 test("all three careers can pass the former age-23 boundary and end in old-age death", () => {
+  const engine = createEngine(beforeBalance);
   // Discovered by a bounded search across coverage-0..coverage-2999. This seed
   // covers long lived paths; it is not a claim that every birth reaches adulthood.
   for (const career of ["stay", "sail", "study"] as const) {

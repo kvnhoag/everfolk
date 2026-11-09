@@ -3,6 +3,7 @@ import type { LifeState, WorldPack } from "../src/types.ts";
 import { engineForLife } from "./session.ts";
 import { relationshipSupport } from "../src/relationships.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
+import { severeHealthRisk, formatHealthRisk } from "./health-risk.ts";
 import "./health.css";
 
 const careIds = new Set(["rest-for-recovery", "seek-a-healer", "ask-household-care"]);
@@ -20,13 +21,15 @@ export default function LifeHealthPanel({ life, world, onActivity, compact = fal
     const definition = world.health!.conditions.find(item => item.id === condition.id);
     return definition ? [{ condition, definition }] : [];
   });
-  const urgent = conditions.some(({ definition }) => score <= definition.fatalHealthThreshold + definition.healthLoss);
+  const urgent = conditions.some(({ condition, definition }) => condition.severe || score <= definition.fatalHealthThreshold + definition.healthLoss);
+  const severeRisk = severeHealthRisk(life, world);
   return <section className={`life-health-panel${urgent ? " health-urgent" : ""}${compact ? " health-compact" : ""}`} aria-labelledby={titleId}>
     <header><h3 id={titleId}>Health &amp; recovery</h3><span>{urgent ? "Needs attention" : "Unwell"}</span></header>
     <ul className="health-condition-list">{conditions.map(({ condition, definition }) => <li key={condition.id}>
-      <div><strong>{definition.title}</strong><span>Since age {condition.sinceAge}</span></div>
+      <div><strong>{condition.severe ? `Severe ${definition.title.toLocaleLowerCase()}` : definition.title}</strong><span>Since age {condition.sinceAge}</span></div>
       <span className={`health-care-status${condition.care > 0 ? " is-arranged" : ""}`}>{condition.care > 0 ? "Care arranged" : "Needs care"}</span>
     </li>)}</ul>
+    {severeRisk && <p className="health-care-note">Severe illness can be fatal before your next birthday. Current risk: {formatHealthRisk(severeRisk)}. Care can improve your chance of recovery.</p>}
     {relationshipSupport(world, life) > 0 && <p className="health-care-note">Your close household is helping with recovery.</p>}
     {!compact && <p className="health-care-note">Care can help recovery. These actions do not use your yearly activity.</p>}
     {actions.length > 0 && <div className="health-care-actions">{actions.map(activity => <div className="health-care-action" key={activity.id}>

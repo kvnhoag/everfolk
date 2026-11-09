@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.16.0",
+  "version": "0.21.0",
   "title": "A life in Alexandria",
   "description": "Live a fictional life in Alexandria, starting in 66 BCE. Learn a trade, start a family or pursue a career in scholarship, the army or the royal court.",
   "startYear": -66,
@@ -15,7 +15,25 @@
       "initialRange": {
         "min": 60,
         "max": 80
-      }
+      },
+      "gainCurve": [
+        {
+          "from": 0,
+          "multiplier": 1
+        },
+        {
+          "from": 40,
+          "multiplier": 0.5
+        },
+        {
+          "from": 70,
+          "multiplier": 0.2
+        },
+        {
+          "from": 90,
+          "multiplier": 0.05
+        }
+      ]
     },
     "knowledge": {
       "label": "Knowledge",
@@ -25,7 +43,25 @@
       "initialRange": {
         "min": 0,
         "max": 2
-      }
+      },
+      "gainCurve": [
+        {
+          "from": 0,
+          "multiplier": 1
+        },
+        {
+          "from": 40,
+          "multiplier": 0.5
+        },
+        {
+          "from": 70,
+          "multiplier": 0.2
+        },
+        {
+          "from": 90,
+          "multiplier": 0.05
+        }
+      ]
     },
     "wealth": {
       "label": "Wealth",
@@ -45,7 +81,25 @@
       "initialRange": {
         "min": 55,
         "max": 75
-      }
+      },
+      "gainCurve": [
+        {
+          "from": 0,
+          "multiplier": 1
+        },
+        {
+          "from": 40,
+          "multiplier": 0.5
+        },
+        {
+          "from": 70,
+          "multiplier": 0.2
+        },
+        {
+          "from": 90,
+          "multiplier": 0.05
+        }
+      ]
     }
   },
   "flags": {
@@ -135,6 +189,34 @@
     },
     "joined-alexandrian-war": {
       "label": "Took part in the Alexandrian War",
+      "initial": false
+    },
+    "court-recommendation": {
+      "label": "A clerk has recommended your petition work",
+      "initial": false
+    },
+    "officer-recommendation": {
+      "label": "An officer has recommended your supply work",
+      "initial": false
+    },
+    "scholar-recommendation": {
+      "label": "A patron has offered you paid scholarly work",
+      "initial": false
+    },
+    "workshop-recommendation": {
+      "label": "A customer has recommended your workshop work",
+      "initial": false
+    },
+    "petition-presented": {
+      "label": "Presented a district petition",
+      "initial": false
+    },
+    "sky-table-commission": {
+      "label": "Completed a paid sky-table copy",
+      "initial": false
+    },
+    "workshop-commission": {
+      "label": "Completed a paid craft order",
       "initial": false
     }
   },
@@ -436,10 +518,36 @@
           "delta": -1
         }
       ]
+    },
+    {
+      "id": "close-ties-upkeep",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "stat",
+            "stat": "bonds",
+            "op": "gte",
+            "value": 80
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": -0.5
+        }
+      ]
     }
   ],
   "mortality": {
-    "description": "These age bands preserve the earlier game's Roman-Egyptian female comparison and easier-play conversion for inspection and legacy context. The source is not a measured life table for a Ptolemaic Alexandrian man. New 0.15.0 lives use active health conditions and explicit dangerous outcomes rather than independently sampling these death probabilities. Earlier survival percentages therefore do not describe the new causal-health model. Reaching the age-100 record limit does not itself assign a death.",
+    "description": "The adult baseline uses 100% of the annual probabilities converted from Zakrzewski (2015), Table 1, after Bagnall and Frier's Roman Egyptian female model. The former discounts at ages 18-94 are removed. Only the comparison bands below 18 retain early-play discounts; childhood still uses the existing causal-health system. In health-enabled lives these adult probabilities calibrate warned serious illness episodes, with a neutral reference of Health 50, household rest/care 0.55 and no family recovery bonus. They are not a second independent death roll. Actual play varies with Health, care, existing conditions and risky choices. This is a later-period female proxy, not observed Ptolemaic Alexandrian mortality. The 95+ tail and within-band annual interpolation remain assumptions; age 100 closes the record without assigning death.",
     "sourceIds": [
       "life-expectancy-egyptology",
       "demography-evidence-limits"
@@ -478,97 +586,97 @@
       {
         "minAge": 18,
         "maxAge": 19,
-        "annualProbability": 0.004853557767201688,
+        "annualProbability": 0.013867307906290538,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 20,
         "maxAge": 24,
-        "annualProbability": 0.006076888251330786,
+        "annualProbability": 0.017362537860945104,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 25,
         "maxAge": 29,
-        "annualProbability": 0.006818870934457322,
+        "annualProbability": 0.019482488384163776,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 30,
         "maxAge": 34,
-        "annualProbability": 0.0077240813774057,
+        "annualProbability": 0.02206880393544486,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 35,
         "maxAge": 39,
-        "annualProbability": 0.008456596561724577,
+        "annualProbability": 0.02416170446207022,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 40,
         "maxAge": 44,
-        "annualProbability": 0.009011107125126344,
+        "annualProbability": 0.02574602035750384,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 45,
         "maxAge": 49,
-        "annualProbability": 0.009588020431555088,
+        "annualProbability": 0.027394344090157396,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 50,
         "maxAge": 54,
-        "annualProbability": 0.012412301070728542,
+        "annualProbability": 0.035463717344938694,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 55,
         "maxAge": 59,
-        "annualProbability": 0.01575581273189585,
+        "annualProbability": 0.04501660780541672,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 60,
         "maxAge": 64,
-        "annualProbability": 0.03662109912904634,
+        "annualProbability": 0.06658381659826607,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 65,
         "maxAge": 69,
-        "annualProbability": 0.048734334061477175,
+        "annualProbability": 0.08860788011177667,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 70,
         "maxAge": 74,
-        "annualProbability": 0.07092553861231282,
+        "annualProbability": 0.12895552474965966,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 75,
         "maxAge": 79,
-        "annualProbability": 0.10094850647458255,
+        "annualProbability": 0.18354273904469554,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 80,
         "maxAge": 84,
-        "annualProbability": 0.19665684163571415,
+        "annualProbability": 0.24582105204464266,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 85,
         "maxAge": 89,
-        "annualProbability": 0.27578364801345634,
+        "annualProbability": 0.3447295600168204,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 90,
         "maxAge": 94,
-        "annualProbability": 0.3753320333005194,
+        "annualProbability": 0.4691650416256492,
         "ending": "death-in-later-life"
       },
       {
@@ -589,7 +697,25 @@
         "branch": "Letters & ideas",
         "tier": 0,
         "description": "Practise letters, reading and clear copies.",
-        "trainingActivity": "train-literacy"
+        "trainingActivity": "train-literacy",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "reckoning": {
         "label": "Reckoning",
@@ -599,17 +725,53 @@
         "branch": "Numbers & sky",
         "tier": 0,
         "description": "Count goods, check totals and keep simple accounts.",
-        "trainingActivity": "train-reckoning"
+        "trainingActivity": "train-reckoning",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "craft": {
-        "label": "Craft",
+        "label": "Tool handling",
         "min": 0,
         "max": 100,
         "initial": 0,
         "branch": "Crafts",
         "tier": 0,
-        "description": "Learn to use tools, mend small items and work at a bench.",
-        "trainingActivity": "train-craft"
+        "description": "Measure materials, control hand tools and repair everyday objects. These basics support several trades.",
+        "trainingActivity": "train-craft",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "seamanship": {
         "label": "Seamanship",
@@ -619,7 +781,25 @@
         "branch": "Practical service",
         "tier": 0,
         "description": "Practise ropes, loads and everyday shipboard tasks.",
-        "trainingActivity": "train-seamanship"
+        "trainingActivity": "train-seamanship",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "pottery": {
         "label": "Pottery",
@@ -632,10 +812,28 @@
           "craft": 15
         },
         "description": "Build on workshop practice to shape and finish clay vessels.",
-        "trainingActivity": "train-pottery"
+        "trainingActivity": "train-pottery",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "carving": {
-        "label": "Carving",
+        "label": "Wood carving",
         "min": 0,
         "max": 100,
         "initial": 0,
@@ -645,7 +843,25 @@
           "craft": 15
         },
         "description": "Use controlled cuts to make wooden fittings and small figures.",
-        "trainingActivity": "train-carving"
+        "trainingActivity": "train-carving",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "sculpture": {
         "label": "Sculpture",
@@ -659,7 +875,25 @@
           "pottery": 10
         },
         "description": "Combine carving and clay work to make figures and reliefs.",
-        "trainingActivity": "train-sculpture"
+        "trainingActivity": "train-sculpture",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "philosophy": {
         "label": "Philosophy",
@@ -673,7 +907,25 @@
           "oratory": 10
         },
         "description": "Read arguments, compare objections and explain your reasons.",
-        "trainingActivity": "train-philosophy"
+        "trainingActivity": "train-philosophy",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "astronomy": {
         "label": "Astronomy",
@@ -687,7 +939,25 @@
           "literacy": 10
         },
         "description": "Record observations and compare positions and calendar calculations.",
-        "trainingActivity": "train-astronomy"
+        "trainingActivity": "train-astronomy",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "astrology": {
         "label": "Astrology",
@@ -701,7 +971,25 @@
           "reckoning": 10
         },
         "description": "Study traditional chart interpretations after learning observation and arithmetic. These beliefs do not provide reliable predictions.",
-        "trainingActivity": "train-astrology"
+        "trainingActivity": "train-astrology",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "warfare": {
         "label": "Warfare",
@@ -714,7 +1002,25 @@
           "craft": 10
         },
         "description": "Build on equipment handling with drills, guard duties and unit movements.",
-        "trainingActivity": "train-warfare"
+        "trainingActivity": "train-warfare",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       },
       "oratory": {
         "label": "Oratory",
@@ -727,7 +1033,25 @@
           "literacy": 10
         },
         "description": "Prepare a short argument and explain it to other people.",
-        "trainingActivity": "train-oratory"
+        "trainingActivity": "train-oratory",
+        "gainCurve": [
+          {
+            "from": 0,
+            "multiplier": 1
+          },
+          {
+            "from": 40,
+            "multiplier": 0.5
+          },
+          {
+            "from": 70,
+            "multiplier": 0.2
+          },
+          {
+            "from": 90,
+            "multiplier": 0.05
+          }
+        ]
       }
     },
     "playerNames": [
@@ -781,7 +1105,7 @@
           {
             "type": "skill",
             "skill": "craft",
-            "delta": 4
+            "delta": 2
           },
           {
             "type": "stat",
@@ -835,12 +1159,12 @@
           {
             "type": "skill",
             "skill": "craft",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
             "skill": "pottery",
-            "delta": 2
+            "delta": 1
           }
         ]
       },
@@ -898,7 +1222,7 @@
           {
             "type": "skill",
             "skill": "literacy",
-            "delta": 2
+            "delta": 1
           }
         ]
       },
@@ -929,7 +1253,7 @@
           {
             "type": "skill",
             "skill": "seamanship",
-            "delta": 2
+            "delta": 1
           }
         ]
       },
@@ -978,7 +1302,7 @@
           {
             "type": "skill",
             "skill": "pottery",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
@@ -1010,7 +1334,7 @@
           {
             "type": "skill",
             "skill": "carving",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "stat",
@@ -1037,7 +1361,7 @@
           {
             "type": "skill",
             "skill": "sculpture",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
@@ -1075,7 +1399,7 @@
           {
             "type": "skill",
             "skill": "philosophy",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
@@ -1108,7 +1432,7 @@
           {
             "type": "skill",
             "skill": "astronomy",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
@@ -1136,7 +1460,7 @@
           {
             "type": "skill",
             "skill": "astrology",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
@@ -1162,7 +1486,7 @@
           {
             "type": "skill",
             "skill": "warfare",
-            "delta": 3
+            "delta": 2
           },
           {
             "type": "stat",
@@ -1194,7 +1518,7 @@
           {
             "type": "skill",
             "skill": "warfare",
-            "delta": 3
+            "delta": 2
           },
           {
             "type": "skill",
@@ -1264,12 +1588,140 @@
           {
             "type": "skill",
             "skill": "oratory",
-            "delta": 2
+            "delta": 1
           },
           {
             "type": "skill",
             "skill": "philosophy",
             "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "patron-supported-reader",
+        "title": "Patron-supported reader",
+        "minAge": 18,
+        "requirements": {
+          "literacy": 35,
+          "reckoning": 25,
+          "astronomy": 30
+        },
+        "description": "Check copied sky tables and prepare notes for a household that pays for your work.",
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 30
+          },
+          {
+            "type": "stat",
+            "stat": "knowledge",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "astronomy",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "pottery-workshop-lead",
+        "title": "Pottery workshop lead",
+        "description": "Organise kiln loads, check finished pots and divide tasks for larger orders.",
+        "minAge": 20,
+        "requirements": {
+          "craft": 30,
+          "reckoning": 15,
+          "pottery": 40
+        },
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 40
+          },
+          {
+            "type": "skill",
+            "skill": "pottery",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "stat",
+            "stat": "health",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "carving-workshop-lead",
+        "title": "Wood-carving workshop lead",
+        "description": "Measure larger orders, divide bench work and check finished wooden fittings.",
+        "minAge": 20,
+        "requirements": {
+          "craft": 30,
+          "reckoning": 15,
+          "carving": 40
+        },
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 40
+          },
+          {
+            "type": "skill",
+            "skill": "carving",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "stat",
+            "stat": "health",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "sculpture-workshop-lead",
+        "title": "Sculpture workshop lead",
+        "description": "Plan small figure and relief orders, organise preparation and check the carving.",
+        "minAge": 20,
+        "requirements": {
+          "craft": 30,
+          "reckoning": 15,
+          "sculpture": 40
+        },
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 40
+          },
+          {
+            "type": "skill",
+            "skill": "sculpture",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "stat",
+            "stat": "health",
+            "delta": -1
           }
         ]
       }
@@ -1359,7 +1811,7 @@
               {
                 "type": "skill",
                 "skill": "literacy",
-                "delta": 10
+                "delta": 6
               },
               {
                 "type": "flag",
@@ -1411,7 +1863,7 @@
               {
                 "type": "skill",
                 "skill": "reckoning",
-                "delta": 10
+                "delta": 6
               },
               {
                 "type": "stat",
@@ -1432,7 +1884,7 @@
       },
       {
         "id": "train-craft",
-        "text": "Practise at a workshop bench",
+        "text": "Practise cutting and joining wood",
         "when": {
           "type": "all",
           "conditions": [
@@ -1452,13 +1904,13 @@
         "outcomes": [
           {
             "id": "train-craft-result",
-            "text": "You work through a small task under supervision. Tired hands and a little spoiled material are part of the lesson.",
+            "text": "You measure a piece of wood, cut a joint and fit the pieces together. A workshop worker checks your work.",
             "weight": 1,
             "effects": [
               {
                 "type": "skill",
                 "skill": "craft",
-                "delta": 10
+                "delta": 6
               },
               {
                 "type": "flag",
@@ -1473,11 +1925,6 @@
               {
                 "type": "stat",
                 "stat": "wealth",
-                "delta": -1
-              },
-              {
-                "type": "stat",
-                "stat": "health",
                 "delta": -1
               }
             ]
@@ -1515,7 +1962,7 @@
               {
                 "type": "skill",
                 "skill": "seamanship",
-                "delta": 10
+                "delta": 6
               },
               {
                 "type": "stat",
@@ -1966,7 +2413,7 @@
       },
       {
         "id": "pottery-order",
-        "text": "Accept a demanding pottery order",
+        "text": "Finish a large order of clay pots",
         "when": {
           "type": "all",
           "conditions": [
@@ -1985,7 +2432,7 @@
         "outcomes": [
           {
             "id": "pottery-order-result",
-            "text": "Experience helps you finish a demanding order. The work pays, but leaves tired hands and less time for company.",
+            "text": "You shape and finish the clay pots for a large order. The customer pays when the work is done, but the long hours leave you tired.",
             "weight": 1,
             "effects": [
               {
@@ -2227,7 +2674,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 5
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -2431,7 +2878,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 5
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -2635,7 +3082,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 5
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -2839,7 +3286,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 5
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -3030,7 +3477,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 5
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -3287,7 +3734,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 4
+                "delta": 2
               },
               {
                 "type": "stat",
@@ -3741,16 +4188,16 @@
       },
       {
         "id": "train-pottery",
-        "text": "Practise shaping and firing clay",
+        "text": "Shape and fire clay pots",
         "outcomes": [
           {
             "id": "train-pottery-result",
-            "text": "You shape a few small vessels, dry them and help check a kiln load.",
+            "text": "You shape small clay pots, leave them to dry and help load a kiln.",
             "effects": [
               {
                 "type": "skill",
                 "skill": "pottery",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "skill",
@@ -3793,26 +4240,21 @@
       },
       {
         "id": "train-carving",
-        "text": "Practise carving a wooden fitting",
+        "text": "Carve a wooden fitting",
         "outcomes": [
           {
             "id": "train-carving-result",
-            "text": "You mark a pattern and carve it slowly. A worker helps you correct the uneven parts.",
+            "text": "You mark a pattern on wood and carve the fitting. A worker checks the cuts and helps you correct uneven parts.",
             "effects": [
               {
                 "type": "skill",
                 "skill": "carving",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "skill",
                 "skill": "craft",
                 "delta": 2
-              },
-              {
-                "type": "stat",
-                "stat": "health",
-                "delta": -1
               },
               {
                 "type": "stat",
@@ -3845,26 +4287,21 @@
       },
       {
         "id": "train-sculpture",
-        "text": "Model a figure and practise a relief",
+        "text": "Carve a small stone relief",
         "outcomes": [
           {
             "id": "train-sculpture-result",
-            "text": "You model a small figure and practise cutting a shallow relief in spare material.",
+            "text": "You mark a design on a scrap of stone and cut a shallow relief. A sculptor checks the depth and shape.",
             "effects": [
               {
                 "type": "skill",
                 "skill": "sculpture",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "skill",
                 "skill": "carving",
                 "delta": 2
-              },
-              {
-                "type": "stat",
-                "stat": "health",
-                "delta": -1
               },
               {
                 "type": "stat",
@@ -3912,7 +4349,7 @@
               {
                 "type": "skill",
                 "skill": "philosophy",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "stat",
@@ -3970,7 +4407,7 @@
               {
                 "type": "skill",
                 "skill": "astronomy",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "skill",
@@ -4038,7 +4475,7 @@
               {
                 "type": "skill",
                 "skill": "astrology",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "stat",
@@ -4113,7 +4550,7 @@
               {
                 "type": "skill",
                 "skill": "warfare",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "stat",
@@ -4165,7 +4602,7 @@
               {
                 "type": "skill",
                 "skill": "oratory",
-                "delta": 8
+                "delta": 5
               },
               {
                 "type": "stat",
@@ -4661,7 +5098,7 @@
       },
       {
         "id": "seek-officer-commission",
-        "text": "Apply for an officer's post (15% appointment chance)",
+        "text": "Apply for an officer's post",
         "outcomes": [
           {
             "id": "officer-appointed",
@@ -4682,7 +5119,64 @@
                 "delta": 2
               }
             ],
-            "weight": 15
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                },
+                "multiplier": 2,
+                "reason": "An officer has recommended your work"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 50
+                },
+                "multiplier": 1.5,
+                "reason": "Experienced military training"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 30
+                },
+                "multiplier": 1.3,
+                "reason": "Practised leadership speeches"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 25
+                },
+                "multiplier": 1.2,
+                "reason": "You can keep unit accounts"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "joined-alexandrian-war",
+                  "value": true
+                },
+                "multiplier": 1.25,
+                "reason": "Wartime service"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ]
           },
           {
             "id": "officer-refused",
@@ -4736,11 +5230,17 @@
         },
         "category": "career",
         "minAge": 22,
-        "cooldownYears": 3
+        "cooldownYears": 3,
+        "opportunity": {
+          "label": "Receive an officer's commission",
+          "outcomeIds": [
+            "officer-appointed"
+          ]
+        }
       },
       {
         "id": "seek-general-command",
-        "text": "Seek an army command (2% appointment chance)",
+        "text": "Seek an army command",
         "outcomes": [
           {
             "id": "general-appointed",
@@ -4761,7 +5261,54 @@
                 "delta": 4
               }
             ],
-            "weight": 2
+            "weight": 2,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                },
+                "multiplier": 2,
+                "reason": "Your supply work has an officer's backing"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 70
+                },
+                "multiplier": 1.5,
+                "reason": "Advanced military experience"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 45
+                },
+                "multiplier": 1.5,
+                "reason": "Experienced public speaking"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "joined-alexandrian-war",
+                  "value": true
+                },
+                "multiplier": 1.5,
+                "reason": "Wartime service"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ]
           },
           {
             "id": "general-refused",
@@ -4809,11 +5356,17 @@
         },
         "category": "career",
         "minAge": 28,
-        "cooldownYears": 6
+        "cooldownYears": 6,
+        "opportunity": {
+          "label": "Receive a senior command",
+          "outcomeIds": [
+            "general-appointed"
+          ]
+        }
       },
       {
         "id": "seek-court-appointment",
-        "text": "Seek a court appointment (3% appointment chance)",
+        "text": "Seek a court appointment",
         "outcomes": [
           {
             "id": "court-appointed",
@@ -4834,7 +5387,97 @@
                 "delta": 3
               }
             ],
-            "weight": 3
+            "weight": 3,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "origin",
+                      "origin": "clerk-household"
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "merchant-household"
+                    }
+                  ]
+                },
+                "multiplier": 1.35,
+                "reason": "Your household knows written accounts"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "court-recommendation",
+                  "value": true
+                },
+                "multiplier": 3,
+                "reason": "A clerk has recommended your petition work"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "clerk"
+                    },
+                    {
+                      "type": "job",
+                      "job": "copyist"
+                    },
+                    {
+                      "type": "job",
+                      "job": "philosophy-tutor"
+                    },
+                    {
+                      "type": "job",
+                      "job": "patron-supported-reader"
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "You currently work with written records"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 50
+                },
+                "multiplier": 1.5,
+                "reason": "Experienced writing"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 45
+                },
+                "multiplier": 1.5,
+                "reason": "Experienced public speaking"
+              },
+              {
+                "when": {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "op": "gte",
+                  "value": 60
+                },
+                "multiplier": 1.25,
+                "reason": "Strong local contacts"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ]
           },
           {
             "id": "court-refused",
@@ -4897,7 +5540,13 @@
         },
         "category": "career",
         "minAge": 24,
-        "cooldownYears": 5
+        "cooldownYears": 5,
+        "opportunity": {
+          "label": "Receive a court appointment",
+          "outcomeIds": [
+            "court-appointed"
+          ]
+        }
       },
       {
         "id": "decorate-pottery-order",
@@ -4921,6 +5570,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ],
             "weight": 1
@@ -4976,6 +5630,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ],
             "weight": 1
@@ -5022,6 +5681,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -2
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ],
             "weight": 1
@@ -5377,7 +6041,7 @@
       },
       {
         "id": "propose-royal-grain-order",
-        "text": "Propose a grain-delivery change (10% adoption chance)",
+        "text": "Propose a grain-delivery change",
         "outcomes": [
           {
             "id": "grain-proposal-adopted",
@@ -5391,7 +6055,7 @@
               {
                 "type": "stat",
                 "stat": "bonds",
-                "delta": 6
+                "delta": 3
               },
               {
                 "type": "stat",
@@ -5399,7 +6063,45 @@
                 "delta": -2
               }
             ],
-            "weight": 10
+            "weight": 10,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 35
+                },
+                "multiplier": 1.5,
+                "reason": "You can check delivery totals"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 60
+                },
+                "multiplier": 1.5,
+                "reason": "You can explain the proposal clearly"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "petition-presented",
+                  "value": true
+                },
+                "multiplier": 1.5,
+                "reason": "Experience presenting district needs"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ]
           },
           {
             "id": "grain-proposal-refused",
@@ -5460,7 +6162,13 @@
         },
         "category": "career",
         "minAge": 25,
-        "cooldownYears": 5
+        "cooldownYears": 5,
+        "opportunity": {
+          "label": "Have the delivery proposal adopted",
+          "outcomeIds": [
+            "grain-proposal-adopted"
+          ]
+        }
       },
       {
         "id": "present-a-district-petition",
@@ -5484,6 +6192,11 @@
                 "type": "stat",
                 "stat": "wealth",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "petition-presented",
+                "value": true
               }
             ],
             "weight": 1
@@ -5712,7 +6425,7 @@
       },
       {
         "id": "take-small-repair-jobs",
-        "text": "Take small repair jobs",
+        "text": "Repair hinges, straps and household fittings",
         "when": {
           "type": "all",
           "conditions": [
@@ -5840,6 +6553,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ]
           }
@@ -5896,6 +6614,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ]
           }
@@ -5952,6 +6675,11 @@
                 "type": "stat",
                 "stat": "health",
                 "delta": -1
+              },
+              {
+                "type": "flag",
+                "flag": "workshop-commission",
+                "value": true
               }
             ]
           }
@@ -6077,6 +6805,11 @@
                 "type": "stat",
                 "stat": "knowledge",
                 "delta": 1
+              },
+              {
+                "type": "flag",
+                "flag": "sky-table-commission",
+                "value": true
               }
             ]
           }
@@ -6451,6 +7184,1049 @@
         "category": "relationship",
         "minAge": 18,
         "cooldownYears": 1
+      },
+      {
+        "id": "prepare-official-petition",
+        "text": "Help prepare the petition",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "year",
+              "op": "lt",
+              "value": -30
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "flag",
+                "flag": "court-recommendation",
+                "value": true
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Earn a court recommendation",
+          "outcomeIds": [
+            "prepare-official-petition-recommended"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "prepare-official-petition-recommended",
+            "text": "You check the names, rewrite the request and answer the clerk's questions. The clerk agrees to recommend you. You still need the skills and age required for a court appointment.",
+            "weight": 20,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "origin",
+                      "origin": "clerk-household"
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "merchant-household"
+                    }
+                  ]
+                },
+                "multiplier": 1.35,
+                "reason": "Your household knows written accounts"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 30
+                },
+                "multiplier": 1.5,
+                "reason": "Practised writing"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 25
+                },
+                "multiplier": 1.5,
+                "reason": "Experience explaining requests"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "clerk"
+                    },
+                    {
+                      "type": "job",
+                      "job": "copyist"
+                    },
+                    {
+                      "type": "job",
+                      "job": "philosophy-tutor"
+                    },
+                    {
+                      "type": "job",
+                      "job": "patron-supported-reader"
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Your current work uses written records"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "petition-presented",
+                  "value": true
+                },
+                "multiplier": 2,
+                "reason": "You have presented a district petition"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ],
+            "effects": [
+              {
+                "type": "flag",
+                "flag": "court-recommendation",
+                "value": true
+              },
+              {
+                "type": "cash",
+                "delta": 10
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "id": "prepare-official-petition-not-selected",
+            "text": "The clerk corrects several passages and files the petition. No recommendation follows. You are paid for the copying.",
+            "weight": 80,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": 10
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 3
+      },
+      {
+        "id": "organise-unit-supplies",
+        "text": "Take charge of the supply lists",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "year",
+              "op": "lt",
+              "value": -30
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "soldier"
+                },
+                {
+                  "type": "job",
+                  "job": "officer"
+                },
+                {
+                  "type": "job",
+                  "job": "general"
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "warfare",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "flag",
+                "flag": "officer-recommendation",
+                "value": true
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Earn an officer's recommendation",
+          "outcomeIds": [
+            "organise-unit-supplies-recommended"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "organise-unit-supplies-recommended",
+            "text": "The records match the stores, and your officer accepts the revised list. They agree to recommend you for more responsibility. This helps future applications; it does not change your rank.",
+            "weight": 25,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "origin",
+                      "origin": "clerk-household"
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "merchant-household"
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Household experience with lists and accounts"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 20
+                },
+                "multiplier": 1.6,
+                "reason": "You can check supply totals"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 35
+                },
+                "multiplier": 1.5,
+                "reason": "You understand the unit's equipment"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 20
+                },
+                "multiplier": 1.3,
+                "reason": "You can explain the shortages"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "joined-alexandrian-war",
+                  "value": true
+                },
+                "multiplier": 1.5,
+                "reason": "You have wartime supply experience"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ],
+            "effects": [
+              {
+                "type": "flag",
+                "flag": "officer-recommendation",
+                "value": true
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "id": "organise-unit-supplies-not-selected",
+            "text": "You find missing entries, but another soldier has to help finish the count. You return to ordinary duties with more practice.",
+            "weight": 75,
+            "effects": [
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 3
+      },
+      {
+        "id": "show-sky-calculations",
+        "text": "Show your copied tables and calculations",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "skill",
+              "skill": "astronomy",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "flag",
+                "flag": "scholar-recommendation",
+                "value": true
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Receive a scholarly work offer",
+          "outcomeIds": [
+            "show-sky-calculations-recommended"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "show-sky-calculations-recommended",
+            "text": "The reader checks your arithmetic and offers to recommend you to the paying household. A regular post is open once you meet its skill requirements. You keep your current work until you accept it.",
+            "weight": 25,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "origin",
+                      "origin": "clerk-household"
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "merchant-household"
+                    }
+                  ]
+                },
+                "multiplier": 1.3,
+                "reason": "Household experience with writing and accounts"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "astronomy",
+                  "op": "gte",
+                  "value": 30
+                },
+                "multiplier": 1.8,
+                "reason": "You have practised sky-table work"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 30
+                },
+                "multiplier": 1.5,
+                "reason": "Your arithmetic is well practised"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "clerk"
+                    },
+                    {
+                      "type": "job",
+                      "job": "copyist"
+                    },
+                    {
+                      "type": "job",
+                      "job": "philosophy-tutor"
+                    },
+                    {
+                      "type": "job",
+                      "job": "patron-supported-reader"
+                    }
+                  ]
+                },
+                "multiplier": 1.4,
+                "reason": "Your current work involves written records"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "sky-table-commission",
+                  "value": true
+                },
+                "multiplier": 2,
+                "reason": "You have completed a paid sky-table copy"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ],
+            "effects": [
+              {
+                "type": "flag",
+                "flag": "scholar-recommendation",
+                "value": true
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "knowledge",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "id": "show-sky-calculations-not-selected",
+            "text": "The reader points out a copied position and a calculation to correct. There is no work offer, but you leave with useful corrections.",
+            "weight": 75,
+            "effects": [
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "knowledge",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 3
+      },
+      {
+        "id": "show-workshop-sample",
+        "text": "Show a finished piece and explain the work",
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "carving",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "op": "gte",
+                  "value": 25
+                }
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "flag",
+                "flag": "workshop-recommendation",
+                "value": true
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Earn a workshop recommendation",
+          "outcomeIds": [
+            "show-workshop-sample-recommended"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "show-workshop-sample-recommended",
+            "text": "The customer accepts your sample and recommends you to a workshop owner. You can apply to lead work in your trained trade once you meet the requirements. You keep your current job for now.",
+            "weight": 25,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "origin",
+                      "origin": "artisan-household"
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "weaver-household"
+                    }
+                  ]
+                },
+                "multiplier": 1.35,
+                "reason": "Your household has workshop contacts"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "pottery",
+                      "op": "gte",
+                      "value": 40
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "carving",
+                      "op": "gte",
+                      "value": 40
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "sculpture",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.8,
+                "reason": "You have an experienced specialism"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "potter"
+                    },
+                    {
+                      "type": "job",
+                      "job": "ceramic-decorator"
+                    },
+                    {
+                      "type": "job",
+                      "job": "wood-carver"
+                    },
+                    {
+                      "type": "job",
+                      "job": "sculptor"
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "You already work in a skilled workshop"
+              },
+              {
+                "when": {
+                  "type": "flag",
+                  "flag": "workshop-commission",
+                  "value": true
+                },
+                "multiplier": 2,
+                "reason": "You have completed a paid craft order"
+              },
+              {
+                "when": {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 20
+                },
+                "multiplier": 1.3,
+                "reason": "You can explain quantities and costs"
+              },
+              {
+                "when": {
+                  "type": "has-condition"
+                },
+                "multiplier": 0.75,
+                "reason": "Illness or injury makes the extra work harder"
+              }
+            ],
+            "effects": [
+              {
+                "type": "flag",
+                "flag": "workshop-recommendation",
+                "value": true
+              },
+              {
+                "type": "cash",
+                "delta": 10
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "id": "show-workshop-sample-not-selected",
+            "text": "The customer asks for a different finish and places the larger order elsewhere. You correct the sample and sell it as an ordinary piece.",
+            "weight": 75,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": 10
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 1
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 3
+      },
+      {
+        "id": "work-patron-supported-reader",
+        "text": "Take the patron-supported reader post",
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "flag",
+              "flag": "scholar-recommendation",
+              "value": true
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "patron-supported-reader"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 35
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 25
+            },
+            {
+              "type": "skill",
+              "skill": "astronomy",
+              "op": "gte",
+              "value": 30
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-patron-supported-reader-accepted",
+            "text": "You accept regular work as a patron-supported reader. You leave your previous job and agree on the tasks and payment.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "patron-supported-reader"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-pottery-workshop-lead",
+        "text": "Take the pottery workshop lead post",
+        "category": "career",
+        "minAge": 20,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "flag",
+              "flag": "workshop-recommendation",
+              "value": true
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "pottery-workshop-lead"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 30
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "skill",
+              "skill": "pottery",
+              "op": "gte",
+              "value": 40
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-pottery-workshop-lead-accepted",
+            "text": "You accept regular work as a pottery workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "pottery-workshop-lead"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-carving-workshop-lead",
+        "text": "Take the wood-carving workshop lead post",
+        "category": "career",
+        "minAge": 20,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "flag",
+              "flag": "workshop-recommendation",
+              "value": true
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "carving-workshop-lead"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 30
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "skill",
+              "skill": "carving",
+              "op": "gte",
+              "value": 40
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-carving-workshop-lead-accepted",
+            "text": "You accept regular work as a wood-carving workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "carving-workshop-lead"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-sculpture-workshop-lead",
+        "text": "Take the sculpture workshop lead post",
+        "category": "career",
+        "minAge": 20,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "flag",
+              "flag": "workshop-recommendation",
+              "value": true
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "sculpture-workshop-lead"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 30
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 15
+            },
+            {
+              "type": "skill",
+              "skill": "sculpture",
+              "op": "gte",
+              "value": 40
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-sculpture-workshop-lead-accepted",
+            "text": "You accept regular work as a sculpture workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "sculpture-workshop-lead"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "borrow-moneylender",
+        "text": "Borrow from the moneylender — dangerous loan",
+        "outcomes": [
+          {
+            "id": "borrow-moneylender-result",
+            "text": "You accept the moneylender's cash and repayment terms. You must pay this loan yourself. If it stays unpaid after the deadline, the collectors can threaten, injure or kill you.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "loan",
+                "action": "borrow"
+              }
+            ]
+          }
+        ],
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "age",
+              "op": "gte",
+              "value": 18
+            },
+            {
+              "type": "loan",
+              "status": "none"
+            }
+          ]
+        },
+        "category": "finance",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "repay-moneylender",
+        "text": "Pay the remaining balance",
+        "outcomes": [
+          {
+            "id": "repay-moneylender-result",
+            "text": "You pay the remaining balance. The lender marks the loan settled. You owe them nothing.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "loan",
+                "action": "repay"
+              }
+            ]
+          }
+        ],
+        "when": {
+          "type": "loan",
+          "status": "active"
+        },
+        "category": "finance",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "repay-moneylender-part",
+        "text": "Pay 10 drachmas toward the loan",
+        "outcomes": [
+          {
+            "id": "repay-moneylender-part-result",
+            "text": "You pay 10 drachmas toward the loan. The remaining balance keeps its existing deadline.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "loan",
+                "action": "repay",
+                "amount": 10
+              }
+            ]
+          }
+        ],
+        "when": {
+          "type": "loan",
+          "status": "active"
+        },
+        "category": "finance",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
+      },
+      {
+        "id": "extend-moneylender",
+        "text": "Ask for an extension",
+        "outcomes": [
+          {
+            "id": "extend-moneylender-result",
+            "text": "The lender adds the agreed extension charge to the balance and gives you a new deadline.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "loan",
+                "action": "extend"
+              }
+            ]
+          }
+        ],
+        "when": {
+          "type": "loan",
+          "status": "due"
+        },
+        "category": "finance",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "usesYearlyActivity": false
       }
     ],
     "childNames": [
@@ -6471,7 +8247,7 @@
       "Theron",
       "Doris"
     ],
-    "deathCauseDescription": "For new causal-health lives, a natural death names the actual unresolved condition that depleted Health. Explicit dangerous choices retain their authored fatal outcomes and record the choice that caused death. Disease and injury names are modern labels for clarity, not diagnoses reconstructed from ancient individuals or calibrated cause-specific rates. Condition onset, progression, recovery, care and relationship effects are authored gameplay. The comparative mortality data does not supply these values.",
+    "deathCauseDescription": "Natural deaths name an active illness, injury or physical decline that was recorded before fatal progression. A serious illness can cause a sharp Health decline even in a previously healthy person, followed by a care decision. The adult all-cause baseline comes from the historical comparison; disease labels, severity and treatment response are fictional gameplay, not measured cause-specific rates or retrospective diagnoses. Explicit dangerous choices retain their authored fatal outcomes and record the choice that caused death.",
     "deathCauses": [
       {
         "id": "early-illness",
@@ -6644,6 +8420,13 @@
         "title": "Multiple organ failure following prolonged physical decline",
         "text": "Your health has steadily deteriorated. Prolonged physical decline leads to multiple organ failure.",
         "weight": 1
+      },
+      {
+        "id": "moneylender-stabbing",
+        "title": "Stab wound to the chest",
+        "text": "A collector stabs you during a confrontation over your unpaid moneylender loan. The chest wound proves fatal.",
+        "weight": 1,
+        "choiceOnly": true
       }
     ]
   },
@@ -7494,7 +9277,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -7651,7 +9434,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 7
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -7677,7 +9460,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 5
+                  "delta": 2
                 },
                 {
                   "type": "stat",
@@ -9053,7 +10836,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 7
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9205,7 +10988,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9266,7 +11049,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9505,7 +11288,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9595,7 +11378,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 }
               ]
             }
@@ -9652,7 +11435,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9710,7 +11493,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 7
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -9733,7 +11516,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 5
+                  "delta": 2
                 },
                 {
                   "type": "stat",
@@ -9872,7 +11655,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 7
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -10094,7 +11877,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 5
+                  "delta": 2
                 },
                 {
                   "type": "stat",
@@ -10122,7 +11905,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 }
               ]
             }
@@ -10156,7 +11939,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -10217,7 +12000,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 5
+                  "delta": 2
                 }
               ]
             }
@@ -10235,7 +12018,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 5
+                  "delta": 2
                 }
               ]
             }
@@ -10642,13 +12425,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -10778,13 +12555,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -11007,13 +12778,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -11144,13 +12909,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -11442,13 +13201,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -11479,13 +13232,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -12774,13 +14521,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -12848,13 +14589,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -13021,13 +14756,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -13368,13 +15097,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -13436,13 +15159,7 @@
         "weight": 1
       },
       "mode": "automatic",
-      "effects": [
-        {
-          "type": "stat",
-          "stat": "bonds",
-          "delta": 1
-        }
-      ],
+      "effects": [],
       "choices": [],
       "sourceIds": [],
       "evidence": "fictional",
@@ -13961,7 +15678,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "stat",
@@ -15235,7 +16952,7 @@
                 {
                   "type": "stat",
                   "stat": "bonds",
-                  "delta": 6
+                  "delta": 3
                 },
                 {
                   "type": "skill",
@@ -15647,6 +17364,1567 @@
           ]
         }
       ]
+    },
+    {
+      "id": "career-petition-opening",
+      "title": "A petition needs a writer",
+      "text": "A local clerk needs help checking names and explaining a petition. Good work could earn a recommendation for service with royal officials.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 16
+          },
+          {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "year",
+                "op": "lt",
+                "value": -30
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "court-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "maxOccurrences": 4,
+      "cooldownYears": 5,
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria",
+        "plutarch-antony-areius",
+        "augustan-alexandria-documents"
+      ],
+      "choices": [
+        {
+          "id": "prepare-official-petition",
+          "text": "Help prepare the petition",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "year",
+                "op": "lt",
+                "value": -30
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "court-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "opportunity": {
+            "label": "Earn a court recommendation",
+            "outcomeIds": [
+              "prepare-official-petition-recommended"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "prepare-official-petition-recommended",
+              "text": "You check the names, rewrite the request and answer the clerk's questions. The clerk agrees to recommend you. You still need the skills and age required for a court appointment.",
+              "weight": 20,
+              "weightModifiers": [
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "origin",
+                        "origin": "clerk-household"
+                      },
+                      {
+                        "type": "origin",
+                        "origin": "merchant-household"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.35,
+                  "reason": "Your household knows written accounts"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "literacy",
+                    "op": "gte",
+                    "value": 30
+                  },
+                  "multiplier": 1.5,
+                  "reason": "Practised writing"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "oratory",
+                    "op": "gte",
+                    "value": 25
+                  },
+                  "multiplier": 1.5,
+                  "reason": "Experience explaining requests"
+                },
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "job",
+                        "job": "clerk"
+                      },
+                      {
+                        "type": "job",
+                        "job": "copyist"
+                      },
+                      {
+                        "type": "job",
+                        "job": "philosophy-tutor"
+                      },
+                      {
+                        "type": "job",
+                        "job": "patron-supported-reader"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.5,
+                  "reason": "Your current work uses written records"
+                },
+                {
+                  "when": {
+                    "type": "flag",
+                    "flag": "petition-presented",
+                    "value": true
+                  },
+                  "multiplier": 2,
+                  "reason": "You have presented a district petition"
+                },
+                {
+                  "when": {
+                    "type": "has-condition"
+                  },
+                  "multiplier": 0.75,
+                  "reason": "Illness or injury makes the extra work harder"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "court-recommendation",
+                  "value": true
+                },
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                }
+              ]
+            },
+            {
+              "id": "prepare-official-petition-not-selected",
+              "text": "The clerk corrects several passages and files the petition. No recommendation follows. You are paid for the copying.",
+              "weight": 80,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "prepare-official-petition-decline",
+          "text": "Keep to your usual work",
+          "outcomes": [
+            {
+              "id": "prepare-official-petition-declined",
+              "text": "You leave the extra task to someone else and keep to your usual work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "career-unit-supply-opening",
+      "title": "The unit's supply lists",
+      "text": "Your unit's equipment and supply lists need checking. You can offer to sort the records and explain the shortages to an officer.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "year",
+                "op": "lt",
+                "value": -30
+              },
+              {
+                "type": "any",
+                "conditions": [
+                  {
+                    "type": "job",
+                    "job": "soldier"
+                  },
+                  {
+                    "type": "job",
+                    "job": "officer"
+                  },
+                  {
+                    "type": "job",
+                    "job": "general"
+                  }
+                ]
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "maxOccurrences": 4,
+      "cooldownYears": 5,
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-war"
+      ],
+      "choices": [
+        {
+          "id": "organise-unit-supplies",
+          "text": "Take charge of the supply lists",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "year",
+                "op": "lt",
+                "value": -30
+              },
+              {
+                "type": "any",
+                "conditions": [
+                  {
+                    "type": "job",
+                    "job": "soldier"
+                  },
+                  {
+                    "type": "job",
+                    "job": "officer"
+                  },
+                  {
+                    "type": "job",
+                    "job": "general"
+                  }
+                ]
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "opportunity": {
+            "label": "Earn an officer's recommendation",
+            "outcomeIds": [
+              "organise-unit-supplies-recommended"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "organise-unit-supplies-recommended",
+              "text": "The records match the stores, and your officer accepts the revised list. They agree to recommend you for more responsibility. This helps future applications; it does not change your rank.",
+              "weight": 25,
+              "weightModifiers": [
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "origin",
+                        "origin": "clerk-household"
+                      },
+                      {
+                        "type": "origin",
+                        "origin": "merchant-household"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.2,
+                  "reason": "Household experience with lists and accounts"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "reckoning",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  "multiplier": 1.6,
+                  "reason": "You can check supply totals"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "warfare",
+                    "op": "gte",
+                    "value": 35
+                  },
+                  "multiplier": 1.5,
+                  "reason": "You understand the unit's equipment"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "oratory",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  "multiplier": 1.3,
+                  "reason": "You can explain the shortages"
+                },
+                {
+                  "when": {
+                    "type": "flag",
+                    "flag": "joined-alexandrian-war",
+                    "value": true
+                  },
+                  "multiplier": 1.5,
+                  "reason": "You have wartime supply experience"
+                },
+                {
+                  "when": {
+                    "type": "has-condition"
+                  },
+                  "multiplier": 0.75,
+                  "reason": "Illness or injury makes the extra work harder"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                }
+              ]
+            },
+            {
+              "id": "organise-unit-supplies-not-selected",
+              "text": "You find missing entries, but another soldier has to help finish the count. You return to ordinary duties with more practice.",
+              "weight": 75,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "organise-unit-supplies-decline",
+          "text": "Keep to your usual work",
+          "outcomes": [
+            {
+              "id": "organise-unit-supplies-declined",
+              "text": "You leave the extra task to someone else and keep to your usual work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "career-reader-opening",
+      "title": "A reader checks your calculations",
+      "text": "An experienced reader is checking copied sky tables for a paying household. You can show your own work and ask to help with the next set.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 16
+          },
+          {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "op": "gte",
+                "value": 20
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "scholar-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "maxOccurrences": 4,
+      "cooldownYears": 5,
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria",
+        "louvre-dendera-zodiac"
+      ],
+      "choices": [
+        {
+          "id": "show-sky-calculations",
+          "text": "Show your copied tables and calculations",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "op": "gte",
+                "value": 20
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "scholar-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "opportunity": {
+            "label": "Receive a scholarly work offer",
+            "outcomeIds": [
+              "show-sky-calculations-recommended"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "show-sky-calculations-recommended",
+              "text": "The reader checks your arithmetic and offers to recommend you to the paying household. A regular post is open once you meet its skill requirements. You keep your current work until you accept it.",
+              "weight": 25,
+              "weightModifiers": [
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "origin",
+                        "origin": "clerk-household"
+                      },
+                      {
+                        "type": "origin",
+                        "origin": "merchant-household"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.3,
+                  "reason": "Household experience with writing and accounts"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "astronomy",
+                    "op": "gte",
+                    "value": 30
+                  },
+                  "multiplier": 1.8,
+                  "reason": "You have practised sky-table work"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "reckoning",
+                    "op": "gte",
+                    "value": 30
+                  },
+                  "multiplier": 1.5,
+                  "reason": "Your arithmetic is well practised"
+                },
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "job",
+                        "job": "clerk"
+                      },
+                      {
+                        "type": "job",
+                        "job": "copyist"
+                      },
+                      {
+                        "type": "job",
+                        "job": "philosophy-tutor"
+                      },
+                      {
+                        "type": "job",
+                        "job": "patron-supported-reader"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.4,
+                  "reason": "Your current work involves written records"
+                },
+                {
+                  "when": {
+                    "type": "flag",
+                    "flag": "sky-table-commission",
+                    "value": true
+                  },
+                  "multiplier": 2,
+                  "reason": "You have completed a paid sky-table copy"
+                },
+                {
+                  "when": {
+                    "type": "has-condition"
+                  },
+                  "multiplier": 0.75,
+                  "reason": "Illness or injury makes the extra work harder"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "scholar-recommendation",
+                  "value": true
+                },
+                {
+                  "type": "skill",
+                  "skill": "astronomy",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            },
+            {
+              "id": "show-sky-calculations-not-selected",
+              "text": "The reader points out a copied position and a calculation to correct. There is no work offer, but you leave with useful corrections.",
+              "weight": 75,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "astronomy",
+                  "delta": 1
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "show-sky-calculations-decline",
+          "text": "Keep to your usual work",
+          "outcomes": [
+            {
+              "id": "show-sky-calculations-declined",
+              "text": "You leave the extra task to someone else and keep to your usual work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "career-workshop-opening",
+      "title": "An order for a larger household",
+      "text": "A customer is looking for someone who can finish a larger workshop order and organise the smaller tasks. You can show a sample of your pottery, carving or sculpture.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 16
+          },
+          {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "craft",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "any",
+                "conditions": [
+                  {
+                    "type": "skill",
+                    "skill": "pottery",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "carving",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "sculpture",
+                    "op": "gte",
+                    "value": 25
+                  }
+                ]
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "workshop-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "maxOccurrences": 4,
+      "cooldownYears": 5,
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-terracottas",
+        "met-wood-carving",
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "show-workshop-sample",
+          "text": "Show a finished piece and explain the work",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "craft",
+                "op": "gte",
+                "value": 15
+              },
+              {
+                "type": "any",
+                "conditions": [
+                  {
+                    "type": "skill",
+                    "skill": "pottery",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "carving",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  {
+                    "type": "skill",
+                    "skill": "sculpture",
+                    "op": "gte",
+                    "value": 25
+                  }
+                ]
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "flag",
+                  "flag": "workshop-recommendation",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "opportunity": {
+            "label": "Earn a workshop recommendation",
+            "outcomeIds": [
+              "show-workshop-sample-recommended"
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "show-workshop-sample-recommended",
+              "text": "The customer accepts your sample and recommends you to a workshop owner. You can apply to lead work in your trained trade once you meet the requirements. You keep your current job for now.",
+              "weight": 25,
+              "weightModifiers": [
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "origin",
+                        "origin": "artisan-household"
+                      },
+                      {
+                        "type": "origin",
+                        "origin": "weaver-household"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.35,
+                  "reason": "Your household has workshop contacts"
+                },
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "skill",
+                        "skill": "pottery",
+                        "op": "gte",
+                        "value": 40
+                      },
+                      {
+                        "type": "skill",
+                        "skill": "carving",
+                        "op": "gte",
+                        "value": 40
+                      },
+                      {
+                        "type": "skill",
+                        "skill": "sculpture",
+                        "op": "gte",
+                        "value": 40
+                      }
+                    ]
+                  },
+                  "multiplier": 1.8,
+                  "reason": "You have an experienced specialism"
+                },
+                {
+                  "when": {
+                    "type": "any",
+                    "conditions": [
+                      {
+                        "type": "job",
+                        "job": "potter"
+                      },
+                      {
+                        "type": "job",
+                        "job": "ceramic-decorator"
+                      },
+                      {
+                        "type": "job",
+                        "job": "wood-carver"
+                      },
+                      {
+                        "type": "job",
+                        "job": "sculptor"
+                      }
+                    ]
+                  },
+                  "multiplier": 1.5,
+                  "reason": "You already work in a skilled workshop"
+                },
+                {
+                  "when": {
+                    "type": "flag",
+                    "flag": "workshop-commission",
+                    "value": true
+                  },
+                  "multiplier": 2,
+                  "reason": "You have completed a paid craft order"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "reckoning",
+                    "op": "gte",
+                    "value": 20
+                  },
+                  "multiplier": 1.3,
+                  "reason": "You can explain quantities and costs"
+                },
+                {
+                  "when": {
+                    "type": "has-condition"
+                  },
+                  "multiplier": 0.75,
+                  "reason": "Illness or injury makes the extra work harder"
+                }
+              ],
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "workshop-recommendation",
+                  "value": true
+                },
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                }
+              ]
+            },
+            {
+              "id": "show-workshop-sample-not-selected",
+              "text": "The customer asks for a different finish and places the larger order elsewhere. You correct the sample and sell it as an ordinary piece.",
+              "weight": 75,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 10
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "show-workshop-sample-decline",
+          "text": "Keep to your usual work",
+          "outcomes": [
+            {
+              "id": "show-workshop-sample-declined",
+              "text": "You leave the extra task to someone else and keep to your usual work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lender-offer",
+      "title": "A moneylender offers cash",
+      "text": "A moneylender offers ready cash on the stated repayment terms. This loan is paid manually. Missing the deadline can lead to threats, assault or death.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "loan",
+            "status": "none"
+          },
+          {
+            "type": "cash",
+            "op": "lt",
+            "value": 50
+          }
+        ]
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 8,
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-loan-contract"
+      ],
+      "choices": [
+        {
+          "id": "decline-moneylender-offer",
+          "text": "Turn down the loan",
+          "outcomes": [
+            {
+              "id": "decline-moneylender-offer-result",
+              "text": "You turn down the loan. You owe this lender nothing.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        },
+        {
+          "id": "accept-moneylender-offer",
+          "text": "Borrow from the moneylender — dangerous loan",
+          "outcomes": [
+            {
+              "id": "borrow-moneylender-result",
+              "text": "You accept the moneylender's cash and repayment terms. You must pay this loan yourself. If it stays unpaid after the deadline, the collectors can threaten, injure or kill you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "borrow"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "loan",
+                "status": "none"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "lender-payment-due",
+      "title": "Your loan is due",
+      "text": "The moneylender asks for the remaining balance. Leaving it unpaid can bring threats and, after a longer delay, a dangerous confrontation.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "loan",
+            "status": "due"
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 1,
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-loan-contract"
+      ],
+      "choices": [
+        {
+          "id": "pay-moneylender-balance",
+          "text": "Pay the remaining balance",
+          "outcomes": [
+            {
+              "id": "pay-moneylender-balance-result",
+              "text": "You pay the remaining balance. The lender marks the loan settled. You owe them nothing.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "pay-moneylender-instalment",
+          "text": "Pay 10 drachmas toward the loan",
+          "outcomes": [
+            {
+              "id": "pay-moneylender-instalment-result",
+              "text": "You pay 10 drachmas toward the loan. The remaining balance keeps its existing deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay",
+                  "amount": 10
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "extend-moneylender-deadline",
+          "text": "Ask for an extension",
+          "outcomes": [
+            {
+              "id": "extend-moneylender-deadline-result",
+              "text": "The lender adds the agreed extension charge to the balance and gives you a new deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "extend"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "due"
+          }
+        },
+        {
+          "id": "delay-moneylender-payment",
+          "text": "Leave the loan unpaid for now",
+          "outcomes": [
+            {
+              "id": "delay-moneylender-payment-result",
+              "text": "You leave the balance unpaid. The deadline has not changed, and the collectors may return.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lender-threat",
+      "title": "Collectors at your door",
+      "text": "Two collectors demand payment. They threaten to hurt you if you keep delaying. The balance and deadline remain in force.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "loan",
+            "status": "due"
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 1,
+      "evidence": "fictional",
+      "sourceIds": [
+        "alexandrian-loan-contract"
+      ],
+      "choices": [
+        {
+          "id": "settle-lender-threat",
+          "text": "Pay the remaining balance",
+          "outcomes": [
+            {
+              "id": "settle-lender-threat-result",
+              "text": "You pay the remaining balance. The lender marks the loan settled. You owe them nothing.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "part-pay-lender-threat",
+          "text": "Pay 10 drachmas toward the loan",
+          "outcomes": [
+            {
+              "id": "part-pay-lender-threat-result",
+              "text": "You pay 10 drachmas toward the loan. The remaining balance keeps its existing deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay",
+                  "amount": 10
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "extend-after-lender-threat",
+          "text": "Ask for an extension",
+          "outcomes": [
+            {
+              "id": "extend-after-lender-threat-result",
+              "text": "The lender adds the agreed extension charge to the balance and gives you a new deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "extend"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "due"
+          }
+        },
+        {
+          "id": "ignore-lender-threat",
+          "text": "Leave the loan unpaid for now",
+          "outcomes": [
+            {
+              "id": "ignore-lender-threat-result",
+              "text": "You leave the balance unpaid. The deadline has not changed, and the collectors may return.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lender-confrontation",
+      "title": "The collectors corner you",
+      "text": "The loan has been overdue for years. Collectors stop you on your way home and threaten violence. Refusing or trying to run can be fatal.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "loan",
+            "status": "due"
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 1,
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "settle-lender-confrontation",
+          "text": "Pay the remaining balance",
+          "outcomes": [
+            {
+              "id": "settle-lender-confrontation-result",
+              "text": "You pay the remaining balance. The lender marks the loan settled. You owe them nothing.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "part-pay-lender-confrontation",
+          "text": "Pay 10 drachmas toward the loan",
+          "outcomes": [
+            {
+              "id": "part-pay-lender-confrontation-result",
+              "text": "You pay 10 drachmas toward the loan. The remaining balance keeps its existing deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "repay",
+                  "amount": 10
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "active"
+          }
+        },
+        {
+          "id": "extend-at-lender-confrontation",
+          "text": "Ask for an extension",
+          "outcomes": [
+            {
+              "id": "extend-at-lender-confrontation-result",
+              "text": "The lender adds the agreed extension charge to the balance and gives you a new deadline.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "loan",
+                  "action": "extend"
+                }
+              ]
+            }
+          ],
+          "when": {
+            "type": "loan",
+            "status": "due"
+          }
+        },
+        {
+          "id": "ask-neighbors-to-intercede",
+          "text": "Ask the neighbors to speak for you",
+          "outcomes": [
+            {
+              "id": "neighbors-persuade-collectors",
+              "text": "Neighbors speak with the collectors. They leave without hurting you, but the balance remains overdue.",
+              "weight": 60,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                }
+              ],
+              "weightModifiers": [
+                {
+                  "when": {
+                    "type": "stat",
+                    "stat": "bonds",
+                    "op": "gte",
+                    "value": 60
+                  },
+                  "multiplier": 1.5,
+                  "reason": "People nearby are willing to speak for you"
+                },
+                {
+                  "when": {
+                    "type": "skill",
+                    "skill": "oratory",
+                    "op": "gte",
+                    "value": 25
+                  },
+                  "multiplier": 1.5,
+                  "reason": "You can explain your request clearly"
+                }
+              ]
+            },
+            {
+              "id": "neighbors-cannot-stop-beating",
+              "text": "The collectors shove your neighbors aside and beat you before leaving. You are hurt, and the loan remains unpaid.",
+              "weight": 35,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -8
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -2
+                }
+              ]
+            },
+            {
+              "id": "collectors-break-leg",
+              "text": "A collector strikes your lower leg. You suffer an open tibial fracture and need care. The loan remains unpaid.",
+              "weight": 5,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -10
+                },
+                {
+                  "type": "condition",
+                  "condition": "open-leg-fracture"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -2
+                }
+              ]
+            }
+          ],
+          "opportunity": {
+            "label": "Leave without an assault",
+            "outcomeIds": [
+              "neighbors-persuade-collectors"
+            ]
+          }
+        },
+        {
+          "id": "run-from-collectors",
+          "text": "Try to get past them and run",
+          "outcomes": [
+            {
+              "id": "escape-collectors",
+              "text": "You get past the collectors and reach a crowded street. You escape for now, but the loan is still overdue.",
+              "weight": 85,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            },
+            {
+              "id": "escape-collectors-leg-injury",
+              "text": "A collector catches you and strikes your lower leg. You suffer an open tibial fracture and need care.",
+              "weight": 12,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -12
+                },
+                {
+                  "type": "condition",
+                  "condition": "open-leg-fracture"
+                }
+              ]
+            },
+            {
+              "id": "escape-collectors-fatal",
+              "text": "A collector stabs you in the chest as you try to pass. The wound proves fatal.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "end",
+                  "ending": "death-by-collector",
+                  "deathCause": "moneylender-stabbing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "refuse-collectors",
+          "text": "Refuse to pay or go with them",
+          "outcomes": [
+            {
+              "id": "collectors-beat-you",
+              "text": "The collectors beat you and leave. You are badly hurt, and the loan remains overdue.",
+              "weight": 70,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -12
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -3
+                }
+              ]
+            },
+            {
+              "id": "collectors-break-leg-after-refusal",
+              "text": "The collectors strike your lower leg. An open tibial fracture stops you walking, and you need care.",
+              "weight": 25,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -15
+                },
+                {
+                  "type": "condition",
+                  "condition": "open-leg-fracture"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -3
+                }
+              ]
+            },
+            {
+              "id": "collectors-stab-you",
+              "text": "A collector stabs you in the chest during the confrontation. The wound proves fatal.",
+              "weight": 5,
+              "effects": [
+                {
+                  "type": "end",
+                  "ending": "death-by-collector",
+                  "deathCause": "moneylender-stabbing"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "endings": [
@@ -15701,6 +18979,14 @@
       "text": "The record stops at age 100. This is the end of the simulation record, not a recorded death.",
       "evidence": "fictional",
       "sourceIds": []
+    },
+    {
+      "id": "death-by-collector",
+      "title": "Killed by a collector",
+      "kind": "death",
+      "evidence": "fictional",
+      "sourceIds": [],
+      "text": "A collector stabs you during a confrontation over the unpaid loan. The chest wound proves fatal."
     }
   ],
   "defaultEnding": "end-of-record",
@@ -16040,6 +19326,18 @@
       "summary": "Records Hermaiskos, a son not yet of age, being trained in nailsmithing; cancelling the agreement permits his father to place him with another master.",
       "limitations": "The apprentice's numerical age is unstated. The document postdates the cohort's Ptolemaic childhood and does not establish age 12 as a norm, free access to an apprenticeship or the game's pay and skill gains.",
       "accessed": "2026-11-07"
+    },
+    {
+      "id": "alexandrian-loan-contract",
+      "title": "BGU 4.1151.2: Loan agreement",
+      "url": "https://classics.uc.edu/users/vanminnen/Alexandria/BGU_4.1151.2.html",
+      "publisher": "University of Cincinnati; Peter van Minnen translation",
+      "kind": "primary",
+      "period": "12 April 13 BCE, early Roman period",
+      "geography": "Alexandria",
+      "summary": "Records a money loan with scheduled instalments, default penalties and enforcement claims against debtors and workshop property.",
+      "limitations": "One early Roman contract, later than the Ptolemaic beginning of the game. Contractual enforcement clauses do not establish how frequently they were exercised or support violent collectors, murder, or the game's loan terms and risks.",
+      "accessed": "2026-11-07"
     }
   ],
   "economy": {
@@ -16050,7 +19348,7 @@
       "short": "dr"
     },
     "unitsPerPoint": 10,
-    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified unit continues after Roman rule.",
+    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified unit continues after Roman rule. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan.",
     "sourceIds": [
       "ucl-ptolemaic-coins"
     ],
@@ -16058,7 +19356,7 @@
       {
         "id": "tool-chest",
         "title": "Tool chest",
-        "description": "Unlocks small repair jobs at Craft 15. Sell for 30 drachmas.",
+        "description": "Unlocks hinge, strap and fitting repairs at Tool handling 15. Sell for 30 drachmas.",
         "value": 30,
         "maxOwned": 1,
         "yearlyIncome": 0
@@ -16072,15 +19370,32 @@
         "yearlyIncome": 10
       }
     ],
-    "autoDebtRepayment": true
+    "autoDebtRepayment": true,
+    "moneylender": {
+      "title": "Harbor moneylender",
+      "principal": 100,
+      "fee": 30,
+      "termYears": 3,
+      "threatAfterYears": 1,
+      "attackAfterYears": 3,
+      "extensionYears": 2,
+      "extensionFee": 20,
+      "maxExtensions": 1,
+      "events": {
+        "due": "lender-payment-due",
+        "threat": "lender-threat",
+        "attack": "lender-confrontation"
+      }
+    }
   },
   "health": {
-    "description": "Deaths in new lives follow an active named illness, injury or prolonged physical decline, or an explicitly dangerous choice. There is no separate age-band death roll. Condition onset, recovery, Health loss and care effects are authored gameplay values, not measured Ptolemaic disease rates or clinical advice. Annual steps organize playable episodes; they do not claim that an acute infection went untreated for a full year. Historical comparison mortality bands remain recorded separately.",
+    "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for Ptolemaic Alexandria is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules.",
     "sourceIds": [
       "family-care",
       "alexandrian-wetnursing",
       "roman-model-life-table",
-      "demography-evidence-limits"
+      "demography-evidence-limits",
+      "life-expectancy-egyptology"
     ],
     "stat": "health",
     "criticalHealth": 20,
@@ -16234,7 +19549,17 @@
         "careRecoveryBonus": 0,
         "fatalHealthThreshold": 0
       }
-    ]
+    ],
+    "mortalityCalibration": {
+      "minAge": 18,
+      "referenceHealth": 50,
+      "referenceCare": 0.55,
+      "caseFatality": 0.8,
+      "onsetHealth": 20,
+      "convalescenceLoss": 4,
+      "healthInfluence": 0.5,
+      "careInfluence": 0.5
+    }
   },
   "relationships": {
     "description": "Each introduced partner and born child has an individual closeness score. Contact can improve it, conflict can reduce it and prolonged neglect slowly erodes it. Close household members can help with recovery. These values and their effects are authored gameplay, not historical relationship measurements.",

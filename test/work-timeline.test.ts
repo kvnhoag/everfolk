@@ -1,3 +1,4 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, yearAtAge } from "../src/index.ts";
@@ -7,7 +8,7 @@ import previous from "../worlds/alexandria-0.12.0.json" with { type: "json" };
 
 /** Isolate occupational boundaries from unrelated narrative and mortality draws. */
 function controlledWorld(): WorldPack {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -91,11 +92,15 @@ test("an apprenticeship earns a small return and skill through work, then permit
   const craft = life.character!.skills.craft;
   life = engine.advance(life);
   assert.equal(life.economy!.cash, cash + 10);
-  assert.equal(life.character!.skills.craft, craft + 4);
+  assert.equal(life.character!.skills.craft, craft + 2);
   assert.equal(activity(engine, life, "work-potter").available, false);
   life = engine.act(life, "train-craft");
   life = engine.advance(life);
   assert.equal(life.age, 14);
+  assert.equal(activity(engine, life, "work-potter").available, false, "The minimum working age does not bypass training.");
+  life = engine.act(life, "train-craft");
+  life = engine.advance(life);
+  assert.equal(life.age, 15);
   assert.equal(activity(engine, life, "work-potter").available, true);
   life = engine.act(life, "work-potter");
   assert.equal(life.character!.jobId, "potter");
@@ -111,7 +116,7 @@ test("a regular job leaves later literacy lessons available alongside earning", 
   assert.equal(activity(engine, life, "train-literacy").available, true);
   life = engine.act(life, "train-literacy");
   assert.equal(life.character!.jobId, "porter");
-  assert.equal(life.character!.skills.literacy, literacy + 10);
+  assert.equal(life.character!.skills.literacy, literacy + 6);
   assert.deepEqual(engine.replay(life.seed, life.commands), life);
 });
 

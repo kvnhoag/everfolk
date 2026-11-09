@@ -56,10 +56,30 @@ export function provideHealthCare(world: WorldPack, state: LifeState, amount: nu
   health.lastCareAge = state.age;
 }
 
+/** Reference mortality is a baseline, not a health-independent death draw. */
+export function calibratedEpisodeProbability(world: WorldPack, state: LifeState): number {
+  const calibration = world.health?.mortalityCalibration;
+  if (!calibration || state.age < calibration.minAge) return 0;
+  const probability = world.mortality?.bands.find(band => state.age >= band.minAge && state.age <= band.maxAge)?.annualProbability ?? 0;
+  return unit(probability / calibration.caseFatality);
+}
+
+/** Conditional severe-episode risk. Health and care effects are authored rules. */
+export function severeEpisodeFatalityProbability(world: WorldPack, state: LifeState, active: ActiveHealthCondition, care = active.care, support = 0): number {
+  const model = world.health;
+  const calibration = model?.mortalityCalibration;
+  if (!model || !calibration || !active.severe) return 0;
+  const stat = world.stats[model.stat];
+  const healthFactor = 1 + calibration.healthInfluence * (calibration.referenceHealth - active.severe.healthBefore) / (stat.max - stat.min || 1);
+  const careFactor = (1 - calibration.careInfluence * unit(care)) / (1 - calibration.careInfluence * calibration.referenceCare);
+  return unit(calibration.caseFatality * healthFactor * careFactor * (1 - unit(support) * model.supportRecoveryBonus));
+}
+
 /**
- * Resolve existing episodes before the engine enters another year. There is no
- * independent death draw: an unresolved named condition must exhaust Health.
- * Recovery is resolved first so care can still help a seriously ill person.
+ * Resolve existing episodes before the engine enters another year. Fatality
+ * requires a warned, active named condition and deterioration to fatal Health.
+ * Optional severe episodes have a calibrated baseline with authored care and
+ * Health adjustments; ordinary episodes retain their original recovery rules.
  */
 export function progressHealth(world: WorldPack, state: LifeState, hooks: HealthHooks): HealthProgress {
   if (!world.health || state.phase === "ended") return {};
@@ -74,10 +94,30 @@ export function progressHealth(world: WorldPack, state: LifeState, hooks: Health
 
   const remaining: ActiveHealthCondition[] = [];
   const progressed: { active: ActiveHealthCondition; condition: HealthConditionDefinition; loss: number; care: number }[] = [];
-  for (const original of health.conditions) {
+  for (let index = 0; index < health.conditions.length; index++) {
+    const original = health.conditions[index];
     if (original.lastProgressAge >= state.age) { remaining.push(original); continue; }
     const condition = definition(world, original.id);
     const care = unit(original.care);
+    if (original.severe && model.mortalityCalibration) {
+      const probability = severeEpisodeFatalityProbability(world, state, original, care, support);
+      const fatal = probability === 1 || probability > 0 && hooks.random() < probability;
+      if (fatal) {
+        // The warned illness deteriorates sharply during this annual interval.
+        // Never raise a lower Health score while recording fatal deterioration.
+        changeHealth(world, state, Math.min(state.stats[model.stat], condition.fatalHealthThreshold) - state.stats[model.stat]);
+        // Already recovered episodes stay removed if this later episode is fatal.
+        // Unprocessed conditions remain active when death interrupts progression.
+        health.conditions = [...remaining, { ...original, lastProgressAge: state.age, care: 0 }, ...health.conditions.slice(index + 1)];
+        health.needsCareDecision = false;
+        hooks.journal(`health-severe-deterioration-${original.id}`, `Severe ${condition.title.toLocaleLowerCase()} worsens. Your health falls to a fatal level.`);
+        return { deathCause: condition.deathCause, context: `The recorded illness, ${condition.title}, had become severe. You had been warned before it progressed. The illness began at age ${original.sinceAge}. Your health deteriorated to a fatal level.${original.source ? ` It followed: ${original.source}` : ""}${care > 0 ? " Care was provided, but you did not recover." : " You did not recover."}` };
+      }
+      const restored = original.severe.healthBefore - ageLoss - model.mortalityCalibration.convalescenceLoss;
+      changeHealth(world, state, Math.max(state.stats[model.stat], restored) - state.stats[model.stat]);
+      hooks.journal(`health-recovery-${original.id}`, `You recover from severe ${condition.title.toLocaleLowerCase()}. You need time to regain your strength.`);
+      continue;
+    }
     const recovery = unit(condition.recoveryChance + care * condition.careRecoveryBonus + support * model.supportRecoveryBonus);
     const recovered = recovery === 1 || recovery > 0 && hooks.random() < recovery;
     if (recovered) {
@@ -119,6 +159,26 @@ export function developHealthIncident(world: WorldPack, state: LifeState, hooks:
   if (!world.health || state.phase === "ended") return;
   const model = world.health;
   const health = healthRecord(world, state)!;
+  if (model.mortalityCalibration && state.age >= model.mortalityCalibration.minAge) {
+    // A severe episode already awaiting care must not be redrawn or replaced.
+    if (health.conditions.some(active => active.severe)) return;
+    const probability = calibratedEpisodeProbability(world, state);
+    if (probability > 0 && (probability === 1 || hooks.random() < probability)) {
+      const candidates = model.conditions.filter(condition => condition.kind === "illness" && condition.weight > 0 && hooks.matches(condition.when));
+      if (!candidates.length) throw new Error("Mortality calibration requires an eligible illness.");
+      const selected = selectCondition(candidates, hooks);
+      const healthBefore = state.stats[model.stat];
+      const existing = health.conditions.find(active => active.id === selected.id);
+      if (!existing) addHealthCondition(world, state, selected.id, undefined, hooks);
+      const active = existing ?? health.conditions.find(active => active.id === selected.id)!;
+      active.severe = { healthBefore };
+      active.lastProgressAge = state.age - 1;
+      changeHealth(world, state, Math.min(healthBefore, model.mortalityCalibration.onsetHealth) - healthBefore);
+      health.needsCareDecision = true;
+      hooks.journal(`health-severe-onset-${selected.id}`, `${selected.title} has become severe. Your health has fallen sharply. You need care before the illness can progress.`);
+      return;
+    }
+  }
   if (health.conditions.length === 0 && state.stats[model.stat] <= model.criticalHealth) {
     addHealthCondition(world, state, model.declineCondition, "Your health has fallen to a critical level.", hooks);
   }
@@ -131,6 +191,10 @@ export function developHealthIncident(world: WorldPack, state: LifeState, hooks:
   const ratio = unit((state.stats[model.stat] - stat.min) / (stat.max - stat.min || 1));
   const probability = unit(band.annualProbability * (0.25 + 1.75 * (1 - ratio)));
   if (probability < 1 && hooks.random() >= probability) return;
+  addHealthCondition(world, state, selectCondition(candidates, hooks).id, undefined, hooks);
+}
+
+function selectCondition(candidates: HealthConditionDefinition[], hooks: HealthHooks): HealthConditionDefinition {
   let selected = candidates[0];
   if (candidates.length > 1) {
     const maximum = Math.max(...candidates.map(condition => condition.weight));
@@ -142,5 +206,5 @@ export function developHealthIncident(world: WorldPack, state: LifeState, hooks:
       if (draw < 0) break;
     }
   }
-  addHealthCondition(world, state, selected.id, undefined, hooks);
+  return selected;
 }

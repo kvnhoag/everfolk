@@ -1,3 +1,4 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
@@ -8,7 +9,10 @@ import { advanceYearWithFocus, persistYearlyFocus } from "../client/yearly-focus
 
 /** Keep current care/state rules, isolating retention from unrelated incidents. */
 function fixture(knowledge = 80): WorldPack {
-  const world = structuredClone(current) as WorldPack;
+  const world = withoutMoneylender(structuredClone(current) as WorldPack);
+  // Retention tests isolate forgetting and timing from the separate gain curve.
+  for (const stat of Object.values(world.stats)) delete stat.gainCurve;
+  for (const skill of Object.values(world.character!.skills)) delete skill.gainCurve;
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -102,7 +106,7 @@ test("continued study limits forgetting but does not cancel advanced-age loss", 
 
 test("new packs remove passive blanket gains while older lives keep their original rules", () => {
   assert.ok(current.knowledge);
-  assert.equal(current.version, "0.16.0");
+  assert.equal(current.version, "0.21.0");
   assert.equal(current.yearlyRules.some(rule => rule.id === "practical-experience" || rule.id === "learning-through-words"), false);
   const engine = createEngine(legacy);
   let life = engine.start("legacy-retention-replay");

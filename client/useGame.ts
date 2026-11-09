@@ -210,7 +210,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
       setHasRevealedStats(revealed);
       commit(restored);
       setNotice("The imported life is ready.");
-      return true;
+      return restored;
     } catch (error) { setNotice(message(error)); return false; }
   }, [commit, commitPauseState, setAutoDecisions]);
 
@@ -282,7 +282,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
 
   useEffect(() => {
     if (!canRunAutomaticDecision(pauseState, { hasBegun, phase: life.phase }, isVisible, isOverlayOpen, autoDecisions)) return;
-    const choice = selectAutomaticChoice(engineForLife(life).getChoices(life), engineForLife(life).world);
+    const choice = selectAutomaticChoice(engineForLife(life).getChoices(life), engineForLife(life).world, life);
     if (!choice) return;
     const timer = window.setTimeout(() => {
       if (!document.hidden && !pauseStateRef.current.screenOpen && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id);

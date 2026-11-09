@@ -1,4 +1,5 @@
 import type { ActivityAvailability, CharacterActivity, Condition, JobDefinition, LifeState, SkillDefinition, WorldPack } from "../src/types.ts";
+import { applyStatDelta } from "../src/progression.ts";
 import { formatYear } from "../src/calendar.ts";
 
 export type SkillState = "locked" | "ready" | "learning" | "mastered";
@@ -217,7 +218,7 @@ export function trainingSkillChanges(activity: ActivityAvailability, world: Worl
       let value = initial;
       for (const effect of outcome.effects) {
         if (effect.type === "end") break;
-        if (effect.type === "skill" && effect.skill === id) value = Math.max(definition.min, Math.min(definition.max, value + effect.delta));
+        if (effect.type === "skill" && effect.skill === id) value = applyStatDelta(definition, value, effect.delta);
       }
       return value - initial;
     });

@@ -1,4 +1,5 @@
 .pause-screen{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 24px 60px;color:var(--ink,#405443);background:var(--paper,#f3efe5)}
+.pause-to-menu{display:block;margin:19px auto 0;padding:6px 10px;color:#69785f;font-size:12px;text-decoration:underline;text-underline-offset:4px}.pause-to-menu:focus-visible{outline:2px solid #789369;outline-offset:3px}
 .pause-brand{font:400 29px/1.2 var(--serif,Georgia,serif);text-align:center;margin-bottom:30px}.pause-brand span{display:block;margin-top:8px;font:400 12px/1.5 var(--sans,Arial,sans-serif);color:#7b8672}
 .pause-card{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);width:min(820px,100%);overflow:hidden;border:1px solid #cdd3c1;border-radius:6px;background:#f8f5ec;box-shadow:0 12px 45px #2c463411}
 .pause-art{min-height:370px;background:#d9d6bd}.pause-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}

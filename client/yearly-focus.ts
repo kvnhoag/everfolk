@@ -1,9 +1,14 @@
 import type { ActivityAvailability, Choice, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
+import { getOutcomeProbabilities } from "../src/outcomes.ts";
+import { severeHealthRisk } from "./health-risk.ts";
 
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
   { id: "study", label: "Study", activityId: "train-literacy" },
-  { id: "craft", label: "Craft", activityId: "train-craft" },
+  { id: "craft", label: "Woodwork", activityId: "train-craft" },
+  { id: "pottery", label: "Pottery", activityId: "train-pottery" },
+  { id: "carving", label: "Wood carving", activityId: "train-carving" },
+  { id: "sculpture", label: "Stone sculpture", activityId: "train-sculpture" },
   { id: "friends", label: "Friends", activityId: "visit-a-friend" },
   { id: "health", label: "Health", activityId: "take-an-easy-walk" },
 ] as const;
@@ -90,14 +95,20 @@ export function advanceToDecisionWithFocus(engine: LifeEngine, life: LifeState, 
   throw new Error("This life could not reach its next decision.");
 }
 
-/** Choose the lowest disclosed direct fatal risk; declaration order breaks ties. */
-export function selectAutomaticChoice(choices: readonly Choice[], world?: WorldPack): Choice | undefined {
+/** Choose the lowest disclosed fatal risk, including a recorded severe episode. */
+export function selectAutomaticChoice(choices: readonly Choice[], world?: WorldPack, life?: LifeState): Choice | undefined {
   let selected: Choice | undefined;
   let lowestRisk = Infinity;
   for (const choice of choices) {
-    const total = choice.outcomes.reduce((sum, outcome) => sum + outcome.weight, 0);
-    const fatal = choice.outcomes.reduce((sum, outcome) => sum + (outcome.effects.some(effect => effect.type === "end" &&
-      (!world || effect.deathCause || world.endings.find(ending => ending.id === effect.ending)?.kind !== "chapter")) ? outcome.weight : 0), 0);
+    const branches = world && life ? getOutcomeProbabilities(world, life, choice)
+      : choice.outcomes.map(outcome => ({ outcome, probability: outcome.weight / Math.max(...choice.outcomes.map(item => item.weight)) }));
+    const total = branches.reduce((sum, branch) => sum + branch.probability, 0);
+    const fatal = branches.reduce((sum, { outcome, probability }) => {
+      const ends = outcome.effects.find(effect => effect.type === "end");
+      const immediate = ends?.type === "end" && (!world || ends.deathCause || world.endings.find(ending => ending.id === ends.ending)?.kind !== "chapter");
+      const later = !ends && world && life ? severeHealthRisk(life, world, { ...choice, outcomes: [outcome] })?.expected ?? 0 : 0;
+      return sum + probability * (immediate ? 1 : later);
+    }, 0);
     const risk = total > 0 ? fatal / total : 1;
     if (risk < lowestRisk) { selected = choice; lowestRisk = risk; }
   }

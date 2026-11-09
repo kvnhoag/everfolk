@@ -17,6 +17,11 @@ import coherentAlexandria from "../worlds/alexandria-0.12.0.json" with { type: "
 import workTimelineAlexandria from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 import interestCareersAlexandria from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import causalHealthAlexandria from "../worlds/alexandria-0.15.0.json" with { type: "json" };
+import statDecayAlexandria from "../worlds/alexandria-0.16.0.json" with { type: "json" };
+import specificCraftAlexandria from "../worlds/alexandria-0.17.0.json" with { type: "json" };
+import strictProgressionAlexandria from "../worlds/alexandria-0.18.0.json" with { type: "json" };
+import careerOpeningsAlexandria from "../worlds/alexandria-0.19.0.json" with { type: "json" };
+import adultMortalityAlexandria from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
 import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
 
@@ -212,6 +217,8 @@ export function compileWorld(world: ManagedWorld): WorldPack {
     if (choices.length === 0) throw new Error(`Disabling routes leaves event “${event.title}” without a choice. Enable a route or disable that event.`);
     return { ...event, choices };
   });
+  if (pack.character && disabledFlags.size) pack.character.activities = pack.character.activities.filter(activity =>
+    !activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "flag" && effect.value && disabledFlags.has(effect.flag))));
   validateWorld(pack);
   return pack;
 }
@@ -234,6 +241,12 @@ export function getBuiltinCatalog(pack: unknown = alexandria): AdminCatalog {
       { id: "home", title: "Life in the city", description: "Build a life close to home and the people who know you.", flag: "stayed", enabled: true },
       { id: "sea", title: "Life at sea", description: "Work aboard a merchant ship and discover other shores.", flag: "sailed", enabled: true },
       { id: "study", title: "The written word", description: "Learn letters and join a copyist's workshop.", flag: "studied", enabled: true },
+      ...[
+        { id: "court-access", title: "Court recommendation", description: "Prepare a petition and seek a recommendation for royal service.", flag: "court-recommendation", enabled: true },
+        { id: "officer-access", title: "Officer recommendation", description: "Organise unit supplies and apply for a commission.", flag: "officer-recommendation", enabled: true },
+        { id: "scholar-access", title: "A scholarly patron", description: "Demonstrate your calculations and seek paid work for a learned household.", flag: "scholar-recommendation", enabled: true },
+        { id: "workshop-access", title: "Workshop leadership", description: "Show a finished piece and earn a chance to lead a workshop.", flag: "workshop-recommendation", enabled: true },
+      ].filter(route => Object.hasOwn(pack.flags, route.flag)),
     ],
   }] };
 }
@@ -256,7 +269,7 @@ export function getPreviousWorld(): PublishedWorld {
 
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria]) {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria]) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -265,7 +278,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

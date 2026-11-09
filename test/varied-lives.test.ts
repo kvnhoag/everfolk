@@ -1,8 +1,9 @@
+import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { matchesCondition } from "../src/engine.ts";
-import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
+import type { Condition, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { builtinEngine, createDifferentSampleLife, createSampleLife, selectWorldPack } from "../client/session.ts";
 import { portraitVariant } from "../client/life-background.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
@@ -40,9 +41,26 @@ function sampleBirths(engine: LifeEngine) {
   return { origins, names };
 }
 
+/** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
+function pruneRemovedOriginModifiers(world: WorldPack): void {
+  const retained = new Set(world.origins.map(origin => origin.id));
+  const hasRemovedOrigin = (condition: Condition): boolean => {
+    if (condition.type === "origin") return !retained.has(condition.origin);
+    if (condition.type === "all" || condition.type === "any") return condition.conditions.some(hasRemovedOrigin);
+    return condition.type === "not" && hasRemovedOrigin(condition.condition);
+  };
+  for (const choice of [...world.events.flatMap(event => event.choices), ...(world.character?.activities ?? [])]) {
+    for (const outcome of choice.outcomes) {
+      if (!outcome.weightModifiers) continue;
+      outcome.weightModifiers = outcome.weightModifiers.filter(modifier => !hasRemovedOrigin(modifier.when));
+      if (!outcome.weightModifiers.length) delete outcome.weightModifiers;
+    }
+  }
+}
+
 test("new lives draw broadly from 32 names and eight distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.16.0");
+  assert.equal(pack.version, "0.21.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 8);
@@ -81,7 +99,7 @@ test("the varied release preserves the existing economy, skill tree, risks and e
 });
 
 test("each background has exclusive childhood milestones and its own adolescent opportunity", () => {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   isolateBackground(world);
   world.yearlyEffects = [];
   world.yearlyRules = [];
@@ -143,7 +161,7 @@ test("complete varied lives retain their drawn name, coherent background and exa
 });
 
 test("every household opportunity follows the core trade decisions without a long milestone backlog", () => {
-  const world = structuredClone(pack) as WorldPack;
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   isolateBackground(world);
   const engine = createEngine(world);
   const { origins } = sampleBirths(engine);
@@ -197,11 +215,12 @@ test("an explicit fresh-life request avoids the preceding name and background wh
 });
 
 test("limited authored worlds use a bounded fresh-life fallback rather than looping forever", () => {
-  const limited = structuredClone(builtinEngine.world) as WorldPack;
+  const limited = withoutMoneylender(structuredClone(builtinEngine.world) as WorldPack);
   limited.version = "one-profile-restart-fixture";
   limited.origins = [limited.origins[0]];
   limited.events = limited.events.filter(event => event.id === "the-first-household" || event.id === limited.health!.careDecision);
   limited.character!.playerNames = ["Damon"];
+  pruneRemovedOriginModifiers(limited);
   try {
     selectWorldPack(limited);
     const previousLife = createSampleLife("limited-before");

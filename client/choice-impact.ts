@@ -1,4 +1,6 @@
 import type { Choice, LifeState, WorldPack } from "../src/types.ts";
+import { applyStatDelta } from "../src/progression.ts";
+import { getOutcomeProbabilities } from "../src/outcomes.ts";
 
 export interface ChoiceStatImpact {
   id: string;
@@ -22,7 +24,7 @@ export interface ChoiceImpact {
 /**
  * Preview only the choice's direct effects, without drawing an outcome or changing
  * the life. Annual rules, queued events and later mortality are separate actions.
- * Applying bounds after each stat effect mirrors the engine's effect order.
+ * Applying growth and bounds after each stat effect mirrors the engine's order.
  */
 export function getChoiceImpact(choice: Choice, life: LifeState, world: WorldPack): ChoiceImpact {
   if (choice.outcomes.length === 0) throw new Error("This choice has no possible outcomes.");
@@ -33,17 +35,14 @@ export function getChoiceImpact(choice: Choice, life: LifeState, world: WorldPac
       if (effect.type === "end") { canEndLife = true; break; }
       if (effect.type !== "stat") continue;
       const definition = world.stats[effect.stat];
-      stats[effect.stat] = Math.max(definition.min, Math.min(definition.max, stats[effect.stat] + effect.delta));
+      stats[effect.stat] = applyStatDelta(definition, stats[effect.stat], effect.delta);
     }
     return stats;
   });
-  const maximumWeight = Math.max(...choice.outcomes.map(outcome => outcome.weight));
-  let totalWeight = 0, fatalWeight = 0;
-  for (const outcome of choice.outcomes) {
-    const scaled = outcome.weight / maximumWeight;
-    totalWeight += scaled;
+  let fatalWeight = 0;
+  for (const { outcome, probability } of getOutcomeProbabilities(world, life, choice)) {
     const ending = outcome.effects.find(effect => effect.type === "end");
-    if (ending?.type === "end" && world.endings.find(item => item.id === ending.ending)?.kind === "death") fatalWeight += scaled;
+    if (ending?.type === "end" && world.endings.find(item => item.id === ending.ending)?.kind === "death") fatalWeight += probability;
   }
 
   return {
@@ -60,7 +59,7 @@ export function getChoiceImpact(choice: Choice, life: LifeState, world: WorldPac
     }),
     hasVariableOutcomes: choice.outcomes.length > 1,
     canEndLife,
-    deathRisk: fatalWeight / totalWeight,
+    deathRisk: fatalWeight,
   };
 }
 
