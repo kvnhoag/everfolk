@@ -1,6 +1,7 @@
 import type { CharacterActivity, Effect, EvidenceKind, JournalEntry, LifeEvent, LifeState, Outcome, WorldPack } from "../src/types.ts";
+import { ALEXANDRIA_VARIETY_VISUALS } from "./alexandria-variety-visuals.ts";
 
-export const SCENE_IDS = ["birth", "childhood", "learning", "work", "sea", "family", "later-life", "memorial", "rest", "history-war", "history-city"] as const;
+export const SCENE_IDS = ["birth", "childhood", "learning", "work", "sea", "family", "later-life", "memorial", "rest", "history-war", "history-city", "music"] as const;
 export type SceneId = typeof SCENE_IDS[number];
 export const MOTION_IDS = ["cradle", "play", "write", "work", "sail", "gather", "reflect", "still", "rest", "unrest", "city"] as const;
 export type MotionId = typeof MOTION_IDS[number];
@@ -8,7 +9,7 @@ export interface EventVisual { scene: SceneId; motion: MotionId; caption?: strin
 export type EventVisuals = Record<string, EventVisual>;
 export const DEFAULT_MOTIONS: Record<SceneId, MotionId> = {
   birth: "cradle", childhood: "play", learning: "write", work: "work", sea: "sail", family: "gather",
-  "later-life": "reflect", memorial: "still", rest: "rest", "history-war": "unrest", "history-city": "city",
+  "later-life": "reflect", memorial: "still", rest: "rest", "history-war": "unrest", "history-city": "city", music: "gather",
 };
 
 export const sceneOptions = [
@@ -18,6 +19,7 @@ export const sceneOptions = [
   { value: "later-life", label: "Later life" }, { value: "memorial", label: "Remembrance" },
   { value: "rest", label: "Rest and illness" }, { value: "history-war", label: "War and disruption" },
   { value: "history-city", label: "The changing city" },
+  { value: "music", label: "Music and performance" },
 ] satisfies { value: SceneId; label: string }[];
 export const motionOptions = [
   { value: "cradle", label: "Gentle cradle" }, { value: "play", label: "Play and discovery" },
@@ -28,23 +30,47 @@ export const motionOptions = [
 ] satisfies { value: MotionId; label: string }[];
 
 export const sceneDefinitions: Record<SceneId, { file: string; title: string; caption: string; alt: string; defaultMotion: MotionId }> = {
-  birth: { file: "birth", title: "A newborn at home.", caption: "Your household takes care of you.", alt: "Paper-cutout illustration of a newborn and caregiver in an Alexandrian household", defaultMotion: "cradle" },
-  childhood: { file: "childhood", title: "Playing in the courtyard.", caption: "You play with other children near home.", alt: "Paper-cutout illustration of children in an Alexandrian courtyard", defaultMotion: "play" },
-  learning: { file: "learning", title: "Something to learn.", caption: "There is time to watch, practise and ask a question.", alt: "Paper-cutout illustration of a young learner with a teacher and tablet", defaultMotion: "write" },
-  work: { file: "work", title: "At work.", caption: "You work, run errands and help with daily tasks.", alt: "Paper-cutout illustration of a craft worker at a workbench", defaultMotion: "work" },
-  sea: { file: "sea", title: "Aboard a merchant ship.", caption: "You work with the crew and travel between ports.", alt: "Paper-cutout illustration of a sailor aboard an ancient merchant ship", defaultMotion: "sail" },
-  family: { file: "family", title: "At home with family.", caption: "You eat, talk and do chores together.", alt: "Paper-cutout illustration of an ancient household sharing company", defaultMotion: "gather" },
-  "later-life": { file: "later-life", title: "Later life.", caption: "You spend time at home and visit people you know.", alt: "Paper-cutout illustration of an older person in familiar company", defaultMotion: "reflect" },
-  memorial: { file: "memorial", title: "Life ended.", caption: "The cause of death and life record are shown below.", alt: "Quiet paper-cutout memorial still life with an olive branch and lamp", defaultMotion: "still" },
-  rest: { file: "rest", title: "Time to rest.", caption: "You take a break while someone helps with the chores.", alt: "Paper-cutout illustration of a quiet resting place and household care", defaultMotion: "rest" },
-  "history-war": { file: "history-war", title: "A city unsettled.", caption: "Events beyond your household are changing the city around you.", alt: "Paper-cutout illustration of an ancient harbor unsettled by war, without graphic violence", defaultMotion: "unrest" },
-  "history-city": { file: "history-city", title: "The city around you.", caption: "Work, neighbors and changing arrangements fill the streets.", alt: "Paper-cutout illustration of an ancient Alexandrian street and changing civic life", defaultMotion: "city" },
+  birth: { file: "birth", title: "A newborn at home.", caption: "Your household takes care of you.", alt: "Pixel artwork of a newborn and caregiver in an Alexandrian household", defaultMotion: "cradle" },
+  childhood: { file: "childhood", title: "Playing in the courtyard.", caption: "You play with other children near home.", alt: "Pixel artwork of children in an Alexandrian courtyard", defaultMotion: "play" },
+  learning: { file: "learning", title: "Something to learn.", caption: "There is time to watch, practise and ask a question.", alt: "Pixel artwork of a young learner with a teacher and tablet", defaultMotion: "write" },
+  work: { file: "work", title: "At work.", caption: "You work, run errands and help with daily tasks.", alt: "Pixel artwork of a craft worker at a workbench", defaultMotion: "work" },
+  sea: { file: "sea", title: "Aboard a merchant ship.", caption: "You work with the crew and travel between ports.", alt: "Pixel artwork of a sailor aboard an ancient merchant ship", defaultMotion: "sail" },
+  family: { file: "family", title: "At home with family.", caption: "You eat, talk and do chores together.", alt: "Pixel artwork of an ancient household sharing company", defaultMotion: "gather" },
+  "later-life": { file: "later-life", title: "Later life.", caption: "You spend time at home and visit people you know.", alt: "Pixel artwork of an older person in familiar company", defaultMotion: "reflect" },
+  memorial: { file: "memorial", title: "Life ended.", caption: "The cause of death and life record are shown below.", alt: "Quiet pixel memorial still life with an olive branch and lamp", defaultMotion: "still" },
+  rest: { file: "rest", title: "Time to rest.", caption: "You take a break while someone helps with the chores.", alt: "Pixel artwork of a quiet resting place and household care", defaultMotion: "rest" },
+  "history-war": { file: "history-war", title: "A city unsettled.", caption: "Events beyond your household are changing the city around you.", alt: "Pixel artwork of an ancient harbor unsettled by war, without graphic violence", defaultMotion: "unrest" },
+  "history-city": { file: "history-city", title: "The city around you.", caption: "Work, neighbors and changing arrangements fill the streets.", alt: "Pixel artwork of an ancient Alexandrian street and changing civic life", defaultMotion: "city" },
+  music: { file: "music", title: "Music in the courtyard.", caption: "You practise an agreed repertoire and perform with other musicians.", alt: "Pixel artwork of a musician playing a lyre for a small courtyard audience", defaultMotion: "gather" },
 };
 
 const visual = (scene: SceneId, motion = DEFAULT_MOTIONS[scene]): EventVisual => ({ scene, motion });
 
 /** Authored event IDs, not text matching, connect the shipped stories to their art. */
 export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
+  ...Object.entries(ALEXANDRIA_VARIETY_VISUALS),
+  ...["sculpture", "philosophy", "seafaring", "military", "commerce", "astronomy-calendar", "music-performance"].flatMap(route => {
+    const scene: SceneId = route === "sculpture" ? "work" : route === "philosophy" || route === "astronomy-calendar" ? "learning" : route === "seafaring" ? "sea" : route === "music-performance" ? "music" : "history-city";
+    // Military callbacks may occur under Roman rule; they depict remembered
+    // service/account work rather than inventing a renewed royal campaign.
+    return ["prestige", "callback-1", "callback-2"].map(suffix => [`legacy-${route}-${suffix}`, visual(scene, route === "military" ? "gather" : DEFAULT_MOTIONS[scene])]);
+  }),
+  ["legacy-shared-cargo", visual("history-city", "work")],
+  ["legacy-performance-passage", visual("sea", "sail")],
+  ...["rare-abduction", "rare-scaffold-collapse"].map(id => [id, visual("history-city", "unrest")]),
+  ["rare-mistaken-cargo-theft", visual("history-city", "gather")],
+  ["rare-lost-valuables", visual("history-city", "city")],
+  ["rare-patron-test", visual("history-city", "gather")],
+  ["rare-sailor-rescue", visual("sea", "sail")],
+  ["rare-masterwork", visual("work", "work")],
+  ...["rare-scholarly-mastery", "rare-knowledge-breakthrough"].map(id => [id, visual("learning", "write")]),
+  ["rare-community-recognition", visual("history-city", "gather")],
+  ...["early-care-market-morning", "early-care-visitors", "early-care-restless-afternoon"].map(id => [id, visual("childhood", "play")]),
+  ...["early-learning-shop-marks", "early-learning-model-boat", "early-learning-clay-scrap"].map(id => [id, visual("childhood", "work")]),
+  ...["early-training-merchants-list", "early-work-reader-introduction"].map(id => [id, visual("learning", "write")]),
+  ...["early-training-repair-yard", "early-training-potters-bench", "early-wages-shop-help", "early-wages-kiln-order", "early-wages-quay-delivery", "early-work-workshop-orders"].map(id => [id, visual("work", "work")]),
+  ["early-work-harbor-crew", visual("history-city", "gather")],
+  ...["familiar-song", "cloth-knot", "patch-of-light", "visitor-hands", "painted-door", "loose-laces", "stone-row", "friend-keeps-turn", "familiar-order", "new-shortcut", "spare-offcut", "count-again", "merchant-parcel", "pottery-offcut", "quay-packed-rope", "fishing-float", "bakery-flour", "clerk-sheets", "weaving-thread", "delta-word"].map(id => [`early-year-${id}`, visual("childhood", "play")]),
   // Background scenes at four and nine keep children at home or learning safely.
   ...["background-merchant-household-childhood", "background-artisan-household-childhood", "background-harbor-household-childhood", "background-fishing-household-childhood", "background-bakery-household-childhood", "background-clerk-household-childhood", "background-weaver-household-childhood", "background-delta-newcomers-childhood"].map(id => [id, visual("childhood", "play")]),
   ...["background-artisan-household-practice", "background-harbor-household-practice", "background-fishing-household-practice", "background-bakery-household-practice", "background-weaver-household-practice", "background-delta-newcomers-practice"].map(id => [id, visual("childhood", "work")]),
@@ -131,13 +157,15 @@ export interface SceneContext extends EventVisual {
   alt: string;
   eventId?: string;
   kind: SceneKind;
+  rarity?: "rare";
   evidence?: EvidenceKind;
   sourceIds?: string[];
 }
 
 /** Keep automatic events separate from decisions the player can make. */
-export function sceneContextLabel(context: Pick<SceneContext, "kind" | "eventId">): string {
+export function sceneContextLabel(context: Pick<SceneContext, "kind" | "eventId" | "rarity">): string {
   if (context.eventId === "the-first-household") return "Birth";
+  if (context.rarity === "rare" && context.kind === "pending") return "Rare encounter";
   const labels: Record<SceneKind, string> = {
     pending: "Decision", outcome: "Outcome", event: "Life event",
     history: "World event", birth: "Background", ending: "Cause of death", record: "Record complete", fallback: "Daily life",
@@ -151,6 +179,7 @@ function ageVisual(life: LifeState): EventVisual {
   if (life.age >= 60 || life.flags.retired) return visual("later-life");
   if (life.character) {
     if (life.character.jobId === "sailor") return visual("sea");
+    if (life.character.jobId === "performer") return visual("music");
     if (["clerk", "copyist", "philosophy-tutor", "sky-table-calculator", "astrologer"].includes(life.character.jobId ?? "")) return visual("learning");
     if (["soldier", "officer", "general", "court-adviser"].includes(life.character.jobId ?? "")) return visual("history-city");
     if (life.character.jobId) return visual("work");
@@ -176,6 +205,9 @@ function outcomeVisual(event: LifeEvent, outcome: Outcome, life: LifeState): Eve
     return selected;
   }
   const branches: Record<string, EventVisual> = {
+    "rare-patron-copy-result": visual("learning", "write"),
+    "rare-patron-fitting-result": visual("work", "work"),
+    "rare-patron-pot-result": visual("work", "work"),
     "fire-rescue-success": visual("rest"), "fire-rescue-injury": visual("rest"),
     "rough-crossing-paid": visual("sea"), "robbers-driven-off": visual("rest"),
     "dirty-water-illness": visual("rest"), "dirty-water-no-illness": visual("history-city"),
@@ -198,7 +230,7 @@ function outcomeVisual(event: LifeEvent, outcome: Outcome, life: LifeState): Eve
 
 function makeContext(id: string, kind: SceneKind, assignment: EventVisual, title: string, caption: string, event?: LifeEvent): SceneContext {
   return { id, key: id, kind, ...assignment, title, caption: assignment.caption ?? caption, alt: sceneDefinitions[assignment.scene].alt,
-    ...(event ? { eventId: event.id, evidence: event.evidence, sourceIds: event.sourceIds } : {}) };
+    ...(event ? { eventId: event.id, evidence: event.evidence, sourceIds: event.sourceIds, ...(event.rarity ? { rarity: event.rarity } : {}) } : {}) };
 }
 
 /** Presentation-only: read the accepted journal without consuming randomness or changing a life. */
@@ -242,6 +274,9 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
           "take-day-cargo-work": visual("work"), "join-an-evening-song": visual("history-city", "gather"),
           "take-night-cargo-work": visual("work"), "swim-offshore": visual("sea"),
           "train-warfare": visual("work"), "drill-a-unit": visual("work"), "organise-war-supplies": visual("history-war"),
+          "train-music": visual("music"), "work-performer": visual("music"), "complete-paid-engagement": visual("music"),
+          "complete-cargo-voyage": visual("sea"), "complete-service-assignment": visual("history-city", "work"),
+          "fulfil-significant-order": visual("history-city", "work"), "copy-a-sky-table": visual("learning", "write"),
         };
         const craftPractice = outcome?.effects.some(effect => effect.type === "skill" && ["craft", "pottery", "carving", "sculpture"].includes(effect.skill));
         const scholarlyPractice = outcome?.effects.some(effect => effect.type === "skill" && ["philosophy", "astronomy", "astrology", "oratory"].includes(effect.skill));

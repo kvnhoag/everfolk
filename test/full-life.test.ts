@@ -39,8 +39,17 @@ function complete(engine: LifeEngine, seed: string, career = "stay", manageFamil
   return state;
 }
 
-function safeEngine(): LifeEngine {
+function safeEngine(originalOpening = false): LifeEngine {
   const copy = structuredClone(pack);
+  if (originalOpening) {
+    // This controlled route check covers the retained career milestones. The
+    // opening-variation engine/content tests exercise the other alternatives.
+    const originals = new Set(["a-child-in-the-courtyard", "the-first-letters", "a-place-to-learn", "the-first-wages", "a-place-on-the-manifest"]);
+    copy.events = copy.events.filter(event => !("exclusiveGroup" in event) || originals.has(event.id));
+    for (const event of copy.events) if ("exclusiveGroup" in event) delete event.exclusiveGroup;
+  }
+  // This fixture isolates ordinary stage coverage and decision cadence.
+  if (copy.eventPacing.rareEvents) copy.eventPacing.rareEvents.annualChance = 0;
   copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
   copy.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
   copy.health.declineBands.forEach(band => { band.healthLoss = 0; });
@@ -119,7 +128,7 @@ test("historical anchors occur in their documented calendar years and the correc
 });
 
 test("controlled content coverage reaches all life stages and ends the record without inventing a death", () => {
-  const engine = safeEngine();
+  const engine = safeEngine(true);
   for (const career of ["stay", "sail", "study"]) {
     const life = complete(engine, `full-stage-${career}`, career, true);
     assert.equal(life.age, 100);
@@ -219,7 +228,8 @@ test("every completed living year has its own background brief alongside histori
 
 test("the shipped personal decision pools sustain two-to-three-year gaps through a full life", () => {
   const engine = safeEngine();
-  assert.deepEqual(pack.eventPacing, { minChoiceGapYears: 2, maxChoiceGapYears: 3 });
+  assert.equal(pack.eventPacing.minChoiceGapYears, 2);
+  assert.equal(pack.eventPacing.maxChoiceGapYears, 3);
   for (let seed = 0; seed < 12; seed++) {
     const life = complete(engine, `cadence-${seed}`);
     const decisions = life.journal.filter(entry => entry.type === "choice");

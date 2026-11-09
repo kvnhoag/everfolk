@@ -73,11 +73,13 @@ function setup(t: { after(fn: () => void): void }) {
 /** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
 function pruneRemovedOriginModifiers(world: WorldPack): void {
   const retained = new Set(world.origins.map(origin => origin.id));
-  const hasRemovedOrigin = (condition: Condition): boolean => {
+  const hasRemovedOrigin = (condition: Condition | undefined): boolean => {
+    if (!condition) return false;
     if (condition.type === "origin") return !retained.has(condition.origin);
     if (condition.type === "all" || condition.type === "any") return condition.conditions.some(hasRemovedOrigin);
     return condition.type === "not" && hasRemovedOrigin(condition.condition);
   };
+  world.events = world.events.filter(event => !hasRemovedOrigin(event.when));
   for (const choice of [...world.events.flatMap(event => event.choices), ...(world.character?.activities ?? [])]) {
     for (const outcome of choice.outcomes) {
       if (!outcome.weightModifiers) continue;
@@ -537,7 +539,11 @@ test("malformed or oversized JSON, invalid publish requests and missing storage 
 test("UTF-8 catalog limits reject otherwise valid large imports before any database write", async t => {
   const { db, call } = setup(t);
   const draft = getBuiltinCatalog();
-  for (const event of draft.worlds[0].pack.events) event.text = "界".repeat(6_000);
+  const events = draft.worlds[0].pack.events;
+  // Size the multibyte payload against this release's larger event catalog.
+  const textLength = Math.floor((MAX_CATALOG_BYTES * 0.8 - JSON.stringify(draft).length) / events.length);
+  assert.ok(textLength > 1_000);
+  for (const event of events) event.text = "界".repeat(textLength);
   const serialized = JSON.stringify(draft);
   assert.ok(serialized.length < MAX_CATALOG_BYTES, "character count alone would accept this import");
   assert.ok(new TextEncoder().encode(serialized).byteLength > MAX_CATALOG_BYTES);

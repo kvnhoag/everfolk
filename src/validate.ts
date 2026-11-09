@@ -122,7 +122,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy"], worldFields);
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -131,9 +131,23 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const startYear = year(world.startYear, "world.startYear");
   const maxAge = integer(world.maxAge, "world.maxAge", 1, 10_000);
   if (Object.hasOwn(world, "eventPacing")) {
-    const pacing = object(world.eventPacing, "world.eventPacing", ["minChoiceGapYears", "maxChoiceGapYears"]);
+    const pacing = object(world.eventPacing, "world.eventPacing", ["minChoiceGapYears", "maxChoiceGapYears", "variety", "rareEvents"], ["minChoiceGapYears", "maxChoiceGapYears"]);
     const minGap = integer(pacing.minChoiceGapYears, "world.eventPacing.minChoiceGapYears", 1, 10_000);
     integer(pacing.maxChoiceGapYears, "world.eventPacing.maxChoiceGapYears", minGap, 10_000);
+    if (Object.hasOwn(pacing, "rareEvents")) {
+      const rare = object(pacing.rareEvents, "world.eventPacing.rareEvents", ["annualChance", "cooldownYears"]);
+      const chance = number(rare.annualChance, "world.eventPacing.rareEvents.annualChance");
+      if (chance < 0 || chance > 1) fail("world.eventPacing.rareEvents.annualChance", "expected a probability in 0..1");
+      integer(rare.cooldownYears, "world.eventPacing.rareEvents.cooldownYears", 1, maxAge);
+    }
+    if (Object.hasOwn(pacing, "variety")) {
+      const variety = object(pacing.variety, "world.eventPacing.variety", ["recentWindow", "recentWeight", "repeatWeight"]);
+      integer(variety.recentWindow, "world.eventPacing.variety.recentWindow", 1, 1_000);
+      for (const field of ["recentWeight", "repeatWeight"]) {
+        const multiplier = number(variety[field], `world.eventPacing.variety.${field}`);
+        if (multiplier < 0.001 || multiplier > 1) fail(`world.eventPacing.variety.${field}`, "expected a multiplier in 0.001..1");
+      }
+    }
   }
   const lastAstronomicalYear = (startYear < 0 ? startYear + 1 : startYear) + maxAge;
   const lastYear = lastAstronomicalYear <= 0 ? lastAstronomicalYear - 1 : lastAstronomicalYear;
@@ -340,6 +354,47 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   skillIds.forEach(visitSkill);
   const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
   const jobIds = unique(jobs, "world.character.jobs");
+  const legacy = Object.hasOwn(world, "legacy") ? object(world.legacy, "world.legacy", ["routes", "achievements"]) : undefined;
+  const legacyRoutes = legacy ? array(legacy.routes, "world.legacy.routes", 1, 64) : [];
+  const legacyRouteIds = unique(legacyRoutes, "world.legacy.routes");
+  const achievements = legacy ? array(legacy.achievements, "world.legacy.achievements", 1, 256) : [];
+  const achievementIds = unique(achievements, "world.legacy.achievements");
+  if (legacy && !character) fail("world.legacy", "requires a character definition");
+  const references = (value: unknown, path: string, ids: Set<string>, kind: string, min = 0): void => {
+    const seen = new Set<string>();
+    array(value, path, min, 128).forEach((entry, i) => {
+      reference(entry, `${path}[${i}]`, ids, kind);
+      if (seen.has(entry as string)) fail(`${path}[${i}]`, "duplicate reference");
+      seen.add(entry as string);
+    });
+  };
+  legacyRoutes.forEach((entry, i) => {
+    const path = `world.legacy.routes[${i}]`;
+    const route = object(entry, path, ["id", "title", "description", "skillIds", "jobIds", "achievementIds"]);
+    string(route.title, `${path}.title`, 100);
+    string(route.description, `${path}.description`, 1000);
+    references(route.skillIds, `${path}.skillIds`, skillIds, "skill", 1);
+    references(route.jobIds, `${path}.jobIds`, jobIds, "job");
+    references(route.achievementIds, `${path}.achievementIds`, achievementIds, "achievement", 1);
+    for (const achievement of route.achievementIds as string[]) {
+      if ((achievements.find(item => (item as DataObject).id === achievement) as DataObject).routeId !== route.id) fail(`${path}.achievementIds`, "achievement belongs to a different route");
+    }
+  });
+  achievements.forEach((entry, i) => {
+    const path = `world.legacy.achievements[${i}]`;
+    const achievement = object(entry, path, ["id", "routeId", "title", "description", "kind", "nameTemplate", "people", "evidence", "sourceIds"], ["id", "routeId", "title", "description", "kind", "nameTemplate", "people"]);
+    reference(achievement.routeId, `${path}.routeId`, legacyRouteIds, "legacy route");
+    const route = legacyRoutes.find(item => (item as DataObject).id === achievement.routeId) as DataObject;
+    if (!(route.achievementIds as string[]).includes(achievement.id as string)) fail(path, "achievement must be listed in its route");
+    string(achievement.title, `${path}.title`, 200);
+    string(achievement.description, `${path}.description`, 1000);
+    string(achievement.nameTemplate, `${path}.nameTemplate`, 200);
+    if (achievement.kind !== "ordinary" && achievement.kind !== "prestige") fail(`${path}.kind`, "expected ordinary or prestige");
+    const people = array(achievement.people, `${path}.people`, 1, 8);
+    people.forEach((person, j) => string(person, `${path}.people[${j}]`, 100));
+    if (new Set(people).size !== people.length) fail(`${path}.people`, "duplicate contact");
+    evidence(achievement, path);
+  });
   const partners = character ? array(character.partners, "world.character.partners", 0, 128) : [];
   const partnerIds = unique(partners, "world.character.partners");
   const deathCauses = character ? array(character.deathCauses, "world.character.deathCauses", 1, 256) : [];
@@ -386,6 +441,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     if (depth > 32) fail(path, "condition nesting exceeds 32 levels");
     const rule = object(value, path, undefined, ["type"]);
     switch (rule.type) {
+      case "accomplishment":
+        object(rule, path, ["type", "achievement", "minYears"], ["type", "achievement"]);
+        reference(rule.achievement, `${path}.achievement`, achievementIds, "achievement");
+        if (Object.hasOwn(rule, "minYears")) integer(rule.minYears, `${path}.minYears`, 0, maxAge);
+        break;
       case "cash":
       case "debt":
         object(rule, path, ["type", "op", "value"]);
@@ -461,6 +521,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
         integer(rule.value, `${path}.value`, 0, 8);
         break;
+      case "child-age": {
+        object(rule, path, ["type", "min", "max"]);
+        requireCharacter(path);
+        const min = integer(rule.min, `${path}.min`, 0, 10_000);
+        integer(rule.max, `${path}.max`, min, 10_000);
+        break;
+      }
       case "has-condition":
         object(rule, path, ["type", "condition"], ["type"]);
         requireHealth(path);
@@ -487,11 +554,28 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         fail(`${path}.type`, "unknown condition type");
     }
   };
-  const effects = (value: unknown, path: string): void => {
+  const effects = (value: unknown, path: string, allowMastery = false, allowAccomplishment = false): void => {
     array(value, path, 0, 128).forEach((entry, i) => {
       const location = `${path}[${i}]`;
       const effect = object(entry, location, undefined, ["type"]);
       switch (effect.type) {
+        case "accomplishment":
+          object(effect, location, ["type", "achievement"]);
+          if (!allowAccomplishment) fail(location, "accomplishments require an accepted decision or activity outcome");
+          reference(effect.achievement, `${location}.achievement`, achievementIds, "achievement");
+          break;
+        case "mastery":
+          object(effect, location, ["type", "target", "id"]);
+          if (!allowMastery) fail(location, "mastery is permitted only in rare encounter choice outcomes");
+          if (effect.target !== "stat" && effect.target !== "skill") fail(`${location}.target`, "expected stat or skill");
+          if (effect.target === "stat") {
+            reference(effect.id, `${location}.id`, statIds, "stat");
+            if (economy && effect.id === economy.stat) fail(`${location}.id`, "mastery cannot target the economy stat; use explicit currency effects");
+          } else {
+            requireCharacter(location);
+            reference(effect.id, `${location}.id`, skillIds, "skill");
+          }
+          break;
         case "cash":
         case "debt":
           object(effect, location, ["type", "delta"]);
@@ -593,11 +677,15 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   };
 
   /** Check the full conditional-weight budget, not just today's active rules. */
-  const outcomeDefinition = (entry: unknown, path: string): number => {
+  const outcomeDefinition = (entry: unknown, path: string, allowMastery = false): number => {
     const outcome = object(entry, path, ["id", "text", "weight", "effects", "weightModifiers"], ["id", "text", "weight", "effects"]);
     string(outcome.text, `${path}.text`);
     const base = weight(outcome.weight, `${path}.weight`);
-    effects(outcome.effects, `${path}.effects`);
+    effects(outcome.effects, `${path}.effects`, allowMastery, true);
+    for (const effect of outcome.effects as DataObject[]) if (effect.type === "accomplishment") {
+      const achievement = achievements.find(item => (item as DataObject).id === effect.achievement) as DataObject;
+      for (const person of achievement.people as string[]) if (!(outcome.text as string).includes(person)) fail(`${path}.text`, "awarding outcomes must introduce every recorded contact by name");
+    }
     let maximum = base, minimum = base;
     if (Object.hasOwn(outcome, "weightModifiers")) {
       array(outcome.weightModifiers, `${path}.weightModifiers`, 1, 8).forEach((entry, i) => {
@@ -750,9 +838,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     });
   }
   const randomWeights: number[] = [];
+  const exclusiveGroupAges = new Map<string, number>();
   events.forEach((entry, i) => {
     const path = `world.events[${i}]`;
-    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
+    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
     string(event.title, `${path}.title`, 300);
     string(event.text, `${path}.text`);
     evidence(event, path);
@@ -775,6 +864,19 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const at = year(trigger.at, `${path}.trigger.at`);
       if (at < startYear || at > lastYear) fail(`${path}.trigger.at`, "scheduled year is outside this life's calendar range");
     } else fail(`${path}.trigger.type`, "unknown event trigger type");
+    if (Object.hasOwn(event, "exclusiveGroup")) {
+      const group = id(event.exclusiveGroup, `${path}.exclusiveGroup`);
+      if (trigger.type !== "age" || event.mode === "automatic" || Object.hasOwn(event, "rarity")) fail(`${path}.exclusiveGroup`, "exclusive groups require age-trigger decision events");
+      if (event.id === health?.careDecision || moneylender && Object.values(moneylender.events as DataObject).includes(event.id)) fail(`${path}.exclusiveGroup`, "medical and collection interrupts cannot be grouped");
+      const at = trigger.at as number;
+      if (exclusiveGroupAges.has(group) && exclusiveGroupAges.get(group) !== at) fail(`${path}.exclusiveGroup`, "all events in an exclusive group must use the same trigger age");
+      exclusiveGroupAges.set(group, at);
+    }
+    if (Object.hasOwn(event, "rarity")) {
+      if (event.rarity !== "rare") fail(`${path}.rarity`, "only rare rarity is supported");
+      if (trigger.type !== "random" || event.mode === "automatic") fail(`${path}.rarity`, "rare encounters require random-trigger decision events");
+      if (event.id === health?.careDecision || moneylender && Object.values(moneylender.events as DataObject).includes(event.id)) fail(`${path}.rarity`, "medical and collection interrupts cannot be rare encounters");
+    }
     if (Object.hasOwn(event, "maxOccurrences")) {
       const count = integer(event.maxOccurrences, `${path}.maxOccurrences`, 1, Number.MAX_SAFE_INTEGER);
       if (trigger.type !== "random" && count !== 1) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
@@ -790,7 +892,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (Object.hasOwn(choice, "when")) condition(choice.when, `${choicePath}.when`);
       const outcomes = array(choice.outcomes, `${choicePath}.outcomes`, 1, 64);
       unique(outcomes, `${choicePath}.outcomes`);
-      const outcomeWeights = outcomes.map((entry, k) => outcomeDefinition(entry, `${choicePath}.outcomes[${k}]`));
+      const outcomeWeights = outcomes.map((entry, k) => outcomeDefinition(entry, `${choicePath}.outcomes[${k}]`, event.rarity === "rare"));
       aggregate(outcomeWeights, `${choicePath}.outcomes`);
       opportunityDefinition(choice, choicePath, outcomes);
     });

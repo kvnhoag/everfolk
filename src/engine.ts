@@ -15,6 +15,8 @@ import { initialRelationships, introduceRelationship, addChildRelationship, appl
 
 import { matchesCondition } from "./conditions.ts";
 import { outcomeWeight } from "./outcomes.ts";
+import { randomEventWeights } from "./event-variety.ts";
+import { awardAccomplishment, legacyText } from "./legacy.ts";
 export { matchesCondition } from "./conditions.ts";
 
 const MAX_COMMANDS = 50_000;
@@ -73,6 +75,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     stats: { ...state.stats }, flags: { ...state.flags },
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
+    ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
     ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
@@ -95,11 +98,30 @@ export function createEngine(input: unknown): LifeEngine {
   const world: WorldPack = freeze(structuredClone(input));
   const fingerprint = contentFingerprint(world);
   const eventById = new Map(world.events.map(event => [event.id, event]));
+  const randomStoryById = new Map(world.events.filter(event => event.trigger.type === "random" && event.rarity !== "rare" &&
+    event.id !== world.health?.careDecision && !Object.values(world.economy?.moneylender?.events ?? {}).includes(event.id))
+    .map(event => [event.id, event]));
   const endingById = new Map(world.endings.map(ending => [ending.id, ending]));
   const activityById = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
+  const rareEvents = world.events.filter(event => event.rarity === "rare");
+  const rareEventIds = new Set(rareEvents.map(event => event.id));
+  const exclusiveGroups = new Map<string, LifeEvent[]>();
+  for (const event of world.events) if (event.exclusiveGroup) {
+    const members = exclusiveGroups.get(event.exclusiveGroup) ?? [];
+    members.push(event);
+    exclusiveGroups.set(event.exclusiveGroup, members);
+  }
+
+  function pickRandomEvent(events: readonly LifeEvent[], state: LifeState): LifeEvent {
+    // The opt-in branch leaves legacy draw counts and floating-point arithmetic
+    // untouched. Recency comes from the existing journal, so saves need no cache.
+    if (!world.eventPacing?.variety) return pick(events, event => event.trigger.type === "random" ? event.trigger.weight : 0, state);
+    const weights = randomEventWeights(events, randomStoryById, state, world.eventPacing.variety);
+    return pick(events, event => weights.get(event.id)!, state);
+  }
 
   function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string): void {
-    state.journal.push({ type, id, text, age: state.age, year: state.year });
+    state.journal.push({ type, id, text: legacyText(world, state, text), age: state.age, year: state.year });
   }
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
@@ -145,7 +167,7 @@ export function createEngine(input: unknown): LifeEngine {
     if (Object.hasOwn(state.flags, "parent")) state.flags.parent = state.character.children.length > 0;
   }
 
-  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string): void {
+  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string, provenance?: { sourceId: string; outcomeId: string }): void {
     for (const effect of effects) {
       const beforeLoanBalance = effect.type === "loan" ? state.economy?.loan?.balance ?? 0 : 0;
       if (applyEconomyEffect(world, state, effect)) {
@@ -160,6 +182,19 @@ export function createEngine(input: unknown): LifeEngine {
       const reason = characterEffectReason(world, state, effect, true);
       if (reason) throw new Error(`Character effect is unavailable: ${reason}`);
       switch (effect.type) {
+        case "accomplishment": {
+          if (!provenance) throw new Error("Accomplishments require an accepted decision or activity outcome.");
+          const record = awardAccomplishment(world, state, effect.achievement, provenance.sourceId, provenance.outcomeId);
+          if (record) journal(state, "activity", `earned-${record.achievementId}`, `Accomplishment: ${record.name}. ${record.description}`);
+          break;
+        }
+        case "mastery": {
+          if (effect.target === "stat") {
+            state.stats[effect.id] = world.stats[effect.id].max;
+            recordKnowledgePractice(world, state, effect);
+          } else state.character!.skills[effect.id] = world.character!.skills[effect.id].max;
+          break;
+        }
         case "stat": {
           const definition = world.stats[effect.stat];
           state.stats[effect.stat] = applyStatDelta(definition, state.stats[effect.stat], effect.delta);
@@ -235,6 +270,7 @@ export function createEngine(input: unknown): LifeEngine {
     // unrelated random story or a repeat after care was already chosen.
     if (world.health?.careDecision === event.id) return false;
     if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
+    if (event.exclusiveGroup && exclusiveGroups.get(event.exclusiveGroup)!.some(member => (state.eventCounts[member.id] ?? 0) > 0)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
     if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
@@ -253,11 +289,16 @@ export function createEngine(input: unknown): LifeEngine {
     journal(state, "event", event.id, `${event.title}: ${event.text}`);
   }
 
-  function offer(state: LifeState, event: LifeEvent): void {
+  function scheduledAlternative(first: LifeEvent, state: LifeState): LifeEvent {
+    if (!first.exclusiveGroup) return first;
+    return pick(exclusiveGroups.get(first.exclusiveGroup)!.filter(event => eligible(event, state)), () => 1, state);
+  }
+
+  function offer(state: LifeState, event: LifeEvent, advancePacing = true): void {
     recordEvent(state, event);
     state.pendingEventId = event.id;
     state.phase = "choice";
-    if (world.eventPacing) {
+    if (world.eventPacing && advancePacing) {
       const { minChoiceGapYears, maxChoiceGapYears } = world.eventPacing;
       let gap = minChoiceGapYears;
       if (maxChoiceGapYears > minChoiceGapYears) {
@@ -298,6 +339,29 @@ export function createEngine(input: unknown): LifeEngine {
     return true;
   }
 
+  function offerRareEncounter(state: LifeState): boolean {
+    const policy = world.eventPacing?.rareEvents;
+    if (!policy || policy.annualChance === 0) return false;
+    for (let i = state.journal.length - 1; i >= 0; i--) {
+      const entry = state.journal[i];
+      if (entry.type !== "event" || !rareEventIds.has(entry.id)) continue;
+      if (state.age - entry.age < policy.cooldownYears) return false;
+      break;
+    }
+    const candidates = rareEvents.filter(event => eligible(event, state));
+    if (candidates.length === 0) return false;
+    if (policy.annualChance < 1) {
+      const draw = nextRandom(state.rngState);
+      state.rngState = draw.state;
+      if (draw.value >= policy.annualChance) return false;
+    }
+    // Rare stories use their raw relative weights, so novelty penalties cannot
+    // promote them into common events. The ordinary decision deadline survives.
+    const event = pick(candidates, item => item.trigger.type === "random" ? item.trigger.weight : 0, state);
+    offer(state, event, false);
+    return true;
+  }
+
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
@@ -316,24 +380,29 @@ export function createEngine(input: unknown): LifeEngine {
       const background = world.events.filter(event => event.mode === "automatic" &&
         event.trigger.type === "random" && eligible(event, state));
       if (background.length > 0) {
-        automaticEvent(state, pick(background, event => event.trigger.type === "random" ? event.trigger.weight : 0, state));
+        automaticEvent(state, pickRandomEvent(background, state));
         if (offerMedicalDecision(state)) return;
         if (drainAutomatic()) return;
       }
     }
     if (offerLoanCollection(state)) return;
     const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
+    if (world.eventPacing?.rareEvents) {
+      const anchor = world.events.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      if (anchor) { offer(state, anchor); return; }
+      if (allowRandom && state.age > 0 && offerRareEncounter(state)) return;
+    }
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
     const scheduled = world.events.find(event => event.mode !== "automatic" &&
       event.trigger.type !== "random" && eligible(event, state) &&
       (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
-    if (scheduled) { offer(state, scheduled); return; }
+    if (scheduled) { offer(state, scheduledAlternative(scheduled, state)); return; }
     if (allowRandom && state.age > 0 && decisionDue) {
-      const decisions = world.events.filter(event => event.mode !== "automatic" &&
+      const decisions = world.events.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
         event.trigger.type === "random" && eligible(event, state));
       if (decisions.length > 0) {
-        offer(state, pick(decisions, event => event.trigger.type === "random" ? event.trigger.weight : 0, state));
+        offer(state, pickRandomEvent(decisions, state));
         return;
       }
     }
@@ -372,12 +441,12 @@ export function createEngine(input: unknown): LifeEngine {
       if (scheduled) {
         randomAvailable = false;
         if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
-        offer(state, scheduled);
+        offer(state, scheduledAlternative(scheduled, state));
         return;
       }
       if (randomAvailable) {
         randomAvailable = false;
-        const random = world.events.filter(event => event.trigger.type === "random" && eligible(event, state));
+        const random = world.events.filter(event => event.trigger.type === "random" && event.rarity !== "rare" && eligible(event, state));
         if (random.length > 0) {
           const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
           if (event.mode === "automatic") { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
@@ -444,6 +513,7 @@ export function createEngine(input: unknown): LifeEngine {
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
+      ...(world.legacy ? { accomplishments: [] } : {}),
     };
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
@@ -525,7 +595,7 @@ export function createEngine(input: unknown): LifeEngine {
     journal(next, "choice", choice.id, choice.text);
     const outcome = pick(choice.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
-    apply(next, outcome.effects, `${choice.text} — ${outcome.text}`);
+    apply(next, outcome.effects, `${choice.text} — ${outcome.text}`, { sourceId: event.id, outcomeId: outcome.id });
     checkEndings(next);
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
@@ -579,7 +649,7 @@ export function createEngine(input: unknown): LifeEngine {
     journal(next, "activity", activity.id, activity.text);
     const outcome = pick(activity.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
-    apply(next, outcome.effects, `${activity.text} — ${outcome.text}`);
+    apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id });
     checkEndings(next);
     resolveEvents(next, false);
   }

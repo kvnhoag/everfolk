@@ -26,6 +26,8 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
   }));
   const events = new Map(world.events.map(event => [event.id, event]));
   const activities = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
+  const jobs = new Set(world.character?.jobs.map(job => job.id) ?? []);
+  let lastWork: { id: string; age: number } | undefined;
   // Outcome IDs are unique within a world. Resolving by ID also handles several
   // decisions/actions in one year without mistaking introductions for actions.
   const outcomes = new Map<string, { title: string; kind: "event" | "activity"; sourceIds: readonly string[] }>();
@@ -61,6 +63,14 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
       const owner = outcomes.get(entry.id);
       group.events.push({ key, kind: owner?.kind ?? "event", title: owner?.title, text: entry.text, sourceIds: owner?.sourceIds ?? [] });
     } else if (entry.type === "activity") {
+      // Regular work is already represented in the yearly budget. Record its
+      // first year, a changed job or a return after a gap, rather than repeating
+      // the same sentence every year. The full chronicle retains every entry.
+      if (jobs.has(entry.id)) {
+        const changed = !lastWork || lastWork.id !== entry.id || entry.age > lastWork.age + 1;
+        lastWork = { id: entry.id, age: entry.age };
+        if (!changed) return;
+      }
       // Known activity IDs are action labels followed by an outcome. Other
       // activity records are standalone facts: wages, meeting people, a name.
       if (!activities.has(entry.id)) group.events.push({ key, kind: "activity", text: entry.text, sourceIds: [] });

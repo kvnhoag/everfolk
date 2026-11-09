@@ -33,6 +33,10 @@ export function getChoiceImpact(choice: Choice, life: LifeState, world: WorldPac
     const stats = { ...life.stats };
     for (const effect of outcome.effects) {
       if (effect.type === "end") { canEndLife = true; break; }
+      if (effect.type === "mastery" && effect.target === "stat") {
+        stats[effect.id] = world.stats[effect.id].max;
+        continue;
+      }
       if (effect.type !== "stat") continue;
       const definition = world.stats[effect.stat];
       stats[effect.stat] = applyStatDelta(definition, stats[effect.stat], effect.delta);

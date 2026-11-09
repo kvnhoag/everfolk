@@ -20,11 +20,12 @@ const expectedPaths = {
   astrology: ["Numbers & sky", 2, { astronomy: 10, reckoning: 10 }],
   seamanship: ["Practical service", 0, {}],
   warfare: ["Practical service", 1, { craft: 10 }],
+  music: ["Performance", 0, {}],
 } as const;
 
-test("Alexandria authors twelve connected skill nodes with real training routes and no cycles", () => {
+test("Alexandria authors thirteen skill nodes with real training routes and no cycles", () => {
   const skills = createEngine(pack).world.character!.skills;
-  assert.equal(pack.version, "0.21.0");
+  assert.equal(pack.version, "0.25.0");
   assert.deepEqual(Object.keys(skills).sort(), Object.keys(expectedPaths).sort());
   const visited = new Set<string>();
   function visit(id: string, path = new Set<string>()) {
@@ -46,7 +47,7 @@ test("Alexandria authors twelve connected skill nodes with real training routes 
     assert.ok(action.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "skill" && effect.skill === id && effect.delta > 0)), id);
     visit(id);
   }
-  assert.equal(visited.size, 12);
+  assert.equal(visited.size, 13);
 });
 
 test("skill paths add no birth draws and preserve the existing life content and career odds", () => {

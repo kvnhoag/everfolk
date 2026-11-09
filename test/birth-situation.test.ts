@@ -79,6 +79,7 @@ test("time advances from birth and the first actual decision occurs later in chi
   safe.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   safe.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   const engine = createEngine(safe);
+  const openings = new Set<string>();
   for (let index = 0; index < 24; index++) {
     let life = engine.start(`later-childhood-choice-${index}`);
     const firstYear = engine.advance(life);
@@ -89,10 +90,13 @@ test("time advances from birth and the first actual decision occurs later in chi
     while (life.phase === "ready" && life.age < 8) life = engine.advance(life);
     assert.equal(life.phase, "choice");
     assert.equal(life.age, 3);
-    assert.equal(life.pendingEventId, "a-child-in-the-courtyard");
+    const event = engine.world.events.find(event => event.id === life.pendingEventId)!;
+    assert.equal(event.exclusiveGroup, "early-care");
+    openings.add(event.id);
     assert.equal(life.commands.some(command => command.type === "choose"), false);
     assert.deepEqual(engine.load(engine.save(life)), life);
   }
+  assert.ok(openings.size >= 3, "The first decision should have several reachable scenarios rather than the same courtyard every run.");
 });
 
 test("complete lives after an automatic birth retain exact saves and no hidden birth command", () => {

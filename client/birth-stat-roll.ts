@@ -52,11 +52,14 @@ function decimalPlaces(value: number): number {
   return Math.max(0, (coefficient.split(".")[1]?.length ?? 0) - Number(exponent));
 }
 
-/** Reserve the same geometry throughout the reveal using public bounds only. */
+/** Keep the result's integer width throughout the spin, including one reel for zero. */
 export function getBirthReelLayout(stat: BirthRollStat): BirthReelLayout {
-  const largest = stat.range ? Math.max(Math.abs(stat.range.min), Math.abs(stat.range.max)) : 999;
-  const places = Number.isFinite(largest) && largest >= 1 ? Math.floor(Math.log10(largest)) + 1 : 1;
-  const integerPlaces = Math.max(2, Math.min(16, places));
+  const magnitude = Math.abs(stat.value);
+  const integer = String(Math.trunc(magnitude));
+  const places = Number.isFinite(magnitude) && magnitude >= 1
+    ? integer.includes("e") ? Math.floor(Math.log10(magnitude)) + 1 : integer.length
+    : 1;
+  const integerPlaces = Math.max(1, Math.min(16, places));
   const fractionPlaces = stat.range
     ? Math.min(16 - integerPlaces, Math.max(decimalPlaces(stat.range.min), decimalPlaces(stat.range.max)))
     : 0;
@@ -78,8 +81,8 @@ function reelIdentity(stat: BirthRollStat, seed: string, place: number) {
   return { key, direction, sign: direction === "up" ? 1 : -1, start: cosmeticHash(`${key}:start`) % 10 };
 }
 
-/** Cosmetic reels have no knowledge of the chosen final value. Public range
- * bounds only reserve room; fixed starts and zero still get moving digits. */
+/** The result controls reel count; each place's cosmetic motion is seeded
+ * independently. Fixed starts and zero still get moving digits. */
 export function getCosmeticBirthDigits(stat: BirthRollStat, seed: string, frame: number): BirthRollDigit[] {
   const count = getBirthReelLayout(stat).digitCount;
   const currentFrame = Number.isFinite(frame) ? Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, Math.floor(frame))) : 0;
@@ -97,7 +100,7 @@ export function getBirthRollTiming(statIndex: number, statCount: number): { star
   const count = Math.max(1, Number.isFinite(statCount) ? Math.floor(statCount) : 1);
   const index = Math.max(0, Math.min(count - 1, Number.isFinite(statIndex) ? Math.floor(statIndex) : 0));
   return {
-    startsAt: BIRTH_ORIGIN_REVEAL_MS + index * Math.min(180, 2_000 / count),
+    startsAt: 0,
     settlesAt: 900 + (index + 1) * (2_300 / count),
   };
 }

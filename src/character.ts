@@ -32,6 +32,10 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "mastery") {
+    if (effect.target === "skill" && (!world.character || !state.character)) return "This world has no character skills.";
+    return;
+  }
   if (effect.type === "condition" || effect.type === "care") {
     if (!world.health || !state.health) return "This world has no health conditions.";
     if (effect.type === "care" && !state.health.conditions.length) return "There is no illness or injury requiring care.";

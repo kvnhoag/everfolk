@@ -1,0 +1,56 @@
+/* Final player-facing theme layer. Body copy stays readable at normal sizes. */
+:root{--ink:#263b43;--muted:#727562;--line:#cdbb95;--accent:#a85e44;--green:#41637b;--paper:#f4e7c9;--serif:"Courier New",Courier,monospace;--pixel-shadow:#886447;--pixel-outline:#baa47a;color:#263b43;background:#f4e7c9}
+body{background:#f4e7c9}
+button,input,select,textarea{border-radius:0}
+button{transition:background-color .12s,border-color .12s,color .12s;box-shadow:none}
+button:focus-visible,a:focus-visible{outline:2px solid #41637b;outline-offset:3px}
+.pixel-icon{display:inline-block;flex-shrink:0;vertical-align:middle;overflow:visible}
+.pixel-portrait{display:block;image-rendering:pixelated;image-rendering:crisp-edges;object-fit:contain;filter:none}
+.site-header{border-bottom:2px solid #cdbb95}
+.brand{font-weight:700;letter-spacing:-.8px}
+.brand-mark{border:2px solid #886447;border-radius:0;background:#edcf91;box-shadow:3px 3px 0 #d6b778}
+.main-menu h1{font-weight:700;line-height:.97;font-size:clamp(44px,4.8vw,70px);letter-spacing:-3px;text-shadow:3px 3px 0 #d6b778}
+.main-menu-world{font-weight:700;font-size:23px;letter-spacing:-.7px}
+.chapter-heading h1,.character-panel h2,.paper-scene-copy h2,.dialog-content>h2,.chronicle-heading h2,.year-review-heading h2,.journal-year-heading h3{font-weight:700;letter-spacing:-1px}
+.chapter-heading h1{font-size:clamp(35px,4.2vw,53px)}
+.character-panel h2{font-size:29px}
+.character-origin{font-family:"DM Sans","Segoe UI",sans-serif;font-size:12px;line-height:1.6;font-style:normal}
+.portrait-frame{height:128px;width:100px}
+.portrait{width:96px;height:120px}
+.portrait-label{font-family:"Courier New",monospace;font-weight:700;background:#f4e7c9;letter-spacing:1px}
+.character-panel{border-color:#cdbb95}
+.primary-button,.secondary-button,.choice-button,.activity-button,.character-open,.birth-roll-button,.birth-roll-start,.pause-resume,.main-menu-actions>button{border-radius:0;border-width:2px;box-shadow:3px 3px 0 #8864472e}
+.primary-button{background:#41637b;border-color:#263b43;color:#fff2d1}
+.primary-button:hover{background:#293c58;border-color:#263b43;color:#fff2d1}
+.secondary-button{background:#f5e6bf;border-color:#baa47a;color:#263b43}
+.secondary-button:hover{background:#edcf91;border-color:#886447}
+.stat-track,.stat-track>span,.stat-bar,.stat-bar>span{border-radius:0}
+.small-dot,.footer-dot,.save-indicator-dot,.motion-indicator{border-radius:0}
+.section-number{border:1px solid #baa47a;background:#edcf91;font-weight:700}
+.scene-image.paper-scene{border:2px solid #baa47a;border-radius:0;background:#f5e6bf}
+.scene-image.paper-scene:before{display:none}
+.scene-image.paper-scene .paper-scene-copy h2{font-family:var(--serif);font-weight:700;font-size:27px;line-height:1.16;color:#263b43}
+.scene-image.paper-scene .paper-scene-copy p{color:#4c5c51}
+.birth-record,.event-card,.year-event,.year-event-card,.year-review,.character-card,.world-library>article,.wealth-net-worth,.wealth-breakdown>div,.wealth-budget,.wealth-action,.skill-tree-panel,.skill-tree-node,.career-list>article,.legacy-card,.route-progress,.skill-context-panel{border-radius:0;border-color:#cdbb95;background-color:#f7ecd4}
+.birth-record{border-width:2px;box-shadow:4px 4px 0 #88644712}
+.pause-card{border:2px solid #886447;border-radius:0;background:#f7ecd4;box-shadow:4px 4px 0 #88644725}
+.pause-actions>button{border-radius:0;border-width:2px;box-shadow:3px 3px 0 #88644725}
+.pause-content h1,.pause-brand{font-weight:700}
+.pause-continue{background:#41637b;color:#fff2d1}
+.pause-continue:hover{background:#293c58}
+.pause-art img{image-rendering:pixelated;image-rendering:crisp-edges}
+.event-card h3,.year-event h3,.year-review h2{font-family:var(--serif);font-weight:700}
+dialog,.dialog,.sources-dialog,.decision-dialog,.birth-roll-popover,.pause-dialog,.restart-dialog{border-radius:0;border:2px solid #886447;background:#f7ecd4;box-shadow:6px 6px 0 #263b4335}
+dialog::backdrop{background:#263b4370}
+.birth-roll-grid,.birth-roll-stat,.birth-roll-number,.birth-roll-origin,.digit-reel,.digit-reel-window{border-radius:0}
+.birth-roll-number,.birth-roll-heading h2{font-family:"Courier New",Courier,monospace;font-weight:700}
+.impact-stat,.world-route-tags>span,.requirement-chip,.skill-tag{border-radius:0}
+.nav-link.active:after{height:3px;background:#41637b}
+.text-button,.another-life{color:#41637b}
+.text-button:hover{color:#a85e44}
+.choice-locked,.activity-locked{border-style:dashed}
+.site-footer{border-color:#cdbb95}
+.memorial-scene>img,.life-has-ended .portrait{filter:saturate(.65)}
+img[src^="/assets/pixel/"]{image-rendering:pixelated;image-rendering:crisp-edges}
+@media(max-width:760px){.main-menu h1{font-size:clamp(55px,13.4vw,80px);letter-spacing:-3px}.main-menu-world{font-size:21px}.character-panel h2{font-size:25px}.scene-image.paper-scene .paper-scene-copy h2{font-size:25px}.portrait-frame{height:103px;width:80px}.portrait{width:80px;height:100px}.chapter-heading h1{font-size:35px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}.pixel-scene [data-loop]{animation:none!important}}

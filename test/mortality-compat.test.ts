@@ -7,10 +7,10 @@ import { selectAutomaticChoice } from "../client/yearly-focus.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import type { LifeState } from "../src/types.ts";
 import previous from "../worlds/alexandria-0.19.0.json" with { type: "json" };
-import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import mortalityRelease from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 
-test("childhood through age seventeen keeps the exact 0.19 health behavior and random sequence", () => {
-  const before = createEngine(previous), after = createEngine(current);
+test("the 0.20 mortality release retained exact 0.19 childhood behavior and random sequence", () => {
+  const before = createEngine(previous), after = createEngine(mortalityRelease);
   assert.equal(after.world.health!.mortalityCalibration!.minAge, 18);
   const comparable = (life: LifeState) => {
     const { worldVersion: _version, worldFingerprint: _fingerprint, ...state } = life;

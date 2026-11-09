@@ -7,31 +7,20 @@ import "./paper-motion.css";
 
 const MOTION_KEY = "historical-lives:scene-motion:v1";
 
-function Leaf({ className, x, y }: { className: string; x: number; y: number }) {
-  return <g transform={`translate(${x} ${y})`}><path className={className} data-loop="leaf" d="M0 0C-23-18-14-37 2-43 19-26 19-10 0 0Z" fill="#7e916a" /><path d="m0 0 2-34" fill="none" stroke="#b7c3a2" strokeWidth="1.3" /></g>;
-}
-
-/** Independently moving paper props accompany the event without articulating raster people. */
-function PaperAtmosphere({ motion, front = false }: { motion: MotionId; front?: boolean }) {
+/** Discrete pixel props add atmosphere without distorting the scene artwork. */
+function PixelAtmosphere({ motion, front = false }: { motion: MotionId; front?: boolean }) {
   const water = motion === "sail" || motion === "unrest";
-  return <svg className={`paper-atmosphere ${front ? "atmosphere-front" : "atmosphere-back"}`} viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+  return <svg className={`paper-atmosphere pixel-atmosphere ${front ? "atmosphere-front" : "atmosphere-back"}`} viewBox="0 0 64 48" shapeRendering="crispEdges" aria-hidden="true" focusable="false">
     {!front && <>
-      {(["cradle", "gather", "reflect", "play"] as MotionId[]).includes(motion) && <>
-        <Leaf className="paper-leaf leaf-one" x={36} y={149} /><Leaf className="paper-leaf leaf-two" x={553} y={203} />
-        <circle className="paper-mote mote-one" data-loop="mote" cx="113" cy="98" r="3" fill="#bdad72" /><circle className="paper-mote mote-two" data-loop="mote" cx="499" cy="89" r="2" fill="#9ba67e" />
-      </>}
-      {(motion === "sail" || motion === "city") && <g className="paper-birds" data-loop="birds" fill="none" stroke="#76877b" strokeWidth="2.5" strokeLinecap="round"><path d="m86 95 10-4 10 4m35 24 8-3 8 3" /></g>}
-      {motion === "rest" && <><path className="paper-shade" data-loop="shade" d="m81 52 53-15 132 253-38 12Z" fill="#d8dfd1" /><path className="paper-shade shade-two" data-loop="shade" d="m143 34 31-8 116 249-22 9Z" fill="#d8dfd1" /></>}
-      {motion === "unrest" && <g fill="#b1b2a5" opacity=".28"><path className="paper-haze haze-one" data-loop="haze" d="M95 92c26-20 40-5 58-13 23-13 30 5 52 1 16-3 30 10 14 17-45 3-83 5-124-5Z" /><path className="paper-haze haze-two" data-loop="haze" d="M324 62c28-14 35-3 53-8 25-11 32 4 54 1 16-2 30 8 14 13-45 3-81 2-121-6Z" /></g>}
-      {motion === "city" && <g className="paper-city-banner" data-loop="banner"><path d="M476 78h40v69l-20-12-20 12Z" fill="#b87e5c" /><path d="M471 78h49" stroke="#927b59" strokeWidth="3" strokeLinecap="round" /></g>}
+      {motion === "write" && <g className="pixel-twinkle" data-loop="stars" fill="#fff2d1"><rect x="46" y="10" width="1" height="1"/><rect x="51" y="14" width="1" height="1"/></g>}
+      {(motion === "sail" || motion === "city") && <g className="pixel-birds" data-loop="birds" fill="#41637b"><rect x="18" y="9" width="2" height="1"/><rect x="20" y="10" width="2" height="1"/><rect x="22" y="9" width="2" height="1"/></g>}
+      {motion === "unrest" && <g className="pixel-smoke" data-loop="smoke" fill="#adb4a6"><rect x="32" y="20" width="3" height="2"/><rect x="34" y="17" width="4" height="2"/></g>}
     </>}
     {front && <>
-      {water && <g fill="none" strokeLinecap="round"><path className="paper-wave wave-back" data-loop="wave" d="M-50 351q35-13 70 0t70 0t70 0t70 0t70 0t70 0t70 0t70 0t70 0t70 0" stroke="#a0b6af" strokeWidth="8" /><path className="paper-wave wave-front" data-loop="wave" d="M-50 371q28-11 56 0t56 0t56 0t56 0t56 0t56 0t56 0t56 0t56 0t56 0t56 0t56 0" stroke="#d4dfd4" strokeWidth="6" /></g>}
-      {motion === "play" && <g className="paper-play-ball" data-loop="ball"><circle cx="455" cy="353" r="9" fill="#b9954c" /><path d="m450 346 6 15m-9-10 16 3" stroke="#d0b36f" strokeWidth="1.2" fill="none" /></g>}
-      {motion === "write" && <g className="paper-writing" transform="translate(75 325)"><path d="m-25-14 66-5 5 39-66 5Z" fill="#d2b681" stroke="#bda06c" strokeWidth="1" /><path className="paper-writing-line" data-loop="writing" d="M-12 0q8-8 14-1t14-3m-27 14q11-6 21-2" fill="none" stroke="#827353" strokeWidth="2" strokeLinecap="round" /><path className="paper-stylus" data-loop="stylus" d="m18-20 17-25" stroke="#795d3f" strokeWidth="4" strokeLinecap="round" /></g>}
-      {motion === "work" && <g fill="#c3a06b"><path className="paper-shaving shaving-one" data-loop="shaving" d="m94 333 14-5 5 3-14 5Z" /><path className="paper-shaving shaving-two" data-loop="shaving" d="m120 348 10-4 5 3-11 5Z" /><path className="paper-shaving shaving-three" data-loop="shaving" d="m76 355 11-4 4 3-10 4Z" /></g>}
-      {(motion === "gather" || motion === "reflect") && <circle className="paper-warm-light" data-loop="light" cx="422" cy="339" r="15" fill="#d6bb72" opacity=".16" />}
-      {motion === "rest" && <path className="paper-rest-line" data-loop="rest-line" d="M73 345q23-9 47 0" fill="none" stroke="#bdcbb9" strokeWidth="3" strokeLinecap="round" />}
+      {water && <g className="pixel-wave" data-loop="wave" fill="#b8d2c4"><rect x="5" y="44" width="7" height="1"/><rect x="22" y="46" width="9" height="1"/><rect x="46" y="43" width="10" height="1"/></g>}
+      {motion === "play" && <g className="pixel-play-spark" data-loop="play" fill="#edcf91"><rect x="31" y="35" width="1" height="1"/><rect x="34" y="37" width="1" height="1"/></g>}
+      {motion === "work" && <g className="pixel-work-spark" data-loop="work" fill="#fff2d1"><rect x="30" y="25" width="1" height="2"/><rect x="33" y="27" width="2" height="1"/></g>}
+      {(["cradle", "gather", "reflect", "rest"] as MotionId[]).includes(motion) && <g className="pixel-lamp-flame" data-loop="light" fill="#e4b651"><rect x="55" y="28" width="1" height="2"/><rect x="54" y="29" width="2" height="1"/></g>}
     </>}
   </svg>;
 }
@@ -75,10 +64,10 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
     try { window.localStorage.setItem(MOTION_KEY, next ? "on" : "off"); } catch { /* The control still works for this visit. */ }
   };
 
-  return <figure ref={figure} className={`scene-image paper-scene paper-motion-scene ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-motion={scene.motion} data-motion-state={motionState}>
+  return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-motion={scene.motion} data-motion-state={motionState}>
     <div className="paper-scene-copy">{scene.eventId !== "the-first-household" && <span className="paper-scene-kicker">{sceneContextLabel(scene)}</span>}<h2>{scene.title}</h2>{!dashboard && scene.eventId !== "the-first-household" && <p className="paper-event-caption">{scene.caption}</p>}</div>
     <div className={`paper-illustration-wrap motion-${scene.motion}`} key={`${scene.scene}-${scene.motion}`}>
-      <PaperAtmosphere motion={scene.motion} /><div className="paper-character-layer" data-loop="character"><img src={`/assets/paper/${scene.scene === "rest" && life.age < 18 ? "rest-child" : scene.scene}.webp`} alt={scene.alt} fetchPriority="high" /></div><PaperAtmosphere motion={scene.motion} front />
+      <PixelAtmosphere motion={scene.motion} /><div className="paper-character-layer"><img src={`/assets/pixel/scenes/${scene.scene === "rest" && life.age < 18 ? "rest-child" : scene.scene}.svg`} alt={scene.alt} fetchPriority="high" /></div><PixelAtmosphere motion={scene.motion} front />
     </div>
     <div className="paper-scene-bottom">
       {!dashboard && contexts.length > 1 && <div className="scene-context-list" role="group" aria-label="Scenes from this year">{contexts.map(context => <button type="button" key={context.key} className={context.key === scene.key ? "is-active" : ""} aria-pressed={context.key === scene.key} aria-label={`Show scene: ${context.title}`} title={context.title} onClick={() => setSelectedKey(context.key)}><span>{sceneContextLabel(context)}</span><strong>{context.title}</strong></button>)}</div>}

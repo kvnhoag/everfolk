@@ -26,8 +26,15 @@
 .main-menu-links>button{font-size:10px;line-height:1.7;background:transparent;color:#72806a;padding:1px 0;border-bottom:1px solid transparent;border-radius:0}
 .main-menu-links>button:hover{color:#435b3e;border-bottom-color:#aab89b}
 .main-menu button:focus-visible,.main-menu a:focus-visible{outline:2px solid #8e6f43;outline-offset:4px}
-.main-menu-landscape{margin:0;position:relative;min-width:0;padding:9px;background:#f8f4e9;border:1px solid #d5cdb7;box-shadow:0 8px 25px #384d3210;transform:rotate(-1deg)}
-.main-menu-landscape:before{content:"";position:absolute;inset:5px -7px -7px 6px;border:1px solid #d5cdb7;background:#e7e0cd;z-index:-1;transform:rotate(2deg)}
+.main-menu-world-stack{position:relative;isolation:isolate;min-width:0;padding:54px 27px 15px}
+.main-menu-world-preview{position:absolute;inset:15px 28px 30px;display:flex;flex-direction:column;padding:9px;background:#f8f4e9;border:1px solid #d5cdb7;box-shadow:0 8px 25px #384d3214;pointer-events:none}
+.main-menu-world-preview img{display:block;width:100%;min-height:0;flex:1;object-fit:cover}
+.main-menu-world-preview>span{padding:12px 5px 4px;font-size:9px;line-height:1.5;color:#7d7e68}
+.main-menu-world-preview-medieval{z-index:0;transform:translate(-18px,-3px) rotate(-9deg)}
+.main-menu-world-preview-medieval img{object-position:30% 50%}
+.main-menu-world-preview-ottoman{z-index:1;transform:translate(19px,2px) rotate(7deg)}
+.main-menu-world-preview-ottoman img{object-position:70% 50%}
+.main-menu-landscape{margin:0;position:relative;z-index:2;min-width:0;padding:9px;background:#f8f4e9;border:1px solid #d5cdb7;box-shadow:0 8px 25px #384d3220;transform:rotate(-1deg)}
 .main-menu-image{height:clamp(315px,34vw,450px);overflow:hidden;background:#d6d8bd}
 .main-menu-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:52% 50%}
 .main-menu-landscape figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 5px 4px;font-size:9px;line-height:1.5;letter-spacing:.2px;color:#7d7e68}
@@ -35,6 +42,25 @@
 .main-menu-footer{border-top:1px solid #d1d4c5;padding-top:17px;display:flex;justify-content:space-between;gap:20px;color:#8a8d7c;font-size:9px;line-height:1.6}
 @media(min-width:1500px){.main-menu-layout{padding-top:70px;padding-bottom:68px;gap:85px}.main-menu-image{height:460px}}
 @media(max-width:900px){.main-menu{padding:24px 32px}.main-menu-layout{gap:36px;grid-template-columns:minmax(280px,.9fr) minmax(0,1fr)}.main-menu h1{font-size:clamp(68px,8vw,85px)}.main-menu-image{height:360px}.main-menu-save{grid-template-columns:1fr}.main-menu-save>span:last-child{margin-top:2px}}
-@media(max-width:700px){.main-menu{padding:21px 24px 20px;align-items:flex-start}.main-menu-topline{padding-bottom:16px;font-size:8px;letter-spacing:1.2px;gap:9px}.main-menu-topline>a{font-size:9px}.main-menu-layout{grid-template-columns:1fr;gap:28px;padding:31px 0 26px}.main-menu-content{display:flex;flex-direction:column;align-items:stretch}.main-menu-kicker{font-size:10px;margin-bottom:16px}.main-menu h1{font-size:83px;letter-spacing:-2.8px}.main-menu-world{font-size:25px;margin:20px 0 24px}.main-menu-actions{max-width:none}.main-menu-save{grid-template-columns:minmax(0,1fr) auto;margin-bottom:20px}.main-menu-save>span:last-child{margin-top:0}.main-menu-links{max-width:none;gap:9px 20px;margin-top:20px}.main-menu-landscape{order:1;transform:none}.main-menu-landscape:before{inset:4px -4px -4px 4px;transform:rotate(.5deg)}.main-menu-image{height:190px}.main-menu-landscape figcaption{font-size:9px;padding-top:9px}.main-menu-footer{font-size:8px;padding-top:13px;gap:12px}}
+@media(max-width:700px){.main-menu{padding:21px 24px 20px;align-items:flex-start}.main-menu-topline{padding-bottom:16px;font-size:8px;letter-spacing:1.2px;gap:9px}.main-menu-topline>a{font-size:9px}.main-menu-layout{grid-template-columns:1fr;gap:28px;padding:31px 0 26px}.main-menu-content{display:flex;flex-direction:column;align-items:stretch}.main-menu-kicker{font-size:10px;margin-bottom:16px}.main-menu h1{font-size:83px;letter-spacing:-2.8px}.main-menu-world{font-size:25px;margin:20px 0 24px}.main-menu-actions{max-width:none}.main-menu-save{grid-template-columns:minmax(0,1fr) auto;margin-bottom:20px}.main-menu-save>span:last-child{margin-top:0}.main-menu-links{max-width:none;gap:9px 20px;margin-top:20px}.main-menu-world-stack{padding:39px 17px 8px}.main-menu-world-preview{inset:12px 19px 19px;padding:6px}.main-menu-world-preview-medieval{transform:translate(-9px,-2px) rotate(-7deg)}.main-menu-world-preview-ottoman{transform:translate(10px,1px) rotate(6deg)}.main-menu-landscape{transform:none}.main-menu-image{height:190px}.main-menu-landscape figcaption{font-size:9px;padding-top:9px}.main-menu-footer{font-size:8px;padding-top:13px;gap:12px}}
 @media(max-width:370px){.main-menu{padding-left:19px;padding-right:19px}.main-menu-topline>a{font-size:8px}.main-menu h1{font-size:74px}.main-menu-save{grid-template-columns:1fr}.main-menu-save>span:last-child{margin-top:2px}.main-menu-links{gap:8px 14px}.main-menu-footer{flex-direction:column;gap:2px}}
 @media(prefers-reduced-motion:reduce){.main-menu button{transition:none}}
+
+/* Integer-offset card stack keeps the native pixel grid free of rotated edges. */
+.main-menu{background:#f4e7c9;color:#263b43}
+.main-menu-mark{border:2px solid #886447;border-radius:0;background:#edcf91;filter:none;box-shadow:2px 2px 0 #d6b778}
+.main-menu-world-preview,.main-menu-landscape{border:2px solid #886447;background:#f5e6bf;box-shadow:4px 4px 0 #263b4330;padding:8px}
+.main-menu-world-preview-medieval{transform:translate(-18px,-14px)}
+.main-menu-world-preview-ottoman{transform:translate(18px,4px)}
+.main-menu-landscape{transform:none}
+.main-menu-world-preview img,.main-menu-image img{image-rendering:pixelated;image-rendering:crisp-edges}
+.main-menu-image{background:#b8d2c4;border:1px solid #baa47a}
+.main-menu-image img{object-position:center}
+.main-menu-actions>button{border-radius:0;border-width:2px;box-shadow:3px 3px 0 #88644740}
+.main-menu-primary{background:#41637b;border-color:#263b43;color:#fff2d1}
+.main-menu-primary:hover{background:#293c58;border-color:#263b43}
+.main-menu-secondary{background:#f5e6bf;border-color:#baa47a}
+.main-menu-topline,.main-menu-footer{border-color:#c5aa79}
+.main-menu-world,.main-menu h1{color:#263b43}
+.main-menu h1>span{color:#ba704c}
+@media(max-width:700px){.main-menu-world-preview-medieval{transform:translate(-9px,-8px)}.main-menu-world-preview-ottoman{transform:translate(9px,3px)}.main-menu-world-preview,.main-menu-landscape{padding:5px}.main-menu-world-stack{padding-top:30px}}

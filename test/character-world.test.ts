@@ -5,6 +5,7 @@ import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import beforeNaming from "../worlds/alexandria-0.5.0.json" with { type: "json" };
 import afterNaming from "../worlds/alexandria-0.5.1.json" with { type: "json" };
+import nightRiskRelease from "../worlds/alexandria-0.23.0.json" with { type: "json" };
 
 test("specific cause names preserve the previous life mechanics and mortality outcomes", () => {
   const older = createEngine(beforeNaming), current = createEngine(afterNaming);
@@ -20,9 +21,15 @@ test("specific cause names preserve the previous life mechanics and mortality ou
 });
 
 test("the authored night cargo risk can cause its exact death and replays that decision", () => {
-  const world = structuredClone(pack) as WorldPack;
+  assert.deepEqual(pack.character.activities.find(activity => activity.id === "take-night-cargo-work"),
+    nightRiskRelease.character.activities.find(activity => activity.id === "take-night-cargo-work"),
+    "The latest pack retains the authored cargo-risk action and its exact fatal branch.");
+  // Keep this historical seed check on its retained release. New opening story
+  // draws legitimately change RNG paths without changing the cargo-risk action.
+  const world = structuredClone(nightRiskRelease) as WorldPack;
   // Isolate the unchanged authored fatal branch from additional adult illness draws.
   delete world.health!.mortalityCalibration;
+  delete world.eventPacing!.rareEvents;
   const engine = createEngine(world);
   let state = engine.start("coherent-night-cargo-240");
   for (let commands = 0; commands < 160 && state.phase !== "ended" && (state.age < 25 || state.phase === "choice"); commands++) {
@@ -43,7 +50,7 @@ test("the authored night cargo risk can cause its exact death and replays that d
 test("every dangerous narrative decision offers a safe alternative and names its fatal cause", () => {
   const causeIds = new Set(pack.character.deathCauses.filter(cause => cause.choiceOnly).map(cause => cause.id));
   const dangerous = pack.events.filter(event => event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end" && "deathCause" in effect))));
-  assert.equal(dangerous.length, 6);
+  assert.equal(dangerous.length, 8);
   for (const event of dangerous) {
     assert.ok(event.choices.some(choice => choice.outcomes.every(outcome => outcome.effects.every(effect => effect.type !== "end"))), event.id);
     for (const choice of event.choices) for (const outcome of choice.outcomes) for (const effect of outcome.effects) {

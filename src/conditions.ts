@@ -14,6 +14,8 @@ function compare(left: number, op: Comparison, right: number): boolean {
 export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
   if (!condition) return true;
   switch (condition.type) {
+    case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
+      state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);
     case "debt": return state.economy !== undefined && compare(state.economy.debt, condition.op, condition.value);
     case "loan": {
@@ -36,6 +38,10 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
       (condition.partner === undefined || state.character.partnerId === condition.partner);
     case "known-partner": return state.character?.knownPartnerIds?.includes(condition.partner) === true || state.character?.partnerId === condition.partner;
     case "children": return state.character !== undefined && compare(state.character.children.length, condition.op, condition.value);
+    case "child-age": return state.character?.children.some(child => {
+      const age = state.age - child.birthAge;
+      return age >= condition.min && age <= condition.max;
+    }) === true;
     case "has-condition": return Boolean(state.health?.conditions.some(item => condition.condition === undefined || item.id === condition.condition));
     case "closeness": {
       const tie = state.character?.relationships?.partners[condition.partner ?? state.character.partnerId ?? ""];

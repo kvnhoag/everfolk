@@ -22,6 +22,10 @@ import specificCraftAlexandria from "../worlds/alexandria-0.17.0.json" with { ty
 import strictProgressionAlexandria from "../worlds/alexandria-0.18.0.json" with { type: "json" };
 import careerOpeningsAlexandria from "../worlds/alexandria-0.19.0.json" with { type: "json" };
 import adultMortalityAlexandria from "../worlds/alexandria-0.20.0.json" with { type: "json" };
+import moneylenderAlexandria from "../worlds/alexandria-0.21.0.json" with { type: "json" };
+import eventVarietyAlexandria from "../worlds/alexandria-0.22.0.json" with { type: "json" };
+import rareEncountersAlexandria from "../worlds/alexandria-0.23.0.json" with { type: "json" };
+import masteryOpeningsAlexandria from "../worlds/alexandria-0.24.0.json" with { type: "json" };
 import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
 import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
 
@@ -269,7 +273,7 @@ export function getPreviousWorld(): PublishedWorld {
 
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria]) {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria]) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -278,7 +282,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

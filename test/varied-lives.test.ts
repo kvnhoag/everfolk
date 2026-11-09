@@ -60,7 +60,7 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
 
 test("new lives draw broadly from 32 names and eight distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.21.0");
+  assert.equal(pack.version, "0.25.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 8);
@@ -165,14 +165,17 @@ test("every household opportunity follows the core trade decisions without a lon
   isolateBackground(world);
   const engine = createEngine(world);
   const { origins } = sampleBirths(engine);
+  const tradeOffers = new Set(engine.world.events.filter(event => event.exclusiveGroup === "early-work").map(event => event.id));
+  assert.equal(tradeOffers.size, 4);
   for (const born of origins.values()) {
     const opportunity = backgroundEvents.find(event => event.mode !== "automatic" && matchesCondition(event.when, born))!;
     assert.ok(opportunity);
     let life = settle(engine, born);
-    for (let commands = 0; commands < 80 && life.pendingEventId !== "a-place-on-the-manifest"; commands++) {
+    for (let commands = 0; commands < 80 && !tradeOffers.has(life.pendingEventId ?? ""); commands++) {
       life = life.phase === "choice" ? settle(engine, life) : engine.advance(life);
     }
-    assert.equal(life.pendingEventId, "a-place-on-the-manifest");
+    assert.ok(tradeOffers.has(life.pendingEventId ?? ""), `${born.originId} should reach one of the equivalent work-offer scenarios.`);
+    assert.ok(life.age >= 16, "Work offers must not move ahead of their real minimum-age stage.");
     life = settle(engine, life);
     const dueAge = Math.max(14, life.nextChoiceAge ?? 14);
     assert.ok(dueAge >= life.age + 2 && dueAge <= life.age + 3);

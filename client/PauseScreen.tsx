@@ -15,7 +15,7 @@ export default function PauseScreen({ life, world, onContinue, onReborn, onMainM
   return <main className="pause-screen" aria-labelledby="pause-screen-title">
     <header className="pause-brand">Historical Lives<span>{world.title}</span></header>
     <section className="pause-card">
-      <div className="pause-art"><img src="/assets/alexandria-harbor.webp" alt="Illustrated harbor of Alexandria" /></div>
+      <div className="pause-art"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined Alexandrian harbor" /></div>
       <div className="pause-content">
         <h1 ref={heading} id="pause-screen-title" tabIndex={-1}>Game paused</h1>
         <div className="pause-life"><strong>{life.character?.name ?? "Your character"}</strong><span>Age {life.age} · {formatYear(life.year)}</span></div>

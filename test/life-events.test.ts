@@ -89,6 +89,38 @@ test("multiple repeated events and results in one year retain their encounter or
   ]);
 });
 
+test("routine work is shown when it starts, changes or resumes, with every year kept in the chronicle", () => {
+  const journal = [
+    entry("activity", "porter", "You continue your work as quay porter.", 6),
+    entry("activity", "porter", "You continue your work as quay porter.", 7),
+    entry("activity", "practice", "Spend time at the workbench", 7),
+    entry("outcome", "practiced", "You practise joining two pieces of wood.", 7),
+    entry("activity", "auto-debt-payment", "You repay 10 dr of debt.", 7),
+    entry("activity", "copyist", "You continue your work as copyist.", 8),
+    entry("activity", "porter", "You continue your work as quay porter.", 9),
+    // An unemployed year has no regular-work entry.
+    entry("year", "age-10", "Age 10", 10),
+    entry("activity", "porter", "You continue your work as quay porter.", 11),
+    entry("activity", "porter", "You continue your work as quay porter.", 12),
+  ];
+  const { world, life } = fixture(journal, 12);
+  const before = structuredClone(life.journal);
+  const years = buildLifeEvents(life, world);
+  const work = years.flatMap(year => year.events.filter(event => event.text.startsWith("You continue your work")).map(event => [year.age, event.text]));
+  assert.deepEqual(work, [
+    [11, "You continue your work as quay porter."],
+    [9, "You continue your work as quay porter."],
+    [8, "You continue your work as copyist."],
+    [6, "You continue your work as quay porter."],
+  ]);
+  assert.deepEqual(years.find(year => year.age === 7)!.events.map(event => event.text), [
+    "You repay 10 dr of debt.", "You practise joining two pieces of wood.",
+  ]);
+  assert.equal(years.length, 13);
+  assert.deepEqual(life.journal, before);
+  assert.equal(life.journal.filter(item => item.id === "porter").length, 5);
+});
+
 test("quiet years remain visible and the calendar crosses BCE to CE without a year zero", () => {
   const { world, life } = fixture([], 3);
   world.startYear = -2;

@@ -51,7 +51,7 @@ function defaultsToConfrontation(engine: LifeEngine, seed: string): LifeState {
 }
 
 test("the new loan route preserves adult mortality, childhood and old credit-free packs", () => {
-  assert.equal(current.version, "0.21.0");
+  assert.equal(current.version, "0.25.0");
   assert.deepEqual(current.health, previous.health);
   assert.deepEqual(current.mortality, previous.mortality);
   assert.deepEqual(current.origins, previous.origins);

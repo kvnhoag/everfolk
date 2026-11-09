@@ -5,6 +5,8 @@ import { getMoneyImpact } from "./wealth.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
 import { severeHealthRisk, formatHealthRisk } from "./health-risk.ts";
 import { loanEffectNotes } from "./loan-summary.ts";
+import { getMasteryPreviews } from "./mastery.ts";
+import { getSkillImpact } from "./skill-impact.ts";
 import "./choice-impact.css";
 
 /** Only existing people are named. Preview deltas use the same sequential bounds as play. */
@@ -70,7 +72,7 @@ function healthEffects(choice: Choice, life: LifeState, world: WorldPack): { tex
 }
 
 /** Immediate outcome effects only: reading a preview never advances the simulation. */
-export default function ChoiceImpact({ choice, life, world }: { choice: Choice; life: LifeState; world: WorldPack }) {
+export default function ChoiceImpact({ choice, life, world, hideSkills = false }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean }) {
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
@@ -79,8 +81,10 @@ export default function ChoiceImpact({ choice, life, world }: { choice: Choice; 
   const opportunity = getOpportunityPreview(world, life, choice);
   const severeRisk = severeHealthRisk(life, world, choice);
   const loanNotes = loanEffectNotes(choice, life, world);
-  const hasRange = changedStats.some(stat => stat.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
-  if (changedStats.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0) return null;
+  const mastery = getMasteryPreviews(choice, life, world);
+  const skillImpact = hideSkills ? [] : getSkillImpact(choice, life, world);
+  const hasRange = changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
+  if (changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0) return null;
   return <span className="choice-impact">
     <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
@@ -90,6 +94,8 @@ export default function ChoiceImpact({ choice, life, world }: { choice: Choice; 
         </span>;
       })}
       {moneyImpact.map(item => <span className="impact-stat" key={`money-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} inverse={item.inverse} suffix={world.economy!.currency.short} /></span>)}
+      {skillImpact.map(item => <span className="impact-stat" key={`skill-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
+      {mastery.map(item => <span className="impact-stat impact-gain" key={`mastery-${item.target}-${item.id}`}>{item.label} cap {item.cap}{!opportunity && ` · ${Number((item.probability * 100).toFixed(1))}% chance`}</span>)}
       {connections.map(item => <span className="impact-stat" key={`closeness-${item.label}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} /></span>)}
       {health.map(item => <span className={`impact-stat impact-${item.gain ? "gain" : "loss"}`} key={item.text}>{item.text}</span>)}
       {loanNotes.map(note => <span className="impact-stat" key={note}>{note}</span>)}

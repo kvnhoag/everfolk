@@ -30,7 +30,7 @@ test("wealth separates available cash from assets and debt, not a capped score",
   const summary = getWealthSummary(world, life)!;
   assert.equal(summary.cash, 2000); assert.equal(summary.assetTotal, 30); assert.equal(summary.debt, 50); assert.equal(summary.netWorth, 1980);
   assert.equal(summary.assets.length, 1);
-  assert.equal(summary.affordableLessons, 200);
+  assert.equal(summary.affordableLessons, 400);
   assert.deepEqual(life, before);
 });
 
@@ -44,7 +44,7 @@ test("annual display reports actual work, held asset income and costs at current
 
 test("paid-practice examples are taken from outcomes and share the yearly activity limit", () => {
   const summary = getWealthSummary(world, ready(25))!;
-  assert.deepEqual(summary.lessonPrices, [10, 20]); assert.equal(summary.affordableLessons, 2);
+  assert.deepEqual(summary.lessonPrices, [5, 10, 20]); assert.equal(summary.affordableLessons, 5);
   const practice = world.character!.activities.find(activity => activity.id === "train-pottery")!;
   assert.deepEqual(getMoneyImpact(practice, ready(25), world), [{ id: "cash", label: "Cash", min: -10, max: -10, inverse: false }]);
 });

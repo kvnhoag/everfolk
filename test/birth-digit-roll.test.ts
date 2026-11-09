@@ -29,7 +29,7 @@ test("every reel contains decimal digits and a valid independent travel directio
   assert.ok(BIRTH_DIGIT_FRAME_MS > 0 && BIRTH_DIGIT_FRAME_MS < BIRTH_ROLL_DURATION_MS);
   for (let frame = 0; frame < 80; frame++) {
     const digits = getCosmeticBirthDigits(stat, "decimal-reels", frame);
-    assert.equal(digits.length, 3, "The known currency envelope reserves three independent places.");
+    assert.equal(digits.length, 3, "A three-digit amount uses three independent places.");
     for (const digit of digits) {
       assert.ok(Number.isInteger(digit.digit) && digit.digit >= 0 && digit.digit <= 9);
       assert.ok(Number.isInteger(digit.previous) && digit.previous >= 0 && digit.previous <= 9);
@@ -49,7 +49,7 @@ test("fixed zero, fixed decimal and missing ranges still produce moving cosmetic
     const seen = new Set<number>();
     for (let frame = 0; frame < 50; frame++) {
       const digits = getCosmeticBirthDigits(stat, "fixed-values-must-roll", frame);
-      assert.ok(digits.length >= 2);
+      assert.equal(digits.length, stat.value === 70.5 ? 3 : 1);
       patterns.add(digits.map(item => item.digit).join(""));
       digits.forEach(item => seen.add(item.digit));
     }
@@ -58,18 +58,18 @@ test("fixed zero, fixed decimal and missing ranges still produce moving cosmetic
   }
 });
 
-test("cosmetic reels are reproducible and independent of the official stat value", () => {
+test("cosmetic motion is reproducible per place while the result controls the number of reels", () => {
   const stat: BirthRollStat = { id: "health", label: "Health", value: 61, range: { min: 60, max: 80 } };
   for (let frame = 0; frame < 60; frame++) {
     const expected = getCosmeticBirthDigits(stat, "same-reel-seed", frame);
     assert.deepEqual(getCosmeticBirthDigits(stat, "same-reel-seed", frame), expected);
     assert.deepEqual(getCosmeticBirthDigits({ ...stat, value: 80 }, "same-reel-seed", frame), expected);
-    assert.deepEqual(getCosmeticBirthDigits({ ...stat, value: 987654321 }, "same-reel-seed", frame), expected,
-      "Even the number of final-value digits must not affect the cosmetic sequence.");
+    assert.deepEqual(getCosmeticBirthDigits({ ...stat, value: 987654321 }, "same-reel-seed", frame).slice(0, expected.length), expected,
+      "Adding places must not change an existing reel's cosmetic motion.");
   }
   const noRange: BirthRollStat = { id: "unknown", label: "Unknown", value: 0 };
   assert.deepEqual(getCosmeticBirthDigits(noRange, "no-range", 8),
-    getCosmeticBirthDigits({ ...noRange, value: -987654321.5 }, "no-range", 8));
+    getCosmeticBirthDigits({ ...noRange, value: -987654321.5 }, "no-range", 8).slice(0, 1));
 });
 
 test("individual places keep their own direction for the entire roll", () => {
@@ -129,7 +129,7 @@ test("continuous reels retain direction and slow monotonically into their final 
   }
 });
 
-test("reels wait for their existing staggered starts and land at their settlement boundaries", () => {
+test("reels start together and land at their staggered settlement boundaries", () => {
   const stat: BirthRollStat = { id: "stagger", label: "Knowledge", value: 0, range: { min: 0, max: 0 } };
   for (const [card, expected] of [1475, 2050, 2625, 3200].entries()) {
     const timing = getBirthRollTiming(card, 4);
@@ -142,22 +142,14 @@ test("reels wait for their existing staggered starts and land at their settlemen
   }
 });
 
-test("public reel layouts preserve leading places, decimal positions and signs without using the final value", () => {
-  for (const stat of [
-    { id: "zero", label: "Zero", value: 0, range: { min: 0, max: 0 } },
-    { id: "decimal", label: "Decimal", value: 70.5, range: { min: 70.5, max: 70.5 } },
-    { id: "signed", label: "Signed", value: -70, range: { min: -100, max: 10 } },
-    { id: "unknown", label: "Unknown", value: 3 },
-  ] as BirthRollStat[]) {
-    assert.deepEqual(getBirthReelLayout(stat), getBirthReelLayout({ ...stat, value: -9876543210.75 }));
-  }
+test("reel layouts match the result's integer width and retain decimal positions and signs", () => {
   assert.deepEqual(getBirthReelLayout({ id: "decimal", label: "Decimal", value: 70.5, range: { min: 70.5, max: 70.5 } }),
     { integerPlaces: 2, fractionPlaces: 1, hasSign: false, digitCount: 3 });
   assert.deepEqual(getBirthReelLayout({ id: "signed", label: "Signed", value: -70, range: { min: -100, max: 10 } }),
-    { integerPlaces: 3, fractionPlaces: 0, hasSign: true, digitCount: 3 });
+    { integerPlaces: 2, fractionPlaces: 0, hasSign: true, digitCount: 2 });
 });
 
-test("zero, padded money, signed values and fixed decimals land on their exact magnitude digits", () => {
+test("zero, money, signed values and fixed decimals land on their exact magnitude digits", () => {
   const cases: BirthRollStat[] = [
     { id: "zero", label: "Knowledge", value: 0, range: { min: 0, max: 0 } },
     { id: "two", label: "Health", value: 70, range: { min: 0, max: 100 } },
@@ -180,7 +172,19 @@ test("zero, padded money, signed values and fixed decimals land on their exact m
   assert.equal(canRepresentBirthReelValue({ ...outside, value: 70.5 }), false, "An unreserved decimal does not get rounded.");
 });
 
-test("public range envelopes bound reel width without exposing final-value formatting", () => {
+test("single-digit results keep one moving reel through settlement even in a wide range", () => {
+  for (const value of [0, 1, 7, 9, 10, 99, 100]) {
+    const stat: BirthRollStat = { id: "width", label: "Stat", value, range: { min: 0, max: 100 } };
+    const count = value < 10 ? 1 : value < 100 ? 2 : 3;
+    for (const elapsed of [0, 500, 1_000, 2_000, BIRTH_ROLL_DURATION_MS]) {
+      const reels = getBirthDigitReels(stat, "stable-width", elapsed, 1, 4);
+      assert.equal(reels.length, count, `${value} at ${elapsed}ms`);
+      if (elapsed === BIRTH_ROLL_DURATION_MS) assert.equal(reels.map(reel => reel.glyphs[1]).join(""), String(value));
+    }
+  }
+});
+
+test("reel counts stay bounded for wide ranges and imported values", () => {
   const cases: BirthRollStat[] = [
     { id: "zero", label: "Zero", value: 0, range: { min: 0, max: 0 } },
     { id: "negative", label: "Signed", value: -70, range: { min: -100, max: 10 } },
@@ -189,8 +193,7 @@ test("public range envelopes bound reel width without exposing final-value forma
   ];
   for (const stat of cases) {
     const digits = getCosmeticBirthDigits(stat, "safe-width", 1);
-    assert.ok(digits.length >= 2 && digits.length <= 16);
-    assert.deepEqual(digits, getCosmeticBirthDigits({ ...stat, value: 1 }, "safe-width", 1));
+    assert.ok(digits.length >= 1 && digits.length <= 16);
   }
 });
 

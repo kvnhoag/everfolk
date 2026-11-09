@@ -7,7 +7,7 @@ import { engineForLife, loadAnyLife } from "../client/session.ts";
 import { selectAutomaticChoice } from "../client/yearly-focus.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import previous from "../worlds/alexandria-0.20.0.json" with { type: "json" };
-import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import current from "../worlds/alexandria-0.21.0.json" with { type: "json" };
 
 test("0.20 adult lives load and continue without loan liabilities or collection rules", () => {
   assert.equal(contentFingerprint(previous), "fnv1a64-fa27733d19e4c207");

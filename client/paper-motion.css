@@ -1,4 +1,4 @@
-/* Narrative, illustration and independent paper props belong to the selected event. */
+/* Narrative, pixel illustration and ambient props follow the selected event. */
 .scene-image.paper-scene.paper-motion-scene{height:auto;min-height:310px;grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr);grid-template-rows:auto auto;gap:6px 8px;padding:23px 24px 15px;overflow:hidden}
 .paper-motion-scene .paper-scene-copy{min-width:0;padding-right:8px;align-self:center;z-index:2}
 .paper-motion-scene .paper-scene-kicker{display:block;text-transform:uppercase;font-size:9px;letter-spacing:1.25px;color:#657a58}
@@ -66,3 +66,26 @@
 @media(max-width:1100px){.scene-image.paper-scene.paper-motion-scene{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);padding:21px 20px 13px}.paper-motion-scene .paper-scene-copy h2,.paper-motion-scene.paper-in-play .paper-scene-copy h2{font-size:29px}.paper-motion-scene .paper-scene-copy p.paper-event-caption{font-size:11px}.paper-illustration-wrap{height:235px}.paper-in-play .paper-illustration-wrap{height:215px}}
 @media(max-width:760px){.scene-image.paper-scene.paper-motion-scene{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;height:auto;min-height:0;padding:19px 17px 12px;gap:0}.paper-motion-scene .paper-scene-copy{padding:0}.paper-motion-scene .paper-scene-kicker{font-size:8px;letter-spacing:1px}.paper-motion-scene .paper-scene-copy h2,.paper-motion-scene.paper-in-play .paper-scene-copy h2{font-size:29px;margin:9px 0 10px}.paper-motion-scene .paper-scene-copy p.paper-event-caption{display:block;font-size:12px;line-height:1.8}.paper-illustration-wrap,.paper-in-play .paper-illustration-wrap{height:220px;margin:4px 0 0}.paper-scene-bottom{grid-column:1;margin-top:2px;padding-top:10px;gap:8px}.scene-context-list{gap:5px}.scene-context-list>button{padding:6px 8px;max-width:100%;flex:1 1 125px}.scene-context-list>button>strong{font-size:9px;max-width:none}.scene-context-list>button>span{font-size:6px}.paper-motion-status{font-size:8px}.scene-motion-toggle{font-size:10px}.paper-motion-controls{min-height:27px}}
 @media(prefers-reduced-motion:reduce){.paper-motion-scene [data-loop]{animation:none!important;transition:none!important;will-change:auto}.paper-writing-line{stroke-dashoffset:0}.paper-stylus{opacity:.7}.paper-haze{opacity:.35}.paper-shade{opacity:.2}}
+
+/* Pixel artwork stays fixed. Only small integer-grid ambient props move. */
+.pixel-scene .paper-character-layer{animation:none!important;will-change:auto}
+.pixel-scene .paper-character-layer>img{image-rendering:pixelated;image-rendering:crisp-edges;filter:none}
+.pixel-scene .paper-illustration-wrap{border:2px solid #886447;background:#edcf91;box-shadow:3px 3px 0 #88644725;aspect-ratio:4/3}
+.pixel-atmosphere{z-index:2}
+.pixel-atmosphere.atmosphere-back{z-index:2}
+.pixel-atmosphere.atmosphere-front{z-index:3}
+.pixel-wave{animation:pixel-water 2.4s steps(3,end) infinite}
+.pixel-birds{animation:pixel-birds 5s steps(5,end) infinite}
+.pixel-twinkle,.pixel-lamp-flame{animation:pixel-flicker 2.2s steps(2,end) infinite}
+.pixel-work-spark,.pixel-play-spark{animation:pixel-spark 3s steps(3,end) infinite}
+.pixel-smoke{animation:pixel-smoke 4s steps(4,end) infinite}
+.pixel-scene .motion-indicator{border-radius:0;background:#baa47a}
+.pixel-scene .motion-indicator.is-moving{background:#6b8051;box-shadow:2px 0 0 #9ca968}
+.pixel-scene .scene-context-list>button{border-radius:0;border-color:#baa47a;background:#f5e6bf}
+.pixel-scene .scene-context-list>button.is-active{border-color:#41637b;background:#dce5d6;color:#263b43}
+@keyframes pixel-water{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+@keyframes pixel-birds{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-1px)}}
+@keyframes pixel-flicker{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes pixel-spark{0%,65%,100%{opacity:0}70%,85%{opacity:1;transform:translateY(-1px)}}
+@keyframes pixel-smoke{0%{transform:translate(0,0);opacity:.15}75%{transform:translate(2px,-3px);opacity:.5}100%{transform:translate(3px,-4px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.pixel-scene [data-loop]{animation:none!important;transition:none!important}.pixel-lamp-flame,.pixel-twinkle{opacity:.65}.pixel-work-spark,.pixel-play-spark,.pixel-smoke{opacity:0}}

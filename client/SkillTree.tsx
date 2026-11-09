@@ -46,7 +46,7 @@ function Practice({ activity, life, world, onActivity }: {
   return <div className={`skill-practice${reason ? " unavailable" : ""}`}>
     <p className="skill-practice-name">{activity.text}</p>
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
-    <ChoiceImpact choice={activity} life={life} world={world} />
+    <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
     <button type="button" className="skill-practice-button" disabled={Boolean(reason)} onClick={() => onActivity(activity.id)}>{reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>
     {reason && <p className="skill-practice-reason">{reason}</p>}
   </div>;
@@ -62,7 +62,7 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
     <p className="skill-practice-name">{activity.text}</p>
     {requirements.length > 0 && <p className="skill-work-requirements">{requirements.join(" · ")}</p>}
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
-    <ChoiceImpact choice={activity} life={life} world={world} />
+    <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
     <button type="button" className="skill-practice-button" disabled={Boolean(reason)} aria-label={`${occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
       {occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
     </button>

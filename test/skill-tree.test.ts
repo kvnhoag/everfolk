@@ -12,11 +12,11 @@ function adult(world = main): { engine: ReturnType<typeof createEngine>; life: L
   return { engine, life: { ...initial, age: 20, year: world.startYear + 20, phase: "ready", pendingEventId: null, stats: { ...initial.stats, wealth: 100 }, character: { ...initial.character!, skills: { ...initial.character!.skills } } } };
 }
 
-test("the twelve-skill board uses actual authored dependencies and genuine left-to-right tiers", () => {
+test("the thirteen-skill board uses actual authored dependencies and genuine left-to-right tiers", () => {
   const { engine, life } = adult();
   const model = buildSkillTree(main, life, engine.getActivities(life));
-  assert.equal(model.nodes.length, 12);
-  assert.deepEqual(model.branches, ["Crafts", "Letters & ideas", "Numbers & sky", "Practical service"]);
+  assert.equal(model.nodes.length, 13);
+  assert.deepEqual(model.branches, ["Crafts", "Letters & ideas", "Numbers & sky", "Practical service", "Performance"]);
   assert.deepEqual(model.edges.map(edge => `${edge.from}:${edge.to}:${edge.threshold}`).sort(), [
     "craft:pottery:15", "craft:carving:15", "carving:sculpture:20", "pottery:sculpture:10",
     "literacy:oratory:10", "literacy:philosophy:20", "oratory:philosophy:10",

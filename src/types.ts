@@ -2,6 +2,7 @@
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
   | { type: "loan-overdue"; op: Comparison; value: number }
@@ -16,12 +17,16 @@ export type Condition =
   | { type: "relationship"; status: RelationshipStatus; partner?: string }
   | { type: "known-partner"; partner: string }
   | { type: "children"; op: Comparison; value: number }
+  /** At least one existing child has this inclusive age range. */
+  | { type: "child-age"; min: number; max: number }
   | { type: "has-condition"; condition?: string }
   | { type: "closeness"; partner?: string; op: Comparison; value: number }
   | { type: "all" | "any"; conditions: Condition[] }
   | { type: "not"; condition: Condition };
 
 export type Effect =
+  | { type: "accomplishment"; achievement: string }
+  | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }
   | { type: "loan"; action: "borrow" | "repay" | "extend"; amount?: number }
   | { type: "asset"; asset: string; delta: number }
@@ -128,6 +133,8 @@ export interface Choice {
 
 export interface LifeEvent extends EvidenceMetadata {
   id: string;
+  /** Seeded alternatives at one age; offering any member consumes the group. */
+  exclusiveGroup?: string;
   title: string;
   text: string;
   trigger:
@@ -138,6 +145,8 @@ export interface LifeEvent extends EvidenceMetadata {
   /** Scheduled events occur once. Random events default to once. */
   maxOccurrences?: number;
   cooldownYears?: number;
+  /** Opt-in annual surprise lane, separate from ordinary weighted stories. */
+  rarity?: "rare";
   /** Automatic events narrate and apply effects without asking the player to choose. */
   mode?: "automatic";
   effects?: Effect[];
@@ -351,6 +360,54 @@ export interface KnowledgeDefinition {
 }
 export interface KnowledgeState { lastPracticeAge: number | null }
 
+/** Optional soft penalties for repeated random stories. No event is forced. */
+export interface EventVariety {
+  /** Number of previous random events remembered separately in each lane. */
+  recentWindow: number;
+  /** Multiplier for an event in that lane's recent window, in 0.001..1. */
+  recentWeight: number;
+  /** Seen-once multiplier; subsequent occurrences taper harmonically, in 0.001..1. */
+  repeatWeight: number;
+}
+
+/** Optional authored legacy, earned only by an accepted decision/activity outcome. */
+export interface LegacyRouteDefinition {
+  id: string;
+  title: string;
+  description: string;
+  skillIds: string[];
+  jobIds: string[];
+  achievementIds: string[];
+}
+export interface LegacyAchievementDefinition extends EvidenceMetadata {
+  id: string;
+  routeId: string;
+  title: string;
+  description: string;
+  kind: "ordinary" | "prestige";
+  nameTemplate: string;
+  /** Fictional contacts explicitly introduced by the awarding outcome. */
+  people: string[];
+}
+export interface AccomplishmentRecord {
+  id: string;
+  achievementId: string;
+  routeId: string;
+  title: string;
+  description: string;
+  kind: "ordinary" | "prestige";
+  name: string;
+  age: number;
+  year: number;
+  sourceId: string;
+  outcomeId: string;
+  people: string[];
+}
+export interface LegacyRouteProgress extends LegacyRouteDefinition {
+  earned: readonly AccomplishmentRecord[];
+  next?: LegacyAchievementDefinition;
+}
+
 export interface WorldPack {
   schemaVersion: 1;
   id: string;
@@ -366,13 +423,18 @@ export interface WorldPack {
   yearlyEffects: Effect[];
   yearlyRules?: YearlyRule[];
   /** Separate annual background stories from decisions with a seeded global gap. */
-  eventPacing?: { minChoiceGapYears: number; maxChoiceGapYears: number };
+  eventPacing?: {
+    minChoiceGapYears: number; maxChoiceGapYears: number; variety?: EventVariety;
+    /** Shared annual gate and cooldown for marked rare decisions. */
+    rareEvents?: { annualChance: number; cooldownYears: number };
+  };
   mortality?: MortalityModel;
   health?: HealthDefinition;
   relationships?: RelationshipDefinition;
   character?: CharacterDefinition;
   economy?: EconomyDefinition;
   knowledge?: KnowledgeDefinition;
+  legacy?: { routes: LegacyRouteDefinition[]; achievements: LegacyAchievementDefinition[] };
   sources?: HistoricalSource[];
   events: LifeEvent[];
   endings: Ending[];
@@ -417,6 +479,8 @@ export interface LifeState {
   deathCauseKind?: "choice" | "condition";
   health?: HealthState;
   knowledge?: KnowledgeState;
+  /** Omitted entirely for earlier packs, preserving their exact snapshots. */
+  accomplishments?: AccomplishmentRecord[];
   journal: JournalEntry[];
   commands: Command[];
 }

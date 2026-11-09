@@ -2,7 +2,7 @@ import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
 import { activityPartnerIds } from "../src/character.ts";
-import { applyStatDelta } from "../src/progression.ts";
+import { getSkillImpact } from "./skill-impact.ts";
 import { engineForLife } from "./session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
@@ -19,22 +19,7 @@ type AvailabilityFilter = "all" | "available" | "unavailable";
 
 /** Preview skill changes with the same sequential bounds as the engine. */
 function skillEffects(activity: ActivityAvailability, life: LifeState, world: WorldPack): { label: string; min: number; max: number; variable: boolean }[] {
-  if (!world.character || !life.character) return [];
-  return Object.entries(world.character.skills).flatMap(([id, definition]) => {
-    const initial = life.character!.skills[id];
-    const deltas = activity.outcomes.map(outcome => {
-      let value = initial;
-      for (const effect of outcome.effects) {
-        if (effect.type === "end") break;
-        if (effect.type === "skill" && effect.skill === id) {
-          value = applyStatDelta(definition, value, effect.delta);
-        }
-      }
-      return value - initial;
-    });
-    const min = Math.min(...deltas), max = Math.max(...deltas);
-    return min === 0 && max === 0 ? [] : [{ label: definition.label, min, max, variable: min !== max }];
-  });
+  return getSkillImpact(activity, life, world).map(({ id: _id, ...change }) => change);
 }
 
 function ActivityButton({ activity, life, world, onActivity }: {
@@ -54,7 +39,7 @@ function ActivityButton({ activity, life, world, onActivity }: {
     {openings.map(note => <span className="personal-opening-note" key={note}>{note}</span>)}
     {changes.length > 0 && <span className="personal-skill-effects">{changes.map(change => <span className="impact-stat" key={change.label}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</span>}
     {reason && <span className="personal-activity-reason">{reason}</span>}
-    <ChoiceImpact choice={activity} life={life} world={world} />
+    <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
   </button>;
 }
 

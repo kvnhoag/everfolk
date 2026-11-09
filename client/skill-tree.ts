@@ -1,5 +1,5 @@
 import type { ActivityAvailability, CharacterActivity, Condition, JobDefinition, LifeState, SkillDefinition, WorldPack } from "../src/types.ts";
-import { applyStatDelta } from "../src/progression.ts";
+import { getSkillImpact } from "./skill-impact.ts";
 import { formatYear } from "../src/calendar.ts";
 
 export type SkillState = "locked" | "ready" | "learning" | "mastered";
@@ -211,18 +211,5 @@ export function layoutSkillTree(model: SkillTreeModel): SkillTreeLayout {
 
 /** Exact bounded skill previews, using the same effect order as the simulation. */
 export function trainingSkillChanges(activity: ActivityAvailability, world: WorldPack, life: LifeState): { id: string; label: string; min: number; max: number }[] {
-  if (!world.character || !life.character) return [];
-  return Object.entries(world.character.skills).flatMap(([id, definition]) => {
-    const initial = life.character!.skills[id] ?? definition.min;
-    const changes = activity.outcomes.map(outcome => {
-      let value = initial;
-      for (const effect of outcome.effects) {
-        if (effect.type === "end") break;
-        if (effect.type === "skill" && effect.skill === id) value = applyStatDelta(definition, value, effect.delta);
-      }
-      return value - initial;
-    });
-    const min = Math.min(...changes), max = Math.max(...changes);
-    return min === 0 && max === 0 ? [] : [{ id, label: definition.label, min, max }];
-  });
+  return getSkillImpact(activity, life, world).map(({ variable: _variable, ...change }) => change);
 }

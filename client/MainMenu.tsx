@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from "react";
 import { formatYear } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
+import PixelIcon from "./PixelIcon.tsx";
 import "./main-menu.css";
 
 export interface MainMenuProps {
@@ -12,6 +13,7 @@ export interface MainMenuProps {
   onContinue(): void;
   onWorlds?(): void;
   onPastLives(): void;
+  onLegacy?(): void;
   onSources(): void;
   isAdmin?: boolean;
   notice?: string;
@@ -19,7 +21,7 @@ export interface MainMenuProps {
 }
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
-export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onSources, isAdmin = false, notice, active = true }: MainMenuProps) {
+export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, isAdmin = false, notice, active = true }: MainMenuProps) {
   const heading = useRef<HTMLHeadingElement>(null);
   const headingId = useId();
   const saveId = useId();
@@ -33,7 +35,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
 
   return <main className="main-menu" aria-labelledby={headingId}>
     <div className="main-menu-shell">
-      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><svg width="13" height="17" viewBox="0 0 16 20" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M2 1h12M2 19h12M4 1v3c0 3 4 4 4 6s-4 3-4 6v3M12 1v3c0 3-4 4-4 6s4 3 4 6v3M5 16h6" /></svg></span><span>A historical life simulator</span>{isAdmin && <a href="/admin">World editor <span aria-hidden="true">↗</span></a>}</header>
+      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><PixelIcon name="hourglass" size={18} /></span><span>A historical life simulator</span>{isAdmin && <a href="/admin">World editor <span aria-hidden="true">↗</span></a>}</header>
       <div className="main-menu-layout">
         <section className="main-menu-content">
           <p className="main-menu-kicker">One life in another age.</p>
@@ -52,13 +54,24 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
           <nav className="main-menu-links" aria-label="Main menu">
             {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
             <button type="button" onClick={onPastLives}>Past lives</button>
+            {onLegacy && <button type="button" onClick={onLegacy}>Legacy gallery</button>}
             <button type="button" onClick={onSources}>History &amp; sources</button>
           </nav>
         </section>
-        <figure className="main-menu-landscape">
-          <div className="main-menu-image"><img src="/assets/alexandria-harbor.webp" alt="Illustrated harbor of ancient Alexandria, with sailing boats and a lighthouse" fetchPriority="high" /></div>
-          <figcaption><span>{worldTitle}</span><span>{formatYear(world.startYear)}</span></figcaption>
-        </figure>
+        <div className="main-menu-world-stack">
+          <div className="main-menu-world-preview main-menu-world-preview-medieval" aria-hidden="true">
+            <img src="/assets/pixel/worlds/medieval-europe.svg" alt="" />
+            <span>Medieval Europe</span>
+          </div>
+          <div className="main-menu-world-preview main-menu-world-preview-ottoman" aria-hidden="true">
+            <img src="/assets/pixel/worlds/ottoman-constantinople.svg" alt="" />
+            <span>Ottoman Empire</span>
+          </div>
+          <figure className="main-menu-landscape">
+            <div className="main-menu-image"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined ancient Alexandrian harbor, with merchant sails, a lighthouse and a waterfront terrace" fetchPriority="high" /></div>
+            <figcaption><span>{worldTitle}</span><span>{formatYear(world.startYear)}</span></figcaption>
+          </figure>
+        </div>
       </div>
       <footer className="main-menu-footer"><span>Historical setting. Your own life.</span><span>Progress saves in this browser.</span></footer>
     </div>

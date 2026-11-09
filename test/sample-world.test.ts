@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
-import type { LifeEngine, LifeState } from "../src/types.ts";
+import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import beforeBalance from "../worlds/alexandria-0.17.0.json" with { type: "json" };
 
@@ -37,13 +37,21 @@ function until(engine: LifeEngine, seed: string, career: Career, stop: (state: L
 }
 
 function withoutMortality(): LifeEngine {
-  const copy = structuredClone(pack);
-  copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  const copy = structuredClone(pack) as WorldPack;
+  // These controlled qualification checks deliberately take the original
+  // opening route. The unmodified opening groups are covered separately; a
+  // different valid first job must not displace this test's porter fixture.
+  const opening = new Set(["a-child-in-the-courtyard", "the-first-letters", "a-place-to-learn", "the-first-wages", "a-place-on-the-manifest"]);
+  copy.events = copy.events.filter(event => !event.exclusiveGroup || opening.has(event.id)).map(event => {
+    const { exclusiveGroup: _exclusiveGroup, ...retained } = event;
+    return retained;
+  });
+  copy.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   // This progression fixture isolates skill gates from household affordability;
   // unmodified-pack mortality and bounded-stat coverage stays above.
   copy.stats.wealth.initial = 80;
   copy.stats.wealth.initialRange = { min: 80, max: 80 };
-  for (const origin of copy.origins) origin.statRanges.wealth = { min: 80, max: 80 };
+  for (const origin of copy.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 80, max: 80 } };
   return createEngine(copy);
 }
 

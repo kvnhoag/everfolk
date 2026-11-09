@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { BIRTH_ROLL_DURATION_MS, canRepresentBirthReelValue, getBirthDigitReels, getBirthReelLayout, getBirthRollFrame, getBirthRollStats } from "./birth-stat-roll.ts";
+import { createBirthRollClock } from "./birth-roll-clock.ts";
 import "./birth-stat-roll.css";
 
 export interface BirthStatRollProps {
@@ -16,9 +17,10 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
   const stats = useMemo(() => getBirthRollStats(world, life), [world, life]);
   const origin = world.origins.find(item => item.id === life.originId);
   const characterName = life.character?.name ?? "Damon";
-  const [started, setStarted] = useState(revealed);
+  const [started, setStarted] = useState(revealed || autoStart);
   const [finished, setFinished] = useState(revealed);
   const [elapsed, setElapsed] = useState(revealed ? BIRTH_ROLL_DURATION_MS : 0);
+  const [clock] = useState(() => createBirthRollClock(BIRTH_ROLL_DURATION_MS, revealed ? BIRTH_ROLL_DURATION_MS : 0));
   const [hidden, setHidden] = useState(() => typeof document !== "undefined" && document.hidden);
   const [reducedMotion, setReducedMotion] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const completeRef = useRef(revealed);
@@ -30,9 +32,9 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
     completeRef.current = true;
     setStarted(true);
     setFinished(true);
-    setElapsed(BIRTH_ROLL_DURATION_MS);
+    setElapsed(clock.finish());
     callbackRef.current();
-  }, []);
+  }, [clock]);
 
   const start = useCallback(() => {
     if (completeRef.current || paused || hidden) return;
@@ -43,41 +45,44 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotion = () => setReducedMotion(media.matches);
-    const updateVisibility = () => setHidden(document.hidden);
+    const updateVisibility = () => {
+      if (document.hidden) setElapsed(clock.pause(performance.now()));
+      setHidden(document.hidden);
+    };
     media.addEventListener("change", updateMotion);
     document.addEventListener("visibilitychange", updateVisibility);
+    updateVisibility();
     return () => {
       media.removeEventListener("change", updateMotion);
       document.removeEventListener("visibilitychange", updateVisibility);
     };
-  }, []);
+  }, [clock]);
 
   useEffect(() => {
     if (!revealed) return;
     completeRef.current = true;
     setFinished(true);
     setStarted(true);
-    setElapsed(BIRTH_ROLL_DURATION_MS);
-  }, [revealed]);
+    setElapsed(clock.finish());
+  }, [revealed, clock]);
 
   useEffect(() => { if (autoStart && !started) start(); }, [autoStart, started, start]);
 
   useEffect(() => {
     if (!started || finished || revealed || paused || hidden) return;
     if (reducedMotion) { finish(); return; }
-    let previous = performance.now();
+    clock.resume(performance.now());
     let animationFrame = 0;
     const tick = (now: number) => {
-      const delta = Math.max(0, Math.min(160, now - previous));
-      previous = now;
-      setElapsed(value => Math.min(BIRTH_ROLL_DURATION_MS, value + delta));
+      if (document.hidden) { setElapsed(clock.pause(now)); setHidden(true); return; }
+      const next = clock.tick(now);
+      setElapsed(next);
+      if (next >= BIRTH_ROLL_DURATION_MS) { finish(); return; }
       animationFrame = window.requestAnimationFrame(tick);
     };
     animationFrame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(animationFrame);
-  }, [started, finished, revealed, paused, hidden, reducedMotion, finish]);
-
-  useEffect(() => { if (started && elapsed >= BIRTH_ROLL_DURATION_MS) finish(); }, [elapsed, started, finish]);
+    return () => { window.cancelAnimationFrame(animationFrame); clock.pause(performance.now()); };
+  }, [started, finished, revealed, paused, hidden, reducedMotion, finish, clock]);
 
   const settled = revealed || finished;
   const frame = getBirthRollFrame(settled ? BIRTH_ROLL_DURATION_MS : elapsed, stats.length);
@@ -90,11 +95,10 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
     <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>BACKGROUND</span><strong>{frame.originRevealed || settled ? origin?.title ?? "Your household" : running ? "Rolling…" : "Unrevealed"}</strong></div>
     <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>NAME</span><strong>{frame.originRevealed || settled ? characterName : "Unrevealed"}</strong></div>
     <div className="birth-roll-cards" aria-hidden="true">{stats.map((stat, index) => {
-      const phase = settled ? "settled" : frame.phases[index];
+      const phase = settled ? "settled" : !started ? "waiting" : frame.phases[index];
       const layout = getBirthReelLayout(stat);
       const digits = getBirthDigitReels(stat, life.seed, settled ? BIRTH_ROLL_DURATION_MS : elapsed, index, stats.length);
       const exactReels = canRepresentBirthReelValue(stat, layout);
-      const integerDigits = Math.max(1, String(Math.trunc(Math.abs(stat.value))).length);
       const rawFinal = phase === "settled" && !exactReels;
       return <div className={`birth-roll-card birth-roll-${stat.id} is-${phase}`} key={stat.id}>
         <span className="birth-roll-stat-name">{stat.label}</span><strong className="birth-roll-number">
@@ -102,7 +106,7 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
             {layout.hasSign && <span className="birth-digit-sign" style={{ visibility: phase === "settled" && stat.value < 0 && !rawFinal ? "visible" : "hidden" }}>−</span>}
             {digits.map((digit, place) => <span className="birth-digit-place" key={place}>
               {layout.fractionPlaces > 0 && place === layout.integerPlaces && <span className="birth-digit-decimal" style={rawFinal ? { visibility: "hidden" } : undefined}>.</span>}
-              <span className="birth-digit-window" style={{ visibility: rawFinal || phase === "settled" && place < layout.integerPlaces - integerDigits ? "hidden" : "visible" }}><span className={`birth-digit-reel rolls-${digit.direction}`} data-direction={digit.direction} data-position={digit.position} style={{ transform: `translate3d(0, ${-1.1 * (1 + digit.fraction)}em, 0)` }}>
+              <span className="birth-digit-window" style={{ visibility: rawFinal ? "hidden" : "visible" }}><span className={`birth-digit-reel rolls-${digit.direction}`} data-direction={digit.direction} data-position={digit.position} style={{ transform: `translate3d(0, ${-1.1 * (1 + digit.fraction)}em, 0)` }}>
                 {digit.glyphs.map((glyph, row) => <span key={row}>{glyph}</span>)}
               </span></span>
             </span>)}

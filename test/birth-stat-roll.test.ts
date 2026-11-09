@@ -10,11 +10,13 @@ import { BIRTH_ORIGIN_REVEAL_MS, BIRTH_ROLL_DURATION_MS, getBirthRollFrame, getB
 /** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
 function pruneRemovedOriginModifiers(world: WorldPack): void {
   const retained = new Set(world.origins.map(origin => origin.id));
-  const hasRemovedOrigin = (condition: Condition): boolean => {
+  const hasRemovedOrigin = (condition: Condition | undefined): boolean => {
+    if (!condition) return false;
     if (condition.type === "origin") return !retained.has(condition.origin);
     if (condition.type === "all" || condition.type === "any") return condition.conditions.some(hasRemovedOrigin);
     return condition.type === "not" && hasRemovedOrigin(condition.condition);
   };
+  world.events = world.events.filter(event => !hasRemovedOrigin(event.when));
   for (const choice of [...world.events.flatMap(event => event.choices), ...(world.character?.activities ?? [])]) {
     for (const outcome of choice.outcomes) {
       if (!outcome.weightModifiers) continue;
@@ -26,7 +28,7 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
 
 test("the origin is revealed before the starting stats settle in order", () => {
   assert.equal(getBirthRollFrame(0, 4).originRevealed, false);
-  assert.deepEqual(getBirthRollFrame(0, 4).phases, ["waiting", "waiting", "waiting", "waiting"]);
+  assert.deepEqual(getBirthRollFrame(0, 4).phases, ["rolling", "rolling", "rolling", "rolling"]);
   assert.equal(getBirthRollFrame(BIRTH_ORIGIN_REVEAL_MS, 4).originRevealed, true);
   assert.equal(getBirthRollFrame(BIRTH_ORIGIN_REVEAL_MS, 4).phases[0], "rolling");
   assert.deepEqual(getBirthRollFrame(1_500, 4).phases, ["settled", "rolling", "rolling", "rolling"]);

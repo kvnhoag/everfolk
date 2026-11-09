@@ -7,8 +7,10 @@ export function initialKnowledge(world: WorldPack): KnowledgeState | undefined {
 
 /** Only accepted learning effects count. A capped stat still represents practice. */
 export function recordKnowledgePractice(world: WorldPack, state: LifeState, effect: Effect): void {
-  if (!world.knowledge || state.phase === "ended" || effect.type !== "stat" ||
-      effect.stat !== world.knowledge.stat || !Number.isFinite(effect.delta) || effect.delta <= 0) return;
+  if (!world.knowledge || state.phase === "ended") return;
+  const learns = effect.type === "stat" && effect.stat === world.knowledge.stat && Number.isFinite(effect.delta) && effect.delta > 0 ||
+    effect.type === "mastery" && effect.target === "stat" && effect.id === world.knowledge.stat;
+  if (!learns) return;
   state.knowledge ??= initialKnowledge(world)!;
   state.knowledge.lastPracticeAge = state.age;
 }
