@@ -178,6 +178,8 @@ export function sites({ mockAuth = true } = {}): Plugin {
       const drizzleSource = resolve(root, "drizzle");
 
       await rm(outputDirectory, { recursive: true, force: true });
+      // Portable source checkouts do not carry an installation's Site identity.
+      // Preserve hosted packaging when that optional manifest is supplied.
       if (!(await exists(hostingConfig))) return;
       await mkdir(outputDirectory, { recursive: true });
 

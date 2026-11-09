@@ -3,6 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const helperPath = process.env.ARTCRAFT_MCP_HELPER;
+if (!helperPath) throw new Error("Set ARTCRAFT_MCP_HELPER to your local ArtCraft mcp.cjs helper before rebuilding banner artwork.");
 const { withMcp } = require(helperPath);
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "artwork", "life-banners");

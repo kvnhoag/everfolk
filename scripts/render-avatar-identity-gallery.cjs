@@ -1,7 +1,9 @@
 // Editable ArtCraft proof: the selected portrait beside its matching scene actor.
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
-const { withMcp } = require(process.env.ARTCRAFT_MCP_HELPER);
+const helperPath = process.env.ARTCRAFT_MCP_HELPER;
+if (!helperPath) throw new Error("Set ARTCRAFT_MCP_HELPER to your local ArtCraft mcp.cjs helper before rendering the avatar gallery.");
+const { withMcp } = require(helperPath);
 const root = path.resolve(__dirname, "..");
 const unwrap = result => JSON.parse(result.content.find(item => item.type === "text").text);
 (async () => {
