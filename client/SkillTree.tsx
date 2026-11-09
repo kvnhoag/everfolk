@@ -8,6 +8,7 @@ import type { SkillNode, SkillRequirement } from "./skill-tree.ts";
 import { layoutSkillLinks } from "./skill-tree-links.ts";
 import { activityLoanOffer } from "./loan-access.ts";
 import SkillGrowth from "./SkillGrowth.tsx";
+import LateSkillRoutes from "./LateSkillRoutes.tsx";
 import { formatSkillValue as skillNumber } from "./skill-growth.ts";
 import "./skill-tree.css";
 
@@ -182,6 +183,7 @@ export default function SkillTree({ life, world, activities, onActivity, initial
       </aside>
     </div>
     {otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{otherTraining.length}</span></summary><div>{otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</div></details>}
+    <LateSkillRoutes world={world} life={life} activities={activities} onActivity={onActivity} readOnly={wiki} skillId={selected.id} />
     <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.{world.character?.skills[selected.id]?.gainCurve && " Gains get smaller at higher proficiency."}</p>
   </div>;
 }

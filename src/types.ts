@@ -411,13 +411,15 @@ export interface LegacyRouteDefinition {
   jobIds: string[];
   achievementIds: string[];
   earlyInterestFlag?: string;
+  /** Optional later progression; achievements within one stage are alternatives. */
+  stages?: { title: string; achievementIds: string[] }[];
 }
 export interface LegacyAchievementDefinition extends EvidenceMetadata {
   id: string;
   routeId: string;
   title: string;
   description: string;
-  kind: "ordinary" | "prestige";
+  kind: "ordinary" | "prestige" | "ultimate";
   nameTemplate: string;
   /** Fictional contacts explicitly introduced by the awarding outcome. */
   people: string[];
@@ -428,7 +430,7 @@ export interface AccomplishmentRecord {
   routeId: string;
   title: string;
   description: string;
-  kind: "ordinary" | "prestige";
+  kind: "ordinary" | "prestige" | "ultimate";
   name: string;
   age: number;
   year: number;

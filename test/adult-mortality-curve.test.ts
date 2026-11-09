@@ -18,7 +18,7 @@ const comparison = (age: number) => {
 const generated = (age: number) => world.mortality!.bands.find(band => band.minAge <= age && age <= band.maxAge)!.annualProbability;
 
 test("the play reduction ends at18 and every adult annual target keeps the source conversion", () => {
-  assert.equal(world.version, "0.33.0");
+  assert.equal(world.version, "0.34.0");
   assert.equal(world.health!.mortalityCalibration!.minAge, 18);
   for (let age = 0; age < 100; age++) {
     if (age < 18) assert.ok(generated(age) < comparison(age), `Childhood age ${age}`);

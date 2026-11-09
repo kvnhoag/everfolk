@@ -20,9 +20,9 @@ function withoutProse<T>(value: T): T {
 
 test("all sixteen encountered identities offer explicit friendship and bounded shared work", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.33.0");
+  assert.equal(world.version, "0.34.0");
   assert.equal(world.events.filter(event => event.id.startsWith("meet-person-")).length, 16);
-  assert.equal(world.character!.activities.length, 256);
+  assert.equal(world.character!.activities.length, 285);
   assert.equal(world.character!.socialRelationships, true);
   const engine = createEngine(world), birth = engine.start("social-content-inventory");
   assert.deepEqual(birth.character!.people, {});

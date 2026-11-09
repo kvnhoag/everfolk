@@ -370,13 +370,26 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   };
   legacyRoutes.forEach((entry, i) => {
     const path = `world.legacy.routes[${i}]`;
-    const route = object(entry, path, ["id", "title", "description", "skillIds", "jobIds", "achievementIds", "earlyInterestFlag"], ["id", "title", "description", "skillIds", "jobIds", "achievementIds"]);
+    const route = object(entry, path, ["id", "title", "description", "skillIds", "jobIds", "achievementIds", "earlyInterestFlag", "stages"], ["id", "title", "description", "skillIds", "jobIds", "achievementIds"]);
     string(route.title, `${path}.title`, 100);
     string(route.description, `${path}.description`, 1000);
     references(route.skillIds, `${path}.skillIds`, skillIds, "skill", 1);
     references(route.jobIds, `${path}.jobIds`, jobIds, "job");
     references(route.achievementIds, `${path}.achievementIds`, achievementIds, "achievement", 1);
     if (Object.hasOwn(route, "earlyInterestFlag")) reference(route.earlyInterestFlag, `${path}.earlyInterestFlag`, flagIds, "flag");
+    if (Object.hasOwn(route, "stages")) {
+      const staged = new Set<string>();
+      array(route.stages, `${path}.stages`, 1, 16).forEach((entry, index) => {
+        const stagePath = `${path}.stages[${index}]`;
+        const stage = object(entry, stagePath, ["title", "achievementIds"]);
+        string(stage.title, `${stagePath}.title`, 100);
+        references(stage.achievementIds, `${stagePath}.achievementIds`, new Set(route.achievementIds as string[]), "route achievement", 1);
+        for (const id of stage.achievementIds as string[]) {
+          if (staged.has(id)) fail(`${stagePath}.achievementIds`, "achievement appears in more than one stage");
+          staged.add(id);
+        }
+      });
+    }
     for (const achievement of route.achievementIds as string[]) {
       if ((achievements.find(item => (item as DataObject).id === achievement) as DataObject).routeId !== route.id) fail(`${path}.achievementIds`, "achievement belongs to a different route");
     }
@@ -390,7 +403,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     string(achievement.title, `${path}.title`, 200);
     string(achievement.description, `${path}.description`, 1000);
     string(achievement.nameTemplate, `${path}.nameTemplate`, 200);
-    if (achievement.kind !== "ordinary" && achievement.kind !== "prestige") fail(`${path}.kind`, "expected ordinary or prestige");
+    if (!["ordinary", "prestige", "ultimate"].includes(achievement.kind as string)) fail(`${path}.kind`, "expected ordinary, prestige or ultimate");
     const people = array(achievement.people, `${path}.people`, 1, 8);
     people.forEach((person, j) => string(person, `${path}.people[${j}]`, 100));
     if (new Set(people).size !== people.length) fail(`${path}.people`, "duplicate contact");

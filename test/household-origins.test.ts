@@ -3,7 +3,8 @@ import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { matchesCondition } from "../src/engine.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import current from "../worlds/alexandria-sample.json" with { type: "json" };
+// Preserve the exact household-origin release comparison as later routes expand.
+import current from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.32.0.json" with { type: "json" };
 import { withoutMoneylender } from "./fixture-features.ts";
 

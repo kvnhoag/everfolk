@@ -40,7 +40,7 @@ function validEntry(value: unknown): value is LegacyEntry {
   if (entry.lifeKey !== legacyLifeKey({ worldId: entry.worldId, worldFingerprint: entry.worldFingerprint, seed: entry.seed }) ||
     entry.key !== JSON.stringify([entry.lifeKey, record.id])) return false;
   if (![record.id, record.achievementId, record.routeId, record.title, record.name, record.description, record.sourceId, record.outcomeId].every(value => text(value)) ||
-    !["ordinary", "prestige"].includes(record.kind) || !Number.isSafeInteger(record.age) || record.age < 0 ||
+    !["ordinary", "prestige", "ultimate"].includes(record.kind) || !Number.isSafeInteger(record.age) || record.age < 0 ||
     !Number.isSafeInteger(record.year) || record.year === 0 || !Array.isArray(record.people) || !record.people.every(value => text(value, 200))) return false;
   if (entry.verifiedRunId !== undefined && !text(entry.verifiedRunId, 300)) return false;
   if (entry.routeTitle !== undefined && !text(entry.routeTitle, 200)) return false;

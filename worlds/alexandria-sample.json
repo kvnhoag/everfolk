@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "title": "From Rhakotis to Alexandria",
   "description": "Begin a fictional life near Rhakotis on Egypt's Mediterranean coast in 350 BCE. Grow up before Alexandria is founded, then live through Alexander's arrival and the first generations of the new city. Work, learn and build a household; chosen journeys and skilled work may bring you into the worlds of Aristotle, Alexander and Euclid.",
   "startYear": -350,
@@ -269,6 +269,34 @@
     },
     "studied-euclidean-proof": {
       "label": "Had a geometrical demonstration checked in Euclid's circle",
+      "initial": false
+    },
+    "late-sculpture-assessed": {
+      "label": "Sculpture: final assessment completed",
+      "initial": false
+    },
+    "late-philosophy-assessed": {
+      "label": "Philosophy: final assessment completed",
+      "initial": false
+    },
+    "late-seafaring-assessed": {
+      "label": "Seafaring: final assessment completed",
+      "initial": false
+    },
+    "late-military-assessed": {
+      "label": "Military: final assessment completed",
+      "initial": false
+    },
+    "late-commerce-assessed": {
+      "label": "Commerce: final assessment completed",
+      "initial": false
+    },
+    "late-astronomy-calendar-assessed": {
+      "label": "Astronomy & Calendar Tables: final assessment completed",
+      "initial": false
+    },
+    "late-music-performance-assessed": {
+      "label": "Music & Performance: final assessment completed",
       "initial": false
     }
   },
@@ -17840,6 +17868,3122 @@
         "minAge": 18,
         "cooldownYears": 1,
         "usesYearlyActivity": false
+      },
+      {
+        "id": "undertake-sculpture-monumental-work",
+        "text": "Plan and finish a large figure for a shared courtyard (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "sculpture-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "sculpture",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "carving",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "sculpture-monumental-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Plan and finish a large figure for a shared courtyard",
+          "outcomeIds": [
+            "sculpture-monumental-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "sculpture-monumental-work-accepted",
+            "text": "Your collaborators check the figure's balance, joins and finished surface. The customer accepts the completed commission and credits you for its design. Philista and Menon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "sculpture",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "carving",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "sculpture-monumental-work"
+              }
+            ]
+          },
+          {
+            "id": "sculpture-monumental-work-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-sculpture-workshop-method",
+        "text": "Develop and test a repeatable moulding and firing method (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "sculpture-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "pottery",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "sculpture-workshop-method"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Develop and test a repeatable moulding and firing method",
+          "outcomeIds": [
+            "sculpture-workshop-method-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "sculpture-workshop-method-accepted",
+            "text": "The workshop repeats your tested process on a new batch. The pieces survive firing and the workers record the method with your name. Philista and Menon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "pottery",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "sculpture-workshop-method"
+              }
+            ]
+          },
+          {
+            "id": "sculpture-workshop-method-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-sculpture-signature-work",
+        "text": "Complete a workshop's signature collection (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "sculpture-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "sculpture-monumental-work",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "sculpture-workshop-method",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "carving",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "sculpture-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete a workshop's signature collection",
+          "outcomeIds": [
+            "sculpture-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "sculpture-signature-work-accepted",
+            "text": "You complete {name}'s Courtyard Collection, record the difficult methods and teach the workshop to maintain the finished pieces. Your collaborators accept the collection under your name. Philista and Menon confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "sculpture-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "sculpture-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-sculpture-ultimate-title",
+        "text": "Seek recognition as Master Sculptor (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "sculpture-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "sculpture-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "carving",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-sculpture-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "sculpture-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Master Sculptor",
+          "outcomeIds": [
+            "sculpture-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "sculpture-ultimate-title-accepted",
+            "text": "The workshop and its customers review your completed commissions and the collection that remains in their care. They recognize you as Master Sculptor and retain your name with the work. Philista and Menon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "sculpture",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "carving",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "sculpture",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "carving",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "sculpture-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-sculpture-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "sculpture-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-sculpture-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-philosophy-defended-argument",
+        "text": "Revise an argument after a public discussion (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "philosophy-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "philosophy",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "philosophy-defended-argument"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Revise an argument after a public discussion",
+          "outcomeIds": [
+            "philosophy-defended-argument-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "philosophy-defended-argument-accepted",
+            "text": "Readers test your premises with counterexamples. You answer the strongest objection and revise the argument before they accept the written discussion. Kleio and Apollonios confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "philosophy",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "philosophy-defended-argument"
+              }
+            ]
+          },
+          {
+            "id": "philosophy-defended-argument-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-philosophy-comparative-inquiry",
+        "text": "Compare observations and write down their limits (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "philosophy-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "philosophy",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "philosophy-comparative-inquiry"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Compare observations and write down their limits",
+          "outcomeIds": [
+            "philosophy-comparative-inquiry-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "philosophy-comparative-inquiry-accepted",
+            "text": "Your readers check the recorded observations against your explanation. You distinguish the cases that support it from those that remain uncertain, and the inquiry is accepted. Kleio and Apollonios confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "philosophy",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "philosophy-comparative-inquiry"
+              }
+            ]
+          },
+          {
+            "id": "philosophy-comparative-inquiry-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-philosophy-signature-work",
+        "text": "Complete an independent course of inquiry (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "philosophy-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "philosophy-defended-argument",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "philosophy-comparative-inquiry",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "philosophy-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete an independent course of inquiry",
+          "outcomeIds": [
+            "philosophy-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "philosophy-signature-work-accepted",
+            "text": "You finish {name}'s Questions and Replies, credit the arguments you borrowed and teach a group through the remaining objections. The readers accept the work as your own connected inquiry. Kleio and Apollonios confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "philosophy-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "philosophy-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-philosophy-ultimate-title",
+        "text": "Seek recognition as Keeper of a Living School (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "philosophy-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "philosophy-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-philosophy-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "philosophy-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Keeper of a Living School",
+          "outcomeIds": [
+            "philosophy-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "philosophy-ultimate-title-accepted",
+            "text": "Former pupils return with questions and their own teaching notes. They recognize the school you have sustained around your accepted work, calling you Keeper of a Living School. Kleio and Apollonios confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "philosophy",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "philosophy",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "philosophy-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-philosophy-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "philosophy-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-philosophy-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-seafaring-charted-passage",
+        "text": "Check a coastal passage and its water stops (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "seafaring-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "seamanship",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "seafaring-charted-passage"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Check a coastal passage and its water stops",
+          "outcomeIds": [
+            "seafaring-charted-passage-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "seafaring-charted-passage-accepted",
+            "text": "Your crew completes the passage and checks the landfalls, supplies and stopping places against your account. The accepted record distinguishes the route you sailed from hearsay. Nikeratos and Tasos confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "seafaring-charted-passage"
+              }
+            ]
+          },
+          {
+            "id": "seafaring-charted-passage-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-seafaring-crew-plan",
+        "text": "Lead a crew through an agreed difficult passage (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "seafaring-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "seamanship",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "seafaring-crew-plan"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Lead a crew through an agreed difficult passage",
+          "outcomeIds": [
+            "seafaring-crew-plan-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "seafaring-crew-plan-accepted",
+            "text": "The crew follows the agreed watches and responds to a damaged sail without abandoning the entrusted cargo. At the quay, the returning crew confirms your responsibility for the completed passage. Nikeratos and Tasos confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "seafaring-crew-plan"
+              }
+            ]
+          },
+          {
+            "id": "seafaring-crew-plan-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-seafaring-signature-work",
+        "text": "Complete a useful book of passages (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "seafaring-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "seafaring-charted-passage",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "seafaring-crew-plan",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "seafaring-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete a useful book of passages",
+          "outcomeIds": [
+            "seafaring-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "seafaring-signature-work-accepted",
+            "text": "You complete {name}'s Coastal Passages after checking its instructions on another voyage. Crew and customer accept both the completed delivery and the corrected account. Nikeratos and Tasos confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "seafaring-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "seafaring-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-seafaring-ultimate-title",
+        "text": "Seek recognition as Master of Safe Passages (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "seafaring-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "seafaring-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-seafaring-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "seafaring-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Master of Safe Passages",
+          "outcomeIds": [
+            "seafaring-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "seafaring-ultimate-title-accepted",
+            "text": "Crews review the voyages you completed and the instructions they have used since. They recognize you as Master of Safe Passages; this distinction records past work and cannot promise a risk-free voyage. Nikeratos and Tasos confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "seamanship",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "seamanship",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "seafaring-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-seafaring-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "seafaring-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-seafaring-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-military-supply-exercise",
+        "text": "Plan and lead a bounded escort and supply exercise (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "military-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "warfare",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "military-supply-exercise"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Plan and lead a bounded escort and supply exercise",
+          "outcomeIds": [
+            "military-supply-exercise-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "military-supply-exercise-accepted",
+            "text": "Your group completes the agreed escort exercise with its supplies accounted for. The observers record the route, decisions and shortages you actually resolved. Dion and Herakleides confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "military-supply-exercise"
+              }
+            ]
+          },
+          {
+            "id": "military-supply-exercise-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-military-unit-exercise",
+        "text": "Lead a group through a difficult formation exercise (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "military-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "warfare",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "military-unit-exercise"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Lead a group through a difficult formation exercise",
+          "outcomeIds": [
+            "military-unit-exercise-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "military-unit-exercise-accepted",
+            "text": "Your group completes the exercise under the agreed limits. The observers accept your account of the orders, reserves and withdrawal, without conferring a royal commission. Dion and Herakleides confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "military-unit-exercise"
+              }
+            ]
+          },
+          {
+            "id": "military-unit-exercise-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-military-signature-work",
+        "text": "Complete a tested account of command (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "military-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "military-supply-exercise",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "military-unit-exercise",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "military-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete a tested account of command",
+          "outcomeIds": [
+            "military-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "military-signature-work-accepted",
+            "text": "Veterans test {name}'s Exercises in Command against the exercises you completed. You revise the supply and withdrawal sections before they accept the finished account. Dion and Herakleides confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "military-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "military-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-military-ultimate-title",
+        "text": "Seek recognition as Veteran Strategist (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "military-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "military-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-military-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "military-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Veteran Strategist",
+          "outcomeIds": [
+            "military-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "military-ultimate-title-accepted",
+            "text": "Veterans review your recorded service, completed exercises and the account others have used. They recognize you as Veteran Strategist. This distinction grants no army, territory or new office. Dion and Herakleides confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "warfare",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "warfare",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "military-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-military-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "military-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-military-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-commerce-audited-accounts",
+        "text": "Reconcile a trading partnership's accounts and receipts (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "commerce-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "commerce-audited-accounts"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Reconcile a trading partnership's accounts and receipts",
+          "outcomeIds": [
+            "commerce-audited-accounts-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "commerce-audited-accounts-accepted",
+            "text": "The partners compare your completed accounts with their receipts and deliveries. You resolve the discrepancies and they accept the settled record. Sarapion and Berenike confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "commerce-audited-accounts"
+              }
+            ]
+          },
+          {
+            "id": "commerce-audited-accounts-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-commerce-supply-settlement",
+        "text": "Negotiate and fulfil a multi-party supply agreement (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "commerce-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "commerce-supply-settlement"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Negotiate and fulfil a multi-party supply agreement",
+          "outcomeIds": [
+            "commerce-supply-settlement-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "commerce-supply-settlement-accepted",
+            "text": "You agree quantities, delivery and payment with the suppliers and customer. After the goods arrive and the accounts are settled, all parties accept the fulfilled agreement. Sarapion and Berenike confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "commerce-supply-settlement"
+              }
+            ]
+          },
+          {
+            "id": "commerce-supply-settlement-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-commerce-signature-work",
+        "text": "Complete a trading house's completed ledger (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "commerce-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "commerce-audited-accounts",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "commerce-supply-settlement",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "commerce-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete a trading house's completed ledger",
+          "outcomeIds": [
+            "commerce-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "commerce-signature-work-accepted",
+            "text": "You finish {name}'s Settled Ledger after another trading season, settling the recorded obligations and retaining the supporting receipts. The partners accept the ledger and your responsibility for it. Sarapion and Berenike confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "commerce-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "commerce-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-commerce-ultimate-title",
+        "text": "Seek recognition as Master of the Trading House (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "commerce-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "commerce-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-commerce-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "commerce-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Master of the Trading House",
+          "outcomeIds": [
+            "commerce-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "commerce-ultimate-title-accepted",
+            "text": "Customers and partners review your fulfilled orders, settled agreements and the ledger used over the following seasons. They recognize you as Master of the Trading House. Sarapion and Berenike confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "commerce-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-commerce-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "commerce-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-commerce-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "complete-measured-plan",
+        "text": "Complete a checked courtyard measurement (5 drachmas)",
+        "category": "career",
+        "minAge": 16,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 5
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-geometry-first-work"
+              }
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "measured-plan-accepted",
+            "text": "Heron and Isidora check the dimensions in {name}'s Measured Courtyard against the completed measurement. They accept your practical plan and keep the record under your name. You spend 5 drachmas on measuring cord and writing materials.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -5
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-geometry-first-work"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-astronomy-calendar-compared-calculations",
+        "text": "Compare the calculations behind two sets of sky tables (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-first-work"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-geometry-first-work"
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "astronomy",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-compared-calculations"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Compare the calculations behind two sets of sky tables",
+          "outcomeIds": [
+            "astronomy-calendar-compared-calculations-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "astronomy-calendar-compared-calculations-accepted",
+            "text": "Readers repeat your calculations and trace the differences between the two tables. They accept your corrected comparison while retaining its stated limits. Heron and Isidora confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "astronomy",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-compared-calculations"
+              }
+            ]
+          },
+          {
+            "id": "astronomy-calendar-compared-calculations-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-astronomy-calendar-geometrical-exposition",
+        "text": "Write and defend a connected geometrical demonstration (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-first-work"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-geometry-first-work"
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-geometrical-exposition"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Write and defend a connected geometrical demonstration",
+          "outcomeIds": [
+            "astronomy-calendar-geometrical-exposition-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "astronomy-calendar-geometrical-exposition-accepted",
+            "text": "A reader reconstructs your figure and follows each justified step. You correct an unclear premise before the demonstration is accepted under your name. Heron and Isidora confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-geometrical-exposition"
+              }
+            ]
+          },
+          {
+            "id": "astronomy-calendar-geometrical-exposition-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-astronomy-calendar-signature-work",
+        "text": "Complete a connected mathematical work (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-first-work"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-geometry-first-work"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-compared-calculations",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-geometrical-exposition",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "accomplishment",
+                      "achievement": "astronomy-calendar-compared-calculations"
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "astronomy",
+                      "op": "gte",
+                      "value": 55
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 30
+                    }
+                  ]
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "accomplishment",
+                      "achievement": "astronomy-calendar-geometrical-exposition"
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 55
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "literacy",
+                      "op": "gte",
+                      "value": 30
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete a connected mathematical work",
+          "outcomeIds": [
+            "astronomy-calendar-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "astronomy-calendar-signature-work-accepted",
+            "text": "You complete {name}'s Methods and Demonstrations. Independent readers reproduce its examples, check the reasoning and accept the revised work with its debts to earlier authors credited. Heron and Isidora confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "astronomy-calendar-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-astronomy-calendar-ultimate-title",
+        "text": "Seek recognition as Mathematical Author of Renown (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-first-work"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "astronomy-calendar-geometry-first-work"
+                }
+              ]
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "astronomy-calendar-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "accomplishment",
+                      "achievement": "astronomy-calendar-compared-calculations"
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "astronomy",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "accomplishment",
+                      "achievement": "astronomy-calendar-geometrical-exposition"
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "reckoning",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "literacy",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-astronomy-calendar-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Mathematical Author of Renown",
+          "outcomeIds": [
+            "astronomy-calendar-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "astronomy-calendar-ultimate-title-accepted",
+            "text": "Readers bring copies used in their own lessons and compare them with your accepted work. They recognize you as Mathematical Author of Renown for the contribution they can reproduce. Heron and Isidora confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "all",
+                      "conditions": [
+                        {
+                          "type": "accomplishment",
+                          "achievement": "astronomy-calendar-compared-calculations"
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "astronomy",
+                          "op": "gte",
+                          "value": 75
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "reckoning",
+                          "op": "gte",
+                          "value": 40
+                        }
+                      ]
+                    },
+                    {
+                      "type": "all",
+                      "conditions": [
+                        {
+                          "type": "accomplishment",
+                          "achievement": "astronomy-calendar-geometrical-exposition"
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "reckoning",
+                          "op": "gte",
+                          "value": 75
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "literacy",
+                          "op": "gte",
+                          "value": 40
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "all",
+                      "conditions": [
+                        {
+                          "type": "accomplishment",
+                          "achievement": "astronomy-calendar-compared-calculations"
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "astronomy",
+                          "op": "gte",
+                          "value": 65
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "reckoning",
+                          "op": "gte",
+                          "value": 50
+                        }
+                      ]
+                    },
+                    {
+                      "type": "all",
+                      "conditions": [
+                        {
+                          "type": "accomplishment",
+                          "achievement": "astronomy-calendar-geometrical-exposition"
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "reckoning",
+                          "op": "gte",
+                          "value": 65
+                        },
+                        {
+                          "type": "skill",
+                          "skill": "literacy",
+                          "op": "gte",
+                          "value": 50
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "astronomy-calendar-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-astronomy-calendar-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "astronomy-calendar-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-astronomy-calendar-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-music-performance-ensemble-direction",
+        "text": "Prepare and direct a demanding ensemble engagement (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "music-performance-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "music",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "music-performance-ensemble-direction"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Prepare and direct a demanding ensemble engagement",
+          "outcomeIds": [
+            "music-performance-ensemble-direction-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "music-performance-ensemble-direction-accepted",
+            "text": "The performers complete the agreed programme with your entries and changes clearly understood. The host accepts the engagement and credits your direction. Melitta and Theon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "music",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "oratory",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "music-performance-ensemble-direction"
+              }
+            ]
+          },
+          {
+            "id": "music-performance-ensemble-direction-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-music-performance-repertoire-teaching",
+        "text": "Prepare a repertoire and teach it to new performers (10 drachmas)",
+        "category": "career",
+        "minAge": 24,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "music-performance-first-work"
+            },
+            {
+              "type": "skill",
+              "skill": "music",
+              "op": "gte",
+              "value": 40
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "music-performance-repertoire-teaching"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Prepare a repertoire and teach it to new performers",
+          "outcomeIds": [
+            "music-performance-repertoire-teaching-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "music-performance-repertoire-teaching-accepted",
+            "text": "New performers learn the agreed repertoire from your rehearsals and notes. Their completed engagement confirms that they can perform it together, with earlier melodies properly credited. Melitta and Theon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "skill",
+                "skill": "music",
+                "delta": 2
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "music-performance-repertoire-teaching"
+              }
+            ]
+          },
+          {
+            "id": "music-performance-repertoire-teaching-unfinished",
+            "text": "The reviewers find an unresolved problem and return your work with corrections. You spend 10 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-music-performance-signature-work",
+        "text": "Complete an ensemble's lasting repertoire (20 drachmas)",
+        "category": "career",
+        "minAge": 30,
+        "cooldownYears": 3,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "music-performance-first-work"
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "music-performance-ensemble-direction",
+                  "minYears": 2
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "music-performance-repertoire-teaching",
+                  "minYears": 2
+                }
+              ]
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "music",
+                  "op": "gte",
+                  "value": 55
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 30
+                }
+              ]
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "music-performance-signature-work"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Complete an ensemble's lasting repertoire",
+          "outcomeIds": [
+            "music-performance-signature-work-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "music-performance-signature-work-accepted",
+            "text": "You complete {name}'s Rehearsal Collection and lead a further engagement from it. Performers accept the practical instructions and credit your arrangement and teaching. Melitta and Theon confirm the accepted work and its credit. You spend 20 drachmas on the undertaking.",
+            "weight": 70,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 2
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "music-performance-signature-work"
+              }
+            ]
+          },
+          {
+            "id": "music-performance-signature-work-unfinished",
+            "text": "The readers identify a weakness that prevents acceptance of the complete work. You spend 20 drachmas on the undertaking. You can revise the work and attempt it again after three years.",
+            "weight": 30,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "undertake-music-performance-ultimate-title",
+        "text": "Seek recognition as Master of the Ensemble (10 drachmas)",
+        "category": "career",
+        "minAge": 36,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "accomplishment",
+              "achievement": "music-performance-first-work"
+            },
+            {
+              "type": "accomplishment",
+              "achievement": "music-performance-signature-work",
+              "minYears": 3
+            },
+            {
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "music",
+                  "op": "gte",
+                  "value": 65
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
+            },
+            {
+              "type": "flag",
+              "flag": "late-music-performance-assessed",
+              "value": false
+            },
+            {
+              "type": "cash",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "music-performance-ultimate-title"
+              }
+            }
+          ]
+        },
+        "opportunity": {
+          "label": "Master of the Ensemble",
+          "outcomeIds": [
+            "music-performance-ultimate-title-accepted"
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "music-performance-ultimate-title-accepted",
+            "text": "Performers review the engagements you led and the repertoire others have learned since. They recognize you as Master of the Ensemble and keep your name with the collection. Melitta and Theon confirm the accepted work and its credit. You spend 10 drachmas on the undertaking.",
+            "weight": 15,
+            "weightModifiers": [
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "music",
+                      "op": "gte",
+                      "value": 75
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 40
+                    }
+                  ]
+                },
+                "multiplier": 1.5,
+                "reason": "Highly developed technique supports the review"
+              },
+              {
+                "when": {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "skill",
+                      "skill": "music",
+                      "op": "gte",
+                      "value": 65
+                    },
+                    {
+                      "type": "skill",
+                      "skill": "oratory",
+                      "op": "gte",
+                      "value": 50
+                    }
+                  ]
+                },
+                "multiplier": 1.2,
+                "reason": "Strong supporting skill helps the review"
+              }
+            ],
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 3
+              },
+              {
+                "type": "accomplishment",
+                "achievement": "music-performance-ultimate-title"
+              },
+              {
+                "type": "flag",
+                "flag": "late-music-performance-assessed",
+                "value": true
+              }
+            ]
+          },
+          {
+            "id": "music-performance-ultimate-title-unfinished",
+            "text": "The reviewers acknowledge your earlier work but do not grant the final distinction. You spend 10 drachmas on the undertaking. This route's final assessment is now complete; it cannot be repeated in this life.",
+            "weight": 85,
+            "effects": [
+              {
+                "type": "cash",
+                "delta": -10
+              },
+              {
+                "type": "flag",
+                "flag": "late-music-performance-assessed",
+                "value": true
+              }
+            ]
+          }
+        ]
       }
     ],
     "childNames": [
@@ -54433,9 +57577,34 @@
         ],
         "achievementIds": [
           "sculpture-first-work",
-          "sculpture-prestige"
+          "sculpture-prestige",
+          "sculpture-monumental-work",
+          "sculpture-workshop-method",
+          "sculpture-signature-work",
+          "sculpture-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-sculpture"
+        "earlyInterestFlag": "early-interest-sculpture",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "sculpture-monumental-work",
+              "sculpture-workshop-method"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "sculpture-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "sculpture-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "philosophy",
@@ -54452,9 +57621,34 @@
         ],
         "achievementIds": [
           "philosophy-first-work",
-          "philosophy-prestige"
+          "philosophy-prestige",
+          "philosophy-defended-argument",
+          "philosophy-comparative-inquiry",
+          "philosophy-signature-work",
+          "philosophy-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-philosophy"
+        "earlyInterestFlag": "early-interest-philosophy",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "philosophy-defended-argument",
+              "philosophy-comparative-inquiry"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "philosophy-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "philosophy-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "seafaring",
@@ -54469,9 +57663,34 @@
         ],
         "achievementIds": [
           "seafaring-first-work",
-          "seafaring-prestige"
+          "seafaring-prestige",
+          "seafaring-charted-passage",
+          "seafaring-crew-plan",
+          "seafaring-signature-work",
+          "seafaring-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-seafaring"
+        "earlyInterestFlag": "early-interest-seafaring",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "seafaring-charted-passage",
+              "seafaring-crew-plan"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "seafaring-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "seafaring-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "military",
@@ -54489,9 +57708,34 @@
         ],
         "achievementIds": [
           "military-first-work",
-          "military-prestige"
+          "military-prestige",
+          "military-supply-exercise",
+          "military-unit-exercise",
+          "military-signature-work",
+          "military-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-military"
+        "earlyInterestFlag": "early-interest-military",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "military-supply-exercise",
+              "military-unit-exercise"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "military-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "military-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "commerce",
@@ -54508,9 +57752,34 @@
         ],
         "achievementIds": [
           "commerce-first-work",
-          "commerce-prestige"
+          "commerce-prestige",
+          "commerce-audited-accounts",
+          "commerce-supply-settlement",
+          "commerce-signature-work",
+          "commerce-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-commerce"
+        "earlyInterestFlag": "early-interest-commerce",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "commerce-audited-accounts",
+              "commerce-supply-settlement"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "commerce-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "commerce-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "astronomy-calendar",
@@ -54527,9 +57796,35 @@
         ],
         "achievementIds": [
           "astronomy-calendar-first-work",
-          "astronomy-calendar-prestige"
+          "astronomy-calendar-prestige",
+          "astronomy-calendar-geometry-first-work",
+          "astronomy-calendar-compared-calculations",
+          "astronomy-calendar-geometrical-exposition",
+          "astronomy-calendar-signature-work",
+          "astronomy-calendar-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-astronomy-calendar"
+        "earlyInterestFlag": "early-interest-astronomy-calendar",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "astronomy-calendar-compared-calculations",
+              "astronomy-calendar-geometrical-exposition"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "astronomy-calendar-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "astronomy-calendar-ultimate-title"
+            ]
+          }
+        ]
       },
       {
         "id": "music-performance",
@@ -54544,9 +57839,34 @@
         ],
         "achievementIds": [
           "music-performance-first-work",
-          "music-performance-prestige"
+          "music-performance-prestige",
+          "music-performance-ensemble-direction",
+          "music-performance-repertoire-teaching",
+          "music-performance-signature-work",
+          "music-performance-ultimate-title"
         ],
-        "earlyInterestFlag": "early-interest-music-performance"
+        "earlyInterestFlag": "early-interest-music-performance",
+        "stages": [
+          {
+            "title": "Specialize",
+            "achievementIds": [
+              "music-performance-ensemble-direction",
+              "music-performance-repertoire-teaching"
+            ]
+          },
+          {
+            "title": "Signature work",
+            "achievementIds": [
+              "music-performance-signature-work"
+            ]
+          },
+          {
+            "title": "Ultimate title",
+            "achievementIds": [
+              "music-performance-ultimate-title"
+            ]
+          }
+        ]
       }
     ],
     "achievements": [
@@ -54789,6 +58109,412 @@
           "prauscello-2023-theadelpheia",
           "coppens-2009-festivals"
         ]
+      },
+      {
+        "id": "sculpture-monumental-work",
+        "routeId": "sculpture",
+        "title": "A balanced monumental figure",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s balanced monumental figure",
+        "description": "Your collaborators check the figure's balance, joins and finished surface. The customer accepts the completed commission and credits you for its design.",
+        "people": [
+          "Philista",
+          "Menon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "sculpture-workshop-method",
+        "routeId": "sculpture",
+        "title": "A reliable workshop method",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s reliable workshop method",
+        "description": "The workshop repeats your tested process on a new batch. The pieces survive firing and the workers record the method with your name.",
+        "people": [
+          "Philista",
+          "Menon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "sculpture-signature-work",
+        "routeId": "sculpture",
+        "title": "A workshop's signature collection",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Courtyard Collection",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Philista",
+          "Menon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "sculpture-ultimate-title",
+        "routeId": "sculpture",
+        "title": "Master Sculptor",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Master Sculptor",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Philista",
+          "Menon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "philosophy-defended-argument",
+        "routeId": "philosophy",
+        "title": "An argument that survives criticism",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s argument that survives criticism",
+        "description": "Readers test your premises with counterexamples. You answer the strongest objection and revise the argument before they accept the written discussion.",
+        "people": [
+          "Kleio",
+          "Apollonios"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "philosophy-comparative-inquiry",
+        "routeId": "philosophy",
+        "title": "A checked comparative inquiry",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s checked comparative inquiry",
+        "description": "Your readers check the recorded observations against your explanation. You distinguish the cases that support it from those that remain uncertain, and the inquiry is accepted.",
+        "people": [
+          "Kleio",
+          "Apollonios"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "philosophy-signature-work",
+        "routeId": "philosophy",
+        "title": "An independent course of inquiry",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Questions and Replies",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Kleio",
+          "Apollonios"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "philosophy-ultimate-title",
+        "routeId": "philosophy",
+        "title": "Keeper of a Living School",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Keeper of a Living School",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Kleio",
+          "Apollonios"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "seafaring-charted-passage",
+        "routeId": "seafaring",
+        "title": "A passage checked on the water",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s passage checked on the water",
+        "description": "Your crew completes the passage and checks the landfalls, supplies and stopping places against your account. The accepted record distinguishes the route you sailed from hearsay.",
+        "people": [
+          "Nikeratos",
+          "Tasos"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "seafaring-crew-plan",
+        "routeId": "seafaring",
+        "title": "A crew plan tested at sea",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s crew plan tested at sea",
+        "description": "The crew follows the agreed watches and responds to a damaged sail without abandoning the entrusted cargo. At the quay, the returning crew confirms your responsibility for the completed passage.",
+        "people": [
+          "Nikeratos",
+          "Tasos"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "seafaring-signature-work",
+        "routeId": "seafaring",
+        "title": "A useful book of passages",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Coastal Passages",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Nikeratos",
+          "Tasos"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "seafaring-ultimate-title",
+        "routeId": "seafaring",
+        "title": "Master of Safe Passages",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Master of Safe Passages",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Nikeratos",
+          "Tasos"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "military-supply-exercise",
+        "routeId": "military",
+        "title": "A completed supply exercise",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s completed supply exercise",
+        "description": "Your group completes the agreed escort exercise with its supplies accounted for. The observers record the route, decisions and shortages you actually resolved.",
+        "people": [
+          "Dion",
+          "Herakleides"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "military-unit-exercise",
+        "routeId": "military",
+        "title": "A unit exercise brought to order",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s unit exercise brought to order",
+        "description": "Your group completes the exercise under the agreed limits. The observers accept your account of the orders, reserves and withdrawal, without conferring a royal commission.",
+        "people": [
+          "Dion",
+          "Herakleides"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "military-signature-work",
+        "routeId": "military",
+        "title": "A tested account of command",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Exercises in Command",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Dion",
+          "Herakleides"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "military-ultimate-title",
+        "routeId": "military",
+        "title": "Veteran Strategist",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Veteran Strategist",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Dion",
+          "Herakleides"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "commerce-audited-accounts",
+        "routeId": "commerce",
+        "title": "A set of reconciled trading accounts",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s set of reconciled trading accounts",
+        "description": "The partners compare your completed accounts with their receipts and deliveries. You resolve the discrepancies and they accept the settled record.",
+        "people": [
+          "Sarapion",
+          "Berenike"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "commerce-supply-settlement",
+        "routeId": "commerce",
+        "title": "A fulfilled negotiated supply agreement",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s fulfilled negotiated supply agreement",
+        "description": "You agree quantities, delivery and payment with the suppliers and customer. After the goods arrive and the accounts are settled, all parties accept the fulfilled agreement.",
+        "people": [
+          "Sarapion",
+          "Berenike"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "commerce-signature-work",
+        "routeId": "commerce",
+        "title": "A trading house's completed ledger",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Settled Ledger",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Sarapion",
+          "Berenike"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "commerce-ultimate-title",
+        "routeId": "commerce",
+        "title": "Master of the Trading House",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Master of the Trading House",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Sarapion",
+          "Berenike"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "astronomy-calendar-geometry-first-work",
+        "routeId": "astronomy-calendar",
+        "title": "A checked measurement plan",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s Measured Courtyard",
+        "description": "A completed practical measurement whose recorded dimensions another reader has checked.",
+        "people": [
+          "Heron",
+          "Isidora"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "astronomy-calendar-compared-calculations",
+        "routeId": "astronomy-calendar",
+        "title": "A set of independently checked calculations",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s set of independently checked calculations",
+        "description": "Readers repeat your calculations and trace the differences between the two tables. They accept your corrected comparison while retaining its stated limits.",
+        "people": [
+          "Heron",
+          "Isidora"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "astronomy-calendar-geometrical-exposition",
+        "routeId": "astronomy-calendar",
+        "title": "A demonstration another reader can reproduce",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s demonstration another reader can reproduce",
+        "description": "A reader reconstructs your figure and follows each justified step. You correct an unclear premise before the demonstration is accepted under your name.",
+        "people": [
+          "Heron",
+          "Isidora"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "astronomy-calendar-signature-work",
+        "routeId": "astronomy-calendar",
+        "title": "A connected mathematical work",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Methods and Demonstrations",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Heron",
+          "Isidora"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "astronomy-calendar-ultimate-title",
+        "routeId": "astronomy-calendar",
+        "title": "Mathematical Author of Renown",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Mathematical Author of Renown",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Heron",
+          "Isidora"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "music-performance-ensemble-direction",
+        "routeId": "music-performance",
+        "title": "A difficult ensemble engagement",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s difficult ensemble engagement",
+        "description": "The performers complete the agreed programme with your entries and changes clearly understood. The host accepts the engagement and credits your direction.",
+        "people": [
+          "Melitta",
+          "Theon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "music-performance-repertoire-teaching",
+        "routeId": "music-performance",
+        "title": "A repertoire passed to new performers",
+        "kind": "ordinary",
+        "nameTemplate": "{name}'s repertoire passed to new performers",
+        "description": "New performers learn the agreed repertoire from your rehearsals and notes. Their completed engagement confirms that they can perform it together, with earlier melodies properly credited.",
+        "people": [
+          "Melitta",
+          "Theon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "music-performance-signature-work",
+        "routeId": "music-performance",
+        "title": "An ensemble's lasting repertoire",
+        "kind": "prestige",
+        "nameTemplate": "{name}'s Rehearsal Collection",
+        "description": "A substantial connected work, independently checked and retained under its maker's name.",
+        "people": [
+          "Melitta",
+          "Theon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
+      },
+      {
+        "id": "music-performance-ultimate-title",
+        "routeId": "music-performance",
+        "title": "Master of the Ensemble",
+        "kind": "ultimate",
+        "nameTemplate": "{name}, Master of the Ensemble",
+        "description": "An earned late-career distinction following accepted work and a later review.",
+        "people": [
+          "Melitta",
+          "Theon"
+        ],
+        "evidence": "fictional",
+        "sourceIds": []
       }
     ]
   }

@@ -9,8 +9,18 @@ export function getLegacyRoutes(world: WorldPack, state: LifeState): readonly Le
   const records = getAccomplishments(world, state);
   return (world.legacy?.routes ?? []).map(route => {
     const earned = records.filter(record => record.routeId === route.id);
-    const next = route.achievementIds.map(id => world.legacy!.achievements.find(item => item.id === id)!)
-      .find(item => !earned.some(record => record.achievementId === item.id));
+    const achieved = (id: string) => earned.some(record => record.achievementId === id);
+    const definitions = route.achievementIds.map(id => world.legacy!.achievements.find(item => item.id === id)!);
+    const firstWork = definitions.filter(item => item.kind === "ordinary" && !route.stages?.some(stage => stage.achievementIds.includes(item.id)));
+    const assessed = (id: string) => definitions.find(item => item.id === id)?.kind === "ultimate" &&
+      world.character?.activities.some(activity => state.character?.lastActivityAges[activity.id] !== undefined &&
+        activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === id)));
+    const nextId = route.stages && firstWork.some(item => achieved(item.id))
+      ? route.stages.find(stage => !stage.achievementIds.some(achieved) && !stage.achievementIds.every(assessed))?.achievementIds[0]
+      : undefined;
+    const next = route.stages
+      ? nextId ? definitions.find(item => item.id === nextId) : !firstWork.some(item => achieved(item.id)) ? firstWork[0] : undefined
+      : definitions.find(item => !achieved(item.id));
     return { ...route, earned, ...(next ? { next } : {}) };
   });
 }
