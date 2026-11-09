@@ -34,6 +34,7 @@ import skillCeilingWorld from "../worlds/alexandria-0.28.0.json" with { type: "j
 import proceduralPeopleWorld from "../worlds/alexandria-0.29.0.json" with { type: "json" };
 import socialRolesWorld from "../worlds/alexandria-0.30.0.json" with { type: "json" };
 import narrativeWorld from "../worlds/alexandria-0.31.0.json" with { type: "json" };
+import classicalWorld from "../worlds/alexandria-0.32.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -69,6 +70,7 @@ const skillCeilingEngine = createEngine(skillCeilingWorld);
 const proceduralPeopleEngine = createEngine(proceduralPeopleWorld);
 const socialRolesEngine = createEngine(socialRolesWorld);
 const narrativeEngine = createEngine(narrativeWorld);
+const classicalEngine = createEngine(classicalWorld);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -92,6 +94,7 @@ engines.set(skillCeilingEngine.fingerprint, skillCeilingEngine);
 engines.set(proceduralPeopleEngine.fingerprint, proceduralPeopleEngine);
 engines.set(socialRolesEngine.fingerprint, socialRolesEngine);
 engines.set(narrativeEngine.fingerprint, narrativeEngine);
+engines.set(classicalEngine.fingerprint, classicalEngine);
 const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

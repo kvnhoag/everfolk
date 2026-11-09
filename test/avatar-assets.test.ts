@@ -6,7 +6,8 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import { avatarOptions, avatarStage, AVATAR_ORIGIN_IDS, AVATAR_STAGES, portraitSource, portraitVariant } from "../client/life-background.ts";
+import { avatarArtworkOrigin, avatarOptions, avatarStage, AVATAR_ORIGIN_IDS, AVATAR_ORIGIN_ALIASES, AVATAR_STAGES, portraitSource, portraitVariant } from "../client/life-background.ts";
+import { getAvatarAppearance } from "../client/avatar-appearance.ts";
 import type { AvatarSex, AvatarStage } from "../client/life-background.ts";
 import world from "../worlds/alexandria-sample.json" with { type: "json" };
 
@@ -35,8 +36,8 @@ function pixelDigest(asset: Asset): string {
   return createHash("sha256").update(bitmap(asset).flat().join("")).digest("hex");
 }
 
-test("all eight origins have three complete male and female avatar lifetimes", () => {
-  assert.deepEqual(new Set(AVATAR_ORIGIN_IDS), new Set(world.origins.map(origin => origin.id)));
+test("eight physical artwork families cover every household with complete avatar lifetimes", () => {
+  assert.deepEqual(new Set(AVATAR_ORIGIN_IDS), new Set(world.origins.map(origin => avatarArtworkOrigin(origin.id))));
   assert.equal(assets.length, 8 * 2 * 3 * 6);
   assert.equal(new Set(assets.map(asset => asset.path)).size, assets.length);
   for (const originId of AVATAR_ORIGIN_IDS) for (const sex of ["male", "female"] as const) for (const stage of AVATAR_STAGES) {
@@ -48,6 +49,22 @@ test("all eight origins have three complete male and female avatar lifetimes", (
       assert.equal(asset.originId, originId); assert.equal(asset.sex, sex); assert.equal(asset.stage, stage);
       assert.equal(asset.width, 32); assert.equal(asset.height, 40);
       bitmap(asset);
+    }
+  }
+});
+
+test("expanded household origins use matching shipped avatar choices and appearance data", () => {
+  for (const [originId, artworkOrigin] of Object.entries(AVATAR_ORIGIN_ALIASES)) {
+    assert.equal(avatarArtworkOrigin(originId), artworkOrigin);
+    for (const sex of ["male", "female"] as const) for (const stage of AVATAR_STAGES) {
+      const options = avatarOptions(originId, sex, stage);
+      assert.deepEqual(options, avatarOptions(artworkOrigin, sex, stage));
+      assert.equal(options.length, 3);
+      for (const { variant, src } of options) {
+        assert.ok(assets.some(asset => asset.path === src), src);
+        assert.deepEqual(getAvatarAppearance({ originId, sex, stage, variant }), getAvatarAppearance({ originId: artworkOrigin, sex, stage, variant }));
+        assert.equal(portraitSource({ age: stage === "infant" ? 0 : stage === "child" ? 5 : stage === "youth" ? 15 : stage === "adult" ? 25 : stage === "middle" ? 45 : 65, originId, sex, avatarVariant: variant }), src);
+      }
     }
   }
 });

@@ -1,5 +1,5 @@
 import type { ActivityAvailability, Choice, LifeState, WorldPack } from "../src/types.ts";
-import { buildSkillTree } from "./skill-tree.ts";
+import { buildSkillTree, currentSkillTree } from "./skill-tree.ts";
 import { getSkillImpact } from "./skill-impact.ts";
 import { activeEarlyInfluences, previewEarlyInfluences } from "./early-influences.ts";
 import type { EarlyInfluence } from "./early-influences.ts";
@@ -27,24 +27,25 @@ export function compactSkillPreview(world: WorldPack, life: LifeState, choice?: 
 
 /** Pick one useful branch without changing the authored tree or the life. */
 export function compactSkillView(model: ReturnType<typeof compactSkillPreview>, life: LifeState, selectedBranch?: string, previewOnly = false) {
+  const current = model.previewing || previewOnly ? model : currentSkillTree(model);
   const score = (branch: string) => {
-    const nodes = model.nodes.filter(node => node.branch === branch);
+    const nodes = current.nodes.filter(node => node.branch === branch);
     return {
       relevant: nodes.some(node => node.careers.some(career => career.job.id === life.character?.jobId)),
       progress: nodes.reduce((sum, node) => sum + node.progress, 0) / (nodes.length || 1),
     };
   };
-  const preferred = model.branches.reduce<string | undefined>((best, branch) => {
+  const preferred = current.branches.reduce<string | undefined>((best, branch) => {
     if (!best) return branch;
     const previous = score(best), candidate = score(branch);
     return Number(candidate.relevant) > Number(previous.relevant) || candidate.relevant === previous.relevant && candidate.progress > previous.progress ? branch : best;
   }, undefined);
-  const branch = selectedBranch && model.branches.includes(selectedBranch) ? selectedBranch : preferred;
+  const branch = selectedBranch && current.branches.includes(selectedBranch) ? selectedBranch : preferred;
   const affectedBranches = new Set(model.nodes.filter(node => model.affected.has(node.id)).map(node => node.branch));
   const nodes = previewOnly ? model.nodes.filter(node => model.context.has(node.id))
     : model.previewing ? model.nodes.filter(node => affectedBranches.has(node.branch) || model.context.has(node.id))
-    : model.nodes.filter(node => node.branch === branch);
-  return { branch, nodes, branches: model.branches.filter(branch => nodes.some(node => node.branch === branch)) };
+    : current.nodes.filter(node => node.branch === branch);
+  return { branch, nodes, branches: current.branches.filter(branch => nodes.some(node => node.branch === branch)), selectableBranches: current.branches };
 }
 
 export interface ProgressFeedback {

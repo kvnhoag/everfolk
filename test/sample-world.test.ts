@@ -77,7 +77,8 @@ test("the coastal setting records birth automatically in 350 BCE without a house
 
 test("Alexandria newborns vary within their household's configured starting ranges", () => {
   const households = new Map(pack.origins.map(origin => [origin.id, new Set<string>()]));
-  for (let index = 0; index < 128; index++) {
+  // Rare royal births need a larger bounded cohort than the common families.
+  for (let index = 0; index < 2048 && (index < 128 || [...households.values()].some(variations => variations.size < 2)); index++) {
     const life = engine.start(`alexandria-origin-cohort-${index}`);
     const origin = engine.world.origins.find(origin => origin.id === life.originId)!;
     assert.equal(life.pendingEventId, null);

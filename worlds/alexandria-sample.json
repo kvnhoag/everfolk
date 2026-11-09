@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "title": "From Rhakotis to Alexandria",
   "description": "Begin a fictional life near Rhakotis on Egypt's Mediterranean coast in 350 BCE. Grow up before Alexandria is founded, then live through Alexander's arrival and the first generations of the new city. Work, learn and build a household; chosen journeys and skilled work may bring you into the worlds of Aristotle, Alexander and Euclid.",
   "startYear": -350,
@@ -277,7 +277,7 @@
       "id": "merchant-household",
       "title": "A merchant household",
       "text": "You are born above a small shop near the harbor. Your family sells goods downstairs and sleeps in rooms above it. A relative watches you while the shop is open.",
-      "weight": 2,
+      "weight": 8,
       "statRanges": {
         "health": {
           "min": 60,
@@ -307,7 +307,7 @@
       "id": "artisan-household",
       "title": "A pottery-worker household",
       "text": "You are born into a family of pottery workers. Your home shares a courtyard with their workshop. Adults take turns caring for you while clay dries and orders are finished.",
-      "weight": 3,
+      "weight": 12,
       "statRanges": {
         "health": {
           "min": 60,
@@ -337,7 +337,7 @@
       "id": "harbor-household",
       "title": "A quay-laborer household",
       "text": "You are born into a family of quay laborers. Your household rents crowded rooms a few streets from the water. Neighbors help with your care when several adults are called to unload a ship.",
-      "weight": 3,
+      "weight": 12,
       "statRanges": {
         "health": {
           "min": 63,
@@ -367,7 +367,7 @@
       "id": "fishing-household",
       "title": "A fishing household",
       "text": "You are born near the shore into a family that catches and sells fish. Nets hang outside the doorway. A grandparent cares for you during the early morning trips.",
-      "weight": 2,
+      "weight": 8,
       "statRanges": {
         "health": {
           "min": 61,
@@ -397,7 +397,7 @@
       "id": "bakery-household",
       "title": "A bakery household",
       "text": "You are born into a family working in a rented bakery. The ovens are lit before dawn. You sleep in a quieter room with an aunt while the first loaves are made.",
-      "weight": 2,
+      "weight": 8,
       "statRanges": {
         "health": {
           "min": 60,
@@ -427,7 +427,7 @@
       "id": "clerk-household",
       "title": "A clerk's household",
       "text": "You are born into a household supported by paid writing and record keeping. Work tablets and documents are kept out of your reach. Your parents share your care with a nearby relative.",
-      "weight": 1,
+      "weight": 4,
       "statRanges": {
         "health": {
           "min": 60,
@@ -457,7 +457,7 @@
       "id": "weaver-household",
       "title": "A weaving household",
       "text": "You are born into a household that prepares thread and weaves cloth for customers. Work fills part of the main room. Older relatives care for you while the adults finish orders.",
-      "weight": 2,
+      "weight": 8,
       "statRanges": {
         "health": {
           "min": 60,
@@ -487,7 +487,7 @@
       "id": "delta-newcomers",
       "title": "Newcomers from the Delta",
       "text": "You are born near Rhakotis after your family moves from a Delta village. They share rooms with relatives and look for steady work along the coast. Food and childcare are shared while they settle in.",
-      "weight": 2,
+      "weight": 8,
       "statRanges": {
         "health": {
           "min": 62,
@@ -511,6 +511,249 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
+      ]
+    },
+    {
+      "id": "royal-household",
+      "title": "Royal kin on a coastal estate",
+      "text": "You are born into a fictional minor branch of Egypt’s native royal family, on a coastal estate near Rhakotis. Relatives and household staff share your care. Your family’s resources depend on lands, obligations and its connections with the ruling house.",
+      "weight": 1,
+      "statRanges": {
+        "health": {
+          "min": 62,
+          "max": 82
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 5
+        },
+        "wealth": {
+          "min": 70,
+          "max": 100
+        },
+        "bonds": {
+          "min": 45,
+          "max": 70
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-royal-kin",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "estate-household",
+      "title": "A landowning estate household",
+      "text": "You are born into a family that owns fields and storage buildings near the coast. Your home has room for visiting relatives, and a caregiver stays with you while adults travel to check supplies and rents.",
+      "weight": 3,
+      "statRanges": {
+        "health": {
+          "min": 61,
+          "max": 83
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 4
+        },
+        "wealth": {
+          "min": 25,
+          "max": 60
+        },
+        "bonds": {
+          "min": 48,
+          "max": 75
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "temple-household",
+      "title": "A temple-service household",
+      "text": "You are born into a household with relatives who serve a local temple and keep some of its records. Your home is nearby. A grandparent looks after you when duties keep the adults away.",
+      "weight": 4,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 81
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 5
+        },
+        "wealth": {
+          "min": 8,
+          "max": 22
+        },
+        "bonds": {
+          "min": 55,
+          "max": 81
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-temple-family",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "soldier-household",
+      "title": "A garrison family",
+      "text": "You are born into a family supported partly by a relative’s military service. Your household rents rooms near the coastal road. Family and neighbors share your care when service keeps an adult away.",
+      "weight": 5,
+      "statRanges": {
+        "health": {
+          "min": 62,
+          "max": 84
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 3
+        },
+        "wealth": {
+          "min": 4,
+          "max": 16
+        },
+        "bonds": {
+          "min": 50,
+          "max": 79
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "tenant-farming-household",
+      "title": "A tenant-farming household",
+      "text": "You are born into a family cultivating rented land beside the western Delta. Your household also sells produce on the coast near Rhakotis. Relatives take turns watching you while the adults work the fields and make deliveries.",
+      "weight": 7,
+      "statRanges": {
+        "health": {
+          "min": 61,
+          "max": 83
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 2
+        },
+        "wealth": {
+          "min": 0,
+          "max": 7
+        },
+        "bonds": {
+          "min": 60,
+          "max": 85
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "domestic-service-household",
+      "title": "A household of hired domestic workers",
+      "text": "You are born into a family earning wages through cooking, cleaning and other household work. You share a small rented room near your relatives’ employers. A neighbor cares for you when their work hours overlap.",
+      "weight": 5,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 80
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 2
+        },
+        "wealth": {
+          "min": 0,
+          "max": 5
+        },
+        "bonds": {
+          "min": 58,
+          "max": 83
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "boatbuilder-household",
+      "title": "A boatbuilding household",
+      "text": "You are born into a family repairing and building small working boats on the coast. Your home stands beside a shared workyard. An older relative keeps you away from the tools while the adults fit timber and mend hulls.",
+      "weight": 4,
+      "statRanges": {
+        "health": {
+          "min": 62,
+          "max": 84
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 3
+        },
+        "wealth": {
+          "min": 3,
+          "max": 12
+        },
+        "bonds": {
+          "min": 56,
+          "max": 82
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "musician-household",
+      "title": "A household of traveling musicians",
+      "text": "You are born into a family earning small payments by performing at gatherings along the coast. Your relatives keep rented rooms near Rhakotis as a home base. Family and trusted neighbors care for you when some adults travel to perform.",
+      "weight": 3,
+      "statRanges": {
+        "health": {
+          "min": 60,
+          "max": 82
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 3
+        },
+        "wealth": {
+          "min": 1,
+          "max": 10
+        },
+        "bonds": {
+          "min": 57,
+          "max": 84
+        }
+      },
+      "effects": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
       ]
     }
   ],
@@ -18556,6 +18799,516 @@
       ]
     },
     {
+      "id": "household-royal-patronage-changes",
+      "title": "The family’s patronage changes",
+      "text": "News reaches the estate that Persia has taken Egypt and the old royal house has lost power. Your relatives lose a regular contribution and reduce the household’s spending. The adults explain only part of what has happened; you notice fewer visitors at the courtyard gate.",
+      "trigger": {
+        "type": "year",
+        "at": -343
+      },
+      "when": {
+        "type": "origin",
+        "origin": "royal-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "cash",
+          "delta": -80
+        },
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": -1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-royal-kin",
+        "household-late-period",
+        "classical-egypt-transitions"
+      ]
+    },
+    {
+      "id": "background-royal-household-childhood",
+      "title": "Visitors at the estate",
+      "text": "A relative receives visitors in the shaded courtyard. You sit with a caregiver behind the gathering and are called forward for a brief greeting.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "royal-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-royal-kin",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-royal-household-practice",
+      "title": "The family accounts after the conquest",
+      "text": "Egypt’s old royal house has lost power. Your relatives now check the estate’s smaller income closely. An adult lets you count a few deliveries and explains the marks beside each entry.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "royal-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "literacy",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-royal-kin",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-estate-household-childhood",
+      "title": "A shaded corner of the storeyard",
+      "text": "You play in a shaded corner while adults move sacks into storage. Your caregiver brings you inside before the yard fills with carts.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "estate-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-estate-household-practice",
+      "title": "Checking the stored grain",
+      "text": "A relative lets you count a small row of grain measures. You compare your count with theirs before the containers are closed.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "estate-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-temple-household-childhood",
+      "title": "Waiting for the family meal",
+      "text": "A grandparent keeps you close while relatives finish their temple duties. You help set out cups before everyone gathers for food.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "temple-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-temple-family",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-temple-household-practice",
+      "title": "A short list of supplies",
+      "text": "A relative copies a short supply list for you to practise. You compare the marks with the counted items and ask about the ones you do not recognize.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "temple-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "literacy",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-temple-family",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-soldier-household-childhood",
+      "title": "A relative comes home",
+      "text": "A relative returns after time away on service. You watch them unpack, then sit close while the household shares a meal.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "soldier-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-soldier-household-practice",
+      "title": "Sorting the household equipment",
+      "text": "An adult lets you sort straps and count pieces of equipment at home. You learn how to check a fastening before putting it away.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "soldier-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 2
+        },
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-tenant-farming-household-childhood",
+      "title": "Under the courtyard awning",
+      "text": "You sit with an older relative while baskets are cleaned for the next delivery. They give you a small empty basket to carry across the courtyard.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "tenant-farming-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-tenant-farming-household-practice",
+      "title": "Measuring a small harvest share",
+      "text": "Your family lets you fill and count a few measures of grain. An adult checks the total before the household sets its share aside.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "tenant-farming-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-domestic-service-household-childhood",
+      "title": "Waiting with the neighbor",
+      "text": "You spend the afternoon with a neighbor while your relatives finish their work. They come for you with food saved from their meal.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "domestic-service-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-domestic-service-household-practice",
+      "title": "Checking the household purchases",
+      "text": "A relative takes you on a small purchase and lets you count the change. Back home, you compare the bought items with the list of errands.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "domestic-service-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 2
+        },
+        {
+          "type": "skill",
+          "skill": "literacy",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-boatbuilder-household-childhood",
+      "title": "Shavings outside the workyard",
+      "text": "You sit with a relative outside the boatyard. They give you a smooth offcut and sweep the sharp shavings away from your feet.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "boatbuilder-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-boatbuilder-household-practice",
+      "title": "A wooden fitting to check",
+      "text": "A relative shows you how two wooden pieces meet. You practise smoothing a spare fitting and compare its edges with the example.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "boatbuilder-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "craft",
+          "delta": 3
+        },
+        {
+          "type": "skill",
+          "skill": "carving",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-musician-household-childhood",
+      "title": "A tune before the journey",
+      "text": "A relative repeats a tune while packing for a performance. You clap along from your caregiver’s lap and stop when everyone begins to laugh.",
+      "trigger": {
+        "type": "age",
+        "at": 4
+      },
+      "when": {
+        "type": "origin",
+        "origin": "musician-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-musician-household-practice",
+      "title": "Keeping a steady rhythm",
+      "text": "Your relatives let you practise a short rhythm at home. They slow it down and begin again whenever you lose the beat.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "when": {
+        "type": "origin",
+        "origin": "musician-household"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "music",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
       "id": "the-first-household",
       "title": "You are born near Rhakotis",
       "text": "You are born near Rhakotis in 350 BCE, on the Egyptian coast where Alexandria will later grow. For now, your world is a room, familiar hands and the sounds of work outside.",
@@ -22456,6 +23209,698 @@
       "evidence": "fictional",
       "sourceIds": [
         "strabo-alexandria",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-royal-household-opportunity",
+      "title": "A household finding its footing",
+      "text": "Your relatives are finding ways to support the estate after the old dynasty’s fall. They offer you a place checking records or a paid errand. You can also make your own plans.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "royal-household"
+      },
+      "choices": [
+        {
+          "id": "royal-household-check-records",
+          "text": "Learn to check the estate records",
+          "outcomes": [
+            {
+              "id": "royal-household-check-records-result",
+              "text": "You compare a short list with the deliveries. A relative checks your work and explains each correction.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "royal-household-carry-messages",
+          "text": "Carry household messages for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "royal-household-carry-messages-result",
+              "text": "You deliver the messages and return with the replies. The household pays you for the errand.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "royal-household-another-path",
+          "text": "Keep your own plans and help later",
+          "outcomes": [
+            {
+              "id": "royal-household-another-path-result",
+              "text": "You keep your plans, then help your relatives arrange the next day’s work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-royal-kin",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-estate-household-opportunity",
+      "title": "An estate delivery to prepare",
+      "text": "A delivery needs checking and packing. Your relatives offer a small payment for preparing it, or time learning the accounts. You can leave the work to the regular staff.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "estate-household"
+      },
+      "choices": [
+        {
+          "id": "estate-household-prepare-delivery",
+          "text": "Prepare the delivery for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "estate-household-prepare-delivery-result",
+              "text": "You check the containers and help prepare the load. Your relative pays you when the delivery leaves.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estate-household-learn-accounts",
+          "text": "Practise checking the accounts",
+          "outcomes": [
+            {
+              "id": "estate-household-learn-accounts-result",
+              "text": "You compare quantities with the written list, then review the mistakes with a relative.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 4
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estate-household-another-path",
+          "text": "Keep your own plans",
+          "outcomes": [
+            {
+              "id": "estate-household-another-path-result",
+              "text": "You leave the delivery to the household’s regular workers and join your family later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-temple-household-opportunity",
+      "title": "Supplies for the temple household",
+      "text": "Your relatives need help checking supplies and carrying messages. They can pay for an errand or spend time helping you practise a short copy. You can keep to other work.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "temple-household"
+      },
+      "choices": [
+        {
+          "id": "temple-household-carry-supplies",
+          "text": "Carry the supplies for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "temple-household-carry-supplies-result",
+              "text": "You bring the supplies to the named recipient and return with the empty containers. Your relative pays you for the task.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "temple-household-practise-copy",
+          "text": "Practise a short supply record",
+          "outcomes": [
+            {
+              "id": "temple-household-practise-copy-result",
+              "text": "You copy the list slowly, then check it against the original with an experienced reader.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 5
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "temple-household-another-path",
+          "text": "Keep your own plans and visit afterward",
+          "outcomes": [
+            {
+              "id": "temple-household-another-path-result",
+              "text": "Another helper takes the supplies. You return in the evening and help prepare food at home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-temple-family",
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-soldier-household-opportunity",
+      "title": "Equipment to put in order",
+      "text": "Your family has equipment to sort and repair. A relative offers paid preparation work or a supervised practice session with worn straps. You can choose another use for your time.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "soldier-household"
+      },
+      "choices": [
+        {
+          "id": "soldier-household-sort-equipment",
+          "text": "Sort the equipment for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "soldier-household-sort-equipment-result",
+              "text": "You count the pieces and separate the damaged fittings. Your relative pays you for clearing the task.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "soldier-household-repair-straps",
+          "text": "Practise repairing worn straps",
+          "outcomes": [
+            {
+              "id": "soldier-household-repair-straps-result",
+              "text": "You work on discarded straps while a relative checks the joins and shows you where they are weak.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "soldier-household-another-path",
+          "text": "Keep your own plans",
+          "outcomes": [
+            {
+              "id": "soldier-household-another-path-result",
+              "text": "Your family arranges other help. You return later and share the evening meal.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-tenant-farming-household-opportunity",
+      "title": "Produce to take to the coast",
+      "text": "A relative has produce to deliver near Rhakotis. You can earn a small payment helping with the load, practise checking the measures, or keep your own plans.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "tenant-farming-household"
+      },
+      "choices": [
+        {
+          "id": "tenant-farming-household-help-delivery",
+          "text": "Help with the delivery for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-help-delivery-result",
+              "text": "You help pack the produce and return the baskets after the sale. Your relative gives you a share of the payment.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tenant-farming-household-check-measures",
+          "text": "Practise checking the measures",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-check-measures-result",
+              "text": "You compare the filled measures and count them again with a relative before the load leaves.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tenant-farming-household-another-path",
+          "text": "Keep your own plans and help at home later",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-another-path-result",
+              "text": "Someone else joins the delivery. You help clean the containers when they return.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-farming-context",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-domestic-service-household-opportunity",
+      "title": "Help with a busy household",
+      "text": "A relative’s employer needs extra help preparing a meal. You can take a paid task, practise organizing the purchases, or leave the work to someone else.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "domestic-service-household"
+      },
+      "choices": [
+        {
+          "id": "domestic-service-household-prepare-meal",
+          "text": "Help prepare the meal for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-prepare-meal-result",
+              "text": "You wash containers, carry supplies and help clear the work space. You receive the agreed payment afterward.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "domestic-service-household-organize-purchases",
+          "text": "Practise checking the purchases",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-organize-purchases-result",
+              "text": "You compare the items and costs with your relative, correcting the count before anything is put away.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 4
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "domestic-service-household-another-path",
+          "text": "Keep your own plans and visit later",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-another-path-result",
+              "text": "Your relative finds another helper. You return later and take care of a few tasks in your own home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-boatbuilder-household-opportunity",
+      "title": "A small boat repair",
+      "text": "Your family needs help preparing a boat repair. They offer a payment for sorting material or time learning to shape a spare fitting. You can leave the repair to the regular workers.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "boatbuilder-household"
+      },
+      "choices": [
+        {
+          "id": "boatbuilder-household-prepare-materials",
+          "text": "Prepare the materials for 30 drachmas",
+          "outcomes": [
+            {
+              "id": "boatbuilder-household-prepare-materials-result",
+              "text": "You sort the timber and lay out the required pieces. Your relative pays you when the repair is ready to begin.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 30
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "boatbuilder-household-shape-fitting",
+          "text": "Practise shaping a spare fitting",
+          "outcomes": [
+            {
+              "id": "boatbuilder-household-shape-fitting-result",
+              "text": "You shape an offcut under supervision, checking it against the pattern before making another cut.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "carving",
+                  "delta": 4
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "boatbuilder-household-another-path",
+          "text": "Keep your own plans",
+          "outcomes": [
+            {
+              "id": "boatbuilder-household-another-path-result",
+              "text": "The regular workers handle the repair. You stop by later and help put the workyard in order.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "background-musician-household-opportunity",
+      "title": "A family performance to prepare",
+      "text": "Your relatives are preparing for a small gathering. You can earn a payment helping carry and arrange their things, rehearse a short part, or keep to your own plans.",
+      "trigger": {
+        "type": "age",
+        "at": 14
+      },
+      "when": {
+        "type": "origin",
+        "origin": "musician-household"
+      },
+      "choices": [
+        {
+          "id": "musician-household-prepare-gathering",
+          "text": "Help prepare the gathering for 20 drachmas",
+          "outcomes": [
+            {
+              "id": "musician-household-prepare-gathering-result",
+              "text": "You carry the family’s things and help put them in order. Your relatives give you the agreed payment after the gathering.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "cash",
+                  "delta": 20
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "musician-household-rehearse-part",
+          "text": "Rehearse a short part with the family",
+          "outcomes": [
+            {
+              "id": "musician-household-rehearse-part-result",
+              "text": "You repeat your part with the group until its entrances are clearer. A relative helps you work through the missed notes.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "music",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "musician-household-another-path",
+          "text": "Keep your own plans and hear them afterward",
+          "outcomes": [
+            {
+              "id": "musician-household-another-path-result",
+              "text": "You keep your plans, then sit with your relatives while they talk about the gathering.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": [
+        "household-late-period",
         "classical-rhakotis"
       ]
     },
@@ -52660,6 +54105,54 @@
       "geography": "Alexandria and its Mediterranean coast",
       "summary": "Dates the lighthouse to the reign of Ptolemy II, between 283 and 279 BCE, and explains the use of archaeological and historical evidence in modern reconstructions.",
       "limitations": "A reconstruction overview, not a fully recovered original building. A completed lighthouse must not appear at the 350 BCE birth or 331 BCE city foundation. Pharos Island existed earlier; its name alone need not imply the lighthouse. The page's Ptolemy III Serapeum belongs after this cohort's age-100 record.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "household-royal-kin",
+      "title": "The General Tjahapimu",
+      "url": "https://www.metmuseum.org/art/collection/search/551806",
+      "publisher": "The Metropolitan Museum of Art, Egyptian Art; object 08.205.1",
+      "kind": "museum",
+      "period": "Dynasty 30, reign of Nectanebo II, 360–343 BCE",
+      "geography": "Memphis and the Egyptian royal administration",
+      "summary": "The statue's inscription names Tjahapimu as a brother and father of kings. The museum discusses his royal family relationships and political and military responsibilities.",
+      "limitations": "Some details of the genealogy remain uncertain. This object does not attest a royal family at Rhakotis, the player's ancestry, inheritance rights or a particular coastal estate. The game's royal household and its personal experiences are fiction.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "household-late-period",
+      "title": "Egypt in the Late Period (ca. 664–332 B.C.)",
+      "url": "https://www.metmuseum.org/essays/egypt-in-the-late-period-ca-712-332-b-c",
+      "publisher": "Marsha Hill and James P. Allen, The Metropolitan Museum of Art; revised 2018",
+      "kind": "museum",
+      "period": "Late Period Egypt, including Dynasty 30 and Persian reconquest in 343 BCE",
+      "geography": "Egypt, including Memphis and the Nile Delta",
+      "summary": "Surveys changing government, Egyptian and foreign military communities, temple patronage and elite participation in religious institutions. It places Nectanebo II and the Persian reconquest within the transition to Alexander's conquest.",
+      "limitations": "A broad historical account covering several centuries, not a census of Rhakotis in 350 BCE. It does not establish the game's household frequencies, starting cash, ability ranges, care arrangements or fictional family outcomes. Later Ptolemaic institutions must not be assumed at birth.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "household-temple-family",
+      "title": "Block Statue of the God's Father Pameniuwedja, son of Nesmin and Nestefnut",
+      "url": "https://www.metmuseum.org/art/collection/search/549514",
+      "publisher": "The Metropolitan Museum of Art, Egyptian Art; object 07.228.25",
+      "kind": "museum",
+      "period": "Fourth century BCE, Dynasty 30 to early Ptolemaic Period",
+      "geography": "Egypt; the object does not establish a Rhakotis household",
+      "summary": "The inscription names a priest's parents and records his father with the same priestly titles, providing an example of family connections within temple service.",
+      "limitations": "One priestly family does not establish universal hereditary office or the means of every temple household. The fictional player does not inherit a priesthood, education, occupation or guaranteed patronage from this comparison.",
+      "accessed": "2026-11-08"
+    },
+    {
+      "id": "household-farming-context",
+      "title": "Farmers in ancient Egypt",
+      "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/social/farmer.html",
+      "publisher": "Digital Egypt for Universities, University College London",
+      "kind": "scholarship",
+      "period": "Comparative discussion across ancient Egyptian periods",
+      "geography": "Egypt; not a household survey of the fourth-century BCE coast",
+      "summary": "Discusses evidence and uncertainty concerning farming households, land, property and social status. It cautions against simple conclusions about farmers' circumstances.",
+      "limitations": "The article does not establish the tenancy terms, wealth, legal status or routines of a particular 350 BCE household. The game's tenant-farming family, financial ranges and choices are authored fiction rather than measured historical distributions.",
       "accessed": "2026-11-08"
     }
   ],

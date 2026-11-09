@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { getAvatarAppearance } from "../client/avatar-appearance.ts";
-import { AVATAR_ORIGIN_IDS, AVATAR_STAGES } from "../client/life-background.ts";
+import { avatarArtworkOrigin, AVATAR_ORIGIN_ALIASES, AVATAR_ORIGIN_IDS, AVATAR_STAGES } from "../client/life-background.ts";
 import { bannerActorSource } from "../client/banner-actor.ts";
 import { resolveLifeBanner } from "../client/banner-state.ts";
 import { createActorLayers } from "../scripts/banner-art-actors.mjs";
@@ -63,13 +63,29 @@ test("accepted avatar selection survives replay and scene/age changes without re
     const banner = resolveLifeBanner(view, world);
     for (const pose of age < 3 ? ["cradle"] as const : ["standing", "seated", "reclined"] as const) {
       const src = bannerActorSource(view, { ...banner, actorPose: pose })!;
-      assert.ok(src.includes(`/${restored.originId}/${restored.character!.sex}/${banner.stage}-2-${pose}.svg`));
+      assert.ok(src.includes(`/${avatarArtworkOrigin(restored.originId)}/${restored.character!.sex}/${banner.stage}-2-${pose}.svg`));
       assert.ok(actors.actors.some(actor => actor.asset === src));
     }
   }
   assert.deepEqual(restored, before);
   assert.equal(restored.rngState, selected.rngState);
   assert.equal(restored.character!.name, selected.character!.name);
+});
+
+test("expanded household actors follow the same shipped artwork family as their portraits", () => {
+  const born = createEngine(world).start("expanded-origin-actor-appearance");
+  for (const [originId, artworkOrigin] of Object.entries(AVATAR_ORIGIN_ALIASES)) for (const sex of ["male", "female"] as const) for (const age of [0, 5, 15, 25, 45, 65]) {
+    const life = { ...born, originId, age, character: { ...born.character!, sex, avatarVariant: 2 } };
+    const banner = resolveLifeBanner(life, world);
+    const poses = age < 3 ? ["cradle"] as const : ["standing", "seated", "reclined"] as const;
+    for (const pose of poses) {
+      const src = bannerActorSource(life, { ...banner, actorPose: pose });
+      assert.equal(src, `/assets/pixel/banners/actors/${artworkOrigin}/${sex}/${banner.stage}-2-${pose}.svg`);
+      const record = actors.actors.find(actor => actor.asset === src);
+      assert.ok(record, src);
+      assert.deepEqual(record.appearance, getAvatarAppearance({ originId, sex, variant: 2, stage: banner.stage }));
+    }
+  }
 });
 
 test("unsupported origins keep a shipped fallback and memorials do not invent an actor", () => {

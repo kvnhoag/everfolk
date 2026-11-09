@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import App from "./App";
-import { getArchivedBuiltinWorld, getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
+import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
 import { engineForLife, hasLifeBegun, readSavedLife, selectWorldPack } from "./session.ts";
 import type { LifeState } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
+import { selectFactoryWorld } from "./factory-world-selection.ts";
 
 const SELECTION_KEY = "historical-lives:selected-world:v1";
 
@@ -37,24 +38,22 @@ export default function GameClient() {
           world = JSON.parse(saved) as PublishedWorld;
           selectWorldPack(world.pack);
           restored = true;
-          // Keep lives already begun in their original era. An untouched pending
-          // factory birth may use the new setting, including its Reborn button.
-          if (world.id === builtin.id && world.pack.startYear !== builtin.pack.startYear) {
-            const archived = getArchivedBuiltinWorld(world.revisionId);
+          // Started lives retain their exact pack. Pending official births may
+          // refresh after any content revision, including one in the same era.
+          let hasBegunLife = true;
+          try {
             const currentLife = readSavedLife(window.localStorage);
-            if (archived && contentFingerprint(archived.pack) === contentFingerprint(world.pack) &&
-              (!currentLife || !hasLifeBegun(window.localStorage, currentLife))) {
-              world = builtin;
-              restored = false;
-            }
-          }
+            hasBegunLife = Boolean(currentLife && hasLifeBegun(window.localStorage, currentLife));
+          } catch { /* Keep an existing selection when its save cannot be checked. */ }
+          const selection = selectFactoryWorld(world, { hasBegunLife });
+          if (selection !== world) { world = selection; restored = false; }
         }
         else if (window.localStorage.getItem("historical-lives:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
       if (!restored) {
         try {
           const catalog = await readApi<PublishedCatalog>("/api/worlds");
-          if (catalog.worlds[0]) world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(catalog.worlds[0].id)}`);
+          if (catalog.worlds[0]) world = selectFactoryWorld(await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(catalog.worlds[0].id)}`));
         } catch { /* A saved or bundled world also works while the service is unavailable. */ }
       }
       if (cancelled) return;
@@ -90,7 +89,18 @@ export default function GameClient() {
     setBusy(true);
     setError("");
     try {
-      const world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
+      let world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
+      if (fresh) world = selectFactoryWorld(world, { fresh: true });
+      else {
+        const refreshed = selectFactoryWorld(world);
+        if (refreshed !== world) {
+          selectWorldPack(world.pack);
+          try {
+            const savedLife = readSavedLife(window.localStorage);
+            if (!savedLife || !hasLifeBegun(window.localStorage, savedLife)) world = refreshed;
+          } catch { /* Preserve the selected world when its save cannot be checked. */ }
+        }
+      }
       selectWorldPack(world.pack);
       try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* Per-life saves still report their storage status. */ }
       setActive(current => ({ world, key: (current?.key ?? 0) + 1, fresh, ...(fresh && previousLife ? { previousLife } : {}) }));

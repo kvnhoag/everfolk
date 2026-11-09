@@ -10,8 +10,7 @@ import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.9.0.json" with { type: "json" };
 import variedRelease from "../worlds/alexandria-0.10.0.json" with { type: "json" };
 
-const originalEventIds = new Set(previous.events.map(event => event.id));
-const backgroundEventIds = new Set(variedRelease.events.filter(event => !originalEventIds.has(event.id)).map(event => event.id));
+const backgroundEventIds = new Set(pack.events.filter(event => event.id.startsWith("background-")).map(event => event.id));
 const backgroundEvents = pack.events.filter(event => backgroundEventIds.has(event.id));
 
 /** Fixed-name restart fixtures intentionally exercise the older identity model. */
@@ -71,16 +70,16 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
   }
 }
 
-test("new lives draw broadly from both name pools and eight distinct household backgrounds", () => {
+test("new lives draw broadly from both name pools and sixteen distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.32.0");
+  assert.equal(pack.version, "0.33.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
-  assert.equal(pack.origins.length, 8);
-  assert.equal(new Set(pack.origins.map(origin => origin.title)).size, 8);
-  assert.equal(new Set(pack.origins.map(origin => origin.text)).size, 8);
+  assert.equal(pack.origins.length, 16);
+  assert.equal(new Set(pack.origins.map(origin => origin.title)).size, 16);
+  assert.equal(new Set(pack.origins.map(origin => origin.text)).size, 16);
   const { origins, names } = sampleBirths(engine);
-  assert.equal(origins.size, 8, "All authored households must be reachable through ordinary seeded births.");
+  assert.equal(origins.size, 16, "All authored households must be reachable through ordinary seeded births.");
   assert.ok(names.size >= 28, `Only ${names.size} names appeared in 512 new lives.`);
   assert.ok(names.has("Damon"), "Damon remains one possible name, rather than a fixed identity.");
   for (const life of origins.values()) {
@@ -106,7 +105,7 @@ test("the varied release preserves the existing economy, skill tree, risks and e
   delete (currentCharacter as Partial<typeof currentCharacter>).playerNames;
   delete (previousCharacter as Partial<typeof previousCharacter>).playerNames;
   assert.deepEqual(currentCharacter, previousCharacter);
-  assert.equal(backgroundEvents.length, 24);
+  assert.equal(backgroundEvents.length, 48);
   assert.equal(variedRelease.events.length, 166);
   for (const event of previous.events) assert.deepEqual(variedRelease.events.find(candidate => candidate.id === event.id), event, event.id);
 });
@@ -179,6 +178,7 @@ test("every household opportunity follows the core trade decisions without a lon
   const engine = createEngine(world);
   const { origins } = sampleBirths(engine);
   const tradeOffers = new Set(engine.world.events.filter(event => event.exclusiveGroup === "early-work").map(event => event.id));
+  const historicalChoices = new Set(engine.world.events.filter(event => event.id.startsWith("classical-") && event.mode !== "automatic").map(event => event.id));
   assert.equal(tradeOffers.size, 8);
   for (const born of origins.values()) {
     const opportunity = backgroundEvents.find(event => event.mode !== "automatic" && matchesCondition(event.when, born))!;
@@ -192,14 +192,18 @@ test("every household opportunity follows the core trade decisions without a lon
     life = settle(engine, life);
     const dueAge = Math.max(14, life.nextChoiceAge ?? 14);
     assert.ok(dueAge >= life.age + 2 && dueAge <= life.age + 3);
-    assert.ok(dueAge <= 23, "The earlier training and work queue must still reach the household offer without a long delay.");
+    // A better-resourced origin can qualify for an extra dated encounter before
+    // the trade offer. Its real pacing gap is part of the lived chronology.
+    const historicalDelay = life.journal.filter(entry => entry.type === "event" && historicalChoices.has(entry.id)).length * world.eventPacing!.maxChoiceGapYears;
+    const deadline = 23 + historicalDelay;
+    assert.ok(dueAge <= deadline, `${born.originId}: household offer is delayed beyond the ordinary queue and recorded historical encounters.`);
     const intervening = new Set<string>();
-    for (let commands = 0; commands < 30 && life.age <= 23 && life.pendingEventId !== opportunity.id; commands++) {
+    for (let commands = 0; commands < 30 && life.age <= deadline && life.pendingEventId !== opportunity.id; commands++) {
       if (life.phase === "choice" && life.pendingEventId) intervening.add(life.pendingEventId);
       life = life.phase === "choice" ? settle(engine, life) : engine.advance(life);
     }
     assert.equal(life.pendingEventId, opportunity.id, `${born.originId} must not wait behind decades of generic milestones.`);
-    assert.ok(life.age >= dueAge && life.age <= 23, `${opportunity.id} remains in early adulthood`);
+    assert.ok(life.age >= dueAge && life.age <= deadline, `${opportunity.id} remains in early adulthood`);
     if (life.age !== dueAge) assert.ok([...intervening].some(id => id.startsWith("classical-")), "Only a dated historical choice can defer this isolated household opportunity.");
     assert.deepEqual(engine.load(engine.save(life)), life);
   }

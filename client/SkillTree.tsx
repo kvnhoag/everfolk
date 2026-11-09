@@ -1,9 +1,9 @@
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent, ReactNode } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
-import { buildSkillTree, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "./skill-tree.ts";
+import { buildSkillTree, currentSkillTree, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "./skill-tree.ts";
 import type { SkillNode, SkillRequirement } from "./skill-tree.ts";
 import { layoutSkillLinks } from "./skill-tree-links.ts";
 import { activityLoanOffer } from "./loan-access.ts";
@@ -37,8 +37,8 @@ function Requirement({ requirement, onSelect }: { requirement: SkillRequirement;
   </li>;
 }
 
-function Practice({ activity, life, world, onActivity }: {
-  activity: ActivityAvailability; life: LifeState; world: WorldPack; onActivity: (id: string) => void;
+function Practice({ activity, life, world, onActivity, readOnly = false }: {
+  activity: ActivityAvailability; life: LifeState; world: WorldPack; onActivity: (id: string) => void; readOnly?: boolean;
 }) {
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
@@ -47,13 +47,13 @@ function Practice({ activity, life, world, onActivity }: {
     <p className="skill-practice-name">{activity.text}</p>
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>
+    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>}
     {reason && <p className="skill-practice-reason">{reason}</p>}
   </div>;
 }
 
-function SkillWorkAction({ activity, life, world, onActivity, occupation = false }: {
-  activity: ActivityAvailability; life: LifeState; world: WorldPack; onActivity: (id: string) => void; occupation?: boolean;
+function SkillWorkAction({ activity, life, world, onActivity, occupation = false, readOnly = false }: {
+  activity: ActivityAvailability; life: LifeState; world: WorldPack; onActivity: (id: string) => void; occupation?: boolean; readOnly?: boolean;
 }) {
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
@@ -64,25 +64,38 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
     {requirements.length > 0 && <p className="skill-work-requirements">{requirements.join(" · ")}</p>}
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
+    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
       {loanOffer ? "Ask moneylender to fund this" : occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
-    </button>
+    </button>}
     {reason && <p className="skill-practice-reason">{reason}</p>}
   </div>;
 }
 
-export default function SkillTree({ life, world, activities, onActivity }: {
-  life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void;
+export default function SkillTree({ life, world, activities, onActivity, initialView = "current" }: {
+  life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void; initialView?: "current" | "wiki";
 }) {
-  const model = useMemo(() => buildSkillTree(world, life, activities), [world, life, activities]);
+  const [view, setView] = useState(initialView);
+  const wiki = view === "wiki";
+  const fullModel = useMemo(() => buildSkillTree(world, life, activities), [world, life, activities]);
+  const model = useMemo(() => wiki ? fullModel : currentSkillTree(fullModel), [fullModel, wiki]);
   const layout = useMemo(() => layoutSkillTree(model), [model]);
   const links = useMemo(() => layoutSkillLinks(model, layout), [model, layout]);
   const [selectedId, setSelectedId] = useState("craft");
   const [search, setSearch] = useState("");
   const instanceId = useId();
   const nodeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const pendingFocus = useRef<string | null>(null);
+  useEffect(() => {
+    const target = pendingFocus.current && nodeRefs.current[pendingFocus.current];
+    if (target) {
+      target.focus();
+      target.scrollIntoView({ block: "nearest", inline: "nearest" });
+      pendingFocus.current = null;
+    }
+  }, [view, selectedId]);
   const selected = model.nodes.find(node => node.id === selectedId) ?? model.nodes[0];
-  if (!selected) return <p className="character-empty">This world has no skills to practice.</p>;
+  if (!fullModel.nodes.length) return <p className="character-empty">This world has no skills to practice.</p>;
+  if (!selected) return <div className="skill-tree skill-tree-empty"><h3>Your skills</h3><p>Skills unlock as you grow and learn. Browse the wiki for future paths and requirements.</p><button type="button" className="skill-wiki-link" onClick={() => setView("wiki")}>Skill wiki <span aria-hidden="true">↗</span></button></div>;
   const query = search.trim().toLocaleLowerCase();
   const matches = (node: SkillNode) => `${node.label} ${node.branch} ${node.description}`.toLocaleLowerCase().includes(query);
   const matchCount = model.nodes.filter(matches).length;
@@ -90,10 +103,15 @@ export default function SkillTree({ life, world, activities, onActivity }: {
   const started = model.nodes.filter(node => node.value > node.min).length;
   const incoming = new Set(selected.requirements.map(item => item.id));
   const outgoing = model.nodes.filter(node => node.requirements.some(item => item.id === selected.id));
+  const otherTraining = wiki ? model.otherTraining : model.otherTraining.filter(activity => !practiceBlockReason(activity, life));
 
   function select(id: string, focus = false) {
+    if (!model.nodes.some(node => node.id === id)) setView("wiki");
     setSelectedId(id);
-    if (focus) { nodeRefs.current[id]?.focus(); nodeRefs.current[id]?.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    if (focus) {
+      if (!model.nodes.some(node => node.id === id)) pendingFocus.current = id;
+      else { nodeRefs.current[id]?.focus(); nodeRefs.current[id]?.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    }
   }
   function navigate(event: KeyboardEvent<HTMLButtonElement>, node: SkillNode) {
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
@@ -111,10 +129,10 @@ export default function SkillTree({ life, world, activities, onActivity }: {
   }
 
   return <div className="skill-tree">
-    <div className="skill-tree-heading"><div><span className="skill-tree-eyebrow">Training</span><h3>Skill tree</h3><p>Select a skill to see its requirements and unlocks.</p></div><div className="skill-tree-tally"><strong>{started}<span> / {model.nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastered` : ""}</span></div></div>
+    <div className="skill-tree-heading"><div><span className="skill-tree-eyebrow">{wiki ? "Reference" : "Training"}</span><h3>{wiki ? "All skill paths" : "Your skills"}</h3><p>{wiki ? "Explore every skill, including future paths and their requirements." : "Learned skills and paths you have unlocked."}</p><button type="button" className="skill-wiki-link" onClick={() => setView(wiki ? "current" : "wiki")}>{wiki ? "Your skills" : "Skill wiki"} <span aria-hidden="true">↗</span></button></div><div className="skill-tree-tally"><strong>{started}<span> / {model.nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastered` : ""}</span></div></div>
     <div className="skill-tree-toolbar">
       <div className="skill-tree-search"><label htmlFor={`${instanceId}-search`}>Find a skill</label><input id={`${instanceId}-search`} type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Try pottery or astronomy" autoComplete="off" /></div>
-      <div className="skill-tree-legend" aria-label="Skill states"><span className="is-locked">Locked</span><span className="is-ready">Ready</span><span className="is-learning">Learning</span><span className="is-mastered">Mastered</span></div>
+      <div className="skill-tree-legend" aria-label="Skill states">{model.nodes.some(node => node.state === "locked") && <span className="is-locked">Locked</span>}<span className="is-ready">Ready</span><span className="is-learning">Learning</span><span className="is-mastered">Mastered</span></div>
     </div>
     <p className="skill-tree-map-note" id={`${instanceId}-map-help`}>{query ? `${matchCount} matching ${matchCount === 1 ? "skill" : "skills"}. All paths remain visible.` : "Follow each path from left to right. Green links show requirements you have met."} <span>Select a skill to highlight its connections. Use arrow keys to explore.</span></p>
     <div className="skill-tree-layout">
@@ -155,15 +173,15 @@ export default function SkillTree({ life, world, activities, onActivity }: {
         </ul>{selected.requirements.length === 0 && <p className="skill-detail-small">A foundation skill. No other skill is required.</p>}</section>
         <section className="skill-detail-section"><h5>{selected.state === "mastered" ? "Mastered" : "Training"}</h5>
           {selected.state === "mastered" && <p className="skill-detail-small">You have reached this skill’s maximum proficiency.</p>}
-          {selected.training.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} />)}
+          {selected.training.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}
           {selected.training.length === 0 && <p className="skill-detail-small">There is no direct practice for this skill in this world. Events and work may develop it.</p>}
         </section>
-        {selected.paidWork.length > 0 && <section className="skill-detail-section skill-paid-work"><h5>Paid work</h5><p className="skill-detail-small">Earn from this skill while keeping your current occupation.</p>{selected.paidWork.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} />)}</section>}
+        {selected.paidWork.length > 0 && <section className="skill-detail-section skill-paid-work"><h5>Paid work</h5><p className="skill-detail-small">Earn from this skill while keeping your current occupation.</p>{selected.paidWork.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</section>}
         {outgoing.length > 0 && <section className="skill-detail-section"><h5>Unlocks</h5><div className="skill-next-list">{outgoing.map(node => <button type="button" key={node.id} onClick={() => select(node.id, true)}><span>{node.label}</span><span>{selected.label} {node.requirements.find(item => item.id === selected.id)!.required} <span aria-hidden="true">→</span></span></button>)}</div></section>}
-        {selected.careers.length > 0 && <section className="skill-detail-section skill-career-section"><h5>Make it your occupation</h5><p className="skill-detail-small">Choosing an occupation replaces your current job if accepted. Age, skills and other requirements still apply.</p>{selected.careers.map(career => <details className="skill-career" key={career.job.id}><summary><span>{career.job.title}</span><span>{life.character?.jobId === career.job.id ? "Current occupation" : career.thresholdsMet ? "Thresholds met" : "View requirements"}</span></summary><p>{career.job.description}</p><ul className="skill-requirement-list"><li className={`skill-requirement ${career.ageMet ? "met" : "missing"}`}><span aria-hidden="true">{career.ageMet ? "✓" : "○"}</span><span>Age {career.job.minAge} or older</span><span className="skill-requirement-numbers">{career.ageMet ? "Met" : `Age ${life.age}`}</span></li>{career.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}</ul>{career.activities.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} occupation />)}</details>)}</section>}
+        {selected.careers.length > 0 && <section className="skill-detail-section skill-career-section"><h5>Make it your occupation</h5><p className="skill-detail-small">Choosing an occupation replaces your current job if accepted. Age, skills and other requirements still apply.</p>{selected.careers.map(career => <details className="skill-career" key={career.job.id}><summary><span>{career.job.title}</span><span>{life.character?.jobId === career.job.id ? "Current occupation" : career.thresholdsMet ? "Thresholds met" : "View requirements"}</span></summary><p>{career.job.description}</p><ul className="skill-requirement-list"><li className={`skill-requirement ${career.ageMet ? "met" : "missing"}`}><span aria-hidden="true">{career.ageMet ? "✓" : "○"}</span><span>Age {career.job.minAge} or older</span><span className="skill-requirement-numbers">{career.ageMet ? "Met" : `Age ${life.age}`}</span></li>{career.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}</ul>{career.activities.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} occupation readOnly={wiki} />)}</details>)}</section>}
       </aside>
     </div>
-    {model.otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{model.otherTraining.length}</span></summary><div>{model.otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} />)}</div></details>}
+    {otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{otherTraining.length}</span></summary><div>{otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</div></details>}
     <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.{world.character?.skills[selected.id]?.gainCurve && " Gains get smaller at higher proficiency."}</p>
   </div>;
 }

@@ -14,6 +14,19 @@ export interface SkillNode {
 export interface SkillEdge { from: string; to: string; threshold: number; met: boolean }
 export interface SkillTreeModel { nodes: SkillNode[]; edges: SkillEdge[]; branches: string[]; otherTraining: ActivityAvailability[] }
 
+/** Keep future, unlearned paths in the wiki rather than the current skill view.
+ * Temporary action, cash and choice restrictions never hide earned progress. */
+export function currentSkillTree(model: SkillTreeModel): SkillTreeModel {
+  const nodes = model.nodes.filter(node => node.state !== "locked" || node.value > node.min);
+  const visible = new Set(nodes.map(node => node.id));
+  return {
+    nodes,
+    edges: model.edges.filter(edge => visible.has(edge.from) && visible.has(edge.to)),
+    branches: model.branches.filter(branch => nodes.some(node => node.branch === branch)),
+    otherTraining: model.otherTraining,
+  };
+}
+
 const knownBranches: Record<string, string> = {
   craft: "Crafts", pottery: "Crafts", carving: "Crafts", sculpture: "Crafts",
   literacy: "Letters & ideas", oratory: "Letters & ideas", philosophy: "Letters & ideas",

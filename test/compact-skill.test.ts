@@ -84,6 +84,65 @@ test("the compact view defaults to one developed branch, honors a manual selecti
   assert.equal(life.character!.jobId, null);
 });
 
+function gatedFixture(): WorldPack {
+  const world = fixture(option([]));
+  for (const [id, definition] of Object.entries(world.character!.skills)) {
+    definition.initial = 0;
+    definition.trainingActivity = `train-${id}`;
+    world.character!.activities.push({ id: `train-${id}`, text: `Practice ${id}`, category: "training", minAge: id === "craft" ? 6 : id === "sculpture" ? 12 : 15,
+      outcomes: [{ id: `learn-${id}`, text: "You practice.", weight: 1, effects: [{ type: "skill", skill: id, delta: 2 }] }] });
+  }
+  return world;
+}
+
+test("ordinary compact skills omit age and prerequisite locks and fall back from a hidden branch", () => {
+  const world = gatedFixture(), engine = createEngine(world), life = structuredClone(engine.start("compact-current-locks"));
+  const snapshot = structuredClone(life);
+  let view = compactSkillView(compactSkillPreview(world, life), life, "Performance");
+  assert.deepEqual(view.nodes, []);
+  assert.deepEqual(view.selectableBranches, []);
+  assert.equal(view.branch, undefined);
+  assert.deepEqual(life, snapshot);
+
+  life.age = 6;
+  let model = compactSkillPreview(world, life);
+  view = compactSkillView(model, life, "Performance");
+  assert.deepEqual(view.nodes.map(node => node.id), ["craft"]);
+  assert.deepEqual(view.selectableBranches, ["Crafts"]);
+  assert.equal(view.branch, "Crafts");
+  assert.equal(model.nodes.length, 3, "The complete wiki model remains available.");
+
+  life.age = 12;
+  model = compactSkillPreview(world, life);
+  assert.deepEqual(compactSkillView(model, life).nodes.map(node => node.id), ["craft"], "An age-qualified skill still needs its prerequisites.");
+  life.character!.skills.craft = 20;
+  assert.deepEqual(compactSkillView(compactSkillPreview(world, life), life).nodes.map(node => node.id), ["craft", "sculpture"]);
+});
+
+test("current compact skills retain earned locked proficiency and survive temporary action blocks", () => {
+  const world = gatedFixture(), engine = createEngine(world), life = structuredClone(engine.start("compact-earned-locks"));
+  life.character!.skills.music = 1;
+  let view = compactSkillView(compactSkillPreview(world, life), life);
+  assert.deepEqual(view.nodes.map(node => node.id), ["music"]);
+  assert.equal(view.nodes[0].state, "locked");
+  assert.deepEqual(view.selectableBranches, ["Performance"]);
+
+  life.age = 6;
+  life.phase = "ready";
+  life.pendingEventId = null;
+  const baseline = compactSkillView(compactSkillPreview(world, life, undefined, engine.getActivities(life)), life, "Crafts");
+  assert.equal(baseline.nodes[0].canPractice, true);
+  life.character!.lastActivityAge = life.age;
+  view = compactSkillView(compactSkillPreview(world, life, undefined, engine.getActivities(life)), life, "Crafts");
+  assert.deepEqual(view.nodes.map(node => node.id), baseline.nodes.map(node => node.id));
+  assert.equal(view.nodes[0].canPractice, false);
+  assert.deepEqual(view.selectableBranches, ["Crafts", "Performance"]);
+
+  life.phase = "choice";
+  view = compactSkillView(compactSkillPreview(world, life), life, "Crafts");
+  assert.deepEqual(view.nodes.map(node => node.id), ["craft"]);
+});
+
 test("choice previews show affected branches and cross-branch prerequisites while the dialog omits unrelated siblings", () => {
   const choice = option([{ type: "skill", skill: "music", delta: 4 }]), world = fixture(choice);
   world.character!.skills.music.prerequisites = { craft: 20 };

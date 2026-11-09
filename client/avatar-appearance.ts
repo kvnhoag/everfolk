@@ -1,4 +1,5 @@
 import type { AvatarSex, AvatarStage } from "./life-background.ts";
+import { avatarArtworkOrigin } from "./life-background.ts";
 
 /** Shared presentation data for portrait and full-body scene artwork. */
 export const AVATAR_APPEARANCE_ORIGINS = [
@@ -55,7 +56,8 @@ export function getAvatarAppearance({ originId, sex, variant, stage = "adult" }:
   if (sex !== "male" && sex !== "female") throw new Error("Avatar appearance requires a recorded male or female identity.");
   if (!Number.isInteger(variant) || variant < 0 || variant >= IDENTITIES.length) throw new Error("Avatar appearance requires variant 0, 1 or 2.");
   if (!STAGES.includes(stage)) throw new Error("Unknown avatar life stage.");
-  const origin = AVATAR_APPEARANCE_ORIGINS.find(origin => origin.id === originId) ?? AVATAR_APPEARANCE_ORIGINS[0];
+  const artworkOrigin = avatarArtworkOrigin(originId);
+  const origin = AVATAR_APPEARANCE_ORIGINS.find(origin => origin.id === artworkOrigin) ?? AVATAR_APPEARANCE_ORIGINS[0];
   const identity = IDENTITIES[variant];
   const mature = stage === "adult" || stage === "middle" || stage === "elder";
   return Object.freeze({

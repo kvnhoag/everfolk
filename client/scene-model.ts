@@ -151,7 +151,14 @@ const ALL_ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
 
 // Keep the earlier authored assignments for archived lives while exposing an
 // exact current-world map to the editor and completeness checks.
+const expandedHouseholdOrigins = ["royal-household", "estate-household", "temple-household", "soldier-household", "tenant-farming-household", "domestic-service-household", "boatbuilder-household", "musician-household"];
+Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries(expandedHouseholdOrigins.flatMap(origin => [
+  [`background-${origin}-childhood`, visual("childhood", "play")],
+  [`background-${origin}-practice`, visual(origin === "musician-household" ? "music" : ["royal-household", "estate-household", "temple-household"].includes(origin) ? "learning" : "childhood", origin === "musician-household" ? "gather" : ["royal-household", "estate-household", "temple-household"].includes(origin) ? "write" : "work")],
+  [`background-${origin}-opportunity`, visual("history-city", "gather")],
+])));
 Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries([
+  ["household-royal-patronage-changes", visual("history-city", "reflect")],
   ...["classical-persian-reconquest", "classical-alexander-accession", "classical-alexander-crossing", "classical-alexander-egypt", "classical-alexandria-founded", "classical-alexander-death", "classical-aristotle-death", "classical-ptolemy-kingship", "classical-pharos-completed"].map(id => [id, visual("history-city")]),
   ...["classical-euclid-teaching", "classical-scholarly-households", "classical-euclid-demonstration"].map(id => [id, visual("learning")]),
   ["classical-aristotle-journey", visual("sea")],
