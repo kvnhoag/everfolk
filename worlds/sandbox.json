@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "id": "sandbox",
+  "version": "0.1.0",
+  "title": "Engine sandbox",
+  "description": "Entirely fictional test content. Names, ages, dates, weights and outcomes exercise engine behavior; they are not historical evidence or population statistics.",
+  "startYear": -5,
+  "maxAge": 12,
+  "stats": {
+    "health": { "label": "Health", "min": 0, "max": 100, "initial": 60 },
+    "learning": { "label": "Learning", "min": 0, "max": 100, "initial": 10 },
+    "standing": { "label": "Standing", "min": 0, "max": 100, "initial": 10 }
+  },
+  "flags": {
+    "apprentice": { "label": "Joined the workshop", "initial": false },
+    "departed": { "label": "Left the sandbox", "initial": false }
+  },
+  "origins": [
+    {
+      "id": "riverside",
+      "title": "Riverside household",
+      "text": "You begin in a fictional riverside household, surrounded by stories and small experiments.",
+      "weight": 3,
+      "effects": [
+        { "type": "stat", "stat": "learning", "delta": 2 },
+        { "type": "stat", "stat": "health", "delta": -5 }
+      ]
+    },
+    {
+      "id": "hill-house",
+      "title": "Hill household",
+      "text": "You begin in a fictional hill household with a connection to the local workshop.",
+      "weight": 1,
+      "effects": [{ "type": "stat", "stat": "standing", "delta": 15 }]
+    }
+  ],
+  "yearlyEffects": [{ "type": "stat", "stat": "health", "delta": -1 }],
+  "events": [
+    {
+      "id": "welcome",
+      "title": "A first page",
+      "text": "The sandbox opens its notebook. This short fictional life is designed to test the engine.",
+      "trigger": { "type": "age", "at": 0 },
+      "choices": [
+        {
+          "id": "observe",
+          "text": "Begin by observing.",
+          "outcomes": [
+            {
+              "id": "first-notes",
+              "text": "Your household starts a small notebook of discoveries.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 3 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-lessons",
+      "title": "A way to learn",
+      "text": "A teacher offers lessons. A workshop connection can open a second path.",
+      "trigger": { "type": "age", "at": 2 },
+      "choices": [
+        {
+          "id": "study",
+          "text": "Study with the teacher.",
+          "outcomes": [
+            {
+              "id": "lessons",
+              "text": "Regular lessons give you a foundation to build on.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 8 }]
+            }
+          ]
+        },
+        {
+          "id": "apprentice",
+          "text": "Use your connection to join the workshop.",
+          "when": { "type": "stat", "stat": "standing", "op": "gte", "value": 20 },
+          "outcomes": [
+            {
+              "id": "workshop-place",
+              "text": "You gain a workshop place and begin learning through practice.",
+              "weight": 1,
+              "effects": [
+                { "type": "flag", "flag": "apprentice", "value": true },
+                { "type": "stat", "stat": "learning", "delta": 12 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "market-notes",
+      "title": "The first errand",
+      "text": "Two things happen at this age. This errand is the first scheduled event in declaration order.",
+      "trigger": { "type": "age", "at": 4 },
+      "choices": [
+        {
+          "id": "exchange-stories",
+          "text": "Exchange stories at the market.",
+          "outcomes": [
+            {
+              "id": "many-stories",
+              "text": "Several new stories find their way into your notebook.",
+              "weight": 3,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 6 }]
+            },
+            {
+              "id": "quiet-market",
+              "text": "It is a quiet market day, but you still learn something.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 2 }]
+            }
+          ]
+        },
+        {
+          "id": "finish-errand",
+          "text": "Concentrate on the errand.",
+          "outcomes": [
+            {
+              "id": "reliable",
+              "text": "Your household appreciates your reliability.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "standing", "delta": 3 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "river-message",
+      "title": "The second errand",
+      "text": "A message arrives in the same year. Resolving the first errand has not advanced your age.",
+      "trigger": { "type": "age", "at": 4 },
+      "choices": [
+        {
+          "id": "help-reader",
+          "text": "Help read and deliver the message.",
+          "outcomes": [
+            {
+              "id": "message-delivered",
+              "text": "Reading the message gives you practice and earns a little trust.",
+              "weight": 1,
+              "effects": [
+                { "type": "stat", "stat": "learning", "delta": 4 },
+                { "type": "stat", "stat": "standing", "delta": 2 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rest",
+          "text": "Leave the message to someone else and rest.",
+          "outcomes": [
+            {
+              "id": "rested",
+              "text": "A little rest restores your energy.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "health", "delta": 2 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calendar-crossing",
+      "title": "A new calendar page",
+      "text": "The displayed calendar has moved from 1 BCE to 1 CE. There was no year zero.",
+      "trigger": { "type": "year", "at": 1 },
+      "choices": [
+        {
+          "id": "record-date",
+          "text": "Record the date in your notebook.",
+          "outcomes": [
+            {
+              "id": "calendar-note",
+              "text": "You add a careful note about the calendar convention used by this test world.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 5 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "practice-day",
+      "title": "A day to practise",
+      "text": "A spare day offers a chance to test an idea. This random event can recur, with a cooldown.",
+      "trigger": { "type": "random", "weight": 2 },
+      "when": { "type": "age", "op": "gte", "value": 3 },
+      "maxOccurrences": 3,
+      "cooldownYears": 2,
+      "choices": [
+        {
+          "id": "experiment",
+          "text": "Try the experiment.",
+          "outcomes": [
+            {
+              "id": "discovery",
+              "text": "The experiment works, and your notebook gains a useful discovery.",
+              "weight": 3,
+              "effects": [{ "type": "stat", "stat": "learning", "delta": 4 }]
+            },
+            {
+              "id": "tiring-day",
+              "text": "The experiment proves tiring and will need another attempt.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "health", "delta": -3 }]
+            }
+          ]
+        },
+        {
+          "id": "take-break",
+          "text": "Take a quiet break.",
+          "outcomes": [
+            {
+              "id": "quiet-day",
+              "text": "You spend the day resting.",
+              "weight": 1,
+              "effects": [{ "type": "stat", "stat": "health", "delta": 1 }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "departure-offer",
+      "title": "A road out of the sandbox",
+      "text": "You can finish the remaining notebook pages here, or end this test life by leaving now.",
+      "trigger": { "type": "age", "at": 9 },
+      "choices": [
+        {
+          "id": "stay",
+          "text": "Stay and finish the notebook.",
+          "outcomes": [
+            {
+              "id": "staying",
+              "text": "You decide to complete the sandbox's remaining years.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        },
+        {
+          "id": "leave",
+          "text": "Leave the sandbox and end this run.",
+          "outcomes": [
+            {
+              "id": "leaving",
+              "text": "You close the notebook and step onto the road.",
+              "weight": 1,
+              "effects": [
+                { "type": "flag", "flag": "departed", "value": true },
+                { "type": "end", "ending": "departure" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "id": "workshop-graduate",
+      "title": "A workshop notebook completed",
+      "text": "Your workshop studies reach their goal. This conditional ending completes the test life early.",
+      "when": {
+        "type": "all",
+        "conditions": [
+          { "type": "flag", "flag": "apprentice", "value": true },
+          { "type": "stat", "stat": "learning", "op": "gte", "value": 35 },
+          { "type": "age", "op": "gte", "value": 8 }
+        ]
+      }
+    },
+    {
+      "id": "departure",
+      "title": "Beyond the sandbox",
+      "text": "You chose to leave. This is an explicit ending effect, not a simulated death."
+    },
+    {
+      "id": "notebook-complete",
+      "title": "The sandbox is complete",
+      "text": "You reach the test world's maximum age and complete its notebook. Twelve is a test boundary, not a historical lifespan estimate."
+    }
+  ],
+  "defaultEnding": "notebook-complete"
+}

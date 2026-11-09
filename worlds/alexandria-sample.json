@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "id": "alexandria-sample",
+  "version": "0.1.0",
+  "title": "A life in Alexandria",
+  "description": "An illustrative, fictional scene for testing the client. The character, households, decisions, dates and probability weights are authored game content, not a historical reconstruction or measured population statistics. Alexandria is a sample setting, not a final world selection.",
+  "startYear": -66,
+  "maxAge": 23,
+  "stats": {
+    "health": {
+      "label": "Health",
+      "min": 0,
+      "max": 100,
+      "initial": 78
+    },
+    "knowledge": {
+      "label": "Knowledge",
+      "min": 0,
+      "max": 100,
+      "initial": 36
+    },
+    "wealth": {
+      "label": "Wealth",
+      "min": 0,
+      "max": 100,
+      "initial": 18
+    },
+    "bonds": {
+      "label": "Bonds",
+      "min": 0,
+      "max": 100,
+      "initial": 65
+    }
+  },
+  "flags": {
+    "sailed": {
+      "label": "Took a place aboard ship",
+      "initial": false
+    },
+    "studied": {
+      "label": "Joined a scholar's workshop",
+      "initial": false
+    },
+    "stayed": {
+      "label": "Made a home in the city",
+      "initial": false
+    },
+    "kept-letters": {
+      "label": "Kept letters from home",
+      "initial": false
+    }
+  },
+  "origins": [
+    {
+      "id": "merchant-household",
+      "title": "A merchant household",
+      "text": "You were born above a small shop near the harbor. Counting goods and listening to travelers became familiar parts of your childhood.",
+      "weight": 2,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "wealth",
+          "delta": 5
+        },
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "artisan-household",
+      "title": "An artisan household",
+      "text": "You grew up around a crowded workbench, learning the patience of careful hands and the value of doing a thing well.",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 5
+        },
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 3
+        }
+      ]
+    },
+    {
+      "id": "harbor-household",
+      "title": "A harbor household",
+      "text": "Your family made its living around the quays. You grew up knowing the sound of ropes, the changing light and the neighbors who watched out for you.",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "health",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 6
+        }
+      ]
+    }
+  ],
+  "yearlyEffects": [
+    {
+      "type": "stat",
+      "stat": "health",
+      "delta": -0.5
+    },
+    {
+      "type": "stat",
+      "stat": "wealth",
+      "delta": 0.5
+    }
+  ],
+  "events": [
+    {
+      "id": "a-place-on-the-manifest",
+      "title": "A name on the manifest",
+      "text": "A merchant needs someone to copy cargo records aboard a ship leaving Alexandria. You know your letters, and the harbor suddenly feels like a doorway. At home, there is steady work. Across the city, a scholar's workshop has offered you a place. Which life will you begin?",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "choices": [
+        {
+          "id": "stay",
+          "text": "Stay and build a life here",
+          "outcomes": [
+            {
+              "id": "a-familiar-door",
+              "text": "You choose the familiar streets. A neighbor offers you regular copying work, and your family is glad to have you close.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "stayed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 8
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 4
+                }
+              ]
+            },
+            {
+              "id": "a-slow-beginning",
+              "text": "You stay, but regular work takes time to find. Your household makes room for you while you look.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "stayed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sail",
+          "text": "Take the place aboard ship",
+          "outcomes": [
+            {
+              "id": "beyond-the-breakwater",
+              "text": "Your name goes onto the manifest. As the harbor slips behind you, excitement and homesickness arrive together.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "sailed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -6
+                }
+              ]
+            },
+            {
+              "id": "a-hard-first-crossing",
+              "text": "You take the berth. The first crossing is tiring, but by its end the cargo records are in your own careful hand.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "sailed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 8
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "study",
+          "text": "Learn in the scholar's workshop",
+          "outcomes": [
+            {
+              "id": "a-new-bench",
+              "text": "You find a place at a long workbench. The work pays little, but every page seems to open another question.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "studied",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 10
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                }
+              ]
+            },
+            {
+              "id": "the-patience-of-pages",
+              "text": "The workshop is demanding. You spend long hours preparing materials before you are trusted with a page of your own.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "studied",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letters-across-the-water",
+      "title": "Letters across the water",
+      "text": "A returning sailor can carry a letter to your household. There is room for a few words and a small parcel.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "when": {
+        "type": "flag",
+        "flag": "sailed",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "write-home",
+          "text": "Write a long letter home",
+          "outcomes": [
+            {
+              "id": "a-thread-kept",
+              "text": "You write about ordinary things: the light, the work, the people you miss. A thread between your two lives stays unbroken.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "kept-letters",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seek-another-port",
+          "text": "Spend the day learning the port",
+          "outcomes": [
+            {
+              "id": "another-kind-of-map",
+              "text": "You follow the quays and listen to unfamiliar voices. The city begins to become a place you can navigate.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-unfamiliar-page",
+      "title": "The unfamiliar page",
+      "text": "A visitor brings a damaged page to the workshop. Some of its words are beyond you, but someone must begin the patient work.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "when": {
+        "type": "flag",
+        "flag": "studied",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "work-together",
+          "text": "Ask to work beside a senior copyist",
+          "outcomes": [
+            {
+              "id": "a-patient-lesson",
+              "text": "Working side by side, you learn how much can be recovered by looking carefully and asking a good question.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "take-extra-work",
+          "text": "Take paid copying work instead",
+          "outcomes": [
+            {
+              "id": "lamplight-hours",
+              "text": "Extra work puts a little money in your purse. Your own studies must wait for the quieter hours.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-neighbors-request",
+      "title": "The neighbor's request",
+      "text": "A neighbor wants help putting an agreement into writing. It is small work, but people are beginning to bring their questions to your door.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "when": {
+        "type": "flag",
+        "flag": "stayed",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "help-a-neighbor",
+          "text": "Make time for the neighbor",
+          "outcomes": [
+            {
+              "id": "a-trusted-hand",
+              "text": "You explain the words as you write them. Your neighbor leaves relieved, and your careful work is remembered.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "set-a-fair-price",
+          "text": "Agree on a fair payment",
+          "outcomes": [
+            {
+              "id": "a-living-from-letters",
+              "text": "You are paid for your time and begin to see how a living might be made from this work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "room-for-one-more",
+      "title": "Room for one more",
+      "text": "A young traveler needs a little help finding their feet. Your time and money are limited, but you remember what it felt like to be starting out.",
+      "trigger": {
+        "type": "age",
+        "at": 20
+      },
+      "choices": [
+        {
+          "id": "share-a-meal",
+          "text": "Share a meal and a little time",
+          "outcomes": [
+            {
+              "id": "an-unhurried-evening",
+              "text": "An unhurried meal turns a stranger into someone you may meet again.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "share-what-you-know",
+          "text": "Offer to teach what you know",
+          "outcomes": [
+            {
+              "id": "a-useful-lesson",
+              "text": "Explaining your work makes you understand it more clearly. The traveler leaves with a useful skill.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "recommend-paid-work",
+          "text": "Recommend a place to find paid work",
+          "outcomes": [
+            {
+              "id": "a-practical-introduction",
+              "text": "You make an introduction, then return to your own responsibilities.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-uneven-accounts",
+      "title": "The uneven accounts",
+      "text": "A set of records does not add up. Fixing it will take time, and someone is eager to have the matter settled quickly.",
+      "trigger": {
+        "type": "age",
+        "at": 21
+      },
+      "choices": [
+        {
+          "id": "read-every-line",
+          "text": "Check every line before agreeing",
+          "when": {
+            "type": "stat",
+            "stat": "knowledge",
+            "op": "gte",
+            "value": 40
+          },
+          "outcomes": [
+            {
+              "id": "the-missing-entry",
+              "text": "You find a missing entry. Careful work protects your reputation and earns a little extra pay.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                }
+              ]
+            },
+            {
+              "id": "a-long-search",
+              "text": "The answer takes longer than you expected. You are tired, but your work is sound.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ask-for-help",
+          "text": "Ask someone you trust to check it",
+          "outcomes": [
+            {
+              "id": "two-pairs-of-eyes",
+              "text": "Another pair of eyes finds what you missed. You are grateful to have someone to ask.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pass-on-the-work",
+          "text": "Pass the work to another copyist",
+          "outcomes": [
+            {
+              "id": "a-quiet-refusal",
+              "text": "You give up the fee and keep the afternoon for yourself. Not every responsibility needs to become yours.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-you-will-keep",
+      "title": "What you will keep",
+      "text": "You have a little more experience now, and a small choice about what to do with it. None of these paths can hold everything.",
+      "trigger": {
+        "type": "age",
+        "at": 22
+      },
+      "choices": [
+        {
+          "id": "teach-someone",
+          "text": "Make time to teach someone",
+          "outcomes": [
+            {
+              "id": "knowledge-passed-on",
+              "text": "You spend an afternoon guiding a beginner. Something you learned becomes useful to another person.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "send-a-gift-home",
+          "text": "Set something aside for your household",
+          "outcomes": [
+            {
+              "id": "a-small-gift",
+              "text": "A modest gift carries more than its price. Your household knows it was chosen with them in mind.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-in-your-work",
+          "text": "Buy better tools for your work",
+          "outcomes": [
+            {
+              "id": "tools-well-used",
+              "text": "Your new tools make the daily work easier. Small improvements begin to add up.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            },
+            {
+              "id": "a-cost-for-tomorrow",
+              "text": "The tools cost more than you hoped, but you expect to use them for years.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "id": "a-life-on-the-water",
+      "title": "A life on the water",
+      "text": "You have learned to read a coastline as closely as a page. Your story continues beyond this harbor; this chapter closes with another journey ahead.",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "flag",
+            "flag": "sailed",
+            "value": true
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "a-keeper-of-words",
+      "title": "A keeper of words",
+      "text": "The workshop has become a place where your questions are welcome. You have begun helping others learn, and there are still shelves of things you do not know.",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "flag",
+            "flag": "studied",
+            "value": true
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "a-place-to-belong",
+      "title": "A place to belong",
+      "text": "Your work is familiar to your neighbors, and your door is rarely quiet. Staying has given you roots, responsibilities and a life that is your own.",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "flag",
+            "flag": "stayed",
+            "value": true
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapter-complete",
+      "title": "Another page awaits",
+      "text": "This short sample chapter ends here. Your character is still alive, with years and possibilities ahead."
+    }
+  ],
+  "defaultEnding": "chapter-complete"
+}
