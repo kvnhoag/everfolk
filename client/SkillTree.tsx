@@ -5,12 +5,11 @@ import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
 import { buildSkillTree, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "./skill-tree.ts";
 import type { SkillNode, SkillRequirement } from "./skill-tree.ts";
+import { layoutSkillLinks } from "./skill-tree-links.ts";
+import { activityLoanOffer } from "./loan-access.ts";
+import SkillGrowth from "./SkillGrowth.tsx";
+import { formatSkillValue as skillNumber } from "./skill-growth.ts";
 import "./skill-tree.css";
-
-function skillNumber(value: number, boundary = Infinity): number {
-  const rounded = Number(value.toFixed(2));
-  return value < boundary && rounded >= boundary ? Math.floor(value * 100) / 100 : rounded;
-}
 
 function SkillIcon({ id }: { id: string }) {
   const paths: Record<string, ReactNode> = {
@@ -43,11 +42,12 @@ function Practice({ activity, life, world, onActivity }: {
 }) {
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
+  const loanOffer = reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-practice${reason ? " unavailable" : ""}`}>
     <p className="skill-practice-name">{activity.text}</p>
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    <button type="button" className="skill-practice-button" disabled={Boolean(reason)} onClick={() => onActivity(activity.id)}>{reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>
+    <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>
     {reason && <p className="skill-practice-reason">{reason}</p>}
   </div>;
 }
@@ -58,13 +58,14 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
   const requirements = skillActionRequirements(activity, world);
+  const loanOffer = reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-work-action${reason ? " unavailable" : ""}`}>
     <p className="skill-practice-name">{activity.text}</p>
     {requirements.length > 0 && <p className="skill-work-requirements">{requirements.join(" · ")}</p>}
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    <button type="button" className="skill-practice-button" disabled={Boolean(reason)} aria-label={`${occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
-      {occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
+    <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
+      {loanOffer ? "Ask moneylender to fund this" : occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
     </button>
     {reason && <p className="skill-practice-reason">{reason}</p>}
   </div>;
@@ -75,6 +76,7 @@ export default function SkillTree({ life, world, activities, onActivity }: {
 }) {
   const model = useMemo(() => buildSkillTree(world, life, activities), [world, life, activities]);
   const layout = useMemo(() => layoutSkillTree(model), [model]);
+  const links = useMemo(() => layoutSkillLinks(model, layout), [model, layout]);
   const [selectedId, setSelectedId] = useState("craft");
   const [search, setSearch] = useState("");
   const instanceId = useId();
@@ -114,25 +116,17 @@ export default function SkillTree({ life, world, activities, onActivity }: {
       <div className="skill-tree-search"><label htmlFor={`${instanceId}-search`}>Find a skill</label><input id={`${instanceId}-search`} type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Try pottery or astronomy" autoComplete="off" /></div>
       <div className="skill-tree-legend" aria-label="Skill states"><span className="is-locked">Locked</span><span className="is-ready">Ready</span><span className="is-learning">Learning</span><span className="is-mastered">Mastered</span></div>
     </div>
-    <p className="skill-tree-map-note" id={`${instanceId}-map-help`}>{query ? `${matchCount} matching ${matchCount === 1 ? "skill" : "skills"}. All paths remain visible.` : "Lines show required skills. A green connection means its threshold is met."} <span>Use arrow keys to explore; select any skill for details.</span></p>
+    <p className="skill-tree-map-note" id={`${instanceId}-map-help`}>{query ? `${matchCount} matching ${matchCount === 1 ? "skill" : "skills"}. All paths remain visible.` : "Follow each path from left to right. Green links show requirements you have met."} <span>Select a skill to highlight its connections. Use arrow keys to explore.</span></p>
     <div className="skill-tree-layout">
       <div className="skill-tree-map-wrap"><div className="skill-tree-scroll" tabIndex={0} role="region" aria-label="Skill tree map, scroll horizontally to explore" aria-describedby={`${instanceId}-map-help`}>
         <div className="skill-tree-board" style={{ width: layout.width, height: layout.height }}>
-          {Array.from({ length: layout.tierCount }, (_, tier) => <span key={tier} className="skill-tree-tier" style={{ left: 100 + tier * (layout.cardWidth + 32), width: layout.cardWidth }}>{tier === 0 ? "Basic" : tier === 1 ? "Intermediate" : tier === 2 ? "Advanced" : `Tier ${tier + 1}`}</span>)}
+          {layout.tierX.map((left, tier) => <span key={tier} className="skill-tree-tier" style={{ left, width: layout.cardWidth }}>{tier === 0 ? "Basic" : tier === 1 ? "Intermediate" : tier === 2 ? "Advanced" : `Tier ${tier + 1}`}</span>)}
           {layout.branches.map((branch, index) => <div key={branch.label} className={`skill-tree-branch skill-branch-${index % 4}`} style={{ top: branch.y, height: branch.height, width: layout.width }}><span>{branch.label}</span></div>)}
           <svg className="skill-tree-connectors" width={layout.width} height={layout.height} viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true">
-            <defs><marker id={`${instanceId}-arrow`} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 6 3 0 6z" fill="currentColor" /></marker></defs>
-            {model.edges.map(edge => {
-              const from = layout.positions[edge.from], to = layout.positions[edge.to];
-              const x1 = from.x + layout.cardWidth, y1 = from.y + layout.cardHeight / 2, x2 = to.x - 4, y2 = to.y + layout.cardHeight / 2;
+            <defs><marker id={`${instanceId}-arrow`} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 6 3 0 6z" fill="context-stroke" /></marker></defs>
+            {links.map(edge => {
               const active = edge.to === selected.id || edge.from === selected.id;
-              const distance = Math.max(18, (x2 - x1) / 2);
-              // An edge that skips a tier runs above the middle card instead of disappearing behind it.
-              const lane = Math.min(from.y, to.y) - 5;
-              const path = x2 - x1 > layout.cardWidth + 32
-                ? `M${x1} ${y1} C${x1 + 17} ${y1},${x1 + 17} ${lane},${x1 + 25} ${lane} L${x2 - 25} ${lane} C${x2 - 17} ${lane},${x2 - 17} ${y2},${x2} ${y2}`
-                : `M${x1} ${y1} C${x1 + distance} ${y1},${x2 - distance} ${y2},${x2} ${y2}`;
-              return <path key={`${edge.from}-${edge.to}`} className={`${edge.met ? "connection-met" : "connection-locked"}${active ? " connection-selected" : ""}`} d={path} markerEnd={`url(#${instanceId}-arrow)`} />;
+              return <path key={`${edge.from}-${edge.to}`} className={`${edge.met ? "connection-met" : "connection-locked"}${active ? " connection-selected" : ""}`} d={edge.path} markerEnd={`url(#${instanceId}-arrow)`} />;
             })}
           </svg>
           {model.nodes.map(node => {
@@ -154,6 +148,7 @@ export default function SkillTree({ life, world, activities, onActivity }: {
         <div className="skill-detail-title"><span className="skill-detail-icon"><SkillIcon id={selected.id} /></span><div><span className="skill-detail-branch">{selected.branch}</span><h4>{selected.label}</h4></div><span className="skill-detail-state">{selected.state}</span></div>
         <p className="skill-detail-description">{selected.description}</p>
         <div className="skill-detail-proficiency"><label htmlFor={`${instanceId}-proficiency`}>Proficiency <strong>{skillNumber(selected.value, selected.max)}<span> / {selected.max}</span></strong></label><meter id={`${instanceId}-proficiency`} min={selected.min} max={selected.max} value={selected.value} /></div>
+        <SkillGrowth life={life} world={world} skillId={selected.id} />
         <section className="skill-detail-section"><h5>Requirements</h5><ul className="skill-requirement-list">
           {selected.minAge > 0 && <li className={`skill-requirement ${selected.ageMet ? "met" : "missing"}`}><span className="skill-requirement-mark" aria-hidden="true">{selected.ageMet ? "✓" : "○"}</span><span>Age {selected.minAge} or older</span><span className="skill-requirement-numbers">{selected.ageMet ? "Met" : `Age ${life.age}`}</span></li>}
           {selected.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}

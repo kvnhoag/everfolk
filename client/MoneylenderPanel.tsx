@@ -8,8 +8,8 @@ import "./moneylender.css";
 export function MoneylenderNotice({ life, world, onManage }: { life: LifeState; world: WorldPack; onManage(): void }) {
   const loan = getLoanSummary(world, life);
   if (!loan || life.phase === "ended") return null;
-  return <aside className={`moneylender-notice${loan.threatened ? " lender-overdue" : ""}`} aria-label="Moneylender loan">
-    <div><strong>{formatMoney(loan.balance, world)} owed to the moneylender</strong><span>{loan.status}{loan.dangerous ? " · Collectors may attack" : loan.threatened ? " · Collectors are demanding payment" : ""}</span></div>
+  return <aside className={`moneylender-notice${loan.dueSoon ? " lender-due-soon" : ""}${loan.due ? " lender-overdue" : ""}`} aria-label="Moneylender loan" role={loan.dueSoon || loan.due ? "status" : undefined}>
+    <div><strong>{loan.yearsLeft === 1 ? "Repayment next year · " : loan.yearsLeft === 0 ? "Repayment due · " : ""}{formatMoney(loan.balance, world)} owed to the moneylender</strong><span>{loan.status} · Deadline {loan.dueYear}{loan.dangerous ? " · Collectors may attack" : loan.threatened ? " · Collectors are demanding payment" : loan.dueSoon ? " · Repay manually from Wealth" : ""}</span></div>
     <button type="button" onClick={onManage}>Manage loan <span aria-hidden="true">↗</span></button>
   </aside>;
 }

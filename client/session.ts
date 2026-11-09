@@ -27,6 +27,12 @@ import moneylenderWorld from "../worlds/alexandria-0.21.0.json" with { type: "js
 import eventVarietyWorld from "../worlds/alexandria-0.22.0.json" with { type: "json" };
 import rareEncountersWorld from "../worlds/alexandria-0.23.0.json" with { type: "json" };
 import masteryOpeningsWorld from "../worlds/alexandria-0.24.0.json" with { type: "json" };
+import legacyRoutesWorld from "../worlds/alexandria-0.25.0.json" with { type: "json" };
+import childhoodRoutesWorld from "../worlds/alexandria-0.26.0.json" with { type: "json" };
+import creditOpportunitiesWorld from "../worlds/alexandria-0.27.0.json" with { type: "json" };
+import skillCeilingWorld from "../worlds/alexandria-0.28.0.json" with { type: "json" };
+import proceduralPeopleWorld from "../worlds/alexandria-0.29.0.json" with { type: "json" };
+import socialRolesWorld from "../worlds/alexandria-0.30.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -55,6 +61,12 @@ const moneylenderEngine = createEngine(moneylenderWorld);
 const eventVarietyEngine = createEngine(eventVarietyWorld);
 const rareEncountersEngine = createEngine(rareEncountersWorld);
 const masteryOpeningsEngine = createEngine(masteryOpeningsWorld);
+const legacyRoutesEngine = createEngine(legacyRoutesWorld);
+const childhoodRoutesEngine = createEngine(childhoodRoutesWorld);
+const creditOpportunitiesEngine = createEngine(creditOpportunitiesWorld);
+const skillCeilingEngine = createEngine(skillCeilingWorld);
+const proceduralPeopleEngine = createEngine(proceduralPeopleWorld);
+const socialRolesEngine = createEngine(socialRolesWorld);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -71,6 +83,12 @@ engines.set(moneylenderEngine.fingerprint, moneylenderEngine);
 engines.set(eventVarietyEngine.fingerprint, eventVarietyEngine);
 engines.set(rareEncountersEngine.fingerprint, rareEncountersEngine);
 engines.set(masteryOpeningsEngine.fingerprint, masteryOpeningsEngine);
+engines.set(legacyRoutesEngine.fingerprint, legacyRoutesEngine);
+engines.set(childhoodRoutesEngine.fingerprint, childhoodRoutesEngine);
+engines.set(creditOpportunitiesEngine.fingerprint, creditOpportunitiesEngine);
+engines.set(skillCeilingEngine.fingerprint, skillCeilingEngine);
+engines.set(proceduralPeopleEngine.fingerprint, proceduralPeopleEngine);
+engines.set(socialRolesEngine.fingerprint, socialRolesEngine);
 const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
@@ -193,7 +211,7 @@ export function persistLife(storage: StorageLike, life: LifeState): void {
 
 /** Remember the birth reveal separately; it is presentation, not a simulation command. */
 export function hasLifeBegun(storage: StorageLike, life: LifeState): boolean {
-  if (life.commands.length > 0 || life.phase === "ended") return true;
+  if (life.commands.some(command => command.type !== "avatar") || life.phase === "ended") return true;
   let engine: LifeEngine;
   try { engine = engineForLife(life); } catch { return false; }
   return storage.getItem(presentationKeyFor(engine)) === `${life.worldFingerprint}:${life.seed}`;
@@ -205,7 +223,7 @@ export function persistBirthPresentation(storage: StorageLike, life: LifeState, 
 
 /** A stat reveal is presentation only; older lives that have begun need no replay. */
 export function hasBirthStatsBeenRevealed(storage: StorageLike, life: LifeState): boolean {
-  if (life.commands.length > 0 || life.phase === "ended") return true;
+  if (life.commands.some(command => command.type !== "avatar") || life.phase === "ended") return true;
   try {
     if (hasLifeBegun(storage, life)) return true;
     const key = `${presentationKeyFor(engineForLife(life))}:stats-revealed`;

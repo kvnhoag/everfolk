@@ -1,6 +1,40 @@
-import type { Effect, LifeState, Outcome, RelationshipState, RelationshipTie, WorldPack } from "./types.ts";
+import type { Effect, LifeState, Outcome, RelationshipState, RelationshipTie, SocialRole, WorldPack } from "./types.ts";
+import { resolvePartner } from "./people.ts";
 
 type ClosenessEffect = Extract<Effect, { type: "closeness" }>;
+type SocialRoleEffect = Extract<Effect, { type: "social-role" }>;
+
+/** Roles are independent of the one current romantic relationship. */
+export function hasSocialRole(state: LifeState, partner: string, role: SocialRole): boolean {
+  return state.character?.relationships?.partners[partner]?.roles?.includes(role) === true;
+}
+
+export function socialRoleEffectReason(world: WorldPack, state: LifeState, effect: SocialRoleEffect, allowUnchanged = false): string | undefined {
+  if (!world.character?.socialRelationships || !world.relationships || !state.character?.relationships) return "This world has no social relationship roles.";
+  if (state.phase === "ended") return "This life has ended.";
+  const person = resolvePartner(world, state, effect.partner);
+  if (!person || !("metAge" in person)) return "Meet this person before establishing a social relationship.";
+  if (state.age < 18 || state.age + person.ageOffset < 18) return "Both people must be at least 18.";
+  if (!allowUnchanged && hasSocialRole(state, effect.partner, effect.role) === effect.active) {
+    if (effect.role === "friend") return effect.active ? `You are already friends with ${person.name}.` : `You and ${person.name} have not established a friendship.`;
+    return effect.active ? `${person.name} is already your business partner.` : `You have no business partnership with ${person.name}.`;
+  }
+}
+
+/** Called only on an accepted detached engine snapshot, with no automatic reward. */
+export function applySocialRole(world: WorldPack, state: LifeState, effect: SocialRoleEffect): void {
+  const reason = socialRoleEffectReason(world, state, effect, true);
+  if (reason) throw new Error(reason);
+  introduceRelationship(world, state, effect.partner);
+  const tie = state.character!.relationships!.partners[effect.partner];
+  const roles = tie.roles ?? [];
+  if (effect.active && !roles.includes(effect.role)) tie.roles = [...roles, effect.role];
+  else if (!effect.active && roles.includes(effect.role)) {
+    const remaining = roles.filter(role => role !== effect.role);
+    if (remaining.length) tie.roles = remaining;
+    else delete tie.roles;
+  }
+}
 
 /** Older worlds retain their original state shape and behavior. */
 export function initialRelationships(world: WorldPack): RelationshipState | undefined {
@@ -14,7 +48,7 @@ function relationships(world: WorldPack, state: LifeState, create = false): Rela
 }
 
 function knownPartner(world: WorldPack, state: LifeState, partner: string): boolean {
-  return Boolean(world.character?.partners.some(person => person.id === partner) &&
+  return Boolean(resolvePartner(world, state, partner) &&
     (state.character?.knownPartnerIds?.includes(partner) || state.character?.partnerId === partner));
 }
 
@@ -77,7 +111,7 @@ export function advanceRelationships(world: WorldPack, state: LifeState, journal
     if (visibleWarning && crossed) journal(`relationship-distance-${id}`, `You and ${name} have spent little time together. Your relationship is less close.`);
   };
   for (const [id, tie] of Object.entries(ties.partners)) {
-    const person = world.character!.partners.find(person => person.id === id);
+    const person = resolvePartner(world, state, id);
     if (!person || !knownPartner(world, state, id)) continue;
     decay(tie, id, person.name, state.character.partnerId === id);
   }
@@ -118,6 +152,6 @@ export function marriageRelationshipReason(world: WorldPack, state: LifeState, p
   const minimum = world.relationships.marriageMinimum;
   const closeness = relationshipCloseness(world, state, partner);
   if (closeness >= minimum) return;
-  const name = world.character?.partners.find(person => person.id === partner)?.name ?? "this person";
+  const name = resolvePartner(world, state, partner)?.name ?? "this person";
   return `Requires closeness ${minimum} with ${name} (currently ${closeness}).`;
 }

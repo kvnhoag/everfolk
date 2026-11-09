@@ -14,6 +14,7 @@ function controlledWorld(qualified = true): WorldPack {
   delete world.health!.mortalityCalibration;
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.yearlyEffects = [];
@@ -78,7 +79,12 @@ test("choosing and previewing specific crafts cannot spend money, advance time o
   const storage = { getItem: (key: string) => rows.get(key) ?? null, setItem: (key: string, value: string) => { rows.set(key, value); } };
   for (const id of ["craft", "pottery", "carving", "sculpture"] as const) persistYearlyFocus(storage, life, id);
   const pottery = engine.getActivities(life).find(action => action.id === "train-pottery")!;
-  assert.deepEqual(trainingSkillChanges(pottery, engine.world, life), [{ id: "pottery", label: engine.world.character!.skills.pottery.label, min: 0.25, max: 0.25 }]);
+  const gains = trainingSkillChanges(pottery, engine.world, life);
+  assert.equal(gains.length, 1);
+  assert.equal(gains[0].id, "pottery");
+  assert.equal(gains[0].label, engine.world.character!.skills.pottery.label);
+  assert.ok(Math.abs(gains[0].min - 0.075) < 1e-10);
+  assert.equal(gains[0].max, gains[0].min);
   assert.deepEqual(life, before);
   assert.equal(engine.save(life), saved);
 });

@@ -5,13 +5,15 @@ import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacyPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
+import retainedRelationshipsPack from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual, resolveLifeScenes } from "../client/scene-model.ts";
 
-function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prepare?: (engine: LifeEngine, life: LifeState) => LifeState) {
-  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prepare?: (engine: LifeEngine, life: LifeState) => LifeState, source = pack as WorldPack) {
+  const world = withoutMoneylender(structuredClone(source));
   delete world.mortality;
   delete world.health!.mortalityCalibration;
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   // Visual tests isolate accepted commands from the cost of reaching the scene.
@@ -48,6 +50,78 @@ test("every shipped event has an authored visual rather than a text-keyword gues
   assert.equal(defaultEventVisual(pack.events.find(event => event.id === "a-place-on-the-manifest")! as LifeEvent).scene, "history-city");
   assert.equal(defaultEventVisual(pack.events.find(event => event.id === "news-of-actium")! as LifeEvent).scene, "history-city", "news must not invent local fighting");
   assert.equal(defaultEventVisual(pack.events.find(event => event.id === "child-useful-hands")! as LifeEvent).scene, "childhood", "a child's tasks must not show an adult craft worker");
+});
+
+test("all generated meetings have contextual artwork and dates remain ordinary company", () => {
+  const encounters = pack.events.filter(event => event.id.startsWith("meet-person-") || event.id.startsWith("date-person-"));
+  assert.equal(encounters.length, 32);
+  for (const event of encounters) {
+    const assignment = ALEXANDRIA_EVENT_VISUALS[event.id];
+    assert.ok(assignment, event.id);
+    assert.notEqual(assignment.scene, "family", "meeting or dating does not establish a family");
+    assert.notEqual(assignment.scene, "birth");
+    if (event.id.startsWith("date-person-")) assert.deepEqual(assignment, { scene: "history-city", motion: "gather" });
+  }
+  assert.equal(ALEXANDRIA_EVENT_VISUALS["meet-person-music"].scene, "music");
+  assert.equal(ALEXANDRIA_EVENT_VISUALS["meet-person-boat"].scene, "sea");
+  assert.equal(ALEXANDRIA_EVENT_VISUALS["meet-person-library"].scene, "learning");
+  assert.equal(ALEXANDRIA_EVENT_VISUALS["meet-person-pottery"].scene, "work");
+});
+
+test("business proposals show the shared-work context without implying romance or a battle", () => {
+  const proposals = pack.events.filter(event => event.id.startsWith("business-proposal-person-"));
+  assert.equal(proposals.length, 16);
+  for (const event of proposals) {
+    const assignment = ALEXANDRIA_EVENT_VISUALS[event.id];
+    assert.ok(assignment, event.id);
+    assert.ok(!["family", "birth", "history-war", "memorial"].includes(assignment.scene), `${event.id} depicts an unrelated commitment or hazard`);
+    assert.notEqual(assignment.motion, "unrest");
+  }
+  assert.deepEqual(ALEXANDRIA_EVENT_VISUALS["business-proposal-person-harbor"], { scene: "history-city", motion: "work" });
+  assert.deepEqual(ALEXANDRIA_EVENT_VISUALS["business-proposal-person-library"], { scene: "learning", motion: "write" });
+  assert.deepEqual(ALEXANDRIA_EVENT_VISUALS["business-proposal-person-music"], { scene: "music", motion: "gather" });
+  assert.deepEqual(ALEXANDRIA_EVENT_VISUALS["business-proposal-person-boat"], { scene: "sea", motion: "gather" });
+});
+
+test("generated names resolve in scene headings, pending captions and accepted activities without draws", () => {
+  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  delete world.mortality; delete world.eventPacing;
+  delete world.character!.encounterPacing;
+  delete world.health!.mortalityCalibration;
+  world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
+  for (const origin of world.origins) origin.statRanges = { ...origin.statRanges, health: { min: 100, max: 100 }, wealth: { min: 80, max: 80 } };
+  const meet = structuredClone(world.events.find(event => event.id === "meet-person-harbor")!);
+  const date = structuredClone(world.events.find(event => event.id === "date-person-harbor")!);
+  for (const [event, age] of [[meet, 18], [date, 19]] as const) {
+    event.trigger = { type: "age", at: age };
+    delete event.maxOccurrences; delete event.cooldownYears;
+  }
+  date.title = "An invitation for {person:person-harbor}";
+  world.events = [meet, date, world.events.find(event => event.id === world.health!.careDecision)!];
+  const engine = createEngine(world);
+  let life = engine.start("named-person-scenes");
+  while (life.age < 18) life = engine.advance(life);
+  life = engine.choose(life, "introduce-person-harbor");
+  const name = life.character!.people!["person-harbor"].name;
+  assert.notEqual(name, "An acquaintance");
+  life = engine.act(life, "talk-with-person-harbor");
+  const activity = resolveLifeScenes(life, world)[0];
+  assert.ok(activity.title.includes(name));
+  assert.equal(activity.caption, life.journal.findLast(entry => entry.type === "outcome")!.text, "accepted narration remains the journal's exact text");
+  life = engine.advance(life);
+  assert.equal(life.pendingEventId, date.id);
+  const before = structuredClone(life), beforeWorld = structuredClone(world);
+  const pending = resolveLifeScenes(life, world)[0];
+  assert.equal(pending.title, `An invitation for ${name}`);
+  assert.ok(pending.caption.includes(name));
+  assert.doesNotMatch(pending.caption, /\{person:|person-harbor/);
+  const custom = resolveLifeScenes(life, world, { [date.id]: { scene: "history-city", motion: "gather", caption: "You speak with {person:person-harbor}." } })[0];
+  assert.equal(custom.caption, `You speak with ${name}.`);
+  assert.deepEqual(life, before); assert.deepEqual(world, beforeWorld);
+  const retained = fixture("an-unwell-week", 20, undefined, undefined, retainedRelationshipsPack as WorldPack);
+  const literal = resolveLifeScenes(retained.life, retained.world, { "an-unwell-week": { scene: "rest", motion: "rest", caption: "An old literal {person:person-harbor}." } })[0];
+  assert.equal(literal.caption, "An old literal {person:person-harbor}.", "old worlds never reinterpret their text as new encounter placeholders");
 });
 
 test("illness shows the actual event and keeps a care scene after accepting help", () => {
@@ -126,7 +200,7 @@ test("only a real child activity depicts parenthood, while childhood care keeps 
       : state.character!.relationshipStatus === "courting" ? "marry-demetria" : undefined;
     const activity = engine.getActivities(state).find(activity => activity.id === activityId && activity.available);
     return activity ? engine.act(state, activity.id) : state;
-  });
+  }, retainedRelationshipsPack as WorldPack);
   assert.equal(life.character!.relationshipStatus, "married");
   let parent = life;
   assert.equal(parent.phase, "ready");
@@ -157,6 +231,7 @@ test("dated history and the annual event remain available beside a pending decis
   delete world.mortality;
   delete world.health!.mortalityCalibration;
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   const history = structuredClone(world.events.find(event => event.id === "caesar-in-alexandria")!);

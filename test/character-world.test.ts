@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import beforeNaming from "../worlds/alexandria-0.5.0.json" with { type: "json" };
 import afterNaming from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 import nightRiskRelease from "../worlds/alexandria-0.23.0.json" with { type: "json" };
@@ -59,8 +60,8 @@ test("every dangerous narrative decision offers a safe alternative and names its
   }
 });
 
-function safeEngine(): LifeEngine {
-  const copy = structuredClone(pack);
+function safeEngine(source = pack): LifeEngine {
+  const copy = structuredClone(source);
   copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
   copy.health.incidenceBands.forEach(band => { band.annualProbability = 0; });
   copy.health.declineBands.forEach(band => { band.healthLoss = 0; });
@@ -79,6 +80,7 @@ function settle(engine: LifeEngine, state: LifeState): LifeState {
     const choice = choices.find(candidate => candidate.id === "learn-letters")
       ?? choices.find(candidate => candidate.id === "practice-reading")
       ?? choices.find(candidate => candidate.id === "keep-regular-job")
+      ?? choices.find(candidate => candidate.outcomes.every(outcome => outcome.effects.every(effect => effect.type !== "job")))
       ?? choices[0];
     assert.ok(choice, `No offered choice at ${state.pendingEventId}.`);
     state = engine.choose(state, choice.id);
@@ -121,7 +123,9 @@ test("Alexandria training visibly unlocks authored job and narrative career requ
 });
 
 test("Alexandria supports chosen marriages, named children, care, divorce, remarriage and a replayable completed record", () => {
-  const engine = safeEngine();
+  // This explicit Demetria→Thais route is retained exactly. New event-generated
+  // dating and household transitions are tested against the current pack.
+  const engine = safeEngine(namedCatalog);
   let state = ageTo(engine, engine.start("alexandria-character-smoke"), 20);
   for (let attempts = 0; state.character!.relationshipStatus !== "courting" && attempts < 6; attempts++) {
     state = engine.act(state, "court-demetria");

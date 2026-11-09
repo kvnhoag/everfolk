@@ -1,5 +1,5 @@
 import type { Choice, LifeState, WorldPack } from "../src/types.ts";
-import { applyStatDelta } from "../src/progression.ts";
+import { applyStatDelta, skillEffectDelta } from "../src/progression.ts";
 
 /** Direct skill changes, in authored effect order, without random draws. */
 export function getSkillImpact(choice: Pick<Choice, "outcomes">, life: LifeState, world: WorldPack): {
@@ -10,9 +10,11 @@ export function getSkillImpact(choice: Pick<Choice, "outcomes">, life: LifeState
     const initial = life.character!.skills[id] ?? definition.min;
     const changes = choice.outcomes.map(outcome => {
       let value = initial;
+      const flags = { ...life.flags };
       for (const effect of outcome.effects) {
         if (effect.type === "end") break;
-        if (effect.type === "skill" && effect.skill === id) value = applyStatDelta(definition, value, effect.delta);
+        if (effect.type === "flag") flags[effect.flag] = effect.value;
+        if (effect.type === "skill" && effect.skill === id) value = applyStatDelta(definition, value, skillEffectDelta(effect, flags));
         if (effect.type === "mastery" && effect.target === "skill" && effect.id === id) value = definition.max;
       }
       return value - initial;

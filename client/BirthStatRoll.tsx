@@ -87,13 +87,14 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
   const settled = revealed || finished;
   const frame = getBirthRollFrame(settled ? BIRTH_ROLL_DURATION_MS : elapsed, stats.length);
   const running = started && !settled;
-  const summary = settled ? `Starting stats ready. ${characterName}. ${origin?.title ?? "Origin selected"}. ${stats.map(stat => `${stat.label} ${stat.value}${stat.currency ? ` ${stat.currency}` : ""}`).join(", ")}.`
+  const summary = settled ? `Starting stats ready. ${characterName}. ${life.character?.sex === "female" ? "Born a girl. " : life.character?.sex === "male" ? "Born a boy. " : ""}${origin?.title ?? "Origin selected"}. ${stats.map(stat => `${stat.label} ${stat.value}${stat.currency ? ` ${stat.currency}` : ""}`).join(", ")}.`
     : running ? "Rolling starting stats. Final values are hidden until each roll finishes." : autoStart ? "Starting the stat roll automatically." : "Reveal your name, household and starting stats.";
 
   return <section className={`birth-stat-roll ${running ? "is-rolling" : ""} ${settled ? "is-complete" : ""} ${paused || hidden ? "is-paused" : ""}`} aria-label="Starting stat roll" aria-busy={running}>
     <div className="birth-roll-heading"><div><span className="birth-roll-eyebrow">NEW LIFE</span><h3>{settled ? "Starting stats" : "Rolling stats…"}</h3></div><span className="birth-roll-seal" aria-hidden="true">{settled ? "✓" : "✦"}</span></div>
     <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>BACKGROUND</span><strong>{frame.originRevealed || settled ? origin?.title ?? "Your household" : running ? "Rolling…" : "Unrevealed"}</strong></div>
     <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>NAME</span><strong>{frame.originRevealed || settled ? characterName : "Unrevealed"}</strong></div>
+    {life.character?.sex && <div className={`birth-roll-origin ${frame.originRevealed || settled ? "is-revealed" : ""}`} aria-hidden="true"><span>BIRTH</span><strong>{frame.originRevealed || settled ? life.character.sex === "female" ? "A girl" : "A boy" : "Unrevealed"}</strong></div>}
     <div className="birth-roll-cards" aria-hidden="true">{stats.map((stat, index) => {
       const phase = settled ? "settled" : !started ? "waiting" : frame.phases[index];
       const layout = getBirthReelLayout(stat);

@@ -1,0 +1,27 @@
+/* Main life stays in one center column; small facts sit beside the scene. */
+.game-dashboard .life-layout{grid-template-columns:210px minmax(0,1fr) 220px;grid-template-areas:"identity story household";grid-template-rows:auto;gap:20px}
+.game-dashboard .life-info-sidebar{grid-area:household;display:flex;flex-direction:column;align-self:start;gap:12px;min-width:0}
+.life-info-sidebar .household-summary{min-width:0}
+.life-info-sidebar .household-summary summary{padding:12px;font-size:12px}
+.life-info-sidebar .household-summary-content{padding:0 12px 12px;gap:11px}
+.life-info-sidebar .household-background,.life-info-sidebar .household-work{display:grid;grid-template-columns:70px minmax(0,1fr);gap:7px;align-items:baseline}
+.life-info-sidebar .household-field-label{font-size:8px;line-height:1.5;margin-bottom:3px}
+.life-info-sidebar .household-summary p{font-size:10px;line-height:1.5}
+.life-info-sidebar .household-person>strong{font-size:11px}
+.life-info-sidebar .household-open{font-size:10px;min-height:34px;padding-top:9px}
+@media(min-width:761px) and (max-width:960px){
+  .game-dashboard .life-layout{grid-template-columns:minmax(0,1fr) 200px;grid-template-areas:"identity identity" "story household";grid-template-rows:auto;gap:16px}
+  .game-dashboard .character-panel{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px;text-align:left}
+  .game-dashboard .character-panel .portrait-frame{width:46px;height:56px;margin:0}
+  .game-dashboard .character-panel .portrait{width:46px;height:52px}
+  .game-dashboard .character-panel .portrait-label,.game-dashboard .character-panel .character-origin{display:none}
+  .game-dashboard .character-panel h2{flex:1;font-size:25px;margin:0}
+  .game-dashboard .character-panel .age-line{margin:0}
+  .game-dashboard .character-panel .stats{order:1;flex-basis:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:0}
+  .game-dashboard .character-panel .character-open{margin:0;min-height:34px;font-size:10px}
+  .game-dashboard .character-panel .another-life{margin:0;font-size:9px}
+}
+@media(max-width:760px){
+  .game-dashboard .life-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"identity" "story" "household";grid-template-rows:auto;gap:14px}
+  .game-dashboard .life-info-sidebar{gap:10px}
+}

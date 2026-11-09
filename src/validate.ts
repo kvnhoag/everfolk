@@ -304,7 +304,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   reference(world.defaultEnding, "world.defaultEnding", endingIds, "ending");
 
   const character = Object.hasOwn(world, "character") ? object(world.character, "world.character",
-    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship"],
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship", "identity", "proceduralPartners", "socialRelationships", "encounterPacing"],
     ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription"]) : undefined;
   if (moneylender && (!character || maxAge < 19)) fail("world.economy.moneylender", "requires a character definition and a life extending beyond age 18");
   const skills = character ? object(character.skills, "world.character.skills") : {};
@@ -370,12 +370,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   };
   legacyRoutes.forEach((entry, i) => {
     const path = `world.legacy.routes[${i}]`;
-    const route = object(entry, path, ["id", "title", "description", "skillIds", "jobIds", "achievementIds"]);
+    const route = object(entry, path, ["id", "title", "description", "skillIds", "jobIds", "achievementIds", "earlyInterestFlag"], ["id", "title", "description", "skillIds", "jobIds", "achievementIds"]);
     string(route.title, `${path}.title`, 100);
     string(route.description, `${path}.description`, 1000);
     references(route.skillIds, `${path}.skillIds`, skillIds, "skill", 1);
     references(route.jobIds, `${path}.jobIds`, jobIds, "job");
     references(route.achievementIds, `${path}.achievementIds`, achievementIds, "achievement", 1);
+    if (Object.hasOwn(route, "earlyInterestFlag")) reference(route.earlyInterestFlag, `${path}.earlyInterestFlag`, flagIds, "flag");
     for (const achievement of route.achievementIds as string[]) {
       if ((achievements.find(item => (item as DataObject).id === achievement) as DataObject).routeId !== route.id) fail(`${path}.achievementIds`, "achievement belongs to a different route");
     }
@@ -436,6 +437,14 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const relationships = Object.hasOwn(world, "relationships") ? object(world.relationships, "world.relationships", ["description", "initialCloseness", "childCloseness", "decayAfterYears", "yearlyDecay", "marriageMinimum", "supportThreshold", "maxHealthSupport"]) : undefined;
   const requireHealth = (path: string): void => { if (!health) fail(path, "requires a health definition"); };
   const requireRelationships = (path: string): void => { if (!relationships) fail(path, "requires a relationship definition"); };
+  const socialRole = (value: Record<string, unknown>, path: string): void => {
+    requireCharacter(path);
+    requireRelationships(path);
+    if (character?.socialRelationships !== true) fail(path, "requires socialRelationships");
+    reference(value.partner, `${path}.partner`, partnerIds, "partner");
+    if (value.role !== "friend" && value.role !== "business-partner") fail(`${path}.role`, "expected friend or business-partner");
+    bool(value.active, `${path}.active`);
+  };
 
   const condition = (value: unknown, path: string, depth = 0): void => {
     if (depth > 32) fail(path, "condition nesting exceeds 32 levels");
@@ -515,6 +524,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         requireCharacter(path);
         reference(rule.partner, `${path}.partner`, partnerIds, "partner");
         break;
+      case "social-role":
+        object(rule, path, ["type", "partner", "role", "active"]);
+        socialRole(rule, path);
+        break;
       case "children":
         object(rule, path, ["type", "op", "value"]);
         requireCharacter(path);
@@ -554,7 +567,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         fail(`${path}.type`, "unknown condition type");
     }
   };
-  const effects = (value: unknown, path: string, allowMastery = false, allowAccomplishment = false): void => {
+  const effects = (value: unknown, path: string, allowMastery = false, allowAccomplishment = false, allowTrainingGainModifiers = false): void => {
     array(value, path, 0, 128).forEach((entry, i) => {
       const location = `${path}[${i}]`;
       const effect = object(entry, location, undefined, ["type"]);
@@ -612,9 +625,24 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           bool(effect.value, `${location}.value`);
           break;
         case "skill":
-          object(effect, location, ["type", "skill", "delta"]);
+          object(effect, location, ["type", "skill", "delta", "gainModifiers"], ["type", "skill", "delta"]);
           reference(effect.skill, `${location}.skill`, skillIds, "skill");
           number(effect.delta, `${location}.delta`);
+          if (Object.hasOwn(effect, "gainModifiers")) {
+            if (!allowTrainingGainModifiers) fail(`${location}.gainModifiers`, "gain modifiers are permitted only in paid training activity outcomes");
+            if ((effect.delta as number) <= 0) fail(`${location}.delta`, "training gain modifiers require a positive skill delta");
+            const seen = new Set<string>();
+            array(effect.gainModifiers, `${location}.gainModifiers`, 1, 16).forEach((entry, j) => {
+              const path = `${location}.gainModifiers[${j}]`;
+              const modifier = object(entry, path, ["flag", "multiplier", "reason"]);
+              reference(modifier.flag, `${path}.flag`, flagIds, "flag");
+              if (seen.has(modifier.flag as string)) fail(`${path}.flag`, "duplicate training modifier flag");
+              seen.add(modifier.flag as string);
+              const multiplier = number(modifier.multiplier, `${path}.multiplier`);
+              if (multiplier < 1 || multiplier > 1.2) fail(`${path}.multiplier`, "expected a training multiplier in 1..1.2");
+              string(modifier.reason, `${path}.reason`, 160);
+            });
+          }
           break;
         case "job":
           object(effect, location, ["type", "job"]);
@@ -630,6 +658,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           object(effect, location, ["type", "partner"]);
           requireCharacter(location);
           reference(effect.partner, `${location}.partner`, partnerIds, "partner");
+          break;
+        case "social-role":
+          object(effect, location, ["type", "partner", "role", "active"]);
+          socialRole(effect, location);
           break;
         case "end-courtship":
         case "divorce":
@@ -677,11 +709,21 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   };
 
   /** Check the full conditional-weight budget, not just today's active rules. */
-  const outcomeDefinition = (entry: unknown, path: string, allowMastery = false): number => {
+  const outcomeDefinition = (entry: unknown, path: string, allowMastery = false, training = false): number => {
     const outcome = object(entry, path, ["id", "text", "weight", "effects", "weightModifiers"], ["id", "text", "weight", "effects"]);
     string(outcome.text, `${path}.text`);
     const base = weight(outcome.weight, `${path}.weight`);
-    effects(outcome.effects, `${path}.effects`, allowMastery, true);
+    effects(outcome.effects, `${path}.effects`, allowMastery, true, training);
+    const effectList = outcome.effects as DataObject[];
+    if (effectList.some(effect => effect.type === "skill" && Object.hasOwn(effect, "gainModifiers"))) {
+      let paid = false;
+      for (const effect of effectList) {
+        if (effect.type === "end") break;
+        if (effect.type === "cash" && (effect.delta as number) < 0 ||
+          effect.type === "stat" && effect.stat === (economy?.stat ?? "wealth") && (effect.delta as number) < 0) paid = true;
+      }
+      if (!paid) fail(`${path}.effects`, "training gain modifiers require an actual cash or Wealth payment before the outcome ends");
+    }
     for (const effect of outcome.effects as DataObject[]) if (effect.type === "accomplishment") {
       const achievement = achievements.find(item => (item as DataObject).id === effect.achievement) as DataObject;
       for (const person of achievement.people as string[]) if (!(outcome.text as string).includes(person)) fail(`${path}.text`, "awarding outcomes must introduce every recorded contact by name");
@@ -721,6 +763,44 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   if (character) {
     if (Object.hasOwn(character, "requireIntroductions")) bool(character.requireIntroductions, "world.character.requireIntroductions");
     if (Object.hasOwn(character, "exclusiveCourtship")) bool(character.exclusiveCourtship, "world.character.exclusiveCourtship");
+    if (Object.hasOwn(character, "proceduralPartners")) bool(character.proceduralPartners, "world.character.proceduralPartners");
+    if (Object.hasOwn(character, "socialRelationships")) {
+      bool(character.socialRelationships, "world.character.socialRelationships");
+      if (character.socialRelationships === true && (character.proceduralPartners !== true || !relationships)) {
+        fail("world.character.socialRelationships", "requires proceduralPartners and a relationship definition");
+      }
+    }
+    if (Object.hasOwn(character, "identity")) {
+      const path = "world.character.identity";
+      const identity = object(character.identity, path, ["namePools", "avatarVariants"]);
+      integer(identity.avatarVariants, `${path}.avatarVariants`, 1, 32);
+      const pools = object(identity.namePools, `${path}.namePools`, ["male", "female"]);
+      for (const sex of ["male", "female"]) {
+        const names = array(pools[sex], `${path}.namePools.${sex}`, 1, 128);
+        names.forEach((entry, index) => {
+          const name = string(entry, `${path}.namePools.${sex}[${index}]`, 100);
+          if (name !== name.trim()) fail(`${path}.namePools.${sex}[${index}]`, "name must be trimmed");
+        });
+        if (new Set(names).size !== names.length) fail(`${path}.namePools.${sex}`, "duplicate identity name");
+      }
+      if (character.proceduralPartners === true && new Set([...(pools.male as string[]), ...(pools.female as string[])]).size < partners.length + 1) {
+        fail(`${path}.namePools`, "needs enough distinct names for the player and every encounter template");
+      }
+    }
+    if (character.proceduralPartners === true && (!character.identity || character.requireIntroductions !== true)) {
+      fail("world.character.proceduralPartners", "requires identity pools and requireIntroductions");
+    }
+    if (Object.hasOwn(character, "encounterPacing")) {
+      const path = "world.character.encounterPacing";
+      const pacing = object(character.encounterPacing, path, ["firstMeetingChance", "meetingChance", "dateChance", "cooldownYears"]);
+      if (character.proceduralPartners !== true) fail(path, "requires proceduralPartners");
+      if (!world.eventPacing) fail(path, "requires world.eventPacing");
+      for (const key of ["firstMeetingChance", "meetingChance", "dateChance"]) {
+        const chance = number(pacing[key], `${path}.${key}`);
+        if (chance < 0 || chance > 1) fail(`${path}.${key}`, "probability must be between zero and one");
+      }
+      integer(pacing.cooldownYears, `${path}.cooldownYears`, 0, 100);
+    }
     if (Object.hasOwn(character, "playerNames")) {
       const playerNames = array(character.playerNames, "world.character.playerNames", 1, 128);
       playerNames.forEach((entry, i) => {
@@ -774,7 +854,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (Object.hasOwn(activity, "when")) condition(activity.when, `${path}.when`);
       const outcomes = array(activity.outcomes, `${path}.outcomes`, 1, 64);
       unique(outcomes, `${path}.outcomes`);
-      const weights = outcomes.map((entry, j) => outcomeDefinition(entry, `${path}.outcomes[${j}]`));
+      const weights = outcomes.map((entry, j) => outcomeDefinition(entry, `${path}.outcomes[${j}]`, false, activity.category === "training"));
       aggregate(weights, `${path}.outcomes`);
       opportunityDefinition(activity, path, outcomes);
     });

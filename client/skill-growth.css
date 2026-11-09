@@ -1,0 +1,6 @@
+.skill-growth{padding:12px;margin:13px 0;background:#f4e7c9;border:1px solid #cdbb95;font-size:11px;line-height:1.65;color:#4c5c51}
+.skill-growth .skill-growth-current{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0;color:#263b43}
+.skill-growth-current>strong{font-size:14px;font-variant-numeric:tabular-nums;color:#41637b}.skill-growth>p:not(:first-child){margin:6px 0 0}
+.skill-growth details{margin-top:8px}.skill-growth summary{cursor:pointer;color:#41637b}.skill-growth summary:focus-visible{outline:2px solid #41637b;outline-offset:3px}
+.skill-growth dl{margin:9px 0;padding:0}.skill-growth dl>div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid #cdbb95}.skill-growth dd{margin:0;text-align:right}.skill-growth details>p{margin:8px 0 0}
+.compact-skill-growth{display:block;margin-top:4px;font-size:9px;line-height:1.4;color:#886447;font-variant-numeric:tabular-nums}

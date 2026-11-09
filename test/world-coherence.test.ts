@@ -4,11 +4,12 @@ import test from "node:test";
 import { createEngine, matchesCondition, yearAtAge } from "../src/index.ts";
 import type { Condition, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.11.0.json" with { type: "json" };
 import timelineRelease from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 
-function fixture(eventIds: string[] = []): LifeEngine {
-  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+function fixture(eventIds: string[] = [], source = pack): LifeEngine {
+  const world = withoutMoneylender(structuredClone(source) as WorldPack);
   world.events = world.events.filter(event => eventIds.includes(event.id) || event.id === world.health!.careDecision);
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -98,7 +99,7 @@ test("family discussions are automatic notes that respect existing relationships
 });
 
 test("a second courtship requires an explicit breakup before another person can be pursued", () => {
-  const engine = fixture();
+  const engine = fixture([], namedCatalog);
   const life = adult(engine);
   life.character!.partnerId = "demetria";
   life.character!.relationshipStatus = "courting";

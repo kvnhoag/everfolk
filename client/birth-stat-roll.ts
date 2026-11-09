@@ -151,7 +151,7 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
     }
     // Later actions are not part of a birth draw. Never label their values with
     // an earlier range, including imported records or terminal birth outcomes.
-    const isBirthValue = life.age === 0 && life.commands.length === 0 && value >= range.min && value <= range.max;
+    const isBirthValue = life.age === 0 && !life.commands.some(command => command.type !== "avatar") && value >= range.min && value <= range.max;
     if (world.economy?.stat === id && life.economy) {
       const moneyValue = getNetWorth(world, life);
       const moneyRange = { min: range.min * world.economy.unitsPerPoint, max: range.max * world.economy.unitsPerPoint };

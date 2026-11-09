@@ -90,7 +90,7 @@ const reports = world.legacy!.routes.map(route => {
     backgrounds: origins, reproducibleExamples: examples };
 });
 const result = { worldVersion: world.version, fingerprint: engine.fingerprint, seedsPerRoute: count,
-  mortality: "Unmodified 0.25 health and mortality settings, exactly equal to archived 0.24 settings.",
+  mortality: "Health and mortality definitions remain equal to archived 0.25 and 0.24 settings.",
   policy: "Route-focused paid learning respecting prerequisites and annual action limits; safe decisions; care; porter/apprentice income when needed; ordinary milestone when available; no state edits or waived requirements.",
   limitation: "Bounded seeded simulation; route-specific policies change decisions and RNG consumption. Award rates are not historical probabilities, randomized treatment effects, or guarantees for every playthrough. This audit stops at the first ordinary accomplishment.", reports };
 writeFileSync(new URL("../artifacts/legacy-pacing-2026-11-08.json", import.meta.url), JSON.stringify(result, null, 2) + "\n");

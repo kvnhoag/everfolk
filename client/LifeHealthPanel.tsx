@@ -4,6 +4,7 @@ import { engineForLife } from "./session.ts";
 import { relationshipSupport } from "../src/relationships.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import { severeHealthRisk, formatHealthRisk } from "./health-risk.ts";
+import { activityLoanOffer } from "./loan-access.ts";
 import "./health.css";
 
 const careIds = new Set(["rest-for-recovery", "seek-a-healer", "ask-household-care"]);
@@ -32,10 +33,13 @@ export default function LifeHealthPanel({ life, world, onActivity, compact = fal
     {severeRisk && <p className="health-care-note">Severe illness can be fatal before your next birthday. Current risk: {formatHealthRisk(severeRisk)}. Care can improve your chance of recovery.</p>}
     {relationshipSupport(world, life) > 0 && <p className="health-care-note">Your close household is helping with recovery.</p>}
     {!compact && <p className="health-care-note">Care can help recovery. These actions do not use your yearly activity.</p>}
-    {actions.length > 0 && <div className="health-care-actions">{actions.map(activity => <div className="health-care-action" key={activity.id}>
-      <button type="button" disabled={!activity.available} onClick={() => onActivity(activity.id)}>{activity.text}<span aria-hidden="true">↗</span></button>
+    {actions.length > 0 && <div className="health-care-actions">{actions.map(activity => {
+      const loanOffer = !activity.available && activityLoanOffer(world, life, activity);
+      return <div className="health-care-action" key={activity.id}>
+      <button type="button" disabled={!activity.available && !loanOffer} onClick={() => onActivity(activity.id)}>{activity.text}<span aria-hidden="true">↗</span></button>
       <ChoiceImpact choice={activity} life={life} world={world} />
       {!activity.available && activity.reason && <small>{activity.reason}</small>}
-    </div>)}</div>}
+      {loanOffer && <small className="loan-funding-hint">Ask moneylender to fund care · View terms</small>}
+    </div>; })}</div>}
   </section>;
 }

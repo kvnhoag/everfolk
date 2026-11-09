@@ -1,5 +1,6 @@
 import type { CharacterActivity, Effect, EvidenceKind, JournalEntry, LifeEvent, LifeState, Outcome, WorldPack } from "../src/types.ts";
 import { ALEXANDRIA_VARIETY_VISUALS } from "./alexandria-variety-visuals.ts";
+import { personText } from "../src/people.ts";
 
 export const SCENE_IDS = ["birth", "childhood", "learning", "work", "sea", "family", "later-life", "memorial", "rest", "history-war", "history-city", "music"] as const;
 export type SceneId = typeof SCENE_IDS[number];
@@ -57,12 +58,33 @@ export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
   }),
   ["legacy-shared-cargo", visual("history-city", "work")],
   ["legacy-performance-passage", visual("sea", "sail")],
+  ["credit-opportunity-sculpture", visual("work", "work")],
+  ["credit-opportunity-philosophy", visual("learning", "write")],
+  ["credit-opportunity-seafaring", visual("sea", "sail")],
+  // Private equipment practice does not depict a battle or royal appointment.
+  ["credit-opportunity-military", visual("history-city", "work")],
+  ["credit-opportunity-commerce", visual("learning", "write")],
+  ["credit-opportunity-astronomy-calendar", visual("learning", "write")],
+  ["credit-opportunity-music-performance", visual("music", "gather")],
+  ...["clay-animals", "echo-rhythm", "window-shadow", "cloth-loop", "shared-steps", "floating-reed", "unequal-portions", "puppet-voices"].map(id => [`child-route-care-${id}`, visual("childhood")]),
+  ...["pattern-repair", "two-explanations", "cord-and-names", "ordered-figures", "counter-exchange", "shadow-marks", "missing-phrase", "measuring-cord"].map(id => [`child-route-learning-${id}`, visual("learning")]),
+  ...["puppet-frame", "unequal-tasks", "vessel-packing"].map(id => [`child-route-training-${id}`, visual("work")]),
+  ["child-route-training-two-day-lists", visual("learning")],
+  ["child-route-wages-rehearsal-messages", visual("music")],
+  ...["delivery-receipt", "bench-measures", "competing-records"].map(id => [`child-route-wages-${id}`, visual("work")]),
+  ["child-route-work-ensemble-repertoire", visual("music")],
+  ["child-route-work-merchant-and-crew", visual("history-city")],
+  ["child-route-work-copy-explained", visual("learning")],
+  ["child-route-work-checked-pattern", visual("work")],
+  ...["unequal-sandals", "thread-shadow", "silent-entrance", "folded-reply", "reed-bridge", "pitcher-echo", "opposite-view", "waiting-hand", "false-bottom", "familiar-refrain", "long-cord", "old-correction"].map(id => [`child-memory-ambient-${id}`, visual("childhood")]),
+  ...["sculpture", "philosophy", "seafaring", "military", "commerce", "astronomy-calendar", "music-performance"].map(route => [`early-interest-recalled-${route}`, visual(route === "sculpture" ? "work" : route === "seafaring" ? "sea" : route === "music-performance" ? "music" : route === "philosophy" || route === "astronomy-calendar" ? "learning" : "history-city")]),
   ...["rare-abduction", "rare-scaffold-collapse"].map(id => [id, visual("history-city", "unrest")]),
   ["rare-mistaken-cargo-theft", visual("history-city", "gather")],
   ["rare-lost-valuables", visual("history-city", "city")],
   ["rare-patron-test", visual("history-city", "gather")],
   ["rare-sailor-rescue", visual("sea", "sail")],
   ["rare-masterwork", visual("work", "work")],
+  ["rare-applied-mastery", visual("work", "gather")],
   ...["rare-scholarly-mastery", "rare-knowledge-breakthrough"].map(id => [id, visual("learning", "write")]),
   ["rare-community-recognition", visual("history-city", "gather")],
   ...["early-care-market-morning", "early-care-visitors", "early-care-restless-afternoon"].map(id => [id, visual("childhood", "play")]),
@@ -77,7 +99,22 @@ export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries([
   ...["background-merchant-household-practice", "background-clerk-household-practice"].map(id => [id, visual("learning", "write")]),
   // A family contact's offer does not imply the player has a spouse or children.
   ...["background-merchant-household-opportunity", "background-artisan-household-opportunity", "background-harbor-household-opportunity", "background-fishing-household-opportunity", "background-bakery-household-opportunity", "background-clerk-household-opportunity", "background-weaver-household-opportunity", "background-delta-newcomers-opportunity"].map(id => [id, visual("history-city", "gather")]),
-  ...["meet-demetria", "meet-thais", "meet-berenike", "meet-tyche"].map(id => [id, visual("history-city", "gather")]),
+  // Meeting someone is an everyday encounter. An invitation does not depict
+  // marriage, a shared household or parenthood as already accepted.
+  ...["harbor", "market", "well", "festival", "garden", "neighbors"].map(id => [`meet-person-${id}`, visual("history-city", "gather")]),
+  ...["workshop", "linen", "bakery", "pottery"].map(id => [`meet-person-${id}`, visual("work", "gather")]),
+  ...["copies", "library", "accounts"].map(id => [`meet-person-${id}`, visual("learning", "gather")]),
+  ["meet-person-music", visual("music", "gather")],
+  ["meet-person-boat", visual("sea", "gather")],
+  ["meet-person-drill", visual("history-city", "work")],
+  ...["harbor", "market", "workshop", "linen", "copies", "bakery", "well", "festival", "library", "music", "boat", "drill", "garden", "accounts", "pottery", "neighbors"].map(id => [`date-person-${id}`, visual("history-city", "gather")]),
+  // A proposed venture is a discussion of shared work, not an accepted job,
+  // marriage, military appointment or guaranteed return.
+  ...["harbor", "market", "well", "festival", "drill", "neighbors"].map(id => [`business-proposal-person-${id}`, visual("history-city", "work")]),
+  ...["workshop", "linen", "bakery", "garden", "pottery"].map(id => [`business-proposal-person-${id}`, visual("work", "work")]),
+  ...["copies", "library", "accounts"].map(id => [`business-proposal-person-${id}`, visual("learning", "write")]),
+  ["business-proposal-person-music", visual("music", "gather")],
+  ["business-proposal-person-boat", visual("sea", "gather")],
   ...["specialist-kiln-load", "specialist-carved-repair", "specialist-sculpture-detail"].map(id => [id, visual("work")]),
   ...["specialist-philosophy-objection", "specialist-sky-record", "specialist-conflicting-charts", "specialist-dendera-chart"].map(id => [id, visual("learning")]),
   ...["royal-campaign-muster", "royal-garrison-reorganisation"].map(id => [id, visual("history-war")]),
@@ -137,6 +174,9 @@ function effectsVisual(effects: readonly Effect[]): EventVisual | undefined {
 /** Default used by the editor before a life exists; explicit sidecars override it. */
 export function defaultEventVisual(event: LifeEvent): EventVisual {
   if (event.id === "medical-care-needed") return visual("rest");
+  // Retained fixed-name worlds keep their original meeting artwork, outside
+  // the current pack's complete authored map.
+  if (["meet-demetria", "meet-thais", "meet-berenike", "meet-tyche"].includes(event.id)) return visual("history-city", "gather");
   const authored = ALEXANDRIA_EVENT_VISUALS[event.id];
   if (authored) return { ...authored };
   if (event.trigger.type === "year" && event.evidence === "documented-history") return visual("history-city");
@@ -235,11 +275,16 @@ function makeContext(id: string, kind: SceneKind, assignment: EventVisual, title
 
 /** Presentation-only: read the accepted journal without consuming randomness or changing a life. */
 export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisuals: EventVisuals = {}): SceneContext[] {
+  const authored = (context: SceneContext): SceneContext => ({
+    ...context,
+    title: personText(context.title, world, life),
+    caption: personText(context.caption, world, life),
+  });
   if (life.phase === "ended") {
     const ending = world.endings.find(item => item.id === life.endingId);
     const cause = world.character?.deathCauses.find(item => item.id === life.deathCauseId);
-    if (ending?.kind === "chapter") return [makeContext(`record-${life.age}-${life.endingId}`, "record", visual("history-city", "still"), ending.title, ending.text)];
-    return [makeContext(`ending-${life.age}-${life.endingId}`, "ending", visual("memorial"), cause?.title ?? ending?.title ?? "A life remembered.", cause?.text ?? ending?.text ?? sceneDefinitions.memorial.caption)];
+    if (ending?.kind === "chapter") return [authored(makeContext(`record-${life.age}-${life.endingId}`, "record", visual("history-city", "still"), ending.title, ending.text))];
+    return [authored(makeContext(`ending-${life.age}-${life.endingId}`, "ending", visual("memorial"), cause?.title ?? ending?.title ?? "A life remembered.", cause?.text ?? ending?.text ?? sceneDefinitions.memorial.caption))];
   }
   const result: SceneContext[] = [];
   const events = new Map(world.events.map(event => [event.id, event]));
@@ -317,5 +362,5 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
     const scene = sceneDefinitions[assignment.scene];
     result.push(makeContext(`year-${life.age}`, "fallback", assignment, scene.title, scene.caption));
   }
-  return result;
+  return result.map(authored);
 }

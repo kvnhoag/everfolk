@@ -1,4 +1,5 @@
 import type { Comparison, Condition, LifeState } from "./types.ts";
+import { hasSocialRole } from "./relationships.ts";
 
 function compare(left: number, op: Comparison, right: number): boolean {
   switch (op) {
@@ -37,6 +38,7 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
     case "relationship": return state.character !== undefined && state.character.relationshipStatus === condition.status &&
       (condition.partner === undefined || state.character.partnerId === condition.partner);
     case "known-partner": return state.character?.knownPartnerIds?.includes(condition.partner) === true || state.character?.partnerId === condition.partner;
+    case "social-role": return hasSocialRole(state, condition.partner, condition.role) === condition.active;
     case "children": return state.character !== undefined && compare(state.character.children.length, condition.op, condition.value);
     case "child-age": return state.character?.children.some(child => {
       const age = state.age - child.birthAge;

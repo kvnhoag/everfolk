@@ -125,15 +125,18 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
   if (!world.character || !life.character) return { nodes: [], edges: [], branches: [], otherTraining: [] };
   const definitions = world.character.skills;
   const current = life.character.skills;
+  // Read unlock metadata even in a choice preview that has no activity buttons.
+  const declaredActivities = world.character.activities.map(activity => ({ ...activity, available: false }));
   const requirement = (id: string, required: number): SkillRequirement => ({ id, label: definitions[id]?.label ?? id, value: current[id] ?? definitions[id]?.min ?? 0, required, met: (current[id] ?? definitions[id]?.min ?? 0) >= required });
   const nodes = Object.entries(definitions).map(([id, definition]): SkillNode => {
     const training = trainingFor(id, definition, activities);
+    const declaredTraining = trainingFor(id, definition, declaredActivities);
     // Multiple fallback routes must share a prerequisite before it becomes an edge.
-    const fallback = training.length ? guaranteedSkillRequirements({ type: "any", conditions: training.map(activity => activity.when ?? { type: "all", conditions: [] }) }) : {};
+    const fallback = declaredTraining.length ? guaranteedSkillRequirements({ type: "any", conditions: declaredTraining.map(activity => activity.when ?? { type: "all", conditions: [] }) }) : {};
     const requirements = Object.entries(definition.prerequisites ?? fallback)
       .filter(([parent, threshold]) => parent !== id && parent in definitions && threshold > 0)
       .map(([parent, threshold]) => requirement(parent, threshold));
-    const minAge = training.length ? Math.min(...training.map(activity => activity.minAge ?? 0)) : 0;
+    const minAge = declaredTraining.length ? Math.min(...declaredTraining.map(activity => activity.minAge ?? 0)) : 0;
     const value = current[id] ?? definition.min;
     const ageMet = life.age >= minAge;
     const unlocked = ageMet && requirements.every(item => item.met);
@@ -185,28 +188,113 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
 export interface SkillPosition { x: number; y: number }
 export interface SkillTreeLayout {
   width: number; height: number; cardWidth: number; cardHeight: number; tierCount: number;
+  tierX: number[];
   positions: Record<string, SkillPosition>; branches: { label: string; y: number; height: number }[];
 }
 
-/** Deterministic coordinates keep connectors attached even before fonts load. */
+/** Place connected branch bands together, then reduce crossings within their
+ * fixed tiers. Only topology affects ordering; proficiency never moves cards. */
 export function layoutSkillTree(model: SkillTreeModel): SkillTreeLayout {
-  const cardWidth = 158, cardHeight = 100, columnGap = 32, rowGap = 14, gutter = 100, top = 36;
+  const cardWidth = 158, cardHeight = 100, columnGap = 56, rowGap = 14, gutter = 100, top = 48;
   const tierCount = Math.max(1, ...model.nodes.map(node => node.tier + 1));
-  const positions: Record<string, SkillPosition> = {};
-  let y = top;
-  const branches = model.branches.map(label => {
-    const nodes = model.nodes.filter(node => node.branch === label);
-    const rows = Math.max(1, ...Array.from({ length: tierCount }, (_, tier) => nodes.filter(node => node.tier === tier).length));
-    const height = rows * (cardHeight + rowGap) + 14;
-    const branch = { label, y, height };
-    for (let tier = 0; tier < tierCount; tier++) {
-      const column = nodes.filter(node => node.tier === tier);
-      column.forEach((node, index) => { positions[node.id] = { x: gutter + tier * (cardWidth + columnGap), y: y + 7 + index * (cardHeight + rowGap) + (rows - column.length) * (cardHeight + rowGap) / 2 }; });
+  const tierX = Array.from({ length: tierCount }, (_, tier) => gutter + tier * (cardWidth + columnGap));
+  const byId = new Map(model.nodes.map(node => [node.id, node]));
+  const labels = [...new Set([...model.branches, ...model.nodes.map(node => node.branch)])];
+  const rank = new Map(labels.map((label, index) => [label, index]));
+  const adjacency = new Map(labels.map(label => [label, new Set<string>()]));
+  const edges = model.edges.filter(edge => byId.has(edge.from) && byId.has(edge.to));
+  for (const edge of edges) {
+    const from = byId.get(edge.from)!.branch, to = byId.get(edge.to)!.branch;
+    if (from !== to) { adjacency.get(from)!.add(to); adjacency.get(to)!.add(from); }
+  }
+  // Connected components prevent an unrelated branch from splitting a link.
+  // Iterative traversal also handles cycles in older/custom display graphs.
+  const seen = new Set<string>(), component = new Map<string, number>();
+  const order: string[] = [];
+  for (const label of labels) {
+    if (seen.has(label)) continue;
+    const pending = [label], group: string[] = [];
+    seen.add(label);
+    while (pending.length) {
+      const next = pending.pop()!;
+      group.push(next);
+      for (const neighbour of adjacency.get(next)!) if (!seen.has(neighbour)) { seen.add(neighbour); pending.push(neighbour); }
     }
-    y += height;
-    return branch;
-  });
-  return { width: gutter + tierCount * (cardWidth + columnGap) - columnGap + 18, height: y + 8, cardWidth, cardHeight, tierCount, positions, branches };
+    group.sort((a, b) => rank.get(a)! - rank.get(b)!);
+    for (const member of group) component.set(member, order.length);
+    order.push(...group);
+  }
+  const columns = new Map<string, string[][]>();
+  for (const label of labels) columns.set(label, Array.from({ length: tierCount }, () => []));
+  for (const node of [...model.nodes].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) columns.get(node.branch)![node.tier].push(node.id);
+  function place(): SkillTreeLayout {
+    const positions: Record<string, SkillPosition> = {};
+    let y = top;
+    const branches = order.map(label => {
+      const branchColumns = columns.get(label)!;
+      const rows = Math.max(1, ...branchColumns.map(column => column.length));
+      const height = rows * (cardHeight + rowGap) + 14;
+      const branch = { label, y, height };
+      branchColumns.forEach((column, tier) => column.forEach((id, index) => {
+        positions[id] = { x: tierX[tier],
+          y: y + 7 + index * (cardHeight + rowGap) + (rows - column.length) * (cardHeight + rowGap) / 2 };
+      }));
+      y += height;
+      return branch;
+    });
+    return { width: gutter + tierCount * (cardWidth + columnGap) - columnGap + 18, height: y + 8, cardWidth, cardHeight, tierCount, tierX, positions, branches };
+  }
+  const orientation = (a: SkillPosition, b: SkillPosition, c: SkillPosition) => (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  function score(layout: SkillTreeLayout): [number, number] {
+    const segments = edges.map(edge => ({ edge,
+      from: { x: layout.positions[edge.from].x + cardWidth, y: layout.positions[edge.from].y + cardHeight / 2 },
+      to: { x: layout.positions[edge.to].x - 4, y: layout.positions[edge.to].y + cardHeight / 2 },
+    }));
+    let crossings = 0;
+    // Avoid quadratic work for unusually dense custom packs; their bounded
+    // ordering search still shortens links using the same topology-only score.
+    if (segments.length <= 256) for (let i = 0; i < segments.length; i++) for (let j = i + 1; j < segments.length; j++) {
+      const a = segments[i], b = segments[j];
+      if (a.edge.from === b.edge.from || a.edge.to === b.edge.to || a.edge.from === b.edge.to || a.edge.to === b.edge.from) continue;
+      if (orientation(a.from, a.to, b.from) * orientation(a.from, a.to, b.to) < 0 &&
+        orientation(b.from, b.to, a.from) * orientation(b.from, b.to, a.to) < 0) crossings++;
+    }
+    return [crossings, segments.reduce((sum, segment) => sum + Math.abs(segment.to.y - segment.from.y), 0)];
+  }
+  const better = (a: [number, number], b: [number, number]) => a[0] < b[0] || a[0] === b[0] && a[1] < b[1];
+  let layout = place(), best = score(layout), evaluations = 0;
+  const tryChange = (change: () => void, undo: () => void): boolean => {
+    if (++evaluations > 512) return false;
+    change();
+    const candidate = place(), candidateScore = score(candidate);
+    if (better(candidateScore, best)) { layout = candidate; best = candidateScore; return true; }
+    undo(); return false;
+  };
+  for (let pass = 0; pass < 8 && evaluations < 512; pass++) {
+    let improved = false;
+    for (let index = 0; index + 1 < order.length; index++) {
+      if (component.get(order[index]) !== component.get(order[index + 1])) continue;
+      const swap = () => { [order[index], order[index + 1]] = [order[index + 1], order[index]]; };
+      improved = tryChange(swap, swap) || improved;
+    }
+    for (const label of order) for (const column of columns.get(label)!) {
+      if (column.length < 2) continue;
+      const original = [...column];
+      const neighbours = (id: string) => edges.flatMap(edge => edge.from === id ? [edge.to] : edge.to === id ? [edge.from] : []);
+      const barycentre = (id: string) => {
+        const adjacent = neighbours(id);
+        return adjacent.length ? adjacent.reduce((sum, next) => sum + layout.positions[next].y, 0) / adjacent.length : layout.positions[id].y;
+      };
+      const proposed = [...column].sort((a, b) => barycentre(a) - barycentre(b) || original.indexOf(a) - original.indexOf(b));
+      improved = tryChange(() => { column.splice(0, column.length, ...proposed); }, () => { column.splice(0, column.length, ...original); }) || improved;
+      for (let index = 0; index + 1 < column.length; index++) {
+        const swap = () => { [column[index], column[index + 1]] = [column[index + 1], column[index]]; };
+        improved = tryChange(swap, swap) || improved;
+      }
+    }
+    if (!improved) break;
+  }
+  return layout;
 }
 
 /** Exact bounded skill previews, using the same effect order as the simulation. */

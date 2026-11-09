@@ -1,4 +1,13 @@
-import type { StatDefinition } from "./types.ts";
+import type { Effect, LifeState, StatDefinition } from "./types.ts";
+
+/** The strongest remembered interest changes only a positive training budget.
+ * It is applied before the existing growth curve, never compounded or rounded. */
+export function skillEffectDelta(effect: Extract<Effect, { type: "skill" }>, flags: LifeState["flags"]): number {
+  if (effect.delta <= 0 || !effect.gainModifiers?.length) return effect.delta;
+  let multiplier = 1;
+  for (const modifier of effect.gainModifiers) if (flags[modifier.flag] === true) multiplier = Math.max(multiplier, modifier.multiplier);
+  return effect.delta * Math.min(1.2, multiplier);
+}
 
 /**
  * Spend an authored positive reward across each reached growth band. Penalties

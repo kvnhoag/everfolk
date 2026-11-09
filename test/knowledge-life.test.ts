@@ -15,6 +15,7 @@ function fixture(knowledge = 80): WorldPack {
   for (const skill of Object.values(world.character!.skills)) delete skill.gainCurve;
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
@@ -106,7 +107,7 @@ test("continued study limits forgetting but does not cancel advanced-age loss", 
 
 test("new packs remove passive blanket gains while older lives keep their original rules", () => {
   assert.ok(current.knowledge);
-  assert.equal(current.version, "0.25.0");
+  assert.equal(current.version, "0.31.0");
   assert.equal(current.yearlyRules.some(rule => rule.id === "practical-experience" || rule.id === "learning-through-words"), false);
   const engine = createEngine(legacy);
   let life = engine.start("legacy-retention-replay");

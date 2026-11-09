@@ -14,6 +14,19 @@ const originalEventIds = new Set(previous.events.map(event => event.id));
 const backgroundEventIds = new Set(variedRelease.events.filter(event => !originalEventIds.has(event.id)).map(event => event.id));
 const backgroundEvents = pack.events.filter(event => backgroundEventIds.has(event.id));
 
+/** Fixed-name restart fixtures intentionally exercise the older identity model. */
+function omitProceduralSocialRoles(world: WorldPack): void {
+  const referencesRole = (value: unknown): boolean => {
+    if (!value || typeof value !== "object") return false;
+    if (Array.isArray(value)) return value.some(referencesRole);
+    const entry = value as Record<string, unknown>;
+    return entry.type === "social-role" || Object.values(entry).some(referencesRole);
+  };
+  world.events = world.events.filter(event => !referencesRole(event));
+  world.character!.activities = world.character!.activities.filter(activity => !referencesRole(activity));
+  delete world.character!.socialRelationships;
+}
+
 function isolateBackground(world: WorldPack): void {
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -58,9 +71,9 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
   }
 }
 
-test("new lives draw broadly from 32 names and eight distinct household backgrounds", () => {
+test("new lives draw broadly from both name pools and eight distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.25.0");
+  assert.equal(pack.version, "0.31.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 8);
@@ -166,7 +179,7 @@ test("every household opportunity follows the core trade decisions without a lon
   const engine = createEngine(world);
   const { origins } = sampleBirths(engine);
   const tradeOffers = new Set(engine.world.events.filter(event => event.exclusiveGroup === "early-work").map(event => event.id));
-  assert.equal(tradeOffers.size, 4);
+  assert.equal(tradeOffers.size, 8);
   for (const born of origins.values()) {
     const opportunity = backgroundEvents.find(event => event.mode !== "automatic" && matchesCondition(event.when, born))!;
     assert.ok(opportunity);
@@ -223,6 +236,10 @@ test("limited authored worlds use a bounded fresh-life fallback rather than loop
   limited.origins = [limited.origins[0]];
   limited.events = limited.events.filter(event => event.id === "the-first-household" || event.id === limited.health!.careDecision);
   limited.character!.playerNames = ["Damon"];
+  delete limited.character!.identity;
+  delete limited.character!.proceduralPartners;
+  delete limited.character!.encounterPacing;
+  omitProceduralSocialRoles(limited);
   pruneRemovedOriginModifiers(limited);
   try {
     selectWorldPack(limited);
@@ -242,6 +259,10 @@ test("a limited name pool still chooses the best available different background"
   const limited = structuredClone(builtinEngine.world) as WorldPack;
   limited.version = "one-name-restart-fixture";
   limited.character!.playerNames = ["Damon"];
+  delete limited.character!.identity;
+  delete limited.character!.proceduralPartners;
+  delete limited.character!.encounterPacing;
+  omitProceduralSocialRoles(limited);
   try {
     selectWorldPack(limited);
     const previousLife = createSampleLife("one-name-before");

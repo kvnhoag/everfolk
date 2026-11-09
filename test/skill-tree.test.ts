@@ -149,7 +149,7 @@ test("building, laying out and previewing are read-only and preserve the RNG and
   const changes = trainingSkillChanges(practice, main, life);
   const literacy = changes.find(change => change.id === "literacy")!;
   assert.equal(literacy.label, "Literacy");
-  assert.ok(Math.abs(literacy.min - 0.3) < 1e-10);
+  assert.ok(Math.abs(literacy.min - 0.018) < 1e-10);
   assert.equal(literacy.max, literacy.min);
   assert.equal(practiceBlockReason(practice, life), undefined);
   assert.equal(JSON.stringify({ life, world: main, activities }), before);

@@ -4,6 +4,7 @@ import { practiceBlockReason } from "./skill-tree.ts";
 import { formatMoney, getWealthSummary } from "./wealth.ts";
 import MoneylenderPanel from "./MoneylenderPanel.tsx";
 import { isLoanAction } from "./loan-summary.ts";
+import { activityLoanOffer } from "./loan-access.ts";
 import "./wealth.css";
 
 /** The same read-only view and accepted activities are used in game and draft preview. */
@@ -26,7 +27,8 @@ export default function WealthPanel({ life, world, activities, onActivity }: {
     <div className="wealth-possessions"><h4>Possessions</h4>{summary.assets.length ? <ul>{summary.assets.map(asset => <li key={asset.id}><div><strong>{asset.title}{asset.quantity > 1 ? ` × ${asset.quantity}` : ""}</strong><p>{asset.description}</p>{(asset.yearlyIncome ?? 0) > 0 && <small>Annual income {money(asset.yearlyIncome! * asset.quantity)}</small>}</div><span>{money(asset.value * asset.quantity)}</span></li>)}</ul> : <p className="wealth-muted">No possessions recorded.</p>}</div>
     {finance.length > 0 && <div className="wealth-finance"><h4>Manage finances</h4><p className="wealth-muted">{hasFreePayments ? "Buying or selling uses your yearly activity. Debt payments do not." : "Money management uses your yearly activity."}</p><div className="wealth-actions">{finance.map(activity => {
       const reason = practiceBlockReason(activity, life);
-      return <button className="wealth-action" type="button" key={activity.id} disabled={Boolean(reason)} onClick={() => onActivity(activity.id)}><span className="wealth-action-title">{activity.text}<span aria-hidden="true">↗</span></span><ChoiceImpact choice={activity} world={world} life={life} />{reason && <span className="wealth-action-reason">{reason}</span>}</button>;
+      const loanOffer = reason && activityLoanOffer(world, life, activity);
+      return <button className="wealth-action" type="button" key={activity.id} disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}><span className="wealth-action-title">{activity.text}<span aria-hidden="true">↗</span></span><ChoiceImpact choice={activity} world={world} life={life} />{reason && <span className="wealth-action-reason">{reason}</span>}{loanOffer && <span className="loan-funding-hint">Ask moneylender to fund this · View terms</span>}</button>;
     })}</div></div>}
     <p className="wealth-model-note">{world.economy.description}</p>
   </section>;

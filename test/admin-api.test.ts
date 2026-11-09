@@ -464,18 +464,29 @@ test("disabled routes and events affect only the next published pack", async t =
 });
 
 test("disabled worlds leave the public catalog while their old revisions remain readable", async t => {
-  const { call } = setup(t);
+  const { db, call } = setup(t);
   const draft = getBuiltinCatalog();
   const second = structuredClone(draft.worlds[0]);
   second.id = second.pack.id = "another-world";
   second.pack.title = "Another world";
   draft.worlds.push(second);
-  let saved = await (await call("/api/admin/catalog", "PUT", draft)).json();
-  await call("/api/admin/publish", "POST", { revision: saved.revision });
+  assert.ok(new TextEncoder().encode(JSON.stringify(draft)).byteLength < MAX_CATALOG_BYTES, "two complete current worlds must fit the bounded catalog");
+  let response = await call("/api/admin/catalog", "PUT", draft);
+  assert.equal(response.status, 200, "the full duplicated catalog can be saved");
+  let saved = await response.json();
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
+  const storedDraft = db.sqlite.prepare("SELECT draft_json FROM content_catalog WHERE id = 1").get()!.draft_json as string;
+  const storedPublication = db.sqlite.prepare("SELECT worlds_json FROM content_publications ORDER BY catalog_revision DESC LIMIT 1").get()!.worlds_json as string;
+  assert.equal(JSON.parse(storedDraft).length, 2);
+  assert.equal(JSON.parse(storedPublication).length, 2);
+  assert.ok(new TextEncoder().encode(storedDraft).byteLength < MAX_CATALOG_BYTES);
+  assert.ok(new TextEncoder().encode(storedPublication).byteLength < MAX_CATALOG_BYTES);
   const oldWorld = await (await call("/api/worlds/another-world")).json();
   saved.worlds[1].enabled = false;
-  saved = await (await call("/api/admin/catalog", "PUT", saved)).json();
-  await call("/api/admin/publish", "POST", { revision: saved.revision });
+  response = await call("/api/admin/catalog", "PUT", saved);
+  assert.equal(response.status, 200);
+  saved = await response.json();
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
   assert.equal((await (await call("/api/worlds")).json()).worlds.length, 1);
   assert.equal((await call("/api/worlds/another-world")).status, 404);
   assert.equal((await call(`/api/revisions/${oldWorld.revisionId}`)).status, 200);
@@ -540,14 +551,17 @@ test("UTF-8 catalog limits reject otherwise valid large imports before any datab
   const { db, call } = setup(t);
   const draft = getBuiltinCatalog();
   const events = draft.worlds[0].pack.events;
-  // Size the multibyte payload against this release's larger event catalog.
-  const textLength = Math.floor((MAX_CATALOG_BYTES * 0.8 - JSON.stringify(draft).length) / events.length);
-  assert.ok(textLength > 1_000);
+  // Derive padding from the actual remaining structure, rather than assuming
+  // the release's existing story text leaves a particular amount of headroom.
+  for (const event of events) event.text = "x";
+  const textLength = 1 + Math.floor((MAX_CATALOG_BYTES * 0.8 - JSON.stringify(draft).length) / events.length);
+  assert.ok(textLength > 0 && textLength <= 20_000, "padding stays inside the world's text field limit");
   for (const event of events) event.text = "界".repeat(textLength);
   const serialized = JSON.stringify(draft);
   assert.ok(serialized.length < MAX_CATALOG_BYTES, "character count alone would accept this import");
   assert.ok(new TextEncoder().encode(serialized).byteLength > MAX_CATALOG_BYTES);
-  assert.throws(() => validateCatalog(draft), /1,500,000-byte limit/);
+  const limitMessage = new RegExp(`${MAX_CATALOG_BYTES.toLocaleString("en-US")}-byte limit`);
+  assert.throws(() => validateCatalog(draft), limitMessage);
   const response = await call("/api/admin/catalog", "PUT", draft);
   assert.equal(response.status, 413);
   assert.equal(db.sqlite.prepare("SELECT COUNT(*) AS count FROM content_catalog").get()!.count, 0);

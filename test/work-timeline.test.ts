@@ -4,11 +4,12 @@ import test from "node:test";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.12.0.json" with { type: "json" };
 
 /** Isolate occupational boundaries from unrelated narrative and mortality draws. */
-function controlledWorld(): WorldPack {
-  const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+function controlledWorld(source = pack): WorldPack {
+  const world = withoutMoneylender(structuredClone(source) as WorldPack);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
@@ -134,7 +135,7 @@ test("earlier work references primary evidence while disclosing that exact start
 });
 
 test("earlier occupational ages do not lower the engine's adult relationship boundary", () => {
-  const world = controlledWorld();
+  const world = controlledWorld(namedCatalog);
   // Remove only the content's later age gate to exercise the engine invariant.
   world.character!.activities.find(activity => activity.id === "court-demetria")!.minAge = 0;
   const engine = createEngine(world);

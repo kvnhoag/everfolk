@@ -16,6 +16,7 @@ export type Condition =
   | { type: "job"; job: string | null }
   | { type: "relationship"; status: RelationshipStatus; partner?: string }
   | { type: "known-partner"; partner: string }
+  | { type: "social-role"; partner: string; role: SocialRole; active: boolean }
   | { type: "children"; op: Comparison; value: number }
   /** At least one existing child has this inclusive age range. */
   | { type: "child-age"; min: number; max: number }
@@ -32,10 +33,11 @@ export type Effect =
   | { type: "asset"; asset: string; delta: number }
   | { type: "stat"; stat: string; delta: number }
   | { type: "flag"; flag: string; value: boolean }
-  | { type: "skill"; skill: string; delta: number }
+  | { type: "skill"; skill: string; delta: number; gainModifiers?: SkillGainModifier[] }
   | { type: "job"; job: string | null }
   | { type: "relationship"; partner: string; status: "courting" | "married" }
   | { type: "introduce"; partner: string }
+  | { type: "social-role"; partner: string; role: SocialRole; active: boolean }
   | { type: "end-courtship" }
   | { type: "divorce" }
   | { type: "child" }
@@ -44,6 +46,13 @@ export type Effect =
   | { type: "closeness"; target: "partner"; partner?: string; delta: number }
   | { type: "closeness"; target: "children"; delta: number }
   | { type: "end"; ending: string; deathCause?: string };
+
+/** Optional, non-stacking encouragement for an actually paid training outcome. */
+export interface SkillGainModifier {
+  flag: string;
+  multiplier: number;
+  reason: string;
+}
 
 /** Inclusive whole-number bounds for a randomized starting attribute. */
 export interface StatRange {
@@ -240,7 +249,8 @@ export interface RelationshipDefinition {
   supportThreshold: number;
   maxHealthSupport: number;
 }
-export interface RelationshipTie { closeness: number; lastContactAge: number }
+export type SocialRole = "friend" | "business-partner";
+export interface RelationshipTie { closeness: number; lastContactAge: number; roles?: SocialRole[] }
 export interface RelationshipState { partners: Record<string, RelationshipTie>; children: Record<string, RelationshipTie> }
 
 export type RelationshipStatus = "single" | "courting" | "married" | "divorced";
@@ -261,6 +271,16 @@ export interface PartnerDefinition {
   ageOffset: number;
   occupation: string;
   description: string;
+}
+
+export type CharacterSex = "male" | "female";
+
+/** A person generated only when their encounter is accepted in this life. */
+export interface EncounteredPerson extends PartnerDefinition {
+  sex: CharacterSex;
+  avatarVariant: number;
+  originId: string;
+  metAge: number;
 }
 
 export interface CharacterActivity extends Choice {
@@ -289,6 +309,14 @@ export interface DeathCause {
 
 /** Authored gameplay, including fictional cause weights rather than measured rates. */
 export interface CharacterDefinition {
+  /** Opt-in birth identity; older packs retain their original RNG and state. */
+  identity?: { namePools: { male: string[]; female: string[] }; avatarVariants: number };
+  /** Partner definitions are encounter templates, not a pre-existing named pool. */
+  proceduralPartners?: boolean;
+  /** Explicit nonromantic roles for encountered people; older packs omit them. */
+  socialRelationships?: boolean;
+  /** Optional adult encounter lane; all probabilities are authored gameplay. */
+  encounterPacing?: { firstMeetingChance: number; meetingChance: number; dateChance: number; cooldownYears: number };
   /** Optional seeded protagonist-name pool; omitted packs retain their original state. */
   playerNames?: string[];
   /** People must be introduced before courtship or marriage when enabled. */
@@ -306,6 +334,10 @@ export interface CharacterDefinition {
 
 export interface CharacterState {
   name?: string;
+  sex?: CharacterSex;
+  avatarVariant?: number;
+  people?: Record<string, EncounteredPerson>;
+  datedPartnerIds?: string[];
   knownPartnerIds?: string[];
   skills: Record<string, number>;
   jobId: string | null;
@@ -378,6 +410,7 @@ export interface LegacyRouteDefinition {
   skillIds: string[];
   jobIds: string[];
   achievementIds: string[];
+  earlyInterestFlag?: string;
 }
 export interface LegacyAchievementDefinition extends EvidenceMetadata {
   id: string;
@@ -442,7 +475,7 @@ export interface WorldPack {
   defaultEnding: string;
 }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string };
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number };
 
 export interface JournalEntry {
   type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity";
@@ -504,6 +537,7 @@ export interface LifeEngine {
   getChoices(state: LifeState): readonly Choice[];
   getActivities(state: LifeState): readonly ActivityAvailability[];
   act(state: LifeState, activityId: string): LifeState;
+  chooseAvatar(state: LifeState, variant: number): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

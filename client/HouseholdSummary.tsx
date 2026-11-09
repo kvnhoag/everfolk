@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
+import { resolvePartner } from "../src/people.ts";
+import { romanticPartnerLabel } from "./relationship-labels.ts";
 import "./health.css";
 
 const closenessLabel = (value: number, world: WorldPack) => value >= (world.relationships?.supportThreshold ?? 60) ? "Close" : value < (world.relationships?.marriageMinimum ?? 40) ? "Strained" : "Steady";
@@ -14,7 +16,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter }: {
   const character = life.character;
   const origin = world.origins.find(item => item.id === life.originId);
   const partner = character?.partnerId && (character.relationshipStatus === "courting" || character.relationshipStatus === "married")
-    ? world.character?.partners.find(item => item.id === character.partnerId) : undefined;
+    ? resolvePartner(world, life, character.partnerId) : undefined;
   const job = world.character?.jobs.find(item => item.id === character?.jobId);
   const children = character?.children ?? [];
 
@@ -29,7 +31,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter }: {
       <div className="household-summary-content">
         {origin && <div className="household-background"><span className="household-field-label">Background</span><p>{origin.title}</p></div>}
         {job && <div className="household-work"><span className="household-field-label">Your work</span><p>{job.title}</p></div>}
-        {partner && <div className="household-person"><span className="household-field-label">{character?.relationshipStatus === "married" ? "Spouse" : "Courting"}</span><strong>{partner.name}</strong><p>{partner.occupation}</p>{character?.relationships?.partners[partner.id] && <span className="household-closeness">{closenessLabel(character.relationships.partners[partner.id].closeness, world)} · {character.relationships.partners[partner.id].closeness}/100</span>}</div>}
+        {partner && <div className="household-person"><span className="household-field-label">{romanticPartnerLabel(world, life, partner.id)}</span><strong>{partner.name}</strong><p>{partner.occupation}</p>{character?.relationships?.partners[partner.id] && <span className="household-closeness">{closenessLabel(character.relationships.partners[partner.id].closeness, world)} · {character.relationships.partners[partner.id].closeness}/100</span>}</div>}
         {children.length > 0 && <div className="household-children"><span className="household-field-label">{children.length === 1 ? "Child" : "Children"}</span><ul>{children.map(child => {
           const age = life.age - child.birthAge;
           const tie = character?.relationships?.children[child.id];

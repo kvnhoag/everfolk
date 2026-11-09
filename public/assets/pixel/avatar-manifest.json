@@ -1,0 +1,2936 @@
+{
+  "generator": "scripts/build-avatar-assets.mjs",
+  "origins": [
+    {
+      "id": "merchant-household",
+      "title": "Merchant household"
+    },
+    {
+      "id": "artisan-household",
+      "title": "Pottery-worker household"
+    },
+    {
+      "id": "harbor-household",
+      "title": "Quay-laborer household"
+    },
+    {
+      "id": "fishing-household",
+      "title": "Fishing household"
+    },
+    {
+      "id": "bakery-household",
+      "title": "Bakery household"
+    },
+    {
+      "id": "clerk-household",
+      "title": "Clerk's household"
+    },
+    {
+      "id": "weaver-household",
+      "title": "Weaving household"
+    },
+    {
+      "id": "delta-newcomers",
+      "title": "Newcomers from the Delta"
+    }
+  ],
+  "sexes": [
+    "male",
+    "female"
+  ],
+  "variants": [
+    0,
+    1,
+    2
+  ],
+  "stages": [
+    "infant",
+    "child",
+    "youth",
+    "adult",
+    "middle",
+    "elder"
+  ],
+  "assets": [
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/child-0.svg",
+      "title": "Fictional male child portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/child-1.svg",
+      "title": "Fictional male child portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/child-2.svg",
+      "title": "Fictional male child portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/child-0.svg",
+      "title": "Fictional female child portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, merchant household, avatar 1",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/child-1.svg",
+      "title": "Fictional female child portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, merchant household, avatar 2",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/child-2.svg",
+      "title": "Fictional female child portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/merchant-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, merchant household, avatar 3",
+      "originId": "merchant-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/child-0.svg",
+      "title": "Fictional male child portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/child-1.svg",
+      "title": "Fictional male child portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/child-2.svg",
+      "title": "Fictional male child portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/child-0.svg",
+      "title": "Fictional female child portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, pottery-worker household, avatar 1",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/child-1.svg",
+      "title": "Fictional female child portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, pottery-worker household, avatar 2",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/child-2.svg",
+      "title": "Fictional female child portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/artisan-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, pottery-worker household, avatar 3",
+      "originId": "artisan-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/child-0.svg",
+      "title": "Fictional male child portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/child-1.svg",
+      "title": "Fictional male child portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/child-2.svg",
+      "title": "Fictional male child portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/child-0.svg",
+      "title": "Fictional female child portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, quay-laborer household, avatar 1",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/child-1.svg",
+      "title": "Fictional female child portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, quay-laborer household, avatar 2",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/child-2.svg",
+      "title": "Fictional female child portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/harbor-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, quay-laborer household, avatar 3",
+      "originId": "harbor-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/child-0.svg",
+      "title": "Fictional male child portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/child-1.svg",
+      "title": "Fictional male child portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/child-2.svg",
+      "title": "Fictional male child portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/child-0.svg",
+      "title": "Fictional female child portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, fishing household, avatar 1",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/child-1.svg",
+      "title": "Fictional female child portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, fishing household, avatar 2",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/child-2.svg",
+      "title": "Fictional female child portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/fishing-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, fishing household, avatar 3",
+      "originId": "fishing-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/child-0.svg",
+      "title": "Fictional male child portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/child-1.svg",
+      "title": "Fictional male child portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/child-2.svg",
+      "title": "Fictional male child portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/child-0.svg",
+      "title": "Fictional female child portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, bakery household, avatar 1",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/child-1.svg",
+      "title": "Fictional female child portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, bakery household, avatar 2",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/child-2.svg",
+      "title": "Fictional female child portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/bakery-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, bakery household, avatar 3",
+      "originId": "bakery-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/child-0.svg",
+      "title": "Fictional male child portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/child-1.svg",
+      "title": "Fictional male child portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/child-2.svg",
+      "title": "Fictional male child portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/child-0.svg",
+      "title": "Fictional female child portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, clerk's household, avatar 1",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/child-1.svg",
+      "title": "Fictional female child portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, clerk's household, avatar 2",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/child-2.svg",
+      "title": "Fictional female child portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/clerk-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, clerk's household, avatar 3",
+      "originId": "clerk-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/infant-0.svg",
+      "title": "Fictional male infant portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/child-0.svg",
+      "title": "Fictional male child portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/youth-0.svg",
+      "title": "Fictional male youth portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/adult-0.svg",
+      "title": "Fictional male adult portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/middle-0.svg",
+      "title": "Fictional male middle portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/elder-0.svg",
+      "title": "Fictional male elder portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/infant-1.svg",
+      "title": "Fictional male infant portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/child-1.svg",
+      "title": "Fictional male child portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/youth-1.svg",
+      "title": "Fictional male youth portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/adult-1.svg",
+      "title": "Fictional male adult portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/middle-1.svg",
+      "title": "Fictional male middle portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/elder-1.svg",
+      "title": "Fictional male elder portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/infant-2.svg",
+      "title": "Fictional male infant portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/child-2.svg",
+      "title": "Fictional male child portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/youth-2.svg",
+      "title": "Fictional male youth portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/adult-2.svg",
+      "title": "Fictional male adult portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/middle-2.svg",
+      "title": "Fictional male middle portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/male/elder-2.svg",
+      "title": "Fictional male elder portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/infant-0.svg",
+      "title": "Fictional female infant portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/child-0.svg",
+      "title": "Fictional female child portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/youth-0.svg",
+      "title": "Fictional female youth portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/adult-0.svg",
+      "title": "Fictional female adult portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/middle-0.svg",
+      "title": "Fictional female middle portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/elder-0.svg",
+      "title": "Fictional female elder portrait, weaving household, avatar 1",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/infant-1.svg",
+      "title": "Fictional female infant portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/child-1.svg",
+      "title": "Fictional female child portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/youth-1.svg",
+      "title": "Fictional female youth portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/adult-1.svg",
+      "title": "Fictional female adult portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/middle-1.svg",
+      "title": "Fictional female middle portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/elder-1.svg",
+      "title": "Fictional female elder portrait, weaving household, avatar 2",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/infant-2.svg",
+      "title": "Fictional female infant portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/child-2.svg",
+      "title": "Fictional female child portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/youth-2.svg",
+      "title": "Fictional female youth portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/adult-2.svg",
+      "title": "Fictional female adult portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/middle-2.svg",
+      "title": "Fictional female middle portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/weaver-household/female/elder-2.svg",
+      "title": "Fictional female elder portrait, weaving household, avatar 3",
+      "originId": "weaver-household",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/infant-0.svg",
+      "title": "Fictional male infant portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/child-0.svg",
+      "title": "Fictional male child portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/youth-0.svg",
+      "title": "Fictional male youth portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/adult-0.svg",
+      "title": "Fictional male adult portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/middle-0.svg",
+      "title": "Fictional male middle portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/elder-0.svg",
+      "title": "Fictional male elder portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/infant-1.svg",
+      "title": "Fictional male infant portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/child-1.svg",
+      "title": "Fictional male child portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/youth-1.svg",
+      "title": "Fictional male youth portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/adult-1.svg",
+      "title": "Fictional male adult portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/middle-1.svg",
+      "title": "Fictional male middle portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/elder-1.svg",
+      "title": "Fictional male elder portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/infant-2.svg",
+      "title": "Fictional male infant portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/child-2.svg",
+      "title": "Fictional male child portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/youth-2.svg",
+      "title": "Fictional male youth portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/adult-2.svg",
+      "title": "Fictional male adult portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/middle-2.svg",
+      "title": "Fictional male middle portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/male/elder-2.svg",
+      "title": "Fictional male elder portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "male",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/infant-0.svg",
+      "title": "Fictional female infant portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/child-0.svg",
+      "title": "Fictional female child portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "child",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/youth-0.svg",
+      "title": "Fictional female youth portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/adult-0.svg",
+      "title": "Fictional female adult portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/middle-0.svg",
+      "title": "Fictional female middle portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/elder-0.svg",
+      "title": "Fictional female elder portrait, newcomers from the delta, avatar 1",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 0,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/infant-1.svg",
+      "title": "Fictional female infant portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/child-1.svg",
+      "title": "Fictional female child portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "child",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/youth-1.svg",
+      "title": "Fictional female youth portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/adult-1.svg",
+      "title": "Fictional female adult portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/middle-1.svg",
+      "title": "Fictional female middle portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/elder-1.svg",
+      "title": "Fictional female elder portrait, newcomers from the delta, avatar 2",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 1,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/infant-2.svg",
+      "title": "Fictional female infant portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "infant",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/child-2.svg",
+      "title": "Fictional female child portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "child",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/youth-2.svg",
+      "title": "Fictional female youth portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "youth",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/adult-2.svg",
+      "title": "Fictional female adult portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "adult",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/middle-2.svg",
+      "title": "Fictional female middle portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "middle",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/delta-newcomers/female/elder-2.svg",
+      "title": "Fictional female elder portrait, newcomers from the delta, avatar 3",
+      "originId": "delta-newcomers",
+      "sex": "female",
+      "stage": "elder",
+      "variant": 2,
+      "width": 32,
+      "height": 40
+    }
+  ]
+}

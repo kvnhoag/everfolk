@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+// The named catalog and scheduled meetings belong to this retained release.
+import pack from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import peopleRelease from "../worlds/alexandria-0.7.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.6.1.json" with { type: "json" };
 

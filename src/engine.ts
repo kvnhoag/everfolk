@@ -9,14 +9,15 @@ import { activityPartnerIds, activityReason, characterEffectReason, initialChara
 import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
-import { applyStatDelta } from "./progression.ts";
+import { applyStatDelta, skillEffectDelta } from "./progression.ts";
 import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
-import { initialRelationships, introduceRelationship, addChildRelationship, applyCloseness, advanceRelationships, relationshipSupport } from "./relationships.ts";
+import { initialRelationships, introduceRelationship, addChildRelationship, applyCloseness, applySocialRole, advanceRelationships, relationshipSupport } from "./relationships.ts";
 
 import { matchesCondition } from "./conditions.ts";
 import { outcomeWeight } from "./outcomes.ts";
 import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
+import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
 export { matchesCondition } from "./conditions.ts";
 
 const MAX_COMMANDS = 50_000;
@@ -84,8 +85,10 @@ function mutableSnapshot(state: LifeState): LifeState {
       children: state.character.children.map(child => ({ ...child })),
       lastActivityAges: { ...state.character.lastActivityAges },
       ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
+      ...(state.character.people ? { people: Object.fromEntries(Object.entries(state.character.people).map(([id, person]) => [id, { ...person }])) } : {}),
+      ...(state.character.datedPartnerIds ? { datedPartnerIds: [...state.character.datedPartnerIds] } : {}),
       ...(state.character.relationships ? { relationships: {
-        partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie }])),
+        partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie, ...(tie.roles ? { roles: [...tie.roles] } : {}) }])),
         children: Object.fromEntries(Object.entries(state.character.relationships.children).map(([id, tie]) => [id, { ...tie }])),
       } } : {}),
     } } : {}),
@@ -105,6 +108,11 @@ export function createEngine(input: unknown): LifeEngine {
   const activityById = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
   const rareEvents = world.events.filter(event => event.rarity === "rare");
   const rareEventIds = new Set(rareEvents.map(event => event.id));
+  const peoplePolicy = world.character?.encounterPacing;
+  const peopleEvents = peoplePolicy ? world.events.filter(event => event.mode !== "automatic" && event.rarity !== "rare" && event.trigger.type === "random" &&
+    event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "introduce" || effect.type === "relationship" && effect.status === "courting" ||
+      world.character?.socialRelationships && effect.type === "social-role" && effect.active)))) : [];
+  const peopleEventIds = new Set(peopleEvents.map(event => event.id));
   const exclusiveGroups = new Map<string, LifeEvent[]>();
   for (const event of world.events) if (event.exclusiveGroup) {
     const members = exclusiveGroups.get(event.exclusiveGroup) ?? [];
@@ -121,7 +129,7 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string): void {
-    state.journal.push({ type, id, text: legacyText(world, state, text), age: state.age, year: state.year });
+    state.journal.push({ type, id, text: personText(legacyText(world, state, text), world, state), age: state.age, year: state.year });
   }
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
@@ -204,23 +212,29 @@ export function createEngine(input: unknown): LifeEngine {
         case "flag": state.flags[effect.flag] = effect.value; break;
         case "skill": {
           const definition = world.character!.skills[effect.skill];
-          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], effect.delta);
+          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], skillEffectDelta(effect, state.flags));
           break;
         }
         case "job": state.character!.jobId = effect.job; break;
         case "condition": addHealthCondition(world, state, effect.condition, decisionContext, healthHooks(state)); break;
         case "care": provideHealthCare(world, state, effect.amount); break;
         case "closeness": applyCloseness(world, state, effect); break;
+        case "social-role": applySocialRole(world, state, effect); break;
         case "relationship":
           state.character!.partnerId = effect.partner;
           state.character!.relationshipStatus = effect.status;
+          if (world.character?.proceduralPartners) {
+            state.character!.datedPartnerIds ??= [];
+            if (!state.character!.datedPartnerIds.includes(effect.partner)) state.character!.datedPartnerIds.push(effect.partner);
+          }
           break;
         case "introduce": {
           const character = state.character!;
           character.knownPartnerIds ??= [];
           if (!character.knownPartnerIds.includes(effect.partner)) {
+            const generated = encounterPerson(world, state, effect.partner);
             character.knownPartnerIds.push(effect.partner);
-            const person = world.character!.partners.find(partner => partner.id === effect.partner)!;
+            const person = generated ?? world.character!.partners.find(partner => partner.id === effect.partner)!;
             journal(state, "activity", `met-${person.id}`, `You meet ${person.name}.`);
           }
           introduceRelationship(world, state, effect.partner);
@@ -362,6 +376,33 @@ export function createEngine(input: unknown): LifeEngine {
     return true;
   }
 
+  function offerPeopleEncounter(state: LifeState): boolean {
+    if (!peoplePolicy || state.age < 18) return false;
+    for (let index = state.journal.length - 1; index >= 0; index--) {
+      const entry = state.journal[index];
+      if (entry.type !== "event" || !peopleEventIds.has(entry.id)) continue;
+      if (state.age - entry.age < peoplePolicy.cooldownYears) return false;
+      break;
+    }
+    const candidates = peopleEvents.filter(event => eligible(event, state));
+    const invitations = candidates.filter(event => choicesFor(event, state).some(choice => choice.outcomes.some(outcome =>
+      outcome.effects.some(effect => effect.type === "relationship" && effect.status === "courting" ||
+        world.character?.socialRelationships && effect.type === "social-role" && effect.active))));
+    const meetings = candidates.filter(event => choicesFor(event, state).some(choice => choice.outcomes.some(outcome =>
+      outcome.effects.some(effect => effect.type === "introduce"))));
+    const pool = invitations.length ? invitations : meetings;
+    if (!pool.length) return false;
+    const chance = invitations.length ? peoplePolicy.dateChance : state.character?.knownPartnerIds?.length ? peoplePolicy.meetingChance : peoplePolicy.firstMeetingChance;
+    if (chance === 0) return false;
+    if (chance < 1) {
+      const draw = nextRandom(state.rngState);
+      state.rngState = draw.state;
+      if (draw.value >= chance) return false;
+    }
+    offer(state, pickRandomEvent(pool, state));
+    return true;
+  }
+
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
@@ -391,16 +432,24 @@ export function createEngine(input: unknown): LifeEngine {
       const anchor = world.events.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
       if (allowRandom && state.age > 0 && offerRareEncounter(state)) return;
+    } else if (peoplePolicy) {
+      // The new lane cannot promote a personal encounter ahead of dated history.
+      const anchor = world.events.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      if (anchor) { offer(state, anchor); return; }
     }
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
     const scheduled = world.events.find(event => event.mode !== "automatic" &&
       event.trigger.type !== "random" && eligible(event, state) &&
       (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
+    // Essential childhood milestones through sixteen keep their place even if
+    // delayed. Later personal milestones share the adult encounter slots.
+    if (scheduled?.trigger.type === "age" && scheduled.trigger.at <= 16) { offer(state, scheduledAlternative(scheduled, state)); return; }
+    if (allowRandom && decisionDue && offerPeopleEncounter(state)) return;
     if (scheduled) { offer(state, scheduledAlternative(scheduled, state)); return; }
     if (allowRandom && state.age > 0 && decisionDue) {
       const decisions = world.events.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
-        event.trigger.type === "random" && eligible(event, state));
+        event.trigger.type === "random" && !peopleEventIds.has(event.id) && eligible(event, state));
       if (decisions.length > 0) {
         offer(state, pickRandomEvent(decisions, state));
         return;
@@ -522,7 +571,8 @@ export function createEngine(input: unknown): LifeEngine {
       const range = origin.statRanges?.[id] ?? definition.initialRange;
       if (range) state.stats[id] = startingStat(range.min, range.max, state);
     }
-    if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
+    if (world.character?.identity) initializeIdentity(world, state);
+    else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) state.economy = initialEconomy(world, state)!;
@@ -618,7 +668,7 @@ export function createEngine(input: unknown): LifeEngine {
   function getChoices(state: LifeState): readonly Choice[] {
     assertCompatible(state);
     if (state.phase !== "choice") return Object.freeze([]);
-    return Object.freeze(choicesFor(eventById.get(state.pendingEventId!)!, state));
+    return freeze(choicesFor(eventById.get(state.pendingEventId!)!, state).map(choice => visiblePersonChoice(choice, world, state)));
   }
 
   function getActivities(state: LifeState): readonly ActivityAvailability[] {
@@ -633,7 +683,7 @@ export function createEngine(input: unknown): LifeEngine {
       return activity.category !== "relationship" || known.length > 0 || Boolean(state.character?.partnerId) || introduces;
     }).map(activity => {
       const reason = activityReason(world, state, activity, matches);
-      return { ...activity, available: reason === undefined, ...(reason ? { reason } : {}) };
+      return { ...visiblePersonChoice(activity, world, state), available: reason === undefined, ...(reason ? { reason } : {}) };
     }));
   }
 
@@ -661,6 +711,24 @@ export function createEngine(input: unknown): LifeEngine {
     return freeze(next);
   }
 
+  function chooseAvatarInto(state: LifeState, variant: number): void {
+    assertPlayable(state);
+    const identity = world.character?.identity;
+    if (!identity || !state.character) throw new Error("Avatar selection is unavailable in this world.");
+    if (!Number.isInteger(variant) || variant < 0 || variant >= identity.avatarVariants) throw new Error("Unknown avatar variant.");
+    if (state.age !== 0 || state.commands.some(command => command.type !== "avatar")) throw new Error("Choose an avatar before beginning this life.");
+    if (state.character.avatarVariant === variant) return;
+    state.character.avatarVariant = variant;
+    state.commands.push({ type: "avatar", variant });
+  }
+
+  function chooseAvatar(state: LifeState, variant: number): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    chooseAvatarInto(next, variant);
+    return next.commands.length === state.commands.length ? state : freeze(next);
+  }
+
   function replay(seed: string, commands: readonly Command[]): LifeState {
     if (!Array.isArray(commands) || commands.length > MAX_COMMANDS) throw new Error("Invalid command history length.");
     // Reconstruct privately in one pass; only the final state escapes to callers.
@@ -673,6 +741,10 @@ export function createEngine(input: unknown): LifeEngine {
         chooseInto(state, command.choice);
       } else if (command.type === "act" && typeof command.activity === "string" && Object.keys(command).length === 2) {
         actInto(state, command.activity);
+      } else if (command.type === "avatar" && typeof command.variant === "number" && Object.keys(command).length === 2) {
+        const count = state.commands.length;
+        chooseAvatarInto(state, command.variant);
+        if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
       } else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -703,5 +775,5 @@ export function createEngine(input: unknown): LifeEngine {
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, replay, save, load });
 }

@@ -91,6 +91,9 @@ export function advanceToDecisionWithFocus(engine: LifeEngine, life: LifeState, 
   for (let years = 0; years <= engine.world.maxAge; years++) {
     if (next.phase !== "ready") return next;
     next = advanceYearWithFocus(engine, next, focusId);
+    // Fast-forward must stop where the repayment reminder can be seen.
+    const loan = next.economy?.loan;
+    if (loan && loan.balance > 0 && next.age >= loan.dueAge - 1) return next;
   }
   throw new Error("This life could not reach its next decision.");
 }
@@ -100,6 +103,8 @@ export function selectAutomaticChoice(choices: readonly Choice[], world?: WorldP
   let selected: Choice | undefined;
   let lowestRisk = Infinity;
   for (const choice of choices) {
+    // A dangerous contract always needs the player's explicit acceptance.
+    if (choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan" && effect.action === "borrow"))) continue;
     const branches = world && life ? getOutcomeProbabilities(world, life, choice)
       : choice.outcomes.map(outcome => ({ outcome, probability: outcome.weight / Math.max(...choice.outcomes.map(item => item.weight)) }));
     const total = branches.reduce((sum, branch) => sum + branch.probability, 0);

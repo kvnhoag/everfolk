@@ -1,6 +1,7 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import BirthStatRoll from "./BirthStatRoll.tsx";
+import BirthAvatarPicker from "./BirthAvatarPicker.tsx";
 import "./birth-roll-popover.css";
 
 export interface BirthRollPopoverProps {
@@ -11,12 +12,19 @@ export interface BirthRollPopoverProps {
   onReveal(): void;
   onContinue(): void;
   onClose(): void;
+  onChooseAvatar?(variant: number): void;
 }
 
-function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onClose }: Omit<BirthRollPopoverProps, "open">) {
+function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onClose, onChooseAvatar }: Omit<BirthRollPopoverProps, "open">) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const id = useId();
+  // Saved reveal history must not skip the animation for this popup opening.
+  const [rollComplete, setRollComplete] = useState(false);
+  function completeRoll() {
+    setRollComplete(true);
+    if (!revealed) onReveal();
+  }
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -28,11 +36,11 @@ function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onC
 
   return <dialog ref={dialogRef} className="birth-roll-popover" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`} onCancel={event => { event.preventDefault(); onClose(); }}>
     <header className="birth-popover-heading">
-      <div><h2 ref={headingRef} id={`${id}-title`} tabIndex={-1}>A new life</h2><p id={`${id}-description`}>{revealed ? "Starting stats ready" : "Rolling stats…"}</p></div>
+      <div><h2 ref={headingRef} id={`${id}-title`} tabIndex={-1}>A new life</h2><p id={`${id}-description`}>{rollComplete ? "Starting stats ready" : "Rolling stats…"}</p></div>
       <button className="birth-popover-close" type="button" aria-label="Close starting stats" onClick={onClose}><span aria-hidden="true">×</span></button>
     </header>
-    <div className="birth-popover-content"><BirthStatRoll life={life} world={world} revealed={revealed} onComplete={onReveal} autoStart /></div>
-    <footer className="birth-popover-footer"><button className="birth-popover-continue" type="button" disabled={!revealed} onClick={() => { if (revealed) onContinue(); }}>Begin life <span aria-hidden="true">↗</span></button></footer>
+    <div className="birth-popover-content"><BirthStatRoll life={life} world={world} revealed={rollComplete} onComplete={completeRoll} autoStart />{rollComplete && onChooseAvatar && <BirthAvatarPicker life={life} world={world} onChoose={onChooseAvatar} />}</div>
+    <footer className="birth-popover-footer"><button className="birth-popover-continue" type="button" disabled={!rollComplete} onClick={() => { if (rollComplete) onContinue(); }}>Begin life <span aria-hidden="true">↗</span></button></footer>
   </dialog>;
 }
 

@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 import comparisonPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import registry from "../research/sources.json" with { type: "json" };
 import mortalityModel from "../research/mortality-model.json" with { type: "json" };
@@ -39,8 +40,8 @@ function complete(engine: LifeEngine, seed: string, career = "stay", manageFamil
   return state;
 }
 
-function safeEngine(originalOpening = false): LifeEngine {
-  const copy = structuredClone(pack);
+function safeEngine(originalOpening = false, source = pack): LifeEngine {
+  const copy = structuredClone(source);
   if (originalOpening) {
     // This controlled route check covers the retained career milestones. The
     // opening-variation engine/content tests exercise the other alternatives.
@@ -128,7 +129,7 @@ test("historical anchors occur in their documented calendar years and the correc
 });
 
 test("controlled content coverage reaches all life stages and ends the record without inventing a death", () => {
-  const engine = safeEngine(true);
+  const engine = safeEngine(true, namedCatalog);
   for (const career of ["stay", "sail", "study"]) {
     const life = complete(engine, `full-stage-${career}`, career, true);
     assert.equal(life.age, 100);

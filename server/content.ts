@@ -26,6 +26,12 @@ import moneylenderAlexandria from "../worlds/alexandria-0.21.0.json" with { type
 import eventVarietyAlexandria from "../worlds/alexandria-0.22.0.json" with { type: "json" };
 import rareEncountersAlexandria from "../worlds/alexandria-0.23.0.json" with { type: "json" };
 import masteryOpeningsAlexandria from "../worlds/alexandria-0.24.0.json" with { type: "json" };
+import legacyRoutesAlexandria from "../worlds/alexandria-0.25.0.json" with { type: "json" };
+import childhoodRoutesAlexandria from "../worlds/alexandria-0.26.0.json" with { type: "json" };
+import creditOpportunitiesAlexandria from "../worlds/alexandria-0.27.0.json" with { type: "json" };
+import skillCeilingAlexandria from "../worlds/alexandria-0.28.0.json" with { type: "json" };
+import proceduralPeopleAlexandria from "../worlds/alexandria-0.29.0.json" with { type: "json" };
+import socialRolesAlexandria from "../worlds/alexandria-0.30.0.json" with { type: "json" };
 import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
 import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
 
@@ -77,9 +83,10 @@ export interface PublishedCatalog {
   worlds: WorldSummary[];
 }
 
-// D1 limits each string and row to 2 MB. Leave room for row metadata and
-// publication wrappers while keeping editor imports and request bodies bounded.
-export const MAX_CATALOG_BYTES = 1_500_000;
+// D1 limits each string and row to 2 MB. Keep 200 kB for row metadata and
+// wrappers while allowing two complete current worlds in an editor catalog.
+// Drafts, compiled worlds, publication lists and request streams share this cap.
+export const MAX_CATALOG_BYTES = 1_800_000;
 const BAD_IDS = new Set(["constructor", "prototype", "__proto__"]);
 const ID = /^[a-z][a-z0-9-]{0,99}$/;
 
@@ -127,7 +134,7 @@ function enabled(value: unknown, path: string): void {
 
 function boundedJson(value: unknown, path: string): void {
   if (new TextEncoder().encode(JSON.stringify(value)).byteLength > MAX_CATALOG_BYTES) {
-    throw new Error(`${path}: serialized content exceeds the 1,500,000-byte limit. Reduce the catalog before saving or publishing.`);
+    throw new Error(`${path}: serialized content exceeds the ${MAX_CATALOG_BYTES.toLocaleString("en-US")}-byte limit. Reduce the catalog before saving or publishing.`);
   }
 }
 
@@ -273,7 +280,7 @@ export function getPreviousWorld(): PublishedWorld {
 
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria]) {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria]) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -282,7 +289,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

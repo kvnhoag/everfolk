@@ -1,6 +1,6 @@
 import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
-import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
+import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../src/types.ts";
 import { activityPartnerIds } from "../src/character.ts";
 import { getSkillImpact } from "./skill-impact.ts";
 import { engineForLife } from "./session.ts";
@@ -11,11 +11,18 @@ import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "./character-panel-model.ts";
 import { careerOpeningNotes } from "./career-openings.ts";
+import { activityLoanOffer } from "./loan-access.ts";
+import { resolvePartner } from "../src/people.ts";
+import PixelPortrait from "./PixelPortrait.tsx";
+import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "./relationship-labels.ts";
+import "./birth-avatar.css";
+import "./social-relationships.css";
 import type { CharacterSection } from "./character-panel-model.ts";
 import "./character-panel.css";
 
 type Section = CharacterSection;
 type AvailabilityFilter = "all" | "available" | "unavailable";
+type RelationshipFilter = "all" | "friends" | "business" | "romance";
 
 /** Preview skill changes with the same sequential bounds as the engine. */
 function skillEffects(activity: ActivityAvailability, life: LifeState, world: WorldPack): { label: string; min: number; max: number; variable: boolean }[] {
@@ -34,13 +41,19 @@ function ActivityButton({ activity, life, world, onActivity }: {
     : actionUsed ? "Action used. Available next year."
     : activity.reason;
   const disabled = !activity.available || unavailable;
-  return <button type="button" className="personal-activity" disabled={disabled} onClick={() => onActivity(activity.id)}>
-    <span className="personal-activity-heading"><strong>{activity.text}</strong><span className="personal-activity-state">{disabled ? "Locked" : "Choose"}</span></span>
+  const loanOffer = disabled && activityLoanOffer(world, life, activity);
+  return <button type="button" className="personal-activity" disabled={disabled && !loanOffer} onClick={() => onActivity(activity.id)}>
+    <span className="personal-activity-heading"><strong>{activity.text}</strong><span className="personal-activity-state">{loanOffer ? "Ask moneylender" : disabled ? "Locked" : "Choose"}</span></span>
     {openings.map(note => <span className="personal-opening-note" key={note}>{note}</span>)}
     {changes.length > 0 && <span className="personal-skill-effects">{changes.map(change => <span className="impact-stat" key={change.label}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</span>}
     {reason && <span className="personal-activity-reason">{reason}</span>}
+    {loanOffer && <span className="loan-funding-hint">Short of {formatLoanShortfall(loanOffer.shortfall, world)} · View loan terms</span>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
   </button>;
+}
+
+function formatLoanShortfall(amount: number, world: WorldPack): string {
+  return `${amount} ${world.economy?.currency.short ?? ""}`.trim();
 }
 
 function tieLabel(value: number, world: WorldPack): string {
@@ -64,6 +77,20 @@ function targetsJob(activity: ActivityAvailability, jobId: string): boolean {
 
 function targetsPartner(activity: ActivityAvailability, partnerId: string): boolean {
   return activityPartnerIds(activity).includes(partnerId);
+}
+
+/** Other requirements remain engine-owned; an absent social role hides its controls. */
+function socialRequirements(condition: Condition | undefined, life: LifeState): boolean | undefined {
+  if (!condition) return;
+  if (condition.type === "social-role") return (life.character?.relationships?.partners[condition.partner]?.roles?.includes(condition.role) === true) === condition.active;
+  if (condition.type === "not") {
+    const value = socialRequirements(condition.condition, life);
+    return value === undefined ? undefined : !value;
+  }
+  if (condition.type !== "all" && condition.type !== "any") return;
+  const values = condition.conditions.map(part => socialRequirements(part, life));
+  if (condition.type === "all") return values.includes(false) ? false : values.every(value => value === true) ? true : undefined;
+  return values.includes(true) ? true : values.every(value => value === false) ? false : undefined;
 }
 
 function matchesSearch(text: string, query: string): boolean {
@@ -101,6 +128,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
   const [section, setSection] = useState<Section>(initialSection);
   const [jobSearch, setJobSearch] = useState("");
   const [jobAvailability, setJobAvailability] = useState<AvailabilityFilter>("all");
+  const [relationshipFilter, setRelationshipFilter] = useState<RelationshipFilter>("all");
   const instanceId = useId();
   const tabRefs = useRef<Partial<Record<Section, HTMLButtonElement | null>>>({});
   const allActivities = useMemo(() => world.character && life.character ? engineForLife(life).getActivities(life) : [], [life, world]);
@@ -115,15 +143,17 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
     ...character.children.map(child => child.otherParentId),
   ]);
   const knowsPartner = (id: string) => !definition.requireIntroductions || knownPartnerIds.has(id);
-  const knownPartners = definition.partners.filter(partner => knowsPartner(partner.id));
-  const hasRelationships = !definition.requireIntroductions || knownPartners.length > 0;
+  const datedPartnerIds = new Set(character.datedPartnerIds ?? []);
+  const knownPartners = visibleRelationshipPeople(world, life);
+  const visiblePeopleIds = new Set(knownPartners.map(person => person.id));
+  const hasRelationships = definition.proceduralPartners ? knownPartners.length > 0 : !definition.requireIntroductions || knownPartners.length > 0;
   const visibleSections = visibleCharacterSections(life, world, hasRelationships);
   const activeSection = visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
   // Keep undiscovered people out of the DOM as well as the visible cards.
   const activities = allActivities.filter(activity => activityPartnerIds(activity).every(knowsPartner));
   const currentJob = definition.jobs.find(job => job.id === character.jobId);
   const origin = world.origins.find(item => item.id === life.originId);
-  const currentPartner = definition.partners.find(partner => partner.id === character.partnerId);
+  const currentPartner = character.partnerId ? resolvePartner(world, life, character.partnerId) : undefined;
   const career = activities.filter(activity => activity.category === "career");
   const visibleJobs = definition.jobs.filter(job => {
     const jobActions = career.filter(activity => targetsJob(activity, job.id));
@@ -132,9 +162,27 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
   });
   const otherCareer = career.filter(activity => !definition.jobs.some(job => targetsJob(activity, job.id)));
   const visibleOtherCareer = otherCareer.filter(activity => matchesSearch(activitySearchText(activity, world), jobSearch) && matchesAvailability(activity.available, jobAvailability));
-  const relationships = activities.filter(activity => activity.category === "relationship");
+  const relationships = activities.filter(activity => activity.category === "relationship" && (!definition.proceduralPartners || activityPartnerIds(activity).every(id => visiblePeopleIds.has(id))) && (!definition.socialRelationships || !activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")) || character.relationshipStatus === "courting"));
   const hasBreakupAction = relationships.some(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")));
   const adults = knownPartners.filter(partner => life.age + partner.ageOffset >= 18);
+  const matchesRelationshipFilter = (id: string, filter: RelationshipFilter): boolean => {
+    const labels = relationshipLabels(world, life, id);
+    return filter === "all" || filter === "friends" && labels.includes("Friend") || filter === "business" && labels.includes("Business partner") || filter === "romance" && (datedPartnerIds.has(id) || character.partnerId === id);
+  };
+  const shownPeople = adults.filter(person => !definition.socialRelationships || matchesRelationshipFilter(person.id, relationshipFilter));
+  const currentRomanceLabel = currentPartner && romanticPartnerLabel(world, life, currentPartner.id);
+  const personActivities = (id: string) => relationships.filter(activity => {
+    if (!targetsPartner(activity, id)) return false;
+    if (!definition.socialRelationships) return true;
+    if (socialRequirements(activity.when, life) === false) return false;
+    const effects = activity.outcomes.flatMap(outcome => outcome.effects);
+    if (effects.some(effect => effect.type === "relationship" && effect.status === "courting") && (character.relationshipStatus === "courting" || character.relationshipStatus === "married")) return false;
+    if (effects.some(effect => effect.type === "relationship" && effect.status === "married") && !(character.partnerId === id && character.relationshipStatus === "courting")) return false;
+    if (activity.id.startsWith("time-with-") && !(character.partnerId === id && (character.relationshipStatus === "courting" || character.relationshipStatus === "married"))) return false;
+    const roles = character.relationships?.partners[id]?.roles ?? [];
+    if (effects.some(effect => effect.type === "social-role" && effect.active === roles.includes(effect.role))) return false;
+    return true;
+  });
   const hasActivity = character.lastActivityAge === life.age;
   let recentOutcome: string | undefined;
   for (let index = life.journal.length - 1; index >= 0; index--) {
@@ -163,7 +211,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
     <LifeHealthPanel {...props} compact />
     {origin && <details className="character-background"><summary><span>Background</span><strong>{origin.title}</strong></summary><div><span className="character-background-name">{character.name ?? "Damon"}</span><p>{origin.text}</p></div></details>}
     <div className={`character-activity-status${hasActivity ? " activity-spent" : ""}`}>
-      <span className="character-budget-label">Age {life.age} · Activities</span>
+      <span className="character-budget-label">Age {life.age}{character.sex && ` · ${character.sex === "female" ? life.age < 18 ? "Girl" : "Woman" : life.age < 18 ? "Boy" : "Man"}`} · Activities</span>
       <p>{budget}</p>
     </div>
     {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{recentOutcome}</p></div>}
@@ -202,20 +250,30 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
         <WealthPanel activities={activities} {...props} />
       </div>}
       {visibleSections.some(item => item.id === "relationships") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-relationships`} aria-labelledby={`${instanceId}-tab-relationships`} tabIndex={0} hidden={activeSection !== "relationships"}>
-        <div className="character-section-heading"><span>Relationships</span><h3>{character.relationshipStatus === "married" && currentPartner ? `Married to ${currentPartner.name}` : character.relationshipStatus === "courting" && currentPartner ? `Courting ${currentPartner.name}` : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
+        <div className="character-section-heading"><span>Relationships</span><h3>{currentRomanceLabel && currentPartner ? `${currentRomanceLabel}: ${currentPartner.name}` : definition.socialRelationships ? "People in your life" : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{definition.socialRelationships ? "Spend time with friends, work with business partners and care for your close relationships." : character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
+        {definition.socialRelationships && <div className="relationship-filters" role="group" aria-label="Relationship groups">{([["all", "All"], ["friends", "Friends"], ["business", "Business"], ["romance", "Romance"]] as const).map(([filter, label]) => <button type="button" key={filter} aria-pressed={relationshipFilter === filter} onClick={() => setRelationshipFilter(filter)}>{label}<span>{adults.filter(person => matchesRelationshipFilter(person.id, filter)).length}</span></button>)}</div>}
         {adults.length === 0 && <p className="character-empty">No adult partners available.</p>}
-        <div className="character-card-list">{adults.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
-          <div className="character-card-heading"><h4>{partner.name}</h4>{partner.id === character.partnerId && character.relationshipStatus !== "single" && <span className="character-status-tag">{character.relationshipStatus === "married" ? "Spouse" : character.relationshipStatus === "courting" ? "Courting" : "Former partner"}</span>}</div>
+        {adults.length > 0 && shownPeople.length === 0 && <p className="character-empty">No relationships in this group yet.</p>}
+        <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
+          {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
+          <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>)}</div></div>
           <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{partner.description}</p>
           {character.relationships?.partners[partner.id] && <Closeness lastContactAge={character.relationships.partners[partner.id].lastContactAge} world={world} value={character.relationships.partners[partner.id].closeness} />}
-          <ActivityList activities={relationships.filter(activity => targetsPartner(activity, partner.id))} {...props} />
+          <ActivityList activities={personActivities(partner.id)} {...props} />
         </article>)}</div>
-        <ActivityList activities={relationships.filter(activity => !definition.partners.some(partner => targetsPartner(activity, partner.id)) && (character.relationshipStatus === "married" || !activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "divorce"))))} {...props} />
+        <ActivityList activities={relationships.filter(activity => {
+          if (definition.partners.some(partner => targetsPartner(activity, partner.id))) return false;
+          const effects = activity.outcomes.flatMap(outcome => outcome.effects);
+          if (character.relationshipStatus !== "married" && effects.some(effect => effect.type === "divorce")) return false;
+          if (!definition.socialRelationships || relationshipFilter === "all") return true;
+          const romantic = effects.some(effect => effect.type === "end-courtship" || effect.type === "divorce");
+          return relationshipFilter === "romance" ? romantic : relationshipFilter === "friends" && !romantic;
+        })} {...props} />
       </div>}
       {visibleSections.some(item => item.id === "children") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-children`} aria-labelledby={`${instanceId}-tab-children`} tabIndex={0} hidden={activeSection !== "children"}>
         <div className="character-section-heading"><span>Family</span><h3>{character.children.length === 0 ? "Home life" : `${character.children.length} ${character.children.length === 1 ? "child" : "children"}`}</h3><p>{character.children.length > 0 ? "Spend time with your family and help at home." : hasFamily ? "Manage your household and family plans." : "Help at home or spend time with the neighbors."}</p></div>
         {character.children.length > 0 && <ul className="character-children">{character.children.map(child => {
-          const otherParent = definition.partners.find(partner => partner.id === child.otherParentId);
+          const otherParent = resolvePartner(world, life, child.otherParentId);
           const age = life.age - child.birthAge;
           const tie = character.relationships?.children[child.id];
           return <li key={child.id}><span className="character-child-initial" aria-hidden="true">{child.name.charAt(0)}</span><div><h4>{child.name}</h4><span>{age === 0 ? "Newborn" : `Age ${age}`}{otherParent ? ` · Other parent: ${otherParent.name}` : ""}</span>{tie && <span className="character-child-closeness">{tieLabel(tie.closeness, world)} · {tie.closeness}/100 · Last contact: age {tie.lastContactAge}</span>}</div></li>;

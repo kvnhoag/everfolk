@@ -40,8 +40,48 @@ button:focus-visible,a:focus-visible{outline:2px solid #41637b;outline-offset:3p
 .pause-continue:hover{background:#293c58}
 .pause-art img{image-rendering:pixelated;image-rendering:crisp-edges}
 .event-card h3,.year-event h3,.year-review h2{font-family:var(--serif);font-weight:700}
-dialog,.dialog,.sources-dialog,.decision-dialog,.birth-roll-popover,.pause-dialog,.restart-dialog{border-radius:0;border:2px solid #886447;background:#f7ecd4;box-shadow:6px 6px 0 #263b4335}
-dialog::backdrop{background:#263b4370}
+/* Match the actual modal classes so their older paper-theme rules cannot win. */
+dialog.detail-dialog,dialog.life-decision-dialog,dialog.birth-roll-popover{border-radius:0;border:2px solid #886447;background:#f7ecd4;color:var(--ink);box-shadow:6px 6px 0 #263b4366;scrollbar-color:#886447 #edcf91;scrollbar-width:thin}
+dialog.detail-dialog::backdrop,dialog.life-decision-dialog::backdrop,dialog.birth-roll-popover::backdrop{background:#263b4380;backdrop-filter:none}
+.life-decision-dialog .life-decision-meta{background:#edcf91;border-bottom:2px solid #baa47a;color:var(--ink)}
+.life-decision-dialog .life-decision-meta>span:first-child{color:#886447;font:700 10px/1.4 var(--serif);text-transform:uppercase;letter-spacing:1px}
+dialog.life-decision-dialog.is-rare{border-top:4px solid #a85e44}
+.life-decision-dialog.is-rare .life-decision-meta{background:#edcf91}
+.life-decision-dialog.is-rare .life-decision-meta>span:first-child{color:#934e38}
+.life-decision-dialog .life-decision-content>h2,dialog.birth-roll-popover .birth-popover-heading h2,dialog.detail-dialog .dialog-content>h2{font-family:var(--serif);font-weight:700;line-height:1.16;letter-spacing:-1px;color:var(--ink)}
+.life-decision-dialog .life-decision-content>p,dialog.birth-roll-popover .birth-popover-heading p,dialog.detail-dialog .dialog-content>p{color:#4c5c51}
+.life-decision-dialog .life-decision-meta>button,.life-decision-dialog .life-decision-content>footer button{border:2px solid #baa47a;border-radius:0;background:#f5e6bf;color:var(--ink);box-shadow:2px 2px 0 #88644735;min-height:34px}
+.life-decision-dialog .life-choice-commit{border:2px solid #baa47a;border-radius:0;background:#fff2d1;color:var(--ink);box-shadow:3px 3px 0 #88644725}
+.life-decision-dialog .life-choice-commit:hover,.life-decision-dialog .life-choice-commit:focus-visible{border-color:#41637b;background:#f5e6bf}
+.life-decision-dialog .life-option-number{display:grid;place-items:center;min-width:22px;height:22px;margin-top:0;border:1px solid #baa47a;background:#edcf91;color:var(--ink);font:700 12px/1 var(--serif)}
+.life-decision-dialog .compact-skills.is-preview{background:#f4e7c9;border:1px solid #baa47a}
+.life-decision-dialog .compact-skill-node{background:#fff2d1;border-color:#cdbb95}
+.life-decision-dialog .compact-skill-node.is-highlighted{background:#e3e9dc;border-color:#597149;box-shadow:inset 3px 0 #597149}
+.life-decision-dialog .life-decision-sources{color:#4c5c51}
+.life-decision-dialog .life-decision-sources a{color:#41637b}
+dialog.life-decision-dialog button:focus-visible,dialog.birth-roll-popover button:focus-visible,dialog.detail-dialog :is(button,input,select,textarea):focus-visible{outline:2px solid #41637b;outline-offset:3px}
+dialog.detail-dialog .dialog-close,dialog.birth-roll-popover .birth-popover-close{display:grid;place-items:center;width:34px;height:34px;padding:4px;border:2px solid #baa47a;border-radius:0;background:#f5e6bf;color:var(--ink);box-shadow:2px 2px 0 #88644735}
+dialog.birth-roll-popover .birth-popover-heading{background:#edcf91;border-bottom:2px solid #baa47a;margin-bottom:20px}
+dialog.birth-roll-popover .birth-popover-footer{border-radius:0;background:#f7ecd4;border-top:1px solid #cdbb95;margin-top:20px}
+dialog.birth-roll-popover .birth-stat-roll{background:#f4e7c9;border:1px solid #baa47a;border-radius:0}
+dialog.birth-roll-popover .birth-stat-roll::before{border-color:#edcf91;border-radius:0}
+dialog.birth-roll-popover .birth-roll-origin{background:#fff2d1;border-color:#cdbb95;border-radius:0}
+dialog.birth-roll-popover .birth-roll-origin>span{color:#727562}
+dialog.birth-roll-popover .birth-roll-origin.is-revealed>strong{color:var(--ink)}
+dialog.birth-roll-popover .birth-roll-card{--roll-accent:#41637b;border:2px solid #cdbb95;border-radius:0;background:#fff2d1;box-shadow:3px 3px 0 #88644735}
+dialog.birth-roll-popover .birth-roll-health{--roll-accent:#a85e44}
+dialog.birth-roll-popover .birth-roll-wealth{--roll-accent:#937438}
+dialog.birth-roll-popover .birth-roll-bonds{--roll-accent:#597149}
+dialog.birth-roll-popover .birth-roll-number{font-family:var(--serif);font-weight:700}
+dialog.birth-roll-popover .birth-roll-stat-name{color:var(--ink)}
+dialog.birth-roll-popover .birth-roll-range,dialog.birth-roll-popover .birth-roll-card-state,dialog.birth-roll-popover .birth-roll-footer>p{color:#727562}
+dialog.birth-roll-popover .birth-roll-card-state{border-color:#cdbb95}
+dialog.birth-roll-popover .birth-roll-card-state i{border-radius:0}
+dialog.birth-roll-popover .birth-popover-continue{border:2px solid #263b43;border-radius:0;background:#41637b;color:#fff2d1;box-shadow:3px 3px 0 #88644735}
+dialog.birth-roll-popover .birth-popover-continue:hover:not(:disabled){background:#293c58;border-color:#263b43}
+dialog.birth-roll-popover .birth-popover-continue:disabled{background:#e5dbc1;border-color:#cdbb95;color:#727562;box-shadow:none}
+dialog.birth-roll-popover .birth-roll-skip{color:#41637b;border-color:#41637b}
+dialog.detail-dialog :is(input,select,textarea){border-radius:0;border-color:#baa47a;background:#fff2d1;color:var(--ink)}
 .birth-roll-grid,.birth-roll-stat,.birth-roll-number,.birth-roll-origin,.digit-reel,.digit-reel-window{border-radius:0}
 .birth-roll-number,.birth-roll-heading h2{font-family:"Courier New",Courier,monospace;font-weight:700}
 .impact-stat,.world-route-tags>span,.requirement-chip,.skill-tag{border-radius:0}

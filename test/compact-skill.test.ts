@@ -21,6 +21,22 @@ function fixture(choice: Choice): WorldPack {
     },
   };
 }
+
+test("choice previews retain the same training ages and locks as the full activity panel", () => {
+  const choice: Choice = { id: "shape", text: "Try shaping", outcomes: [{ id: "shaped", text: "You try a shape.", weight: 1, effects: [{ type: "skill", skill: "sculpture", delta: 1 }] }] };
+  const world = fixture(choice);
+  world.character!.skills.sculpture.trainingActivity = "train-sculpture";
+  world.character!.activities.push({ id: "train-sculpture", text: "Practise sculpture", category: "training", minAge: 12,
+    outcomes: [{ id: "practised", text: "You practise.", weight: 1, effects: [{ type: "skill", skill: "sculpture", delta: 2 }] }] });
+  const engine = createEngine(world), life = engine.start("preview-age-gate");
+  const popup = compactSkillPreview(world, life, choice);
+  const full = compactSkillPreview(world, life, choice, engine.getActivities(life));
+  const selected = popup.nodes.find(node => node.id === "sculpture")!;
+  assert.equal(selected.minAge, 12);
+  assert.equal(selected.state, "locked");
+  assert.equal(selected.ageMet, false);
+  assert.deepEqual(popup.nodes.map(node => [node.id, node.minAge, node.state, node.requirements]), full.nodes.map(node => [node.id, node.minAge, node.state, node.requirements]));
+});
 const option = (effects: Choice["outcomes"][number]["effects"]): Choice => ({ id: "make", text: "Make a figure", outcomes: [{ id: "made", text: "A figure is made.", weight: 1, effects }] });
 
 test("ordinary choice skill previews match bounded accepted results and illuminate prerequisite context without changing the life", () => {

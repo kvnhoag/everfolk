@@ -1,6 +1,7 @@
 import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, WorldPack } from "./types.ts";
 import { financeActivityReason } from "./economy.ts";
-import { marriageRelationshipReason } from "./relationships.ts";
+import { marriageRelationshipReason, socialRoleEffectReason } from "./relationships.ts";
+import { resolvePartner } from "./people.ts";
 
 export function initialCharacter(world: WorldPack): CharacterState | undefined {
   if (!world.character) return undefined;
@@ -9,6 +10,7 @@ export function initialCharacter(world: WorldPack): CharacterState | undefined {
     jobId: null, partnerId: null, relationshipStatus: "single", children: [],
     lastActivityAge: null, lastActivityAges: {},
     ...(world.character.requireIntroductions ? { knownPartnerIds: [] } : {}),
+    ...(world.character.proceduralPartners ? { people: {}, datedPartnerIds: [] } : {}),
   };
 }
 
@@ -16,12 +18,12 @@ export function initialCharacter(world: WorldPack): CharacterState | undefined {
 export function activityPartnerIds(activity: CharacterActivity): string[] {
   const people = new Set<string>();
   for (const outcome of activity.outcomes) for (const effect of outcome.effects) {
-    if (effect.type === "relationship") people.add(effect.partner);
+    if (effect.type === "relationship" || effect.type === "social-role") people.add(effect.partner);
     if (effect.type === "closeness" && effect.target === "partner" && effect.partner) people.add(effect.partner);
   }
   const visit = (condition: Condition | undefined): void => {
     if (!condition) return;
-    if (condition.type === "known-partner" || condition.type === "closeness" && condition.partner) people.add(condition.partner!);
+    if (condition.type === "known-partner" || condition.type === "social-role" || condition.type === "closeness" && condition.partner) people.add(condition.partner!);
     else if (condition.type === "relationship" && condition.partner) people.add(condition.partner);
     else if (condition.type === "all" || condition.type === "any") condition.conditions.forEach(visit);
     else if (condition.type === "not") visit(condition.condition);
@@ -32,6 +34,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {
     if (effect.target === "skill" && (!world.character || !state.character)) return "This world has no character skills.";
     return;
@@ -60,7 +63,8 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (missing.length) return `Requires ${missing.map(([skill, threshold]) => `${definition.skills[skill].label} ${threshold} (currently ${character.skills[skill]})`).join(", ")}.`;
   }
   if (effect.type === "relationship") {
-    const partner = definition.partners.find(candidate => candidate.id === effect.partner)!;
+    const partner = resolvePartner(world, state, effect.partner);
+    if (!partner) return "Meet this person before beginning a relationship.";
     if (definition.requireIntroductions && !character.knownPartnerIds?.includes(effect.partner)) return "Meet this person before beginning a relationship.";
     if (allowUnchanged && character.relationshipStatus === effect.status && character.partnerId === effect.partner) return;
     if (state.age < 18) return "Relationships unlock at age 18.";
@@ -81,7 +85,8 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
   if (effect.type === "divorce" && character.relationshipStatus !== "married") return "You must be married to divorce.";
   if (effect.type === "child") {
     if (state.age < 18 || character.relationshipStatus !== "married" || !character.partnerId) return "A married adult household is required.";
-    const partner = definition.partners.find(candidate => candidate.id === character.partnerId)!;
+    const partner = resolvePartner(world, state, character.partnerId);
+    if (!partner) return "Both parents must have a recorded identity.";
     if (state.age + partner.ageOffset < 18) return "Both parents must be adults.";
     if (character.children.length >= 8) return "Your household has reached the limit of eight children.";
     const last = character.children.at(-1);

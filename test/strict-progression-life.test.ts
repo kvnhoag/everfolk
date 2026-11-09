@@ -69,6 +69,7 @@ function currentCareerFixture(): WorldPack {
   delete world.health!.mortalityCalibration;
   world.events = world.events.filter(event=>event.id===world.health!.careDecision);
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.health!.incidenceBands.forEach(band=>{band.annualProbability=0;});
   world.health!.declineBands.forEach(band=>{band.healthLoss=0;});
   world.yearlyRules=[];

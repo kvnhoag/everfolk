@@ -1,12 +1,18 @@
 import type { ActivityAvailability, Choice, LifeState, WorldPack } from "../src/types.ts";
 import { buildSkillTree } from "./skill-tree.ts";
 import { getSkillImpact } from "./skill-impact.ts";
+import { activeEarlyInfluences, previewEarlyInfluences } from "./early-influences.ts";
+import type { EarlyInfluence } from "./early-influences.ts";
 
 /** A display projection only: previewing never rolls an outcome or spends an action. */
 export function compactSkillPreview(world: WorldPack, life: LifeState, choice?: Choice | null, activities: readonly ActivityAvailability[] = []) {
   const model = buildSkillTree(world, life, activities);
   const changes = choice ? getSkillImpact(choice, life, world) : [];
+  const early = choice ? previewEarlyInfluences(choice, world, life) : [];
+  const futureSkills = new Map<string, number>();
+  for (const influence of early) for (const skill of influence.skills) futureSkills.set(skill.id, Math.max(futureSkills.get(skill.id) ?? 1, skill.multiplier));
   const affected = new Set(changes.map(change => change.id));
+  for (const id of futureSkills.keys()) affected.add(id);
   const context = new Set(affected);
   function parents(id: string) {
     for (const edge of model.edges.filter(edge => edge.to === id)) {
@@ -16,7 +22,7 @@ export function compactSkillPreview(world: WorldPack, life: LifeState, choice?: 
     }
   }
   for (const id of affected) parents(id);
-  return { ...model, changes, affected, context, previewing: Boolean(choice) };
+  return { ...model, changes, affected, context, previewing: Boolean(choice), earlyInfluences: early, futureSkills };
 }
 
 /** Pick one useful branch without changing the authored tree or the life. */
@@ -45,6 +51,7 @@ export interface ProgressFeedback {
   key: string;
   skills: { id: string; label: string; delta: number; value: number; max: number }[];
   accomplishments: { id: string; name: string; title: string }[];
+  influences?: EarlyInfluence[];
 }
 
 /** Report observed changes, including resolved follow-ups, rather than the previewed range. */
@@ -58,5 +65,6 @@ export function choiceProgressFeedback(before: LifeState, after: LifeState, worl
   });
   const previous = new Set((before.accomplishments ?? []).map(record => record.id));
   const accomplishments = (after.accomplishments ?? []).filter(record => !previous.has(record.id)).map(({ id, name, title }) => ({ id, name, title }));
-  return skills.length || accomplishments.length ? { key: `${after.worldFingerprint}:${after.seed}:${after.commands.length}`, skills, accomplishments } : null;
+  const influences = activeEarlyInfluences(world, after).filter(item => !before.flags[item.flag]);
+  return skills.length || accomplishments.length || influences.length ? { key: `${after.worldFingerprint}:${after.seed}:${after.commands.length}`, skills, accomplishments, ...(influences.length ? { influences } : {}) } : null;
 }

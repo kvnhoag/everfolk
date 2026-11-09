@@ -7,6 +7,7 @@ import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normal
 import type { YearlyFocusId } from "./yearly-focus.ts";
 import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "./pause-state.ts";
 import type { PauseState } from "./pause-state.ts";
+import { borrowAndAct } from "./loan-access.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
 export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
@@ -149,6 +150,16 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
     }
   }, [commit, hasBegun, life]);
 
+  const actWithLoan = useCallback((activityId: string) => {
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    try {
+      // The player has confirmed the contract. Commit both ordinary commands
+      // together, so a changed opportunity can never leave an unwanted loan.
+      commit(borrowAndAct(engineForLife(life), life, activityId));
+      setNotice("");
+    } catch (error) { setNotice(message(error)); }
+  }, [commit, life]);
+
   const advance = useCallback(() => {
     if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
     try {
@@ -173,6 +184,14 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
     setHasRevealedStats(true);
   }, [life]);
 
+  const chooseAvatar = useCallback((variant: number) => {
+    if (hasBegunRef.current || lifeRef.current !== life) return;
+    try {
+      commit(engineForLife(life).chooseAvatar(life, variant));
+      setNotice("");
+    } catch (error) { setNotice(message(error)); }
+  }, [commit, life]);
+
   const beginLife = useCallback(() => {
     if (hasBegunRef.current || pauseStateRef.current.screenOpen || !hasRevealedStats || lifeRef.current !== life) return;
     hasBegunRef.current = true;
@@ -194,7 +213,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   const importLife = useCallback((json: string) => {
     try {
       const restored = loadAnyLife(json);
-      let begun = restored.commands.length > 0 || restored.phase === "ended";
+      let begun = restored.commands.some(command => command.type !== "avatar") || restored.phase === "ended";
       if (!begun && typeof window !== "undefined") {
         try { begun = hasLifeBegun(window.localStorage, restored); }
         catch { /* Unmarked age-zero imports retain the normal birth introduction. */ }
@@ -294,11 +313,13 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
     life,
     choose,
     act,
+    actWithLoan,
     advance,
     restart,
     hasBegun,
     hasRevealedStats,
     revealStats,
+    chooseAvatar,
     beginLife,
     nextTurningPoint,
     focusId,

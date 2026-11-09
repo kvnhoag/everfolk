@@ -36,8 +36,14 @@ function until(engine: LifeEngine, seed: string, career: Career, stop: (state: L
   return state;
 }
 
-function withoutMortality(): LifeEngine {
+function withoutMortality(includeSocialEncounters = true): LifeEngine {
   const copy = structuredClone(pack) as WorldPack;
+  if (!includeSocialEncounters) {
+    // This qualification fixture isolates the selected occupation's follow-up.
+    // Meeting/dating pacing is exercised in the current people integration tests.
+    delete copy.character!.encounterPacing;
+    copy.events = copy.events.filter(event => !event.id.startsWith("meet-person-") && !event.id.startsWith("date-person-"));
+  }
   // These controlled qualification checks deliberately take the original
   // opening route. The unmodified opening groups are covered separately; a
   // different valid first job must not displace this test's porter fixture.
@@ -47,6 +53,8 @@ function withoutMortality(): LifeEngine {
     return retained;
   });
   copy.mortality!.bands.forEach(band => { band.annualProbability = 0; });
+  copy.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
+  copy.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   // This progression fixture isolates skill gates from household affordability;
   // unmodified-pack mortality and bounded-stat coverage stays above.
   copy.stats.wealth.initial = 80;
@@ -123,7 +131,7 @@ test("all three careers can pass the former age-23 boundary and end in old-age d
 });
 
 test("graded childhood training opens careers and the selected named job receives its own follow-up", () => {
-  const safeEngine = withoutMortality();
+  const safeEngine = withoutMortality(false);
   const followups = { sail: "letters-across-the-water", study: "the-unfamiliar-page", stay: "the-neighbors-request" };
   for (const career of ["stay", "sail", "study"] as const) {
     const adult = until(safeEngine, `training-${career}`, career, state => state.pendingEventId === "a-place-on-the-manifest");

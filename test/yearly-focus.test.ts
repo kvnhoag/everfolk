@@ -10,6 +10,7 @@ function controlledWorld(): WorldPack {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
+  delete world.character!.encounterPacing;
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
