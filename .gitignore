@@ -12,3 +12,13 @@ artifacts/
 .env*
 .dev.vars*
 next-env.d.ts
+
+# Local-only planning, research notes and installation identity
+/docs/
+/.openai/hosting.json
+/research/legacy-route-evidence.json
+/research/historical-title-routes.json
+/scripts/audit-title-route-design.mjs
+/assets/source/worlds/README.md
+/artwork/life-banners/README.md
+/public/assets/pixel/README.md
