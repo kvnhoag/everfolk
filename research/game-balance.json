@@ -1,0 +1,27 @@
+{
+  "id": "alexandria-play-balance-v2",
+  "version": "2.0.0",
+  "purpose": "Authored POC balance, kept separate from the historical comparison data.",
+  "mortality": {
+    "id": "longer-lives-v2",
+    "description": "Background death probabilities are reduced to give players more time with work, family and specialist paths. After annual conversion, age 0 uses 6% of the historical comparison probability, ages 1-4 use 3%, ages 5-17 use 6%, ages 18-59 use 35%, ages 60-79 use 55%, and ages 80-94 use 80%. Ages 95-99 retain the comparison-derived tail assumption. These are authored game-balance settings, not reconstructed Alexandrian mortality rates.",
+    "defaultMultiplier": 1,
+    "ageMultipliers": [
+      { "minAge": 0, "maxAge": 0, "multiplier": 0.06 },
+      { "minAge": 1, "maxAge": 4, "multiplier": 0.03 },
+      { "minAge": 5, "maxAge": 17, "multiplier": 0.06 },
+      { "minAge": 18, "maxAge": 59, "multiplier": 0.35 },
+      { "minAge": 60, "maxAge": 79, "multiplier": 0.55 },
+      { "minAge": 80, "maxAge": 94, "multiplier": 0.8 }
+    ]
+  },
+  "notes": [
+    "Apply the multiplier to the converted conditional annual death probability, not to an interval q or to remaining life expectancy.",
+    "Split source age bands wherever a balance boundary falls within them; the source 15–19 band becomes 15–17 and 18–19.",
+    "The raw mortality-model.json remains unchanged. Its life expectancy at birth describes the comparison source, not this easier play curve.",
+    "Early deaths remain possible. Adult background risks are also reduced; explicitly dangerous choices retain their separately disclosed authored fatal outcomes.",
+    "Completed-age death timing, the 95+ tail assumption and the maximum age of 100 remain unchanged.",
+    "Existing saved world revisions keep their original probabilities. This profile applies to new lives in the new pack."
+  ],
+  "updated": "2026-11-06"
+}

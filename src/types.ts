@@ -2,24 +2,60 @@
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "cash" | "debt"; op: Comparison; value: number }
+  | { type: "asset"; asset: string; op: Comparison; value: number }
   | { type: "stat"; stat: string; op: Comparison; value: number }
   | { type: "flag"; flag: string; value: boolean }
   | { type: "age"; op: Comparison; value: number }
   | { type: "year"; op: Comparison; value: number }
   | { type: "origin"; origin: string }
+  | { type: "skill"; skill: string; op: Comparison; value: number }
+  | { type: "job"; job: string | null }
+  | { type: "relationship"; status: RelationshipStatus; partner?: string }
+  | { type: "known-partner"; partner: string }
+  | { type: "children"; op: Comparison; value: number }
   | { type: "all" | "any"; conditions: Condition[] }
   | { type: "not"; condition: Condition };
 
 export type Effect =
+  | { type: "cash" | "debt"; delta: number }
+  | { type: "asset"; asset: string; delta: number }
   | { type: "stat"; stat: string; delta: number }
   | { type: "flag"; flag: string; value: boolean }
-  | { type: "end"; ending: string };
+  | { type: "skill"; skill: string; delta: number }
+  | { type: "job"; job: string | null }
+  | { type: "relationship"; partner: string; status: "courting" | "married" }
+  | { type: "introduce"; partner: string }
+  | { type: "divorce" }
+  | { type: "child" }
+  | { type: "end"; ending: string; deathCause?: string };
+
+/** Inclusive whole-number bounds for a randomized starting attribute. */
+export interface StatRange {
+  min: number;
+  max: number;
+}
 
 export interface StatDefinition {
   label: string;
   min: number;
   max: number;
   initial: number;
+  /** Optional starting range for main stats; fixed initial values remain replay-compatible. */
+  initialRange?: StatRange;
+}
+
+/** Skill-tree metadata is optional so older packs keep their original rules. */
+export interface SkillDefinition extends StatDefinition {
+  description?: string;
+  /** Display label for a group of related skills. */
+  branch?: string;
+  /** Author-supplied layout hint, rather than an additional unlock rule. */
+  tier?: number;
+  /** Minimum current skill levels required for voluntary training gains. */
+  prerequisites?: Record<string, number>;
+  /** Declared training activity used to practice this skill. */
+  trainingActivity?: string;
 }
 
 export type EvidenceKind = "documented-history" | "historically-inspired" | "fictional";
@@ -49,6 +85,8 @@ export interface Origin extends EvidenceMetadata {
   text: string;
   weight: number;
   effects: Effect[];
+  /** Partial starting-range overrides, drawn before this origin's effects. */
+  statRanges?: Record<string, StatRange>;
 }
 
 export interface Outcome {
@@ -113,6 +151,90 @@ export interface MortalityModel {
   bands: MortalityBand[];
 }
 
+export type RelationshipStatus = "single" | "courting" | "married" | "divorced";
+
+export interface JobDefinition {
+  id: string;
+  title: string;
+  description: string;
+  minAge: number;
+  requirements?: Record<string, number>;
+  yearlyEffects: Effect[];
+}
+
+export interface PartnerDefinition {
+  id: string;
+  name: string;
+  /** Candidate age is the player's current age plus this offset. */
+  ageOffset: number;
+  occupation: string;
+  description: string;
+}
+
+export interface CharacterActivity extends Choice {
+  category: "training" | "career" | "relationship" | "family" | "finance";
+  minAge?: number;
+  cooldownYears?: number;
+}
+
+export interface ActivityAvailability extends CharacterActivity {
+  available: boolean;
+  reason?: string;
+}
+
+export interface DeathCause {
+  id: string;
+  title: string;
+  text: string;
+  weight: number;
+  /** Reserved for an explicit authored fatal consequence, never natural sampling. */
+  choiceOnly?: boolean;
+  /** Eligibility for random attribution. Explicit authored fatal effects can override it. */
+  when?: Condition;
+}
+
+/** Authored gameplay, including fictional cause weights rather than measured rates. */
+export interface CharacterDefinition {
+  /** Optional seeded protagonist-name pool; omitted packs retain their original state. */
+  playerNames?: string[];
+  /** People must be introduced before courtship or marriage when enabled. */
+  requireIntroductions?: boolean;
+  skills: Record<string, SkillDefinition>;
+  jobs: JobDefinition[];
+  partners: PartnerDefinition[];
+  activities: CharacterActivity[];
+  childNames: string[];
+  deathCauses: DeathCause[];
+  deathCauseDescription: string;
+}
+
+export interface CharacterState {
+  name?: string;
+  knownPartnerIds?: string[];
+  skills: Record<string, number>;
+  jobId: string | null;
+  partnerId: string | null;
+  relationshipStatus: RelationshipStatus;
+  children: { id: string; name: string; birthAge: number; otherParentId: string }[];
+  lastActivityAge: number | null;
+  lastActivityAges: Record<string, number>;
+}
+
+export interface EconomyDefinition {
+  stat: string;
+  currency: { singular: string; plural: string; short: string };
+  unitsPerPoint: number;
+  description: string;
+  sourceIds?: string[];
+  assets: { id: string; title: string; description: string; value: number; maxOwned: number; yearlyIncome?: number }[];
+}
+
+export interface EconomyState {
+  cash: number;
+  debt: number;
+  assets: Record<string, number>;
+}
+
 export interface WorldPack {
   schemaVersion: 1;
   id: string;
@@ -130,6 +252,8 @@ export interface WorldPack {
   /** Separate annual background stories from decisions with a seeded global gap. */
   eventPacing?: { minChoiceGapYears: number; maxChoiceGapYears: number };
   mortality?: MortalityModel;
+  character?: CharacterDefinition;
+  economy?: EconomyDefinition;
   sources?: HistoricalSource[];
   events: LifeEvent[];
   endings: Ending[];
@@ -137,10 +261,10 @@ export interface WorldPack {
   defaultEnding: string;
 }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string };
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string };
 
 export interface JournalEntry {
-  type: "birth" | "year" | "event" | "choice" | "outcome" | "ending";
+  type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity";
   age: number;
   year: number;
   id: string;
@@ -166,6 +290,11 @@ export interface LifeState {
   lastEventAge: Record<string, number>;
   /** Only paced worlds use this; part of deterministic replay, never a wall clock. */
   nextChoiceAge?: number;
+  character?: CharacterState;
+  economy?: EconomyState;
+  deathCauseId?: string;
+  /** The accepted decision and outcome when they explicitly end life with an authored cause. */
+  deathCauseContext?: string;
   journal: JournalEntry[];
   commands: Command[];
 }
@@ -187,6 +316,8 @@ export interface LifeEngine {
   advance(state: LifeState): LifeState;
   choose(state: LifeState, choiceId: string): LifeState;
   getChoices(state: LifeState): readonly Choice[];
+  getActivities(state: LifeState): readonly ActivityAvailability[];
+  act(state: LifeState, activityId: string): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

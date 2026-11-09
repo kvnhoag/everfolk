@@ -3,9 +3,16 @@ import test from "node:test";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
 import { handleApi } from "../server/api.ts";
-import { MAX_CATALOG_BYTES, compileWorld, getBuiltinCatalog, getBuiltinWorld, validateCatalog } from "../server/content.ts";
+import { MAX_CATALOG_BYTES, compileWorld, getBuiltinCatalog, getBuiltinWorld, getLegacyWorld, validateCatalog } from "../server/content.ts";
 import type { ContentDatabase, D1Statement, StatementResult } from "../server/store.ts";
 import type { ApiEnvironment } from "../server/api.ts";
+import { createEngine } from "../src/index.ts";
+import namedCausesPack from "../worlds/alexandria-0.5.1.json" with { type: "json" };
+import originRangesPack from "../worlds/alexandria-0.6.0.json" with { type: "json" };
+import longerLivesPack from "../worlds/alexandria-0.6.1.json" with { type: "json" };
+import pooledPeoplePack from "../worlds/alexandria-0.7.0.json" with { type: "json" };
+import skillTreePack from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import { contentFingerprint } from "../src/random.ts";
 
 const OWNER = "owner@example.test";
 const ORIGIN = "https://game.example.test";
@@ -80,6 +87,22 @@ test("admin authorization requires both trusted identity headers and a configure
   assert.deepEqual(await (await handleApi(request("/api/session"), env)).json(), { authenticated: true, isAdmin: true });
 });
 
+test("explicit additional admins can edit while ordinary invited players remain viewers", async t => {
+  const { env } = setup(t);
+  const configured = { ...env, ADMIN_EMAILS: "  Invited-Admin@example.test ; second-admin@example.test\n" };
+  for (const email of [OWNER, "invited-admin@example.test", "SECOND-ADMIN@example.test"]) {
+    assert.deepEqual(await (await handleApi(request("/api/session", "GET", undefined, email), configured)).json(), { authenticated: true, isAdmin: true });
+    assert.equal((await handleApi(request("/api/admin/catalog", "GET", undefined, email), configured)).status, 200);
+  }
+  assert.equal((await handleApi(request("/api/admin/catalog", "PUT", getBuiltinCatalog(), "invited-admin@example.test"), configured)).status, 200);
+  for (const email of ["friend@example.test", "invited-admin@example.test.evil", "not-invited-admin@example.test"]) {
+    assert.equal((await handleApi(request("/api/admin/catalog", "GET", undefined, email), configured)).status, 403);
+  }
+  const missingIdentity = request("/api/admin/catalog", "GET", undefined, "invited-admin@example.test");
+  missingIdentity.headers.delete("oai-authenticated-user-id");
+  assert.equal((await handleApi(missingIdentity, configured)).status, 401);
+});
+
 test("cross-site, missing-origin and non-JSON mutations fail without changing the draft", async t => {
   const { env, call } = setup(t);
   const catalog = getBuiltinCatalog();
@@ -102,6 +125,62 @@ test("the initial public world uses the exact shipped pack and stable revision",
   assert.equal((await call("/api/worlds/unknown-world")).status, 404);
 });
 
+test("only an untouched factory draft receives new bundled content, and legacy revisions remain readable", async t => {
+  const { call, db } = setup(t);
+  const legacy = getLegacyWorld();
+  const baseline = getBuiltinCatalog(legacy.pack);
+  db.sqlite.prepare("INSERT INTO content_catalog (id, revision, draft_json) VALUES (1, 0, ?)").run(JSON.stringify(baseline.worlds));
+  const upgraded = await (await call("/api/admin/catalog")).json();
+  assert.equal(upgraded.worlds[0].pack.version, getBuiltinWorld().pack.version);
+  assert.deepEqual(await (await call(`/api/revisions/${legacy.revisionId}`)).json(), legacy);
+  baseline.worlds[0].pack.title = "An owner-authored title";
+  db.sqlite.prepare("UPDATE content_catalog SET draft_json = ? WHERE id = 1").run(JSON.stringify(baseline.worlds));
+  const preserved = await (await call("/api/admin/catalog")).json();
+  assert.equal(preserved.worlds[0].pack.title, "An owner-authored title");
+  assert.equal(preserved.worlds[0].pack.version, legacy.pack.version);
+});
+
+test("event visual metadata validates its references, scenes, motions and captions before persistence", async t => {
+  const { call, db } = setup(t);
+  for (const visuals of [
+    { "unknown-event": { scene: "rest", motion: "rest" } },
+    { "an-unwell-week": { scene: "not-an-asset", motion: "rest" } },
+    { "an-unwell-week": { scene: "rest", motion: "not-a-loop" } },
+    { "an-unwell-week": { scene: "rest", motion: "rest", caption: "x".repeat(2001) } },
+    { "an-unwell-week": { scene: "rest", motion: "rest", extra: true } },
+  ]) {
+    const draft = getBuiltinCatalog();
+    (draft.worlds[0] as unknown as { eventVisuals: unknown }).eventVisuals = visuals;
+    assert.equal((await call("/api/admin/catalog", "PUT", draft)).status, 422);
+  }
+  assert.equal((db.sqlite.prepare("SELECT count(*) AS count FROM content_catalog").get() as { count: number }).count, 0);
+});
+
+test("published visual edits are immutable sidecars and do not change simulation save fingerprints", async t => {
+  const { call } = setup(t);
+  const draft = getBuiltinCatalog();
+  draft.worlds[0].eventVisuals = {
+    "an-unwell-week": { scene: "rest", motion: "rest", caption: "Care and quiet in the household." },
+    "child-found-treasure": { scene: "childhood", motion: "play" },
+  };
+  draft.worlds[0].disabledEventIds = ["child-found-treasure"];
+  let saved = await (await call("/api/admin/catalog", "PUT", draft)).json();
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
+  const first = await (await call("/api/worlds/alexandria-sample")).json();
+  assert.equal(first.eventVisuals["an-unwell-week"].scene, "rest");
+  assert.equal(first.eventVisuals["child-found-treasure"], undefined, "a disabled event's sidecar does not leak into its compiled publication");
+  const fingerprint = createEngine(first.pack).fingerprint;
+  saved.worlds[0].eventVisuals["an-unwell-week"] = { scene: "history-city", motion: "still", caption: "An alternative authored context." };
+  saved = await (await call("/api/admin/catalog", "PUT", saved)).json();
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
+  const second = await (await call("/api/worlds/alexandria-sample")).json();
+  assert.notEqual(second.revisionId, first.revisionId);
+  assert.deepEqual(second.pack, first.pack);
+  assert.equal(createEngine(second.pack).fingerprint, fingerprint);
+  assert.deepEqual(await (await call(`/api/revisions/${first.revisionId}`)).json(), first);
+  assert.equal(second.eventVisuals["an-unwell-week"].scene, "history-city");
+});
+
 test("saving drafts is durable but cannot change the published game", async t => {
   const { call, env } = setup(t);
   const draft = getBuiltinCatalog();
@@ -114,6 +193,76 @@ test("saving drafts is durable but cannot change the published game", async t =>
   assert.equal(reread.worlds[0].pack.title, "A draft title");
   assert.equal((await (await call("/api/worlds/alexandria-sample")).json()).pack.title, getBuiltinWorld().pack.title);
   assert.equal((await call("/api/admin/catalog", "PUT", draft)).status, 409);
+});
+
+test("origin stat ranges survive draft persistence and publication and determine new life stats", async t => {
+  const { call } = setup(t);
+  const draft = getBuiltinCatalog();
+  const pack = draft.worlds[0].pack;
+  pack.stats.knowledge.initialRange = { min: 3, max: 4 };
+  pack.stats.bonds.initialRange = { min: 51, max: 52 };
+  pack.origins = [{ ...pack.origins[0], statRanges: { health: { min: 41, max: 43 }, wealth: { min: 10, max: 12 } }, effects: [] }];
+  const response = await call("/api/admin/catalog", "PUT", draft);
+  assert.equal(response.status, 200);
+  const saved = await response.json();
+  assert.deepEqual((await (await call("/api/admin/catalog")).json()).worlds[0].pack.origins, pack.origins);
+  assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
+  const published = await (await call("/api/worlds/alexandria-sample")).json();
+  assert.deepEqual(published.pack.origins, pack.origins);
+  assert.deepEqual(published.pack.stats, pack.stats);
+  const engine = createEngine(published.pack);
+  const births = Array.from({ length: 40 }, (_, index) => engine.start(`published-origin-ranges-${index}`));
+  for (const life of births) {
+    assert.equal(life.originId, pack.origins[0].id);
+    for (const [stat, min, max] of [["health", 41, 43], ["wealth", 10, 12], ["knowledge", 3, 4], ["bonds", 51, 52]] as const) {
+      assert.ok(Number.isInteger(life.stats[stat]) && life.stats[stat] >= min && life.stats[stat] <= max, `${stat} must follow its published origin override or world fallback`);
+    }
+    assert.deepEqual(engine.load(engine.save(life)), life);
+  }
+  assert.ok(new Set(births.map(life => JSON.stringify(life.stats))).size > 1);
+});
+
+test("invalid starting ranges are rejected before any admin draft write", async t => {
+  const { call } = setup(t);
+  const original = await (await call("/api/admin/catalog")).json();
+  for (const mutate of [
+    (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].pack.stats.health.initialRange = { min: 80, max: 70 }; },
+    (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].pack.origins[0].statRanges = { health: { min: 0, max: 101 } }; },
+    (draft: ReturnType<typeof getBuiltinCatalog>) => { draft.worlds[0].pack.origins[0].statRanges = { missing: { min: 0, max: 1 } }; },
+  ]) {
+    const draft = getBuiltinCatalog();
+    mutate(draft);
+    assert.equal((await call("/api/admin/catalog", "PUT", draft)).status, 422);
+    assert.deepEqual(await (await call("/api/admin/catalog")).json(), original);
+  }
+});
+
+test("the pre-randomization 0.5.1 factory revision remains retrievable with its original replay", async t => {
+  const { call } = setup(t);
+  const revisionId = `pack-${contentFingerprint(namedCausesPack)}`;
+  const response = await call(`/api/revisions/${revisionId}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, namedCausesPack);
+  const original = createEngine(namedCausesPack);
+  const restored = createEngine(archived.pack);
+  const life = original.choose(original.start("pinned-0.5.1-api"), "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
+});
+
+test("the 0.6.0 factory revision retains its earlier mortality curve for pinned lives", async t => {
+  const { call } = setup(t);
+  const revisionId = `pack-${contentFingerprint(originRangesPack)}`;
+  const response = await call(`/api/revisions/${revisionId}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, originRangesPack);
+  const original = createEngine(originRangesPack);
+  const restored = createEngine(archived.pack);
+  const life = original.choose(original.start("pinned-0.6.0-api"), "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
 });
 
 test("publication is explicit, immutable and safe for existing pinned lives", async t => {
@@ -140,6 +289,30 @@ test("publication is explicit, immutable and safe for existing pinned lives", as
   assert.deepEqual(await (await call(`/api/revisions/${getBuiltinWorld().revisionId}`)).json(), getBuiltinWorld());
 });
 
+test("the 0.6.1 world remains available without retroactive names or introductions", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(longerLivesPack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, longerLivesPack);
+  const original = createEngine(longerLivesPack);
+  const life = original.choose(original.start("pre-discovery-api"), "family-care");
+  assert.deepEqual(createEngine(archived.pack).load(original.save(life)), life);
+});
+
+test("the pinned 0.7.0 world retains its original skill definitions and exact continuation", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(pooledPeoplePack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, pooledPeoplePack);
+  const original = createEngine(pooledPeoplePack), restored = createEngine(archived.pack);
+  assert.equal(restored.world.character!.skills.pottery.prerequisites, undefined);
+  const life = original.choose(original.start("pinned-0.7.0-api"), "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
+});
+
 test("a draft save racing publication cannot publish a stale snapshot or orphan a revision", async t => {
   const { db, call } = setup(t);
   const saved = await (await call("/api/admin/catalog", "PUT", getBuiltinCatalog())).json();
@@ -147,6 +320,20 @@ test("a draft save racing publication cannot publish a stale snapshot or orphan 
   assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 409);
   assert.equal(db.sqlite.prepare("SELECT COUNT(*) AS count FROM content_publications").get()!.count, 0);
   assert.equal(db.sqlite.prepare("SELECT COUNT(*) AS count FROM content_world_revisions").get()!.count, 1, "only the preexisting builtin revision remains");
+});
+
+test("the pinned 0.8.0 world retains its skill tree and abstract Resources without a money ledger", async t => {
+  const { call } = setup(t);
+  const response = await call(`/api/revisions/pack-${contentFingerprint(skillTreePack)}`);
+  assert.equal(response.status, 200);
+  const archived = await response.json();
+  assert.deepEqual(archived.pack, skillTreePack);
+  const original = createEngine(skillTreePack), restored = createEngine(archived.pack);
+  assert.equal(restored.world.economy, undefined);
+  assert.deepEqual(restored.world.character!.skills.sculpture.prerequisites, { carving: 20, pottery: 10 });
+  const life = original.choose(original.start("pinned-0.8.0-api"), "family-care");
+  assert.deepEqual(restored.load(original.save(life)), life);
+  assert.deepEqual(restored.advance(life), original.advance(life));
 });
 
 test("disabled routes and events affect only the next published pack", async t => {

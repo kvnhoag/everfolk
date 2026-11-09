@@ -2,7 +2,7 @@ import { MAX_CATALOG_BYTES, validateCatalog } from "./content.ts";
 import type { ContentDatabase } from "./store.ts";
 import { ContentConflict, publishDraft, readDraft, readPublished, readPublishedWorld, readRevision, saveDraft } from "./store.ts";
 
-export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string }
+export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string }
 
 class HttpError extends Error {
   status: number;
@@ -17,14 +17,15 @@ function identity(request: Request, env: ContentEnvironment): { authenticated: b
   const userId = request.headers.get("oai-authenticated-user-id");
   const email = request.headers.get("oai-authenticated-user-email");
   const authenticated = Boolean(userId && email);
-  const owner = env.ADMIN_EMAIL?.trim().toLowerCase();
-  return { authenticated, isAdmin: Boolean(authenticated && owner && email?.trim().toLowerCase() === owner) };
+  const admins = [env.ADMIN_EMAIL ?? "", ...(env.ADMIN_EMAILS ?? "").split(/[,;\n]/)]
+    .map(value => value.trim().toLowerCase()).filter(Boolean);
+  return { authenticated, isAdmin: Boolean(authenticated && admins.includes(email!.trim().toLowerCase())) };
 }
 
 function requireAdmin(request: Request, env: ContentEnvironment): void {
   const user = identity(request, env);
   if (!user.authenticated) throw new HttpError(401, "Sign in to manage this game.");
-  if (!user.isAdmin) throw new HttpError(403, "Only the game owner can manage content.");
+  if (!user.isAdmin) throw new HttpError(403, "Content editing is restricted to game admins.");
 }
 
 function requireSameOrigin(request: Request): void {

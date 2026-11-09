@@ -1,0 +1,40 @@
+.birth-stat-roll{margin:24px 0;padding:23px;border:1px solid #d8d8c8;border-radius:5px;background:#ebece0;text-align:left;color:#405443;position:relative;isolation:isolate;overflow:hidden}
+.birth-stat-roll::before{content:'';position:absolute;inset:5px;border:1px solid #f7f5eb;border-radius:2px;pointer-events:none;z-index:-1}
+.birth-roll-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+.birth-roll-eyebrow{display:block;font-size:8px;letter-spacing:1.6px;font-weight:600;color:#85907a}
+.birth-roll-heading h3{font-family:var(--serif,Georgia,serif);font-size:29px;font-weight:400;line-height:1.08;margin:7px 0 0;color:#405443}
+.birth-roll-seal{display:grid;place-items:center;flex-shrink:0;width:37px;height:39px;background:#d6dfca;border:1px solid #c7d1b9;clip-path:polygon(8% 0,91% 3%,100% 91%,8% 100%,0 15%);font-size:21px;color:#788b64;transform:rotate(6deg)}
+.birth-roll-origin{padding:12px 14px;background:#f6f3e9;border:1px solid #dfdfd0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 13px;margin-bottom:15px;min-height:44px}
+.birth-roll-origin>span{font-size:7px;font-weight:600;letter-spacing:1.4px;color:#8c927f}
+.birth-roll-origin>strong{font-size:12px;font-weight:500;color:#8b927e}
+.birth-roll-origin.is-revealed>strong{color:#4c644b}
+.birth-roll-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.birth-roll-card{--roll-accent:#76866a;position:relative;min-width:0;padding:14px 10px 10px;background:#f7f4eb;border:1px solid #d7d8c8;box-shadow:0 3px 0 #d8dac9;transform-origin:50% 90%;border-radius:2px;overflow:hidden}
+.birth-roll-health{--roll-accent:#a47158}.birth-roll-wealth{--roll-accent:#aa9565}.birth-roll-bonds{--roll-accent:#8a9380}
+.birth-roll-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--roll-accent);opacity:.7}
+.birth-roll-stat-name{display:block;font-size:9px;font-weight:500;line-height:1.35;color:#72816b;min-height:13px}
+.birth-roll-number{display:block;font-family:var(--serif,Georgia,serif);font-weight:400;font-size:42px;line-height:1.15;min-height:49px;margin:6px 0 2px;color:var(--roll-accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.birth-roll-number>small{font:400 11px/1.2 var(--sans,Arial,sans-serif);margin-left:3px;color:#8b8c72}
+.birth-roll-range{display:block;font-size:9px;line-height:1.4;color:#929784;font-variant-numeric:tabular-nums}
+.birth-roll-card-state{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:7px;letter-spacing:.9px;text-transform:uppercase;color:#9aa18d;border-top:1px solid #e1e2d4;margin-top:10px;padding-top:8px}
+.birth-roll-card-state i{height:4px;width:4px;border-radius:50%;background:#b8c0ab}
+.birth-roll-card.is-rolling{animation:birth-card-shuffle .32s ease-in-out infinite alternate}
+.birth-roll-card.is-rolling .birth-roll-number{animation:birth-number-tick .12s steps(2,end) infinite}
+.birth-roll-card.is-rolling .birth-roll-card-state i{background:#a58656;animation:birth-dot-pulse .7s ease-in-out infinite alternate}
+.birth-roll-card.is-settled{animation:birth-card-set .32s ease-out both}
+.birth-roll-card.is-settled .birth-roll-card-state{color:#728568}.birth-roll-card.is-settled .birth-roll-card-state i{background:#758b66}
+.birth-stat-roll.is-complete .birth-roll-card{animation:none}
+.birth-stat-roll.is-paused *{animation-play-state:paused!important}
+.birth-roll-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:17px;min-height:34px}
+.birth-roll-footer>p{font-size:10px;line-height:1.6;color:#859079;margin:0}
+.birth-roll-button{display:inline-flex;align-items:center;justify-content:center;gap:17px;background:#4d664e;border:1px solid #4d664e;border-radius:3px;padding:11px 14px;color:#f8f5ec;font-size:11px;font-weight:500}
+.birth-roll-button:hover{background:#3f5840;color:#fff}.birth-roll-button>span{font-size:14px}
+.birth-roll-skip{background:transparent;color:#7b846e;border-bottom:1px solid #a9b09b;padding:4px 0;font-size:10px}
+.birth-roll-skip:hover{color:#a45036;border-color:#a45036}
+@keyframes birth-card-shuffle{from{transform:translateY(-1px) rotate(-.6deg)}to{transform:translateY(1px) rotate(.6deg)}}
+@keyframes birth-number-tick{from{transform:translateY(-1px);opacity:.7}to{transform:translateY(1px);opacity:1}}
+@keyframes birth-dot-pulse{to{opacity:.35}}
+@keyframes birth-card-set{0%{transform:translateY(-4px) rotate(-1deg)}70%{transform:translateY(1px) rotate(.3deg)}100%{transform:translateY(0) rotate(0)}}
+@media(max-width:900px){.birth-roll-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.birth-roll-card{padding:13px 14px 10px}.birth-roll-number{font-size:39px}.birth-roll-stat-name{font-size:10px}.birth-roll-range{font-size:10px}}
+@media(max-width:480px){.birth-stat-roll{padding:17px;margin:20px 0}.birth-roll-heading h3{font-size:26px}.birth-roll-heading{gap:10px}.birth-roll-origin{padding:11px}.birth-roll-origin>strong{font-size:11px}.birth-roll-card{padding:12px}.birth-roll-footer{align-items:flex-start}.birth-roll-button{width:100%}}
+@media(prefers-reduced-motion:reduce){.birth-stat-roll *,.birth-stat-roll *::before{animation:none!important;transition:none!important}}

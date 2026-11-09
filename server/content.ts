@@ -2,6 +2,16 @@ import type { WorldPack } from "../src/types.ts";
 import { validateWorld } from "../src/validate.ts";
 import { contentFingerprint } from "../src/random.ts";
 import alexandria from "../worlds/alexandria-sample.json" with { type: "json" };
+import legacyAlexandria from "../worlds/alexandria-0.3.0.json" with { type: "json" };
+import previousAlexandria from "../worlds/alexandria-0.4.1.json" with { type: "json" };
+import specialistAlexandria from "../worlds/alexandria-0.5.0.json" with { type: "json" };
+import namedCausesAlexandria from "../worlds/alexandria-0.5.1.json" with { type: "json" };
+import originRangesAlexandria from "../worlds/alexandria-0.6.0.json" with { type: "json" };
+import longerLivesAlexandria from "../worlds/alexandria-0.6.1.json" with { type: "json" };
+import peopleAlexandria from "../worlds/alexandria-0.7.0.json" with { type: "json" };
+import skillTreeAlexandria from "../worlds/alexandria-0.8.0.json" with { type: "json" };
+import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
+import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
 
 export interface WorldRoute {
   id: string;
@@ -17,6 +27,8 @@ export interface ManagedWorld {
   pack: WorldPack;
   routes: WorldRoute[];
   disabledEventIds: string[];
+  /** Presentation metadata is kept outside replayed simulation packs. */
+  eventVisuals?: EventVisuals;
 }
 
 export interface AdminCatalog {
@@ -31,6 +43,7 @@ export interface PublishedWorld {
   revisionId: string;
   pack: WorldPack;
   routes: WorldRoute[];
+  eventVisuals?: EventVisuals;
 }
 
 export interface WorldSummary {
@@ -113,7 +126,7 @@ export function validateCatalog(input: unknown): asserts input is AdminCatalog {
   let playable = false;
   for (let i = 0; i < worlds.length; i++) {
     const path = `worlds[${i}]`;
-    const world = record(worlds[i], path, ["id", "enabled", "pack", "routes", "disabledEventIds"]);
+    const world = record(worlds[i], path, ["id", "enabled", "pack", "routes", "disabledEventIds", "eventVisuals"], ["id", "enabled", "pack", "routes", "disabledEventIds"]);
     const worldId = id(world.id, `${path}.id`);
     if (worldIds.has(worldId)) throw new Error(`${path}.id: duplicate world ID.`);
     worldIds.add(worldId);
@@ -122,6 +135,16 @@ export function validateCatalog(input: unknown): asserts input is AdminCatalog {
     validateWorld(world.pack);
     if (world.pack.id !== worldId) throw new Error(`${path}: the world ID must match the pack ID.`);
     const eventIds = new Set(world.pack.events.map(event => event.id));
+    if (Object.hasOwn(world, "eventVisuals")) {
+      const assignments = record(world.eventVisuals, `${path}.eventVisuals`, [...eventIds], []);
+      for (const [eventId, assignment] of Object.entries(assignments)) {
+        const visualPath = `${path}.eventVisuals.${eventId}`;
+        const visual = record(assignment, visualPath, ["scene", "motion", "caption"], ["scene", "motion"]);
+        if (typeof visual.scene !== "string" || !SCENE_IDS.includes(visual.scene as SceneId)) throw new Error(`${visualPath}.scene: choose an available scene.`);
+        if (typeof visual.motion !== "string" || !MOTION_IDS.includes(visual.motion as MotionId)) throw new Error(`${visualPath}.motion: choose an available animation.`);
+        if (Object.hasOwn(visual, "caption")) text(visual.caption, `${visualPath}.caption`, 2_000);
+      }
+    }
     const disabledIds = list(world.disabledEventIds, `${path}.disabledEventIds`, 5_000);
     const seenDisabled = new Set<string>();
     for (const value of disabledIds) {
@@ -147,12 +170,8 @@ export function validateCatalog(input: unknown): asserts input is AdminCatalog {
       if (!Object.hasOwn(world.pack.flags, routeFlag)) throw new Error(`${routePath}: flag ${routeFlag} is not declared by the pack.`);
     }
     // Compile after metadata validation: disabled routes/events must leave a valid pack.
-    const compiled = compileWorld(worlds[i] as ManagedWorld);
+    const published = compilePublishedWorld(worlds[i] as ManagedWorld);
     if (world.enabled) {
-      const published: PublishedWorld = {
-        id: worldId, revisionId: `pack-${contentFingerprint({ pack: compiled, routes: world.routes })}`,
-        pack: compiled, routes: world.routes as WorldRoute[],
-      };
       boundedJson(published, `${path}.published`);
       publicationWorlds.push(published);
     }
@@ -190,10 +209,21 @@ export function compileWorld(world: ManagedWorld): WorldPack {
   return pack;
 }
 
-export function getBuiltinCatalog(): AdminCatalog {
-  validateWorld(alexandria);
+/** A visual edit creates a new presentation revision without changing save compatibility. */
+export function compilePublishedWorld(world: ManagedWorld): PublishedWorld {
+  const pack = compileWorld(world);
+  const routes = structuredClone(world.routes);
+  const enabledEvents = new Set(pack.events.map(event => event.id));
+  const presentation = world.eventVisuals === undefined ? {} : {
+    eventVisuals: structuredClone(Object.fromEntries(Object.entries(world.eventVisuals).filter(([eventId]) => enabledEvents.has(eventId)))),
+  };
+  return { id: world.id, revisionId: `pack-${contentFingerprint({ pack, routes, ...presentation })}`, pack, routes, ...presentation };
+}
+
+export function getBuiltinCatalog(pack: unknown = alexandria): AdminCatalog {
+  validateWorld(pack);
   return { revision: 0, publishedRevision: 0, publishedAt: null, worlds: [{
-    id: alexandria.id, enabled: true, pack: structuredClone(alexandria), disabledEventIds: [], routes: [
+    id: pack.id, enabled: true, pack: structuredClone(pack), disabledEventIds: [], routes: [
       { id: "home", title: "Life in the city", description: "Build a life close to home and the people who know you.", flag: "stayed", enabled: true },
       { id: "sea", title: "Life at sea", description: "Work aboard a merchant ship and discover other shores.", flag: "sailed", enabled: true },
       { id: "study", title: "The written word", description: "Learn letters and join a copyist's workshop.", flag: "studied", enabled: true },
@@ -204,6 +234,31 @@ export function getBuiltinCatalog(): AdminCatalog {
 export function getBuiltinWorld(): PublishedWorld {
   const world = getBuiltinCatalog().worlds[0];
   return { id: world.id, revisionId: `pack-${contentFingerprint(world.pack)}`, pack: world.pack, routes: world.routes };
+}
+
+/** The original full-life pack remains available for saves made before 0.4. */
+export function getLegacyWorld(): PublishedWorld {
+  const world = getBuiltinCatalog(legacyAlexandria).worlds[0];
+  return { id: world.id, revisionId: `pack-${contentFingerprint(world.pack)}`, pack: world.pack, routes: world.routes };
+}
+
+export function getPreviousWorld(): PublishedWorld {
+  const world = getBuiltinCatalog(previousAlexandria).worlds[0];
+  return { id: world.id, revisionId: `pack-${contentFingerprint(world.pack)}`, pack: world.pack, routes: world.routes };
+}
+
+/** Bundled factory revisions are retained even if they were never saved in D1. */
+export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria]) {
+    const world = getBuiltinCatalog(pack).worlds[0];
+    const revisionId = `pack-${contentFingerprint(world.pack)}`;
+    if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
+  }
+}
+
+/** Upgrade only the untouched factory draft; edited and published content stays exact. */
+export function isLegacyFactoryDraft(worlds: unknown): boolean {
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

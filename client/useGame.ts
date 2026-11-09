@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../src/types.ts";
-import { advanceToTurningPoint, archiveLife, createSampleLife, hasLifeBegun, persistBirthPresentation, persistLife, readArchivedLives, readSavedLife, sampleEngine } from "./session.ts";
+import { advanceToTurningPoint, archiveLife, createSampleLife, engineForLife, hasBirthStatsBeenRevealed, hasLifeBegun, loadAnyLife, persistBirthPresentation, persistBirthStatsReveal, persistLife, readArchivedLives, readSavedLife } from "./session.ts";
 import type { ArchivedLife } from "./session.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
@@ -12,15 +12,19 @@ function message(error: unknown): string {
   return error instanceof Error ? error.message : "Something interrupted this action. Please try again.";
 }
 
-function initialSession(startFresh = false): { life: LifeState; notice: string; hasBegun: boolean } {
+function initialSession(startFresh = false): { life: LifeState; notice: string; hasBegun: boolean; hasRevealedStats: boolean } {
   try {
     if (!startFresh && typeof window !== "undefined") {
       const restored = readSavedLife(window.localStorage);
-      if (restored) return { life: restored, notice: "Your life has been restored.", hasBegun: hasLifeBegun(window.localStorage, restored) };
+      if (restored) return {
+        life: restored, notice: "Your life has been restored.",
+        hasBegun: hasLifeBegun(window.localStorage, restored),
+        hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
+      };
     }
-    return { life: createSampleLife(), notice: "", hasBegun: false };
+    return { life: createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
   } catch (error) {
-    return { life: createSampleLife(), notice: `${message(error)} A fresh sample is ready.`, hasBegun: false };
+    return { life: createSampleLife(), notice: `${message(error)} A fresh sample is ready.`, hasBegun: false, hasRevealedStats: false };
   }
 }
 
@@ -30,6 +34,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
   const [hasBegun, setHasBegun] = useState(initial.hasBegun);
+  const [hasRevealedStats, setHasRevealedStats] = useState(initial.hasRevealedStats);
   const [notice, setNotice] = useState(initial.notice);
   // Playback is player intent; decisions, panels and hidden tabs only suspend it.
   const [isPlaying, setPlaybackIntent] = useState(initial.hasBegun && initial.life.phase !== "ended");
@@ -63,7 +68,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
     if (!hasBegun || lifeRef.current !== life) return;
     try {
       const current = life;
-      const next = sampleEngine.choose(current, choiceId);
+      const next = engineForLife(current).choose(current, choiceId);
       const outcome = next.journal.slice(current.journal.length).find(entry => entry.type === "outcome");
       commit(next);
       setNotice(outcome?.text ?? "Your choice has been recorded.");
@@ -72,10 +77,23 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
     }
   }, [commit, hasBegun, life]);
 
+  const act = useCallback((activityId: string) => {
+    if (!hasBegun || lifeRef.current !== life) return;
+    try {
+      const current = life;
+      const next = engineForLife(current).act(current, activityId);
+      const outcome = next.journal.slice(current.journal.length).find(entry => entry.type === "outcome");
+      commit(next);
+      setNotice(outcome?.text ?? "Your activity has been recorded in your chronicle.");
+    } catch (error) {
+      setNotice(message(error));
+    }
+  }, [commit, hasBegun, life]);
+
   const advance = useCallback(() => {
     if (!hasBegun || lifeRef.current !== life) return;
     try {
-      commit(sampleEngine.advance(life));
+      commit(engineForLife(life).advance(life));
       setNotice("");
     } catch (error) {
       setNotice(message(error));
@@ -91,25 +109,37 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
     } catch (error) { setNotice(message(error)); }
   }, [commit, hasBegun, life]);
 
+  const revealStats = useCallback(() => {
+    if (lifeRef.current !== life) return;
+    setHasRevealedStats(true);
+  }, [life]);
+
   const beginLife = useCallback(() => {
+    if (!hasRevealedStats || lifeRef.current !== life) return;
     setHasBegun(true);
     setPlaying(true);
     setNotice("");
-  }, [setPlaying]);
+  }, [hasRevealedStats, life, setPlaying]);
 
   const restart = useCallback(() => {
     setPlaying(false);
     setHasBegun(false);
+    setHasRevealedStats(false);
     commit(createSampleLife());
     setNotice("");
   }, [commit, setPlaying]);
 
   const importLife = useCallback((json: string) => {
     try {
-      const restored = sampleEngine.load(json);
+      const restored = loadAnyLife(json);
       const begun = restored.commands.length > 0 || restored.phase === "ended";
+      let revealed = begun;
+      try {
+        if (!revealed && typeof window !== "undefined") revealed = hasBirthStatsBeenRevealed(window.localStorage, restored);
+      } catch { /* Keep the stat reveal available when browser storage is blocked. */ }
       setPlaying(begun && restored.phase !== "ended");
       setHasBegun(begun);
+      setHasRevealedStats(revealed);
       commit(restored);
       setNotice("The imported life is ready.");
       return true;
@@ -131,6 +161,14 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
       setNotice(message(error));
     }
   }, [hasBegun, life]);
+
+  useEffect(() => {
+    try { persistBirthStatsReveal(window.localStorage, life, hasRevealedStats); }
+    catch (error) {
+      setSaveStatus("unavailable");
+      setNotice(message(error));
+    }
+  }, [hasRevealedStats, life]);
 
   useEffect(() => {
     if (life.phase !== "ended") return;
@@ -169,9 +207,12 @@ export function useGame({ isOverlayOpen = false, startFresh = false }: { isOverl
   return {
     life,
     choose,
+    act,
     advance,
     restart,
     hasBegun,
+    hasRevealedStats,
+    revealStats,
     beginLife,
     nextTurningPoint,
     importLife,

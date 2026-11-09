@@ -122,7 +122,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy"], worldFields);
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -182,17 +182,59 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const stats = object(world.stats, "world.stats");
   const statIds = new Set(Object.keys(stats));
   if (statIds.size < 1 || statIds.size > 128) fail("world.stats", "expected 1..128 stat definitions");
+  const statRange = (value: unknown, path: string, definition: DataObject): void => {
+    const range = object(value, path, ["min", "max"]);
+    const min = integer(range.min, `${path}.min`, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+    const max = integer(range.max, `${path}.max`, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+    if (min > max) fail(path, "minimum must not exceed maximum");
+    if (min < (definition.min as number) || max > (definition.max as number)) {
+      fail(path, "must be within stat bounds");
+    }
+  };
   for (const [key, value] of Object.entries(stats)) {
     id(key, `world.stats.${key}`);
     const path = `world.stats.${key}`;
-    const definition = object(value, path, ["label", "min", "max", "initial"]);
+    const definition = object(value, path, ["label", "min", "max", "initial", "initialRange"], ["label", "min", "max", "initial"]);
     string(definition.label, `${path}.label`, 300);
     const min = number(definition.min, `${path}.min`);
     const max = number(definition.max, `${path}.max`);
     const initial = number(definition.initial, `${path}.initial`);
     if (min >= max) fail(path, "min must be less than max");
     if (initial < min || initial > max) fail(`${path}.initial`, "must be within stat bounds");
+    if (Object.hasOwn(definition, "initialRange")) statRange(definition.initialRange, `${path}.initialRange`, definition);
   }
+  const economy = Object.hasOwn(world, "economy") ? object(world.economy, "world.economy",
+    ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
+  const moneyLimit = 1_000_000_000_000;
+  const assets = economy ? array(economy.assets, "world.economy.assets", 0, 128) : [];
+  const assetIds = unique(assets, "world.economy.assets");
+  if (economy) {
+    reference(economy.stat, "world.economy.stat", statIds, "stat");
+    const scale = integer(economy.unitsPerPoint, "world.economy.unitsPerPoint", 1, 1_000_000);
+    string(economy.description, "world.economy.description");
+    const currency = object(economy.currency, "world.economy.currency", ["singular", "plural", "short"]);
+    for (const field of ["singular", "plural", "short"]) string(currency[field], `world.economy.currency.${field}`, 100);
+    if (Object.hasOwn(economy, "sourceIds")) sourceReferences(economy.sourceIds, "world.economy.sourceIds");
+    const definition = stats[economy.stat as string] as DataObject;
+    for (const field of ["min", "max", "initial"]) {
+      const value = (definition[field] as number) * scale;
+      if (!Number.isSafeInteger(value) || value < 0 || value > moneyLimit) fail(`world.stats.${economy.stat}.${field}`, "economy stat must scale to a whole, nonnegative currency amount within 1000000000000");
+    }
+    let maximumAssetValue = 0, maximumAssetIncome = 0;
+    assets.forEach((entry, i) => {
+      const path = `world.economy.assets[${i}]`;
+      const asset = object(entry, path, ["id", "title", "description", "value", "maxOwned", "yearlyIncome"], ["id", "title", "description", "value", "maxOwned"]);
+      string(asset.title, `${path}.title`, 300);
+      string(asset.description, `${path}.description`);
+      const value = integer(asset.value, `${path}.value`, 0, 1_000_000_000);
+      const maxOwned = integer(asset.maxOwned, `${path}.maxOwned`, 1, 1_000_000);
+      const income = Object.hasOwn(asset, "yearlyIncome") ? integer(asset.yearlyIncome, `${path}.yearlyIncome`, 0, 1_000_000_000) : 0;
+      maximumAssetValue += value * maxOwned;
+      maximumAssetIncome += income * maxOwned;
+    });
+    if (maximumAssetValue > moneyLimit || maximumAssetIncome > moneyLimit) fail("world.economy.assets", "maximum combined asset value and annual income must each stay within 1000000000000");
+  }
+  const requireEconomy = (path: string): void => { if (!economy) fail(path, "requires an economy definition"); };
   const flags = object(world.flags, "world.flags");
   const flagIds = new Set(Object.keys(flags));
   if (flagIds.size > 512) fail("world.flags", "expected at most 512 flags");
@@ -211,10 +253,82 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const endingIds = unique(endings, "world.endings");
   reference(world.defaultEnding, "world.defaultEnding", endingIds, "ending");
 
+  const character = Object.hasOwn(world, "character") ? object(world.character, "world.character",
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions"],
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription"]) : undefined;
+  const skills = character ? object(character.skills, "world.character.skills") : {};
+  const skillIds = new Set(Object.keys(skills));
+  if (character && (skillIds.size < 1 || skillIds.size > 128)) fail("world.character.skills", "expected 1..128 skills");
+  for (const [key, entry] of Object.entries(skills)) {
+    const path = `world.character.skills.${key}`;
+    id(key, path);
+    const definition = object(entry, path,
+      ["label", "min", "max", "initial", "description", "branch", "tier", "prerequisites", "trainingActivity"],
+      ["label", "min", "max", "initial"]);
+    string(definition.label, `${path}.label`, 300);
+    const min = number(definition.min, `${path}.min`);
+    const max = number(definition.max, `${path}.max`);
+    const initial = number(definition.initial, `${path}.initial`);
+    if (min >= max || initial < min || initial > max) fail(path, "expected increasing bounds containing initial skill");
+    if (Object.hasOwn(definition, "description")) string(definition.description, `${path}.description`, 1_000);
+    if (Object.hasOwn(definition, "branch")) string(definition.branch, `${path}.branch`, 100);
+    if (Object.hasOwn(definition, "tier")) integer(definition.tier, `${path}.tier`, 0, 8);
+    if (Object.hasOwn(definition, "prerequisites")) object(definition.prerequisites, `${path}.prerequisites`);
+    if (Object.hasOwn(definition, "trainingActivity")) id(definition.trainingActivity, `${path}.trainingActivity`);
+  }
+  for (const [key, entry] of Object.entries(skills)) {
+    const definition = entry as DataObject;
+    for (const [prerequisite, value] of Object.entries((definition.prerequisites ?? {}) as DataObject)) {
+      const path = `world.character.skills.${key}.prerequisites.${prerequisite}`;
+      reference(prerequisite, path, skillIds, "skill");
+      if (prerequisite === key) fail(path, "a skill cannot require itself");
+      const threshold = number(value, path);
+      const requiredSkill = skills[prerequisite] as DataObject;
+      if (threshold <= (requiredSkill.min as number) || threshold > (requiredSkill.max as number)) {
+        fail(path, "skill prerequisite must be above its minimum and at most its maximum");
+      }
+    }
+  }
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  const visitSkill = (key: string): void => {
+    if (visited.has(key)) return;
+    if (visiting.has(key)) fail(`world.character.skills.${key}.prerequisites`, "skill prerequisites contain a cycle");
+    visiting.add(key);
+    for (const prerequisite of Object.keys(((skills[key] as DataObject).prerequisites ?? {}) as DataObject)) visitSkill(prerequisite);
+    visiting.delete(key);
+    visited.add(key);
+  };
+  skillIds.forEach(visitSkill);
+  const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
+  const jobIds = unique(jobs, "world.character.jobs");
+  const partners = character ? array(character.partners, "world.character.partners", 0, 128) : [];
+  const partnerIds = unique(partners, "world.character.partners");
+  const deathCauses = character ? array(character.deathCauses, "world.character.deathCauses", 1, 256) : [];
+  const deathCauseIds = unique(deathCauses, "world.character.deathCauses");
+  const deathEndingIds = new Set(endings.filter(entry => (entry as DataObject).kind === "death").map(entry => (entry as DataObject).id as string));
+  const requireCharacter = (path: string): void => {
+    if (!character) fail(path, "requires a character definition");
+  };
+
   const condition = (value: unknown, path: string, depth = 0): void => {
     if (depth > 32) fail(path, "condition nesting exceeds 32 levels");
     const rule = object(value, path, undefined, ["type"]);
     switch (rule.type) {
+      case "cash":
+      case "debt":
+        object(rule, path, ["type", "op", "value"]);
+        requireEconomy(path);
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        integer(rule.value, `${path}.value`, 0, moneyLimit);
+        break;
+      case "asset":
+        object(rule, path, ["type", "asset", "op", "value"]);
+        requireEconomy(path);
+        reference(rule.asset, `${path}.asset`, assetIds, "asset");
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        integer(rule.value, `${path}.value`, 0, 1_000_000);
+        break;
       case "stat":
         object(rule, path, ["type", "stat", "op", "value"]);
         reference(rule.stat, `${path}.stat`, statIds, "stat");
@@ -237,6 +351,34 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         object(rule, path, ["type", "origin"]);
         reference(rule.origin, `${path}.origin`, originIds, "origin");
         break;
+      case "skill":
+        object(rule, path, ["type", "skill", "op", "value"]);
+        reference(rule.skill, `${path}.skill`, skillIds, "skill");
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        number(rule.value, `${path}.value`);
+        break;
+      case "job":
+        object(rule, path, ["type", "job"]);
+        requireCharacter(path);
+        if (rule.job !== null) reference(rule.job, `${path}.job`, jobIds, "job");
+        break;
+      case "relationship":
+        object(rule, path, ["type", "status", "partner"], ["type", "status"]);
+        requireCharacter(path);
+        if (!["single", "courting", "married", "divorced"].includes(rule.status as string)) fail(`${path}.status`, "unknown relationship status");
+        if (Object.hasOwn(rule, "partner")) reference(rule.partner, `${path}.partner`, partnerIds, "partner");
+        break;
+      case "known-partner":
+        object(rule, path, ["type", "partner"]);
+        requireCharacter(path);
+        reference(rule.partner, `${path}.partner`, partnerIds, "partner");
+        break;
+      case "children":
+        object(rule, path, ["type", "op", "value"]);
+        requireCharacter(path);
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        integer(rule.value, `${path}.value`, 0, 8);
+        break;
       case "all":
       case "any":
         object(rule, path, ["type", "conditions"]);
@@ -255,19 +397,65 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const location = `${path}[${i}]`;
       const effect = object(entry, location, undefined, ["type"]);
       switch (effect.type) {
+        case "cash":
+        case "debt":
+          object(effect, location, ["type", "delta"]);
+          requireEconomy(location);
+          integer(effect.delta, `${location}.delta`, -1_000_000_000, 1_000_000_000);
+          break;
+        case "asset":
+          object(effect, location, ["type", "asset", "delta"]);
+          requireEconomy(location);
+          reference(effect.asset, `${location}.asset`, assetIds, "asset");
+          integer(effect.delta, `${location}.delta`, -1_000_000, 1_000_000);
+          break;
         case "stat":
           object(effect, location, ["type", "stat", "delta"]);
           reference(effect.stat, `${location}.stat`, statIds, "stat");
           number(effect.delta, `${location}.delta`);
+          if (economy && effect.stat === economy.stat) {
+            const change = (effect.delta as number) * (economy.unitsPerPoint as number);
+            if (!Number.isSafeInteger(change) || Math.abs(change) > 1_000_000_000) fail(`${location}.delta`, "economy stat changes must scale to whole currency amounts within 1000000000");
+          }
           break;
         case "flag":
           object(effect, location, ["type", "flag", "value"]);
           reference(effect.flag, `${location}.flag`, flagIds, "flag");
           bool(effect.value, `${location}.value`);
           break;
+        case "skill":
+          object(effect, location, ["type", "skill", "delta"]);
+          reference(effect.skill, `${location}.skill`, skillIds, "skill");
+          number(effect.delta, `${location}.delta`);
+          break;
+        case "job":
+          object(effect, location, ["type", "job"]);
+          requireCharacter(location);
+          if (effect.job !== null) reference(effect.job, `${location}.job`, jobIds, "job");
+          break;
+        case "relationship":
+          object(effect, location, ["type", "partner", "status"]);
+          reference(effect.partner, `${location}.partner`, partnerIds, "partner");
+          if (effect.status !== "courting" && effect.status !== "married") fail(`${location}.status`, "expected courting or married");
+          break;
+        case "introduce":
+          object(effect, location, ["type", "partner"]);
+          requireCharacter(location);
+          reference(effect.partner, `${location}.partner`, partnerIds, "partner");
+          break;
+        case "divorce":
+        case "child":
+          object(effect, location, ["type"]);
+          requireCharacter(location);
+          break;
         case "end":
-          object(effect, location, ["type", "ending"]);
+          object(effect, location, ["type", "ending", "deathCause"], ["type", "ending"]);
           reference(effect.ending, `${location}.ending`, endingIds, "ending");
+          if (Object.hasOwn(effect, "deathCause")) {
+            requireCharacter(location);
+            reference(effect.deathCause, `${location}.deathCause`, deathCauseIds, "death cause");
+            if (!deathEndingIds.has(effect.ending as string)) fail(`${location}.ending`, "an explicit death cause requires a death ending");
+          }
           break;
         default:
           fail(`${location}.type`, "unknown effect type");
@@ -275,14 +463,113 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     });
   };
 
+  if (character) {
+    if (Object.hasOwn(character, "requireIntroductions")) bool(character.requireIntroductions, "world.character.requireIntroductions");
+    if (Object.hasOwn(character, "playerNames")) {
+      const playerNames = array(character.playerNames, "world.character.playerNames", 1, 128);
+      playerNames.forEach((entry, i) => {
+        const name = string(entry, `world.character.playerNames[${i}]`, 100);
+        if (name !== name.trim()) fail(`world.character.playerNames[${i}]`, "name must be trimmed");
+      });
+      if (new Set(playerNames).size !== playerNames.length) fail("world.character.playerNames", "duplicate player name");
+    }
+    string(character.deathCauseDescription, "world.character.deathCauseDescription");
+    const names = array(character.childNames, "world.character.childNames", 1, 128);
+    names.forEach((entry, i) => string(entry, `world.character.childNames[${i}]`, 100));
+    if (new Set(names).size !== names.length) fail("world.character.childNames", "duplicate child name");
+    jobs.forEach((entry, i) => {
+      const path = `world.character.jobs[${i}]`;
+      const job = object(entry, path, ["id", "title", "description", "minAge", "requirements", "yearlyEffects"], ["id", "title", "description", "minAge", "yearlyEffects"]);
+      string(job.title, `${path}.title`, 300);
+      string(job.description, `${path}.description`);
+      integer(job.minAge, `${path}.minAge`, 0, maxAge);
+      if (Object.hasOwn(job, "requirements")) {
+        const requirements = object(job.requirements, `${path}.requirements`);
+        for (const [skill, value] of Object.entries(requirements)) {
+          reference(skill, `${path}.requirements.${skill}`, skillIds, "skill");
+          const threshold = number(value, `${path}.requirements.${skill}`);
+          const definition = skills[skill] as DataObject;
+          if (threshold < (definition.min as number) || threshold > (definition.max as number)) fail(`${path}.requirements.${skill}`, "skill requirement is outside its bounds");
+        }
+      }
+      effects(job.yearlyEffects, `${path}.yearlyEffects`);
+      (job.yearlyEffects as DataObject[]).forEach((effect, j) => {
+        if (!["stat", "flag", "skill", "cash"].includes(effect.type as string)) fail(`${path}.yearlyEffects[${j}].type`, "jobs can change only stats, flags, skills and cash annually");
+      });
+    });
+    partners.forEach((entry, i) => {
+      const path = `world.character.partners[${i}]`;
+      const partner = object(entry, path, ["id", "name", "ageOffset", "occupation", "description"]);
+      string(partner.name, `${path}.name`, 100);
+      string(partner.occupation, `${path}.occupation`, 300);
+      string(partner.description, `${path}.description`);
+      integer(partner.ageOffset, `${path}.ageOffset`, -maxAge, maxAge);
+    });
+    const activities = array(character.activities, "world.character.activities", 1, 1_000);
+    const activityIds = unique(activities, "world.character.activities");
+    activities.forEach((entry, i) => {
+      const path = `world.character.activities[${i}]`;
+      const activity = object(entry, path, ["id", "text", "when", "outcomes", "category", "minAge", "cooldownYears"], ["id", "text", "outcomes", "category"]);
+      string(activity.text, `${path}.text`);
+      if (!["training", "career", "relationship", "family", "finance"].includes(activity.category as string)) fail(`${path}.category`, "unknown activity category");
+      if (Object.hasOwn(activity, "minAge")) integer(activity.minAge, `${path}.minAge`, 0, maxAge);
+      if (Object.hasOwn(activity, "cooldownYears")) integer(activity.cooldownYears, `${path}.cooldownYears`, 1, maxAge);
+      if (Object.hasOwn(activity, "when")) condition(activity.when, `${path}.when`);
+      const outcomes = array(activity.outcomes, `${path}.outcomes`, 1, 64);
+      unique(outcomes, `${path}.outcomes`);
+      const weights: number[] = [];
+      outcomes.forEach((outcomeEntry, j) => {
+        const outcomePath = `${path}.outcomes[${j}]`;
+        const outcome = object(outcomeEntry, outcomePath, ["id", "text", "weight", "effects"]);
+        string(outcome.text, `${outcomePath}.text`);
+        weights.push(weight(outcome.weight, `${outcomePath}.weight`));
+        effects(outcome.effects, `${outcomePath}.effects`);
+      });
+      aggregate(weights, `${path}.outcomes`);
+    });
+    for (const [key, entry] of Object.entries(skills)) {
+      const definition = entry as DataObject;
+      if (!Object.hasOwn(definition, "trainingActivity")) continue;
+      const path = `world.character.skills.${key}.trainingActivity`;
+      reference(definition.trainingActivity, path, activityIds, "activity");
+      const activity = activities.find(candidate => (candidate as DataObject).id === definition.trainingActivity) as DataObject;
+      if (activity.category !== "training") fail(path, "must reference a training activity");
+      const gainsSkill = (activity.outcomes as DataObject[]).some(outcome => (outcome.effects as DataObject[])
+        .some(effect => effect.type === "skill" && effect.skill === key && (effect.delta as number) > 0));
+      if (!gainsSkill) fail(path, "training activity must have a positive effect for this skill");
+    }
+    const weights: number[] = [];
+    deathCauses.forEach((entry, i) => {
+      const path = `world.character.deathCauses[${i}]`;
+      const cause = object(entry, path, ["id", "title", "text", "weight", "when", "choiceOnly"], ["id", "title", "text", "weight"]);
+      string(cause.title, `${path}.title`, 300);
+      string(cause.text, `${path}.text`);
+      weights.push(weight(cause.weight, `${path}.weight`));
+      if (Object.hasOwn(cause, "choiceOnly")) bool(cause.choiceOnly, `${path}.choiceOnly`);
+      if (Object.hasOwn(cause, "when")) condition(cause.when, `${path}.when`);
+    });
+    aggregate(weights, "world.character.deathCauses");
+    if (!deathCauses.some(entry => !Object.hasOwn(entry as DataObject, "when") && (entry as DataObject).choiceOnly !== true)) {
+      fail("world.character.deathCauses", "requires an unconditional fallback cause available for natural sampling");
+    }
+  }
+
   const originWeights: number[] = [];
   origins.forEach((entry, i) => {
     const path = `world.origins[${i}]`;
-    const origin = object(entry, path, ["id", "title", "text", "weight", "effects", "sourceIds", "evidence"], ["id", "title", "text", "weight", "effects"]);
+    const origin = object(entry, path, ["id", "title", "text", "weight", "effects", "sourceIds", "evidence", "statRanges"], ["id", "title", "text", "weight", "effects"]);
     string(origin.title, `${path}.title`, 300);
     string(origin.text, `${path}.text`);
     originWeights.push(weight(origin.weight, `${path}.weight`));
+    if (Object.hasOwn(origin, "statRanges")) {
+      const ranges = object(origin.statRanges, `${path}.statRanges`);
+      for (const [key, range] of Object.entries(ranges)) {
+        reference(key, `${path}.statRanges.${key}`, statIds, "stat");
+        statRange(range, `${path}.statRanges.${key}`, stats[key] as DataObject);
+      }
+    }
     effects(origin.effects, `${path}.effects`);
+    if ((origin.effects as DataObject[]).some(effect => ["cash", "debt", "asset"].includes(effect.type as string))) fail(`${path}.effects`, "origin money is derived from its starting economy stat; use finance effects in events and activities");
     evidence(origin, path);
   });
   aggregate(originWeights, "world.origins");

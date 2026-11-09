@@ -1,0 +1,5050 @@
+{
+  "schemaVersion": 1,
+  "id": "alexandria-sample",
+  "version": "0.3.0",
+  "title": "A life in Alexandria",
+  "description": "A complete fictional life in a free urban household, born in Alexandria in 66 BCE, through Ptolemaic and Roman rule. Historical anchors and inspired personal stories carry source links. Household weights, opportunities and stat effects are game assumptions. Mortality uses a disclosed later Roman Egyptian female comparison model, not measured male Alexandrian rates. This is not a representative simulation of every status, sex or population in ancient Egypt.",
+  "startYear": -66,
+  "maxAge": 100,
+  "stats": {
+    "health": {
+      "label": "Health",
+      "min": 0,
+      "max": 100,
+      "initial": 70
+    },
+    "knowledge": {
+      "label": "Knowledge",
+      "min": 0,
+      "max": 100,
+      "initial": 0
+    },
+    "wealth": {
+      "label": "Resources",
+      "min": 0,
+      "max": 100,
+      "initial": 5
+    },
+    "bonds": {
+      "label": "Bonds",
+      "min": 0,
+      "max": 100,
+      "initial": 65
+    }
+  },
+  "flags": {
+    "sailed": {
+      "label": "Worked aboard a merchant ship",
+      "initial": false
+    },
+    "studied": {
+      "label": "Joined a copyist's workshop",
+      "initial": false
+    },
+    "stayed": {
+      "label": "Made a home in the city",
+      "initial": false
+    },
+    "kept-letters": {
+      "label": "Kept letters and memories",
+      "initial": false
+    },
+    "literate": {
+      "label": "Learned to read",
+      "initial": false
+    },
+    "apprenticed": {
+      "label": "Learned through practical training",
+      "initial": false
+    },
+    "partnered": {
+      "label": "Joined a shared household",
+      "initial": false
+    },
+    "parent": {
+      "label": "Cared for a child",
+      "initial": false
+    },
+    "retired": {
+      "label": "Stepped back from regular work",
+      "initial": false
+    },
+    "experienced-war": {
+      "label": "Lived during the Alexandrian War",
+      "initial": false
+    },
+    "roman-rule": {
+      "label": "Lived under Roman rule",
+      "initial": false
+    },
+    "legacy-arranged": {
+      "label": "Discussed wishes with the household",
+      "initial": false
+    }
+  },
+  "origins": [
+    {
+      "id": "merchant-household",
+      "title": "A merchant household",
+      "text": "You are born into a household whose work is tied to a small shop and the harbor. The sounds of work and the footsteps of neighbors surround your earliest days.",
+      "weight": 2,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "wealth",
+          "delta": 8
+        }
+      ],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria",
+        "augustan-alexandria-documents"
+      ]
+    },
+    {
+      "id": "artisan-household",
+      "title": "An artisan household",
+      "text": "You are born among people who earn their living through practiced hands and useful work. People work close together, sharing space, tools and the care of a new child.",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 3
+        }
+      ],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-bakery-lease"
+      ]
+    },
+    {
+      "id": "harbor-household",
+      "title": "A harbor household",
+      "text": "Your household's work follows the needs of the quays. Other people, changing cargoes and the sound of ropes will be part of your earliest world.",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "health",
+          "delta": 3
+        },
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 6
+        }
+      ],
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria"
+      ]
+    }
+  ],
+  "yearlyEffects": [],
+  "eventPacing": {
+    "minChoiceGapYears": 2,
+    "maxChoiceGapYears": 3
+  },
+  "yearlyRules": [
+    {
+      "id": "growing-child",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 15
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "health",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "practical-experience",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 50
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "learning-through-words",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 6
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 60
+          },
+          {
+            "type": "flag",
+            "flag": "literate",
+            "value": true
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "adult-livelihood",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 60
+          },
+          {
+            "type": "flag",
+            "flag": "retired",
+            "value": false
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "wealth",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "later-life-strength",
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 45
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "health",
+          "delta": -1
+        }
+      ]
+    },
+    {
+      "id": "later-household-resources",
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 65
+      },
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "wealth",
+          "delta": -1
+        }
+      ]
+    }
+  ],
+  "mortality": {
+    "description": "Annual death risks are derived from a Roman Egyptian female model table reproduced by Zakrzewski (2015), Table 1, after Bagnall and Frier. It is a later-period, different-sex comparison used for this fictional life—not measured death rates for a male born in Alexandria in 66 BCE. Annual interpolation, the 95+ tail and age 100 cap are modeling assumptions. The health/resources scores do not alter these all-cause risks; no exact cause of death is inferred.",
+    "sourceIds": [
+      "life-expectancy-egyptology",
+      "demography-evidence-limits"
+    ],
+    "bands": [
+      {
+        "minAge": 0,
+        "maxAge": 0,
+        "annualProbability": 0.33399,
+        "ending": "death-in-infancy"
+      },
+      {
+        "minAge": 1,
+        "maxAge": 4,
+        "annualProbability": 0.06557226169289965,
+        "ending": "death-in-childhood"
+      },
+      {
+        "minAge": 5,
+        "maxAge": 9,
+        "annualProbability": 0.013683380766249642,
+        "ending": "death-in-childhood"
+      },
+      {
+        "minAge": 10,
+        "maxAge": 14,
+        "annualProbability": 0.010633761668287112,
+        "ending": "death-in-childhood"
+      },
+      {
+        "minAge": 15,
+        "maxAge": 19,
+        "annualProbability": 0.013867307906290538,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 20,
+        "maxAge": 24,
+        "annualProbability": 0.017362537860945104,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 25,
+        "maxAge": 29,
+        "annualProbability": 0.019482488384163776,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 30,
+        "maxAge": 34,
+        "annualProbability": 0.02206880393544486,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 35,
+        "maxAge": 39,
+        "annualProbability": 0.02416170446207022,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 40,
+        "maxAge": 44,
+        "annualProbability": 0.02574602035750384,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 45,
+        "maxAge": 49,
+        "annualProbability": 0.027394344090157396,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 50,
+        "maxAge": 54,
+        "annualProbability": 0.035463717344938694,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 55,
+        "maxAge": 59,
+        "annualProbability": 0.04501660780541672,
+        "ending": "death-in-adulthood"
+      },
+      {
+        "minAge": 60,
+        "maxAge": 64,
+        "annualProbability": 0.06658381659826607,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 65,
+        "maxAge": 69,
+        "annualProbability": 0.08860788011177667,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 70,
+        "maxAge": 74,
+        "annualProbability": 0.12895552474965966,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 75,
+        "maxAge": 79,
+        "annualProbability": 0.18354273904469554,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 80,
+        "maxAge": 84,
+        "annualProbability": 0.24582105204464266,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 85,
+        "maxAge": 89,
+        "annualProbability": 0.3447295600168204,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 90,
+        "maxAge": 94,
+        "annualProbability": 0.4691650416256492,
+        "ending": "death-in-later-life"
+      },
+      {
+        "minAge": 95,
+        "maxAge": 99,
+        "annualProbability": 0.5693501720032319,
+        "ending": "death-in-later-life"
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "caesar-in-alexandria",
+      "title": "The city drawn into war",
+      "text": "In 48 BCE, Caesar's arrival becomes entangled with the struggle over Egypt's throne. Fighting follows in Alexandria, reaching streets and quays that once felt familiar.",
+      "trigger": {
+        "type": "year",
+        "at": -48
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "experienced-war",
+          "value": true
+        },
+        {
+          "type": "stat",
+          "stat": "wealth",
+          "delta": -2
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "alexandrian-war",
+        "caesar-chronology"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "water-and-war",
+      "title": "A struggle over water",
+      "text": "The Alexandrian War continues into 47 BCE. A Roman account describes attempts to disrupt Caesar's water supply and the digging of wells. The city's water and harbors have become part of the struggle.",
+      "trigger": {
+        "type": "year",
+        "at": -47
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "alexandrian-war",
+        "caesar-chronology"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "news-of-actium",
+      "title": "News from Actium",
+      "text": "In 31 BCE, Antony and Cleopatra's forces are defeated at Actium. Egypt's political future is becoming tied to Octavian's victory.",
+      "trigger": {
+        "type": "year",
+        "at": -31
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "ptolemaic-period"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "roman-rule",
+      "title": "A kingdom becomes a province",
+      "text": "Ptolemaic rule ends in 30 BCE and Egypt comes under Roman rule. Augustus later lists the addition of Egypt among his achievements. For people making their living in the city, a different political world is taking shape.",
+      "trigger": {
+        "type": "year",
+        "at": -30
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "flag",
+          "flag": "roman-rule",
+          "value": true
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "ptolemaic-period",
+        "augustus-res-gestae"
+      ],
+      "evidence": "documented-history"
+    },
+    {
+      "id": "the-first-household",
+      "title": "A small world of voices",
+      "text": "You are born in Alexandria in 66 BCE. For now, your world is a household: hands that carry you, voices you will learn to recognize, and adults deciding how to care for you. This first choice belongs to them.",
+      "trigger": {
+        "type": "age",
+        "at": 0
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-wetnursing"
+      ],
+      "choices": [
+        {
+          "id": "family-care",
+          "text": "Your family shares the care",
+          "outcomes": [
+            {
+              "id": "family-care-result",
+              "text": "Different hands take turns holding you. The household makes room for its newest member.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seek-help",
+          "text": "Your household asks a trusted neighbor for help",
+          "outcomes": [
+            {
+              "id": "seek-help-result",
+              "text": "Help arrives in small, ordinary ways. Your earliest story is one of dependence on others.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-steps",
+      "title": "A wider room",
+      "text": "Before long, the space between one familiar face and another becomes a journey you can begin on your own. Your household remembers the first unsteady steps.",
+      "trigger": {
+        "type": "age",
+        "at": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional"
+    },
+    {
+      "id": "a-child-in-the-courtyard",
+      "title": "The courtyard beyond the door",
+      "text": "As you grow, you begin to spend more time around the other children. Your caregivers decide how much of the busy neighborhood to let into your small world.",
+      "trigger": {
+        "type": "age",
+        "at": 3
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "close-to-home",
+          "text": "Stay close to the household",
+          "outcomes": [
+            {
+              "id": "close-to-home-result",
+              "text": "Familiar routines give the days a shape. You learn names, tasks and places at your own pace.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "play-with-neighbors",
+          "text": "Spend time with the neighbors' children",
+          "outcomes": [
+            {
+              "id": "play-with-neighbors-result",
+              "text": "You return with dusty feet and a little more confidence among other people.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-first-letters",
+      "title": "Marks that mean something",
+      "text": "A literate neighbor offers to show you a few letters. Your household must weigh this unusual opportunity against the work and care that already fill its days. Learning will have to find a place among those responsibilities.",
+      "trigger": {
+        "type": "age",
+        "at": 6
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "learn-letters",
+          "text": "Make time to learn the letters",
+          "outcomes": [
+            {
+              "id": "learn-letters-result",
+              "text": "Repeated marks become familiar words. You have gained an opportunity to learn, not a guarantee of an easy life.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "literate",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 12
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "learn-by-doing",
+          "text": "Learn through the household's work",
+          "outcomes": [
+            {
+              "id": "learn-by-doing-result",
+              "text": "You learn by watching hands at work and trying small tasks for yourself. Practical knowledge has its own value.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "apprenticed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-shape-of-the-city",
+      "title": "A city of many kinds of work",
+      "text": "The quays, workshops and streets become less mysterious as you grow. There are traders to watch, useful tasks to learn and names for places that once seemed far away.",
+      "trigger": {
+        "type": "age",
+        "at": 9
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "sourceIds": [
+        "strabo-alexandria"
+      ],
+      "evidence": "historically-inspired"
+    },
+    {
+      "id": "a-place-to-learn",
+      "title": "A place to learn",
+      "text": "Your household looks for a way to prepare you for adult work. There is no single path shared by every child; training depends on opportunity, status and the people around you.",
+      "trigger": {
+        "type": "age",
+        "at": 12
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "practice-reading",
+          "text": "Continue learning to read and reckon",
+          "outcomes": [
+            {
+              "id": "practice-reading-result",
+              "text": "You practise with a patient reader, fitting lessons around other responsibilities.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "literate",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 9
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "join-workbench",
+          "text": "Learn beside an experienced craft worker",
+          "outcomes": [
+            {
+              "id": "join-workbench-result",
+              "text": "Tools and materials begin to make sense in your hands. Repetition teaches what a hurried glance cannot.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "apprenticed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "help-household",
+          "text": "Give more of your time to the household",
+          "outcomes": [
+            {
+              "id": "help-household-result",
+              "text": "Your work makes an immediate difference at home, even while other opportunities remain out of reach.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-first-wages",
+      "title": "The first work of your own",
+      "text": "You are old enough to be trusted with more demanding tasks. The people around you begin to see both what you can do and what you still need to learn.",
+      "trigger": {
+        "type": "age",
+        "at": 16
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "augustan-alexandria-documents",
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "steady-work",
+          "text": "Take the steady work available nearby",
+          "outcomes": [
+            {
+              "id": "steady-work-result",
+              "text": "The pay is modest, but the familiar work gives you a beginning.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seek-experience",
+          "text": "Look for a task that teaches you more",
+          "outcomes": [
+            {
+              "id": "seek-experience-result",
+              "text": "You choose a demanding beginning. Some days bring more experience than pay.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-place-on-the-manifest",
+      "title": "A name on the manifest",
+      "text": "There is work close to home and a place for willing hands aboard a merchant ship. If you have learned your letters, a copyist's workshop offers another possibility. Which way will you begin your adult life?",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "strabo-alexandria",
+        "education-apprenticeship",
+        "augustan-alexandria-documents"
+      ],
+      "choices": [
+        {
+          "id": "stay",
+          "text": "Stay and build a life here",
+          "outcomes": [
+            {
+              "id": "a-familiar-door",
+              "text": "You choose the familiar streets. Small jobs and useful introductions begin to give your days a shape.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "stayed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 4
+                }
+              ]
+            },
+            {
+              "id": "a-slow-beginning",
+              "text": "You stay, though regular work takes time to find. Your household makes room while you look.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "stayed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sail",
+          "text": "Take a place with the ship's crew",
+          "outcomes": [
+            {
+              "id": "beyond-the-breakwater",
+              "text": "Your name goes onto the manifest. As the harbor slips behind you, excitement and homesickness arrive together.",
+              "weight": 3,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "sailed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -5
+                }
+              ]
+            },
+            {
+              "id": "a-hard-first-crossing",
+              "text": "The first crossing is tiring. You learn the work slowly and depend on the patience of the crew.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "sailed",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "study",
+          "text": "Learn in a copyist's workshop",
+          "when": {
+            "type": "flag",
+            "flag": "literate",
+            "value": true
+          },
+          "outcomes": [
+            {
+              "id": "a-new-bench",
+              "text": "You find a place at a long workbench. The pay is small, but each page offers something to learn.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "studied",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 10
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letters-across-the-water",
+      "title": "Letters across the water",
+      "text": "A returning sailor can carry a message to your household. You can ask a writer to help if you need one. There is room for a few words and a small parcel.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-letter",
+        "strabo-alexandria"
+      ],
+      "when": {
+        "type": "flag",
+        "flag": "sailed",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "write-home",
+          "text": "Send a long message home",
+          "outcomes": [
+            {
+              "id": "write-home-result",
+              "text": "You describe ordinary things: the light, the work, the people you miss. A thread between two parts of your life stays unbroken.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "kept-letters",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "learn-port",
+          "text": "Spend the day learning the port",
+          "outcomes": [
+            {
+              "id": "learn-port-result",
+              "text": "You follow the quays and listen to unfamiliar voices. The place becomes a little easier to navigate.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-unfamiliar-page",
+      "title": "The unfamiliar page",
+      "text": "A damaged page arrives at the workshop. Some words are beyond you, but someone must begin the patient work.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "education-apprenticeship"
+      ],
+      "when": {
+        "type": "flag",
+        "flag": "studied",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "work-together",
+          "text": "Work beside an experienced copyist",
+          "outcomes": [
+            {
+              "id": "work-together-result",
+              "text": "Looking carefully and asking questions teaches you more than working in silence.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "extra-work",
+          "text": "Take paid work instead",
+          "outcomes": [
+            {
+              "id": "extra-work-result",
+              "text": "Extra work puts a little money aside. Your own learning waits for quieter hours.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-neighbors-request",
+      "title": "The neighbor's request",
+      "text": "A neighbor asks for help arranging a small piece of work. You are beginning to be known as someone who can be relied upon.",
+      "trigger": {
+        "type": "age",
+        "at": 19
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "augustan-alexandria-documents"
+      ],
+      "when": {
+        "type": "flag",
+        "flag": "stayed",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "help-neighbor",
+          "text": "Make time for your neighbor",
+          "outcomes": [
+            {
+              "id": "help-neighbor-result",
+              "text": "A small kindness becomes part of the trust people place in you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fair-payment",
+          "text": "Agree on a fair payment",
+          "outcomes": [
+            {
+              "id": "fair-payment-result",
+              "text": "You find a way to help while being paid for your time.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "room-for-one-more",
+      "title": "Room for one more",
+      "text": "A traveler needs a little help finding their feet. Your time and money are limited, but you remember starting out.",
+      "trigger": {
+        "type": "age",
+        "at": 20
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-letter"
+      ],
+      "choices": [
+        {
+          "id": "share-meal",
+          "text": "Share a meal and a little time",
+          "outcomes": [
+            {
+              "id": "share-meal-result",
+              "text": "An unhurried meal turns a stranger into someone you may meet again.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "share-skill",
+          "text": "Teach something useful",
+          "outcomes": [
+            {
+              "id": "share-skill-result",
+              "text": "Explaining your work makes you understand it more clearly.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "make-introduction",
+          "text": "Introduce the traveler to someone with work",
+          "outcomes": [
+            {
+              "id": "make-introduction-result",
+              "text": "A practical introduction helps someone else begin.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-uneven-accounts",
+      "title": "The uneven accounts",
+      "text": "An agreement does not quite match what was promised. Settling the matter will take time, and someone is eager to finish quickly.",
+      "trigger": {
+        "type": "age",
+        "at": 22
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-bakery-lease",
+        "augustan-alexandria-documents"
+      ],
+      "choices": [
+        {
+          "id": "check-carefully",
+          "text": "Ask for a careful reading of the agreement",
+          "outcomes": [
+            {
+              "id": "check-carefully-result",
+              "text": "The missing detail is found before anyone agrees. Patience protects your work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "seek-mediator",
+          "text": "Ask someone trusted to help settle it",
+          "outcomes": [
+            {
+              "id": "seek-mediator-result",
+              "text": "A familiar voice helps both sides find an arrangement they can accept.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "walk-away",
+          "text": "Leave the work and keep your time",
+          "outcomes": [
+            {
+              "id": "walk-away-result",
+              "text": "You give up the payment rather than a longer dispute.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-shared-household",
+      "title": "The possibility of a shared life",
+      "text": "You have grown close to someone. Joining households would mean affection, responsibility and conversations about property and obligations. A shared life will need more than a single promise.",
+      "trigger": {
+        "type": "age",
+        "at": 25
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-marriage"
+      ],
+      "choices": [
+        {
+          "id": "share-life",
+          "text": "Make a household together",
+          "outcomes": [
+            {
+              "id": "share-life-result",
+              "text": "Two sets of routines become one shared life. There are adjustments, and someone to come home to.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "partnered",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 10
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "remain-independent",
+          "text": "Keep your independence",
+          "outcomes": [
+            {
+              "id": "remain-independent-result",
+              "text": "You choose a life shaped around your own work and friendships. Your household remains your own.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-new-generation",
+      "title": "A new generation",
+      "text": "A child joins your household. There is delight, interrupted sleep and a new set of responsibilities. How will you make room for them?",
+      "trigger": {
+        "type": "age",
+        "at": 28
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-wetnursing",
+        "family-care"
+      ],
+      "when": {
+        "type": "flag",
+        "flag": "partnered",
+        "value": true
+      },
+      "choices": [
+        {
+          "id": "share-parenting",
+          "text": "Share the work of care",
+          "outcomes": [
+            {
+              "id": "share-parenting-result",
+              "text": "Time and care are rearranged around someone who depends on you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "parent",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 9
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ask-kin",
+          "text": "Ask relatives and neighbors to help",
+          "outcomes": [
+            {
+              "id": "ask-kin-result",
+              "text": "The child grows within a circle wider than one pair of hands.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "parent",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-younger-friend",
+      "title": "Someone beginning again",
+      "text": "A younger friend asks you how to find their place. You recognize the uncertainty in the question.",
+      "trigger": {
+        "type": "age",
+        "at": 28
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "education-apprenticeship"
+      ],
+      "when": {
+        "type": "flag",
+        "flag": "partnered",
+        "value": false
+      },
+      "choices": [
+        {
+          "id": "be-a-guide",
+          "text": "Offer time and practical guidance",
+          "outcomes": [
+            {
+              "id": "be-a-guide-result",
+              "text": "You become one of the people whose experience helps someone else begin.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "make-space",
+          "text": "Give them a chance to work beside you",
+          "outcomes": [
+            {
+              "id": "make-space-result",
+              "text": "A small opportunity becomes a beginning for another person.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "an-unreliable-season",
+      "title": "A difficult season upriver",
+      "text": "Reports of an uneven harvest bring concern to the city. The household must decide what to keep in reserve and whom it can help.",
+      "trigger": {
+        "type": "age",
+        "at": 32
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "nile-floods",
+        "strabo-alexandria"
+      ],
+      "choices": [
+        {
+          "id": "keep-reserve",
+          "text": "Keep a small reserve for the household",
+          "outcomes": [
+            {
+              "id": "keep-reserve-result",
+              "text": "What you set aside makes an uncertain season easier to face.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "help-circle",
+          "text": "Share with the people closest to you",
+          "outcomes": [
+            {
+              "id": "help-circle-result",
+              "text": "Resources are stretched, but so are the ties that help people through.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "after-the-transition",
+      "title": "Learning the new arrangements",
+      "text": "Political rule has changed, but daily responsibilities continue. People still need work, food and agreements they can trust. You must find your own way through the new arrangements.",
+      "trigger": {
+        "type": "age",
+        "at": 36
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "augustan-alexandria-documents",
+        "augustus-res-gestae"
+      ],
+      "choices": [
+        {
+          "id": "learn-new-forms",
+          "text": "Learn how the new arrangements work",
+          "outcomes": [
+            {
+              "id": "learn-new-forms-result",
+              "text": "You listen, ask questions and slowly learn what has changed for your work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rely-on-neighbors",
+          "text": "Stay close to your established network",
+          "outcomes": [
+            {
+              "id": "rely-on-neighbors-result",
+              "text": "People who know your work help you navigate an uncertain transition.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-weight-of-years",
+      "title": "A life with some weight to it",
+      "text": "At forty, the years behind you contain work, people and choices that no longer feel new. The shape of your life is clearer, though much remains unwritten.",
+      "trigger": {
+        "type": "age",
+        "at": 40
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional"
+    },
+    {
+      "id": "care-between-generations",
+      "title": "Care between generations",
+      "text": "An older relative needs more help. Work and care compete for the same hours, and there is no single answer that makes the difficulty disappear.",
+      "trigger": {
+        "type": "age",
+        "at": 43
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "give-time",
+          "text": "Give more of your own time",
+          "outcomes": [
+            {
+              "id": "give-time-result",
+              "text": "Your days become more crowded, and your presence matters to someone who needs it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "share-care",
+          "text": "Arrange help across the household",
+          "outcomes": [
+            {
+              "id": "share-care-result",
+              "text": "Care becomes a shared responsibility instead of one person's task.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-different-kind-of-work",
+      "title": "A different kind of work",
+      "text": "You notice that some tasks take longer than they once did. Experience still helps, even when strength and patience need to be spent more carefully.",
+      "trigger": {
+        "type": "age",
+        "at": 49
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care",
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "work-with-experience",
+          "text": "Take work that depends on experience",
+          "outcomes": [
+            {
+              "id": "work-with-experience-result",
+              "text": "What you know begins to matter more than how much you can carry.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-pace",
+          "text": "Keep the familiar pace for now",
+          "outcomes": [
+            {
+              "id": "keep-pace-result",
+              "text": "Familiar work continues to provide, though you feel its cost more clearly.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-trade-to-pass-on",
+      "title": "A trade to pass on",
+      "text": "Someone younger asks to learn from you. A skill can travel further than the hands that first practised it. You remember the people who once had patience for your own uncertain hands.",
+      "trigger": {
+        "type": "age",
+        "at": 53
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-apprenticeship",
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "teach-patiently",
+          "text": "Make room for a learner",
+          "outcomes": [
+            {
+              "id": "teach-patiently-result",
+              "text": "You repeat lessons you once struggled to understand. Another person begins to carry the work forward.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 7
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-independent",
+          "text": "Keep working independently",
+          "outcomes": [
+            {
+              "id": "keep-independent-result",
+              "text": "You continue the work in your own way, making a record of what you know when time permits.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-cost-of-rest",
+      "title": "The cost of rest",
+      "text": "Recovery takes longer than it once did. You must decide how much work to exchange for a little more time and ease.",
+      "trigger": {
+        "type": "age",
+        "at": 58
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "take-rest",
+          "text": "Make more room for rest",
+          "outcomes": [
+            {
+              "id": "take-rest-result",
+              "text": "The days grow less crowded. You have a little less income and a little more energy for the people around you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reduce-a-little",
+          "text": "Reduce the work a little at a time",
+          "outcomes": [
+            {
+              "id": "reduce-a-little-result",
+              "text": "You keep a place in familiar work while allowing yourself to slow down.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stepping-back",
+      "title": "Stepping back",
+      "text": "Decades of work have made some things easier to understand and others harder to do. There is no modern pension waiting here; stepping back depends on resources, relationships and help.",
+      "trigger": {
+        "type": "age",
+        "at": 60
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "step-back",
+          "text": "Let others carry more of the work",
+          "outcomes": [
+            {
+              "id": "step-back-result",
+              "text": "You accept a different place in the household, with more time for advice, company and the smaller tasks.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -4
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "continue-light-work",
+          "text": "Keep a little regular work",
+          "outcomes": [
+            {
+              "id": "continue-light-work-result",
+              "text": "A lighter rhythm keeps you involved without pretending the years have not changed you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "putting-things-in-order",
+      "title": "Putting things in order",
+      "text": "You think about the belongings, obligations and knowledge that others may one day need to sort out. Some things can be written down; others need a conversation.",
+      "trigger": {
+        "type": "age",
+        "at": 65
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-inheritance",
+        "funerary-rituals"
+      ],
+      "choices": [
+        {
+          "id": "write-arrangements",
+          "text": "Arrange for your wishes to be recorded",
+          "outcomes": [
+            {
+              "id": "write-arrangements-result",
+              "text": "A careful conversation leaves fewer questions for the people who may have to act for you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "legacy-arranged",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "speak-with-household",
+          "text": "Talk through what matters with your household",
+          "outcomes": [
+            {
+              "id": "speak-with-household-result",
+              "text": "People hear what you hope will be remembered, and what should happen to the things you leave.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "legacy-arranged",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-you-will-keep",
+      "title": "What you will keep",
+      "text": "The longest-lasting part of your work may be something you can give away. You decide where a little of your remaining energy should go.",
+      "trigger": {
+        "type": "age",
+        "at": 70
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-letter",
+        "education-apprenticeship"
+      ],
+      "choices": [
+        {
+          "id": "guide-beginner",
+          "text": "Guide someone at the beginning of their life",
+          "outcomes": [
+            {
+              "id": "guide-beginner-result",
+              "text": "A lesson you once needed becomes useful to someone who will remember it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 6
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gather-letters",
+          "text": "Gather your letters and memories",
+          "outcomes": [
+            {
+              "id": "gather-letters-result",
+              "text": "You put names and words in order, keeping a record of a life that was larger than its work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "kept-letters",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-people-who-return",
+      "title": "The people who return",
+      "text": "A familiar person comes to sit with you. The visit is not an achievement to earn; it is a small part of the life you still share with others.",
+      "trigger": {
+        "type": "age",
+        "at": 75
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "tell-old-stories",
+          "text": "Tell a story they have not heard",
+          "outcomes": [
+            {
+              "id": "tell-old-stories-result",
+              "text": "One ordinary memory becomes new to someone else.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "listen",
+          "text": "Ask about their life instead",
+          "outcomes": [
+            {
+              "id": "listen-result",
+              "text": "For a while, you are simply together, each with something to give.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-small-pleasures",
+      "title": "The small pleasures",
+      "text": "In this later part of your life, the pace of a day is different. There are still choices about how to spend the time within it.",
+      "trigger": {
+        "type": "age",
+        "at": 80
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "family-care"
+      ],
+      "choices": [
+        {
+          "id": "sit-in-light",
+          "text": "Find a quiet place in the afternoon light",
+          "outcomes": [
+            {
+              "id": "sit-in-light-result",
+              "text": "You let the day be small, noticing what once passed without your attention.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "welcome-company",
+          "text": "Welcome a little company",
+          "outcomes": [
+            {
+              "id": "welcome-company-result",
+              "text": "Voices fill a familiar room. The world reaches you through other people's stories.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "names-remembered",
+      "title": "Names remembered",
+      "text": "You speak names that fewer people now recognize. Someone listens and repeats one back to you, keeping a small part of the past in the present.",
+      "trigger": {
+        "type": "age",
+        "at": 85
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 2
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional"
+    },
+    {
+      "id": "a-later-season",
+      "title": "A later season",
+      "text": "Ninety years lie behind you. The days are quieter, and help from other people has become part of their shape.",
+      "trigger": {
+        "type": "age",
+        "at": 90
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "life-expectancy-egyptology"
+      ],
+      "evidence": "historically-inspired"
+    },
+    {
+      "id": "an-extraordinary-age",
+      "title": "An extraordinary age",
+      "text": "You have lived through more seasons than you once could imagine. The remaining days are lived one at a time, among familiar things and the people who know you.",
+      "trigger": {
+        "type": "age",
+        "at": 95
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [
+        "life-expectancy-egyptology"
+      ],
+      "evidence": "historically-inspired"
+    },
+    {
+      "id": "a-quiet-room",
+      "title": "A quiet room",
+      "text": "There is light at the doorway and the sound of a world continuing beyond it. Your life is still here, in this day.",
+      "trigger": {
+        "type": "age",
+        "at": 99
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional"
+    },
+    {
+      "id": "a-letter-from-a-friend",
+      "title": "A letter from a friend",
+      "text": "A message brings news from someone whose life has taken a different course from yours. A writer can help with the words if needed.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "alexandrian-letter"
+      ],
+      "choices": [
+        {
+          "id": "send-reply",
+          "text": "Send a reply",
+          "outcomes": [
+            {
+              "id": "send-reply-result",
+              "text": "Your reply keeps an ordinary friendship alive across distance.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 4
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-message",
+          "text": "Keep the message for another day",
+          "outcomes": [
+            {
+              "id": "keep-message-result",
+              "text": "You hold onto the words, though other responsibilities need your attention now.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 12
+    },
+    {
+      "id": "an-unwell-week",
+      "title": "An unwell week",
+      "text": "For a while, ordinary work feels unusually difficult. The household must make room for a person who needs care. You have to decide which tasks can wait.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "accept-care",
+          "text": "Accept help and rest",
+          "outcomes": [
+            {
+              "id": "accept-care-result",
+              "text": "Someone takes on a little of your work while you recover.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "work-more-slowly",
+          "text": "Do what you can at a slower pace",
+          "outcomes": [
+            {
+              "id": "work-more-slowly-result",
+              "text": "You do less, and leave some tasks for another day.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -1
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 15
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 75
+          }
+        ]
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 18
+    },
+    {
+      "id": "small-familiar-voices",
+      "title": "A year of familiar voices",
+      "text": "The household's voices become easier to recognize. A face at the doorway, a song repeated, a hand reaching down: small things give your year its shape.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "small-doorway",
+      "title": "The world beyond the doorway",
+      "text": "You spend more time watching the busy space outside. Sandals pass, people call to one another, and someone always brings you back from the edge of the doorway.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "small-household-rhythm",
+      "title": "The rhythm of the household",
+      "text": "Your year follows other people's routines: work beginning, food being prepared, a quieter room at the end of the day. Familiar sounds tell you who is nearby.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "small-new-words",
+      "title": "Words for small things",
+      "text": "A few more sounds become words you can use. The people around you begin to understand what you are asking for, even when patience runs short.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "small-shared-shade",
+      "title": "Afternoons in the shade",
+      "text": "On warm afternoons, someone finds a cooler place for you to sit. There is company nearby and a view of feet, baskets and the small workings of a household.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "small-returning-faces",
+      "title": "People who return",
+      "text": "Some visitors become familiar enough that you wait for them. Your small world grows through people who remember your name and stop to speak to you.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 5
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-neighborhood-paths",
+      "title": "Paths you know",
+      "text": "You learn another little part of the neighborhood this year. A doorway that once looked like every other doorway now belongs to someone you know.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-useful-hands",
+      "title": "Small useful hands",
+      "text": "You are trusted with a few more small tasks. Carrying something carefully, remembering an instruction and returning on time all feel like important work.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-found-treasure",
+      "title": "A small treasure",
+      "text": "A smooth stone becomes something worth keeping. You show it to another child, lose it for a while and find that the story of finding it matters almost as much.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-shared-laughter",
+      "title": "A joke that lasts",
+      "text": "Something ordinary becomes a joke among the children. For days, the slightest reminder starts the laughter again, though the adults never quite understand it.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-watching-work",
+      "title": "Watching and trying",
+      "text": "You spend time watching a familiar task being done. This year someone lets you try a small part yourself, then patiently puts right what you have made awkward.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-beyond-the-corner",
+      "title": "Beyond the next corner",
+      "text": "An errand takes you a little farther than usual. You return with the task done and a better picture of how the streets near home fit together.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-stronger-hands",
+      "title": "Stronger hands",
+      "text": "You notice the difference a year makes when a familiar task feels lighter. There are still awkward moments, but people begin asking for your help more often.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-learning-patience",
+      "title": "Learning patience",
+      "text": "A task refuses to go well the first time. Repeating it slowly teaches you something that a quick explanation did not.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-evening-conversation",
+      "title": "At the edge of the conversation",
+      "text": "You listen while older people discuss work and obligations. This year you find that you understand more of what worries them, even when you have little to add.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-changing-friendships",
+      "title": "Friendships finding new shapes",
+      "text": "Friends are given different tasks and begin keeping different hours. You learn to make room for one another as the old routines change.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-a-trusted-errand",
+      "title": "An errand entrusted to you",
+      "text": "Someone relies on you to remember a message accurately. You repeat it to yourself on the way and feel the quiet satisfaction of being trusted.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "youth-questions-about-work",
+      "title": "Questions about the years ahead",
+      "text": "Watching people work makes you think about the work you might do. Some possibilities seem close enough to touch; others still belong to an unfamiliar world.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-work-and-return",
+      "title": "Work, and the way home",
+      "text": "The year gathers around familiar journeys: leaving for work, meeting people along the way and returning with some part of the day still on your mind.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-a-repaired-belonging",
+      "title": "Something repaired",
+      "text": "A worn belonging is made useful again. The repair is small, but it saves the household from finding a replacement and gives someone a story to tell over the work.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-shared-meal",
+      "title": "A meal that runs long",
+      "text": "Company keeps a meal going longer than expected. News becomes conversation, and conversation becomes the sort of ordinary memory that belongs to a place.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-the-busy-season",
+      "title": "A crowded stretch of days",
+      "text": "Work and household tasks arrive close together this year. Some things are finished, some are postponed, and you learn which promises need the most care.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-an-unhurried-hour",
+      "title": "An unhurried hour",
+      "text": "You find a little time with no task immediately waiting. Watching the movement around you, it is possible to feel part of the city without hurrying through it.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "adult-someone-remembers",
+      "title": "Known by your work",
+      "text": "Someone remembers a piece of work you did and calls you by name. Being known brings small obligations, but also the comfort of having a place among people.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 45
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-familiar-work",
+      "title": "The value of familiar work",
+      "text": "Experience saves you a little effort this year. You recognize a problem before it grows and remember a way around it that once took time to learn.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "knowledge",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-a-slower-morning",
+      "title": "A slower morning",
+      "text": "You allow a little more time before beginning a demanding task. The work gets done, though the order of the day is different from the one you once kept.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-a-younger-voice",
+      "title": "A younger voice",
+      "text": "Someone younger brings an unfamiliar suggestion. Listening to it reminds you that experience is useful without making every old habit the best one.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-household-rearranged",
+      "title": "A household rearranged",
+      "text": "Space and responsibilities are adjusted again. What belongs where, who can help and which task can wait become small conversations through the year.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-the-long-view",
+      "title": "A longer view",
+      "text": "A difficulty that once would have filled your thoughts now looks smaller. You have lived through enough changing years to know that a troubled week is not the whole story.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "middle-an-old-acquaintance",
+      "title": "An old acquaintance",
+      "text": "You cross paths with someone whose face belongs to an earlier part of your life. There are changes to notice and familiar things neither of you needs to explain.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-company-at-the-door",
+      "title": "Company at the door",
+      "text": "A visit brings the life of another household into your room. You hear about small troubles and small successes, and the afternoon passes in company.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-familiar-things",
+      "title": "Familiar things",
+      "text": "You spend time among belongings that carry their own memories. A mark, a repair or a worn edge recalls the person who once helped make it useful.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-a-helpful-hand",
+      "title": "A helpful hand",
+      "text": "Someone notices a task that has become awkward and helps before you have to ask. Accepting it makes room for a less hurried conversation.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-news-from-outside",
+      "title": "News from outside",
+      "text": "People bring you pieces of a changing city: a new acquaintance, work found, a familiar doorway occupied by someone else. Your world still reaches beyond the room.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-an-old-story",
+      "title": "An old story, told again",
+      "text": "You return to a memory you have told before. This time someone asks a different question, and a detail you had almost forgotten becomes part of the story.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "later-the-light-changes",
+      "title": "The light changes",
+      "text": "The pattern of light in a familiar place marks the passing days. There are quieter pleasures now, and time to notice something that once passed unseen.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "path-a-port-remembered",
+      "title": "A port remembered",
+      "text": "A name in conversation brings back another shore: the work, the unfamiliar voices and the first people who helped you find your way. That part of your life has not disappeared.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 80
+          },
+          {
+            "type": "flag",
+            "flag": "sailed",
+            "value": true
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "path-a-careful-line",
+      "title": "A careful line",
+      "text": "You notice a well-made piece of writing and remember the patience needed to make words clear. Even away from the workbench, that habit of looking closely stays with you.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 80
+          },
+          {
+            "type": "flag",
+            "flag": "studied",
+            "value": true
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "path-familiar-streets",
+      "title": "Familiar streets",
+      "text": "People you have known for years give familiar streets their meaning. A brief greeting is enough to remind you how much of your life has taken place close to home.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 80
+          },
+          {
+            "type": "flag",
+            "flag": "stayed",
+            "value": true
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "family-shared-routines",
+      "title": "Routines you share",
+      "text": "You and your companion adjust the household's small routines again. There is no grand occasion, only the ongoing work of making a life with another person.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 26
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 85
+          },
+          {
+            "type": "flag",
+            "flag": "partnered",
+            "value": true
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "family-a-child-growing",
+      "title": "Another person's beginning",
+      "text": "Someone you have helped care for can do a little more without you. Pride and the work of letting go arrive together, while another kind of help is still needed.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "sourceIds": [],
+      "evidence": "fictional",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 29
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 55
+          },
+          {
+            "type": "flag",
+            "flag": "parent",
+            "value": true
+          }
+        ]
+      },
+      "maxOccurrences": 100,
+      "cooldownYears": 3
+    },
+    {
+      "id": "child-a-friend-needs-help",
+      "title": "A friend needs help",
+      "text": "Another child is struggling with a small task while your own play is waiting. Your caregivers let you decide how to spend this little part of the day.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "child-help-friend",
+          "text": "Stay and help",
+          "outcomes": [
+            {
+              "id": "child-help-friend-result",
+              "text": "You finish together. The task takes longer, but there is company in it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "child-explain-task",
+          "text": "Show them what you know, then return to play",
+          "outcomes": [
+            {
+              "id": "child-explain-task-result",
+              "text": "You find a way to explain the task and leave them to try it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "child-the-spare-afternoon",
+      "title": "A spare afternoon",
+      "text": "For once there is a little time with no errand waiting. You can spend it near a busy workbench or with the children outside.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "child-watch-work",
+          "text": "Watch how something is made",
+          "outcomes": [
+            {
+              "id": "child-watch-work-result",
+              "text": "An adult lets you watch closely and answers a few questions.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "child-find-company",
+          "text": "Find the other children",
+          "outcomes": [
+            {
+              "id": "child-find-company-result",
+              "text": "The afternoon is spent in company, with a new story to tell at home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 5
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 12
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "youth-the-extra-task",
+      "title": "An extra task",
+      "text": "Someone offers you an extra task. It will take time you had hoped to spend with familiar people, but it could teach you something useful.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "youth-try-task",
+          "text": "Try the unfamiliar work",
+          "outcomes": [
+            {
+              "id": "youth-try-task-result",
+              "text": "The task asks more of you than expected. You finish knowing something new.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "youth-keep-time",
+          "text": "Keep the time you promised to others",
+          "outcomes": [
+            {
+              "id": "youth-keep-time-result",
+              "text": "You keep your word and spend the time with the people expecting you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "youth-someone-to-ask",
+      "title": "Someone to ask",
+      "text": "You have a question about work that no longer feels small. A more experienced person has time to talk, if you are willing to admit what you do not know.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "youth-ask-question",
+          "text": "Ask the question openly",
+          "outcomes": [
+            {
+              "id": "youth-ask-question-result",
+              "text": "A patient explanation makes the next attempt easier.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "youth-watch-first",
+          "text": "Watch carefully before trying again",
+          "outcomes": [
+            {
+              "id": "youth-watch-first-result",
+              "text": "You learn by looking closely and testing a small part for yourself.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 18
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "adult-the-loaned-tool",
+      "title": "A borrowed tool",
+      "text": "Someone you know asks to borrow a useful belonging. You need it too, and lending it will mean arranging your own work differently.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "adult-lend-tool",
+          "text": "Lend it and rearrange your tasks",
+          "outcomes": [
+            {
+              "id": "adult-lend-tool-result",
+              "text": "The belonging returns with thanks. Your own work takes a little longer.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "adult-share-time",
+          "text": "Offer a time when you can use it together",
+          "outcomes": [
+            {
+              "id": "adult-share-time-result",
+              "text": "You find a practical arrangement that leaves room for both sets of work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "adult-an-extra-payment",
+      "title": "A little extra work",
+      "text": "A small piece of paid work is available, but the household has been waiting for your attention. Neither need will disappear on its own.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "adult-take-payment",
+          "text": "Take the work this time",
+          "outcomes": [
+            {
+              "id": "adult-take-payment-result",
+              "text": "You bring home a little more, and some household tasks wait for another day.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "adult-make-time",
+          "text": "Keep the time for home",
+          "outcomes": [
+            {
+              "id": "adult-make-time-result",
+              "text": "You put your attention where you had promised it. The small payment goes to someone else.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "adult-the-unfamiliar-method",
+      "title": "A different way to work",
+      "text": "Someone suggests a different way to do a familiar task. Trying it would cost time now, with no promise that it will suit you better.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "adult-try-method",
+          "text": "Give the new method a careful try",
+          "outcomes": [
+            {
+              "id": "adult-try-method-result",
+              "text": "Some parts are useful and some are not. You keep what helps.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "adult-keep-method",
+          "text": "Use the method you know well",
+          "outcomes": [
+            {
+              "id": "adult-keep-method-result",
+              "text": "The task is finished in a familiar way, with time left for other work.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "adult-an-invitation",
+      "title": "An invitation",
+      "text": "An acquaintance invites you to spend a little time with people you do not yet know. You could go, or use the time to catch up with an old friend.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "adult-meet-people",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "adult-meet-people-result",
+              "text": "New faces become names. One conversation gives you something to think about on the way home.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "adult-old-friend",
+          "text": "Make time for an old friend",
+          "outcomes": [
+            {
+              "id": "adult-old-friend-result",
+              "text": "A familiar conversation strengthens a connection that could easily have been left waiting.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 65
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "later-a-question-of-energy",
+      "title": "Where your energy goes",
+      "text": "There are more things you could do today than you have energy for. Someone asks for advice while a small task of your own remains unfinished.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "later-give-advice",
+          "text": "Spend the time with the person asking",
+          "outcomes": [
+            {
+              "id": "later-give-advice-result",
+              "text": "The task can wait. You help someone see a difficulty a little more clearly.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "later-finish-task",
+          "text": "Finish your own task first",
+          "outcomes": [
+            {
+              "id": "later-finish-task-result",
+              "text": "Completing it brings a quiet satisfaction. You arrange to talk another day.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "health",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "later-a-memory-to-share",
+      "title": "A memory to share",
+      "text": "Someone asks about a place from your earlier life. You can tell the story yourself or ask a visitor to help put a few words in order.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "later-tell-memory",
+          "text": "Tell the story in your own time",
+          "outcomes": [
+            {
+              "id": "later-tell-memory-result",
+              "text": "A memory becomes something shared between the people in the room.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "later-record-memory",
+          "text": "Ask for help recording the memory",
+          "outcomes": [
+            {
+              "id": "later-record-memory-result",
+              "text": "A few carefully chosen words keep a piece of your story within reach.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "flag",
+                  "flag": "kept-letters",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "later-a-small-outing",
+      "title": "A small outing",
+      "text": "Someone offers to accompany you on a short visit. It would be a change of scene, though a quiet day at home has its own appeal.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "later-take-outing",
+          "text": "Go together, at an easy pace",
+          "outcomes": [
+            {
+              "id": "later-take-outing-result",
+              "text": "The visit is short and unhurried. You return with news and a little more to talk about.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "later-invite-instead",
+          "text": "Invite a visitor to come to you",
+          "outcomes": [
+            {
+              "id": "later-invite-instead-result",
+              "text": "Company arrives at your door, bringing a piece of the outside world into a familiar room.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    },
+    {
+      "id": "later-the-useful-belonging",
+      "title": "Something still useful",
+      "text": "You come across a belonging you seldom use now. Someone younger could make good use of it, though you have reasons to keep it nearby.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "evidence": "fictional",
+      "sourceIds": [],
+      "choices": [
+        {
+          "id": "later-give-belonging",
+          "text": "Pass it to someone who needs it",
+          "outcomes": [
+            {
+              "id": "later-give-belonging-result",
+              "text": "The belonging begins another part of its story in different hands.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "wealth",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "later-keep-belonging",
+          "text": "Keep it, and explain what it means to you",
+          "outcomes": [
+            {
+              "id": "later-keep-belonging-result",
+              "text": "Telling its story helps another person understand why a small thing can matter.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 65
+          },
+          {
+            "type": "age",
+            "op": "lt",
+            "value": 100
+          }
+        ]
+      },
+      "maxOccurrences": 8,
+      "cooldownYears": 9
+    }
+  ],
+  "endings": [
+    {
+      "id": "death-in-infancy",
+      "kind": "death",
+      "title": "A life, however brief",
+      "text": "You die before your first birthday. Your life was brief, but you were here: held, named and part of a household's story. The years you did not live remain unwritten.",
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "life-expectancy-egyptology",
+        "funerary-rituals"
+      ]
+    },
+    {
+      "id": "death-in-childhood",
+      "kind": "death",
+      "title": "The years left unwritten",
+      "text": "Your life ends in childhood. The places you knew and the people who cared for you carry a memory of the time you had. Your story was short; it was still a life.",
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "life-expectancy-egyptology",
+        "funerary-rituals"
+      ]
+    },
+    {
+      "id": "death-in-adulthood",
+      "kind": "death",
+      "title": "The life you leave behind",
+      "text": "Your life comes to an end. Work is left unfinished, familiar voices continue without yours, and the people whose lives crossed yours remember you in their own ways.",
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "life-expectancy-egyptology",
+        "funerary-rituals"
+      ]
+    },
+    {
+      "id": "death-in-later-life",
+      "kind": "death",
+      "title": "A life becomes a memory",
+      "text": "Your life comes to an end after many seasons. What remains is scattered among people, work, stories and small acts that once seemed ordinary. The harbor goes on, and you become part of its past.",
+      "evidence": "historically-inspired",
+      "sourceIds": [
+        "life-expectancy-egyptology",
+        "funerary-rituals"
+      ]
+    }
+  ],
+  "defaultEnding": "death-in-later-life",
+  "sources": [
+    {
+      "id": "strabo-alexandria",
+      "title": "Strabo, Geography 17.1.3–10: the Nile and Alexandria",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/17A1*.html",
+      "publisher": "LacusCurtius, University of Chicago; H. L. Jones, Loeb translation (1932)",
+      "kind": "primary",
+      "period": "Augustan-era account of Egypt and Alexandria, referring also to earlier Ptolemaic history",
+      "geography": "Alexandria and the Nile valley",
+      "summary": "Describes Alexandria's harbors, Pharos, streets and royal district, and the importance of Nile inundation, canals and agricultural management.",
+      "limitations": "Elite literary testimony with Roman imperial sympathies. Descriptive claims and reported numbers are not a population survey, an exact city map or annual household probabilities.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-war",
+      "title": "Bellum Alexandrinum 1–33: the Alexandrian War",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Caesar/Alexandrian_War/A*.html",
+      "publisher": "LacusCurtius, University of Chicago; Loeb translation (1955)",
+      "kind": "primary",
+      "period": "Events of 48–47 BCE; authorship traditionally associated with the Caesarian corpus",
+      "geography": "Alexandria and the Nile Delta",
+      "summary": "Narrates fighting, barricades, harbor operations and disruption of Caesar's water supply during the Alexandrian War.",
+      "limitations": "A partisan Roman military narrative with prejudicial descriptions of Alexandrians. It supports a war setting, not invented civilian experiences, precise casualty odds or a claim that the entire Library was destroyed.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "caesar-chronology",
+      "title": "Chronological Tables for Caesar's Wars (58–45 BCE)",
+      "url": "https://histos.org/documents/2017AA07Ramsey-RaaflaubChronologicalTables.pdf",
+      "publisher": "John T. Ramsey and Kurt A. Raaflaub, Histos 11 (2017); journal page published online 2018",
+      "kind": "scholarship",
+      "period": "58–45 BCE, including the Alexandrian War of 48–47 BCE",
+      "geography": "Roman campaigns including Alexandria and Egypt",
+      "summary": "Reconstructs the sequence of Caesar's campaigns and separates Roman civil-calendar dates from reconstructed Julian dates.",
+      "limitations": "A scholarly chronology reconstructed from ancient testimony. Day-level dates may be disputed; the game uses year-level anchors and does not reproduce whole tables.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "ptolemaic-period",
+      "title": "Ptolemaic Period",
+      "url": "https://egymonuments.gov.eg/en/historical-periods/ptolemaic-period/",
+      "publisher": "Egyptian Ministry of Tourism and Antiquities",
+      "kind": "museum",
+      "period": "332–30 BCE; Actium in 31 BCE and the end of Ptolemaic rule in 30 BCE",
+      "geography": "Egypt, with Alexandria as capital",
+      "summary": "Provides a heritage-authority overview of Ptolemaic Egypt and the transition following the defeat at Actium.",
+      "limitations": "A broad public-history overview, not a detailed social dataset. Use the year-level chronology without treating its compressed narrative as proof of every personal consequence.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "augustus-res-gestae",
+      "title": "Augustus, Res Gestae, especially section 27",
+      "url": "https://www.livius.org/sources/content/augustus-res-gestae/",
+      "publisher": "Livius.org; F. W. Shipley translation from LacusCurtius",
+      "kind": "primary",
+      "period": "Augustus's retrospective inscription, completed near the end of his reign in 14 CE",
+      "geography": "Roman Empire; section 27 concerns annexation of Egypt",
+      "summary": "Augustus claims to have added Egypt to Roman rule. The inscription offers a contemporary imperial voice for the political transition.",
+      "limitations": "Self-promotional imperial testimony. It does not describe the response of all Egyptians and must be paired with independent chronology and local evidence.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "augustan-alexandria-documents",
+      "title": "Alexandrian Documents from the Reign of Augustus",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/",
+      "publisher": "Peter van Minnen, Department of Classics, University of Cincinnati",
+      "kind": "scholarship",
+      "period": "Augustan Alexandria, especially 13 BCE; individual texts and later additions have their own dates",
+      "geography": "Documents issued in Alexandria, many recovered from reused cartonnage at Abusir el-Melek",
+      "summary": "Provides scholarly English translations of Alexandrian contracts, letters, petitions and association records, with document identifiers and links to the underlying Greek texts.",
+      "limitations": "The surviving archive is selective, not representative of every household. Early Roman material is comparative evidence for earlier Ptolemaic years; use each document's actual date.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-apprenticeship",
+      "title": "BGU 4.1125.1–15: apprenticeship contract for a musician",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1125_1_15.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "March/April 13 BCE",
+      "geography": "Alexandria",
+      "summary": "Records training in flute playing, the term of apprenticeship, provision of food and clothing, and examination by fellow practitioners.",
+      "limitations": "The apprentice is enslaved, and this is a specific musical contract. It is evidence for organized training, not universal schooling or the terms of a free child's scribal apprenticeship.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-wetnursing",
+      "title": "BGU 4.1058: wetnursing contract",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1058.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "30 March 13 BCE",
+      "geography": "Alexandria",
+      "summary": "Documents paid nursing, infant care and a clause anticipating the possibility of a child's death.",
+      "limitations": "Both nurse and infant are enslaved in this contract. Its clauses show contemporary concerns; they do not estimate infant mortality or demonstrate that every household employed a wet nurse.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-marriage",
+      "title": "BGU 4.1052.1–34: marriage contract",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1052_1_34.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "15 April 13 BCE",
+      "geography": "Alexandria",
+      "summary": "Records an agreement for a shared life, a dowry and economic and marital obligations.",
+      "limitations": "One Greek-language legal agreement, with particular status and guardianship conventions. Its terms are not universal Egyptian marriage rules or an observed marriage-age distribution.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-letter",
+      "title": "BGU 4.1141: private letter",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1141.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "After 9 April 13 BCE",
+      "geography": "Alexandria",
+      "summary": "Preserves correspondence concerning friendship, accusations, work, wages and interpersonal obligations.",
+      "limitations": "A fragmentary and sometimes difficult personal letter, embedded in unequal relationships. It supports written communication as a theme, not the fictional character's letter or a literacy rate.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-bakery-lease",
+      "title": "BGU 4.1117: lease contract for a bakery",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1117.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "April/May 13 BCE",
+      "geography": "Alexandria, Beta quarter",
+      "summary": "Describes a bakery lease, equipment, rent, repairs and responsibility for taxes, illustrating workshop livelihoods and contractual obligations.",
+      "limitations": "A single bakery agreement. Monetary amounts and conditions cannot be generalized to all trades or converted directly into the game's abstract wealth score.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "alexandrian-inheritance",
+      "title": "BGU 4.1151.1–18: partial payment of an inheritance",
+      "url": "https://classics.uc.edu/users/vanminnen/ancient_alexandria/pdf/bgu_4_1151_1_18.pdf",
+      "publisher": "Peter van Minnen, University of Cincinnati, translation of the primary papyrus",
+      "kind": "primary",
+      "period": "12 April 13 BCE",
+      "geography": "Alexandria",
+      "summary": "Records an agreement concerning the partial payment of an inheritance, supporting a narrative theme of property and obligations between generations.",
+      "limitations": "A particular legal settlement. It supplies neither a representative inheritance amount nor evidence that all older people held transferable property.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "education-apprenticeship",
+      "title": "Education and Apprenticeship",
+      "url": "https://escholarship.org/uc/item/1026h44g",
+      "publisher": "Nikolaos Lazaridis (2010), UCLA Encyclopedia of Egyptology",
+      "kind": "scholarship",
+      "period": "Survey across ancient Egyptian periods, including Ptolemaic and Roman bilingual education",
+      "geography": "Ancient Egypt; not exclusively Alexandria",
+      "summary": "Reviews training for scribes and specialist crafts, educational exercises and restricted access to formal schooling.",
+      "limitations": "A long-period synthesis with uneven evidence. It cannot supply exact Alexandrian enrolment or literacy probabilities, and does not justify giving every child formal schooling.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "funerary-rituals",
+      "title": "Funerary Rituals (Ptolemaic and Roman Periods)",
+      "url": "https://ueaeprints.uea.ac.uk/id/eprint/29469/",
+      "publisher": "Christina Riggs (2010), UCLA Encyclopedia of Egyptology; University of East Anglia repository",
+      "kind": "scholarship",
+      "period": "Ptolemaic and Roman periods",
+      "geography": "Egypt; evidence includes Akhmim, Thebes, Tuna el-Gebel and other communities",
+      "summary": "Surveys burial, commemoration, mourning and funerary associations, including arrangements for members to contribute to funeral costs.",
+      "limitations": "Rites varied with community, status, resources and religion. Elite mummification evidence is not a universal Alexandrian funeral script; use broad remembrance themes carefully.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "family-care",
+      "title": "The abuse of aged parents in the ancient Roman world",
+      "url": "https://academic.oup.com/bics/article/66/2/41/7756244",
+      "publisher": "Tim Parkin, Bulletin of the Institute of Classical Studies 66(2), 41–50; online 2024",
+      "kind": "scholarship",
+      "period": "Roman world with Ptolemaic Egyptian petitions of 225 and 221 BCE among the comparative cases",
+      "geography": "Roman Mediterranean and the Arsinoite nome in Egypt",
+      "summary": "Examines duties, dependence and care between generations, including papyrus petitions by older parents.",
+      "limitations": "Sparse, often one-sided dispute evidence from varied times and places. It does not establish rates of neglect or a uniform old-age household arrangement in Alexandria.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "nile-floods",
+      "title": "Volcanic suppression of Nile summer flooding triggers revolt and constrains interstate conflict in ancient Egypt",
+      "url": "https://www.nature.com/articles/s41467-017-00957-y",
+      "publisher": "Joseph G. Manning and colleagues (2017), Nature Communications 8, 900; author copy at UC Berkeley",
+      "kind": "scholarship",
+      "period": "Ptolemaic Egypt, 305–30 BCE, with later Nilometer measurements used for comparison",
+      "geography": "Nile basin and Egypt; papyrus survival particularly strong in the Fayyum",
+      "summary": "Combines environmental reconstructions and ancient writings to examine Nile flood variability, agricultural vulnerability and social stress.",
+      "limitations": "Ancient flood indications are intermittent and may have dating uncertainty. The continuous Nilometer series begins in 622 CE; this is not a precise annual Alexandrian food-price or famine-risk dataset.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "roman-model-life-table",
+      "title": "Roman Model Life Table (Coale–Demeny Female West Level 3)",
+      "url": "https://www.columbia.edu/~wvh1/syllabus/lifetable.html",
+      "publisher": "Columbia University / W. V. Harris teaching resources",
+      "kind": "scholarship",
+      "period": "Comparative Roman demographic model; not an observed Ptolemaic cohort",
+      "geography": "Roman comparison model; not an Alexandria-specific dataset",
+      "summary": "Provides age-band mortality, survivorship and remaining life expectancy for a model population with life expectancy at birth of 25 years.",
+      "limitations": "A female model life table, not measured male Alexandrian rates. Converting interval death probabilities into annual hazards assumes within-band timing. Age at death is simulated, not a historical prediction.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "demography-evidence-limits",
+      "title": "Quantifying antiquity",
+      "url": "https://www.columbia.edu/cu/21stC/issue-2.3/bagnall.html",
+      "publisher": "Roger S. Bagnall, Columbia University",
+      "kind": "scholarship",
+      "period": "Contrasts Roman Egyptian census evidence with Hellenistic Egyptian household lists",
+      "geography": "Egypt, with wider methodological comparisons",
+      "summary": "Explains the promise and limits of ancient demographic evidence, including why Hellenistic household lists without ages cannot yield life expectancy.",
+      "limitations": "A methodological essay rather than a downloadable life table. It explicitly cautions against combining Roman and Hellenistic evidence without careful analysis.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "life-expectancy-egyptology",
+      "title": "Life Expectancy",
+      "url": "https://escholarship.org/content/qt7zb2f62c/qt7zb2f62c.pdf?t=rzuedi",
+      "publisher": "Sonia Zakrzewski (2015), UCLA Encyclopedia of Egyptology",
+      "kind": "scholarship",
+      "period": "Long-period review of ancient Egyptian demographic evidence, including Roman model tables",
+      "geography": "Egypt; evidence from varied populations and sites",
+      "summary": "Explains demographic methods and biases. Table 1 reproduces a model life table for Roman Egyptian females after Bagnall and Frier (1994), with life expectancy at birth of 22.5 years.",
+      "limitations": "A later-period female model inferred using census returns and Coale–Demeny West, not observed mortality for a male in Ptolemaic Alexandria. Annual interpolation and the final age-band policy are additional game assumptions; cause-of-death rates are not supplied.",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

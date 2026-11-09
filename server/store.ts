@@ -1,5 +1,5 @@
 import type { AdminCatalog, PublishedCatalog, PublishedWorld } from "./content.ts";
-import { compileWorld, getBuiltinCatalog, getBuiltinWorld, validateCatalog, worldSummary } from "./content.ts";
+import { compilePublishedWorld, getBuiltinCatalog, getBuiltinWorld, getArchivedBuiltinWorld, isLegacyFactoryDraft, validateCatalog, worldSummary } from "./content.ts";
 import { contentFingerprint } from "../src/random.ts";
 
 export interface StatementResult { meta?: { changes?: number }; results?: unknown[]; success?: boolean }
@@ -46,6 +46,7 @@ export async function readDraft(db: ContentDatabase): Promise<AdminCatalog> {
     revision: current.revision, worlds: JSON.parse(current.draft_json),
     publishedRevision: current.published_revision ?? 0, publishedAt: current.published_at,
   };
+  if (current.revision === 0 && !current.published_id && isLegacyFactoryDraft(catalog.worlds)) catalog.worlds = getBuiltinCatalog().worlds;
   validateCatalog(catalog);
   return catalog;
 }
@@ -82,6 +83,8 @@ export async function readPublishedWorld(db: ContentDatabase, id: string): Promi
 export async function readRevision(db: ContentDatabase, id: string): Promise<PublishedWorld | null> {
   const builtin = getBuiltinWorld();
   if (id === builtin.revisionId) return builtin;
+  const archived = getArchivedBuiltinWorld(id);
+  if (archived) return archived;
   const saved = await db.prepare("SELECT world_json FROM content_world_revisions WHERE id = ?").bind(id).first<{ world_json: string }>();
   return saved ? JSON.parse(saved.world_json) as PublishedWorld : null;
 }
@@ -91,12 +94,9 @@ export async function publishDraft(db: ContentDatabase, expectedRevision: number
   const current = await row(db);
   if (!current || current.revision !== expectedRevision) throw new ContentConflict();
   if (current.published_revision === expectedRevision && current.published_id) return readPublished(db);
-  const draft: AdminCatalog = { revision: current.revision, worlds: JSON.parse(current.draft_json) };
+  const draft = await readDraft(db);
   validateCatalog(draft);
-  const worlds: PublishedWorld[] = draft.worlds.filter(world => world.enabled).map(world => {
-    const pack = compileWorld(world);
-    return { id: world.id, revisionId: `pack-${contentFingerprint({ pack, routes: world.routes })}`, pack, routes: structuredClone(world.routes) };
-  });
+  const worlds: PublishedWorld[] = draft.worlds.filter(world => world.enabled).map(compilePublishedWorld);
   const publicationId = `publication-${draft.revision}-${contentFingerprint(worlds)}`;
   const publishedAt = new Date().toISOString();
   // D1 batch is atomic. Every insert and the pointer switch checks the same draft

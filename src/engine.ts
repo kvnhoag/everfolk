@@ -1,10 +1,12 @@
 import type {
-  Choice, Command, Comparison, Condition, Effect, JournalEntry,
+  ActivityAvailability, Choice, Command, Comparison, Condition, Effect, JournalEntry,
   LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
 } from "./types.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { yearAtAge } from "./calendar.ts";
+import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
+import { applyEconomyEffect, initialEconomy, yearlyAssetIncome } from "./economy.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -28,19 +30,30 @@ function compare(left: number, op: Comparison, right: number): boolean {
   }
 }
 
-function matches(condition: Condition | undefined, state: LifeState): boolean {
+export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
   if (!condition) return true;
   switch (condition.type) {
+    case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);
+    case "debt": return state.economy !== undefined && compare(state.economy.debt, condition.op, condition.value);
+    case "asset": return state.economy !== undefined && compare(state.economy.assets[condition.asset] ?? 0, condition.op, condition.value);
     case "stat": return compare(state.stats[condition.stat], condition.op, condition.value);
     case "flag": return state.flags[condition.flag] === condition.value;
     case "age": return compare(state.age, condition.op, condition.value);
     case "year": return compare(state.year, condition.op, condition.value);
     case "origin": return state.originId === condition.origin;
-    case "all": return condition.conditions.every(child => matches(child, state));
-    case "any": return condition.conditions.some(child => matches(child, state));
-    case "not": return !matches(condition.condition, state);
+    case "skill": return state.character !== undefined && compare(state.character.skills[condition.skill], condition.op, condition.value);
+    case "job": return state.character !== undefined && state.character.jobId === condition.job;
+    case "relationship": return state.character !== undefined && state.character.relationshipStatus === condition.status &&
+      (condition.partner === undefined || state.character.partnerId === condition.partner);
+    case "known-partner": return state.character?.knownPartnerIds?.includes(condition.partner) === true || state.character?.partnerId === condition.partner;
+    case "children": return state.character !== undefined && compare(state.character.children.length, condition.op, condition.value);
+    case "all": return condition.conditions.every(child => matchesCondition(child, state));
+    case "any": return condition.conditions.some(child => matchesCondition(child, state));
+    case "not": return !matchesCondition(condition.condition, state);
   }
 }
+
+const matches = matchesCondition;
 
 function pick<T>(items: readonly T[], weight: (item: T) => number, state: LifeState): T {
   if (items.length === 0) throw new Error("Cannot select from an empty list.");
@@ -58,6 +71,25 @@ function pick<T>(items: readonly T[], weight: (item: T) => number, state: LifeSt
   return items[items.length - 1];
 }
 
+/** Inclusive integer sampling without rounding bias or unsafe span arithmetic. */
+function startingStat(min: number, max: number, state: LifeState): number {
+  if (min === max) return min;
+  const width = BigInt(max) - BigInt(min) + 1n;
+  const words = width <= 0x1_0000_0000n ? 1 : 2;
+  const size = 1n << BigInt(words * 32);
+  const limit = size - size % width;
+  let draw: bigint;
+  do {
+    draw = 0n;
+    for (let i = 0; i < words; i++) {
+      const random = nextRandom(state.rngState);
+      state.rngState = random.state;
+      draw = (draw << 32n) | BigInt(random.value * 0x1_0000_0000);
+    }
+  } while (draw >= limit);
+  return Number(BigInt(min) + draw % width);
+}
+
 function mutableSnapshot(state: LifeState): LifeState {
   // Historical entries are frozen and safe to share across public snapshots.
   return {
@@ -65,6 +97,13 @@ function mutableSnapshot(state: LifeState): LifeState {
     stats: { ...state.stats }, flags: { ...state.flags },
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
+    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets } } } : {}),
+    ...(state.character ? { character: {
+      ...state.character, skills: { ...state.character.skills },
+      children: state.character.children.map(child => ({ ...child })),
+      lastActivityAges: { ...state.character.lastActivityAges },
+      ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
+    } } : {}),
   };
 }
 
@@ -75,23 +114,47 @@ export function createEngine(input: unknown): LifeEngine {
   const fingerprint = contentFingerprint(world);
   const eventById = new Map(world.events.map(event => [event.id, event]));
   const endingById = new Map(world.endings.map(ending => [ending.id, ending]));
+  const activityById = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
 
   function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string): void {
     state.journal.push({ type, id, text, age: state.age, year: state.year });
   }
 
-  function finish(state: LifeState, id: string): void {
+  function finish(state: LifeState, id: string, explicitCause?: string, decisionContext?: string): void {
     if (state.phase === "ended") return;
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
+    let causeText = "";
+    if (ending.kind === "death" && world.character) {
+      // An authored consequence describes what actually happened. Conditions on
+      // causes govern random attribution, not deliberate exposure to a hazard.
+      const cause = explicitCause
+        ? world.character.deathCauses.find(candidate => candidate.id === explicitCause)!
+        : pick(world.character.deathCauses.filter(cause => !cause.choiceOnly && matches(cause.when, state)), candidate => candidate.weight, state);
+      state.deathCauseId = cause.id;
+      causeText = ` Cause of death: ${cause.title}. ${cause.text}`;
+      if (explicitCause && decisionContext) {
+        state.deathCauseContext = decisionContext;
+        causeText += ` Decision leading to death: ${decisionContext}`;
+      }
+    }
     state.phase = "ended";
     state.endingId = id;
     state.pendingEventId = null;
-    journal(state, "ending", id, `${ending.title}: ${ending.text}`);
+    journal(state, "ending", id, `${ending.title}: ${ending.text}${causeText}`);
   }
 
-  function apply(state: LifeState, effects: readonly Effect[]): void {
+  function syncCharacterFlags(state: LifeState): void {
+    if (!state.character) return;
+    if (Object.hasOwn(state.flags, "partnered")) state.flags.partnered = state.character.relationshipStatus === "married";
+    if (Object.hasOwn(state.flags, "parent")) state.flags.parent = state.character.children.length > 0;
+  }
+
+  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string): void {
     for (const effect of effects) {
+      if (applyEconomyEffect(world, state, effect)) continue;
+      const reason = characterEffectReason(world, state, effect, true);
+      if (reason) throw new Error(`Character effect is unavailable: ${reason}`);
       switch (effect.type) {
         case "stat": {
           const definition = world.stats[effect.stat];
@@ -100,9 +163,44 @@ export function createEngine(input: unknown): LifeEngine {
           break;
         }
         case "flag": state.flags[effect.flag] = effect.value; break;
-        case "end": finish(state, effect.ending); return;
+        case "skill": {
+          const definition = world.character!.skills[effect.skill];
+          state.character!.skills[effect.skill] = Math.max(definition.min,
+            Math.min(definition.max, state.character!.skills[effect.skill] + effect.delta));
+          break;
+        }
+        case "job": state.character!.jobId = effect.job; break;
+        case "relationship":
+          state.character!.partnerId = effect.partner;
+          state.character!.relationshipStatus = effect.status;
+          break;
+        case "introduce": {
+          const character = state.character!;
+          character.knownPartnerIds ??= [];
+          if (!character.knownPartnerIds.includes(effect.partner)) {
+            character.knownPartnerIds.push(effect.partner);
+            const person = world.character!.partners.find(partner => partner.id === effect.partner)!;
+            journal(state, "activity", `met-${person.id}`, `You meet ${person.name}.`);
+          }
+          break;
+        }
+        case "divorce":
+          state.character!.partnerId = null;
+          state.character!.relationshipStatus = "divorced";
+          break;
+        case "child": {
+          const character = state.character!;
+          const used = new Set(character.children.map(child => child.name));
+          const names = world.character!.childNames.filter(name => !used.has(name));
+          const name = names.length ? pick(names, () => 1, state) : `${world.character!.childNames[0]} ${character.children.length + 1}`;
+          character.children.push({ id: `child-${character.children.length + 1}`, name, birthAge: state.age, otherParentId: character.partnerId! });
+          journal(state, "activity", `child-${character.children.length}`, `${name} joins your family.`);
+          break;
+        }
+        case "end": syncCharacterFlags(state); finish(state, effect.ending, effect.deathCause, decisionContext); return;
       }
     }
+    syncCharacterFlags(state);
   }
 
   function checkEndings(state: LifeState): void {
@@ -256,6 +354,8 @@ export function createEngine(input: unknown): LifeEngine {
     assertCompatible(state);
     if (state.phase === "ended") throw new Error("This life has ended.");
     if (state.commands.length >= MAX_COMMANDS) throw new Error("Life command limit reached.");
+    if (world.character && !state.character) throw new Error("State is missing its character record.");
+    if (world.economy && !state.economy) throw new Error("State is missing its economy record.");
   }
 
   function start(seed: string): LifeState {
@@ -271,11 +371,18 @@ export function createEngine(input: unknown): LifeEngine {
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
+      ...(world.character ? { character: initialCharacter(world)! } : {}),
     };
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
+    for (const [id, definition] of Object.entries(world.stats)) {
+      const range = origin.statRanges?.[id] ?? definition.initialRange;
+      if (range) state.stats[id] = startingStat(range.min, range.max, state);
+    }
+    if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
+    if (world.economy) state.economy = initialEconomy(world, state)!;
     checkEndings(state);
     resolveEvents(state, true);
     return freeze(state);
@@ -291,11 +398,29 @@ export function createEngine(input: unknown): LifeEngine {
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
+    const annualIncome = (): void => {
+      if (next.phase !== "ended" && next.character?.jobId) {
+        const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
+        apply(next, job.yearlyEffects);
+        journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+      }
+      if (next.phase !== "ended") {
+        const income = yearlyAssetIncome(world, next);
+        if (income > 0) {
+          apply(next, [{ type: "cash", delta: income }]);
+          journal(next, "activity", "asset-income", `Your assets bring in ${income} ${world.economy!.currency.short}.`);
+        }
+      }
+    };
+    // Money-enabled years settle income before costs, avoiding bridge debt
+    // created only by batching a whole year. Legacy worlds keep exact ordering.
+    if (world.economy) annualIncome();
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
       if (matches(rule.when, next)) apply(next, rule.effects);
     }
+    if (!world.economy) annualIncome();
     checkEndings(next);
     resolveEvents(next, true);
   }
@@ -312,7 +437,7 @@ export function createEngine(input: unknown): LifeEngine {
     journal(next, "choice", choice.id, choice.text);
     const outcome = pick(choice.outcomes, candidate => candidate.weight, next);
     journal(next, "outcome", outcome.id, outcome.text);
-    apply(next, outcome.effects);
+    apply(next, outcome.effects, `${choice.text} — ${outcome.text}`);
     checkEndings(next);
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
@@ -338,6 +463,46 @@ export function createEngine(input: unknown): LifeEngine {
     return Object.freeze(choicesFor(eventById.get(state.pendingEventId!)!, state));
   }
 
+  function getActivities(state: LifeState): readonly ActivityAvailability[] {
+    assertCompatible(state);
+    return freeze((world.character?.activities ?? []).filter(activity => {
+      if (!world.character?.requireIntroductions) return true;
+      const known = state.character?.knownPartnerIds ?? [];
+      const introduced = new Set(activity.outcomes.flatMap(outcome => outcome.effects.flatMap(effect => effect.type === "introduce" ? [effect.partner] : [])));
+      if (activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "relationship" && !known.includes(effect.partner)))) return false;
+      if (activityPartnerIds(activity).some(partner => !known.includes(partner) && !introduced.has(partner))) return false;
+      const introduces = introduced.size > 0;
+      return activity.category !== "relationship" || known.length > 0 || Boolean(state.character?.partnerId) || introduces;
+    }).map(activity => {
+      const reason = activityReason(world, state, activity, matches);
+      return { ...activity, available: reason === undefined, ...(reason ? { reason } : {}) };
+    }));
+  }
+
+  function actInto(next: LifeState, activityId: string): void {
+    assertPlayable(next);
+    const activity = activityById.get(activityId);
+    if (!activity) throw new Error(`Unknown activity: ${activityId}`);
+    const reason = activityReason(world, next, activity, matches);
+    if (reason) throw new Error(`Activity is unavailable: ${reason}`);
+    next.commands.push({ type: "act", activity: activityId });
+    next.character!.lastActivityAge = next.age;
+    next.character!.lastActivityAges[activityId] = next.age;
+    journal(next, "activity", activity.id, activity.text);
+    const outcome = pick(activity.outcomes, candidate => candidate.weight, next);
+    journal(next, "outcome", outcome.id, outcome.text);
+    apply(next, outcome.effects, `${activity.text} — ${outcome.text}`);
+    checkEndings(next);
+    resolveEvents(next, false);
+  }
+
+  function act(state: LifeState, activityId: string): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    actInto(next, activityId);
+    return freeze(next);
+  }
+
   function replay(seed: string, commands: readonly Command[]): LifeState {
     if (!Array.isArray(commands) || commands.length > MAX_COMMANDS) throw new Error("Invalid command history length.");
     // Reconstruct privately in one pass; only the final state escapes to callers.
@@ -348,6 +513,8 @@ export function createEngine(input: unknown): LifeEngine {
       if (command.type === "advance" && Object.keys(command).length === 1) advanceInto(state);
       else if (command.type === "choose" && typeof command.choice === "string" && Object.keys(command).length === 2) {
         chooseInto(state, command.choice);
+      } else if (command.type === "act" && typeof command.activity === "string" && Object.keys(command).length === 2) {
+        actInto(state, command.activity);
       } else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -378,5 +545,5 @@ export function createEngine(input: unknown): LifeEngine {
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, replay, save, load });
 }

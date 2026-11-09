@@ -11,7 +11,7 @@ function choiceFor(engine: LifeEngine, state: LifeState, career: Career): string
   const choices = engine.getChoices(state);
   if (state.pendingEventId === "a-place-on-the-manifest") {
     const chosen = choices.find(choice => choice.id === career);
-    assert.ok(chosen, `The ${career} career must be available to this literate test character.`);
+    assert.ok(chosen, `The ${career} career must be available after its required training.`);
     return chosen.id;
   }
   if (state.pendingEventId === "the-first-letters") return "learn-letters";
@@ -19,12 +19,18 @@ function choiceFor(engine: LifeEngine, state: LifeState, career: Career): string
   return choices[0].id;
 }
 
-function until(engine: LifeEngine, seed: string, career: Career, stop: (state: LifeState) => boolean): LifeState {
+function until(engine: LifeEngine, seed: string, career: Career, stop: (state: LifeState) => boolean, trainSkills = true): LifeState {
   let state = engine.start(seed);
   for (let step = 0; step < 500 && !stop(state) && state.phase !== "ended"; step++) {
-    state = state.phase === "choice"
-      ? engine.choose(state, choiceFor(engine, state, career))
-      : engine.advance(state);
+    if (state.phase === "choice") state = engine.choose(state, choiceFor(engine, state, career));
+    else {
+      // Build the actual graded skills through accepted player commands. The
+      // narrative literacy flag alone no longer grants every kind of work.
+      const trainingId = state.age < 18 && state.character!.skills.literacy < 30 ? "train-literacy"
+        : state.age < 18 && state.character!.skills.seamanship < 15 ? "train-seamanship" : undefined;
+      const training = trainSkills ? engine.getActivities(state).find(activity => activity.id === trainingId && activity.available) : undefined;
+      state = training ? engine.act(state, training.id) : engine.advance(state);
+    }
   }
   return state;
 }
@@ -32,6 +38,11 @@ function until(engine: LifeEngine, seed: string, career: Career, stop: (state: L
 function withoutMortality(): LifeEngine {
   const copy = structuredClone(pack);
   copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  // This progression fixture isolates skill gates from household affordability;
+  // unmodified-pack mortality and bounded-stat coverage stays above.
+  copy.stats.wealth.initial = 80;
+  copy.stats.wealth.initialRange = { min: 80, max: 80 };
+  for (const origin of copy.origins) origin.statRanges.wealth = { min: 80, max: 80 };
   return createEngine(copy);
 }
 
@@ -45,6 +56,24 @@ test("Alexandria begins with birth and a household-care decision in 66 BCE", () 
   assert.equal(state.commands.length, 0);
   assert.equal(state.journal[0].type, "birth");
   assert.equal(state.journal.some(entry => entry.age > 0), false);
+});
+
+test("Alexandria newborns vary within their household's configured starting ranges", () => {
+  const households = new Map(pack.origins.map(origin => [origin.id, new Set<string>()]));
+  for (let index = 0; index < 128; index++) {
+    const life = engine.start(`alexandria-origin-cohort-${index}`);
+    const origin = engine.world.origins.find(origin => origin.id === life.originId)!;
+    assert.equal(life.pendingEventId, "the-first-household");
+    assert.equal(life.age, 0);
+    for (const [stat, definition] of Object.entries(engine.world.stats)) {
+      const range = origin.statRanges?.[stat] ?? definition.initialRange;
+      assert.ok(range, `${origin.id}: ${stat} has a starting range`);
+      assert.ok(Number.isInteger(life.stats[stat]) && life.stats[stat] >= range.min && life.stats[stat] <= range.max, `${origin.id}: ${stat} follows its own range`);
+    }
+    households.get(origin.id)!.add(JSON.stringify(life.stats));
+    assert.deepEqual(engine.start(life.seed), life);
+  }
+  for (const [origin, variations] of households) assert.ok(variations.size > 1, `${origin} produces different individuals`);
 });
 
 test("a birth decision and its continuation survive save/load without skipping childhood", () => {
@@ -67,6 +96,8 @@ test("all three careers can pass the former age-23 boundary and end in old-age d
     assert.equal(engine.world.endings.find(ending => ending.id === state.endingId)?.kind, "death");
     assert.equal(state.endingId, "death-in-later-life");
     assert.equal(state.flags[career === "stay" ? "stayed" : career === "sail" ? "sailed" : "studied"], true);
+    assert.ok(state.commands.some(command => command.type === "act" && command.activity === "train-seamanship"));
+    assert.ok(state.commands.some(command => command.type === "act" && command.activity === "train-literacy"));
     assert.ok(state.journal.some(entry => entry.age > 23));
     assert.ok(state.journal.some(entry => entry.id === "care-between-generations"));
     assert.ok(state.journal.some(entry => entry.id === "putting-things-in-order"));
@@ -79,17 +110,33 @@ test("all three careers can pass the former age-23 boundary and end in old-age d
   }
 });
 
-test("childhood learning opens study and the selected adult career receives its own follow-up", () => {
+test("graded childhood training opens careers and the selected named job receives its own follow-up", () => {
   const safeEngine = withoutMortality();
   const followups = { sail: "letters-across-the-water", study: "the-unfamiliar-page", stay: "the-neighbors-request" };
   for (const career of ["stay", "sail", "study"] as const) {
     const adult = until(safeEngine, `training-${career}`, career, state => state.pendingEventId === "a-place-on-the-manifest");
     assert.ok(adult.age >= 18 && adult.age <= 21, "The personal milestone may wait for the next decision interval.");
     assert.equal(adult.flags.literate, true);
+    assert.ok(adult.character!.skills.literacy >= 30);
+    assert.ok(adult.character!.skills.seamanship >= 15);
     assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["stay", "sail", "study"]);
     let next = safeEngine.choose(adult, career);
+    assert.equal(next.character!.jobId, career === "stay" ? "porter" : career === "sail" ? "sailor" : "copyist");
     while (next.phase === "ready") next = safeEngine.advance(next);
     assert.ok(next.age - adult.age >= 2 && next.age - adult.age <= 3);
     assert.equal(next.pendingEventId, followups[career]);
   }
+});
+
+test("a literacy flag alone does not bypass graded copyist and sailor requirements", () => {
+  const safeEngine = withoutMortality();
+  const adult = until(safeEngine, "learning-without-extra-training", "stay", state => state.pendingEventId === "a-place-on-the-manifest", false);
+  assert.equal(adult.flags.literate, true);
+  assert.ok(adult.character!.skills.literacy < 30);
+  assert.ok(adult.character!.skills.seamanship < 15);
+  assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["stay"]);
+  const before = structuredClone(adult);
+  assert.throws(() => safeEngine.choose(adult, "study"), /unavailable/);
+  assert.throws(() => safeEngine.choose(adult, "sail"), /unavailable/);
+  assert.deepEqual(adult, before, "Rejected career requests must preserve the current snapshot.");
 });

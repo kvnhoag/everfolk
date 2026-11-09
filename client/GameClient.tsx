@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import App from "./App";
-import { getBuiltinWorld, worldSummary } from "../server/content.ts";
+import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
 import { selectWorldPack } from "./session.ts";
 
@@ -32,7 +32,7 @@ export default function GameClient() {
       try {
         const saved = window.localStorage.getItem(SELECTION_KEY);
         if (saved) { world = JSON.parse(saved) as PublishedWorld; selectWorldPack(world.pack); restored = true; }
-        else restored = window.localStorage.getItem("historical-lives:alexandria-sample:v3") !== null;
+        else if (window.localStorage.getItem("historical-lives:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
       if (!restored) {
         try {
@@ -79,7 +79,7 @@ export default function GameClient() {
 
   if (!active) return <main className="page-shell"><p>Opening your life…</p></main>;
   return <>
-    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={() => { void enterWorld(active.world.id, true); }} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} worldRoutes={active.world.routes} />
+    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={() => { void enterWorld(active.world.id, true); }} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">ANOTHER PLACE. ANOTHER POSSIBILITY.</p><h2 id="world-picker-title">Choose a world.</h2><p>Enter a published world, or return to the life you saved there. Each world revision keeps its own saved life.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}

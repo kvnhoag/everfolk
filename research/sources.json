@@ -226,5 +226,77 @@
     "summary": "Explains demographic methods and biases. Table 1 reproduces a model life table for Roman Egyptian females after Bagnall and Frier (1994), with life expectancy at birth of 22.5 years.",
     "limitations": "A later-period female model inferred using census returns and Coale–Demeny West, not observed mortality for a male in Ptolemaic Alexandria. Annual interpolation and the final age-band policy are additional game assumptions; cause-of-death rates are not supplied.",
     "accessed": "2026-11-05"
+  },
+  {
+    "id": "louvre-dendera-zodiac",
+    "title": "Zodiaque de Dendéra (E 13482)",
+    "url": "https://collections.louvre.fr/en/ark:/53355/cl010028871",
+    "publisher": "Musée du Louvre, Egyptian Antiquities collection",
+    "kind": "museum",
+    "period": "50 BCE; catalogue dates the relief to June–August",
+    "geography": "Hathor temple, Dendera, Upper Egypt",
+    "summary": "Catalogues a sandstone ceiling relief with zodiacal signs, decans and constellations, providing a contemporary example of Egyptian astral imagery.",
+    "limitations": "A temple object from Dendera, not an Alexandrian teaching manual. It supplies neither access probabilities nor evidence that astrological predictions were reliable.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "alexandrian-terracottas",
+    "title": "Alexandrian terracottas",
+    "url": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/museo-gregoriano-egizio/sala-vii--alessandria-e-palmira/terrecotte-alessandrine.html",
+    "publisher": "Vatican Museums, Gregorian Egyptian Museum",
+    "kind": "museum",
+    "period": "Ptolemaic and Roman periods",
+    "geography": "Alexandria; collection objects have varied acquisition histories",
+    "summary": "Describes Alexandrian figurative terracottas, including mould-made examples and a range of decorative and religious subjects.",
+    "limitations": "The collection spans multiple periods and some objects entered through the antiquities market. It does not measure workshop employment, wages or apprenticeship access.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "met-wood-carving",
+    "title": "Statuette of an ancestral king (2003.154)",
+    "url": "https://www.metmuseum.org/art/collection/search/547689",
+    "publisher": "The Metropolitan Museum of Art",
+    "kind": "museum",
+    "period": "Late Period–Early Ptolemaic Period, 380–246 BCE",
+    "geography": "Egypt; exact workshop not established in this catalogue entry",
+    "summary": "Documents a carved wooden ritual figure associated with temple equipment, illustrating skilled Egyptian wood carving.",
+    "limitations": "Earlier than the player's lifetime and not specifically Alexandrian. The object's interpretation is debated; it does not establish a universal carving curriculum or job ladder.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "berlin-early-horoscope",
+    "title": "An enigmatic early horoscope: BKT X 29 (P. 11831)",
+    "url": "https://berlpap.smb.museum/ein-raetselhaftes-fruehes-horoskop/?lang=en",
+    "publisher": "Berlin Papyrus Database, Egyptian Museum and Papyrus Collection; Marius Gerhardt, Andreas Winkler and Michael Zellmann-Rohrer",
+    "kind": "museum",
+    "period": "Late Ptolemaic or early Roman handwriting; astronomical reconstruction best fits 5 June 29 BCE",
+    "geography": "Egypt; no Alexandrian workshop identified",
+    "summary": "Examines a Greek horoscope listing astral positions, abbreviations, the ascendant and midheaven, with possible professional or client use.",
+    "limitations": "The papyrus lacks a personal name and explicit date, and its solar position conflicts with the proposed reconstruction. Its use is uncertain, and no accompanying interpretation survives.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "plutarch-antony-areius",
+    "title": "Plutarch, Life of Antony 80: Areius and Octavian at Alexandria",
+    "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Antony*.html",
+    "publisher": "LacusCurtius, University of Chicago; Bernadotte Perrin, Loeb translation",
+    "kind": "primary",
+    "period": "Later biography describing the Roman takeover of Alexandria in 30 BCE",
+    "geography": "Alexandria",
+    "summary": "Depicts the philosopher Areius receiving public favour from Octavian and interceding for others, illustrating elite intellectual patronage and political access.",
+    "limitations": "A retrospective literary account, not an administrative record or promotion dataset. It concerns an exceptional elite figure and does not prove ordinary access to Cleopatra's court.",
+    "accessed": "2026-11-06"
+  },
+  {
+    "id": "ucl-ptolemaic-coins",
+    "title": "Coins in Egypt: Coins of the Ptolemies",
+    "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/metal/coins.html",
+    "publisher": "University College London, Digital Egypt for Universities",
+    "kind": "scholarship",
+    "period": "Ptolemaic Egypt, with an overview of earlier coinage",
+    "geography": "Egypt",
+    "summary": "Introduces Ptolemaic coin circulation, drachma denominations, bronze and silver coinage, and debt settlement as part of the economy.",
+    "limitations": "An overview of money and denominations, not an Alexandrian household budget or price series. It does not support the game's prices, wages, asset valuations, fixed returns or a constant currency standard across Roman rule; these remain disclosed gameplay assumptions.",
+    "accessed": "2026-11-06"
   }
 ]

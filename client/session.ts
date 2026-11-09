@@ -2,19 +2,37 @@ import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
 import sampleWorld from "../worlds/alexandria-sample.json" with { type: "json" };
+import legacyWorld from "../worlds/alexandria-0.3.0.json" with { type: "json" };
+import characterPreviewWorld from "../worlds/alexandria-0.4.0.json" with { type: "json" };
+import previousWorld from "../worlds/alexandria-0.4.1.json" with { type: "json" };
+import specialistWorld from "../worlds/alexandria-0.5.0.json" with { type: "json" };
+import namedCausesWorld from "../worlds/alexandria-0.5.1.json" with { type: "json" };
+import originRangesWorld from "../worlds/alexandria-0.6.0.json" with { type: "json" };
+import longerLivesWorld from "../worlds/alexandria-0.6.1.json" with { type: "json" };
+import peopleWorld from "../worlds/alexandria-0.7.0.json" with { type: "json" };
+import skillTreeWorld from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
+export const legacyEngine = createEngine(legacyWorld);
+const characterPreviewEngine = createEngine(characterPreviewWorld);
+const previousEngine = createEngine(previousWorld);
+const specialistEngine = createEngine(specialistWorld);
+const namedCausesEngine = createEngine(namedCausesWorld);
+const originRangesEngine = createEngine(originRangesWorld);
+const longerLivesEngine = createEngine(longerLivesWorld);
+const peopleEngine = createEngine(peopleWorld);
+const skillTreeEngine = createEngine(skillTreeWorld);
 export let sampleEngine = builtinEngine;
-const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine]]);
+const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine]]);
 const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
-export let SAVE_KEY = "historical-lives:alexandria-sample:v3";
+export let SAVE_KEY = saveKeyFor(builtinEngine);
 export const ARCHIVE_KEY = "historical-lives:alexandria-lives:v3";
-export let PRESENTATION_KEY = "historical-lives:alexandria-presentation:v3";
+export let PRESENTATION_KEY = presentationKeyFor(builtinEngine);
 const ARCHIVE_LIMIT = 10;
-const saveKeyFor = (engine: LifeEngine) => engine.fingerprint === builtinEngine.fingerprint ? "historical-lives:alexandria-sample:v3" : `historical-lives:active:${engine.world.id}:${engine.fingerprint}`;
-const presentationKeyFor = (engine: LifeEngine) => engine.fingerprint === builtinEngine.fingerprint ? "historical-lives:alexandria-presentation:v3" : `${saveKeyFor(engine)}:presentation`;
+function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "historical-lives:alexandria-sample:v3" : `historical-lives:active:${engine.world.id}:${engine.fingerprint}`; }
+function presentationKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "historical-lives:alexandria-presentation:v3" : `${saveKeyFor(engine)}:presentation`; }
 
 /** Pin a life to its own immutable world revision; publishing never rewrites it. */
 export function selectWorldPack(pack: WorldPack): void {
@@ -75,10 +93,11 @@ export function createSampleLife(seed = newLifeSeed()): LifeState {
 
 /** Skip quiet years without making any decisions on the player's behalf. */
 export function advanceToTurningPoint(life: LifeState): LifeState {
+  const engine = engineForLife(life);
   let next = life;
-  for (let years = 0; years <= sampleEngine.world.maxAge; years++) {
+  for (let years = 0; years <= engine.world.maxAge; years++) {
     if (next.phase !== "ready") return next;
-    next = sampleEngine.advance(next);
+    next = engine.advance(next);
   }
   throw new Error("This life could not reach its next turning point.");
 }
@@ -123,6 +142,24 @@ export function persistBirthPresentation(storage: StorageLike, life: LifeState, 
   storage.setItem(presentationKeyFor(engineForLife(life)), hasBegun ? `${life.worldFingerprint}:${life.seed}` : "");
 }
 
+/** A stat reveal is presentation only; older lives that have begun need no replay. */
+export function hasBirthStatsBeenRevealed(storage: StorageLike, life: LifeState): boolean {
+  if (life.commands.length > 0 || life.phase === "ended") return true;
+  try {
+    if (hasLifeBegun(storage, life)) return true;
+    const key = `${presentationKeyFor(engineForLife(life))}:stats-revealed`;
+    return storage.getItem(key) === `${life.worldFingerprint}:${life.seed}`;
+  } catch {
+    // A blocked storage read must not prevent revealing and playing in memory.
+    return false;
+  }
+}
+
+export function persistBirthStatsReveal(storage: StorageLike, life: LifeState, revealed: boolean): void {
+  const key = `${presentationKeyFor(engineForLife(life))}:stats-revealed`;
+  storage.setItem(key, revealed ? `${life.worldFingerprint}:${life.seed}` : "");
+}
+
 export function readArchivedLives(storage: StorageLike): ArchivedLife[] {
   let raw: string | null;
   try { raw = storage.getItem(ARCHIVE_KEY); }
@@ -147,6 +184,7 @@ export function archiveLife(storage: StorageLike, life: LifeState): ArchivedLife
   if (life.phase !== "ended") throw new Error("Only completed lives can enter the archive.");
   const world = engineForLife(life).world;
   const ending = world.endings.find(item => item.id === life.endingId);
+  const cause = world.character?.deathCauses.find(item => item.id === life.deathCauseId);
   const saved = exportLife(life);
   const item: ArchivedLife = {
     // Equal-length branches from the same seed are still different completed lives.
@@ -154,7 +192,7 @@ export function archiveLife(storage: StorageLike, life: LifeState): ArchivedLife
     age: life.age,
     year: life.year,
     birthYear: world.startYear,
-    endingTitle: ending?.title ?? "A life remembered",
+    endingTitle: cause?.title ?? ending?.title ?? "Life ended",
     save: saved,
   };
   const entries = [item, ...readArchivedLives(storage).filter(previous => previous.id !== item.id)].slice(0, ARCHIVE_LIMIT);
