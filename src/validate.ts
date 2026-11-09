@@ -118,10 +118,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     return result;
   };
 
-  const world = object(input, "world", [
+  const worldFields = [
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
-  ]);
+  ];
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing"], worldFields);
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -129,11 +130,54 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   string(world.description, "world.description");
   const startYear = year(world.startYear, "world.startYear");
   const maxAge = integer(world.maxAge, "world.maxAge", 1, 10_000);
+  if (Object.hasOwn(world, "eventPacing")) {
+    const pacing = object(world.eventPacing, "world.eventPacing", ["minChoiceGapYears", "maxChoiceGapYears"]);
+    const minGap = integer(pacing.minChoiceGapYears, "world.eventPacing.minChoiceGapYears", 1, 10_000);
+    integer(pacing.maxChoiceGapYears, "world.eventPacing.maxChoiceGapYears", minGap, 10_000);
+  }
   const lastAstronomicalYear = (startYear < 0 ? startYear + 1 : startYear) + maxAge;
   const lastYear = lastAstronomicalYear <= 0 ? lastAstronomicalYear - 1 : lastAstronomicalYear;
   if (!Number.isSafeInteger(lastAstronomicalYear) || !Number.isSafeInteger(lastYear)) {
     fail("world.startYear", "calendar range through maxAge must remain a safe integer");
   }
+
+  const sources = Object.hasOwn(world, "sources") ? array(world.sources, "world.sources", 0, 128) : [];
+  const sourceIds = unique(sources, "world.sources");
+  sources.forEach((entry, i) => {
+    const path = `world.sources[${i}]`;
+    const source = object(entry, path, ["id", "title", "url", "publisher", "kind", "period", "geography", "summary", "limitations", "accessed"]);
+    for (const field of ["title", "publisher", "period", "geography", "summary", "limitations"]) string(source[field], `${path}.${field}`);
+    if (!["primary", "museum", "scholarship"].includes(source.kind as string)) fail(`${path}.kind`, "unknown source kind");
+    const url = string(source.url, `${path}.url`, 4_000);
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol !== "https:" || !parsed.hostname || parsed.username || parsed.password) fail(`${path}.url`, "expected an HTTPS source URL without credentials");
+    } catch { fail(`${path}.url`, "expected an HTTPS source URL without credentials"); }
+    const accessed = string(source.accessed, `${path}.accessed`, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(accessed)) fail(`${path}.accessed`, "expected a YYYY-MM-DD access date");
+    const [accessYear, month, day] = accessed.split("-").map(Number);
+    const leap = accessYear % 4 === 0 && (accessYear % 100 !== 0 || accessYear % 400 === 0);
+    const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (accessYear < 1 || month < 1 || month > 12 || day < 1 || day > days[month - 1]) fail(`${path}.accessed`, "expected a valid calendar date");
+  });
+  const sourceReferences = (value: unknown, path: string): void => {
+    const refs = array(value, path, 0, 128);
+    const seen = new Set<string>();
+    refs.forEach((entry, i) => {
+      reference(entry, `${path}[${i}]`, sourceIds, "source");
+      if (seen.has(entry as string)) fail(`${path}[${i}]`, "duplicate source reference");
+      seen.add(entry as string);
+    });
+  };
+  const evidence = (entry: DataObject, path: string): void => {
+    if (Object.hasOwn(entry, "sourceIds")) sourceReferences(entry.sourceIds, `${path}.sourceIds`);
+    if (Object.hasOwn(entry, "evidence")) {
+      if (!["documented-history", "historically-inspired", "fictional"].includes(entry.evidence as string)) fail(`${path}.evidence`, "unknown evidence classification");
+      if (entry.evidence !== "fictional" && (!Array.isArray(entry.sourceIds) || entry.sourceIds.length === 0)) {
+        fail(`${path}.sourceIds`, "historical evidence classifications require at least one source");
+      }
+    }
+  };
 
   const stats = object(world.stats, "world.stats");
   const statIds = new Set(Object.keys(stats));
@@ -234,20 +278,37 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const originWeights: number[] = [];
   origins.forEach((entry, i) => {
     const path = `world.origins[${i}]`;
-    const origin = object(entry, path, ["id", "title", "text", "weight", "effects"]);
+    const origin = object(entry, path, ["id", "title", "text", "weight", "effects", "sourceIds", "evidence"], ["id", "title", "text", "weight", "effects"]);
     string(origin.title, `${path}.title`, 300);
     string(origin.text, `${path}.text`);
     originWeights.push(weight(origin.weight, `${path}.weight`));
     effects(origin.effects, `${path}.effects`);
+    evidence(origin, path);
   });
   aggregate(originWeights, "world.origins");
   effects(world.yearlyEffects, "world.yearlyEffects");
+  if (Object.hasOwn(world, "yearlyRules")) {
+    const rules = array(world.yearlyRules, "world.yearlyRules", 0, 128);
+    unique(rules, "world.yearlyRules");
+    rules.forEach((entry, i) => {
+      const path = `world.yearlyRules[${i}]`;
+      const rule = object(entry, path, ["id", "when", "effects"], ["id", "effects"]);
+      if (Object.hasOwn(rule, "when")) condition(rule.when, `${path}.when`);
+      effects(rule.effects, `${path}.effects`);
+    });
+  }
   const randomWeights: number[] = [];
   events.forEach((entry, i) => {
     const path = `world.events[${i}]`;
-    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "choices"], ["id", "title", "text", "trigger", "choices"]);
+    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
     string(event.title, `${path}.title`, 300);
     string(event.text, `${path}.text`);
+    evidence(event, path);
+    if (Object.hasOwn(event, "mode") && event.mode !== "automatic") fail(`${path}.mode`, "only automatic mode is supported");
+    if (Object.hasOwn(event, "effects")) {
+      if (event.mode !== "automatic") fail(`${path}.effects`, "event effects require automatic mode");
+      effects(event.effects, `${path}.effects`);
+    }
     if (Object.hasOwn(event, "when")) condition(event.when, `${path}.when`);
     const trigger = object(event.trigger, `${path}.trigger`, undefined, ["type"]);
     if (trigger.type === "random") {
@@ -266,7 +327,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (trigger.type !== "random" && count !== 1) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
-    const choices = array(event.choices, `${path}.choices`, 1, 32);
+    const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);
+    if (event.mode === "automatic" && choices.length > 0) fail(`${path}.choices`, "automatic events must have an empty choice list");
     unique(choices, `${path}.choices`);
     choices.forEach((choiceEntry, j) => {
       const choicePath = `${path}.choices[${j}]`;
@@ -289,9 +351,32 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   aggregate(randomWeights, "world.events");
   endings.forEach((entry, i) => {
     const path = `world.endings[${i}]`;
-    const ending = object(entry, path, ["id", "title", "text", "when"], ["id", "title", "text"]);
+    const ending = object(entry, path, ["id", "title", "text", "when", "kind", "sourceIds", "evidence"], ["id", "title", "text"]);
     string(ending.title, `${path}.title`, 300);
     string(ending.text, `${path}.text`);
+    evidence(ending, path);
+    if (Object.hasOwn(ending, "kind") && ending.kind !== "death" && ending.kind !== "chapter") fail(`${path}.kind`, "unknown ending kind");
     if (Object.hasOwn(ending, "when")) condition(ending.when, `${path}.when`);
   });
+  if (Object.hasOwn(world, "mortality")) {
+    const model = object(world.mortality, "world.mortality", ["description", "sourceIds", "bands"]);
+    string(model.description, "world.mortality.description");
+    sourceReferences(model.sourceIds, "world.mortality.sourceIds");
+    const deathIds = new Set(endings.filter(entry => (entry as DataObject).kind === "death").map(entry => (entry as DataObject).id as string));
+    if (!deathIds.has(world.defaultEnding as string)) fail("world.defaultEnding", "a mortality-enabled world requires a death ending at maximum age");
+    const bands = array(model.bands, "world.mortality.bands", 1, 128);
+    let nextAge = 0;
+    bands.forEach((entry, i) => {
+      const path = `world.mortality.bands[${i}]`;
+      const band = object(entry, path, ["minAge", "maxAge", "annualProbability", "ending"]);
+      const min = integer(band.minAge, `${path}.minAge`, 0, maxAge - 1);
+      const max = integer(band.maxAge, `${path}.maxAge`, min, maxAge - 1);
+      if (min !== nextAge) fail(`${path}.minAge`, "mortality bands must be ordered and contiguous from age zero");
+      nextAge = max + 1;
+      const probability = number(band.annualProbability, `${path}.annualProbability`);
+      if (probability < 0 || probability > 1) fail(`${path}.annualProbability`, "expected a probability in 0..1");
+      reference(band.ending, `${path}.ending`, deathIds, "death ending");
+    });
+    if (nextAge !== maxAge) fail("world.mortality.bands", "mortality bands must cover every age below maxAge");
+  }
 }

@@ -6,3 +6,9 @@ coverage/
 .sites-runtime/
 .sites-checkout/
 artifacts/
+.wrangler/
+.vinext/
+.next/
+.env*
+.dev.vars*
+next-env.d.ts

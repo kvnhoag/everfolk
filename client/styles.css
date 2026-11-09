@@ -19,3 +19,154 @@
 .decision-body{font-size:14px;line-height:1.8;color:#68725f}.choice-copy strong{font-size:13px}.choice-copy>span{font-size:11px;color:#717965}.nav-link{font-size:13px}.stat-heading{font-size:12px}.stat-heading strong{font-size:11px}.chapter-subtitle{font-size:13px;color:#6e7766}.character-details p{font-size:12px}.chronicle-preview li p{font-size:11px;color:#707b65}.ending-note{font-size:14px}.playback-label{font-size:10px}.save-indicator{font-size:11px}.primary-button{font-size:13px}
 @media(max-width:760px){.nav-link{font-size:11px}.save-indicator{font-size:9px}.chapter-subtitle{font-size:11px}.stat-heading{font-size:9px}.stat-heading strong{font-size:9px}.decision-body{font-size:14px}.choice-copy strong{font-size:13px}.choice-copy>span{font-size:11px}.playback-label{font-size:9px}.playback-controls{gap:2px}.primary-button{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Full-life presentation, evidence and local memory. */
+.main-nav{gap:26px;margin-right:0}.birth-record{margin-top:24px;border:1px solid #d2d7c6;background:#f6f3e9;padding:28px 31px;border-radius:4px}.birth-record-heading{display:flex;justify-content:space-between;gap:20px;align-items:center}.birth-record-heading .eyebrow{color:#947354}.birth-record-seal{font-family:var(--serif);font-size:23px;color:#8a957b}.birth-record h2{font-family:var(--serif);font-size:42px;font-weight:400;letter-spacing:-.5px;line-height:1.1;margin:19px 0 12px}.birth-record>p{font-size:14px;line-height:1.85;color:#6a755f;margin:0}.birth-facts{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;margin:22px 0}.birth-facts dt{font-size:8px;letter-spacing:1.3px;color:#8b947c}.birth-facts dd{font-size:12px;line-height:1.6;margin:7px 0 0}.birth-actions{display:flex;align-items:center;gap:24px;margin-top:23px}.birth-actions>.primary-button{min-width:205px}.birth-actions>.text-button{font-size:11px;line-height:1.5;text-align:left}.birth-record .birth-note{font-size:10px;line-height:1.8;color:#858d78;margin-top:17px;max-width:700px}.life-stages{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:15px 0 12px}.life-stages>span{font-size:9px;letter-spacing:.25px;color:#9aa18e}.life-stages .current-stage{color:#536a48;font-weight:650}.event-evidence{margin:16px 0 0;border-left:2px solid #bbc7ad;padding:0 0 0 10px}.event-evidence>span{font-size:8px;letter-spacing:.7px;text-transform:uppercase;color:#7c8c6a}.event-evidence>small{display:block;font-size:10px;line-height:1.7;color:#8b947d;margin:8px 0}.source-links{display:flex;flex-direction:column;gap:6px;margin-top:9px}.source-links>a{font-size:10px;line-height:1.6;text-underline-offset:3px;color:#6a8060;overflow-wrap:anywhere;text-decoration-color:#a4b39a}.source-links>a:hover{color:#8f573e}.turning-point-button{align-self:flex-end;margin:5px 0}.memorial-scene>img{filter:saturate(.45) contrast(.96)}.life-has-ended .portrait{filter:saturate(.4)}.memorial-summary{border-left:1px solid #bcc6ad;padding:4px 0 7px 18px;margin-bottom:15px}.memorial-summary>.eyebrow{font-size:8px;letter-spacing:1.3px;color:#8a9478}.memorial-dates{font-family:var(--serif);font-size:27px;margin:12px 0 8px;line-height:1.2}.memorial-dates>span{font-size:20px;color:#a3a88f;margin:0 5px}.memorial-summary>strong{font-size:12px;font-weight:500;color:#617557}.memorial-summary>p:last-child{font-size:12px;line-height:1.85;color:#7c886b;margin:12px 0 0}.sources-dialog{width:min(760px,calc(100% - 32px))}.mortality-source-note{margin:25px 0;padding:20px;border:1px solid #cad4bb;background:#e8eddf;border-radius:4px}.mortality-source-note>h3{font-family:var(--serif);font-size:29px;font-weight:400;margin:0 0 10px}.mortality-source-note>p{font-size:12px;line-height:1.9;color:#64745a;white-space:pre-line;margin:0}.mortality-source-note .source-links>a{font-size:11px}.evidence-key{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0}.evidence-key>span{font-size:8px;line-height:1.5;letter-spacing:.3px;border:1px solid #cbd1bd;border-radius:3px;padding:5px 7px;color:#73836a}.sources-list{display:grid;gap:0}.sources-list>article{border-top:1px solid var(--line);padding:24px 0}.sources-list>article>.eyebrow{font-size:8px;line-height:1.8;text-transform:uppercase;letter-spacing:1px;color:#939d83}.sources-list h3{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.2;margin:12px 0}.sources-list h3>a{color:#4e6845;text-decoration:none}.sources-list h3>a:hover{text-decoration:underline;text-underline-offset:4px}.sources-list p{font-size:12px;line-height:1.9;color:#6b795e;margin:10px 0 0}.sources-list .source-period{font-size:10px;letter-spacing:.2px;color:#979e86}.sources-list .source-limits{font-size:11px;color:#8c947e;padding:10px 0 0}.source-limits>strong{font-weight:600}.past-lives{margin:24px 0}.archived-life{padding:22px 0;border-top:1px solid var(--line)}.archived-life>.eyebrow{font-size:8px;line-height:1.7;color:#939b84}.archived-life>h3{font-family:var(--serif);font-size:29px;font-weight:400;line-height:1.2;margin:10px 0 7px}.archived-life>p{font-size:11px;color:#829174;margin:0}.archived-life>div{display:flex;gap:24px;margin-top:17px}.archived-life .text-button{font-size:11px}.empty-archive{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.5;color:#8b947d;border-top:1px solid var(--line);padding:25px 0}.full-journal .source-links>a{font-size:10px}.dialog-content>.dialog-actions>.secondary-button{min-height:47px}
+@media(max-width:1100px){.main-nav{gap:18px}.brand{font-size:23px}.main-nav .nav-link{font-size:11px}}
+@media(max-width:760px){.main-nav{gap:18px;overflow-x:auto;white-space:nowrap}.main-nav .nav-link{font-size:10px;flex-shrink:0}.birth-record{padding:23px 20px;margin-top:23px}.birth-record h2{font-size:36px}.birth-record>p{font-size:13px}.birth-record-heading .eyebrow{font-size:8px;letter-spacing:1.1px;gap:7px}.birth-record-seal{font-size:20px}.birth-facts{grid-template-columns:1fr 1fr;gap:17px;padding:18px 0;margin:18px 0}.birth-facts>div:last-child{grid-column:1/-1}.birth-facts dd{font-size:12px}.birth-actions{flex-direction:column;align-items:stretch;gap:17px;margin-top:20px}.birth-actions>.text-button{align-self:center;font-size:10px}.birth-record .birth-note{font-size:10px}.life-stages{gap:5px;padding-top:14px;padding-bottom:11px}.life-stages>span{font-size:7px;letter-spacing:0}.source-links>a{font-size:11px}.event-evidence>small{font-size:10px}.event-evidence>span{font-size:8px}.memorial-summary{padding-left:17px;margin:2px 0 13px}.memorial-dates{font-size:29px}.memorial-summary>p:last-child{font-size:13px}.sources-list h3{font-size:26px}.mortality-source-note{padding:18px 16px}.mortality-source-note>h3{font-size:27px}.mortality-source-note>p{font-size:12px}.sources-list p{font-size:12px}.evidence-key{gap:7px}.evidence-key>span{font-size:8px}.archived-life>div{gap:20px}.turning-point-button{font-size:11px;margin:9px 0 0}.playback-label{font-size:8px}.playback-controls{gap:1px}.speed-button,.play-button{min-width:24px;padding-left:4px;padding-right:4px}.control-divider{margin:0 1px}}
+@media(prefers-reduced-motion:reduce){.birth-record,.memorial-summary{animation:none!important}}
+.scene-image.paper-scene{height:320px;display:grid;grid-template-columns:.85fr 1.3fr;align-items:center;gap:0;background:radial-gradient(ellipse at 75% 70%,#e5e4cc 0%,#eee9d8 55%,#f0ece0 100%);border:1px solid #d0d7c2;overflow:hidden;padding:20px 24px 30px;isolation:isolate}
+.scene-image.paper-scene:after{display:none}.paper-scene-copy{position:relative;z-index:1;padding-right:10px}.paper-scene-kicker{font-size:8px;letter-spacing:1.4px;font-weight:650;color:#768467}.paper-scene-copy h2{font-family:var(--serif);font-size:39px;font-weight:400;letter-spacing:-.6px;line-height:1.1;color:#35513b;margin:14px 0 12px}.paper-scene-copy p{font-size:12px;line-height:1.85;color:#647159;max-width:270px;margin:0}.scene-image.paper-scene>img{width:100%;height:100%;object-fit:contain;object-position:center;max-height:280px;filter:drop-shadow(0 9px 9px #403d2112);animation:scene-reveal .6s ease both}
+.scene-image.paper-scene figcaption{position:absolute;bottom:11px;left:24px;font-family:"DM Sans","Segoe UI",sans-serif;font-size:8px;color:#7f8a70;letter-spacing:.25px;line-height:1.5}.scene-image.paper-in-play{height:240px}.paper-in-play .paper-scene-copy h2{font-size:33px}.scene-image.paper-in-play>img{max-height:210px}.scene-image.paper-memorial{background:#ecebdf}.paper-memorial .paper-scene-copy h2{color:#626e56}
+@media(max-width:1100px){.scene-image.paper-scene{padding-left:20px;padding-right:16px;grid-template-columns:.9fr 1.2fr}.paper-scene-copy h2{font-size:34px}.paper-scene-copy p{font-size:11px}.scene-image.paper-in-play{height:230px}.paper-in-play .paper-scene-copy h2{font-size:28px}}
+@media(max-width:760px){.scene-image.paper-scene{height:300px;grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:18px 18px 24px;gap:0}.paper-scene-copy{padding:0;max-width:none}.paper-scene-kicker{font-size:7px;letter-spacing:1.2px}.paper-scene-copy h2,.paper-in-play .paper-scene-copy h2{font-size:29px;line-height:1.1;margin:8px 0 0}.paper-scene-copy p{display:none}.scene-image.paper-scene>img{max-height:210px;width:100%;height:100%;object-fit:contain}.scene-image.paper-scene figcaption{left:18px;bottom:8px;font-size:7px;right:10px}.scene-image.paper-in-play{height:270px}.scene-image.paper-in-play>img{max-height:185px}}
+.dialog-content>.dialog-error{background:#eee0d4;border:1px solid #d2b89d;border-radius:3px;padding:12px 14px;margin:14px 0 22px;font-size:12px;line-height:1.8;color:#855538}
+
+/* The clock carries quiet years; a decision always holds the next birthday. */
+.year-clock{border:1px solid #d3d9c8;border-radius:4px;padding:17px 18px;background:#e9eddf;margin-top:2px}.year-clock-heading{display:flex;align-items:center;justify-content:space-between;gap:14px}.year-clock-heading>span:first-child{display:flex;align-items:center;gap:8px;font-size:12px;color:#556c49}.year-clock-countdown{font-size:12px;font-variant-numeric:tabular-nums;color:#7c8a6e;white-space:nowrap}.year-clock-track{height:3px;background:#d2dac5;margin:15px 0 12px;overflow:hidden;border-radius:2px}.year-clock-track>span{display:block;height:100%;background:#7e9270;transition:width .1s linear}.year-clock-footer{display:flex;justify-content:space-between;align-items:center;gap:12px}.year-clock-footer>small{font-size:9px;line-height:1.6;color:#839075}.clock-toggle{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;background:transparent;padding:3px 0;font-size:10px;color:#617653}.clock-toggle:hover{color:#a45036}.playback-label{font-variant-numeric:tabular-nums}
+@media(max-width:760px){.year-clock{padding:17px}.year-clock-heading>span:first-child{font-size:12px}.year-clock-countdown{font-size:12px}.year-clock-footer>small{font-size:10px}.clock-toggle{font-size:11px}.playback-label{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.year-clock-track>span{transition:none!important}}
+.admin-nav-link{text-decoration:none;white-space:nowrap}.main-nav{gap:20px}
+.world-library{display:grid;gap:18px;margin-top:25px}.world-library>article{border:1px solid #c9d3bd;border-radius:6px;padding:22px;background:#f7f4e9}.world-library h3{font-family:var(--serif);font-size:30px;font-weight:400;margin:10px 0;color:#354f3b}.world-library article>p{font-size:12px;line-height:1.8;color:#66765a}.world-route-tags{display:flex;flex-wrap:wrap;gap:6px;margin:15px 0 20px}.world-route-tags>span{border:1px solid #c9d3bd;border-radius:20px;padding:4px 8px;font-size:10px;color:#596f4c}.world-library .eyebrow{font-size:9px;color:#7b8a69}
+@media(max-width:1100px){.main-nav{gap:13px}.main-nav .nav-link{font-size:10px}}
+
+/* The complete record stays on the life screen, grouped by every lived year. */
+.chronicle-preview{padding-top:27px}
+.chronicle-heading h2{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:29px;font-weight:400;line-height:1.2;margin:0;color:#354e3a}
+.chronicle-heading h2 svg{flex-shrink:0;color:#6b805b}
+.chronicle-description{font-size:12px;line-height:1.7;color:#67765c;margin:10px 0 24px}
+.life-timeline{display:grid;gap:24px}
+.journal-year{border:1px solid #d1d8c7;border-radius:5px;background:#f7f5ed;overflow:hidden}
+.journal-year-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#e3e9da;padding:13px 19px;border-bottom:1px solid #d1d8c7}
+.journal-year-heading h3{font-family:var(--serif);font-size:27px;line-height:1.15;font-weight:400;letter-spacing:-.3px;margin:0;color:#354f3b}
+.journal-year-heading>span{font-size:11px;font-weight:600;color:#53694a;white-space:nowrap}
+.life-timeline ol.journal-year-entries{display:grid;list-style:none;margin:0;padding:4px 19px;gap:0}
+.life-timeline li.journal-row{display:flex;align-items:flex-start;gap:12px;padding:17px 0;border-bottom:1px solid #dce0d2}
+.life-timeline li.journal-row:last-child{border-bottom:0}
+.life-timeline .journal-point{margin-top:6px;background:#7d936c;width:5px;height:5px;flex-shrink:0}
+.journal-copy{min-width:0;flex:1}
+.life-timeline .journal-kind{display:block;font-size:9px;line-height:1.5;letter-spacing:.8px;color:#59704b;font-weight:650;margin:0 0 6px;text-transform:uppercase}
+.life-timeline .journal-copy>p{font-size:13px;line-height:1.85;color:#4f6047;margin:0;overflow-wrap:anywhere}
+.life-timeline .journal-choice .journal-kind{color:#945737}
+.life-timeline .journal-choice .journal-point{background:#aa714e}
+.life-timeline .journal-choice .journal-copy>p{font-weight:600;color:#6f4d34}
+.life-timeline .journal-outcome .journal-kind{color:#3f6e65}
+.life-timeline .journal-ending .journal-copy>p{font-family:var(--serif);font-size:21px;line-height:1.6}
+.journal-sources{font-size:10px;margin-top:9px;color:#667b58}
+.journal-sources>summary{cursor:pointer;line-height:1.7;list-style-position:inside}
+.journal-sources .source-links{margin-top:7px}
+.journal-quiet-year{font-size:13px;color:#68795b;line-height:1.8;padding:18px 19px;margin:0}
+.dialog-content>.life-timeline{margin:25px 0}
+@media(max-width:760px){.chronicle-heading{gap:14px;align-items:flex-start}.chronicle-heading h2{font-size:25px;gap:7px}.chronicle-heading h2 svg{width:17px}.chronicle-heading .text-button{white-space:nowrap;font-size:10px;gap:5px;margin-top:6px}.chronicle-description{font-size:11px;margin-bottom:20px}.life-timeline{gap:18px}.journal-year-heading{padding:12px 15px}.journal-year-heading h3{font-size:25px}.journal-year-heading>span{font-size:10px}.life-timeline ol.journal-year-entries{padding:3px 15px}.life-timeline li.journal-row{gap:10px;padding:16px 0}.life-timeline .journal-kind{font-size:8px}.life-timeline .journal-copy>p{font-size:13px;line-height:1.85}}
+
+/* Keep the year, lived events and changing attributes at the center of play. */
+.chapter-date{min-width:174px;align-items:flex-start;background:#304e40;color:#fff8e8;border-radius:6px;padding:17px 22px 15px;margin:0;box-shadow:0 6px 18px #233c2e0c}
+.chapter-date>span.date-label{font-family:"DM Sans","Segoe UI",sans-serif;font-size:9px;letter-spacing:1.6px;line-height:1.4;font-weight:650}
+.chapter-date .date-value{font-family:var(--serif);font-size:61px;letter-spacing:-2px;line-height:1.05;margin-top:4px;white-space:nowrap}
+.chapter-date .date-value small{font-family:"DM Sans","Segoe UI",sans-serif;font-size:13px;font-weight:500;letter-spacing:.8px;display:inline;margin:0;color:#e6d8b8}
+.chapter-date p{color:#d7e0d2;font-size:10px;margin-top:9px}
+.age-line{font-size:11px;color:#5d6f59}
+.age-line strong{font-size:18px;color:#314c3a}
+.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;border:0;padding:0}
+.stat{--stat-color:#59734b;--stat-background:#e7eddd;border:1px solid #c9d4bd;border-radius:5px;padding:12px 10px 11px;background:var(--stat-background);min-width:0}
+.stat-health{--stat-color:#a04c3a;--stat-background:#f1e3db;border-color:#dfc4b6}
+.stat-knowledge{--stat-color:#426977;--stat-background:#e0e9e8;border-color:#bfd1d0}
+.stat-wealth{--stat-color:#89622a;--stat-background:#f0e8d4;border-color:#d8c8a4}
+.stat-bonds{--stat-color:#64628a;--stat-background:#e9e6ef;border-color:#cfc9de}
+.stat-heading{display:block;font-size:10px;margin-bottom:10px;color:var(--stat-color)}
+.stat-heading>span{gap:5px;white-space:nowrap;font-weight:600}
+.stat-heading svg{color:var(--stat-color);height:14px;width:14px}
+.stat-heading strong{display:block;font-size:29px;line-height:1.1;font-weight:650;color:var(--stat-color);margin-top:10px;letter-spacing:-1px;animation:stat-arrive .35s ease-out}
+.stat-heading strong small{font-size:9px;font-weight:400;letter-spacing:0;opacity:.85;white-space:nowrap}
+.stat-track{height:5px;background:#ffffff9c;border-radius:3px}
+.stat .stat-track>span{background:var(--stat-color);border-radius:3px}
+.scene-image.scene-in-play{height:176px}
+.scene-in-play>img{object-position:50% 57%}
+.scene-in-play figcaption{font-size:27px;bottom:18px}
+.scene-in-play figcaption em{font-size:24px}
+.scene-in-play .scene-caption-rule{display:none}
+.life-stages{padding:14px 0 12px}
+.life-stages>span{font-size:10px;color:#66735f}
+.life-stages .current-stage{color:#304e40;font-weight:700;border-bottom:2px solid #55734a;padding-bottom:4px;margin-bottom:-6px}
+.year-review{padding:24px 0 0;animation:decision-in .35s ease both}
+.year-review-heading{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:17px}
+.year-review-heading .eyebrow{font-size:9px;color:#5b714a;letter-spacing:1.5px;gap:7px}
+.year-review-heading h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.12;margin:8px 0 0;letter-spacing:-.4px}
+.year-age-badge{background:#e1e7d8;color:#526848;border:1px solid #c5cfb9;border-radius:4px;padding:9px 13px;font-size:10px;white-space:nowrap;text-align:center}
+.year-age-badge strong{display:block;font-size:17px;margin-top:4px;font-weight:650;color:#354f3b}
+.year-event-list{display:grid;gap:10px}
+.year-event{padding:20px 23px;border:1px solid #d4d7c7;border-left:4px solid #788b61;border-radius:4px;background:#f8f6ee}
+.event-kind{display:flex;align-items:center;gap:7px;font-size:9px;line-height:1.5;letter-spacing:1.1px;font-weight:650;color:#536b43}
+.year-event h3{font-family:var(--serif);font-size:27px;font-weight:400;letter-spacing:-.2px;line-height:1.15;margin:10px 0 8px;color:#304834}
+.year-event>p{font-size:14px;line-height:1.8;color:#53614b;margin:0;max-width:780px}
+.history-event{background:#e8eeeb;border-color:#c7d5cf;border-left-color:#537c79}
+.history-event .event-kind{color:#3c6b6d}
+.history-event h3{color:#2d5254}
+.annual-evidence{margin-top:11px;font-size:10px;color:#647655}
+.annual-evidence summary{cursor:pointer;font-size:10px;line-height:1.7;text-underline-offset:3px;list-style-position:inside}
+.annual-evidence>span{display:block;font-size:10px;margin-top:8px;line-height:1.7}
+.annual-evidence .source-links{margin-top:7px}
+.annual-fiction-label{font-size:10px;line-height:1.5;color:#6d7b60;display:block;margin-top:11px}
+.year-outcome{background:#e2e9d9;border:1px solid #c5d0b8;border-radius:4px;padding:15px 21px}
+.year-outcome .event-kind{color:#4c6540;font-size:8px;letter-spacing:.9px}
+.year-outcome p{font-size:13px;line-height:1.8;color:#405637;margin:7px 0 0}
+.decision-area{margin-top:20px;padding:23px 0;gap:30px}
+.decision-area.has-decision{background:#f5eadc;border:1px solid #d7b89a;border-top:4px solid #ac6443;border-radius:5px;padding:24px;box-shadow:0 4px 18px #6d452007}
+.has-decision .decision-eyebrow{color:#8c472d;font-size:9px;letter-spacing:1px;flex-wrap:wrap;row-gap:7px}
+.has-decision .decision-age{color:#885b3e;font-size:9px}
+.has-decision .decision-story h2{color:#6e3f2a;font-size:35px}
+.has-decision .decision-body{color:#644e3c}
+.has-decision .decision-prompt{color:#8c472d;font-size:20px}
+.has-decision .choice-button{background:#fffaf1;border-color:#d8bea5;min-height:74px;padding:16px}
+.has-decision .choice-button:hover{background:#e8edde;border-color:#8da279;transform:translateX(2px)}
+.has-decision .choice-copy strong{font-size:14px;color:#374d36}
+.has-decision .choice-copy>span{font-size:11px;color:#5e7054}
+.has-decision .choice-icon{color:#8b6646}
+.has-decision .event-evidence{border-color:#c4a787}
+.has-decision .event-evidence>span{color:#78583e}
+.has-decision .event-evidence>small{color:#75644f}
+.decision-area:not(.has-decision):not(.is-ended) .decision-story h2{font-size:29px;margin-top:12px}
+.decision-area:not(.has-decision):not(.is-ended) .decision-body{font-size:13px;color:#5c6d52}
+.decision-eyebrow{font-size:9px;color:#5a6d4d}
+.year-clock{border-color:#b9c9ac;background:#e0e8d6;padding:19px 20px}
+.year-clock-heading>span:first-child{color:#3c5733;font-size:12px;font-weight:550}
+.year-clock-countdown{font-size:20px;font-weight:600;color:#3d5c32;letter-spacing:-.4px}
+.year-clock-track{height:6px;background:#c2cfb4;margin-top:16px}
+.year-clock-track>span{background:#637f4f}
+.year-clock-footer>small{font-size:10px;color:#586e4b}
+.clock-toggle{font-size:11px;color:#3e5c32}
+.playback-bar{border-color:#c9d0bd;padding:13px 0}
+.playback-label{color:#5b6e50;font-size:11px}
+.play-button,.speed-button{font-size:11px;min-width:31px;min-height:32px;color:#617355}
+.play-button.selected,.speed-button.selected{color:#f5f4e9;background:#405d3a}
+.journal-date{font-size:10px;color:#5f7355;min-width:52px}
+.journal-point{background:#7d936c}
+.journal-kind{font-size:8px;font-weight:650;letter-spacing:.7px;text-transform:uppercase;color:#5d724f;display:block;margin-bottom:3px}
+.chronicle-preview li p{font-size:12px;line-height:1.75;color:#607055}
+@keyframes stat-arrive{from{opacity:.4;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1600px){.scene-image.scene-in-play{height:210px}.decision-area.has-decision{padding:28px}.year-event{padding:22px 25px}}
+@media(max-width:1100px){.stat{padding:11px 7px}.stat-heading{font-size:9px}.stat-heading>span{gap:3px}.stat-heading svg{width:12px;height:12px}.stat-heading strong{font-size:26px}.stat-heading strong small{font-size:8px}.decision-area.has-decision{grid-template-columns:1fr;padding:22px;gap:19px}.has-decision .decision-body{max-width:none}}
+@media(max-width:760px){
+  .chapter-heading{align-items:center;gap:14px}.chapter-heading h1{font-size:38px}.chapter-subtitle{font-size:10px}
+  .chapter-date{min-width:102px;padding:12px 12px 11px;align-items:flex-start;border-radius:4px}
+  .chapter-date>span.date-label{font-size:7px;letter-spacing:1px}.chapter-date .date-value{font-size:45px;letter-spacing:-1.5px;margin-top:5px}.chapter-date .date-value small{font-size:10px;letter-spacing:.2px}.chapter-date p{font-size:7px;gap:3px;margin:5px 0 0;white-space:normal;line-height:1.5}.chapter-date svg{width:10px}
+  .age-line{font-size:10px}.age-line strong{font-size:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:17px}.stat{padding:11px 8px 10px}.stat-heading{font-size:9px;margin-bottom:9px}.stat-heading>span{gap:4px}.stat-heading svg{display:block;width:12px;height:12px}.stat-heading strong{font-size:25px;margin-top:9px;letter-spacing:-.6px}.stat-heading strong small{display:none}.stat-track{height:4px}
+  .scene-image.scene-in-play{height:140px}.scene-in-play figcaption{font-size:24px;bottom:15px}.scene-in-play figcaption em{font-size:22px}.scene-in-play .scene-location{font-size:6px;letter-spacing:.8px}.scene-in-play .scene-time{font-size:11px}
+  .life-stages>span{font-size:7px}.year-review{padding-top:23px}.year-review-heading{margin-bottom:15px;gap:10px}.year-review-heading .eyebrow{font-size:8px;letter-spacing:1px}.year-review-heading h2{font-size:30px}.year-age-badge{padding:8px 11px;font-size:9px}.year-age-badge strong{font-size:16px}
+  .year-event{padding:17px 18px}.year-event h3{font-size:27px;margin:10px 0 9px}.year-event>p{font-size:13px;line-height:1.85}.event-kind{font-size:8px;letter-spacing:.8px}.year-outcome{padding:15px 18px}.year-outcome p{font-size:13px}
+  .decision-area{margin-top:17px;gap:18px}.decision-area.has-decision{padding:20px 18px}.has-decision .decision-eyebrow{font-size:8px;gap:6px;letter-spacing:.65px}.has-decision .decision-age{font-size:8px}.has-decision .decision-story h2{font-size:33px;margin-top:14px}.has-decision .decision-body{font-size:14px}.has-decision .choice-button{padding:14px 13px;gap:10px}.has-decision .choice-copy strong{font-size:13px}
+  .year-clock{padding:17px}.year-clock-countdown{font-size:20px}.year-clock-heading>span:first-child{font-size:11px}.year-clock-footer>small{font-size:10px}.clock-toggle{font-size:11px}
+  .playback-bar{gap:8px;flex-wrap:wrap}.playback-label{font-size:10px}.playback-controls{margin-left:auto;gap:2px}.play-button,.speed-button{font-size:10px;min-width:29px;min-height:33px}.chronicle-preview li{gap:9px}.chronicle-preview li p{font-size:11px}.journal-date{font-size:9px;min-width:44px}.journal-kind{font-size:7px}
+}
+@media(max-width:370px){.chapter-date{min-width:92px;padding-left:10px;padding-right:10px}.chapter-heading h1{font-size:34px}.stat{padding:10px 6px}.stat-heading{font-size:8px}.stat-heading>span{gap:3px}.stat-heading svg{width:10px;height:10px}.stat-heading strong{font-size:24px}.stats{gap:5px}.year-review-heading h2{font-size:28px}}
+@media(prefers-reduced-motion:reduce){.year-review,.stat-heading strong{animation:none!important}}

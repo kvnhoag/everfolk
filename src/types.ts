@@ -22,7 +22,28 @@ export interface StatDefinition {
   initial: number;
 }
 
-export interface Origin {
+export type EvidenceKind = "documented-history" | "historically-inspired" | "fictional";
+
+/** Bibliographic support travels with the pack rather than depending on a service. */
+export interface HistoricalSource {
+  id: string;
+  title: string;
+  url: string;
+  publisher: string;
+  kind: "primary" | "museum" | "scholarship";
+  period: string;
+  geography: string;
+  summary: string;
+  limitations: string;
+  accessed: string;
+}
+
+export interface EvidenceMetadata {
+  sourceIds?: string[];
+  evidence?: EvidenceKind;
+}
+
+export interface Origin extends EvidenceMetadata {
   id: string;
   title: string;
   text: string;
@@ -44,7 +65,7 @@ export interface Choice {
   outcomes: Outcome[];
 }
 
-export interface LifeEvent {
+export interface LifeEvent extends EvidenceMetadata {
   id: string;
   title: string;
   text: string;
@@ -56,15 +77,40 @@ export interface LifeEvent {
   /** Scheduled events occur once. Random events default to once. */
   maxOccurrences?: number;
   cooldownYears?: number;
+  /** Automatic events narrate and apply effects without asking the player to choose. */
+  mode?: "automatic";
+  effects?: Effect[];
   choices: Choice[];
 }
 
-export interface Ending {
+export interface Ending extends EvidenceMetadata {
   id: string;
   title: string;
   text: string;
   /** Endings with conditions are checked in declaration order. */
   when?: Condition;
+  /** Omitted for legacy chapter endings. Mortality endings must explicitly be deaths. */
+  kind?: "death" | "chapter";
+}
+
+export interface YearlyRule {
+  id: string;
+  when?: Condition;
+  effects: Effect[];
+}
+
+export interface MortalityBand {
+  minAge: number;
+  maxAge: number;
+  annualProbability: number;
+  ending: string;
+}
+
+export interface MortalityModel {
+  description: string;
+  sourceIds: string[];
+  /** Inclusive, sorted, contiguous age bands cover every age from 0 to maxAge - 1. */
+  bands: MortalityBand[];
 }
 
 export interface WorldPack {
@@ -80,6 +126,11 @@ export interface WorldPack {
   flags: Record<string, { label: string; initial: boolean }>;
   origins: Origin[];
   yearlyEffects: Effect[];
+  yearlyRules?: YearlyRule[];
+  /** Separate annual background stories from decisions with a seeded global gap. */
+  eventPacing?: { minChoiceGapYears: number; maxChoiceGapYears: number };
+  mortality?: MortalityModel;
+  sources?: HistoricalSource[];
   events: LifeEvent[];
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
@@ -113,6 +164,8 @@ export interface LifeState {
   endingId: string | null;
   eventCounts: Record<string, number>;
   lastEventAge: Record<string, number>;
+  /** Only paced worlds use this; part of deterministic replay, never a wall clock. */
+  nextChoiceAge?: number;
   journal: JournalEntry[];
   commands: Command[];
 }

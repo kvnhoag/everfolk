@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
@@ -11,7 +13,7 @@
     "lib": ["ES2022", "DOM"],
     "jsx": "react-jsx",
     "resolveJsonModule": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node", "@cloudflare/workers-types"]
   },
-  "include": ["src/**/*.ts", "client/**/*.ts", "client/**/*.tsx"]
+  "include": ["src/**/*.ts", "client/**/*.ts", "client/**/*.tsx", "server/**/*.ts", "app/**/*.ts", "app/**/*.tsx", "worker/**/*.ts", "cloudflare-env.d.ts"]
 }

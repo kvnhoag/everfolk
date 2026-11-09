@@ -1,8 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { formatYear } from "../src/index.ts";
-import { exportLife, sampleEngine } from "./session.ts";
+import type { LifeState, JournalEntry, WorldPack } from "../src/types.ts";
+import type { WorldRoute } from "../server/content.ts";
+import type { ArchivedLife } from "./session.ts";
+import { engineForLife, exportLife, loadAnyLife, sampleEngine } from "./session.ts";
 import { useGame } from "./useGame.ts";
+import PaperScene from "./PaperScene.tsx";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -29,8 +33,9 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }
 
-function Portrait() {
-  return <svg viewBox="0 0 100 112" className="portrait" aria-label="Illustrated silhouette of the fictional character Damon" role="img"><path d="M14 103c2-25 15-35 36-35s34 10 36 35" fill="#c6bd9f" /><path d="m27 81 23 19 23-19M38 68l12 15 12-15" fill="none" stroke="#f0e9d9" strokeWidth="4" /><path d="M34 42c0-20 32-20 32 0v10c0 16-9 24-16 24S34 68 34 52" fill="#a89f80" /><path d="M31 49c-3-16 2-27 17-28 15-2 25 8 21 27l-6-10c-9 6-18 0-26 8" fill="#3a4a40" /><path d="M10 92C-1 54 10 23 31 12M89 92c12-38 0-69-20-80" fill="none" stroke="#89917a" strokeWidth="1.4" /><path d="M18 66C7 64 4 57 5 53c10 0 13 7 13 13m-1-21C9 41 9 32 11 30c9 4 10 10 6 15m7-19c-7-7-6-13-3-16 7 6 7 11 3 16M82 66c11-2 14-9 13-13-10 0-13 7-13 13m1-21c8-4 8-13 6-15-9 4-10 10-6 15m-7-19c7-7 6-13 3-16-7 6-7 11-3 16" fill="#89917a" /></svg>;
+function Portrait({ age = 18 }: { age?: number }) {
+  if (age < 5) return <svg viewBox="0 0 100 112" className="portrait" role="img" aria-label="Illustrated infant in a cradle"><circle cx="50" cy="35" r="17" fill="#b4aa8b"/><path d="M25 100V70c0-22 50-22 50 0v30" fill="#c9c3aa"/><path d="m29 63 39 25M26 82l38 22M75 63 33 89" stroke="#f0e9d9" strokeWidth="3"/><path d="M16 99h68M22 99l-7 10m63-10 7 10" stroke="#89917a" strokeWidth="3" fill="none"/></svg>;
+  return <svg viewBox="0 0 100 112" className="portrait" aria-label="Illustrated silhouette of the fictional character Damon" role="img"><path d="M14 103c2-25 15-35 36-35s34 10 36 35" fill="#c6bd9f" /><path d="m27 81 23 19 23-19M38 68l12 15 12-15" fill="none" stroke="#f0e9d9" strokeWidth="4" /><path d="M34 42c0-20 32-20 32 0v10c0 16-9 24-16 24S34 68 34 52" fill="#a89f80" /><path d="M31 49c-3-16 2-27 17-28 15-2 25 8 21 27l-6-10c-9 6-18 0-26 8" fill={age >= 60 ? "#c2c5b5" : "#3a4a40"} /><path d="M10 92C-1 54 10 23 31 12M89 92c12-38 0-69-20-80" fill="none" stroke="#89917a" strokeWidth="1.4" /><path d="M18 66C7 64 4 57 5 53c10 0 13 7 13 13m-1-21C9 41 9 32 11 30c9 4 10 10 6 15m7-19c-7-7-6-13-3-16 7 6 7 11 3 16M82 66c11-2 14-9 13-13-10 0-13 7-13 13m1-21c8-4 8-13 6-15-9 4-10 10-6 15m-7-19c7-7 6-13 3-16-7 6-7 11-3 16" fill="#89917a" /></svg>;
 }
 
 const choiceDetails: Record<string, { label: string; hint: string; icon: IconName }> = {
@@ -41,43 +46,155 @@ const choiceDetails: Record<string, { label: string; hint: string; icon: IconNam
 
 const statIcons: Record<string, IconName> = { health: "heart", knowledge: "book", wealth: "coin", bonds: "bonds" };
 
-function App() {
-  const game = useGame();
-  const { life } = game;
-  const [panel, setPanel] = useState<"world" | "chronicle" | "about" | null>(null);
+function lifeStage(age: number): string {
+  if (age < 5) return "Infancy";
+  if (age < 13) return "Childhood";
+  if (age < 18) return "Youth";
+  if (age < 40) return "Adulthood";
+  if (age < 60) return "Middle years";
+  return "Later life";
+}
+
+function lifePath(life: LifeState): string {
+  if (life.age < 5) return "In your household’s care";
+  if (life.age < 13) return "Learning your world";
+  if (life.flags.retired) return "Passing on what you know";
+  if (life.flags.sailed) return "A life on the water";
+  if (life.flags.studied) return "A student of words";
+  if (life.flags.stayed) return "Rooted in the city";
+  return "Still unwritten";
+}
+
+function yearsLived(age: number): string {
+  return age === 0 ? "Less than one year" : `${age} ${age === 1 ? "year" : "years"}`;
+}
+
+function evidenceLabel(evidence?: string): string {
+  if (evidence === "documented-history") return "Documented history";
+  if (evidence === "historically-inspired") return "Historical context · fictional story";
+  return "Fictional personal story";
+}
+
+function SourceLinks({ ids = [], world = sampleEngine.world }: { ids?: readonly string[]; world?: WorldPack }) {
+  const sources = ids.map(id => world.sources?.find(source => source.id === id)).filter(source => source !== undefined);
+  if (sources.length === 0) return null;
+  return <div className="source-links">{sources.map(source => <a key={source.id} href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>)}</div>;
+}
+
+function journalSourceIds(entry: JournalEntry, world = sampleEngine.world): string[] {
+  if (entry.type === "birth") return world.origins.find(item => item.id === entry.id)?.sourceIds ?? [];
+  if (entry.type === "event") return world.events.find(item => item.id === entry.id)?.sourceIds ?? [];
+  if (entry.type === "ending") return world.endings.find(item => item.id === entry.id)?.sourceIds ?? [];
+  return [];
+}
+
+function journalKind(entry: JournalEntry, world = sampleEngine.world): string {
+  if (entry.type === "choice") return "You chose";
+  if (entry.type === "outcome") return "Outcome";
+  if (entry.type === "birth") return "A beginning";
+  if (entry.type === "ending") return "A life remembered";
+  const event = world.events.find(item => item.id === entry.id);
+  if (event?.trigger.type === "year") return "History";
+  if (event?.mode === "automatic" && event.trigger.type === "age") return "A milestone";
+  return event?.mode === "automatic" ? "Life event" : "A decision";
+}
+
+function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFirst?: boolean }) {
+  const world = engineForLife(life).world;
+  const years = useMemo(() => {
+    const groups = new Map<number, { age: number; year: number; entries: JournalEntry[] }>();
+    for (const entry of life.journal) {
+      let group = groups.get(entry.age);
+      if (!group) {
+        group = { age: entry.age, year: entry.year, entries: [] };
+        groups.set(entry.age, group);
+      }
+      // Birthday markers establish a year even when no narrative event occurred.
+      if (entry.type !== "year") group.entries.push(entry);
+    }
+    const result = [...groups.values()];
+    return newestFirst ? result.reverse() : result;
+  }, [life.journal, newestFirst]);
+
+  return <div className="life-timeline">
+    {years.map(group => <section className="journal-year" key={group.age} aria-label={`${formatYear(group.year)}, age ${group.age}`}>
+      <header className="journal-year-heading"><h3>{formatYear(group.year)}</h3><span>{group.age === 0 ? "Birth year" : `Age ${group.age}`}</span></header>
+      {group.entries.length > 0 ? <ol className="journal-year-entries">
+        {group.entries.map((entry, index) => <li className={`journal-row journal-${entry.type}`} key={`${entry.type}-${entry.id}-${index}`}>
+          <span className="journal-point" aria-hidden="true" /><div className="journal-copy"><span className="journal-kind">{journalKind(entry, world)}</span><p>{entry.text}</p>
+            {journalSourceIds(entry, world).length > 0 && <details className="journal-sources"><summary>Sources</summary><SourceLinks ids={journalSourceIds(entry, world)} world={world} /></details>}
+          </div>
+        </li>)}
+      </ol> : <p className="journal-quiet-year">This year passed without a recorded event.</p>}
+    </section>)}
+  </div>;
+}
+
+function App({ isAdmin = false, onChooseWorld, onNewLife, worldPickerOpen = false, startFresh = false, worldRoutes = [] }: { isAdmin?: boolean; onChooseWorld?: () => void; onNewLife?: () => void; worldPickerOpen?: boolean; startFresh?: boolean; worldRoutes?: WorldRoute[] }) {
+  const [panel, setPanel] = useState<"world" | "chronicle" | "sources" | "archive" | "about" | null>(null);
   const [restartOpen, setRestartOpen] = useState(false);
+  const game = useGame({ isOverlayOpen: panel !== null || restartOpen || worldPickerOpen, startFresh });
+  const { life } = game;
   const [downloadError, setDownloadError] = useState("");
+  const [dialogError, setDialogError] = useState("");
   const [choiceKey, setChoiceKey] = useState(0);
+  const [viewedLife, setViewedLife] = useState<LifeState | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const decisionTitleRef = useRef<HTMLHeadingElement>(null);
+  const yearReviewRef = useRef<HTMLElement>(null);
+  const importRef = useRef<HTMLInputElement>(null);
   const event = sampleEngine.world.events.find(item => item.id === life.pendingEventId);
   const ending = sampleEngine.world.endings.find(item => item.id === life.endingId);
   const origin = sampleEngine.world.origins.find(item => item.id === life.originId)!;
+  const thisYearEvents = life.journal.filter(entry => entry.age === life.age && entry.type === "event")
+    .map(entry => ({ entry, event: sampleEngine.world.events.find(item => item.id === entry.id) }))
+    .filter(item => item.event?.mode === "automatic");
+  const thisYearOutcomes = life.journal.filter(entry => entry.age === life.age && entry.type === "outcome");
   const choices = sampleEngine.getChoices(life);
-  const meaningfulJournal = life.journal.filter(entry => entry.type !== "year" && entry.type !== "choice");
-  const visibleJournal = [...meaningfulJournal].reverse().slice(0, 3);
-  const lastOutcome = [...life.journal].reverse().find(entry => entry.type === "outcome");
+  const chronicleLife = viewedLife ?? life;
+  const chronicleEnding = engineForLife(chronicleLife).world.endings.find(item => item.id === chronicleLife.endingId);
+  const stage = lifeStage(life.age);
+  const isDead = life.phase === "ended" && ending?.kind === "death";
 
   useEffect(() => {
     const dialog = dialogRef.current;
     if (panel || restartOpen) {
-      game.setPlaying(false);
       if (dialog && !dialog.open) dialog.showModal();
     } else if (dialog?.open) dialog.close();
-  }, [panel, restartOpen, game.setPlaying]);
+  }, [panel, restartOpen]);
 
-  function closeDialog() { setPanel(null); setRestartOpen(false); }
+  useEffect(() => {
+    if (game.hasBegun && !panel && !restartOpen && (life.phase === "choice" || life.phase === "ended")) {
+      decisionTitleRef.current?.focus({ preventScroll: life.phase === "choice" });
+      if (life.phase === "choice") yearReviewRef.current?.scrollIntoView({ block: "start", behavior: "auto" });
+    }
+  }, [game.hasBegun, life.pendingEventId, life.phase, panel, restartOpen]);
 
-  function download() {
+  function closeDialog() {
+    setPanel(null);
+    setRestartOpen(false);
+    setViewedLife(null);
+    setDialogError("");
+  }
+
+  function openChronicle() {
+    setViewedLife(null);
+    setPanel("chronicle");
+  }
+
+  function downloadLife(saved?: string, filename?: string) {
     try {
-      const blob = new Blob([exportLife(life)], { type: "application/json" });
+      const blob = new Blob([saved ?? exportLife(life)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `a-life-in-alexandria-age-${life.age}.json`;
+      anchor.download = filename ?? `a-life-in-alexandria-age-${life.age}.json`;
       anchor.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       setDownloadError("");
-    } catch { setDownloadError("Your chronicle could not be exported. Please try again."); }
+    } catch {
+      setDownloadError("This life could not be exported. Please try again.");
+    }
   }
 
   function selectChoice(id: string) {
@@ -85,66 +202,186 @@ function App() {
     setChoiceKey(value => value + 1);
   }
 
+  function readArchived(entry: ArchivedLife) {
+    try {
+      setViewedLife(loadAnyLife(entry.save));
+      setDialogError("");
+      setPanel("chronicle");
+    } catch {
+      setDialogError("This archived life belongs to different world content. Its original save can still be downloaded.");
+    }
+  }
+
+  async function importFile(file?: File) {
+    if (!file) return;
+    try {
+      if (file.size > 8_000_000) throw new Error("This save file is too large.");
+      if (game.importLife(await file.text())) closeDialog();
+      else setDialogError("This save could not be opened. Please use a save from the current full-life world.");
+    } catch (error) {
+      setDialogError(error instanceof Error ? error.message : "This save could not be imported.");
+    } finally {
+      if (importRef.current) importRef.current.value = "";
+    }
+  }
+
   return <>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
-      <a className="brand" href="#" aria-label="Historical Lives home" onClick={e => { e.preventDefault(); setPanel("about"); }}>
+      <a className="brand" href="#" aria-label="About Historical Lives" onClick={e => { e.preventDefault(); setPanel("about"); }}>
         <span className="brand-mark"><Icon name="hourglass" size={26} /></span>
         <span>Historical Lives<span className="brand-caption">ONE LIFE. ANOTHER AGE.</span></span>
       </a>
       <nav className="main-nav" aria-label="Main navigation">
         <button className={!panel ? "nav-link active" : "nav-link"} onClick={closeDialog}><span className="small-dot" />Your life</button>
         <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>The world</button>
-        <button className={panel === "chronicle" ? "nav-link active" : "nav-link"} onClick={() => setPanel("chronicle")}>Chronicle</button>
+        <button className={panel === "chronicle" ? "nav-link active" : "nav-link"} onClick={openChronicle}>Chronicle</button>
+        <button className={panel === "archive" ? "nav-link active" : "nav-link"} onClick={() => setPanel("archive")}>Past lives</button>
+        <button className={panel === "sources" ? "nav-link active" : "nav-link"} onClick={() => setPanel("sources")}>Sources</button>
+        {onChooseWorld && <button className="nav-link" onClick={onChooseWorld}>Worlds</button>}
+        {isAdmin && <a className="nav-link admin-nav-link" href="/admin">World editor</a>}
       </nav>
-      <div className={`save-indicator ${game.saveStatus === "unavailable" ? "save-warning" : ""}`} role="status"><Icon name={game.saveStatus === "saved" ? "check" : "feather"} size={15} /><span>{game.saveStatus === "saved" ? "Life saved" : game.saveStatus === "saving" ? "Saving…" : "Save unavailable"}</span></div>
+      <div className={`save-indicator ${game.saveStatus === "unavailable" ? "save-warning" : ""}`} role="status">
+        <Icon name={game.saveStatus === "saved" ? "check" : "feather"} size={15} />
+        <span>{game.saveStatus === "saved" ? "Life saved" : game.saveStatus === "saving" ? "Saving…" : "Save unavailable"}</span>
+      </div>
     </header>
 
     <main className="page-shell" id="life-scene">
       <section className="chapter-heading" aria-label="Current world">
-        <div><p className="eyebrow"><span className="section-number">I</span> THE ANCIENT MEDITERRANEAN</p><h1>A life in Alexandria<span>.</span></h1><p className="chapter-subtitle">History remembers empires. This is the story of one life.</p></div>
-        <div className="chapter-date"><span>{Math.abs(life.year)}</span><small>{life.year < 0 ? "BEFORE THE COMMON ERA" : "COMMON ERA"}</small><span className="date-rule" /><p><Icon name="pin" size={14} /> Alexandria, Egypt</p></div>
+        <div>
+          <p className="eyebrow"><span className="section-number">I</span> THE ANCIENT MEDITERRANEAN</p>
+          <h1>{isDead ? "A life remembered" : sampleEngine.world.title}<span>.</span></h1>
+          <p className="chapter-subtitle">{isDead ? "An ordinary beginning. A life that will not come again." : "History remembers empires. This is the story of one life."}</p>
+        </div>
+        <div className="chapter-date" aria-label={`Current year ${formatYear(life.year)}`}><span className="date-label">{isDead ? "FINAL YEAR" : "CURRENT YEAR"}</span><span className="date-value">{Math.abs(life.year)} <small>{life.year < 0 ? "BCE" : "CE"}</small></span><p><Icon name="pin" size={14} /> Alexandria, Egypt</p></div>
       </section>
 
-      <div className="life-layout">
+      <div className={`life-layout ${isDead ? "life-has-ended" : ""}`}>
         <aside className="character-panel" aria-label="Your character">
-          <div className="portrait-frame"><Portrait /><span className="portrait-label">YOUR LIFE</span></div>
+          <div className="portrait-frame"><Portrait age={life.age} /><span className="portrait-label">{isDead ? "REMEMBERED" : "YOUR LIFE"}</span></div>
           <h2>Damon</h2><p className="character-origin">Of Alexandria</p>
-          <div className="age-line"><span>Age <strong>{life.age}</strong></span><span className="tiny-divider" /><span>{life.age < 21 ? "A life taking shape" : "A path of your own"}</span></div>
-          <div className="character-details"><div><span>BACKGROUND</span><p>{origin.title}</p></div><div><span>YOUR PATH</span><p>{life.flags.sailed ? "A life on the water" : life.flags.studied ? "A student of words" : life.flags.stayed ? "Rooted in the city" : "Still unwritten"}</p></div></div>
-          <div className="stats" aria-label="Life attributes">{Object.entries(sampleEngine.world.stats).map(([id, definition]) => <div className={`stat stat-${id}`} key={id}><div className="stat-heading"><span><Icon name={statIcons[id] ?? "sun"} size={16} />{definition.label}</span><strong>{life.stats[id]}</strong></div><div className="stat-track" role="meter" aria-label={definition.label} aria-valuemin={definition.min} aria-valuemax={definition.max} aria-valuenow={life.stats[id]}><span style={{ width: `${(life.stats[id] - definition.min) / (definition.max - definition.min) * 100}%` }} /></div></div>)}</div>
+          <div className="age-line"><span>{isDead && life.age === 0 ? "Died in infancy" : <>Age <strong>{life.age}</strong></>}</span><span className="tiny-divider" /><span>{isDead ? "A life remembered" : stage}</span></div>
+          <div className="character-details">
+            <div><span>BACKGROUND</span><p>{origin.title}</p></div>
+            <div><span>YOUR PATH</span><p>{worldRoutes.find(route => life.flags[route.flag])?.title ?? lifePath(life)}</p></div>
+            <div><span>BORN</span><p>{formatYear(sampleEngine.world.startYear)}</p></div>
+          </div>
+          <div className="stats" aria-label="Life attributes">
+            {Object.entries(sampleEngine.world.stats).map(([id, definition]) => <div className={`stat stat-${id}`} key={id}>
+              <div className="stat-heading"><span><Icon name={statIcons[id] ?? "sun"} size={16} />{definition.label}</span><strong key={life.stats[id]}>{Number(life.stats[id].toFixed(1))}<small> / {definition.max}</small></strong></div>
+              <div className="stat-track" role="meter" aria-label={definition.label} aria-valuemin={definition.min} aria-valuemax={definition.max} aria-valuenow={life.stats[id]}><span style={{ width: `${(life.stats[id] - definition.min) / (definition.max - definition.min) * 100}%` }} /></div>
+            </div>)}
+          </div>
           <p className="character-quote">“A life is made of the things<br />we choose, and those we cannot.”</p>
           <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>
         </aside>
 
         <section className="story-column" aria-label="Your unfolding story">
-          <figure className="scene-image">
-            <img src="/assets/alexandria-harbor.webp" alt="An imagined ancient Alexandria harbor at sunset, with merchant boats, limestone terraces and a distant lighthouse" fetchPriority="high" />
-            <div className="scene-location"><Icon name="pin" size={13} /><span>THE EASTERN HARBOR</span></div>
-            <div className="scene-time"><Icon name="sun" size={16} /><span>Late afternoon</span></div>
-            <figcaption><span className="scene-caption-rule" />A whole world.<br /><em>One unwritten life.</em></figcaption>
-          </figure>
+          <PaperScene life={life} compact={game.hasBegun} />
 
-          <section className={`decision-area ${life.phase === "ended" ? "is-ended" : ""}`} key={`${life.pendingEventId}-${choiceKey}`} aria-labelledby="decision-title">
-            <div className="decision-story"><p className="eyebrow decision-eyebrow"><span className="decision-star">✧</span>{life.phase === "choice" ? "A TURNING POINT" : life.phase === "ended" ? "THE END OF THIS CHAPTER" : "YOUR STORY CONTINUES"}<span className="decision-age">AGE {life.age}</span></p><h2 id="decision-title">{event?.title ?? ending?.title ?? "A life in the making."}</h2><p className="decision-body">{event?.text ?? ending?.text ?? "A choice becomes a memory, and the days begin to turn into years. There are people to meet, things to learn, and a life still waiting to be lived."}</p>{life.phase === "choice" && <span className="decision-prompt">What will you do?</span>}</div>
-            <div className="choice-list" aria-label={life.phase === "choice" ? "Available decisions" : "Continue your life"}>{choices.map((choice, index) => {
-              const detail = life.age === 18 ? choiceDetails[choice.id] : undefined;
-              return <button className="choice-button" key={choice.id} onClick={() => selectChoice(choice.id)}><span className="choice-icon"><Icon name={detail?.icon ?? "feather"} size={21} /></span><span className="choice-copy"><strong>{detail?.label ?? choice.text}</strong>{detail && <span>{detail.hint}</span>}</span><span className="choice-arrow"><Icon name="arrow" size={19} /></span><span className="sr-only">Choice {index + 1}</span></button>;
-            })}{life.phase === "ready" && <><div className="outcome-note"><Icon name="feather" size={22} /><p>{lastOutcome?.text ?? "Your next year is waiting."}</p></div><button className="primary-button" onClick={game.advance}>Live another year <Icon name="arrow" size={20} /></button></>}{life.phase === "ended" && <><p className="ending-note">Your choices have become a story. Keep it, or discover who you might be next.</p><button className="primary-button" onClick={() => setPanel("chronicle")}>Read your chronicle <Icon name="book" size={19} /></button><button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button></>}</div>
-          </section>
+          {!game.hasBegun ? <section className="birth-record" aria-labelledby="birth-title">
+            <div className="birth-record-heading"><p className="eyebrow"><Icon name="hourglass" size={16} /> A LIFE BEGINS</p><span className="birth-record-seal">{formatYear(sampleEngine.world.startYear)}</span></div>
+            <h2 id="birth-title">Damon enters the world.</h2>
+            <p>{origin.text}</p>
+            <dl className="birth-facts"><div><dt>PLACE</dt><dd>Alexandria, Egypt</dd></div><div><dt>BORN</dt><dd>{formatYear(sampleEngine.world.startYear)}</dd></div><div><dt>HOUSEHOLD</dt><dd>{origin.title}</dd></div></dl>
+            <SourceLinks ids={origin.sourceIds} />
+            <div className="birth-actions"><button className="primary-button" onClick={game.beginLife}>Begin this life <Icon name="arrow" size={20} /></button><button className="text-button" onClick={() => setPanel("sources")}>History, chance and the sources <Icon name="book" size={15} /></button></div>
+            <p className="birth-note">At 1×, each year takes 25 seconds and brings a brief of your life. Decisions arrive roughly every 2–3 years and pause time. A full life can be brief or long. Childhood mortality is included using an exploratory historical model; its limits are explained under Sources.</p>
+          </section> : <>
+            <div className="life-stages" aria-label="Life stage">{["Infancy", "Childhood", "Youth", "Adulthood", "Middle years", "Later life"].map(label => <span className={stage === label ? "current-stage" : ""} key={label}>{label}</span>)}</div>
+            {life.phase !== "ended" && <section className="year-review" ref={yearReviewRef} aria-labelledby="year-review-title" key={`year-${life.age}`}>
+              <header className="year-review-heading"><div><p className="eyebrow"><Icon name="sun" size={16} /> THIS YEAR</p><h2 id="year-review-title">A year in your life.</h2></div><span className="year-age-badge">{formatYear(life.year)}<strong>Age {life.age}</strong></span></header>
+              <div className="year-event-list">
+                {thisYearEvents.map(({ entry, event: annualEvent }) => <article className={`year-event ${annualEvent?.trigger.type === "year" ? "history-event" : "background-event"}`} key={`${entry.id}-${entry.age}`}>
+                  <span className="event-kind"><Icon name={annualEvent?.trigger.type === "year" ? "book" : "feather"} size={15} />{annualEvent?.trigger.type === "year" ? "HISTORY" : annualEvent?.trigger.type === "age" ? "A MILESTONE" : "LIFE EVENT"}</span>
+                  <h3>{annualEvent?.title}</h3><p>{annualEvent?.text}</p>
+                  <details className="annual-evidence"><summary>Story &amp; sources</summary><span>{evidenceLabel(annualEvent?.evidence)}</span><SourceLinks ids={annualEvent?.sourceIds} /></details>
+                </article>)}
+                {thisYearEvents.length === 0 && <article className="year-event background-event"><span className="event-kind"><Icon name="home" size={15} /> EVERYDAY LIFE</span><h3>{life.age === 0 ? "Your first days in Alexandria." : "The rhythm of an ordinary year."}</h3><p>{life.age === 0 ? "A household gathers around a new life. Beyond its walls, the city carries on: boats reach the harbor, neighbors trade news, and your story begins." : "Work, home and the familiar streets make up the days between turning points. Small moments belong to your story, too."}</p><span className="annual-fiction-label">Fictional personal story</span></article>}
+                {thisYearOutcomes.map((entry, index) => <article className="year-outcome" key={`${entry.id}-${index}`}><span className="event-kind"><Icon name="check" size={15} /> YOUR CHOICE, REMEMBERED</span><p>{entry.text}</p></article>)}
+              </div>
+            </section>}
+            <section className={`decision-area ${life.phase === "choice" ? "has-decision" : ""} ${life.phase === "ended" ? "is-ended" : ""}`} key={`${life.pendingEventId}-${choiceKey}`} aria-labelledby="decision-title">
+              <div className="decision-story">
+                <p className="eyebrow decision-eyebrow"><span className="decision-star">✧</span>{life.phase === "choice" ? "A DECISION · TIME IS PAUSED" : isDead ? "THE END OF A LIFE" : life.phase === "ended" ? "A LIFE RECORDED" : "BETWEEN TURNING POINTS"}<span className="decision-age">AGE {life.age}</span></p>
+                <h2 id="decision-title" ref={decisionTitleRef} tabIndex={-1}>{event?.title ?? ending?.title ?? "Let the year unfold."}</h2>
+                <p className="decision-body">{event?.text ?? ending?.text ?? "Life carries on between decisions. Read this year’s story, take a breath, and let the clock bring the next chapter. You can pause at any time."}</p>
+                {event && <div className="event-evidence"><span>{evidenceLabel(event.evidence)}</span><SourceLinks ids={event.sourceIds} />{(event.sourceIds?.length ?? 0) > 0 && <small>The sources support the setting or historical event. Personal choices and their numerical effects are authored.</small>}</div>}
+                {life.phase === "choice" && <span className="decision-prompt">{life.age < 5 ? "What will your household do?" : "What will you do?"}</span>}
+              </div>
+              <div className="choice-list" aria-label={life.phase === "choice" ? "Available decisions" : "Continue your life"}>
+                {choices.map((choice, index) => {
+                  const route = worldRoutes.find(route => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "flag" && effect.flag === route.flag && effect.value)));
+                  const baseDetail = event?.id === "a-place-on-the-manifest" ? choiceDetails[choice.id] : undefined;
+                  const detail = route ? { label: route.title, hint: route.description, icon: baseDetail?.icon ?? "feather" as IconName } : baseDetail;
+                  return <button className="choice-button" key={choice.id} onClick={() => selectChoice(choice.id)}><span className="choice-icon"><Icon name={detail?.icon ?? "feather"} size={21} /></span><span className="choice-copy"><strong>{detail?.label ?? choice.text}</strong>{detail && <span>{detail.hint}</span>}</span><span className="choice-arrow"><Icon name="arrow" size={19} /></span><span className="sr-only">Choice {index + 1}</span></button>;
+                })}
+                {life.phase === "ready" && <>
+                  <div className={`year-clock ${game.isClockRunning ? "clock-running" : ""}`}>
+                    <div className="year-clock-heading"><span><Icon name="hourglass" size={18} />{game.isPlaying ? "Your life is unfolding" : "A moment to reflect"}</span><span className="year-clock-countdown" role="timer" aria-live="off">{game.isClockRunning ? `${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
+                    <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>
+                    <div className="year-clock-footer"><small>{game.isClockRunning ? "Until another year passes" : game.isPlaying ? "Time will resume when you return" : "Resume whenever you’re ready"}</small><button className="clock-toggle" onClick={() => game.setPlaying(value => !value)}><Icon name={game.isPlaying ? "pause" : "play"} size={13} />{game.isPlaying ? "Pause time" : "Resume time"}</button></div>
+                  </div>
+                  <button className="text-button turning-point-button" onClick={game.nextTurningPoint}>Next turning point <Icon name="arrow" size={16} /></button>
+                </>}
+                {life.phase === "ended" && <>
+                  <div className="memorial-summary"><span className="eyebrow">DAMON OF ALEXANDRIA</span><p className="memorial-dates">{formatYear(sampleEngine.world.startYear)} <span>—</span> {formatYear(life.year)}</p><strong>{yearsLived(life.age)}</strong><p>{life.age === 0 ? "Your household remembers a life that ended before its first birthday." : life.age < 18 ? "A young life, held in the memory of those who knew you." : life.flags.parent ? "Your story lives on in the people you cared for and what you left behind." : "The people you knew and the things you made become the traces of your life."}</p></div>
+                  <button className="primary-button" onClick={openChronicle}>Read your life’s chronicle <Icon name="book" size={19} /></button>
+                  <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>
+                  <SourceLinks ids={ending?.sourceIds} />
+                </>}
+              </div>
+            </section>
 
-          <div className="playback-bar"><div className="playback-label"><span className={`status-dot ${life.phase === "ready" && game.isPlaying ? "running" : ""}`} /><span>{life.phase === "choice" ? "Time waits for your decision" : life.phase === "ended" ? "A chapter to remember" : game.isPlaying ? "Your life is unfolding" : "A moment to reflect"}</span></div><div className="playback-controls"><button className={`play-button ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => game.setPlaying(value => !value)}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /></button><span className="control-divider" />{([1, 2, 4] as const).map(speed => <button key={speed} className={`speed-button ${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div></div>
-          <section className="chronicle-preview" aria-label="Recent life events"><div className="chronicle-heading"><h3><Icon name="feather" size={17} /> A few lines from your life</h3><button className="text-button" onClick={() => setPanel("chronicle")}>Full chronicle <Icon name="arrow" size={15} /></button></div><ol>{visibleJournal.map((entry, index) => <li key={`${entry.id}-${entry.age}-${index}`}><span className="journal-date">{formatYear(entry.year)}</span><span className="journal-point" /><p>{entry.text}</p></li>)}</ol></section>
+            <div className="playback-bar">
+              <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span>{life.phase === "choice" ? game.isPlaying ? "Time waits for your decision" : "Time paused · a decision awaits" : life.phase === "ended" ? "A life remembered" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : game.isPlaying ? "Time is resting while you explore" : "Time is paused"}</span></div>
+              <div className="playback-controls"><button className={`play-button ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => game.setPlaying(value => !value)}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /></button><span className="control-divider" />{([1, 2, 4, 8] as const).map(speed => <button key={speed} className={`speed-button ${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
+            </div>
+            <section className="chronicle-preview" aria-labelledby="life-timeline-title"><div className="chronicle-heading"><h2 id="life-timeline-title"><Icon name="feather" size={20} /> Your life, year by year</h2><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><p className="chronicle-description">Every year, event and choice stays here. Newest year first.</p><LifeJournal life={life} newestFirst /></section>
+          </>}
         </section>
       </div>
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
 
-    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Every life leaves a trace.</span><div><span>SCENE STUDY 01</span><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this scene</button></div></footer>
-
-    <dialog ref={dialogRef} className="detail-dialog" onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title"><div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button>
-      {restartOpen ? <><p className="eyebrow">ANOTHER POSSIBILITY</p><h2 id="dialog-title">Every beginning is different.</h2><p>Your current chapter will be replaced by a new life. You can download its chronicle first.</p><div className="dialog-actions"><button className="secondary-button" onClick={download}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.restart(); closeDialog(); }}>Begin another life <Icon name="arrow" /></button></div></> : panel === "chronicle" ? <><p className="eyebrow">THE LIFE OF DAMON</p><h2 id="dialog-title">Your chronicle.</h2><p className="dialog-subtitle">An ordinary beginning. A story that belongs to you.</p><ol className="full-journal">{meaningfulJournal.map((entry, index) => <li key={`${entry.id}-${index}`}><span className="eyebrow">AGE {entry.age} · {formatYear(entry.year)}</span><p>{entry.text}</p></li>)}</ol><button className="secondary-button" onClick={download}><Icon name="download" size={18} /> Download your life</button></> : panel === "world" ? <><p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">A city at the water’s edge.</h2><img className="dialog-scene" src="/assets/alexandria-harbor.webp" alt="Imagined Alexandria harbor" /><p>For this scene, your story begins in an imagined Alexandria: a harbor of merchants, artisans and people drawn to the written word.</p><p>The sea offers one kind of possibility. The city offers another. What matters is the life you make between them.</p><dl className="world-facts"><div><dt>SETTING</dt><dd>Alexandria, Egypt</dd></div><div><dt>OPENING YEAR</dt><dd>48 BCE</dd></div><div><dt>YOUR BEGINNING</dt><dd>Age 18</dd></div><div><dt>CHAPTER ENDS</dt><dd>Age 23</dd></div></dl><p className="fine-print">This fictional chapter explores the game’s interactions. Characters, events and probability weights are invented; the illustration is evocative rather than an archaeological reconstruction.</p></> : <><p className="eyebrow">HISTORICAL LIVES · SCENE STUDY 01</p><h2 id="dialog-title">One life. Another age.</h2><p>A first playable look at a life through history. Make a decision, see what changes, and continue through the next five years. Your life saves in this browser when storage is available.</p><p>The title, art direction and Alexandria setting are provisional. The story and character are fictional. An ending completes this sample chapter; it does not imply the character has died.</p><p className="fine-print">Original scene artwork created with OpenAI image generation. Built with React, Vite and the project’s independent simulation engine.</p><button className="primary-button" onClick={closeDialog}>Return to your life <Icon name="arrow" /></button></>}
-    </div></dialog>
+    <footer className="site-footer"><span><Icon name="hourglass" size={13} /> Every life leaves a trace.</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
+    <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
+      <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
+        {(dialogError || downloadError) && <p className="dialog-error" role="alert">{dialogError || downloadError}</p>}
+        {restartOpen ? <>
+          <p className="eyebrow">ANOTHER POSSIBILITY</p><h2 id="dialog-title">Every beginning is different.</h2>
+          <p>Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first.</p>
+          <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); closeDialog(); if (onNewLife) onNewLife(); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
+        </> : panel === "chronicle" ? <>
+          <p className="eyebrow">THE LIFE OF DAMON</p><h2 id="dialog-title">{chronicleLife.phase === "ended" ? "A life remembered." : "Your chronicle."}</h2>
+          <p className="dialog-subtitle">{chronicleLife.phase === "ended" ? `${formatYear(sampleEngine.world.startYear)} — ${formatYear(chronicleLife.year)} · ${yearsLived(chronicleLife.age)}` : "An ordinary beginning. A story that belongs to you."}</p>
+          {chronicleEnding && <p>{chronicleEnding.text}</p>}
+          <LifeJournal life={chronicleLife} />
+          <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `damon-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
+        </> : panel === "archive" ? <>
+          <p className="eyebrow">HELD IN THIS BROWSER</p><h2 id="dialog-title">Past lives.</h2>
+          <p>Up to ten completed lives are kept here, newest first. Download a save to keep a copy outside this browser.</p>
+          <div className="past-lives">{game.archivedLives.length === 0 ? <p className="empty-archive">No life has ended yet. Your first story is still unfolding.</p> : game.archivedLives.map(entry => <article className="archived-life" key={entry.id}><span className="eyebrow">{formatYear(entry.birthYear)} — {formatYear(entry.year)}</span><h3>{entry.endingTitle}</h3><p>{yearsLived(entry.age)}</p><div><button className="text-button" onClick={() => readArchived(entry)}>Read this life <Icon name="book" size={15} /></button><button className="text-button" onClick={() => downloadLife(entry.save, `alexandria-past-life-age-${entry.age}.json`)}>Download <Icon name="download" size={15} /></button></div></article>)}</div>
+          <button className="secondary-button" onClick={() => importRef.current?.click()}><Icon name="book" size={18} /> Import a saved life</button>
+        </> : panel === "sources" ? <>
+          <p className="eyebrow">HISTORY, FICTION &amp; CHANCE</p><h2 id="dialog-title">Behind this world.</h2>
+          <p>Historical dates and context come from the sources below. Damon, his personal story, choices and stat effects are authored fiction. A source for a practice does not establish how likely a particular person was to experience it.</p>
+          <section className="mortality-source-note"><h3>How a life can end</h3><p>{sampleEngine.world.mortality?.description ?? "Mortality parameters are simulation assumptions, not measured Alexandrian death rates."}</p><SourceLinks ids={sampleEngine.world.mortality?.sourceIds} /></section>
+          <div className="evidence-key"><span>Documented history</span><span>Historical context · fictional story</span><span>Fictional personal story</span></div>
+          <div className="sources-list">{sampleEngine.world.sources?.map(source => <article key={source.id} id={`source-${source.id}`}><span className="eyebrow">{source.kind} · {source.publisher}</span><h3><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></h3><p className="source-period">{source.period} · {source.geography}</p><p>{source.summary}</p><p className="source-limits"><strong>Scope:</strong> {source.limitations}</p></article>)}</div>
+        </> : panel === "world" ? <>
+          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">A city at the water’s edge.</h2><img className="dialog-scene" src="/assets/alexandria-harbor.webp" alt="Imagined Alexandria harbor" />
+          <p>Your life begins in Alexandria in 66 BCE. If you live long enough, the city and the government around it will change as your own life unfolds.</p><p>The harbor offers one kind of possibility. The written word offers another. Family, work, illness and chance shape what becomes possible.</p>
+          <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>Alexandria, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(sampleEngine.world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
+          <p className="fine-print">The setting has documented historical anchors; the individual life is fiction. The illustration is evocative rather than an archaeological reconstruction. Evidence from other periods and places is identified under Sources.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>
+        </> : <>
+          <p className="eyebrow">HISTORICAL LIVES</p><h2 id="dialog-title">One life. Another age.</h2>
+          <p>Begin as a newborn, live through childhood and adulthood if you survive, and reach the end of one person’s life. The clock starts when you begin and runs between decisions. Time waits while you choose, then continues automatically unless you have paused it. You can change the speed or skip quiet years to the next turning point.</p><p>Early deaths are possible. The demographic model is an exploratory comparison, not a precise reconstruction of a boy born in Ptolemaic Alexandria. The model and each event’s historical basis can be inspected under Sources.</p><p>Your life saves in this browser when storage is available. Completed lives are kept in a local archive of up to ten, and JSON saves can be downloaded or imported.</p>
+          <div className="dialog-actions"><button className="secondary-button" onClick={() => importRef.current?.click()}>Import a saved life <Icon name="book" size={17} /></button><button className="primary-button" onClick={closeDialog}>Return to your life <Icon name="arrow" /></button></div><p className="fine-print">The title and art direction remain provisional. Original scene artwork created with OpenAI image generation.</p>
+        </>}
+      </div>
+    </dialog>
   </>;
 }
 

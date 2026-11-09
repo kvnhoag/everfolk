@@ -1,80 +1,95 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
-import type { LifeState } from "../src/types.ts";
+import type { LifeEngine, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const engine = createEngine(pack);
+type Career = "stay" | "sail" | "study";
 
-function scene(seed = "alexandria-scene"): LifeState {
-  let state = engine.start(seed);
-  while (state.age < 18) {
-    assert.equal(state.phase, "ready", "Childhood must remain quiet for this sample.");
-    state = engine.advance(state);
+function choiceFor(engine: LifeEngine, state: LifeState, career: Career): string {
+  const choices = engine.getChoices(state);
+  if (state.pendingEventId === "a-place-on-the-manifest") {
+    const chosen = choices.find(choice => choice.id === career);
+    assert.ok(chosen, `The ${career} career must be available to this literate test character.`);
+    return chosen.id;
   }
-  return state;
+  if (state.pendingEventId === "the-first-letters") return "learn-letters";
+  assert.ok(choices.length > 0, "An offered decision must have a way forward.");
+  return choices[0].id;
 }
 
-function complete(firstChoice: string, seed: string): LifeState {
-  let state = engine.choose(scene(seed), firstChoice);
-  for (let step = 0; step < 30 && state.phase !== "ended"; step++) {
+function until(engine: LifeEngine, seed: string, career: Career, stop: (state: LifeState) => boolean): LifeState {
+  let state = engine.start(seed);
+  for (let step = 0; step < 500 && !stop(state) && state.phase !== "ended"; step++) {
     state = state.phase === "choice"
-      ? engine.choose(state, engine.getChoices(state)[0].id)
+      ? engine.choose(state, choiceFor(engine, state, career))
       : engine.advance(state);
   }
-  assert.equal(state.phase, "ended");
   return state;
 }
 
-test("Alexandria scene opens at eighteen in 48 BCE with three available paths", () => {
-  const state = scene();
-  assert.equal(state.age, 18);
-  assert.equal(state.year, -48);
-  assert.equal(state.pendingEventId, "a-place-on-the-manifest");
-  assert.deepEqual(engine.getChoices(state).map(choice => choice.id), ["stay", "sail", "study"]);
-  assert.equal(state.journal.filter(entry => entry.type === "event").length, 1);
+function withoutMortality(): LifeEngine {
+  const copy = structuredClone(pack);
+  copy.mortality.bands.forEach(band => { band.annualProbability = 0; });
+  return createEngine(copy);
+}
+
+test("Alexandria begins with birth and a household-care decision in 66 BCE", () => {
+  const state = engine.start("birth-screen");
+  assert.equal(state.age, 0);
+  assert.equal(state.year, -66);
+  assert.equal(state.phase, "choice");
+  assert.equal(state.pendingEventId, "the-first-household");
+  assert.deepEqual(engine.getChoices(state).map(choice => choice.id), ["family-care", "seek-help"]);
+  assert.equal(state.commands.length, 0);
+  assert.equal(state.journal[0].type, "birth");
+  assert.equal(state.journal.some(entry => entry.age > 0), false);
 });
 
-test("a pending sample decision survives save/load exactly", () => {
-  const state = scene("sample-save");
-  assert.deepEqual(engine.load(engine.save(state)), state);
+test("a birth decision and its continuation survive save/load without skipping childhood", () => {
+  const state = engine.start("birth-save");
   const restored = engine.load(engine.save(state));
-  assert.deepEqual(engine.choose(restored, "sail"), engine.choose(state, "sail"));
+  assert.deepEqual(restored, state);
+  const afterChoice = engine.choose(restored, "family-care");
+  assert.equal(afterChoice.age, 0);
+  assert.equal(afterChoice.phase, "ready");
+  assert.deepEqual(afterChoice, engine.choose(state, "family-care"));
 });
 
-test("each initial path reaches its own living chapter ending with bounded stats", () => {
-  const expected = {
-    stay: "a-place-to-belong",
-    sail: "a-life-on-the-water",
-    study: "a-keeper-of-words",
-  };
-  for (const [choice, ending] of Object.entries(expected)) {
-    for (let seed = 0; seed < 12; seed++) {
-      const state = complete(choice, `path-${choice}-${seed}`);
-      assert.equal(state.endingId, ending);
-      assert.equal(state.age, 23);
-      assert.equal(state.year, -43);
-      assert.equal(state.pendingEventId, null);
-      for (const [id, value] of Object.entries(state.stats)) {
-        assert.ok(Number.isFinite(value));
-        assert.ok(value >= engine.world.stats[id].min && value <= engine.world.stats[id].max);
-      }
-      assert.deepEqual(engine.load(engine.save(state)), state);
+test("all three careers can pass the former age-23 boundary and end in old-age death", () => {
+  // Discovered by a bounded search across coverage-0..coverage-2999. This seed
+  // covers long lived paths; it is not a claim that every birth reaches adulthood.
+  for (const career of ["stay", "sail", "study"] as const) {
+    const state = until(engine, "coverage-1", career, state => state.phase === "ended");
+    assert.equal(state.phase, "ended");
+    assert.ok(state.age >= 70 && state.age <= pack.maxAge);
+    assert.equal(engine.world.endings.find(ending => ending.id === state.endingId)?.kind, "death");
+    assert.equal(state.endingId, "death-in-later-life");
+    assert.equal(state.flags[career === "stay" ? "stayed" : career === "sail" ? "sailed" : "studied"], true);
+    assert.ok(state.journal.some(entry => entry.age > 23));
+    assert.ok(state.journal.some(entry => entry.id === "care-between-generations"));
+    assert.ok(state.journal.some(entry => entry.id === "putting-things-in-order"));
+    assert.equal(state.pendingEventId, null);
+    for (const [id, value] of Object.entries(state.stats)) {
+      assert.ok(Number.isFinite(value));
+      assert.ok(value >= engine.world.stats[id].min && value <= engine.world.stats[id].max);
     }
+    assert.deepEqual(engine.load(engine.save(state)), state);
   }
 });
 
-test("path-specific follow-up events match the initial choice", () => {
-  const expected = {
-    sail: "letters-across-the-water",
-    study: "the-unfamiliar-page",
-    stay: "the-neighbors-request",
-  };
-  for (const [choice, event] of Object.entries(expected)) {
-    let state = engine.choose(scene(`followup-${choice}`), choice);
-    assert.equal(state.phase, "ready");
-    state = engine.advance(state);
-    assert.equal(state.age, 19);
-    assert.equal(state.pendingEventId, event);
+test("childhood learning opens study and the selected adult career receives its own follow-up", () => {
+  const safeEngine = withoutMortality();
+  const followups = { sail: "letters-across-the-water", study: "the-unfamiliar-page", stay: "the-neighbors-request" };
+  for (const career of ["stay", "sail", "study"] as const) {
+    const adult = until(safeEngine, `training-${career}`, career, state => state.pendingEventId === "a-place-on-the-manifest");
+    assert.ok(adult.age >= 18 && adult.age <= 21, "The personal milestone may wait for the next decision interval.");
+    assert.equal(adult.flags.literate, true);
+    assert.deepEqual(safeEngine.getChoices(adult).map(choice => choice.id), ["stay", "sail", "study"]);
+    let next = safeEngine.choose(adult, career);
+    while (next.phase === "ready") next = safeEngine.advance(next);
+    assert.ok(next.age - adult.age >= 2 && next.age - adult.age <= 3);
+    assert.equal(next.pendingEventId, followups[career]);
   }
 });

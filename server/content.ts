@@ -1,0 +1,211 @@
+import type { WorldPack } from "../src/types.ts";
+import { validateWorld } from "../src/validate.ts";
+import { contentFingerprint } from "../src/random.ts";
+import alexandria from "../worlds/alexandria-sample.json" with { type: "json" };
+
+export interface WorldRoute {
+  id: string;
+  title: string;
+  description: string;
+  flag: string;
+  enabled: boolean;
+}
+
+export interface ManagedWorld {
+  id: string;
+  enabled: boolean;
+  pack: WorldPack;
+  routes: WorldRoute[];
+  disabledEventIds: string[];
+}
+
+export interface AdminCatalog {
+  revision: number;
+  worlds: ManagedWorld[];
+  publishedRevision?: number | null;
+  publishedAt?: string | null;
+}
+
+export interface PublishedWorld {
+  id: string;
+  revisionId: string;
+  pack: WorldPack;
+  routes: WorldRoute[];
+}
+
+export interface WorldSummary {
+  id: string;
+  title: string;
+  version: string;
+  description: string;
+  routes: WorldRoute[];
+}
+
+export interface PublishedCatalog {
+  revision: number;
+  publicationId: string;
+  publishedAt: string | null;
+  worlds: WorldSummary[];
+}
+
+// D1 limits each string and row to 2 MB. Leave room for row metadata and
+// publication wrappers while keeping editor imports and request bodies bounded.
+export const MAX_CATALOG_BYTES = 1_500_000;
+const BAD_IDS = new Set(["constructor", "prototype", "__proto__"]);
+const ID = /^[a-z][a-z0-9-]{0,99}$/;
+
+function record(value: unknown, path: string, fields: string[], required = fields): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value) ||
+    (Object.getPrototypeOf(value) !== Object.prototype && Object.getPrototypeOf(value) !== null)) {
+    throw new Error(`${path}: expected a plain object.`);
+  }
+  for (const key of Reflect.ownKeys(value)) {
+    if (typeof key !== "string" || !fields.includes(key) || BAD_IDS.has(key)) throw new Error(`${path}: unknown field.`);
+    const descriptor = Object.getOwnPropertyDescriptor(value, key)!;
+    if (!("value" in descriptor) || !descriptor.enumerable) throw new Error(`${path}: expected plain JSON fields.`);
+  }
+  for (const key of required) if (!Object.hasOwn(value, key)) throw new Error(`${path}.${key}: required field is missing.`);
+  return value as Record<string, unknown>;
+}
+
+function list(value: unknown, path: string, max: number): unknown[] {
+  if (!Array.isArray(value) || value.length > max || Reflect.ownKeys(value).length !== value.length + 1) {
+    throw new Error(`${path}: expected an array with at most ${max} items.`);
+  }
+  for (let i = 0; i < value.length; i++) {
+    const descriptor = Object.getOwnPropertyDescriptor(value, String(i));
+    if (!descriptor || !("value" in descriptor)) throw new Error(`${path}: sparse arrays and accessors are not allowed.`);
+  }
+  return value;
+}
+
+function text(value: unknown, path: string, max: number): string {
+  if (typeof value !== "string" || value.trim().length === 0 || value.length > max) {
+    throw new Error(`${path}: enter text of 1–${max} characters.`);
+  }
+  return value;
+}
+
+function id(value: unknown, path: string): string {
+  const result = text(value, path, 100);
+  if (!ID.test(result) || BAD_IDS.has(result)) throw new Error(`${path}: use a lowercase ID containing letters, numbers and hyphens.`);
+  return result;
+}
+
+function enabled(value: unknown, path: string): void {
+  if (typeof value !== "boolean") throw new Error(`${path}: expected true or false.`);
+}
+
+function boundedJson(value: unknown, path: string): void {
+  if (new TextEncoder().encode(JSON.stringify(value)).byteLength > MAX_CATALOG_BYTES) {
+    throw new Error(`${path}: serialized content exceeds the 1,500,000-byte limit. Reduce the catalog before saving or publishing.`);
+  }
+}
+
+/** Pure validation shared by the editor and server; authoritative checks run server-side. */
+export function validateCatalog(input: unknown): asserts input is AdminCatalog {
+  const catalog = record(input, "catalog", ["revision", "worlds", "publishedRevision", "publishedAt"], ["revision", "worlds"]);
+  if (!Number.isSafeInteger(catalog.revision) || (catalog.revision as number) < 0) throw new Error("catalog.revision: expected a nonnegative integer.");
+  const worlds = list(catalog.worlds, "catalog.worlds", 20);
+  if (worlds.length === 0) throw new Error("Keep at least one world in the catalog.");
+  const worldIds = new Set<string>();
+  const publicationWorlds: PublishedWorld[] = [];
+  let playable = false;
+  for (let i = 0; i < worlds.length; i++) {
+    const path = `worlds[${i}]`;
+    const world = record(worlds[i], path, ["id", "enabled", "pack", "routes", "disabledEventIds"]);
+    const worldId = id(world.id, `${path}.id`);
+    if (worldIds.has(worldId)) throw new Error(`${path}.id: duplicate world ID.`);
+    worldIds.add(worldId);
+    enabled(world.enabled, `${path}.enabled`);
+    playable ||= world.enabled === true;
+    validateWorld(world.pack);
+    if (world.pack.id !== worldId) throw new Error(`${path}: the world ID must match the pack ID.`);
+    const eventIds = new Set(world.pack.events.map(event => event.id));
+    const disabledIds = list(world.disabledEventIds, `${path}.disabledEventIds`, 5_000);
+    const seenDisabled = new Set<string>();
+    for (const value of disabledIds) {
+      const eventId = id(value, `${path}.disabledEventIds`);
+      if (!eventIds.has(eventId)) throw new Error(`${path}: disabled event ${eventId} does not exist.`);
+      if (seenDisabled.has(eventId)) throw new Error(`${path}: duplicate disabled event ${eventId}.`);
+      seenDisabled.add(eventId);
+    }
+    const routes = list(world.routes, `${path}.routes`, 200);
+    const routeIds = new Set<string>();
+    const routeFlags = new Set<string>();
+    for (let j = 0; j < routes.length; j++) {
+      const routePath = `${path}.routes[${j}]`;
+      const route = record(routes[j], routePath, ["id", "title", "description", "flag", "enabled"]);
+      const routeId = id(route.id, `${routePath}.id`);
+      const routeFlag = id(route.flag, `${routePath}.flag`);
+      if (routeIds.has(routeId) || routeFlags.has(routeFlag)) throw new Error(`${routePath}: route IDs and flags must be unique within a world.`);
+      routeIds.add(routeId);
+      routeFlags.add(routeFlag);
+      text(route.title, `${routePath}.title`, 200);
+      text(route.description, `${routePath}.description`, 2_000);
+      enabled(route.enabled, `${routePath}.enabled`);
+      if (!Object.hasOwn(world.pack.flags, routeFlag)) throw new Error(`${routePath}: flag ${routeFlag} is not declared by the pack.`);
+    }
+    // Compile after metadata validation: disabled routes/events must leave a valid pack.
+    const compiled = compileWorld(worlds[i] as ManagedWorld);
+    if (world.enabled) {
+      const published: PublishedWorld = {
+        id: worldId, revisionId: `pack-${contentFingerprint({ pack: compiled, routes: world.routes })}`,
+        pack: compiled, routes: world.routes as WorldRoute[],
+      };
+      boundedJson(published, `${path}.published`);
+      publicationWorlds.push(published);
+    }
+  }
+  if (!playable) throw new Error("Keep at least one enabled world available to players.");
+  // Serialize only structurally validated draft fields, never optional metadata.
+  boundedJson({ revision: catalog.revision, worlds }, "catalog");
+  boundedJson(publicationWorlds, "published catalog");
+}
+
+/** Route switches remove entry choices; existing lives remain pinned to their old pack. */
+export function compileWorld(world: ManagedWorld): WorldPack {
+  validateWorld(world.pack);
+  const pack = structuredClone(world.pack);
+  const disabledEvents = new Set(world.disabledEventIds);
+  const disabledFlags = new Set(world.routes.filter(route => !route.enabled).map(route => route.flag));
+  for (const flag of disabledFlags) {
+    const nonChoiceEffects = [
+      ...pack.origins.flatMap(origin => origin.effects), ...pack.yearlyEffects,
+      ...(pack.yearlyRules ?? []).flatMap(rule => rule.effects),
+      ...pack.events.filter(event => event.mode === "automatic" && !disabledEvents.has(event.id)).flatMap(event => event.effects ?? []),
+    ];
+    if (pack.flags[flag]?.initial || nonChoiceEffects.some(effect => effect.type === "flag" && effect.flag === flag && effect.value)) {
+      throw new Error(`Route ${flag} also starts outside a player choice; remove that activation before disabling this route.`);
+    }
+  }
+  pack.events = pack.events.filter(event => !disabledEvents.has(event.id)).map(event => {
+    if (event.mode === "automatic") return event;
+    const choices = event.choices.filter(choice => !choice.outcomes.some(outcome =>
+      outcome.effects.some(effect => effect.type === "flag" && effect.value && disabledFlags.has(effect.flag))));
+    if (choices.length === 0) throw new Error(`Disabling routes leaves event “${event.title}” without a choice. Enable a route or disable that event.`);
+    return { ...event, choices };
+  });
+  validateWorld(pack);
+  return pack;
+}
+
+export function getBuiltinCatalog(): AdminCatalog {
+  validateWorld(alexandria);
+  return { revision: 0, publishedRevision: 0, publishedAt: null, worlds: [{
+    id: alexandria.id, enabled: true, pack: structuredClone(alexandria), disabledEventIds: [], routes: [
+      { id: "home", title: "Life in the city", description: "Build a life close to home and the people who know you.", flag: "stayed", enabled: true },
+      { id: "sea", title: "Life at sea", description: "Work aboard a merchant ship and discover other shores.", flag: "sailed", enabled: true },
+      { id: "study", title: "The written word", description: "Learn letters and join a copyist's workshop.", flag: "studied", enabled: true },
+    ],
+  }] };
+}
+
+export function getBuiltinWorld(): PublishedWorld {
+  const world = getBuiltinCatalog().worlds[0];
+  return { id: world.id, revisionId: `pack-${contentFingerprint(world.pack)}`, pack: world.pack, routes: world.routes };
+}
+
+export function worldSummary(world: PublishedWorld): WorldSummary {
+  return { id: world.id, title: world.pack.title, version: world.pack.version, description: world.pack.description, routes: world.routes };
+}

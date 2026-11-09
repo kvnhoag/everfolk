@@ -1,0 +1,46 @@
+{
+  "id": "roman-egypt-female-comparison",
+  "title": "Comparative Roman Egyptian female model life table",
+  "sourceIds": ["life-expectancy-egyptology", "demography-evidence-limits"],
+  "tableLocator": "Sonia Zakrzewski, Life Expectancy (2015), Table 1, printed page 3 / PDF page 5, after Bagnall and Frier (1994).",
+  "sourceLifeExpectancyAtBirth": 22.5,
+  "applicability": "An exploratory proxy for this fictional life. The source is a model for females in later Roman Egypt, not measured mortality for a male born in Ptolemaic Alexandria in 66 BCE. No precise Alexandrian death rates are claimed.",
+  "conversion": "For an interval of n complete years with conditional death probability q, annual p = 1 - (1 - q)^(1/n). This assumes constant annual risk within each source interval.",
+  "intervals": [
+    { "minAge": 0, "nextAge": 1, "deathProbability": 0.33399 },
+    { "minAge": 1, "nextAge": 5, "deathProbability": 0.23760 },
+    { "minAge": 5, "nextAge": 10, "deathProbability": 0.06657 },
+    { "minAge": 10, "nextAge": 15, "deathProbability": 0.05205 },
+    { "minAge": 15, "nextAge": 20, "deathProbability": 0.06744 },
+    { "minAge": 20, "nextAge": 25, "deathProbability": 0.08385 },
+    { "minAge": 25, "nextAge": 30, "deathProbability": 0.09369 },
+    { "minAge": 30, "nextAge": 35, "deathProbability": 0.10558 },
+    { "minAge": 35, "nextAge": 40, "deathProbability": 0.11511 },
+    { "minAge": 40, "nextAge": 45, "deathProbability": 0.12227 },
+    { "minAge": 45, "nextAge": 50, "deathProbability": 0.12967 },
+    { "minAge": 50, "nextAge": 55, "deathProbability": 0.16518 },
+    { "minAge": 55, "nextAge": 60, "deathProbability": 0.20571 },
+    { "minAge": 60, "nextAge": 65, "deathProbability": 0.29144 },
+    { "minAge": 65, "nextAge": 70, "deathProbability": 0.37118 },
+    { "minAge": 70, "nextAge": 75, "deathProbability": 0.49858 },
+    { "minAge": 75, "nextAge": 80, "deathProbability": 0.63720 },
+    { "minAge": 80, "nextAge": 85, "deathProbability": 0.75601 },
+    { "minAge": 85, "nextAge": 90, "deathProbability": 0.87919 },
+    { "minAge": 90, "nextAge": 95, "deathProbability": 0.95785 }
+  ],
+  "oldestAgeTail": {
+    "minAge": 95,
+    "maxAge": 99,
+    "sourceRemainingLifeExpectancy": 1.187,
+    "conversion": "The source's 95+ interval is open-ended with q=1. That is not an annual death probability. As an explicit tail assumption, use annual p=1-exp(-1/1.187), then impose a computational age cap of 100."
+  },
+  "maxAge": 100,
+  "additionalAssumptions": [
+    "The engine records deaths in completed years at the start of the sampled interval; age 0 means before the first birthday. The source's continuous within-year timing is not reproduced.",
+    "The chosen table's sex, period and geography do not match the fictional protagonist exactly. This is a disclosed historical comparison, not a validated individual prediction.",
+    "No health-score, career, wealth, war or illness multiplier is added to the all-cause table, avoiding invented cause-specific rates and double counting.",
+    "Origins, personal event selection, outcome weights, stat effects, marriage/parenthood opportunities and stage ages are authored game assumptions, not population estimates.",
+    "Conditional survival into adulthood permits a long life. Low life expectancy at birth does not mean that every adult dies in their twenties."
+  ],
+  "accessed": "2026-11-05"
+}

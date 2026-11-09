@@ -118,7 +118,7 @@ export function createEngine(input: unknown): LifeEngine {
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
-    if (!matches(event.when, state) || choicesFor(event, state).length === 0) return false;
+    if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
       case "year": return state.year >= event.trigger.at;
@@ -129,29 +129,117 @@ export function createEngine(input: unknown): LifeEngine {
     }
   }
 
-  function offer(state: LifeState, event: LifeEvent): void {
+  function recordEvent(state: LifeState, event: LifeEvent): void {
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
-    state.pendingEventId = event.id;
-    state.phase = "choice";
     journal(state, "event", event.id, `${event.title}: ${event.text}`);
   }
 
-  function resolveEvents(state: LifeState, allowRandom: boolean): void {
-    if (state.phase === "ended") return;
-    // Due scheduled events queue in declaration order and never silently overwrite each other.
-    const scheduled = world.events.find(event => event.trigger.type !== "random" && eligible(event, state));
+  function offer(state: LifeState, event: LifeEvent): void {
+    recordEvent(state, event);
+    state.pendingEventId = event.id;
+    state.phase = "choice";
+    if (world.eventPacing) {
+      const { minChoiceGapYears, maxChoiceGapYears } = world.eventPacing;
+      let gap = minChoiceGapYears;
+      if (maxChoiceGapYears > minChoiceGapYears) {
+        const draw = nextRandom(state.rngState);
+        state.rngState = draw.state;
+        gap += Math.floor(draw.value * (maxChoiceGapYears - minChoiceGapYears + 1));
+      }
+      state.nextChoiceAge = state.age + gap;
+    }
+  }
+
+  function automaticEvent(state: LifeState, event: LifeEvent): void {
+    recordEvent(state, event);
+    apply(state, event.effects ?? []);
+    checkEndings(state);
+  }
+
+  function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
+    const drainAutomatic = (): boolean => {
+      while (state.phase !== "ended") {
+        const event = world.events.find(candidate => candidate.mode === "automatic" &&
+          candidate.trigger.type !== "random" && eligible(candidate, state));
+        if (!event) return false;
+        automaticEvent(state, event);
+      }
+      return true;
+    };
+    // Dated history and age milestones never consume the annual background slot.
+    // Resolve these before offering a decision so the whole year is available to UI.
+    if (drainAutomatic()) return;
+    if (allowRandom && state.age > 0) {
+      const background = world.events.filter(event => event.mode === "automatic" &&
+        event.trigger.type === "random" && eligible(event, state));
+      if (background.length > 0) {
+        automaticEvent(state, pick(background, event => event.trigger.type === "random" ? event.trigger.weight : 0, state));
+        if (drainAutomatic()) return;
+      }
+    }
+    const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
+    // Fixed-year decisions are hard anchors. Personal age milestones wait for the
+    // next decision slot; the initial household decision is the age-zero exception.
+    const scheduled = world.events.find(event => event.mode !== "automatic" &&
+      event.trigger.type !== "random" && eligible(event, state) &&
+      (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
     if (scheduled) { offer(state, scheduled); return; }
-    if (allowRandom) {
-      const random = world.events.filter(event => event.trigger.type === "random" && eligible(event, state));
-      if (random.length > 0) {
-        const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
-        offer(state, event);
+    if (allowRandom && state.age > 0 && decisionDue) {
+      const decisions = world.events.filter(event => event.mode !== "automatic" &&
+        event.trigger.type === "random" && eligible(event, state));
+      if (decisions.length > 0) {
+        offer(state, pick(decisions, event => event.trigger.type === "random" ? event.trigger.weight : 0, state));
         return;
       }
     }
     state.phase = "ready";
     state.pendingEventId = null;
+  }
+
+  function resolveEvents(state: LifeState, allowRandom: boolean): void {
+    if (world.eventPacing) { resolvePacedEvents(state, allowRandom); return; }
+    let randomAvailable = allowRandom;
+    // Scheduled events queue in declaration order. Automatic entries drain without
+    // inventing a player choice, and any scheduled activity takes this year's slot.
+    while (state.phase !== "ended") {
+      const scheduled = world.events.find(event => event.trigger.type !== "random" && eligible(event, state));
+      if (scheduled) {
+        randomAvailable = false;
+        if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); continue; }
+        offer(state, scheduled);
+        return;
+      }
+      if (randomAvailable) {
+        randomAvailable = false;
+        const random = world.events.filter(event => event.trigger.type === "random" && eligible(event, state));
+        if (random.length > 0) {
+          const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
+          if (event.mode === "automatic") { automaticEvent(state, event); continue; }
+          offer(state, event);
+          return;
+        }
+      }
+      state.phase = "ready";
+      state.pendingEventId = null;
+      return;
+    }
+  }
+
+  function mortalityCheck(state: LifeState): boolean {
+    if (!world.mortality) return false;
+    const band = world.mortality.bands.find(candidate => state.age >= candidate.minAge && state.age <= candidate.maxAge);
+    if (!band) throw new Error("The mortality model does not cover the current age.");
+    const probability = band.annualProbability;
+    if (probability === 0) return false;
+    let died = probability === 1;
+    if (!died) {
+      const draw = nextRandom(state.rngState);
+      state.rngState = draw.state;
+      died = draw.value < probability;
+    }
+    if (died) finish(state, band.ending);
+    return died;
   }
 
   function assertCompatible(state: LifeState): void {
@@ -182,6 +270,7 @@ export function createEngine(input: unknown): LifeEngine {
       flags: Object.fromEntries(Object.entries(world.flags).map(([id, definition]) => [id, definition.initial])),
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
+      ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
     };
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
@@ -196,10 +285,17 @@ export function createEngine(input: unknown): LifeEngine {
     assertPlayable(next);
     if (next.phase === "choice") throw new Error("Resolve the pending choice before advancing time.");
     next.commands.push({ type: "advance" });
+    // The interval [age, age + 1) belongs to the current completed age. A death
+    // before the first birthday is therefore recorded at age zero, not age one.
+    if (mortalityCheck(next)) return;
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     apply(next, world.yearlyEffects);
+    for (const rule of world.yearlyRules ?? []) {
+      if (next.phase === "ended") break;
+      if (matches(rule.when, next)) apply(next, rule.effects);
+    }
     checkEndings(next);
     resolveEvents(next, true);
   }
