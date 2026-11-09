@@ -1,8 +1,10 @@
 import { MAX_CATALOG_BYTES, validateCatalog } from "./content.ts";
 import type { ContentDatabase } from "./store.ts";
 import { ContentConflict, publishDraft, readDraft, readPublished, readPublishedWorld, readRevision, saveDraft } from "./store.ts";
+import { handleSeededPlayApi } from "./seeded-play.ts";
+import type { SeededPlayService } from "./seeded-play.ts";
 
-export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string }
+export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService }
 
 class HttpError extends Error {
   status: number;
@@ -64,6 +66,10 @@ export async function handleApi(request: Request, env: ContentEnvironment): Prom
   const path = url.pathname.replace(/\/$/, "");
   try {
     if (path === "/api/session" && request.method === "GET") return json(identity(request, env));
+    if (path === "/api/seeded-play" || path.startsWith("/api/seeded-play/")) {
+      const user = identity(request, env);
+      return handleSeededPlayApi(request, env.SEEDED_PLAY, user.authenticated ? { userId: request.headers.get("oai-authenticated-user-id")! } : null);
+    }
     const admin = path === "/api/admin" || path.startsWith("/api/admin/");
     if (admin) {
       requireAdmin(request, env);
