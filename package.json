@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Everfolk — a storybook life simulator set on Egypt's ancient Mediterranean coast.",
+  "description": "Everfolk \u2014 a storybook life simulator set on Egypt's ancient Mediterranean coast.",
   "engines": {
     "node": ">=24"
   },
@@ -22,7 +22,13 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "next": "16.3.4",
-    "drizzle-orm": "0.45.2"
+    "drizzle-orm": "0.45.2",
+    "@near-wallet-selector/core": "10.1.4",
+    "@near-wallet-selector/meteor-wallet": "10.1.4",
+    "@near-wallet-selector/modal-ui": "10.1.4",
+    "@near-wallet-selector/my-near-wallet": "10.1.4",
+    "buffer": "6.0.3",
+    "near-api-js": "7.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",

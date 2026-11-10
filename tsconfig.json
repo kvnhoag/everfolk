@@ -15,5 +15,5 @@
     "resolveJsonModule": true,
     "types": ["vite/client", "node", "@cloudflare/workers-types"]
   },
-  "include": ["src/**/*.ts", "client/**/*.ts", "client/**/*.tsx", "server/**/*.ts", "app/**/*.ts", "app/**/*.tsx", "worker/**/*.ts", "cloudflare-env.d.ts"]
+  "include": ["src/**/*.ts", "chain/**/*.ts", "client/**/*.ts", "client/**/*.tsx", "server/**/*.ts", "app/**/*.ts", "app/**/*.tsx", "worker/**/*.ts", "cloudflare-env.d.ts"]
 }
