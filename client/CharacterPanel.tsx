@@ -1,3 +1,4 @@
+import { displayProse } from "./display-prose.ts";
 import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../src/types.ts";
@@ -43,10 +44,10 @@ function ActivityButton({ activity, life, world, onActivity }: {
   const disabled = !activity.available || unavailable;
   const loanOffer = disabled && activityLoanOffer(world, life, activity);
   return <button type="button" className="personal-activity" disabled={disabled && !loanOffer} onClick={() => onActivity(activity.id)}>
-    <span className="personal-activity-heading"><strong>{activity.text}</strong><span className="personal-activity-state">{loanOffer ? "Ask moneylender" : disabled ? "Locked" : "Choose"}</span></span>
+    <span className="personal-activity-heading"><strong>{displayProse(activity.text)}</strong><span className="personal-activity-state">{loanOffer ? "Ask moneylender" : disabled ? "Locked" : "Choose"}</span></span>
     {openings.map(note => <span className="personal-opening-note" key={note}>{note}</span>)}
     {changes.length > 0 && <span className="personal-skill-effects">{changes.map(change => <span className="impact-stat" key={change.label}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</span>}
-    {reason && <span className="personal-activity-reason">{reason}</span>}
+    {reason && <span className="personal-activity-reason">{displayProse(reason)}</span>}
     {loanOffer && <span className="loan-funding-hint">Short of {formatLoanShortfall(loanOffer.shortfall, world)} · View loan terms</span>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
   </button>;
@@ -209,18 +210,18 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
 
   return <div className="character-management">
     <LifeHealthPanel {...props} compact />
-    {origin && <details className="character-background"><summary><span>Background</span><strong>{origin.title}</strong></summary><div><span className="character-background-name">{character.name ?? "Damon"}</span><p>{origin.text}</p></div></details>}
+    {origin && <details className="character-background"><summary><span>Background</span><strong>{origin.title}</strong></summary><div><span className="character-background-name">{character.name ?? "Damon"}</span><p>{displayProse(origin.text)}</p></div></details>}
     <div className={`character-activity-status${hasActivity ? " activity-spent" : ""}`}>
       <span className="character-budget-label">Age {life.age}{character.sex && ` · ${character.sex === "female" ? life.age < 18 ? "Girl" : "Woman" : life.age < 18 ? "Boy" : "Man"}`} · Activities</span>
       <p>{budget}</p>
     </div>
-    {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{recentOutcome}</p></div>}
+    {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{displayProse(recentOutcome)}</p></div>}
     <div className="character-tabs" role="tablist" aria-label="Life management sections">
       {visibleSections.map((item, index) => <button type="button" role="tab" id={`${instanceId}-tab-${item.id}`} aria-selected={activeSection === item.id} aria-controls={`${instanceId}-panel-${item.id}`} tabIndex={activeSection === item.id ? 0 : -1} key={item.id} ref={element => { tabRefs.current[item.id] = element; }} onKeyDown={event => navigateTabs(event, index)} onClick={() => setSection(item.id)}>{item.label}</button>)}
     </div>
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
-        <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{currentJob?.description ?? "Find work that matches your skills."}</p></div>
+        <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
         <SearchControls id={`${instanceId}-career`} label="Find work" placeholder="Job, skill or activity" value={jobSearch} onChange={setJobSearch} filter={jobAvailability} onFilter={setJobAvailability} filterLabel="Availability" />
         <p className="character-result-count" role="status">{visibleJobs.length} of {definition.jobs.length} jobs · {visibleOtherCareer.length} of {otherCareer.length} work activities</p>
         <div className="character-card-list character-job-list">{visibleJobs.map(job => {
@@ -229,7 +230,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
           return <details className={`character-detail-card character-job-card${job.id === character.jobId ? " current-character-card" : ""}`} key={job.id} open={job.id === character.jobId}>
           <summary><span className="character-job-summary-copy"><span className="character-job-title">{job.title}</span><span className="character-job-summary-requirements">Age {job.minAge}+{Object.entries(job.requirements ?? {}).map(([id, value]) => <span key={id}> · {definition.skills[id]?.label ?? id} {value}</span>)}</span></span><span className={`character-status-tag${available ? " occupation-available" : ""}`}>{job.id === character.jobId ? "Current job" : available ? "Available" : "Unavailable"}</span></summary>
           <div className="character-job-details">
-          <p>{job.description}</p>
+          <p>{displayProse(job.description)}</p>
           <ul className="character-requirements" aria-label={`${job.title} requirements`}>
             <li className={life.age >= job.minAge ? "requirement-met" : ""}>Age {job.minAge}+ <span>{life.age >= job.minAge ? "met" : `you are ${life.age}`}</span></li>
             {Object.entries(job.requirements ?? {}).map(([id, value]) => <li key={id} className={character.skills[id] >= value ? "requirement-met" : ""}>{definition.skills[id].label} {value} <span>{character.skills[id] >= value ? "met" : `you have ${Math.floor(character.skills[id] * 100) / 100}`}</span></li>)}
@@ -257,7 +258,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
         <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
           {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
           <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>)}</div></div>
-          <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{partner.description}</p>
+          <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{displayProse(partner.description)}</p>
           {character.relationships?.partners[partner.id] && <Closeness lastContactAge={character.relationships.partners[partner.id].lastContactAge} world={world} value={character.relationships.partners[partner.id].closeness} />}
           <ActivityList activities={personActivities(partner.id)} {...props} />
         </article>)}</div>

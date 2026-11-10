@@ -1,6 +1,7 @@
 import type { ActivityAvailability, Choice, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { getOutcomeProbabilities } from "../src/outcomes.ts";
 import { severeHealthRisk } from "./health-risk.ts";
+import { readEverfolkStorage } from "./brand-storage.ts";
 
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
@@ -25,11 +26,11 @@ export function normalizeYearlyFocus(value: unknown, world?: WorldPack): YearlyF
 
 /** Focus is a device preference for exactly one life, not part of its simulation. */
 export function yearlyFocusStorageKey(life: Pick<LifeState, "worldFingerprint" | "seed">): string {
-  return `historical-lives:yearly-focus:v1:${life.worldFingerprint}:${encodeURIComponent(life.seed)}`;
+  return `everfolk:yearly-focus:v1:${life.worldFingerprint}:${encodeURIComponent(life.seed)}`;
 }
 
 export function readYearlyFocus(storage: FocusStorage, life: LifeState, world?: WorldPack): YearlyFocusId {
-  try { return normalizeYearlyFocus(storage.getItem(yearlyFocusStorageKey(life)), world); }
+  try { return normalizeYearlyFocus(readEverfolkStorage(storage, yearlyFocusStorageKey(life)), world); }
   catch { return "everyday"; }
 }
 

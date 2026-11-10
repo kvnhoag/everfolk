@@ -118,14 +118,14 @@ test("the controller begins at birth without simulating childhood in advance", (
   assert.equal(life.journal[0].type, "birth");
 });
 
-test("the original v3 life survives character-world updates with its original rules and save slot", () => {
+test("the original v3 life survives the Everfolk rebrand with its original rules and untouched save", () => {
   const storage = memoryStorage();
   const legacy = legacyEngine.start("legacy-character-release");
   const save = legacyEngine.save(legacy);
   storage.setItem("historical-lives:alexandria-sample:v3", save);
   try {
     selectWorldPack(legacyEngine.world);
-    assert.equal(SAVE_KEY, "historical-lives:alexandria-sample:v3");
+    assert.equal(SAVE_KEY, "everfolk:alexandria-sample:v3");
     assert.deepEqual(readSavedLife(storage), legacy);
     selectWorldPack(builtinEngine.world);
     assert.deepEqual(loadAnyLife(save), legacy);

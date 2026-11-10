@@ -2,8 +2,6 @@
 
 [![CI](https://github.com/kvnhoag/everfolk/actions/workflows/ci.yml/badge.svg)](https://github.com/kvnhoag/everfolk/actions/workflows/ci.yml)
 
-**Live another story.**
-
 Everfolk is a browser-based historical life simulation. Be born into different circumstances, learn a trade, form relationships and discover what your choices make possible. Alexandria is the first playable world choice; future worlds will be independent settings.
 
 Historical context is sourced. Individual lives are fictional, and prices, probabilities and progression values are authored game design.

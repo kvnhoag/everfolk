@@ -43,7 +43,7 @@ export function buildLocationMap(world: WorldPack, life: LifeState): LocationMap
   return {
     placeName,
     yearLabel: formatYear(life.year),
-    homeNote: "Your life is based on this stretch of Egypt’s Mediterranean coast. The pin marks your home area, rather than a particular house.",
+    homeNote: "The pin marks your home area on Egypt’s Mediterranean coast. It does not identify a particular house.",
     founded,
     lighthouseBuilt,
     cityMarker: { x: 390, y: 245 },

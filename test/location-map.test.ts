@@ -74,7 +74,7 @@ test("jobs, origins and permanent journey flags never masquerade as current trav
     character: { ...initial.character!, jobId: "sailor" } };
   const result = buildLocationMap(world, travelled);
   assert.deepEqual(result, home);
-  assert.match(result.homeNote, /home area.*rather than a particular house/);
+  assert.match(result.homeNote, /home area.*particular house/);
 });
 
 test("viewing a frozen life leaves its RNG, commands and world unchanged", () => {

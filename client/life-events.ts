@@ -1,3 +1,4 @@
+import { displayProse } from "./display-prose.ts";
 import { yearAtAge } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 
@@ -85,5 +86,5 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
     // Birth-background paragraphs, birthday markers and option labels remain in
     // the full chronicle. Every lived year still has a header in this projection.
   });
-  return years.reverse().map(group => ({ ...group, events: group.events.reverse() }));
+  return years.reverse().map(group => ({ ...group, events: group.events.reverse().map(event => ({ ...event, ...(event.title ? { title: displayProse(event.title) } : {}), text: displayProse(event.text) })) }));
 }

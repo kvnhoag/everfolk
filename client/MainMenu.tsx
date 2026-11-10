@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef } from "react";
 import { formatYear } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import PixelIcon from "./PixelIcon.tsx";
+import StorybookMark from "./StorybookMark.tsx";
 import "./main-menu.css";
+import "./storybook-menu.css";
 
 export interface MainMenuProps {
   world: WorldPack;
@@ -15,13 +16,12 @@ export interface MainMenuProps {
   onPastLives(): void;
   onLegacy?(): void;
   onSources(): void;
-  isAdmin?: boolean;
   notice?: string;
   active?: boolean;
 }
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
-export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, isAdmin = false, notice, active = true }: MainMenuProps) {
+export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
   const heading = useRef<HTMLHeadingElement>(null);
   const headingId = useId();
   const saveId = useId();
@@ -33,14 +33,13 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
-  return <main className="main-menu" aria-labelledby={headingId}>
+  return <main className="main-menu storybook-menu" aria-labelledby={headingId}>
     <div className="main-menu-shell">
-      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><PixelIcon name="hourglass" size={18} /></span><span>A historical life simulator</span>{isAdmin && <a href="/admin">World editor <span aria-hidden="true">↗</span></a>}</header>
+      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><StorybookMark size={32} /></span><span>A life simulator</span><span className="main-menu-stars" aria-hidden="true">· <span>✦</span> ·</span></header>
       <div className="main-menu-layout">
         <section className="main-menu-content">
-          <p className="main-menu-kicker">Live another story</p>
           <h1 id={headingId} ref={heading} tabIndex={-1}>Everfolk<span>.</span></h1>
-          <p className="main-menu-world">World: {worldTitle}</p>
+          <p className="main-menu-world"><span>Your starting world</span>{worldTitle}</p>
           {hasBegun && <div className="main-menu-save" id={saveId}>
             <span className="main-menu-save-label">{ended ? "Last life" : "Your saved life"}</span>
             <strong>{life.character?.name ?? "Your character"}</strong>
@@ -59,6 +58,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
           </nav>
         </section>
         <div className="main-menu-world-stack">
+          <span className="main-menu-frontispiece-star" aria-hidden="true">✦</span>
           <div className="main-menu-world-preview main-menu-world-preview-medieval" aria-hidden="true">
             <img src="/assets/pixel/worlds/medieval-europe.svg" alt="" />
             <span>Medieval Europe</span>
@@ -68,12 +68,14 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
             <span>Ottoman Empire</span>
           </div>
           <figure className="main-menu-landscape">
+            <div className="main-menu-illustration-label"><span>Beyond the harbour</span><span aria-hidden="true">✦</span></div>
             <div className="main-menu-image"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined ancient Egyptian coast, with merchant sails and low waterfront buildings" fetchPriority="high" /></div>
             <figcaption><span>{worldTitle}</span><span>{formatYear(world.startYear)}</span></figcaption>
           </figure>
+          <span className="main-menu-world-seal" aria-hidden="true"><StorybookMark size={27} /></span>
         </div>
       </div>
-      <footer className="main-menu-footer"><span>Historical setting. Your own life.</span><span>Progress saves in this browser.</span></footer>
+      <footer className="main-menu-footer"><span>Progress saves in this browser.</span></footer>
     </div>
   </main>;
 }

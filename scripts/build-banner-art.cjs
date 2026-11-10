@@ -52,7 +52,7 @@ function pathRuns(rects) {
     const tools = await listTools();
     for (const name of ["command_batch", "draw_path", "save_file", "export", "inspect_document", "open_file"]) if (!tools.some(tool => tool.name === name)) throw new Error(`Missing ArtCraft tool ${name}`);
     for (const job of jobs.filter(job => !only || only.includes(job.id))) {
-      unpack(await callTool("run_command", { command: "file.new", params: { name: `Historical Lives — ${job.id}`, width: 240, height: 112, units: "Pixels", backgroundContents: "transparent", colorMode: "rgb", created: 0 } }));
+      unpack(await callTool("run_command", { command: "file.new", params: { name: `Everfolk — ${job.id}`, width: 240, height: 112, units: "Pixels", backgroundContents: "transparent", colorMode: "rgb", created: 0 } }));
       const steps = [];
       for (const layer of job.layers) {
         if (!layer.rects.length) continue;

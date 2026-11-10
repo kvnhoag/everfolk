@@ -15,7 +15,7 @@ export function worldPlace(world: WorldPack, year: number): string {
 export function worldBeginning(world: WorldPack): string {
   const foundation = classicalFoundationYear(world);
   if (foundation !== undefined && world.startYear < foundation) {
-    return `Your life begins on Egypt's coast near Rhakotis in ${formatYear(world.startYear)}. Alexandria is founded in ${formatYear(foundation)}. The ambitions of Alexander and the early Hellenistic kingdoms unfold around your household's work and choices.`;
+    return `You are born near Rhakotis on Egypt's coast in ${formatYear(world.startYear)}. Alexandria will be founded here in ${formatYear(foundation)}.`;
   }
-  return `Your life begins in Alexandria in ${formatYear(world.startYear)}. If you live long enough, the city and government around it will change as your own life unfolds.`;
+  return `You are born in Alexandria in ${formatYear(world.startYear)}.`;
 }

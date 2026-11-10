@@ -1,3 +1,4 @@
+import { displayProse } from "./display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent, ReactNode } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
@@ -45,11 +46,11 @@ function Practice({ activity, life, world, onActivity, readOnly = false }: {
   const changes = trainingSkillChanges(activity, world, life);
   const loanOffer = reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-practice${reason ? " unavailable" : ""}`}>
-    <p className="skill-practice-name">{activity.text}</p>
+    <p className="skill-practice-name">{displayProse(activity.text)}</p>
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
     {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>}
-    {reason && <p className="skill-practice-reason">{reason}</p>}
+    {reason && <p className="skill-practice-reason">{displayProse(reason)}</p>}
   </div>;
 }
 
@@ -61,14 +62,14 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
   const requirements = skillActionRequirements(activity, world);
   const loanOffer = reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-work-action${reason ? " unavailable" : ""}`}>
-    <p className="skill-practice-name">{activity.text}</p>
+    <p className="skill-practice-name">{displayProse(activity.text)}</p>
     {requirements.length > 0 && <p className="skill-work-requirements">{requirements.join(" · ")}</p>}
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${activity.text}`} onClick={() => onActivity(activity.id)}>
+    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${displayProse(activity.text)}`} onClick={() => onActivity(activity.id)}>
       {loanOffer ? "Ask moneylender to fund this" : occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
     </button>}
-    {reason && <p className="skill-practice-reason">{reason}</p>}
+    {reason && <p className="skill-practice-reason">{displayProse(reason)}</p>}
   </div>;
 }
 
@@ -165,7 +166,7 @@ export default function SkillTree({ life, world, activities, onActivity, initial
       </div><p className="skill-tree-scroll-hint">Follow each branch from left to right <span aria-hidden="true">→</span></p></div>
       <aside className={`skill-tree-detail is-${selected.state}`} id={`${instanceId}-detail`} aria-label={`${selected.label} details`}>
         <div className="skill-detail-title"><span className="skill-detail-icon"><SkillIcon id={selected.id} /></span><div><span className="skill-detail-branch">{selected.branch}</span><h4>{selected.label}</h4></div><span className="skill-detail-state">{selected.state}</span></div>
-        <p className="skill-detail-description">{selected.description}</p>
+        <p className="skill-detail-description">{displayProse(selected.description)}</p>
         <div className="skill-detail-proficiency"><label htmlFor={`${instanceId}-proficiency`}>Proficiency <strong>{skillNumber(selected.value, selected.max)}<span> / {selected.max}</span></strong></label><meter id={`${instanceId}-proficiency`} min={selected.min} max={selected.max} value={selected.value} /></div>
         <SkillGrowth life={life} world={world} skillId={selected.id} />
         <section className="skill-detail-section"><h5>Requirements</h5><ul className="skill-requirement-list">
@@ -179,7 +180,7 @@ export default function SkillTree({ life, world, activities, onActivity, initial
         </section>
         {selected.paidWork.length > 0 && <section className="skill-detail-section skill-paid-work"><h5>Paid work</h5><p className="skill-detail-small">Earn from this skill while keeping your current occupation.</p>{selected.paidWork.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</section>}
         {outgoing.length > 0 && <section className="skill-detail-section"><h5>Unlocks</h5><div className="skill-next-list">{outgoing.map(node => <button type="button" key={node.id} onClick={() => select(node.id, true)}><span>{node.label}</span><span>{selected.label} {node.requirements.find(item => item.id === selected.id)!.required} <span aria-hidden="true">→</span></span></button>)}</div></section>}
-        {selected.careers.length > 0 && <section className="skill-detail-section skill-career-section"><h5>Make it your occupation</h5><p className="skill-detail-small">Choosing an occupation replaces your current job if accepted. Age, skills and other requirements still apply.</p>{selected.careers.map(career => <details className="skill-career" key={career.job.id}><summary><span>{career.job.title}</span><span>{life.character?.jobId === career.job.id ? "Current occupation" : career.thresholdsMet ? "Thresholds met" : "View requirements"}</span></summary><p>{career.job.description}</p><ul className="skill-requirement-list"><li className={`skill-requirement ${career.ageMet ? "met" : "missing"}`}><span aria-hidden="true">{career.ageMet ? "✓" : "○"}</span><span>Age {career.job.minAge} or older</span><span className="skill-requirement-numbers">{career.ageMet ? "Met" : `Age ${life.age}`}</span></li>{career.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}</ul>{career.activities.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} occupation readOnly={wiki} />)}</details>)}</section>}
+        {selected.careers.length > 0 && <section className="skill-detail-section skill-career-section"><h5>Make it your occupation</h5><p className="skill-detail-small">Choosing an occupation replaces your current job if accepted. Age, skills and other requirements still apply.</p>{selected.careers.map(career => <details className="skill-career" key={career.job.id}><summary><span>{career.job.title}</span><span>{life.character?.jobId === career.job.id ? "Current occupation" : career.thresholdsMet ? "Thresholds met" : "View requirements"}</span></summary><p>{displayProse(career.job.description)}</p><ul className="skill-requirement-list"><li className={`skill-requirement ${career.ageMet ? "met" : "missing"}`}><span aria-hidden="true">{career.ageMet ? "✓" : "○"}</span><span>Age {career.job.minAge} or older</span><span className="skill-requirement-numbers">{career.ageMet ? "Met" : `Age ${life.age}`}</span></li>{career.requirements.map(item => <Requirement key={item.id} requirement={item} onSelect={id => select(id, true)} />)}</ul>{career.activities.map(activity => <SkillWorkAction key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} occupation readOnly={wiki} />)}</details>)}</section>}
       </aside>
     </div>
     {otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{otherTraining.length}</span></summary><div>{otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</div></details>}

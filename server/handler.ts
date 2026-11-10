@@ -3,6 +3,7 @@ import type { ContentDatabase } from "./store.ts";
 import { ContentConflict, publishDraft, readDraft, readPublished, readPublishedWorld, readRevision, saveDraft } from "./store.ts";
 import { handleSeededPlayApi } from "./seeded-play.ts";
 import type { SeededPlayService } from "./seeded-play.ts";
+import { requestIdentity } from "./identity.ts";
 
 export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService }
 
@@ -16,12 +17,7 @@ function json(value: unknown, status = 200): Response {
 }
 
 function identity(request: Request, env: ContentEnvironment): { authenticated: boolean; isAdmin: boolean } {
-  const userId = request.headers.get("oai-authenticated-user-id");
-  const email = request.headers.get("oai-authenticated-user-email");
-  const authenticated = Boolean(userId && email);
-  const admins = [env.ADMIN_EMAIL ?? "", ...(env.ADMIN_EMAILS ?? "").split(/[,;\n]/)]
-    .map(value => value.trim().toLowerCase()).filter(Boolean);
-  return { authenticated, isAdmin: Boolean(authenticated && admins.includes(email!.trim().toLowerCase())) };
+  return requestIdentity(request.headers, env);
 }
 
 function requireAdmin(request: Request, env: ContentEnvironment): void {

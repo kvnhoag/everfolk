@@ -1,0 +1,93 @@
+/* Choices live above the chronicle; the dashboard keeps its skill paths. */
+dialog.life-decision-dialog.choice-popup{
+  width:min(620px,calc(100% - 36px));
+  max-height:min(88dvh,840px);
+  margin:auto;
+  padding:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  border:1px solid #ab8d5d;
+  border-radius:3px;
+  background:#fcf7eb;
+  color:#2e3e3d;
+  box-shadow:0 0 0 4px #e8d5b0,0 0 0 5px #b6955e,0 24px 80px #1d353855;
+  scrollbar-color:#b69a6b #f1e6cf;
+  scrollbar-width:thin;
+}
+dialog.life-decision-dialog.choice-popup::backdrop{background:#1c3538b3;backdrop-filter:blur(2px)}
+dialog.life-decision-dialog.choice-popup .life-decision-meta{position:sticky;top:0;z-index:2;padding:12px 19px;gap:12px;border-bottom:1px solid #c9b184;background:#eee0c0;color:#6e624b;font:400 11px/1.5 "DM Sans","Segoe UI",sans-serif}
+dialog.life-decision-dialog.choice-popup .life-decision-meta>span:first-child{display:flex;align-items:center;gap:8px;color:#98584b;font:600 10px/1.5 "DM Sans","Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:1.2px}
+dialog.life-decision-dialog.choice-popup .life-decision-meta>span:first-child:before{content:"";width:6px;height:6px;flex-shrink:0;transform:rotate(45deg);background:#98584b}
+dialog.life-decision-dialog.choice-popup .life-decision-meta>button{min-height:32px;padding:6px 10px;border:1px solid #bea985;border-radius:2px;background:#f8f0dd;color:#665d4c;box-shadow:0 2px 0 #dfd0b2;font:400 11px/1.5 "DM Sans","Segoe UI",sans-serif;white-space:nowrap}
+dialog.life-decision-dialog.choice-popup .life-decision-content{padding:23px 23px 20px}
+dialog.life-decision-dialog.choice-popup .life-decision-content>h2{margin:0 0 15px;font:700 29px/1.22 "Courier New",Courier,monospace;letter-spacing:-.6px;color:#24464b;outline:none;overflow-wrap:anywhere}
+dialog.life-decision-dialog.choice-popup .life-decision-content>p{margin:0 0 20px;color:#595e50;font:400 14px/1.8 "DM Sans","Segoe UI",sans-serif}
+dialog.life-decision-dialog.choice-popup .life-decision-options{gap:11px}
+dialog.life-decision-dialog.choice-popup .life-choice-commit{width:100%;min-height:49px;gap:12px;padding:13px 14px;border:1px solid #baa47c;border-radius:2px;background:#f7edda;box-shadow:0 3px 0 #ded0b5;color:#2e3e3d;text-align:left;align-items:flex-start}
+dialog.life-decision-dialog.choice-popup .life-choice-commit.is-previewed{border-color:#8a9e88;box-shadow:inset 3px 0 #6d886f,0 3px 0 #ded0b5}
+dialog.life-decision-dialog.choice-popup .life-choice-commit:hover,dialog.life-decision-dialog.choice-popup .life-choice-commit:focus-visible{background:#e5e9dc;border-color:#7a998a;color:#24464b}
+dialog.life-decision-dialog.choice-popup .life-choice-commit>span:last-child{min-width:0}
+dialog.life-decision-dialog.choice-popup .life-decision-options strong{font:500 14px/1.6 "DM Sans","Segoe UI",sans-serif}
+dialog.life-decision-dialog.choice-popup .life-option-number{display:grid;place-items:center;min-width:21px;height:23px;margin-top:0;border:1px solid #c8b18a;border-radius:1px;background:#eadabb;color:#7a6242;font:600 10px/1 "DM Sans","Segoe UI",sans-serif}
+dialog.life-decision-dialog.choice-popup .life-decision-options .choice-impact{font-size:11px;line-height:1.65;margin-top:5px}
+dialog.life-decision-dialog.choice-popup .life-decision-content>.life-decision-legend{font-size:10px;line-height:1.6;margin:14px 0 0;color:#766d59}
+dialog.life-decision-dialog.choice-popup .compact-skills.is-preview{margin-top:17px;padding:13px 14px;border:1px solid #d1bd98;border-radius:2px;background:#f4ebd7;color:#2e3e3d}
+dialog.life-decision-dialog.choice-popup .compact-skills.is-preview .eyebrow{color:#8a6636;font-size:9px;letter-spacing:1px}
+dialog.life-decision-dialog.choice-popup .compact-skill-preview-label{color:#496351;font-size:12px;line-height:1.7}
+dialog.life-decision-dialog.choice-popup .choice-preview-effects{margin:0;padding:10px 11px;border-color:#d6c4a2;background:#fcf7eb}
+
+/* Every option participates in one grid row, so changing the visible preview
+   cannot resize or recenter the dialog. Long details scroll inside their panel. */
+dialog.life-decision-dialog.choice-popup .life-choice-preview-stack{
+  --preview-min:min(144px,28dvh);
+  --preview-max:min(224px,38dvh);
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:minmax(0,auto);
+  min-block-size:var(--preview-min);
+  max-block-size:var(--preview-max);
+  margin-top:17px;
+}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-layer{
+  grid-area:1/1;
+  min-inline-size:0;
+  min-block-size:0;
+  max-block-size:var(--preview-max);
+  visibility:hidden;
+  pointer-events:none;
+}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-layer.is-active{visibility:visible;pointer-events:auto}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-stack .compact-skills.is-preview{
+  block-size:100%;
+  min-block-size:var(--preview-min);
+  max-block-size:var(--preview-max);
+  margin:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  scrollbar-color:#b69a6b #f4ebd7;
+  scrollbar-width:thin;
+}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-stack .compact-skill-preview-label{overflow-wrap:anywhere}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-stack .impact-stat{max-inline-size:100%;white-space:normal;flex-wrap:wrap;overflow-wrap:anywhere}
+dialog.life-decision-dialog.choice-popup .life-choice-preview-stack .compact-skills.is-preview:focus-visible{outline:2px solid #b58a49;outline-offset:-3px}
+dialog.life-decision-dialog.choice-popup .life-decision-sources{margin-top:15px;color:#6e6c55;font-size:11px;line-height:1.6}
+dialog.life-decision-dialog.choice-popup .life-decision-sources summary{min-height:28px;cursor:pointer}
+dialog.life-decision-dialog.choice-popup .life-decision-sources a{color:#24464b}
+dialog.life-decision-dialog.choice-popup .life-decision-content>footer{margin-top:16px;text-align:right}
+dialog.life-decision-dialog.choice-popup .life-decision-content>footer button{min-height:32px;padding:7px 11px;border:1px solid #c3cbb4;border-radius:2px;background:#e7eadb;color:#4e6653;box-shadow:none;font-size:11px}
+dialog.life-decision-dialog.choice-popup.is-rare{border-top:3px solid #b58a49}
+dialog.life-decision-dialog.choice-popup.is-rare .life-decision-meta{background:#ead6ac}
+dialog.life-decision-dialog.choice-popup.is-rare .life-decision-meta>span:first-child{color:#75502e}
+dialog.life-decision-dialog.choice-popup.is-rare .life-decision-meta>span:first-child:before{background:#b58a49;box-shadow:0 0 0 3px #b58a4926}
+dialog.life-decision-dialog.choice-popup button:focus-visible,dialog.life-decision-dialog.choice-popup summary:focus-visible,dialog.life-decision-dialog.choice-popup a:focus-visible{outline:3px solid #b58a49;outline-offset:3px}
+@media(max-width:600px){
+  dialog.life-decision-dialog.choice-popup{width:calc(100% - 30px);max-height:calc(100dvh - 38px)}
+  dialog.life-decision-dialog.choice-popup .life-decision-meta{padding:11px 13px;gap:8px;font-size:10px}
+  dialog.life-decision-dialog.choice-popup .life-decision-meta>span:first-child{font-size:9px;letter-spacing:.7px}
+  dialog.life-decision-dialog.choice-popup .life-decision-meta>button{padding:6px 8px;font-size:10px}
+  dialog.life-decision-dialog.choice-popup .life-decision-content{padding:19px 15px 17px}
+  dialog.life-decision-dialog.choice-popup .life-decision-content>h2{font-size:25px;line-height:1.25}
+  dialog.life-decision-dialog.choice-popup .life-choice-commit{padding:12px 11px;gap:10px}
+  dialog.life-decision-dialog.choice-popup .life-decision-options strong{font-size:13px}
+}

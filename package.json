@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Everfolk — Live another story. A historical life simulation with sourced context, a complete lifecycle and a React/Vite client.",
+  "description": "Everfolk — a storybook life simulator set on Egypt's ancient Mediterranean coast.",
   "engines": {
     "node": ">=24"
   },

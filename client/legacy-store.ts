@@ -1,8 +1,9 @@
 import type { AccomplishmentRecord, LifeState, WorldPack } from "../src/types.ts";
 import type { StorageLike } from "./session.ts";
 import { getAccomplishments } from "../src/legacy.ts";
+import { readEverfolkStorage } from "./brand-storage.ts";
 
-export const LEGACY_GALLERY_KEY = "historical-lives:legacy-gallery:v1";
+export const LEGACY_GALLERY_KEY = "everfolk:legacy-gallery:v1";
 export interface LegacyEntry {
   key: string;
   lifeKey: string;
@@ -51,7 +52,7 @@ function validEntry(value: unknown): value is LegacyEntry {
 /** A separate collection: restarting or trimming the ten-life archive never evicts achievements. */
 export function readLegacyEntries(storage: StorageLike): LegacyEntry[] {
   let raw: string | null;
-  try { raw = storage.getItem(LEGACY_GALLERY_KEY); }
+  try { raw = readEverfolkStorage(storage, LEGACY_GALLERY_KEY); }
   catch { throw new Error("The legacy gallery cannot access browser storage. Your current accomplishments are still visible."); }
   if (raw === null) return [];
   try {

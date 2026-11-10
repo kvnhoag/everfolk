@@ -1,3 +1,4 @@
+import { displayProse } from "./display-prose.ts";
 import { useId, useMemo, useState } from "react";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { getAccomplishments, getLegacyRoutes } from "../src/legacy.ts";
@@ -32,17 +33,17 @@ export default function LegacyGallery({ entries, currentLifeKey, storageNotice }
     `${entry.accomplishment.name} ${entry.accomplishment.title} ${entry.characterName} ${entry.accomplishment.people.join(" ")}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())).slice().reverse();
   const lives = new Set(entries.map(entry => entry.lifeKey)).size;
   return <div className="legacy-gallery">
-    <p className="legacy-intro">A record of your work, service and discoveries across lives. Saved in this browser, including records from lives no longer in the archive.</p>
+    <p className="legacy-intro">Your accomplishments from every life, saved in this browser. They stay here even after a life leaves the archive.</p>
     {storageNotice && <p className="legacy-storage-notice" role="status">{storageNotice}</p>}
     <div className="legacy-gallery-tally"><span><strong>{entries.length}</strong> accomplishments</span><span><strong>{lives}</strong> {lives === 1 ? "life" : "lives"}</span><span><strong>{entries.filter(entry => entry.accomplishment.kind === "prestige").length}</strong> prestige</span><span><strong>{entries.filter(entry => entry.accomplishment.kind === "ultimate").length}</strong> ultimate titles</span></div>
-    <div className="legacy-gallery-filters"><label htmlFor={`${id}-search`}>Find a memory<input id={`${id}-search`} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Work, person or achievement" /></label><label htmlFor={`${id}-route`}>Path<select id={`${id}-route`} value={route} onChange={event => setRoute(event.target.value)}><option value="all">All paths</option>{routes.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>{currentLifeKey && <label htmlFor={`${id}-scope`}>Lives<select id={`${id}-scope`} value={scope} onChange={event => setScope(event.target.value)}><option value="all">All lives</option><option value="current">Current life</option></select></label>}</div>
+    <div className="legacy-gallery-filters"><label htmlFor={`${id}-search`}>Search accomplishments<input id={`${id}-search`} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Work, person or achievement" /></label><label htmlFor={`${id}-route`}>Path<select id={`${id}-route`} value={route} onChange={event => setRoute(event.target.value)}><option value="all">All paths</option>{routes.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>{currentLifeKey && <label htmlFor={`${id}-scope`}>Lives<select id={`${id}-scope`} value={scope} onChange={event => setScope(event.target.value)}><option value="all">All lives</option><option value="current">Current life</option></select></label>}</div>
     {filtered.length ? <div className="legacy-gallery-grid">{filtered.map(entry => {
       const record = entry.accomplishment;
       return <article className={`legacy-card${distinction(record.kind) ? " is-prestige" : ""}${record.kind === "ultimate" ? " is-ultimate" : ""}`} key={entry.key}>
         <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId}.svg`} width={64} height={64} alt="" /><span>{distinction(record.kind) ? "✦" : "◆"}</span></div>
-        <div className="legacy-card-copy"><p className="legacy-card-path">{entry.routeTitle ?? record.routeId.replace(/-/g, " ")}{distinction(record.kind) && <span className="legacy-prestige">{distinction(record.kind)}</span>}</p><h3>{record.name}</h3><strong className="legacy-card-achievement">{record.title}</strong><p>{record.description}</p><div className="legacy-card-person"><strong>{entry.characterName}</strong><span>Age {record.age} · {formatYear(record.year)}</span></div>{record.people.length > 0 && <p className="legacy-card-people">Remembered with {record.people.join(", ")}</p>}<small className="legacy-card-world">{entry.worldTitle}</small>
+        <div className="legacy-card-copy"><p className="legacy-card-path">{entry.routeTitle ?? record.routeId.replace(/-/g, " ")}{distinction(record.kind) && <span className="legacy-prestige">{distinction(record.kind)}</span>}</p><h3>{record.name}</h3><strong className="legacy-card-achievement">{record.title}</strong><p>{displayProse(record.description)}</p><div className="legacy-card-person"><strong>{entry.characterName}</strong><span>Age {record.age} · {formatYear(record.year)}</span></div>{record.people.length > 0 && <p className="legacy-card-people">Remembered with {record.people.join(", ")}</p>}<small className="legacy-card-world">{entry.worldTitle}</small>
         </div>
       </article>;
-    })}</div> : <p className="legacy-empty">{entries.length ? "No accomplishments match these filters." : "Nothing recorded yet. Completed commissions, voyages and other accomplishments will appear here."}</p>}
+    })}</div> : <p className="legacy-empty">{entries.length ? "No accomplishments match these filters." : "No accomplishments yet. Your first one will appear here."}</p>}
   </div>;
 }

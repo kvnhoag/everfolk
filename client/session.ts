@@ -1,6 +1,7 @@
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
+import { readEverfolkStorage } from "./brand-storage.ts";
 import sampleWorld from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacyWorld from "../worlds/alexandria-0.3.0.json" with { type: "json" };
 import characterPreviewWorld from "../worlds/alexandria-0.4.0.json" with { type: "json" };
@@ -98,14 +99,14 @@ engines.set(socialRolesEngine.fingerprint, socialRolesEngine);
 engines.set(narrativeEngine.fingerprint, narrativeEngine);
 engines.set(classicalEngine.fingerprint, classicalEngine);
 engines.set(householdEngine.fingerprint, householdEngine);
-const PACK_CACHE_PREFIX = "historical-lives:world-pack:";
+const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
-export const ARCHIVE_KEY = "historical-lives:alexandria-lives:v3";
+export const ARCHIVE_KEY = "everfolk:alexandria-lives:v3";
 export let PRESENTATION_KEY = presentationKeyFor(builtinEngine);
 const ARCHIVE_LIMIT = 10;
-function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "historical-lives:alexandria-sample:v3" : `historical-lives:active:${engine.world.id}:${engine.fingerprint}`; }
-function presentationKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "historical-lives:alexandria-presentation:v3" : `${saveKeyFor(engine)}:presentation`; }
+function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-sample:v3" : `everfolk:active:${engine.world.id}:${engine.fingerprint}`; }
+function presentationKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-presentation:v3" : `${saveKeyFor(engine)}:presentation`; }
 
 /** Pin a life to its own immutable world revision; publishing never rewrites it. */
 export function selectWorldPack(pack: WorldPack): void {
@@ -121,7 +122,7 @@ export function engineForLife(life: Pick<LifeState, "worldFingerprint">): LifeEn
   const known = engines.get(life.worldFingerprint);
   if (known) return known;
   try {
-    const raw = window.localStorage.getItem(`${PACK_CACHE_PREFIX}${life.worldFingerprint}`);
+    const raw = readEverfolkStorage(window.localStorage, `${PACK_CACHE_PREFIX}${life.worldFingerprint}`);
     if (raw) {
       const engine = createEngine(JSON.parse(raw));
       if (engine.fingerprint === life.worldFingerprint) {
@@ -197,7 +198,7 @@ export function exportLife(life: LifeState): string {
 export function readSavedLife(storage: StorageLike): LifeState | null {
   let saved: string | null;
   try {
-    saved = storage.getItem(SAVE_KEY);
+    saved = readEverfolkStorage(storage, SAVE_KEY);
   } catch {
     throw new Error("Local saves are unavailable in this browser.");
   }
@@ -223,7 +224,7 @@ export function hasLifeBegun(storage: StorageLike, life: LifeState): boolean {
   if (life.commands.some(command => command.type !== "avatar") || life.phase === "ended") return true;
   let engine: LifeEngine;
   try { engine = engineForLife(life); } catch { return false; }
-  return storage.getItem(presentationKeyFor(engine)) === `${life.worldFingerprint}:${life.seed}`;
+  return readEverfolkStorage(storage, presentationKeyFor(engine)) === `${life.worldFingerprint}:${life.seed}`;
 }
 
 export function persistBirthPresentation(storage: StorageLike, life: LifeState, hasBegun: boolean): void {
@@ -236,7 +237,7 @@ export function hasBirthStatsBeenRevealed(storage: StorageLike, life: LifeState)
   try {
     if (hasLifeBegun(storage, life)) return true;
     const key = `${presentationKeyFor(engineForLife(life))}:stats-revealed`;
-    return storage.getItem(key) === `${life.worldFingerprint}:${life.seed}`;
+    return readEverfolkStorage(storage, key) === `${life.worldFingerprint}:${life.seed}`;
   } catch {
     // A blocked storage read must not prevent revealing and playing in memory.
     return false;
@@ -250,7 +251,7 @@ export function persistBirthStatsReveal(storage: StorageLike, life: LifeState, r
 
 export function readArchivedLives(storage: StorageLike): ArchivedLife[] {
   let raw: string | null;
-  try { raw = storage.getItem(ARCHIVE_KEY); }
+  try { raw = readEverfolkStorage(storage, ARCHIVE_KEY); }
   catch { throw new Error("The local past-lives archive is unavailable."); }
   if (raw === null) return [];
   try {

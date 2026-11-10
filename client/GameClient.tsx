@@ -1,4 +1,5 @@
 "use client";
+import { displayProse } from "./display-prose.ts";
 import { useEffect, useRef, useState } from "react";
 import App from "./App";
 import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
@@ -7,33 +8,41 @@ import { engineForLife, hasLifeBegun, readSavedLife, selectWorldPack } from "./s
 import type { LifeState } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
 import { selectFactoryWorld } from "./factory-world-selection.ts";
+import { readEverfolkStorage } from "./brand-storage.ts";
+import LoadingScreen from "./LoadingScreen.tsx";
+import type { LoadingPhase } from "./LoadingScreen.tsx";
 
-const SELECTION_KEY = "historical-lives:selected-world:v1";
+const SELECTION_KEY = "everfolk:selected-world:v1";
 
 async function readApi<T>(path: string): Promise<T> {
-  const response = await fetch(path, { credentials: "same-origin", cache: "no-store" });
-  const data = await response.json() as { error?: string };
-  if (!response.ok) throw new Error(data.error ?? "The world library could not be opened.");
-  return data as T;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12_000);
+  try {
+    const response = await fetch(path, { credentials: "same-origin", cache: "no-store", signal: controller.signal });
+    const data = await response.json() as { error?: string };
+    if (!response.ok) throw new Error(data.error ?? "The world library could not be opened.");
+    return data as T;
+  } finally { clearTimeout(timeout); }
 }
 
 export default function GameClient() {
   const [active, setActive] = useState<{ world: PublishedWorld; key: number; fresh: boolean; previousLife?: LifeState } | null>(null);
-  const [isAdmin, setAdmin] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [worlds, setWorlds] = useState<WorldSummary[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("opening");
   const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     let cancelled = false;
     void (async () => {
+      setLoadingPhase("restoring");
       const builtin = getBuiltinWorld();
       let world = builtin;
       let restored = false;
       try {
-        const saved = window.localStorage.getItem(SELECTION_KEY);
+        const saved = readEverfolkStorage(window.localStorage, SELECTION_KEY);
         if (saved) {
           world = JSON.parse(saved) as PublishedWorld;
           selectWorldPack(world.pack);
@@ -48,9 +57,10 @@ export default function GameClient() {
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
         }
-        else if (window.localStorage.getItem("historical-lives:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
+        else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
       if (!restored) {
+        setLoadingPhase("world");
         try {
           const catalog = await readApi<PublishedCatalog>("/api/worlds");
           if (catalog.worlds[0]) world = selectFactoryWorld(await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(catalog.worlds[0].id)}`));
@@ -61,7 +71,6 @@ export default function GameClient() {
       try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* In-memory play still works. */ }
       setActive({ world, key: 0, fresh: false });
     })();
-    void readApi<{ isAdmin: boolean }>("/api/session").then(session => { if (!cancelled) setAdmin(session.isAdmin); }).catch(() => {});
     return () => { cancelled = true; };
   }, []);
 
@@ -124,14 +133,14 @@ export default function GameClient() {
     setActive(current => current ? { ...current, world } : current);
   }
 
-  if (!active) return <main className="page-shell"><p>Loading Everfolk…</p></main>;
+  if (!active) return <LoadingScreen phase={loadingPhase} />;
   return <>
-    <App key={active.key} isAdmin={isAdmin} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
+    <App key={active.key} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}
         {busy && <p role="status">Opening the world library…</p>}
-        <div className="world-library">{worlds.map(world => <article key={world.id}><span className="eyebrow">{world.id === active.world.id ? "YOUR CURRENT WORLD" : "A WORLD TO EXPLORE"}</span><h3>{world.title}</h3><p>{world.description}</p><div className="world-route-tags">{world.routes.filter(route => route.enabled).map(route => <span key={route.id}>{route.title}</span>)}</div><button className="primary-button" disabled={busy} onClick={() => { void enterWorld(world.id, false); }}>Enter this world →</button></article>)}</div>
+        <div className="world-library">{worlds.map(world => <article key={world.id}><span className="eyebrow">{world.id === active.world.id ? "YOUR CURRENT WORLD" : "A WORLD TO EXPLORE"}</span><h3>{world.title}</h3><p>{displayProse(world.description)}</p><div className="world-route-tags">{world.routes.filter(route => route.enabled).map(route => <span key={route.id}>{route.title}</span>)}</div><button className="primary-button" disabled={busy} onClick={() => { void enterWorld(world.id, false); }}>Enter this world →</button></article>)}</div>
       </div>
     </dialog>
   </>;

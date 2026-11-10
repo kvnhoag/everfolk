@@ -26,7 +26,7 @@ test("the infant sidebar keeps the wiki accessible without locked skills or an e
   const before = structuredClone(life);
   const html = renderToStaticMarkup(createElement(CompactSkillPanel, { world, life, onOpenWiki: () => {} }));
   assert.match(html, />Skill wiki /);
-  assert.match(html, /Skills unlock as you grow/);
+  assert.match(html, /No skills unlocked yet/);
   assert.doesNotMatch(html, /compact-skill-node|<select|<meter|Full tree/);
   assert.deepEqual(life, before);
 });

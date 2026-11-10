@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#283c38"/><path d="M19 15h26M19 49h26M23 15c0 10 5 12 9 17-4 5-9 7-9 17m18-34c0 10-5 12-9 17 4 5 9 7 9 17" fill="none" stroke="#f1e9d4" stroke-width="3" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <title>Everfolk</title>
+  <rect x=".75" y=".75" width="38.5" height="38.5" rx="5" fill="#24464b" stroke="#b58a49" stroke-width="1.5"/>
+  <path d="M20 4 21.8 9.2 27 11l-5.2 1.8L20 18l-1.8-5.2L13 11l5.2-1.8L20 4Z" fill="#b58a49"/>
+  <path d="m8.5 8.5 1.5 1.5m21.5-1.5L30 10" stroke="#b58a49" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M5.5 20c4.8-1.4 9.7-.3 14.5 3.1 4.8-3.4 9.7-4.5 14.5-3.1v13c-4.8-1.4-9.7-.3-14.5 3.1-4.8-3.4-9.7-4.5-14.5-3.1V20Z" fill="#fbf3df" stroke="#b58a49" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M20 23.1v13M9.5 24c2.5 0 4.8.7 7 2M9.5 28c2.5 0 4.8.7 7 2m14-6c-2.5 0-4.8.7-7 2m7 2c-2.5 0-4.8.7-7 2" stroke="#24464b" stroke-width="1.1" stroke-linecap="round"/>
+  <path d="M17.3 22v9.3l1.4-.8 1.3 2v-9.4L17.3 22Z" fill="#98584b"/>
+</svg>

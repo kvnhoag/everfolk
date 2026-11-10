@@ -3,7 +3,7 @@
 .choice-with-impact .choice-copy{min-width:0;flex:1}
 .choice-impact,.choice-copy>span.choice-impact{display:block;margin-top:5px;color:#59644e;font-size:11px;line-height:1.5;letter-spacing:0;text-transform:none}
 .choice-impact-list{display:flex;flex-wrap:wrap;gap:2px 10px;min-width:0}
-.impact-stat{display:inline-flex;gap:4px;align-items:baseline;white-space:nowrap}
+.impact-stat{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
 .impact-stat-label{font-size:inherit;font-weight:400;color:#65705d}
 .impact-attribute .impact-stat-label,.impact-skill .impact-stat-label{display:inline-flex;align-items:center;gap:4px}
 .impact-attribute .impact-stat-label{color:var(--stat-color,#65705d);font-weight:600}

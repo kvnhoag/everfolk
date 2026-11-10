@@ -25,7 +25,7 @@ const samples = [
   const { createActorLayers } = await import(pathToFileURL(path.join(__dirname, "banner-art-actors.mjs")));
   const { AVATAR_APPEARANCE_ORIGINS } = await import(pathToFileURL(path.join(root, "client/avatar-appearance.ts")));
   await withMcp("VectorCraft", { readRoot: root, writeRoot: root }, async ({ callTool }) => {
-    unwrap(await callTool("run_command", { command: "file.new", params: { name: "Historical Lives — layered banner library", width: 1000, height: 848, units: "Pixels", created: 0 } }));
+    unwrap(await callTool("run_command", { command: "file.new", params: { name: "Everfolk — layered banner library", width: 1000, height: 848, units: "Pixels", created: 0 } }));
     await callTool("draw_path", { d: "M0 0h1000v848h-1000z", fill: "#f7ecd4", stroke: "none", name: "Proof sheet background" });
     for (const [i, [id, stage, sex, variant, pose]] of samples.entries()) {
       const dx = 8 + (i % 4) * 248, dy = 8 + Math.floor(i / 4) * 140;

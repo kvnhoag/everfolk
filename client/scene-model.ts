@@ -1,3 +1,4 @@
+import { displayProse } from "./display-prose.ts";
 import type { CharacterActivity, Effect, EvidenceKind, JournalEntry, LifeEvent, LifeState, Outcome, WorldPack } from "../src/types.ts";
 import { ALEXANDRIA_VARIETY_VISUALS } from "./alexandria-variety-visuals.ts";
 import { personText } from "../src/people.ts";
@@ -301,8 +302,8 @@ function makeContext(id: string, kind: SceneKind, assignment: EventVisual, title
 export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisuals: EventVisuals = {}): SceneContext[] {
   const authored = (context: SceneContext): SceneContext => ({
     ...context,
-    title: personText(context.title, world, life),
-    caption: personText(context.caption, world, life),
+    title: displayProse(personText(context.title, world, life)),
+    caption: displayProse(personText(context.caption, world, life)),
   });
   if (life.phase === "ended") {
     const ending = world.endings.find(item => item.id === life.endingId);

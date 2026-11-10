@@ -11,7 +11,7 @@ export default function EventVarietyEditor({ world, onChange }: {
     if (variety) onChange({ eventPacing: { ...pacing, variety: { ...variety, ...patch } } });
   };
   return <><div className="admin-card">
-    <div className="admin-card-title"><div><h2>Event variety</h2><p>Reduce repeated random stories while keeping their authored odds.</p></div>
+    <div className="admin-card-title"><div><h2>Event variety</h2><p>Make previously seen random events less likely to repeat.</p></div>
       <label className="admin-switch"><input type="checkbox" checked={!!variety} onChange={event => {
         const { variety: _variety, ...rest } = pacing;
         onChange({ eventPacing: event.target.checked ? { ...rest, variety: { recentWindow: 6, recentWeight: 0.08, repeatWeight: 0.35 } } : rest });

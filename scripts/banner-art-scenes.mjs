@@ -1,4 +1,4 @@
-// Original pixel-vector scenery for the Historical Lives banner library.
+// Original pixel-vector scenery for the Everfolk banner library.
 // The ArtCraft build consumes these drawing specifications as native vector
 // paths on named layers. This module does not emit flattened artwork.
 export const BANNER_SITUATIONS = Object.freeze([

@@ -13,7 +13,7 @@ export default defineConfig(async () => {
       config: {
         main: "./worker/index.ts",
         compatibility_flags: ["nodejs_compat"],
-        d1_databases: [{ binding: "DB", database_name: "historical-lives-content", database_id: "00000000-0000-4000-8000-000000000000" }],
+        d1_databases: [{ binding: "DB", database_name: "everfolk-content", database_id: "00000000-0000-4000-8000-000000000000" }],
       },
     })],
   };

@@ -6,10 +6,11 @@ import type { EventVisuals, MotionId } from "./scene-model.ts";
 import { resolveLifeBanner } from "./banner-state.ts";
 import { bannerActorSource } from "./banner-actor.ts";
 import { formatYear } from "../src/calendar.ts";
+import { readEverfolkStorage } from "./brand-storage.ts";
 import "./paper-motion.css";
 import "./life-banner.css";
 
-const MOTION_KEY = "historical-lives:scene-motion:v1";
+const MOTION_KEY = "everfolk:scene-motion:v1";
 
 /** Discrete pixel props add atmosphere without distorting the scene artwork. */
 function PixelAtmosphere({ motion, front = false, water = false }: { motion: MotionId; front?: boolean; water?: boolean }) {
@@ -40,7 +41,7 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   const primaryKey = contexts[0]?.key;
   const [selectedKey, setSelectedKey] = useState(primaryKey);
   const scene = contexts.find(context => context.key === selectedKey) ?? contexts[0];
-  const [motionEnabled, setMotionEnabled] = useState(() => { try { return window.localStorage.getItem(MOTION_KEY) !== "off"; } catch { return true; } });
+  const [motionEnabled, setMotionEnabled] = useState(() => { try { return readEverfolkStorage(window.localStorage, MOTION_KEY) !== "off"; } catch { return true; } });
   const [reducedMotion, setReducedMotion] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [visible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [inView, setInView] = useState(true);
@@ -70,7 +71,7 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   };
 
   return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-motion={banner.motion} data-motion-state={motionState}>
-    <div className="paper-scene-copy"><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
+    <div className="paper-scene-copy" hidden={dashboard}><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
     <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.situation}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
       <img className="life-banner-background" src={banner.assetSrc} alt="" width={240} height={112} fetchPriority="high" />
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
@@ -78,6 +79,7 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} front />
     </div>
     <div className="paper-scene-bottom">
+      {dashboard && <details className="dashboard-scene-notes"><summary>{banner.title} · Scene notes</summary><p>{banner.situationLabel}. {banner.caption}</p></details>}
       {!dashboard && contexts.length > 1 && <div className="scene-context-list" role="group" aria-label="Scenes from this year">{contexts.map(context => <button type="button" key={context.key} className={context.key === scene.key ? "is-active" : ""} aria-pressed={context.key === scene.key} aria-label={`Show scene: ${context.title}`} title={context.title} onClick={() => setSelectedKey(context.key)}><span>{sceneContextLabel(context)}</span><strong>{context.title}</strong></button>)}</div>}
       <div className="paper-motion-controls"><span className="paper-motion-status">{reducedMotion ? "Reduced motion" : ""}</span><button type="button" className="scene-motion-toggle" aria-label="Scene motion" aria-pressed={motionEnabled && !reducedMotion} disabled={reducedMotion} title={reducedMotion ? "Your device is set to reduce motion." : "Turn scene animation on or off"} onClick={toggleMotion}><span className={running ? "motion-indicator is-moving" : "motion-indicator"} aria-hidden="true" />Animation {motionEnabled && !reducedMotion ? "on" : "off"}</button></div>
     </div>
