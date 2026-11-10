@@ -1,4 +1,4 @@
-import { mkdir, writeFile, readFile, readdir } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, readdir, copyFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -59,6 +59,12 @@ export async function buildCollection(){
   for(let rarity=0;rarity<5;rarity++)await write(descriptor.rarityVariants[rarity].path,renderCard(profile,descriptor,rarity).png());
   contact.blit(card,28+(index%5)*248,82+Math.floor(index/5)*336,232,310);
   descriptor.sha256=createHash('sha256').update(card.png()).digest('hex');manifest.characters.push(descriptor);
+  if(['alexander','euclid'].includes(profile.id)){
+    const examples=path.join(root,'historical-figures');await mkdir(examples,{recursive:true});
+    await writeFile(path.join(examples,`${profile.id}.json`),JSON.stringify(profile.state,null,2)+'\n');
+    await writeFile(path.join(examples,`${profile.id}-collectible.png`),card.png());
+    await copyFile(path.join(out,descriptor.sprite),path.join(examples,`${profile.id}-front-3x.png`));
+  }
   if(figure){historicalContact.blit(card,24+historicalIndex*256,72,240,320);historicalIndex++;const figuresDir=path.join(repo,'public/assets/figures');await mkdir(figuresDir,{recursive:true});await writeFile(path.join(figuresDir,`${profile.id}.png`),card.png());await writeFile(path.join(figuresDir,`${profile.id}-front.png`),await readFile(path.join(out,descriptor.sprite)));}
  }
  const faceSheet=new Raster(976,452);faceSheet.rect(0,0,976,452,'#efe6cc');faceSheet.text('EVERFOLK / FACES OF ALEXANDRIA',20,20,3,'#3e4f3d');faceSheet.text('6 FACE SHAPES / EYES, NOSES, BROWS AND EXPRESSIONS / EDITABLE CREATOR PROFILES',20,53,1,'#695140');

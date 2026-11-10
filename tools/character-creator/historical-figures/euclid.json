@@ -1,16 +1,16 @@
 {
   "version": 1,
   "finish": "prism",
-  "backdrop": "observatory",
+  "backdrop": "euclid-museum",
   "name": "Euclid",
   "presentation": "masculine",
   "build": "average",
   "height": "medium",
   "skin": "honey",
-  "face": "round",
+  "face": "oval",
   "hair": "curly",
   "hairColor": "silver",
-  "eyes": "relaxed",
+  "eyes": "narrow",
   "brows": "soft",
   "nose": "straight",
   "expression": "calm",
@@ -25,5 +25,6 @@
   "prop": "geometry",
   "trait": "patient",
   "birthplace": "alexandria",
-  "story": "Nhà toán học gắn với Alexandria khoảng 300 TCN và bộ Cơ sở. Thích tìm lời chứng minh mạch lạc từ những hình vẽ đơn giản."
+  "story": "A geometer of Alexandria: open a school, or keep to the Museum.",
+  "figure": "euclid"
 }

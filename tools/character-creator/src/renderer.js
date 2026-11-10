@@ -266,7 +266,7 @@ export function drawCollectible(canvas,s,view,scratch) {
   scratch.width=64;scratch.height=96;drawCharacter(scratch,s,view);
   ctx.drawImage(scratch,112,100,256,384);
   drawHistoricalFrame(ctx,s.figure,prism?'#95b8a3':'#d6aa52');
-  ctx.fillStyle=gold;ctx.font='12px monospace';ctx.fillText('BÊN DÒNG NILE',26,35);ctx.textAlign='right';ctx.fillText(s.finish==='classic'?'CHARACTER':prism?'PRISM ◇':'AURUM ◇',454,35);ctx.textAlign='left';
+  ctx.fillStyle=gold;ctx.font='12px monospace';ctx.fillText('EVERFOLK',26,35);ctx.textAlign='right';ctx.fillText(s.finish==='classic'?'CHARACTER':prism?'PRISM ◇':'AURUM ◇',454,35);ctx.textAlign='left';
   ctx.fillRect(26,510,42,2);ctx.fillStyle='#fff5d8';ctx.font='26px Georgia';ctx.fillText(s.name,26,551,428);
   const roleTitle={commander:'MACEDONIAN COMMANDER',geometer:'ALEXANDRIAN GEOMETER',philosopher:'PHILOSOPHER OF THE LYCEUM','grain-official':'GRAIN ADMINISTRATOR',soldier:'SOLDIER OF ALEXANDRIA',stargazer:'STARGAZER OF ALEXANDRIA'}[s.role]??'CHARACTER PORTRAIT';
   ctx.fillStyle=gold;ctx.font='13px sans-serif';ctx.fillText(roleTitle,26,578,420);

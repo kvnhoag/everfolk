@@ -12,6 +12,6 @@ const server = http.createServer(async (req, res) => {
     const data = await readFile(file);
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
     res.end(data);
-  } catch { res.writeHead(404); res.end('Không tìm thấy trang'); }
+  } catch { res.writeHead(404); res.end('Page not found'); }
 });
 server.listen(Number(process.env.PORT || 4173), '127.0.0.1', () => console.log('Local: http://127.0.0.1:' + server.address().port));

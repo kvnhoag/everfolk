@@ -29,12 +29,12 @@ test('raster stays in frame with opaque pixel clusters and palette-legal colors'
  for(let n=0;n<100;n++){const s=randomState(DEFAULT,{},()=>((n*17+11)%101)/101);for(const view of ['front','side','back']){const c=image(s,view);assert.equal(c.clipped,0,`clipped ${JSON.stringify(s)}`);const allowed=new Set(paletteColors(s));const colors=new Set();for(let i=0;i<c.data.length;i+=4){assert.ok(c.data[i+3]===0||c.data[i+3]===255);if(c.data[i+3])colors.add('#'+[...c.data.slice(i,i+3)].map(x=>x.toString(16).padStart(2,'0')).join(''));}for(const color of colors)assert.ok(allowed.has(color),`unexpected color ${color}`);assert.ok(colors.size<=40,`${colors.size} colors exceeds prototype budget`);}}
 });
 test('role references and identity choices survive export/import and prompt generation',()=>{
- for(const role of ROLES){const s={...DEFAULT,role:role.id,prop:role.prop,name:'Người bạn'};assert.deepEqual(normalize(JSON.parse(JSON.stringify(s))),s);const prompt=promptFor(s);assert.ok(prompt.includes(role.nv));assert.ok(prompt.includes('64×96'));assert.ok(prompt.includes('Người bạn'));}
+ for(const role of ROLES){const s={...DEFAULT,role:role.id,prop:role.prop,name:'New character'};assert.deepEqual(normalize(JSON.parse(JSON.stringify(s))),s);const prompt=promptFor(s);assert.ok(prompt.includes(role.nv));assert.ok(prompt.includes('64×96'));assert.ok(prompt.includes('New character'));}
 });
 
 test('historical presets are editable modular states and round-trip with no schema break',()=>{
  const old={...DEFAULT};delete old.beard;assert.equal(normalize(old).beard,'none');
- for(const preset of FIGURE_PRESETS){const s=figurePreset(preset.id);assert.deepEqual(normalize(JSON.parse(JSON.stringify(s))),s);assert.equal(s.name,preset.name);const changed=normalize({...s,cloth:'terracotta',expression:'smile'});assert.equal(changed.cloth,'terracotta');assert.equal(figurePreset(preset.id).cloth,s.cloth);assert.ok(promptFor(s).includes(preset.id==='alexander'?'thế kỷ IV TCN':'300 TCN'));}
+  for(const preset of FIGURE_PRESETS){const s=figurePreset(preset.id);assert.deepEqual(normalize(JSON.parse(JSON.stringify(s))),s);assert.equal(s.name,preset.name);const changed=normalize({...s,cloth:'terracotta',expression:'smile'});assert.equal(changed.cloth,'terracotta');assert.equal(figurePreset(preset.id).cloth,s.cloth);assert.ok(promptFor(s).includes(preset.id==='alexander'?'fourth century BCE':'300 BCE'));}
  assert.throws(()=>figurePreset('missing'));
 });
 test('both historical silhouettes and all new parts fit the original raster and palette in every view',()=>{

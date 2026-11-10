@@ -1,18 +1,18 @@
 {
   "version": 1,
   "finish": "aurum",
-  "backdrop": "palace",
-  "name": "Alexander Đại đế",
+  "backdrop": "alexander-city",
+  "name": "Alexander",
   "presentation": "masculine",
   "build": "sturdy",
   "height": "medium",
   "skin": "sand",
-  "face": "oval",
+  "face": "diamond",
   "hair": "anastole",
   "hairColor": "flax",
   "eyes": "almond",
   "brows": "thick",
-  "nose": "straight",
+  "nose": "aquiline",
   "expression": "determined",
   "marks": "none",
   "beard": "none",
@@ -25,5 +25,6 @@
   "prop": "spear",
   "trait": "strategic",
   "birthplace": "pella",
-  "story": "Vua Macedonia, đến Ai Cập năm 332 TCN. Một nhân vật cách điệu với áo giáp lanh và áo choàng chlamys."
+  "story": "Royal commander: levy the city, or found and build.",
+  "figure": "alexander"
 }
