@@ -27,7 +27,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter }: {
 
   return <aside className="household-summary" aria-label="Household">
     <details ref={detailsRef} open>
-      <summary><span>Household</span><span className="household-disclosure" aria-hidden="true">⌄</span></summary>
+      <summary><span>Household</span><svg className="household-disclosure" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></summary>
       <div className="household-summary-content">
         {origin && <div className="household-background"><span className="household-field-label">Background</span><p>{origin.title}</p></div>}
         {job && <div className="household-work"><span className="household-field-label">Your work</span><p>{job.title}</p></div>}
