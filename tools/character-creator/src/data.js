@@ -1,4 +1,5 @@
 import { FIGURE_DESIGN } from './historical-frame.js';
+import { historicalStage } from './historical-stages.js';
 export const SKINS = [
   {id:'sand',name:'Warm sand',colors:['#8b5846','#ca9167','#efc497']},
   {id:'honey',name:'Honey',colors:['#80503f','#bb8257','#e4b180']},
@@ -43,6 +44,7 @@ export const OPTIONS = {
  finish:[['classic','Classic'],['aurum','Royal gold'],['prism','Iridescent jade']],
  backdrop:[['local','Local landscape'],['palace','Sunset palace'],['observatory','Night observatory'],['alexander-city','Alexander · city under construction'],['aristotle-lyceum','Aristotle · Lyceum garden'],['euclid-museum','Euclid · geometry courtyard'],['cleomenes-granary','Cleomenes · granary quay']],
  figure:[['none','Ordinary character'],['alexander','Alexander'],['aristotle','Aristotle'],['euclid','Euclid'],['cleomenes','Cleomenes']],
+ rarity:[['0','Common'],['1','Uncommon'],['2','Rare'],['3','Epic'],['4','Legendary']],
  presentation:[['neutral','Neutral'],['masculine','Masculine'],['feminine','Feminine']],
  build:[['slim','Slim'],['average','Average'],['sturdy','Sturdy'],['soft','Soft']],
  height:[['short','Short'],['medium','Medium'],['tall','Tall']],
@@ -64,6 +66,7 @@ export const OPTIONS = {
 export const DEFAULT = {version:1,finish:'classic',backdrop:'local',name:'Neri',presentation:'neutral',build:'average',height:'medium',skin:'copper',face:'round',hair:'wavy',hairColor:'ink',eyes:'almond',brows:'soft',nose:'small',expression:'smile',marks:'freckles',beard:'none',role:'gardener',outfit:'tunic',cloth:'linen',accent:'turquoise',jewelry:'amulet',footwear:'sandals',prop:'hoe',trait:'curious',birthplace:'nile',story:'Dreams of growing a small garden where travelers can stop and rest.'};
 OPTIONS.prop.push(['grain','Grain sack & wheat']);
 DEFAULT.figure='none';
+DEFAULT.rarity='0';
 export const FIGURE_PRESETS = [
  {id:'alexander',name:'Alexander the Great',period:'356–323 BCE',note:'A stylized appearance inspired by swept-back anastole hair and Macedonian clothing.',source:'https://artmuseum.princeton.edu/art/collections/objects/55773',state:{...DEFAULT,name:'Alexander the Great',finish:'aurum',backdrop:'palace',presentation:'masculine',build:'sturdy',height:'medium',skin:'sand',face:'oval',hair:'anastole',hairColor:'flax',beard:'none',eyes:'almond',brows:'thick',nose:'straight',expression:'determined',marks:'none',role:'commander',outfit:'linothorax',cloth:'sage',accent:'gold',jewelry:'fibula',footwear:'boots',prop:'spear',trait:'strategic',birthplace:'pella',story:'King of Macedon, who reached Egypt in 332 BCE. A stylized character wearing linen armor and a chlamys cloak.'}},
  {id:'euclid',name:'Euclid',period:'Active around 300 BCE',note:'Euclid’s appearance and birthplace are uncertain. His beard, hair and clothing are artistic choices; Alexandria was his place of work.',source:'https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/',state:{...DEFAULT,name:'Euclid',finish:'prism',backdrop:'observatory',presentation:'masculine',build:'average',height:'medium',skin:'honey',face:'round',hair:'curly',hairColor:'silver',beard:'scholar',eyes:'relaxed',brows:'soft',nose:'straight',expression:'calm',marks:'none',role:'geometer',outfit:'himation',cloth:'river',accent:'gold',jewelry:'none',footwear:'sandals',prop:'geometry',trait:'patient',birthplace:'alexandria',story:'A mathematician associated with Alexandria around 300 BCE and the Elements. Finds clear proofs in simple geometric figures.'}}
@@ -79,6 +82,7 @@ export const PALETTE_CORE = ['#29252a','#493d34','#695140','#9b7852','#c7a66c','
 export const label = (key,value) => OPTIONS[key]?.find(x=>x[0]===value)?.[1] || value;
 export const roleOf = state => ROLES.find(x=>x.id===state.role) || ROLES[0];
 GROUPS.story.push('figure');
+GROUPS.outfit.push('rarity');
 export function normalize(input) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('The profile must be a JSON object.');
   if (input.version != null && input.version !== 1) throw new Error('This profile version is not supported.');
@@ -89,18 +93,21 @@ export function normalize(input) {
     else if (OPTIONS[key]?.some(x=>x[0]===input[key]) || lists[key]?.some(x=>x.id===input[key])) state[key]=input[key];
   }
   state.name = state.name || 'New character';
+  if(FIGURE_DESIGN[state.figure])state.backdrop=FIGURE_DESIGN[state.figure].scene;
   return state;
 }
 export function randomState(state, locks={}, rng=Math.random) {
   const result = {...state}; const choose = arr => arr[Math.min(arr.length-1,Math.floor(rng()*arr.length))];
   const locked = key => Object.entries(GROUPS).some(([group,keys])=> locks[group] && keys.includes(key));
-  for (const [key,values] of Object.entries(OPTIONS)) if(key!=='figure'&&!locked(key)) result[key]=choose(values)[0];
+  for (const [key,values] of Object.entries(OPTIONS)) if(!['figure','rarity'].includes(key)&&!locked(key)) result[key]=choose(values)[0];
   for (const [key,values] of Object.entries({skin:SKINS,hairColor:HAIR,cloth:CLOTH,accent:ACCENTS,role:ROLES})) if(!locked(key)) result[key]=choose(values).id;
   if(!locks.story) { const role=roleOf(result); result.prop=role.prop; result.name=choose(['Neri','Tami','Meri','Dori','Ipi','Seni','Niko','Tia']); }
   return normalize(result);
 }
 export function promptFor(s) {
  const role=roleOf(s);
+ const stage=historicalStage(s.figure,Number(s.rarity));
+ const backdrop=stage?`${label('rarity',s.rarity)} / ${stage.title}. ${stage.description} Keep the same character at every tier. ${Number(s.rarity)<2?'Use a plain civilian card with no gold historical frame.':'Use tier-appropriate historical ornament.'}${s.figure==='alexander'?' No flags, banners or flagpoles.':''}`:label('backdrop',s.backdrop);
  const setting=s.role==='commander'?'Greek-Macedonian Egypt in the late fourth century BCE':s.role==='geometer'?'Alexandria around 300 BCE, in the early Ptolemaic period':'Egypt around 270 BCE, in the early Ptolemaic period';
- return `Design a 2D pixel art game character: ${s.name}, ${role.name.toLowerCase()}, set in ${setting}. Warm, charming, nostalgic style; stylized four-head proportions and a native 64×96 sprite. Build: ${label('build',s.build)}; height: ${label('height',s.height)}; presentation: ${label('presentation',s.presentation)}. Skin: ${SKINS.find(x=>x.id===s.skin).name}; hair: ${label('hair',s.hair)} in ${HAIR.find(x=>x.id===s.hairColor).name}. Beard: ${label('beard',s.beard)}. Face: ${label('face',s.face)}; eyes: ${label('eyes',s.eyes)}; eyebrows: ${label('brows',s.brows)}; nose: ${label('nose',s.nose)}; expression: ${label('expression',s.expression)}; marks: ${label('marks',s.marks)}. Outfit: ${label('outfit',s.outfit)} in ${CLOTH.find(x=>x.id===s.cloth).name}; jewelry: ${label('jewelry',s.jewelry)}; footwear: ${label('footwear',s.footwear)}; prop: ${label('prop',s.prop)}. Personality: ${label('trait',s.trait)}; home region: ${label('birthplace',s.birthplace)}. ${s.story} Finish: ${label('finish',s.finish)}; card backdrop: ${label('backdrop',s.backdrop)}. Prioritize a clear silhouette, visible gaps between arms and torso, a convincing grip, restrained detail, dark brown outlines, compact color clusters, warm light from the upper left and soft shadows. Keep the same identity and outfit in every view. No modern objects, late Roman equipment or blurred pixels. Role references: ${role.nv}, ${role.ng}; this design is a stylized artistic interpretation. Export transparent front, side and back views with separate props. Attach the reference PNG to preserve identity.`;
+ return `Design a 2D pixel art game character: ${s.name}, ${role.name.toLowerCase()}, set in ${setting}. Warm, charming, nostalgic style; stylized four-head proportions and a native 64×96 sprite. Build: ${label('build',s.build)}; height: ${label('height',s.height)}; presentation: ${label('presentation',s.presentation)}. Skin: ${SKINS.find(x=>x.id===s.skin).name}; hair: ${label('hair',s.hair)} in ${HAIR.find(x=>x.id===s.hairColor).name}. Beard: ${label('beard',s.beard)}. Face: ${label('face',s.face)}; eyes: ${label('eyes',s.eyes)}; eyebrows: ${label('brows',s.brows)}; nose: ${label('nose',s.nose)}; expression: ${label('expression',s.expression)}; marks: ${label('marks',s.marks)}. Outfit: ${label('outfit',s.outfit)} in ${CLOTH.find(x=>x.id===s.cloth).name}; jewelry: ${label('jewelry',s.jewelry)}; footwear: ${label('footwear',s.footwear)}; prop: ${label('prop',s.prop)}. Personality: ${label('trait',s.trait)}; home region: ${label('birthplace',s.birthplace)}. ${s.story} Finish: ${label('finish',s.finish)}; card backdrop: ${backdrop}. Prioritize a clear silhouette, visible gaps between arms and torso, a convincing grip, restrained detail, dark brown outlines, compact color clusters, warm light from the upper left and soft shadows. Keep the same identity and outfit in every view. No modern objects, late Roman equipment or blurred pixels. Role references: ${role.nv}, ${role.ng}; this design is a stylized artistic interpretation. Export transparent front, side and back views with separate props. Attach the reference PNG to preserve identity.`;
 }

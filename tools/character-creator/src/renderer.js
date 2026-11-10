@@ -1,6 +1,7 @@
 import { SKINS, CLOTH, HAIR, ACCENTS, PALETTE_CORE } from './data.js';
 import { drawHistoricalScene } from './historical-scenes.js';
 import { drawHistoricalFrame } from './historical-frame.js';
+import { stageIndex } from './historical-stages.js';
 export const WIDTH=64, HEIGHT=96;
 // All raster primitives use integer pixels; no antialiased paths or scaled source art.
 export function painter(ctx) {
@@ -185,10 +186,10 @@ export function drawCharacter(canvas,s,view='front',mode='color',frame=0) {
   return {skin,cloth,hair,accent};
 }
 export function usedColors(canvas){const d=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;const set=new Set();for(let i=0;i<d.length;i+=4)if(d[i+3])set.add('#'+[d[i],d[i+1],d[i+2]].map(x=>x.toString(16).padStart(2,'0')).join(''));return [...set];}
-export function drawLandscape(canvas,place='nile',backdrop='local') {
+export function drawLandscape(canvas,place='nile',backdrop='local',rarity=0) {
   const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
   const {rect:r,line:l,poly:p,oval:o}=painter(ctx);
-  if(drawHistoricalScene({rect:r,line:l,poly:p,oval:o},backdrop))return;
+  if(drawHistoricalScene({rect:r,line:l,poly:p,oval:o},backdrop,rarity))return;
   if(backdrop==='palace'||backdrop==='observatory') {
     const night=backdrop==='observatory';
     r(0,0,240,190,night?'#172e35':'#493d34');
@@ -258,18 +259,19 @@ export function paletteColors(s){return [...new Set([...PALETTE_CORE,...SKINS.fi
 export function drawCollectible(canvas,s,view,scratch) {
   const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
   const prism=s.finish==='prism',ink=prism?'#172e35':'#29252a',gold=prism?'#95b8a3':'#d6aa52';
-  ctx.fillStyle=ink;ctx.fillRect(0,0,480,640);ctx.strokeStyle=gold;ctx.lineWidth=2;ctx.strokeRect(7,7,466,626);ctx.strokeRect(12,12,456,616);
-  scratch.width=240;scratch.height=190;drawLandscape(scratch,s.birthplace,s.backdrop);
+  const tier=stageIndex(s.rarity),border=s.figure&&s.figure!=='none'?['#b8b5a6','#7f9364','#608baf','#b596bb','#d6aa52'][tier]:gold;
+  ctx.fillStyle=ink;ctx.fillRect(0,0,480,640);ctx.strokeStyle=border;ctx.lineWidth=2;ctx.strokeRect(7,7,466,626);ctx.strokeRect(12,12,456,616);
+  scratch.width=240;scratch.height=190;drawLandscape(scratch,s.birthplace,s.backdrop,tier);
   // Crop to fill, preserving background proportions.
   const cropWidth=190*456/432;
   ctx.drawImage(scratch,(240-cropWidth)/2,0,cropWidth,190,12,52,456,432);
   scratch.width=64;scratch.height=96;drawCharacter(scratch,s,view);
   ctx.drawImage(scratch,112,100,256,384);
-  drawHistoricalFrame(ctx,s.figure,prism?'#95b8a3':'#d6aa52');
+  drawHistoricalFrame(ctx,s.figure,border,tier);
   ctx.fillStyle=gold;ctx.font='12px monospace';ctx.fillText('EVERFOLK',26,35);ctx.textAlign='right';ctx.fillText(s.finish==='classic'?'CHARACTER':prism?'PRISM ◇':'AURUM ◇',454,35);ctx.textAlign='left';
   ctx.fillRect(26,510,42,2);ctx.fillStyle='#fff5d8';ctx.font='26px Georgia';ctx.fillText(s.name,26,551,428);
   const roleTitle={commander:'MACEDONIAN COMMANDER',geometer:'ALEXANDRIAN GEOMETER',philosopher:'PHILOSOPHER OF THE LYCEUM','grain-official':'GRAIN ADMINISTRATOR',soldier:'SOLDIER OF ALEXANDRIA',stargazer:'STARGAZER OF ALEXANDRIA'}[s.role]??'CHARACTER PORTRAIT';
   ctx.fillStyle=gold;ctx.font='13px sans-serif';ctx.fillText(roleTitle,26,578,420);
   ctx.font='11px monospace';ctx.fillText('HISTORICAL IMAGINATION · PIXEL COLLECTION',26,611,420);
-  for(const [x,y]of [[18,18],[462,18],[18,622],[462,622]]){ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.fillStyle=gold;ctx.fillRect(-3,-3,6,6);ctx.restore();}
+  if(!s.figure||s.figure==='none'||tier>=2)for(const [x,y]of [[18,18],[462,18],[18,622],[462,622]]){ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.fillStyle=border;ctx.fillRect(-3,-3,6,6);ctx.restore();}
 }

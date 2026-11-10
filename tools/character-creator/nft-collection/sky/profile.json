@@ -1,7 +1,7 @@
 {
   "version": 1,
   "finish": "classic",
-  "backdrop": "observatory",
+  "backdrop": "local",
   "name": "The Stargazer",
   "presentation": "feminine",
   "build": "slim",
@@ -26,5 +26,6 @@
   "trait": "quiet",
   "birthplace": "alexandria",
   "story": "Read a favourable omen or warn the household of a difficult year.",
-  "figure": "none"
+  "figure": "none",
+  "rarity": "0"
 }

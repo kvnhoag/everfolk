@@ -275,30 +275,71 @@
         {
           "label": "Common",
           "path": "alexander/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "alexander/background-rarity-0.png",
+          "layeredCard": "alexander/rarity-0.ora",
+          "profile": "alexander/profile-rarity-0.json",
+          "stage": {
+            "title": "Field camp",
+            "description": "A modest campaign tent, supplies and a small campfire."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "alexander/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "alexander/background-rarity-1.png",
+          "layeredCard": "alexander/rarity-1.ora",
+          "profile": "alexander/profile-rarity-1.json",
+          "stage": {
+            "title": "Officer quarters",
+            "description": "An organized camp with a timber shelter and a planning table."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "alexander/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "alexander/background-rarity-2.png",
+          "layeredCard": "alexander/rarity-2.ora",
+          "profile": "alexander/profile-rarity-2.json",
+          "stage": {
+            "title": "Command pavilion",
+            "description": "A substantial command pavilion with a campaign map and stone defenses."
+          },
+          "frameStyle": "royal-laurel"
         },
         {
           "label": "Epic",
           "path": "alexander/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "alexander/background-rarity-3.png",
+          "layeredCard": "alexander/rarity-3.ora",
+          "profile": "alexander/profile-rarity-3.json",
+          "stage": {
+            "title": "General headquarters",
+            "description": "A fortified residence with a broad courtyard and an imposing command hall."
+          },
+          "frameStyle": "royal-laurel"
         },
         {
           "label": "Legendary",
           "path": "alexander/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "alexander/background-rarity-4.png",
+          "layeredCard": "alexander/rarity-4.ora",
+          "profile": "alexander/profile-rarity-4.json",
+          "stage": {
+            "title": "Royal palace",
+            "description": "A lavish palace with monumental gold-trimmed columns and a ceremonial dais."
+          },
+          "frameStyle": "royal-laurel"
         }
       ],
-      "frameStyle": "royal-laurel",
+      "frameFamily": "royal-laurel",
+      "frameStyle": "citizen",
       "background": "alexander/background.png",
       "face": {
         "shape": "diamond",
@@ -307,7 +348,7 @@
         "nose": "aquiline",
         "expression": "determined"
       },
-      "sha256": "aed83dfaf9e957a3e74b79c6dc52c54143a8b42f485dbdcdbe8ce825ce8e1c6b"
+      "sha256": "6a0b5e175b05a66deea87b6702c218ef093d0fc888d61f882e15e8f19226aaa0"
     },
     {
       "id": "aristotle",
@@ -543,30 +584,71 @@
         {
           "label": "Common",
           "path": "aristotle/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "aristotle/background-rarity-0.png",
+          "layeredCard": "aristotle/rarity-0.ora",
+          "profile": "aristotle/profile-rarity-0.json",
+          "stage": {
+            "title": "Humble study",
+            "description": "A simple reading desk beneath an olive tree."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "aristotle/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "aristotle/background-rarity-1.png",
+          "layeredCard": "aristotle/rarity-1.ora",
+          "profile": "aristotle/profile-rarity-1.json",
+          "stage": {
+            "title": "Private study",
+            "description": "A small scholar’s room with manuscript shelves and a writing table."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "aristotle/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "aristotle/background-rarity-2.png",
+          "layeredCard": "aristotle/rarity-2.ora",
+          "profile": "aristotle/profile-rarity-2.json",
+          "stage": {
+            "title": "Teaching courtyard",
+            "description": "An established teaching court with benches and a stone colonnade."
+          },
+          "frameStyle": "lyceum-scroll"
         },
         {
           "label": "Epic",
           "path": "aristotle/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "aristotle/background-rarity-3.png",
+          "layeredCard": "aristotle/rarity-3.ora",
+          "profile": "aristotle/profile-rarity-3.json",
+          "stage": {
+            "title": "Lyceum complex",
+            "description": "An extensive scholarly garden with multiple lecture colonnades."
+          },
+          "frameStyle": "lyceum-scroll"
         },
         {
           "label": "Legendary",
           "path": "aristotle/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "aristotle/background-rarity-4.png",
+          "layeredCard": "aristotle/rarity-4.ora",
+          "profile": "aristotle/profile-rarity-4.json",
+          "stage": {
+            "title": "Court library",
+            "description": "A magnificent royal library with carved columns and illuminated manuscript cabinets."
+          },
+          "frameStyle": "lyceum-scroll"
         }
       ],
-      "frameStyle": "lyceum-scroll",
+      "frameFamily": "lyceum-scroll",
+      "frameStyle": "citizen",
       "background": "aristotle/background.png",
       "face": {
         "shape": "long",
@@ -575,7 +657,7 @@
         "nose": "long",
         "expression": "thoughtful"
       },
-      "sha256": "56240d13c0723408450f8ff5ed2f9dcceda2542e03ca9db44fb6ae88a70cc0df"
+      "sha256": "88a7cd97881c248ecbd458ef1113efdd31b40e7c4ce70b53cd36ffc03da0a37d"
     },
     {
       "id": "euclid",
@@ -811,30 +893,71 @@
         {
           "label": "Common",
           "path": "euclid/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "euclid/background-rarity-0.png",
+          "layeredCard": "euclid/rarity-0.ora",
+          "profile": "euclid/profile-rarity-0.json",
+          "stage": {
+            "title": "Sand-tray courtyard",
+            "description": "A small courtyard with a sand tray for simple geometric demonstrations."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "euclid/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "euclid/background-rarity-1.png",
+          "layeredCard": "euclid/rarity-1.ora",
+          "profile": "euclid/profile-rarity-1.json",
+          "stage": {
+            "title": "Geometry workroom",
+            "description": "A dedicated workroom with a diagram board and a few book rolls."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "euclid/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "euclid/background-rarity-2.png",
+          "layeredCard": "euclid/rarity-2.ora",
+          "profile": "euclid/profile-rarity-2.json",
+          "stage": {
+            "title": "Geometry school",
+            "description": "A flourishing school with large diagrams and demonstration tables."
+          },
+          "frameStyle": "museum-geometry"
         },
         {
           "label": "Epic",
           "path": "euclid/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "euclid/background-rarity-3.png",
+          "layeredCard": "euclid/rarity-3.ora",
+          "profile": "euclid/profile-rarity-3.json",
+          "stage": {
+            "title": "Museum hall",
+            "description": "An imposing scholarly hall with tall shelves and geometric instruments."
+          },
+          "frameStyle": "museum-geometry"
         },
         {
           "label": "Legendary",
           "path": "euclid/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "euclid/background-rarity-4.png",
+          "layeredCard": "euclid/rarity-4.ora",
+          "profile": "euclid/profile-rarity-4.json",
+          "stage": {
+            "title": "Grand library",
+            "description": "A monumental library with gilded arches and a ceremonial geometry floor."
+          },
+          "frameStyle": "museum-geometry"
         }
       ],
-      "frameStyle": "museum-geometry",
+      "frameFamily": "museum-geometry",
+      "frameStyle": "citizen",
       "background": "euclid/background.png",
       "face": {
         "shape": "oval",
@@ -843,7 +966,7 @@
         "nose": "straight",
         "expression": "calm"
       },
-      "sha256": "3223f0438bf94dcc490196af92cd4c360cd4f06c7ad7f66f27f89801d31d93d0"
+      "sha256": "e321f1e3fa51550fe34e6dd20f667c5b62ce0ed083e1a04fc0aed7a60bf91460"
     },
     {
       "id": "cleomenes",
@@ -1061,30 +1184,71 @@
         {
           "label": "Common",
           "path": "cleomenes/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "cleomenes/background-rarity-0.png",
+          "layeredCard": "cleomenes/rarity-0.ora",
+          "profile": "cleomenes/profile-rarity-0.json",
+          "stage": {
+            "title": "Market storehouse",
+            "description": "A modest grain stall, a small storehouse and a trade balance."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "cleomenes/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "cleomenes/background-rarity-1.png",
+          "layeredCard": "cleomenes/rarity-1.ora",
+          "profile": "cleomenes/profile-rarity-1.json",
+          "stage": {
+            "title": "Merchant warehouse",
+            "description": "An expanded warehouse with organized grain sacks and shipping records."
+          },
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "cleomenes/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "cleomenes/background-rarity-2.png",
+          "layeredCard": "cleomenes/rarity-2.ora",
+          "profile": "cleomenes/profile-rarity-2.json",
+          "stage": {
+            "title": "Revenue office",
+            "description": "A formal accounts office overlooking the granary quay."
+          },
+          "frameStyle": "granary-wheat"
         },
         {
           "label": "Epic",
           "path": "cleomenes/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "cleomenes/background-rarity-3.png",
+          "layeredCard": "cleomenes/rarity-3.ora",
+          "profile": "cleomenes/profile-rarity-3.json",
+          "stage": {
+            "title": "Administrator residence",
+            "description": "A grand official residence with a courtyard overlooking the grain harbor."
+          },
+          "frameStyle": "granary-wheat"
         },
         {
           "label": "Legendary",
           "path": "cleomenes/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "cleomenes/background-rarity-4.png",
+          "layeredCard": "cleomenes/rarity-4.ora",
+          "profile": "cleomenes/profile-rarity-4.json",
+          "stage": {
+            "title": "Treasury hall",
+            "description": "A lavish treasury and administrative palace with gilded architecture and grain reliefs."
+          },
+          "frameStyle": "granary-wheat"
         }
       ],
-      "frameStyle": "granary-wheat",
+      "frameFamily": "granary-wheat",
+      "frameStyle": "citizen",
       "background": "cleomenes/background.png",
       "face": {
         "shape": "heart",
@@ -1093,7 +1257,7 @@
         "nose": "broad",
         "expression": "stern"
       },
-      "sha256": "fd0fb8ea7b2a5204ae1b85906e0969ad9455a04f31004f17fc56de4cb1cab4b2"
+      "sha256": "77fedb7f162a8bc10d10012e98260b900805cca92e1e0cf1478334eafbde8e30"
     },
     {
       "id": "letters",
@@ -1275,29 +1439,55 @@
         {
           "label": "Common",
           "path": "letters/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "letters/background-rarity-0.png",
+          "layeredCard": "letters/rarity-0.ora",
+          "profile": "letters/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "letters/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "letters/background-rarity-1.png",
+          "layeredCard": "letters/rarity-1.ora",
+          "profile": "letters/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "letters/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "letters/background-rarity-2.png",
+          "layeredCard": "letters/rarity-2.ora",
+          "profile": "letters/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "letters/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "letters/background-rarity-3.png",
+          "layeredCard": "letters/rarity-3.ora",
+          "profile": "letters/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "letters/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "letters/background-rarity-4.png",
+          "layeredCard": "letters/rarity-4.ora",
+          "profile": "letters/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "letters/background.png",
       "face": {
@@ -1507,29 +1697,55 @@
         {
           "label": "Common",
           "path": "military/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "military/background-rarity-0.png",
+          "layeredCard": "military/rarity-0.ora",
+          "profile": "military/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "military/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "military/background-rarity-1.png",
+          "layeredCard": "military/rarity-1.ora",
+          "profile": "military/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "military/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "military/background-rarity-2.png",
+          "layeredCard": "military/rarity-2.ora",
+          "profile": "military/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "military/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "military/background-rarity-3.png",
+          "layeredCard": "military/rarity-3.ora",
+          "profile": "military/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "military/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "military/background-rarity-4.png",
+          "layeredCard": "military/rarity-4.ora",
+          "profile": "military/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "military/background.png",
       "face": {
@@ -1727,29 +1943,55 @@
         {
           "label": "Common",
           "path": "commerce/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "commerce/background-rarity-0.png",
+          "layeredCard": "commerce/rarity-0.ora",
+          "profile": "commerce/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "commerce/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "commerce/background-rarity-1.png",
+          "layeredCard": "commerce/rarity-1.ora",
+          "profile": "commerce/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "commerce/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "commerce/background-rarity-2.png",
+          "layeredCard": "commerce/rarity-2.ora",
+          "profile": "commerce/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "commerce/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "commerce/background-rarity-3.png",
+          "layeredCard": "commerce/rarity-3.ora",
+          "profile": "commerce/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "commerce/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "commerce/background-rarity-4.png",
+          "layeredCard": "commerce/rarity-4.ora",
+          "profile": "commerce/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "commerce/background.png",
       "face": {
@@ -1929,29 +2171,55 @@
         {
           "label": "Common",
           "path": "craft/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "craft/background-rarity-0.png",
+          "layeredCard": "craft/rarity-0.ora",
+          "profile": "craft/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "craft/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "craft/background-rarity-1.png",
+          "layeredCard": "craft/rarity-1.ora",
+          "profile": "craft/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "craft/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "craft/background-rarity-2.png",
+          "layeredCard": "craft/rarity-2.ora",
+          "profile": "craft/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "craft/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "craft/background-rarity-3.png",
+          "layeredCard": "craft/rarity-3.ora",
+          "profile": "craft/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "craft/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "craft/background-rarity-4.png",
+          "layeredCard": "craft/rarity-4.ora",
+          "profile": "craft/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "craft/background.png",
       "face": {
@@ -2179,29 +2447,55 @@
         {
           "label": "Common",
           "path": "sky/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "sky/background-rarity-0.png",
+          "layeredCard": "sky/rarity-0.ora",
+          "profile": "sky/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "sky/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "sky/background-rarity-1.png",
+          "layeredCard": "sky/rarity-1.ora",
+          "profile": "sky/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "sky/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "sky/background-rarity-2.png",
+          "layeredCard": "sky/rarity-2.ora",
+          "profile": "sky/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "sky/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "sky/background-rarity-3.png",
+          "layeredCard": "sky/rarity-3.ora",
+          "profile": "sky/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "sky/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "sky/background-rarity-4.png",
+          "layeredCard": "sky/rarity-4.ora",
+          "profile": "sky/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "sky/background.png",
       "face": {
@@ -2211,7 +2505,7 @@
         "nose": "long",
         "expression": "thoughtful"
       },
-      "sha256": "3a2459f40805ea123dad8d14bdc6cb465432e9e2ee006713b47e7b201a41ecef"
+      "sha256": "8c8eb379e08a1e84a7c812a7edf5f8ccc099dbb32197b838f190ca69d999f033"
     },
     {
       "id": "performance",
@@ -2393,29 +2687,55 @@
         {
           "label": "Common",
           "path": "performance/rarity-0.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "performance/background-rarity-0.png",
+          "layeredCard": "performance/rarity-0.ora",
+          "profile": "performance/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Uncommon",
           "path": "performance/rarity-1.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "performance/background-rarity-1.png",
+          "layeredCard": "performance/rarity-1.ora",
+          "profile": "performance/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Rare",
           "path": "performance/rarity-2.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "performance/background-rarity-2.png",
+          "layeredCard": "performance/rarity-2.ora",
+          "profile": "performance/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Epic",
           "path": "performance/rarity-3.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "performance/background-rarity-3.png",
+          "layeredCard": "performance/rarity-3.ora",
+          "profile": "performance/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
         },
         {
           "label": "Legendary",
           "path": "performance/rarity-4.png",
-          "artPreviewOnly": true
+          "artPreviewOnly": true,
+          "background": "performance/background-rarity-4.png",
+          "layeredCard": "performance/rarity-4.ora",
+          "profile": "performance/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
         }
       ],
+      "frameFamily": "citizen",
       "frameStyle": "citizen",
       "background": "performance/background.png",
       "face": {

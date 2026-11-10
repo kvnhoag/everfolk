@@ -1,27 +1,31 @@
 # Everfolk · Living Legacies — design rules
 
-## Historical figures require exclusive frames
+## Rarity follows a life-stage progression
 
-1. Every historical figure must have a `state.figure` matching its catalog ID. The renderer retains this identity when importing JSON or opening a profile in the editor; changing an outfit does not turn a historical figure into an NPC.
-2. Never use the NPC frame for a historical figure. NPCs use the restrained `citizen` frame. Historical frames require a distinct architectural structure: carved gold uprights, a stepped cornice and a recognizable crest above the portrait.
-3. Each historical figure has a dedicated frame design and background, rather than a recolor of another figure. Rules are declared in `src/historical-frame.js` and checked before exporting the collection.
-4. Historical frames must convey rarity, luxury and mystery through obsidian or onyx tones, chased gold, faceted gemstones, crests and restrained highlights. Keep each figure's individual emblem clearly visible.
-5. Common–Legendary artwork variants progressively increase gemstone count, engraving density and highlights. Historical structure and identity crests remain present at every tier. The original artwork is not a minted rarity assignment; frame color does not assign a token's rarity or supply.
+1. The five artwork tiers are Common, Uncommon, Rare, Epic and Legendary. A historical figure has a distinct setting at every tier. Change the background architecture, scale, props and atmosphere, rather than merely recoloring one scene.
+2. Keep the character exactly the same across all five tiers: face, body, age, hair, skin, outfit, pose and handheld prop. Rarity progression is expressed by the setting and frame, not by repainting the person.
+3. Common must read as an ordinary early-life setting. Use the same restrained card treatment as a civilian: no historical gold uprights, gemstones, crest or supernatural halo. Uncommon remains modest and has no gilded historical frame.
+4. Rare introduces an established professional setting and the first carved historical frame. Epic uses an imposing headquarters, residence or institution, with richer carving and gemstones. Legendary uses an exceptional palace or grand scholarly institution, with the most elaborate historical frame and restrained mystical highlights.
+5. Every historical figure retains a catalog identity (`state.figure`). Their exclusive frame family appears only from Rare onward. Frame identity is independent of rarity; it does not require displaying gold decoration at Common.
+6. These settings are fictional visual chapters, not a dated biography or proof of a historical figure's wealth. Artwork previews do not mint tokens, assign a real rarity or allocate the five-copy figure supply.
 
-## Scope and atmosphere of historical backgrounds
+## Five settings for each figure
 
-- Only the four historical backgrounds and historical frames receive this treatment. Preserve the backgrounds, frames, portraits and rarity artwork of all six NPC career groups when changing historical art direction.
-- Use rich twilight palettes: royal blue and gold for Alexander, amethyst and bronze-gold for Aristotle, celestial blue and aquamarine for Euclid, and emerald with antique gold for Cleomenes.
-- Give backgrounds depth through dark architecture, reflected highlights and fine celestial rings behind the figure. Keep luminous particles sparse and peripheral; faces and props must remain readable.
-- Create mystery through color, light and ornament while retaining each figure's occupational setting and catalog actions. Do not replace all four environments with the same gate or palace.
-- Preserve crisp sprite pixels. Effects must not obscure faces, names or props, or invent minted serial numbers, rarity assignments or token IDs. Avoid flooding the entire background with gold and weakening frame contrast.
+- **Alexander:** Field camp → Officer quarters → Command pavilion → General headquarters → Royal palace. Common begins at a simple tent; Epic reaches a large command residence; Legendary is a lavish ceremonial palace. No flags, banners or flagpoles may appear at any tier.
+- **Aristotle:** Humble study → Private study → Teaching courtyard → Lyceum complex → Court library. Scholarly influence is expressed through reading space, manuscripts, lecture colonnades and institutional prestige.
+- **Euclid:** Sand-tray courtyard → Geometry workroom → Geometry school → Museum hall → Grand library. Use geometric demonstrations, diagrams, shelves and a monumental scholarly setting; do not turn Euclid into a ruler.
+- **Cleomenes:** Market storehouse → Merchant warehouse → Revenue office → Administrator residence → Treasury hall. Grain, records and trade balances remain the visual theme. A grand administrative palace does not make the character a king.
 
-## Four art directions
+The source of truth is `src/historical-stages.js`. The export manifest records the stage title, description, background, layered card and importable profile for every rarity preview.
 
-- **Alexander — `royal-laurel`:** carved laurel leaves and a spear crest; a coastal city under construction, scaffolding and Macedonian banners. The setting follows the commander role and the catalog's “Found and build” action; it is not an archaeological reconstruction.
-- **Aristotle — `lyceum-scroll`:** scroll capitals and a manuscript crest; a Lyceum garden with a colonnade, olive trees and reading places. Use a long face, deep-set eyes, a long nose and a thoughtful expression.
-- **Euclid — `museum-geometry`:** square geometric relief and a triangle crest; a geometry courtyard with scroll shelves, diagrams and a demonstration table. Keep the geometric prop distinct from a philosopher's scroll.
-- **Cleomenes — `granary-wheat`:** wheat relief and a grain crest; waterfront granaries, grain sacks and a trade balance. Use a soft build, heart-shaped face, deep-set eyes and a stern expression. Do not portray him as a king or warrior.
+## Scope and atmosphere
+
+- The four historical figures receive the five-stage background progression. Other NPC backgrounds remain ordinary. In particular, Stargazer of Alexandria uses the local daytime landscape at every tier, not the night observatory.
+- Keep rich but readable historical colors at higher tiers: royal blue and gold for Alexander, amethyst for Aristotle, aquamarine for Euclid, emerald and antique gold for Cleomenes.
+- Use clear daylight and restrained everyday materials at Common/Uncommon. Architectural scale and atmosphere must rise visibly through Rare and Epic into Legendary.
+- Restrict celestial rings and luminous particles to Rare and higher. Keep highlights sparse and peripheral. Faces, names and props must remain unobscured.
+- Preserve crisp pixels and the existing creator renderer. Keep landscapes, character paint passes, historical ornament and lettering in separate layers.
+- Historical and NPC card previews must use the background matching the selected rarity. Gallery downloads and “Edit in creator” must preserve that same tier.
 
 ## Facial diversity
 
@@ -35,12 +39,14 @@
 
 - Use integer pixels and nearest-neighbor scaling. Maintain consistent body proportions and lighting from the upper left.
 - Separate the landscape, character paint passes, historical frame and lettering. Every `.ora` must reconstruct the delivered PNG exactly, pixel for pixel.
-- Frames must not obscure faces, props or names. Place the crest above the portrait and the uprights outside the sprite area.
-- Export each profile's background separately as `<id>/background.png`.
+- Frames must not obscure faces, props or names. Where historical ornament is present (Rare and higher), place the crest above the portrait and uprights outside the sprite area.
+- Export each profile's base/Common background as `<id>/background.png`, and tier-specific backgrounds as `<id>/background-rarity-<index>.png`. Include layered cards and JSON profiles for all five tiers.
 - Portraits are artistic interpretations. Do not claim they reproduce a historical figure's verified appearance.
 - Take names, descriptions, actions and supply caps from `chain/`; do not invent mint data, Affection values or probabilities in the artwork.
 
 ## Language
+
+- Communicate with the project owner in Vietnamese. All delivered products, documentation and reports remain in English.
 
 - All project-authored interface copy, accessibility labels, option names, descriptions, notifications, prompts, exported profiles, documentation and reports must be in English.
 - Generated copies of this document and text files inside the downloadable ZIP must use the same English content as their sources.

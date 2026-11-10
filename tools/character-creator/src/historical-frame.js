@@ -7,6 +7,9 @@ export const FIGURE_DESIGN = Object.freeze({
 });
 export function drawHistoricalFrame(ctx,figure,accent,rarity=null){
  if(!FIGURE_DESIGN[figure])return;
+ const grade=rarity===null?0:Math.max(0,Math.min(4,rarity));
+ // Early-life tiers deliberately share the restrained civilian presentation.
+ if(grade<2)return;
  const r=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h);},gold='#d6aa52',light='#f1d889',shade='#8b5d35';
  // Architectural picture frame: carved gold uprights and a stepped pediment.
  for(const x of [18,444]){r(x,81,18,405,shade);r(x+3,83,12,400,gold);r(x+3,83,3,400,light);r(x+13,83,2,400,shade);r(x-5,76,28,8,gold);r(x-7,72,32,4,light);r(x-4,484,26,7,shade);r(x-6,491,30,5,gold);}
@@ -29,7 +32,6 @@ export function drawHistoricalFrame(ctx,figure,accent,rarity=null){
  // Onyx, chased gold and faceted gemstones make limited figures read as
  // heirloom objects. Rarity increases ornament, without assigning a tier.
  const gems={alexander:['#793b51','#c15a6d','#f1b7a0'],aristotle:['#594370','#a17bd0','#e3d1fa'],euclid:['#285d6c','#58b9bc','#ccf5e9'],cleomenes:['#285d48','#5caf86','#d1edb1']}[figure];
- const grade=rarity===null?2:Math.max(0,Math.min(4,rarity));
  const gem=(cx,cy,size=8)=>{
   r(cx-size-3,cy-size+2,size*2+6,size*2-4,'#29252a');r(cx-size+2,cy-size-3,size*2-4,size*2+6,'#29252a');
   r(cx-size-1,cy-size+2,size*2+2,size*2-4,gold);r(cx-size+2,cy-size-1,size*2-4,size*2+2,gold);

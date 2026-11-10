@@ -12,6 +12,8 @@ checked = 0
 for character in manifest['characters']:
     for source, merged, size in [(character['layeredCard'], character['card'], (480, 640))] + [
         (view['layered'], view['path'], (64, 96)) for view in character['views']
+    ] + [
+        (variant['layeredCard'], variant['path'], (480, 640)) for variant in character['rarityVariants']
     ]:
         with zipfile.ZipFile(root / source) as archive:
             assert archive.testzip() is None, source
@@ -36,6 +38,7 @@ for character in manifest['characters']:
         assert sprite.getbbox() is not None
     for variant in character['rarityVariants']:
         assert Image.open(root / variant['path']).size == (480, 640)
+        assert Image.open(root / variant['background']).size == (240, 190)
 with zipfile.ZipFile(root / 'collection.zip') as archive:
     assert archive.testzip() is None
     for name in archive.namelist():

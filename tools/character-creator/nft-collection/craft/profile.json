@@ -26,5 +26,6 @@
   "trait": "patient",
   "birthplace": "memphis",
   "story": "Take an apprentice and share the proceeds of a paid commission.",
-  "figure": "none"
+  "figure": "none",
+  "rarity": "0"
 }

@@ -26,5 +26,6 @@
   "trait": "patient",
   "birthplace": "alexandria",
   "story": "A geometer of Alexandria: open a school, or keep to the Museum.",
-  "figure": "euclid"
+  "figure": "euclid",
+  "rarity": "0"
 }

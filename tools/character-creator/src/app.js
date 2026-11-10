@@ -1,6 +1,7 @@
 import {DEFAULT,SKINS,CLOTH,HAIR,ACCENTS,ROLES,OPTIONS,label,roleOf,normalize,randomState,promptFor,FIGURE_PRESETS,figurePreset} from './data.js';
 import {drawCharacter,drawLandscape,usedColors,paletteColors,painter,drawCollectible} from './renderer.js';
 import {NFT_PROFILES} from './nft-collection.js';
+import {historicalStage} from './historical-stages.js';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const DRAFT='nile.character.draft.v1',COLLECTION='nile.character.collection.v1';
@@ -8,6 +9,8 @@ function stored(key,fallback){try{return JSON.parse(localStorage.getItem(key))??
 let state;try{state=normalize(stored(DRAFT,DEFAULT));}catch{state={...DEFAULT};}
 const collectionProfile=NFT_PROFILES.find(item=>item.id===new URLSearchParams(location.search).get('collection'));
 if(collectionProfile)state={...collectionProfile.state};
+const requestedRarity=new URLSearchParams(location.search).get('rarity');
+if(collectionProfile&&OPTIONS.rarity.some(([id])=>id===requestedRarity))state=normalize({...state,rarity:requestedRarity});
 let locks={},tab='body',view='front',mode='color',motion=!matchMedia('(prefers-reduced-motion: reduce)').matches,history=[],frame=0;
 let saved=stored(COLLECTION,[]);if(!Array.isArray(saved))saved=[];
 saved=saved.filter(x=>x && typeof x.id==='string' && x.state && x.state.version===1).slice(0,30);
@@ -26,16 +29,20 @@ function renderPresets(){
   $('#historical-presets').innerHTML=`<span class="field-label">HISTORICAL INSPIRATION</span><div class="historical-preset-grid">${FIGURE_PRESETS.map(p=>`<button class="historical-preset" data-preset="${p.id}" aria-pressed="${JSON.stringify(state)===JSON.stringify(figurePreset(p.id))}"><canvas width="64" height="96" aria-hidden="true" data-preset-preview="${p.id}"></canvas><span><strong>${esc(p.name)}</strong><small>${esc(p.period)}</small></span></button>`).join('')}</div><p class="field-help">Start from a preset, then customize each detail. You can undo your changes.</p>`;
   $$('[data-preset-preview]').forEach(c=>drawCharacter(c,figurePreset(c.dataset.presetPreview)));
 }
+function backgroundControls(){
+ const stage=historicalStage(state.figure,Number(state.rarity));
+ return stage?`<div class="field"><span class="field-label">Life-stage setting</span><p>${esc(stage.title)}</p><p class="field-help">The setting follows the rarity preview. Character features remain unchanged.</p></div>`:chips('backdrop','Card background');
+}
 function renderEditor(){
   renderPresets();
   $('#panel-body').innerHTML=section('body','01','BODY & SKIN',chips('presentation','Presentation')+chips('build','Build')+chips('height','Height')+swatches('skin','Skin tone',SKINS),'Every silhouette has a story of its own.')+section('face','02','FACE & HAIR',chips('face','Face shape')+chips('hair','Hairstyle')+chips('beard','Beard style')+swatches('hairColor','Hair color',HAIR)+chips('eyes','Eyes')+chips('brows','Eyebrows')+chips('nose','Nose')+chips('expression','Expression')+chips('marks','Distinctive marks'));
   $('#panel-outfit').innerHTML=section('story','01','CHARACTER ROLE',roles())+section('outfit','02','CLOTHING & JEWELRY',chips('outfit','Outfit')+swatches('cloth','Cloth color',CLOTH)+chips('jewelry','Jewelry')+swatches('accent','Accent color',ACCENTS)+chips('footwear','Footwear')+chips('finish','Finish'))+section('story','03','WHAT TO CARRY?',chips('prop','Handheld prop','Choose one main prop to keep the silhouette readable.'));
-  $('#panel-story').innerHTML=section('story','01','WHAT IS YOUR NAME?',`<div class="field"><label for="name" class="field-label">Character name</label><input id="name" class="text-input" data-input="name" maxlength="24" value="${esc(state.name)}" autocomplete="off" placeholder="What is your name?"><p class="field-help">A short name, a fresh beginning. Names are a creative choice.</p></div>`+selectField('birthplace','Home region')+chips('backdrop','Card background')+chips('trait','Personality trait'))+section('story','02','A STORY TO TELL',`<label class="field-label" for="story">A dream, a habit, or a little secret?</label><textarea id="story" class="text-area" maxlength="180" data-input="story" placeholder="Write a short story…">${esc(state.story)}</textarea><p class="input-counter"><span id="story-count">${state.story.length}</span> / 180</p><p class="preset-note" id="role-reference">Role reference: ${esc(roleOf(state).nv)} · ${esc(roleOf(state).codes)}.<br>Appearance and personality are your own artistic interpretation.${['commander','geometer'].includes(state.role)?`<br>${esc(FIGURE_PRESETS.find(p=>p.state.role===state.role).note)}`:''}</p>`);
+  $('#panel-story').innerHTML=section('story','01','WHAT IS YOUR NAME?',`<div class="field"><label for="name" class="field-label">Character name</label><input id="name" class="text-input" data-input="name" maxlength="24" value="${esc(state.name)}" autocomplete="off" placeholder="What is your name?"><p class="field-help">A short name, a fresh beginning. Names are a creative choice.</p></div>`+selectField('birthplace','Home region')+backgroundControls()+chips('rarity','NFT rarity preview')+chips('trait','Personality trait'))+section('story','02','A STORY TO TELL',`<label class="field-label" for="story">A dream, a habit, or a little secret?</label><textarea id="story" class="text-area" maxlength="180" data-input="story" placeholder="Write a short story…">${esc(state.story)}</textarea><p class="input-counter"><span id="story-count">${state.story.length}</span> / 180</p><p class="preset-note" id="role-reference">Role reference: ${esc(roleOf(state).nv)} · ${esc(roleOf(state).codes)}.<br>Appearance and personality are your own artistic interpretation.${['commander','geometer'].includes(state.role)?`<br>${esc(FIGURE_PRESETS.find(p=>p.state.role===state.role).note)}`:''}</p>`);
 }
 function renderPreview(){
   $$('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',JSON.stringify(state)===JSON.stringify(figurePreset(b.dataset.preset))));
-  drawCharacter(canvas,state,view,mode,motion?frame:0);drawLandscape($('#landscape'),state.birthplace,state.backdrop);
-  $('.preview-card').dataset.finish=state.finish;$('#scene').dataset.finish=state.finish;$('#scene-location').textContent=state.backdrop==='local'?label('birthplace',state.birthplace).toLocaleUpperCase('en'):label('backdrop',state.backdrop).toLocaleUpperCase('en');
+  drawCharacter(canvas,state,view,mode,motion?frame:0);drawLandscape($('#landscape'),state.birthplace,state.backdrop,Number(state.rarity));
+  $('.preview-card').dataset.finish=state.finish;$('#scene').dataset.finish=state.finish;const stage=historicalStage(state.figure,Number(state.rarity));$('#scene-location').textContent=(stage?`${state.name} · ${stage.title}`:state.backdrop==='local'?label('birthplace',state.birthplace):label('backdrop',state.backdrop)).toLocaleUpperCase('en');
   $('#preview-name').textContent=state.name||'New character';$('#preview-role').textContent=roleOf(state).name;
   $('#character-description').textContent=state.story||roleOf(state).description;
   $('#identity-chips').replaceChildren(...[label('trait',state.trait),label('birthplace',state.birthplace)].map(text=>{const span=document.createElement('span');span.textContent=text;return span;}));

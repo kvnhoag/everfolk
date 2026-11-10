@@ -26,5 +26,6 @@
   "trait": "patient",
   "birthplace": "alexandria",
   "story": "Teach the young and lend books to those who want to learn.",
-  "figure": "none"
+  "figure": "none",
+  "rarity": "0"
 }
