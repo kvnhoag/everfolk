@@ -1,0 +1,2431 @@
+{
+  "schemaVersion": 1,
+  "collection": "Everfolk / Living Legacies",
+  "purpose": "Editable collection artwork; no tokens are minted by this tool.",
+  "sourceCommit": "56f5d69631f9df2e717a22de3d7334f5a0a004ee",
+  "sources": [
+    "chain/ids.ts",
+    "chain/catalog/figures.ts",
+    "chain/catalog/npc-influences.ts",
+    "chain/catalog/figure-influences.ts",
+    "client/chain/chain-copy.ts",
+    "guide/TUTORIAL.md"
+  ],
+  "rarityRules": [
+    {
+      "label": "Common",
+      "powerBps": 10000
+    },
+    {
+      "label": "Uncommon",
+      "powerBps": 12500
+    },
+    {
+      "label": "Rare",
+      "powerBps": 15000
+    },
+    {
+      "label": "Epic",
+      "powerBps": 20000
+    },
+    {
+      "label": "Legendary",
+      "powerBps": 30000
+    }
+  ],
+  "historicalNote": "Fictional, stylized appearances. Euclid and Cleomenes are not authenticated portraits. Visual colors and costumes are art direction, not NFT rarity assignments. Five artwork variants do not allocate the five historical-figure token copies.",
+  "characters": [
+    {
+      "id": "alexander",
+      "kind": "figure",
+      "title": "Alexander, the conqueror",
+      "summary": "Born to royal kin, a commander who reached the rank of general and earned a recorded military distinction while still young.",
+      "supplyCap": 5,
+      "actions": [
+        {
+          "id": "alexander.levy",
+          "name": "Levy the city"
+        },
+        {
+          "id": "alexander.found",
+          "name": "Found and build"
+        }
+      ],
+      "profile": "alexander/profile.json",
+      "card": "alexander/card.png",
+      "sprite": "alexander/front-3x.png",
+      "sheet": "alexander/three-views-3x.png",
+      "layeredCard": "alexander/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "alexander/front.png",
+          "layered": "alexander/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "alexander/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "alexander/layers/front/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "alexander/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "alexander/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "alexander/layers/front/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "alexander/layers/front/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "alexander/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "alexander/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "alexander/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "alexander/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "alexander/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "alexander/side.png",
+          "layered": "alexander/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "alexander/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "alexander/layers/side/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "alexander/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "alexander/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "alexander/layers/side/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "alexander/layers/side/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "alexander/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "alexander/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "alexander/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "alexander/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "alexander/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "alexander/back.png",
+          "layered": "alexander/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "alexander/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "alexander/layers/back/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "alexander/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "alexander/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "alexander/layers/back/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "alexander/layers/back/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "alexander/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "alexander/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "alexander/layers/back/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "alexander/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "alexander/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "alexander/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "alexander/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "alexander/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "alexander/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "royal-laurel",
+      "background": "alexander/background.png",
+      "face": {
+        "shape": "diamond",
+        "eyes": "almond",
+        "brows": "thick",
+        "nose": "aquiline",
+        "expression": "determined"
+      },
+      "sha256": "c71b7cee3f0f29a73df102a106cc6ea887c6af3ddc067bb494fb14ee70baa879"
+    },
+    {
+      "id": "aristotle",
+      "kind": "figure",
+      "title": "Aristotle, the philosopher",
+      "summary": "A widely read teacher of argument who tutored students or advised the court and left a remembered philosophical work.",
+      "supplyCap": 5,
+      "actions": [
+        {
+          "id": "aristotle.lyceum",
+          "name": "Found the Lyceum"
+        },
+        {
+          "id": "aristotle.tutor-court",
+          "name": "Tutor the court"
+        }
+      ],
+      "profile": "aristotle/profile.json",
+      "card": "aristotle/card.png",
+      "sprite": "aristotle/front-3x.png",
+      "sheet": "aristotle/three-views-3x.png",
+      "layeredCard": "aristotle/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "aristotle/front.png",
+          "layered": "aristotle/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "aristotle/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "aristotle/layers/front/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "aristotle/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "aristotle/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "aristotle/layers/front/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "aristotle/layers/front/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "aristotle/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "aristotle/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "aristotle/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "aristotle/layers/front/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "aristotle/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "aristotle/side.png",
+          "layered": "aristotle/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "aristotle/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "aristotle/layers/side/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "aristotle/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "aristotle/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "aristotle/layers/side/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "aristotle/layers/side/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "aristotle/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "aristotle/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "aristotle/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "aristotle/layers/side/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "aristotle/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "aristotle/back.png",
+          "layered": "aristotle/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "aristotle/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "aristotle/layers/back/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "aristotle/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "aristotle/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "aristotle/layers/back/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "aristotle/layers/back/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "aristotle/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "aristotle/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "aristotle/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "aristotle/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "aristotle/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "aristotle/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "aristotle/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "aristotle/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "lyceum-scroll",
+      "background": "aristotle/background.png",
+      "face": {
+        "shape": "long",
+        "eyes": "deep",
+        "brows": "arched",
+        "nose": "long",
+        "expression": "thoughtful"
+      },
+      "sha256": "2f2ab001d3f84511155ef588623eec084230cf5db54ef1e262c3e43f827899b3"
+    },
+    {
+      "id": "euclid",
+      "kind": "figure",
+      "title": "Euclid, the geometer",
+      "summary": "A careful reckoner and reader who worked among tables and demonstrations and left a credited piece of scholarship.",
+      "supplyCap": 5,
+      "actions": [
+        {
+          "id": "euclid.school",
+          "name": "Open a school"
+        },
+        {
+          "id": "euclid.museum",
+          "name": "Keep to the Museum"
+        }
+      ],
+      "profile": "euclid/profile.json",
+      "card": "euclid/card.png",
+      "sprite": "euclid/front-3x.png",
+      "sheet": "euclid/three-views-3x.png",
+      "layeredCard": "euclid/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "euclid/front.png",
+          "layered": "euclid/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "euclid/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "euclid/layers/front/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "euclid/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "euclid/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "euclid/layers/front/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "euclid/layers/front/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "euclid/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "euclid/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "euclid/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "euclid/layers/front/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "euclid/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "euclid/side.png",
+          "layered": "euclid/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "euclid/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "euclid/layers/side/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "euclid/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "euclid/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "euclid/layers/side/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "euclid/layers/side/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "euclid/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "euclid/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "euclid/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "euclid/layers/side/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "euclid/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "euclid/back.png",
+          "layered": "euclid/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "euclid/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "euclid/layers/back/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "euclid/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "euclid/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "euclid/layers/back/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "euclid/layers/back/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "euclid/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "euclid/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "euclid/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "euclid/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "euclid/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "euclid/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "euclid/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "euclid/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "museum-geometry",
+      "background": "euclid/background.png",
+      "face": {
+        "shape": "oval",
+        "eyes": "narrow",
+        "brows": "soft",
+        "nose": "straight",
+        "expression": "calm"
+      },
+      "sha256": "5af1e824eadc0a08dcf8ede69352a0c295f04e80ae1f85ebc99aa99e53f2edab"
+    },
+    {
+      "id": "cleomenes",
+      "kind": "figure",
+      "title": "Cleomenes of Naucratis, the grain administrator",
+      "summary": "A trader or court official with a head for accounts who grew rich and closed recorded commercial agreements.",
+      "supplyCap": 5,
+      "actions": [
+        {
+          "id": "cleomenes.corner-grain",
+          "name": "Corner the grain"
+        },
+        {
+          "id": "cleomenes.granaries",
+          "name": "Fill the granaries"
+        }
+      ],
+      "profile": "cleomenes/profile.json",
+      "card": "cleomenes/card.png",
+      "sprite": "cleomenes/front-3x.png",
+      "sheet": "cleomenes/three-views-3x.png",
+      "layeredCard": "cleomenes/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "cleomenes/front.png",
+          "layered": "cleomenes/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "cleomenes/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "cleomenes/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "cleomenes/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "cleomenes/layers/front/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "cleomenes/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "cleomenes/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "cleomenes/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "cleomenes/layers/front/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "cleomenes/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "cleomenes/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "cleomenes/side.png",
+          "layered": "cleomenes/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "cleomenes/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "cleomenes/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "cleomenes/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "cleomenes/layers/side/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "cleomenes/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "cleomenes/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "cleomenes/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "cleomenes/layers/side/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "cleomenes/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "cleomenes/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "cleomenes/back.png",
+          "layered": "cleomenes/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "cleomenes/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "cleomenes/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "cleomenes/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "06-garment-trim",
+              "path": "cleomenes/layers/back/06-garment-trim.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "cleomenes/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "cleomenes/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "cleomenes/layers/back/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "cleomenes/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "cleomenes/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "cleomenes/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "cleomenes/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "cleomenes/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "cleomenes/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "granary-wheat",
+      "background": "cleomenes/background.png",
+      "face": {
+        "shape": "heart",
+        "eyes": "deep",
+        "brows": "thick",
+        "nose": "broad",
+        "expression": "stern"
+      },
+      "sha256": "4385b5a9117d8a4473fff60decc5115c60f1849dde859a9ba8683293c6e1684e"
+    },
+    {
+      "id": "letters",
+      "kind": "npc",
+      "title": "Scholar of Alexandria",
+      "summary": "A teacher took you in hand for a season and drilled your letters. A reader lent you a book roll and talked it over with you.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "letters.teach",
+          "name": "Teach the young"
+        },
+        {
+          "id": "letters.lend-books",
+          "name": "Lend books"
+        }
+      ],
+      "profile": "letters/profile.json",
+      "card": "letters/card.png",
+      "sprite": "letters/front-3x.png",
+      "sheet": "letters/three-views-3x.png",
+      "layeredCard": "letters/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "letters/front.png",
+          "layered": "letters/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "letters/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "letters/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "letters/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "letters/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "letters/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "letters/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "letters/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "letters/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "letters/side.png",
+          "layered": "letters/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "letters/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "letters/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "letters/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "letters/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "letters/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "letters/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "letters/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "letters/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "letters/back.png",
+          "layered": "letters/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "letters/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "letters/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "letters/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "letters/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "letters/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "letters/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "letters/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "letters/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "letters/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "letters/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "letters/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "letters/background.png",
+      "face": {
+        "shape": "oval",
+        "eyes": "round",
+        "brows": "arched",
+        "nose": "small",
+        "expression": "curious"
+      },
+      "sha256": "65e2c2dca9ccca44c95ff77edff452329133a57de5a11a8f53389bed3028b3f2"
+    },
+    {
+      "id": "military",
+      "kind": "npc",
+      "title": "Soldier of Alexandria",
+      "summary": "A veteran took you under his wing and taught you to keep your footing. A soldier warned you that the recruiters were coming, so you put food and silver aside.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "military.mentor",
+          "name": "Mentor a recruit"
+        },
+        {
+          "id": "military.warn-levy",
+          "name": "Warn of the levy"
+        }
+      ],
+      "profile": "military/profile.json",
+      "card": "military/card.png",
+      "sprite": "military/front-3x.png",
+      "sheet": "military/three-views-3x.png",
+      "layeredCard": "military/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "military/front.png",
+          "layered": "military/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "military/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "military/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "military/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "military/layers/front/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "military/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "military/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "military/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "military/layers/front/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "military/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "military/side.png",
+          "layered": "military/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "military/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "military/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "military/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "military/layers/side/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "military/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "military/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "military/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "military/layers/side/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "military/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "military/back.png",
+          "layered": "military/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "military/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "military/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "military/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "military/layers/back/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "military/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "military/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "military/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "military/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "military/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "military/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "military/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "military/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "military/background.png",
+      "face": {
+        "shape": "square",
+        "eyes": "narrow",
+        "brows": "thick",
+        "nose": "aquiline",
+        "expression": "stern"
+      },
+      "sha256": "10123c703118d0e2faf87251e83350244c1f063809644102ea59b1859db96905"
+    },
+    {
+      "id": "commerce",
+      "kind": "npc",
+      "title": "Trader of Alexandria",
+      "summary": "A merchant extended you credit on easy terms when you needed it. A trader hired you for a season of paid work at the quays.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "commerce.credit",
+          "name": "Extend credit"
+        },
+        {
+          "id": "commerce.hire",
+          "name": "Hire a hand"
+        }
+      ],
+      "profile": "commerce/profile.json",
+      "card": "commerce/card.png",
+      "sprite": "commerce/front-3x.png",
+      "sheet": "commerce/three-views-3x.png",
+      "layeredCard": "commerce/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "commerce/front.png",
+          "layered": "commerce/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "commerce/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "commerce/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "commerce/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "commerce/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "commerce/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "commerce/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "commerce/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "commerce/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "commerce/side.png",
+          "layered": "commerce/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "commerce/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "commerce/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "commerce/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "commerce/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "commerce/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "commerce/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "commerce/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "commerce/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "commerce/back.png",
+          "layered": "commerce/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "commerce/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "commerce/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "commerce/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "commerce/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "commerce/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "commerce/layers/back/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "commerce/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "commerce/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "commerce/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "commerce/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "commerce/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "commerce/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "commerce/background.png",
+      "face": {
+        "shape": "heart",
+        "eyes": "wide",
+        "brows": "arched",
+        "nose": "broad",
+        "expression": "smile"
+      },
+      "sha256": "9922995dce8408c4b841ef9032d005d19b597fbb52837972221e99116d2411c3"
+    },
+    {
+      "id": "craft",
+      "kind": "npc",
+      "title": "Craftworker of Alexandria",
+      "summary": "A workshop master took you on and taught you the trade's first skills. A craftsman shared part of a paid commission with you.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "craft.apprentice",
+          "name": "Take an apprentice"
+        },
+        {
+          "id": "craft.commission",
+          "name": "Share a commission"
+        }
+      ],
+      "profile": "craft/profile.json",
+      "card": "craft/card.png",
+      "sprite": "craft/front-3x.png",
+      "sheet": "craft/three-views-3x.png",
+      "layeredCard": "craft/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "craft/front.png",
+          "layered": "craft/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "craft/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "craft/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "craft/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "craft/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "craft/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "craft/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "craft/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "craft/side.png",
+          "layered": "craft/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "craft/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "craft/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "craft/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "craft/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "craft/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "craft/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "craft/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "craft/back.png",
+          "layered": "craft/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "craft/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "craft/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "craft/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "craft/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "craft/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "craft/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "craft/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "craft/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "craft/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "craft/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "craft/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "craft/background.png",
+      "face": {
+        "shape": "round",
+        "eyes": "wide",
+        "brows": "straight",
+        "nose": "broad",
+        "expression": "smile"
+      },
+      "sha256": "b666dd09d336892ee0c3e6491f151d0fcd783d977fcc494bf440a8cee7351e0c"
+    },
+    {
+      "id": "sky",
+      "kind": "npc",
+      "title": "Stargazer of Alexandria",
+      "summary": "An interpreter of the sky read a favourable omen for you. A sky-watcher warned of a hard year, and your household stored food against it.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "sky.omen",
+          "name": "Cast a favourable omen"
+        },
+        {
+          "id": "sky.warn-year",
+          "name": "Warn of a bad year"
+        }
+      ],
+      "profile": "sky/profile.json",
+      "card": "sky/card.png",
+      "sprite": "sky/front-3x.png",
+      "sheet": "sky/three-views-3x.png",
+      "layeredCard": "sky/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "sky/front.png",
+          "layered": "sky/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "sky/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "sky/layers/front/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "sky/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "sky/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "sky/layers/front/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "sky/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "sky/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "sky/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "sky/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "sky/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "sky/side.png",
+          "layered": "sky/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "sky/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "sky/layers/side/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "sky/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "sky/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "sky/layers/side/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "sky/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "sky/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "sky/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "sky/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "sky/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "sky/back.png",
+          "layered": "sky/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "sky/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "02-rear-cloak",
+              "path": "sky/layers/back/02-rear-cloak.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "sky/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "sky/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "05-outer-garment-and-footwear",
+              "path": "sky/layers/back/05-outer-garment-and-footwear.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "sky/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "sky/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "sky/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "sky/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "sky/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "sky/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "sky/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "sky/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "sky/background.png",
+      "face": {
+        "shape": "diamond",
+        "eyes": "relaxed",
+        "brows": "arched",
+        "nose": "long",
+        "expression": "thoughtful"
+      },
+      "sha256": "3a2459f40805ea123dad8d14bdc6cb465432e9e2ee006713b47e7b201a41ecef"
+    },
+    {
+      "id": "performance",
+      "kind": "npc",
+      "title": "Performer of Alexandria",
+      "summary": "A musician's playing lifted your spirits through a hard week. A troupe of performers lent your household a hand when it was struggling.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "performance.lift",
+          "name": "Lift the spirits"
+        },
+        {
+          "id": "performance.lend-hand",
+          "name": "Lend a hand"
+        }
+      ],
+      "profile": "performance/profile.json",
+      "card": "performance/card.png",
+      "sprite": "performance/front-3x.png",
+      "sheet": "performance/three-views-3x.png",
+      "layeredCard": "performance/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "performance/front.png",
+          "layered": "performance/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "performance/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "performance/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "performance/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "performance/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "performance/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "performance/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "performance/layers/front/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "performance/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "performance/side.png",
+          "layered": "performance/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "performance/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "performance/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "performance/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "performance/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "performance/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "performance/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "11-jewelry",
+              "path": "performance/layers/side/11-jewelry.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "performance/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "performance/back.png",
+          "layered": "performance/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "performance/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "performance/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "performance/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "performance/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "performance/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "performance/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "performance/rarity-0.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Uncommon",
+          "path": "performance/rarity-1.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Rare",
+          "path": "performance/rarity-2.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Epic",
+          "path": "performance/rarity-3.png",
+          "artPreviewOnly": true
+        },
+        {
+          "label": "Legendary",
+          "path": "performance/rarity-4.png",
+          "artPreviewOnly": true
+        }
+      ],
+      "frameStyle": "citizen",
+      "background": "performance/background.png",
+      "face": {
+        "shape": "long",
+        "eyes": "round",
+        "brows": "soft",
+        "nose": "small",
+        "expression": "smile"
+      },
+      "sha256": "2799c7c726d7fa083d8b9b6c5c18c71247bb2fa1767cffaa31968dd14dc162d6"
+    }
+  ]
+}

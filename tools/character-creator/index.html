@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#efe6cc">
+  <meta name="description" content="Một góc nhỏ để tạo người bạn pixel của bạn bên dòng Nile. Chọn diện mạo, đồ mặc và câu chuyện, xem nhân vật thay đổi ngay.">
+  <title>Bên dòng Nile · Tạo người bạn nhỏ</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="top-thread"></div>
+  <header class="site-header">
+    <a href="./" class="brand" aria-label="Bên dòng Nile, trang chủ"><span class="brand-tile" aria-hidden="true">𓆸</span><span>Bên dòng Nile<small>NHỮNG CÂU CHUYỆN NHỎ</small></span></a>
+    <span class="header-world"><span class="little-sun" aria-hidden="true"></span> Ai Cập & Địa Trung Hải · 350–246 TCN</span>
+    <a class="button quiet" href="./collection.html">Living Legacies ↗</a><button class="button quiet" id="open-library"><span aria-hidden="true">▤</span> Bộ sưu tập <span class="count" id="saved-count">0</span></button>
+  </header>
+  <main class="page-wrap">
+    <div class="intro"><div><p class="eyebrow">MỘT HÀNH TRÌNH, MỘT NGƯỜI BẠN</p><h1>Câu chuyện bắt đầu từ bạn<span>.</span></h1><p>Chút tóc rối, một chiếc áo lanh. Và cả một thế giới đang chờ.</p></div><span class="intro-stamp" aria-hidden="true">✦<small>TỰ TAY<br>TẠO NÊN</small>✦</span></div>
+    <div class="creator-layout">
+      <section class="editor-shell" aria-label="Tùy chỉnh nhân vật">
+        <div class="editor-top"><div class="editor-label"><span class="small-diamond" aria-hidden="true"></span> XƯỞNG NHÂN VẬT</div><div class="history-buttons"><button id="undo" class="icon-button" title="Hoàn tác" aria-label="Hoàn tác" disabled>↶</button><button id="reset" class="icon-button" title="Về mẫu ban đầu" aria-label="Về mẫu ban đầu">↺</button></div></div>
+        <div id="historical-presets" class="historical-presets" aria-label="Mẫu nhân vật lịch sử"></div>
+        <div class="tabs" role="tablist" aria-label="Các bước tạo nhân vật">
+          <button id="tab-body" class="tab active" role="tab" aria-selected="true" aria-controls="panel-body" data-tab="body"><span>01</span> Diện mạo</button>
+          <button id="tab-outfit" class="tab" role="tab" aria-selected="false" aria-controls="panel-outfit" tabindex="-1" data-tab="outfit"><span>02</span> Đồ mặc</button>
+          <button id="tab-story" class="tab" role="tab" aria-selected="false" aria-controls="panel-story" tabindex="-1" data-tab="story"><span>03</span> Nét riêng</button>
+        </div>
+        <div class="editor-scroll" id="editor-scroll">
+          <div id="panel-body" class="tab-panel" role="tabpanel" aria-labelledby="tab-body"></div>
+          <div id="panel-outfit" class="tab-panel" role="tabpanel" aria-labelledby="tab-outfit" hidden></div>
+          <div id="panel-story" class="tab-panel" role="tabpanel" aria-labelledby="tab-story" hidden></div>
+        </div>
+        <div class="editor-bottom"><span id="step-caption">BƯỚC 1 / 3 <span>· Ngoại hình của bạn</span></span><button id="next-step" class="button next">Chọn đồ mặc <span aria-hidden="true">→</span></button></div>
+      </section>
+      <aside class="preview-column" aria-label="Nhân vật đang tạo">
+        <section class="preview-card">
+          <div class="preview-heading"><span><i class="live-dot"></i> NGƯỜI BẠN CỦA BẠN</span><button class="icon-button" id="toggle-motion" aria-label="Tạm dừng chuyển động" title="Tạm dừng chuyển động">Ⅱ</button></div>
+          <div class="scene" id="scene">
+            <canvas id="landscape" width="240" height="190" aria-hidden="true"></canvas>
+            <span class="scene-location" id="scene-location">BẾN SÔNG NILE</span>
+            <canvas id="character" width="64" height="96" role="img" aria-label="Nhân vật pixel art đang tạo"></canvas>
+            <div class="scene-corner" aria-hidden="true">✧</div>
+          </div>
+          <div class="view-controls" role="group" aria-label="Góc nhìn nhân vật"><button data-view="front" class="view active" aria-pressed="true">Trước</button><button data-view="side" class="view" aria-pressed="false">Nghiêng</button><button data-view="back" class="view" aria-pressed="false">Sau</button><span class="control-divider"></span><button id="silhouette" class="icon-button" aria-label="Xem hình bóng" aria-pressed="false" title="Xem hình bóng">◐</button><button id="gray" class="icon-button" aria-label="Xem thang xám" aria-pressed="false" title="Xem thang xám">▧</button></div>
+          <div class="character-card"><div class="character-title"><h2 id="preview-name">Neri</h2><span id="preview-role">Người làm vườn</span></div><p id="character-description"></p><div class="identity-chips" id="identity-chips"></div></div>
+          <div class="palette-row"><span>BẢNG MÀU NHỎ</span><div id="palette" aria-label="Các màu trong nhân vật"></div><button id="download-palette" class="icon-button" aria-label="Tải bảng màu PNG" title="Tải bảng màu">↓</button></div>
+        </section>
+        <div class="preview-actions"><button id="randomize" class="button shuffle"><span aria-hidden="true">⚄</span> Thử một chút bất ngờ</button><button id="save" class="button primary"><span aria-hidden="true">＋</span> Lưu người bạn</button></div>
+        <button id="export-card" class="button collectible-export">◇ Tải thẻ nhân vật <span aria-hidden="true">↗</span></button>
+        <div class="secondary-actions"><button id="export-png">Tải ảnh PNG <span aria-hidden="true">↗</span></button><span>·</span><button id="export-json">Tải hồ sơ</button><span>·</span><button id="copy-prompt">Lấy prompt vẽ</button></div>
+        <p class="local-note"><span aria-hidden="true">♧</span> Lưu trong trình duyệt này. Người bạn nhỏ luôn ở đây.</p>
+        <details class="small-print"><summary>Một chút về thế giới này</summary><p>Nhân vật lấy cảm hứng từ Ai Cập và Địa Trung Hải cuối thế kỷ IV–III TCN. Tỷ lệ dễ thương, màu và các nét cá nhân là cách điệu cho game, không phải chân dung lịch sử.</p><p>Hình bóng, chất liệu và nghề được tham khảo từ thư viện. Bạn có thể kiểm tra hình đen hoặc thang xám bằng hai nút phía trên.</p><button id="export-sheet">Tải bộ 3 góc nhìn</button></details>
+      </aside>
+    </div>
+    <footer class="page-footer"><span>𓇬 Một thế giới cũ. Những người bạn mới.</span><span>VẼ BẰNG PIXEL · KỂ BẰNG BẠN</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="library-dialog"><div class="modal-heading"><div><p class="eyebrow">NHỮNG NGƯỜI BẠN ĐÃ LƯU</p><h2>Bộ sưu tập của bạn</h2></div><button class="icon-button" data-close aria-label="Đóng bộ sưu tập">×</button></div><div id="saved-list"></div><div class="modal-footer"><button class="button" id="import-json">Nhập hồ sơ JSON</button><span>Chỉ lưu trên thiết bị này</span></div></dialog>
+  <dialog id="prompt-dialog"><div class="modal-heading"><div><p class="eyebrow">MANG Ý TƯỞNG ĐI XA HƠN</p><h2>Prompt của người bạn</h2></div><button class="icon-button" data-close aria-label="Đóng prompt">×</button></div><textarea id="prompt-text" readonly aria-label="Prompt vẽ nhân vật"></textarea><div class="modal-footer"><button class="button primary" id="copy-prompt-text">Sao chép prompt</button><span>Đưa kèm ảnh PNG để giữ diện mạo</span></div></dialog>
+  <dialog id="reset-dialog"><div class="modal-heading"><h2>Bắt đầu lại một chút?</h2></div><p>Các lựa chọn đang tạo sẽ trở về mẫu ban đầu. Người bạn đã lưu vẫn còn trong bộ sưu tập.</p><div class="modal-footer"><button class="button" data-close>Giữ lại</button><button class="button primary" id="confirm-reset">Về mẫu ban đầu</button></div></dialog>
+  <input id="json-input" type="file" accept="application/json,.json" hidden>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
