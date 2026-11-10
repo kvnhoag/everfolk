@@ -56,6 +56,27 @@ export async function createFaucetAccount(accountId: string): Promise<void> {
 export function createCliContract(contractId: string, accountId: string): LivesContract {
   const unsupported = (name: string) => () => Promise.reject(new Error(`${name} is not available in the CLI contract.`));
   return {
+    mintTerms: () => viewMethod(contractId, "mint_terms", {}),
+    mintPack: lifeId => viewMethod(contractId, "get_mint_pack", { life_id: lifeId }),
+    async openMintPack(lifeId, signed, action) {
+      const terms = await viewMethod<{ mint_fee: string }>(contractId, "mint_terms", {});
+      await callMethod(accountId, contractId, "open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: action }, `${terms.mint_fee} yoctoNEAR`);
+      return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
+    },
+    async rerollMintSlot(lifeId, slot, fee) {
+      await callMethod(accountId, contractId, "reroll_mint_slot", { life_id: lifeId, slot }, `${fee} yoctoNEAR`);
+      return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
+    },
+    async chooseMintSlot(lifeId, slot) {
+      await callMethod(accountId, contractId, "choose_mint_slot", { life_id: lifeId, slot }, "1 yoctoNEAR");
+      const tokens = await viewMethod<{ token_id: string; metadata: { extra: string } }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });
+      const token = tokens.find(t => JSON.parse(t.metadata.extra).life_id === lifeId);
+      if (!token) throw new Error("The selected card's token could not be found.");
+      const extra = JSON.parse(token.metadata.extra) as Omit<MintResult, "token_id">;
+      return { token_id: token.token_id, kind: extra.kind, figure_id: extra.figure_id, rarity: extra.rarity, affection: extra.affection };
+    },
+    figureCopies: figureId => viewMethod(contractId, "figure_copies", { figure_id: figureId }),
+    figureSupply: figureId => viewMethod(contractId, "figure_supply", { figure_id: figureId }),
     async startLife(worldVersion) {
       try {
         await callMethod(accountId, contractId, "start_life", { world_version: worldVersion }, "0 NEAR", "50.0 Tgas");

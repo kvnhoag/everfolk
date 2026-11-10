@@ -42,6 +42,7 @@ export interface RankedSession {
   sync(next: LifeState): Promise<LifeState>;
   finish(fetcher?: typeof fetch): Promise<SignedEvidence>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  chooseMint(slot: number): Promise<MintResult>;
   abandon(): Promise<void>;
 }
 
@@ -229,6 +230,19 @@ class Session implements RankedSession {
     if (!token) return null;
     const { kind, figure_id, rarity, affection } = token.extra;
     return { token_id: token.token_id, kind, figure_id, rarity, affection };
+  }
+
+  async chooseMint(slot: number): Promise<MintResult> {
+    let result: MintResult;
+    try { result = await this.options.contract.chooseMintSlot(this.life.life_id, slot); }
+    catch (error) {
+      const landed = await this.findMinted().catch(() => null);
+      if (!landed) throw error;
+      result = landed;
+    }
+    this.storage.removeItem(rankedSaveKey(this.life.life_id));
+    this.life = { ...this.life, status: "minted" };
+    return result;
   }
 
   async abandon(): Promise<void> {

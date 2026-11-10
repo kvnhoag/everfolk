@@ -1,3 +1,4 @@
+import LifeChoices from "./LifeChoices.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
@@ -75,6 +76,7 @@ export function TokenPageBody({ tokenId, view, busy = false, error, notice, canC
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
+    {view.evidenceHref && <LifeChoices evidenceHref={view.evidenceHref} />}
     <section className="chain-card" aria-label="Lives touched">
       <h2>Lives touched</h2>
       <p className="token-reach">{view.reach}</p>

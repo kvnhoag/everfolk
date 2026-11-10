@@ -1,9 +1,11 @@
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
-import { marketRows, type MarketRow } from "./token-page-model.ts";
+import { filterMarket, marketRows, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
+import PixelIcon from "../PixelIcon.tsx";
 import type { TokenView } from "./types.ts";
 import "./token-market.css";
+import "./ledger.css";
 
 export interface MarketBodyProps {
   rows: readonly MarketRow[];
@@ -15,32 +17,53 @@ export interface MarketBodyProps {
   onBuy(row: MarketRow): void;
 }
 
-/** Kept lives offered for sale by other players. */
+const EMPTY_TEXT: Record<MarketTab, string> = {
+  all: "Nothing is for sale right now.",
+  figures: "No famous figures are for sale right now.",
+  people: "No people of the city are for sale right now.",
+};
+
+/** Kept lives offered for sale, as a ledger in the life-record format. */
 export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy }: MarketBodyProps) {
   const headingId = useId();
-  return <div className="market">
-    <section className="chain-card" aria-labelledby={headingId}>
-      <p className="chain-kicker">Lives kept by other players</p>
+  const [tab, setTab] = useState<MarketTab>("all");
+  const shown = filterMarket(rows, tab);
+  return <section className="ledger-panel market" aria-labelledby={headingId}>
+    <header className="ledger-heading">
+      <p className="ledger-kicker"><span className="cr-index">{String(rows.length).padStart(2, "0")}</span>Lives kept by other players</p>
       <h1 id={headingId} tabIndex={-1}>Market</h1>
       <p>Buy a kept life and choose what it does in the lives it meets. Every sale pays a share to the people who shaped it.</p>
+    </header>
+    {(canConnect || error || notice) && <div className="ledger-body">
       {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>Connect a NEAR wallet to buy</button></div>}
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice.text} {notice.href && <a href={notice.href}>See its page</a>}</p>}
-    </section>
-    {rows.length === 0
-      ? <p className="chain-empty">Nothing is for sale right now.</p>
-      : <ul className="market-grid">{rows.map(row => <li key={row.tokenId} className={`chain-card market-item${row.isFigure ? " is-figure" : ""}`}>
-          <p className="chain-kicker">No. {row.tokenId}</p>
-          <h2><a href={row.href}>{row.title}</a></h2>
-          <FigureArtwork figureId={row.figureId} />
-          <div className="token-tags">{row.rarityLabel && <span className={`chain-tag${row.isFigure ? " is-figure" : ""}`}>{row.rarityLabel}</span>}{row.actionName && <span className="chain-tag">{row.actionName}</span>}</div>
-          <p className="chain-fine">Offered by {row.seller}</p>
-          <div className="market-buy">
-            <strong>{row.priceText}</strong>
+    </div>}
+    <ul className="market-tabs" role="tablist" aria-label="Show">{marketTabs(rows).map(item => <li key={item.id}>
+      <button className="market-tab" type="button" role="tab" aria-selected={tab === item.id} onClick={() => setTab(item.id)}>{item.label}<small>{item.count}</small></button>
+    </li>)}</ul>
+    {shown.length === 0
+      ? <p className="market-empty">{EMPTY_TEXT[tab]}</p>
+      : <ol className="ledger-rows market-ledger ledger-body">{shown.map(row => <li key={row.tokenId} className={`ledger-row market-row${row.isFigure ? " is-figure" : ""}`}>
+          <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
+          <div className="ledger-value">
+            <span className="market-thumb">{row.figureId
+              ? <FigureArtwork figureId={row.figureId} />
+              : <span className="ledger-emblem" aria-hidden="true"><PixelIcon name={row.emblem ?? "sun"} size={26} /></span>}</span>
+            <h2><a href={row.href}>{row.title}</a></h2>
+            <ul className="ledger-chips">
+              {row.rarityLabel && <li className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>{row.rarityLabel}</li>}
+              {row.actionName && <li className="ledger-chip">{row.actionName}</li>}
+              {row.affection !== undefined && <li className="ledger-chip is-faience">Affection {row.affection}</li>}
+            </ul>
+            <span className="ledger-detail">Offered by {row.seller}</span>
+          </div>
+          <div className="market-price">
+            <span>{row.priceText}</span>
             {row.canBuy && <button className="chain-primary" type="button" disabled={busy} onClick={() => onBuy(row)}>Buy<span aria-hidden="true">→</span></button>}
           </div>
-        </li>)}</ul>}
-  </div>;
+        </li>)}</ol>}
+  </section>;
 }
 
 async function loadRows(backend: ChainBackend): Promise<MarketRow[]> {

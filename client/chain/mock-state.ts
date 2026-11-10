@@ -1,6 +1,6 @@
 import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import type { CareerGroup, Category, FigureId } from "../../chain/ids.ts";
-import type { LifeView, Listing, SourceShare, TokenExtra } from "../../chain/types.ts";
+import type { LifeView, Listing, MintPack, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
 
 /** In-memory ledger behind `createMockContract`. Mirrors the contract's storage, not its gas or storage costs. */
 
@@ -57,6 +57,7 @@ export interface MockParams {
 }
 
 export interface MockState {
+  packs: Map<string, { view: MintPack; evidence: Evidence; signed: import("./types.ts").SignedEvidence; action: string }>;
   params: MockParams;
   counters: { nextLifeId: number; nextTokenId: number };
   lives: Map<string, LifeView>;
@@ -88,7 +89,7 @@ export function createState(options: MockOptions): MockState {
     params: {
       now: options.now ?? Date.now,
       abandonCooldownMs: options.abandonCooldownMs ?? 600_000,
-      mintFee: BigInt(options.mintFeeYocto ?? (10n ** 24n).toString()),
+      mintFee: BigInt(options.mintFeeYocto ?? (10n ** 21n).toString()),
       dropRateBps: options.dropRateBps ?? 500,
       nobodyWeightBps: options.nobodyWeightBps ?? 5000,
       figureSupplyCap: options.figureSupplyCap ?? 25,
@@ -99,7 +100,7 @@ export function createState(options: MockOptions): MockState {
       royaltyTreasuryBps: 500,
     },
     counters: { nextLifeId: 1, nextTokenId: 1 },
-    lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(),
+    packs: new Map(), lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(),
     npcPools: new Map(), figureCopies: new Map(), balances: new Map(), sources: new Map(),
     children: new Map(), stats: new Map(), listings: new Map(),
   };

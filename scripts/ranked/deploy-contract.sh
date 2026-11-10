@@ -37,7 +37,7 @@ near_cli contract deploy "$CONTRACT_ID" use-file "$WASM" with-init-call new \
 CATALOG="$(node "$ROOT/scripts/ranked/contract-catalog.ts")"
 call "$OWNER_ID" "$CONTRACT_ID" set_catalog "{\"catalog\":$CATALOG}"
 call "$OWNER_ID" "$CONTRACT_ID" set_world_versions "{\"versions\":[\"$WORLD_VERSION\"]}"
-PARAMS="{\"mint_fee\":\"1000000000000000000000000\",\"drop_rate_bps\":$DROP_RATE_BPS,\"source_mint_share_bps\":5000,\"royalty_sources_bps\":500,\"royalty_treasury_bps\":500,\"nobody_weight_bps\":5000,\"abandon_cooldown_ms\":600000,\"evidence_base_url\":\"$EVIDENCE_BASE_URL\"}"
+PARAMS="{\"mint_fee\":\"1000000000000000000000\",\"drop_rate_bps\":$DROP_RATE_BPS,\"source_mint_share_bps\":5000,\"royalty_sources_bps\":500,\"royalty_treasury_bps\":500,\"nobody_weight_bps\":5000,\"abandon_cooldown_ms\":600000,\"evidence_base_url\":\"$EVIDENCE_BASE_URL\"}"
 call "$OWNER_ID" "$CONTRACT_ID" set_params "{\"params\":$PARAMS}"
 
 echo "✓ deployed: https://testnet.nearblocks.io/address/$CONTRACT_ID"

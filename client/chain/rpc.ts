@@ -46,3 +46,16 @@ export async function viewFunction(
   if (typeof result.error === "string") throw new Error(contractErrorMessage(result.error));
   return parseReturnText(decodeResultBytes(result.result));
 }
+
+/** Spendable yoctoNEAR of an account (`view_account`), or null when the account does not exist or the RPC fails. */
+export async function accountBalance(fetchFn: FetchLike, rpcUrl: string, accountId: string): Promise<string | null> {
+  const body = { jsonrpc: "2.0", id: "everfolk", method: "query", params: { request_type: "view_account", finality: "final", account_id: accountId } };
+  try {
+    const response = await fetchFn(rpcUrl, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    const payload: unknown = await response.json();
+    const result = isRecord(payload) && isRecord(payload.result) ? payload.result : null;
+    return result && typeof result.amount === "string" && /^\d+$/.test(result.amount) ? result.amount : null;
+  } catch {
+    return null;
+  }
+}

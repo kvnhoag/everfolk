@@ -25,3 +25,7 @@ next-env.d.ts
 
 # NEAR contract build output
 contract/target/
+
+# Local character workshops and research are kept outside published snapshots.
+/artwork/history-live/
+/tools/character-creator/

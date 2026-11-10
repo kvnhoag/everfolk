@@ -7,6 +7,8 @@ import "./main-menu.css";
 import "./storybook-menu.css";
 
 export interface MainMenuProps {
+  /** A ranked life is in progress: it can only be continued, never replaced from here. */
+  rankedLife?: boolean;
   world: WorldPack;
   life: LifeState;
   hasBegun: boolean;
@@ -22,21 +24,21 @@ export interface MainMenuProps {
 }
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
-export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
+export default function MainMenu({ rankedLife = false, world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
   const heading = useRef<HTMLHeadingElement>(null);
   const headingId = useId();
   const saveId = useId();
   const ended = life.phase === "ended";
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
-  const primaryLabel = continuing ? "Continue" : ended ? "Begin a new life" : "Begin life";
+  const primaryLabel = rankedLife ? "Return to ranked life" : continuing ? "Continue free exploration" : "Explore for free";
   const worldTitle = world.title.replace(/[.!?]+$/u, "");
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
   return <main className="main-menu storybook-menu" aria-labelledby={headingId}>
     <div className="main-menu-shell">
-      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><StorybookMark size={32} /></span><span>A life simulator</span><span className="main-menu-stars" aria-hidden="true">· <span>✦</span> ·</span></header>
+      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><StorybookMark size={32} /></span><span>{rankedLife ? "Ranked life · NEAR testnet" : "Explore for free · A life simulator"}</span><span className="main-menu-stars" aria-hidden="true">· <span>✦</span> ·</span></header>
       <div className="main-menu-layout">
         <section className="main-menu-content">
           <h1 id={headingId} ref={heading} tabIndex={-1}>Everfolk<span>.</span></h1>
@@ -48,10 +50,10 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
           </div>}
           {notice && <p className="main-menu-notice" role="status">{notice}</p>}
           <div className="main-menu-actions">
-            <button className="main-menu-primary" type="button" onClick={continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>{primaryLabel}<span aria-hidden="true">→</span></button>
-            {hasBegun && <button className="main-menu-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "View last life" : "Begin a new life"}</button>}
+            <button className="main-menu-primary" type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>{primaryLabel}<span aria-hidden="true">→</span></button>
+            {hasBegun && !rankedLife && <button className="main-menu-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "View last life" : "Begin a new life"}</button>}
           </div>
-          <RankedMenuEntry />
+          {!rankedLife && <RankedMenuEntry />}
           <nav className="main-menu-links" aria-label="Main menu">
             {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
             <button type="button" onClick={onPastLives}>Past lives</button>

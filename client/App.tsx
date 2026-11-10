@@ -4,6 +4,7 @@ import type { LifeState, JournalEntry, WorldPack } from "../src/types.ts";
 import type { WorldRoute } from "../server/content.ts";
 import type { EventVisuals } from "./scene-model.ts";
 import type { RankedPlay } from "./useGame.ts";
+import { findLifeEvent } from "./life-event-lookup.ts";
 import type { ArchivedLife } from "./session.ts";
 import { engineForLife, exportLife, loadAnyLife, sampleEngine } from "./session.ts";
 import { useGame } from "./useGame.ts";
@@ -89,7 +90,7 @@ function SourceLinks({ ids = [], world = sampleEngine.world }: { ids?: readonly 
 
 function journalSourceIds(entry: JournalEntry, world = sampleEngine.world): string[] {
   if (entry.type === "birth") return world.origins.find(item => item.id === entry.id)?.sourceIds ?? [];
-  if (entry.type === "event") return world.events.find(item => item.id === entry.id)?.sourceIds ?? [];
+  if (entry.type === "event") return findLifeEvent(world, entry.id)?.sourceIds ?? [];
   if (entry.type === "ending") return world.endings.find(item => item.id === entry.id)?.sourceIds ?? [];
   return [];
 }
@@ -101,7 +102,7 @@ function journalKind(entry: JournalEntry, world = sampleEngine.world): string {
   if (entry.type === "birth") return "Background";
   if (entry.type === "influence") return "Influence";
   if (entry.type === "ending") return world.endings.find(ending => ending.id === entry.id)?.kind === "chapter" ? "Record complete" : "Life ended";
-  const event = world.events.find(item => item.id === entry.id);
+  const event = findLifeEvent(world, entry.id);
   if (event?.rarity === "rare") return "Rare encounter";
   if (event?.id === "the-first-household") return "Birth";
   if (event?.trigger.type === "year") return "History";
@@ -147,7 +148,8 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [panel, setPanel] = useState<"world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null>(null);
   const [characterSection, setCharacterSection] = useState<"career" | "wealth" | "children" | "skills">("career");
   const [restartOpen, setRestartOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(true);
+  // A ranked life opens straight into play; free play starts at the main menu.
+  const [menuOpen, setMenuOpen] = useState(!ranked);
   const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh);
   const [readingPause, setReadingPause] = useState(false);
   const [deferredDecision, setDeferredDecision] = useState<string | null>(null);
@@ -177,7 +179,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const ending = world.endings.find(item => item.id === life.endingId);
   const origin = world.origins.find(item => item.id === life.originId)!;
   const choices = lifeEngine.getChoices(life);
-  const decisionEvent = world.events.find(event => event.id === life.pendingEventId);
+  const decisionEvent = findLifeEvent(world, life.pendingEventId);
   const loanSummary = getLoanSummary(world, life);
   const lender = world.economy?.moneylender;
   const loanOfferTerms = lender ? `Receive ${formatMoney(lender.principal, world)}. Repay ${formatMoney(lender.principal + lender.fee, world)} within ${lender.termYears} ${lender.termYears === 1 ? "year" : "years"}.` : "";
@@ -286,10 +288,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   useEffect(() => {
     const identity = `${life.worldFingerprint}:${life.seed}`;
     if (menuLifeRef.current === identity) return;
+    const firstVisit = menuLifeRef.current === null;
     menuLifeRef.current = identity;
     setReadingPause(false);
-    setBirthPopoverOpen(!game.hasBegun && life.phase !== "ended");
-    setMenuOpen(true);
+    // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
+    setBirthPopoverOpen(!ranked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
+    setMenuOpen(!ranked);
   }, [life.worldFingerprint, life.seed]);
 
   useEffect(() => {
@@ -405,7 +409,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   }
 
   return <>
-    {menuOpen && <MainMenu life={life} world={world} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
+    {menuOpen && <MainMenu life={life} world={world} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     {!menuOpen && game.resumeScreenOpen && <PauseScreen life={life} world={world} onContinue={continueWithReadingPause} onReborn={() => { setPanel(null); setRestartOpen(true); }} onMainMenu={openMainMenu} />}
     <div className="everfolk-game" hidden={game.resumeScreenOpen || menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>

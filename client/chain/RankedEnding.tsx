@@ -1,30 +1,34 @@
 import { useEffect, useState } from "react";
-import type { LifeView, MintResult } from "../../chain/types.ts";
+import type { LifeView, MintResult, MintPack as Pack, MintTerms } from "../../chain/types.ts";
 import type { OwnersByToken } from "./born-into-model.ts";
 import { errorText } from "./chain-backend.ts";
 import LifeReport from "./LifeReport.tsx";
-import { lifeReport, lifeSpanLine, mintRevealView, npcActionMenu } from "./life-report-model.ts";
-import MintReveal from "./MintReveal.tsx";
+import { lifeReport, lifeSpanLine, npcActionMenu } from "./life-report-model.ts";
+import MintPack from "./MintPack.tsx";
 import DeclineChoice from "./DeclineChoice.tsx";
-import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
+import { DEFAULT_MINT_FEE_YOCTO, REROLL_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
 
 /** The part of the ranked session (Task 17) the ending needs. `RankedSession` satisfies it structurally. */
 export interface RankedEndingSession {
   life: LifeView;
   finish(): Promise<SignedEvidence>;
+  chooseMint(slot: number): Promise<MintResult>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   abandon(): Promise<void>;
 }
 
 export interface RankedEndingProps {
   session: RankedEndingSession;
+  practice?: boolean;
   contract: LivesContract;
   feeYocto?: string;
+  /** Hash of the latest confirmed wallet transaction (the mint, once it lands), for an explorer link. */
+  lastTxHash?: string | null;
   onClose(): void;
 }
 
-type Stage = { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "revealed"; result: MintResult; signed: SignedEvidence };
+type Stage = { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "pack"; signed: SignedEvidence; pack: Pack };
 
 /** Matches the contract's default `abandon_cooldown_ms`. */
 const COOLDOWN_MINUTES = 10;
@@ -35,8 +39,9 @@ async function ownersOf(contract: LivesContract, tokenIds: readonly string[]): P
 }
 
 /** A ranked life's end: verify the save, show who shaped it, offer the mint, reveal the result. */
-export default function RankedEnding({ session, contract, feeYocto = DEFAULT_MINT_FEE_YOCTO, onClose }: RankedEndingProps) {
+export default function RankedEnding({ session, practice = false, contract, feeYocto = DEFAULT_MINT_FEE_YOCTO, lastTxHash, onClose }: RankedEndingProps) {
   const [stage, setStage] = useState<Stage>({ kind: "verifying" });
+  const [terms, setTerms] = useState<MintTerms | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [owners, setOwners] = useState<OwnersByToken>({});
   const [selected, setSelected] = useState("");
@@ -46,11 +51,13 @@ export default function RankedEnding({ session, contract, feeYocto = DEFAULT_MIN
   useEffect(() => {
     let cancelled = false;
     void session.finish().then(async signed => {
+      const [quote, existing] = await Promise.all([contract.mintTerms(), contract.mintPack(session.life.life_id)]);
       const found = await ownersOf(contract, signed.evidence.sources.map(source => source.token_id));
       if (cancelled) return;
+      setTerms(quote);
       setOwners(found);
       setSelected(npcActionMenu(signed.evidence.career_group)[0]?.id ?? "");
-      setStage({ kind: "report", signed });
+      setStage(existing ? { kind: "pack", signed, pack: existing } : { kind: "report", signed });
     }).catch(cause => { if (!cancelled) setStage({ kind: "failed", error: errorText(cause, "Your life could not be checked.") }); });
     return () => { cancelled = true; };
   }, [session, contract, attempt]);
@@ -58,8 +65,12 @@ export default function RankedEnding({ session, contract, feeYocto = DEFAULT_MIN
   async function mint(signed: SignedEvidence) {
     setBusy(true);
     setError("");
-    try { setStage({ kind: "revealed", result: await session.mint(signed, selected), signed }); }
-    catch (cause) { setError(errorText(cause, "The mint did not go through. Please try again.")); }
+    try { setStage({ kind: "pack", pack: await contract.openMintPack(session.life.life_id, signed, selected), signed }); }
+    catch (cause) {
+      const landed = await contract.mintPack(session.life.life_id).catch(() => null);
+      if (landed) setStage({ kind: "pack", signed, pack: landed });
+      else setError(errorText(cause, "The pack was not opened. Please try again."));
+    }
     finally { setBusy(false); }
   }
 
@@ -80,15 +91,18 @@ export default function RankedEnding({ session, contract, feeYocto = DEFAULT_MIN
   const evidence = stage.signed.evidence;
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
-  if (stage.kind === "revealed") return <MintReveal view={mintRevealView(stage.result, evidence.career_group)} affection={stage.result.affection} onClose={onClose} />;
+  if (stage.kind === "pack") return <MintPack practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
   return <LifeReport
     report={lifeReport({ life: session.life, sources: evidence.sources, owners })}
     spanLine={lifeSpanLine(evidence)}
-    feeText={formatNear(feeYocto)}
+    feeText={formatNear(terms?.mint_fee ?? feeYocto)}
     menu={npcActionMenu(evidence.career_group)}
     selectedAction={selected}
     busy={busy}
     error={error}
+    packMode
+    rerollFeeText={formatNear(terms?.reroll_fee ?? REROLL_FEE_YOCTO)}
+    sourceSharePercent={(terms?.source_share_bps ?? 5000) / 100}
     onSelectAction={setSelected}
     onMint={() => { void mint(stage.signed); }}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }}

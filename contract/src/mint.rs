@@ -25,10 +25,10 @@ fn affection(seed: &[u8; 32], evidence: &Evidence) -> u8 {
     (base + (bonds - 50) / 5).clamp(1, 100) as u8
 }
 
-struct Outcome {
-    figure: Option<String>,
-    rarity: u8,
-    affection: u8,
+pub(crate) struct Outcome {
+    pub(crate) figure: Option<String>,
+    pub(crate) rarity: u8,
+    pub(crate) affection: u8,
 }
 
 #[near]
@@ -36,6 +36,7 @@ impl Contract {
     /// Mints a verified, finished ranked life. Randomness decides whether it becomes a figure or stays an NPC.
     #[payable]
     pub fn mint_life(&mut self, life_id: U64, evidence_json: String, signature: String, npc_action_id: String) -> MintResult {
+        require!(self.get_mint_pack(life_id).is_none(), "Choose a card from the open mint pack");
         require!(env::prepaid_gas() >= MIN_MINT_GAS, "Attach at least 150 Tgas to mint a life");
         let fee = self.params.mint_fee.0;
         let deposit = env::attached_deposit().as_yoctonear();
@@ -46,7 +47,6 @@ impl Contract {
         let mut life = self.owned_alive_life(life_id.0);
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
 
-        let storage_before = env::storage_usage();
         let evidence_hash = env::sha256_array(evidence_json.as_bytes());
         let outcome = self.roll_outcome(&block_seed(life_id.0, &evidence_hash), &evidence);
         let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
@@ -59,10 +59,9 @@ impl Contract {
         self.active_life.remove(&owner);
         self.lives.flush();
         self.active_life.flush();
-        let locked = env::storage_usage().saturating_sub(storage_before) as u128 * env::storage_byte_cost().as_yoctonear();
-        require!(fee >= paid_to_sources + locked, "The mint fee does not cover this token's storage");
+        // Testnet storage is sponsored from the contract reserve, as with births and checkpoints.
         let treasury = self.treasury_id.clone();
-        self.credit(&treasury, fee - paid_to_sources - locked);
+        self.credit(&treasury, fee - paid_to_sources);
         if deposit > fee {
             Promise::new(owner).transfer(NearToken::from_yoctonear(deposit - fee)).detach();
         }
@@ -71,13 +70,13 @@ impl Contract {
 }
 
 impl Contract {
-    fn assert_signed(&self, evidence_json: &str, signature: &str) {
+    pub(crate) fn assert_signed(&self, evidence_json: &str, signature: &str) {
         let signature = parse_signature(signature);
         let valid = self.verifier_keys.iter().any(|key| env::ed25519_verify(&signature, evidence_json.as_bytes(), key));
         require!(valid, "The life evidence signature is not valid");
     }
 
-    fn assert_evidence(&self, life_id: u64, life: &Life, evidence: &Evidence, npc_action_id: &str) {
+    pub(crate) fn assert_evidence(&self, life_id: u64, life: &Life, evidence: &Evidence, npc_action_id: &str) {
         require!(evidence.v == 1, "Unsupported evidence version");
         require!(
             evidence.life_id == life_id.to_string() && evidence.account_id == life.account_id,
@@ -98,13 +97,13 @@ impl Contract {
         );
     }
 
-    fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence) -> Outcome {
+    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence) -> Outcome {
         let figure = evidence
             .matched_figures
             .iter()
             .find(|figure| {
                 let (minted, cap) = self.supply(figure);
-                minted < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < self.params.drop_rate_bps as u64
+                minted + self.pack_reserved(figure) < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < self.params.drop_rate_bps as u64
             })
             .cloned();
         let weights = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
@@ -121,7 +120,7 @@ impl Contract {
     }
 
     #[allow(clippy::too_many_arguments)]
-    fn mint_token(
+    pub(crate) fn mint_token(
         &mut self,
         owner: &AccountId,
         life_id: u64,

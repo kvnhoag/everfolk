@@ -35,9 +35,8 @@ function creditSources(state: MockState, shares: readonly SourceShare[], amount:
 }
 
 /** Fixes the child's source shares, records the reverse index and splits the mint fee. Returns the shares. */
-export function payMintFee(state: MockState, child: string, impacts: readonly SourceImpact[]): SourceShare[] {
+export function payMintFee(state: MockState, child: string, impacts: readonly SourceImpact[], fee = state.params.mintFee): SourceShare[] {
   const shares = computeShares(impacts);
-  const fee = state.params.mintFee;
   state.sources.set(child, shares);
   for (const { token_id } of shares) {
     const stats = state.stats.get(token_id) ?? { lives_influenced: 0, earned: 0n };

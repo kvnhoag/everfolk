@@ -1,7 +1,7 @@
 import type { Category } from "../../chain/ids.ts";
-import type { Draw, Evidence, LifeView, Listing, MintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
+import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
 
-export type { Draw, Evidence, LifeView, Listing, MintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
+export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 /**
  * What the verifier returns for a finished life. Local stand-in until lane E publishes it from
@@ -27,6 +27,13 @@ export interface LivesContract {
   getLife(lifeId: string): Promise<LifeView | null>;
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  mintTerms(): Promise<MintTerms>;
+  mintPack(lifeId: string): Promise<MintPack | null>;
+  openMintPack(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintPack>;
+  rerollMintSlot(lifeId: string, slot: number, feeYocto: string): Promise<MintPack>;
+  chooseMintSlot(lifeId: string, slot: number): Promise<MintResult>;
+  figureCopies(figureId: string): Promise<PoolEntry[]>;
+  figureSupply(figureId: string): Promise<[number, number]>;
   setAction(tokenId: string, actionId: string): Promise<void>;
   withdraw(): Promise<void>;
   balanceOf(account: string): Promise<string>;
@@ -60,6 +67,10 @@ export interface ContractCall {
 /** The signed-in NEAR account and the only path for change calls. `call` resolves to the method's decoded JSON return value. */
 export interface WalletSession {
   readonly accountId: string | null;
+  /** Wallet module id, e.g. "meteor-wallet"; null when not signed in or unknown. */
+  readonly walletId?: string | null;
+  /** Called with each confirmed transaction hash, for explorer links in the UI. Returns an unsubscribe. */
+  onTransaction?(listener: (hash: string, method: string) => void): () => void;
   signIn(): Promise<void>;
   signOut(): Promise<void>;
   call(call: ContractCall): Promise<unknown>;

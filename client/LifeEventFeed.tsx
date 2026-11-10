@@ -8,6 +8,7 @@ import { createEngine } from "../src/engine.ts";
 import InfluenceMarkerTag from "./InfluenceMarkerTag.tsx";
 import { influenceMarker } from "./influence-marker.ts";
 import PixelIcon from "./PixelIcon.tsx";
+import { findLifeEvent } from "./life-event-lookup.ts";
 import "./life-event-feed.css";
 
 function RecordChanges({ changes, label }: { changes: YearChange[]; label: string }) {
@@ -49,7 +50,7 @@ export default function LifeEventFeed({ life, world }: { life: LifeState; world:
               <p className="life-year-change-note">Year totals above; individual changes beside each entry.</p>
               {entries.length > 0 ? <ol className="life-event-rows">{entries.map(({ entry, journalIndex }, index) => {
                 const marker = influenceMarker(entry, world);
-                const ids = entry.type === "event" ? world.events.find(event => event.id === entry.id)?.sourceIds
+                const ids = entry.type === "event" ? findLifeEvent(world, entry.id)?.sourceIds
                   : entry.type === "birth" ? world.origins.find(origin => origin.id === entry.id)?.sourceIds
                   : entry.type === "ending" ? world.endings.find(ending => ending.id === entry.id)?.sourceIds : [];
                 const references = (ids ?? []).map(id => sources.get(id)).filter(source => source !== undefined);

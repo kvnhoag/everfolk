@@ -25,6 +25,7 @@ const { default: MintReveal } = await import("../client/chain/MintReveal.tsx");
 const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 const { MarketBody } = await import("../client/chain/Market.tsx");
 const { default: DeclineChoice } = await import("../client/chain/DeclineChoice.tsx");
+const { default: ActiveLifeCard } = await import("../client/chain/ActiveLifeCard.tsx");
 hooks.deregister();
 
 const noop = () => {};
@@ -64,8 +65,10 @@ test("reveal names the kept life with rarity and affection", () => {
   const view = mintRevealView({ token_id: "9", kind: "figure", figure_id: "euclid", rarity: 3, affection: 80 }, "letters");
   const html = renderToStaticMarkup(createElement(MintReveal, { view, affection: 80, onClose: noop }));
   assert.match(html, /Euclid, the geometer/);
-  assert.match(html, /Epic/);
-  assert.match(html, /Affection 80 \/ 100/);
+  assert.match(html, /Epic · influence ×2/);
+  assert.match(html, />Affection</);
+  assert.match(html, /80 \/ 100/);
+  assert.match(html, /No\. 9/);
   assert.match(html, /href="#token\/9"/);
 });
 
@@ -101,4 +104,42 @@ test("declining a mint offers to keep the life for later or close it, and says w
   assert.match(html, /Close this life/);
   assert.match(html, /10 minutes/);
   assert.match(html, /Ranked life/);
+});
+
+test("the reveal ledger shows the deed, sources and NEAR links when known", () => {
+  const view = mintRevealView({ token_id: "4", kind: "npc", figure_id: null, rarity: 1, affection: 40 }, "letters",
+    { evidence: { birth_year: -350, death_year: -290, death_age: 60, sources: [{ token_id: "2", impact: 3 }] }, actionId: "letters.teach", txHash: "Tx1", evidenceUrl: "/api/ranked/evidence/e" });
+  const html = renderToStaticMarkup(createElement(MintReveal, { view, affection: 40, onClose: noop }));
+  assert.match(html, /Teach the young/);
+  assert.match(html, /#2 · 100%/);
+  assert.match(html, /nearblocks\.io\/txns\/Tx1/);
+  assert.match(html, /Verified evidence/);
+});
+
+test("market ledger has tabs with counts", () => {
+  const rows = [
+    { tokenId: "5", href: "#token/5", title: "Scholar of Alexandria", isFigure: false, rarityLabel: "Common", actionName: "Teach the young", seller: "alice.testnet", priceText: "2 NEAR", priceYocto: "2", canBuy: true, affection: 30, emblem: "literacy" },
+    { tokenId: "9", href: "#token/9", title: "Euclid, the geometer", isFigure: true, figureId: "euclid" as const, rarityLabel: "Rare", actionName: "Open a school", seller: "bob.testnet", priceText: "12 NEAR", priceYocto: "12", canBuy: false, affection: 70, emblem: null },
+  ];
+  const html = renderToStaticMarkup(createElement(MarketBody, { rows, onBuy: noop }));
+  assert.match(html, /role="tablist"/);
+  assert.match(html, /Famous figures<small>1<\/small>/);
+  assert.match(html, /People of the city<small>1<\/small>/);
+  assert.match(html, /Affection 70/);
+  assert.equal((html.match(/>Buy</g) ?? []).length, 1);
+});
+
+
+test("an ended unminted life shows a mint action and never offers to continue playing", () => {
+  const html = renderToStaticMarkup(createElement(ActiveLifeCard, { life, progress: { status: "ended", age: 62 }, onOpen: noop }));
+  assert.match(html, /Ended · Ready to mint/);
+  assert.match(html, /Review &amp; mint this life/);
+  assert.doesNotMatch(html, /Continue this life/);
+});
+
+test("an on-chain paid pack can be reopened without a device save", () => {
+  const html = renderToStaticMarkup(createElement(ActiveLifeCard, { life, progress: { status: "ended", pack: true }, onOpen: noop }));
+  assert.match(html, /Open mint pack/);
+  assert.match(html, /any device/);
+  assert.doesNotMatch(html, /Keep this browser/);
 });
