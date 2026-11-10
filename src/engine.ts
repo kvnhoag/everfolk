@@ -1,12 +1,13 @@
 import type {
-  ActivityAvailability, Choice, Command, Condition, Effect, JournalEntry,
+  ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
   LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
 } from "./types.ts";
+import { influenceCatalog, influenceDeltas, influenceMeasure, parseInfluenceCommand, scaleInfluenceEffects } from "./influence.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
 import { applyStatDelta, skillEffectDelta } from "./progression.ts";
@@ -77,6 +78,8 @@ function mutableSnapshot(state: LifeState): LifeState {
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
     ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
+    ...(state.activeInfluences ? { activeInfluences: [...state.activeInfluences] } : {}),
+    ...(state.queuedInfluences ? { queuedInfluences: [...state.queuedInfluences] } : {}),
     ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
@@ -95,26 +98,48 @@ function mutableSnapshot(state: LifeState): LifeState {
   };
 }
 
-export function createEngine(input: unknown): LifeEngine {
+/** Detached telemetry for record projections; never persisted in saves. */
+export interface JournalObserver { onChange(index: number, changes: Readonly<Record<string, number>>): void }
+
+export function createEngine(input: unknown, observer?: JournalObserver): LifeEngine {
   validateWorld(input);
   // Own a detached immutable pack so the caller cannot change rules mid-life.
   const world: WorldPack = freeze(structuredClone(input));
   const fingerprint = contentFingerprint(world);
-  const eventById = new Map(world.events.map(event => [event.id, event]));
-  const randomStoryById = new Map(world.events.filter(event => event.trigger.type === "random" && event.rarity !== "rare" &&
+  function observedValues(state: LifeState): Record<string, number> {
+    const result = { ...state.stats };
+    if (world.economy && state.economy) result[world.economy.stat] = getNetWorth(world, state);
+    for (const [id, value] of Object.entries(state.character?.skills ?? {})) result[`skill:${id}`] = value;
+    return result;
+  }
+  function report(state: LifeState, index: number, before: Record<string, number> | undefined): void {
+    if (!observer || !before || !state.journal[index]) return;
+    const deltas = Object.fromEntries(Object.entries(observedValues(state)).map(([id, value]) => [id, value - (before[id] ?? 0)]).filter(([, delta]) => delta !== 0));
+    if (Object.keys(deltas).length) observer.onChange(index, Object.freeze(deltas));
+  }
+  function recorded(state: LifeState, index: number | (() => number), action: () => void): void {
+    const before = observer ? observedValues(state) : undefined;
+    action();
+    report(state, typeof index === "number" ? index : index(), before);
+  }
+  // Catalog events join every lane, but stay ineligible until activated.
+  const influences = influenceCatalog(world);
+  const allEvents = influences.events;
+  const eventById = new Map(allEvents.map(event => [event.id, event]));
+  const randomStoryById = new Map(allEvents.filter(event => event.trigger.type === "random" && event.rarity !== "rare" &&
     event.id !== world.health?.careDecision && !Object.values(world.economy?.moneylender?.events ?? {}).includes(event.id))
     .map(event => [event.id, event]));
   const endingById = new Map(world.endings.map(ending => [ending.id, ending]));
   const activityById = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
-  const rareEvents = world.events.filter(event => event.rarity === "rare");
+  const rareEvents = allEvents.filter(event => event.rarity === "rare");
   const rareEventIds = new Set(rareEvents.map(event => event.id));
   const peoplePolicy = world.character?.encounterPacing;
-  const peopleEvents = peoplePolicy ? world.events.filter(event => event.mode !== "automatic" && event.rarity !== "rare" && event.trigger.type === "random" &&
+  const peopleEvents = peoplePolicy ? allEvents.filter(event => event.mode !== "automatic" && event.rarity !== "rare" && event.trigger.type === "random" &&
     event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "introduce" || effect.type === "relationship" && effect.status === "courting" ||
       world.character?.socialRelationships && effect.type === "social-role" && effect.active)))) : [];
   const peopleEventIds = new Set(peopleEvents.map(event => event.id));
   const exclusiveGroups = new Map<string, LifeEvent[]>();
-  for (const event of world.events) if (event.exclusiveGroup) {
+  for (const event of allEvents) if (event.exclusiveGroup) {
     const members = exclusiveGroups.get(event.exclusiveGroup) ?? [];
     members.push(event);
     exclusiveGroups.set(event.exclusiveGroup, members);
@@ -128,8 +153,8 @@ export function createEngine(input: unknown): LifeEngine {
     return pick(events, event => weights.get(event.id)!, state);
   }
 
-  function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string): void {
-    state.journal.push({ type, id, text: personText(legacyText(world, state, text), world, state), age: state.age, year: state.year });
+  function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string, extra?: Pick<JournalEntry, "source" | "deltas">): void {
+    state.journal.push({ type, id, text: personText(legacyText(world, state, text), world, state), age: state.age, year: state.year, ...extra });
   }
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
@@ -161,10 +186,15 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function healthHooks(state: LifeState) {
+    const indices = new Map<string, number>();
     return {
       random: () => { const draw = nextRandom(state.rngState); state.rngState = draw.state; return draw.value; },
       matches: (condition: Condition | undefined) => matches(condition, state),
-      journal: (id: string, text: string) => journal(state, "event", id, text),
+      journal: (id: string, text: string) => { indices.set(id, state.journal.length); journal(state, "event", id, text); },
+      changes: observer ? (id: string, delta: number) => {
+        const index = indices.get(id);
+        if (index !== undefined && delta) observer.onChange(index, Object.freeze({ [world.health!.stat]: delta }));
+      } : undefined,
       support: relationshipSupport(world, state),
     };
   }
@@ -280,6 +310,7 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
+    if (influences.inactive(event.id, state)) return false;
     // Medical decisions are interrupts from the health lifecycle, never an
     // unrelated random story or a repeat after care was already chosen.
     if (world.health?.careDecision === event.id) return false;
@@ -297,10 +328,11 @@ export function createEngine(input: unknown): LifeEngine {
     }
   }
 
-  function recordEvent(state: LifeState, event: LifeEvent): void {
+  /** A fired catalog event's entry carries its source, so impact is countable from the journal. */
+  function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state)): void {
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
-    journal(state, "event", event.id, `${event.title}: ${event.text}`);
+    journal(state, "event", event.id, `${event.title}: ${event.text}`, source ? { source } : undefined);
   }
 
   function scheduledAlternative(first: LifeEvent, state: LifeState): LifeEvent {
@@ -308,8 +340,8 @@ export function createEngine(input: unknown): LifeEngine {
     return pick(exclusiveGroups.get(first.exclusiveGroup)!.filter(event => eligible(event, state)), () => 1, state);
   }
 
-  function offer(state: LifeState, event: LifeEvent, advancePacing = true): void {
-    recordEvent(state, event);
+  function offer(state: LifeState, event: LifeEvent, advancePacing = true, source?: InfluenceSource): void {
+    recordEvent(state, event, source);
     state.pendingEventId = event.id;
     state.phase = "choice";
     if (world.eventPacing && advancePacing) {
@@ -324,10 +356,24 @@ export function createEngine(input: unknown): LifeEngine {
     }
   }
 
-  function automaticEvent(state: LifeState, event: LifeEvent): void {
-    recordEvent(state, event);
-    apply(state, event.effects ?? []);
+  function automaticEvent(state: LifeState, event: LifeEvent, source?: InfluenceSource): void {
+    recordEvent(state, event, source);
+    recorded(state, state.journal.length - 1, () => apply(state, event.effects ?? []));
     checkEndings(state);
+  }
+
+  /** Applied influence events come next after the current decision, outside pacing and triggers. */
+  function offerQueuedInfluence(state: LifeState): boolean {
+    while (state.queuedInfluences && state.phase !== "ended") {
+      const [queued, ...rest] = state.queuedInfluences;
+      if (rest.length) state.queuedInfluences = rest;
+      else delete state.queuedInfluences;
+      const event = influences.entry(queued.entry).event!;
+      if (!matches(event.when, state)) continue;
+      if (event.mode === "automatic") automaticEvent(state, event, queued.source);
+      else if (choicesFor(event, state).length) { offer(state, event, false, queued.source); return true; }
+    }
+    return false;
   }
 
   function offerMedicalDecision(state: LifeState): boolean {
@@ -406,7 +452,7 @@ export function createEngine(input: unknown): LifeEngine {
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
-        const event = world.events.find(candidate => candidate.mode === "automatic" &&
+        const event = allEvents.find(candidate => candidate.mode === "automatic" &&
           candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) return false;
         automaticEvent(state, event);
@@ -418,7 +464,7 @@ export function createEngine(input: unknown): LifeEngine {
     // Resolve these before offering a decision so the whole year is available to UI.
     if (drainAutomatic()) return;
     if (allowRandom && state.age > 0) {
-      const background = world.events.filter(event => event.mode === "automatic" &&
+      const background = allEvents.filter(event => event.mode === "automatic" &&
         event.trigger.type === "random" && eligible(event, state));
       if (background.length > 0) {
         automaticEvent(state, pickRandomEvent(background, state));
@@ -429,17 +475,17 @@ export function createEngine(input: unknown): LifeEngine {
     if (offerLoanCollection(state)) return;
     const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
     if (world.eventPacing?.rareEvents) {
-      const anchor = world.events.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
       if (allowRandom && state.age > 0 && offerRareEncounter(state)) return;
     } else if (peoplePolicy) {
       // The new lane cannot promote a personal encounter ahead of dated history.
-      const anchor = world.events.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
     }
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
-    const scheduled = world.events.find(event => event.mode !== "automatic" &&
+    const scheduled = allEvents.find(event => event.mode !== "automatic" &&
       event.trigger.type !== "random" && eligible(event, state) &&
       (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
     // Essential childhood milestones through sixteen keep their place even if
@@ -448,7 +494,7 @@ export function createEngine(input: unknown): LifeEngine {
     if (allowRandom && decisionDue && offerPeopleEncounter(state)) return;
     if (scheduled) { offer(state, scheduledAlternative(scheduled, state)); return; }
     if (allowRandom && state.age > 0 && decisionDue) {
-      const decisions = world.events.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
+      const decisions = allEvents.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
         event.trigger.type === "random" && !peopleEventIds.has(event.id) && eligible(event, state));
       if (decisions.length > 0) {
         offer(state, pickRandomEvent(decisions, state));
@@ -467,14 +513,14 @@ export function createEngine(input: unknown): LifeEngine {
       // A due contract drains historical/automatic entries before interrupting
       // personal decisions, including worlds without separate paced lanes.
       while (state.phase !== "ended") {
-        const event = world.events.find(candidate => candidate.mode === "automatic" && candidate.trigger.type !== "random" && eligible(candidate, state));
+        const event = allEvents.find(candidate => candidate.mode === "automatic" && candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) break;
         automaticEvent(state, event);
         if (offerMedicalDecision(state)) return;
       }
       if (state.phase === "ended") return;
       if (randomAvailable && state.age > 0) {
-        const background = world.events.filter(event => event.mode === "automatic" && event.trigger.type === "random" && eligible(event, state));
+        const background = allEvents.filter(event => event.mode === "automatic" && event.trigger.type === "random" && eligible(event, state));
         if (background.length) {
           randomAvailable = false;
           automaticEvent(state, pick(background, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state));
@@ -486,7 +532,7 @@ export function createEngine(input: unknown): LifeEngine {
     // Scheduled events queue in declaration order. Automatic entries drain without
     // inventing a player choice, and any scheduled activity takes this year's slot.
     while (state.phase !== "ended") {
-      const scheduled = world.events.find(event => event.trigger.type !== "random" && eligible(event, state));
+      const scheduled = allEvents.find(event => event.trigger.type !== "random" && eligible(event, state));
       if (scheduled) {
         randomAvailable = false;
         if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
@@ -495,7 +541,7 @@ export function createEngine(input: unknown): LifeEngine {
       }
       if (randomAvailable) {
         randomAvailable = false;
-        const random = world.events.filter(event => event.trigger.type === "random" && event.rarity !== "rare" && eligible(event, state));
+        const random = allEvents.filter(event => event.trigger.type === "random" && event.rarity !== "rare" && eligible(event, state));
         if (random.length > 0) {
           const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
           if (event.mode === "automatic") { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
@@ -598,21 +644,25 @@ export function createEngine(input: unknown): LifeEngine {
     // The interval [age, age + 1) belongs to the current completed age. A death
     // before the first birthday is therefore recorded at age zero, not age one.
     if (mortalityCheck(next)) return;
-    progressKnowledge(world, next, (id, text) => journal(next, "event", id, text));
+    recorded(next, next.journal.length, () => progressKnowledge(world, next, (id, text) => journal(next, "event", id, text)));
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     const annualIncome = (): void => {
       if (next.phase !== "ended" && next.character?.jobId) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
-        apply(next, job.yearlyEffects);
-        journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+        recorded(next, () => next.journal.length - 1, () => {
+          apply(next, job.yearlyEffects);
+          journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+        });
       }
       if (next.phase !== "ended") {
         const income = yearlyAssetIncome(world, next);
         if (income > 0) {
-          apply(next, [{ type: "cash", delta: income }]);
-          journal(next, "activity", "asset-income", `Your assets bring in ${income} ${world.economy!.currency.short}.`);
+          recorded(next, () => next.journal.length - 1, () => {
+            apply(next, [{ type: "cash", delta: income }]);
+            journal(next, "activity", "asset-income", `Your assets bring in ${income} ${world.economy!.currency.short}.`);
+          });
         }
       }
     };
@@ -645,8 +695,9 @@ export function createEngine(input: unknown): LifeEngine {
     journal(next, "choice", choice.id, choice.text);
     const outcome = pick(choice.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
-    apply(next, outcome.effects, `${choice.text} — ${outcome.text}`, { sourceId: event.id, outcomeId: outcome.id });
+    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${choice.text} — ${outcome.text}`, { sourceId: event.id, outcomeId: outcome.id }));
     checkEndings(next);
+    if (offerQueuedInfluence(next)) return;
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
   }
@@ -699,7 +750,7 @@ export function createEngine(input: unknown): LifeEngine {
     journal(next, "activity", activity.id, activity.text);
     const outcome = pick(activity.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
-    apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id });
+    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
     checkEndings(next);
     resolveEvents(next, false);
   }
@@ -716,7 +767,8 @@ export function createEngine(input: unknown): LifeEngine {
     const identity = world.character?.identity;
     if (!identity || !state.character) throw new Error("Avatar selection is unavailable in this world.");
     if (!Number.isInteger(variant) || variant < 0 || variant >= identity.avatarVariants) throw new Error("Unknown avatar variant.");
-    if (state.age !== 0 || state.commands.some(command => command.type !== "avatar")) throw new Error("Choose an avatar before beginning this life.");
+    // Ranked lives open with their influence activations; those do not begin the life.
+    if (state.age !== 0 || state.commands.some(command => command.type !== "avatar" && command.type !== "influence")) throw new Error("Choose an avatar before beginning this life.");
     if (state.character.avatarVariant === variant) return;
     state.character.avatarVariant = variant;
     state.commands.push({ type: "avatar", variant });
@@ -727,6 +779,33 @@ export function createEngine(input: unknown): LifeEngine {
     const next = mutableSnapshot(state);
     chooseAvatarInto(next, variant);
     return next.commands.length === state.commands.length ? state : freeze(next);
+  }
+
+  /** activate: the entry's event joins this life's pool. apply: scaled effects now, its event next. */
+  function influenceInto(next: LifeState, input: unknown, where?: string): void {
+    assertPlayable(next);
+    const command = parseInfluenceCommand(input, where);
+    const entry = influences.entry(command.entry);
+    next.commands.push(command);
+    const record = { entry: entry.id, source: command.source, power: command.power };
+    if (command.mode === "activate") next.activeInfluences = [...next.activeInfluences ?? [], record];
+    else {
+      const index = next.journal.length, before = influenceMeasure(next);
+      journal(next, "influence", entry.id, entry.label, { source: command.source, deltas: {} });
+      recorded(next, index, () => apply(next, scaleInfluenceEffects(entry.effects ?? [], command.power), entry.label));
+      next.journal[index] = { ...next.journal[index], deltas: influenceDeltas(before, influenceMeasure(next)) };
+      checkEndings(next);
+      if (entry.event && next.phase !== "ended") next.queuedInfluences = [...next.queuedInfluences ?? [], record];
+    }
+    // A pending decision stays pending; otherwise resolve as after an activity.
+    if (next.phase === "ready" && !offerQueuedInfluence(next)) resolveEvents(next, false);
+  }
+
+  function influence(state: LifeState, command: InfluenceCommand): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    influenceInto(next, command);
+    return freeze(next);
   }
 
   function replay(seed: string, commands: readonly Command[]): LifeState {
@@ -745,7 +824,8 @@ export function createEngine(input: unknown): LifeEngine {
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
         if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
-      } else throw new Error(`Invalid command at ${i}.`);
+      } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
+      else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
   }
@@ -775,5 +855,5 @@ export function createEngine(input: unknown): LifeEngine {
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, influence, replay, save, load });
 }

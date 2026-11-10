@@ -4,6 +4,8 @@ export interface HealthHooks {
   random: () => number;
   matches: (condition: Condition | undefined) => boolean;
   journal: (id: string, text: string) => void;
+  /** Read-only journal telemetry; omitted in ordinary simulation. */
+  changes?: (journalId: string, delta: number) => void;
   /** Current household support, normalized by the relationship model. */
   support: number;
 }
@@ -27,10 +29,12 @@ function healthRecord(world: WorldPack, state: LifeState): HealthState | undefin
   return state.health ??= initialHealth(world)!;
 }
 
-function changeHealth(world: WorldPack, state: LifeState, delta: number): void {
+function changeHealth(world: WorldPack, state: LifeState, delta: number): number {
   const id = world.health!.stat;
   const stat = world.stats[id];
+  const before = state.stats[id];
   state.stats[id] = Math.max(stat.min, Math.min(stat.max, state.stats[id] + delta));
+  return state.stats[id] - before;
 }
 
 /** Onset records a warning only. The engine offers care before another advance. */
@@ -88,8 +92,9 @@ export function progressHealth(world: WorldPack, state: LifeState, hooks: Health
   const support = unit(hooks.support);
   const ageLoss = model.declineBands.find(band => state.age >= band.minAge && state.age <= band.maxAge)?.healthLoss ?? 0;
   if (ageLoss > 0) {
-    changeHealth(world, state, -ageLoss);
+    const delta = changeHealth(world, state, -ageLoss);
     hooks.journal("health-age-decline", "Your strength is declining with age.");
+    hooks.changes?.("health-age-decline", delta);
   }
 
   const remaining: ActiveHealthCondition[] = [];
@@ -105,17 +110,19 @@ export function progressHealth(world: WorldPack, state: LifeState, hooks: Health
       if (fatal) {
         // The warned illness deteriorates sharply during this annual interval.
         // Never raise a lower Health score while recording fatal deterioration.
-        changeHealth(world, state, Math.min(state.stats[model.stat], condition.fatalHealthThreshold) - state.stats[model.stat]);
+        const delta = changeHealth(world, state, Math.min(state.stats[model.stat], condition.fatalHealthThreshold) - state.stats[model.stat]);
         // Already recovered episodes stay removed if this later episode is fatal.
         // Unprocessed conditions remain active when death interrupts progression.
         health.conditions = [...remaining, { ...original, lastProgressAge: state.age, care: 0 }, ...health.conditions.slice(index + 1)];
         health.needsCareDecision = false;
         hooks.journal(`health-severe-deterioration-${original.id}`, `Severe ${condition.title.toLocaleLowerCase()} worsens. Your health falls to a fatal level.`);
+        hooks.changes?.(`health-severe-deterioration-${original.id}`, delta);
         return { deathCause: condition.deathCause, context: `The recorded illness, ${condition.title}, had become severe. You had been warned before it progressed. The illness began at age ${original.sinceAge}. Your health deteriorated to a fatal level.${original.source ? ` It followed: ${original.source}` : ""}${care > 0 ? " Care was provided, but you did not recover." : " You did not recover."}` };
       }
       const restored = original.severe.healthBefore - ageLoss - model.mortalityCalibration.convalescenceLoss;
-      changeHealth(world, state, Math.max(state.stats[model.stat], restored) - state.stats[model.stat]);
+      const delta = changeHealth(world, state, Math.max(state.stats[model.stat], restored) - state.stats[model.stat]);
       hooks.journal(`health-recovery-${original.id}`, `You recover from severe ${condition.title.toLocaleLowerCase()}. You need time to regain your strength.`);
+      hooks.changes?.(`health-recovery-${original.id}`, delta);
       continue;
     }
     const recovery = unit(condition.recoveryChance + care * condition.careRecoveryBonus + support * model.supportRecoveryBonus);
@@ -133,7 +140,12 @@ export function progressHealth(world: WorldPack, state: LifeState, hooks: Health
   }
   health.conditions = remaining;
   const loss = progressed.reduce((total, item) => total + item.loss, 0);
-  if (loss > 0) changeHealth(world, state, -loss);
+  if (loss > 0) {
+    const delta = changeHealth(world, state, -loss);
+    // Conditions resolve together. Share any clamped loss in proportion to
+    // each episode's contribution, without changing simulation arithmetic.
+    for (const item of progressed) hooks.changes?.(`health-continues-${item.active.id}`, delta * item.loss / loss);
+  }
 
   const fatal = progressed.filter(item => state.stats[model.stat] <= item.condition.fatalHealthThreshold)
     .sort((left, right) => right.loss - left.loss)[0];
@@ -173,9 +185,10 @@ export function developHealthIncident(world: WorldPack, state: LifeState, hooks:
       const active = existing ?? health.conditions.find(active => active.id === selected.id)!;
       active.severe = { healthBefore };
       active.lastProgressAge = state.age - 1;
-      changeHealth(world, state, Math.min(healthBefore, model.mortalityCalibration.onsetHealth) - healthBefore);
+      const delta = changeHealth(world, state, Math.min(healthBefore, model.mortalityCalibration.onsetHealth) - healthBefore);
       health.needsCareDecision = true;
       hooks.journal(`health-severe-onset-${selected.id}`, `${selected.title} has become severe. Your health has fallen sharply. You need care before the illness can progress.`);
+      hooks.changes?.(`health-severe-onset-${selected.id}`, delta);
       return;
     }
   }

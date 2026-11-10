@@ -1,14 +1,18 @@
 import { displayProse } from "./display-prose.ts";
 import { yearAtAge } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
+import { influenceMarker } from "./influence-marker.ts";
+import type { InfluenceMarker } from "./influence-marker.ts";
 
 export interface LifeEventRow {
   key: string;
-  kind: "event" | "history" | "milestone" | "activity" | "ending";
+  kind: "event" | "history" | "milestone" | "activity" | "ending" | "influence";
   /** Metadata for the event; the feed displays the completed fact in text. */
   title?: string;
   text: string;
   sourceIds: readonly string[];
+  /** Only for ranked lives: the NFT influence that wrote this entry. */
+  marker?: InfluenceMarker;
 }
 
 export interface LifeEventYear {
@@ -48,7 +52,8 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
       // Health progression and individual relationship warnings are completed
       // facts recorded by the engine, rather than authored decision prompts.
       if (!event) {
-        group.events.push({ key, kind: "event", text: entry.text, sourceIds: entry.id.startsWith("health-") ? world.health?.sourceIds ?? [] : [] });
+        const marker = influenceMarker(entry, world);
+        group.events.push({ key, kind: "event", text: entry.text, sourceIds: entry.id.startsWith("health-") ? world.health?.sourceIds ?? [] : [], ...(marker ? { marker } : {}) });
         return;
       }
       // An offered decision is still a question. Its accepted outcome is added
@@ -75,6 +80,10 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
       // Known activity IDs are action labels followed by an outcome. Other
       // activity records are standalone facts: wages, meeting people, a name.
       if (!activities.has(entry.id)) group.events.push({ key, kind: "activity", text: entry.text, sourceIds: [] });
+    } else if (entry.type === "influence") {
+      // Ranked lives only: an applied NFT deed is a completed fact of the year.
+      const marker = influenceMarker(entry, world);
+      group.events.push({ key, kind: "influence", text: entry.text, sourceIds: [], ...(marker ? { marker } : {}) });
     } else if (entry.type === "ending") {
       const ending = world.endings.find(ending => ending.id === entry.id);
       const cause = world.character?.deathCauses.find(cause => cause.id === life.deathCauseId);

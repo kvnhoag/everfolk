@@ -3,6 +3,7 @@ import type { WorldPack } from "./types.ts";
 type DataObject = Record<string, unknown>;
 const BAD_KEYS = new Set(["__proto__", "constructor", "prototype"]);
 const ID = /^[a-z][a-z0-9-]*$/;
+const INFLUENCE_ID = /^[a-z][a-z0-9-]*(?:\.[a-z][a-z0-9-]*)*$/;
 const OPERATORS = new Set(["eq", "ne", "gt", "gte", "lt", "lte"]);
 const MAX_NODES = 100_000;
 
@@ -122,7 +123,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences"], worldFields);
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -932,8 +933,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   }
   const randomWeights: number[] = [];
   const exclusiveGroupAges = new Map<string, number>();
-  events.forEach((entry, i) => {
-    const path = `world.events[${i}]`;
+  const eventDefinition = (entry: unknown, path: string): void => {
     const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
     string(event.title, `${path}.title`, 300);
     string(event.text, `${path}.text`);
@@ -989,7 +989,35 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       aggregate(outcomeWeights, `${choicePath}.outcomes`);
       opportunityDefinition(choice, choicePath, outcomes);
     });
-  });
+  };
+  events.forEach((entry, i) => eventDefinition(entry, `world.events[${i}]`));
+  if (Object.hasOwn(world, "influences")) {
+    // Entry IDs are catalog action IDs such as `letters.teach`; their events share the world's event namespace.
+    const influenceIds = new Set<string>();
+    const catalogEventIds = new Set(eventIds);
+    array(world.influences, "world.influences", 0, 1_000).forEach((value, i) => {
+      const path = `world.influences[${i}]`;
+      const entry = object(value, path, ["id", "label", "baseWeight", "effects", "event"], ["id", "label", "baseWeight"]);
+      const key = string(entry.id, `${path}.id`, 100);
+      if (!INFLUENCE_ID.test(key) || BAD_KEYS.has(key)) fail(`${path}.id`, "expected a lowercase dotted ID such as 'letters.teach'");
+      if (influenceIds.has(key)) fail(`${path}.id`, `duplicate ID '${key}'`);
+      influenceIds.add(key);
+      string(entry.label, `${path}.label`, 300);
+      if (entry.baseWeight !== 1 && entry.baseWeight !== 3 && entry.baseWeight !== 5) fail(`${path}.baseWeight`, "expected 1, 3 or 5");
+      if (!Object.hasOwn(entry, "effects") && !Object.hasOwn(entry, "event")) fail(path, "an influence entry needs effects or an event");
+      if (Object.hasOwn(entry, "effects")) {
+        effects(entry.effects, `${path}.effects`);
+        if ((entry.effects as DataObject[]).some(effect => effect.type === "loan")) fail(`${path}.effects`, "loan actions require an explicit player choice or activity");
+      }
+      if (!Object.hasOwn(entry, "event")) return;
+      const event = object(entry.event, `${path}.event`, undefined, ["id"]);
+      const eventId = id(event.id, `${path}.event.id`);
+      if (catalogEventIds.has(eventId)) fail(`${path}.event.id`, `duplicate event ID '${eventId}'`);
+      catalogEventIds.add(eventId);
+      if (Object.hasOwn(event, "exclusiveGroup")) fail(`${path}.event.exclusiveGroup`, "influence events cannot join exclusive groups");
+      eventDefinition(event, `${path}.event`);
+    });
+  }
   aggregate(randomWeights, "world.events");
   if (moneylender) {
     const path = "world.economy.moneylender.events";

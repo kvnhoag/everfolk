@@ -1,0 +1,35 @@
+/* Ranked screens: full-page paper sheet over the game, in the pixel theme. */
+dialog.chain-screen{position:fixed;inset:0;z-index:60;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;overflow-y:auto;background:var(--paper,#f4e7c9);color:var(--ink,#263b43);padding:24px 32px 40px}
+dialog.chain-screen::backdrop{background:var(--paper,#f4e7c9)}
+.chain-shell{width:min(880px,100%);margin:0 auto}
+.chain-topline{display:flex;align-items:center;flex-wrap:wrap;gap:10px 20px;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c5aa79;font-size:11px}
+.chain-topline a{color:#41637b;text-decoration:none}
+.chain-topline a:hover{color:#a85e44;text-decoration:underline;text-underline-offset:3px}
+.chain-topline nav{display:flex;gap:16px;margin-left:auto}
+.chain-preview{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#7a5a2c;background:#edcf91;border:2px solid #baa47a;padding:3px 7px}
+.chain-card{border:2px solid #886447;background:#f7ecd4;box-shadow:4px 4px 0 #88644725;padding:22px 24px;margin:0 0 20px;min-width:0}
+.chain-card h1,.chain-card h2{font-family:var(--serif,"Courier New",monospace);font-weight:700;letter-spacing:-1px;color:#263b43;margin:0 0 14px;outline:none;overflow-wrap:anywhere}
+.chain-card h1{font-size:clamp(30px,6vw,44px);line-height:1.05}
+.chain-card h2{font-size:clamp(22px,4.5vw,28px);line-height:1.15}
+.chain-card h3{font-size:13px;font-weight:700;margin:22px 0 10px;letter-spacing:.2px}
+.chain-card p{font-size:13px;line-height:1.7;margin:0 0 12px}
+.chain-kicker{font-size:10px!important;letter-spacing:1.4px;text-transform:uppercase;color:#7b7c64;margin:0 0 10px!important}
+.chain-fine{font-size:11px!important;color:#727562;overflow-wrap:anywhere}
+.chain-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.chain-primary,.chain-secondary{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:11px 16px;font-size:13px;text-align:left;border:2px solid;box-shadow:3px 3px 0 #88644740}
+.chain-primary{background:#41637b;border-color:#263b43;color:#fff2d1}
+.chain-primary:hover:not(:disabled){background:#293c58;color:#fff2d1}
+.chain-primary>span{font-size:17px;line-height:1}
+.chain-secondary{background:#f5e6bf;border-color:#baa47a;color:#263b43}
+.chain-secondary:hover:not(:disabled){background:#edcf91;border-color:#886447;color:#263b43}
+.chain-link{background:transparent;color:#41637b;font-size:12px;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+.chain-tag{display:inline-block;font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:#7a5a2c;background:#f3e1b4;border:1px solid #c7ad75;padding:2px 6px;white-space:nowrap}
+.chain-tag.is-figure{color:#fff2d1;background:#a85e44;border-color:#7d3f2b}
+.chain-error{color:#9c3f2b!important;border-left:3px solid #a85e44;padding-left:10px}
+.chain-notice{color:#5b5a3a!important;border-left:3px solid #baa47a;padding-left:10px}
+.chain-loading,.chain-empty{font-size:13px;color:#727562}
+.chain-field{display:grid;gap:6px;font-size:11px;color:#5d6150}
+.chain-field input,.chain-field select{min-height:42px;min-width:0;width:100%;padding:8px 10px;border:2px solid #baa47a;background:#fbf5e4;color:#263b43;font:13px "DM Sans","Segoe UI",sans-serif}
+.chain-screen a:focus-visible,.chain-screen button:focus-visible,.chain-screen input:focus-visible,.chain-screen select:focus-visible{outline:2px solid #41637b;outline-offset:3px}
+@media(max-width:600px){dialog.chain-screen{padding:16px 14px 32px}.chain-card{padding:18px 16px}.chain-actions>button{flex:1 1 100%}}
+@media(max-width:360px){dialog.chain-screen{padding:12px 10px 28px}.chain-card{padding:16px 12px;box-shadow:3px 3px 0 #88644725}.chain-topline nav{margin-left:0}}

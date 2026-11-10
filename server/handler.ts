@@ -4,8 +4,10 @@ import { ContentConflict, publishDraft, readDraft, readPublished, readPublishedW
 import { handleSeededPlayApi } from "./seeded-play.ts";
 import type { SeededPlayService } from "./seeded-play.ts";
 import { requestIdentity } from "./identity.ts";
+import { handleRankedApi, type RankedDependencies, type RankedEnvironment } from "./ranked/routes.ts";
+import { defaultRankedDependencies } from "./ranked/default-verifier.ts";
 
-export interface ContentEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService }
+export interface ContentEnvironment extends RankedEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
 
 class HttpError extends Error {
   status: number;
@@ -66,6 +68,7 @@ export async function handleApi(request: Request, env: ContentEnvironment): Prom
       const user = identity(request, env);
       return handleSeededPlayApi(request, env.SEEDED_PLAY, user.authenticated ? { userId: request.headers.get("oai-authenticated-user-id")! } : null);
     }
+    if (path === "/api/ranked" || path.startsWith("/api/ranked/")) return handleRankedApi(request, env, env.RANKED ?? defaultRankedDependencies());
     const admin = path === "/api/admin" || path.startsWith("/api/admin/");
     if (admin) {
       requireAdmin(request, env);

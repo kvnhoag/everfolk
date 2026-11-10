@@ -1,0 +1,36 @@
+/* Atlas presentation: strong headings and quiet, colored paper behind the graph. */
+.detail-dialog.skill-wiki-dialog{background:#f3f1e7;border-color:#52674a;box-shadow:5px 5px 0 #314b3838}
+.skill-river .skill-tree-heading{padding:18px 22px;background:linear-gradient(110deg,#193f30,#2c6047);border:1px solid #173728;border-left:5px solid #d7ac54;box-shadow:0 4px 0 #163a2420;gap:18px;margin-bottom:16px}
+.skill-river .skill-tree-heading h3{color:#fffdf2;font-size:34px;margin:4px 0 6px}
+.skill-river .skill-tree-heading p{color:#f1ecd8;font-size:13px}
+.skill-river .skill-tree-heading .skill-tree-eyebrow{color:#f0cb80;letter-spacing:2px}
+.skill-river .skill-tree-heading .skill-wiki-link{color:#fff7df;border:1px solid #91af91;padding:9px 13px;text-decoration:none;background:#ffffff0c}
+.skill-river .skill-tree-heading .skill-wiki-link:hover{background:#ffffff20}
+.skill-river .skill-tree-heading .skill-tree-tally{padding:8px 16px;border:1px solid #94ad86;background:#163b2c;min-width:114px;text-align:center}
+.skill-river .skill-tree-heading .skill-tree-tally>strong{color:#ffe2a2;font-size:30px}
+.skill-river .skill-tree-heading .skill-tree-tally>strong>span{color:#fff5d5}
+.skill-river .skill-tree-heading .skill-tree-tally>span{color:#fff5d5;font-size:11px}
+.skill-river .skill-tree-toolbar{padding:12px 16px;background:#fffdf7;border:1px solid #c2bd9f;border-bottom:3px solid #6d855d;box-shadow:2px 2px 0 #52674a0c}
+.skill-river .skill-tree-search label{font-weight:650;color:#234d37}
+.skill-river .skill-tree-search input{border-color:#7b936e;background:#fff;min-height:40px}
+.skill-river .skill-tree-legend>span{padding:5px 8px;border:1px solid #d1c8ad;background:#fff;gap:6px}
+.skill-river .skill-tree-map-note{padding-left:10px;border-left:3px solid #b18b42;font-size:12px;margin:11px 0}
+.skill-river .skill-tree-map-wrap{border:1px solid #687b50;border-top:3px solid #466342;box-shadow:4px 4px 0 #52674a24}
+.skill-river .skill-delta-branches{background:#e8ecdd;border-bottom:1px solid #9caa86;padding:9px 10px;gap:5px}
+.skill-river .skill-delta-branches>button{border-color:#b1bb9f;background:#fffdf5;min-height:38px}
+.skill-river .skill-delta-branches>button[aria-pressed=true]{background:#245d40;color:#fff;border-color:#173f2b}
+/* Athens/Alexandria board art (user-supplied), dimmed with a parchment wash so skills stay in front. */
+.skill-river .skill-tree-board.skill-delta-board{background-color:#faf4e2;background-image:linear-gradient(#fdf7e9b3,#fdf7e9b3),url("/assets/ui/skill-map-background.png");background-size:cover;background-position:center,center;background-repeat:no-repeat}
+
+.skill-river .skill-delta-channel>header{background:#fffdf9;border:1px solid var(--skill-accent);border-top:3px solid var(--skill-accent);padding:5px 10px;min-width:128px;box-shadow:0 2px 0 #493e2d0c}
+.skill-river .skill-delta-channel>header h4{font-size:16px}
+.skill-river .delta-branch-number{color:var(--skill-accent);font-weight:700}
+.skill-river .skill-delta-source{background:#fffdf2;border-color:#a6853b;box-shadow:0 2px 0 #a6853b22;font-size:14px;padding:6px 14px}
+.skill-river .skill-node-name{background:#fffdf8;color:#282b24;border-radius:2px}
+.skill-river .skill-tree-detail{border-top:4px solid #245d40;box-shadow:3px 3px 0 #52674a20}
+.skill-river .skill-detail-title{padding-bottom:12px;border-bottom:1px solid #c8d1b9}
+.skill-river .skill-detail-section h5{color:#245d40;border-left:3px solid #b18b42;padding-left:8px}
+.skill-river .skill-other-practice{background:#fffdf5;border:1px solid #9caa86;border-left:4px solid #6d855d}
+.skill-river .skill-icon-credits{border-top:1px solid #c2bd9f;padding-top:4px}
+@container(max-width:860px){.skill-river .skill-delta-channel>header{min-width:180px}}
+@media(max-width:600px){.skill-river .skill-tree-heading{padding:16px 14px;gap:10px}.skill-river .skill-tree-heading h3{font-size:28px}.skill-river .skill-tree-heading .skill-tree-tally{min-width:90px;padding:6px 10px}.skill-river .skill-tree-toolbar{padding:12px}.skill-river .skill-tree-legend{gap:6px}.skill-river .skill-tree-legend>span{padding:4px 6px;font-size:11px}.skill-river .skill-tree-map-note{line-height:1.6}.skill-river .skill-delta-branches{padding:8px}}

@@ -1,15 +1,50 @@
-.life-event-feed{display:grid;gap:0;margin-top:12px}
-.life-event-year{display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;padding:15px 0;border-top:1px solid #d5dacb}
-.life-event-year-heading{display:flex;flex-direction:column;gap:4px;padding-top:2px;align-items:flex-start}
-.life-event-year-heading strong{font-size:13px;font-weight:650;color:#3f563d;font-variant-numeric:tabular-nums}
-.life-event-year-heading span{font-size:10px;color:#798370;font-variant-numeric:tabular-nums}
-.life-event-feed .life-event-rows{display:grid;gap:8px;list-style:none;padding:0;margin:0;min-width:0}
-.life-event-feed .life-event-row{display:block;padding:0;margin:0;min-width:0}
-.life-event-feed .life-event-copy p{margin:0;color:#53654c;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
-.life-event-quiet{margin:0;font-size:12px;line-height:1.7;color:#87907e}
-.life-event-sources{margin-top:3px;font-size:10px;line-height:1.5;color:#7e8874}
-.life-event-sources summary{cursor:pointer;width:max-content}
-.life-event-sources>div{display:grid;gap:4px;padding:6px 0 2px}
-.life-event-sources a{color:#617650;text-decoration:underline;text-underline-offset:2px}
-.life-event-feed .life-event-ending p{color:#81543f}
-@media(max-width:600px){.life-event-year{grid-template-columns:61px minmax(0,1fr);column-gap:12px;padding:12px 0}.life-event-year-heading strong{font-size:12px}.life-event-year-heading span{font-size:9px}.life-event-feed .life-event-copy p{font-size:12px;line-height:1.65}.life-event-feed .life-event-rows{gap:7px}}
+.game-dashboard .chronicle-preview{padding:16px 18px;border:1px solid #cbd1c0;background:#fffdf5}
+.game-dashboard .chronicle-heading h2{font-size:20px;font-weight:500;letter-spacing:0}
+.chronicle-preview .chronicle-description{font-size:11px;margin:7px 0 12px}
+.life-record-heading{margin:-16px -18px 0;padding:13px 18px 11px;background:#355c43;border-bottom:1px solid #284b35}
+.game-dashboard .life-record-heading h2{color:#fff9e9;font-weight:700}
+.life-record-heading .chronicle-heading h2 svg{color:#e4cf97}
+.life-record-heading .chronicle-description{margin:6px 0 0;color:#dbe6d0}
+.life-record-heading .text-button{color:#ecf0de}
+.life-record-heading .text-button:hover{color:#fff1bd}
+.life-record-heading .text-button:focus-visible{outline-color:#e4cc8a}
+.life-event-feed{display:grid;gap:0;margin-top:0;--record-ink:#405347;--record-muted:#657365}
+.life-event-year{display:grid;grid-template-columns:68px minmax(0,1fr);gap:14px;padding:12px 0 5px;border:0;border-top:1px solid #dce0d3;background:transparent;box-shadow:none}
+.life-event-year-heading{display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding-top:2px}
+.life-event-year-heading strong{font-size:12px;font-weight:650;color:#465b40;font-variant-numeric:tabular-nums}
+.life-event-year-heading span{font-size:10px;color:#7b8372;font-variant-numeric:tabular-nums}
+.life-event-year-body{min-width:0}
+.life-year-overview{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:6px 12px}
+.life-event-feed .life-year-headline{flex:1 1 190px;margin:0;color:var(--record-ink);font-family:inherit;font-size:13px;font-weight:400;line-height:1.65;letter-spacing:0;overflow-wrap:anywhere}
+.life-event-feed .life-year-changes{display:flex;flex-wrap:wrap;align-items:center;gap:5px;list-style:none;margin:0;padding:0}
+.life-event-feed .life-year-change{display:inline-flex;align-items:center;gap:4px;padding:3px 5px;margin:0;border:1px solid;font-size:11px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.life-year-change.is-gain{color:#1b5b40;background:#e6f0df;border-color:#acbd9c}
+.life-year-change.is-loss{color:#913d2c;background:#f8e8dc;border-color:#d7af99}
+.life-year-change small{font-size:10px;font-weight:600}
+.life-year-change .pixel-icon{flex-shrink:0}
+.life-year-details{margin-top:2px}
+.life-event-feed .life-year-details>summary{display:flex;align-items:center;justify-content:flex-start;gap:5px;min-height:26px;list-style:none;cursor:pointer;color:#858d7d;font-size:9px;font-weight:400;letter-spacing:0;width:max-content;max-width:100%;padding:0;border:0}
+.life-year-details>summary::-webkit-details-marker{display:none}
+.life-year-details>summary:hover{color:#50694d}
+.life-year-details>summary:focus-visible{outline:2px solid #286548;outline-offset:2px}
+.life-year-chevron{display:inline-block;width:5px;height:5px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .15s}
+.life-year-details[open] .life-year-chevron{transform:rotate(225deg)}
+.life-year-expanded{padding:2px 0 10px}
+.life-year-change-note{font-size:11px;line-height:1.5;color:var(--record-muted);margin:3px 0 14px}
+.life-event-feed .life-event-rows{display:grid;gap:12px;list-style:none;padding:0;margin:0;min-width:0}
+.life-event-feed .life-event-row{display:block;padding:0 0 0 12px;margin:0;min-width:0;border-left:2px solid #d7ddca}
+.life-event-feed .life-event-copy p{margin:3px 0 0;color:#445b4b;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.life-entry-overview{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;margin-top:3px}
+.life-event-feed .life-entry-overview>p{flex:1 1 240px;min-width:0;margin:0}
+.life-entry-overview .life-year-changes{max-width:100%;padding-top:2px}
+.life-record-kind{font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:#6f7554}
+.life-event-quiet{margin:0;font-size:12px;line-height:1.7;color:var(--record-muted)}
+.life-event-sources{margin-top:5px;font-size:11px;line-height:1.5;color:#506b4e}
+.life-event-sources summary{cursor:pointer;width:max-content;min-height:24px}
+.life-event-sources>div{display:grid;gap:6px;padding:6px 0 2px}
+.life-event-sources a{color:#315d54;text-decoration:underline;text-underline-offset:3px}
+.life-event-feed .life-event-ending p{color:#853f2d}
+@media(max-width:600px){.game-dashboard .chronicle-preview{padding:14px 12px}.life-event-year{grid-template-columns:51px minmax(0,1fr);gap:10px;padding:10px 0 4px}.life-event-year-heading strong{font-size:11px}.life-event-year-heading span{font-size:9px}.life-event-feed .life-year-headline{font-size:12px;flex-basis:100%}.life-year-overview{gap:5px}.life-event-feed .life-year-change{font-size:10px;padding:3px 4px}.life-event-feed .life-year-details>summary{min-height:28px}.life-event-feed .life-event-copy p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.life-year-chevron{transition:none}}
+@media(max-width:600px){.life-record-heading{margin:-14px -12px 0;padding:12px}.life-record-heading .chronicle-description{margin:5px 0 0}}
+@media(max-width:600px){.life-event-feed .life-entry-overview>p{flex-basis:100%}.life-entry-overview .life-year-changes{padding-top:0}}

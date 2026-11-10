@@ -90,7 +90,7 @@ test("the wiki includes every authored skill and its prerequisite notes", () => 
   const html = renderToStaticMarkup(createElement(SkillTree, { life, world, activities: engine.getActivities(life), initialView: "wiki", onActivity: () => { actions++; } }));
   assert.match(html, /<h3>All skill paths<\/h3>/);
   assert.equal((html.match(/class="skill-tree-node /g) ?? []).length, Object.keys(world.character!.skills).length);
-  for (const definition of Object.values(world.character!.skills)) assert.ok(html.includes(`<span class="skill-node-name">${definition.label}</span>`), definition.label);
+  for (const definition of Object.values(world.character!.skills)) assert.ok(html.includes(`aria-label="${definition.label},`), definition.label);
   assert.match(html, /requires Tool handling 15/);
   assert.match(html, /requires Wood carving 20, Pottery 10/);
   assert.doesNotMatch(html, /skill-practice-button|>Train<|>Take paid work<|>Choose this occupation</);

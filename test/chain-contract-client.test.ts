@@ -6,6 +6,7 @@ import { FIGURE_IDS, RANKED_WORLD_VERSION } from "../chain/ids.ts";
 import type { Evidence, LifeView } from "../chain/types.ts";
 import { resolveChainConfig } from "../client/chain/config.ts";
 import { createLivesContract } from "../client/chain/contract.ts";
+import { createMockContract } from "../client/chain/mock-contract.ts";
 import { readCallResult } from "../client/chain/outcome.ts";
 import type { ContractCall, SignedEvidence, WalletSession } from "../client/chain/types.ts";
 
@@ -45,6 +46,153 @@ async function signedEvidenceFor(life: LifeView, overrides: Partial<Evidence> = 
   const evidence_json = canonicalJson(evidence);
   return { evidence, evidence_json, evidence_hash: await sha256Hex(evidence_json), signature: "ab".repeat(64), verifier_kind: "server-signer" };
 }
+
+// --- mock contract -------------------------------------------------------------------------------
+
+test("mock start, draw, mint round-trip matches T0 shapes", async () => {
+  const contract = createMockContract();
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  assertLifeShape(life);
+  assert.equal(life.status, "alive");
+  assert.equal(life.world_version, RANKED_WORLD_VERSION);
+  assert.ok(life.figure_picks.length > 0, "the default mock genesis seeds figure copies");
+
+  const step = life.figure_picks.length;
+  const draw = await contract.drawNpc(life.life_id, step, "education", HASH_A);
+  assert.deepEqual(Object.keys(draw).sort(), DRAW_KEYS);
+  assert.equal(draw.step, step);
+  assert.equal(draw.category, "education");
+  assert.equal(draw.commands_hash, HASH_A);
+  const drawn = [draw.token_id, draw.action_id, draw.rarity];
+  assert.ok(drawn.every(value => value === null) || drawn.every(value => value !== null), "a draw is either nobody or a full pick");
+
+  await contract.checkpoint(life.life_id, step + 3, HASH_B);
+  const stored = await contract.getLife(life.life_id);
+  assert.ok(stored);
+  assertLifeShape(stored);
+  assert.deepEqual(stored.draws, [draw]);
+  assert.deepEqual(stored.checkpoints, [{ step: step + 3, commands_hash: HASH_B }]);
+  assert.deepEqual(await contract.activeLifeOf(life.account_id), stored);
+
+  const minted = await contract.mintLife(life.life_id, await signedEvidenceFor(stored), "letters.teach");
+  assert.deepEqual(Object.keys(minted).sort(), MINT_KEYS);
+  assert.ok(["figure", "npc"].includes(minted.kind));
+  assert.ok(minted.affection >= 1 && minted.affection <= 100);
+  assert.ok(minted.rarity >= 0 && minted.rarity <= 4);
+
+  assert.equal((await contract.getLife(life.life_id))?.status, "minted");
+  assert.equal(await contract.activeLifeOf(life.account_id), null);
+  const token = await contract.token(minted.token_id);
+  assert.ok(token);
+  assert.equal(token.owner_id, life.account_id);
+  assert.equal(token.extra.life_id, life.life_id);
+  assert.equal(token.extra.evidence_hash, (await signedEvidenceFor(stored)).evidence_hash);
+  assert.equal(token.extra.sources.reduce((sum, share) => sum + share.bps, 0), 10000);
+  await assert.rejects(contract.mintLife(life.life_id, await signedEvidenceFor(stored), "letters.teach"), /no longer in progress/);
+});
+
+test("drawNpc retry with same step returns same draw", async () => {
+  const contract = createMockContract();
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  const first = await contract.drawNpc(life.life_id, 4, "war", HASH_A);
+  const retry = await contract.drawNpc(life.life_id, 4, "war", HASH_A);
+  assert.deepEqual(retry, first);
+  assert.equal((await contract.getLife(life.life_id))?.draws.length, 1);
+  await assert.rejects(contract.drawNpc(life.life_id, 4, "war", HASH_B), /different record already exists/);
+});
+
+test("mock draws are deterministic for the same life and step", async () => {
+  const draws = [];
+  for (let run = 0; run < 2; run += 1) {
+    const contract = createMockContract();
+    const life = await contract.startLife(RANKED_WORLD_VERSION);
+    draws.push([await contract.drawNpc(life.life_id, 4, "education", HASH_A), await contract.drawNpc(life.life_id, 9, "money", HASH_B)]);
+  }
+  assert.deepEqual(draws[0], draws[1]);
+});
+
+test("mock enforces one alive life per account and steps that never go back", async () => {
+  const contract = createMockContract();
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  await assert.rejects(contract.startLife(RANKED_WORLD_VERSION), /already have a ranked life/);
+  await assert.rejects(contract.as("other.testnet").startLife("unknown-world"), /not open for ranked play/);
+
+  await contract.checkpoint(life.life_id, 10, HASH_A);
+  await contract.checkpoint(life.life_id, 10, HASH_A);
+  await assert.rejects(contract.checkpoint(life.life_id, 10, HASH_B), /different record already exists/);
+  await assert.rejects(contract.drawNpc(life.life_id, 9, "fate", HASH_A), /must not go backwards/);
+  await contract.drawNpc(life.life_id, 10, "fate", HASH_A);
+  await assert.rejects(contract.checkpoint(life.life_id, 11, "XYZ"), /64 lowercase hex/);
+  await assert.rejects(contract.as("other.testnet").checkpoint(life.life_id, 12, HASH_A), /owner/);
+  assert.equal((await contract.getLife(life.life_id))?.checkpoints.length, 1);
+});
+
+test("mock abandon deletes the life and applies the cooldown", async () => {
+  let now = 1_000;
+  const contract = createMockContract({ now: () => now, abandonCooldownMs: 600_000 });
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  await contract.abandonLife(life.life_id);
+  assert.equal(await contract.getLife(life.life_id), null);
+  await assert.rejects(contract.startLife(RANKED_WORLD_VERSION), /opens in 600 seconds/);
+  now += 600_000;
+  const next = await contract.startLife(RANKED_WORLD_VERSION);
+  assert.notEqual(next.life_id, life.life_id);
+});
+
+test("mock mint rejects evidence for another seed or an unknown source", async () => {
+  const contract = createMockContract();
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  await assert.rejects(contract.mintLife(life.life_id, await signedEvidenceFor(life, { seed: "0".repeat(64) }), "letters.teach"), /different life seed/);
+  await assert.rejects(
+    contract.mintLife(life.life_id, await signedEvidenceFor(life, { sources: [{ token_id: "999", impact: 1 }] }), "letters.teach"),
+    /did not influence this life/,
+  );
+  await assert.rejects(contract.mintLife(life.life_id, await signedEvidenceFor(life), "military.mentor"), /career/);
+  assert.equal((await contract.getLife(life.life_id))?.status, "alive");
+});
+
+test("mock market pays sources, returns proceeds and moves the token", async () => {
+  const contract = createMockContract({ genesis: false });
+  const source = contract.seedToken({ owner_id: "genesis.testnet", kind: "npc", career_group: "letters", action_id: "letters.teach", rarity: 0, affection: 50 });
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  const evidence = await signedEvidenceFor(life, { sources: [] });
+  const minted = await contract.mintLife(life.life_id, evidence, "letters.teach");
+  assert.deepEqual(await contract.childrenOf(source), []);
+
+  await assert.rejects(contract.as("buyer.testnet").list(minted.token_id, "100"), /owner/);
+  await contract.list(minted.token_id, (10n * ONE_NEAR).toString());
+  assert.deepEqual(await contract.listings(), [{ token_id: minted.token_id, seller_id: life.account_id, price: (10n * ONE_NEAR).toString() }]);
+  await assert.rejects(contract.buy(minted.token_id, (10n * ONE_NEAR).toString()), /already own/);
+  await assert.rejects(contract.as("buyer.testnet").buy(minted.token_id, "1"), /listing price/);
+
+  const proceeds = await contract.as("buyer.testnet").buy(minted.token_id, (10n * ONE_NEAR).toString());
+  assert.equal(proceeds, (9n * ONE_NEAR).toString(), "10% royalty: 5% sources (none here → treasury) + 5% treasury");
+  assert.equal((await contract.token(minted.token_id))?.owner_id, "buyer.testnet");
+  assert.deepEqual(await contract.listings(), []);
+});
+
+test("mock mint credits source owners, stats and children", async () => {
+  const contract = createMockContract({ genesis: false });
+  const teacher = contract.seedToken({ owner_id: "genesis.testnet", kind: "npc", career_group: "letters", action_id: "letters.teach", rarity: 1, affection: 100 });
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  let draw = await contract.drawNpc(life.life_id, 0, "education", HASH_A);
+  for (let step = 1; draw.token_id === null; step += 1) draw = await contract.drawNpc(life.life_id, step, "education", HASH_A.replace("a", String(step % 10)));
+  assert.equal(draw.token_id, teacher);
+  const stored = await contract.getLife(life.life_id);
+  assert.ok(stored);
+  const minted = await contract.mintLife(life.life_id, await signedEvidenceFor(stored), "letters.lend-books");
+
+  assert.equal(await contract.balanceOf("genesis.testnet"), (ONE_NEAR / 2n).toString(), "50% of the 1 NEAR fee to the only source");
+  assert.deepEqual(await contract.tokenStats(teacher), { lives_influenced: 1, earned: (ONE_NEAR / 2n).toString() });
+  assert.deepEqual(await contract.childrenOf(teacher), [minted.token_id]);
+  await contract.as("genesis.testnet").withdraw();
+  assert.equal(await contract.balanceOf("genesis.testnet"), "0");
+  await assert.rejects(contract.as("genesis.testnet").withdraw(), /Nothing to withdraw/);
+
+  await contract.setAction(minted.token_id, "letters.teach");
+  assert.equal((await contract.token(minted.token_id))?.extra.action_id, "letters.teach");
+  await assert.rejects(contract.setAction(minted.token_id, "military.mentor"), /not on this token's menu/);
+});
 
 // --- real contract client against a fake wallet and RPC -------------------------------------------
 

@@ -1,0 +1,33 @@
+.token-hero.is-figure,.market-item.is-figure{border-color:#a85e44;box-shadow:5px 5px 0 #a85e4430}
+.token-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.token-owner{font-size:13px!important;color:#4c5c51;overflow-wrap:anywhere}
+.token-affection{display:flex;align-items:center;gap:12px;font-size:12px;max-width:420px}
+.token-affection>span:first-child{white-space:nowrap;font-weight:700}
+.token-affection .life-report-bar{flex:1;display:block;height:10px;background:#efe0bb;border:1px solid #baa47a}
+.token-affection .life-report-bar>span{display:block;height:100%;background:#a85e44}
+.token-reach{font-family:var(--serif,"Courier New",monospace);font-size:18px!important;font-weight:700;line-height:1.35!important}
+.token-links{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:6px}
+.token-links li{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;background:#fbf5e4;border:1px solid #cdbb95;font-size:13px}
+.token-links a{color:#41637b;overflow-wrap:anywhere}
+.token-links span{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.token-claim{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-top:14px;padding:12px 14px;border:2px solid #41637b;background:#eef0e2}
+.token-claim p{margin:0!important}
+.token-actions{border:0;margin:12px 0 0;padding:0;display:grid;gap:8px;min-width:0}
+.token-actions legend{font-size:12px;font-weight:700;margin-bottom:8px;padding:0}
+.token-actions label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid #d9c79e;background:#fbf5e4;cursor:pointer}
+.token-actions label.is-selected{border-color:#41637b;background:#eef0e2}
+.token-actions input{margin:3px 0 0;accent-color:#41637b}
+.token-actions label>span{display:grid;gap:3px;min-width:0}
+.token-actions strong{font-size:13px}
+.token-actions small{font-size:11px;line-height:1.55;color:#5d6150}
+.token-actions>button{justify-self:start;margin-top:4px}
+.token-sale{display:grid;gap:10px;max-width:420px}
+.token-sale>p{margin:0!important}
+.market-grid{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.market-item{display:flex;flex-direction:column;margin:0}
+.market-item h2{font-size:20px;margin-bottom:10px}
+.market-item h2 a{color:#263b43;text-decoration:none}
+.market-item h2 a:hover{color:#a85e44;text-decoration:underline;text-underline-offset:3px}
+.market-buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:10px;border-top:1px solid #cdbb95}
+.market-buy strong{font-size:16px;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.token-claim>button,.token-actions>button{width:100%}.market-grid{grid-template-columns:1fr}.market-buy>button{flex:0 0 auto}}

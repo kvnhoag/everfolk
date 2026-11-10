@@ -2,6 +2,7 @@ import { useEffect, useId, useRef } from "react";
 import { formatYear } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import StorybookMark from "./StorybookMark.tsx";
+import RankedMenuEntry from "./chain/RankedMenuEntry.tsx";
 import "./main-menu.css";
 import "./storybook-menu.css";
 
@@ -50,6 +51,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
             <button className="main-menu-primary" type="button" onClick={continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>{primaryLabel}<span aria-hidden="true">→</span></button>
             {hasBegun && <button className="main-menu-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "View last life" : "Begin a new life"}</button>}
           </div>
+          <RankedMenuEntry />
           <nav className="main-menu-links" aria-label="Main menu">
             {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
             <button type="button" onClick={onPastLives}>Past lives</button>
