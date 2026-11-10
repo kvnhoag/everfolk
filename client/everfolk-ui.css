@@ -1,0 +1,266 @@
+/* Everfolk: papyrus, fired clay, olive leaves and the blue of the Nile. */
+:root{--ink:#433729;--muted:#786c57;--line:#c5b28b;--accent:#a85e44;--green:#667951;--paper:#f4eddb;--serif:"Courier New",Courier,monospace;--ef-outline:#594630;--ef-blue:#527e8a;--ef-clay:#b57359;--ef-olive:#75805a;--ef-gold:#c59a4b;--ef-panel:#fbf6e9;--ef-shadow:3px 3px 0 #8c765a70;color:var(--ink);background:var(--paper)}
+body{background-color:var(--paper);background-image:conic-gradient(#d8ccb42b 25%,transparent 0 50%,#d8ccb42b 0 75%,transparent 0);background-size:14px 14px}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ef-blue);outline-offset:4px}
+button:hover{color:var(--accent)}
+.everfolk-game{padding:0 28px}
+.everfolk-game[hidden]{display:none}
+.everfolk-game .site-header{max-width:1180px;margin:0 auto;min-height:91px;height:auto;padding:21px 0 14px;display:flex;flex-wrap:wrap;gap:15px 28px;border-bottom:0;align-items:center}
+.brand{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:1px;gap:13px;line-height:1.5}
+.brand-mark{width:30px;height:36px;background:#e0b38a;border:2px solid var(--ef-outline);box-shadow:3px 3px 0 #baa37b;display:grid;place-items:center}
+.brand-mark svg{width:19px;height:19px;color:var(--ef-outline)}
+.brand-caption{font-family:"DM Sans","Segoe UI",sans-serif;font-size:8px;letter-spacing:2px;color:var(--muted);margin-top:1px}
+.everfolk-game .main-nav{position:static;gap:18px;flex:1;justify-content:center;flex-wrap:wrap}
+.everfolk-game .nav-link{font-size:11px;padding:7px 0;min-height:32px;color:#74634f;white-space:nowrap}
+.everfolk-game .nav-link.active{color:var(--ink)}
+.everfolk-game .nav-link.active:after{background:var(--ef-clay);bottom:0;height:2px}
+.small-dot{background:var(--ef-olive)}
+.everfolk-game .save-indicator{font-size:10px;margin:0;color:var(--muted);gap:6px}
+.save-indicator-dot{background:var(--ef-olive)}
+.everfolk-game .page-shell{max-width:1180px;margin:0 auto;padding:10px 0 0}
+.everfolk-game .page-shell.game-dashboard{padding-top:0}
+.game-dashboard .life-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:none;grid-template-rows:auto;gap:18px;align-items:start}
+.life-visual-column{display:flex;flex-direction:column;gap:15px;min-width:0}
+.game-dashboard .story-column{grid-area:auto;display:flex;flex-direction:column;gap:15px;min-width:0;padding:0}
+.life-scene-frame,.game-dashboard .character-panel,.life-overview,.life-moment,.inline-decision,.life-year-rail,.compact-life-record,.game-dashboard>.life-info-sidebar>.household-summary,.game-dashboard>.life-info-sidebar>.compact-skills{border:2px solid var(--ef-outline);box-shadow:var(--ef-shadow);background:var(--ef-panel);border-radius:0}
+.life-scene-frame{position:relative;overflow:hidden;outline:none}
+.life-scene-frame:focus-visible{outline:3px solid var(--ef-blue);outline-offset:5px}
+.game-dashboard .life-scene-frame .scene-image.paper-scene.dashboard-scene.life-banner{border:0;background:#e4ce9e;box-shadow:none;display:flex;flex-direction:column;margin:0}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .life-banner-art{order:0;min-height:0;aspect-ratio:240/144;width:100%;height:auto;isolation:isolate}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy{order:1;position:static;width:auto;max-width:none;margin:0;padding:13px 16px 10px;pointer-events:auto;background:var(--ef-panel);border:0;border-top:2px solid var(--ef-outline);box-shadow:none;align-self:stretch}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy .paper-scene-kicker{display:none}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy h2{font-family:var(--serif);font-size:13px;font-weight:400;line-height:1.6;letter-spacing:.3px;margin:0 0 6px;color:var(--ink)}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .life-banner-situation{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;font-weight:500;color:var(--ef-blue);line-height:1.6}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-event-caption{font-size:12px;line-height:1.65;color:var(--muted);margin:4px 0 0}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-bottom{order:2;border:0;background:var(--ef-panel);padding:0 16px 7px;min-height:0}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy[hidden]{display:none}
+.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-bottom{position:relative;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px;padding:9px 13px;border-top:1px solid var(--line)}
+.dashboard-scene-notes{min-width:0;font-size:10px;line-height:1.6;color:var(--muted)}
+.dashboard-scene-notes>summary{cursor:pointer;min-height:24px;padding:3px 0}
+.dashboard-scene-notes>p{margin:7px 0 3px;font-size:12px;line-height:1.7}
+.game-dashboard .life-scene-frame .paper-motion-controls{flex-shrink:0;align-self:flex-start}
+.game-dashboard .life-scene-frame .paper-motion-controls{min-height:20px}
+.scene-motion-toggle{font-size:9px;color:var(--muted);padding:2px 0;min-height:24px}
+.motion-indicator{background:#a09377;box-shadow:none}
+.motion-indicator.is-moving{background:var(--ef-olive);box-shadow:none}
+.life-scene-location{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 13px;background:var(--ef-outline);color:#fff0ca;font-family:var(--serif);font-size:9px;line-height:1.5;letter-spacing:.6px;text-transform:uppercase}
+.life-scene-location>span:first-child{display:flex;align-items:center;gap:8px}
+.game-dashboard .character-panel{grid-area:auto;display:grid;grid-template-columns:62px minmax(0,1fr) auto;grid-template-rows:auto auto auto;gap:3px 14px;align-items:center;text-align:left;padding:12px 14px;margin:0;min-width:0}
+.game-dashboard .character-panel .portrait-frame{grid-column:1;grid-row:1/4;width:60px;height:78px;margin:0;border:1px solid var(--ef-outline);background:#ead9b8;border-radius:0;box-shadow:2px 2px 0 #d6c099;overflow:hidden}
+.game-dashboard .character-panel .portrait{width:58px;height:76px}
+.game-dashboard .character-panel .portrait-label{display:none}
+.game-dashboard .character-panel h2{grid-column:2;grid-row:1;font:400 15px/1.6 var(--serif);letter-spacing:.4px;margin:0;overflow-wrap:anywhere}
+.game-dashboard .character-panel .character-origin{display:block;grid-column:2;grid-row:2;font-size:11px;line-height:1.4;margin:0;color:var(--muted)}
+.game-dashboard .character-panel .age-line{grid-column:2;grid-row:3;justify-content:flex-start;gap:8px;font-size:10px;line-height:1.5;margin:2px 0 0;color:var(--muted)}
+.game-dashboard .character-panel .character-open{grid-column:3;grid-row:1/3;min-height:34px;padding:7px 9px;font-size:10px;margin:0;background:#e4e6d1;border:1px solid #828866;box-shadow:2px 2px 0 #cfceb0;color:#4e5e3d}
+.game-dashboard .character-panel .another-life{grid-column:3;grid-row:3;justify-self:end;font-size:9px;gap:4px;line-height:1.4;margin:0}
+.game-dashboard .character-panel .another-life svg{width:10px;height:10px}
+.life-overview{padding:12px 13px 0}
+.life-overview-facts{display:grid;grid-template-columns:.8fr 1.1fr 1fr;gap:7px;margin:0 0 18px}
+.life-overview-facts>div{border:1px solid #8b7555;background:#f1e5c9;padding:12px 5px 10px;text-align:center;min-width:0}
+.life-overview-facts dt{font-family:var(--serif);font-size:8px;text-transform:uppercase;letter-spacing:1px;line-height:1.6;color:#7b5737;margin:0 0 8px}
+.life-overview-facts dd{font-family:var(--serif);font-size:15px;line-height:1.5;letter-spacing:.1px;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.life-overview-stats{display:grid;gap:12px;margin:0 0 17px}
+.overview-stat{display:grid;grid-template-columns:86px minmax(0,1fr) 32px;align-items:center;gap:10px;--stat-color:var(--ef-gold)}
+.overview-stat.stat-health{--stat-color:var(--ef-clay)}
+.overview-stat.stat-knowledge{--stat-color:var(--ef-blue)}
+.overview-stat.stat-bonds{--stat-color:var(--ef-olive)}
+.overview-stat-label{font-family:var(--serif);font-size:8px;line-height:1.5;letter-spacing:.4px;text-transform:uppercase}
+.overview-stat>strong{font-family:var(--serif);font-size:9px;line-height:1.4;font-weight:400;text-align:right}
+.segmented-stat-track{position:relative;height:16px;border:1px solid var(--ef-outline);padding:2px;background:#f5e9d0;isolation:isolate;overflow:hidden}
+.segmented-stat-track>span{display:block;height:100%;background:var(--stat-color);transition:width .3s steps(12,end)}
+.segmented-stat-track:after{content:"";position:absolute;inset:2px;pointer-events:none;background:repeating-linear-gradient(to right,transparent 0 10px,#fbf6e9 10px 12px)}
+.overview-wealth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;width:100%;padding:14px 12px;margin-bottom:18px;border:1px solid #8b7555;background:#f1e5c9;color:var(--ink);text-align:left}
+.overview-wealth:hover{background:#ecddbb;color:var(--ink)}
+.overview-wealth-metric{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0}
+.overview-wealth-label{font:600 10px/1.5 "DM Sans","Segoe UI",sans-serif;letter-spacing:1px;text-transform:uppercase;color:#7b5737}
+.overview-wealth-metric>strong{font:700 24px/1.25 var(--serif);letter-spacing:-.5px;color:var(--ink);overflow-wrap:anywhere}
+.overview-cash-note{font:400 11px/1.5 "DM Sans","Segoe UI",sans-serif;color:var(--muted)}
+.overview-wealth-details{align-self:end;justify-self:end;font-size:10px;color:var(--ef-blue)}
+.life-session-bar{position:relative;top:auto;padding:10px 12px 12px;margin:0 0 16px;gap:15px;background:var(--ef-panel);border:1px solid var(--line)}
+.life-session-age{font-family:var(--serif);font-size:9px;gap:7px;color:var(--muted)}
+.life-session-age strong{font-size:15px;font-weight:400;color:var(--ink)}
+.life-session-year{font-size:11px;color:var(--muted)}
+.life-session-bar .playback-bar.life-clock{gap:9px;flex-wrap:wrap}
+.life-session-bar .life-clock .playback-label{min-width:100px;font-size:10px;color:var(--muted)}
+.status-dot{border-radius:0;background:var(--ef-gold)}
+.status-dot.running{background:var(--ef-olive)}
+.life-session-bar .life-clock .playback-controls{gap:3px}
+.life-session-bar .life-clock .play-button,.life-session-bar .life-clock .speed-button{min-width:30px;min-height:30px;border:1px solid var(--line);background:#f3e8ce;border-radius:0;color:var(--ink);font-size:10px}
+.life-session-bar .life-clock .session-play{min-width:68px}
+.life-session-bar .life-clock .play-button.selected,.life-session-bar .life-clock .speed-button.selected{background:var(--ef-blue);border-color:var(--ef-outline);color:var(--ef-panel)}
+.life-session-bar .life-clock .turning-point-button{font-size:10px;color:var(--ef-blue);min-height:30px}
+.session-auto,.session-manage{border:1px solid var(--line);background:#f3e8ce;border-radius:0;color:var(--ink);font-size:10px;padding:6px 9px;min-height:30px}
+.session-auto.is-on{background:var(--ef-olive);border-color:var(--ef-outline);color:var(--ef-panel)}
+.session-desktop-actions{gap:5px}
+.life-session-bar .life-clock .year-clock-track{height:2px;position:absolute;bottom:0;left:0;width:100%;background:#e4d9bd}
+.year-clock-track>span{background:var(--ef-gold)}
+.life-moment{padding:18px 17px 13px}
+.life-moment-intro{font-size:12px;line-height:1.65;font-style:italic;color:var(--ef-blue);border-left:4px solid #a0ac7b;padding:0 0 0 11px;margin:0 0 18px}
+.life-moment-heading{display:flex;gap:12px;align-items:baseline;margin-bottom:15px}
+.life-moment-heading>span{font-family:var(--serif);font-size:8px;line-height:1.5;white-space:nowrap;padding:6px 7px;background:#cadcdf;border:1px solid #6c8c8e;color:#3b626d}
+.life-moment-heading h2{font-family:var(--serif);font-weight:400;font-size:13px;letter-spacing:.4px;line-height:1.7;margin:0;text-transform:uppercase}
+.life-moment-copy{font-size:13px;line-height:1.8;color:#6d5b44;margin:0 0 20px}
+.moment-advance{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:43px;padding:11px 13px;background:#efe1c0;border:2px solid var(--ef-outline);box-shadow:2px 2px 0 #bca581;color:var(--ink);font-size:12px;text-align:left}
+.moment-advance:hover{background:#e5d0a2;color:var(--ink)}
+.moment-chronicle{display:flex;gap:9px;align-items:center;margin-top:12px;padding:4px 0;min-height:28px;background:transparent;font-size:10px;color:var(--ef-blue)}
+.game-dashboard .inline-decision{position:static;display:block;width:100%;max-height:none;padding:0;margin:0;overflow:visible;color:var(--ink)}
+.inline-decision .life-decision-meta{padding:10px 14px;gap:8px;border-bottom:1px solid var(--line);background:#f1e5c9;font-size:10px}
+.inline-decision .life-decision-meta>span:first-child{font-family:var(--serif);font-weight:400;font-size:8px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent)}
+.inline-decision .life-decision-meta>button{border:1px solid #a59170;border-radius:0;background:#fbf6e9;padding:5px 7px;min-height:28px;font-size:9px;color:var(--muted)}
+.inline-decision .life-decision-content{padding:18px 16px 14px}
+.inline-decision .life-decision-content>h2{font:400 14px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.5px;color:var(--ink);margin:0 0 13px}
+.inline-decision .life-decision-content>p{font-size:13px;line-height:1.8;color:#6d5b44;margin-bottom:18px}
+.inline-decision .life-decision-options{gap:10px}
+.inline-decision .life-decision-options .life-choice-commit{padding:11px 12px;gap:10px;border:2px solid var(--ef-outline);border-radius:0;background:#f2e6cc;box-shadow:2px 2px 0 #bca581;color:var(--ink);min-height:46px;transition:background .12s,border-color .12s}
+.inline-decision .life-decision-options .life-choice-commit:hover,.inline-decision .life-decision-options .life-choice-commit:focus-visible{background:#e8d6b2;border-color:#527e8a;color:var(--ink)}
+.inline-decision .life-choice-commit.is-previewed{box-shadow:inset 3px 0 var(--ef-blue),2px 2px 0 #bca581}
+.inline-decision .life-option-number{font-family:var(--serif);font-size:8px;font-weight:400;line-height:1.6;color:#9b7752;margin-top:2px;min-width:11px}
+.inline-decision .life-decision-options strong{font-size:12px;font-weight:500;line-height:1.6}
+.inline-decision .life-decision-options .choice-impact{font-size:10px;line-height:1.6;margin-top:4px}
+.inline-decision .life-decision-content>.life-decision-legend{font-size:9px;line-height:1.5;margin:13px 0 0;color:var(--muted)}
+.inline-choice-preview{font-size:10px;color:var(--muted);margin-top:12px}
+.inline-choice-preview>summary{cursor:pointer;min-height:28px;padding:6px 0}
+.inline-choice-preview .compact-skills{margin-top:8px}
+.inline-decision .life-decision-content>footer{margin-top:10px;text-align:right}
+.inline-decision .life-decision-content>footer button{font-size:9px;border:1px solid var(--line);border-radius:0;color:var(--muted);padding:6px 8px;min-height:28px}
+.inline-decision .life-decision-sources{margin-top:8px}
+.game-dashboard .compact-life-record{padding:0;margin:0}
+.compact-legacy-record{border:2px solid var(--ef-outline);box-shadow:var(--ef-shadow);background:var(--ef-panel)}
+.compact-legacy-record .current-legacy{margin:0;padding:14px;border:0}
+.compact-life-record>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 15px;cursor:pointer;font-family:var(--serif);font-size:9px;line-height:1.6}
+.compact-life-record>summary::-webkit-details-marker{display:none}
+.life-record-count{font-family:"DM Sans","Segoe UI",sans-serif;font-size:10px;color:var(--muted)}
+.life-record-count>span{margin-left:10px}
+.compact-life-record[open]>summary{border-bottom:1px solid var(--line)}
+.compact-life-record[open]>.chronicle-heading,.compact-life-record[open]>.chronicle-description,.compact-life-record[open]>.life-event-feed{margin:12px 15px}
+.compact-life-record .chronicle-heading h2{font:400 12px/1.6 var(--serif)}
+.compact-life-record .life-event-feed{max-height:340px;overflow:auto;scrollbar-color:#a08b67 #f2e6cc;scrollbar-width:thin}
+.game-dashboard .yearly-focus{border:1px solid var(--line);padding:14px 15px;background:var(--ef-panel)}
+.yearly-focus h2{color:var(--ink)}
+.yearly-focus-options button{border-radius:0;border-color:#c5b28b;color:var(--ink);font-size:11px;background:#f4ead3}
+.yearly-focus-options button[aria-pressed=true]{background:#e2e5ce;border-color:#828866;color:#4e5e3d}
+.life-year-rail{margin:18px 0 0;padding:14px 17px 12px;overflow:hidden}
+.life-year-rail-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 20px}
+.life-year-rail-heading>strong{font:400 9px/1.6 var(--serif);letter-spacing:.4px;text-transform:uppercase}
+.life-year-rail-heading>span{font-size:10px;color:var(--muted)}
+.life-year-rail-track{position:relative;margin:0 27px}
+.life-year-rail-track:before{content:"";position:absolute;top:5px;left:0;right:0;height:3px;background:#ded0af}
+.life-year-rail-progress{position:absolute;top:5px;left:0;width:var(--life-progress);height:3px;background:var(--ef-olive)}
+.life-year-rail-present{position:absolute;left:var(--life-progress);top:2px;width:8px;height:9px;background:var(--ef-gold);border:1px solid var(--ef-outline);transform:translateX(-50%);z-index:2}
+.life-year-rail-stops{display:flex;justify-content:space-between;list-style:none;margin:0 -27px;padding:0;position:relative}
+.life-year-stop{width:54px;text-align:center}
+.life-year-stop>button{display:flex;flex-direction:column;align-items:center;width:100%;padding:0 0 4px;background:transparent;gap:8px;color:#8e7d62}
+.life-year-stop>button:disabled{opacity:1;cursor:default}
+.life-year-stop-mark{display:block;width:10px;height:11px;border:2px solid #8c765a;background:#f9efda;margin-bottom:5px}
+.life-year-stop.is-lived .life-year-stop-mark{background:#9aa77c;border-color:var(--ef-outline)}
+.life-year-stop.is-current .life-year-stop-mark{background:#d7ac61}
+.life-year-stop.is-lived>button{color:var(--ink)}
+.life-year-stop-age{font:400 8px/1.4 var(--serif);text-transform:uppercase}
+.life-year-stop-year{font-size:8px;line-height:1.5;white-space:nowrap}
+.game-dashboard>.life-info-sidebar{grid-area:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;align-items:start}
+.game-dashboard>.life-info-sidebar>.household-summary,.game-dashboard>.life-info-sidebar>.compact-skills{grid-area:auto;min-width:0}
+.life-info-sidebar .household-summary summary{font:400 10px/1.6 var(--serif);padding:13px 15px;color:var(--ink)}
+.life-info-sidebar .household-summary-content{padding:0 15px 14px}
+.life-info-sidebar .household-field-label{color:var(--muted)}
+.life-info-sidebar .household-summary p{font-size:12px;color:#74634f}
+.life-info-sidebar .household-open{color:var(--ef-blue)}
+.game-dashboard .life-health-panel{border-radius:0;margin:0;background:#eeeeda;border-color:#b4b894;color:var(--ink)}
+.game-dashboard .health-urgent{background:#f0e0c8;border-color:#b88b68}
+.game-dashboard .life-health-panel h3{font:400 12px/1.6 var(--serif)}
+.game-dashboard .health-care-action>button{border-radius:0}
+.game-dashboard .decision-waiting{border-radius:0;margin:0;background:#f2e5c7;border:1px solid #b59b70;color:#806040}
+.game-dashboard .decision-waiting button{border-radius:0;background:var(--ef-blue);color:var(--ef-panel)}
+.everfolk-game .site-footer{max-width:1180px;margin:22px auto 0;padding:13px 0 20px;border-color:#c5b28b;font-size:10px;color:var(--muted)}
+.everfolk-game .site-footer>span{font:400 8px/1.7 var(--serif);font-style:normal}
+.everfolk-game .site-footer button{font-size:10px;color:var(--muted)}
+.main-menu{background:transparent;padding:28px 38px;color:var(--ink)}
+.main-menu-shell{max-width:1180px}
+.main-menu-topline{color:var(--muted);border-color:var(--line)}
+.main-menu-mark{border:2px solid var(--ef-outline);border-radius:0;background:#dfb38b;filter:none;box-shadow:2px 2px 0 #baa37b;color:var(--ef-outline)}
+.main-menu .main-menu-kicker{font-family:var(--serif);font-size:10px;line-height:1.8;text-transform:uppercase;letter-spacing:.5px;color:var(--ef-blue)}
+.main-menu h1{font:400 clamp(38px,4.4vw,62px)/1.3 var(--serif);letter-spacing:0;text-shadow:3px 3px 0 #d2bd95;color:var(--ink)}
+.main-menu h1>span{color:var(--ef-clay)}
+.main-menu .main-menu-world{font-family:"DM Sans","Segoe UI",sans-serif;font-weight:500;font-size:18px;letter-spacing:0;color:var(--muted);margin:18px 0 28px}
+.main-menu .main-menu-primary{border:2px solid var(--ef-outline);border-radius:0;background:var(--ef-blue);color:var(--ef-panel);box-shadow:var(--ef-shadow);padding:15px 18px;font-size:13px}
+.main-menu .main-menu-primary:hover{background:#3e6570;color:var(--ef-panel)}
+.main-menu .main-menu-secondary{border:1px solid #9e8866;border-radius:0;background:#efe2c5;color:var(--ink)}
+.main-menu-landscape{border:2px solid var(--ef-outline);border-radius:0;box-shadow:5px 5px 0 #8c765a70;background:#e7cc97}
+.main-menu-landscape figcaption{background:var(--ef-outline);color:#fff0ca;font-family:var(--serif);font-size:9px;font-weight:400;line-height:1.8;letter-spacing:0;border:0}
+.main-menu-world-preview{border:2px solid #8c765a;border-radius:0;box-shadow:3px 3px 0 #8c765a45}
+.main-menu-world-preview>span{background:#f7eacb;color:var(--ink);font-size:10px}
+.main-menu-footer{border-color:var(--line);color:var(--muted)}
+.main-menu-links button{color:var(--muted)}
+.primary-button{background:var(--ef-blue);border-color:var(--ef-outline);color:var(--ef-panel)}
+.primary-button:hover{background:#3e6570;border-color:var(--ef-outline);color:var(--ef-panel)}
+.secondary-button{color:var(--ink);border-color:#a59170}
+.text-button,.another-life{color:var(--ef-blue)}
+dialog.detail-dialog,dialog.life-decision-dialog,dialog.birth-roll-popover{background:var(--ef-panel);border-color:var(--ef-outline);color:var(--ink);box-shadow:5px 5px 0 #59463080}
+dialog.detail-dialog .dialog-content>h2,dialog.birth-roll-popover .birth-popover-heading h2{font-size:21px;line-height:1.7;font-weight:400;letter-spacing:.2px;color:var(--ink)}
+dialog.birth-roll-popover .birth-popover-heading{background:#efe2c4;border-color:var(--line)}
+dialog.birth-roll-popover .birth-roll-number{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1.6}
+.pause-brand{font:400 15px/1.6 var(--serif);letter-spacing:.5px;color:var(--ink)}
+.pause-content h1{font:400 27px/1.6 var(--serif);letter-spacing:0}
+.pause-card{background:var(--ef-panel);border-color:var(--ef-outline)}
+.pause-continue{background:var(--ef-blue)}
+@media(max-width:1120px){
+  .everfolk-game .site-header{gap:12px 20px}.everfolk-game .main-nav{gap:13px}.everfolk-game .nav-link{font-size:10px}.everfolk-game .save-indicator{font-size:9px}
+  .life-session-bar{flex-wrap:wrap;gap:8px 16px}.life-session-bar .playback-bar.life-clock{flex-basis:70%}.session-desktop-actions{display:none}.session-more{display:block}
+  .session-more>summary{border-radius:0;min-height:30px;width:30px;border-color:var(--line)}.session-more-options{background:var(--ef-panel);border-radius:0;border-color:var(--ef-outline)}
+  .game-dashboard .character-panel{grid-template-columns:52px minmax(0,1fr)}.game-dashboard .character-panel .portrait-frame{width:50px;height:68px}.game-dashboard .character-panel .portrait{width:48px;height:66px}
+  .game-dashboard .character-panel h2{font-size:12px}.game-dashboard .character-panel .character-open{grid-column:1/-1;grid-row:4;justify-content:space-between;margin-top:9px}.game-dashboard .character-panel .another-life{grid-column:1/-1;grid-row:5;justify-self:start;margin-top:6px}
+  .overview-stat{grid-template-columns:76px minmax(0,1fr) 27px;gap:8px}.life-overview-facts dd{font-size:12px}.life-overview-facts dt{font-size:7px}
+}
+@media(max-width:760px){
+  .everfolk-game{padding:0 16px}.everfolk-game .site-header{padding:17px 0 12px;gap:12px;min-height:0}.brand{font-size:18px}.brand-caption{font-size:7px}.everfolk-game .save-indicator{margin-left:auto}
+  .everfolk-game .main-nav{display:flex;order:3;justify-content:flex-start;flex-basis:100%;gap:4px 17px;flex-wrap:nowrap;overflow:auto;padding:0 0 5px;scrollbar-width:thin;scrollbar-color:#bca581 transparent}.everfolk-game .nav-link{font-size:11px;flex-shrink:0}
+  .game-dashboard .life-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:none;gap:15px}.life-visual-column{gap:12px}.game-dashboard .story-column{gap:13px}
+  .game-dashboard .life-scene-frame .dashboard-scene.life-banner .life-banner-art{aspect-ratio:240/116}.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy{padding:12px 13px 8px}.game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-copy h2{font-size:12px;line-height:1.6}
+  .game-dashboard .character-panel{grid-template-columns:50px minmax(0,1fr) auto;padding:11px 12px;gap:3px 12px}.game-dashboard .character-panel .character-open{grid-column:3;grid-row:1/3;font-size:9px;margin:0;padding:6px 8px;min-height:32px}.game-dashboard .character-panel .another-life{grid-column:3;grid-row:3;justify-self:end;font-size:8px;margin:0;max-width:95px}.game-dashboard .character-panel .character-origin{font-size:10px}.game-dashboard .character-panel .age-line{font-size:9px;gap:6px}
+  .life-session-bar{padding:9px 10px 12px;gap:9px 14px;margin-bottom:13px}.life-session-bar .playback-bar.life-clock{flex-basis:100%;gap:7px}.life-session-bar .life-clock .playback-label{font-size:9px;min-width:100px}.life-session-bar .life-clock .playback-controls{order:2;flex:1}.life-session-bar .life-clock .turning-point-button{order:0;margin-left:auto;font-size:9px}.life-session-bar .life-clock .speed-button{min-width:30px}.life-session-bar .life-clock .advanced-speed{display:none}.session-more{order:2}
+  .life-overview-facts{grid-template-columns:.8fr 1.1fr 1fr;margin-bottom:17px}.life-overview-facts dd{font-size:15px}.life-overview-facts dt{font-size:8px}.overview-stat{grid-template-columns:85px minmax(0,1fr) 32px;gap:9px}.overview-stat-label{font-size:8px}
+  .life-moment{padding:17px 15px 12px}.life-moment-heading h2{font-size:12px}.life-moment-heading{gap:10px}.life-moment-copy{font-size:13px}
+  .life-year-rail{padding:13px 10px 10px;margin-top:15px}.life-year-rail-heading{gap:6px;margin-bottom:17px}.life-year-rail-heading>strong{font-size:7px}.life-year-rail-heading>span{font-size:8px}.life-year-rail-track{margin:0 14px}.life-year-rail-stops{margin:0 -14px}.life-year-stop{width:29px}.life-year-stop-age{font-size:6px}.life-year-stop-year{display:none}.life-year-stop-mark{width:8px;height:9px;margin-bottom:4px}.life-year-rail-track:before,.life-year-rail-progress{top:4px}.life-year-rail-present{top:1px}
+  .game-dashboard>.life-info-sidebar{grid-template-columns:minmax(0,1fr);gap:13px;margin-top:15px}.everfolk-game .site-footer{gap:14px;flex-wrap:wrap;margin-top:18px}.everfolk-game .site-footer>span{font-size:7px}
+  .main-menu{padding:22px 22px}.main-menu .main-menu-layout{gap:30px;padding-top:30px}.main-menu h1{font-size:clamp(31px,7.7vw,53px);letter-spacing:0}.main-menu .main-menu-kicker{font-size:8px}.main-menu .main-menu-world{font-size:15px}.main-menu-landscape figcaption{font-size:7px}.main-menu .main-menu-world-preview>span{font-size:8px}
+}
+@media(max-width:390px){.everfolk-game{padding:0 12px}.brand{font-size:16px}.game-dashboard .character-panel{grid-template-columns:45px minmax(0,1fr);gap:3px 10px}.game-dashboard .character-panel .portrait-frame{width:44px;height:62px}.game-dashboard .character-panel .portrait{width:42px;height:60px}.game-dashboard .character-panel .character-open{grid-column:1/-1;grid-row:4;margin-top:7px}.game-dashboard .character-panel .another-life{grid-column:1/-1;grid-row:5;max-width:none;justify-self:start;margin-top:7px}.overview-stat{grid-template-columns:77px minmax(0,1fr) 28px}.life-overview-facts dd{font-size:12px}.life-moment-heading{flex-wrap:wrap}.life-year-rail-heading{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.segmented-stat-track>span{transition:none}}
+
+/* Keep the game's original DM Sans and Courier typography, at readable sizes. */
+.brand{font-size:25px;font-weight:700;letter-spacing:-.5px}
+.game-dashboard .character-panel h2{font-size:23px;font-weight:700;letter-spacing:-.5px;line-height:1.2}
+.life-overview-facts dt{font-family:"DM Sans","Segoe UI",sans-serif;font-size:10px;font-weight:600;letter-spacing:1.4px}
+.life-overview-facts dd{font-size:22px;font-weight:700;line-height:1.25}
+.overview-stat-label{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;font-weight:600;letter-spacing:1px}
+.overview-stat>strong{font-family:"DM Sans","Segoe UI",sans-serif;font-size:12px;font-weight:600}
+.life-overview-facts{margin-bottom:18px}
+.life-overview-stats{gap:13px}
+.life-moment-heading>span{font-size:11px;font-weight:700}
+.life-moment-heading h2,.inline-decision .life-decision-content>h2{font-size:20px;font-weight:700;letter-spacing:0;line-height:1.4}
+.inline-decision .life-decision-meta>span:first-child{font-family:"DM Sans","Segoe UI",sans-serif;font-size:10px;font-weight:600;letter-spacing:1px}
+.inline-decision .life-option-number{font-family:"DM Sans","Segoe UI",sans-serif;font-size:10px;font-weight:600}
+.life-session-age{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px}
+.life-session-age strong{font-size:22px;font-weight:600}
+.life-scene-location{font-size:11px;font-weight:700;letter-spacing:1px}
+.compact-life-record>summary,.life-year-rail-heading>strong,.life-info-sidebar .household-summary summary{font-family:"DM Sans","Segoe UI",sans-serif;font-size:12px;font-weight:600;letter-spacing:.2px}
+.life-year-stop-age{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;font-weight:600}
+.life-year-stop-year{font-size:9px}
+.main-menu h1{font-size:clamp(52px,6vw,78px);font-weight:700;letter-spacing:-3px;line-height:1.1}
+.main-menu .main-menu-kicker{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;letter-spacing:1.4px}
+.main-menu-landscape figcaption{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;font-weight:500}
+.everfolk-game .site-footer>span{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px}
+dialog.detail-dialog .dialog-content>h2,dialog.birth-roll-popover .birth-popover-heading h2{font-size:32px;font-weight:700;line-height:1.2;letter-spacing:-1px}
+.pause-brand{font-size:23px;font-weight:700}
+.pause-content h1{font-size:36px;font-weight:700;line-height:1.2}
+@media(max-width:1120px){.life-overview-facts dd{font-size:19px}.game-dashboard .character-panel h2{font-size:21px}}
+@media(max-width:760px){
+  .brand{font-size:24px}.game-dashboard .character-panel h2{font-size:22px}.life-overview-facts dd{font-size:21px}.overview-stat-label{font-size:10px}.life-scene-location{font-size:10px}
+  .life-moment-heading h2,.inline-decision .life-decision-content>h2{font-size:20px}.life-moment-heading>span{font-size:10px}.life-year-rail-heading>strong{font-size:10px}.life-year-stop-age{font-size:9px}
+  .main-menu h1{font-size:clamp(47px,12vw,72px);letter-spacing:-2px}.main-menu .main-menu-kicker{font-size:10px}.main-menu-landscape figcaption{font-size:10px}.everfolk-game .site-footer>span{font-size:10px}
+}
+.life-overview-facts.has-wealth{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:12px}
+.life-overview-facts.has-wealth>div{display:flex;align-items:baseline;gap:7px;padding:0;border:0;background:transparent;text-align:left}
+.life-overview-facts.has-wealth dt{font-size:9px;letter-spacing:1px;margin:0}
+.life-overview-facts.has-wealth dd{font:500 14px/1.5 "DM Sans","Segoe UI",sans-serif;letter-spacing:0}
+@media(max-width:390px){.overview-wealth{gap:9px 12px;padding:12px 10px}.overview-wealth-label{font-size:9px;letter-spacing:.7px}.overview-wealth-metric>strong{font-size:22px}.overview-cash-note{font-size:10px}}

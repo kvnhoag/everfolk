@@ -1,0 +1,50 @@
+[
+  {
+    "id": "household-royal-kin",
+    "title": "The General Tjahapimu",
+    "url": "https://www.metmuseum.org/art/collection/search/551806",
+    "publisher": "The Metropolitan Museum of Art, Egyptian Art; object 08.205.1",
+    "kind": "museum",
+    "period": "Dynasty 30, reign of Nectanebo II, 360–343 BCE",
+    "geography": "Memphis and the Egyptian royal administration",
+    "summary": "The statue's inscription names Tjahapimu as a brother and father of kings. The museum discusses his royal family relationships and political and military responsibilities.",
+    "limitations": "Some details of the genealogy remain uncertain. This object does not attest a royal family at Rhakotis, the player's ancestry, inheritance rights or a particular coastal estate. The game's royal household and its personal experiences are fiction.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "household-late-period",
+    "title": "Egypt in the Late Period (ca. 664–332 B.C.)",
+    "url": "https://www.metmuseum.org/essays/egypt-in-the-late-period-ca-712-332-b-c",
+    "publisher": "Marsha Hill and James P. Allen, The Metropolitan Museum of Art; revised 2018",
+    "kind": "museum",
+    "period": "Late Period Egypt, including Dynasty 30 and Persian reconquest in 343 BCE",
+    "geography": "Egypt, including Memphis and the Nile Delta",
+    "summary": "Surveys changing government, Egyptian and foreign military communities, temple patronage and elite participation in religious institutions. It places Nectanebo II and the Persian reconquest within the transition to Alexander's conquest.",
+    "limitations": "A broad historical account covering several centuries, not a census of Rhakotis in 350 BCE. It does not establish the game's household frequencies, starting cash, ability ranges, care arrangements or fictional family outcomes. Later Ptolemaic institutions must not be assumed at birth.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "household-temple-family",
+    "title": "Block Statue of the God's Father Pameniuwedja, son of Nesmin and Nestefnut",
+    "url": "https://www.metmuseum.org/art/collection/search/549514",
+    "publisher": "The Metropolitan Museum of Art, Egyptian Art; object 07.228.25",
+    "kind": "museum",
+    "period": "Fourth century BCE, Dynasty 30 to early Ptolemaic Period",
+    "geography": "Egypt; the object does not establish a Rhakotis household",
+    "summary": "The inscription names a priest's parents and records his father with the same priestly titles, providing an example of family connections within temple service.",
+    "limitations": "One priestly family does not establish universal hereditary office or the means of every temple household. The fictional player does not inherit a priesthood, education, occupation or guaranteed patronage from this comparison.",
+    "accessed": "2026-11-08"
+  },
+  {
+    "id": "household-farming-context",
+    "title": "Farmers in ancient Egypt",
+    "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/social/farmer.html",
+    "publisher": "Digital Egypt for Universities, University College London",
+    "kind": "scholarship",
+    "period": "Comparative discussion across ancient Egyptian periods",
+    "geography": "Egypt; not a household survey of the fourth-century BCE coast",
+    "summary": "Discusses evidence and uncertainty concerning farming households, land, property and social status. It cautions against simple conclusions about farmers' circumstances.",
+    "limitations": "The article does not establish the tenancy terms, wealth, legal status or routines of a particular 350 BCE household. The game's tenant-farming family, financial ranges and choices are authored fiction rather than measured historical distributions.",
+    "accessed": "2026-11-08"
+  }
+]

@@ -1,0 +1,15 @@
+.life-event-feed{display:grid;gap:0;margin-top:12px}
+.life-event-year{display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;padding:15px 0;border-top:1px solid #d5dacb}
+.life-event-year-heading{display:flex;flex-direction:column;gap:4px;padding-top:2px;align-items:flex-start}
+.life-event-year-heading strong{font-size:13px;font-weight:650;color:#3f563d;font-variant-numeric:tabular-nums}
+.life-event-year-heading span{font-size:10px;color:#798370;font-variant-numeric:tabular-nums}
+.life-event-feed .life-event-rows{display:grid;gap:8px;list-style:none;padding:0;margin:0;min-width:0}
+.life-event-feed .life-event-row{display:block;padding:0;margin:0;min-width:0}
+.life-event-feed .life-event-copy p{margin:0;color:#53654c;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.life-event-quiet{margin:0;font-size:12px;line-height:1.7;color:#87907e}
+.life-event-sources{margin-top:3px;font-size:10px;line-height:1.5;color:#7e8874}
+.life-event-sources summary{cursor:pointer;width:max-content}
+.life-event-sources>div{display:grid;gap:4px;padding:6px 0 2px}
+.life-event-sources a{color:#617650;text-decoration:underline;text-underline-offset:2px}
+.life-event-feed .life-event-ending p{color:#81543f}
+@media(max-width:600px){.life-event-year{grid-template-columns:61px minmax(0,1fr);column-gap:12px;padding:12px 0}.life-event-year-heading strong{font-size:12px}.life-event-year-heading span{font-size:9px}.life-event-feed .life-event-copy p{font-size:12px;line-height:1.65}.life-event-feed .life-event-rows{gap:7px}}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg shape-rendering="crispEdges" data-appearance-key="bakery-household:female:1" data-origin="bakery-household" data-sex="female" data-avatar-variant="1" data-life-stage="youth" data-skin="#d9a579" data-hair="#65503e" data-hair-style="side-braid" data-facial-hair="none" data-robe="#6b8051" data-accent="#8c4947" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="112" viewBox="0 0 240 112">
+  <title>Everfolk — bakery-household/female/youth-1-standing</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Contact_shadow" data-name="01 Contact shadow">
+    <rect id="_01_Contact_shadow___pixels_1" data-name="01 Contact shadow · pixels 1" x="159" y="96" width="19" height="2" fill="#a18c68"/>
+  </g>
+  <g id="_02_Limbs" data-name="02 Limbs">
+    <path id="_02_Limbs___pixels_1" data-name="02 Limbs · pixels 1" d="M161 76 L163 76 L163 87 L161 87 Z M173 76 L175 76 L175 86 L173 86 Z M164 90 L167 90 L167 96 L164 96 Z" fill="#d9a579"/>
+    <rect id="_02_Limbs___pixels_2" data-name="02 Limbs · pixels 2" x="169" y="90" width="3" height="6" fill="#bf8b62"/>
+  </g>
+  <g id="_03_Tunic_and_mantle" data-name="03 Tunic and mantle">
+    <path id="_03_Tunic_and_mantle___pixels_1" data-name="03 Tunic and mantle · pixels 1" d="M164 73 L172 73 L172 75 L164 75 Z M162 75 L174 75 L174 91 L162 91 Z" fill="#6b8051"/>
+    <path id="_03_Tunic_and_mantle___pixels_2" data-name="03 Tunic and mantle · pixels 2" d="M172 76 L174 76 L174 91 L172 91 Z M167 79 L168 79 L168 89 L167 89 Z" fill="#4c623d"/>
+    <path id="_03_Tunic_and_mantle___pixels_3" data-name="03 Tunic and mantle · pixels 3" d="M164 74 L167 74 L167 79 L164 79 Z M166 78 L169 78 L169 83 L166 83 Z M168 82 L171 82 L171 90 L168 90 Z" fill="#8c4947"/>
+    <rect id="_03_Tunic_and_mantle___pixels_4" data-name="03 Tunic and mantle · pixels 4" x="165" y="75" width="1" height="3" fill="#f5e6bf"/>
+    <rect id="_03_Tunic_and_mantle___pixels_5" data-name="03 Tunic and mantle · pixels 5" x="163" y="89" width="10" height="1" fill="#8c4947"/>
+    <rect id="_03_Tunic_and_mantle___pixels_6" data-name="03 Tunic and mantle · pixels 6" x="163" y="90" width="10" height="3" fill="#6b8051"/>
+    <rect id="_03_Tunic_and_mantle___pixels_7" data-name="03 Tunic and mantle · pixels 7" x="171" y="90" width="2" height="3" fill="#4c623d"/>
+  </g>
+  <g id="_04_Face_and_neck" data-name="04 Face and neck">
+    <path id="_04_Face_and_neck___pixels_1" data-name="04 Face and neck · pixels 1" d="M166 71 L170 71 L170 74 L166 74 Z M165 65 L172 65 L172 71 L165 71 Z" fill="#d9a579"/>
+    <rect id="_04_Face_and_neck___pixels_2" data-name="04 Face and neck · pixels 2" x="166" y="71" width="5" height="1" fill="#bf8b62"/>
+    <rect id="_04_Face_and_neck___pixels_3" data-name="04 Face and neck · pixels 3" x="164" y="68" width="1" height="2" fill="#d9a579"/>
+    <rect id="_04_Face_and_neck___pixels_4" data-name="04 Face and neck · pixels 4" x="172" y="68" width="1" height="2" fill="#bf8b62"/>
+  </g>
+  <g id="_05_Hair_and_age_marks" data-name="05 Hair and age marks">
+    <path id="_05_Hair_and_age_marks___pixels_1" data-name="05 Hair and age marks · pixels 1" d="M165 64 L172 64 L172 66 L165 66 Z M165 65 L170 65 L170 67 L165 67 Z M164 66 L166 66 L166 69 L164 69 Z M171 66 L173 66 L173 78 L171 78 Z" fill="#65503e"/>
+    <rect id="_05_Hair_and_age_marks___pixels_2" data-name="05 Hair and age marks · pixels 2" x="172" y="74" width="1" height="2" fill="#8c4947"/>
+    <rect id="_05_Hair_and_age_marks___pixels_3" data-name="05 Hair and age marks · pixels 3" x="171" y="72" width="1" height="1" fill="#bf8b62"/>
+  </g>
+  <g id="_06_Sandals_and_small_details" data-name="06 Sandals and small details">
+    <path id="_06_Sandals_and_small_details___pixels_1" data-name="06 Sandals and small details · pixels 1" d="M167 69 L168 69 L168 70 L167 70 Z M170 69 L171 69 L171 70 L170 70 Z" fill="#263b43"/>
+    <rect id="_06_Sandals_and_small_details___pixels_2" data-name="06 Sandals and small details · pixels 2" x="168" y="70" width="1" height="1" fill="#bf8b62"/>
+    <path id="_06_Sandals_and_small_details___pixels_3" data-name="06 Sandals and small details · pixels 3" d="M163 95 L168 95 L168 97 L163 97 Z M169 95 L174 95 L174 97 L169 97 Z" fill="#65503e"/>
+    <path id="_06_Sandals_and_small_details___pixels_4" data-name="06 Sandals and small details · pixels 4" d="M164 94 L166 94 L166 95 L164 95 Z M170 94 L172 94 L172 95 L170 95 Z" fill="#886447"/>
+  </g>
+</svg>

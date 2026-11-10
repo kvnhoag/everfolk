@@ -1,0 +1,170 @@
+[
+  {
+    "routeId": "sculpture",
+    "name": "Lysippos of Sikyon",
+    "period": "About 390–305 BCE",
+    "availability": "Contemporary model; travel, patronage and a specific encounter would need separate authored content.",
+    "contribution": "Signed statue bases preserve his authorship even where the bronze has vanished. Supports credited commissions, workshop practice and a body of work; reported production totals are not a measured game target.",
+    "url": "https://www.getty.edu/art/exhibitions/power_pathos/BRONZES_EXHIBITION_CHECKLIST.pdf"
+  },
+  {
+    "routeId": "sculpture",
+    "name": "Eutychides of Sikyon",
+    "period": "Active around 300 BCE",
+    "availability": "Later-career contemporary model, around age 50 for the starting cohort; no meeting is implemented.",
+    "contribution": "The Tyche of Antioch connects a civic commission with local topography and an image reproduced by later artists. Supports a designed public work and its later use, without taking credit for the historical statue.",
+    "url": "https://museum.classics.cam.ac.uk/collections/casts/tyche-antioch"
+  },
+  {
+    "routeId": "sculpture",
+    "name": "Chares of Lindos",
+    "period": "Early third century BCE; Colossus dated 295–283 BCE in Badoud's reconstruction",
+    "availability": "Late-life model, roughly ages 55–67; construction dates and technical reconstruction require care.",
+    "contribution": "The Colossus of Rhodes offers a model for a large civic bronze requiring planning, resources and completion. The monument is lost and its reconstruction remains debated; the player does not automatically build a historical Wonder.",
+    "url": "https://academic.oup.com/book/58178"
+  },
+  {
+    "routeId": "philosophy",
+    "name": "Xenocrates of Chalcedon",
+    "period": "About 396/395–314/313 BCE; Academy head from 339/338 BCE",
+    "availability": "Contemporary school model; the real Academy's succession is not reassigned to the player.",
+    "contribution": "Sustained leadership of a philosophical school supports teaching, institutional continuity and succession distinct from family inheritance. Accounts of his selection differ, and his own writings are lost.",
+    "url": "https://plato.stanford.edu/entries/xenocrates/"
+  },
+  {
+    "routeId": "philosophy",
+    "name": "Epicurus",
+    "period": "341–270 BCE; Garden established in Athens in 306 BCE",
+    "availability": "Later-career contemporary model; the Garden begins around player age 44.",
+    "contribution": "A connected philosophical system, practical exercises and a continuing community support an independent school route. The player's inquiry keeps its own name and need not reproduce Epicurus's doctrines.",
+    "url": "https://plato.stanford.edu/entries/epicurus/"
+  },
+  {
+    "routeId": "philosophy",
+    "name": "Zeno of Citium",
+    "period": "Stoic school founded around 300 BCE",
+    "availability": "Later-career contemporary model, around player age 50; no direct discipleship is implemented.",
+    "contribution": "Study across several traditions followed by a school of his own supports defended argument and independent teaching. Stoic physics, logic and ethics illustrate connected inquiry rather than a single proficiency test.",
+    "url": "https://plato.stanford.edu/entries/stoicism/"
+  },
+  {
+    "routeId": "seafaring",
+    "name": "Pytheas of Massalia",
+    "period": "Fourth century BCE; expedition dates uncertain",
+    "availability": "Contemporary reference model; uncertain biography does not establish a fixed meeting window.",
+    "contribution": "An account describing Britain supports observation, sailing reports and later scrutiny. His work survives through other authors; the exact northern itinerary and the location of Thule must remain uncertain.",
+    "url": "https://academic.oup.com/oxford-dictionary-of-national-biography/reference/63486/reference-article-abstract/581793426"
+  },
+  {
+    "routeId": "seafaring",
+    "name": "Androsthenes of Thasos",
+    "period": "Fleet service in 326 BCE; Arabian coastal exploration in 324 BCE",
+    "availability": "Contemporary expedition model, around player ages 24–26; actual participation would require a travel and service record.",
+    "contribution": "Fleet service followed by exploration of Bahrain and the Arabian coast supports a survey and observational report alongside a command route. His account informed later geographical and botanical writing.",
+    "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548071663"
+  },
+  {
+    "routeId": "seafaring",
+    "name": "Patrocles",
+    "period": "Active after 312 BCE; Caspian expedition around 285 BCE",
+    "availability": "Late-life model, around player age 65 for the Caspian expedition; suitable for future later-generation content too.",
+    "contribution": "A command career led to geographical exploration, but his reports also supported mistaken conclusions about the Caspian and rivers. Reward a completed survey separately from an unverified claim about the wider world.",
+    "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/549686575"
+  },
+  {
+    "routeId": "military",
+    "name": "Craterus",
+    "period": "Late fourth century BCE; Alexander's campaigns and the successor wars",
+    "availability": "Contemporary command model; disputed successor-war chronology is not converted into a new encounter date.",
+    "contribution": "Independent responsibilities included forces, supplies and the return of veterans. Supports bounded command duties and logistics rather than counting victories alone; a successful career can still end in defeat.",
+    "url": "https://www.livius.org/articles/person/craterus/"
+  },
+  {
+    "routeId": "military",
+    "name": "Coenus",
+    "period": "Hyphasis refusal to advance, 326 BCE",
+    "availability": "Contemporary campaign model, around player age 24; no campaign participation is inferred from reading the reference.",
+    "contribution": "Arrian presents Coenus speaking for exhausted soldiers when Alexander wished to advance. Supports judgement, cohesion and a reasoned refusal; the episode is not a battlefield defeat or a guaranteed reward for dissent.",
+    "url": "https://www.livius.org/sources/content/arrian/anabasis/mutiny-at-the-hyphasis/"
+  },
+  {
+    "routeId": "military",
+    "name": "Phocion",
+    "period": "Fourth century BCE; Athenian command and political reversals",
+    "availability": "Contemporary civic and military model; Athenian office still requires its own eligibility and appointment.",
+    "contribution": "Plutarch's life connects repeated command with civic decisions, removal and execution, followed by later rehabilitation. Supports separating a record of service from current office and changing public reputation; the biography has a moralizing perspective.",
+    "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Phocion%2A.html"
+  },
+  {
+    "routeId": "commerce",
+    "name": "Herakleides of Salamis",
+    "period": "Grain deliveries and contributions in 330/329 and 328/327 BCE; honours in 325/324 BCE",
+    "availability": "Contemporary commercial model, around player ages 20–26; the documented Athenian honours belong to Herakleides.",
+    "contribution": "Public decrees record supplied grain, financial help and civic recognition, while also describing interference with his voyage. Supports fulfilled obligations, transport risk and reputation built through repeated useful trade.",
+    "url": "https://www.atticinscriptions.com/inscription/IGII31/367"
+  },
+  {
+    "routeId": "commerce",
+    "name": "Cleomenes of Naucratis",
+    "period": "Egyptian administration under Alexander, late fourth century BCE",
+    "availability": "Contemporary fiscal and grain-trade model; an official appointment is distinct from a trading distinction.",
+    "contribution": "Accounts of his revenue management and grain policies support conflicts among profit, public supply and political accountability. Modern source criticism cautions that hostile reports may serve political interests; allegations are not treated as neutral measurements.",
+    "url": "https://www.ull.es/revistas/index.php/trabajos-egiptologia/article/view/5084"
+  },
+  {
+    "routeId": "commerce",
+    "name": "Zenon of Kaunos",
+    "period": "Archive begins in 261 BCE; estate management in 256–248 BCE",
+    "availability": "Later-generation reference, ages 89+ for the starting cohort; playable descendants are not implemented by this feature.",
+    "contribution": "A dated documentary archive traces service, correspondence, estate management and dismissal. Supports accounts, receipts, delegated responsibility and career reversals without turning every archive document into Zenon's personal achievement.",
+    "url": "https://apps.lib.umich.edu/files/collections/papyrus/exhibits/reading/Zenon/zenondates.html"
+  },
+  {
+    "routeId": "astronomy-calendar",
+    "name": "Callippus of Cyzicus",
+    "period": "Fourth century BCE",
+    "availability": "Contemporary intellectual model; the reference supplies no fixed meeting or appointment.",
+    "contribution": "Aristotle describes Callippus revising Eudoxus's sphere models to account for observed motions. Supports comparison, criticism and a revised explanatory model, while keeping historical models separate from modern astronomical truth.",
+    "url": "https://classics.mit.edu/Aristotle/metaphysics.12.xii.html"
+  },
+  {
+    "routeId": "astronomy-calendar",
+    "name": "Autolycus of Pitane",
+    "period": "About 360–290 BCE; dates uncertain",
+    "availability": "Contemporary mathematical-astronomy model, including the cohort's middle and later career.",
+    "contribution": "Surviving works on the moving sphere and risings and settings connect demonstrated geometry with astronomy. Supports reproducible exposition without requiring a famous mentor; priority and dependence claims involving Euclid remain disputed.",
+    "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Autolycus/"
+  },
+  {
+    "routeId": "astronomy-calendar",
+    "name": "Aristarchus of Samos",
+    "period": "About 310–230 BCE; active in the early third century BCE",
+    "availability": "Late-life or later-generation model; flourishing around 280–260 BCE corresponds to player ages 70–90.",
+    "contribution": "Geometrical reasoning about celestial distances and a separately reported heliocentric hypothesis support bold explanations with explicit observational limits. His surviving distance treatise is not heliocentric, and no earlier encounter is invented.",
+    "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Aristarchus/"
+  },
+  {
+    "routeId": "music-performance",
+    "name": "Timotheus of Thebes",
+    "period": "Alexander's court; Susa wedding performances in 324 BCE",
+    "availability": "Contemporary performance model, around player age 26; distinguish him from Timotheus of Miletus.",
+    "contribution": "Traditions place this aulos player at court and with choral performance. Supports preparation for a demanding engagement and coordination with others; stories about music instantly controlling Alexander are rhetorical anecdotes, not reliable mechanics.",
+    "url": "https://assets.cambridge.org/97810095/18246/excerpt/9781009518246_excerpt.pdf"
+  },
+  {
+    "routeId": "music-performance",
+    "name": "Aristoxenus of Tarentum",
+    "period": "Born about 370 BCE; nothing securely known of his life after 322 BCE",
+    "availability": "Contemporary musical and philosophical model; an unknown death date is not permission for unlimited direct teaching.",
+    "contribution": "Musical writing, training and study at Aristotle's Lyceum support a route through careful listening, explanation and teaching. His institutional ambitions also show that expertise does not itself secure a school's leadership.",
+    "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548548858?login=false"
+  },
+  {
+    "routeId": "music-performance",
+    "name": "Satyra",
+    "period": "Documented in 258–257 BCE",
+    "availability": "Later-generation reference, around player ages 92–93; no contemporary mentor encounter is added.",
+    "contribution": "A dated linen account names Satyra as a kitharode. This sparse documentary trace supports the presence of a named female professional performer, without supplying a full biography or proving an otherwise undocumented touring career.",
+    "url": "https://papyri.info/ddbdp/p.cair.zen;1;59087"
+  }
+]

@@ -1,0 +1,91 @@
+/* Narrative, pixel illustration and ambient props follow the selected event. */
+.scene-image.paper-scene.paper-motion-scene{height:auto;min-height:310px;grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr);grid-template-rows:auto auto;gap:6px 8px;padding:23px 24px 15px;overflow:hidden}
+.paper-motion-scene .paper-scene-copy{min-width:0;padding-right:8px;align-self:center;z-index:2}
+.paper-motion-scene .paper-scene-kicker{display:block;text-transform:uppercase;font-size:9px;letter-spacing:1.25px;color:#657a58}
+.paper-motion-scene .paper-scene-copy h2{font-size:34px;line-height:1.12;margin:12px 0 10px;overflow-wrap:anywhere}
+.paper-motion-scene .paper-scene-copy p.paper-event-caption{display:block;font-size:12px;line-height:1.8;max-width:none;color:#53644b;margin:0;overflow-wrap:anywhere}
+.paper-illustration-wrap{position:relative;isolation:isolate;min-width:0;height:255px;width:100%;align-self:center;overflow:hidden}
+.paper-character-layer{position:absolute;inset:0;z-index:1;transform-origin:50% 85%;will-change:transform}
+.paper-character-layer>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 8px #403d2112)}
+.paper-atmosphere{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+.atmosphere-back{z-index:0}.atmosphere-front{z-index:2}
+.paper-scene-bottom{grid-column:1/-1;position:relative;z-index:3;display:flex;flex-direction:column;gap:9px;margin-top:6px;padding-top:11px;border-top:1px solid #cbd2bc}
+.scene-context-list{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch}
+.scene-context-list>button{border:1px solid #c5ceb7;border-radius:4px;background:#f5f2e6;color:#657458;padding:7px 10px;text-align:left;max-width:250px;min-width:0;transition:background .15s,border-color .15s}
+.scene-context-list>button:hover{background:#e0e8d6;border-color:#96a781}
+.scene-context-list>button.is-active{background:#dce5d0;border-color:#7e9468;color:#36532f}
+.scene-context-list>button>span{display:block;text-transform:uppercase;font-size:7px;line-height:1.5;letter-spacing:.6px;opacity:.85}
+.scene-context-list>button>strong{display:block;font-size:10px;line-height:1.5;font-weight:550;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.paper-motion-controls{display:flex;gap:12px;justify-content:flex-end;align-items:center;min-height:23px}
+.paper-motion-status{font-size:9px;line-height:1.5;color:#78856b}
+.scene-motion-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;padding:4px 0 4px 6px;font-size:10px;line-height:1.5;color:#536b45;white-space:nowrap;border-radius:3px}
+.scene-motion-toggle:hover{color:#8b583b}.scene-motion-toggle:disabled{cursor:default;opacity:.7}
+.scene-motion-toggle:focus-visible,.scene-context-list>button:focus-visible{outline:2px solid #8a9e71;outline-offset:3px}
+.motion-indicator{display:block;width:6px;height:6px;border-radius:50%;background:#a8b297}.motion-indicator.is-moving{background:#6c8d54;box-shadow:0 0 0 3px #8099671b}
+.paper-motion-scene.paper-in-play{min-height:280px}.paper-in-play .paper-illustration-wrap{height:220px}.paper-motion-scene.paper-in-play .paper-scene-copy h2{font-size:31px}
+
+/* Props retain their current pose while paused or outside the visible page. */
+.motion-cradle .paper-character-layer{animation:paper-cradle-breathe 4.8s ease-in-out infinite}
+.motion-play .paper-character-layer{animation:paper-play-breathe 4.4s ease-in-out infinite}
+.motion-write .paper-character-layer,.motion-work .paper-character-layer{animation:paper-attentive-breathe 4.6s ease-in-out infinite}
+.motion-sail .paper-character-layer{animation:paper-boat-rock 5.8s ease-in-out infinite}
+.motion-gather .paper-character-layer,.motion-reflect .paper-character-layer{animation:paper-calm-breathe 6.2s ease-in-out infinite}
+.motion-rest .paper-character-layer{animation:paper-rest-breathe 6.8s ease-in-out infinite}
+.motion-unrest .paper-character-layer{animation:paper-harbor-wind 7.2s ease-in-out infinite}
+.motion-city .paper-character-layer{animation:paper-calm-breathe 7s ease-in-out infinite}
+.paper-leaf{transform-box:fill-box;transform-origin:50% 100%;animation:paper-leaf-sway 5.2s ease-in-out infinite}.leaf-two{animation-duration:6.5s;animation-delay:-2.6s;fill:#a5ae83}
+.paper-mote{animation:paper-mote-rise 7s ease-in-out infinite}.mote-two{animation-duration:8.7s;animation-delay:-3s}.paper-birds{animation:paper-birds-drift 9s ease-in-out infinite}
+.paper-wave{animation:paper-wave-pan 5.8s ease-in-out infinite;opacity:.62}.wave-front{animation-duration:4.6s;animation-delay:-1.8s}
+.paper-play-ball{transform-box:fill-box;transform-origin:center;animation:paper-ball-roll 5.4s ease-in-out infinite}
+.paper-writing-line{stroke-dasharray:65;stroke-dashoffset:65;animation:paper-write-strokes 4.1s ease-in-out infinite}.paper-stylus{transform-box:fill-box;transform-origin:50% 100%;animation:paper-stylus-trace 4.1s ease-in-out infinite}
+.paper-shaving{animation:paper-shaving-drift 4.2s ease-in-out infinite}.shaving-two{animation-delay:-1.2s;animation-duration:5s}.shaving-three{animation-delay:-2.5s}
+.paper-warm-light{transform-box:fill-box;transform-origin:center;animation:paper-light-glow 5.3s ease-in-out infinite}
+.paper-shade{animation:paper-shade-pass 8s ease-in-out infinite;opacity:.15}.shade-two{animation-delay:-2.8s;animation-duration:10s}.paper-rest-line{animation:paper-rest-line 6.8s ease-in-out infinite}
+.paper-haze{animation:paper-haze-drift 10s ease-in-out infinite}.haze-two{animation-delay:-4s;animation-duration:13s}.paper-city-banner{transform-box:fill-box;transform-origin:50% 0%;animation:paper-banner-flutter 3.8s ease-in-out infinite}
+.paper-motion-scene.motion-paused [data-loop]{animation-play-state:paused!important;will-change:auto}.paper-motion-scene[data-motion="still"] .paper-character-layer{animation:none}
+@keyframes paper-cradle-breathe{0%,100%{transform:translateY(0) rotate(-.25deg)}50%{transform:translateY(-2px) rotate(.25deg)}}
+@keyframes paper-play-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes paper-attentive-breathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-1px) scaleY(1.008)}}
+@keyframes paper-boat-rock{0%,100%{transform:translateY(2px) rotate(-1deg)}50%{transform:translateY(-3px) rotate(1deg)}}
+@keyframes paper-calm-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.008)}}
+@keyframes paper-rest-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.006)}}
+@keyframes paper-harbor-wind{0%,100%{transform:translateX(-1px)}50%{transform:translateX(1px)}}
+@keyframes paper-leaf-sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(7deg)}}
+@keyframes paper-mote-rise{0%,100%{transform:translateY(3px);opacity:.2}50%{transform:translateY(-9px);opacity:.55}}
+@keyframes paper-birds-drift{0%,100%{transform:translateX(-7px) translateY(2px)}50%{transform:translateX(12px) translateY(-3px)}}
+@keyframes paper-wave-pan{0%,100%{transform:translateX(-13px) translateY(1px)}50%{transform:translateX(13px) translateY(-2px)}}
+@keyframes paper-ball-roll{0%,15%,100%{transform:translateX(-19px) rotate(-100deg)}50%,65%{transform:translateX(19px) rotate(100deg)}}
+@keyframes paper-write-strokes{0%,12%{stroke-dashoffset:65;opacity:.25}67%,86%{stroke-dashoffset:0;opacity:.8}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes paper-stylus-trace{0%,12%,100%{transform:translate(-7px,1px) rotate(-7deg);opacity:.4}32%{transform:translate(2px,4px) rotate(4deg);opacity:.9}65%,86%{transform:translate(8px,6px) rotate(-3deg);opacity:.8}}
+@keyframes paper-shaving-drift{0%,100%{transform:translate(0,-2px) rotate(0deg);opacity:.25}50%{transform:translate(6px,4px) rotate(7deg);opacity:.7}}
+@keyframes paper-light-glow{0%,100%{opacity:.08;transform:scale(1)}50%{opacity:.23;transform:scale(1.12)}}
+@keyframes paper-shade-pass{0%,100%{transform:translateX(-7px);opacity:.1}50%{transform:translateX(8px);opacity:.3}}
+@keyframes paper-rest-line{0%,100%{transform:translateY(1px);opacity:.2}50%{transform:translateY(-2px);opacity:.6}}
+@keyframes paper-haze-drift{0%,100%{transform:translateX(-12px);opacity:.4}50%{transform:translateX(12px);opacity:.8}}
+@keyframes paper-banner-flutter{0%,100%{transform:skewX(-3deg) scaleX(.97)}45%{transform:skewX(4deg) scaleX(1)}70%{transform:skewX(1deg) scaleX(.98)}}
+@media(max-width:1100px){.scene-image.paper-scene.paper-motion-scene{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);padding:21px 20px 13px}.paper-motion-scene .paper-scene-copy h2,.paper-motion-scene.paper-in-play .paper-scene-copy h2{font-size:29px}.paper-motion-scene .paper-scene-copy p.paper-event-caption{font-size:11px}.paper-illustration-wrap{height:235px}.paper-in-play .paper-illustration-wrap{height:215px}}
+@media(max-width:760px){.scene-image.paper-scene.paper-motion-scene{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;height:auto;min-height:0;padding:19px 17px 12px;gap:0}.paper-motion-scene .paper-scene-copy{padding:0}.paper-motion-scene .paper-scene-kicker{font-size:8px;letter-spacing:1px}.paper-motion-scene .paper-scene-copy h2,.paper-motion-scene.paper-in-play .paper-scene-copy h2{font-size:29px;margin:9px 0 10px}.paper-motion-scene .paper-scene-copy p.paper-event-caption{display:block;font-size:12px;line-height:1.8}.paper-illustration-wrap,.paper-in-play .paper-illustration-wrap{height:220px;margin:4px 0 0}.paper-scene-bottom{grid-column:1;margin-top:2px;padding-top:10px;gap:8px}.scene-context-list{gap:5px}.scene-context-list>button{padding:6px 8px;max-width:100%;flex:1 1 125px}.scene-context-list>button>strong{font-size:9px;max-width:none}.scene-context-list>button>span{font-size:6px}.paper-motion-status{font-size:8px}.scene-motion-toggle{font-size:10px}.paper-motion-controls{min-height:27px}}
+@media(prefers-reduced-motion:reduce){.paper-motion-scene [data-loop]{animation:none!important;transition:none!important;will-change:auto}.paper-writing-line{stroke-dashoffset:0}.paper-stylus{opacity:.7}.paper-haze{opacity:.35}.paper-shade{opacity:.2}}
+
+/* Pixel artwork stays fixed. Only small integer-grid ambient props move. */
+.pixel-scene .paper-character-layer{animation:none!important;will-change:auto}
+.pixel-scene .paper-character-layer>img{image-rendering:pixelated;image-rendering:crisp-edges;filter:none}
+.pixel-scene .paper-illustration-wrap{border:2px solid #886447;background:#edcf91;box-shadow:3px 3px 0 #88644725;aspect-ratio:4/3}
+.pixel-atmosphere{z-index:2}
+.pixel-atmosphere.atmosphere-back{z-index:2}
+.pixel-atmosphere.atmosphere-front{z-index:3}
+.pixel-wave{animation:pixel-water 2.4s steps(3,end) infinite}
+.pixel-birds{animation:pixel-birds 5s steps(5,end) infinite}
+.pixel-twinkle,.pixel-lamp-flame{animation:pixel-flicker 2.2s steps(2,end) infinite}
+.pixel-work-spark,.pixel-play-spark{animation:pixel-spark 3s steps(3,end) infinite}
+.pixel-smoke{animation:pixel-smoke 4s steps(4,end) infinite}
+.pixel-scene .motion-indicator{border-radius:0;background:#baa47a}
+.pixel-scene .motion-indicator.is-moving{background:#6b8051;box-shadow:2px 0 0 #9ca968}
+.pixel-scene .scene-context-list>button{border-radius:0;border-color:#baa47a;background:#f5e6bf}
+.pixel-scene .scene-context-list>button.is-active{border-color:#41637b;background:#dce5d6;color:#263b43}
+@keyframes pixel-water{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+@keyframes pixel-birds{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-1px)}}
+@keyframes pixel-flicker{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes pixel-spark{0%,65%,100%{opacity:0}70%,85%{opacity:1;transform:translateY(-1px)}}
+@keyframes pixel-smoke{0%{transform:translate(0,0);opacity:.15}75%{transform:translate(2px,-3px);opacity:.5}100%{transform:translate(3px,-4px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.pixel-scene [data-loop]{animation:none!important;transition:none!important}.pixel-lamp-flame,.pixel-twinkle{opacity:.65}.pixel-work-spark,.pixel-play-spark,.pixel-smoke{opacity:0}}

@@ -1,0 +1,56 @@
+/* Original readable fonts, with the heavier weight used by the earlier UI. */
+:root,body,button,input,select,textarea{font-weight:600}
+.everfolk-game .nav-link,.everfolk-game .nav-link.active{font-weight:600}
+.everfolk-game .brand,.game-dashboard .character-panel h2{font-weight:700}
+.life-moment-copy,.life-moment-intro,.moment-advance,.moment-chronicle,
+.yearly-focus-options button,.yearly-focus-note,.yearly-focus-action,
+.game-dashboard .character-panel .character-open,.game-dashboard .character-panel .character-origin,
+.game-dashboard .life-support-grid .household-summary p,
+.life-event-copy>p,.life-event-quiet,.journal-copy>p{font-weight:600}
+.overview-wealth-label,.overview-stat-label,.overview-stat>strong,
+.compact-life-record>summary,.life-record-count,.dashboard-scene-notes>summary,
+.life-session-bar .life-clock .playback-label,.life-session-bar .life-clock .play-button,
+.life-session-bar .life-clock .speed-button,.session-auto,.session-manage,
+.game-dashboard .dashboard-skills .compact-skill-name,
+.game-dashboard .dashboard-skills .compact-skill-help,
+.game-dashboard .dashboard-skills .compact-skill-empty,
+.game-dashboard .dashboard-skills .compact-branch-selector select{font-weight:600}
+.overview-cash-note,.overview-wealth-details,.scene-motion-toggle,
+.game-dashboard .character-panel .age-line,.game-dashboard .character-panel .another-life,
+.life-year-rail-heading>span,.life-year-stop-year,.everfolk-game .site-footer{font-weight:500}
+.game-dashboard .life-overview-facts.has-wealth dd,
+.overview-wealth-metric>strong,.life-moment-heading h2,.compact-skills h3{font-weight:700}
+
+.main-menu.storybook-menu .main-menu-topline,
+.main-menu.storybook-menu .main-menu-intro,
+.main-menu.storybook-menu .main-menu-world,
+.main-menu.storybook-menu .main-menu-actions>button,
+.main-menu.storybook-menu .main-menu-links>button,
+.main-menu.storybook-menu .main-menu-landscape figcaption,
+.main-menu.storybook-menu .main-menu-illustration-label{font-weight:600}
+.main-menu.storybook-menu .main-menu-save>strong{font-weight:700}
+.main-menu.storybook-menu .main-menu-footer,
+.main-menu.storybook-menu .main-menu-save,
+.main-menu.storybook-menu .main-menu-world-preview>span{font-weight:500}
+
+dialog.life-decision-dialog.choice-popup .life-decision-content>p,
+dialog.life-decision-dialog.choice-popup .life-decision-meta,
+dialog.life-decision-dialog.choice-popup .life-decision-meta>button,
+dialog.life-decision-dialog.choice-popup .life-decision-options strong,
+dialog.life-decision-dialog.choice-popup .compact-skill-preview-label,
+dialog.life-decision-dialog.choice-popup .life-decision-content>footer button{font-weight:600}
+dialog.life-decision-dialog.choice-popup .life-decision-content>.life-decision-legend,
+dialog.life-decision-dialog.choice-popup .life-decision-options .choice-impact{font-weight:500}
+dialog.detail-dialog .dialog-content>p,
+dialog.birth-roll-popover .birth-popover-heading p,
+.pause-content>p:not(.pause-eyebrow),.pause-actions>button{font-weight:600}
+.wealth-net-worth>strong,.wealth-comparison>strong,.wealth-breakdown dd,
+.wealth-panel h4,.character-section-heading h3,.character-card-heading h4,
+.character-background-name{font-weight:700}
+
+.birth-stat-roll .birth-roll-number,
+dialog.birth-roll-popover .birth-roll-number,
+.birth-roll-heading h3{font-weight:700}
+.birth-roll-number>small,.birth-roll-stat-name,.birth-roll-origin>strong,
+.birth-popover-continue,.birth-popover-reborn,
+.impact-stat-label,.impact-neutral,.impact-range-separator{font-weight:600}

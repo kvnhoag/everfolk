@@ -1,0 +1,277 @@
+{
+  "generator": "scripts/build-pixel-assets.mjs",
+  "palette": {
+    "ink": "#263b43",
+    "dark": "#3e4d4d",
+    "night": "#293c58",
+    "navy": "#41637b",
+    "sea": "#4e8f9a",
+    "teal": "#76b5b1",
+    "mist": "#b8d2c4",
+    "cream": "#f5e6bf",
+    "sand": "#d6b778",
+    "stone": "#baa47a",
+    "pale": "#edcf91",
+    "wood": "#886447",
+    "brown": "#65503e",
+    "clay": "#ba704c",
+    "red": "#8c4947",
+    "gold": "#e4b651",
+    "olive": "#6b8051",
+    "leaf": "#9ca968",
+    "skin": "#bf8b62",
+    "light": "#d9a579",
+    "deep": "#91644c",
+    "hair": "#483d38",
+    "grey": "#adb4a6",
+    "white": "#fff2d1"
+  },
+  "assets": [
+    {
+      "path": "/assets/pixel/scenes/birth.svg",
+      "title": "Original pixel scene: birth",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/childhood.svg",
+      "title": "Original pixel scene: childhood",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/learning.svg",
+      "title": "Original pixel scene: learning",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/work.svg",
+      "title": "Original pixel scene: work",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/sea.svg",
+      "title": "Original pixel scene: sea",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/family.svg",
+      "title": "Original pixel scene: family",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/later-life.svg",
+      "title": "Original pixel scene: later-life",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/memorial.svg",
+      "title": "Original pixel scene: memorial",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/rest.svg",
+      "title": "Original pixel scene: rest",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/rest-child.svg",
+      "title": "Original pixel scene: rest-child",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/history-war.svg",
+      "title": "Original pixel scene: history-war",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/history-city.svg",
+      "title": "Original pixel scene: history-city",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/scenes/music.svg",
+      "title": "Original pixel scene: music",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/worlds/alexandria.svg",
+      "title": "Original pixel world: alexandria",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/worlds/medieval-europe.svg",
+      "title": "Original pixel world: medieval-europe",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/worlds/ottoman-constantinople.svg",
+      "title": "Original pixel world: ottoman-constantinople",
+      "width": 64,
+      "height": 48
+    },
+    {
+      "path": "/assets/pixel/portraits/infant-0.svg",
+      "title": "Fictional infant portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/infant-1.svg",
+      "title": "Fictional infant portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/infant-2.svg",
+      "title": "Fictional infant portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/child-0.svg",
+      "title": "Fictional child portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/child-1.svg",
+      "title": "Fictional child portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/child-2.svg",
+      "title": "Fictional child portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/youth-0.svg",
+      "title": "Fictional youth portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/youth-1.svg",
+      "title": "Fictional youth portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/youth-2.svg",
+      "title": "Fictional youth portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/adult-0.svg",
+      "title": "Fictional adult portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/adult-1.svg",
+      "title": "Fictional adult portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/adult-2.svg",
+      "title": "Fictional adult portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/middle-0.svg",
+      "title": "Fictional middle portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/middle-1.svg",
+      "title": "Fictional middle portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/middle-2.svg",
+      "title": "Fictional middle portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/elder-0.svg",
+      "title": "Fictional elder portrait, variant 1",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/elder-1.svg",
+      "title": "Fictional elder portrait, variant 2",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/portraits/elder-2.svg",
+      "title": "Fictional elder portrait, variant 3",
+      "width": 32,
+      "height": 40
+    },
+    {
+      "path": "/assets/pixel/routes/sculpture.svg",
+      "title": "Original achievement artwork: sculpture",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/philosophy.svg",
+      "title": "Original achievement artwork: philosophy",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/seafaring.svg",
+      "title": "Original achievement artwork: seafaring",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/military.svg",
+      "title": "Original achievement artwork: military",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/commerce.svg",
+      "title": "Original achievement artwork: commerce",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/astronomy-calendar.svg",
+      "title": "Original achievement artwork: astronomy-calendar",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "/assets/pixel/routes/music-performance.svg",
+      "title": "Original achievement artwork: music-performance",
+      "width": 64,
+      "height": 64
+    }
+  ]
+}

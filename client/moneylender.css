@@ -1,0 +1,37 @@
+.moneylender-panel{padding:18px;margin:21px 0;border:1px solid #ccb994;border-left:3px solid #a58248;background:#f5efdf;border-radius:4px}
+.moneylender-panel>header>span{font-size:9px;letter-spacing:1px;color:#947648}
+.moneylender-panel>header>h4{margin:6px 0 11px;font-size:25px}
+.moneylender-panel>p{font-size:12px;line-height:1.7;color:#6d725c;margin:9px 0}
+.moneylender-panel>p.lender-risk{font-size:11px;color:#92543b}
+.lender-balance{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
+.lender-balance>strong{font:400 30px/1.3 var(--serif,Georgia,serif);font-variant-numeric:tabular-nums;color:#7f5536}
+.lender-balance>span{font-size:10px;color:#88806b}
+.lender-balance>b{font-size:11px;font-weight:500;color:#966040;margin-left:auto}
+.moneylender-notice{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 16px;margin-bottom:16px;background:#f4eedf;border:1px solid #d1c4a6;border-left:3px solid #ac8a4e;border-radius:4px}
+.moneylender-notice>div{display:grid;gap:4px}.moneylender-notice strong{font-size:12px;font-weight:600;color:#6f6443}.moneylender-notice>div>span{font-size:10px;color:#8f7a55}
+.moneylender-notice>button{font-size:11px;white-space:nowrap;color:#785b35;padding:7px 0}
+.moneylender-notice>button:focus-visible{outline:2px solid #9a7247;outline-offset:4px}
+.lender-overdue{border-left-color:#a7513f;background:#f5eadd}.lender-overdue .lender-balance>b,.lender-overdue.moneylender-notice strong{color:#a04d37}
+@media(max-width:600px){.moneylender-panel{padding:15px}.moneylender-notice{padding:11px 12px;gap:10px}.moneylender-notice strong{font-size:11px}.moneylender-notice>button{font-size:10px}.lender-balance>b{flex-basis:100%;margin:2px 0 3px}}
+.moneylender-notice.lender-due-soon{border:2px solid #a58248;border-left-width:5px;border-radius:0;background:#f5e6bf;box-shadow:3px 3px 0 #88644725}
+.moneylender-notice.lender-due-soon strong{color:#765121}
+.moneylender-notice.lender-overdue{border:2px solid #a7513f;border-left-width:5px;border-radius:0}
+.loan-deadline-dialog{width:min(500px,calc(100% - 28px));max-height:88dvh;overflow:auto;padding:0;border:2px solid #baa47a;border-radius:0;background:#f7ecd4;color:#263b43;box-shadow:6px 6px 0 #88644755,0 18px 75px #172a3555}
+.loan-deadline-dialog::backdrop{background:#25383199;backdrop-filter:blur(2px)}
+.loan-deadline-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 21px;border-bottom:2px solid #baa47a;background:#edcf91;color:#765121;font:700 11px/1.5 var(--serif,"Courier New",monospace);letter-spacing:.8px}
+.loan-deadline-content{padding:23px}
+.loan-deadline-content>h2{font:700 30px/1.2 var(--serif,"Courier New",monospace);letter-spacing:-.5px;margin:0 0 14px;outline:none}
+.loan-deadline-content>p{font-size:13px;line-height:1.7;color:#526255;margin:12px 0}
+.loan-deadline-facts{display:grid;gap:12px;margin:20px 0;padding:16px;border:1px solid #baa47a;background:#fff2d1}
+.loan-deadline-facts>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.loan-deadline-facts dt{font-size:12px;color:#727562}
+.loan-deadline-facts dd{margin:0;text-align:right;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.loan-deadline-content>p.loan-deadline-risk{padding-left:12px;border-left:3px solid #a85e44;color:#92543b;font-size:12px}
+.loan-deadline-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.loan-deadline-actions>button{padding:11px 17px;border:2px solid #baa47a;border-radius:0;background:#f5e6bf;color:#263b43;font-size:13px;box-shadow:3px 3px 0 #88644725}
+.loan-deadline-actions>button.loan-deadline-manage{background:#41637b;border-color:#263b43;color:#fff2d1}
+.loan-deadline-actions>button:hover{background:#edcf91}.loan-deadline-actions>button.loan-deadline-manage:hover{background:#293c58}
+.loan-deadline-actions>button:focus-visible{outline:2px solid #41637b;outline-offset:3px}
+.loan-deadline-content>p.loan-deadline-note{font-size:10px;margin-bottom:0;color:#727562}
+.loan-warning-due>header,.loan-warning-overdue>header{background:#ecd0b8;color:#884b36}
+@media(max-width:600px){.loan-deadline-dialog>header{padding:13px 16px;font-size:10px}.loan-deadline-content{padding:20px 16px}.loan-deadline-content>h2{font-size:27px}.loan-deadline-facts{padding:13px}.loan-deadline-facts>div{gap:10px}.loan-deadline-facts dd{font-size:13px}}
