@@ -5,7 +5,7 @@ export const FIGURE_DESIGN = Object.freeze({
  euclid:{frame:'museum-geometry',scene:'euclid-museum',motif:'triangle-and-circle'},
  cleomenes:{frame:'granary-wheat',scene:'cleomenes-granary',motif:'wheat-and-granary'}
 });
-export function drawHistoricalFrame(ctx,figure,accent){
+export function drawHistoricalFrame(ctx,figure,accent,rarity=null){
  if(!FIGURE_DESIGN[figure])return;
  const r=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h);},gold='#d6aa52',light='#f1d889',shade='#8b5d35';
  // Architectural picture frame: carved gold uprights and a stepped pediment.
@@ -26,4 +26,24 @@ export function drawHistoricalFrame(ctx,figure,accent){
  if(figure==='cleomenes'){r(239,64,2,17,light);for(let n=0;n<3;n++){r(234,64+n*5,5,3,gold);r(241,66+n*5,5,3,gold);}r(230,80,20,2,gold);}
  // Rarity can recolor the inset seam, never erase the historical gold structure.
  r(39,87,2,400,accent);r(439,87,2,400,accent);
+ // Onyx, chased gold and faceted gemstones make limited figures read as
+ // heirloom objects. Rarity increases ornament, without assigning a tier.
+ const gems={alexander:['#793b51','#c15a6d','#f1b7a0'],aristotle:['#594370','#a17bd0','#e3d1fa'],euclid:['#285d6c','#58b9bc','#ccf5e9'],cleomenes:['#285d48','#5caf86','#d1edb1']}[figure];
+ const grade=rarity===null?2:Math.max(0,Math.min(4,rarity));
+ const gem=(cx,cy,size=8)=>{
+  r(cx-size-3,cy-size+2,size*2+6,size*2-4,'#29252a');r(cx-size+2,cy-size-3,size*2-4,size*2+6,'#29252a');
+  r(cx-size-1,cy-size+2,size*2+2,size*2-4,gold);r(cx-size+2,cy-size-1,size*2-4,size*2+2,gold);
+  r(cx-size+2,cy-size+3,size*2-4,size*2-6,gems[0]);r(cx-size+4,cy-size+1,size*2-8,size*2-2,gems[1]);
+  r(cx-size+4,cy-size+3,3,size-1,gems[2]);r(cx+1,cy+1,size-4,size-3,gems[0]);r(cx-1,cy-1,3,3,gems[2]);
+ };
+ for(const [x,y,sx,sy]of [[17,72,1,1],[463,72,-1,1],[17,500,1,-1],[463,500,-1,-1]]){
+  for(let step=0;step<5;step++){r(x+sx*step*3-(sx<0?14:0),y+sy*step*3-(sy<0?3:0),16,3,step%2?shade:gold);}
+  r(x+(sx>0?2:-4),y+(sy>0?2:-4),3,3,light);
+ }
+ for(const x of [26,453])for(let i=0;i<grade+1;i++)gem(x,116+Math.round(i*338/Math.max(1,grade)),grade>=3?8:7);
+ // Paired jewels and filigree flank the figure's recognizable central crest.
+ for(let step=0;step<6;step++){r(188+step*4,65-step,4,2,step%2?light:gold);r(268+step*4,60+step,4,2,step%2?gold:light);}
+ gem(197,72,7);gem(283,72,7);
+ if(grade>=3)for(const x of [49,428])for(let y=101;y<477;y+=12){r(x,y,3,3,grade===4?light:gold);}
+ for(const [x,y]of [[55,84],[424,84],[55,477],[424,477]]){r(x,y-4,1,9,light);r(x-4,y,9,1,light);}
 }

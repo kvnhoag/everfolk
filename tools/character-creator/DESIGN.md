@@ -5,7 +5,16 @@
 1. Mọi nhân vật lịch sử phải có `state.figure` trùng với ID trong catalog. Renderer giữ cờ này khi nhập JSON hoặc mở mẫu trong editor; đổi trang phục không biến nhân vật lịch sử thành NPC.
 2. Không dùng khung NPC cho nhân vật lịch sử. NPC dùng khung `citizen` giản dị. Khung lịch sử phải có kiến trúc nổi bật: cột vàng chạm khắc, diềm bậc thang và huy hiệu phía trên chân dung.
 3. Mỗi nhân vật lịch sử có một mẫu khung và background riêng, không chỉ đổi màu. Quy tắc được khai báo trong `src/historical-frame.js` và được kiểm tra trước khi xuất collection.
-4. Biến thể Common–Legendary chỉ thay đường viền phụ. Cấu trúc khung lịch sử và huy hiệu phải còn nguyên ở tất cả độ hiếm. Màu khung không tự gán rarity hoặc số lượng token.
+4. Khung lịch sử phải gợi cảm giác quý hiếm, sang trọng và huyền bí: nền obsidian/onyx, vàng chạm nổi, đá quý có mặt cắt, huy hiệu và ánh sáng điểm. Giữ biểu tượng riêng của từng nhân vật ở vị trí nhìn rõ.
+5. Biến thể Common–Legendary tăng dần số lượng đá quý, mật độ chạm khắc và điểm sáng. Cấu trúc khung lịch sử và huy hiệu phải còn nguyên ở tất cả độ hiếm. Không diễn giải khung bản gốc thành một rarity đã được mint; màu khung không tự gán rarity hoặc số lượng token.
+
+## Phạm vi và không khí của nền lịch sử
+
+- Chỉ bốn background lịch sử và khung lịch sử dùng phong cách quý hiếm này. Không thay nền, khung, chân dung hoặc rarity artwork của sáu nhóm NPC khi sửa hướng art lịch sử.
+- Dùng bảng màu đêm giàu sắc độ: Alexander xanh hoàng gia–vàng, Aristotle tím amethyst–đồng vàng, Euclid xanh thiên thanh–aquamarine, Cleomenes xanh emerald–vàng cổ.
+- Nền có chiều sâu với kiến trúc tối, nét ánh sáng phản chiếu và vòng thiên thể chạm mảnh phía sau nhân vật. Điểm sáng phải thưa, đặt ở vùng phụ; khuôn mặt và đạo cụ luôn rõ.
+- Cảm giác huyền bí đến từ màu, ánh sáng và hoa văn; tiếp tục giữ cảnh đặc trưng theo nghề và hành động của từng nhân vật. Không thay cả bốn nền thành cùng một cổng hoặc một cung điện.
+- Không làm mờ hay nội suy sprite; không vẽ hiệu ứng che mặt, tên, đạo cụ hoặc giả số serial/rarity/token đã mint. Không mạ vàng toàn bộ nền làm mất tương phản của khung.
 
 ## Bốn hướng tạo hình
 

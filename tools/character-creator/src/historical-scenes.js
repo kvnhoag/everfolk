@@ -1,6 +1,14 @@
-/** Quiet fictional settings, authored for each figure's actions in the NFT catalog. */
-export function drawHistoricalScene({rect:r,line:l,poly:p,oval:o},scene){
+/** Jewel-toned twilight settings; only the four historical backdrops use this treatment. */
+const PALETTES={
+ 'alexander-city':{'#d9d7b9':'#111b32','#d7c69d':'#192744','#e8c985':'#d4a84f','#a8b493':'#2b3d58','#7caaa0':'#23495e','#b0c7b0':'#577e86','#b7a37b':'#34445b','#d6c39b':'#57657b','#c7b586':'#9f895c','#a18e6b':'#263249','#8e7954':'#a8824b','#a8664b':'#803b51','#cbb58b':'#1c3047','#b39d76':'#3b536a','#dcc99e':'#7d7c78'},
+ 'aristotle-lyceum':{'#dfe0c1':'#211b36','#bbc39d':'#2d3147','#cbbd95':'#65516e','#b8a47a':'#9e7e62','#efe2ba':'#d9c28d','#b4a17a':'#584663','#e2d5b0':'#aa8e97','#eadfbc':'#d7bb89','#ad9b76':'#6a5467','#a5b18a':'#282d44','#c7cfaa':'#4b5666','#8e7954':'#98704e','#8da47b':'#344b48','#b0bd90':'#738466','#d8c8a0':'#483b55','#bfaf87':'#756282','#b7a37b':'#80654e','#958467':'#4e4351','#f4e8c6':'#d2bb8b'},
+ 'euclid-museum':{'#29494e':'#0d202d','#527d79':'#173b4b','#c3bc98':'#355569','#9ba98c':'#466e76','#769b91':'#244554','#c6d0a4':'#bbd9be','#b4c494':'#809f92','#bac3a5':'#688b8f','#e0d9b8':'#aec1aa','#9b7852':'#b08e50','#695140':'#735a3b','#395756':'#18333f','#d8c8a0':'#e2c98c','#95b8a3':'#94d1c4','#608b85':'#345b69','#f4e8c6':'#d6c79f'},
+ 'cleomenes-granary':{'#ded1a7':'#142d2d','#e8c985':'#c9a152','#7d9d8b':'#214f49','#baa376':'#465a4c','#cdb687':'#88906a','#d8c397':'#6a7a5d','#8e7954':'#203b33','#b7a37b':'#a28d59','#c6af81':'#223d36','#e0cca3':'#8d9568','#b39d76':'#3f6153','#a78c5e':'#4e644c','#d8c8a0':'#9fa57a','#e8d5ac':'#c3ba86','#695140':'#aa8647','#9b7852':'#a88c4e','#d6aa52':'#d1b967'}
+};
+export function drawHistoricalScene(paint,scene){
  if(!['alexander-city','aristotle-lyceum','euclid-museum','cleomenes-granary'].includes(scene))return false;
+ const colors=PALETTES[scene],color=c=>colors[c]??c;
+ const r=(x,y,w,h,c)=>paint.rect(x,y,w,h,color(c)),l=(x,y,x2,y2,c,w)=>paint.line(x,y,x2,y2,color(c),w),p=(points,c)=>paint.poly(points,color(c)),o=(x,y,w,h,c)=>paint.oval(x,y,w,h,color(c));
  if(scene==='alexander-city'){
   r(0,0,240,190,'#d9d7b9');r(0,0,240,65,'#d7c69d');o(167,18,23,23,'#e8c985');
   p([[0,87],[42,58],[75,77],[123,50],[178,80],[240,64],[240,130],[0,130]],'#a8b493');
@@ -38,5 +46,19 @@ export function drawHistoricalScene({rect:r,line:l,poly:p,oval:o},scene){
   l(188,108,188,133,'#695140',2);l(175,111,201,111,'#695140',2);l(176,111,172,123,'#9b7852');l(176,111,181,123,'#9b7852');l(200,111,195,123,'#9b7852');l(200,111,205,123,'#9b7852');l(170,124,183,124,'#d6aa52',2);l(194,124,207,124,'#d6aa52',2);
   for(let x=59;x<86;x+=5){l(x,155,x,130,'#9b7852');for(let y=132;y<147;y+=5){r(x-3,y,3,2,'#e8c985');r(x+1,y+2,3,2,'#d6aa52');}}
  }
+ // Etched celestial halo and sparse luminous dust are behind the sprite.
+ // Draw outlines rather than a solid disk, retaining the authored environment.
+ const aura={
+  'alexander-city':{dim:'#716046',light:'#c8a45e',star:'#efd49a'},
+  'aristotle-lyceum':{dim:'#715e87',light:'#bfa8d6',star:'#e4c8f1'},
+  'euclid-museum':{dim:'#3f7d87',light:'#8ac6c0',star:'#d1eee0'},
+  'cleomenes-granary':{dim:'#64794e',light:'#b6bf7b',star:'#e7d7a1'}
+ }[scene];
+ const ring=(cx,cy,radius,c)=>{for(let i=0;i<64;i++){const a=i*Math.PI/32,b=(i+1)*Math.PI/32;paint.line(Math.round(cx+Math.cos(a)*radius),Math.round(cy+Math.sin(a)*radius),Math.round(cx+Math.cos(b)*radius),Math.round(cy+Math.sin(b)*radius),c);}};
+ ring(119,65,38,aura.dim);ring(119,65,43,aura.dim);
+ for(let i=0;i<8;i++){const a=i*Math.PI/4,x=Math.round(119+Math.cos(a)*43),y=Math.round(65+Math.sin(a)*43);paint.rect(x-1,y-1,3,3,aura.light);}
+ for(const [x,y]of [[17,22],[43,41],[202,26],[223,58],[58,99],[190,118],[25,133],[214,153]]){paint.rect(x,y-2,1,5,aura.star);paint.rect(x-2,y,5,1,aura.star);}
+ for(let i=0;i<18;i++)paint.rect(9+(i*47)%221,19+(i*31)%138,1,1,aura.dim);
+ if(scene==='euclid-museum'){paint.line(85,88,119,23,aura.light);paint.line(119,23,153,88,aura.light);paint.line(85,88,153,88,aura.light);}
  return true;
 }

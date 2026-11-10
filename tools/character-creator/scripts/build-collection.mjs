@@ -22,7 +22,7 @@ export function renderCard(profile,descriptor,rarity=null){
   const landscape=new Raster(240,190);drawLandscape(landscape,profile.state.birthplace,profile.state.backdrop);card.blit(landscape,24,72,432,416);
   const sprite=renderSprite(profile.state);
   for(const layer of sprite.layers){card.beginLayer(layer.name);card.blit({width:64,height:96,data:layer.data},112,100,256,384);}
-  if(profile.kind==='figure'){card.beginLayer('98-historical-identity-frame');drawHistoricalFrame(card,profile.id,accent);}
+  if(profile.kind==='figure'){card.beginLayer('98-historical-identity-frame');drawHistoricalFrame(card,profile.id,accent,rarity);}
   card.beginLayer('99-frame-and-lettering');
   for(const [x,y,w,h]of [[7,7,466,2],[7,631,466,2],[7,7,2,626],[471,7,2,626],[16,16,448,1],[16,623,448,1]])card.rect(x,y,w,h,accent);
   card.text('EVERFOLK',26,28,2,accent);card.text('LIVING LEGACIES',26,48,1,'#f4e8c6');
@@ -38,6 +38,7 @@ export async function buildCollection(){
  await mkdir(out,{recursive:true});
  const manifest={schemaVersion:1,collection:'Everfolk / Living Legacies',purpose:'Editable collection artwork; no tokens are minted by this tool.',sourceCommit:'56f5d69631f9df2e717a22de3d7334f5a0a004ee',sources:['chain/ids.ts','chain/catalog/figures.ts','chain/catalog/npc-influences.ts','chain/catalog/figure-influences.ts','client/chain/chain-copy.ts','guide/TUTORIAL.md'],rarityRules:RARITY_LABELS.map((label,i)=>({label,powerBps:RARITY_POWER_BPS[i]})),historicalNote:'Fictional, stylized appearances. Euclid and Cleomenes are not authenticated portraits. Visual colors and costumes are art direction, not NFT rarity assignments. Five artwork variants do not allocate the five historical-figure token copies.',characters:[]};
  const contact=new Raster(1280,766);contact.rect(0,0,1280,766,'#efe6cc');contact.text('EVERFOLK / LIVING LEGACIES',28,22,3,'#3e4f3d');contact.text('4 HISTORICAL FIGURES + 6 PEOPLE OF ALEXANDRIA / CREATOR PIXEL ART',28,53,1,'#695140');
+ const historicalContact=new Raster(1072,414);historicalContact.rect(0,0,1072,414,'#efe6cc');historicalContact.text('EVERFOLK / HISTORICAL FIGURES',24,18,3,'#3e4f3d');historicalContact.text('JEWEL-TONED TWILIGHT / GILDED HEIRLOOM FRAMES / FOUR LIMITED FIGURE ART STUDIES',24,48,1,'#695140');let historicalIndex=0;
  for(const [index,profile]of NFT_PROFILES.entries()){
   if(profile.kind==='figure'&&(!FIGURE_DESIGN[profile.id]||profile.frame!==FIGURE_DESIGN[profile.id].frame||profile.state.figure!==profile.id||profile.state.backdrop!==FIGURE_DESIGN[profile.id].scene))throw new Error(`Historical frame/background rule violated: ${profile.id}`);
   if(profile.kind==='npc'&&(profile.frame!=='citizen'||profile.state.figure!=='none'))throw new Error(`NPC must use the citizen frame: ${profile.id}`);
@@ -58,7 +59,7 @@ export async function buildCollection(){
   for(let rarity=0;rarity<5;rarity++)await write(descriptor.rarityVariants[rarity].path,renderCard(profile,descriptor,rarity).png());
   contact.blit(card,28+(index%5)*248,82+Math.floor(index/5)*336,232,310);
   descriptor.sha256=createHash('sha256').update(card.png()).digest('hex');manifest.characters.push(descriptor);
-  if(figure){const figuresDir=path.join(repo,'public/assets/figures');await mkdir(figuresDir,{recursive:true});await writeFile(path.join(figuresDir,`${profile.id}.png`),card.png());await writeFile(path.join(figuresDir,`${profile.id}-front.png`),await readFile(path.join(out,descriptor.sprite)));}
+  if(figure){historicalContact.blit(card,24+historicalIndex*256,72,240,320);historicalIndex++;const figuresDir=path.join(repo,'public/assets/figures');await mkdir(figuresDir,{recursive:true});await writeFile(path.join(figuresDir,`${profile.id}.png`),card.png());await writeFile(path.join(figuresDir,`${profile.id}-front.png`),await readFile(path.join(out,descriptor.sprite)));}
  }
  const faceSheet=new Raster(976,452);faceSheet.rect(0,0,976,452,'#efe6cc');faceSheet.text('EVERFOLK / FACES OF ALEXANDRIA',20,20,3,'#3e4f3d');faceSheet.text('6 FACE SHAPES / EYES, NOSES, BROWS AND EXPRESSIONS / EDITABLE CREATOR PROFILES',20,53,1,'#695140');
  const studies=[];
@@ -69,6 +70,7 @@ export async function buildCollection(){
   const file=`face-studies/${shape}-${row+1}.png`;await write(file,crop.png());studies.push({image:file,state:study});
  }
  await write('face-studies.json',JSON.stringify(studies,null,2)+'\n');await write('face-study.png',faceSheet.png());
+ await write('historical-contact-sheet.png',historicalContact.png());
  await write('DESIGN.md',await readFile(path.join(root,'DESIGN.md')));
  await write('contact-sheet.png',contact.png());await write('manifest.json',JSON.stringify(manifest,null,2)+'\n');
  const archive=[];async function collect(dir){for(const entry of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name.localeCompare(b.name))){const full=path.join(dir,entry.name);if(entry.isDirectory())await collect(full);else if(entry.name!=='collection.zip')archive.push([path.relative(out,full).replaceAll('\\','/'),await readFile(full)]);}}await collect(out);await write('collection.zip',zip(archive));

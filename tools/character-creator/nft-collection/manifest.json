@@ -307,7 +307,7 @@
         "nose": "aquiline",
         "expression": "determined"
       },
-      "sha256": "c71b7cee3f0f29a73df102a106cc6ea887c6af3ddc067bb494fb14ee70baa879"
+      "sha256": "aed83dfaf9e957a3e74b79c6dc52c54143a8b42f485dbdcdbe8ce825ce8e1c6b"
     },
     {
       "id": "aristotle",
@@ -575,7 +575,7 @@
         "nose": "long",
         "expression": "thoughtful"
       },
-      "sha256": "2f2ab001d3f84511155ef588623eec084230cf5db54ef1e262c3e43f827899b3"
+      "sha256": "56240d13c0723408450f8ff5ed2f9dcceda2542e03ca9db44fb6ae88a70cc0df"
     },
     {
       "id": "euclid",
@@ -843,7 +843,7 @@
         "nose": "straight",
         "expression": "calm"
       },
-      "sha256": "5af1e824eadc0a08dcf8ede69352a0c295f04e80ae1f85ebc99aa99e53f2edab"
+      "sha256": "3223f0438bf94dcc490196af92cd4c360cd4f06c7ad7f66f27f89801d31d93d0"
     },
     {
       "id": "cleomenes",
@@ -1093,7 +1093,7 @@
         "nose": "broad",
         "expression": "stern"
       },
-      "sha256": "4385b5a9117d8a4473fff60decc5115c60f1849dde859a9ba8683293c6e1684e"
+      "sha256": "fd0fb8ea7b2a5204ae1b85906e0969ad9455a04f31004f17fc56de4cb1cab4b2"
     },
     {
       "id": "letters",
