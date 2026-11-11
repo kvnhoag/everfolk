@@ -1,0 +1,75 @@
+{
+  "currency": "dr",
+  "cases": [
+    {
+      "case": "Independent beginner: one garment",
+      "quantity": 1,
+      "quality": 1,
+      "inputs": {
+        "linen": 2,
+        "thread": 2
+      },
+      "cashNeeded": 66,
+      "referenceSales": 80,
+      "grossMargin": 14
+    },
+    {
+      "case": "Independent beginner: two garments",
+      "quantity": 2,
+      "quality": 1,
+      "inputs": {
+        "linen": 4,
+        "thread": 4
+      },
+      "cashNeeded": 124,
+      "referenceSales": 160,
+      "grossMargin": 36
+    },
+    {
+      "case": "Depth 5: four plain garments",
+      "quantity": 4,
+      "quality": 1,
+      "inputs": {
+        "linen": 8,
+        "thread": 8
+      },
+      "cashNeeded": 240,
+      "referenceSales": 320,
+      "grossMargin": 80
+    },
+    {
+      "case": "Depth 5: four inspected garments",
+      "quantity": 4,
+      "quality": 2,
+      "inputs": {
+        "linen": 8,
+        "thread": 8
+      },
+      "cashNeeded": 243,
+      "referenceSales": 368,
+      "grossMargin": 125
+    },
+    {
+      "case": "Depth 8: eight quality-3 garments",
+      "quantity": 8,
+      "quality": 3,
+      "inputs": {
+        "linen": 14,
+        "thread": 16
+      },
+      "cashNeeded": 422,
+      "referenceSales": 832,
+      "grossMargin": 410
+    }
+  ],
+  "verticalIntegration": {
+    "chain": "20 flax \u2192 40 thread \u2192 8 linen + 8 thread \u2192 4 garments",
+    "workYears": 3,
+    "materialsCost": 60,
+    "totalAccessFees": 16,
+    "referenceQuality1Sales": 320,
+    "grossMargin": 244,
+    "averagePerWorkYear": "81 1/3"
+  },
+  "caveat": "Gross margins exclude food, rent, debt, upkeep, unsold stock and opportunity cost. All sales need finite buyer demand and cash; these are reference arithmetic examples, not validated net income."
+}
