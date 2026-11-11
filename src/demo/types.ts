@@ -51,6 +51,12 @@ export interface TimelineConfig {
   }>;
   /** Extra chance (basis points) of an uneasy road in recruitment years or after a low flood. */
   roadPressureBps: number;
+  /** Chance (basis points) of a high flood in a year outside low-flood episodes. Default 0. */
+  highFloodBps?: number;
+  /** Army episodes at least this long turn to war in their middle year. Default 4. */
+  warMinYears?: number;
+  /** Calm years kept between two episodes of one family. Default 1. */
+  episodeGapYears?: number;
 }
 
 /** Track A: household, farming, flax, family. */
@@ -114,6 +120,35 @@ export interface MarketConfig {
   importFactorBps: Record<RoadLevel, number>;
   royalAllocation: number;
   maxOrderQuantity: number;
+  // Track B optional tuning; `market.ts` documents the default used when a field is absent.
+  /** Grain the grower's own households eat each year (they are the neighbours). */
+  growerEating?: number;
+  /** Share of the grower's barn lost each year, basis points. */
+  growerSpoilageBps?: number;
+  /** Fixed-rule share of the grower's stock offered to the merchant each year, basis points. */
+  growerReleaseBps?: number;
+  /** The merchant buys from the grower only up to this share of `targetGrainStock`, basis points. */
+  merchantMaxStockBps?: number;
+  /** Army grain kept beyond the year's demand; it buys to refill it (defaults to `start.army.grain`). */
+  armyReserve?: number;
+  /** Drachmas the army keeps in its purse for wages; it never spends them on grain. */
+  armyPurseReserve?: number;
+  /** Imports restock each good only up to this level (defaults to the merchant's starting goods). */
+  goodsStockCap?: Partial<Record<Good, number>>;
+  /** Army price over the merchant's grain sell price, basis points (levy premium). */
+  armyPremiumBps?: Record<ArmyLevel, number>;
+  /** Gold and silver price change by army level, basis points. */
+  metalsPressureBps?: Record<ArmyLevel, number>;
+  /** Coan silk price change by road level, basis points. */
+  silkPressureBps?: Record<RoadLevel, number>;
+  /** Grain, flax and linen price change by flood level, basis points. */
+  cropPressureBps?: Record<FloodLevel, number>;
+  /** Most head of each animal a household may keep. */
+  maxAnimals?: number;
+  /** Youngest age at which the player may visit the market. */
+  minTradeAge?: number;
+  /** Reputation for bringing grain to the merchant in a low-flood year (fair trade). */
+  fairTradeReputation?: number;
 }
 
 /** Track C: wages, rations, convoy. */
@@ -134,6 +169,14 @@ export interface WorksConfig {
   reputation: { initial: number; min: number; max: number };
   granarySpoilageCutBps: number;
   schoolDiscountBps: number;
+  /** Track E (optional): cut in the yearly illness chance once the well is built, basis points. */
+  wellIllnessReliefBps?: number;
+  /** Track E (optional): extra recovery from illness once the healing house is built, basis points. */
+  healingRecoveryBonusBps?: number;
+  /** Track E (optional): one-off stat changes (world stat id → delta) applied when each work is finished. */
+  completionStats?: Partial<Record<WorkId, Record<string, number>>>;
+  /** Track E (optional): minimum reputation for each reputation-gated opportunity event. */
+  opportunityReputation?: { neighbours: number; dispute: number; envoy: number };
 }
 
 /** Track F: agent limits. */

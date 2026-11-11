@@ -1,4 +1,4 @@
-import type { CharacterActivity, JobDefinition, LegacyAchievementDefinition, LegacyRouteDefinition, LifeEvent, Origin, SkillDefinition } from "../../types.ts";
+import type { CharacterActivity, InfluenceEntry, JobDefinition, LegacyAchievementDefinition, LegacyRouteDefinition, LifeEvent, Origin, SkillDefinition } from "../../types.ts";
 
 /** Authored additions one track contributes to `alexandria-demo-1`. */
 export interface DemoContent {
@@ -16,4 +16,6 @@ export interface DemoContent {
   achievements?: LegacyAchievementDefinition[];
   /** When set, the world keeps only these origins (rural births). */
   origins?: Origin[];
+  /** Existing influence entries (figure deeds) replaced by id, tying them to this world's accounts. */
+  replaceInfluences?: InfluenceEntry[];
 }

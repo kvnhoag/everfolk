@@ -1,5 +1,5 @@
 /** Lead — assembles `alexandria-demo-1` from the ranked world plus every track's content. Pure. */
-import type { CharacterActivity, JobDefinition, LifeEvent, WorldPack } from "../types.ts";
+import type { CharacterActivity, Condition, JobDefinition, LifeEvent, WorldPack } from "../types.ts";
 import type { DemoContent } from "./content/types.ts";
 import { DEMO_CONFIG, FUTURE_PATHS, PLAYABLE_JOBS, UNAVAILABLE_ROUTES, UNAVAILABLE_SKILLS } from "./config.ts";
 import { DEMO_WORLD_VERSION, FARMING_SKILL } from "./types.ts";
@@ -30,6 +30,18 @@ function byId<T extends { id: string }>(items: readonly T[], replacements: reado
   return [...replaced, ...(additions ?? [])];
 }
 
+/** A condition no life can meet: used for references to origins this world no longer has. */
+const NEVER: Condition = { type: "age", op: "lt", value: 0 };
+
+/** Conditions naming a dropped origin can never hold, so they become `NEVER` (pure; returns a new tree). */
+function retireOrigins<T>(value: T, kept: ReadonlySet<string>): T {
+  if (Array.isArray(value)) return value.map(item => retireOrigins(item, kept)) as T;
+  if (value === null || typeof value !== "object") return value;
+  const data = value as Record<string, unknown>;
+  if (data.type === "origin" && typeof data.origin === "string" && Object.keys(data).length === 2 && !kept.has(data.origin)) return { ...NEVER } as T;
+  return Object.fromEntries(Object.entries(data).map(([key, item]) => [key, retireOrigins(item, kept)])) as T;
+}
+
 export function buildDemoWorld(ranked: WorldPack, content: readonly DemoContent[] = DEMO_CONTENT): WorldPack {
   const world = structuredClone(ranked) as WorldPack;
   const character = world.character!;
@@ -40,14 +52,17 @@ export function buildDemoWorld(ranked: WorldPack, content: readonly DemoContent[
     events = byId(events.filter(event => !part.removeEvents?.includes(event.id)), part.replaceEvents, part.events, "event");
     Object.assign(character.skills, part.skills ?? {});
     if (part.origins) world.origins = structuredClone(part.origins);
+    if (part.replaceInfluences && world.influences) world.influences = byId(world.influences, part.replaceInfluences, undefined, "influence");
     if (world.legacy) {
       world.legacy.routes = byId(world.legacy.routes, undefined, part.routes, "route");
       world.legacy.achievements = byId(world.legacy.achievements, undefined, part.achievements, "achievement");
     }
   }
+  const origins = new Set(world.origins.map(origin => origin.id));
   character.jobs = jobs;
-  character.activities = activities;
-  world.events = events;
+  character.activities = retireOrigins(activities, origins);
+  world.events = retireOrigins(events, origins);
+  if (world.influences) world.influences = retireOrigins(world.influences, origins);
   world.version = DEMO_WORLD_VERSION;
   world.title = `${ranked.title} — Grain and Service`;
   const unavailableRoutes = new Set(UNAVAILABLE_ROUTES);
