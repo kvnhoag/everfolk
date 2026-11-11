@@ -11,9 +11,7 @@ function signed(delta: number): string {
 function Coming({ flows }: { flows: StorehouseFlow[] }) {
   return <div>
     <h4>Coming year</h4>
-    {flows.length > 0
-      ? <ul>{flows.map(flow => <li key={flow.text}>{signed(flow.delta)} {flow.text}</li>)}</ul>
-      : <p>No change expected.</p>}
+    <ul>{flows.map(flow => <li key={flow.text}>{signed(flow.delta)} {flow.text}</li>)}</ul>
   </div>;
 }
 
@@ -25,7 +23,7 @@ function Row({ row }: { row: StorehouseRow }) {
       <span className="storehouse-label">{row.label}</span>
       <span className="storehouse-amount">{amount}</span>
     </div>
-    <Coming flows={row.coming} />
+    {row.coming.length > 0 && <Coming flows={row.coming} />}
     <div>
       <h4>Last year</h4>
       {row.lastYear.length > 0 ? <ul>{row.lastYear.map((text, index) => <li key={index}>{text}</li>)}</ul> : <p>{EMPTY_NOTE}</p>}

@@ -10,7 +10,7 @@ import { demoEngine } from "./fixtures/demo/world.ts";
 import { householdView } from "../src/demo/household.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
 import { RESOURCE_IDS } from "../client/demo/resources.ts";
-import { storehouseRows } from "../client/demo/storehouse-model.ts";
+import { mentionedResources, storehouseRows } from "../client/demo/storehouse-model.ts";
 
 const hooks = registerHooks({
   load(url, context, nextLoad) {
@@ -89,4 +89,21 @@ test("Storehouse renders icons and the empty note", () => {
   assert.match(html, /<title[^>]*>Grain<\/title>/);
   assert.match(html, /Nothing recorded yet\./);
   assert.match(html, /Coming year/);
+});
+
+test("a row without a forecast shows no Coming year block", () => {
+  const gold = rows().filter(row => row.id === "gold");
+  assert.deepEqual(gold[0].coming, []);
+  const html = renderToStaticMarkup(createElement(Storehouse, { rows: gold }));
+  assert.doesNotMatch(html, /Coming year/);
+  assert.doesNotMatch(html, /No change expected/);
+  assert.match(html, /Last year/);
+});
+
+test("trade text is matched by whole word, tolerating plurals", () => {
+  assert.deepEqual(mentionedResources("You buy a box of golden bolts."), []);
+  assert.deepEqual(mentionedResources("You buy 1 ox from the merchant at 9 drachmas each."), ["drachmas", "ox"]);
+  assert.deepEqual(mentionedResources("You buy 2 oxen from the merchant."), ["ox"]);
+  assert.deepEqual(mentionedResources("You sell 3 bolts of Coan silk."), ["silk"]);
+  assert.deepEqual(mentionedResources("You buy 2 donkeys."), ["donkey"]);
 });

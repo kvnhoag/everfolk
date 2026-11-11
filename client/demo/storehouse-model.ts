@@ -25,13 +25,13 @@ const JOURNAL_RESOURCES: readonly { prefix: string; resources: readonly Resource
   ...["army-wage", "convoy-paid", "convoy-pay-shortfall"].map(prefix => ({ prefix, resources: ["drachmas"] as const })),
 ];
 
-function mentioned(text: string): ResourceId[] {
-  const lower = text.toLowerCase();
-  return RESOURCE_IDS.filter(id => lower.includes(RESOURCES[id].label.toLowerCase()));
+/** Whole-word, case-insensitive label match; tolerates a plural "s" and the irregular "oxen". */
+export function mentionedResources(text: string): ResourceId[] {
+  return RESOURCE_IDS.filter(id => new RegExp(`\\b${RESOURCES[id].label}(?:s|(?<=ox)en)?\\b`, "i").test(text));
 }
 
 function touches(entry: { id: string; text: string }): ResourceId[] {
-  if (TRADE_IDS.some(prefix => entry.id.startsWith(prefix))) return ["drachmas", ...mentioned(entry.text)];
+  if (TRADE_IDS.some(prefix => entry.id.startsWith(prefix))) return ["drachmas", ...mentionedResources(entry.text)];
   return JOURNAL_RESOURCES.filter(rule => entry.id.startsWith(rule.prefix)).flatMap(rule => rule.resources);
 }
 
