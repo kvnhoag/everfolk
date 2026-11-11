@@ -1,4 +1,4 @@
-# Everfolk — The Last Light over Rhakotis
+# Everfolk — First Light over Rhakotis
 
 ## Historical frame
 
@@ -6,7 +6,7 @@ The starting year is 350 BCE. Rhakotis precedes the foundation of Alexandria in 
 
 ## Visual system
 
-A warm limestone and clay settlement faces a cool Mediterranean sea beneath a dusty rose evening sky. The original harbor silhouettes are reinterpreted as pixel volumes: light upper surfaces, cool shaded side walls, narrow contact occlusion, and long shadows falling away from the upper-right sun. Ordered transition pixels and nearest-neighbor sampling preserve the pixel grid. Text uses the project's DM Sans and Libre Caslon Display families, with restrained dimensional shadows on the title.
+A warm limestone and clay settlement faces a cool Mediterranean sea beneath a pale blue, peach and champagne dawn sky. The original harbor silhouettes are reinterpreted as pixel volumes: light upper surfaces, cool shaded side walls, narrow contact occlusion, and long shadows falling away from the upper-right sun. Ordered transition pixels and nearest-neighbor sampling preserve the pixel grid. Text uses the project's DM Sans and Libre Caslon Display families, with restrained dimensional shadows on the title.
 
 The full-viewport coast is the environment, not a static hero image. Quiet space on the left provides contrast for the menu; the settlement occupies the right and recedes toward the horizon. On phones, the environment forms an upper scene and fades into the menu surface. All interactive controls remain regular accessible HTML.
 
@@ -46,3 +46,7 @@ The original composition, typography metrics, 350 BCE scenery, sprite geometry a
 The existing motion switch controls the decorative timelines as well as the coastal scene. A GSAP media-query context and CSS reduced-motion overrides disable sweeps, glints and motes when reduced motion is requested. Document visibility and intersection guards pause the timelines. Static gold lettering stays readable without JavaScript; forced-color mode restores system text colors. Only GSAP core is added, pinned in the lockfile. No PixiJS filters, Three.js renderer or post-processing engine is installed.
 
 Additional reference: [GSAP React skill](https://github.com/greensock/gsap-skills/blob/main/skills/gsap-react/SKILL.md), using a scoped `gsap.context` with explicit cleanup and lazy client-only import. [PixiJS filters](https://github.com/pixijs/pixijs-skills/tree/main/skills/pixijs-filters) and the Three.js post-processing reference informed the selective rather than full-scene glow decision.
+
+## Dawn and community gathering
+
+The dawn pass supersedes the original evening color study. The original camera, stage size, building positions and HTML layout remain fixed. See [DAWN.md](DAWN.md) for water engineering, festival provenance and validation.

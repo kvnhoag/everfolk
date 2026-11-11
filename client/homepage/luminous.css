@@ -27,14 +27,17 @@
 .ef-home-links>button:hover,.ef-home-secondary:hover,.ef-motion-toggle:hover:not(:disabled){color:#ffedc3;text-shadow:0 0 9px #f3cb7b66}
 .ef-home-links>button>span{filter:drop-shadow(0 0 4px #e8b76633)}
 .ef-home .main-menu-ranked>button:not(:disabled){border-color:#d7b57a9c;box-shadow:inset 0 1px #f9d99c22,0 0 13px #e2b56112,0 2px 0 #142b31}
-.ef-coast-aureole{position:absolute;inset:0;opacity:.5;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(ellipse 15% 17% at 74.7% 24.8%,#ffe2a163,#efbb6b19 48%,transparent 78%),radial-gradient(ellipse 28% 22% at 77% 39%,#eab77916,transparent 76%)}
-.ef-coast-sunlight{background:radial-gradient(ellipse at 75% 27%,#ffe0a337,transparent 30%),linear-gradient(117deg,transparent 50%,#f0bd8715 60%,transparent 73%)}
+.ef-coast-aureole{position:absolute;inset:0;opacity:.5;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(ellipse 15% 17% at 74.7% 31.5%,#ffe2a163,#efbb6b19 48%,transparent 78%),radial-gradient(ellipse 28% 22% at 77% 39%,#eab77916,transparent 76%)}
+.ef-coast-sunlight{background:radial-gradient(ellipse at 74.7% 31.5%,#ffe0a337,transparent 30%),linear-gradient(117deg,transparent 50%,#f0bd8715 60%,transparent 73%)}
 .ef-light-air{position:absolute;z-index:1;inset:0;pointer-events:none;overflow:hidden}
 .ef-light-air:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 29% 26% at 23% 31%,#eab4670e,transparent 80%)}
 .ef-light-mote{position:absolute;width:2px;height:2px;background:#ffe6a6;opacity:0;box-shadow:0 0 6px #ffdb8a66}
 .ef-light-mote:nth-child(1){left:7%;top:22%}.ef-light-mote:nth-child(2){left:33%;top:19%}.ef-light-mote:nth-child(3){left:40%;top:43%}.ef-light-mote:nth-child(4){left:27%;top:57%}.ef-light-mote:nth-child(5){left:70%;top:33%}.ef-light-mote:nth-child(6){left:83%;top:45%}.ef-light-mote:nth-child(7){left:61%;top:63%}.ef-light-mote:nth-child(8){left:48%;top:27%}
 .ef-home[data-motion=paused] .ef-title-glint,.ef-home[data-motion=paused] .ef-light-mote{opacity:0!important}
 .ef-home[data-light-resting=true] .ef-coast-sunlight{animation-play-state:paused}
-@media(max-width:700px){.ef-title-glint:before{height:7px;top:-2px}.ef-title-glint:after{width:7px;left:-2px}.ef-coast-aureole{background:radial-gradient(ellipse 35% 18% at 71% 26%,#ffe2a15c,#efbb6b14 48%,transparent 78%)}.ef-title-gold{filter:drop-shadow(0 1px 0 #e7c186) drop-shadow(1px 2px 0 #5f4834) drop-shadow(0 0 12px #edb24c36)}}
+@media(max-width:700px){.ef-title-glint:before{height:7px;top:-2px}.ef-title-glint:after{width:7px;left:-2px}.ef-coast-aureole{background:radial-gradient(ellipse 35% 18% at 71% 31.5%,#ffe2a15c,#efbb6b14 48%,transparent 78%)}.ef-title-gold{filter:drop-shadow(0 1px 0 #e7c186) drop-shadow(1px 2px 0 #5f4834) drop-shadow(0 0 12px #edb24c36)}}
 @media(prefers-reduced-motion:reduce){.ef-title-glint,.ef-light-mote,.ef-home-primary:after,.ef-title-gold:after{display:none!important}.ef-home-tagline{background-position:100% 0!important}.ef-coast-aureole{opacity:.5!important}}
 @media(forced-colors:active){.ef-home h1 .ef-title-gold,.ef-home-tagline{background:none;-webkit-text-fill-color:CanvasText;color:CanvasText;filter:none;-webkit-text-stroke:0}.ef-title-gold:after,.ef-title-glint,.ef-light-air,.ef-coast-aureole{display:none}}
+
+/* Dawn rays originate at the existing sun; restrained screen light leaves pixel edges untouched. */
+.ef-coast-aureole:after{content:"";position:absolute;inset:0;background:conic-gradient(from 135deg at 74.7% 31.5%,transparent 0deg,#ffe9ad0a 9deg,transparent 14deg,transparent 28deg,#fff0bc0b 33deg,transparent 39deg,transparent 55deg,#ffe9ad08 62deg,transparent 68deg);mask-image:linear-gradient(transparent 28%,#0009 37%,transparent 88%)}

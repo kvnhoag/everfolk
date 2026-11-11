@@ -76,7 +76,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
         <aside className="ef-home-world-note" aria-label="Your starting world">
           <span className="ef-home-world-line" aria-hidden="true" />
           <span>YOUR STARTING WORLD</span><strong>{worldTitle}</strong>
-          <p>The Mediterranean coast · {formatYear(world.startYear)}</p>
+          <p>First light on the coast · {formatYear(world.startYear)}</p>
         </aside>
       </div>
       <footer className="ef-home-footer">

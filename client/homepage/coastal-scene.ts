@@ -1,4 +1,5 @@
 import art from './scene-assets.json' with { type: 'json' };
+import { createDawnWater, DAWN_SUN, quayEdge } from './dawn-water.ts';
 
 /** A fixed pixel stage: CSS scales it with nearest-neighbour sampling. */
 export const COAST_SIZE = { width: 768, height: 480 } as const;
@@ -6,17 +7,16 @@ type PixelSprite = { width: number; height: number; pixels: (string | number)[][
 type Point = readonly [number, number];
 export type CoastalScene = ReturnType<typeof createCoastalScene>;
 const BOATS = [[423,218,.48,16,.018],[365,292,.94,29,.012],[636,190,.24,8,.021]];
-const SEA_COLORS = ['#7a9290','#638783','#537b79','#43696b','#365960','#2d4c55','#29434e'];
 
 function mix(a: string, b: string, amount: number) {
   const channel = (offset: number) => Math.round(parseInt(a.slice(offset,offset+2),16)*(1-amount)+parseInt(b.slice(offset,offset+2),16)*amount).toString(16).padStart(2,'0');
   return `#${channel(1)}${channel(3)}${channel(5)}`;
 }
 
-// Sunset grading of the existing warm limestone / clay / olive / teal palette.
+// Sunrise grading of the existing warm limestone / clay / olive / teal palette.
 const grading: Record<string, string> = {
-  '#fff2d1': '#ffe7b0', '#f5e6bf': '#f0c993', '#edcf91': '#f6cd8b',
-  '#ddc79b': '#c59477', '#baa47a': '#ad8069', '#cbb58b': '#ac7f68',
+  '#fff2d1': '#ffe7b0', '#f5e6bf': '#f6deb0', '#edcf91': '#f6cd8b',
+  '#ddc79b': '#d5b58b', '#baa47a': '#ad8069', '#cbb58b': '#ac7f68',
   '#65503e': '#483d43', '#886447': '#785455', '#bf8b62': '#c9906d',
   '#263b43': '#252f3b', '#b8d2c4': '#a9b6a0', '#6b8051': '#717c5d',
 };
@@ -65,18 +65,18 @@ function disk(c: CanvasRenderingContext2D, x: number, y: number, radius: number,
 }
 
 function cloud(c: CanvasRenderingContext2D, x: number, y: number, size: number) {
-  c.fillStyle = '#e3b0a0'; c.fillRect(x + 8, y, size - 20, 2);
+  c.fillStyle = '#f6ddc3'; c.fillRect(x + 8, y, size - 20, 2);
   c.fillRect(x, y + 2, size, 3); c.fillRect(x + 12, y + 5, size - 16, 1);
-  c.fillStyle = '#ba8c94'; c.fillRect(x + 4, y + 5, size - 20, 2);
+  c.fillStyle = '#c4cfd0'; c.fillRect(x + 4, y + 5, size - 20, 2);
 }
 
 /** Low flat-roofed coastal storehouses, using the shipped harbor's silhouettes. */
 function house(c: CanvasRenderingContext2D, x: number, base: number, w: number, h: number, depth: number, variant: number) {
   const top = base - h, roof = top - depth;
-  polygon(c, [[x, base], [x + w, base], [x + w - 35, base + 15], [x - 34, base + 15]], '#423f43');
-  polygon(c, [[x + w, top], [x + w + depth, roof], [x + w + depth, base - depth], [x + w, base]], '#746064');
-  c.fillStyle = ['#b08776', '#c7997b', '#bd8c72'][variant % 3]; c.fillRect(x, top, w, h);
-  polygon(c, [[x, top], [x + depth, roof], [x + w + depth, roof], [x + w, top]], '#ecc49a');
+  polygon(c, [[x, base], [x + w, base], [x + w - 35, base + 15], [x - 34, base + 15]], '#5e7375');
+  polygon(c, [[x + w, top], [x + w + depth, roof], [x + w + depth, base - depth], [x + w, base]], '#89978f');
+  c.fillStyle = ['#c2b08e', '#d8bc92', '#cbb08a'][variant % 3]; c.fillRect(x, top, w, h);
+  polygon(c, [[x, top], [x + depth, roof], [x + w + depth, roof], [x + w, top]], '#ffe1a5');
   c.fillStyle = '#f4d2a2'; c.fillRect(x - 1, top, w + 2, 2);
   c.fillStyle = '#d9ae86'; c.fillRect(x + depth, roof - 2, w, 2);
   // Low parapet edges and a few warm roof pixels retain the original flat-roof shape.
@@ -125,7 +125,7 @@ function shore() {
 
 function sky() {
   const { canvas, context: c } = surface();
-  const colors = Array.from({length:24},(_,i)=>mix('#454052','#e1b795',i/23));
+  const colors = Array.from({length:24},(_,i)=>mix('#80a8bb','#ffe5b8',i/23));
   for (let band = 0; band < colors.length; band++) {
     c.fillStyle = colors[band]; c.fillRect(0, band * 7, 768, 7);
     // Ordered, sparse transition pixels instead of a smooth raster gradient.
@@ -133,14 +133,14 @@ function sky() {
       c.fillStyle = colors[band - 1]; c.fillRect(x, band * 7 + y, 1, 1);
     }
   }
-  disk(c, 574, 119, 27, '#f4cda1');
-  c.fillStyle = '#e1bb99'; c.fillRect(542, 138, 65, 2); c.fillRect(547, 146, 55, 3);
-  c.fillStyle = '#798c8b'; c.fillRect(0, 162, 768, 8);
-  c.fillStyle = '#9ba49a'; c.fillRect(0, 162, 768, 1);
+  disk(c, DAWN_SUN.x, DAWN_SUN.y, 21, '#fff1c5');
+  c.fillStyle = '#ffe7bd'; c.fillRect(548, 157, 54, 1); c.fillRect(549, 164, 52, 1);
+  c.fillStyle = '#c6d7cd'; c.fillRect(0, 162, 768, 8);
+  c.fillStyle = '#f1ddbb'; c.fillRect(0, 162, 768, 1);
   // Far coast uses the same low storehouse silhouettes, veiled by atmospheric perspective.
   for (let i = 0; i < 19; i++) {
     const x = 376 + i * 23, h = 3 + i * 7 % 10;
-    c.fillStyle = '#958f8b'; c.fillRect(x, 164 - h, 20, h + 3);
+    c.fillStyle = '#a5b7b3'; c.fillRect(x, 164 - h, 20, h + 3);
     c.fillStyle = '#c7aa91'; c.fillRect(x, 164 - h, 20, 1);
   }
   return canvas;
@@ -171,39 +171,33 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
   const boats = art.shipFrames.map(sprite);
   const people = art.actors.map(actor => actor.frames.map(sprite));
   const cargo = sprite(art.cargo);
-  const waterBands = Array.from({length:28},(_,i)=>{
-    const progress = i/27*(SEA_COLORS.length-1), index = Math.floor(progress);
-    return mix(SEA_COLORS[index],SEA_COLORS[Math.min(index+1,SEA_COLORS.length-1)],progress-index);
-  });
+  const water = createDawnWater();
+  const musician = sprite(art.festival.musician), rug = sprite(art.festival.rug), garland = sprite(art.festival.garland);
   // Fixed bounded pools: no particles or sprite objects allocated during animation.
-  const wavelets = Array.from({ length: 108 }, (_, i) => ({ x: (i * 127 + 31) % 800,
-    y: 176 + (i * 47) % 290, size: 2 + i % 14, phase: i * 1.73 }));
   const dust = Array.from({ length: 21 }, (_, i) => ({ x: 390 + i * 79 % 360, y: 100 + i * 37 % 300, phase: i * 3.11 }));
-  const reflections = Array.from({ length: 50 }, (_, i) => ({ y: 172 + i * 3, width: 10 + i * 1.5, phase: i * 2.7 }));
   let cameraX = 0, cameraY = 0;
   function draw(time: number, pointerX = 0, pointerY = 0) {
     cameraX += (pointerX - cameraX) * .065; cameraY += (pointerY - cameraY) * .065;
     const px = Math.round(cameraX * 5), py = Math.round(cameraY * 3);
     c.fillStyle = '#25454c'; c.fillRect(0,0,768,480);
     c.drawImage(backdrop, Math.round(px * .2), Math.round(py * .2));
-    // Quantized sea depth with warm sky reflections and cool ambient fill.
-    for (let i = 0; i < waterBands.length; i++) {
-      c.fillStyle = waterBands[i]; c.fillRect(0,170+i*12,768,13);
+    // The moving height field shades every water sample, not a scrolling gradient.
+    c.drawImage(water.draw(time), 0, 170, 768, 310);
+    // Distorted reflections of the actual cached settlement along the water-facing quay.
+    c.globalAlpha = .14;
+    for (let row=228;row<466;row+=2) {
+      const edge=quayEdge(row), displacement=Math.round(Math.sin(row*.29+time*.9)*2);
+      c.save(); c.translate(Math.round(edge+px+displacement), row+py); c.scale(-.5,1);
+      c.drawImage(settlement,Math.round(edge),row-7,48,2,0,0,48,2); c.restore();
     }
-    for (const r of reflections) {
-      const x = 574 + Math.sin(time * .45 + r.phase) * (5 + r.width * .08);
-      c.fillStyle = r.y < 220 ? '#dfb48b' : '#a29f84';
-      c.globalAlpha = .35 + .13 * Math.sin(time + r.phase);
-      c.fillRect(Math.round(x - r.width / 2 + px * .4), r.y, Math.round(r.width), 1);
+    c.globalAlpha=1;
+    // Shoreline swash and refracted caustic glints share the water's slow wave cadence.
+    for(let row=229;row<460;row+=4){
+      const edge=quayEdge(row), swell=Math.sin(row*.22-time*.72);
+      c.globalAlpha=.16+Math.max(0,swell)*.23; c.fillStyle='#cde7cd';
+      c.fillRect(Math.round(edge-4+swell*2+px),row+py,3+Math.round(Math.max(0,swell)*3),1);
     }
-    c.globalAlpha = 1;
-    for (const w of wavelets) {
-      const x = (w.x + time * (1 + (w.y - 170) / 120)) % 800 - 20;
-      c.fillStyle = Math.sin(time * .65 + w.phase) > .2 ? '#8daba2' : '#42666c';
-      c.globalAlpha = .17 + .12 * Math.sin(time + w.phase);
-      c.fillRect(Math.round(x + px * .5), w.y, w.size, 1);
-    }
-    c.globalAlpha = 1;
+    c.globalAlpha=1;
     // Clouds, sail cloth, wakes and individual people each have independent clocks.
     cloud(c, 415 + Math.round(Math.sin(time * .027) * 13 + px*.25), 54, 79);
     cloud(c, 626 + Math.round(Math.sin(time * .019 + 1) * 19), 83, 101);
@@ -215,16 +209,48 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       const image = boats[Math.floor(time * (3 + i) + i) % boats.length];
       c.globalAlpha = .2; c.fillStyle = '#202f3e';
       c.fillRect(bx - 5, by + Math.round(image.height*s) + 3, Math.round(image.width*s)+9, 3);
-      c.globalAlpha = .2; c.save(); c.translate(bx,by+image.height*s*1.3+2); c.scale(s,-s*.3); c.drawImage(image,0,0); c.restore();
+      // Reflect hull and sail in independently displaced horizontal water strips.
+      c.globalAlpha=.19;
+      const base=by+image.height*s;
+      for(let row=0;row<image.height;row+=3){
+        const dy=Math.round(base+(image.height-row)*s*.34), shift=Math.round(Math.sin(dy*.37+time*1.3)*2);
+        c.drawImage(image,0,row,image.width,3,bx+shift,dy,Math.round(image.width*s),1);
+      }
       c.globalAlpha = 1; c.drawImage(image,bx,by,Math.round(image.width*s),Math.round(image.height*s));
-      c.fillStyle = '#b3b49b'; c.fillRect(bx-8,by+Math.round(image.height*s),10+Math.floor(Math.sin(time+i)*3),1);
+      for(let w=0;w<4;w++){
+        c.globalAlpha=.3-w*.055; c.fillStyle='#c6dfc4';
+        c.fillRect(bx-5-w*3,Math.round(base+w*2+Math.sin(time*.8+w)),Math.round(image.width*s)+10+w*5,1);
+      }
+      c.globalAlpha=1;
     }
     c.drawImage(settlement,px,py);
+    for(let row=242;row<450;row+=6){
+      c.globalAlpha=Math.max(0,Math.sin(row*.19+time*.72))*.12;c.fillStyle='#e7efc5';
+      c.fillRect(Math.round(quayEdge(row)-5+px),row+py,4,1);
+    }
+    c.globalAlpha=1;
     c.drawImage(cargo, 526+px,274+py, cargo.width, cargo.height);
     c.drawImage(cargo, 692+px,397+py, cargo.width*1.5, cargo.height*1.5);
-    for (let i = 0; i < 3; i++) {
+    // A modest community gathering uses the shipped music scene, not a named ritual.
+    c.drawImage(rug,653+px,294+py,42,6);
+    c.drawImage(musician,679+px,279+py,14,17);
+    for(let g=0;g<2;g++){
+      const gx=536+g*91, gy=202+g*40;
+      for(let strip=0;strip<garland.width;strip+=5){
+        const lift=Math.round(Math.sin(time*.65+strip*.12+g));
+        c.drawImage(garland,strip,0,Math.min(5,garland.width-strip),garland.height,gx+strip*.55+px,gy+lift+py,3,5);
+      }
+    }
+    for(let guest=0;guest<5;guest++){
+      const person=people[guest%2][Math.floor(time*.65+guest)%4];
+      const x=655+guest%3*11,y=304+Math.floor(guest/3)*9;
+      c.globalAlpha=.24;c.fillStyle='#446365';c.fillRect(x-5+px,y+py,13,2);c.globalAlpha=1;
+      c.drawImage(person,x+px,y-15+py,8,15);
+    }
+    // Only five walkers, spaced along the clear quay; the performance group stays seated nearby.
+    for (let i = 0; i < 5; i++) {
       const person = people[i%2][Math.floor(time*4+i)%4];
-      const progress = (time * (i === 1 ? -.011 : .008) + i * .32 + 100) % 1;
+      const progress = (time * (i === 1 ? -.011 : .008) + i * .19 + 100) % 1;
       // Follow the open strip along the quay, rather than crossing building faces.
       const x = Math.round(490+progress*196), y = Math.round(282+progress*166);
       const scale = .27 + progress*.16;
@@ -246,5 +272,5 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     }
     c.globalAlpha = 1;
   }
-  return { draw, dispose() { for (const image of [backdrop,settlement,near,...boats,...people.flat(),cargo]) { image.width=0; image.height=0; } } };
+  return { draw, dispose() { for (const image of [backdrop,settlement,near,...boats,...people.flat(),cargo,musician,rug,garland]) { image.width=0; image.height=0; } water.dispose(); } };
 }

@@ -33,7 +33,13 @@ const actors = ['male', 'female'].map((sex, variant) => {
   return { id: `coastal-${sex}`, frames };
 });
 const jarPixels = harbor[3].rects.filter(r => r.x >= 127 && r.x < 146 && r.y >= 84 && r.w <= 7);
-const data = { version: 1, shipFrames, actors, cargo: crop(jarPixels),
+const music = createBannerLayers('music');
+const festival = {
+  musician: crop(music[3].rects.filter(r => r.x >= 193 && r.x + r.w <= 223 && r.y >= 58 && r.y + r.h <= 93)),
+  rug: crop(music[4].rects),
+  garland: crop(music[3].rects.filter(r => r.x >= 133 && r.x < 218 && r.y >= 20 && r.y + r.h <= 28)),
+};
+const data = { version: 2, festival, shipFrames, actors, cargo: crop(jarPixels),
   provenance: ['scripts/banner-art-scenes.mjs:harbor', 'scripts/banner-art-actors.mjs:adult standing', 'client/PaperScene.tsx:PixelAtmosphere'],
 };
 await mkdir(new URL('../client/homepage/', import.meta.url), { recursive: true });
