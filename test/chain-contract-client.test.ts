@@ -194,6 +194,34 @@ test("views decode JSON-RPC results into T0 shapes", async () => {
   assert.deepEqual(byMethod("listings"), [{ from_index: 0, limit: 100 }]);
 });
 
+for (const count of [0, 100, 101, 300]) test(`tokensOf returns all ${count} owned tokens using NEP-181 string offsets`, async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const tokens = Array.from({ length: count }, (_, index) => ({
+    token_id: String(index + 1), owner_id: "player.testnet", metadata: { extra: JSON.stringify({
+      kind: "npc", rarity: 0, affection: 50, action_id: "letters.teach", life_id: String(index + 1),
+      sources: [], evidence_hash: HASH_A,
+    }) },
+  }));
+  const contract = createLivesContract(fakeWallet(recorder), cfg, {
+    fetch: fakeRpc(recorder, {
+      nft_tokens_for_owner: (args: unknown) => {
+        const { account_id, from_index, limit } = args as { account_id: string; from_index: string; limit: number };
+        assert.equal(account_id, "player.testnet");
+        assert.equal(typeof from_index, "string", "NEP-181 wraps its U128 offset as a decimal string");
+        assert.match(from_index, /^\d+$/);
+        assert.equal(limit, 100);
+        return tokens.slice(Number(from_index), Number(from_index) + limit);
+      },
+    }),
+  });
+  const owned = await contract.tokensOf("player.testnet");
+  assert.deepEqual(owned.map(token => token.token_id), tokens.map(token => token.token_id));
+  const pageCount = Math.floor(count / 100) + 1;
+  assert.deepEqual(recorder.views, Array.from({ length: pageCount }, (_, index) => ({
+    method: "nft_tokens_for_owner", args: { account_id: "player.testnet", from_index: String(index * 100), limit: 100 },
+  })));
+});
+
 test("view errors surface the contract message", async () => {
   const failing = (async () => new Response(JSON.stringify({ jsonrpc: "2.0", id: "x", result: { error: "wasm execution failed with error: FunctionCallError(HostError(GuestPanic { panic_msg: \"Token not found\" }))", logs: [] } }))) as typeof fetch;
   const contract = createLivesContract(fakeWallet({ calls: [], views: [] }), cfg, { fetch: failing });
