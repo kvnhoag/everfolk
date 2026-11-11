@@ -49,6 +49,10 @@ Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_
 
 ## Development
 
+The standalone [character creator](tools/character-creator/README.md) includes editable historical presets, layered NFT artwork, and five rarity previews. Run `node tools/character-creator/server.mjs` to open it locally on port 4173, or visit `/collection.html` on that server to browse the collection.
+
+`pnpm test` runs both the game tests and the character creator tests.
+
 ```sh
 pnpm check
 pnpm test

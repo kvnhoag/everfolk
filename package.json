@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test test/*.test.ts",
+    "test": "node --test test/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "demo": "node examples/play.ts",
     "dev": "node scripts/run-framework.mjs dev",
     "check": "tsc --noEmit",
