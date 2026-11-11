@@ -101,6 +101,11 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
       <p><strong>{view.currentAction.name}.</strong> {view.currentAction.description}</p>
       {view.canChangeAction && <ActionPicker view={view} busy={busy} onSetAction={onSetAction} />}
     </section>
+    <section className="chain-card token-story" aria-label="Life">
+      <h2>Life</h2>
+      <p><strong>{view.story.career}.</strong> {view.story.lived}.</p>
+      <p><strong>Deed: {view.story.deed.name}.</strong> {view.story.deed.effect}</p>
+    </section>
     <section className="chain-card" aria-label="For sale">
       <h2>For sale</h2>
       <SaleBox view={view} busy={busy} onList={onList} onUnlist={onUnlist} onBuy={onBuy} terms={terms} />

@@ -109,7 +109,7 @@ test("Market shows the Yours tab only when signed in, listing own NFTs", () => {
 });
 
 test("the token page sale box uses the 0.025 placeholder", () => {
-  const view = { listing: null, canList: true, sources: [], isOwner: true, currentAction: { id: "a", name: "A", description: "" }, menu: [], children: [], figureId: null, kindLabel: "", title: "T", rarityLabel: "", lifeLine: "", owner: "x", affectionText: "", affection: 1, evidenceHref: null, reach: "", claimableText: null, canChangeAction: false, isFigure: false, canBuy: false, canUnlist: false };
+  const view = { listing: null, canList: true, sources: [], isOwner: true, currentAction: { id: "a", name: "A", description: "" }, menu: [], children: [], figureId: null, kindLabel: "", title: "T", rarityLabel: "", lifeLine: "", story: { career: "", lived: "", deed: { name: "A", effect: "" } }, owner: "x", affectionText: "", affection: 1, evidenceHref: null, reach: "", claimableText: null, canChangeAction: false, isFigure: false, canBuy: false, canUnlist: false };
   const html = renderToStaticMarkup(createElement(TokenPageBody, { tokenId: "1", view: view as never, onSetAction: noop, onWithdraw: noop, onList: noop, onUnlist: noop, onBuy: noop }));
   assert.match(html, /placeholder="0\.025"/);
 });
