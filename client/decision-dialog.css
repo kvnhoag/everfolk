@@ -1,4 +1,6 @@
-.life-decision-dialog{width:min(580px,calc(100% - 28px));max-height:88dvh;padding:0;border:1px solid #c7cebe;border-radius:6px;background:#f8f5ec;color:#344b3d;box-shadow:0 18px 75px #172a3555}
+.life-decision-dialog{width:min(720px,calc(100% - 28px));max-height:90dvh;padding:0;border:2px solid #594630;border-radius:0;background:#f8f5ec;color:#344b3d;box-shadow:0 18px 75px #172a3555}
+.life-decision-board-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start}
+@media(max-width:680px){.life-decision-board-grid{grid-template-columns:1fr}}
 .life-decision-dialog::backdrop{background:#25383199;backdrop-filter:blur(2px)}
 .life-decision-dialog.is-rare{border-top:3px solid #b58747}.life-decision-dialog.is-rare .life-decision-meta{background:#f0e8d8}.life-decision-dialog.is-rare .life-decision-meta>span:first-child{color:#885a24}
 .life-decision-meta{display:flex;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid #d7dbce;font-size:11px}.life-decision-meta>span:first-child{color:#a15f45;font-weight:600}.life-decision-meta>span:nth-child(2){margin-left:auto;font-variant-numeric:tabular-nums}.life-decision-meta>button{padding:6px 11px;border:1px solid #cbd2c2;border-radius:20px;background:#edf0e5;font-size:11px;color:#53664e}

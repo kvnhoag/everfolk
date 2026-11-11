@@ -63,9 +63,9 @@ export default function MintPack({ initialPack, evidence, walletPath = true, pra
   if (result) return <MintReveal practice={practice} view={mintRevealView(result, group, { evidence, evidenceUrl: practice ? null : `/api/ranked/evidence/${pack.evidence_hash}`, actionId: selected === null ? null : pack.cards[selected].action_id, txHash })} affection={result.affection} onClose={onClose} />;
   return <section className={`chain-card mint-pack${opened ? " is-open" : ""}`} aria-labelledby="pack-title">
     <p className="chain-kicker">Life #{pack.life_id} · {practice ? "Practice pack · not recorded on NEAR" : "Pack recorded on NEAR"}</p>
-    <h1 id="pack-title" tabIndex={-1}>{opened ? "Choose your legacy" : "A life. Three possibilities."}</h1>
+    <h1 id="pack-title" tabIndex={-1}>{opened ? "Choose who weaves forward" : "A life. Three possibilities."}</h1>
     <p>{opened ? "Choose one card to keep as your life NFT. The other two return to the story." : "Your three cards are ready. Open the pack to reveal them."}</p>
-    {!opened ? <button className={`booster-pack${opening ? " is-opening" : ""}`} type="button" disabled={opening} onClick={() => setOpening(true)}><span className="booster-seal" aria-hidden="true">✦</span><strong>EVERFOLK</strong><span>Living legacies</span><small>{opening ? "Opening your legacy…" : "Open your pack →"}</small></button> : <>
+    {!opened ? <button className={`booster-pack${opening ? " is-opening" : ""}`} type="button" disabled={opening} onClick={() => setOpening(true)}><span className="booster-seal" aria-hidden="true">✦</span><strong>EVERFOLK</strong><span>Weaving fates</span><small>{opening ? "Opening your fate…" : "Open your pack →"}</small></button> : <>
       <div className="augment-cards" role="group" aria-label="Choose one of three mint cards">{pack.cards.map((card, slot) => <article key={slot} className={`augment-slot${selected === slot ? " is-selected" : ""}`} style={{ animationDelay: `${slot * 100}ms` }}>
         <button className="augment-choice" type="button" disabled={Boolean(busy)} aria-pressed={selected === slot} onClick={() => setSelected(slot)}>
           <span className="chain-kicker">Slot {slot + 1} · {rarityLabel(card.rarity)}</span>

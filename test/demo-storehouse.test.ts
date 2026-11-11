@@ -85,7 +85,7 @@ test("storehouse is null off the demo world", () => {
 
 test("Storehouse renders icons and the empty note", () => {
   const html = renderToStaticMarkup(createElement(Storehouse, { rows: rows() }));
-  assert.match(html, /aria-label="Storehouse"/);
+  assert.match(html, /aria-label="Yearly resource details"/);
   assert.match(html, /<title[^>]*>Grain<\/title>/);
   assert.match(html, /Nothing recorded yet\./);
   assert.match(html, /Coming year/);

@@ -12,6 +12,8 @@ import { buildSkillTree, currentSkillTree } from "../client/skill-tree.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
 import { careerEmblem } from "../client/chain/token-page-model.ts";
 import { actionName } from "../client/chain/chain-copy.ts";
+import { ensureDemoDeeds } from "../chain/catalog/demo-deeds.ts";
+import { createEngine } from "../src/index.ts";
 import { influenceMarker } from "../client/influence-marker.ts";
 
 const hooks = registerHooks({
@@ -24,6 +26,9 @@ const hooks = registerHooks({
   },
 });
 const { default: EconomyPanels } = await import("../client/demo/EconomyPanels.tsx");
+const { default: LifeChoiceBoard } = await import("../client/LifeChoiceBoard.tsx");
+const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
+const { default: EventNotificationStack } = await import("../client/EventNotificationStack.tsx");
 hooks.deregister();
 
 const engine = demoEngine();
@@ -48,8 +53,25 @@ test("opening the economy panels shows the engine view and changes nothing", () 
   assert.match(html, /Household grain/);
   assert.match(html, new RegExp("Store"));
   assert.match(html, new RegExp(String(screen.household.grain)));
+  assert.doesNotMatch(html, /A past life kept a granary for you/);
   assert.match(html, /This is not the NFT Market/);
   assert.deepEqual(life, before);
+});
+
+test("a granary arrival is visible in household grain with a link to its source NFT", () => {
+  const deedEngine = createEngine(ensureDemoDeeds(engine.world));
+  const life = deedEngine.influence(deedEngine.start("visible-granary"), {
+    type: "influence", mode: "apply", entry: "farming.stock-granary", power: 1,
+    source: { contractId: "preview.everfolk.testnet", tokenId: "17" },
+  });
+  const screen = demoScreen(deedEngine.world, life)!;
+  const html = renderToStaticMarkup(createElement(EconomyPanels, {
+    screen, cashText: "0 dr", autoPlay: false, onTrade: () => null, onPlan: () => null,
+    onAutoPlay: () => {}, onDelegate: () => null,
+  }));
+  assert.match(html, /A past life kept a granary for you/);
+  assert.match(html, /href="#token\/17"/);
+  assert.match(html, /Arrived at age 0/);
 });
 
 test("a rejected order is shown and not sent twice", () => {
@@ -101,4 +123,72 @@ test("unavailable work cannot be funded, and the skill stays visible", () => {
   const philosophy = model.nodes.find(node => node.id === "philosophy");
   assert.equal(philosophy?.availability, "unavailable");
   assert.equal(currentSkillTree(model).nodes.some(node => node.id === "philosophy"), true);
+});
+
+test("DecisionDialog popup, EventNotificationStack, LifeChoiceBoard, and styled trade dropdowns render without mutating state", () => {
+  let life = engine.start("choice-board-ui");
+  for (let i = 0; i < 16 && life.phase !== "choice"; i++) life = engine.advance(life);
+  const before = structuredClone(life);
+  const screen = demoScreen(engine.world, life)!;
+  const activities = engine.getActivities(life);
+  const choices = engine.getChoices(life);
+  const decisionEvent = engine.world.events.find(e => e.id === life.pendingEventId)!;
+
+  const boardHtml = renderToStaticMarkup(createElement(LifeChoiceBoard, {
+    life,
+    world: engine.world,
+    activities,
+    focusId: "everyday",
+    onAdvance: () => {},
+    onOpenChronicle: () => {},
+    onFocusChange: () => {},
+    onActivity: () => {},
+  }));
+  assert.doesNotMatch(boardHtml, /TURNING POINT/);
+
+  const popupHtml = renderToStaticMarkup(createElement(DecisionDialog, {
+    open: true,
+    event: decisionEvent,
+    life,
+    world: engine.world,
+    choices,
+    demoView: screen,
+    onChoose: () => {},
+    onSetAside: () => {},
+    onEnableAuto: () => {},
+  }));
+  assert.match(popupHtml, /life-encounter-banner/);
+  assert.match(popupHtml, /life-decision-board-grid/);
+  assert.match(popupHtml, /CHOICE PREVIEW/);
+
+  const notifHtml = renderToStaticMarkup(createElement(EventNotificationStack, {
+    life,
+    world: engine.world,
+    decisionEvent,
+    demoView: screen,
+    onOpenDecision: () => {},
+    onOpenChronicle: () => {},
+  }));
+  assert.match(notifHtml, /event-notification-stack/);
+  assert.match(notifHtml, /Open decision/);
+
+  const deckHtml = renderToStaticMarkup(createElement(EconomyPanels, {
+    screen,
+    life,
+    world: engine.world,
+    activities,
+    cashText: "10 dr",
+    autoPlay: false,
+    onTrade: () => null,
+    onPlan: () => null,
+    onAutoPlay: () => {},
+    onDelegate: () => null,
+  }));
+  assert.match(deckHtml, /demo-dropdown-trigger/);
+  assert.match(deckHtml, /demo-commodity-cell/);
+  assert.match(deckHtml, /People &amp; Town/);
+  assert.match(deckHtml, /Naukleros Heron/);
+  assert.match(deckHtml, /Pakhom of the Fayyum/);
+  assert.match(deckHtml, /Strategos Ptolemaios/);
+  assert.deepEqual(life, before);
 });

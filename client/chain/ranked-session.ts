@@ -67,6 +67,8 @@ export class ChainActionError extends Error {
 const CHAIN_RETRY = "The NEAR network didn't confirm in time. Your life is safe; try that again.";
 const CHAIN_CONFLICT = "This ranked life has different progress recorded on NEAR. Continue from the device with that progress; this history cannot continue.";
 
+const sessionEngines = new WeakMap<WorldPack, LifeEngine>();
+
 class Session implements RankedSession {
   life: LifeView;
   state: LifeState;
@@ -82,7 +84,7 @@ class Session implements RankedSession {
   constructor(options: RankedSessionOptions, life: LifeView, state: LifeState, tracker = new ObligationTracker(), owed: Obligation[] = []) {
     this.options = options;
     this.storage = options.storage ?? browserStorage();
-    this.engine = createEngine(options.world);
+    this.engine = Session.engineFor(options.world);
     this.life = life;
     this.state = state;
     this.tracker = tracker;
@@ -90,7 +92,12 @@ class Session implements RankedSession {
   }
 
   static engineFor(world: WorldPack): LifeEngine {
-    return createEngine(world);
+    let engine = sessionEngines.get(world);
+    if (!engine) {
+      engine = createEngine(world);
+      sessionEngines.set(world, engine);
+    }
+    return engine;
   }
 
   choices(): readonly Choice[] {
@@ -102,11 +109,19 @@ class Session implements RankedSession {
   }
 
   private commands(): Command[] {
-    return (JSON.parse(this.save()) as SaveFile).commands;
+    return [...this.state.commands];
   }
 
   private persist(): void {
-    this.storage.setItem(rankedSaveKey(this.life.life_id), this.save());
+    const saveFile: SaveFile = {
+      schemaVersion: 1,
+      worldId: this.state.worldId,
+      worldVersion: this.state.worldVersion,
+      worldFingerprint: this.state.worldFingerprint,
+      seed: this.state.seed,
+      commands: [...this.state.commands],
+    };
+    this.storage.setItem(rankedSaveKey(this.life.life_id), JSON.stringify(saveFile));
   }
 
   async applyFigures(): Promise<void> {

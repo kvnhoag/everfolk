@@ -186,11 +186,8 @@ test("opportunity odds include hidden influences without explaining the internal
   assert.match(admin, /Complete the work: 54.5%/);
 });
 
-test("the empty accomplishments panel uses one plain heading and no promotional placeholder", () => {
+test("unearned accomplishments never reveal routes in the current run", () => {
   const { world, life } = sample();
   const html = renderToStaticMarkup(createElement(CurrentLegacySummary, { world, life, onOpenGallery() {} }));
-  assert.match(html, /Works &amp; deeds/);
-  assert.match(html, /View collection/);
-  assert.match(html, /No accomplishments recorded yet\./);
-  assert.doesNotMatch(html, /A LIFE TAKING SHAPE|Your legacy|Your actions can become|>Gallery/);
+  assert.equal(html, "");
 });

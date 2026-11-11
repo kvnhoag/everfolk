@@ -31,9 +31,9 @@ function Row({ row }: { row: StorehouseRow }) {
   </li>;
 }
 
-export default function Storehouse({ rows }: { rows: StorehouseRow[] }) {
-  return <section aria-label="Storehouse" className="storehouse">
-    <h3>Storehouse</h3>
+export default function ResourceYearDetails({ rows }: { rows: StorehouseRow[] }) {
+  return <section aria-label="Yearly resource details" className="storehouse">
+    <h3>Coming year &amp; last year</h3>
     <ul className="storehouse-list">{rows.map(row => <Row key={row.id} row={row} />)}</ul>
   </section>;
 }

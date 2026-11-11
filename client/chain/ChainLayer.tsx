@@ -56,7 +56,7 @@ function ChainShell({ backend, focusKey, onBack, children }: ChainShellProps) {
     shell.current?.scrollTo({ top: 0 });
     shell.current?.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
   }, [focusKey, backend === null]);
-  return <dialog className="chain-screen" ref={shell} aria-label="Ranked lives" onCancel={event => { event.preventDefault(); onBack(); }}>
+  return <dialog className="chain-screen" ref={shell} aria-label="Weave Mode" onCancel={event => { event.preventDefault(); onBack(); }}>
     <div className="chain-shell">
       <Web3Navigation backend={backend} onExplore={onBack} />
       {backend?.mode === "preview" && <p className="chain-notice">Practice ledger · This session is a local preview. No NEAR is spent and nothing is recorded on chain.</p>}

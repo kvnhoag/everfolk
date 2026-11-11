@@ -1,6 +1,6 @@
 import type { Choice, LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
-import type { DemoCommand, TradeCommand, TownRole } from "../../src/demo/types.ts";
-import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
+import type { DemoCommand, TradeCommand, TradeItem, TownRole } from "../../src/demo/types.ts";
+import type { LifeStateWithDemo, OfferKind } from "../../src/demo/contracts.ts";
 import { availability } from "../../src/demo/availability.ts";
 import { UNAVAILABLE_REASON } from "../../src/demo/types.ts";
 import { householdView } from "../../src/demo/household.ts";
@@ -13,6 +13,7 @@ import type { MarketView } from "../../src/demo/market.ts";
 import type { ConvoyPreview, ServiceView } from "../../src/demo/service.ts";
 import type { WorksView } from "../../src/demo/works.ts";
 import type { YearView } from "../../src/demo/timeline.ts";
+import { buildPriceHistory, type PriceHistoryPoint } from "./price-history.ts";
 
 export { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import { isDemoVersion } from "../../chain/ids.ts";
@@ -21,9 +22,37 @@ export { UNAVAILABLE_REASON };
 const ROLE_LABEL: Record<TownRole, string> = { merchant: "Merchant", grower: "Grower", army: "Army" };
 
 export interface AgentLine { role: TownRole; text: string }
+export interface TownFigureView {
+  role: TownRole;
+  name: string;
+  title: string;
+  originId: string;
+  sex: "male" | "female";
+  avatarVariant: number;
+  age: number;
+  cash: number;
+  grain: number;
+  flax: number;
+  statusLine: string;
+  agent: string | null;
+}
+export interface ActiveOfferView {
+  kind: OfferKind;
+  role: TownRole;
+  agent: string | null;
+  item: TradeItem;
+  quantity: number;
+  price: number;
+  total: number;
+}
 export interface DemoScreen {
   year: YearView;
   household: HouseholdView;
+  holdings?: Record<TradeItem, number>;
+  basePrices?: Record<TradeItem, number>;
+  priceHistory?: PriceHistoryPoint[];
+  townFigures?: TownFigureView[];
+  activeOffer?: ActiveOfferView | null;
   market: MarketView;
   service: ServiceView;
   convoy: ConvoyPreview | null;
@@ -31,6 +60,7 @@ export interface DemoScreen {
   agents: AgentLine[];
   offerText: string | null;
   futurePaths: { id: string; title: string; description: string; prerequisites?: string }[];
+  legacyHelp: { text: string; age: number; tokenId: string }[];
 }
 
 export function isDemoWorld(world: Pick<WorldPack, "version">): boolean {
@@ -46,10 +76,83 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
   if (!world.demo || !life.demo) return null;
   const typed = life as LifeStateWithDemo;
   const def = world.demo;
+  const household = householdView(def, typed);
+  const holdings: Record<TradeItem, number> = {
+    grain: typed.demo.household.grain,
+    flax: typed.demo.household.flax,
+    linen: typed.demo.goods.linen,
+    silver: typed.demo.goods.silver,
+    gold: typed.demo.goods.gold,
+    silk: typed.demo.goods.silk,
+    ox: typed.demo.household.animals.ox,
+    donkey: typed.demo.household.animals.donkey,
+  };
+  const market = marketView(def, typed);
+  const townFigures: TownFigureView[] = [
+    {
+      role: "merchant",
+      name: "Naukleros Heron",
+      title: "Harbor Merchant",
+      originId: "merchant-household",
+      sex: "male",
+      avatarVariant: 0,
+      age: 44,
+      cash: typed.demo.town.merchant.cash,
+      grain: typed.demo.town.merchant.grain,
+      flax: typed.demo.town.merchant.flax,
+      statusLine: `Buys grain at ${typed.demo.town.prices.grain.buy} dr · Sells at ${typed.demo.town.prices.grain.sell} dr`,
+      agent: typed.demo.agents.assigned.merchant ?? null,
+    },
+    {
+      role: "grower",
+      name: "Pakhom of the Fayyum",
+      title: "Neighbouring Grower",
+      originId: "artisan-household",
+      sex: "male",
+      avatarVariant: 1,
+      age: 48,
+      cash: typed.demo.town.grower.cash,
+      grain: typed.demo.town.grower.grain,
+      flax: 0,
+      statusLine: `Holds ${typed.demo.town.grower.grain} measures · Releases harvest to Alexandria`,
+      agent: typed.demo.agents.assigned.grower ?? null,
+    },
+    {
+      role: "army",
+      name: "Strategos Ptolemaios",
+      title: "Army Quartermaster",
+      originId: "scribe-household",
+      sex: "male",
+      avatarVariant: 2,
+      age: 42,
+      cash: typed.demo.town.army.purse,
+      grain: typed.demo.town.army.grain,
+      flax: 0,
+      statusLine: `Army grain levy: ${market.armyGrainPrice} dr · Contract ${market.armyOpen ? "Open" : "Closed"}`,
+      agent: typed.demo.agents.assigned.army ?? null,
+    },
+  ];
+  const rawOffer = typed.demo.offer;
+  const activeOffer: ActiveOfferView | null = rawOffer
+    ? {
+        kind: rawOffer.kind,
+        role: rawOffer.role,
+        agent: rawOffer.agent,
+        item: rawOffer.item,
+        quantity: rawOffer.quantity,
+        price: rawOffer.price,
+        total: rawOffer.quantity * rawOffer.price,
+      }
+    : null;
   return {
     year: yearView(def, typed),
-    household: householdView(def, typed),
-    market: marketView(def, typed),
+    household,
+    holdings,
+    basePrices: { ...def.market.basePrice },
+    priceHistory: buildPriceHistory(world, life),
+    townFigures,
+    activeOffer,
+    market,
     service: serviceView(def, typed),
     convoy: convoyPreview(def, typed),
     works: worksView(def, typed),
@@ -59,6 +162,8 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
     }),
     offerText: offerLine(typed),
     futurePaths: def.availability.futurePaths,
+    legacyHelp: life.journal.filter(entry => entry.type === "influence" && entry.id === "farming.stock-granary" && entry.source)
+      .slice(-1).map(entry => ({ text: entry.text, age: entry.age, tokenId: entry.source!.tokenId })),
   };
 }
 

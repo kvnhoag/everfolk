@@ -128,7 +128,7 @@ test("declining a mint offers to keep the life for later or close it, and says w
   assert.match(html, /Keep it for later/);
   assert.match(html, /Close this life/);
   assert.match(html, /10 minutes/);
-  assert.match(html, /Ranked life/);
+  assert.match(html, /Weave Mode/);
 });
 
 test("the reveal ledger shows the deed, sources and NEAR links when known", () => {

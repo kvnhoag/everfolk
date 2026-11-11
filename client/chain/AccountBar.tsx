@@ -7,7 +7,7 @@ import SignInPanel from "./SignInPanel.tsx";
 import { ACCESS_KEY_METHODS } from "./contract.ts";
 
 const METHOD_LABELS: Record<string, string> = {
-  start_life: "Ranked life started", abandon_life: "Life closed", mint_life: "Life minted", open_mint_pack: "Mint pack opened", reroll_mint_slot: "Mint slot rerolled", choose_mint_slot: "Life minted", set_action: "Deed changed",
+  start_life: "Weave life started", abandon_life: "Life closed", mint_life: "Life minted", open_mint_pack: "Mint pack opened", reroll_mint_slot: "Mint slot rerolled", choose_mint_slot: "Life minted", set_action: "Deed changed",
   withdraw: "Earnings withdrawn", list: "Listed for sale", unlist: "Listing removed", buy: "Purchase complete",
 };
 
