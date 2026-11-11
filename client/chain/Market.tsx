@@ -2,7 +2,7 @@ import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { filterMarket, marketRows, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
-import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
+import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, effectiveFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import PixelIcon from "../PixelIcon.tsx";
 import type { TokenView } from "./types.ts";
@@ -31,8 +31,9 @@ const EMPTY_TEXT: Record<MarketTab, string> = {
 export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy, initialFilter = DEFAULT_FILTER }: MarketBodyProps) {
   const headingId = useId();
   const [tab, setTab] = useState<MarketTab>("all");
-  const [filter, setFilter] = useState<MarketFilter>(initialFilter);
+  const [chosen, setFilter] = useState<MarketFilter>(initialFilter);
   const options = filterOptions(rows);
+  const filter = effectiveFilter(chosen, options);
   const shown = filterMarket(applyFilter(rows, filter), tab);
   const filtered = filter.group !== "all" || filter.rarity !== "all";
   return <section className="ledger-panel market" aria-labelledby={headingId}>

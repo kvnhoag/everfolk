@@ -29,15 +29,32 @@ export function filterOptions(rows: readonly MarketRow[]): FilterOptions {
   return { groups, rarities };
 }
 
-function compareBig(a: bigint, b: bigint): number {
-  return a < b ? -1 : a > b ? 1 : 0;
+const NUMERIC = /^\d+$/;
+
+/** Numeric strings compare as numbers; anything else is null and sorts last. */
+function parseNumeric(value: string): bigint | null {
+  return NUMERIC.test(value) ? BigInt(value) : null;
+}
+
+function compareKeys(a: bigint | null, b: bigint | null, direction: 1 | -1): number {
+  if (a === null || b === null) return a === b ? 0 : a === null ? 1 : -1;
+  return a < b ? -direction : a > b ? direction : 0;
 }
 
 const COMPARE: Record<MarketSort, (a: MarketRow, b: MarketRow) => number> = {
-  "price-asc": (a, b) => compareBig(BigInt(a.priceYocto), BigInt(b.priceYocto)),
-  "price-desc": (a, b) => compareBig(BigInt(b.priceYocto), BigInt(a.priceYocto)),
-  newest: (a, b) => compareBig(BigInt(b.tokenId), BigInt(a.tokenId)),
+  "price-asc": (a, b) => compareKeys(parseNumeric(a.priceYocto), parseNumeric(b.priceYocto), 1),
+  "price-desc": (a, b) => compareKeys(parseNumeric(a.priceYocto), parseNumeric(b.priceYocto), -1),
+  newest: (a, b) => compareKeys(parseNumeric(a.tokenId), parseNumeric(b.tokenId), -1),
 };
+
+/** The filter with a group or rarity that is no longer on offer treated as "all". */
+export function effectiveFilter(filter: MarketFilter, options: FilterOptions): MarketFilter {
+  return {
+    ...filter,
+    group: filter.group !== "all" && !options.groups.some(item => item.id === filter.group) ? "all" : filter.group,
+    rarity: filter.rarity !== "all" && !options.rarities.some(item => item.id === filter.rarity) ? "all" : filter.rarity,
+  };
+}
 
 /** A new, filtered and sorted array; the input is not touched. */
 export function applyFilter(rows: readonly MarketRow[], filter: MarketFilter): MarketRow[] {

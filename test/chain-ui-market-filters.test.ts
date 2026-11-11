@@ -61,6 +61,25 @@ test("applyFilter does not mutate its input", () => {
 test("Market body shows the filter controls and an empty note when nothing matches", () => {
   const html = renderToStaticMarkup(createElement(MarketBody, { rows, onBuy() {} }));
   for (const label of ["Career", "Rarity", "Sort", "Newest minted"]) assert.ok(html.includes(label), label);
-  const none = renderToStaticMarkup(createElement(MarketBody, { rows, onBuy() {}, initialFilter: { ...DEFAULT_FILTER, group: "sky" } }));
+  const none = renderToStaticMarkup(createElement(MarketBody, { rows, onBuy() {}, initialFilter: { ...DEFAULT_FILTER, group: "letters", rarity: 1 } }));
   assert.ok(none.includes("Nothing matches these filters."));
+});
+
+test("a selected group missing from the rows is treated as all", () => {
+  const html = renderToStaticMarkup(createElement(MarketBody, { rows, onBuy() {}, initialFilter: { ...DEFAULT_FILTER, group: "sky", rarity: 99 } }));
+  assert.ok(!html.includes("Nothing matches these filters."));
+  assert.ok(html.includes("No. 10"));
+});
+
+test("malformed prices and token ids sort last without throwing", () => {
+  const bad = [
+    row({ tokenId: "x", priceYocto: "abc" }), row({ tokenId: "5", priceYocto: "" }),
+    row({ tokenId: "2", priceYocto: "30" }), row({ tokenId: "", priceYocto: "4" }),
+  ];
+  for (const sort of ["price-asc", "price-desc"] as const) {
+    const ids = applyFilter(bad, { ...DEFAULT_FILTER, sort }).map(r => r.tokenId);
+    assert.deepEqual(new Set(ids.slice(2)), new Set(["x", "5"]), sort);
+  }
+  assert.deepEqual(applyFilter(bad, { ...DEFAULT_FILTER, sort: "price-asc" }).slice(0, 2).map(r => r.tokenId), ["", "2"]);
+  assert.deepEqual(applyFilter(bad, { ...DEFAULT_FILTER, sort: "newest" }).map(r => r.tokenId), ["5", "2", "x", ""]);
 });
