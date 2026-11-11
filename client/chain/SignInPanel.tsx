@@ -1,5 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 import EmailSignIn from "../demo/EmailSignIn.tsx";
+import { WrongCodeError } from "./sign-in-errors.ts";
 import "./sign-in.css";
 
 /**
@@ -20,7 +21,7 @@ export interface SignInPanelProps {
   onClose(): void;
 }
 
-type Step = { kind: "email" } | { kind: "code"; email: string } | { kind: "setup"; email: string };
+export type Step = { kind: "email" } | { kind: "code"; email: string } | { kind: "setup"; email: string };
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_EMAIL_LENGTH = 254;
@@ -38,6 +39,11 @@ export function validEmail(value: string): string | null {
 export function validCode(value: string): string | null {
   const code = value.replace(/\s/g, "");
   return CODE_PATTERN.test(code) ? code : null;
+}
+
+/** A wrong code may be typed again; any other failure (setup refused, sign-in lost) starts over from the email. */
+export function stepAfterVerifyError(cause: unknown, email: string): Step {
+  return cause instanceof WrongCodeError ? { kind: "code", email } : { kind: "email" };
 }
 
 function submitted(event: FormEvent<HTMLFormElement>, field: string): string {
@@ -79,10 +85,10 @@ export default function SignInPanel({ available, onEmail, onWallet, onClose }: S
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
-  async function attempt(action: () => Promise<void>, fallback: string, onFail?: () => void) {
+  async function attempt(action: () => Promise<void>, fallback: string, onFail?: (cause: unknown) => void) {
     setBusy(true);
     setError("");
-    try { await action(); } catch (cause) { setError(messageOf(cause, fallback)); onFail?.(); } finally { setBusy(false); }
+    try { await action(); } catch (cause) { setError(messageOf(cause, fallback)); onFail?.(cause); } finally { setBusy(false); }
   }
 
   const sendCode = (value: string) => {
@@ -95,7 +101,7 @@ export default function SignInPanel({ available, onEmail, onWallet, onClose }: S
     const code = validCode(value);
     if (!code) { setError(BAD_CODE); return; }
     setStep({ kind: "setup", email });
-    void attempt(async () => { await onEmail.verify(code); onClose(); }, "Sign-in didn't finish. Try again.", () => setStep({ kind: "code", email }));
+    void attempt(async () => { await onEmail.verify(code); onClose(); }, "Sign-in didn't finish. Try again.", cause => setStep(stepAfterVerifyError(cause, email)));
   };
 
   const emailBody = !available.email ? <EmailSignIn />

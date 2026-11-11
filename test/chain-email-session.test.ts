@@ -4,7 +4,8 @@ import { bytesToHex, hexToBytes } from "@noble/hashes/utils.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 import { actions, base64Decode, createTransaction, encodeTransaction, KeyPair, SignedTransaction } from "near-api-js";
 import { resolveChainConfig } from "../client/chain/config.ts";
-import { accountLabel, confirmText, createEmailSession, NOT_SET_UP, type EmailBridge } from "../client/chain/email-session.ts";
+import { accountLabel, confirmText, createEmailSession, NOT_ENOUGH_NEAR, NOT_SET_UP, type EmailBridge } from "../client/chain/email-session.ts";
+import { WrongCodeError } from "../client/chain/sign-in-errors.ts";
 import { implicitAccountId, PrivyNearSigner } from "../client/chain/privy-signer.ts";
 import type { ContractCall } from "../client/chain/types.ts";
 
@@ -32,7 +33,7 @@ function keyBridge() {
   return { bridge, keyPair, publicKeyHex, log };
 }
 
-interface ChainOptions { funded?: boolean; fundStatus?: number; fundBody?: unknown; fundsOnPost?: boolean; sendError?: unknown }
+interface ChainOptions { funded?: boolean; amount?: string; fundStatus?: number; fundBody?: unknown; fundsOnPost?: boolean; sendError?: unknown }
 
 /** Answers `/api/signin/fund` and the NEAR RPC (`view_account`, `view_access_key`, `send_tx`). */
 function fakeChain(options: ChainOptions = {}) {
@@ -49,7 +50,7 @@ function fakeChain(options: ChainOptions = {}) {
     }
     const body = JSON.parse(String(init?.body)) as { method: string; params: Record<string, string> };
     log.rpc.push(body.params.request_type ?? body.method);
-    if (body.params.request_type === "view_account") return reply(funded ? { result: { amount: "100000000000000000000000" } } : unknownAccount);
+    if (body.params.request_type === "view_account") return reply(funded ? { result: { amount: options.amount ?? "100000000000000000000000" } } : unknownAccount);
     if (body.params.request_type === "view_access_key") return reply(funded ? { result: { nonce: 5, block_hash: BLOCK_HASH, block_height: 1 } } : unknownAccount);
     if (body.method === "send_tx") {
       log.sent.push(body.params.signed_tx_base64);
@@ -163,10 +164,28 @@ test("emailSession maps an unfunded-account error", async () => {
   assert.equal(NOT_SET_UP, "Your account is still being set up — try again in a moment.");
 });
 
-test("emailSession maps a NotEnoughBalance rejection", async () => {
-  const chain = fakeChain({ funded: true, sendError: { name: "HANDLER_ERROR", cause: { name: "INVALID_TRANSACTION" }, data: { TxExecutionError: { InvalidTxError: { NotEnoughBalance: { balance: "0" } } } } } });
+const NOT_ENOUGH_BALANCE = { name: "HANDLER_ERROR", cause: { name: "INVALID_TRANSACTION" }, data: { TxExecutionError: { InvalidTxError: { NotEnoughBalance: { balance: "0" } } } } };
+
+test("emailSession maps a NotEnoughBalance rejection on an empty account to still being set up", async () => {
+  const chain = fakeChain({ funded: true, amount: "0", fundBody: { funded: false, reason: "already-funded" }, fundsOnPost: false, sendError: NOT_ENOUGH_BALANCE });
   const { session } = await signedIn(chain);
   await assert.rejects(session.call(CHECKPOINT), (error: Error) => error.message === NOT_SET_UP);
+});
+
+test("a player who spent the drip is told they lack NEAR, not that setup is pending", async () => {
+  const chain = fakeChain({ funded: true, amount: "1000", sendError: NOT_ENOUGH_BALANCE });
+  const { session } = await signedIn(chain);
+  assert.equal(chain.log.fundPosts.length, 0);
+  await assert.rejects(session.call(BUY), (error: Error) => error.message === NOT_ENOUGH_NEAR);
+  assert.equal(NOT_ENOUGH_NEAR, "You don't have enough NEAR for this.");
+});
+
+test("a deposit that is not a number is refused without signing", async () => {
+  const chain = fakeChain({ funded: true });
+  const { session, key, confirms } = await signedIn(chain, async () => false);
+  await assert.rejects(session.call({ ...BUY, deposit: "abc" }), (error: Error) => error.message === "Cancelled.");
+  assert.equal(confirms.length, 1);
+  assert.equal(key.log.hashes, 0);
 });
 
 test("funding refusals read as friendly text and leave the player signed out", async () => {
@@ -196,7 +215,7 @@ test("a wrong code and a bad address read as friendly text", async () => {
   const bridge: EmailBridge = { ...key.bridge, async verify() { throw new Error("Invalid code"); }, async login() { throw new Error("400 invalid_data"); } };
   const session = createEmailSession(cfg, bridge, { fetch: chain.fetchFn, confirm: async () => true, ...FAST });
   await assert.rejects(session.sendCode("ada@example.com"), /couldn't send a code/i);
-  await assert.rejects(session.verify("000000"), /code didn't work/i);
+  await assert.rejects(session.verify("000000"), (error: Error) => error instanceof WrongCodeError && /code didn't work/i.test(error.message));
   assert.equal(chain.log.fundPosts.length, 0);
 });
 
@@ -214,6 +233,8 @@ test("confirm text names the NFT action and its price", () => {
   assert.deepEqual(confirmText({ ...BUY, method: "open_mint_pack", deposit: "1000000000000000000000" }), { title: "Mint this life", price: "0.001 NEAR" });
   assert.deepEqual(confirmText(BUY), { title: "Buy", price: "0.025 NEAR" });
   assert.equal(confirmText(CHECKPOINT), null);
+  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2", price: "25000000000000000000000" }, deposit: "1" }), { title: "List for sale", price: "0.025 NEAR" });
+  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2" }, deposit: "1" }), { title: "List for sale", price: "No NEAR spent" });
 });
 
 test("a remembered player is restored without a code, and a new code replaces them", async () => {

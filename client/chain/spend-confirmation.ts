@@ -21,11 +21,24 @@ const DEFAULT_TITLE = "Confirm this action";
 const ONE_YOCTO = "1";
 const APPROVAL_ONLY = "No NEAR spent";
 
-/** Null when the call spends nothing, so it is signed without a question. */
+const DECIMAL = /^\d+$/;
+
+/** True only for a readable zero deposit: such calls are signed without a question. */
+export function spendsNothing(deposit: string): boolean {
+  return DECIMAL.test(deposit) && BigInt(deposit) === 0n;
+}
+
+/** A listing pays nothing but a one-yocto approval, so its sheet shows the asking price instead. */
+function priceText(call: ContractCall): string {
+  const asking = call.method === "list" ? call.args.price : undefined;
+  if (typeof asking === "string" && DECIMAL.test(asking) && BigInt(asking) > 0n) return `${formatNear(asking)} NEAR`;
+  return call.deposit === ONE_YOCTO ? APPROVAL_ONLY : `${formatNear(call.deposit)} NEAR`;
+}
+
+/** Null when the call spends nothing, or when its deposit cannot be read (the queue then refuses it). */
 export function confirmText(call: ContractCall): SpendText | null {
-  if (!/^\d+$/.test(call.deposit) || BigInt(call.deposit) === 0n) return null;
-  const price = call.deposit === ONE_YOCTO ? APPROVAL_ONLY : `${formatNear(call.deposit)} NEAR`;
-  return { title: TITLES[call.method] ?? DEFAULT_TITLE, price };
+  if (!DECIMAL.test(call.deposit) || BigInt(call.deposit) === 0n) return null;
+  return { title: TITLES[call.method] ?? DEFAULT_TITLE, price: priceText(call) };
 }
 
 export interface SpendRequest { call: ContractCall; text: SpendText; answer(confirmed: boolean): void }
@@ -46,7 +59,8 @@ export function createSpendQueue(): SpendQueue {
   return {
     request(call) {
       const text = confirmText(call);
-      if (!text) return Promise.resolve(true);
+      // No sheet: a zero deposit goes ahead; an unreadable one is refused rather than paid blind.
+      if (!text) return Promise.resolve(spendsNothing(call.deposit));
       return new Promise<boolean>(resolve => {
         const entry: SpendRequest = {
           call, text,

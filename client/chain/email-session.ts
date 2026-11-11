@@ -2,6 +2,8 @@ import type { ChainConfig } from "./config.ts";
 import { requestFunding, waitForFunds, type FundingDeps } from "./email-funding.ts";
 import { contractErrorMessage, readCallResult, transactionHash } from "./outcome.ts";
 import { accountBalance } from "./rpc.ts";
+import { WrongCodeError } from "./sign-in-errors.ts";
+import { spendsNothing } from "./spend-confirmation.ts";
 import type { ContractCall, WalletSession } from "./types.ts";
 
 export { accountLabel } from "./account-bar-model.ts";
@@ -37,22 +39,27 @@ export interface EmailSession extends WalletSession {
 }
 
 export const NOT_SET_UP = "Your account is still being set up — try again in a moment.";
+export const NOT_ENOUGH_NEAR = "You don't have enough NEAR for this.";
 export const CANCELLED = "Cancelled.";
 const SIGNED_OUT_MID_MOVE = "You signed out before this was sent.";
 const ENTER_CODE = "Enter the code from your email to sign in.";
 const SEND_FAILED = "We couldn't send a code to that address. Check it and try again.";
 const CODE_FAILED = "That code didn't work. Check it and try again.";
 const SIGN_IN_FAILED = "Sign-in didn't finish. Please try again.";
-const UNFUNDED = /does not exist|NotEnoughBalance|UNKNOWN_ACCOUNT|UNKNOWN_ACCESS_KEY|AccountDoesNotExist|LackBalanceForState/;
+/** Errors that mean "no NEAR here": either setup has not landed yet, or a funded player has spent it. */
+const LACKS_NEAR = /does not exist|NotEnoughBalance|UNKNOWN_ACCOUNT|UNKNOWN_ACCESS_KEY|AccountDoesNotExist|LackBalanceForState/;
 
 type Signed = { accountId: string; email: string };
 type Loaded = { send: (call: ContractCall) => Promise<unknown> };
 
 const messageOf = (error: unknown) => (error instanceof Error ? error.message : String(error));
 
-function callErrorText(call: ContractCall, error: unknown): string {
+/** An empty (or missing) account is still being set up; one that holds some NEAR simply cannot afford this. */
+async function callErrorText(call: ContractCall, error: unknown, balance: () => Promise<string | null>): Promise<string> {
   const message = messageOf(error);
-  return UNFUNDED.test(message) ? NOT_SET_UP : `${call.method} failed: ${contractErrorMessage(message)}`;
+  if (!LACKS_NEAR.test(message)) return `${call.method} failed: ${contractErrorMessage(message)}`;
+  const held = await balance().catch(() => null);
+  return held !== null && /^\d+$/.test(held) && BigInt(held) > 0n ? NOT_ENOUGH_NEAR : NOT_SET_UP;
 }
 
 /** Loads near-api-js and the Privy-backed signer for one signed-in account. */
@@ -134,7 +141,8 @@ export function createEmailSession(cfg: ChainConfig, bridge: EmailBridge, deps: 
       let verified: VerifiedEmail;
       try { verified = await bridge.verify(code); } catch (error) {
         console.warn("Everfolk: the sign-in code was not accepted.", messageOf(error));
-        throw new Error(/code|otp|invalid|expired/i.test(messageOf(error)) ? CODE_FAILED : SIGN_IN_FAILED);
+        if (/code|otp|invalid|expired/i.test(messageOf(error))) throw new WrongCodeError(CODE_FAILED);
+        throw new Error(SIGN_IN_FAILED);
       }
       current = null;
       await install(verified, true);
@@ -156,13 +164,14 @@ export function createEmailSession(cfg: ChainConfig, bridge: EmailBridge, deps: 
     async call(call) {
       const owner = current;
       if (!owner) throw new Error("Sign in first.");
-      if (BigInt(call.deposit) > 0n && !(await deps.confirm(call))) throw new Error(CANCELLED);
+      // Anything but a plain zero deposit is asked about; the sheet refuses a deposit it cannot read.
+      if (!spendsNothing(call.deposit) && !(await deps.confirm(call))) throw new Error(CANCELLED);
       assertCurrent(owner);
       try {
         return await send(owner, call);
       } catch (error) {
         if (messageOf(error) === SIGNED_OUT_MID_MOVE) throw error;
-        throw new Error(callErrorText(call, error));
+        throw new Error(await callErrorText(call, error, () => balance(owner.accountId)));
       }
     },
   };

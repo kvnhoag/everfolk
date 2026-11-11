@@ -9,6 +9,11 @@ import { accountBarView } from "../client/chain/account-bar-model.ts";
 import { parseSignInConfig } from "../client/chain/sign-in-config.ts";
 import { anotherDialogOpened, SPEND_SHEET_CLASS } from "../client/chain/wallet-host.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
+import { signInEntry } from "../client/chain/sign-in-entry.ts";
+import { EMAIL_NOT_LOADED, WrongCodeError } from "../client/chain/sign-in-errors.ts";
+import { emailOpener } from "../client/chain/chain-backend.ts";
+import { resolveChainConfig } from "../client/chain/config.ts";
+import { tokenPageView } from "../client/chain/token-page-model.ts";
 
 const hooks = registerHooks({
   load(url, context, nextLoad) {
@@ -19,7 +24,11 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: SignInPanel, EmailStep, CodeStep, SettingUpStep } = await import("../client/chain/SignInPanel.tsx");
+const { default: SignInPanel, EmailStep, CodeStep, SettingUpStep, stepAfterVerifyError } = await import("../client/chain/SignInPanel.tsx");
+const { default: RankedEntry } = await import("../client/chain/RankedEntry.tsx");
+const { default: MyLives } = await import("../client/chain/MyLives.tsx");
+const { MarketBody } = await import("../client/chain/Market.tsx");
+const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 const { default: EmailSignIn, emailButtonAction } = await import("../client/demo/EmailSignIn.tsx");
 const { SpendSheet } = await import("../client/chain/ConfirmSpend.tsx");
 hooks.deregister();
@@ -114,4 +123,89 @@ test("the spend queue asks one question at a time and never for free calls", asy
   queue.current()?.answer(true);
   assert.equal(await second, true);
   assert.equal(queue.current(), null);
+});
+
+function fakeBackend(signin: Record<string, unknown> | undefined, accountId: string | null = null) {
+  const contract = { mintTerms: async () => ({ mint_fee: "1000000000000000000000", reroll_fee: "10000000000000000000000" }), activeLifeOf: async () => null, tokensOf: async () => [] };
+  return {
+    mode: "live", contract, accountId, walletId: null, worldVersion: "w", contractId: "c.testnet", lastTransaction: null, revision: 0,
+    connect: noop, disconnect: noop, nearBalance: async () => null,
+    signin: signin && { available: { email: true }, method: null, email: null, needsPlayKey: false, emailFlow: flow, useWallet: noop, ...signin },
+  };
+}
+const EMAIL_PATH_WORDS = /gas|recovery phrase|Wallet approvals|Using Meteor/i;
+
+test("the ranked screen offering email sign-in never mentions gas, wallet approvals or a recovery phrase", () => {
+  const neutral = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend({}) as never }));
+  assert.doesNotMatch(neutral, EMAIL_PATH_WORDS);
+  assert.match(neutral, /Sign in to play/);
+  const email = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend({ method: "email", email: "ada@example.com" }, "ab".repeat(32)) as never }));
+  assert.doesNotMatch(email, EMAIL_PATH_WORDS);
+  assert.match(email, /Playing as ada@example\.com/);
+  const wallet = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend({ method: "wallet" }, "cherry.testnet") as never }));
+  assert.match(wallet, /gas/);
+  const legacy = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend(undefined) as never }));
+  assert.match(legacy, /Using Meteor Wallet\?/);
+  assert.match(legacy, /Connect a NEAR wallet/);
+});
+
+test("market, token page and my lives open the sign-in panel when sign-in is available", async () => {
+  const calls: string[] = [];
+  const handlers = { openPanel: () => calls.push("panel"), connectWallet: () => calls.push("wallet") };
+  const withSignIn = signInEntry(fakeBackend({}).signin as never, { signIn: "Sign in to buy", wallet: "Connect a NEAR wallet to buy" }, handlers);
+  assert.equal(withSignIn.label, "Sign in to buy");
+  withSignIn.onConnect();
+  const without = signInEntry(undefined, { signIn: "Sign in to buy", wallet: "Connect a NEAR wallet to buy" }, handlers);
+  assert.equal(without.label, "Connect a NEAR wallet to buy");
+  without.onConnect();
+  assert.deepEqual(calls, ["panel", "wallet"]);
+
+  const panel = createElement(SignInPanel, { available: { email: true }, onEmail: flow, onWallet: noop, onClose() {} });
+  const market = renderToStaticMarkup(createElement(MarketBody, { rows: [], onBuy() {}, canConnect: true, connectLabel: "Sign in to buy", onConnect() {}, signInPanel: panel }));
+  assert.match(market, /Sign in to buy/);
+  assert.match(market, /Continue with email/);
+  assert.doesNotMatch(market, /Connect a NEAR wallet to buy/);
+  assert.match(renderToStaticMarkup(createElement(MarketBody, { rows: [], onBuy() {}, canConnect: true, onConnect() {} })), /Connect a NEAR wallet to buy/);
+
+  const owned = { owner_id: "alice.testnet", extra: {
+    kind: "npc" as const, figure_id: null, rarity: 1, affection: 70, action_id: "letters.teach", life_id: "4", birth_year: -350, death_year: -289,
+    career_group: "letters" as const, sources: [{ token_id: "1", bps: 10_000 }], evidence_hash: "e".repeat(64),
+  } };
+  const view = tokenPageView({ tokenId: "5", token: owned, stats: { lives_influenced: 0, earned: "0" }, balance: "0", listing: null, children: [], sourceTokens: {}, viewer: null } as never);
+  const tokenHandlers = { onSetAction() {}, onWithdraw() {}, onList() {}, onUnlist() {}, onBuy() {} };
+  const token = renderToStaticMarkup(createElement(TokenPageBody, { tokenId: "5", view, ...tokenHandlers, canConnect: true, connectLabel: "Sign in to buy", onConnect() {}, signInPanel: panel }));
+  assert.match(token, /Sign in to buy/);
+  assert.match(token, /Continue with email/);
+  assert.doesNotMatch(token, /Connect a NEAR wallet/);
+  assert.match(renderToStaticMarkup(createElement(TokenPageBody, { tokenId: "5", view, ...tokenHandlers, canConnect: true, onConnect() {} })), /Connect a NEAR wallet/);
+
+  const mine = renderToStaticMarkup(createElement(MyLives, { backend: fakeBackend({}) as never }));
+  assert.match(mine, /Sign in to see the lives you keep/);
+  assert.doesNotMatch(mine, /Connect a NEAR wallet|your wallet/);
+  assert.match(renderToStaticMarkup(createElement(MyLives, { backend: fakeBackend(undefined) as never })), /Connect a NEAR wallet to see the lives you keep/);
+});
+
+test("a wrong code goes back to the code step; any other failure starts again from the email", () => {
+  assert.deepEqual(stepAfterVerifyError(new WrongCodeError("That code didn't work."), "ada@example.com"), { kind: "code", email: "ada@example.com" });
+  assert.deepEqual(stepAfterVerifyError(new Error("New accounts are paused right now — try again later."), "ada@example.com"), { kind: "email" });
+});
+
+test("the spend queue refuses a deposit it cannot read", async () => {
+  const { createSpendQueue } = await import("../client/chain/spend-confirmation.ts");
+  const queue = createSpendQueue();
+  const base = { method: "buy", args: {}, gas: "1", access: "wallet" as const };
+  assert.equal(await queue.request({ ...base, deposit: "abc" }), false);
+  assert.equal(await queue.request({ ...base, deposit: "-1" }), false);
+  assert.equal(await queue.request({ ...base, deposit: "" }), false);
+  assert.equal(queue.current(), null);
+});
+
+test("a failed load of email sign-in reads as friendly text and can be retried", async () => {
+  const cfg = resolveChainConfig({}, {});
+  let attempts = 0;
+  const opener = emailOpener(cfg, "app-id", () => { attempts += 1; return Promise.reject(new TypeError("Failed to fetch dynamically imported module")); });
+  await assert.rejects(opener.open(), (error: Error) => error.message === EMAIL_NOT_LOADED);
+  await assert.rejects(opener.open(), (error: Error) => error.message === EMAIL_NOT_LOADED);
+  assert.equal(attempts, 2);
+  await assert.rejects(emailOpener(cfg, null).open(), /not set up yet/);
 });

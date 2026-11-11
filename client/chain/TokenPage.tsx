@@ -1,6 +1,8 @@
 import LifeChoices from "./LifeChoices.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
+import SignInPanel from "./SignInPanel.tsx";
+import { signInEntry } from "./sign-in-entry.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { parseNearInput } from "./near-amount.ts";
 import { tokenPageView, type TokenPageView } from "./token-page-model.ts";
@@ -19,6 +21,10 @@ export interface TokenPageBodyProps {
   notice?: string;
   canConnect?: boolean;
   onConnect?(): void;
+  /** Text of the sign-in button; defaults to the NEAR wallet wording. */
+  connectLabel?: string;
+  /** The open sign-in panel, shown under the button. */
+  signInPanel?: ReactNode;
   onSetAction(actionId: string): void;
   onWithdraw(): void;
   onList(priceYocto: string): void;
@@ -70,7 +76,7 @@ function SaleBox({ view, busy, onList, onUnlist, onBuy, terms = DEFAULT_MARKET_T
 }
 
 /** A kept life's page: who it is, what it does, the lives it touched, its earnings and its sale. */
-export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy, terms }: TokenPageBodyProps) {
+export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, connectLabel = WALLET_LABEL, signInPanel, onSetAction, onWithdraw, onList, onUnlist, onBuy, terms }: TokenPageBodyProps) {
   const headingId = useId();
   return <div className="token-page">
     <section className={`chain-card token-hero${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
@@ -80,7 +86,8 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
       <div className="token-tags"><span className={`chain-tag${view.isFigure ? " is-figure" : ""}`}>{view.rarityLabel}</span><span className="chain-tag">{view.lifeLine}</span></div>
       <p className="token-owner">{view.isOwner ? "This life is yours." : `Kept by ${view.owner}`}</p>
       <div className="token-affection"><span>{view.affectionText}</span><span className="life-report-bar" aria-hidden="true"><span style={{ width: `${Math.max(0, Math.min(100, view.affection))}%` }} /></span></div>
-      {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>Connect a NEAR wallet</button></div>}
+      {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>{connectLabel}</button></div>}
+      {signInPanel}
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
@@ -139,12 +146,17 @@ async function loadTokenPage(backend: ChainBackend, tokenId: string): Promise<Lo
   return { token, view, terms };
 }
 
+const WALLET_LABEL = "Connect a NEAR wallet";
+const SIGN_IN_LABELS = { signIn: "Sign in", wallet: WALLET_LABEL };
+
 export default function TokenPage({ backend, tokenId }: { backend: ChainBackend; tokenId: string }) {
   const [loaded, setLoaded] = useState<Loaded | null | "missing">(null);
   const [reload, setReload] = useState(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [signingIn, setSigningIn] = useState(false);
+  const { signin } = backend;
 
   useEffect(() => {
     let cancelled = false;
@@ -167,12 +179,17 @@ export default function TokenPage({ backend, tokenId }: { backend: ChainBackend;
   if (loaded === "missing") return <section className="chain-card"><h1 tabIndex={-1}>No life here</h1><p>{error || `Nothing has been kept under No. ${tokenId}.`}</p><p><a href="#market">See the market</a></p></section>;
   const { contract } = backend;
   const listing = loaded.view.listing;
+  const entry = signInEntry(signin, SIGN_IN_LABELS, {
+    openPanel: () => setSigningIn(true),
+    connectWallet: () => { void run(backend.connect, "Wallet connected.", "The wallet could not connect."); },
+  });
   return <TokenPageBody
     practice={backend.mode === "preview"}
     tokenId={tokenId} view={loaded.view} terms={loaded.terms} busy={busy} error={error} notice={notice}
-    canConnect={!backend.accountId} onConnect={() => { void run(backend.connect, "Wallet connected.", "The wallet could not connect."); }}
+    canConnect={!backend.accountId} connectLabel={entry.label} onConnect={entry.onConnect}
+    signInPanel={signin && signingIn && !backend.accountId ? <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={signin.useWallet} onClose={() => setSigningIn(false)} /> : undefined}
     onSetAction={actionId => { void run(() => contract.setAction(tokenId, actionId), "Its deed has changed. New lives will feel it.", "The deed could not be changed."); }}
-    onWithdraw={() => { void run(() => contract.withdraw(), "Sent to your wallet.", "The withdrawal did not go through."); }}
+    onWithdraw={() => { void run(() => contract.withdraw(), signin?.method === "email" ? "Sent to your account." : "Sent to your wallet.", "The withdrawal did not go through."); }}
     onList={price => { void run(() => contract.list(tokenId, price), "It's on the market.", "It could not be put up for sale."); }}
     onUnlist={() => { void run(() => contract.unlist(tokenId), "It's off the market.", "It could not be taken off the market."); }}
     onBuy={() => { if (listing) void run(() => contract.buy(tokenId, listing.priceYocto), "It's yours.", "The purchase did not go through."); }}

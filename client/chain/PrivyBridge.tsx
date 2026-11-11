@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { PrivyProvider, useLoginWithEmail, usePrivy, type PrivyProviderProps, type User } from "@privy-io/react-auth";
 import { useCreateWallet, useSignRawHash } from "@privy-io/react-auth/extended-chains";
 import type { EmailBridge, VerifiedEmail } from "./email-session.ts";
+import { EMAIL_NOT_LOADED } from "./sign-in-errors.ts";
 
 /**
  * Privy behind the `EmailBridge` interface. Loaded with a dynamic import from the email opener, in the browser
@@ -26,7 +27,7 @@ interface PrivyHooks {
 
 const READY_TIMEOUT_MS = 15_000;
 const USER_TIMEOUT_MS = 15_000;
-const NOT_LOADED = "Email sign-in could not load. Check your connection and try again.";
+const NOT_LOADED = EMAIL_NOT_LOADED;
 const NO_ACCOUNT = "Your account could not be opened. Please sign in again.";
 const NEAR_CHAIN = "near";
 /** Headless: email codes only, no Privy windows, and no Ethereum or Solana keys made on the side. */

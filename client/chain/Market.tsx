@@ -1,5 +1,7 @@
 import FigureArtwork from "./FigureArtwork.tsx";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
+import SignInPanel from "./SignInPanel.tsx";
+import { signInEntry } from "./sign-in-entry.ts";
 import { chainHref } from "./chain-route.ts";
 import { formatNear } from "./near-amount.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
@@ -20,6 +22,10 @@ export interface MarketBodyProps {
   notice?: { text: string; href?: string };
   canConnect?: boolean;
   onConnect?(): void;
+  /** Text of the sign-in button; defaults to the NEAR wallet wording. */
+  connectLabel?: string;
+  /** The open sign-in panel, shown under the button. */
+  signInPanel?: ReactNode;
   onBuy(row: MarketRow): void;
   /** Starting filter; defaults to showing everything, cheapest first. */
   initialFilter?: MarketFilter;
@@ -30,6 +36,8 @@ export interface MarketBodyProps {
 }
 
 export const YOURS_TAB = "yours";
+const WALLET_LABEL = "Connect a NEAR wallet to buy";
+const SIGN_IN_LABELS = { signIn: "Sign in to buy", wallet: WALLET_LABEL };
 
 const EMPTY_TEXT: Record<MarketTab, string> = {
   all: "Nothing is for sale right now.",
@@ -38,7 +46,7 @@ const EMPTY_TEXT: Record<MarketTab, string> = {
 };
 
 /** Kept lives offered for sale, as a ledger in the life-record format. */
-export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy, initialFilter = DEFAULT_FILTER, yours, initialTab = "all" }: MarketBodyProps) {
+export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, connectLabel = WALLET_LABEL, signInPanel, onBuy, initialFilter = DEFAULT_FILTER, yours, initialTab = "all" }: MarketBodyProps) {
   const headingId = useId();
   const [picked, setTab] = useState<MarketTab | typeof YOURS_TAB>(initialTab);
   const showYours = yours !== undefined && picked === YOURS_TAB;
@@ -54,8 +62,9 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       <h1 id={headingId} tabIndex={-1}>Market</h1>
       <p>Buy a kept life and choose what it does in the lives it meets. Every sale pays a share to the people who shaped it.</p>
     </header>
-    {(canConnect || error || notice) && <div className="ledger-body">
-      {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>Connect a NEAR wallet to buy</button></div>}
+    {(canConnect || error || notice || signInPanel) && <div className="ledger-body">
+      {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>{connectLabel}</button></div>}
+      {signInPanel}
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice.text} {notice.href && <a href={notice.href}>See its page</a>}</p>}
     </div>}
@@ -146,6 +155,8 @@ export default function Market({ backend }: { backend: ChainBackend }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState<{ text: string; href?: string } | undefined>();
+  const [signingIn, setSigningIn] = useState(false);
+  const { signin } = backend;
 
   useEffect(() => {
     let cancelled = false;
@@ -164,10 +175,15 @@ export default function Market({ backend }: { backend: ChainBackend }) {
     finally { setBusy(false); }
   }
 
+  const entry = signInEntry(signin, SIGN_IN_LABELS, {
+    openPanel: () => setSigningIn(true),
+    connectWallet: () => { void run(backend.connect, { text: "Wallet connected." }, "The wallet could not connect."); },
+  });
   if (loaded === null) return <p className="chain-loading" role="status">Opening the market…</p>;
   return <MarketBody
     rows={loaded.rows} busy={busy} error={error} notice={notice} canConnect={!backend.accountId}
-    onConnect={() => { void run(backend.connect, { text: "Wallet connected." }, "The wallet could not connect."); }}
+    connectLabel={entry.label} onConnect={entry.onConnect}
+    signInPanel={signin && signingIn && !backend.accountId ? <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={signin.useWallet} onClose={() => setSigningIn(false)} /> : undefined}
     onBuy={row => { void run(() => backend.contract.buy(row.tokenId, row.priceYocto), { text: `${row.title} is yours.`, href: row.href }, "The purchase did not go through."); }}
     yours={loaded.items ? {
       items: loaded.items, terms: loaded.terms, error: loaded.itemsError,

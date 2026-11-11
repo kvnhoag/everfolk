@@ -9,6 +9,7 @@ import { accountBalance } from "./rpc.ts";
 import type { EmailSession } from "./email-session.ts";
 import { createSessionRouter, SIGN_IN_STORAGE_KEY, type RoutedSession, type SessionOpeners, type SignInMethod } from "./session-router.ts";
 import { loadSignInConfig } from "./sign-in-config.ts";
+import { EMAIL_NOT_LOADED } from "./sign-in-errors.ts";
 import type { EmailSignInFlow } from "./SignInPanel.tsx";
 
 /**
@@ -89,14 +90,23 @@ export function useRankedAvailability(): RankedAvailability {
 export const REMEMBERED_WALLET_KEY = SIGN_IN_STORAGE_KEY;
 export const EMAIL_NOT_READY = "Email sign-in is not set up yet.";
 
+type EmailOpenerModule = typeof import("./email-opener.ts");
+const loadEmailOpener = (): Promise<EmailOpenerModule> => import("./email-opener.ts");
+
 /** The email session, opened (Privy mounted) once on first use; a failed open can be retried. */
-function emailOpener(cfg: ChainConfig, privyAppId: string | null) {
+export function emailOpener(cfg: ChainConfig, privyAppId: string | null, load: () => Promise<EmailOpenerModule> = loadEmailOpener) {
   let opening: Promise<EmailSession> | null = null;
   let session: EmailSession | null = null;
   const open = (): Promise<EmailSession> => {
     if (!privyAppId) return Promise.reject(new Error(EMAIL_NOT_READY));
     if (!opening) {
-      const request = import("./email-opener.ts").then(({ openEmailSession }) => openEmailSession(cfg, privyAppId));
+      const request = load()
+        .catch(error => {
+          // A stale or blocked chunk: say so plainly instead of the browser's module error.
+          console.warn("Everfolk: email sign-in did not load.", error);
+          throw new Error(EMAIL_NOT_LOADED);
+        })
+        .then(({ openEmailSession }) => openEmailSession(cfg, privyAppId));
       opening = request;
       request.then(opened => { session = opened; }, () => { if (opening === request) opening = null; });
     }
