@@ -57,7 +57,7 @@ test("a rejected order is shown and not sent twice", () => {
   const before = structuredClone(life);
   const order = { type: "trade" as const, item: "grain" as const, side: "buy" as const, quantity: 1, counterparty: "merchant" as const };
   const reason = orderPreview(engine.world, life, order);
-  assert.equal(reason, "The grain market is not open yet.");
+  assert.equal(reason, "You are too young to trade at the market (from age 12).");
   const slot = { current: false };
   const wallet = () => { throw new Error("wallet"); };
   const first = sendDemoCommand(engine, life, order, slot);
@@ -71,7 +71,7 @@ test("a rejected order is shown and not sent twice", () => {
 });
 
 test("deed names, the farming emblem and the source line do not need a second catalog", () => {
-  assert.equal(actionName("farming.stock-granary"), "Stock a granary");
+  assert.equal(actionName("farming.stock-granary"), "Stock the granary");
   assert.equal(careerEmblem("farming"), "farming");
   const marker = influenceMarker({ type: "influence", id: "farming.share-seed", source: { contractId: "demo.near", tokenId: "12" } }, {});
   assert.ok(marker);

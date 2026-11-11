@@ -217,10 +217,13 @@ test("a harvest draw does not take a war token, and a ranked life can still star
 
 test("a trade command replays as a demo command, not an unknown command", () => {
   const engine = createEngine(ensureDemoDeeds(demoWorld as unknown as WorldPack));
-  const started = engine.start("trade-replay");
+  let started = engine.start("trade-replay");
+  for (let step = 0; step < 400 && (started.age < 12 || started.phase !== "ready"); step++) {
+    started = started.phase === "choice" ? engine.choose(started, engine.getChoices(started)[0].id) : engine.advance(started);
+  }
   const traded = engine.demo(started, { type: "trade", item: "grain", side: "sell", quantity: 1, counterparty: "merchant" });
   assert.equal(traded.commands.at(-1)?.type, "trade");
   const replayed = stepCommand(engine, started, { type: "trade", item: "grain", side: "sell", quantity: 1, counterparty: "merchant" });
   assert.equal(replayed.commands.at(-1)?.type, "trade");
-  assert.equal(traded.demo?.household.grain, started.demo?.household.grain);
+  assert.equal(traded.demo?.household.grain, (started.demo?.household.grain ?? 0) - 1);
 });
