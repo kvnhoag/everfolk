@@ -6,8 +6,9 @@ import type { SeededPlayService } from "./seeded-play.ts";
 import { requestIdentity } from "./identity.ts";
 import { handleRankedApi, type RankedDependencies, type RankedEnvironment } from "./ranked/routes.ts";
 import { defaultRankedDependencies } from "./ranked/default-verifier.ts";
+import { handleSignInApi, type SignInEnvironment } from "./signin/routes.ts";
 
-export interface ContentEnvironment extends RankedEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
+export interface ContentEnvironment extends RankedEnvironment, SignInEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
 
 class HttpError extends Error {
   status: number;
@@ -69,6 +70,7 @@ export async function handleApi(request: Request, env: ContentEnvironment): Prom
       return handleSeededPlayApi(request, env.SEEDED_PLAY, user.authenticated ? { userId: request.headers.get("oai-authenticated-user-id")! } : null);
     }
     if (path === "/api/ranked" || path.startsWith("/api/ranked/")) return handleRankedApi(request, env, env.RANKED ?? defaultRankedDependencies());
+    if (path === "/api/signin" || path.startsWith("/api/signin/")) return handleSignInApi(request, env);
     const admin = path === "/api/admin" || path.startsWith("/api/admin/");
     if (admin) {
       requireAdmin(request, env);

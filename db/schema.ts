@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const contentCatalog = sqliteTable("content_catalog", {
   id: integer("id").primaryKey(),
@@ -30,3 +30,12 @@ export const rankedEvidence = sqliteTable("ranked_evidence", {
   saveJson: text("save_json").notNull(),
   createdAt: text("created_at").notNull(),
 });
+
+/** One testnet drip per Privy user; the row is reserved before the transfer and released if it fails. */
+export const signinFunding = sqliteTable("signin_funding", {
+  privyUserId: text("privy_user_id").primaryKey(),
+  accountId: text("account_id").notNull().unique(),
+  amount: text("amount").notNull(),
+  txHash: text("tx_hash"),
+  createdAt: text("created_at").notNull(),
+}, table => [index("signin_funding_created_at_idx").on(table.createdAt)]);
