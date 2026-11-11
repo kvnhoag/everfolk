@@ -63,6 +63,15 @@ export const DEMO_CONFIG: Omit<DemoDefinition, "availability"> = {
     reputation: { initial: 20, min: 0, max: 100 },
     granarySpoilageCutBps: 5000,
     schoolDiscountBps: 5000,
+    wellIllnessReliefBps: 2500,
+    healingRecoveryBonusBps: 3000,
+    completionStats: {
+      well: { health: 3, bonds: 2 },
+      granary: { bonds: 4 },
+      school: { bonds: 3 },
+      "healing-house": { health: 4, bonds: 2 },
+    },
+    opportunityReputation: { neighbours: 30, dispute: 40, envoy: 50 },
   },
   agents: {
     priceBandBps: 2000,

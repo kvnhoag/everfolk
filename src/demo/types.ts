@@ -126,6 +126,14 @@ export interface WorksConfig {
   reputation: { initial: number; min: number; max: number };
   granarySpoilageCutBps: number;
   schoolDiscountBps: number;
+  /** Track E (optional): cut in the yearly illness chance once the well is built, basis points. */
+  wellIllnessReliefBps?: number;
+  /** Track E (optional): extra recovery from illness once the healing house is built, basis points. */
+  healingRecoveryBonusBps?: number;
+  /** Track E (optional): one-off stat changes (world stat id → delta) applied when each work is finished. */
+  completionStats?: Partial<Record<WorkId, Record<string, number>>>;
+  /** Track E (optional): minimum reputation for each reputation-gated opportunity event. */
+  opportunityReputation?: { neighbours: number; dispute: number; envoy: number };
 }
 
 /** Track F: agent limits. */
