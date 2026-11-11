@@ -1,0 +1,67 @@
+{
+  "name": "Everfolk Printed Folktale",
+  "font": "Eczar",
+  "weight": 600,
+  "trackingEm": -0.025,
+  "fontWeightRange": [
+    400,
+    800
+  ],
+  "source": "https://github.com/google/fonts/tree/main/ofl/eczar",
+  "upstreamProject": "https://github.com/rosettatype/eczar",
+  "copyright": "Copyright 2014 The Eczar Project Authors (https://github.com/rosettatype/eczar)",
+  "license": "SIL Open Font License 1.1",
+  "sourceFontSha256": "b52af3a3b457f9b2278612b73c97eaf28270ffc91c99e4c90471cc15bb8748c6",
+  "logoViewBox": "0 0 3959 900",
+  "logoWidth": 1280,
+  "logoHeight": 291,
+  "cream": {
+    "ink": "#e7e0c9",
+    "period": "#db9c78"
+  },
+  "ink": {
+    "ink": "#284744",
+    "period": "#9b553e"
+  },
+  "assetDirectory": "public/assets/branding",
+  "fontFile": "public/fonts/eczar-latin-variable.woff2",
+  "fontLicense": "public/fonts/OFL-Eczar.txt",
+  "glyphAdvances": [
+    {
+      "character": "E",
+      "x": 0
+    },
+    {
+      "character": "v",
+      "x": 577.0
+    },
+    {
+      "character": "e",
+      "x": 1067.0
+    },
+    {
+      "character": "r",
+      "x": 1516.0
+    },
+    {
+      "character": "f",
+      "x": 1963.0
+    },
+    {
+      "character": "o",
+      "x": 2280.0
+    },
+    {
+      "character": "l",
+      "x": 2755.0
+    },
+    {
+      "character": "k",
+      "x": 3065.0
+    },
+    {
+      "character": ".",
+      "x": 3615.0
+    }
+  ]
+}
