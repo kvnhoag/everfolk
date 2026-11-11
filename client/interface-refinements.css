@@ -14,8 +14,7 @@ body :is(h1,h2,h3),body .brand{font-family:var(--ef-heading)!important}
 .life-record-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 15px 3px}
 .life-record-toolbar .chronicle-description{margin:0;font-size:11px}
 .life-record-toolbar .text-button{font-size:10px}
-.game-dashboard .life-visual-column>.life-support-grid{display:flex;flex-direction:column;gap:15px;margin-top:0}
-.game-dashboard .life-record-panel>.life-event-feed{margin:0;padding:3px 15px 12px;max-height:clamp(520px,72vh,880px);overflow-y:auto}
+.game-dashboard .life-record-panel>.life-event-feed{margin:0;padding:3px 15px 12px}
 .life-event-feed .life-year-overview,.life-event-feed .life-entry-overview{flex-direction:column;align-items:stretch;gap:9px}
 .life-record-panel .life-event-feed .life-year-headline,.life-record-panel .life-event-feed .life-entry-overview>p{flex:none;width:100%}
 .life-event-feed .life-year-changes{align-self:flex-start;padding-top:0;margin-top:0}

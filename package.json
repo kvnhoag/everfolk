@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test test/*.test.ts",
+    "test": "node --test test/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "demo": "node examples/play.ts",
     "dev": "node scripts/run-framework.mjs dev",
     "check": "tsc --noEmit",
@@ -17,7 +17,8 @@
     "content": "node scripts/build-alexandria-world.mjs",
     "db:generate": "drizzle-kit generate",
     "ranked:world": "node scripts/ranked/build-ranked-world.mjs",
-    "demo:world": "node scripts/demo/build-demo-world.mjs"
+    "demo:world": "node scripts/demo/build-demo-world.mjs",
+    "art:collection": "node tools/character-creator/scripts/build-collection.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {
