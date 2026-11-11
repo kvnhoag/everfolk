@@ -50,18 +50,25 @@ test("resetting the scenario rebuilds the same checkpoint with a fresh isolated 
   assert.equal((await reset.ledger.tokenStats(reset.source.minted.token_id)).lives_influenced, 0);
 });
 
-test("prepareWeavePreset prepares every Weave feature preset with real playable ranked sessions and ledger state", async () => {
-  assert.equal(WEAVE_PRESETS.length, 6);
+test("prepareWeavePreset prepares every /test/weave/<feature> preset with real playable ranked sessions and ledger state", async () => {
+  assert.equal(WEAVE_PRESETS.length, 7);
 
-  const weave = await prepareWeavePreset("weave");
-  assert.equal(weave.session.state.pendingEventId, "flood-failure");
-  assert.ok((demoScreen(weave.world, weave.session.state)?.legacyHelp.length ?? 0) > 0);
+  const granary = await prepareWeavePreset("granary");
+  assert.equal(granary.session.state.pendingEventId, "flood-failure");
+  assert.ok((demoScreen(granary.world, granary.session.state)?.legacyHelp.length ?? 0) > 0);
 
   const career = await prepareWeavePreset("career");
   assert.equal(career.session.state.phase, "ready");
   assert.ok((career.session.state.character?.skills.farming ?? 0) >= 25);
   assert.ok((career.session.state.character?.skills.reckoning ?? 0) >= 25);
   assert.ok((career.session.state.character?.skills.warfare ?? 0) >= 20);
+
+  const nft = await prepareWeavePreset("nft");
+  assert.equal(nft.session.state.phase, "ended");
+  assert.equal(await nft.ledger.mintPack(nft.session.life.life_id), null);
+  const nftOwned = await nft.ledger.tokensOf(DEMO_NEXT_OWNER);
+  assert.ok(nftOwned.length >= 2);
+  assert.ok(BigInt(await nft.ledger.balanceOf(DEMO_NEXT_OWNER)) > 0n);
 
   const economy = await prepareWeavePreset("economy");
   assert.equal(economy.session.state.phase, "ready");
@@ -73,12 +80,12 @@ test("prepareWeavePreset prepares every Weave feature preset with real playable 
   assert.equal(convoy.session.state.character?.jobId, "soldier");
   assert.equal(demoScreen(convoy.world, convoy.session.state)?.service.serving, true);
 
-  const pack = await prepareWeavePreset("nft-pack");
+  const pack = await prepareWeavePreset("pack");
   assert.equal(pack.session.state.phase, "ended");
   const openedPack = await pack.ledger.mintPack(pack.session.life.life_id);
   assert.equal(openedPack?.cards.length, 3);
 
-  const market = await prepareWeavePreset("nft-market");
+  const market = await prepareWeavePreset("market");
   assert.equal(market.initialHash, "#token/1");
   const owned = await market.ledger.tokensOf(DEMO_NEXT_OWNER);
   assert.ok(owned.some(t => t.token_id === "1"));

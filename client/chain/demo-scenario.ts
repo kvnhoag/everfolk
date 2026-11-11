@@ -134,7 +134,17 @@ export function createDemoScenarioLedger(accountId = "player.testnet"): MockLive
 
 // ── Weave Feature Presets (separately testable in normal UI) ────────────────
 
-export type WeavePresetId = "weave" | "career" | "economy" | "convoy" | "nft-pack" | "nft-market";
+export type WeavePresetId =
+  | "granary"
+  | "weave"
+  | "career"
+  | "nft"
+  | "economy"
+  | "convoy"
+  | "pack"
+  | "nft-pack"
+  | "market"
+  | "nft-market";
 
 export interface WeavePresetMeta {
   id: WeavePresetId;
@@ -145,7 +155,7 @@ export interface WeavePresetMeta {
 
 export const WEAVE_PRESETS: readonly WeavePresetMeta[] = [
   {
-    id: "weave",
+    id: "granary",
     label: "1. Weave: Cross-Life Granary",
     shortLabel: "1. Cross-Life Weave",
     summary: `A previous farmer's NFT (#1 · Stock the granary) weaves into this household during a low flood, delivering ${GRANARY_GRAIN} grain.`,
@@ -157,30 +167,48 @@ export const WEAVE_PRESETS: readonly WeavePresetMeta[] = [
     summary: "Prefilled adult life with trained skills, cash, stats, and resources so you can switch careers and inspect the skill tree.",
   },
   {
+    id: "nft",
+    label: "3. NFT: Verify, Pack, Royalties & Market",
+    shortLabel: "3. NFT & Market",
+    summary: "Completed Weave life ready to verify, pick a deed, open a 3-card booster pack, reroll, mint, claim NEAR royalties, and trade on the market.",
+  },
+  {
     id: "economy",
-    label: "3. Grain Market & Agents",
-    shortLabel: "3. Market & Agents",
+    label: "4. Grain Market & Agents",
+    shortLabel: "4. Market & Agents",
     summary: "Prefilled household with grain, harvested flax, flax plots, and cash ready to trade at the market and delegate to town agents.",
   },
   {
     id: "convoy",
-    label: "4. Soldier & Convoy Weave",
-    shortLabel: "4. Soldier & Convoy",
+    label: "5. Soldier & Convoy Weave",
+    shortLabel: "5. Soldier & Convoy",
     summary: "Serving soldier on the supply road with a previous soldier's Guard the Road deed applied and full route risk preview.",
   },
   {
-    id: "nft-pack",
-    label: "5. NFT: Pack Open & Rerolls",
-    shortLabel: "5. Pack & Rerolls",
-    summary: "Completed Weave life ready to open a 3-card booster pack, reroll individual card slots, and mint a chosen card.",
+    id: "pack",
+    label: "6. NFT: 3-Card Booster Pack",
+    shortLabel: "6. Pack & Rerolls",
+    summary: "Completed Weave life with the 3-card booster pack already opened for slot rerolls and minting.",
   },
   {
-    id: "nft-market",
-    label: "6. NFT: Sell, Buy & Royalties",
-    shortLabel: "6. NFT Sell & Market",
+    id: "market",
+    label: "7. NFT: Token Page, Royalties & Listings",
+    shortLabel: "7. NFT Token & Market",
     summary: "Inspect your minted Farmer NFT (#1) with claimable NEAR royalties, change its deed, list it for sale, or buy from the Market.",
   },
 ];
+
+export function normalizeWeavePreset(raw?: string | null): WeavePresetId {
+  const key = (raw ?? "").trim().toLowerCase();
+  if (key === "career" || key === "skills" || key === "jobs") return "career";
+  if (key === "nft" || key === "mint") return "nft";
+  if (key === "pack" || key === "nft-pack") return "pack";
+  if (key === "market" || key === "nft-market" || key === "token") return "market";
+  if (key === "economy" || key === "trade") return "economy";
+  if (key === "convoy" || key === "soldier") return "convoy";
+  if (key === "weave") return "weave";
+  return "granary";
+}
 
 export interface PreparedWeavePreset {
   presetId: WeavePresetId;
@@ -261,7 +289,7 @@ export async function prepareWeavePreset(
   const world = await loadLifeWorld(DEMO_WORLD_VERSION);
   registerWorldPack(world);
 
-  if (presetId === "weave") {
+  if (presetId === "granary" || presetId === "weave") {
     const granary = await prepareGranaryScenario();
     seedMarketplaceTokens(granary.ledger);
     if (!options.weaveBeforeFlood) {
@@ -315,20 +343,39 @@ export async function prepareWeavePreset(
     return { presetId, world, ledger, session };
   }
 
-  if (presetId === "nft-pack") {
+  if (presetId === "nft" || presetId === "pack" || presetId === "nft-pack") {
+    // Seed an already-owned Farmer NFT by DEMO_NEXT_OWNER that helped carol.testnet so #mine / #token/2 also has claimable NEAR royalties!
+    const earlierSession = await beginRankedSession({
+      contract: ledger, contractId: PRACTICE_CONTRACT_ID, world,
+      verifyUrl: "", storage: memoryStorage(), verifyLocally: practiceVerifier(world, ledger),
+    }, await ledger.startLife(world.version));
+    await fastForwardFarmer(earlierSession, world);
+    const earlierSigned = await earlierSession.finish();
+    await earlierSession.mint(earlierSigned, "farming.stock-granary");
+
+    const carolContract = ledger.as("carol.testnet");
+    const carolSession = await beginRankedSession({
+      contract: carolContract, contractId: PRACTICE_CONTRACT_ID, world,
+      verifyUrl: "", storage: memoryStorage(), verifyLocally: practiceVerifier(world, carolContract),
+    }, await carolContract.startLife(world.version));
+    await fastForwardFarmer(carolSession, world);
+    const carolSigned = await carolSession.finish();
+    await carolSession.mint(carolSigned, "farming.share-seed");
+
     const session = await beginRankedSession({
       contract: ledger, contractId: PRACTICE_CONTRACT_ID, world,
       verifyUrl: "", storage: memoryStorage(), verifyLocally: practiceVerifier(world, ledger),
     }, await ledger.startLife(world.version));
     await fastForwardFarmer(session, world);
-    if (options.packPreopened !== false) {
+    const shouldPreopenPack = presetId === "pack" || presetId === "nft-pack" ? options.packPreopened !== false : Boolean(options.packPreopened);
+    if (shouldPreopenPack) {
       const signed = await session.finish();
       await ledger.openMintPack(session.life.life_id, signed, "farming.stock-granary");
     }
     return { presetId, world, ledger, session };
   }
 
-  // presetId === "nft-market": Player owns Token #1 (a verified Farmer NFT with royalties from 2 child lives!)
+  // presetId === "market" | "nft-market": Player owns Token #1 (a verified Farmer NFT with royalties from child lives)
   const marketLedger = createMockContract({ genesis: false, nobodyWeightBps: 0, abandonCooldownMs: 0, accountId: DEMO_NEXT_OWNER });
   const playerSession = await beginRankedSession({
     contract: marketLedger, contractId: PRACTICE_CONTRACT_ID, world,
