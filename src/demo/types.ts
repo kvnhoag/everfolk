@@ -106,6 +106,35 @@ export interface MarketConfig {
   importFactorBps: Record<RoadLevel, number>;
   royalAllocation: number;
   maxOrderQuantity: number;
+  // Track B optional tuning; `market.ts` documents the default used when a field is absent.
+  /** Grain the grower's own households eat each year (they are the neighbours). */
+  growerEating?: number;
+  /** Share of the grower's barn lost each year, basis points. */
+  growerSpoilageBps?: number;
+  /** Fixed-rule share of the grower's stock offered to the merchant each year, basis points. */
+  growerReleaseBps?: number;
+  /** The merchant buys from the grower only up to this share of `targetGrainStock`, basis points. */
+  merchantMaxStockBps?: number;
+  /** Army grain kept beyond the year's demand; it buys to refill it (defaults to `start.army.grain`). */
+  armyReserve?: number;
+  /** Drachmas the army keeps in its purse for wages; it never spends them on grain. */
+  armyPurseReserve?: number;
+  /** Imports restock each good only up to this level (defaults to the merchant's starting goods). */
+  goodsStockCap?: Partial<Record<Good, number>>;
+  /** Army price over the merchant's grain sell price, basis points (levy premium). */
+  armyPremiumBps?: Record<ArmyLevel, number>;
+  /** Gold and silver price change by army level, basis points. */
+  metalsPressureBps?: Record<ArmyLevel, number>;
+  /** Coan silk price change by road level, basis points. */
+  silkPressureBps?: Record<RoadLevel, number>;
+  /** Grain, flax and linen price change by flood level, basis points. */
+  cropPressureBps?: Record<FloodLevel, number>;
+  /** Most head of each animal a household may keep. */
+  maxAnimals?: number;
+  /** Youngest age at which the player may visit the market. */
+  minTradeAge?: number;
+  /** Reputation for bringing grain to the merchant in a low-flood year (fair trade). */
+  fairTradeReputation?: number;
 }
 
 /** Track C: wages, rations, convoy. */
