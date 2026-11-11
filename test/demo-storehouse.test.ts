@@ -5,6 +5,7 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
+import { createEngine } from "../src/engine.ts";
 import type { WorldPack } from "../src/types.ts";
 import { demoEngine } from "./fixtures/demo/world.ts";
 import { householdView } from "../src/demo/household.ts";
@@ -130,4 +131,15 @@ test("the resource bar and economy controls share the inventory icon set", () =>
     const shared = renderToStaticMarkup(createElement(PixelIcon, { name: RESOURCES[id].icon, size: 14 }));
     assert.ok(glyph.includes(shared), `${id} uses the shared icon`);
   }
+});
+
+
+test("new artisan births retain the shared household resource details", () => {
+  const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-1.json", import.meta.url), "utf8")) as WorldPack;
+  const life = createEngine(world).start("artisan-inventory-details");
+  const details = storehouseRows(world, life);
+  assert.ok(details, "the new birth world has the same household economy");
+  assert.equal(details.length, RESOURCE_IDS.length);
+  assert.equal(details.find(row => row.id === "grain")!.amount, life.demo!.household.grain);
+  assert.ok(details.find(row => row.id === "grain")!.coming.length > 0);
 });

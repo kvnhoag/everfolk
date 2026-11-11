@@ -1,7 +1,6 @@
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
 import { householdView } from "../../src/demo/household.ts";
-import { isDemoWorld } from "./screen.ts";
 import { RESOURCE_IDS, RESOURCES } from "./resources.ts";
 import type { ResourceId } from "./resources.ts";
 
@@ -53,7 +52,7 @@ function flows(entries: readonly [string, number][]): StorehouseFlow[] {
 
 /** Read-only household view of every resource; null when the world has no demo economy. */
 export function storehouseRows(world: WorldPack, life: LifeState): StorehouseRow[] | null {
-  if (!isDemoWorld(world) || !world.demo || !life.demo) return null;
+  if (!world.demo || !life.demo) return null;
   const typed = life as LifeStateWithDemo;
   const view = householdView(world.demo, typed);
   const { household, goods } = typed.demo;
