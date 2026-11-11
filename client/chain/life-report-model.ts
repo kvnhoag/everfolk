@@ -83,10 +83,10 @@ export interface MintRevealView {
   lead: string;
 }
 
-export function mintRevealView(result: MintResult, careerGroup: CareerGroup): MintRevealView {
+export function mintRevealView(result: MintResult, careerGroup?: CareerGroup): MintRevealView {
   const isFigure = result.kind === "figure" && result.figure_id !== null;
   return {
-    title: isFigure && result.figure_id ? figureTitle(result.figure_id) : GROUP_TITLE[careerGroup],
+    title: isFigure && result.figure_id ? figureTitle(result.figure_id) : careerGroup ? GROUP_TITLE[careerGroup] : "A life of Alexandria",
     kindLabel: KIND_LABEL[isFigure ? "figure" : "npc"],
     isFigure,
     figureId: isFigure ? result.figure_id : null,

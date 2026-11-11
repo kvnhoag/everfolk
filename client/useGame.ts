@@ -78,7 +78,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const autoAllowedRef = useRef(false);
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [clockElapsedMs, setClockElapsedMs] = useState(0);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>("saving");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
   const yearDurationMs = YEAR_DURATION_MS / speed;
@@ -134,16 +134,19 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (rankedPlay && !fresh) {
       // Pause commands and the clock while key decisions draw and checkpoints post on chain.
       lifeRef.current = next;
+      setSaveStatus("saving");
       setSyncing(true);
       void rankedPlay.sync(next).then(adopted => {
         lifeRef.current = adopted;
         setLife(adopted);
+        setSaveStatus("saved");
         rankedPlay.onSynced?.(adopted);
         if (adopted.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: hasBegunRef.current, phase: adopted.phase }));
       }, error => {
         const current = rankedPlay.current();
         lifeRef.current = current;
         setLife(current);
+        setSaveStatus("unavailable");
         setNotice(message(error));
       }).finally(() => setSyncing(false));
       return;

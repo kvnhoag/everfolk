@@ -59,10 +59,11 @@ export function parseRankedConfig(value: unknown): RankedConfig | null {
   return config;
 }
 
-export type RankedAvailability = "checking" | "available" | "unavailable";
+export type RankedAvailability = "checking" | "available" | "practice" | "unavailable";
 
 export function rankedEntryView(availability: RankedAvailability): { disabled: boolean; note: string } {
   if (availability === "available") return { disabled: false, note: "A life recorded for keeps. Real players can shape it, and you can keep it." };
+  if (availability === "practice") return { disabled: false, note: "Try a ranked life in this browser. Nothing is sent to NEAR." };
   if (availability === "checking") return { disabled: true, note: "Checking whether ranked lives are open…" };
   return { disabled: true, note: "Ranked lives are unavailable right now. Free play works as usual." };
 }

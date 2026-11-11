@@ -46,7 +46,7 @@ The verifier refuses to sign unless all of these hold:
 - a checkpoint was posted at every five-year boundary, and every recorded hash matches the save's prefix (so the life was not rewound);
 - the replay ends in death, and the evidence (stats, skills, career, matched figures, sources and impacts) comes from the replay, never from the client.
 
-The contract adds its own limits: it accepts evidence only for the matching life seed (so evidence can't be replayed on another deployment), requires 150 Tgas to mint and 100 Tgas to draw (so a player can't retry a bad roll by starving its branch of gas), caps draws and checkpoints per life, pays each token's storage out of the mint fee, and requires a wallet-signed deposit to list a token.
+The contract accepts evidence only for the matching life seed. Minting commits the fee, evidence and random seed before a private resolver creates the token in a separate receipt, so a caller cannot inspect the outcome and roll it back with a later action in the same batch. Interrupted resolvers can be retried with the committed seed and no second mint fee. Requests need 200 Tgas; draws need 100 Tgas. The contract also caps draws and checkpoints per life, reserves each token's complete persisted storage cost from the mint fee, and requires a wallet-signed deposit to list a token.
 
 ## 4. Economy
 

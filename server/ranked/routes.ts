@@ -32,6 +32,13 @@ class RouteError extends Error {
 
 const json = (value: unknown, status = 200) =>
   Response.json(value, { status, headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } });
+const jsonBytes = (text: string) => new Response(text, {
+  headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" },
+});
+
+async function cancelBody(body: ReadableStream<Uint8Array> | null): Promise<void> {
+  try { await body?.cancel(); } catch { /* The response must still reject a cancelled or broken upload. */ }
+}
 
 function configured(env: RankedEnvironment): { secret: string; contractId: string; rpcUrl: string } {
   if (!env.RANKED_VERIFIER_SECRET || !env.RANKED_CONTRACT_ID) throw new RouteError(503, "Ranked lives are not set up on this server yet.");
@@ -39,10 +46,37 @@ function configured(env: RankedEnvironment): { secret: string; contractId: strin
 }
 
 async function readBody(request: Request): Promise<string> {
-  if (Number(request.headers.get("Content-Length")) > MAX_BODY_BYTES) throw new RouteError(413, "This life is too long to verify.");
-  const text = await request.text();
-  if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) throw new RouteError(413, "This life is too long to verify.");
-  return text;
+  if (Number(request.headers.get("Content-Length")) > MAX_BODY_BYTES) {
+    await cancelBody(request.body);
+    throw new RouteError(413, "This life is too long to verify.");
+  }
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  // A contiguous bounded buffer also bounds bookkeeping for streams with many tiny chunks.
+  let buffer = new Uint8Array(16_384);
+  let bytes = 0;
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const nextBytes = bytes + value.byteLength;
+      if (nextBytes > MAX_BODY_BYTES) {
+        try { await reader.cancel(); } catch { /* Retain the size error if cancellation fails. */ }
+        throw new RouteError(413, "This life is too long to verify.");
+      }
+      if (nextBytes > buffer.byteLength) {
+        const grown = new Uint8Array(Math.min(MAX_BODY_BYTES, Math.max(nextBytes, buffer.byteLength * 2)));
+        grown.set(buffer.subarray(0, bytes));
+        buffer = grown;
+      }
+      buffer.set(value, bytes);
+      bytes = nextBytes;
+    }
+    // Decode once from complete bytes, preserving UTF-8 characters split across chunks.
+    return new TextDecoder().decode(buffer.subarray(0, bytes));
+  } finally {
+    reader.releaseLock();
+  }
 }
 
 function parseVerifyRequest(text: string): { lifeId: string; saveJson: string; save: SaveFile } {
@@ -51,7 +85,7 @@ function parseVerifyRequest(text: string): { lifeId: string; saveJson: string; s
   const { life_id: lifeId, save: saveJson } = (input ?? {}) as { life_id?: unknown; save?: unknown };
   if (typeof lifeId !== "string" || !/^\d{1,19}$/.test(lifeId)) throw new RouteError(400, "Send the ranked life's id.");
   if (typeof saveJson !== "string") throw new RouteError(400, "Send the life's save file.");
-  if (saveJson.length > MAX_RANKED_SAVE_BYTES) throw new RouteError(413, "This life is too long to verify.");
+  if (new TextEncoder().encode(saveJson).byteLength > MAX_RANKED_SAVE_BYTES) throw new RouteError(413, "This life is too long to verify.");
   let save: unknown;
   try { save = JSON.parse(saveJson); } catch { throw new RouteError(400, "The save file is not valid JSON."); }
   const shape = save as Partial<SaveFile> | null;
@@ -65,12 +99,13 @@ function parseVerifyRequest(text: string): { lifeId: string; saveJson: string; s
 async function verify(request: Request, env: RankedEnvironment, deps: RankedDependencies): Promise<Response> {
   const { contractId, rpcUrl } = configured(env);
   if (!deps.verifier) throw new RouteError(503, "Ranked lives are not set up on this server yet.");
-  const { lifeId, saveJson, save } = parseVerifyRequest(await readBody(request));
-  // After the cheap checks, before the RPC read and the replay.
+  // Reject limited clients before buffering even a bounded upload or running the replay.
   const limiter = deps.limiter ?? env.RANKED_RATE_LIMITER ?? defaultVerifyLimiter;
   if (!(await limiter.limit({ key: `verify:${clientKey(request)}` })).success) {
+    await cancelBody(request.body);
     throw new RouteError(429, "Too many lives verified from here just now. Wait a minute and try again.");
   }
+  const { lifeId, saveJson, save } = parseVerifyRequest(await readBody(request));
   const life = await viewLife(rpcUrl, contractId, lifeId, deps.fetch ?? fetch);
   if (!life) throw new RouteError(404, "This ranked life was not found on NEAR.");
   const signed = await (await deps.verifier(env)).verify(life, save);
@@ -84,7 +119,7 @@ async function verify(request: Request, env: RankedEnvironment, deps: RankedDepe
     console.error("ranked evidence storage failed", { hash: signed.evidence_hash, error: error instanceof Error ? error.message : String(error) });
   }
   const evidenceUrl = `${new URL(request.url).origin}/api/ranked/evidence/${signed.evidence_hash}`;
-  return json({ ...signed, evidence_url: evidenceUrl, evidence_stored: stored });
+  return json({ ...signed, evidence_url: evidenceUrl, save_url: `${evidenceUrl}/save`, evidence_stored: stored });
 }
 
 /** `/api/ranked/*`: public config, life verification and evidence lookup. */
@@ -101,13 +136,15 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
       if (request.method !== "POST") return json({ error: "Method not allowed." }, 405);
       return await verify(request, env, deps);
     }
-    const evidence = /^\/api\/ranked\/evidence\/([^/]+)$/.exec(path);
+    const evidence = /^\/api\/ranked\/evidence\/([^/]+)(\/save)?$/.exec(path);
     if (evidence) {
       if (request.method !== "GET") return json({ error: "Method not allowed." }, 405);
       if (!/^[0-9a-f]{64}$/.test(evidence[1])) throw new RouteError(400, "Evidence is addressed by its 64-character hash.");
       if (!env.DB) throw new RouteError(503, "Ranked lives are not set up on this server yet.");
       const found = await readEvidence(env.DB, evidence[1]);
-      return found ? json(found) : json({ error: "No evidence with this hash." }, 404);
+      if (!found) return json({ error: "No evidence with this hash." }, 404);
+      // NFT metadata hashes these exact signed bytes. The larger replay save has its own URL.
+      return jsonBytes(evidence[2] ? found.saveJson : found.evidenceJson);
     }
     return json({ error: "API route not found." }, 404);
   } catch (error) {

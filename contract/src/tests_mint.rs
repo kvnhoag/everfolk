@@ -4,7 +4,9 @@ use crate::Contract;
 use ed25519_dalek::{Signer, SigningKey};
 use near_sdk::json_types::{U128, U64};
 use near_sdk::serde_json;
-use near_sdk::NearToken;
+use near_sdk::{env, testing_env, Gas, NearToken, PromiseOrValue};
+use near_sdk::test_utils::{get_created_receipts, VMContextBuilder};
+use crate::mint::{mint_records, MintRecord};
 
 const WORLD: &str = "alexandria-ranked-1";
 const NEAR: u128 = 1_000_000_000_000_000_000_000_000;
@@ -25,12 +27,32 @@ fn set_drop(c: &mut Contract, bps: u16) {
 
 fn start(c: &mut Contract, who: &str) -> u64 {
     as_account(who);
-    c.start_life(WORLD.into()).life_id.0
+    let id = c.start_life(WORLD.into()).life_id.0;
+    c.flush_mint_storage();
+    id
 }
 
 fn mint(c: &mut Contract, who: &str, life: u64, evidence: &str, action: &str) -> MintResult {
-    pay(who, 1);
-    c.mint_life(U64(life), evidence.into(), sign(evidence), action.into())
+    receipt(who, NEAR, [5; 32]);
+    c.mint_life(U64(life), evidence.into(), sign(evidence), action.into()).detach();
+    receipt(CONTRACT, 0, [99; 32]);
+    c.finalize_mint(U64(life))
+}
+
+/// A new receipt preserves persisted storage usage, as the runtime does.
+fn receipt(caller: &str, deposit: u128, seed: [u8; 32]) {
+    let usage = env::storage_usage();
+    let mut b = VMContextBuilder::new();
+    b.current_account_id(account(CONTRACT))
+        .predecessor_account_id(account(caller))
+        .signer_account_id(account(ALICE))
+        .block_timestamp(START_MS * 1_000_000)
+        .attached_deposit(NearToken::from_yoctonear(deposit))
+        .account_balance(NearToken::from_near(1_000))
+        .storage_usage(usage)
+        .prepaid_gas(Gas::from_tgas(300))
+        .random_seed(seed);
+    testing_env!(b.build());
 }
 
 fn src(list: &[(&str, u64)]) -> Vec<(String, u64)> {
@@ -184,7 +206,7 @@ fn bad_signature_rejected() {
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
     let forged = hex::encode(SigningKey::from_bytes(&[99; 32]).sign(evidence.as_bytes()).to_bytes());
     pay(ALICE, 1);
-    c.mint_life(U64(life), evidence, forged, "letters.teach".into());
+    c.mint_life(U64(life), evidence, forged, "letters.teach".into()).detach();
 }
 
 #[test]
@@ -195,7 +217,7 @@ fn tampered_evidence_rejected() {
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
     let signature = sign(&evidence);
     pay(ALICE, 1);
-    c.mint_life(U64(life), evidence.replace("\"bonds\":50", "\"bonds\":99"), signature, "letters.teach".into());
+    c.mint_life(U64(life), evidence.replace("\"bonds\":50", "\"bonds\":99"), signature, "letters.teach".into()).detach();
 }
 
 #[test]
@@ -215,7 +237,7 @@ fn insufficient_deposit_rejected() {
     let life = start(&mut c, ALICE);
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
     context(ALICE, START_MS, NearToken::from_millinear(999), [5; 32]);
-    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into());
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
 }
 
 #[test]
@@ -343,13 +365,13 @@ fn evidence_with_another_seed_rejected() {
 }
 
 #[test]
-#[should_panic(expected = "Attach at least 150 Tgas")]
+#[should_panic(expected = "Attach at least 200 Tgas")]
 fn mint_with_too_little_gas_rejected() {
     let mut c = ready();
     let life = start(&mut c, ALICE);
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
-    with_gas(ALICE, NearToken::from_near(1), 149);
-    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into());
+    with_gas(ALICE, NearToken::from_near(1), 199);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
 }
 
 #[test]
@@ -363,7 +385,7 @@ fn fee_too_small_for_storage_rejected() {
     let life = start(&mut c, ALICE);
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
     pay(ALICE, 1);
-    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into());
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
 }
 
 #[test]
@@ -379,4 +401,145 @@ fn npc_pool_is_capped() {
     let pool = c.npc_pools.get("education").cloned().unwrap();
     assert_eq!(pool.len(), crate::lives::MAX_POOL);
     assert!(!pool.contains(&overflow), "tokens past the cap are minted but not drawable");
+}
+
+#[test]
+fn request_commits_before_a_separate_resolver_receipt_exposes_the_token() {
+    let mut c = ready();
+    let life = start(&mut c, ALICE);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &["euclid"], "letters", 50);
+    let next_id = c.next_token_id.to_string();
+    receipt(ALICE, NEAR, [17; 32]);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    assert_eq!(c.get_life(U64(life)).unwrap().status, LifeStatus::Minting);
+    assert!(c.nft.owner_by_id.get(&next_id).is_none(), "a later action in the request batch cannot inspect a minted outcome");
+    assert!(c.mint_result(U64(life)).is_none());
+    let receipts = get_created_receipts();
+    assert_eq!(receipts.len(), 1);
+    assert_eq!(receipts[0].receiver_id, account(CONTRACT));
+    match &receipts[0].actions[0] {
+        near_sdk::mock::MockAction::FunctionCallWeight { method_name, args, attached_deposit, prepaid_gas, .. } => {
+            assert_eq!(method_name, b"finalize_mint");
+            assert_eq!(serde_json::from_slice::<serde_json::Value>(args).unwrap()["life_id"], life.to_string());
+            assert_eq!(*attached_deposit, NearToken::from_yoctonear(0));
+            assert_eq!(*prepaid_gas, Gas::from_tgas(150));
+        }
+        action => panic!("expected resolver call, got {action:?}"),
+    }
+    receipt(CONTRACT, 0, [89; 32]);
+    let result = c.finalize_mint(U64(life));
+    assert_eq!(result.token_id, next_id);
+    assert_eq!(c.mint_result(U64(life)), Some(result));
+}
+
+#[test]
+fn retry_keeps_the_committed_seed_evidence_fee_and_economics() {
+    let mut c = ready();
+    set_drop(&mut c, 10_000);
+    let life = start(&mut c, ALICE);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &["euclid"], "letters", 50);
+    receipt(ALICE, NEAR, [17; 32]);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    let request = match mint_records().get(&life) { Some(MintRecord::Pending(request)) => request.clone(), _ => panic!("pending mint") };
+    // Neither later blocks nor owner parameter edits change the committed draw.
+    set_drop(&mut c, 0);
+    receipt(ALICE, 0, [123; 32]);
+    match c.retry_mint(U64(life)) { PromiseOrValue::Promise(promise) => promise.detach(), _ => panic!("expected resolver") };
+    let retried = match mint_records().get(&life) { Some(MintRecord::Pending(request)) => request.clone(), _ => panic!("pending mint") };
+    assert_eq!(retried.seed, request.seed);
+    assert_eq!(retried.evidence_json, request.evidence_json);
+    assert_eq!(retried.fee, NEAR);
+    assert_eq!(retried.extra_storage_deposit, 0);
+    assert_eq!(retried.params, request.params);
+    receipt(CONTRACT, 0, [211; 32]);
+    let result = c.finalize_mint(U64(life));
+    assert_eq!(result.figure_id.as_deref(), Some("euclid"), "the committed 100% rate survives the later admin edit");
+    let token_count = c.next_token_id;
+    let treasury = c.balance_of(account(TREASURY));
+    assert_eq!(c.finalize_mint(U64(life)), result, "duplicate callbacks return the first result");
+    assert_eq!(c.next_token_id, token_count);
+    assert_eq!(c.balance_of(account(TREASURY)), treasury, "duplicate callbacks never credit the fee twice");
+    receipt(ALICE, 0, [212; 32]);
+    match c.retry_mint(U64(life)) { PromiseOrValue::Value(found) => assert_eq!(found, result), _ => panic!("completed mint should return its result") };
+}
+
+#[test]
+fn persisted_storage_and_credits_fit_the_fee_after_all_caches_are_flushed() {
+    let mut c = ready();
+    let (life, euclid, alexander) = two_figure_sources(&mut c);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &src(&[(&euclid, 3), (&alexander, 1)]), &[], "letters", 50);
+    c.flush_mint_storage();
+    let before = env::storage_usage();
+    mint(&mut c, ALICE, life, &evidence, "letters.teach");
+    let measured = env::storage_usage();
+    // Re-serialization/drop is the point at which any omitted lazy writes would appear.
+    let persisted = near_sdk::borsh::to_vec(&c).unwrap();
+    drop(c);
+    let c: Contract = near_sdk::borsh::from_slice(&persisted).unwrap();
+    assert_eq!(env::storage_usage(), measured, "the reserve must already include every lazy write");
+    let locked = env::storage_usage().saturating_sub(before) as u128 * env::storage_byte_cost().as_yoctonear();
+    let credited = c.balance_of(account(CAROL)).0 + c.balance_of(account(BOB)).0 + c.balance_of(account(TREASURY)).0;
+    assert_eq!(credited + locked, NEAR);
+}
+
+#[test]
+#[should_panic(expected = "Only the contract can finalize a mint")]
+fn external_caller_cannot_run_the_resolver() {
+    let mut c = ready();
+    let life = start(&mut c, ALICE);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
+    receipt(ALICE, NEAR, [17; 32]);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    c.finalize_mint(U64(life));
+}
+
+#[test]
+#[should_panic(expected = "Only the life's owner can do this")]
+fn another_account_cannot_retry_the_committed_mint() {
+    let mut c = ready();
+    let life = start(&mut c, ALICE);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
+    receipt(ALICE, NEAR, [17; 32]);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    receipt(BOB, 0, [18; 32]);
+    let _ = c.retry_mint(U64(life));
+}
+
+#[test]
+fn unused_recovery_storage_deposit_is_refunded_without_extra_royalties() {
+    let mut c = ready();
+    let (life, euclid, _) = two_figure_sources(&mut c);
+    let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &src(&[(&euclid, 1)]), &[], "letters", 50);
+    receipt(ALICE, NEAR, [17; 32]);
+    c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    receipt(ALICE, NEAR, [18; 32]);
+    match c.retry_mint(U64(life)) { PromiseOrValue::Promise(promise) => promise.detach(), _ => panic!("expected resolver") };
+    receipt(CONTRACT, 0, [19; 32]);
+    c.finalize_mint(U64(life));
+    assert_eq!(c.balance_of(account(CAROL)), U128(NEAR / 2), "recovery funds are not another royalty-bearing mint fee");
+    let receipts = get_created_receipts();
+    assert_eq!(receipts.len(), 1);
+    assert_eq!(receipts[0].receiver_id, account(ALICE));
+    assert!(format!("{:?}", receipts[0].actions).contains(&NEAR.to_string()));
+}
+
+#[test]
+fn concurrent_committed_mints_do_not_exceed_the_figure_supply_cap() {
+    let mut c = ready();
+    let mut catalog = sample_catalog();
+    catalog.figures[0].supply_cap = 1;
+    c.set_catalog(catalog);
+    set_drop(&mut c, 10_000);
+    let first = start(&mut c, ALICE);
+    let second = start(&mut c, BOB);
+    for (life, who) in [(first, ALICE), (second, BOB)] {
+        let evidence = evidence_json(&seed_of(&c, life), life, who, &[], &["euclid"], "letters", 50);
+        receipt(who, NEAR, [17; 32]);
+        c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    }
+    receipt(CONTRACT, 0, [18; 32]);
+    assert_eq!(c.finalize_mint(U64(first)).kind, TokenKind::Figure);
+    receipt(CONTRACT, 0, [19; 32]);
+    assert_eq!(c.finalize_mint(U64(second)).kind, TokenKind::Npc);
+    assert_eq!(c.figure_supply("euclid".into()), (1, 1));
 }

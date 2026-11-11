@@ -3,6 +3,7 @@ import { RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import { activationCommand, applyCommand } from "../../chain/validate-ranked.ts";
 import { ObligationTracker, rankedObligations, stepCommand, type Obligation } from "../../chain/ranked-rules.ts";
 import { createEngine } from "../../src/index.ts";
+import { canonicalJson } from "../../src/random.ts";
 import type { Choice, Command, LifeEngine, LifeState, SaveFile, WorldPack } from "../../src/types.ts";
 import type { Draw, LifeView, LivesContract, MintResult, SignedEvidence } from "./types.ts";
 
@@ -42,6 +43,8 @@ export interface RankedSession {
   sync(next: LifeState): Promise<LifeState>;
   finish(fetcher?: typeof fetch): Promise<SignedEvidence>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  /** Resumes a committed mint without asking the verifier or paying a second fee. */
+  recoverMint(): Promise<MintResult>;
   abandon(): Promise<void>;
 }
 
@@ -61,6 +64,7 @@ export class ChainActionError extends Error {
 }
 
 const CHAIN_RETRY = "The NEAR network didn't confirm in time. Your life is safe; try that again.";
+const CHAIN_CONFLICT = "This ranked life has different progress recorded on NEAR. Continue from the device with that progress; this history cannot continue.";
 
 class Session implements RankedSession {
   life: LifeView;
@@ -112,6 +116,7 @@ class Session implements RankedSession {
   }
 
   async dispatch(command: Command): Promise<void> {
+    if (this.life.status !== "alive") throw new Error("This life's mint is already committed; its progress cannot change.");
     if (command.type === "influence") throw new Error("Influences only come from the chain.");
     if (this.state.phase === "ended") throw new Error("This life has ended.");
     await this.settle(); // Anything still owed reaches the chain before the life moves on.
@@ -147,7 +152,8 @@ class Session implements RankedSession {
       const obligation = this.owed[0];
       try {
         await this.fulfil(obligation);
-      } catch {
+      } catch (error) {
+        if (error instanceof ChainActionError) throw error;
         if (!(await this.reconcile(obligation))) throw new ChainActionError(CHAIN_RETRY);
       }
       this.owed.shift();
@@ -166,7 +172,9 @@ class Session implements RankedSession {
     }
     this.pendingDraw = true;
     try {
-      this.adoptDraw(await this.options.contract.drawNpc(this.life.life_id, obligation.step, obligation.category, hash));
+      const draw = await this.options.contract.drawNpc(this.life.life_id, obligation.step, obligation.category, hash);
+      this.assertDraw(obligation, draw, hash);
+      this.adoptDraw(draw);
     } finally {
       this.pendingDraw = false;
     }
@@ -176,26 +184,45 @@ class Session implements RankedSession {
     let onChain: LifeView | null;
     try { onChain = await this.options.contract.getLife(this.life.life_id); } catch { return false; }
     if (!onChain) return false;
+    const hash = await commandsHash(this.commands(), obligation.step);
     if (obligation.kind === "checkpoint") {
-      const landed = onChain.checkpoints.some(c => c.step === obligation.step);
-      if (landed) this.life = { ...this.life, checkpoints: onChain.checkpoints };
-      return landed;
+      const checkpoint = onChain.checkpoints.find(c => c.step === obligation.step);
+      if (!checkpoint) return false;
+      if (checkpoint.commands_hash !== hash) throw new ChainActionError(CHAIN_CONFLICT);
+      this.life = { ...this.life, checkpoints: onChain.checkpoints };
+      return true;
     }
     const draw = onChain.draws.find(d => d.step === obligation.step);
-    if (draw) this.adoptDraw(draw);
-    return Boolean(draw);
+    if (!draw) return false;
+    this.assertDraw(obligation, draw, hash);
+    this.adoptDraw(draw);
+    return true;
+  }
+
+  private assertDraw(obligation: Extract<Obligation, { kind: "draw" }>, draw: Draw, hash: string): void {
+    if (draw.step !== obligation.step || draw.commands_hash !== hash || draw.category !== obligation.category) {
+      throw new ChainActionError(CHAIN_CONFLICT);
+    }
   }
 
   private adoptDraw(draw: Draw): void {
-    this.lastDraw = draw;
-    if (!this.life.draws.some(d => d.step === draw.step)) this.life = { ...this.life, draws: [...this.life.draws, draw] };
     if (draw.token_id) {
-      this.state = this.engine.influence(this.state, applyCommand(draw, this.options.contractId));
+      const command = applyCommand(draw, this.options.contractId);
+      const existing = this.state.commands[draw.step];
+      if (existing) {
+        if (canonicalJson(existing) !== canonicalJson(command)) throw new ChainActionError(CHAIN_CONFLICT);
+      } else {
+        if (this.state.commands.length !== draw.step) throw new ChainActionError(CHAIN_CONFLICT);
+        this.state = this.engine.influence(this.state, command);
+      }
       this.persist();
     }
+    this.lastDraw = draw;
+    if (!this.life.draws.some(d => d.step === draw.step)) this.life = { ...this.life, draws: [...this.life.draws, draw] };
   }
 
   async finish(fetcher: typeof fetch = fetch): Promise<SignedEvidence> {
+    if (this.life.status !== "alive") throw new Error("This life's mint is already committed. Complete the mint instead of verifying it again.");
     if (this.state.phase !== "ended") throw new Error("This life has not ended yet.");
     await this.settle();
     if (this.options.verifyLocally) return this.options.verifyLocally(this.life, JSON.parse(this.save()) as SaveFile);
@@ -218,17 +245,33 @@ class Session implements RankedSession {
       if (!minted) throw error;
       result = minted;
     }
-    this.storage.removeItem(rankedSaveKey(this.life.life_id));
-    return result;
+    return this.completeMint(result);
   }
 
   private async findMinted(): Promise<MintResult | null> {
     const life = await this.options.contract.getLife(this.life.life_id);
-    if (life?.status !== "minted") return null;
-    const token = (await this.options.contract.tokensOf(this.life.account_id)).find(t => t.extra.life_id === this.life.life_id);
-    if (!token) return null;
-    const { kind, figure_id, rarity, affection } = token.extra;
-    return { token_id: token.token_id, kind, figure_id, rarity, affection };
+    if (life) this.life = life;
+    return this.options.contract.mintResult(this.life.life_id);
+  }
+
+  private completeMint(result: MintResult): MintResult {
+    this.life = { ...this.life, status: "minted" };
+    this.storage.removeItem(rankedSaveKey(this.life.life_id));
+    return result;
+  }
+
+  async recoverMint(): Promise<MintResult> {
+    if (this.state.phase !== "ended") throw new Error("This life has not ended yet.");
+    const completed = await this.findMinted();
+    if (completed) return this.completeMint(completed);
+    if (this.life.status !== "minting") throw new Error("This life has no committed mint to complete.");
+    try {
+      return this.completeMint(await this.options.contract.retryMint(this.life.life_id));
+    } catch (error) {
+      const landed = await this.findMinted().catch(() => null);
+      if (landed) return this.completeMint(landed);
+      throw error;
+    }
   }
 
   async abandon(): Promise<void> {
@@ -249,6 +292,7 @@ export async function startRankedSession(options: RankedSessionOptions): Promise
 export async function beginRankedSession(options: RankedSessionOptions, life: LifeView): Promise<RankedSession> {
   const saved = (options.storage ?? browserStorage()).getItem(rankedSaveKey(life.life_id));
   if (saved) return resumeRankedSession(options, life.life_id);
+  if (life.status !== "alive") throw new Error("This life has a committed mint. Complete it from the ranked entry screen.");
   if (life.draws.length > 0 || life.checkpoints.length > 0) {
     throw new Error("This device has no saved progress for this ranked life. Give it up here to start a new one.");
   }
@@ -260,12 +304,17 @@ export async function beginRankedSession(options: RankedSessionOptions, life: Li
 /** Reloads the saved progress of a ranked life that is still alive on chain, reconciling it with the chain first. */
 export async function resumeRankedSession(options: RankedSessionOptions, lifeId: string): Promise<RankedSession> {
   const life = await options.contract.getLife(lifeId);
-  if (!life || life.status !== "alive") throw new Error("This ranked life is no longer in progress.");
+  if (!life || life.status === "abandoned") throw new Error("This ranked life is no longer in progress.");
   const saved = (options.storage ?? browserStorage()).getItem(rankedSaveKey(lifeId));
   if (!saved) throw new Error("This device has no saved progress for this ranked life.");
   const engine = Session.engineFor(options.world);
   const save = JSON.parse(saved) as SaveFile;
   if (save.seed !== life.seed) throw new Error("The saved progress belongs to a different life.");
+  if (life.status !== "alive") {
+    const state = engine.load(saved);
+    if (state.phase !== "ended") throw new Error("This device has no finished save for the committed mint. Complete it from the ranked entry screen.");
+    return new Session(options, life, state);
+  }
   const { state, required, tracker } = rankedObligations(engine, life.figure_picks.length, save);
   const tip = save.commands.length;
   const met = (o: Obligation) => o.kind === "draw" ? life.draws.some(d => d.step === o.step) : life.checkpoints.some(c => c.step === o.step);
