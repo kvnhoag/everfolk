@@ -114,16 +114,13 @@ test("the token page sale box uses the 0.025 placeholder", () => {
   assert.match(html, /placeholder="0\.025"/);
 });
 
-async function loadWith(overrides: Record<string, () => Promise<unknown>>) {
-  const mock = createMockContract({ genesis: false, accountId: "me.testnet" });
-  const contract = new Proxy(mock, { get: (target, key: string) => overrides[key] ?? (target as never)[key] });
-  return loadMarket({ contract, accountId: "me.testnet", mode: "preview" } as never);
-}
-
 test("a failing marketTerms falls back to defaults and keeps the market", async () => {
-  const loaded = await loadWith({ marketTerms: () => Promise.reject(new Error("rpc down")) });
+  const preview = await createPreviewLedger();
+  const contract = new Proxy(preview, { get: (target, key: string) => key === "marketTerms" ? () => Promise.reject(new Error("rpc down")) : (target as never)[key] });
+  const loaded = await loadMarket({ contract, accountId: "player.testnet", mode: "preview" } as never);
   assert.deepEqual(loaded.terms, TERMS);
-  assert.ok(loaded.items);
+  assert.ok(loaded.rows.length > 0);
+  assert.ok(loaded.items && loaded.items.length > 0);
   assert.equal(loaded.itemsError, undefined);
 });
 
@@ -135,4 +132,5 @@ test("a failing tokensOf keeps listings and shows an error in the Yours tab", as
   assert.equal(loaded.itemsError, YOURS_LOAD_ERROR);
   const html = renderToStaticMarkup(createElement(MarketBody, { rows: loaded.rows, onBuy: noop, initialTab: "yours", yours: { items: loaded.items ?? [], terms: loaded.terms, error: loaded.itemsError, onList: noop, onUnlist: noop } }));
   assert.match(html, /Your NFTs could not be loaded\./);
+  assert.doesNotMatch(html, /Yours<small>/);
 });

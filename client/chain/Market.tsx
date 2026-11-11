@@ -75,7 +75,7 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
     <ul className="market-tabs" role="tablist" aria-label="Show">{marketTabs(rows).map(item => <li key={item.id}>
       <button className="market-tab" type="button" role="tab" aria-selected={tab === item.id} onClick={() => setTab(item.id)}>{item.label}<small>{item.count}</small></button>
     </li>)}{yours && <li>
-      <button className="market-tab" type="button" role="tab" aria-selected={showYours} onClick={() => setTab(YOURS_TAB)}>Yours<small>{yours.items.length}</small></button>
+      <button className="market-tab" type="button" role="tab" aria-selected={showYours} onClick={() => setTab(YOURS_TAB)}>Yours{!yours.error && <small>{yours.items.length}</small>}</button>
     </li>}</ul>
     {showYours && yours
       ? <div className="ledger-body">{yours.error && <p className="chain-error" role="alert">{yours.error}</p>}<SellYours items={yours.items} terms={yours.terms} busy={busy} onList={yours.onList} onUnlist={yours.onUnlist} /></div>
