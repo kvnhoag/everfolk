@@ -51,6 +51,12 @@ export interface TimelineConfig {
   }>;
   /** Extra chance (basis points) of an uneasy road in recruitment years or after a low flood. */
   roadPressureBps: number;
+  /** Chance (basis points) of a high flood in a year outside low-flood episodes. Default 0. */
+  highFloodBps?: number;
+  /** Army episodes at least this long turn to war in their middle year. Default 4. */
+  warMinYears?: number;
+  /** Calm years kept between two episodes of one family. Default 1. */
+  episodeGapYears?: number;
 }
 
 /** Track A: household, farming, flax, family. */

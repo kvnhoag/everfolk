@@ -945,6 +945,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     });
   }
   const randomWeights: number[] = [];
+  const hasDemoCondition = (rule: unknown): boolean => {
+    if (rule === null || typeof rule !== "object") return false;
+    const data = rule as DataObject;
+    if (data.type === "demo") return true;
+    if (data.type === "not") return hasDemoCondition(data.condition);
+    return (data.type === "all" || data.type === "any") && Array.isArray(data.conditions) && data.conditions.some(hasDemoCondition);
+  };
   const exclusiveGroupAges = new Map<string, number>();
   const eventDefinition = (entry: unknown, path: string): void => {
     const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
@@ -985,7 +992,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     }
     if (Object.hasOwn(event, "maxOccurrences")) {
       const count = integer(event.maxOccurrences, `${path}.maxOccurrences`, 1, Number.MAX_SAFE_INTEGER);
-      if (trigger.type !== "random" && count !== 1) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
+      // Demo worlds: a year-anchored decision gated by a demo condition (e.g. a fresh low flood) recurs once per episode.
+      const demoAnchor = Object.hasOwn(world, "demo") && trigger.type === "year" && hasDemoCondition(event.when);
+      if (trigger.type !== "random" && count !== 1 && !demoAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
     const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);
@@ -1030,7 +1039,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (catalogEventIds.has(eventId)) fail(`${path}.event.id`, `duplicate event ID '${eventId}'`);
       catalogEventIds.add(eventId);
       if (Object.hasOwn(event, "exclusiveGroup")) fail(`${path}.event.exclusiveGroup`, "influence events cannot join exclusive groups");
+      // Influence events are deeds too: they may bring grain into the store.
+      demoGrainGain = true;
       eventDefinition(event, `${path}.event`);
+      demoGrainGain = false;
     });
   }
   aggregate(randomWeights, "world.events");
