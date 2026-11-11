@@ -158,7 +158,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const loanWarningsSeen = useRef(new Set<string>());
   const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
   const { life } = game;
-  const menuLifeRef = useRef<string | null>(null);
+  const menuLifeRef = useRef<string | null>(`${life.worldFingerprint}:${life.seed}`);
   const lifeEngine = engineForLife(life);
   const world = lifeEngine.world;
   const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life]);

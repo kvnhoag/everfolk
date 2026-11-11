@@ -38,7 +38,6 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
   const primaryLabel = continuing ? "Continue your life" : ended ? "Begin a new life" : "Begin your life";
-  const worldTitle = world.title.replace(/[.!?]+$/u, "");
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
@@ -75,11 +74,6 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
           </div>
           <p className="ef-home-save-note"><span aria-hidden="true">◇</span>Your story is saved in this browser.</p>
         </section>
-        <aside className="ef-home-world-note" aria-label="Your starting world">
-          <span className="ef-home-world-line" aria-hidden="true" />
-          <span>YOUR STARTING WORLD</span><strong>{worldTitle}</strong>
-          <p>First light on the coast · {formatYear(world.startYear)}</p>
-        </aside>
       </div>
       <footer className="ef-home-footer">
         <nav className="ef-home-links" aria-label="Main menu">

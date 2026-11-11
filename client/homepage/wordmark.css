@@ -1,12 +1,12 @@
-/* Original square-cell inscription. Its pixel plane stays separate from the coastal world. */
-.ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96;max-width:100%}
-.ef-royal-wordmark{display:inline-block;vertical-align:top;width:3.5em;max-width:100%;height:.98em;overflow:visible;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #10293155)}
-.ef-logo-emblem{filter:drop-shadow(0 0 5px #e6c47c25)}
-.ef-royal-sculpture{--stone-light:1;filter:brightness(var(--stone-light)) drop-shadow(1px 2px 0 #10293166)}
+/* Stylized classical chiseled inscription, centered over the Mediterranean bay. */
+.ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96;max-width:100%;display:inline-flex;justify-content:center;align-items:center}
+.ef-royal-wordmark{display:block;margin:0 auto;width:3.85em;max-width:100%;height:.84em;overflow:visible;filter:drop-shadow(0 6px 18px #0d222c66)}
+.ef-logo-emblem,.ef-logo-lower-rule{filter:drop-shadow(0 2px 6px #0f242e4d)}
+.ef-royal-letter{transform-box:fill-box;transform-origin:center bottom}
 .ef-logo-reflection{mix-blend-mode:screen}
-.ef-home .ef-title-glint:nth-of-type(1){left:4%;top:44%}
-.ef-home .ef-title-glint:nth-of-type(2){left:48%;top:44%}
-.ef-home .ef-title-glint:nth-of-type(3){left:69%;top:80%}
+.ef-home .ef-title-glint:nth-of-type(1){left:9%;top:32%}
+.ef-home .ef-title-glint:nth-of-type(2){left:50%;top:12%}
+.ef-home .ef-title-glint:nth-of-type(3){left:89%;top:74%}
 .ef-home[data-motion=paused] .ef-logo-reflection,.ef-home[data-motion=paused] .ef-royal-dust{opacity:0!important}
-@media(prefers-reduced-motion:reduce){.ef-logo-reflection,.ef-royal-dust{display:none}.ef-royal-pixel-batch,.ef-logo-emblem,.ef-royal-sculpture{opacity:1!important;transform:none!important}.ef-royal-sculpture{--stone-light:1!important}}
+@media(prefers-reduced-motion:reduce){.ef-logo-reflection,.ef-royal-dust{display:none}.ef-royal-pixel-batch,.ef-logo-emblem,.ef-logo-lower-rule{opacity:1!important;transform:none!important}}
 @media(forced-colors:active){.ef-royal-wordmark{filter:none;forced-color-adjust:none}}
