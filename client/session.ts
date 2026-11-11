@@ -118,6 +118,13 @@ export function selectWorldPack(pack: WorldPack): void {
   try { window.localStorage.setItem(`${PACK_CACHE_PREFIX}${engine.fingerprint}`, JSON.stringify(pack)); } catch { /* Session play remains available without storage. */ }
 }
 
+/** Makes a pack's engine available to engineForLife without changing the free-play world or its save slot. */
+export function registerWorldPack(pack: WorldPack): LifeEngine {
+  const engine = createEngine(pack);
+  engines.set(engine.fingerprint, engine);
+  return engine;
+}
+
 export function engineForLife(life: Pick<LifeState, "worldFingerprint">): LifeEngine {
   const known = engines.get(life.worldFingerprint);
   if (known) return known;

@@ -22,3 +22,11 @@ export const contentWorldRevisions = sqliteTable("content_world_revisions", {
   worldJson: text("world_json").notNull(),
   createdAt: text("created_at").notNull(),
 });
+
+/** Public, content-addressed evidence for minted ranked lives (keyed by the evidence SHA-256). */
+export const rankedEvidence = sqliteTable("ranked_evidence", {
+  hash: text("hash").primaryKey(),
+  evidenceJson: text("evidence_json").notNull(),
+  saveJson: text("save_json").notNull(),
+  createdAt: text("created_at").notNull(),
+});

@@ -1,0 +1,74 @@
+/* Skill river v2: container layout owns the nodes, SVG follows measured anchors. */
+.skill-wiki-dialog .dialog-content>.eyebrow,.skill-wiki-dialog .dialog-content>h2{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.detail-dialog.skill-wiki-dialog{max-height:calc(100dvh - 40px);width:min(1220px,calc(100% - 32px));max-width:1220px}
+.skill-tree.skill-river{--tree-ink:#493e2d;--tree-muted:#6e624d;--tree-sage:#536b48;--tree-line:#d8c8a0;font-family:"Be Vietnam Pro","Segoe UI",sans-serif;color:var(--tree-ink);font-size:14px}
+.skill-river .skill-tree-heading{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:20px;align-items:center;margin-bottom:16px}
+.skill-river .skill-tree-heading h3{font:400 32px/1.2 Georgia,serif;color:#493e2d;margin:4px 0 7px}
+.skill-river .skill-tree-heading p{font-size:14px;line-height:1.5;color:#6e624d;margin:0}
+.skill-river .skill-tree-eyebrow{font:11px Consolas,monospace;color:#76613e;letter-spacing:1.4px}
+.skill-river .skill-tree-tally{border-color:#d8c8a0}.skill-river .skill-tree-tally>span{font-size:12px;color:#6e624d}
+.skill-river .skill-wiki-link{min-height:44px;white-space:nowrap;font-size:12px;color:#344e36}
+.skill-river .skill-tree-toolbar{gap:16px;align-items:center}
+.skill-river .skill-tree-search{width:min(280px,100%)}.skill-river .skill-tree-search label{font-size:12px;color:#493e2d}
+.skill-river .skill-tree-search input{min-height:42px;border:1px solid #b39c68;border-radius:2px;background:#fffbed;font-size:14px;color:#493e2d}.skill-river .skill-tree-search input::placeholder{color:#73664e}
+.skill-river .skill-tree-legend{font-size:12px;line-height:1.5;color:#62573f;gap:10px 16px;padding:0}
+.skill-river .skill-tree-legend>span:before{width:10px;height:10px;border-radius:50%}
+.skill-river .skill-tree-legend>.is-locked:before{content:"×";font-size:11px;line-height:9px;text-align:center}.skill-river .skill-tree-legend>.is-learning:before{content:"•";line-height:8px;color:#fffbed;text-align:center}.skill-river .skill-tree-legend>.is-mastered:before{content:"★";font-size:9px;line-height:10px;text-align:center;color:#493e2d}
+.skill-river .skill-tree-map-note{font-size:13px;color:#62573f;margin:12px 0}.skill-river .skill-tree-map-note>span{display:inline;font-size:12px;color:#6e624d;margin-left:8px}
+.skill-river .skill-tree-layout{display:block}
+.skill-river .skill-tree-map-wrap{min-width:0;container-type:inline-size;border:1px solid #b39c68;border-radius:3px;background:#faf4e2;box-shadow:3px 3px 0 #d4c39a;overflow:visible}
+.skill-delta-branches{display:flex;gap:5px;align-items:center;padding:10px 12px;border-bottom:1px solid #d8c8a0;background:#f0e9d6;overflow-x:auto;scrollbar-width:thin;border-radius:3px 3px 0 0}
+.skill-delta-branches>button{display:flex;align-items:center;justify-content:center;flex:1 0 auto;min-height:40px;padding:7px 11px;border:1px solid transparent;background:transparent;color:#62573f;font-family:inherit;font-size:12px;font-weight:600;line-height:1.3;white-space:nowrap;border-radius:2px}
+.skill-delta-branches>button[aria-pressed=true]{color:#344e36;border-color:#b3bc93;background:#e3e9d0;box-shadow:0 2px 0 #c1c99f}
+.skill-delta-branches>button:hover{color:#344e36;border-color:#b39c68;background:#fffbed}
+.skill-river .skill-tree-scroll.skill-delta-viewport{overflow:visible;max-height:none;width:100%;outline-offset:-4px}
+.skill-river .skill-tree-board.skill-delta-board{min-width:0;width:100%;min-height:500px;padding:78px 18px 14px;position:relative;background-color:#faf4e2;background-image:radial-gradient(#c7b78745 .65px,transparent .65px);background-size:16px 16px;border-radius:0;box-sizing:border-box}
+.skill-delta-source{position:absolute;top:15px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 24px);background:#fffbed;padding:5px 12px;border:1px solid #d8c8a0;border-radius:24px;color:#49685c;font:italic 15px/1.2 Georgia,serif;z-index:1;text-align:center;box-shadow:0 2px 0 #d4c39a55}
+.skill-delta-source>span:first-child{font-size:24px;font-style:normal;color:#608b85;line-height:1}
+.skill-delta-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}
+.skill-delta-grid.is-filtered{grid-template-columns:minmax(0,1fr);max-width:440px;margin-inline:auto}
+.skill-delta-grid.is-filtered>.skill-delta-channel:not(.is-branch-active){display:none}
+.skill-delta-channel{min-width:0;text-align:center}
+.skill-delta-channel>header{display:grid;grid-template-columns:auto 1fr;gap:2px 7px;align-content:center;align-items:center;min-height:52px;width:max-content;max-width:100%;margin:0 auto 4px;padding:4px 7px;background:#faf4e2f5;position:relative;box-sizing:border-box;border-bottom:1px solid #d8c8a0}
+.skill-delta-channel>header h4{font:400 17px/1.25 Georgia,serif;letter-spacing:0;color:#493e2d;margin:0;overflow-wrap:anywhere}
+.delta-branch-number{font:10px Consolas,monospace;color:#806c47}
+.skill-delta-stage{display:flex;justify-content:center;align-items:start;gap:8px;row-gap:28px;flex-wrap:wrap;min-height:118px;padding-top:7px;box-sizing:border-box}
+.skill-delta-node-slot{display:flex;justify-content:center;flex:0 1 92px;min-width:0;height:108px}
+.skill-river .skill-tree-node{position:relative;z-index:2;display:grid;place-items:center;flex:0 0 72px;width:72px;height:72px;text-align:center;padding:0;border:1.5px solid #7c916c;border-radius:50%;background:#fffbed;color:#344e36;box-shadow:0 3px 0 #c8b78e;line-height:1.3;cursor:pointer;overflow:visible;transition:transform .12s,box-shadow .12s,opacity .12s}
+.skill-artwork{display:block;flex-shrink:0;width:72px;height:72px;pointer-events:none}
+.skill-river .skill-tree-node.is-locked{background:#f4edda;border:1.5px dashed #a49676;color:#6e624d;box-shadow:0 3px 0 #d8c8a0}
+.skill-river .skill-tree-node.is-locked>.skill-artwork{filter:saturate(.72);opacity:.88}
+.skill-river .skill-tree-node.is-learning{border:2px solid #536b48;background:#e3e9d0;color:#344e36}.skill-river .skill-tree-node.is-mastered{border:2px solid #a78343;background:#f0dfb7;color:#79512c}
+.skill-river .skill-tree-node:hover,.skill-river .skill-tree-node:focus-visible{transform:translateY(-2px);border:2px solid #344e36;background:#fffbed;box-shadow:0 4px 0 #c9b98d;color:#344e36}
+.skill-river .skill-tree-node.is-selected{border:2px solid #344e36;box-shadow:0 0 0 4px #e3e9d0,0 3px 0 #b39c68;padding:0}
+.skill-river .skill-tree-node.is-related{border-color:#536b48}.skill-river .skill-tree-node.is-unrelated{opacity:.42}.skill-river .skill-tree-node.is-unrelated:hover,.skill-river .skill-tree-node.is-unrelated:focus-visible{opacity:1}
+.skill-river .skill-node-name{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:max-content;max-width:98px;padding:2px 4px;background:#faf4e2f5;font-size:12px;line-height:1.3;color:#493e2d;font-weight:600;white-space:normal;overflow-wrap:anywhere;border-radius:3px;pointer-events:none}
+.skill-river .skill-node-progress{position:absolute;bottom:5px;left:20px;width:30px;height:3px;margin:0;border-radius:2px;background:#d8c8a0}.skill-river .skill-node-progress>span{background:#536b48}
+.skill-delta-status{position:absolute;display:grid;place-items:center;right:-3px;top:-3px;width:19px;height:19px;border:1px solid #829275;border-radius:50%;background:#fffbed;color:#344e36;font:700 14px/1 Consolas,monospace;box-shadow:0 1px 0 #d4c39a}
+.is-locked .skill-delta-status{border-color:#a49676;color:#72664f}.is-mastered .skill-delta-status{border-color:#8b633b;color:#79512c;background:#f0dfb7}
+.skill-river .skill-tree-node.is-search-muted{opacity:.3}.skill-river .skill-tree-node.is-search-match{border:2px solid #79512c;box-shadow:0 0 0 4px #e8c985,0 3px 0 #b39c68}
+.skill-river .skill-tree-node.is-search-muted:hover,.skill-river .skill-tree-node.is-search-muted:focus-visible,.skill-river .skill-tree-node.is-search-muted.is-selected{opacity:1}
+.skill-delta-water{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:visible}
+.skill-delta-water path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.delta-river-bank{stroke:#c2d0b6;stroke-width:15}.delta-river-stream{stroke:#85aba0;stroke-width:8}
+.delta-root-flow{opacity:.6}.delta-root-flow .delta-river-bank{stroke-width:13}.delta-root-flow .delta-river-stream{stroke-width:6}
+.delta-link.is-main .delta-river-bank{stroke:#d7d5bc}.delta-link.is-main .delta-river-stream{stroke:#afb69a;stroke-width:6}
+.delta-link.is-met .delta-river-bank{stroke:#afc2a0}.delta-link.is-met .delta-river-stream{stroke:#6d9480;stroke-width:8}
+.delta-link.is-active .delta-river-bank{stroke:#a4b790;stroke-width:17}.delta-link.is-active .delta-river-stream{stroke:#3d6b59;stroke-width:9}
+.skill-river-preview{position:absolute;z-index:10;max-height:265px;overflow:auto;padding:14px;background:#fffbed;border:1px solid #b39c68;border-top:3px solid #536b48;border-radius:3px;box-shadow:3px 4px 0 #c9b98d80;color:#493e2d;font-size:13px;line-height:1.6;box-sizing:border-box;cursor:default;text-align:left}
+.skill-preview-heading{display:flex;align-items:center;gap:8px}.skill-preview-heading>.skill-artwork{width:34px;height:34px}.skill-preview-heading>strong{min-width:0;font:400 20px/1.15 Georgia,serif;overflow-wrap:anywhere}.skill-preview-heading>span:last-child{margin-left:auto;font-size:11px;text-transform:capitalize;color:#62573f}
+.skill-river-preview>p{margin:9px 0;color:#62573f}.skill-preview-value{display:flex;justify-content:space-between;border-top:1px solid #d8c8a0;padding-top:8px;gap:12px;font-size:12px}.skill-preview-value strong{color:#344e36}.skill-river-preview>.skill-preview-requirement{font-size:12px;margin:4px 0}.skill-preview-hint{display:block;font-size:11px;color:#6e624d;margin-top:8px}
+.skill-river .skill-tree-detail[hidden]{display:none}
+.skill-river .skill-tree-detail{margin-top:20px;padding:22px;border:1px solid #b39c68;border-top:3px solid #536b48;background:#fffbed;border-radius:3px;box-shadow:3px 3px 0 #d4c39a}
+.skill-detail-close{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 0 14px;margin-bottom:15px;border:0;border-bottom:1px solid #d8c8a0;background:none;color:#344e36;font-family:inherit;font-size:12px;font-weight:600;min-height:44px;text-align:left}
+.skill-river .skill-detail-title h4{font:400 28px/1.2 Georgia,serif;color:#493e2d}.skill-river .skill-detail-description{font-size:14px;color:#62573f;max-width:65ch}.skill-river .skill-detail-branch,.skill-river .skill-detail-state,.skill-river .skill-detail-proficiency label{font-size:12px;color:#62573f}
+.skill-river .skill-detail-icon{width:48px;height:48px;border-radius:50%;background:#f0e9d6}.skill-river .skill-detail-icon>.skill-artwork{width:48px;height:48px}
+.skill-river .skill-detail-section h5{font-size:14px;color:#493e2d}.skill-river .skill-detail-small,.skill-river .skill-requirement,.skill-river .skill-requirement-numbers,.skill-river .skill-practice-name,.skill-river .skill-practice-reason,.skill-river .skill-career>p,.skill-river .skill-work-requirements{font-size:13px;color:#62573f}
+.skill-river .skill-requirement.met{color:#344e36}.skill-river .skill-practice,.skill-river .skill-work-action,.skill-river .skill-career{border-radius:2px;border-color:#d8c8a0;background:#faf4e2}
+.skill-river .skill-practice-button{min-height:44px;border-radius:2px;font-size:13px;background:#536b48;border-color:#344e36;color:#fffbed}.skill-river .skill-practice-button:disabled{background:#eee6d2;border-color:#b39c68;color:#6e624d}
+.skill-river .skill-practice-gains,.skill-river .skill-practice .choice-impact,.skill-river .skill-work-action>.choice-impact{font-size:12px;color:#62573f}.skill-river .skill-next-list>button{min-height:44px;border-radius:2px;font-size:13px}.skill-river .skill-next-list>button>span+span{font-size:12px}.skill-river .skill-career summary{min-height:44px;font-size:13px}.skill-river .skill-career summary>span+span{font-size:11px}
+.skill-river .skill-tree-footnote{font-size:12px;color:#6e624d}.skill-river .skill-other-practice{border-radius:2px;border-color:#d8c8a0}.skill-river .skill-other-practice>summary{min-height:44px;font-size:13px;color:#493e2d}
+.skill-river button:focus-visible,.skill-river input:focus-visible,.skill-river summary:focus-visible,.skill-river .skill-tree-scroll:focus-visible{outline:3px solid #344e36;outline-offset:4px}
+@container(max-width:860px){.skill-delta-grid{grid-template-columns:minmax(0,1fr);max-width:440px;margin-inline:auto}.skill-delta-grid>.skill-delta-channel:not(.is-branch-active){display:none}.skill-delta-branches>.delta-all-branches{display:none}.skill-delta-branches>.is-mobile-active{color:#344e36;border-color:#b3bc93;background:#e3e9d0}.skill-river .skill-tree-board.skill-delta-board{min-height:500px;padding-inline:20px}.skill-delta-channel>header{min-width:170px}.skill-delta-stage{gap:32px}}
+@media(max-width:600px){.skill-river .skill-tree-heading{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}.skill-river .skill-tree-heading>div:first-child{grid-column:1 / -1}.skill-river .skill-tree-heading>.skill-wiki-link{grid-row:2;justify-self:start}.skill-river .skill-tree-tally{grid-column:2;grid-row:2;padding-left:12px}.skill-river .skill-tree-heading h3{font-size:28px}.skill-river .skill-tree-heading p{font-size:13px}.skill-river .skill-tree-toolbar{display:block}.skill-river .skill-tree-search{width:100%}.skill-river .skill-tree-legend{margin-top:12px;font-size:12px}.skill-river .skill-tree-map-note>span{display:block;margin:3px 0 0}.skill-river .skill-tree-detail{padding:16px}.skill-river .skill-next-list>button{flex-wrap:wrap}.skill-delta-source{font-size:13px}.skill-delta-branches{padding:8px}.skill-delta-branches>button{min-height:44px;padding:8px 10px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.skill-river .skill-tree-node{transition:none}.skill-river .skill-tree-node:hover,.skill-river .skill-tree-node:focus-visible{transform:none}}

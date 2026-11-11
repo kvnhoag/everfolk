@@ -1,0 +1,106 @@
+{
+  "figures": [
+    {
+      "figure_id": "alexander",
+      "title": "Alexander, the conqueror",
+      "media": "/assets/figures/alexander.png",
+      "supply_cap": 5,
+      "action_ids": [
+        "alexander.levy",
+        "alexander.found"
+      ]
+    },
+    {
+      "figure_id": "aristotle",
+      "title": "Aristotle, the philosopher",
+      "media": "/assets/figures/aristotle.png",
+      "supply_cap": 5,
+      "action_ids": [
+        "aristotle.lyceum",
+        "aristotle.tutor-court"
+      ]
+    },
+    {
+      "figure_id": "euclid",
+      "title": "Euclid, the geometer",
+      "media": "/assets/figures/euclid.png",
+      "supply_cap": 5,
+      "action_ids": [
+        "euclid.school",
+        "euclid.museum"
+      ]
+    },
+    {
+      "figure_id": "cleomenes",
+      "title": "Cleomenes of Naucratis, the grain administrator",
+      "media": "/assets/figures/cleomenes.png",
+      "supply_cap": 5,
+      "action_ids": [
+        "cleomenes.corner-grain",
+        "cleomenes.granaries"
+      ]
+    }
+  ],
+  "npc_actions": [
+    {
+      "action_id": "letters.teach",
+      "career_group": "letters",
+      "category": "education"
+    },
+    {
+      "action_id": "letters.lend-books",
+      "career_group": "letters",
+      "category": "education"
+    },
+    {
+      "action_id": "military.mentor",
+      "career_group": "military",
+      "category": "war"
+    },
+    {
+      "action_id": "military.warn-levy",
+      "career_group": "military",
+      "category": "war"
+    },
+    {
+      "action_id": "commerce.credit",
+      "career_group": "commerce",
+      "category": "money"
+    },
+    {
+      "action_id": "commerce.hire",
+      "career_group": "commerce",
+      "category": "money"
+    },
+    {
+      "action_id": "craft.apprentice",
+      "career_group": "craft",
+      "category": "work"
+    },
+    {
+      "action_id": "craft.commission",
+      "career_group": "craft",
+      "category": "work"
+    },
+    {
+      "action_id": "sky.omen",
+      "career_group": "sky",
+      "category": "fate"
+    },
+    {
+      "action_id": "sky.warn-year",
+      "career_group": "sky",
+      "category": "fate"
+    },
+    {
+      "action_id": "performance.lift",
+      "career_group": "performance",
+      "category": "spirit"
+    },
+    {
+      "action_id": "performance.lend-hand",
+      "career_group": "performance",
+      "category": "spirit"
+    }
+  ]
+}

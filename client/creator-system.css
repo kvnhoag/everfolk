@@ -1,0 +1,84 @@
+/* Character-creator system applied over the storybook theme. Loaded after
+   storybook-theme.css and readable-type.css, so these rules settle the
+   cascade for the panels below. Tokens: creator-tokens.css. */
+
+/* 01 · Skill paths (dashboard and sidebar) */
+.compact-skills .compact-skill-branch h4,.life-info-sidebar .compact-skills .compact-skill-branch h4,.game-dashboard .dashboard-skills .compact-skill-branch h4{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--cr-ink);margin:0 0 9px}
+.compact-skills .compact-skill-path{gap:6px}
+.game-dashboard .compact-skills .compact-skill-node,.life-info-sidebar .compact-skills .compact-skill-node,.compact-skills .compact-skill-node{border:1px solid var(--cr-wood-1);background:var(--cr-paper);box-shadow:inset 0 0 0 2px var(--cr-paper),inset 0 0 0 3px var(--cr-linen-2),2px 2px 0 #d4c39a;color:var(--cr-ink);border-radius:0;padding:8px 9px}
+.compact-skills .compact-skill-node.is-locked{border-style:dashed;border-color:var(--cr-linen-0);background:var(--cr-linen-wash);box-shadow:none;color:#6e6450}
+.compact-skills .compact-skill-node.is-learning{border-color:var(--cr-faience-0);background:var(--cr-faience-wash);box-shadow:inset 0 0 0 2px var(--cr-faience-wash),inset 0 0 0 3px var(--cr-faience-2),2px 2px 0 #a9c7b5}
+.compact-skills .compact-skill-node.is-mastered{border-color:var(--cr-gold-0);background:var(--cr-gold-wash);box-shadow:inset 0 0 0 2px var(--cr-gold-wash),inset 0 0 0 3px var(--cr-gold-2),2px 2px 0 #d6b874}
+.compact-skills .compact-skill-node.is-highlighted{border:1px solid var(--cr-olive);background:var(--cr-olive-wash);box-shadow:inset 3px 0 var(--cr-olive),inset 0 0 0 1px var(--cr-olive-ring),2px 2px 0 #91a47555}
+.compact-skills .compact-skill-name strong{font-weight:700}
+.compact-skills .compact-skill-node meter{height:5px;border:1px solid var(--cr-linen-0);background:var(--cr-paper);border-radius:0}
+.compact-skills .compact-skill-node meter::-webkit-meter-bar{background:var(--cr-paper);height:3px;border-radius:0}
+.compact-skills .compact-skill-node meter::-webkit-meter-optimum-value{background:var(--cr-wood-1)}
+.compact-skills .compact-skill-node meter::-moz-meter-bar{background:var(--cr-wood-1)}
+.compact-skills .compact-skill-node.is-learning meter{border-color:var(--cr-faience-0)}
+.compact-skills .compact-skill-node.is-learning meter::-webkit-meter-optimum-value{background:var(--cr-faience-1)}
+.compact-skills .compact-skill-node.is-learning meter::-moz-meter-bar{background:var(--cr-faience-1)}
+.compact-skills .compact-skill-node.is-mastered meter{border-color:var(--cr-gold-0)}
+.compact-skills .compact-skill-node.is-mastered meter::-webkit-meter-optimum-value{background:var(--cr-gold-1)}
+.compact-skills .compact-skill-node.is-mastered meter::-moz-meter-bar{background:var(--cr-gold-1)}
+.compact-skills .compact-skill-state{color:var(--cr-wood-0)}
+.compact-skills .compact-skill-state>span:first-child{display:inline-flex;align-items:center;gap:4px;text-transform:capitalize;font-weight:600}
+.compact-skills .is-locked .compact-skill-state{color:#6e6450}
+.compact-skills .is-learning .compact-skill-state{color:var(--cr-faience-0)}
+.compact-skills .is-mastered .compact-skill-state{color:var(--cr-gold-0)}
+.compact-skills .compact-branch-selector select,.life-info-sidebar .compact-branch-selector select{border:1px solid var(--cr-edge);background:#fffdf4;border-radius:0}
+.compact-skills .compact-branch-selector select:focus-visible,.compact-skills button:focus-visible{outline:3px solid #648473;outline-offset:3px}
+
+/* "Shaped by …": faience for people of the city, gold for famous figures. */
+.life-event-feed .life-event-row.is-faience,.life-timeline li.journal-row.is-faience{border-color:var(--cr-faience-0);box-shadow:inset 3px 0 var(--cr-faience-1),2px 2px 0 #a9c7b5}
+.life-event-feed .life-event-row.is-gold,.life-timeline li.journal-row.is-gold{border-color:var(--cr-gold-0);box-shadow:inset 3px 0 var(--cr-gold-1),2px 2px 0 #d6b874}
+.influence-marker{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin:0 0 6px!important;font-size:10px!important;line-height:1.4!important}
+.influence-marker-glyph{width:11px;height:11px;flex-shrink:0;fill:currentColor}
+.influence-marker-who{display:inline-flex;align-items:center;min-height:20px;padding:1px 7px;border:1px solid;font-weight:600;letter-spacing:.2px}
+.influence-marker-who strong{margin-left:4px;font-weight:700}
+.influence-marker-action{font-weight:600;overflow-wrap:anywhere}
+.influence-marker.is-faience{color:var(--cr-faience-0)}
+.influence-marker.is-faience .influence-marker-who{background:var(--cr-faience-wash);border-color:var(--cr-faience-0);box-shadow:inset 0 0 0 1px var(--cr-faience-2)}
+.influence-marker.is-gold{color:var(--cr-gold-0)}
+.influence-marker.is-gold .influence-marker-who{background:var(--cr-gold-wash);border-color:var(--cr-gold-0);box-shadow:inset 0 0 0 1px var(--cr-gold-2)}
+
+/* 03 · Full chronicle: year sections as creator option-sections. */
+.life-timeline{gap:18px}
+.life-timeline .journal-year{border:1px solid var(--cr-edge);border-radius:0;background:var(--cr-paper);box-shadow:var(--cr-hard)}
+.life-timeline .journal-year-heading{background:#f5efda;border-bottom:1px solid var(--cr-line);padding:11px 16px}
+.life-timeline .journal-year-heading h3{color:var(--cr-ink);font-size:23px}
+.life-timeline .journal-year-heading>span{display:inline-grid;place-items:center;min-height:22px;padding:2px 8px;background:var(--cr-olive);color:var(--cr-paper);font:700 10px/1.2 var(--cr-mono);letter-spacing:.6px}
+.life-timeline ol.journal-year-entries{padding:12px 14px;gap:8px}
+.life-timeline li.journal-row{padding:10px 12px;border:1px solid var(--cr-line);background:#fffbee;box-shadow:var(--cr-hard)}
+.life-timeline li.journal-row:last-child{border-bottom:1px solid var(--cr-line)}
+.life-timeline li.journal-row.is-gold:last-child{border-bottom-color:var(--cr-gold-0)}
+.life-timeline li.journal-row.is-faience:last-child{border-bottom-color:var(--cr-faience-0)}
+.life-timeline .journal-point{width:7px;height:7px;margin-top:5px;background:var(--cr-olive);transform:rotate(45deg)}
+.life-timeline .journal-kind{color:var(--cr-olive-dark);font:700 9px/1.5 var(--cr-mono);letter-spacing:1px}
+.life-timeline .journal-copy>p{color:var(--cr-ink)}
+.life-timeline .journal-choice{background:var(--cr-linen-wash)}
+.life-timeline .journal-choice .journal-point{background:var(--cr-pottery-1)}
+.life-timeline .journal-choice .journal-kind,.life-timeline .journal-choice .journal-copy>p{color:var(--cr-pottery-0)}
+.life-timeline .journal-quiet-year{margin:12px 14px;padding:8px 11px;border:1px dashed var(--cr-line);color:var(--cr-muted);font-size:12px}
+
+/* 04 · Lifetime rail: decade stops as creator chips. */
+.life-year-rail{border:1px solid var(--cr-edge);background:var(--cr-paper);box-shadow:inset 0 0 0 3px var(--cr-paper),inset 0 0 0 4px var(--cr-line),var(--cr-hard)}
+.life-year-rail-heading>strong{color:var(--cr-ink)}
+.life-year-rail-heading>strong:before{color:var(--cr-gold-0)}
+.life-year-rail-track:before{background:var(--cr-linen-1);height:3px}
+.life-year-rail-progress{background:var(--cr-olive);height:3px}
+.life-year-rail .life-year-stop-mark{width:10px;height:10px;border:1px solid var(--cr-linen-0);background:var(--cr-paper);transform:none;margin-top:0}
+.life-year-rail .life-year-stop.is-lived .life-year-stop-mark{background:var(--cr-olive);border-color:var(--cr-olive-dark)}
+.life-year-rail .life-year-stop.is-current .life-year-stop-mark{background:var(--cr-gold-1);border-color:var(--cr-gold-0);box-shadow:0 0 0 2px var(--cr-paper),0 0 0 3px var(--cr-gold-0)}
+.life-year-rail .life-year-rail-present{background:var(--cr-olive-dark);border:1px solid var(--cr-paper);box-shadow:0 0 0 1px var(--cr-olive-dark)}
+.life-year-rail .life-year-stop-age,.life-year-rail .life-year-stop-year{color:var(--cr-muted)}
+.life-year-rail .life-year-stop.is-lived .life-year-stop-age{color:var(--cr-ink)}
+.life-year-rail .life-year-stop>button:not(:disabled):hover .life-year-stop-mark{box-shadow:0 0 0 2px var(--cr-paper),0 0 0 3px var(--cr-olive)}
+.life-year-rail .life-year-stop>button:focus-visible{outline:3px solid #648473;outline-offset:2px}
+@media(max-width:600px){
+  .life-timeline ol.journal-year-entries{padding:10px}
+  .life-timeline li.journal-row{padding:9px 10px;gap:9px}
+  .life-timeline .journal-year-heading{padding:10px 12px}
+  .life-timeline .journal-year-heading h3{font-size:20px}
+}
+@media(max-width:360px){.life-event-feed .life-event-year{grid-template-columns:minmax(0,1fr);row-gap:6px}.life-event-feed .life-event-year-heading{flex-direction:row;align-items:center}}

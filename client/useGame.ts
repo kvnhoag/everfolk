@@ -40,8 +40,22 @@ function initialSession(startFresh = false, startFreshFrom?: LifeState): { life:
 }
 
 /** Bridge React to one authoritative engine snapshot; UI pacing stays outside the core. */
-export function useGame({ isOverlayOpen = false, startFresh = false, startFreshFrom }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState } = {}) {
-  const [initial] = useState(() => initialSession(startFresh, startFreshFrom));
+/** A ranked life is played through its session: every new state is synced on chain before the player sees it. */
+export interface RankedPlay {
+  initial: LifeState;
+  sync(next: LifeState): Promise<LifeState>;
+  current(): LifeState;
+  onSynced?(life: LifeState): void;
+}
+
+export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay } = {}) {
+  const [syncing, setSyncing] = useState(false);
+  const isOverlayOpen = overlayFromApp || syncing;
+  const rankedRef = useRef(ranked);
+  rankedRef.current = ranked;
+  const [initial] = useState(() => ranked
+    ? { life: ranked.initial, notice: "", hasBegun: true, hasRevealedStats: true }
+    : initialSession(startFresh, startFreshFrom));
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
   const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
@@ -64,7 +78,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   const autoAllowedRef = useRef(false);
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [clockElapsedMs, setClockElapsedMs] = useState(0);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>("saving");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
   const yearDurationMs = YEAR_DURATION_MS / speed;
@@ -116,6 +130,27 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   }, [commitPauseState]);
 
   const commit = useCallback((next: LifeState, fresh = false) => {
+    const rankedPlay = rankedRef.current;
+    if (rankedPlay && !fresh) {
+      // Pause commands and the clock while key decisions draw and checkpoints post on chain.
+      lifeRef.current = next;
+      setSaveStatus("saving");
+      setSyncing(true);
+      void rankedPlay.sync(next).then(adopted => {
+        lifeRef.current = adopted;
+        setLife(adopted);
+        setSaveStatus("saved");
+        rankedPlay.onSynced?.(adopted);
+        if (adopted.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: hasBegunRef.current, phase: adopted.phase }));
+      }, error => {
+        const current = rankedPlay.current();
+        lifeRef.current = current;
+        setLife(current);
+        setSaveStatus("unavailable");
+        setNotice(message(error));
+      }).finally(() => setSyncing(false));
+      return;
+    }
     if (fresh || next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
       setFocusSelection({ key: yearlyFocusStorageKey(next), id: fresh ? "everyday" : savedFocus(next) });
     }
@@ -201,6 +236,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   }, [hasRevealedStats, life, setPlaying]);
 
   const restart = useCallback(() => {
+    if (rankedRef.current) return; // A ranked life ends by minting or closing it, never by rerolling.
     setPlaying(false);
     setAutoDecisions(false);
     hasBegunRef.current = false;
@@ -244,6 +280,7 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   }, []);
 
   useEffect(() => {
+    if (rankedRef.current) return; // The ranked session keeps its own save; never overwrite the free-play slot.
     try {
       persistLife(window.localStorage, life);
       persistBirthPresentation(window.localStorage, life, hasBegun);
@@ -263,7 +300,8 @@ export function useGame({ isOverlayOpen = false, startFresh = false, startFreshF
   }, [hasRevealedStats, life]);
 
   useEffect(() => {
-    if (life.phase !== "ended") return;
+    // Ranked lives are kept on chain and by their session; the past-lives shelf is for free play.
+    if (life.phase !== "ended" || rankedRef.current) return;
     try { setArchivedLives(archiveLife(window.localStorage, life)); }
     catch (error) { setNotice(message(error)); }
   }, [life]);

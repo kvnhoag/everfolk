@@ -3,6 +3,7 @@ import { formatYear } from "../src/index.ts";
 import type { LifeState, JournalEntry, WorldPack } from "../src/types.ts";
 import type { WorldRoute } from "../server/content.ts";
 import type { EventVisuals } from "./scene-model.ts";
+import type { RankedPlay } from "./useGame.ts";
 import type { ArchivedLife } from "./session.ts";
 import { engineForLife, exportLife, loadAnyLife, sampleEngine } from "./session.ts";
 import { useGame } from "./useGame.ts";
@@ -13,6 +14,8 @@ import PauseScreen from "./PauseScreen.tsx";
 import MainMenu from "./MainMenu.tsx";
 import DecisionDialog from "./DecisionDialog.tsx";
 import LifeEventFeed from "./LifeEventFeed.tsx";
+import InfluenceMarkerTag from "./InfluenceMarkerTag.tsx";
+import { influenceMarker } from "./influence-marker.ts";
 import LifeOverview from "./LifeOverview.tsx";
 import LifeMoment from "./LifeMoment.tsx";
 import LifeYearRail from "./LifeYearRail.tsx";
@@ -52,6 +55,8 @@ import "./pixel-theme.css";
 import "./everfolk-ui.css";
 import "./storybook-theme.css";
 import "./readable-type.css";
+import "./creator-tokens.css";
+import "./creator-system.css";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -94,6 +99,7 @@ function journalKind(entry: JournalEntry, world = sampleEngine.world): string {
   if (entry.type === "outcome") return "Outcome";
   if (entry.type === "activity") return "Activity";
   if (entry.type === "birth") return "Background";
+  if (entry.type === "influence") return "Influence";
   if (entry.type === "ending") return world.endings.find(ending => ending.id === entry.id)?.kind === "chapter" ? "Record complete" : "Life ended";
   const event = world.events.find(item => item.id === entry.id);
   if (event?.rarity === "rare") return "Rare encounter";
@@ -124,17 +130,20 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
     {years.map(group => <section className="journal-year" key={group.age} aria-label={`${formatYear(group.year)}, age ${group.age}`}>
       <header className="journal-year-heading"><h3>{formatYear(group.year)}</h3><span>{group.age === 0 ? "Birth year" : `Age ${group.age}`}</span></header>
       {group.entries.length > 0 ? <ol className="journal-year-entries">
-        {group.entries.map((entry, index) => <li className={`journal-row journal-${entry.type}`} key={`${entry.type}-${entry.id}-${index}`}>
-          <span className="journal-point" aria-hidden="true" /><div className="journal-copy"><span className="journal-kind">{journalKind(entry, world)}</span><p>{displayProse(entry.text)}</p>
+        {group.entries.map((entry, index) => {
+          const marker = influenceMarker(entry, world);
+          return <li className={`journal-row journal-${entry.type}${marker ? ` is-shaped is-${marker.material}` : ""}`} key={`${entry.type}-${entry.id}-${index}`}>
+          <span className="journal-point" aria-hidden="true" /><div className="journal-copy"><span className="journal-kind">{journalKind(entry, world)}</span>{marker && <InfluenceMarkerTag marker={marker} />}<p>{displayProse(entry.text)}</p>
             {journalSourceIds(entry, world).length > 0 && <details className="journal-sources"><summary>Sources</summary><SourceLinks ids={journalSourceIds(entry, world)} world={world} /></details>}
           </div>
-        </li>)}
+        </li>;
+        })}
       </ol> : <p className="journal-quiet-year">This year passed without a recorded event.</p>}
     </section>)}
   </div>;
 }
 
-function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals }) {
+function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay }) {
   const [panel, setPanel] = useState<"world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null>(null);
   const [characterSection, setCharacterSection] = useState<"career" | "wealth" | "children" | "skills">("career");
   const [restartOpen, setRestartOpen] = useState(false);
@@ -145,7 +154,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [loanRequest, setLoanRequest] = useState<LoanRequest | null>(null);
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const loanWarningsSeen = useRef(new Set<string>());
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom });
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
   const { life } = game;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
@@ -473,7 +482,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
             </div>)}
           </div>}
           <button className="secondary-button character-open" disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character <Icon name="arrow" size={16} /></button>
-          <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>
+          {!ranked && <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>}
         </aside>
         </div>
 
@@ -503,7 +512,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
               <div className="choice-list">
                   <div className="memorial-summary"><span className="eyebrow">{characterName.toLocaleUpperCase()} OF ALEXANDRIA</span>{deathCause && <p className="memorial-cause"><span>CAUSE OF DEATH</span><strong>{deathCause.title}</strong></p>}{life.deathCauseContext && <p className="death-context"><strong>{life.deathCauseKind === "condition" ? "Health history" : "What led to it"}</strong>{displayProse(life.deathCauseContext)}</p>}<p className="memorial-dates">{formatYear(world.startYear)} <span>—</span> {formatYear(life.year)}</p><strong>{yearsLived(life.age)}</strong>{!deathCause && <p>{ending?.kind === "chapter" ? displayProse(ending.text) : life.age === 0 ? "You died before your first birthday." : life.age < 18 ? "You died before reaching adulthood." : life.flags.parent ? "Your children and household are listed in the character record." : "Read the chronicle to review this life."}</p>}</div>
                   <button className="primary-button" onClick={openChronicle}>Read your life’s chronicle <Icon name="book" size={19} /></button>
-                  <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>
+                  {!ranked && <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>}
                   <SourceLinks ids={ending?.sourceIds} />
               </div>
             </section>}
@@ -515,7 +524,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         <HouseholdSummary life={life} world={world} onOpenCharacter={() => { setCharacterSection("children"); setPanel("character"); }} />
         <div className="life-support-records">
           <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>
-          <details className="chronicle-preview compact-life-record"><summary><span>Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="chronicle-heading"><h2 id="life-timeline-title">Life record</h2><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><p className="chronicle-description">Newest first</p><LifeEventFeed life={life} world={world} /></details>
+          <details className="chronicle-preview compact-life-record"><summary><span>Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><header className="life-record-heading"><div className="chronicle-heading"><h2 id="life-timeline-title"><Icon name="feather" size={20} />Life record</h2><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><p className="chronicle-description">Newest first</p></header><LifeEventFeed life={life} world={world} /></details>
         </div>
       </aside>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}

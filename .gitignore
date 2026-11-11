@@ -22,3 +22,6 @@ next-env.d.ts
 /assets/source/worlds/README.md
 /artwork/life-banners/README.md
 /public/assets/pixel/README.md
+
+# NEAR contract build output
+contract/target/

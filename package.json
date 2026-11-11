@@ -15,14 +15,21 @@
     "build": "tsc --noEmit && node scripts/run-framework.mjs build",
     "preview": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "content": "node scripts/build-alexandria-world.mjs",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "ranked:world": "node scripts/ranked/build-ranked-world.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "next": "16.3.4",
-    "drizzle-orm": "0.45.2"
+    "drizzle-orm": "0.45.2",
+    "@near-wallet-selector/core": "10.1.4",
+    "@near-wallet-selector/meteor-wallet": "10.1.4",
+    "@near-wallet-selector/modal-ui": "10.1.4",
+    "@near-wallet-selector/my-near-wallet": "10.1.4",
+    "buffer": "6.0.3",
+    "near-api-js": "7.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",

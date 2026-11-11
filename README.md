@@ -23,6 +23,32 @@ Begin a life near Rhakotis in 350 BCE and experience the world around the emergi
 
 The engine uses a recorded seed and accepted commands for deterministic replay. Existing saves retain their exact world revisions.
 
+## Ranked lives on NEAR
+
+**Guides:** [project report](guide/REPORT.md) · [how to play](guide/TUTORIAL.md) · [a real life that became Euclid](guide/EXAMPLE_LIFE.md)
+
+Ordinary play stays offline. A **ranked life** adds NEAR in four places, each one necessary to the game rather than decoration:
+
+1. **A birth nobody can choose.** `start_life` assigns the life's seed from NEAR block randomness and records which famous figures shape that world. The engine is deterministic, so the seed plus the player's choices *is* the life.
+2. **Other players' lives reach into yours.** At key decisions (study, work, war, money, risk, family) the contract draws a living NPC token, weighted by its Affection. Its owner's chosen action, scaled by its Rarity, becomes part of your life. Figure tokens (Alexander, Aristotle, Euclid, Cleomenes) act from birth.
+3. **A life is proven before it is minted.** The verifier replays the save from the on-chain seed, checks it against every draw and against checkpoints posted every five game years (so a life can't be rewound), and signs the evidence. `mint_life` checks the Ed25519 signature on chain, then randomness decides whether the life becomes a famous figure (about 5% when the life met that figure's requirements, five copies each) or an NPC of its own.
+4. **Influence pays.** Every token whose action fired in your life is a *source* of your NFT. Half the mint fee and 5% of every resale go to sources in proportion to how much each changed your life, paid to whoever owns them now.
+
+| | |
+|---|---|
+| Contract (testnet) | [`everfolk-lives-11101338.testnet`](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) — 5% figure drop, the real rules |
+| Demo contract (testnet) | [`demo.genesis-1794297139-6.testnet`](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) — used only to record the video: 100% figure drop, every key decision draws someone, no wait after closing a life |
+| Standards | NEP-171, 177, 178, 181, and NEP-199 payouts that include sources |
+| Contract code and tests | [`contract/`](contract/README.md) (Rust, `cargo test`) |
+| Verifier | [`server/ranked/`](server/ranked) — `POST /api/ranked/verify`, exact signed evidence at `/api/ranked/evidence/<sha256>` and replay saves at that URL plus `/save` |
+| Shared rules | [`chain/`](chain) — ids, wire types, impact and save validation used by both the verifier and the game |
+
+**Honest limits.** Randomness is NEAR block randomness (validator VRF), fine for testnet. Between checkpoints a player could simulate ahead offline, but draws come from future blocks. The verifier is a server key today; it sits behind a `LifeVerifier` interface so a TEE verifier can replace it. External marketplaces pay sources up to their `max_len_payout`; the in-game market pays every source. The demo video uses the separate demo contract above so a figure mint can be shown; the main contract keeps the 5% drop. Figure requirements are calibrated by simulation: a player who deliberately follows a figure's path qualifies in about 20–30% of lives (Alexander also needs a royal birth, 1 in 100), an unfocused life almost never does (`test/chain-figure-calibration.test.ts`).
+
+Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_SECRET=<64 hex>`); the contract id and RPC are set in `vite.config.ts`. Testnet tools live in [`scripts/ranked/`](scripts/ranked): deploy, smoke run and genesis seeding.
+
+Without a configured verifier, choose **Practice ranked life** to try the same screens and simulation using a browser-only ledger. It sends no transactions to NEAR. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above.
+
 ## Development
 
 ```sh

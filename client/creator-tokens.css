@@ -1,0 +1,37 @@
+/* Visual tokens from artwork/history-live/character-creator (styles.css and
+   ART_DIRECTION.md), shared by the Everfolk screens that adopt its system:
+   ivory paper, brown lines, olive selection, numbered chips, double borders
+   with hard shadows and finite material ramps. Decisions that differ from
+   the creator are recorded in artwork/history-live/EVERFOLK_INTEGRATION.md. */
+:root{
+  --cr-page:#f0e9d6;
+  --cr-paper:#fffbed;
+  --cr-panel:#faf4e2;
+  --cr-ink:#493e2d;
+  --cr-muted:#6f6550;
+  --cr-line:#d8c8a0;
+  --cr-edge:#b39c68;
+  --cr-outline:#29252a;
+  --cr-shade:#493d34;
+  --cr-olive:#536b48;
+  --cr-olive-dark:#344e36;
+  --cr-olive-wash:#e3e9d0;
+  --cr-olive-ring:#b6c4a1;
+  /* Material ramps: dark, mid, light. */
+  --cr-linen-0:#958467;--cr-linen-1:#d8c8a0;--cr-linen-2:#f4e8c6;
+  --cr-faience-0:#38665e;--cr-faience-1:#6caaa0;--cr-faience-2:#b0d3bb;
+  --cr-gold-0:#8b5d35;--cr-gold-1:#d6aa52;--cr-gold-2:#f1d889;
+  --cr-pottery-0:#80463d;--cr-pottery-1:#b3694c;--cr-pottery-2:#d99166;
+  --cr-wood-0:#493d34;--cr-wood-1:#9b7852;--cr-wood-2:#c7a66c;
+  /* Washes keep long text on paper-light backgrounds. */
+  --cr-faience-wash:#e9f2ea;
+  --cr-gold-wash:#fbf1d3;
+  --cr-linen-wash:#f3ecd8;
+  --cr-double:0 0 0 4px #e0d4b5,0 0 0 5px #c4b183,4px 5px 0 4px #bcaa8030;
+  --cr-hard:2px 2px 0 #d4c39a;
+  --cr-mono:"Courier New",Consolas,monospace;
+}
+/* The creator's numbered group chip ("01"). Darker olive than the creator's
+   #81916d so 9px numerals keep at least 4.5:1 contrast. */
+.cr-index{display:inline-grid;place-items:center;flex-shrink:0;height:20px;min-width:23px;padding:0 4px;background:var(--cr-olive);color:var(--cr-paper);font:700 9px/1 var(--cr-mono);letter-spacing:1px;font-variant-numeric:tabular-nums}
+.cr-state-icon{display:inline-block;flex-shrink:0;width:9px;height:9px}

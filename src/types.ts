@@ -443,6 +443,24 @@ export interface LegacyRouteProgress extends LegacyRouteDefinition {
   next?: LegacyAchievementDefinition;
 }
 
+/** The NFT that issued an influence command. Opaque to the engine. */
+export interface InfluenceSource { contractId: string; tokenId: string }
+
+/** Authored catalog entry an `influence` command may name. */
+export interface InfluenceEntry {
+  id: string;
+  label: string;
+  /** Impact weight: small stat effect 1, large stat effect 3, forced decision event 5. */
+  baseWeight: 1 | 3 | 5;
+  /** apply: numeric deltas scaled by power, applied immediately. */
+  effects?: Effect[];
+  /** apply: queued as the next pending decision; activate: joins this life's event pool. */
+  event?: LifeEvent;
+}
+
+/** An activated influence, or an applied one whose event still awaits its turn. */
+export interface InfluenceRecord { entry: string; source: InfluenceSource; power: number }
+
 export interface WorldPack {
   schemaVersion: 1;
   id: string;
@@ -472,19 +490,28 @@ export interface WorldPack {
   legacy?: { routes: LegacyRouteDefinition[]; achievements: LegacyAchievementDefinition[] };
   sources?: HistoricalSource[];
   events: LifeEvent[];
+  /** Optional catalog for `influence` commands; omitted packs have no influences. */
+  influences?: InfluenceEntry[];
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
 }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number };
+/** Issued by a ranked life's NFT sources; free play never contains one. */
+export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
+
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number } | InfluenceCommand;
 
 export interface JournalEntry {
-  type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity";
+  type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity" | "influence";
   age: number;
   year: number;
   id: string;
   text: string;
+  /** Only on an influence entry, or on the event entry of a fired influence event. */
+  source?: InfluenceSource;
+  /** Only on influence entries: nonzero applied changes keyed by stat id, `skill:<id>`, `economy:cash` or `economy:debt`. */
+  deltas?: Record<string, number>;
 }
 
 export interface LifeState {
@@ -516,6 +543,10 @@ export interface LifeState {
   knowledge?: KnowledgeState;
   /** Omitted entirely for earlier packs, preserving their exact snapshots. */
   accomplishments?: AccomplishmentRecord[];
+  /** Omitted until the first activation; activated entries' events join the pool. */
+  activeInfluences?: InfluenceRecord[];
+  /** Applied influence events waiting for the current decision to resolve. */
+  queuedInfluences?: InfluenceRecord[];
   journal: JournalEntry[];
   commands: Command[];
 }
@@ -540,6 +571,7 @@ export interface LifeEngine {
   getActivities(state: LifeState): readonly ActivityAvailability[];
   act(state: LifeState, activityId: string): LifeState;
   chooseAvatar(state: LifeState, variant: number): LifeState;
+  influence(state: LifeState, command: InfluenceCommand): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

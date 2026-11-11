@@ -1,0 +1,27 @@
+.life-report-rows{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.life-report-rows>li{padding:12px 14px;background:#fbf5e4;border:1px solid #cdbb95;min-width:0}
+.life-report-rows p{margin:6px 0 10px!important;font-size:12px!important}
+.life-report-who{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.life-report-who>a{font-size:14px;font-weight:700;color:#263b43;overflow-wrap:anywhere;margin-right:4px}
+.life-report-who>a:hover{color:#a85e44}
+.life-report-share{display:flex;align-items:center;gap:10px}
+.life-report-share>strong{min-width:58px;text-align:right;font-variant-numeric:tabular-nums;font-size:14px}
+.life-report-bar{flex:1;display:block;height:10px;background:#efe0bb;border:1px solid #baa47a}
+.life-report-bar>span{display:block;height:100%;background:#41637b}
+.life-report-actions{border:0;margin:14px 0 0;padding:0;display:grid;gap:8px;min-width:0}
+.life-report-actions legend{font-size:12px;font-weight:700;margin-bottom:8px;padding:0}
+.life-report-actions label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid #d9c79e;background:#fbf5e4;cursor:pointer}
+.life-report-actions label.is-selected{border-color:#41637b;background:#eef0e2}
+.life-report-actions input{margin:3px 0 0;accent-color:#41637b}
+.life-report-actions label>span{display:grid;gap:3px;min-width:0}
+.life-report-actions strong{font-size:13px}
+.life-report-actions small{font-size:11px;line-height:1.55;color:#5d6150}
+.life-report-actions .chain-fine{margin:4px 0 0!important}
+a.chain-primary,a.chain-secondary{text-decoration:none}
+.mint-reveal{text-align:left}
+.mint-reveal.is-figure{border-color:#a85e44;box-shadow:6px 6px 0 #a85e4440}
+.mint-reveal-tags{display:flex;gap:8px;margin:0 0 12px}
+.mint-reveal-affection{display:flex;align-items:center;gap:12px;font-size:13px;margin:4px 0 6px}
+.mint-reveal-affection>span:first-child{white-space:nowrap;font-weight:700}
+.mint-reveal-affection .life-report-bar>span{background:#a85e44}
+@media(max-width:420px){.life-report-share>strong{min-width:50px;font-size:13px}.mint-reveal-affection{flex-wrap:wrap}.mint-reveal-affection .life-report-bar{flex-basis:100%}}

@@ -4,13 +4,30 @@ import { useEffect, useRef, useState } from "react";
 import App from "./App";
 import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
 import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
-import { engineForLife, hasLifeBegun, readSavedLife, selectWorldPack } from "./session.ts";
+import { engineForLife, hasLifeBegun, readSavedLife, registerWorldPack, selectWorldPack } from "./session.ts";
 import type { LifeState } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
 import { selectFactoryWorld } from "./factory-world-selection.ts";
 import { readEverfolkStorage } from "./brand-storage.ts";
 import LoadingScreen from "./LoadingScreen.tsx";
 import type { LoadingPhase } from "./LoadingScreen.tsx";
+import { keepFreePlayOnRankedStart } from "./ranked-return.ts";
+import ChainLayer from "./chain/ChainLayer.tsx";
+import type { ChainBackend } from "./chain/chain-backend.ts";
+import { loadRankedConfig } from "./chain/chain-backend.ts";
+import { beginRankedSession, type RankedSession } from "./chain/ranked-session.ts";
+import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
+import type { LifeView } from "../chain/types.ts";
+import type { WorldPack } from "../src/types.ts";
+
+
+/** Loads the ranked world only when a ranked life begins; it is large and free play never needs it. */
+async function loadRankedWorld(): Promise<WorldPack> {
+  const module = await import("../worlds/ranked/alexandria-ranked-1.json");
+  const pack = (module.default ?? module) as unknown as WorldPack;
+  registerWorldPack(pack);
+  return pack;
+}
 
 const SELECTION_KEY = "everfolk:selected-world:v1";
 
@@ -33,6 +50,21 @@ export default function GameClient() {
   const [error, setError] = useState("");
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("opening");
   const dialog = useRef<HTMLDialogElement>(null);
+  // A ranked life replaces free play until its ending report is closed; free play's save is untouched meanwhile.
+  const [rankedSession, setRankedSession] = useState<RankedSession | null>(null);
+  const [, setRankedRevision] = useState(0);
+
+  async function beginRanked(life: LifeView, backend: ChainBackend) {
+    const config = backend.mode === "live" ? await loadRankedConfig() : null;
+    const world = await loadRankedWorld();
+    const session = await beginRankedSession({
+      contract: backend.contract, contractId: config?.contract_id ?? PRACTICE_CONTRACT_ID,
+      verifyUrl: "/api/ranked/verify", world,
+      ...(backend.mode === "preview" ? { verifyLocally: practiceVerifier(world, backend.contract) } : {}),
+    }, life);
+    setActive(keepFreePlayOnRankedStart);
+    setRankedSession(session);
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -135,7 +167,12 @@ export default function GameClient() {
 
   if (!active) return <LoadingScreen phase={loadingPhase} />;
   return <>
-    <App key={active.key} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />
+    {rankedSession
+      ? <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy} ranked={{
+        initial: rankedSession.state, current: () => rankedSession.state,
+        sync: next => rankedSession.sync(next), onSynced: () => setRankedRevision(value => value + 1),
+      }} />
+      : <App key={active.key} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}
@@ -143,5 +180,6 @@ export default function GameClient() {
         <div className="world-library">{worlds.map(world => <article key={world.id}><span className="eyebrow">{world.id === active.world.id ? "YOUR CURRENT WORLD" : "A WORLD TO EXPLORE"}</span><h3>{world.title}</h3><p>{displayProse(world.description)}</p><div className="world-route-tags">{world.routes.filter(route => route.enabled).map(route => <span key={route.id}>{route.title}</span>)}</div><button className="primary-button" disabled={busy} onClick={() => { void enterWorld(world.id, false); }}>Enter this world →</button></article>)}</div>
       </div>
     </dialog>
+    <ChainLayer rankedSession={rankedSession} onBeginRanked={beginRanked} onRankedClosed={() => setRankedSession(null)} />
   </>;
 }
