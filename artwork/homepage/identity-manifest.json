@@ -1,17 +1,48 @@
 {
-  "id": "everfolk-classical-wordmark",
-  "role": "Homepage identity and reusable transparent brand artwork",
-  "source": "Original hand-authored SVG outlines and emblem geometry in this repository",
-  "sourceFiles": ["client/homepage/classical-lettering.ts", "client/homepage/ClassicalWordmark.tsx"],
+  "id": "everfolk-royal-pixel-insignia",
+  "role": "Homepage title identity; symbolic historical emblem",
+  "sourceFiles": [
+    "client/homepage/royal-pixel-art.ts",
+    "client/homepage/RoyalPixelWordmark.tsx"
+  ],
   "export": "public/assets/brand/everfolk-wordmark.svg",
   "regenerate": "node scripts/export-homepage-wordmark.mjs",
-  "nativeViewBox": [0, 0, 812, 220],
-  "transparency": true,
-  "filtering": "Browser vector rasterization; the coastal Canvas retains nearest-neighbor sampling",
-  "palette": {"highlight": "#fff0c5", "gold": "#eac886", "antiqueGold": "#bb8c48", "bronze": "#654526", "shadow": "#17272d"},
-  "animation": "Scoped GSAP entrance, clipped reflection, occasional glints and restrained rays; static export",
-  "reducedMotion": "Complete static artwork with no reflection or glints",
-  "collision": "None; decorative non-interactive identity",
-  "rights": "Original Everfolk artwork; follows the repository's ownership and license terms. No third-party logo geometry included.",
-  "status": "Implemented and visually validated in the application"
+  "nativeViewBox": [
+    0,
+    0,
+    278,
+    84
+  ],
+  "letterCapHeight": 31,
+  "letterCells": 2220,
+  "paletteSize": 12,
+  "patinaCells": 62,
+  "filtering": "Integer SVG square cells with crispEdges; nearest-neighbor image sampling",
+  "alpha": true,
+  "animation": "Sixteen interleaved pixel assembly cohorts; slow reflection; stone-light variation; tiny dust and glints",
+  "reducedMotion": "Complete static insignia; no assembly, reflection or dust",
+  "portrait": {
+    "file": "public/assets/brand/alexander-royal-pixel.png",
+    "source": "Built-in image_gen generation, not a downloaded museum photograph",
+    "sourcePixels": [
+      1122,
+      1402
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "frames": 1,
+    "renderBox": [
+      211,
+      1,
+      65,
+      82
+    ],
+    "role": "Symbolic title bust, outside the dated village simulation",
+    "prompt": "artwork/homepage/ALEXANDER_PROMPT.md"
+  },
+  "rights": "Original Everfolk glyph matrices and ornaments; generated sculpture. No third-party logo geometry or museum image reproduced.",
+  "status": "Implemented and visually validated in the running application"
 }

@@ -7,7 +7,7 @@ import LivingCoast, { useCoastMotion } from "./homepage/LivingCoast.tsx";
 import "./homepage/homepage.css";
 import "./homepage/luminous.css";
 import "./homepage/wordmark.css";
-import ClassicalWordmark from "./homepage/ClassicalWordmark.tsx";
+import RoyalPixelWordmark from "./homepage/RoyalPixelWordmark.tsx";
 import { useLuminousLight } from "./homepage/useLuminousLight.ts";
 
 export interface MainMenuProps {
@@ -57,7 +57,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
       <div className="ef-home-body">
         <section className="ef-home-content">
           <p className="ef-home-eyebrow"><span aria-hidden="true">✦</span>A LIFE SIMULATOR</p>
-          <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><ClassicalWordmark />{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
+          <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><RoyalPixelWordmark />{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
           <p className="ef-home-tagline">Live another story.</p>
           <div className="ef-home-rule" aria-hidden="true"><span />◆<span /></div>
           <p className="ef-home-intro">Before Alexandria, there was Rhakotis.<br />A world of ordinary lives.<br /><em>One of them is yours.</em></p>

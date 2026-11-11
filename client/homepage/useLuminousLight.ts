@@ -13,15 +13,17 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
       const context = gsap.context(() => {
         media.add('(prefers-reduced-motion: no-preference)', () => {
           const animations: gsap.core.Animation[] = [];
-          // Reveal the complete inscription as one artifact, then light its engraved facets.
+          // Scatter-cohort assembly illuminates pixels across every letter at once.
           const entrance=gsap.timeline({defaults:{ease:'power2.out'}});
-          entrance.fromTo('.ef-logo-carving',{opacity:.4,y:5},{opacity:1,y:0,duration:2.2},0)
-            .fromTo('.ef-logo-emblem',{opacity:.55,y:-2},{opacity:1,y:0,duration:2.5},.15);
+          entrance.fromTo('.ef-royal-pixel-batch',{opacity:0,y:index=>index%2?1:-1},{opacity:1,y:0,duration:1.5,stagger:.055},0)
+            .fromTo('.ef-logo-emblem',{opacity:.55,y:-1},{opacity:1,y:0,duration:2.5},.15)
+            .fromTo('.ef-royal-sculpture',{opacity:.45},{opacity:1,duration:2.8},.2);
           animations.push(entrance);
           animations.push(gsap.fromTo('.ef-logo-reflection', { x: 0, opacity: 0 }, {
-            x: 1070, opacity: .45, duration: 9, delay: 2.5, ease: 'sine.inOut', repeat: -1, repeatDelay: 13,
+            x: 305, opacity: .42, duration: 9, delay: 2.5, ease: 'sine.inOut', repeat: -1, repeatDelay: 13,
           }));
-          animations.push(gsap.to('.ef-logo-rays',{opacity:.075,duration:11,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+          animations.push(gsap.to('.ef-royal-sculpture',{'--stone-light':1.08,duration:9,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+          animations.push(gsap.fromTo('.ef-royal-dust',{y:2,opacity:0},{y:-3,opacity:.5,duration:8,repeat:-1,yoyo:true,ease:'sine.inOut'}));
           animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
             '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
           }));

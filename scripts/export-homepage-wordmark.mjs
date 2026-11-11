@@ -1,4 +1,4 @@
-// Export the same hand-authored vector composition used by the live homepage.
+// Export the live pixel insignia, embedding its transparent sculpture for portable reuse.
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { registerHooks } from 'node:module';
 import { readFileSync } from 'node:fs';
@@ -13,11 +13,12 @@ const hooks=registerHooks({load(url,context,next){
   }).outputText};
   return next(url,context);
 }});
-const {default:Wordmark}=await import('../client/homepage/ClassicalWordmark.tsx');
+const {default:Wordmark}=await import('../client/homepage/RoyalPixelWordmark.tsx');
 hooks.deregister();
 const target=new URL('../public/assets/brand/everfolk-wordmark.svg',import.meta.url);
 await mkdir(new URL('.',target),{recursive:true});
-const artwork=renderToStaticMarkup(createElement(Wordmark));
+const portrait=await readFile(new URL('../public/assets/brand/alexander-royal-pixel.png',import.meta.url));
+const artwork=renderToStaticMarkup(createElement(Wordmark,{sculptureHref:`data:image/png;base64,${portrait.toString('base64')}`}));
 const svg=artwork.replace('aria-hidden="true"','role="img" aria-label="Everfolk"');
 await writeFile(target,svg+'\n');
 console.log(`Exported ${Buffer.byteLength(await readFile(target))} bytes of original vector artwork.`);

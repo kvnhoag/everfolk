@@ -34,9 +34,9 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.match(html, /350 BCE/);
   assert.match(html, /Before Alexandria, there was Rhakotis/);
   assert.match(html, /<canvas/);
-  assert.match(html, /ef-classical-wordmark/);
+  assert.match(html, /ef-royal-wordmark/);
   assert.match(html, /THE ANCIENT WORLD/);
-  assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-pixel-wordmark/);
+  assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-classical-wordmark/);
   for (const label of ['Begin your life','Choose a world','Past lives','Legacy gallery','History &amp; sources','Ranked life']) assert.ok(html.includes(label),label);
   assert.doesNotMatch(html, /medieval-europe|ottoman-constantinople|A STORY IN PROGRESS/);
   assert.deepEqual(life,before,'opening the menu cannot advance, reroll or replace the life');

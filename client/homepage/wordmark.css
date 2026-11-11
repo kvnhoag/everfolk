@@ -1,12 +1,12 @@
-/* Custom outlined metal lettering contrasts deliberately with the pixel environment. */
+/* Original square-cell inscription. Its pixel plane stays separate from the coastal world. */
 .ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96;max-width:100%}
-.ef-classical-wordmark{display:inline-block;vertical-align:top;width:3.5em;max-width:100%;height:.98em;overflow:visible;filter:drop-shadow(0 4px 4px #101d2855)}
-.ef-logo-emblem{filter:drop-shadow(0 0 6px #edcf852b)}
+.ef-royal-wordmark{display:inline-block;vertical-align:top;width:3.5em;max-width:100%;height:.98em;overflow:visible;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #10293155)}
+.ef-logo-emblem{filter:drop-shadow(0 0 5px #e6c47c25)}
+.ef-royal-sculpture{--stone-light:1;filter:brightness(var(--stone-light)) drop-shadow(1px 2px 0 #10293166)}
 .ef-logo-reflection{mix-blend-mode:screen}
-.ef-home .ef-title-glint:nth-of-type(1){left:4%;top:43%}
-.ef-home .ef-title-glint:nth-of-type(2){left:64%;top:42%}
-.ef-home .ef-title-glint:nth-of-type(3){left:95%;top:87%}
-.ef-home[data-motion=paused] .ef-logo-reflection{opacity:0!important}
-@media(max-width:700px){.ef-classical-wordmark{filter:drop-shadow(0 3px 2px #101d2844)}}
-@media(prefers-reduced-motion:reduce){.ef-logo-reflection{display:none}.ef-logo-carving,.ef-logo-emblem{opacity:1!important;transform:none!important}}
-@media(forced-colors:active){.ef-classical-wordmark{filter:none;forced-color-adjust:none}}
+.ef-home .ef-title-glint:nth-of-type(1){left:4%;top:44%}
+.ef-home .ef-title-glint:nth-of-type(2){left:48%;top:44%}
+.ef-home .ef-title-glint:nth-of-type(3){left:69%;top:80%}
+.ef-home[data-motion=paused] .ef-logo-reflection,.ef-home[data-motion=paused] .ef-royal-dust{opacity:0!important}
+@media(prefers-reduced-motion:reduce){.ef-logo-reflection,.ef-royal-dust{display:none}.ef-royal-pixel-batch,.ef-logo-emblem,.ef-royal-sculpture{opacity:1!important;transform:none!important}.ef-royal-sculpture{--stone-light:1!important}}
+@media(forced-colors:active){.ef-royal-wordmark{filter:none;forced-color-adjust:none}}
