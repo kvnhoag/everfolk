@@ -7,7 +7,7 @@ import { getSkillImpact } from "./skill-impact.ts";
 import { engineForLife } from "./session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
-import SkillTree from "./SkillTree.tsx";
+import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "./character-panel-model.ts";
@@ -159,10 +159,10 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
   const visibleJobs = definition.jobs.filter(job => {
     const jobActions = career.filter(activity => targetsJob(activity, job.id));
     const searchText = [job.title, job.description, ...Object.entries(job.requirements ?? {}).map(([id, value]) => `${definition.skills[id]?.label ?? id} ${value}`), ...jobActions.map(activity => activitySearchText(activity, world))].join(" ");
-    return matchesSearch(searchText, jobSearch) && matchesAvailability(jobActions.some(activity => activity.available), jobAvailability);
+    return (job.id === character.jobId || life.journal.some(entry => entry.type === "activity" && entry.id === job.id) || jobActions.some(activity => activity.available)) && matchesSearch(searchText, jobSearch) && matchesAvailability(jobActions.some(activity => activity.available), jobAvailability);
   });
   const otherCareer = career.filter(activity => !definition.jobs.some(job => targetsJob(activity, job.id)));
-  const visibleOtherCareer = otherCareer.filter(activity => matchesSearch(activitySearchText(activity, world), jobSearch) && matchesAvailability(activity.available, jobAvailability));
+  const visibleOtherCareer = otherCareer.filter(activity => (activity.available || character.lastActivityAges[activity.id] !== undefined) && matchesSearch(activitySearchText(activity, world), jobSearch) && matchesAvailability(activity.available, jobAvailability));
   const relationships = activities.filter(activity => activity.category === "relationship" && (!definition.proceduralPartners || activityPartnerIds(activity).every(id => visiblePeopleIds.has(id))) && (!definition.socialRelationships || !activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")) || character.relationshipStatus === "courting"));
   const hasBreakupAction = relationships.some(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")));
   const adults = knownPartners.filter(partner => life.age + partner.ageOffset >= 18);
@@ -245,7 +245,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        <SkillTree activities={activities} {...props} />
+        <CompactSkillPanel activities={activities} {...props} /><ActivityList activities={activities.filter(activity => activity.category === "training" && activity.available)} {...props} />
       </div>
       {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
         <WealthPanel activities={activities} {...props} />

@@ -38,6 +38,7 @@ import { displayProse } from "./display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "./source-copy.ts";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import SkillTree from "./SkillTree.tsx";
+import WikiLibrary from "./WikiLibrary.tsx";
 import WorldMap from "./WorldMap.tsx";
 import { supportsLocationMap } from "./location-map.ts";
 import LegacyGallery, { CurrentLegacySummary } from "./LegacyGallery.tsx";
@@ -57,6 +58,7 @@ import "./storybook-theme.css";
 import "./readable-type.css";
 import "./creator-tokens.css";
 import "./creator-system.css";
+import "./interface-refinements.css";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -417,9 +419,8 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       <nav className="main-nav" aria-label="Main navigation">
         <button className={!panel ? "nav-link active" : "nav-link"} onClick={closeDialog}><span className="small-dot" />Your life</button>
         <button className={panel === "character" ? "nav-link active" : "nav-link"} disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character</button>
-        <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>The world</button>
+        <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>Wiki</button>
         {supportsLocationMap(world) && <button className={panel === "map" ? "nav-link active" : "nav-link"} onClick={() => setPanel("map")}>Map</button>}
-        <button className={panel === "chronicle" ? "nav-link active" : "nav-link"} onClick={openChronicle}>Chronicle</button>
         <button className={panel === "archive" ? "nav-link active" : "nav-link"} onClick={() => setPanel("archive")}>Past lives</button>
         <button className={panel === "legacy" ? "nav-link active" : "nav-link"} onClick={() => setPanel("legacy")}>Legacy</button>
         <button className={panel === "sources" ? "nav-link active" : "nav-link"} onClick={() => setPanel("sources")}>Sources</button>
@@ -519,12 +520,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           </>}
         </section>
       </div>
-      {game.hasBegun && <LifeYearRail life={life} onOpenChronicle={openChronicle} />}
+      {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && <aside className="life-support-grid" aria-label="Household and life records">
         <HouseholdSummary life={life} world={world} onOpenCharacter={() => { setCharacterSection("children"); setPanel("character"); }} />
         <div className="life-support-records">
-          <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>
-          <details className="chronicle-preview compact-life-record"><summary><span>Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><header className="life-record-heading"><div className="chronicle-heading"><h2 id="life-timeline-title"><Icon name="feather" size={20} />Life record</h2><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><p className="chronicle-description">Newest first</p></header><LifeEventFeed life={life} world={world} /></details>
+          {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
+          <details className="chronicle-preview compact-life-record life-record-panel"><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>
         </div>
       </aside>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
@@ -560,7 +561,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `everfolk-${chronicleName.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "character"}-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
         </> : panel === "legacy" ? <>
           <p className="eyebrow">ACROSS YOUR LIVES</p><h2 id="dialog-title">Works &amp; deeds</h2>
-          <LegacyGallery entries={legacyEntries} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} />
+          <LegacyGallery entries={legacyEntries.filter(entry => entry.lifeKey === legacyLifeKey(life))} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} />
         </> : panel === "archive" ? <>
           <p className="eyebrow">SAVED LIVES</p><h2 id="dialog-title">Past lives</h2>
           <p>Up to ten completed lives are kept here, newest first. Download a save to keep a copy outside this browser.</p>
@@ -573,7 +574,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <div className="evidence-key"><span>Documented history</span><span>Historical context · fictional story</span><span>Fictional personal story</span></div>
           <div className="sources-list">{world.sources?.map(source => <article key={source.id} id={`source-${source.id}`}><span className="eyebrow">{source.kind} · {source.publisher}</span><h3><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></h3><p className="source-period">{source.period} · {source.geography}</p><p>{sourceSummary(source.summary)}</p><p className="source-limits"><strong>Scope:</strong> {sourceScope(source.limitations)}</p></article>)}</div>
         </> : panel === "world" ? <>
-          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">{world.title}</h2><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
+          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">Wiki</h2><h3>{world.title}</h3><WikiLibrary world={world} onSkills={() => setPanel("wiki")} /><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
           <p>{worldBeginning(world)}</p><p>You can work at the harbor, learn a trade or study writing. Choose a job, meet a partner and decide whether to have children.</p>
           <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
           <p className="fine-print">The dates and setting draw on historical sources. Your character is fictional, and the artwork imagines the city. Sources labels evidence from other periods and places.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>

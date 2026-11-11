@@ -2,9 +2,9 @@ import type { CSSProperties } from "react";
 import { formatYear, yearAtAge } from "../src/calendar.ts";
 import type { LifeState } from "../src/types.ts";
 
-/** A lifetime scale; only years already lived can open the life record. */
-export default function LifeYearRail({ life, onOpenChronicle }: {
-  life: LifeState; onOpenChronicle: () => void;
+/** A passive lifetime scale. The Life record owns history navigation. */
+export default function LifeYearRail({ life }: {
+  life: LifeState;
 }) {
   const birthYear = yearAtAge(life.year, -life.age);
   const lastAge = Math.max(90, Math.ceil(life.age / 10) * 10);
@@ -29,13 +29,12 @@ export default function LifeYearRail({ life, onOpenChronicle }: {
           const current = age === currentDecade;
           const year = formatYear(yearAtAge(birthYear, age));
           return <li className={`life-year-stop${lived ? " is-lived" : ""}${current ? " is-current" : ""}`} key={age}>
-            <button type="button" disabled={!lived} onClick={onOpenChronicle}
-              aria-label={lived ? `Open chronicle: age ${age}, ${year}` : `Age ${age}, ${year}, not yet lived`}
+            <span className="life-year-stop-label"
+              aria-label={lived ? `Age ${age}, ${year}` : `Age ${age}, ${year}, not yet lived`}
               aria-current={current ? "step" : undefined} title={year}>
-              <span className="life-year-stop-mark" aria-hidden="true" />
               <span className="life-year-stop-age">{age === 0 ? "Birth" : age}</span>
               <span className="life-year-stop-year">{year}</span>
-            </button>
+            </span>
           </li>;
         })}
       </ol>

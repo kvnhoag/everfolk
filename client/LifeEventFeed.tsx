@@ -46,7 +46,7 @@ export default function LifeEventFeed({ life, world }: { life: LifeState; world:
           <details className="life-year-details">
             <summary aria-label={`Show full record for age ${group.age}`}><span className="life-year-chevron" aria-hidden="true" /><span className="life-year-expand">Full year</span></summary>
             <div className="life-year-expanded">
-              <p className="life-year-change-note">Year totals above; individual changes beside each entry.</p>
+              <p className="life-year-change-note">Year totals above; individual changes below each entry.</p>
               {entries.length > 0 ? <ol className="life-event-rows">{entries.map(({ entry, journalIndex }, index) => {
                 const marker = influenceMarker(entry, world);
                 const ids = entry.type === "event" ? world.events.find(event => event.id === entry.id)?.sourceIds
