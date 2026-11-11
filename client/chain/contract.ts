@@ -2,7 +2,7 @@ import { sha256Hex } from "../../chain/hash.ts";
 import type { Category } from "../../chain/ids.ts";
 import type { ChainConfig } from "./config.ts";
 import { viewFunction, type FetchLike } from "./rpc.ts";
-import type { CallAccess, ContractCall, LivesContract, SignedEvidence, WalletSession } from "./types.ts";
+import type { CallAccess, ContractCall, LivesContract, MintResult, SignedEvidence, WalletSession } from "./types.ts";
 import {
   assertAccountId, assertCategory, assertCommandsHash, assertLifeId, assertPrice, assertStep, assertTokenId,
 } from "./validate.ts";
@@ -14,7 +14,7 @@ import {
 const TGAS = 10n ** 12n;
 const gas = (tgas: bigint) => (tgas * TGAS).toString();
 
-/** Gas per method. `draw_npc` and `mint_life` must meet the contract's floors (100 / 150 Tgas). */
+/** Gas per method. Draws need 100 Tgas; mint requests/retries need 200 Tgas including their resolver. */
 export const CALL_GAS = {
   start_life: gas(50n),
   abandon_life: gas(30n),
@@ -24,6 +24,7 @@ export const CALL_GAS = {
   open_mint_pack: gas(250n),
   reroll_mint_slot: gas(200n),
   choose_mint_slot: gas(250n),
+  retry_mint: gas(200n),
   set_action: gas(50n),
   withdraw: gas(30n),
   list: gas(30n),
@@ -77,6 +78,26 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
     }
   }
 
+  async function mintResult(lifeId: string): Promise<MintResult | null> {
+    assertLifeId(lifeId);
+    const result = await view("mint_result", { life_id: lifeId });
+    return result === null ? null : parseMintResult(result);
+  }
+
+  async function retryMint(lifeId: string): Promise<MintResult> {
+    assertLifeId(lifeId);
+    const completed = await mintResult(lifeId);
+    if (completed) return completed;
+    try {
+      return parseMintResult(await call("retry_mint", { life_id: lifeId }));
+    } catch (error) {
+      // A resolver can land before the wallet/RPC reports it. A second request is never a second fee.
+      const landed = await mintResult(lifeId).catch(() => null);
+      if (landed) return landed;
+      throw error;
+    }
+  }
+
   return {
     async startLife(worldVersion) {
       if (!worldVersion) throw new Error("A world version is required to start a ranked life.");
@@ -111,10 +132,25 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       assertLifeId(lifeId);
       if (!npcActionId) throw new Error("Pick an action for the minted NPC.");
       await assertEvidenceFor(lifeId, signed);
+      const life = parseOptionalLife(await view("get_life", { life_id: lifeId }));
+      if (life?.status === "minting") return retryMint(lifeId);
+      if (life?.status === "minted") {
+        const completed = await mintResult(lifeId);
+        if (completed) return completed;
+        throw new Error("This life is already minted, but its result is unavailable. Open its token from the ledger.");
+      }
       const fee = parseMintFee(await view("get_params", {}));
       const args = { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId };
-      return parseMintResult(await call("mint_life", args, fee));
+      try {
+        return parseMintResult(await call("mint_life", args, fee));
+      } catch (error) {
+        const landed = await mintResult(lifeId).catch(() => null);
+        if (landed) return landed;
+        throw error;
+      }
     },
+    retryMint,
+    mintResult,
     async setAction(tokenId, actionId) {
       assertTokenId(tokenId);
       if (!actionId) throw new Error("An action id is required.");

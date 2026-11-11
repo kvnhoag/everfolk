@@ -55,14 +55,21 @@ test("verify stores evidence and returns its url", async () => {
   const result = await response.json();
   assert.equal(result.signature, signed.signature);
   assert.equal(result.evidence_url, `${ORIGIN}/api/ranked/evidence/${HASH}`);
+  assert.equal(result.save_url, `${result.evidence_url}/save`);
   const stored = await handleRankedApi(new Request(result.evidence_url), e);
   assert.equal(stored.status, 200);
-  assert.deepEqual(await stored.json(), { evidence: signed.evidence, save: SAVE });
+  assert.match(stored.headers.get("content-type")!, /^application\/json/);
+  assert.equal(await stored.text(), signed.evidence_json, "the reference URL preserves the signed bytes");
+  const replay = await handleRankedApi(new Request(result.save_url), e);
+  assert.equal(replay.status, 200);
+  assert.equal(await replay.text(), JSON.stringify(SAVE), "the replay remains available separately");
 });
 
 test("evidence lookup for an unknown or malformed hash", async () => {
   assert.equal((await handleRankedApi(new Request(`${ORIGIN}/api/ranked/evidence/${"f".repeat(64)}`), env())).status, 404);
   assert.equal((await handleRankedApi(new Request(`${ORIGIN}/api/ranked/evidence/not-a-hash`), env())).status, 400);
+  assert.equal((await handleRankedApi(new Request(`${ORIGIN}/api/ranked/evidence/${"f".repeat(64)}/save`), env())).status, 404);
+  assert.equal((await handleRankedApi(new Request(`${ORIGIN}/api/ranked/evidence/not-a-hash/save`), env())).status, 400);
 });
 
 test("unknown life returns 404", async () => {
@@ -89,6 +96,98 @@ test("oversized save rejected with 413", async () => {
   const huge = JSON.stringify({ life_id: "5", save: "x".repeat(MAX_RANKED_SAVE_BYTES + 1) });
   const response = await handleRankedApi(post(huge), env(), { verifier: async () => fakeVerifier(signed), fetch: rpcReturning(LIFE) });
   assert.equal(response.status, 413);
+});
+
+/** No prefetch: tests can prove that a rejected request was cancelled before being drained. */
+function streamingPost(chunks: Uint8Array[], headers: HeadersInit = {}) {
+  let read = 0;
+  let cancelled = false;
+  const stream = new ReadableStream<Uint8Array>({
+    pull(controller) {
+      if (read === chunks.length) { controller.close(); return; }
+      controller.enqueue(chunks[read++]);
+    },
+    cancel() { cancelled = true; },
+  }, { highWaterMark: 0 });
+  const request = new Request(`${ORIGIN}/api/ranked/verify`, {
+    method: "POST", body: stream, headers, duplex: "half",
+  } as RequestInit & { duplex: "half" });
+  return { request, read: () => read, cancelled: () => cancelled };
+}
+
+test("oversized chunked uploads are cancelled at the byte limit without Content-Length", async () => {
+  const chunk = new Uint8Array(500_000).fill(120);
+  const input = streamingPost(Array.from({ length: 12 }, () => chunk));
+  const response = await handleRankedApi(input.request, env(), {
+    verifier: async () => { throw new Error("oversized uploads must not reach verification"); },
+    fetch: async () => { throw new Error("oversized uploads must not reach the RPC"); },
+  });
+  assert.equal(response.status, 413);
+  assert.equal(input.read(), 4, "stop at the first chunk that crosses the cap, rather than reading all 6 MB");
+  assert.equal(input.cancelled(), true);
+});
+
+test("a small declared Content-Length cannot bypass the streaming byte limit", async () => {
+  const input = streamingPost([new Uint8Array(MAX_RANKED_SAVE_BYTES + 4_097)], { "content-length": "1" });
+  const response = await handleRankedApi(input.request, env(), { verifier: async () => fakeVerifier(signed) });
+  assert.equal(response.status, 413);
+  assert.equal(input.cancelled(), true);
+});
+
+test("an oversized declared Content-Length cancels before reading the upload", async () => {
+  const input = streamingPost([new TextEncoder().encode(verifyBody)], { "content-length": String(MAX_RANKED_SAVE_BYTES + 4_097) });
+  const response = await handleRankedApi(input.request, env(), { verifier: async () => fakeVerifier(signed) });
+  assert.equal(response.status, 413);
+  assert.equal(input.read(), 0);
+  assert.equal(input.cancelled(), true);
+});
+
+test("a body exactly at the byte cap is accepted and one extra byte is rejected", async () => {
+  const empty = JSON.stringify({ life_id: "5", save: JSON.stringify(SAVE), padding: "" });
+  const body = JSON.stringify({ life_id: "5", save: JSON.stringify(SAVE), padding: "x".repeat(MAX_RANKED_SAVE_BYTES + 4_096 - empty.length) });
+  const bytes = new TextEncoder().encode(body);
+  const deps = { verifier: async () => fakeVerifier(signed), fetch: rpcReturning(LIFE) };
+  assert.equal(bytes.byteLength, MAX_RANKED_SAVE_BYTES + 4_096);
+  const accepted = streamingPost([bytes.subarray(0, 100), bytes.subarray(100)]);
+  assert.equal((await handleRankedApi(accepted.request, env(), deps)).status, 200);
+  const rejected = streamingPost([bytes, new Uint8Array([32])]);
+  assert.equal((await handleRankedApi(rejected.request, env(), deps)).status, 413);
+  assert.equal(rejected.cancelled(), true);
+});
+
+test("UTF-8 characters split across upload chunks retain their exact value", async () => {
+  const save = { ...SAVE, seed: "Αλεξάνδρεια — 🏺" };
+  const bytes = new TextEncoder().encode(JSON.stringify({ life_id: "5", save: JSON.stringify(save) }));
+  const input = streamingPost(Array.from(bytes, value => new Uint8Array([value])));
+  let received: unknown;
+  const verifier = fakeVerifier(signed);
+  verifier.verify = async (_life, parsed) => { received = parsed; return signed; };
+  const response = await handleRankedApi(input.request, env(), { verifier: async () => verifier, fetch: rpcReturning(LIFE) });
+  assert.equal(response.status, 200);
+  assert.deepEqual(received, save);
+});
+
+test("the save limit counts UTF-8 bytes rather than JavaScript characters", async () => {
+  const empty = JSON.stringify({ ...SAVE, padding: "" });
+  const room = MAX_RANKED_SAVE_BYTES + 1 - new TextEncoder().encode(empty).byteLength;
+  const padding = "é".repeat(Math.floor(room / 2)) + (room % 2 ? "x" : "");
+  const save = JSON.stringify({ ...SAVE, padding });
+  assert.ok(save.length < MAX_RANKED_SAVE_BYTES);
+  assert.equal(new TextEncoder().encode(save).byteLength, MAX_RANKED_SAVE_BYTES + 1);
+  const response = await handleRankedApi(post(JSON.stringify({ life_id: "5", save })), env(), {
+    verifier: async () => fakeVerifier(signed), fetch: rpcReturning(LIFE),
+  });
+  assert.equal(response.status, 413);
+});
+
+test("a rate-limited request is cancelled before its body is read", async () => {
+  const input = streamingPost([new TextEncoder().encode(verifyBody)]);
+  const response = await handleRankedApi(input.request, env(), {
+    limiter: { limit: async () => ({ success: false }) }, verifier: async () => fakeVerifier(signed),
+  });
+  assert.equal(response.status, 429);
+  assert.equal(input.read(), 0);
+  assert.equal(input.cancelled(), true);
 });
 
 test("only GET and POST routes exist", async () => {

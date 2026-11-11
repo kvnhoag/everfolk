@@ -8,7 +8,7 @@ export interface Draw {
 export interface Checkpoint { step: number; commands_hash: string }
 export interface LifeView {
   life_id: string; account_id: string; seed: string; world_version: string;
-  status: "alive" | "minted" | "abandoned";
+  status: "alive" | "minted" | "abandoned" | "minting";
   figure_picks: FigurePick[]; draws: Draw[]; checkpoints: Checkpoint[]; started_at_ms: number;
 }
 

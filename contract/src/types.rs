@@ -51,6 +51,8 @@ pub enum LifeStatus {
     Alive,
     Minted,
     Abandoned,
+    /// The fee and random seed are committed; a separate receipt completes the mint.
+    Minting,
 }
 
 #[near(serializers = [json, borsh])]
@@ -182,7 +184,7 @@ pub struct Evidence {
     pub sources: Vec<SourceImpact>,
 }
 
-#[near(serializers = [json])]
+#[near(serializers = [json, borsh])]
 #[derive(Clone, Debug, PartialEq)]
 pub struct MintResult {
     pub token_id: String,

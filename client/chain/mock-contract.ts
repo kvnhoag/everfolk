@@ -136,6 +136,12 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
 }
 
 function bind(state: MockState, account: string): MockLivesContract {
+  const mintResult = (lifeId: string): MintResult | null => {
+    const token = [...state.tokens.entries()].find(([, token]) => token.extra.life_id === lifeId);
+    if (!token || state.lives.get(lifeId)?.status !== "minted") return null;
+    const [token_id, { kind, figure_id, rarity, affection }] = token;
+    return { token_id, kind, figure_id, rarity, affection };
+  };
   return {
     accountId: account,
     as: other => bind(state, other),
@@ -258,6 +264,18 @@ function bind(state: MockState, account: string): MockLivesContract {
       return life ? copy(life) : null;
     },
     mintLife: (lifeId, signed, npcActionId) => mintLife(state, account, lifeId, signed, npcActionId),
+    async mintResult(lifeId) {
+      assertLifeId(lifeId);
+      return mintResult(lifeId);
+    },
+    async retryMint(lifeId) {
+      assertLifeId(lifeId);
+      const life = state.lives.get(lifeId);
+      if (life?.account_id !== account) throw new Error("Only the life's owner can do this");
+      const completed = mintResult(lifeId);
+      if (!completed) throw new Error("This life has no committed mint");
+      return completed;
+    },
     async setAction(tokenId, actionId) {
       setAction(state, account, tokenId, actionId);
     },

@@ -104,7 +104,7 @@ const EMBLEM: Record<CareerGroup, string> = {
 };
 
 /** The kept life as a ledger: what it is, how strongly and how often it acts, and where it is recorded. */
-export function mintRevealView(result: MintResult, careerGroup: CareerGroup, details: RevealDetails = {}): MintRevealView {
+export function mintRevealView(result: MintResult, careerGroup?: CareerGroup, details: RevealDetails = {}): MintRevealView {
   const isFigure = result.kind === "figure" && result.figure_id !== null;
   const power = (RARITY_POWER_BPS[result.rarity] ?? RARITY_POWER_BPS[0]) / 10000;
   const rows: LedgerRow[] = [
@@ -123,12 +123,12 @@ export function mintRevealView(result: MintResult, careerGroup: CareerGroup, det
   if (details.txHash) links.push({ label: "Mint transaction", href: explorerUrl({ tx: details.txHash }) });
   if (details.evidenceUrl) links.push({ label: "Verified evidence", href: details.evidenceUrl });
   return {
-    title: isFigure && result.figure_id ? figureTitle(result.figure_id) : GROUP_TITLE[careerGroup],
+    title: isFigure && result.figure_id ? figureTitle(result.figure_id) : careerGroup ? GROUP_TITLE[careerGroup] : "A life of Alexandria",
     number: `No. ${result.token_id}`,
     kindLabel: KIND_LABEL[isFigure ? "figure" : "npc"],
     isFigure,
     figureId: isFigure ? result.figure_id : null,
-    emblem: isFigure ? null : EMBLEM[careerGroup],
+    emblem: isFigure ? null : careerGroup ? EMBLEM[careerGroup] : "literacy",
     rarityLabel: rarityLabel(result.rarity),
     affectionText: `Affection ${result.affection} / 100`,
     href: chainHref({ kind: "token", tokenId: result.token_id }),

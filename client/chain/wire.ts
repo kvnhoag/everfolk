@@ -40,7 +40,7 @@ export function parseLife(value: unknown): LifeView {
     life_id: "string", account_id: "string", seed: "string", world_version: "string", status: "string",
     figure_picks: "array", draws: "array", checkpoints: "array", started_at_ms: "number",
   });
-  if (!["alive", "minted", "abandoned"].includes(life.status as string)) fail("life status");
+  if (!["alive", "minted", "abandoned", "minting"].includes(life.status as string)) fail("life status");
   (life.draws as unknown[]).forEach(parseDraw);
   return life as unknown as LifeView;
 }

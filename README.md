@@ -40,12 +40,14 @@ Ordinary play stays offline. A **ranked life** adds NEAR in four places, each on
 | Demo contract (testnet) | [`demo.genesis-1794297139-6.testnet`](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) — used only to record the video: 100% figure drop, every key decision draws someone, no wait after closing a life |
 | Standards | NEP-171, 177, 178, 181, and NEP-199 payouts that include sources |
 | Contract code and tests | [`contract/`](contract/README.md) (Rust, `cargo test`) |
-| Verifier | [`server/ranked/`](server/ranked) — `POST /api/ranked/verify`, public evidence at `/api/ranked/evidence/<sha256>` |
+| Verifier | [`server/ranked/`](server/ranked) — `POST /api/ranked/verify`, exact signed evidence at `/api/ranked/evidence/<sha256>` and replay saves at that URL plus `/save` |
 | Shared rules | [`chain/`](chain) — ids, wire types, impact and save validation used by both the verifier and the game |
 
 **Honest limits.** Randomness is NEAR block randomness (validator VRF), fine for testnet. Between checkpoints a player could simulate ahead offline, but draws come from future blocks. The verifier is a server key today; it sits behind a `LifeVerifier` interface so a TEE verifier can replace it. External marketplaces pay sources up to their `max_len_payout`; the in-game market pays every source. The demo video uses the separate demo contract above so a figure mint can be shown; the main contract keeps the 5% drop. Figure requirements are calibrated by simulation: a player who deliberately follows a figure's path qualifies in about 20–30% of lives (Alexander also needs a royal birth, 1 in 100), an unfocused life almost never does (`test/chain-figure-calibration.test.ts`).
 
 Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_SECRET=<64 hex>`); the contract id and RPC are set in `vite.config.ts`. Testnet tools live in [`scripts/ranked/`](scripts/ranked): deploy, smoke run and genesis seeding.
+
+Without a configured verifier, choose **Practice ranked life** to try the same screens and simulation using a browser-only ledger. It sends no transactions to NEAR. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above.
 
 ## Development
 

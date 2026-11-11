@@ -358,8 +358,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   /** A fired catalog event's entry carries its source, so impact is countable from the journal. */
   function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state)): void {
     // A fresh-year decision is consumed when it fires, so it cannot reopen in the same year.
-    const yearGate = event.when?.type === "demo" && event.when.condition.kind === "year" ? event.when.condition
-      : event.when?.type === "all" ? event.when.conditions.find(item => item.type === "demo" && item.condition.kind === "year")?.condition : undefined;
+    const demoGate = event.when?.type === "all"
+      ? event.when.conditions.find(item => item.type === "demo" && item.condition.kind === "year")
+      : event.when;
+    const yearGate = demoGate?.type === "demo" && demoGate.condition.kind === "year" ? demoGate.condition : undefined;
     if (state.demo && yearGate?.kind === "year" && yearGate.fresh) {
       state.demo.year.fresh = state.demo.year.fresh.filter(family => family !== yearGate.family);
     }

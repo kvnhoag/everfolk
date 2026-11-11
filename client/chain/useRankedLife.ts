@@ -38,7 +38,8 @@ export function useRankedLife(options: RankedSessionOptions) {
   const finish = useCallback(() => run<SignedEvidence | null>(() => session ? session.finish() : Promise.resolve(null)), [run, session]);
   const mint = useCallback((signed: SignedEvidence, actionId: string) =>
     run<MintResult | null>(() => session ? session.mint(signed, actionId) : Promise.resolve(null)), [run, session]);
+  const recoverMint = useCallback(() => run<MintResult | null>(() => session ? session.recoverMint() : Promise.resolve(null)), [run, session]);
   const abandon = useCallback(() => run(async () => { await session?.abandon(); setSession(null); }), [run, session]);
 
-  return { session, busy, error, start, resume, dispatch, finish, mint, abandon };
+  return { session, busy, error, start, resume, dispatch, finish, mint, recoverMint, abandon };
 }

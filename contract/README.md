@@ -26,7 +26,7 @@ The deploy script creates a missing contract account from the testnet faucet and
 | Area | Methods |
 |---|---|
 | Lives | `start_life`, `abandon_life`, `draw_npc`, `checkpoint`, `get_life`, `active_life_of` |
-| Mint | `mint_life` (payable), `set_action`, `figure_supply` |
+| Mint | `mint_life` (payable), `retry_mint` (payable), `mint_result`, `set_action`, `figure_supply` |
 | Earnings | `withdraw`, `balance_of`, `sources_of`, `children_of`, `token_stats` |
 | Market | `list`, `unlist`, `buy` (payable, returns seller proceeds), `listing`, `listings` |
 | Pools | `active_pool`, `figure_copies` |
@@ -35,10 +35,14 @@ The deploy script creates a missing contract account from the testnet faucet and
 
 ## Known limits
 
-- Gas floors: `mint_life` needs 150 Tgas and `draw_npc` 100 Tgas, so no outcome can be retried by starving its branch of gas.
+- Gas floors: `mint_life` and `retry_mint` need 200 Tgas, including a separate 150-Tgas mint resolver receipt; `draw_npc` needs 100 Tgas.
+- A mint request commits its fee, evidence, action, random seed and economic/catalog settings before the resolver creates a token. The life reports `minting` while pending. A later failing action in the request's batch cannot inspect a minted outcome, and failed resolver retries keep the same committed seed. Figure supply is checked when resolving, so concurrent requests cannot exceed the committed catalog's caps.
+- `mint_life` returns a promise whose successful result remains the original `MintResult` JSON. If execution or its wallet response is interrupted, call `mint_result({ life_id })` to find a completed result, or the owner can call `retry_mint({ life_id })` with zero deposit to reschedule the pending request. Duplicate callbacks/retries return the same result without another token or fee. An optional retry deposit covers extra storage only; unused funds are refunded and do not earn another royalty.
 - Per life: at most 128 draws and 128 checkpoints. Per category: at most 1000 drawable NPCs (later ones are minted but not drawn).
-- Each mint's storage is paid from the treasury's share of the fee; mint panics if the fee can't cover it.
+- Each mint's storage is paid from the treasury's share of the fee. Every changed lazy collection and any new treasury balance row is flushed before measuring the full request-plus-resolver storage delta. If storage exceeds the available fee, the resolver fails atomically while the committed request remains recoverable with an additional storage deposit.
 - Evidence is bound to the life's on-chain seed, so it can't be replayed on another deployment.
 - Randomness comes from NEAR block randomness (validator VRF). Fine for testnet; a block producer could withhold a block.
 - External marketplaces receive NEP-199 payouts limited by `max_len_payout`; the source owners that don't fit go to treasury. The in-game market pays every source.
 - Gas: pools and source lists are vectors; the MVP caps sources at 64 per token.
+
+The pending/completed mint records use an appended storage-key prefix and `minting` is appended to the life-status enum; existing field layouts and enum discriminants are preserved. The contract unit suite checks resolver receipt isolation, committed retry data, duplicate-callback idempotency and fee-versus-persisted-storage conservation. These mocked-receipt tests do not replace a sandbox or testnet transaction-level release check.

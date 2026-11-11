@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { KEY_DECISIONS } from "../chain/catalog/key-decisions.ts";
+import { NPC_ACTIONS } from "../chain/ids.ts";
 import { activationCommand, applyCommand, validateRankedSave } from "../chain/validate-ranked.ts";
 import { createMockContract } from "../client/chain/mock-contract.ts";
-import { startRankedSession, resumeRankedSession, type RankedSession, type SessionStorage } from "../client/chain/ranked-session.ts";
+import { beginRankedSession, ChainActionError, startRankedSession, resumeRankedSession, type RankedSession, type SessionStorage } from "../client/chain/ranked-session.ts";
 import type { Command, SaveFile, WorldPack } from "../src/types.ts";
 
 const CONTRACT = "everfolk-lives.testnet";
@@ -171,7 +172,7 @@ test("beginRankedSession refuses a recorded life with no progress on this device
 
 /** Wraps a contract so the next `drawNpc` / `checkpoint` call fails, optionally after it already landed on chain. */
 function flaky(contract: ReturnType<typeof createMockContract>) {
-  const failures = { drawAfterLanding: 0, checkpointBeforeLanding: 0, getLife: 0 };
+  const failures = { drawAfterLanding: 0, checkpointBeforeLanding: 0, checkpointAfterLanding: 0, getLife: 0 };
   const wrapped = Object.create(contract) as typeof contract;
   wrapped.getLife = async (...args) => {
     if (failures.getLife > 0) { failures.getLife--; throw new Error("RPC timeout"); }
@@ -184,7 +185,8 @@ function flaky(contract: ReturnType<typeof createMockContract>) {
   };
   wrapped.checkpoint = async (...args) => {
     if (failures.checkpointBeforeLanding > 0) { failures.checkpointBeforeLanding--; throw new Error("checkpoint failed: 429 Too Many Requests"); }
-    return contract.checkpoint(...args);
+    await contract.checkpoint(...args);
+    if (failures.checkpointAfterLanding > 0) { failures.checkpointAfterLanding--; throw new Error("checkpoint reply lost"); }
   };
   return { wrapped, failures };
 }
@@ -229,6 +231,90 @@ test("a failed checkpoint is retried before the life moves on, and the draw is n
   assert.equal(result.ok, true, result.ok ? "" : result.reason);
 });
 
+test("a matching checkpoint is recovered after its reply is lost", async () => {
+  const contract = createMockContract({ nobodyWeightBps: 0 });
+  const { wrapped, failures } = flaky(contract);
+  const session = await startRankedSession({ contract: wrapped, contractId: CONTRACT, verifyUrl: "x", world, storage: memoryStorage() });
+  failures.checkpointAfterLanding = 1;
+  await playUntil(session, s => s.state.age >= 6);
+  assert.equal(failures.checkpointAfterLanding, 0, "the lost reply was recovered");
+  const life = (await contract.getLife(session.life.life_id))!;
+  assert.ok(life.checkpoints.length > 0);
+  assert.deepEqual(await validateRankedSave(life, JSON.parse(session.save()) as SaveFile, CONTRACT), { ok: true });
+});
+
+function smallRankedWorld(): WorldPack {
+  const fixture = JSON.parse(readFileSync(new URL("../worlds/sandbox.json", import.meta.url), "utf8")) as WorldPack;
+  fixture.id = "alexandria";
+  fixture.version = "ranked-1";
+  return fixture;
+}
+
+test("a second session stops when another history already owns the checkpoint step", async () => {
+  const fixture = smallRankedWorld();
+  fixture.events[0].choices.push({ id: "other-observation", text: "Observe another thing.", outcomes: [
+    { id: "other-notes", text: "A different notebook.", weight: 1, effects: [] },
+  ] });
+  const contract = createMockContract({ genesis: false });
+  const life = await contract.startLife("alexandria-ranked-1");
+  const options = { contract, contractId: CONTRACT, verifyUrl: "x", world: fixture };
+  const first = await beginRankedSession({ ...options, storage: memoryStorage() }, life);
+  const second = await beginRankedSession({ ...options, storage: memoryStorage() }, life);
+  await first.dispatch({ type: "choose", choice: "observe" });
+  await second.dispatch({ type: "choose", choice: "other-observation" });
+  await playUntil(first, s => s.state.age >= 6);
+  await assert.rejects(playUntil(second, s => s.state.age >= 6), {
+    name: "ChainActionError", message: /different progress recorded on NEAR/,
+  });
+  assert.equal(second.state.age, 5, "the conflicting checkpoint must stop further play");
+  const stoppedSave = second.save();
+  const next: Command = second.state.phase === "choice" ? { type: "choose", choice: second.choices()[0].id } : { type: "advance" };
+  await assert.rejects(second.dispatch(next), ChainActionError);
+  assert.equal(second.save(), stoppedSave, "retry must not advance the conflicting history");
+});
+
+for (const conflict of ["hash", "category"] as const) test(`recovery refuses a draw with a conflicting ${conflict}`, async () => {
+  const fixture = smallRankedWorld();
+  fixture.events[0].id = "the-first-letters";
+  fixture.events[0].trigger = { type: "age", at: 1 };
+  const contract = createMockContract({ genesis: false });
+  const wrapped = Object.create(contract) as typeof contract;
+  wrapped.drawNpc = async (lifeId, step, category, hash) => {
+    await contract.drawNpc(lifeId, step, conflict === "category" ? "war" : category, conflict === "hash" ? "f".repeat(64) : hash);
+    throw new Error("draw reply lost");
+  };
+  const session = await startRankedSession({ contract: wrapped, contractId: CONTRACT, verifyUrl: "x", world: fixture, storage: memoryStorage() });
+  await assert.rejects(session.dispatch({ type: "advance" }), {
+    name: "ChainActionError", message: /different progress recorded on NEAR/,
+  });
+  assert.equal(session.lastDraw, null, "a conflicting draw must never be adopted");
+  assert.equal(session.life.draws.length, 0);
+  assert.equal(commandsOf(session).length, 1, "no conflicting influence was inserted");
+});
+
+test("recovering a non-empty draw after a storage failure applies its influence only once", async () => {
+  const contract = createMockContract({ nobodyWeightBps: 0 });
+  const storage = memoryStorage();
+  const persist = storage.setItem;
+  let failures = 1;
+  storage.setItem = (key, value) => {
+    const last = (JSON.parse(value) as SaveFile).commands.at(-1);
+    if (failures && last?.type === "influence" && last.mode === "apply") {
+      failures--;
+      throw new Error("Storage temporarily unavailable");
+    }
+    persist(key, value);
+  };
+  const session = await startRankedSession({ contract, contractId: CONTRACT, verifyUrl: "x", world, storage });
+  await playUntil(session, s => s.lastDraw?.token_id != null);
+  assert.equal(failures, 0, "the influence's first persistence attempt failed");
+  const draw = session.lastDraw!;
+  const commands = commandsOf(session);
+  assert.deepEqual(commands[draw.step], applyCommand(draw, CONTRACT));
+  assert.equal(commands.length, draw.step + 1, "recovery did not insert a second influence command");
+  assert.deepEqual(await validateRankedSave((await contract.getLife(session.life.life_id))!, JSON.parse(session.save()) as SaveFile, CONTRACT), { ok: true });
+});
+
 test("sync surfaces chain failures instead of swallowing them", async () => {
   const { ChainActionError } = await import("../client/chain/ranked-session.ts");
   const { createEngine } = await import("../src/index.ts");
@@ -265,7 +351,7 @@ test("resume applies a draw that landed on chain but was never saved on this dev
   assert.equal(result.ok, true, result.ok ? "" : result.reason);
 });
 
-test("a mint that landed on chain but failed on the client still returns the minted token", async () => {
+test("a mint with a lost response is recovered directly even after its token changes owner", async () => {
   const contract = createMockContract({ nobodyWeightBps: 5000 });
   const storage = memoryStorage();
   const session = await startRankedSession({ contract, contractId: CONTRACT, verifyUrl: "x", world, storage });
@@ -275,14 +361,91 @@ test("a mint that landed on chain but failed on the client still returns the min
   const verifier = await createServerSignerVerifier({ secretHex: "07".repeat(32), contractId: CONTRACT, buildEvidence, loadWorld: () => world });
   const signed = await verifier.verify((await contract.getLife(session.life.life_id))!, JSON.parse(session.save()) as SaveFile);
   const flakyMint = Object.create(contract) as typeof contract;
-  flakyMint.mintLife = async (...args) => { await contract.mintLife(...args); throw new Error("Transaction has not finished yet"); };
+  flakyMint.mintLife = async (...args) => {
+    const result = await contract.mintLife(...args);
+    await contract.list(result.token_id, "100");
+    await contract.as("buyer.testnet").buy(result.token_id, "100");
+    throw new Error("Transaction has not finished yet");
+  };
+  flakyMint.tokensOf = async () => { throw new Error("Mint recovery must not depend on the owner's current collection"); };
   (session as unknown as { options: { contract: typeof contract } }).options.contract = flakyMint;
   const action = { letters: "letters.teach", military: "military.mentor", commerce: "commerce.credit", craft: "craft.apprentice", sky: "sky.omen", performance: "performance.lift" }[signed.evidence.career_group];
   const result = await session.mint(signed, action);
   assert.ok(result.token_id);
   const token = await contract.token(result.token_id);
   assert.equal(token?.extra.life_id, session.life.life_id);
+  assert.equal(token?.owner_id, "buyer.testnet");
   assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null, "the local save is cleared once minted");
+});
+
+async function finishedSmallLife() {
+  const fixture = smallRankedWorld();
+  const contract = createMockContract({ genesis: false });
+  const storage = memoryStorage();
+  const options = { contract, contractId: CONTRACT, verifyUrl: "unused", world: fixture, storage };
+  const session = await startRankedSession(options);
+  await playUntil(session, () => false);
+  assert.equal(session.state.phase, "ended");
+  const { createServerSignerVerifier } = await import("../server/ranked/verifier.ts");
+  const { buildEvidence } = await import("../chain/evidence.ts");
+  const verifier = await createServerSignerVerifier({ secretHex: "07".repeat(32), contractId: CONTRACT, buildEvidence, loadWorld: () => fixture });
+  const signed = await verifier.verify((await contract.getLife(session.life.life_id))!, JSON.parse(session.save()) as SaveFile);
+  return { contract, session, storage, options, signed, action: NPC_ACTIONS[signed.evidence.career_group].actions[0] };
+}
+
+test("a committed mint resumes after reload without verification, replay or another mint fee", async () => {
+  const { contract, session, storage, options, signed, action } = await finishedSmallLife();
+  let initialCalls = 0, retries = 0, committed = false;
+  const wrapped = Object.create(contract) as typeof contract;
+  wrapped.getLife = async lifeId => {
+    const life = await contract.getLife(lifeId);
+    return life && committed && life.status === "alive" ? { ...life, status: "minting" } : life;
+  };
+  wrapped.mintLife = async () => {
+    initialCalls++;
+    committed = true;
+    throw new Error("The resolver was interrupted after the mint fee committed");
+  };
+  wrapped.retryMint = async lifeId => {
+    assert.equal(lifeId, session.life.life_id);
+    retries++;
+    return contract.mintLife(lifeId, signed, action);
+  };
+  (session as unknown as { options: { contract: typeof contract } }).options.contract = wrapped;
+  await assert.rejects(session.mint(signed, action), /resolver was interrupted/);
+  assert.equal(session.life.status, "minting");
+  const saved = storage.getItem(`everfolk.ranked.${session.life.life_id}`);
+  assert.ok(saved, "finished progress stays saved while the mint is pending");
+
+  const resumed = await resumeRankedSession({ ...options, contract: wrapped }, session.life.life_id);
+  assert.equal(resumed.life.status, "minting");
+  assert.equal(resumed.state.phase, "ended");
+  assert.equal(resumed.save(), saved);
+  await assert.rejects(resumed.dispatch({ type: "advance" }), /mint is already committed/);
+  await assert.rejects(resumed.finish((async () => { throw new Error("The verifier must not be called again"); }) as typeof fetch), /Complete the mint instead/);
+  const result = await resumed.recoverMint();
+  assert.equal(initialCalls, 1, "only the original request paid the mint fee");
+  assert.equal(retries, 1);
+  assert.equal(resumed.life.status, "minted");
+  assert.equal((await contract.mintResult(session.life.life_id))?.token_id, result.token_id);
+  assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null);
+});
+
+test("a completed mint can be recovered after reload when local save cleanup was interrupted", async () => {
+  const { contract, session, storage, options, signed, action } = await finishedSmallLife();
+  const saved = session.save();
+  const minted = await contract.mintLife(session.life.life_id, signed, action);
+  storage.setItem(`everfolk.ranked.${session.life.life_id}`, saved);
+  const resumed = await resumeRankedSession(options, session.life.life_id);
+  contract.retryMint = async () => { throw new Error("An already complete mint must not send another transaction"); };
+  assert.deepEqual(await resumed.recoverMint(), minted);
+  assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null);
+});
+
+test("a pending mint with no local save is never started again as a new playable life", async () => {
+  const contract = createMockContract({ genesis: false });
+  const life = await contract.startLife("alexandria-ranked-1");
+  await assert.rejects(beginRankedSession({ contract, contractId: CONTRACT, verifyUrl: "x", world: smallRankedWorld(), storage: memoryStorage() }, { ...life, status: "minting" }), /committed mint/);
 });
 
 test("practice mode checks and signs a finished life in the browser, without the server", async () => {

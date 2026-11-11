@@ -36,6 +36,8 @@ enum StorageKey {
     Children,
     Stats,
     Listings,
+    // Appended so existing collection prefixes remain unchanged.
+    MintRecords,
 }
 
 #[near(contract_state)]

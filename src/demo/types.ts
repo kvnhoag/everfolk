@@ -161,6 +161,16 @@ export interface ServiceConfig {
   roadLossBps: Record<RoadLevel, number>;
   provisionsCost: number;
   distinctionMinWarfare: number;
+  escortBonus?: number;
+  escortChanceBps?: number;
+  escortPressureBps?: number;
+  provisionCutBps?: number;
+  companionCutBps?: number;
+  maxCompanions?: number;
+  rationHealthLoss?: number;
+  wageShortReputation?: number;
+  withdrawReputation?: number;
+  deliveryReputation?: number;
 }
 
 /** Track E: community works and reputation. */

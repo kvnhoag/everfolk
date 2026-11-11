@@ -43,7 +43,9 @@ fn farming_life_mints_into_the_farming_group() {
     assert_eq!(life.world_version, DEMO);
     let body = evidence(&life.seed, life.life_id.0, "farming");
     pay(ALICE, 1);
-    let result = c.mint_life(U64(life.life_id.0), body.clone(), sign(&body), "farming.stock-granary".into());
+    c.mint_life(U64(life.life_id.0), body.clone(), sign(&body), "farming.stock-granary".into()).detach();
+    as_account(CONTRACT);
+    let result = c.finalize_mint(U64(life.life_id.0));
     assert_eq!(result.kind, TokenKind::Npc);
     assert_eq!(result.figure_id, None);
     let record = c.record(&result.token_id);

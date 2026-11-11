@@ -26,6 +26,8 @@ const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 const { MarketBody } = await import("../client/chain/Market.tsx");
 const { default: DeclineChoice } = await import("../client/chain/DeclineChoice.tsx");
 const { default: ActiveLifeCard } = await import("../client/chain/ActiveLifeCard.tsx");
+const { default: MintRecovery } = await import("../client/chain/MintRecovery.tsx");
+const { default: RankedEnding } = await import("../client/chain/RankedEnding.tsx");
 hooks.deregister();
 
 const noop = () => {};
@@ -33,6 +35,29 @@ const life: LifeView = {
   life_id: "4", account_id: "bob.testnet", seed: "c".repeat(64), world_version: "alexandria-ranked-1", status: "alive",
   figure_picks: [{ figure_id: "euclid", token_id: "3", action_id: "euclid.school", rarity: 2 }], draws: [], checkpoints: [], started_at_ms: 0,
 };
+
+test("a committed mint's ending opens recovery instead of offering verification or another fee", () => {
+  const session = {
+    life: { ...life, status: "minting" as const },
+    finish: async () => { throw new Error("No new verification"); },
+    mint: async () => { throw new Error("No second mint fee"); },
+    recoverMint: async () => { throw new Error("Only a button may start recovery"); },
+    abandon: async () => {},
+  };
+  const html = renderToStaticMarkup(createElement(RankedEnding, { session, contract: {} as never, onClose: noop }));
+  assert.match(html, /Finish keeping this life/);
+  assert.match(html, /without paying another mint fee/);
+  assert.match(html, /Complete mint/);
+  assert.doesNotMatch(html, /Checking your life|Mint for|Give up/);
+});
+
+test("mint recovery remains retryable and explains the already committed fee", () => {
+  const html = renderToStaticMarkup(createElement(MintRecovery, { busy: true, error: "Network interrupted", onRecover: noop, onBack: noop }));
+  assert.match(html, /mint fee is already committed/);
+  assert.match(html, /Completing/);
+  assert.match(html, /Network interrupted/);
+  assert.equal((html.match(/disabled/g) ?? []).length, 2);
+});
 
 test("birth world lists each line and a begin button", () => {
   const html = renderToStaticMarkup(createElement(BornInto, { lines: ["Euclid (alice.testnet) has opened a school."], onBegin: noop }));

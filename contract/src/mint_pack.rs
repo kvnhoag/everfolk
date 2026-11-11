@@ -200,9 +200,11 @@ impl Contract {
             &pack.npc_action_id,
             &shares,
             &hash,
+            &self.params.clone(),
+            &self.catalog.clone(),
         );
         // Index the source relation once; economics were frozen when the pack opened.
-        self.pay_sources(&token_id, 0, &shares);
+        self.pay_sources(&token_id, 0, &shares, pack.view.source_share_bps);
         let paid = self.credit_sources(
             &shares,
             bps_of(pack.view.total_fee.0, pack.view.source_share_bps),
@@ -257,7 +259,7 @@ impl Contract {
         npc: &str,
     ) -> MintCard {
         let seed = block_seed(id, format!("mint-pack:{hash}:{slot}:{rerolled}").as_bytes());
-        let outcome = self.roll_outcome(&seed, evidence);
+        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog);
         let action_id = outcome
             .figure
             .as_ref()

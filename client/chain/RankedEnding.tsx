@@ -5,6 +5,9 @@ import { errorText } from "./chain-backend.ts";
 import LifeReport from "./LifeReport.tsx";
 import { lifeReport, lifeSpanLine, npcActionMenu } from "./life-report-model.ts";
 import MintPack from "./MintPack.tsx";
+import MintRecovery from "./MintRecovery.tsx";
+import MintReveal from "./MintReveal.tsx";
+import { mintRevealView } from "./life-report-model.ts";
 import DeclineChoice from "./DeclineChoice.tsx";
 import { DEFAULT_MINT_FEE_YOCTO, REROLL_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
@@ -15,6 +18,7 @@ export interface RankedEndingSession {
   finish(): Promise<SignedEvidence>;
   chooseMint(slot: number): Promise<MintResult>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  recoverMint(): Promise<MintResult>;
   abandon(): Promise<void>;
 }
 
@@ -28,7 +32,7 @@ export interface RankedEndingProps {
   onClose(): void;
 }
 
-type Stage = { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "pack"; signed: SignedEvidence; pack: Pack };
+type Stage = { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "committed" } | { kind: "recovered"; result: MintResult } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "pack"; signed: SignedEvidence; pack: Pack };
 
 /** Matches the contract's default `abandon_cooldown_ms`. */
 const COOLDOWN_MINUTES = 10;
@@ -40,7 +44,7 @@ async function ownersOf(contract: LivesContract, tokenIds: readonly string[]): P
 
 /** A ranked life's end: verify the save, show who shaped it, offer the mint, reveal the result. */
 export default function RankedEnding({ session, practice = false, contract, feeYocto = DEFAULT_MINT_FEE_YOCTO, lastTxHash, onClose }: RankedEndingProps) {
-  const [stage, setStage] = useState<Stage>({ kind: "verifying" });
+  const [stage, setStage] = useState<Stage>(() => ({ kind: session.life.status === "alive" ? "verifying" : "committed" }));
   const [terms, setTerms] = useState<MintTerms | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [owners, setOwners] = useState<OwnersByToken>({});
@@ -49,6 +53,7 @@ export default function RankedEnding({ session, practice = false, contract, feeY
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (session.life.status !== "alive") { setStage({ kind: "committed" }); return; }
     let cancelled = false;
     void session.finish().then(async signed => {
       const [quote, existing] = await Promise.all([contract.mintTerms(), contract.mintPack(session.life.life_id)]);
@@ -82,6 +87,16 @@ export default function RankedEnding({ session, practice = false, contract, feeY
     finally { setBusy(false); }
   }
 
+  async function recover() {
+    setBusy(true);
+    setError("");
+    try { setStage({ kind: "recovered", result: await session.recoverMint() }); }
+    catch (cause) { setError(errorText(cause, "The mint could not finish. Please try again.")); }
+    finally { setBusy(false); }
+  }
+
+  if (stage.kind === "committed") return <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={onClose} />;
+  if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} onClose={onClose} />;
   if (stage.kind === "verifying") return <p className="chain-loading" role="status">Checking your life against its record…</p>;
   if (stage.kind === "failed") return <section className="chain-card">
     <h1 tabIndex={-1}>We couldn't check this life</h1>
