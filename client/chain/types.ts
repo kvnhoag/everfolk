@@ -77,6 +77,8 @@ export interface WalletSession {
   readonly accountId: string | null;
   /** Wallet module id, e.g. "meteor-wallet"; null when not signed in or unknown. */
   readonly walletId?: string | null;
+  /** True when signed in without a usable play key, so ranked moves would open the wallet; `signIn()` re-keys. */
+  readonly needsPlayKey?: boolean;
   /** Called with each confirmed transaction hash, for explorer links in the UI. Returns an unsubscribe. */
   onTransaction?(listener: (hash: string, method: string) => void): () => void;
   signIn(): Promise<void>;

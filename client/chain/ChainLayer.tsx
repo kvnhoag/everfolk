@@ -7,6 +7,7 @@ import RankedEntry from "./RankedEntry.tsx";
 import Market from "./Market.tsx";
 import TokenPage from "./TokenPage.tsx";
 import Web3Navigation from "./Web3Navigation.tsx";
+import { anotherDialogOpened } from "./wallet-host.ts";
 import PackPage from "./PackPage.tsx";
 import Figures from "./Figures.tsx";
 import MyLives from "./MyLives.tsx";
@@ -42,7 +43,7 @@ function ChainShell({ backend, focusKey, onBack, children }: ChainShellProps) {
     if (!dialog.open) dialog.showModal();
     // A game dialog opened later (e.g. the first-visit birth roll) would stack above; lift this one back on top.
     const raise = new MutationObserver(records => {
-      if (!records.some(record => record.target !== dialog && (record.target as HTMLDialogElement).open)) return;
+      if (!anotherDialogOpened(records, dialog)) return; // never above the wallet host
       const top = dialog.scrollTop;
       dialog.close();
       dialog.showModal();

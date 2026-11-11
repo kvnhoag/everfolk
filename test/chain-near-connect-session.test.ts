@@ -21,13 +21,15 @@ function memoryStore(initial: Record<string, string> = {}) {
   const data = new Map(Object.entries(initial));
   return {
     data,
+    get length() { return data.size; },
+    key: (index: number) => Array.from(data.keys())[index] ?? null,
     getItem: (key: string) => data.get(key) ?? null,
     setItem: (key: string, value: string) => { data.set(key, value); },
     removeItem: (key: string) => { data.delete(key); },
   };
 }
 
-interface FakeOptions { restored?: boolean; playKeyError?: string; walletError?: string }
+interface FakeOptions { restored?: boolean; playKeyError?: string; walletError?: string; noKeyWallets?: boolean }
 
 function fakes(options: FakeOptions = {}) {
   const log = { connects: [] as unknown[], walletTx: [] as Record<string, unknown>[], playTx: [] as Record<string, unknown>[], disconnects: 0, signers: [] as string[] };
@@ -40,7 +42,11 @@ function fakes(options: FakeOptions = {}) {
       return OK("wallet-hash");
     },
   };
+  const handlers = new Map<string, () => void>();
   const connector = {
+    whenManifestLoaded: Promise.resolve(),
+    availableWallets: [{ manifest: { id: "meteor-wallet", features: { signInWithFunctionCallKey: !options.noKeyWallets, testnet: true } } }],
+    on(event: string, handler: () => void) { handlers.set(event, handler); },
     async connect(input: unknown) { log.connects.push(input); return wallet; },
     async disconnect() { log.disconnects += 1; },
     async getConnectedWallet() {
@@ -65,7 +71,7 @@ function fakes(options: FakeOptions = {}) {
     actions: { functionCall: (method: string, args: unknown, gas: bigint, deposit: bigint) => ({ method, args, gas, deposit }) },
   };
   const load = async (): Promise<WalletLibraries> => ({ connector, near } as unknown as WalletLibraries);
-  return { load, log };
+  return { load, log, emit: (event: string) => handlers.get(event)?.() };
 }
 
 test("wallet sign-in asks for the play key and keeps its secret for this account", async () => {
@@ -169,4 +175,68 @@ test("a cancelled wallet picker reads as cancelled", async () => {
   const session = await createWalletSession(cfg, { load: loadRejecting, store: memoryStore() });
   await assert.rejects(session.signIn(), /Wallet connection was cancelled\./);
   assert.equal(session.accountId, null);
+});
+
+test("without wallets that can add a play key, sign-in explains instead of showing an empty picker", async () => {
+  const { load } = fakes({ noKeyWallets: true });
+  await assert.rejects(createWalletSession(cfg, { load, store: memoryStore() }), /Wallets could not be loaded\. Check your connection and try again\./);
+});
+
+test("a restored session without a play key asks the same wallet for a new one", async () => {
+  const { load, log } = fakes({ restored: true });
+  const store = memoryStore();
+  const session = await createWalletSession(cfg, { load, store });
+  assert.equal(session.accountId, "alice.testnet");
+  assert.equal(session.needsPlayKey, true);
+  await session.signIn();
+  assert.deepEqual(log.connects, [{ walletId: "meteor-wallet", addFunctionCallKey: playKeyRequest(cfg, PUBLIC) }], "no picker: straight to the connected wallet");
+  assert.equal(store.data.get("everfolk:play-key:alice.testnet"), SECRET);
+  assert.equal(session.needsPlayKey, false);
+  await session.call(CHECKPOINT);
+  assert.equal(log.walletTx.length, 0);
+});
+
+test("after a refused key is forgotten, signing in again re-keys and play is popup-free again", async () => {
+  const options: FakeOptions = { restored: true, playKeyError: `Access key ${PUBLIC} does not exist at block height 9` };
+  const { load, log } = fakes(options);
+  const store = memoryStore({ "everfolk:play-key:alice.testnet": SECRET });
+  const session = await createWalletSession(cfg, { load, store });
+  await session.call(CHECKPOINT);
+  assert.equal(session.needsPlayKey, true);
+  options.playKeyError = undefined;
+  await session.signIn();
+  assert.equal(log.connects.length, 1);
+  assert.equal(session.needsPlayKey, false);
+  await session.call(CHECKPOINT);
+  assert.equal(log.walletTx.length, 1, "only the one fallback before re-keying");
+});
+
+test("with no wallet session left, stored play keys are forgotten", async () => {
+  const { load } = fakes();
+  const store = memoryStore({ "everfolk:play-key:alice.testnet": SECRET, "everfolk:sign-in": "wallet" });
+  const session = await createWalletSession(cfg, { load, store });
+  assert.equal(session.accountId, null);
+  assert.equal(store.data.has("everfolk:play-key:alice.testnet"), false);
+  assert.equal(store.data.get("everfolk:sign-in"), "wallet", "the router decides about the remembered method");
+});
+
+test("NEAR Connect signing out drops the session and its play key", async () => {
+  const { load, emit } = fakes({ restored: true });
+  const store = memoryStore({ "everfolk:play-key:alice.testnet": SECRET });
+  const session = await createWalletSession(cfg, { load, store });
+  emit("wallet:signOut");
+  assert.equal(session.accountId, null);
+  assert.equal(store.data.has("everfolk:play-key:alice.testnet"), false);
+});
+
+test("signing out while a fresh key settles stops the move without a wallet popup", async () => {
+  const { load, log } = fakes({ playKeyError: `Access key ${PUBLIC} does not exist at block height 9` });
+  const session = await createWalletSession(cfg, { load, store: memoryStore(), settleDelayMs: 20 });
+  await session.signIn();
+  const move = session.call(CHECKPOINT);
+  await new Promise(resolve => setTimeout(resolve, 5));
+  await session.signOut();
+  await assert.rejects(move, /checkpoint failed: .*signed out/i);
+  assert.equal(log.playTx.length, 1, "no retry after sign-out");
+  assert.equal(log.walletTx.length, 0, "no wallet fallback after sign-out");
 });

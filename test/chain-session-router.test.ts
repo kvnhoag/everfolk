@@ -159,3 +159,42 @@ test("router reports the email opener's refusal", async () => {
   await assert.rejects(router.use("email"), /Email sign-in is not set up yet\./);
   assert.equal(router.method, null);
 });
+
+test("router asks the active session for a new play key when it has none", async () => {
+  const wallet = fakeSession("alice.testnet", { restored: true });
+  let needsPlayKey = true;
+  const session: WalletSession = {
+    ...wallet.session,
+    get accountId() { return wallet.session.accountId; },
+    get needsPlayKey() { return needsPlayKey; },
+    async signIn() { wallet.log.signIns += 1; needsPlayKey = false; },
+  };
+  const router = createSessionRouter({ email: async () => fakeSession("x").session, wallet: async () => session }, memoryStore({ [SIGN_IN_STORAGE_KEY]: "wallet" }));
+  await router.restore();
+  assert.equal(router.needsPlayKey, true);
+  await router.use("wallet");
+  assert.equal(wallet.log.signIns, 1, "the wallet is asked to add a play key");
+  assert.equal(wallet.log.signOuts, 0, "without signing the player out");
+  assert.equal(router.needsPlayKey, false);
+  await router.use("wallet");
+  assert.equal(wallet.log.signIns, 1, "nothing to do once the key is there");
+});
+
+test("router signOut drops a sign-in still in progress", async () => {
+  // Both sign-ins reach the same (cached) wallet session; releasing finishes every sign-in waiting on it.
+  const waiting: (() => void)[] = [];
+  const release = () => { for (const resolve of waiting.splice(0)) void late.session.signIn().then(resolve); };
+  const late = fakeSession("alice.testnet");
+  const slow: WalletSession = { ...late.session, get accountId() { return late.session.accountId; }, signIn: () => new Promise<void>(resolve => { waiting.push(resolve); }) };
+  const router = createSessionRouter({ email: async () => fakeSession("x").session, wallet: async () => slow }, memoryStore());
+  const first = router.use("wallet");
+  await new Promise(resolve => setImmediate(resolve));
+  await router.signOut();
+  const second = router.use("wallet");
+  assert.notEqual(second, first, "a new sign-in starts instead of joining the cancelled one");
+  await new Promise(resolve => setImmediate(resolve));
+  release();
+  await assert.rejects(first, /Sign-in was cancelled\./);
+  await second;
+  assert.equal(router.accountId, "alice.testnet");
+});

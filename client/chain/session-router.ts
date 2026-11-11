@@ -68,9 +68,12 @@ export function createSessionRouter(open: SessionOpeners, store: MethodStore | n
     writeMethod(store, method);
   };
 
+  let pending: { method: SignInMethod; done: Promise<void> } | null = null;
+
   /** Detaches first, so the old session is unreachable even if its own sign-out fails. */
   const signOut = async () => {
     generation += 1;
+    pending = null;
     const previous = active;
     active = null;
     writeMethod(store, null);
@@ -79,28 +82,35 @@ export function createSessionRouter(open: SessionOpeners, store: MethodStore | n
     await previous.session.signOut();
   };
 
+  /** Latest sign-in ticket per session: a newer sign-in may be reusing the same (cached) session. */
+  const latestTicket = new Map<WalletSession, number>();
+
   /** A sign-in that finished after a newer sign-in or sign-out must not stay signed in behind the router. */
-  const abandon = async (session: WalletSession) => {
-    if (active?.session === session) return;
+  const abandon = async (session: WalletSession, ticket: number) => {
+    if (active?.session === session || latestTicket.get(session) !== ticket) return;
     await session.signOut().catch(error => console.warn("Everfolk: could not sign out a cancelled sign-in.", error));
   };
 
   const signInWith = async (method: SignInMethod) => {
-    if (active?.method === method && active.session.accountId) return;
+    if (active?.method === method && active.session.accountId) {
+      // Signed in but without a play key (refused, unsaved or restored without one): ask the same session for one.
+      if (active.session.needsPlayKey) await active.session.signIn();
+      return;
+    }
     if (active) await signOut();
     generation += 1;
     const ticket = generation;
     const session = await openSession(method);
+    latestTicket.set(session, ticket);
     await session.signIn();
     if (ticket !== generation) {
-      await abandon(session);
+      await abandon(session, ticket);
       throw new Error("Sign-in was cancelled.");
     }
     if (!session.accountId) throw new Error("Sign-in did not finish. Try again.");
     install(method, session);
   };
 
-  let pending: { method: SignInMethod; done: Promise<void> } | null = null;
   /** A second click on the same method joins the sign-in already in progress. */
   const use = (method: SignInMethod): Promise<void> => {
     if (pending?.method === method) return pending.done;
@@ -123,6 +133,7 @@ export function createSessionRouter(open: SessionOpeners, store: MethodStore | n
     get method() { return active?.method ?? null; },
     get accountId() { return active?.session.accountId ?? null; },
     get walletId() { return active?.session.walletId ?? null; },
+    get needsPlayKey() { return active?.session.needsPlayKey ?? false; },
     onTransaction(listener) {
       listeners.add(listener);
       return () => { listeners.delete(listener); };

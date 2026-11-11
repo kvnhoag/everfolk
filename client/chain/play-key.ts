@@ -8,10 +8,10 @@ import type { ContractCall } from "./types.ts";
  * Pure apart from the injected storage; no wallet or RPC library.
  */
 
-export type KeyStore = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+export type KeyStore = Pick<Storage, "getItem" | "setItem" | "removeItem"> & Partial<Pick<Storage, "key" | "length">>;
 
-/** Lifetime gas allowance of the play key in yoctoNEAR (0.25 NEAR). */
-export const PLAY_KEY_GAS_ALLOWANCE = "250000000000000000000000";
+/** Lifetime gas allowance of the play key in yoctoNEAR (1 NEAR). */
+export const PLAY_KEY_GAS_ALLOWANCE = "1000000000000000000000000";
 const STORAGE_PREFIX = "everfolk:play-key:";
 const SECRET_FORMAT = /^ed25519:[1-9A-HJ-NP-Za-km-z]{43,90}$/;
 
@@ -55,6 +55,16 @@ export function savePlayKey(store: KeyStore, accountId: string, secret: string):
 
 export function forgetPlayKey(store: KeyStore, accountId: string): void {
   try { store.removeItem(storageKey(accountId)); } catch { /* nothing stored, nothing to forget */ }
+}
+
+/** Forgets every stored play key (no wallet session is left to own them). Needs an enumerable store. */
+export function forgetAllPlayKeys(store: KeyStore): void {
+  try {
+    const { key, length } = store;
+    if (typeof key !== "function" || typeof length !== "number") return;
+    const keys = Array.from({ length }, (_, index) => key.call(store, index)).filter(name => name?.startsWith(STORAGE_PREFIX));
+    for (const name of keys) if (name) store.removeItem(name);
+  } catch { /* storage blocked: nothing readable to forget */ }
 }
 
 /** near-api-js messages for a key that is gone from chain, out of allowance, or not allowed for this call. */

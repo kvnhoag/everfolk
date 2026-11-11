@@ -2,13 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { resolveChainConfig } from "../client/chain/config.ts";
 import { ACCESS_KEY_METHODS } from "../client/chain/contract.ts";
-import { forgetPlayKey, isPlayKeyRejected, loadPlayKey, playKeyRequest, savePlayKey, usesPlayKey } from "../client/chain/play-key.ts";
+import { forgetAllPlayKeys, forgetPlayKey, isPlayKeyRejected, loadPlayKey, playKeyRequest, savePlayKey, usesPlayKey } from "../client/chain/play-key.ts";
 import type { ContractCall } from "../client/chain/types.ts";
 
 function memoryStore() {
   const data = new Map<string, string>();
   return {
     data,
+    get length() { return data.size; },
+    key: (index: number) => Array.from(data.keys())[index] ?? null,
     getItem: (key: string) => data.get(key) ?? null,
     setItem: (key: string, value: string) => { data.set(key, value); },
     removeItem: (key: string) => { data.delete(key); },
@@ -39,7 +41,7 @@ test("play key request names exactly the ranked methods", () => {
   assert.equal(request.publicKey, publicKey);
   assert.equal(request.allowMethods.anyMethod, false);
   assert.deepEqual(request.allowMethods.methodNames, [...ACCESS_KEY_METHODS]);
-  assert.deepEqual(request.gasAllowance, { kind: "limited", amount: "250000000000000000000000" });
+  assert.deepEqual(request.gasAllowance, { kind: "limited", amount: "1000000000000000000000000" }, "1 NEAR lifetime gas allowance");
 });
 
 test("play keys are stored per account and forgotten on sign-out", () => {
@@ -70,4 +72,14 @@ test("a missing or exhausted play key is recognised, contract panics are not", (
   assert.equal(isPlayKeyRejected(new Error("Smart contract panicked: life already active")), false);
   assert.equal(isPlayKeyRejected(new Error("Failed to fetch")), false);
   assert.equal(isPlayKeyRejected("Access key ed25519:abc does not exist at block height 12"), true);
+});
+
+test("all play keys can be forgotten at once, leaving other storage alone", () => {
+  const store = memoryStore();
+  savePlayKey(store, "alice.testnet", SECRET_A);
+  savePlayKey(store, "bob.testnet", SECRET_B);
+  store.setItem("everfolk:sign-in", "wallet");
+  forgetAllPlayKeys(store);
+  assert.deepEqual(Array.from(store.data.keys()), ["everfolk:sign-in"]);
+  assert.doesNotThrow(() => forgetAllPlayKeys({ getItem: () => null, setItem: () => {}, removeItem: () => {} }), "a store without enumeration is left as is");
 });

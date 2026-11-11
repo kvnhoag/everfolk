@@ -1,6 +1,8 @@
 /** Class NEAR Connect (`@hot-labs/near-connect`) gives every popup root it appends to `<body>`. */
 export const WALLET_POPUP_CLASS = "hot-connector-popup";
-const HOST_CLASS = "everfolk-wallet-host";
+/** Class of the dialog that hosts NEAR Connect popups above the ranked screen. */
+export const WALLET_HOST_CLASS = "everfolk-wallet-host";
+const HOST_CLASS = WALLET_HOST_CLASS;
 const HOST_STYLE = "position:fixed;inset:0;width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;overflow:visible;";
 const BACKDROP_RULE = `dialog.${HOST_CLASS}::backdrop{background:transparent}`;
 
@@ -26,6 +28,19 @@ export function isWalletPopup(node: unknown): boolean {
 
 function isShown(node: unknown): boolean {
   return isWalletPopup(node) && (node as PopupLike).style?.display !== "none";
+}
+
+export function isWalletHost(node: unknown): boolean {
+  const host = node as PopupLike | null;
+  return Boolean(host?.classList?.contains(WALLET_HOST_CLASS));
+}
+
+/**
+ * For the ranked screen's raise observer: true when a dialog other than `self` opened, so the ranked screen
+ * should lift itself back on top. The wallet host is exempt: it must stay above the ranked screen.
+ */
+export function anotherDialogOpened(records: ArrayLike<{ target: unknown }>, self: unknown): boolean {
+  return Array.from(records).some(({ target }) => target !== self && !isWalletHost(target) && Boolean((target as { open?: boolean } | null)?.open));
 }
 
 /** Moves the wallet popups among `nodes` into `host`; other nodes stay where they are. */
