@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import type { PriceHistoryPoint } from "./price-history.ts";
+import { ResourceGlyph } from "./ResourceBar.tsx";
 
 export function AssetSparkline({
   item,
@@ -148,7 +149,8 @@ export default function PriceChart({
                 className={`demo-chart-pill${item === id ? " is-active" : ""}`}
                 onClick={() => onSelectItem(id)}
               >
-                {itemLabel(id)}
+                <ResourceGlyph id={id} />
+                <span>{itemLabel(id)}</span>
               </button>
             ))}
           </div>

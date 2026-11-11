@@ -76,7 +76,7 @@
 .demo-price-chart-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
 .demo-price-chart-header h4{margin:2px 0 0;font-size:15px;font-family:var(--serif,Georgia,serif)}
 .demo-chart-asset-pills{display:flex;flex-wrap:wrap;gap:4px}
-.demo-chart-pill{border:1px solid #8a7352;background:#fbf6e9;color:var(--ink,#2b2318);padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
+.demo-chart-pill{display:inline-flex;align-items:center;gap:5px;border:1px solid #8a7352;background:#fbf6e9;color:var(--ink,#2b2318);padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
 .demo-chart-pill.is-active{background:#38665e;color:#fbf6e9;border-color:#38665e;font-weight:700}
 
 .demo-chart-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:6px;margin-bottom:8px}
@@ -107,9 +107,27 @@
 .demo-row-btns button{border:1px solid #7c674a;background:#f3ebd9;padding:3px 7px;font-size:11px;cursor:pointer;font-family:inherit}
 .demo-row-btns button:hover{background:#2d2419;color:#fbf6e9}
 
-/* Trade Ticket */
+/* Trade Ticket & Styled Icon Dropdowns */
+.demo-commodity-cell{display:inline-flex;align-items:center;gap:6px}
 .demo-market-summary-facts{margin-top:8px;padding-top:8px;border-top:1px solid #e2d6be}
 .demo-trade-ticket{border-top:2px dashed #bba785;padding-top:10px;margin-top:10px}
+.demo-dropdown-field{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 9.5rem;font-size:12px}
+.demo-dropdown-label{font-size:12px;color:#2b2318}
+.demo-dropdown-wrap{position:relative}
+.demo-dropdown-trigger{display:flex;align-items:center;gap:8px;width:100%;min-height:42px;padding:6px 10px;border:2px solid #594630;background:#fffcf4;color:#2b2318;cursor:pointer;font:inherit;text-align:left;transition:background .1s}
+.demo-dropdown-trigger:hover,.demo-dropdown-trigger.is-open{background:#f3ebd9;border-color:#2d2419}
+.demo-dropdown-trigger-text{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.demo-dropdown-trigger-text strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.demo-dropdown-trigger-text small{font-size:10.5px;color:#6c5c43}
+.demo-dropdown-caret{font-size:12px;color:#594630}
+.demo-dropdown-menu{position:absolute;top:calc(100% + 4px);left:0;right:0;min-width:210px;z-index:45;list-style:none;margin:0;padding:4px;border:2px solid #2d2419;background:#fbf6e9;box-shadow:4px 4px 0 #2b231845;max-height:260px;overflow-y:auto;display:grid;gap:2px}
+.demo-dropdown-option{display:flex;align-items:center;gap:8px;width:100%;padding:7px 8px;border:1px solid transparent;background:transparent;color:#2b2318;cursor:pointer;font:inherit;text-align:left}
+.demo-dropdown-option:hover{background:#efe5cf;border-color:#cbbba0}
+.demo-dropdown-option.is-selected{background:#e3efe9;border-color:#2b5c53;font-weight:700}
+.demo-dropdown-opt-main{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.demo-dropdown-opt-main strong{font-size:12.5px}
+.demo-dropdown-opt-main small{font-size:10px;color:#6c5c43}
+.demo-dropdown-opt-meta{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;color:#2b5c53;white-space:nowrap}
 .demo-trade-submit{background:#2d2419;color:#fbf6e9;border:2px solid #2d2419;padding:0 14px;font-weight:700;cursor:pointer}
 .demo-trade-submit:disabled{opacity:.5;cursor:not-allowed}
 .demo-batch-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 0;font-size:12px}

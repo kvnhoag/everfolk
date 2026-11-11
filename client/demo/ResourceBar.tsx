@@ -111,9 +111,27 @@ const RESOURCE_PIXELS: Record<string, string[]> = {
     "##.....##",
     ".........",
   ],
+  merchant: [
+    "...###...",
+    ".#######.",
+    "#.#.#.#.#",
+    ".#######.",
+    "..#...#..",
+    "..#####..",
+    ".#######.",
+  ],
+  army: [
+    "....#....",
+    "...###...",
+    "..#####..",
+    "..#####..",
+    "...###...",
+    "....#....",
+    "...###...",
+  ],
 };
 
-function ResourceGlyph({ id }: { id: string }) {
+export function ResourceGlyph({ id }: { id: string }) {
   const rows = RESOURCE_PIXELS[id] ?? RESOURCE_PIXELS.grain;
   return (
     <span className={`aoe-glyph aoe-glyph-${id}`} aria-hidden="true">

@@ -20,7 +20,9 @@ body :is(h1,h2,h3),body .brand{font-family:var(--ef-heading)!important}
 .life-record-panel .life-event-feed .life-year-headline,.life-record-panel .life-event-feed .life-entry-overview>p{flex:none;width:100%}
 .life-event-feed .life-year-changes{align-self:flex-start;padding-top:0;margin-top:0}
 /* A passive lifetime scale, without a second history navigation. */
-.life-year-stop-label{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:22px;color:#8e7d62}
+.game-dashboard>.life-year-rail{margin:0 0 14px;padding:10px 15px 9px}
+.game-dashboard>.life-year-rail .life-year-rail-heading{margin:0 0 11px}
+.life-year-stop-label{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:16px;color:#8e7d62}
 .life-year-stop.is-lived .life-year-stop-label{color:var(--ink)}
 /* Skills remain one native, keyboard-operable disclosure. */
 .game-dashboard .dashboard-skills .compact-skills:has(>.compact-skill-disclosure){padding:0}

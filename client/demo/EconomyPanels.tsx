@@ -14,6 +14,7 @@ import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
+import { ResourceGlyph } from "./ResourceBar.tsx";
 import "./economy-panels.css";
 
 export interface ComparisonSide {
@@ -96,6 +97,7 @@ export default function EconomyPanels({
   const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
   const [agentName, setAgentName] = useState("");
   const [peopleFilter, setPeopleFilter] = useState<"all" | "friends" | "business" | "romance" | "family">("all");
+  const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
   const quote = screen.market.quotes.find(entry => entry.item === item);
   const order: TradeCommand = { type: "trade", item, side, quantity, counterparty };
@@ -363,7 +365,10 @@ export default function EconomyPanels({
                     onClick={() => setItem(entry.item)}
                   >
                     <td>
-                      <strong>{itemLabel(entry.item)}</strong>
+                      <span className="demo-commodity-cell">
+                        <ResourceGlyph id={entry.item} />
+                        <strong>{itemLabel(entry.item)}</strong>
+                      </span>
                     </td>
                     <td className="num">{playerHeld}</td>
                     <td className="num">{entry.buy} dr</td>
@@ -419,30 +424,155 @@ export default function EconomyPanels({
 
         <div className="demo-trade-ticket">
           <div className="demo-actions">
-            <label>
-              Good
-              <select value={item} onChange={event => setItem(event.target.value as TradeItem)}>
-                {TRADE_ITEMS.map(id => (
-                  <option key={id} value={id}>
-                    {itemLabel(id)} (held: {heldQuantity(screen, id)})
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Side
-              <select value={side} onChange={event => setSide(event.target.value as "buy" | "sell")}>
-                <option value="sell">Sell ({unitPrice} dr each)</option>
-                <option value="buy">Buy ({unitPrice} dr each)</option>
-              </select>
-            </label>
-            <label>
-              With
-              <select value={counterparty} onChange={event => setCounterparty(event.target.value as "merchant" | "army")}>
-                <option value="merchant">Merchant</option>
-                <option value="army">Army</option>
-              </select>
-            </label>
+            {/* Styled Asset (Good) Dropdown with Icons & Text */}
+            <div className="demo-dropdown-field">
+              <span className="demo-dropdown-label">Good</span>
+              <div className="demo-dropdown-wrap">
+                <button
+                  type="button"
+                  className={`demo-dropdown-trigger${openDropdown === "good" ? " is-open" : ""}`}
+                  aria-haspopup="listbox"
+                  aria-expanded={openDropdown === "good"}
+                  onClick={() => setOpenDropdown(prev => (prev === "good" ? null : "good"))}
+                >
+                  <ResourceGlyph id={item} />
+                  <span className="demo-dropdown-trigger-text">
+                    <strong>{itemLabel(item)}</strong>
+                    <small>Held: {held}</small>
+                  </span>
+                  <span className="demo-dropdown-caret" aria-hidden="true">▾</span>
+                </button>
+                {openDropdown === "good" && (
+                  <ul className="demo-dropdown-menu" role="listbox" aria-label="Choose asset to trade">
+                    {TRADE_ITEMS.map(id => {
+                      const q = screen.market.quotes.find(entry => entry.item === id);
+                      const h = heldQuantity(screen, id);
+                      return (
+                        <li key={id} role="option" aria-selected={item === id}>
+                          <button
+                            type="button"
+                            className={`demo-dropdown-option${item === id ? " is-selected" : ""}`}
+                            onClick={() => {
+                              setItem(id);
+                              setOpenDropdown(null);
+                            }}
+                          >
+                            <ResourceGlyph id={id} />
+                            <span className="demo-dropdown-opt-main">
+                              <strong>{itemLabel(id)}</strong>
+                              <small>Held: {h}</small>
+                            </span>
+                            <span className="demo-dropdown-opt-meta">
+                              {q?.buy ?? 1} / {q?.sell ?? 1} dr
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            {/* Styled Side (Sell / Buy) Dropdown */}
+            <div className="demo-dropdown-field">
+              <span className="demo-dropdown-label">Side</span>
+              <div className="demo-dropdown-wrap">
+                <button
+                  type="button"
+                  className={`demo-dropdown-trigger${openDropdown === "side" ? " is-open" : ""}`}
+                  aria-haspopup="listbox"
+                  aria-expanded={openDropdown === "side"}
+                  onClick={() => setOpenDropdown(prev => (prev === "side" ? null : "side"))}
+                >
+                  <ResourceGlyph id="cash" />
+                  <span className="demo-dropdown-trigger-text">
+                    <strong>{side === "sell" ? "Sell" : "Buy"}</strong>
+                    <small>{unitPrice} dr each</small>
+                  </span>
+                  <span className="demo-dropdown-caret" aria-hidden="true">▾</span>
+                </button>
+                {openDropdown === "side" && (
+                  <ul className="demo-dropdown-menu" role="listbox" aria-label="Choose trade side">
+                    {(["sell", "buy"] as const).map(s => {
+                      const p =
+                        counterparty === "army" && item === "grain"
+                          ? screen.market.armyGrainPrice
+                          : s === "buy"
+                            ? (quote?.sell ?? 1)
+                            : (quote?.buy ?? 1);
+                      return (
+                        <li key={s} role="option" aria-selected={side === s}>
+                          <button
+                            type="button"
+                            className={`demo-dropdown-option${side === s ? " is-selected" : ""}`}
+                            onClick={() => {
+                              setSide(s);
+                              setOpenDropdown(null);
+                            }}
+                          >
+                            <ResourceGlyph id="cash" />
+                            <span className="demo-dropdown-opt-main">
+                              <strong>{s === "sell" ? "Sell to counterparty" : "Buy from counterparty"}</strong>
+                              <small>{s === "sell" ? `You hold ${held}` : `Merchant stock ${quote?.merchantStock ?? 0}`}</small>
+                            </span>
+                            <span className="demo-dropdown-opt-meta">{p} dr</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            {/* Styled Counterparty (Merchant / Army) Dropdown */}
+            <div className="demo-dropdown-field">
+              <span className="demo-dropdown-label">With</span>
+              <div className="demo-dropdown-wrap">
+                <button
+                  type="button"
+                  className={`demo-dropdown-trigger${openDropdown === "with" ? " is-open" : ""}`}
+                  aria-haspopup="listbox"
+                  aria-expanded={openDropdown === "with"}
+                  onClick={() => setOpenDropdown(prev => (prev === "with" ? null : "with"))}
+                >
+                  <ResourceGlyph id={counterparty} />
+                  <span className="demo-dropdown-trigger-text">
+                    <strong>{counterparty === "merchant" ? "Merchant" : "Army"}</strong>
+                    <small>{counterparty === "merchant" ? "Harbor market" : "Levy contract"}</small>
+                  </span>
+                  <span className="demo-dropdown-caret" aria-hidden="true">▾</span>
+                </button>
+                {openDropdown === "with" && (
+                  <ul className="demo-dropdown-menu" role="listbox" aria-label="Choose counterparty">
+                    {(
+                      [
+                        ["merchant", "Merchant", "Harbor market"],
+                        ["army", "Army", `Grain levy (${screen.market.armyOpen ? "Open" : "Closed"})`],
+                      ] as const
+                    ).map(([cp, label, sub]) => (
+                      <li key={cp} role="option" aria-selected={counterparty === cp}>
+                        <button
+                          type="button"
+                          className={`demo-dropdown-option${counterparty === cp ? " is-selected" : ""}`}
+                          onClick={() => {
+                            setCounterparty(cp);
+                            setOpenDropdown(null);
+                          }}
+                        >
+                          <ResourceGlyph id={cp} />
+                          <span className="demo-dropdown-opt-main">
+                            <strong>{label}</strong>
+                            <small>{sub}</small>
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
             <label>
               Quantity
               <input

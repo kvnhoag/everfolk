@@ -30,6 +30,7 @@ import EconomyPanels, { type ComparisonSide, type EconomyTabId } from "./demo/Ec
 import ResourceBar from "./demo/ResourceBar.tsx";
 import type { TradeItem } from "../src/demo/contracts.ts";
 import LifeChoiceBoard from "./LifeChoiceBoard.tsx";
+import EventNotificationStack from "./EventNotificationStack.tsx";
 import { activityGate, demoScreen, freePlayIntro, occupationBadge } from "./demo/screen.ts";
 import LoanOfferDialog from "./LoanOfferDialog.tsx";
 import type { LoanRequest } from "./LoanOfferDialog.tsx";
@@ -187,7 +188,6 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [dialogError, setDialogError] = useState("");
   const [selectedTradeItem, setSelectedTradeItem] = useState<{ item: TradeItem; seq: number } | null>(null);
   const [selectedEconomyTab, setSelectedEconomyTab] = useState<{ tab: EconomyTabId; seq: number } | null>(null);
-  const [popupDecisionKey, setPopupDecisionKey] = useState<string | null>(null);
   const [viewedLife, setViewedLife] = useState<LifeState | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const playbackMenuRef = useRef<HTMLDetailsElement>(null);
@@ -210,7 +210,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
   const dashboardVisible = game.hasBegun && !menuOpen && !game.resumeScreenOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
-  const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== null && popupDecisionKey === decisionKey && !game.autoDecisions);
+  const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== null && deferredDecision !== decisionKey && !game.autoDecisions);
 
   useEffect(() => {
     // Count reading time only on the visible life page. An interruption starts
@@ -468,14 +468,16 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         <div className="playback-bar life-clock">
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else continueWithReadingPause(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
-          <button className="text-button turning-point-button" disabled={life.phase !== "ready"} onClick={() => { setReadingPause(false); game.nextTurningPoint(); }}>Next decision <Icon name="arrow" size={15} /></button>
+          <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
           <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection("children"); setPanel("character"); }}>Family &amp; life</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>Spend</button></div>
           <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options"><button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("children"); setPanel("character"); }}>Family &amp; life</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>Spend</button>{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
           {life.phase === "ready" && <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>}
         </div>
       </section>}
 
+      {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
+      {dashboardVisible && <EventNotificationStack life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
 
       <div className={`life-layout ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
@@ -535,28 +537,8 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
             <LifeChoiceBoard
               life={life}
               world={world}
-              decisionEvent={decisionDisplayEvent}
-              choices={choices}
               activities={activities}
               focusId={game.focusId}
-              readingPause={readingPause}
-              autoDecisions={game.autoDecisions}
-              isPlaying={game.isPlaying}
-              decisionButtonRef={decisionButtonRef}
-              demoView={demoView}
-              isLoanDecision={Boolean(isLoanDecision)}
-              isLoanOffer={Boolean(isLoanOffer)}
-              loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null}
-              riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null}
-              onChoose={selectChoice}
-              onOpenPopup={() => {
-                setReadingPause(false);
-                game.setAutoDecisions(false);
-                setPopupDecisionKey(decisionKey);
-              }}
-              onToggleAuto={() => {
-                game.setAutoDecisions(value => !value);
-              }}
               onAdvance={() => {
                 setReadingPause(false);
                 game.advance();
@@ -584,14 +566,13 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           </>}
         </section>
       </div>
-      {game.hasBegun && <LifeYearRail life={life} />}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
 
     <footer className="site-footer"><span><StorybookMark size={19} /> Everfolk · {place}</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
     </div>
     {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
-    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} onChoose={selectChoice} onSetAside={() => setPopupDecisionKey(null)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
+    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} demoView={demoView} isLoanDecision={Boolean(isLoanDecision)} isLoanOffer={Boolean(isLoanOffer)} loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
     <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : panel === "legacy" ? "legacy-dialog" : panel === "wiki" ? "skill-wiki-dialog" : panel === "map" ? "location-map-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
         {(dialogError || downloadError) && <p className="dialog-error" role="alert">{dialogError || downloadError}</p>}

@@ -27,6 +27,8 @@ const hooks = registerHooks({
 });
 const { default: EconomyPanels } = await import("../client/demo/EconomyPanels.tsx");
 const { default: LifeChoiceBoard } = await import("../client/LifeChoiceBoard.tsx");
+const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
+const { default: EventNotificationStack } = await import("../client/EventNotificationStack.tsx");
 hooks.deregister();
 
 const engine = demoEngine();
@@ -123,36 +125,52 @@ test("unavailable work cannot be funded, and the skill stays visible", () => {
   assert.equal(currentSkillTree(model).nodes.some(node => node.id === "philosophy"), true);
 });
 
-test("LifeChoiceBoard and People & Town deck render inline decisions, encounter banners, and town counterparties without mutating state", () => {
+test("DecisionDialog popup, EventNotificationStack, LifeChoiceBoard, and styled trade dropdowns render without mutating state", () => {
   let life = engine.start("choice-board-ui");
   for (let i = 0; i < 16 && life.phase !== "choice"; i++) life = engine.advance(life);
   const before = structuredClone(life);
   const screen = demoScreen(engine.world, life)!;
   const activities = engine.getActivities(life);
   const choices = engine.getChoices(life);
-  const decisionEvent = engine.world.events.find(e => e.id === life.pendingEventId);
+  const decisionEvent = engine.world.events.find(e => e.id === life.pendingEventId)!;
 
   const boardHtml = renderToStaticMarkup(createElement(LifeChoiceBoard, {
     life,
     world: engine.world,
-    decisionEvent,
-    choices,
     activities,
     focusId: "everyday",
-    readingPause: false,
-    autoDecisions: false,
-    isPlaying: false,
-    demoView: screen,
-    onChoose: () => {},
-    onOpenPopup: () => {},
-    onToggleAuto: () => {},
     onAdvance: () => {},
     onOpenChronicle: () => {},
     onFocusChange: () => {},
     onActivity: () => {},
   }));
-  assert.match(boardHtml, /Open decision popup/);
-  assert.match(boardHtml, /CHOICE PREVIEW/);
+  assert.doesNotMatch(boardHtml, /TURNING POINT/);
+
+  const popupHtml = renderToStaticMarkup(createElement(DecisionDialog, {
+    open: true,
+    event: decisionEvent,
+    life,
+    world: engine.world,
+    choices,
+    demoView: screen,
+    onChoose: () => {},
+    onSetAside: () => {},
+    onEnableAuto: () => {},
+  }));
+  assert.match(popupHtml, /life-encounter-banner/);
+  assert.match(popupHtml, /life-decision-board-grid/);
+  assert.match(popupHtml, /CHOICE PREVIEW/);
+
+  const notifHtml = renderToStaticMarkup(createElement(EventNotificationStack, {
+    life,
+    world: engine.world,
+    decisionEvent,
+    demoView: screen,
+    onOpenDecision: () => {},
+    onOpenChronicle: () => {},
+  }));
+  assert.match(notifHtml, /event-notification-stack/);
+  assert.match(notifHtml, /Open decision/);
 
   const deckHtml = renderToStaticMarkup(createElement(EconomyPanels, {
     screen,
@@ -166,6 +184,8 @@ test("LifeChoiceBoard and People & Town deck render inline decisions, encounter 
     onAutoPlay: () => {},
     onDelegate: () => null,
   }));
+  assert.match(deckHtml, /demo-dropdown-trigger/);
+  assert.match(deckHtml, /demo-commodity-cell/);
   assert.match(deckHtml, /People &amp; Town/);
   assert.match(deckHtml, /Naukleros Heron/);
   assert.match(deckHtml, /Pakhom of the Fayyum/);
