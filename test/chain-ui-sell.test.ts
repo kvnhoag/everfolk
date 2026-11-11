@@ -21,7 +21,7 @@ const hooks = registerHooks({
   },
 });
 const { default: SellYours } = await import("../client/chain/SellYours.tsx");
-const { MarketBody } = await import("../client/chain/Market.tsx");
+const { MarketBody, loadMarket, YOURS_LOAD_ERROR } = await import("../client/chain/Market.tsx");
 const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 hooks.deregister();
 
@@ -112,4 +112,27 @@ test("the token page sale box uses the 0.025 placeholder", () => {
   const view = { listing: null, canList: true, sources: [], isOwner: true, currentAction: { id: "a", name: "A", description: "" }, menu: [], children: [], figureId: null, kindLabel: "", title: "T", rarityLabel: "", lifeLine: "", owner: "x", affectionText: "", affection: 1, evidenceHref: null, reach: "", claimableText: null, canChangeAction: false, isFigure: false, canBuy: false, canUnlist: false };
   const html = renderToStaticMarkup(createElement(TokenPageBody, { tokenId: "1", view: view as never, onSetAction: noop, onWithdraw: noop, onList: noop, onUnlist: noop, onBuy: noop }));
   assert.match(html, /placeholder="0\.025"/);
+});
+
+async function loadWith(overrides: Record<string, () => Promise<unknown>>) {
+  const mock = createMockContract({ genesis: false, accountId: "me.testnet" });
+  const contract = new Proxy(mock, { get: (target, key: string) => overrides[key] ?? (target as never)[key] });
+  return loadMarket({ contract, accountId: "me.testnet", mode: "preview" } as never);
+}
+
+test("a failing marketTerms falls back to defaults and keeps the market", async () => {
+  const loaded = await loadWith({ marketTerms: () => Promise.reject(new Error("rpc down")) });
+  assert.deepEqual(loaded.terms, TERMS);
+  assert.ok(loaded.items);
+  assert.equal(loaded.itemsError, undefined);
+});
+
+test("a failing tokensOf keeps listings and shows an error in the Yours tab", async () => {
+  const preview = await createPreviewLedger();
+  const contract = new Proxy(preview, { get: (target, key: string) => key === "tokensOf" ? () => Promise.reject(new Error("boom")) : (target as never)[key] });
+  const loaded = await loadMarket({ contract, accountId: "player.testnet", mode: "preview" } as never);
+  assert.ok(loaded.rows.length > 0);
+  assert.equal(loaded.itemsError, YOURS_LOAD_ERROR);
+  const html = renderToStaticMarkup(createElement(MarketBody, { rows: loaded.rows, onBuy: noop, initialTab: "yours", yours: { items: loaded.items ?? [], terms: loaded.terms, error: loaded.itemsError, onList: noop, onUnlist: noop } }));
+  assert.match(html, /Your NFTs could not be loaded\./);
 });

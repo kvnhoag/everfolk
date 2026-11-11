@@ -5,6 +5,7 @@ import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { parseNearInput } from "./near-amount.ts";
 import { tokenPageView, type TokenPageView } from "./token-page-model.ts";
 import StewardSettings from "../demo/StewardSettings.tsx";
+import { DEFAULT_MARKET_TERMS } from "./payout-preview.ts";
 import { PRICE_PLACEHOLDER, PayoutLine } from "./SellYours.tsx";
 import type { MarketTerms, TokenView } from "./types.ts";
 import "./token-market.css";
@@ -27,7 +28,6 @@ export interface TokenPageBodyProps {
   terms?: MarketTerms;
 }
 
-const DEFAULT_TERMS: MarketTerms = { royaltySourcesBps: 500, royaltyTreasuryBps: 500 };
 
 function ActionPicker({ view, busy, onSetAction }: Pick<TokenPageBodyProps, "view" | "busy" | "onSetAction">) {
   const [choice, setChoice] = useState(view.currentAction.id);
@@ -42,7 +42,7 @@ function ActionPicker({ view, busy, onSetAction }: Pick<TokenPageBodyProps, "vie
   </fieldset>;
 }
 
-function SaleBox({ view, busy, onList, onUnlist, onBuy, terms = DEFAULT_TERMS }: Pick<TokenPageBodyProps, "view" | "busy" | "onList" | "onUnlist" | "onBuy" | "terms">) {
+function SaleBox({ view, busy, onList, onUnlist, onBuy, terms = DEFAULT_MARKET_TERMS }: Pick<TokenPageBodyProps, "view" | "busy" | "onList" | "onUnlist" | "onBuy" | "terms">) {
   const priceId = useId();
   const [price, setPrice] = useState("");
   const [priceError, setPriceError] = useState("");
@@ -124,7 +124,7 @@ async function loadTokenPage(backend: ChainBackend, tokenId: string): Promise<Lo
   if (!token) return null;
   const [stats, children, listings, balance, terms] = await Promise.all([
     contract.tokenStats(tokenId), contract.childrenOf(tokenId), contract.listings(), accountId ? contract.balanceOf(accountId) : Promise.resolve("0"),
-    contract.marketTerms().catch(() => DEFAULT_TERMS),
+    contract.marketTerms().catch(() => DEFAULT_MARKET_TERMS),
   ]);
   const sources = await Promise.all(token.extra.sources.map(async source => [source.token_id, await contract.token(source.token_id).catch(() => null)] as const));
   const view = tokenPageView({

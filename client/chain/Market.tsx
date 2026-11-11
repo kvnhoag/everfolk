@@ -7,7 +7,8 @@ import { filterMarket, marketRows, tokenTitle, marketTabs, type MarketRow, type 
 import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, effectiveFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import PixelIcon from "../PixelIcon.tsx";
-import type { MarketTerms, TokenView } from "./types.ts";
+import { DEFAULT_MARKET_TERMS } from "./payout-preview.ts";
+import type { Listing, MarketTerms, TokenView } from "./types.ts";
 import SellYours, { type SellItem } from "./SellYours.tsx";
 import "./token-market.css";
 import "./ledger.css";
@@ -23,7 +24,7 @@ export interface MarketBodyProps {
   /** Starting filter; defaults to showing everything, cheapest first. */
   initialFilter?: MarketFilter;
   /** The signed-in player's own NFTs; the "Yours" tab appears only when this is set. */
-  yours?: { items: readonly SellItem[]; terms: MarketTerms; onList(tokenId: string, priceYocto: string): void; onUnlist(tokenId: string): void };
+  yours?: { items: readonly SellItem[]; terms: MarketTerms; error?: string; onList(tokenId: string, priceYocto: string): void; onUnlist(tokenId: string): void };
   /** Tab to open first. */
   initialTab?: MarketTab | typeof YOURS_TAB;
 }
@@ -77,7 +78,7 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       <button className="market-tab" type="button" role="tab" aria-selected={showYours} onClick={() => setTab(YOURS_TAB)}>Yours<small>{yours.items.length}</small></button>
     </li>}</ul>
     {showYours && yours
-      ? <div className="ledger-body"><SellYours items={yours.items} terms={yours.terms} busy={busy} onList={yours.onList} onUnlist={yours.onUnlist} /></div>
+      ? <div className="ledger-body">{yours.error && <p className="chain-error" role="alert">{yours.error}</p>}<SellYours items={yours.items} terms={yours.terms} busy={busy} onList={yours.onList} onUnlist={yours.onUnlist} /></div>
       : shown.length === 0
       ? <p className="market-empty">{filtered && rows.length > 0 ? "Nothing matches these filters." : EMPTY_TEXT[tab]}</p>
       : <ol className="ledger-rows market-ledger ledger-body">{shown.map(row => <li key={row.tokenId} className={`ledger-row market-row${row.isFigure ? " is-figure" : ""}`}>
@@ -102,36 +103,45 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
   </section>;
 }
 
-async function loadRows(backend: ChainBackend): Promise<MarketRow[]> {
-  const listings = await backend.contract.listings();
+async function loadRows(backend: ChainBackend, listings: Listing[]): Promise<MarketRow[]> {
   const tokens = await Promise.all(listings.map(async listing => [listing.token_id, await backend.contract.token(listing.token_id).catch(() => null)] as const));
   return marketRows(listings, Object.fromEntries(tokens) as Record<string, TokenView | null>, backend.accountId);
 }
 
-const FALLBACK_TERMS: MarketTerms = { royaltySourcesBps: 500, royaltyTreasuryBps: 500 };
+export const YOURS_LOAD_ERROR = "Your NFTs could not be loaded.";
 
-interface Loaded { rows: MarketRow[]; items: SellItem[] | null; terms: MarketTerms }
+export interface LoadedMarket { rows: MarketRow[]; items: SellItem[] | null; itemsError?: string; terms: MarketTerms }
 
-async function loadMarket(backend: ChainBackend): Promise<Loaded> {
-  const { accountId, contract } = backend;
-  const [rows, mine, listings, terms] = await Promise.all([
-    loadRows(backend),
-    accountId ? contract.tokensOf(accountId) : Promise.resolve(null),
-    accountId ? contract.listings() : Promise.resolve([]),
-    accountId ? contract.marketTerms() : Promise.resolve(FALLBACK_TERMS),
+async function loadYours(backend: ChainBackend, accountId: string, listings: Listing[]): Promise<Pick<LoadedMarket, "items" | "itemsError" | "terms">> {
+  const { contract } = backend;
+  const terms = await contract.marketTerms().catch(() => DEFAULT_MARKET_TERMS);
+  try {
+    const mine = await contract.tokensOf(accountId);
+    const items = mine.map(token => {
+      const listed = listings.find(listing => listing.token_id === token.token_id);
+      return {
+        tokenId: token.token_id, title: tokenTitle(token.extra), href: chainHref({ kind: "token", tokenId: token.token_id }),
+        listedPriceText: listed ? `${formatNear(listed.price)} NEAR` : null, hasSources: token.extra.sources.length > 0,
+      };
+    });
+    return { items, terms };
+  } catch {
+    return { items: [], itemsError: YOURS_LOAD_ERROR, terms };
+  }
+}
+
+/** Listings load first; the signed-in player's own NFTs load on their own so their failure never hides the market. */
+export async function loadMarket(backend: ChainBackend): Promise<LoadedMarket> {
+  const listings = await backend.contract.listings();
+  const [rows, yours] = await Promise.all([
+    loadRows(backend, listings),
+    backend.accountId ? loadYours(backend, backend.accountId, listings) : Promise.resolve({ items: null, terms: DEFAULT_MARKET_TERMS }),
   ]);
-  const items = mine && mine.map(token => {
-    const listed = listings.find(listing => listing.token_id === token.token_id);
-    return {
-      tokenId: token.token_id, title: tokenTitle(token.extra), href: chainHref({ kind: "token", tokenId: token.token_id }),
-      listedPriceText: listed ? `${formatNear(listed.price)} NEAR` : null, hasSources: token.extra.sources.length > 0,
-    };
-  });
-  return { rows, items, terms };
+  return { rows, ...yours };
 }
 
 export default function Market({ backend }: { backend: ChainBackend }) {
-  const [loaded, setLoaded] = useState<Loaded | null>(null);
+  const [loaded, setLoaded] = useState<LoadedMarket | null>(null);
   const [reload, setReload] = useState(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -141,7 +151,7 @@ export default function Market({ backend }: { backend: ChainBackend }) {
     let cancelled = false;
     void loadMarket(backend)
       .then(result => { if (!cancelled) setLoaded(result); })
-      .catch(cause => { if (!cancelled) { setLoaded({ rows: [], items: null, terms: FALLBACK_TERMS }); setError(errorText(cause, "The market could not be opened.")); } });
+      .catch(cause => { if (!cancelled) { setLoaded({ rows: [], items: null, terms: DEFAULT_MARKET_TERMS }); setError(errorText(cause, "The market could not be opened.")); } });
     return () => { cancelled = true; };
   }, [backend, reload]);
 
@@ -160,7 +170,7 @@ export default function Market({ backend }: { backend: ChainBackend }) {
     onConnect={() => { void run(backend.connect, { text: "Wallet connected." }, "The wallet could not connect."); }}
     onBuy={row => { void run(() => backend.contract.buy(row.tokenId, row.priceYocto), { text: `${row.title} is yours.`, href: row.href }, "The purchase did not go through."); }}
     yours={loaded.items ? {
-      items: loaded.items, terms: loaded.terms,
+      items: loaded.items, terms: loaded.terms, error: loaded.itemsError,
       onList: (tokenId, price) => { void run(() => backend.contract.list(tokenId, price), { text: "It's on the market." }, "It could not be put up for sale."); },
       onUnlist: tokenId => { void run(() => backend.contract.unlist(tokenId), { text: "It's off the market." }, "It could not be taken off the market."); },
     } : undefined}
