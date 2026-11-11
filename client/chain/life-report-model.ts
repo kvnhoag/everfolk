@@ -1,4 +1,5 @@
-import { NPC_ACTIONS, RARITY_POWER_BPS, type FigureId } from "../../chain/ids.ts";
+import { actionsForGroup } from "../../chain/catalog/demo-deeds.ts";
+import { RARITY_POWER_BPS, type FigureId } from "../../chain/ids.ts";
 import { explorerUrl } from "./account-bar-model.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import type { Evidence, LifeView, MintResult, SourceImpact } from "../../chain/types.ts";
@@ -64,7 +65,7 @@ export function lifeReport(input: { life: LifeView; sources: readonly SourceImpa
 
 /** The actions a newly minted NPC can take: its life's career group only. */
 export function npcActionMenu(group: CareerGroup): ActionOption[] {
-  return NPC_ACTIONS[group].actions.map(actionOption);
+  return actionsForGroup(group).map(actionOption);
 }
 
 export function lifeSpanLine(evidence: Pick<Evidence, "birth_year" | "death_year" | "death_age">): string {
@@ -99,7 +100,7 @@ export interface RevealDetails {
 }
 
 const EMBLEM: Record<CareerGroup, string> = {
-  letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music",
+  letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music", farming: "farming",
 };
 
 /** The kept life as a ledger: what it is, how strongly and how often it acts, and where it is recorded. */

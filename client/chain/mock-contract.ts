@@ -1,5 +1,6 @@
 import { sha256Hex } from "../../chain/hash.ts";
-import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS } from "../../chain/ids.ts";
+import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
 import type { Category, FigureId } from "../../chain/ids.ts";
 import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack } from "../../chain/types.ts";
 import { REROLL_FEE_YOCTO } from "./near-amount.ts";
@@ -113,7 +114,7 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
   const { figure, rarity, affection } = chosen ? { figure: chosen.figure_id, rarity: chosen.rarity, affection: chosen.affection } : await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence);
   const actionId = figure ? FIGURE_ACTIONS[figure][0] : npcActionId;
   const kind = figure ? "figure" : "npc";
-  const category = figure ? null : NPC_ACTIONS[evidence.career_group].category;
+  const category = figure ? null : categoryOfNpcAction(npcActionId);
   const tokenId = registerToken(state, {
     owner_id: life.account_id, kind, figure_id: figure, category, rarity, affection, action_id: actionId,
     extra: {

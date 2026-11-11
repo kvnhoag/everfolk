@@ -1,5 +1,6 @@
 import type { CareerGroup } from "../../chain/ids.ts";
-import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
+import { actionsForGroup } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import type { Listing, TokenExtra, TokenStats } from "../../chain/types.ts";
 import { formatYear } from "../../src/calendar.ts";
 import { actionName, actionOption, figureTitle, groupOfAction, GROUP_TITLE, rarityLabel, type ActionOption } from "./chain-copy.ts";
@@ -27,7 +28,7 @@ export function tokenActionMenu(extra: TokenExtra): (ActionOption & { selected: 
   const group = groupOfAction(extra.action_id);
   const ids: readonly string[] = extra.kind === "figure" && extra.figure_id
     ? FIGURE_ACTIONS[extra.figure_id]
-    : group ? NPC_ACTIONS[group].actions : [extra.action_id];
+    : group ? actionsForGroup(group) : [extra.action_id];
   return ids.map(id => ({ ...actionOption(id), selected: id === extra.action_id }));
 }
 
@@ -107,9 +108,8 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
   };
 }
 
-const EMBLEMS: Record<string, string> = {
-  letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music",
-  farming: "farming",
+const EMBLEMS: Record<CareerGroup, string> = {
+  letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music", farming: "farming",
 };
 
 /** A skill icon standing for a career group, for people of the city who have no collectible art. */

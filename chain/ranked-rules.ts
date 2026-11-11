@@ -17,7 +17,7 @@ export class ObligationTracker {
 
   /** `state` is the life at command index `step`, before `commands[step]` runs (or at the end of the log). */
   at(state: LifeState, step: number): Obligation[] {
-    const category = state.phase === "choice" && state.pendingEventId ? keyDecisionCategory(state.pendingEventId) : null;
+    const category = state.phase === "choice" && state.pendingEventId ? keyDecisionCategory(state.pendingEventId, state.worldVersion) : null;
     if (!category) {
       this.drawnDecision = null;
       return [];
@@ -41,6 +41,12 @@ export function stepCommand(engine: LifeEngine, state: LifeState, command: Comma
     case "act": return engine.act(state, command.activity);
     case "avatar": return engine.chooseAvatar(state, command.variant);
     case "influence": return engine.influence(state, command);
+    case "trade":
+    case "plan":
+    case "assign-agents":
+    case "delegate":
+    case "agent":
+      return engine.demo(state, command);
     default: throw new Error("Unknown command.");
   }
 }

@@ -13,6 +13,8 @@ export interface FigureRequirement {
   minStats?: Record<string, number>;
   accomplishmentsAny?: string[];
   maxAgeAtAccomplishment?: number;
+  /** Demo-world only. Ranked figures omit it, so ranked matching is unchanged. */
+  minReputation?: number;
 }
 
 export const FIGURE_SUPPLY_CAP = 5;

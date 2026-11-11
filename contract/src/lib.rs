@@ -125,3 +125,5 @@ mod tests_mint;
 mod tests_nft;
 #[cfg(test)]
 mod tests_market;
+#[cfg(test)]
+mod tests_demo_catalog;
