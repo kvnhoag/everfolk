@@ -31,6 +31,10 @@ const { MarketBody } = await import("../client/chain/Market.tsx");
 const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 const { default: EmailSignIn, emailButtonAction } = await import("../client/demo/EmailSignIn.tsx");
 const { SpendSheet } = await import("../client/chain/ConfirmSpend.tsx");
+const { default: AccountBar } = await import("../client/chain/AccountBar.tsx");
+const { default: LifeReport } = await import("../client/chain/LifeReport.tsx");
+const { default: MintPack } = await import("../client/chain/MintPack.tsx");
+const { default: ActiveLifeCard } = await import("../client/chain/ActiveLifeCard.tsx");
 hooks.deregister();
 
 const CHAIN_WORDS = /gas|seed|wallet|crypto/i;
@@ -58,7 +62,7 @@ test("email sign-in falls back to the note without a Privy App ID", () => {
   assert.deepEqual(parseSignInConfig({ privyAppId: null, funding: false, dripYocto: "1" }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig({ privyAppId: "  " }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig("nonsense"), { privyAppId: null });
-  assert.deepEqual(parseSignInConfig({ privyAppId: "cm0abc123def456" }), { privyAppId: "cm0abc123def456" });
+  assert.deepEqual(parseSignInConfig({ privyAppId: "cm0abc123def456", funding: true }), { privyAppId: "cm0abc123def456" });
   assert.equal(emailButtonAction(false, () => {}), "note");
   assert.equal(emailButtonAction(true, undefined), "note");
   assert.equal(emailButtonAction(true, () => {}), "open");
@@ -119,7 +123,7 @@ test("the spend queue asks one question at a time and never for free calls", asy
   assert.deepEqual(queue.current()?.text, { title: "Buy", price: "0.025 NEAR" });
   queue.current()?.answer(false);
   assert.equal(await first, false);
-  assert.deepEqual(queue.current()?.text, { title: "List for sale", price: "No NEAR spent" });
+  assert.deepEqual(queue.current()?.text, { title: "List for sale", price: "No NEAR spent", note: "Listing is free; the buyer pays this price." });
   queue.current()?.answer(true);
   assert.equal(await second, true);
   assert.equal(queue.current(), null);
@@ -208,4 +212,49 @@ test("a failed load of email sign-in reads as friendly text and can be retried",
   await assert.rejects(opener.open(), (error: Error) => error.message === EMAIL_NOT_LOADED);
   assert.equal(attempts, 2);
   await assert.rejects(emailOpener(cfg, null).open(), /not set up yet/);
+});
+
+
+test("email sign-in needs both a valid app ID and enabled funding", () => {
+  for (const funding of [false, undefined, "true", 1]) assert.deepEqual(parseSignInConfig({ privyAppId: "app-id", funding }), { privyAppId: null });
+  assert.deepEqual(parseSignInConfig({ privyAppId: "app-id", funding: true }), { privyAppId: "app-id" });
+});
+
+test("wallet-only sign-in retains Meteor help and a missing play key replaces Start", () => {
+  const only = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend({ available: { email: false } }) as never }));
+  assert.match(only, /Using Meteor Wallet/);
+  const rekey = renderToStaticMarkup(createElement(RankedEntry, { backend: fakeBackend({ method: "wallet", needsPlayKey: true }, "ada.testnet") as never }));
+  assert.match(rekey, /Sign in again for popup-free play/);
+  assert.doesNotMatch(rekey, />Start a ranked life/);
+});
+
+test("transaction toasts never interrupt email play or popup-free game methods", () => {
+  for (const method of ["start_life", "abandon_life", "draw_npc", "checkpoint", "buy"]) {
+    for (const email of [false, true]) {
+      const backend = { ...fakeBackend({ method: email ? "email" : "wallet" }, "ada.testnet"), lastTransaction: { hash: "confirmed", method } };
+      const html = renderToStaticMarkup(createElement(AccountBar, { backend: backend as never }));
+      if (email || method !== "buy") assert.doesNotMatch(html, /View transaction/);
+      else assert.match(html, /Purchase complete.*recorded on NEAR/);
+    }
+  }
+});
+
+test("email mint screens use account and confirmation copy", () => {
+  const report = renderToStaticMarkup(createElement(LifeReport, { walletPath: false, packMode: true, busy: true, report: { rows: [] }, feeText: "0.001", menu: [], selectedAction: "letters.teach", onSelectAction() {}, onMint() {}, onDecline() {} } as never));
+  const pack = renderToStaticMarkup(createElement(MintPack, { walletPath: false, initialPack: { life_id: "1", cards: [], evidence_hash: "a".repeat(64), total_fee: "1000000000000000000000", reroll_fee: "10000000000000000000000", source_share_bps: 5000 }, contract: {} as never, onClose() {} }));
+  const active = renderToStaticMarkup(createElement(ActiveLifeCard, { walletPath: false, life: { life_id: "1" } as never, progress: { status: "ended", pack: true }, onOpen() {} }));
+  for (const html of [report, pack, active]) assert.doesNotMatch(html, /wallet|gas|yocto/i);
+  assert.match(report, /Confirming/);
+  assert.match(pack, /confirm your choice first/);
+  const rekey = renderToStaticMarkup(createElement(ActiveLifeCard, { life: { life_id: "1" } as never, progress: { status: "playing" } as never, needsPlayKey: true, onOpen() {} }));
+  assert.match(rekey, /Sign in again for popup-free play/);
+});
+
+test("listing confirmation identifies the buyer's price rather than a charge", async () => {
+  const { confirmText } = await import("../client/chain/spend-confirmation.ts");
+  const text = confirmText({ method: "list", args: { price: "25000000000000000000000" }, gas: "1", deposit: "1", access: "wallet" })!;
+  const html = renderToStaticMarkup(createElement(SpendSheet, { text, onConfirm() {}, onCancel() {} }));
+  assert.match(html, /Asking price 0.025 NEAR/);
+  assert.match(html, /Listing is free; the buyer pays this price/);
+  assert.doesNotMatch(html, /Nothing is spent until/);
 });

@@ -11,7 +11,7 @@ export function parseSignInConfig(value: unknown): SignInConfig {
   if (typeof value !== "object" || value === null) return NO_EMAIL;
   const raw = (value as { privyAppId?: unknown }).privyAppId;
   const appId = typeof raw === "string" ? raw.trim() : "";
-  return APP_ID.test(appId) ? { privyAppId: appId } : NO_EMAIL;
+  return APP_ID.test(appId) && (value as { funding?: unknown }).funding === true ? { privyAppId: appId } : NO_EMAIL;
 }
 
 let request: Promise<SignInConfig> | null = null;

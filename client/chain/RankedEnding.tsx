@@ -25,6 +25,7 @@ export interface RankedEndingSession {
 export interface RankedEndingProps {
   session: RankedEndingSession;
   practice?: boolean;
+  walletPath?: boolean;
   contract: LivesContract;
   feeYocto?: string;
   /** Hash of the latest confirmed wallet transaction (the mint, once it lands), for an explorer link. */
@@ -43,7 +44,7 @@ async function ownersOf(contract: LivesContract, tokenIds: readonly string[]): P
 }
 
 /** A ranked life's end: verify the save, show who shaped it, offer the mint, reveal the result. */
-export default function RankedEnding({ session, practice = false, contract, feeYocto = DEFAULT_MINT_FEE_YOCTO, lastTxHash, onClose }: RankedEndingProps) {
+export default function RankedEnding({ session, walletPath = true, practice = false, contract, feeYocto = DEFAULT_MINT_FEE_YOCTO, lastTxHash, onClose }: RankedEndingProps) {
   const [stage, setStage] = useState<Stage>(() => ({ kind: session.life.status === "alive" ? "verifying" : "committed" }));
   const [terms, setTerms] = useState<MintTerms | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -106,8 +107,9 @@ export default function RankedEnding({ session, practice = false, contract, feeY
   const evidence = stage.signed.evidence;
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
-  if (stage.kind === "pack") return <MintPack practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
+  if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
   return <LifeReport
+    walletPath={walletPath}
     report={lifeReport({ life: session.life, sources: evidence.sources, owners })}
     spanLine={lifeSpanLine(evidence)}
     feeText={formatNear(terms?.mint_fee ?? feeYocto)}

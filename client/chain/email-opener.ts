@@ -8,13 +8,13 @@ import { EMAIL_NOT_LOADED } from "./sign-in-errors.ts";
  */
 export async function openEmailSession(cfg: ChainConfig, privyAppId: string): Promise<EmailSession> {
   if (typeof window === "undefined") throw new Error("Email sign-in is only available in the browser.");
-  const [{ mountPrivyBridge }, { mountConfirmSpend }] = await Promise.all([import("./PrivyBridge.tsx"), import("./ConfirmSpend.tsx")])
+  const [{ mountPrivyBridge }, { mountConfirmSpend, cancelSpendConfirmations }] = await Promise.all([import("./PrivyBridge.tsx"), import("./ConfirmSpend.tsx")])
     .catch(error => {
       console.warn("Everfolk: email sign-in did not load.", error);
       throw new Error(EMAIL_NOT_LOADED);
     });
   const bridge = await mountPrivyBridge(privyAppId);
-  const session = createEmailSession(cfg, bridge, { fetch: (input, init) => fetch(input, init), confirm: mountConfirmSpend() });
+  const session = createEmailSession(cfg, bridge, { fetch: (input, init) => fetch(input, init), confirm: mountConfirmSpend(), cancelConfirmations: cancelSpendConfirmations });
   await session.restore().catch(error => console.warn("Everfolk: the remembered email sign-in could not be restored.", error));
   return session;
 }

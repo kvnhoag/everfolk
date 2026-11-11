@@ -17,7 +17,7 @@ export function SpendSheet({ text, onConfirm, onCancel }: { text: SpendText; onC
     <p className="chain-kicker">Before you continue</p>
     <h2 id={titleId}>{text.title}</h2>
     <p className="spend-sheet-price"><strong>{text.price}</strong></p>
-    <p className="chain-fine">Testnet NEAR from your Everfolk account. Nothing is spent until you confirm.</p>
+    <p className="chain-fine">{text.note ?? "Testnet NEAR from your Everfolk account. Nothing is spent until you confirm."}</p>
     <div className="chain-actions">
       <button className="chain-secondary" type="button" onClick={onCancel}>Cancel</button>
       <button className="chain-primary" type="button" onClick={onConfirm} autoFocus>Confirm<span aria-hidden="true">→</span></button>
@@ -49,6 +49,8 @@ export function ConfirmSpend({ queue }: { queue: SpendQueue }) {
 }
 
 let mounted: SpendQueue | null = null;
+
+export function cancelSpendConfirmations(): void { mounted?.cancelAll(); }
 
 /** Mounts the sheet once per page (browser only) and returns the `confirm` an email session asks. */
 export function mountConfirmSpend(doc: Document = document): (call: ContractCall) => Promise<boolean> {

@@ -15,6 +15,7 @@ export interface MintPackProps {
   initialPack: Pack;
   evidence?: Evidence;
   practice?: boolean;
+  walletPath?: boolean;
   contract: LivesContract;
   careerGroup?: CareerGroup;
   onChoose?(slot: number): Promise<MintResult>;
@@ -23,7 +24,7 @@ export interface MintPackProps {
 }
 
 /** All outcomes and rerolls are contract values. Animation only reveals confirmed cards. */
-export default function MintPack({ initialPack, evidence, practice = false, contract, careerGroup, onChoose, onClose, txHash }: MintPackProps) {
+export default function MintPack({ initialPack, evidence, walletPath = true, practice = false, contract, careerGroup, onChoose, onClose, txHash }: MintPackProps) {
   const [pack, setPack] = useState(initialPack);
   const [opened, setOpened] = useState(false);
   const [opening, setOpening] = useState(false);
@@ -74,15 +75,15 @@ export default function MintPack({ initialPack, evidence, practice = false, cont
           <strong>{actionName(card.action_id)}</strong><span>{actionDescription(card.action_id)}</span>
           <span className="augment-affection">Affection {card.affection} / 100</span><span className="augment-select">{selected === slot ? "Selected ✓" : "Choose this card"}</span>
         </button>
-        <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? "Confirm in wallet…" : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>
+        <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? (walletPath ? "Confirm in wallet…" : "Confirming…") : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>
       </article>)}</div>
       <p className="chain-fine">One optional reroll per slot. A reroll replaces that card permanently. {practice ? "Practice rerolls update this local ledger; no NEAR is spent." : "Every paid reroll is saved on NEAR and added to your total mint fee."}</p>
     </>}
-    <div className="pack-receipt"><strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong><span>{pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this life. Network gas is separate.</span></div>
-    {busy && <p role="status" className="chain-notice">{busy === "mint" ? "Confirm your chosen card in your wallet. Waiting for NEAR…" : "Confirm the reroll payment in your wallet. Waiting for NEAR…"}</p>}
+    <div className="pack-receipt"><strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong><span>{pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this life. {walletPath && "Network gas is separate."}</span></div>
+    {busy && <p role="status" className="chain-notice">{!walletPath ? "Confirming…" : busy === "mint" ? "Confirm your chosen card in your wallet. Waiting for NEAR…" : "Confirm the reroll payment in your wallet. Waiting for NEAR…"}</p>}
     {error && <p className="chain-error" role="alert">{error}</p>}
     <div className="chain-actions">{opened && <button className="chain-primary" type="button" disabled={Boolean(busy) || selected === null} onClick={() => { void choose(); }}>{busy === "mint" ? "Minting…" : selected === null ? "Select a card above" : `Mint selected card · Slot ${selected + 1}`}<span aria-hidden="true">→</span></button>}<button className="chain-secondary" type="button" disabled={Boolean(busy)} onClick={onClose}>Save pack & leave</button></div>
-    <p className="chain-fine">{practice ? "This practice pack lasts while this page stays open. No NEAR is spent." : "Your pack is saved on NEAR. Return from My lives at any time. Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas."}</p>
-    {!practice && <details className="pack-proof"><summary>Verify this pack</summary><p>Life #{pack.life_id} · Signed evidence hash <code>{pack.evidence_hash}</code></p><p>Opening, each reroll, and final selection have separate NEAR transactions. The contract stores the outcomes and enforces the one-reroll limit. Check their receipts from the wallet menu.</p><a href={`/api/ranked/evidence/${pack.evidence_hash}`} target="_blank" rel="noreferrer">View the verified life & choices</a></details>}
+    <p className="chain-fine">{practice ? "This practice pack lasts while this page stays open. No NEAR is spent." : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? "Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas." : "You’ll confirm your choice first."}`}</p>
+    {!practice && <details className="pack-proof"><summary>Verify this pack</summary><p>Life #{pack.life_id} · Signed evidence hash <code>{pack.evidence_hash}</code></p><p>Opening, each reroll, and final selection have separate NEAR transactions. The contract stores the outcomes and enforces the one-reroll limit. Check their receipts from Account details.</p><a href={`/api/ranked/evidence/${pack.evidence_hash}`} target="_blank" rel="noreferrer">View the verified life & choices</a></details>}
   </section>;
 }

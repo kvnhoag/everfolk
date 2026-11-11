@@ -28,6 +28,7 @@ export interface EmailBridge {
 export interface EmailSessionDeps extends Pick<FundingDeps, "fetch" | "pollDelayMs" | "pollAttempts"> {
   /** Shows the spend sheet; resolves true on Confirm. Asked only for calls that spend NEAR. */
   confirm(call: ContractCall): Promise<boolean>;
+  cancelConfirmations?(): void;
 }
 export interface EmailSession extends WalletSession {
   readonly email: string | null;
@@ -57,7 +58,11 @@ const messageOf = (error: unknown) => (error instanceof Error ? error.message : 
 /** An empty (or missing) account is still being set up; one that holds some NEAR simply cannot afford this. */
 async function callErrorText(call: ContractCall, error: unknown, balance: () => Promise<string | null>): Promise<string> {
   const message = messageOf(error);
-  if (!LACKS_NEAR.test(message)) return `${call.method} failed: ${contractErrorMessage(message)}`;
+  if (!LACKS_NEAR.test(message)) {
+    const plain = contractErrorMessage(message);
+    const meaningful = /^(?:This token is not for sale|The price has changed|You already own this token)[.!]?$/i;
+    return meaningful.test(plain) ? plain : "That didn't go through — try again.";
+  }
   const held = await balance().catch(() => null);
   return held !== null && /^\d+$/.test(held) && BigInt(held) > 0n ? NOT_ENOUGH_NEAR : NOT_SET_UP;
 }
@@ -132,6 +137,7 @@ export function createEmailSession(cfg: ChainConfig, bridge: EmailBridge, deps: 
       // A new code starts a new sign-in: a player restored on this device can no longer sign.
       current = null;
       loaded = null;
+      deps.cancelConfirmations?.();
       try { await bridge.login(email); } catch (error) {
         console.warn("Everfolk: the sign-in code was not sent.", messageOf(error));
         throw new Error(SEND_FAILED);
@@ -158,6 +164,7 @@ export function createEmailSession(cfg: ChainConfig, bridge: EmailBridge, deps: 
     async signOut() {
       const previous = current;
       current = null;
+      deps.cancelConfirmations?.();
       loaded = null;
       if (previous) await bridge.logout();
     },

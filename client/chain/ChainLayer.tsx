@@ -83,7 +83,7 @@ export default function ChainLayer({ backend, onBeginRanked, rankedSession, onRa
   if (rankedSession?.state.phase === "ended" && backend && !route) {
     const close = () => onRankedClosed?.();
     return <ChainShell backend={backend} focusKey={`ending:${rankedSession.life.life_id}`} onBack={close}>
-      <RankedEnding practice={backend.mode === "preview"} session={rankedSession} contract={backend.contract} lastTxHash={["mint_life", "choose_mint_slot"].includes(backend.lastTransaction?.method ?? "") ? backend.lastTransaction?.hash : null} onClose={close} />
+      <RankedEnding walletPath={backend.signin?.method !== "email"} practice={backend.mode === "preview"} session={rankedSession} contract={backend.contract} lastTxHash={["mint_life", "choose_mint_slot"].includes(backend.lastTransaction?.method ?? "") ? backend.lastTransaction?.hash : null} onClose={close} />
     </ChainShell>;
   }
   if (!route) return null;

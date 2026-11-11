@@ -37,7 +37,10 @@ function touches(entry: { id: string; text: string }): ResourceId[] {
 
 function lastYearLines(life: LifeState): Record<ResourceId, string[]> {
   const lines = Object.fromEntries(RESOURCE_IDS.map(id => [id, [] as string[]])) as Record<ResourceId, string[]>;
-  for (const entry of life.journal) {
+  // In-year trades have the same age as the harvest, but follow the settlement block.
+  let end = life.journal.length - 1;
+  while (end >= 0 && !(life.journal[end].age === life.age && JOURNAL_RESOURCES.some(rule => life.journal[end].id.startsWith(rule.prefix)))) end--;
+  for (const entry of life.journal.slice(0, end + 1)) {
     if (entry.age !== life.age) continue;
     for (const id of new Set(touches(entry))) lines[id] = [...lines[id], entry.text];
   }

@@ -107,3 +107,16 @@ test("trade text is matched by whole word, tolerating plurals", () => {
   assert.deepEqual(mentionedResources("You sell 3 bolts of Coan silk."), ["silk"]);
   assert.deepEqual(mentionedResources("You buy 2 donkeys."), ["donkey"]);
 });
+
+
+test("last year stops at settlement and excludes a later trade at the same age", () => {
+  let life = engine.start("storehouse-cutoff");
+  for (let i = 0; i < 40 && life.phase !== "ended"; i++) {
+    life = life.phase === "choice" ? engine.choose(life, engine.getChoices(life)[0].id) : engine.advance(life);
+    if (life.journal.some(entry => entry.id === "household-harvest" && entry.age === life.age)) break;
+  }
+  const trade = { type: "activity" as const, id: "market-trade", text: "You buy 3 measures of grain for 6 drachmas.", age: life.age, year: life.year };
+  const afterTrade = { ...life, journal: [...life.journal, trade] };
+  assert.ok(rows(afterTrade).some(row => row.lastYear.some(line => /harvest/i.test(line))));
+  assert.ok(rows(afterTrade).every(row => !row.lastYear.includes(trade.text)));
+});

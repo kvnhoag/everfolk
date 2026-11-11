@@ -14,6 +14,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
   const current = useActiveRankedLife(backend);
   const [busy, setBusy] = useState(false);
   async function openLife(life: LifeView) {
+    if (backend.signin?.needsPlayKey) { await backend.signin.useWallet().catch(cause => setError(errorText(cause, "Sign-in did not finish. Try again."))); return; }
     if (!onOpen) { window.location.hash = "#ranked"; return; }
     setBusy(true); setError("");
     try { await onOpen(life); } catch (cause) { setError(errorText(cause, "This life could not be opened.")); } finally { setBusy(false); }
@@ -42,7 +43,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
     {!accountId && signin && <div className="market-empty"><p>Sign in to see the lives you keep.</p>{signingIn
       ? <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={signin.useWallet} onClose={() => setSigningIn(false)} />
       : <button className="chain-secondary" type="button" onClick={() => setSigningIn(true)}>Sign in</button>}</div>}
-    {current.active && <ActiveLifeCard life={current.active.life} progress={current.active.progress} busy={busy} onOpen={() => { void openLife(current.active!.life); }} />}
+    {current.active && <ActiveLifeCard walletPath={signin?.method !== "email"} needsPlayKey={signin?.needsPlayKey} life={current.active.life} progress={current.active.progress} busy={busy} onOpen={() => { void openLife(current.active!.life); }} />}
     {current.loading && <p role="status" className="market-empty">Finding your ranked life…</p>}
     {current.error && <p className="chain-error" role="alert">{current.error}</p>}
     {error && <div className="ledger-body"><p className="chain-error" role="alert">{error}</p></div>}

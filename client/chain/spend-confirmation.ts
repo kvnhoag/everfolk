@@ -6,7 +6,7 @@ import type { ContractCall } from "./types.ts";
  * one question at a time. Pure: no React, no wallet library.
  */
 
-export interface SpendText { title: string; price: string }
+export interface SpendText { title: string; price: string; note?: string }
 
 const TITLES: Record<string, string> = {
   open_mint_pack: "Mint this life",
@@ -31,14 +31,14 @@ export function spendsNothing(deposit: string): boolean {
 /** A listing pays nothing but a one-yocto approval, so its sheet shows the asking price instead. */
 function priceText(call: ContractCall): string {
   const asking = call.method === "list" ? call.args.price : undefined;
-  if (typeof asking === "string" && DECIMAL.test(asking) && BigInt(asking) > 0n) return `${formatNear(asking)} NEAR`;
+  if (typeof asking === "string" && DECIMAL.test(asking) && BigInt(asking) > 0n) return `Asking price ${formatNear(asking)} NEAR`;
   return call.deposit === ONE_YOCTO ? APPROVAL_ONLY : `${formatNear(call.deposit)} NEAR`;
 }
 
 /** Null when the call spends nothing, or when its deposit cannot be read (the queue then refuses it). */
 export function confirmText(call: ContractCall): SpendText | null {
   if (!DECIMAL.test(call.deposit) || BigInt(call.deposit) === 0n) return null;
-  return { title: TITLES[call.method] ?? DEFAULT_TITLE, price: priceText(call) };
+  return { title: TITLES[call.method] ?? DEFAULT_TITLE, price: priceText(call), ...(call.method === "list" ? { note: "Listing is free; the buyer pays this price." } : {}) };
 }
 
 export interface SpendRequest { call: ContractCall; text: SpendText; answer(confirmed: boolean): void }
@@ -47,6 +47,7 @@ export interface SpendQueue {
   request(call: ContractCall): Promise<boolean>;
   /** The question on screen now, or null. */
   current(): SpendRequest | null;
+  cancelAll(): void;
   subscribe(listener: () => void): () => void;
 }
 
@@ -76,6 +77,9 @@ export function createSpendQueue(): SpendQueue {
       });
     },
     current: () => waiting[0] ?? null,
+    cancelAll() {
+      for (const request of [...waiting]) request.answer(false);
+    },
     subscribe(listener) {
       listeners.add(listener);
       return () => { listeners.delete(listener); };

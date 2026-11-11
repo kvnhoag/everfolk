@@ -233,8 +233,8 @@ test("confirm text names the NFT action and its price", () => {
   assert.deepEqual(confirmText({ ...BUY, method: "open_mint_pack", deposit: "1000000000000000000000" }), { title: "Mint this life", price: "0.001 NEAR" });
   assert.deepEqual(confirmText(BUY), { title: "Buy", price: "0.025 NEAR" });
   assert.equal(confirmText(CHECKPOINT), null);
-  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2", price: "25000000000000000000000" }, deposit: "1" }), { title: "List for sale", price: "0.025 NEAR" });
-  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2" }, deposit: "1" }), { title: "List for sale", price: "No NEAR spent" });
+  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2", price: "25000000000000000000000" }, deposit: "1" }), { title: "List for sale", price: "Asking price 0.025 NEAR", note: "Listing is free; the buyer pays this price." });
+  assert.deepEqual(confirmText({ ...BUY, method: "list", args: { token_id: "2" }, deposit: "1" }), { title: "List for sale", price: "No NEAR spent", note: "Listing is free; the buyer pays this price." });
 });
 
 test("a remembered player is restored without a code, and a new code replaces them", async () => {
@@ -256,4 +256,32 @@ test("a remembered player that Privy has forgotten stays signed out", async () =
   await session.restore();
   assert.equal(session.accountId, null);
   await assert.rejects(session.signIn(), /code from your email/);
+});
+
+
+test("email calls hide technical failures and retain meaningful game errors", async () => {
+  for (const [raw, expected] of [
+    ["Exceeded prepaid gas while calling buy", "That didn't go through — try again."],
+    ["Smart contract panicked: This token is not for sale", "This token is not for sale"],
+  ]) {
+    const { session } = await signedIn(fakeChain({ funded: true, sendError: { message: raw } }));
+    await assert.rejects(session.call(BUY), { message: expected });
+  }
+});
+
+test("signing out cancels every pending spend request before anything is signed", async () => {
+  const { createSpendQueue } = await import("../client/chain/spend-confirmation.ts");
+  const queue = createSpendQueue();
+  const key = keyBridge();
+  const chain = fakeChain({ funded: true });
+  const session = createEmailSession(cfg, key.bridge, { fetch: chain.fetchFn, confirm: queue.request, cancelConfirmations: queue.cancelAll, ...FAST });
+  await session.verify("123456");
+  const pending = [session.call(BUY), session.call(BUY)];
+  const checks = pending.map(call => assert.rejects(call, /Cancelled/));
+  assert.ok(queue.current());
+  await session.signOut();
+  await Promise.all(checks);
+  assert.equal(queue.current(), null);
+  assert.equal(key.log.hashes, 0);
+  assert.equal(chain.log.sent.length, 0);
 });

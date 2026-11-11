@@ -4,6 +4,7 @@ import { errorText, type ChainBackend } from "./chain-backend.ts";
 import "./account-bar.css";
 import EmailSignIn from "../demo/EmailSignIn.tsx";
 import SignInPanel from "./SignInPanel.tsx";
+import { ACCESS_KEY_METHODS } from "./contract.ts";
 
 const METHOD_LABELS: Record<string, string> = {
   start_life: "Ranked life started", abandon_life: "Life closed", mint_life: "Life minted", open_mint_pack: "Mint pack opened", reroll_mint_slot: "Mint slot rerolled", choose_mint_slot: "Life minted", set_action: "Deed changed",
@@ -82,7 +83,7 @@ export default function AccountBar({ backend, compact = false }: { backend: Chai
     </section>
     </>}
     {error && <p className="chain-error account-bar-error" role="alert">{error}</p>}
-    {tx && tx.hash !== dismissed && <p className="account-tx" role="status">
+    {tx && !emailPlayer && !(ACCESS_KEY_METHODS as readonly string[]).includes(tx.method) && tx.hash !== dismissed && <p className="account-tx" role="status">
       <span className="account-tx-mark" aria-hidden="true">✦</span>
       <span>{METHOD_LABELS[tx.method] ?? "Transaction confirmed"} · recorded on NEAR</span>
       <a href={explorerUrl({ tx: tx.hash })} target="_blank" rel="noreferrer">View transaction<span aria-hidden="true"> ↗</span></a>
