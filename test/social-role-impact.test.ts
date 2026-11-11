@@ -3,7 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, Effect, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { socialRoleImpact } from "../client/social-role-impact.ts";
+import { socialRoleImpact } from "../client/models/social-role-impact.ts";
 
 const engine = createEngine(pack), person = pack.character.partners[0];
 const role = (active: boolean): Effect => ({ type: "social-role", partner: person.id, role: "friend", active });

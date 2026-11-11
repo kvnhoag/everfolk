@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { WorldPack } from "../src/types.ts";
-import { attachLegacyNft, collectLegacyEntries, LEGACY_GALLERY_KEY, persistLegacyEntries, readLegacyEntries, safeExplorerUrl } from "../client/legacy-store.ts";
+import { attachLegacyNft, collectLegacyEntries, LEGACY_GALLERY_KEY, persistLegacyEntries, readLegacyEntries, safeExplorerUrl } from "../client/storage/legacy-store.ts";
 
 function storage() {
   const values = new Map<string, string>();

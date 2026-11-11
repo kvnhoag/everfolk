@@ -8,7 +8,7 @@ import ts from "typescript";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.28.0.json" with { type: "json" };
-import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../client/relationship-labels.ts";
+import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../client/models/relationship-labels.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -17,8 +17,8 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: CharacterPanel } = await import("../client/CharacterPanel.tsx");
-const { default: HouseholdSummary } = await import("../client/HouseholdSummary.tsx");
+const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
+const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
 hooks.deregister();
 
 function socialFixture() {

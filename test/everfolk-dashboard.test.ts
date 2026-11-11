@@ -5,7 +5,7 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import { builtinEngine } from "../client/session.ts";
+import { builtinEngine } from "../client/lib/world-session.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -14,9 +14,9 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LifeOverview } = await import("../client/LifeOverview.tsx");
-const { default: LifeMoment } = await import("../client/LifeMoment.tsx");
-const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
+const { default: LifeOverview } = await import("../client/components/LifeOverview.tsx");
+const { default: LifeMoment } = await import("../client/components/LifeMoment.tsx");
+const { default: DecisionDialog } = await import("../client/components/DecisionDialog.tsx");
 hooks.deregister();
 
 const world = builtinEngine.world;
@@ -59,4 +59,31 @@ test("the quiet-year card shows completed facts without advancing or changing th
   assert.match(html, /Live another year/);
   assert.match(html, /Read your life record/);
   assert.equal(JSON.stringify(life), before);
+});
+
+test("completed-event notices render newest first with dismiss controls and keep the record available during decisions", () => {
+  const updated = { ...life, phase: "choice" as const, journal: [...life.journal, ...["one", "two", "three", "four"].map(id => ({
+    type: "event" as const, id: `health-onset-${id}`, age: life.age, year: life.year, text: `Completed ${id}.`,
+  }))] };
+  const before = JSON.stringify(updated);
+  const html = renderToStaticMarkup(createElement(LifeMoment, { life: updated, world, onAdvance: noop, onOpenChronicle: noop }));
+  assert.match(html, /role="log" aria-label="Important life events"/);
+  assert.equal((html.match(/class="event-notification"/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /Completed one\./);
+  assert.ok(html.indexOf("Completed four.") < html.indexOf("Completed three."));
+  assert.match(html, /aria-label="Dismiss event: Completed four\."/);
+  assert.doesNotMatch(html, /Live another year/);
+  assert.match(html, /Read your life record/);
+  assert.equal(JSON.stringify(updated), before);
+});
+
+test("routine childhood moments stay out of the notification panel and remain in the life record", () => {
+  const updated = { ...life, age: 3, year: life.year + 3, journal: [...life.journal, {
+    type: "event" as const, id: "small-doorway", age: 3, year: life.year + 3, text: "An ordinary childhood moment.",
+  }] };
+  const html = renderToStaticMarkup(createElement(LifeMoment, { life: updated, world, onAdvance: noop, onOpenChronicle: noop }));
+  assert.doesNotMatch(html, /class="event-notification"/);
+  assert.match(html, /Important life events/);
+  assert.match(html, /Read your life record/);
+  assert.equal(updated.journal.at(-1)?.text, "An ordinary childhood moment.");
 });

@@ -3,8 +3,8 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { ActivityAvailability, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../client/character-panel-model.ts";
-import { practiceBlockReason } from "../client/skill-tree.ts";
+import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../client/models/character-panel-model.ts";
+import { practiceBlockReason } from "../client/models/skill-tree.ts";
 
 const engine = createEngine(pack);
 function lifeAt(age: number): LifeState {

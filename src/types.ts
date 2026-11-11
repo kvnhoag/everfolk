@@ -121,6 +121,8 @@ export interface Origin extends EvidenceMetadata {
   effects: Effect[];
   /** Partial starting-range overrides, drawn before this origin's effects. */
   statRanges?: Record<string, StatRange>;
+  /** Starting household possessions, overriding each asset's default roll. */
+  assetRanges?: Record<string, StatRange>;
 }
 
 export interface OutcomeWeightModifier {
@@ -270,6 +272,17 @@ export interface JobDefinition {
   minAge: number;
   requirements?: Record<string, number>;
   yearlyEffects: Effect[];
+  /** Broad purchasing or resale duties unlock the complete market catalogue. */
+  marketAccess?: "full";
+  /** Independent work consumes purchased stock and creates saleable goods annually. */
+  production?: {
+    inputs: Record<string, number>;
+    outputs: Record<string, number>;
+    baseBatches: number;
+    skill?: string;
+    skillPerBatch?: number;
+    maxBatches: number;
+  };
 }
 
 export interface PartnerDefinition {
@@ -365,6 +378,25 @@ export interface EconomyDefinition {
   sourceIds?: string[];
   /** Settle outstanding debt from remaining cash after regular yearly costs. */
   autoDebtRepayment?: boolean;
+  /** New worlds allow resources and market-valued wealth to grow without gameplay caps. */
+  uncappedResources?: boolean;
+  /** Opt-in annual contracts; absent in retained world revisions. */
+  market?: {
+    minAge: number;
+    feePercent: number;
+    maxQuantity: number;
+    maxOrders: number;
+    /** Combined purchase and sale units committed at the next annual settlement. */
+    orderLimits?: {
+      household: { perOrder: number; perYear: number };
+      professional: { perOrder: number; perYear: number };
+    };
+    goods: string[];
+    traderJob: string;
+    traderYears: number;
+    traderFocusActivity: string;
+    shocks: { eventId: string; title: string; durationYears: number; priceMultipliers: Record<string, number> }[];
+  };
   /** An explicitly accepted risky contract, distinct from unpaid household bills. */
   moneylender?: {
     title: string;
@@ -378,7 +410,26 @@ export interface EconomyDefinition {
     maxExtensions: number;
     events: { due: string; threat: string; attack: string };
   };
-  assets: { id: string; title: string; description: string; value: number; maxOwned: number; yearlyIncome?: number }[];
+  assets: {
+    id: string;
+    title: string;
+    description: string;
+    /** Optional catalogue grouping; display-only and independent of prices. */
+    category?: string;
+    /** Where an unowned resource is useful; holdings and orders remain visible. */
+    context?: {
+      origins?: string[];
+      jobs?: string[];
+      activities?: string[];
+    };
+    /** Market price per unit, used for the household's total wealth. */
+    value: number;
+    /** Optional starting quantity roll; absent definitions start at zero. */
+    initialRange?: StatRange;
+    /** Legacy ownership bound; ignored when uncappedResources is enabled. */
+    maxOwned?: number;
+    yearlyIncome?: number;
+  }[];
 }
 
 export interface EconomyState {
@@ -387,7 +438,24 @@ export interface EconomyState {
   assets: Record<string, number>;
   /** Its balance is included once in debt. No entry exists before accepting a loan. */
   loan?: { balance: number; borrowedAge: number; dueAge: number; extensions: number; lastCollectionAge?: number };
+  market?: {
+    orders: MarketOrder[];
+    nextOrderId: number;
+    tradingYears: number;
+    lastSettlement?: MarketSettlement;
+    history?: MarketSettlement[];
+  };
 }
+
+export interface MarketOrderRequest { side: "buy" | "sell"; asset: string; quantity: number }
+export interface MarketOrder extends MarketOrderRequest {
+  id: number;
+  unitPrice: number;
+  total: number;
+  placedAge: number;
+  settlesAtAge: number;
+}
+export interface MarketSettlement { age: number; bought: number; sold: number; revenue: number; spent: number }
 
 /** Optional, authored retention and age-related Knowledge loss. */
 export interface KnowledgeDefinition {
@@ -511,7 +579,8 @@ export interface WorldPack {
 /** Issued by a ranked life's NFT sources; free play never contains one. */
 export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number } | InfluenceCommand | DemoCommand;
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number }
+  | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand;
 
 export interface JournalEntry {
   type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity" | "influence";
@@ -584,6 +653,8 @@ export interface LifeEngine {
   getChoices(state: LifeState): readonly Choice[];
   getActivities(state: LifeState): readonly ActivityAvailability[];
   act(state: LifeState, activityId: string): LifeState;
+  orderMarket(state: LifeState, order: MarketOrderRequest): LifeState;
+  cancelMarketOrder(state: LifeState, orderId: number): LifeState;
   chooseAvatar(state: LifeState, variant: number): LifeState;
   influence(state: LifeState, command: InfluenceCommand): LifeState;
   /** Demo worlds only: trade, plan, agent assignment, delegation and agent decisions. */

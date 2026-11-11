@@ -1,15 +1,17 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacy from "../worlds/alexandria-0.15.0.json" with { type: "json" };
-import { advanceYearWithFocus, persistYearlyFocus } from "../client/yearly-focus.ts";
+import { advanceYearWithFocus } from "../client/models/yearly-focus.ts";
+import { persistYearlyFocus } from "../client/mutations/yearly-focus.ts";
 
 /** Keep current care/state rules, isolating retention from unrelated incidents. */
 function fixture(knowledge = 80): WorldPack {
   const world = withoutMoneylender(structuredClone(current) as WorldPack);
+  withoutMarketSignals(world);
   // Retention tests isolate forgetting and timing from the separate gain curve.
   for (const stat of Object.values(world.stats)) delete stat.gainCurve;
   for (const skill of Object.values(world.character!.skills)) delete skill.gainCurve;
@@ -21,6 +23,9 @@ function fixture(knowledge = 80): WorldPack {
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.yearlyEffects = [{ type: "cash", delta: 100 }];
   world.yearlyRules = [];
+  // Retention and lesson-affordability fixtures supply all cash explicitly.
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) delete origin.assetRanges;
   for (const origin of world.origins) {
     origin.effects = [];
     origin.statRanges = { ...origin.statRanges, health: { min: 100, max: 100 }, knowledge: { min: knowledge, max: knowledge }, wealth: { min: 50, max: 50 } };
@@ -107,7 +112,7 @@ test("continued study limits forgetting but does not cancel advanced-age loss", 
 
 test("new packs remove passive blanket gains while older lives keep their original rules", () => {
   assert.ok(current.knowledge);
-  assert.equal(current.version, "0.34.0");
+  assert.equal(current.version, "0.41.0");
   assert.equal(current.yearlyRules.some(rule => rule.id === "practical-experience" || rule.id === "learning-through-words"), false);
   const engine = createEngine(legacy);
   let life = engine.start("legacy-retention-replay");

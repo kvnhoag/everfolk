@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.34.0",
+  "version": "0.41.0",
   "title": "From Rhakotis to Alexandria",
   "description": "Begin a fictional life near Rhakotis on Egypt's Mediterranean coast in 350 BCE. Grow up before Alexandria is founded, then live through Alexander's arrival and the first generations of the new city. Work, learn and build a household; chosen journeys and skilled work may bring you into the worlds of Aristotle, Alexander and Euclid.",
   "startYear": -350,
@@ -298,6 +298,10 @@
     "late-music-performance-assessed": {
       "label": "Music & Performance: final assessment completed",
       "initial": false
+    },
+    "trader-qualified": {
+      "label": "Experienced enough to make market trading a livelihood",
+      "initial": false
     }
   },
   "origins": [
@@ -329,7 +333,29 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        },
+        "linen-cloth": {
+          "min": 0,
+          "max": 1
+        },
+        "oil": {
+          "min": 0,
+          "max": 2
+        },
+        "transport-baskets": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "artisan-household",
@@ -346,8 +372,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 2,
-          "max": 8
+          "min": 5,
+          "max": 12
         },
         "bonds": {
           "min": 58,
@@ -359,7 +385,25 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 2
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "clay": {
+          "min": 0,
+          "max": 3
+        },
+        "fuel": {
+          "min": 0,
+          "max": 2
+        }
+      }
     },
     {
       "id": "harbor-household",
@@ -389,7 +433,25 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "rope": {
+          "min": 0,
+          "max": 1
+        },
+        "transport-baskets": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "fishing-household",
@@ -406,8 +468,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 1,
-          "max": 7
+          "min": 4,
+          "max": 10
         },
         "bonds": {
           "min": 62,
@@ -419,7 +481,25 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "netting": {
+          "min": 0,
+          "max": 1
+        },
+        "salt": {
+          "min": 0,
+          "max": 2
+        }
+      }
     },
     {
       "id": "bakery-household",
@@ -436,7 +516,7 @@
           "max": 3
         },
         "wealth": {
-          "min": 4,
+          "min": 5,
           "max": 12
         },
         "bonds": {
@@ -449,7 +529,25 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        },
+        "flour": {
+          "min": 0,
+          "max": 3
+        },
+        "fuel": {
+          "min": 0,
+          "max": 2
+        }
+      }
     },
     {
       "id": "clerk-household",
@@ -479,7 +577,29 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "papyrus": {
+          "min": 0,
+          "max": 2
+        },
+        "ink": {
+          "min": 0,
+          "max": 2
+        },
+        "wax-tablets": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "weaver-household",
@@ -496,8 +616,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 2,
-          "max": 9
+          "min": 5,
+          "max": 11
         },
         "bonds": {
           "min": 60,
@@ -509,7 +629,21 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "flax-thread": {
+          "min": 0,
+          "max": 3
+        }
+      }
     },
     {
       "id": "delta-newcomers",
@@ -539,7 +673,25 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "rope": {
+          "min": 0,
+          "max": 1
+        },
+        "transport-baskets": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "royal-household",
@@ -570,7 +722,29 @@
         "household-royal-kin",
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 1,
+          "max": 2
+        },
+        "wax-tablets": {
+          "min": 0,
+          "max": 1
+        },
+        "papyrus": {
+          "min": 0,
+          "max": 2
+        },
+        "ink": {
+          "min": 0,
+          "max": 2
+        }
+      }
     },
     {
       "id": "estate-household",
@@ -601,7 +775,25 @@
         "household-late-period",
         "household-farming-context",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 1,
+          "max": 1
+        },
+        "wax-tablets": {
+          "min": 0,
+          "max": 1
+        },
+        "transport-baskets": {
+          "min": 0,
+          "max": 2
+        }
+      }
     },
     {
       "id": "temple-household",
@@ -632,7 +824,33 @@
         "household-temple-family",
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        },
+        "papyrus": {
+          "min": 0,
+          "max": 1
+        },
+        "ink": {
+          "min": 0,
+          "max": 1
+        },
+        "incense": {
+          "min": 0,
+          "max": 1
+        },
+        "oil": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "soldier-household",
@@ -662,7 +880,25 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "leather": {
+          "min": 0,
+          "max": 1
+        },
+        "bronze-fittings": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "tenant-farming-household",
@@ -679,8 +915,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 0,
-          "max": 7
+          "min": 4,
+          "max": 9
         },
         "bonds": {
           "min": 60,
@@ -692,7 +928,25 @@
       "sourceIds": [
         "household-farming-context",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "seed-grain": {
+          "min": 0,
+          "max": 2
+        },
+        "transport-baskets": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "domestic-service-household",
@@ -722,7 +976,25 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "cleaning-cloths": {
+          "min": 0,
+          "max": 2
+        },
+        "oil": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "boatbuilder-household",
@@ -739,8 +1011,8 @@
           "max": 3
         },
         "wealth": {
-          "min": 3,
-          "max": 12
+          "min": 6,
+          "max": 14
         },
         "bonds": {
           "min": 56,
@@ -752,7 +1024,29 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 2
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        },
+        "timber": {
+          "min": 0,
+          "max": 2
+        },
+        "rope": {
+          "min": 0,
+          "max": 1
+        },
+        "pitch": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "musician-household",
@@ -782,7 +1076,29 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        },
+        "musical-reeds": {
+          "min": 0,
+          "max": 1
+        },
+        "instrument-strings": {
+          "min": 0,
+          "max": 1
+        },
+        "musical-instrument": {
+          "min": 0,
+          "max": 1
+        }
+      }
     }
   ],
   "yearlyEffects": [],
@@ -1608,17 +1924,12 @@
       {
         "id": "potter",
         "title": "Potter",
-        "description": "Shape and finish everyday vessels in a workshop. Practical training brings steadier work.",
+        "description": "Shape and finish everyday vessels in a workshop. Practical training brings steadier work. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 14,
         "requirements": {
           "craft": 15
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 3
-          },
           {
             "type": "stat",
             "stat": "health",
@@ -1634,7 +1945,19 @@
             "skill": "pottery",
             "delta": 1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "clay": 2
+          },
+          "outputs": {
+            "pottery-goods": 1
+          },
+          "baseBatches": 2,
+          "skill": "pottery",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "clerk",
@@ -1671,17 +1994,12 @@
       {
         "id": "copyist",
         "title": "Workshop copyist",
-        "description": "Copy and check written work patiently. There is more learning than immediate wealth.",
+        "description": "Copy and check written work patiently. There is more learning than immediate wealth. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 14,
         "requirements": {
           "literacy": 30
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 2
-          },
           {
             "type": "stat",
             "stat": "knowledge",
@@ -1692,7 +2010,20 @@
             "skill": "literacy",
             "delta": 1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "papyrus": 1,
+            "ink": 1
+          },
+          "outputs": {
+            "written-copies": 1
+          },
+          "baseBatches": 2,
+          "skill": "literacy",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "sailor",
@@ -1728,7 +2059,7 @@
       {
         "id": "shopkeeper",
         "title": "Small-shop keeper",
-        "description": "Manage goods, customers and accounts. Experience helps, but responsibilities leave less time for company.",
+        "description": "Manage goods, customers and accounts. Experience helps, but responsibilities leave less time for company. Buying varied goods for resale gives you access to the full market catalogue. Personal orders still use your own cash and stock.",
         "minAge": 18,
         "requirements": {
           "reckoning": 35,
@@ -1750,23 +2081,19 @@
             "skill": "reckoning",
             "delta": 1
           }
-        ]
+        ],
+        "marketAccess": "full"
       },
       {
         "id": "ceramic-decorator",
         "title": "Ceramic decorator",
-        "description": "Finish and decorate pots and mould-made figures in a workshop.",
+        "description": "Finish and decorate pots and mould-made figures in a workshop. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 14,
         "requirements": {
           "craft": 15,
           "pottery": 20
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 3
-          },
           {
             "type": "skill",
             "skill": "pottery",
@@ -1782,23 +2109,30 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "clay": 2
+          },
+          "outputs": {
+            "pottery-goods": 1
+          },
+          "baseBatches": 2,
+          "skill": "pottery",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "wood-carver",
         "title": "Wood carver",
-        "description": "Carve small figures, fittings and patterns in wood.",
+        "description": "Carve small figures, fittings and patterns in wood. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 14,
         "requirements": {
           "craft": 15,
           "carving": 20
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 3
-          },
           {
             "type": "skill",
             "skill": "carving",
@@ -1809,23 +2143,30 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "timber": 1
+          },
+          "outputs": {
+            "wooden-goods": 1
+          },
+          "baseBatches": 2,
+          "skill": "carving",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "sculptor",
         "title": "Sculptor",
-        "description": "Make small figures and carved reliefs for customers. Larger commissions need more experience.",
+        "description": "Make small figures and carved reliefs for customers. Larger commissions need more experience. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 16,
         "requirements": {
           "carving": 15,
           "sculpture": 25
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 3
-          },
           {
             "type": "skill",
             "skill": "sculpture",
@@ -1841,7 +2182,19 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "stone": 1
+          },
+          "outputs": {
+            "carved-stone": 1
+          },
+          "baseBatches": 2,
+          "skill": "sculpture",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "philosophy-tutor",
@@ -1879,7 +2232,7 @@
       {
         "id": "sky-table-calculator",
         "title": "Sky-table calculator",
-        "description": "Copy observation tables and check calendar calculations. Access to texts depends on personal contacts.",
+        "description": "Copy observation tables and check calendar calculations. Access to texts depends on personal contacts. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 18,
         "requirements": {
           "literacy": 25,
@@ -1887,11 +2240,6 @@
           "astronomy": 30
         },
         "yearlyEffects": [
-          {
-            "type": "stat",
-            "stat": "wealth",
-            "delta": 2
-          },
           {
             "type": "stat",
             "stat": "knowledge",
@@ -1907,7 +2255,20 @@
             "skill": "reckoning",
             "delta": 1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "papyrus": 1,
+            "ink": 1
+          },
+          "outputs": {
+            "written-copies": 1
+          },
+          "baseBatches": 2,
+          "skill": "astronomy",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
       },
       {
         "id": "astrologer",
@@ -2100,7 +2461,7 @@
       {
         "id": "pottery-workshop-lead",
         "title": "Pottery workshop lead",
-        "description": "Organise kiln loads, check finished pots and divide tasks for larger orders.",
+        "description": "Organise kiln loads, check finished pots and divide tasks for larger orders. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 20,
         "requirements": {
           "craft": 30,
@@ -2108,10 +2469,6 @@
           "pottery": 40
         },
         "yearlyEffects": [
-          {
-            "type": "cash",
-            "delta": 40
-          },
           {
             "type": "skill",
             "skill": "pottery",
@@ -2127,12 +2484,24 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "clay": 2
+          },
+          "outputs": {
+            "pottery-goods": 1
+          },
+          "baseBatches": 4,
+          "skill": "pottery",
+          "skillPerBatch": 20,
+          "maxBatches": 12
+        }
       },
       {
         "id": "carving-workshop-lead",
         "title": "Wood-carving workshop lead",
-        "description": "Measure larger orders, divide bench work and check finished wooden fittings.",
+        "description": "Measure larger orders, divide bench work and check finished wooden fittings. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 20,
         "requirements": {
           "craft": 30,
@@ -2140,10 +2509,6 @@
           "carving": 40
         },
         "yearlyEffects": [
-          {
-            "type": "cash",
-            "delta": 40
-          },
           {
             "type": "skill",
             "skill": "carving",
@@ -2159,12 +2524,24 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "timber": 1
+          },
+          "outputs": {
+            "wooden-goods": 1
+          },
+          "baseBatches": 4,
+          "skill": "carving",
+          "skillPerBatch": 20,
+          "maxBatches": 12
+        }
       },
       {
         "id": "sculpture-workshop-lead",
         "title": "Sculpture workshop lead",
-        "description": "Plan small figure and relief orders, organise preparation and check the carving.",
+        "description": "Plan small figure and relief orders, organise preparation and check the carving. Buy materials through the market; annual production consumes stock and creates finished goods. Sell those goods to receive cash.",
         "minAge": 20,
         "requirements": {
           "craft": 30,
@@ -2172,10 +2549,6 @@
           "sculpture": 40
         },
         "yearlyEffects": [
-          {
-            "type": "cash",
-            "delta": 40
-          },
           {
             "type": "skill",
             "skill": "sculpture",
@@ -2191,7 +2564,19 @@
             "stat": "health",
             "delta": -1
           }
-        ]
+        ],
+        "production": {
+          "inputs": {
+            "stone": 1
+          },
+          "outputs": {
+            "carved-stone": 1
+          },
+          "baseBatches": 4,
+          "skill": "sculpture",
+          "skillPerBatch": 20,
+          "maxBatches": 12
+        }
       },
       {
         "id": "performer",
@@ -2214,6 +2599,297 @@
           {
             "type": "skill",
             "skill": "oratory",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "farmer",
+        "title": "Independent farmer",
+        "minAge": 14,
+        "description": "Choose to cultivate a small crop. Buy seed grain, harvest at the year end, and sell your grain through the market. Farming is optional for every background.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "seed-grain": 1
+          },
+          "outputs": {
+            "grain": 3
+          },
+          "baseBatches": 2,
+          "skill": "reckoning",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "weaver",
+        "title": "Independent weaver",
+        "minAge": 14,
+        "requirements": {
+          "craft": 15
+        },
+        "description": "Buy flax thread to weave cloth. More stocked thread and better tool handling support larger batches; sell the finished cloth through the market.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "craft",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "flax-thread": 2
+          },
+          "outputs": {
+            "linen-cloth": 1
+          },
+          "baseBatches": 2,
+          "skill": "craft",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "writer",
+        "title": "Independent writer",
+        "minAge": 16,
+        "requirements": {
+          "literacy": 30
+        },
+        "description": "Buy papyrus and ink for written work. Completed copies become stock for sale rather than an automatic cash wage.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "delta": 1
+          },
+          {
+            "type": "stat",
+            "stat": "knowledge",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "papyrus": 1,
+            "ink": 1
+          },
+          "outputs": {
+            "written-copies": 1
+          },
+          "baseBatches": 2,
+          "skill": "literacy",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "boatbuilder",
+        "title": "Boat-fittings maker",
+        "minAge": 16,
+        "requirements": {
+          "craft": 20,
+          "seamanship": 10
+        },
+        "description": "Buy timber and make fittings for working boats. Stock and practical skill limit annual output; finished fittings must be sold.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "craft",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "seamanship",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "timber": 2
+          },
+          "outputs": {
+            "boat-fittings": 1
+          },
+          "baseBatches": 2,
+          "skill": "craft",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "trader",
+        "title": "Market trader",
+        "minAge": 18,
+        "requirements": {
+          "reckoning": 10
+        },
+        "description": "Earn from buying and selling goods through annual contracts. Trading has no guaranteed salary: stock, prices and completed sales determine your return. Buying and selling across goods gives you access to the full market catalogue.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          }
+        ],
+        "marketAccess": "full"
+      },
+      {
+        "id": "baker",
+        "title": "Independent baker",
+        "minAge": 14,
+        "requirements": {
+          "reckoning": 10
+        },
+        "description": "Buy flour and fuel to fulfil bread orders. Each annual batch consumes supplies and creates bread orders for sale through the market.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "flour": 2,
+            "fuel": 1
+          },
+          "outputs": {
+            "bread": 4
+          },
+          "baseBatches": 2,
+          "skill": "reckoning",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "fisher",
+        "title": "Independent fisher",
+        "minAge": 14,
+        "requirements": {
+          "seamanship": 10
+        },
+        "description": "Buy replacement netting and salt for the fishing season. Annual batches use those supplies and create preserved catch for market sale.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "seamanship",
+            "delta": 1
+          }
+        ],
+        "production": {
+          "inputs": {
+            "netting": 1,
+            "salt": 1
+          },
+          "outputs": {
+            "preserved-fish": 2
+          },
+          "baseBatches": 2,
+          "skill": "seamanship",
+          "skillPerBatch": 20,
+          "maxBatches": 8
+        }
+      },
+      {
+        "id": "household-worker",
+        "title": "Household worker",
+        "minAge": 14,
+        "description": "Earn wages through household service. Your employer supplies ordinary work; use your own cloths and oil for optional independent service orders.",
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 20
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "merchant",
+        "title": "Merchant",
+        "minAge": 18,
+        "requirements": {
+          "reckoning": 30,
+          "oratory": 15
+        },
+        "marketAccess": "full",
+        "description": "Arrange purchases and sales across several kinds of goods. Experience in market trading opens this independent livelihood and the full market catalogue. There is no salary: your own stock, contracts and completed sales determine your earnings.",
+        "yearlyEffects": [
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "oratory",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "estate-steward",
+        "title": "Estate steward",
+        "minAge": 18,
+        "requirements": {
+          "reckoning": 25,
+          "literacy": 20
+        },
+        "marketAccess": "full",
+        "description": "Keep an estate's supply accounts and arrange varied purchases. A household connection or previous clerk's post gives you a way into this work, with reading and reckoning still required. Your purchasing duties open the full market catalogue. Your employer supplies ordinary duties; personal orders use your own cash and stock.",
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 30
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "quartermaster",
+        "title": "Quartermaster",
+        "minAge": 18,
+        "requirements": {
+          "warfare": 20,
+          "reckoning": 25,
+          "literacy": 15
+        },
+        "marketAccess": "full",
+        "description": "Check stores, maintain supply records and arrange purchases for a military unit. An existing command post or a recommendation for supply work is required. Broad purchasing duties open the full market catalogue. The unit supplies ordinary duties; independent orders still use your own cash and stock. This supply appointment does not grant an officer's commission.",
+        "yearlyEffects": [
+          {
+            "type": "cash",
+            "delta": 30
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "warfare",
             "delta": 1
           }
         ]
@@ -2682,7 +3358,7 @@
         "outcomes": [
           {
             "id": "work-potter-result",
-            "text": "You arrange to start work as a potter and pay for a few initial supplies.",
+            "text": "You choose work as potter. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "weight": 1,
             "effects": [
               {
@@ -2698,11 +3374,6 @@
                 "type": "flag",
                 "flag": "stayed",
                 "value": true
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ]
           }
@@ -2794,7 +3465,7 @@
         "outcomes": [
           {
             "id": "work-copyist-result",
-            "text": "You arrange to start work as a workshop copyist and pay for a few initial supplies.",
+            "text": "You choose work as workshop copyist. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "weight": 1,
             "effects": [
               {
@@ -2810,11 +3481,6 @@
                 "type": "flag",
                 "flag": "studied",
                 "value": true
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ]
           }
@@ -2942,23 +3608,50 @@
           "type": "all",
           "conditions": [
             {
-              "type": "job",
-              "job": "copyist"
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "copyist"
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 50
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "literacy",
+              "type": "asset",
+              "asset": "papyrus",
               "op": "gte",
-              "value": 50
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "ink",
+              "op": "gte",
+              "value": 1
             }
           ]
         },
         "outcomes": [
           {
             "id": "careful-copy-result",
-            "text": "Your practiced eye helps you prepare a clear copy of a difficult page. The extra payment comes after long, tiring hours.",
+            "text": "Your practiced eye helps you prepare a clear copy of a difficult page. The extra payment comes after long, tiring hours. The materials used are removed from your stock.",
             "weight": 1,
             "effects": [
+              {
+                "type": "asset",
+                "asset": "papyrus",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "ink",
+                "delta": -1
+              },
               {
                 "type": "stat",
                 "stat": "wealth",
@@ -3043,23 +3736,39 @@
           "type": "all",
           "conditions": [
             {
-              "type": "job",
-              "job": "potter"
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "potter"
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "op": "gte",
+                  "value": 40
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "craft",
+              "type": "asset",
+              "asset": "clay",
               "op": "gte",
-              "value": 40
+              "value": 3
             }
           ]
         },
         "outcomes": [
           {
             "id": "pottery-order-result",
-            "text": "You shape and finish the clay pots for a large order. The customer pays when the work is done, but the long hours leave you tired.",
+            "text": "You shape and finish the clay pots for a large order. The customer pays when the work is done, but the long hours leave you tired. The materials used are removed from your stock.",
             "weight": 1,
             "effects": [
+              {
+                "type": "asset",
+                "asset": "clay",
+                "delta": -3
+              },
               {
                 "type": "stat",
                 "stat": "wealth",
@@ -4567,7 +5276,7 @@
         "outcomes": [
           {
             "id": "work-ceramic-decorator-result",
-            "text": "You arrange work as a ceramic decorator and buy a few supplies.",
+            "text": "You choose work as ceramic decorator. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "effects": [
               {
                 "type": "job",
@@ -4577,11 +5286,6 @@
                 "type": "flag",
                 "flag": "retired",
                 "value": false
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ],
             "weight": 1
@@ -4626,7 +5330,7 @@
         "outcomes": [
           {
             "id": "work-wood-carver-result",
-            "text": "You arrange work as a wood carver and buy a few supplies.",
+            "text": "You choose work as wood carver. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "effects": [
               {
                 "type": "job",
@@ -4636,11 +5340,6 @@
                 "type": "flag",
                 "flag": "retired",
                 "value": false
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ],
             "weight": 1
@@ -4685,7 +5384,7 @@
         "outcomes": [
           {
             "id": "work-sculptor-result",
-            "text": "You arrange work as a sculptor and buy a few supplies.",
+            "text": "You choose work as sculptor. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "effects": [
               {
                 "type": "job",
@@ -4695,11 +5394,6 @@
                 "type": "flag",
                 "flag": "retired",
                 "value": false
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ],
             "weight": 1
@@ -4809,7 +5503,7 @@
         "outcomes": [
           {
             "id": "work-sky-table-calculator-result",
-            "text": "You arrange work as a sky-table calculator and buy a few supplies.",
+            "text": "You choose work as sky-table calculator. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "effects": [
               {
                 "type": "job",
@@ -4819,11 +5513,6 @@
                 "type": "flag",
                 "flag": "retired",
                 "value": false
-              },
-              {
-                "type": "stat",
-                "stat": "wealth",
-                "delta": -1
               }
             ],
             "weight": 1
@@ -5519,8 +6208,13 @@
         "outcomes": [
           {
             "id": "decorate-pottery-order-result",
-            "text": "You finish the painted vessels, check the firing and deliver the order.",
+            "text": "You finish the painted vessels, check the firing and deliver the order. The materials used are removed from your stock.",
             "effects": [
+              {
+                "type": "asset",
+                "asset": "clay",
+                "delta": -3
+              },
               {
                 "type": "stat",
                 "stat": "wealth",
@@ -5549,23 +6243,34 @@
           "type": "all",
           "conditions": [
             {
-              "type": "any",
+              "type": "all",
               "conditions": [
                 {
-                  "type": "job",
-                  "job": "potter"
+                  "type": "any",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": "potter"
+                    },
+                    {
+                      "type": "job",
+                      "job": "ceramic-decorator"
+                    }
+                  ]
                 },
                 {
-                  "type": "job",
-                  "job": "ceramic-decorator"
+                  "type": "skill",
+                  "skill": "pottery",
+                  "op": "gte",
+                  "value": 35
                 }
               ]
             },
             {
-              "type": "skill",
-              "skill": "pottery",
+              "type": "asset",
+              "asset": "clay",
               "op": "gte",
-              "value": 35
+              "value": 3
             }
           ]
         },
@@ -5579,8 +6284,13 @@
         "outcomes": [
           {
             "id": "carve-door-fitting-result",
-            "text": "You measure the damaged fitting and carve a replacement that fits the opening.",
+            "text": "You measure the damaged fitting and carve a replacement that fits the opening. The materials used are removed from your stock.",
             "effects": [
+              {
+                "type": "asset",
+                "asset": "timber",
+                "delta": -2
+              },
               {
                 "type": "stat",
                 "stat": "wealth",
@@ -5609,14 +6319,25 @@
           "type": "all",
           "conditions": [
             {
-              "type": "job",
-              "job": "wood-carver"
+              "type": "all",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "wood-carver"
+                },
+                {
+                  "type": "skill",
+                  "skill": "carving",
+                  "op": "gte",
+                  "value": 35
+                }
+              ]
             },
             {
-              "type": "skill",
-              "skill": "carving",
+              "type": "asset",
+              "asset": "timber",
               "op": "gte",
-              "value": 35
+              "value": 2
             }
           ]
         },
@@ -6222,150 +6943,6 @@
         "category": "relationship",
         "minAge": 20,
         "cooldownYears": 4
-      },
-      {
-        "id": "buy-tool-chest",
-        "text": "Buy a tool chest",
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "cash",
-              "op": "gte",
-              "value": 30
-            },
-            {
-              "type": "asset",
-              "asset": "tool-chest",
-              "op": "eq",
-              "value": 0
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "buy-tool-chest-result",
-            "text": "You pay 30 drachmas for a tool chest. It is now recorded among your household's possessions.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "cash",
-                "delta": -30
-              },
-              {
-                "type": "asset",
-                "asset": "tool-chest",
-                "delta": 1
-              }
-            ]
-          }
-        ],
-        "category": "finance",
-        "minAge": 14,
-        "cooldownYears": 1
-      },
-      {
-        "id": "sell-tool-chest",
-        "text": "Sell your tool chest",
-        "when": {
-          "type": "asset",
-          "asset": "tool-chest",
-          "op": "gte",
-          "value": 1
-        },
-        "outcomes": [
-          {
-            "id": "sell-tool-chest-result",
-            "text": "You sell your tool chest for 30 drachmas. The sale turns its recorded value into spendable cash.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "asset",
-                "asset": "tool-chest",
-                "delta": -1
-              },
-              {
-                "type": "cash",
-                "delta": 30
-              }
-            ]
-          }
-        ],
-        "category": "finance",
-        "minAge": 14,
-        "cooldownYears": 1
-      },
-      {
-        "id": "buy-workshop-share",
-        "text": "Buy a workshop share",
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "cash",
-              "op": "gte",
-              "value": 120
-            },
-            {
-              "type": "asset",
-              "asset": "workshop-share",
-              "op": "eq",
-              "value": 0
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "buy-workshop-share-result",
-            "text": "You pay 120 drachmas for a workshop share. It is now recorded among your household's possessions.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "cash",
-                "delta": -120
-              },
-              {
-                "type": "asset",
-                "asset": "workshop-share",
-                "delta": 1
-              }
-            ]
-          }
-        ],
-        "category": "finance",
-        "minAge": 18,
-        "cooldownYears": 1
-      },
-      {
-        "id": "sell-workshop-share",
-        "text": "Sell your workshop share",
-        "when": {
-          "type": "asset",
-          "asset": "workshop-share",
-          "op": "gte",
-          "value": 1
-        },
-        "outcomes": [
-          {
-            "id": "sell-workshop-share-result",
-            "text": "You sell your workshop share for 120 drachmas. The sale turns its recorded value into spendable cash.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "asset",
-                "asset": "workshop-share",
-                "delta": -1
-              },
-              {
-                "type": "cash",
-                "delta": 120
-              }
-            ]
-          }
-        ],
-        "category": "finance",
-        "minAge": 18,
-        "cooldownYears": 1
       },
       {
         "id": "repay-household-debt",
@@ -7863,7 +8440,7 @@
         "outcomes": [
           {
             "id": "work-pottery-workshop-lead-accepted",
-            "text": "You accept regular work as a pottery workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "text": "You choose work as pottery workshop lead. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "weight": 1,
             "effects": [
               {
@@ -7923,7 +8500,7 @@
         "outcomes": [
           {
             "id": "work-carving-workshop-lead-accepted",
-            "text": "You accept regular work as a wood-carving workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "text": "You choose work as wood-carving workshop lead. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "weight": 1,
             "effects": [
               {
@@ -7983,7 +8560,7 @@
         "outcomes": [
           {
             "id": "work-sculpture-workshop-lead-accepted",
-            "text": "You accept regular work as a sculpture workshop lead. You leave your previous job and agree on the tasks and payment.",
+            "text": "You choose work as sculpture workshop lead. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
             "weight": 1,
             "effects": [
               {
@@ -20980,6 +21557,1456 @@
                 "type": "flag",
                 "flag": "late-music-performance-assessed",
                 "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-farmer",
+        "text": "Become an independent farmer",
+        "outcomes": [
+          {
+            "id": "work-farmer-result",
+            "text": "You choose work as independent farmer. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "farmer"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "farmer"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "work-weaver",
+        "text": "Become a independent weaver",
+        "outcomes": [
+          {
+            "id": "work-weaver-result",
+            "text": "You choose work as independent weaver. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "weaver"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "weaver"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 15
+            }
+          ]
+        }
+      },
+      {
+        "id": "work-writer",
+        "text": "Become a independent writer",
+        "outcomes": [
+          {
+            "id": "work-writer-result",
+            "text": "You choose work as independent writer. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "writer"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "writer"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 30
+            }
+          ]
+        }
+      },
+      {
+        "id": "work-boatbuilder",
+        "text": "Become a boat-fittings maker",
+        "outcomes": [
+          {
+            "id": "work-boatbuilder-result",
+            "text": "You choose work as boat-fittings maker. Order the required materials through the market. Annual production uses your stock; sell the finished goods to receive cash.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "boatbuilder"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 16,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "boatbuilder"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "craft",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "seamanship",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        }
+      },
+      {
+        "id": "focus-market-trading",
+        "text": "Spend the year arranging market trade",
+        "outcomes": [
+          {
+            "id": "focus-market-trading-result",
+            "text": "You compare quantities and prices, arrange deliveries and keep the trade accounts. Only completed market contracts create trading experience; this focus pays no wage.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 2
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1
+      },
+      {
+        "id": "work-trader",
+        "text": "Make market trading your occupation",
+        "outcomes": [
+          {
+            "id": "work-trader-result",
+            "text": "You make market trading your regular livelihood. You leave your former occupation and rely on completed sales for income; there is no trader's salary.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "trader"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "flag",
+              "flag": "trader-qualified",
+              "value": true
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 10
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "trader"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "work-baker",
+        "text": "Become an independent baker",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "baker"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-baker-accepted",
+            "text": "You choose this independent livelihood. Order the required supplies, then sell the completed goods through annual market contracts.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "baker"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-fisher",
+        "text": "Become an independent fisher",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "fisher"
+              }
+            },
+            {
+              "type": "skill",
+              "skill": "seamanship",
+              "op": "gte",
+              "value": 10
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-fisher-accepted",
+            "text": "You choose this independent livelihood. Order the required supplies, then sell the completed goods through annual market contracts.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "fisher"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-household-worker",
+        "text": "Become a household worker",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "household-worker"
+              }
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-household-worker-accepted",
+            "text": "You accept household service work. Wages cover ordinary service; independent orders use supplies that you purchase yourself.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "job",
+                "job": "household-worker"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "prepare-workshop-firing",
+        "text": "Prepare a paid workshop firing",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "apprentice"
+                },
+                {
+                  "type": "job",
+                  "job": "potter"
+                },
+                {
+                  "type": "job",
+                  "job": "ceramic-decorator"
+                },
+                {
+                  "type": "job",
+                  "job": "pottery-workshop-lead"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "artisan-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "fuel",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "prepare-workshop-firing-completed",
+            "text": "You use one fuel bundle to prepare the kiln and receive 12 drachmas for the completed preparation.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "fuel",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 12
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "secure-cargo-load",
+        "text": "Secure an independent cargo load",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "porter"
+                },
+                {
+                  "type": "job",
+                  "job": "sailor"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "harbor-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "delta-newcomers"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "rope",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "transport-baskets",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "secure-cargo-load-completed",
+            "text": "You use rope and deliver a transport basket with the prepared load. The customer pays 24 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "rope",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "transport-baskets",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 24
+              },
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "repair-ship-rigging",
+        "text": "Take an independent rigging repair",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "sailor"
+                },
+                {
+                  "type": "job",
+                  "job": "boatbuilder"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "boatbuilder-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "sailcloth",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "rope",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "pitch",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "repair-ship-rigging-completed",
+            "text": "You replace worn cloth and rope, use the sealing material and receive 32 drachmas for the finished repair.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "sailcloth",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "rope",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "pitch",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 32
+              },
+              {
+                "type": "skill",
+                "skill": "craft",
+                "delta": 1
+              },
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "repair-service-equipment",
+        "text": "Repair a set of service equipment",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "soldier"
+                },
+                {
+                  "type": "job",
+                  "job": "officer"
+                },
+                {
+                  "type": "job",
+                  "job": "general"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "soldier-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "job",
+                  "job": "quartermaster"
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "leather",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "bronze-fittings",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "repair-service-equipment-completed",
+            "text": "Replacement leather and fittings are used in the repair. You receive 26 drachmas for the completed equipment.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "leather",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "bronze-fittings",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 26
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "prepare-teaching-notes",
+        "text": "Prepare a paid set of lesson notes",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "clerk"
+                },
+                {
+                  "type": "job",
+                  "job": "philosophy-tutor"
+                },
+                {
+                  "type": "job",
+                  "job": "astrologer"
+                },
+                {
+                  "type": "job",
+                  "job": "court-adviser"
+                },
+                {
+                  "type": "job",
+                  "job": "patron-supported-reader"
+                },
+                {
+                  "type": "job",
+                  "job": "sky-table-calculator"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "clerk-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "royal-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "papyrus",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "ink",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "wax-tablets",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "prepare-teaching-notes-completed",
+            "text": "You draft on your reusable tablet, then use papyrus and ink for the final notes. The customer pays 24 drachmas; you keep the tablet.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "papyrus",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "ink",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 24
+              },
+              {
+                "type": "skill",
+                "skill": "literacy",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "knowledge",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "prepare-temple-gathering",
+        "text": "Prepare supplies for a temple gathering",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "temple-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "incense",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "oil",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "prepare-temple-gathering-completed",
+            "text": "You use the incense and oil to fulfil the preparation order, and receive 20 drachmas for the supplies and work.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "incense",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "oil",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 20
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "complete-household-service-order",
+        "text": "Complete an independent household service order",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "household-worker"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "domestic-service-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "cleaning-cloths",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "oil",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "complete-household-service-order-completed",
+            "text": "You use your cloths and oil to complete the agreed household work. The customer pays 22 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "cleaning-cloths",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "oil",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 22
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "perform-independent-engagement",
+        "text": "Play an independent musical engagement",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "performer"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "musician-household"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "musical-reeds",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "instrument-strings",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "musical-instrument",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "perform-independent-engagement-completed",
+            "text": "You replace the reeds and strings used for the engagement and receive 24 drachmas. You keep your instrument for later performances.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "musical-reeds",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "instrument-strings",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 24
+              },
+              {
+                "type": "skill",
+                "skill": "music",
+                "delta": 1
+              },
+              {
+                "type": "stat",
+                "stat": "bonds",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fulfil-shop-parcel",
+        "text": "Fulfil a small shop parcel",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "shopkeeper"
+                },
+                {
+                  "type": "job",
+                  "job": "trader"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "merchant-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "job",
+                  "job": "merchant"
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "oil",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "preserved-fish",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "transport-baskets",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "fulfil-shop-parcel-completed",
+            "text": "You pack oil and preserved fish from your own stock into a transport basket. The customer keeps the basket with the delivery and pays 36 drachmas for the parcel.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "oil",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "preserved-fish",
+                "delta": -1
+              },
+              {
+                "type": "asset",
+                "asset": "transport-baskets",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 36
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "check-estate-supply-order",
+        "text": "Check and deliver an estate supply order",
+        "category": "career",
+        "minAge": 14,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "officer"
+                },
+                {
+                  "type": "job",
+                  "job": "general"
+                },
+                {
+                  "type": "job",
+                  "job": "court-adviser"
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "estate-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "all",
+                  "conditions": [
+                    {
+                      "type": "job",
+                      "job": null
+                    },
+                    {
+                      "type": "origin",
+                      "origin": "tenant-farming-household"
+                    }
+                  ]
+                },
+                {
+                  "type": "job",
+                  "job": "estate-steward"
+                },
+                {
+                  "type": "job",
+                  "job": "quartermaster"
+                }
+              ]
+            },
+            {
+              "type": "asset",
+              "asset": "transport-baskets",
+              "op": "gte",
+              "value": 1
+            },
+            {
+              "type": "asset",
+              "asset": "wax-tablets",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "check-estate-supply-order-completed",
+            "text": "You check the supply list on your reusable tablet and deliver a transport basket with the order. The completed task pays 18 drachmas.",
+            "weight": 1,
+            "effects": [
+              {
+                "type": "asset",
+                "asset": "transport-baskets",
+                "delta": -1
+              },
+              {
+                "type": "cash",
+                "delta": 18
+              },
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-merchant",
+        "text": "Become a merchant",
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "merchant"
+              }
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "flag",
+                  "flag": "trader-qualified",
+                  "value": true
+                },
+                {
+                  "type": "job",
+                  "job": "trader"
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 30
+            },
+            {
+              "type": "skill",
+              "skill": "oratory",
+              "op": "gte",
+              "value": 15
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-merchant-accepted",
+            "weight": 1,
+            "text": "Your experience earns you a place arranging a wider range of purchases and sales as a merchant. You can browse the full market, but must fund your own orders and earn through completed sales; there is no salary.",
+            "effects": [
+              {
+                "type": "job",
+                "job": "merchant"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-estate-steward",
+        "text": "Become an estate steward",
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "estate-steward"
+              }
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "clerk"
+                },
+                {
+                  "type": "origin",
+                  "origin": "estate-household"
+                },
+                {
+                  "type": "origin",
+                  "origin": "royal-household"
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 25
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 20
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-estate-steward-accepted",
+            "weight": 1,
+            "text": "You accept work as estate steward. Its broad purchasing responsibilities give you access to the full market. The employer supplies ordinary duties; personal orders still use your own cash and goods.",
+            "effects": [
+              {
+                "type": "job",
+                "job": "estate-steward"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "work-quartermaster",
+        "text": "Become a quartermaster",
+        "category": "career",
+        "minAge": 18,
+        "cooldownYears": 1,
+        "when": {
+          "type": "all",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "job",
+                "job": "quartermaster"
+              }
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "officer"
+                },
+                {
+                  "type": "job",
+                  "job": "general"
+                },
+                {
+                  "type": "flag",
+                  "flag": "officer-recommendation",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "type": "skill",
+              "skill": "warfare",
+              "op": "gte",
+              "value": 20
+            },
+            {
+              "type": "skill",
+              "skill": "reckoning",
+              "op": "gte",
+              "value": 25
+            },
+            {
+              "type": "skill",
+              "skill": "literacy",
+              "op": "gte",
+              "value": 15
+            }
+          ]
+        },
+        "outcomes": [
+          {
+            "id": "work-quartermaster-accepted",
+            "weight": 1,
+            "text": "You accept work as quartermaster. Its broad purchasing responsibilities give you access to the full market. The employer supplies ordinary duties; personal orders still use your own cash and goods.",
+            "effects": [
+              {
+                "type": "job",
+                "job": "quartermaster"
+              },
+              {
+                "type": "flag",
+                "flag": "retired",
+                "value": false
               }
             ]
           }
@@ -56577,6 +58604,1356 @@
           ]
         }
       ]
+    },
+    {
+      "id": "market-trader-opening",
+      "title": "Known for your market trade",
+      "text": "Several years arranging deliveries and completing trades have made buyers and sellers familiar with your work. You can make trading your occupation, or keep your present livelihood.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "flag",
+            "flag": "trader-qualified",
+            "value": true
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
+            "type": "skill",
+            "skill": "reckoning",
+            "op": "gte",
+            "value": 10
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "trader"
+            }
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept-market-trader-opening",
+          "text": "Make trading your occupation",
+          "outcomes": [
+            {
+              "id": "accept-market-trader-opening-result",
+              "text": "You choose market trading as your livelihood. Your income now comes from completed sales, with no guaranteed salary.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "trader"
+                },
+                {
+                  "type": "flag",
+                  "flag": "retired",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "keep-current-livelihood",
+          "text": "Keep your current livelihood",
+          "outcomes": [
+            {
+              "id": "keep-current-livelihood-result",
+              "text": "You keep your present work. You can still choose trading later through the occupation controls.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-merchant-household-adult-livelihood",
+      "title": "An introduction at the market",
+      "text": "A relative offers to show you how to compare quantities and arrange deliveries for the shop.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "merchant-household"
+      },
+      "choices": [
+        {
+          "id": "merchant-household-adult-family-work",
+          "text": "Check a delivery with the family",
+          "outcomes": [
+            {
+              "id": "merchant-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "linen-cloth",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "oil",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "merchant-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "merchant-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-artisan-household-adult-livelihood",
+      "title": "A place beside the pottery bench",
+      "text": "A relative puts aside prepared clay and offers to help you plan a small independent batch.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "artisan-household"
+      },
+      "choices": [
+        {
+          "id": "artisan-household-adult-family-work",
+          "text": "Prepare your own pottery batch",
+          "outcomes": [
+            {
+              "id": "artisan-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "clay",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "fuel",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "artisan-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "artisan-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-harbor-household-adult-livelihood",
+      "title": "The quay crew remembers your family",
+      "text": "Your relatives introduce you to a crew checking a timber delivery. You can practise the tally or make other plans.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "harbor-household"
+      },
+      "choices": [
+        {
+          "id": "harbor-household-adult-family-work",
+          "text": "Check the crew's tally",
+          "outcomes": [
+            {
+              "id": "harbor-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "rope",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "transport-baskets",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "harbor-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "harbor-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-fishing-household-adult-livelihood",
+      "title": "A morning with the family nets",
+      "text": "Your relatives invite you to check repaired nets and help count the catch before the buyers arrive.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "fishing-household"
+      },
+      "choices": [
+        {
+          "id": "fishing-household-adult-family-work",
+          "text": "Help with the catch and its account",
+          "outcomes": [
+            {
+              "id": "fishing-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "seamanship",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "netting",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "salt",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fishing-household-choose-fisher",
+          "text": "Choose work as independent fisher",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "seamanship",
+                "op": "gte",
+                "value": 10
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "fishing-household-choose-fisher-result",
+              "text": "You choose this livelihood for yourself. Your relatives give you supplies for a first order; later work needs stock that you buy through the market.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "fisher"
+                },
+                {
+                  "type": "asset",
+                  "asset": "netting",
+                  "delta": 2
+                },
+                {
+                  "type": "asset",
+                  "asset": "salt",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fishing-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "fishing-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-bakery-household-adult-livelihood",
+      "title": "The bakery's next order",
+      "text": "Your relatives offer flour and fuel, and time planning a small bread order. You can use the supplies in your own work or continue your present plans.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "bakery-household"
+      },
+      "choices": [
+        {
+          "id": "bakery-household-adult-family-work",
+          "text": "Plan a bread order with the family",
+          "outcomes": [
+            {
+              "id": "bakery-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "flour",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "fuel",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bakery-household-choose-baker",
+          "text": "Choose work as independent baker",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "skill",
+                "skill": "reckoning",
+                "op": "gte",
+                "value": 10
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "bakery-household-choose-baker-result",
+              "text": "You choose this livelihood for yourself. Your relatives give you supplies for a first order; later work needs stock that you buy through the market.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "baker"
+                },
+                {
+                  "type": "asset",
+                  "asset": "flour",
+                  "delta": 4
+                },
+                {
+                  "type": "asset",
+                  "asset": "fuel",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bakery-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "bakery-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-clerk-household-adult-livelihood",
+      "title": "Sheets set aside for you",
+      "text": "A relative offers a few writing materials and time checking your first independent copies.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "clerk-household"
+      },
+      "choices": [
+        {
+          "id": "clerk-household-adult-family-work",
+          "text": "Prepare an independent copy",
+          "outcomes": [
+            {
+              "id": "clerk-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "papyrus",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "ink",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "clerk-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "clerk-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-weaver-household-adult-livelihood",
+      "title": "Thread for your own work",
+      "text": "Your relatives offer thread and advice on planning a batch of cloth. Taking up weaving remains your choice.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "weaver-household"
+      },
+      "choices": [
+        {
+          "id": "weaver-household-adult-family-work",
+          "text": "Plan a batch with the family",
+          "outcomes": [
+            {
+              "id": "weaver-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "flax-thread",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "weaver-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "weaver-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-delta-newcomers-adult-livelihood",
+      "title": "A useful introduction from home",
+      "text": "A visiting relative knows a household looking for someone to check a coastal delivery.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "delta-newcomers"
+      },
+      "choices": [
+        {
+          "id": "delta-newcomers-adult-family-work",
+          "text": "Take the introduction and check the load",
+          "outcomes": [
+            {
+              "id": "delta-newcomers-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "rope",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "transport-baskets",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "delta-newcomers-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "delta-newcomers-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-royal-household-adult-livelihood",
+      "title": "A smaller household account",
+      "text": "A relative asks you to compare the estate's recorded supplies with what remains in storage. Family connections offer a task rather than a promised career.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "royal-household"
+      },
+      "choices": [
+        {
+          "id": "royal-household-adult-family-work",
+          "text": "Help check the household account",
+          "outcomes": [
+            {
+              "id": "royal-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "wax-tablets",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "papyrus",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "royal-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "royal-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-estate-household-adult-livelihood",
+      "title": "A choice about the family fields",
+      "text": "Your relatives offer seed for a small crop, or time learning how to check the estate accounts. You can pursue another livelihood.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "estate-household"
+      },
+      "choices": [
+        {
+          "id": "estate-household-adult-family-work",
+          "text": "Learn the estate accounts",
+          "outcomes": [
+            {
+              "id": "estate-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "wax-tablets",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "transport-baskets",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estate-household-choose-farming",
+          "text": "Choose farming and accept seed for a first crop",
+          "outcomes": [
+            {
+              "id": "estate-household-choose-farming-result",
+              "text": "You choose farming for yourself. Your relatives give you seed for the first crop. Later crops need purchased seed, and harvests must be sold through the market.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "farmer"
+                },
+                {
+                  "type": "asset",
+                  "asset": "seed-grain",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "estate-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "estate-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-temple-household-adult-livelihood",
+      "title": "The household's supply record",
+      "text": "Your relatives are preparing a temple gathering. They offer oil and incense, and show you how to check the supplies. You can take up a preparation order or keep your own plans.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "temple-household"
+      },
+      "choices": [
+        {
+          "id": "temple-household-adult-family-work",
+          "text": "Help prepare the gathering supplies",
+          "outcomes": [
+            {
+              "id": "temple-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "incense",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "oil",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "temple-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "temple-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-soldier-household-adult-livelihood",
+      "title": "Equipment ready for inspection",
+      "text": "A relative asks for help inspecting worn straps and counting the pieces that need repair.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "soldier-household"
+      },
+      "choices": [
+        {
+          "id": "soldier-household-adult-family-work",
+          "text": "Inspect the household equipment",
+          "outcomes": [
+            {
+              "id": "soldier-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "leather",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "bronze-fittings",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "soldier-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "soldier-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-tenant-farming-household-adult-livelihood",
+      "title": "The fields or a different livelihood",
+      "text": "Your relatives can help you begin a small crop with seed, or teach you to check the produce accounts. The family fields do not decide your occupation.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "tenant-farming-household"
+      },
+      "choices": [
+        {
+          "id": "tenant-farming-household-adult-family-work",
+          "text": "Learn to check produce accounts",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "knowledge",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "seed-grain",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "transport-baskets",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tenant-farming-household-choose-farming",
+          "text": "Choose farming and accept seed for a first crop",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-choose-farming-result",
+              "text": "You choose farming for yourself. Your relatives give you seed for the first crop. Later crops need purchased seed, and harvests must be sold through the market.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "farmer"
+                },
+                {
+                  "type": "asset",
+                  "asset": "seed-grain",
+                  "delta": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tenant-farming-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "tenant-farming-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-domestic-service-household-adult-livelihood",
+      "title": "A recommendation from the household",
+      "text": "Your relatives offer cleaning cloths and oil, and an introduction to a household that sometimes places service orders. You can accept their help or continue your present work.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "domestic-service-household"
+      },
+      "choices": [
+        {
+          "id": "domestic-service-household-adult-family-work",
+          "text": "Learn the household service routine",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "cleaning-cloths",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "oil",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "domestic-service-household-choose-household-worker",
+          "text": "Choose work as household worker",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-choose-household-worker-result",
+              "text": "You choose this livelihood for yourself. Your relatives give you supplies for a first order; later work needs stock that you buy through the market.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "household-worker"
+                },
+                {
+                  "type": "asset",
+                  "asset": "cleaning-cloths",
+                  "delta": 2
+                },
+                {
+                  "type": "asset",
+                  "asset": "oil",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "domestic-service-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "domestic-service-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-boatbuilder-household-adult-livelihood",
+      "title": "Timber in the family workyard",
+      "text": "Your relatives put aside timber and offer advice on cutting fittings for a small working boat.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "boatbuilder-household"
+      },
+      "choices": [
+        {
+          "id": "boatbuilder-household-adult-family-work",
+          "text": "Plan fittings with the family",
+          "outcomes": [
+            {
+              "id": "boatbuilder-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "asset",
+                  "asset": "timber",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "rope",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "boatbuilder-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "boatbuilder-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "background-musician-household-adult-livelihood",
+      "title": "An invitation through the family",
+      "text": "A relative invites you to rehearse a short part for a gathering. You can join the practice without making performance your occupation.",
+      "trigger": {
+        "type": "age",
+        "at": 18
+      },
+      "when": {
+        "type": "origin",
+        "origin": "musician-household"
+      },
+      "choices": [
+        {
+          "id": "musician-household-adult-family-work",
+          "text": "Rehearse with your relatives",
+          "outcomes": [
+            {
+              "id": "musician-household-adult-family-work-result",
+              "text": "You help with the family's work, learn from your relatives and accept a few supplies for your own use. Your occupation remains your choice.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "music",
+                  "delta": 3
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "musical-reeds",
+                  "delta": 1
+                },
+                {
+                  "type": "asset",
+                  "asset": "instrument-strings",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "musician-household-adult-independent-path",
+          "text": "Continue with your own plans",
+          "outcomes": [
+            {
+              "id": "musician-household-adult-independent-path-result",
+              "text": "Your relatives arrange other help. You keep your current work and plans, then visit the household later.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "market-poor-harvest",
+      "title": "Less grain reaches the market",
+      "text": "Traders report that a poor harvest has reduced the grain reaching the coast. Grain and seed offers rise while buyers seek alternative supplies.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 14
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "maxOccurrences": 12,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "market-abundant-harvest",
+      "title": "Grain stores fill",
+      "text": "More grain arrives from the countryside. Sellers lower their offers as stores fill and buyers have more choice.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 14
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "maxOccurrences": 12,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "market-delayed-ships",
+      "title": "Supply boats arrive late",
+      "text": "Several supply boats arrive late. Market sellers ask more for timber, papyrus and thread while those deliveries are missing.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 14
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "maxOccurrences": 12,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "market-workshop-orders",
+      "title": "Buyers seek workshop goods",
+      "text": "Buyers place more orders with local workshops. Offers for finished cloth, pottery and carved goods rise.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "age",
+        "op": "gte",
+        "value": 14
+      },
+      "mode": "automatic",
+      "effects": [],
+      "choices": [],
+      "maxOccurrences": 12,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "sourceIds": []
+    },
+    {
+      "id": "farmer-checks-seed",
+      "title": "Seed set aside for the next crop",
+      "text": "You check the seed remaining after the last crop. Your next harvest depends on having seed in stock; you can order it at the market or choose another livelihood.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "job",
+        "job": "farmer"
+      },
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "skill",
+          "skill": "reckoning",
+          "delta": 1
+        }
+      ],
+      "choices": [],
+      "maxOccurrences": 12,
+      "cooldownYears": 5,
+      "evidence": "fictional",
+      "sourceIds": []
     }
   ],
   "endings": [
@@ -57308,7 +60685,7 @@
       "short": "dr"
     },
     "unitsPerPoint": 10,
-    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified accounting unit is used across this lifetime's changes of ruler; it does not imply a fixed exchange rate or uniform historical coinage. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan.",
+    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified accounting unit is used across this lifetime's changes of ruler; it does not imply a fixed exchange rate or uniform historical coinage. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan. Starting household resources are rolled by background and count toward wealth at the listed market prices. Resource quantities and total wealth have no gameplay cap. Resource ranges and prices are authored game balance, not measured historical holdings or market prices. Annual market contracts lock the displayed unit price when ordered and conclude at the next year end. Production consumes purchased materials and creates saleable goods. Market offers respond to recorded game events; all prices, outputs and effects are authored game balance. Resources cover the household trades, service orders and independent livelihoods. Salaried employers provide ordinary work supplies; optional independent orders consume your own stock. Bread units represent fulfilment orders rather than fresh loaves stored between years. Annual market capacity limits each household to 50 units per order and 100 committed units per year. Occupations with full market access can arrange up to 100 units per order and 300 committed units per year. Purchases and sales share the annual allowance; splitting a contract does not increase it. Cancelling a pending contract frees its committed capacity. Existing possessions and production capacity are unchanged. These limits are authored game balance.",
     "sourceIds": [
       "ucl-ptolemaic-coins"
     ],
@@ -57316,18 +60693,749 @@
       {
         "id": "tool-chest",
         "title": "Tool chest",
-        "description": "Unlocks hinge, strap and fitting repairs at Tool handling 15. Sell for 30 drachmas.",
+        "description": "Unlocks hinge, strap and fitting repairs at Tool handling 15. Buy or sell through an annual market contract.",
         "value": 30,
-        "maxOwned": 1,
-        "yearlyIncome": 0
+        "yearlyIncome": 0,
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Equipment and investments",
+        "context": {
+          "jobs": [
+            "apprentice"
+          ]
+        }
       },
       {
         "id": "workshop-share",
         "title": "Workshop share",
-        "description": "Earn 10 drachmas each year you survive. Sell for 120 drachmas.",
+        "description": "Earn 10 drachmas each surviving year. Buy or sell through an annual market contract.",
         "value": 120,
-        "maxOwned": 1,
-        "yearlyIncome": 10
+        "yearlyIncome": 10,
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Equipment and investments"
+      },
+      {
+        "id": "flax-thread",
+        "title": "Flax thread",
+        "value": 4,
+        "description": "Thread for weaving linen.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Textiles",
+        "context": {
+          "jobs": [
+            "weaver"
+          ],
+          "origins": [
+            "weaver-household"
+          ]
+        }
+      },
+      {
+        "id": "linen-cloth",
+        "title": "Linen cloth",
+        "value": 16,
+        "description": "Finished cloth ready for a market sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Textiles",
+        "context": {
+          "jobs": [
+            "trader",
+            "weaver"
+          ],
+          "origins": [
+            "merchant-household"
+          ]
+        }
+      },
+      {
+        "id": "papyrus",
+        "title": "Papyrus sheets",
+        "value": 4,
+        "description": "Writing sheets consumed by copying and writing work.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Writing and records",
+        "context": {
+          "activities": [
+            "prepare-teaching-notes"
+          ],
+          "jobs": [
+            "clerk",
+            "philosophy-tutor",
+            "astrologer",
+            "court-adviser",
+            "patron-supported-reader",
+            "copyist",
+            "sky-table-calculator",
+            "writer"
+          ],
+          "origins": [
+            "clerk-household",
+            "royal-household",
+            "temple-household"
+          ]
+        }
+      },
+      {
+        "id": "ink",
+        "title": "Ink",
+        "value": 2,
+        "description": "Ink consumed with papyrus in written work.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Writing and records",
+        "context": {
+          "activities": [
+            "prepare-teaching-notes"
+          ],
+          "jobs": [
+            "clerk",
+            "philosophy-tutor",
+            "astrologer",
+            "court-adviser",
+            "patron-supported-reader",
+            "copyist",
+            "sky-table-calculator",
+            "writer"
+          ],
+          "origins": [
+            "clerk-household",
+            "royal-household"
+          ]
+        }
+      },
+      {
+        "id": "written-copies",
+        "title": "Written copies",
+        "value": 15,
+        "description": "Completed written work ready for sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Writing and records",
+        "context": {
+          "jobs": [
+            "copyist",
+            "sky-table-calculator",
+            "writer"
+          ]
+        }
+      },
+      {
+        "id": "clay",
+        "title": "Clay",
+        "value": 3,
+        "description": "Prepared clay for pottery production.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "potter",
+            "ceramic-decorator",
+            "pottery-workshop-lead"
+          ],
+          "origins": [
+            "artisan-household"
+          ]
+        }
+      },
+      {
+        "id": "pottery-goods",
+        "title": "Finished pottery",
+        "value": 14,
+        "description": "Finished vessels ready for sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "potter",
+            "ceramic-decorator",
+            "pottery-workshop-lead"
+          ]
+        }
+      },
+      {
+        "id": "timber",
+        "title": "Timber",
+        "value": 6,
+        "description": "Wood for carved goods and boat fittings.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "wood-carver",
+            "carving-workshop-lead",
+            "boatbuilder"
+          ],
+          "origins": [
+            "boatbuilder-household"
+          ]
+        }
+      },
+      {
+        "id": "wooden-goods",
+        "title": "Wooden goods",
+        "value": 19,
+        "description": "Finished carved fittings ready for sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "wood-carver",
+            "carving-workshop-lead"
+          ]
+        }
+      },
+      {
+        "id": "stone",
+        "title": "Stone",
+        "value": 8,
+        "description": "Stone blanks for carved figures and reliefs.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "sculptor",
+            "sculpture-workshop-lead"
+          ]
+        }
+      },
+      {
+        "id": "carved-stone",
+        "title": "Carved stonework",
+        "value": 24,
+        "description": "Completed figures and reliefs ready for sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Workshop materials",
+        "context": {
+          "jobs": [
+            "sculptor",
+            "sculpture-workshop-lead"
+          ]
+        }
+      },
+      {
+        "id": "seed-grain",
+        "title": "Seed grain",
+        "value": 2,
+        "description": "Seed for a voluntarily chosen farming livelihood.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Food and farming",
+        "context": {
+          "jobs": [
+            "farmer"
+          ],
+          "origins": [
+            "tenant-farming-household"
+          ]
+        }
+      },
+      {
+        "id": "grain",
+        "title": "Grain",
+        "value": 6,
+        "description": "Harvested grain that can be sold at the market.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Food and farming",
+        "context": {
+          "jobs": [
+            "trader",
+            "farmer"
+          ]
+        }
+      },
+      {
+        "id": "boat-fittings",
+        "title": "Boat fittings",
+        "value": 22,
+        "description": "Finished timber fittings for working boats.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "category": "Fishing and shipping",
+        "context": {
+          "jobs": [
+            "boatbuilder"
+          ]
+        }
+      },
+      {
+        "id": "flour",
+        "title": "Flour",
+        "value": 3,
+        "category": "Food and farming",
+        "description": "Flour consumed by independent baking.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "jobs": [
+            "baker"
+          ],
+          "origins": [
+            "bakery-household"
+          ]
+        }
+      },
+      {
+        "id": "fuel",
+        "title": "Fuel bundles",
+        "value": 3,
+        "category": "Food and farming",
+        "description": "Fuel consumed in baking and optional kiln work.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "prepare-workshop-firing"
+          ],
+          "jobs": [
+            "apprentice",
+            "baker"
+          ],
+          "origins": [
+            "artisan-household",
+            "bakery-household"
+          ]
+        }
+      },
+      {
+        "id": "bread",
+        "title": "Bread orders",
+        "value": 6,
+        "category": "Food and farming",
+        "description": "A settled order for a batch of bread. One unit represents an order, not bread stored fresh for a year.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "jobs": [
+            "baker"
+          ]
+        }
+      },
+      {
+        "id": "netting",
+        "title": "Netting supplies",
+        "value": 4,
+        "category": "Fishing and shipping",
+        "description": "Replacement net sections used in a fishing season.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "jobs": [
+            "fisher"
+          ],
+          "origins": [
+            "fishing-household"
+          ]
+        }
+      },
+      {
+        "id": "salt",
+        "title": "Salt",
+        "value": 2,
+        "category": "Fishing and shipping",
+        "description": "Salt consumed when preserving the catch.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "jobs": [
+            "fisher"
+          ],
+          "origins": [
+            "fishing-household"
+          ]
+        }
+      },
+      {
+        "id": "preserved-fish",
+        "title": "Preserved fish",
+        "value": 10,
+        "category": "Fishing and shipping",
+        "description": "A portion of preserved catch ready for sale.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "fulfil-shop-parcel"
+          ],
+          "jobs": [
+            "shopkeeper",
+            "trader",
+            "fisher",
+            "merchant"
+          ]
+        }
+      },
+      {
+        "id": "rope",
+        "title": "Rope",
+        "value": 4,
+        "category": "Fishing and shipping",
+        "description": "Rope used for securing cargo and repairing rigging.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "secure-cargo-load",
+            "repair-ship-rigging"
+          ],
+          "jobs": [
+            "porter",
+            "sailor"
+          ],
+          "origins": [
+            "harbor-household",
+            "delta-newcomers",
+            "boatbuilder-household"
+          ]
+        }
+      },
+      {
+        "id": "sailcloth",
+        "title": "Sailcloth",
+        "value": 6,
+        "category": "Fishing and shipping",
+        "description": "Cloth consumed in optional rigging repairs.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "repair-ship-rigging"
+          ],
+          "jobs": [
+            "sailor"
+          ]
+        }
+      },
+      {
+        "id": "pitch",
+        "title": "Pitch",
+        "value": 3,
+        "category": "Fishing and shipping",
+        "description": "Sealing material consumed in boat and rigging repairs.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "repair-ship-rigging"
+          ],
+          "jobs": [
+            "sailor"
+          ],
+          "origins": [
+            "boatbuilder-household"
+          ]
+        }
+      },
+      {
+        "id": "transport-baskets",
+        "title": "Transport baskets",
+        "value": 5,
+        "category": "Fishing and shipping",
+        "description": "Baskets delivered with prepared cargo or estate supplies.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "secure-cargo-load",
+            "fulfil-shop-parcel",
+            "check-estate-supply-order"
+          ],
+          "jobs": [
+            "porter",
+            "shopkeeper",
+            "merchant",
+            "estate-steward",
+            "quartermaster"
+          ],
+          "origins": [
+            "merchant-household",
+            "harbor-household",
+            "delta-newcomers",
+            "estate-household",
+            "tenant-farming-household"
+          ]
+        }
+      },
+      {
+        "id": "leather",
+        "title": "Leather straps",
+        "value": 5,
+        "category": "Military supplies",
+        "description": "Replacement straps consumed in equipment repairs.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "repair-service-equipment"
+          ],
+          "jobs": [
+            "soldier",
+            "officer",
+            "general",
+            "quartermaster"
+          ],
+          "origins": [
+            "soldier-household"
+          ]
+        }
+      },
+      {
+        "id": "bronze-fittings",
+        "title": "Bronze fittings",
+        "value": 7,
+        "category": "Military supplies",
+        "description": "Small replacement fittings consumed in equipment repairs.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "repair-service-equipment"
+          ],
+          "jobs": [
+            "soldier",
+            "officer",
+            "general",
+            "quartermaster"
+          ],
+          "origins": [
+            "soldier-household"
+          ]
+        }
+      },
+      {
+        "id": "wax-tablets",
+        "title": "Writing tablets",
+        "value": 12,
+        "category": "Writing and records",
+        "description": "Reusable working tablets for lesson notes and supply accounts.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "prepare-teaching-notes",
+            "check-estate-supply-order"
+          ],
+          "jobs": [
+            "clerk",
+            "philosophy-tutor",
+            "astrologer",
+            "officer",
+            "general",
+            "court-adviser",
+            "patron-supported-reader",
+            "estate-steward",
+            "quartermaster"
+          ],
+          "origins": [
+            "clerk-household",
+            "royal-household",
+            "estate-household"
+          ]
+        }
+      },
+      {
+        "id": "oil",
+        "title": "Oil",
+        "value": 4,
+        "category": "Household and temple",
+        "description": "Oil consumed in household service orders and preparations for a gathering.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "prepare-temple-gathering",
+            "complete-household-service-order",
+            "fulfil-shop-parcel"
+          ],
+          "jobs": [
+            "shopkeeper",
+            "trader",
+            "household-worker",
+            "merchant"
+          ],
+          "origins": [
+            "merchant-household",
+            "temple-household",
+            "domestic-service-household"
+          ]
+        }
+      },
+      {
+        "id": "incense",
+        "title": "Incense",
+        "value": 5,
+        "category": "Household and temple",
+        "description": "Incense consumed in an optional preparation order for a temple gathering.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "prepare-temple-gathering"
+          ],
+          "origins": [
+            "temple-household"
+          ]
+        }
+      },
+      {
+        "id": "cleaning-cloths",
+        "title": "Cleaning cloths",
+        "value": 3,
+        "category": "Household and temple",
+        "description": "Cloths consumed while fulfilling a household service order.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "complete-household-service-order"
+          ],
+          "jobs": [
+            "household-worker"
+          ],
+          "origins": [
+            "domestic-service-household"
+          ]
+        }
+      },
+      {
+        "id": "musical-reeds",
+        "title": "Musical reeds",
+        "value": 3,
+        "category": "Music",
+        "description": "Replacement reeds consumed in a paid musical engagement.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "perform-independent-engagement"
+          ],
+          "jobs": [
+            "performer"
+          ],
+          "origins": [
+            "musician-household"
+          ]
+        }
+      },
+      {
+        "id": "instrument-strings",
+        "title": "Instrument strings",
+        "value": 4,
+        "category": "Music",
+        "description": "Replacement strings consumed in a paid musical engagement.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "perform-independent-engagement"
+          ],
+          "jobs": [
+            "performer"
+          ],
+          "origins": [
+            "musician-household"
+          ]
+        }
+      },
+      {
+        "id": "musical-instrument",
+        "title": "Musical instrument",
+        "value": 24,
+        "category": "Music",
+        "description": "A reusable instrument that opens independent paid musical engagements.",
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        },
+        "context": {
+          "activities": [
+            "perform-independent-engagement"
+          ],
+          "jobs": [
+            "performer"
+          ],
+          "origins": [
+            "musician-household"
+          ]
+        }
       }
     ],
     "autoDebtRepayment": true,
@@ -57345,6 +61453,135 @@
         "due": "lender-payment-due",
         "threat": "lender-threat",
         "attack": "lender-confrontation"
+      }
+    },
+    "uncappedResources": true,
+    "market": {
+      "minAge": 14,
+      "feePercent": 5,
+      "maxQuantity": 100,
+      "maxOrders": 8,
+      "traderJob": "trader",
+      "traderYears": 3,
+      "traderFocusActivity": "focus-market-trading",
+      "goods": [
+        "flax-thread",
+        "linen-cloth",
+        "papyrus",
+        "ink",
+        "written-copies",
+        "clay",
+        "pottery-goods",
+        "timber",
+        "wooden-goods",
+        "stone",
+        "carved-stone",
+        "seed-grain",
+        "grain",
+        "boat-fittings",
+        "tool-chest",
+        "workshop-share",
+        "flour",
+        "fuel",
+        "bread",
+        "netting",
+        "salt",
+        "preserved-fish",
+        "rope",
+        "sailcloth",
+        "pitch",
+        "transport-baskets",
+        "leather",
+        "bronze-fittings",
+        "wax-tablets",
+        "oil",
+        "incense",
+        "cleaning-cloths",
+        "musical-reeds",
+        "instrument-strings",
+        "musical-instrument"
+      ],
+      "shocks": [
+        {
+          "eventId": "market-poor-harvest",
+          "title": "Less grain reaches the market",
+          "durationYears": 3,
+          "priceMultipliers": {
+            "grain": 1.5,
+            "seed-grain": 1.5,
+            "flour": 1.5,
+            "bread": 1.25
+          }
+        },
+        {
+          "eventId": "market-abundant-harvest",
+          "title": "Grain stores fill",
+          "durationYears": 3,
+          "priceMultipliers": {
+            "grain": 0.75,
+            "seed-grain": 0.75,
+            "flour": 0.75,
+            "bread": 0.75
+          }
+        },
+        {
+          "eventId": "market-delayed-ships",
+          "title": "Supply boats arrive late",
+          "durationYears": 3,
+          "priceMultipliers": {
+            "timber": 1.5,
+            "papyrus": 1.5,
+            "flax-thread": 1.25,
+            "salt": 1.5,
+            "rope": 1.25,
+            "sailcloth": 1.25,
+            "pitch": 1.25,
+            "oil": 1.25
+          }
+        },
+        {
+          "eventId": "market-workshop-orders",
+          "title": "Buyers seek workshop goods",
+          "durationYears": 3,
+          "priceMultipliers": {
+            "linen-cloth": 1.25,
+            "pottery-goods": 1.25,
+            "wooden-goods": 1.25,
+            "carved-stone": 1.25,
+            "written-copies": 1.25,
+            "bronze-fittings": 1.25,
+            "musical-instrument": 1.25
+          }
+        },
+        {
+          "eventId": "classical-alexandria-founded",
+          "title": "Work begins on the new city",
+          "durationYears": 5,
+          "priceMultipliers": {
+            "timber": 1.25,
+            "stone": 1.25,
+            "boat-fittings": 1.25
+          }
+        },
+        {
+          "eventId": "classical-scholarly-households",
+          "title": "More patrons support written work",
+          "durationYears": 5,
+          "priceMultipliers": {
+            "papyrus": 1.25,
+            "written-copies": 1.5
+          }
+        }
+      ],
+      "orderLimits": {
+        "household": {
+          "perOrder": 50,
+          "perYear": 100
+        },
+        "professional": {
+          "perOrder": 100,
+          "perYear": 300
+        }
       }
     }
   },

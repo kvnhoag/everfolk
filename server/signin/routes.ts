@@ -1,5 +1,5 @@
 import { clientKey, createMemoryLimiter, type RateLimiter } from "../ranked/rate-limit.ts";
-import type { ContentDatabase } from "../store.ts";
+import type { ContentDatabase } from "../db/types.ts";
 import { createAccountBalance, createTransfer, redact, TransferNotSentError, type AccountBalance, type Transfer } from "./funder.ts";
 import { claimFunding, hasFunding, recordTransfer, releaseFunding } from "./funding-store.ts";
 import { TokenServiceError, verifyPrivyToken, type VerifyToken } from "./privy-token.ts";

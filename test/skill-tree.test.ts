@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import type { CharacterActivity, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacy from "../worlds/alexandria-0.4.0.json" with { type: "json" };
-import { buildSkillTree, guaranteedSkillRequirements, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "../client/skill-tree.ts";
+import { buildSkillTree, guaranteedSkillRequirements, layoutSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "../client/models/skill-tree.ts";
 
 const main = pack as WorldPack;
 function adult(world = main): { engine: ReturnType<typeof createEngine>; life: LifeState } {

@@ -1,13 +1,16 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { advanceToDecisionWithFocus, advanceYearWithFocus, focusStatus, normalizeYearlyFocus, persistYearlyFocus, readYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../client/yearly-focus.ts";
+import { advanceToDecisionWithFocus, advanceYearWithFocus, focusStatus, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../client/models/yearly-focus.ts";
+import { persistYearlyFocus } from "../client/mutations/yearly-focus.ts";
+import { readYearlyFocus } from "../client/queries/yearly-focus.ts";
 
 function controlledWorld(): WorldPack {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   world.events = world.events.filter(event => event.id === world.health!.careDecision);
   delete world.eventPacing;
   delete world.character!.encounterPacing;

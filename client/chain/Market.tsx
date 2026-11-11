@@ -8,7 +8,7 @@ import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { filterMarket, marketRows, tokenTitle, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
 import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, effectiveFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import { DEFAULT_MARKET_TERMS } from "./payout-preview.ts";
 import type { Listing, MarketTerms, TokenView } from "./types.ts";
 import SellYours, { type SellItem } from "./SellYours.tsx";

@@ -1,16 +1,18 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { pruneRemovedOriginActivities, withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { matchesCondition } from "../src/engine.ts";
+import { getNetWorth } from "../src/economy.ts";
 import type { Condition, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { builtinEngine, createDifferentSampleLife, createSampleLife, selectWorldPack } from "../client/session.ts";
-import { portraitVariant } from "../client/life-background.ts";
+import { builtinEngine, selectWorldPack } from "../client/lib/world-session.ts";
+import { createDifferentSampleLife, createSampleLife } from "../client/mutations/lives.ts";
+import { portraitVariant } from "../client/models/life-background.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.9.0.json" with { type: "json" };
 import variedRelease from "../worlds/alexandria-0.10.0.json" with { type: "json" };
 
-const backgroundEventIds = new Set(pack.events.filter(event => event.id.startsWith("background-")).map(event => event.id));
+const backgroundEventIds = new Set(pack.events.filter(event => event.id.startsWith("background-") && !event.id.endsWith("-adult-livelihood")).map(event => event.id));
 const backgroundEvents = pack.events.filter(event => backgroundEventIds.has(event.id));
 
 /** Fixed-name restart fixtures intentionally exercise the older identity model. */
@@ -72,7 +74,7 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
 
 test("new lives draw broadly from both name pools and sixteen distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.34.0");
+  assert.equal(pack.version, "0.41.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 16);
@@ -85,12 +87,18 @@ test("new lives draw broadly from both name pools and sixteen distinct household
   for (const life of origins.values()) {
     const origin = engine.world.origins.find(origin => origin.id === life.originId)!;
     for (const [id, stat] of Object.entries(engine.world.stats)) {
+      if (id === engine.world.economy!.stat) continue;
       const range = origin.statRanges?.[id] ?? stat.initialRange!;
       assert.ok(life.stats[id] >= range.min && life.stats[id] <= range.max, `${origin.id}: ${id}`);
     }
-    assert.equal(life.economy!.cash, life.stats.wealth * 10);
+    const cashRange = origin.statRanges!.wealth;
+    assert.ok(life.economy!.cash >= cashRange.min * 10 && life.economy!.cash <= cashRange.max * 10);
+    assert.equal(getNetWorth(engine.world, life), life.stats.wealth * 10);
     assert.equal(life.economy!.debt, 0);
-    assert.ok(Object.values(life.economy!.assets).every(quantity => quantity === 0));
+    for (const asset of engine.world.economy!.assets) {
+      const range = origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
+      assert.ok(life.economy!.assets[asset.id] >= range.min && life.economy!.assets[asset.id] <= range.max);
+    }
     assert.ok(Object.values(life.character!.skills).every(value => value === 0), "A newborn has not already learned the household's trade.");
     assert.deepEqual(life.character!.knownPartnerIds, []);
     assert.deepEqual(engine.load(engine.save(life)), life);
@@ -112,6 +120,7 @@ test("the varied release preserves the existing economy, skill tree, risks and e
 
 test("each background has exclusive childhood milestones and its own adolescent opportunity", () => {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   isolateBackground(world);
   world.yearlyEffects = [];
   world.yearlyRules = [];
@@ -174,6 +183,7 @@ test("complete varied lives retain their drawn name, coherent background and exa
 
 test("every household opportunity follows the core trade decisions without a long milestone backlog", () => {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   isolateBackground(world);
   const engine = createEngine(world);
   const { origins } = sampleBirths(engine);
@@ -239,6 +249,7 @@ test("an explicit fresh-life request avoids the preceding name and background wh
 
 test("limited authored worlds use a bounded fresh-life fallback rather than looping forever", () => {
   const limited = withoutMoneylender(structuredClone(builtinEngine.world) as WorldPack);
+  withoutMarketSignals(limited);
   limited.version = "one-profile-restart-fixture";
   limited.origins = [limited.origins[0]];
   limited.events = limited.events.filter(event => event.id === "the-first-household" || event.id === limited.health!.careDecision);
@@ -248,6 +259,7 @@ test("limited authored worlds use a bounded fresh-life fallback rather than loop
   delete limited.character!.encounterPacing;
   omitProceduralSocialRoles(limited);
   pruneRemovedOriginModifiers(limited);
+  pruneRemovedOriginActivities(limited);
   try {
     selectWorldPack(limited);
     const previousLife = createSampleLife("limited-before");

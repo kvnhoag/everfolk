@@ -8,8 +8,9 @@ import ts from "typescript";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import type { LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { getBirthRollStats } from "../client/birth-stat-roll.ts";
-import { hasBirthStatsBeenRevealed, hasLifeBegun, persistBirthPresentation, persistBirthStatsReveal } from "../client/session.ts";
+import { getBirthRollStats } from "../client/models/birth-stat-roll.ts";
+import { hasBirthStatsBeenRevealed, hasLifeBegun } from "../client/queries/lives.ts";
+import { persistBirthPresentation, persistBirthStatsReveal } from "../client/mutations/lives.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -18,9 +19,9 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: CharacterPanel } = await import("../client/CharacterPanel.tsx");
-const { default: HouseholdSummary } = await import("../client/HouseholdSummary.tsx");
-const { default: BirthAvatarPicker } = await import("../client/BirthAvatarPicker.tsx");
+const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
+const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
+const { default: BirthAvatarPicker } = await import("../client/components/BirthAvatarPicker.tsx");
 hooks.deregister();
 const engine = createEngine(pack);
 

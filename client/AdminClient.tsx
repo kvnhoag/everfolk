@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import AdminPanel from "./admin/AdminPanel";
+import AdminPanel from "./screens/AdminPanel";
 export default function AdminClient() {
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);

@@ -6,7 +6,8 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
-import { builtinEngine, createDifferentSampleLife, createSampleLife, selectWorldPack } from "../client/session.ts";
+import { builtinEngine, selectWorldPack } from "../client/lib/world-session.ts";
+import { createDifferentSampleLife, createSampleLife } from "../client/mutations/lives.ts";
 import type { WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 
@@ -20,8 +21,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: BirthRollPopover } = await import("../client/BirthRollPopover.tsx");
-const { default: App } = await import("../client/App.tsx");
+const { default: BirthRollPopover } = await import("../client/components/BirthRollPopover.tsx");
+const { default: App } = await import("../client/screens/App.tsx");
 hooks.deregister();
 
 for (const revealed of [false, true]) test(`opening a birth popup auto-rolls with saved reveal=${revealed}`, () => {

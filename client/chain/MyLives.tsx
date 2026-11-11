@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { keptRows, type KeptRow } from "./token-page-model.ts";

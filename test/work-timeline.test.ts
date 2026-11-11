@@ -1,3 +1,4 @@
+import fixturePack from "../worlds/alexandria-0.37.0.json" with { type: "json" };
 import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -8,7 +9,7 @@ import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" 
 import previous from "../worlds/alexandria-0.12.0.json" with { type: "json" };
 
 /** Isolate occupational boundaries from unrelated narrative and mortality draws. */
-function controlledWorld(source = pack): WorldPack {
+function controlledWorld(source = fixturePack): WorldPack {
   const world = withoutMoneylender(structuredClone(source) as WorldPack);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });

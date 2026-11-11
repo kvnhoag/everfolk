@@ -3,7 +3,7 @@ import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./resource-bar.css";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import { RESOURCES, type ResourceId } from "./resources.ts";
 import ResourceYearDetails from "./Storehouse.tsx";
 import type { StorehouseRow } from "./storehouse-model.ts";

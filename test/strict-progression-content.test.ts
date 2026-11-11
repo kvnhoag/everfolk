@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, Effect, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { advanceYearWithFocus, selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { advanceYearWithFocus, selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import current from "../worlds/alexandria-0.18.0.json" with {type:"json"};
 import previous from "../worlds/alexandria-0.17.0.json" with {type:"json"};
 

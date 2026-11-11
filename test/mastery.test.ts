@@ -3,9 +3,9 @@ import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { applyStatDelta } from "../src/progression.ts";
 import type { Effect, LifeState, WorldPack } from "../src/types.ts";
-import { getChoiceImpact } from "../client/choice-impact.ts";
-import { getSkillImpact } from "../client/skill-impact.ts";
-import { getMasteryPreviews } from "../client/mastery.ts";
+import { getChoiceImpact } from "../client/models/choice-impact.ts";
+import { getSkillImpact } from "../client/models/skill-impact.ts";
+import { getMasteryPreviews } from "../client/models/mastery.ts";
 import alexandria from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const mastery: Effect[] = [{ type: "mastery", target: "stat", id: "knowledge" }, { type: "mastery", target: "skill", id: "pottery" }];

@@ -1,4 +1,4 @@
-import type { ContentDatabase } from "../store.ts";
+import type { ContentDatabase } from "../db/types.ts";
 
 export type ClaimResult = "claimed" | "already-funded" | "account-taken" | "daily-cap";
 

@@ -1,4 +1,4 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
@@ -7,10 +7,11 @@ import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import romanEraPack from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import legacyPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
 import retainedRelationshipsPack from "../worlds/alexandria-0.28.0.json" with { type: "json" };
-import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual, resolveLifeScenes } from "../client/scene-model.ts";
+import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual, resolveLifeScenes } from "../client/models/scene-model.ts";
 
 function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prepare?: (engine: LifeEngine, life: LifeState) => LifeState, source = pack as WorldPack) {
   const world = withoutMoneylender(structuredClone(source));
+  withoutMarketSignals(world);
   delete world.mortality;
   delete world.health!.mortalityCalibration;
   delete world.eventPacing;
@@ -86,6 +87,7 @@ test("business proposals show the shared-work context without implying romance o
 
 test("generated names resolve in scene headings, pending captions and accepted activities without draws", () => {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   delete world.mortality; delete world.eventPacing;
   delete world.character!.encounterPacing;
   delete world.health!.mortalityCalibration;
@@ -230,6 +232,7 @@ test("only a real child activity depicts parenthood, while childhood care keeps 
 test("dated history and the annual event remain available beside a pending decision", () => {
   // This fixture checks an actual retained Roman-era event beside its age-18 decision.
   const world = withoutMoneylender(structuredClone(romanEraPack) as WorldPack);
+  withoutMarketSignals(world);
   delete world.mortality;
   delete world.health!.mortalityCalibration;
   delete world.eventPacing;
@@ -272,6 +275,7 @@ test("explicit event visuals override defaults and unknown events fall back from
 
 test("death before the first birthday shows the actual selected cause in the memorial", () => {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });

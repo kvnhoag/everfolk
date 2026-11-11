@@ -9,13 +9,13 @@ import { demoEngine } from "./fixtures/demo/world.ts";
 import { activityGate, beginOrder, demoScreen, orderPreview, sendDemoCommand } from "../client/demo/screen.ts";
 import { availability } from "../src/demo/availability.ts";
 import { storehouseRows } from "../client/demo/storehouse-model.ts";
-import { buildSkillTree, currentSkillTree } from "../client/skill-tree.ts";
+import { buildSkillTree, currentSkillTree } from "../client/models/skill-tree.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
 import { careerEmblem } from "../client/chain/token-page-model.ts";
 import { actionName } from "../client/chain/chain-copy.ts";
 import { ensureDemoDeeds } from "../chain/catalog/demo-deeds.ts";
 import { createEngine } from "../src/index.ts";
-import { influenceMarker } from "../client/influence-marker.ts";
+import { influenceMarker } from "../client/models/influence-marker.ts";
 
 const hooks = registerHooks({
   load(url, context, nextLoad) {
@@ -29,9 +29,9 @@ const hooks = registerHooks({
 const { default: EconomyPanels } = await import("../client/demo/EconomyPanels.tsx");
 const { default: ResourceYearDetails } = await import("../client/demo/Storehouse.tsx");
 const { default: ResourceBar } = await import("../client/demo/ResourceBar.tsx");
-const { default: LifeChoiceBoard } = await import("../client/LifeChoiceBoard.tsx");
-const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
-const { default: EventNotificationStack } = await import("../client/EventNotificationStack.tsx");
+const { default: LifeChoiceBoard } = await import("../client/components/LifeChoiceBoard.tsx");
+const { default: DecisionDialog } = await import("../client/components/DecisionDialog.tsx");
+const { default: EventNotificationStack } = await import("../client/components/EventNotificationStack.tsx");
 hooks.deregister();
 
 const engine = demoEngine();

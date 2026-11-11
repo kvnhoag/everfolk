@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { buildLocationMap, supportsLocationMap } from "../client/location-map.ts";
+import { buildLocationMap, supportsLocationMap } from "../client/models/location-map.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 
@@ -104,7 +104,7 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: WorldMap } = await import("../client/WorldMap.tsx");
+const { default: WorldMap } = await import("../client/components/WorldMap.tsx");
 hooks.deregister();
 
 test("the early home map labels both scales and omits the later city and lighthouse", () => {

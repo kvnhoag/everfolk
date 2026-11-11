@@ -1,4 +1,4 @@
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import type { StorehouseFlow, StorehouseRow } from "./storehouse-model.ts";
 import "./storehouse.css";
 

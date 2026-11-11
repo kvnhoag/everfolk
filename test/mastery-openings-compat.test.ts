@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import previous from "../worlds/alexandria-0.23.0.json" with { type: "json" };
 // Keep this release-specific whole-pack comparison exact; 0.25 has its own legacy tests.

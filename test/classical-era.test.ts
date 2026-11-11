@@ -1,11 +1,12 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { matchesCondition } from "../src/engine.ts";
 import { contentFingerprint } from "../src/random.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { classicalFoundationYear, worldBeginning, worldPlace } from "../client/world-era.ts";
-import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual } from "../client/scene-model.ts";
+import { classicalFoundationYear, worldBeginning, worldPlace } from "../client/models/world-era.ts";
+import { ALEXANDRIA_EVENT_VISUALS, defaultEventVisual } from "../client/models/scene-model.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import sources from "../research/classical-era-sources.json" with { type: "json" };
@@ -23,6 +24,7 @@ const anchors = [
 /** Qualified calendar fixture: isolate chronology/access from mortality and money. */
 function calendarWorld(): WorldPack {
   const copy = structuredClone(world);
+  withoutMarketSignals(copy);
   const required = new Set([copy.health!.careDecision, ...Object.values(copy.economy!.moneylender!.events)]);
   copy.events = copy.events.filter(event => event.id.startsWith("classical-") || required.has(event.id));
   copy.mortality!.bands.forEach(band => { band.annualProbability = 0; });
@@ -31,6 +33,9 @@ function calendarWorld(): WorldPack {
   copy.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   copy.eventPacing!.rareEvents!.annualChance = 0;
   copy.yearlyEffects = []; copy.yearlyRules = [];
+  // Calendar fixtures deliberately exclude starting possessions and their income.
+  for (const asset of copy.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of copy.origins) delete origin.assetRanges;
   copy.stats.wealth.initialRange = { min: 80, max: 80 };
   for (const origin of copy.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 80, max: 80 } };
   for (const definition of Object.values(copy.character!.skills)) definition.initial = 30;
@@ -47,7 +52,7 @@ function reach(engine: LifeEngine, life: LifeState, eventId: string, maxAge: num
 
 test("350 BCE births precede the foundation; retained 66 BCE lives keep their original pack", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.34.0"); assert.equal(world.startYear, -350);
+  assert.equal(world.version, "0.41.0"); assert.equal(world.startYear, -350);
   const engine = createEngine(world), life = engine.start("classical-birth");
   assert.equal(life.age, 0); assert.equal(life.year, -350);
   assert.equal(worldPlace(world, -350), "Rhakotis coast");

@@ -5,7 +5,7 @@ import { actionName, actionDescription, figureTitle, GROUP_TITLE, groupOfAction,
 import { errorText } from "./chain-backend.ts";
 import { formatNear } from "./near-amount.ts";
 import FigureArtwork from "./FigureArtwork.tsx";
-import PixelPortrait from "../PixelPortrait.tsx";
+import PixelPortrait from "../components/PixelPortrait.tsx";
 import MintReveal from "./MintReveal.tsx";
 import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";

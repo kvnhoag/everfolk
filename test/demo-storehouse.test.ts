@@ -23,7 +23,7 @@ const hooks = registerHooks({
   },
 });
 const { ResourceGlyph } = await import("../client/demo/ResourceBar.tsx");
-const { default: PixelIcon } = await import("../client/PixelIcon.tsx");
+const { default: PixelIcon } = await import("../client/components/PixelIcon.tsx");
 const { default: Storehouse } = await import("../client/demo/Storehouse.tsx");
 hooks.deregister();
 

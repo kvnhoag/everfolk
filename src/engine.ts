@@ -1,15 +1,16 @@
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
-  LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
+  LifeEngine, LifeEvent, LifeState, MarketOrderRequest, SaveFile, WorldPack,
 } from "./types.ts";
 import { influenceCatalog, influenceDeltas, influenceMeasure, parseInfluenceCommand, scaleInfluenceEffects } from "./influence.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
+import { placeMarketOrder, cancelMarketOrder as cancelOrder, settleMarketYear } from "./market.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
 import { applyStatDelta, skillEffectDelta } from "./progression.ts";
 import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
@@ -90,7 +91,9 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
     ...(state.activeInfluences ? { activeInfluences: [...state.activeInfluences] } : {}),
     ...(state.queuedInfluences ? { queuedInfluences: [...state.queuedInfluences] } : {}),
-    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
+    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}),
+      ...(state.economy.market ? { market: { ...state.economy.market, orders: state.economy.market.orders.map(order => ({ ...order })),
+        ...(state.economy.market.history ? { history: [...state.economy.market.history] } : {}) } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
@@ -371,6 +374,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
+    if (world.economy?.market) syncEconomyStat(world, state);
     journal(state, "event", event.id, `${event.title}: ${event.text}`, source ? { source } : undefined);
   }
 
@@ -661,7 +665,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
-    if (world.economy) state.economy = initialEconomy(world, state)!;
+    if (world.economy) {
+      state.economy = initialEconomy(world, state)!;
+      for (const asset of world.economy.assets) {
+        const range = origin.assetRanges?.[asset.id] ?? asset.initialRange;
+        if (range) state.economy.assets[asset.id] = startingStat(range.min, range.max, state);
+      }
+      if (world.economy.uncappedResources || world.economy.assets.some(asset => origin.assetRanges?.[asset.id] || asset.initialRange)) syncEconomyStat(world, state);
+    }
     if (world.demo) initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
@@ -686,16 +697,22 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // before the first birthday is therefore recorded at age zero, not age one.
     if (mortalityCheck(next)) return;
     recorded(next, next.journal.length, () => progressKnowledge(world, next, (id, text) => journal(next, "event", id, text)));
+    const completedAge = next.age;
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
+    const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
+    if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
       if (next.phase !== "ended" && next.character?.jobId && next.vocations?.workedAge !== next.age - 1) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
-        recorded(next, () => next.journal.length - 1, () => {
-          apply(next, job.yearlyEffects);
-          journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
-        });
+        if (marketYear.focused) journal(next, "activity", "work-set-aside-for-trade", `You set aside your ${job.title.toLowerCase()} work to focus on market trading this year. No job income or production is earned.`);
+        else if (!job.production || marketYear.productionBatches > 0) {
+          recorded(next, () => next.journal.length - 1, () => {
+            apply(next, job.yearlyEffects);
+            journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+          });
+        }
       }
       if (next.phase !== "ended") {
         const income = yearlyAssetIncome(world, next);
@@ -724,6 +741,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.demo && next.phase !== "ended") openDemoYear(demoCtx(next));
     checkEndings(next);
     resolveEvents(next, true);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function chooseInto(next: LifeState, choiceId: string): void {
@@ -743,6 +761,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (offerQueuedInfluence(next)) return;
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function advance(state: LifeState): LifeState {
@@ -796,12 +815,45 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
     checkEndings(next);
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function act(state: LifeState, activityId: string): LifeState {
     assertPlayable(state);
     const next = mutableSnapshot(state);
     actInto(next, activityId);
+    return freeze(next);
+  }
+
+  function orderMarketInto(next: LifeState, request: MarketOrderRequest): void {
+    assertPlayable(next);
+    placeMarketOrder(world, next, request);
+    next.commands.push({ type: "market-order", side: request.side, asset: request.asset, quantity: request.quantity });
+    const order = next.economy!.market!.orders.at(-1)!;
+    const title = world.economy!.assets.find(item => item.id === request.asset)!.title.toLowerCase();
+    journal(next, "activity", "market-order", `You contract to ${order.side} ${order.quantity} ${title} at ${order.unitPrice} ${world.economy!.currency.short} each. ${order.side === "buy" ? "Cash" : "Goods"} reserved; settlement at age ${order.settlesAtAge}.`);
+    syncEconomyStat(world, next);
+  }
+
+  function orderMarket(state: LifeState, request: MarketOrderRequest): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    orderMarketInto(next, request);
+    return freeze(next);
+  }
+
+  function cancelMarketOrderInto(next: LifeState, orderId: number): void {
+    assertPlayable(next);
+    cancelOrder(world, next, orderId);
+    next.commands.push({ type: "market-cancel", orderId });
+    journal(next, "activity", "market-cancel", `You cancel market contract ${orderId}. Its reserved cash or goods are returned.`);
+    syncEconomyStat(world, next);
+  }
+
+  function cancelMarketOrder(state: LifeState, orderId: number): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    cancelMarketOrderInto(next, orderId);
     return freeze(next);
   }
 
@@ -905,6 +957,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
         if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
+      } else if (command.type === "market-order" && Object.keys(command).length === 4 && typeof command.asset === "string" && typeof command.quantity === "number") {
+        orderMarketInto(state, command);
+      } else if (command.type === "market-cancel" && Object.keys(command).length === 2 && typeof command.orderId === "number") {
+        cancelMarketOrderInto(state, command.orderId);
       } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
       else if (DEMO_COMMAND_TYPES.has(command.type)) demoInto(state, command, ` at ${i}`);
       else throw new Error(`Invalid command at ${i}.`);
@@ -937,5 +993,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, influence, demo, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, replay, save, load });
 }

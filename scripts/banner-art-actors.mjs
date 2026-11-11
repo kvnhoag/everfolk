@@ -1,5 +1,5 @@
 /** Native ArtCraft actor geometry, sharing identity features with every portrait. */
-import { getAvatarAppearance } from '../client/avatar-appearance.ts';
+import { getAvatarAppearance } from '../client/models/avatar-appearance.ts';
 export const ACTOR_STAGES = Object.freeze(['infant','child','youth','adult','middle','elder']);
 export const ACTOR_POSES = Object.freeze(['standing','seated','reclined']);
 export const ACTOR_SEXES = Object.freeze(['male','female']);

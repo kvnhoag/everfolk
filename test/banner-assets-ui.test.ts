@@ -8,8 +8,8 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine, yearAtAge } from "../src/index.ts";
-import { BANNER_SITUATION_IDS, resolveLifeBanner } from "../client/banner-state.ts";
-import { bannerActorSource } from "../client/banner-actor.ts";
+import { BANNER_SITUATION_IDS, resolveLifeBanner } from "../client/models/banner-state.ts";
+import { bannerActorSource } from "../client/models/banner-actor.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import manifest from "../public/assets/pixel/banners/manifest.json" with { type: "json" };
 
@@ -20,7 +20,7 @@ const hooks = registerHooks({ load(url, context, next) {
   }).outputText };
   return next(url, context);
 } });
-const { default: PaperScene } = await import("../client/PaperScene.tsx");
+const { default: PaperScene } = await import("../client/components/PaperScene.tsx");
 hooks.deregister();
 
 test("every banner and pose has a real web export and a native master with editable vector layers", () => {

@@ -1,5 +1,5 @@
 import { createEngine } from "./engine.ts";
-import type { ActivityAvailability, Choice, Command, LifeState, SaveFile, WorldPack } from "./types.ts";
+import type { ActivityAvailability, Choice, Command, LifeState, MarketOrderRequest, SaveFile, WorldPack } from "./types.ts";
 
 /** Ordinary saves allow 8 MB; leave a bounded allowance for the binding envelope. */
 export const MAX_SEEDED_SAVE_LENGTH = 8_004_096;
@@ -59,6 +59,8 @@ export interface SeededPlayEngine {
   advance(state: LifeState): LifeState;
   choose(state: LifeState, choiceId: string): LifeState;
   act(state: LifeState, activityId: string): LifeState;
+  orderMarket(state: LifeState, order: MarketOrderRequest): LifeState;
+  cancelMarketOrder(state: LifeState, orderId: number): LifeState;
   chooseAvatar(state: LifeState, variant: number): LifeState;
   getChoices(state: LifeState): readonly Choice[];
   getActivities(state: LifeState): readonly ActivityAvailability[];
@@ -189,6 +191,8 @@ export function createSeededPlayEngine(definition: SeededScenarioDefinition, per
     advance: (state: LifeState) => { assertBound(state); return engine.advance(state); },
     choose: (state: LifeState, choiceId: string) => { assertBound(state); return engine.choose(state, choiceId); },
     act: (state: LifeState, activityId: string) => { assertBound(state); return engine.act(state, activityId); },
+    orderMarket: (state: LifeState, order: MarketOrderRequest) => { assertBound(state); return engine.orderMarket(state, order); },
+    cancelMarketOrder: (state: LifeState, orderId: number) => { assertBound(state); return engine.cancelMarketOrder(state, orderId); },
     chooseAvatar: (state: LifeState, variant: number) => { assertBound(state); return engine.chooseAvatar(state, variant); },
     getChoices: (state: LifeState) => { assertBound(state); return engine.getChoices(state); },
     getActivities: (state: LifeState) => { assertBound(state); return engine.getActivities(state); },

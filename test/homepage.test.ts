@@ -17,7 +17,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: MainMenu } = await import('../client/MainMenu.tsx');
+const { default: MainMenu } = await import('../client/screens/MainMenu.tsx');
 hooks.deregister();
 const engine = createEngine(world);
 const noop = () => {};

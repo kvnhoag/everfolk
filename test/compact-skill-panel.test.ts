@@ -18,8 +18,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: CompactSkillPanel } = await import("../client/CompactSkillPanel.tsx");
-const { default: WikiLibrary } = await import("../client/WikiLibrary.tsx");
+const { default: CompactSkillPanel } = await import("../client/components/CompactSkillPanel.tsx");
+const { default: WikiLibrary } = await import("../client/components/WikiLibrary.tsx");
 hooks.deregister();
 
 test("the sidebar offers a collapsed Your skills disclosure without unearned skills", () => {

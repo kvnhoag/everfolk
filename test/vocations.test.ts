@@ -187,8 +187,8 @@ test("malformed vocation packs reject unknown references, duplicate supports and
 });
 
 test("new work previews match actual skill gains and cash transfers", async () => {
-  const { getSkillImpact } = await import("../client/skill-impact.ts");
-  const { getMoneyImpact } = await import("../client/wealth.ts");
+  const { getSkillImpact } = await import("../client/models/skill-impact.ts");
+  const { getMoneyImpact } = await import("../client/models/wealth.ts");
   const { engine, life, world } = fixture();
   const choice = engine.getActivities(life).find(a => a.id === "v-apprentice-pottery")!;
   const gains = getSkillImpact(choice, life, world);

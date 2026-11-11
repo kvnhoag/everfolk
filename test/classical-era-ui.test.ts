@@ -6,7 +6,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import type { WorldPack } from "../src/types.ts";
-import { builtinEngine, selectWorldPack } from "../client/session.ts";
+import { builtinEngine, selectWorldPack } from "../client/lib/world-session.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 
@@ -17,7 +17,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: App } = await import("../client/App.tsx");
+const { default: App } = await import("../client/screens/App.tsx");
 hooks.deregister();
 
 function render(world: WorldPack) {
