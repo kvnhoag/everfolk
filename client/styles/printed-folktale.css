@@ -1,0 +1,61 @@
+/* Approved Printed Folktale: Eczar 600, -.025em display tracking,
+   with DM Sans 500 / 16px for the life story. Keep compact UI at its own scale. */
+:root { --serif: var(--font-display); }
+body { font-family: var(--font-body); font-weight: 500; }
+
+.everfolk-game h1,
+.everfolk-game h2,
+.everfolk-game h3,
+.everfolk-game .character-panel h2,
+.everfolk-game .life-moment-heading h2,
+.everfolk-game .compact-skills h3,
+.everfolk-game .life-health-panel h3,
+dialog.detail-dialog .dialog-content > h2,
+dialog .character-section-heading h3,
+dialog .character-card-heading h4,
+dialog .birth-roll-heading h2,
+dialog .birth-roll-heading h3,
+dialog.birth-roll-popover .birth-popover-heading h2,
+dialog.life-decision-dialog.choice-popup .life-decision-content > h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+.everfolk-game .life-moment-copy,
+.everfolk-game .life-moment-intro,
+.everfolk-game .inline-decision .life-decision-content > p,
+.everfolk-game .life-event-feed .life-event-copy p,
+.everfolk-game .journal-copy > p,
+dialog.life-decision-dialog.choice-popup .life-decision-content > p,
+dialog.detail-dialog .dialog-content > p,
+dialog.birth-roll-popover .birth-popover-heading p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.birth-stat-roll .birth-roll-number,
+dialog.birth-roll-popover .birth-roll-number {
+  font-family: var(--font-body);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.everfolk-game .brand { gap: 0; font-size: 28px; }
+.everfolk-game .site-footer .everfolk-wordmark { font-size: 18px; }
+.main-menu.storybook-menu h1 > .everfolk-wordmark { color: var(--wordmark-ink); }
+
+body {
+  background-image: url("/assets/branding/everfolk-parchment-grain.png"),
+    radial-gradient(ellipse at 12% 0%, #e8d1a757, transparent 50%),
+    radial-gradient(ellipse at 95% 80%, #d3d9cc40, transparent 55%);
+}
+.main-menu.storybook-menu .main-menu-shell {
+  background-image: url("/assets/branding/everfolk-parchment-grain.png"),
+    radial-gradient(ellipse at 18% 12%, #fffaf080, transparent 65%);
+}
+
+@media (max-width: 760px) {
+  .everfolk-game .brand { font-size: 25px; }
+}
