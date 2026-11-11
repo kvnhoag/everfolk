@@ -1,4 +1,5 @@
 import { vocationInventory } from "../src/vocations/view.ts";
+import { TRADE_ITEMS } from "../src/demo/types.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/engine.ts";
@@ -7,7 +8,7 @@ import { validateWorld } from "../src/validate.ts";
 import { labourUnits } from "../src/demo/household.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-1.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 
 function fixture(options: { craft?: number; cash?: number; job?: string; events?: boolean } = {}) {
@@ -24,6 +25,9 @@ function fixture(options: { craft?: number; cash?: number; job?: string; events?
   for (const definition of Object.values(world.stats)) delete definition.initialRange;
   for (const [id, definition] of Object.entries(world.character!.skills)) definition.initial = id === "craft" ? options.craft ?? 24 : 0;
   world.origins = [{ id: "test-household", title: "Test household", text: "Deterministic accounting fixture.", weight: 1, effects: [] }];
+  world.demo!.startingResources = { defaults: Object.fromEntries(TRADE_ITEMS.map(item => [item, {
+    min: item === "grain" ? world.demo!.household.startingGrain : 0, max: item === "grain" ? world.demo!.household.startingGrain : 0,
+  }])) as NonNullable<NonNullable<WorldPack["demo"]>["startingResources"]>["defaults"] };
   world.stats.wealth.initial = (options.cash ?? 1000) / world.economy!.unitsPerPoint;
   const engine = createEngine(world);
   let life = engine.start("vocation-ledger");

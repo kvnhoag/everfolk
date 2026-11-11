@@ -1,5 +1,7 @@
 import { applyStatDelta } from "../../src/progression.ts";
 import { marketQuote } from "../../src/market.ts";
+import { initialTown } from "../../src/demo/market.ts";
+import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import type { Effect, WorldPack } from "../../src/types.ts";
 
 export interface UniformRoll { first: number; step: number; count: number }
@@ -26,6 +28,8 @@ function getMockSocietyWealthData(world: WorldPack): SocietyWealthGroup[] {
   if (!economy) return [];
   const definition = world.stats[economy.stat];
   const maximumWeight = Math.max(...world.origins.map(origin => origin.weight));
+  const startingResources = world.demo?.startingResources;
+  const demoPrices = world.demo && startingResources ? initialTown(world.demo).prices : undefined;
   return world.origins.map(origin => {
     const range = origin.statRanges?.[economy.stat] ?? definition.initialRange;
     const first = range?.min ?? definition.initial;
@@ -35,14 +39,20 @@ function getMockSocietyWealthData(world: WorldPack): SocietyWealthGroup[] {
       if (effect.type === "end") break;
       if (effect.type === "stat" && effect.stat === economy.stat) effects.push(effect);
     }
+    const resources = economy.assets.map(asset => {
+      const range = origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
+      const unitPrice = marketQuote(world, { age: 0, lastEventAge: {}, eventCounts: {} }, asset.id).sell;
+      return { first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 };
+    });
+    if (startingResources && demoPrices) for (const item of TRADE_ITEMS) {
+      const range = startingResources.origins?.[origin.id]?.[item] ?? startingResources.defaults[item];
+      const unitPrice = demoPrices[item].buy;
+      resources.push({ first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 });
+    }
     return {
       weight: origin.weight / maximumWeight,
       count,
-      resources: economy.assets.map(asset => {
-        const range = origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
-        const unitPrice = marketQuote(world, { age: 0, lastEventAge: {}, eventCounts: {} }, asset.id).sell;
-        return { first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 };
-      }).filter(roll => roll.first !== 0 || roll.count > 1),
+      resources: resources.filter(roll => roll.first !== 0 || roll.count > 1),
       wealthAt(index: number) {
         let value = first + index;
         for (const effect of effects) {

@@ -271,10 +271,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
           state.character!.jobId = effect.job; break;
         case "vocation":
-          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action)); break;
+          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action));
+          if (world.demo?.startingResources) syncEconomyStat(world, state);
+          break;
         case "demo":
           if (!world.demo || !state.demo) throw new Error("Demo effects need a demo world.");
-          applyDemoEffect(demoCtx(state), effect.effect); break;
+          applyDemoEffect(demoCtx(state), effect.effect);
+          if (world.demo.startingResources) syncEconomyStat(world, state);
+          break;
         case "condition": addHealthCondition(world, state, effect.condition, decisionContext, healthHooks(state)); break;
         case "care": provideHealthCare(world, state, effect.amount); break;
         case "closeness": applyCloseness(world, state, effect); break;
@@ -676,7 +680,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       }
       if (world.economy.uncappedResources || world.economy.assets.some(asset => origin.assetRanges?.[asset.id] || asset.initialRange)) syncEconomyStat(world, state);
     }
-    if (world.demo) initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
+    if (world.demo) {
+      initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
+      if (world.demo.startingResources) syncEconomyStat(world, state);
+    }
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
@@ -730,7 +737,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Money-enabled years settle income before costs, avoiding bridge debt
     // created only by batching a whole year. Legacy worlds keep exact ordering.
     if (world.economy) annualIncome();
-    if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => settleDemoYear(demoCtx(next)));
+    if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => {
+      settleDemoYear(demoCtx(next));
+      if (world.demo!.startingResources) syncEconomyStat(world, next);
+    });
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
@@ -741,7 +751,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
-    if (world.demo && next.phase !== "ended") openDemoYear(demoCtx(next));
+    if (world.demo && next.phase !== "ended") {
+      openDemoYear(demoCtx(next));
+      if (world.demo.startingResources) syncEconomyStat(world, next);
+    }
     checkEndings(next);
     resolveEvents(next, true);
     if (world.economy?.market) syncEconomyStat(world, next);
@@ -935,6 +948,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       case "agent":
         applyAgentCommand(ctx, command, inner => runAsAgent(next, inner.command)); break;
     }
+    if (world.demo.startingResources) syncEconomyStat(world, next);
   }
 
   function demo(state: LifeState, command: DemoCommand): LifeState {

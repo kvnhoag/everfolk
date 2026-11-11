@@ -1,6 +1,6 @@
 # Handmade work and public life
 
-`alexandria-lives-1` is the new **free-play** birth revision, built from the retained `alexandria-demo-2` pack. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
+`alexandria-lives-2` is the current **free-play** birth revision, built from the retained `alexandria-demo-2` pack. It adds deterministic household resource rolls and market-valued wealth. The previous `alexandria-lives-1` revision remains available for exact replay. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
 
 Run `node scripts/vocations/build-world.mjs` to reproduce the shipped JSON. The builder reads the public [skill-tree design](../../design/skill-tree/README.md) for recipe inputs and reference prices.
 

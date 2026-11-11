@@ -1,6 +1,7 @@
 import { vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
+import { TRADE_ITEMS } from "./demo/types.ts";
 import { marketCommittedQuantity, marketOrderValue, marketQuote } from "./market.ts";
 
 /** Deliberate numeric ceiling keeps all ledger arithmetic safely below 2^53. */
@@ -11,12 +12,25 @@ function amount(value: number, label: string): number {
   return value;
 }
 
-type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts">>;
+type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo">>;
+/** The merchant's current bid is the realizable market value of each holding. */
+export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeState, "demo">>): number {
+  if (!world.demo?.startingResources || !state.demo) return 0;
+  const demo = state.demo;
+  return amount(TRADE_ITEMS.reduce((sum, item) => {
+    const quantity = item === "grain" ? demo.household.grain : item === "flax" ? demo.household.flax
+      : item === "ox" || item === "donkey" ? demo.household.animals[item] : demo.goods[item];
+    const held = amount(quantity, `Household ${item}`);
+    const price = amount(demo.town.prices[item].buy, `Market ${item} price`);
+    return sum + held * price;
+  }, 0), "Household resource market value");
+}
+
 export function getAssetValue(world: WorldPack, state: ValuationState): number {
   if (!world.economy || !state.economy) return 0;
   const valuation = { ...state, age: state.age ?? 0, lastEventAge: state.lastEventAge ?? {}, eventCounts: state.eventCounts ?? {} };
   return amount(world.economy.assets.reduce((sum, asset) => sum + marketQuote(world, valuation, asset.id).sell * (state.economy!.assets[asset.id] ?? 0), 0)
-    + marketOrderValue(world, valuation), "Resource market value");
+    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state), "Resource market value");
 }
 
 export function getNetWorth(world: WorldPack, state: ValuationState): number {

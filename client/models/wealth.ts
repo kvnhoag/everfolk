@@ -1,8 +1,10 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../../src/types.ts";
-import { financeActivityReason, getNetWorth, previewEconomyEffects } from "../../src/economy.ts";
+import { financeActivityReason, getDemoResourceValue, getNetWorth, previewEconomyEffects } from "../../src/economy.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
 import { marketOrderValue, marketQuote } from "../../src/market.ts";
+import { TRADE_ITEMS } from "../../src/demo/types.ts";
+import type { TradeItem } from "../../src/demo/types.ts";
 
 export function formatMoney(amount: number, world: WorldPack, full = false): string {
   const currency = world.economy?.currency;
@@ -67,6 +69,17 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
   if (!world.economy || !life.economy) return null;
   const assets = world.economy.assets.map(asset => ({ ...asset, value: world.economy?.market?.goods.includes(asset.id) ? marketQuote(world, life, asset.id).sell : asset.value, quantity: life.economy!.assets[asset.id] ?? 0 }))
     .filter(asset => asset.quantity > 0);
+  // These holdings use the demo household ledger rather than classic assets.
+  if (world.demo?.startingResources && life.demo) {
+    const demo = life.demo;
+    const titles: Record<TradeItem, string> = { grain: "Grain", flax: "Flax", silver: "Silver", gold: "Gold", silk: "Coan silk", linen: "Linen", ox: "Ox", donkey: "Donkey" };
+    for (const item of TRADE_ITEMS) {
+      const quantity = item === "grain" || item === "flax" ? demo.household[item]
+        : item === "ox" || item === "donkey" ? demo.household.animals[item] : demo.goods[item];
+      if (quantity <= 0) continue;
+      assets.push({ id: `demo:${item}`, title: titles[item], description: "Household stores valued at the merchant’s current buying price.", value: demo.town.prices[item].buy, quantity });
+    }
+  }
   const job = world.character?.jobs.find(item => item.id === life.character?.jobId);
   const trading = Boolean(world.economy.market && life.character?.lastActivityAges[world.economy.market.traderFocusActivity] === life.age);
   const jobCash = trading ? 0 : directMoneyDelta(job?.yearlyEffects ?? [], world);
@@ -80,7 +93,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .flatMap(activity => activity.outcomes.map(outcome => -directMoneyDelta(outcome.effects, world)))
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
-    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life), committedValue,
+    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life), committedValue,
     netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), job, jobCash, trading, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),

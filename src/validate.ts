@@ -1383,7 +1383,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     const character = (world.character ?? {}) as DataObject;
     const legacy = (world.legacy ?? {}) as DataObject;
     const listIds = (list: unknown) => new Set(Array.isArray(list) ? list.map(item => (item as DataObject).id as string) : []);
-    validateDemoDefinition(world.demo, fail, { jobs: listIds(character.jobs), activities: listIds(character.activities),
+    validateDemoDefinition(world.demo, fail, { origins: originIds, jobs: listIds(character.jobs), activities: listIds(character.activities),
       skills: new Set(Object.keys((character.skills ?? {}) as DataObject)), achievements: listIds(legacy.achievements) });
     if (!Object.hasOwn(world, "economy") || !Object.hasOwn(world, "character")) fail("world.demo", "requires an economy and characters");
   }
