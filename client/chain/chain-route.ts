@@ -2,7 +2,7 @@
 export type ChainRoute = { kind: "ranked" } | { kind: "market" } | { kind: "figures" } | { kind: "mine" } | { kind: "pack"; lifeId: string } | { kind: "token"; tokenId: string };
 
 export function parseChainRoute(hash: string): ChainRoute | null {
-  if (hash === "#ranked") return { kind: "ranked" };
+  if (hash === "#ranked" || hash === "#weave") return { kind: "ranked" };
   if (hash === "#figures") return { kind: "figures" };
   if (hash === "#market") return { kind: "market" };
   if (hash === "#mine") return { kind: "mine" };

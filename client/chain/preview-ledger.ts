@@ -1,10 +1,10 @@
 import { sha256Hex } from "../../chain/hash.ts";
-import { RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import type { Evidence } from "../../chain/types.ts";
 import { createMockContract, type MockLivesContract } from "./mock-contract.ts";
 
 /**
- * A small practice ledger for the ranked screens while the live service is not configured:
+ * A small practice ledger for the Weave Mode screens while the live service is not configured:
  * a few owners, one finished and minted life, earnings waiting to be claimed and two listings.
  * The player is `player.testnet`. Nothing here touches NEAR.
  */
@@ -17,8 +17,9 @@ function seedOwners(ledger: MockLivesContract): void {
   ledger.seedToken({ owner_id: "alice.testnet", kind: "figure", figure_id: "aristotle", action_id: "aristotle.lyceum", rarity: 3, affection: 48 });
   ledger.seedToken({ owner_id: "genesis.testnet", kind: "figure", figure_id: "alexander", action_id: "alexander.found", rarity: 2, affection: 40 });
   ledger.seedToken({ owner_id: "genesis.testnet", kind: "figure", figure_id: "cleomenes", action_id: "cleomenes.granaries", rarity: 4, affection: 55 });
+  ledger.seedToken({ owner_id: "alice.testnet", kind: "npc", career_group: "farming", action_id: "farming.stock-granary", rarity: 2, affection: 78 });
   ledger.seedToken({ owner_id: "alice.testnet", kind: "npc", career_group: "letters", action_id: "letters.teach", rarity: 1, affection: 70 });
-  ledger.seedToken({ owner_id: "bob.testnet", kind: "npc", career_group: "military", rarity: 0, affection: 35 });
+  ledger.seedToken({ owner_id: "bob.testnet", kind: "npc", career_group: "military", action_id: "military.guard-road", rarity: 1, affection: 52 });
   ledger.seedToken({ owner_id: "genesis.testnet", kind: "npc", career_group: "commerce", rarity: 0, affection: 30 });
   ledger.seedToken({ owner_id: "genesis.testnet", kind: "npc", career_group: "craft", rarity: 2, affection: 42 });
   ledger.seedToken({ owner_id: PREVIEW_ACCOUNT, kind: "npc", career_group: "sky", action_id: "sky.omen", rarity: 1, affection: 58 });
@@ -28,7 +29,7 @@ function seedOwners(ledger: MockLivesContract): void {
 /** Bob lives and mints one life shaped by Euclid and Aristotle, then offers it for sale. */
 async function mintBobsLife(ledger: MockLivesContract): Promise<void> {
   const bob = ledger.as("bob.testnet");
-  const life = await bob.startLife(RANKED_WORLD_VERSION);
+  const life = await bob.startLife(DEMO_WORLD_VERSION);
   const evidence: Evidence = {
     v: 1, seed: life.seed, life_id: life.life_id, account_id: life.account_id, world_version: life.world_version,
     world_fingerprint: "preview", save_hash: await sha256Hex("preview-save"), stats: { bonds: 62 }, skills: { literacy: 48 },

@@ -34,15 +34,15 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
     <header className="ledger-heading">
       <p className="ledger-kicker"><span className="cr-index">{String(rows?.length ?? 0).padStart(2, "0")}</span>{backend.mode === "preview" ? "Practice collection" : "Kept on NEAR"}</p>
       <h1 id={headingId} tabIndex={-1}>My lives</h1>
-      <p>Your current ranked life, completed lives waiting to mint, and the NFTs your wallet owns.</p>
+      <p>Your current Weave life, completed lives waiting to mint, and the NFTs your wallet owns.</p>
     </header>
     {!accountId && <p className="market-empty">Connect a NEAR wallet to see the lives you keep.</p>}
     {current.active && <ActiveLifeCard life={current.active.life} progress={current.active.progress} busy={busy} onOpen={() => { void openLife(current.active!.life); }} />}
-    {current.loading && <p role="status" className="market-empty">Finding your ranked life…</p>}
+    {current.loading && <p role="status" className="market-empty">Finding your Weave life…</p>}
     {current.error && <p className="chain-error" role="alert">{current.error}</p>}
     {error && <div className="ledger-body"><p className="chain-error" role="alert">{error}</p></div>}
     {accountId && rows === null && !error && <p className="market-empty" role="status">Reading your lives from NEAR…</p>}
-    {rows !== null && rows.length === 0 && <p className="market-empty">No minted NFTs yet. {current.active ? "Your ranked life is shown above." : <a href="#ranked">Start a ranked life</a>}</p>}
+    {rows !== null && rows.length === 0 && <p className="market-empty">No minted NFTs yet. {current.active ? "Your Weave life is shown above." : <a href="#weave">Start a Weave life</a>}</p>}
     {rows !== null && rows.length > 0 && <ol className="ledger-rows market-ledger ledger-body">{rows.map(row => <li key={row.tokenId} className="ledger-row">
       <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
       <div className="ledger-value">

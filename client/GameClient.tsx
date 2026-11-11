@@ -98,10 +98,11 @@ export default function GameClient() {
           } catch { /* Keep an existing selection when its save cannot be checked. */ }
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
+          if (!hasBegunLife && world.pack.version !== DEMO_WORLD_VERSION) { restored = false; hadSelection = false; }
         }
         else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
-      if (!restored && !hadSelection) {
+      if (!restored && (!hadSelection || world.pack.version !== DEMO_WORLD_VERSION)) {
         setLoadingPhase("world");
         const demo = await loadDemoWorld();
         world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
@@ -138,7 +139,8 @@ export default function GameClient() {
     setBusy(true);
     setError("");
     try {
-      const demo = fresh && active?.world.id === id && active.world.pack.demo ? await loadDemoWorld() : null;
+      const useDemo = fresh || id === "alexandria" || id === "alexandria-sample" || Boolean(active?.world.pack.demo);
+      const demo = useDemo ? await loadDemoWorld() : null;
       let world: PublishedWorld = demo
         ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
         : await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);

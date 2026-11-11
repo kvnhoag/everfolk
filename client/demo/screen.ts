@@ -31,6 +31,7 @@ export interface DemoScreen {
   agents: AgentLine[];
   offerText: string | null;
   futurePaths: { id: string; title: string; description: string; prerequisites?: string }[];
+  legacyHelp: { text: string; age: number; tokenId: string }[];
 }
 
 export function isDemoWorld(world: Pick<WorldPack, "version">): boolean {
@@ -59,6 +60,8 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
     }),
     offerText: offerLine(typed),
     futurePaths: def.availability.futurePaths,
+    legacyHelp: life.journal.filter(entry => entry.type === "influence" && entry.id === "farming.stock-granary" && entry.source)
+      .slice(-1).map(entry => ({ text: entry.text, age: entry.age, tokenId: entry.source!.tokenId })),
   };
 }
 

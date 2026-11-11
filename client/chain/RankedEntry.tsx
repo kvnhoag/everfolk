@@ -85,9 +85,9 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack or rerolls, those fees are shared with its source lives and the protocol treasury; they are not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 
     <section className="chain-card ranked-entry-intro" aria-labelledby={headingId}>
-      <p className="chain-kicker">Live another story, for keeps</p>
-      <h1 id={headingId} tabIndex={-1}>Ranked life</h1>
-      <p>One life that counts. Famous figures owned by other players shape the city you are born into, and people from their lives may step in at your big decisions.</p>
+      <p className="chain-kicker">Weaving fates · Live another story, for keeps</p>
+      <h1 id={headingId} tabIndex={-1}>Weave Mode</h1>
+      <p>One life that counts. Famous figures owned by other players shape the city you are born into, and people from their past lives weave into your big decisions.</p>
       <ul className="ranked-entry-rules">
         <li>No rewinds. Each choice stands.</li>
         <li>Other players' characters can help you when it matters.</li>
@@ -97,17 +97,17 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
       <p className="chain-fine">Base and reroll fees share the same source-life and protocol treasury split. Wallet approvals show the cost before payment; gas is separate. Testnet tokens have no real monetary value.</p>
       {!life && !current.loading && !current.error && <div className="chain-actions">
         {accountId
-          ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void start(); }}>{busy ? "Starting…" : "Start a ranked life"}<span aria-hidden="true">→</span></button>
+          ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void start(); }}>{busy ? "Starting…" : "Start a Weave life"}<span aria-hidden="true">→</span></button>
           : <><button className="chain-primary" type="button" disabled={busy} onClick={() => { void run(backend.connect, "The wallet could not connect."); }}>Connect a NEAR wallet<span aria-hidden="true">→</span></button><EmailSignIn /></>}
       </div>}
       <div className="chain-actions"><a className="chain-secondary" href="#figures">Meet the figures</a><a className="chain-secondary" href="#mine">My lives</a></div>
       {accountId && <p className="chain-fine">Playing as {accountId}</p>}
       {!accountId && backend.mode === "live" && <details className="wallet-help">
         <summary>Using Meteor Wallet?</summary>
-        <p>Ranked lives run on NEAR <strong>testnet</strong>. Meteor only lists testnet accounts it already holds in this browser. If it asks you to create a wallet, open Meteor, switch its network to <strong>Testnet</strong> and import your testnet account (recovery phrase or private key), or install the Meteor extension in this browser. Then connect again.</p>
+        <p>Weave Mode runs on NEAR <strong>testnet</strong>. Meteor only lists testnet accounts it already holds in this browser. If it asks you to create a wallet, open Meteor, switch its network to <strong>Testnet</strong> and import your testnet account (recovery phrase or private key), or install the Meteor extension in this browser. Then connect again.</p>
         <p>MyNearWallet works too: sign in at testnet.mynearwallet.com first.</p>
       </details>}
-      {current.loading && <p role="status">Finding your ranked life…</p>}
+      {current.loading && <p role="status">Finding your Weave life…</p>}
       {current.error && <p className="chain-error" role="alert">{current.error}</p>}
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}

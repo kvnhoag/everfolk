@@ -71,6 +71,10 @@ export default function EconomyPanels({ screen, cashText, autoPlay, pending = fa
 
     <section aria-label="Household grain">
       <h3>Household grain</h3>
+      {screen.legacyHelp?.map(help => <aside className="demo-legacy-arrival" key={`${help.tokenId}:${help.age}`} aria-label="Granary from a past life">
+        <strong>A past life kept a granary for you</strong><p>{help.text}</p>
+        <a href={`#token/${help.tokenId}`}>Meet the farmer · Life NFT #{help.tokenId}</a><small>Arrived at age {help.age}. Recorded in your life history.</small>
+      </aside>)}
       <dl className="demo-facts">
         <Field label="Store" value={String(screen.household.grain)} />
         <Field label="Capacity" value={String(screen.household.capacity)} />

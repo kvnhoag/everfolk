@@ -1,6 +1,5 @@
 import { displayProse } from "./display-prose.ts";
-import { useEffect, useId, useRef, useState } from "react";
-import type { RefObject } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
 import type { Choice, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 import { formatYear } from "../src/index.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
@@ -19,9 +18,10 @@ interface Props {
   onSetAside(): void;
   onEnableAuto(): void;
   riskPreview?: { knownCosts: readonly string[]; chance: string; routes?: readonly { choice: string; expectedLossBps: number }[] } | null;
+  topSlot?: ReactNode;
 }
 
-function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onChoose, onSetAside, onEnableAuto, riskPreview = null }: Omit<Props, "open">) {
+function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onChoose, onSetAside, onEnableAuto, riskPreview = null, topSlot }: Omit<Props, "open">) {
   const dialog = useRef<HTMLDialogElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const previewStack = useRef<HTMLDivElement>(null);
@@ -46,6 +46,7 @@ function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onCho
   }, [returnFocusRef]);
   const sources = (event.sourceIds ?? []).map(sourceId => world.sources?.find(source => source.id === sourceId)).filter(source => source !== undefined);
   return <dialog ref={dialog} className={`life-decision-dialog choice-popup${event.rarity === "rare" ? " is-rare" : ""}`} aria-labelledby={`${id}-title`} aria-describedby={`${id}-body`} onCancel={event => { event.preventDefault(); onSetAside(); }}>
+    {topSlot}
     <header className="life-decision-meta"><span>{event.rarity === "rare" ? "Rare encounter" : "Decision"}</span><span>Age {life.age} · {formatYear(life.year)}</span><button type="button" onClick={onSetAside}>Set aside</button></header>
     <div className="life-decision-content">
       <h2 ref={heading} tabIndex={-1} id={`${id}-title`}>{displayProse(event.title)}</h2>

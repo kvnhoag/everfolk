@@ -28,13 +28,13 @@ export function leaveChainRoute(): void {
   window.dispatchEvent(new HashChangeEvent("hashchange"));
 }
 
-interface ChainShellProps { backend: ChainBackend | null; focusKey: string; onBack(): void; children: ReactNode }
+interface ChainShellProps { backend: ChainBackend | null; focusKey: string; onBack(): void; topSlot?: ReactNode; children: ReactNode }
 
 /**
  * A modal dialog, so it sits in the top layer above the game's own modal dialogs
  * (the birth roll opens on its own for a new visitor) and makes the game inert underneath.
  */
-function ChainShell({ backend, focusKey, onBack, children }: ChainShellProps) {
+function ChainShell({ backend, focusKey, onBack, topSlot, children }: ChainShellProps) {
   const shell = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = shell.current;
@@ -55,7 +55,8 @@ function ChainShell({ backend, focusKey, onBack, children }: ChainShellProps) {
     shell.current?.scrollTo({ top: 0 });
     shell.current?.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
   }, [focusKey, backend === null]);
-  return <dialog className="chain-screen" ref={shell} aria-label="Ranked lives" onCancel={event => { event.preventDefault(); onBack(); }}>
+  return <dialog className="chain-screen" ref={shell} aria-label="Weave Mode" onCancel={event => { event.preventDefault(); onBack(); }}>
+    {topSlot}
     <div className="chain-shell">
       <Web3Navigation backend={backend} onExplore={onBack} />
       {backend?.mode === "preview" && <p className="chain-notice">Practice ledger · This session is a local preview. No NEAR is spent and nothing is recorded on chain.</p>}
@@ -74,14 +75,16 @@ export interface ChainLayerProps {
   /** Only a ranked life shows the end-of-life report; free play passes nothing. */
   rankedSession?: ChainLayerSession | null;
   onRankedClosed?(): void;
+  /** Optional header slot rendered inside the modal dialog above Web3Navigation (e.g. for the Weave test bar). */
+  topSlot?: ReactNode;
 }
 
 /** Ranked screens over the game, opened by hash routes. The game stays mounted underneath. */
-export default function ChainLayer({ backend, onBeginRanked, rankedSession, onRankedClosed }: ChainLayerProps) {
+export default function ChainLayer({ backend, onBeginRanked, rankedSession, onRankedClosed, topSlot }: ChainLayerProps) {
   const route = useChainRoute();
   if (rankedSession?.state.phase === "ended" && backend && !route) {
     const close = () => onRankedClosed?.();
-    return <ChainShell backend={backend} focusKey={`ending:${rankedSession.life.life_id}`} onBack={close}>
+    return <ChainShell backend={backend} focusKey={`ending:${rankedSession.life.life_id}`} onBack={close} topSlot={topSlot}>
       <RankedEnding practice={backend.mode === "preview"} session={rankedSession} contract={backend.contract} lastTxHash={["mint_life", "choose_mint_slot"].includes(backend.lastTransaction?.method ?? "") ? backend.lastTransaction?.hash : null} onClose={close} />
     </ChainShell>;
   }
@@ -98,5 +101,5 @@ export default function ChainLayer({ backend, onBeginRanked, rankedSession, onRa
   if (backend && route.kind === "market") content = <Market backend={backend} />;
   if (backend && route.kind === "mine") content = <MyLives backend={backend} onOpen={begin} />;
   if (backend && route.kind === "token") content = <TokenPage key={route.tokenId} backend={backend} tokenId={route.tokenId} />;
-  return <ChainShell backend={backend} focusKey={chainHref(route)} onBack={leaveChainRoute}>{content}</ChainShell>;
+  return <ChainShell backend={backend} focusKey={chainHref(route)} onBack={leaveChainRoute} topSlot={topSlot}>{content}</ChainShell>;
 }

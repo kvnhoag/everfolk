@@ -26,8 +26,8 @@ export default function ActiveLifeCard({ life, progress, busy, onOpen, onGiveUp 
 }) {
   const ended = progress.status === "ended";
   const missing = progress.status === "unavailable";
-  return <section className={`chain-card active-life-card${ended ? " is-ended" : ""}`} aria-label="Your ranked life">
-    <p className="chain-kicker">Ranked life #{life.life_id} · {ended ? progress.pack ? "Ended · Pack ready" : "Ended · Ready to mint" : missing ? "Save needed on this device" : "In progress"}</p>
+  return <section className={`chain-card active-life-card${ended ? " is-ended" : ""}`} aria-label="Your Weave life">
+    <p className="chain-kicker">Weave life #{life.life_id} · {ended ? progress.pack ? "Ended · Pack ready" : "Ended · Ready to mint" : missing ? "Save needed on this device" : "In progress"}</p>
     <h2>{ended ? progress.pack ? "Your pack is waiting" : "Your story is complete" : progress.name ?? "A life in Alexandria"}</h2>
     <p>{progress.pack ? "Your paid pack is saved on NEAR. Open it to review your three cards, use any remaining rerolls, and choose one to mint. You can finish it from any device with this wallet." : ended ? `Your life ended${progress.age !== undefined ? ` at age ${progress.age}` : ""}. It is saved in this browser and ready to mint. You haven't minted an NFT yet.` : missing ? "Open this life in the browser where you played it. The on-chain record alone cannot restore your choices." : `Your progress is saved${progress.age !== undefined ? ` · Age ${progress.age}` : ""}. Return to the same life and keep your choices.`}</p>
     <div className="chain-actions">

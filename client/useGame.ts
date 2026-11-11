@@ -50,6 +50,8 @@ export interface RankedPlay {
   sync(next: LifeState): Promise<LifeState>;
   current(): LifeState;
   onSynced?(life: LifeState): void;
+  /** Open straight onto the live dashboard (paused) without showing the resume screen first. */
+  skipResumeScreen?: boolean;
 }
 
 export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay } = {}) {
@@ -71,8 +73,10 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   hasBegunRef.current = hasBegun;
   const [hasRevealedStats, setHasRevealedStats] = useState(initial.hasRevealedStats);
   const [notice, setNotice] = useState(initial.notice);
-  // A restored or interrupted life waits at Continue / Be reborn.
-  const [pauseState, setPauseState] = useState(() => initialPauseState({ hasBegun: initial.hasBegun, phase: initial.life.phase }));
+  // A restored or interrupted life waits at Continue / Be reborn, unless opened directly into the dashboard.
+  const [pauseState, setPauseState] = useState(() => ranked?.skipResumeScreen
+    ? { screenOpen: false, playing: false }
+    : initialPauseState({ hasBegun: initial.hasBegun, phase: initial.life.phase }));
   const pauseStateRef = useRef(pauseState);
   const isPlaying = pauseState.playing;
   const playbackIntentRef = useRef(isPlaying);

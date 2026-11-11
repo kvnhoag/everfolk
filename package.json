@@ -30,7 +30,8 @@
     "@near-wallet-selector/modal-ui": "10.1.4",
     "@near-wallet-selector/my-near-wallet": "10.1.4",
     "buffer": "6.0.3",
-    "near-api-js": "7.4.0"
+    "near-api-js": "7.4.0",
+    "gsap": "3.15.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",

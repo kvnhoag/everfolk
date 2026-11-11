@@ -3,8 +3,12 @@ import { formatYear } from "../src/calendar.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import StorybookMark from "./StorybookMark.tsx";
 import RankedMenuEntry from "./chain/RankedMenuEntry.tsx";
-import "./main-menu.css";
-import "./storybook-menu.css";
+import LivingCoast, { useCoastMotion } from "./homepage/LivingCoast.tsx";
+import "./homepage/homepage.css";
+import "./homepage/luminous.css";
+import "./homepage/wordmark.css";
+import RoyalPixelWordmark from "./homepage/RoyalPixelWordmark.tsx";
+import { useLuminousLight } from "./homepage/useLuminousLight.ts";
 
 export interface MainMenuProps {
   /** A ranked life is in progress: it can only be continued, never replaced from here. */
@@ -25,61 +29,69 @@ export interface MainMenuProps {
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
 export default function MainMenu({ rankedLife = false, world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
+  const lightRoot = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const headingId = useId();
   const saveId = useId();
+  const motion = useCoastMotion();
+  const running = motion.enabled && !motion.reduced;
+  useLuminousLight(lightRoot, running && active);
   const ended = life.phase === "ended";
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
-  const primaryLabel = rankedLife ? "Return to ranked life" : continuing ? "Continue free exploration" : "Explore for free";
+  const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Begin your life";
   const worldTitle = world.title.replace(/[.!?]+$/u, "");
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
-  return <main className="main-menu storybook-menu" aria-labelledby={headingId}>
-    <div className="main-menu-shell">
-      <header className="main-menu-topline"><span className="main-menu-mark" aria-hidden="true"><StorybookMark size={32} /></span><span>{rankedLife ? "Ranked life · NEAR testnet" : "Explore for free · A life simulator"}</span><span className="main-menu-stars" aria-hidden="true">· <span>✦</span> ·</span></header>
-      <div className="main-menu-layout">
-        <section className="main-menu-content">
-          <h1 id={headingId} ref={heading} tabIndex={-1}>Everfolk<span>.</span></h1>
-          <p className="main-menu-world"><span>Your starting world</span>{worldTitle}</p>
-          {hasBegun && <div className="main-menu-save" id={saveId}>
-            <span className="main-menu-save-label">{ended ? "Last life" : "Your saved life"}</span>
-            <strong>{life.character?.name ?? "Your character"}</strong>
-            <span>Age {life.age} <span aria-hidden="true">·</span> {formatYear(life.year)}</span>
+  return <main ref={lightRoot} className="ef-home" aria-labelledby={headingId} data-motion={running && active ? "running" : "paused"}>
+    <LivingCoast running={running} active={active} />
+    <div className="ef-light-air" aria-hidden="true">{Array.from({length:8}, (_,i) => <i key={i} className="ef-light-mote" />)}</div>
+    <div className="ef-home-frame" aria-hidden="true"><i /><i /><i /><i /></div>
+    <div className="ef-home-shell">
+      <header className="ef-home-header">
+        <div className="ef-home-brand"><StorybookMark size={30} /><span>EVERFOLK<small>{rankedLife ? "WEAVE MODE · NEAR TESTNET" : "LIVE ANOTHER STORY"}</small></span></div>
+        <div className="ef-home-era"><span className="ef-home-diamond" aria-hidden="true" /><span>THE ANCIENT WORLD</span><strong>{formatYear(world.startYear)}</strong></div>
+        <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
+          <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
+        </button>
+      </header>
+      <div className="ef-home-body">
+        <section className="ef-home-content">
+          <p className="ef-home-eyebrow"><span aria-hidden="true">✦</span>A LIFE SIMULATOR</p>
+          <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><RoyalPixelWordmark />{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
+          <p className="ef-home-tagline">Live another story.</p>
+          <div className="ef-home-rule" aria-hidden="true"><span />◆<span /></div>
+          <p className="ef-home-intro">Before Alexandria, there was Rhakotis.<br />A world of ordinary lives.<br /><em>One of them is yours.</em></p>
+          {hasBegun && <div className="ef-home-save" id={saveId}>
+            <span className="ef-home-save-mark" aria-hidden="true">◇</span>
+            <div><span>{ended ? "YOUR LAST STORY" : "A STORY IN PROGRESS"}</span><strong>{life.character?.name ?? "Your character"}</strong></div>
+            <span className="ef-home-save-age">Age {life.age}<small>{formatYear(life.year)}</small></span>
           </div>}
-          {notice && <p className="main-menu-notice" role="status">{notice}</p>}
-          <div className="main-menu-actions">
-            <button className="main-menu-primary" type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>{primaryLabel}<span aria-hidden="true">→</span></button>
-            {hasBegun && !rankedLife && <button className="main-menu-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "View last life" : "Begin a new life"}</button>}
+          {notice && <p className="ef-home-notice" role="status">{notice}</p>}
+          <div className="ef-home-actions">
+            <button className="ef-home-primary" type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>
+              <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">↗</span>
+            </button>
+            {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>
-          {!rankedLife && <RankedMenuEntry />}
-          <nav className="main-menu-links" aria-label="Main menu">
-            {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
-            <button type="button" onClick={onPastLives}>Past lives</button>
-            {onLegacy && <button type="button" onClick={onLegacy}>Legacy gallery</button>}
-            <button type="button" onClick={onSources}>History &amp; sources</button>
-          </nav>
+          <p className="ef-home-save-note"><span aria-hidden="true">◇</span>Your story is saved in this browser.</p>
         </section>
-        <div className="main-menu-world-stack">
-          <span className="main-menu-frontispiece-star" aria-hidden="true">✦</span>
-          <div className="main-menu-world-preview main-menu-world-preview-medieval" aria-hidden="true">
-            <img src="/assets/pixel/worlds/medieval-europe.svg" alt="" />
-            <span>Medieval Europe</span>
-          </div>
-          <div className="main-menu-world-preview main-menu-world-preview-ottoman" aria-hidden="true">
-            <img src="/assets/pixel/worlds/ottoman-constantinople.svg" alt="" />
-            <span>Ottoman Empire</span>
-          </div>
-          <figure className="main-menu-landscape">
-            <div className="main-menu-illustration-label"><span>Beyond the harbour</span><span aria-hidden="true">✦</span></div>
-            <div className="main-menu-image"><img src="/assets/pixel/worlds/alexandria.svg" alt="Pixel artwork of an imagined ancient Egyptian coast, with merchant sails and low waterfront buildings" fetchPriority="high" /></div>
-            <figcaption><span>{worldTitle}</span><span>{formatYear(world.startYear)}</span></figcaption>
-          </figure>
-          <span className="main-menu-world-seal" aria-hidden="true"><StorybookMark size={27} /></span>
-        </div>
+        <aside className="ef-home-world-note" aria-label="Your starting world">
+          <span className="ef-home-world-line" aria-hidden="true" />
+          <span>YOUR STARTING WORLD</span><strong>{worldTitle}</strong>
+          <p>First light on the coast · {formatYear(world.startYear)}</p>
+        </aside>
       </div>
-      <footer className="main-menu-footer"><span>Progress saves in this browser.</span></footer>
+      <footer className="ef-home-footer">
+        <nav className="ef-home-links" aria-label="Main menu">
+          {onWorlds && <button type="button" onClick={onWorlds}><span aria-hidden="true">⊕</span>Choose a world</button>}
+          <button type="button" onClick={onPastLives}><span aria-hidden="true">◷</span>Past lives</button>
+          {onLegacy && <button type="button" onClick={onLegacy}><span aria-hidden="true">♧</span>Legacy gallery</button>}
+          <button type="button" onClick={onSources}><span aria-hidden="true">⌘</span>History &amp; sources</button>
+        </nav>
+        {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry /></div>}
+      </footer>
     </div>
   </main>;
 }

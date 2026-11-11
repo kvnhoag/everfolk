@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { formatYear } from "../src/index.ts";
 import type { LifeState, JournalEntry, WorldPack } from "../src/types.ts";
 import type { WorldRoute } from "../server/content.ts";
@@ -26,7 +26,7 @@ import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { MoneylenderNotice } from "./MoneylenderPanel.tsx";
 import { getLoanSummary, loanDeadlineWarning } from "./loan-summary.ts";
 import { activityLoanOffer, isBorrowChoice } from "./loan-access.ts";
-import EconomyPanels from "./demo/EconomyPanels.tsx";
+import EconomyPanels, { type ComparisonSide } from "./demo/EconomyPanels.tsx";
 import { activityGate, demoScreen, freePlayIntro, occupationBadge } from "./demo/screen.ts";
 import LoanOfferDialog from "./LoanOfferDialog.tsx";
 import type { LoanRequest } from "./LoanOfferDialog.tsx";
@@ -41,6 +41,7 @@ import { displayProse } from "./display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "./source-copy.ts";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import SkillTree from "./SkillTree.tsx";
+import WikiLibrary from "./WikiLibrary.tsx";
 import WorldMap from "./WorldMap.tsx";
 import { supportsLocationMap } from "./location-map.ts";
 import LegacyGallery, { CurrentLegacySummary } from "./LegacyGallery.tsx";
@@ -60,6 +61,7 @@ import "./storybook-theme.css";
 import "./readable-type.css";
 import "./creator-tokens.css";
 import "./creator-system.css";
+import "./interface-refinements.css";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -146,20 +148,34 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
   </div>;
 }
 
-function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay }) {
-  const [panel, setPanel] = useState<"world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null>(null);
-  const [characterSection, setCharacterSection] = useState<"career" | "wealth" | "children" | "skills">("career");
+export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null;
+export type CharacterSection = "career" | "wealth" | "children" | "skills";
+
+function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", panelRequest, deferInitialDecision = false, demoComparison = null, topSlot }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; panelRequest?: { panel: AppPanel; section?: CharacterSection; openDecision?: boolean; seq: number }; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null; topSlot?: ReactNode }) {
+  const [panel, setPanel] = useState<AppPanel>(initialPanel);
+  const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [restartOpen, setRestartOpen] = useState(false);
   // A ranked life opens straight into play; free play starts at the main menu.
   const [menuOpen, setMenuOpen] = useState(!ranked);
   const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh);
   const [readingPause, setReadingPause] = useState(false);
-  const [deferredDecision, setDeferredDecision] = useState<string | null>(null);
+  const [deferredDecision, setDeferredDecision] = useState<string | null>(() => {
+    const initial = ranked?.initial ?? startFreshFrom;
+    return deferInitialDecision && initial?.phase === "choice" ? `${initial.seed}:${initial.age}:${initial.pendingEventId}` : null;
+  });
   const [loanRequest, setLoanRequest] = useState<LoanRequest | null>(null);
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const loanWarningsSeen = useRef(new Set<string>());
   const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
   const { life } = game;
+  const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
+  useEffect(() => {
+    if (!panelRequest) return;
+    if (panelRequest.section) setCharacterSection(panelRequest.section);
+    setPanel(panelRequest.panel);
+    if (panelRequest.openDecision === true) setDeferredDecision(null);
+    else if (panelRequest.openDecision === false) setDeferredDecision(decisionKey);
+  }, [panelRequest?.seq]);
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
   const world = lifeEngine.world;
@@ -194,7 +210,6 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     : decisionEvent && isLoanDecision && loanSummary ? { ...decisionEvent, text: `Remaining balance: ${formatMoney(loanSummary.balance, world)}. ${loanSummary.description} ${decisionEvent.text}` }
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
-  const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const dashboardVisible = game.hasBegun && !menuOpen && !game.resumeScreenOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
   const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions);
 
@@ -417,6 +432,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     {menuOpen && <MainMenu life={life} world={world} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     {!menuOpen && game.resumeScreenOpen && <PauseScreen life={life} world={world} onContinue={continueWithReadingPause} onReborn={() => { setPanel(null); setRestartOpen(true); }} onMainMenu={openMainMenu} />}
     <div className="everfolk-game" hidden={game.resumeScreenOpen || menuOpen}>
+    {!decisionOpen && !(restartOpen || panel) && topSlot}
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
       <a className="brand" href="#" aria-label="Everfolk main menu" onClick={e => { e.preventDefault(); openMainMenu(); }}>
@@ -426,9 +442,8 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       <nav className="main-nav" aria-label="Main navigation">
         <button className={!panel ? "nav-link active" : "nav-link"} onClick={closeDialog}><span className="small-dot" />Your life</button>
         <button className={panel === "character" ? "nav-link active" : "nav-link"} disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character</button>
-        <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>The world</button>
+        <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>Wiki</button>
         {supportsLocationMap(world) && <button className={panel === "map" ? "nav-link active" : "nav-link"} onClick={() => setPanel("map")}>Map</button>}
-        <button className={panel === "chronicle" ? "nav-link active" : "nav-link"} onClick={openChronicle}>Chronicle</button>
         <button className={panel === "archive" ? "nav-link active" : "nav-link"} onClick={() => setPanel("archive")}>Past lives</button>
         <button className={panel === "legacy" ? "nav-link active" : "nav-link"} onClick={() => setPanel("legacy")}>Legacy</button>
         <button className={panel === "sources" ? "nav-link active" : "nav-link"} onClick={() => setPanel("sources")}>Sources</button>
@@ -513,7 +528,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
             {life.phase === "choice" && <div className="decision-waiting" role="status"><span>{readingPause ? "Reading pause." : game.autoDecisions ? game.isPlaying ? "Auto mode is choosing." : "Auto mode is paused." : "A decision is waiting."}</span><button ref={decisionButtonRef} type="button" onClick={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); }}>Open decision</button></div>}
             {life.phase === "ready" && <LifeMoment life={life} world={world} onAdvance={() => { setReadingPause(false); game.advance(); }} onOpenChronicle={openChronicle} />}
             <YearlyFocus life={life} world={world} focusId={game.focusId} onChange={game.setFocus} />
-            {demoView && <EconomyPanels screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
+            {demoView && <EconomyPanels screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
               onActivity={requestActivity} training={activities.filter(item => ["train-farming", "train-craft", "train-warfare", "train-reckoning"].includes(item.id)).map(item => ({ id: item.id, label: item.text, reason: item.available ? null : item.reason ?? "Locked" }))}
               onOccupation={jobId => { const activity = activities.find(item => item.category === "career" && item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job === jobId))); if (activity) requestActivity(activity.id); }} occupations={(world.character?.jobs ?? []).filter(job => job.id === "farmhand" || job.id === "tenant-farmer" || job.id === "grain-dealer" || job.id === "soldier").map(job => { const badge = occupationBadge(world, job.id, life.character?.jobId === job.id, activities.some(item => item.available && item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job === job.id)))); return { id: job.id, label: job.title, unavailable: badge.label === "Unavailable", reason: badge.detail }; })} />}
             {progressFeedback && progressFeedback.accomplishments.length > 0 && <section className="choice-progress-feedback" aria-label="Accomplishments after your choice" role="status" key={progressFeedback.key}>
@@ -531,12 +546,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           </>}
         </section>
       </div>
-      {game.hasBegun && <LifeYearRail life={life} onOpenChronicle={openChronicle} />}
+      {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && <aside className="life-support-grid" aria-label="Household and life records">
         <HouseholdSummary life={life} world={world} onOpenCharacter={() => { setCharacterSection("children"); setPanel("character"); }} />
         <div className="life-support-records">
-          <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>
-          <details className="chronicle-preview compact-life-record"><summary><span>Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><header className="life-record-heading"><div className="chronicle-heading"><h2 id="life-timeline-title"><Icon name="feather" size={20} />Life record</h2><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><p className="chronicle-description">Newest first</p></header><LifeEventFeed life={life} world={world} /></details>
+          {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
+          <details className="chronicle-preview compact-life-record life-record-panel"><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>
         </div>
       </aside>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
@@ -545,8 +560,9 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     <footer className="site-footer"><span><StorybookMark size={19} /> Everfolk · {place}</span><div><button onClick={() => setPanel("sources")}>History &amp; sources</button><span className="footer-dot">·</span><button onClick={() => setPanel("about")}>About this world</button></div></footer>
     </div>
     {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
-    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
+    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} topSlot={decisionOpen ? topSlot : undefined} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
     <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : panel === "legacy" ? "legacy-dialog" : panel === "wiki" ? "skill-wiki-dialog" : panel === "map" ? "location-map-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
+      {(restartOpen || panel) && topSlot}
       <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
         {(dialogError || downloadError) && <p className="dialog-error" role="alert">{dialogError || downloadError}</p>}
         {restartOpen ? <>
@@ -572,7 +588,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `everfolk-${chronicleName.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "character"}-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
         </> : panel === "legacy" ? <>
           <p className="eyebrow">ACROSS YOUR LIVES</p><h2 id="dialog-title">Works &amp; deeds</h2>
-          <LegacyGallery entries={legacyEntries} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} />
+          <LegacyGallery entries={legacyEntries.filter(entry => entry.lifeKey === legacyLifeKey(life))} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} />
         </> : panel === "archive" ? <>
           <p className="eyebrow">SAVED LIVES</p><h2 id="dialog-title">Past lives</h2>
           <p>Up to ten completed lives are kept here, newest first. Download a save to keep a copy outside this browser.</p>
@@ -585,7 +601,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <div className="evidence-key"><span>Documented history</span><span>Historical context · fictional story</span><span>Fictional personal story</span></div>
           <div className="sources-list">{world.sources?.map(source => <article key={source.id} id={`source-${source.id}`}><span className="eyebrow">{source.kind} · {source.publisher}</span><h3><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></h3><p className="source-period">{source.period} · {source.geography}</p><p>{sourceSummary(source.summary)}</p><p className="source-limits"><strong>Scope:</strong> {sourceScope(source.limitations)}</p></article>)}</div>
         </> : panel === "world" ? <>
-          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">{world.title}</h2><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
+          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">Wiki</h2><h3>{world.title}</h3><WikiLibrary world={world} onSkills={() => setPanel("wiki")} /><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
           <p>{worldBeginning(world)}</p><p>{intro ?? "You can work at the harbor, learn a trade or study writing. Choose a job, meet a partner and decide whether to have children."}</p>
           <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(world.startYear)}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
           <p className="fine-print">The dates and setting draw on historical sources. Your character is fictional, and the artwork imagines the city. Sources labels evidence from other periods and places.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>

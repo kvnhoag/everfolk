@@ -12,6 +12,8 @@ import { buildSkillTree, currentSkillTree } from "../client/skill-tree.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
 import { careerEmblem } from "../client/chain/token-page-model.ts";
 import { actionName } from "../client/chain/chain-copy.ts";
+import { ensureDemoDeeds } from "../chain/catalog/demo-deeds.ts";
+import { createEngine } from "../src/index.ts";
 import { influenceMarker } from "../client/influence-marker.ts";
 
 const hooks = registerHooks({
@@ -48,8 +50,25 @@ test("opening the economy panels shows the engine view and changes nothing", () 
   assert.match(html, /Household grain/);
   assert.match(html, new RegExp("Store"));
   assert.match(html, new RegExp(String(screen.household.grain)));
+  assert.doesNotMatch(html, /A past life kept a granary for you/);
   assert.match(html, /This is not the NFT Market/);
   assert.deepEqual(life, before);
+});
+
+test("a granary arrival is visible in household grain with a link to its source NFT", () => {
+  const deedEngine = createEngine(ensureDemoDeeds(engine.world));
+  const life = deedEngine.influence(deedEngine.start("visible-granary"), {
+    type: "influence", mode: "apply", entry: "farming.stock-granary", power: 1,
+    source: { contractId: "preview.everfolk.testnet", tokenId: "17" },
+  });
+  const screen = demoScreen(deedEngine.world, life)!;
+  const html = renderToStaticMarkup(createElement(EconomyPanels, {
+    screen, cashText: "0 dr", autoPlay: false, onTrade: () => null, onPlan: () => null,
+    onAutoPlay: () => {}, onDelegate: () => null,
+  }));
+  assert.match(html, /A past life kept a granary for you/);
+  assert.match(html, /href="#token\/17"/);
+  assert.match(html, /Arrived at age 0/);
 });
 
 test("a rejected order is shown and not sent twice", () => {
