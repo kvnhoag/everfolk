@@ -1,3 +1,4 @@
+import { vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
 
@@ -83,7 +84,7 @@ export function previewEconomyEffects(world: WorldPack, life: LifeState, effects
   const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets }, ...(life.economy.loan ? { loan: { ...life.economy.loan } } : {}) } };
   for (const effect of effects) {
     if (effect.type === "end") break;
-    applyEconomyEffect(world, state, effect);
+    applyEconomyEffect(world, state, effect.type === "vocation" ? { type: "cash", delta: vocationCashDelta(world, life, effect.action) } : effect);
   }
   return state.economy;
 }

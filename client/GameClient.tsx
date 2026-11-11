@@ -20,11 +20,11 @@ import { beginRankedSession, type RankedSession } from "./chain/ranked-session.t
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
 import type { LifeView } from "../chain/types.ts";
 import type { WorldPack } from "../src/types.ts";
-import { DEMO_WORLD_VERSION } from "../chain/ids.ts";
+import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
 import { loadLifeWorld } from "./chain/life-world.ts";
 
 
-/** Loads the world a ranked life was started in. New practice lives use the demo world. */
+/** Loads the world a ranked life was started in. New free-play lives use the vocation expansion; ranked lives use their recorded pack. */
 async function loadRankedWorld(version: string): Promise<WorldPack> {
   const ready = await loadLifeWorld(version);
   registerWorldPack(ready);
@@ -32,7 +32,7 @@ async function loadRankedWorld(version: string): Promise<WorldPack> {
 }
 
 async function loadDemoWorld(): Promise<WorldPack> {
-  return loadRankedWorld(DEMO_WORLD_VERSION);
+  return loadRankedWorld(LIVES_WORLD_VERSION);
 }
 
 const SELECTION_KEY = "everfolk:selected-world:v1";
@@ -98,11 +98,11 @@ export default function GameClient() {
           } catch { /* Keep an existing selection when its save cannot be checked. */ }
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
-          if (!hasBegunLife && world.pack.version !== DEMO_WORLD_VERSION) { restored = false; hadSelection = false; }
+          if (!hasBegunLife && world.pack.version !== LIVES_WORLD_VERSION) { restored = false; hadSelection = false; }
         }
         else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
-      if (!restored && (!hadSelection || world.pack.version !== DEMO_WORLD_VERSION)) {
+      if (!restored && (!hadSelection || world.pack.version !== LIVES_WORLD_VERSION)) {
         setLoadingPhase("world");
         const demo = await loadDemoWorld();
         world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };

@@ -1,8 +1,10 @@
+import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "vocation"; action: string; count: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -29,6 +31,7 @@ export type Condition =
   | { type: "demo"; condition: DemoCondition };
 
 export type Effect =
+  | { type: "vocation"; action: string }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }
@@ -499,6 +502,7 @@ export interface WorldPack {
   influences?: InfluenceEntry[];
   /** Opt-in Grain and Service economy; older packs omit it and keep their rules. */
   demo?: DemoDefinition;
+  vocations?: VocationDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -556,6 +560,7 @@ export interface LifeState {
   queuedInfluences?: InfluenceRecord[];
   /** Only in demo worlds. */
   demo?: DemoState;
+  vocations?: VocationState;
   journal: JournalEntry[];
   commands: Command[];
 }

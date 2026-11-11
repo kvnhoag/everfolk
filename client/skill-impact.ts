@@ -1,3 +1,4 @@
+import { vocationGains } from "../src/vocations/view.ts";
 import type { Choice, LifeState, WorldPack } from "../src/types.ts";
 import { applyStatDelta, skillEffectDelta } from "../src/progression.ts";
 
@@ -15,6 +16,7 @@ export function getSkillImpact(choice: Pick<Choice, "outcomes">, life: LifeState
         if (effect.type === "end") break;
         if (effect.type === "flag") flags[effect.flag] = effect.value;
         if (effect.type === "skill" && effect.skill === id) value = applyStatDelta(definition, value, skillEffectDelta(effect, flags));
+        if (effect.type === "vocation") value = applyStatDelta(definition, value, vocationGains(world, effect.action)[id] ?? 0);
         if (effect.type === "mastery" && effect.target === "skill" && effect.id === id) value = definition.max;
       }
       return value - initial;

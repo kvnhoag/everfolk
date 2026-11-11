@@ -1,3 +1,4 @@
+import { vocationReason } from "./vocations/engine.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { UNAVAILABLE_REASON } from "./demo/types.ts";
 import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, WorldPack } from "./types.ts";
@@ -36,6 +37,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "vocation") return vocationReason(world, state, effect.action);
   if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {
     if (effect.target === "skill" && (!world.character || !state.character)) return "This world has no character skills.";

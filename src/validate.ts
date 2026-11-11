@@ -1,3 +1,5 @@
+import type { VocationDefinition } from "./vocations/types.ts";
+import { validateVocations } from "./vocations/validate.ts";
 import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
 
@@ -124,7 +126,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations"], worldFields);
   let demoGrainGain = false;
   const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
@@ -356,6 +358,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     visited.add(key);
   };
   skillIds.forEach(visitSkill);
+  if (Object.hasOwn(world, "vocations")) {
+    if (!world.economy || !character) fail("world.vocations", "requires economy and characters");
+    validateVocations(world.vocations, skillIds, fail);
+  }
+
   const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
   const jobIds = unique(jobs, "world.character.jobs");
   const legacy = Object.hasOwn(world, "legacy") ? object(world.legacy, "world.legacy", ["routes", "achievements"]) : undefined;
@@ -580,6 +587,12 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         object(rule, path, ["type", "condition"]);
         condition(rule.condition, `${path}.condition`, depth + 1);
         break;
+      case "vocation":
+        object(rule, path, ["type", "action", "count"]);
+        if (!world.vocations) fail(path, "requires vocation rules");
+        reference(rule.action, `${path}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions ?? {})), "vocation action");
+        integer(rule.count, `${path}.count`, 1, 10000);
+        break;
       case "demo":
         object(rule, path, ["type", "condition"]);
         requireDemo(path);
@@ -723,6 +736,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
             reference(effect.deathCause, `${location}.deathCause`, deathCauseIds, "death cause");
             if (!deathEndingIds.has(effect.ending as string)) fail(`${location}.ending`, "an explicit death cause requires a death ending");
           }
+          break;
+        case "vocation":
+          object(effect, location, ["type", "action"]);
+          if (!world.vocations) fail(location, "requires vocation rules");
+          reference(effect.action, `${location}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions)), "vocation action");
+          const vocationAction = (world.vocations as VocationDefinition).actions[effect.action as string];
+          if ((vocationAction.kind === "make" || vocationAction.kind === "work") && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
           break;
         case "demo":
           object(effect, location, ["type", "effect"]);
@@ -884,6 +904,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const weights = outcomes.map((entry, j) => outcomeDefinition(entry, `${path}.outcomes[${j}]`, false, activity.category === "training"));
       aggregate(weights, `${path}.outcomes`);
       opportunityDefinition(activity, path, outcomes);
+      if (activity.usesYearlyActivity === false && world.vocations && outcomes.some(outcome => ((outcome as DataObject).effects as DataObject[]).some(effect => {
+        if (effect.type !== "vocation") return false;
+        const action = (world.vocations as VocationDefinition).actions[effect.action as string];
+        return action.kind === "make" || action.kind === "work";
+      }))) fail(path, "vocation work must consume the annual activity");
     });
     for (const [key, entry] of Object.entries(skills)) {
       const definition = entry as DataObject;
