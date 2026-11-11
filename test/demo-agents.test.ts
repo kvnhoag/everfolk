@@ -333,12 +333,10 @@ test("auto-play runs advance, choose, act, trade and plan, records only agent co
   const play = (command: Command) => { life = withDemo(engine.demo(life, agentCommand(AUTO, "player", { kind: "command", command }))); };
   let steps = 0;
   const step = () => { play(life.phase === "choice" ? { type: "choose", choice: engine.getChoices(life)[0].id } : { type: "advance" }); steps++; };
-  while (life.age < 4) step();
+  while (life.age < 12) step();
   while (life.phase !== "ready") step();
   play({ type: "plan", flaxPlots: 0 }); steps++;
   play({ type: "trade", item: "grain", side: "buy", quantity: 1, counterparty: "merchant" }); steps++;
-  // Household work opens at 6; nothing is available at the age-4 checkpoint above.
-  while (life.age < 6 || life.phase !== "ready") step();
   const activity = engine.getActivities(life).find(item => item.available);
   assert.equal(activity?.id, "train-literacy");
   play({ type: "act", activity: activity.id }); steps++;

@@ -203,7 +203,12 @@ test("the army buys only grain, only from a grain dealer, and its sale goes thro
   const before = structuredClone(ok.life);
   executeTrade(ok.ctx, order("grain", "sell", 100, "army"));
   // Service (track C) moves the grain and the pay; the market only records the visit.
-  assert.equal(ok.life.economy!.cash, before.economy!.cash);
+  const price = before.demo.town.prices.grain.sell;
+  assert.equal(ok.life.economy!.cash, before.economy!.cash + 100 * price);
+  assert.equal(ok.life.demo.household.grain, before.demo.household.grain - 100);
+  assert.equal(ok.life.demo.town.army.grain, before.demo.town.army.grain + 100);
+  assert.equal(ok.life.demo.town.army.purse, before.demo.town.army.purse - 100 * price);
+  assert.equal(ok.life.demo.shipment, null);
   assert.equal(ok.life.demo.town.merchant.grain, before.demo.town.merchant.grain);
   assert.equal(ok.life.demo.lastTradeAge, ok.life.age);
   assert.match(ok.lines.at(-1)!.text, /army/);
