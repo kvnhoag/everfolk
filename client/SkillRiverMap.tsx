@@ -138,13 +138,13 @@ const SkillRiverMap = forwardRef<SkillRiverHandle, {model:SkillTreeModel; query:
               <button type="button" data-skill-id={node.id} ref={button=>{nodeRefs.current[node.id]=button;}}
                 className={`skill-tree-node is-${node.state}${detailOpen&&selectedId===node.id?' is-selected':''}${exploring&&related.has(node.id)?' is-related':''}${exploring&&!related.has(node.id)?' is-unrelated':''}${query&&matches(node)?' is-search-match':''}${query&&!matches(node)?' is-search-muted':''}`}
                 aria-controls={detailId} aria-pressed={detailOpen&&selectedId===node.id} aria-describedby={preview?.id===node.id?`${id}-preview`:undefined}
-                aria-label={`${node.label}, ${skillNumber(node.value,node.max)} of ${node.max}, ${node.state}${node.requirements.length?`, requires ${node.requirements.map(item=>`${item.label} ${item.required}`).join(', ')}`:''}`}
+                aria-label={`${node.label}, ${skillNumber(node.value,node.max)} of ${node.max}, ${node.state}${node.availability==='unavailable' ? ', Unavailable' : ''}${node.requirements.length?`, requires ${node.requirements.map(item=>`${item.label} ${item.required}`).join(', ')}`:''}`}
                 onFocus={()=>showPreview(node.id)} onBlur={dismiss} onKeyDown={event=>navigate(event,node)}
                 onPointerEnter={event=>{if(event.pointerType!=='touch')showPreview(node.id);}} onPointerLeave={event=>{if(event.pointerType!=='touch')leave();}}
                 onPointerDown={event=>{touchPreview.current=event.pointerType==='touch'&&preview?.id!==node.id;}}
                 onClick={()=>{if(touchPreview.current){touchPreview.current=false;showPreview(node.id);}else{dismiss();onSelect(node.id);}}}>
                 <SkillArtwork id={node.id}/>
-                <span className="skill-delta-status" aria-hidden="true">{node.state==='locked'?'×':node.state==='mastered'?'★':node.state==='learning'?'•':'+'}</span>
+                <span className="skill-delta-status" aria-hidden="true">{node.state==='locked'?'×':node.state==='mastered'?'★':node.state==='learning'?'•':'+'}</span>{node.availability==='unavailable' && <span className="skill-unavailable-badge">Unavailable</span>}
               </button>
             </div>)}</div>)}
           </section>)}

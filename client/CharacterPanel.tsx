@@ -12,6 +12,8 @@ import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "./character-panel-model.ts";
 import { careerOpeningNotes } from "./career-openings.ts";
+import { occupationBadge } from "./demo/screen.ts";
+import { UNAVAILABLE_REASON } from "../src/demo/types.ts";
 import { activityLoanOffer } from "./loan-access.ts";
 import { resolvePartner } from "../src/people.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
@@ -224,12 +226,14 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
         <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
         <SearchControls id={`${instanceId}-career`} label="Find work" placeholder="Job, skill or activity" value={jobSearch} onChange={setJobSearch} filter={jobAvailability} onFilter={setJobAvailability} filterLabel="Availability" />
         <p className="character-result-count" role="status">{visibleJobs.length} of {definition.jobs.length} jobs · {visibleOtherCareer.length} of {otherCareer.length} work activities</p>
+        {world.demo && <div className="character-card-list" aria-label="Future paths">{world.demo.availability.futurePaths.map(path => <article className="character-detail-card" key={path.id}><h3>{path.title} <span className="character-status-tag">Unavailable</span></h3><p>{path.description}</p>{path.prerequisites && <p>{path.prerequisites}</p>}<p>{UNAVAILABLE_REASON}</p></article>)}</div>}
         <div className="character-card-list character-job-list">{visibleJobs.map(job => {
           const jobActions = career.filter(activity => targetsJob(activity, job.id));
           const available = jobActions.some(activity => activity.available);
           return <details className={`character-detail-card character-job-card${job.id === character.jobId ? " current-character-card" : ""}`} key={job.id} open={job.id === character.jobId}>
-          <summary><span className="character-job-summary-copy"><span className="character-job-title">{job.title}</span><span className="character-job-summary-requirements">Age {job.minAge}+{Object.entries(job.requirements ?? {}).map(([id, value]) => <span key={id}> · {definition.skills[id]?.label ?? id} {value}</span>)}</span></span><span className={`character-status-tag${available ? " occupation-available" : ""}`}>{job.id === character.jobId ? "Current job" : available ? "Available" : "Unavailable"}</span></summary>
+          <summary><span className="character-job-summary-copy"><span className="character-job-title">{job.title}</span><span className="character-job-summary-requirements">Age {job.minAge}+{Object.entries(job.requirements ?? {}).map(([id, value]) => <span key={id}> · {definition.skills[id]?.label ?? id} {value}</span>)}</span></span><span className={`character-status-tag${available ? " occupation-available" : ""}`}>{occupationBadge(world, job.id, job.id === character.jobId, available).label}</span></summary>
           <div className="character-job-details">
+          {occupationBadge(world, job.id, job.id === character.jobId, available).detail && <p>{UNAVAILABLE_REASON}</p>}
           <p>{displayProse(job.description)}</p>
           <ul className="character-requirements" aria-label={`${job.title} requirements`}>
             <li className={life.age >= job.minAge ? "requirement-met" : ""}>Age {job.minAge}+ <span>{life.age >= job.minAge ? "met" : `you are ${life.age}`}</span></li>

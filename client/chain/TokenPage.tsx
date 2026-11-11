@@ -4,6 +4,7 @@ import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { parseNearInput } from "./near-amount.ts";
 import { tokenPageView, type TokenPageView } from "./token-page-model.ts";
+import StewardSettings from "../demo/StewardSettings.tsx";
 import type { TokenView } from "./types.ts";
 import "./token-market.css";
 
@@ -97,6 +98,7 @@ export function TokenPageBody({ tokenId, view, busy = false, error, notice, canC
       <h2>For sale</h2>
       <SaleBox view={view} busy={busy} onList={onList} onUnlist={onUnlist} onBuy={onBuy} />
     </section>
+    <StewardSettings owner={view.isOwner} />
     <section className="chain-card" aria-label="Who shaped this life">
       <h2>Who shaped this life</h2>
       {view.sources.length > 0

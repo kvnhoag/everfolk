@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../src/types.ts";
-import { archiveLife, createDifferentSampleLife, createSampleLife, engineForLife, hasBirthStatsBeenRevealed, hasLifeBegun, loadAnyLife, persistBirthPresentation, persistBirthStatsReveal, persistLife, readArchivedLives, readSavedLife } from "./session.ts";
+import { archiveLife, createDifferentSampleLife, createSampleLife, engineForLife, hasBirthStatsBeenRevealed, hasLifeBegun, loadAnyLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife, readArchivedLives, readSavedLife } from "./session.ts";
 import type { ArchivedLife } from "./session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, persistYearlyFocus, readYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "./yearly-focus.ts";
 import type { YearlyFocusId } from "./yearly-focus.ts";
 import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "./pause-state.ts";
 import type { PauseState } from "./pause-state.ts";
 import { borrowAndAct } from "./loan-access.ts";
+import type { DemoCommand } from "../src/demo/types.ts";
+import { createDemoLife } from "./demo/start.ts";
+import { releaseOrder, sendDemoCommand } from "./demo/screen.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
 export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
@@ -32,6 +35,7 @@ function initialSession(startFresh = false, startFreshFrom?: LifeState): { life:
         hasBegun: hasLifeBegun(window.localStorage, restored),
         hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
       };
+      return { life: createDemoLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false };
     }
     return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
   } catch (error) {
@@ -239,7 +243,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     hasBegunRef.current = false;
     setHasBegun(false);
     setHasRevealedStats(false);
-    commit(createDifferentSampleLife(lifeRef.current), true);
+    commit(createDemoLife(newLifeSeed()), true);
     setNotice("");
   }, [commit, setPlaying, setAutoDecisions]);
 
@@ -344,10 +348,23 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     return () => window.clearTimeout(timer);
   }, [autoDecisions, hasBegun, pauseState, isVisible, isOverlayOpen, life, choose]);
 
+  const orderSlot = useRef(false);
+  const runDemo = useCallback((command: DemoCommand): string | null => {
+    if (!canUseLifeCommands(pauseStateRef.current, { hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return "Wait until this life can take a command.";
+    const result = sendDemoCommand(engineForLife(life), life, command, orderSlot);
+    if (!result.sent) return result.reason;
+    commit(result.life);
+    setNotice("");
+    return null;
+  }, [commit, life]);
+
+  useEffect(() => { releaseOrder(orderSlot); }, [life]);
+
   return {
     life,
     choose,
     act,
+    runDemo,
     actWithLoan,
     advance,
     restart,

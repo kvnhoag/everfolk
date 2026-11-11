@@ -55,7 +55,14 @@ const figureTitles = new Map(FIGURES.map(figure => [figure.figure, figure.title]
 
 export interface ActionOption { id: string; name: string; description: string }
 
+const DEMO_DEEDS: Record<string, string> = {
+  "farming.stock-granary": "Stock a granary",
+  "farming.share-seed": "Share seed",
+  "military.guard-road": "Guard the road",
+};
+
 export function actionName(actionId: string | null): string {
+  if (actionId && DEMO_DEEDS[actionId]) return DEMO_DEEDS[actionId];
   return (actionId && (ACTION_NAMES as Record<string, string>)[actionId]) || "An unknown deed";
 }
 
