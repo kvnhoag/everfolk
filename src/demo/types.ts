@@ -83,6 +83,14 @@ export interface HouseholdConfig {
   /** Linen bolts spun per unit of spare household labour from flax bundles. */
   flaxPerLinen: number;
   marriageGift: { item: Good | "grain"; quantity: number };
+  /** Track A: linen bolts spun per 100 units of spare household labour (default 10). */
+  spinBoltsPer100Labour?: number;
+  /** Track A: extra store capacity while the player works as a grain dealer (default 0). */
+  dealerExtraCapacity?: number;
+  /** Track A: spoilage cut per point of the player's reckoning, basis points (default 0). */
+  reckoningSpoilageCutBpsPerPoint?: number;
+  /** Track A: cap on the reckoning spoilage cut, basis points (default 0). */
+  reckoningSpoilageCutCapBps?: number;
 }
 
 /** Track B: townspeople, prices, goods, livestock. */

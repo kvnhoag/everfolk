@@ -15,17 +15,23 @@ export const DEMO_CONFIG: Omit<DemoDefinition, "availability"> = {
     roadPressureBps: 3000,
   },
   household: {
+    // Normal year, two adults on two plots, farming 20: 1300 × 1.08 = 1404 grown, 280 rent, 840 eaten by
+    // two adults and three young children → about 280 surplus. A low flood (45%) without reserves → hunger.
     startingGrain: 600, storeCapacity: 1500, plots: 2,
-    yieldPerPlot: 600, flaxPerPlot: 40,
+    yieldPerPlot: 650, flaxPerPlot: 120,
     floodFactorBps: { low: 4500, normal: 10000, high: 12000 },
-    skillBonusBps: 40, oxBonusBps: 2500, rentBps: 2500,
+    skillBonusBps: 40, oxBonusBps: 2500, rentBps: 2000,
     spoilageBps: 800, overCapacitySpoilageBps: 4000,
     adultRation: 240, childRationBps: 5000,
     animalFeed: { ox: 120, donkey: 60 },
-    childHelpAge: 8, childWorkAge: 14, handOverAge: 20, parentsStopEatingAfterYears: 12,
+    childHelpAge: 8, childWorkAge: 14, handOverAge: 20, parentsStopEatingAfterYears: 8,
     hungerHealthPer10Pct: 3, hungerHealthCap: 18,
     flaxPerLinen: 4,
     marriageGift: { item: "silver", quantity: 2 },
+    spinBoltsPer100Labour: 10,
+    dealerExtraCapacity: 1500,
+    reckoningSpoilageCutBpsPerPoint: 50,
+    reckoningSpoilageCutCapBps: 4000,
   },
   market: {
     start: {
