@@ -25,6 +25,11 @@ export function routeRequirements(condition: Condition | undefined, world: World
       case "all": return rule.conditions.map(label).join(" + ");
       case "any": return rule.conditions.map(child => `(${label(child)})`).join(" or ");
       case "skill": return `${world.character?.skills[rule.skill]?.label ?? rule.skill} ${amount(rule)}`;
+      case "vocation": {
+        const activity = world.character?.activities.find(activity => activity.outcomes.some(outcome =>
+          outcome.effects.some(effect => effect.type === "vocation" && effect.action === rule.action)));
+        return `${activity?.text ?? rule.action.replaceAll("-", " ")} · completed ${rule.count}+ times`;
+      }
       case "accomplishment": return `${world.legacy?.achievements.find(item => item.id === rule.achievement)?.title ?? rule.achievement}${rule.minYears ? ` · completed ${rule.minYears}+ years ago` : " · completed"}`;
       case "cash": return `${amount(rule)} ${world.economy?.currency.short ?? "cash"} available`;
       case "job": return rule.job === null ? "No current occupation" : `Working as ${world.character?.jobs.find(job => job.id === rule.job)?.title ?? rule.job}`;

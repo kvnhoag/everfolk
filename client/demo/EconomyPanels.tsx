@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
@@ -50,7 +50,7 @@ interface Props {
   occupations?: { id: string; label: string; unavailable: boolean; reason: string | null }[];
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({ label, value }: { label: ReactNode; value: string }) {
   return <div><dt>{label}</dt><dd>{value}</dd></div>;
 }
 
@@ -414,7 +414,7 @@ export default function EconomyPanels({
           {screen.market.quotes
             .filter(entry => entry.item === "grain" || entry.item === item)
             .map(entry => (
-              <Field key={entry.item} label={itemLabel(entry.item) + " buy / sell"} value={entry.buy + " / " + entry.sell} />
+              <Field key={entry.item} label={<><ResourceGlyph id={entry.item} /> {itemLabel(entry.item)} buy / sell</>} value={entry.buy + " / " + entry.sell} />
             ))}
           <Field label="Merchant can buy" value={String(quote?.merchantCanBuy ?? 0)} />
           <Field label="Merchant holds" value={String(quote?.merchantStock ?? 0)} />
