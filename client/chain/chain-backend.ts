@@ -42,6 +42,9 @@ let configRequest: Promise<RankedConfig | null> | null = null;
 
 /** Fetched once per page; any error or malformed answer means "unavailable". */
 export function loadRankedConfig(): Promise<RankedConfig | null> {
+  // Local rehearsals explicitly use an isolated ledger, never the configured testnet contract.
+  if (typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname)
+    && new URLSearchParams(window.location.search).get("practice") === "1") return Promise.resolve(null);
   configRequest ??= fetch(CONFIG_PATH, { credentials: "same-origin", cache: "no-store" })
     .then(response => (response.ok ? response.json() : null))
     .then(parseRankedConfig)

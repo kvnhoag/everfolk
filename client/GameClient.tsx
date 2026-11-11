@@ -20,23 +20,19 @@ import { beginRankedSession, type RankedSession } from "./chain/ranked-session.t
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
 import type { LifeView } from "../chain/types.ts";
 import type { WorldPack } from "../src/types.ts";
+import { DEMO_WORLD_VERSION } from "../chain/ids.ts";
+import { loadLifeWorld } from "./chain/life-world.ts";
 
 
 /** Loads the world a ranked life was started in. New practice lives use the demo world. */
 async function loadRankedWorld(version: string): Promise<WorldPack> {
-  const ranked = version !== "alexandria-demo-1";
-  const module = ranked
-    ? await import("../worlds/ranked/alexandria-ranked-1.json")
-    : await import("../worlds/demo/alexandria-demo-1.json");
-  const pack = (module.default ?? module) as unknown as WorldPack;
-  const { ensureDemoDeeds } = await import("../chain/catalog/demo-deeds.ts");
-  const ready = ensureDemoDeeds(pack);
+  const ready = await loadLifeWorld(version);
   registerWorldPack(ready);
   return ready;
 }
 
 async function loadDemoWorld(): Promise<WorldPack> {
-  return loadRankedWorld("alexandria-demo-1");
+  return loadRankedWorld(DEMO_WORLD_VERSION);
 }
 
 const SELECTION_KEY = "everfolk:selected-world:v1";
@@ -142,8 +138,11 @@ export default function GameClient() {
     setBusy(true);
     setError("");
     try {
-      let world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
-      if (fresh) world = selectFactoryWorld(world, { fresh: true });
+      const demo = fresh && active?.world.id === id && active.world.pack.demo ? await loadDemoWorld() : null;
+      let world: PublishedWorld = demo
+        ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
+        : await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
+      if (fresh && !demo) world = selectFactoryWorld(world, { fresh: true });
       else {
         const refreshed = selectFactoryWorld(world);
         if (refreshed !== world) {

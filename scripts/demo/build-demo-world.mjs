@@ -8,5 +8,5 @@ const ranked = JSON.parse(readFileSync(new URL("worlds/ranked/alexandria-ranked-
 const world = buildDemoWorld(ranked);
 validateWorld(world);
 mkdirSync(new URL("worlds/demo/", root), { recursive: true });
-writeFileSync(new URL("worlds/demo/alexandria-demo-1.json", root), `${JSON.stringify(world, null, 2)}\n`);
-console.log(`Wrote worlds/demo/alexandria-demo-1.json (${world.events.length} events, ${world.character.jobs.length} jobs).`);
+writeFileSync(new URL(`worlds/demo/${world.version}.json`, root), `${JSON.stringify(world, null, 2)}\n`);
+console.log(`Wrote worlds/demo/${world.version}.json (${world.events.length} events, ${world.character.jobs.length} jobs).`);

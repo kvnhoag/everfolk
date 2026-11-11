@@ -28,6 +28,7 @@ export const DEMO_CONFIG: Omit<DemoDefinition, "availability"> = {
     adultRation: 240, childRationBps: 5000,
     animalFeed: { ox: 120, donkey: 60 },
     childHelpAge: 8, childWorkAge: 14, handOverAge: 20, parentsStopEatingAfterYears: 8,
+    retiredParentLabourBps: 5000,
     hungerHealthPer10Pct: 3, hungerHealthCap: 18,
     flaxPerLinen: 4,
     marriageGift: { item: "silver", quantity: 2 },

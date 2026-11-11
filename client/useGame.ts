@@ -9,7 +9,7 @@ import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPa
 import type { PauseState } from "./pause-state.ts";
 import { borrowAndAct } from "./loan-access.ts";
 import type { DemoCommand } from "../src/demo/types.ts";
-import { createDemoLife } from "./demo/start.ts";
+import "./demo/start.ts";
 import { releaseOrder, sendDemoCommand } from "./demo/screen.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
@@ -35,7 +35,7 @@ function initialSession(startFresh = false, startFreshFrom?: LifeState): { life:
         hasBegun: hasLifeBegun(window.localStorage, restored),
         hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
       };
-      return { life: createDemoLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false };
+      return { life: createSampleLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false };
     }
     return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
   } catch (error) {
@@ -246,7 +246,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     hasBegunRef.current = false;
     setHasBegun(false);
     setHasRevealedStats(false);
-    commit(createDemoLife(newLifeSeed()), true);
+    commit(createSampleLife(newLifeSeed()), true);
     setNotice("");
   }, [commit, setPlaying, setAutoDecisions]);
 

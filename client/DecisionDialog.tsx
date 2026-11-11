@@ -18,7 +18,7 @@ interface Props {
   onChoose(id: string): void;
   onSetAside(): void;
   onEnableAuto(): void;
-  riskPreview?: { knownCosts: readonly string[]; chance: string } | null;
+  riskPreview?: { knownCosts: readonly string[]; chance: string; routes?: readonly { choice: string; expectedLossBps: number }[] } | null;
 }
 
 function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onChoose, onSetAside, onEnableAuto, riskPreview = null }: Omit<Props, "open">) {
@@ -28,6 +28,7 @@ function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onCho
   const id = useId();
   const [previewId, setPreviewId] = useState<string | null>(choices[0]?.id ?? null);
   const preview = choices.find(choice => choice.id === previewId) ?? choices[0];
+  const routeRisk = riskPreview?.routes?.find(route => route.choice === preview?.id);
   useEffect(() => {
     const element = dialog.current;
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -68,7 +69,7 @@ function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onCho
         </div>;
       })}</div>}
       {sources.length > 0 && <details className="life-decision-sources"><summary>Historical sources</summary>{sources.map(source => <a key={source.id} href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>)}</details>}
-      {riskPreview && <section className="life-decision-risk" aria-label="Convoy risk"><h3>Known costs</h3>{riskPreview.knownCosts.length ? <ul>{riskPreview.knownCosts.map(cost => <li key={cost}>{cost}</li>)}</ul> : <p>No known cost is listed.</p>}<h3>Chance</h3><p>{riskPreview.chance}</p></section>}
+      {riskPreview && <section className="life-decision-risk" aria-label="Convoy risk"><h3>Known costs</h3>{riskPreview.knownCosts.length ? <ul>{riskPreview.knownCosts.map(cost => <li key={cost}>{cost}</li>)}</ul> : <p>No known cost is listed.</p>}<h3>Chance</h3><p>{routeRisk ? `${preview?.text}: expected cargo loss ${routeRisk.expectedLossBps / 100}%.` : riskPreview.chance}</p></section>}
       <footer><button type="button" onClick={onEnableAuto}>Enable Auto mode</button></footer>
     </div>
   </dialog>;

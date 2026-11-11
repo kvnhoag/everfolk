@@ -1,6 +1,6 @@
 import type { FigureRequirement } from "./figures.ts";
 import { FIGURES } from "./figures.ts";
-import { DEMO_WORLD_VERSION, RANKED_WORLD_VERSION, type FigureId } from "../ids.ts";
+import { isDemoVersion, RANKED_WORLD_VERSION, type FigureId } from "../ids.ts";
 import { CONVOY_DISTINCTION } from "../../src/demo/types.ts";
 import { deepFreeze } from "./content.ts";
 
@@ -45,7 +45,7 @@ export const DEMO_FIGURES: readonly FigureRequirement[] = deepFreeze(DEMO_FIGURE
 
 /** Ranked-1 keeps its current standards. The demo world uses the soldier and grain-dealer standards. */
 export function figuresForWorld(worldVersion: string): readonly FigureRequirement[] {
-  return worldVersion === DEMO_WORLD_VERSION ? DEMO_FIGURES : FIGURES;
+  return isDemoVersion(worldVersion) ? DEMO_FIGURES : FIGURES;
 }
 
 export function isRankedWorldVersion(worldVersion: string): boolean {

@@ -6,17 +6,18 @@ import "./life-report.css";
 import "./ledger.css";
 
 export interface MintRevealProps {
+  practice?: boolean;
   view: MintRevealView;
   affection: number;
   onClose(): void;
 }
 
 /** The kept life as a ledger entry: its card, what it is, how it acts, and where it is recorded on NEAR. */
-export default function MintReveal({ view, affection, onClose }: MintRevealProps) {
+export default function MintReveal({ view, affection, practice = false, onClose }: MintRevealProps) {
   const headingId = useId();
   return <section className={`ledger-panel mint-reveal mint-reveal-ledger${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
     <header className="ledger-heading">
-      <p className="ledger-kicker"><span className="cr-index">{view.number}</span>{view.kindLabel} · kept on NEAR</p>
+      <p className="ledger-kicker"><span className="cr-index">{view.number}</span>{view.kindLabel} · {practice ? "practice collectible" : "kept on NEAR"}</p>
       <h1 id={headingId} tabIndex={-1}>{view.title}</h1>
       <p>{view.lead}</p>
     </header>

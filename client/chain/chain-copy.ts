@@ -1,4 +1,4 @@
-import { groupOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
+import { groupOfNpcAction, DEMO_DEED_INFLUENCES } from "../../chain/catalog/demo-deeds.ts";
 import { FIGURE_ACTIONS, RARITY_LABELS } from "../../chain/ids.ts";
 import type { ActionId, CareerGroup, FigureId } from "../../chain/ids.ts";
 import { FIGURES, INFLUENCES } from "../../chain/catalog/index.ts";
@@ -58,7 +58,7 @@ export const GROUP_TITLE: Record<CareerGroup, string> = {
   farming: "Farmer of Alexandria",
 };
 
-const descriptions = new Map(INFLUENCES.map(entry => [entry.id, entry.label]));
+const descriptions = new Map([...INFLUENCES, ...DEMO_DEED_INFLUENCES].map(entry => [entry.id, entry.label]));
 const figureTitles = new Map(FIGURES.map(figure => [figure.figure, figure.title]));
 
 export interface ActionOption { id: string; name: string; description: string }

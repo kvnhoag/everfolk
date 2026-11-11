@@ -14,7 +14,7 @@ import { createEngine } from "../src/index.ts";
 import { DEMO_WORLD_VERSION as PACK_VERSION, CONVOY_DISTINCTION } from "../src/demo/types.ts";
 import type { AccomplishmentRecord, Evidence, LifeState, WorldPack } from "../src/types.ts";
 import type { SignedEvidence } from "../client/chain/types.ts";
-import demoWorld from "../worlds/demo/alexandria-demo-1.json" with { type: "json" };
+import demoWorld from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import rankedWorld from "../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
 
 const HASH = "ab".repeat(32);
@@ -59,7 +59,7 @@ function ended(input: Partial<LifeState> & { worldVersion: string; jobs?: string
 
 test("demo world version matches the shared contract", () => {
   assert.equal(DEMO_WORLD_VERSION, PACK_VERSION);
-  assert.equal(DEMO_WORLD_VERSION, "alexandria-demo-1");
+  assert.equal(DEMO_WORLD_VERSION, "alexandria-demo-2");
 });
 
 test("ranked lives never draw a new deed category", () => {
@@ -73,6 +73,8 @@ test("ranked lives never draw a new deed category", () => {
   assert.equal(keyDecisionCategory("demo-levy", DEMO_WORLD_VERSION), "war");
   assert.equal(keyDecisionCategory("demo-convoy-road", DEMO_WORLD_VERSION), "road");
   assert.deepEqual(DEMO_KEY_DECISIONS, {
+    "flood-failure": "harvest",
+    "levy-call": "war",
     "demo-flood-failure": "harvest",
     "demo-levy": "war",
     "demo-convoy-road": "road",

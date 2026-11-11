@@ -10,7 +10,7 @@ import type { Command, Effect, LifeState, WorldPack } from "../types.ts";
 
 // ── Stable identifiers ───────────────────────────────────────────────────────
 
-export const DEMO_WORLD_VERSION = "alexandria-demo-1";
+export const DEMO_WORLD_VERSION = "alexandria-demo-2";
 export const FARMING_JOBS = ["farmhand", "tenant-farmer", "grain-dealer"] as const;
 export const SERVICE_JOBS = ["soldier"] as const;
 export const FARMING_SKILL = "farming";
@@ -83,6 +83,8 @@ export interface HouseholdConfig {
   childWorkAge: number;
   handOverAge: number;
   parentsStopEatingAfterYears: number;
+  /** Remaining field help after handing over management. Older packs default to none. */
+  retiredParentLabourBps?: number;
   /** Health lost per 10% of the household ration missing, capped. */
   hungerHealthPer10Pct: number;
   hungerHealthCap: number;

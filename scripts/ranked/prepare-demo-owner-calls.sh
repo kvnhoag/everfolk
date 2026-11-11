@@ -3,7 +3,7 @@
 # Run only after the user approves a release step.
 #
 # The catalog update is additive: existing action ids stay. World versions keep
-# alexandria-ranked-1 and add alexandria-demo-1. The main contract is not called.
+# alexandria-ranked-1 and both demo revisions. The main contract is not called.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEMO_CONTRACT="${DEMO_CONTRACT:-demo.genesis-1794297139-6.testnet}"
@@ -22,7 +22,7 @@ near contract call-function as-transaction $DEMO_CONTRACT set_catalog \\
 
 # 2. Open the demo world without closing the existing ranked world.
 near contract call-function as-transaction $DEMO_CONTRACT set_world_versions \\
-  json-args '{"versions":["alexandria-ranked-1","alexandria-demo-1"]}' \\
+  json-args '{"versions":["alexandria-ranked-1","alexandria-demo-1","alexandria-demo-2"]}' \\
   prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' \\
   sign-as $OWNER_ID network-config testnet sign-with-legacy-keychain send
 CALLS

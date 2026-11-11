@@ -81,7 +81,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   }
 
   return <div className="ranked-entry">
-    {life && current.active && current.active.progress.status !== "new" && <ActiveLifeCard life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
+    {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
     {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack or rerolls, those fees are shared with its source lives and the protocol treasury; they are not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 
     <section className="chain-card ranked-entry-intro" aria-labelledby={headingId}>

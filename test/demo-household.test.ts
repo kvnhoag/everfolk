@@ -129,7 +129,7 @@ test("a child helps from childHelpAge while the parents run the plot", () => {
   const farmhand = draft(life => { life.age = 12; life.character!.jobId = "farmhand"; });
   assert.equal(labourUnits(def, farmhand.life), 300);
   const head = draft((life, demo) => { life.age = 25; demo.household.parents = "retired"; demo.household.headSinceAge = 20; });
-  assert.equal(labourUnits(def, head.life), 100, "a head of the plot without other work still works it");
+  assert.equal(labourUnits(def, head.life), 100 + 2 * Math.floor(100 * (h.retiredParentLabourBps ?? 0) / 10000), "the head works the plot with the parents' remaining help");
 });
 
 test("children eat childRationBps of an adult ration and help from childHelpAge, fully from childWorkAge", () => {

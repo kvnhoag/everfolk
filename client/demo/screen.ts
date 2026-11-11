@@ -14,7 +14,8 @@ import type { ConvoyPreview, ServiceView } from "../../src/demo/service.ts";
 import type { WorksView } from "../../src/demo/works.ts";
 import type { YearView } from "../../src/demo/timeline.ts";
 
-export const DEMO_WORLD_VERSION = "alexandria-demo-1";
+export { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
+import { isDemoVersion } from "../../chain/ids.ts";
 export { UNAVAILABLE_REASON };
 
 const ROLE_LABEL: Record<TownRole, string> = { merchant: "Merchant", grower: "Grower", army: "Army" };
@@ -33,7 +34,7 @@ export interface DemoScreen {
 }
 
 export function isDemoWorld(world: Pick<WorldPack, "version">): boolean {
-  return world.version === DEMO_WORLD_VERSION;
+  return isDemoVersion(world.version);
 }
 
 export function freePlayIntro(world: Pick<WorldPack, "version">): string | null {

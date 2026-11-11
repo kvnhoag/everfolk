@@ -10,6 +10,8 @@ import type { LivesContract, SignedEvidence } from "./types.ts";
 
 /** Practice ledger contract id; influences in practice lives name it as their source. */
 export const PRACTICE_CONTRACT_ID = "preview.everfolk.testnet";
+const records = new Map<string, { evidence: SignedEvidence["evidence"]; save: SaveFile }>();
+export function practiceEvidence(hash: string) { return records.get(hash) ?? null; }
 
 /**
  * For the in-browser practice ledger only: the same rules the server verifier enforces, with an all-zero
@@ -26,6 +28,8 @@ export function practiceVerifier(world: WorldPack, contract: LivesContract, cont
     if (replay.state.phase !== "ended") throw new Error("This life has not ended yet.");
     const evidence = await buildEvidence({ life: current, save, state: replay.state, worldFingerprint: engine.fingerprint });
     const evidenceJson = canonicalJson(evidence);
-    return { evidence, evidence_json: evidenceJson, evidence_hash: await sha256Hex(evidenceJson), signature: "0".repeat(128), verifier_kind: "server-signer" };
+    const hash = await sha256Hex(evidenceJson);
+    records.set(hash, structuredClone({ evidence, save }));
+    return { evidence, evidence_json: evidenceJson, evidence_hash: hash, signature: "0".repeat(128), verifier_kind: "server-signer" };
   };
 }

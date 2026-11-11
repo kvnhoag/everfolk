@@ -62,7 +62,8 @@ function members(def: DemoDefinition, life: LifeStateWithDemo, age: number): Mem
   const playerLabour = isSoldier(life) ? 0 : isFarming(life) ? ADULT : atHome ? youngLabour(h, age) : 0;
   if (!isSoldier(life)) list.push({ role: "player", labour: playerLabour, ration: rationShare(h, age) });
   if (household.parents !== "gone") {
-    for (let i = 0; i < 2; i++) list.push({ role: "parent", labour: parentsRun ? ADULT : 0, ration: ADULT });
+    const labour = parentsRun ? ADULT : Math.floor(ADULT * (h.retiredParentLabourBps ?? 0) / FULL);
+    for (let i = 0; i < 2; i++) list.push({ role: "parent", labour, ration: ADULT });
   }
   if (isMarried(life)) list.push({ role: "spouse", labour: ADULT, ration: ADULT });
   for (const child of life.character?.children ?? []) {
@@ -264,8 +265,8 @@ export function advanceFamily(ctx: DemoContext): void {
     household.parents = "retired";
     household.headSinceAge = age;
     ctx.journal("household-hand-over", isMarried(ctx.life)
-      ? "With your marriage, your parents hand the household plot to you. They stop working the fields but still eat from the store."
-      : "Your parents hand the household plot to you. They stop working the fields but still eat from the store.");
+      ? `With your marriage, your parents hand the household plot to you. ${h.retiredParentLabourBps ? "They still help with lighter field work and eat from the store." : "They stop working the fields but still eat from the store."}`
+      : `Your parents hand the household plot to you. ${h.retiredParentLabourBps ? "They still help with lighter field work and eat from the store." : "They stop working the fields but still eat from the store."}`);
   } else if (household.parents === "retired" && household.headSinceAge !== null && age >= household.headSinceAge + h.parentsStopEatingAfterYears) {
     household.parents = "gone";
     ctx.journal("household-parents-gone", "Your parents' last years pass quietly at home. The household mourns them, and now only your own family eats from the store.");

@@ -8,6 +8,8 @@ import { choiceIsUnavailable } from "./demo/screen.ts";
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
   { id: "study", label: "Study", activityId: "train-literacy" },
+  { id: "farming", label: "Farming", activityId: "train-farming" },
+  { id: "warfare", label: "Military training", activityId: "train-warfare" },
   { id: "craft", label: "Woodwork", activityId: "train-craft" },
   { id: "pottery", label: "Pottery", activityId: "train-pottery" },
   { id: "carving", label: "Wood carving", activityId: "train-carving" },

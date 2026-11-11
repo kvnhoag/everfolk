@@ -36,4 +36,8 @@ export const RARITY_LABELS = ["Common", "Uncommon", "Rare", "Epic", "Legendary"]
 
 export const RANKED_WORLD_VERSION = "alexandria-ranked-1";
 /** Contract version for new ranked and free-play lives. The pack version field is this string. */
-export const DEMO_WORLD_VERSION = "alexandria-demo-1";
+export const DEMO_WORLD_VERSION = "alexandria-demo-2";
+export const LEGACY_DEMO_WORLD_VERSION = "alexandria-demo-1";
+export function isDemoVersion(version: string): boolean {
+  return version === DEMO_WORLD_VERSION || version === LEGACY_DEMO_WORLD_VERSION;
+}

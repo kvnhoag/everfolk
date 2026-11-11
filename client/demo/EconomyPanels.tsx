@@ -26,6 +26,8 @@ interface Props {
   onAutoPlay(on: boolean): void;
   onDelegate(agent: string | null): string | null;
   onOccupation?(id: string): void;
+  onActivity?(id: string): void;
+  training?: { id: string; label: string; reason: string | null }[];
   occupations?: { id: string; label: string; unavailable: boolean; reason: string | null }[];
 }
 
@@ -33,7 +35,7 @@ function Field({ label, value }: { label: string; value: string }) {
   return <div><dt>{label}</dt><dd>{value}</dd></div>;
 }
 
-export default function EconomyPanels({ screen, cashText, autoPlay, pending = false, comparison = null, scenario = null, onTrade, onPlan, onAutoPlay, onDelegate, onOccupation, occupations = [] }: Props) {
+export default function EconomyPanels({ screen, cashText, autoPlay, pending = false, comparison = null, scenario = null, onTrade, onPlan, onAutoPlay, onDelegate, onOccupation, onActivity, training = [], occupations = [] }: Props) {
   const titleId = useId();
   const slot = useRef(false);
   const [item, setItem] = useState<TradeItem>("grain");
@@ -116,6 +118,9 @@ export default function EconomyPanels({ screen, cashText, autoPlay, pending = fa
       {screen.service.purse <= 0 && <p>The army purse is short.</p>}
       {screen.service.readiness.length > 0 ? <ul>{screen.service.readiness.map(line => <li key={line}>{line}</li>)}</ul> : <p>Convoy readiness has not been set.</p>}
       {screen.service.shipment && <p>A convoy is waiting: {screen.service.shipment.cargo} measures of grain, stage {screen.service.shipment.stage}.</p>}
+      <h4>Practice for your career</h4>
+      <div className="demo-actions">{training.map(activity => <button key={activity.id} type="button" disabled={Boolean(activity.reason) || pending} title={activity.reason ?? undefined} data-activity={activity.id} onClick={() => onActivity?.(activity.id)}>{activity.label}</button>)}</div>
+      {training.some(activity => activity.reason) && <p>Training uses your activity for the year. Age and skill requirements apply.</p>}
       {occupations.length > 0 && <div className="demo-actions">{occupations.map(job => <button key={job.id} type="button" aria-disabled={job.unavailable || undefined} onClick={() => { if (!job.unavailable) onOccupation?.(job.id); }}>
         {job.label}{job.unavailable ? " · Unavailable" : ""}
       </button>)}
@@ -161,13 +166,13 @@ export default function EconomyPanels({ screen, cashText, autoPlay, pending = fa
       {screen.futurePaths.length === 0 ? <p>No future paths are listed for this world.</p> : <ul>{screen.futurePaths.map(path => <li key={path.id}><strong>{path.title}</strong> <span className="demo-badge">Unavailable</span><p>{path.description}</p>{path.prerequisites && <p>{path.prerequisites}</p>}<p>Not available in this demo.</p></li>)}</ul>}
     </section>
 
-    <section aria-label="Demo scenario">
+    {(scenario || comparison) && <section aria-label="Demo scenario">
       <h3>Demo scenario</h3>
       {scenario ? <p><strong>{scenario.title}</strong> · seed {scenario.seed}. {scenario.summary}</p> : <p>The prepared demo scenario is not loaded yet.</p>}
       {comparison ? <div className="demo-compare">
         <article><h4>{comparison.withDeed.label}</h4><p>Grain received {comparison.withDeed.grainReceived}. Hunger avoided: {comparison.withDeed.hungerAvoided ? "yes" : "no"}.</p><p>Source: {comparison.withDeed.sourceName ?? "none"}. Owner share: {comparison.withDeed.ownerShare ?? "none"}.</p></article>
         <article><h4>{comparison.withoutDeed.label}</h4><p>Grain received {comparison.withoutDeed.grainReceived}. Hunger avoided: {comparison.withoutDeed.hungerAvoided ? "yes" : "no"}.</p><p>Source: {comparison.withoutDeed.sourceName ?? "none"}. Owner share: {comparison.withoutDeed.ownerShare ?? "none"}.</p></article>
       </div> : <p>After a flood, the same life with and without an earlier farmer&apos;s deed will be compared here.</p>}
-    </section>
+    </section>}
   </div>;
 }

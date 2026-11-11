@@ -9,6 +9,7 @@ import type { TokenView } from "./types.ts";
 import "./token-market.css";
 
 export interface TokenPageBodyProps {
+  practice?: boolean;
   tokenId: string;
   view: TokenPageView;
   busy?: boolean;
@@ -63,7 +64,7 @@ function SaleBox({ view, busy, onList, onUnlist, onBuy }: Pick<TokenPageBodyProp
 }
 
 /** A kept life's page: who it is, what it does, the lives it touched, its earnings and its sale. */
-export function TokenPageBody({ tokenId, view, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy }: TokenPageBodyProps) {
+export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy }: TokenPageBodyProps) {
   const headingId = useId();
   return <div className="token-page">
     <section className={`chain-card token-hero${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
@@ -77,7 +78,7 @@ export function TokenPageBody({ tokenId, view, busy = false, error, notice, canC
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
-    {view.evidenceHref && <LifeChoices evidenceHref={view.evidenceHref} />}
+    {view.evidenceHref && <LifeChoices evidenceHref={view.evidenceHref} practice={practice} />}
     <section className="chain-card" aria-label="Lives touched">
       <h2>Lives touched</h2>
       <p className="token-reach">{view.reach}</p>
@@ -155,6 +156,7 @@ export default function TokenPage({ backend, tokenId }: { backend: ChainBackend;
   const { contract } = backend;
   const listing = loaded.view.listing;
   return <TokenPageBody
+    practice={backend.mode === "preview"}
     tokenId={tokenId} view={loaded.view} busy={busy} error={error} notice={notice}
     canConnect={!backend.accountId} onConnect={() => { void run(backend.connect, "Wallet connected.", "The wallet could not connect."); }}
     onSetAction={actionId => { void run(() => contract.setAction(tokenId, actionId), "Its deed has changed. New lives will feel it.", "The deed could not be changed."); }}

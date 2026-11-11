@@ -1,6 +1,6 @@
 import type { InfluenceEntry } from "./influence-entry.ts";
 import type { WorldPack } from "../../src/types.ts";
-import { DEMO_WORLD_VERSION, NPC_ACTIONS, type CareerGroup, type Category } from "../ids.ts";
+import { isDemoVersion, NPC_ACTIONS, type CareerGroup, type Category } from "../ids.ts";
 
 /** Deeds that do not fit the one-category-per-group table. Existing action ids are untouched. */
 export const DEMO_EXTRA_ACTIONS = [
@@ -71,7 +71,7 @@ export function actionsForGroup(group: CareerGroup): readonly string[] {
 
 /** Appends demo deeds to a demo world that does not yet carry them. Ranked worlds are returned unchanged. */
 export function ensureDemoDeeds(world: WorldPack): WorldPack {
-  if (world.version !== DEMO_WORLD_VERSION) return world;
+  if (!isDemoVersion(world.version)) return world;
   const have = new Set((world.influences ?? []).map(entry => entry.id));
   const missing = DEMO_DEED_INFLUENCES.filter(entry => !have.has(entry.id));
   if (missing.length === 0) return world;
