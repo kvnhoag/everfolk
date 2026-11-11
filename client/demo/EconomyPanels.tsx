@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
@@ -15,6 +16,8 @@ import type { DemoScreen } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
+import Storehouse from "./Storehouse.tsx";
+import type { StorehouseRow } from "./storehouse-model.ts";
 import "./economy-panels.css";
 
 export interface ComparisonSide {
@@ -29,6 +32,7 @@ export type EconomyTabId = "market" | "farm" | "service" | "people" | "works";
 
 interface Props {
   screen: DemoScreen;
+  storehouse?: StorehouseRow[] | null;
   cashText: string;
   autoPlay: boolean;
   pending?: boolean;
@@ -50,7 +54,7 @@ interface Props {
   occupations?: { id: string; label: string; unavailable: boolean; reason: string | null }[];
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({ label, value }: { label: ReactNode; value: string }) {
   return <div><dt>{label}</dt><dd>{value}</dd></div>;
 }
 
@@ -66,6 +70,7 @@ function heldQuantity(screen: DemoScreen, item: TradeItem): number {
 
 export default function EconomyPanels({
   screen,
+  storehouse = null,
   cashText,
   autoPlay,
   pending = false,
@@ -414,7 +419,7 @@ export default function EconomyPanels({
           {screen.market.quotes
             .filter(entry => entry.item === "grain" || entry.item === item)
             .map(entry => (
-              <Field key={entry.item} label={itemLabel(entry.item) + " buy / sell"} value={entry.buy + " / " + entry.sell} />
+              <Field key={entry.item} label={<><ResourceGlyph id={entry.item} /> {itemLabel(entry.item)} buy / sell</>} value={entry.buy + " / " + entry.sell} />
             ))}
           <Field label="Merchant can buy" value={String(quote?.merchantCanBuy ?? 0)} />
           <Field label="Merchant holds" value={String(quote?.merchantStock ?? 0)} />
@@ -611,6 +616,7 @@ export default function EconomyPanels({
       </section>
 
       {/* TAB 2: FARM & GRANARY */}
+      {storehouse && <div hidden={activeTab !== "farm"}><Storehouse rows={storehouse} /></div>}
       <section aria-label="This year" hidden={activeTab !== "farm"}>
         <h3>This year</h3>
         <dl className="demo-facts">

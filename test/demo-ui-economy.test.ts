@@ -8,6 +8,7 @@ import ts from "typescript";
 import { demoEngine } from "./fixtures/demo/world.ts";
 import { activityGate, beginOrder, demoScreen, orderPreview, sendDemoCommand } from "../client/demo/screen.ts";
 import { availability } from "../src/demo/availability.ts";
+import { storehouseRows } from "../client/demo/storehouse-model.ts";
 import { buildSkillTree, currentSkillTree } from "../client/skill-tree.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
 import { careerEmblem } from "../client/chain/token-page-model.ts";
@@ -191,4 +192,30 @@ test("DecisionDialog popup, EventNotificationStack, LifeChoiceBoard, and styled 
   assert.match(deckHtml, /Pakhom of the Fayyum/);
   assert.match(deckHtml, /Strategos Ptolemaios/);
   assert.deepEqual(life, before);
+});
+
+
+test("the Storehouse integrates with the command deck without replacing its market, charts or people", () => {
+  const life = engine.start("storehouse-command-deck");
+  const screen = demoScreen(engine.world, life)!;
+  const storehouse = storehouseRows(engine.world, life)!;
+  const before = structuredClone({ life, world: engine.world, screen, storehouse });
+  const html = renderToStaticMarkup(createElement(EconomyPanels, {
+    screen, storehouse, life, world: engine.world, activities: engine.getActivities(life),
+    cashText: "12 drachmas", autoPlay: false,
+    onTrade() { assert.fail("Rendering sent a trade"); },
+    onPlan() { assert.fail("Rendering changed the planting plan"); },
+    onAutoPlay() { assert.fail("Rendering changed autoplay"); },
+    onDelegate() { assert.fail("Rendering delegated decisions"); },
+  }));
+  assert.match(html, /aria-label="Storehouse"/);
+  assert.equal((html.match(/class="storehouse-row"/g) ?? []).length, storehouse.length);
+  assert.match(html, /Coming year/);
+  for (const label of ["Market &amp; Trade", "Farm &amp; Granary", "Career &amp; Army", "People &amp; Town", "Works &amp; Stewards"]) {
+    assert.ok(html.includes(label), label);
+  }
+  assert.match(html, /price history graph/);
+  assert.match(html, /demo-dropdown-trigger/);
+  assert.match(html, /Naukleros Heron/);
+  assert.deepEqual({ life, world: engine.world, screen, storehouse }, before);
 });

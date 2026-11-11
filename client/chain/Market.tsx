@@ -2,6 +2,8 @@ import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { filterMarket, marketRows, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
+import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, effectiveFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
+import type { CareerGroup } from "../../chain/ids.ts";
 import PixelIcon from "../PixelIcon.tsx";
 import type { TokenView } from "./types.ts";
 import "./token-market.css";
@@ -15,6 +17,8 @@ export interface MarketBodyProps {
   canConnect?: boolean;
   onConnect?(): void;
   onBuy(row: MarketRow): void;
+  /** Starting filter; defaults to showing everything, cheapest first. */
+  initialFilter?: MarketFilter;
 }
 
 const EMPTY_TEXT: Record<MarketTab, string> = {
@@ -24,10 +28,14 @@ const EMPTY_TEXT: Record<MarketTab, string> = {
 };
 
 /** Kept lives offered for sale, as a ledger in the life-record format. */
-export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy }: MarketBodyProps) {
+export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy, initialFilter = DEFAULT_FILTER }: MarketBodyProps) {
   const headingId = useId();
   const [tab, setTab] = useState<MarketTab>("all");
-  const shown = filterMarket(rows, tab);
+  const [chosen, setFilter] = useState<MarketFilter>(initialFilter);
+  const options = filterOptions(rows);
+  const filter = effectiveFilter(chosen, options);
+  const shown = filterMarket(applyFilter(rows, filter), tab);
+  const filtered = filter.group !== "all" || filter.rarity !== "all";
   return <section className="ledger-panel market" aria-labelledby={headingId}>
     <header className="ledger-heading">
       <p className="ledger-kicker"><span className="cr-index">{String(rows.length).padStart(2, "0")}</span>Lives kept by other players</p>
@@ -39,11 +47,24 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice.text} {notice.href && <a href={notice.href}>See its page</a>}</p>}
     </div>}
+    <div className="market-filters">
+      <label>Career<select value={filter.group} onChange={event => setFilter({ ...filter, group: event.target.value as CareerGroup | "all" })}>
+        <option value="all">All careers</option>
+        {options.groups.map(item => <option key={item.id} value={item.id}>{item.label} ({item.count})</option>)}
+      </select></label>
+      <label>Rarity<select value={String(filter.rarity)} onChange={event => setFilter({ ...filter, rarity: event.target.value === "all" ? "all" : Number(event.target.value) })}>
+        <option value="all">All rarities</option>
+        {options.rarities.map(item => <option key={item.id} value={item.id}>{item.label} ({item.count})</option>)}
+      </select></label>
+      <label>Sort<select value={filter.sort} onChange={event => setFilter({ ...filter, sort: event.target.value as MarketSort })}>
+        {SORT_OPTIONS.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+      </select></label>
+    </div>
     <ul className="market-tabs" role="tablist" aria-label="Show">{marketTabs(rows).map(item => <li key={item.id}>
       <button className="market-tab" type="button" role="tab" aria-selected={tab === item.id} onClick={() => setTab(item.id)}>{item.label}<small>{item.count}</small></button>
     </li>)}</ul>
     {shown.length === 0
-      ? <p className="market-empty">{EMPTY_TEXT[tab]}</p>
+      ? <p className="market-empty">{filtered && rows.length > 0 ? "Nothing matches these filters." : EMPTY_TEXT[tab]}</p>
       : <ol className="ledger-rows market-ledger ledger-body">{shown.map(row => <li key={row.tokenId} className={`ledger-row market-row${row.isFigure ? " is-figure" : ""}`}>
           <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
           <div className="ledger-value">
