@@ -14,6 +14,7 @@ import { SKILL_RIVER_REVISION, skillRequirementNotes } from "./skill-river.ts";
 import { activityLoanOffer } from "./loan-access.ts";
 import SkillGrowth from "./SkillGrowth.tsx";
 import LateSkillRoutes from "./LateSkillRoutes.tsx";
+import CareerEconomyTree from "./CareerEconomyTree.tsx";
 import { formatSkillValue as skillNumber } from "./skill-growth.ts";
 import "./skill-tree.css";
 import "./skill-river.css";
@@ -147,6 +148,7 @@ export default function SkillTree({ life, world, activities, onActivity, initial
       </aside>
     </div>
     {otherTraining.length > 0 && <details className="skill-other-practice"><summary>Other training activities <span>{otherTraining.length}</span></summary><div>{otherTraining.map(activity => <Practice key={activity.id} activity={activity} life={life} world={world} onActivity={onActivity} readOnly={wiki} />)}</div></details>}
+    <CareerEconomyTree world={world} life={life} activities={activities} onActivity={onActivity} readOnly={wiki} />
     <div hidden={!detailOpen}><LateSkillRoutes world={world} life={life} activities={activities} onActivity={onActivity} readOnly={wiki} skillId={selected.id} /></div>
     <details className="skill-icon-credits"><summary>Icon credits</summary><p>Icons made by Delapouite, Lorc and Willdabeast. Available on <a href="https://game-icons.net" target="_blank" rel="noreferrer">Game-icons.net</a>, under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>. Backgrounds removed; display colors and sizes adjusted.</p></details>
     <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.{world.character?.skills[selected.id]?.gainCurve && " Gains get smaller at higher proficiency."}</p>
