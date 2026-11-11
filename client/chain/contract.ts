@@ -156,9 +156,14 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
     },
     async tokensOf(owner) {
       assertAccountId(owner);
-      const tokens = await view("nft_tokens_for_owner", { account_id: owner, from_index: "0", limit: 100 });
-      if (!Array.isArray(tokens)) throw new Error("The contract returned an unexpected token list.");
-      return tokens.map(token => ({ token_id: String((token as { token_id: unknown }).token_id), ...parseTokenView(token)! }));
+      const tokens: Awaited<ReturnType<LivesContract["tokensOf"]>> = [];
+      // NEP-181 offsets are U128 decimal strings, unlike this contract's numeric pagination offsets.
+      for (let from = 0n; ; from += BigInt(PAGE)) {
+        const page = await view("nft_tokens_for_owner", { account_id: owner, from_index: from.toString(), limit: PAGE });
+        if (!Array.isArray(page)) throw new Error("The contract returned an unexpected token list.");
+        tokens.push(...page.map(token => ({ token_id: String((token as { token_id: unknown }).token_id), ...parseTokenView(token)! })));
+        if (page.length < PAGE) return tokens;
+      }
     },
     async tokenStats(tokenId) {
       assertTokenId(tokenId);
