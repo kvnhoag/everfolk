@@ -1,0 +1,31 @@
+/* Sign-in panel (email first, NEAR wallet second) and the email player's spend sheet. */
+.sign-in-panel{margin:12px 0 0;padding:16px 18px;background:var(--cr-panel,#faf4e2);border:1px solid var(--cr-edge,#b39c68);box-shadow:var(--cr-hard,2px 2px 0 #d4c39a);color:var(--cr-ink,#493e2d);max-width:440px;flex:1 1 100%}
+.sign-in-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
+.sign-in-panel h2{margin:0!important;font-size:20px!important;letter-spacing:-.4px}
+.sign-in-close{background:none;border:0;font-size:20px;line-height:1;padding:4px 6px;color:var(--cr-muted,#6f6550);cursor:pointer}
+.sign-in-close:disabled{opacity:.4;cursor:default}
+.sign-in-step{display:flex;flex-direction:column;gap:8px}
+.sign-in-step label{font-size:12px;font-weight:700}
+.sign-in-step input{min-height:40px;padding:8px 10px;font:inherit;font-size:14px;color:inherit;background:var(--cr-paper,#fffbed);border:1px solid var(--cr-edge,#b39c68)}
+.sign-in-step input:focus-visible{outline:2px solid #41637b;outline-offset:1px}
+.sign-in-step input[name="code"]{font-family:var(--cr-mono,"Courier New",monospace);letter-spacing:4px;font-size:18px}
+.sign-in-step .chain-primary{justify-content:space-between}
+.sign-in-step .account-link{margin:0;align-self:flex-start}
+.sign-in-step .chain-fine{margin:2px 0 0!important}
+.sign-in-setup{display:flex;align-items:center;gap:10px;margin:6px 0 0!important;font-weight:700}
+.sign-in-spinner{width:14px;height:14px;border:2px solid var(--cr-edge,#b39c68);border-top-color:#41637b;border-radius:50%;animation:sign-in-spin .9s linear infinite}
+@keyframes sign-in-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.sign-in-spinner{animation:none}}
+.sign-in-panel .chain-error{margin:10px 0 0!important;font-size:12px}
+.sign-in-other{display:flex;flex-direction:column;gap:8px;margin:14px 0 0}
+.sign-in-or{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--cr-muted,#6f6550)}
+.account-details{font-size:11px;color:var(--cr-muted,#6f6550)}
+.account-details summary{cursor:pointer;color:#41637b;text-decoration:underline;text-underline-offset:3px}
+.account-details p{margin:6px 0 0;font:11px/1.5 var(--cr-mono,"Courier New",monospace);overflow-wrap:anywhere}
+dialog.spend-sheet{max-width:min(420px,calc(100vw - 32px));padding:0;border:2px solid #886447;background:#f7ecd4;color:#263b43;box-shadow:4px 4px 0 #88644740}
+dialog.spend-sheet::backdrop{background:rgba(38,59,67,.45)}
+.spend-sheet-body{padding:20px 22px}
+.spend-sheet-body h2{margin:4px 0 8px;font-size:24px;letter-spacing:-.6px}
+.spend-sheet-price{margin:0 0 8px;font:700 20px/1.2 var(--cr-mono,"Courier New",monospace)}
+.spend-sheet-body .chain-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.spend-sheet-body .chain-actions>button{flex:1 1 140px}
