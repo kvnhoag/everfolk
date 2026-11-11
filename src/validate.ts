@@ -1,3 +1,4 @@
+import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
 
 type DataObject = Record<string, unknown>;
@@ -123,7 +124,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo"], worldFields);
+  let demoGrainGain = false;
+  const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -577,6 +580,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         object(rule, path, ["type", "condition"]);
         condition(rule.condition, `${path}.condition`, depth + 1);
         break;
+      case "demo":
+        object(rule, path, ["type", "condition"]);
+        requireDemo(path);
+        validateDemoCondition(rule, path, fail);
+        break;
       default:
         fail(`${path}.type`, "unknown condition type");
     }
@@ -715,6 +723,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
             reference(effect.deathCause, `${location}.deathCause`, deathCauseIds, "death cause");
             if (!deathEndingIds.has(effect.ending as string)) fail(`${location}.ending`, "an explicit death cause requires a death ending");
           }
+          break;
+        case "demo":
+          object(effect, location, ["type", "effect"]);
+          requireDemo(location);
+          validateDemoEffect(effect, location, fail, demoGrainGain);
           break;
         default:
           fail(`${location}.type`, "unknown effect type");
@@ -1006,7 +1019,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (entry.baseWeight !== 1 && entry.baseWeight !== 3 && entry.baseWeight !== 5) fail(`${path}.baseWeight`, "expected 1, 3 or 5");
       if (!Object.hasOwn(entry, "effects") && !Object.hasOwn(entry, "event")) fail(path, "an influence entry needs effects or an event");
       if (Object.hasOwn(entry, "effects")) {
+        demoGrainGain = true;
         effects(entry.effects, `${path}.effects`);
+        demoGrainGain = false;
         if ((entry.effects as DataObject[]).some(effect => effect.type === "loan")) fail(`${path}.effects`, "loan actions require an explicit player choice or activity");
       }
       if (!Object.hasOwn(entry, "event")) return;
@@ -1160,5 +1175,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const condition = entry as DataObject;
       return condition.kind === "illness" && (condition.weight as number) > 0 && !Object.hasOwn(condition, "when");
     })) fail(path, "requires an unconditional positive-weight illness fallback");
+  }
+  if (Object.hasOwn(world, "demo")) {
+    const character = (world.character ?? {}) as DataObject;
+    const legacy = (world.legacy ?? {}) as DataObject;
+    const listIds = (list: unknown) => new Set(Array.isArray(list) ? list.map(item => (item as DataObject).id as string) : []);
+    validateDemoDefinition(world.demo, fail, { jobs: listIds(character.jobs), activities: listIds(character.activities),
+      skills: new Set(Object.keys((character.skills ?? {}) as DataObject)), achievements: listIds(legacy.achievements) });
+    if (!Object.hasOwn(world, "economy") || !Object.hasOwn(world, "character")) fail("world.demo", "requires an economy and characters");
   }
 }

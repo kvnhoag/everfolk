@@ -1,5 +1,6 @@
 import type { Comparison, Condition, LifeState } from "./types.ts";
 import { hasSocialRole } from "./relationships.ts";
+import { matchesDemoCondition } from "./demo/effects.ts";
 
 function compare(left: number, op: Comparison, right: number): boolean {
   switch (op) {
@@ -52,6 +53,7 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
     case "all": return condition.conditions.every(child => matchesCondition(child, state));
     case "any": return condition.conditions.some(child => matchesCondition(child, state));
     case "not": return !matchesCondition(condition.condition, state);
+    case "demo": return matchesDemoCondition(state, condition.condition);
   }
 }
 

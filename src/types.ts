@@ -1,4 +1,5 @@
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
+import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
@@ -23,7 +24,9 @@ export type Condition =
   | { type: "has-condition"; condition?: string }
   | { type: "closeness"; partner?: string; op: Comparison; value: number }
   | { type: "all" | "any"; conditions: Condition[] }
-  | { type: "not"; condition: Condition };
+  | { type: "not"; condition: Condition }
+  /** Grain and Service demo worlds only. */
+  | { type: "demo"; condition: DemoCondition };
 
 export type Effect =
   | { type: "accomplishment"; achievement: string }
@@ -45,7 +48,9 @@ export type Effect =
   | { type: "care"; amount: number }
   | { type: "closeness"; target: "partner"; partner?: string; delta: number }
   | { type: "closeness"; target: "children"; delta: number }
-  | { type: "end"; ending: string; deathCause?: string };
+  | { type: "end"; ending: string; deathCause?: string }
+  /** Grain and Service demo worlds only. */
+  | { type: "demo"; effect: DemoEffect };
 
 /** Optional, non-stacking encouragement for an actually paid training outcome. */
 export interface SkillGainModifier {
@@ -492,6 +497,8 @@ export interface WorldPack {
   events: LifeEvent[];
   /** Optional catalog for `influence` commands; omitted packs have no influences. */
   influences?: InfluenceEntry[];
+  /** Opt-in Grain and Service economy; older packs omit it and keep their rules. */
+  demo?: DemoDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -500,7 +507,7 @@ export interface WorldPack {
 /** Issued by a ranked life's NFT sources; free play never contains one. */
 export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number } | InfluenceCommand;
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number } | InfluenceCommand | DemoCommand;
 
 export interface JournalEntry {
   type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity" | "influence";
@@ -547,6 +554,8 @@ export interface LifeState {
   activeInfluences?: InfluenceRecord[];
   /** Applied influence events waiting for the current decision to resolve. */
   queuedInfluences?: InfluenceRecord[];
+  /** Only in demo worlds. */
+  demo?: DemoState;
   journal: JournalEntry[];
   commands: Command[];
 }
@@ -572,6 +581,8 @@ export interface LifeEngine {
   act(state: LifeState, activityId: string): LifeState;
   chooseAvatar(state: LifeState, variant: number): LifeState;
   influence(state: LifeState, command: InfluenceCommand): LifeState;
+  /** Demo worlds only: trade, plan, agent assignment, delegation and agent decisions. */
+  demo(state: LifeState, command: DemoCommand): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

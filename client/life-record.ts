@@ -48,7 +48,8 @@ export function lifeRecordChanges(life: LifeState, engine: LifeEngine): { years:
       : command.type === "choose" ? projection.tracer.choose(projection.state, command.choice)
       : command.type === "act" ? projection.tracer.act(projection.state, command.activity)
       : command.type === "influence" ? projection.tracer.influence(projection.state, command)
-      : projection.tracer.chooseAvatar(projection.state, command.variant);
+      : command.type === "avatar" ? projection.tracer.chooseAvatar(projection.state, command.variant)
+      : projection.tracer.demo(projection.state, command);
     const totals = projection.totals.get(after.age) ?? {};
     for (const [id, value] of Object.entries(values(after, engine))) totals[id] = (totals[id] ?? 0) + value - (before[id] ?? 0);
     projection.totals.set(after.age, totals);
