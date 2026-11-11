@@ -6,7 +6,7 @@ import { createLivesContract } from "./contract.ts";
 import { createPreviewLedger, PREVIEW_ACCOUNT } from "./preview-ledger.ts";
 import type { ContractCall, LivesContract, WalletSession } from "./types.ts";
 import { accountBalance } from "./rpc.ts";
-import { createWalletSession, REMEMBERED_WALLET_KEY } from "./wallet.ts";
+import { createSessionRouter, SIGN_IN_STORAGE_KEY, type RoutedSession, type SessionOpeners } from "./session-router.ts";
 
 /**
  * Which ledger the ranked screens talk to. "live" = the deployed contract through a wallet loaded on demand;
@@ -62,25 +62,21 @@ export function useRankedAvailability(): RankedAvailability {
   return availability;
 }
 
-/** A wallet session whose heavy wallet modules load on first use (sign-in or a change call). */
-function lazyWallet(cfg: ChainConfig): WalletSession & { restore(): Promise<void> } {
-  let request: Promise<WalletSession> | null = null;
-  let loaded: WalletSession | null = null;
-  const load = () => (request ??= createWalletSession(cfg).then(session => (loaded = session)));
+/** The router remembers the chosen sign-in method under this key; its presence means a session can be restored. */
+export const REMEMBERED_WALLET_KEY = SIGN_IN_STORAGE_KEY;
+export const EMAIL_NOT_READY = "Email sign-in is not set up yet.";
+
+/** Sign-in methods for `cfg`. Each loads its libraries on first use (sign-in, restore or a change call). */
+export function sessionOpeners(cfg: ChainConfig): SessionOpeners {
   return {
-    get accountId() { return loaded?.accountId ?? null; },
-    get walletId() { return loaded?.walletId ?? null; },
-    onTransaction(listener) {
-      let off: (() => void) | undefined;
-      void load().then(session => { off = session.onTransaction?.(listener); });
-      return () => off?.();
-    },
-    /** Loads the wallet library, which restores a remembered account without opening any window. */
-    async restore() { await load(); },
-    async signIn() { await (await load()).signIn(); },
-    async signOut() { if (loaded) await loaded.signOut(); },
-    async call(call: ContractCall) { return (await load()).call(call); },
+    wallet: () => import("./wallet.ts").then(({ createWalletSession }) => createWalletSession(cfg)),
+    email: () => Promise.reject(new Error(EMAIL_NOT_READY)),
   };
+}
+
+/** One session for every sign-in method; nothing heavy loads until the player signs in or is restored. */
+function lazyWallet(cfg: ChainConfig): RoutedSession {
+  return createSessionRouter(sessionOpeners(cfg));
 }
 
 function rememberedWallet(): boolean {
@@ -109,7 +105,8 @@ async function createBackend(events: BackendEvents): Promise<BaseBackend> {
   return {
     mode: "live", contract: createLivesContract(wallet, cfg), worldVersion: config.world_version, contractId: config.contract_id,
     connect: async () => { await wallet.signIn(); report(); },
-    disconnect: async () => { await wallet.signOut(); events.onAccount(null, null); },
+    // The router drops the session before the wallet answers, so the bar shows signed out even if that fails.
+    disconnect: async () => { try { await wallet.signOut(); } finally { events.onAccount(null, null); } },
     nearBalance: accountId => accountBalance(fetch, cfg.rpcUrl, accountId),
   };
 }
