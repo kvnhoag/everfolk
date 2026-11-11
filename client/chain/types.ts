@@ -15,6 +15,9 @@ export interface SignedEvidence {
   verifier_kind: "server-signer" | "tee";
 }
 
+/** Sale royalties in basis points, from the contract's params. */
+export interface MarketTerms { royaltySourcesBps: number; royaltyTreasuryBps: number }
+
 export interface TokenView { owner_id: string; extra: TokenExtra }
 
 /** Every lives-contract call the client makes. Ids and yocto amounts are decimal strings, as on the wire. */
@@ -28,6 +31,7 @@ export interface LivesContract {
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   mintTerms(): Promise<MintTerms>;
+  marketTerms(): Promise<MarketTerms>;
   mintPack(lifeId: string): Promise<MintPack | null>;
   openMintPack(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintPack>;
   rerollMintSlot(lifeId: string, slot: number, feeYocto: string): Promise<MintPack>;

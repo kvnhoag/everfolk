@@ -70,6 +70,7 @@ export function createCliContract(contractId: string, accountId: string): LivesC
   };
   return {
     mintTerms: () => viewMethod(contractId, "mint_terms", {}),
+    marketTerms: unsupported("marketTerms"),
     mintPack: lifeId => viewMethod(contractId, "get_mint_pack", { life_id: lifeId }),
     async openMintPack(lifeId, signed, action) {
       const terms = await viewMethod<{ mint_fee: string }>(contractId, "mint_terms", {});

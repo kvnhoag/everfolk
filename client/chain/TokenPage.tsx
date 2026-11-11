@@ -5,7 +5,8 @@ import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { parseNearInput } from "./near-amount.ts";
 import { tokenPageView, type TokenPageView } from "./token-page-model.ts";
 import StewardSettings from "../demo/StewardSettings.tsx";
-import type { TokenView } from "./types.ts";
+import { PRICE_PLACEHOLDER, PayoutLine } from "./SellYours.tsx";
+import type { MarketTerms, TokenView } from "./types.ts";
 import "./token-market.css";
 
 export interface TokenPageBodyProps {
@@ -22,7 +23,11 @@ export interface TokenPageBodyProps {
   onList(priceYocto: string): void;
   onUnlist(): void;
   onBuy(): void;
+  /** Sale royalties for the payout preview; defaults to the contract defaults. */
+  terms?: MarketTerms;
 }
+
+const DEFAULT_TERMS: MarketTerms = { royaltySourcesBps: 500, royaltyTreasuryBps: 500 };
 
 function ActionPicker({ view, busy, onSetAction }: Pick<TokenPageBodyProps, "view" | "busy" | "onSetAction">) {
   const [choice, setChoice] = useState(view.currentAction.id);
@@ -37,7 +42,7 @@ function ActionPicker({ view, busy, onSetAction }: Pick<TokenPageBodyProps, "vie
   </fieldset>;
 }
 
-function SaleBox({ view, busy, onList, onUnlist, onBuy }: Pick<TokenPageBodyProps, "view" | "busy" | "onList" | "onUnlist" | "onBuy">) {
+function SaleBox({ view, busy, onList, onUnlist, onBuy, terms = DEFAULT_TERMS }: Pick<TokenPageBodyProps, "view" | "busy" | "onList" | "onUnlist" | "onBuy" | "terms">) {
   const priceId = useId();
   const [price, setPrice] = useState("");
   const [priceError, setPriceError] = useState("");
@@ -56,15 +61,16 @@ function SaleBox({ view, busy, onList, onUnlist, onBuy }: Pick<TokenPageBodyProp
   </div>;
   if (!view.canList) return <p className="chain-fine">Not for sale.</p>;
   return <form className="token-sale" onSubmit={event => { event.preventDefault(); submit(); }}>
-    <label className="chain-field" htmlFor={priceId}>Price in NEAR<input id={priceId} inputMode="decimal" autoComplete="off" placeholder="2.5" value={price} disabled={busy} onChange={event => setPrice(event.target.value)} aria-invalid={priceError ? true : undefined} /></label>
+    <label className="chain-field" htmlFor={priceId}>Price in NEAR<input id={priceId} inputMode="decimal" autoComplete="off" placeholder={PRICE_PLACEHOLDER} value={price} disabled={busy} onChange={event => setPrice(event.target.value)} aria-invalid={priceError ? true : undefined} /></label>
     {priceError && <p className="chain-error" role="alert">{priceError}</p>}
+    <PayoutLine text={price} terms={terms} hasSources={view.sources.length > 0} />
     <p className="chain-fine">Each sale sends 5% to the people who shaped this life and 5% to the city.</p>
     <div className="chain-actions"><button className="chain-secondary" type="submit" disabled={busy}>Put it up for sale</button></div>
   </form>;
 }
 
 /** A kept life's page: who it is, what it does, the lives it touched, its earnings and its sale. */
-export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy }: TokenPageBodyProps) {
+export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy, terms }: TokenPageBodyProps) {
   const headingId = useId();
   return <div className="token-page">
     <section className={`chain-card token-hero${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
@@ -97,7 +103,7 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
     </section>
     <section className="chain-card" aria-label="For sale">
       <h2>For sale</h2>
-      <SaleBox view={view} busy={busy} onList={onList} onUnlist={onUnlist} onBuy={onBuy} />
+      <SaleBox view={view} busy={busy} onList={onList} onUnlist={onUnlist} onBuy={onBuy} terms={terms} />
     </section>
     <StewardSettings owner={view.isOwner} />
     <section className="chain-card" aria-label="Who shaped this life">
@@ -110,21 +116,22 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
   </div>;
 }
 
-interface Loaded { token: TokenView; view: TokenPageView }
+interface Loaded { token: TokenView; view: TokenPageView; terms: MarketTerms }
 
 async function loadTokenPage(backend: ChainBackend, tokenId: string): Promise<Loaded | null> {
   const { contract, accountId } = backend;
   const token = await contract.token(tokenId);
   if (!token) return null;
-  const [stats, children, listings, balance] = await Promise.all([
+  const [stats, children, listings, balance, terms] = await Promise.all([
     contract.tokenStats(tokenId), contract.childrenOf(tokenId), contract.listings(), accountId ? contract.balanceOf(accountId) : Promise.resolve("0"),
+    contract.marketTerms().catch(() => DEFAULT_TERMS),
   ]);
   const sources = await Promise.all(token.extra.sources.map(async source => [source.token_id, await contract.token(source.token_id).catch(() => null)] as const));
   const view = tokenPageView({
     tokenId, token, stats, viewer: accountId, balance, children,
     listing: listings.find(listing => listing.token_id === tokenId) ?? null, sourceTokens: Object.fromEntries(sources),
   });
-  return { token, view };
+  return { token, view, terms };
 }
 
 export default function TokenPage({ backend, tokenId }: { backend: ChainBackend; tokenId: string }) {
@@ -157,7 +164,7 @@ export default function TokenPage({ backend, tokenId }: { backend: ChainBackend;
   const listing = loaded.view.listing;
   return <TokenPageBody
     practice={backend.mode === "preview"}
-    tokenId={tokenId} view={loaded.view} busy={busy} error={error} notice={notice}
+    tokenId={tokenId} view={loaded.view} terms={loaded.terms} busy={busy} error={error} notice={notice}
     canConnect={!backend.accountId} onConnect={() => { void run(backend.connect, "Wallet connected.", "The wallet could not connect."); }}
     onSetAction={actionId => { void run(() => contract.setAction(tokenId, actionId), "Its deed has changed. New lives will feel it.", "The deed could not be changed."); }}
     onWithdraw={() => { void run(() => contract.withdraw(), "Sent to your wallet.", "The withdrawal did not go through."); }}

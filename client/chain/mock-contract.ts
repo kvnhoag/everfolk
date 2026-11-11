@@ -28,6 +28,8 @@ const NPC_RARITY_WEIGHTS = [6000n, 2500n, 1000n, 400n, 100n];
 const FIGURE_RARITY_WEIGHTS = [0n, 0n, 7000n, 2500n, 500n];
 
 const copy = <T>(value: T): T => structuredClone(value);
+/** Matches the contract defaults: 5% to earlier lives, 5% to the treasury. */
+const MOCK_ROYALTY_BPS = 500;
 
 function ownedAliveLife(state: MockState, account: string, lifeId: string): LifeView {
   assertLifeId(lifeId);
@@ -148,6 +150,7 @@ function bind(state: MockState, account: string): MockLivesContract {
     seedToken: input => seedToken(state, input),
 
     async mintTerms() { return { mint_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
+    async marketTerms() { return { royaltySourcesBps: MOCK_ROYALTY_BPS, royaltyTreasuryBps: MOCK_ROYALTY_BPS }; },
     async mintPack(lifeId) { return copy(state.packs.get(lifeId)?.view ?? null); },
     async openMintPack(lifeId, signed, action) {
       const life = ownedAliveLife(state, account, lifeId);

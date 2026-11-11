@@ -1,11 +1,14 @@
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
+import { chainHref } from "./chain-route.ts";
+import { formatNear } from "./near-amount.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
-import { filterMarket, marketRows, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
+import { filterMarket, marketRows, tokenTitle, marketTabs, type MarketRow, type MarketTab } from "./token-page-model.ts";
 import { DEFAULT_FILTER, SORT_OPTIONS, applyFilter, effectiveFilter, filterOptions, type MarketFilter, type MarketSort } from "./market-filters.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import PixelIcon from "../PixelIcon.tsx";
-import type { TokenView } from "./types.ts";
+import type { MarketTerms, TokenView } from "./types.ts";
+import SellYours, { type SellItem } from "./SellYours.tsx";
 import "./token-market.css";
 import "./ledger.css";
 
@@ -19,7 +22,13 @@ export interface MarketBodyProps {
   onBuy(row: MarketRow): void;
   /** Starting filter; defaults to showing everything, cheapest first. */
   initialFilter?: MarketFilter;
+  /** The signed-in player's own NFTs; the "Yours" tab appears only when this is set. */
+  yours?: { items: readonly SellItem[]; terms: MarketTerms; onList(tokenId: string, priceYocto: string): void; onUnlist(tokenId: string): void };
+  /** Tab to open first. */
+  initialTab?: MarketTab | typeof YOURS_TAB;
 }
+
+export const YOURS_TAB = "yours";
 
 const EMPTY_TEXT: Record<MarketTab, string> = {
   all: "Nothing is for sale right now.",
@@ -28,9 +37,11 @@ const EMPTY_TEXT: Record<MarketTab, string> = {
 };
 
 /** Kept lives offered for sale, as a ledger in the life-record format. */
-export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy, initialFilter = DEFAULT_FILTER }: MarketBodyProps) {
+export function MarketBody({ rows, busy = false, error, notice, canConnect, onConnect, onBuy, initialFilter = DEFAULT_FILTER, yours, initialTab = "all" }: MarketBodyProps) {
   const headingId = useId();
-  const [tab, setTab] = useState<MarketTab>("all");
+  const [picked, setTab] = useState<MarketTab | typeof YOURS_TAB>(initialTab);
+  const showYours = yours !== undefined && picked === YOURS_TAB;
+  const tab: MarketTab = picked === YOURS_TAB ? "all" : picked;
   const [chosen, setFilter] = useState<MarketFilter>(initialFilter);
   const options = filterOptions(rows);
   const filter = effectiveFilter(chosen, options);
@@ -47,7 +58,7 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice.text} {notice.href && <a href={notice.href}>See its page</a>}</p>}
     </div>}
-    <div className="market-filters">
+    {!showYours && <div className="market-filters">
       <label>Career<select value={filter.group} onChange={event => setFilter({ ...filter, group: event.target.value as CareerGroup | "all" })}>
         <option value="all">All careers</option>
         {options.groups.map(item => <option key={item.id} value={item.id}>{item.label} ({item.count})</option>)}
@@ -59,11 +70,15 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       <label>Sort<select value={filter.sort} onChange={event => setFilter({ ...filter, sort: event.target.value as MarketSort })}>
         {SORT_OPTIONS.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
       </select></label>
-    </div>
+    </div>}
     <ul className="market-tabs" role="tablist" aria-label="Show">{marketTabs(rows).map(item => <li key={item.id}>
       <button className="market-tab" type="button" role="tab" aria-selected={tab === item.id} onClick={() => setTab(item.id)}>{item.label}<small>{item.count}</small></button>
-    </li>)}</ul>
-    {shown.length === 0
+    </li>)}{yours && <li>
+      <button className="market-tab" type="button" role="tab" aria-selected={showYours} onClick={() => setTab(YOURS_TAB)}>Yours<small>{yours.items.length}</small></button>
+    </li>}</ul>
+    {showYours && yours
+      ? <div className="ledger-body"><SellYours items={yours.items} terms={yours.terms} busy={busy} onList={yours.onList} onUnlist={yours.onUnlist} /></div>
+      : shown.length === 0
       ? <p className="market-empty">{filtered && rows.length > 0 ? "Nothing matches these filters." : EMPTY_TEXT[tab]}</p>
       : <ol className="ledger-rows market-ledger ledger-body">{shown.map(row => <li key={row.tokenId} className={`ledger-row market-row${row.isFigure ? " is-figure" : ""}`}>
           <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
@@ -93,8 +108,30 @@ async function loadRows(backend: ChainBackend): Promise<MarketRow[]> {
   return marketRows(listings, Object.fromEntries(tokens) as Record<string, TokenView | null>, backend.accountId);
 }
 
+const FALLBACK_TERMS: MarketTerms = { royaltySourcesBps: 500, royaltyTreasuryBps: 500 };
+
+interface Loaded { rows: MarketRow[]; items: SellItem[] | null; terms: MarketTerms }
+
+async function loadMarket(backend: ChainBackend): Promise<Loaded> {
+  const { accountId, contract } = backend;
+  const [rows, mine, listings, terms] = await Promise.all([
+    loadRows(backend),
+    accountId ? contract.tokensOf(accountId) : Promise.resolve(null),
+    accountId ? contract.listings() : Promise.resolve([]),
+    accountId ? contract.marketTerms() : Promise.resolve(FALLBACK_TERMS),
+  ]);
+  const items = mine && mine.map(token => {
+    const listed = listings.find(listing => listing.token_id === token.token_id);
+    return {
+      tokenId: token.token_id, title: tokenTitle(token.extra), href: chainHref({ kind: "token", tokenId: token.token_id }),
+      listedPriceText: listed ? `${formatNear(listed.price)} NEAR` : null, hasSources: token.extra.sources.length > 0,
+    };
+  });
+  return { rows, items, terms };
+}
+
 export default function Market({ backend }: { backend: ChainBackend }) {
-  const [rows, setRows] = useState<MarketRow[] | null>(null);
+  const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [reload, setReload] = useState(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -102,9 +139,9 @@ export default function Market({ backend }: { backend: ChainBackend }) {
 
   useEffect(() => {
     let cancelled = false;
-    void loadRows(backend)
-      .then(result => { if (!cancelled) setRows(result); })
-      .catch(cause => { if (!cancelled) { setRows([]); setError(errorText(cause, "The market could not be opened.")); } });
+    void loadMarket(backend)
+      .then(result => { if (!cancelled) setLoaded(result); })
+      .catch(cause => { if (!cancelled) { setLoaded({ rows: [], items: null, terms: FALLBACK_TERMS }); setError(errorText(cause, "The market could not be opened.")); } });
     return () => { cancelled = true; };
   }, [backend, reload]);
 
@@ -117,10 +154,15 @@ export default function Market({ backend }: { backend: ChainBackend }) {
     finally { setBusy(false); }
   }
 
-  if (rows === null) return <p className="chain-loading" role="status">Opening the market…</p>;
+  if (loaded === null) return <p className="chain-loading" role="status">Opening the market…</p>;
   return <MarketBody
-    rows={rows} busy={busy} error={error} notice={notice} canConnect={!backend.accountId}
+    rows={loaded.rows} busy={busy} error={error} notice={notice} canConnect={!backend.accountId}
     onConnect={() => { void run(backend.connect, { text: "Wallet connected." }, "The wallet could not connect."); }}
     onBuy={row => { void run(() => backend.contract.buy(row.tokenId, row.priceYocto), { text: `${row.title} is yours.`, href: row.href }, "The purchase did not go through."); }}
+    yours={loaded.items ? {
+      items: loaded.items, terms: loaded.terms,
+      onList: (tokenId, price) => { void run(() => backend.contract.list(tokenId, price), { text: "It's on the market." }, "It could not be put up for sale."); },
+      onUnlist: tokenId => { void run(() => backend.contract.unlist(tokenId), { text: "It's off the market." }, "It could not be taken off the market."); },
+    } : undefined}
   />;
 }
