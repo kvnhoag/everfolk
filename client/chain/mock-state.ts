@@ -1,4 +1,5 @@
-import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { categoryOfNpcAction, groupOfNpcAction as catalogGroupOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
+import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import type { CareerGroup, Category, FigureId } from "../../chain/ids.ts";
 import type { LifeView, Listing, MintPack, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
 
@@ -80,8 +81,7 @@ export const MAX_POOL = 1000;
 const FIGURE_CAREER: Record<FigureId, CareerGroup> = { alexander: "military", aristotle: "letters", euclid: "letters", cleomenes: "commerce" };
 
 export function groupOfNpcAction(actionId: string): CareerGroup | null {
-  const entry = Object.entries(NPC_ACTIONS).find(([, group]) => (group.actions as readonly string[]).includes(actionId));
-  return entry ? (entry[0] as CareerGroup) : null;
+  return catalogGroupOfNpcAction(actionId);
 }
 
 export function createState(options: MockOptions): MockState {
@@ -93,7 +93,7 @@ export function createState(options: MockOptions): MockState {
       dropRateBps: options.dropRateBps ?? 500,
       nobodyWeightBps: options.nobodyWeightBps ?? 5000,
       figureSupplyCap: options.figureSupplyCap ?? 25,
-      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION],
+      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION, DEMO_WORLD_VERSION],
       treasuryId: options.treasuryId ?? "treasury.testnet",
       sourceMintShareBps: 5000,
       royaltySourcesBps: 500,
@@ -131,7 +131,7 @@ export function seedToken(state: MockState, input: SeedTokenInput): string {
   const careerGroup = input.career_group ?? (figureId ? FIGURE_CAREER[figureId] : null);
   if (!careerGroup) throw new Error("An NPC token needs a career_group.");
   const actionId = input.action_id ?? (figureId ? FIGURE_ACTIONS[figureId][0] : NPC_ACTIONS[careerGroup].actions[0]);
-  const category = figureId ? null : NPC_ACTIONS[groupOfNpcAction(actionId) ?? careerGroup].category;
+  const category = figureId ? null : categoryOfNpcAction(actionId);
   return registerToken(state, {
     owner_id: input.owner_id, kind: input.kind, figure_id: figureId, category, rarity: input.rarity, affection: input.affection, action_id: actionId,
     extra: {

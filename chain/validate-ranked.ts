@@ -1,7 +1,7 @@
 import type { SaveFile } from "../src/types.ts";
 import { canonicalJson } from "../src/random.ts";
 import { commandsHash } from "./hash.ts";
-import { RARITY_POWER_BPS } from "./ids.ts";
+import { DEMO_WORLD_VERSION, RARITY_POWER_BPS } from "./ids.ts";
 import type { Draw, FigurePick, InfluenceCommand, LifeView } from "./types.ts";
 
 export type RankedCheck = { ok: true } | { ok: false; reason: string };
@@ -12,6 +12,7 @@ const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 
 /** The world version string the contract records for a save's world. */
 export function rankedWorldVersion(save: Pick<SaveFile, "worldId" | "worldVersion">): string {
+  if (save.worldVersion === DEMO_WORLD_VERSION || save.worldVersion.startsWith(`${save.worldId}-`)) return save.worldVersion;
   return `${save.worldId}-${save.worldVersion}`;
 }
 

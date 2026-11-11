@@ -15,4 +15,5 @@ export const CAREER_GROUP_JOBS: Record<CareerGroup, readonly string[]> = Object.
   ]),
   sky: Object.freeze(["astrologer", "sky-table-calculator"]),
   performance: Object.freeze(["performer"]),
+  farming: Object.freeze(["farmhand", "tenant-farmer", "grain-dealer"]),
 });

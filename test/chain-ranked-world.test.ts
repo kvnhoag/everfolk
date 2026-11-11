@@ -4,7 +4,8 @@ import test from "node:test";
 import base from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import keyDecisions from "../chain/catalog/key-decisions.json" with { type: "json" };
 import { FIGURES, INFLUENCES, KEY_DECISIONS, keyDecisionCategory } from "../chain/catalog/index.ts";
-import { CATEGORIES, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../chain/ids.ts";
+import { npcActionRecords } from "../chain/catalog/demo-deeds.ts";
+import { CATEGORIES, FIGURE_ACTIONS, FIGURE_IDS, RANKED_CATEGORIES, RANKED_WORLD_VERSION } from "../chain/ids.ts";
 import { buildContractCatalog, buildRankedWorld } from "../chain/ranked-world.ts";
 import { figureMediaUrl } from "../chain/figure-media.ts";
 import { rankedWorldVersion } from "../chain/validate-ranked.ts";
@@ -39,8 +40,8 @@ test("every key decision id is a choice event in the ranked world", () => {
   assert.ok(Object.isFrozen(KEY_DECISIONS));
 });
 
-test("every category has at least 3 key decisions", () => {
-  for (const category of CATEGORIES) {
+test("every ranked category has at least 3 key decisions", () => {
+  for (const category of RANKED_CATEGORIES) {
     const count = Object.values(keyDecisions).filter(value => value === category).length;
     assert.ok(count >= 3, `${category} has ${count} key decisions`);
   }
@@ -97,9 +98,7 @@ test("contract catalog lists every figure and NPC action", () => {
     assert.equal(png.readUInt32BE(20), 640);
     assert.deepEqual(figure.action_ids, [...FIGURE_ACTIONS[figure.figure_id as keyof typeof FIGURE_ACTIONS]]);
   }
-  const expected = Object.entries(NPC_ACTIONS).flatMap(([group, { category, actions }]) =>
-    actions.map(action_id => ({ action_id, career_group: group, category })));
-  assert.deepEqual(contractCatalog.npc_actions, expected);
+  assert.deepEqual(contractCatalog.npc_actions, npcActionRecords());
 });
 
 // Marketplace metadata needs a public absolute URL when the catalog is published.

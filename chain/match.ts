@@ -1,7 +1,9 @@
 import type { LifeState } from "../src/types.ts";
-import { CAREER_GROUP_JOBS, FIGURES } from "./catalog/index.ts";
+import { CAREER_GROUP_JOBS } from "./catalog/index.ts";
 import type { FigureRequirement } from "./catalog/index.ts";
+import { figuresForWorld } from "./catalog/demo-figures.ts";
 import type { CareerGroup, FigureId } from "./ids.ts";
+import { rankedWorldVersion } from "./validate-ranked.ts";
 
 const DEFAULT_CAREER_GROUP: CareerGroup = "performance";
 
@@ -47,6 +49,7 @@ function qualifies(state: LifeState, figure: FigureRequirement, held: ReadonlyMa
   if (figure.jobsAny?.length && !figure.jobsAny.some(job => held.has(job))) return false;
   if (!meetsAll(state.character?.skills ?? {}, figure.minSkills)) return false;
   if (!meetsAll(state.stats, figure.minStats)) return false;
+  if (figure.minReputation !== undefined && (state.demo?.reputation ?? 0) < figure.minReputation) return false;
   if (!figure.accomplishmentsAny?.length) return true;
   const maxAge = figure.maxAgeAtAccomplishment ?? Number.POSITIVE_INFINITY;
   return (state.accomplishments ?? []).some(record =>
@@ -54,7 +57,7 @@ function qualifies(state: LifeState, figure: FigureRequirement, held: ReadonlyMa
 }
 
 /** Figures whose requirements the finished life meets, in catalog order. */
-export function matchFigures(state: LifeState, figures: readonly FigureRequirement[] = FIGURES): FigureId[] {
+export function matchFigures(state: LifeState, figures: readonly FigureRequirement[] = figuresForWorld(rankedWorldVersion(state))): FigureId[] {
   const held = jobsHeld(state);
   return figures.filter(figure => qualifies(state, figure, held)).map(figure => figure.figure);
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import { parseRankedConfig, type RankedAvailability, type RankedConfig } from "./born-into-model.ts";
 import { resolveChainConfig, type ChainConfig } from "./config.ts";
 import { createLivesContract } from "./contract.ts";
@@ -93,7 +93,7 @@ async function createBackend(events: BackendEvents): Promise<BaseBackend> {
     const contract = await previewLedger;
     events.onAccount(PREVIEW_ACCOUNT, null);
     return {
-      mode: "preview", contract, worldVersion: RANKED_WORLD_VERSION, contractId: null,
+      mode: "preview", contract, worldVersion: DEMO_WORLD_VERSION, contractId: null,
       connect: async () => events.onAccount(PREVIEW_ACCOUNT, null), disconnect: async () => {}, nearBalance: async () => null,
     };
   }

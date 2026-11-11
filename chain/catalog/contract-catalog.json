@@ -101,6 +101,21 @@
       "action_id": "performance.lend-hand",
       "career_group": "performance",
       "category": "spirit"
+    },
+    {
+      "action_id": "farming.stock-granary",
+      "career_group": "farming",
+      "category": "harvest"
+    },
+    {
+      "action_id": "farming.share-seed",
+      "career_group": "farming",
+      "category": "harvest"
+    },
+    {
+      "action_id": "military.guard-road",
+      "career_group": "military",
+      "category": "road"
     }
   ]
 }

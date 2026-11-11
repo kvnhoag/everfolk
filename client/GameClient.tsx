@@ -22,12 +22,21 @@ import type { LifeView } from "../chain/types.ts";
 import type { WorldPack } from "../src/types.ts";
 
 
-/** Loads the ranked world only when a ranked life begins; it is large and free play never needs it. */
-async function loadRankedWorld(): Promise<WorldPack> {
-  const module = await import("../worlds/ranked/alexandria-ranked-1.json");
+/** Loads the world a ranked life was started in. New practice lives use the demo world. */
+async function loadRankedWorld(version: string): Promise<WorldPack> {
+  const ranked = version !== "alexandria-demo-1";
+  const module = ranked
+    ? await import("../worlds/ranked/alexandria-ranked-1.json")
+    : await import("../worlds/demo/alexandria-demo-1.json");
   const pack = (module.default ?? module) as unknown as WorldPack;
-  registerWorldPack(pack);
-  return pack;
+  const { ensureDemoDeeds } = await import("../chain/catalog/demo-deeds.ts");
+  const ready = ensureDemoDeeds(pack);
+  registerWorldPack(ready);
+  return ready;
+}
+
+async function loadDemoWorld(): Promise<WorldPack> {
+  return loadRankedWorld("alexandria-demo-1");
 }
 
 const SELECTION_KEY = "everfolk:selected-world:v1";
@@ -59,7 +68,7 @@ export default function GameClient() {
 
   async function beginRanked(life: LifeView, backend: ChainBackend) {
     const config = backend.mode === "live" ? await loadRankedConfig() : null;
-    const world = await loadRankedWorld();
+    const world = await loadRankedWorld(life.world_version);
     const session = await beginRankedSession({
       contract: backend.contract, contractId: config?.contract_id ?? PRACTICE_CONTRACT_ID,
       verifyUrl: "/api/ranked/verify", world,
@@ -76,9 +85,11 @@ export default function GameClient() {
       const builtin = getBuiltinWorld();
       let world = builtin;
       let restored = false;
+      let hadSelection = false;
       try {
         const saved = readEverfolkStorage(window.localStorage, SELECTION_KEY);
         if (saved) {
+          hadSelection = true;
           world = JSON.parse(saved) as PublishedWorld;
           selectWorldPack(world.pack);
           restored = true;
@@ -94,12 +105,10 @@ export default function GameClient() {
         }
         else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
-      if (!restored) {
+      if (!restored && !hadSelection) {
         setLoadingPhase("world");
-        try {
-          const catalog = await readApi<PublishedCatalog>("/api/worlds");
-          if (catalog.worlds[0]) world = selectFactoryWorld(await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(catalog.worlds[0].id)}`));
-        } catch { /* A saved or bundled world also works while the service is unavailable. */ }
+        const demo = await loadDemoWorld();
+        world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
       }
       if (cancelled) return;
       selectWorldPack(world.pack);

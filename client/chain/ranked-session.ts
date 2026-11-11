@@ -1,5 +1,5 @@
 import { commandsHash } from "../../chain/hash.ts";
-import { RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { contractWorldVersion } from "../../chain/worlds.ts";
 import { activationCommand, applyCommand } from "../../chain/validate-ranked.ts";
 import { ObligationTracker, rankedObligations, stepCommand, type Obligation } from "../../chain/ranked-rules.ts";
 import { createEngine } from "../../src/index.ts";
@@ -253,7 +253,7 @@ class Session implements RankedSession {
 
 /** Starts a ranked life: the contract chooses the seed and the figures that shape this world. */
 export async function startRankedSession(options: RankedSessionOptions): Promise<RankedSession> {
-  return beginRankedSession(options, await options.contract.startLife(RANKED_WORLD_VERSION));
+  return beginRankedSession(options, await options.contract.startLife(contractWorldVersion(options.world)));
 }
 
 /**
