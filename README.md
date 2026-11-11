@@ -49,6 +49,12 @@ Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_
 
 Without a configured verifier, choose **Practice ranked life** to try the same screens and simulation using a browser-only ledger. It sends no transactions to NEAR. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above.
 
+## Career and economy tree
+
+Open **Character → Skills** to follow the full career and economy tree, or **Wiki → All skills & requirements** to browse it without taking actions. The tree connects authored skills, occupations and accomplishment paths. Filter by branch, follow a foundation skill into later careers, and inspect the real age, skill, cash, resource and accepted-work requirements.
+
+Occupation cards explain yearly income before costs, harvest and storage mechanics, or army wages and rations. Training and career actions use the existing yearly activity budget. **Locked** paths have unmet requirements; **Unavailable** paths remain inspectable but are excluded by the current world. Existing worlds retain their own rules.
+
 ## Development
 
 ```sh
