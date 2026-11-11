@@ -36,7 +36,6 @@ const jarPixels = harbor[3].rects.filter(r => r.x >= 127 && r.x < 146 && r.y >= 
 const music = createBannerLayers('music');
 const festival = {
   musician: crop(music[3].rects.filter(r => r.x >= 193 && r.x + r.w <= 223 && r.y >= 58 && r.y + r.h <= 93)),
-  rug: crop(music[4].rects),
   garland: crop(music[3].rects.filter(r => r.x >= 133 && r.x < 218 && r.y >= 20 && r.y + r.h <= 28)),
 };
 const data = { version: 2, festival, shipFrames, actors, cargo: crop(jarPixels),

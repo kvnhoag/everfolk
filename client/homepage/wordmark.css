@@ -1,17 +1,12 @@
-/* The wordmark is authored square geometry. Font rules only size its original heading slot. */
-.ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96}
-.ef-pixel-wordmark{display:inline-block;width:3.14em;max-width:100%;height:.96em;vertical-align:top;overflow:visible;image-rendering:pixelated;filter:drop-shadow(0 2px 0 #101e2955) drop-shadow(0 0 12px #c1c59515)}
+/* Custom outlined metal lettering contrasts deliberately with the pixel environment. */
+.ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96;max-width:100%}
+.ef-classical-wordmark{display:inline-block;vertical-align:top;width:3.5em;max-width:100%;height:.98em;overflow:visible;filter:drop-shadow(0 4px 4px #101d2855)}
+.ef-logo-emblem{filter:drop-shadow(0 0 6px #edcf852b)}
 .ef-logo-reflection{mix-blend-mode:screen}
-.ef-logo-pixel-batch{opacity:1}
+.ef-home .ef-title-glint:nth-of-type(1){left:4%;top:43%}
+.ef-home .ef-title-glint:nth-of-type(2){left:64%;top:42%}
+.ef-home .ef-title-glint:nth-of-type(3){left:95%;top:87%}
 .ef-home[data-motion=paused] .ef-logo-reflection{opacity:0!important}
-@media(prefers-reduced-motion:reduce){.ef-logo-reflection{display:none}.ef-logo-pixel-batch{opacity:1!important}}
-@media(forced-colors:active){.ef-pixel-wordmark{filter:none;forced-color-adjust:none}}
-.ef-era-button{background:transparent;border:0;padding:4px 0;color:inherit;cursor:pointer;font-family:inherit;min-height:44px}
-.ef-era-button:hover{background:transparent;filter:drop-shadow(0 0 7px #e9c17944)}
-.ef-meteor-overlay{position:fixed;inset:0;z-index:1000;isolation:isolate;overflow:hidden}
-.ef-meteor-overlay>canvas{width:100%;height:100%;display:block;object-fit:cover;image-rendering:pixelated}
-.ef-cinematic-skip{position:absolute;right:max(30px,env(safe-area-inset-right));bottom:max(25px,env(safe-area-inset-bottom));background:#213844dd;border:1px solid #dbc08b88;color:#f8e6bd;min-height:44px;padding:10px 17px;font-size:12px;cursor:pointer}
-.ef-cinematic-caption{position:absolute;top:12%;inset-inline:20px;text-align:center;color:#f8e9c7;text-shadow:0 2px 8px #142934;font-size:13px;letter-spacing:3px;pointer-events:none}
-.ef-home .ef-coast{transform:translate(var(--impact-x,0px),var(--impact-y,0px))}
-.ef-home[data-era=modern] .ef-coast-aureole{filter:hue-rotate(-6deg)}
-@media(prefers-reduced-motion:reduce){.ef-home .ef-coast{transform:none!important}}
+@media(max-width:700px){.ef-classical-wordmark{filter:drop-shadow(0 3px 2px #101d2844)}}
+@media(prefers-reduced-motion:reduce){.ef-logo-reflection{display:none}.ef-logo-carving,.ef-logo-emblem{opacity:1!important;transform:none!important}}
+@media(forced-colors:active){.ef-classical-wordmark{filter:none;forced-color-adjust:none}}

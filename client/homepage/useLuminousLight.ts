@@ -13,13 +13,15 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
       const context = gsap.context(() => {
         media.add('(prefers-reduced-motion: no-preference)', () => {
           const animations: gsap.core.Animation[] = [];
-          // Interleaved pixel cohorts illuminate across every glyph, never one letter at a time.
-          animations.push(gsap.fromTo('.ef-logo-pixel-batch', { opacity: .28 }, {
-            opacity: 1, duration: 1.25, stagger: .055, ease: 'sine.out',
-          }));
+          // Reveal the complete inscription as one artifact, then light its engraved facets.
+          const entrance=gsap.timeline({defaults:{ease:'power2.out'}});
+          entrance.fromTo('.ef-logo-carving',{opacity:.4,y:5},{opacity:1,y:0,duration:2.2},0)
+            .fromTo('.ef-logo-emblem',{opacity:.55,y:-2},{opacity:1,y:0,duration:2.5},.15);
+          animations.push(entrance);
           animations.push(gsap.fromTo('.ef-logo-reflection', { x: 0, opacity: 0 }, {
-            x: 155, opacity: .45, duration: 6.8, ease: 'sine.inOut', repeat: -1, repeatDelay: 9,
+            x: 1070, opacity: .45, duration: 9, delay: 2.5, ease: 'sine.inOut', repeat: -1, repeatDelay: 13,
           }));
+          animations.push(gsap.to('.ef-logo-rays',{opacity:.075,duration:11,repeat:-1,yoyo:true,ease:'sine.inOut'}));
           animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
             '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
           }));

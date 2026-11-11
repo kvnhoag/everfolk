@@ -1,0 +1,17 @@
+{
+  "id": "everfolk-classical-wordmark",
+  "role": "Homepage identity and reusable transparent brand artwork",
+  "source": "Original hand-authored SVG outlines and emblem geometry in this repository",
+  "sourceFiles": ["client/homepage/classical-lettering.ts", "client/homepage/ClassicalWordmark.tsx"],
+  "export": "public/assets/brand/everfolk-wordmark.svg",
+  "regenerate": "node scripts/export-homepage-wordmark.mjs",
+  "nativeViewBox": [0, 0, 812, 220],
+  "transparency": true,
+  "filtering": "Browser vector rasterization; the coastal Canvas retains nearest-neighbor sampling",
+  "palette": {"highlight": "#fff0c5", "gold": "#eac886", "antiqueGold": "#bb8c48", "bronze": "#654526", "shadow": "#17272d"},
+  "animation": "Scoped GSAP entrance, clipped reflection, occasional glints and restrained rays; static export",
+  "reducedMotion": "Complete static artwork with no reflection or glints",
+  "collision": "None; decorative non-interactive identity",
+  "rights": "Original Everfolk artwork; follows the repository's ownership and license terms. No third-party logo geometry included.",
+  "status": "Implemented and visually validated in the application"
+}

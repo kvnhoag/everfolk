@@ -34,6 +34,9 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.match(html, /350 BCE/);
   assert.match(html, /Before Alexandria, there was Rhakotis/);
   assert.match(html, /<canvas/);
+  assert.match(html, /ef-classical-wordmark/);
+  assert.match(html, /THE ANCIENT WORLD/);
+  assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-pixel-wordmark/);
   for (const label of ['Begin your life','Choose a world','Past lives','Legacy gallery','History &amp; sources','Ranked life']) assert.ok(html.includes(label),label);
   assert.doesNotMatch(html, /medieval-europe|ottoman-constantinople|A STORY IN PROGRESS/);
   assert.deepEqual(life,before,'opening the menu cannot advance, reroll or replace the life');
@@ -52,6 +55,7 @@ test('homepage preserves pending birth, continuing and ended-life states', () =>
 });
 
 test('coastal sprites have fixed pivots, distinct animation frames and bounded integer pixel geometry', () => {
+  assert.equal('rug' in sprites.festival,false,'the stretched brown rug is no longer a homepage asset');
   for (const frames of [sprites.shipFrames,...sprites.actors.map(actor=>actor.frames)]) {
     assert.equal(frames.length,4);
     assert.equal(new Set(frames.map(frame=>`${frame.width}x${frame.height}`)).size,1,'frame boxes cannot shift an entity pivot');
