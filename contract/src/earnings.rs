@@ -46,7 +46,7 @@ impl Contract {
     }
 
     /// Records a newly minted token's sources and pays them their part of the mint fee. Returns what they were paid.
-    pub(crate) fn pay_sources(&mut self, child: &str, fee: u128, shares: &[Share]) -> u128 {
+    pub(crate) fn pay_sources(&mut self, child: &str, fee: u128, shares: &[Share], mint_share_bps: u16) -> u128 {
         self.sources.insert(child.to_string(), shares.to_vec());
         for share in shares {
             let mut stats = self.token_stats(share.token_id.clone());
@@ -56,7 +56,7 @@ impl Contract {
             children.push(child.to_string());
             self.children.insert(share.token_id.clone(), children);
         }
-        self.credit_sources(shares, bps_of(fee, self.params.source_mint_share_bps))
+        self.credit_sources(shares, bps_of(fee, mint_share_bps))
     }
 
     /// Splits `amount` by shares, credits each source token's current owner, and returns what was paid out.

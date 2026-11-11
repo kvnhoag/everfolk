@@ -36,7 +36,7 @@ export function useRankedAvailability(): RankedAvailability {
   const [availability, setAvailability] = useState<RankedAvailability>("checking");
   useEffect(() => {
     let cancelled = false;
-    void loadRankedConfig().then(config => { if (!cancelled) setAvailability(config ? "available" : "unavailable"); });
+    void loadRankedConfig().then(config => { if (!cancelled) setAvailability(config ? "available" : "practice"); });
     return () => { cancelled = true; };
   }, []);
   return availability;

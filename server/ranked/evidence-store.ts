@@ -8,7 +8,8 @@ export async function storeEvidence(db: ContentDatabase, hash: string, evidenceJ
     .bind(hash, evidenceJson, saveJson, now.toISOString()).run();
 }
 
-export async function readEvidence(db: ContentDatabase, hash: string): Promise<{ evidence: unknown; save: unknown } | null> {
+/** Keep the signed bytes intact: NFT reference_hash commits to evidence_json, not a JSON wrapper. */
+export async function readEvidence(db: ContentDatabase, hash: string): Promise<{ evidenceJson: string; saveJson: string } | null> {
   const row = await db.prepare("SELECT evidence_json, save_json FROM ranked_evidence WHERE hash = ?").bind(hash).first<EvidenceRow>();
-  return row ? { evidence: JSON.parse(row.evidence_json), save: JSON.parse(row.save_json) } : null;
+  return row ? { evidenceJson: row.evidence_json, saveJson: row.save_json } : null;
 }

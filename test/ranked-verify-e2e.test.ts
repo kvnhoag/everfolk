@@ -7,6 +7,7 @@ import { handleApi } from "../server/api.ts";
 import { defaultRankedDependencies } from "../server/ranked/default-verifier.ts";
 import type { Command, WorldPack } from "../src/types.ts";
 import { TestDatabase } from "./support/d1.ts";
+import { sha256Hex } from "../chain/hash.ts";
 
 const CONTRACT = "everfolk-lives.testnet";
 const SECRET = "07".repeat(32);
@@ -35,8 +36,17 @@ test("a full ranked life verifies through the API with the real ranked world", a
   assert.equal(body.evidence.seed, life!.seed);
   assert.equal(body.evidence.world_version, "alexandria-ranked-1");
   assert.equal(body.evidence.death_age, session.state.age);
+  const reference = await handleApi(new Request(body.evidence_url), env);
+  assert.equal(reference.status, 200);
+  const referenceBytes = await reference.text();
+  assert.equal(referenceBytes, body.evidence_json, "the public reference is the exact signed JSON");
+  assert.equal(await sha256Hex(referenceBytes), body.evidence_hash, "the fetched file matches the hash committed by NFT metadata");
+  const replay = await handleApi(new Request(body.save_url), env);
+  assert.equal(replay.status, 200);
+  assert.equal(await replay.text(), session.save());
   const minted = await contract.mintLife(session.life.life_id, body, body.evidence.career_group === "letters" ? "letters.teach" : `${body.evidence.career_group}.${{ military: "mentor", commerce: "credit", craft: "apprentice", sky: "omen", performance: "lift" }[body.evidence.career_group as string]}`);
   assert.ok(minted.token_id, "the mock contract accepts the verifier's evidence");
+  assert.equal((await contract.token(minted.token_id))!.extra.evidence_hash, await sha256Hex(referenceBytes));
 });
 
 test("the API refuses a ranked life that skipped its key-decision draws", async () => {

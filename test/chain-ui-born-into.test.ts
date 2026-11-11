@@ -67,3 +67,9 @@ test("ranked menu entry is disabled with a reason unless the service answered", 
   assert.equal(closed.disabled, true);
   assert.match(closed.note, /unavailable/u);
 });
+
+test("ranked menu offers the browser-only practice ledger when live service is unavailable", () => {
+  const practice = rankedEntryView("practice");
+  assert.equal(practice.disabled, false);
+  assert.match(practice.note, /Nothing is sent to NEAR/);
+});

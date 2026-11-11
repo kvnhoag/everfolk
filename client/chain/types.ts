@@ -27,6 +27,10 @@ export interface LivesContract {
   getLife(lifeId: string): Promise<LifeView | null>;
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  /** Completes an already committed mint without paying its fee again. */
+  retryMint(lifeId: string): Promise<MintResult>;
+  /** Immutable result keyed by life, independent of the token's current owner. */
+  mintResult(lifeId: string): Promise<MintResult | null>;
   setAction(tokenId: string, actionId: string): Promise<void>;
   withdraw(): Promise<void>;
   balanceOf(account: string): Promise<string>;

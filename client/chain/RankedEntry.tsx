@@ -4,6 +4,8 @@ import BornInto from "./BornInto.tsx";
 import { bornIntoLines, type OwnersByToken } from "./born-into-model.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import type { LivesContract } from "./types.ts";
+import MintRecovery from "./MintRecovery.tsx";
+import { rankedSaveKey } from "./ranked-session.ts";
 import "./ranked-entry.css";
 
 export interface RankedEntryProps {
@@ -33,7 +35,7 @@ export default function RankedEntry({ backend, onBegin }: RankedEntryProps) {
     let cancelled = false;
     void contract.activeLifeOf(accountId).then(async active => {
       if (cancelled || !active) return;
-      const found = await ownersOf(contract, active);
+      const found = active.status === "minting" ? {} : await ownersOf(contract, active);
       if (!cancelled) { setLife(active); setOwners(found); setResumed(true); }
     }).catch(() => { /* Starting fresh still works; errors surface on the next action. */ });
     return () => { cancelled = true; };
@@ -58,6 +60,13 @@ export default function RankedEntry({ backend, onBegin }: RankedEntryProps) {
     setLife(null);
     setNotice("That life is closed. It can't be kept, and a new one opens after a short wait.");
   }, "That life could not be closed.");
+
+  const recover = () => run(async () => {
+    if (!life) return;
+    const completed = await contract.mintResult(life.life_id) ?? await contract.retryMint(life.life_id);
+    try { window.localStorage.removeItem(rankedSaveKey(life.life_id)); } catch { /* The confirmed mint remains accessible on its token page. */ }
+    window.location.hash = `token/${completed.token_id}`;
+  }, "The mint could not finish. Please try again.");
 
   function begin() {
     if (!life) return;
@@ -84,6 +93,8 @@ export default function RankedEntry({ backend, onBegin }: RankedEntryProps) {
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
-    {life && <BornInto lines={bornIntoLines(life.figure_picks, owners)} beginLabel={resumed ? "Continue this life" : "Begin this life"} busy={busy} onBegin={begin} onGiveUp={() => { void giveUp(); }} />}
+    {life?.status === "minting"
+      ? <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={() => { window.location.hash = ""; }} />
+      : life && <BornInto lines={bornIntoLines(life.figure_picks, owners)} beginLabel={resumed ? "Continue this life" : "Begin this life"} busy={busy} onBegin={begin} onGiveUp={() => { void giveUp(); }} />}
   </div>;
 }

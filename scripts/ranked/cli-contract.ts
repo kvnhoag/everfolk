@@ -55,6 +55,19 @@ export async function createFaucetAccount(accountId: string): Promise<void> {
 /** The subset of LivesContract a ranked session and minting need, acting as `accountId`. */
 export function createCliContract(contractId: string, accountId: string): LivesContract {
   const unsupported = (name: string) => () => Promise.reject(new Error(`${name} is not available in the CLI contract.`));
+  const mintResult = (lifeId: string) => viewMethod<MintResult | null>(contractId, "mint_result", { life_id: lifeId });
+  const retryMint = async (lifeId: string): Promise<MintResult> => {
+    const completed = await mintResult(lifeId);
+    if (completed) return completed;
+    try {
+      await callMethod(accountId, contractId, "retry_mint", { life_id: lifeId }, "0 NEAR", "200.0 Tgas");
+    } catch (error) {
+      if (!(error instanceof UnconfirmedTransactionError)) throw error;
+    }
+    const result = await mintResult(lifeId);
+    if (!result) throw new Error("The committed mint is not complete yet; retry it without another mint fee.");
+    return result;
+  };
   return {
     async startLife(worldVersion) {
       try {
@@ -80,20 +93,23 @@ export function createCliContract(contractId: string, accountId: string): LivesC
     getLife: lifeId => viewMethod<LifeView | null>(contractId, "get_life", { life_id: lifeId }),
     activeLifeOf: account => viewMethod<LifeView | null>(contractId, "active_life_of", { account_id: account }),
     async mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult> {
+      const life = await viewMethod<LifeView | null>(contractId, "get_life", { life_id: lifeId });
+      if (life?.status === "minting") return retryMint(lifeId);
+      const completed = await mintResult(lifeId);
+      if (completed) return completed;
       const { mint_fee: fee } = await viewMethod<{ mint_fee: string }>(contractId, "get_params", {});
-      const before = await viewMethod<{ token_id: string }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });
       try {
         await callMethod(accountId, contractId, "mint_life",
           { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, `${fee} yoctoNEAR`, "200.0 Tgas");
       } catch (error) {
         if (!(error instanceof UnconfirmedTransactionError)) throw error; // the token read below settles it
       }
-      const after = await viewMethod<{ token_id: string; metadata: { extra: string } }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });
-      const token = after.find(t => !before.some(b => b.token_id === t.token_id));
-      if (!token) throw new Error("mint_life succeeded but no new token was found.");
-      const extra = JSON.parse(token.metadata.extra) as Omit<MintResult, "token_id">;
-      return { token_id: token.token_id, kind: extra.kind, figure_id: extra.figure_id, rarity: extra.rarity, affection: extra.affection };
+      const result = await mintResult(lifeId);
+      if (!result) throw new Error("The mint is committed but its result is not available yet; retry without another mint fee.");
+      return result;
     },
+    retryMint,
+    mintResult,
     async setAction(tokenId, actionId) { await callMethod(accountId, contractId, "set_action", { token_id: tokenId, action_id: actionId }); },
     async withdraw() { await callMethod(accountId, contractId, "withdraw", {}); },
     balanceOf: async account => (await viewMethod<string>(contractId, "balance_of", { account_id: account })),

@@ -23,7 +23,7 @@ function assertLifeShape(life: LifeView): void {
   assert.deepEqual(Object.keys(life).sort(), LIFE_KEYS);
   assert.match(life.life_id, /^\d+$/);
   assert.match(life.seed, /^[0-9a-f]{64}$/);
-  assert.ok(["alive", "minted", "abandoned"].includes(life.status));
+  assert.ok(["alive", "minted", "abandoned", "minting"].includes(life.status));
   assert.equal(typeof life.started_at_ms, "number");
   for (const pick of life.figure_picks) {
     assert.deepEqual(Object.keys(pick).sort(), ["action_id", "figure_id", "rarity", "token_id"]);
@@ -287,7 +287,7 @@ test("gas-only life calls use the function-call key; payable and owner calls use
   assert.equal(byMethod.buy.deposit, "10000");
 });
 
-test("mint_life attaches the on-chain mint fee, 150+ Tgas and the signed evidence string", async () => {
+test("mint_life attaches the on-chain mint fee, 200+ Tgas and the signed evidence string", async () => {
   const recorder: Recorder = { calls: [], views: [] };
   const life = { life_id: "3", account_id: "player.testnet", seed: HASH_A, world_version: RANKED_WORLD_VERSION, status: "alive",
     figure_picks: [], draws: [], checkpoints: [], started_at_ms: 1 } satisfies LifeView;
@@ -301,12 +301,74 @@ test("mint_life attaches the on-chain mint fee, 150+ Tgas and the signed evidenc
   assert.equal(call.method, "mint_life");
   assert.deepEqual(call.args, { life_id: "3", evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: "letters.teach" });
   assert.equal(call.deposit, "1000000000000000000000000");
-  assert.ok(BigInt(call.gas) >= 150n * TGAS);
+  assert.ok(BigInt(call.gas) >= 200n * TGAS);
   assert.equal(call.access, "wallet");
 
   await assert.rejects(contract.mintLife("4", signed, "letters.teach"), /different life/);
   await assert.rejects(contract.mintLife("3", { ...signed, evidence_hash: HASH_B }, "letters.teach"), /hash/);
   assert.equal(recorder.calls.length, 1);
+});
+
+test("mintLife retries a committed mint without fetching or paying another mint fee", async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const life: LifeView = { life_id: "3", account_id: "player.testnet", seed: HASH_A, world_version: RANKED_WORLD_VERSION,
+    status: "minting", figure_picks: [], draws: [], checkpoints: [], started_at_ms: 1 };
+  const minted = { token_id: "8", kind: "npc", figure_id: null, rarity: 1, affection: 40 };
+  const contract = createLivesContract(fakeWallet(recorder, { retry_mint: minted }), cfg, {
+    fetch: fakeRpc(recorder, { get_life: life, mint_result: null }),
+  });
+  assert.deepEqual(await contract.mintLife("3", await signedEvidenceFor(life), "letters.teach"), minted);
+  assert.equal(recorder.calls.length, 1);
+  const [call] = recorder.calls;
+  assert.equal(call.method, "retry_mint");
+  assert.deepEqual(call.args, { life_id: "3" });
+  assert.equal(call.deposit, "0");
+  assert.ok(BigInt(call.gas) >= 200n * TGAS);
+  assert.equal(recorder.views.some(view => view.method === "get_params"), false);
+});
+
+test("mintLife recovers an already completed result directly without looking through the owner's tokens", async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const life: LifeView = { life_id: "3", account_id: "player.testnet", seed: HASH_A, world_version: RANKED_WORLD_VERSION,
+    status: "minted", figure_picks: [], draws: [], checkpoints: [], started_at_ms: 1 };
+  const minted = { token_id: "8", kind: "npc", figure_id: null, rarity: 1, affection: 40 };
+  const contract = createLivesContract(fakeWallet(recorder), cfg, {
+    fetch: fakeRpc(recorder, { get_life: life, mint_result: minted, nft_tokens_for_owner: [] }),
+  });
+  assert.deepEqual(await contract.mintLife("3", await signedEvidenceFor(life), "letters.teach"), minted);
+  assert.deepEqual(await contract.mintResult("3"), minted);
+  assert.deepEqual(recorder.calls, []);
+  assert.equal(recorder.views.some(view => view.method === "nft_tokens_for_owner" || view.method === "get_params"), false);
+});
+
+test("a lost mint resolver response is recovered through mint_result", async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const life: LifeView = { life_id: "3", account_id: "player.testnet", seed: HASH_A, world_version: RANKED_WORLD_VERSION,
+    status: "alive", figure_picks: [], draws: [], checkpoints: [], started_at_ms: 1 };
+  const minted = { token_id: "8", kind: "npc", figure_id: null, rarity: 1, affection: 40 };
+  const wallet = fakeWallet(recorder);
+  wallet.call = async call => { recorder.calls.push(call); throw new Error("RPC response lost"); };
+  const contract = createLivesContract(wallet, cfg, {
+    fetch: fakeRpc(recorder, { get_life: life, get_params: { mint_fee: ONE_NEAR.toString() }, mint_result: minted }),
+  });
+  assert.deepEqual(await contract.mintLife("3", await signedEvidenceFor(life), "letters.teach"), minted);
+  assert.equal(recorder.calls.length, 1);
+  assert.equal(recorder.calls[0].method, "mint_life");
+});
+
+test("retryMint recovers a lost retry response without another fee-bearing call", async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const minted = { token_id: "8", kind: "npc", figure_id: null, rarity: 1, affection: 40 };
+  let resultReads = 0;
+  const wallet = fakeWallet(recorder);
+  wallet.call = async call => { recorder.calls.push(call); throw new Error("Retry response lost"); };
+  const contract = createLivesContract(wallet, cfg, {
+    fetch: fakeRpc(recorder, { mint_result: () => ++resultReads === 1 ? null : minted }),
+  });
+  assert.deepEqual(await contract.retryMint("3"), minted);
+  assert.equal(recorder.calls.length, 1);
+  assert.equal(recorder.calls[0].method, "retry_mint");
+  assert.equal(recorder.calls[0].deposit, "0");
 });
 
 test("views decode JSON-RPC results into T0 shapes", async () => {

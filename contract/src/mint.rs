@@ -1,15 +1,43 @@
 use crate::random::{block_seed, roll, weighted_pick};
 use crate::shares::compute_shares;
 use crate::types::*;
-use crate::{Contract, ContractExt};
+use crate::{Contract, ContractExt, StorageKey};
 use near_contract_standards::non_fungible_token::metadata::TokenMetadata;
 use near_sdk::json_types::{Base64VecU8, U64};
-use near_sdk::{env, near, require, serde_json, AccountId, Gas, NearToken, Promise};
+use near_sdk::store::LookupMap;
+use near_sdk::{env, near, require, serde_json, AccountId, Gas, NearToken, Promise, PromiseOrValue};
 
 const NPC_RARITY_WEIGHTS: [u64; 5] = [6000, 2500, 1000, 400, 100];
 const FIGURE_RARITY_WEIGHTS: [u64; 5] = [0, 0, 7000, 2500, 500];
-/// Gas floor above the most expensive outcome branch, so an outcome can't be retried by starving it of gas.
-const MIN_MINT_GAS: Gas = Gas::from_tgas(150);
+/// Request validation/persistence plus the separate resolver receipt's fixed budget.
+const MIN_MINT_GAS: Gas = Gas::from_tgas(200);
+const FINALIZE_MINT_GAS: Gas = Gas::from_tgas(150);
+
+/// Kept in its own appended storage prefix, preserving the existing Contract layout.
+#[near(serializers = [borsh])]
+#[derive(Clone)]
+pub(crate) struct PendingMint {
+    pub(crate) evidence_json: String,
+    pub(crate) npc_action_id: String,
+    pub(crate) seed: [u8; 32],
+    pub(crate) fee: u128,
+    /// Optional recovery deposit pays storage only, never another mint fee or royalties.
+    pub(crate) extra_storage_deposit: u128,
+    pub(crate) storage_bytes: u64,
+    pub(crate) params: Params,
+    pub(crate) catalog: CatalogConfig,
+}
+
+#[near(serializers = [borsh])]
+#[derive(Clone)]
+pub(crate) enum MintRecord {
+    Pending(PendingMint),
+    Complete(MintResult),
+}
+
+pub(crate) fn mint_records() -> LookupMap<u64, MintRecord> {
+    LookupMap::new(StorageKey::MintRecords)
+}
 
 fn parse_signature(signature: &str) -> [u8; 64] {
     hex::decode(signature)
@@ -33,10 +61,11 @@ struct Outcome {
 
 #[near]
 impl Contract {
-    /// Mints a verified, finished ranked life. Randomness decides whether it becomes a figure or stays an NPC.
+    /// Commits a verified life's fee and random seed, then mints in a separate receipt.
+    /// A subsequent failing action in the caller's batch cannot observe or undo the mint outcome.
     #[payable]
-    pub fn mint_life(&mut self, life_id: U64, evidence_json: String, signature: String, npc_action_id: String) -> MintResult {
-        require!(env::prepaid_gas() >= MIN_MINT_GAS, "Attach at least 150 Tgas to mint a life");
+    pub fn mint_life(&mut self, life_id: U64, evidence_json: String, signature: String, npc_action_id: String) -> Promise {
+        require!(env::prepaid_gas() >= MIN_MINT_GAS, "Attach at least 200 Tgas to mint a life");
         let fee = self.params.mint_fee.0;
         let deposit = env::attached_deposit().as_yoctonear();
         require!(deposit >= fee, "Attach at least the mint fee");
@@ -46,31 +75,138 @@ impl Contract {
         let mut life = self.owned_alive_life(life_id.0);
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
 
+        // Do not charge this request for writes left cached by earlier setup/calls in a batch.
+        self.flush_mint_storage();
         let storage_before = env::storage_usage();
         let evidence_hash = env::sha256_array(evidence_json.as_bytes());
-        let outcome = self.roll_outcome(&block_seed(life_id.0, &evidence_hash), &evidence);
-        let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
         let owner = life.account_id.clone();
-        let token_id = self.mint_token(&owner, life_id.0, &evidence, &outcome, &npc_action_id, &shares, &evidence_hash);
-        let paid_to_sources = self.pay_sources(&token_id, fee, &shares);
-
-        life.status = LifeStatus::Minted;
+        let mut request = PendingMint {
+            evidence_json,
+            npc_action_id,
+            seed: block_seed(life_id.0, &evidence_hash),
+            fee,
+            extra_storage_deposit: 0,
+            storage_bytes: 0,
+            params: self.params.clone(),
+            catalog: self.catalog.clone(),
+        };
+        life.status = LifeStatus::Minting;
         self.lives.insert(life_id.0, life);
-        self.active_life.remove(&owner);
         self.lives.flush();
-        self.active_life.flush();
-        let locked = env::storage_usage().saturating_sub(storage_before) as u128 * env::storage_byte_cost().as_yoctonear();
-        require!(fee >= paid_to_sources + locked, "The mint fee does not cover this token's storage");
-        let treasury = self.treasury_id.clone();
-        self.credit(&treasury, fee - paid_to_sources - locked);
+        let mut records = mint_records();
+        records.insert(life_id.0, MintRecord::Pending(request.clone()));
+        records.flush();
+        request.storage_bytes = env::storage_usage().saturating_sub(storage_before);
+        require!(fee >= request.storage_bytes as u128 * env::storage_byte_cost().as_yoctonear(), "The mint fee does not cover this token's storage");
+        records.insert(life_id.0, MintRecord::Pending(request));
+        records.flush(); // Updating the fixed-width byte count adds no storage.
         if deposit > fee {
             Promise::new(owner).transfer(NearToken::from_yoctonear(deposit - fee)).detach();
         }
-        MintResult { token_id, kind: self.record_kind(&outcome), figure_id: outcome.figure, rarity: outcome.rarity, affection: outcome.affection }
+        Self::schedule_mint(life_id)
+    }
+
+    /// Retries an interrupted resolver without drawing again or charging another mint fee.
+    /// An optional deposit funds extra storage only; unused recovery funds are refunded.
+    #[payable]
+    pub fn retry_mint(&mut self, life_id: U64) -> PromiseOrValue<MintResult> {
+        require!(env::prepaid_gas() >= MIN_MINT_GAS, "Attach at least 200 Tgas to retry a mint");
+        let life = self.lives.get(&life_id.0).unwrap_or_else(|| env::panic_str("Life not found"));
+        require!(env::predecessor_account_id() == life.account_id, "Only the life's owner can do this");
+        let mut records = mint_records();
+        let record = records.get(&life_id.0).cloned().unwrap_or_else(|| env::panic_str("This life has no committed mint"));
+        let deposit = env::attached_deposit().as_yoctonear();
+        match record {
+            MintRecord::Complete(result) => {
+                if deposit > 0 {
+                    Promise::new(life.account_id.clone()).transfer(NearToken::from_yoctonear(deposit)).detach();
+                }
+                PromiseOrValue::Value(result)
+            }
+            MintRecord::Pending(mut request) => {
+                require!(life.status == LifeStatus::Minting, "This life is not awaiting its mint");
+                request.extra_storage_deposit = request.extra_storage_deposit.checked_add(deposit).unwrap_or_else(|| env::panic_str("Storage deposit overflow"));
+                records.insert(life_id.0, MintRecord::Pending(request));
+                records.flush();
+                PromiseOrValue::Promise(Self::schedule_mint(life_id))
+            }
+        }
+    }
+
+    /// Returns a landed mint directly, including when the original wallet response was lost.
+    pub fn mint_result(&self, life_id: U64) -> Option<MintResult> {
+        match mint_records().get(&life_id.0) {
+            Some(MintRecord::Complete(result)) => Some(result.clone()),
+            _ => None,
+        }
+    }
+
+    #[private]
+    pub fn finalize_mint(&mut self, life_id: U64) -> MintResult {
+        require!(env::predecessor_account_id() == env::current_account_id(), "Only the contract can finalize a mint");
+        let mut records = mint_records();
+        let request = match records.get(&life_id.0).cloned().unwrap_or_else(|| env::panic_str("This life has no committed mint")) {
+            MintRecord::Complete(result) => return result,
+            MintRecord::Pending(request) => request,
+        };
+        let mut life = self.lives.get(&life_id.0).cloned().unwrap_or_else(|| env::panic_str("Life not found"));
+        require!(life.status == LifeStatus::Minting, "This life is not awaiting its mint");
+        let evidence: Evidence = serde_json::from_str(&request.evidence_json).expect("validated evidence");
+        self.flush_mint_storage();
+        let storage_before = env::storage_usage();
+        let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog);
+        let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
+        let evidence_hash = env::sha256_array(request.evidence_json.as_bytes());
+        let token_id = self.mint_token(&life.account_id, life_id.0, &evidence, &outcome, &request.npc_action_id, &shares, &evidence_hash, &request.params, &request.catalog);
+        let paid_to_sources = self.pay_sources(&token_id, request.fee, &shares, request.params.source_mint_share_bps);
+        let result = MintResult { token_id, kind: self.record_kind(&outcome), figure_id: outcome.figure, rarity: outcome.rarity, affection: outcome.affection };
+        life.status = LifeStatus::Minted;
+        let owner = life.account_id.clone();
+        self.lives.insert(life_id.0, life);
+        self.active_life.remove(&owner);
+        records.insert(life_id.0, MintRecord::Complete(result.clone()));
+        let treasury = self.treasury_id.clone();
+        // Reserve the new balance row before measuring; its final u128 value is fixed-width.
+        if self.balances.get(&treasury).is_none() {
+            self.balances.insert(treasury.clone(), 0);
+        }
+        self.flush_mint_storage();
+        records.flush();
+        // Add this receipt's signed delta to the storage already reserved by the request.
+        // Replacing the large pending record releases bytes and is part of the same mint.
+        let bytes = (request.storage_bytes as i128 + env::storage_usage() as i128 - storage_before as i128).max(0) as u128;
+        let locked = bytes * env::storage_byte_cost().as_yoctonear();
+        let available = request.fee.checked_add(request.extra_storage_deposit).unwrap_or_else(|| env::panic_str("Storage deposit overflow"));
+        require!(available >= paid_to_sources + locked, "The mint fee does not cover this token's storage; retry with an extra storage deposit");
+        let ordinary_budget = request.fee - paid_to_sources;
+        self.credit(&treasury, ordinary_budget.saturating_sub(locked));
+        self.balances.flush();
+        let extra_used = locked.saturating_sub(ordinary_budget);
+        let extra_refund = request.extra_storage_deposit - extra_used;
+        if extra_refund > 0 {
+            Promise::new(owner).transfer(NearToken::from_yoctonear(extra_refund)).detach();
+        }
+        result
     }
 }
 
 impl Contract {
+    fn schedule_mint(life_id: U64) -> Promise {
+        Self::ext(env::current_account_id()).with_static_gas(FINALIZE_MINT_GAS).with_unused_gas_weight(0).finalize_mint(life_id)
+    }
+
+    /// Every collection a mint mutates must reach storage before its reserve is measured.
+    pub(crate) fn flush_mint_storage(&mut self) {
+        self.lives.flush();
+        self.active_life.flush();
+        self.records.flush();
+        self.npc_pools.flush();
+        self.figure_copies.flush();
+        self.balances.flush();
+        self.sources.flush();
+        self.children.flush();
+        self.stats.flush();
+    }
     fn assert_signed(&self, evidence_json: &str, signature: &str) {
         let signature = parse_signature(signature);
         let valid = self.verifier_keys.iter().any(|key| env::ed25519_verify(&signature, evidence_json.as_bytes(), key));
@@ -98,13 +234,14 @@ impl Contract {
         );
     }
 
-    fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence) -> Outcome {
+    fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig) -> Outcome {
         let figure = evidence
             .matched_figures
             .iter()
             .find(|figure| {
-                let (minted, cap) = self.supply(figure);
-                minted < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < self.params.drop_rate_bps as u64
+                let minted = self.figure_copies.get(*figure).map(|copies| copies.len() as u32).unwrap_or(0);
+                let cap = catalog.figures.iter().find(|item| &item.figure_id == *figure).map(|item| item.supply_cap).unwrap_or(0);
+                minted < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
             })
             .cloned();
         let weights = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
@@ -130,10 +267,12 @@ impl Contract {
         npc_action_id: &str,
         shares: &[crate::shares::Share],
         evidence_hash: &[u8; 32],
+        params: &Params,
+        catalog: &CatalogConfig,
     ) -> String {
-        let figure = outcome.figure.as_ref().and_then(|id| self.catalog.figures.iter().find(|f| &f.figure_id == id)).cloned();
+        let figure = outcome.figure.as_ref().and_then(|id| catalog.figures.iter().find(|f| &f.figure_id == id)).cloned();
         let action_id = figure.as_ref().map(|f| f.action_ids[0].clone()).unwrap_or_else(|| npc_action_id.to_string());
-        let category = self.catalog.npc_actions.iter().find(|a| a.action_id == npc_action_id).map(|a| a.category.clone());
+        let category = catalog.npc_actions.iter().find(|a| a.action_id == npc_action_id).map(|a| a.category.clone());
         let kind = self.record_kind(outcome);
         let record = TokenRecord {
             kind,
@@ -157,7 +296,7 @@ impl Contract {
             sources: shares.to_vec(),
             evidence_hash: hash_hex.clone(),
         };
-        let base_url = &self.params.evidence_base_url;
+        let base_url = &params.evidence_base_url;
         let metadata = TokenMetadata {
             title: Some(figure.as_ref().map(|f| f.title.clone()).unwrap_or_else(|| format!("A life of Alexandria #{life_id}"))),
             description: Some(format!("An Everfolk life lived to age {} ({} BCE – {} BCE).", evidence.death_age, -evidence.birth_year, -evidence.death_year)),
