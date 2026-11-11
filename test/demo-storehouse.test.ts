@@ -9,7 +9,7 @@ import type { WorldPack } from "../src/types.ts";
 import { demoEngine } from "./fixtures/demo/world.ts";
 import { householdView } from "../src/demo/household.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
-import { RESOURCE_IDS } from "../client/demo/resources.ts";
+import { RESOURCE_IDS, RESOURCES } from "../client/demo/resources.ts";
 import { mentionedResources, storehouseRows } from "../client/demo/storehouse-model.ts";
 
 const hooks = registerHooks({
@@ -21,6 +21,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
+const { ResourceGlyph } = await import("../client/demo/ResourceBar.tsx");
+const { default: PixelIcon } = await import("../client/PixelIcon.tsx");
 const { default: Storehouse } = await import("../client/demo/Storehouse.tsx");
 hooks.deregister();
 
@@ -119,4 +121,13 @@ test("last year stops at settlement and excludes a later trade at the same age",
   const afterTrade = { ...life, journal: [...life.journal, trade] };
   assert.ok(rows(afterTrade).some(row => row.lastYear.some(line => /harvest/i.test(line))));
   assert.ok(rows(afterTrade).every(row => !row.lastYear.includes(trade.text)));
+});
+
+
+test("the resource bar and economy controls share the inventory icon set", () => {
+  for (const id of RESOURCE_IDS) {
+    const glyph = renderToStaticMarkup(createElement(ResourceGlyph, { id: id === "drachmas" ? "cash" : id }));
+    const shared = renderToStaticMarkup(createElement(PixelIcon, { name: RESOURCES[id].icon, size: 14 }));
+    assert.ok(glyph.includes(shared), `${id} uses the shared icon`);
+  }
 });

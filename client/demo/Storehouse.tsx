@@ -32,8 +32,8 @@ function Row({ row }: { row: StorehouseRow }) {
 }
 
 export default function ResourceYearDetails({ rows }: { rows: StorehouseRow[] }) {
-  return <section aria-label="Yearly resource details" className="storehouse">
-    <h3>Coming year &amp; last year</h3>
+  return <section aria-label="Yearly resource details" className="aoe-drawer-section storehouse">
+    <h3>Yearly resource details</h3>
     <ul className="storehouse-list">{rows.map(row => <Row key={row.id} row={row} />)}</ul>
   </section>;
 }
