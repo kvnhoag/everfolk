@@ -13,6 +13,9 @@ export const DEMO_CONFIG: Omit<DemoDefinition, "availability"> = {
       road: { windowYears: { min: 50, max: 100 }, episodes: { min: 1, max: 3 }, durationYears: { min: 1, max: 3 }, level: "dangerous" },
     },
     roadPressureBps: 3000,
+    highFloodBps: 800,
+    warMinYears: 4,
+    episodeGapYears: 1,
   },
   household: {
     startingGrain: 600, storeCapacity: 1500, plots: 2,
