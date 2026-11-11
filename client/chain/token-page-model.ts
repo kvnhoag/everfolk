@@ -1,4 +1,6 @@
-import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
+import type { CareerGroup } from "../../chain/ids.ts";
+import { actionsForGroup } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import type { Listing, TokenExtra, TokenStats } from "../../chain/types.ts";
 import { formatYear } from "../../src/calendar.ts";
 import { actionName, actionOption, figureTitle, groupOfAction, GROUP_TITLE, rarityLabel, type ActionOption } from "./chain-copy.ts";
@@ -26,7 +28,7 @@ export function tokenActionMenu(extra: TokenExtra): (ActionOption & { selected: 
   const group = groupOfAction(extra.action_id);
   const ids: readonly string[] = extra.kind === "figure" && extra.figure_id
     ? FIGURE_ACTIONS[extra.figure_id]
-    : group ? NPC_ACTIONS[group].actions : [extra.action_id];
+    : group ? actionsForGroup(group) : [extra.action_id];
   return ids.map(id => ({ ...actionOption(id), selected: id === extra.action_id }));
 }
 
@@ -106,6 +108,15 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
   };
 }
 
+const EMBLEMS: Record<CareerGroup, string> = {
+  letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music", farming: "farming",
+};
+
+/** A skill icon standing for a career group, for people of the city who have no collectible art. */
+export function careerEmblem(group: string): string {
+  return Object.hasOwn(EMBLEMS, group) ? EMBLEMS[group as CareerGroup] : group;
+}
+
 export interface MarketRow {
   tokenId: string;
   href: string;
@@ -118,6 +129,25 @@ export interface MarketRow {
   priceText: string;
   priceYocto: string;
   canBuy: boolean;
+  /** 1–100; absent when the token could not be read. */
+  affection?: number;
+  /** Skill icon for people of the city; null for figures, which show their art. */
+  emblem?: string | null;
+}
+
+export type MarketTab = "all" | "figures" | "people";
+
+export function marketTabs(rows: readonly MarketRow[]): { id: MarketTab; label: string; count: number }[] {
+  const figures = rows.filter(row => row.isFigure).length;
+  return [
+    { id: "all", label: "All", count: rows.length },
+    { id: "figures", label: "Famous figures", count: figures },
+    { id: "people", label: "People of the city", count: rows.length - figures },
+  ];
+}
+
+export function filterMarket(rows: readonly MarketRow[], tab: MarketTab): MarketRow[] {
+  return rows.filter(row => tab === "all" || (tab === "figures") === row.isFigure);
 }
 
 export function marketRows(listings: readonly Listing[], tokens: Readonly<Record<string, TokenView | null>>, viewer: string | null): MarketRow[] {
@@ -135,6 +165,21 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
       priceText: `${formatNear(listing.price)} NEAR`,
       priceYocto: listing.price,
       canBuy: viewer !== null && viewer !== listing.seller_id,
+      ...(token ? { affection: token.extra.affection, emblem: token.extra.kind === "figure" ? null : careerEmblem(token.extra.career_group) } : {}),
+    };
+  });
+}
+
+export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
+
+/** The signed-in player's own kept lives. */
+export function keptRows(tokens: readonly (TokenView & { token_id: string })[]): KeptRow[] {
+  return tokens.map(token => {
+    const isFigure = token.extra.kind === "figure" && token.extra.figure_id !== null;
+    return {
+      tokenId: token.token_id, href: chainHref({ kind: "token", tokenId: token.token_id }), title: tokenTitle(token.extra), isFigure,
+      figureId: isFigure ? token.extra.figure_id : null, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
+      affection: token.extra.affection, emblem: isFigure ? null : careerEmblem(token.extra.career_group),
     };
   });
 }

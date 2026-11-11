@@ -47,7 +47,7 @@ async function loadSelector(cfg: ChainConfig): Promise<Loaded> {
   const selector = await setupWalletSelector({
     network: cfg.networkId,
     fallbackRpcUrls: [cfg.rpcUrl],
-    modules: [setupMyNearWallet({ walletUrl: "https://testnet.mynearwallet.com" }), setupMeteorWallet()],
+    modules: [setupMeteorWallet(), setupMyNearWallet({ walletUrl: "https://testnet.mynearwallet.com" })],
     createAccessKeyFor: access,
   });
   // The modal forwards its own contractId/methodNames to `wallet.signIn`, overriding `createAccessKeyFor`; pass both.
@@ -101,12 +101,23 @@ function waitForSignIn(selector: WalletSelector, modal: WalletSelectorModal): Pr
   });
 }
 
+/** wallet-selector remembers the chosen wallet under this key; its presence means a session can be restored. */
+export const REMEMBERED_WALLET_KEY = "near-wallet-selector:selectedWalletId";
+
 /** Connects to the wallet selector for `cfg`. Resolves already signed in when a previous session exists. */
 export async function createWalletSession(cfg: ChainConfig): Promise<WalletSession> {
   const { selector, modal } = await loadSelector(cfg);
+  const listeners = new Set<(hash: string, method: string) => void>();
   return {
     get accountId() {
       return activeAccount(selector);
+    },
+    get walletId() {
+      return selector.store.getState().selectedWalletId ?? null;
+    },
+    onTransaction(listener) {
+      listeners.add(listener);
+      return () => { listeners.delete(listener); };
     },
     async signIn() {
       if (activeAccount(selector)) return;
@@ -123,8 +134,10 @@ export async function createWalletSession(cfg: ChainConfig): Promise<WalletSessi
       const wallet = await selector.wallet();
       const action = actionCreators.functionCall(call.method, call.args, BigInt(call.gas), BigInt(call.deposit));
       try {
-        const outcome = await wallet.signAndSendTransaction({ signerId, receiverId: cfg.contractId, actions: [action] });
-        return readCallResult(await finalOutcome(outcome, cfg, signerId));
+        const outcome = await finalOutcome(await wallet.signAndSendTransaction({ signerId, receiverId: cfg.contractId, actions: [action] }), cfg, signerId);
+        const hash = transactionHash(outcome);
+        if (hash) for (const listener of listeners) listener(hash, call.method);
+        return readCallResult(outcome);
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         throw new Error(`${call.method} failed: ${contractErrorMessage(message)}`);

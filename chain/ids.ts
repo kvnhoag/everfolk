@@ -1,7 +1,9 @@
 /** Stable identifiers shared by the contract, verifier and client. Changing one breaks minted tokens. */
 export const FIGURE_IDS = ["alexander", "aristotle", "euclid", "cleomenes"] as const;
-export const CATEGORIES = ["education", "war", "money", "work", "fate", "spirit"] as const;
-export const CAREER_GROUPS = ["letters", "military", "commerce", "craft", "sky", "performance"] as const;
+export const RANKED_CATEGORIES = ["education", "war", "money", "work", "fate", "spirit"] as const;
+export const DEMO_CATEGORIES = ["harvest", "road"] as const;
+export const CATEGORIES = [...RANKED_CATEGORIES, ...DEMO_CATEGORIES] as const;
+export const CAREER_GROUPS = ["letters", "military", "commerce", "craft", "sky", "performance", "farming"] as const;
 
 export type FigureId = typeof FIGURE_IDS[number];
 export type Category = typeof CATEGORIES[number];
@@ -21,6 +23,7 @@ export const NPC_ACTIONS = {
   craft: { category: "work", actions: ["craft.apprentice", "craft.commission"] },
   sky: { category: "fate", actions: ["sky.omen", "sky.warn-year"] },
   performance: { category: "spirit", actions: ["performance.lift", "performance.lend-hand"] },
+  farming: { category: "harvest", actions: ["farming.stock-granary", "farming.share-seed"] },
 } as const satisfies Record<CareerGroup, { category: Category; actions: readonly string[] }>;
 
 export type FigureActionId = typeof FIGURE_ACTIONS[FigureId][number];
@@ -32,3 +35,9 @@ export const RARITY_POWER_BPS = [10000, 12500, 15000, 20000, 30000] as const;
 export const RARITY_LABELS = ["Common", "Uncommon", "Rare", "Epic", "Legendary"] as const;
 
 export const RANKED_WORLD_VERSION = "alexandria-ranked-1";
+/** Contract version for new ranked and free-play lives. The pack version field is this string. */
+export const DEMO_WORLD_VERSION = "alexandria-demo-2";
+export const LEGACY_DEMO_WORLD_VERSION = "alexandria-demo-1";
+export function isDemoVersion(version: string): boolean {
+  return version === DEMO_WORLD_VERSION || version === LEGACY_DEMO_WORLD_VERSION;
+}

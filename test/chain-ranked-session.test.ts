@@ -472,3 +472,34 @@ test("practice mode refuses a life that broke the ranked rules", async () => {
   for (let i = 0; i < 20_000 && state.phase !== "ended"; i++) state = state.phase === "choice" ? engine.choose(state, engine.getChoices(state)[0].id) : engine.advance(state);
   await assert.rejects(practiceVerifier(world, contract, CONTRACT)(life, JSON.parse(engine.save(state))), /not drawn on chain/);
 });
+
+test("a completed unminted save is recognized as ended when the chain still calls it alive", async () => {
+  const { rankedProgress } = await import("../client/chain/ranked-progress.ts");
+  const { session, storage } = await start();
+  await playUntil(session, () => false, 20000);
+  assert.equal(session.state.phase, "ended");
+  assert.equal(session.life.status, "alive");
+  const progress = await rankedProgress(session.life, storage, world);
+  assert.equal(progress.status, "ended");
+  assert.equal(progress.age, session.state.age);
+  const wrong = await rankedProgress({ ...session.life, seed: "0".repeat(64) }, storage, world);
+  assert.equal(wrong.status, "unavailable", "a save from a different deployment cannot masquerade as a finished life");
+});
+
+test("verifiable life history checks both evidence and choices before displaying them", async () => {
+  const { verifiedLifeChoices } = await import("../client/chain/life-choices.ts");
+  const { canonicalJson } = await import("../src/random.ts");
+  const { sha256Hex } = await import("../chain/hash.ts");
+  const { buildEvidence } = await import("../chain/evidence.ts");
+  const { session } = await start();
+  await playUntil(session, () => false, 20000);
+  const save = JSON.parse(session.save()) as SaveFile;
+  const evidence = await buildEvidence({ life: session.life, state: session.state, save, worldFingerprint: session.state.worldFingerprint });
+  const hash = await sha256Hex(canonicalJson(evidence));
+  const response = (data: unknown) => (async () => new Response(JSON.stringify(data))) as typeof fetch;
+  const rows = await verifiedLifeChoices(hash, response({ evidence, save }), world);
+  assert.ok(rows.some(row => row.type === "choice"));
+  assert.ok(rows.some(row => row.type === "ending"));
+  await assert.rejects(verifiedLifeChoices(hash, response({ evidence: { ...evidence, death_age: 999 }, save }), world), /on-chain evidence hash/);
+  await assert.rejects(verifiedLifeChoices(hash, response({ evidence, save: { ...save, commands: [] } }), world), /on-chain evidence hash/);
+});

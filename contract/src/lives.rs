@@ -70,6 +70,7 @@ impl Contract {
     /// Gives up a life in progress. It can never mint, and a cooldown applies before the next one.
     pub fn abandon_life(&mut self, life_id: U64) {
         let life = self.owned_alive_life(life_id.0);
+        self.close_mint_pack(life_id.0);
         self.lives.remove(&life_id.0);
         self.active_life.remove(&life.account_id);
         self.abandoned_at.insert(life.account_id, now_ms());
@@ -77,6 +78,7 @@ impl Contract {
 
     /// Picks which NPC token (if any) touches this key decision. Retrying the same step, category and hash returns the stored draw.
     pub fn draw_npc(&mut self, life_id: U64, step: u32, category: String, commands_hash: String) -> Draw {
+        require!(self.get_mint_pack(life_id).is_none(), "This life has ended; choose a mint card");
         require!(env::prepaid_gas() >= MIN_DRAW_GAS, "Attach at least 100 Tgas to draw");
         validate_hash(&commands_hash);
         require!(self.catalog.npc_actions.iter().any(|a| a.category == category), "Unknown category");
@@ -96,6 +98,7 @@ impl Contract {
 
     /// Records the hash of the command log so far, so the life cannot be rewound before this point.
     pub fn checkpoint(&mut self, life_id: U64, step: u32, commands_hash: String) {
+        require!(self.get_mint_pack(life_id).is_none(), "This life has ended; choose a mint card");
         validate_hash(&commands_hash);
         let mut life = self.owned_alive_life(life_id.0);
         assert_next_step(&life, step, &commands_hash);

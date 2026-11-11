@@ -1,4 +1,5 @@
-import { FIGURE_ACTIONS, NPC_ACTIONS } from "../../chain/ids.ts";
+import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS } from "../../chain/ids.ts";
 import type { SourceImpact, SourceShare } from "../../chain/types.ts";
 import { bpsOf, computeShares, splitAmount } from "./mock-math.ts";
 import { addToPool, groupOfNpcAction, type MockState } from "./mock-state.ts";
@@ -35,9 +36,8 @@ function creditSources(state: MockState, shares: readonly SourceShare[], amount:
 }
 
 /** Fixes the child's source shares, records the reverse index and splits the mint fee. Returns the shares. */
-export function payMintFee(state: MockState, child: string, impacts: readonly SourceImpact[]): SourceShare[] {
+export function payMintFee(state: MockState, child: string, impacts: readonly SourceImpact[], fee = state.params.mintFee): SourceShare[] {
   const shares = computeShares(impacts);
-  const fee = state.params.mintFee;
   state.sources.set(child, shares);
   for (const { token_id } of shares) {
     const stats = state.stats.get(token_id) ?? { lives_influenced: 0, earned: 0n };
@@ -65,7 +65,7 @@ export function setAction(state: MockState, account: string, tokenId: string, ac
     const group = groupOfNpcAction(token.action_id);
     if (!group || groupOfNpcAction(actionId) !== group) throw new Error("This action is not on this token's menu");
   }
-  const category = token.kind === "npc" ? NPC_ACTIONS[groupOfNpcAction(actionId) ?? "letters"].category : null;
+  const category = token.kind === "npc" ? categoryOfNpcAction(actionId) : null;
   const updated = { ...token, action_id: actionId, category, extra: { ...token.extra, action_id: actionId } };
   if (category && category !== token.category && token.category) {
     state.npcPools.set(token.category, (state.npcPools.get(token.category) ?? []).filter(id => id !== tokenId));

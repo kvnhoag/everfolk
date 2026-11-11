@@ -16,6 +16,7 @@ function visibleButtons(ref:RefObject<Record<string,HTMLButtonElement|null>>) {
 
 const SkillRiverMap = forwardRef<SkillRiverHandle, {model:SkillTreeModel; query:string; selectedId:string; detailOpen:boolean; age:number; detailId:string; onSelect:(id:string)=>void}>(function SkillRiverMap({model,query,selectedId,detailOpen,age,detailId,onSelect},ref) {
   const groups=useMemo(()=>skillRiverGroups(model),[model]);
+  const branchIndices=new Map(groups.flatMap((group,index)=>group.nodes.map(node=>[node.id,index%5] as const)));
   const [branch,setBranch]=useState('all');
   const [preview,setPreview]=useState<Preview|null>(null);
   const [geometry,setGeometry]=useState<Geometry>({width:0,height:0,boxes:{}});
@@ -120,31 +121,31 @@ const SkillRiverMap = forwardRef<SkillRiverHandle, {model:SkillTreeModel; query:
           {model.nodes.filter(node=>!model.edges.some(edge=>edge.to===node.id)&&geometry.boxes[node.id]).map(node=>{
             const p=geometry.boxes[node.id],x=p.x+p.width/2,y=p.y-5;
             const path=`M ${geometry.width/2} 42 L ${geometry.width/2} 64 L ${x} 64 L ${x} ${y}`;
-            return <g key={node.id} className="delta-root-flow"><path className="delta-river-bank" d={path}/><path className="delta-river-stream" d={path}/></g>;
+            return <g key={node.id} data-branch-index={branchIndices.get(node.id)} className="delta-root-flow"><path className="delta-river-bank" d={path}/><path className="delta-river-stream" d={path}/></g>;
           })}
           {model.edges.filter(edge=>isMainRiverEdge(edge,model)).map(edge=>{
             const from=geometry.boxes[edge.from],to=geometry.boxes[edge.to];
             if(!from || !to)return null;
             const active=exploring===edge.from||exploring===edge.to;
-            return <g key={`${edge.from}-${edge.to}`} data-from={edge.from} data-to={edge.to} className={`delta-link is-main${edge.met?' is-met':''}${active?' is-active':''}`}>
+            return <g key={`${edge.from}-${edge.to}`} data-branch-index={branchIndices.get(edge.to)} data-from={edge.from} data-to={edge.to} className={`delta-link is-main${edge.met?' is-met':''}${active?' is-active':''}`}>
               <path className="delta-river-stream" d={skillRiverPath(from,to,true)}/>
             </g>;
           })}
         </svg>
         <div className={`skill-delta-grid${activeBranch!=='all'?' is-filtered':''}`}>
           {groups.map((group,index)=><section data-branch-index={index%5} className={`skill-delta-channel${activeBranch===group.label || activeBranch==='all'&&index===0?' is-branch-active':''}`} key={group.label} aria-label={`${group.label} skill branch`}>
-            <header><span className="delta-branch-number">0{index+1}</span><h4>{group.label}</h4></header>
+            <header><span className="delta-branch-icon" aria-hidden="true"><SkillArtwork id={group.nodes[0]?.id ?? group.label}/></span><h4>{group.label}</h4></header>
             {group.stages.map((nodes,tier)=><div className="skill-delta-stage" data-stage={tier} key={tier}>{nodes.map(node=><div className="skill-delta-node-slot" key={node.id}>
               <button type="button" data-skill-id={node.id} ref={button=>{nodeRefs.current[node.id]=button;}}
-                className={`skill-tree-node is-${node.state}${detailOpen&&selectedId===node.id?' is-selected':''}${exploring&&related.has(node.id)?' is-related':''}${exploring&&!related.has(node.id)?' is-unrelated':''}${query&&matches(node)?' is-search-match':''}${query&&!matches(node)?' is-search-muted':''}`}
+                className={`skill-tree-node is-${node.state}${node.value<=node.min?' is-unlearned':''}${detailOpen&&selectedId===node.id?' is-selected':''}${exploring&&related.has(node.id)?' is-related':''}${exploring&&!related.has(node.id)?' is-unrelated':''}${query&&matches(node)?' is-search-match':''}${query&&!matches(node)?' is-search-muted':''}`}
                 aria-controls={detailId} aria-pressed={detailOpen&&selectedId===node.id} aria-describedby={preview?.id===node.id?`${id}-preview`:undefined}
-                aria-label={`${node.label}, ${skillNumber(node.value,node.max)} of ${node.max}, ${node.state}${node.requirements.length?`, requires ${node.requirements.map(item=>`${item.label} ${item.required}`).join(', ')}`:''}`}
+                aria-label={`${node.label}, ${skillNumber(node.value,node.max)} of ${node.max}, ${node.state}${node.availability==='unavailable' ? ', Unavailable' : ''}${node.requirements.length?`, requires ${node.requirements.map(item=>`${item.label} ${item.required}`).join(', ')}`:''}`}
                 onFocus={()=>showPreview(node.id)} onBlur={dismiss} onKeyDown={event=>navigate(event,node)}
                 onPointerEnter={event=>{if(event.pointerType!=='touch')showPreview(node.id);}} onPointerLeave={event=>{if(event.pointerType!=='touch')leave();}}
                 onPointerDown={event=>{touchPreview.current=event.pointerType==='touch'&&preview?.id!==node.id;}}
                 onClick={()=>{if(touchPreview.current){touchPreview.current=false;showPreview(node.id);}else{dismiss();onSelect(node.id);}}}>
                 <SkillArtwork id={node.id}/>
-                <span className="skill-delta-status" aria-hidden="true">{node.state==='locked'?'×':node.state==='mastered'?'★':node.state==='learning'?'•':'+'}</span>
+                <span className="skill-delta-status" aria-hidden="true">{node.state==='locked'?'×':node.state==='mastered'?'★':node.state==='learning'?'•':'+'}</span>{node.availability==='unavailable' && <span className="skill-unavailable-badge">Unavailable</span>}
               </button>
             </div>)}</div>)}
           </section>)}

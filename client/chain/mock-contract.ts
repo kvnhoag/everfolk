@@ -1,7 +1,9 @@
 import { sha256Hex } from "../../chain/hash.ts";
-import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS } from "../../chain/ids.ts";
+import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
 import type { Category, FigureId } from "../../chain/ids.ts";
-import type { Draw, Evidence, FigurePick, LifeView, MintResult } from "../../chain/types.ts";
+import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack } from "../../chain/types.ts";
+import { REROLL_FEE_YOCTO } from "./near-amount.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
 import {
@@ -91,7 +93,7 @@ function assertEvidence(life: LifeView, evidence: Evidence, npcActionId: string)
 async function rollOutcome(state: MockState, seed: string, evidence: Evidence) {
   let figure: FigureId | null = null;
   for (const candidate of evidence.matched_figures) {
-    const minted = state.figureCopies.get(candidate)?.length ?? 0;
+    const minted = (state.figureCopies.get(candidate)?.length ?? 0) + [...state.packs.values()].reduce((n, p) => n + p.view.cards.filter(c => c.figure_id === candidate).length, 0);
     if (minted < state.params.figureSupplyCap && (await roll(seed, `drop:${candidate}`)) % 10_000n < BigInt(state.params.dropRateBps)) {
       figure = candidate;
       break;
@@ -103,15 +105,16 @@ async function rollOutcome(state: MockState, seed: string, evidence: Evidence) {
   return { figure, rarity, affection };
 }
 
-async function mintLife(state: MockState, account: string, lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult> {
+async function mintLife(state: MockState, account: string, lifeId: string, signed: SignedEvidence, npcActionId: string, chosen?: MintCard, fee?: bigint): Promise<MintResult> {
   const evidence = parseEvidence(signed);
   const life = ownedAliveLife(state, account, lifeId);
   assertEvidence(life, evidence, npcActionId);
   const evidenceHash = await sha256Hex(signed.evidence_json);
-  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence);
+  if (state.packs.has(lifeId) && !chosen) throw new Error("Choose a card from the open mint pack");
+  const { figure, rarity, affection } = chosen ? { figure: chosen.figure_id, rarity: chosen.rarity, affection: chosen.affection } : await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence);
   const actionId = figure ? FIGURE_ACTIONS[figure][0] : npcActionId;
   const kind = figure ? "figure" : "npc";
-  const category = figure ? null : NPC_ACTIONS[evidence.career_group].category;
+  const category = figure ? null : categoryOfNpcAction(npcActionId);
   const tokenId = registerToken(state, {
     owner_id: life.account_id, kind, figure_id: figure, category, rarity, affection, action_id: actionId,
     extra: {
@@ -119,12 +122,17 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
       death_year: evidence.death_year, career_group: evidence.career_group, sources: [], evidence_hash: evidenceHash,
     },
   });
-  const shares = payMintFee(state, tokenId, evidence.sources);
+  const shares = payMintFee(state, tokenId, evidence.sources, fee);
   const token = state.tokens.get(tokenId);
   if (token) state.tokens.set(tokenId, { ...token, extra: { ...token.extra, sources: shares } });
   state.lives.set(lifeId, { ...life, status: "minted" });
   state.activeLife.delete(life.account_id);
   return { token_id: tokenId, kind, figure_id: figure, rarity, affection };
+}
+
+async function packCard(state: MockState, life: LifeView, hash: string, slot: number, rerolled: boolean, evidence: Evidence, action: string): Promise<MintCard> {
+  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}:${rerolled}`), evidence);
+  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, rerolled };
 }
 
 function bind(state: MockState, account: string): MockLivesContract {
@@ -139,6 +147,47 @@ function bind(state: MockState, account: string): MockLivesContract {
     as: other => bind(state, other),
     seedToken: input => seedToken(state, input),
 
+    async mintTerms() { return { mint_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
+    async mintPack(lifeId) { return copy(state.packs.get(lifeId)?.view ?? null); },
+    async openMintPack(lifeId, signed, action) {
+      const life = ownedAliveLife(state, account, lifeId);
+      if (state.packs.has(lifeId)) throw new Error("Resume your existing pack without paying again");
+      const evidence = parseEvidence(signed);
+      assertEvidence(life, evidence, action);
+      const evidenceHash = await sha256Hex(signed.evidence_json);
+      const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps };
+      const pack = { view, evidence, signed, action };
+      state.packs.set(lifeId, pack);
+      for (let slot = 0; slot < 3; slot++) view.cards.push(await packCard(state, life, evidenceHash, slot, false, evidence, action));
+      return copy(view);
+    },
+    async rerollMintSlot(lifeId, slot, fee) {
+      const life = ownedAliveLife(state, account, lifeId);
+      const pack = state.packs.get(lifeId);
+      if (!pack || !Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Unknown mint slot");
+      if (pack.view.cards[slot].rerolled) throw new Error("This slot has already been rerolled");
+      if (fee !== pack.view.reroll_fee) throw new Error("Attach exactly the quoted fee");
+      const old = pack.view.cards[slot];
+      pack.view.cards[slot] = { ...old, figure_id: null };
+      pack.view.cards[slot] = await packCard(state, life, pack.view.evidence_hash, slot, true, pack.evidence, pack.action);
+      pack.view.total_fee = (BigInt(pack.view.total_fee) + BigInt(fee)).toString();
+      return copy(pack.view);
+    },
+    async chooseMintSlot(lifeId, slot) {
+      ownedAliveLife(state, account, lifeId);
+      const pack = state.packs.get(lifeId);
+      if (!pack || !Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Unknown mint slot");
+      const result = await mintLife(state, account, lifeId, pack.signed, pack.action, pack.view.cards[slot], BigInt(pack.view.total_fee));
+      state.packs.delete(lifeId);
+      return result;
+    },
+    async figureCopies(id) {
+      return (state.figureCopies.get(id as FigureId) ?? []).map(token_id => {
+        const t = state.tokens.get(token_id)!;
+        return { token_id, action_id: t.action_id, rarity: t.rarity, affection: t.affection };
+      });
+    },
+    async figureSupply(id) { return [state.figureCopies.get(id as FigureId)?.length ?? 0, state.params.figureSupplyCap]; },
     async startLife(worldVersion) {
       if (!state.params.worldVersions.includes(worldVersion)) throw new Error("This world version is not open for ranked play");
       if (state.activeLife.has(account)) throw new Error("You already have a ranked life in progress");
@@ -160,11 +209,25 @@ function bind(state: MockState, account: string): MockLivesContract {
     },
     async abandonLife(lifeId) {
       const life = ownedAliveLife(state, account, lifeId);
+      const pack = state.packs.get(lifeId);
+      if (pack) {
+        // Account for a forfeited paid pack using the same split, without inventing an NFT.
+        const child = `closed:${lifeId}`;
+        payMintFee(state, child, pack.evidence.sources, BigInt(pack.view.total_fee));
+        for (const source of state.sources.get(child) ?? []) {
+          state.children.set(source.token_id, (state.children.get(source.token_id) ?? []).filter(id => id !== child));
+          const stats = state.stats.get(source.token_id);
+          if (stats) stats.lives_influenced--;
+        }
+        state.sources.delete(child);
+        state.packs.delete(lifeId);
+      }
       state.lives.delete(lifeId);
       state.activeLife.delete(life.account_id);
       state.abandonedAt.set(life.account_id, state.params.now());
     },
     async drawNpc(lifeId, step, category, commandsHash) {
+      if (state.packs.has(lifeId)) throw new Error("This life has ended; choose a mint card");
       assertCommandsHash(commandsHash);
       assertCategory(category);
       assertStep(step);
@@ -181,6 +244,7 @@ function bind(state: MockState, account: string): MockLivesContract {
       return copy(draw);
     },
     async checkpoint(lifeId, step, commandsHash) {
+      if (state.packs.has(lifeId)) throw new Error("This life has ended; choose a mint card");
       assertCommandsHash(commandsHash);
       assertStep(step);
       const life = ownedAliveLife(state, account, lifeId);

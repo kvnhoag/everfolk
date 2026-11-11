@@ -94,3 +94,7 @@ pnpm dev                         # http://localhost:5173
 - **With a wallet:** open the app, choose **Ranked life** and connect a testnet wallet.
 - **Without a wallet:** if the server has no verifier key, **Ranked life** runs on a *Practice ledger* in your browser: the same rules and screens, nothing sent to NEAR.
 - **The scripted story:** `scripts/ranked/demo-rehearsal.ts` plays the example life's story on testnet end to end (a copyist mints, Bob becomes Euclid, the copyist is paid, a third player is born into Euclid's school, a fourth buys Euclid). It needs four testnet accounts in `~/.near-credentials/testnet`; set `VERIFY_URL=http://localhost:5173/api/ranked/verify` to verify through your local server.
+
+## The grain demo
+
+Practice mode can start a life in `alexandria-demo-1` without a wallet. Farm or serve, then mint. A Farming NFT can stock a granary or share seed; a later practice life can draw that deed at a harvest shock. The same commands replayed with no draw are the comparison.

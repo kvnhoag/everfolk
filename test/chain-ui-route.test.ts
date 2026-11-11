@@ -5,6 +5,10 @@ import { chainHref, parseChainRoute } from "../client/chain/chain-route.ts";
 test("hash routes for the ranked screens", () => {
   assert.deepEqual(parseChainRoute("#ranked"), { kind: "ranked" });
   assert.deepEqual(parseChainRoute("#market"), { kind: "market" });
+  assert.deepEqual(parseChainRoute("#figures"), { kind: "figures" });
+  assert.deepEqual(parseChainRoute("#pack/14"), { kind: "pack", lifeId: "14" });
+  assert.equal(chainHref({ kind: "pack", lifeId: "14" }), "#pack/14");
+  assert.deepEqual(parseChainRoute("#mine"), { kind: "mine" });
   assert.deepEqual(parseChainRoute("#token/12"), { kind: "token", tokenId: "12" });
   assert.deepEqual(parseChainRoute("#token/0"), { kind: "token", tokenId: "0" });
 });

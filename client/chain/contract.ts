@@ -8,7 +8,7 @@ import {
 } from "./validate.ts";
 import {
   parseDraw, parseLife, parseListing, parseMintFee, parseMintResult, parseOptionalLife, parseStringList,
-  parseTokenStats, parseTokenView, parseYocto,
+  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parsePoolEntries, parseFigureSupply,
 } from "./wire.ts";
 
 const TGAS = 10n ** 12n;
@@ -21,6 +21,9 @@ export const CALL_GAS = {
   draw_npc: gas(100n),
   checkpoint: gas(30n),
   mint_life: gas(200n),
+  open_mint_pack: gas(250n),
+  reroll_mint_slot: gas(200n),
+  choose_mint_slot: gas(250n),
   retry_mint: gas(200n),
   set_action: gas(50n),
   withdraw: gas(30n),
@@ -37,6 +40,9 @@ const ONE_YOCTO = "1";
 const PAGE = 100;
 
 type Method = keyof typeof CALL_GAS;
+function assertSlot(slot: number) {
+  if (!Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Choose one of the three mint slots.");
+}
 
 function accessFor(method: Method, deposit: string): CallAccess {
   return deposit === "0" && (ACCESS_KEY_METHODS as readonly string[]).includes(method) ? "function-call-key" : "wallet";
@@ -150,6 +156,29 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       if (!actionId) throw new Error("An action id is required.");
       await call("set_action", { token_id: tokenId, action_id: actionId });
     },
+    async mintTerms() { return parseMintTerms(await view("mint_terms", {})); },
+    async mintPack(lifeId) {
+      assertLifeId(lifeId);
+      const value = await view("get_mint_pack", { life_id: lifeId });
+      return value === null ? null : parseMintPack(value);
+    },
+    async openMintPack(lifeId, signed, npcActionId) {
+      assertLifeId(lifeId);
+      await assertEvidenceFor(lifeId, signed);
+      if (!npcActionId) throw new Error("Choose your life's deed first.");
+      const terms = parseMintTerms(await view("mint_terms", {}));
+      return parseMintPack(await call("open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, terms.mint_fee));
+    },
+    async rerollMintSlot(lifeId, slot, feeYocto) {
+      assertLifeId(lifeId); assertSlot(slot); assertPrice(feeYocto);
+      return parseMintPack(await call("reroll_mint_slot", { life_id: lifeId, slot }, feeYocto));
+    },
+    async chooseMintSlot(lifeId, slot) {
+      assertLifeId(lifeId); assertSlot(slot);
+      return parseMintResult(await call("choose_mint_slot", { life_id: lifeId, slot }, ONE_YOCTO));
+    },
+    async figureCopies(figureId) { return parsePoolEntries(await view("figure_copies", { figure_id: figureId })); },
+    async figureSupply(figureId) { return parseFigureSupply(await view("figure_supply", { figure_id: figureId })); },
     async withdraw() {
       await call("withdraw", {});
     },

@@ -12,21 +12,27 @@ import { readEverfolkStorage } from "./brand-storage.ts";
 import LoadingScreen from "./LoadingScreen.tsx";
 import type { LoadingPhase } from "./LoadingScreen.tsx";
 import { keepFreePlayOnRankedStart } from "./ranked-return.ts";
-import ChainLayer from "./chain/ChainLayer.tsx";
+import ChainLayer, { useChainRoute } from "./chain/ChainLayer.tsx";
 import type { ChainBackend } from "./chain/chain-backend.ts";
-import { loadRankedConfig } from "./chain/chain-backend.ts";
+import Web3Navigation from "./chain/Web3Navigation.tsx";
+import { useChainBackend, loadRankedConfig } from "./chain/chain-backend.ts";
 import { beginRankedSession, type RankedSession } from "./chain/ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
 import type { LifeView } from "../chain/types.ts";
 import type { WorldPack } from "../src/types.ts";
+import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
+import { loadLifeWorld } from "./chain/life-world.ts";
 
 
-/** Loads the ranked world only when a ranked life begins; it is large and free play never needs it. */
-async function loadRankedWorld(): Promise<WorldPack> {
-  const module = await import("../worlds/ranked/alexandria-ranked-1.json");
-  const pack = (module.default ?? module) as unknown as WorldPack;
-  registerWorldPack(pack);
-  return pack;
+/** Loads the world a ranked life was started in. New free-play lives use the vocation expansion; ranked lives use their recorded pack. */
+async function loadRankedWorld(version: string): Promise<WorldPack> {
+  const ready = await loadLifeWorld(version);
+  registerWorldPack(ready);
+  return ready;
+}
+
+async function loadDemoWorld(): Promise<WorldPack> {
+  return loadRankedWorld(LIVES_WORLD_VERSION);
 }
 
 const SELECTION_KEY = "everfolk:selected-world:v1";
@@ -43,6 +49,8 @@ async function readApi<T>(path: string): Promise<T> {
 }
 
 export default function GameClient() {
+  const backend = useChainBackend();
+  const chainRoute = useChainRoute();
   const [active, setActive] = useState<{ world: PublishedWorld; key: number; fresh: boolean; previousLife?: LifeState } | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [worlds, setWorlds] = useState<WorldSummary[]>([]);
@@ -56,7 +64,7 @@ export default function GameClient() {
 
   async function beginRanked(life: LifeView, backend: ChainBackend) {
     const config = backend.mode === "live" ? await loadRankedConfig() : null;
-    const world = await loadRankedWorld();
+    const world = await loadRankedWorld(life.world_version);
     const session = await beginRankedSession({
       contract: backend.contract, contractId: config?.contract_id ?? PRACTICE_CONTRACT_ID,
       verifyUrl: "/api/ranked/verify", world,
@@ -73,9 +81,11 @@ export default function GameClient() {
       const builtin = getBuiltinWorld();
       let world = builtin;
       let restored = false;
+      let hadSelection = false;
       try {
         const saved = readEverfolkStorage(window.localStorage, SELECTION_KEY);
         if (saved) {
+          hadSelection = true;
           world = JSON.parse(saved) as PublishedWorld;
           selectWorldPack(world.pack);
           restored = true;
@@ -88,15 +98,14 @@ export default function GameClient() {
           } catch { /* Keep an existing selection when its save cannot be checked. */ }
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
+          if (!hasBegunLife && world.pack.version !== LIVES_WORLD_VERSION) { restored = false; hadSelection = false; }
         }
         else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; }
-      if (!restored) {
+      if (!restored && (!hadSelection || world.pack.version !== LIVES_WORLD_VERSION)) {
         setLoadingPhase("world");
-        try {
-          const catalog = await readApi<PublishedCatalog>("/api/worlds");
-          if (catalog.worlds[0]) world = selectFactoryWorld(await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(catalog.worlds[0].id)}`));
-        } catch { /* A saved or bundled world also works while the service is unavailable. */ }
+        const demo = await loadDemoWorld();
+        world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
       }
       if (cancelled) return;
       selectWorldPack(world.pack);
@@ -130,8 +139,12 @@ export default function GameClient() {
     setBusy(true);
     setError("");
     try {
-      let world = await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
-      if (fresh) world = selectFactoryWorld(world, { fresh: true });
+      const useDemo = fresh || id === "alexandria" || id === "alexandria-sample" || Boolean(active?.world.pack.demo);
+      const demo = useDemo ? await loadDemoWorld() : null;
+      let world: PublishedWorld = demo
+        ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
+        : await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
+      if (fresh && !demo) world = selectFactoryWorld(world, { fresh: true });
       else {
         const refreshed = selectFactoryWorld(world);
         if (refreshed !== world) {
@@ -167,12 +180,13 @@ export default function GameClient() {
 
   if (!active) return <LoadingScreen phase={loadingPhase} />;
   return <>
+    <div className="web3-home-bar" hidden={Boolean(chainRoute) || rankedSession?.state.phase === "ended"}><Web3Navigation backend={backend} onExplore={() => { setRankedSession(null); }} /></div>
     {rankedSession
-      ? <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy} ranked={{
+      ? <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} ranked={{
         initial: rankedSession.state, current: () => rankedSession.state,
         sync: next => rankedSession.sync(next), onSynced: () => setRankedRevision(value => value + 1),
       }} />
-      : <App key={active.key} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
+      : <App key={active.key} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}
@@ -180,6 +194,6 @@ export default function GameClient() {
         <div className="world-library">{worlds.map(world => <article key={world.id}><span className="eyebrow">{world.id === active.world.id ? "YOUR CURRENT WORLD" : "A WORLD TO EXPLORE"}</span><h3>{world.title}</h3><p>{displayProse(world.description)}</p><div className="world-route-tags">{world.routes.filter(route => route.enabled).map(route => <span key={route.id}>{route.title}</span>)}</div><button className="primary-button" disabled={busy} onClick={() => { void enterWorld(world.id, false); }}>Enter this world →</button></article>)}</div>
       </div>
     </dialog>
-    <ChainLayer rankedSession={rankedSession} onBeginRanked={beginRanked} onRankedClosed={() => setRankedSession(null)} />
+    <ChainLayer backend={backend} rankedSession={rankedSession} onBeginRanked={beginRanked} onRankedClosed={() => setRankedSession(null)} />
   </>;
 }

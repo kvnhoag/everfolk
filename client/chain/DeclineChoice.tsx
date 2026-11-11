@@ -11,8 +11,8 @@ export interface DeclineChoiceProps {
 export default function DeclineChoice({ cooldownMinutes, busy = false, error, onKeep, onClose, onBack }: DeclineChoiceProps) {
   return <section className="chain-card" aria-labelledby="decline-title">
     <h1 id="decline-title" tabIndex={-1}>Not this time</h1>
-    <p>This life stays yours. You can mint it later from <strong>Ranked life</strong> on the main menu, as long as you don't start another.</p>
-    <p>Closing it lets you begin a new ranked life after {cooldownMinutes} minutes. A closed life can never be minted.</p>
+    <p>This life stays yours. You can mint it later from <strong>My lives</strong> or <strong>Weave Mode</strong>, using the saved progress in this browser.</p>
+    <p>Closing it lets you begin a new Weave life after {cooldownMinutes} minutes. A closed life can never be minted.</p>
     {error && <p className="chain-error" role="alert">{error}</p>}
     <div className="chain-actions">
       <button className="chain-primary" type="button" disabled={busy} onClick={onKeep}>Keep it for later<span aria-hidden="true">→</span></button>

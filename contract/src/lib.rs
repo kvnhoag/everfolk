@@ -4,6 +4,7 @@ mod earnings;
 mod lives;
 mod market;
 mod mint;
+mod mint_pack;
 mod nft;
 mod random;
 mod shares;
@@ -79,7 +80,7 @@ impl Contract {
             treasury_id,
             verifier_keys: admin::parse_verifier_keys(&verifier_keys),
             params: Params {
-                mint_fee: NearToken::from_near(1).as_yoctonear().into(),
+                mint_fee: NearToken::from_millinear(1).as_yoctonear().into(),
                 drop_rate_bps: 500,
                 source_mint_share_bps: 5000,
                 royalty_sources_bps: 500,
@@ -126,3 +127,5 @@ mod tests_mint;
 mod tests_nft;
 #[cfg(test)]
 mod tests_market;
+#[cfg(test)]
+mod tests_demo_catalog;

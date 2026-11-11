@@ -1,5 +1,6 @@
 import type { Comparison, Condition, LifeState } from "./types.ts";
 import { hasSocialRole } from "./relationships.ts";
+import { matchesDemoCondition } from "./demo/effects.ts";
 
 function compare(left: number, op: Comparison, right: number): boolean {
   switch (op) {
@@ -15,6 +16,7 @@ function compare(left: number, op: Comparison, right: number): boolean {
 export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
   if (!condition) return true;
   switch (condition.type) {
+    case "vocation": return (state.vocations?.completed[condition.action] ?? 0) >= condition.count;
     case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
       state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);
@@ -52,6 +54,7 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
     case "all": return condition.conditions.every(child => matchesCondition(child, state));
     case "any": return condition.conditions.some(child => matchesCondition(child, state));
     case "not": return !matchesCondition(condition.condition, state);
+    case "demo": return matchesDemoCondition(state, condition.condition);
   }
 }
 

@@ -1,12 +1,15 @@
+import LifeChoices from "./LifeChoices.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState } from "react";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { parseNearInput } from "./near-amount.ts";
 import { tokenPageView, type TokenPageView } from "./token-page-model.ts";
+import StewardSettings from "../demo/StewardSettings.tsx";
 import type { TokenView } from "./types.ts";
 import "./token-market.css";
 
 export interface TokenPageBodyProps {
+  practice?: boolean;
   tokenId: string;
   view: TokenPageView;
   busy?: boolean;
@@ -61,7 +64,7 @@ function SaleBox({ view, busy, onList, onUnlist, onBuy }: Pick<TokenPageBodyProp
 }
 
 /** A kept life's page: who it is, what it does, the lives it touched, its earnings and its sale. */
-export function TokenPageBody({ tokenId, view, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy }: TokenPageBodyProps) {
+export function TokenPageBody({ tokenId, view, practice = false, busy = false, error, notice, canConnect, onConnect, onSetAction, onWithdraw, onList, onUnlist, onBuy }: TokenPageBodyProps) {
   const headingId = useId();
   return <div className="token-page">
     <section className={`chain-card token-hero${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
@@ -75,6 +78,7 @@ export function TokenPageBody({ tokenId, view, busy = false, error, notice, canC
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
+    {view.evidenceHref && <LifeChoices evidenceHref={view.evidenceHref} practice={practice} />}
     <section className="chain-card" aria-label="Lives touched">
       <h2>Lives touched</h2>
       <p className="token-reach">{view.reach}</p>
@@ -95,6 +99,7 @@ export function TokenPageBody({ tokenId, view, busy = false, error, notice, canC
       <h2>For sale</h2>
       <SaleBox view={view} busy={busy} onList={onList} onUnlist={onUnlist} onBuy={onBuy} />
     </section>
+    <StewardSettings owner={view.isOwner} />
     <section className="chain-card" aria-label="Who shaped this life">
       <h2>Who shaped this life</h2>
       {view.sources.length > 0
@@ -151,6 +156,7 @@ export default function TokenPage({ backend, tokenId }: { backend: ChainBackend;
   const { contract } = backend;
   const listing = loaded.view.listing;
   return <TokenPageBody
+    practice={backend.mode === "preview"}
     tokenId={tokenId} view={loaded.view} busy={busy} error={error} notice={notice}
     canConnect={!backend.accountId} onConnect={() => { void run(backend.connect, "Wallet connected.", "The wallet could not connect."); }}
     onSetAction={actionId => { void run(() => contract.setAction(tokenId, actionId), "Its deed has changed. New lives will feel it.", "The deed could not be changed."); }}

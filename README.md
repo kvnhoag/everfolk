@@ -66,4 +66,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and architecture, and [ROADMAP.
 
 The TypeScript simulation lives in `src/`, the React interface in `client/`, and the application/content service in `app/`, `server/`, `db/` and `worker/`. World packs, required research inputs and their citations are included.
 
-Original pixel/vector artwork, source geometry and editable native masters are retained with the project. These scenes are fictional illustrations, not archaeological reconstructions. Font copyright and SIL Open Font License notices remain under `public/fonts/`; the vendored Sites plugin retains its upstream license notice.
+Original pixel/vector artwork, source geometry and editable native masters are retained with the project. `artwork/history-live/` holds the character design references (Vietnamese), the pixel character creator used for figure NFT avatars, and the Alexander and Euclid collectible art; its reports are read-only references (see its `AGENTS.md`). These scenes are fictional illustrations, not archaeological reconstructions. Font copyright and SIL Open Font License notices remain under `public/fonts/`; the vendored Sites plugin retains its upstream license notice.
+
+## Grain and Service demo
+
+New free-play and practice lives use `alexandria-demo-1`. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.

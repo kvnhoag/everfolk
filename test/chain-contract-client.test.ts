@@ -182,8 +182,8 @@ test("mock mint credits source owners, stats and children", async () => {
   assert.ok(stored);
   const minted = await contract.mintLife(life.life_id, await signedEvidenceFor(stored), "letters.lend-books");
 
-  assert.equal(await contract.balanceOf("genesis.testnet"), (ONE_NEAR / 2n).toString(), "50% of the 1 NEAR fee to the only source");
-  assert.deepEqual(await contract.tokenStats(teacher), { lives_influenced: 1, earned: (ONE_NEAR / 2n).toString() });
+  assert.equal(await contract.balanceOf("genesis.testnet"), (ONE_NEAR / 2000n).toString(), "50% of the 0.001 NEAR fee to the only source");
+  assert.deepEqual(await contract.tokenStats(teacher), { lives_influenced: 1, earned: (ONE_NEAR / 2000n).toString() });
   assert.deepEqual(await contract.childrenOf(teacher), [minted.token_id]);
   await contract.as("genesis.testnet").withdraw();
   assert.equal(await contract.balanceOf("genesis.testnet"), "0");
@@ -459,4 +459,53 @@ test("chain config defaults to NEAR testnet over FastNEAR", () => {
   assert.equal(config.verifyUrl, "/api/ranked/verify");
   assert.equal(resolveChainConfig({}, { VITE_EVERFOLK_CONTRACT_ID: "x.testnet" }).contractId, "x.testnet");
   assert.throws(() => resolveChainConfig({ contractId: "Not An Account" }), /contract account/);
+});
+
+test("mint pack persists three choices, one paid reroll per slot, and splits the combined fee once", async () => {
+  const contract = createMockContract({ nobodyWeightBps: 0 });
+  const life = await contract.startLife(RANKED_WORLD_VERSION);
+  const signed = await signedEvidenceFor(life);
+  const terms = await contract.mintTerms();
+  assert.equal(terms.mint_fee, (ONE_NEAR / 1000n).toString());
+  assert.equal(terms.reroll_fee, (ONE_NEAR / 100n).toString());
+  const pack = await contract.openMintPack(life.life_id, signed, "letters.teach");
+  assert.equal(pack.cards.length, 3);
+  assert.deepEqual(await contract.mintPack(life.life_id), pack);
+  await assert.rejects(contract.openMintPack(life.life_id, signed, "letters.teach"), /existing pack/);
+  await assert.rejects(contract.mintLife(life.life_id, signed, "letters.teach"), /open mint pack/);
+  await assert.rejects(contract.as("stranger.testnet").chooseMintSlot(life.life_id, 0), /owner/);
+  await assert.rejects(contract.rerollMintSlot(life.life_id, 0, "1"), /quoted fee/);
+  const changed = await contract.rerollMintSlot(life.life_id, 0, terms.reroll_fee);
+  assert.deepEqual(changed.cards.slice(1), pack.cards.slice(1), "other slots do not change");
+  assert.equal(changed.cards[0].rerolled, true);
+  await assert.rejects(contract.rerollMintSlot(life.life_id, 0, terms.reroll_fee), /already been rerolled/);
+  assert.equal(changed.total_fee, (BigInt(terms.mint_fee) + BigInt(terms.reroll_fee)).toString());
+  assert.equal(await contract.balanceOf("genesis.testnet"), "0", "the pack fee is escrowed");
+  const result = await contract.chooseMintSlot(life.life_id, 0);
+  assert.equal(result.rarity, changed.cards[0].rarity);
+  assert.equal(result.affection, changed.cards[0].affection);
+  assert.equal(await contract.balanceOf("genesis.testnet"), (BigInt(changed.total_fee) / 2n).toString());
+  assert.equal(await contract.balanceOf("treasury.testnet"), (BigInt(changed.total_fee) / 2n).toString());
+  assert.equal(await contract.mintPack(life.life_id), null);
+  assert.equal((await contract.tokensOf(life.account_id)).length, 1);
+  await assert.rejects(contract.chooseMintSlot(life.life_id, 0), /no longer in progress/);
+});
+
+test("the real pack client quotes chain fees and requires wallet approval for every paid step", async () => {
+  const recorder: Recorder = { calls: [], views: [] };
+  const mock = createMockContract({ genesis: false });
+  const life = await mock.startLife(RANKED_WORLD_VERSION);
+  const signed = await signedEvidenceFor(life);
+  const pack = await mock.openMintPack(life.life_id, signed, "letters.teach");
+  const terms = await mock.mintTerms();
+  const minted = { token_id: "99", kind: "npc", figure_id: null, rarity: 2, affection: 60 };
+  const contract = createLivesContract(fakeWallet(recorder, { open_mint_pack: pack, reroll_mint_slot: pack, choose_mint_slot: minted }), cfg, { fetch: fakeRpc(recorder, { mint_terms: terms, get_mint_pack: pack }) });
+  assert.deepEqual(await contract.openMintPack(life.life_id, signed, "letters.teach"), pack);
+  await contract.rerollMintSlot(life.life_id, 2, terms.reroll_fee);
+  await contract.chooseMintSlot(life.life_id, 1);
+  assert.deepEqual(recorder.calls.map(c => c.deposit), [terms.mint_fee, terms.reroll_fee, "1"]);
+  for (const call of recorder.calls) { assert.equal(call.access, "wallet"); assert.ok(BigInt(call.gas) >= 150n * TGAS); }
+  await assert.rejects(contract.rerollMintSlot(life.life_id, 3, terms.reroll_fee), /three mint slots/);
+  await assert.rejects(contract.chooseMintSlot(life.life_id, -1), /three mint slots/);
+  assert.equal(recorder.calls.length, 3);
 });

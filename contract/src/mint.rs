@@ -53,10 +53,10 @@ fn affection(seed: &[u8; 32], evidence: &Evidence) -> u8 {
     (base + (bonds - 50) / 5).clamp(1, 100) as u8
 }
 
-struct Outcome {
-    figure: Option<String>,
-    rarity: u8,
-    affection: u8,
+pub(crate) struct Outcome {
+    pub(crate) figure: Option<String>,
+    pub(crate) rarity: u8,
+    pub(crate) affection: u8,
 }
 
 #[near]
@@ -65,6 +65,7 @@ impl Contract {
     /// A subsequent failing action in the caller's batch cannot observe or undo the mint outcome.
     #[payable]
     pub fn mint_life(&mut self, life_id: U64, evidence_json: String, signature: String, npc_action_id: String) -> Promise {
+        require!(self.get_mint_pack(life_id).is_none(), "Choose a card from the open mint pack");
         require!(env::prepaid_gas() >= MIN_MINT_GAS, "Attach at least 200 Tgas to mint a life");
         let fee = self.params.mint_fee.0;
         let deposit = env::attached_deposit().as_yoctonear();
@@ -97,7 +98,6 @@ impl Contract {
         records.insert(life_id.0, MintRecord::Pending(request.clone()));
         records.flush();
         request.storage_bytes = env::storage_usage().saturating_sub(storage_before);
-        require!(fee >= request.storage_bytes as u128 * env::storage_byte_cost().as_yoctonear(), "The mint fee does not cover this token's storage");
         records.insert(life_id.0, MintRecord::Pending(request));
         records.flush(); // Updating the fixed-width byte count adds no storage.
         if deposit > fee {
@@ -153,7 +153,6 @@ impl Contract {
         require!(life.status == LifeStatus::Minting, "This life is not awaiting its mint");
         let evidence: Evidence = serde_json::from_str(&request.evidence_json).expect("validated evidence");
         self.flush_mint_storage();
-        let storage_before = env::storage_usage();
         let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog);
         let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
         let evidence_hash = env::sha256_array(request.evidence_json.as_bytes());
@@ -172,17 +171,12 @@ impl Contract {
         }
         self.flush_mint_storage();
         records.flush();
-        // Add this receipt's signed delta to the storage already reserved by the request.
-        // Replacing the large pending record releases bytes and is part of the same mint.
-        let bytes = (request.storage_bytes as i128 + env::storage_usage() as i128 - storage_before as i128).max(0) as u128;
-        let locked = bytes * env::storage_byte_cost().as_yoctonear();
         let available = request.fee.checked_add(request.extra_storage_deposit).unwrap_or_else(|| env::panic_str("Storage deposit overflow"));
-        require!(available >= paid_to_sources + locked, "The mint fee does not cover this token's storage; retry with an extra storage deposit");
+        require!(available >= paid_to_sources, "The mint fee does not cover its source shares");
         let ordinary_budget = request.fee - paid_to_sources;
-        self.credit(&treasury, ordinary_budget.saturating_sub(locked));
+        self.credit(&treasury, ordinary_budget);
         self.balances.flush();
-        let extra_used = locked.saturating_sub(ordinary_budget);
-        let extra_refund = request.extra_storage_deposit - extra_used;
+        let extra_refund = request.extra_storage_deposit;
         if extra_refund > 0 {
             Promise::new(owner).transfer(NearToken::from_yoctonear(extra_refund)).detach();
         }
@@ -207,13 +201,13 @@ impl Contract {
         self.children.flush();
         self.stats.flush();
     }
-    fn assert_signed(&self, evidence_json: &str, signature: &str) {
+    pub(crate) fn assert_signed(&self, evidence_json: &str, signature: &str) {
         let signature = parse_signature(signature);
         let valid = self.verifier_keys.iter().any(|key| env::ed25519_verify(&signature, evidence_json.as_bytes(), key));
         require!(valid, "The life evidence signature is not valid");
     }
 
-    fn assert_evidence(&self, life_id: u64, life: &Life, evidence: &Evidence, npc_action_id: &str) {
+    pub(crate) fn assert_evidence(&self, life_id: u64, life: &Life, evidence: &Evidence, npc_action_id: &str) {
         require!(evidence.v == 1, "Unsupported evidence version");
         require!(
             evidence.life_id == life_id.to_string() && evidence.account_id == life.account_id,
@@ -234,14 +228,14 @@ impl Contract {
         );
     }
 
-    fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig) -> Outcome {
+    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig) -> Outcome {
         let figure = evidence
             .matched_figures
             .iter()
             .find(|figure| {
                 let minted = self.figure_copies.get(*figure).map(|copies| copies.len() as u32).unwrap_or(0);
                 let cap = catalog.figures.iter().find(|item| &item.figure_id == *figure).map(|item| item.supply_cap).unwrap_or(0);
-                minted < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
+                minted + self.pack_reserved(figure) < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
             })
             .cloned();
         let weights = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
@@ -258,7 +252,7 @@ impl Contract {
     }
 
     #[allow(clippy::too_many_arguments)]
-    fn mint_token(
+    pub(crate) fn mint_token(
         &mut self,
         owner: &AccountId,
         life_id: u64,

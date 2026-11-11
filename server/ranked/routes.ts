@@ -1,4 +1,4 @@
-import { RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import type { SaveFile } from "../../src/types.ts";
 import type { ContentDatabase } from "../store.ts";
 import { readEvidence, storeEvidence } from "./evidence-store.ts";
@@ -130,7 +130,7 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
       if (request.method !== "GET") return json({ error: "Method not allowed." }, 405);
       const { secret, contractId, rpcUrl } = configured(env);
       const publicKey = deps.verifier ? (await deps.verifier(env)).publicKey : (await createEvidenceSigner(secret)).publicKey;
-      return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: RANKED_WORLD_VERSION, verifier_public_key: publicKey });
+      return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: DEMO_WORLD_VERSION, verifier_public_key: publicKey });
     }
     if (path === "/api/ranked/verify") {
       if (request.method !== "POST") return json({ error: "Method not allowed." }, 405);

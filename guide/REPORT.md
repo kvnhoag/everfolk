@@ -94,5 +94,10 @@ Four famous figures can be minted: **Euclid**, **Aristotle**, **Cleomenes** and 
 | `client/chain/` | Wallet, contract client, ranked session, ranked screens, practice ledger |
 | `src/influence.ts` | The additive engine command that applies influences |
 | `scripts/ranked/` | Testnet deploy, smoke run, genesis seeding, demo rehearsal |
+| `artwork/history-live/` | Character design references and figure art |
 
 How to play: [TUTORIAL.md](TUTORIAL.md).
+
+## Grain and Service
+
+The demo world `alexandria-demo-1` adds a Farming career group and two draw categories, `harvest` and `road`. Deeds `farming.stock-granary`, `farming.share-seed` and `military.guard-road` are drawn only in the demo world, so an `alexandria-ranked-1` life never meets them. Figure standards are per world: the demo Alexander is a soldier with convoy distinction by 32, and Cleomenes is a grain dealer. The ranked world's standards are unchanged. Practice mode can play the loop without a wallet.

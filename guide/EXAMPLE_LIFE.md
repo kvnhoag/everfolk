@@ -75,3 +75,7 @@ Then the new Euclid was listed for 2 NEAR and bought by a fourth account. The in
 The new Euclid's owner keeps *Open a school*, or switches it to *Keep to the Museum*. Either way, every ranked life born from now on may be shaped by it, and when those lives are minted, this Euclid earns too.
 
 To replay this whole story yourself, see [Running the demo](TUTORIAL.md#running-the-demo).
+
+## A farming life
+
+A tenant farmer who does not meet the Cleomenes standard mints a Farming NFT, not a figure. Its owner chooses "Stock the granary" or "Share seed". A later life that draws the granary deed receives grain in the household store, and the owner earns a share of that mint fee.

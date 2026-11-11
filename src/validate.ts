@@ -1,3 +1,6 @@
+import type { VocationDefinition } from "./vocations/types.ts";
+import { validateVocations } from "./vocations/validate.ts";
+import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
 
 type DataObject = Record<string, unknown>;
@@ -123,7 +126,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations"], worldFields);
+  let demoGrainGain = false;
+  const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
   id(world.id, "world.id");
   string(world.version, "world.version", 100);
@@ -353,6 +358,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     visited.add(key);
   };
   skillIds.forEach(visitSkill);
+  if (Object.hasOwn(world, "vocations")) {
+    if (!world.economy || !character) fail("world.vocations", "requires economy and characters");
+    validateVocations(world.vocations, skillIds, fail);
+  }
+
   const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
   const jobIds = unique(jobs, "world.character.jobs");
   const legacy = Object.hasOwn(world, "legacy") ? object(world.legacy, "world.legacy", ["routes", "achievements"]) : undefined;
@@ -577,6 +587,17 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         object(rule, path, ["type", "condition"]);
         condition(rule.condition, `${path}.condition`, depth + 1);
         break;
+      case "vocation":
+        object(rule, path, ["type", "action", "count"]);
+        if (!world.vocations) fail(path, "requires vocation rules");
+        reference(rule.action, `${path}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions ?? {})), "vocation action");
+        integer(rule.count, `${path}.count`, 1, 10000);
+        break;
+      case "demo":
+        object(rule, path, ["type", "condition"]);
+        requireDemo(path);
+        validateDemoCondition(rule, path, fail);
+        break;
       default:
         fail(`${path}.type`, "unknown condition type");
     }
@@ -715,6 +736,18 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
             reference(effect.deathCause, `${location}.deathCause`, deathCauseIds, "death cause");
             if (!deathEndingIds.has(effect.ending as string)) fail(`${location}.ending`, "an explicit death cause requires a death ending");
           }
+          break;
+        case "vocation":
+          object(effect, location, ["type", "action"]);
+          if (!world.vocations) fail(location, "requires vocation rules");
+          reference(effect.action, `${location}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions)), "vocation action");
+          const vocationAction = (world.vocations as VocationDefinition).actions[effect.action as string];
+          if ((vocationAction.kind === "make" || vocationAction.kind === "work") && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
+          break;
+        case "demo":
+          object(effect, location, ["type", "effect"]);
+          requireDemo(location);
+          validateDemoEffect(effect, location, fail, demoGrainGain);
           break;
         default:
           fail(`${location}.type`, "unknown effect type");
@@ -871,6 +904,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const weights = outcomes.map((entry, j) => outcomeDefinition(entry, `${path}.outcomes[${j}]`, false, activity.category === "training"));
       aggregate(weights, `${path}.outcomes`);
       opportunityDefinition(activity, path, outcomes);
+      if (activity.usesYearlyActivity === false && world.vocations && outcomes.some(outcome => ((outcome as DataObject).effects as DataObject[]).some(effect => {
+        if (effect.type !== "vocation") return false;
+        const action = (world.vocations as VocationDefinition).actions[effect.action as string];
+        return action.kind === "make" || action.kind === "work";
+      }))) fail(path, "vocation work must consume the annual activity");
     });
     for (const [key, entry] of Object.entries(skills)) {
       const definition = entry as DataObject;
@@ -932,6 +970,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     });
   }
   const randomWeights: number[] = [];
+  const hasDemoCondition = (rule: unknown): boolean => {
+    if (rule === null || typeof rule !== "object") return false;
+    const data = rule as DataObject;
+    if (data.type === "demo") return true;
+    if (data.type === "not") return hasDemoCondition(data.condition);
+    return (data.type === "all" || data.type === "any") && Array.isArray(data.conditions) && data.conditions.some(hasDemoCondition);
+  };
   const exclusiveGroupAges = new Map<string, number>();
   const eventDefinition = (entry: unknown, path: string): void => {
     const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
@@ -972,7 +1017,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     }
     if (Object.hasOwn(event, "maxOccurrences")) {
       const count = integer(event.maxOccurrences, `${path}.maxOccurrences`, 1, Number.MAX_SAFE_INTEGER);
-      if (trigger.type !== "random" && count !== 1) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
+      // Demo worlds: a year-anchored decision gated by a demo condition (e.g. a fresh low flood) recurs once per episode.
+      const demoAnchor = Object.hasOwn(world, "demo") && trigger.type === "year" && hasDemoCondition(event.when);
+      if (trigger.type !== "random" && count !== 1 && !demoAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
     const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);
@@ -1006,7 +1053,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (entry.baseWeight !== 1 && entry.baseWeight !== 3 && entry.baseWeight !== 5) fail(`${path}.baseWeight`, "expected 1, 3 or 5");
       if (!Object.hasOwn(entry, "effects") && !Object.hasOwn(entry, "event")) fail(path, "an influence entry needs effects or an event");
       if (Object.hasOwn(entry, "effects")) {
+        demoGrainGain = true;
         effects(entry.effects, `${path}.effects`);
+        demoGrainGain = false;
         if ((entry.effects as DataObject[]).some(effect => effect.type === "loan")) fail(`${path}.effects`, "loan actions require an explicit player choice or activity");
       }
       if (!Object.hasOwn(entry, "event")) return;
@@ -1015,7 +1064,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (catalogEventIds.has(eventId)) fail(`${path}.event.id`, `duplicate event ID '${eventId}'`);
       catalogEventIds.add(eventId);
       if (Object.hasOwn(event, "exclusiveGroup")) fail(`${path}.event.exclusiveGroup`, "influence events cannot join exclusive groups");
+      // Influence events are deeds too: they may bring grain into the store.
+      demoGrainGain = true;
       eventDefinition(event, `${path}.event`);
+      demoGrainGain = false;
     });
   }
   aggregate(randomWeights, "world.events");
@@ -1160,5 +1212,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const condition = entry as DataObject;
       return condition.kind === "illness" && (condition.weight as number) > 0 && !Object.hasOwn(condition, "when");
     })) fail(path, "requires an unconditional positive-weight illness fallback");
+  }
+  if (Object.hasOwn(world, "demo")) {
+    const character = (world.character ?? {}) as DataObject;
+    const legacy = (world.legacy ?? {}) as DataObject;
+    const listIds = (list: unknown) => new Set(Array.isArray(list) ? list.map(item => (item as DataObject).id as string) : []);
+    validateDemoDefinition(world.demo, fail, { jobs: listIds(character.jobs), activities: listIds(character.activities),
+      skills: new Set(Object.keys((character.skills ?? {}) as DataObject)), achievements: listIds(legacy.achievements) });
+    if (!Object.hasOwn(world, "economy") || !Object.hasOwn(world, "character")) fail("world.demo", "requires an economy and characters");
   }
 }

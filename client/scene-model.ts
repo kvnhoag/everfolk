@@ -312,7 +312,7 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
     return [authored(makeContext(`ending-${life.age}-${life.endingId}`, "ending", visual("memorial"), cause?.title ?? ending?.title ?? "A life remembered.", cause?.text ?? ending?.text ?? sceneDefinitions.memorial.caption))];
   }
   const result: SceneContext[] = [];
-  const events = new Map(world.events.map(event => [event.id, event]));
+  const events = new Map([...world.events, ...(world.influences ?? []).flatMap(entry => entry.event ? [entry.event] : [])].map(event => [event.id, event]));
   const pending = life.phase === "choice" ? events.get(life.pendingEventId ?? "") : undefined;
   if (pending) result.push(makeContext(`pending-${life.age}-${pending.id}`, "pending", eventVisuals[pending.id] ?? defaultEventVisual(pending), pending.title, pending.text, pending));
 

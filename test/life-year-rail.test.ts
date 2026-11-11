@@ -19,15 +19,15 @@ hooks.deregister();
 
 function render(age: number, birthYear = -350) {
   const life = { age, year: yearAtAge(birthYear, age) } as LifeState;
-  return renderToStaticMarkup(createElement(LifeYearRail, { life, onOpenChronicle() {} }));
+  return renderToStaticMarkup(createElement(LifeYearRail, { life }));
 }
 
-test("the birth rail starts in the actual birth year and keeps future decades disabled", () => {
+test("the birth rail starts in the actual birth year and marks future decades without clickable controls", () => {
   const html = render(0);
   assert.match(html, /Birth 350 BCE · Age 0/);
   assert.match(html, /Current year 350 BCE, age 0/);
-  assert.match(html, /Open chronicle: age 0, 350 BCE/);
-  assert.equal((html.match(/ disabled=""/g) ?? []).length, 9);
+  assert.match(html, /Age 0, 350 BCE/);
+  assert.doesNotMatch(html, /<button|life-year-stop-mark|Open chronicle/);
   assert.equal((html.match(/aria-current="step"/g) ?? []).length, 1);
 });
 
@@ -35,22 +35,22 @@ test("a growing life exposes completed decades and tracks the exact current year
   const html = render(23);
   assert.match(html, /Birth 350 BCE · Age 23/);
   assert.match(html, /Current year 327 BCE, age 23/);
-  assert.match(html, /Open chronicle: age 20, 330 BCE/);
-  assert.match(html, /disabled="" aria-label="Age 30, 320 BCE, not yet lived"/);
-  assert.equal((html.match(/ disabled=""/g) ?? []).length, 7);
+  assert.match(html, /Age 20, 330 BCE/);
+  assert.match(html, /aria-label="Age 30, 320 BCE, not yet lived"/);
+  assert.doesNotMatch(html, /<button|life-year-stop-mark/);
 });
 
 test("BCE to CE lifetimes skip year zero and retain the correct birth year", () => {
   const html = render(23, -10);
   assert.match(html, /Birth 10 BCE · Age 23/);
   assert.match(html, /Current year 14 CE, age 23/);
-  assert.match(html, /Open chronicle: age 10, 1 CE/);
-  assert.match(html, /Open chronicle: age 20, 11 CE/);
+  assert.match(html, /Age 10, 1 CE/);
+  assert.match(html, /Age 20, 11 CE/);
   assert.doesNotMatch(html, /\b0 (?:BCE|CE)\b/);
 });
 
 test("lifetimes beyond ninety extend the rail to the next decade", () => {
   const html = render(94);
   assert.match(html, /Age 100, 250 BCE, not yet lived/);
-  assert.equal((html.match(/ disabled=""/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /<button/);
 });

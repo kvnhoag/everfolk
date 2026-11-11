@@ -1,5 +1,5 @@
 import { useId, useMemo } from "react";
-import type { LifeState, WorldPack } from "../src/types.ts";
+import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
 import { engineForLife } from "./session.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
@@ -8,11 +8,11 @@ import { focusActivity, focusStatus, yearlyDeclineNotes, YEARLY_FOCUSES } from "
 import type { YearlyFocusId } from "./yearly-focus.ts";
 import "./yearly-focus.css";
 
-export default function YearlyFocus({ life, world, focusId, onChange }: {
-  life: LifeState; world: WorldPack; focusId: YearlyFocusId; onChange: (focusId: YearlyFocusId) => void;
+export default function YearlyFocus({ life, world, focusId, activities: providedActivities, onChange }: {
+  life: LifeState; world: WorldPack; focusId: YearlyFocusId; activities?: readonly ActivityAvailability[]; onChange: (focusId: YearlyFocusId) => void;
 }) {
   const id = useId();
-  const activities = useMemo(() => engineForLife(life).getActivities(life), [life]);
+  const activities = useMemo(() => providedActivities ?? engineForLife(life).getActivities(life), [providedActivities, life]);
   const firstAge = Math.min(...YEARLY_FOCUSES.flatMap(focus => {
     const activity = focusActivity(world, focus.id);
     return activity ? [activity.minAge ?? 0] : [];

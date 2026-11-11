@@ -1,3 +1,4 @@
+import { vocationInventory } from "../src/vocations/view.ts";
 import { displayProse } from "./display-prose.ts";
 import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
@@ -7,11 +8,13 @@ import { getSkillImpact } from "./skill-impact.ts";
 import { engineForLife } from "./session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
-import SkillTree from "./SkillTree.tsx";
+import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "./character-panel-model.ts";
 import { careerOpeningNotes } from "./career-openings.ts";
+import { occupationBadge } from "./demo/screen.ts";
+import { UNAVAILABLE_REASON } from "../src/demo/types.ts";
 import { activityLoanOffer } from "./loan-access.ts";
 import { resolvePartner } from "../src/people.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
@@ -159,10 +162,11 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
   const visibleJobs = definition.jobs.filter(job => {
     const jobActions = career.filter(activity => targetsJob(activity, job.id));
     const searchText = [job.title, job.description, ...Object.entries(job.requirements ?? {}).map(([id, value]) => `${definition.skills[id]?.label ?? id} ${value}`), ...jobActions.map(activity => activitySearchText(activity, world))].join(" ");
-    return matchesSearch(searchText, jobSearch) && matchesAvailability(jobActions.some(activity => activity.available), jobAvailability);
+    const visibleByScope = world.demo ? true : (job.id === character.jobId || life.journal.some(entry => entry.type === "activity" && entry.id === job.id) || jobActions.some(activity => activity.available));
+    return visibleByScope && matchesSearch(searchText, jobSearch) && matchesAvailability(jobActions.some(activity => activity.available), jobAvailability);
   });
   const otherCareer = career.filter(activity => !definition.jobs.some(job => targetsJob(activity, job.id)));
-  const visibleOtherCareer = otherCareer.filter(activity => matchesSearch(activitySearchText(activity, world), jobSearch) && matchesAvailability(activity.available, jobAvailability));
+  const visibleOtherCareer = otherCareer.filter(activity => (world.demo || activity.available || character.lastActivityAges[activity.id] !== undefined) && matchesSearch(activitySearchText(activity, world), jobSearch) && matchesAvailability(activity.available, jobAvailability));
   const relationships = activities.filter(activity => activity.category === "relationship" && (!definition.proceduralPartners || activityPartnerIds(activity).every(id => visiblePeopleIds.has(id))) && (!definition.socialRelationships || !activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")) || character.relationshipStatus === "courting"));
   const hasBreakupAction = relationships.some(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "end-courtship")));
   const adults = knownPartners.filter(partner => life.age + partner.ageOffset >= 18);
@@ -222,14 +226,21 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
         <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
+        {life.vocations && <details className="character-background"><summary>Materials and handmade products</summary>
+          {Object.values(vocationInventory(life)).some(n => n > 0) ? <ul>{["linen", "flax"].filter(id => (vocationInventory(life)[id] ?? 0) > 0).map(id => <li key={id}>{id} · {vocationInventory(life)[id]}</li>)}{life.vocations.lots.filter(lot => lot.quantity > 0).map(lot => <li key={`${lot.item}-${lot.quality}`}>{lot.item.replaceAll("-", " ")} · {lot.quantity}{world.vocations?.materials[lot.item] ? "" : ` · grade ${lot.quality}`}</li>)}</ul> : <p>No materials or products yet. Buy materials or start a paid apprenticeship under Other work.</p>}
+          {life.vocations.project && <p>In progress: {world.vocations!.recipes[life.vocations.project.recipe].title} · {life.vocations.project.completedYears} of {world.vocations!.recipes[life.vocations.project.recipe].workYears} work years complete. Inputs and workshop fee are reserved.</p>}
+          <p>Making and study use this year's major activity. Product sales require a buyer with cash and remaining demand.</p>
+        </details>}
         <SearchControls id={`${instanceId}-career`} label="Find work" placeholder="Job, skill or activity" value={jobSearch} onChange={setJobSearch} filter={jobAvailability} onFilter={setJobAvailability} filterLabel="Availability" />
         <p className="character-result-count" role="status">{visibleJobs.length} of {definition.jobs.length} jobs · {visibleOtherCareer.length} of {otherCareer.length} work activities</p>
+        {world.demo && <div className="character-card-list" aria-label="Future paths">{world.demo.availability.futurePaths.map(path => <article className="character-detail-card" key={path.id}><h3>{path.title} <span className="character-status-tag">Unavailable</span></h3><p>{path.description}</p>{path.prerequisites && <p>{path.prerequisites}</p>}<p>{UNAVAILABLE_REASON}</p></article>)}</div>}
         <div className="character-card-list character-job-list">{visibleJobs.map(job => {
           const jobActions = career.filter(activity => targetsJob(activity, job.id));
           const available = jobActions.some(activity => activity.available);
           return <details className={`character-detail-card character-job-card${job.id === character.jobId ? " current-character-card" : ""}`} key={job.id} open={job.id === character.jobId}>
-          <summary><span className="character-job-summary-copy"><span className="character-job-title">{job.title}</span><span className="character-job-summary-requirements">Age {job.minAge}+{Object.entries(job.requirements ?? {}).map(([id, value]) => <span key={id}> · {definition.skills[id]?.label ?? id} {value}</span>)}</span></span><span className={`character-status-tag${available ? " occupation-available" : ""}`}>{job.id === character.jobId ? "Current job" : available ? "Available" : "Unavailable"}</span></summary>
+          <summary><span className="character-job-summary-copy"><span className="character-job-title">{job.title}</span><span className="character-job-summary-requirements">Age {job.minAge}+{Object.entries(job.requirements ?? {}).map(([id, value]) => <span key={id}> · {definition.skills[id]?.label ?? id} {value}</span>)}</span></span><span className={`character-status-tag${available ? " occupation-available" : ""}`}>{occupationBadge(world, job.id, job.id === character.jobId, available).label}</span></summary>
           <div className="character-job-details">
+          {occupationBadge(world, job.id, job.id === character.jobId, available).detail && <p>{UNAVAILABLE_REASON}</p>}
           <p>{displayProse(job.description)}</p>
           <ul className="character-requirements" aria-label={`${job.title} requirements`}>
             <li className={life.age >= job.minAge ? "requirement-met" : ""}>Age {job.minAge}+ <span>{life.age >= job.minAge ? "met" : `you are ${life.age}`}</span></li>
@@ -245,7 +256,7 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        <SkillTree activities={activities} {...props} />
+        <CompactSkillPanel activities={activities} {...props} /><ActivityList activities={activities.filter(activity => activity.category === "training" && activity.available)} {...props} />
       </div>
       {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
         <WealthPanel activities={activities} {...props} />

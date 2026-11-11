@@ -1,7 +1,8 @@
 import { figureMediaUrl } from "./figure-media.ts";
 import type { WorldPack } from "../src/types.ts";
+import { npcActionRecords } from "./catalog/demo-deeds.ts";
 import { FIGURES, INFLUENCES } from "./catalog/index.ts";
-import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "./ids.ts";
+import { FIGURE_ACTIONS, FIGURE_IDS, RANKED_WORLD_VERSION } from "./ids.ts";
 
 /** `${RANKED_WORLD_ID}-${RANKED_WORLD_PACK_VERSION}` is the version string the contract records for ranked lives. */
 export const RANKED_WORLD_ID = "alexandria";
@@ -29,7 +30,6 @@ export function buildContractCatalog(mediaBaseUrl?: string): ContractCatalog {
       if (!figure) throw new Error(`Figure ${id} has no requirement in the catalog.`);
       return { figure_id: id, title: figure.title, media: figureMediaUrl(id, mediaBaseUrl), supply_cap: figure.supplyCap, action_ids: [...FIGURE_ACTIONS[id]] };
     }),
-    npc_actions: Object.entries(NPC_ACTIONS).flatMap(([group, { category, actions }]) =>
-      actions.map(action_id => ({ action_id, career_group: group, category }))),
+    npc_actions: npcActionRecords(),
   };
 }

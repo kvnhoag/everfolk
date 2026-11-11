@@ -47,7 +47,9 @@ export function influenceMarker(entry: Pick<JournalEntry, "type" | "id" | "sourc
   const actionId = influenceActionId(entry, world);
   const figureId = figureOfAction(actionId);
   const group = groupOfAction(actionId);
-  const who = figureId ? figureName(figureId) : group ? lowerFirst(GROUP_PERSON[group]) : SOMEONE;
+  let who = figureId ? figureName(figureId) : group ? lowerFirst(GROUP_PERSON[group]) : SOMEONE;
+  if (actionId?.startsWith("farming.")) who = "a farmer";
+  else if (actionId === "military.guard-road") who = "a soldier";
   const actionLabel = actionName(actionId);
   return {
     kind: figureId ? "figure" : "npc",

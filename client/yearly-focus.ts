@@ -2,10 +2,14 @@ import type { ActivityAvailability, Choice, LifeEngine, LifeState, WorldPack } f
 import { getOutcomeProbabilities } from "../src/outcomes.ts";
 import { severeHealthRisk } from "./health-risk.ts";
 import { readEverfolkStorage } from "./brand-storage.ts";
+import { isUnavailable } from "../src/demo/availability.ts";
+import { choiceIsUnavailable } from "./demo/screen.ts";
 
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
   { id: "study", label: "Study", activityId: "train-literacy" },
+  { id: "farming", label: "Farming", activityId: "train-farming" },
+  { id: "warfare", label: "Military training", activityId: "train-warfare" },
   { id: "craft", label: "Woodwork", activityId: "train-craft" },
   { id: "pottery", label: "Pottery", activityId: "train-pottery" },
   { id: "carving", label: "Wood carving", activityId: "train-carving" },
@@ -79,7 +83,7 @@ export function advanceYearWithFocus(engine: LifeEngine, life: LifeState, focusI
   if (life.phase !== "ready") return life;
   let next = life;
   const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world));
-  if (activity && life.character?.lastActivityAge !== life.age) {
+  if (activity && !isUnavailable(engine.world.demo, "activity", activity.id) && life.character?.lastActivityAge !== life.age) {
     const available = engine.getActivities(life).find(candidate => candidate.id === activity.id);
     if (available?.available) next = engine.act(life, activity.id);
   }
@@ -106,6 +110,7 @@ export function selectAutomaticChoice(choices: readonly Choice[], world?: WorldP
   for (const choice of choices) {
     // A dangerous contract always needs the player's explicit acceptance.
     if (choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan" && effect.action === "borrow"))) continue;
+    if (choiceIsUnavailable(world, choice)) continue;
     const branches = world && life ? getOutcomeProbabilities(world, life, choice)
       : choice.outcomes.map(outcome => ({ outcome, probability: outcome.weight / Math.max(...choice.outcomes.map(item => item.weight)) }));
     const total = branches.reduce((sum, branch) => sum + branch.probability, 0);

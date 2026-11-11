@@ -6,7 +6,7 @@ use near_sdk::NearToken;
 fn new_sets_defaults() {
     let c = fresh();
     let p = c.get_params();
-    assert_eq!(p.mint_fee, U128(NearToken::from_near(1).as_yoctonear()));
+    assert_eq!(p.mint_fee, U128(NearToken::from_millinear(1).as_yoctonear()));
     assert_eq!(p.drop_rate_bps, 500);
     assert_eq!(p.source_mint_share_bps, 5000);
     assert_eq!((p.royalty_sources_bps, p.royalty_treasury_bps), (500, 500));

@@ -1,4 +1,5 @@
-import { FIGURE_ACTIONS, NPC_ACTIONS, RARITY_LABELS } from "../../chain/ids.ts";
+import { groupOfNpcAction, DEMO_DEED_INFLUENCES } from "../../chain/catalog/demo-deeds.ts";
+import { FIGURE_ACTIONS, RARITY_LABELS } from "../../chain/ids.ts";
 import type { ActionId, CareerGroup, FigureId } from "../../chain/ids.ts";
 import { FIGURES, INFLUENCES } from "../../chain/catalog/index.ts";
 
@@ -25,7 +26,13 @@ export const ACTION_NAMES = {
   "sky.warn-year": "Warn of a bad year",
   "performance.lift": "Lift the spirits",
   "performance.lend-hand": "Lend a hand",
+  "farming.stock-granary": "Stock the granary",
+  "farming.share-seed": "Share seed",
 } as const satisfies Record<ActionId, string>;
+
+const EXTRA_ACTION_NAMES = {
+  "military.guard-road": "Guard the road",
+} as const;
 
 /** What a figure is doing in the world a ranked life is born into ("Euclid … has opened a school."). */
 export const FIGURE_DEEDS = {
@@ -41,22 +48,29 @@ export const FIGURE_DEEDS = {
 
 /** One person of each career group, as a draw or a source is introduced. */
 export const GROUP_PERSON: Record<CareerGroup, string> = {
-  letters: "A scholar", military: "A soldier", commerce: "A trader", craft: "A craftworker", sky: "A stargazer", performance: "A performer",
+  letters: "A scholar", military: "A soldier", commerce: "A trader", craft: "A craftworker", sky: "A stargazer", performance: "A performer", farming: "A farmer",
 };
 
 /** Title of an NPC token of each career group. */
 export const GROUP_TITLE: Record<CareerGroup, string> = {
   letters: "Scholar of Alexandria", military: "Soldier of Alexandria", commerce: "Trader of Alexandria",
   craft: "Craftworker of Alexandria", sky: "Stargazer of Alexandria", performance: "Performer of Alexandria",
+  farming: "Farmer of Alexandria",
 };
 
-const descriptions = new Map(INFLUENCES.map(entry => [entry.id, entry.label]));
+const descriptions = new Map([...INFLUENCES, ...DEMO_DEED_INFLUENCES].map(entry => [entry.id, entry.label]));
 const figureTitles = new Map(FIGURES.map(figure => [figure.figure, figure.title]));
 
 export interface ActionOption { id: string; name: string; description: string }
 
+const DEMO_DEEDS: Record<string, string> = {
+  "farming.stock-granary": "Stock a granary",
+  "farming.share-seed": "Share seed",
+  "military.guard-road": "Guard the road",
+};
+
 export function actionName(actionId: string | null): string {
-  return (actionId && (ACTION_NAMES as Record<string, string>)[actionId]) || "An unknown deed";
+  return (actionId && ((ACTION_NAMES as Record<string, string>)[actionId] || (EXTRA_ACTION_NAMES as Record<string, string>)[actionId] || DEMO_DEEDS[actionId])) || "An unknown deed";
 }
 
 export function actionDescription(actionId: string | null): string {
@@ -83,8 +97,7 @@ export function rarityLabel(rarity: number | null): string {
 
 export function groupOfAction(actionId: string | null): CareerGroup | null {
   if (!actionId) return null;
-  const entry = (Object.entries(NPC_ACTIONS) as [CareerGroup, { actions: readonly string[] }][]).find(([, group]) => group.actions.includes(actionId));
-  return entry ? entry[0] : null;
+  return groupOfNpcAction(actionId);
 }
 
 export function figureOfAction(actionId: string | null): FigureId | null {

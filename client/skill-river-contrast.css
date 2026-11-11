@@ -1,4 +1,6 @@
 /* Bright paper, compact SVG icons and square skill tiles with a warm hover halo. */
+.skill-tree.skill-river .skill-delta-board .skill-tree-node.is-unlearned{background:#e5e5e1;color:#60645d;border-color:#989c94}
+.skill-tree.skill-river .skill-delta-board .skill-tree-node.is-unlearned .skill-delta-status{color:#60645d}
 .detail-dialog.skill-wiki-dialog,
 .detail-dialog:has(.character-section:not([hidden]) .skill-river){background:#fffdf7;color:#282b24;border:2px solid #806b40;box-shadow:4px 4px 0 #65563c44}
 .skill-tree.skill-river{--tree-ink:#282b24;--tree-muted:#444b3e;--tree-sage:#245d40;--tree-line:#a28e64;--skill-accent:#245d40;color:#282b24}
@@ -14,11 +16,13 @@
 .skill-river .skill-delta-branches>button[aria-pressed=true]{background:#245d40;border-color:#183f2b;color:#fff;box-shadow:0 2px 0 #183f2b}
 .skill-river .skill-delta-branches>button:hover{border-color:#245d40;outline:1px solid #245d40}
 .skill-river .skill-tree-board.skill-delta-board{background:#fff;background-image:none;min-height:466px}
-.skill-delta-channel[data-branch-index="0"]{--skill-accent:#8b3f20}
-.skill-delta-channel[data-branch-index="1"]{--skill-accent:#245d40}
-.skill-delta-channel[data-branch-index="2"]{--skill-accent:#204e78}
-.skill-delta-channel[data-branch-index="3"]{--skill-accent:#693c62}
-.skill-delta-channel[data-branch-index="4"]{--skill-accent:#825512}
+.skill-river [data-branch-index="0"]{--skill-accent:#8b3f20}
+.skill-river [data-branch-index="1"]{--skill-accent:#245d40}
+.skill-river [data-branch-index="2"]{--skill-accent:#204e78}
+.skill-river [data-branch-index="3"]{--skill-accent:#693c62}
+.skill-river [data-branch-index="4"]{--skill-accent:#825512}
+.skill-river .delta-branch-icon{display:flex;align-items:center;justify-content:center;color:var(--skill-accent);flex-shrink:0}
+.skill-river .delta-branch-icon>.skill-artwork{width:20px;height:20px}
 .skill-river .skill-delta-channel>header{background:#fff;border-bottom:2px solid var(--skill-accent);border-radius:0}
 .skill-river .skill-delta-channel>header h4{color:var(--skill-accent);font-weight:600}
 .skill-river .delta-branch-number{color:#444b3e}
@@ -53,10 +57,10 @@
 .skill-river .is-mastered .skill-delta-status{background:transparent;color:#ffe3a1;border:0}
 .skill-river .skill-delta-water path{stroke-linecap:butt;stroke-linejoin:miter}
 .skill-river .delta-root-flow{opacity:1}.skill-river .delta-river-bank{display:none}
-.skill-river .delta-root-flow .delta-river-stream{stroke:#4a7055;stroke-width:2.5}
-.skill-river .delta-link.is-main .delta-river-stream{stroke:#795b32;stroke-width:2.5}
-.skill-river .delta-link.is-met .delta-river-stream{stroke:#245d40;stroke-width:3}
-.skill-river .delta-link.is-active .delta-river-stream{stroke:#173f2a;stroke-width:3.5}
+.skill-river .delta-root-flow .delta-river-stream{stroke:var(--skill-accent);stroke-width:2.5}
+.skill-river .delta-link.is-main .delta-river-stream{stroke:var(--skill-accent);stroke-width:2.5}
+.skill-river .delta-link.is-met .delta-river-stream{stroke:var(--skill-accent);stroke-width:3}
+.skill-river .delta-link.is-active .delta-river-stream{stroke:var(--skill-accent);stroke-width:3.5}
 .skill-river .skill-river-preview{background:#fff;border:1.5px solid #806b40;border-top:3px solid #245d40;color:#282b24;border-radius:2px;box-shadow:3px 4px 0 #65563c40}
 .skill-river .skill-preview-heading{color:#282b24}.skill-river .skill-preview-heading>.skill-artwork{width:26px;height:26px;color:#245d40}
 .skill-river .skill-preview-heading>span:last-child,.skill-river .skill-river-preview>p,.skill-river .skill-preview-hint{color:#444b3e}.skill-river .skill-preview-value{border-color:#a28e64}.skill-river .skill-preview-value strong{color:#245d40}

@@ -9,7 +9,7 @@ use near_sdk::test_utils::{get_created_receipts, VMContextBuilder};
 use crate::mint::{mint_records, MintRecord};
 
 const WORLD: &str = "alexandria-ranked-1";
-const NEAR: u128 = 1_000_000_000_000_000_000_000_000;
+const NEAR: u128 = 1_000_000_000_000_000_000_000;
 
 fn ready() -> Contract {
     let mut c = fresh();
@@ -84,7 +84,8 @@ fn mint_npc_happy_path() {
     assert_eq!(c.get_life(U64(life)).unwrap().status, LifeStatus::Minted);
     assert_eq!(c.active_life_of(account(ALICE)), None);
     assert!(locked > 0);
-    assert_eq!(c.balance_of(account(TREASURY)), U128(NEAR - locked), "with no sources the fee minus locked storage goes to treasury");
+    assert!(locked > 0);
+    assert_eq!(c.balance_of(account(TREASURY)), U128(NEAR), "testnet storage is sponsored separately");
 }
 
 #[test]
@@ -236,7 +237,7 @@ fn insufficient_deposit_rejected() {
     let mut c = ready();
     let life = start(&mut c, ALICE);
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
-    context(ALICE, START_MS, NearToken::from_millinear(999), [5; 32]);
+    context(ALICE, START_MS, NearToken::from_yoctonear(NEAR - 1), [5; 32]);
     c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
 }
 
@@ -268,7 +269,8 @@ fn fee_split_credits_sources_by_impact() {
     let locked = (near_sdk::env::storage_usage() - before) as u128 * near_sdk::env::storage_byte_cost().as_yoctonear();
     assert_eq!(c.balance_of(account(CAROL)), U128(NEAR * 375 / 1000));
     assert_eq!(c.balance_of(account(BOB)), U128(NEAR * 125 / 1000));
-    assert_eq!(c.balance_of(account(TREASURY)), U128(NEAR / 2 - locked), "storage is paid from the treasury's half");
+    assert!(locked > 0);
+    assert_eq!(c.balance_of(account(TREASURY)), U128(NEAR / 2), "testnet storage does not reduce source or treasury shares");
     let shares = c.sources_of(minted.token_id.clone());
     assert_eq!(shares.iter().map(|s| (s.token_id.clone(), s.bps)).collect::<Vec<_>>(), vec![(euclid.clone(), 7500), (alexander, 2500)]);
     assert_eq!(c.children_of(euclid.clone(), 0, 10), vec![minted.token_id]);
@@ -375,8 +377,7 @@ fn mint_with_too_little_gas_rejected() {
 }
 
 #[test]
-#[should_panic(expected = "The mint fee does not cover this token's storage")]
-fn fee_too_small_for_storage_rejected() {
+fn sponsored_storage_allows_small_testnet_fee() {
     let mut c = ready();
     as_account(OWNER);
     let mut p = c.get_params();
@@ -386,6 +387,9 @@ fn fee_too_small_for_storage_rejected() {
     let evidence = evidence_json(&seed_of(&c, life), life, ALICE, &[], &[], "letters", 50);
     pay(ALICE, 1);
     c.mint_life(U64(life), evidence.clone(), sign(&evidence), "letters.teach".into()).detach();
+    as_account(CONTRACT);
+    let minted = c.finalize_mint(U64(life));
+    assert_eq!(c.mint_result(U64(life)), Some(minted));
 }
 
 #[test]
@@ -479,7 +483,8 @@ fn persisted_storage_and_credits_fit_the_fee_after_all_caches_are_flushed() {
     assert_eq!(env::storage_usage(), measured, "the reserve must already include every lazy write");
     let locked = env::storage_usage().saturating_sub(before) as u128 * env::storage_byte_cost().as_yoctonear();
     let credited = c.balance_of(account(CAROL)).0 + c.balance_of(account(BOB)).0 + c.balance_of(account(TREASURY)).0;
-    assert_eq!(credited + locked, NEAR);
+    assert!(locked > 0);
+    assert_eq!(credited, NEAR);
 }
 
 #[test]

@@ -1,3 +1,4 @@
+import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
   LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
@@ -20,6 +21,15 @@ import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
 import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
 export { matchesCondition } from "./conditions.ts";
+import type { DemoCommand } from "./demo/types.ts";
+import { demoContext, initialDemo } from "./demo/state.ts";
+import { settleDemoYear, openDemoYear } from "./demo/settle.ts";
+import { applyDemoEffect } from "./demo/effects.ts";
+import { DEMO_COMMAND_TYPES, parseDemoCommand } from "./demo/commands.ts";
+import { executeTrade } from "./demo/market.ts";
+import { applyPlan } from "./demo/household.ts";
+import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
+import { isUnavailable } from "./demo/availability.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -83,6 +93,8 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
+    ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
+    ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
       children: state.character.children.map(child => ({ ...child })),
@@ -157,6 +169,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     state.journal.push({ type, id, text: personText(legacyText(world, state, text), world, state), age: state.age, year: state.year, ...extra });
   }
 
+  function demoCtx(state: LifeState) {
+    return demoContext(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
+  }
+
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
     const ending = endingById.get(id);
@@ -222,6 +238,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       switch (effect.type) {
         case "accomplishment": {
           if (!provenance) throw new Error("Accomplishments require an accepted decision or activity outcome.");
+          if (isUnavailable(world.demo, "accomplishment", effect.achievement)) throw new Error("Character effect is unavailable: Not available in this demo.");
           const record = awardAccomplishment(world, state, effect.achievement, provenance.sourceId, provenance.outcomeId);
           if (record) journal(state, "activity", `earned-${record.achievementId}`, `Accomplishment: ${record.name}. ${record.description}`);
           break;
@@ -245,7 +262,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], skillEffectDelta(effect, state.flags));
           break;
         }
-        case "job": state.character!.jobId = effect.job; break;
+        case "job":
+          if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
+          state.character!.jobId = effect.job; break;
+        case "vocation":
+          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action)); break;
+        case "demo":
+          if (!world.demo || !state.demo) throw new Error("Demo effects need a demo world.");
+          applyDemoEffect(demoCtx(state), effect.effect); break;
         case "condition": addHealthCondition(world, state, effect.condition, decisionContext, healthHooks(state)); break;
         case "care": provideHealthCare(world, state, effect.amount); break;
         case "closeness": applyCloseness(world, state, effect); break;
@@ -304,8 +328,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     else if (state.age >= world.maxAge) finish(state, world.defaultEnding);
   }
 
+  /** Demo worlds: a choice that would grant unavailable content cannot be taken. */
+  function grantsUnavailable(choice: Choice): boolean {
+    return Boolean(world.demo) && choice.outcomes.some(outcome => outcome.effects.some(effect =>
+      effect.type === "job" && effect.job !== null && isUnavailable(world.demo, "job", effect.job) ||
+      effect.type === "accomplishment" && isUnavailable(world.demo, "accomplishment", effect.achievement)));
+  }
+
   function choicesFor(event: LifeEvent, state: LifeState): Choice[] {
-    return event.choices.filter(choice => matches(choice.when, state) &&
+    return event.choices.filter(choice => matches(choice.when, state) && !grantsUnavailable(choice) &&
       (!choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan")) || !financeActivityReason(world, state, choice)));
   }
 
@@ -330,6 +361,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   /** A fired catalog event's entry carries its source, so impact is countable from the journal. */
   function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state)): void {
+    // A fresh-year decision is consumed when it fires, so it cannot reopen in the same year.
+    const demoGate = event.when?.type === "all"
+      ? event.when.conditions.find(item => item.type === "demo" && item.condition.kind === "year")
+      : event.when;
+    const yearGate = demoGate?.type === "demo" && demoGate.condition.kind === "year" ? demoGate.condition : undefined;
+    if (state.demo && yearGate?.kind === "year" && yearGate.fresh) {
+      state.demo.year.fresh = state.demo.year.fresh.filter(family => family !== yearGate.family);
+    }
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
     journal(state, "event", event.id, `${event.title}: ${event.text}`, source ? { source } : undefined);
@@ -605,6 +644,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
+      ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
@@ -622,6 +662,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) state.economy = initialEconomy(world, state)!;
+    if (world.demo) initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
@@ -649,7 +690,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     const annualIncome = (): void => {
-      if (next.phase !== "ended" && next.character?.jobId) {
+      if (next.phase !== "ended" && next.character?.jobId && next.vocations?.workedAge !== next.age - 1) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
         recorded(next, () => next.journal.length - 1, () => {
           apply(next, job.yearlyEffects);
@@ -669,6 +710,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Money-enabled years settle income before costs, avoiding bridge debt
     // created only by batching a whole year. Legacy worlds keep exact ordering.
     if (world.economy) annualIncome();
+    if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => settleDemoYear(demoCtx(next)));
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
@@ -679,6 +721,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
+    if (world.demo && next.phase !== "ended") openDemoYear(demoCtx(next));
     checkEndings(next);
     resolveEvents(next, true);
   }
@@ -808,6 +851,44 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return freeze(next);
   }
 
+  /** Runs an engine command for an auto-play agent; the agent command is the one recorded. */
+  function runAsAgent(next: LifeState, inner: Command): void {
+    const recordedLength = next.commands.length;
+    if (inner.type === "advance") advanceInto(next);
+    else if (inner.type === "choose") chooseInto(next, inner.choice);
+    else if (inner.type === "act") actInto(next, inner.activity);
+    else if (inner.type === "trade" || inner.type === "plan") demoInto(next, inner);
+    else throw new Error("An agent cannot issue that command for the player.");
+    next.commands.splice(recordedLength, 1);
+  }
+
+  function demoInto(next: LifeState, input: unknown, where = ""): void {
+    assertPlayable(next);
+    if (!world.demo || !next.demo) throw new Error("This world has no demo economy.");
+    const command = parseDemoCommand(input, where);
+    const ctx = demoCtx(next);
+    next.commands.push(command);
+    switch (command.type) {
+      case "trade":
+        if (next.phase !== "ready") throw new Error("Resolve the current decision first.");
+        executeTrade(ctx, command); break;
+      case "plan": applyPlan(ctx, command); break;
+      case "assign-agents":
+        if (next.age !== 0 || next.commands.some(c => c.type === "advance")) throw new Error("Agents are assigned before the first year.");
+        assignAgents(ctx, command); break;
+      case "delegate": delegate(ctx, command); break;
+      case "agent":
+        applyAgentCommand(ctx, command, inner => runAsAgent(next, inner.command)); break;
+    }
+  }
+
+  function demo(state: LifeState, command: DemoCommand): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    demoInto(next, command);
+    return freeze(next);
+  }
+
   function replay(seed: string, commands: readonly Command[]): LifeState {
     if (!Array.isArray(commands) || commands.length > MAX_COMMANDS) throw new Error("Invalid command history length.");
     // Reconstruct privately in one pass; only the final state escapes to callers.
@@ -825,6 +906,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         chooseAvatarInto(state, command.variant);
         if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
       } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
+      else if (DEMO_COMMAND_TYPES.has(command.type)) demoInto(state, command, ` at ${i}`);
       else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -855,5 +937,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, influence, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, influence, demo, replay, save, load });
 }

@@ -1,17 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import world from "../worlds/alexandria-0.33.0.json" with { type: "json" };
-import { CAREER_GROUP_JOBS, FIGURES, INFLUENCES, influenceFor } from "../chain/catalog/index.ts";
+import { CAREER_GROUP_JOBS, DEMO_DEED_INFLUENCES, FIGURES, INFLUENCES, influenceFor } from "../chain/catalog/index.ts";
+import { DEMO_EXTRA_ACTIONS } from "../chain/catalog/demo-deeds.ts";
 import { CAREER_GROUPS, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS } from "../chain/ids.ts";
 import { WORLD_START_YEAR } from "../chain/catalog/content.ts";
 import { createEngine } from "../src/engine.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeEvent, LifeState } from "../src/types.ts";
 
-const actionIds: string[] = [
+const rankedActionIds: string[] = [
   ...Object.values(FIGURE_ACTIONS).flat(),
-  ...Object.values(NPC_ACTIONS).flatMap(group => [...group.actions]),
+  ...Object.entries(NPC_ACTIONS).filter(([group]) => group !== "farming").flatMap(([, group]) => [...group.actions]),
 ];
+const demoActionIds: string[] = [
+  ...NPC_ACTIONS.farming.actions,
+  ...DEMO_EXTRA_ACTIONS.map(action => action.action_id),
+];
+const actionIds = [...rankedActionIds, ...demoActionIds];
 const jobIds = new Set(world.character.jobs.map(job => job.id));
 const originIds = new Set(world.origins.map(origin => origin.id));
 const skillIds = new Set(Object.keys(world.character.skills));
@@ -21,16 +27,20 @@ const achievementIds = new Set(world.legacy.achievements.map(achievement => achi
 test("every action id has exactly one influence entry", () => {
   const entryIds = INFLUENCES.map(entry => entry.id);
   assert.equal(new Set(entryIds).size, entryIds.length, "influence ids are unique");
-  assert.deepEqual([...entryIds].sort(), [...actionIds].sort());
+  assert.deepEqual([...entryIds].sort(), [...rankedActionIds].sort(), "ranked influences stay the ranked catalog");
+  assert.deepEqual(DEMO_DEED_INFLUENCES.map(entry => entry.id).sort(), [...demoActionIds].sort());
   for (const id of actionIds) assert.equal(influenceFor(id).id, id);
   assert.throws(() => influenceFor("nobody.nothing"), /Unknown influence entry/);
 });
 
 test("every job id in CAREER_GROUP_JOBS exists in alexandria-0.33.0", () => {
   assert.deepEqual(Object.keys(CAREER_GROUP_JOBS).sort(), [...CAREER_GROUPS].sort());
+  const demoJobs = ["farmhand", "tenant-farmer", "grain-dealer"];
   const mapped = Object.values(CAREER_GROUP_JOBS).flat();
-  for (const job of mapped) assert.ok(jobIds.has(job), `unknown job ${job}`);
-  assert.deepEqual([...mapped].sort(), [...jobIds].sort(), "every pack job belongs to a group");
+  const rankedJobs = mapped.filter(job => !demoJobs.includes(job));
+  for (const job of rankedJobs) assert.ok(jobIds.has(job), `unknown job ${job}`);
+  assert.deepEqual([...rankedJobs].sort(), [...jobIds].sort(), "every pack job belongs to a group");
+  assert.deepEqual(CAREER_GROUP_JOBS.farming, demoJobs);
 });
 
 test("every figure requirement references real origins, jobs, skills and accomplishments", () => {
@@ -85,9 +95,12 @@ test("base weights are 1, 3 or 5", () => {
 
 test("figure actions carry events and NPC actions carry immediate effects", () => {
   for (const id of Object.values(FIGURE_ACTIONS).flat()) assert.ok(influenceFor(id).event, `${id} activates an event`);
-  for (const id of Object.values(NPC_ACTIONS).flatMap(group => [...group.actions])) {
-    const effects = influenceFor(id).effects ?? [];
-    assert.ok(effects.some(effect => effect.type === "stat"), `${id} has a stat effect that power can scale`);
+  for (const [group, entry] of Object.entries(NPC_ACTIONS)) {
+    if (group === "farming") continue;
+    for (const id of entry.actions) {
+      const effects = influenceFor(id).effects ?? [];
+      assert.ok(effects.some(effect => effect.type === "stat"), `${id} has a stat effect that power can scale`);
+    }
   }
 });
 
