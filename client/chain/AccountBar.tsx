@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { accountBarView, explorerUrl } from "./account-bar-model.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import "./account-bar.css";
+import EmailSignIn from "../demo/EmailSignIn.tsx";
 
 const METHOD_LABELS: Record<string, string> = {
   start_life: "Ranked life started", abandon_life: "Life closed", mint_life: "Life minted", open_mint_pack: "Mint pack opened", reroll_mint_slot: "Mint slot rerolled", choose_mint_slot: "Life minted", set_action: "Deed changed",
@@ -54,6 +55,7 @@ export default function AccountBar({ backend, compact = false }: { backend: Chai
         <span className="account-net">{view.network}</span>
         <span className="account-muted">No wallet connected</span>
         <button className="account-action" type="button" disabled={busy} onClick={() => { void run(backend.connect, "The wallet could not connect."); }}>Connect wallet</button>
+        <EmailSignIn />
       </>}
       {view.status === "connected" && <>
         <span className="account-net">{view.network}</span>

@@ -18,9 +18,10 @@ interface Props {
   onChoose(id: string): void;
   onSetAside(): void;
   onEnableAuto(): void;
+  riskPreview?: { knownCosts: readonly string[]; chance: string } | null;
 }
 
-function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onChoose, onSetAside, onEnableAuto }: Omit<Props, "open">) {
+function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onChoose, onSetAside, onEnableAuto, riskPreview = null }: Omit<Props, "open">) {
   const dialog = useRef<HTMLDialogElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const previewStack = useRef<HTMLDivElement>(null);
@@ -67,6 +68,7 @@ function OpenDecisionDialog({ event, life, world, choices, returnFocusRef, onCho
         </div>;
       })}</div>}
       {sources.length > 0 && <details className="life-decision-sources"><summary>Historical sources</summary>{sources.map(source => <a key={source.id} href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>)}</details>}
+      {riskPreview && <section className="life-decision-risk" aria-label="Convoy risk"><h3>Known costs</h3>{riskPreview.knownCosts.length ? <ul>{riskPreview.knownCosts.map(cost => <li key={cost}>{cost}</li>)}</ul> : <p>No known cost is listed.</p>}<h3>Chance</h3><p>{riskPreview.chance}</p></section>}
       <footer><button type="button" onClick={onEnableAuto}>Enable Auto mode</button></footer>
     </div>
   </dialog>;

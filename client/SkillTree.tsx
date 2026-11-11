@@ -4,6 +4,8 @@ import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
 import { buildSkillTree, currentSkillTree, practiceBlockReason, skillActionRequirements, trainingSkillChanges } from "./skill-tree.ts";
+import { availability } from "../src/demo/availability.ts";
+import { UNAVAILABLE_REASON } from "../src/demo/types.ts";
 import type { SkillNode, SkillRequirement } from "./skill-tree.ts";
 import SkillArtwork from "./SkillArtwork.tsx";
 import SkillRiverMap from "./SkillRiverMap.tsx";
@@ -36,13 +38,15 @@ function Practice({ activity, life, world, onActivity, readOnly = false }: {
 }) {
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
-  const loanOffer = reason && activityLoanOffer(world, life, activity);
+  const unavailable = availability(world.demo, "activity", activity.id).status === "unavailable";
+  const loanOffer = !unavailable && reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-practice${reason ? " unavailable" : ""}`}>
     <p className="skill-practice-name">{displayProse(activity.text)}</p>
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => onActivity(activity.id)}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>}
+    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} onClick={() => { if (!unavailable) onActivity(activity.id); }}>{loanOffer ? "Ask moneylender to fund training" : reason ? "Unavailable" : "Train"}<span aria-hidden="true">↗</span></button>}
     {reason && <p className="skill-practice-reason">{displayProse(reason)}</p>}
+    {unavailable && <p className="skill-practice-reason">{UNAVAILABLE_REASON}</p>}
   </div>;
 }
 
@@ -52,16 +56,18 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
   const reason = practiceBlockReason(activity, life);
   const changes = trainingSkillChanges(activity, world, life);
   const requirements = skillActionRequirements(activity, world);
-  const loanOffer = reason && activityLoanOffer(world, life, activity);
+  const unavailable = availability(world.demo, "activity", activity.id).status === "unavailable";
+  const loanOffer = !unavailable && reason && activityLoanOffer(world, life, activity);
   return <div className={`skill-work-action${reason ? " unavailable" : ""}`}>
     <p className="skill-practice-name">{displayProse(activity.text)}</p>
     {requirements.length > 0 && <p className="skill-work-requirements">{requirements.join(" · ")}</p>}
     {changes.length > 0 && <div className="skill-practice-gains" aria-label="Possible skill changes">{changes.map(change => <span key={change.id}>{change.label} <ImpactValue min={change.min} max={change.max} /></span>)}</div>}
     <ChoiceImpact choice={activity} life={life} world={world} hideSkills />
-    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${displayProse(activity.text)}`} onClick={() => onActivity(activity.id)}>
+    {!readOnly && <button type="button" className="skill-practice-button" disabled={Boolean(reason) && !loanOffer} aria-label={`${loanOffer ? "Ask moneylender to fund" : occupation ? "Change occupation" : "Take paid work"}: ${displayProse(activity.text)}`} onClick={() => { if (!unavailable) onActivity(activity.id); }}>
       {loanOffer ? "Ask moneylender to fund this" : occupation ? "Choose this occupation" : "Take paid work"}<span aria-hidden="true">↗</span>
     </button>}
     {reason && <p className="skill-practice-reason">{displayProse(reason)}</p>}
+    {unavailable && <p className="skill-practice-reason">{UNAVAILABLE_REASON}</p>}
   </div>;
 }
 
@@ -122,7 +128,7 @@ export default function SkillTree({ life, world, activities, onActivity, initial
       <SkillRiverMap ref={mapRef} model={model} query={query} selectedId={selected.id} detailOpen={detailOpen} age={life.age} detailId={`${instanceId}-detail`} onSelect={openDetails} />
       <aside ref={detailRef} hidden={!detailOpen} className={`skill-tree-detail is-${selected.state}`} id={`${instanceId}-detail`} aria-label={`${selected.label} details`}>
         <button type="button" className="skill-detail-close" onClick={() => { setDetailOpen(false); mapRef.current?.focusSkill(selected.id); }} aria-label="Close skill details">Back to the river <span aria-hidden="true">↑</span></button>
-        <div className="skill-detail-title"><span className="skill-detail-icon"><SkillIcon id={selected.id} /></span><div><span className="skill-detail-branch">{selected.branch}</span><h4>{selected.label}</h4></div><span className="skill-detail-state">{selected.state}</span></div>
+        <div className="skill-detail-title"><span className="skill-detail-icon"><SkillIcon id={selected.id} /></span><div><span className="skill-detail-branch">{selected.branch}</span><h4>{selected.label}</h4></div><span className="skill-detail-state">{selected.availability === "unavailable" ? "Unavailable" : selected.state}</span></div>
         <p className="skill-detail-description">{displayProse(selected.description)}</p>
         <div className="skill-detail-proficiency"><label htmlFor={`${instanceId}-proficiency`}>Proficiency <strong>{skillNumber(selected.value, selected.max)}<span> / {selected.max}</span></strong></label><meter id={`${instanceId}-proficiency`} min={selected.min} max={selected.max} value={selected.value} /></div>
         <SkillGrowth life={life} world={world} skillId={selected.id} />

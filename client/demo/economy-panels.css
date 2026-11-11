@@ -1,0 +1,19 @@
+.demo-economy{display:grid;gap:12px;min-width:0;margin:0}
+.demo-economy-title,.demo-economy h3{font-family:var(--serif,"Courier New",monospace);font-weight:400;margin:0 0 8px}
+.demo-economy section{min-width:0;border:2px solid var(--ef-outline,#594630);background:var(--ef-panel,#fbf6e9);padding:12px;box-shadow:var(--ef-shadow,3px 3px 0 #8c765a70)}
+.demo-economy p,.demo-economy li{overflow-wrap:anywhere;line-height:1.5}
+.demo-facts{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;margin:0}
+.demo-facts div{display:contents}
+.demo-facts dt{margin:0;color:var(--muted,#786c57)}
+.demo-facts dd{margin:0;text-align:right}
+.demo-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:end;min-width:0}
+.demo-actions label{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 8rem;font-size:12px}
+.demo-actions input,.demo-actions select,.demo-actions button{min-height:40px;max-width:100%;font:inherit}
+.demo-badge{display:inline-block;border:1px solid currentColor;padding:0 6px;font-size:11px;letter-spacing:.04em}
+.demo-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.email-sign-in{display:flex;flex-direction:column;gap:6px;min-width:0}
+@media (max-width:600px){
+  .demo-compare{grid-template-columns:1fr}
+  .demo-actions{flex-direction:column;align-items:stretch}
+  .demo-actions button,.demo-actions input,.demo-actions select{width:100%}
+}

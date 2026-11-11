@@ -1,6 +1,7 @@
 import type { ActivityAvailability, CharacterActivity, Condition, JobDefinition, LifeState, SkillDefinition, WorldPack } from "../src/types.ts";
 import { getSkillImpact } from "./skill-impact.ts";
 import { formatYear } from "../src/calendar.ts";
+import { availability } from "../src/demo/availability.ts";
 
 export type SkillState = "locked" | "ready" | "learning" | "mastered";
 export interface SkillRequirement { id: string; label: string; value: number; required: number; met: boolean }
@@ -10,6 +11,8 @@ export interface SkillNode {
   value: number; min: number; max: number; progress: number; state: SkillState;
   requirements: SkillRequirement[]; minAge: number; ageMet: boolean;
   training: ActivityAvailability[]; canPractice: boolean; careers: SkillCareer[]; paidWork: ActivityAvailability[];
+  availability: "playable" | "locked" | "unavailable";
+  availabilityText: string | null;
 }
 export interface SkillEdge { from: string; to: string; threshold: number; met: boolean }
 export interface SkillTreeModel { nodes: SkillNode[]; edges: SkillEdge[]; branches: string[]; otherTraining: ActivityAvailability[] }
@@ -17,7 +20,7 @@ export interface SkillTreeModel { nodes: SkillNode[]; edges: SkillEdge[]; branch
 /** Keep future, unlearned paths in the wiki rather than the current skill view.
  * Temporary action, cash and choice restrictions never hide earned progress. */
 export function currentSkillTree(model: SkillTreeModel): SkillTreeModel {
-  const nodes = model.nodes.filter(node => node.state !== "locked" || node.value > node.min);
+  const nodes = model.nodes.filter(node => node.availability === "unavailable" || node.state !== "locked" || node.value > node.min);
   const visible = new Set(nodes.map(node => node.id));
   return {
     nodes,
@@ -150,6 +153,7 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
       .filter(([parent, threshold]) => parent !== id && parent in definitions && threshold > 0)
       .map(([parent, threshold]) => requirement(parent, threshold));
     const minAge = declaredTraining.length ? Math.min(...declaredTraining.map(activity => activity.minAge ?? 0)) : 0;
+    const skillMark = availability(world.demo, "skill", id);
     const value = current[id] ?? definition.min;
     const ageMet = life.age >= minAge;
     const unlocked = ageMet && requirements.every(item => item.met);
@@ -170,7 +174,9 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
         (id in guaranteedSkillRequirements(activity.when) || activity.outcomes.some(outcome => gainsSkill(outcome.effects, id))))
         .sort((left, right) => Number(right.available) - Number(left.available)),
       state: value >= definition.max ? "mastered" : !unlocked ? "locked" : value > definition.min ? "learning" : "ready",
-      canPractice: unlocked && value < definition.max && training.some(activity => !practiceBlockReason(activity, life)),
+      canPractice: skillMark.status !== "unavailable" && unlocked && value < definition.max && training.some(activity => !practiceBlockReason(activity, life)),
+      availability: skillMark.status,
+      availabilityText: skillMark.status === "unavailable" ? skillMark.reason : null,
     };
   });
   const byId = new Map(nodes.map(node => [node.id, node]));

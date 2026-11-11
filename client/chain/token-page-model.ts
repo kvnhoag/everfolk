@@ -107,13 +107,14 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
   };
 }
 
-const EMBLEMS: Record<CareerGroup, string> = {
+const EMBLEMS: Record<string, string> = {
   letters: "literacy", military: "warfare", commerce: "reckoning", craft: "craft", sky: "astronomy", performance: "music",
+  farming: "farming",
 };
 
 /** A skill icon standing for a career group, for people of the city who have no collectible art. */
-export function careerEmblem(group: CareerGroup): string {
-  return EMBLEMS[group];
+export function careerEmblem(group: string): string {
+  return EMBLEMS[group] ?? group;
 }
 
 export interface MarketRow {

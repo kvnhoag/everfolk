@@ -1,3 +1,4 @@
+import EmailSignIn from "../demo/EmailSignIn.tsx";
 import { useEffect, useId, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
@@ -88,7 +89,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
       {!life && !current.loading && !current.error && <div className="chain-actions">
         {accountId
           ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void start(); }}>{busy ? "Starting…" : "Start a ranked life"}<span aria-hidden="true">→</span></button>
-          : <button className="chain-primary" type="button" disabled={busy} onClick={() => { void run(backend.connect, "The wallet could not connect."); }}>Connect a NEAR wallet<span aria-hidden="true">→</span></button>}
+          : <><button className="chain-primary" type="button" disabled={busy} onClick={() => { void run(backend.connect, "The wallet could not connect."); }}>Connect a NEAR wallet<span aria-hidden="true">→</span></button><EmailSignIn /></>}
       </div>}
       <div className="chain-actions"><a className="chain-secondary" href="#figures">Meet the figures</a><a className="chain-secondary" href="#mine">My lives</a></div>
       {accountId && <p className="chain-fine">Playing as {accountId}</p>}
