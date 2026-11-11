@@ -5,12 +5,14 @@ import { readFileSync } from "node:fs";
 import { createEngine, validateWorld } from "../src/index.ts";
 import type { WorldPack } from "../src/types.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
+import capacityRelease from "../worlds/alexandria-0.41.0.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.40.0.json" with { type: "json" };
 
-const world = current as WorldPack;
+const world = capacityRelease as WorldPack;
 
 test("annual order capacity is small and shared across buying and selling", () => {
   validateWorld(world);
+  assert.deepEqual(current.economy.market.orderLimits, world.economy!.market!.orderLimits, "Later family releases retain the market allowance.");
   const market = world.economy!.market!;
   assert.deepEqual(market.orderLimits, {
     household: { perOrder: 50, perYear: 100 },

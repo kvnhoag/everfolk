@@ -43,6 +43,7 @@ import cashReservesWorld from "../../worlds/alexandria-0.37.0.json" with { type:
 import livelihoodsWorld from "../../worlds/alexandria-0.38.0.json" with { type: "json" };
 import resourceVarietyWorld from "../../worlds/alexandria-0.39.0.json" with { type: "json" };
 import marketRolesWorld from "../../worlds/alexandria-0.40.0.json" with { type: "json" };
+import marketCapacityWorld from "../../worlds/alexandria-0.41.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -87,6 +88,7 @@ const cashReservesEngine = createEngine(cashReservesWorld);
 const livelihoodsEngine = createEngine(livelihoodsWorld);
 const resourceVarietyEngine = createEngine(resourceVarietyWorld);
 const marketRolesEngine = createEngine(marketRolesWorld);
+const marketCapacityEngine = createEngine(marketCapacityWorld);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -119,6 +121,7 @@ engines.set(cashReservesEngine.fingerprint, cashReservesEngine);
 engines.set(livelihoodsEngine.fingerprint, livelihoodsEngine);
 engines.set(resourceVarietyEngine.fingerprint, resourceVarietyEngine);
 engines.set(marketRolesEngine.fingerprint, marketRolesEngine);
+engines.set(marketCapacityEngine.fingerprint, marketCapacityEngine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

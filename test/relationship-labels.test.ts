@@ -166,7 +166,12 @@ test("the actual relationship and household panels show wife or husband alongsid
 test("the actual panel keeps a plain acquaintance hidden and uses love interest for accepted dating", () => {
   const { world, life, ids } = socialFixture(), id = ids[0];
   const met = renderToStaticMarkup(createElement(CharacterPanel, { world, life, initialSection: "relationships", onActivity() {} }));
-  assert.doesNotMatch(met, />Relationships<\/button>|class="relationship-tags"/);
+  assert.match(met, />Relationships<\/button>/);
+  assert.match(met, /No social relationships recorded yet/);
+  // A relative can share a fixture name; scope identity privacy to the social panel.
+  const socialPanel = met.split(/id="[^"]+-panel-relationships"/)[1]?.split(/id="[^"]+-panel-children"/)[0];
+  assert.ok(socialPanel);
+  assert.doesNotMatch(socialPanel, /Kleopatra|Petosiris|Eirene|class="relationship-tags"|aria-label="Relationship with /);
   life.character!.partnerId = id; life.character!.relationshipStatus = "courting";
   life.character!.datedPartnerIds = [id];
   const dating = renderToStaticMarkup(createElement(CharacterPanel, { world, life, initialSection: "relationships", onActivity() {} }));

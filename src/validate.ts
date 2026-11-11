@@ -326,7 +326,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   reference(world.defaultEnding, "world.defaultEnding", endingIds, "ending");
 
   const character = Object.hasOwn(world, "character") ? object(world.character, "world.character",
-    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship", "identity", "proceduralPartners", "socialRelationships", "encounterPacing"],
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship", "identity", "proceduralPartners", "socialRelationships", "extendedSocialRoles", "familyBackgrounds", "encounterPacing"],
     ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription"]) : undefined;
   if (moneylender && (!character || maxAge < 19)) fail("world.economy.moneylender", "requires a character definition and a life extending beyond age 18");
   const skills = character ? object(character.skills, "world.character.skills") : {};
@@ -538,7 +538,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     requireRelationships(path);
     if (character?.socialRelationships !== true) fail(path, "requires socialRelationships");
     reference(value.partner, `${path}.partner`, partnerIds, "partner");
-    if (value.role !== "friend" && value.role !== "business-partner") fail(`${path}.role`, "expected friend or business-partner");
+    const allowed = character?.extendedSocialRoles === true ? ["friend", "business-partner", "teacher", "disciple", "enemy"] : ["friend", "business-partner"];
+    if (!allowed.includes(value.role as string)) fail(`${path}.role`, `expected ${allowed.join(", ")}`);
     bool(value.active, `${path}.active`);
   };
 
@@ -889,6 +890,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         fail("world.character.socialRelationships", "requires proceduralPartners and a relationship definition");
       }
     }
+    if (Object.hasOwn(character, "extendedSocialRoles")) {
+      bool(character.extendedSocialRoles, "world.character.extendedSocialRoles");
+      if (character.extendedSocialRoles === true && character.socialRelationships !== true) fail("world.character.extendedSocialRoles", "requires socialRelationships");
+    }
     if (Object.hasOwn(character, "identity")) {
       const path = "world.character.identity";
       const identity = object(character.identity, path, ["namePools", "avatarVariants"]);
@@ -908,6 +913,16 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     }
     if (character.proceduralPartners === true && (!character.identity || character.requireIntroductions !== true)) {
       fail("world.character.proceduralPartners", "requires identity pools and requireIntroductions");
+    }
+    if (Object.hasOwn(character, "familyBackgrounds")) {
+      const path = "world.character.familyBackgrounds";
+      bool(character.familyBackgrounds, path);
+      if (character.familyBackgrounds === true) {
+        if (!character.identity) fail(path, "requires identity pools");
+        const pools = (character.identity as { namePools: { male: string[]; female: string[] } }).namePools;
+        if (pools.male.length < 4 || pools.female.length < 4) fail(path, "needs at least four names per sex for the player and natal relatives");
+        if (new Set([...pools.male, ...pools.female]).size < partners.length + 7) fail(path, "needs enough distinct names for the player, natal relatives and every encounter template");
+      }
     }
     if (Object.hasOwn(character, "encounterPacing")) {
       const path = "world.character.encounterPacing";

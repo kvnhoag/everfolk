@@ -259,7 +259,7 @@ export interface RelationshipDefinition {
   supportThreshold: number;
   maxHealthSupport: number;
 }
-export type SocialRole = "friend" | "business-partner";
+export type SocialRole = "friend" | "business-partner" | "teacher" | "disciple" | "enemy";
 export interface RelationshipTie { closeness: number; lastContactAge: number; roles?: SocialRole[] }
 export interface RelationshipState { partners: Record<string, RelationshipTie>; children: Record<string, RelationshipTie> }
 
@@ -295,6 +295,22 @@ export interface PartnerDefinition {
 }
 
 export type CharacterSex = "male" | "female";
+
+export type FamilyRelation = "mother" | "father" | "maternal-grandmother" | "maternal-grandfather" | "paternal-grandmother" | "paternal-grandfather";
+
+/** Fictional natal relatives are fixed at birth; ages use the player's clock. */
+export interface FamilyMember {
+  id: string;
+  relation: FamilyRelation;
+  name: string;
+  sex: CharacterSex;
+  ageOffset: number;
+  originId: string;
+  background: string;
+  occupation: string;
+  /** Relative's own age at death. Views reveal it only once that age is reached. */
+  deathAge: number;
+}
 
 /** A person generated only when their encounter is accepted in this life. */
 export interface EncounteredPerson extends PartnerDefinition {
@@ -332,10 +348,14 @@ export interface DeathCause {
 export interface CharacterDefinition {
   /** Opt-in birth identity; older packs retain their original RNG and state. */
   identity?: { namePools: { male: string[]; female: string[] }; avatarVariants: number };
+  /** Generate parents and grandparents at birth; omitted packs preserve their state. */
+  familyBackgrounds?: boolean;
   /** Partner definitions are encounter templates, not a pre-existing named pool. */
   proceduralPartners?: boolean;
   /** Explicit nonromantic roles for encountered people; older packs omit them. */
   socialRelationships?: boolean;
+  /** Explicit teaching and hostile ties, enabled only in newer authored worlds. */
+  extendedSocialRoles?: boolean;
   /** Optional adult encounter lane; all probabilities are authored gameplay. */
   encounterPacing?: { firstMeetingChance: number; meetingChance: number; dateChance: number; cooldownYears: number };
   /** Optional seeded protagonist-name pool; omitted packs retain their original state. */
@@ -358,6 +378,7 @@ export interface CharacterState {
   sex?: CharacterSex;
   avatarVariant?: number;
   people?: Record<string, EncounteredPerson>;
+  family?: FamilyMember[];
   datedPartnerIds?: string[];
   knownPartnerIds?: string[];
   skills: Record<string, number>;

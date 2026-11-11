@@ -17,7 +17,7 @@ test("new births use the current bundled factory for an exact older official pac
     const published = factory(pack), before = structuredClone(published);
     const selected = selectFactoryWorld(published);
     assert.deepEqual(selected, getBuiltinWorld());
-    assert.equal(selected.pack.version, "0.41.0");
+    assert.equal(selected.pack.version, "0.42.0");
     assert.ok(selected.pack.origins.some(origin => origin.id === "royal-household"));
     assert.deepEqual(published, before);
   }
@@ -27,7 +27,7 @@ test("an untouched published factory revision refreshes using its canonical publ
   for (const pack of [classical, older]) {
     const published = compilePublishedWorld(getBuiltinCatalog(pack).worlds[0]);
     assert.notEqual(published.revisionId, factory(pack).revisionId);
-    assert.equal(selectFactoryWorld(published).pack.version, "0.41.0");
+    assert.equal(selectFactoryWorld(published).pack.version, "0.42.0");
     const unexpectedRevision = { ...published, revisionId: "pack-unrecognized-publication" };
     assert.equal(selectFactoryWorld(unexpectedRevision), unexpectedRevision);
   }

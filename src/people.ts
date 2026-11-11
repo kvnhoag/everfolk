@@ -35,7 +35,7 @@ export function encounterPerson(world: WorldPack, state: LifeState, id: string):
   const template = world.character.partners.find(person => person.id === id);
   const identity = world.character.identity;
   if (!template || !identity) throw new Error("The encounter has no valid person template.");
-  const used = new Set([state.character.name, ...Object.values(state.character.people ?? {}).map(person => person.name)]);
+  const used = new Set([state.character.name, ...(state.character.family ?? []).map(member => member.name), ...Object.values(state.character.people ?? {}).map(person => person.name)]);
   const pools = {
     male: identity.namePools.male.filter(name => !used.has(name)),
     female: identity.namePools.female.filter(name => !used.has(name)),

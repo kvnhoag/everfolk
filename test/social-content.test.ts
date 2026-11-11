@@ -21,7 +21,7 @@ function withoutProse<T>(value: T): T {
 
 test("all sixteen encountered identities offer explicit friendship and bounded shared work", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.41.0");
+  assert.equal(world.version, "0.42.0");
   assert.equal(world.events.filter(event => event.id.startsWith("meet-person-")).length, 16);
   assert.equal(world.character!.activities.filter(activity => /^(befriend|friend-time|form-business|joint-order|end-friendship|end-business)-person-/.test(activity.id)).length, 16 * 6);
   assert.equal(world.character!.socialRelationships, true);
@@ -39,7 +39,9 @@ test("all sixteen encountered identities offer explicit friendship and bounded s
     assert.deepEqual(friend.outcomes[0].effects, [{ type: "social-role", partner: id, role: "friend", active: true }, { type: "closeness", target: "partner", partner: id, delta: 3 }]);
     const invite = followup.choices.find(choice => choice.id === `invite-date-${id}`)!;
     const { opportunity, ...invitationRules } = invite;
-    assert.deepEqual(withoutProse(invitationRules), withoutProse(previous.events.find(event => event.id === followup.id)!.choices.find(choice => choice.id === invite.id)), "romantic acceptance keeps its actual guards and weights");
+    assert.ok(invitationRules.when?.type === "all");
+    assert.deepEqual(invitationRules.when.conditions[1], { type: "social-role", partner: id, role: "enemy", active: false });
+    assert.deepEqual(withoutProse({ ...invitationRules, when: invitationRules.when.conditions[0] }), withoutProse(previous.events.find(event => event.id === followup.id)!.choices.find(choice => choice.id === invite.id)), "romantic acceptance keeps its original guards and weights alongside the new hostile-role guard");
     assert.deepEqual(opportunity, { label: "Begin dating", outcomeIds: [`date-${id}-accepted`] });
     const business = world.events.find(event => event.id === `business-proposal-${id}`)!;
     assert.equal(business.trigger.type, "random"); assert.equal(business.maxOccurrences, 1);

@@ -22,9 +22,9 @@ export function socialRoleImpact(choice: Choice, life: LifeState, world: WorldPa
   }
   return [...changes.values()].map(change => {
     const person = resolvePartner(world, life, change.partner)?.name ?? "someone you meet";
-    const role = change.role === "friend" ? "Friendship" : "Business partnership";
+    const role = { friend: "Friendship", "business-partner": "Business partnership", teacher: "Teacher relationship", disciple: "Discipleship", enemy: "Hostility" }[change.role];
     const action = change.active ? role : `End ${role.toLocaleLowerCase()}`;
     const possible = change.active ? role.toLocaleLowerCase() : `end of ${role.toLocaleLowerCase()}`;
-    return { text: `${change.probability < 1 - 1e-12 ? `Possible ${possible}` : action} with ${person}`, gain: change.active };
+    return { text: `${change.probability < 1 - 1e-12 ? `Possible ${possible}` : action} with ${person}`, gain: change.role === "enemy" ? !change.active : change.active };
   });
 }

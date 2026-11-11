@@ -52,7 +52,7 @@ function reach(engine: LifeEngine, life: LifeState, eventId: string, maxAge: num
 
 test("350 BCE births precede the foundation; retained 66 BCE lives keep their original pack", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.41.0"); assert.equal(world.startYear, -350);
+  assert.equal(world.version, "0.42.0"); assert.equal(world.startYear, -350);
   const engine = createEngine(world), life = engine.start("classical-birth");
   assert.equal(life.age, 0); assert.equal(life.year, -350);
   assert.equal(worldPlace(world, -350), "Rhakotis coast");

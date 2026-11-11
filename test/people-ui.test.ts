@@ -41,8 +41,11 @@ test("neither a future catalog nor a met acquaintance appears in Relationships b
   for (const life of [engine.start("people-ui-birth"), metLife()]) {
     const before = structuredClone(life);
     const html = renderToStaticMarkup(createElement(CharacterPanel, { life, world: engine.world, initialSection: "relationships", onActivity() {} }));
-    assert.doesNotMatch(html, /role="tab"[^>]*>Relationships<|role="tabpanel"[^>]*panel-relationships/);
-    assert.doesNotMatch(html, /<h4>Kleopatra<\/h4>/);
+    assert.match(html, /role="tab"[^>]*>Relationships</);
+    assert.match(html, /No social relationships recorded yet/);
+    const socialPanel = html.split(/id="[^"]+-panel-relationships"/)[1]?.split(/id="[^"]+-panel-children"/)[0];
+    assert.ok(socialPanel);
+    assert.doesNotMatch(socialPanel, /Kleopatra|class="relationship-tags"|aria-label="Relationship with /);
     assert.deepEqual(life, before);
   }
 });

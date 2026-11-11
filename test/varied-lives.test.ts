@@ -26,6 +26,8 @@ function omitProceduralSocialRoles(world: WorldPack): void {
   world.events = world.events.filter(event => !referencesRole(event));
   world.character!.activities = world.character!.activities.filter(activity => !referencesRole(activity));
   delete world.character!.socialRelationships;
+  delete world.character!.extendedSocialRoles;
+  delete world.character!.familyBackgrounds;
 }
 
 function isolateBackground(world: WorldPack): void {
@@ -74,7 +76,7 @@ function pruneRemovedOriginModifiers(world: WorldPack): void {
 
 test("new lives draw broadly from both name pools and sixteen distinct household backgrounds", () => {
   const engine = createEngine(pack);
-  assert.equal(pack.version, "0.41.0");
+  assert.equal(pack.version, "0.42.0");
   assert.equal(pack.character.playerNames.length, 32);
   assert.equal(new Set(pack.character.playerNames).size, 32);
   assert.equal(pack.origins.length, 16);

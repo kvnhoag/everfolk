@@ -6,7 +6,9 @@ import { displayProse } from "../models/display-prose.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
 import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../models/relationship-labels.ts";
+import { familyRelationshipRows, socialRelationshipRows } from "../models/relationship-table.ts";
 import "../styles/health.css";
+import "../styles/relationship-table.css";
 
 function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
   return "sex" in person;
@@ -15,13 +17,14 @@ function isEncountered(person: PartnerDefinition | EncounteredPerson): person is
 const closenessLabel = (value: number, world: WorldPack) => value >= (world.relationships?.supportThreshold ?? 60) ? "Close" : value < (world.relationships?.marriageMinimum ?? 40) ? "Strained" : "Steady";
 
 /** Only established household facts appear here; unknown relatives are not invented. */
-export default function HouseholdSummary({ life, world, onOpenCharacter, activities = [], onActivity, onOpenPeopleTab }: {
+export default function HouseholdSummary({ life, world, onOpenCharacter, activities = [], onActivity, onOpenPeopleTab, onOpenRelationships }: {
   life: LifeState;
   world: WorldPack;
   onOpenCharacter(): void;
   activities?: readonly ActivityAvailability[];
   onActivity?(id: string): void;
   onOpenPeopleTab?(): void;
+  onOpenRelationships?(): void;
 }) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const character = life.character;
@@ -41,6 +44,8 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
   const quickFamilyActions = onActivity && canActThisYear
     ? visibleFamilyActivities(life, activities).filter(act => act.available).slice(0, 2)
     : [];
+  const family = familyRelationshipRows(world, life);
+  const parents = family.filter(row => row.roles.includes("Mother") || row.roles.includes("Father"));
 
   useEffect(() => {
     // Native disclosure remains under player control after its initial layout.
@@ -52,9 +57,10 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
       <summary><span>Household &amp; People</span><svg className="household-disclosure" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></summary>
       <div className="household-summary-content">
         <div className="household-meta-grid">
-          {origin && <div className="household-background"><span className="household-field-label">Background</span><p>{origin.title}</p></div>}
+          {origin && <div className="household-background"><span className="household-field-label">Background</span><p>{origin.title}</p><p className="household-background-detail">{displayProse(origin.text)}</p></div>}
           {job && <div className="household-work"><span className="household-field-label">Your work</span><p>{job.title}</p></div>}
         </div>
+        {parents.length > 0 && <div className="household-natal-family"><span className="household-field-label">Parents</span><ul>{parents.map(parent => <li key={parent.id}><strong>{parent.name}</strong><span>{parent.roles[0]}{parent.deceased ? " · Deceased" : ""}</span><span>{parent.occupation}</span></li>)}</ul></div>}
         {partner && <div className="household-person household-person-card">
           <div className="household-person-top">
             {isEncountered(partner) && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="household-mini-avatar" />}
@@ -105,9 +111,11 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
             </div>}
           </li>;
         })}</ul></div>}
+        {character?.family?.length && <p className="household-family-count">{family.filter(row => !row.deceased).length} living family · {family.filter(row => row.deceased).length} remembered</p>}
         <div className="household-footer-actions">
-          <button type="button" className="household-open" onClick={onOpenCharacter}>Family &amp; life <span aria-hidden="true">→</span></button>
+          <button type="button" className="household-open" onClick={onOpenCharacter}>Family table &amp; life <span aria-hidden="true">→</span></button>
           {onOpenPeopleTab && <button type="button" className="household-open is-secondary" onClick={onOpenPeopleTab}>People &amp; town <span aria-hidden="true">↘</span></button>}
+          {onOpenRelationships && <button type="button" className="household-open is-secondary" onClick={onOpenRelationships}>Relationships <span>{socialRelationshipRows(world, life).length} <span aria-hidden="true">→</span></span></button>}
         </div>
       </div>
     </details>

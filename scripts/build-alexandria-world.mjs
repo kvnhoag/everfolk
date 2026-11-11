@@ -29,6 +29,7 @@ import { applyLivelihoods } from "./alexandria-livelihoods.mjs";
 import { applyResourceVariety } from "./alexandria-resources.mjs";
 import { applyMarketRoles } from "./alexandria-market-roles.mjs";
 import { applyMarketCapacity } from "./alexandria-market-capacity.mjs";
+import { applyFamilyRelationships } from "./alexandria-family-relationships.mjs";
 
 const root = new URL("../", import.meta.url);
 const sources = JSON.parse(readFileSync(new URL("research/sources.json", root), "utf8"));
@@ -972,5 +973,6 @@ applyLivelihoods(world);
 applyResourceVariety(world);
 applyMarketRoles(world);
 applyMarketCapacity(world);
+applyFamilyRelationships(world);
 writeFileSync(output, `${JSON.stringify(world, null, 2)}\n`);
 console.log(`Built ${world.events.length} events, ${world.sources.length} sources, ${bands.length} mortality bands and ${world.character.activities.length} character activities: ${fileURLToPath(output)}`);

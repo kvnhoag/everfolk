@@ -159,6 +159,11 @@ Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries(expandedHousehold
   [`background-${origin}-opportunity`, visual("history-city", "gather")],
 ])));
 Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries([
+  ...currentWorld.character!.partners.flatMap(person => [
+    [`teacher-offer-${person.id}`, visual("learning", "write")],
+    [`disciple-offer-${person.id}`, visual("learning", "write")],
+    [`enmity-offer-${person.id}`, visual("history-city", "gather")],
+  ]),
   ...currentWorld.origins.map(origin => [`background-${origin.id}-adult-livelihood`, visual("history-city", "work")]),
   ...["market-trader-opening", "market-poor-harvest", "market-abundant-harvest", "market-delayed-ships", "market-workshop-orders"].map(id => [id, visual("history-city", "gather")]),
   ["farmer-checks-seed", visual("work")],

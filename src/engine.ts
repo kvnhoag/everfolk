@@ -21,6 +21,7 @@ import { outcomeWeight } from "./outcomes.ts";
 import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
 import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
+import { initializeFamily } from "./family.ts";
 export { matchesCondition } from "./conditions.ts";
 import type { DemoCommand } from "./demo/types.ts";
 import { demoContext, initialDemo } from "./demo/state.ts";
@@ -104,6 +105,7 @@ function mutableSnapshot(state: LifeState): LifeState {
       lastActivityAges: { ...state.character.lastActivityAges },
       ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
       ...(state.character.people ? { people: Object.fromEntries(Object.entries(state.character.people).map(([id, person]) => [id, { ...person }])) } : {}),
+      ...(state.character.family ? { family: state.character.family.map(member => ({ ...member })) } : {}),
       ...(state.character.datedPartnerIds ? { datedPartnerIds: [...state.character.datedPartnerIds] } : {}),
       ...(state.character.relationships ? { relationships: {
         partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie, ...(tie.roles ? { roles: [...tie.roles] } : {}) }])),
@@ -663,6 +665,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     if (world.character?.identity) initializeIdentity(world, state);
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
+    initializeFamily(world, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) {

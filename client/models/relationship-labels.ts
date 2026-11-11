@@ -26,6 +26,11 @@ export function relationshipLabels(world: WorldPack, life: LifeState, personId: 
     const roles = life.character?.relationships?.partners[personId]?.roles;
     if (roles?.includes("friend")) labels.push("Friend");
     if (roles?.includes("business-partner")) labels.push("Business partner");
+    if (world.character.extendedSocialRoles) {
+      if (roles?.includes("teacher")) labels.push("Teacher");
+      if (roles?.includes("disciple")) labels.push("Disciple");
+      if (roles?.includes("enemy")) labels.push("Enemy");
+    }
   }
   return labels;
 }
@@ -46,7 +51,7 @@ export function visibleRelationshipPeople(world: WorldPack, life: LifeState): Re
     if (!definition.proceduralPartners) return [person];
     const dated = character.datedPartnerIds?.includes(person.id) === true;
     const roles = definition.socialRelationships ? character.relationships?.partners[person.id]?.roles : undefined;
-    const social = roles?.some(role => role === "friend" || role === "business-partner") === true;
+    const social = roles?.some(role => role === "friend" || role === "business-partner" || definition.extendedSocialRoles && (role === "teacher" || role === "disciple" || role === "enemy")) === true;
     return dated || social ? [person] : [];
   });
 }

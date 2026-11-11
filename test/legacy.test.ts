@@ -152,7 +152,7 @@ test("legacy validation rejects forged references, passive awards and contacts a
 
 test("new content has seven ordinary career paths, seven rare prestige paths, fourteen callbacks and unchanged mortality", () => {
   const world = current as WorldPack;
-  assert.equal(world.version, "0.41.0");
+  assert.equal(world.version, "0.42.0");
   assert.equal(world.legacy!.routes.length, 7); assert.equal(world.legacy!.achievements.length, 43);
   assert.equal(world.events.filter(event => event.id.includes("-callback-")).length, 14);
   for (const route of world.legacy!.routes) {

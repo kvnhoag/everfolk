@@ -20,6 +20,8 @@ import { activityLoanOffer } from "../models/loan-access.ts";
 import { resolvePartner } from "../../src/people.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../models/relationship-labels.ts";
+import { familyRelationshipRows, socialRelationshipRows } from "../models/relationship-table.ts";
+import RelationshipTable from "./RelationshipTable.tsx";
 import "../styles/birth-avatar.css";
 import "../styles/social-relationships.css";
 import type { CharacterSection } from "../models/character-panel-model.ts";
@@ -28,7 +30,7 @@ import "../styles/character-panel.css";
 
 type Section = CharacterSection;
 type AvailabilityFilter = "all" | "available" | "unavailable";
-type RelationshipFilter = "all" | "friends" | "business" | "romance";
+type RelationshipFilter = "all" | "friends" | "business" | "romance" | "teachers" | "disciples" | "enemies";
 
 /** Preview skill changes with the same sequential bounds as the engine. */
 function skillEffects(activity: ActivityAvailability, life: LifeState, world: WorldPack): { label: string; min: number; max: number; variable: boolean }[] {
@@ -174,9 +176,16 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
   const adults = knownPartners.filter(partner => life.age + partner.ageOffset >= 18);
   const matchesRelationshipFilter = (id: string, filter: RelationshipFilter): boolean => {
     const labels = relationshipLabels(world, life, id);
-    return filter === "all" || filter === "friends" && labels.includes("Friend") || filter === "business" && labels.includes("Business partner") || filter === "romance" && (datedPartnerIds.has(id) || character.partnerId === id);
+    return filter === "all" || filter === "friends" && labels.includes("Friend") || filter === "business" && labels.includes("Business partner") || filter === "romance" && (datedPartnerIds.has(id) || character.partnerId === id)
+      || filter === "teachers" && labels.includes("Teacher") || filter === "disciples" && labels.includes("Disciple") || filter === "enemies" && labels.includes("Enemy");
   };
   const shownPeople = adults.filter(person => !definition.socialRelationships || matchesRelationshipFilter(person.id, relationshipFilter));
+  const shownPeopleIds = new Set(shownPeople.map(person => person.id));
+  const socialRows = socialRelationshipRows(world, life).filter(row => shownPeopleIds.has(row.id));
+  const familyRows = familyRelationshipRows(world, life);
+  const livingFamily = familyRows.filter(row => !row.deceased);
+  const rememberedFamily = familyRows.filter(row => row.deceased);
+  const relationshipGroups: [RelationshipFilter, string][] = [["all", "All"], ["friends", "Friends"], ["business", "Business"], ["romance", "Romance"], ...(definition.extendedSocialRoles ? [["teachers", "Teachers"], ["disciples", "Disciples"], ["enemies", "Enemies"]] as [RelationshipFilter, string][] : [])];
   const currentRomanceLabel = currentPartner && romanticPartnerLabel(world, life, currentPartner.id);
   const personActivities = (id: string) => relationships.filter(activity => {
     if (!targetsPartner(activity, id)) return false;
@@ -200,7 +209,6 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
   }
   const budget = characterActivitySummary(life, activities);
   const familyActivities = visibleFamilyActivities(life, activities);
-  const hasFamily = character.children.length > 0 || character.relationshipStatus === "married";
 
   function navigateTabs(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     let next = index;
@@ -266,10 +274,10 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />
       </div>}
       {visibleSections.some(item => item.id === "relationships") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-relationships`} aria-labelledby={`${instanceId}-tab-relationships`} tabIndex={0} hidden={activeSection !== "relationships"}>
-        <div className="character-section-heading"><span>Relationships</span><h3>{currentRomanceLabel && currentPartner ? `${currentRomanceLabel}: ${currentPartner.name}` : definition.socialRelationships ? "People in your life" : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{definition.socialRelationships ? "Spend time with friends, work with business partners and care for your close relationships." : character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
-        {definition.socialRelationships && <div className="relationship-filters" role="group" aria-label="Relationship groups">{([["all", "All"], ["friends", "Friends"], ["business", "Business"], ["romance", "Romance"]] as const).map(([filter, label]) => <button type="button" key={filter} aria-pressed={relationshipFilter === filter} onClick={() => setRelationshipFilter(filter)}>{label}<span>{adults.filter(person => matchesRelationshipFilter(person.id, filter)).length}</span></button>)}</div>}
-        {adults.length === 0 && <p className="character-empty">No adult partners available.</p>}
-        {adults.length > 0 && shownPeople.length === 0 && <p className="character-empty">No relationships in this group yet.</p>}
+        <div className="character-section-heading"><span>Relationships</span><h3>{currentRomanceLabel && currentPartner ? `${currentRomanceLabel}: ${currentPartner.name}` : definition.socialRelationships ? "People in your life" : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{definition.extendedSocialRoles ? "Keep track of friends, teachers, disciples, enemies and the people you love or work with." : definition.socialRelationships ? "Spend time with friends, work with business partners and care for your close relationships." : character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
+        {definition.socialRelationships && <div className="relationship-filters" role="group" aria-label="Relationship groups">{relationshipGroups.map(([filter, label]) => <button type="button" key={filter} aria-pressed={relationshipFilter === filter} onClick={() => setRelationshipFilter(filter)}>{label}<span>{adults.filter(person => matchesRelationshipFilter(person.id, filter)).length}</span></button>)}</div>}
+        <RelationshipTable rows={socialRows} world={world} caption="Social relationships" emptyText={adults.length === 0 ? "No social relationships recorded yet. People appear here as friendships, romances and other relationships form." : "No relationships in this group yet."} />
+        {shownPeople.length > 0 && <h4 className="relationship-actions-title">Relationship activities</h4>}
         <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
           {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
           <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>)}</div></div>
@@ -287,13 +295,12 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         })} {...props} />
       </div>}
       {visibleSections.some(item => item.id === "children") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-children`} aria-labelledby={`${instanceId}-tab-children`} tabIndex={0} hidden={activeSection !== "children"}>
-        <div className="character-section-heading"><span>Family</span><h3>{character.children.length === 0 ? "Home life" : `${character.children.length} ${character.children.length === 1 ? "child" : "children"}`}</h3><p>{character.children.length > 0 ? "Spend time with your family and help at home." : hasFamily ? "Manage your household and family plans." : "Help at home or spend time with the neighbors."}</p></div>
-        {character.children.length > 0 && <ul className="character-children">{character.children.map(child => {
-          const otherParent = resolvePartner(world, life, child.otherParentId);
-          const age = life.age - child.birthAge;
-          const tie = character.relationships?.children[child.id];
-          return <li key={child.id}><span className="character-child-initial" aria-hidden="true">{child.name.charAt(0)}</span><div><h4>{child.name}</h4><span>{age === 0 ? "Newborn" : `Age ${age}`}{otherParent ? ` · Other parent: ${otherParent.name}` : ""}</span>{tie && <span className="character-child-closeness">{tieLabel(tie.closeness, world)} · {tie.closeness}/100 · Last contact: age {tie.lastContactAge}</span>}</div></li>;
-        })}</ul>}
+        <div className="character-section-heading"><span>Family</span><h3>Your family</h3><p>Grandparents, parents, your spouse and children, with their backgrounds and work.</p></div>
+        {origin && <div className="family-background-note"><strong>{origin.title}</strong><p>{displayProse(origin.text)}</p></div>}
+        <RelationshipTable rows={livingFamily} world={world} caption="Current family" emptyText="No living family members recorded for this life." />
+        {rememberedFamily.length > 0 && <details className="family-history"><summary>Remembered family · {rememberedFamily.length}</summary><RelationshipTable rows={rememberedFamily} world={world} caption="Remembered family" emptyText="No deceased relatives recorded." /></details>}
+        {!character.family?.length && <p className="character-person-meta">Parents and grandparents were not recorded for this life.</p>}
+        {familyActivities.length > 0 && <h4 className="relationship-actions-title">Family activities</h4>}
         <ActivityList activities={familyActivities} {...props} />
       </div>}
     </div>
