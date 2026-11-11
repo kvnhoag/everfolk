@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { handleSignInApi } from "../server/signin/routes.ts";
+import { DEFAULT_DRIP_DAILY_CAP, FUNDER_RESERVE_YOCTO, handleSignInApi } from "../server/signin/routes.ts";
 import type { SignInDependencies, SignInEnvironment } from "../server/signin/routes.ts";
 import { createPrivyTokenVerifier, TokenServiceError } from "../server/signin/privy-token.ts";
-import { createAccountBalance, createTransfer } from "../server/signin/funder.ts";
+import { createAccountBalance, createTransfer, isRejectedBeforeInclusion, redact, TransferNotSentError } from "../server/signin/funder.ts";
 import { TestDatabase } from "./support/d1.ts";
 
 const ORIGIN = "https://everfolk.test";
@@ -12,6 +12,9 @@ const SECRET_KEY = "ed25519:SuperSecretFunderKeyThatMustNeverLeak111111111111111
 const DRIP = "100000000000000000000000";
 const IMPLICIT = "a".repeat(64);
 const NOW = new Date("2026-11-12T10:00:00Z");
+const FUNDER = "funder.testnet";
+const FUNDER_RICH = "10000000000000000000000000";
+const funderOr = (other: string | null) => async (id: string) => (id === FUNDER ? FUNDER_RICH : other);
 
 const allowAll = { limit: async () => ({ success: true }) };
 
@@ -32,7 +35,7 @@ function harness(overrides: Partial<SignInDependencies> = {}): Harness {
       return { userId: token.slice("good:".length) };
     },
     transfer: async (to, yocto) => { transfers.push({ to, yocto }); return { hash: `tx-${transfers.length}` }; },
-    accountBalance: async () => null,
+    accountBalance: funderOr(null),
     now: () => NOW,
     limiter: allowAll,
     ...overrides,
@@ -127,7 +130,7 @@ test("fund refuses an account that already has NEAR", async () => {
 });
 
 test("fund treats a zero balance as unfunded", async () => {
-  const { deps, transfers } = harness({ accountBalance: async () => "0" });
+  const { deps, transfers } = harness({ accountBalance: funderOr("0") });
   const response = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), env(), deps);
   assert.equal(response.status, 200);
   assert.equal(transfers.length, 1);
@@ -154,10 +157,43 @@ test("fund stops at the daily cap", async () => {
   assert.equal(nextDay.status, 200, "the cap resets at 00:00 UTC");
 });
 
-test("fund ignores an invalid daily cap and uses the default", async () => {
-  const e = env({ EVERFOLK_DRIP_DAILY_CAP: "-3" });
-  const { deps } = harness();
-  assert.equal((await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, deps)).status, 200);
+test("fund ignores an invalid daily cap and uses the default of 5", async () => {
+  assert.equal(DEFAULT_DRIP_DAILY_CAP, 5);
+  for (const cap of [undefined, "-3", "0", "abc", "99999999999999999999"]) {
+    const e = env({ EVERFOLK_DRIP_DAILY_CAP: cap });
+    const { deps, transfers } = harness();
+    const statuses: number[] = [];
+    for (let i = 0; i < 6; i += 1) {
+      const account = i.toString(16).repeat(64);
+      statuses.push((await handleSignInApi(fund(`good:did:privy:user${i}`, { accountId: account }), e, deps)).status);
+    }
+    assert.deepEqual(statuses, [200, 200, 200, 200, 200, 429], `cap ${JSON.stringify(cap)} falls back to 5`);
+    assert.equal(transfers.length, 5);
+  }
+});
+
+test("fund pauses when the funder cannot cover a drip plus its reserve", async () => {
+  assert.equal(FUNDER_RESERVE_YOCTO, "50000000000000000000000");
+  const threshold = (BigInt(DRIP) + BigInt(FUNDER_RESERVE_YOCTO)).toString();
+  const below = (BigInt(threshold) - 1n).toString();
+  const e = env();
+  const originalError = console.error;
+  console.error = () => {};
+  try {
+    for (const funderBalance of [below, "0", null]) {
+      const { deps, transfers } = harness({ accountBalance: async id => (id === FUNDER ? funderBalance : null) });
+      const response = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, deps);
+      assert.equal(response.status, 503);
+      assert.equal((await response.json()).error, "Funding is paused.");
+      assert.equal(transfers.length, 0);
+    }
+  } finally {
+    console.error = originalError;
+  }
+  const rows = (e.DB as TestDatabase).sqlite.prepare("SELECT COUNT(*) AS n FROM signin_funding").get() as { n: number };
+  assert.equal(rows.n, 0, "a paused request claims nothing");
+  const topped = harness({ accountBalance: async id => (id === FUNDER ? threshold : null) });
+  assert.equal((await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, topped.deps)).status, 200);
 });
 
 test("fund limits each client to 6 attempts a minute", async () => {
@@ -181,25 +217,75 @@ test("fund is unavailable when funding is not configured", async () => {
   assert.equal(transfers.length, 0);
 });
 
-test("a failed transfer can be retried", async () => {
-  const e = env();
+function quietly<T>(run: (logged: unknown[]) => Promise<T>): Promise<T> {
   const logged: unknown[] = [];
   const originalError = console.error;
   console.error = (...args: unknown[]) => { logged.push(args); };
-  try {
-    const failing = harness({ transfer: async () => { throw new Error(`rpc exploded near ${SECRET_KEY}`); } });
-    const failed = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, failing.deps);
+  return run(logged).finally(() => { console.error = originalError; });
+}
+
+test("a transfer that may have been sent keeps the reservation", async () => {
+  const e = env();
+  let attempts = 0;
+  const timingOut = harness({
+    transfer: async (_to, _yocto, onSigned) => {
+      attempts += 1;
+      await onSigned?.("signed-hash");
+      throw new Error(`TransactionTimeoutError near ${SECRET_KEY}`);
+    },
+  });
+  await quietly(async logged => {
+    const response = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, timingOut.deps);
+    assert.equal(response.status, 502);
+    const text = await response.text();
+    assert.ok(!text.includes(SECRET_KEY));
+    assert.deepEqual(JSON.parse(text), { funded: false, reason: "pending", error: "Your account is still being set up." });
+    assert.ok(!JSON.stringify(logged).includes(SECRET_KEY), "logs never contain the key");
+  });
+  const row = (e.DB as TestDatabase).sqlite.prepare("SELECT tx_hash FROM signin_funding WHERE privy_user_id = ?").get("did:privy:alice") as { tx_hash: string };
+  assert.equal(row.tx_hash, "signed-hash", "the signed hash is recorded before broadcast");
+  const retry = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, timingOut.deps);
+  assert.deepEqual(await retry.json(), { funded: false, reason: "already-funded" });
+  assert.equal(attempts, 1, "a quick retry never sends a second drip");
+});
+
+test("a transfer proven not sent can be retried", async () => {
+  const e = env();
+  const rejected = harness({
+    transfer: async (_to, _yocto, onSigned) => {
+      await onSigned?.("signed-hash");
+      throw new TransferNotSentError(`rejected by the node near ${SECRET_KEY}`);
+    },
+  });
+  await quietly(async logged => {
+    const failed = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, rejected.deps);
     assert.equal(failed.status, 502);
     assert.ok(!(await failed.text()).includes(SECRET_KEY), "errors never echo the key");
-  } finally {
-    console.error = originalError;
-  }
-  assert.ok(logged.length > 0, "transfer failures are logged server-side");
-  assert.ok(!JSON.stringify(logged).includes(SECRET_KEY), "logs never contain the key");
+    assert.ok(logged.length > 0, "transfer failures are logged server-side");
+    assert.ok(!JSON.stringify(logged).includes(SECRET_KEY), "logs never contain the key");
+  });
   const { deps, transfers } = harness();
   const retried = await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, deps);
   assert.equal(retried.status, 200);
+  assert.deepEqual(await retried.json(), { funded: true, hash: "tx-1" });
   assert.equal(transfers.length, 1);
+});
+
+test("redact removes the trimmed key and its bare base58 part", () => {
+  const base58 = "3xYzSecretBase58Part";
+  assert.equal(redact(`a ${base58} b ed25519:${base58} c`, `  ed25519:${base58}\n`), "a [redacted] b [redacted] c");
+  assert.equal(redact("nothing here", undefined), "nothing here");
+});
+
+test("logs redact a key that env padded with whitespace", async () => {
+  const bare = "PaddedSecretBase58KeyValue";
+  const e = env({ EVERFOLK_FUNDER_PRIVATE_KEY: `  ed25519:${bare}  ` });
+  const leaky = harness({ transfer: async () => { throw new TransferNotSentError(`boom ${bare}`); } });
+  await quietly(async logged => {
+    await handleSignInApi(fund("good:did:privy:alice", { accountId: IMPLICIT }), e, leaky.deps);
+    assert.ok(logged.length > 0);
+    assert.ok(!JSON.stringify(logged).includes(bare));
+  });
 });
 
 test("unknown routes and methods are refused", async () => {
@@ -339,4 +425,86 @@ test("the real transfer never echoes a malformed funder key", async () => {
     assert.ok(!error.message.includes(badKey), error.message);
     return true;
   });
+});
+
+// --- Real near-api-js transfer against a stubbed RPC (no network) ----------------------------------
+
+const BLOCK_HASH = "11111111111111111111111111111111";
+
+async function withRpc<T>(sendTx: () => unknown, run: (sends: () => number) => Promise<T>): Promise<T> {
+  const originalFetch = globalThis.fetch;
+  let sends = 0;
+  globalThis.fetch = (async (_url: string | URL | Request, init?: RequestInit) => {
+    const request = JSON.parse(String(init?.body)) as { id: string; method: string };
+    const reply = (body: Record<string, unknown>) => Response.json({ jsonrpc: "2.0", id: request.id, ...body });
+    if (request.method === "query") return reply({ result: { nonce: 7, permission: "FullAccess", block_hash: BLOCK_HASH, block_height: 1 } });
+    if (request.method === "block") return reply({ result: { header: { hash: BLOCK_HASH, height: 1 } } });
+    if (request.method === "send_tx") {
+      sends += 1;
+      const answer = sendTx();
+      return answer instanceof Response ? answer : reply(answer as Record<string, unknown>);
+    }
+    return reply({ error: { name: "REQUEST_VALIDATION_ERROR", cause: { name: "METHOD_NOT_FOUND", info: { method_name: request.method } } } });
+  }) as typeof fetch;
+  try { return await run(() => sends); } finally { globalThis.fetch = originalFetch; }
+}
+
+async function realTransfer() {
+  const { KeyPair } = await import("near-api-js");
+  const key = KeyPair.fromRandom("ed25519").toString();
+  const signedHashes: string[] = [];
+  const transfer = createTransfer({ accountId: FUNDER, privateKey: key, rpcUrl: "https://rpc.test" });
+  return { key, signedHashes, send: () => transfer(IMPLICIT, DRIP, async hash => { signedHashes.push(hash); }) };
+}
+
+const outcome = (status: unknown) => ({ result: { status, transaction: { hash: "x" }, transaction_outcome: { id: "x", block_hash: BLOCK_HASH }, receipts_outcome: [], final_execution_status: "EXECUTED_OPTIMISTIC" } });
+
+test("real transfer: success returns the signed hash recorded before broadcast", async () => {
+  const { signedHashes, send } = await realTransfer();
+  await withRpc(() => outcome({ SuccessValue: "" }), async sends => {
+    const { hash } = await send();
+    assert.deepEqual(signedHashes, [hash]);
+    assert.equal(sends(), 1);
+  });
+});
+
+test("real transfer: a node timeout is not proof of not sending, and is not resent", async () => {
+  const { key, signedHashes, send } = await realTransfer();
+  await withRpc(() => ({ error: { name: "HANDLER_ERROR", cause: { name: "TIMEOUT_ERROR", info: {} }, message: "Timeout" } }), async sends => {
+    await assert.rejects(send(), (error: Error) => {
+      assert.ok(!(error instanceof TransferNotSentError), error.message);
+      assert.ok(!error.message.includes(key.split(":")[1]));
+      return true;
+    });
+    assert.equal(signedHashes.length, 1);
+    assert.equal(sends(), 1, "the signed transaction is broadcast once");
+  });
+});
+
+test("real transfer: an unavailable RPC during broadcast keeps the drip pending and is not resent", async () => {
+  const { send } = await realTransfer();
+  await withRpc(() => new Response("unavailable", { status: 503 }), async sends => {
+    await assert.rejects(send(), (error: Error) => !(error instanceof TransferNotSentError));
+    assert.equal(sends(), 1);
+  });
+});
+
+test("real transfer: a rejected nonce or a refunded failure is proof of not sending", async () => {
+  const invalidNonce = { error: { name: "HANDLER_ERROR", cause: { name: "INVALID_TRANSACTION", info: {} }, data: { TxExecutionError: { InvalidTxError: { InvalidNonce: { ak_nonce: 9, tx_nonce: 8 } } } }, message: "Invalid" } };
+  const failure = outcome({ Failure: { ActionError: { index: 0, kind: { AccountDoesNotExist: { account_id: IMPLICIT } } } } });
+  for (const reply of [invalidNonce, failure]) {
+    const { send } = await realTransfer();
+    await withRpc(() => reply, async () => {
+      await assert.rejects(send(), TransferNotSentError);
+    });
+  }
+});
+
+test("rejection classification uses near-api-js error types", async () => {
+  const errors = await import("near-api-js/rpc-errors");
+  assert.equal(isRejectedBeforeInclusion(new errors.InvalidNonceError(9n as never, 8n as never, "h", "b")), true);
+  assert.equal(isRejectedBeforeInclusion(new errors.InvalidTransactionError()), true);
+  assert.equal(isRejectedBeforeInclusion(new errors.TransactionTimeoutError()), false);
+  assert.equal(isRejectedBeforeInclusion(new errors.ActionExecutionError("x", 0, "h", "b")), false);
+  assert.equal(isRejectedBeforeInclusion(new Error("RetriesExceeded")), false);
 });

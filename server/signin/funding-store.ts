@@ -32,7 +32,10 @@ export async function recordTransfer(db: ContentDatabase, privyUserId: string, t
   await db.prepare("UPDATE signin_funding SET tx_hash = ? WHERE privy_user_id = ?").bind(txHash, privyUserId).run();
 }
 
-/** Frees a reservation whose transfer failed, so the player can retry. Never removes a completed funding. */
+/**
+ * Frees a reservation, so the player can retry. Call it only from the request that claimed the row, and only
+ * once the transfer is proven not sent: the signed hash is recorded before broadcast, so it is no evidence of payment.
+ */
 export async function releaseFunding(db: ContentDatabase, privyUserId: string): Promise<void> {
-  await db.prepare("DELETE FROM signin_funding WHERE privy_user_id = ? AND tx_hash IS NULL").bind(privyUserId).run();
+  await db.prepare("DELETE FROM signin_funding WHERE privy_user_id = ?").bind(privyUserId).run();
 }

@@ -1,12 +1,14 @@
 import { clientKey, createMemoryLimiter, type RateLimiter } from "../ranked/rate-limit.ts";
 import type { ContentDatabase } from "../store.ts";
-import { createAccountBalance, createTransfer, redact, type AccountBalance, type Transfer } from "./funder.ts";
+import { createAccountBalance, createTransfer, redact, TransferNotSentError, type AccountBalance, type Transfer } from "./funder.ts";
 import { claimFunding, hasFunding, recordTransfer, releaseFunding } from "./funding-store.ts";
 import { TokenServiceError, verifyPrivyToken, type VerifyToken } from "./privy-token.ts";
 
 /** 0.1 testnet NEAR: enough gas for a new email player's first NFT actions. */
 export const DEFAULT_DRIP_YOCTO = "100000000000000000000000";
-export const DEFAULT_DRIP_DAILY_CAP = 20;
+export const DEFAULT_DRIP_DAILY_CAP = 5;
+/** The funder keeps this much on top of one drip so its own gas and storage are never at risk (0.05 NEAR). */
+export const FUNDER_RESERVE_YOCTO = "50000000000000000000000";
 const DEFAULT_RPC_URL = "https://test.rpc.fastnear.com";
 const MAX_BODY_BYTES = 1_024;
 const IMPLICIT_ACCOUNT = /^[0-9a-f]{64}$/;
@@ -106,13 +108,30 @@ async function ensureEmpty(accountId: string, balance: AccountBalance): Promise<
   if (amount !== null && BigInt(amount) > 0n) throw new RouteError(409, "This account is already set up.");
 }
 
+async function ensureFunderCanPay(setup: FundingSetup, balance: AccountBalance): Promise<void> {
+  let amount: string | null;
+  try { amount = await balance(setup.accountId); } catch (error) {
+    console.error("signin funder balance lookup failed", { error: redact(error instanceof Error ? error.message : String(error), setup.privateKey) });
+    throw new RouteError(503, "Account setup is unavailable right now. Please try again in a moment.");
+  }
+  if (amount === null || BigInt(amount) < BigInt(setup.drip) + BigInt(FUNDER_RESERVE_YOCTO)) {
+    console.error("signin funding paused: funder balance is low", { balance: amount });
+    throw new RouteError(503, "Funding is paused.");
+  }
+}
+
 async function sendDrip(setup: FundingSetup, userId: string, accountId: string, transfer: Transfer): Promise<Response> {
   let hash: string;
   try {
-    hash = (await transfer(accountId, setup.drip)).hash;
+    hash = (await transfer(accountId, setup.drip, signedHash => recordTransfer(setup.db, userId, signedHash))).hash;
   } catch (error) {
+    const notSent = error instanceof TransferNotSentError;
     const message = redact(error instanceof Error ? error.message : String(error), setup.privateKey);
-    console.error("signin funding transfer failed", { userId, accountId, amount: setup.drip, error: message });
+    console.error("signin funding transfer failed", { userId, accountId, amount: setup.drip, notSent, error: message });
+    if (!notSent) {
+      // The drip may be on chain: keep the reservation so a retry can never send a second one.
+      return json({ funded: false, reason: "pending", error: "Your account is still being set up." }, 502);
+    }
     await releaseFunding(setup.db, userId);
     throw new RouteError(502, "Your account could not be set up just now. Please try again in a moment.");
   }
@@ -133,7 +152,9 @@ async function fund(request: Request, env: SignInEnvironment, deps: SignInDepend
   const userId = await authenticate(request, setup.appId, deps.verifyToken ?? verifyPrivyToken);
   const accountId = await readAccountId(request);
   if (await hasFunding(setup.db, userId)) return json({ funded: false, reason: "already-funded" });
-  await ensureEmpty(accountId, deps.accountBalance ?? createAccountBalance(setup.rpcUrl));
+  const balance = deps.accountBalance ?? createAccountBalance(setup.rpcUrl);
+  await ensureEmpty(accountId, balance);
+  await ensureFunderCanPay(setup, balance);
   const now = (deps.now ?? (() => new Date()))();
   const claim = await claimFunding(setup.db, { privyUserId: userId, accountId, amount: setup.drip, now, dailyCap: setup.dailyCap });
   if (claim === "already-funded") return json({ funded: false, reason: "already-funded" });
@@ -159,7 +180,7 @@ export async function handleSignInApi(request: Request, env: SignInEnvironment, 
   } catch (error) {
     if (error instanceof RouteError) return json({ error: error.message }, error.status);
     // Never expose keys, RPC payloads, SQL or stack traces to visitors.
-    console.error("signin route failed", { path, error: redact(error instanceof Error ? error.message : String(error), env.EVERFOLK_FUNDER_PRIVATE_KEY ?? "") });
+    console.error("signin route failed", { path, error: redact(error instanceof Error ? error.message : String(error), env.EVERFOLK_FUNDER_PRIVATE_KEY) });
     return json({ error: "Account setup is unavailable right now. Please try again later." }, 503);
   }
 }
