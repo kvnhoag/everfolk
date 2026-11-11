@@ -129,6 +129,10 @@ export interface MarketRow {
   priceText: string;
   priceYocto: string;
   canBuy: boolean;
+  /** Null when the token could not be read. */
+  careerGroup: CareerGroup | null;
+  /** Null when the token could not be read. */
+  rarity: number | null;
   /** 1–100; absent when the token could not be read. */
   affection?: number;
   /** Skill icon for people of the city; null for figures, which show their art. */
@@ -165,6 +169,8 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
       priceText: `${formatNear(listing.price)} NEAR`,
       priceYocto: listing.price,
       canBuy: viewer !== null && viewer !== listing.seller_id,
+      careerGroup: token ? token.extra.career_group : null,
+      rarity: token ? token.extra.rarity : null,
       ...(token ? { affection: token.extra.affection, emblem: token.extra.kind === "figure" ? null : careerEmblem(token.extra.career_group) } : {}),
     };
   });
