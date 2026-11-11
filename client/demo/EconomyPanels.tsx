@@ -1,9 +1,14 @@
 import { useEffect, useId, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
+import PixelIcon from "../PixelIcon.tsx";
+import Storehouse from "./Storehouse.tsx";
+import type { StorehouseRow } from "./storehouse-model.ts";
+import { resourceIcon } from "./resources.ts";
 import "./economy-panels.css";
 
 export interface ComparisonSide {
@@ -16,6 +21,7 @@ export interface ComparisonSide {
 
 interface Props {
   screen: DemoScreen;
+  storehouse?: StorehouseRow[] | null;
   cashText: string;
   autoPlay: boolean;
   pending?: boolean;
@@ -31,11 +37,11 @@ interface Props {
   occupations?: { id: string; label: string; unavailable: boolean; reason: string | null }[];
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({ label, value }: { label: ReactNode; value: string }) {
   return <div><dt>{label}</dt><dd>{value}</dd></div>;
 }
 
-export default function EconomyPanels({ screen, cashText, autoPlay, pending = false, comparison = null, scenario = null, onTrade, onPlan, onAutoPlay, onDelegate, onOccupation, onActivity, training = [], occupations = [] }: Props) {
+export default function EconomyPanels({ screen, storehouse = null, cashText, autoPlay, pending = false, comparison = null, scenario = null, onTrade, onPlan, onAutoPlay, onDelegate, onOccupation, onActivity, training = [], occupations = [] }: Props) {
   const titleId = useId();
   const slot = useRef(false);
   const [item, setItem] = useState<TradeItem>("grain");
@@ -59,6 +65,8 @@ export default function EconomyPanels({ screen, cashText, autoPlay, pending = fa
 
   return <div className="demo-economy" aria-labelledby={titleId}>
     <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
+    {storehouse && <Storehouse rows={storehouse} />}
+
     <section aria-label="This year">
       <h3>This year</h3>
       <dl className="demo-facts">
@@ -90,14 +98,14 @@ export default function EconomyPanels({ screen, cashText, autoPlay, pending = fa
       {screen.market.visitUsed && <p>You have already visited the market this year.</p>}
       {screen.market.reasons.map(reason => <p key={reason}>{reason}</p>)}
       <dl className="demo-facts">
-        {screen.market.quotes.filter(entry => entry.item === "grain" || entry.item === item).map(entry => <Field key={entry.item} label={itemLabel(entry.item) + " buy / sell"} value={entry.buy + " / " + entry.sell} />)}
+        {screen.market.quotes.filter(entry => entry.item === "grain" || entry.item === item).map(entry => <Field key={entry.item} label={<><PixelIcon name={resourceIcon(entry.item)} size={16} /> {itemLabel(entry.item)} buy / sell</>} value={entry.buy + " / " + entry.sell} />)}
         <Field label="Merchant can buy" value={String(quote?.merchantCanBuy ?? 0)} />
         <Field label="Merchant holds" value={String(quote?.merchantStock ?? 0)} />
         <Field label="Army grain price" value={String(screen.market.armyGrainPrice)} />
         <Field label="Army contract" value={screen.market.armyOpen ? "Open" : "Not offered"} />
       </dl>
       <div className="demo-actions">
-        <label>Good<select value={item} onChange={event => setItem(event.target.value as TradeItem)}>{TRADE_ITEMS.map(id => <option key={id} value={id}>{itemLabel(id)}</option>)}</select></label>
+        <label>Good <PixelIcon name={resourceIcon(item)} size={16} /><select value={item} onChange={event => setItem(event.target.value as TradeItem)}>{TRADE_ITEMS.map(id => <option key={id} value={id}>{itemLabel(id)}</option>)}</select></label>
         <label>Side<select value={side} onChange={event => setSide(event.target.value as "buy" | "sell")}><option value="sell">Sell</option><option value="buy">Buy</option></select></label>
         <label>With<select value={counterparty} onChange={event => setCounterparty(event.target.value as "merchant" | "army")}><option value="merchant">Merchant</option><option value="army">Army</option></select></label>
         <label>Quantity<input inputMode="numeric" min={1} type="number" value={quantity} onChange={event => setQuantity(Math.max(1, Number(event.target.value) || 1))} /></label>
