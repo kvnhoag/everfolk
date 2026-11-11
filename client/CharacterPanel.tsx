@@ -1,3 +1,4 @@
+import { vocationInventory } from "../src/vocations/view.ts";
 import { displayProse } from "./display-prose.ts";
 import { useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
@@ -226,6 +227,11 @@ export default function CharacterPanel({ life, world, onActivity, initialSection
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
         <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
+        {life.vocations && <details className="character-background"><summary>Materials and handmade products</summary>
+          {Object.values(vocationInventory(life)).some(n => n > 0) ? <ul>{["linen", "flax"].filter(id => (vocationInventory(life)[id] ?? 0) > 0).map(id => <li key={id}>{id} · {vocationInventory(life)[id]}</li>)}{life.vocations.lots.filter(lot => lot.quantity > 0).map(lot => <li key={`${lot.item}-${lot.quality}`}>{lot.item.replaceAll("-", " ")} · {lot.quantity}{world.vocations?.materials[lot.item] ? "" : ` · grade ${lot.quality}`}</li>)}</ul> : <p>No materials or products yet. Buy materials or start a paid apprenticeship under Other work.</p>}
+          {life.vocations.project && <p>In progress: {world.vocations!.recipes[life.vocations.project.recipe].title} · {life.vocations.project.completedYears} of {world.vocations!.recipes[life.vocations.project.recipe].workYears} work years complete. Inputs and workshop fee are reserved.</p>}
+          <p>Making and study use this year's major activity. Product sales require a buyer with cash and remaining demand.</p>
+        </details>}
         <SearchControls id={`${instanceId}-career`} label="Find work" placeholder="Job, skill or activity" value={jobSearch} onChange={setJobSearch} filter={jobAvailability} onFilter={setJobAvailability} filterLabel="Availability" />
         <p className="character-result-count" role="status">{visibleJobs.length} of {definition.jobs.length} jobs · {visibleOtherCareer.length} of {otherCareer.length} work activities</p>
         {world.demo && <div className="character-card-list" aria-label="Future paths">{world.demo.availability.futurePaths.map(path => <article className="character-detail-card" key={path.id}><h3>{path.title} <span className="character-status-tag">Unavailable</span></h3><p>{path.description}</p>{path.prerequisites && <p>{path.prerequisites}</p>}<p>{UNAVAILABLE_REASON}</p></article>)}</div>}

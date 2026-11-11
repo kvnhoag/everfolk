@@ -1,0 +1,1789 @@
+{
+  "version": "everfolk-skill-tree-design-1",
+  "status": "design-deliverable-for-review",
+  "created": "2026-11-12",
+  "thresholds": {
+    "1": 0,
+    "2": 8,
+    "3": 16,
+    "4": 24,
+    "5": 32,
+    "6": 40,
+    "7": 48,
+    "8": 56,
+    "9": 64,
+    "10": 72
+  },
+  "nodes": [
+    {
+      "id": "F1",
+      "depth": 1,
+      "title": "Fieldwork",
+      "branch": "Farming",
+      "specialization": null,
+      "prerequisites": {
+        "all": []
+      },
+      "minimumProficiency": {
+        "farming": 0
+      },
+      "proof": "Complete 1 annual fieldwork action, hired or on a household plot.",
+      "reward": "Unlock ordinary cultivation plan; +3 Farming from each subsequent completed farming work year."
+    },
+    {
+      "id": "F2",
+      "depth": 2,
+      "title": "Seed handling",
+      "branch": "Farming",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "F1"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 8
+      },
+      "proof": "Complete 1 sowing cycle with its seed debited from inventory; retain seed for the following cycle.",
+      "reward": "Unlock a seed reserve: default 10 grain per grain plot, protected from automatic surplus sales. Flax sowing consumes 2 purchased flax-seed units/plot; reserve that input separately."
+    },
+    {
+      "id": "F3S",
+      "depth": 3,
+      "title": "Soil knowledge",
+      "branch": "Farming",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "F2"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 16
+      },
+      "proof": "Complete 1 soil-preparation work year; record plot allocation and resulting harvest.",
+      "reward": "Unlock soil preparation: spend the annual work action for +5% gross grain/flax yield this year; no automatic bonus."
+    },
+    {
+      "id": "F3W",
+      "depth": 3,
+      "title": "Water management",
+      "branch": "Farming",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "F2"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 16
+      },
+      "proof": "Complete 1 channel-maintenance work year, including its quoted cost; no low flood required.",
+      "reward": "Unlock maintained channels: 8 dr per plot/year; low-flood yield factor becomes 0.55 instead of 0.45 while maintained; other flood factors unchanged."
+    },
+    {
+      "id": "F4",
+      "depth": 4,
+      "title": "Seasonal planning",
+      "branch": "Farming",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "F3S",
+          "F3W"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 24
+      },
+      "proof": "Complete 1 planned harvest with recorded plot/labour allocation and seed reserve.",
+      "reward": "Unlock annual production-plan preview with rent, rations, seed, feed and remaining saleable surplus; unlock both specializations."
+    },
+    {
+      "id": "FC5",
+      "depth": 5,
+      "title": "Sowing methods",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "F4"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 32
+      },
+      "proof": "Complete 1 prepared sowing cycle with full seed allocation.",
+      "reward": "Unlock dense sowing: consume 20 rather than 10 seed grain per plot; +6% gross yield at normal/high flood, no yield increase at low flood."
+    },
+    {
+      "id": "FC6",
+      "depth": 6,
+      "title": "Crop care",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "FC5"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 40
+      },
+      "proof": "Complete 2 crop-care work years.",
+      "reward": "Crop-care activity gives +8% gross yield in its work year instead of the +5% soil-preparation action; they are alternative annual actions."
+    },
+    {
+      "id": "FC7",
+      "depth": 7,
+      "title": "Water allocation",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "FC6"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 48
+      },
+      "proof": "Complete 2 maintained-channel harvests, under any flood condition.",
+      "reward": "Maintained-channel low-flood factor becomes 0.60; maintenance remains 8 dr/plot/year; replaces the 0.55 effect."
+    },
+    {
+      "id": "FC8",
+      "depth": 8,
+      "title": "Crop allocation",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "FC7"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 56
+      },
+      "proof": "Complete 2 different single-crop harvest plans (grain then flax, or the reverse), retaining the applicable next-year seed. Mixed allocation is not required before its unlock.",
+      "reward": "Unlock coordinated mixed-crop planning; +5% flax yield on assigned flax plots; grain plots and animal feed remain actual resource constraints."
+    },
+    {
+      "id": "FC9",
+      "depth": 9,
+      "title": "Yield reliability",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "FC8"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 64
+      },
+      "proof": "Complete 2 planned harvests whose household grain ledger reconciles, with full household rations.",
+      "reward": "Unlock conservative planting: +15% gross yield during low flood, -5% at normal/high flood; alternative to dense sowing, never stacked with it."
+    },
+    {
+      "id": "FC10",
+      "depth": 10,
+      "title": "Integrated cultivation",
+      "branch": "Farming",
+      "specialization": "Cultivation",
+      "prerequisites": {
+        "all": [
+          "FC9"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 72
+      },
+      "proof": "Complete a 2-work-year integrated plan, each year providing full household rations and next-year seed.",
+      "reward": "Unlock one integrated annual action combining channel maintenance with crop care within available labour; pay both costs. Combined sowing/crop-care/flax plan bonuses are capped at +20%; flood-factor correction is separate. Qualify for master cultivator work offers."
+    },
+    {
+      "id": "FR5",
+      "depth": 5,
+      "title": "Grain preservation",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "F4"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 32
+      },
+      "proof": "Store at least 240 grain across 1 annual settlement; the household must receive full rations.",
+      "reward": "Reduce the configured in-capacity grain spoilage rate by 15% relative: 8% becomes 6.8%; never changes over-capacity spoilage. Apply after existing reductions; total in-capacity reduction cannot exceed 75% of configured base."
+    },
+    {
+      "id": "FR6",
+      "depth": 6,
+      "title": "Reserve budgeting",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "FR5"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 40,
+        "reckoning": 16
+      },
+      "proof": "Complete 1 settlement retaining a full coming-year household ration plus seed; food served must be recorded.",
+      "reward": "Unlock protected food/seed reserve plans. Voluntary sales below reserve require an explicit override; reserves create no grain."
+    },
+    {
+      "id": "FR7",
+      "depth": 7,
+      "title": "Storehouse management",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "FR6"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 48
+      },
+      "proof": "Complete 1 paid store repair/inspection and 1 annual stock reconciliation.",
+      "reward": "Unlock a +500-capacity store extension: 80 dr, 4 timber and 5 clay, 1 work year; upkeep 4 dr/year. Materials and paid work are separate recorded costs; one extension per household."
+    },
+    {
+      "id": "FR8",
+      "depth": 8,
+      "title": "Reserve replenishment",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "FR7"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 56,
+        "reckoning": 24
+      },
+      "proof": "Restore the full food/seed reserve in 2 different years after normal household consumption.",
+      "reward": "Unlock automatic surplus allocation targets: food, seed, animal feed, then sale. Reduce in-capacity spoilage by 25% relative to base, replacing the earlier 15%."
+    },
+    {
+      "id": "FR9",
+      "depth": 9,
+      "title": "Shortage preparedness",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "FR8"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 64
+      },
+      "proof": "Either feed the household fully during 1 low-flood year using reserves, OR finish 2 years with stored food covering 1.5 annual household rations plus seed.",
+      "reward": "Unlock contingency purchase plans capped by player cash and merchant stock; never borrow automatically. Spoilage reduction becomes 30% relative to base, replacing 25%."
+    },
+    {
+      "id": "FR10",
+      "depth": 10,
+      "title": "Resilient husbandry",
+      "branch": "Farming",
+      "specialization": "Resilience",
+      "prerequisites": {
+        "all": [
+          "FR9"
+        ]
+      },
+      "minimumProficiency": {
+        "farming": 72,
+        "reckoning": 32
+      },
+      "proof": "Complete 3 consecutive annual settlements with full rations, seed reserved and no new emergency food debt; the same years may be ordinary flood years.",
+      "reward": "Unlock a 2-year reserve/maintenance plan using existing resources; in-capacity spoilage reduction becomes 35% relative to base, replacing 30%. Qualify for master household-farmer work offers."
+    },
+    {
+      "id": "A1",
+      "depth": 1,
+      "title": "Safe hand tools",
+      "branch": "Artisan",
+      "specialization": null,
+      "prerequisites": {
+        "all": []
+      },
+      "minimumProficiency": {
+        "craft": 0
+      },
+      "proof": "Complete 1 supervised tool-practice work year; workshop-owned practice stock is not player inventory.",
+      "reward": "Unlock hired workshop practice and rental tools; introductory access fee 2 dr per work year."
+    },
+    {
+      "id": "A2",
+      "depth": 2,
+      "title": "Measuring and cutting",
+      "branch": "Artisan",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "A1"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 8,
+        "reckoning": 8
+      },
+      "proof": "Complete 1 measurement/cutting exercise within 5% of the stated exercise target dimensions.",
+      "reward": "Unlock measured material estimates for recipes and cutting exercises; no material-efficiency discount yet."
+    },
+    {
+      "id": "A3",
+      "depth": 3,
+      "title": "Material preparation",
+      "branch": "Artisan",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "A2"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 16
+      },
+      "proof": "Complete 2 preparation jobs in any one of textiles, clay or wood/stone. Distinct work years; each job records paid inputs.",
+      "reward": "Unlock supervised starter templates for thread, linen, one basic garment, one fired vessel or one clay model. Garment/vessel/model starter batches are limited to 1 output and quality 1, with the normal access fee plus 2 dr supervision. Each specialty can complete its own foundation proof."
+    },
+    {
+      "id": "A4",
+      "depth": 4,
+      "title": "Controlled making",
+      "branch": "Artisan",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "A3"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 24
+      },
+      "proof": "Complete 2 supervised starter-production jobs in any material line, each in a distinct work year, with paid inputs, reconciled output and at least 1 sellable result.",
+      "reward": "Unlock independent basic production: garment batch cap 2, vessel cap 4 and clay-model cap 2, quality cap 1. Remove the 2 dr supervision fee. Unlock optional inspection: +1 quality for 3 dr/batch, still limited by the learned quality cap."
+    },
+    {
+      "id": "AT5",
+      "depth": 5,
+      "title": "Garment assembly",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "A4"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 32
+      },
+      "proof": "Complete 2 basic-garment work years, each producing at least 1 quality-1 garment from paid materials.",
+      "reward": "Unlock fitted-garment method, quality cap 2; garment batch limit becomes 4."
+    },
+    {
+      "id": "AT6",
+      "depth": 6,
+      "title": "Patterns and dyes",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "AT5"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 40
+      },
+      "proof": "Complete 2 quality-2 garment batches; each must reconcile cloth/thread consumption.",
+      "reward": "Garment quality cap becomes 3. Unlock dyed garments: 1 pigment/garment for +1 recipe quality before cap, base ask 130 dr; dye/colour-specific orders check actual pigment use."
+    },
+    {
+      "id": "AT7",
+      "depth": 7,
+      "title": "Tailoring fit",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "AT6"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 48
+      },
+      "proof": "Complete 2 inspected quality-2 garment orders; all units must meet the quoted specification.",
+      "reward": "Garment quality cap becomes 3; batch limit 6. Unlock fit/finish commissions with explicit quoted payment."
+    },
+    {
+      "id": "AT8",
+      "depth": 8,
+      "title": "Batch cutting",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "AT7"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 56,
+        "reckoning": 24
+      },
+      "proof": "Complete 2 quality-3 garment batches of at least 4 units each.",
+      "reward": "Garment batch limit becomes 8. For batches of at least 4, total base cloth requirement becomes ceil(recipe cloth units * quantity * 7 / 8), applied to the actual recipe base cloth requirement; thread and pigment unchanged."
+    },
+    {
+      "id": "AT9",
+      "depth": 9,
+      "title": "Fine finishing",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "AT8"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 64
+      },
+      "proof": "Deliver 2 quality-3 garment contracts on time, with recorded payment and no unpaid supplier balance.",
+      "reward": "Garment quality cap becomes 4; batch limit 10. Unlock ceremonial garment recipe."
+    },
+    {
+      "id": "AT10",
+      "depth": 10,
+      "title": "Masterwork tailoring",
+      "branch": "Artisan",
+      "specialization": "Clothing",
+      "prerequisites": {
+        "all": [
+          "AT9"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 72
+      },
+      "proof": "Complete 1 registered masterwork assessment over 2 work years: 4 quality-4 ceremonial garments in total, fully paid inputs and accepted inspection.",
+      "reward": "Garment quality cap becomes 5; batch limit 12. Qualify for Master Tailor career offers; unlock repair/restoration contracts. No cash awarded solely for learning."
+    },
+    {
+      "id": "AC5",
+      "depth": 5,
+      "title": "Vessel forming",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "A4"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 32,
+        "pottery": 8
+      },
+      "proof": "Complete 2 fired-vessel production years with at least 1 quality-1 sellable vessel each.",
+      "reward": "Vessel quality cap 2; batch limit 6."
+    },
+    {
+      "id": "AC6",
+      "depth": 6,
+      "title": "Controlled firing",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "AC5"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 40,
+        "pottery": 16
+      },
+      "proof": "Complete 2 quality-2 fired-vessel batches with fuel and kiln fees recorded.",
+      "reward": "Vessel quality cap becomes 3. Unlock controlled firing: consume 1 extra fuel per 4 vessels (round up) for +1 recipe quality before cap; vessel batch limit 8."
+    },
+    {
+      "id": "AC7",
+      "depth": 7,
+      "title": "Form and decoration",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "AC6"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 48,
+        "pottery": 24
+      },
+      "proof": "Complete 2 inspected quality-2 vessel orders.",
+      "reward": "Vessel quality cap 3; batch limit 10. Unlock decorated vessels, consuming 1 pigment per 4 vessels (round up)."
+    },
+    {
+      "id": "AC8",
+      "depth": 8,
+      "title": "Kiln batching",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "AC7"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 56,
+        "pottery": 32,
+        "reckoning": 24
+      },
+      "proof": "Complete 2 quality-3 batches of at least 8 vessels.",
+      "reward": "Batch limit 12; base fuel becomes ceil(vessels / 2), replacing 1 fuel/vessel. Controlled-firing extra fuel remains payable."
+    },
+    {
+      "id": "AC9",
+      "depth": 9,
+      "title": "Reliable ceramic sets",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "AC8"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 64,
+        "pottery": 40
+      },
+      "proof": "Deliver 2 quality-3 matched-set contracts on time with reconciled materials.",
+      "reward": "Vessel quality cap 4; batch limit 14. Unlock matched sets with a minimum-quality contract check, not automatic extra retail demand."
+    },
+    {
+      "id": "AC10",
+      "depth": 10,
+      "title": "Master ceramic work",
+      "branch": "Artisan",
+      "specialization": "Ceramics",
+      "prerequisites": {
+        "all": [
+          "AC9"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 72,
+        "pottery": 48
+      },
+      "proof": "Complete 1 registered assessment over 2 work years: 12 quality-4 decorated vessels in total, including 1 accepted matched set.",
+      "reward": "Vessel quality cap 5; batch limit 16. Qualify for Master Potter career offers; unlock large commission bids."
+    },
+    {
+      "id": "AS5",
+      "depth": 5,
+      "title": "Modelling and relief",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "A4"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 32,
+        "carving": 20,
+        "pottery": 10,
+        "sculpture": 8
+      },
+      "proof": "Complete 1 clay-model job and 1 wood-relief practice job after A4; both record paid materials.",
+      "reward": "Unlock small relief recipe, sculpture quality cap 2; maximum 2 small pieces per work year."
+    },
+    {
+      "id": "AS6",
+      "depth": 6,
+      "title": "Stone cutting",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "AS5"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 40,
+        "sculpture": 16
+      },
+      "proof": "Complete 2 quality-2 relief production jobs with measured material use.",
+      "reward": "Unlock stone figurines; 1 stone block + 1 timber support per figurine, maximum 2/year; tool rental 8 dr/work year."
+    },
+    {
+      "id": "AS7",
+      "depth": 7,
+      "title": "Proportion and likeness",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "AS6"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 48,
+        "sculpture": 24,
+        "carving": 28
+      },
+      "proof": "Complete 2 inspected quality-2 stone-figure jobs.",
+      "reward": "Sculpture quality cap 3. Unlock portrait/bust recipe, maximum 1/year."
+    },
+    {
+      "id": "AS8",
+      "depth": 8,
+      "title": "Large-work planning",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "AS7"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 56,
+        "sculpture": 32,
+        "reckoning": 24
+      },
+      "proof": "Complete 1 quality-3 bust and 1 reconciled project budget.",
+      "reward": "Unlock 2-work-year large relief projects; inputs reserved at start, progress resumes after interruption without duplicating output."
+    },
+    {
+      "id": "AS9",
+      "depth": 9,
+      "title": "Commission execution",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "AS8"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 64,
+        "sculpture": 40,
+        "carving": 36
+      },
+      "proof": "Complete 1 quality-3 large relief project on its agreed work-year deadline; account for every input and payment.",
+      "reward": "Sculpture quality cap 4. Unlock monumental-work assessment; the assessment contract is routinely offered when eligible."
+    },
+    {
+      "id": "AS10",
+      "depth": 10,
+      "title": "Masterwork sculpture",
+      "branch": "Artisan",
+      "specialization": "Sculpture",
+      "prerequisites": {
+        "all": [
+          "AS9"
+        ]
+      },
+      "minimumProficiency": {
+        "craft": 72,
+        "sculpture": 48
+      },
+      "proof": "Complete 1 registered quality-4 monument assessment over 2 work years, with paid materials and accepted measurement/finish review.",
+      "reward": "Sculpture quality cap 5. Qualify for Master Sculptor career offers; unlock monumental/restoration commissions."
+    },
+    {
+      "id": "P1",
+      "depth": 1,
+      "title": "Reading and questioning",
+      "branch": "Philosophy",
+      "specialization": null,
+      "prerequisites": {
+        "all": []
+      },
+      "minimumProficiency": {
+        "philosophy": 0,
+        "literacy": 10
+      },
+      "proof": "Complete 1 guided reading/discussion session; record a question and its stated evidence.",
+      "reward": "Unlock guided philosophy practice: 1 papyrus + 1 ink + 2 dr teaching fee per work year."
+    },
+    {
+      "id": "P2",
+      "depth": 2,
+      "title": "Reasoned argument",
+      "branch": "Philosophy",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "P1"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 8,
+        "literacy": 16,
+        "oratory": 8
+      },
+      "proof": "Complete 1 argument exercise with a claim, 2 recorded reasons, 1 counterargument and a response.",
+      "reward": "Unlock structured debate activities; each completed ordinary debate grants +3 Philosophy and +2 Oratory, once per work year."
+    },
+    {
+      "id": "P3",
+      "depth": 3,
+      "title": "Evidence and comparison",
+      "branch": "Philosophy",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "P2"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 16,
+        "reckoning": 8
+      },
+      "proof": "Complete 2 comparisons of distinct observations or accounts; identify at least 1 disagreement.",
+      "reward": "Unlock comparison records and fact-checking tasks. Claims are evaluated against recorded world/exercise data, not a random approval roll."
+    },
+    {
+      "id": "P4",
+      "depth": 4,
+      "title": "Inquiry and ethics",
+      "branch": "Philosophy",
+      "specialization": null,
+      "prerequisites": {
+        "all": [
+          "P3"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 24,
+        "literacy": 24
+      },
+      "proof": "Complete 1 reviewed inquiry and 1 reasoned public dilemma exercise. Review checks evidence/process, not a required moral stance.",
+      "reward": "Unlock research and civic specializations; qualify for Philosopher/tutor career offers and paid copying work from finite payer budgets."
+    },
+    {
+      "id": "PS5",
+      "depth": 5,
+      "title": "Systematic observation",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "P4"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 32,
+        "reckoning": 16
+      },
+      "proof": "Complete 2 observation projects in different work years, using distinct recorded data.",
+      "reward": "Unlock paid observation-record contracts: base fee 20 dr; each project consumes 1 papyrus and 1 ink."
+    },
+    {
+      "id": "PS6",
+      "depth": 6,
+      "title": "Measurement and calculation",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "PS5"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 40,
+        "reckoning": 24
+      },
+      "proof": "Complete 2 measurement exercises within 2% of the stated reference, with calculations retained.",
+      "reward": "Unlock surveys and calculations: base fee 40 dr/project; 2 papyrus + 1 ink + 5 dr instrument rental."
+    },
+    {
+      "id": "PS7",
+      "depth": 7,
+      "title": "Testable explanations",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "PS6"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 48,
+        "reckoning": 28,
+        "literacy": 32
+      },
+      "proof": "Complete 1 explanation stating its predicted result before observing the outcome; compare it with recorded results.",
+      "reward": "Unlock planned field investigations and competing explanations; accepted investigation base fee 60 dr, costing 2 papyrus + 2 ink + 5 dr instrument rental."
+    },
+    {
+      "id": "PS8",
+      "depth": 8,
+      "title": "Independent checking",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "PS7"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 56,
+        "reckoning": 32
+      },
+      "proof": "Complete 2 checked investigations in different work years; an ordinary NPC reviewer reproduces its recorded results within 2%.",
+      "reward": "Unlock reviewed-method contracts: base fee 90 dr; investigation inputs plus 5 dr review fee. Reviewer access is regular, never a named-figure lottery."
+    },
+    {
+      "id": "PS9",
+      "depth": 9,
+      "title": "Research synthesis",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "PS8"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 64,
+        "reckoning": 40,
+        "literacy": 40
+      },
+      "proof": "Complete 1 synthesis of at least 3 earlier distinct records spanning 2 years, with 2 independently checked results.",
+      "reward": "Unlock 2-work-year treatise projects: base fee 180 dr on acceptance, total 4 papyrus + 3 ink + 10 dr instrument/review fees."
+    },
+    {
+      "id": "PS10",
+      "depth": 10,
+      "title": "Original inquiry",
+      "branch": "Philosophy",
+      "specialization": "Research",
+      "prerequisites": {
+        "all": [
+          "PS9"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 72,
+        "reckoning": 48,
+        "literacy": 48
+      },
+      "proof": "Complete 1 registered 2-work-year original-inquiry assessment: predeclared question, 2 distinct results, independent check and a defensible conclusion, including a valid negative finding.",
+      "reward": "Qualify for Scientist career offers; unlock leading a funded research project, whose complete fee and material budget are quoted before acceptance."
+    },
+    {
+      "id": "PP5",
+      "depth": 5,
+      "title": "Public speaking",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "P4"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 32,
+        "oratory": 16
+      },
+      "proof": "Complete 2 public addresses on different local issues, each citing 2 recorded facts and 1 explicit trade-off.",
+      "reward": "Unlock civic hearing work: base fee 20 dr, 1 papyrus + 1 ink/project; completed competent service adds +2 district reputation."
+    },
+    {
+      "id": "PP6",
+      "depth": 6,
+      "title": "Negotiation",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "PP5"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 40,
+        "oratory": 24,
+        "reckoning": 16
+      },
+      "proof": "Complete 2 agreements where each party has the offered stock/cash and accepts the recorded terms.",
+      "reward": "Unlock mediation contracts: base fee 40 dr, 1 papyrus + 1 ink/project; fulfilled agreements add +3 district reputation."
+    },
+    {
+      "id": "PP7",
+      "depth": 7,
+      "title": "Public accounts",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "PP6"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 48,
+        "oratory": 28,
+        "reckoning": 24
+      },
+      "proof": "Complete 1 public budget with all money/materials reconciled and 1 completed service within that budget.",
+      "reward": "Unlock administration contracts: base fee 60 dr, 2 papyrus + 1 ink/project; public funds remain a separate ledger, never personal cash. Successful service adds +4 reputation."
+    },
+    {
+      "id": "PP8",
+      "depth": 8,
+      "title": "Coalition building",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "PP7"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 56,
+        "oratory": 32,
+        "literacy": 32
+      },
+      "proof": "Complete 2 agreements involving at least 2 distinct local groups; fulfill the recorded commitments.",
+      "reward": "Unlock multi-party civic projects: base fee 90 dr, 2 papyrus + 2 ink/project; fulfilled projects add +4 reputation and record which groups benefited."
+    },
+    {
+      "id": "PP9",
+      "depth": 9,
+      "title": "Policy and consequences",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "PP8"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 64,
+        "oratory": 40,
+        "reckoning": 32
+      },
+      "proof": "Complete 1 2-work-year policy project with declared costs, affected groups and 1 follow-up evaluation against actual outcomes.",
+      "reward": "Unlock policy proposals and their before/after public ledger preview: base fee 180 dr, 4 papyrus + 3 ink total; fulfilled, evaluated service adds +5 reputation."
+    },
+    {
+      "id": "PP10",
+      "depth": 10,
+      "title": "Statesmanship",
+      "branch": "Philosophy",
+      "specialization": "Civic practice",
+      "prerequisites": {
+        "all": [
+          "PP9"
+        ]
+      },
+      "minimumProficiency": {
+        "philosophy": 72,
+        "oratory": 48,
+        "literacy": 40
+      },
+      "proof": "Complete 1 registered civic assessment: present a funded plan, secure an agreement, deliver it and reconcile the public account across 2 work years. District reputation at least 60.",
+      "reward": "Qualify for Politician career offers; unlock seeking public office and proposing district policy. Appointment needs an available funded role; learning grants neither public money nor automatic office."
+    },
+    {
+      "id": "T1",
+      "depth": 1,
+      "title": "Measures and exchange",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": []
+      },
+      "minimumProficiency": {
+        "reckoning": 0
+      },
+      "proof": "Complete 1 supervised stock-counting job or recorded purchase/sale with correct quantity and payment.",
+      "reward": "Unlock counting practice and a simple lot ledger. Prices, totals and ordinary market access are already visible without this node."
+    },
+    {
+      "id": "T2",
+      "depth": 2,
+      "title": "Cost accounting",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T1"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 8,
+        "literacy": 8
+      },
+      "proof": "Reconcile 1 paid material basket: cash spent equals item quantities at their accepted quotes plus explicit fees.",
+      "reward": "Unlock cost basis per lot and gross-margin previews using the current buyer quote; no guarantee of a future sale price."
+    },
+    {
+      "id": "T3",
+      "depth": 3,
+      "title": "Price comparison",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T2"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 16,
+        "literacy": 12
+      },
+      "proof": "Record 3 actual item quotes across at least 2 market years and compare each against a recorded acquisition cost.",
+      "reward": "Unlock bid/ask target plans for the existing annual market visit; plans cannot spend missing cash or trade with missing stock."
+    },
+    {
+      "id": "T4",
+      "depth": 4,
+      "title": "Inventory planning",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T3"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 24,
+        "literacy": 16
+      },
+      "proof": "Complete 2 distinct annual stock reconciliations with recorded purchases, sales, consumption and remaining inventory.",
+      "reward": "Unlock item-by-item stock targets and costed replenishment plans. Basic baskets remain accessible; replenishment is not an extra market visit."
+    },
+    {
+      "id": "T5",
+      "depth": 5,
+      "title": "Commercial production planning",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T4"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 32,
+        "literacy": 20
+      },
+      "proof": "Complete 2 costed supply plans using either farm output or artisan products; source every input and fulfill the stated output/delivery.",
+      "reward": "Unlock demand-led production and purchase plans that compare actual material cost, labour, stock and buyer budget. Farming yield and artisan recipes still require their own skills.",
+      "anyProficiency": [
+        {
+          "farming": 8
+        },
+        {
+          "craft": 8
+        }
+      ]
+    },
+    {
+      "id": "T6",
+      "depth": 6,
+      "title": "Negotiated supply",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T5"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 40,
+        "oratory": 16
+      },
+      "proof": "Fulfill 2 pre-agreed, funded fixed-price orders. Orders are distinct work-year jobs; introductory fixed-price delivery work is available before this node.",
+      "reward": "Unlock counteroffers within 10% of the posted reference price in return for quantity or lead-time terms; the NPC acceptance bounds, budget and stock are explicit. No automatic price premium."
+    },
+    {
+      "id": "T7",
+      "depth": 7,
+      "title": "Delivery logistics",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T6"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 48,
+        "oratory": 20
+      },
+      "proof": "Complete 2 paid delivery work years within the agreed work-year deadline, with cargo and fees reconciled.",
+      "reward": "Unlock scheduled deliveries with at most 2 item lines; baseline haulage is 12 dr/order and quantities stay within the market and carrier limits shown before acceptance. Delivery consumes the work action and existing visit; it adds neither a free visit nor unearned soldier capability."
+    },
+    {
+      "id": "T8",
+      "depth": 8,
+      "title": "Stock turnover",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T7"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 56,
+        "literacy": 28
+      },
+      "proof": "Complete 2 trading work years with non-negative realized gross margin, actual paid receipts and reconciled closing stock.",
+      "reward": "Unlock repeat restock/sale plans with user-set cash and quantity caps. Every execution remains subject to current quotes, finite demand and the annual visit budget."
+    },
+    {
+      "id": "T9",
+      "depth": 9,
+      "title": "Enterprise accounts",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T8"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 64,
+        "literacy": 36,
+        "oratory": 28
+      },
+      "proof": "Deliver 2 funded contracts with itemized supplier costs, access/transport fees, final payment and closing stock; no unpaid supplier amount.",
+      "reward": "Unlock quoted 2-work-year supply contracts and their cash-flow preview. Payer reserves payment; player does not receive the full future payment in advance."
+    },
+    {
+      "id": "T10",
+      "depth": 10,
+      "title": "Commercial stewardship",
+      "branch": "Trade",
+      "specialization": "Commercial planning",
+      "prerequisites": {
+        "all": [
+          "T9"
+        ]
+      },
+      "minimumProficiency": {
+        "reckoning": 72,
+        "literacy": 40,
+        "oratory": 32
+      },
+      "proof": "Complete a 2-work-year assessment delivering 2 funded orders to 2 distinct buyer accounts; reconcile cash, stock, fees and commitments in both years.",
+      "reward": "Qualify for Merchant or Trading-house manager career offers. Unlock an integrated 2-year stock/order/delivery plan within the existing action and visit limits; this grants no free goods, price immunity or personal ownership of employer funds."
+    }
+  ],
+  "materials": [
+    {
+      "id": "flax",
+      "baseAsk": 3,
+      "initialStock": 40,
+      "annualImportCap": 40
+    },
+    {
+      "id": "flax-seed",
+      "baseAsk": 3,
+      "initialStock": 20,
+      "annualImportCap": 20
+    },
+    {
+      "id": "linen",
+      "baseAsk": 25,
+      "initialStock": 20,
+      "annualImportCap": 6
+    },
+    {
+      "id": "thread",
+      "baseAsk": 4,
+      "initialStock": 40,
+      "annualImportCap": 40
+    },
+    {
+      "id": "clay",
+      "baseAsk": 2,
+      "initialStock": 120,
+      "annualImportCap": 120
+    },
+    {
+      "id": "fuel",
+      "baseAsk": 2,
+      "initialStock": 80,
+      "annualImportCap": 80
+    },
+    {
+      "id": "timber",
+      "baseAsk": 5,
+      "initialStock": 40,
+      "annualImportCap": 40
+    },
+    {
+      "id": "stone",
+      "baseAsk": 30,
+      "initialStock": 20,
+      "annualImportCap": 10
+    },
+    {
+      "id": "pigment",
+      "baseAsk": 6,
+      "initialStock": 24,
+      "annualImportCap": 12
+    },
+    {
+      "id": "papyrus",
+      "baseAsk": 2,
+      "initialStock": 60,
+      "annualImportCap": 40
+    },
+    {
+      "id": "ink",
+      "baseAsk": 1,
+      "initialStock": 100,
+      "annualImportCap": 60
+    }
+  ],
+  "recipes": [
+    {
+      "id": "thread",
+      "name": "Thread",
+      "inputs": {
+        "flax": 2
+      },
+      "output": {
+        "thread": 4
+      },
+      "maxUnits": 10,
+      "workYears": 1,
+      "fee": 4,
+      "baseAsk": 4,
+      "requires": "A3",
+      "family": "Intermediate",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "linen",
+      "name": "Linen bolt",
+      "inputs": {
+        "thread": 4
+      },
+      "output": {
+        "linen": 1
+      },
+      "maxUnits": 10,
+      "workYears": 1,
+      "fee": 4,
+      "baseAsk": 25,
+      "requires": "A3",
+      "family": "Intermediate",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "garment",
+      "name": "Plain garment",
+      "inputs": {
+        "linen": 2,
+        "thread": 2
+      },
+      "output": {
+        "garment": 1
+      },
+      "maxUnits": 2,
+      "workYears": 1,
+      "fee": 8,
+      "baseAsk": 100,
+      "requires": "A3",
+      "independentRequires": "A4",
+      "starterOutputCap": 1,
+      "starterFeeExtra": 2,
+      "family": "Clothing",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "dyed-garment",
+      "name": "Dyed garment",
+      "inputs": {
+        "linen": 2,
+        "thread": 2,
+        "pigment": 1
+      },
+      "output": {
+        "garment": 1
+      },
+      "maxUnits": 4,
+      "workYears": 1,
+      "fee": 8,
+      "baseAsk": 130,
+      "recipeQualityBonus": 1,
+      "requires": "AT6",
+      "family": "Clothing",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "ceremonial-garment",
+      "name": "Ceremonial garment",
+      "inputs": {
+        "linen": 3,
+        "thread": 3,
+        "pigment": 2
+      },
+      "output": {
+        "ceremonial-garment": 1
+      },
+      "maxUnits": 10,
+      "workYears": 1,
+      "fee": 8,
+      "baseAsk": 180,
+      "requires": "AT9",
+      "family": "Clothing",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "vessel",
+      "name": "Fired vessel",
+      "inputs": {
+        "clay": 2,
+        "fuel": 1
+      },
+      "output": {
+        "vessel": 1
+      },
+      "maxUnits": 4,
+      "workYears": 1,
+      "fee": 4,
+      "baseAsk": 20,
+      "requires": "A3",
+      "independentRequires": "A4",
+      "starterOutputCap": 1,
+      "starterFeeExtra": 2,
+      "family": "Ceramics",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "pottery",
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "decorated-vessel",
+      "name": "Decorated vessel",
+      "inputs": {
+        "clay": 2,
+        "fuel": 1
+      },
+      "batchExtras": {
+        "pigment": "ceil(quantity / 4)"
+      },
+      "output": {
+        "vessel": 1
+      },
+      "maxUnits": 10,
+      "workYears": 1,
+      "fee": 4,
+      "baseAsk": 24,
+      "requires": "AC7",
+      "family": "Ceramics",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "pottery",
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "clay-model",
+      "name": "Clay model",
+      "inputs": {
+        "clay": 2
+      },
+      "output": {
+        "clay-model": 1
+      },
+      "maxUnits": 2,
+      "workYears": 1,
+      "fee": 2,
+      "baseAsk": 12,
+      "requires": "A3",
+      "independentRequires": "A4",
+      "starterOutputCap": 1,
+      "starterFeeExtra": 2,
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "pottery",
+          "sculpture"
+        ]
+      }
+    },
+    {
+      "id": "small-relief",
+      "name": "Small wood relief",
+      "inputs": {
+        "timber": 2,
+        "clay": 1
+      },
+      "output": {
+        "relief": 1
+      },
+      "maxUnits": 2,
+      "workYears": 1,
+      "fee": 6,
+      "baseAsk": 90,
+      "requires": "AS5",
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "carving",
+          "sculpture"
+        ]
+      }
+    },
+    {
+      "id": "stone-figure",
+      "name": "Stone figure",
+      "inputs": {
+        "stone": 1,
+        "timber": 1
+      },
+      "output": {
+        "stone-figure": 1
+      },
+      "maxUnits": 2,
+      "workYears": 1,
+      "fee": 8,
+      "baseAsk": 200,
+      "requires": "AS6",
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "carving",
+          "sculpture"
+        ]
+      }
+    },
+    {
+      "id": "bust",
+      "name": "Portrait/bust",
+      "inputs": {
+        "stone": 2,
+        "pigment": 1
+      },
+      "output": {
+        "bust": 1
+      },
+      "maxUnits": 1,
+      "workYears": 1,
+      "fee": 8,
+      "baseAsk": 350,
+      "requires": "AS7",
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "carving",
+          "sculpture"
+        ]
+      }
+    },
+    {
+      "id": "large-relief",
+      "name": "Large relief",
+      "inputs": {
+        "stone": 4,
+        "timber": 2,
+        "pigment": 2
+      },
+      "output": {
+        "large-relief": 1
+      },
+      "maxUnits": 1,
+      "workYears": 2,
+      "fee": 16,
+      "baseAsk": 900,
+      "requires": "AS8",
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "sculpture",
+          "reckoning"
+        ]
+      }
+    },
+    {
+      "id": "monument",
+      "name": "Monument assessment",
+      "inputs": {
+        "stone": 6,
+        "timber": 3,
+        "pigment": 3
+      },
+      "output": {
+        "monument": 1
+      },
+      "maxUnits": 1,
+      "workYears": 2,
+      "fee": 16,
+      "baseAsk": 1500,
+      "requires": "AS9",
+      "family": "Sculpture",
+      "workProficiencies": {
+        "primary": "craft",
+        "supports": [
+          "sculpture",
+          "reckoning"
+        ]
+      }
+    }
+  ],
+  "stageOutput": "Skill-tree design and engine handoff",
+  "date": "2026-11-12",
+  "learning": {
+    "workGain": {
+      "primary": 3,
+      "relevantSupportEach": 2,
+      "maxSupportSkills": 2
+    },
+    "practiceGain": {
+      "chosen": 5,
+      "relevantSupportEach": 1,
+      "maxSupportSkills": 2
+    },
+    "supportRule": "Support skills are named by the recipe/activity and actually used. Two supports can develop in the same work year; unrelated skills receive nothing. Do not duplicate legacy job gains for the same work.",
+    "proofRule": "Proof projects begin after their required parents are learned. A batch is one completed work-year deed, not one deed per item. A new synthesis may cite earlier evidence when its node explicitly allows it.",
+    "masteryTarget": {
+      "ratePercent": [
+        50,
+        60
+      ],
+      "scope": "one specialization at depth 10",
+      "cohortProposal": "All seeded attempts assigned a focused policy from birth, including early deaths; separately report adult-survivor rates.",
+      "focusPolicyProposal": "Use about 3 of every 4 eligible major-activity years on the chosen path or its supporting practice; keep 1 for family, recovery or another interest."
+    },
+    "entryAccess": "Introductory reading, counting and tool practice are available before their root nodes when the world enables that branch. Root practice cannot require the node it teaches. An NPC-funded apprenticeship can own inputs/output and pay a quoted wage; own production buys/owns its inputs.",
+    "qualityMultiplierBps": [
+      10000,
+      11500,
+      13000,
+      15000,
+      18000
+    ],
+    "qualityFormula": "min(5, learned family cap, 1 + floor(max(0, craft - 24)/16) + paidInspectionBonus + paidRecipeBonus)",
+    "retailFormula": "floor(baseAsk * qualityMultiplierBps / 10000)",
+    "merchantBidFormula": "floor(retail * 10000 / 12500)",
+    "minimumProofQualityRule": "Every proof saying quality N means quality at least N. Higher-quality work always qualifies.",
+    "inputOwnershipRule": "Eligible materials are owned, cost-traced inventory: purchases, self-produced intermediates with traceable inputs, or explicitly employer-owned apprenticeship stock. Paid inputs means external obligations were settled, not that every intermediate must be repurchased.",
+    "deadlineRule": "A work-year deadline counts active work actions assigned to that project. Paused calendar years do not consume it. An explicitly accepted calendar deadline is separate, shows its due year before acceptance, and continues during pauses.",
+    "practiceMappingRule": "A practice variant names one chosen score from that work template and at most two other listed scores as support. It produces a training sample/exercise rather than the full commercial production batch. Main/support rate caps apply once per year."
+  },
+  "workTemplates": [
+    {
+      "id": "fieldwork",
+      "primary": "farming",
+      "supports": [
+        "reckoning"
+      ],
+      "uses": "Measured field/harvest work and stock records"
+    },
+    {
+      "id": "channel-maintenance",
+      "primary": "farming",
+      "supports": [
+        "craft",
+        "reckoning"
+      ],
+      "uses": "Channel/tool work with costed maintenance"
+    },
+    {
+      "id": "tool-practice",
+      "primary": "craft",
+      "supports": [
+        "carving",
+        "reckoning"
+      ],
+      "uses": "Supervised hand tools, measures and materials"
+    },
+    {
+      "id": "measurement-exercise",
+      "primary": "craft",
+      "supports": [
+        "reckoning",
+        "literacy"
+      ],
+      "uses": "Recorded target dimensions and instructions"
+    },
+    {
+      "id": "textile-preparation",
+      "primary": "craft",
+      "supports": [
+        "reckoning"
+      ],
+      "uses": "Count/cost fibre and thread"
+    },
+    {
+      "id": "clay-preparation",
+      "primary": "craft",
+      "supports": [
+        "pottery",
+        "sculpture"
+      ],
+      "uses": "Prepare and shape clay"
+    },
+    {
+      "id": "wood-stone-preparation",
+      "primary": "craft",
+      "supports": [
+        "carving",
+        "sculpture"
+      ],
+      "uses": "Cut/prepare model and relief material"
+    },
+    {
+      "id": "reading-discussion",
+      "primary": "philosophy",
+      "supports": [
+        "literacy",
+        "oratory"
+      ],
+      "uses": "Read, formulate and defend an argument"
+    },
+    {
+      "id": "evidence-comparison",
+      "primary": "philosophy",
+      "supports": [
+        "reckoning",
+        "literacy"
+      ],
+      "uses": "Compare recorded observations/calculations"
+    },
+    {
+      "id": "research-project",
+      "primary": "philosophy",
+      "supports": [
+        "reckoning",
+        "literacy"
+      ],
+      "uses": "Measure, calculate and write/review the inquiry"
+    },
+    {
+      "id": "public-speaking",
+      "primary": "philosophy",
+      "supports": [
+        "oratory",
+        "literacy"
+      ],
+      "uses": "Prepare and deliver an evidence-based address"
+    },
+    {
+      "id": "negotiation",
+      "primary": "philosophy",
+      "supports": [
+        "oratory",
+        "reckoning"
+      ],
+      "uses": "Negotiate quantities, budgets and commitments"
+    },
+    {
+      "id": "public-accounts",
+      "primary": "philosophy",
+      "supports": [
+        "reckoning",
+        "literacy"
+      ],
+      "uses": "Reconcile public money/materials in a written account"
+    },
+    {
+      "id": "coalition-building",
+      "primary": "philosophy",
+      "supports": [
+        "oratory",
+        "literacy"
+      ],
+      "uses": "Document and secure multi-party agreement"
+    },
+    {
+      "id": "policy-project",
+      "primary": "philosophy",
+      "supports": [
+        "oratory",
+        "reckoning"
+      ],
+      "uses": "Propose, cost, deliver and evaluate a policy"
+    },
+    {
+      "id": "trade-work",
+      "primary": "reckoning",
+      "supports": [
+        "literacy",
+        "oratory"
+      ],
+      "uses": "Document and fulfill costed orders and terms"
+    }
+  ],
+  "coverage": {
+    "fullySpecifiedBranches": [
+      "Farming",
+      "Artisan",
+      "Philosophy",
+      "Trade"
+    ],
+    "deferredBranches": [
+      {
+        "name": "Military progression",
+        "status": "Unavailable",
+        "note": "Ten-depth progression extension is not specified in this stage. Existing soldier/convoy gameplay remains under its original world rules."
+      },
+      {
+        "name": "Seafaring",
+        "status": "Unavailable",
+        "note": "Retain the branch in the full-tree roadmap. Detailed skill gates, proofs and rewards need a later design."
+      },
+      {
+        "name": "Music and performance",
+        "status": "Unavailable",
+        "note": "Retain the branch and its career direction. This stage does not invent unlocked techniques or working gameplay."
+      },
+      {
+        "name": "Court and rulership",
+        "status": "Unavailable",
+        "note": "Royal succession and command campaigns remain a later branch; Politician qualification does not unlock kingship."
+      }
+    ]
+  }
+}

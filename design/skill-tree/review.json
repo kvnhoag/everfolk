@@ -1,0 +1,42 @@
+{
+  "nodes": 65,
+  "prerequisiteEdges": 62,
+  "specializations": 8,
+  "depth10Paths": [
+    "FC10",
+    "FR10",
+    "AT10",
+    "AC10",
+    "AS10",
+    "PS10",
+    "PP10",
+    "T10"
+  ],
+  "acyclic": true,
+  "allNodeDepthsExact": true,
+  "redundantPrerequisiteEdges": 0,
+  "advancedQualityProofChecks": 15,
+  "masterySuccessRate": "not simulated; target only",
+  "drawingNodes": 65,
+  "nodeBoxCollisions": 0,
+  "edgesCrossingUnrelatedNodes": 0,
+  "viewerReadOnly": true,
+  "browserReview": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "mobileWidths": [
+      390,
+      320
+    ],
+    "horizontalPageOverflow": false,
+    "nodeSelection": true,
+    "search": true,
+    "branchHighlightPreservesAllNodes": true,
+    "mobileDetailFocus": true,
+    "overviewFitsBothDimensions": true,
+    "readSizeControl": true,
+    "keyboardActivation": true
+  }
+}

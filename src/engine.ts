@@ -1,3 +1,4 @@
+import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
   LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
@@ -92,6 +93,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
+    ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
@@ -263,6 +265,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         case "job":
           if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
           state.character!.jobId = effect.job; break;
+        case "vocation":
+          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action)); break;
         case "demo":
           if (!world.demo || !state.demo) throw new Error("Demo effects need a demo world.");
           applyDemoEffect(demoCtx(state), effect.effect); break;
@@ -640,6 +644,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
+      ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
@@ -685,7 +690,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     const annualIncome = (): void => {
-      if (next.phase !== "ended" && next.character?.jobId) {
+      if (next.phase !== "ended" && next.character?.jobId && next.vocations?.workedAge !== next.age - 1) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
         recorded(next, () => next.journal.length - 1, () => {
           apply(next, job.yearlyEffects);
