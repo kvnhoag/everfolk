@@ -75,6 +75,7 @@ export default function LivingCoast({ running, active }: { running: boolean; act
   return <div className="ef-coast" aria-hidden="true">
     <canvas ref={element} width={768} height={480} className="ef-coast-canvas" />
     <div className="ef-coast-sunlight" />
+    <div className="ef-coast-aureole" />
     <div className="ef-coast-shade" />
     <div className="ef-coast-grain" />
   </div>;

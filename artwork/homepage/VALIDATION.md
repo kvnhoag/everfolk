@@ -33,3 +33,11 @@ The gameplay controller, simulation, NFT collection and character editor are unc
 Reduced-motion support is implemented with a live `prefers-reduced-motion` listener, a render-loop guard and CSS overrides. The operating system's accessibility setting was not changed during validation. Visibility and intersection guards are present; the browser's background-tab scheduling was not profiled with an external performance recorder.
 
 Lighting and depth are stylized 2.5D pixel effects implemented in Canvas 2D and CSS. There is no HDRI, PBR rendering, WebGL dependency, or claim of true 3D lighting.
+
+## Luminous typography upgrade
+
+The follow-up lighting pass preserves the layout and coastal renderer. GSAP 3.15.1 is pinned; the existing dependency graph is unchanged apart from that single dependency. The frozen-lockfile installation passed pnpm's supply-chain policies for all 583 entries. TypeScript checking, the framework production build, and all 10 tests in `homepage.test.ts` and `chain-ui-screens.test.ts` passed.
+
+The actual application was inspected at desktop 1440 × 900 and phone 390 × 844. Both retain the original composition, with no horizontal overflow. The title now has clipped metallic gold, illuminated edges, dimensional shadows and a masked reflection. GSAP's computed sweep property was observed advancing. The existing motion switch was tested: switching it off reverts the reflection's inline animation property and makes all three letter glints fully transparent. It was restored to the on state after testing. The accessible heading exposes one name, "Everfolk.", rather than repeated decorative lettering.
+
+The background artwork, environmental objects, simulation and NFT collection were not edited. Local captures are `artifacts/homepage/luminous-desktop.png` and `artifacts/homepage/luminous-mobile.png`. OS reduced-motion settings were not altered; support is implemented using GSAP matchMedia, the existing preference listener and CSS overrides. A temporary render fallback was logged while the new dependency was being linked into the active dev server; after restarting the preview, no new render-fallback entry appeared. The browser also injected an unrelated `mdl-js` attribute that produced a development hydration warning; no site code was changed to suppress it.

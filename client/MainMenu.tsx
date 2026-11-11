@@ -5,6 +5,8 @@ import StorybookMark from "./StorybookMark.tsx";
 import RankedMenuEntry from "./chain/RankedMenuEntry.tsx";
 import LivingCoast, { useCoastMotion } from "./homepage/LivingCoast.tsx";
 import "./homepage/homepage.css";
+import "./homepage/luminous.css";
+import { useLuminousLight } from "./homepage/useLuminousLight.ts";
 
 export interface MainMenuProps {
   world: WorldPack;
@@ -23,11 +25,13 @@ export interface MainMenuProps {
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
 export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
+  const lightRoot = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const headingId = useId();
   const saveId = useId();
   const motion = useCoastMotion();
   const running = motion.enabled && !motion.reduced;
+  useLuminousLight(lightRoot, running && active);
   const ended = life.phase === "ended";
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
@@ -36,8 +40,9 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
-  return <main className="ef-home" aria-labelledby={headingId} data-motion={running && active ? "running" : "paused"}>
+  return <main ref={lightRoot} className="ef-home" aria-labelledby={headingId} data-motion={running && active ? "running" : "paused"}>
     <LivingCoast running={running} active={active} />
+    <div className="ef-light-air" aria-hidden="true">{Array.from({length:8}, (_,i) => <i key={i} className="ef-light-mote" />)}</div>
     <div className="ef-home-frame" aria-hidden="true"><i /><i /><i /><i /></div>
     <div className="ef-home-shell">
       <header className="ef-home-header">
@@ -50,7 +55,7 @@ export default function MainMenu({ world, life, hasBegun, hasRevealedStats, onBe
       <div className="ef-home-body">
         <section className="ef-home-content">
           <p className="ef-home-eyebrow"><span aria-hidden="true">✦</span>A LIFE SIMULATOR</p>
-          <h1 id={headingId} ref={heading} tabIndex={-1}>Everfolk<span>.</span></h1>
+          <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><span className="ef-title-gold" aria-hidden="true" data-lettering="Everfolk.">Everfolk.</span>{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
           <p className="ef-home-tagline">Live another story.</p>
           <div className="ef-home-rule" aria-hidden="true"><span />◆<span /></div>
           <p className="ef-home-intro">Before Alexandria, there was Rhakotis.<br />A world of ordinary lives.<br /><em>One of them is yours.</em></p>

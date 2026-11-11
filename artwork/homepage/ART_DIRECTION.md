@@ -35,6 +35,14 @@ All existing begin, resume, pending-birth, last-life, world-selection, past-life
 - [Create Game Assets](https://github.com/gamedev-skills/awesome-gamedev-agent-skills/blob/main/skills/disciplines/create-game-assets/SKILL.md): inspect existing assets, derive cohesive families, stable pivots and provenance.
 - [PixiJS sprite skill](https://github.com/pixijs/pixijs-skills/blob/main/skills/pixijs-scene-sprite/SKILL.md) and performance skill: independent frame animation, caches, bounded resources and cleanup. Applied as engine-neutral principles; PixiJS is not installed.
 - [Three.js scenes](https://github.com/tuomashatakka/threejs-scenes-skill): reviewed the lighting hierarchy and contrast between directional sun and ambient fill. A new WebGL engine is unnecessary for this existing pixel-vector project.
-- [GSAP](https://github.com/greensock/GSAP): consulted for motion architecture. A single bounded RAF clock and CSS transitions meet this menu's needs without another dependency.
+- [GSAP](https://github.com/greensock/GSAP): consulted for motion architecture. The luminous upgrade uses lazily imported GSAP core for masked text reflections, sparse glints, button sheen and light variation. Scoped contexts and media queries clean up timelines on pause, reduced motion and unmount.
 
 Products and reports are written in English. User communication remains in Vietnamese.
+
+## Luminous gold upgrade
+
+The original composition, typography metrics, 350 BCE scenery, sprite geometry and gameplay callbacks remain unchanged. Champagne-gold lettering combines a clipped metallic gradient, a fine illuminated edge, crisp offset depth and restrained amber drop shadows. A second aria-hidden reflection layer is clipped to the same glyphs; the heading has one accessible name. GSAP moves the reflection over 6.5 seconds with a 7.5-second rest. Three small pixel glints use staggered, slow envelopes; eight bounded light motes float independently. The subtitle receives a softer reflection. Existing buttons, separators and frame edges receive selective warm highlights. A separate screen-blended aureole follows the existing sun's screen position; no artwork or environmental object is replaced.
+
+The existing motion switch controls the decorative timelines as well as the coastal scene. A GSAP media-query context and CSS reduced-motion overrides disable sweeps, glints and motes when reduced motion is requested. Document visibility and intersection guards pause the timelines. Static gold lettering stays readable without JavaScript; forced-color mode restores system text colors. Only GSAP core is added, pinned in the lockfile. No PixiJS filters, Three.js renderer or post-processing engine is installed.
+
+Additional reference: [GSAP React skill](https://github.com/greensock/gsap-skills/blob/main/skills/gsap-react/SKILL.md), using a scoped `gsap.context` with explicit cleanup and lazy client-only import. [PixiJS filters](https://github.com/pixijs/pixijs-skills/tree/main/skills/pixijs-filters) and the Three.js post-processing reference informed the selective rather than full-scene glow decision.

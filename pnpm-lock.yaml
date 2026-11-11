@@ -10,6 +10,9 @@ importers:
 
   .:
     dependencies:
+      gsap:
+        specifier: 3.15.1
+        version: 3.15.1
       '@near-wallet-selector/core':
         specifier: 10.1.4
         version: 10.1.4(@near-js/keystores@2.2.5(@near-js/crypto@2.5.1(@near-js/types@2.5.1)(@near-js/utils@2.5.1(@near-js/types@2.5.1)))(@near-js/types@2.5.1))(@near-js/utils@2.5.1(@near-js/types@2.5.1))
@@ -82,6 +85,9 @@ importers:
         version: 4.92.0(@cloudflare/workers-types@4.20260515.1)
 
 packages:
+
+  gsap@3.15.1:
+    resolution: {integrity: sha512-63yjWRFWj3QRP1UOuD8kcidCcy3nxb1mMRpwHr/xJRvPfm9GtWOXFAYUiL0ro1fgPq2nY53LR+98pAgy9BumBg==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -3037,6 +3043,8 @@ packages:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
 snapshots:
+
+  gsap@3.15.1: {}
 
   '@babel/code-frame@7.29.7':
     dependencies:
