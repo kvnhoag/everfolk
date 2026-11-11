@@ -29,10 +29,10 @@ function surface(width = 768, height = 480) {
   return { canvas, context };
 }
 
-function sprite(data: PixelSprite) {
+function sprite(data: PixelSprite, modernActor=false) {
   const { canvas, context: c } = surface(data.width, data.height);
   for (const [x, y, w, h, color] of data.pixels) {
-    c.fillStyle = grading[String(color)] ?? String(color);
+    c.fillStyle = modernActor && Number(y)>data.height*.55 && Number(y)<data.height*.84 && Number(w)>1 ? "#596b80" : grading[String(color)] ?? String(color);
     c.fillRect(Number(x), Number(y), Number(w), Number(h));
   }
   return canvas;
@@ -71,7 +71,7 @@ function cloud(c: CanvasRenderingContext2D, x: number, y: number, size: number) 
 }
 
 /** Low flat-roofed coastal storehouses, using the shipped harbor's silhouettes. */
-function house(c: CanvasRenderingContext2D, x: number, base: number, w: number, h: number, depth: number, variant: number) {
+function house(c: CanvasRenderingContext2D, x: number, base: number, w: number, h: number, depth: number, variant: number, modern=false) {
   const top = base - h, roof = top - depth;
   polygon(c, [[x, base], [x + w, base], [x + w - 35, base + 15], [x - 34, base + 15]], '#5e7375');
   polygon(c, [[x + w, top], [x + w + depth, roof], [x + w + depth, base - depth], [x + w, base]], '#89978f');
@@ -95,11 +95,23 @@ function house(c: CanvasRenderingContext2D, x: number, base: number, w: number, 
     c.fillStyle = '#d0a082'; c.fillRect(x+8+(y%5),y+3,3,1);
     c.fillStyle = '#82686a'; c.fillRect(x+w+2,y-depth+1,Math.max(2,depth-5),1);
   }
+  if(modern){
+    c.fillStyle='#d4dbcb';c.fillRect(x+1,top+3,w-2,h-5);
+    for(let wy=top+8;wy<base-6;wy+=9)for(let wx=x+5;wx<x+w-3;wx+=8){
+      c.fillStyle=(wx+wy+variant)%3?'#5c929e':'#c0c9ae';c.fillRect(wx,wy,5,6);
+      c.fillStyle='#b2d9d4';c.fillRect(wx,wy,5,1);
+      c.fillStyle='#748e91';c.fillRect(wx+4,wy+1,1,5);
+    }
+    c.fillStyle='#466c79';c.fillRect(x+Math.floor(w*.63),base-14,6,14);
+    c.fillStyle='#e7dac2';c.fillRect(x,top+3,w,2);
+    c.fillStyle='#487283';c.fillRect(x+depth+5,roof-5,Math.max(6,w-12),3);
+    c.fillStyle='#b6d8d7';c.fillRect(x+depth+5,roof-5,Math.max(6,w-12),1);
+  }
   // Cool contact occlusion stays attached to the base, beneath the long cast shadow.
   c.fillStyle = '#68565a'; c.fillRect(x, base - 2, w, 2);
 }
 
-function shore() {
+function shore(modern=false) {
   const { canvas, context: c } = surface();
   // The source harbor's waterfront, recomposed as receding limestone quays.
   polygon(c, [[501, 183], [768, 226], [768, 480], [696, 480], [471, 289], [465, 232]], '#8d7870');
@@ -118,12 +130,21 @@ function shore() {
   const buildings = [[521,216,25,24,11], [563,221,30,33,12], [610,238,35,36,15],
     [667,256,31,29,12], [721,285,43,42,17], [502,269,29,37,13],
     [544,301,40,44,16], [604,338,45,53,20], [677,390,46,61,20], [745,434,42,66,19]];
-  buildings.forEach(([x,y,w,h,d], i) => house(c, x,y,w,h,d,i));
+  buildings.forEach(([x,y,w,h,d], i) => house(c, x,y,w,modern?h+14+(i%3)*15:h,d,i,modern));
+  if(modern){
+    // The same waterfront becomes a modern promenade, not a different geographical scene.
+    for(let y=282;y<440;y+=37){
+      const x=Math.round(quayEdge(y)+8);
+      c.fillStyle='#536d78';c.fillRect(x,y-25,1,25);c.fillRect(x-3,y-26,9,2);
+      c.fillStyle='#f8dda2';c.fillRect(x+1,y-24,4,2);
+      c.fillStyle='#dae0c9';c.fillRect(x-5,y,10,2);
+    }
+  }
   // Original cargo jars are composited separately at runtime.
   return canvas;
 }
 
-function sky() {
+function sky(modern=false) {
   const { canvas, context: c } = surface();
   const colors = Array.from({length:24},(_,i)=>mix('#80a8bb','#ffe5b8',i/23));
   for (let band = 0; band < colors.length; band++) {
@@ -139,9 +160,10 @@ function sky() {
   c.fillStyle = '#f1ddbb'; c.fillRect(0, 162, 768, 1);
   // Far coast uses the same low storehouse silhouettes, veiled by atmospheric perspective.
   for (let i = 0; i < 19; i++) {
-    const x = 376 + i * 23, h = 3 + i * 7 % 10;
+    const x = 376 + i * 23, h = modern ? 12+(i*17)%49 : 3 + i * 7 % 10;
     c.fillStyle = '#a5b7b3'; c.fillRect(x, 164 - h, 20, h + 3);
     c.fillStyle = '#c7aa91'; c.fillRect(x, 164 - h, 20, 1);
+    if(modern)for(let yy=168-h;yy<160;yy+=7){c.fillStyle='#b6cdca';c.fillRect(x+4,yy,12,2);}
   }
   return canvas;
 }
@@ -161,15 +183,26 @@ function foreground() {
   return canvas;
 }
 
-export function createCoastalScene(canvas: HTMLCanvasElement) {
+export function createCoastalScene(canvas: HTMLCanvasElement, modern=false) {
   const context = canvas.getContext('2d', { alpha: false });
   if (!context) return null;
   const c = context;
   canvas.width = COAST_SIZE.width; canvas.height = COAST_SIZE.height;
   c.imageSmoothingEnabled = false;
-  const backdrop = sky(), settlement = shore(), near = foreground();
-  const boats = art.shipFrames.map(sprite);
-  const people = art.actors.map(actor => actor.frames.map(sprite));
+  const backdrop = sky(modern), settlement = shore(modern), near = foreground();
+  const boats = art.shipFrames.map(frame=>{
+    const image=sprite(frame);
+    if(modern){
+      const c=image.getContext('2d')!;
+      c.clearRect(0,0,image.width,58);
+      c.fillStyle='#dbe6dc';c.fillRect(21,57,19,14);c.fillRect(17,69,27,3);
+      c.fillStyle='#699da8';c.fillRect(24,60,13,5);
+      c.fillStyle='#3d6175';c.fillRect(10,73,30,3);
+      c.fillStyle='#fff0ba';c.fillRect(39,66,2,2);
+    }
+    return image;
+  });
+  const people = art.actors.map(actor => actor.frames.map(frame=>sprite(frame,modern)));
   const cargo = sprite(art.cargo);
   const water = createDawnWater();
   const musician = sprite(art.festival.musician), rug = sprite(art.festival.rug), garland = sprite(art.festival.garland);
@@ -229,25 +262,21 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       c.fillRect(Math.round(quayEdge(row)-5+px),row+py,4,1);
     }
     c.globalAlpha=1;
-    c.drawImage(cargo, 526+px,274+py, cargo.width, cargo.height);
-    c.drawImage(cargo, 692+px,397+py, cargo.width*1.5, cargo.height*1.5);
+    if(!modern)c.drawImage(cargo, 526+px,274+py, cargo.width, cargo.height);
+    if(!modern)c.drawImage(cargo, 692+px,397+py, cargo.width*1.5, cargo.height*1.5);
     // A modest community gathering uses the shipped music scene, not a named ritual.
-    c.drawImage(rug,653+px,294+py,42,6);
-    c.drawImage(musician,679+px,279+py,14,17);
-    for(let g=0;g<2;g++){
+    if(!modern)c.drawImage(rug,653+px,294+py,42,6);
+    if(!modern)c.drawImage(musician,679+px,279+py,14,17);
+    for(let g=0;!modern&&g<2;g++){
       const gx=536+g*91, gy=202+g*40;
       for(let strip=0;strip<garland.width;strip+=5){
         const lift=Math.round(Math.sin(time*.65+strip*.12+g));
         c.drawImage(garland,strip,0,Math.min(5,garland.width-strip),garland.height,gx+strip*.55+px,gy+lift+py,3,5);
       }
     }
-    for(let guest=0;guest<5;guest++){
-      const person=people[guest%2][Math.floor(time*.65+guest)%4];
-      const x=655+guest%3*11,y=304+Math.floor(guest/3)*9;
-      c.globalAlpha=.24;c.fillStyle='#446365';c.fillRect(x-5+px,y+py,13,2);c.globalAlpha=1;
-      c.drawImage(person,x+px,y-15+py,8,15);
-    }
-    // Only five walkers, spaced along the clear quay; the performance group stays seated nearby.
+    // Remove only the five stationary listeners that formed the awkward central cluster.
+    // The seated musician, decorations and all five waterfront walkers remain.
+    // Five independent walkers stay spaced along the clear quay.
     for (let i = 0; i < 5; i++) {
       const person = people[i%2][Math.floor(time*4+i)%4];
       const progress = (time * (i === 1 ? -.011 : .008) + i * .19 + 100) % 1;

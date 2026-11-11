@@ -21,13 +21,13 @@ export function useCoastMotion() {
 }
 
 /** Presentation-only environment: owns no game clock, save, command or world mutation. */
-export default function LivingCoast({ running, active }: { running: boolean; active: boolean }) {
+export default function LivingCoast({ running, active, modern=false }: { running: boolean; active: boolean; modern?:boolean }) {
   const element = useRef<HTMLCanvasElement>(null);
   const clock = useRef(0);
   useEffect(() => {
     const canvas = element.current;
     if (!canvas) return;
-    const scene = createCoastalScene(canvas);
+    const scene = createCoastalScene(canvas,modern);
     if (!scene) return;
     let frame = 0, last = 0, inView = true, disposed = false;
     let pointerX = 0, pointerY = 0;
@@ -71,7 +71,7 @@ export default function LivingCoast({ running, active }: { running: boolean; act
       document.removeEventListener('pointerleave', leave);
       reduced.removeEventListener('change', sync);
     };
-  }, [running, active]);
+  }, [running, active, modern]);
   return <div className="ef-coast" aria-hidden="true">
     <canvas ref={element} width={768} height={480} className="ef-coast-canvas" />
     <div className="ef-coast-sunlight" />

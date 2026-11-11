@@ -13,9 +13,12 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
       const context = gsap.context(() => {
         media.add('(prefers-reduced-motion: no-preference)', () => {
           const animations: gsap.core.Animation[] = [];
-          const title = element.querySelector('.ef-title-gold');
-          animations.push(gsap.fromTo(title, { '--gold-sweep': '140%' }, {
-            '--gold-sweep': '-40%', duration: 6.5, ease: 'sine.inOut', repeat: -1, repeatDelay: 7.5,
+          // Interleaved pixel cohorts illuminate across every glyph, never one letter at a time.
+          animations.push(gsap.fromTo('.ef-logo-pixel-batch', { opacity: .28 }, {
+            opacity: 1, duration: 1.25, stagger: .055, ease: 'sine.out',
+          }));
+          animations.push(gsap.fromTo('.ef-logo-reflection', { x: 0, opacity: 0 }, {
+            x: 155, opacity: .45, duration: 6.8, ease: 'sine.inOut', repeat: -1, repeatDelay: 9,
           }));
           animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
             '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
