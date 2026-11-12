@@ -31,3 +31,10 @@ export function firstSentence(text: string): string {
   const end = text.search(/\.(?:\s|$)/);
   return end < 0 ? text : text.slice(0, end + 1);
 }
+
+/** Learned skills are strongest; real skills (ready or locked) stay legible; skills not in this world are greyed out. */
+export type CapabilityTier = "learned" | "learnable" | "unavailable";
+export function capabilityTier(state: string | undefined): CapabilityTier {
+  if (state === "learned") return "learned";
+  return state === "available" || state === "locked" ? "learnable" : "unavailable";
+}

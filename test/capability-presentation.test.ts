@@ -30,3 +30,12 @@ test("compact summaries preserve decimal values and leave complete rules intact"
   assert.equal(firstSentence(text),'Low-flood factor becomes 0.60.');
   assert.equal(firstSentence('No extra sentence'),'No extra sentence');
 });
+
+test("node visibility tiers separate learned, learnable and not-yet-in-game skills", async () => {
+  const { capabilityTier } = await import("../client/models/capability-presentation.ts");
+  assert.equal(capabilityTier("learned"), "learned");
+  assert.equal(capabilityTier("available"), "learnable");
+  assert.equal(capabilityTier("locked"), "learnable");
+  assert.equal(capabilityTier("unavailable"), "unavailable");
+  assert.equal(capabilityTier(undefined), "unavailable");
+});
