@@ -39,8 +39,7 @@ test("old lives show all 74 inspectable nodes with their original rules retained
   for (const node of CAPABILITY_NODES) assert.ok(html.includes(`data-capability-id="${node.id}"`), node.id);
   assert.match(html, /This life keeps its earlier skill rules/);
   assert.match(html, /Connected skill tree/);
-  assert.match(html, /Fit whole tree/);
-  assert.match(html, /Read selected path/);
+  assert.doesNotMatch(html, /Fit whole tree|Find a skill|Zoom in skill map|Zoom out skill map/, "The map zooms by scroll or pinch only.");
   assert.doesNotMatch(html, /Inspect a skill|capability-node-picker/);
   assert.match(html, /Tree legend/);
   assert.match(html, /Crossover/);
