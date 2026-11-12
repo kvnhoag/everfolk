@@ -8,8 +8,13 @@ import { CAREER_GROUP_JOBS } from "../chain/catalog/npc-actions.ts";
 import { getAssetValue, getNetWorth } from "../src/economy.ts";
 import { lifeRecordChanges } from "../client/models/life-record.ts";
 import { visibleRelationshipPeople } from "../client/models/relationship-labels.ts";
+import { entryUsesDefaultLives, startupRefreshesToDefault } from "../client/models/world-entry.ts";
+import { visibleCharacterSections } from "../client/models/character-panel-model.ts";
+import { clearRecordedWealthObservations, recordWealthObservation, getSocietyWealthBenchmarkInfo } from "../client/models/society-wealth-data.ts";
+import { getWealthComparison } from "../client/models/wealth-comparison.ts";
 import sample from "../worlds/alexandria-sample.json" with { type: "json" };
 import lives2 from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
+import lives3 from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 test("Issue #12: alexandria-lives-1 export loads and restores on clean storage without prior session setup", async () => {
   const pack = await loadLifeWorld("alexandria-lives-1");
@@ -219,3 +224,90 @@ test("Issue #18: Uncatalogued runtime records are labelled Life event rather tha
     assert.equal(journalKind({ type: "event", id: decisionEvent.id }, sample), "Decision");
   }
 });
+
+test("Issue #10: World catalogue routing respects explicit classic and custom selections", () => {
+  const activeDemo = { id: "alexandria", pack: { demo: true } as any };
+  const activeClassic = { id: "alexandria-sample", pack: { demo: false } as any };
+
+  // Choosing alexandria-sample (0.42.0) does NOT redirect to demo
+  assert.equal(entryUsesDefaultLives("alexandria-sample", false, activeDemo), false);
+  // Default world alexandria DOES redirect to demo
+  assert.equal(entryUsesDefaultLives("alexandria", false, activeDemo), true);
+  // Custom world does NOT redirect to demo
+  assert.equal(entryUsesDefaultLives("custom-city", false, activeDemo), false);
+  // Restarting inside classic world does NOT switch to demo
+  assert.equal(entryUsesDefaultLives("alexandria-sample", true, activeClassic), false);
+
+  // Startup refreshes an unbegun older demo birth to lives-3
+  assert.equal(startupRefreshesToDefault({ demo: true, version: "alexandria-lives-2" }, false, "alexandria-lives-3"), true);
+  // Begun lives never refresh
+  assert.equal(startupRefreshesToDefault({ demo: true, version: "alexandria-lives-2" }, true, "alexandria-lives-3"), false);
+  // Classic pending births never refresh to demo lives
+  assert.equal(startupRefreshesToDefault({ demo: false, version: "0.42.0" }, false, "alexandria-lives-3"), false);
+});
+
+test("Issue #17: Newborn family tab is visible in household worlds", () => {
+  const engine = createEngine(lives3);
+  const life = engine.start("test-newborn-family");
+  assert.equal(life.age, 0);
+
+  const sections = visibleCharacterSections(life, lives3, false);
+  const sectionIds = sections.map(s => s.id);
+  assert.ok(sectionIds.includes("children"), "Family section must be visible at age 0 in household worlds");
+});
+
+test("Issue #5: Recorded player lives feed society wealth percentiles with revision isolation and fallback", () => {
+  clearRecordedWealthObservations();
+
+  const worldA = { ...sample, id: "world-a", version: "1.0.0" };
+  const worldB = { ...sample, id: "world-a", version: "2.0.0" };
+
+  // 1. Fallback when observations are unavailable
+  const fallbackInfo = getSocietyWealthBenchmarkInfo(worldA);
+  assert.equal(fallbackInfo.kind, "authored-households");
+  assert.match(fallbackInfo.description, /starting household distributions/);
+
+  // 2. Record observations for revision 1.0.0
+  recordWealthObservation("world-a", "1.0.0", 100);
+  recordWealthObservation("world-a", "1.0.0", 200);
+  recordWealthObservation("world-a", "1.0.0", 500);
+  recordWealthObservation("world-a", "1.0.0", 1000);
+
+  // 3. Observations active for revision 1.0.0
+  const infoA = getSocietyWealthBenchmarkInfo(worldA);
+  assert.equal(infoA.kind, "recorded-lives");
+  assert.equal(infoA.sampleCount, 4);
+  assert.match(infoA.description, /4 recorded player lives/);
+
+  // 4. Revision isolation: worldB (revision 2.0.0) retains authored fallback
+  const infoB = getSocietyWealthBenchmarkInfo(worldB);
+  assert.equal(infoB.kind, "authored-households");
+
+  // 5. Percentile calculation against recorded lives:
+  // Life with 500 net worth: strictly below 500 are 100 and 200 (2/4 = 50%)
+  const engine = createEngine(worldA);
+  const life = structuredClone(engine.start("test-society-percentile"));
+  life.economy!.cash = 500;
+  life.economy!.assets = {};
+  life.economy!.debt = 0;
+
+  const comparison = getWealthComparison(worldA, life);
+  assert.ok(comparison);
+  assert.equal(comparison.netWorth, 500);
+  assert.equal(comparison.percentile, 50);
+
+  // Life with 50 net worth: strictly below 50 is 0 (0%)
+  life.economy!.cash = 50;
+  const lowComp = getWealthComparison(worldA, life);
+  assert.equal(lowComp?.percentile, 0);
+
+  // Life with 2000 net worth: strictly below 2000 is 4 (100%)
+  life.economy!.cash = 2000;
+  const highComp = getWealthComparison(worldA, life);
+  assert.equal(highComp?.percentile, 100);
+
+  // Clean up
+  clearRecordedWealthObservations();
+});
+
+

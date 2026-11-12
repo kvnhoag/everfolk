@@ -14,11 +14,69 @@ export interface SocietyWealthGroup {
   resources: UniformRoll[];
 }
 
+export type SocietyBenchmarkKind = "recorded-lives" | "authored-households";
+
+export interface SocietyBenchmarkInfo {
+  kind: SocietyBenchmarkKind;
+  description: string;
+  sampleCount: number;
+}
+
+/** In-memory store for recorded player life net worth observations per world and revision. */
+const recordedObservations = new Map<string, number[]>();
+
+function observationKey(worldId: string, worldVersion: string): string {
+  return `${worldId}::${worldVersion}`;
+}
+
+/** Record a player life net-worth observation for a specific world and compatible revision. */
+export function recordWealthObservation(worldId: string, worldVersion: string, netWorth: number): void {
+  if (!Number.isFinite(netWorth)) return;
+  const key = observationKey(worldId, worldVersion);
+  const existing = recordedObservations.get(key) ?? [];
+  existing.push(Math.round(netWorth));
+  recordedObservations.set(key, existing);
+}
+
+/** Retrieve all net-worth observations for a specific world revision. */
+export function getRecordedWealthObservations(worldId: string, worldVersion: string): readonly number[] {
+  return recordedObservations.get(observationKey(worldId, worldVersion)) ?? [];
+}
+
+/** Clear all recorded net-worth observations (primarily for test isolation). */
+export function clearRecordedWealthObservations(): void {
+  recordedObservations.clear();
+}
+
+/** Retrieve metadata describing whether the society comparison is based on recorded lives or authored fallback. */
+export function getSocietyWealthBenchmarkInfo(world: WorldPack, explicitObservations?: readonly number[]): SocietyBenchmarkInfo {
+  const observations = explicitObservations ?? (world ? getRecordedWealthObservations(world.id, world.version) : []);
+  if (observations.length > 0) {
+    return {
+      kind: "recorded-lives",
+      description: `Based on ${observations.length} recorded player ${observations.length === 1 ? "life" : "lives"} in this world revision.`,
+      sampleCount: observations.length,
+    };
+  }
+  return {
+    kind: "authored-households",
+    description: "Based on starting household distributions (game population benchmark).",
+    sampleCount: world?.origins?.length ?? 0,
+  };
+}
+
 /** Retrieve the population used for the society percentile and median wealth. */
-export function getSocietyWealthData(world: WorldPack): SocietyWealthGroup[] {
-  // TODO: Retrieve net-worth data from players' recorded lives for this world
-  // and compatible world revision. Refresh the population as new players join
-  // and their lives progress; keep the authored mock fallback until data exists.
+export function getSocietyWealthData(world: WorldPack, explicitObservations?: readonly number[]): SocietyWealthGroup[] {
+  const observations = explicitObservations ?? getRecordedWealthObservations(world.id, world.version);
+  if (observations.length > 0) {
+    const sorted = [...observations].sort((a, b) => a - b);
+    return [{
+      weight: 1,
+      count: sorted.length,
+      wealthAt: (index: number) => sorted[index],
+      resources: [],
+    }];
+  }
   return getMockSocietyWealthData(world);
 }
 

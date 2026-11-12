@@ -70,6 +70,8 @@ import "../styles/everfolk-ui.css";
 import "../styles/storybook-theme.css";
 import "../styles/readable-type.css";
 import "../styles/printed-folktale.css";
+import { journalKind } from "../models/journal-kind.ts";
+import "../styles/save-recovery.css";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -105,22 +107,6 @@ function journalSourceIds(entry: JournalEntry, world = sampleEngine.world): stri
   if (entry.type === "event") return findLifeEvent(world, entry.id)?.sourceIds ?? [];
   if (entry.type === "ending") return world.endings.find(item => item.id === entry.id)?.sourceIds ?? [];
   return [];
-}
-
-function journalKind(entry: JournalEntry, world = sampleEngine.world): string {
-  if (entry.type === "choice") return "Selected";
-  if (entry.type === "outcome") return "Outcome";
-  if (entry.type === "activity") return "Activity";
-  if (entry.type === "birth") return "Background";
-  if (entry.type === "influence") return "Influence";
-  if (entry.type === "ending") return world.endings.find(ending => ending.id === entry.id)?.kind === "chapter" ? "Record complete" : "Life ended";
-  const event = findLifeEvent(world, entry.id);
-  if (!event) return "Life event";
-  if (event.rarity === "rare") return "Rare encounter";
-  if (event.id === "the-first-household") return "Birth";
-  if (event.trigger.type === "year") return "History";
-  if (event.mode === "automatic" && event.trigger.type === "age") return "Milestone";
-  return event.mode === "automatic" ? "Life event" : "Decision";
 }
 
 function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFirst?: boolean }) {
@@ -446,6 +432,11 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   }
 
   return <>
+    {game.unreadableSave !== null && <aside className="save-recovery" role="alert">
+      <strong>Your previous save is protected</strong>
+      <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
+      <div><button type="button" onClick={() => downloadLife(game.unreadableSave!, "everfolk-protected-save.json")}>Download original save</button><button type="button" onClick={game.resetUnreadableSave}>Replace protected save with this life</button></div>
+    </aside>}
     {menuOpen && <MainMenu life={life} world={world} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>

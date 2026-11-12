@@ -35,8 +35,8 @@ test("every action id has exactly one influence entry", () => {
 
 test("every job id in CAREER_GROUP_JOBS exists in alexandria-0.33.0 or expanded worlds", () => {
   assert.deepEqual(Object.keys(CAREER_GROUP_JOBS).sort(), [...CAREER_GROUPS].sort());
-  const demoJobs = ["farmhand", "tenant-farmer", "grain-dealer"];
-  const expandedJobs = ["tailor", "scientist", "politician"];
+  const demoJobs = ["farmhand", "tenant-farmer", "grain-dealer", "master-cultivator", "master-household-farmer"];
+  const expandedJobs = ["tailor", "scientist", "politician", "master-tailor", "master-potter", "master-sculptor", "merchant", "trading-house-manager"];
   const mapped = Object.values(CAREER_GROUP_JOBS).flat();
   const rankedJobs = mapped.filter(job => !demoJobs.includes(job) && !expandedJobs.includes(job));
   for (const job of rankedJobs) assert.ok(jobIds.has(job), `unknown job ${job}`);

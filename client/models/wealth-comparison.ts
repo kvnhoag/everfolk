@@ -86,10 +86,10 @@ function countBelow(group: SocietyWealthGroup, wealth: number, includeEqual = fa
  * it is not a measured historical or age-adjusted population.
  * Reads only: no sampling, extra engine starts, or simulation RNG use.
  */
-export function getWealthComparison(world: WorldPack, life: LifeState): WealthComparison | null {
+export function getWealthComparison(world: WorldPack, life: LifeState, explicitObservations?: readonly number[]): WealthComparison | null {
   const economy = world.economy;
   if (!economy || !life.economy) return null;
-  const groups = getSocietyWealthData(world);
+  const groups = getSocietyWealthData(world, explicitObservations);
   const totalWeight = groups.reduce((sum, group) => sum + group.weight, 0);
   const weightBelow = (wealth: number, includeEqual = false) => groups.reduce((sum, group) =>
     sum + group.weight * householdShare(group, wealth, economy.unitsPerPoint, includeEqual), 0);

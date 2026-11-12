@@ -1,6 +1,5 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../../src/types.ts";
-import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
-import { bid } from "../../src/vocations/view.ts";
+import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationHoldings, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
 import { marketOrderValue, marketQuote } from "../../src/market.ts";
@@ -82,35 +81,13 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     }
   }
   if (world.vocations && life.vocations) {
-    const def = world.vocations;
-    const ledger = life.vocations;
-    const countedFromLots: Record<string, number> = {};
-    for (const lot of ledger.lots ?? []) {
-      if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
-      countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
-      const isMaterial = Boolean(def.materials[lot.item]);
-      const value = isMaterial ? def.materials[lot.item].price : bid(world, lot.item, lot.quality);
-      assets.push({
-        id: `vocation:${lot.item}:${lot.quality}`,
-        title: `${lot.item.replaceAll("-", " ")}${isMaterial ? "" : ` (grade ${lot.quality})`}`,
-        description: isMaterial ? "Workshop material holdings." : "Crafted goods valued at the funded buyer bid.",
-        value,
-        quantity: lot.quantity,
-      });
-    }
-    for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
-      if (quantity <= 0 || item === "flax" || item === "linen") continue;
-      const remaining = quantity - (countedFromLots[item] ?? 0);
-      if (remaining <= 0) continue;
-      const isMaterial = Boolean(def.materials[item]);
-      const value = isMaterial ? def.materials[item].price : bid(world, item, 1);
-      assets.push({
-        id: `vocation:${item}`,
-        title: item.replaceAll("-", " "),
-        description: isMaterial ? "Workshop material holdings." : "Crafted goods valued at the funded buyer bid.",
-        value,
-        quantity: remaining,
-      });
+    for (const [index, holding] of getVocationHoldings(world, life).entries()) {
+      const title = `${holding.item.replaceAll("-", " ")}${holding.material ? "" : ` (grade ${holding.quality})`}`;
+      if (holding.valuedQuantity) assets.push({ id: `vocation:${index}`, title,
+        description: holding.material ? "Materials valued at the current supplier quote." : "Funded buyer bids, limited by remaining demand and merchant cash.",
+        value: holding.unitValue, quantity: holding.valuedQuantity });
+      if (holding.quantity > holding.valuedQuantity) assets.push({ id: `vocation:${index}:unfunded`, title,
+        description: "Owned, but no remaining funded buyer; excluded from realizable wealth.", value: 0, quantity: holding.quantity - holding.valuedQuantity });
     }
   }
   const job = world.character?.jobs.find(item => item.id === life.character?.jobId);

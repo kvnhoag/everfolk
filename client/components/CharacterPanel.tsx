@@ -303,7 +303,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {origin && <div className="family-background-note"><strong>{origin.title}</strong><p>{displayProse(origin.text)}</p></div>}
         <RelationshipTable rows={livingFamily} world={world} caption="Current family" emptyText="No living family members recorded for this life." />
         {rememberedFamily.length > 0 && <details className="family-history"><summary>Remembered family · {rememberedFamily.length}</summary><RelationshipTable rows={rememberedFamily} world={world} caption="Remembered family" emptyText="No deceased relatives recorded." /></details>}
-        {!character.family?.length && <p className="character-person-meta">Parents and grandparents were not recorded for this life.</p>}
+        {!character.family?.length && <p className="character-person-meta">{world.demo ? "Your household's parents care for you and work the family plot. Individual relatives were not named in this revision." : "Parents and grandparents were not recorded for this life."}</p>}
         {familyActivities.length > 0 && <h4 className="relationship-actions-title">Family activities</h4>}
         <ActivityList activities={familyActivities} {...props} />
       </div>}

@@ -26,33 +26,43 @@ export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeS
   }, 0), "Household resource market value");
 }
 
-/** Non-shared vocation materials and completed lots valued at realizable funded buyer bids. */
-export function getVocationInventoryValue(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): number {
-  if (!world.vocations || !state.vocations) return 0;
+export interface VocationHolding { item: string; quality: number; quantity: number; valuedQuantity: number; unitValue: number; material: boolean }
+
+/** Materials use supplier quotes; products share the finite merchant budget and demand. */
+export function getVocationHoldings(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): VocationHolding[] {
+  if (!world.vocations || !state.vocations) return [];
   const def = world.vocations;
   const ledger = state.vocations;
-  let total = 0;
+  const holdings: VocationHolding[] = [];
   const countedFromLots: Record<string, number> = {};
+  const add = (item: string, quality: number, quantity: number) => {
+    const material = Boolean(def.materials[item]);
+    holdings.push({ item, quality, quantity, valuedQuantity: material ? quantity : 0,
+      unitValue: material ? def.materials[item].price : bid(world, item, quality), material });
+  };
   for (const lot of ledger.lots ?? []) {
     if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
     countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
-    if (def.materials[lot.item]) {
-      total += def.materials[lot.item].price * lot.quantity;
-    } else {
-      total += bid(world, lot.item, lot.quality) * lot.quantity;
-    }
+    add(lot.item, lot.quality, lot.quantity);
   }
   for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
     if (quantity <= 0 || item === "flax" || item === "linen") continue;
     const remaining = quantity - (countedFromLots[item] ?? 0);
     if (remaining <= 0) continue;
-    if (def.materials[item]) {
-      total += def.materials[item].price * remaining;
-    } else {
-      total += bid(world, item, 1) * remaining;
-    }
+    add(item, 1, remaining);
   }
-  return amount(total, "Vocation inventory realizable value");
+  let budget = ledger.accounts.merchant;
+  const demand = { ...ledger.demand };
+  for (const holding of holdings.filter(item => !item.material).sort((a, b) => b.unitValue - a.unitValue || a.item.localeCompare(b.item))) {
+    holding.valuedQuantity = holding.unitValue > 0 ? Math.min(holding.quantity, demand[holding.item] ?? 0, Math.floor(budget / holding.unitValue)) : 0;
+    budget -= holding.valuedQuantity * holding.unitValue;
+    demand[holding.item] = (demand[holding.item] ?? 0) - holding.valuedQuantity;
+  }
+  return holdings;
+}
+
+export function getVocationInventoryValue(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): number {
+  return amount(getVocationHoldings(world, state).reduce((sum, item) => sum + item.unitValue * item.valuedQuantity, 0), "Vocation inventory realizable value");
 }
 
 export function getAssetValue(world: WorldPack, state: ValuationState): number {
