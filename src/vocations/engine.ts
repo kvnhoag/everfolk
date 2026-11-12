@@ -20,7 +20,7 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
   const cash = life.economy.cash;
   if (world.capabilities && id.startsWith("appointment-") && action.kind === "work" && ledger.accounts[action.payer] < 30) return "No funded appointment is available in this office right now.";
   if (major(world, id) && ledger.workedAge === life.age) return "This year's work is complete.";
-  if (major(world, id) && life.character.jobId === "soldier") return "Leave military service before taking a year of civilian work.";
+  if (major(world, id) && (life.character.jobId === "soldier" || world.capabilities?.version===2 && ["officer","general"].includes(life.character.jobId ?? "")) && !(world.capabilities?.version===2 && action.kind==="work" && action.practice && ["warfare","strength","endurance","literacy","reckoning","oratory","philosophy"].includes(action.primary))) return "Leave military service before taking a year of civilian work.";
   if (life.capabilities?.project && (action.kind === "make" || action.kind === "work" && !action.practice)) return "Finish the registered capability assessment before taking another work project.";
   if (action.kind === "buy") {
     if (ledger.stock[action.item] < action.quantity) return "The material supplier has insufficient stock.";

@@ -5,6 +5,7 @@ import { UNAVAILABLE_REASON } from "./demo/types.ts";
 import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, WorldPack } from "./types.ts";
 import { financeActivityReason } from "./economy.ts";
 import { marriageRelationshipReason, socialRoleEffectReason } from "./relationships.ts";
+import { militaryCareerReason } from "./capabilities/military.ts";
 import { resolvePartner } from "./people.ts";
 
 export function initialCharacter(world: WorldPack): CharacterState | undefined {
@@ -64,6 +65,8 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (character.jobId === effect.job) return allowUnchanged ? undefined : effect.job ? "You already hold this job." : "You are not currently employed.";
     if (effect.job === null) return;
     const job = definition.jobs.find(candidate => candidate.id === effect.job)!;
+    const militaryBlock=militaryCareerReason(world,state,effect.job);
+    if(militaryBlock)return militaryBlock;
     if (state.age < job.minAge) return `${job.title} requires age ${job.minAge}.`;
     const missing = Object.entries(job.requirements ?? {}).filter(([skill, threshold]) => character.skills[skill] < threshold);
     if (missing.length) return `Requires ${missing.map(([skill, threshold]) => `${definition.skills[skill].label} ${threshold} (currently ${character.skills[skill]})`).join(", ")}.`;

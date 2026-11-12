@@ -5,6 +5,7 @@ import { FARMING_JOBS, FARMING_SKILL, LIVESTOCK } from "./types.ts";
 import { buyForHousehold } from "./market.ts";
 import { spoilageCutBps } from "./works.ts";
 import { beginFarmHarvest, farmCapacityBonus, farmSpoilageCut, farmYieldPlan, recordFarmFlow } from "../capabilities/farming.ts";
+import { hasServiceRole } from "./service-role.ts";
 
 const FULL = 10_000;
 const ADULT = 100;
@@ -36,7 +37,7 @@ function skill(life: LifeState, id: string): number {
 interface Member { role: "player" | "parent" | "spouse" | "child"; labour: number; ration: number }
 
 function isSoldier(life: LifeState): boolean {
-  return life.character?.jobId === "soldier";
+  return hasServiceRole(life);
 }
 function isFarming(life: LifeState): boolean {
   return FARMING_JOB_IDS.includes(life.character?.jobId ?? "") || Boolean(life.capabilities && ["master-cultivator", "master-household-farmer"].includes(life.character?.jobId ?? ""));

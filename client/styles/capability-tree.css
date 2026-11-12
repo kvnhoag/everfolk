@@ -44,6 +44,7 @@
 .capability-depth-label{font:400 13px var(--font-body,"DM Sans",sans-serif);fill:#8a806b}
 .capability-link{fill:none;stroke:#b4b09f;stroke-width:2;stroke-linecap:round;transition:opacity .18s,stroke .18s,stroke-width .18s}
 .capability-link.is-learned{stroke:var(--cap-earned)}
+.capability-link.is-crossover{stroke-dasharray:7 5;stroke-width:2.5}
 .capability-link.is-lineage{stroke:#b47b20;stroke-width:4;filter:drop-shadow(0 0 3px #e8c87d);opacity:1}
 .capability-link.is-off-path{opacity:.35}
 .capability-link.is-muted,.capability-connections g.is-muted{opacity:.22}

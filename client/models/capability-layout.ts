@@ -1,15 +1,15 @@
-import catalog from "../../design/skill-tree/catalog.json" with { type: "json" };
+import { ATTRIBUTE_BRANCHES, ATTRIBUTE_NODES } from "../../src/capabilities/attribute-catalog.ts";
 import type { CapabilityNode } from "../../src/capabilities/types.ts";
 
 /** Geometry is independent of life state: earning a node never moves a path. */
-export const CAPABILITY_NODES = catalog.nodes as unknown as CapabilityNode[];
-export const CAPABILITY_BRANCHES = ["Farming", "Artisan", "Philosophy", "Trade"] as const;
+export const CAPABILITY_NODES = ATTRIBUTE_NODES;
+export const CAPABILITY_BRANCHES = ATTRIBUTE_BRANCHES;
 export const CAPABILITY_NODE_WIDTH = 112;
 export const CAPABILITY_NODE_HEIGHT = 102;
 export const CAPABILITY_COLUMN_STEP = 142;
 
 export interface PositionedCapability { node: CapabilityNode; x: number; y: number }
-export interface CapabilityLink { from: string; to: string; path: string }
+export interface CapabilityLink { from: string; to: string; path: string; crossover?: boolean }
 export interface CapabilityBand { branch: string; top: number; bottom: number; titleY: number }
 export interface CapabilityLayout {
   width: number; height: number; nodes: PositionedCapability[];
@@ -17,29 +17,30 @@ export interface CapabilityLayout {
 }
 
 const BANDS: readonly CapabilityBand[] = [
-  { branch: "Farming", top: 54, bottom: 344, titleY: 77 },
-  { branch: "Artisan", top: 359, bottom: 801, titleY: 383 },
-  { branch: "Philosophy", top: 816, bottom: 1113, titleY: 840 },
-  { branch: "Trade", top: 1128, bottom: 1324, titleY: 1152 },
+  { branch: "Physique", top: 54, bottom: 484, titleY: 77 },
+  { branch: "Knowledge", top: 499, bottom: 796, titleY: 523 },
+  { branch: "Handmade", top: 811, bottom: 1253, titleY: 835 },
+  { branch: "Trade", top: 1268, bottom: 1464, titleY: 1292 },
 ];
 
 function lane(node: CapabilityNode): number {
-  if (node.branch === "Farming") {
+  if (node.branch === "Physique") {
+    if(node.specialization==="Conditioning" || node.specialization==="Military practice")return 426;
     if (node.id === "F3S" || node.specialization === "Cultivation") return 146;
     if (node.id === "F3W" || node.specialization === "Resilience") return 286;
     return 216;
   }
-  if (node.branch === "Artisan") {
-    if (node.specialization === "Clothing") return 452;
-    if (node.specialization === "Sculpture") return 732;
-    return 592;
+  if (node.branch === "Handmade") {
+    if (node.specialization === "Clothing") return 904;
+    if (node.specialization === "Sculpture") return 1184;
+    return 1044;
   }
-  if (node.branch === "Philosophy") {
-    if (node.specialization === "Research") return 907;
-    if (node.specialization === "Civic practice") return 1047;
-    return 977;
+  if (node.branch === "Knowledge") {
+    if (node.specialization === "Research") return 590;
+    if (node.specialization === "Civic practice") return 730;
+    return 660;
   }
-  return 1245;
+  return 1385;
 }
 
 export function buildCapabilityLayout(nodes: readonly CapabilityNode[] = CAPABILITY_NODES): CapabilityLayout {
@@ -50,9 +51,13 @@ export function buildCapabilityLayout(nodes: readonly CapabilityNode[] = CAPABIL
     if (!from) return [];
     const x1 = from.x + 27, x2 = to.x - 27;
     const bend = Math.max(32, (x2 - x1) * .5);
-    return [{ from: id, to: to.node.id, path: `M ${x1} ${from.y} C ${x1 + bend} ${from.y}, ${x2 - bend} ${to.y}, ${x2} ${to.y}` }];
+    const crossover=from.node.branch!==to.node.branch;
+    const path=id==='P4'&&to.node.id==='M8'
+      ? `M ${from.x} ${from.y-32} V 514 H ${to.x-71} V ${to.y} H ${x2}`
+      : `M ${x1} ${from.y} C ${x1 + bend} ${from.y}, ${x2 - bend} ${to.y}, ${x2} ${to.y}`;
+    return [{ from: id, to: to.node.id, path, ...(crossover?{crossover:true}:{}) }];
   }));
-  return { width: 1480, height: 1340, nodes: positioned, links, bands: BANDS.map(band => ({ ...band })) };
+  return { width: 1480, height: 1480, nodes: positioned, links, bands: BANDS.map(band => ({ ...band })) };
 }
 
 /** Arrow keys follow real dependencies before using a nearby lane. */

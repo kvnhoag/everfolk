@@ -1,6 +1,6 @@
 # Handmade work and public life
 
-`alexandria-lives-3` is the current **free-play** birth revision, built from the retained `alexandria-demo-2` pack. It retains deterministic household resource rolls and market-valued wealth, and adds the connected 65-node skill atlas with recorded work proofs. The previous `alexandria-lives-1` and `alexandria-lives-2` revisions remain available for exact replay. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
+`alexandria-lives-4` is the current **free-play** birth revision, built from the retained `alexandria-demo-2` pack. It retains deterministic household resource rolls and market-valued wealth, and adds the connected 74-node attribute atlas with recorded work proofs. The previous `alexandria-lives-1`, `alexandria-lives-2` and `alexandria-lives-3` revisions remain available for exact replay. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
 
 Run `node scripts/vocations/build-world.mjs` to reproduce the shipped JSON. The builder reads the public [skill-tree design](../../design/skill-tree/README.md) for recipe inputs and reference prices.
 
@@ -16,7 +16,9 @@ The runtime supports:
 - Work consumes the player's annual action and farm labour. Existing automatic job gains are skipped in a year spent on vocation work. Family helpers continue contributing to the farm.
 - Deterministic commands, immutable snapshots, journal receipts, validated pack references, save/load and replay. The existing Career screen exposes work, price/skill previews, inventory and project status.
 
-The **65-node capability evaluator** requires parent capabilities, proficiency and distinct accepted work receipts. Farming proofs wait for the actual harvest and food settlement. Artisan assessments reserve materials, fees and funded buyer payment once, then count active work years. Civic and inquiry records retain their costs and results. The two-year commercial assessment reserves two orders and delivers to two separate funded buyer accounts. No skill score or map visit grants a node by itself.
+The **versioned capability evaluator** requires parent capabilities, proficiency and distinct accepted work receipts. Farming proofs wait for the actual harvest and food settlement. Artisan assessments reserve materials, fees and funded buyer payment once, then count active work years. Civic and inquiry records retain their costs and results. The two-year commercial assessment reserves two orders and delivers to two separate funded buyer accounts. No skill score or map visit grants a node by itself.
+
+The current graph uses Physique, Handmade, Knowledge and Trade. Two Knowledge crossovers feed one military lane. Strength and Endurance are trainable; Health stays a current-condition gate. Soldier, Officer and General appointments require the corresponding capabilities and service deeds, and all three ranks use the real army wage/ration accounts. See [military crossover rules](../../guide/SKILL_CROSSOVERS.md).
 
 Open `/skills` for the complete read-only atlas or **Skill tree** in a life to inspect prerequisites, proof progress, work quotes, rewards and career offers. See [the player guide](../../guide/SKILL_TREE.md) for controls and the focused-play evaluator. All eight mastery paths have accepted-command, save/load and replay coverage in an authored fixture that isolates proofs from survival and training balance. The proposed 50–60% birth-cohort mastery rate remains a balance target, not a measured claim. Numerical stocks, budgets and progression are authored gameplay values.
 

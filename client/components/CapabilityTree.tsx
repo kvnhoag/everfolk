@@ -10,27 +10,28 @@ import "../styles/capability-tree.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
 const BRANCH_DESCRIPTIONS: Record<string, string> = {
-  Farming: "Cultivation and resilience",
-  Artisan: "Clothing, ceramics and sculpture",
-  Philosophy: "Research and civic practice",
+  Physique: "Strength, endurance and physical work",
+  Handmade: "Clothing, ceramics and sculpture",
+  Knowledge: "Reading, inquiry and public reasoning",
   Trade: "Commercial planning",
 };
 const EMPTY_VIEW: CapabilityNodeView = { id: "", state: "unavailable", reasons: ["This path is unavailable in this world."], progress: { done: 0, required: 1 }, actionId: null, actionLabel: "Work on this skill", requirementText: [] };
 
 function NodeShape({ branch, mastery }: { branch: string; mastery: boolean }) {
   return <svg className="capability-node-shape" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-    {branch === "Farming" ? <path d="M32 3C48 3 59 15 59 32S48 61 32 61 5 49 5 32 16 3 32 3Z" />
-      : branch === "Artisan" ? <path d="m32 3 26 14v30L32 61 6 47V17L32 3Z" />
-        : branch === "Philosophy" ? <path d="M13 5h38l8 8v38l-8 8H13l-8-8V13l8-8Z" />
+    {branch === "Physique" ? <path d="M32 3C48 3 59 15 59 32S48 61 32 61 5 49 5 32 16 3 32 3Z" />
+      : branch === "Handmade" ? <path d="m32 3 26 14v30L32 61 6 47V17L32 3Z" />
+        : branch === "Knowledge" ? <path d="M13 5h38l8 8v38l-8 8H13l-8-8V13l8-8Z" />
           : <path d="M32 2 61 32 32 62 3 32Z" />}
     <path className="capability-node-engraving" d={mastery ? "m12 15 8-6m24 0 8 6M12 49l8 6m24 0 8-6M9 20v24m46-24v24" : "m14 12 6-3m24 0 6 3M14 52l6 3m24 0 6-3"} />
   </svg>;
 }
 
 function relatedJobs(world: WorldPack, node: CapabilityNode) {
-  const patterns = node.branch === "Farming" ? /farm|cultivat|estate|grower/
+  const patterns = node.specialization === "Military practice" ? /soldier|officer|general/
+    : node.branch === "Physique" ? /farm|cultivat|estate|grower/
     : node.branch === "Trade" ? /merchant|trader|dealer|shopkeeper|steward/
-      : node.branch === "Philosophy" ? node.specialization === "Research" ? /scientist|research/ : node.specialization === "Civic practice" ? /politician|public|council/ : /philosoph|tutor/
+      : node.branch === "Knowledge" ? node.specialization === "Research" ? /scientist|research/ : node.specialization === "Civic practice" ? /politician|public|council/ : /philosoph|tutor/
         : node.specialization === "Clothing" ? /tailor|textile|weaver/ : node.specialization === "Ceramics" ? /potter|ceramic/ : node.specialization === "Sculpture" ? /sculpt|carv/ : /apprentice/;
   return world.character?.jobs.filter(job => patterns.test(`${job.id} ${job.title}`.toLowerCase())).slice(0, 4) ?? [];
 }
@@ -67,6 +68,7 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
       const current = life.character?.skills[skill] ?? 0;
       return <li key={skill} className={current >= required ? "is-met" : ""}><span>{world.character?.skills[skill]?.label ?? skill}</span><strong>{Math.floor(current * 10) / 10} / {required}</strong></li>;
     })}</ul>{node.anyProficiency && <p>Also meet one: {node.anyProficiency.map(group => Object.entries(group).map(([id, value]) => `${world.character?.skills[id]?.label ?? id} ${value}`).join(" + ")).join(" or ")}.</p>}</section>
+    {node.minimumStats && <section><h5>Current condition requirements</h5><ul className="capability-proficiency-list">{Object.entries(node.minimumStats).map(([stat,value])=><li key={stat} className={life.stats[stat]>=value?"is-met":""}><span>{world.stats[stat]?.label ?? stat}</span><strong>{Math.floor(life.stats[stat] ?? 0)} / {value}</strong></li>)}</ul><p>Health is your current condition. Strength and Endurance are trainable skills.</p></section>}
     <section><h5>Demonstrate it</h5><p>{node.proof}</p><div className="capability-proof-progress"><progress aria-label={`${node.title} demonstrated work`} max={Math.max(1, view.progress.required)} value={Math.min(view.progress.done, Math.max(1, view.progress.required))} /><span>{view.progress.done} / {view.progress.required} work steps</span></div></section>
     <section><h5>What this opens</h5><p>{node.reward}</p></section>
     {view.requirementText.length > 0 && <section><h5>Before taking the work</h5><ul>{view.requirementText.map(text => <li key={text}>{text}</li>)}</ul></section>}
@@ -142,7 +144,7 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
               const from = byId.get(link.from), to = byId.get(link.to);
               const target = CAPABILITY_NODES.find(node => node.id === link.to)!;
               const lineage = ancestors.has(link.from) && ancestors.has(link.to);
-              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} d={link.path} className={`capability-link${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${branch !== "all" && target.branch !== branch && !lineage ? " is-muted" : ""}`} />;
+              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} data-crossover={link.crossover || undefined} d={link.path} className={`capability-link${link.crossover?" is-crossover":""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${branch !== "all" && target.branch !== branch && !lineage ? " is-muted" : ""}`} />;
             })}
           </svg>
           {layout.nodes.map(({ node, x, y }) => {

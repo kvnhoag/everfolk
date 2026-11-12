@@ -32,10 +32,10 @@ function buttonWithClass(value: unknown, className: string): ReactElement<{ clas
   return buttonWithClass(value.props.children, className);
 }
 
-test("old lives show all 65 inspectable nodes with their original rules retained", () => {
+test("old lives show all 74 inspectable nodes with their original rules retained", () => {
   const before = structuredClone(life);
   const html = renderToStaticMarkup(createElement(CapabilityTree, { world, life, activities: engine.getActivities(life), onActivity() { assert.fail("Viewing a tree must not act"); } }));
-  assert.equal((html.match(/data-capability-id=/g) ?? []).length, 65);
+  assert.equal((html.match(/data-capability-id=/g) ?? []).length, 74);
   for (const node of CAPABILITY_NODES) assert.ok(html.includes(`data-capability-id="${node.id}"`), node.id);
   assert.match(html, /This life keeps its earlier skill rules/);
   assert.match(html, /Connected skill tree/);
@@ -43,9 +43,9 @@ test("old lives show all 65 inspectable nodes with their original rules retained
   assert.match(html, /Read selected path/);
   assert.match(html, /Inspect a skill/);
   assert.match(html, /Double frame · depth 10/);
-  assert.match(html, /Cultivation and resilience/);
+  assert.match(html, /Strength, endurance and physical work/);
   assert.match(html, /Clothing, ceramics and sculpture/);
-  assert.match(html, /Research and civic practice/);
+  assert.match(html, /Reading, inquiry and public reasoning/);
   assert.equal((html.match(/data-from=/g) ?? []).length, CAPABILITY_NODES.reduce((sum, node) => sum + node.prerequisites.all.length, 0));
   assert.deepEqual(life, before);
 });

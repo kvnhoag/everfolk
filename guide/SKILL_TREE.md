@@ -2,7 +2,7 @@
 
 Open `/skills` after starting the local server to inspect the complete atlas without creating a save. In a game, use **Skill tree** in the top navigation or **Character → Skills**.
 
-The atlas contains 65 connected capabilities across Farming, Artisan, Philosophy and Trade. All paths remain visible. Choose a node to light its complete path from the root and inspect its prerequisites, proficiency thresholds, demonstrated-work proof, quoted action and practical reward. Scroll to zoom around the pointer and drag the map to explore; touchscreens support dragging and pinch zoom. Use **Read selected path** to center the selected skill at reading size, **Fit whole tree** to return to the overview, or the named-node picker on a small screen. Arrow keys follow connected skills.
+The atlas contains 74 connected capabilities across Physique, Handmade, Knowledge and Trade. All paths remain visible. Choose a node to light its complete path from the root and inspect its prerequisites, proficiency thresholds, demonstrated-work proof, quoted action and practical reward. Scroll to zoom around the pointer and drag the map to explore; touchscreens support dragging and pinch zoom. Use **Read selected path** to center the selected skill at reading size, **Fit whole tree** to return to the overview, or the named-node picker on a small screen. Arrow keys follow connected skills.
 
 ![The complete skill atlas](../public/assets/skills/skill-atlas.svg)
 
@@ -16,7 +16,7 @@ Locked nodes explain missing requirements. Unavailable nodes remain inspectable 
 
 ## Saves and versions
 
-New free-play births use `alexandria-lives-3`. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
+New free-play births use `alexandria-lives-4`. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
 
 ## Reproduce and verify
 
@@ -38,4 +38,6 @@ The design's 50–60% mastery goal refers to reaching depth 10 on one specializa
 
 ## Current balance limit
 
-The first smoke cohort used 10 seeds for each specialization. Resilience reached mastery in 3 of 10 lives; the other seven paths reached none under that disclosed policy. This is below the design target. Food security, training time and financing need further balance work; the policy is not an optimal player. The mastery-path regression fixture deliberately supplies expertise and resources to verify proofs and replay, and does not measure ordinary-play attainment.
+The retained `alexandria-lives-3` smoke cohort used 10 seeds for each specialization. Resilience reached mastery in 3 of 10 lives; the other seven paths reached none under that disclosed policy. This is below the design target. Food security, training time and financing need further balance work; the policy is not an optimal player. The mastery-path regression fixture deliberately supplies expertise and resources to verify proofs and replay, and does not measure ordinary-play attainment.
+
+The attribute revision has not been calibrated to that target. See [military crossovers](SKILL_CROSSOVERS.md) for Strength, Endurance, Health and career gates.
