@@ -77,7 +77,7 @@ function householdShare(group: SocietyWealthGroup, wealth: number, step: number,
   if (suffixStart > prefix) cash.push({ first: group.wealthAt(prefix), step, count: suffixStart - prefix, weight: (suffixStart - prefix) / group.count });
   if (suffixStart < group.count) cash.push({ first: last, step: 0, count: 1, weight: (group.count - suffixStart) / group.count });
   return cash.reduce((share, segment) => {
-    const components = [segment, ...group.resources];
+    const components: UniformRoll[] = [segment, ...group.resources];
     const base = components.reduce((sum, roll) => sum + roll.first, 0);
     const rolls = components.filter(roll => (roll.step > 0 || roll.valueAt) && roll.count > 1).sort((a, b) => a.count - b.count);
     const ceiling = Math.ceil(wealth - base) - 1 + (includeEqual && Number.isInteger(wealth - base) ? 1 : 0);

@@ -6,8 +6,9 @@ export const OFFICER_SERVICE_YEARS = 2, GENERAL_SERVICE_YEARS = 5;
 export const MILITARY_QUALIFICATIONS: Record<string,string> = {soldier:"M4",officer:"M7",general:"M10"};
 export const provedServiceYears = (life:LifeState) => new Set((life.capabilities?.military?.service ?? []).filter(r=>r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations).map(r=>r.age)).size;
 export function militaryCareerReason(world:WorldPack,life:LifeState,job:string):string|undefined {
-  if((world.capabilities?.version ?? 0) < 2 || !MILITARY_QUALIFICATIONS[job]) return;
-  const id=MILITARY_QUALIFICATIONS[job], node=world.capabilities.nodes.find(n=>n.id===id)!;
+  const capabilities = world.capabilities;
+  if(!capabilities || capabilities.version < 2 || !MILITARY_QUALIFICATIONS[job]) return;
+  const id=MILITARY_QUALIFICATIONS[job], node=capabilities.nodes.find(n=>n.id===id)!;
   if(!life.capabilities?.learned[id])return `Learn ${node.title} through demonstrated work before seeking this career.`;
   // An appointment checks fitness; knowledge was proved when the qualification was learned.
   const fitness=world.health?.stat ?? "health";
