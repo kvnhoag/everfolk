@@ -33,8 +33,8 @@ import { executeTrade } from "./demo/market.ts";
 import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
-import { decidedByOthers, inTimeFrame } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, changeAffinity, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
+import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
+import { advanceDistrict, affinityJournalId, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -188,6 +188,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
+    if (world.paths) closeStage(world, state, state.age, state.age);
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
     let causeText = "";
@@ -775,6 +776,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
+    // Paths worlds: a stage that just ended is recorded as it stood at its last year.
+    if (world.paths && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
