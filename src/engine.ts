@@ -39,6 +39,7 @@ import { takeItem } from "./capabilities/inventory.ts";
 import { deathEndingFor, decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
 import { TIERS } from "./paths/types.ts";
 import type { FieldId, PathsState } from "./paths/types.ts";
+import { drawFromAccount, recordSuccessor } from "./paths/index.ts";
 import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
@@ -329,6 +330,17 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           journal(state, "activity", `paths-use-${effect.item}`, `${effect.quantity} ${effect.item} used: ${effect.cause}.`);
           break;
         }
+        case "account-pay": {
+          const paid = drawFromAccount(state, effect.account, effect.amount);
+          if (paid > 0) {
+            apply(state, [{ type: "cash", delta: paid }]);
+            journal(state, "activity", `paths-pay-${effect.account}`, `You are paid ${paid} ${world.economy?.currency.short ?? "dr"}: ${effect.cause}.`);
+          } else journal(state, "activity", `paths-pay-${effect.account}`, `The payer's chest could not cover the fee (${effect.cause}), so nothing was paid.`);
+          break;
+        }
+        case "successor":
+          journal(state, "event", `paths-successor-${effect.field}`, recordSuccessor(state, effect.field, effect.relation, effect.cause));
+          break;
         case "move-district":
           journal(state, "event", "paths-move", moveDistrict(world, state, effect.district, effect.reason));
           break;
@@ -433,7 +445,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (!matches(event.when, state) || (event.mode !== "automatic" && !byOthers && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
-      case "year": return state.year >= event.trigger.at;
+      case "year": {
+        // Only a recurring dated event names a cooldown; older packs have none, so their dated events are unchanged.
+        const lastAge = event.cooldownYears === undefined ? undefined : state.lastEventAge[event.id];
+        return state.year >= event.trigger.at && (lastAge === undefined || state.age - lastAge >= event.cooldownYears!);
+      }
       case "random": {
         const lastAge = state.lastEventAge[event.id];
         return lastAge === undefined || state.age - lastAge >= (event.cooldownYears ?? 1);

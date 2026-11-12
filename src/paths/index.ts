@@ -9,3 +9,4 @@ export { MEETING_BANDS, meetPractitioner, moveDistrict } from "./practitioners.t
 export type { Meeting, MeetingBand } from "./practitioners.ts";
 export { closeStage, recordStage, stageRecordsView } from "./stage-records.ts";
 export { farmEdgeHealth, farmEdgeOf, farmInputCost, materialCost } from "./farm-edge.ts";
+export { drawFromAccount, recordSuccessor, accountBalance } from "./late-life.ts";

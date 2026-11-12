@@ -33,7 +33,7 @@ const SPECIALIZATIONS: Record<string, Specialization> = {
   PS: { field: "research", skill: "philosophy", people: "scholars",
     apprentice: "Your careful observations are talked about. A student asks to copy your notes and follow your method.",
     invitation: "Scholars near the court invite you to read your observations to them and answer their questions.",
-    recognition: "Your work is copied and argued over by other scholars. You are counted among the renowned scholars of Alexandria." },
+    recognition: "Your work is copied and argued over by other scholars. You are counted among the learned people of the city, whose judgement others ask for." },
   PP: { field: "civic", skill: "oratory", people: "officials",
     apprentice: "Your fair settling of disputes is remembered. A young clerk asks to learn how you prepare a hearing.",
     invitation: "The district's officials invite you to speak for the district at the next gathering.",

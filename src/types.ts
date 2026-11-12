@@ -1,7 +1,7 @@
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
-import type { Tier, FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
+import type { AccountId, Tier, FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -16,6 +16,8 @@ export type Condition =
   | { type: "away-from-home" }
   | { type: "introduced"; field: FieldId }
   | { type: "material"; item: string; op: Comparison; value: number }
+  /** Paths worlds: what a finite payer (a vocation account or the army purse) holds. */
+  | { type: "account"; account: AccountId; op: Comparison; value: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -48,6 +50,10 @@ export type Effect =
   | { type: "meet-practitioner"; field: FieldId; band: "child" | "young" | "adult" | "elder" }
   | { type: "move-district"; district: string; reason: string }
   | { type: "use-material"; item: string; quantity: number; cause: string }
+  /** Paths worlds: a payer hands money to the household from its own account; pays nothing when it cannot fund the amount. */
+  | { type: "account-pay"; account: AccountId; amount: number; cause: string }
+  /** Paths worlds: the life trains a child or an apprentice to carry its craft on. */
+  | { type: "successor"; field: FieldId; relation: "child" | "apprentice"; cause: string }
   | { type: "introduce-field"; field: FieldId }
   /** Paths worlds: the life is counted among its current district's people of a field, at a tier. */
   | { type: "join-district"; field: FieldId; tier: Tier }

@@ -350,6 +350,50 @@
     "recognised-m": {
       "label": "Recognised among the soldiers",
       "initial": false
+    },
+    "cleruch-allotment": {
+      "label": "Holds a cleruch's allotment of crown land",
+      "initial": false
+    },
+    "crown-lease": {
+      "label": "Leases crown land",
+      "initial": false
+    },
+    "temple-lease": {
+      "label": "Leases temple land",
+      "initial": false
+    },
+    "passed-on-farming": {
+      "label": "Passed the farming craft on",
+      "initial": false
+    },
+    "passed-on-clothing": {
+      "label": "Passed the clothing craft on",
+      "initial": false
+    },
+    "passed-on-ceramics": {
+      "label": "Passed the ceramics craft on",
+      "initial": false
+    },
+    "passed-on-sculpture": {
+      "label": "Passed the sculpture craft on",
+      "initial": false
+    },
+    "passed-on-research": {
+      "label": "Passed the research craft on",
+      "initial": false
+    },
+    "passed-on-civic": {
+      "label": "Passed the civic craft on",
+      "initial": false
+    },
+    "passed-on-trade": {
+      "label": "Passed the trade craft on",
+      "initial": false
+    },
+    "passed-on-soldiering": {
+      "label": "Passed the soldiering craft on",
+      "initial": false
     }
   },
   "origins": [
@@ -70393,7 +70437,7 @@
     {
       "id": "milestone-ps10",
       "title": "Recognised",
-      "text": "Your work is copied and argued over by other scholars. You are counted among the renowned scholars of Alexandria.",
+      "text": "Your work is copied and argued over by other scholars. You are counted among the learned people of the city, whose judgement others ask for.",
       "trigger": {
         "type": "year",
         "at": -350
@@ -71235,6 +71279,4939 @@
             {
               "id": "village-seed-exchange-keep-done",
               "text": "You keep your own seed and your own counsel.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-museum-scholar",
+      "title": "A place at the Museum",
+      "text": "The king is gathering scholars into a new house of the Muses beside the palace, to be kept at his expense. Word reaches you that those known for careful work are being asked.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS8"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -290
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -275
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 90
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-museum-scholar-accept",
+          "text": "Take a place among them",
+          "outcomes": [
+            {
+              "id": "era-museum-scholar-accept-done",
+              "text": "You are given a seat, a table and a stipend, and you sit with scholars from other lands.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 90,
+                  "cause": "a stipend from the royal house of the Muses"
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 10,
+                  "source": "the king's gathering of scholars"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-museum-scholar-decline",
+          "text": "Stay with your own work",
+          "outcomes": [
+            {
+              "id": "era-museum-scholar-decline-done",
+              "text": "You send thanks and keep to your own table.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-museum-steward",
+      "title": "Stewards for the new house",
+      "text": "The new house of the Muses and the great collection of books need people who can keep accounts, receive supplies and answer the king's questions. Officials of good name are being asked.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP8"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -290
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -275
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 70
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-museum-steward-accept",
+          "text": "Serve as a steward",
+          "outcomes": [
+            {
+              "id": "era-museum-steward-accept-done",
+              "text": "You keep the accounts of a house that is only now taking shape, and you are paid from the royal chest.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 70,
+                  "cause": "a steward's pay from the royal house"
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 10,
+                  "source": "serving the royal house"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-museum-steward-decline",
+          "text": "Stay in your district",
+          "outcomes": [
+            {
+              "id": "era-museum-steward-decline-done",
+              "text": "You send thanks and keep your own office.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-library-copyists",
+      "title": "Copyists for the great collection",
+      "text": "The king wants the books of every land gathered and copied. The collection is paying for careful hands that can read and copy without error.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "capability",
+                "node": "PS5"
+              },
+              {
+                "type": "capability",
+                "node": "PP5"
+              }
+            ]
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -285
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -270
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research",
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-library-copyists-accept",
+          "text": "Take up the copying",
+          "outcomes": [
+            {
+              "id": "era-library-copyists-accept-done",
+              "text": "You copy a roll through the season without a slip, and the keeper pays from the collection's fund.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 40,
+                  "cause": "copying for the great collection"
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "copying for the great collection"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-library-copyists-decline",
+          "text": "Not this season",
+          "outcomes": [
+            {
+              "id": "era-library-copyists-decline-done",
+              "text": "You leave the copying to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-cleruch-serving",
+      "title": "Land for those who serve",
+      "text": "The king is settling serving soldiers on crown land: a plot to hold while they stay on the rolls, in place of coin they would be owed. Your name is on the list.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "job",
+                "job": "soldier"
+              },
+              {
+                "type": "job",
+                "job": "officer"
+              },
+              {
+                "type": "job",
+                "job": "general"
+              }
+            ]
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -305
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -260
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "plots",
+              "op": "lte",
+              "value": 3
+            }
+          },
+          {
+            "type": "flag",
+            "flag": "cleruch-allotment",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "household",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-cleruch-serving-accept",
+          "text": "Take the allotment for the household",
+          "outcomes": [
+            {
+              "id": "era-cleruch-serving-accept-done",
+              "text": "A scribe walks you to the boundary stones. The household now holds one more plot, and owes the crown your service for it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "plot",
+                    "delta": 1,
+                    "cause": "a cleruch's allotment of crown land"
+                  }
+                },
+                {
+                  "type": "flag",
+                  "flag": "cleruch-allotment",
+                  "value": true
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "an allotment for serving soldiers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-cleruch-serving-decline",
+          "text": "Wait for a posting",
+          "outcomes": [
+            {
+              "id": "era-cleruch-serving-decline-done",
+              "text": "You tell the scribe you would rather wait.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-cleruch-veteran",
+      "title": "Land for a veteran",
+      "text": "Men who served and were discharged are being given crown land to settle on, so that the king can call on them again. The scribes have your service on their rolls.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "flag",
+                "flag": "army-service",
+                "value": true
+              },
+              {
+                "type": "capability",
+                "node": "M7"
+              }
+            ]
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "job",
+                  "job": "soldier"
+                },
+                {
+                  "type": "job",
+                  "job": "officer"
+                },
+                {
+                  "type": "job",
+                  "job": "general"
+                }
+              ]
+            }
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -305
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -260
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "plots",
+              "op": "lte",
+              "value": 3
+            }
+          },
+          {
+            "type": "flag",
+            "flag": "cleruch-allotment",
+            "value": false
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 35
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "household",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-cleruch-veteran-accept",
+          "text": "Accept a veteran's allotment",
+          "outcomes": [
+            {
+              "id": "era-cleruch-veteran-accept-done",
+              "text": "You are shown your plot and the stones that bound it. The household now holds one more plot, and the crown may call on you again.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "plot",
+                    "delta": 1,
+                    "cause": "a veteran's allotment of crown land"
+                  }
+                },
+                {
+                  "type": "flag",
+                  "flag": "cleruch-allotment",
+                  "value": true
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "a veteran's allotment"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-cleruch-veteran-decline",
+          "text": "Stay as you are",
+          "outcomes": [
+            {
+              "id": "era-cleruch-veteran-decline-done",
+              "text": "You thank the scribe and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-royal-land-lease",
+      "title": "Crown land to lease",
+      "text": "A royal scribe is measuring crown land along the channel and offering it on lease to growers who can work it. The rent is a share of the harvest, and the first season's seed is to be repaid in grain.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -300
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -250
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "head-of-plot",
+              "value": true
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "plots",
+              "op": "lte",
+              "value": 3
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 250
+            }
+          },
+          {
+            "type": "flag",
+            "flag": "crown-lease",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "household",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-royal-land-lease-accept",
+          "text": "Lease a plot and give the first grain",
+          "outcomes": [
+            {
+              "id": "era-royal-land-lease-accept-done",
+              "text": "You sign the lease and hand over the first grain into the royal granary. The household has another plot to sow.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "plot",
+                    "delta": 1,
+                    "cause": "a lease of crown land"
+                  }
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "grain-to",
+                    "to": "crown",
+                    "quantity": 120,
+                    "cause": "the first season's seed repaid to the crown"
+                  }
+                },
+                {
+                  "type": "flag",
+                  "flag": "crown-lease",
+                  "value": true
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "leasing crown land"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-royal-land-lease-decline",
+          "text": "You have enough land to work",
+          "outcomes": [
+            {
+              "id": "era-royal-land-lease-decline-done",
+              "text": "You tell the scribe you have all the land you can work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-royal-rent-due",
+      "title": "The crown's share is due",
+      "text": "The scribe comes to count the harvest of the crown plot. The crown's share is a measure of grain, due before the next sowing.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "flag",
+            "flag": "crown-lease",
+            "value": true
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -300
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -250
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "head-of-plot",
+              "value": true
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 100
+            }
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "household",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-royal-rent-due-accept",
+          "text": "Pay the crown its share in grain",
+          "outcomes": [
+            {
+              "id": "era-royal-rent-due-accept-done",
+              "text": "The scribe counts the grain into the royal granary and marks it paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "grain-to",
+                    "to": "crown",
+                    "quantity": 80,
+                    "cause": "the crown's share of the harvest"
+                  }
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-royal-rent-due-decline",
+          "text": "Plead a poor year and ask to wait",
+          "outcomes": [
+            {
+              "id": "era-royal-rent-due-decline-done",
+              "text": "The scribe writes down the arrears, and the neighbours notice who asked to wait.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": -2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-temple-land-lease",
+      "title": "Temple land to farm",
+      "text": "The temple steward has strips of the god's land lying idle. Tenants pay a share of the harvest to the god's store, and are expected to help on festival days.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -300
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -250
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "head-of-plot",
+              "value": true
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "plots",
+              "op": "lte",
+              "value": 3
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 200
+            }
+          },
+          {
+            "type": "flag",
+            "flag": "temple-lease",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "household",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-temple-land-lease-accept",
+          "text": "Take a strip and give the god's share",
+          "outcomes": [
+            {
+              "id": "era-temple-land-lease-accept-done",
+              "text": "You agree to the share and to the festival days. The household has another plot to sow.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "plot",
+                    "delta": 1,
+                    "cause": "a lease of temple land"
+                  }
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "grain-to",
+                    "to": "temple",
+                    "quantity": 60,
+                    "cause": "the god's share on taking a temple lease"
+                  }
+                },
+                {
+                  "type": "flag",
+                  "flag": "temple-lease",
+                  "value": true
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "farming temple land"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-temple-land-lease-decline",
+          "text": "Leave it to others",
+          "outcomes": [
+            {
+              "id": "era-temple-land-lease-decline-done",
+              "text": "You say that you have land enough.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-royal-linen",
+      "title": "Linen under the royal licence",
+      "text": "The crown has put linen weaving under licence: only licensed looms may sell it, and the royal workshop buys what it needs at a fixed price. A licence-holder asks you to weave for him.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -285
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -240
+          },
+          {
+            "type": "account",
+            "account": "workshop",
+            "op": "gte",
+            "value": 60
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-royal-linen-accept",
+          "text": "Weave under the licence",
+          "outcomes": [
+            {
+              "id": "era-royal-linen-accept-done",
+              "text": "You weave the royal order at the fixed price. It is less than a free sale might fetch, but it is certain.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "workshop",
+                  "amount": 60,
+                  "cause": "the royal workshop's fixed price for linen"
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 3,
+                  "source": "weaving under the royal licence"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-royal-linen-decline",
+          "text": "Keep to private customers",
+          "outcomes": [
+            {
+              "id": "era-royal-linen-decline-done",
+              "text": "You keep to the customers who ask for you by name.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-royal-oil",
+      "title": "Jars for the royal oil",
+      "text": "Oil is now pressed under the crown's licence and sold at the crown's price. The licensed presses need many sound jars and will pay for them.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -285
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -240
+          },
+          {
+            "type": "account",
+            "account": "workshop",
+            "op": "gte",
+            "value": 70
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-royal-oil-accept",
+          "text": "Make jars for the presses",
+          "outcomes": [
+            {
+              "id": "era-royal-oil-accept-done",
+              "text": "You fire a long line of identical jars and the press-keeper pays the set price.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "workshop",
+                  "amount": 70,
+                  "cause": "the licensed presses' price for oil jars"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 3,
+                  "source": "jars for the royal oil"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-royal-oil-decline",
+          "text": "Keep to finer work",
+          "outcomes": [
+            {
+              "id": "era-royal-oil-decline-done",
+              "text": "You keep to your own finer work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-pharos-stone",
+      "title": "Stone for the great lighthouse",
+      "text": "On the island of Pharos the king's builders are raising a great lighthouse for the harbour. They need carvers for the blocks and the figures on its tiers.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -297
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -278
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 90
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-pharos-stone-accept",
+          "text": "Carve for the lighthouse",
+          "outcomes": [
+            {
+              "id": "era-pharos-stone-accept-done",
+              "text": "You carve blocks and a figure for the island, and the royal builders pay you from the works' account.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 90,
+                  "cause": "carving for the lighthouse on Pharos"
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "carving for the lighthouse"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-pharos-stone-decline",
+          "text": "Not for the island",
+          "outcomes": [
+            {
+              "id": "era-pharos-stone-decline-done",
+              "text": "You stay in your own yard.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era-royal-licence-trade",
+      "title": "Agents for the licensed trades",
+      "text": "Oil and linen are now sold under the crown's licence, and each licensed seller must reckon the crown's share. The houses want agents who can keep those accounts straight.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T5"
+          },
+          {
+            "type": "year",
+            "op": "gte",
+            "value": -285
+          },
+          {
+            "type": "year",
+            "op": "lte",
+            "value": -240
+          },
+          {
+            "type": "account",
+            "account": "merchant",
+            "op": "gte",
+            "value": 80
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "era-royal-licence-trade-accept",
+          "text": "Act as an agent for a licensed house",
+          "outcomes": [
+            {
+              "id": "era-royal-licence-trade-accept-done",
+              "text": "You keep the crown's share apart from the house's, to the last measure, and the house pays you well.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "merchant",
+                  "amount": 80,
+                  "cause": "an agent's fee from a licensed house"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 3,
+                  "source": "reckoning the crown's share"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "era-royal-licence-trade-decline",
+          "text": "Stay with your own trade",
+          "outcomes": [
+            {
+              "id": "era-royal-licence-trade-decline-done",
+              "text": "You stay with your own dealings.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-fc",
+      "title": "Work for a master",
+      "text": "Grain dealers and an estate steward want someone who knows the soil to walk the fields before sowing and say which plots will bear. They will pay for the advice.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC10"
+          },
+          {
+            "type": "account",
+            "account": "merchant",
+            "op": "gte",
+            "value": 60
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-fc-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-fc-accept-done",
+              "text": "You walk the plots with the steward and name the ones that will bear. The fee is counted out.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "merchant",
+                  "amount": 60,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-fc-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-fc-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-fc",
+      "title": "Students",
+      "text": "Families with land ask whether you would teach their sons your way of sowing for a season. They offer a fee.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-fc-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-fc-teach-done",
+              "text": "The boys follow you down the furrows until they can sow a straight line. Their families pay the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "teaching other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-fc-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-fc-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-fc",
+      "title": "Keeper of the channel shares",
+      "text": "The village asks you to keep the roll of channel shares and settle who clears which stretch. The post carries a small stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-fc-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-fc-accept-done",
+              "text": "You keep the roll, and the channels are cleared on time. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of keeper of the channel shares"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 8,
+                  "source": "holding office among other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-fc-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-fc-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-fc",
+      "title": "Who will carry it on",
+      "text": "Your plots have fed the household for years, and someone should know how you read them. You could teach the whole of it to one person.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-farming",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-fc-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-fc-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "farming",
+                  "relation": "child",
+                  "cause": "taught the growers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-farming",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-fc-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-fc-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "farming",
+                  "relation": "apprentice",
+                  "cause": "taught the growers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-farming",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-fc-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-fc-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-fr",
+      "title": "Work for a master",
+      "text": "The district keeps a common granary, and its keepers want a grower who can say how much to hold back against a low flood. They pay a fee for the reckoning.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR10"
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 50
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-fr-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-fr-accept-done",
+              "text": "You count the stores against the worst floods you remember. The keepers pay for the reckoning.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 50,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-fr-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-fr-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-fr",
+      "title": "Students",
+      "text": "Younger households ask you to show them how to keep stores through a lean year, and offer a fee.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-fr-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-fr-teach-done",
+              "text": "You show them the jars, the seals and the counting. They pay what they promised.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "teaching other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-fr-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-fr-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-fr",
+      "title": "Keeper of the common granary",
+      "text": "The elders offer you the keys to the common granary. The post carries a small stipend from the common chest.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-fr-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-fr-accept-done",
+              "text": "You take the keys, and the granary is kept honestly. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of keeper of the common granary"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 8,
+                  "source": "holding office among other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-fr-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-fr-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-fr",
+      "title": "Who will carry it on",
+      "text": "You have kept your stores through floods that emptied others. You could pass the whole method to one person you trust.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-farming",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-fr-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-fr-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "farming",
+                  "relation": "child",
+                  "cause": "taught the growers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-farming",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-fr-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-fr-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "farming",
+                  "relation": "apprentice",
+                  "cause": "taught the growers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-farming",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-fr-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-fr-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-at",
+      "title": "Work for a master",
+      "text": "A cloth merchant has an order too fine for his own looms. He will pay you to weave it and to show his weavers the pattern.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT10"
+          },
+          {
+            "type": "account",
+            "account": "workshop",
+            "op": "gte",
+            "value": 60
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-at-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-at-accept-done",
+              "text": "You weave the order to the last thread and show the pattern. The merchant pays in full.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "workshop",
+                  "amount": 60,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-at-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-at-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-at",
+      "title": "Students",
+      "text": "Two girls from the weavers' street are sent to learn at your loom, and their families will pay for it.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-at-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-at-teach-done",
+              "text": "The girls learn to set a warp and to see a fault in the cloth. Their families pay the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "teaching other weavers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-at-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-at-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-at",
+      "title": "Inspector of cloth",
+      "text": "The cloth merchants ask you to inspect every bolt before it is sold on. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-at-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-at-accept-done",
+              "text": "You pass the good cloth and refuse the poor. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of inspector of cloth"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 8,
+                  "source": "holding office among other weavers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-at-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-at-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-at",
+      "title": "Who will carry it on",
+      "text": "Your cloth is known by hand and by eye. Soon no one will weave quite like you, unless you teach one person all of it.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-clothing",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-at-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-at-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "clothing",
+                  "relation": "child",
+                  "cause": "taught the weavers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-clothing",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-at-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-at-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "clothing",
+                  "relation": "apprentice",
+                  "cause": "taught the weavers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-clothing",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-at-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-at-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-ac",
+      "title": "Work for a master",
+      "text": "A workshop master is short of a steady hand for a large order of fine tableware. He will pay a master's fee for your wheel.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC10"
+          },
+          {
+            "type": "account",
+            "account": "workshop",
+            "op": "gte",
+            "value": 70
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-ac-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-ac-accept-done",
+              "text": "You throw and fire the order, and not a vessel is lost. The workshop pays the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "workshop",
+                  "amount": 70,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-ac-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-ac-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-ac",
+      "title": "Students",
+      "text": "Potters in the quarter send their boys to learn the wheel from you for a season, and pay for it.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-ac-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-ac-teach-done",
+              "text": "The boys centre their first clay before the season is out. Their fathers pay the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "teaching other potters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-ac-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-ac-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-ac",
+      "title": "Warden of the potters' quarter",
+      "text": "The potters ask you to hold the keys to the common kiln and to settle who fires when. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-ac-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-ac-accept-done",
+              "text": "The kiln is fired in turn and no one complains. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of warden of the potters' quarter"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 8,
+                  "source": "holding office among other potters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-ac-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-ac-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-ac",
+      "title": "Who will carry it on",
+      "text": "Your vessels are copied, yet the copies lack something. You could teach one person the whole of the craft.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-ceramics",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-ac-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-ac-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "ceramics",
+                  "relation": "child",
+                  "cause": "taught the potters' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-ceramics",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-ac-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-ac-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "ceramics",
+                  "relation": "apprentice",
+                  "cause": "taught the potters' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-ceramics",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-ac-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-ac-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-as",
+      "title": "Work for a master",
+      "text": "A temple builder wants a carved relief for a courtyard wall and will pay a master's fee for it.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS10"
+          },
+          {
+            "type": "account",
+            "account": "workshop",
+            "op": "gte",
+            "value": 90
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-as-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-as-accept-done",
+              "text": "You carve the relief over the season and set it in its wall. The builder pays in full.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "workshop",
+                  "amount": 90,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-as-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-as-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-as",
+      "title": "Students",
+      "text": "A carvers' yard sends its young hands to work under you for a season, and pays for the teaching.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-as-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-as-teach-done",
+              "text": "The young carvers learn to read the grain of the stone. The yard pays the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "teaching other sculptors"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-as-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-as-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-as",
+      "title": "Master of the yard",
+      "text": "The stone yard asks you to direct its carvers and judge their work. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-as-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-as-accept-done",
+              "text": "You direct the yard, and its work is admired. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of master of the yard"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 8,
+                  "source": "holding office among other sculptors"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-as-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-as-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-as",
+      "title": "Who will carry it on",
+      "text": "Your figures stand in places many pass each day. When your hands tire, someone should hold your tools.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-sculpture",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-as-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-as-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "sculpture",
+                  "relation": "child",
+                  "cause": "taught the sculptors' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-sculpture",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-as-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-as-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "sculpture",
+                  "relation": "apprentice",
+                  "cause": "taught the sculptors' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-sculpture",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-as-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-as-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-ps",
+      "title": "Work for a master",
+      "text": "A wealthy household asks you to cast a calendar for the year and check the steward's reckoning. The fee comes from the teaching fund.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 80
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-ps-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-ps-accept-done",
+              "text": "You cast the calendar and find the error in the reckoning. The fee is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 80,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-ps-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-ps-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-ps",
+      "title": "Students",
+      "text": "Families ask you to take their sons and teach them to reason and to observe. They offer fees.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-ps-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-ps-teach-done",
+              "text": "The students copy your notes and learn to question them. Their fees are paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "teaching other scholars"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-ps-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-ps-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-ps",
+      "title": "Reader to the court",
+      "text": "Someone near the court asks you to read and answer questions for the household of the court each season. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-ps-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-ps-accept-done",
+              "text": "You read, and you are questioned, and you answer. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of reader to the court"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 8,
+                  "source": "holding office among other scholars"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-ps-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-ps-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-ps",
+      "title": "Who will carry it on",
+      "text": "Your method lives in your notes and in your habits. A student who learned both could carry it further than you can.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-research",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-ps-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-ps-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "research",
+                  "relation": "child",
+                  "cause": "taught the scholars' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-research",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-ps-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-ps-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "research",
+                  "relation": "apprentice",
+                  "cause": "taught the scholars' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-research",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-ps-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-ps-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-pp",
+      "title": "Work for a master",
+      "text": "Two landholders cannot agree on a boundary, and the district asks you to settle it. The fee is paid from the common chest.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP10"
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 60
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-pp-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-pp-accept-done",
+              "text": "You hear both sides and mark the boundary. The common chest pays your fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 60,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-pp-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-pp-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-pp",
+      "title": "Students",
+      "text": "Young clerks ask you to teach them how to prepare a hearing and keep an honest record, and offer a fee.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-pp-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-pp-teach-done",
+              "text": "The clerks learn to set out a case so a stranger could follow it. They pay the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "teaching other officials"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-pp-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-pp-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-pp",
+      "title": "Recorder of the district",
+      "text": "The district asks you to keep its record of disputes and decrees. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-pp-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-pp-accept-done",
+              "text": "The record is kept, and no one can say a decree was lost. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of recorder of the district"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 8,
+                  "source": "holding office among other officials"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-pp-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-pp-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-pp",
+      "title": "Who will carry it on",
+      "text": "People bring their disputes to you before any office. There is a way you hear them, and it could be taught.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-civic",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-pp-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-pp-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "civic",
+                  "relation": "child",
+                  "cause": "taught the officials' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-civic",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-pp-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-pp-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "civic",
+                  "relation": "apprentice",
+                  "cause": "taught the officials' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-civic",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-pp-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-pp-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-t",
+      "title": "Work for a master",
+      "text": "A trading house wants a reckoner it trusts to read the harbour and set prices for a season's cargoes. It will pay a fee.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T10"
+          },
+          {
+            "type": "account",
+            "account": "merchant",
+            "op": "gte",
+            "value": 80
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-t-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-t-accept-done",
+              "text": "You read the harbour and set the prices, and the cargoes move. The house pays your fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "merchant",
+                  "amount": 80,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-t-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-t-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-t",
+      "title": "Students",
+      "text": "Young porters and clerks ask to be taught how a price is set, and offer a fee.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T10"
+          },
+          {
+            "type": "account",
+            "account": "school",
+            "op": "gte",
+            "value": 30
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-t-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-t-teach-done",
+              "text": "They learn to weigh, count and haggle without being cheated. They pay the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "school",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "teaching other traders"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-t-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-t-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-t",
+      "title": "Assessor of the harbour dues",
+      "text": "The harbour asks you to assess the dues on every cargo, fairly. The post carries a stipend.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "council",
+            "op": "gte",
+            "value": 40
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-t-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-t-accept-done",
+              "text": "The dues are fair, and traders stop arguing. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "council",
+                  "amount": 40,
+                  "cause": "the stipend of assessor of the harbour dues"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 8,
+                  "source": "holding office among other traders"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-t-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-t-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-t",
+      "title": "Who will carry it on",
+      "text": "Your word settles prices. You could teach one person how you reckon, so that the habit outlasts you.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-trade",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-t-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-t-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "trade",
+                  "relation": "child",
+                  "cause": "taught the traders' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-trade",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-t-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-t-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "trade",
+                  "relation": "apprentice",
+                  "cause": "taught the traders' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-trade",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-t-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-t-keep-done",
+              "text": "You keep your craft to yourself for now.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-commission-m",
+      "title": "Work for a master",
+      "text": "The officers ask a master to drill a company before the season's march. The fee is paid from the army purse.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "M10"
+          },
+          {
+            "type": "account",
+            "account": "army",
+            "op": "gte",
+            "value": 1500
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-commission-m-accept",
+          "text": "Take the work",
+          "outcomes": [
+            {
+              "id": "late-commission-m-accept-done",
+              "text": "You drill the company until it moves as one. The army purse pays the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "army",
+                  "amount": 70,
+                  "cause": "a master's fee"
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 3,
+                  "source": "a master's commission"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-commission-m-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "late-commission-m-decline-done",
+              "text": "You send word that your hands are full.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-students-m",
+      "title": "Students",
+      "text": "Young soldiers are sent to learn from you for a season, and the army will pay for the teaching.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "M10"
+          },
+          {
+            "type": "account",
+            "account": "army",
+            "op": "gte",
+            "value": 1500
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-students-m-teach",
+          "text": "Take them on for a season",
+          "outcomes": [
+            {
+              "id": "late-students-m-teach-done",
+              "text": "The young soldiers learn to hold a line and to keep their heads. The army pays the fee.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "army",
+                  "amount": 30,
+                  "cause": "fees for teaching"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "teaching other soldiers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-students-m-decline",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "late-students-m-decline-done",
+              "text": "You keep your season for your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-office-m",
+      "title": "Master of drill",
+      "text": "The garrison asks you to take charge of its drill ground. The post carries a stipend from the army purse.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "M10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 45
+          },
+          {
+            "type": "account",
+            "account": "army",
+            "op": "gte",
+            "value": 1500
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-office-m-accept",
+          "text": "Accept the post",
+          "outcomes": [
+            {
+              "id": "late-office-m-accept-done",
+              "text": "The drill ground is yours, and the company is steady. The stipend is paid.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "account-pay",
+                  "account": "army",
+                  "amount": 40,
+                  "cause": "the stipend of master of drill"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 8,
+                  "source": "holding office among other soldiers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-office-m-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "late-office-m-decline-done",
+              "text": "You send your thanks and keep to your own work.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "late-successor-m",
+      "title": "Who will carry it on",
+      "text": "Your drill is steady, and the soldiers know it. Someone could learn to keep the line the way you do.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "M10"
+          },
+          {
+            "type": "age",
+            "op": "gte",
+            "value": 50
+          },
+          {
+            "type": "flag",
+            "flag": "passed-on-soldiering",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "late-successor-m-child",
+          "text": "Teach it to a child of yours",
+          "when": {
+            "type": "child-age",
+            "min": 8,
+            "max": 40
+          },
+          "outcomes": [
+            {
+              "id": "late-successor-m-child-done",
+              "text": "You teach a little each season, and the child learns to do it your way and then a little better.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "soldiering",
+                  "relation": "child",
+                  "cause": "taught the soldiers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "passing the craft to a child"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-soldiering",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-m-apprentice",
+          "text": "Take an apprentice and teach them everything",
+          "outcomes": [
+            {
+              "id": "late-successor-m-apprentice-done",
+              "text": "You teach all of it, the parts you never wrote down as well. Someone will carry the craft on.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "successor",
+                  "field": "soldiering",
+                  "relation": "apprentice",
+                  "cause": "taught the soldiers' craft"
+                },
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "passing the craft to a apprentice"
+                },
+                {
+                  "type": "flag",
+                  "flag": "passed-on-soldiering",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "late-successor-m-keep",
+          "text": "It is not yet time",
+          "outcomes": [
+            {
+              "id": "late-successor-m-keep-done",
+              "text": "You keep your craft to yourself for now.",
               "weight": 1,
               "effects": []
             }

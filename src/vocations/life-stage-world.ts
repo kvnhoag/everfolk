@@ -9,6 +9,7 @@ import { holdingsEvents } from "../paths/content/holdings.ts";
 import { needsEvents } from "../paths/content/needs.ts";
 import { moveEvents } from "../paths/content/moves.ts";
 import { milestoneEvents, milestoneFlags } from "../paths/content/milestones.ts";
+import { lateLifeEvents, lateLifeFlags } from "../paths/content/late-life.ts";
 import { applyPacing } from "./pacing.ts";
 import { applyPlaytestFixes } from "./lives-fixes.ts";
 import { applyIllnessPacing } from "./illness-pacing.ts";
@@ -51,6 +52,6 @@ function addPaths(world: WorldPack): void {
   for (const field of FIELD_IDS) {
     world.flags[`met-renowned-${field}`] = { label: `Met a renowned ${world.paths.fields[field].practitioner}`, initial: false };
   }
-  Object.assign(world.flags, milestoneFlags());
-  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents(), ...milestoneEvents()];
+  Object.assign(world.flags, milestoneFlags(), lateLifeFlags());
+  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents(), ...milestoneEvents(), ...lateLifeEvents()];
 }
