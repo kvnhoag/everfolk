@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "Running English-only language check..."
+
+if command -v node >/dev/null 2>&1; then
+  node scripts/check-english-only.mjs
+elif [ -x "/mnt/c/Program Files/nodejs/node.exe" ]; then
+  "/mnt/c/Program Files/nodejs/node.exe" "d:\\skill tree\\everfolk-j0kerH1-next\\scripts\\check-english-only.mjs"
+else
+  echo "Error: Node.js runtime not found."
+  exit 1
+fi

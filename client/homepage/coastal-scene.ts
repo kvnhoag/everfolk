@@ -420,7 +420,7 @@ function shore() {
   // 3. Main limestone harbor deck base
   polygon(c, [[501, 177], [768, 190], [768, 480], [718, 480], [477, 283], [470, 228]], '#c8aa88');
 
-  // 4. Clean staggered stone/brick tile grid (ô gạch) across the entire village ground,
+  // 4. Clean staggered stone/brick tile grid across the entire village ground,
   // strictly clipped inside BOTH the western quay coping stone and the continuous northern coping border.
   const tileW = 22, tileH = 11;
   const tileShades = ['#c9ab89', '#c2a482', '#cfb18f', '#c6a886'] as const;
