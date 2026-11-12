@@ -5,7 +5,7 @@ import { ObligationTracker, rankedObligations, stepCommand, type Obligation } fr
 import { createEngine } from "../../src/index.ts";
 import { canonicalJson } from "../../src/random.ts";
 import type { Choice, Command, LifeEngine, LifeState, SaveFile, WorldPack } from "../../src/types.ts";
-import type { Draw, LifeView, LivesContract, MintResult, SignedEvidence } from "./types.ts";
+import type { Draw, LifeView, LivesContract, MintResult, StageMintResult, SignedEvidence } from "./types.ts";
 
 
 export interface SessionStorage {
@@ -43,6 +43,7 @@ export interface RankedSession {
   sync(next: LifeState): Promise<LifeState>;
   finish(fetcher?: typeof fetch): Promise<SignedEvidence>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
   chooseMint(slot: number): Promise<MintResult>;
   /** Resumes a committed mint without asking the verifier or paying a second fee. */
   recoverMint(): Promise<MintResult>;
@@ -262,6 +263,12 @@ class Session implements RankedSession {
       result = minted;
     }
     return this.completeMint(result);
+  }
+
+  async mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult> {
+    const result = await this.options.contract.mintStageFigures(this.life.life_id, signed, npcActionId, expectedFee);
+    this.completeMint(result.tokens[0]);
+    return result;
   }
 
   private async findMinted(): Promise<MintResult | null> {

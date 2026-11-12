@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import type { LifeView, MintResult, MintPack as Pack, MintTerms } from "../../chain/types.ts";
+import type { LifeView, MintResult, MintPack as Pack, MintTerms, StageMintResult } from "../../chain/types.ts";
 import type { OwnersByToken } from "./born-into-model.ts";
 import { errorText } from "./chain-backend.ts";
 import LifeReport from "./LifeReport.tsx";
 import { lifeReport, lifeSpanLine, npcActionMenu } from "./life-report-model.ts";
 import MintPack from "./MintPack.tsx";
+import StageAlbum, { StageAlbumReceipt } from "./StageAlbum.tsx";
 import MintRecovery from "./MintRecovery.tsx";
 import MintReveal from "./MintReveal.tsx";
 import { mintRevealView } from "./life-report-model.ts";
@@ -17,6 +18,7 @@ export interface RankedEndingSession {
   life: LifeView;
   finish(): Promise<SignedEvidence>;
   chooseMint(slot: number): Promise<MintResult>;
+  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   recoverMint(): Promise<MintResult>;
   abandon(): Promise<void>;
@@ -33,7 +35,7 @@ export interface RankedEndingProps {
   onClose(): void;
 }
 
-type Stage = { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "committed" } | { kind: "recovered"; result: MintResult } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "pack"; signed: SignedEvidence; pack: Pack };
+type Stage = { kind: "album-recovered"; result: StageMintResult } | { kind: "verifying" } | { kind: "failed"; error: string } | { kind: "committed" } | { kind: "recovered"; result: MintResult } | { kind: "report"; signed: SignedEvidence } | { kind: "declining"; signed: SignedEvidence } | { kind: "pack"; signed: SignedEvidence; pack: Pack };
 
 /** Matches the contract's default `abandon_cooldown_ms`. */
 const COOLDOWN_MINUTES = 10;
@@ -91,11 +93,16 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
   async function recover() {
     setBusy(true);
     setError("");
-    try { setStage({ kind: "recovered", result: await session.recoverMint() }); }
+    try {
+      const result = await session.recoverMint();
+      const album = await contract.stageMintResult(session.life.life_id).catch(() => null);
+      setStage(album ? { kind: "album-recovered", result: album } : { kind: "recovered", result });
+    }
     catch (cause) { setError(errorText(cause, "The mint could not finish. Please try again.")); }
     finally { setBusy(false); }
   }
 
+  if (stage.kind === "album-recovered") return <StageAlbumReceipt result={stage.result} onClose={onClose} />;
   if (stage.kind === "committed") return <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={onClose} />;
   if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} onClose={onClose} />;
   if (stage.kind === "verifying") return <p className="chain-loading" role="status">Checking your life against its record…</p>;
@@ -108,6 +115,9 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
+  if (evidence.stage_figures?.length) return <StageAlbum signed={stage.signed} contract={contract} practice={practice} walletPath={walletPath}
+    onMint={(action, fee) => session.mintStages(stage.signed, action, fee)} onClose={onClose}
+    onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }} />;
   return <LifeReport
     walletPath={walletPath}
     report={lifeReport({ life: session.life, sources: evidence.sources, owners })}

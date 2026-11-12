@@ -5,6 +5,7 @@ mod lives;
 mod market;
 mod mint;
 mod mint_pack;
+mod stage_mint;
 mod nft;
 mod random;
 mod shares;

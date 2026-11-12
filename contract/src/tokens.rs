@@ -53,7 +53,12 @@ impl Contract {
         let Some(mut metadata) = by_id.get(&key) else { return };
         let Some(mut extra) = metadata.extra.as_deref().and_then(|e| serde_json::from_str::<TokenExtra>(e).ok()) else { return };
         change(&mut extra);
-        metadata.extra = Some(serde_json::to_string(&extra).expect("extra json"));
+        // Keep stage metadata (and future JSON extensions) when changing a token's action.
+        let mut original: serde_json::Value = serde_json::from_str(metadata.extra.as_deref().unwrap()).expect("extra json");
+        for (key, value) in serde_json::to_value(&extra).expect("extra json").as_object().unwrap() {
+            original[key] = value.clone();
+        }
+        metadata.extra = Some(original.to_string());
         metadata.updated_at = Some(env::block_timestamp_ms().to_string());
         by_id.insert(&key, &metadata);
     }

@@ -1,7 +1,7 @@
 import { categoryOfNpcAction, groupOfNpcAction as catalogGroupOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
 import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import type { CareerGroup, Category, FigureId } from "../../chain/ids.ts";
-import type { LifeView, Listing, MintPack, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
+import type { LifeView, Listing, MintPack, StageMintResult, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
 
 /** In-memory ledger behind `createMockContract`. Mirrors the contract's storage, not its gas or storage costs. */
 
@@ -58,6 +58,7 @@ export interface MockParams {
 }
 
 export interface MockState {
+  stageMints: Map<string, StageMintResult>;
   packs: Map<string, { view: MintPack; evidence: Evidence; signed: import("./types.ts").SignedEvidence; action: string }>;
   params: MockParams;
   counters: { nextLifeId: number; nextTokenId: number };
@@ -100,7 +101,7 @@ export function createState(options: MockOptions): MockState {
       royaltyTreasuryBps: 500,
     },
     counters: { nextLifeId: 1, nextTokenId: 1 },
-    packs: new Map(), lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(),
+    stageMints: new Map(), packs: new Map(), lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(),
     npcPools: new Map(), figureCopies: new Map(), balances: new Map(), sources: new Map(),
     children: new Map(), stats: new Map(), listings: new Map(),
   };
