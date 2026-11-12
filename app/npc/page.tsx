@@ -1,4 +1,4 @@
-import NpcSessionLab from "../../client/screens/NpcSessionLab.tsx";
+import { NpcLabPage } from "../../client/screens/BrowserPages.tsx";
 export default function NpcPage() {
-  return <NpcSessionLab />;
+  return <NpcLabPage />;
 }
