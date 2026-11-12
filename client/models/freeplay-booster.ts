@@ -109,6 +109,10 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
 
   // Lightweight in-memory contract stub for preview rerolls & card choice
   const contract: LivesContract = {
+    async stageMintQuote() { throw new Error("Free-play albums are kept locally. Play Weave Mode to mint on NEAR."); },
+    async mintStageFigures() { throw new Error("Free-play albums are kept locally. Play Weave Mode to mint on NEAR."); },
+    async retryStageMint() { throw new Error("Free-play has no paid stage mint to recover."); },
+    async stageMintResult() { return null; },
     async mintTerms() {
       return { mint_fee: "0", reroll_fee: REROLL_FEE_YOCTO, source_share_bps: 5000, pack_version: 1 };
     },

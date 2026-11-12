@@ -231,6 +231,14 @@ impl Contract {
     }
 }
 impl Contract {
+    pub(crate) fn reserve_figure(&self, id: &str) {
+        env::storage_write(&reserved_key(id), &(self.pack_reserved(id) + 1).to_le_bytes());
+    }
+    pub(crate) fn release_figure(&self, id: &str) {
+        let count = self.pack_reserved(id).checked_sub(1).expect("reserved figure");
+        if count == 0 { env::storage_remove(&reserved_key(id)); }
+        else { env::storage_write(&reserved_key(id), &count.to_le_bytes()); }
+    }
     pub(crate) fn pack_reserved(&self, figure: &str) -> u32 {
         env::storage_read(&reserved_key(figure))
             .map(|b| u32::from_le_bytes(b.try_into().unwrap()))

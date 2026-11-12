@@ -4,7 +4,7 @@ import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
 import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
 import type { Category, FigureId } from "../../chain/ids.ts";
 import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO } from "../../chain/stage-figures.ts";
-import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack } from "../../chain/types.ts";
+import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack, StageMintQuote } from "../../chain/types.ts";
 import { REROLL_FEE_YOCTO } from "./near-amount.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
@@ -202,8 +202,64 @@ function bind(state: MockState, account: string): MockLivesContract {
       } : {}),
     };
   };
+  async function stageMintQuote(lifeId: string, signed: SignedEvidence, action: string): Promise<StageMintQuote> {
+    const life = state.lives.get(lifeId);
+    if (!life) throw new Error("Life not found");
+    const evidence = parseEvidence(signed); assertEvidence(life, evidence, action);
+    if (!evidence.stage_figures?.length) throw new Error("Stage records and signed portraits are required");
+    const allocated = new Map<FigureId, number>();
+    const cards = evidence.stage_figures.map(fig => {
+      const candidate = fig.kind === "historical" ? fig.figureId : null;
+      const used = candidate ? (state.figureCopies.get(candidate)?.length ?? 0) + (allocated.get(candidate) ?? 0)
+        + [...state.packs.values()].reduce((n, p) => n + p.view.cards.filter(c => c.figure_id === candidate).length, 0) : 0;
+      const figure = candidate && used < state.params.figureSupplyCap ? candidate : null;
+      if (figure) allocated.set(figure, (allocated.get(figure) ?? 0) + 1);
+      return { stage_id: fig.stageId, figure_id: figure, title: figure ? fig.title : fig.stageRecord.title,
+        character_name: figure ? fig.name : fig.characterName ?? fig.name,
+        portrait_media: figure ? fig.media : fig.genericMedia ?? fig.media, stage_record: fig.stageRecord,
+        fee: figure ? TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO : TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO,
+        action_id: figure ? FIGURE_ACTIONS[figure][0] : action };
+    });
+    return { cards, total_fee: cards.reduce((n, c) => n + BigInt(c.fee), 0n).toString(), source_share_bps: state.params.sourceMintShareBps };
+  }
   return {
     accountId: account,
+    stageMintQuote,
+    async stageMintResult(lifeId) { return copy(state.stageMints.get(lifeId) ?? null); },
+    async retryStageMint(lifeId) {
+      if (state.lives.get(lifeId)?.account_id !== account) throw new Error("Only the life's owner can do this");
+      const result = state.stageMints.get(lifeId);
+      if (!result) throw new Error("This life has no committed stage mint");
+      return copy(result);
+    },
+    async mintStageFigures(lifeId, signed, action) {
+      const existing = state.stageMints.get(lifeId);
+      if (existing) return copy(existing);
+      const life = ownedAliveLife(state, account, lifeId);
+      if (state.packs.has(lifeId)) throw new Error("Choose a card from the open mint pack");
+      const quote = await stageMintQuote(lifeId, signed, action);
+      const evidence = parseEvidence(signed), hash = await sha256Hex(signed.evidence_json);
+      const tokens = [];
+      for (const card of quote.cards) {
+        const kind = card.figure_id ? "figure" as const : "npc" as const;
+        const rarity = card.figure_id ? 2 : 1, affection = 1 + Number(await roll(life.seed, card.stage_id) % 100n);
+        const record = card.stage_record;
+        const token_id = registerToken(state, { owner_id: account, kind, figure_id: card.figure_id,
+          category: card.figure_id ? null : categoryOfNpcAction(action), rarity, affection, action_id: card.action_id,
+          extra: { kind, figure_id: card.figure_id, rarity, affection, action_id: card.action_id, life_id: lifeId,
+            birth_year: evidence.birth_year, death_year: evidence.death_year, career_group: evidence.career_group,
+            sources: [], evidence_hash: hash, stage_id: card.stage_id, stage_title: card.title,
+            character_name: card.character_name, portrait_media: card.portrait_media, stage_record: record,
+            from_age: record.fromAge, to_age: record.toAge, district: record.district, field: record.field, tier: record.tier } });
+        const shares = payMintFee(state, token_id, evidence.sources, BigInt(card.fee));
+        state.tokens.get(token_id)!.extra.sources = shares;
+        tokens.push({ token_id, kind, figure_id: card.figure_id, rarity, affection, stage_id: card.stage_id,
+          stage_title: card.title, character_name: card.character_name, portrait_media: card.portrait_media });
+      }
+      const result = { life_id: lifeId, evidence_hash: hash, total_fee: quote.total_fee, tokens };
+      state.stageMints.set(lifeId, copy(result)); state.lives.set(lifeId, { ...life, status: "minted" }); state.activeLife.delete(account);
+      return result;
+    },
     as: other => bind(state, other),
     seedToken: input => seedToken(state, input),
 

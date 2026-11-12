@@ -46,6 +46,9 @@ export interface MatchedStageFigure {
   summary: string;
   media: string;
   frontMedia?: string;
+  /** Signed fallback if the historical name has reached its shared supply cap. */
+  genericMedia?: string;
+  characterName?: string;
   stageRecord: StageRecord;
 }
 
@@ -77,13 +80,18 @@ export function stagePortraitPath({
   avatarVariant?: number;
 }): string {
   const stage = stageAvatarStage(age);
-  const variant = Math.max(0, Math.min(2, Math.floor(avatarVariant)));
+  const variant = Number.isFinite(avatarVariant) ? Math.max(0, Math.min(2, Math.floor(avatarVariant))) : 0;
   const mappedOrigin = originId ? (AVATAR_ORIGIN_ALIASES[originId] ?? originId) : undefined;
-  if (mappedOrigin && sex && (sex === "male" || sex === "female")) {
+  if (mappedOrigin && PORTRAIT_ORIGINS.has(mappedOrigin) && sex && (sex === "male" || sex === "female")) {
     return `/assets/pixel/portraits/${mappedOrigin}/${sex}/${stage}-${variant}.svg`;
   }
   return `/assets/pixel/portraits/${stage}-${variant}.svg`;
 }
+
+const PORTRAIT_ORIGINS = new Set([
+  "artisan-household", "bakery-household", "clerk-household", "delta-newcomers",
+  "fishing-household", "harbor-household", "merchant-household", "weaver-household",
+]);
 
 function formatWord(id: string): string {
   return id.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
@@ -159,6 +167,7 @@ export function matchStageFigure(
   const historical = matchStageRecordToHistorical(stage, context, figureCatalog);
 
   const charName = context.characterName ?? context.name ?? "A citizen of Alexandria";
+  const genericMedia = stagePortraitPath({ age: Math.round((stage.fromAge + stage.toAge) / 2), originId: context.originId, sex: context.sex, avatarVariant: context.avatarVariant });
 
   if (historical) {
     return {
@@ -171,6 +180,8 @@ export function matchStageFigure(
       summary: historical.summary,
       media: figureMediaPath(historical.figure),
       frontMedia: figureFrontPath(historical.figure),
+      genericMedia,
+      characterName: charName,
       stageRecord: stage,
     };
   }
@@ -197,5 +208,7 @@ export function matchStageFigure(
     summary,
     media,
     stageRecord: stage,
+    genericMedia: media,
+    characterName: charName,
   };
 }

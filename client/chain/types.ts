@@ -1,7 +1,7 @@
 import type { Category } from "../../chain/ids.ts";
-import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
+import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
 
-export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, TokenExtra, TokenStats } from "../../chain/types.ts";
+export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, StageMintQuote, StageMintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 /**
  * What the verifier returns for a finished life. Local stand-in until lane E publishes it from
@@ -30,6 +30,10 @@ export interface LivesContract {
   getLife(lifeId: string): Promise<LifeView | null>;
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  stageMintQuote(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<StageMintQuote>;
+  mintStageFigures(lifeId: string, signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  retryStageMint(lifeId: string): Promise<StageMintResult>;
+  stageMintResult(lifeId: string): Promise<StageMintResult | null>;
   mintTerms(): Promise<MintTerms>;
   marketTerms(): Promise<MarketTerms>;
   mintPack(lifeId: string): Promise<MintPack | null>;
