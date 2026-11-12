@@ -263,6 +263,14 @@ export interface HealthDefinition {
     convalescenceLoss: number;
     healthInfluence: number;
     careInfluence: number;
+    /** Optional graded onset: Health falls by this much, never below onsetHealth. Omitted: it falls straight to onsetHealth. */
+    onsetLoss?: number;
+    /** Optional lingering: years a severe episode runs, unable to kill, before its fatality is drawn. Omitted: none. */
+    lingerYears?: number;
+    /** Health lost in each lingering year before care and support reduce it. */
+    lingerLoss?: number;
+    /** Share (0..1) of the ordinary recovery chance that applies in a lingering year. Omitted: all of it. */
+    lingerRecovery?: number;
   };
 }
 export interface ActiveHealthCondition {
@@ -272,7 +280,7 @@ export interface ActiveHealthCondition {
   care: number;
   source?: string;
   /** Health immediately before a warned severe episode; care cannot erase it. */
-  severe?: { healthBefore: number };
+  severe?: { healthBefore: number; /** Lingering years already survived. */ lingered?: number };
 }
 export interface HealthState { conditions: ActiveHealthCondition[]; needsCareDecision: boolean; lastCareAge?: number }
 

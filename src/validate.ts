@@ -1386,7 +1386,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   }
   if (health && Object.hasOwn(health, "mortalityCalibration")) {
     const path = "world.health.mortalityCalibration";
-    const calibration = object(health.mortalityCalibration, path, ["minAge", "referenceHealth", "referenceCare", "caseFatality", "onsetHealth", "convalescenceLoss", "healthInfluence", "careInfluence"]);
+    const requiredCalibration = ["minAge", "referenceHealth", "referenceCare", "caseFatality", "onsetHealth", "convalescenceLoss", "healthInfluence", "careInfluence"];
+    const calibration = object(health.mortalityCalibration, path, [...requiredCalibration, "onsetLoss", "lingerYears", "lingerLoss", "lingerRecovery"], requiredCalibration);
     const minAge = integer(calibration.minAge, `${path}.minAge`, 0, maxAge - 1);
     const healthStat = stats[health.stat as string] as DataObject;
     const min = healthStat.min as number, max = healthStat.max as number;
@@ -1403,6 +1404,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (value < 0 || value > 1) fail(`${path}.${key}`, "expected a value in 0..1");
     }
     if (1 - (calibration.careInfluence as number) * (calibration.referenceCare as number) <= 0) fail(`${path}.referenceCare`, "reference care denominator must remain positive");
+    if (Object.hasOwn(calibration, "onsetLoss") && number(calibration.onsetLoss, `${path}.onsetLoss`) < 0) fail(`${path}.onsetLoss`, "must not be negative");
+    if (Object.hasOwn(calibration, "lingerYears")) integer(calibration.lingerYears, `${path}.lingerYears`, 0, maxAge);
+    if (Object.hasOwn(calibration, "lingerLoss") && number(calibration.lingerLoss, `${path}.lingerLoss`) < 0) fail(`${path}.lingerLoss`, "must not be negative");
+    if (Object.hasOwn(calibration, "lingerRecovery")) {
+      const share = number(calibration.lingerRecovery, `${path}.lingerRecovery`);
+      if (share < 0 || share > 1) fail(`${path}.lingerRecovery`, "expected a share in 0..1");
+    }
     const fatality = number(calibration.caseFatality, `${path}.caseFatality`);
     if (fatality <= 0 || fatality > 1) fail(`${path}.caseFatality`, "expected a case fatality in (0, 1]");
     if (!Object.hasOwn(world, "mortality")) fail(path, "requires mortality reference bands");

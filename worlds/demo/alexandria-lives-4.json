@@ -672,103 +672,103 @@
       {
         "minAge": 18,
         "maxAge": 19,
-        "annualProbability": 0.013867307906290538,
+        "annualProbability": 0.01109384632503243,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 20,
         "maxAge": 24,
-        "annualProbability": 0.017362537860945104,
+        "annualProbability": 0.013890030288756084,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 25,
         "maxAge": 29,
-        "annualProbability": 0.019482488384163776,
+        "annualProbability": 0.015585990707331021,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 30,
         "maxAge": 34,
-        "annualProbability": 0.02206880393544486,
+        "annualProbability": 0.01765504314835589,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 35,
         "maxAge": 39,
-        "annualProbability": 0.02416170446207022,
+        "annualProbability": 0.01932936356965618,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 40,
         "maxAge": 44,
-        "annualProbability": 0.02574602035750384,
+        "annualProbability": 0.020596816286003072,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 45,
         "maxAge": 49,
-        "annualProbability": 0.027394344090157396,
+        "annualProbability": 0.02191547527212592,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 50,
         "maxAge": 54,
-        "annualProbability": 0.035463717344938694,
+        "annualProbability": 0.02837097387595096,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 55,
         "maxAge": 59,
-        "annualProbability": 0.04501660780541672,
+        "annualProbability": 0.03601328624433338,
         "ending": "death-in-adulthood"
       },
       {
         "minAge": 60,
         "maxAge": 64,
-        "annualProbability": 0.06658381659826607,
+        "annualProbability": 0.05326705327861286,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 65,
         "maxAge": 69,
-        "annualProbability": 0.08860788011177667,
+        "annualProbability": 0.07088630408942134,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 70,
         "maxAge": 74,
-        "annualProbability": 0.12895552474965966,
+        "annualProbability": 0.10316441979972774,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 75,
         "maxAge": 79,
-        "annualProbability": 0.18354273904469554,
+        "annualProbability": 0.14683419123575644,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 80,
         "maxAge": 84,
-        "annualProbability": 0.24582105204464266,
+        "annualProbability": 0.19665684163571415,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 85,
         "maxAge": 89,
-        "annualProbability": 0.3447295600168204,
+        "annualProbability": 0.27578364801345634,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 90,
         "maxAge": 94,
-        "annualProbability": 0.4691650416256492,
+        "annualProbability": 0.3753320333005194,
         "ending": "death-in-later-life"
       },
       {
         "minAge": 95,
         "maxAge": 99,
-        "annualProbability": 0.5693501720032319,
+        "annualProbability": 0.45548013760258554,
         "ending": "death-in-later-life"
       }
     ]
@@ -72020,7 +72020,7 @@
     "uncappedResources": true
   },
   "health": {
-    "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for the Egyptian coast in this era is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules.",
+    "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for the Egyptian coast in this era is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules. Here a severe illness runs for years: Health falls part of the way at first, the illness can pass or drag on, and it cannot be fatal until two years after it begins. Care and household support lower the final risk, and a healer helps most. Adult episodes strike about 80% as often as the reference baseline.",
     "sourceIds": [
       "family-care",
       "alexandrian-wetnursing",
@@ -72189,7 +72189,11 @@
       "onsetHealth": 20,
       "convalescenceLoss": 4,
       "healthInfluence": 0.5,
-      "careInfluence": 0.5
+      "careInfluence": 0.5,
+      "onsetLoss": 25,
+      "lingerYears": 2,
+      "lingerLoss": 8,
+      "lingerRecovery": 0.1
     }
   },
   "relationships": {

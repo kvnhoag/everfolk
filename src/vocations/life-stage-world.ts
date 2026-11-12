@@ -11,6 +11,7 @@ import { moveEvents } from "../paths/content/moves.ts";
 import { milestoneEvents, milestoneFlags } from "../paths/content/milestones.ts";
 import { applyPacing } from "./pacing.ts";
 import { applyPlaytestFixes } from "./lives-fixes.ts";
+import { applyIllnessPacing } from "./illness-pacing.ts";
 import { refitEvents } from "../paths/content/refits.ts";
 import { auditEvents } from "../paths/audit.ts";
 
@@ -21,6 +22,7 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
   applyPacing(world);
   applyPlaytestFixes(world);
+  applyIllnessPacing(world);
   addPaths(world);
   // New births: a household keeps seed when the store runs short, and leases what it cannot work.
   Object.assign(world.demo!.household, { buySeedWhenShort: true, leaseUnworkedBps: 5000 });
