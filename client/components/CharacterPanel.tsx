@@ -28,6 +28,7 @@ import "../styles/social-relationships.css";
 import type { CharacterSection } from "../models/character-panel-model.ts";
 import type { MarketActions } from "../types/market.ts";
 import "../styles/character-panel.css";
+import LifePathPanel from "./LifePathPanel.tsx";
 
 type Section = CharacterSection;
 type AvailabilityFilter = "all" | "available" | "unavailable";
@@ -274,6 +275,9 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
           <CareerEconomyTree activities={activities} {...props} />
         </details>
       </div>
+      {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
+        <LifePathPanel life={life} world={world} />
+      </div>}
       {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
         <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />
       </div>}

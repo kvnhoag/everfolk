@@ -1424,6 +1424,16 @@
             "delta": 2
           },
           {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
+          },
+          {
             "type": "stat",
             "stat": "health",
             "delta": -1
@@ -1453,6 +1463,21 @@
             "delta": 2
           },
           {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "oratory",
+            "delta": 1
+          },
+          {
             "type": "stat",
             "stat": "health",
             "delta": -1
@@ -1480,6 +1505,21 @@
             "type": "skill",
             "skill": "warfare",
             "delta": 2
+          },
+          {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "oratory",
+            "delta": 1
           },
           {
             "type": "stat",

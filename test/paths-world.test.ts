@@ -81,3 +81,10 @@ test("war recruiting offers drilling to anyone not yet qualified to sign, so the
   const drill = recruiting.choices.find(choice => choice.id.endsWith("-drill"))!;
   assert.deepEqual(drill.when, { type: "not", condition: { type: "capability", node: "M4" } });
 });
+
+test("military service builds the body it demands, and command builds the voice", () => {
+  const yearly = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.flatMap(effect => effect.type === "skill" ? [`${effect.skill}+${effect.delta}`] : []);
+  for (const job of ["soldier", "officer", "general"]) for (const gain of ["warfare+2", "strength+1", "endurance+1"]) assert.ok(yearly(job).includes(gain), `${job}: ${yearly(job).join(", ")}`);
+  for (const job of ["officer", "general"]) assert.ok(yearly(job).includes("oratory+1"), job);
+  assert.ok(!yearly("soldier").includes("oratory+1"));
+});

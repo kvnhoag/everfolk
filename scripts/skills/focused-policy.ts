@@ -66,6 +66,12 @@ export function runFocusedPolicy(world: WorldPack, target: string, seed: string)
     const workNode = next === "PP10" && (life.demo?.reputation ?? 0) < 60 ? "PP8" : next;
     const work = actions.find(a => a.id === `cap-work-${workNode.toLowerCase()}`);
     reason = work?.reason ?? "Required work is unavailable.";
+    // The military lane needs an appointment before service work: seek it as a player would.
+    const appointment = /Enlist and serve/.test(reason) ? "enlist-royal-army" : /Officer appointment is required/.test(reason) ? "seek-officer-commission" : null;
+    const appoint = appointment ? actions.find(a => a.id === appointment && a.available) : undefined;
+    if (appoint) {
+      try { life = engine.act(life, appoint.id); actions = engine.getActivities(life); } catch (error) { reason = error instanceof Error ? error.message : String(error); }
+    }
     if (life.age >= 8 && life.age % 4 !== 3) {
       let selected = work?.available ? work : undefined;
       if (!selected) {

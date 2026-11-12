@@ -15,7 +15,7 @@ import "../styles/creator-system.css";
 import "../styles/interface-refinements.css";
 import { storehouseRows } from "../demo/storehouse-model.ts";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { formatYear } from "../../src/index.ts";
+import { lifeStageView, formatYear } from "../../src/index.ts";
 import type { LifeState, JournalEntry, WorldPack } from "../../src/types.ts";
 import type { WorldRoute } from "../../server/content.ts";
 import type { EventVisuals } from "../models/scene-model.ts";
@@ -233,6 +233,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const stage = lifeStage(life.age);
   const isDead = life.phase === "ended" && ending?.kind === "death";
   const hasFamilySection = Boolean(life.character?.family?.length || life.age >= 12 || life.character?.children?.length);
+  const stageTitle = lifeStageView(world, life.age)?.title;
   const [progressFeedback, setProgressFeedback] = useState<(ProgressFeedback & { lifeKey: string }) | null>(null);
   const progressNotification = useRef({ createdAt: 0, eventCount: 0 });
   const importantEventCount = useMemo(() => buildImportantLifeEvents(life, world).reduce((count, year) => count + year.events.length, 0), [life, world]);
@@ -479,7 +480,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       </section>}
 
       {game.hasBegun && <section className="life-session-bar" aria-label="Time controls">
-        <div className="life-session-age">Age <strong>{life.age}</strong></div><div className="life-session-year">{formatYear(life.year)} · {supportsLocationMap(world) ? <button type="button" className="location-map-open" aria-label={`Open location map: ${place}, Egypt`} onClick={() => setPanel("map")}><Icon name="pin" size={13} />{place}</button> : place}</div>
+        <div className="life-session-age">Age <strong>{life.age}</strong>{stageTitle && <span className="life-session-stage"> · {stageTitle}</span>}</div><div className="life-session-year">{formatYear(life.year)} · {supportsLocationMap(world) ? <button type="button" className="location-map-open" aria-label={`Open location map: ${place}, Egypt`} onClick={() => setPanel("map")}><Icon name="pin" size={13} />{place}</button> : place}</div>
         <div className="playback-bar life-clock">
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else continueWithReadingPause(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
