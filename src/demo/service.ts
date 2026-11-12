@@ -13,7 +13,7 @@ import { matchesCondition } from "../conditions.ts";
 import { changeReputation } from "./works.ts";
 import { townDecision } from "./agents.ts";
 import { CONVOY_MUSTER_EVENT_ID, CONVOY_ROAD_EVENT_ID, RISK_REASONS, SERVICE_CONTENT } from "./content/service.ts";
-import { scaledPay } from "../paths/pay.ts";
+import { needNote, scaledPay } from "../paths/pay.ts";
 
 const BPS = 10_000;
 const UNIT = "dr";
@@ -79,6 +79,8 @@ export function payWages(ctx: DemoContext): void {
   army.purse -= paid;
   if (paid > 0) ctx.apply([{ type: "cash", delta: paid }]);
   ctx.journal(WAGE_JOURNAL_ID, `The quartermaster pays ${paid} ${money} of your ${wage} ${money} wage from the army purse.`);
+  const need = needNote(ctx.world, life, "soldiering");
+  if (need) ctx.journal("army-wage-need", need);
   if (paid < wage) {
     ctx.journal("army-wage-shortfall", `The army purse is short: ${wage - paid} ${money} of your wage goes unpaid this year.`);
     changeReputation(ctx, tuning(def).wageShortReputation, "the army could not pay its soldiers in full");

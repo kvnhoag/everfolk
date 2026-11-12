@@ -4,12 +4,14 @@ import { farmSaleReason } from "./farming.ts";
 import { ruleFor, type CapabilityRule } from "./rules.ts";
 import { productionQuote, type ProductionQuote } from "./production.ts";
 import { basketQuote, buyBasket, inventoryOf, putItem, takeItem, type BasketQuote } from "./inventory.ts";
-import { fieldOfNode, scaledPay } from "../paths/pay.ts";
+import { fieldOfNode, needNote, scaledPay } from "../paths/pay.ts";
 
 export interface WorkQuote {
   inputs: Record<string, number>; basket: BasketQuote; fee: number; pay: number;
   payer: "merchant" | "workshop" | "school" | "council"; production?: ProductionQuote;
   output?: string; quantity?: number; quality?: number; reason?: string;
+  /** Paths worlds: why the pay differs from the usual (scarce or crowded field). */
+  need?: string;
 }
 const records = (life: LifeState, id: string) => life.capabilities!.evidence.filter(e => e.nodeId === id && e.data.qualifies === true);
 const held = (life: LifeState, item: string) => inventoryOf(life)[item] ?? 0;
@@ -62,7 +64,10 @@ export function workQuote(world: WorldPack, life: LifeState, nodeId: string): Wo
   }
   if (nodeId === "T3" && Object.keys(life.capabilities!.costBasis ?? {}).length < 3) quote.reason = "Record the paid basket's three acquisition costs before comparing quotations.";
   const supplyOrder = rule.kind === "trade" && Number(nodeId.slice(1)) >= 5;
-  if (!supplyOrder) quote.pay = scaledPay(world, life, fieldOfNode(world, nodeId), quote.pay);
+  const field = supplyOrder ? "trade" : fieldOfNode(world, nodeId);
+  if (!supplyOrder) quote.pay = scaledPay(world, life, field, quote.pay);
+  const need = quote.pay > 0 ? needNote(world, life, field) : undefined;
+  if (need) quote.need = need;
   quote.basket = basketQuote(world, life, quote.inputs);
   if (!quote.reason && quote.basket.reason) quote.reason = quote.basket.reason;
   const expense = quote.fee + quote.basket.cost;

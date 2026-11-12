@@ -2,7 +2,7 @@ export * from "./types.ts";
 export { advanceDistrict, applyStartingMaterials, derivedStream, districtOf, initialPaths } from "./district.ts";
 export { fieldNeedBps, fieldNeedsView, refreshNeeds, working } from "./needs.ts";
 export type { FieldNeed } from "./needs.ts";
-export { fieldOfNode, scaledPay } from "./pay.ts";
+export { fieldOfNode, needNote, scaledPay } from "./pay.ts";
 export { affinityJournalId, affinityView, changeAffinity, eventFieldWeight, fadeAffinity, notePractice, practiceBonus, practiceGain } from "./affinity.ts";
 export type { AffinityEntry } from "./affinity.ts";
 export { MEETING_BANDS, meetPractitioner, moveDistrict } from "./practitioners.ts";

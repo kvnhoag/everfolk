@@ -6,7 +6,7 @@ import { payWages } from "../src/demo/service.ts";
 import { demoContext } from "../src/demo/state.ts";
 import { fieldOfNode, scaledPay } from "../src/paths/index.ts";
 import type { Effect, LifeState, WorldPack } from "../src/types.ts";
-import retained from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import { livesWithPaths, staffed } from "./paths-lives-fixture.ts";
 
 const world = livesWithPaths();
@@ -61,4 +61,21 @@ test("worlds without paths keep their pay", () => {
   const life = createEngine(plain).start("paths-pay") as LifeState;
   assert.equal(workQuote(plain, life, "PS5").pay, 20);
   assert.equal(scaledPay(plain, life, "research", 20), 20);
+});
+
+test("scaled pay says why: the wage journal and the work quote name the need", () => {
+  const notes = (workers: number): string[] => {
+    const life = staffed(world, base, "soldiering", workers);
+    life.character!.jobId = "soldier";
+    life.demo!.year = { ...life.demo!.year, army: "war" };
+    life.demo!.town.army.purse = 100_000;
+    const lines: string[] = [];
+    payWages(demoContext(world, life, () => {}, (_id, text) => lines.push(text)));
+    return lines;
+  };
+  assert.ok(notes(1).some(line => /soldiers are scarce/i.test(line) && /1\.6×/.test(line)), notes(1).join(" | "));
+  assert.ok(!notes(6).some(line => /scarce|crowded/i.test(line)), "a steady field adds no note");
+  assert.match(workQuote(world, staffed(world, base, "research", 1), "PS5").need ?? "", /scholars are scarce.*1\.6×/i);
+  assert.match(workQuote(world, staffed(world, base, "research", 12), "PS5").need ?? "", /crowded.*0\.7×/i);
+  assert.equal(workQuote(world, staffed(world, base, "research", 4), "PS5").need, undefined);
 });
