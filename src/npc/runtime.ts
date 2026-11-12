@@ -2,6 +2,7 @@ import type { LifeEngine, LifeState, WorldPack } from "../types.ts";
 import { initializeFamily, familyMemberIsAlive } from "../family.ts";
 import { nextRandom, seedToUint32 } from "../random.ts";
 import { syncEconomyStat } from "../economy.ts";
+import { decidesScope } from "../life-stages/index.ts";
 import {
   NPC_ROLES,
   NPC_RULES_VERSION,
@@ -506,6 +507,9 @@ export function applyNpcAction(
           throw new NpcInputError(
             "Personal paid offers become available at age 12.",
           );
+        // Staged worlds: shared purchases are the household's decision until the household scope opens (16).
+        if (offer.kind === "grain" && !decidesScope(world, "household", life.age))
+          throw new NpcInputError("Your household still decides shared purchases for you.");
         if (life.economy!.cash < offer.price)
           throw new NpcInputError("The household cannot afford this offer.");
         if (offer.kind === "grain") {

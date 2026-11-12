@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/engine.ts";
 import type { WorldPack } from "../src/types.ts";
 import world from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import legacyWorld from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import {
   createNpcSimulation,
   stepNpcSimulation,
@@ -17,8 +18,8 @@ import { npcMcpRoute } from "../server/npc/mcp.ts";
 import { npcRoute } from "../server/npc/http.ts";
 import { compatibleNpcController } from "../server/npc/controller.ts";
 const pack = world as unknown as WorldPack;
-function fixture() {
-  const w = structuredClone(pack);
+function fixture(base: WorldPack = pack) {
+  const w = structuredClone(base);
   for (const e of w.events) {
     e.when = { type: "age", op: "gte", value: 1000 };
     e.maxOccurrences = 1;
@@ -120,6 +121,59 @@ test("accepted decisions and all NPC/player state replay exactly without mutatin
   );
   assert.equal(next.people[npcId].workedAge, 12);
   assert.equal(s.people[npcId].workedAge, 11);
+});
+
+test("household grain offers wait until adulthood while lessons remain available at age 12", () => {
+  const w = fixture();
+  for (const origin of w.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 100, max: 100 } };
+  const engine = createEngine(w);
+  let state = age12(w);
+  const mentor = state.slots.mentor;
+  state = stepNpcSimulation(engine, state, { type: "resolve", decisions: {
+    [mentor]: { action: "offer-lesson", speech: "A lesson is available.", source: "external" },
+  } });
+  const childGrain = state.offers.find(offer => offer.kind === "grain" && offer.expiresAge === 13)!;
+  assert.ok(childGrain);
+  assert.ok(state.player.economy!.cash >= childGrain.price, "Authority is the blocker, not affordability.");
+  const snapshot = structuredClone(state);
+  assert.throws(() => stepNpcSimulation(engine, state, { type: "answer", offerId: childGrain.id, accept: true }), /household still decides shared purchases/);
+  assert.deepEqual(state, snapshot, "Rejected acceptance cannot spend cash, move stock or consume the offer.");
+  const lesson = state.offers.find(offer => offer.kind === "lesson" && offer.npcId === mentor)!;
+  assert.ok(lesson);
+  const beforeLiteracy = state.player.character!.skills.literacy;
+  state = stepNpcSimulation(engine, state, { type: "answer", offerId: lesson.id, accept: true });
+  assert.equal(state.player.character!.skills.literacy, Math.min(100, beforeLiteracy + 2));
+  assert.equal(state.player.character!.lastActivityAge, 12);
+  while (state.player.age < 16) {
+    if (state.lastResolvedAge !== state.player.age) state = stepNpcSimulation(engine, state, { type: "resolve", decisions: {} });
+    state = stepNpcSimulation(engine, state, { type: "player", command: { type: "advance" } });
+  }
+  state = stepNpcSimulation(engine, state, { type: "resolve", decisions: {} });
+  const adultGrain = state.offers.find(offer => offer.kind === "grain" && offer.expiresAge === 17)!;
+  assert.ok(adultGrain);
+  const before = structuredClone(state.player);
+  state = stepNpcSimulation(engine, state, { type: "answer", offerId: adultGrain.id, accept: true });
+  assert.equal(state.player.economy!.cash, before.economy!.cash - adultGrain.price);
+  assert.equal(state.player.demo!.household.grain, before.demo!.household.grain + adultGrain.quantity);
+  assert.equal(state.player.demo!.town.merchant.cash, before.demo!.town.merchant.cash + adultGrain.price);
+  assert.equal(state.player.demo!.town.merchant.grain, before.demo!.town.merchant.grain - adultGrain.quantity);
+  assert.deepEqual(replayNpcSimulation(w, state.seed, state.commands), state);
+});
+
+test("worlds without life stages keep age-12 NPC grain acceptance", () => {
+  const w = fixture(legacyWorld as unknown as WorldPack);
+  for (const origin of w.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 100, max: 100 } };
+  assert.equal(w.lifeStages, undefined);
+  const engine = createEngine(w);
+  let state = age12(w);
+  state = stepNpcSimulation(engine, state, { type: "resolve", decisions: {} });
+  const offer = state.offers.find(offer => offer.kind === "grain" && offer.expiresAge === 13)!;
+  assert.ok(offer);
+  const cash = state.player.economy!.cash, grain = state.player.demo!.household.grain;
+  state = stepNpcSimulation(engine, state, { type: "answer", offerId: offer.id, accept: true });
+  assert.equal(state.player.economy!.cash, cash - offer.price);
+  assert.equal(state.player.demo!.household.grain, grain + offer.quantity);
+  assert.deepEqual(replayNpcSimulation(w, state.seed, state.commands), state);
 });
 
 test("caregiver authority ends at adulthood and world conditions affect NPC health", () => {

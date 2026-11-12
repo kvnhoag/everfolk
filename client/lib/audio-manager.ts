@@ -75,13 +75,14 @@ const STORAGE_KEY_SFX = "everfolk:audio:sfx";
 const CLICK_SFX_SRC = "/assets/audio/button-click.mp3";
 const DEFAULT_VOLUME = 0.35;
 
-class AudioManager {
+export class AudioManager {
   private bgmAudio: HTMLAudioElement | null = null;
   private sfxAudioPool: HTMLAudioElement[] = [];
   private sfxPoolIndex = 0;
   private audioCtx: AudioContext | null = null;
   private listeners = new Set<() => void>();
   private globalClickInstalled = false;
+  private userUnlockInstalled = false;
   private lastClickTime = 0;
 
   private state: AudioState = {
@@ -181,8 +182,12 @@ class AudioManager {
   }
 
   private installUserUnlockListener() {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || this.userUnlockInstalled) return;
+    this.userUnlockInstalled = true;
     const unlock = () => {
+      // Only the first gesture unlocks autoplay; later interactions must respect Pause.
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
       if (!this.state.muted && !this.state.isPlaying && this.bgmAudio) {
         this.play();
       }

@@ -151,7 +151,9 @@
   .ef-home .ef-home-footer{min-height:80px}
 }
 @media(max-width:700px){
-  .ef-home .ef-home-links{display:none}
+  .ef-home .ef-home-header{flex-wrap:wrap;gap:8px 12px}
+  .ef-home .ef-home-links{display:flex;flex:1 0 100%;margin-right:0;gap:2px 16px}
+  .ef-home .ef-home-links>a,.ef-home .ef-home-links>button{min-height:40px}
   .ef-home .ef-home-body{padding-top:150px}
   .ef-home .ef-home-eyebrow{font-size:11px;letter-spacing:3.2px}
   .ef-home .ef-home-wordmark{font-size:clamp(78px,22vw,112px)}
