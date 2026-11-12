@@ -3,6 +3,7 @@ import { sha256Hex } from "../../chain/hash.ts";
 import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
 import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
 import type { Category, FigureId } from "../../chain/ids.ts";
+import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO } from "../../chain/stage-figures.ts";
 import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack } from "../../chain/types.ts";
 import { REROLL_FEE_YOCTO } from "./near-amount.ts";
 import { roll, weightedPick } from "./mock-math.ts";
@@ -116,22 +117,72 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
   const actionId = figure ? FIGURE_ACTIONS[figure][0] : npcActionId;
   const kind = figure ? "figure" : "npc";
   const category = figure ? null : categoryOfNpcAction(npcActionId);
+  const effectiveFee = fee !== undefined ? fee : (chosen?.stage_id
+    ? (chosen.kind === "figure" ? BigInt(TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO) : BigInt(TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO))
+    : state.params.mintFee);
   const tokenId = registerToken(state, {
     owner_id: life.account_id, kind, figure_id: figure, category, rarity, affection, action_id: actionId,
     extra: {
       kind, figure_id: figure, rarity, affection, action_id: actionId, life_id: life.life_id, birth_year: evidence.birth_year,
       death_year: evidence.death_year, career_group: evidence.career_group, sources: [], evidence_hash: evidenceHash,
+      stage_id: chosen?.stage_id,
+      stage_title: chosen?.stage_title,
+      from_age: chosen?.stage_record?.fromAge,
+      to_age: chosen?.stage_record?.toAge,
+      character_name: chosen?.character_name,
+      district: chosen?.district,
+      field: chosen?.field,
+      tier: chosen?.tier,
+      portrait_media: chosen?.portrait_media,
     },
   });
-  const shares = payMintFee(state, tokenId, evidence.sources, fee);
+  const shares = payMintFee(state, tokenId, evidence.sources, effectiveFee);
   const token = state.tokens.get(tokenId);
   if (token) state.tokens.set(tokenId, { ...token, extra: { ...token.extra, sources: shares } });
   state.lives.set(lifeId, { ...life, status: "minted" });
   state.activeLife.delete(life.account_id);
-  return { token_id: tokenId, kind, figure_id: figure, rarity, affection };
+  return {
+    token_id: tokenId,
+    kind,
+    figure_id: figure,
+    rarity,
+    affection,
+    ...(chosen?.stage_id ? {
+      stage_id: chosen.stage_id,
+      stage_title: chosen.stage_title,
+      character_name: chosen.character_name,
+      portrait_media: chosen.portrait_media,
+    } : {}),
+  };
 }
 
 async function packCard(state: MockState, life: LifeView, hash: string, slot: number, rerolled: boolean, evidence: Evidence, action: string): Promise<MintCard> {
+  const stageFigures = evidence.stage_figures;
+  if (stageFigures && stageFigures.length > 0) {
+    const stageFig = stageFigures[slot % stageFigures.length];
+    const figure = stageFig.kind === "historical" && stageFig.figureId ? stageFig.figureId : null;
+    const kind = figure ? "figure" : "npc";
+    const rarity = figure ? 2 : 1;
+    const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
+    const affection = Math.max(1, Math.min(100, 1 + Number((await roll(life.seed, `aff:${slot}:${rerolled}`)) % 100n) + Math.trunc((bonds - 50) / 5)));
+    const actionId = figure ? FIGURE_ACTIONS[figure][0] : action;
+    return {
+      kind,
+      figure_id: figure,
+      rarity,
+      affection,
+      action_id: actionId,
+      rerolled,
+      stage_id: stageFig.stageId,
+      stage_title: stageFig.title,
+      character_name: stageFig.name,
+      district: stageFig.stageRecord.district,
+      field: stageFig.stageRecord.field,
+      tier: stageFig.stageRecord.tier,
+      portrait_media: stageFig.media,
+      stage_record: stageFig.stageRecord,
+    };
+  }
   const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}:${rerolled}`), evidence);
   return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, rerolled };
 }
@@ -140,8 +191,16 @@ function bind(state: MockState, account: string): MockLivesContract {
   const mintResult = (lifeId: string): MintResult | null => {
     const token = [...state.tokens.entries()].find(([, token]) => token.extra.life_id === lifeId);
     if (!token || state.lives.get(lifeId)?.status !== "minted") return null;
-    const [token_id, { kind, figure_id, rarity, affection }] = token;
-    return { token_id, kind, figure_id, rarity, affection };
+    const [token_id, { kind, figure_id, rarity, affection, extra }] = token;
+    return {
+      token_id, kind, figure_id, rarity, affection,
+      ...(extra.stage_id ? {
+        stage_id: extra.stage_id,
+        stage_title: extra.stage_title,
+        character_name: extra.character_name,
+        portrait_media: extra.portrait_media,
+      } : {}),
+    };
   };
   return {
     accountId: account,
@@ -157,7 +216,9 @@ function bind(state: MockState, account: string): MockLivesContract {
       const evidence = parseEvidence(signed);
       assertEvidence(life, evidence, action);
       const evidenceHash = await sha256Hex(signed.evidence_json);
-      const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps };
+      const hasStageFigures = Boolean(evidence.stage_figures && evidence.stage_figures.length > 0);
+      const initialFee = hasStageFigures ? TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO : state.params.mintFee.toString();
+      const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: initialFee, reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps };
       const pack = { view, evidence, signed, action };
       state.packs.set(lifeId, pack);
       for (let slot = 0; slot < 3; slot++) view.cards.push(await packCard(state, life, evidenceHash, slot, false, evidence, action));

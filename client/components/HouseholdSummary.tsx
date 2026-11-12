@@ -113,7 +113,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
         })}</ul></div>}
         {character?.family?.length && <p className="household-family-count">{family.filter(row => !row.deceased).length} living family · {family.filter(row => row.deceased).length} remembered</p>}
         <div className="household-footer-actions">
-          <button type="button" className="household-open" onClick={onOpenCharacter}>Family table &amp; life <span aria-hidden="true">→</span></button>
+          <button type="button" className="household-open" onClick={onOpenCharacter}>{character?.family?.length || life.age >= 12 || character?.children?.length ? "Family table & life" : "Character & life"} <span aria-hidden="true">→</span></button>
           {onOpenPeopleTab && <button type="button" className="household-open is-secondary" onClick={onOpenPeopleTab}>People &amp; town <span aria-hidden="true">↘</span></button>}
           {onOpenRelationships && <button type="button" className="household-open is-secondary" onClick={onOpenRelationships}>Relationships <span>{socialRelationshipRows(world, life).length} <span aria-hidden="true">→</span></span></button>}
         </div>

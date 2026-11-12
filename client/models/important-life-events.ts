@@ -56,7 +56,7 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
   const activities = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
   const jobs = new Map(world.character?.jobs.map(job => [job.id, job]) ?? []);
   const outcomes = new Map<string, { owner: string; effects: readonly Effect[] }>();
-  for (const event of world.events) for (const choice of event.choices) for (const outcome of choice.outcomes) outcomes.set(outcome.id, { owner: event.id, effects: outcome.effects });
+  for (const event of world.events) for (const outcome of [...event.choices.flatMap(choice => choice.outcomes), ...event.dependent?.responses ?? []]) outcomes.set(outcome.id, { owner: event.id, effects: outcome.effects });
   for (const activity of activities.values()) for (const outcome of activity.outcomes) outcomes.set(outcome.id, { owner: activity.id, effects: outcome.effects });
   const readers = flagReaders(world);
   const origin = world.origins.find(item => item.id === life.originId);

@@ -1,5 +1,6 @@
 import type { LifeState } from "../src/types.ts";
 import { CAREER_GROUP_JOBS } from "./catalog/index.ts";
+import { ADDITIONAL_JOB_TIERS } from "./catalog/npc-actions.ts";
 import type { FigureRequirement } from "./catalog/index.ts";
 import { figuresForWorld } from "./catalog/demo-figures.ts";
 import type { CareerGroup, FigureId } from "./ids.ts";
@@ -9,7 +10,7 @@ const DEFAULT_CAREER_GROUP: CareerGroup = "performance";
 
 /** job id → its group and its tier (index within the group's lowest-to-highest list). */
 const JOB_TIERS = new Map(Object.entries(CAREER_GROUP_JOBS).flatMap(([group, jobs]) =>
-  jobs.map((job, tier) => [job, { group: group as CareerGroup, tier }] as const)));
+  jobs.map((job, tier) => [job, { group: group as CareerGroup, tier: ADDITIONAL_JOB_TIERS[job] ?? tier }] as const)));
 
 /**
  * Jobs the life held, each with the position it was last seen at. The engine journals an `activity`

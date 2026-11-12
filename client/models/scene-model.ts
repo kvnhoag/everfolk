@@ -370,7 +370,9 @@ export function resolveLifeScenes(life: LifeState, world: WorldPack, eventVisual
           : activity.category === "family" && life.flags.parent ? visual("family") : visual("history-city", "gather"));
         outcomes.push(makeContext(`activity-${life.age}-${index}-${activity.id}`, "outcome", assignment, activity.text, entry.text));
       }
-      const outcome = event?.choices.flatMap(choice => choice.outcomes).find(item => item.id === entry.id);
+      // Household-decided results (staged worlds) are outcomes too, with the same shape minus a weight.
+      const outcome = event && [...event.choices.flatMap(choice => choice.outcomes),
+        ...(event.dependent?.responses ?? []).map(response => ({ ...response, weight: response.weight ?? 1 }))].find(item => item.id === entry.id);
       if (event && outcome) outcomes.push(makeContext(`outcome-${life.age}-${index}-${event.id}`, "outcome", eventVisuals[event.id] ?? outcomeVisual(event, outcome, life), event.title, entry.text, event));
     }
     if (entry.type === "event") {

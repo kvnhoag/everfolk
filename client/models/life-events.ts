@@ -36,7 +36,7 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
   // Outcome IDs are unique within a world. Resolving by ID also handles several
   // decisions/actions in one year without mistaking introductions for actions.
   const outcomes = new Map<string, { title: string; kind: "event" | "activity"; sourceIds: readonly string[] }>();
-  for (const event of world.events) for (const choice of event.choices) for (const outcome of choice.outcomes) {
+  for (const event of world.events) for (const outcome of [...event.choices.flatMap(choice => choice.outcomes), ...event.dependent?.responses ?? []]) {
     outcomes.set(outcome.id, { title: event.title, kind: "event", sourceIds: event.sourceIds ?? [] });
   }
   for (const activity of activities.values()) for (const outcome of activity.outcomes) {

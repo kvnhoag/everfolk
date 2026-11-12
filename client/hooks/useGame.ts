@@ -3,7 +3,7 @@ import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
 import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife } from "../mutations/lives.ts";
 import { engineForLife, loadAnyLife } from "../lib/world-session.ts";
-import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readSavedLife } from "../queries/lives.ts";
+import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../models/yearly-focus.ts";
 import { persistYearlyFocus } from "../mutations/yearly-focus.ts";
@@ -31,7 +31,15 @@ function savedFocus(life: LifeState): YearlyFocusId {
   catch { return "everyday"; }
 }
 
-function initialSession(startFresh = false, startFreshFrom?: LifeState): { life: LifeState; notice: string; hasBegun: boolean; hasRevealedStats: boolean } {
+interface SessionState {
+  life: LifeState;
+  notice: string;
+  hasBegun: boolean;
+  hasRevealedStats: boolean;
+  unreadableSave?: string | null;
+}
+
+function initialSession(startFresh = false, startFreshFrom?: LifeState): SessionState {
   try {
     if (!startFresh && typeof window !== "undefined") {
       const restored = readSavedLife(window.localStorage);
@@ -39,12 +47,14 @@ function initialSession(startFresh = false, startFreshFrom?: LifeState): { life:
         life: restored, notice: "",
         hasBegun: hasLifeBegun(window.localStorage, restored),
         hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
+        unreadableSave: null,
       };
-      return { life: createSampleLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false };
+      return { life: createSampleLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
     }
-    return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false };
+    return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
   } catch (error) {
-    return { life: createSampleLife(), notice: `${message(error)} A fresh sample is ready.`, hasBegun: false, hasRevealedStats: false };
+    const raw = typeof window !== "undefined" ? readRawSavedLife(window.localStorage) : null;
+    return { life: createSampleLife(), notice: `${message(error)} A fresh sample is ready.`, hasBegun: false, hasRevealedStats: false, unreadableSave: raw };
   }
 }
 
@@ -65,8 +75,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const rankedRef = useRef(ranked);
   rankedRef.current = ranked;
   const [initial] = useState(() => ranked
-    ? { life: ranked.initial, notice: "", hasBegun: true, hasRevealedStats: true }
+    ? { life: ranked.initial, notice: "", hasBegun: true, hasRevealedStats: true, unreadableSave: null }
     : initialSession(startFresh, startFreshFrom));
+  const [unreadableSave, setUnreadableSave] = useState<string | null>(() => initial.unreadableSave ?? null);
+  const unreadableSaveRef = useRef(unreadableSave);
+  unreadableSaveRef.current = unreadableSave;
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
   const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
@@ -156,7 +169,10 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
         const current = rankedPlay.current();
         lifeRef.current = current;
         setLife(current);
-        setSaveStatus("unavailable");
+        setHasBegun(true);
+        setHasRevealedStats(true);
+        hasBegunRef.current = true;
+        setSaveStatus("saved");
         setNotice(message(error));
       }).finally(() => setSyncing(false));
       return;
@@ -263,6 +279,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const restart = useCallback(() => {
     if (rankedRef.current) return; // A ranked life ends by minting or closing it, never by rerolling.
+    unreadableSaveRef.current = null;
+    setUnreadableSave(null);
     setPlaying(false);
     setAutoDecisions(false);
     hasBegunRef.current = false;
@@ -273,8 +291,14 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [commit, setPlaying, setAutoDecisions]);
 
   const importLife = useCallback((json: string) => {
+    if (rankedRef.current) {
+      setNotice("Free-play saves cannot be imported into an active ranked session.");
+      return false;
+    }
     try {
       const restored = loadAnyLife(json);
+      unreadableSaveRef.current = null;
+      setUnreadableSave(null);
       let begun = restored.commands.some(command => command.type !== "avatar") || restored.phase === "ended";
       if (!begun && typeof window !== "undefined") {
         try { begun = hasLifeBegun(window.localStorage, restored); }
@@ -307,6 +331,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   useEffect(() => {
     if (rankedRef.current) return; // The ranked session keeps its own save; never overwrite the free-play slot.
+    if (unreadableSaveRef.current !== null) return; // Includes malformed empty records.
     try {
       persistLife(window.localStorage, life);
       persistBirthPresentation(window.localStorage, life, hasBegun);
@@ -315,15 +340,16 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasBegun, life]);
+  }, [hasBegun, life, unreadableSave]);
 
   useEffect(() => {
+    if (unreadableSaveRef.current !== null) return;
     try { persistBirthStatsReveal(window.localStorage, life, hasRevealedStats); }
     catch (error) {
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasRevealedStats, life]);
+  }, [hasRevealedStats, life, unreadableSave]);
 
   useEffect(() => {
     // Ranked lives are kept on chain and by their session; the past-lives shelf is for free play.
@@ -385,6 +411,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   useEffect(() => { releaseOrder(orderSlot); }, [life]);
 
+  const resetUnreadableSave = useCallback(() => {
+    unreadableSaveRef.current = null;
+    setUnreadableSave(null);
+  }, []);
+
   return {
     life,
     choose,
@@ -406,6 +437,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     autoDecisions,
     setAutoDecisions,
     importLife,
+    unreadableSave,
+    resetUnreadableSave,
     archivedLives,
     isPlaying,
     pauseLife,

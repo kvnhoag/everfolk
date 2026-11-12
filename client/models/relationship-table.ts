@@ -32,7 +32,7 @@ function personRow(world: WorldPack, life: LifeState, id: string): RelationshipR
 export function socialRelationshipRows(world: WorldPack, life: LifeState): RelationshipRow[] {
   return visibleRelationshipPeople(world, life).flatMap(person => {
     const row = personRow(world, life, person.id);
-    return row ? [row] : [];
+    return row && row.roles.length > 0 ? [row] : [];
   });
 }
 

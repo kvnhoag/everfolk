@@ -15,6 +15,7 @@ import { activityLoanOffer } from "../models/loan-access.ts";
 import SkillGrowth from "./SkillGrowth.tsx";
 import LateSkillRoutes from "./LateSkillRoutes.tsx";
 import CareerEconomyTree from "./CareerEconomyTree.tsx";
+import CapabilityTree from "./CapabilityTree.tsx";
 import { formatSkillValue as skillNumber } from "../models/skill-growth.ts";
 import "../styles/skill-tree.css";
 import "../styles/skill-river.css";
@@ -72,7 +73,19 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
   </div>;
 }
 
-export default function SkillTree({ life, world, activities, onActivity, initialView = "current" }: {
+type SkillTreeProps = {
+  life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void; initialView?: "current" | "wiki";
+};
+
+/** The earned-capability map is first; older proficiency routes remain inspectable. */
+export default function SkillTree(props: SkillTreeProps) {
+  return <div className="skill-tree-complete">
+    <CapabilityTree {...props} readOnly={props.initialView === "wiki"} />
+    <details className="capability-legacy-reference"><summary>Proficiency, occupations &amp; earlier skill paths</summary><LegacySkillTree {...props} /></details>
+  </div>;
+}
+
+function LegacySkillTree({ life, world, activities, onActivity, initialView = "current" }: {
   life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void; initialView?: "current" | "wiki";
 }) {
   const [view, setView] = useState(initialView);

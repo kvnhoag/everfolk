@@ -12,6 +12,7 @@ import type { LoadingPhase } from "../types/loading.ts";
 import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
 import { loadLifeWorld } from "../chain/life-world.ts";
 import { keepFreePlayOnRankedStart } from "../models/ranked-return.ts";
+import { entryUsesDefaultLives, startupRefreshesToDefault } from "../models/world-entry.ts";
 async function loadDemoWorld() {
   const pack = await loadLifeWorld(LIVES_WORLD_VERSION);
   registerWorldPack(pack);
@@ -51,11 +52,11 @@ export function useWorldLibrary() {
           } catch { /* Keep an existing selection when its save cannot be checked. */ }
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
-          if (!hasBegunLife && world.pack.version !== LIVES_WORLD_VERSION) { restored = false; hadSelection = false; }
+          if (startupRefreshesToDefault(world.pack, hasBegunLife, LIVES_WORLD_VERSION)) { restored = false; hadSelection = false; }
         }
         else if (hasLegacyWorldSave(window.localStorage)) { world = getLegacyWorld(); restored = true; }
-      } catch { world = builtin; }
-      if (!restored && (!hadSelection || world.pack.version !== LIVES_WORLD_VERSION)) {
+      } catch { world = builtin; restored = false; hadSelection = false; }
+      if (!restored && !hadSelection) {
         setLoadingPhase("world");
         const demo = await loadDemoWorld();
         world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
@@ -87,12 +88,21 @@ export function useWorldLibrary() {
     setBusy(true);
     setError("");
     try {
-      const useDemo = fresh || id === "alexandria" || id === "alexandria-sample" || Boolean(active?.world.pack.demo);
-      const demo = useDemo ? await loadDemoWorld() : null;
-      let world: PublishedWorld = demo
-        ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
-        : await readWorld(id);
-      if (fresh && !demo) world = selectFactoryWorld(world, { fresh: true });
+      const isDemoTarget = entryUsesDefaultLives(id, fresh, active?.world);
+      let world: PublishedWorld;
+      if (isDemoTarget) {
+        const demo = await loadDemoWorld();
+        world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
+      } else {
+        try {
+          world = await readWorld(id);
+        } catch (cause) {
+          const builtin = getBuiltinWorld();
+          if (id === builtin.id) world = builtin;
+          else throw cause;
+        }
+      }
+      if (fresh && !isDemoTarget) world = selectFactoryWorld(world, { fresh: true });
       else {
         const refreshed = selectFactoryWorld(world);
         if (refreshed !== world) {

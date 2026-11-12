@@ -82,8 +82,15 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
     <section className={`chain-card token-hero${view.isFigure ? " is-figure" : ""}`} aria-labelledby={headingId}>
       <p className="chain-kicker">{view.kindLabel} · No. {tokenId}</p>
       <h1 id={headingId} tabIndex={-1}>{view.title}</h1>
-      <FigureArtwork figureId={view.figureId} />
+      {view.portraitMedia
+        ? <div className="figure-artwork is-stage"><img src={view.portraitMedia} alt={view.title} className="stage-token-portrait" /></div>
+        : <FigureArtwork figureId={view.figureId} />}
       <div className="token-tags"><span className={`chain-tag${view.isFigure ? " is-figure" : ""}`}>{view.rarityLabel}</span><span className="chain-tag">{view.lifeLine}</span></div>
+      {view.stageInfo && <div className="token-tags stage-tags">
+        <span className="chain-tag">{view.stageInfo.stageTitle}</span>
+        {view.stageInfo.district && <span className="chain-tag">District: {view.stageInfo.district}</span>}
+        {view.stageInfo.field && <span className="chain-tag">Field: {view.stageInfo.field}</span>}
+      </div>}
       <p className="token-owner">{view.isOwner ? "This life is yours." : `Kept by ${view.owner}`}</p>
       <div className="token-affection"><span>{view.affectionText}</span><span className="life-report-bar" aria-hidden="true"><span style={{ width: `${Math.max(0, Math.min(100, view.affection))}%` }} /></span></div>
       {canConnect && <div className="chain-actions"><button className="chain-secondary" type="button" disabled={busy} onClick={onConnect}>{connectLabel}</button></div>}

@@ -1,10 +1,21 @@
+import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
+import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
+import type { FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "capability"; node: string }
   | { type: "vocation"; action: string; count: number }
+  | { type: "affinity"; field: FieldId; op: Comparison; value: number }
+  | { type: "field-need"; field: FieldId; label: NeedLabel }
+  | { type: "field-people"; field: FieldId; op: Comparison; value: number }
+  | { type: "district"; district: string }
+  | { type: "away-from-home" }
+  | { type: "introduced"; field: FieldId }
+  | { type: "material"; item: string; op: Comparison; value: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -31,7 +42,13 @@ export type Condition =
   | { type: "demo"; condition: DemoCondition };
 
 export type Effect =
+  | { type: "capability"; node: string }
   | { type: "vocation"; action: string }
+  | { type: "affinity"; field: FieldId; delta: number; source: string }
+  | { type: "meet-practitioner"; field: FieldId; band: "child" | "young" | "adult" | "elder" }
+  | { type: "move-district"; district: string; reason: string }
+  | { type: "use-material"; item: string; quantity: number; cause: string }
+  | { type: "introduce-field"; field: FieldId }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }
@@ -170,6 +187,14 @@ export interface LifeEvent extends EvidenceMetadata {
   mode?: "automatic";
   effects?: Effect[];
   choices: Choice[];
+  /** Staged worlds: the life stages in which this event can happen. */
+  stages?: string[];
+  /** Staged worlds: who would really decide. Defaults to `personal`. */
+  scope?: DecisionScope;
+  /** Staged worlds: how others resolve the event when the player may not decide it. */
+  dependent?: DependentResolution;
+  /** Paths worlds: the fields of work this event belongs to. */
+  fields?: FieldId[];
 }
 
 export interface Ending extends EvidenceMetadata {
@@ -592,6 +617,11 @@ export interface WorldPack {
   /** Opt-in Grain and Service economy; older packs omit it and keep their rules. */
   demo?: DemoDefinition;
   vocations?: VocationDefinition;
+  capabilities?: CapabilityDefinition;
+  /** Opt-in life stages: event time frames and who decides. */
+  lifeStages?: LifeStagesDefinition;
+  /** Opt-in fields of work, districts and their people. Requires lifeStages. */
+  paths?: PathsDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -651,6 +681,11 @@ export interface LifeState {
   /** Only in demo worlds. */
   demo?: DemoState;
   vocations?: VocationState;
+  capabilities?: CapabilityState;
+  /** Paths worlds only. */
+  paths?: PathsState;
+  /** Paths worlds only: one record per completed life stage. */
+  stageRecords?: StageRecord[];
   journal: JournalEntry[];
   commands: Command[];
 }

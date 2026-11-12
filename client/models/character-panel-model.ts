@@ -17,7 +17,7 @@ export function visibleCharacterSections(life: LifeState, world: WorldPack, hasR
     if (section.id === "career") return Boolean(life.character?.jobId) || life.age >= firstJobAge;
     if (section.id === "wealth") return Boolean(world.economy && life.economy);
     if (section.id === "relationships") return world.character?.extendedSocialRoles === true || life.age >= 18 && hasRelationships;
-    if (section.id === "children") return Boolean(life.character?.family?.length) || life.age >= 12 || Boolean(life.character?.children.length);
+    if (section.id === "children") return Boolean(world.demo || life.character?.family?.length) || life.age >= 12 || Boolean(life.character?.children.length);
     return true;
   });
 }

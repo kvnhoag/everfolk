@@ -93,7 +93,9 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
       : <ol className="ledger-rows market-ledger ledger-body">{shown.map(row => <li key={row.tokenId} className={`ledger-row market-row${row.isFigure ? " is-figure" : ""}`}>
           <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
           <div className="ledger-value">
-            <span className="market-thumb">{row.figureId
+            <span className="market-thumb">{row.portraitMedia
+              ? <img src={row.portraitMedia} alt={row.title} className="stage-market-portrait" />
+              : row.figureId
               ? <FigureArtwork figureId={row.figureId} />
               : <span className="ledger-emblem" aria-hidden="true"><PixelIcon name={row.emblem ?? "sun"} size={26} /></span>}</span>
             <h2><a href={row.href}>{row.title}</a></h2>

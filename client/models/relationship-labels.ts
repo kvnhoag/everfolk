@@ -35,6 +35,24 @@ export function relationshipLabels(world: WorldPack, life: LifeState, personId: 
   return labels;
 }
 
+const grantingOutcomes = new WeakMap<WorldPack, Map<string, string[]>>();
+function establishedContacts(world: WorldPack, life: LifeState): Set<string> {
+  if (!world.character?.socialRelationships) return new Set();
+  let grants = grantingOutcomes.get(world);
+  if (!grants) {
+    grants = new Map();
+    const events = [...world.events, ...(world.influences ?? []).flatMap(entry => entry.event ? [entry.event] : [])];
+    const outcomes = [...world.character.activities.flatMap(activity => activity.outcomes), ...events.flatMap(event => event.choices.flatMap(choice => choice.outcomes))];
+    for (const outcome of outcomes) {
+      const partners = outcome.effects.flatMap(effect => effect.type === "social-role" && effect.active ? [effect.partner] : []);
+      if (partners.length) grants.set(outcome.id, [...(grants.get(outcome.id) ?? []), ...partners]);
+    }
+    grantingOutcomes.set(world, grants);
+  }
+  // Only an accepted role-granting outcome establishes a contact; a failed attempt does not.
+  return new Set(life.journal.flatMap(entry => entry.type === "outcome" ? grants!.get(entry.id) ?? [] : []));
+}
+
 /** Meeting alone stays private; retained releases keep their own catalog rules. */
 export function visibleRelationshipPeople(world: WorldPack, life: LifeState): ResolvedPerson[] {
   const definition = world.character, character = life.character;
@@ -44,6 +62,7 @@ export function visibleRelationshipPeople(world: WorldPack, life: LifeState): Re
     ...(character.partnerId ? [character.partnerId] : []),
     ...character.children.map(child => child.otherParentId),
   ]);
+  const established = establishedContacts(world, life);
   return definition.partners.flatMap(template => {
     if (definition.requireIntroductions && !known.has(template.id)) return [];
     const person = resolvePartner(world, life, template.id);
@@ -52,6 +71,6 @@ export function visibleRelationshipPeople(world: WorldPack, life: LifeState): Re
     const dated = character.datedPartnerIds?.includes(person.id) === true;
     const roles = definition.socialRelationships ? character.relationships?.partners[person.id]?.roles : undefined;
     const social = roles?.some(role => role === "friend" || role === "business-partner" || definition.extendedSocialRoles && (role === "teacher" || role === "disciple" || role === "enemy")) === true;
-    return dated || social ? [person] : [];
+    return dated || social || established.has(person.id) ? [person] : [];
   });
 }

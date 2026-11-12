@@ -1,5 +1,5 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../../src/types.ts";
-import { financeActivityReason, getDemoResourceValue, getNetWorth, previewEconomyEffects } from "../../src/economy.ts";
+import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationHoldings, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
 import { marketOrderValue, marketQuote } from "../../src/market.ts";
@@ -80,6 +80,16 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
       assets.push({ id: `demo:${item}`, title: titles[item], description: "Household stores valued at the merchant’s current buying price.", value: demo.town.prices[item].buy, quantity });
     }
   }
+  if (world.vocations && life.vocations) {
+    for (const [index, holding] of getVocationHoldings(world, life).entries()) {
+      const title = `${holding.item.replaceAll("-", " ")}${holding.material ? "" : ` (grade ${holding.quality})`}`;
+      if (holding.valuedQuantity) assets.push({ id: `vocation:${index}`, title,
+        description: holding.material ? "Materials valued at the current supplier quote." : "Funded buyer bids, limited by remaining demand and merchant cash.",
+        value: holding.unitValue, quantity: holding.valuedQuantity });
+      if (holding.quantity > holding.valuedQuantity) assets.push({ id: `vocation:${index}:unfunded`, title,
+        description: "Owned, but no remaining funded buyer; excluded from realizable wealth.", value: 0, quantity: holding.quantity - holding.valuedQuantity });
+    }
+  }
   const job = world.character?.jobs.find(item => item.id === life.character?.jobId);
   const trading = Boolean(world.economy.market && life.character?.lastActivityAges[world.economy.market.traderFocusActivity] === life.age);
   const jobCash = trading ? 0 : directMoneyDelta(job?.yearlyEffects ?? [], world);
@@ -93,7 +103,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .flatMap(activity => activity.outcomes.map(outcome => -directMoneyDelta(outcome.effects, world)))
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
-    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life), committedValue,
+    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life) + getVocationInventoryValue(world, life), committedValue,
     netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), job, jobCash, trading, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),

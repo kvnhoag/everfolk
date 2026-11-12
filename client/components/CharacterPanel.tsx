@@ -10,6 +10,7 @@ import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import CareerEconomyTree from "./CareerEconomyTree.tsx";
+import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
@@ -267,8 +268,11 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        <CompactSkillPanel activities={activities} {...props} />
-        <CareerEconomyTree activities={activities} {...props} />
+        <CapabilityTree activities={activities} {...props} />
+        <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
+          <CompactSkillPanel activities={activities} {...props} />
+          <CareerEconomyTree activities={activities} {...props} />
+        </details>
       </div>
       {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
         <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />
@@ -280,7 +284,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {shownPeople.length > 0 && <h4 className="relationship-actions-title">Relationship activities</h4>}
         <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
           {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
-          <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>)}</div></div>
+          <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).length ? relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>) : <span className="character-status-tag">Contact</span>}</div></div>
           <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{displayProse(partner.description)}</p>
           {character.relationships?.partners[partner.id] && <Closeness lastContactAge={character.relationships.partners[partner.id].lastContactAge} world={world} value={character.relationships.partners[partner.id].closeness} />}
           <ActivityList activities={personActivities(partner.id)} {...props} />
@@ -299,7 +303,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {origin && <div className="family-background-note"><strong>{origin.title}</strong><p>{displayProse(origin.text)}</p></div>}
         <RelationshipTable rows={livingFamily} world={world} caption="Current family" emptyText="No living family members recorded for this life." />
         {rememberedFamily.length > 0 && <details className="family-history"><summary>Remembered family · {rememberedFamily.length}</summary><RelationshipTable rows={rememberedFamily} world={world} caption="Remembered family" emptyText="No deceased relatives recorded." /></details>}
-        {!character.family?.length && <p className="character-person-meta">Parents and grandparents were not recorded for this life.</p>}
+        {!character.family?.length && <p className="character-person-meta">{world.demo ? "Your household's parents care for you and work the family plot. Individual relatives were not named in this revision." : "Parents and grandparents were not recorded for this life."}</p>}
         {familyActivities.length > 0 && <h4 className="relationship-actions-title">Family activities</h4>}
         <ActivityList activities={familyActivities} {...props} />
       </div>}

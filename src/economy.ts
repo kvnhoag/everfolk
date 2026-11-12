@@ -1,4 +1,4 @@
-import { vocationCashDelta } from "./vocations/view.ts";
+import { bid, vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
 import { TRADE_ITEMS } from "./demo/types.ts";
@@ -12,7 +12,7 @@ function amount(value: number, label: string): number {
   return value;
 }
 
-type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo">>;
+type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo" | "vocations">>;
 /** The merchant's current bid is the realizable market value of each holding. */
 export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeState, "demo">>): number {
   if (!world.demo?.startingResources || !state.demo) return 0;
@@ -26,11 +26,50 @@ export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeS
   }, 0), "Household resource market value");
 }
 
+export interface VocationHolding { item: string; quality: number; quantity: number; valuedQuantity: number; unitValue: number; material: boolean }
+
+/** Materials use supplier quotes; products share the finite merchant budget and demand. */
+export function getVocationHoldings(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): VocationHolding[] {
+  if (!world.vocations || !state.vocations) return [];
+  const def = world.vocations;
+  const ledger = state.vocations;
+  const holdings: VocationHolding[] = [];
+  const countedFromLots: Record<string, number> = {};
+  const add = (item: string, quality: number, quantity: number) => {
+    const material = Boolean(def.materials[item]);
+    holdings.push({ item, quality, quantity, valuedQuantity: material ? quantity : 0,
+      unitValue: material ? def.materials[item].price : bid(world, item, quality), material });
+  };
+  for (const lot of ledger.lots ?? []) {
+    if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
+    countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
+    add(lot.item, lot.quality, lot.quantity);
+  }
+  for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
+    if (quantity <= 0 || item === "flax" || item === "linen") continue;
+    const remaining = quantity - (countedFromLots[item] ?? 0);
+    if (remaining <= 0) continue;
+    add(item, 1, remaining);
+  }
+  let budget = ledger.accounts.merchant;
+  const demand = { ...ledger.demand };
+  for (const holding of holdings.filter(item => !item.material).sort((a, b) => b.unitValue - a.unitValue || a.item.localeCompare(b.item))) {
+    holding.valuedQuantity = holding.unitValue > 0 ? Math.min(holding.quantity, demand[holding.item] ?? 0, Math.floor(budget / holding.unitValue)) : 0;
+    budget -= holding.valuedQuantity * holding.unitValue;
+    demand[holding.item] = (demand[holding.item] ?? 0) - holding.valuedQuantity;
+  }
+  return holdings;
+}
+
+export function getVocationInventoryValue(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): number {
+  return amount(getVocationHoldings(world, state).reduce((sum, item) => sum + item.unitValue * item.valuedQuantity, 0), "Vocation inventory realizable value");
+}
+
 export function getAssetValue(world: WorldPack, state: ValuationState): number {
   if (!world.economy || !state.economy) return 0;
   const valuation = { ...state, age: state.age ?? 0, lastEventAge: state.lastEventAge ?? {}, eventCounts: state.eventCounts ?? {} };
   return amount(world.economy.assets.reduce((sum, asset) => sum + marketQuote(world, valuation, asset.id).sell * (state.economy!.assets[asset.id] ?? 0), 0)
-    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state), "Resource market value");
+    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state) + getVocationInventoryValue(world, state), "Resource market value");
 }
 
 export function getNetWorth(world: WorldPack, state: ValuationState): number {
