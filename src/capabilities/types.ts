@@ -1,68 +1,54 @@
-/** Engine-authored successful receipts, never claims copied from client flags. */
-export type CapabilityEvidenceKind = "work" | "production" | "harvest" | "exercise" | "contract" | "assessment" | "trade" | "reconciliation";
-export type CapabilityFact = string | number | boolean;
-export interface CapabilityEvidence {
-  id: string;
-  year: number;
-  kind: CapabilityEvidenceKind;
-  action: string;
-  successful: boolean;
-  facts: Record<string, CapabilityFact>;
-  references?: string[];
-  group?: string;
-}
-export interface LearnedCapability { year: number; evidenceIds: string[] }
-export interface CapabilityState { learned: Record<string, LearnedCapability>; evidence: CapabilityEvidence[] }
-export type CapabilityFactTest = CapabilityFact | { gte?: number; lte?: number; eq?: CapabilityFact; oneOf?: CapabilityFact[] };
-export interface CapabilityEvidenceTest {
-  kind?: CapabilityEvidenceKind;
-  actions?: string[];
-  facts?: Record<string, CapabilityFactTest>;
-  balances?: { available: string; required: { fact: string; bps?: number }[] }[];
-  references?: {
-    minimum: number;
-    allMatch?: CapabilityEvidenceTest;
-    sum?: { fact: string; minimum: number };
-    distinctYears?: number;
-    distinctBy?: string;
-    minimumDistinct?: number;
-    matching?: CapabilityEvidenceTest;
-    minimumMatching?: number;
-  };
-}
-export type CapabilityProof =
-  | { type: "all"; proofs: CapabilityProof[] }
-  | { type: "any"; proofs: CapabilityProof[] }
-  | { type: "records"; match: CapabilityEvidenceTest; count: number; distinctYears?: number; distinctBy?: string; minimumDistinct?: number; consecutiveYears?: number; afterNode?: string; sum?: { fact: string; minimum: number } }
-  | { type: "context"; field: "reputation"; minimum: number };
-export interface CapabilityRule {
-  id: string;
-  depth: number;
-  title: string;
-  branch: string;
-  specialization: string | null;
+/** Saved progression belongs to the immutable world in which a life began. */
+export interface CapabilityNode {
+  id: string; depth: number; title: string;
+  branch: string; specialization: string | null;
   prerequisites: { all: string[] };
   minimumProficiency: Record<string, number>;
+  minimumStats?: Record<string, number>;
   anyProficiency?: Record<string, number>[];
-  proof: CapabilityProof;
-  proofDescription: string;
-  rewardDescription: string;
+  /** Years of qualifying proof this world asks for; older packs use the catalog's count. */
+  proofYears?: number;
+  proof: string; reward: string;
 }
-export interface CapabilityProgress {
-  learned: boolean;
-  eligible: boolean;
-  missingParents: string[];
-  missingSkills: Record<string, { current: number; required: number }>;
-  missingAlternatives: boolean;
-  proofSatisfied: boolean;
-  evidenceIds: string[];
+export interface CapabilityEvidence {
+  nodeId: string; age: number; year: number;
+  kind: string;
+  data: Record<string, number | string | boolean>;
 }
-export interface CapabilityEvaluationInput {
-  skills: Readonly<Record<string, number>>;
-  stats?: Readonly<Record<string, number>>;
-  reputation?: number;
-  year: number;
-  state: CapabilityState;
-  rules?: readonly CapabilityRule[];
+export interface CapabilityState {
+  learned: Record<string, { age: number; year: number }>;
+  evidence: CapabilityEvidence[];
+  workedAge?: number;
+  /** Item cost traces are updated only by accepted purchases/production. */
+  costBasis?: Record<string, { quantity: number; cost: number }>;
+  reservedPayment?: number;
+  /** Grain delivered to civic buyers is kept apart from merchant stock. */
+  civicGrain?: number;
+  military?: { service: { age: number; role: string; paid: number; wage: number; rations: number; ration: number; purseBefore: number; purseAfter: number; grainBefore: number; grainAfter: number }[] };
+  /** An unfinished assessment counts active work years, not elapsed years. */
+  project?: { nodeId: string; completedYears: number; startedAge: number;
+    inputs?: Record<string, number>; fee?: number; payment?: number;
+    payer?: "merchant" | "workshop" | "school" | "council";
+    quality?: number; output?: string; quantity?: number;
+    data?: Record<string, number | string | boolean>;
+  };
+  farm?: {
+    actionAge: number; nodeId: string; seed: number; fee: number;
+    mode?: string; reserve?: number; extension?: boolean;
+    lastSettlementAge?: number; grainBefore?: number; flaxBefore?: number; cropGrain?: number; cropFlax?: number;
+    consumed?: number; rationNeed?: number; fullRations?: boolean; debtBefore?: number; maintenancePaid?: number;
+    seedFlax?: number; extensionPaid?: number; extensionMaintainedAge?: number; reserveYears?: number;
+  };
 }
-export interface CapabilityEvaluation { state: CapabilityState; newlyLearned: string[]; progress: Record<string, CapabilityProgress> }
+export interface CapabilityDefinition {
+  version: number;
+  nodes: CapabilityNode[];
+}
+export type CapabilityStatus = "learned" | "available" | "locked" | "unavailable";
+export interface CapabilityNodeView {
+  id: string; state: CapabilityStatus; reasons: string[];
+  progress: { done: number; required: number };
+  actionId: string | null; actionLabel: string;
+  requirementText: string[];
+}
+export interface CapabilityView { enabled: boolean; nodes: CapabilityNodeView[] }

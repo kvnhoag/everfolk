@@ -5,8 +5,8 @@ import { validateWorld } from "../src/validate.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import { FIGURE_RANK_POLICY } from "../chain/catalog/figure-ranks.ts";
 import { figureFixture } from "./helpers/figure-path-fixture.ts";
-import base from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import base from "../worlds/demo/alexandria-deep-1.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import type { Condition, WorldPack } from "../src/types.ts";
 const build = () => buildFigurePathWorld(base as unknown as WorldPack);
 
@@ -15,11 +15,11 @@ test("eleven figure paths build reproducibly without changing the retained deep-
   validateWorld(world);
   assert.deepEqual(world, shipped);
   assert.equal(world.figurePaths!.length, 11);
-  assert.equal(world.capabilities!.rules.length, 65);
+  assert.equal(world.deepCapabilities!.rules.length, 65);
   assert.equal(world.events.filter(event => event.id.startsWith("fig-story-")).length, 22);
   assert.equal(JSON.stringify(base), before);
-  assert.equal((await loadLifeWorld("alexandria-lives-3")).figurePaths, undefined);
-  assert.equal((await loadLifeWorld("alexandria-lives-4")).figurePaths!.length, 11);
+  assert.equal((await loadLifeWorld("alexandria-deep-1")).figurePaths, undefined);
+  assert.equal((await loadLifeWorld("alexandria-figures-1")).figurePaths!.length, 11);
   assert.throws(() => buildFigurePathWorld(world), /retained world/i);
 });
 
@@ -54,7 +54,7 @@ test("supply contributions debit actual grain, paid materials and finite payer b
   assert.equal(run.life.economy!.cash, before.economy!.cash + action.pay - action.fee);
   assert.equal(run.life.economy!.cash + Object.values(run.life.vocations!.accounts).reduce((sum, value) => sum + value, 0), funds);
   assert.equal(run.progress("alexander").associationRank, null);
-  const receipt = run.life.capabilities!.evidence.find(record => record.action === stage.workActionId)!;
+  const receipt = run.life.deepCapabilities!.evidence.find(record => record.action === stage.workActionId)!;
   assert.equal(receipt.facts.grainDelivered, action.inputs!.grain);
   assert.throws(() => run.engine.act(run.life, "v-" + stage.workActionId), /year|work|activity/i);
   run.act(stage.activityId);

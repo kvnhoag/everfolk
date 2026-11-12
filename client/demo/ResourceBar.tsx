@@ -3,96 +3,20 @@ import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./resource-bar.css";
+import PixelIcon from "../components/PixelIcon.tsx";
+import { RESOURCES, type ResourceId } from "./resources.ts";
+import ResourceYearDetails from "./Storehouse.tsx";
+import type { StorehouseRow } from "./storehouse-model.ts";
 
 interface ResourceBarProps {
   screen: DemoScreen;
   cashText: string;
+  rows?: StorehouseRow[] | null;
   onPlan?(flaxPlots: number): string | null;
   onSelectTradeItem?(item: TradeItem): void;
 }
 
 const RESOURCE_PIXELS: Record<string, string[]> = {
-  grain: [
-    "...#.#...",
-    "..##.##..",
-    ".###.###.",
-    "..##.##..",
-    "...###...",
-    "....#....",
-    "...###...",
-  ],
-  cash: [
-    "..#####..",
-    ".##...##.",
-    "##..#..##",
-    "##.###.##",
-    "##..#..##",
-    ".##...##.",
-    "..#####..",
-  ],
-  flax: [
-    "..#.#.#..",
-    "..#####..",
-    "...###...",
-    "..#####..",
-    "...###...",
-    "..##.##..",
-    ".##...##.",
-  ],
-  linen: [
-    ".#######.",
-    "#########",
-    "##.#.#.##",
-    "#########",
-    "##.#.#.##",
-    "#########",
-    ".#######.",
-  ],
-  silver: [
-    ".........",
-    "..#####..",
-    ".#######.",
-    "#########",
-    ".#######.",
-    ".........",
-    ".........",
-  ],
-  gold: [
-    "....#....",
-    "..#####..",
-    ".#######.",
-    "#########",
-    ".#######.",
-    "..#####..",
-    "....#....",
-  ],
-  silk: [
-    ".#######.",
-    "##.....##",
-    "#.#####.#",
-    "#.#...#.#",
-    "#.#####.#",
-    "##.....##",
-    ".#######.",
-  ],
-  ox: [
-    "#.......#",
-    "##.#####.",
-    ".#######.",
-    ".#######.",
-    "..#####..",
-    "..#...#..",
-    "..#...#..",
-  ],
-  donkey: [
-    ".#....#..",
-    ".##..###.",
-    "..######.",
-    "..######.",
-    "..#####..",
-    "..#...#..",
-    "..#...#..",
-  ],
   plots: [
     "####.####",
     "####.####",
@@ -101,15 +25,6 @@ const RESOURCE_PIXELS: Record<string, string[]> = {
     "####.####",
     "####.####",
     "####.####",
-  ],
-  reputation: [
-    "#...#...#",
-    "##.###.##",
-    ".#######.",
-    "..#####..",
-    ".#######.",
-    "##.....##",
-    ".........",
   ],
   merchant: [
     "...###...",
@@ -132,7 +47,9 @@ const RESOURCE_PIXELS: Record<string, string[]> = {
 };
 
 export function ResourceGlyph({ id }: { id: string }) {
-  const rows = RESOURCE_PIXELS[id] ?? RESOURCE_PIXELS.grain;
+  const resource = id === "cash" ? "drachmas" : id;
+  if (Object.hasOwn(RESOURCES, resource)) return <span className={`aoe-glyph aoe-glyph-${id}`} aria-hidden="true"><PixelIcon name={RESOURCES[resource as ResourceId].icon} size={14} /></span>;
+  const rows = RESOURCE_PIXELS[id] ?? RESOURCE_PIXELS.plots;
   return (
     <span className={`aoe-glyph aoe-glyph-${id}`} aria-hidden="true">
       <svg width={14} height={14} viewBox="0 0 11 11" fill="currentColor" shapeRendering="crispEdges" focusable="false">
@@ -156,7 +73,7 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ screen, cashText, onPlan, onSelectTradeItem }: ResourceBarProps) {
+export default function ResourceBar({ rows = null, screen, cashText, onPlan, onSelectTradeItem }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
   const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
@@ -317,6 +234,7 @@ export default function ResourceBar({ screen, cashText, onPlan, onSelectTradeIte
 
       {drawerOpen && (
         <div className="aoe-inventory-drawer" role="region" aria-label="Inventory and granary details">
+          {rows && <ResourceYearDetails rows={rows} />}
           <div className="aoe-drawer-section">
             <header className="aoe-drawer-header">
               <div>

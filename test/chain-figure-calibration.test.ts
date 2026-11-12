@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { matchFigures } from "../chain/match.ts";
 import type { FigureId } from "../chain/ids.ts";
-import { YEARLY_FOCUSES } from "../client/yearly-focus.ts";
+import { YEARLY_FOCUSES } from "../client/models/yearly-focus.ts";
 import { createEngine } from "../src/engine.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { playToEnd, playUnfocusedToEnd } from "../scripts/ranked/path-policies.ts";

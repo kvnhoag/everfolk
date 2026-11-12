@@ -33,6 +33,8 @@ export function progressKnowledge(world: WorldPack, state: LifeState, journal: (
   // changing the actual simulation value or using locale-dependent formatting.
   const amount = Number(loss.toPrecision(12));
   const label = stat.label;
+  // Staged worlds mention a slow fade every five years; the loss still applies every year.
+  if (world.lifeStages && state.age % 5 !== 0) return;
   if (idleLoss > 0 && ageLoss > 0) {
     journal("knowledge-combined-decline", `You have not kept up with learning, and age is affecting your recall. ${label} falls by ${amount}.`);
   } else if (idleLoss > 0) {

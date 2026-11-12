@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { createEngine } from "../../src/engine.ts";
 import { buildFigurePathWorld } from "../../src/figures/world.ts";
 import { getFigurePathProgress } from "../../src/figures/progress.ts";
-import { capabilityRewards, quoteCapabilityProduction } from "../../src/capabilities/rewards.ts";
-import { deepInventory } from "../../src/capabilities/actions.ts";
+import { capabilityRewards, quoteCapabilityProduction } from "../../src/deep-capabilities/rewards.ts";
+import { deepInventory } from "../../src/deep-capabilities/actions.ts";
 import type { FigurePathDefinition } from "../../src/figures/types.ts";
 import type { DemoCommand } from "../../src/demo/types.ts";
 import type { Condition, WorldPack } from "../../src/types.ts";
-import base from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import base from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 
 // Mechanics fixtures author health, capital, food and high numerical proficiency.
 // Every learned node, work receipt, contact and title must still arise from commands.
@@ -71,7 +71,7 @@ export function figureFixture(seed: string, startAge = 12, configure?: (world: W
   };
   const make = (recipe: string, quantity?: number, inspected = false) => {
     if (life.character!.lastActivityAge === life.age || life.vocations!.workedAge === life.age) next();
-    const quote = quoteCapabilityProduction(capabilityRewards(Object.keys(life.capabilities!.learned)), world.vocations!.recipes[recipe], { recipeId: recipe, quantity, inspected });
+    const quote = quoteCapabilityProduction(capabilityRewards(Object.keys(life.deepCapabilities!.learned)), world.vocations!.recipes[recipe], { recipeId: recipe, quantity, inspected });
     assert.ok(quote.allowed, quote.reason);
     for (const [item, units] of Object.entries(quote.inputs)) ensure(item, units);
     const id = `v-make-${recipe}${quantity ? `-${quantity}` : ""}${inspected ? "-inspected" : ""}`;
@@ -79,32 +79,32 @@ export function figureFixture(seed: string, startAge = 12, configure?: (world: W
   };
   const researchFoundation = () => {
     for (const id of ["guided-reading", "argument-exercise", "evidence-comparison", "evidence-comparison", "reviewed-inquiry", "public-dilemma"]) cap(id);
-    assert.ok(life.capabilities!.learned.P4);
+    assert.ok(life.deepCapabilities!.learned.P4);
   };
   const researchMastery = () => {
-    if (!life.capabilities!.learned.P4) researchFoundation();
+    if (!life.deepCapabilities!.learned.P4) researchFoundation();
     for (const id of ["observation-project", "observation-project", "measurement-calculation", "measurement-calculation", "test-explanation", "independent-check", "independent-check", "research-synthesis"]) cap(id);
     act("v-cap-register-ps10");
     cap("original-inquiry"); cap("original-inquiry"); act("v-cap-submit-ps10");
-    assert.ok(life.capabilities!.learned.PS10);
+    assert.ok(life.deepCapabilities!.learned.PS10);
   };
   const sculptureFoundation = () => {
     cap("tool-practice"); cap("measurement-exercise");
     for (let year = 0; year < 2; year++) { ensure("clay", 1); cap("prepare-clay"); }
     for (let year = 0; year < 2; year++) make("clay-model");
-    assert.ok(life.capabilities!.learned.A4);
+    assert.ok(life.deepCapabilities!.learned.A4);
   };
   const sculptureMastery = () => {
-    if (!life.capabilities!.learned.A4) sculptureFoundation();
+    if (!life.deepCapabilities!.learned.A4) sculptureFoundation();
     make("clay-model"); ensure("timber", 1); cap("wood-relief-practice");
-    assert.ok(life.capabilities!.learned.AS5);
+    assert.ok(life.deepCapabilities!.learned.AS5);
     for (let year = 0; year < 2; year++) make("small-relief", undefined, true);
     for (let year = 0; year < 2; year++) make("stone-figure", undefined, true);
     make("bust", undefined, true); cap("project-budget");
     if (life.character!.lastActivityAge === life.age) next();
     act("v-cap-commission-large-relief"); make("large-relief", undefined, true); act("v-cap-deliver-commission");
     act("v-cap-register-as10"); make("monument", undefined, true); act("v-cap-submit-as10");
-    assert.ok(life.capabilities!.learned.AS10);
+    assert.ok(life.deepCapabilities!.learned.AS10);
   };
   const workActivity = (workActionId: string) => {
     const activity = world.character!.activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === workActionId)));
@@ -141,8 +141,8 @@ export function figureFixture(seed: string, startAge = 12, configure?: (world: W
   const progress = (id: string) => getFigurePathProgress(world, path(id), life);
   const durable = () => { assert.deepEqual(engine.load(engine.save(life)), life); assert.deepEqual(engine.replay(life.seed, life.commands), life); };
   advanceTo(startAge);
-  assert.deepEqual(life.capabilities!.learned, {});
-  assert.equal(life.capabilities!.evidence.length, 0);
+  assert.deepEqual(life.deepCapabilities!.learned, {});
+  assert.equal(life.deepCapabilities!.evidence.length, 0);
   assert.deepEqual(life.accomplishments, []);
   return { world, engine, get life() { return life; }, next, advanceTo, act, demo, yearly, cap, ensure, make, researchFoundation, researchMastery, sculptureFoundation, sculptureMastery, contribute, completeCapstone, completeWork, requiredWork, fundWork, workActivity, path, progress, durable };
 }

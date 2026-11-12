@@ -1,16 +1,19 @@
-import { syncCapabilities, recordFarmSettlement, recordAcceptedTrade, initialCapabilities, protectedGrain } from "./capabilities/runtime.ts";
+import { initialCapabilities as initialDeepCapabilities, syncCapabilities as syncDeepCapabilities, recordFarmSettlement, recordAcceptedTrade, protectedGrain } from "./deep-capabilities/runtime.ts";
+import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
-  LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
+  LifeEngine, LifeEvent, LifeState, MarketOrderRequest, SaveFile, WorldPack,
 } from "./types.ts";
 import { influenceCatalog, influenceDeltas, influenceMeasure, parseInfluenceCommand, scaleInfluenceEffects } from "./influence.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
-import { formatYear, yearAtAge } from "./calendar.ts";
+import { birthYearOf, formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically, getNetWorth, syncEconomyStat } from "./economy.ts";
+import { MILITARY_QUALIFICATIONS } from "./capabilities/military.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
+import { placeMarketOrder, cancelMarketOrder as cancelOrder, settleMarketYear } from "./market.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
 import { applyStatDelta, skillEffectDelta } from "./progression.ts";
 import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
@@ -21,16 +24,26 @@ import { outcomeWeight } from "./outcomes.ts";
 import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
 import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
+import { initializeFamily } from "./family.ts";
 export { matchesCondition } from "./conditions.ts";
 import type { DemoCommand } from "./demo/types.ts";
 import { demoContext, initialDemo } from "./demo/state.ts";
 import { settleDemoYear, openDemoYear } from "./demo/settle.ts";
+import { settleVocationYear } from "./vocations/trade.ts";
 import { applyDemoEffect } from "./demo/effects.ts";
 import { DEMO_COMMAND_TYPES, parseDemoCommand } from "./demo/commands.ts";
 import { executeTrade } from "./demo/market.ts";
 import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
+import { takeItem } from "./capabilities/inventory.ts";
+import { deathEndingFor, decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
+import { TIERS } from "./paths/types.ts";
+import type { FieldId, PathsState } from "./paths/types.ts";
+import { drawFromAccount, recordSuccessor } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import type { NpcCommand, NpcSessionState } from "./npc/types.ts";
+import { applyNpcCommand, createNpcState, settlePeople } from "./npc/runtime.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -91,18 +104,25 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
     ...(state.activeInfluences ? { activeInfluences: [...state.activeInfluences] } : {}),
     ...(state.queuedInfluences ? { queuedInfluences: [...state.queuedInfluences] } : {}),
-    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
+    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}),
+      ...(state.economy.market ? { market: { ...state.economy.market, orders: state.economy.market.orders.map(order => ({ ...order })),
+        ...(state.economy.market.history ? { history: [...state.economy.market.history] } : {}) } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
-    ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.capabilities ? { capabilities: structuredClone(state.capabilities) } : {}),
+    ...(state.deepCapabilities ? { deepCapabilities: structuredClone(state.deepCapabilities) } : {}),
+    ...(state.paths ? { paths: structuredClone(state.paths) } : {}),
+    ...(state.stageRecords ? { stageRecords: structuredClone(state.stageRecords) } : {}),
+    ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
+    ...(state.npcs ? { npcs: structuredClone(state.npcs) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
       children: state.character.children.map(child => ({ ...child })),
       lastActivityAges: { ...state.character.lastActivityAges },
       ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
       ...(state.character.people ? { people: Object.fromEntries(Object.entries(state.character.people).map(([id, person]) => [id, { ...person }])) } : {}),
+      ...(state.character.family ? { family: state.character.family.map(member => ({ ...member })) } : {}),
       ...(state.character.datedPartnerIds ? { datedPartnerIds: [...state.character.datedPartnerIds] } : {}),
       ...(state.character.relationships ? { relationships: {
         partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie, ...(tie.roles ? { roles: [...tie.roles] } : {}) }])),
@@ -162,9 +182,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function pickRandomEvent(events: readonly LifeEvent[], state: LifeState): LifeEvent {
     // The opt-in branch leaves legacy draw counts and floating-point arithmetic
     // untouched. Recency comes from the existing journal, so saves need no cache.
-    if (!world.eventPacing?.variety) return pick(events, event => event.trigger.type === "random" ? event.trigger.weight : 0, state);
+    // Paths worlds: affinity raises a field's events (×1 without affinity, so draws are unchanged).
+    const pull = (event: LifeEvent): number => eventFieldWeight(world, state, event);
+    if (!world.eventPacing?.variety) return pick(events, event => (event.trigger.type === "random" ? event.trigger.weight : 0) * pull(event), state);
     const weights = randomEventWeights(events, randomStoryById, state, world.eventPacing.variety);
-    return pick(events, event => weights.get(event.id)!, state);
+    return pick(events, event => weights.get(event.id)! * pull(event), state);
   }
 
   function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string, extra?: Pick<JournalEntry, "source" | "deltas">): void {
@@ -177,6 +199,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
+    if (world.paths) {
+      // A death while the year settles can come before the finished stage was recorded.
+      if (state.age > 0 && lifeStageAt(world, state.age - 1)?.id !== lifeStageAt(world, state.age)?.id) closeStage(world, state, state.age - 1, state.age - 1);
+      closeStage(world, state, state.age, state.age);
+    }
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
     let causeText = "";
@@ -229,9 +256,9 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (applyEconomyEffect(world, state, effect)) {
         if (effect.type === "loan") {
           const currency = world.economy!.currency.short, loan = state.economy!.loan;
-          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
           else if (effect.action === "repay") journal(state, "activity", "moneylender-loan-payment", `You pay ${beforeLoanBalance - (loan?.balance ?? 0)} ${currency} toward the moneylender loan.${loan ? ` ${loan.balance} ${currency} remains.` : " The loan is fully repaid."}`);
-          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
         }
         continue;
       }
@@ -261,12 +288,67 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         case "flag": state.flags[effect.flag] = effect.value; break;
         case "skill": {
           const definition = world.character!.skills[effect.skill];
-          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], skillEffectDelta(effect, state.flags));
+          const gain = skillEffectDelta(effect, state.flags);
+          // Paths worlds: practice grows faster in a field the life is drawn to.
+          const delta = practiceGain(world, state, effect.skill, gain);
+          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], delta);
           break;
         }
         case "job":
           if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
           state.character!.jobId = effect.job; break;
+        case "capability": {
+          const previous = new Set(Object.keys(state.capabilities?.learned ?? {}));
+          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node));
+          for (const id of Object.keys(state.capabilities?.learned ?? {})) if (!previous.has(id)) {
+            const node = world.capabilities!.nodes.find(node => node.id === id)!;
+            journal(state, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+          }
+          syncEconomyStat(world, state);
+          break;
+        }
+        case "affinity": {
+          const text = changeAffinity(world, state, effect.field, effect.delta, effect.source);
+          if (text) journal(state, "event", affinityJournalId(effect.field), text);
+          break;
+        }
+        case "meet-practitioner": {
+          const meeting = meetPractitioner(world, state, effect.field, effect.band);
+          journal(state, "event", `paths-meet-${effect.field}`, meeting.text);
+          apply(state, meeting.effects);
+          break;
+        }
+        case "join-district": {
+          const counts = [...state.paths!.people[effect.field]] as PathsState["people"][FieldId];
+          counts[TIERS.indexOf(effect.tier)] += 1;
+          state.paths!.people = { ...state.paths!.people, [effect.field]: counts };
+          refreshNeeds(world, state);
+          break;
+        }
+        case "introduce-field":
+          if (!state.paths!.introductions.includes(effect.field)) state.paths!.introductions = [...state.paths!.introductions, effect.field];
+          break;
+        case "use-material": {
+          const held = state.vocations?.inventory[effect.item] ?? 0;
+          if (held < effect.quantity) { journal(state, "activity", `paths-use-${effect.item}`, `There is not enough ${effect.item} left to use.`); break; }
+          takeItem(state, effect.item, effect.quantity);
+          journal(state, "activity", `paths-use-${effect.item}`, `${effect.quantity} ${effect.item} used: ${effect.cause}.`);
+          break;
+        }
+        case "account-pay": {
+          const paid = drawFromAccount(state, effect.account, effect.amount);
+          if (paid > 0) {
+            apply(state, [{ type: "cash", delta: paid }]);
+            journal(state, "activity", `paths-pay-${effect.account}`, `You are paid ${paid} ${world.economy?.currency.short ?? "dr"}: ${effect.cause}.`);
+          } else journal(state, "activity", `paths-pay-${effect.account}`, `The payer's chest could not cover the fee (${effect.cause}), so nothing was paid.`);
+          break;
+        }
+        case "successor":
+          journal(state, "event", `paths-successor-${effect.field}`, recordSuccessor(state, effect.field, effect.relation, effect.cause));
+          break;
+        case "move-district":
+          journal(state, "event", "paths-move", moveDistrict(world, state, effect.district, effect.reason));
+          break;
         case "vocation":
           journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action));
           if (world.demo?.startingResources) syncEconomyStat(world, state);
@@ -322,7 +404,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       }
     }
     syncCharacterFlags(state);
-    syncCapabilities(world, state);
+    syncDeepCapabilities(world, state);
     if (world.health && state.phase !== "ended" && state.health?.conditions.length === 0 && state.stats[world.health.stat] <= world.health.criticalHealth) {
       addHealthCondition(world, state, world.health.declineCondition, "Your health has fallen to a critical level.", healthHooks(state));
     }
@@ -343,8 +425,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   }
 
   function choicesFor(event: LifeEvent, state: LifeState): Choice[] {
-    return event.choices.filter(choice => matches(choice.when, state) && !grantsUnavailable(choice) &&
+    return event.choices.filter(choice => matches(choice.when, state) && !grantsUnavailable(choice) && !refusedAppointment(choice, state) &&
       (!choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan")) || !financeActivityReason(world, state, choice)));
+  }
+
+  /** Attribute-atlas worlds: a military appointment the army would refuse is not offered (older packs are unaffected). */
+  function refusedAppointment(choice: Choice, state: LifeState): boolean {
+    if ((world.capabilities?.version ?? 0) < 2) return false;
+    return choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job !== null && effect.job in MILITARY_QUALIFICATIONS &&
+      characterEffectReason(world, state, effect, true) !== undefined));
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
@@ -355,10 +444,20 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
     if (event.exclusiveGroup && exclusiveGroups.get(event.exclusiveGroup)!.some(member => (state.eventCounts[member.id] ?? 0) > 0)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
-    if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
+    if (!inTimeFrame(world, event, state.age)) return false;
+    // In staged worlds a decision outside the player's scope is resolved by others, or does not happen.
+    const byOthers = decidedByOthers(world, event, state.age);
+    if (byOthers && !event.dependent) return false;
+    if (!matches(event.when, state) || (event.mode !== "automatic" && !byOthers && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
-      case "year": return state.year >= event.trigger.at;
+      case "year": {
+        // Only a recurring dated event names a cooldown; older packs have none, so their dated events are unchanged.
+        const lastAge = event.cooldownYears === undefined ? undefined : state.lastEventAge[event.id];
+        // History dated before this life's birth does not happen to it; anchors dated at the world's start always can.
+        if (state.birthYear !== undefined && event.trigger.at > world.startYear && event.trigger.at < state.birthYear) return false;
+        return state.year >= event.trigger.at && (lastAge === undefined || state.age - lastAge >= event.cooldownYears!);
+      }
       case "random": {
         const lastAge = state.lastEventAge[event.id];
         return lastAge === undefined || state.age - lastAge >= (event.cooldownYears ?? 1);
@@ -367,7 +466,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   }
 
   /** A fired catalog event's entry carries its source, so impact is countable from the journal. */
-  function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state)): void {
+  function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state), text = event.text): void {
     // A fresh-year decision is consumed when it fires, so it cannot reopen in the same year.
     const demoGate = event.when?.type === "all"
       ? event.when.conditions.find(item => item.type === "demo" && item.condition.kind === "year")
@@ -378,7 +477,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
-    journal(state, "event", event.id, `${event.title}: ${event.text}`, source ? { source } : undefined);
+    if (world.economy?.market) syncEconomyStat(world, state);
+    journal(state, "event", event.id, `${event.title}: ${text}`, source ? { source } : undefined);
   }
 
   function scheduledAlternative(first: LifeEvent, state: LifeState): LifeEvent {
@@ -402,7 +502,26 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
   }
 
+  /** Staged worlds: an event the player may not decide now resolves like an automatic one. */
+  function automaticNow(event: LifeEvent, state: LifeState): boolean {
+    return event.mode === "automatic" || decidedByOthers(world, event, state.age);
+  }
+
+  /** Others decide by their written rule; the player lives with the result, without a choice. */
+  function dependentEvent(state: LifeState, event: LifeEvent, source?: InfluenceSource): void {
+    const dependent = event.dependent!;
+    recordEvent(state, event, source, dependent.text);
+    // Conditional responses are the household's rules; unconditional ones apply when no rule matches.
+    const ruled = dependent.responses.filter(item => item.when && matches(item.when, state));
+    const pool = ruled.length ? ruled : dependent.responses.filter(item => !item.when);
+    const response = pick(pool, item => item.weight ?? 1, state);
+    journal(state, "outcome", response.id, response.text);
+    recorded(state, state.journal.length - 1, () => apply(state, response.effects, `${event.title} — ${response.text}`, { sourceId: event.id, outcomeId: response.id }));
+    checkEndings(state);
+  }
+
   function automaticEvent(state: LifeState, event: LifeEvent, source?: InfluenceSource): void {
+    if (event.mode !== "automatic" && decidedByOthers(world, event, state.age)) { dependentEvent(state, event, source); return; }
     recordEvent(state, event, source);
     recorded(state, state.journal.length - 1, () => apply(state, event.effects ?? []));
     checkEndings(state);
@@ -416,7 +535,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       else delete state.queuedInfluences;
       const event = influences.entry(queued.entry).event!;
       if (!matches(event.when, state)) continue;
-      if (event.mode === "automatic") automaticEvent(state, event, queued.source);
+      if (automaticNow(event, state)) { if (event.mode === "automatic" || event.dependent) automaticEvent(state, event, queued.source); }
       else if (choicesFor(event, state).length) { offer(state, event, false, queued.source); return true; }
     }
     return false;
@@ -425,8 +544,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function offerMedicalDecision(state: LifeState): boolean {
     if (state.phase === "ended" || !world.health || !state.health?.needsCareDecision || !state.health.conditions.length) return false;
     state.health.needsCareDecision = false;
+    const care = eventById.get(world.health.careDecision)!;
+    // A child's care is arranged by the household; the life continues without a choice.
+    if (decidedByOthers(world, care, state.age) && care.dependent) { automaticEvent(state, care); return false; }
     const previousChoiceAge = state.nextChoiceAge;
-    offer(state, eventById.get(world.health.careDecision)!);
+    offer(state, care);
     if (previousChoiceAge === undefined) delete state.nextChoiceAge;
     else state.nextChoiceAge = previousChoiceAge;
     return true;
@@ -454,7 +576,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (state.age - entry.age < policy.cooldownYears) return false;
       break;
     }
-    const candidates = rareEvents.filter(event => eligible(event, state));
+    const candidates = rareEvents.filter(event => eligible(event, state) && !automaticNow(event, state));
     if (candidates.length === 0) return false;
     if (policy.annualChance < 1) {
       const draw = nextRandom(state.rngState);
@@ -498,7 +620,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
-        const event = allEvents.find(candidate => candidate.mode === "automatic" &&
+        const event = allEvents.find(candidate => automaticNow(candidate, state) &&
           candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) return false;
         automaticEvent(state, event);
@@ -510,7 +632,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Resolve these before offering a decision so the whole year is available to UI.
     if (drainAutomatic()) return;
     if (allowRandom && state.age > 0) {
-      const background = allEvents.filter(event => event.mode === "automatic" &&
+      const background = allEvents.filter(event => automaticNow(event, state) &&
         event.trigger.type === "random" && eligible(event, state));
       if (background.length > 0) {
         automaticEvent(state, pickRandomEvent(background, state));
@@ -521,17 +643,17 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (offerLoanCollection(state)) return;
     const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
     if (world.eventPacing?.rareEvents) {
-      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => !automaticNow(event, state) && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
       if (allowRandom && state.age > 0 && offerRareEncounter(state)) return;
     } else if (peoplePolicy) {
       // The new lane cannot promote a personal encounter ahead of dated history.
-      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => !automaticNow(event, state) && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
     }
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
-    const scheduled = allEvents.find(event => event.mode !== "automatic" &&
+    const scheduled = allEvents.find(event => !automaticNow(event, state) &&
       event.trigger.type !== "random" && eligible(event, state) &&
       (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
     // Essential childhood milestones through sixteen keep their place even if
@@ -540,7 +662,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (allowRandom && decisionDue && offerPeopleEncounter(state)) return;
     if (scheduled) { offer(state, scheduledAlternative(scheduled, state)); return; }
     if (allowRandom && state.age > 0 && decisionDue) {
-      const decisions = allEvents.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
+      const decisions = allEvents.filter(event => !automaticNow(event, state) && event.rarity !== "rare" &&
         event.trigger.type === "random" && !peopleEventIds.has(event.id) && eligible(event, state));
       if (decisions.length > 0) {
         offer(state, pickRandomEvent(decisions, state));
@@ -559,14 +681,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       // A due contract drains historical/automatic entries before interrupting
       // personal decisions, including worlds without separate paced lanes.
       while (state.phase !== "ended") {
-        const event = allEvents.find(candidate => candidate.mode === "automatic" && candidate.trigger.type !== "random" && eligible(candidate, state));
+        const event = allEvents.find(candidate => automaticNow(candidate, state) && candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) break;
         automaticEvent(state, event);
         if (offerMedicalDecision(state)) return;
       }
       if (state.phase === "ended") return;
       if (randomAvailable && state.age > 0) {
-        const background = allEvents.filter(event => event.mode === "automatic" && event.trigger.type === "random" && eligible(event, state));
+        const background = allEvents.filter(event => automaticNow(event, state) && event.trigger.type === "random" && eligible(event, state));
         if (background.length) {
           randomAvailable = false;
           automaticEvent(state, pick(background, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state));
@@ -581,7 +703,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       const scheduled = allEvents.find(event => event.trigger.type !== "random" && eligible(event, state));
       if (scheduled) {
         randomAvailable = false;
-        if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
+        if (automaticNow(scheduled, state)) { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
         offer(state, scheduledAlternative(scheduled, state));
         return;
       }
@@ -590,7 +712,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         const random = allEvents.filter(event => event.trigger.type === "random" && event.rarity !== "rare" && eligible(event, state));
         if (random.length > 0) {
           const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
-          if (event.mode === "automatic") { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
+          if (automaticNow(event, state)) { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
           offer(state, event);
           return;
         }
@@ -651,13 +773,20 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
-      ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.capabilities ? { capabilities: initialCapabilities() } : {}),
+      ...(world.deepCapabilities ? { deepCapabilities: initialDeepCapabilities() } : {}),
+      ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
       ...(world.legacy ? { accomplishments: [] } : {}),
     };
+    if (world.birthYears) {
+      // A side stream of the seed, so the life's own random draws are unchanged.
+      const span = world.birthYears.to - world.birthYears.from + 1;
+      state.birthYear = world.birthYears.from + Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      state.year = state.birthYear;
+    }
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
@@ -667,6 +796,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     if (world.character?.identity) initializeIdentity(world, state);
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
+    initializeFamily(world, state);
+    if (world.paths) state.paths = initialPaths(world, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) {
@@ -681,7 +812,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
       if (world.demo.startingResources) syncEconomyStat(world, state);
     }
+    if (world.paths && applyStartingMaterials(world, state) && world.demo?.startingResources) syncEconomyStat(world, state);
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
+    if (world.npcAgents) {
+      const session = structuredClone(createNpcState(world, seed, state));
+      Object.assign(state, session.player);
+      const { player: _p, commands: _c, ...runtime } = session;
+      state.npcs = runtime;
+    }
     checkEndings(state);
     resolveEvents(state, true);
     return freeze(state);
@@ -690,11 +828,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function advanceInto(next: LifeState): void {
     assertPlayable(next);
     if (next.phase === "choice") throw new Error("Resolve the pending choice before advancing time.");
+    if (next.npcs && next.npcs.lastResolvedAge !== next.age) {
+      throw new Error("Resolve the NPC turn before advancing the year.");
+    }
+    const previousSnapshot = next.npcs ? mutableSnapshot(next) : undefined;
     next.commands.push({ type: "advance" });
     if (world.health) {
       const healthResult = progressHealth(world, next, healthHooks(next));
       if (healthResult.deathCause) {
-        const deathEnding = next.age === 0 ? "death-in-infancy" : next.age < 15 ? "death-in-childhood" : next.age < 60 ? "death-in-adulthood" : "death-in-later-life";
+        const deathEnding = deathEndingFor(world, next.age);
         const ending = endingById.has(deathEnding) ? deathEnding : world.endings.find(item => item.kind === "death")!.id;
         finish(next, ending, healthResult.deathCause, healthResult.context, "condition");
         return;
@@ -704,16 +846,22 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // before the first birthday is therefore recorded at age zero, not age one.
     if (mortalityCheck(next)) return;
     recorded(next, next.journal.length, () => progressKnowledge(world, next, (id, text) => journal(next, "event", id, text)));
+    const completedAge = next.age;
     next.age += 1;
-    next.year = yearAtAge(world.startYear, next.age);
+    next.year = yearAtAge(birthYearOf(world, next), next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
+    const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
+    if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
       if (next.phase !== "ended" && next.character?.jobId && next.vocations?.workedAge !== next.age - 1) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
-        recorded(next, () => next.journal.length - 1, () => {
-          apply(next, job.yearlyEffects);
-          journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
-        });
+        if (marketYear.focused) journal(next, "activity", "work-set-aside-for-trade", `You set aside your ${job.title.toLowerCase()} work to focus on market trading this year. No job income or production is earned.`);
+        else if (!job.production || marketYear.productionBatches > 0) {
+          recorded(next, () => next.journal.length - 1, () => {
+            apply(next, job.yearlyEffects);
+            journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+          });
+        }
       }
       if (next.phase !== "ended") {
         const income = yearlyAssetIncome(world, next);
@@ -728,12 +876,23 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Money-enabled years settle income before costs, avoiding bridge debt
     // created only by batching a whole year. Legacy worlds keep exact ordering.
     if (world.economy) annualIncome();
-    if (world.demo && next.phase !== "ended") {
-      const grainBefore = next.demo!.household.grain, debtBefore = next.economy?.debt ?? 0;
-      recorded(next, () => next.journal.length - 1, () => settleDemoYear(demoCtx(next)));
-      recordFarmSettlement(world, next, grainBefore, debtBefore);
-      syncCapabilities(world, next);
-      if (world.demo.startingResources) syncEconomyStat(world, next);
+    if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => {
+      const beforeGrain = next.demo!.household.grain, beforeDebt = next.economy?.debt ?? 0;
+      settleDemoYear(demoCtx(next));
+      recordFarmSettlement(world, next, beforeGrain, beforeDebt);
+      syncDeepCapabilities(world, next);
+      if (world.demo!.startingResources) syncEconomyStat(world, next);
+    });
+    // Trade worlds: workshop buyers return and the supplier restocks for the new year.
+    if (world.vocations?.trade && next.phase !== "ended") settleVocationYear(world, next, (id, text) => journal(next, "activity", id, text));
+    if (world.capabilities && next.phase !== "ended") {
+      const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
+      settleCapabilities(world, next, completedAge);
+      for (const id of Object.keys(next.capabilities?.learned ?? {})) if (!previous.has(id)) {
+        const node = world.capabilities.nodes.find(node => node.id === id)!;
+        journal(next, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+      }
+      syncEconomyStat(world, next);
     }
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
@@ -745,12 +904,35 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
+    // Paths worlds: a stage that just ended is recorded once its last year has settled.
+    if (world.paths && next.phase !== "ended" && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     if (world.demo && next.phase !== "ended") {
       openDemoYear(demoCtx(next));
       if (world.demo.startingResources) syncEconomyStat(world, next);
     }
+    // The district moves with this year's conditions (war, flood) once they are known.
+    if (world.paths && next.phase !== "ended") {
+      // Village edge: a year in the home fields is healthier than travelling to work.
+      const edgeHealth = farmEdgeHealth(world, next, completedAge);
+      if (edgeHealth > 0) {
+        apply(next, [{ type: "stat", stat: world.health?.stat ?? "health", delta: edgeHealth }]);
+        journal(next, "activity", "farm-edge-health", "A year of work in your own fields, close to home, leaves you stronger.");
+      }
+      advanceDistrict(world, next); fadeAffinity(world, next);
+    }
     checkEndings(next);
     resolveEvents(next, true);
+    if (next.npcs && previousSnapshot && next.phase !== "ended") {
+      const session: NpcSessionState = {
+        ...next.npcs,
+        player: next,
+        commands: [],
+      };
+      settlePeople(session, previousSnapshot);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function chooseInto(next: LifeState, choiceId: string): void {
@@ -770,6 +952,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (offerQueuedInfluence(next)) return;
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function advance(state: LifeState): LifeState {
@@ -823,12 +1006,53 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
     checkEndings(next);
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function act(state: LifeState, activityId: string): LifeState {
     assertPlayable(state);
     const next = mutableSnapshot(state);
     actInto(next, activityId);
+    return freeze(next);
+  }
+
+  function orderMarketInto(next: LifeState, request: MarketOrderRequest): void {
+    assertPlayable(next);
+    recorded(next, () => next.journal.length - 1, () => {
+      placeMarketOrder(world, next, request);
+      next.commands.push({ type: "market-order", side: request.side, asset: request.asset, quantity: request.quantity });
+      const order = next.economy!.market!.orders.at(-1)!;
+      const title = world.economy!.assets.find(item => item.id === request.asset)!.title.toLowerCase();
+      journal(next, "activity", "market-order", `You contract to ${order.side} ${order.quantity} ${title} at ${order.unitPrice} ${world.economy!.currency.short} each. ${order.side === "buy" ? "Cash" : "Goods"} reserved; settlement at age ${order.settlesAtAge}.`);
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
+  }
+
+  function orderMarket(state: LifeState, request: MarketOrderRequest): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    orderMarketInto(next, request);
+    return freeze(next);
+  }
+
+  function cancelMarketOrderInto(next: LifeState, orderId: number): void {
+    assertPlayable(next);
+    recorded(next, () => next.journal.length - 1, () => {
+      cancelOrder(world, next, orderId);
+      next.commands.push({ type: "market-cancel", orderId });
+      journal(next, "activity", "market-cancel", `You cancel market contract ${orderId}. Its reserved cash or goods are returned.`);
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
+  }
+
+  function cancelMarketOrder(state: LifeState, orderId: number): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    cancelMarketOrderInto(next, orderId);
     return freeze(next);
   }
 
@@ -896,11 +1120,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     const ctx = demoCtx(next);
     next.commands.push(command);
     switch (command.type) {
-      case "trade":
+      case "trade": {
         if (next.phase !== "ready") throw new Error("Resolve the current decision first.");
-        if (world.capabilities && command.side === "sell" && command.item === "grain" && next.demo.household.grain - command.quantity < protectedGrain(world,next) && next.vocations?.capabilityWork?.reserveOverrideAge !== next.age) throw new Error("This sale would use protected food or seed. Explicitly authorise a reserve sale first.");
-        { const beforeCash = next.economy?.cash ?? 0; executeTrade(ctx, command); recordAcceptedTrade(world, next, command, beforeCash); }
-        break;
+        if (world.deepCapabilities && command.side === "sell" && command.item === "grain" && next.demo.household.grain - command.quantity < protectedGrain(world, next) && next.vocations?.capabilityWork?.reserveOverrideAge !== next.age) throw new Error("This sale would use protected food or seed. Explicitly authorise a reserve sale first.");
+        const beforeCash = next.economy?.cash ?? 0; executeTrade(ctx, command); recordAcceptedTrade(world, next, command, beforeCash); break;
+      }
       case "plan": applyPlan(ctx, command); break;
       case "assign-agents":
         if (next.age !== 0 || next.commands.some(c => c.type === "advance")) throw new Error("Agents are assigned before the first year.");
@@ -916,6 +1140,33 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     assertPlayable(state);
     const next = mutableSnapshot(state);
     demoInto(next, command);
+    return freeze(next);
+  }
+
+  function npcInto(next: LifeState, command: NpcCommand): void {
+    assertPlayable(next);
+    if (!world.npcAgents && !next.npcs) throw new Error("This world has no NPC companion system.");
+    if (!next.npcs) {
+      const session = structuredClone(createNpcState(world, next.seed, next));
+      Object.assign(next, session.player);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
+    const session: NpcSessionState = {
+      ...next.npcs,
+      player: next,
+      commands: [],
+    };
+    applyNpcCommand(world, session, command);
+    const { player: _p, commands: _c, ...runtime } = session;
+    next.npcs = runtime;
+    next.commands.push(command);
+  }
+
+  function npc(state: LifeState, command: NpcCommand): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    npcInto(next, command);
     return freeze(next);
   }
 
@@ -935,8 +1186,13 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
         if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
+      } else if (command.type === "market-order" && Object.keys(command).length === 4 && typeof command.asset === "string" && typeof command.quantity === "number") {
+        orderMarketInto(state, command);
+      } else if (command.type === "market-cancel" && Object.keys(command).length === 2 && typeof command.orderId === "number") {
+        cancelMarketOrderInto(state, command.orderId);
       } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
       else if (DEMO_COMMAND_TYPES.has(command.type)) demoInto(state, command, ` at ${i}`);
+      else if (command.type === "npc-turn" || command.type === "npc-answer" || command.type === "npc-speech") npcInto(state, command);
       else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -967,5 +1223,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, influence, demo, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
 }

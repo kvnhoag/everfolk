@@ -1,3 +1,4 @@
+import { marketView } from "../../src/demo/market.ts";
 import { createEngine } from "../../src/index.ts";
 import { TRADE_ITEMS, type ArmyLevel, type FloodLevel, type RoadLevel, type TradeItem } from "../../src/demo/types.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
@@ -35,15 +36,7 @@ function engineFor(world: WorldPack): LifeEngine {
 function snapshotPoint(world: WorldPack, state: LifeState): PriceHistoryPoint | null {
   const typed = state as LifeStateWithDemo;
   if (!typed.demo) return null;
-  const prices = Object.fromEntries(
-    TRADE_ITEMS.map(item => [
-      item,
-      {
-        buy: typed.demo.town.prices[item]?.buy ?? world.demo?.market.basePrice[item] ?? 1,
-        sell: typed.demo.town.prices[item]?.sell ?? world.demo?.market.basePrice[item] ?? 1,
-      },
-    ]),
-  ) as Record<TradeItem, { buy: number; sell: number }>;
+  const prices = Object.fromEntries(marketView(world.demo!, typed).quotes.map(({ item, buy, sell }) => [item, { buy, sell }])) as Record<TradeItem, { buy: number; sell: number }>;
   return {
     age: state.age,
     year: state.year,
@@ -68,6 +61,14 @@ function stepCommand(engine: LifeEngine, state: LifeState, cmd: Command): LifeSt
       return engine.chooseAvatar(state, cmd.variant);
     case "influence":
       return engine.influence(state, cmd);
+    case "market-order":
+      return engine.orderMarket(state, cmd);
+    case "market-cancel":
+      return engine.cancelMarketOrder(state, cmd.orderId);
+    case "npc-turn":
+    case "npc-answer":
+    case "npc-speech":
+      return engine.npc(state, cmd);
     default:
       return engine.demo(state, cmd);
   }

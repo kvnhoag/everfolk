@@ -1,13 +1,20 @@
+import { npcRoute } from "./npc/http.ts";
+import { npcMcpRoute } from "./npc/mcp.ts";
+import { configuredNpcService, type NpcEnvironment } from "./npc/composition.ts";
+import type { NpcSessionService } from "./npc/service.ts";
 import { MAX_CATALOG_BYTES, validateCatalog } from "./content.ts";
-import type { ContentDatabase } from "./store.ts";
-import { ContentConflict, publishDraft, readDraft, readPublished, readPublishedWorld, readRevision, saveDraft } from "./store.ts";
+import type { ContentDatabase } from "./db/types.ts";
+import { ContentConflict } from "./errors/content-conflict.ts";
+import { publishDraft, saveDraft } from "./mutations/content.ts";
+import { readDraft, readPublished, readPublishedWorld, readRevision } from "./queries/content.ts";
 import { handleSeededPlayApi } from "./seeded-play.ts";
 import type { SeededPlayService } from "./seeded-play.ts";
 import { requestIdentity } from "./identity.ts";
 import { handleRankedApi, type RankedDependencies, type RankedEnvironment } from "./ranked/routes.ts";
 import { defaultRankedDependencies } from "./ranked/default-verifier.ts";
+import { handleSignInApi, type SignInEnvironment } from "./signin/routes.ts";
 
-export interface ContentEnvironment extends RankedEnvironment { DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
+export interface ContentEnvironment extends RankedEnvironment, SignInEnvironment, NpcEnvironment { NPC_SESSIONS?: NpcSessionService; DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
 
 class HttpError extends Error {
   status: number;
@@ -63,12 +70,19 @@ export async function handleApi(request: Request, env: ContentEnvironment): Prom
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/$/, "");
   try {
+    if (path === "/api/npc/mcp" || path.startsWith("/api/npc/sessions")) {
+      const service = env.NPC_SESSIONS ?? configuredNpcService(env);
+      if (path === "/api/npc/mcp") return npcMcpRoute(request, service);
+      const user = identity(request, env);
+      return npcRoute(request, service, user.authenticated ? request.headers.get("oai-authenticated-user-id") : null);
+    }
     if (path === "/api/session" && request.method === "GET") return json(identity(request, env));
     if (path === "/api/seeded-play" || path.startsWith("/api/seeded-play/")) {
       const user = identity(request, env);
       return handleSeededPlayApi(request, env.SEEDED_PLAY, user.authenticated ? { userId: request.headers.get("oai-authenticated-user-id")! } : null);
     }
     if (path === "/api/ranked" || path.startsWith("/api/ranked/")) return handleRankedApi(request, env, env.RANKED ?? defaultRankedDependencies());
+    if (path === "/api/signin" || path.startsWith("/api/signin/")) return handleSignInApi(request, env);
     const admin = path === "/api/admin" || path.startsWith("/api/admin/");
     if (admin) {
       requireAdmin(request, env);

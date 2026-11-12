@@ -1,24 +1,27 @@
 import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
-import vocationWorld from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
-import previousDeepSkillWorld from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
-import previousDeepBaseWorld from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
-import previousVocationWorld from "../../worlds/demo/alexandria-lives-1.json" with { type: "json" };
+import currentLife from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import life5 from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import life4 from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import life3 from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import life2 from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
+import life1 from "../../worlds/demo/alexandria-lives-1.json" with { type: "json" };
+import deep1 from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
+import figures1 from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import type { WorldPack } from "../../src/types.ts";
 import { DEMO_WORLD_VERSION, LEGACY_DEMO_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import { ensureDemoDeeds } from "../../chain/catalog/demo-deeds.ts";
 import currentDemo from "../../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import legacyDemo from "../../worlds/demo/alexandria-demo-1.json" with { type: "json" };
 import ranked from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
-
-/** Resolve the exact revision recorded in the life and its signed evidence. */
+/** Resolve the exact revision recorded in the life; never replace retained packs. */
 export async function loadLifeWorld(version: string): Promise<WorldPack> {
-  const pack = version === LIVES_WORLD_VERSION ? vocationWorld : version === "alexandria-lives-3" ? previousDeepSkillWorld : version === "alexandria-lives-2" ? previousDeepBaseWorld : version === "alexandria-lives-1" ? previousVocationWorld : version === DEMO_WORLD_VERSION
-    ? currentDemo
-    : version === LEGACY_DEMO_WORLD_VERSION
-      ? legacyDemo
-      : version === RANKED_WORLD_VERSION
-        ? ranked
-        : null;
-  if (!pack) throw new Error(`Unknown life world: ${version}`);
-  return ensureDemoDeeds(pack as unknown as WorldPack);
+  const packs: Record<string, unknown> = {
+    [LIVES_WORLD_VERSION]: currentLife,
+    "alexandria-lives-5": life5, "alexandria-lives-4": life4, "alexandria-lives-3": life3,
+    "alexandria-lives-2": life2, "alexandria-lives-1": life1,
+    "alexandria-deep-1": deep1, "alexandria-figures-1": figures1,
+    [DEMO_WORLD_VERSION]: currentDemo, [LEGACY_DEMO_WORLD_VERSION]: legacyDemo, [RANKED_WORLD_VERSION]: ranked,
+  };
+  if (!Object.hasOwn(packs, version)) throw new Error(`Unknown life world: ${version}`);
+  return ensureDemoDeeds(packs[version] as WorldPack);
 }

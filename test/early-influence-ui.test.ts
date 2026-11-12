@@ -3,9 +3,9 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, Effect, WorldPack } from "../src/types.ts";
 import previous from "../worlds/alexandria-0.25.0.json" with { type: "json" };
-import { activeEarlyInfluences, earlyInfluences, practiceBonus, previewEarlyInfluences } from "../client/early-influences.ts";
-import { compactSkillPreview, choiceProgressFeedback } from "../client/compact-skill.ts";
-import { getSkillImpact } from "../client/skill-impact.ts";
+import { activeEarlyInfluences, earlyInfluences, practiceBonus, previewEarlyInfluences } from "../client/models/early-influences.ts";
+import { compactSkillPreview, choiceProgressFeedback } from "../client/models/compact-skill.ts";
+import { getSkillImpact } from "../client/models/skill-impact.ts";
 
 const CLAY = "remembered-clay";
 const MUSIC = "remembered-music";

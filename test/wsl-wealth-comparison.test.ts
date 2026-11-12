@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Effect, LifeState, Origin, WorldPack } from "../src/types.ts";
-import { formatWealthPercentile, getWealthComparison } from "../client/wealth-comparison.ts";
+import { formatWealthPercentile, getWealthComparison } from "../client/models/wealth-comparison.ts";
 
 function origin(id: string, weight: number, min?: number, max = min, effects: Effect[] = []): Origin {
   return { id, title: id, text: "A reference household.", weight, effects,

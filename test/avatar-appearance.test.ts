@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getAvatarAppearance, AVATAR_APPEARANCE_ORIGINS } from "../client/avatar-appearance.ts";
-import { AVATAR_ORIGIN_IDS, AVATAR_STAGES } from "../client/life-background.ts";
-import type { AvatarSex, AvatarStage } from "../client/life-background.ts";
+import { getAvatarAppearance, AVATAR_APPEARANCE_ORIGINS } from "../client/models/avatar-appearance.ts";
+import { AVATAR_ORIGIN_IDS, AVATAR_STAGES } from "../client/models/life-background.ts";
+import type { AvatarSex, AvatarStage } from "../client/models/life-background.ts";
 import { renderAvatarPortrait } from "../scripts/build-avatar-assets.mjs";
 
 function pixels(svg: string) {

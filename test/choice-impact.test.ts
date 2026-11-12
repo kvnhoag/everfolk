@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, Effect, WorldPack } from "../src/types.ts";
-import { formatImpactDelta, getChoiceImpact } from "../client/choice-impact.ts";
+import { formatImpactDelta, getChoiceImpact } from "../client/models/choice-impact.ts";
 
 function option(branches: Effect[][], weights = branches.map(() => 1)): Choice {
   return { id: "decide", text: "Make a choice", outcomes: branches.map((effects, index) => ({

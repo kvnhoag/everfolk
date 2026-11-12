@@ -15,7 +15,7 @@ export default defineConfig(async () => {
         compatibility_flags: ["nodejs_compat"],
         d1_databases: [{ binding: "DB", database_name: "everfolk-content", database_id: "00000000-0000-4000-8000-000000000000" }],
         // Public ranked-life settings. The verifier secret RANKED_VERIFIER_SECRET is a secret (.dev.vars locally).
-        vars: { RANKED_CONTRACT_ID: "everfolk-lives-11101338.testnet", NEAR_RPC_URL: "https://test.rpc.fastnear.com" },
+        vars: { RANKED_CONTRACT_ID: "everfolk-albums-11121956.testnet", NEAR_RPC_URL: "https://test.rpc.fastnear.com" },
       },
     })],
   };

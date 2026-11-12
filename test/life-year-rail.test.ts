@@ -14,7 +14,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LifeYearRail } = await import("../client/LifeYearRail.tsx");
+const { default: LifeYearRail } = await import("../client/components/LifeYearRail.tsx");
 hooks.deregister();
 
 function render(age: number, birthYear = -350) {

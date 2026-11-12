@@ -3,8 +3,8 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "../client/pause-state.ts";
-import type { PauseContext } from "../client/pause-state.ts";
+import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "../client/models/pause-state.ts";
+import type { PauseContext } from "../client/models/pause-state.ts";
 
 const living: PauseContext = { hasBegun: true, phase: "ready" };
 const pending: PauseContext = { hasBegun: true, phase: "choice" };

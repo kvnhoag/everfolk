@@ -1,7 +1,7 @@
 // In-memory D1 stand-in backed by node:sqlite, with every drizzle migration applied.
 import { readFileSync, readdirSync } from "node:fs";
 import { DatabaseSync } from "node:sqlite";
-import type { ContentDatabase, D1Statement, StatementResult } from "../../server/store.ts";
+import type { ContentDatabase, D1Statement, StatementResult } from "../../server/db/types.ts";
 
 class TestStatement implements D1Statement {
   values: unknown[] = [];

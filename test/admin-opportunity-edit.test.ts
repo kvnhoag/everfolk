@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Choice } from "../src/types.ts";
-import { removeChoiceOutcome, renameChoiceOutcome } from "../client/admin/opportunity-edit.ts";
+import { removeChoiceOutcome, renameChoiceOutcome } from "../client/models/admin/opportunity-edit.ts";
 
 function opportunity(): Choice {
   return {

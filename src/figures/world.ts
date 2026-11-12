@@ -4,7 +4,8 @@ import type { VocationAction } from "../vocations/types.ts";
 import { biographyFor } from "../../chain/catalog/figure-biographies.ts";
 import { FIGURE_RANK_POLICY } from "../../chain/catalog/figure-ranks.ts";
 
-export const FIGURE_PATH_WORLD_VERSION = "alexandria-lives-4";
+export const FIGURE_PATH_WORLD_VERSION = "alexandria-lives-6";
+export const DEEP_FIGURE_PATH_WORLD_VERSION = "alexandria-figures-1";
 const all = (...conditions: Condition[]): Condition => ({ type: "all", conditions });
 const any = (...conditions: Condition[]): Condition => ({ type: "any", conditions });
 const skill = (id: string, value: number): Condition => ({ type: "skill", skill: id, op: "gte", value });
@@ -150,19 +151,21 @@ const specs: Spec[] = [
 
 /** Build only a new revision; retained packs are never amended at load time. */
 export function buildFigurePathWorld(base: WorldPack): WorldPack {
-  if (!base.capabilities || !base.character || !base.vocations || !base.legacy || !base.demo) throw new Error("Figure paths require the completed deep-skill world.");
+  if ((!base.deepCapabilities && !base.capabilities) || !base.character || !base.vocations || !base.legacy || !base.demo) throw new Error("Figure paths require the completed deep-skill world.");
   if (base.figurePaths) throw new Error("Build figure paths from a retained world without figure-path metadata.");
   const world = structuredClone(base);
-  world.version = FIGURE_PATH_WORLD_VERSION;
+  world.version = world.deepCapabilities ? DEEP_FIGURE_PATH_WORLD_VERSION : FIGURE_PATH_WORLD_VERSION;
   world.title = "Alexandria — Historical lives and earned legacies";
   world.description = "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements.";
   world.figurePaths = [];
   // A sound comparison may find agreement. Keep this repair local to this revision.
-  const comparisonRule = world.capabilities!.rules.find(rule => rule.id === "P3");
+  if (world.deepCapabilities) {
+  const comparisonRule = world.deepCapabilities.rules.find(rule => rule.id === "P3");
   if (!comparisonRule || comparisonRule.proof.type !== "records") throw new Error("The retained research comparison rule is missing.");
   const { disagreementRecorded: _oldDisagreement, ...comparisonFacts } = comparisonRule.proof.match.facts ?? {};
   comparisonRule.proof.match.facts = { ...comparisonFacts, comparisonRecorded: true };
   comparisonRule.proofDescription = "Compare two actual records and record their agreement or disagreement in two distinct comparison records.";
+  }
   world.sources ??= [];
   const def = world.vocations!;
   def.materials.bronze = { price: 18, stock: 240 };
@@ -276,6 +279,13 @@ export function buildFigurePathWorld(base: WorldPack): WorldPack {
         { id: `fig-story-${spec.id}-recheck`, text: "Recheck the result before presenting it", outcomes: [{ id: `fig-story-${spec.id}-recheck-result`, text: "You identify a weak claim and plan a more careful check. You leave a specific question for the next review.", weight: 1, effects: [{ type: "stat", stat: "knowledge", delta: 2 }, { type: "skill", skill: spec.primary, delta: 1 }] }] },
       ],
     });
+  }
+  if (world.lifeStages) {
+    const firstWork = world.lifeStages.stages.findIndex(stage => stage.id === world.lifeStages!.scopes.work);
+    for (const event of world.events) if (event.id.startsWith("fig-story-")) {
+      event.stages = world.lifeStages.stages.slice(Math.max(0, firstWork)).map(stage => stage.id);
+      event.scope = "work";
+    }
   }
   return world;
 }

@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
-  <title>Everfolk</title>
-  <rect x=".75" y=".75" width="38.5" height="38.5" rx="5" fill="#24464b" stroke="#b58a49" stroke-width="1.5"/>
-  <path d="M20 4 21.8 9.2 27 11l-5.2 1.8L20 18l-1.8-5.2L13 11l5.2-1.8L20 4Z" fill="#b58a49"/>
-  <path d="m8.5 8.5 1.5 1.5m21.5-1.5L30 10" stroke="#b58a49" stroke-width="1.2" stroke-linecap="round"/>
-  <path d="M5.5 20c4.8-1.4 9.7-.3 14.5 3.1 4.8-3.4 9.7-4.5 14.5-3.1v13c-4.8-1.4-9.7-.3-14.5 3.1-4.8-3.4-9.7-4.5-14.5-3.1V20Z" fill="#fbf3df" stroke="#b58a49" stroke-width="1.2" stroke-linejoin="round"/>
-  <path d="M20 23.1v13M9.5 24c2.5 0 4.8.7 7 2M9.5 28c2.5 0 4.8.7 7 2m14-6c-2.5 0-4.8.7-7 2m7 2c-2.5 0-4.8.7-7 2" stroke="#24464b" stroke-width="1.1" stroke-linecap="round"/>
-  <path d="M17.3 22v9.3l1.4-.8 1.3 2v-9.4L17.3 22Z" fill="#98584b"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title"><title id="title">Everfolk</title><rect width="64" height="64" rx="10" fill="#284744"/><path fill="#e7e0c9" transform="translate(9.37994 51) scale(0.06231 -0.06231)" d="M32 0 26 32Q48 46 73.25 57.5Q98.5 69 125 79L126 0ZM555 0 428 24 483 205 567 198.5Q568 171 566.5 134.5Q565 98 562.0 62.5Q559 27 555 0ZM150.5 592.5 37.5 606.5 38.5 658H150.5ZM459.5 468 432 631 559.5 658Q561 638.5 559.75 606.0Q558.5 573.5 554.75 537.25Q551 501 544 468ZM111 0V658H262.5V0ZM478.5 281 238.5 291V363L478.5 382ZM544.5 560 229.5 582 154.5 658H559.5ZM158 0 233 81 545.5 102 554.5 0Z"/><path fill="#db9c78" transform="translate(42.6923 51.1302) scale(0.0473373 -0.0473373)" d="M186.5 -39Q172 -33 153.5 -20.75Q135 -8.5 118.0 6.25Q101 21 91 35Q105 63 125.75 89.75Q146.5 116.5 168 129Q185 122.5 202.75 109.5Q220.5 96.5 235.75 82.0Q251 67.5 260 55Q250 29.5 229.5 3.0Q209 -23.5 186.5 -39Z"/></svg>

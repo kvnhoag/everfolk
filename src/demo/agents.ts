@@ -1,3 +1,4 @@
+import { farmSaleReason } from "../capabilities/farming.ts";
 /** Track F — agent decisions, offers, delegation and credits. The engine never talks to the network. */
 import type { Command, LifeState } from "../types.ts";
 import type {
@@ -339,6 +340,7 @@ function acceptReason(ctx: DemoContext, offer: Offer): string | undefined {
   const total = offer.quantity * offer.price;
   switch (offer.kind) {
     case "grain-contract":
+      { const reserveReason = farmSaleReason(ctx.world, life, offer.quantity); if (reserveReason) return reserveReason; }
       if (demo.household.grain < offer.quantity) return `There is not enough grain in your store for this contract (you have ${items("grain", demo.household.grain)}).`;
       if (roleCash(demo, offer.role) < total) return `${capitalised(ROLE_LABEL[offer.role])} can no longer pay ${total} drachmas.`;
       return undefined;

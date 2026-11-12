@@ -1,8 +1,8 @@
 # Deep skill-tree runtime progression · deep-1
 
-**Status:** `deep-1` is integrated for new free-play lives in **`alexandria-lives-3`**, with the 65-node evaluator, work receipts, rewards, 13 service operations and 24 new decisions. Earlier saved lives retain their original packs. This record does not claim a deployed ranked-contract update, a measured mastery cohort or completed historical-title paths.
+**Status:** `deep-1` is integrated for new free-play lives in **`alexandria-deep-1`**, with the 65-node evaluator, work receipts, rewards, 13 service operations and 24 new decisions. Earlier saved lives retain their original packs. This record does not claim a deployed ranked-contract update, a measured mastery cohort or completed historical-title paths.
 
-This implements the agreed [65-node design](design.md) using [machine-readable proofs](../../src/capabilities/rules.ts), [operation definitions](../../src/capabilities/operations.ts), [reward quotes](../../src/capabilities/rewards.ts), [funded service execution](../../src/capabilities/services.ts) and [events](../../src/capabilities/events.ts). Numerical costs and gains are authored gameplay balance, not reconstructed historical measurements.
+This implements the agreed [65-node design](design.md) using [machine-readable proofs](../../src/deep-capabilities/rules.ts), [operation definitions](../../src/deep-capabilities/operations.ts), [reward quotes](../../src/deep-capabilities/rewards.ts), [funded service execution](../../src/deep-capabilities/services.ts) and [events](../../src/deep-capabilities/events.ts). Numerical costs and gains are authored gameplay balance, not reconstructed historical measurements.
 
 ## Stats and proficiencies
 
@@ -54,10 +54,12 @@ Existing supported-branch events are adapted for the new revision: one-event mas
 
 - Earlier free-play worlds retain their exact content and fingerprints. The integration uses a new birth revision, not a silent rewrite of `alexandria-lives-1` or `alexandria-lives-2`.
 - Military, Seafaring, Music/performance and Court/rulership deep branches remain **Unavailable** until their own rules are authored. Existing unrelated activities are not presented as completed deep branches.
-- The retained `alexandria-lives-3` pack remains the deep-tree foundation. Its successor, `alexandria-lives-4`, implements eleven [figure-specific paths](../figure-paths.md), contribution titles and separate defining achievements. Deployed ranked/NFT minting rules remain separate.
+- The retained `alexandria-deep-1` pack remains the deep-tree foundation. Its successor, `alexandria-figures-1`, implements eleven [figure-specific paths](../figure-paths.md), contribution titles and separate defining achievements. Deployed ranked/NFT minting rules remain separate.
 - Real-engine full-path tests cover all eight depth-10 endpoints, including actual annual commands, paid inputs, funded contracts and registered assessment work. These use high-proficiency, resource-rich fixtures to check mechanical reachability; they do not estimate ordinary-life success rates. Save/load and replay checks protect the recorded progression.
 - The design target of 50–60% of normally focused lives reaching one depth-10 specialization is **not a measured result**. Representative cohort simulations and balance checks are still required before making that claim. Repository-wide validation is recorded below.
 
 ## Validation
 
 The capability, retained-vocation and household checks pass (108 tests), and the complete TypeScript check passes. Real engine commands reach all eight depth-10 endpoints; saved lives load and replay identically. These mechanics fixtures start with high proficiency and generous resources, so they do not measure normal-life balance. The final wider repository run reports 1,513 passing tests and 19 failures (1,532 total). The remaining failures are in birth-resource, economy, content-version, moneylender/event-priority and legacy UI expectations; none is in the capability suites. This is not a clean repository-wide release check.
+
+The integrated current free-play release is `alexandria-lives-6`, which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.

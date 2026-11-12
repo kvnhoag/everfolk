@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, WorldPack } from "../src/types.ts";
-import { compactSkillPreview, compactSkillView, choiceProgressFeedback } from "../client/compact-skill.ts";
+import { compactSkillPreview, compactSkillView, choiceProgressFeedback } from "../client/models/compact-skill.ts";
 
 function fixture(choice: Choice): WorldPack {
   return {

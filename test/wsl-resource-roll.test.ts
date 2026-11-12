@@ -8,7 +8,7 @@ import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import { getAssetValue, getNetWorth } from "../src/economy.ts";
 import type { WorldPack } from "../src/types.ts";
-import { BIRTH_ROLL_DURATION_MS, getBirthDigitReels, getBirthRollResources, getBirthRollStats } from "../client/birth-stat-roll.ts";
+import { BIRTH_ROLL_DURATION_MS, getBirthDigitReels, getBirthRollResources, getBirthRollStats } from "../client/models/birth-stat-roll.ts";
 
 const hooks = registerHooks({
   load(url, context, nextLoad) {
@@ -19,7 +19,7 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: BirthStatRoll } = await import("../client/BirthStatRoll.tsx");
+const { default: BirthStatRoll } = await import("../client/components/BirthStatRoll.tsx");
 hooks.deregister();
 
 function resourceWorld(): WorldPack {

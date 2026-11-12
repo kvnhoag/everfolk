@@ -1,7 +1,6 @@
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
 import { householdView } from "../../src/demo/household.ts";
-import { isDemoWorld } from "./screen.ts";
 import { RESOURCE_IDS, RESOURCES } from "./resources.ts";
 import type { ResourceId } from "./resources.ts";
 
@@ -37,7 +36,10 @@ function touches(entry: { id: string; text: string }): ResourceId[] {
 
 function lastYearLines(life: LifeState): Record<ResourceId, string[]> {
   const lines = Object.fromEntries(RESOURCE_IDS.map(id => [id, [] as string[]])) as Record<ResourceId, string[]>;
-  for (const entry of life.journal) {
+  // In-year trades have the same age as the harvest, but follow the settlement block.
+  let end = life.journal.length - 1;
+  while (end >= 0 && !(life.journal[end].age === life.age && JOURNAL_RESOURCES.some(rule => life.journal[end].id.startsWith(rule.prefix)))) end--;
+  for (const entry of life.journal.slice(0, end + 1)) {
     if (entry.age !== life.age) continue;
     for (const id of new Set(touches(entry))) lines[id] = [...lines[id], entry.text];
   }
@@ -50,7 +52,7 @@ function flows(entries: readonly [string, number][]): StorehouseFlow[] {
 
 /** Read-only household view of every resource; null when the world has no demo economy. */
 export function storehouseRows(world: WorldPack, life: LifeState): StorehouseRow[] | null {
-  if (!isDemoWorld(world) || !world.demo || !life.demo) return null;
+  if (!world.demo || !life.demo) return null;
   const typed = life as LifeStateWithDemo;
   const view = householdView(world.demo, typed, world);
   const { household, goods } = typed.demo;

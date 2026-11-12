@@ -5,11 +5,12 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
+import { createEngine } from "../src/engine.ts";
 import type { WorldPack } from "../src/types.ts";
 import { demoEngine } from "./fixtures/demo/world.ts";
 import { householdView } from "../src/demo/household.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
-import { RESOURCE_IDS } from "../client/demo/resources.ts";
+import { RESOURCE_IDS, RESOURCES } from "../client/demo/resources.ts";
 import { mentionedResources, storehouseRows } from "../client/demo/storehouse-model.ts";
 
 const hooks = registerHooks({
@@ -21,6 +22,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
+const { ResourceGlyph } = await import("../client/demo/ResourceBar.tsx");
+const { default: PixelIcon } = await import("../client/components/PixelIcon.tsx");
 const { default: Storehouse } = await import("../client/demo/Storehouse.tsx");
 hooks.deregister();
 
@@ -85,7 +88,7 @@ test("storehouse is null off the demo world", () => {
 
 test("Storehouse renders icons and the empty note", () => {
   const html = renderToStaticMarkup(createElement(Storehouse, { rows: rows() }));
-  assert.match(html, /aria-label="Storehouse"/);
+  assert.match(html, /aria-label="Yearly resource details"/);
   assert.match(html, /<title[^>]*>Grain<\/title>/);
   assert.match(html, /Nothing recorded yet\./);
   assert.match(html, /Coming year/);
@@ -106,4 +109,37 @@ test("trade text is matched by whole word, tolerating plurals", () => {
   assert.deepEqual(mentionedResources("You buy 2 oxen from the merchant."), ["ox"]);
   assert.deepEqual(mentionedResources("You sell 3 bolts of Coan silk."), ["silk"]);
   assert.deepEqual(mentionedResources("You buy 2 donkeys."), ["donkey"]);
+});
+
+
+test("last year stops at settlement and excludes a later trade at the same age", () => {
+  let life = engine.start("storehouse-cutoff");
+  for (let i = 0; i < 40 && life.phase !== "ended"; i++) {
+    life = life.phase === "choice" ? engine.choose(life, engine.getChoices(life)[0].id) : engine.advance(life);
+    if (life.journal.some(entry => entry.id === "household-harvest" && entry.age === life.age)) break;
+  }
+  const trade = { type: "activity" as const, id: "market-trade", text: "You buy 3 measures of grain for 6 drachmas.", age: life.age, year: life.year };
+  const afterTrade = { ...life, journal: [...life.journal, trade] };
+  assert.ok(rows(afterTrade).some(row => row.lastYear.some(line => /harvest/i.test(line))));
+  assert.ok(rows(afterTrade).every(row => !row.lastYear.includes(trade.text)));
+});
+
+
+test("the resource bar and economy controls share the inventory icon set", () => {
+  for (const id of RESOURCE_IDS) {
+    const glyph = renderToStaticMarkup(createElement(ResourceGlyph, { id: id === "drachmas" ? "cash" : id }));
+    const shared = renderToStaticMarkup(createElement(PixelIcon, { name: RESOURCES[id].icon, size: 14 }));
+    assert.ok(glyph.includes(shared), `${id} uses the shared icon`);
+  }
+});
+
+
+test("new artisan births retain the shared household resource details", () => {
+  const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-1.json", import.meta.url), "utf8")) as WorldPack;
+  const life = createEngine(world).start("artisan-inventory-details");
+  const details = storehouseRows(world, life);
+  assert.ok(details, "the new birth world has the same household economy");
+  assert.equal(details.length, RESOURCE_IDS.length);
+  assert.equal(details.find(row => row.id === "grain")!.amount, life.demo!.household.grain);
+  assert.ok(details.find(row => row.id === "grain")!.coming.length > 0);
 });

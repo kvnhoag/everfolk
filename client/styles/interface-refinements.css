@@ -1,0 +1,66 @@
+/* Two fonts across the game, menus, dialogs and content studio. */
+.compact-skills .compact-skill-tree-open{display:flex;align-items:center;justify-content:center;gap:10px;width:fit-content;max-width:calc(100% - 28px);margin:10px 14px 12px auto;padding:6px 12px;min-height:32px;border:1px solid #3d7069;border-radius:2px;background:#1c423e;color:#f8f1df;font-size:11px;font-weight:700;cursor:pointer;box-shadow:none}
+.compact-skills .compact-skill-tree-open:hover{background:#2a5e58;border-color:#e2b86b;color:#fff8e7}
+:root{--ef-body:"DM Sans",sans-serif;--ef-heading:"Libre Caslon Display",serif}
+body{font-family:var(--ef-body)!important}
+body *{font-family:inherit!important}
+body :is(h1,h2,h3),body .brand{font-family:var(--ef-heading)!important}
+/* Sharp Roguelike / ResourceBar aesthetic across all main dashboard panels */
+.life-scene-frame,.game-dashboard .character-panel,.life-overview,.life-moment,.game-dashboard .inline-decision,.life-year-rail,.compact-life-record,.game-dashboard .dashboard-skills>.compact-skills,.game-dashboard .life-support-grid>.household-summary{
+  border-radius:2px;
+  border:2px solid #5a4228;
+  box-shadow:inset 0 1px 0 #fffdf8;
+}
+.everfolk-game .life-session-bar{border-radius:2px;border:2px solid #3a626c;border-left:4px solid #e6c173;background:#17343d;color:#f9f1dc}
+
+/* Flatten the game interface without changing its artwork or control colors. */
+:is(.everfolk-game, dialog, .skill-tree-preview),
+:is(.everfolk-game, dialog, .skill-tree-preview) *,
+:is(.everfolk-game, dialog, .skill-tree-preview)::before,
+:is(.everfolk-game, dialog, .skill-tree-preview)::after,
+:is(.everfolk-game, dialog, .skill-tree-preview) *::before,
+:is(.everfolk-game, dialog, .skill-tree-preview) *::after,
+dialog::backdrop {
+  box-shadow:none !important;
+  text-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+}
+/* One record title: Nile Malachite green HUD disclosure is the panel heading. */
+.game-dashboard .chronicle-preview.life-record-panel{padding:0;background:#f8f2e2;border:2px solid #496e58;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8;overflow:hidden}
+.everfolk-game .game-dashboard .life-support-grid .life-record-panel>summary{background:#223c2e;color:#f9f1dc;padding:11px 15px;border:0;min-height:44px;font-size:13px;border-radius:0}
+.game-dashboard .life-record-panel[open]>summary{border-bottom:2px solid #496e58}
+.life-record-title{display:flex;align-items:center;gap:8px;font-weight:700;color:#fff8e7}
+.life-record-panel .life-record-count{color:#dcebd9;font-weight:700}
+.life-record-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 15px 6px;border-bottom:1px solid #d2ded5;background:#f2ede2}
+.life-record-toolbar .chronicle-description{margin:0;font-size:11px;color:#284736;font-weight:700}
+.life-record-toolbar .text-button{font-size:11px;font-weight:700;color:#284736}
+.game-dashboard .life-record-panel>.life-event-feed{margin:0;padding:8px 15px 12px;max-height:220px}
+.life-event-feed .life-year-overview,.life-event-feed .life-entry-overview{flex-direction:column;align-items:stretch;gap:8px}
+.life-record-panel .life-event-feed .life-year-headline,.life-record-panel .life-event-feed .life-entry-overview>p{flex:none;width:100%}
+.life-event-feed .life-year-changes{align-self:flex-start;padding-top:0;margin-top:0}
+/* A passive lifetime scale, without a second history navigation. */
+.game-dashboard>.life-year-rail{margin:0 0 12px;padding:10px 15px 9px}
+.game-dashboard>.life-year-rail .life-year-rail-heading{margin:0 0 11px}
+.life-year-stop-label{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:16px;color:#8e7d62}
+.life-year-stop.is-lived .life-year-stop-label{color:var(--ink)}
+/* Skills remain one native, keyboard-operable disclosure with Egyptian Faience Teal header. */
+.game-dashboard .dashboard-skills .compact-skills:has(>.compact-skill-disclosure){padding:0;overflow:hidden}
+.compact-skill-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;padding:11px 15px;min-height:48px;background:#1c423e;color:#f8f1df}
+.compact-skill-disclosure[open]>summary{border-bottom:2px solid #3d7069}
+.compact-skill-disclosure>summary::-webkit-details-marker{display:none}
+.compact-skill-disclosure>summary .eyebrow{display:block;color:#e2b86b!important;font-size:9px;letter-spacing:.12em}
+.skill-paths-title{display:block;font-size:17px;color:#f8f1df;font-weight:600}
+.skill-disclosure-arrow{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-right:4px;margin-top:-4px;color:#e2b86b}
+.compact-skill-disclosure[open] .skill-disclosure-arrow{transform:rotate(225deg);margin-top:4px}
+.compact-skill-disclosure>summary:focus-visible{outline:2px solid #e2b86b;outline-offset:-3px}
+.compact-your-skills{padding:0 14px 14px;border-top:1px solid #cbb692}
+.compact-your-skills>h3{margin:14px 0 12px;font-size:18px}
+.compact-your-skills .compact-skill-branch h4{font-size:11px;font-weight:600}
+.game-dashboard .compact-your-skills .compact-skill-node.is-unlearned{background:#eeede8;border-color:#d5d3cd;color:#7b7c76;box-shadow:none}
+.game-dashboard .compact-your-skills .is-unlearned :is(.compact-skill-name,.compact-skill-name small,.compact-skill-state,.compact-skill-growth){color:#7b7c76}
+.game-dashboard .compact-your-skills .is-unlearned .pixel-icon{color:#969890}
+.game-dashboard .compact-your-skills .is-unlearned meter::-webkit-meter-optimum-value{background:#a5a7a0}
+.game-dashboard .compact-your-skills .is-unlearned meter::-moz-meter-bar{background:#a5a7a0}
+@media(max-width:600px){.life-record-toolbar{padding-inline:12px}.game-dashboard .life-record-panel>.life-event-feed{padding-inline:12px}.life-year-stop-label{padding-top:17px;gap:4px}}
+.wiki-library{padding:16px 0;margin-bottom:24px;border-bottom:1px solid var(--line)}.wiki-library>details{border:1px solid var(--line);margin-top:10px}.wiki-library>details>summary{cursor:pointer;padding:12px;font-weight:600}.wiki-library article{padding:12px;border-top:1px solid var(--line)}.wiki-library article h4{margin:0 0 6px;font-size:14px}.wiki-library article p{font-size:12px;line-height:1.6;margin:5px 0}

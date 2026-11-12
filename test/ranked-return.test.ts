@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { keepFreePlayOnRankedStart } from "../client/ranked-return.ts";
+import { keepFreePlayOnRankedStart } from "../client/models/ranked-return.ts";
 
 test("starting a ranked life clears a pending fresh start so free play resumes its save afterwards", () => {
   const previousLife = { seed: "x" } as never;

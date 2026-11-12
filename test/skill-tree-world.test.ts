@@ -25,7 +25,7 @@ const expectedPaths = {
 
 test("Alexandria authors thirteen skill nodes with real training routes and no cycles", () => {
   const skills = createEngine(pack).world.character!.skills;
-  assert.equal(pack.version, "0.34.0");
+  assert.equal(pack.version, "0.42.0");
   assert.deepEqual(Object.keys(skills).sort(), Object.keys(expectedPaths).sort());
   const visited = new Set<string>();
   function visit(id: string, path = new Set<string>()) {

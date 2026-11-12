@@ -9,3 +9,7 @@
 @media (max-width:600px){
   .storehouse-row{grid-template-columns:1fr}
 }
+
+.aoe-inventory-drawer .storehouse{grid-column:1/-1}
+.aoe-inventory-drawer .storehouse-row h4{color:#786c57}
+.aoe-inventory-drawer .storehouse-row{border-bottom-color:#cbbba0}

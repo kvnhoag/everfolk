@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { formatSkillValue, skillGrowthProfile } from "../client/skill-growth.ts";
+import { formatSkillValue, skillGrowthProfile } from "../client/models/skill-growth.ts";
 import retained from "../worlds/alexandria-0.26.0.json" with { type: "json" };
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 
@@ -102,8 +102,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: SkillGrowth } = await import("../client/SkillGrowth.tsx");
-const { default: CompactSkillPanel } = await import("../client/CompactSkillPanel.tsx");
+const { default: SkillGrowth } = await import("../client/components/SkillGrowth.tsx");
+const { default: CompactSkillPanel } = await import("../client/components/CompactSkillPanel.tsx");
 hooks.deregister();
 
 test("the learning panel renders the retained and revised real rates and actual mastery coverage", () => {

@@ -31,7 +31,7 @@ export function validateFigurePaths(input: unknown, world: WorldPack, condition:
     if (Reflect.ownKeys(value).length !== value.length + 1) fail(path, "array has extra properties");
     return value;
   };
-  if (!world.capabilities || !world.legacy || !world.character || !world.vocations || !world.demo) fail("world.figurePaths", "figure paths require the deep-tree, achievement, work and household systems");
+  if ((!world.deepCapabilities && !world.capabilities) || !world.legacy || !world.character || !world.vocations || !world.demo) fail("world.figurePaths", "figure paths require the deep-tree, achievement, work and household systems");
   const paths = array(input, "world.figurePaths", 1, 32), usedIds = new Set<string>(), usedAchievements = new Set<string>();
   const activities = new Map(world.character.activities.map(activity => [activity.id, activity]));
   const achievements = new Map(world.legacy.achievements.map(achievement => [achievement.id, achievement]));

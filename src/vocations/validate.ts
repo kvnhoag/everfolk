@@ -1,7 +1,7 @@
-import { CAPABILITY_OPERATIONS } from "../capabilities/operations.ts";
+import { CAPABILITY_OPERATIONS } from "../deep-capabilities/operations.ts";
 import type { VocationDefinition } from "./types.ts";
 /** Strict, bounded JSON rules. All ids are local to this immutable pack. */
-export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never, capabilities = false, figurePaths = false): asserts input is VocationDefinition {
+export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never, deepCapabilities = false, figurePaths = false): asserts input is VocationDefinition {
   const path = "world.vocations";
   function obj(v: unknown, p: string, fields?: string[], required = fields): Record<string, any> {
     if (!v || typeof v !== "object" || Array.isArray(v) || Object.getPrototypeOf(v) !== Object.prototype) fail(p, "expected plain object");
@@ -14,12 +14,12 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     return v as Record<string, any>;
   }
   const n = (v: unknown, p: string, min = 0, max = 1000000): void => { if (!Number.isSafeInteger(v) || (v as number) < min || (v as number) > max) fail(p, `expected integer ${min}..${max}`); };
-  const map = (v: unknown, p: string): Record<string, any> => {
-    const o = obj(v, p); if (Object.keys(o).length > 256) fail(p, "too many entries");
+  const map = (v: unknown, p: string, maximum = 256): Record<string, any> => {
+    const o = obj(v, p); if (Object.keys(o).length > maximum) fail(p, "too many entries");
     for (const k of Object.keys(o)) if (!/^[a-z][a-z0-9-]*$/.test(k)) fail(p, "invalid id");
     return o;
   };
-  const root = obj(input, path, ["materials", "recipes", "actions", "accounts", "demand"]);
+  const root = obj(input, path, ["materials", "recipes", "actions", "accounts", "demand", "trade"], ["materials", "recipes", "actions", "accounts", "demand"]);
   const materials = map(root.materials, path + ".materials"), recipes = map(root.recipes, path + ".recipes");
   for (const [id, value] of Object.entries(materials)) {
     const m = obj(value, `${path}.materials.${id}`, ["price", "stock"]); n(m.price, path, 1, 10000); n(m.stock, path, 0, 100000);
@@ -47,22 +47,28 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
   const accounts = obj(root.accounts, path, ["merchant", "workshop", "school", "council"]);
   for (const value of Object.values(accounts)) n(value, path);
   mapping(root.demand, outputs, 0, 10000);
-  for (const value of Object.values(map(root.actions, path + ".actions"))) {
+  if (root.trade !== undefined) {
+    const trade = obj(root.trade, path + ".trade", ["bidBps", "yearlyDemand"]);
+    n(trade.bidBps, path + ".trade.bidBps", 1, 10000);
+    mapping(trade.yearlyDemand, outputs, 0, 10000);
+  }
+  for (const value of Object.values(map(root.actions, path + ".actions", figurePaths ? 512 : 256))) {
     const a = obj(value, path);
     if (a.kind === "buy") { obj(a, path, ["kind", "item", "quantity"]); if (typeof a.item !== "string" || !Object.hasOwn(materials, a.item)) fail(path, "unknown material"); n(a.quantity, path, 1, 1000); }
     else if (a.kind === "sell") { obj(a, path, ["kind", "item"]); if (!outputs.has(a.item)) fail(path, "unknown product"); }
     else if (a.kind === "make") {
-      obj(a, path, capabilities ? ["kind", "recipe", "quantity", "inspected", "controlledFiring"] : ["kind", "recipe"], ["kind", "recipe"]);
+      obj(a, path, ["kind", "recipe", "quantity", "inspected", "controlledFiring"], ["kind", "recipe"]);
       if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe");
-      if (Object.hasOwn(a,"quantity")) n(a.quantity,path,1,1000);
-      for (const key of ["inspected","controlledFiring"]) if(Object.hasOwn(a,key)&&typeof a[key]!=="boolean")fail(path,"expected inspection/firing boolean");
-    } else if (a.kind === "capability") {
-      obj(a,path,["kind","operation"]);
-      if(!capabilities||typeof a.operation!=="string"||!Object.hasOwn(CAPABILITY_OPERATIONS,a.operation))fail(path,"unknown deep capability operation");
+      if (a.quantity !== undefined) n(a.quantity, path, 1, deepCapabilities ? 1000 : 16);
+      for (const field of ["inspected", "controlledFiring"]) if (a[field] !== undefined && typeof a[field] !== "boolean") fail(path, "expected boolean production option");
+    }
+    else if (a.kind === "capability") {
+      obj(a, path, ["kind", "operation"]);
+      if (!deepCapabilities || typeof a.operation !== "string" || !Object.hasOwn(CAPABILITY_OPERATIONS, a.operation)) fail(path, "unknown deep capability operation");
     }
     else if (a.kind === "work") {
       obj(a, path, figurePaths ? ["kind", "fee", "pay", "payer", "primary", "supports", "practice", "inputs"] : ["kind", "fee", "pay", "payer", "primary", "supports", "practice"], ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]);
-      if (Object.hasOwn(a, "inputs")) { if (a.practice) fail(path, "material-consuming project work cannot be marked as free practice"); mapping(a.inputs, figurePaths ? new Set([...items, "grain"]) : items, 1, 1000); }
+      if (Object.hasOwn(a, "inputs")) { if (a.practice) fail(path, "material-consuming project work cannot be free practice"); mapping(a.inputs, new Set([...items, "grain"]), 1, 1000); }
       training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
       if (!["workshop", "school", "council"].includes(a.payer) || typeof a.practice !== "boolean") fail(path, "invalid work account/practice");
     } else fail(path, "unknown action kind");

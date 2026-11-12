@@ -1,4 +1,4 @@
-import type { CapabilityWorkState } from "../capabilities/runtime-types.ts";
+import type { CapabilityWorkState } from "../deep-capabilities/runtime-types.ts";
 /** Opt-in rules for new lives; earlier packs have no vocation ledger. */
 export interface VocationRecipe {
   title: string;
@@ -23,8 +23,22 @@ export interface VocationDefinition {
   recipes: Record<string, VocationRecipe>;
   actions: Record<string, VocationAction>;
   accounts: { merchant: number; workshop: number; school: number; council: number };
-  /** Finite lifetime buyer demand; there is no unbacked annual refill. */
+  /** Finite lifetime buyer demand; there is no unbacked annual refill (unless `trade` sets yearly buyers). */
   demand: Record<string, number>;
+  /** Track B (lives-4 and later): a craftsperson's trade. Absent: one sale and one bought lot at a time, lifetime buyers. */
+  trade?: VocationTradeConfig;
+}
+/**
+ * Workshop trade for a full-time craftsperson. A make action buys its missing inputs from the supplier,
+ * a sale sells the whole lot to funded buyers, buyers return each year, and the supplier restocks each
+ * year by paying outside sellers for what arrives. Money only moves between finite accounts and the household
+ * (or out of the town for restocked materials), never appears.
+ */
+export interface VocationTradeConfig {
+  /** Share of a product's value the merchant pays, basis points (older packs: 8000, a 25% markup). */
+  bidBps: number;
+  /** Buyers each product has again at the start of each year. */
+  yearlyDemand: Record<string, number>;
 }
 export interface VocationState {
   capabilityWork?: CapabilityWorkState;
@@ -36,5 +50,5 @@ export interface VocationState {
   demand: Record<string, number>;
   completed: Record<string, number>;
   workedAge: number | null;
-  project?: { recipe: string; completedYears: number; quality: number; quantity?: number; inspected?: boolean; controlledFiring?: boolean; inputPaid?: boolean };
+  project?: { recipe: string; completedYears: number; quality: number; outputQuantity?: number; quantity?: number; inspected?: boolean; controlledFiring?: boolean; inputPaid?: boolean };
 }

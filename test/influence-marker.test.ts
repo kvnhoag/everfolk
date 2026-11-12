@@ -10,8 +10,8 @@ import type { JournalEntry, WorldPack } from "../src/types.ts";
 import ranked from "../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
 import sample from "../worlds/alexandria-sample.json" with { type: "json" };
 import { FIGURE_ACTIONS, NPC_ACTIONS } from "../chain/ids.ts";
-import { influenceActionId, influenceMarker } from "../client/influence-marker.ts";
-import { buildLifeEvents } from "../client/life-events.ts";
+import { influenceActionId, influenceMarker } from "../client/models/influence-marker.ts";
+import { buildLifeEvents } from "../client/models/life-events.ts";
 
 const rankedWorld = ranked as unknown as WorldPack;
 const SOURCE = { contractId: "everfolk-lives.testnet", tokenId: "7" };
@@ -88,7 +88,7 @@ const hooks = registerHooks({ load(url, context, next) {
   if (url.endsWith(".tsx")) return { format: "module", shortCircuit: true, source: ts.transpileModule(readFileSync(new URL(url), "utf8"), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 }, fileName: new URL(url).pathname }).outputText };
   return next(url, context);
 } });
-const { default: LifeEventFeed } = await import("../client/LifeEventFeed.tsx");
+const { default: LifeEventFeed } = await import("../client/components/LifeEventFeed.tsx");
 hooks.deregister();
 
 test("the feed renders the marker with text and shape, not colour alone", () => {

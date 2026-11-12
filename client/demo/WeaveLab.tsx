@@ -1,9 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-import App from "../App.tsx";
-import LoadingScreen from "../LoadingScreen.tsx";
+import App from "../screens/App.tsx";
+import LoadingScreen from "../screens/LoadingScreen.tsx";
 import ChainLayer, { leaveChainRoute, useChainRoute } from "../chain/ChainLayer.tsx";
-import Web3Navigation from "../chain/Web3Navigation.tsx";
 import type { ChainBackend } from "../chain/chain-backend.ts";
 import {
   DEMO_LIFE_A_OWNER,
@@ -16,7 +15,7 @@ import {
 } from "../chain/demo-scenario.ts";
 import { beginRankedSession } from "../chain/ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "../chain/practice-verifier.ts";
-import { selectWorldPack } from "../session.ts";
+import { selectWorldPack } from "../lib/world-session.ts";
 import { GRANARY_GRAIN } from "../../chain/catalog/demo-deeds.ts";
 import { householdView } from "../../src/demo/household.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
@@ -127,9 +126,6 @@ export default function WeaveLab({ initialPreset = "granary" }: { initialPreset?
 
   return (
     <>
-      <div className="web3-home-bar" hidden={chainModalOpen}>
-        <Web3Navigation backend={backend} onExplore={() => leaveChainRoute()} />
-      </div>
       <App
         key={`weave-${preset}-${prepared.session.life.life_id}-${sessionEpoch}`}
         worldPickerOpen={chainModalOpen}

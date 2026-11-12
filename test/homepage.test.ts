@@ -17,7 +17,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: MainMenu } = await import('../client/MainMenu.tsx');
+const { default: MainMenu } = await import('../client/screens/MainMenu.tsx');
 hooks.deregister();
 const engine = createEngine(world);
 const noop = () => {};
@@ -32,9 +32,13 @@ test('homepage renders the historical world with live canvas and retains all men
   const before = structuredClone(life);
   const html = render();
   assert.match(html, /350 BCE/);
-  assert.match(html, /Before Alexandria, there was Rhakotis/);
+  assert.match(html, /Everfolk/);
+  assert.doesNotMatch(html, /Live another story/);
+  assert.doesNotMatch(html, /A LIFE SIMULATOR/);
+  assert.doesNotMatch(html, /Your story is saved in this browser/);
+  assert.doesNotMatch(html, /Before Alexandria/);
   assert.match(html, /<canvas/);
-  assert.match(html, /ef-royal-wordmark/);
+  assert.match(html, /everfolk-wordmark-cream\.svg/);
   assert.match(html, /THE ANCIENT WORLD/);
   assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-classical-wordmark/);
   for (const label of ['Begin your life','Choose a world','Past lives','Legacy gallery','History &amp; sources','Weave Mode']) assert.ok(html.includes(label),label);

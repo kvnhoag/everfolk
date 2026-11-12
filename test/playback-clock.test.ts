@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPlaybackClock, playbackYearKey } from "../client/playback-clock.ts";
+import { createPlaybackClock, playbackYearKey } from "../client/models/playback-clock.ts";
 
 const YEAR = 25_000;
 const key = "life:year-1";

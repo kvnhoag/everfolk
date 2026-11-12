@@ -4,7 +4,7 @@ import { createEngine } from "../src/engine.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import demo from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import ranked from "../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
-import { buildCareerEconomyTree } from "../client/career-economy-tree.ts";
+import { buildCareerEconomyTree } from "../client/models/career-economy-tree.ts";
 
 const world = demo as unknown as WorldPack;
 const engine = createEngine(world);

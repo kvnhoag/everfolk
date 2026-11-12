@@ -35,7 +35,7 @@ function pathRuns(rects) {
 (async () => {
   const { BANNER_SITUATIONS, createBannerLayers } = await import(pathToFileURL(path.join(__dirname, "banner-art-scenes.mjs")));
   const { ACTOR_STAGES, createActorLayers } = await import(pathToFileURL(path.join(__dirname, "banner-art-actors.mjs")));
-  const { AVATAR_APPEARANCE_ORIGINS, getAvatarAppearance } = await import(pathToFileURL(path.join(root, "client/avatar-appearance.ts")));
+  const { AVATAR_APPEARANCE_ORIGINS, getAvatarAppearance } = await import(pathToFileURL(path.join(root, "client/models/avatar-appearance.ts")));
   const jobs = [];
   if (!actorsOnly) for (const id of BANNER_SITUATIONS) jobs.push({ id, kind: "scene", layers: createBannerLayers(id) });
   if (!scenesOnly) for (const origin of [null, ...AVATAR_APPEARANCE_ORIGINS]) for (const stage of ACTOR_STAGES) for (const sex of ["male", "female"]) for (let variant = 0; variant < 3; variant++) {

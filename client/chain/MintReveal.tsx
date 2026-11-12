@@ -1,5 +1,5 @@
 import { useId } from "react";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import type { MintRevealView } from "./life-report-model.ts";
 import "./life-report.css";
@@ -22,7 +22,9 @@ export default function MintReveal({ view, affection, practice = false, onClose 
       <p>{view.lead}</p>
     </header>
     <div className="ledger-body">
-      {view.figureId
+      {view.portraitMedia
+        ? <div className="mint-reveal-portrait"><img src={view.portraitMedia} alt={view.title} className="stage-reveal-portrait" /></div>
+        : view.figureId
         ? <FigureArtwork figureId={view.figureId} />
         : <div className="ledger-emblem" aria-hidden="true"><PixelIcon name={view.emblem ?? "sun"} size={64} /><span>{view.kindLabel}</span></div>}
       <ol className="ledger-rows">{view.rows.map(row => <li className="ledger-row" key={row.label}>

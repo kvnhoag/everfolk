@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Effect, LifeState, Origin, WorldPack } from "../src/types.ts";
-import { formatWealthPercentile, getWealthComparison } from "../client/wealth-comparison.ts";
+import { formatWealthPercentile, getWealthComparison } from "../client/models/wealth-comparison.ts";
 
 function origin(id: string, weight: number, min?: number, max = min, effects: Effect[] = []): Origin {
   return { id, title: id, text: "A reference household.", weight, effects,
@@ -93,6 +93,59 @@ test("enormous ranges are ranked analytically without enumeration", { timeout: 1
   const comparison = getWealthComparison(world, lifeWith(world, 500_000_000_000))!;
   assert.equal(comparison.medianWealth, 500_000_000_000);
   assert.equal(comparison.percentile, 500_000_000_000 / 1_000_000_000_001 * 100);
+});
+
+test("household benchmarks include independent resource rolls at market prices", () => {
+  const world = fixture();
+  world.economy!.uncappedResources = true;
+  world.origins = [origin("default", 1, 0, 2)];
+  world.economy!.assets[0].initialRange = { min: 0, max: 2 };
+  world.economy!.assets.push({ id: "shares", title: "Shares", description: "Workshop shares.", value: 50, initialRange: { min: 1, max: 2 } });
+  const values: number[] = [];
+  for (let cash = 0; cash <= 2; cash++) for (let tools = 0; tools <= 2; tools++) for (let shares = 1; shares <= 2; shares++) values.push(cash * 10 + tools * 30 + shares * 50);
+  values.sort((a, b) => a - b);
+  const life = lifeWith(world, 0);
+  life.economy!.assets = { tools: 0, shares: 0 };
+  for (let wealth = 0; wealth <= 190; wealth++) {
+    life.economy!.cash = wealth;
+    const comparison = getWealthComparison(world, life)!;
+    assert.ok(Math.abs(comparison.percentile - values.filter(value => value < wealth).length / values.length * 100) < 1e-10, `Wealth ${wealth}`);
+    assert.equal(comparison.medianWealth, values[values.length / 2 - 1]);
+  }
+});
+
+test("origin resource overrides and clamped cash retain inclusive probabilities", () => {
+  const world = fixture();
+  world.economy!.uncappedResources = true;
+  world.stats.wealth.max = 10;
+  world.origins = [origin("default", 1, 0, 10, [{ type: "stat", stat: "wealth", delta: 5 }])];
+  world.economy!.assets[0].initialRange = { min: 9, max: 9 };
+  world.origins[0].assetRanges = { tools: { min: 1, max: 3 } };
+  const values: number[] = [];
+  for (let cash = 0; cash <= 10; cash++) for (let tools = 1; tools <= 3; tools++) values.push(Math.min(10, cash + 5) * 10 + tools * 30);
+  values.sort((a, b) => a - b);
+  const life = lifeWith(world, 0); life.economy!.assets.tools = 0;
+  for (let wealth = 0; wealth <= 200; wealth++) {
+    life.economy!.cash = wealth;
+    const comparison = getWealthComparison(world, life)!;
+    assert.ok(Math.abs(comparison.percentile - values.filter(value => value < wealth).length / values.length * 100) < 1e-10);
+    assert.equal(comparison.medianWealth, values[Math.floor(values.length / 2)]);
+  }
+});
+
+test("very wide cash and resource rolls use analytical pair counting", { timeout: 1000 }, () => {
+  const world = fixture();
+  world.economy!.uncappedResources = true;
+  world.stats.wealth.max = 1_000_000;
+  world.economy!.unitsPerPoint = 1;
+  world.origins = [origin("default", 1, 0, 1_000_000)];
+  world.economy!.assets[0].value = 1;
+  world.economy!.assets[0].initialRange = { min: 0, max: 1_000_000 };
+  const life = lifeWith(world, 0); life.economy!.assets.tools = 0;
+  life.economy!.cash = 1_000_000;
+  const comparison = getWealthComparison(world, life)!;
+  assert.equal(comparison.medianWealth, 1_000_000);
+  assert.ok(Math.abs(comparison.percentile - (1_000_000 / 2_000_002 * 100)) < 1e-10);
 });
 
 test("subnormal weights retain relative household shares", () => {

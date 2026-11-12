@@ -8,7 +8,7 @@ function authoredRecord(world: WorldPack, life: LifeState, achievementId: string
   if (!definition) return;
   return life.accomplishments?.find(record => {
     if (record.achievementId !== achievementId || record.routeId !== definition.routeId || activityId && record.sourceId !== activityId) return false;
-    if (!Number.isSafeInteger(record.age) || record.age < 0 || record.age > life.age || record.year > life.year || record.year !== yearAtAge(world.startYear, record.age)) return false;
+    if (!Number.isSafeInteger(record.age) || record.age < 0 || record.age > life.age || record.year > life.year || record.year !== yearAtAge(life.birthYear ?? world.startYear, record.age)) return false;
     const activity = world.character?.activities.find(candidate => candidate.id === record.sourceId);
     if (activity) {
       return record.age >= (activity.minAge ?? 0) && activity.outcomes.some(outcome =>
@@ -23,7 +23,7 @@ const readable = (id: string) => id.replaceAll("-", " ");
 function requirementText(world: WorldPack, condition: Condition): string {
   const comparison = (op: string) => ({ eq: "exactly", ne: "other than", gt: "above", gte: "at least", lt: "below", lte: "at most" }[op] ?? op);
   switch (condition.type) {
-    case "capability": return `${condition.learned === false ? "Do not hold" : "Learn"} ${world.capabilities?.rules.find(rule => rule.id === condition.node)?.title ?? condition.node} (${condition.node})`;
+    case "capability": return `${condition.learned === false ? "Do not hold" : "Learn"} ${(world.deepCapabilities?.rules.find(rule => rule.id === condition.node)?.title ?? world.capabilities?.nodes.find(rule => rule.id === condition.node)?.title) ?? condition.node} (${condition.node})`;
     case "vocation": {
       const activity = world.character?.activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === condition.action)));
       return `Complete ${condition.count} work year${condition.count === 1 ? "" : "s"}: ${activity?.text ?? readable(condition.action)}`;

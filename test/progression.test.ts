@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import type { ActivityAvailability, Choice, LifeState, StatDefinition, WorldPack } from "../src/types.ts";
 import { applyStatDelta } from "../src/progression.ts";
-import { getChoiceImpact } from "../client/choice-impact.ts";
-import { trainingSkillChanges } from "../client/skill-tree.ts";
+import { getChoiceImpact } from "../client/models/choice-impact.ts";
+import { trainingSkillChanges } from "../client/models/skill-tree.ts";
 import { createEngine } from "../src/index.ts";
 
 const definition = (): StatDefinition => ({

@@ -8,8 +8,9 @@ import ts from "typescript";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import type { LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { getBirthRollStats } from "../client/birth-stat-roll.ts";
-import { hasBirthStatsBeenRevealed, hasLifeBegun, persistBirthPresentation, persistBirthStatsReveal } from "../client/session.ts";
+import { getBirthRollStats } from "../client/models/birth-stat-roll.ts";
+import { hasBirthStatsBeenRevealed, hasLifeBegun } from "../client/queries/lives.ts";
+import { persistBirthPresentation, persistBirthStatsReveal } from "../client/mutations/lives.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -18,9 +19,9 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: CharacterPanel } = await import("../client/CharacterPanel.tsx");
-const { default: HouseholdSummary } = await import("../client/HouseholdSummary.tsx");
-const { default: BirthAvatarPicker } = await import("../client/BirthAvatarPicker.tsx");
+const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
+const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
+const { default: BirthAvatarPicker } = await import("../client/components/BirthAvatarPicker.tsx");
 hooks.deregister();
 const engine = createEngine(pack);
 
@@ -40,8 +41,11 @@ test("neither a future catalog nor a met acquaintance appears in Relationships b
   for (const life of [engine.start("people-ui-birth"), metLife()]) {
     const before = structuredClone(life);
     const html = renderToStaticMarkup(createElement(CharacterPanel, { life, world: engine.world, initialSection: "relationships", onActivity() {} }));
-    assert.doesNotMatch(html, /role="tab"[^>]*>Relationships<|role="tabpanel"[^>]*panel-relationships/);
-    assert.doesNotMatch(html, /<h4>Kleopatra<\/h4>/);
+    assert.match(html, /role="tab"[^>]*>Relationships</);
+    assert.match(html, /No social relationships recorded yet/);
+    const socialPanel = html.split(/id="[^"]+-panel-relationships"/)[1]?.split(/id="[^"]+-panel-children"/)[0];
+    assert.ok(socialPanel);
+    assert.doesNotMatch(socialPanel, /Kleopatra|class="relationship-tags"|aria-label="Relationship with /);
     assert.deepEqual(life, before);
   }
 });

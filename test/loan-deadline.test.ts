@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import type { LifeState } from "../src/types.ts";
-import { getLoanSummary, loanDeadlineWarning } from "../client/loan-summary.ts";
+import { getLoanSummary, loanDeadlineWarning } from "../client/models/loan-summary.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const engine = createEngine(pack);
@@ -103,8 +103,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: LoanDeadlineDialog } = await import("../client/LoanDeadlineDialog.tsx");
-const { MoneylenderNotice } = await import("../client/MoneylenderPanel.tsx");
+const { default: LoanDeadlineDialog } = await import("../client/components/LoanDeadlineDialog.tsx");
+const { MoneylenderNotice } = await import("../client/components/MoneylenderPanel.tsx");
 hooks.deregister();
 
 test("the real reminder dialog and persistent notice expose the due year and manual repayment", () => {

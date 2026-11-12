@@ -4,7 +4,7 @@ import { yearAtAge } from "../src/calendar.ts";
 import { getFigurePaths, getFigurePathProgress, figurePathMissingRequirements } from "../src/figures/progress.ts";
 import type { FigurePathDefinition } from "../src/figures/types.ts";
 import type { AccomplishmentRecord, LifeState, WorldPack } from "../src/types.ts";
-import base from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import base from "../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 
 // These small authored-record fixtures test view/provenance rules; real-engine route
 // feasibility is covered separately by the figure-path integration tests.
@@ -45,7 +45,7 @@ function fixture(options: { id?: string; conditional?: boolean; circle?: boolean
     age: 40, year: yearAtAge(world.startYear, 40), phase: "ready", rngState: 42,
     stats: { health: 100, knowledge: 100, bonds: 100, wealth: 100 }, flags: {},
     character: { skills: Object.fromEntries(Object.keys(world.character!.skills).map(id => [id, 100])) },
-    capabilities: { learned: {}, evidence: [] }, vocations: { completed: {} }, accomplishments: [],
+    deepCapabilities: { learned: {}, evidence: [] }, vocations: { completed: {} }, accomplishments: [],
   } as unknown as LifeState;
   const record = (achievementId: string, activityId: string, age = 20): AccomplishmentRecord => ({
     id: achievementId + ":" + age, achievementId, routeId: `figure-${id}`, title: achievementId, description: "A recorded accepted contribution.", kind: "ordinary",
@@ -189,7 +189,7 @@ test("missing requirements explain actual capability and completed-work gaps", (
   assert.equal(next.ready, false);
   assert.ok(next.missingRequirements.some(text => text.includes("P4")));
   assert.ok(next.missingRequirements.some(text => text.includes("work year")));
-  f.life.capabilities!.learned.P4 = { year: f.life.year, evidenceIds: [] };
+  f.life.deepCapabilities!.learned.P4 = { year: f.life.year, evidenceIds: [] };
   f.life.vocations!.completed[f.path.stages[0].workActionId] = 1;
   next = f.progress().nextStage!;
   assert.equal(next.ready, true);

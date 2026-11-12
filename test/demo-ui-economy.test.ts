@@ -9,13 +9,13 @@ import { demoEngine } from "./fixtures/demo/world.ts";
 import { activityGate, beginOrder, demoScreen, orderPreview, sendDemoCommand } from "../client/demo/screen.ts";
 import { availability } from "../src/demo/availability.ts";
 import { storehouseRows } from "../client/demo/storehouse-model.ts";
-import { buildSkillTree, currentSkillTree } from "../client/skill-tree.ts";
+import { buildSkillTree, currentSkillTree } from "../client/models/skill-tree.ts";
 import { EMAIL_SIGN_IN_NOTE } from "../client/demo/labels.ts";
 import { careerEmblem } from "../client/chain/token-page-model.ts";
 import { actionName } from "../client/chain/chain-copy.ts";
 import { ensureDemoDeeds } from "../chain/catalog/demo-deeds.ts";
 import { createEngine } from "../src/index.ts";
-import { influenceMarker } from "../client/influence-marker.ts";
+import { influenceMarker } from "../client/models/influence-marker.ts";
 
 const hooks = registerHooks({
   load(url, context, nextLoad) {
@@ -27,9 +27,11 @@ const hooks = registerHooks({
   },
 });
 const { default: EconomyPanels } = await import("../client/demo/EconomyPanels.tsx");
-const { default: LifeChoiceBoard } = await import("../client/LifeChoiceBoard.tsx");
-const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
-const { default: EventNotificationStack } = await import("../client/EventNotificationStack.tsx");
+const { default: ResourceYearDetails } = await import("../client/demo/Storehouse.tsx");
+const { default: ResourceBar } = await import("../client/demo/ResourceBar.tsx");
+const { default: LifeChoiceBoard } = await import("../client/components/LifeChoiceBoard.tsx");
+const { default: DecisionDialog } = await import("../client/components/DecisionDialog.tsx");
+const { default: EventNotificationStack } = await import("../client/components/EventNotificationStack.tsx");
 hooks.deregister();
 
 const engine = demoEngine();
@@ -195,22 +197,25 @@ test("DecisionDialog popup, EventNotificationStack, LifeChoiceBoard, and styled 
 });
 
 
-test("the Storehouse integrates with the command deck without replacing its market, charts or people", () => {
+test("the inventory details coexist with the command deck without duplicating its resource display", () => {
   const life = engine.start("storehouse-command-deck");
   const screen = demoScreen(engine.world, life)!;
   const storehouse = storehouseRows(engine.world, life)!;
   const before = structuredClone({ life, world: engine.world, screen, storehouse });
   const html = renderToStaticMarkup(createElement(EconomyPanels, {
-    screen, storehouse, life, world: engine.world, activities: engine.getActivities(life),
+    screen, life, world: engine.world, activities: engine.getActivities(life),
     cashText: "12 drachmas", autoPlay: false,
     onTrade() { assert.fail("Rendering sent a trade"); },
     onPlan() { assert.fail("Rendering changed the planting plan"); },
     onAutoPlay() { assert.fail("Rendering changed autoplay"); },
     onDelegate() { assert.fail("Rendering delegated decisions"); },
   }));
-  assert.match(html, /aria-label="Storehouse"/);
-  assert.equal((html.match(/class="storehouse-row"/g) ?? []).length, storehouse.length);
-  assert.match(html, /Coming year/);
+  const details = renderToStaticMarkup(createElement(ResourceYearDetails, { rows: storehouse }));
+  const bar = renderToStaticMarkup(createElement(ResourceBar, { screen, rows: storehouse, cashText: "12 drachmas" }));
+  assert.doesNotMatch(html, /aria-label="Storehouse"|storehouse-row/);
+  assert.match(bar, /Inventory &amp; Granary/);
+  assert.equal((details.match(/class="storehouse-row"/g) ?? []).length, storehouse.length);
+  assert.match(details, /Coming year/);
   for (const label of ["Market &amp; Trade", "Farm &amp; Granary", "Career &amp; Army", "People &amp; Town", "Works &amp; Stewards"]) {
     assert.ok(html.includes(label), label);
   }

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import "../client/styles.css";
-import "../client/interface-refinements.css";
+import "../client/styles/styles.css";
+import "../client/styles/interface-refinements.css";
+import "../client/styles/loading-screen.css";
 
 export const metadata = {
   title: "Everfolk",

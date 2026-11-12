@@ -9,7 +9,7 @@ import { buildFigurePathWorld } from "../src/figures/world.ts";
 import { createEngine } from "../src/engine.ts";
 import { yearAtAge } from "../src/calendar.ts";
 import type { AccomplishmentRecord, ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
-import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import retained from "../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -18,7 +18,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: FigurePaths } = await import("../client/FigurePaths.tsx");
+const { default: FigurePaths } = await import("../client/components/FigurePaths.tsx");
 hooks.deregister();
 
 function fixture(age = 18) {

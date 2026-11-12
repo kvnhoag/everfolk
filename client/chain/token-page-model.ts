@@ -15,6 +15,9 @@ const EVIDENCE_PATH = "/api/ranked/evidence/";
 const NO_EVIDENCE = /^0+$/u;
 
 export function tokenTitle(extra: TokenExtra): string {
+  if (extra.stage_title && extra.character_name) {
+    return extra.kind === "figure" && extra.figure_id ? figureTitle(extra.figure_id) : `${extra.character_name} · ${extra.stage_title}`;
+  }
   return extra.kind === "figure" && extra.figure_id ? figureTitle(extra.figure_id) : GROUP_TITLE[extra.career_group];
 }
 
@@ -36,6 +39,19 @@ function yearText(year: number): string {
   return Number.isSafeInteger(year) && year !== 0 ? formatYear(year) : "?";
 }
 
+const NO_EFFECT_TEXT = "Its effect on later lives is not recorded.";
+
+export interface TokenStory { career: string; lived: string; deed: { name: string; effect: string } }
+
+function tokenStory(extra: TokenExtra): TokenStory {
+  const deed = actionOption(extra.action_id);
+  return {
+    career: GROUP_TITLE[extra.career_group] ?? extra.career_group,
+    lived: `Lived ${yearText(extra.birth_year)} – ${yearText(extra.death_year)}`,
+    deed: { name: deed.name, effect: deed.description || NO_EFFECT_TEXT },
+  };
+}
+
 export interface TokenPageInput {
   tokenId: string;
   token: TokenView;
@@ -53,10 +69,21 @@ export interface TokenPageView {
   kindLabel: string;
   isFigure: boolean;
   figureId?: FigureId | null;
+  portraitMedia?: string | null;
+  stageInfo?: {
+    stageId?: string;
+    stageTitle?: string;
+    fromAge?: number;
+    toAge?: number;
+    district?: string;
+    field?: string | null;
+    tier?: string | number;
+  } | null;
   rarityLabel: string;
   affection: number;
   affectionText: string;
   lifeLine: string;
+  story: TokenStory;
   owner: string;
   isOwner: boolean;
   reach: string;
@@ -81,13 +108,24 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
   const claimable = isOwner && /^\d+$/.test(input.balance) && BigInt(input.balance) > 0n;
   return {
     title: tokenTitle(extra),
-    kindLabel: isFigure ? "Famous figure" : "Person of the city",
+    kindLabel: isFigure ? "Famous figure" : extra.stage_id ? "Stage figure" : "Person of the city",
     isFigure,
     figureId: isFigure ? extra.figure_id : null,
+    portraitMedia: extra.portrait_media ?? null,
+    stageInfo: extra.stage_id ? {
+      stageId: extra.stage_id,
+      stageTitle: extra.stage_title,
+      fromAge: extra.from_age,
+      toAge: extra.to_age,
+      district: extra.district,
+      field: extra.field,
+      tier: extra.tier,
+    } : null,
     rarityLabel: rarityLabel(extra.rarity),
     affection: extra.affection,
     affectionText: `Affection ${extra.affection} / 100`,
     lifeLine: `Lived ${yearText(extra.birth_year)} – ${yearText(extra.death_year)}`,
+    story: tokenStory(extra),
     owner,
     isOwner,
     reach: reachLine(input.stats),
@@ -123,6 +161,7 @@ export interface MarketRow {
   title: string;
   isFigure: boolean;
   figureId?: FigureId | null;
+  portraitMedia?: string | null;
   rarityLabel: string;
   actionName: string;
   seller: string;
@@ -163,6 +202,7 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
       title: token ? tokenTitle(token.extra) : `Token #${listing.token_id}`,
       isFigure: token?.extra.kind === "figure",
       figureId: token?.extra.kind === "figure" ? token.extra.figure_id : null,
+      portraitMedia: token?.extra.portrait_media ?? null,
       rarityLabel: token ? rarityLabel(token.extra.rarity) : "",
       actionName: token ? actionName(token.extra.action_id) : "",
       seller: listing.seller_id,
@@ -176,7 +216,7 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
   });
 }
 
-export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
+export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; portraitMedia?: string | null; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
 
 /** The signed-in player's own kept lives. */
 export function keptRows(tokens: readonly (TokenView & { token_id: string })[]): KeptRow[] {
@@ -184,7 +224,7 @@ export function keptRows(tokens: readonly (TokenView & { token_id: string })[]):
     const isFigure = token.extra.kind === "figure" && token.extra.figure_id !== null;
     return {
       tokenId: token.token_id, href: chainHref({ kind: "token", tokenId: token.token_id }), title: tokenTitle(token.extra), isFigure,
-      figureId: isFigure ? token.extra.figure_id : null, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
+      figureId: isFigure ? token.extra.figure_id : null, portraitMedia: token.extra.portrait_media ?? null, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
       affection: token.extra.affection, emblem: isFigure ? null : careerEmblem(token.extra.career_group),
     };
   });

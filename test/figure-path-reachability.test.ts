@@ -5,7 +5,7 @@ import { buildFigurePathWorld } from "../src/figures/world.ts";
 import { getFigurePaths } from "../src/figures/progress.ts";
 import { figureFixture } from "./helpers/figure-path-fixture.ts";
 import type { Condition, LifeState, WorldPack } from "../src/types.ts";
-import base from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import base from "../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 
 // Mechanical reachability fixtures: resources/health/proficiency are authored,
 // while every encounter, learned capability, work year and title must be earned.
@@ -43,7 +43,7 @@ type Route = ReturnType<typeof fixture>;
 function phiIntroduction(run: Route) {
   run.atAge(12);
   for (const id of ["guided-reading", "argument-exercise"]) run.capWork(id);
-  assert.ok(run.life.capabilities!.learned.P2);
+  assert.ok(run.life.deepCapabilities!.learned.P2);
 }
 
 test("Alexander's living encounter is reachable at 18 without royal birth or the age-28 General job", () => {
@@ -53,7 +53,7 @@ test("Alexander's living encounter is reachable at 18 without royal birth or the
   assert.equal(path.directAvailable, true);
   assert.notEqual(run.life.character!.jobId, "general");
   assert.notEqual(run.life.originId, "royal-household");
-  assert.equal(run.life.capabilities!.learned.PS10, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PS10, undefined);
   run.act(path.definition.encounter.activityId);
   assert.equal(run.path("alexander").encounterMode, "direct");
   assert.equal(run.path("alexander").encounterRecord!.age, 18);
@@ -63,8 +63,8 @@ test("Alexander's living encounter is reachable at 18 without royal birth or the
 test("Aristotle's Lyceum entry is reachable at 18 with moderate skills and actual foundation work", () => {
   const run = fixture({ skill: 35, seed: "young-aristotle-route" });
   phiIntroduction(run); run.atAge(18);
-  assert.equal(run.life.capabilities!.learned.PS10, undefined);
-  assert.equal(run.life.capabilities!.learned.PS9, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PS10, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PS9, undefined);
   const path = run.path("aristotle");
   assert.equal(path.directAvailable, true);
   run.act(path.definition.encounter.activityId);
@@ -135,7 +135,7 @@ function completeLegacy(run: FullRoute, id: string, enter = true, expectedSucces
 function civicProgramme(run: FullRoute) {
   run.researchFoundation();
   for (const action of ["public-address", "public-address", "negotiate-agreement", "negotiate-agreement", "public-budget", "public-service", "coalition-agreement", "coalition-agreement", "policy-project", "policy-project"]) run.cap(action);
-  assert.ok(run.life.capabilities!.learned.PP9);
+  assert.ok(run.life.deepCapabilities!.learned.PP9);
 }
 function buyCargo(run: FullRoute) {
   if (run.life.character!.lastActivityAge === run.life.age || run.life.vocations!.workedAge === run.life.age) run.next();
@@ -145,18 +145,18 @@ function tradeProgramme(run: FullRoute) {
   run.sculptureFoundation();
   run.act("v-buy-papyrus"); run.act("v-buy-ink");
   run.cap("cost-basket");
-  assert.ok(run.life.capabilities!.learned.T2);
+  assert.ok(run.life.deepCapabilities!.learned.T2);
   run.advanceTo(18);
   // The living official is met before later work continues in the revenue tradition.
   run.yearly(run.path("cleomenes").encounter.activityId);
   for (const action of ["price-comparison", "price-comparison", "stock-reconciliation", "stock-reconciliation"]) run.cap(action);
   for (const action of ["supply-plan", "supply-plan", "delivery-order", "delivery-order"]) { buyCargo(run); run.cap(action); }
-  assert.ok(run.life.capabilities!.learned.T7);
+  assert.ok(run.life.deepCapabilities!.learned.T7);
   for (let year = 0; year < 2; year++) {
     run.next(); run.act("v-sell-clay-model"); run.cap("trading-year");
   }
   for (let year = 0; year < 2; year++) { buyCargo(run); run.cap("enterprise-contract"); }
-  assert.ok(run.life.capabilities!.learned.T9);
+  assert.ok(run.life.deepCapabilities!.learned.T9);
 }
 function biasCapstone(world: WorldPack, id: string, success: boolean) {
   const path = world.figurePaths!.find(path => path.id === id)!;
@@ -228,7 +228,7 @@ test("Pytheas's actual funded voyage records earn Epic without inventing a Legen
   const run = figureFixture("complete-pytheas", 18);
   completeLegacy(run, "pytheas");
   assert.equal(run.progress("pytheas").specialTitle!.rank, "Epic");
-  assert.equal(run.life.capabilities!.learned.PS10, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PS10, undefined);
   assert.match(run.path("pytheas").summary, /uncertain|lost|Thule/i);
   run.durable();
 });
@@ -237,8 +237,8 @@ test("Menander's actual writing, rehearsal and staging work earns the Legendary 
   const run = figureFixture("complete-menander", 18);
   completeLegacy(run, "menander");
   assert.equal(run.progress("menander").specialTitle!.rank, "Legendary");
-  assert.equal(run.life.capabilities!.learned.PP10, undefined);
-  assert.equal(run.life.capabilities!.learned.PS10, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PP10, undefined);
+  assert.equal(run.life.deepCapabilities!.learned.PS10, undefined);
   assert.match(run.path("menander").summary, /write|rehearse|comedy/i);
   run.durable();
 });

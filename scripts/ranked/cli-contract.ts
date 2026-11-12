@@ -2,7 +2,7 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import type { Category } from "../../chain/ids.ts";
-import type { Draw, LifeView, LivesContract, MintResult, SignedEvidence } from "../../client/chain/types.ts";
+import type { Draw, LifeView, LivesContract, MintResult, StageMintQuote, StageMintResult, SignedEvidence } from "../../client/chain/types.ts";
 
 const run = promisify(execFile);
 const NEAR_CLI = ["-y", "near-cli-rs@0.31.1"];
@@ -59,6 +59,7 @@ export function createCliContract(contractId: string, accountId: string): LivesC
   const retryMint = async (lifeId: string): Promise<MintResult> => {
     const completed = await mintResult(lifeId);
     if (completed) return completed;
+    if (await viewMethod(contractId, "stage_mint_status", { life_id: lifeId }).catch(() => null)) return (await retryStageMint(lifeId)).tokens[0];
     try {
       await callMethod(accountId, contractId, "retry_mint", { life_id: lifeId }, "0 NEAR", "200.0 Tgas");
     } catch (error) {
@@ -68,8 +69,34 @@ export function createCliContract(contractId: string, accountId: string): LivesC
     if (!result) throw new Error("The committed mint is not complete yet; retry it without another mint fee.");
     return result;
   };
+  const stageMintResult = (lifeId: string) => viewMethod<StageMintResult | null>(contractId, "stage_mint_result", { life_id: lifeId });
+  const retryStageMint = async (lifeId: string): Promise<StageMintResult> => {
+    const completed = await stageMintResult(lifeId); if (completed) return completed;
+    try { await callMethod(accountId, contractId, "retry_stage_mint", { life_id: lifeId }); }
+    catch (error) { if (!(error instanceof UnconfirmedTransactionError)) throw error; }
+    const result = await stageMintResult(lifeId);
+    if (!result) throw new Error("The stage album is committed; retry it without another mint fee.");
+    return result;
+  };
   return {
+    stageMintResult,
+    retryStageMint,
+    stageMintQuote: (lifeId, signed, action) => viewMethod<StageMintQuote>(contractId, "stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: action }),
+    async mintStageFigures(lifeId, signed, action, expectedFee) {
+      const completed = await stageMintResult(lifeId); if (completed) return completed;
+      const life = await viewMethod<LifeView | null>(contractId, "get_life", { life_id: lifeId });
+      if (life?.status === "minting") return retryStageMint(lifeId);
+      const args = { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: action };
+      const quote = await viewMethod<StageMintQuote>(contractId, "stage_mint_quote", args);
+      if (expectedFee !== undefined && expectedFee !== quote.total_fee) throw new Error("Stage prices changed. Refresh before paying.");
+      try { await callMethod(accountId, contractId, "mint_stage_figures", { ...args, signature: signed.signature }, `${quote.total_fee} yoctoNEAR`); }
+      catch (error) { if (!(error instanceof UnconfirmedTransactionError)) throw error; }
+      const result = await stageMintResult(lifeId);
+      if (!result) throw new Error("The stage album is committed; retry it without another mint fee.");
+      return result;
+    },
     mintTerms: () => viewMethod(contractId, "mint_terms", {}),
+    marketTerms: unsupported("marketTerms"),
     mintPack: lifeId => viewMethod(contractId, "get_mint_pack", { life_id: lifeId }),
     async openMintPack(lifeId, signed, action) {
       const terms = await viewMethod<{ mint_fee: string }>(contractId, "mint_terms", {});

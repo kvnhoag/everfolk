@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { figureFixture } from "./helpers/figure-path-fixture.ts";
-import { deepInventory } from "../src/capabilities/actions.ts";
+import { deepInventory } from "../src/deep-capabilities/actions.ts";
 
 test("Aristotle's route meets him before 322 BCE and earns a later body-of-inquiry title through real research", () => {
   const run = figureFixture("aristotle-actual-title");
@@ -21,7 +21,7 @@ test("Aristotle's route meets him before 322 BCE and earns a later body-of-inqui
   assert.equal(progress.specialTitle?.rank, "Legendary");
   assert.equal(progress.specialTitle?.title, path.capstone.title);
   assert.ok(progress.specialTitle!.record.year > -322);
-  assert.ok(run.life.capabilities!.evidence.some(receipt => receipt.action === "assess-PS10"));
+  assert.ok(run.life.deepCapabilities!.evidence.some(receipt => receipt.action === "assess-PS10"));
   run.durable();
 });
 
@@ -53,7 +53,7 @@ test("Lysippos requires a real sculptural mastery and consumes bronze rather tha
   assert.equal(run.progress("lysippos").encounterMode, "direct");
   assert.ok(run.progress("lysippos").encounterRecord!.year <= -310);
   run.sculptureMastery();
-  assert.ok(run.life.capabilities!.learned.AS10);
+  assert.ok(run.life.deepCapabilities!.learned.AS10);
   assert.equal(run.progress("lysippos").specialTitle, null);
   assert.ok((deepInventory(run.life).monument ?? 0) > 0, "A completed stone monument exists but cannot replace a bronze commission.");
   const first = path.stages[0];

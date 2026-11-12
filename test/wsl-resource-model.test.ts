@@ -4,7 +4,7 @@ import { createEngine } from '../src/index.ts';
 import { getNetWorth } from '../src/economy.ts';
 import current from '../worlds/alexandria-sample.json' with { type: 'json' };
 import previous from '../worlds/alexandria-0.34.0.json' with { type: 'json' };
-import { getBirthRollResources } from '../client/birth-stat-roll.ts';
+import { getBirthRollResources } from '../client/models/birth-stat-roll.ts';
 
 test('WSL current births roll background resources, keep working reserves and replay', () => {
   const engine = createEngine(current);
@@ -15,7 +15,7 @@ test('WSL current births roll background resources, keep working reserves and re
     missing.delete(life.originId);
     const origin = engine.world.origins.find(origin => origin.id === life.originId)!;
     for (const asset of engine.world.economy!.assets) {
-      const range = origin.assetRanges![asset.id];
+      const range = origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
       assert.ok(life.economy!.assets[asset.id] >= range.min && life.economy!.assets[asset.id] <= range.max);
     }
     if (working.has(life.originId)) {
@@ -24,7 +24,7 @@ test('WSL current births roll background resources, keep working reserves and re
     }
     assert.equal(life.stats.wealth, getNetWorth(engine.world, life) / engine.world.economy!.unitsPerPoint);
     assert.deepEqual(engine.load(engine.save(life)), life);
-    assert.equal(getBirthRollResources(engine.world, life).length, 2);
+    assert.equal(getBirthRollResources(engine.world, life).length, engine.world.economy!.assets.length);
   }
   assert.equal(missing.size, 0);
 });
@@ -38,7 +38,7 @@ test('WSL legacy births keep their exact original zero-resource replay', () => {
 
 test('WSL old official factory upgrades for a fresh life', async () => {
   const { getArchivedBuiltinWorld, getBuiltinWorld } = await import('../server/content.ts');
-  const { selectFactoryWorld } = await import('../client/factory-world-selection.ts');
+  const { selectFactoryWorld } = await import('../client/models/factory-world-selection.ts');
   const engine = createEngine(previous);
   const old = getArchivedBuiltinWorld(`pack-${engine.fingerprint}`)!;
   assert.ok(old);

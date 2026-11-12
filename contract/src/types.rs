@@ -4,6 +4,8 @@ use near_sdk::{near, AccountId};
 use std::collections::HashMap;
 
 pub const MAX_BPS: u16 = 10_000;
+/// Must match chain/npc-proof.ts. New NPC sessions never change a legacy world's evidence rules.
+pub const NPC_WORLD_VERSION: &str = "alexandria-npc-1";
 
 /// Admin-tunable economics. Every `*_bps` value is in basis points.
 #[near(serializers = [json, borsh])]
@@ -159,6 +161,17 @@ pub struct Accomplishment {
     pub age: u32,
 }
 
+/// Short-lived provider verification, included in the verifier-signed evidence JSON only.
+/// This is not stored as Borsh, so adding it does not change deployed storage layouts.
+#[near(serializers = [json])]
+#[derive(Clone, Debug, PartialEq)]
+pub struct NpcSessionAttestation {
+    pub session_id: String,
+    pub transcript_hash: String,
+    pub provider_checked_at: u64,
+    pub expires_at: u64,
+}
+
 /// What the verifier attests after replaying a ranked life. Signed as the exact JSON string received.
 #[near(serializers = [json])]
 #[derive(Clone, Debug, PartialEq)]
@@ -182,6 +195,9 @@ pub struct Evidence {
     pub career_group: String,
     pub matched_figures: Vec<String>,
     pub sources: Vec<SourceImpact>,
+    /// Omitted entirely for legacy evidence, preserving its existing JSON shape.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub npc_session: Option<NpcSessionAttestation>,
 }
 
 #[near(serializers = [json, borsh])]

@@ -1,11 +1,11 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, StatDefinition, WorldPack } from "../src/types.ts";
 import current from "../worlds/alexandria-sample.json" with {type:"json"};
 import previous from "../worlds/alexandria-0.17.0.json" with {type:"json"};
-import { advanceYearWithFocus } from "../client/yearly-focus.ts";
+import { advanceYearWithFocus } from "../client/models/yearly-focus.ts";
 
 const curve: NonNullable<StatDefinition["gainCurve"]> = [
   {from:0,multiplier:1}, {from:40,multiplier:0.5},
@@ -65,6 +65,7 @@ test("higher values do not reduce the losses from a failed activity", () => {
 
 function currentCareerFixture(): WorldPack {
   const world = withoutMoneylender(structuredClone(current) as WorldPack);
+  withoutMarketSignals(world);
   // Keep this qualification schedule independent of annual illness onset.
   delete world.health!.mortalityCalibration;
   world.events = world.events.filter(event=>event.id===world.health!.careDecision);
@@ -90,6 +91,8 @@ test("new progression still permits early paid work and affordable study alongsi
   const job=engine.getActivities(life).find(activity=>activity.id==="work-copyist")!;
   assert.equal(job.available,true,job.reason);
   life=engine.act(life,job.id);
+  life=engine.orderMarket(life,{side:"buy",asset:"papyrus",quantity:8});
+  life=engine.orderMarket(life,{side:"buy",asset:"ink",quantity:8});
   life=engine.advance(life);
   const before=life, after=advanceYearWithFocus(engine,life,"study");
   assert.equal(after.character!.jobId,"copyist");

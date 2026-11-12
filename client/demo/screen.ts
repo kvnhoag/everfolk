@@ -88,6 +88,8 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
     donkey: typed.demo.household.animals.donkey,
   };
   const market = marketView(def, typed);
+  // The merchant's current quote (worlds with market depth quote grain in hundredths of a drachma).
+  const grainQuote = market.quotes.find(quote => quote.item === "grain") ?? typed.demo.town.prices.grain;
   const townFigures: TownFigureView[] = [
     {
       role: "merchant",
@@ -100,7 +102,7 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
       cash: typed.demo.town.merchant.cash,
       grain: typed.demo.town.merchant.grain,
       flax: typed.demo.town.merchant.flax,
-      statusLine: `Buys grain at ${typed.demo.town.prices.grain.buy} dr · Sells at ${typed.demo.town.prices.grain.sell} dr`,
+      statusLine: `Buys grain at ${grainQuote.buy} dr · Sells at ${grainQuote.sell} dr`,
       agent: typed.demo.agents.assigned.merchant ?? null,
     },
     {

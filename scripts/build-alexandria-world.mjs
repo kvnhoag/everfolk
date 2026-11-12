@@ -1,4 +1,3 @@
-import { applyStartingResources } from "./alexandria-starting-resources.mjs";
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { applySpecialists } from "./alexandria-specialists.mjs";
@@ -25,6 +24,12 @@ import { applyCareerProse } from "./alexandria-prose-careers.mjs";
 import { applyClassicalEra } from "./alexandria-classical-era.mjs";
 import { applyHouseholdOrigins } from "./alexandria-household-origins.mjs";
 import { applyLateRoutes } from "./alexandria-late-routes.mjs";
+import { applyStartingResources } from "./alexandria-starting-resources.mjs";
+import { applyLivelihoods } from "./alexandria-livelihoods.mjs";
+import { applyResourceVariety } from "./alexandria-resources.mjs";
+import { applyMarketRoles } from "./alexandria-market-roles.mjs";
+import { applyMarketCapacity } from "./alexandria-market-capacity.mjs";
+import { applyFamilyRelationships } from "./alexandria-family-relationships.mjs";
 
 const root = new URL("../", import.meta.url);
 const sources = JSON.parse(readFileSync(new URL("research/sources.json", root), "utf8"));
@@ -964,5 +969,10 @@ applyClassicalEra(world);
 applyHouseholdOrigins(world);
 applyLateRoutes(world);
 applyStartingResources(world);
+applyLivelihoods(world);
+applyResourceVariety(world);
+applyMarketRoles(world);
+applyMarketCapacity(world);
+applyFamilyRelationships(world);
 writeFileSync(output, `${JSON.stringify(world, null, 2)}\n`);
 console.log(`Built ${world.events.length} events, ${world.sources.length} sources, ${bands.length} mortality bands and ${world.character.activities.length} character activities: ${fileURLToPath(output)}`);

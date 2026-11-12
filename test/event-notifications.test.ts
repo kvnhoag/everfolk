@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { builtinEngine } from "../client/session.ts";
+import { builtinEngine } from "../client/lib/world-session.ts";
 import type { JournalEntry, LifeState } from "../src/types.ts";
-import { dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, syncEventNotifications } from "../client/event-notifications.ts";
-import { createEventNotificationStore } from "../client/event-notification-store.ts";
+import { dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, syncEventNotifications } from "../client/models/event-notifications.ts";
+import { createEventNotificationStore } from "../client/state/event-notification-store.ts";
 
 const world = builtinEngine.world;
 const base = { ...builtinEngine.start("notification-lifecycle"), journal: [] };

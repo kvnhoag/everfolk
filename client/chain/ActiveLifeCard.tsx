@@ -21,17 +21,17 @@ export function useActiveRankedLife(backend: ChainBackend) {
   return { active, loading, error };
 }
 
-export default function ActiveLifeCard({ life, progress, busy, onOpen, onGiveUp }: {
-  life: LifeView; progress: RankedProgress; busy?: boolean; onOpen(): void; onGiveUp?(): void;
+export default function ActiveLifeCard({ life, progress, busy, walletPath = true, needsPlayKey = false, onOpen, onGiveUp }: {
+  life: LifeView; progress: RankedProgress; busy?: boolean; walletPath?: boolean; needsPlayKey?: boolean; onOpen(): void; onGiveUp?(): void;
 }) {
   const ended = progress.status === "ended";
   const missing = progress.status === "unavailable";
   return <section className={`chain-card active-life-card${ended ? " is-ended" : ""}`} aria-label="Your Weave life">
     <p className="chain-kicker">Weave life #{life.life_id} · {ended ? progress.pack ? "Ended · Pack ready" : "Ended · Ready to mint" : missing ? "Save needed on this device" : "In progress"}</p>
     <h2>{ended ? progress.pack ? "Your pack is waiting" : "Your story is complete" : progress.name ?? "A life in Alexandria"}</h2>
-    <p>{progress.pack ? "Your paid pack is saved on NEAR. Open it to review your three cards, use any remaining rerolls, and choose one to mint. You can finish it from any device with this wallet." : ended ? `Your life ended${progress.age !== undefined ? ` at age ${progress.age}` : ""}. It is saved in this browser and ready to mint. You haven't minted an NFT yet.` : missing ? "Open this life in the browser where you played it. The on-chain record alone cannot restore your choices." : `Your progress is saved${progress.age !== undefined ? ` · Age ${progress.age}` : ""}. Return to the same life and keep your choices.`}</p>
+    <p>{progress.pack ? "Your paid pack is saved on NEAR. Open it to review your three cards, use any remaining rerolls, and choose one to mint. You can finish it from any device with this account." : ended ? `Your life ended${progress.age !== undefined ? ` at age ${progress.age}` : ""}. It is saved in this browser and ready to mint. You haven't minted an NFT yet.` : missing ? "Open this life in the browser where you played it. The on-chain record alone cannot restore your choices." : `Your progress is saved${progress.age !== undefined ? ` · Age ${progress.age}` : ""}. Return to the same life and keep your choices.`}</p>
     <div className="chain-actions">
-      {!missing && <button className="chain-primary" type="button" disabled={busy} onClick={onOpen}>{ended ? progress.pack ? "Open mint pack" : "Review & mint this life" : progress.status === "new" ? "Begin this life" : "Continue this life"}<span aria-hidden="true">→</span></button>}
+      {!missing && <button className="chain-primary" type="button" disabled={busy} onClick={onOpen}>{needsPlayKey ? "Sign in again for popup-free play" : ended ? progress.pack ? "Open mint pack" : "Review & mint this life" : progress.status === "new" ? "Begin this life" : "Continue this life"}<span aria-hidden="true">→</span></button>}
       {onGiveUp && <button className="chain-secondary" type="button" disabled={busy} onClick={onGiveUp}>{ended ? "Close without minting" : "Give up this life"}</button>}
     </div>
     {ended && !progress.pack && <p className="chain-fine">Minting is optional. Keep this browser's save until you mint; the finished save is needed for verification.</p>}

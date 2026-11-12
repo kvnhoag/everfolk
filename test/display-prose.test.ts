@@ -4,8 +4,8 @@ import { createEngine } from "../src/index.ts";
 import { contentFingerprint } from "../src/random.ts";
 import type { WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-0.33.0.json" with { type: "json" };
-import { displayProse } from "../client/display-prose.ts";
-import { buildLifeEvents } from "../client/life-events.ts";
+import { displayProse } from "../client/models/display-prose.ts";
+import { buildLifeEvents } from "../client/models/life-events.ts";
 
 test("reviewed prose changes preserve resolved names and unresolved tokens", () => {
   const excerpt = "agree that this should become a friendship, rather than another conversation snatched between bundles.";

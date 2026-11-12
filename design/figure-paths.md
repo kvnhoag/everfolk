@@ -1,4 +1,4 @@
-# Historical figure paths · alexandria-lives-4
+# Historical figure paths · alexandria-lives-6
 
 The new free-play revision connects all eleven agreed figures to the existing skill tree, authored work, replay-recorded achievements and earned special titles. Earlier free-play and ranked packs retain their original content. These paths do not alter deployed NFT contracts or the four legacy mintable figure IDs.
 
@@ -64,3 +64,7 @@ All eleven complete figure routes are exercised through real engine commands. Fi
 Mechanics fixtures deliberately author high proficiency, health and resources; early Alexander and Aristotle entry also has moderate-proficiency checks. These establish reachability and correctness, not an ordinary-life success rate. Representative balance simulations remain separate. Retained free-play and ranked packs keep their existing rules and deployed NFT IDs.
 
 Final repository regression result: **1,565 passing / 1,584 total**, with the **same 19 failing tests as the pre-figure-path baseline**. No additional failures were introduced. The remaining baseline failures cover existing content-version, birth-resource/economy and legacy UI/event expectations. Strict TypeScript and diff checks pass.
+
+## Integration with current main
+
+The combined default is `alexandria-lives-6`, built from the unchanged official `alexandria-lives-5`. It retains the attribute atlas, military lane, life stages, district paths and NPC systems while adding the eleven historical paths. Official worlds 1–5 remain byte-for-byte unchanged. The independent 65-node proof engine is preserved under `src/deep-capabilities`, using `alexandria-deep-1` and `alexandria-figures-1`; it does not replace the official numeric capability engine.

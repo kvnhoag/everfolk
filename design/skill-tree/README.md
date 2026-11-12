@@ -1,6 +1,6 @@
 # Everfolk deep skill tree
 
-The agreed 65-capability design is now integrated into new free-play lives in **`alexandria-lives-3`**. Earlier world revisions retain their exact rules and fingerprints. The original design package remains the reference for its prerequisite graph; the runtime record explains the implemented proficiency gains, work evidence, rewards and events.
+The agreed 65-capability design is now integrated into new free-play lives in **`alexandria-deep-1`**. Earlier world revisions retain their exact rules and fingerprints. The original design package remains the reference for its prerequisite graph; the runtime record explains the implemented proficiency gains, work evidence, rewards and events.
 
 - [Read the runtime progression decisions](runtime-progression.md)
 - [Open the read-only design viewer](index.html)
@@ -17,4 +17,6 @@ The runtime adds **24 decisions** and **13 service operations**, adapts supporte
 
 Engine full-path tests cover the eight mastery endpoints with high-proficiency, resource-rich fixtures; this is a mechanics reachability check. The proposed 50–60% mastery cohort target has **not** been measured. Costs, gains and prices are authored gameplay values; no claim of reconstructed historical prices or a measured lifetime success rate is made.
 
-The current new-birth revision is `alexandria-lives-4`, which extends the retained deep-tree pack with eleven figure-linked development paths and earned titles. Build it with `node scripts/figures/build-world.mjs` after retaining `alexandria-lives-3`. The earlier builder still reproduces the unchanged deep-tree foundation.
+The current new-birth revision is `alexandria-figures-1`, which extends the retained deep-tree pack with eleven figure-linked development paths and earned titles. Build it with `node scripts/figures/build-world.mjs` after retaining `alexandria-deep-1`. The earlier builder still reproduces the unchanged deep-tree foundation.
+
+The integrated current free-play release is `alexandria-lives-6`, which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.

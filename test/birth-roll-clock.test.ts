@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createBirthRollClock } from "../client/birth-roll-clock.ts";
-import { BIRTH_ROLL_DURATION_MS, getBirthDigitReels, getBirthRollFrame, getBirthRollTiming } from "../client/birth-stat-roll.ts";
+import { createBirthRollClock } from "../client/models/birth-roll-clock.ts";
+import { BIRTH_ROLL_DURATION_MS, getBirthDigitReels, getBirthRollFrame, getBirthRollTiming } from "../client/models/birth-stat-roll.ts";
 
 test("all cards start moving on the first active frame and still settle in order", () => {
   assert.deepEqual(getBirthRollFrame(0, 4).phases, ["rolling", "rolling", "rolling", "rolling"]);

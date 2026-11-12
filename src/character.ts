@@ -1,9 +1,11 @@
+import { capabilityReason } from "./capabilities/engine.ts";
 import { vocationReason } from "./vocations/engine.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { UNAVAILABLE_REASON } from "./demo/types.ts";
 import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, WorldPack } from "./types.ts";
 import { financeActivityReason } from "./economy.ts";
 import { marriageRelationshipReason, socialRoleEffectReason } from "./relationships.ts";
+import { militaryCareerReason } from "./capabilities/military.ts";
 import { resolvePartner } from "./people.ts";
 
 export function initialCharacter(world: WorldPack): CharacterState | undefined {
@@ -37,6 +39,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "capability") return capabilityReason(world, state, effect.node);
   if (effect.type === "vocation") return vocationReason(world, state, effect.action, allowUnchanged);
   if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {
@@ -62,6 +65,8 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (character.jobId === effect.job) return allowUnchanged ? undefined : effect.job ? "You already hold this job." : "You are not currently employed.";
     if (effect.job === null) return;
     const job = definition.jobs.find(candidate => candidate.id === effect.job)!;
+    const militaryBlock=militaryCareerReason(world,state,effect.job);
+    if(militaryBlock)return militaryBlock;
     if (state.age < job.minAge) return `${job.title} requires age ${job.minAge}.`;
     const missing = Object.entries(job.requirements ?? {}).filter(([skill, threshold]) => character.skills[skill] < threshold);
     if (missing.length) return `Requires ${missing.map(([skill, threshold]) => `${definition.skills[skill].label} ${threshold} (currently ${character.skills[skill]})`).join(", ")}.`;
@@ -73,6 +78,7 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (allowUnchanged && character.relationshipStatus === effect.status && character.partnerId === effect.partner) return;
     if (state.age < 18) return "Relationships unlock at age 18.";
     if (state.age + partner.ageOffset < 18) return `${partner.name} must be at least 18.`;
+    if (definition.extendedSocialRoles && character.relationships?.partners[partner.id]?.roles?.includes("enemy")) return `Settle your hostility with ${partner.name} before beginning a romantic relationship.`;
     if (effect.status === "courting") {
       if (character.relationshipStatus === "married") return "End your current marriage before beginning another courtship.";
       if (character.relationshipStatus === "courting" && character.partnerId === partner.id) return `You are already courting ${partner.name}.`;

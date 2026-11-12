@@ -5,7 +5,7 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import { builtinEngine } from "../client/session.ts";
+import { builtinEngine } from "../client/lib/world-session.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -14,10 +14,9 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LifeOverview } = await import("../client/LifeOverview.tsx");
-const { default: LifeMoment } = await import("../client/LifeMoment.tsx");
-const { default: EventNotificationStack } = await import("../client/EventNotificationStack.tsx");
-const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
+const { default: LifeOverview } = await import("../client/components/LifeOverview.tsx");
+const { default: LifeMoment } = await import("../client/components/LifeMoment.tsx");
+const { default: DecisionDialog } = await import("../client/components/DecisionDialog.tsx");
 hooks.deregister();
 
 const world = builtinEngine.world;
@@ -87,27 +86,4 @@ test("routine childhood moments stay out of the notification panel and remain in
   assert.match(html, /Important life events/);
   assert.match(html, /Read your life record/);
   assert.equal(updated.journal.at(-1)?.text, "An ordinary childhood moment.");
-});
-
-
-test("the floating stack ignores routine events while keeping an unanswered decision actionable", () => {
-  const event = world.events.find(item => item.mode !== "automatic" && item.choices.length > 0)!;
-  const updated = { ...life, age: 3, year: life.year + 3, phase: "choice" as const, pendingEventId: event.id,
-    journal: [...life.journal, { type: "event" as const, id: "small-doorway", age: 3, year: life.year + 3, text: "An ordinary childhood moment." }] };
-  const html = renderToStaticMarkup(createElement(EventNotificationStack, { life: updated, world, decisionEvent: event, onOpenDecision: noop, onOpenChronicle: noop }));
-  assert.match(html, /event-toast is-decision/);
-  assert.match(html, /Open decision/);
-  assert.doesNotMatch(html, /event-toast is-event/);
-  assert.doesNotMatch(html, /event-toast-dismiss/);
-});
-
-test("the floating stack shows only the latest important completed facts with dismiss controls", () => {
-  const updated = { ...life, journal: [...life.journal, ...["one", "two", "three", "four"].map(id => ({
-    type: "event" as const, id: `health-onset-${id}`, age: life.age, year: life.year, text: `Important ${id}.`,
-  })), { type: "event" as const, id: "small-doorway", age: life.age, year: life.year, text: "An ordinary moment." }] };
-  const html = renderToStaticMarkup(createElement(EventNotificationStack, { life: updated, world, onOpenDecision: noop, onOpenChronicle: noop }));
-  assert.equal((html.match(/event-toast is-event/g) ?? []).length, 3);
-  assert.doesNotMatch(html, /Important one\.|An ordinary moment/);
-  assert.ok(html.indexOf("Important four.") < html.indexOf("Important three."));
-  assert.equal((html.match(/class="event-toast-dismiss"/g) ?? []).length, 3);
 });

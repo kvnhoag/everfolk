@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createEngine } from "../src/index.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import input from "../worlds/alexandria-sample.json" with { type: "json" };
 import type { WorldPack } from "../src/types.ts";
 

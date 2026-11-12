@@ -126,6 +126,10 @@ export function createSeededPlayService(options: {
     if (command.type === "advance" && fields.length === 1) return engine.advance(life);
     if (command.type === "choose" && fields.length === 2 && typeof command.choice === "string") return engine.choose(life, command.choice);
     if (command.type === "act" && fields.length === 2 && typeof command.activity === "string") return engine.act(life, command.activity);
+    if (command.type === "market-order" && fields.length === 4 && (command.side === "buy" || command.side === "sell") && typeof command.asset === "string" && typeof command.quantity === "number") {
+      return engine.orderMarket(life, { side: command.side, asset: command.asset, quantity: command.quantity });
+    }
+    if (command.type === "market-cancel" && fields.length === 2 && typeof command.orderId === "number") return engine.cancelMarketOrder(life, command.orderId);
     if (command.type === "avatar" && fields.length === 2 && typeof command.variant === "number") {
       const next = engine.chooseAvatar(life, command.variant);
       if (next.commands.length !== life.commands.length + 1) throw new Error("An avatar step must change the selected avatar.");

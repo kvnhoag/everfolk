@@ -28,3 +28,19 @@
 
 .booster-pack.is-opening{animation:booster-open .65s ease-in both;pointer-events:none}
 @keyframes booster-open{0%{transform:rotate(-3deg) scale(1)}25%{transform:rotate(4deg) scale(1.04)}45%{transform:rotate(-5deg) scale(1.06)}70%{transform:rotate(0) scale(1.1);opacity:1}100%{transform:translateY(-30px) scale(1.15);opacity:0}}
+
+.stage-card-portrait{max-width:140px;max-height:180px;object-fit:contain;image-rendering:pixelated}
+.stage-album-section{margin:32px 0 24px;text-align:left;border-top:1px dashed var(--cr-edge,#b39c68);padding-top:24px}
+.stage-album-section h2{font-size:18px;margin-bottom:6px}
+.stage-album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px}
+.stage-album-card{display:flex;gap:12px;padding:12px;border:1px solid var(--cr-edge,#b39c68);background:var(--cr-panel,#faf4e2);box-shadow:2px 2px 0 #88644720}
+.stage-album-card.is-selected{border:2px solid var(--cr-faience-0,#38665e);box-shadow:3px 3px 0 var(--cr-faience-1,#6caaa0)}
+.stage-album-art{flex-shrink:0;width:64px;height:80px;display:flex;align-items:center;justify-content:center}
+.stage-album-portrait{max-width:100%;max-height:100%;object-fit:contain;image-rendering:pixelated}
+.stage-album-body{display:flex;flex-direction:column;gap:4px;font-size:12px;min-width:0}
+.stage-album-body strong{font-size:13px;line-height:1.3}
+.stage-album-fee{font-weight:700;color:var(--cr-faience-0,#38665e)}
+.stage-album-btn{margin-top:auto;font-size:11px;padding:4px 8px}
+.stage-token-portrait{max-width:180px;max-height:220px;object-fit:contain;image-rendering:pixelated;margin:12px auto;display:block}
+.stage-market-portrait{width:40px;height:40px;object-fit:contain;image-rendering:pixelated;display:inline-block;vertical-align:middle}
+.stage-reveal-portrait{max-width:160px;max-height:200px;object-fit:contain;image-rendering:pixelated;margin:16px auto;display:block}

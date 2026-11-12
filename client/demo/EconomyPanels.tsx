@@ -1,23 +1,20 @@
-import { useEffect, useId, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import { resolvePartner } from "../../src/people.ts";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
-import ChoiceImpact from "../ChoiceImpact.tsx";
-import { visibleFamilyActivities } from "../character-panel-model.ts";
-import { displayProse } from "../display-prose.ts";
-import { getLoanSummary } from "../loan-summary.ts";
-import PixelPortrait from "../PixelPortrait.tsx";
-import { relationshipLabels, visibleRelationshipPeople } from "../relationship-labels.ts";
+import ChoiceImpact from "../components/ChoiceImpact.tsx";
+import { visibleFamilyActivities } from "../models/character-panel-model.ts";
+import { displayProse } from "../models/display-prose.ts";
+import { getLoanSummary } from "../models/loan-summary.ts";
+import PixelPortrait from "../components/PixelPortrait.tsx";
+import { relationshipLabels, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
-import Storehouse from "./Storehouse.tsx";
-import type { StorehouseRow } from "./storehouse-model.ts";
 import "./economy-panels.css";
 
 export interface ComparisonSide {
@@ -32,7 +29,6 @@ export type EconomyTabId = "market" | "farm" | "service" | "people" | "works";
 
 interface Props {
   screen: DemoScreen;
-  storehouse?: StorehouseRow[] | null;
   cashText: string;
   autoPlay: boolean;
   pending?: boolean;
@@ -70,7 +66,6 @@ function heldQuantity(screen: DemoScreen, item: TradeItem): number {
 
 export default function EconomyPanels({
   screen,
-  storehouse = null,
   cashText,
   autoPlay,
   pending = false,
@@ -97,6 +92,7 @@ export default function EconomyPanels({
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
   const [quantity, setQuantity] = useState(1);
+  const [reserveOverride, setReserveOverride] = useState(false);
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
   const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
@@ -105,7 +101,7 @@ export default function EconomyPanels({
   const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
   const quote = screen.market.quotes.find(entry => entry.item === item);
-  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty };
+  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty, ...(reserveOverride ? { reserveOverride: true } : {}) };
   const held = heldQuantity(screen, item);
   const unitPrice =
     counterparty === "army" && item === "grain"
@@ -114,6 +110,8 @@ export default function EconomyPanels({
         ? (quote?.sell ?? 1)
         : (quote?.buy ?? 1);
   const orderTotal = quantity * unitPrice;
+
+  useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
 
   useEffect(() => {
     slot.current = false;
@@ -278,43 +276,50 @@ export default function EconomyPanels({
       ))}
 
       {(scenario || comparison) && (
-        <section aria-label="Demo scenario">
-          <h3>Demo scenario</h3>
-          {scenario ? (
-            <p>
-              <strong>{scenario.title}</strong> · seed {scenario.seed}. {scenario.summary}
-            </p>
-          ) : !comparison ? (
-            <p>The prepared demo scenario is not loaded yet.</p>
-          ) : null}
-          {comparison ? (
-            <div className="demo-compare">
-              <article>
-                <h4>{comparison.withDeed.label}</h4>
+        <section className="demo-scenario-section" aria-label="Demo scenario">
+          <details className="demo-scenario-drawer">
+            <summary>
+              <h3>Demo scenario</h3>
+              <span className="demo-scenario-toggle">Compare flood outcomes ▾</span>
+            </summary>
+            <div className="demo-scenario-body">
+              {scenario ? (
                 <p>
-                  Grain received {comparison.withDeed.grainReceived}. Hunger avoided:{" "}
-                  {comparison.withDeed.hungerAvoided ? "yes" : "no"}.
+                  <strong>{scenario.title}</strong> · seed {scenario.seed}. {scenario.summary}
                 </p>
-                <p>
-                  Source: {comparison.withDeed.sourceName ?? "none"}. Owner share:{" "}
-                  {comparison.withDeed.ownerShare ?? "none"}.
-                </p>
-              </article>
-              <article>
-                <h4>{comparison.withoutDeed.label}</h4>
-                <p>
-                  Grain received {comparison.withoutDeed.grainReceived}. Hunger avoided:{" "}
-                  {comparison.withoutDeed.hungerAvoided ? "yes" : "no"}.
-                </p>
-                <p>
-                  Source: {comparison.withoutDeed.sourceName ?? "none"}. Owner share:{" "}
-                  {comparison.withoutDeed.ownerShare ?? "none"}.
-                </p>
-              </article>
+              ) : !comparison ? (
+                <p>The prepared demo scenario is not loaded yet.</p>
+              ) : null}
+              {comparison ? (
+                <div className="demo-compare">
+                  <article>
+                    <h4>{comparison.withDeed.label}</h4>
+                    <p>
+                      Grain received {comparison.withDeed.grainReceived}. Hunger avoided:{" "}
+                      {comparison.withDeed.hungerAvoided ? "yes" : "no"}.
+                    </p>
+                    <p>
+                      Source: {comparison.withDeed.sourceName ?? "none"}. Owner share:{" "}
+                      {comparison.withDeed.ownerShare ?? "none"}.
+                    </p>
+                  </article>
+                  <article>
+                    <h4>{comparison.withoutDeed.label}</h4>
+                    <p>
+                      Grain received {comparison.withoutDeed.grainReceived}. Hunger avoided:{" "}
+                      {comparison.withoutDeed.hungerAvoided ? "yes" : "no"}.
+                    </p>
+                    <p>
+                      Source: {comparison.withoutDeed.sourceName ?? "none"}. Owner share:{" "}
+                      {comparison.withoutDeed.ownerShare ?? "none"}.
+                    </p>
+                  </article>
+                </div>
+              ) : (
+                <p>After a flood, the same life with and without an earlier farmer&apos;s deed will be compared here.</p>
+              )}
             </div>
-          ) : (
-            <p>After a flood, the same life with and without an earlier farmer&apos;s deed will be compared here.</p>
-          )}
+          </details>
         </section>
       )}
 
@@ -598,6 +603,7 @@ export default function EconomyPanels({
             </button>
           </div>
 
+          {world?.capabilities && item === "grain" && side === "sell" && <label className="demo-reserve-override"><input type="checkbox" checked={reserveOverride} onChange={event => setReserveOverride(event.target.checked)} /> Allow this sale to use grain reserved for household food or seed.</label>}
           <div className="demo-batch-row">
             <span>Quick quantity:</span>
             {[1, 10, 50, 100].map( presetQty => (
@@ -616,7 +622,6 @@ export default function EconomyPanels({
       </section>
 
       {/* TAB 2: FARM & GRANARY */}
-      {storehouse && <div hidden={activeTab !== "farm"}><Storehouse rows={storehouse} /></div>}
       <section aria-label="This year" hidden={activeTab !== "farm"}>
         <h3>This year</h3>
         <dl className="demo-facts">

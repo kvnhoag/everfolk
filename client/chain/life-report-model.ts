@@ -82,6 +82,7 @@ export interface MintRevealView {
   kindLabel: string;
   isFigure: boolean;
   figureId?: FigureId | null;
+  portraitMedia?: string | null;
   /** Skill icon for a person of the city; null for figures. */
   emblem: string | null;
   rarityLabel: string;
@@ -122,17 +123,24 @@ export function mintRevealView(result: MintResult, careerGroup?: CareerGroup, de
   const links: { label: string; href: string }[] = [];
   if (details.txHash) links.push({ label: "Mint transaction", href: explorerUrl({ tx: details.txHash }) });
   if (details.evidenceUrl) links.push({ label: "Verified evidence", href: details.evidenceUrl });
+  const title = isFigure && result.figure_id
+    ? figureTitle(result.figure_id)
+    : result.stage_title && result.character_name
+    ? `${result.character_name} · ${result.stage_title}`
+    : careerGroup ? GROUP_TITLE[careerGroup] : "A life of Alexandria";
+  if (result.stage_title) rows.splice(1, 0, { label: "Stage", value: result.stage_title });
   return {
-    title: isFigure && result.figure_id ? figureTitle(result.figure_id) : careerGroup ? GROUP_TITLE[careerGroup] : "A life of Alexandria",
+    title,
     number: `No. ${result.token_id}`,
-    kindLabel: KIND_LABEL[isFigure ? "figure" : "npc"],
+    kindLabel: isFigure ? KIND_LABEL.figure : result.stage_id ? "Stage figure" : KIND_LABEL.npc,
     isFigure,
     figureId: isFigure ? result.figure_id : null,
+    portraitMedia: result.portrait_media ?? null,
     emblem: isFigure ? null : careerGroup ? EMBLEM[careerGroup] : "literacy",
     rarityLabel: rarityLabel(result.rarity),
     affectionText: `Affection ${result.affection} / 100`,
     href: chainHref({ kind: "token", tokenId: result.token_id }),
-    lead: isFigure ? "Your life became one of the city's great names." : "Your life joins the people of the city. Others may meet you at their big decisions.",
+    lead: isFigure ? "Your life became one of the city's great names." : result.stage_id ? "Your stage portrait weaves forward into future stories." : "Your life joins the people of the city. Others may meet you at their big decisions.",
     rows,
     links,
   };

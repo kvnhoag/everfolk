@@ -3,8 +3,8 @@ import test from 'node:test';
 import { createEngine } from '../src/index.ts';
 import { getNetWorth, getDemoResourceValue } from '../src/economy.ts';
 import { TRADE_ITEMS } from '../src/demo/types.ts';
-import { getVisibleBirthRollResources } from '../client/birth-stat-roll.ts';
-import { getWealthSummary } from '../client/wealth.ts';
+import { getVisibleBirthRollResources } from '../client/models/birth-stat-roll.ts';
+import { getWealthSummary } from '../client/models/wealth.ts';
 import current from '../worlds/demo/alexandria-lives-2.json' with {type:'json'};
 import previous from '../worlds/demo/alexandria-lives-1.json' with {type:'json'};
 

@@ -8,7 +8,7 @@ import {
 } from "./validate.ts";
 import {
   parseDraw, parseLife, parseListing, parseMintFee, parseMintResult, parseOptionalLife, parseStringList,
-  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parsePoolEntries, parseFigureSupply,
+  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parseMarketTerms, parsePoolEntries, parseFigureSupply, parseStageMintQuote, parseStageMintResult,
 } from "./wire.ts";
 
 const TGAS = 10n ** 12n;
@@ -21,6 +21,8 @@ export const CALL_GAS = {
   draw_npc: gas(100n),
   checkpoint: gas(30n),
   mint_life: gas(200n),
+  mint_stage_figures: gas(300n),
+  retry_stage_mint: gas(300n),
   open_mint_pack: gas(250n),
   reroll_mint_slot: gas(200n),
   choose_mint_slot: gas(250n),
@@ -88,11 +90,32 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
     assertLifeId(lifeId);
     const completed = await mintResult(lifeId);
     if (completed) return completed;
+    // New stage albums retain the legacy recovery entry point used by My lives.
+    if (await view("stage_mint_status", { life_id: lifeId }).catch(() => null)) {
+      return (await retryStageMint(lifeId)).tokens[0];
+    }
     try {
       return parseMintResult(await call("retry_mint", { life_id: lifeId }));
     } catch (error) {
       // A resolver can land before the wallet/RPC reports it. A second request is never a second fee.
       const landed = await mintResult(lifeId).catch(() => null);
+      if (landed) return landed;
+      throw error;
+    }
+  }
+
+  async function stageMintResult(lifeId: string) {
+    assertLifeId(lifeId);
+    const result = await view("stage_mint_result", { life_id: lifeId });
+    return result === null ? null : parseStageMintResult(result);
+  }
+  async function retryStageMint(lifeId: string) {
+    assertLifeId(lifeId);
+    const completed = await stageMintResult(lifeId);
+    if (completed) return completed;
+    try { return parseStageMintResult(await call("retry_stage_mint", { life_id: lifeId })); }
+    catch (error) {
+      const landed = await stageMintResult(lifeId).catch(() => null);
       if (landed) return landed;
       throw error;
     }
@@ -151,12 +174,35 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
     },
     retryMint,
     mintResult,
+    stageMintResult,
+    retryStageMint,
+    async stageMintQuote(lifeId, signed, npcActionId) {
+      assertLifeId(lifeId); await assertEvidenceFor(lifeId, signed);
+      return parseStageMintQuote(await view("stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: npcActionId }));
+    },
+    async mintStageFigures(lifeId, signed, npcActionId, expectedFee) {
+      assertLifeId(lifeId); await assertEvidenceFor(lifeId, signed);
+      const completed = await stageMintResult(lifeId);
+      if (completed) return completed;
+      const life = parseOptionalLife(await view("get_life", { life_id: lifeId }));
+      if (life?.status === "minting") return retryStageMint(lifeId);
+      const quote = parseStageMintQuote(await view("stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: npcActionId }));
+      if (expectedFee !== undefined && quote.total_fee !== expectedFee) throw new Error("Stage prices changed as historical supply changed. Refresh prices before paying.");
+      try {
+        return parseStageMintResult(await call("mint_stage_figures", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, quote.total_fee));
+      } catch (error) {
+        const landed = await stageMintResult(lifeId).catch(() => null);
+        if (landed) return landed;
+        throw error;
+      }
+    },
     async setAction(tokenId, actionId) {
       assertTokenId(tokenId);
       if (!actionId) throw new Error("An action id is required.");
       await call("set_action", { token_id: tokenId, action_id: actionId });
     },
     async mintTerms() { return parseMintTerms(await view("mint_terms", {})); },
+    async marketTerms() { return parseMarketTerms(await view("get_params", {})); },
     async mintPack(lifeId) {
       assertLifeId(lifeId);
       const value = await view("get_mint_pack", { life_id: lifeId });

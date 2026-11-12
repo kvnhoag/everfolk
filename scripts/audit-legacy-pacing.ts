@@ -2,7 +2,7 @@ import { writeFileSync } from "node:fs";
 import { createEngine } from "../src/index.ts";
 import { getOutcomeProbabilities } from "../src/outcomes.ts";
 import type { Choice, Condition, LegacyRouteDefinition, LifeState, WorldPack } from "../src/types.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const world = pack as WorldPack, engine = createEngine(world);

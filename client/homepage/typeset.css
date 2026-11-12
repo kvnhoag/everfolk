@@ -1,0 +1,224 @@
+/* Homepage typography system, measured from the exported Figma frames
+   ("Everfolk wordmark", "Your story", "Main navigation").
+   Two families, five styles:
+     Eczar 600                     -> footer wordmark and saved character name
+     Cormorant Garamond 500         -> "Live another story." (46px) and ornaments
+     Be Vietnam Pro 400             -> intro (18px), dates and notes (12px)
+     Be Vietnam Pro 500             -> menu (14px), emphasis line (18px), age (14px), small labels
+     Be Vietnam Pro 600             -> character name and primary button (18px)
+   The hero uses the outlined Eczar wordmark from the brand kit. */
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/be-vietnam-pro-400-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/be-vietnam-pro-400-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/be-vietnam-pro-500-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/be-vietnam-pro-500-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/be-vietnam-pro-600-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/be-vietnam-pro-600-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url("/fonts/cormorant-garamond-600-italic-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url("/fonts/cormorant-garamond-600-italic-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/cormorant-garamond-500-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/cormorant-garamond-500-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+.ef-home{
+  --home-scale:1;
+  --home-viewport-width:calc(100vw / var(--home-scale));
+  --home-viewport-height:calc(100svh / var(--home-scale));
+  --tx-logo:"Cormorant Garamond",Georgia,serif;
+  --tx-sans:"Be Vietnam Pro","Segoe UI",sans-serif;
+  --tx-cream:#fdf3dc;
+  --tx-gold:#f1cf88;
+  --tx-gold-line:#e3c58b;
+  --tx-ink:#17363c;
+  --tx-panel:#102e37;
+  --tx-shadow:0 1px 2px #08161c,0 2px 10px #0a1b22cc;
+}
+/* The global stylesheet forces inherited fonts with !important; the homepage root re-asserts its own system. */
+.ef-home,.ef-home *{font-family:var(--tx-sans)!important;font-synthesis:none}
+.ef-home .ef-home-weave-brand .everfolk-wordmark,.ef-home .ef-home-weave-brand .everfolk-wordmark>span,.ef-home .ef-home-save strong{font-family:var(--font-display)!important;font-style:normal;font-weight:600}
+.ef-home .ef-home-tagline,.ef-home .ef-home-logo-rule i{font-family:var(--tx-logo)!important;font-style:normal;font-weight:500}
+
+/* Footer: a compact utility row below the harbor. */
+.ef-home .ef-home-utility-bar{
+  position:relative;
+  isolation:isolate;
+  min-height:42px;
+  gap:16px;
+  border-bottom:0;
+}
+.ef-home .ef-home-utility-bar::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset-block:0;
+  inset-inline:calc((100% - var(--coast-viewport-width, var(--home-viewport-width))) / 2);
+  background:#102e37;
+  pointer-events:none;
+}
+.ef-home .ef-home-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;margin-right:auto}
+.ef-home .ef-home-links>a,.ef-home .ef-home-links>button{display:inline-flex;align-items:center;min-height:32px;padding:3px 0;border:0;background:transparent;color:#efe2c6;font-size:13px;font-weight:500;letter-spacing:.1px;text-decoration:none;cursor:pointer;text-shadow:var(--tx-shadow);transition:color .2s}
+.ef-home .ef-home-links>a:hover,.ef-home .ef-home-links>button:hover{color:var(--tx-gold)}
+.ef-home .ef-home-era>span:not(.ef-home-diamond){font-size:10px;font-weight:500;letter-spacing:2px;color:#efe2c6}
+.ef-home .ef-home-era strong{font-size:12px;font-weight:500;letter-spacing:1.2px;color:var(--tx-cream)}
+.ef-home .ef-motion-toggle{min-height:36px;padding-block:3px;font-size:12px;font-weight:500;color:#fff3db}
+.ef-home .ef-motion-toggle:disabled{opacity:1;color:#d3dfdc}
+.ef-home :is(.ef-home-weave-bar,.ef-home-utility-bar) :is(a,button):focus-visible{outline:2px solid #f1cf88;outline-offset:3px}
+
+/* Hero column: aligned precisely into the calm open Rhakotis sea bay, nestled down over the water surface. */
+.ef-home .ef-home-body{padding:clamp(12px,4svh,44px) 0 clamp(16px,3.5svh,36px);min-height:0}
+@media (min-width: 701px) {
+  .ef-home {
+    --home-scale:.8;
+    zoom:var(--home-scale);
+    min-height:var(--home-viewport-height);
+  }
+  .ef-home .ef-home-shell {
+    min-height:var(--home-viewport-height);
+  }
+  .ef-home .ef-home-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: clamp(20px, var(--home-viewport-height) * .06, 72px);
+    padding-bottom: clamp(24px, var(--home-viewport-height) * .155, 148px);
+  }
+  .ef-home .ef-home-content {
+    margin-top: auto;
+    margin-bottom: 0;
+    margin-right: auto;
+    /* Anchor to the same bay point when the covered canvas is cropped. */
+    --bay-center: calc(50% - var(--coast-rendered-width, max(var(--home-viewport-width), var(--home-viewport-height) * 1.6)) * .083);
+    --hero-width: min(57%, 550px, var(--bay-center) * 2);
+    margin-left: calc(var(--bay-center) - var(--hero-width) / 2);
+    width: var(--hero-width);
+  }
+}
+@media (max-width: 700px) {
+  .ef-home .ef-home-content {
+    max-width: calc(100% - 28px);
+    margin: 0 auto;
+    inset-inline-start: clamp(-58px, 128px - 28vw, 12px);
+  }
+}
+.ef-home .ef-home-eyebrow{margin:0;gap:0;font-size:12px;font-weight:500;letter-spacing:4.2px;color:var(--tx-cream);text-shadow:0 1px 3px rgba(10, 32, 42, 0.65), 0 3px 10px rgba(10, 32, 42, 0.3)}
+.ef-home h1{margin:0;font-size:inherit;letter-spacing:0;line-height:1;text-shadow:none}
+.ef-home h1{width:100%}
+.ef-home h1 .ef-title-wrap{
+  display:flex;
+  position:relative;
+  align-items:center;
+  justify-content:center;
+  width:min(100%, clamp(300px, var(--home-viewport-width) * .33, 510px));
+  min-height:clamp(100px, var(--home-viewport-width) * .11, 164px);
+  margin-inline:auto;
+}
+.ef-home .ef-home-wordmark{
+  display:block;
+  width:100%;
+  height:auto;
+  filter:drop-shadow(0 2px 0 #163038) drop-shadow(0 5px 10px #08212ba6);
+}
+.ef-home .ef-title-glint:nth-of-type(1){left:14%;top:30%}
+.ef-home .ef-title-glint:nth-of-type(2){left:64%;top:18%}
+.ef-home .ef-title-glint:nth-of-type(3){left:90%;top:70%}
+.ef-home .ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:11px;width:min(100%,176px);margin:5px auto 16px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
+.ef-home .ef-home-logo-rule span{flex:1;height:1px;background:#e7e0c9;opacity:.55}
+.ef-home .ef-home-logo-rule i{font-size:17px;line-height:1;color:#db9c78}
+.ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:clamp(32px, 3.2vw, 46px);line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
+  background:none;-webkit-text-fill-color:currentColor;border-radius:0;filter:none;text-shadow:0 1px 1px rgba(255, 252, 240, 0.35), 0 2px 8px rgba(12, 38, 48, 0.5), 0 8px 20px rgba(10, 32, 42, 0.25)}
+.ef-home .ef-home-rule{width:min(100%,286px);gap:14px;margin:0 auto 22px;opacity:1;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
+.ef-home .ef-home-rule span:first-child,.ef-home .ef-home-rule span:last-child{height:1px;background:var(--tx-gold-line);opacity:.7}
+.ef-home .ef-home-rule i{width:11px;height:11px;border:1.5px solid var(--tx-gold);transform:rotate(45deg)}
+.ef-home .ef-home-intro{margin:0 auto 34px;padding:4px 26px;font-size:18px;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--tx-cream);text-shadow:0 1px 3px rgba(10, 32, 42, 0.65), 0 3px 10px rgba(10, 32, 42, 0.3);
+  background:none}
+.ef-home .ef-home-intro em{display:inline-block;margin-top:6px;font-style:normal;font-weight:500;color:var(--tx-gold)}
+
+/* Save card ("A story in progress"): elevated gently above the water with luminous dawn depth. */
+.ef-home .ef-home-save{gap:12px;width:min(100%,340px);margin:0 auto 9px;padding:8px 13px;border:1px solid #71664d;border-radius:2px;background:#103038}
+.ef-home .ef-home-save-mark{flex:0 0 auto;width:13px;height:13px;margin:0 4px;border:1.5px solid var(--tx-gold);transform:rotate(45deg)}
+.ef-home .ef-home-save>div{gap:4px}
+.ef-home .ef-home-save>div>span{font-size:10px;font-weight:500;letter-spacing:2.4px;color:var(--tx-gold)}
+.ef-home .ef-home-save strong{font-size:16px;font-weight:600;line-height:1.3;color:var(--tx-cream);overflow-wrap:anywhere}
+.ef-home .ef-home-save-age{font-size:14px;font-weight:500;line-height:1.4;color:var(--tx-cream)}
+.ef-home .ef-home-save-age small{font-size:12px;font-weight:400;line-height:1.6;color:#e6dcc6}
+
+/* Primary action: a single fill and outline. */
+.ef-home .ef-home-actions{width:min(100%,340px);gap:2px}
+.ef-home .ef-home-primary{min-height:50px;gap:12px;padding:9px 16px;border:1px solid #fff2d0;border-radius:3px;color:var(--tx-ink);font-size:15px;font-weight:600;letter-spacing:0;
+  background:#f5ddb0}
+.ef-home .ef-home-primary:hover{transform:none;color:#0f2c31;background:#fae8c0}
+.ef-home .ef-home-primary:active{transform:none;background:#e8cc98}
+.ef-home .ef-home-button-mark{font-size:24px;color:#6f4f2a}
+.ef-home .ef-home-button-arrow{font-size:22px;color:var(--tx-ink)}
+.ef-home .ef-home-primary:hover .ef-home-button-arrow{transform:translateX(3px)}
+.ef-home .ef-home-secondary{min-height:44px;font-size:14px;font-weight:500;color:var(--tx-gold);background:transparent}
+.ef-home .ef-home-secondary span{margin-left:12px;color:var(--tx-gold)}
+.ef-home .ef-home-secondary:hover{color:#fff1cf}
+.ef-home .ef-home-save-note{margin-top:10px;gap:9px;font-size:12px;font-weight:400;color:#efe6d3;text-shadow:0 1px 3px rgba(10, 32, 42, 0.65)}
+.ef-home .ef-home-save-note>span{font-size:13px;color:var(--tx-cream)}
+.ef-home .ef-home-notice{font-size:12px;font-weight:400}
+
+/* Header: Everfolk Weaving Fates and the main destinations. */
+.ef-home .ef-home-weave-bar{min-height:66px;gap:16px;margin-inline:calc((100% - var(--coast-viewport-width, var(--home-viewport-width))) / 2);padding:5px calc(var(--home-viewport-width) * .026);border:0;background:#102e37}
+.ef-home .ef-home-weave-bar-main{gap:12px 0;flex-wrap:nowrap}
+.ef-home .ef-home-weave-brand{gap:6px;padding:4px 40px 4px 0;margin-right:32px;border-right:1px solid #f4d38f33}
+.ef-home .ef-home-weave-brand strong{font-size:32px;line-height:1.02;letter-spacing:-.025em}
+.ef-home .ef-home-weave-brand>span{font-size:10px;font-weight:500;letter-spacing:2.6px;color:var(--tx-gold)}
+.ef-home .ef-home-weave-links{gap:6px 48px;padding-right:0;border-right:0}
+.ef-home .ef-home-weave-links>a,.ef-home .ef-home-weave-links>button{font-size:14px;font-weight:500;letter-spacing:0;color:var(--tx-cream)}
+.ef-home .ef-home-weave-links>a:hover,.ef-home .ef-home-weave-links>button:hover{color:var(--tx-gold);text-shadow:none}
+.ef-home .ef-home-ranked{flex:0 0 350px;min-width:0;padding-left:0;border-left:0}
+.ef-home .main-menu-ranked{gap:0}
+.ef-home .main-menu-ranked>button{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:0 20px 0 18px;border:1px solid #c9a35f;border-radius:0;background:transparent;box-shadow:none;color:var(--tx-cream);font-size:14px;font-weight:500}
+.ef-home .main-menu-ranked>button span{font-size:18px;color:var(--tx-gold)}
+.ef-home .main-menu-ranked>button:hover:not(:disabled){background:#f4d38f14;border-color:var(--tx-gold);color:#fff6e2}
+.ef-home .main-menu-ranked>p{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media(max-width:1024px){
+  .ef-home .ef-home-weave-links{gap:6px 28px}
+  .ef-home .ef-home-weave-brand{padding-right:26px;margin-right:24px}
+  .ef-home .ef-home-ranked{flex-basis:270px}
+}
+@media(max-width:880px){
+  .ef-home .ef-home-links{gap:2px 16px}
+  .ef-home .ef-home-links>a,.ef-home .ef-home-links>button{font-size:12px}
+  .ef-home .ef-home-weave-bar-main{flex-wrap:wrap}
+}
+@media(min-width:701px) and (max-height:720px){
+  .ef-home .ef-home-tagline{font-size:40px}
+  .ef-home .ef-home-intro{font-size:17px;margin-bottom:24px}
+}
+@media(max-width:700px){
+  .ef-home .ef-home-utility-bar{flex-wrap:wrap;justify-content:space-between;gap:0 8px;padding-block:3px}
+  .ef-home .ef-home-links{display:flex;flex:0 0 100%;order:1;justify-content:center;gap:0 12px;margin:0}
+  .ef-home .ef-home-links>a,.ef-home .ef-home-links>button{min-height:40px;font-size:11px}
+  .ef-home .ef-home-body{padding-top:clamp(105px, 18svh, 150px)}
+  .ef-home .ef-coast{height:clamp(365px, 62svh, 520px)}
+  .ef-home .ef-coast-canvas{object-position:43% center}
+  .ef-home .ef-home-eyebrow{font-size:11px;letter-spacing:3.2px}
+  .ef-home h1 .ef-title-wrap{width:min(75%,315px);min-height:clamp(74px, 11svh, 95px)}
+  .ef-home .ef-home-tagline{font-size:34px}
+  .ef-home .ef-home-intro{font-size:16px;padding-inline:8px}
+  .ef-home .ef-home-primary,.ef-home .ef-home-save strong{font-size:16px}
+  .ef-home .ef-home-actions,.ef-home .ef-home-save{width:min(100%,280px)}
+  .ef-home .ef-home-weave-bar{padding:8px max(16px,5vw);flex-direction:column;align-items:stretch;gap:5px}
+  .ef-home .ef-home-weave-bar-main{flex-wrap:wrap;gap:5px}
+  .ef-home .ef-home-weave-brand{border-right:0;padding-right:0;margin-right:0}
+  .ef-home .ef-home-weave-links{gap:4px 12px}
+  .ef-home .ef-home-weave-links>a,.ef-home .ef-home-weave-links>button{font-size:12px}
+  .ef-home .ef-home-ranked{flex:auto;border-top:0;padding-top:0}
+}
+@media(forced-colors:active){.ef-home .ef-home-tagline{-webkit-text-fill-color:CanvasText}}
+
+/* Shared control styles can load after the menu. Keep their surfaces flat here. */
+:is(.ef-home, .main-menu),
+:is(.ef-home, .main-menu) *,
+:is(.ef-home, .main-menu)::before,
+:is(.ef-home, .main-menu)::after,
+:is(.ef-home, .main-menu) *::before,
+:is(.ef-home, .main-menu) *::after {
+  background-image:none !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+}

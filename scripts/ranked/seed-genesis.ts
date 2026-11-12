@@ -10,7 +10,7 @@ import { startRankedSession } from "../../client/chain/ranked-session.ts";
 import { createServerSignerVerifier } from "../../server/ranked/verifier.ts";
 import { createEngine } from "../../src/index.ts";
 import type { WorldPack } from "../../src/types.ts";
-import { advanceYearWithFocus, selectAutomaticChoice, type YearlyFocusId } from "../../client/yearly-focus.ts";
+import { advanceYearWithFocus, selectAutomaticChoice, type YearlyFocusId } from "../../client/models/yearly-focus.ts";
 import { createCliContract, createFaucetAccount } from "./cli-contract.ts";
 import { nextState, PATH_IDS, type PathId } from "./path-policies.ts";
 

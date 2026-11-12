@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const contentCatalog = sqliteTable("content_catalog", {
   id: integer("id").primaryKey(),
@@ -29,4 +29,32 @@ export const rankedEvidence = sqliteTable("ranked_evidence", {
   evidenceJson: text("evidence_json").notNull(),
   saveJson: text("save_json").notNull(),
   createdAt: text("created_at").notNull(),
+});
+
+/** One testnet drip per Privy user; the row is reserved before the transfer and released if it fails. */
+export const signinFunding = sqliteTable("signin_funding", {
+  privyUserId: text("privy_user_id").primaryKey(),
+  accountId: text("account_id").notNull().unique(),
+  amount: text("amount").notNull(),
+  txHash: text("tx_hash"),
+  createdAt: text("created_at").notNull(),
+}, table => [index("signin_funding_created_at_idx").on(table.createdAt)]);
+
+/** Online free-play NPC sessions, isolated from ranked evidence and content editing. */
+export const npcSessions = sqliteTable("npc_sessions", {
+  id: text("id").primaryKey(),
+  revision: integer("revision").notNull(),
+  recordJson: text("record_json").notNull(),
+});
+
+/** Atomic daily reservations shared by all sessions for an authenticated user. */
+export const npcUsage = sqliteTable("npc_usage", {
+  id: text("id").primaryKey(),
+  used: integer("used").notNull(),
+});
+
+/** Immutable world revisions allow old NPC sessions to survive content updates. */
+export const npcWorlds = sqliteTable("npc_worlds", {
+  id: text("id").primaryKey(),
+  worldJson: text("world_json").notNull(),
 });

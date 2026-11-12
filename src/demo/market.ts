@@ -9,35 +9,19 @@
  * for the merchant's declared imports (the source of goods). Every movement is journalled.
  */
 import type {
-  ArmyLevel, DemoContext, DemoDefinition, DemoState, FloodLevel, Good, LifeStateWithDemo, MarketConfig, RoadLevel,
+  DemoContext, DemoDefinition, DemoState, FloodLevel, Good, LifeStateWithDemo, MarketConfig,
   TownState, TradeCommand, TradeItem,
 } from "./contracts.ts";
 import { GOODS, TRADE_ITEMS } from "./types.ts";
 import { townDecision } from "./agents.ts";
 import { startContractShipment } from "./service.ts";
 import { changeReputation } from "./works.ts";
+import { farmSaleReason } from "../capabilities/farming.ts";
+import { BPS, adjustments, buyPrice, rulePrice, tuning } from "./market-rules.ts";
+import { addPressure, clearQuote, depthQuote, leanYearStanding, orderValue, pressureFactorBps, priceText, recoverPressure } from "./market-depth.ts";
 
-const BPS = 10_000;
 const DEALER_JOB = "grain-dealer";
 const CURRENCY = "drachmas";
-
-/** Optional tuning with the defaults used when a world leaves a field out. */
-function tuning(m: MarketConfig) {
-  return {
-    growerEating: m.growerEating ?? 2800,
-    growerSpoilageBps: m.growerSpoilageBps ?? 800,
-    growerReleaseBps: m.growerReleaseBps ?? 6000,
-    merchantMaxStockBps: m.merchantMaxStockBps ?? 15_000,
-    armyPurseReserve: m.armyPurseReserve ?? 1000,
-    armyPremiumBps: m.armyPremiumBps ?? { quiet: 0, recruiting: 2500, war: 5000 } satisfies Record<ArmyLevel, number>,
-    metalsPressureBps: m.metalsPressureBps ?? { quiet: 0, recruiting: 2000, war: 5000 } satisfies Record<ArmyLevel, number>,
-    silkPressureBps: m.silkPressureBps ?? { safe: 0, uneasy: 1500, dangerous: 4000 } satisfies Record<RoadLevel, number>,
-    cropPressureBps: m.cropPressureBps ?? { low: 2500, normal: 0, high: -2500 } satisfies Record<FloodLevel, number>,
-    maxAnimals: m.maxAnimals ?? 3,
-    minTradeAge: m.minTradeAge ?? 12,
-    fairTradeReputation: m.fairTradeReputation ?? 1,
-  };
-}
 
 const LABELS: Record<TradeItem, readonly [string, string]> = {
   grain: ["measure of grain", "measures of grain"], flax: ["bundle of flax", "bundles of flax"],
@@ -45,6 +29,9 @@ const LABELS: Record<TradeItem, readonly [string, string]> = {
   silk: ["bolt of Coan silk", "bolts of Coan silk"], linen: ["bolt of linen", "bolts of linen"],
   ox: ["ox", "oxen"], donkey: ["donkey", "donkeys"],
 };
+
+/** The goods themselves, for sentences about a market glut or shortage. */
+const GOODS_NOUN: Record<TradeItem, string> = { grain: "grain", flax: "flax", silver: "silver", gold: "gold", silk: "Coan silk", linen: "linen", ox: "oxen", donkey: "donkeys" };
 
 function label(item: TradeItem, quantity: number): string {
   return LABELS[item][quantity === 1 ? 0 : 1];
@@ -65,6 +52,7 @@ export function initialTown(def: DemoDefinition): TownState {
     merchant: { ...m.start.merchant, goods: { ...m.start.merchant.goods }, animals: { ...m.start.merchant.animals } },
     army: { ...m.start.army },
     prices, armyGrainPrice: m.basePrice.grain,
+    ...(m.depth ? { pressure: {} } : {}),
   };
 }
 
@@ -100,45 +88,9 @@ function playerCash(life: LifeStateWithDemo): number {
 
 // ── Prices ──────────────────────────────────────────────────────────────────
 
-function priceBounds(m: MarketConfig, item: TradeItem): { floor: number; ceiling: number } {
-  const base = m.basePrice[item];
-  const floor = Math.max(1, Math.floor(base * m.priceFloorBps / BPS));
-  return { floor, ceiling: Math.max(floor, Math.floor(base * m.priceCeilingBps / BPS)) };
-}
-
-/** Base price moved by `adjustBps`, rounded and clamped to the item's floor and ceiling. */
-function rulePrice(m: MarketConfig, item: TradeItem, adjustBps: number): number {
-  const { floor, ceiling } = priceBounds(m, item);
-  const raw = Math.round(m.basePrice[item] * Math.max(0, BPS + adjustBps) / BPS);
-  return Math.min(ceiling, Math.max(floor, raw));
-}
-
-/** What the merchant pays: its asking price less the spread, never below one drachma. */
-function buyPrice(m: MarketConfig, sell: number): number {
-  return Math.max(1, Math.floor(sell * BPS / (BPS + m.spreadBps)));
-}
-
 function armyPrice(def: DemoDefinition, demo: DemoState, sell: number): number {
   const premium = tuning(def.market).armyPremiumBps[demo.year.army];
   return Math.max(sell, Math.round(sell * (BPS + premium) / BPS));
-}
-
-/**
- * Grain: stock below `targetGrainStock` raises the price (up to +100% when empty), stock above lowers
- * it (at most −50%); army demand over the quiet level and the road's transport cost add to it; the
- * flood's crop pressure moves it. Metals answer to the army, silk to the road, flax and linen to the flood.
- */
-function adjustments(def: DemoDefinition, demo: DemoState): Record<TradeItem, number> {
-  const m = def.market, t = tuning(m), year = demo.year;
-  const target = Math.max(1, m.targetGrainStock);
-  const stockBps = Math.min(BPS, Math.max(-5000, Math.round((m.targetGrainStock - demo.town.merchant.grain) * BPS / target)));
-  const demandBps = Math.round(Math.max(0, m.armyDemand[year.army] - m.armyDemand.quiet) * BPS / target);
-  const crop = t.cropPressureBps[year.flood];
-  const metals = t.metalsPressureBps[year.army];
-  return {
-    grain: stockBps + demandBps + m.transportCostBps[year.road] + crop,
-    flax: crop, linen: crop, silver: metals, gold: metals, silk: t.silkPressureBps[year.road], ox: 0, donkey: 0,
-  };
 }
 
 /** The fixed-rule quotes for the current state. Pure: never changes state or draws randomness. */
@@ -161,10 +113,29 @@ export function movePrices(ctx: DemoContext): void {
   const before = demo.town.prices.grain;
   demo.town.prices = { ...rule.prices, grain };
   demo.town.armyGrainPrice = armyPrice(def, demo, grain.sell);
+  if (def.market.depth) { settleDepthYear(ctx); return; }
   if (before.buy === grain.buy && before.sell === grain.sell) return;
   const who = decision?.kind === "prices" && demo.agents.assigned.merchant
     ? `The merchant (run by agent ${demo.agents.assigned.merchant})` : "Following its usual rule, the merchant";
   ctx.journal("market-prices", `${who} now asks ${grain.sell} ${CURRENCY} a measure of grain and pays ${grain.buy}.`);
+}
+
+/** Depth worlds: the market works off part of the player's trade weight; the journal says where prices stand. */
+function settleDepthYear(ctx: DemoContext): void {
+  const { def, demo } = ctx, depth = def.market.depth!;
+  recoverPressure(def, demo);
+  const grain = depthQuote(def, demo, "grain");
+  ctx.journal("market-prices", `Following its usual rule, the merchant now asks ${priceText("grain", grain.ask)} ${CURRENCY} a measure of grain and pays ${priceText("grain", grain.bid)}.`);
+  for (const item of TRADE_ITEMS) {
+    const pressure = demo.town.pressure?.[item] ?? 0;
+    const shift = pressureFactorBps(depth, item, pressure) - BPS;
+    if (Math.abs(shift) < 500) continue;
+    const now = depthQuote(def, demo, item), usual = clearQuote(def, demo, item);
+    const percent = Math.round(Math.abs(shift) / 100), per = item === "grain" ? "a measure" : `a ${label(item, 1)}`;
+    ctx.journal("market-pressure", shift < 0
+      ? `The merchant is still selling off the ${GOODS_NOUN[item]} you brought to market: it pays ${priceText(item, now.bid)} ${CURRENCY} ${per}, ${percent}% under its usual ${priceText(item, usual.bid)}. The price recovers as the market clears.`
+      : `Your purchases of ${GOODS_NOUN[item]} still keep the price up: the merchant asks ${priceText(item, now.ask)} ${CURRENCY} ${per}, ${percent}% over its usual ${priceText(item, usual.ask)}. The price eases as the market restocks.`);
+  }
 }
 
 // ── Townspeople ─────────────────────────────────────────────────────────────
@@ -278,12 +249,12 @@ function merchantReason(def: DemoDefinition, life: LifeStateWithDemo, command: T
     if (!def.startingResources && (item === "ox" || item === "donkey") && held + quantity > max) return `A household can keep at most ${max} ${label(item, max)}.`;
     const stock = merchantHolding(town, item);
     if (quantity > stock) return `The merchant has only ${stock} ${label(item, stock)} to sell.`;
-    const cost = quantity * town.prices[item].sell, cash = playerCash(life);
+    const cost = def.market.depth ? orderValue(def, life.demo, item, "buy", quantity).total : quantity * town.prices[item].sell, cash = playerCash(life);
     if (cost > cash) return `You need ${cost} ${CURRENCY} but have ${cash}.`;
     return undefined;
   }
   if (quantity > held) return `You hold only ${held} ${label(item, held)}.`;
-  const proceeds = quantity * town.prices[item].buy;
+  const proceeds = def.market.depth ? orderValue(def, life.demo, item, "sell", quantity).total : quantity * town.prices[item].buy;
   if (proceeds > town.merchant.cash) return `The merchant has only ${town.merchant.cash} ${CURRENCY} and cannot pay ${proceeds} ${CURRENCY}.`;
   return undefined;
 }
@@ -298,10 +269,15 @@ export function tradeReason(def: DemoDefinition, life: LifeStateWithDemo, comman
   if (life.age < t.minTradeAge) return `You are too young to trade at the market (from age ${t.minTradeAge}).`;
   if (!Number.isSafeInteger(command.quantity) || command.quantity < 1) return "Choose a whole quantity of at least 1.";
   if (command.quantity > m.maxOrderQuantity) return `Orders are limited to at most ${m.maxOrderQuantity} at a time.`;
+  if (command.item === "grain" && command.side === "sell") {
+    const reason = farmSaleReason({ demo: def }, life, command.quantity, command.reserveOverride);
+    if (reason) return reason;
+  }
   return command.counterparty === "army" ? armyReason(life, command) : merchantReason(def, life, command);
 }
 
 function tradeWithMerchant(ctx: DemoContext, command: TradeCommand): void {
+  if (ctx.def.market.depth) { tradeAtDepth(ctx, command); return; }
   const { item, quantity } = command, demo = ctx.demo, merchant = demo.town.merchant;
   const units = `${quantity} ${label(item, quantity)}`;
   if (command.side === "buy") {
@@ -319,6 +295,36 @@ function tradeWithMerchant(ctx: DemoContext, command: TradeCommand): void {
   ctx.journal("market-trade", `You sell ${units} to the merchant for ${proceeds} ${CURRENCY}.`);
   const fair = tuning(ctx.def.market).fairTradeReputation;
   if (item === "grain" && demo.year.flood === "low" && fair > 0) changeReputation(ctx, fair, "you brought grain to market in a lean year");
+}
+
+/** The journal line for an order that moved the price: what it fetched, how far the price moved, the merchant's stock. */
+function depthText(item: TradeItem, side: "buy" | "sell", quantity: number, value: ReturnType<typeof orderValue>, stock: number, who = "You"): string {
+  const units = `${quantity} ${label(item, quantity)}`, per = item === "grain" ? "a measure" : `a ${label(item, 1)}`;
+  const [from, to] = side === "sell" ? [value.from.bid, value.to.bid] : [value.from.ask, value.to.ask];
+  const deal = side === "sell" ? `${who} sell ${units} to the merchant for ${value.total} ${CURRENCY}` : `${who === "You" ? "You buy" : `${who} buys`} ${units} from the merchant for ${value.total} ${CURRENCY}`;
+  const average = item === "grain" && quantity > 0 ? ` (${(value.total / quantity).toFixed(2)} a measure on average)` : "";
+  const moved = from === to ? `The price held at ${priceText(item, from)} ${CURRENCY} ${per}.`
+    : `The price ${to < from ? "fell" : "rose"} from ${priceText(item, from)} to ${priceText(item, to)} ${CURRENCY} ${per} as ${side === "sell" ? "the merchant took in more than it can sell" : "its stock ran down"}.`;
+  const holding = item === "grain" ? `Its barn now holds ${stock} measures.` : `It now holds ${stock} ${label(item, stock)}.`;
+  return `${deal}${average}. ${moved} ${holding}`;
+}
+
+/** Depth worlds: the order is priced as it fills, and its weight stays on the market. */
+function tradeAtDepth(ctx: DemoContext, command: TradeCommand): void {
+  const { item, quantity, side } = command, demo = ctx.demo, merchant = demo.town.merchant;
+  const value = orderValue(ctx.def, demo, item, side, quantity);
+  if (side === "buy") {
+    moveItem(demo, item, quantity);
+    ctx.apply([{ type: "cash", delta: -value.total }]);
+    merchant.cash += value.total;
+  } else {
+    moveItem(demo, item, -quantity);
+    merchant.cash -= value.total;
+    ctx.apply([{ type: "cash", delta: value.total }]);
+  }
+  addPressure(demo, item, side, quantity);
+  ctx.journal("market-trade", depthText(item, side, quantity, value, merchantHolding(demo.town, item)));
+  if (side === "sell" && item === "grain" && demo.year.flood === "low") changeReputation(ctx, leanYearStanding(ctx.def, quantity), "you brought grain to market in a lean year");
 }
 
 /**
@@ -341,6 +347,7 @@ export function executeTrade(ctx: DemoContext, command: TradeCommand): void {
 /** Household shortfall purchase at the merchant's sell price; returns grain bought. Not the yearly visit. */
 export function buyForHousehold(ctx: DemoContext, quantity: number): number {
   if (!Number.isSafeInteger(quantity) || quantity <= 0) return 0;
+  if (ctx.def.market.depth) return buyForHouseholdAtDepth(ctx, quantity);
   const demo = ctx.demo, price = demo.town.prices.grain.sell;
   const bought = Math.min(quantity, demo.town.merchant.grain, Math.floor(playerCash(ctx.life as LifeStateWithDemo) / price));
   if (bought <= 0) return 0;
@@ -352,6 +359,25 @@ export function buyForHousehold(ctx: DemoContext, quantity: number): number {
   return bought;
 }
 
+/** Depth worlds: the most the household can afford of `quantity` as the price rises, bought in one order. */
+function buyForHouseholdAtDepth(ctx: DemoContext, quantity: number): number {
+  const demo = ctx.demo, cash = playerCash(ctx.life as LifeStateWithDemo);
+  const cost = (units: number): number => orderValue(ctx.def, demo, "grain", "buy", units).total;
+  let low = 0, high = Math.min(quantity, demo.town.merchant.grain);
+  while (low < high) {
+    const middle = Math.ceil((low + high) / 2);
+    if (cost(middle) <= cash) low = middle; else high = middle - 1;
+  }
+  if (low <= 0) return 0;
+  const value = orderValue(ctx.def, demo, "grain", "buy", low);
+  moveItem(demo, "grain", low);
+  ctx.apply([{ type: "cash", delta: -value.total }]);
+  demo.town.merchant.cash += value.total;
+  addPressure(demo, "grain", "buy", low);
+  ctx.journal("market-household-buy", depthText("grain", "buy", low, value, demo.town.merchant.grain, "The household"));
+  return low;
+}
+
 // ── Views ───────────────────────────────────────────────────────────────────
 
 export interface QuoteView { item: TradeItem; buy: number; sell: number; merchantStock: number; merchantCanBuy: number }
@@ -359,6 +385,14 @@ export interface MarketView {
   quotes: QuoteView[]; armyGrainPrice: number; armyOpen: boolean; visitUsed: boolean;
   merchantCash: number; reasons: string[];
 }
+function quoteView(def: DemoDefinition, demo: DemoState, item: TradeItem): QuoteView {
+  const t = demo.town, merchantStock = merchantHolding(t, item);
+  if (!def.market.depth) return { item, ...t.prices[item], merchantStock, merchantCanBuy: Math.floor(t.merchant.cash / Math.max(1, t.prices[item].buy)) };
+  // Depth worlds: the current quote after the player's recent trades; grain in hundredths of a drachma.
+  const quote = depthQuote(def, demo, item);
+  return { item, buy: quote.bid / 100, sell: quote.ask / 100, merchantStock, merchantCanBuy: Math.floor(t.merchant.cash * 100 / quote.bid) };
+}
+
 /** Read-only quotes and limits. Never changes state or draws randomness. */
 export function marketView(def: DemoDefinition, life: LifeStateWithDemo): MarketView {
   const t = life.demo.town, minAge = tuning(def.market).minTradeAge;
@@ -368,8 +402,7 @@ export function marketView(def: DemoDefinition, life: LifeStateWithDemo): Market
     ...(life.age < minAge ? [`You are too young to trade at the market (from age ${minAge}).`] : []),
   ];
   return {
-    quotes: TRADE_ITEMS.map(item => ({ item, ...t.prices[item], merchantStock: merchantHolding(t, item),
-      merchantCanBuy: Math.floor(t.merchant.cash / Math.max(1, t.prices[item].buy)) })),
+    quotes: TRADE_ITEMS.map(item => quoteView(def, life.demo, item)),
     armyGrainPrice: t.armyGrainPrice,
     armyOpen: life.character?.jobId === DEALER_JOB && life.demo.shipment === null && reasons.length === 0,
     visitUsed, merchantCash: t.merchant.cash, reasons,

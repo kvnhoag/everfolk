@@ -1,4 +1,4 @@
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import type { StorehouseFlow, StorehouseRow } from "./storehouse-model.ts";
 import "./storehouse.css";
 
@@ -31,9 +31,9 @@ function Row({ row }: { row: StorehouseRow }) {
   </li>;
 }
 
-export default function Storehouse({ rows }: { rows: StorehouseRow[] }) {
-  return <section aria-label="Storehouse" className="storehouse">
-    <h3>Storehouse</h3>
+export default function ResourceYearDetails({ rows }: { rows: StorehouseRow[] }) {
+  return <section aria-label="Yearly resource details" className="aoe-drawer-section storehouse">
+    <h3>Yearly resource details</h3>
     <ul className="storehouse-list">{rows.map(row => <Row key={row.id} row={row} />)}</ul>
   </section>;
 }

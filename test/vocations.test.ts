@@ -1,4 +1,5 @@
 import { vocationInventory } from "../src/vocations/view.ts";
+import { TRADE_ITEMS } from "../src/demo/types.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/engine.ts";
@@ -25,6 +26,9 @@ function fixture(options: { craft?: number; cash?: number; job?: string; events?
   for (const definition of Object.values(world.stats)) delete definition.initialRange;
   for (const [id, definition] of Object.entries(world.character!.skills)) definition.initial = id === "craft" ? options.craft ?? 24 : 0;
   world.origins = [{ id: "test-household", title: "Test household", text: "Deterministic accounting fixture.", weight: 1, effects: [] }];
+  world.demo!.startingResources = { defaults: Object.fromEntries(TRADE_ITEMS.map(item => [item, {
+    min: item === "grain" ? world.demo!.household.startingGrain : 0, max: item === "grain" ? world.demo!.household.startingGrain : 0,
+  }])) as NonNullable<NonNullable<WorldPack["demo"]>["startingResources"]>["defaults"] };
   world.stats.wealth.initial = (options.cash ?? 1000) / world.economy!.unitsPerPoint;
   const engine = createEngine(world);
   let life = engine.start("vocation-ledger");
@@ -188,8 +192,8 @@ test("malformed vocation packs reject unknown references, duplicate supports and
 });
 
 test("new work previews match actual skill gains and cash transfers", async () => {
-  const { getSkillImpact } = await import("../client/skill-impact.ts");
-  const { getMoneyImpact } = await import("../client/wealth.ts");
+  const { getSkillImpact } = await import("../client/models/skill-impact.ts");
+  const { getMoneyImpact } = await import("../client/models/wealth.ts");
   const { engine, life, world } = fixture();
   const choice = engine.getActivities(life).find(a => a.id === "v-apprentice-pottery")!;
   const gains = getSkillImpact(choice, life, world);

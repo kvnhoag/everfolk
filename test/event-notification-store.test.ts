@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createEventNotificationStore } from "../client/event-notification-store.ts";
+import { createEventNotificationStore } from "../client/state/event-notification-store.ts";
 
 function memoryStorage() {
   const values = new Map<string, string>();

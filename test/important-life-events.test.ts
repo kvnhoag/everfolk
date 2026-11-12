@@ -1,9 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { builtinEngine } from "../client/session.ts";
-import { buildImportantLifeEvents } from "../client/important-life-events.ts";
-import { buildLifeEvents } from "../client/life-events.ts";
-import { demoWorld } from "./fixtures/demo/world.ts";
+import { builtinEngine } from "../client/lib/world-session.ts";
+import { buildImportantLifeEvents } from "../client/models/important-life-events.ts";
+import { buildLifeEvents } from "../client/models/life-events.ts";
 import type { Effect, JournalEntry, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 
 function fixture() {
@@ -103,85 +102,15 @@ test("small loan instalments and routine activity fees stay quiet without hiding
 });
 
 
-test("influence-catalog decisions stay pending until their actual outcome is recorded", () => {
+test("vocation crises, completed community works and applied influences remain important", () => {
   const { world, life } = fixture();
-  world.influences = [{ id: "outside-school", label: "A school opens", baseWeight: 5, event: {
-    id: "catalog-school", title: "An invitation from a scholar", text: "Will you join the school?", trigger: { type: "random", weight: 1 },
-    choices: [{ id: "catalog-accept", text: "Join", outcomes: [{ id: "catalog-joined", text: "You begin a new apprenticeship.", weight: 1, effects: [{ type: "job", job: "apprentice" }] }] }],
-  } }];
-  life.journal = [{ ...entry("event", "catalog-school"), source: { contractId: "figures.test", tokenId: "lesson-nft" } }];
-  assert.equal(buildLifeEvents(life, world).flatMap(year => year.events).length, 0, "An external decision prompt is not a completed fact.");
-  assert.deepEqual(ids(life, world), []);
-  life.journal.push(entry("outcome", "catalog-joined"));
-  const completed = buildLifeEvents(life, world).flatMap(year => year.events);
-  assert.equal(completed[0].title, "An invitation from a scholar");
-  assert.equal(completed[0].marker?.tokenId, "lesson-nft", "The accepted outcome keeps its original NFT attribution.");
-  assert.deepEqual(ids(life, world), ["catalog-joined"]);
-});
-
-test("NFT effects use realized journal changes, while capped and effectless deeds stay quiet", () => {
-  const { world, life } = fixture();
-  world.influences = [{ id: "knowledge-deed", label: "A lesson", baseWeight: 3, effects: [{ type: "stat", stat: "knowledge", delta: 30 }] },
-    { id: "empty-deed", label: "Nothing changes", baseWeight: 1, effects: [] }];
-  life.journal = [{ ...entry("influence", "knowledge-deed"), deltas: {} },
-    { ...entry("influence", "empty-deed"), deltas: {} },
-    { ...entry("influence", "knowledge-deed"), deltas: { knowledge: 3 } }];
-  assert.deepEqual(ids(life, world), ["knowledge-deed"], "Only the actually effective applied deed appears.");
-});
-
-test("demo household crises, responsibility and completed works notify; ordinary settlement ticks do not", () => {
-  const { world, life } = fixture();
-  world.demo = demoWorld().demo;
-  const quiet = ["household-harvest", "household-rent", "household-feed-ox", "household-bought-grain", "household-eat",
-    "household-spoilage", "household-spinning", "army-wages", "market-prices", "town-year", "work-well-progress", "offer-declined", "offer-lapsed"];
-  const changed = ["household-hunger", "household-ox-died", "household-hand-over", "household-parents-gone", "work-well-built",
-    "convoy-contract", "convoy-loss", "convoy-pay-shortfall", "army-ration-shortfall", "army-wage-shortfall"];
-  life.journal = [...quiet, ...changed].map(id => entry("event", id));
-  const before = JSON.stringify({ life, world });
-  assert.deepEqual(new Set(ids(life, world)), new Set(changed));
-  assert.equal(JSON.stringify({ life, world }), before);
-});
-
-test("demo contracts notify only after actual settlement and do not duplicate their source outcome", () => {
-  const { world, life } = fixture();
-  world.demo = demoWorld().demo;
-  add(world, "contract", [], { mode: undefined, choices: [{ id: "accept-contract", text: "Accept", outcomes: [{
-    id: "contract-accepted", text: "You answer the offer.", weight: 1, effects: [{ type: "demo", effect: { kind: "offer", action: "accept" } }],
-  }] }] });
-  life.journal = [entry("outcome", "contract-accepted"), entry("event", "offer-lapsed"),
-    entry("outcome", "contract-accepted"), entry("event", "offer-settled")];
-  assert.deepEqual(ids(life, world), ["contract-accepted"]);
-});
-
-test("building progress and its regular costs stay quiet until the community work is finished", () => {
-  const { world, life } = fixture();
-  world.demo = demoWorld().demo;
-  add(world, "build-well", [{ type: "cash", delta: -200 }, { type: "demo", effect: { kind: "work", work: "well", progress: 1 } }]);
-  life.journal = [entry("event", "build-well"), entry("event", "work-well-progress"),
-    entry("event", "build-well"), entry("event", "work-well-built"), entry("event", "reputation-change")];
-  assert.deepEqual(ids(life, world), ["build-well"], "One completed work produces one notification.");
-});
-
-test("major demo trades notify without making every small purchase a life event", () => {
-  const { world, life } = fixture();
-  world.demo = demoWorld().demo;
-  const threshold = Math.max(10, world.demo!.household.adultRation * world.demo!.market.basePrice.grain);
-  life.journal = [{ ...entry("event", "market-trade"), text: "You buy one measure of grain from the merchant for 1 drachmas." },
-    { ...entry("event", "market-trade"), text: `You sell grain to the merchant for ${threshold} drachmas.` }];
-  assert.deepEqual(ids(life, world), ["market-trade"]);
-});
-
-test("demo NFT granary and seed help notify, while a road deed without a convoy has no effect", () => {
-  const { world, life } = fixture();
-  world.demo = demoWorld().demo;
-  world.influences = [{ id: "farming.stock-granary", label: "A granary opens", baseWeight: 3, effects: [{ type: "demo", effect: {
-    kind: "grain", delta: world.demo!.household.adultRation, cause: "granary",
-  } }] }, { id: "farming.share-seed", label: "Seed arrives", baseWeight: 1, effects: [{ type: "demo", effect: { kind: "harvest-bonus", bps: 1000 } }] },
-    { id: "military.guard-road", label: "A road patrol", baseWeight: 3, effects: [{ type: "demo", effect: { kind: "convoy", action: "depart", riskCutBps: 2000 } }] }];
-  life.journal = [{ ...entry("influence", "military.guard-road"), deltas: {} },
-    { ...entry("influence", "farming.stock-granary"), deltas: {} }, entry("event", "grain-granary"),
-    { ...entry("influence", "farming.share-seed"), deltas: {} }, entry("event", "convoy-assigned"),
-    { ...entry("influence", "military.guard-road"), deltas: {} }];
-  assert.deepEqual(new Set(ids(life, world)), new Set(["farming.stock-granary", "farming.share-seed", "convoy-assigned", "military.guard-road"]));
-  assert.equal(ids(life, world).filter(id => id === "military.guard-road").length, 1);
+  // The projection only needs the presence of the vocation economy, never its balances.
+  world.demo = {} as NonNullable<WorldPack["demo"]>;
+  world.influences = [{ id: "past-life-granary", label: "An inherited granary lesson", baseWeight: 1, effects: [{ type: "stat", stat: "knowledge", delta: 1 }] }];
+  life.journal = [entry("event", "household-harvest"), entry("event", "market-prices"),
+    entry("event", "household-hunger"), entry("event", "convoy-loss"), entry("event", "work-well-progress"),
+    entry("event", "work-well-built"), entry("event", "year-road-dangerous"), { ...entry("influence", "past-life-granary"), deltas: { knowledge: 1 } }];
+  assert.deepEqual(new Set(ids(life, world)), new Set([
+    "household-hunger", "convoy-loss", "work-well-built", "year-road-dangerous", "past-life-granary",
+  ]));
 });

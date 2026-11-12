@@ -1,11 +1,13 @@
+import * as deepHousehold from "../deep-capabilities/household.ts";
+import type { WorldPack } from "../types.ts";
 /** Track A (+G) — household, farming, flax, family stages, hunger. */
 import type { DemoContext, DemoDefinition, HouseholdConfig, HouseholdState, LifeStateWithDemo, PlanCommand } from "./contracts.ts";
-import type { LifeState, WorldPack } from "../types.ts";
-import { capabilityRewards, capabilitySpoilageBps } from "../capabilities/rewards.ts";
-import { annualHouseholdRations, capabilityFarmPlan, capabilityStoreCapacity, prepareCapabilityFarmSettlement, recordCapabilityFarmFlow, recordCapabilityFarmLabour } from "../capabilities/farming.ts";
+import type { LifeState } from "../types.ts";
 import { FARMING_JOBS, FARMING_SKILL, LIVESTOCK } from "./types.ts";
 import { buyForHousehold } from "./market.ts";
 import { spoilageCutBps } from "./works.ts";
+import { beginFarmHarvest, farmCapacityBonus, farmSpoilageCut, farmYieldPlan, ordinarySeedGrain, recordFarmFlow } from "../capabilities/farming.ts";
+import { hasServiceRole } from "./service-role.ts";
 
 const FULL = 10_000;
 const ADULT = 100;
@@ -37,10 +39,10 @@ function skill(life: LifeState, id: string): number {
 interface Member { role: "player" | "parent" | "spouse" | "child"; labour: number; ration: number }
 
 function isSoldier(life: LifeState): boolean {
-  return life.character?.jobId === "soldier";
+  return hasServiceRole(life);
 }
 function isFarming(life: LifeState): boolean {
-  return FARMING_JOB_IDS.includes(life.character?.jobId ?? "");
+  return FARMING_JOB_IDS.includes(life.character?.jobId ?? "") || Boolean(life.capabilities && ["master-cultivator", "master-household-farmer"].includes(life.character?.jobId ?? ""));
 }
 function isMarried(life: LifeState): boolean {
   return life.character?.relationshipStatus === "married";
@@ -56,14 +58,14 @@ function rationShare(h: HouseholdConfig, age: number): number {
 }
 
 /** Everyone in the household at `age`: the player, the unseen parents, spouse and children. */
-function members(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age, world?: WorldPack): Member[] {
+function members(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age): Member[] {
   const h = def.household, household = life.demo.household, list: Member[] = [];
   const parentsRun = household.parents === "working";
   // Farming jobs work full time; without other work the player helps at home by age; a soldier is away.
   const atHome = (life.character?.jobId ?? null) === null || parentsRun;
-  const farmWork = Boolean(world?.capabilities && life.vocations?.capabilityWork?.farmWorkAge === workAge);
-  const awayForWork = life.vocations?.workedAge === workAge && !farmWork;
-  const playerLabour = isSoldier(life) || awayForWork ? 0 : isFarming(life) ? ADULT : atHome ? youngLabour(h, age) : 0;
+  const farmWorkAtHome = life.capabilities?.farm?.actionAge === workAge;
+  const awayForWork = life.vocations?.workedAge === workAge && !farmWorkAtHome;
+  const playerLabour = isSoldier(life) || awayForWork ? 0 : isFarming(life) || farmWorkAtHome ? ADULT : atHome ? youngLabour(h, age) : 0;
   if (!isSoldier(life)) list.push({ role: "player", labour: playerLabour, ration: rationShare(h, age) });
   if (household.parents !== "gone") {
     const labour = parentsRun ? ADULT : Math.floor(ADULT * (h.retiredParentLabourBps ?? 0) / FULL);
@@ -79,14 +81,16 @@ function members(def: DemoDefinition, life: LifeStateWithDemo, age: number, work
 
 /** Household labour units working the plot (100 = one adult). Used by service and works. */
 export function labourUnits(def: DemoDefinition, life: LifeState, world?: WorldPack): number {
-  return labourAt(def, life as LifeStateWithDemo, life.age, life.age, world);
+  if (life.deepCapabilities) return deepHousehold.labourUnits(def, life, world);
+  return labourAt(def, life as LifeStateWithDemo, life.age);
 }
 /** Number of people eating from the household store this year (a soldier eats army rations). */
 export function mouths(def: DemoDefinition, life: LifeState): number {
+  if (life.deepCapabilities) return deepHousehold.mouths(def, life);
   return members(def, life as LifeStateWithDemo, life.age).length;
 }
-function labourAt(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age, world?: WorldPack): number {
-  return members(def, life, age, workAge, world).reduce((sum, member) => sum + member.labour, 0);
+function labourAt(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age): number {
+  return members(def, life, age, workAge).reduce((sum, member) => sum + member.labour, 0);
 }
 /** Grain the people of the household eat in a year. */
 function peopleRation(def: DemoDefinition, life: LifeStateWithDemo, age: number): number {
@@ -99,43 +103,62 @@ function animalRation(def: DemoDefinition, household: HouseholdState): number {
 
 // ── Harvest ─────────────────────────────────────────────────────────────────
 
-interface Yield { grain: number; flax: number }
+/** The household's crop, and what a neighbour keeps for working the share the household could not. */
+interface Yield { grain: number; flax: number; neighbourGrain: number; neighbourFlax: number }
 
 /** Grain and flax from plots × labour × flood × farming skill × ox × deed bonus. Pure. */
-function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number, world?: WorldPack): Yield {
+function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number): Yield {
   const h = def.household, household = life.demo.household;
   const plots = household.plots;
-  if (plots <= 0) return { grain: 0, flax: 0 };
-  const worked = Math.min(labourAt(def, life, age, age - 1, world), ADULT * plots);
-  const plan = world?.capabilities ? capabilityFarmPlan(world, life, age) : null;
-  const factor = (amount: number, crop: "grain" | "flax"): number => {
-    const seeded = plan ? bpsOf(amount, crop === "grain" ? plan.grainSeedRatioBps : plan.flaxSeedRatioBps) : amount;
-    let value = bpsOf(seeded, plan ? crop === "grain" ? plan.grainFloodBps : plan.flaxFloodBps : h.floodFactorBps[life.demo.year.flood]);
+  if (plots <= 0) return { grain: 0, flax: 0, neighbourGrain: 0, neighbourFlax: 0 };
+  const worked = Math.min(labourAt(def, life, age, age - 1), ADULT * plots);
+  const leased = h.leaseUnworkedBps === undefined ? 0 : ADULT * plots - worked;
+  const plan = farmYieldPlan(life, age);
+  const factor = (amount: number, flax = false): number => {
+    let value = bpsOf(amount, plan.floodFactorBps ?? h.floodFactorBps[life.demo.year.flood]);
+    value = bpsOf(value, flax ? plan.flaxSeedBps : plan.grainSeedBps);
+    value = bpsOf(value, FULL + (flax ? plan.flaxBonusBps : plan.grainBonusBps));
     value = bpsOf(value, FULL + skill(life, FARMING_SKILL) * h.skillBonusBps);
     if (household.animals.ox > 0) value = bpsOf(value, FULL + h.oxBonusBps);
-    value = bpsOf(value, FULL + household.harvestBonusBps);
-    return plan ? bpsOf(value, FULL + (crop === "grain" ? plan.grainBonusBps : plan.flaxBonusBps)) : value;
+    return bpsOf(value, FULL + household.harvestBonusBps);
   };
   const flaxPlots = Math.min(household.flaxPlots, plots);
-  const share = (perPlot: number, count: number): number => Math.floor(perPlot * count * worked / (ADULT * plots));
-  return { grain: whole(factor(share(h.yieldPerPlot, plots - flaxPlots), "grain")), flax: whole(factor(share(h.flaxPerPlot, flaxPlots), "flax")) };
+  const share = (perPlot: number, count: number, labour = worked): number => Math.floor(perPlot * count * labour / (ADULT * plots));
+  const grain = whole(factor(share(h.yieldPerPlot, plots - flaxPlots))), flax = whole(factor(share(h.flaxPerPlot, flaxPlots), true));
+  if (leased <= 0) return { grain, flax, neighbourGrain: 0, neighbourFlax: 0 };
+  // The leased share's whole crop is split; the two parts always add up to it.
+  const leasedGrain = whole(factor(share(h.yieldPerPlot, plots - flaxPlots, leased))), leasedFlax = whole(factor(share(h.flaxPerPlot, flaxPlots, leased), true));
+  const keptGrain = bpsOf(leasedGrain, h.leaseUnworkedBps!), keptFlax = bpsOf(leasedFlax, h.leaseUnworkedBps!);
+  return { grain: grain + keptGrain, flax: flax + keptFlax, neighbourGrain: leasedGrain - keptGrain, neighbourFlax: leasedFlax - keptFlax };
 }
 
 /** This year's grain harvest, kept for the rent step of the same settlement only. */
 const harvested = new WeakMap<object, number>();
+const harvestedFlax = new WeakMap<object, number>();
 
 /** Grain and flax harvest from plots × labour × flood × skill × ox. */
 export function harvest(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.harvest(ctx);
   const household = ctx.demo.household;
-  prepareCapabilityFarmSettlement(ctx);
-  const crop = expectedYield(ctx.def, ctx.life as LifeStateWithDemo, ctx.life.age, ctx.world);
+  const grainBeforeSeed = household.grain, flaxSeedBefore = ctx.life.vocations?.inventory["flax-seed"] ?? 0;
+  beginFarmHarvest(ctx.world, ctx.life, ctx.life.age - 1);
+  const seedGrain = grainBeforeSeed - household.grain, seedFlax = flaxSeedBefore - (ctx.life.vocations?.inventory["flax-seed"] ?? 0);
+  if (seedGrain + seedFlax > 0) ctx.journal("capability-seed-sown", `The household sows ${seedGrain} grain and ${seedFlax} flax-seed units from its actual stores.`);
+  const crop = expectedYield(ctx.def, ctx.life as LifeStateWithDemo, ctx.life.age);
   household.grain += crop.grain;
   household.flax += crop.flax;
-  recordCapabilityFarmFlow(ctx.world, ctx.life, "harvestGrain", crop.grain);
-  recordCapabilityFarmLabour(ctx.world, ctx.life, Math.min(labourAt(ctx.def, ctx.life as LifeStateWithDemo, ctx.life.age, ctx.life.age - 1, ctx.world), ADULT * household.plots));
+  if (crop.neighbourGrain + crop.neighbourFlax > 0) {
+    ctx.demo.town.grower.grain += crop.neighbourGrain;
+    ctx.demo.town.grower.flax += crop.neighbourFlax;
+    ctx.journal("household-lease", `Your household could not work all of its plot, so a neighbour worked the rest and kept ${crop.neighbourGrain} measures of grain${crop.neighbourFlax ? ` and ${crop.neighbourFlax} bundles of flax` : ""} as their half.`);
+  }
   harvested.set(ctx.demo, crop.grain);
+  harvestedFlax.set(ctx.demo, crop.flax);
+  recordFarmFlow(ctx.life, "grainHarvest", crop.grain);
+  recordFarmFlow(ctx.life, "flaxHarvest", crop.flax);
   const flood = ctx.demo.year.flood === "normal" ? "a normal flood" : `a ${ctx.demo.year.flood} flood`;
-  if (crop.grain + crop.flax === 0) ctx.journal("household-harvest", ctx.world.capabilities ? "The plot brought in no harvest: productive land needs both actual seed and available labour." : "No one could work the household plot this year; it lay fallow and brought in no harvest.");
+  if (crop.grain + crop.flax === 0 && ctx.def.household.buySeedWhenShort && household.plots > 0 && seedGrain + seedFlax === 0) ctx.journal("household-harvest", "There was no seed in the store to sow, so the household plot lay fallow and brought in no harvest.");
+  else if (crop.grain + crop.flax === 0) ctx.journal("household-harvest", "No one could work the household plot this year; it lay fallow and brought in no harvest.");
   else ctx.journal("household-harvest", `After ${flood}, the household plot brings in a harvest of ${crop.grain} measures of grain${crop.flax ? ` and ${crop.flax} bundles of flax` : ""}.`);
   if (household.harvestBonusBps > 0) {
     ctx.journal("household-harvest-bonus", "The extra help with seed and work promised for this harvest has now been used.");
@@ -149,12 +172,19 @@ function rentOn(def: DemoDefinition, grain: number): number {
 
 /** Tenant rent: a share of the harvest leaves the store. */
 export function payRent(ctx: DemoContext): void {
-  const crop = harvested.get(ctx.demo) ?? 0;
-  harvested.delete(ctx.demo);
+  if (ctx.world.deepCapabilities) return deepHousehold.payRent(ctx);
+  const crop = harvested.get(ctx.demo) ?? 0, flaxCrop = harvestedFlax.get(ctx.demo) ?? 0;
+  harvested.delete(ctx.demo); harvestedFlax.delete(ctx.demo);
+  // The landowner takes the same share of a flax crop, in flax (new free-play world only).
+  const flaxRent = ctx.def.household.rentOnFlax ? Math.min(rentOn(ctx.def, flaxCrop), ctx.demo.household.flax) : 0;
+  if (flaxRent > 0) {
+    ctx.demo.household.flax -= flaxRent;
+    ctx.journal("household-rent-flax", `You hand ${flaxRent} bundles of flax to the landowner as rent for the flax plots.`);
+  }
   const rent = Math.min(rentOn(ctx.def, crop), ctx.demo.household.grain);
   if (rent <= 0) return;
   ctx.demo.household.grain -= rent;
-  recordCapabilityFarmFlow(ctx.world, ctx.life, "rentGrain", rent);
+  recordFarmFlow(ctx.life, "rent", rent);
   ctx.journal("household-rent", `You hand ${rent} measures of grain to the landowner as rent for the plot.`);
 }
 
@@ -172,7 +202,7 @@ function feedAnimals(ctx: DemoContext): void {
     for (let head = 0; head < household.animals[animal]; head++) {
       if (household.grain >= feed[animal]) { household.grain -= feed[animal]; fed += 1; } else lost += 1;
     }
-    recordCapabilityFarmFlow(ctx.world, ctx.life, "animalFed", fed * feed[animal]);
+    if (fed > 0) recordFarmFlow(ctx.life, "animalFeed", fed * feed[animal]);
     if (fed > 0) ctx.journal(`household-feed-${animal}`, `Your ${animalName(animal, fed)} ${fed > 1 ? "eat" : "eats"} ${fed * feed[animal]} measures of grain.`);
     if (lost > 0) {
       household.animals[animal] -= lost;
@@ -185,21 +215,36 @@ function hungerHealthLoss(h: HouseholdConfig, shortfallBps: number): number {
   return Math.min(h.hungerHealthCap, Math.ceil(shortfallBps / 1_000) * h.hungerHealthPer10Pct);
 }
 
+/** The store a household must keep after eating so `seed` remains once the year's spoilage is taken. */
+function seedAfterSpoilage(def: DemoDefinition, life: LifeStateWithDemo, seed: number): number {
+  let kept = seed;
+  while (kept - spoilageOf(def, life, kept) < seed && kept < seed * 2 + 10) kept += 1;
+  return kept;
+}
+
 /** Animals then people eat; shortfall bought through `buyForHousehold`; hunger otherwise. */
 export function feedHousehold(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.feedHousehold(ctx);
   const household = ctx.demo.household, life = ctx.life as LifeStateWithDemo;
-  const need = ctx.world.capabilities ? annualHouseholdRations(ctx.def, life, life.age) : peopleRation(ctx.def, life, life.age), animalNeed = animalRation(ctx.def, household);
+  const need = peopleRation(ctx.def, life, life.age), animalNeed = animalRation(ctx.def, household);
   const missing = need + animalNeed - household.grain;
   if (missing > 0) {
     const cash = life.economy?.cash ?? 0;
     const bought = cash > 0 ? whole(buyForHousehold(ctx, missing)) : 0;
-    recordCapabilityFarmFlow(ctx.world, ctx.life, "purchasedGrain", bought);
+    if (bought > 0) recordFarmFlow(ctx.life, "boughtFood", bought);
     if (bought > 0) ctx.journal("household-bought-grain", `The store ran short, so the household bought ${bought} measures of grain from the merchant.`);
+  }
+  // Keep next year's seed: once everyone can eat, buy what the store lacks for sowing.
+  const seedShort = ctx.def.household.buySeedWhenShort ? need + animalNeed + seedAfterSpoilage(ctx.def, life, ordinarySeedGrain(life)) - household.grain : 0;
+  if (seedShort > 0 && (life.economy?.cash ?? 0) > 0 && household.grain >= need + animalNeed) {
+    const bought = whole(buyForHousehold(ctx, seedShort));
+    if (bought > 0) recordFarmFlow(ctx.life, "boughtFood", bought);
+    if (bought > 0) ctx.journal("household-bought-seed", `The household also buys ${bought} measures of grain to keep as seed for next year's sowing.`);
   }
   feedAnimals(ctx);
   const eaten = Math.min(need, household.grain);
   household.grain -= eaten;
-  recordCapabilityFarmFlow(ctx.world, ctx.life, "peopleFed", eaten);
+  recordFarmFlow(ctx.life, "rationsServed", eaten);
   if (eaten > 0) ctx.journal("household-eat", `The household eats ${eaten} measures of grain from the store this year.`);
   household.lastShortfallBps = need > 0 ? Math.floor((need - eaten) * FULL / need) : 0;
   if (household.lastShortfallBps === 0) return;
@@ -210,50 +255,50 @@ export function feedHousehold(ctx: DemoContext): void {
 
 // ── Spoilage and spinning ───────────────────────────────────────────────────
 
-function storeCapacity(def: DemoDefinition, life: LifeStateWithDemo, world?: WorldPack, age = life.age): number {
+function storeCapacity(def: DemoDefinition, life: LifeStateWithDemo, age = life.age): number {
   const dealer = life.character?.jobId === "grain-dealer" ? def.household.dealerExtraCapacity ?? 0 : 0;
-  return capabilityStoreCapacity(world, life, age) + dealer;
+  return life.demo.household.capacity + dealer + farmCapacityBonus(life, age);
 }
 
 /** Grain lost to spoilage from a store holding `grain`. Pure. */
-function spoilageOf(def: DemoDefinition, life: LifeStateWithDemo, grain: number, world?: WorldPack, age = life.age): number {
-  const h = def.household, capacity = storeCapacity(def, life, world, age);
+function spoilageOf(def: DemoDefinition, life: LifeStateWithDemo, grain: number, age = life.age): number {
+  const h = def.household, capacity = storeCapacity(def, life, age);
   const within = Math.min(grain, capacity), over = Math.max(0, grain - capacity);
   const reckoningCut = Math.min(h.reckoningSpoilageCutCapBps ?? 0, skill(life, "reckoning") * (h.reckoningSpoilageCutBpsPerPoint ?? 0));
   const cut = Math.min(FULL, reckoningCut + spoilageCutBps(def, life.demo));
-  if (world?.capabilities) {
-    const profile = capabilityRewards(Object.keys(life.capabilities?.learned ?? {}));
-    const priorRate = Math.floor(h.spoilageBps * (FULL - cut) / FULL);
-    const overLoss = bpsOf(over, h.overCapacitySpoilageBps);
-    return Math.min(grain, bpsOf(within, capabilitySpoilageBps(profile, h.spoilageBps, priorRate)) + overLoss - bpsOf(overLoss, cut));
+  const withinLoss = bpsOf(within, h.spoilageBps), overLoss = bpsOf(over, h.overCapacitySpoilageBps);
+  if (life.capabilities) {
+    const combined = Math.min(7500, FULL - Math.floor((FULL - cut) * (FULL - farmSpoilageCut(life)) / FULL));
+    return Math.min(grain, withinLoss - bpsOf(withinLoss, combined) + overLoss - bpsOf(overLoss, cut));
   }
-  const loss = bpsOf(within, h.spoilageBps) + bpsOf(over, h.overCapacitySpoilageBps);
+  const loss = withinLoss + overLoss;
   return Math.min(grain, loss - bpsOf(loss, cut));
 }
 
-function spareLabour(def: DemoDefinition, life: LifeStateWithDemo, age: number, world?: WorldPack): number {
-  return Math.max(0, labourAt(def, life, age, age - 1, world) - ADULT * life.demo.household.plots);
+function spareLabour(def: DemoDefinition, life: LifeStateWithDemo, age: number): number {
+  return Math.max(0, labourAt(def, life, age, age - 1) - ADULT * life.demo.household.plots);
 }
 
 /** Linen bolts that spare labour could spin from the flax in store. Pure. */
-function spinnable(def: DemoDefinition, life: LifeStateWithDemo, age: number, flax: number, world?: WorldPack): number {
+function spinnable(def: DemoDefinition, life: LifeStateWithDemo, age: number, flax: number): number {
   const h = def.household;
   if (h.flaxPerLinen <= 0) return 0;
-  const byLabour = Math.floor(spareLabour(def, life, age, world) * (h.spinBoltsPer100Labour ?? 10) / ADULT);
+  const byLabour = Math.floor(spareLabour(def, life, age) * (h.spinBoltsPer100Labour ?? 10) / ADULT);
   return Math.min(byLabour, Math.floor(flax / h.flaxPerLinen));
 }
 
 /** Spoilage and over-capacity loss; spinning flax into linen with spare labour. */
 export function spoilAndSpin(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.spoilAndSpin(ctx);
   const life = ctx.life as LifeStateWithDemo, household = ctx.demo.household;
-  const spoiled = spoilageOf(ctx.def, life, household.grain, ctx.world);
+  const spoiled = spoilageOf(ctx.def, life, household.grain);
   if (spoiled > 0) {
     household.grain -= spoiled;
-    recordCapabilityFarmFlow(ctx.world, ctx.life, "spoilage", spoiled);
-    const over = household.grain + spoiled > storeCapacity(ctx.def, life, ctx.world) ? " The store was overfull, so more of it spoiled." : "";
+    recordFarmFlow(ctx.life, "spoiled", spoiled);
+    const over = household.grain + spoiled > storeCapacity(ctx.def, life) ? " The store was overfull, so more of it spoiled." : "";
     ctx.journal("household-spoilage", `${spoiled} measures of stored grain spoil over the year.${over}`);
   }
-  const bolts = spinnable(ctx.def, life, life.age, household.flax, ctx.world);
+  const bolts = spinnable(ctx.def, life, life.age, household.flax);
   if (bolts > 0) {
     household.flax -= bolts * ctx.def.household.flaxPerLinen;
     ctx.demo.goods.linen += bolts;
@@ -281,6 +326,7 @@ function giveMarriageGift(ctx: DemoContext): void {
 
 /** Parents hand over, retire and pass; called once per settled year. */
 export function advanceFamily(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.advanceFamily(ctx);
   const h = ctx.def.household, household = ctx.demo.household, age = ctx.life.age;
   if (household.parents === "working" && (isMarried(ctx.life) || age >= h.handOverAge)) {
     household.parents = "retired";
@@ -297,20 +343,11 @@ export function advanceFamily(ctx: DemoContext): void {
 
 /** Free planting plan; throws when invalid. */
 export function applyPlan(ctx: DemoContext, command: PlanCommand): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.applyPlan(ctx, command);
   const plots = ctx.demo.household.plots, flaxPlots = command.flaxPlots;
   if (!Number.isSafeInteger(flaxPlots) || flaxPlots < 0) throw new Error("The number of flax plots must be a whole number of zero or more.");
   if (flaxPlots > plots) throw new Error(`You cannot plant flax on ${flaxPlots} plots: the household has only ${plots}.`);
-  if (ctx.world.capabilities) {
-    const profile = capabilityRewards(Object.keys(ctx.life.capabilities?.learned ?? {}));
-    if (flaxPlots > 0 && flaxPlots < plots && !profile.farm.mixedCrop) throw new Error("Learn crop allocation before coordinating a mixed-crop plan. Single-crop plans remain available.");
-    const work = ctx.life.vocations!.capabilityWork ??= {};
-    if (work.farmPlan?.age !== ctx.life.age) work.farmPlan = { age: ctx.life.age, mode: "none", sowing: "ordinary", maintainChannels: false, planRecorded: true };
-    else work.farmPlan.planRecorded = true;
-    if (flaxPlots === ctx.demo.household.flaxPlots) {
-      ctx.journal("household-plan", "You record this year's crop allocation and seed requirements, retaining the existing plot plan.");
-      return;
-    }
-  }
+  if (ctx.world.capabilities && ctx.life.capabilities && flaxPlots > 0 && flaxPlots < plots && !ctx.life.capabilities.learned.FC8) throw new Error("Learn Crop allocation before coordinating a mixed grain/flax plan. Single-crop plans remain available.");
   if (flaxPlots === ctx.demo.household.flaxPlots) return;
   ctx.demo.household.flaxPlots = flaxPlots;
   ctx.journal("household-plan", flaxPlots === 0
@@ -334,14 +371,14 @@ export interface HouseholdView {
  * Pure: never changes the life and never draws randomness. Market purchases are not predicted.
  */
 export function householdView(def: DemoDefinition, life: LifeStateWithDemo, world?: WorldPack): HouseholdView {
+  if (life.deepCapabilities) return deepHousehold.householdView(def, life, world);
   const h = life.demo.household, age = life.age + 1;
-  const crop = expectedYield(def, life, age, world);
+  const crop = expectedYield(def, life, age);
   const expectedRent = rentOn(def, crop.grain);
-  const expectedEating = (world?.capabilities ? annualHouseholdRations(def, life, age) : peopleRation(def, life, age)) + animalRation(def, h);
-  const seed = world?.capabilities ? capabilityFarmPlan(world, life, age)?.grainSeedUsed ?? 0 : 0;
-  const afterEating = Math.max(0, h.grain - seed + crop.grain - expectedRent - expectedEating);
-  return { grain: h.grain, capacity: storeCapacity(def, life, world, age), plots: h.plots, flaxPlots: h.flaxPlots, flax: h.flax, linen: life.demo.goods.linen,
-    animals: { ...h.animals }, mouths: members(def, life, age).length, labour: labourAt(def, life, age, age - 1, world),
-    expectedHarvest: crop.grain, expectedRent, expectedEating, expectedSpoilage: spoilageOf(def, life, afterEating, world, age), expectedFlax: crop.flax,
+  const expectedEating = peopleRation(def, life, age) + animalRation(def, h);
+  const afterEating = Math.max(0, h.grain + crop.grain - expectedRent - expectedEating);
+  return { grain: h.grain, capacity: storeCapacity(def, life, age), plots: h.plots, flaxPlots: h.flaxPlots, flax: h.flax, linen: life.demo.goods.linen,
+    animals: { ...h.animals }, mouths: members(def, life, age).length, labour: labourAt(def, life, age, age - 1),
+    expectedHarvest: crop.grain, expectedRent, expectedEating, expectedSpoilage: spoilageOf(def, life, afterEating, age), expectedFlax: crop.flax,
     shortfallBps: h.lastShortfallBps, headOfPlot: h.headSinceAge !== null, parents: h.parents };
 }

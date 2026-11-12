@@ -16,7 +16,7 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: PixelIcon, iconCells } = await import("../client/PixelIcon.tsx");
+const { default: PixelIcon, iconCells } = await import("../client/components/PixelIcon.tsx");
 hooks.deregister();
 
 const SKILL_ICONS = ["heart", "book", "coin", "people", "hourglass", "arrow", "check", "pause", "play", "close", "download", "restart", "pin", "feather", "ship", "home", "sun", "sculpture", "craft", "pottery", "carving", "literacy", "oratory", "philosophy", "reckoning", "astrology", "military", "commerce", "astronomy-calendar", "music-performance"];

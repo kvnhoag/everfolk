@@ -8,9 +8,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { getLegacyRoutes } from "../src/legacy.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { buildLateSkillRoutes, routeRequirements } from "../client/late-skill-routes.ts";
-import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/legacy-store.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { buildLateSkillRoutes, routeRequirements } from "../client/models/late-skill-routes.ts";
+import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/storage/legacy-store.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import vocational from "../worlds/demo/alexandria-lives-1.json" with { type: "json" };
@@ -23,7 +23,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LateSkillRoutes } = await import("../client/LateSkillRoutes.tsx");
+const { default: LateSkillRoutes } = await import("../client/components/LateSkillRoutes.tsx");
 hooks.deregister();
 const world = current as WorldPack, engine = createEngine(world);
 

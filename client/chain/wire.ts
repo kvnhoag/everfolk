@@ -1,5 +1,5 @@
-import type { Draw, LifeView, Listing, MintResult, TokenExtra, TokenStats, TokenView } from "./types.ts";
-import type { MintPack, MintTerms, PoolEntry } from "../../chain/types.ts";
+import type { Draw, LifeView, Listing, MarketTerms, MintResult, TokenExtra, TokenStats, TokenView } from "./types.ts";
+import type { MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry } from "../../chain/types.ts";
 
 /** Shape checks for contract answers. The chain is external data: check what the UI relies on, fail loudly otherwise. */
 
@@ -116,4 +116,43 @@ export function parsePoolEntries(value: unknown): PoolEntry[] {
 export function parseFigureSupply(value: unknown): [number, number] {
   if (!Array.isArray(value) || value.length !== 2 || !value.every(n => Number.isInteger(n) && n >= 0)) fail("figure supply");
   return value as [number, number];
+}
+
+const MAX_BPS = 10_000;
+
+export function parseMarketTerms(value: unknown): MarketTerms {
+  const terms = record(value, "market terms", { royalty_sources_bps: "number", royalty_treasury_bps: "number" });
+  const sources = terms.royalty_sources_bps as number;
+  const treasury = terms.royalty_treasury_bps as number;
+  if (![sources, treasury].every(bps => Number.isInteger(bps) && bps >= 0) || sources + treasury > MAX_BPS) fail("market terms");
+  return { royaltySourcesBps: sources, royaltyTreasuryBps: treasury };
+}
+
+export function parseStageMintQuote(value: unknown): StageMintQuote {
+  const quote = record(value, "stage mint quote", { total_fee: "string", source_share_bps: "number", cards: "array" });
+  yocto(quote.total_fee, "stage mint fee");
+  if (!Number.isInteger(quote.source_share_bps) || Number(quote.source_share_bps) < 0 || Number(quote.source_share_bps) > 10000) fail("stage source share");
+  if (!(quote.cards as unknown[]).length || (quote.cards as unknown[]).length > 7) fail("stage cards");
+  const ids = new Set(); let sum = 0n;
+  for (const value of quote.cards as unknown[]) {
+    const card = record(value, "stage card", { stage_id: "string", figure_id: "string|null", title: "string", character_name: "string", portrait_media: "string", stage_record: "object", fee: "string", action_id: "string" });
+    if (ids.has(card.stage_id)) fail("duplicate stage");
+    ids.add(card.stage_id); sum += BigInt(yocto(card.fee, "stage fee"));
+  }
+  if (sum !== BigInt(quote.total_fee as string)) fail("stage mint total");
+  return quote as unknown as StageMintQuote;
+}
+export function parseStageMintResult(value: unknown): StageMintResult {
+  const receipt = record(value, "stage mint result", { life_id: "string", evidence_hash: "string", total_fee: "string", tokens: "array" });
+  yocto(receipt.total_fee, "stage mint fee");
+  const tokens = receipt.tokens as unknown[];
+  if (!tokens.length || tokens.length > 7) fail("stage tokens");
+  const stages = new Set(), ids = new Set();
+  for (const token of tokens) {
+    const result = parseMintResult(token);
+    record(token, "stage token", { stage_id: "string", stage_title: "string", character_name: "string", portrait_media: "string" });
+    if (stages.has(result.stage_id) || ids.has(result.token_id)) fail("duplicate stage token");
+    stages.add(result.stage_id); ids.add(result.token_id);
+  }
+  return receipt as unknown as StageMintResult;
 }
