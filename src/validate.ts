@@ -131,7 +131,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears"], worldFields);
   let demoGrainGain = false;
   const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
@@ -140,6 +140,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   string(world.title, "world.title", 300);
   string(world.description, "world.description");
   const startYear = year(world.startYear, "world.startYear");
+  if (Object.hasOwn(world, "birthYears")) {
+    const range = object(world.birthYears, "world.birthYears", ["from", "to"]);
+    const from = year(range.from, "world.birthYears.from"), to = year(range.to, "world.birthYears.to");
+    if (from < startYear || to < from) fail("world.birthYears", "births must run forward from the world's start year");
+  }
   const maxAge = integer(world.maxAge, "world.maxAge", 1, 10_000);
   if (Object.hasOwn(world, "eventPacing")) {
     const pacing = object(world.eventPacing, "world.eventPacing", ["minChoiceGapYears", "maxChoiceGapYears", "variety", "rareEvents"], ["minChoiceGapYears", "maxChoiceGapYears"]);

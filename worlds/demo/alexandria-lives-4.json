@@ -82545,6 +82545,10 @@
       "household": "adulthood"
     }
   },
+  "birthYears": {
+    "from": -350,
+    "to": -300
+  },
   "paths": {
     "fields": {
       "farming": {

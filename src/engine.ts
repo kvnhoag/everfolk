@@ -7,7 +7,7 @@ import type {
 import { influenceCatalog, influenceDeltas, influenceMeasure, parseInfluenceCommand, scaleInfluenceEffects } from "./influence.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
-import { formatYear, yearAtAge } from "./calendar.ts";
+import { birthYearOf, formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
 import { MILITARY_QUALIFICATIONS } from "./capabilities/military.ts";
 import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
@@ -251,9 +251,9 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (applyEconomyEffect(world, state, effect)) {
         if (effect.type === "loan") {
           const currency = world.economy!.currency.short, loan = state.economy!.loan;
-          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
           else if (effect.action === "repay") journal(state, "activity", "moneylender-loan-payment", `You pay ${beforeLoanBalance - (loan?.balance ?? 0)} ${currency} toward the moneylender loan.${loan ? ` ${loan.balance} ${currency} remains.` : " The loan is fully repaid."}`);
-          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
         }
         continue;
       }
@@ -448,6 +448,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       case "year": {
         // Only a recurring dated event names a cooldown; older packs have none, so their dated events are unchanged.
         const lastAge = event.cooldownYears === undefined ? undefined : state.lastEventAge[event.id];
+        // History dated before this life's birth does not happen to it; anchors dated at the world's start always can.
+        if (state.birthYear !== undefined && event.trigger.at > world.startYear && event.trigger.at < state.birthYear) return false;
         return state.year >= event.trigger.at && (lastAge === undefined || state.age - lastAge >= event.cooldownYears!);
       }
       case "random": {
@@ -772,6 +774,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
       ...(world.legacy ? { accomplishments: [] } : {}),
     };
+    if (world.birthYears) {
+      // A side stream of the seed, so the life's own random draws are unchanged.
+      const span = world.birthYears.to - world.birthYears.from + 1;
+      state.birthYear = world.birthYears.from + Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      state.year = state.birthYear;
+    }
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
@@ -823,7 +831,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     recorded(next, next.journal.length, () => progressKnowledge(world, next, (id, text) => journal(next, "event", id, text)));
     const completedAge = next.age;
     next.age += 1;
-    next.year = yearAtAge(world.startYear, next.age);
+    next.year = yearAtAge(birthYearOf(world, next), next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);

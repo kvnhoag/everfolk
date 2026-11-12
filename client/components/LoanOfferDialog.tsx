@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef } from "react";
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
-import { formatYear, yearAtAge } from "../../src/calendar.ts";
+import { birthYearOf, formatYear, yearAtAge } from "../../src/calendar.ts";
 import { formatMoney } from "../models/wealth.ts";
 import { requiredCash } from "../models/loan-access.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
@@ -48,7 +48,7 @@ export default function LoanOfferDialog({ request, choice, life, world, onCancel
         <div><dt>Cash received</dt><dd>{formatMoney(lender.principal, world)}</dd></div>
         <div><dt>Lender’s fee</dt><dd>{formatMoney(lender.fee, world)}</dd></div>
         <div><dt>Total to repay</dt><dd>{formatMoney(lender.principal + lender.fee, world)}</dd></div>
-        <div><dt>Repay by</dt><dd>Age {dueAge} · {formatYear(yearAtAge(world.startYear, dueAge))}</dd></div>
+        <div><dt>Repay by</dt><dd>Age {dueAge} · {formatYear(yearAtAge(birthYearOf(world, life), dueAge))}</dd></div>
       </dl>
       {shortfall > 0 && <p>The loan covers the upfront cash requirement. Any additional earnings or costs depend on the result.</p>}
       <p className="loan-offer-risk">Repayment is manual. An overdue loan brings demands, threats and possible violence. Borrowing does not guarantee future earnings.</p>

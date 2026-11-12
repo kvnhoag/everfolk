@@ -607,6 +607,8 @@ export interface WorldPack {
   description: string;
   /** Signed historical years: -1 is 1 BCE, followed by 1 CE. No year zero. */
   startYear: number;
+  /** Births spread across these years (inclusive; `from` is the earliest). Absent: every life starts in `startYear`. */
+  birthYears?: { from: number; to: number };
   maxAge: number;
   stats: Record<string, StatDefinition>;
   flags: Record<string, { label: string; initial: boolean }>;
@@ -670,6 +672,8 @@ export interface LifeState {
   rngState: number;
   age: number;
   year: number;
+  /** The life's own birth year, in worlds that vary births. */
+  birthYear?: number;
   originId: string;
   stats: Record<string, number>;
   flags: Record<string, boolean>;
