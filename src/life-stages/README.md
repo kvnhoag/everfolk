@@ -48,3 +48,5 @@ The medical care decision must have `dependent` unless its scope is decided from
 5. Give consequences in real state and limit repeats with `maxOccurrences` / `cooldownYears`.
 
 Childhood text speaks to a child's world. Never write "you decide" for something others decided.
+
+Fields, districts, needs, affinity and stage records build on these rules: see `src/paths/README.md`.
