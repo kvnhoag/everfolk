@@ -17,6 +17,12 @@ pnpm dev
 
 Open the local URL printed by the server. Ordinary play needs no account or hosted content service. Lives save in the browser, with JSON import/export for transfer.
 
+## NPC companions
+
+Visit `/npc` or choose **NPC companions** from the main menu to play an online free-play life with five changing NPC slots. Characters share the real household/shop accounts, pursue their own needs and accept optional external MCP control. Every accepted NPC and player decision is recorded for exact replay; these NPCs never mint NFTs.
+
+Rules work without a model. Local Laya selects live actions and short authored responses; an OpenAI-compatible provider can generate dialogue. Endpoint failure keeps ordinary play running and blocks real reward checks. See [NPC setup, API and MCP access](guide/NPC_AGENTS.md) and [what remains for judge play](guide/JUDGE_READINESS.md).
+
 ## Skill tree
 
 Open **[the skill-tree guide](guide/SKILL_TREE.md)** for the connected 74-node attribute atlas. Run locally and visit `/skills` to inspect it before a birth, or use **Skill tree** / **Character → Skills** in a game. The main branches are Physique, Handmade, Knowledge and Trade. Two crossovers join Knowledge with physical conditioning for military foundations and tactical command. [Military progression and requirements](guide/SKILL_CROSSOVERS.md). New lives learn capabilities through proficiency and demonstrated work; earlier saves retain their original rules.
