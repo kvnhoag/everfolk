@@ -83,7 +83,7 @@ export async function npcRoute(
       );
     }
     const match =
-      /^\/api\/npc\/sessions\/([a-zA-Z0-9-]{1,100})(?:\/(step|turn|answer|speak|lease|export|observe|act))?$/.exec(
+      /^\/api\/npc\/sessions\/([a-zA-Z0-9-]{1,100})(?:\/(step|turn|answer|speak|lease|export|observe|act|check-provider))?$/.exec(
         path,
       );
     if (!match) throw new NpcError(404, "NPC route not found.");
@@ -109,6 +109,17 @@ export async function npcRoute(
             integer(p.revision),
             text(p.key, 128),
             p.command,
+          ),
+        );
+      }
+      case "check-provider": {
+        const p = object(v, ["revision", "key"]);
+        return npcJson(
+          await service.checkProvider(
+            id,
+            token,
+            integer(p.revision),
+            text(p.key, 128),
           ),
         );
       }

@@ -80,7 +80,7 @@ export function decision(value: unknown): NpcDecision {
   const v = object(value, ["action", "speech", "source"]);
   if (
     !ACTIONS.includes(v.action as never) ||
-    !["rules", "llm", "external", "fallback"].includes(String(v.source))
+    !["rules", "llm", "laya", "external", "fallback"].includes(String(v.source))
   )
     throw new NpcInputError("Unsupported NPC action.");
   return {

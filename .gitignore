@@ -29,3 +29,7 @@ contract/target/
 # Local character workshops and research are kept outside published snapshots.
 /artwork/history-live/
 /tools/character-creator/
+
+# Optional local NPC inference artifacts
+__pycache__/
+*.pyc
