@@ -8,7 +8,7 @@ import { depthQuote } from "../src/demo/market-depth.ts";
 import { demoWorld, liveUntil } from "./fixtures/demo/world.ts";
 import type { DemoContext, LifeStateWithDemo, TradeCommand, TradeItem } from "../src/demo/contracts.ts";
 import type { Effect, LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const lives4 = shipped as unknown as WorldPack;

@@ -5,7 +5,7 @@ import type { NpcPerson } from "../../src/npc/types.ts";
 import type { NpcSnapshot } from "../types/npc.ts";
 import "../styles/npc-session.css";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
-import npcWorld from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import npcWorld from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import type { WorldPack } from "../../src/types.ts";
 function NpcCard({
   npc,

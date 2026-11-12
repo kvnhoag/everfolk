@@ -1,7 +1,7 @@
 import type { WorldPack } from "../types.ts";
 import { buildCrossoverWorld, requireMilitaryQualification } from "./crossover-world.ts";
 import { applyLifeStageContent } from "./life-stage-content.ts";
-import { LIVES_WORLD_VERSION } from "./ids.ts";
+import { LIVES_MIN_TRADE_AGE, LIVES_WORLD_VERSION } from "./ids.ts";
 import { ALEXANDRIA_PATHS, NEW_ORIGINS, NEW_ORIGIN_RESOURCES } from "../paths/content/config.ts";
 import { FIELD_IDS } from "../paths/types.ts";
 import { inspirationEvents } from "../paths/content/inspiration.ts";
@@ -27,6 +27,8 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   applyPacing(world);
   // New births (lives-6): yearly practice and years worked in a job prove the next step of their lane.
   world.capabilities!.proofFromWork = true;
+  // New births (lives-7): a child may run the household's grain errand at the market from age 10, not 12.
+  world.demo!.market.minTradeAge = LIVES_MIN_TRADE_AGE;
   applyPlaytestFixes(world);
   applyIllnessPacing(world);
   addPaths(world);

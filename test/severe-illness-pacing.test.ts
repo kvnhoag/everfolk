@@ -159,18 +159,18 @@ test("validation checks the graded fields", () => {
 const load = (name: string): WorldPack => JSON.parse(readFileSync(new URL(`../worlds/demo/${name}.json`, import.meta.url), "utf8"));
 
 test("only the new free-play world carries the milder illness rules", () => {
-  const lives4 = load("alexandria-lives-6").health!.mortalityCalibration!;
+  const lives4 = load("alexandria-lives-7").health!.mortalityCalibration!;
   assert.deepEqual([lives4.onsetLoss, lives4.lingerYears, lives4.lingerLoss, lives4.lingerRecovery], [25, 2, 8, 0.1]);
   for (const name of ["alexandria-lives-3", "alexandria-lives-2", "alexandria-lives-1"]) {
     const older = load(name).health!.mortalityCalibration!;
     for (const key of ["onsetLoss", "lingerYears", "lingerLoss", "lingerRecovery"]) assert.equal(Object.hasOwn(older, key), false, `${name} ${key}`);
   }
   const adult = (world: WorldPack) => world.mortality!.bands.find(band => band.minAge <= 40 && band.maxAge >= 40)!.annualProbability;
-  assert.ok(adult(load("alexandria-lives-6")) < adult(load("alexandria-lives-3")), "fewer severe onsets");
+  assert.ok(adult(load("alexandria-lives-7")) < adult(load("alexandria-lives-3")), "fewer severe onsets");
 });
 
 test("in the new world no severe illness kills within two years of its onset, whatever care is chosen", () => {
-  const world = load("alexandria-lives-6"), engine = createEngine(world);
+  const world = load("alexandria-lives-7"), engine = createEngine(world);
   let onsets = 0, deaths = 0;
   for (const choice of ["rest-and-care", "carry-on"]) {
     for (let index = 0; index < 40; index++) {

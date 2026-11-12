@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import { buildLifeEvents } from "../client/models/life-events.ts";
 import { buildImportantLifeEvents } from "../client/models/important-life-events.ts";
 import { resolveLifeScenes } from "../client/models/scene-model.ts";
-import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import type { LifeState, WorldPack } from "../src/types.ts";
 
 const world = shipped as unknown as WorldPack;

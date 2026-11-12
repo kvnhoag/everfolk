@@ -3,7 +3,7 @@ import test from "node:test";
 import { capabilityPresentations, firstSentence } from "../client/models/capability-presentation.ts";
 import { ATTRIBUTE_NODES } from "../src/capabilities/attribute-catalog.ts";
 import type { WorldPack } from "../src/types.ts";
-import current from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 
 const world=current as unknown as WorldPack;
 test("crossover badges identify the actual branches and exclude joins within one branch",()=>{
