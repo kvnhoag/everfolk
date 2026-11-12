@@ -18,6 +18,9 @@ test("skill-atlas nodes map to their fields", () => {
   assert.equal(fieldOfNode(world, "PP5"), "civic");
   assert.equal(fieldOfNode(world, "FC5") ?? fieldOfNode(world, "F1"), "farming");
   assert.equal(fieldOfNode(world, "P1"), "research");
+  assert.equal(fieldOfNode(world, "F1"), "farming");
+  assert.equal(fieldOfNode(world, "M4"), "soldiering");
+  assert.equal(fieldOfNode(world, "B2"), "soldiering");
   assert.equal(fieldOfNode(world, "A1"), null);
   assert.equal(fieldOfNode(world, "nope"), null);
 });

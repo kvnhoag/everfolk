@@ -66,3 +66,18 @@ test("existing birthplaces keep their starting resources", () => {
   }
   assert.ok(compared > 10, `compared ${compared} births`);
 });
+
+test("every military appointment offered by an event asks for its proved qualification", () => {
+  const military = new Set(["soldier", "officer", "general"]);
+  const mentions = (condition: unknown): boolean => JSON.stringify(condition ?? null).includes('"type":"capability"');
+  for (const event of world.events) for (const choice of event.choices) {
+    const appoints = choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job !== null && military.has(effect.job)));
+    if (appoints) assert.ok(mentions(choice.when), `${event.id}/${choice.id} appoints without a qualification`);
+  }
+});
+
+test("war recruiting offers drilling to anyone not yet qualified to sign, so the offer is never a dead end", () => {
+  const recruiting = world.events.find(event => event.id === "need-war-recruiting")!;
+  const drill = recruiting.choices.find(choice => choice.id.endsWith("-drill"))!;
+  assert.deepEqual(drill.when, { type: "not", condition: { type: "capability", node: "M4" } });
+});

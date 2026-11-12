@@ -8,7 +8,7 @@
  */
 import type { Choice, LifeState, Outcome } from "../types.ts";
 import type { ArmyLevel, DemoContext, DemoDefinition, DemoEffect, DemoState, LifeStateWithDemo, Shipment, TownDecision } from "./contracts.ts";
-import { SERVICE_JOBS } from "./types.ts";
+import { hasServiceRole } from "./service-role.ts";
 import { matchesCondition } from "../conditions.ts";
 import { changeReputation } from "./works.ts";
 import { townDecision } from "./agents.ts";
@@ -41,7 +41,7 @@ function unit(ctx: DemoContext): string {
 
 /** True while the player serves; they eat army rations and are not a household mouth that year. */
 export function servingThisYear(life: LifeState): boolean {
-  return (SERVICE_JOBS as readonly string[]).includes(life.character?.jobId ?? "");
+  return hasServiceRole(life);
 }
 
 /** The year's wage: the rule wage for the army level plus an in-limit agent premium (never negative). */
@@ -56,16 +56,17 @@ function paidThisYear(life: LifeState): boolean {
   return life.journal.some(entry => entry.id === WAGE_JOURNAL_ID && entry.age === life.age);
 }
 
-function feedFromArmy(ctx: DemoContext): void {
+function feedFromArmy(ctx: DemoContext): number {
   const { def, demo } = ctx, ration = def.service.ration, army = demo.town.army;
-  if (ration <= 0) return;
+  if (ration <= 0) return 0;
   const eaten = Math.min(ration, army.grain);
   army.grain -= eaten;
   const missing = ration - eaten;
-  if (missing === 0) return;
+  if (missing === 0) return eaten;
   const loss = Math.ceil(tuning(def).rationHealthLoss * missing / ration);
   if (loss > 0) ctx.apply([{ type: "stat", stat: ctx.world.health?.stat ?? "health", delta: -loss }]);
   ctx.journal("army-ration-shortfall", `The army stores run short: you receive ${eaten} of your ${ration} measures of rations and go hungry on duty.`);
+  return eaten;
 }
 
 /** Soldiers are paid from the purse (partial when short) and fed from army grain. Once per year. */
@@ -75,6 +76,7 @@ export function payWages(ctx: DemoContext): void {
   const army = demo.town.army, money = unit(ctx);
   // Paths worlds: a soldier-short district pays more, still from the same purse.
   const wage = scaledPay(ctx.world, life, "soldiering", wageFor(def, demo.year.army, townDecision(ctx, "army")));
+  const purseBefore = army.purse, grainBefore = army.grain;
   const paid = Math.min(wage, army.purse);
   army.purse -= paid;
   if (paid > 0) ctx.apply([{ type: "cash", delta: paid }]);
@@ -85,7 +87,10 @@ export function payWages(ctx: DemoContext): void {
     ctx.journal("army-wage-shortfall", `The army purse is short: ${wage - paid} ${money} of your wage goes unpaid this year.`);
     changeReputation(ctx, tuning(def).wageShortReputation, "the army could not pay its soldiers in full");
   }
-  feedFromArmy(ctx);
+  const rations=feedFromArmy(ctx);
+  if(ctx.world.capabilities?.version===2 && life.capabilities) (life.capabilities.military ??= {service:[]}).service.push({
+    age:life.age-1,role:life.character!.jobId!,paid,wage,rations,ration:def.service.ration,purseBefore,purseAfter:army.purse,grainBefore,grainAfter:army.grain,
+  });
 }
 
 // ── Shipments ───────────────────────────────────────────────────────────────

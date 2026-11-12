@@ -5,7 +5,7 @@ import type { FieldId } from "./types.ts";
 import { fieldNeedBps } from "./needs.ts";
 
 /** Base nodes outside a specialization that still belong to one field. */
-const BRANCH_FIELDS: Record<string, FieldId> = { Farming: "farming", Philosophy: "research" };
+const BRANCH_FIELDS: Record<string, FieldId> = { Physique: "farming", Knowledge: "research" };
 
 export function fieldOfNode(world: WorldPack, nodeId: string): FieldId | null {
   const node = world.capabilities?.nodes.find(item => item.id === nodeId);

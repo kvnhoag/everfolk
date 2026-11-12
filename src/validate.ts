@@ -386,7 +386,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
 
   if (Object.hasOwn(world, "capabilities")) {
     if (!world.vocations || !world.demo || !character || !world.economy) fail("world.capabilities", "requires a household economy, vocations and character skills");
-    validateCapabilities(world.capabilities, skillIds, fail);
+    validateCapabilities(world.capabilities, skillIds, fail, statIds);
   }
   const capabilityReference = (value: unknown, path: string): void => {
     if (typeof value !== "string" || !world.capabilities || !(world.capabilities as CapabilityDefinition).nodes.some(node => node.id === value)) fail(path, "unknown capability node");

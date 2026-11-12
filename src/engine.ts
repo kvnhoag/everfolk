@@ -9,6 +9,7 @@ import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
+import { MILITARY_QUALIFICATIONS } from "./capabilities/military.ts";
 import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
 import { placeMarketOrder, cancelMarketOrder as cancelOrder, settleMarketYear } from "./market.ts";
@@ -392,8 +393,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   }
 
   function choicesFor(event: LifeEvent, state: LifeState): Choice[] {
-    return event.choices.filter(choice => matches(choice.when, state) && !grantsUnavailable(choice) &&
+    return event.choices.filter(choice => matches(choice.when, state) && !grantsUnavailable(choice) && !refusedAppointment(choice, state) &&
       (!choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan")) || !financeActivityReason(world, state, choice)));
+  }
+
+  /** Attribute-atlas worlds: a military appointment the army would refuse is not offered (older packs are unaffected). */
+  function refusedAppointment(choice: Choice, state: LifeState): boolean {
+    if (world.capabilities?.version !== 2) return false;
+    return choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job !== null && effect.job in MILITARY_QUALIFICATIONS &&
+      characterEffectReason(world, state, effect, true) !== undefined));
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {

@@ -184,11 +184,30 @@ test("lives move for apprenticeships and study, and only the player moves", () =
   }
 });
 
-test("at the height of a war, recruiters make an offer that some lives accept", () => {
+test("at the height of a war, recruiters make an offer that a life with proved drill can accept", () => {
   const offered = lives.filter(({ offered }) => offered.some(([, id]) => id === "need-war-recruiting"));
-  const enlisted = lives.filter(({ life }) => life.journal.some(entry => entry.id === "need-war-recruiting-enlist-done"));
   assert.ok(offered.length > 0, "recruiting offers were made");
-  assert.ok(enlisted.length > 0, "some lives enlisted");
+  // Signing needs the atlas soldier qualification (Drill and equipment); give one offered life that proof.
+  const pick = lives.indexOf(offered[0]);
+  let life = engine.start(offered[0].life.seed);
+  for (let guard = 0; life.pendingEventId !== "need-war-recruiting" && guard < 600; guard++) {
+    life = life.phase === "choice" ? engine.choose(life, engine.getChoices(life)[(pick + guard) % engine.getChoices(life).length].id) : engine.advance(life);
+  }
+  assert.equal(life.pendingEventId, "need-war-recruiting");
+  const unqualified = engine.getChoices(life).map(choice => choice.id);
+  assert.ok(!unqualified.some(id => id.endsWith("-enlist")) && unqualified.some(id => id.endsWith("-drill")), unqualified.join(", "));
+  const qualified = structuredClone(life);
+  qualified.capabilities!.learned.M4 = { age: life.age, year: 0 };
+  // An appointment the army would refuse (too weak to serve) is never offered, rather than failing when chosen.
+  const frail = structuredClone(qualified);
+  frail.stats.health = 30;
+  assert.ok(!engine.getChoices(frail).some(choice => choice.id.endsWith("-enlist")), "a frail life is not offered enlistment");
+  const m4 = world.capabilities!.nodes.find(node => node.id === "M4")!;
+  for (const [stat, value] of Object.entries(m4.minimumStats ?? {})) qualified.stats[stat] = Math.max(qualified.stats[stat], value + 5);
+  for (const [skill, value] of Object.entries(m4.minimumProficiency)) qualified.character!.skills[skill] = Math.max(qualified.character!.skills[skill], value);
+  const enlist = engine.getChoices(qualified).find(choice => choice.id.endsWith("-enlist"));
+  assert.ok(enlist, "a qualified life can enlist");
+  assert.equal(engine.choose(qualified, enlist.id).character!.jobId, "soldier");
 });
 
 test("a recruiting offer only comes when the life can act on it", () => {

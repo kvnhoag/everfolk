@@ -10,7 +10,7 @@ export const CAREER_GROUP_JOBS: Record<CareerGroup, readonly string[]> = Object.
   military: Object.freeze(["soldier", "officer", "general"]),
   commerce: Object.freeze(["porter", "sailor", "shopkeeper", "merchant", "trading-house-manager"]),
   craft: Object.freeze([
-    "apprentice", "tailor", "potter", "ceramic-decorator", "wood-carver", "sculptor",
+    "apprentice", "potter", "ceramic-decorator", "wood-carver", "sculptor",
     "pottery-workshop-lead", "carving-workshop-lead", "sculpture-workshop-lead",
     "tailor", "master-tailor", "master-potter", "master-sculptor",
   ]),

@@ -1,6 +1,7 @@
 /** Farming assessments settle against real household receipts, never a work-button click. */
 import type { LifeState, WorldPack } from "../types.ts";
 import type { CapabilityEvidence } from "./types.ts";
+import { hasServiceRole } from "../demo/service-role.ts";
 
 const BPS = 10_000;
 const GRAIN_SEED_PER_PLOT = 10;
@@ -24,7 +25,7 @@ export function farmRationNeed(world: Pick<WorldPack, "demo">, life: LifeState, 
   if (!world.demo || !life.demo) return 0;
   const h = world.demo.household;
   const share = (memberAge: number) => memberAge >= h.childWorkAge ? 100 : Math.floor(h.childRationBps / 100);
-  let units = life.character?.jobId === "soldier" ? 0 : share(age);
+  let units = hasServiceRole(life) ? 0 : share(age);
   if (life.demo.household.parents !== "gone") units += 200;
   if (life.character?.relationshipStatus === "married") units += 100;
   for (const child of life.character?.children ?? []) units += share(Math.max(0, age - child.birthAge));

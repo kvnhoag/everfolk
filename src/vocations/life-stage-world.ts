@@ -1,5 +1,5 @@
 import type { WorldPack } from "../types.ts";
-import { buildCapabilityWorld } from "./capability-world.ts";
+import { buildCrossoverWorld, requireMilitaryQualification } from "./crossover-world.ts";
 import { applyLifeStageContent } from "./life-stage-content.ts";
 import { LIVES_WORLD_VERSION } from "./ids.ts";
 import { ALEXANDRIA_PATHS, NEW_ORIGINS, NEW_ORIGIN_RESOURCES } from "../paths/content/config.ts";
@@ -11,13 +11,15 @@ import { moveEvents } from "../paths/content/moves.ts";
 import { refitEvents } from "../paths/content/refits.ts";
 import { auditEvents } from "../paths/audit.ts";
 
-/** New births: the skill atlas plus life stages. Older revisions keep their exact rules for replay. */
+/** New births: the attribute atlas and military lane, plus life stages and life paths. Older revisions keep their exact rules for replay. */
 export function buildLifeStageWorld(base: WorldPack): WorldPack {
-  const world = applyLifeStageContent(buildCapabilityWorld(base));
+  const world = applyLifeStageContent(buildCrossoverWorld(base));
   world.version = LIVES_WORLD_VERSION;
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
   addPaths(world);
   const refitted = refitEvents(world);
+  // Life-paths offers (war recruiting) follow the atlas rule: a rank needs its proved qualification.
+  requireMilitaryQualification(refitted);
   // The build fails rather than ship a household decision a child could make, or an adult decision without a cause.
   const blocking = auditEvents(refitted).filter(item => item.rule === 2 || item.rule === 4);
   if (blocking.length) throw new Error(`Event rules broken: ${blocking.map(item => `rule ${item.rule} ${item.eventId} (${item.message})`).join("; ")}`);

@@ -19,7 +19,7 @@ Open the local URL printed by the server. Ordinary play needs no account or host
 
 ## Skill tree
 
-Open **[the skill-tree guide](guide/SKILL_TREE.md)** for the connected 65-node atlas. Run locally and visit `/skills` to inspect it before a birth, or use **Skill tree** / **Character → Skills** in a game. New lives learn capabilities through proficiency and demonstrated work; earlier saves retain their original rules.
+Open **[the skill-tree guide](guide/SKILL_TREE.md)** for the connected 74-node attribute atlas. Run locally and visit `/skills` to inspect it before a birth, or use **Skill tree** / **Character → Skills** in a game. The main branches are Physique, Handmade, Knowledge and Trade. Two crossovers join Knowledge with physical conditioning for military foundations and tactical command. [Military progression and requirements](guide/SKILL_CROSSOVERS.md). New lives learn capabilities through proficiency and demonstrated work; earlier saves retain their original rules.
 
 ![Everfolk skill atlas](public/assets/skills/skill-atlas.svg)
 

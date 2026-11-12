@@ -36,7 +36,7 @@ export const ALEXANDRIA_PATHS: PathsDefinition = {
     research: field("Research", "scholar", ["philosophy", "literacy", "astronomy"], ["philosophy-tutor", "scientist", "patron-supported-reader", "sky-table-calculator"], ["Research"]),
     civic: field("Civic life", "official", ["oratory", "literacy"], ["clerk", "copyist", "court-adviser", "politician"], ["Civic practice"]),
     trade: field("Trade", "trader", ["reckoning"], ["shopkeeper", "merchant", "trading-house-manager"], ["Commercial planning"]),
-    soldiering: field("Soldiering", "soldier", ["warfare"], ["soldier", "officer", "general"], []),
+    soldiering: field("Soldiering", "soldier", ["warfare", "strength", "endurance"], ["soldier", "officer", "general"], ["Military practice", "Conditioning"]),
   },
   districts: Object.fromEntries(Object.entries(PROFILES).map(([id, { title, origins, rows }]) => [id, {
     title, origins,

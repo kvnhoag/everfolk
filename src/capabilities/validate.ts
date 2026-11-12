@@ -1,7 +1,7 @@
 import type { CapabilityDefinition } from "./types.ts";
-import { CAPABILITY_NODES } from "./catalog.ts";
-/** Strict JSON and the supported 65-node graph, before any behavior reads pack data. */
-export function validateCapabilities(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never): asserts input is CapabilityDefinition {
+import { capabilityCatalog } from "./attribute-catalog.ts";
+/** Strict JSON and versioned supported graphs, before any behavior reads pack data. */
+export function validateCapabilities(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never, stats = new Set<string>()): asserts input is CapabilityDefinition {
   const path = "world.capabilities";
   const object = (value: unknown, at: string, keys?: string[], required = keys): Record<string, unknown> => {
     if (!value || typeof value !== "object" || Array.isArray(value) || ![Object.prototype,null].includes(Object.getPrototypeOf(value))) fail(at, "expected plain JSON object");
@@ -22,13 +22,15 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
     return value as unknown[];
   };
   const root = object(input,path,["version","nodes"]);
-  const nodes = array(root.nodes,65);
-  if (root.version !== 1 || nodes.length !== 65) fail(path,"expected capability version 1 and 65 nodes");
+  if (root.version !== 1 && root.version !== 2) fail(path,"unsupported capability version");
+  const catalog = capabilityCatalog(Number(root.version));
+  const nodes = array(root.nodes,catalog.length);
+  if (nodes.length !== catalog.length) fail(path,"expected the complete versioned capability graph");
   const ids = new Set<string>();
   for (const value of nodes) {
-    const node = object(value,path,["id","depth","title","branch","specialization","prerequisites","minimumProficiency","proof","reward","anyProficiency"],["id","depth","title","branch","specialization","prerequisites","minimumProficiency","proof","reward"]);
+    const node = object(value,path,["id","depth","title","branch","specialization","prerequisites","minimumProficiency","minimumStats","proof","reward","anyProficiency"],["id","depth","title","branch","specialization","prerequisites","minimumProficiency","proof","reward"]);
     if(typeof node.id!=="string" || ids.has(node.id)) fail(path,"invalid or duplicate capability id");
-    const canonical=CAPABILITY_NODES.find(candidate=>candidate.id===node.id);
+    const canonical=catalog.find(candidate=>candidate.id===node.id);
     if(!canonical || node.depth!==canonical.depth || node.branch!==canonical.branch || node.specialization!==canonical.specialization) fail(path,"unsupported node or graph position");
     ids.add(node.id as string);
     for (const key of ["title","proof","reward"]) if (typeof node[key]!=="string" || !node[key] || String(node[key]).length>3000) fail(path,"invalid node text");
@@ -38,6 +40,11 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
       for (const [skill,n] of Object.entries(gates)) if (!skills.has(skill) || !Number.isInteger(n) || Number(n)<0 || Number(n)>100) fail(path,"invalid proficiency gate");
     };
     checkSkills(node.minimumProficiency);
+    if (node.minimumStats !== undefined) {
+      const gates=object(node.minimumStats,path);
+      if(Object.keys(gates).length>4) fail(path,"too many condition gates");
+      for(const [stat,n] of Object.entries(gates)) if(!stats.has(stat) || !Number.isInteger(n) || Number(n)<0 || Number(n)>100) fail(path,"invalid current condition gate");
+    }
     if (node.anyProficiency!==undefined) {
       const alternatives=array(node.anyProficiency,4);
       if(!alternatives.length) fail(path,"empty alternative proficiency gates");
@@ -47,5 +54,7 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
     const all=array(parents.all,4);
     if(all.some(id=>typeof id!=="string") || new Set(all).size!==all.length || all.length!==canonical!.prerequisites.all.length || canonical!.prerequisites.all.some(id=>!all.includes(id))) fail(path,"unsupported prerequisite graph");
   }
-  if(CAPABILITY_NODES.some(node=>!ids.has(node.id))) fail(path,"missing supported capability");
+  if(catalog.some(node=>!ids.has(node.id))) fail(path,"missing supported capability");
+  // Canonical parents must point strictly forward in depth, so crossovers cannot introduce a cycle.
+  for(const node of catalog) if(node.prerequisites.all.some(id=>!catalog.some(parent=>parent.id===id && parent.depth<node.depth))) fail(path,"graph must be acyclic and flow forward");
 }

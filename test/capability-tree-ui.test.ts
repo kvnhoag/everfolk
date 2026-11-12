@@ -32,20 +32,23 @@ function buttonWithClass(value: unknown, className: string): ReactElement<{ clas
   return buttonWithClass(value.props.children, className);
 }
 
-test("old lives show all 65 inspectable nodes with their original rules retained", () => {
+test("old lives show all 74 inspectable nodes with their original rules retained", () => {
   const before = structuredClone(life);
   const html = renderToStaticMarkup(createElement(CapabilityTree, { world, life, activities: engine.getActivities(life), onActivity() { assert.fail("Viewing a tree must not act"); } }));
-  assert.equal((html.match(/data-capability-id=/g) ?? []).length, 65);
+  assert.equal((html.match(/data-capability-id=/g) ?? []).length, 74);
   for (const node of CAPABILITY_NODES) assert.ok(html.includes(`data-capability-id="${node.id}"`), node.id);
   assert.match(html, /This life keeps its earlier skill rules/);
   assert.match(html, /Connected skill tree/);
   assert.match(html, /Fit whole tree/);
   assert.match(html, /Read selected path/);
-  assert.match(html, /Inspect a skill/);
-  assert.match(html, /Double frame · depth 10/);
-  assert.match(html, /Cultivation and resilience/);
+  assert.doesNotMatch(html, /Inspect a skill|capability-node-picker/);
+  assert.match(html, /Tree legend/);
+  assert.match(html, /Crossover/);
+  assert.match(html, /Title \/ key skill/);
+  assert.match(html, /Selected path/);
+  assert.match(html, /Strength, endurance and physical work/);
   assert.match(html, /Clothing, ceramics and sculpture/);
-  assert.match(html, /Research and civic practice/);
+  assert.match(html, /Reading, inquiry and public reasoning/);
   assert.equal((html.match(/data-from=/g) ?? []).length, CAPABILITY_NODES.reduce((sum, node) => sum + node.prerequisites.all.length, 0));
   assert.deepEqual(life, before);
 });
@@ -81,7 +84,7 @@ test("the work control sends exactly its offered engine activity and refuses una
   assert.deepEqual(calls, ["cap-work-f1"]);
   const readOnly = renderToStaticMarkup(createElement(CapabilityInspector, { ...props, readOnly: true }));
   assert.doesNotMatch(readOnly, /class="capability-work-button"/);
-  assert.match(readOnly, /Reference view/);
+  assert.match(readOnly, /Preview/);
 });
 
 test("original single-ink icons distinguish workshop, farm, research, civic and trade paths", () => {
@@ -93,4 +96,15 @@ test("original single-ink icons distinguish workshop, farm, research, civic and 
     assert.match(mark, /aria-hidden="true"/);
     assert.doesNotMatch(mark, /<image|https?:|base64/);
   }
+});
+
+test("skill details keep full rules collapsed and show requirements only once", () => {
+  const node=CAPABILITY_NODES.find(node=>node.id==='M10')!;
+  const view:CapabilityNodeView={id:node.id,state:'locked',reasons:['Serve as an Officer first.'],progress:{done:0,required:2},actionId:null,actionLabel:'Work',requirementText:['Warfare 72']};
+  const html=renderToStaticMarkup(createElement(CapabilityInspector,{node,view,world,life,activities:[],readOnly:true,onActivity(){},onSelect(){},detailId:'compact'}));
+  assert.match(html,/<details class="capability-full-rules"><summary>/);
+  assert.doesNotMatch(html,/<details[^>]*open/);
+  assert.doesNotMatch(html,/Before taking the work|Your demonstrated work is kept|Current condition requirements/);
+  assert.equal((html.match(/Serve as an Officer first\./g)??[]).length,1);
+  assert.match(html,/Full rules &amp; career opportunities/);
 });

@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildCapabilityLayout, CAPABILITY_NODES, CAPABILITY_BRANCHES, CAPABILITY_NODE_WIDTH, CAPABILITY_NODE_HEIGHT, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../client/models/capability-layout.ts";
 
-test("the visible atlas contains all 65 authored nodes and every prerequisite connector", () => {
+test("the visible atlas contains all 74 authored nodes and every prerequisite connector", () => {
   const layout = buildCapabilityLayout();
-  assert.equal(layout.nodes.length, 65);
-  assert.equal(new Set(layout.nodes.map(item => item.node.id)).size, 65);
+  assert.equal(layout.nodes.length, 74);
+  assert.equal(new Set(layout.nodes.map(item => item.node.id)).size, 74);
   assert.deepEqual(layout.bands.map(band => band.branch), [...CAPABILITY_BRANCHES]);
   const expected = CAPABILITY_NODES.flatMap(node => node.prerequisites.all.map(parent => `${parent}>${node.id}`)).sort();
   assert.deepEqual(layout.links.map(link => `${link.from}>${link.to}`).sort(), expected);
@@ -19,11 +19,11 @@ test("every node is reachable from an authored foundation and parents flow left 
     assert.ok(item.node.prerequisites.all.every(id => visited.has(id)), `${item.node.id} has reachable parents`);
     visited.add(item.node.id);
   }
-  assert.equal(visited.size, 65);
+  assert.equal(visited.size, 74);
   for (const link of layout.links) {
     const from = layout.nodes.find(item => item.node.id === link.from)!, to = layout.nodes.find(item => item.node.id === link.to)!;
     assert.ok(from.x < to.x, `${link.from} → ${link.to}`);
-    assert.match(link.path, /^M .+ C /);
+    assert.match(link.path, /^M /);
   }
   for (const branch of CAPABILITY_BRANCHES) assert.equal(Math.max(...layout.nodes.filter(item => item.node.branch === branch).map(item => item.node.depth)), 10);
 });

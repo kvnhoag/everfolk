@@ -4,6 +4,7 @@ export interface CapabilityNode {
   branch: string; specialization: string | null;
   prerequisites: { all: string[] };
   minimumProficiency: Record<string, number>;
+  minimumStats?: Record<string, number>;
   anyProficiency?: Record<string, number>[];
   proof: string; reward: string;
 }
@@ -21,6 +22,7 @@ export interface CapabilityState {
   reservedPayment?: number;
   /** Grain delivered to civic buyers is kept apart from merchant stock. */
   civicGrain?: number;
+  military?: { service: { age: number; role: string; paid: number; wage: number; rations: number; ration: number; purseBefore: number; purseAfter: number; grainBefore: number; grainAfter: number }[] };
   /** An unfinished assessment counts active work years, not elapsed years. */
   project?: { nodeId: string; completedYears: number; startedAge: number;
     inputs?: Record<string, number>; fee?: number; payment?: number;

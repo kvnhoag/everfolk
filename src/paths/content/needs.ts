@@ -1,5 +1,6 @@
 /** World needs: scarce fields ask for workers, war recruits, floods make grain dear, good years commission. */
 import type { Choice, Condition, Effect, LifeEvent } from "../../types.ts";
+import { MILITARY_QUALIFICATIONS } from "../../capabilities/military.ts";
 import type { DecisionScope } from "../../life-stages/types.ts";
 import { FIELD_IDS } from "../types.ts";
 import type { FieldId } from "../types.ts";
@@ -94,6 +95,9 @@ const commission = (field: "ceramics" | "clothing" | "sculpture"): Spec => {
   };
 };
 
+/** Signing the roll needs the atlas qualification for a soldier; anyone without it can drill instead. */
+const SIGN_QUALIFIED: Condition = { type: "capability", node: MILITARY_QUALIFICATIONS.soldier };
+
 const SPECS: Spec[] = [
   ...FIELD_IDS.map(scarce),
   ...FIELD_IDS.map(masterOffer),
@@ -104,10 +108,10 @@ const SPECS: Spec[] = [
     when: { type: "all", conditions: [ARMY_AT_WAR, { type: "age", op: "gte", value: 18 }, { type: "not", condition: { type: "job", job: "soldier" } }] },
     text: "Recruiters stand in the market offering better pay than in quiet years. The army is short of men, and everyone knows why: some who march out will not come back.",
     choices: [
-      { key: "enlist", text: "Enlist for the pay, and the danger", when: { type: "skill", skill: "warfare", op: "gte", value: 10 },
+      { key: "enlist", text: "Enlist for the pay, and the danger", when: SIGN_QUALIFIED,
         result: "You put your mark on the roll and are told when to report.", effects: [{ type: "job", job: "soldier" }, { type: "flag", flag: "army-service", value: true }, pull("soldiering", 10, "enlisting in a war year")] },
-      { key: "drill", text: "Drill with the recruits before deciding", when: { type: "skill", skill: "warfare", op: "lt", value: 10 },
-        result: "You drill with the recruits until your arms ache. Next time you would be ready to sign.", effects: [skill("warfare", 5), pull("soldiering", 10, "drilling with the recruits")] },
+      { key: "drill", text: "Drill with the recruits before deciding", when: { type: "not", condition: SIGN_QUALIFIED },
+        result: "You drill with the recruits until your arms ache. Once you have proved your drill and equipment, you could sign.", effects: [skill("warfare", 5), pull("soldiering", 10, "drilling with the recruits")] },
       { key: "stay", text: "Stay with the work you have", result: "You walk past the recruiters.", effects: [] },
     ] },
   { id: "need-flood-trade", title: "Grain is dear", fields: ["trade"], stages: ["adulthood"], scope: "household", max: 3, cooldown: 3, weight: WEIGHT.season,

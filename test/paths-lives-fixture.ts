@@ -18,7 +18,7 @@ export function livesWithPaths(): WorldPack {
       research: field("Research", "scholar", ["philosophy", "literacy"], ["philosophy-tutor"], ["Research"]),
       civic: field("Civic life", "official", ["oratory", "literacy"], ["clerk"], ["Civic practice"]),
       trade: field("Trade", "trader", ["reckoning"], ["shopkeeper"], ["Commercial planning"]),
-      soldiering: field("Soldiering", "soldier", ["warfare"], ["soldier", "officer", "general"], []),
+      soldiering: field("Soldiering", "soldier", ["warfare"], ["soldier", "officer", "general"], ["Military practice", "Conditioning"]),
     },
     districts: {
       // Real district IDs (content refers to them); test counts in the two used by the tests.

@@ -1,6 +1,6 @@
 export interface CapabilityRule {
   years: number; primary: string; supports: string[];
-  kind: "exercise" | "craft" | "research" | "civic" | "trade";
+  kind: "exercise" | "craft" | "research" | "civic" | "trade" | "military";
   recipe?: string; quantity?: number; minimumQuality?: number; inspected?: boolean;
   contract?: boolean; project?: boolean;
   fee?: number; pay?: number; payer?: "merchant" | "workshop" | "school" | "council";
@@ -12,6 +12,15 @@ const civic = (years: number, pay: number, paper: number, ink: number, reputatio
 const trade = (years: number, pay: number, fee = 0, project = false): CapabilityRule => ({ years, primary: "reckoning", supports: ["literacy"], kind: "trade", pay, fee, payer: "merchant", project });
 /** Counts here are explicit work-year requirements, never parsed from display prose. */
 export const CAPABILITY_RULES: Record<string, CapabilityRule> = {
+  B2: {years:2,primary:"strength",supports:["endurance"],kind:"exercise",fee:2},
+  B3: {years:2,primary:"endurance",supports:["strength"],kind:"exercise",fee:2},
+  M4: {years:2,primary:"warfare",supports:["strength","endurance"],kind:"military",fee:4},
+  M5: {years:2,primary:"warfare",supports:["strength","endurance"],kind:"military"},
+  M6: {years:2,primary:"warfare",supports:["reckoning","literacy"],kind:"military",inputs:{papyrus:1,ink:1},fee:2},
+  M7: {years:2,primary:"warfare",supports:["oratory","endurance"],kind:"military"},
+  M8: {years:2,primary:"warfare",supports:["reckoning","oratory"],kind:"military",inputs:{papyrus:1,ink:1},fee:2},
+  M9: {years:2,primary:"warfare",supports:["literacy","oratory"],kind:"military",inputs:{papyrus:1,ink:1},fee:2},
+  M10: {years:2,primary:"warfare",supports:["oratory","reckoning"],kind:"military",inputs:{papyrus:2,ink:2},fee:4,project:true},
   A1: { years: 1, primary: "craft", supports: ["reckoning"], kind: "exercise", fee: 2, pay: 12, payer: "workshop" },
   A2: { years: 1, primary: "craft", supports: ["reckoning"], kind: "exercise", fee: 2, inputs: { clay: 1 } },
   A3: { years: 2, primary: "craft", supports: ["pottery", "reckoning"], kind: "exercise", fee: 2, inputs: { clay: 2 } },
