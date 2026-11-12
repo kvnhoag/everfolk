@@ -52,7 +52,9 @@ export function buildCapabilityLayout(nodes: readonly CapabilityNode[] = CAPABIL
     const x1 = from.x + 27, x2 = to.x - 27;
     const bend = Math.max(32, (x2 - x1) * .5);
     const crossover=from.node.branch!==to.node.branch;
-    const path=id==='P4'&&to.node.id==='M8'
+    const path=id==='P1'&&to.node.id==='M4'
+      ? `M ${x1} ${from.y} C 155 ${from.y}, 171 620, 171 590 V 560 H ${to.x-71} V ${to.y} H ${x2}`
+      : id==='P4'&&to.node.id==='M8'
       ? `M ${from.x} ${from.y-32} V 514 H ${to.x-71} V ${to.y} H ${x2}`
       : `M ${x1} ${from.y} C ${x1 + bend} ${from.y}, ${x2 - bend} ${to.y}, ${x2} ${to.y}`;
     return [{ from: id, to: to.node.id, path, ...(crossover?{crossover:true}:{}) }];
