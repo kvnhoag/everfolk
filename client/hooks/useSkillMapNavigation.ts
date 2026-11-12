@@ -63,7 +63,8 @@ export function useSkillMapNavigation(canvas: MapSize) {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotion = () => { reducedMotion.current = motion.matches; };
     updateMotion(); motion.addEventListener("change", updateMotion);
-    const resize = () => { if (fitting.current) fit(false); else move(current.current, false); };
+    // Keep the intended camera, not the mid-animation one: the first resize can land before a queued focus animates.
+    const resize = () => { if (fitting.current) fit(false); else move(target.current, false); };
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(element);
