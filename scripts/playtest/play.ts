@@ -69,7 +69,8 @@ function look(life: LifeState): void {
   const open = engine.getActivities(life).filter(activity => activity.available)
     .sort((a, b) => Number(!a.id.startsWith("cap-work-")) - Number(!b.id.startsWith("cap-work-")));
   console.log(`── This year you can (${open.length}) ── or: advance${life.demo ? `; plan <flax-plots> (now ${life.demo.household.flaxPlots} of ${life.demo.household.plots})` : ""}`);
-  for (const activity of open) console.log(`  act ${activity.id}  →  ${activity.text}`);
+  const learnedWork = (id: string) => id.startsWith("cap-work-") && Boolean(life.capabilities?.learned[id.slice("cap-work-".length).toUpperCase()]);
+  for (const activity of open) console.log(`  act ${activity.id}  →  ${activity.text}${learnedWork(activity.id) ? " (already learned: practice and pay only)" : ""}`);
 }
 
 function advance(life: LifeState, years: number): LifeState {

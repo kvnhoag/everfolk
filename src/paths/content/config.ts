@@ -6,7 +6,7 @@ type Row = Record<FieldId, [demand: number, people: TierCounts]>;
 
 /** Demand and starting people [learners, workers, masters, renowned] per district. */
 const PROFILES: Record<string, { title: string; origins: string[]; rows: Row }> = {
-  "delta-village": { title: "a Delta village", origins: ["tenant-farming-household", "delta-newcomers"], rows: {
+  "delta-village": { title: "a Delta village", origins: ["tenant-farming-household"], rows: {
     farming: [12, [4, 12, 3, 0]], clothing: [3, [1, 2, 0, 0]], ceramics: [2, [1, 1, 0, 0]], sculpture: [0, [0, 0, 0, 0]],
     research: [1, [0, 0, 0, 0]], civic: [2, [0, 1, 0, 0]], trade: [2, [0, 1, 0, 0]], soldiering: [1, [0, 1, 0, 0]] } },
   garrison: { title: "the garrison", origins: ["soldier-household"], rows: {
@@ -15,7 +15,7 @@ const PROFILES: Record<string, { title: string; origins: string[]; rows: Row }> 
   estate: { title: "the estate lands", origins: ["estate-household"], rows: {
     farming: [10, [3, 10, 3, 1]], clothing: [2, [1, 2, 0, 0]], ceramics: [1, [0, 1, 0, 0]], sculpture: [1, [0, 0, 0, 0]],
     research: [1, [0, 1, 0, 0]], civic: [3, [1, 2, 0, 0]], trade: [3, [1, 2, 1, 0]], soldiering: [2, [0, 1, 0, 0]] } },
-  "city-quarter": { title: "the city quarter", origins: ["artisan-household"], rows: {
+  "city-quarter": { title: "the city quarter", origins: ["artisan-household", "delta-newcomers"], rows: {
     farming: [2, [0, 1, 0, 0]], clothing: [6, [3, 6, 2, 0]], ceramics: [6, [3, 6, 2, 1]], sculpture: [3, [1, 2, 1, 0]],
     research: [2, [1, 1, 0, 0]], civic: [4, [1, 3, 1, 0]], trade: [6, [2, 5, 2, 1]], soldiering: [3, [1, 2, 1, 0]] } },
   "court-quarter": { title: "the court quarter", origins: ["royal-household"], rows: {

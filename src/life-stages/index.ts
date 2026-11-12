@@ -42,3 +42,11 @@ export function lifeStageView(world: Pick<WorldPack, "lifeStages">, age: number)
   if (!current) return undefined;
   return { id: current.id, title: current.title, decides: DECISION_SCOPES.filter(scope => decidesScope(world, scope, age)) };
 }
+
+/** The death ending for an age: by life stage where the world has stages, else by the older age thresholds. */
+export function deathEndingFor(world: Pick<WorldPack, "lifeStages">, age: number): string {
+  const adulthood = world.lifeStages?.stages.find(stage => stage.id === "adulthood");
+  const laterLife = world.lifeStages?.stages.find(stage => stage.id === "later-life");
+  const adultFrom = adulthood?.minAge ?? 15, laterFrom = laterLife?.minAge ?? 60;
+  return age === 0 ? "death-in-infancy" : age < adultFrom ? "death-in-childhood" : age < laterFrom ? "death-in-adulthood" : "death-in-later-life";
+}
