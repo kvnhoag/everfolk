@@ -57,7 +57,7 @@
     margin-top: auto;
     margin-bottom: 0;
     margin-right: auto;
-    margin-left: max(16px, calc(50% - min(50%, 310px) - 7.5vw));
+    margin-left: max(16px, calc(50% - min(50%, 310px) - 4.5vw));
     max-width: 620px;
     width: 100%;
   }
@@ -76,9 +76,9 @@
 .ef-home .ef-title-glint:nth-of-type(1){left:14%;top:30%}
 .ef-home .ef-title-glint:nth-of-type(2){left:64%;top:18%}
 .ef-home .ef-title-glint:nth-of-type(3){left:90%;top:70%}
-.ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,264px);margin:2px auto 14px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
-.ef-home-logo-rule span{flex:1;height:1px;background:var(--tx-gold-line);opacity:.75}
-.ef-home-logo-rule i{font-size:17px;line-height:1;color:var(--tx-gold)}
+.ef-home .ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,264px);margin:14px auto 28px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
+.ef-home .ef-home-logo-rule span{flex:1;height:1px;background:var(--tx-gold-line);opacity:.75}
+.ef-home .ef-home-logo-rule i{font-size:17px;line-height:1;color:var(--tx-gold)}
 .ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:clamp(32px, 3.2vw, 46px);line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
   background:none;-webkit-text-fill-color:currentColor;border-radius:0;filter:none;text-shadow:0 1px 1px rgba(255, 252, 240, 0.35), 0 2px 8px rgba(12, 38, 48, 0.5), 0 8px 20px rgba(10, 32, 42, 0.25)}
 .ef-home .ef-home-rule{width:min(100%,286px);gap:14px;margin:0 auto 22px;opacity:1;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
