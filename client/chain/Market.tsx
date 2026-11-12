@@ -264,7 +264,6 @@ export function MarketBody({
                 rarity={row.rarity}
                 rarityLabel={row.rarityLabel}
                 actionName={row.actionName}
-                actionDescription={row.actionDescription}
                 affection={row.affection}
                 priceNear={row.priceText.replace(" NEAR", "")}
                 actions={
