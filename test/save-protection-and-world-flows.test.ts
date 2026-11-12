@@ -10,7 +10,7 @@ import { lifeRecordChanges } from "../client/models/life-record.ts";
 import { visibleRelationshipPeople } from "../client/models/relationship-labels.ts";
 import { entryUsesDefaultLives, startupRefreshesToDefault } from "../client/models/world-entry.ts";
 import { visibleCharacterSections } from "../client/models/character-panel-model.ts";
-import { clearRecordedWealthObservations, recordWealthObservation, getSocietyWealthBenchmarkInfo } from "../client/models/society-wealth-data.ts";
+import { MIN_RECORDED_LIVES, clearRecordedWealthObservations, recordWealthObservation, getSocietyWealthBenchmarkInfo } from "../client/models/society-wealth-data.ts";
 import { getWealthComparison } from "../client/models/wealth-comparison.ts";
 import sample from "../worlds/alexandria-sample.json" with { type: "json" };
 import lives2 from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
@@ -269,17 +269,18 @@ test("Issue #5: Recorded player lives feed society wealth percentiles with revis
   assert.equal(fallbackInfo.kind, "authored-households");
   assert.match(fallbackInfo.description, /starting household distributions/);
 
-  // 2. Record observations for revision 1.0.0
-  recordWealthObservation("world-a", "1.0.0", 100);
-  recordWealthObservation("world-a", "1.0.0", 200);
-  recordWealthObservation("world-a", "1.0.0", 500);
-  recordWealthObservation("world-a", "1.0.0", 1000);
+  // 2. A single finished life is not a society: it must not replace the households
+  //    (one life at -510 dr once ranked an asset-less player "Top <0.1%").
+  recordWealthObservation("world-a", "1.0.0", 0);
+  assert.equal(getSocietyWealthBenchmarkInfo(worldA).kind, "authored-households");
+  clearRecordedWealthObservations();
 
-  // 3. Observations active for revision 1.0.0
+  // 3. Enough recorded lives (the minimum sample) replace the authored households
+  for (let copy = 0; copy < MIN_RECORDED_LIVES / 4; copy++) for (const assets of [100, 200, 500, 1000]) recordWealthObservation("world-a", "1.0.0", assets);
   const infoA = getSocietyWealthBenchmarkInfo(worldA);
   assert.equal(infoA.kind, "recorded-lives");
-  assert.equal(infoA.sampleCount, 4);
-  assert.match(infoA.description, /4 recorded player lives/);
+  assert.equal(infoA.sampleCount, MIN_RECORDED_LIVES);
+  assert.match(infoA.description, new RegExp(`${MIN_RECORDED_LIVES} recorded player lives`));
 
   // 4. Revision isolation: worldB (revision 2.0.0) retains authored fallback
   const infoB = getSocietyWealthBenchmarkInfo(worldB);

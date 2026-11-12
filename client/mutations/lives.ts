@@ -3,7 +3,7 @@ import type { LifeState } from "../../src/types.ts";
 import { contentFingerprint } from "../../src/random.ts";
 import type { ArchivedLife, StorageLike } from "../types/session.ts";
 import { ARCHIVE_KEY, ARCHIVE_LIMIT, engineForLife, exportLife, presentationKeyFor, sampleEngine, saveKeyFor } from "../lib/world-session.ts";
-import { getNetWorth } from "../../src/economy.ts";
+import { getAssetValue } from "../../src/economy.ts";
 import { recordWealthObservation } from "../models/society-wealth-data.ts";
 import { readArchivedLives } from "../queries/lives.ts";
 
@@ -82,7 +82,7 @@ export function archiveLife(storage: StorageLike, life: LifeState): ArchivedLife
   catch { throw new Error("This life could not be added to the local archive. You can still download it."); }
   try {
     if (world.economy && life.economy) {
-      recordWealthObservation(world.id, world.version, getNetWorth(world, life));
+      recordWealthObservation(world.id, world.version, life.economy.cash + getAssetValue(world, life));
     }
   } catch { /* Observation recording is advisory and does not fail archive. */ }
   return entries;

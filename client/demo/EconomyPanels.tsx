@@ -5,7 +5,6 @@ import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import { resolvePartner } from "../../src/people.ts";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import ChoiceImpact from "../components/ChoiceImpact.tsx";
-import { useStableHeight } from "../hooks/useStableHeight.ts";
 import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { getLoanSummary } from "../models/loan-summary.ts";
@@ -160,12 +159,10 @@ export default function EconomyPanels({
   }
 
   const history = screen.priceHistory ?? [];
-  // Every tab keeps the height of the tallest one, so switching tabs never reflows the page.
-  const stableBox = useStableHeight<HTMLDivElement>(activeTab);
   const basePrices = screen.basePrices;
 
   return (
-    <div className="demo-economy" aria-labelledby={titleId} ref={stableBox.ref} style={stableBox.style}>
+    <div className="demo-economy" aria-labelledby={titleId}>
       <header className="demo-deck-header">
         <div>
           <span className="demo-deck-eyebrow">HOUSEHOLD &amp; TOWN COMMAND DECK</span>

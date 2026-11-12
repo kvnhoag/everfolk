@@ -11,6 +11,7 @@ import ChoiceImpact from "./ChoiceImpact.tsx";
 import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
+import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { careerOpeningNotes } from "../models/career-openings.ts";
 import { occupationBadge } from "../demo/screen.ts";
@@ -236,6 +237,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
     </div>
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
+        <CompactSkillPanel life={life} world={world} activities={activities} />
         <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
         {life.vocations && <details className="character-background"><summary>Materials and handmade products</summary>
           {Object.values(vocationInventory(life)).some(n => n > 0) ? <ul>{["linen", "flax"].filter(id => (vocationInventory(life)[id] ?? 0) > 0).map(id => <li key={id}>{id} · {vocationInventory(life)[id]}</li>)}{life.vocations.lots.filter(lot => lot.quantity > 0).map(lot => <li key={`${lot.item}-${lot.quality}`}>{lot.item.replaceAll("-", " ")} · {lot.quantity}{world.vocations?.materials[lot.item] ? "" : ` · grade ${lot.quality}`}</li>)}</ul> : <p>No materials or products yet. Buy materials or start a paid apprenticeship under Other work.</p>}

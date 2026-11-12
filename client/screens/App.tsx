@@ -36,7 +36,6 @@ import { buildImportantLifeEvents } from "../models/important-life-events.ts";
 import { eventNotificationLifeKey, MAX_EVENT_NOTIFICATIONS, NOTIFICATION_DURATION_MS } from "../models/event-notifications.ts";
 import { readSeenEventNotifications, rememberSeenEventNotifications } from "../state/event-notification-store.ts";
 import { readEverfolkStorage } from "../lib/brand-storage.ts";
-import HouseholdSummary from "../components/HouseholdSummary.tsx";
 import LifeHealthPanel from "../components/LifeHealthPanel.tsx";
 import { MoneylenderNotice } from "../components/MoneylenderPanel.tsx";
 import { getLoanSummary, loanDeadlineWarning } from "../models/loan-summary.ts";
@@ -55,7 +54,6 @@ import SiteNav from "../components/SiteNav.tsx";
 import LifeEndingBanner from "../components/LifeEndingBanner.tsx";
 import { displayProse } from "../models/display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "../models/source-copy.ts";
-import CompactSkillPanel from "../components/CompactSkillPanel.tsx";
 import SkillTree from "../components/SkillTree.tsx";
 import WorldMap from "../components/WorldMap.tsx";
 import { supportsLocationMap } from "../models/location-map.ts";
@@ -532,11 +530,10 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         </aside>
         {game.hasBegun && life.phase !== "ended" && <YearlyFocus life={life} world={world} focusId={game.focusId} activities={activities} onChange={game.setFocus} />}
         {game.hasBegun && <LifeOverview life={life} world={world} onOpenWealth={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
-        {game.hasBegun && <div className="life-info-sidebar dashboard-skills"><CompactSkillPanel life={life} world={world} activities={activities} onOpenWiki={() => setPanel("wiki")} /></div>}
         {game.hasBegun && <LifeHealthPanel life={life} world={world} onActivity={requestActivity} />}
         {game.hasBegun && <MoneylenderNotice life={life} world={world} onManage={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
-        {game.hasBegun && demoView && <aside className="life-support-grid" aria-label="Household and life records">
-          <HouseholdSummary life={life} world={world} activities={activities} onActivity={requestActivity} onOpenCharacter={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }} onOpenRelationships={() => { setCharacterSection("relationships"); setPanel("character"); }} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />
+        {/* Skill paths and the household live in the Character popup; the dashboard keeps the life record. */}
+        {game.hasBegun && demoView && <aside className="life-support-grid" aria-label="Life records">
           <div className="life-support-records">
             {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
             <details className="chronicle-preview compact-life-record life-record-panel" open><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>
@@ -574,7 +571,6 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
               onActivity={requestActivity}
             />
             <aside className="life-support-grid" aria-label="Household and life records">
-              <HouseholdSummary life={life} world={world} activities={activities} onActivity={requestActivity} onOpenCharacter={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }} onOpenRelationships={() => { setCharacterSection("relationships"); setPanel("character"); }} />
               <div className="life-support-records">
                 {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
                 <details className="chronicle-preview compact-life-record life-record-panel" open><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>

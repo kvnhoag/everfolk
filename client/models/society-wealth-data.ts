@@ -31,7 +31,7 @@ function observationKey(worldId: string, worldVersion: string): string {
   return `${worldId}::${worldVersion}`;
 }
 
-/** Record a player life net-worth observation for a specific world and compatible revision. */
+/** Record a finished life's total assets (cash and holdings, before debt) for a specific world and compatible revision. */
 export function recordWealthObservation(worldId: string, worldVersion: string, netWorth: number): void {
   if (!Number.isFinite(netWorth)) return;
   const key = observationKey(worldId, worldVersion);
@@ -50,9 +50,18 @@ export function clearRecordedWealthObservations(): void {
   recordedObservations.clear();
 }
 
+/** A handful of finished lives is not a society; below this many, the authored households stay the benchmark. */
+export const MIN_RECORDED_LIVES = 20;
+
+function benchmarkObservations(world: WorldPack | undefined, explicitObservations?: readonly number[]): readonly number[] {
+  if (explicitObservations) return explicitObservations;
+  const recorded = world ? getRecordedWealthObservations(world.id, world.version) : [];
+  return recorded.length >= MIN_RECORDED_LIVES ? recorded : [];
+}
+
 /** Retrieve metadata describing whether the society comparison is based on recorded lives or authored fallback. */
 export function getSocietyWealthBenchmarkInfo(world: WorldPack, explicitObservations?: readonly number[]): SocietyBenchmarkInfo {
-  const observations = explicitObservations ?? (world ? getRecordedWealthObservations(world.id, world.version) : []);
+  const observations = benchmarkObservations(world, explicitObservations);
   if (observations.length > 0) {
     return {
       kind: "recorded-lives",
@@ -69,7 +78,7 @@ export function getSocietyWealthBenchmarkInfo(world: WorldPack, explicitObservat
 
 /** Retrieve the population used for the society percentile and median wealth. */
 export function getSocietyWealthData(world: WorldPack, explicitObservations?: readonly number[]): SocietyWealthGroup[] {
-  const observations = explicitObservations ?? getRecordedWealthObservations(world.id, world.version);
+  const observations = benchmarkObservations(world, explicitObservations);
   if (observations.length > 0) {
     const sorted = [...observations].sort((a, b) => a - b);
     return [{
