@@ -2,6 +2,7 @@ import type { ChainBackend } from "./chain-backend.ts";
 import AccountBar from "./AccountBar.tsx";
 import StorybookMark from "../components/StorybookMark.tsx";
 import SiteNav from "../components/SiteNav.tsx";
+import TutorialButton from "../components/TutorialButton.tsx";
 import "./web3-navigation.css";
 
 /** The revamped Weave/Market header, using the same Play · Weave Mode · Market · Figures · My lives links as every screen. */
@@ -19,6 +20,8 @@ export default function Web3Navigation({ backend, onExplore }: { backend: ChainB
       </a>
 
       <SiteNav className="web3-links ef-web3-nav" onPlay={onExplore} />
+
+      <TutorialButton tone="dark" />
 
       {backend ? (
         <AccountBar backend={backend} compact />

@@ -75,6 +75,9 @@ import "../styles/printed-folktale.css";
 import { journalKind } from "../models/journal-kind.ts";
 import "../styles/save-recovery.css";
 import "../styles/gameplay-layout.css";
+import TutorialButton from "../components/TutorialButton.tsx";
+import { useTutorial, useTutorialNavigator } from "../hooks/useTutorial.ts";
+import { planAppScreen } from "../models/tutorial-navigation.ts";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -166,7 +169,10 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
   const loanWarningsSeen = useRef(new Set<string>());
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
+  // The guided tour holds the clock while it is open and may begin a rolled life through the normal flow.
+  const tutorialOpen = useTutorial().open;
+  const [tutorialBegin, setTutorialBegin] = useState(false);
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen || tutorialOpen, startFresh, startFreshFrom, ranked });
   const { life } = game;
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
@@ -206,7 +212,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
   const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
-  const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
+  const decisionOpen = Boolean(dashboardVisible && !tutorialOpen && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
 
   useEffect(() => {
     if (!game.isPlaying) {
@@ -256,12 +262,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   useEffect(() => {
     // Health and pending decisions keep priority. The clock waits as soon as
     // this reminder opens, including when Auto mode is enabled.
-    if (!repaymentWarning || readingPause || !game.isPlaying || !game.hasBegun || menuOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest || life.phase !== "ready") return;
+    if (!repaymentWarning || tutorialOpen || readingPause || !game.isPlaying || !game.hasBegun || menuOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest || life.phase !== "ready") return;
     const key = repaymentWarning.key;
     if (loanWarningsSeen.current.has(key)) return;
     try { if (readEverfolkStorage(window.sessionStorage, `everfolk:loan-warning:${key}`) === "seen") return; } catch { /* An in-memory reminder still works. */ }
     setLoanWarningOpen(true);
-  }, [repaymentWarning?.key, readingPause, game.isPlaying, game.hasBegun, menuOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, loanRequest, life.phase]);
+  }, [repaymentWarning?.key, tutorialOpen, readingPause, game.isPlaying, game.hasBegun, menuOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, loanRequest, life.phase]);
 
   function dismissLoanWarning() {
     if (repaymentWarning) {
@@ -355,6 +361,25 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     setMenuOpen(false);
     game.beginLife();
   }
+
+  // Tour steps open screens through the game's own state; an existing life is continued, never replaced.
+  useTutorialNavigator(screen => {
+    const plan = planAppScreen(screen, { hasBegun: game.hasBegun });
+    setRestartOpen(false);
+    setViewedLife(null);
+    setDialogError("");
+    if (plan.characterSection) setCharacterSection(plan.characterSection);
+    setPanel(plan.panel);
+    setBirthPopoverOpen(plan.birthPopoverOpen);
+    if (plan.menuOpen !== "keep") setMenuOpen(plan.menuOpen);
+    if (plan.beginLife) { game.revealStats(); setTutorialBegin(true); }
+  });
+
+  useEffect(() => {
+    if (!tutorialBegin || !game.hasRevealedStats) return;
+    setTutorialBegin(false);
+    if (!game.hasBegun) beginWithReadingPause();
+  }, [tutorialBegin, game.hasRevealedStats]);
 
   function beginFromMenu() {
     if (game.hasBegun) setRestartOpen(true);
@@ -451,6 +476,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       </a>
       <SiteNav className="main-nav site-primary-nav" linkClassName="nav-link" onPlay={closeDialog} />
       <div className="header-right-cluster">
+        <TutorialButton />
         <GameMusicPlayer />
         <div className={`save-indicator ${game.saveStatus === "unavailable" ? "save-warning" : ""}`} role="status">
           <Icon name={game.saveStatus === "saved" ? "check" : "feather"} size={15} />

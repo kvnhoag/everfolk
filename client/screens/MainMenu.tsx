@@ -9,6 +9,7 @@ import "../homepage/luminous.css";
 import "../homepage/typeset.css";
 import { useLuminousLight } from "../homepage/useLuminousLight.ts";
 import GameMusicPlayer from "../components/GameMusicPlayer.tsx";
+import TutorialButton from "../components/TutorialButton.tsx";
 
 export interface MainMenuProps {
   /** A ranked life is in progress: it can only be continued, never replaced from here. */
@@ -56,6 +57,7 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
           </a>
           <SiteNav className="ef-home-weave-links" onPlay={primaryAction} />
         </div>
+        <TutorialButton tone="dark" />
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
