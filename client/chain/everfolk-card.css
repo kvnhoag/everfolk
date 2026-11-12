@@ -1,0 +1,438 @@
+/* Everfolk Collectible Card System — Unified Trading Card aesthetic across Booster Pack, Market, and Collection */
+
+.ef-card-perspective {
+  perspective: 1200px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: 290px;
+}
+
+.ef-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.34, 1.25, 0.64, 1), box-shadow 0.25s ease;
+  user-select: none;
+}
+
+/* 3D Flip States */
+.ef-card-inner.is-face-down {
+  transform: rotateY(180deg);
+}
+
+.ef-card-inner.is-flipped {
+  transform: rotateY(0deg);
+}
+
+.ef-card-inner:hover {
+  box-shadow: 0 12px 28px rgba(12, 31, 41, 0.35);
+}
+
+.ef-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* =========================================
+   CARD BACK: Ancient Rhakotis Celestial Back
+   ========================================= */
+.ef-card-back {
+  transform: rotateY(180deg);
+  background: radial-gradient(circle at 50% 38%, #1d3648 0%, #112330 55%, #08121a 100%);
+  border: 3px double #d6aa52;
+  box-shadow: inset 0 0 0 2px #3e2815, inset 0 0 16px rgba(0, 0, 0, 0.65), 4px 4px 0 #00000030;
+  color: #fff9e9;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ef-card-back:hover {
+  border-color: #ffd875;
+  transform: rotateY(180deg) scale(1.02);
+}
+
+.ef-card-back-corners {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #d6aa5240;
+  pointer-events: none;
+}
+
+.ef-card-back-corners::before,
+.ef-card-back-corners::after {
+  content: "✦";
+  position: absolute;
+  font-size: 10px;
+  color: #d6aa52;
+}
+.ef-card-back-corners::before { top: 2px; left: 2px; }
+.ef-card-back-corners::after { bottom: 2px; right: 2px; }
+
+.ef-card-back-topline {
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: #d6aa52;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.ef-card-back-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.ef-card-back-medallion {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px dashed #d6aa5288;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #2a4c62 0%, #112330 75%);
+  box-shadow: 0 0 20px rgba(214, 170, 82, 0.35);
+  animation: ef-medallion-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes ef-medallion-pulse {
+  from { box-shadow: 0 0 12px rgba(214, 170, 82, 0.25); border-color: #d6aa5266; }
+  to { box-shadow: 0 0 26px rgba(214, 170, 82, 0.55); border-color: #ffe08a; }
+}
+
+.ef-card-back-brand {
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff4d1;
+  text-shadow: 0 2px 4px #000;
+}
+
+.ef-card-back-realm {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #d6aa52;
+  text-transform: uppercase;
+}
+
+.ef-card-back-prompt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffe699;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid #d6aa5266;
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: ef-prompt-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes ef-prompt-glow {
+  from { transform: scale(1); opacity: 0.85; border-color: #d6aa5266; }
+  to { transform: scale(1.04); opacity: 1; border-color: #ffd875; }
+}
+
+
+/* =========================================
+   CARD FRONT: High-Res Artifact / Collectible
+   ========================================= */
+.ef-card-front {
+  transform: rotateY(0deg);
+  background: radial-gradient(ellipse at 50% 20%, #fffef8 0%, #f7ecd4 70%, #ebd7b2 100%);
+  border: 2px solid #886447;
+  box-shadow: 4px 4px 0 rgba(136, 100, 71, 0.25), inset 0 0 0 1px #d6ba8d;
+  color: #263b43;
+  padding: 10px;
+}
+
+/* Card Selection Highlighting */
+.ef-card-inner.is-selected .ef-card-front {
+  border: 3px solid #38665e;
+  box-shadow: 0 0 0 3px #6caaa0, 6px 6px 0 rgba(40, 75, 53, 0.35);
+  background: radial-gradient(ellipse at 50% 20%, #fffff7 0%, #f7efe0 70%, #e8ddc4 100%);
+}
+
+/* Rarity Variations */
+.ef-card-front.rarity-1 {
+  border-color: #886447;
+}
+
+.ef-card-front.rarity-2 {
+  border-color: #41637b;
+  box-shadow: 4px 4px 0 rgba(65, 99, 123, 0.3), inset 0 0 0 1px #8ab8d8;
+}
+
+.ef-card-front.rarity-3 {
+  border-color: #6a3d82;
+  box-shadow: 4px 4px 0 rgba(106, 61, 130, 0.3), inset 0 0 0 1px #b98fd1;
+}
+
+.ef-card-front.rarity-4,
+.ef-card-front.rarity-5,
+.ef-card-front.is-figure {
+  border-color: #a85e44;
+  box-shadow: 4px 4px 0 rgba(168, 94, 68, 0.35), inset 0 0 0 1px #e8b078;
+}
+
+/* Shimmer Foil effect for rare/legendary/figures */
+.ef-card-front.rarity-2::after,
+.ef-card-front.rarity-3::after,
+.ef-card-front.rarity-4::after,
+.ef-card-front.rarity-5::after,
+.ef-card-front.is-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 240, 180, 0.45) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 250% 250%;
+  background-position: 150% 150%;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: background-position 0.6s ease;
+}
+
+.ef-card-inner:hover .ef-card-front::after {
+  background-position: -50% -50%;
+}
+
+/* Card Header */
+.ef-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #cdbb95;
+  margin-bottom: 8px;
+}
+
+.ef-card-num {
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 10px;
+  font-weight: 700;
+  color: #727562;
+  letter-spacing: 0.5px;
+}
+
+.ef-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+  background: #ecdcb9;
+  border: 1px solid #baa47a;
+  color: #5a4b33;
+}
+
+.ef-card-badge.is-figure {
+  background: #a85e44;
+  border-color: #7d3f2b;
+  color: #fff4d6;
+}
+
+.ef-card-badge.rarity-2 {
+  background: #41637b;
+  border-color: #29465a;
+  color: #eaf3fb;
+}
+
+.ef-card-badge.rarity-3 {
+  background: #6a3d82;
+  border-color: #49265b;
+  color: #faedff;
+}
+
+.ef-card-badge.rarity-4 {
+  background: #d6aa52;
+  border-color: #9c7324;
+  color: #3b2804;
+}
+
+/* Portrait Viewport */
+.ef-card-portrait-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: radial-gradient(circle at 50% 50%, #f2e2be 0%, #deb885 85%, #886447 100%);
+  border: 2px solid #886447;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 8px;
+}
+
+.ef-card-portrait-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: transform 0.25s ease;
+}
+
+.ef-card-inner:hover .ef-card-portrait-wrap img {
+  transform: scale(1.04);
+}
+
+/* Identity & Lore */
+.ef-card-identity {
+  margin-bottom: 6px;
+}
+
+.ef-card-title {
+  display: block;
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #263b43;
+  letter-spacing: -0.2px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ef-card-kind {
+  display: block;
+  font-size: 10px;
+  color: #727562;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Deed Box */
+.ef-card-deed {
+  background: #fbf5e6;
+  border: 1px solid #d4c19c;
+  padding: 6px 8px;
+  border-radius: 2px;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+  flex: 1;
+}
+
+.ef-card-deed-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: #405347;
+  margin-bottom: 2px;
+  font-size: 11.5px;
+}
+
+.ef-card-deed-desc {
+  color: #555d54;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 10.5px;
+}
+
+/* Stats & Footer */
+.ef-card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #d8c7a6;
+  font-size: 11px;
+}
+
+.ef-card-affection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #657365;
+  font-weight: 600;
+}
+
+.ef-card-affection-bar {
+  width: 48px;
+  height: 6px;
+  background: #e2ceaa;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #b8a37e;
+}
+
+.ef-card-affection-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #6caaa0, #38665e);
+}
+
+.ef-card-price {
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 12px;
+  font-weight: 700;
+  color: #a85e44;
+}
+
+/* Uncollected Silhouette State (PokemonSim set style) */
+.ef-card-front.is-silhouette {
+  filter: grayscale(1) contrast(0.8) brightness(0.65);
+  opacity: 0.6;
+}
+
+.ef-card-front.is-silhouette .ef-card-portrait-wrap img {
+  filter: brightness(0);
+}
+
+.ef-card-front.is-silhouette .ef-card-deed-desc,
+.ef-card-front.is-silhouette .ef-card-title {
+  color: #888;
+}
+
+/* Actions Ribbon */
+.ef-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}

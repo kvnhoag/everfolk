@@ -5,8 +5,6 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import type { MintPack } from "../chain/types.ts";
-import type { LivesContract } from "../client/chain/types.ts";
 
 registerHooks({
   load(url, context, nextLoad) {
@@ -17,19 +15,15 @@ registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: MintPackView } = await import("../client/chain/MintPack.tsx");
 const { default: LifeEndingBanner } = await import("../client/components/LifeEndingBanner.tsx");
+const { default: LifeMomentsPack } = await import("../client/chain/LifeMomentsPack.tsx");
 
-const pack = {
-  life_id: "freeplay-0", evidence_hash: "0".repeat(64), reroll_fee: "0", total_fee: "0", source_share_bps: 0,
-  cards: [0, 1, 2].map(() => ({ kind: "npc", action_id: "letters.teach", rarity: "common", affection: 50, rerolled: false, figure_id: null })),
-} as unknown as MintPack;
 
-test("a free life's pack only shows what could have been won and points to Weave Mode", () => {
-  const html = renderToStaticMarkup(createElement(MintPackView, { previewOnly: true, practice: true, walletPath: false, initialPack: pack, contract: {} as LivesContract, onClose() {} }));
-  assert.match(html, /You could have gotten/);
+test("a life without recorded stages explains there are no moments and still points to Weave Mode", () => {
+  const html = renderToStaticMarkup(createElement(LifeMomentsPack, { moments: [], onClose() {} }));
+  assert.match(html, /no moments to show/);
   assert.match(html, /href="#weave"[^>]*>Play Weave Mode to get real NFTs/);
-  assert.doesNotMatch(html, /Mint selected|Reroll|Total paid|Save pack/);
+  assert.doesNotMatch(html, /Open your pack/);
 });
 
 test("the ending banner leads a free life to its pack, Weave Mode and the Market", () => {
@@ -47,7 +41,6 @@ test("a Weave life's ending sends minting back to Weave Mode instead of a free p
   assert.match(html, /href="#market"/);
 });
 
-const { default: LifeMomentsPack } = await import("../client/chain/LifeMomentsPack.tsx");
 const moments = [
   { stageId: "infancy", stageTitle: "Infancy", ages: "Ages 0–2", title: "Child of a farm", media: "/a.svg", historical: false },
   { stageId: "youth", stageTitle: "Youth", ages: "Ages 14–17", title: "Euclid, the geometer", media: "/b.svg", historical: true },
