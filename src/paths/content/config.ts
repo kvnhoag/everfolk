@@ -20,7 +20,8 @@ const PROFILES: Record<string, { title: string; origins: string[]; rows: Row }> 
     research: [2, [1, 1, 0, 0]], civic: [4, [1, 3, 1, 0]], trade: [6, [2, 5, 2, 1]], soldiering: [3, [1, 2, 1, 0]] } },
   "court-quarter": { title: "the court quarter", origins: ["royal-household"], rows: {
     farming: [1, [0, 1, 0, 0]], clothing: [3, [1, 2, 1, 0]], ceramics: [2, [0, 1, 1, 0]], sculpture: [3, [1, 1, 1, 1]],
-    research: [6, [3, 4, 2, 1]], civic: [6, [2, 5, 2, 1]], trade: [3, [1, 2, 1, 0]], soldiering: [4, [1, 3, 1, 1]] } },
+    // The Museum and the court draw famous scholars and officials: renowned people are met here, not elsewhere.
+    research: [6, [3, 4, 2, 2]], civic: [6, [2, 5, 2, 2]], trade: [3, [1, 2, 1, 0]], soldiering: [4, [1, 3, 1, 1]] } },
 };
 
 const field = (title: string, practitioner: string, skills: string[], jobs: string[], specializations: string[]) =>

@@ -4,6 +4,7 @@ import { applyLifeStageContent } from "./life-stage-content.ts";
 import { LIVES_WORLD_VERSION } from "./ids.ts";
 import { ALEXANDRIA_PATHS, NEW_ORIGINS, NEW_ORIGIN_RESOURCES } from "../paths/content/config.ts";
 import { FIELD_IDS } from "../paths/types.ts";
+import { inspirationEvents } from "../paths/content/inspiration.ts";
 
 /** New births: the skill atlas plus life stages. Older revisions keep their exact rules for replay. */
 export function buildLifeStageWorld(base: WorldPack): WorldPack {
@@ -23,4 +24,5 @@ function addPaths(world: WorldPack): void {
   for (const field of FIELD_IDS) {
     world.flags[`met-renowned-${field}`] = { label: `Met a renowned ${world.paths.fields[field].practitioner}`, initial: false };
   }
+  world.events = [...world.events, ...inspirationEvents()];
 }

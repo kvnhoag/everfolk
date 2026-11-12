@@ -9,8 +9,11 @@ import { refreshNeeds } from "./needs.ts";
 export type MeetingBand = "child" | "young" | "adult" | "elder";
 export const MEETING_BANDS: readonly MeetingBand[] = ["child", "young", "adult", "elder"];
 
-/** Common people are met more often; a renowned master is a rare meeting. */
-const TIER_WEIGHT: Record<Tier, number> = { learner: 4, worker: 3, master: 2, renowned: 1 };
+/**
+ * Weight per person of each tier. Learners and workers are many; renowned people are few, but as
+ * public figures they are seen more often than their numbers alone suggest.
+ */
+const TIER_WEIGHT: Record<Tier, number> = { learner: 4, worker: 3, master: 2, renowned: 3 };
 const PULL: Record<Tier, { affinity: number; skill: number; introduce: boolean }> = {
   learner: { affinity: 5, skill: 0, introduce: false },
   worker: { affinity: 10, skill: 2, introduce: false },

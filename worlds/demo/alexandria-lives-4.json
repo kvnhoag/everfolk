@@ -63001,6 +63001,1654 @@
       ],
       "evidence": "fictional",
       "scope": "work"
+    },
+    {
+      "id": "inspire-farming-child",
+      "title": "Out along the canal",
+      "text": "Farmers lift water from the canal with a swing-beam and turn the wet soil for sowing.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "farming",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "farming",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-farming-young",
+      "title": "Out along the canal",
+      "text": "Farmers lift water from the canal with a swing-beam and turn the wet soil for sowing.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "farming",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-farming-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-farming-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "farming",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-farming-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-farming-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "farming",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-farming-adult",
+      "title": "Out along the canal",
+      "text": "Farmers lift water from the canal with a swing-beam and turn the wet soil for sowing.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "farming",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-farming-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-farming-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "farming",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-farming-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-farming-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "farming",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-farming-elder",
+      "title": "Out along the canal",
+      "text": "Farmers lift water from the canal with a swing-beam and turn the wet soil for sowing.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "farming",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "farming",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-clothing-child",
+      "title": "A loom in a doorway",
+      "text": "A weaver works a loom in an open doorway, the shuttle clicking back and forth across the warp.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "clothing",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "clothing",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-clothing-young",
+      "title": "A loom in a doorway",
+      "text": "A weaver works a loom in an open doorway, the shuttle clicking back and forth across the warp.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "clothing",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-clothing-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-clothing-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "clothing",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-clothing-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-clothing-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "clothing",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-clothing-adult",
+      "title": "A loom in a doorway",
+      "text": "A weaver works a loom in an open doorway, the shuttle clicking back and forth across the warp.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "clothing",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-clothing-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-clothing-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "clothing",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-clothing-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-clothing-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "clothing",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-clothing-elder",
+      "title": "A loom in a doorway",
+      "text": "A weaver works a loom in an open doorway, the shuttle clicking back and forth across the warp.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "clothing",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "clothing",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-ceramics-child",
+      "title": "At the wheel",
+      "text": "A potter draws up a jar on a wheel while the kiln behind the workshop cools.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "ceramics",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "ceramics",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-ceramics-young",
+      "title": "At the wheel",
+      "text": "A potter draws up a jar on a wheel while the kiln behind the workshop cools.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "ceramics",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-ceramics-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-ceramics-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "ceramics",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-ceramics-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-ceramics-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "ceramics",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-ceramics-adult",
+      "title": "At the wheel",
+      "text": "A potter draws up a jar on a wheel while the kiln behind the workshop cools.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "ceramics",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-ceramics-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-ceramics-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "ceramics",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-ceramics-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-ceramics-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "ceramics",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-ceramics-elder",
+      "title": "At the wheel",
+      "text": "A potter draws up a jar on a wheel while the kiln behind the workshop cools.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "ceramics",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "ceramics",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-sculpture-child",
+      "title": "Chips of stone",
+      "text": "A carver taps at a block of limestone in a yard white with chips and dust.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "sculpture",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "sculpture",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-sculpture-young",
+      "title": "Chips of stone",
+      "text": "A carver taps at a block of limestone in a yard white with chips and dust.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "sculpture",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-sculpture-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-sculpture-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "sculpture",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-sculpture-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-sculpture-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "sculpture",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-sculpture-adult",
+      "title": "Chips of stone",
+      "text": "A carver taps at a block of limestone in a yard white with chips and dust.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "sculpture",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-sculpture-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-sculpture-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "sculpture",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-sculpture-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-sculpture-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "sculpture",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-sculpture-elder",
+      "title": "Chips of stone",
+      "text": "A carver taps at a block of limestone in a yard white with chips and dust.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "sculpture",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "sculpture",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-research-child",
+      "title": "Questions under the colonnade",
+      "text": "A scholar argues with students under a colonnade, a scroll open on the step beside them.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "research",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "research",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-research-young",
+      "title": "Questions under the colonnade",
+      "text": "A scholar argues with students under a colonnade, a scroll open on the step beside them.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "research",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-research-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-research-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "research",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-research-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-research-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "research",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-research-adult",
+      "title": "Questions under the colonnade",
+      "text": "A scholar argues with students under a colonnade, a scroll open on the step beside them.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "research",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-research-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-research-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "research",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-research-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-research-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "research",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-research-elder",
+      "title": "Questions under the colonnade",
+      "text": "A scholar argues with students under a colonnade, a scroll open on the step beside them.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "research",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "research",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-civic-child",
+      "title": "A decree read aloud",
+      "text": "An official reads a new decree aloud at the record office while scribes copy it for the notice board.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "civic",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "civic",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-civic-young",
+      "title": "A decree read aloud",
+      "text": "An official reads a new decree aloud at the record office while scribes copy it for the notice board.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "civic",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-civic-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-civic-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "civic",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-civic-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-civic-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "civic",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-civic-adult",
+      "title": "A decree read aloud",
+      "text": "An official reads a new decree aloud at the record office while scribes copy it for the notice board.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "civic",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-civic-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-civic-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "civic",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-civic-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-civic-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "civic",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-civic-elder",
+      "title": "A decree read aloud",
+      "text": "An official reads a new decree aloud at the record office while scribes copy it for the notice board.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "civic",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "civic",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-trade-child",
+      "title": "Prices called across the market",
+      "text": "A trader weighs goods on a hanging balance and calls prices across the market.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "trade",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "trade",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-trade-young",
+      "title": "Prices called across the market",
+      "text": "A trader weighs goods on a hanging balance and calls prices across the market.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "trade",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-trade-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-trade-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "trade",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-trade-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-trade-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "trade",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-trade-adult",
+      "title": "Prices called across the market",
+      "text": "A trader weighs goods on a hanging balance and calls prices across the market.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "trade",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-trade-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-trade-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "trade",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-trade-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-trade-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "trade",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-trade-elder",
+      "title": "Prices called across the market",
+      "text": "A trader weighs goods on a hanging balance and calls prices across the market.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "trade",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "trade",
+          "band": "elder"
+        }
+      ]
+    },
+    {
+      "id": "inspire-soldiering-child",
+      "title": "The drill yard",
+      "text": "Soldiers drill in a dusty yard while an officer calls the step.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "soldiering",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "soldiering",
+          "band": "child"
+        }
+      ]
+    },
+    {
+      "id": "inspire-soldiering-young",
+      "title": "The drill yard",
+      "text": "Soldiers drill in a dusty yard while an officer calls the step.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "soldiering",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-soldiering-young-help",
+          "text": "Ask to help for the day",
+          "outcomes": [
+            {
+              "id": "inspire-soldiering-young-helped",
+              "text": "You are handed the simplest job and you do it carefully.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "soldiering",
+                  "band": "young"
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "asking to help"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-soldiering-young-watch",
+          "text": "Watch for a while, then go on your way",
+          "outcomes": [
+            {
+              "id": "inspire-soldiering-young-watched",
+              "text": "You watch long enough to see how it is done.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "soldiering",
+                  "band": "young"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "personal"
+    },
+    {
+      "id": "inspire-soldiering-adult",
+      "title": "The drill yard",
+      "text": "Soldiers drill in a dusty yard while an officer calls the step.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "soldiering",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "inspire-soldiering-adult-talk",
+          "text": "Talk about the work",
+          "outcomes": [
+            {
+              "id": "inspire-soldiering-adult-talked",
+              "text": "You talk about the work, its prices and its troubles.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "soldiering",
+                  "band": "adult"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "inspire-soldiering-adult-learn",
+          "text": "Ask what it would take to learn it properly",
+          "outcomes": [
+            {
+              "id": "inspire-soldiering-adult-asked",
+              "text": "You are told plainly what it takes and who might teach you.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "meet-practitioner",
+                  "field": "soldiering",
+                  "band": "adult"
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "asking how to learn the work"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "work"
+    },
+    {
+      "id": "inspire-soldiering-elder",
+      "title": "The drill yard",
+      "text": "Soldiers drill in a dusty yard while an officer calls the step.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "when": {
+        "type": "field-people",
+        "field": "soldiering",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "later-life"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 10,
+      "evidence": "fictional",
+      "choices": [],
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "meet-practitioner",
+          "field": "soldiering",
+          "band": "elder"
+        }
+      ]
     }
   ],
   "endings": [
@@ -69555,7 +71203,7 @@
               3,
               4,
               2,
-              1
+              2
             ]
           },
           "civic": {
@@ -69564,7 +71212,7 @@
               2,
               5,
               2,
-              1
+              2
             ]
           },
           "trade": {
