@@ -1,10 +1,12 @@
 import { applyStatDelta } from "../../src/progression.ts";
 import { marketQuote } from "../../src/market.ts";
+import { merchantSaleValue } from "../../src/demo/market-depth.ts";
+import type { DemoState } from "../../src/demo/types.ts";
 import { initialTown } from "../../src/demo/market.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import type { Effect, WorldPack } from "../../src/types.ts";
 
-export interface UniformRoll { first: number; step: number; count: number }
+export interface UniformRoll { first: number; step: number; count: number; /** Optional monotone whole-currency values for a nonlinear market curve. */ valueAt?: (index: number) => number }
 
 /** Weighted households with sorted cash values and independent resource rolls. */
 export interface SocietyWealthGroup {
@@ -87,7 +89,9 @@ function getMockSocietyWealthData(world: WorldPack): SocietyWealthGroup[] {
   const definition = world.stats[economy.stat];
   const maximumWeight = Math.max(...world.origins.map(origin => origin.weight));
   const startingResources = world.demo?.startingResources;
-  const demoPrices = world.demo && startingResources ? initialTown(world.demo).prices : undefined;
+  const demoTown = world.demo && startingResources ? initialTown(world.demo) : undefined;
+  const demoPrices = demoTown?.prices;
+  const referenceDemo = { town: demoTown, year: { flood: "normal", army: "quiet", road: "safe", fresh: [] } } as unknown as DemoState;
   return world.origins.map(origin => {
     const range = origin.statRanges?.[economy.stat] ?? definition.initialRange;
     const first = range?.min ?? definition.initial;
@@ -97,15 +101,24 @@ function getMockSocietyWealthData(world: WorldPack): SocietyWealthGroup[] {
       if (effect.type === "end") break;
       if (effect.type === "stat" && effect.stat === economy.stat) effects.push(effect);
     }
-    const resources = economy.assets.map(asset => {
+    const resources: UniformRoll[] = economy.assets.map(asset => {
       const range = origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
       const unitPrice = marketQuote(world, { age: 0, lastEventAge: {}, eventCounts: {} }, asset.id).sell;
       return { first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 };
     });
     if (startingResources && demoPrices) for (const item of TRADE_ITEMS) {
       const range = startingResources.origins?.[origin.id]?.[item] ?? startingResources.defaults[item];
-      const unitPrice = demoPrices[item].buy;
-      resources.push({ first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 });
+      if (world.demo!.market.depth) {
+        const cache = new Map<number, number>();
+        const valueAt = (index: number): number => {
+          if (!cache.has(index)) cache.set(index, merchantSaleValue(world.demo!, referenceDemo, item, range.min + index));
+          return cache.get(index)!;
+        };
+        resources.push({ first: valueAt(0), step: 0, count: range.max - range.min + 1, valueAt });
+      } else {
+        const unitPrice = demoPrices[item].buy;
+        resources.push({ first: range.min * unitPrice, step: unitPrice, count: range.max - range.min + 1 });
+      }
     }
     return {
       weight: origin.weight / maximumWeight,

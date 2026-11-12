@@ -9,7 +9,7 @@ import { capabilityCatalog } from "./attribute-catalog.ts";
 /** Pure view: opening the map never trains, awards nodes, reserves money or draws randomness. */
 export function capabilityView(world: WorldPack, life: LifeState): CapabilityView {
   const enabled = Boolean(world.capabilities && life.capabilities);
-  return { enabled, nodes: capabilityCatalog(world.capabilities?.version ?? 2).map(node => {
+  return { enabled, nodes: (world.capabilities?.nodes ?? capabilityCatalog(3)).map(node => {
     if (!enabled) return { id: node.id, state: "unavailable" as const, reasons: ["This saved world keeps its earlier progression rules. Start a new free-play life to use this tree."], progress: { done: 0, required: 1 }, actionId: null, actionLabel: "Unavailable in this world", requirementText: [] };
     const learned = Boolean(life.capabilities!.learned[node.id]);
     const requirements = requirementReasons(world, life, node.id);

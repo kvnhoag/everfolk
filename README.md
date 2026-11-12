@@ -31,7 +31,7 @@ Open **[the skill-tree guide](guide/SKILL_TREE.md)** for the connected 74-node a
 
 ## Play
 
-Begin a life near Rhakotis in 350 BCE and experience the world around the emerging city of Alexandria. Develop skills, find work, maintain relationships and manage health and household finances. Accepted work can lead to named accomplishments and later career opportunities. At the end, review the life record or begin again.
+Begin a life near Rhakotis with a birth year between 350 and 300 BCE and experience the world around the emerging city of Alexandria. Develop skills, find work, maintain relationships and manage health and household finances. Accepted work can lead to named accomplishments and later career opportunities. At the end, review the life record or begin again.
 
 The engine uses a recorded seed and accepted commands for deterministic replay. Existing saves retain their exact world revisions.
 
@@ -59,7 +59,8 @@ Ordinary play stays offline. A **ranked life** adds NEAR in four places, each on
 
 | | |
 |---|---|
-| Contract (testnet) | [`everfolk-lives-11101338.testnet`](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) — 5% figure drop, the real rules |
+| Contract (testnet) | [`everfolk-albums-11121956.testnet`](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) — current contract with stage albums, 5% figure drop, the real rules |
+| Earlier contract (testnet) | [`everfolk-lives-11101338.testnet`](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) — before stage albums; its lives and tokens remain there |
 | Demo contract (testnet) | [`demo.genesis-1794297139-6.testnet`](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) — used only to record the video: 100% figure drop, every key decision draws someone, no wait after closing a life |
 | Standards | NEP-171, 177, 178, 181, and NEP-199 payouts that include sources |
 | Contract code and tests | [`contract/`](contract/README.md) (Rust, `cargo test`) |
@@ -103,7 +104,7 @@ Original pixel/vector artwork, source geometry and editable native masters are r
 
 ## Grain and Service demo
 
-New free-play births use `alexandria-lives-3`, with household resource rolls shown beneath the four main stats, including zero results. Total wealth includes these holdings at current merchant bids. Begun lives retain their recorded revision; ranked and practice configurations remain unchanged. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
+New free-play births use `alexandria-lives-5`, with household resource rolls shown beneath the four main stats, including zero results. Total wealth includes held resources at their applicable market quotes. Begun lives retain their recorded revision, including the original `alexandria-lives-4` pack and capability rules. Ranked and practice worlds remain separate from the free-play revision. In the separate ranked demo, a finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open the ranked demo on its contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
 
 
 The approved **Printed Folktale** identity uses locally bundled Eczar 600 for the wordmark and headings, with DM Sans 500 at 16px for narrative text. The textured wordmark keeps its clay-coloured period. Transparent SVG/PNG logos, the font licence and rebuild sources are packaged in [the brand kit](artwork/branding/everfolk-printed-folktale/README.md).

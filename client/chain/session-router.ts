@@ -1,4 +1,4 @@
-import type { ContractCall, WalletSession } from "./types.ts";
+import type { AccountProof, ContractCall, WalletSession } from "./types.ts";
 
 /**
  * One `WalletSession` in front of every sign-in method. Screens keep talking to a single session; the router
@@ -12,6 +12,7 @@ type MethodStore = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
 export interface RoutedSession extends WalletSession {
   readonly method: SignInMethod | null;
+  proveAccount(message: string): Promise<AccountProof>;
   /** Signs in with `method`, signing the previous method out first when it differs. */
   use(method: SignInMethod): Promise<void>;
   /** Reopens the remembered method without any sign-in window; stays signed out when its session has ended. */
@@ -142,6 +143,16 @@ export function createSessionRouter(open: SessionOpeners, store: MethodStore | n
     restore,
     async signIn() { await use(active?.method ?? DEFAULT_METHOD); },
     signOut,
+    async proveAccount(message) {
+      const owner = active;
+      const accountId = owner?.session.accountId;
+      if (!owner || !accountId) throw new Error("Sign in first.");
+      if (!owner.session.proveAccount) throw new Error("Sign in again to verify ownership of this account.");
+      const proof = await owner.session.proveAccount(message);
+      if (active !== owner || owner.session.accountId !== accountId) throw new Error("Your sign-in changed before this account was verified.");
+      if (proof.accountId !== accountId) throw new Error("The account proof did not match your signed-in account.");
+      return proof;
+    },
     async call(call: ContractCall) {
       if (!active) throw new Error("Sign in first.");
       return active.session.call(call);

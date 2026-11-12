@@ -60,10 +60,9 @@ export interface NpcEvent {
   text: string;
   kind: "action" | "speech" | "world" | "arrival" | "departure" | "offer";
 }
-export type PlayerCommand = Extract<
-  Command,
-  { type: "advance" | "choose" | "act" }
->;
+export type NpcCommand = {type:'npc-turn';decisions:Record<string,NpcDecision>} | {type:'npc-answer';offerId:string;accept:boolean} | {type:'npc-speech';npcId:string;text:string;reply:string};
+export type PlayerCommand = Exclude<Command,{type:'influence'}|NpcCommand>;
+export type NpcRuntimeState = Omit<NpcSessionState,'player'|'commands'>;
 export type NpcSessionCommand =
   | { type: "player"; command: PlayerCommand }
   | { type: "resolve"; decisions: Record<string, NpcDecision> }

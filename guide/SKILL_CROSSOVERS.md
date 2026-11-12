@@ -7,7 +7,7 @@ The 74-node graph keeps ten depths and only two edges between main branches:
 | Crossover | What joins |
 | --- | --- |
 | Reading and questioning → Drill and equipment | Basic Knowledge joins physical conditioning for military foundations. |
-| Inquiry and ethics → Tactical reasoning | Advanced Knowledge joins the existing military lane for command preparation. |
+| Reading and questioning → Tactical reasoning | The Knowledge foundation joins the existing military lane for command preparation. |
 
 The lane follows Physical work → Strength conditioning → Sustained effort → Drill and equipment → Formation discipline → Field supply accounts → Small-unit coordination → Tactical reasoning → Campaign planning → Strategic command. It never feeds back into an earlier node. Both prerequisites at each crossover are mandatory. Selecting Strategic command highlights both the physical and Knowledge ancestry.
 
@@ -31,6 +31,6 @@ The Strategic command assessment reserves its own materials and fees once and co
 
 ## Versions and map controls
 
-New births use `alexandria-lives-4`, capability graph version 2. Earlier lives keep their exact world and proof rules. The current atlas can show the additional route as Unavailable in a retained world; it does not migrate or replace a saved life.
+New births use `alexandria-lives-5`, capability graph version 3. Earlier lives keep their exact world and proof rules; the original lives-4 graph version 2 retains its Inquiry and ethics prerequisite for Tactical reasoning. The current atlas can show the additional route as Unavailable in a retained world; it does not migrate or replace a saved life.
 
 Scroll to zoom, drag to pan, and click a skill to light every prerequisite path. Crossovers use dashed connectors. Only the two necessary Knowledge links cross the branch boundary; the remaining military nodes form a single chain. Health and Knowledge condition requirements appear alongside trainable proficiency requirements in the inspector.

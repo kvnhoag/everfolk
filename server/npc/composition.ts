@@ -1,6 +1,6 @@
 import type { ContentDatabase } from "../db/types.ts";
 import type { WorldPack } from "../../src/types.ts";
-import world from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import world from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import { d1NpcStore } from "./store.ts";
 import { createNpcSessionService } from "./service.ts";
 import { compatibleNpcController } from "./controller.ts";

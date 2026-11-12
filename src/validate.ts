@@ -131,7 +131,14 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears", "npcAgents"], worldFields);
+  if (Object.hasOwn(world, "npcAgents")) {
+    const agents = object(world.npcAgents, "world.npcAgents", ["version"]);
+    if (agents.version !== 1) fail("world.npcAgents.version", "only version 1 is supported");
+    if (!world.demo || !world.economy || !world.vocations || !world.character) {
+      fail("world.npcAgents", "requires a household economy, vocations and characters");
+    }
+  }
   let demoGrainGain = false;
   const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
@@ -140,6 +147,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   string(world.title, "world.title", 300);
   string(world.description, "world.description");
   const startYear = year(world.startYear, "world.startYear");
+  if (Object.hasOwn(world, "birthYears")) {
+    const range = object(world.birthYears, "world.birthYears", ["from", "to"]);
+    const from = year(range.from, "world.birthYears.from"), to = year(range.to, "world.birthYears.to");
+    if (from < startYear || to < from) fail("world.birthYears", "births must run forward from the world's start year");
+  }
   const maxAge = integer(world.maxAge, "world.maxAge", 1, 10_000);
   if (Object.hasOwn(world, "eventPacing")) {
     const pacing = object(world.eventPacing, "world.eventPacing", ["minChoiceGapYears", "maxChoiceGapYears", "variety", "rareEvents"], ["minChoiceGapYears", "maxChoiceGapYears"]);
@@ -1215,7 +1227,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const count = integer(event.maxOccurrences, `${path}.maxOccurrences`, 1, Number.MAX_SAFE_INTEGER);
       // Demo worlds: a year-anchored decision gated by a demo condition (e.g. a fresh low flood) recurs once per episode.
       const demoAnchor = Object.hasOwn(world, "demo") && trigger.type === "year" && hasDemoCondition(event.when);
-      if (trigger.type !== "random" && count !== 1 && !demoAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
+      // Paths worlds: a dated decision that names a cooldown recurs, spaced by it (late-life offers).
+      const spacedAnchor = Object.hasOwn(world, "paths") && trigger.type === "year" && Object.hasOwn(event, "cooldownYears");
+      if (trigger.type !== "random" && count !== 1 && !demoAnchor && !spacedAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
     const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);
@@ -1386,7 +1400,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   }
   if (health && Object.hasOwn(health, "mortalityCalibration")) {
     const path = "world.health.mortalityCalibration";
-    const calibration = object(health.mortalityCalibration, path, ["minAge", "referenceHealth", "referenceCare", "caseFatality", "onsetHealth", "convalescenceLoss", "healthInfluence", "careInfluence"]);
+    const requiredCalibration = ["minAge", "referenceHealth", "referenceCare", "caseFatality", "onsetHealth", "convalescenceLoss", "healthInfluence", "careInfluence"];
+    const calibration = object(health.mortalityCalibration, path, [...requiredCalibration, "onsetLoss", "lingerYears", "lingerLoss", "lingerRecovery"], requiredCalibration);
     const minAge = integer(calibration.minAge, `${path}.minAge`, 0, maxAge - 1);
     const healthStat = stats[health.stat as string] as DataObject;
     const min = healthStat.min as number, max = healthStat.max as number;
@@ -1403,6 +1418,13 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (value < 0 || value > 1) fail(`${path}.${key}`, "expected a value in 0..1");
     }
     if (1 - (calibration.careInfluence as number) * (calibration.referenceCare as number) <= 0) fail(`${path}.referenceCare`, "reference care denominator must remain positive");
+    if (Object.hasOwn(calibration, "onsetLoss") && number(calibration.onsetLoss, `${path}.onsetLoss`) < 0) fail(`${path}.onsetLoss`, "must not be negative");
+    if (Object.hasOwn(calibration, "lingerYears")) integer(calibration.lingerYears, `${path}.lingerYears`, 0, maxAge);
+    if (Object.hasOwn(calibration, "lingerLoss") && number(calibration.lingerLoss, `${path}.lingerLoss`) < 0) fail(`${path}.lingerLoss`, "must not be negative");
+    if (Object.hasOwn(calibration, "lingerRecovery")) {
+      const share = number(calibration.lingerRecovery, `${path}.lingerRecovery`);
+      if (share < 0 || share > 1) fail(`${path}.lingerRecovery`, "expected a share in 0..1");
+    }
     const fatality = number(calibration.caseFatality, `${path}.caseFatality`);
     if (fatality <= 0 || fatality > 1) fail(`${path}.caseFatality`, "expected a case fatality in (0, 1]");
     if (!Object.hasOwn(world, "mortality")) fail(path, "requires mortality reference bands");

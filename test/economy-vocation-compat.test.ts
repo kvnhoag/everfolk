@@ -2,11 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/engine.ts";
 import { getNetWorth, getVocationHoldings, getVocationInventoryValue } from "../src/economy.ts";
+import { bid } from "../src/vocations/view.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import lives1 from "../worlds/demo/alexandria-lives-1.json" with { type: "json" };
 import lives2 from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import lives3 from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
-import lives4 from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import lives4 from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 
 function ready(engine: LifeEngine, life: LifeState): LifeState {
   while (life.phase === "choice") life = engine.choose(life, engine.getChoices(life)[0].id);
@@ -33,9 +34,11 @@ test("current worlds value graded craft stock within the shared finite buyer bud
   const engine = createEngine(lives4), life = structuredClone(engine.start("current-vocation-wealth"));
   life.vocations!.inventory = { clay: 4, vessel: 2 };
   life.vocations!.lots = [{ item: "clay", quality: 1, quantity: 4 }, { item: "vessel", quality: 1, quantity: 2 }];
-  life.vocations!.accounts.merchant = 16;
+  // The current pack's buyer bid for a vessel; the buyer's budget funds exactly one.
+  const vessel = bid(engine.world, "vessel", 1);
+  life.vocations!.accounts.merchant = vessel;
   life.vocations!.demand.vessel = 2;
-  assert.equal(getVocationInventoryValue(engine.world, life), 24, "Four clay cost 8; the buyer can fund one 16 dr vessel.");
+  assert.equal(getVocationInventoryValue(engine.world, life), 8 + vessel, "Four clay cost 8; the buyer can fund one vessel.");
   life.vocations!.demand.vessel = 0;
   assert.equal(getVocationInventoryValue(engine.world, life), 8);
 });

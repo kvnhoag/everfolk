@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { runFocusedPolicy, FOCUSED_TARGETS } from './focused-policy.ts';
-const world = JSON.parse(await readFile(new URL('../../worlds/demo/alexandria-lives-4.json',import.meta.url),'utf8'));
+const world = JSON.parse(await readFile(new URL('../../worlds/demo/alexandria-lives-5.json',import.meta.url),'utf8'));
 const count = Math.min(1000,Math.max(1,Number(process.argv[2]??100)));
 const targets = process.argv[3] ? process.argv[3].split(',') : FOCUSED_TARGETS;
 const results=[];

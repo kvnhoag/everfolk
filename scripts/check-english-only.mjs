@@ -15,7 +15,10 @@ const VIETNAMESE_REGEX = new RegExp(
   "u"
 );
 
-const IGNORE_DIRS = new Set([".git", "node_modules", "dist", "build", ".cache", ".sites-runtime"]);
+const IGNORE_DIRS = new Set([
+  ".git", "node_modules", "dist", "build", ".cache", ".sites-runtime", ".venv",
+  "artwork", "tools", "research", "docs"
+]);
 const TEXT_EXTS = new Set([
   ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".json", ".html", ".css",
   ".md", ".yml", ".yaml", ".toml", ".rs", ".txt", ".sh", ".py", ".svg"

@@ -1,4 +1,5 @@
 import type { Effect, LifeState, StatRange, WorldPack } from "../../src/types.ts";
+import { merchantSaleValue } from "../../src/demo/market-depth.ts";
 import { getNetWorth } from "../../src/economy.ts";
 import { getRelevantResources } from "./market.ts";
 import { marketQuote } from "../../src/market.ts";
@@ -185,10 +186,11 @@ export function getBirthRollResources(world: WorldPack, life: LifeState): BirthR
     const value = demoHolding(life, item);
     const configuration = world.demo!.startingResources!;
     const range = configuration.origins?.[life.originId]?.[item] ?? configuration.defaults[item];
-    const unitPrice = life.demo!.town.prices[item].buy;
+    const marketValue = merchantSaleValue(world.demo!, life.demo!, item, value);
+    const unitPrice = value > 0 ? marketValue / value : life.demo!.town.prices[item].buy;
     const changedAtBirth = birthEffects.some(effect => effect.type === "demo" &&
       (effect.effect.kind === "grain" && item === "grain" || effect.effect.kind === "item" && effect.effect.item === item));
-    return { id: `demo-resource:${item}`, label: demoResourceLabels[item], value, unitPrice, marketValue: value * unitPrice,
+    return { id: `demo-resource:${item}`, label: demoResourceLabels[item], value, unitPrice, marketValue,
       ...(isUnplayedBirth(life) && !changedAtBirth && value >= range.min && value <= range.max ? { range: { ...range } } : {}) };
   }) : [];
   return [...demo, ...classic];

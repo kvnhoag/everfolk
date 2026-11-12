@@ -50,6 +50,7 @@ function topSkills(life: LifeState): Record<string, number> {
 export function recordStage(world: WorldPack, life: LifeState, stageId: string, fromAge: number, toAge: number): StageRecord {
   const field = mainField(world, life), tier = tierOf(world, life, field);
   const within = (age: number): boolean => age >= fromAge && age <= toAge;
+  const successors = (life.paths!.successors ?? []).filter(item => within(item.age)).map(item => `${item.name} (${item.relation})`);
   return {
     stageId, title: titleOf(world, life, field, tier, toAge), fromAge, toAge, district: life.paths!.district, field, tier,
     jobId: life.character?.jobId ?? null, topSkills: topSkills(life),
@@ -57,6 +58,7 @@ export function recordStage(world: WorldPack, life: LifeState, stageId: string, 
     reputation: life.demo?.reputation ?? 0,
     accomplishments: (life.accomplishments ?? []).filter(item => within(item.age)).map(item => item.achievementId),
     mentors: life.paths!.practitioners.filter(item => within(item.metAge)).map(item => item.name),
+    ...(successors.length ? { successors } : {}),
   };
 }
 

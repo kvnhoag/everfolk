@@ -49,6 +49,8 @@ import demo2World from "../../worlds/demo/alexandria-demo-2.json" with { type: "
 import lives1World from "../../worlds/demo/alexandria-lives-1.json" with { type: "json" };
 import lives2World from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import lives3World from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import lives4World from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import lives5World from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -99,6 +101,8 @@ const demo2Engine = createEngine(demo2World as unknown as WorldPack);
 const lives1Engine = createEngine(lives1World as unknown as WorldPack);
 const lives2Engine = createEngine(lives2World as unknown as WorldPack);
 const lives3Engine = createEngine(lives3World as unknown as WorldPack);
+const lives4Engine = createEngine(lives4World as unknown as WorldPack);
+const lives5Engine = createEngine(lives5World as unknown as WorldPack);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -137,6 +141,8 @@ engines.set(demo2Engine.fingerprint, demo2Engine);
 engines.set(lives1Engine.fingerprint, lives1Engine);
 engines.set(lives2Engine.fingerprint, lives2Engine);
 engines.set(lives3Engine.fingerprint, lives3Engine);
+engines.set(lives4Engine.fingerprint, lives4Engine);
+engines.set(lives5Engine.fingerprint, lives5Engine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

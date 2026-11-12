@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { createEngine } from "../../src/engine.ts";
 import type { WorldPack } from "../../src/types.ts";
-import current from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import current from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import CapabilityTree from "../components/CapabilityTree.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import "../styles/skill-tree-preview.css";

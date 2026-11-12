@@ -4,7 +4,7 @@ import { createFreePlayBooster, generateFreePlayEvidence } from "../client/model
 import type { LifeState, WorldPack } from "../src/types.ts";
 
 const mockWorld: WorldPack = {
-  version: "alexandria-lives-4",
+  version: "alexandria-lives-5",
   fingerprint: "test-world-fingerprint",
   startYear: -350,
   origins: [],

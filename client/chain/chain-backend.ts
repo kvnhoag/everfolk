@@ -4,7 +4,7 @@ import { parseRankedConfig, type RankedAvailability, type RankedConfig } from ".
 import { resolveChainConfig, type ChainConfig } from "./config.ts";
 import { createLivesContract } from "./contract.ts";
 import { createPreviewLedger, PREVIEW_ACCOUNT } from "./preview-ledger.ts";
-import type { ContractCall, LivesContract, WalletSession } from "./types.ts";
+import type { AccountProof, ContractCall, LivesContract, WalletSession } from "./types.ts";
 import { accountBalance } from "./rpc.ts";
 import type { EmailSession } from "./email-session.ts";
 import { createSessionRouter, SIGN_IN_STORAGE_KEY, type RoutedSession, type SessionOpeners, type SignInMethod } from "./session-router.ts";
@@ -31,6 +31,8 @@ export interface ChainBackend {
   /** Opens the wallet. Browser only: call from an event handler. */
   connect(): Promise<void>;
   disconnect(): Promise<void>;
+  /** Available for the live ledger; signs a server ownership challenge with the current game key. */
+  proveAccount?(message: string): Promise<AccountProof>;
   /** Spendable NEAR of an account in yoctoNEAR; null in practice mode or when unknown. */
   nearBalance(accountId: string): Promise<string | null>;
   /** The sign-in panel's choices; absent in practice mode. */
@@ -169,6 +171,7 @@ async function createBackend(events: BackendEvents): Promise<BaseBackend> {
     connect: async () => { await wallet.signIn(); report(); },
     // The router drops the session before the wallet answers, so the bar shows signed out even if that fails.
     disconnect: async () => { try { await wallet.signOut(); } finally { report(); } },
+    proveAccount: message => wallet.proveAccount(message),
     nearBalance: accountId => accountBalance(fetch, cfg.rpcUrl, accountId),
     signin: {
       available: { email: privyAppId !== null },

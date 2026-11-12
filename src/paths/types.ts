@@ -9,6 +9,10 @@ export const TIERS: readonly Tier[] = ["learner", "worker", "master", "renowned"
 /** People of one field in a district, by tier: learners, workers, masters, renowned. */
 export type TierCounts = [learner: number, worker: number, master: number, renowned: number];
 
+/** A finite payer: the four vocation accounts, or the army purse. */
+export const ACCOUNT_IDS = ["merchant", "workshop", "school", "council", "army"] as const;
+export type AccountId = typeof ACCOUNT_IDS[number];
+
 export type NeedLabel = "scarce" | "steady" | "crowded";
 
 export interface FieldDefinition {
@@ -73,7 +77,11 @@ export interface PathsState {
   practitioners: Practitioner[];
   introductions: FieldId[];
   moves: { age: number; from: string; to: string }[];
+  /** People the life trained to carry its craft on. Absent until the first. */
+  successors?: Successor[];
 }
+
+export interface Successor { field: FieldId; relation: "child" | "apprentice"; name: string; age: number; year: number }
 
 export interface StageRecord {
   stageId: string;
@@ -89,4 +97,6 @@ export interface StageRecord {
   reputation: number;
   accomplishments: string[];
   mentors: string[];
+  /** Who the life trained as successor during the stage, e.g. "Eudoros (child)". Absent when nobody. */
+  successors?: string[];
 }

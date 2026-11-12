@@ -1,7 +1,8 @@
+import type {NpcCommand,NpcRuntimeState} from "./npc/types.ts";
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
-import type { Tier, FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
+import type { AccountId, Tier, FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -16,6 +17,8 @@ export type Condition =
   | { type: "away-from-home" }
   | { type: "introduced"; field: FieldId }
   | { type: "material"; item: string; op: Comparison; value: number }
+  /** Paths worlds: what a finite payer (a vocation account or the army purse) holds. */
+  | { type: "account"; account: AccountId; op: Comparison; value: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -48,6 +51,10 @@ export type Effect =
   | { type: "meet-practitioner"; field: FieldId; band: "child" | "young" | "adult" | "elder" }
   | { type: "move-district"; district: string; reason: string }
   | { type: "use-material"; item: string; quantity: number; cause: string }
+  /** Paths worlds: a payer hands money to the household from its own account; pays nothing when it cannot fund the amount. */
+  | { type: "account-pay"; account: AccountId; amount: number; cause: string }
+  /** Paths worlds: the life trains a child or an apprentice to carry its craft on. */
+  | { type: "successor"; field: FieldId; relation: "child" | "apprentice"; cause: string }
   | { type: "introduce-field"; field: FieldId }
   /** Paths worlds: the life is counted among its current district's people of a field, at a tier. */
   | { type: "join-district"; field: FieldId; tier: Tier }
@@ -263,6 +270,14 @@ export interface HealthDefinition {
     convalescenceLoss: number;
     healthInfluence: number;
     careInfluence: number;
+    /** Optional graded onset: Health falls by this much, never below onsetHealth. Omitted: it falls straight to onsetHealth. */
+    onsetLoss?: number;
+    /** Optional lingering: years a severe episode runs, unable to kill, before its fatality is drawn. Omitted: none. */
+    lingerYears?: number;
+    /** Health lost in each lingering year before care and support reduce it. */
+    lingerLoss?: number;
+    /** Share (0..1) of the ordinary recovery chance that applies in a lingering year. Omitted: all of it. */
+    lingerRecovery?: number;
   };
 }
 export interface ActiveHealthCondition {
@@ -272,7 +287,7 @@ export interface ActiveHealthCondition {
   care: number;
   source?: string;
   /** Health immediately before a warned severe episode; care cannot erase it. */
-  severe?: { healthBefore: number };
+  severe?: { healthBefore: number; /** Lingering years already survived. */ lingered?: number };
 }
 export interface HealthState { conditions: ActiveHealthCondition[]; needsCareDecision: boolean; lastCareAge?: number }
 
@@ -586,6 +601,8 @@ export interface InfluenceEntry {
 export interface InfluenceRecord { entry: string; source: InfluenceSource; power: number }
 
 export interface WorldPack {
+  /** Opt-in authoritative companions; older packs never acquire NPC state. */
+  npcAgents?: {version:1};
   schemaVersion: 1;
   id: string;
   version: string;
@@ -593,6 +610,8 @@ export interface WorldPack {
   description: string;
   /** Signed historical years: -1 is 1 BCE, followed by 1 CE. No year zero. */
   startYear: number;
+  /** Births spread across these years (inclusive; `from` is the earliest). Absent: every life starts in `startYear`. */
+  birthYears?: { from: number; to: number };
   maxAge: number;
   stats: Record<string, StatDefinition>;
   flags: Record<string, { label: string; initial: boolean }>;
@@ -633,7 +652,7 @@ export interface WorldPack {
 export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
 
 export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number }
-  | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand;
+  | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand | NpcCommand;
 
 export interface JournalEntry {
   type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity" | "influence";
@@ -656,6 +675,8 @@ export interface LifeState {
   rngState: number;
   age: number;
   year: number;
+  /** The life's own birth year, in worlds that vary births. */
+  birthYear?: number;
   originId: string;
   stats: Record<string, number>;
   flags: Record<string, boolean>;
@@ -688,6 +709,7 @@ export interface LifeState {
   paths?: PathsState;
   /** Paths worlds only: one record per completed life stage. */
   stageRecords?: StageRecord[];
+  npcs?: NpcRuntimeState;
   journal: JournalEntry[];
   commands: Command[];
 }
@@ -717,6 +739,7 @@ export interface LifeEngine {
   influence(state: LifeState, command: InfluenceCommand): LifeState;
   /** Demo worlds only: trade, plan, agent assignment, delegation and agent decisions. */
   demo(state: LifeState, command: DemoCommand): LifeState;
+  npc(state: LifeState, command: NpcCommand): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

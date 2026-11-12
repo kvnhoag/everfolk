@@ -1,5 +1,5 @@
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
-import { formatYear, yearAtAge } from "../../src/calendar.ts";
+import { birthYearOf, formatYear, yearAtAge } from "../../src/calendar.ts";
 
 export function isLoanAction(choice: Choice): boolean {
   return choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "loan"));
@@ -12,10 +12,10 @@ export function loanEffectNotes(choice: Choice, life: LifeState, world: WorldPac
   const branches = choice.outcomes.map(outcome => outcome.effects.filter(effect => effect.type === "loan"));
   if (!branches.length || branches.some(effects => effects.length !== 1)) return [];
   const actions = branches.map(effects => effects[0]);
-  if (actions.every(effect => effect.action === "borrow")) return [`Due ${formatYear(yearAtAge(world.startYear, life.age + model.termYears))}`];
+  if (actions.every(effect => effect.action === "borrow")) return [`Due ${formatYear(yearAtAge(birthYearOf(world, life), life.age + model.termYears))}`];
   const loan = life.economy?.loan;
   if (!loan) return [];
-  if (actions.every(effect => effect.action === "extend")) return [`New deadline ${formatYear(yearAtAge(world.startYear, Math.max(life.age, loan.dueAge) + model.extensionYears))}`];
+  if (actions.every(effect => effect.action === "extend")) return [`New deadline ${formatYear(yearAtAge(birthYearOf(world, life), Math.max(life.age, loan.dueAge) + model.extensionYears))}`];
   if (actions.every(effect => effect.action === "repay" && (effect.amount ?? loan.balance) === loan.balance)) return ["Loan settled"];
   return [];
 }
@@ -26,7 +26,7 @@ export function getLoanSummary(world: WorldPack, life: LifeState) {
   if (!lender || !loan || loan.balance <= 0) return;
   const yearsLeft = loan.dueAge - life.age;
   const overdueYears = Math.max(0, -yearsLeft);
-  const dueYear = formatYear(yearAtAge(world.startYear, loan.dueAge));
+  const dueYear = formatYear(yearAtAge(birthYearOf(world, life), loan.dueAge));
   const status = life.phase === "ended" ? "Outstanding at life end" : yearsLeft > 0 ? `Due in ${yearsLeft} ${yearsLeft === 1 ? "year" : "years"}`
     : yearsLeft === 0 ? "Payment due this year" : `${overdueYears} ${overdueYears === 1 ? "year" : "years"} overdue`;
   return {
