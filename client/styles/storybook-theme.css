@@ -12,8 +12,8 @@
   --ef-clay:#a36854;
   --ef-olive:#72805a;
   --ef-gold:#b58a49;
-  --ef-panel:#fcf7eb;
-  --ef-shadow:0 3px 0 #d6c6a8,0 9px 24px #493c2410;
+  --ef-panel:#f8f2e2;
+  --ef-shadow:inset 0 1px 0 #fffdf8;
   --ef-illuminated:#e4c389;
   --ef-seal:#98584b;
   color:var(--ink);
@@ -25,79 +25,82 @@ body{
   background-size:auto;
 }
 ::selection{background:#d9bd83;color:#203e43}
-.everfolk-game .site-header{position:relative;border-bottom:1px solid #baa17a;padding-bottom:18px;margin-bottom:18px}
-.everfolk-game .site-header:after{content:"";position:absolute;bottom:-3px;left:50%;width:5px;height:5px;background:var(--ef-gold);transform:rotate(45deg);box-shadow:0 0 0 5px var(--paper);pointer-events:none}
-.everfolk-game .brand{gap:10px;color:var(--ef-blue);letter-spacing:-.7px}
-.everfolk-game .brand-caption{color:#7b6847;letter-spacing:2px}
+.everfolk-game .site-header{position:relative;border-bottom:2px solid #5a4228;padding-bottom:14px;margin-bottom:16px}
+.everfolk-game .site-header:after{content:"";position:absolute;bottom:-4px;left:50%;width:6px;height:6px;background:#c89d54;transform:rotate(45deg);box-shadow:0 0 0 4px var(--paper);pointer-events:none}
+.everfolk-game .brand{gap:10px;color:#2b1f13;letter-spacing:-.7px}
+.everfolk-game .brand-caption{color:#6b5033;letter-spacing:2px}
 .everfolk-game .brand-mark{width:38px;height:44px;border:0;box-shadow:none;background:transparent}
-.everfolk-game .brand-mark svg{width:36px;height:36px;color:var(--ef-blue)}
-.everfolk-game .nav-link{color:#696957;font-size:11px}
-.everfolk-game .nav-link.active{color:var(--ef-blue);font-weight:600}
-.everfolk-game .nav-link.active:after{background:var(--ef-gold);height:2px}
-.everfolk-game .save-indicator{color:#647456}
+.everfolk-game .brand-mark svg{width:36px;height:36px;color:#2b1f13}
+.everfolk-game .nav-link{color:#5a462c;font-size:11px}
+.everfolk-game .nav-link.active{color:#2b1f13;font-weight:700}
+.everfolk-game .nav-link.active:after{background:#c89d54;height:2px}
+.everfolk-game .save-indicator{color:#4d6342}
 .save-indicator-dot,.small-dot{background:var(--ef-olive)}
 .life-scene-frame,.game-dashboard .character-panel,.life-overview,.life-moment,.game-dashboard .inline-decision,.life-year-rail,.compact-life-record,.game-dashboard>.life-info-sidebar>.household-summary,.game-dashboard>.life-info-sidebar>.compact-skills{
-  border:1px solid #aa916b;
+  border:2px solid #5a4228;
   border-radius:2px;
   background:var(--ef-panel);
   box-shadow:var(--ef-shadow);
 }
-.life-scene-frame{padding:5px 5px 0;background:#ddcba8;border-color:#9c7b4d;box-shadow:inset 0 0 0 1px #f4e7c9,0 3px 0 #c8b18b,0 12px 28px #493c241c}
-.game-dashboard .life-scene-frame .scene-image.paper-scene.dashboard-scene.life-banner{background:#ead9b5;border:1px solid #b49c76;border-bottom:0}
+.life-scene-frame{padding:4px 4px 0;background:#3c2c1b;border:2px solid #5a4228;box-shadow:inset 0 1px 0 #7c5e3b}
+.game-dashboard .life-scene-frame .scene-image.paper-scene.dashboard-scene.life-banner{background:#ead9b5;border:1px solid #6b5033;border-bottom:0}
 .game-dashboard .life-scene-frame .dashboard-scene.life-banner .paper-scene-bottom{background:#f6eedc;border-color:#c9b38c;padding:8px 11px}
-.dashboard-scene-notes{color:#6c6554}
+.dashboard-scene-notes{color:#5a4831}
 .dashboard-scene-notes>summary{font-size:11px}
-.scene-motion-toggle{font-size:10px;color:#637358}
-.life-scene-location{margin:0 -5px;background:var(--ef-blue);border-top:1px solid #c5a56b;color:#f5e6c8;padding:13px 15px;font-size:10px;letter-spacing:1px}
-.life-scene-location>span:last-child{color:#e6c78d}
-.game-dashboard .character-panel{position:relative;padding:15px 17px;border-left:3px solid var(--ef-seal);background:linear-gradient(90deg,#f0e5d2,#fcf7eb 38%)}
-.game-dashboard .character-panel h2{color:var(--ef-blue);font-size:25px}
-.game-dashboard .character-panel .portrait-frame{border:1px solid #a38960;box-shadow:0 0 0 3px #e6d5b4,0 0 0 4px #c5af89;background:#eee0c3}
-.game-dashboard .character-panel .character-open{background:#e6e9dd;border:1px solid #a5af93;color:#3c594f;box-shadow:0 2px 0 #c7ceb9;padding:8px 10px;font-size:11px}
-.game-dashboard .character-panel .character-open:hover{background:#d7dfcd}
-.game-dashboard .character-panel .character-origin,.game-dashboard .character-panel .age-line{color:#746b59;font-size:11px}
-.game-dashboard .character-panel .another-life{color:var(--ef-seal);font-size:10px}
-.life-overview{padding:15px 16px 2px}
-.life-overview-facts.has-wealth{padding-bottom:11px;margin-bottom:12px;border-bottom:1px solid #dfd0b4;gap:8px 24px}
-.life-overview-facts.has-wealth dt{font-size:9px;color:#85714f}
-.life-overview-facts.has-wealth dd{color:var(--ef-blue);font-weight:600}
-.overview-wealth{position:relative;background:var(--ef-blue);border:1px solid #203d42;box-shadow:inset 0 0 0 3px #24464b,inset 0 0 0 4px #bd9d5d75;padding:17px 15px 13px;gap:11px 18px;color:#fcf3dc}
-.overview-wealth:hover{background:#2b5156;color:#fcf3dc}
-.overview-wealth-label{color:#e0cda7;letter-spacing:1.1px;font-size:10px}
-.overview-wealth-metric>strong{color:#fff6e3;font-size:27px}
-.overview-wealth-metric:nth-child(2)>strong{color:#edcd8f}
-.overview-cash-note{color:#d9d3be;font-size:11px}
-.overview-wealth-details{color:#e6c78d;font-size:10px}
-.life-overview-stats{gap:13px;margin-bottom:16px}
-.overview-stat-label{color:#686451;letter-spacing:.8px}
-.overview-stat>strong{color:var(--ef-blue)}
-.segmented-stat-track{height:13px;border-color:#b6a27c;padding:2px;background:#eee4ce}
-.segmented-stat-track:after{background:repeating-linear-gradient(to right,transparent 0 10px,#fcf7eb 10px 12px)}
-.overview-stat.stat-health{--stat-color:#a56d59}
-.overview-stat.stat-knowledge{--stat-color:#507a7c}
-.overview-stat.stat-bonds{--stat-color:#7e8860}
-.life-session-bar{background:#eee5d2;border:1px solid #d1bd98;border-left:3px solid var(--ef-gold);box-shadow:0 2px 0 #e3d5ba;gap:14px;padding:11px 13px 13px}
-.life-session-age{color:#85714f}
-.life-session-age strong{color:var(--ef-blue)}
-.life-session-year,.life-session-bar .life-clock .playback-label{color:#6c6b58}
-.life-session-bar .life-clock .play-button,.life-session-bar .life-clock .speed-button,.session-auto,.session-manage{border-color:#c9b48d;background:#f8f0dd;color:var(--ef-blue);border-radius:2px}
-.life-session-bar .life-clock .play-button.selected,.life-session-bar .life-clock .speed-button.selected{background:var(--ef-blue);border-color:#24464b;color:#fff6e3}
-.session-auto.is-on{background:#6c7955;border-color:#5a6747;color:#fff6e3}
-.life-session-bar .life-clock .year-clock-track{background:#e4d5b7}
-.year-clock-track>span{background:var(--ef-gold)}
-.session-more>summary,.session-more-options{border-color:#bda67f;background:#fcf5e5;border-radius:2px}
-.session-more-options>button{color:var(--ef-blue)}
-.session-more-options>button:hover{background:#e5e6d8}
-.life-moment{position:relative;padding:20px 20px 15px;background:linear-gradient(125deg,#fff9ed,#f9f0dd)}
-.life-moment:after{content:"";position:absolute;top:17px;right:17px;width:19px;height:25px;background:#b58a4966;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);pointer-events:none}
-.life-moment-intro{border-left:2px solid var(--ef-gold);padding-left:12px;margin-right:22px;color:#786442;font-size:12px}
-.life-moment-heading{gap:12px}
-.life-moment-heading>span{background:#e1e8dd;border:1px solid #a6b49d;color:#3c6259;border-radius:1px}
-.life-moment-heading h2{color:var(--ef-blue);text-transform:none;font-size:23px;line-height:1.3}
-.life-moment-copy{color:#595e50;font-size:14px;line-height:1.85}
-.moment-advance{border:1px solid #24464b;background:var(--ef-blue);color:#fff5df;border-radius:2px;box-shadow:0 3px 0 #b9a57d;padding:12px 14px;font-size:13px}
-.moment-advance:hover{background:#315a5e;color:#fff5df}
-.moment-chronicle{color:#6d674c;font-size:11px}
+.scene-motion-toggle{font-size:10px;color:#4d6342}
+.life-scene-location{margin:0 -4px;background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border-top:2px solid #5a4228;color:#f9f1dc;padding:10px 14px;font-size:10px;letter-spacing:1px}
+.life-scene-location>span:last-child{color:#e2b86b}
+.game-dashboard .character-panel{position:relative;padding:15px 17px;border:2px solid #5a4228;border-left:4px solid #8c3d2b;background:#f8f2e2;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8}
+.game-dashboard .character-panel h2{color:#23190f;font-size:25px}
+.game-dashboard .character-panel .portrait-frame{border:2px solid #5a4228;box-shadow:inset 0 1px 0 #7c5e3b;background:#22180e;border-radius:2px}
+.game-dashboard .character-panel .character-open{background:#2b1f13;border:1px solid #6b5033;color:#f9f1dc;box-shadow:none;padding:8px 10px;font-size:11px;border-radius:2px}
+.game-dashboard .character-panel .character-open:hover{background:#3c2c1b;border-color:#c89d54;color:#fff8e7}
+.game-dashboard .character-panel .character-origin,.game-dashboard .character-panel .age-line{color:#5e4c34;font-size:11px}
+.game-dashboard .character-panel .another-life{color:#8c3d2b;font-size:10px}
+.life-overview{padding:14px 16px 2px;border:2px solid #5a4228;border-radius:2px;background:#f8f2e2}
+.life-overview-facts.has-wealth{padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #cbb692;gap:8px 24px}
+.life-overview-facts.has-wealth dt{font-size:9px;color:#6e522b;font-weight:700}
+.life-overview-facts.has-wealth dd{color:#23190f;font-weight:700}
+.overview-wealth{position:relative;background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border:2px solid #5a4228;border-radius:2px;box-shadow:inset 0 1px 0 #7c5e3b;padding:14px 14px 12px;gap:10px 18px;color:#fcf3dc}
+.overview-wealth:hover{background:#362718;border-color:#c89d54;color:#fcf3dc}
+.overview-wealth-label{color:#d8b574;letter-spacing:1.1px;font-size:9.5px}
+.overview-wealth-metric>strong{color:#fff8e7;font-size:25px}
+.overview-wealth-metric:nth-child(2)>strong{color:#f3cf7a}
+.overview-cash-note{color:#d8c7a8;font-size:11px}
+.overview-wealth-details{color:#f3cf7a;font-size:10px}
+.life-overview-stats{gap:12px;margin-bottom:14px}
+.overview-stat-label{color:#4a3822;letter-spacing:.8px}
+.overview-stat>strong{color:#23190f}
+.segmented-stat-track{height:12px;border:1px solid #7c603c;border-radius:1px;padding:1px;background:#22180e}
+.segmented-stat-track:after{background:repeating-linear-gradient(to right,transparent 0 10px,#22180e 10px 12px)}
+.overview-stat.stat-health{--stat-color:#c45c44}
+.overview-stat.stat-knowledge{--stat-color:#4e9699}
+.overview-stat.stat-bonds{--stat-color:#84a35a}
+.life-session-bar{background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border:2px solid #5a4228;border-left:4px solid #c89d54;box-shadow:inset 0 1px 0 #7c5e3b;gap:14px;padding:9px 14px;border-radius:2px}
+.life-session-age{color:#d8b574}
+.life-session-age strong{color:#fff8e7}
+.life-session-year,.life-session-bar .life-clock .playback-label{color:#dfd0b6}
+.life-session-bar .location-map-open{color:#f3cf7a}
+.life-session-bar .life-clock .play-button,.life-session-bar .life-clock .speed-button,.session-auto,.session-manage{border:1px solid #6b5033;background:#22180e;color:#e8d9be;border-radius:2px;box-shadow:none}
+.life-session-bar .life-clock .play-button:hover,.life-session-bar .life-clock .speed-button:hover,.session-auto:hover,.session-manage:hover{border-color:#b58d4d;background:#332415;color:#fff8e7}
+.life-session-bar .life-clock .play-button.selected,.life-session-bar .life-clock .speed-button.selected{background:linear-gradient(180deg,#4d371f 0%,#332312 100%);border-color:#e2b86b;color:#fff9e8;box-shadow:inset 0 1px 0 #8c6a3d}
+.session-auto.is-on{background:#233b34;border-color:#5b9987;color:#e9fbf5}
+.life-session-bar .life-clock .turning-point-button{color:#f3cf7a}
+.life-session-bar .life-clock .year-clock-track{background:#1c130b}
+.year-clock-track>span{background:#e2b86b}
+.session-more>summary,.session-more-options{border:1px solid #6b5033;background:#22180e;color:#f9f1dc;border-radius:2px}
+.session-more-options>button{color:#f9f1dc}
+.session-more-options>button:hover{background:#332415}
+.life-moment{position:relative;padding:16px 18px 14px;background:#f8f2e2;border:2px solid #5a4228;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8}
+.life-moment:after{content:"";position:absolute;top:15px;right:15px;width:16px;height:20px;background:#b58a4955;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);pointer-events:none}
+.life-moment-intro{border-left:3px solid #8c6a3d;padding-left:10px;margin-right:22px;color:#5a462c;font-size:12px}
+.life-moment-heading{gap:10px}
+.life-moment-heading>span{background:#2b1f13;border:1px solid #6b5033;color:#f3cf7a;border-radius:2px;font-weight:700}
+.life-moment-heading h2{color:#23190f;text-transform:none;font-size:22px;line-height:1.28}
+.life-moment-copy{color:#362919;font-size:14px;line-height:1.78}
+.moment-advance{border:1px solid #c89d54;background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);color:#f3cf7a;border-radius:2px;box-shadow:inset 0 1px 0 #7c5e3b;padding:10px 14px;font-size:12.5px;font-weight:700}
+.moment-advance:hover{background:#473420;color:#fff8e7;border-color:#f0cb82}
+.moment-chronicle{color:#5a462c;font-size:11px;font-weight:700}
 .game-dashboard .inline-decision{position:relative;background:linear-gradient(125deg,#fff9ed,#f9f0dd);overflow:hidden}
 .inline-decision .life-decision-meta{background:#eee0c0;border-bottom:1px solid #c9b184;padding:11px 16px;color:#6e624b}
 .inline-decision .life-decision-meta>span:first-child{display:flex;align-items:center;gap:8px;color:var(--ef-seal);letter-spacing:1.3px}
@@ -125,63 +128,69 @@ body{
 .life-record-count{font-size:11px;color:#7d7058}
 .life-record-count>span{color:#9d7742}
 .compact-life-record[open]>summary{border-color:#d7c4a1}
-.life-year-rail{position:relative;padding:17px 18px 14px;background:#f7efdc;box-shadow:inset 0 0 0 4px #fcf7eb,var(--ef-shadow)}
-.life-year-rail-heading>strong{font-size:11px;letter-spacing:1.2px;color:var(--ef-blue)}
-.life-year-rail-heading>strong:before{content:"✦";margin-right:9px;color:#9a7541;font-size:15px}
-.life-year-rail-heading>span{color:#766b55;font-size:11px}
-.life-year-rail-track:before{background:#dac49d;height:2px}
-.life-year-rail-progress{background:#7a8b69;height:2px}
-.life-year-stop-mark{width:9px;height:9px;border:1px solid #a88a5c;background:#fbf3df;transform:rotate(45deg);margin-top:1px}
-.life-year-stop.is-lived .life-year-stop-mark{background:#849574;border-color:#65795d}
-.life-year-stop.is-current .life-year-stop-mark{background:#c9a461;border-color:#856235;box-shadow:0 0 0 3px #cfad6a2e}
-.life-year-rail-present{background:#24464b;border:1px solid #f8e5b5;width:7px;height:7px;top:3px;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 0 2px #24464b33}
-.life-year-stop-age{font-size:11px;color:#4b5d52}
-.life-year-stop-year{color:#82725a}
-.game-dashboard>.life-info-sidebar>.household-summary,.game-dashboard>.life-info-sidebar>.compact-skills{background:#f7efde}
-.life-info-sidebar .household-summary summary,.life-info-sidebar .compact-skills h3{color:var(--ef-blue)}
+.life-year-rail{position:relative;padding:12px 16px 11px;background:#f8f2e2;border:2px solid #5a4228;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8}
+.life-year-rail-heading>strong{font-size:11px;letter-spacing:1.2px;color:#23190f}
+.life-year-rail-heading>strong:before{content:"✦";margin-right:9px;color:#8c6a3d;font-size:14px}
+.life-year-rail-heading>span{color:#5e4c34;font-size:11px}
+.life-year-rail-track:before{background:#cbb692;height:2px}
+.life-year-rail-progress{background:#5a4228;height:2px}
+.life-year-stop-mark{width:9px;height:9px;border:1px solid #5a4228;background:#fbf3df;transform:rotate(45deg);margin-top:1px}
+.life-year-stop.is-lived .life-year-stop-mark{background:#5a4228;border-color:#2b1f13}
+.life-year-stop.is-current .life-year-stop-mark{background:#e2b86b;border-color:#5a4228;box-shadow:0 0 0 3px #c89d5433}
+.life-year-rail-present{background:#2b1f13;border:1px solid #f3cf7a;width:7px;height:7px;top:3px;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 0 2px #2b1f1333}
+.life-year-stop-age{font-size:11px;color:#23190f}
+.life-year-stop-year{color:#6b583f}
+.game-dashboard>.life-info-sidebar>.household-summary,.game-dashboard>.life-info-sidebar>.compact-skills{background:#f8f2e2}
+.life-info-sidebar .household-summary summary,.life-info-sidebar .compact-skills h3{color:#23190f}
 .life-info-sidebar .household-summary summary{font-size:13px}
-.life-info-sidebar .household-summary p{color:#66634f}
-.life-info-sidebar .household-field-label,.life-info-sidebar .compact-skills .eyebrow{color:#8b744e;font-size:9px}
+.life-info-sidebar .household-summary p{color:#4a3822}
+.life-info-sidebar .household-field-label,.life-info-sidebar .compact-skills .eyebrow{color:#7a5929;font-size:9px}
 .life-info-sidebar .compact-skills{padding:14px 15px}
-.life-info-sidebar .compact-skills h3{font-size:20px;font-weight:700}
-.life-info-sidebar .compact-skills>header>button{font-size:10px;color:var(--ef-blue)}
-.life-info-sidebar .compact-skill-help,.life-info-sidebar .compact-skill-empty{font-size:11px;line-height:1.7;color:#716853}
+.life-info-sidebar .compact-skills h3{font-size:19px;font-weight:700}
+.life-info-sidebar .compact-skills>header>button{font-size:10px;color:#2b1f13}
+.life-info-sidebar .compact-skill-help,.life-info-sidebar .compact-skill-empty{font-size:11px;line-height:1.65;color:#5e4c34}
 .life-info-sidebar .compact-branch-selector label{font-size:10px}
-.life-info-sidebar .compact-branch-selector select{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;background:#fcf7eb;border-color:#c8b18a;padding:7px 9px;min-height:34px}
-.life-info-sidebar .compact-skill-node{background:#fcf7eb;border-color:#d7c7aa;padding:8px}
+.life-info-sidebar .compact-branch-selector select{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;background:#fffdf8;border:1px solid #7c603c;border-radius:2px;padding:6px 9px;min-height:34px}
+.life-info-sidebar .compact-skill-node{background:#fcf8ee;border:1px solid #8c7048;border-radius:2px;padding:8px}
 .life-info-sidebar .compact-skill-name,.life-info-sidebar .compact-skill-name strong{font-size:11px}
 .life-info-sidebar .compact-skill-state{font-size:9px}
-.game-dashboard .yearly-focus{background:#f8f0df;border:1px solid #cdb58d;border-top:2px solid var(--ef-gold);border-radius:2px}
-.yearly-focus h2{color:var(--ef-blue);font-size:13px}
-.yearly-focus-options button{background:#fbf6e8;border-color:#cdbb98;border-radius:2px}
-.yearly-focus-options button[aria-pressed=true]{background:#e4e8d8;border-color:#8fa080;color:#405d49}
-.yearly-focus-note,.yearly-focus-decay{color:#756b54}
-.game-dashboard .life-health-panel{background:#edf0e0;border-color:#b1bc99;border-radius:2px}
-.game-dashboard .health-urgent{background:#f4e4cf;border-color:#bd8e65}
-.game-dashboard .life-health-panel h3{font-size:20px;font-weight:700;color:#4c6752}
-.game-dashboard .decision-waiting{background:#f3e9d1;border-color:#c9b184}
-.primary-button,.pause-continue{background:var(--ef-blue);border-color:var(--ef-blue);border-radius:2px;color:#fff4dc;box-shadow:0 3px 0 #c6af85}
-.primary-button:hover,.pause-continue:hover{background:#315a5e;color:#fff4dc;border-color:#315a5e}
-.secondary-button{background:#f6ecd8;border-color:#bca67e;border-radius:2px;color:var(--ef-blue);box-shadow:0 2px 0 #dfd0b2}
-.text-button{color:var(--ef-blue)}
-dialog.detail-dialog,dialog.life-decision-dialog,dialog.birth-roll-popover{border:1px solid #ab8d5d;border-radius:3px;background:var(--ef-panel);box-shadow:0 0 0 4px #e8d5b0,0 0 0 5px #b6955e,0 24px 80px #1d353855;color:var(--ink)}
-dialog.detail-dialog::backdrop,dialog.life-decision-dialog::backdrop,dialog.birth-roll-popover::backdrop{background:#1c3538a8;backdrop-filter:blur(2px)}
-dialog.detail-dialog .dialog-content>h2,dialog.birth-roll-popover .birth-popover-heading h2{color:var(--ef-blue)}
-dialog.detail-dialog .dialog-content>.eyebrow{color:#977440;font-size:10px}
-dialog.detail-dialog .dialog-close,dialog.birth-roll-popover .birth-popover-close{border:1px solid #bfa980;background:#f4e9d1;box-shadow:0 2px 0 #dac7a3;border-radius:2px;color:var(--ef-blue)}
-dialog.birth-roll-popover .birth-popover-heading{background:#ede0c2;border-bottom:1px solid #c7ad7f}
-dialog.birth-roll-popover .birth-popover-footer{background:#f6eddb;border-color:#d9c7a5}
-dialog.birth-roll-popover .birth-stat-roll{background:#f5ead2;border-color:#c7ae81}
-dialog.birth-roll-popover .birth-roll-card{background:#fffaef;border:1px solid #c4ac7e;box-shadow:0 3px 0 #dbc8a3}
-dialog.birth-roll-popover .birth-popover-continue{background:var(--ef-blue);border:1px solid #24464b;border-radius:2px;box-shadow:0 3px 0 #b9a57d;color:#fff4dc}
-dialog.birth-roll-popover .birth-popover-continue:hover:not(:disabled){background:#315a5e;border-color:#315a5e}
-dialog.birth-roll-popover .birth-popover-reborn{background:#f5e9d2;border:1px solid #bca47b;border-radius:2px;box-shadow:0 2px 0 #d7c29e;color:var(--ef-seal)}
-.everfolk-game .site-footer{border-color:#c4ad83;color:#7b715a}
-.everfolk-game .site-footer>span{gap:8px;color:#536459}
-.everfolk-game .site-footer button{color:#776b52}
-.birth-record{background:#fcf6e8;border-color:#b79a6c;box-shadow:var(--ef-shadow)}
-.birth-record h2,.chapter-heading h1{color:var(--ef-blue)}
-.notice{border:1px solid #a7b493;background:#edf0de;color:#425d49;box-shadow:0 6px 20px #1b35351a;border-radius:2px}
+.game-dashboard .yearly-focus{background:#f8f2e2;border:2px solid #5a4228;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8}
+.yearly-focus h2{color:#23190f;font-size:13.5px}
+.yearly-focus-options button{background:#22180e;border:1px solid #6b5033;color:#e8d9be;border-radius:2px;box-shadow:none}
+.yearly-focus-options button:hover{background:#332415;border-color:#b58d4d;color:#fff8e7}
+.yearly-focus-options button[aria-pressed=true]{background:linear-gradient(180deg,#4d371f 0%,#332312 100%);border-color:#e2b86b;color:#fff9e8;box-shadow:inset 0 1px 0 #8c6a3d,0 0 0 1px #e2b86b33}
+.yearly-focus-note,.yearly-focus-decay{color:#5e4c34}
+.game-dashboard .life-health-panel{background:#f8f2e2;border:2px solid #5a4228;border-radius:2px}
+.game-dashboard .health-urgent{background:#f4e4cf;border:2px solid #8c3d2b}
+.game-dashboard .life-health-panel h3{font-size:19px;font-weight:700;color:#23190f}
+.game-dashboard .decision-waiting{background:#2b1f13;border:2px solid #c89d54;border-radius:2px;color:#fff8e7}
+.game-dashboard .decision-waiting button{background:#c89d54;color:#1c130b;border-radius:2px;font-weight:700}
+.primary-button,.pause-continue{background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border:1px solid #c89d54;border-radius:2px;color:#f3cf7a;box-shadow:inset 0 1px 0 #7c5e3b}
+.primary-button:hover,.pause-continue:hover{background:#473420;color:#fff8e7;border-color:#f0cb82}
+.secondary-button{background:#f5ecda;border:1px solid #7c603c;border-radius:2px;color:#23190f;box-shadow:none}
+.secondary-button:hover{background:#2b1f13;color:#fff8e7;border-color:#c89d54}
+.text-button{color:#2b1f13}
+dialog.detail-dialog,dialog.life-decision-dialog,dialog.birth-roll-popover{border:2px solid #5a4228;border-radius:2px;background:var(--ef-panel);box-shadow:0 0 0 3px #2b1f13,0 20px 60px rgba(15,10,5,0.55);color:var(--ink)}
+dialog.detail-dialog::backdrop,dialog.life-decision-dialog::backdrop,dialog.birth-roll-popover::backdrop{background:#18120ba8;backdrop-filter:blur(2px)}
+dialog.detail-dialog .dialog-content>h2,dialog.birth-roll-popover .birth-popover-heading h2{color:#23190f}
+dialog.detail-dialog .dialog-content>.eyebrow{color:#7a5929;font-size:10px}
+dialog.detail-dialog .dialog-close,dialog.birth-roll-popover .birth-popover-close{border:1px solid #6b5033;background:#2b1f13;box-shadow:none;border-radius:2px;color:#f9f1dc}
+dialog.birth-roll-popover .birth-popover-heading{background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border-bottom:2px solid #5a4228;color:#fff8e7}
+dialog.birth-roll-popover .birth-popover-heading h2,dialog.birth-roll-popover .birth-popover-heading p{color:#fff8e7}
+dialog.birth-roll-popover .birth-popover-footer{background:#f2e7d0;border-color:#cbb692}
+dialog.birth-roll-popover .birth-stat-roll{background:#f5ead2;border-color:#8c7048;border-radius:2px}
+dialog.birth-roll-popover .birth-roll-card{background:#fcf8ee;border:1px solid #8c7048;border-radius:2px;box-shadow:none}
+dialog.birth-roll-popover .birth-popover-continue{background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border:1px solid #c89d54;border-radius:2px;box-shadow:inset 0 1px 0 #7c5e3b;color:#f3cf7a}
+dialog.birth-roll-popover .birth-popover-continue:hover:not(:disabled){background:#473420;border-color:#f0cb82;color:#fff8e7}
+dialog.birth-roll-popover .birth-popover-reborn{background:#f5e9d2;border:1px solid #7c603c;border-radius:2px;box-shadow:none;color:#8c3d2b}
+.everfolk-game .site-footer{border-top:2px solid #5a4228;color:#5e4c34}
+.everfolk-game .site-footer>span{gap:8px;color:#2b1f13}
+.everfolk-game .site-footer button,.everfolk-game .site-footer a{color:#5a462c;text-decoration:none;font-size:10.5px}
+.everfolk-game .site-footer button:hover,.everfolk-game .site-footer a:hover{color:#2b1f13;text-decoration:underline}
+.site-footer-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.birth-record{background:#f8f2e2;border:2px solid #5a4228;border-radius:2px;box-shadow:inset 0 1px 0 #fffdf8}
+.birth-record h2,.chapter-heading h1{color:#23190f}
+.notice{border:2px solid #5a4228;background:#2b1f13;color:#f9f1dc;box-shadow:0 6px 20px rgba(15,10,5,0.35);border-radius:2px}
 @media(max-width:1120px){
   .game-dashboard .character-panel h2{font-size:23px}
   .overview-wealth-metric>strong{font-size:25px}
@@ -227,25 +236,39 @@ dialog.birth-roll-popover .birth-popover-reborn{background:#f5e9d2;border:1px so
   .life-year-rail-heading{gap:6px}
 }
 
-/* Both columns flow independently: information fills the former choice space. */
-.game-dashboard .life-layout{align-items:start}
-.game-dashboard .story-column>.dashboard-skills{display:block;grid-area:auto;align-self:stretch;width:100%;min-width:0}
-.game-dashboard .dashboard-skills>.compact-skills,.game-dashboard .life-support-grid>.household-summary{grid-area:auto;min-width:0;border:1px solid #aa916b;border-radius:2px;background:#f7efde;box-shadow:var(--ef-shadow)}
-.game-dashboard .dashboard-skills>.compact-skills{padding:16px 17px}
+/* Balanced Dual-Column Roguelike Dashboard Layout (Weave, Classic, and Birth Setup) */
+.everfolk-game .site-header,.everfolk-game .page-shell,.everfolk-game .site-footer{max-width:1280px}
+.header-right-cluster{display:flex;align-items:center;gap:10px;margin-left:auto}
+.game-music-player{display:inline-flex;align-items:center}
+
+.life-layout.life-layout-birth{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;align-items:start}
+.game-dashboard .life-layout{display:grid;grid-template-columns:minmax(0,0.96fr) minmax(0,1.04fr);gap:18px;align-items:start}
+.game-dashboard .life-visual-column,.game-dashboard .story-column{display:flex;flex-direction:column;gap:14px;min-width:0}
+.game-dashboard .life-visual-column>.dashboard-skills,.game-dashboard .story-column>.dashboard-skills{display:block;grid-area:auto;align-self:stretch;width:100%;min-width:0;margin:0}
+.game-dashboard .dashboard-skills>.compact-skills{grid-area:auto;min-width:0;border:2px solid #5a4228;border-radius:2px;background:#f8f2e2;box-shadow:inset 0 1px 0 #fffdf8;padding:0;overflow:hidden}
 .game-dashboard .dashboard-skills .compact-skill-branches{grid-template-columns:minmax(0,1fr)}
-.game-dashboard .dashboard-skills .compact-skills h3{font-size:21px}
+.game-dashboard .dashboard-skills .compact-skills h3{font-size:18px;color:#23190f}
 .game-dashboard .dashboard-skills .compact-skill-name,.game-dashboard .dashboard-skills .compact-skill-name strong{font-size:12px}
 .game-dashboard .dashboard-skills .compact-skill-state{font-size:10px}
-.game-dashboard .life-support-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start;gap:18px;margin-top:18px}
+.game-dashboard .life-support-grid{display:grid;grid-template-columns:minmax(0,1fr) !important;align-items:start;gap:14px;margin-top:0}
 .game-dashboard .life-support-records{display:grid;gap:14px;min-width:0}
-.game-dashboard .life-support-grid .household-summary summary{padding:13px 16px;font-size:13px;color:var(--ef-blue)}
-.game-dashboard .life-support-grid .household-summary-content{padding:0 16px 14px;gap:13px}
-.game-dashboard .life-support-grid .household-summary p{font-size:12px;line-height:1.6;color:#66634f}
-.game-dashboard .life-support-grid .household-field-label{font-size:9px;color:#8b744e}
-.game-dashboard .life-support-grid .household-open{font-size:11px;color:var(--ef-blue)}
+.game-dashboard .life-support-grid>.household-summary{grid-area:auto;min-width:0;border:2px solid #5a4228;border-radius:2px;background:#f8f2e2;box-shadow:inset 0 1px 0 #fffdf8;overflow:hidden}
+.game-dashboard .life-support-grid .household-summary summary{padding:11px 15px;font-size:14px;font-weight:700;color:#fff8e7;background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);border-bottom:2px solid #5a4228;border-radius:0}
+.game-dashboard .life-support-grid .household-summary .household-disclosure{color:#e2b86b}
+.game-dashboard .life-support-grid .household-summary-content{padding:12px 15px 14px;gap:12px}
+.game-dashboard .life-support-grid .household-summary p{font-size:12.5px;line-height:1.58;color:#3d2f1d}
+.game-dashboard .life-support-grid .household-field-label{font-size:9.5px;color:#7a5929;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.game-dashboard .life-support-grid .household-open{font-size:11.5px;color:#23190f;font-weight:700;border-top:1px solid #cbb692}
+.game-dashboard .life-support-grid .household-open:hover{color:#7a5929}
+.game-dashboard .life-record-panel{border:2px solid #5a4228;border-radius:2px;background:#f8f2e2;box-shadow:inset 0 1px 0 #fffdf8;overflow:hidden}
+.game-dashboard .life-record-panel>summary{background:linear-gradient(180deg,#3c2c1b 0%,#2b1f13 100%);color:#fff8e7;border-bottom:2px solid #5a4228;border-radius:0;padding:11px 15px}
+.game-dashboard .life-record-panel .life-record-count,.game-dashboard .life-record-panel .life-record-count>span{color:#e2b86b;font-weight:700}
 .game-dashboard .life-support-records>.chronicle-preview{padding:0;margin:0}
+@media(max-width:960px){
+  .life-layout.life-layout-birth,.game-dashboard .life-layout{grid-template-columns:minmax(0,1fr)}
+}
 @media(max-width:760px){
-  .game-dashboard .dashboard-skills>.compact-skills{padding:14px 15px}
-  .game-dashboard .life-support-grid{grid-template-columns:minmax(0,1fr);gap:14px;margin-top:15px}
-  .game-dashboard .life-support-grid .household-summary-content{padding:0 14px 13px}
+  .game-dashboard .dashboard-skills>.compact-skills{padding:0}
+  .game-dashboard .life-support-grid{grid-template-columns:minmax(0,1fr) !important;gap:14px;margin-top:0}
+  .game-dashboard .life-support-grid .household-summary-content{padding:12px 14px 14px}
 }

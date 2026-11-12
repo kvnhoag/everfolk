@@ -1,6 +1,6 @@
 /* The running game uses a compact dashboard; setup retains its introduction. */
 .page-shell.game-dashboard{padding-top:18px}
-.game-dashboard .life-layout{display:grid;grid-template-columns:220px minmax(0,1fr) 240px;grid-template-areas:"identity story household";gap:22px;align-items:start}
+.game-dashboard .life-layout{display:grid;grid-template-columns:minmax(0,0.98fr) minmax(0,1.02fr);gap:20px;align-items:start}
 .game-dashboard .character-panel{grid-area:identity;border:1px solid var(--line);border-radius:5px;padding:18px 15px;text-align:center;background:#f7f4ec}
 .game-dashboard .story-column{grid-area:story;min-width:0}
 .game-dashboard .story-column>[tabindex="-1"]{scroll-margin-top:90px}
@@ -69,7 +69,7 @@
 .household-open{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:38px;border-top:1px solid var(--line);padding:12px 0 0;background:transparent;font-size:11px;color:#4e6348;text-align:left}
 
 @media(max-width:1099px){
-  .game-dashboard .life-layout{grid-template-columns:200px minmax(0,1fr);grid-template-areas:"identity story" "household story";grid-template-rows:min-content 1fr;gap:18px 22px}
+  .game-dashboard .life-layout{grid-template-columns:minmax(0,1fr);gap:18px}
   .life-session-bar{gap:12px;flex-wrap:wrap}
   .life-session-bar .playback-bar.life-clock{flex-basis:60%}
 }

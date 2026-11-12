@@ -1,147 +1,1093 @@
-.demo-economy{display:grid;gap:12px;min-width:0;margin:0}
-.demo-economy-title,.demo-economy h3{font-family:var(--serif,"Courier New",monospace);font-weight:400;margin:0 0 8px}
-.demo-economy section{min-width:0;border:2px solid var(--ef-outline,#594630);background:var(--ef-panel,#fbf6e9);padding:12px;box-shadow:var(--ef-shadow,3px 3px 0 #8c765a70)}
-.demo-economy p,.demo-economy li{overflow-wrap:anywhere;line-height:1.5}
-.demo-facts{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;margin:0}
-.demo-facts div{display:contents}
-.demo-facts dt{margin:0;color:var(--muted,#786c57)}
-.demo-facts dd{margin:0;text-align:right}
-.demo-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:end;min-width:0}
-.demo-actions label{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 8rem;font-size:12px}
-.demo-actions input,.demo-actions select,.demo-actions button{min-height:40px;max-width:100%;font:inherit}
-.demo-badge{display:inline-block;border:1px solid currentColor;padding:0 6px;font-size:11px;letter-spacing:.04em}
-.demo-legacy-arrival{border-left:4px solid var(--cr-faience-0,#38665e);padding:10px 12px;margin:0 0 14px;background:var(--ef-panel,#fbf6e9)}
-.demo-legacy-arrival small{display:block;margin-top:6px}
-.demo-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.email-sign-in{display:flex;flex-direction:column;gap:6px;min-width:0}
+/* Roguelike & ResourceBar-inspired Command Deck, Market Ledger, and Economy Panels */
+.demo-economy {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+}
 
-/* Tabbed Command Deck & Market Price Chart */
-.demo-deck-header{display:flex;flex-direction:column;gap:10px;border:2px solid var(--ef-outline,#594630);background:var(--ef-panel,#fbf6e9);padding:12px 14px;box-shadow:var(--ef-shadow,3px 3px 0 #8c765a70)}
-.demo-deck-eyebrow,.demo-chart-eyebrow{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted,#786c57)}
-.demo-deck-header .demo-economy-title{margin:2px 0 0;font-size:20px}
-.demo-deck-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
-.demo-deck-tab{display:flex;align-items:center;justify-content:center;padding:8px 6px;border:2px solid var(--ef-outline,#594630);background:#f3ebd9;color:var(--ink,#2b2318);cursor:pointer;text-align:center;font:inherit;font-size:12px;font-weight:700;transition:background .12s}
-.demo-deck-tab:hover{background:#fffaf0}
-.demo-deck-tab.is-active{background:#2d2419;color:#fbf6e9;border-color:#2d2419}
+.demo-economy-title,
+.demo-economy h3 {
+  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #23190f;
+}
+
+.demo-economy section {
+  min-width: 0;
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+  background: #f8f2e2;
+  padding: 14px 16px;
+  box-shadow: inset 0 1px 0 #fffdf8;
+}
+
+.demo-economy p,
+.demo-economy li {
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.demo-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  margin: 0;
+}
+
+.demo-facts div {
+  display: contents;
+}
+
+.demo-facts dt {
+  margin: 0;
+  color: #6b583f;
+  font-size: 12px;
+}
+
+.demo-facts dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #23190f;
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: end;
+  min-width: 0;
+}
+
+.demo-actions label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 8rem;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #4a3822;
+}
+
+.demo-actions input,
+.demo-actions select,
+.demo-actions button {
+  min-height: 38px;
+  max-width: 100%;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.demo-actions input,
+.demo-actions select {
+  border: 1px solid #7c603c;
+  background: #fffdf8;
+  padding: 4px 8px;
+  color: #23190f;
+  font-variant-numeric: tabular-nums;
+}
+
+.demo-badge {
+  display: inline-block;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 1px 7px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.demo-legacy-arrival {
+  border: 1px solid #38665e;
+  border-left: 4px solid #2b5c53;
+  border-radius: 2px;
+  padding: 9px 12px;
+  margin: 0 0 12px;
+  background: #ebf3f0;
+}
+
+.demo-legacy-arrival small {
+  display: block;
+  margin-top: 5px;
+}
+
+.demo-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.email-sign-in {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Compact Collapsible Demo Scenario Drawer */
+.demo-economy section.demo-scenario-section {
+  padding: 0;
+  overflow: hidden;
+  background: #f5ecda;
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+}
+
+.demo-scenario-drawer > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  list-style: none;
+  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  color: #f9f1dc;
+}
+
+.demo-scenario-drawer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.demo-scenario-drawer > summary h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #f9f1dc;
+}
+
+.demo-scenario-toggle {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #e2b86b;
+}
+
+.demo-scenario-body {
+  padding: 12px 14px;
+  border-top: 1px solid #5a4228;
+  font-size: 12.5px;
+}
+
+/* Tabbed Command Deck Header — Exact ResourceBar Dark Bronze HUD Aesthetic */
+.demo-deck-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  padding: 12px 14px;
+  box-shadow: inset 0 1px 0 #7c5e3b;
+  color: #f9f1dc;
+}
+
+.demo-deck-eyebrow {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d8b574;
+}
+
+.demo-chart-eyebrow {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7a5929;
+}
+
+.demo-deck-header .demo-economy-title {
+  margin: 1px 0 0;
+  font-size: 22px;
+  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  color: #fff8e7;
+  letter-spacing: -0.01em;
+}
+
+.demo-deck-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.demo-deck-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 7px 8px;
+  border: 1px solid #6b5033;
+  border-radius: 2px;
+  background: #22180e;
+  color: #dfd0b6;
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  box-shadow: none;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.demo-deck-tab:hover {
+  background: #2f2114;
+  border-color: #a88247;
+  color: #fff8e7;
+}
+
+.demo-deck-tab.is-active {
+  background: linear-gradient(180deg, #4d371f 0%, #362514 100%);
+  color: #fff9e8;
+  border: 1px solid #e2b86b;
+  box-shadow: inset 0 1px 0 #8c6a3d, 0 0 0 1px #e2b86b33;
+}
 
 /* Active Town Offer Card & Legacy Figure Card */
-.demo-town-offer-card,.demo-legacy-figure-card{display:flex;align-items:center;gap:12px;border:2px solid #38665e;border-left-width:5px;background:#eef5f2;padding:10px 12px}
-.demo-town-offer-body,.demo-legacy-figure-copy{flex:1;min-width:0}
-.demo-town-offer-body strong,.demo-legacy-figure-copy strong{display:block;font-size:14px;color:#1e3833}
-.demo-town-offer-body p,.demo-legacy-figure-copy p{margin:3px 0;font-size:12.5px}
-.demo-offer-inspect-btn{border:1px solid #2b5c53;background:#2b5c53;color:#fbf6e9;padding:6px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.demo-town-offer-card,
+.demo-legacy-figure-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid #2b5c53;
+  border-left: 5px solid #2b5c53;
+  border-radius: 2px;
+  background: #e9f2ee;
+  padding: 10px 14px;
+}
+
+.demo-town-offer-body,
+.demo-legacy-figure-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-town-offer-body strong,
+.demo-legacy-figure-copy strong {
+  display: block;
+  font-size: 13.5px;
+  color: #183630;
+}
+
+.demo-town-offer-body p,
+.demo-legacy-figure-copy p {
+  margin: 2px 0;
+  font-size: 12px;
+}
+
+.demo-offer-inspect-btn {
+  border: 1px solid #1e453e;
+  border-radius: 2px;
+  background: #244d45;
+  color: #fbf6e9;
+  padding: 7px 11px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.demo-offer-inspect-btn:hover {
+  background: #1a3832;
+}
 
 /* People & Town Counterparties Tab */
-.demo-people-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.demo-people-header h3{margin:0}
-.demo-open-char-btn{border:1px solid #6b5b43;background:#f3ebd9;color:#2b2318;padding:5px 10px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit}
-.demo-open-char-btn:hover{background:#2d2419;color:#fbf6e9}
-.demo-people-subhead{margin:12px 0 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#786c57)}
-.demo-town-figures-grid,.demo-personal-cards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.demo-town-figure-card,.demo-person-card{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid #c9b99b;background:#f7f1e3}
-.demo-town-figure-card.has-offer{border-color:#2b5c53;background:#edf4f1}
-.demo-town-figure-top{display:flex;align-items:center;gap:10px;min-width:0}
-.demo-town-figure-avatar{width:44px;height:44px;flex:0 0 44px;border:1px solid #594630;background:#e6dec8}
-.demo-town-figure-meta{flex:1;min-width:0}
-.demo-town-figure-meta strong{display:block;font-size:13.5px;color:#2b2318}
-.demo-town-figure-meta small{display:block;font-size:11px;color:#6c5c43;line-height:1.35}
-.demo-town-figure-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:2px}
-.demo-figure-role-tag{display:inline-block;padding:1px 5px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:#2d2419;color:#fbf6e9}
-.demo-figure-gov-tag{display:inline-block;padding:1px 5px;font-size:9.5px;background:#e2d6be;color:#4a3d2c}
-.demo-figure-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:4px;margin:0;padding:6px;background:#fbf6e9;border:1px solid #dfd3ba;font-size:11px}
-.demo-figure-stats div{display:flex;flex-direction:column}
-.demo-figure-stats dt{font-size:9.5px;color:var(--muted,#786c57);text-transform:uppercase}
-.demo-figure-stats dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
-.demo-figure-inline-offer{padding:6px 8px;background:#dff0ea;border:1px solid #7ab09e;font-size:11.5px;color:#1b4238}
-.demo-figure-actions,.demo-person-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.demo-figure-actions button,.demo-person-actions button{width:100%;padding:6px 9px;border:1px solid #6b5b43;background:#fbf6e9;color:#2b2318;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left}
-.demo-figure-actions button:hover,.demo-person-actions button:hover{background:#2d2419;color:#fbf6e9}
-.demo-personal-circle-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px}
-.demo-people-filters{display:flex;flex-wrap:wrap;gap:4px}
-.demo-people-filters button{border:1px solid #8a7352;background:#fbf6e9;color:#2b2318;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
-.demo-people-filters button.is-active{background:#38665e;color:#fbf6e9;border-color:#38665e;font-weight:700}
-.demo-person-desc{margin:0;font-size:11.5px;color:#554836}
-.demo-person-closeness{display:flex;flex-direction:column;gap:3px;font-size:11px;color:#4b5d45}
-.demo-person-closeness-bar{height:5px;background:#dfd3ba;overflow:hidden}
-.demo-person-closeness-bar span{display:block;height:100%;background:#38665e}
-.demo-people-empty{margin:8px 0;font-size:12.5px;color:var(--muted,#786c57)}
+.demo-people-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #cbb692;
+}
 
-.demo-market-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.demo-market-top h3{margin:0}
-.demo-market-sub{margin:2px 0 0;font-size:12px;color:var(--muted,#786c57)}
-.demo-visit-badge{display:inline-flex;align-items:center;border:1px solid #2b6640;background:#e8f2ec;color:#1f4f31;padding:3px 8px;font-size:11px;font-weight:700}
-.demo-visit-badge.is-used{border-color:#8a7352;background:#eee6d5;color:#6c5c43}
+.demo-people-header h3 {
+  margin: 0;
+}
 
-.demo-price-chart-card{border:1px solid #c9b99b;background:#f5efe0;padding:12px;margin:10px 0}
-.demo-price-chart-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.demo-price-chart-header h4{margin:2px 0 0;font-size:15px;font-family:var(--serif,Georgia,serif)}
-.demo-chart-asset-pills{display:flex;flex-wrap:wrap;gap:4px}
-.demo-chart-pill{display:inline-flex;align-items:center;gap:5px;border:1px solid #8a7352;background:#fbf6e9;color:var(--ink,#2b2318);padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
-.demo-chart-pill.is-active{background:#38665e;color:#fbf6e9;border-color:#38665e;font-weight:700}
+.demo-open-char-btn {
+  border: 1px solid #6b5033;
+  border-radius: 2px;
+  background: #2b1f13;
+  color: #f9f1dc;
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
 
-.demo-chart-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:6px;margin-bottom:8px}
-.demo-chart-kpis>div{display:flex;flex-direction:column;gap:2px;padding:6px 8px;background:#fbf6e9;border:1px solid #dfd3ba}
-.demo-chart-kpis span{font-size:10px;color:var(--muted,#786c57);text-transform:uppercase;letter-spacing:.04em}
-.demo-chart-kpis strong{font-size:14px;font-variant-numeric:tabular-nums;color:#2b2318}
+.demo-open-char-btn:hover {
+  background: #3c2c1b;
+  border-color: #c89d54;
+}
 
-.demo-chart-svg-wrap{border:1px solid #dfd3ba;background:#fbf6e9;padding:4px}
-.demo-chart-svg{display:block;width:100%;height:auto;max-height:175px}
-.demo-chart-footer{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:12px;color:#4a3d2c}
-.demo-chart-driver-note{margin:0;font-size:11.5px;color:var(--muted,#786c57)}
+.demo-people-subhead {
+  margin: 12px 0 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b5033;
+}
 
-/* Commodity Board Table */
-.demo-commodity-table-wrap{overflow-x:auto;margin:10px 0;border:1px solid #cbbba0;background:#fbf6e9}
-.demo-commodity-table{width:100%;border-collapse:collapse;font-size:12px}
-.demo-commodity-table th{text-align:left;padding:6px 5px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#786c57);border-bottom:1px solid #cbbba0;background:#f2ead9}
-.demo-commodity-table td{padding:6px 5px;border-bottom:1px solid #e6dcc8;vertical-align:middle}
-.demo-commodity-table td.num{font-variant-numeric:tabular-nums}
-.demo-commodity-table tbody tr{cursor:pointer;transition:background .1s}
-.demo-commodity-table tbody tr:hover{background:#f3ebd8}
-.demo-commodity-table tbody tr.is-selected{background:#e7f0ec;outline:2px solid #2b5c53;outline-offset:-2px}
-.demo-sparkline-wrap{display:inline-flex;align-items:center;gap:6px}
-.demo-sparkline{display:block;overflow:visible}
-.demo-price-delta{font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted,#786c57)}
-.demo-price-delta.is-high{color:#9e3b24;font-weight:700}
-.demo-price-delta.is-low{color:#2b6640;font-weight:700}
-.demo-row-btns{display:inline-flex;gap:4px}
-.demo-row-btns button{border:1px solid #7c674a;background:#f3ebd9;padding:3px 7px;font-size:11px;cursor:pointer;font-family:inherit}
-.demo-row-btns button:hover{background:#2d2419;color:#fbf6e9}
+.demo-town-figures-grid,
+.demo-personal-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.demo-town-figure-card,
+.demo-person-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #8c7048;
+  border-radius: 2px;
+  background: #fcf8ee;
+}
+
+.demo-town-figure-card.has-offer {
+  border-color: #2b5c53;
+  background: #eef5f2;
+}
+
+.demo-town-figure-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.demo-town-figure-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1px solid #5a4228;
+  border-radius: 2px;
+  background: #e6dec8;
+}
+
+.demo-town-figure-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-town-figure-meta strong {
+  display: block;
+  font-size: 13.5px;
+  color: #23190f;
+}
+
+.demo-town-figure-meta small {
+  display: block;
+  font-size: 11px;
+  color: #65533b;
+  line-height: 1.35;
+}
+
+.demo-town-figure-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.demo-figure-role-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #2b1f13;
+  color: #f3cf7a;
+  border: 1px solid #6b5033;
+}
+
+.demo-figure-gov-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  background: #e8dcc4;
+  color: #3d2d1b;
+  border: 1px solid #bda57e;
+}
+
+.demo-figure-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  gap: 4px;
+  margin: 0;
+  padding: 6px 8px;
+  background: #f3ead7;
+  border: 1px solid #cbb692;
+  border-radius: 2px;
+  font-size: 11px;
+}
+
+.demo-figure-stats div {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-figure-stats dt {
+  font-size: 9px;
+  color: #6b583f;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.demo-figure-stats dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #23190f;
+}
+
+.demo-figure-inline-offer {
+  padding: 6px 8px;
+  background: #dff0ea;
+  border: 1px solid #5c9986;
+  border-radius: 2px;
+  font-size: 11.5px;
+  color: #16382f;
+}
+
+.demo-figure-actions,
+.demo-person-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.demo-figure-actions button,
+.demo-person-actions button {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #7c603c;
+  border-radius: 2px;
+  background: #f5ecda;
+  color: #23190f;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.demo-figure-actions button:hover,
+.demo-person-actions button:hover {
+  background: #2b1f13;
+  color: #fff8e7;
+  border-color: #c89d54;
+}
+
+.demo-personal-circle-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.demo-people-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.demo-people-filters button {
+  border: 1px solid #8c7048;
+  border-radius: 2px;
+  background: #f5ecda;
+  color: #2b1f13;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.demo-people-filters button.is-active {
+  background: #2b1f13;
+  color: #f3cf7a;
+  border-color: #c89d54;
+}
+
+.demo-person-desc {
+  margin: 0;
+  font-size: 11.5px;
+  color: #554836;
+}
+
+.demo-person-closeness {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  color: #3d5238;
+}
+
+.demo-person-closeness-bar {
+  height: 5px;
+  border-radius: 1px;
+  background: #dfd3ba;
+  overflow: hidden;
+}
+
+.demo-person-closeness-bar span {
+  display: block;
+  height: 100%;
+  background: #2b5c53;
+}
+
+.demo-people-empty {
+  margin: 8px 0;
+  font-size: 12.5px;
+  color: #6b583f;
+}
+
+/* Market Section Top Bar */
+.demo-market-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #cbb692;
+}
+
+.demo-market-top h3 {
+  margin: 0;
+  font-size: 21px;
+  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  color: #23190f;
+}
+
+.demo-market-sub {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: #6b583f;
+}
+
+.demo-visit-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #2b6640;
+  border-radius: 2px;
+  background: #e3f1e8;
+  color: #194528;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.demo-visit-badge.is-used {
+  border-color: #8c7048;
+  background: #ebe1cd;
+  color: #5e4c34;
+}
+
+/* Price Chart Card — Crisp Roguelike Ledger Box */
+.demo-price-chart-card {
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+  background: #f4ebd8;
+  padding: 12px 14px;
+  margin: 10px 0;
+  box-shadow: inset 0 1px 0 #fffdf8;
+}
+
+.demo-price-chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.demo-price-chart-header h4 {
+  margin: 2px 0 0;
+  font-size: 16px;
+  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  color: #23190f;
+}
+
+.demo-chart-asset-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Asset Pills — Matching ResourceBar .aoe-cell Dark Bronze Tiles */
+.demo-chart-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #6b5033;
+  border-radius: 2px;
+  background: #22180e;
+  color: #e8d9be;
+  padding: 4px 9px 4px 5px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: none;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.demo-chart-pill:hover {
+  background: #332415;
+  border-color: #b58d4d;
+  color: #fff8e7;
+}
+
+.demo-chart-pill.is-active {
+  background: linear-gradient(180deg, #4d371f 0%, #332312 100%);
+  color: #fff9e8;
+  border-color: #e2b86b;
+  box-shadow: inset 0 1px 0 #8c6a3d, 0 0 0 1px #e2b86b44;
+}
+
+/* KPI Plaquettes — Crisp Recessed Chiseled Cells */
+.demo-chart-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.demo-chart-kpis > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 9px;
+  background: #fcf8ee;
+  border: 1px solid #8c7048;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.demo-chart-kpis span {
+  font-size: 9px;
+  color: #6e522b;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+.demo-chart-kpis strong {
+  font-size: 14.5px;
+  font-variant-numeric: tabular-nums;
+  color: #1e160d;
+  font-weight: 700;
+}
+
+.demo-chart-svg-wrap {
+  border: 1px solid #9e8258;
+  border-radius: 2px;
+  background: #fcf9f0;
+  padding: 6px 8px;
+}
+
+.demo-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 145px;
+}
+
+.demo-chart-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: #3d2f1d;
+}
+
+.demo-chart-driver-note {
+  margin: 0;
+  font-size: 11.5px;
+  color: #5c4d38;
+  line-height: 1.45;
+}
+
+/* Commodity Board Table — Crisp Roguelike Ledger */
+.demo-commodity-table-wrap {
+  overflow-x: auto;
+  margin: 10px 0;
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+  background: #fcf8ee;
+  box-shadow: none;
+}
+
+.demo-commodity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.demo-commodity-table th {
+  text-align: left;
+  padding: 8px 9px;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f3cf7a;
+  border-bottom: 2px solid #5a4228;
+  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+}
+
+.demo-commodity-table td {
+  padding: 7px 9px;
+  border-bottom: 1px solid #dfd2b8;
+  vertical-align: middle;
+  color: #23190f;
+}
+
+.demo-commodity-table tbody tr:nth-child(even) {
+  background: #f6efe0;
+}
+
+.demo-commodity-table td.num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.demo-commodity-table tbody tr {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.demo-commodity-table tbody tr:hover {
+  background: #ecdfc6;
+}
+
+.demo-commodity-table tbody tr.is-selected {
+  background: #e3efe9;
+  outline: 2px solid #2b5c53;
+  outline-offset: -2px;
+}
+
+.demo-sparkline-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo-sparkline {
+  display: block;
+  overflow: visible;
+}
+
+.demo-price-delta {
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  color: #6b583f;
+}
+
+.demo-price-delta.is-high {
+  color: #9e3b24;
+  font-weight: 700;
+}
+
+.demo-price-delta.is-low {
+  color: #2b6640;
+  font-weight: 700;
+}
+
+.demo-row-btns {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.demo-row-btns button {
+  border: 1px solid #6b5033;
+  border-radius: 2px;
+  background: #2b1f13;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: #f9f1dc;
+  box-shadow: none;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.demo-row-btns button:hover {
+  background: #42301d;
+  color: #fff;
+  border-color: #e2b86b;
+}
 
 /* Trade Ticket & Styled Icon Dropdowns */
-.demo-commodity-cell{display:inline-flex;align-items:center;gap:6px}
-.demo-market-summary-facts{margin-top:8px;padding-top:8px;border-top:1px solid #e2d6be}
-.demo-trade-ticket{border-top:2px dashed #bba785;padding-top:10px;margin-top:10px}
-.demo-dropdown-field{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 9.5rem;font-size:12px}
-.demo-dropdown-label{font-size:12px;color:#2b2318}
-.demo-dropdown-wrap{position:relative}
-.demo-dropdown-trigger{display:flex;align-items:center;gap:8px;width:100%;min-height:42px;padding:6px 10px;border:2px solid #594630;background:#fffcf4;color:#2b2318;cursor:pointer;font:inherit;text-align:left;transition:background .1s}
-.demo-dropdown-trigger:hover,.demo-dropdown-trigger.is-open{background:#f3ebd9;border-color:#2d2419}
-.demo-dropdown-trigger-text{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
-.demo-dropdown-trigger-text strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.demo-dropdown-trigger-text small{font-size:10.5px;color:#6c5c43}
-.demo-dropdown-caret{font-size:12px;color:#594630}
-.demo-dropdown-menu{position:absolute;top:calc(100% + 4px);left:0;right:0;min-width:210px;z-index:45;list-style:none;margin:0;padding:4px;border:2px solid #2d2419;background:#fbf6e9;box-shadow:4px 4px 0 #2b231845;max-height:260px;overflow-y:auto;display:grid;gap:2px}
-.demo-dropdown-option{display:flex;align-items:center;gap:8px;width:100%;padding:7px 8px;border:1px solid transparent;background:transparent;color:#2b2318;cursor:pointer;font:inherit;text-align:left}
-.demo-dropdown-option:hover{background:#efe5cf;border-color:#cbbba0}
-.demo-dropdown-option.is-selected{background:#e3efe9;border-color:#2b5c53;font-weight:700}
-.demo-dropdown-opt-main{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
-.demo-dropdown-opt-main strong{font-size:12.5px}
-.demo-dropdown-opt-main small{font-size:10px;color:#6c5c43}
-.demo-dropdown-opt-meta{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;color:#2b5c53;white-space:nowrap}
-.demo-trade-submit{background:#2d2419;color:#fbf6e9;border:2px solid #2d2419;padding:0 14px;font-weight:700;cursor:pointer}
-.demo-trade-submit:disabled{opacity:.5;cursor:not-allowed}
-.demo-batch-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 0;font-size:12px}
-.demo-batch-row button{border:1px solid #7c674a;background:#f3ebd9;padding:4px 9px;font-size:12px;cursor:pointer;font-family:inherit}
-.demo-batch-row button:hover{background:#e5d8be}
-.demo-ticket-cash{margin-left:auto;font-size:12px;color:#4a3d2c}
-
-@media (max-width:720px){
-  .demo-deck-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .demo-commodity-head{display:none}
-  .demo-commodity-row{grid-template-columns:1fr auto}
+.demo-commodity-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
-@media (max-width:600px){
-  .demo-compare{grid-template-columns:1fr}
-  .demo-actions{flex-direction:column;align-items:stretch}
-  .demo-actions button,.demo-actions input,.demo-actions select{width:100%}
+
+.demo-market-summary-facts {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #cbb692;
+}
+
+.demo-trade-ticket {
+  border-top: 2px solid #8c7048;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.demo-dropdown-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 9.5rem;
+  font-size: 11.5px;
+}
+
+.demo-dropdown-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4a3822;
+}
+
+.demo-dropdown-wrap {
+  position: relative;
+}
+
+.demo-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 5px 9px;
+  border: 1px solid #6b5033;
+  border-radius: 2px;
+  background: #22180e;
+  color: #f9f1dc;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  box-shadow: none;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.demo-dropdown-trigger:hover,
+.demo-dropdown-trigger.is-open {
+  background: #302214;
+  border-color: #e2b86b;
+}
+
+.demo-dropdown-trigger-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-dropdown-trigger-text strong {
+  font-size: 12.5px;
+  color: #fff8e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-dropdown-trigger-text small {
+  font-size: 10px;
+  color: #cbb692;
+}
+
+.demo-dropdown-caret {
+  font-size: 11px;
+  color: #e2b86b;
+}
+
+.demo-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  min-width: 210px;
+  z-index: 45;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  border: 2px solid #5a4228;
+  border-radius: 2px;
+  background: #22180e;
+  box-shadow: 0 10px 24px rgba(15, 10, 5, 0.5);
+  max-height: 250px;
+  overflow-y: auto;
+  display: grid;
+  gap: 2px;
+}
+
+.demo-dropdown-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: #f5ebd6;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.demo-dropdown-option:hover {
+  background: #332415;
+  border-color: #8c6a3d;
+}
+
+.demo-dropdown-option.is-selected {
+  background: #3d2b18;
+  border-color: #e2b86b;
+  font-weight: 700;
+}
+
+.demo-dropdown-opt-main {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-dropdown-opt-main strong {
+  font-size: 12px;
+  color: #fff8e7;
+}
+
+.demo-dropdown-opt-main small {
+  font-size: 10px;
+  color: #bfa888;
+}
+
+.demo-dropdown-opt-meta {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #f3cf7a;
+  white-space: nowrap;
+}
+
+.demo-trade-submit {
+  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  color: #f3cf7a;
+  border: 1px solid #c89d54;
+  border-radius: 2px;
+  padding: 0 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 #7c5e3b;
+}
+
+.demo-trade-submit:hover:not(:disabled) {
+  background: #473420;
+  color: #fff8e7;
+  border-color: #f0cb82;
+}
+
+.demo-trade-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.demo-batch-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0 0;
+  font-size: 11.5px;
+}
+
+.demo-batch-row button {
+  border: 1px solid #7c603c;
+  border-radius: 2px;
+  background: #efe4ce;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: #2b1f13;
+}
+
+.demo-batch-row button:hover {
+  background: #2b1f13;
+  color: #fff8e7;
+  border-color: #c89d54;
+}
+
+.demo-ticket-cash {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: #3d2f1d;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  .demo-deck-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .demo-commodity-head {
+    display: none;
+  }
+  .demo-commodity-row {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .demo-compare {
+    grid-template-columns: 1fr;
+  }
+  .demo-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .demo-actions button,
+  .demo-actions input,
+  .demo-actions select {
+    width: 100%;
+  }
 }

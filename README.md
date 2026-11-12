@@ -74,6 +74,8 @@ Occupation cards explain yearly income before costs, harvest and storage mechani
 
 ## Development
 
+`pnpm test` runs the game tests. `pnpm check` also runs the English-only text check.
+
 ```sh
 pnpm check
 pnpm test

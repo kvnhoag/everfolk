@@ -1,0 +1,11 @@
+# Alexander emblem — generation record
+
+Tool: built-in `image_gen`, with `transparent_background: true`. No reference image was supplied, and no CLI/API fallback was used.
+
+Project file: `public/assets/brand/alexander-royal-pixel.png`.
+
+## Final generation prompt
+
+Use case: historical-scene. Asset type: a single transparent pixel-art sculptural emblem to sit beside the custom word EVERFOLK in a premium ancient Mediterranean civilization game's title. Create ONLY a beautiful small bust of Alexander the Great, youthful, beardless, classical Macedonian idealized features, sculpted nose, calm noble confident expression, head turned three-quarter toward viewer's left, distinctive thick wavy hair with an off-center anastole rising off the forehead. Warm ivory antique marble with restrained weathered bronze and faint malachite in deep recesses, very thin golden rim light from upper left. Clearly a carved stone sculpture, not a flesh person. Upper chest and shoulders with a restrained classical draped mantle, a small simple stepped rectangular plinth directly under the bust. One tiny engraved geometric detail on plinth, no text. Subject all visible, compact vertical silhouette, no background or circular backing or rectangular frame; truly transparent outside sculpture. Exceptional hand-crafted 2.5D PIXEL ART: strict coherent square pixel clusters, stepped contour, limited 24-color ivory/gold/olive/teal/bronze palette, sculptural plane shading, individual expressive curls, selectively placed stone cracks, no smooth painted brushstrokes, no antialiasing or photographic texture. Aim for native 128 by 160 pixel game sprite enlarged with nearest-neighbor pixels, sharp regular pixel grid visible throughout. Bust faces toward the lettering that will be placed to its left. Secondary title ornament, not a huge full scene. No lettering, no letters, no full body, no modern objects, no helmets, no beard, no rainbow, no neon, no cartoon or chibi proportions, no other figures, no scenery, no watermark. Leave a transparent margin around the sculpture.
+
+The generated source is 1122 × 1402 pixels. The requested 128 × 160 figure is an art-direction target, not a claim about the returned file dimensions or an exact color-count guarantee. The original alpha and pixels were preserved; the application controls display size and sampling.

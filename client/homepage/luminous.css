@@ -1,18 +1,18 @@
 /* Selective champagne light: paint-only upgrades, with all original geometry retained. */
 .ef-home h1{text-shadow:none}
 .ef-title-wrap{text-shadow:none;position:relative;display:inline-block;isolation:isolate}
-.ef-title-glint{position:absolute;z-index:2;width:3px;height:3px;background:#fff5cc;opacity:0;pointer-events:none;box-shadow:0 0 5px #ffdda0,0 0 12px #eeb34499;transform-origin:center}
-.ef-title-glint:before,.ef-title-glint:after{content:"";position:absolute;background:#fff0c6}
+.ef-title-glint{position:absolute;z-index:2;width:3px;height:3px;background:#ffffff;opacity:0;pointer-events:none;box-shadow:0 0 5px #ffffff,0 0 12px #e2e8f0cc;transform-origin:center}
+.ef-title-glint:before,.ef-title-glint:after{content:"";position:absolute;background:#ffffff}
 .ef-title-glint:before{width:1px;height:11px;left:1px;top:-4px}
 .ef-title-glint:after{width:9px;height:1px;left:-3px;top:1px}
 .ef-title-glint:nth-of-type(1){left:8%;top:17%}.ef-title-glint:nth-of-type(2){left:65%;top:26%;width:2px;height:2px}.ef-title-glint:nth-of-type(3){left:91%;top:77%}
-.ef-home-tagline{color:#f5dca3;background:linear-gradient(115deg,#d7b57c 25%,#fff0c6 46%,#ffe4a6 50%,#d7b57c 72%);background-size:230% 100%;background-position:var(--subtitle-sweep,130%) 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #645334) drop-shadow(0 0 9px #edbb6638)}
-.ef-home-eyebrow,.ef-home-brand,.ef-home-era strong{color:#efcf91;text-shadow:0 1px 1px #202d35,0 0 12px #e5b26033}
+.ef-home-tagline{color:#fff6dc;background:linear-gradient(115deg,#f7dfa8 18%,#ffffff 44%,#fff9e6 53%,#f5d696 80%);background-size:230% 100%;background-position:var(--subtitle-sweep,130%) 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #091820) drop-shadow(0 3px 8px #071319f5) drop-shadow(0 0 16px #091820cc)}
+.ef-home-eyebrow,.ef-home-brand,.ef-home-era strong{color:#fae6be;text-shadow:0 1px 2px #09151c,0 2px 6px #09151ce6,0 0 14px #102028aa}
 .ef-home-brand svg{filter:drop-shadow(0 0 4px #f6d08b77) drop-shadow(0 0 12px #e6aa462a)}
 .ef-home-world-note strong{color:#f5deae;text-shadow:0 1px 0 #8c7048,0 2px 5px #182b32,0 0 14px #e4b86a3d}
-.ef-home-rule{opacity:.92;filter:drop-shadow(0 0 4px #f2c77755)}
-.ef-home-rule span:first-child{background:linear-gradient(90deg,#b1874e,#f6daa0)}
-.ef-home-rule span:last-child{background:linear-gradient(90deg,#f0ce8a,#c49b6155,transparent)}
+.ef-home-rule{opacity:.92;filter:drop-shadow(0 1px 3px #0d1d24cc)}
+.ef-home-rule span:first-child{background:linear-gradient(270deg,#f8fafc,#cbd5e166,transparent)}
+.ef-home-rule span:last-child{background:linear-gradient(90deg,#f8fafc,#cbd5e166,transparent)}
 .ef-home-frame{border-color:#e6c58a52;box-shadow:inset 0 0 18px #ebbd6f08,0 0 6px #e6b9670d}
 .ef-home-frame i{border-color:#f2d294;filter:drop-shadow(0 0 5px #e8b86966)}
 .ef-home-header,.ef-home-footer{border-color:#dfbd7d3d}
@@ -28,7 +28,7 @@
 .ef-coast-aureole{position:absolute;inset:0;opacity:.5;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(ellipse 15% 17% at 74.7% 31.5%,#ffe2a163,#efbb6b19 48%,transparent 78%),radial-gradient(ellipse 28% 22% at 77% 39%,#eab77916,transparent 76%)}
 .ef-coast-sunlight{background:radial-gradient(ellipse at 74.7% 31.5%,#ffe0a337,transparent 30%),linear-gradient(117deg,transparent 50%,#f0bd8715 60%,transparent 73%)}
 .ef-light-air{position:absolute;z-index:1;inset:0;pointer-events:none;overflow:hidden}
-.ef-light-air:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 29% 26% at 23% 31%,#eab4670e,transparent 80%)}
+.ef-light-air:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 34% 28% at 50% 34%,#eab46712,transparent 80%)}
 .ef-light-mote{position:absolute;width:2px;height:2px;background:#ffe6a6;opacity:0;box-shadow:0 0 6px #ffdb8a66}
 .ef-light-mote:nth-child(1){left:7%;top:22%}.ef-light-mote:nth-child(2){left:33%;top:19%}.ef-light-mote:nth-child(3){left:40%;top:43%}.ef-light-mote:nth-child(4){left:27%;top:57%}.ef-light-mote:nth-child(5){left:70%;top:33%}.ef-light-mote:nth-child(6){left:83%;top:45%}.ef-light-mote:nth-child(7){left:61%;top:63%}.ef-light-mote:nth-child(8){left:48%;top:27%}
 .ef-home[data-motion=paused] .ef-title-glint,.ef-home[data-motion=paused] .ef-light-mote{opacity:0!important}

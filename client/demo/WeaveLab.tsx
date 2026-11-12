@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import App from "../screens/App.tsx";
 import LoadingScreen from "../screens/LoadingScreen.tsx";
 import ChainLayer, { leaveChainRoute, useChainRoute } from "../chain/ChainLayer.tsx";
-import Web3Navigation from "../chain/Web3Navigation.tsx";
 import type { ChainBackend } from "../chain/chain-backend.ts";
 import {
   DEMO_LIFE_A_OWNER,
@@ -127,9 +126,6 @@ export default function WeaveLab({ initialPreset = "granary" }: { initialPreset?
 
   return (
     <>
-      <div className="web3-home-bar" hidden={chainModalOpen}>
-        <Web3Navigation backend={backend} onExplore={() => leaveChainRoute()} />
-      </div>
       <App
         key={`weave-${preset}-${prepared.session.life.life_id}-${sessionEpoch}`}
         worldPickerOpen={chainModalOpen}

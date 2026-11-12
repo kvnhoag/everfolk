@@ -7,7 +7,6 @@ import App from "./screens/App.tsx";
 import LoadingScreen from "./screens/LoadingScreen.tsx";
 import ChainLayer, { useChainRoute } from "./chain/ChainLayer.tsx";
 import type { ChainBackend } from "./chain/chain-backend.ts";
-import Web3Navigation from "./chain/Web3Navigation.tsx";
 import { useChainBackend, loadRankedConfig } from "./chain/chain-backend.ts";
 import { beginRankedSession, type RankedSession } from "./chain/ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
@@ -48,7 +47,6 @@ export default function GameClient() {
 
   if (!active) return <LoadingScreen phase={loadingPhase} />;
   return <>
-    <div className="web3-home-bar" hidden={Boolean(chainRoute) || rankedSession?.state.phase === "ended"}><Web3Navigation backend={backend} onExplore={() => { setRankedSession(null); }} /></div>
     {rankedSession
       ? <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} ranked={{
         initial: rankedSession.state, current: () => rankedSession.state,
