@@ -1,9 +1,11 @@
+import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "capability"; node: string }
   | { type: "vocation"; action: string; count: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
@@ -31,6 +33,7 @@ export type Condition =
   | { type: "demo"; condition: DemoCondition };
 
 export type Effect =
+  | { type: "capability"; node: string }
   | { type: "vocation"; action: string }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
@@ -592,6 +595,7 @@ export interface WorldPack {
   /** Opt-in Grain and Service economy; older packs omit it and keep their rules. */
   demo?: DemoDefinition;
   vocations?: VocationDefinition;
+  capabilities?: CapabilityDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -651,6 +655,7 @@ export interface LifeState {
   /** Only in demo worlds. */
   demo?: DemoState;
   vocations?: VocationState;
+  capabilities?: CapabilityState;
   journal: JournalEntry[];
   commands: Command[];
 }

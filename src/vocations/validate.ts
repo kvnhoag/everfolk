@@ -2,14 +2,14 @@ import type { VocationDefinition } from "./types.ts";
 /** Strict, bounded JSON rules. All ids are local to this immutable pack. */
 export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never): asserts input is VocationDefinition {
   const path = "world.vocations";
-  function obj(v: unknown, p: string, fields?: string[]): Record<string, any> {
+  function obj(v: unknown, p: string, fields?: string[], required = fields): Record<string, any> {
     if (!v || typeof v !== "object" || Array.isArray(v) || Object.getPrototypeOf(v) !== Object.prototype) fail(p, "expected plain object");
     for (const key of Reflect.ownKeys(v as object)) {
       if (typeof key !== "string" || ["__proto__", "constructor", "prototype"].includes(key) || fields && !fields.includes(key)) fail(p, "unknown or reserved field");
       const d = Object.getOwnPropertyDescriptor(v, key)!;
       if (!("value" in d) || !d.enumerable) fail(p, "expected JSON data");
     }
-    if (fields) for (const key of fields) if (!Object.hasOwn(v as object, key)) fail(`${p}.${key}`, "required field");
+    if (required) for (const key of required) if (!Object.hasOwn(v as object, key)) fail(`${p}.${key}`, "required field");
     return v as Record<string, any>;
   }
   const n = (v: unknown, p: string, min = 0, max = 1000000): void => { if (!Number.isSafeInteger(v) || (v as number) < min || (v as number) > max) fail(p, `expected integer ${min}..${max}`); };
@@ -50,7 +50,12 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     const a = obj(value, path);
     if (a.kind === "buy") { obj(a, path, ["kind", "item", "quantity"]); if (typeof a.item !== "string" || !Object.hasOwn(materials, a.item)) fail(path, "unknown material"); n(a.quantity, path, 1, 1000); }
     else if (a.kind === "sell") { obj(a, path, ["kind", "item"]); if (!outputs.has(a.item)) fail(path, "unknown product"); }
-    else if (a.kind === "make") { obj(a, path, ["kind", "recipe"]); if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe"); }
+    else if (a.kind === "make") {
+      obj(a, path, ["kind", "recipe", "quantity", "inspected", "controlledFiring"], ["kind", "recipe"]);
+      if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe");
+      if (a.quantity !== undefined) n(a.quantity, path, 1, 16);
+      for (const field of ["inspected", "controlledFiring"]) if (a[field] !== undefined && typeof a[field] !== "boolean") fail(path, "expected boolean production option");
+    }
     else if (a.kind === "work") {
       obj(a, path, ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]); training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
       if (!["workshop", "school", "council"].includes(a.payer) || typeof a.practice !== "boolean") fail(path, "invalid work account/practice");

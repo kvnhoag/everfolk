@@ -64,8 +64,10 @@ export function parseDemoCommand(value: unknown, where = "", parseInner: (value:
   const type = (value as { type?: unknown } | null)?.type;
   switch (type) {
     case "trade": {
-      const c = plain(value, ["type", "item", "side", "quantity", "counterparty"], where);
-      return { type, item: oneOf(c.item, TRADE_ITEMS, where), side: oneOf(c.side, ["buy", "sell"] as const, where),
+      const hasOverride = typeof value === "object" && value !== null && Object.hasOwn(value, "reserveOverride");
+      const c = plain(value, ["type", "item", "side", "quantity", "counterparty", ...(hasOverride ? ["reserveOverride"] : [])], where);
+      if (hasOverride && typeof c.reserveOverride !== "boolean") bad(where, "reserveOverride must be a boolean");
+      return { type, ...(hasOverride ? { reserveOverride: c.reserveOverride as boolean } : {}), item: oneOf(c.item, TRADE_ITEMS, where), side: oneOf(c.side, ["buy", "sell"] as const, where),
         quantity: amount(c.quantity, where, 1), counterparty: oneOf(c.counterparty, ["merchant", "army"] as const, where) };
     }
     case "plan": return { type, flaxPlots: amount(plain(value, ["type", "flaxPlots"], where).flaxPlots, where) };

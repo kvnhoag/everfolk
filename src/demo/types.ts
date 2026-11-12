@@ -325,6 +325,8 @@ export interface TradeCommand {
   side: "buy" | "sell";
   quantity: number;
   counterparty: "merchant" | "army";
+  /** Explicit consent to sell grain held for food/seed; never inferred by an agent. */
+  reserveOverride?: boolean;
 }
 /** Free yearly planting plan: how many plots grow flax instead of grain. */
 export interface PlanCommand { type: "plan"; flaxPlots: number }

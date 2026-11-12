@@ -1,3 +1,4 @@
+import { productionQuote, productionReason } from "../capabilities/production.ts";
 import { vocationInventory, vocationGains, bid } from "./view.ts";
 import type { LifeState, WorldPack } from "../types.ts";
 import type { VocationDefinition, VocationState } from "./types.ts";
@@ -17,8 +18,10 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
   const def = world.vocations, ledger = life.vocations, action = def?.actions[id];
   if (!def || !ledger || !life.economy || !life.character || !action) return "This vocation action is unavailable in this world.";
   const cash = life.economy.cash;
+  if (world.capabilities && id.startsWith("appointment-") && action.kind === "work" && ledger.accounts[action.payer] < 30) return "No funded appointment is available in this office right now.";
   if (major(world, id) && ledger.workedAge === life.age) return "This year's work is complete.";
   if (major(world, id) && life.character.jobId === "soldier") return "Leave military service before taking a year of civilian work.";
+  if (life.capabilities?.project && (action.kind === "make" || action.kind === "work" && !action.practice)) return "Finish the registered capability assessment before taking another work project.";
   if (action.kind === "buy") {
     if (ledger.stock[action.item] < action.quantity) return "The material supplier has insufficient stock.";
     if (cash < def.materials[action.item].price * action.quantity) return "You cannot afford these materials.";
@@ -33,11 +36,14 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
     if (ledger.accounts[action.payer] + (action.payer === "workshop" ? action.fee : 0) < action.pay) return "The employer has insufficient funds for this work.";
   } else {
     const recipe = def.recipes[action.recipe];
+    const capabilityBlock = productionReason(world, life, action);
+    if (capabilityBlock) return capabilityBlock;
+    const quote = productionQuote(world, life, action.recipe, action.quantity ?? 1, action.inspected, action.controlledFiring);
     const missing = Object.entries(recipe.skills).filter(([id, min]) => skill(life, id) < min);
     if (missing.length) return `Requires ${missing.map(([id, n]) => `${world.character!.skills[id].label} ${n}`).join(", ")}.`;
     if (ledger.project) return ledger.project.recipe === action.recipe ? undefined : "Complete the current large work before starting another product.";
-    if (cash < recipe.fee) return "You cannot afford workshop access.";
-    if (Object.entries(recipe.inputs).some(([id, n]) => (vocationInventory(life)[id] ?? 0) < n)) return "Buy or make all the required materials first.";
+    if (cash < quote.fee) return "You cannot afford workshop access.";
+    if (Object.entries(quote.inputs).some(([id, n]) => (vocationInventory(life)[id] ?? 0) < n)) return "Buy or make all the required materials first.";
   }
 }
 function gain(world: WorldPack, life: LifeState, action: string): void {
@@ -96,16 +102,18 @@ export function applyVocation(world: WorldPack, life: LifeState, id: string): st
   } else {
     const recipe = def.recipes[action.recipe];
     if (!ledger.project) {
-      for (const [item, quantity] of Object.entries(recipe.inputs)) consume(life, item, quantity);
-      cash.cash -= recipe.fee; ledger.accounts.workshop += recipe.fee;
-      const quality = Math.min(5, 1 + Math.floor(Math.max(0, skill(life, "craft") - 24) / 16));
-      ledger.project = { recipe: action.recipe, completedYears: 0, quality };
+      const quote = productionQuote(world, life, action.recipe, action.quantity ?? 1, action.inspected, action.controlledFiring);
+      for (const [item, quantity] of Object.entries(quote.inputs)) consume(life, item, quantity);
+      cash.cash -= quote.fee; ledger.accounts.workshop += quote.fee;
+      const quality = quote.quality;
+      ledger.project = { recipe: action.recipe, completedYears: 0, quality, ...(world.capabilities ? { outputQuantity: quote.outputQuantity, quantity: quote.quantity } : {}) };
     }
     ledger.project.completedYears += 1;
     gain(world, life, id);
     if (ledger.project.completedYears === recipe.workYears) {
-      add(life, recipe.output, recipe.outputQuantity, ledger.project.quality);
-      text = `Completed ${recipe.title}: ${recipe.outputQuantity} grade-${ledger.project.quality} ${recipe.output}.`;
+      const produced = ledger.project.outputQuantity ?? recipe.outputQuantity;
+      add(life, recipe.output, produced, ledger.project.quality);
+      text = `Completed ${recipe.title}: ${produced} grade-${ledger.project.quality} ${recipe.output}.`;
       ledger.completed[`product-${recipe.output}`] = count(life, `product-${recipe.output}`) + 1;
       delete ledger.project;
     } else text = `Worked on ${recipe.title}; ${recipe.workYears - ledger.project.completedYears} work year remains. Inputs and fees are already reserved.`;

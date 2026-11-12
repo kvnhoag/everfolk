@@ -16,6 +16,7 @@ import { GOODS, TRADE_ITEMS } from "./types.ts";
 import { townDecision } from "./agents.ts";
 import { startContractShipment } from "./service.ts";
 import { changeReputation } from "./works.ts";
+import { farmSaleReason } from "../capabilities/farming.ts";
 
 const BPS = 10_000;
 const DEALER_JOB = "grain-dealer";
@@ -298,6 +299,10 @@ export function tradeReason(def: DemoDefinition, life: LifeStateWithDemo, comman
   if (life.age < t.minTradeAge) return `You are too young to trade at the market (from age ${t.minTradeAge}).`;
   if (!Number.isSafeInteger(command.quantity) || command.quantity < 1) return "Choose a whole quantity of at least 1.";
   if (command.quantity > m.maxOrderQuantity) return `Orders are limited to at most ${m.maxOrderQuantity} at a time.`;
+  if (command.item === "grain" && command.side === "sell") {
+    const reason = farmSaleReason({ demo: def }, life, command.quantity, command.reserveOverride);
+    if (reason) return reason;
+  }
   return command.counterparty === "army" ? armyReason(life, command) : merchantReason(def, life, command);
 }
 

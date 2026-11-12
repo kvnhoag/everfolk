@@ -17,6 +17,12 @@ pnpm dev
 
 Open the local URL printed by the server. Ordinary play needs no account or hosted content service. Lives save in the browser, with JSON import/export for transfer.
 
+## Skill tree
+
+Open **[the skill-tree guide](guide/SKILL_TREE.md)** for the connected 65-node atlas. Run locally and visit `/skills` to inspect it before a birth, or use **Skill tree** / **Character → Skills** in a game. New lives learn capabilities through proficiency and demonstrated work; earlier saves retain their original rules.
+
+![Everfolk skill atlas](public/assets/skills/skill-atlas.svg)
+
 ## Play
 
 Begin a life near Rhakotis in 350 BCE and experience the world around the emerging city of Alexandria. Develop skills, find work, maintain relationships and manage health and household finances. Accepted work can lead to named accomplishments and later career opportunities. At the end, review the life record or begin again.
@@ -87,7 +93,7 @@ Original pixel/vector artwork, source geometry and editable native masters are r
 
 ## Grain and Service demo
 
-New free-play births use `alexandria-lives-2`, with household resource rolls shown beneath the four main stats, including zero results. Total wealth includes these holdings at current merchant bids. Begun lives retain their recorded revision; ranked and practice configurations remain unchanged. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
+New free-play births use `alexandria-lives-3`, with household resource rolls shown beneath the four main stats, including zero results. Total wealth includes these holdings at current merchant bids. Begun lives retain their recorded revision; ranked and practice configurations remain unchanged. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
 
 
 The approved **Printed Folktale** identity uses locally bundled Eczar 600 for the wordmark and headings, with DM Sans 500 at 16px for narrative text. The textured wordmark keeps its clay-coloured period. Transparent SVG/PNG logos, the font licence and rebuild sources are packaged in [the brand kit](artwork/branding/everfolk-printed-folktale/README.md).

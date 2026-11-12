@@ -14,7 +14,7 @@ const vocation = (action: string): Effect => ({ type: "vocation", action });
 
 export function buildVocationWorld(base: WorldPack): WorldPack {
   const world = structuredClone(base), character = world.character!;
-  world.version = LIVES_WORLD_VERSION;
+  world.version = "alexandria-lives-2";
   configureStartingResources(world);
   world.title = "Alexandria — Handmade work and public life";
   world.description = "Grow up in a farming household, buy materials and make useful things, or pursue inquiry and public service. Work changes your skills, health, knowledge, bonds and household economy.";

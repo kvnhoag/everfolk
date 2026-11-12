@@ -10,6 +10,7 @@ import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import CareerEconomyTree from "./CareerEconomyTree.tsx";
+import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
@@ -267,8 +268,11 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        <CompactSkillPanel activities={activities} {...props} />
-        <CareerEconomyTree activities={activities} {...props} />
+        <CapabilityTree activities={activities} {...props} />
+        <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
+          <CompactSkillPanel activities={activities} {...props} />
+          <CareerEconomyTree activities={activities} {...props} />
+        </details>
       </div>
       {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
         <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />

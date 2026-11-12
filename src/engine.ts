@@ -1,3 +1,4 @@
+import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
@@ -97,6 +98,7 @@ function mutableSnapshot(state: LifeState): LifeState {
         ...(state.economy.market.history ? { history: [...state.economy.market.history] } : {}) } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
+    ...(state.capabilities ? { capabilities: structuredClone(state.capabilities) } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
     ...(state.character ? { character: {
@@ -270,6 +272,16 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         case "job":
           if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
           state.character!.jobId = effect.job; break;
+        case "capability": {
+          const previous = new Set(Object.keys(state.capabilities?.learned ?? {}));
+          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node));
+          for (const id of Object.keys(state.capabilities?.learned ?? {})) if (!previous.has(id)) {
+            const node = world.capabilities!.nodes.find(node => node.id === id)!;
+            journal(state, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+          }
+          syncEconomyStat(world, state);
+          break;
+        }
         case "vocation":
           journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action));
           if (world.demo?.startingResources) syncEconomyStat(world, state);
@@ -654,6 +666,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       phase: "ready", pendingEventId: null, endingId: null,
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
+      ...(world.capabilities ? { capabilities: initialCapabilities() } : {}),
       ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
@@ -741,6 +754,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       settleDemoYear(demoCtx(next));
       if (world.demo!.startingResources) syncEconomyStat(world, next);
     });
+    if (world.capabilities && next.phase !== "ended") {
+      const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
+      settleCapabilities(world, next, completedAge);
+      for (const id of Object.keys(next.capabilities?.learned ?? {})) if (!previous.has(id)) {
+        const node = world.capabilities.nodes.find(node => node.id === id)!;
+        journal(next, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+      }
+      syncEconomyStat(world, next);
+    }
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;

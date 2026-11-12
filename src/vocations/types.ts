@@ -14,7 +14,7 @@ export interface VocationRecipe {
 export type VocationAction =
   | { kind: "buy"; item: string; quantity: number }
   | { kind: "sell"; item: string }
-  | { kind: "make"; recipe: string }
+  | { kind: "make"; recipe: string; quantity?: number; inspected?: boolean; controlledFiring?: boolean }
   | { kind: "work"; fee: number; pay: number; payer: "workshop" | "school" | "council"; primary: string; supports: string[]; practice: boolean };
 export interface VocationDefinition {
   materials: Record<string, { price: number; stock: number }>;
@@ -33,5 +33,5 @@ export interface VocationState {
   demand: Record<string, number>;
   completed: Record<string, number>;
   workedAge: number | null;
-  project?: { recipe: string; completedYears: number; quality: number };
+  project?: { recipe: string; completedYears: number; quality: number; outputQuantity?: number; quantity?: number };
 }

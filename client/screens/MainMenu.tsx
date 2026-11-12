@@ -86,6 +86,7 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
       </div>
       <footer className="ef-home-footer">
         <nav className="ef-home-links" aria-label="Main menu">
+          <a href="/skills">Skill tree</a>
           {onWorlds && <button type="button" onClick={onWorlds}><span aria-hidden="true">⊕</span>Choose a world</button>}
           <button type="button" onClick={onPastLives}><span aria-hidden="true">◷</span>Past lives</button>
           {onLegacy && <button type="button" onClick={onLegacy}><span aria-hidden="true">♧</span>Legacy gallery</button>}

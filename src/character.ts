@@ -1,3 +1,4 @@
+import { capabilityReason } from "./capabilities/engine.ts";
 import { vocationReason } from "./vocations/engine.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { UNAVAILABLE_REASON } from "./demo/types.ts";
@@ -37,6 +38,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "capability") return capabilityReason(world, state, effect.node);
   if (effect.type === "vocation") return vocationReason(world, state, effect.action);
   if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {

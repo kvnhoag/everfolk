@@ -92,6 +92,7 @@ export default function EconomyPanels({
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
   const [quantity, setQuantity] = useState(1);
+  const [reserveOverride, setReserveOverride] = useState(false);
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
   const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
@@ -100,7 +101,7 @@ export default function EconomyPanels({
   const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
   const quote = screen.market.quotes.find(entry => entry.item === item);
-  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty };
+  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty, ...(reserveOverride ? { reserveOverride: true } : {}) };
   const held = heldQuantity(screen, item);
   const unitPrice =
     counterparty === "army" && item === "grain"
@@ -109,6 +110,8 @@ export default function EconomyPanels({
         ? (quote?.sell ?? 1)
         : (quote?.buy ?? 1);
   const orderTotal = quantity * unitPrice;
+
+  useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
 
   useEffect(() => {
     slot.current = false;
@@ -593,6 +596,7 @@ export default function EconomyPanels({
             </button>
           </div>
 
+          {world?.capabilities && item === "grain" && side === "sell" && <label className="demo-reserve-override"><input type="checkbox" checked={reserveOverride} onChange={event => setReserveOverride(event.target.checked)} /> Allow this sale to use grain reserved for household food or seed.</label>}
           <div className="demo-batch-row">
             <span>Quick quantity:</span>
             {[1, 10, 50, 100].map( presetQty => (
