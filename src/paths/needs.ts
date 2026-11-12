@@ -49,9 +49,12 @@ export function fieldNeedsView(world: WorldPack, life: LifeState): FieldNeed[] {
     const definition = world.paths!.fields[field];
     const count = working(paths, field), demand = district.profile[field].demand;
     const plural = `${definition.practitioner}s`;
-    const reason = count === 0
-      ? `No ${plural} working in ${district.title}${demand > 0 ? `, which needs ${demand}` : ""}.`
-      : `${count} ${count === 1 ? definition.practitioner : plural} working where ${district.title} needs ${demand}.`;
+    const reason = demand === 0
+      ? count === 0 ? `No ${plural} work in ${district.title}, and none are needed.`
+        : `${count} ${count === 1 ? `${definition.practitioner} works` : `${plural} work`} in ${district.title}, though the district has no regular need of one.`
+      : count === 0
+        ? `No ${plural} working in ${district.title}, which needs ${demand}.`
+        : `${count} ${count === 1 ? definition.practitioner : plural} working where ${district.title} needs ${demand}.`;
     const { bps, label } = paths.needs[field];
     return { field, title: definition.title, needBps: bps, label, working: count, reason };
   });

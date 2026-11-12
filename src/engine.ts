@@ -192,7 +192,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
-    if (world.paths) closeStage(world, state, state.age, state.age);
+    if (world.paths) {
+      // A death while the year settles can come before the finished stage was recorded.
+      if (state.age > 0 && lifeStageAt(world, state.age - 1)?.id !== lifeStageAt(world, state.age)?.id) closeStage(world, state, state.age - 1, state.age - 1);
+      closeStage(world, state, state.age, state.age);
+    }
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
     let causeText = "";
@@ -803,8 +807,6 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
-    // Paths worlds: a stage that just ended is recorded as it stood at its last year.
-    if (world.paths && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
@@ -854,6 +856,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
+    // Paths worlds: a stage that just ended is recorded once its last year has settled.
+    if (world.paths && next.phase !== "ended" && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     if (world.demo && next.phase !== "ended") {
       openDemoYear(demoCtx(next));
       if (world.demo.startingResources) syncEconomyStat(world, next);

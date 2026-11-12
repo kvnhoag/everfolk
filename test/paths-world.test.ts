@@ -88,3 +88,14 @@ test("military service builds the body it demands, and command builds the voice"
   for (const job of ["officer", "general"]) assert.ok(yearly(job).includes("oratory+1"), job);
   assert.ok(!yearly("soldier").includes("oratory+1"));
 });
+
+test("a district that needs none of a trade says so plainly", async () => {
+  const { fieldNeedsView } = await import("../src/paths/index.ts");
+  const life = structuredClone(engine.start("no-demand")) as LifeState;
+  life.paths!.district = "delta-village";
+  const reason = () => fieldNeedsView(world, life).find(need => need.field === "sculpture")!.reason;
+  life.paths!.people = { ...life.paths!.people, sculpture: [0, 0, 0, 0] };
+  assert.equal(reason(), "No sculptors work in a Delta village, and none are needed.");
+  life.paths!.people = { ...life.paths!.people, sculpture: [0, 1, 0, 0] };
+  assert.equal(reason(), "1 sculptor works in a Delta village, though the district has no regular need of one.");
+});

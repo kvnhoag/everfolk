@@ -67360,8 +67360,8 @@
     },
     {
       "id": "holdings-gift-of-tools-ceramics",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a potter's turning tool, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a potter's turning tool, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67387,15 +67387,15 @@
           "type": "affinity",
           "field": "ceramics",
           "delta": 5,
-          "source": "a gift of a potter's turning tool"
+          "source": "working with a potter's turning tool"
         }
       ],
       "choices": []
     },
     {
       "id": "holdings-gift-of-tools-clothing",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a weaver's shuttle, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a weaver's shuttle, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67421,15 +67421,15 @@
           "type": "affinity",
           "field": "clothing",
           "delta": 5,
-          "source": "a gift of a weaver's shuttle"
+          "source": "working with a weaver's shuttle"
         }
       ],
       "choices": []
     },
     {
       "id": "holdings-gift-of-tools-sculpture",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a carver's chisel, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a carver's chisel, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67455,7 +67455,7 @@
           "type": "affinity",
           "field": "sculpture",
           "delta": 5,
-          "source": "a gift of a carver's chisel"
+          "source": "working with a carver's chisel"
         }
       ],
       "choices": []
