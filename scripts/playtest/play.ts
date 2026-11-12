@@ -8,6 +8,7 @@
  *   node scripts/playtest/play.ts <save.json> act <activity-id>     take an activity this year
  *   node scripts/playtest/play.ts <save.json> advance [years]       live on (stops at decisions and endings)
  *   node scripts/playtest/play.ts <save.json> sell-grain <n>        sell grain to the merchant
+ *   node scripts/playtest/play.ts <save.json> plan <flax-plots>     how many plots to sow with flax (the rest grain)
  *   node scripts/playtest/play.ts <save.json> journal [n]           the last n journal lines (default 30)
  *
  * The save holds only the seed and commands; every step replays exactly.
@@ -64,10 +65,11 @@ function look(life: LifeState): void {
     for (const choice of engine.getChoices(life)) console.log(`  choose ${choice.id}  →  ${choice.text}`);
     return;
   }
-  const open = engine.getActivities(life).filter(activity => activity.available);
-  console.log(`── This year you can (${open.length}) ── or: advance`);
-  for (const activity of open.slice(0, 40)) console.log(`  act ${activity.id}  →  ${activity.text}`);
-  if (open.length > 40) console.log(`  … ${open.length - 40} more`);
+  // Skill-tree work first (it is what progresses a path), then everything else.
+  const open = engine.getActivities(life).filter(activity => activity.available)
+    .sort((a, b) => Number(!a.id.startsWith("cap-work-")) - Number(!b.id.startsWith("cap-work-")));
+  console.log(`── This year you can (${open.length}) ── or: advance${life.demo ? `; plan <flax-plots> (now ${life.demo.household.flaxPlots} of ${life.demo.household.plots})` : ""}`);
+  for (const activity of open) console.log(`  act ${activity.id}  →  ${activity.text}`);
 }
 
 function advance(life: LifeState, years: number): LifeState {
@@ -93,6 +95,7 @@ switch (command) {
   case "choose": life = engine.choose(load(), args[0]); break;
   case "act": life = engine.act(load(), args[0]); break;
   case "advance": life = advance(load(), Number(args[0] ?? 1)); break;
+  case "plan": life = engine.demo(load(), { type: "plan", flaxPlots: Number(args[0]) }); break;
   case "sell-grain": life = engine.demo(load(), { type: "trade", item: "grain", side: "sell", quantity: Number(args[0]), counterparty: "merchant" }); break;
   case "journal": {
     life = load();
