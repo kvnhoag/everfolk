@@ -30,10 +30,13 @@ export interface VocationHolding { item: string; quality: number; quantity: numb
 
 /** Materials use supplier quotes; products share the finite merchant budget and demand. */
 export function getVocationHoldings(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): VocationHolding[] {
-  if (!world.vocations || !state.vocations) return [];
+  // Retained official packs replay with their original wealth accounting.
+  if (!world.vocations || !state.vocations || world.id === "alexandria" &&
+    ["alexandria-lives-1", "alexandria-lives-2", "alexandria-lives-3"].includes(world.version)) return [];
   const def = world.vocations;
   const ledger = state.vocations;
   const holdings: VocationHolding[] = [];
+  const sharedTextiles = Boolean(world.demo);
   const countedFromLots: Record<string, number> = {};
   const add = (item: string, quality: number, quantity: number) => {
     const material = Boolean(def.materials[item]);
@@ -41,12 +44,12 @@ export function getVocationHoldings(world: WorldPack, state: Partial<Pick<LifeSt
       unitValue: material ? def.materials[item].price : bid(world, item, quality), material });
   };
   for (const lot of ledger.lots ?? []) {
-    if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
+    if (lot.quantity <= 0 || sharedTextiles && (lot.item === "flax" || lot.item === "linen")) continue;
     countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
     add(lot.item, lot.quality, lot.quantity);
   }
   for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
-    if (quantity <= 0 || item === "flax" || item === "linen") continue;
+    if (quantity <= 0 || sharedTextiles && (item === "flax" || item === "linen")) continue;
     const remaining = quantity - (countedFromLots[item] ?? 0);
     if (remaining <= 0) continue;
     add(item, 1, remaining);

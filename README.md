@@ -80,7 +80,9 @@ Occupation cards explain yearly income before costs, harvest and storage mechani
 
 ## Development
 
-`pnpm test` runs the game tests. `pnpm check` also runs the English-only text check.
+The standalone [character creator](tools/character-creator/README.md) includes editable historical presets, layered NFT artwork, and five rarity previews. Run `node tools/character-creator/server.mjs` to open it locally on port 4173, or visit `/collection.html` on that server to browse the collection.
+
+`pnpm test` runs both the game tests and the character creator tests. `pnpm check` also runs the English-only text check.
 
 ```sh
 pnpm check

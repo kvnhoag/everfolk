@@ -149,19 +149,21 @@ test("Issue #14: Non-shared vocation materials and finished products are include
     { type: "advance" }, { type: "choose", choice: "classical-alexander-keep-work" }
   ];
 
-  const engine = createEngine(lives2);
+  // Use a new world identity: retained lives-2 keeps its earlier replay contract.
+  const world = { ...lives2, id: "inventory-wealth-fixture", version: "1" };
+  const engine = createEngine(world);
   let life = engine.replay("audit-crafted-wealth", commands);
-  const netWorthBeforeMake = getNetWorth(lives2, life);
+  const netWorthBeforeMake = getNetWorth(world, life);
   assert.equal(life.economy.cash, 76);
   assert.equal(netWorthBeforeMake, 1919); // 76 cash + 1827 demo resources + 16 vocation materials (4 clay @ 2, 4 fuel @ 2)
 
   life = engine.act(life, "v-make-vessel");
-  const netWorthAfterMake = getNetWorth(lives2, life);
+  const netWorthAfterMake = getNetWorth(world, life);
   assert.equal(life.economy.cash, 72);
   assert.equal(netWorthAfterMake, 1925); // 72 cash + 1827 demo + 10 materials + 16 vessel (funded bid) = 1925
 
   life = engine.act(life, "v-sell-vessel");
-  const netWorthAfterSell = getNetWorth(lives2, life);
+  const netWorthAfterSell = getNetWorth(world, life);
   assert.equal(life.economy.cash, 88);
   assert.equal(netWorthAfterSell, 1925); // Selling converts 16dr vessel to 16dr cash, preserving net worth exactly
 });
