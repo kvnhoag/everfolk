@@ -1,5 +1,6 @@
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
+import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -173,6 +174,12 @@ export interface LifeEvent extends EvidenceMetadata {
   mode?: "automatic";
   effects?: Effect[];
   choices: Choice[];
+  /** Staged worlds: the life stages in which this event can happen. */
+  stages?: string[];
+  /** Staged worlds: who would really decide. Defaults to `personal`. */
+  scope?: DecisionScope;
+  /** Staged worlds: how others resolve the event when the player may not decide it. */
+  dependent?: DependentResolution;
 }
 
 export interface Ending extends EvidenceMetadata {
@@ -596,6 +603,8 @@ export interface WorldPack {
   demo?: DemoDefinition;
   vocations?: VocationDefinition;
   capabilities?: CapabilityDefinition;
+  /** Opt-in life stages: event time frames and who decides. */
+  lifeStages?: LifeStagesDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;

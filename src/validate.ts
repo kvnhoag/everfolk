@@ -2,6 +2,8 @@ import type { CapabilityDefinition } from "./capabilities/types.ts";
 import { validateCapabilities } from "./capabilities/validate.ts";
 import type { VocationDefinition } from "./vocations/types.ts";
 import { validateVocations } from "./vocations/validate.ts";
+import { validateLifeStagesDefinition, validateStagedEvent } from "./life-stages/validate.ts";
+import type { LifeStageValidationTools } from "./life-stages/validate.ts";
 import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
 
@@ -128,7 +130,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages"], worldFields);
   let demoGrainGain = false;
   const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
@@ -1166,8 +1168,11 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     return (data.type === "all" || data.type === "any") && Array.isArray(data.conditions) && data.conditions.some(hasDemoCondition);
   };
   const exclusiveGroupAges = new Map<string, number>();
+  const stageTools: LifeStageValidationTools = { fail, object, array, string, id, integer,
+    condition: (value, path) => condition(value, path), effects: (value, path) => effects(value, path) };
+  const stageRules = Object.hasOwn(world, "lifeStages") ? validateLifeStagesDefinition(world.lifeStages, maxAge, stageTools) : undefined;
   const eventDefinition = (entry: unknown, path: string): void => {
-    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence"], ["id", "title", "text", "trigger", "choices"]);
+    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence", "stages", "scope", "dependent"], ["id", "title", "text", "trigger", "choices"]);
     string(event.title, `${path}.title`, 300);
     string(event.text, `${path}.text`);
     evidence(event, path);
@@ -1224,6 +1229,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       aggregate(outcomeWeights, `${choicePath}.outcomes`);
       opportunityDefinition(choice, choicePath, outcomes);
     });
+    const interrupt = event.id === health?.careDecision ? "medical" as const
+      : moneylender && Object.values(moneylender.events as DataObject).includes(event.id) ? "collection" as const : undefined;
+    validateStagedEvent(event, path, stageRules, { interrupt }, stageTools);
   };
   events.forEach((entry, i) => eventDefinition(entry, `world.events[${i}]`));
   if (Object.hasOwn(world, "influences")) {

@@ -33,6 +33,7 @@ import { executeTrade } from "./demo/market.ts";
 import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
+import { decidedByOthers, inTimeFrame } from "./life-stages/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -369,7 +370,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
     if (event.exclusiveGroup && exclusiveGroups.get(event.exclusiveGroup)!.some(member => (state.eventCounts[member.id] ?? 0) > 0)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
-    if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
+    if (!inTimeFrame(world, event, state.age)) return false;
+    // In staged worlds a decision outside the player's scope is resolved by others, or does not happen.
+    const byOthers = decidedByOthers(world, event, state.age);
+    if (byOthers && !event.dependent) return false;
+    if (!matches(event.when, state) || (event.mode !== "automatic" && !byOthers && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
       case "year": return state.year >= event.trigger.at;
@@ -381,7 +386,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   }
 
   /** A fired catalog event's entry carries its source, so impact is countable from the journal. */
-  function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state)): void {
+  function recordEvent(state: LifeState, event: LifeEvent, source = influences.activatedSource(event.id, state), text = event.text): void {
     // A fresh-year decision is consumed when it fires, so it cannot reopen in the same year.
     const demoGate = event.when?.type === "all"
       ? event.when.conditions.find(item => item.type === "demo" && item.condition.kind === "year")
@@ -393,7 +398,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
     if (world.economy?.market) syncEconomyStat(world, state);
-    journal(state, "event", event.id, `${event.title}: ${event.text}`, source ? { source } : undefined);
+    journal(state, "event", event.id, `${event.title}: ${text}`, source ? { source } : undefined);
   }
 
   function scheduledAlternative(first: LifeEvent, state: LifeState): LifeEvent {
@@ -417,7 +422,26 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
   }
 
+  /** Staged worlds: an event the player may not decide now resolves like an automatic one. */
+  function automaticNow(event: LifeEvent, state: LifeState): boolean {
+    return event.mode === "automatic" || decidedByOthers(world, event, state.age);
+  }
+
+  /** Others decide by their written rule; the player lives with the result, without a choice. */
+  function dependentEvent(state: LifeState, event: LifeEvent, source?: InfluenceSource): void {
+    const dependent = event.dependent!;
+    recordEvent(state, event, source, dependent.text);
+    // Conditional responses are the household's rules; unconditional ones apply when no rule matches.
+    const ruled = dependent.responses.filter(item => item.when && matches(item.when, state));
+    const pool = ruled.length ? ruled : dependent.responses.filter(item => !item.when);
+    const response = pick(pool, item => item.weight ?? 1, state);
+    journal(state, "outcome", response.id, response.text);
+    recorded(state, state.journal.length - 1, () => apply(state, response.effects, `${event.title} — ${response.text}`, { sourceId: event.id, outcomeId: response.id }));
+    checkEndings(state);
+  }
+
   function automaticEvent(state: LifeState, event: LifeEvent, source?: InfluenceSource): void {
+    if (event.mode !== "automatic" && decidedByOthers(world, event, state.age)) { dependentEvent(state, event, source); return; }
     recordEvent(state, event, source);
     recorded(state, state.journal.length - 1, () => apply(state, event.effects ?? []));
     checkEndings(state);
@@ -431,7 +455,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       else delete state.queuedInfluences;
       const event = influences.entry(queued.entry).event!;
       if (!matches(event.when, state)) continue;
-      if (event.mode === "automatic") automaticEvent(state, event, queued.source);
+      if (automaticNow(event, state)) { if (event.mode === "automatic" || event.dependent) automaticEvent(state, event, queued.source); }
       else if (choicesFor(event, state).length) { offer(state, event, false, queued.source); return true; }
     }
     return false;
@@ -440,8 +464,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function offerMedicalDecision(state: LifeState): boolean {
     if (state.phase === "ended" || !world.health || !state.health?.needsCareDecision || !state.health.conditions.length) return false;
     state.health.needsCareDecision = false;
+    const care = eventById.get(world.health.careDecision)!;
+    // A child's care is arranged by the household; the life continues without a choice.
+    if (decidedByOthers(world, care, state.age) && care.dependent) { automaticEvent(state, care); return false; }
     const previousChoiceAge = state.nextChoiceAge;
-    offer(state, eventById.get(world.health.careDecision)!);
+    offer(state, care);
     if (previousChoiceAge === undefined) delete state.nextChoiceAge;
     else state.nextChoiceAge = previousChoiceAge;
     return true;
@@ -469,7 +496,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (state.age - entry.age < policy.cooldownYears) return false;
       break;
     }
-    const candidates = rareEvents.filter(event => eligible(event, state));
+    const candidates = rareEvents.filter(event => eligible(event, state) && !automaticNow(event, state));
     if (candidates.length === 0) return false;
     if (policy.annualChance < 1) {
       const draw = nextRandom(state.rngState);
@@ -513,7 +540,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function resolvePacedEvents(state: LifeState, allowRandom: boolean): void {
     const drainAutomatic = (): boolean => {
       while (state.phase !== "ended") {
-        const event = allEvents.find(candidate => candidate.mode === "automatic" &&
+        const event = allEvents.find(candidate => automaticNow(candidate, state) &&
           candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) return false;
         automaticEvent(state, event);
@@ -525,7 +552,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Resolve these before offering a decision so the whole year is available to UI.
     if (drainAutomatic()) return;
     if (allowRandom && state.age > 0) {
-      const background = allEvents.filter(event => event.mode === "automatic" &&
+      const background = allEvents.filter(event => automaticNow(event, state) &&
         event.trigger.type === "random" && eligible(event, state));
       if (background.length > 0) {
         automaticEvent(state, pickRandomEvent(background, state));
@@ -536,17 +563,17 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (offerLoanCollection(state)) return;
     const decisionDue = state.age >= (state.nextChoiceAge ?? 0);
     if (world.eventPacing?.rareEvents) {
-      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => !automaticNow(event, state) && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
       if (allowRandom && state.age > 0 && offerRareEncounter(state)) return;
     } else if (peoplePolicy) {
       // The new lane cannot promote a personal encounter ahead of dated history.
-      const anchor = allEvents.find(event => event.mode !== "automatic" && event.trigger.type === "year" && eligible(event, state));
+      const anchor = allEvents.find(event => !automaticNow(event, state) && event.trigger.type === "year" && eligible(event, state));
       if (anchor) { offer(state, anchor); return; }
     }
     // Fixed-year decisions are hard anchors. Personal age milestones wait for the
     // next decision slot; the initial household decision is the age-zero exception.
-    const scheduled = allEvents.find(event => event.mode !== "automatic" &&
+    const scheduled = allEvents.find(event => !automaticNow(event, state) &&
       event.trigger.type !== "random" && eligible(event, state) &&
       (event.trigger.type === "year" || decisionDue || (state.age === 0 && event.trigger.at === 0)));
     // Essential childhood milestones through sixteen keep their place even if
@@ -555,7 +582,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (allowRandom && decisionDue && offerPeopleEncounter(state)) return;
     if (scheduled) { offer(state, scheduledAlternative(scheduled, state)); return; }
     if (allowRandom && state.age > 0 && decisionDue) {
-      const decisions = allEvents.filter(event => event.mode !== "automatic" && event.rarity !== "rare" &&
+      const decisions = allEvents.filter(event => !automaticNow(event, state) && event.rarity !== "rare" &&
         event.trigger.type === "random" && !peopleEventIds.has(event.id) && eligible(event, state));
       if (decisions.length > 0) {
         offer(state, pickRandomEvent(decisions, state));
@@ -574,14 +601,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       // A due contract drains historical/automatic entries before interrupting
       // personal decisions, including worlds without separate paced lanes.
       while (state.phase !== "ended") {
-        const event = allEvents.find(candidate => candidate.mode === "automatic" && candidate.trigger.type !== "random" && eligible(candidate, state));
+        const event = allEvents.find(candidate => automaticNow(candidate, state) && candidate.trigger.type !== "random" && eligible(candidate, state));
         if (!event) break;
         automaticEvent(state, event);
         if (offerMedicalDecision(state)) return;
       }
       if (state.phase === "ended") return;
       if (randomAvailable && state.age > 0) {
-        const background = allEvents.filter(event => event.mode === "automatic" && event.trigger.type === "random" && eligible(event, state));
+        const background = allEvents.filter(event => automaticNow(event, state) && event.trigger.type === "random" && eligible(event, state));
         if (background.length) {
           randomAvailable = false;
           automaticEvent(state, pick(background, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state));
@@ -596,7 +623,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       const scheduled = allEvents.find(event => event.trigger.type !== "random" && eligible(event, state));
       if (scheduled) {
         randomAvailable = false;
-        if (scheduled.mode === "automatic") { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
+        if (automaticNow(scheduled, state)) { automaticEvent(state, scheduled); if (offerMedicalDecision(state)) return; continue; }
         offer(state, scheduledAlternative(scheduled, state));
         return;
       }
@@ -605,7 +632,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         const random = allEvents.filter(event => event.trigger.type === "random" && event.rarity !== "rare" && eligible(event, state));
         if (random.length > 0) {
           const event = pick(random, candidate => candidate.trigger.type === "random" ? candidate.trigger.weight : 0, state);
-          if (event.mode === "automatic") { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
+          if (automaticNow(event, state)) { automaticEvent(state, event); if (offerMedicalDecision(state)) return; continue; }
           offer(state, event);
           return;
         }
