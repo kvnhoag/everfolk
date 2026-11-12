@@ -143,6 +143,10 @@ export function validatePathsCondition(rule: DataObject, path: string, paths: un
       object(rule, path, ["type"]);
       requirePaths(paths, path, tools);
       return true;
+    case "introduced":
+      object(rule, path, ["type", "field"]);
+      requirePaths(paths, path, tools); field(rule, path, tools);
+      return true;
     default:
       return false;
   }
@@ -157,6 +161,18 @@ export function validatePathsEffect(effect: DataObject, path: string, paths: unk
       tools.integer(effect.delta, `${path}.delta`, -100, 100);
       tools.string(effect.source, `${path}.source`, 200);
       return true;
+    case "meet-practitioner":
+      tools.object(effect, path, ["type", "field", "band"]);
+      requirePaths(paths, path, tools); field(effect, path, tools);
+      if (!["child", "young", "adult", "elder"].includes(effect.band as string)) tools.fail(`${path}.band`, "expected child, young, adult or elder");
+      return true;
+    case "move-district": {
+      tools.object(effect, path, ["type", "district", "reason"]);
+      const districts = (requirePaths(paths, path, tools).districts ?? {}) as DataObject;
+      if (effect.district !== "home" && !Object.hasOwn(districts, effect.district as string)) tools.fail(`${path}.district`, `unknown district '${String(effect.district)}'`);
+      tools.string(effect.reason, `${path}.reason`, 200);
+      return true;
+    }
     default:
       return false;
   }

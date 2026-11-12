@@ -23,6 +23,7 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
     case "field-people": return state.paths !== undefined && compare(state.paths.people[condition.field].reduce((sum, count) => sum + count, 0), condition.op, condition.value);
     case "district": return state.paths?.district === condition.district;
     case "away-from-home": return state.paths !== undefined && state.paths.district !== state.paths.home;
+    case "introduced": return state.paths?.introductions.includes(condition.field) === true;
     case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
       state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);

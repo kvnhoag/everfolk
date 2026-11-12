@@ -25,6 +25,9 @@ export function livesWithPaths(): WorldPack {
       village: { title: "a Delta village", origins: world.origins.map(origin => origin.id), profile: profile({
         research: { demand: 4, people: [1, 4, 0, 0] }, soldiering: { demand: 6, people: [1, 6, 0, 0] }, trade: { demand: 4, people: [1, 4, 0, 0] },
       }) },
+      city: { title: "the city quarter", origins: [], profile: profile({
+        ceramics: { demand: 6, people: [3, 6, 2, 1] }, research: { demand: 2, people: [1, 1, 0, 0] }, soldiering: { demand: 3, people: [1, 3, 1, 0] },
+      }) },
     },
     pay: { minBps: 7000, maxBps: 16000, scarceBps: 12000, crowdedBps: 8500 },
   };

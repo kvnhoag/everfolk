@@ -14,6 +14,7 @@ export type Condition =
   | { type: "field-people"; field: FieldId; op: Comparison; value: number }
   | { type: "district"; district: string }
   | { type: "away-from-home" }
+  | { type: "introduced"; field: FieldId }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -43,6 +44,8 @@ export type Effect =
   | { type: "capability"; node: string }
   | { type: "vocation"; action: string }
   | { type: "affinity"; field: FieldId; delta: number; source: string }
+  | { type: "meet-practitioner"; field: FieldId; band: "child" | "young" | "adult" | "elder" }
+  | { type: "move-district"; district: string; reason: string }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }

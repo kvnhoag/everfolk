@@ -34,7 +34,7 @@ import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { decidedByOthers, inTimeFrame } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, changeAffinity, eventFieldWeight, fadeAffinity, initialPaths, notePractice, practiceBonus } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, changeAffinity, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -297,6 +297,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           if (text) journal(state, "event", affinityJournalId(effect.field), text);
           break;
         }
+        case "meet-practitioner": {
+          const meeting = meetPractitioner(world, state, effect.field, effect.band);
+          journal(state, "event", `paths-meet-${effect.field}`, meeting.text);
+          apply(state, meeting.effects);
+          break;
+        }
+        case "move-district":
+          journal(state, "event", "paths-move", moveDistrict(world, state, effect.district, effect.reason));
+          break;
         case "vocation":
           journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action));
           if (world.demo?.startingResources) syncEconomyStat(world, state);
