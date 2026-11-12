@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
+import type { OnlinePlay } from "../types/online-play.ts";
 import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife } from "../mutations/lives.ts";
 import { engineForLife, loadAnyLife } from "../lib/world-session.ts";
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
@@ -11,11 +12,12 @@ import { readYearlyFocus } from "../queries/yearly-focus.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import { canRunAutomaticDecision, canRunLifeClock, canUseLifeCommands, initialPauseState, updatePauseState } from "../models/pause-state.ts";
 import type { PauseState } from "../models/pause-state.ts";
-import { borrowAndAct } from "../models/loan-access.ts";
+import { activityLoanOffer, borrowAndAct } from "../models/loan-access.ts";
 import type { MarketOrderRequest } from "../types/market.ts";
 import type { DemoCommand } from "../../src/demo/types.ts";
 import "../demo/start.ts";
 import { releaseOrder, sendDemoCommand } from "../demo/screen.ts";
+import { isUnavailable } from "../../src/demo/availability.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
 export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
@@ -69,20 +71,65 @@ export interface RankedPlay {
   skipResumeScreen?: boolean;
 }
 
-export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay } = {}) {
+/** Lock synchronously, before a second click or a clock callback can submit again. */
+export function runOnlineAction(
+  online: OnlinePlay,
+  pending: { current: boolean },
+  action: (play: OnlinePlay) => Promise<LifeState>,
+  adopt: (life: LifeState, notice: string) => void,
+  onPending: (pending: boolean) => void,
+): Promise<void> | null {
+  if (pending.current) return null;
+  pending.current = true;
+  onPending(true);
+  return (async () => {
+    try {
+      const next = await action(online);
+      adopt(next, "");
+      online.onSynced?.(next);
+    } catch (error) {
+      // A request may have reached the server before its response was lost.
+      adopt(online.current(), message(error));
+    } finally {
+      pending.current = false;
+      onPending(false);
+    }
+  })();
+}
+
+/** Query focus availability locally; only the server may apply either command. */
+export async function advanceOnlineYearWithFocus(online: OnlinePlay, life: LifeState, focusId: YearlyFocusId): Promise<LifeState> {
+  if (life.phase !== "ready") return life;
+  const engine = engineForLife(life);
+  const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world));
+  let next = life;
+  if (activity && !isUnavailable(engine.world.demo, "activity", activity.id) && life.character?.lastActivityAge !== life.age &&
+    engine.getActivities(life).some(candidate => candidate.id === activity.id && candidate.available)) {
+    next = await online.dispatch({ type: "act", activity: activity.id });
+  }
+  // A focused activity may end the life or open a decision. NPC turns required
+  // before an advance are resolved by dispatch, never by a local engine.advance.
+  return next.phase === "ready" ? online.dispatch({ type: "advance" }) : next;
+}
+
+export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked, online }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay; online?: OnlinePlay } = {}) {
   const [syncing, setSyncing] = useState(false);
+  const pendingRef = useRef(false);
   const isOverlayOpen = overlayFromApp || syncing;
   const rankedRef = useRef(ranked);
   rankedRef.current = ranked;
-  const [initial] = useState(() => ranked
-    ? { life: ranked.initial, notice: "", hasBegun: true, hasRevealedStats: true, unreadableSave: null }
+  const onlineRef = useRef(online);
+  onlineRef.current = online;
+  const externalOnlineLifeRef = useRef(online?.initial);
+  const [initial] = useState(() => online || ranked
+    ? { life: (online ?? ranked)!.initial, notice: "", hasBegun: true, hasRevealedStats: true, unreadableSave: null }
     : initialSession(startFresh, startFreshFrom));
   const [unreadableSave, setUnreadableSave] = useState<string | null>(() => initial.unreadableSave ?? null);
   const unreadableSaveRef = useRef(unreadableSave);
   unreadableSaveRef.current = unreadableSave;
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
-  const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
+  const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh || online ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
   const focusId = focusSelection.key === yearlyFocusStorageKey(life) ? focusSelection.id : "everyday";
   const focusIdRef = useRef(focusId);
   focusIdRef.current = focusId;
@@ -102,7 +149,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const autoAllowedRef = useRef(false);
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [clockElapsedMs, setClockElapsedMs] = useState(0);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked ? "saved" : "saving");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
   const yearDurationMs = YEAR_DURATION_MS / speed;
@@ -120,6 +167,40 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
     setPauseState(next);
   }, []);
+
+  const adoptOnlineState = useCallback((next: LifeState, notice = "") => {
+    if (next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
+      setFocusSelection({ key: yearlyFocusStorageKey(next), id: "everyday" });
+    }
+    lifeRef.current = next;
+    setLife(next);
+    hasBegunRef.current = true;
+    setHasBegun(true);
+    setHasRevealedStats(true);
+    setSaveStatus("saved");
+    setNotice(notice);
+    if (next.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: true, phase: next.phase }));
+  }, [commitPauseState]);
+
+  const submitOnline = useCallback((action: (play: OnlinePlay) => Promise<LifeState>) => {
+    const play = onlineRef.current;
+    if (!play) return false;
+    void runOnlineAction(play, pendingRef, action, adoptOnlineState, pending => {
+      if (pending) {
+        clockAllowedRef.current = false;
+        autoAllowedRef.current = false;
+        setSaveStatus("saving");
+      }
+      setSyncing(pending);
+    });
+    return true;
+  }, [adoptOnlineState]);
+
+  useEffect(() => {
+    if (!online || pendingRef.current || online.initial === externalOnlineLifeRef.current) return;
+    externalOnlineLifeRef.current = online.initial;
+    adoptOnlineState(online.current());
+  }, [online?.initial, syncing, adoptOnlineState]);
 
   const setFocus = useCallback((id: YearlyFocusId) => {
     if (lifeRef.current !== life || life.phase === "ended") return;
@@ -188,7 +269,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const choose = useCallback((choiceId: string) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "choose", choice: choiceId }))) return;
     try {
       const current = life;
       const next = engineForLife(current).choose(current, choiceId);
@@ -197,10 +279,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life]);
+  }, [commit, hasBegun, life, submitOnline]);
 
   const act = useCallback((activityId: string) => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "act", activity: activityId }))) return;
     try {
       const current = life;
       const next = engineForLife(current).act(current, activityId);
@@ -209,52 +292,77 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life]);
+  }, [commit, hasBegun, life, submitOnline]);
 
   const actWithLoan = useCallback((activityId: string) => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(async play => {
+      const engine = engineForLife(life);
+      const activity = engine.world.character?.activities.find(candidate => candidate.id === activityId);
+      const offer = activity && activityLoanOffer(engine.world, life, activity);
+      if (!offer) throw new Error("This activity cannot be funded by a moneylender loan right now. No loan was accepted.");
+      const funded = await play.dispatch({ type: "act", activity: offer.borrowActivityId });
+      if (!engineForLife(funded).getActivities(funded).some(candidate => candidate.id === activityId && candidate.available)) {
+        throw new Error("The loan was accepted, but this activity is no longer available. Review your life before continuing.");
+      }
+      return play.dispatch({ type: "act", activity: activityId });
+    })) return;
     try {
       // The player has confirmed the contract. Commit both ordinary commands
       // together, so a changed opportunity can never leave an unwanted loan.
       commit(borrowAndAct(engineForLife(life), life, activityId));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, life]);
+  }, [commit, life, submitOnline]);
 
   const orderMarket = useCallback((order: MarketOrderRequest) => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "market-order", ...order }))) return;
     try {
       commit(engineForLife(life).orderMarket(life, order));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, life]);
+  }, [commit, life, submitOnline]);
 
   const cancelMarketOrder = useCallback((orderId: number) => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "market-cancel", orderId }))) return;
     try {
       commit(engineForLife(life).cancelMarketOrder(life, orderId));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, life]);
+  }, [commit, life, submitOnline]);
 
   const advance = useCallback(() => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focusIdRef.current))) return;
     try {
       commit(advanceYearWithFocus(engineForLife(life), life, focusIdRef.current));
       setNotice("");
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life]);
+  }, [commit, hasBegun, life, submitOnline]);
 
   const nextTurningPoint = useCallback(() => {
-    if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life || life.phase !== "ready") return;
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life || life.phase !== "ready") return;
+    if (submitOnline(async play => {
+      let next = life;
+      const maxAge = engineForLife(life).world.maxAge;
+      for (let years = 0; years <= maxAge; years++) {
+        if (next.phase !== "ready") return next;
+        next = await advanceOnlineYearWithFocus(play, next, focusIdRef.current);
+        const loan = next.economy?.loan;
+        if (loan && loan.balance > 0 && next.age >= loan.dueAge - 1) return next;
+      }
+      throw new Error("This life could not reach its next decision.");
+    })) return;
     try {
       const next = advanceToDecisionWithFocus(engineForLife(life), life, focusIdRef.current);
       commit(next);
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, hasBegun, life]);
+  }, [commit, hasBegun, life, submitOnline]);
 
   const revealStats = useCallback(() => {
     if (lifeRef.current !== life) return;
@@ -262,12 +370,14 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [life]);
 
   const chooseAvatar = useCallback((variant: number) => {
-    if (hasBegunRef.current || lifeRef.current !== life) return;
+    if (pendingRef.current || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "avatar", variant }))) return;
+    if (hasBegunRef.current) return;
     try {
       commit(engineForLife(life).chooseAvatar(life, variant));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, life]);
+  }, [commit, life, submitOnline]);
 
   const beginLife = useCallback(() => {
     if (hasBegunRef.current || !hasRevealedStats || lifeRef.current !== life) return;
@@ -278,7 +388,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [hasRevealedStats, life, setPlaying]);
 
   const restart = useCallback(() => {
-    if (rankedRef.current) return; // A ranked life ends by minting or closing it, never by rerolling.
+    if (onlineRef.current || rankedRef.current) return; // Authoritative lives are replaced only by their container.
     unreadableSaveRef.current = null;
     setUnreadableSave(null);
     setPlaying(false);
@@ -291,6 +401,10 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [commit, setPlaying, setAutoDecisions]);
 
   const importLife = useCallback((json: string) => {
+    if (onlineRef.current) {
+      setNotice("Saved lives cannot be imported into an active online life.");
+      return false;
+    }
     if (rankedRef.current) {
       setNotice("Free-play saves cannot be imported into an active ranked session.");
       return false;
@@ -320,17 +434,19 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [commit, commitPauseState, setAutoDecisions]);
 
   useEffect(() => {
+    if (onlineRef.current) return;
     try { persistYearlyFocus(window.localStorage, life, focusId); }
     catch { /* A blocked preference store does not prevent playing this life. */ }
   }, [focusId, life.worldFingerprint, life.seed]);
 
   useEffect(() => {
+    if (onlineRef.current) return;
     try { setArchivedLives(readArchivedLives(window.localStorage)); }
     catch (error) { setNotice(message(error)); }
   }, []);
 
   useEffect(() => {
-    if (rankedRef.current) return; // The ranked session keeps its own save; never overwrite the free-play slot.
+    if (onlineRef.current || rankedRef.current) return; // Authoritative sessions keep their own saves.
     if (unreadableSaveRef.current !== null) return; // Includes malformed empty records.
     try {
       persistLife(window.localStorage, life);
@@ -343,6 +459,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [hasBegun, life, unreadableSave]);
 
   useEffect(() => {
+    if (onlineRef.current) return;
     if (unreadableSaveRef.current !== null) return;
     try { persistBirthStatsReveal(window.localStorage, life, hasRevealedStats); }
     catch (error) {
@@ -353,7 +470,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   useEffect(() => {
     // Ranked lives are kept on chain and by their session; the past-lives shelf is for free play.
-    if (life.phase !== "ended" || rankedRef.current) return;
+    if (life.phase !== "ended" || onlineRef.current || rankedRef.current) return;
     try { setArchivedLives(archiveLife(window.localStorage, life)); }
     catch (error) { setNotice(message(error)); }
   }, [life]);
@@ -401,17 +518,20 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const orderSlot = useRef(false);
   const runDemo = useCallback((command: DemoCommand): string | null => {
+    if (pendingRef.current) return "That action is already being sent.";
     if (!canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return "Wait until this life can take a command.";
+    if (submitOnline(play => play.dispatch(command))) return null;
     const result = sendDemoCommand(engineForLife(life), life, command, orderSlot);
     if (!result.sent) return result.reason;
     commit(result.life);
     setNotice("");
     return null;
-  }, [commit, life]);
+  }, [commit, life, submitOnline]);
 
   useEffect(() => { releaseOrder(orderSlot); }, [life]);
 
   const resetUnreadableSave = useCallback(() => {
+    if (onlineRef.current) return;
     unreadableSaveRef.current = null;
     setUnreadableSave(null);
   }, []);
@@ -452,5 +572,6 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     notice,
     setNotice,
     saveStatus,
+    isSyncing: syncing,
   };
 }

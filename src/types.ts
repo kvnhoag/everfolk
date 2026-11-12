@@ -1,3 +1,4 @@
+import type {NpcCommand,NpcRuntimeState} from "./npc/types.ts";
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
@@ -586,6 +587,8 @@ export interface InfluenceEntry {
 export interface InfluenceRecord { entry: string; source: InfluenceSource; power: number }
 
 export interface WorldPack {
+  /** Opt-in authoritative companions; older packs never acquire NPC state. */
+  npcAgents?: {version:1};
   schemaVersion: 1;
   id: string;
   version: string;
@@ -633,7 +636,7 @@ export interface WorldPack {
 export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
 
 export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number }
-  | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand;
+  | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand | NpcCommand;
 
 export interface JournalEntry {
   type: "birth" | "year" | "event" | "choice" | "outcome" | "ending" | "activity" | "influence";
@@ -688,6 +691,7 @@ export interface LifeState {
   paths?: PathsState;
   /** Paths worlds only: one record per completed life stage. */
   stageRecords?: StageRecord[];
+  npcs?: NpcRuntimeState;
   journal: JournalEntry[];
   commands: Command[];
 }
@@ -717,6 +721,7 @@ export interface LifeEngine {
   influence(state: LifeState, command: InfluenceCommand): LifeState;
   /** Demo worlds only: trade, plan, agent assignment, delegation and agent decisions. */
   demo(state: LifeState, command: DemoCommand): LifeState;
+  npc(state: LifeState, command: NpcCommand): LifeState;
   replay(seed: string, commands: readonly Command[]): LifeState;
   save(state: LifeState): string;
   load(json: string): LifeState;

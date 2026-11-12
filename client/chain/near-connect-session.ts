@@ -1,4 +1,6 @@
 import type { NearConnector, NearWalletBase } from "@hot-labs/near-connect";
+import { sha256 } from "@noble/hashes/sha2.js";
+import { bytesToHex } from "@noble/hashes/utils.js";
 import type { Account as NearAccount, KeyPairString } from "near-api-js";
 import type { ChainConfig } from "./config.ts";
 import { contractErrorMessage, hasFinalStatus, readCallResult, transactionHash } from "./outcome.ts";
@@ -220,6 +222,23 @@ export async function createWalletSession(cfg: ChainConfig, deps: WalletSessionD
       if (!current) return;
       forgetPlayKey(store, current.accountId);
       await connector.disconnect(current.wallet);
+    },
+    async proveAccount(message) {
+      const current = connected;
+      if (!current) throw new Error("Connect a NEAR wallet first.");
+      const secret = loadPlayKey(store, current.accountId);
+      if (!secret) throw new Error(PLAY_KEY_REMOVED);
+      try {
+        // Reuse the existing play key; ownership requests never create keys or open the wallet.
+        const key = near.KeyPair.fromString(secret as KeyPairString);
+        const { signature } = key.sign(sha256(new TextEncoder().encode(message)));
+        if (signature.length !== 64) throw new Error("Invalid signature.");
+        assertCurrent(current);
+        return { accountId: current.accountId, publicKey: key.getPublicKey().toString(), signature: bytesToHex(signature) };
+      } catch {
+        assertCurrent(current);
+        throw new Error("Your play key could not sign this request; sign in again.");
+      }
     },
     async call(call: ContractCall) {
       const current = connected;

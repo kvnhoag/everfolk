@@ -1,3 +1,5 @@
+import { sha256 } from "@noble/hashes/sha2.js";
+import { bytesToHex } from "@noble/hashes/utils.js";
 import type { ChainConfig } from "./config.ts";
 import { requestFunding, waitForFunds, type FundingDeps } from "./email-funding.ts";
 import { contractErrorMessage, readCallResult, transactionHash } from "./outcome.ts";
@@ -167,6 +169,23 @@ export function createEmailSession(cfg: ChainConfig, bridge: EmailBridge, deps: 
       deps.cancelConfirmations?.();
       loaded = null;
       if (previous) await bridge.logout();
+    },
+    async proveAccount(message) {
+      const owner = current;
+      if (!owner) throw new Error("Sign in first.");
+      const { publicKeyFromHex } = await import("./privy-signer.ts");
+      assertCurrent(owner);
+      const digest = bytesToHex(sha256(new TextEncoder().encode(message)));
+      let raw: string;
+      try { raw = await bridge.signHash(`0x${digest}`); } catch {
+        assertCurrent(owner);
+        throw new Error("Your account could not sign this request. Please sign in again.");
+      }
+      // A proof begun before sign-out or a new email sign-in cannot escape after that session ends.
+      assertCurrent(owner);
+      const signature = raw.replace(/^0x/i, "").toLowerCase();
+      if (!/^[0-9a-f]{128}$/.test(signature)) throw new Error("Sign-in returned an unreadable signature.");
+      return { accountId: owner.accountId, publicKey: publicKeyFromHex(owner.accountId).toString(), signature };
     },
     async call(call) {
       const owner = current;

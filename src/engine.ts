@@ -39,6 +39,8 @@ import { deathEndingFor, decidedByOthers, inTimeFrame, lifeStageAt } from "./lif
 import { TIERS } from "./paths/types.ts";
 import type { FieldId, PathsState } from "./paths/types.ts";
 import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import type { NpcCommand, NpcSessionState } from "./npc/types.ts";
+import { applyNpcCommand, createNpcState, settlePeople } from "./npc/runtime.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -109,6 +111,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.stageRecords ? { stageRecords: structuredClone(state.stageRecords) } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
+    ...(state.npcs ? { npcs: structuredClone(state.npcs) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
       children: state.character.children.map(child => ({ ...child })),
@@ -782,6 +785,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     if (world.paths && applyStartingMaterials(world, state) && world.demo?.startingResources) syncEconomyStat(world, state);
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
+    if (world.npcAgents) {
+      const session = createNpcState(world, seed, state);
+      const { player: _p, commands: _c, ...runtime } = session;
+      state.npcs = runtime;
+    }
     checkEndings(state);
     resolveEvents(state, true);
     return freeze(state);
@@ -790,6 +798,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function advanceInto(next: LifeState): void {
     assertPlayable(next);
     if (next.phase === "choice") throw new Error("Resolve the pending choice before advancing time.");
+    if (next.npcs && next.npcs.lastResolvedAge !== next.age) {
+      throw new Error("Resolve the NPC turn before advancing the year.");
+    }
+    const previousSnapshot = next.npcs ? mutableSnapshot(next) : undefined;
     next.commands.push({ type: "advance" });
     if (world.health) {
       const healthResult = progressHealth(world, next, healthHooks(next));
@@ -875,6 +887,16 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     checkEndings(next);
     resolveEvents(next, true);
+    if (next.npcs && previousSnapshot && next.phase !== "ended") {
+      const session: NpcSessionState = {
+        ...next.npcs,
+        player: next,
+        commands: [],
+      };
+      settlePeople(session, previousSnapshot);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
     if (world.economy?.market) syncEconomyStat(world, next);
   }
 
@@ -1084,6 +1106,32 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return freeze(next);
   }
 
+  function npcInto(next: LifeState, command: NpcCommand): void {
+    assertPlayable(next);
+    if (!world.npcAgents && !next.npcs) throw new Error("This world has no NPC companion system.");
+    if (!next.npcs) {
+      const session = createNpcState(world, next.seed, next);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
+    const session: NpcSessionState = {
+      ...next.npcs,
+      player: next,
+      commands: [],
+    };
+    applyNpcCommand(world, session, command);
+    const { player: _p, commands: _c, ...runtime } = session;
+    next.npcs = runtime;
+    next.commands.push(command);
+  }
+
+  function npc(state: LifeState, command: NpcCommand): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    npcInto(next, command);
+    return freeze(next);
+  }
+
   function replay(seed: string, commands: readonly Command[]): LifeState {
     if (!Array.isArray(commands) || commands.length > MAX_COMMANDS) throw new Error("Invalid command history length.");
     // Reconstruct privately in one pass; only the final state escapes to callers.
@@ -1106,6 +1154,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         cancelMarketOrderInto(state, command.orderId);
       } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
       else if (DEMO_COMMAND_TYPES.has(command.type)) demoInto(state, command, ` at ${i}`);
+      else if (command.type === "npc-turn" || command.type === "npc-answer" || command.type === "npc-speech") npcInto(state, command);
       else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -1136,5 +1185,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
 }

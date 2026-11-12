@@ -1,6 +1,8 @@
 import type { Category } from "../../chain/ids.ts";
+import type { AccountProof } from "../../chain/npc-proof.ts";
 import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
 
+export type { AccountProof } from "../../chain/npc-proof.ts";
 export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, StageMintQuote, StageMintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 /**
@@ -87,5 +89,7 @@ export interface WalletSession {
   onTransaction?(listener: (hash: string, method: string) => void): () => void;
   signIn(): Promise<void>;
   signOut(): Promise<void>;
+  /** Signs SHA-256 of a server ownership challenge with the current game key, without exposing that key. */
+  proveAccount?(message: string): Promise<AccountProof>;
   call(call: ContractCall): Promise<unknown>;
 }
