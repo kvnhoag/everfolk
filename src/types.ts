@@ -1,6 +1,7 @@
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
+import type { FieldId, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -180,6 +181,8 @@ export interface LifeEvent extends EvidenceMetadata {
   scope?: DecisionScope;
   /** Staged worlds: how others resolve the event when the player may not decide it. */
   dependent?: DependentResolution;
+  /** Paths worlds: the fields of work this event belongs to. */
+  fields?: FieldId[];
 }
 
 export interface Ending extends EvidenceMetadata {
@@ -605,6 +608,8 @@ export interface WorldPack {
   capabilities?: CapabilityDefinition;
   /** Opt-in life stages: event time frames and who decides. */
   lifeStages?: LifeStagesDefinition;
+  /** Opt-in fields of work, districts and their people. Requires lifeStages. */
+  paths?: PathsDefinition;
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -665,6 +670,10 @@ export interface LifeState {
   demo?: DemoState;
   vocations?: VocationState;
   capabilities?: CapabilityState;
+  /** Paths worlds only. */
+  paths?: PathsState;
+  /** Paths worlds only: one record per completed life stage. */
+  stageRecords?: StageRecord[];
   journal: JournalEntry[];
   commands: Command[];
 }
