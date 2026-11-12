@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createEngine } from "../src/engine.ts";
 import { demoContext } from "../src/demo/state.ts";
 import { feedHousehold, harvest, spoilAndSpin } from "../src/demo/household.ts";
+import { orderValue } from "../src/demo/market-depth.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { DemoContext } from "../src/demo/types.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
@@ -61,8 +62,8 @@ test("a short store buys next year's seed together with the food", () => {
 
 test("food comes before seed when money is short", () => {
   const withRule = draft(on, life => { life.demo.household.grain = 0; life.economy!.cash = 0; });
-  const price = withRule.life.demo.town.prices.grain.sell;
-  withRule.life.economy!.cash = 240 * price; // exactly one adult ration
+  // Exactly one adult ration at the merchant's price (lives-4 prices the order as it fills).
+  withRule.life.economy!.cash = orderValue(on.demo!, withRule.life.demo, "grain", "buy", 240).total;
   feedHousehold(withRule.ctx);
   assert.equal(withRule.life.demo.household.lastShortfallBps, 0, "nobody goes hungry");
   assert.equal(withRule.life.demo.household.grain, 0, "no seed could be afforded");

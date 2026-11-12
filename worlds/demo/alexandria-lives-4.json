@@ -18251,14 +18251,14 @@
       },
       {
         "id": "v-sell-thread",
-        "text": "Sell one thread to a funded buyer",
+        "text": "Sell your thread lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-thread-done",
-            "text": "Sell one thread to a funded buyer",
+            "text": "Sell your thread lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18296,14 +18296,14 @@
       },
       {
         "id": "v-sell-linen",
-        "text": "Sell one linen to a funded buyer",
+        "text": "Sell your linen lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-linen-done",
-            "text": "Sell one linen to a funded buyer",
+            "text": "Sell your linen lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18341,14 +18341,14 @@
       },
       {
         "id": "v-sell-garment",
-        "text": "Sell one garment to a funded buyer",
+        "text": "Sell your garment lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-garment-done",
-            "text": "Sell one garment to a funded buyer",
+            "text": "Sell your garment lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18386,14 +18386,14 @@
       },
       {
         "id": "v-sell-dyed-garment",
-        "text": "Sell one dyed-garment to a funded buyer",
+        "text": "Sell your dyed garment lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-dyed-garment-done",
-            "text": "Sell one dyed-garment to a funded buyer",
+            "text": "Sell your dyed garment lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18431,14 +18431,14 @@
       },
       {
         "id": "v-sell-ceremonial-garment",
-        "text": "Sell one ceremonial-garment to a funded buyer",
+        "text": "Sell your ceremonial garment lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-ceremonial-garment-done",
-            "text": "Sell one ceremonial-garment to a funded buyer",
+            "text": "Sell your ceremonial garment lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18476,14 +18476,14 @@
       },
       {
         "id": "v-sell-vessel",
-        "text": "Sell one vessel to a funded buyer",
+        "text": "Sell your vessel lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-vessel-done",
-            "text": "Sell one vessel to a funded buyer",
+            "text": "Sell your vessel lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18521,14 +18521,14 @@
       },
       {
         "id": "v-sell-decorated-vessel",
-        "text": "Sell one decorated-vessel to a funded buyer",
+        "text": "Sell your decorated vessel lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-decorated-vessel-done",
-            "text": "Sell one decorated-vessel to a funded buyer",
+            "text": "Sell your decorated vessel lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18566,14 +18566,14 @@
       },
       {
         "id": "v-sell-clay-model",
-        "text": "Sell one clay-model to a funded buyer",
+        "text": "Sell your clay model lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-clay-model-done",
-            "text": "Sell one clay-model to a funded buyer",
+            "text": "Sell your clay model lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18611,14 +18611,14 @@
       },
       {
         "id": "v-sell-relief",
-        "text": "Sell one relief to a funded buyer",
+        "text": "Sell your relief lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-relief-done",
-            "text": "Sell one relief to a funded buyer",
+            "text": "Sell your relief lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18656,14 +18656,14 @@
       },
       {
         "id": "v-sell-stone-figure",
-        "text": "Sell one stone-figure to a funded buyer",
+        "text": "Sell your stone figure lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-stone-figure-done",
-            "text": "Sell one stone-figure to a funded buyer",
+            "text": "Sell your stone figure lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18701,14 +18701,14 @@
       },
       {
         "id": "v-sell-bust",
-        "text": "Sell one bust to a funded buyer",
+        "text": "Sell your bust lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-bust-done",
-            "text": "Sell one bust to a funded buyer",
+            "text": "Sell your bust lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18746,14 +18746,14 @@
       },
       {
         "id": "v-sell-large-relief",
-        "text": "Sell one large-relief to a funded buyer",
+        "text": "Sell your large relief lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-large-relief-done",
-            "text": "Sell one large-relief to a funded buyer",
+            "text": "Sell your large relief lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -18791,14 +18791,14 @@
       },
       {
         "id": "v-sell-monument",
-        "text": "Sell one monument to a funded buyer",
+        "text": "Sell your monument lot to this year's funded buyers",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-sell-monument-done",
-            "text": "Sell one monument to a funded buyer",
+            "text": "Sell your monument lot to this year's funded buyers",
             "weight": 1,
             "effects": [
               {
@@ -74211,7 +74211,7 @@
       },
       "priceFloorBps": 5000,
       "priceCeilingBps": 30000,
-      "spreadBps": 2500,
+      "spreadBps": 1000,
       "targetGrainStock": 3000,
       "armyDemand": {
         "quiet": 600,
@@ -74270,7 +74270,26 @@
       },
       "maxAnimals": 3,
       "minTradeAge": 12,
-      "fairTradeReputation": 1
+      "fairTradeReputation": 1,
+      "depth": {
+        "halfUnits": {
+          "grain": 1200,
+          "flax": 200,
+          "silver": 20,
+          "gold": 4,
+          "silk": 6,
+          "linen": 20,
+          "ox": 3,
+          "donkey": 4
+        },
+        "keepBps": 3000,
+        "minFactorBps": 2500,
+        "maxFactorBps": 25000,
+        "grainAskBps": 7000,
+        "grainSpreadBps": 2000,
+        "leanYearMeasuresPerStanding": 250,
+        "leanYearStandingCap": 4
+      }
     },
     "service": {
       "wage": {
@@ -74722,7 +74741,7 @@
         "supports": [
           "reckoning"
         ],
-        "baseAsk": 100
+        "baseAsk": 170
       },
       "dyed-garment": {
         "title": "Dyed garment",
@@ -74742,7 +74761,7 @@
         "supports": [
           "reckoning"
         ],
-        "baseAsk": 130
+        "baseAsk": 210
       },
       "ceremonial-garment": {
         "title": "Ceremonial garment",
@@ -74782,7 +74801,7 @@
           "pottery",
           "reckoning"
         ],
-        "baseAsk": 20
+        "baseAsk": 75
       },
       "decorated-vessel": {
         "title": "Decorated vessel",
@@ -74803,7 +74822,7 @@
           "pottery",
           "reckoning"
         ],
-        "baseAsk": 24
+        "baseAsk": 90
       },
       "clay-model": {
         "title": "Clay model",
@@ -74822,7 +74841,7 @@
           "pottery",
           "sculpture"
         ],
-        "baseAsk": 12
+        "baseAsk": 30
       },
       "small-relief": {
         "title": "Small wood relief",
@@ -74842,7 +74861,7 @@
           "carving",
           "sculpture"
         ],
-        "baseAsk": 90
+        "baseAsk": 140
       },
       "stone-figure": {
         "title": "Stone figure",
@@ -74862,7 +74881,7 @@
           "carving",
           "sculpture"
         ],
-        "baseAsk": 200
+        "baseAsk": 260
       },
       "bust": {
         "title": "Portrait/bust",
@@ -76088,7 +76107,7 @@
       }
     },
     "accounts": {
-      "merchant": 20000,
+      "merchant": 100000,
       "workshop": 6000,
       "school": 4000,
       "council": 4000
@@ -76107,6 +76126,24 @@
       "bust": 30,
       "large-relief": 30,
       "monument": 30
+    },
+    "trade": {
+      "bidBps": 9000,
+      "yearlyDemand": {
+        "thread": 48,
+        "linen": 16,
+        "garment": 10,
+        "dyed-garment": 8,
+        "ceremonial-garment": 6,
+        "vessel": 16,
+        "decorated-vessel": 12,
+        "clay-model": 16,
+        "relief": 4,
+        "stone-figure": 2,
+        "bust": 2,
+        "large-relief": 1,
+        "monument": 1
+      }
     }
   },
   "capabilities": {

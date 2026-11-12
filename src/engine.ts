@@ -28,6 +28,7 @@ export { matchesCondition } from "./conditions.ts";
 import type { DemoCommand } from "./demo/types.ts";
 import { demoContext, initialDemo } from "./demo/state.ts";
 import { settleDemoYear, openDemoYear } from "./demo/settle.ts";
+import { settleVocationYear } from "./vocations/trade.ts";
 import { applyDemoEffect } from "./demo/effects.ts";
 import { DEMO_COMMAND_TYPES, parseDemoCommand } from "./demo/commands.ts";
 import { executeTrade } from "./demo/market.ts";
@@ -838,6 +839,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       settleDemoYear(demoCtx(next));
       if (world.demo!.startingResources) syncEconomyStat(world, next);
     });
+    // Trade worlds: workshop buyers return and the supplier restocks for the new year.
+    if (world.vocations?.trade && next.phase !== "ended") settleVocationYear(world, next, (id, text) => journal(next, "activity", id, text));
     if (world.capabilities && next.phase !== "ended") {
       const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
       settleCapabilities(world, next, completedAge);

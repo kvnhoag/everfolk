@@ -18,7 +18,7 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     for (const k of Object.keys(o)) if (!/^[a-z][a-z0-9-]*$/.test(k)) fail(p, "invalid id");
     return o;
   };
-  const root = obj(input, path, ["materials", "recipes", "actions", "accounts", "demand"]);
+  const root = obj(input, path, ["materials", "recipes", "actions", "accounts", "demand", "trade"], ["materials", "recipes", "actions", "accounts", "demand"]);
   const materials = map(root.materials, path + ".materials"), recipes = map(root.recipes, path + ".recipes");
   for (const [id, value] of Object.entries(materials)) {
     const m = obj(value, `${path}.materials.${id}`, ["price", "stock"]); n(m.price, path, 1, 10000); n(m.stock, path, 0, 100000);
@@ -46,6 +46,11 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
   const accounts = obj(root.accounts, path, ["merchant", "workshop", "school", "council"]);
   for (const value of Object.values(accounts)) n(value, path);
   mapping(root.demand, outputs, 0, 10000);
+  if (root.trade !== undefined) {
+    const trade = obj(root.trade, path + ".trade", ["bidBps", "yearlyDemand"]);
+    n(trade.bidBps, path + ".trade.bidBps", 1, 10000);
+    mapping(trade.yearlyDemand, outputs, 0, 10000);
+  }
   for (const value of Object.values(map(root.actions, path + ".actions"))) {
     const a = obj(value, path);
     if (a.kind === "buy") { obj(a, path, ["kind", "item", "quantity"]); if (typeof a.item !== "string" || !Object.hasOwn(materials, a.item)) fail(path, "unknown material"); n(a.quantity, path, 1, 1000); }

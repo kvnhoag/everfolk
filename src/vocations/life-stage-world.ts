@@ -14,6 +14,7 @@ import { applyPlaytestFixes } from "./lives-fixes.ts";
 import { applyIllnessPacing } from "./illness-pacing.ts";
 import { refitEvents } from "../paths/content/refits.ts";
 import { auditEvents } from "../paths/audit.ts";
+import { applyTradeEconomy } from "./trade-economy.ts";
 
 /** New births: the attribute atlas and military lane, plus life stages and life paths. Older revisions keep their exact rules for replay. */
 export function buildLifeStageWorld(base: WorldPack): WorldPack {
@@ -26,6 +27,8 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   addPaths(world);
   // New births: a household keeps seed when the store runs short, and leases what it cannot work.
   Object.assign(world.demo!.household, { buySeedWhenShort: true, leaseUnworkedBps: 5000 });
+  // New births: trades move prices, spreads are narrow and finished goods pay a living margin.
+  applyTradeEconomy(world);
   // The flax-seed price depends on the district (the village farm edge), so its label names no fixed price.
   for (const activity of world.character!.activities) {
     if (activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === "buy-flax-seed"))) activity.text = activity.text.replace(/ \(\d+ dr\)$/, "");
