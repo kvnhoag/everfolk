@@ -2,7 +2,7 @@
 
 Open `/skills` after starting the local server to inspect the complete atlas without creating a save. In a game, use **Skill tree** in the top navigation or **Character → Skills**.
 
-The atlas contains 65 connected capabilities across Farming, Artisan, Philosophy and Trade. All paths remain visible. Choose a node for its prerequisites, proficiency thresholds, demonstrated-work proof, quoted action and practical reward. Use the branch buttons to follow a specialization, **Read path** to highlight its ancestors, and the zoom/fit controls or named-node picker on a small screen.
+The atlas contains 65 connected capabilities across Farming, Artisan, Philosophy and Trade. All paths remain visible. Choose a node to light its complete path from the root and inspect its prerequisites, proficiency thresholds, demonstrated-work proof, quoted action and practical reward. Scroll to zoom around the pointer and drag the map to explore; touchscreens support dragging and pinch zoom. Use **Read selected path** to center the selected skill at reading size, **Fit whole tree** to return to the overview, or the named-node picker on a small screen. Arrow keys follow connected skills.
 
 ![The complete skill atlas](../public/assets/skills/skill-atlas.svg)
 

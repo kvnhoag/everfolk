@@ -1,9 +1,11 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
 import { buildCapabilityLayout, CAPABILITY_BRANCHES, CAPABILITY_NODES, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../models/capability-layout.ts";
 import CapabilityIcon from "./CapabilityIcon.tsx";
+import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
+import { MAP_MAX_ZOOM, MAP_MIN_ZOOM } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
@@ -84,54 +86,33 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
   world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[]; onActivity(id: string): void; readOnly?: boolean;
 }) {
   const layout = useMemo(() => buildCapabilityLayout(), []);
-  const view = capabilityView(world, life);
-  const byId = new Map(view.nodes.map(node => [node.id, node]));
+  const view = useMemo(() => capabilityView(world, life), [world, life]);
+  const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
   const [selectedId, setSelectedId] = useState("F1");
+  const [pathSelected, setPathSelected] = useState(false);
   const [branch, setBranch] = useState("all");
   const [query, setQuery] = useState("");
-  const [zoom, setZoom] = useState(.42);
-  const [fit, setFit] = useState(true);
-  const viewport = useRef<HTMLDivElement>(null);
+  const { viewport, paper, zoom, dragging, fit, changeZoom, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
   const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
   const instanceId = useId();
   const selected = CAPABILITY_NODES.find(node => node.id === selectedId) ?? CAPABILITY_NODES[0];
   const selectedView = byId.get(selected.id) ?? { ...EMPTY_VIEW, id: selected.id };
-  const ancestors = capabilityAncestors(CAPABILITY_NODES, selected.id);
+  const ancestors = useMemo(() => pathSelected ? capabilityAncestors(CAPABILITY_NODES, selected.id) : new Set<string>(), [pathSelected, selected.id]);
   const needle = query.trim().toLocaleLowerCase();
   const matches = (node: CapabilityNode) => !needle || `${node.id} ${node.title} ${node.branch} ${node.specialization ?? ""}`.toLocaleLowerCase().includes(needle);
   const learned = view.nodes.filter(node => node.state === "learned").length;
   const mastered = CAPABILITY_NODES.filter(node => node.depth === 10 && byId.get(node.id)?.state === "learned").length;
 
-  useEffect(() => {
-    const element = viewport.current;
-    if (!element || !fit) return;
-    const resize = () => {
-      if (!element.clientWidth) return;
-      const next = Math.max(.18, Math.min(.8, (element.clientWidth - 16) / layout.width, (element.clientHeight - 16) / layout.height));
-      setZoom(next);
-    };
-    resize();
-    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(resize) : null;
-    observer?.observe(element);
-    return () => observer?.disconnect();
-  }, [fit, layout]);
-
-  function centerNode(id: string, scale = zoom) {
-    const element = viewport.current, point = layout.nodes.find(item => item.node.id === id);
-    if (!element || !point) return;
-    element.scrollTo({ left: point.x * scale - element.clientWidth / 2, top: point.y * scale - element.clientHeight / 2, behavior: "auto" });
+  function centerNode(id: string, scale?: number) {
+    const point = layout.nodes.find(item => item.node.id === id);
+    if (point) focusPoint(point, scale);
   }
   function select(id: string, focus = false) {
-    setSelectedId(id);
+    setSelectedId(id); setPathSelected(true);
     if (focus) requestAnimationFrame(() => { nodeRefs.current.get(id)?.focus({ preventScroll: true }); centerNode(id); });
   }
-  function changeZoom(next: number) {
-    const scale = Math.max(.2, Math.min(1.4, next));
-    setFit(false); setZoom(scale);
-    requestAnimationFrame(() => centerNode(selected.id, scale));
-  }
   function highlight(value: string) {
-    setBranch(value);
+    setBranch(value); setPathSelected(false);
     if (value !== "all") {
       const root = CAPABILITY_NODES.find(node => node.branch === value)!;
       setSelectedId(root.id);
@@ -146,12 +127,12 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
     <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Learn the craft. Do the work. Let one skill open the next.</p></div><div className="capability-total"><strong>{learned}<span> / {CAPABILITY_NODES.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
     {!view.enabled && <p className="capability-world-note" role="note">This life keeps its earlier skill rules. The complete atlas is shown as a reference; begin a new life in the current world to learn these nodes.</p>}
     <div className="capability-branches" role="group" aria-label="Highlight a skill branch"><button type="button" aria-pressed={branch === "all"} onClick={() => highlight("all")}>Whole tree</button>{CAPABILITY_BRANCHES.map(label => <button key={label} type="button" aria-pressed={branch === label} onClick={() => highlight(label)}><CapabilityIcon id="" branch={label} specialization={null} /><span>{label}<small>{BRANCH_DESCRIPTIONS[label]}</small></span></button>)}</div>
-    <div className="capability-toolbar"><label htmlFor={`${instanceId}-find`}>Find a skill<input id={`${instanceId}-find`} type="search" placeholder="Try soil, pottery or inquiry" value={query} onChange={event => setQuery(event.target.value)} /></label><div className="capability-map-controls" role="group" aria-label="Skill map zoom"><button type="button" aria-label="Zoom out skill map" disabled={zoom <= .2} onClick={() => changeZoom(zoom - .2)}>−</button><span aria-live="polite">{Math.round(zoom * 100)}%</span><button type="button" aria-label="Zoom in skill map" disabled={zoom >= 1.4} onClick={() => changeZoom(zoom + .2)}>+</button><button type="button" onClick={() => { setFit(true); viewport.current?.scrollTo({ left: 0, top: 0 }); }}>Fit whole tree</button><button type="button" onClick={() => changeZoom(1)}>Read selected path</button></div></div>
+    <div className="capability-toolbar"><label htmlFor={`${instanceId}-find`}>Find a skill<input id={`${instanceId}-find`} type="search" placeholder="Try soil, pottery or inquiry" value={query} onChange={event => setQuery(event.target.value)} /></label><div className="capability-map-controls" role="group" aria-label="Skill map zoom"><button type="button" aria-label="Zoom out skill map" disabled={zoom <= MAP_MIN_ZOOM} onClick={() => changeZoom(zoom / 1.3)}>−</button><span aria-live="polite">{Math.round(zoom * 100)}%</span><button type="button" aria-label="Zoom in skill map" disabled={zoom >= MAP_MAX_ZOOM} onClick={() => changeZoom(zoom * 1.3)}>+</button><button type="button" onClick={() => fit()}>Fit whole tree</button><button type="button" onClick={() => { setPathSelected(true); centerNode(selected.id, 1); }}>Read selected path</button></div></div>
     <div className="capability-legend" aria-label="Skill map states">{(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{STATUS_LABEL[state]}</span>)}<span className="capability-mastery-key">Double frame · depth 10</span></div>
-    <p className="capability-map-help" id={`${instanceId}-help`}>Overview shows the whole tree. Zoom to read paths; scroll inside the map to explore. Arrow keys follow connected skills, Enter selects. Every locked node can be inspected.</p>
+    <p className="capability-map-help" id={`${instanceId}-help`}>Scroll to zoom at your pointer. Drag to explore; pinch to zoom on touchscreens. Select a skill to light its path from the root. Arrow keys follow connected skills, Enter selects.</p>
     <div className="capability-workspace">
-      <div className="capability-map-area"><div className={`capability-viewport${zoom < .55 ? " is-overview" : ""}`} ref={viewport} aria-label="Connected skill tree" aria-describedby={`${instanceId}-help`}>
-        <div className="capability-stage" style={{ width: layout.width * zoom, height: layout.height * zoom }}><div className="capability-paper" style={{ width: layout.width, height: layout.height, transform: `scale(${zoom})` }}>
+      <div className="capability-map-area"><div className={`capability-viewport${zoom < .55 ? " is-overview" : ""}${dragging ? " is-dragging" : ""}`} ref={viewport} {...pointerHandlers} aria-label="Connected skill tree" aria-describedby={`${instanceId}-help`}>
+        <div className="capability-paper" ref={paper} style={{ width: layout.width, height: layout.height }}>
           <svg className="capability-connections" viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true" focusable="false">
             <defs><pattern id={`${instanceId}-fiber`} width="43" height="37" patternUnits="userSpaceOnUse"><path d="M3 7h4M26 29h6M15 19h2" stroke="currentColor" strokeWidth=".7" opacity=".12" /></pattern></defs>
             <rect width={layout.width} height={layout.height} fill={`url(#${instanceId}-fiber)`} />
@@ -160,16 +141,18 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
             {layout.links.map(link => {
               const from = byId.get(link.from), to = byId.get(link.to);
               const target = CAPABILITY_NODES.find(node => node.id === link.to)!;
-              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} d={link.path} className={`capability-link${ancestors.has(link.from) && ancestors.has(link.to) ? " is-lineage" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${branch !== "all" && target.branch !== branch ? " is-muted" : ""}`} />;
+              const lineage = ancestors.has(link.from) && ancestors.has(link.to);
+              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} d={link.path} className={`capability-link${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${branch !== "all" && target.branch !== branch && !lineage ? " is-muted" : ""}`} />;
             })}
           </svg>
           {layout.nodes.map(({ node, x, y }) => {
             const state = byId.get(node.id)?.state ?? "unavailable";
-            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state}${node.id === selected.id ? " is-selected" : ""}${node.depth === 10 ? " is-mastery" : ""}${branch !== "all" && node.branch !== branch || !matches(node) ? " is-muted" : ""}`} style={{ left: x, top: y }} data-capability-id={node.id} data-state={state} aria-label={capabilityNodeLabel(node, STATUS_LABEL[state])} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={capabilityNodeLabel(node, STATUS_LABEL[state])} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
+            const lineage = ancestors.has(node.id);
+            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${!lineage && (branch !== "all" && node.branch !== branch || !matches(node)) ? " is-muted" : ""}`} style={{ left: x, top: y }} data-capability-id={node.id} data-state={state} aria-label={capabilityNodeLabel(node, STATUS_LABEL[state])} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={capabilityNodeLabel(node, STATUS_LABEL[state])} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
               <span className="capability-seal"><NodeShape branch={node.branch} mastery={node.depth === 10} /><CapabilityIcon {...node} /><span className="capability-node-id">{node.id}</span>{state === "learned" && <span className="capability-earned-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg></span>}</span><span className="capability-node-name">{node.title}</span>
             </button>;
           })}
-        </div></div>
+        </div>
       </div><label className="capability-node-picker" htmlFor={`${instanceId}-node`}>Inspect a skill<select id={`${instanceId}-node`} value={selected.id} onChange={event => select(event.target.value)}>{CAPABILITY_BRANCHES.map(label => <optgroup key={label} label={label}>{CAPABILITY_NODES.filter(node => node.branch === label && (matches(node) || node.id === selected.id)).map(node => <option key={node.id} value={node.id}>{node.id} · {node.title} · {STATUS_LABEL[byId.get(node.id)?.state ?? "unavailable"]}</option>)}</optgroup>)}</select></label><p className="capability-map-summary" role="status">{needle ? `${CAPABILITY_NODES.filter(matches).length} matching skills. ` : ""}{selected.title} selected · {STATUS_LABEL[selectedView.state]}.</p></div>
       <CapabilityInspector node={selected} view={selectedView} {...{ world, life, activities, readOnly, onActivity }} onSelect={id => select(id, true)} detailId={`${instanceId}-detail`} />
     </div>
