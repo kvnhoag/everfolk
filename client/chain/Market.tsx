@@ -74,8 +74,12 @@ export function MarketBody({
   const filtered = filter.group !== "all" || filter.rarity !== "all";
 
   // Market overview stats
-  const figuresCount = rows.filter(r => r.isFigure).length;
-  const prices = rows.map(r => Number(r.priceText.replace(/[^\d.]/g, ""))).filter(p => !Number.isNaN(p) && p > 0);
+  const figuresCount = rows ? rows.filter(r => r?.isFigure).length : 0;
+  const prices = rows
+    ? rows
+        .map(r => (r?.priceText ? Number(r.priceText.replace(/[^\d.]/g, "")) : NaN))
+        .filter(p => !Number.isNaN(p) && p > 0)
+    : [];
   const floorPrice = prices.length > 0 ? Math.min(...prices) : null;
 
   return (
@@ -265,7 +269,7 @@ export function MarketBody({
                 rarityLabel={row.rarityLabel}
                 actionName={row.actionName}
                 affection={row.affection}
-                priceNear={row.priceText.replace(" NEAR", "")}
+                priceNear={row.priceText ? row.priceText.replace(" NEAR", "") : undefined}
                 actions={
                   <div className="ef-market-card-footer">
                     <ul className="ledger-chips ef-market-chips">

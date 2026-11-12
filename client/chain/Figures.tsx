@@ -103,10 +103,10 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                     {isExpanded && (
                       <div className="figure-expanded-panel">
                         <h3 style={{ fontSize: "12px", margin: "8px 0 4px", color: "#263b43" }}>Owners &amp; deeds</h3>
-                        {state?.copies.length === 0 && (
+                        {(!state?.copies || state.copies.length === 0) && (
                           <p className="chain-fine">No owner yet. This figure is available to qualifying ranked lives.</p>
                         )}
-                        {state?.copies.map(copy => (
+                        {state?.copies?.map(copy => (
                           <div className="figure-owner" key={copy.token_id}>
                             <a href={`#token/${copy.token_id}`}>
                               Copy #{copy.token_id} · {copy.owner_id}
@@ -121,7 +121,7 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                         ))}
 
                         <h3 style={{ fontSize: "12px", margin: "10px 0 4px", color: "#263b43" }}>Choices this figure can make</h3>
-                        {FIGURE_ACTIONS[figure.figure].map(id => (
+                        {(FIGURE_ACTIONS[figure.figure] ?? []).map(id => (
                           <p key={id} className="chain-fine" style={{ marginBottom: "6px" }}>
                             <strong>{actionName(id)}</strong>: {actionDescription(id)}
                           </p>
@@ -129,10 +129,10 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
 
                         <h3 style={{ fontSize: "12px", margin: "10px 0 4px", color: "#263b43" }}>How a life qualifies</h3>
                         <ul className="chain-fine" style={{ paddingLeft: "16px", margin: "0" }}>
-                          {figure.origins && (
+                          {figure.origins && figure.origins.length > 0 && (
                             <li>Origin: {figure.origins.map(id => id.replaceAll("-", " ")).join(", ")}</li>
                           )}
-                          {figure.jobsAny && (
+                          {figure.jobsAny && figure.jobsAny.length > 0 && (
                             <li>Reach one of: {figure.jobsAny.map(id => id.replaceAll("-", " ")).join(", ")}</li>
                           )}
                           {Object.entries(figure.minSkills ?? {}).map(([id, value]) => (
@@ -141,7 +141,7 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                           {Object.entries(figure.minStats ?? {}).map(([id, value]) => (
                             <li key={id}>{id}: {value}+</li>
                           ))}
-                          {figure.accomplishmentsAny && (
+                          {figure.accomplishmentsAny && figure.accomplishmentsAny.length > 0 && (
                             <li>
                               Record accomplishment: {figure.accomplishmentsAny.map(id => id.replaceAll("-", " ")).join(", ")}
                               {figure.maxAgeAtAccomplishment ? ` by age ${figure.maxAgeAtAccomplishment}` : ""}.

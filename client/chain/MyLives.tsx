@@ -65,7 +65,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
 
   // Collection stats
   const ownedCount = rows?.length ?? 0;
-  const ownedFigureIds = new Set(rows?.filter(r => r.isFigure && r.figureId).map(r => r.figureId) ?? []);
+  const ownedFigureIds = new Set((rows ?? []).filter(r => r?.isFigure && r?.figureId).map(r => r.figureId as string));
   const figuresUnlockedCount = ownedFigureIds.size;
   const totalFigures = FIGURES.length; // 4 legendary figures
   const setPercent = Math.round((figuresUnlockedCount / totalFigures) * 100);

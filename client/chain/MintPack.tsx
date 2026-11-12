@@ -59,9 +59,9 @@ export default function MintPack({
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<number | null>(null);
   const [result, setResult] = useState<MintResult | null>(null);
-  const group = careerGroup ?? groupOfAction(pack.cards.find(c => c.kind === "npc")?.action_id ?? null) ?? "letters";
+  const group = careerGroup ?? groupOfAction(pack?.cards?.find(c => c.kind === "npc")?.action_id ?? null) ?? "letters";
 
-  const totalCards = pack.cards.length;
+  const totalCards = pack?.cards?.length ?? 0;
   const revealedCount = Object.values(flippedCards).filter(Boolean).length;
   const allRevealed = totalCards > 0 && revealedCount >= totalCards;
 
@@ -75,12 +75,12 @@ export default function MintPack({
 
   function revealAllCards() {
     const revealed: Record<number, boolean> = {};
-    pack.cards.forEach((_, idx) => {
+    (pack?.cards ?? []).forEach((_, idx) => {
       revealed[idx] = true;
     });
     setFlippedCards(revealed);
     audioManager.playClickSound();
-    if (selected === null && pack.cards.length > 0) {
+    if (selected === null && (pack?.cards?.length ?? 0) > 0) {
       setSelected(0);
     }
   }
@@ -221,7 +221,7 @@ export default function MintPack({
             role="group"
             aria-label="Booster pack fate cards. Click each card to reveal it."
           >
-            {pack.cards.map((card, slot) => {
+            {(pack?.cards ?? []).map((card, slot) => {
               const isFlipped = Boolean(flippedCards[slot]);
               const isSelected = selected === slot;
               const cardTitle = card.figure_id
