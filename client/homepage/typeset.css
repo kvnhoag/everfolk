@@ -42,13 +42,32 @@
 .ef-home .ef-home-era strong{font-size:12px;font-weight:500;letter-spacing:1.2px;color:var(--tx-cream)}
 .ef-home .ef-motion-toggle{font-size:12px;font-weight:400}
 
-/* Hero column. */
+/* Hero column: aligned precisely into the calm open Rhakotis sea bay between the sailboats and the quay. */
 .ef-home .ef-home-body{padding:clamp(6px,2vh,24px) 0 22px;min-height:0}
-.ef-home .ef-home-content{max-width:620px}
+@media (min-width: 701px) {
+  .ef-home .ef-home-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .ef-home .ef-home-content {
+    margin-right: auto;
+    margin-left: max(16px, calc(50% - min(50%, 310px) - 7.5vw));
+    max-width: 620px;
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .ef-home .ef-home-content {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
 .ef-home .ef-home-eyebrow{margin:0;gap:0;font-size:12px;font-weight:500;letter-spacing:4.2px;color:var(--tx-cream);text-shadow:var(--tx-shadow)}
 .ef-home h1{margin:0;font-size:inherit;letter-spacing:0;line-height:1;text-shadow:none}
 .ef-home h1 .ef-title-wrap{display:inline-block;position:relative}
-.ef-home .ef-home-wordmark{display:block;font-size:134px;line-height:1.04;letter-spacing:-1.5px;color:var(--tx-cream);padding:0 .12em;
+.ef-home .ef-home-wordmark{display:block;font-size:clamp(86px, 8.8vw, 134px);line-height:1.04;letter-spacing:-1.5px;color:var(--tx-cream);padding:0 .12em;
   text-shadow:0 1px 0 #fff9ea55,0 3px 6px #0b1d24b3,0 10px 30px #0b1d2480}
 .ef-home .ef-title-glint:nth-of-type(1){left:14%;top:30%}
 .ef-home .ef-title-glint:nth-of-type(2){left:64%;top:18%}
@@ -56,7 +75,7 @@
 .ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,264px);margin:2px auto 14px;filter:drop-shadow(0 1px 2px #0b1d24cc)}
 .ef-home-logo-rule span{flex:1;height:1px;background:var(--tx-gold-line);opacity:.75}
 .ef-home-logo-rule i{font-size:17px;line-height:1;color:var(--tx-gold)}
-.ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:46px;line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
+.ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:clamp(32px, 3.2vw, 46px);line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
   background:none;-webkit-text-fill-color:currentColor;border-radius:0;filter:none;text-shadow:0 2px 4px #0a1a20cc,0 6px 22px #0a1a2099}
 .ef-home .ef-home-rule{width:min(100%,286px);gap:14px;margin:0 auto 22px;opacity:1;filter:drop-shadow(0 1px 2px #0b1d24cc)}
 .ef-home .ef-home-rule span:first-child,.ef-home .ef-home-rule span:last-child{height:1px;background:var(--tx-gold-line);opacity:.7}

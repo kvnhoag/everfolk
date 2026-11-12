@@ -13,31 +13,40 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
       const context = gsap.context(() => {
         media.add('(prefers-reduced-motion: no-preference)', () => {
           const animations: gsap.core.Animation[] = [];
-          // Stylized letter-by-letter typing / chiseled inscription reveal.
-          const entrance = gsap.timeline({ defaults: { ease: 'power3.out' } });
-          entrance
-            .fromTo(
-              '.ef-royal-pixel-batch',
-              { opacity: 0, y: 5, scale: 0.95 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.36, stagger: 0.05 },
-              0,
-            )
-            .fromTo(
-              '.ef-logo-emblem,.ef-logo-lower-rule',
-              { opacity: 0, scaleX: 0.78 },
-              { opacity: 1, scaleX: 1, duration: 0.65, transformOrigin: 'center center' },
-              0.1,
-            );
-          animations.push(entrance);
-          animations.push(gsap.fromTo('.ef-logo-reflection', { x: 0, opacity: 0 }, {
-            x: 820, opacity: 0.48, duration: 7.5, delay: 1.4, ease: 'sine.inOut', repeat: -1, repeatDelay: 11,
-          }));
-          animations.push(gsap.fromTo('.ef-royal-dust', { y: 2, opacity: 0 }, {
-            y: -3, opacity: 0.5, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut',
-          }));
-          animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
-            '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
-          }));
+          if (element.querySelector('.ef-royal-pixel-batch')) {
+            const entrance = gsap.timeline({ defaults: { ease: 'power3.out' } });
+            entrance
+              .fromTo(
+                '.ef-royal-pixel-batch',
+                { opacity: 0, y: 5, scale: 0.95 },
+                { opacity: 1, y: 0, scale: 1, duration: 0.36, stagger: 0.05 },
+                0,
+              );
+            if (element.querySelector('.ef-logo-emblem, .ef-logo-lower-rule')) {
+              entrance.fromTo(
+                '.ef-logo-emblem,.ef-logo-lower-rule',
+                { opacity: 0, scaleX: 0.78 },
+                { opacity: 1, scaleX: 1, duration: 0.65, transformOrigin: 'center center' },
+                0.1,
+              );
+            }
+            animations.push(entrance);
+          }
+          if (element.querySelector('.ef-logo-reflection')) {
+            animations.push(gsap.fromTo('.ef-logo-reflection', { x: 0, opacity: 0 }, {
+              x: 820, opacity: 0.48, duration: 7.5, delay: 1.4, ease: 'sine.inOut', repeat: -1, repeatDelay: 11,
+            }));
+          }
+          if (element.querySelector('.ef-royal-dust')) {
+            animations.push(gsap.fromTo('.ef-royal-dust', { y: 2, opacity: 0 }, {
+              y: -3, opacity: 0.5, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut',
+            }));
+          }
+          if (element.querySelector('.ef-home-tagline')) {
+            animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
+              '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
+            }));
+          }
           element.querySelectorAll('.ef-title-glint').forEach((glint, i) => {
             const pulse = gsap.timeline({ repeat: -1, repeatDelay: 9 + i * 3.7, delay: 2.5 + i * 4.3 });
             pulse.fromTo(glint, { opacity: 0, scale: 0.5 }, { opacity: 0.85, scale: 1, duration: 0.9, ease: 'sine.out' })
