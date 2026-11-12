@@ -63,11 +63,9 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
-          <p className="ef-home-eyebrow">{rankedLife ? "WEAVE MODE · NEAR TESTNET" : "A LIFE SIMULATOR"}</p>
+          {rankedLife && <p className="ef-home-eyebrow">WEAVE MODE · NEAR TESTNET</p>}
           <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><span className="ef-home-wordmark ef-royal-wordmark" aria-hidden="true">Everfolk</span>{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
           <div className="ef-home-logo-rule" aria-hidden="true"><span /><i>✦</i><span /></div>
-          <p className="ef-home-tagline">Live another story.</p>
-          <div className="ef-home-rule" aria-hidden="true"><span /><i /><span /></div>
           {hasBegun && <div className="ef-home-save" id={saveId}>
             <span className="ef-home-save-mark" aria-hidden="true" />
             <div><span>{ended ? "YOUR LAST STORY" : "A STORY IN PROGRESS"}</span><strong>{life.character?.name ?? "Your character"}</strong></div>
@@ -80,7 +78,6 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
             </button>
             {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>
-          <p className="ef-home-save-note"><span aria-hidden="true">◇</span>Your story is saved in this browser.</p>
         </section>
       </div>
       <footer className="ef-home-footer">
