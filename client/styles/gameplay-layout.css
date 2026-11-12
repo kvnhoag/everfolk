@@ -1,11 +1,11 @@
 /* Main gameplay layout: notifications float on the right, "Live another year" sits in the speed bar,
    and the two dashboard columns keep a similar height. Loaded last so it settles earlier rules. */
 
-/* Life events: a toast column on the right edge instead of a strip in the page. */
-.everfolk-game .event-notification-stack{position:fixed;top:118px;right:18px;z-index:45;width:min(340px,calc(100vw - 36px));margin:0;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 140px);overflow-y:auto;pointer-events:none}
-.everfolk-game .event-notification-stack>*{pointer-events:auto;box-shadow:0 10px 26px #1a2a2e33;animation:toast-in .25s ease-out}
-@keyframes toast-in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.everfolk-game .event-notification-stack>*{animation:none}}
+/* Life events: notifications at the top of the right column, not a strip across the page. */
+.everfolk-game .story-column .event-notification-stack{position:sticky;top:12px;z-index:20;margin:0 0 14px;display:flex;flex-direction:column;gap:10px;width:100%}
+.everfolk-game .story-column .event-notification-stack>*{box-shadow:0 8px 20px #1a2a2e26;animation:toast-in .25s ease-out}
+@keyframes toast-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.everfolk-game .story-column .event-notification-stack>*{animation:none}}
 
 /* "Live another year" in the time bar. */
 .life-session-bar .session-advance{display:inline-flex;align-items:center;gap:10px;min-height:34px;padding:7px 14px;border:1px solid #e2b86b;background:#e2b86b;color:#1c2f33;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
@@ -15,3 +15,8 @@
 /* "Skill learned" notices. */
 .everfolk-game .event-toast.is-skill{border-left:4px solid #3f6b4a}
 .everfolk-game .event-toast-badge.is-skill{background:#3f6b4a;color:#f6efd9}
+
+/* Keep the two dashboard columns close in height: long lists scroll inside their panels. */
+.game-dashboard .life-record-panel .life-event-feed,.game-dashboard .life-record-panel>ol,.game-dashboard .life-record-panel .life-record-list{max-height:240px;overflow-y:auto;overscroll-behavior:contain}
+.life-session-bar{flex-wrap:wrap}
+.life-session-bar .playback-bar.life-clock{flex-wrap:wrap;row-gap:8px;justify-content:flex-end}

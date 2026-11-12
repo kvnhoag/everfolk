@@ -8,8 +8,6 @@ import { getSkillImpact } from "../models/skill-impact.ts";
 import { engineForLife } from "../lib/world-session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
-import CompactSkillPanel from "./CompactSkillPanel.tsx";
-import CareerEconomyTree from "./CareerEconomyTree.tsx";
 import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
@@ -224,7 +222,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
     tabRefs.current[visibleSections[next].id]?.focus();
   }
 
-  return <div className="character-management">
+  // On the Skills tab the tree gets the whole window; health, background and the yearly budget show on the other tabs.
+  return <div className={`character-management${activeSection === "skills" ? " is-skills" : ""}`}>
     <LifeHealthPanel {...props} compact />
     {origin && <details className="character-background"><summary><span>Background</span><strong>{origin.title}</strong></summary><div><span className="character-background-name">{character.name ?? "Damon"}</span><p>{displayProse(origin.text)}</p></div></details>}
     <div className={`character-activity-status${hasActivity ? " activity-spent" : ""}`}>
@@ -269,11 +268,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
+        {/* Proficiency and occupation reference lives in the Wiki; the skill tree gets the space. */}
         <CapabilityTree activities={activities} {...props} />
-        <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
-          <CompactSkillPanel activities={activities} {...props} />
-          <CareerEconomyTree activities={activities} {...props} />
-        </details>
       </div>
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />

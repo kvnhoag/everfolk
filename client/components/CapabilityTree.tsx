@@ -8,6 +8,7 @@ import { capabilityPresentations, capabilityTier, firstSentence, type Capability
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
 import { MAP_MAX_ZOOM, READABLE_START_ZOOM, skillMapStartNode } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
+import "../styles/capability-tree-layout.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
 const BRANCH_DESCRIPTIONS: Record<string, string> = {
