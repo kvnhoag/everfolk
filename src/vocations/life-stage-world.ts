@@ -8,6 +8,8 @@ import { inspirationEvents } from "../paths/content/inspiration.ts";
 import { holdingsEvents } from "../paths/content/holdings.ts";
 import { needsEvents } from "../paths/content/needs.ts";
 import { moveEvents } from "../paths/content/moves.ts";
+import { refitEvents } from "../paths/content/refits.ts";
+import { auditEvents } from "../paths/audit.ts";
 
 /** New births: the skill atlas plus life stages. Older revisions keep their exact rules for replay. */
 export function buildLifeStageWorld(base: WorldPack): WorldPack {
@@ -15,7 +17,11 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   world.version = LIVES_WORLD_VERSION;
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
   addPaths(world);
-  return world;
+  const refitted = refitEvents(world);
+  // The build fails rather than ship a household decision a child could make, or an adult decision without a cause.
+  const blocking = auditEvents(refitted).filter(item => item.rule === 2 || item.rule === 4);
+  if (blocking.length) throw new Error(`Event rules broken: ${blocking.map(item => `rule ${item.rule} ${item.eventId} (${item.message})`).join("; ")}`);
+  return refitted;
 }
 
 /** Fields, districts, the city and royal birthplaces, and the flags for renowned meetings. */

@@ -24093,6 +24093,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24159,6 +24162,10 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing",
+        "ceramics"
       ]
     },
     {
@@ -24225,6 +24232,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -24291,6 +24301,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24357,6 +24370,10 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -24422,6 +24439,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24487,6 +24507,10 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -24559,6 +24583,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24661,6 +24688,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24737,6 +24767,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24806,6 +24839,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -24880,6 +24916,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -24954,6 +24994,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -25021,6 +25064,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -25088,6 +25134,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -25604,6 +25653,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -25715,6 +25767,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -25831,6 +25887,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -25947,6 +26007,11 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "ceramics",
+        "trade"
       ]
     },
     {
@@ -26071,6 +26136,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -26169,6 +26237,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -26267,6 +26338,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -26370,6 +26444,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -26485,6 +26563,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -26654,6 +26735,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -26713,6 +26798,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -26854,6 +26942,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -27439,6 +27531,12 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "ceramics",
+        "sculpture",
+        "research",
+        "civic"
       ]
     },
     {
@@ -27688,6 +27786,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -27868,6 +27969,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -27963,6 +28068,9 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -28060,6 +28168,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing",
+        "ceramics"
       ]
     },
     {
@@ -28156,6 +28268,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -28252,6 +28368,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -28348,6 +28468,9 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -28445,6 +28568,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -28542,6 +28669,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -28640,6 +28771,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -28733,6 +28867,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -28827,6 +28965,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -28920,6 +29061,9 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -29008,6 +29152,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -29096,6 +29244,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -29188,6 +29339,10 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -29280,6 +29435,9 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -29367,6 +29525,9 @@
       ],
       "stages": [
         "youth"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -30788,14 +30949,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 20
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 20
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "skill",
+            "skill": "literacy",
+            "op": "gte",
+            "value": 10
           }
         ]
       },
@@ -32701,14 +32873,26 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
           }
         ]
       },
@@ -32781,14 +32965,24 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "cash",
+            "op": "lte",
+            "value": 60
           }
         ]
       },
@@ -32856,14 +33050,26 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
           }
         ]
       },
@@ -32931,14 +33137,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "stat",
+            "stat": "bonds",
+            "op": "gte",
+            "value": 30
           }
         ]
       },
@@ -33006,14 +33223,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "knowledge",
+            "op": "gte",
+            "value": 30
           }
         ]
       },
@@ -33085,14 +33313,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "knowledge",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -33159,14 +33398,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "health",
+            "op": "lte",
+            "value": 60
           }
         ]
       },
@@ -33238,14 +33488,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "wealth",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -33399,6 +33660,9 @@
       "stages": [
         "early-childhood",
         "childhood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -33475,6 +33739,9 @@
       "stages": [
         "early-childhood",
         "childhood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -33780,6 +34047,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -33857,6 +34127,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -33898,6 +34171,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -34226,6 +34502,9 @@
       "stages": [
         "early-childhood",
         "childhood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -34388,6 +34667,9 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -34457,14 +34739,51 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 60
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 60
+            "type": "any",
+            "conditions": [
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "item",
+                  "item": "linen",
+                  "op": "gte",
+                  "value": 1
+                }
+              },
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "item",
+                  "item": "flax",
+                  "op": "gte",
+                  "value": 5
+                }
+              },
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "item",
+                  "item": "grain",
+                  "op": "gte",
+                  "value": 100
+                }
+              }
+            ]
           }
         ]
       },
@@ -34472,6 +34791,9 @@
       "cooldownYears": 16,
       "stages": [
         "adulthood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -34536,14 +34858,36 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 65
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 65
+            "type": "any",
+            "conditions": [
+              {
+                "type": "district",
+                "district": "city-quarter"
+              },
+              {
+                "type": "district",
+                "district": "court-quarter"
+              },
+              {
+                "type": "district",
+                "district": "garrison"
+              }
+            ]
           }
         ]
       },
@@ -34645,14 +34989,32 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 60
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 60
+            "type": "any",
+            "conditions": [
+              {
+                "type": "district",
+                "district": "city-quarter"
+              },
+              {
+                "type": "district",
+                "district": "court-quarter"
+              }
+            ]
           }
         ]
       },
@@ -34836,14 +35198,24 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 60
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 60
+            "type": "cash",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -35034,14 +35406,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "health",
+            "op": "lte",
+            "value": 70
           }
         ]
       },
@@ -35113,14 +35496,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 65
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 65
+              },
+              {
+                "type": "age",
+                "op": "lt",
+                "value": 100
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lt",
-            "value": 100
+            "type": "stat",
+            "stat": "bonds",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -35179,6 +35573,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "ceramics"
       ]
     },
     {
@@ -35316,6 +35713,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "sculpture"
       ]
     },
     {
@@ -35405,6 +35805,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research",
+        "civic"
       ]
     },
     {
@@ -35544,6 +35948,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research",
+        "trade"
       ]
     },
     {
@@ -35595,6 +36003,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -35685,7 +36096,10 @@
         "type": "year",
         "at": -350
       },
-      "evidence": "fictional"
+      "evidence": "fictional",
+      "fields": [
+        "soldiering"
+      ]
     },
     {
       "id": "royal-grain-order-carried-out",
@@ -35982,14 +36396,10 @@
         }
       ],
       "stages": [
-        "infancy",
-        "early-childhood",
-        "childhood",
-        "adolescence",
-        "youth",
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "career-petition-opening",
@@ -36242,6 +36652,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -36504,6 +36917,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade",
+        "soldiering"
       ]
     },
     {
@@ -36766,6 +37183,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -37057,6 +37477,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -37643,6 +38066,9 @@
             }
           ]
         }
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -41481,6 +41907,9 @@
       ],
       "stages": [
         "childhood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -41563,6 +41992,9 @@
       "stages": [
         "early-childhood",
         "childhood"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -41738,6 +42170,10 @@
       "stages": [
         "childhood",
         "adolescence"
+      ],
+      "fields": [
+        "ceramics",
+        "trade"
       ]
     },
     {
@@ -41903,6 +42339,10 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -41991,6 +42431,9 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -42084,6 +42527,9 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -42167,6 +42613,9 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -42250,6 +42699,9 @@
         "adolescence",
         "youth",
         "adulthood"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -42264,14 +42716,28 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 69
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 69
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 100
+            }
           }
         ]
       },
@@ -42345,14 +42811,24 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 79
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 79
+            "type": "cash",
+            "op": "gte",
+            "value": 10
           }
         ]
       },
@@ -42419,14 +42895,24 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 79
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 79
+            "type": "cash",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -42589,6 +43075,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -42603,14 +43092,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 64
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 64
+            "type": "stat",
+            "stat": "bonds",
+            "op": "gte",
+            "value": 30
           }
         ]
       },
@@ -42671,6 +43171,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -42685,14 +43188,28 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 79
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 79
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "lte",
+              "value": 300
+            }
           }
         ]
       },
@@ -42767,7 +43284,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "trade"
+      ],
+      "scope": "household"
     },
     {
       "id": "variety-choice-unfinished-hinge",
@@ -42860,6 +43381,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "civic"
       ]
     },
     {
@@ -42874,14 +43399,26 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 16
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 16
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 69
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 69
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
           }
         ]
       },
@@ -42947,6 +43484,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -43044,6 +43584,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -43144,6 +43687,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -43440,6 +43986,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -43550,6 +44099,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "ceramics",
+        "civic"
       ]
     },
     {
@@ -43755,6 +44308,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "sculpture",
+        "civic"
       ]
     },
     {
@@ -43861,6 +44418,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -43961,6 +44521,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research",
+        "civic"
       ]
     },
     {
@@ -44063,6 +44627,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -44168,14 +44735,26 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 55
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 55
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 99
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 99
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": null
+            }
           }
         ]
       },
@@ -44241,6 +44820,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -44255,14 +44837,25 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 55
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 55
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 99
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 99
+            "type": "stat",
+            "stat": "wealth",
+            "op": "gte",
+            "value": 20
           }
         ]
       },
@@ -44338,14 +44931,24 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 69
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 69
+            "type": "cash",
+            "op": "gte",
+            "value": 30
           }
         ]
       },
@@ -44559,7 +45162,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "civic"
+      ],
+      "scope": "household"
     },
     {
       "id": "rare-mistaken-cargo-theft",
@@ -44693,6 +45300,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -44708,9 +45318,31 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              }
+            ]
+          },
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "district",
+                "district": "city-quarter"
+              },
+              {
+                "type": "district",
+                "district": "court-quarter"
+              },
+              {
+                "type": "district",
+                "district": "garrison"
+              }
+            ]
           }
         ]
       },
@@ -44808,6 +45440,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -44971,6 +45606,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "ceramics"
       ]
     },
     {
@@ -44986,14 +45625,32 @@
         "type": "all",
         "conditions": [
           {
-            "type": "age",
-            "op": "gte",
-            "value": 18
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "age",
+                "op": "lte",
+                "value": 74
+              }
+            ]
           },
           {
-            "type": "age",
-            "op": "lte",
-            "value": 74
+            "type": "any",
+            "conditions": [
+              {
+                "type": "district",
+                "district": "city-quarter"
+              },
+              {
+                "type": "district",
+                "district": "court-quarter"
+              }
+            ]
           }
         ]
       },
@@ -45107,6 +45764,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -45792,6 +46452,11 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "ceramics",
+        "sculpture"
       ]
     },
     {
@@ -46291,6 +46956,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research"
       ]
     },
     {
@@ -47474,6 +48142,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "sculpture"
       ]
     },
     {
@@ -47516,6 +48187,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "sculpture"
       ]
     },
     {
@@ -47558,6 +48232,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "sculpture"
       ]
     },
     {
@@ -47693,6 +48370,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research"
       ]
     },
     {
@@ -47734,6 +48414,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research"
       ]
     },
     {
@@ -47775,6 +48458,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "research"
       ]
     },
     {
@@ -48136,6 +48822,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "soldiering"
       ]
     },
     {
@@ -48178,6 +48867,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "soldiering"
       ]
     },
     {
@@ -48220,6 +48912,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "soldiering"
       ]
     },
     {
@@ -48357,6 +49052,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -48400,6 +49098,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -48443,6 +49144,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -48937,6 +49641,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -49074,6 +49781,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -49155,6 +49865,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -49317,6 +50030,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -49565,6 +50281,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -49651,6 +50370,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -49764,6 +50486,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50005,6 +50731,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50123,6 +50853,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50241,6 +50975,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -50359,6 +51096,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50477,6 +51218,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -50595,6 +51339,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50707,6 +51455,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -50824,6 +51576,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -50946,6 +51701,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -51058,6 +51817,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -51168,6 +51931,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -51339,6 +52105,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -51449,6 +52219,10 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -51564,6 +52338,9 @@
         "youth",
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -51729,6 +52506,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -51932,6 +52712,11 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "civic",
+        "trade"
       ]
     },
     {
@@ -52102,6 +52887,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -52189,6 +52978,10 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
       ]
     },
     {
@@ -52629,6 +53422,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -52719,6 +53515,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "clothing"
       ]
     },
     {
@@ -52749,6 +53548,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -52779,6 +53581,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -52960,7 +53765,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-philosophy",
@@ -53105,7 +53914,12 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "research",
+        "civic"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-seafaring",
@@ -53250,7 +54064,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "trade"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-military",
@@ -53401,7 +54219,12 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "trade",
+        "soldiering"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-commerce",
@@ -53546,7 +54369,12 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "civic",
+        "trade"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-astronomy-calendar",
@@ -53691,7 +54519,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "trade"
+      ],
+      "scope": "household"
     },
     {
       "id": "credit-opportunity-music-performance",
@@ -53836,7 +54668,11 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "fields": [
+        "civic"
+      ],
+      "scope": "household"
     },
     {
       "id": "rare-applied-mastery",
@@ -54505,6 +55341,11 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic",
+        "trade",
+        "soldiering"
       ]
     },
     {
@@ -57906,7 +58747,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-market",
@@ -58039,7 +58881,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-workshop",
@@ -58172,7 +59015,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-linen",
@@ -58305,7 +59149,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-copies",
@@ -58438,7 +59283,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-bakery",
@@ -58571,7 +59417,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-well",
@@ -58704,7 +59551,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-festival",
@@ -58837,7 +59685,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-library",
@@ -58970,7 +59819,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-music",
@@ -59103,7 +59953,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-boat",
@@ -59236,7 +60087,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-drill",
@@ -59369,7 +60221,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-garden",
@@ -59502,7 +60355,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-accounts",
@@ -59635,7 +60489,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-pottery",
@@ -59768,7 +60623,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "business-proposal-person-neighbors",
@@ -59901,7 +60757,8 @@
       "stages": [
         "adulthood",
         "later-life"
-      ]
+      ],
+      "scope": "household"
     },
     {
       "id": "classical-succession-guard",
@@ -60022,7 +60879,11 @@
           ]
         }
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "soldiering"
+      ]
     },
     {
       "id": "classical-garrison-account",
@@ -60081,7 +60942,11 @@
       "sourceIds": [
         "classical-alexander"
       ],
-      "evidence": "fictional"
+      "evidence": "fictional",
+      "fields": [
+        "trade",
+        "soldiering"
+      ]
     },
     {
       "id": "classical-aristotle-journey",
@@ -60204,7 +61069,11 @@
             }
           ]
         }
-      ]
+      ],
+      "fields": [
+        "research"
+      ],
+      "scope": "household"
     },
     {
       "id": "classical-alexander-shore-work",
@@ -60377,6 +61246,10 @@
             }
           ]
         }
+      ],
+      "fields": [
+        "civic",
+        "trade"
       ]
     },
     {
@@ -60505,7 +61378,11 @@
             }
           ]
         }
-      ]
+      ],
+      "fields": [
+        "trade"
+      ],
+      "scope": "household"
     },
     {
       "id": "demo-convoy-muster",
@@ -61087,7 +61964,11 @@
           ]
         }
       ],
-      "scope": "work"
+      "scope": "household",
+      "stages": [
+        "adulthood",
+        "later-life"
+      ]
     },
     {
       "id": "demo-convoy-road",
@@ -61592,7 +62473,11 @@
           ]
         }
       ],
-      "scope": "work"
+      "scope": "work",
+      "stages": [
+        "adulthood",
+        "later-life"
+      ]
     },
     {
       "id": "neighbours-help-at-harvest",
@@ -61684,6 +62569,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "farming"
       ]
     },
     {
@@ -61766,6 +62654,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "civic"
       ]
     },
     {
@@ -61886,6 +62777,9 @@
       "stages": [
         "adulthood",
         "later-life"
+      ],
+      "fields": [
+        "trade"
       ]
     },
     {
@@ -62733,7 +63627,10 @@
             ]
           }
         ]
-      }
+      },
+      "fields": [
+        "soldiering"
+      ]
     },
     {
       "id": "v-workshop-safety",
