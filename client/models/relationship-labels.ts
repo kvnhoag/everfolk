@@ -35,6 +35,30 @@ export function relationshipLabels(world: WorldPack, life: LifeState, personId: 
   return labels;
 }
 
+function hasSocialRoleHistory(world: WorldPack, life: LifeState, partnerId: string): boolean {
+  if (!world.character?.socialRelationships) return false;
+  const character = life.character;
+  if (!character) return false;
+
+  const socialActionIds = new Set<string>();
+  for (const activity of world.character.activities ?? []) {
+    if (activity.outcomes?.some(o => o.effects?.some(e => e.type === "social-role" && e.partner === partnerId))) {
+      socialActionIds.add(activity.id);
+    }
+  }
+  for (const event of world.events ?? []) {
+    for (const choice of event.choices ?? []) {
+      if (choice.outcomes?.some(o => o.effects?.some(e => e.type === "social-role" && e.partner === partnerId))) {
+        socialActionIds.add(choice.id);
+      }
+    }
+  }
+  const lastAges = character.lastActivityAges;
+  if (lastAges && Object.keys(lastAges).some(id => socialActionIds.has(id))) return true;
+  if (life.journal && life.journal.some(j => socialActionIds.has(j.id))) return true;
+  return false;
+}
+
 /** Meeting alone stays private; retained releases keep their own catalog rules. */
 export function visibleRelationshipPeople(world: WorldPack, life: LifeState): ResolvedPerson[] {
   const definition = world.character, character = life.character;
@@ -52,6 +76,7 @@ export function visibleRelationshipPeople(world: WorldPack, life: LifeState): Re
     const dated = character.datedPartnerIds?.includes(person.id) === true;
     const roles = definition.socialRelationships ? character.relationships?.partners[person.id]?.roles : undefined;
     const social = roles?.some(role => role === "friend" || role === "business-partner" || definition.extendedSocialRoles && (role === "teacher" || role === "disciple" || role === "enemy")) === true;
-    return dated || social ? [person] : [];
+    const established = hasSocialRoleHistory(world, life, person.id);
+    return dated || social || established ? [person] : [];
   });
 }

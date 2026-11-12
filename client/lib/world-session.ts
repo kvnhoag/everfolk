@@ -44,6 +44,11 @@ import livelihoodsWorld from "../../worlds/alexandria-0.38.0.json" with { type: 
 import resourceVarietyWorld from "../../worlds/alexandria-0.39.0.json" with { type: "json" };
 import marketRolesWorld from "../../worlds/alexandria-0.40.0.json" with { type: "json" };
 import marketCapacityWorld from "../../worlds/alexandria-0.41.0.json" with { type: "json" };
+import demo1World from "../../worlds/demo/alexandria-demo-1.json" with { type: "json" };
+import demo2World from "../../worlds/demo/alexandria-demo-2.json" with { type: "json" };
+import lives1World from "../../worlds/demo/alexandria-lives-1.json" with { type: "json" };
+import lives2World from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
+import lives3World from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -89,6 +94,11 @@ const livelihoodsEngine = createEngine(livelihoodsWorld);
 const resourceVarietyEngine = createEngine(resourceVarietyWorld);
 const marketRolesEngine = createEngine(marketRolesWorld);
 const marketCapacityEngine = createEngine(marketCapacityWorld);
+const demo1Engine = createEngine(demo1World as unknown as WorldPack);
+const demo2Engine = createEngine(demo2World as unknown as WorldPack);
+const lives1Engine = createEngine(lives1World as unknown as WorldPack);
+const lives2Engine = createEngine(lives2World as unknown as WorldPack);
+const lives3Engine = createEngine(lives3World as unknown as WorldPack);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -122,6 +132,11 @@ engines.set(livelihoodsEngine.fingerprint, livelihoodsEngine);
 engines.set(resourceVarietyEngine.fingerprint, resourceVarietyEngine);
 engines.set(marketRolesEngine.fingerprint, marketRolesEngine);
 engines.set(marketCapacityEngine.fingerprint, marketCapacityEngine);
+engines.set(demo1Engine.fingerprint, demo1Engine);
+engines.set(demo2Engine.fingerprint, demo2Engine);
+engines.set(lives1Engine.fingerprint, lives1Engine);
+engines.set(lives2Engine.fingerprint, lives2Engine);
+engines.set(lives3Engine.fingerprint, lives3Engine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

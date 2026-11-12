@@ -1,5 +1,6 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../../src/types.ts";
-import { financeActivityReason, getDemoResourceValue, getNetWorth, previewEconomyEffects } from "../../src/economy.ts";
+import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
+import { bid } from "../../src/vocations/view.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
 import { marketOrderValue, marketQuote } from "../../src/market.ts";
@@ -80,6 +81,38 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
       assets.push({ id: `demo:${item}`, title: titles[item], description: "Household stores valued at the merchant’s current buying price.", value: demo.town.prices[item].buy, quantity });
     }
   }
+  if (world.vocations && life.vocations) {
+    const def = world.vocations;
+    const ledger = life.vocations;
+    const countedFromLots: Record<string, number> = {};
+    for (const lot of ledger.lots ?? []) {
+      if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
+      countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
+      const isMaterial = Boolean(def.materials[lot.item]);
+      const value = isMaterial ? def.materials[lot.item].price : bid(world, lot.item, lot.quality);
+      assets.push({
+        id: `vocation:${lot.item}:${lot.quality}`,
+        title: `${lot.item.replaceAll("-", " ")}${isMaterial ? "" : ` (grade ${lot.quality})`}`,
+        description: isMaterial ? "Workshop material holdings." : "Crafted goods valued at the funded buyer bid.",
+        value,
+        quantity: lot.quantity,
+      });
+    }
+    for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
+      if (quantity <= 0 || item === "flax" || item === "linen") continue;
+      const remaining = quantity - (countedFromLots[item] ?? 0);
+      if (remaining <= 0) continue;
+      const isMaterial = Boolean(def.materials[item]);
+      const value = isMaterial ? def.materials[item].price : bid(world, item, 1);
+      assets.push({
+        id: `vocation:${item}`,
+        title: item.replaceAll("-", " "),
+        description: isMaterial ? "Workshop material holdings." : "Crafted goods valued at the funded buyer bid.",
+        value,
+        quantity: remaining,
+      });
+    }
+  }
   const job = world.character?.jobs.find(item => item.id === life.character?.jobId);
   const trading = Boolean(world.economy.market && life.character?.lastActivityAges[world.economy.market.traderFocusActivity] === life.age);
   const jobCash = trading ? 0 : directMoneyDelta(job?.yearlyEffects ?? [], world);
@@ -93,7 +126,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .flatMap(activity => activity.outcomes.map(outcome => -directMoneyDelta(outcome.effects, world)))
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
-    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life), committedValue,
+    cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life) + getVocationInventoryValue(world, life), committedValue,
     netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), job, jobCash, trading, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),

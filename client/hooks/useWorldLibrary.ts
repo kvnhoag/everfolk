@@ -87,12 +87,21 @@ export function useWorldLibrary() {
     setBusy(true);
     setError("");
     try {
-      const useDemo = fresh || id === "alexandria" || id === "alexandria-sample" || Boolean(active?.world.pack.demo);
-      const demo = useDemo ? await loadDemoWorld() : null;
-      let world: PublishedWorld = demo
-        ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
-        : await readWorld(id);
-      if (fresh && !demo) world = selectFactoryWorld(world, { fresh: true });
+      const isDemoTarget = id === "alexandria-demo" || (Boolean(active?.world.pack.demo) && fresh && id === active?.world.id);
+      let world: PublishedWorld;
+      if (isDemoTarget) {
+        const demo = await loadDemoWorld();
+        world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
+      } else {
+        try {
+          world = await readWorld(id);
+        } catch (cause) {
+          const builtin = getBuiltinWorld();
+          if (id === builtin.id) world = builtin;
+          else throw cause;
+        }
+      }
+      if (fresh && !isDemoTarget) world = selectFactoryWorld(world, { fresh: true });
       else {
         const refreshed = selectFactoryWorld(world);
         if (refreshed !== world) {

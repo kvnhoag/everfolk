@@ -1,4 +1,4 @@
-import { vocationCashDelta } from "./vocations/view.ts";
+import { bid, vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
 import { TRADE_ITEMS } from "./demo/types.ts";
@@ -12,7 +12,7 @@ function amount(value: number, label: string): number {
   return value;
 }
 
-type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo">>;
+type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo" | "vocations">>;
 /** The merchant's current bid is the realizable market value of each holding. */
 export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeState, "demo">>): number {
   if (!world.demo?.startingResources || !state.demo) return 0;
@@ -26,11 +26,40 @@ export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeS
   }, 0), "Household resource market value");
 }
 
+/** Non-shared vocation materials and completed lots valued at realizable funded buyer bids. */
+export function getVocationInventoryValue(world: WorldPack, state: Partial<Pick<LifeState, "vocations">>): number {
+  if (!world.vocations || !state.vocations) return 0;
+  const def = world.vocations;
+  const ledger = state.vocations;
+  let total = 0;
+  const countedFromLots: Record<string, number> = {};
+  for (const lot of ledger.lots ?? []) {
+    if (lot.quantity <= 0 || lot.item === "flax" || lot.item === "linen") continue;
+    countedFromLots[lot.item] = (countedFromLots[lot.item] ?? 0) + lot.quantity;
+    if (def.materials[lot.item]) {
+      total += def.materials[lot.item].price * lot.quantity;
+    } else {
+      total += bid(world, lot.item, lot.quality) * lot.quantity;
+    }
+  }
+  for (const [item, quantity] of Object.entries(ledger.inventory ?? {})) {
+    if (quantity <= 0 || item === "flax" || item === "linen") continue;
+    const remaining = quantity - (countedFromLots[item] ?? 0);
+    if (remaining <= 0) continue;
+    if (def.materials[item]) {
+      total += def.materials[item].price * remaining;
+    } else {
+      total += bid(world, item, 1) * remaining;
+    }
+  }
+  return amount(total, "Vocation inventory realizable value");
+}
+
 export function getAssetValue(world: WorldPack, state: ValuationState): number {
   if (!world.economy || !state.economy) return 0;
   const valuation = { ...state, age: state.age ?? 0, lastEventAge: state.lastEventAge ?? {}, eventCounts: state.eventCounts ?? {} };
   return amount(world.economy.assets.reduce((sum, asset) => sum + marketQuote(world, valuation, asset.id).sell * (state.economy!.assets[asset.id] ?? 0), 0)
-    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state), "Resource market value");
+    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state) + getVocationInventoryValue(world, state), "Resource market value");
 }
 
 export function getNetWorth(world: WorldPack, state: ValuationState): number {
