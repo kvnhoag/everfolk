@@ -3,6 +3,7 @@ import { canonicalJson } from "../src/random.ts";
 import { sha256Hex } from "./hash.ts";
 import { computeImpacts } from "./impact.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "./match.ts";
+import { matchStageFigure, type MatchedStageFigure, type StageCharacterContext } from "./stage-figures.ts";
 import type { Evidence, LifeView } from "./types.ts";
 
 export interface EvidenceInput { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string }
@@ -45,6 +46,19 @@ export async function buildEvidence(input: EvidenceInput): Promise<Evidence> {
     career_group: careerGroupOf(state),
     matched_figures: matchFigures(state),
     sources: computeImpacts(save.commands, state.journal),
+    ...(state.stageRecords && state.stageRecords.length > 0 ? {
+      stage_records: state.stageRecords,
+      stage_figures: state.stageRecords.map(record => matchStageFigure(record, {
+        characterName: state.character?.name ?? "A citizen of Alexandria",
+        name: state.character?.name,
+        originId: state.originId,
+        sex: state.character?.sex,
+        avatarVariant: state.character?.avatarVariant,
+        seed: life.seed,
+        worldVersion: life.world_version,
+        stats: { ...state.stats },
+      })),
+    } : {}),
   };
 }
 
