@@ -55,7 +55,7 @@ const NEW_LIFE_STEPS: readonly TutorialStep[] = [
 
 const GAME_STEPS: readonly TutorialStep[] = [
   { id: "time-bar", stage: "game", screen: GAME, targets: [".life-session-bar"], title: "The time bar",
-    body: "A year passes every few seconds. Pause or Resume, pick a speed from 1× to 16×, skip to the Next decision, or let Auto mode choose for you. The clock waits while this tour is open." },
+    body: "A year passes every few seconds. Pause or Resume, pick a speed from 1× to 16×, skip to the Next decision, or let Auto mode choose for you. The game keeps playing while this tour is open; close it any time with ×." },
   { id: "rail", stage: "game", screen: GAME, targets: [".life-year-rail"], title: "Your lifetime",
     body: "This rail marks the decades of your life, from birth onward. The marker moves as you age." },
   { id: "resources", stage: "game", screen: GAME, targets: [".aoe-resource-hud"], title: "Household resources",

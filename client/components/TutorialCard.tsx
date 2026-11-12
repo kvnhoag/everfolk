@@ -12,19 +12,19 @@ export interface TutorialCardProps {
   ready?: boolean;
   position?: CardPosition;
   spotlight?: Rect | null;
-  dialogRef?: Ref<HTMLDialogElement>;
+  cardRef?: Ref<HTMLDivElement>;
   onBack(): void;
   onNext(): void;
   onClose(): void;
 }
 
 /**
- * The tour card. It is itself the modal <dialog> (labelled by its title), so it sits in the browser's top
- * layer above the game's popups and the Weave screens. The spotlight is a fixed child painted under it.
+ * The tour card: a manual popover in the browser's top layer, labelled by its title. It is not modal, so the
+ * game stays playable underneath; the spotlight is a fixed, click-through child painted under the panel.
  */
-export default function TutorialCard({ step, index, total, missing, ready = true, position, spotlight = null, dialogRef, onBack, onNext, onClose }: TutorialCardProps) {
+export default function TutorialCard({ step, index, total, missing, ready = true, position, spotlight = null, cardRef, onBack, onNext, onClose }: TutorialCardProps) {
   const last = index >= total - 1;
-  function onKeyDown(event: KeyboardEvent<HTMLDialogElement>) {
+  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const action = tutorialKeyAction(event.key, event.target instanceof HTMLButtonElement);
     if (!action) return;
     event.preventDefault();
@@ -33,13 +33,14 @@ export default function TutorialCard({ step, index, total, missing, ready = true
     else onNext();
   }
   const style = position ? { top: position.top, left: position.left } : undefined;
-  return <dialog ref={dialogRef} className={`${TUTORIAL_LAYER_CLASS} tutorial-card${ready ? " is-ready" : ""}`} data-placement={position?.placement ?? "center"} data-step={step.id}
-    aria-labelledby="tutorial-card-title" aria-describedby="tutorial-card-body" tabIndex={-1} style={style}
-    onCancel={event => { event.preventDefault(); onClose(); }} onKeyDown={onKeyDown}>
+  return <div ref={cardRef} className={`${TUTORIAL_LAYER_CLASS} tutorial-card${ready ? " is-ready" : ""}`} data-placement={position?.placement ?? "center"} data-step={step.id}
+    popover="manual" role="dialog" aria-modal="false" aria-labelledby="tutorial-card-title" aria-describedby="tutorial-card-body" tabIndex={-1} style={style}
+    onKeyDown={onKeyDown}>
     {spotlight
       ? <div className="tutorial-spotlight" aria-hidden="true" style={{ top: spotlight.top, left: spotlight.left, width: spotlight.width, height: spotlight.height }} />
       : <div className="tutorial-dim" aria-hidden="true" />}
     <div className="tutorial-card-panel">
+      <button type="button" className="tutorial-card-dismiss" aria-label="Close tutorial" title="Close tutorial" onClick={onClose}><span aria-hidden="true">×</span></button>
       <p className="tutorial-card-count">Step {index + 1} of {total}</p>
       <h2 id="tutorial-card-title" className="tutorial-card-title">{step.title}</h2>
       <p id="tutorial-card-body" className="tutorial-card-body">{missing && step.missingBody ? step.missingBody : step.body}</p>
@@ -54,5 +55,5 @@ export default function TutorialCard({ step, index, total, missing, ready = true
         </div>
       </div>
     </div>
-  </dialog>;
+  </div>;
 }

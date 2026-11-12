@@ -32,12 +32,16 @@ test("the Tutorial button is a real button with an accessible label", () => {
   assert.match(renderToStaticMarkup(createElement(TutorialButton, { tone: "dark" })), /tutorial-button is-dark/);
 });
 
-test("the card is a labelled dialog with step count, Back, Next and Close tutorial", () => {
+test("the card is a labelled, non-modal dialog with step count, Back, Next, × and Close tutorial", () => {
   const step = TUTORIAL_STEPS[2];
   const html = renderToStaticMarkup(createElement(TutorialCard, { step, index: 2, total: TUTORIAL_STEPS.length, missing: false, onBack: noop, onNext: noop, onClose: noop }));
-  assert.match(html, /^<dialog[^>]*class="everfolk-tutorial-layer tutorial-card/);
-  assert.match(html, /^<dialog[^>]*aria-labelledby="tutorial-card-title"/);
-  assert.match(html, /^<dialog[^>]*aria-describedby="tutorial-card-body"/);
+  assert.match(html, /^<div[^>]*class="everfolk-tutorial-layer tutorial-card/);
+  assert.match(html, /^<div[^>]*popover="manual"/, "A manual popover stays on top without making the game inert.");
+  assert.match(html, /^<div[^>]*role="dialog"/);
+  assert.match(html, /^<div[^>]*aria-modal="false"/);
+  assert.match(html, /^<div[^>]*aria-labelledby="tutorial-card-title"/);
+  assert.match(html, /^<div[^>]*aria-describedby="tutorial-card-body"/);
+  assert.match(html, /<button[^>]*class="tutorial-card-dismiss"[^>]*aria-label="Close tutorial"/);
   assert.match(html, /id="tutorial-card-title"[^>]*>Weave Mode</);
   assert.match(html, new RegExp(`Step 3 of ${TUTORIAL_STEPS.length}`));
   assert.match(html, /<button[^>]*>Back<\/button>/);
