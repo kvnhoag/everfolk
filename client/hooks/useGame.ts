@@ -279,6 +279,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const restart = useCallback(() => {
     if (rankedRef.current) return; // A ranked life ends by minting or closing it, never by rerolling.
+    unreadableSaveRef.current = null;
+    setUnreadableSave(null);
     setPlaying(false);
     setAutoDecisions(false);
     hasBegunRef.current = false;
@@ -295,6 +297,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
     try {
       const restored = loadAnyLife(json);
+      unreadableSaveRef.current = null;
+      setUnreadableSave(null);
       let begun = restored.commands.some(command => command.type !== "avatar") || restored.phase === "ended";
       if (!begun && typeof window !== "undefined") {
         try { begun = hasLifeBegun(window.localStorage, restored); }
@@ -327,7 +331,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   useEffect(() => {
     if (rankedRef.current) return; // The ranked session keeps its own save; never overwrite the free-play slot.
-    if (unreadableSaveRef.current) return; // Retain unreadable records until the player explicitly replaces them.
+    if (unreadableSaveRef.current !== null) return; // Includes malformed empty records.
     try {
       persistLife(window.localStorage, life);
       persistBirthPresentation(window.localStorage, life, hasBegun);
@@ -336,16 +340,16 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasBegun, life]);
+  }, [hasBegun, life, unreadableSave]);
 
   useEffect(() => {
-    if (unreadableSaveRef.current) return;
+    if (unreadableSaveRef.current !== null) return;
     try { persistBirthStatsReveal(window.localStorage, life, hasRevealedStats); }
     catch (error) {
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasRevealedStats, life]);
+  }, [hasRevealedStats, life, unreadableSave]);
 
   useEffect(() => {
     // Ranked lives are kept on chain and by their session; the past-lives shelf is for free play.
