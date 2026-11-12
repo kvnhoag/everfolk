@@ -1,6 +1,6 @@
 # Handmade work and public life
 
-`alexandria-lives-3` is the current **free-play** birth revision, built from the retained `alexandria-demo-2` pack. It retains deterministic household resource rolls and market-valued wealth, and adds the connected 65-node skill atlas with recorded work proofs. The previous `alexandria-lives-1` and `alexandria-lives-2` revisions remain available for exact replay. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
+`alexandria-lives-4` is the current **free-play** birth revision, built from the retained `alexandria-demo-2` pack. It retains deterministic household resource rolls, market-valued wealth and the connected 65-node skill atlas with recorded work proofs, and adds [life stages](../life-stages/README.md): every event has a time frame, and floods, levies, illness and town offers reach a child through the household's decisions instead of the child's. The previous `alexandria-lives-1`, `alexandria-lives-2` and `alexandria-lives-3` revisions remain available for exact replay. Started lives keep their exact pack. Live ranked configuration, contract allowlists and deployment are unchanged.
 
 Run `node scripts/vocations/build-world.mjs` to reproduce the shipped JSON. The builder reads the public [skill-tree design](../../design/skill-tree/README.md) for recipe inputs and reference prices.
 
