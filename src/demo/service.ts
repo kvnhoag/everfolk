@@ -13,6 +13,7 @@ import { matchesCondition } from "../conditions.ts";
 import { changeReputation } from "./works.ts";
 import { townDecision } from "./agents.ts";
 import { CONVOY_MUSTER_EVENT_ID, CONVOY_ROAD_EVENT_ID, RISK_REASONS, SERVICE_CONTENT } from "./content/service.ts";
+import { scaledPay } from "../paths/pay.ts";
 
 const BPS = 10_000;
 const UNIT = "dr";
@@ -72,7 +73,8 @@ export function payWages(ctx: DemoContext): void {
   const { life, demo, def } = ctx;
   if (!servingThisYear(life) || paidThisYear(life)) return;
   const army = demo.town.army, money = unit(ctx);
-  const wage = wageFor(def, demo.year.army, townDecision(ctx, "army"));
+  // Paths worlds: a soldier-short district pays more, still from the same purse.
+  const wage = scaledPay(ctx.world, life, "soldiering", wageFor(def, demo.year.army, townDecision(ctx, "army")));
   const paid = Math.min(wage, army.purse);
   army.purse -= paid;
   if (paid > 0) ctx.apply([{ type: "cash", delta: paid }]);

@@ -4,6 +4,7 @@ import { farmSaleReason } from "./farming.ts";
 import { ruleFor, type CapabilityRule } from "./rules.ts";
 import { productionQuote, type ProductionQuote } from "./production.ts";
 import { basketQuote, buyBasket, inventoryOf, putItem, takeItem, type BasketQuote } from "./inventory.ts";
+import { fieldOfNode, scaledPay } from "../paths/pay.ts";
 
 export interface WorkQuote {
   inputs: Record<string, number>; basket: BasketQuote; fee: number; pay: number;
@@ -41,7 +42,8 @@ export function workQuote(world: WorldPack, life: LifeState, nodeId: string): Wo
     const deliveries = nodeId === "T10" ? 2 : 1;
     quote.inputs = { grain: 10 * deliveries };
     const unit = life.demo?.town.prices.grain.buy ?? 1;
-    quote.pay = deliveries * (10 * unit + (rule.pay ?? 0));
+    // Only the service premium follows the trade need; the grain itself is paid at market value.
+    quote.pay = deliveries * (10 * unit + scaledPay(world, life, "trade", rule.pay ?? 0));
     quote.fee = deliveries * (rule.fee ?? 0);
     if (nodeId === "T10") {
       const perBuyer = quote.pay / 2;
@@ -59,6 +61,8 @@ export function workQuote(world: WorldPack, life: LifeState, nodeId: string): Wo
     if (prior.length < 3 || new Set(prior.map(e => e.age)).size < 2 || records(life, "PS8").length < 2) quote.reason = "The synthesis needs three distinct earlier records spanning two years and two independent checks.";
   }
   if (nodeId === "T3" && Object.keys(life.capabilities!.costBasis ?? {}).length < 3) quote.reason = "Record the paid basket's three acquisition costs before comparing quotations.";
+  const supplyOrder = rule.kind === "trade" && Number(nodeId.slice(1)) >= 5;
+  if (!supplyOrder) quote.pay = scaledPay(world, life, fieldOfNode(world, nodeId), quote.pay);
   quote.basket = basketQuote(world, life, quote.inputs);
   if (!quote.reason && quote.basket.reason) quote.reason = quote.basket.reason;
   const expense = quote.fee + quote.basket.cost;
