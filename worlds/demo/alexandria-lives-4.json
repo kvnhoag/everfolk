@@ -68402,6 +68402,11 @@
             }
           },
           {
+            "type": "age",
+            "op": "gte",
+            "value": 18
+          },
+          {
             "type": "not",
             "condition": {
               "type": "job",
@@ -68411,7 +68416,6 @@
         ]
       },
       "stages": [
-        "youth",
         "adulthood"
       ],
       "scope": "community",
@@ -68424,20 +68428,10 @@
           "id": "need-war-recruiting-enlist",
           "text": "Enlist for the pay, and the danger",
           "when": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "age",
-                "op": "gte",
-                "value": 18
-              },
-              {
-                "type": "skill",
-                "skill": "warfare",
-                "op": "gte",
-                "value": 10
-              }
-            ]
+            "type": "skill",
+            "skill": "warfare",
+            "op": "gte",
+            "value": 10
           },
           "outcomes": [
             {
@@ -68459,6 +68453,36 @@
                   "field": "soldiering",
                   "delta": 10,
                   "source": "enlisting in a war year"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-war-recruiting-drill",
+          "text": "Drill with the recruits before deciding",
+          "when": {
+            "type": "skill",
+            "skill": "warfare",
+            "op": "lt",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "need-war-recruiting-drill-done",
+              "text": "You drill with the recruits until your arms ache. Next time you would be ready to sign.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 5
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "drilling with the recruits"
                 }
               ]
             }

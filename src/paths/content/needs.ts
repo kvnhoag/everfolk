@@ -98,13 +98,16 @@ const SPECS: Spec[] = [
   ...FIELD_IDS.map(scarce),
   ...FIELD_IDS.map(masterOffer),
   ...(["ceramics", "clothing", "sculpture"] as const).map(commission),
-  { id: "need-war-recruiting", title: "Recruiters in the market", fields: ["soldiering"], stages: ["youth", "adulthood"], scope: "community", anchor: true,
-    // At the height of a war (not the first recruiting year, which the household levy answers).
-    when: { type: "all", conditions: [ARMY_AT_WAR, { type: "not", condition: { type: "job", job: "soldier" } }] },
+  { id: "need-war-recruiting", title: "Recruiters in the market", fields: ["soldiering"], stages: ["adulthood"], scope: "community", anchor: true,
+    // At the height of a war (the first recruiting year belongs to the household levy), and only once
+    // the life is old enough to sign the roll, so the one offer is never wasted on a child.
+    when: { type: "all", conditions: [ARMY_AT_WAR, { type: "age", op: "gte", value: 18 }, { type: "not", condition: { type: "job", job: "soldier" } }] },
     text: "Recruiters stand in the market offering better pay than in quiet years. The army is short of men, and everyone knows why: some who march out will not come back.",
     choices: [
-      { key: "enlist", text: "Enlist for the pay, and the danger", when: { type: "all", conditions: [{ type: "age", op: "gte", value: 18 }, { type: "skill", skill: "warfare", op: "gte", value: 10 }] },
+      { key: "enlist", text: "Enlist for the pay, and the danger", when: { type: "skill", skill: "warfare", op: "gte", value: 10 },
         result: "You put your mark on the roll and are told when to report.", effects: [{ type: "job", job: "soldier" }, { type: "flag", flag: "army-service", value: true }, pull("soldiering", 10, "enlisting in a war year")] },
+      { key: "drill", text: "Drill with the recruits before deciding", when: { type: "skill", skill: "warfare", op: "lt", value: 10 },
+        result: "You drill with the recruits until your arms ache. Next time you would be ready to sign.", effects: [skill("warfare", 5), pull("soldiering", 10, "drilling with the recruits")] },
       { key: "stay", text: "Stay with the work you have", result: "You walk past the recruiters.", effects: [] },
     ] },
   { id: "need-flood-trade", title: "Grain is dear", fields: ["trade"], stages: ["adulthood"], scope: "household", max: 3, cooldown: 3, weight: WEIGHT.season,

@@ -127,7 +127,7 @@ const NEEDS_AND_MOVES: Record<string, { stages: string[]; scope?: string }> = {
   ...Object.fromEntries(FIELD_IDS.map(field => [`need-scarce-${field}`, { stages: ["youth", "adulthood", "later-life"], scope: "work" }])),
   ...Object.fromEntries(FIELD_IDS.map(field => [`need-master-offer-${field}`, { stages: ["adolescence", "youth"], scope: "work" }])),
   ...Object.fromEntries(["ceramics", "clothing", "sculpture"].map(field => [`need-commission-${field}`, { stages: ["adulthood"], scope: "work" }])),
-  "need-war-recruiting": { stages: ["youth", "adulthood"], scope: "community" },
+  "need-war-recruiting": { stages: ["adulthood"], scope: "community" },
   "need-flood-trade": { stages: ["adulthood"], scope: "household" },
   "move-city-apprenticeship": { stages: ["adolescence", "youth"], scope: "work" },
   "move-court-study": { stages: ["youth", "adulthood"], scope: "work" },
@@ -189,4 +189,22 @@ test("at the height of a war, recruiters make an offer that some lives accept", 
   const enlisted = lives.filter(({ life }) => life.journal.some(entry => entry.id === "need-war-recruiting-enlist-done"));
   assert.ok(offered.length > 0, "recruiting offers were made");
   assert.ok(enlisted.length > 0, "some lives enlisted");
+});
+
+test("a recruiting offer only comes when the life can act on it", () => {
+  let offers = 0;
+  for (let i = 0; i < 200; i++) {
+    let life = engine.start(`recruit-${i}`);
+    for (let guard = 0; life.phase !== "ended" && guard < 600; guard++) {
+      if (life.phase !== "choice") { life = engine.advance(life); continue; }
+      const choices = engine.getChoices(life);
+      if (life.pendingEventId === "need-war-recruiting") {
+        offers++;
+        assert.ok(life.age >= 18, `offered at ${life.age}`);
+        assert.ok(choices.some(choice => !choice.id.endsWith("-stay")), `only "stay" is open at age ${life.age}`);
+      }
+      life = engine.choose(life, choices[0].id);
+    }
+  }
+  assert.ok(offers > 10, `${offers} recruiting offers`);
 });
