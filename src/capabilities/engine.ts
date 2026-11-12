@@ -6,6 +6,7 @@ import { performWork, workQuote } from "./work.ts";
 import { applyFarmWork, farmWorkReason, farmProofProgress, settleFarmCapabilities } from "./farming.ts";
 import { applyStatDelta } from "../progression.ts";
 import { syncEconomyStat } from "../economy.ts";
+import { practiceGain } from "../paths/affinity.ts";
 
 export function initialCapabilities(): CapabilityState { return { learned: {}, evidence: [], costBasis: {}, reservedPayment: 0 }; }
 export function requirementReasons(world: WorldPack, life: LifeState, id: string): string[] {
@@ -61,7 +62,8 @@ function gains(world: WorldPack, life: LifeState, id: string): void {
   const supports = id.startsWith("F") ? ["reckoning"] : source?.supports ?? [];
   for (const [skill, amount] of [[primary,3], ...supports.slice(0,2).map(skill => [skill,2])] as [string,number][]) {
     const definition = world.character!.skills[skill];
-    if (definition) life.character!.skills[skill] = applyStatDelta(definition, life.character!.skills[skill], amount);
+    // Paths worlds: work in a field the life is drawn to teaches a little faster.
+    if (definition) life.character!.skills[skill] = applyStatDelta(definition, life.character!.skills[skill], practiceGain(world, life, skill, amount));
   }
 }
 export function applyCapability(world: WorldPack, life: LifeState, id: string): string {

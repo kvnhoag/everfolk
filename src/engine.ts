@@ -35,7 +35,7 @@ import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -276,8 +276,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           const definition = world.character!.skills[effect.skill];
           const gain = skillEffectDelta(effect, state.flags);
           // Paths worlds: practice grows faster in a field the life is drawn to.
-          const delta = state.paths ? practiceBonus(world, state, effect.skill, gain) : gain;
-          if (state.paths && delta > 0) notePractice(world, state, effect.skill);
+          const delta = practiceGain(world, state, effect.skill, gain);
           state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], delta);
           break;
         }

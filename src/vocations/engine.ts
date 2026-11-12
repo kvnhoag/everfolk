@@ -4,6 +4,7 @@ import type { LifeState, WorldPack } from "../types.ts";
 import type { VocationDefinition, VocationState } from "./types.ts";
 import { applyStatDelta } from "../progression.ts";
 import { syncEconomyStat } from "../economy.ts";
+import { practiceGain } from "../paths/affinity.ts";
 
 export function initialVocations(def: VocationDefinition): VocationState {
   return { inventory: {}, lots: [], stock: Object.fromEntries(Object.entries(def.materials).map(([id, m]) => [id, m.stock])), accounts: { ...def.accounts }, demand: { ...def.demand }, completed: {}, workedAge: null };
@@ -48,7 +49,7 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
 }
 function gain(world: WorldPack, life: LifeState, action: string): void {
   for (const [id, delta] of Object.entries(vocationGains(world, action))) {
-    life.character!.skills[id] = applyStatDelta(world.character!.skills[id], skill(life, id), delta);
+    life.character!.skills[id] = applyStatDelta(world.character!.skills[id], skill(life, id), practiceGain(world, life, id, delta));
   }
 }
 function add(life: LifeState, item: string, quantity: number, quality: number): void {

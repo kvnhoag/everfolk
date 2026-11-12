@@ -2,6 +2,7 @@
 import type { LifeEvent, LifeState, WorldPack } from "../types.ts";
 import { FIELD_IDS } from "./types.ts";
 import type { FieldId } from "./types.ts";
+import { derivedStream } from "./district.ts";
 
 const MAX_AFFINITY = 100;
 const PRACTICE_BONUS_BPS = 2000;
@@ -29,10 +30,24 @@ function highest(life: LifeState, fields: readonly FieldId[]): number {
   return fields.reduce((best, field) => Math.max(best, life.paths!.affinity[field]), 0);
 }
 
-/** Positive practice in a skill grows by up to 20% with the strongest affinity among its fields. */
+/**
+ * Positive practice in a skill grows by up to 20% with the strongest affinity among its fields.
+ * The fractional part is rounded up by chance on a side stream, so small gains still grow on average.
+ */
 export function practiceBonus(world: WorldPack, life: LifeState, skill: string, delta: number): number {
   if (delta <= 0 || !world.paths || !life.paths) return delta;
-  return delta + Math.floor(delta * PRACTICE_BONUS_BPS * highest(life, fieldsWithSkill(world, skill)) / (10_000 * MAX_AFFINITY));
+  const scaled = delta * PRACTICE_BONUS_BPS * highest(life, fieldsWithSkill(world, skill));
+  const whole = Math.floor(scaled / (10_000 * MAX_AFFINITY)), fraction = (scaled % (10_000 * MAX_AFFINITY)) / (10_000 * MAX_AFFINITY);
+  if (fraction === 0) return delta + whole;
+  const random = derivedStream(life, `practice:${life.age}:${skill}:${life.journal.length}`);
+  return delta + whole + (random() < fraction ? 1 : 0);
+}
+
+/** A practice gain as the engine applies it: affinity bonus, and the fields marked as practised. */
+export function practiceGain(world: WorldPack, life: LifeState, skill: string, delta: number): number {
+  if (!world.paths || !life.paths) return delta;
+  if (delta > 0) notePractice(world, life, skill);
+  return practiceBonus(world, life, skill, delta);
 }
 
 /** Marks the fields of a practised skill as touched this year. */
