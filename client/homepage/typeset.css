@@ -42,16 +42,20 @@
 .ef-home .ef-home-era strong{font-size:12px;font-weight:500;letter-spacing:1.2px;color:var(--tx-cream)}
 .ef-home .ef-motion-toggle{font-size:12px;font-weight:400}
 
-/* Hero column: aligned precisely into the calm open Rhakotis sea bay between the sailboats and the quay. */
-.ef-home .ef-home-body{padding:clamp(6px,2vh,24px) 0 22px;min-height:0}
+/* Hero column: aligned precisely into the calm open Rhakotis sea bay, nestled down over the water surface. */
+.ef-home .ef-home-body{padding:clamp(12px,4vh,44px) 0 clamp(16px,3.5vh,36px);min-height:0}
 @media (min-width: 701px) {
   .ef-home .ef-home-body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    padding-top: clamp(28px, 8vh, 88px);
+    padding-bottom: clamp(16px, 3.6vh, 36px);
   }
   .ef-home .ef-home-content {
+    margin-top: auto;
+    margin-bottom: 0;
     margin-right: auto;
     margin-left: max(16px, calc(50% - min(50%, 310px) - 7.5vw));
     max-width: 620px;
@@ -64,28 +68,28 @@
     margin: 0 auto;
   }
 }
-.ef-home .ef-home-eyebrow{margin:0;gap:0;font-size:12px;font-weight:500;letter-spacing:4.2px;color:var(--tx-cream);text-shadow:var(--tx-shadow)}
+.ef-home .ef-home-eyebrow{margin:0;gap:0;font-size:12px;font-weight:500;letter-spacing:4.2px;color:var(--tx-cream);text-shadow:0 1px 3px rgba(10, 32, 42, 0.65), 0 3px 10px rgba(10, 32, 42, 0.3)}
 .ef-home h1{margin:0;font-size:inherit;letter-spacing:0;line-height:1;text-shadow:none}
 .ef-home h1 .ef-title-wrap{display:inline-block;position:relative}
 .ef-home .ef-home-wordmark{display:block;font-size:clamp(86px, 8.8vw, 134px);line-height:1.04;letter-spacing:-1.5px;color:var(--tx-cream);padding:0 .12em;
-  text-shadow:0 1px 0 #fff9ea55,0 3px 6px #0b1d24b3,0 10px 30px #0b1d2480}
+  text-shadow:0 1px 1px rgba(255, 252, 240, 0.45), 0 3px 10px rgba(12, 38, 48, 0.48), 0 10px 28px rgba(10, 32, 42, 0.28)}
 .ef-home .ef-title-glint:nth-of-type(1){left:14%;top:30%}
 .ef-home .ef-title-glint:nth-of-type(2){left:64%;top:18%}
 .ef-home .ef-title-glint:nth-of-type(3){left:90%;top:70%}
-.ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,264px);margin:2px auto 14px;filter:drop-shadow(0 1px 2px #0b1d24cc)}
+.ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,264px);margin:2px auto 14px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
 .ef-home-logo-rule span{flex:1;height:1px;background:var(--tx-gold-line);opacity:.75}
 .ef-home-logo-rule i{font-size:17px;line-height:1;color:var(--tx-gold)}
 .ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:clamp(32px, 3.2vw, 46px);line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
-  background:none;-webkit-text-fill-color:currentColor;border-radius:0;filter:none;text-shadow:0 2px 4px #0a1a20cc,0 6px 22px #0a1a2099}
-.ef-home .ef-home-rule{width:min(100%,286px);gap:14px;margin:0 auto 22px;opacity:1;filter:drop-shadow(0 1px 2px #0b1d24cc)}
+  background:none;-webkit-text-fill-color:currentColor;border-radius:0;filter:none;text-shadow:0 1px 1px rgba(255, 252, 240, 0.35), 0 2px 8px rgba(12, 38, 48, 0.5), 0 8px 20px rgba(10, 32, 42, 0.25)}
+.ef-home .ef-home-rule{width:min(100%,286px);gap:14px;margin:0 auto 22px;opacity:1;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
 .ef-home .ef-home-rule span:first-child,.ef-home .ef-home-rule span:last-child{height:1px;background:var(--tx-gold-line);opacity:.7}
 .ef-home .ef-home-rule i{width:11px;height:11px;border:1.5px solid var(--tx-gold);transform:rotate(45deg)}
-.ef-home .ef-home-intro{margin:0 auto 34px;padding:4px 26px;font-size:18px;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--tx-cream);text-shadow:var(--tx-shadow);
+.ef-home .ef-home-intro{margin:0 auto 34px;padding:4px 26px;font-size:18px;font-weight:400;line-height:1.6;letter-spacing:0;color:var(--tx-cream);text-shadow:0 1px 3px rgba(10, 32, 42, 0.65), 0 3px 10px rgba(10, 32, 42, 0.3);
   background:radial-gradient(ellipse 70% 62% at 50% 50%,#0c1d263d 0%,transparent 100%)}
 .ef-home .ef-home-intro em{display:inline-block;margin-top:6px;font-style:normal;font-weight:500;color:var(--tx-gold)}
 
-/* Save card ("A story in progress"). */
-.ef-home .ef-home-save{gap:18px;width:min(100%,468px);margin:0 auto 20px;padding:14px 18px 14px 20px;border:1px solid #f4d38f26;border-radius:2px;background:#123c46e6;box-shadow:0 8px 24px #08171d40}
+/* Save card ("A story in progress"): elevated gently above the water with luminous dawn depth. */
+.ef-home .ef-home-save{gap:18px;width:min(100%,468px);margin:0 auto 16px;padding:14px 18px 14px 20px;border:1px solid rgba(244, 211, 143, 0.32);border-radius:2px;background:rgba(16, 48, 56, 0.9);backdrop-filter:blur(4px);box-shadow:0 12px 30px -4px rgba(8, 28, 36, 0.42), 0 4px 12px rgba(10, 32, 40, 0.25), inset 0 1px 0 rgba(255, 243, 217, 0.22)}
 .ef-home .ef-home-save-mark{flex:0 0 auto;width:20px;height:20px;margin:0 6px;border:1.5px solid var(--tx-gold);transform:rotate(45deg)}
 .ef-home .ef-home-save>div{gap:4px}
 .ef-home .ef-home-save>div>span{font-size:10px;font-weight:500;letter-spacing:2.4px;color:var(--tx-gold)}
@@ -93,22 +97,22 @@
 .ef-home .ef-home-save-age{font-size:14px;font-weight:500;line-height:1.4;color:var(--tx-cream)}
 .ef-home .ef-home-save-age small{font-size:12px;font-weight:400;line-height:1.6;color:#e6dcc6}
 
-/* Primary action. */
+/* Primary action: grounded over the water without harsh black shadows. */
 .ef-home .ef-home-actions{width:min(100%,468px);gap:10px}
 .ef-home .ef-home-primary{min-height:70px;gap:22px;padding:16px 26px 16px 22px;border:1px solid #fff2d0;border-radius:3px;color:var(--tx-ink);font-size:18px;font-weight:600;letter-spacing:0;
   background:linear-gradient(100deg,#fbeaca 0%,#f5ddb0 45%,#ecc781 100%);
-  box-shadow:inset 0 0 0 4px #f6e2b9,inset 0 0 0 5px #b8925a66,0 6px 18px #0b1c2559,0 1px 0 #8a683e}
+  box-shadow:inset 0 0 0 4px #f6e2b9,inset 0 0 0 5px rgba(184, 146, 90, 0.4),0 10px 28px -3px rgba(10, 32, 42, 0.42),0 3px 8px rgba(12, 36, 46, 0.22),0 1px 0 #8a683e}
 .ef-home .ef-home-primary:before{inset:5px;border-color:#b8925a55}
 .ef-home .ef-home-primary:hover{transform:translateY(-1px);color:#0f2c31;background:linear-gradient(100deg,#fff0d4 0%,#f8e3b8 45%,#f0cd8a 100%);
-  box-shadow:inset 0 0 0 4px #f9e8c4,inset 0 0 0 5px #b8925a77,0 9px 24px #0b1c2566,0 1px 0 #8a683e}
+  box-shadow:inset 0 0 0 4px #f9e8c4,inset 0 0 0 5px rgba(184, 146, 90, 0.55),0 14px 32px -2px rgba(10, 32, 42, 0.5),0 4px 12px rgba(12, 36, 46, 0.26),0 1px 0 #8a683e}
 .ef-home .ef-home-primary:active{transform:translateY(1px)}
 .ef-home .ef-home-button-mark{font-size:24px;color:#6f4f2a}
 .ef-home .ef-home-button-arrow{font-size:22px;color:var(--tx-ink)}
 .ef-home .ef-home-primary:hover .ef-home-button-arrow{transform:translateX(3px)}
-.ef-home .ef-home-secondary{min-height:44px;font-size:14px;font-weight:500;color:var(--tx-gold);text-shadow:var(--tx-shadow)}
+.ef-home .ef-home-secondary{min-height:44px;font-size:14px;font-weight:500;color:var(--tx-gold);text-shadow:0 1px 3px rgba(10, 32, 42, 0.65)}
 .ef-home .ef-home-secondary span{margin-left:12px;color:var(--tx-gold)}
 .ef-home .ef-home-secondary:hover{color:#fff1cf}
-.ef-home .ef-home-save-note{margin-top:12px;gap:9px;font-size:12px;font-weight:400;color:#efe6d3}
+.ef-home .ef-home-save-note{margin-top:10px;gap:9px;font-size:12px;font-weight:400;color:#efe6d3;text-shadow:0 1px 3px rgba(10, 32, 42, 0.65)}
 .ef-home .ef-home-save-note>span{font-size:13px;color:var(--tx-cream)}
 .ef-home .ef-home-notice{font-size:12px;font-weight:400}
 
