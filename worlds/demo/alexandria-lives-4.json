@@ -75609,6 +75609,10 @@
           "tenant-farming-household",
           "delta-newcomers"
         ],
+        "farmEdge": {
+          "inputBps": 7000,
+          "healthPerYear": 1
+        },
         "profile": {
           "farming": {
             "demand": 12,

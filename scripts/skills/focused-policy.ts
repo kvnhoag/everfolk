@@ -7,7 +7,7 @@ import { marketView } from "../../src/demo/market.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
 
 export const FOCUSED_TARGETS = ["FC10", "FR10", "AT10", "AC10", "AS10", "PS10", "PP10", "T10"] as const;
-export interface FocusedResult { seed: string; target: string; mastered: boolean; survived18: boolean; age: number; deepest: number; next: string | null; reason: string; commands: number }
+export interface FocusedResult { seed: string; target: string; mastered: boolean; survived18: boolean; age: number; deepest: number; next: string | null; reason: string; commands: number; home: string | null }
 
 function pathTo(target: string): string[] {
   const path: string[] = [];
@@ -85,5 +85,5 @@ export function runFocusedPolicy(world: WorldPack, target: string, seed: string)
   const next = path.find(id => !life.capabilities?.learned[id]) ?? null;
   return { seed, target, mastered: Boolean(life.capabilities?.learned[target]), survived18, age: life.age,
     deepest: Math.max(0, ...path.filter(id => life.capabilities?.learned[id]).map(id => CAPABILITY_NODES.find(n => n.id === id)!.depth)), next,
-    reason, commands: life.commands.length };
+    reason, commands: life.commands.length, home: life.paths?.home ?? null };
 }

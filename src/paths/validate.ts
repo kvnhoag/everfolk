@@ -28,7 +28,12 @@ function validateField(value: unknown, path: string, tools: PathsValidationTools
 
 function validateDistrict(value: unknown, path: string, tools: PathsValidationTools, claimed: Map<string, string>, districtId: string): void {
   const { object, string, array, integer, fail } = tools;
-  const district = object(value, path, ["title", "origins", "profile"]);
+  const district = object(value, path, ["title", "origins", "profile", "farmEdge"], ["title", "origins", "profile"]);
+  if (Object.hasOwn(district, "farmEdge")) {
+    const edge = object(district.farmEdge, `${path}.farmEdge`, ["inputBps", "healthPerYear"]);
+    integer(edge.inputBps, `${path}.farmEdge.inputBps`, 1000, 10_000);
+    integer(edge.healthPerYear, `${path}.farmEdge.healthPerYear`, 0, 3);
+  }
   string(district.title, `${path}.title`, 100);
   array(district.origins, `${path}.origins`, 0, 32).forEach((origin, i) => {
     if (!tools.origins.has(origin as string)) fail(`${path}.origins[${i}]`, `unknown origin '${String(origin)}'`);

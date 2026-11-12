@@ -8,3 +8,4 @@ export type { AffinityEntry } from "./affinity.ts";
 export { MEETING_BANDS, meetPractitioner, moveDistrict } from "./practitioners.ts";
 export type { Meeting, MeetingBand } from "./practitioners.ts";
 export { closeStage, recordStage, stageRecordsView } from "./stage-records.ts";
+export { farmEdgeHealth, farmEdgeOf, farmInputCost, materialCost } from "./farm-edge.ts";

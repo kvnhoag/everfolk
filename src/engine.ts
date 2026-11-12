@@ -36,7 +36,7 @@ import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, farmEdgeHealth, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -851,7 +851,15 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (world.demo.startingResources) syncEconomyStat(world, next);
     }
     // The district moves with this year's conditions (war, flood) once they are known.
-    if (world.paths && next.phase !== "ended") { advanceDistrict(world, next); fadeAffinity(world, next); }
+    if (world.paths && next.phase !== "ended") {
+      // Village edge: a year in the home fields is healthier than travelling to work.
+      const edgeHealth = farmEdgeHealth(world, next, completedAge);
+      if (edgeHealth > 0) {
+        apply(next, [{ type: "stat", stat: world.health?.stat ?? "health", delta: edgeHealth }]);
+        journal(next, "activity", "farm-edge-health", "A year of work in your own fields, close to home, leaves you stronger.");
+      }
+      advanceDistrict(world, next); fadeAffinity(world, next);
+    }
     checkEndings(next);
     resolveEvents(next, true);
     if (world.economy?.market) syncEconomyStat(world, next);
