@@ -60,23 +60,25 @@
   gap:6px;
 }
 .life-choice-popup-btn,.life-choice-auto-btn{
-  border:1px solid #6b5b43;
-  background:#fbf6e9;
-  color:#2b2318;
+  border:1px solid #b59d72;
+  background:#f2e8d4;
+  color:#243336;
   padding:5px 10px;
   font-size:11.5px;
   font-weight:600;
   cursor:pointer;
   font-family:inherit;
+  transition:background 0.1s, border-color 0.1s, color 0.1s;
 }
 .life-choice-popup-btn:hover,.life-choice-auto-btn:hover{
-  background:#2d2419;
-  color:#fbf6e9;
+  background:#e8dcbf;
+  border-color:#8c7048;
+  color:#172426;
 }
 .life-choice-auto-btn.is-on{
-  background:#2d4739;
-  color:#fbf6e9;
-  border-color:#2d4739;
+  background:linear-gradient(180deg,#23534d 0%,#173b36 100%);
+  color:#fff9e8;
+  border-color:#e2b86b;
 }
 
 /* CK3-Style Face-to-Face Encounter Strip */
@@ -302,32 +304,33 @@
   margin-bottom:10px;
 }
 .life-action-tabs button{
-  border:1px solid #6b5033;
+  border:1px solid #b59d72;
   border-radius:2px;
-  background:#22180e;
-  color:#dfd0b6;
+  background:#f2e8d4;
+  color:#243336;
   padding:5px 10px;
   font-size:11px;
   font-weight:700;
   cursor:pointer;
   font-family:inherit;
+  transition:background 0.1s, border-color 0.1s, color 0.1s;
 }
 .life-action-tabs button:hover{
-  background:#332415;
-  border-color:#b58d4d;
-  color:#fff8e7;
+  background:#e8dcbf;
+  border-color:#8c7048;
+  color:#172426;
 }
 .life-action-tabs button.is-active{
-  background:linear-gradient(180deg,#4d371f 0%,#332312 100%);
+  background:linear-gradient(180deg,#23534d 0%,#173b36 100%);
   color:#fff9e8;
   border-color:#e2b86b;
-  box-shadow:inset 0 1px 0 #8c6a3d;
+  box-shadow:inset 0 1px 0 #3d7a6e;
 }
 .life-action-tabs button.life-action-open-people{
   margin-left:auto;
-  background:#233b34;
-  border-color:#5b9987;
-  color:#e9fbf5;
+  background:#23534d;
+  border-color:#e2b86b;
+  color:#fff9e8;
 }
 .life-action-empty{
   margin:4px 0 0;

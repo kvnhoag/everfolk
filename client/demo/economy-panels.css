@@ -145,7 +145,8 @@
   padding: 9px 14px;
   cursor: pointer;
   list-style: none;
-  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  background: linear-gradient(180deg, #1e3740 0%, #14262d 100%);
+  border-bottom: 2px solid #426470;
   color: #f9f1dc;
 }
 
@@ -173,16 +174,16 @@
   font-size: 12.5px;
 }
 
-/* Tabbed Command Deck Header — Exact ResourceBar Dark Bronze HUD Aesthetic */
+/* Tabbed Command Deck Header — Harbor Basalt & Slate Blue HUD Aesthetic */
 .demo-deck-header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border: 2px solid #5a4228;
+  border: 2px solid #426470;
   border-radius: 2px;
-  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  background: linear-gradient(180deg, #1e3740 0%, #14262d 100%);
   padding: 12px 14px;
-  box-shadow: inset 0 1px 0 #7c5e3b;
+  box-shadow: inset 0 1px 0 #2a4c57;
   color: #f9f1dc;
 }
 
@@ -192,7 +193,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #d8b574;
+  color: #d4ab5d;
 }
 
 .demo-chart-eyebrow {
@@ -201,7 +202,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #7a5929;
+  color: #426470;
 }
 
 .demo-deck-header .demo-economy-title {
@@ -224,10 +225,10 @@
   justify-content: center;
   min-height: 36px;
   padding: 7px 8px;
-  border: 1px solid #6b5033;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #22180e;
-  color: #dfd0b6;
+  background: #f2e8d4;
+  color: #243336;
   cursor: pointer;
   text-align: center;
   font: inherit;
@@ -238,16 +239,16 @@
 }
 
 .demo-deck-tab:hover {
-  background: #2f2114;
-  border-color: #a88247;
-  color: #fff8e7;
+  background: #e8dcbf;
+  border-color: #8c7048;
+  color: #172426;
 }
 
 .demo-deck-tab.is-active {
-  background: linear-gradient(180deg, #4d371f 0%, #362514 100%);
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
   color: #fff9e8;
   border: 1px solid #e2b86b;
-  box-shadow: inset 0 1px 0 #8c6a3d, 0 0 0 1px #e2b86b33;
+  box-shadow: inset 0 1px 0 #3d7a6e, 0 0 0 1px #e2b86b33;
 }
 
 /* Active Town Offer Card & Legacy Figure Card */
@@ -515,21 +516,28 @@
 }
 
 .demo-people-filters button {
-  border: 1px solid #8c7048;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #f5ecda;
-  color: #2b1f13;
+  background: #f2e8d4;
+  color: #243336;
   padding: 4px 9px;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.demo-people-filters button:hover {
+  background: #e8dcbf;
+  border-color: #8c7048;
+  color: #172426;
 }
 
 .demo-people-filters button.is-active {
-  background: #2b1f13;
-  color: #f3cf7a;
-  border-color: #c89d54;
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
+  color: #fff9e8;
+  border-color: #e2b86b;
 }
 
 .demo-person-desc {
@@ -640,15 +648,15 @@
   gap: 5px;
 }
 
-/* Asset Pills — Matching ResourceBar .aoe-cell Dark Bronze Tiles */
+/* Asset Pills — Chiseled Limestone & Royal Faience Teal */
 .demo-chart-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid #6b5033;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #22180e;
-  color: #e8d9be;
+  background: #f2e8d4;
+  color: #243336;
   padding: 4px 9px 4px 5px;
   font-size: 11px;
   font-weight: 700;
@@ -659,16 +667,16 @@
 }
 
 .demo-chart-pill:hover {
-  background: #332415;
-  border-color: #b58d4d;
-  color: #fff8e7;
+  background: #e8dcbf;
+  border-color: #8c7048;
+  color: #172426;
 }
 
 .demo-chart-pill.is-active {
-  background: linear-gradient(180deg, #4d371f 0%, #332312 100%);
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
   color: #fff9e8;
   border-color: #e2b86b;
-  box-shadow: inset 0 1px 0 #8c6a3d, 0 0 0 1px #e2b86b44;
+  box-shadow: inset 0 1px 0 #3d7a6e, 0 0 0 1px #e2b86b44;
 }
 
 /* KPI Plaquettes — Crisp Recessed Chiseled Cells */
@@ -735,11 +743,11 @@
   line-height: 1.45;
 }
 
-/* Commodity Board Table — Crisp Roguelike Ledger */
+/* Commodity Board Table — Harbor Basalt & Slate Blue Ledger */
 .demo-commodity-table-wrap {
   overflow-x: auto;
   margin: 10px 0;
-  border: 2px solid #5a4228;
+  border: 2px solid #426470;
   border-radius: 2px;
   background: #fcf8ee;
   box-shadow: none;
@@ -758,9 +766,9 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #f3cf7a;
-  border-bottom: 2px solid #5a4228;
-  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
+  color: #d4ab5d;
+  border-bottom: 2px solid #426470;
+  background: linear-gradient(180deg, #1e3740 0%, #14262d 100%);
 }
 
 .demo-commodity-table td {
@@ -827,22 +835,22 @@
 }
 
 .demo-row-btns button {
-  border: 1px solid #6b5033;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #2b1f13;
+  background: #f2e8d4;
   padding: 4px 9px;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  color: #f9f1dc;
+  color: #243336;
   box-shadow: none;
-  transition: background 0.1s, border-color 0.1s;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
 }
 
 .demo-row-btns button:hover {
-  background: #42301d;
-  color: #fff;
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
+  color: #fff9e8;
   border-color: #e2b86b;
 }
 
@@ -893,10 +901,10 @@
   width: 100%;
   min-height: 40px;
   padding: 5px 9px;
-  border: 1px solid #6b5033;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #22180e;
-  color: #f9f1dc;
+  background: #f2e8d4;
+  color: #243336;
   cursor: pointer;
   font: inherit;
   text-align: left;
@@ -906,8 +914,8 @@
 
 .demo-dropdown-trigger:hover,
 .demo-dropdown-trigger.is-open {
-  background: #302214;
-  border-color: #e2b86b;
+  background: #e8dcbf;
+  border-color: #23534d;
 }
 
 .demo-dropdown-trigger-text {
@@ -920,7 +928,7 @@
 
 .demo-dropdown-trigger-text strong {
   font-size: 12.5px;
-  color: #fff8e7;
+  color: #243336;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -928,12 +936,12 @@
 
 .demo-dropdown-trigger-text small {
   font-size: 10px;
-  color: #cbb692;
+  color: #6a5d49;
 }
 
 .demo-dropdown-caret {
   font-size: 11px;
-  color: #e2b86b;
+  color: #23534d;
 }
 
 .demo-dropdown-menu {
@@ -1009,19 +1017,20 @@
 }
 
 .demo-trade-submit {
-  background: linear-gradient(180deg, #3c2c1b 0%, #2b1f13 100%);
-  color: #f3cf7a;
-  border: 1px solid #c89d54;
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
+  color: #fff9e8;
+  border: 1px solid #e2b86b;
   border-radius: 2px;
   padding: 0 14px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 #7c5e3b;
+  box-shadow: inset 0 1px 0 #3d7a6e;
+  transition: background 0.1s, border-color 0.1s;
 }
 
 .demo-trade-submit:hover:not(:disabled) {
-  background: #473420;
-  color: #fff8e7;
+  background: #2a5e58;
+  color: #fff;
   border-color: #f0cb82;
 }
 
@@ -1040,21 +1049,22 @@
 }
 
 .demo-batch-row button {
-  border: 1px solid #7c603c;
+  border: 1px solid #b59d72;
   border-radius: 2px;
-  background: #efe4ce;
+  background: #f2e8d4;
   padding: 3px 9px;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  color: #2b1f13;
+  color: #243336;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
 }
 
 .demo-batch-row button:hover {
-  background: #2b1f13;
+  background: linear-gradient(180deg, #23534d 0%, #173b36 100%);
   color: #fff8e7;
-  border-color: #c89d54;
+  border-color: #e2b86b;
 }
 
 .demo-ticket-cash {
