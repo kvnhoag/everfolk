@@ -3,7 +3,7 @@ import test from "node:test";
 import { execFileSync } from "node:child_process";
 import { auditEvents } from "../src/paths/audit.ts";
 import type { LifeEvent, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
 

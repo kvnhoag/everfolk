@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { deathEndingFor } from "../src/life-stages/index.ts";
 import type { WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack, old = retained as unknown as WorldPack;

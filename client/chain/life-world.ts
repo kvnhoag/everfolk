@@ -1,5 +1,6 @@
 import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
-import vocationWorld from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import vocationWorld from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import retainedBalanceWorld from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import retainedLifeStageWorld from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
 import capabilityWorld from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import retainedVocationWorld from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
@@ -13,7 +14,7 @@ import ranked from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "
 
 /** Resolve the exact revision recorded in the life and its signed evidence. */
 export async function loadLifeWorld(version: string): Promise<WorldPack> {
-  const pack = version === LIVES_WORLD_VERSION ? vocationWorld : version === "alexandria-lives-4" ? retainedLifeStageWorld : version === "alexandria-lives-3" ? capabilityWorld : version === "alexandria-lives-2" ? retainedVocationWorld : version === "alexandria-lives-1" ? previousVocationWorld : version === DEMO_WORLD_VERSION
+  const pack = version === LIVES_WORLD_VERSION ? vocationWorld : version === "alexandria-lives-5" ? retainedBalanceWorld : version === "alexandria-lives-4" ? retainedLifeStageWorld : version === "alexandria-lives-3" ? capabilityWorld : version === "alexandria-lives-2" ? retainedVocationWorld : version === "alexandria-lives-1" ? previousVocationWorld : version === DEMO_WORLD_VERSION
     ? currentDemo
     : version === LEGACY_DEMO_WORLD_VERSION
       ? legacyDemo

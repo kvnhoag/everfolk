@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createEngine, lifeStageView, affinityView, fieldNeedsView } from "../../src/index.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 
-const worldPath = new URL("../../worlds/demo/alexandria-lives-5.json", import.meta.url);
+const worldPath = new URL("../../worlds/demo/alexandria-lives-6.json", import.meta.url);
 const world = JSON.parse(readFileSync(worldPath, "utf8")) as WorldPack;
 const engine = createEngine(world);
 const [savePath, command, ...args] = process.argv.slice(2);

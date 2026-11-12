@@ -5,7 +5,7 @@ import { applyCapability } from "../src/capabilities/engine.ts";
 import { practiceBonus } from "../src/paths/index.ts";
 import type { FieldId } from "../src/paths/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
 const engine = createEngine(world);

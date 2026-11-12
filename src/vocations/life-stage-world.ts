@@ -25,6 +25,8 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   world.birthYears = { from: world.startYear, to: -300 };
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
   applyPacing(world);
+  // New births (lives-6): yearly practice and years worked in a job prove the next step of their lane.
+  world.capabilities!.proofFromWork = true;
   applyPlaytestFixes(world);
   applyIllnessPacing(world);
   addPaths(world);

@@ -8,6 +8,7 @@ import { syncEconomyStat } from "../economy.ts";
 import { practiceGain } from "../paths/affinity.ts";
 import { hasServiceRole } from "../demo/service-role.ts";
 import { militaryWorkReason, settleMilitaryProofs } from "./military.ts";
+import { recordWorkProofs } from "./work-proof.ts";
 
 export function initialCapabilities(): CapabilityState { return { learned: {}, evidence: [], costBasis: {}, reservedPayment: 0 }; }
 export function requirementReasons(world: WorldPack, life: LifeState, id: string): string[] {
@@ -96,5 +97,7 @@ export function settleCapabilities(world: WorldPack, life: LifeState, completedA
   if (!world.capabilities || !life.capabilities) return;
   settleFarmCapabilities(world, life, completedAge);
   settleMilitaryProofs(world,life,completedAge);
+  // Proof-from-work worlds only: the year's practice and job count toward the next step of their lanes.
+  recordWorkProofs(world, life, completedAge);
   evaluateCapabilities(world, life);
 }

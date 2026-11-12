@@ -2,6 +2,7 @@
 import type { LifeState, WorldPack } from "../types.ts";
 import type { CapabilityEvidence } from "./types.ts";
 import { hasServiceRole } from "../demo/service-role.ts";
+import { passiveProofs } from "./work-proof.ts";
 
 const BPS = 10_000;
 const GRAIN_SEED_PER_PLOT = 10;
@@ -227,7 +228,8 @@ export function settleFarmCapabilities(world: WorldPack, life: LifeState, comple
 export function farmProofProgress(world: WorldPack, life: LifeState, nodeId: string): { done: number; required: number; complete: boolean } {
   const required = world.capabilities?.nodes.find(node => node.id === nodeId)?.proofYears ?? REQUIRED[nodeId] ?? 1;
   const receipts = (life.capabilities?.evidence ?? []).filter(e => e.nodeId === nodeId && e.kind === "farm-settlement" && e.data.qualifies === true);
-  const unique = [...new Map(receipts.map(e => [e.age, e])).values()].sort((a, b) => a.age - b.age);
+  // Proof-from-work worlds: a year of farm work or farming practice is a plain year; a harvest receipt for the same year wins.
+  const unique = [...new Map([...passiveProofs(world, life, nodeId), ...receipts].map(e => [e.age, e])).values()].sort((a, b) => a.age - b.age);
   let done = unique.length;
   if (nodeId === "FC8") done = new Set(unique.map(e => e.data.crop).filter(crop => crop === "grain" || crop === "flax")).size;
   if (nodeId === "FR9" && unique.some(e => e.data.flood === "low" && Number(e.data.grainStart) >= Number(e.data.rationsNeed) && Number(e.data.boughtFood) === 0)) return { done: required, required, complete: true };

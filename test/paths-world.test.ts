@@ -5,7 +5,7 @@ import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
 import { FIELD_IDS } from "../src/paths/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;

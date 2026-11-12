@@ -1,4 +1,5 @@
 import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
+import { recordActivityProof } from "./capabilities/work-proof.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
@@ -996,6 +997,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     journal(next, "activity", activity.id, activity.text);
     const outcome = pick(activity.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
+    // Proof-from-work worlds: the year's practice proves the next open step, judged before the practice's gains.
+    if (world.capabilities?.proofFromWork) recordActivityProof(world, next, activity.id);
     recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
     checkEndings(next);
     resolveEvents(next, false);

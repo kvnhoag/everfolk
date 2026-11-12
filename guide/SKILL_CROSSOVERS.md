@@ -31,6 +31,6 @@ The Strategic command assessment reserves its own materials and fees once and co
 
 ## Versions and map controls
 
-New births use `alexandria-lives-5`, capability graph version 3. Earlier lives keep their exact world and proof rules; the original lives-4 graph version 2 retains its Inquiry and ethics prerequisite for Tactical reasoning. The current atlas can show the additional route as Unavailable in a retained world; it does not migrate or replace a saved life.
+New births use `alexandria-lives-6`, capability graph version 3 with proof from work: a settled, fully funded and rationed service year counts toward the next open military step. Earlier lives keep their exact world and proof rules; the original lives-4 graph version 2 retains its Inquiry and ethics prerequisite for Tactical reasoning. The current atlas can show the additional route as Unavailable in a retained world; it does not migrate or replace a saved life.
 
 Scroll to zoom, drag to pan, and click a skill to light every prerequisite path. Crossovers use dashed connectors. Only the two necessary Knowledge links cross the branch boundary; the remaining military nodes form a single chain. Health and Knowledge condition requirements appear alongside trainable proficiency requirements in the inspector.

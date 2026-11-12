@@ -5,6 +5,11 @@ import { hasServiceRole } from "../demo/service-role.ts";
 export const OFFICER_SERVICE_YEARS = 2, GENERAL_SERVICE_YEARS = 5;
 export const MILITARY_QUALIFICATIONS: Record<string,string> = {soldier:"M4",officer:"M7",general:"M10"};
 export const provedServiceYears = (life:LifeState) => new Set((life.capabilities?.military?.service ?? []).filter(r=>r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations).map(r=>r.age)).size;
+/** A service year whose wage and rations were actually paid from the army's purse and granary. */
+export function reconciledServiceYear(life:LifeState,age:number):boolean {
+  const r=life.capabilities?.military?.service.find(item=>item.age===age);
+  return Boolean(r && r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations);
+}
 export function militaryCareerReason(world:WorldPack,life:LifeState,job:string):string|undefined {
   const capabilities = world.capabilities;
   if(!capabilities || capabilities.version < 2 || !MILITARY_QUALIFICATIONS[job]) return;

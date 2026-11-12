@@ -38,6 +38,8 @@ export function workQuote(world: WorldPack, life: LifeState, nodeId: string): Wo
     }
   }
   if (nodeId === "A4") quote.inputs = { "prepared-clay": 2, fuel: 1 };
+  // Proof-from-work worlds: material preparation learned from practice left no prepared clay, so this work prepares its own.
+  if (nodeId === "A4" && world.capabilities?.proofFromWork === true && held(life, "prepared-clay") < 2) quote.inputs = { clay: 2, fuel: 1 };
   if (nodeId === "T2") quote.inputs = { clay: 2, fuel: 1, papyrus: 1 };
   if (rule.kind === "trade" && Number(nodeId.slice(1)) >= 5) {
     // Small, explicitly quoted supply orders: use actual household grain, never a minted abstract cargo.

@@ -6,7 +6,7 @@ import { auditEvents } from "../src/paths/audit.ts";
 import { recordStage } from "../src/paths/index.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { Condition, Effect, LifeEvent, LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import lives3 from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;

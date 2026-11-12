@@ -66,7 +66,7 @@ test("older free-play lives have no stage records", () => {
 });
 
 test("a stage's record includes its last year's work", async () => {
-  const { default: lives } = await import("../worlds/demo/alexandria-lives-5.json", { with: { type: "json" } });
+  const { default: lives } = await import("../worlds/demo/alexandria-lives-6.json", { with: { type: "json" } });
   const shippedWorld = lives as unknown as import("../src/types.ts").WorldPack;
   const shippedEngine = createEngine(shippedWorld);
   let life = shippedEngine.start("stage-record-last-year");

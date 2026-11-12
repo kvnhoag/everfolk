@@ -43,6 +43,8 @@ export interface CapabilityState {
 export interface CapabilityDefinition {
   version: number;
   nodes: CapabilityNode[];
+  /** alexandria-lives-6 and later: yearly practice and years worked in a job also prove the next step of their lane. */
+  proofFromWork?: true;
 }
 export type CapabilityStatus = "learned" | "available" | "locked" | "unavailable";
 export interface CapabilityNodeView {

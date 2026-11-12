@@ -7,7 +7,7 @@ import { militaryCareerReason } from "../src/capabilities/military.ts";
 import { createEngine } from "../src/engine.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const fresh = shipped as unknown as WorldPack, kept = retained as unknown as WorldPack;

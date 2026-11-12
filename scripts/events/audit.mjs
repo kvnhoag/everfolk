@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { auditEvents } from '../../src/paths/audit.ts';
-const world = JSON.parse(await readFile(new URL('../../worlds/demo/alexandria-lives-5.json', import.meta.url), 'utf8'));
+const world = JSON.parse(await readFile(new URL('../../worlds/demo/alexandria-lives-6.json', import.meta.url), 'utf8'));
 const items = auditEvents(world);
 const verbose = process.argv.includes('--list');
 for (const rule of [2, 3, 4, 5]) {

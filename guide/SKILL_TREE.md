@@ -16,7 +16,7 @@ Locked nodes explain missing requirements. Unavailable nodes remain inspectable 
 
 ## Saves and versions
 
-New free-play births use `alexandria-lives-5`, with capability graph version 3. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, original `alexandria-lives-4`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
+New free-play births use `alexandria-lives-6`, with capability graph version 3 and proof from work: each year of a matching yearly activity (such as woodwork or writing practice) and each year worked in a job counts as one proof year toward the next open skill on that lane, and the skill is learned automatically once its proof years are done. Like recorded work, the step must already be open when the year's practice begins. Steps whose recorded work feeds the next step or is itself the assessment (T2, PS8, AS5, FC8, T10 and every project step) still need recorded work. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, original `alexandria-lives-4`, `alexandria-lives-5` (recorded work only), demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
 
 ## Reproduce and verify
 

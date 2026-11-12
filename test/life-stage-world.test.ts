@@ -6,7 +6,7 @@ import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
 import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import type { LifeState, WorldPack } from "../src/types.ts";
 
@@ -34,8 +34,8 @@ function live(seed: string, pick = 0): Played {
 const lives = Array.from({ length: 80 }, (_, i) => live(`stage-world-${i}`, i));
 
 test("the shipped free-play world is the current build with life stages", () => {
-  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-5");
-  assert.equal(world.version, "alexandria-lives-5");
+  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-6");
+  assert.equal(world.version, "alexandria-lives-6");
   assert.deepEqual(buildLifeStageWorld(base as unknown as WorldPack), world);
   assert.ok(world.lifeStages);
   assert.equal((retained as unknown as WorldPack).version, "alexandria-lives-3");
@@ -43,7 +43,7 @@ test("the shipped free-play world is the current build with life stages", () => 
 });
 
 test("both the new and the retained free-play revisions load for their saves", async () => {
-  assert.equal((await loadLifeWorld("alexandria-lives-5")).version, "alexandria-lives-5");
+  assert.equal((await loadLifeWorld("alexandria-lives-6")).version, "alexandria-lives-6");
   assert.equal((await loadLifeWorld("alexandria-lives-3")).version, "alexandria-lives-3");
 });
 
