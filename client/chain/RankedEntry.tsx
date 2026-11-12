@@ -78,7 +78,8 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     if (!life) return;
     const completed = await contract.mintResult(life.life_id) ?? await contract.retryMint(life.life_id);
     try { window.localStorage.removeItem(rankedSaveKey(life.life_id)); } catch { /* The confirmed mint remains accessible on its token page. */ }
-    window.location.hash = `token/${completed.token_id}`;
+    const album = await contract.stageMintResult(life.life_id).catch(() => null);
+    window.location.hash = album ? "#mine" : `token/${completed.token_id}`;
   }, "The mint could not finish. Please try again.");
 
   function begin() {

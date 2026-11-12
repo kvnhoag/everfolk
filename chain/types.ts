@@ -27,6 +27,13 @@ export interface Evidence {
   stage_figures?: MatchedStageFigure[];
 }
 
+export interface StageMintCard {
+  stage_id: string; figure_id: FigureId | null; title: string; character_name: string;
+  portrait_media: string; stage_record: StageRecord; fee: string; action_id: string;
+}
+export interface StageMintQuote { total_fee: string; source_share_bps: number; cards: StageMintCard[] }
+export interface StageMintResult { life_id: string; evidence_hash: string; total_fee: string; tokens: (MintResult & { stage_id: string })[] }
+
 export interface MintResult {
   token_id: string;
   kind: "figure" | "npc";
@@ -69,6 +76,7 @@ export interface TokenExtra {
   field?: string | null;
   tier?: string | number;
   portrait_media?: string;
+  stage_record?: StageRecord;
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

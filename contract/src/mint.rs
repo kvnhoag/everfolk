@@ -137,7 +137,7 @@ impl Contract {
     pub fn mint_result(&self, life_id: U64) -> Option<MintResult> {
         match mint_records().get(&life_id.0) {
             Some(MintRecord::Complete(result)) => Some(result.clone()),
-            _ => None,
+            _ => self.stage_mint_result(life_id).and_then(|album| album.tokens.first().map(|t| t.result.clone())),
         }
     }
 
