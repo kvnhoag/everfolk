@@ -176,6 +176,17 @@ function cloud(c: CanvasRenderingContext2D, x: number, y: number, size: number, 
   c.fillRect(x + 6, y + 7, size - 14, 1);
 }
 
+// Each pigment has a sun-facing plaster, a cooler shaded side and a roof terrace.
+// The limestone coping, bevels and cast shadows keep their original light colors.
+const HOUSE_PAINTS = {
+  ochre: { front: '#d8b16f', side: '#8e806a', roof: '#e4be83', plinth: '#b99661', mortar: '#b28a56' },
+  ivory: { front: '#e8d1a9', side: '#92948b', roof: '#e7c99a', plinth: '#c4ad8b', mortar: '#b8a084' },
+  celadon: { front: '#aabb96', side: '#667e76', roof: '#c0c39a', plinth: '#8f9d7b', mortar: '#899775' },
+  terracotta: { front: '#d49b81', side: '#8f7473', roof: '#dda681', plinth: '#b48670', mortar: '#ad7965' },
+  blue: { front: '#9cbab6', side: '#617c84', roof: '#b2c5b8', plinth: '#859f9d', mortar: '#779693' },
+} as const;
+const VILLAGE_PAINTS = ['ochre', 'ivory', 'celadon', 'terracotta', 'blue', 'ochre', 'ivory', 'terracotta'] as const;
+
 /**
  * Compact, richly decorated 2.5D Egyptian-Greek coastal limestone buildings of 350 BCE Rhakotis.
  * Every architectural decoration (frieze, sun-awning, amphorae, stone bench, rooftop windcatcher)
@@ -192,6 +203,7 @@ function house(
   kind: 'storehouse' | 'stoa' | 'courtyard' | 'workshop' = 'storehouse',
 ) {
   const top = base - h, roof = top - depth;
+  const paint = HOUSE_PAINTS[VILLAGE_PAINTS[variant % VILLAGE_PAINTS.length]];
 
   // 1. Radial cast shadow away from DAWN_SUN (574, 151), strictly clipped to land
   const cx = x + w * 0.5;
@@ -220,7 +232,7 @@ function house(
     [x + w + depth, roof],
     [x + w + depth, base - depth],
     [x + w, base],
-  ], '#818c88');
+  ], paint.side);
   for (let sy = top + 6; sy < base - 4; sy += 6) {
     c.fillStyle = '#6b7574';
     c.fillRect(x + w + 2, sy - Math.floor(depth * 0.45), Math.max(3, depth - 4), 1);
@@ -233,13 +245,11 @@ function house(
   ], '#4a4548');
 
   // 4. Sun-facing front wall
-  const wallColors = ['#d5b892', '#e0c49e', '#cca982', '#d9bb95'];
-  const wallBase = wallColors[variant % wallColors.length];
-  c.fillStyle = wallBase;
+  c.fillStyle = paint.front;
   c.fillRect(x, top, w, h);
 
   // Warm limestone dado (lower plinth course along the bottom of the front wall)
-  c.fillStyle = '#bfa07e';
+  c.fillStyle = paint.plinth;
   c.fillRect(x, base - 5, w, 4);
   c.fillStyle = '#e6c89e';
   c.fillRect(x, base - 6, w, 1);
@@ -261,7 +271,7 @@ function house(
       [x + depth + 1, roof + 2],
       [x + w + depth - 4, roof + 2],
       [x + w - 2, top - 2],
-    ], '#dfb888');
+    ], paint.roof);
   }
 
   // Rooftop architectural ornaments (strictly inside the roof terrace polygon)
@@ -300,7 +310,7 @@ function house(
 
   // Dressed ashlar masonry courses across the front facade
   for (let y = top + 9; y < base - 7; y += 7) {
-    c.fillStyle = '#b08b6e';
+    c.fillStyle = paint.mortar;
     c.fillRect(x + 2, y, 5, 1);
     c.fillRect(x + w - 7, y + 2, 5, 1);
     c.fillStyle = '#eccb9e';
@@ -407,6 +417,60 @@ const BUILDINGS: readonly [number, number, number, number, number, 'storehouse' 
   [696, 430, 42, 44, 15, 'storehouse'],
 ];
 
+function harborMarket(c: CanvasRenderingContext2D) {
+  const stalls = [
+    { x: 614, y: 266, linen: '#a75f4d', shade: '#79463d', goods: '#b5a55e' },
+    { x: 535, y: 312, linen: '#628b86', shade: '#486761', goods: '#cf8a55' },
+    { x: 663, y: 307, linen: '#b98951', shade: '#845a3b', goods: '#8c9d69' },
+    { x: 725, y: 349, linen: '#738591', shade: '#525e73', goods: '#b77859' },
+  ];
+
+  for (const { x, y, linen, shade, goods } of stalls) {
+    // Reserve the full silhouette, including canopy, baskets and cast shadow.
+    const left = x - 3, right = x + 25, top = y - 16, bottom = y + 5;
+    const insideQuay = right <= 764 && top >= 198 &&
+      left >= Math.max(quayEdge(top), quayEdge(bottom)) + 12;
+    const overlapsHouse = BUILDINGS.some(([bx, base, w, h, depth]) =>
+      left < bx + w + depth + 3 && right > bx - 3 &&
+      top < base + 4 && bottom > base - h - depth - 6);
+    if (!insideQuay || overlapsHouse) continue;
+
+    polygon(c, [[x, y - 2], [x + 20, y - 2], [x + 17, y + 4], [x - 3, y + 4]], '#a68a73');
+    c.fillStyle = '#6f5141';
+    c.fillRect(x + 2, y - 11, 2, 12);
+    c.fillRect(x + 17, y - 11, 2, 12);
+    c.fillStyle = '#a57b58';
+    c.fillRect(x + 2, y - 10, 1, 10);
+    c.fillRect(x + 3, y - 6, 15, 4);
+    c.fillStyle = '#e1bb89';
+    c.fillRect(x + 2, y - 7, 17, 1);
+    c.fillStyle = goods;
+    c.fillRect(x + 5, y - 9, 4, 2);
+    c.fillRect(x + 12, y - 9, 4, 2);
+
+    // Sloped striped linen with a shaded fringe facing the street.
+    polygon(c, [[x + 3, y - 16], [x + 21, y - 16], [x + 19, y - 11], [x, y - 11]], '#eed4a5');
+    for (const stripe of [0, 7, 14]) {
+      polygon(c, [[x + 3 + stripe, y - 16], [x + 6 + stripe, y - 16],
+        [x + 4 + stripe, y - 11], [x + stripe, y - 11]], linen);
+    }
+    c.fillStyle = shade;
+    c.fillRect(x, y - 11, 19, 1);
+    for (const fringe of [1, 8, 15]) c.fillRect(x + fringe, y - 10, 2, 1);
+
+    c.fillStyle = '#9a583f';
+    c.fillRect(x + 21, y - 4, 3, 5);
+    c.fillRect(x + 20, y - 3, 5, 3);
+    c.fillStyle = '#e1a27a';
+    c.fillRect(x + 21, y - 5, 3, 1);
+    c.fillRect(x + 20, y - 3, 1, 2);
+    c.fillStyle = '#916548';
+    c.fillRect(x + 6, y, 6, 3);
+    c.fillStyle = '#dbb27a';
+    c.fillRect(x + 6, y, 6, 1);
+  }
+}
+
 function shore() {
   const { canvas, context: c } = surface();
 
@@ -500,6 +564,7 @@ function shore() {
   BUILDINGS.forEach(([x, y, w, h, d, kind], i) => {
     house(c, x, y, w, h, d, i, kind);
   });
+  harborMarket(c);
 
   return canvas;
 }
@@ -637,19 +702,18 @@ function foreground() {
 }
 
 /** Mid-left cut-stone harbor breakwater & stone beacon obelisk (x = 0..130, y = 232..280) */
-function drawWesternBreakwater(c: CanvasRenderingContext2D, px: number, py: number, time: number) {
-  const ox = Math.round(px * 0.72), oy = Math.round(py * 0.72);
+function drawWesternBreakwater(c: CanvasRenderingContext2D, time: number) {
 
   // Water reflection of the western stone mole & beacon flame
   for (let r = 0; r < 14; r += 2) {
-    const wy = 278 + r + oy;
+    const wy = 278 + r;
     const shift = Math.round(Math.sin(wy * 0.4 + time * 1.4) * 2);
     c.globalAlpha = 0.20 - r * 0.012;
     c.fillStyle = r < 4 ? '#cfa982' : '#5c5558';
     c.fillRect(shift, wy, 124 - r * 3, 1);
     c.globalAlpha = (0.30 - r * 0.018) * (0.85 + 0.15 * Math.sin(time * 3.9));
     c.fillStyle = r < 6 ? '#ffe29a' : '#f0a858';
-    c.fillRect(108 + shift + ox, wy, Math.max(2, 6 - Math.floor(r / 3)), 1);
+    c.fillRect(108 + shift, wy, Math.max(2, 6 - Math.floor(r / 3)), 1);
   }
   c.globalAlpha = 1;
 
@@ -658,25 +722,25 @@ function drawWesternBreakwater(c: CanvasRenderingContext2D, px: number, py: numb
     const swell = Math.sin(sx * 0.18 - time * 0.9);
     c.globalAlpha = 0.22 + Math.max(0, swell) * 0.24;
     c.fillStyle = swell > 0.3 ? '#e4f4ea' : '#bde0d4';
-    c.fillRect(sx + ox, 276 + Math.round(swell) + oy, 6, 1);
+    c.fillRect(sx, 276 + Math.round(swell), 6, 1);
   }
   c.globalAlpha = 1;
 
-  // Submerged stone foundation & ashlar sea wall of the western mole
-  c.fillStyle = '#2d3740';
-  c.fillRect(0, 274 + oy, 128 + ox, 3);
-  polygon(c, [[0, 265 + oy], [126 + ox, 269 + oy], [130 + ox, 275 + oy], [0, 275 + oy]], '#685b58');
-  polygon(c, [[0, 262 + oy], [124 + ox, 266 + oy], [126 + ox, 269 + oy], [0, 265 + oy]], '#c8a686');
+  // A level deck joins the watch-post and beacon on one continuous stone platform.
+  polygon(c, [[0, 273], [130, 273], [128, 277], [0, 277]], '#2d3740');
+  polygon(c, [[0, 265], [126, 265], [130, 269], [130, 274], [0, 274]], '#685b58');
+  polygon(c, [[0, 261], [124, 261], [128, 265], [126, 266], [0, 266]], '#c8a686');
   c.fillStyle = '#edd2a6';
-  c.fillRect(0, 262 + oy, 124 + ox, 1);
-  c.fillRect(92 + ox, 265 + oy, 33, 2);
-  for (let mx = 10; mx < 118; mx += 16) {
+  c.fillRect(0, 261, 124, 1);
+  c.fillStyle = '#a68770';
+  c.fillRect(0, 265, 126, 1);
+  for (let mx = 10; mx < 124; mx += 16) {
     c.fillStyle = '#483f44';
-    c.fillRect(mx + ox, 267 + oy, 1, 7);
+    c.fillRect(mx, 267, 1, 7);
   }
 
   // Stone harbor watch-post / customs shelter on the western mole (x = 18..46)
-  const hx = 18 + ox, hy = 263 + oy, hw = 28, hh = 20;
+  const hx = 18, hy = 262, hw = 28, hh = 20;
   c.fillStyle = '#7e6a5c';
   c.fillRect(0, hy - 1, hx, 2);
   c.fillStyle = '#9c8878';
@@ -691,7 +755,7 @@ function drawWesternBreakwater(c: CanvasRenderingContext2D, px: number, py: numb
   c.fillRect(hx + 20, hy - 14, 4, 6);
 
   // Tall Ptolemaic/Egyptian Harbor Beacon Obelisk at the mole tip (x = 106)
-  const bx = 106 + ox, by = 266 + oy;
+  const bx = 106, by = 263;
   c.fillStyle = '#584e52'; c.fillRect(bx - 3, by - 5, 14, 5);
   c.fillStyle = '#cbb094'; c.fillRect(bx - 1, by - 5, 12, 5);
   c.fillStyle = '#f2d8aa'; c.fillRect(bx + 8, by - 5, 3, 5);
@@ -758,18 +822,13 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     { speed: -0.0078, offset: 0.88, outfit: 3, laneOffset: 2 },
   ] as const;
 
-  let cameraX = 0, cameraY = 0;
-
-  function draw(time: number, pointerX = 0, pointerY = 0) {
-    cameraX += (pointerX - cameraX) * 0.065;
-    cameraY += (pointerY - cameraY) * 0.065;
-    const px = Math.round(cameraX * 5), py = Math.round(cameraY * 3);
+  function draw(time: number) {
 
     c.fillStyle = '#1d3c48';
     c.fillRect(0, 0, 768, 480);
 
-    // 1. Sky dome & distant headland (0.2x parallax)
-    c.drawImage(backdrop, Math.round(px * 0.2), Math.round(py * 0.2));
+    // 1. Sky dome & distant headland
+    c.drawImage(backdrop, 0, 0);
 
     // 2. Software-shaded Mediterranean dawn sea
     c.drawImage(water.draw(time), 0, 170, 768, 310);
@@ -791,7 +850,7 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
         const fade = (1 - r / reflRows) * 0.20;
         c.globalAlpha = fade;
         c.fillStyle = r < 4 ? '#f5dca8' : (r % 6 === 0 ? '#8c7868' : '#d2b48e');
-        c.fillRect(rx + px, wy + py, rw, 1);
+        c.fillRect(rx, wy, rw, 1);
       }
     }
 
@@ -801,10 +860,10 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       const shift = Math.round(Math.sin(row * 0.31 - time * 1.2) * 2);
       c.globalAlpha = 0.18;
       c.fillStyle = '#a8927c';
-      c.fillRect(edge - 14 + shift + px, row + 2 + py, 10, 1);
+      c.fillRect(edge - 14 + shift, row + 2, 10, 1);
       c.globalAlpha = 0.12;
       c.fillStyle = '#e0c49c';
-      c.fillRect(edge - 22 + shift + px, row + 4 + py, 8, 1);
+      c.fillRect(edge - 22 + shift, row + 4, 8, 1);
     }
 
     // Warm golden brazier reflections dancing vertically in the water below each harbor lamp
@@ -816,7 +875,7 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
         const shift = Math.round(Math.sin(wy * 0.45 + time * 2.1) * 2);
         c.globalAlpha = (0.28 - r * 0.016) * (0.85 + 0.15 * Math.sin(time * 3.7 + lamp.x));
         c.fillStyle = r < 6 ? '#ffe29a' : '#f0a858';
-        c.fillRect(Math.round(baseRx - r * 0.2 + shift + px), wy + py, Math.max(2, 6 - Math.floor(r / 3)), 1);
+        c.fillRect(Math.round(baseRx - r * 0.2 + shift), wy, Math.max(2, 6 - Math.floor(r / 3)), 1);
       }
     }
     c.globalAlpha = 1;
@@ -828,8 +887,8 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       c.globalAlpha = 0.18 + Math.max(0, swell) * 0.26;
       c.fillStyle = swell > 0.35 ? '#e4f4ea' : '#bde0d4';
       c.fillRect(
-        Math.round(edge - 5 + swell * 2 + px),
-        row + py,
+        Math.round(edge - 5 + swell * 2),
+        row,
         3 + Math.round(Math.max(0, swell) * 4),
         1,
       );
@@ -837,26 +896,26 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     c.globalAlpha = 1;
 
     // 5. Layered dawn clouds drifting at independent speeds
-    cloud(c, 48 + Math.round(Math.sin(time * 0.019 + 0.5) * 12 + px * 0.22), 62, 92, true);
-    cloud(c, 405 + Math.round(Math.sin(time * 0.025) * 14 + px * 0.25), 48, 84, true);
-    cloud(c, 618 + Math.round(Math.sin(time * 0.018 + 1) * 18 + px * 0.2), 78, 104, true);
-    cloud(c, 198 + Math.round(Math.sin(time * 0.021 + 2) * 15 + px * 0.18), 96, 68, false);
-    cloud(c, 488 + Math.round(Math.sin(time * 0.015 + 3) * 12 + px * 0.22), 118, 62, true);
+    cloud(c, 48 + Math.round(Math.sin(time * 0.019 + 0.5) * 12), 62, 92, true);
+    cloud(c, 405 + Math.round(Math.sin(time * 0.025) * 14), 48, 84, true);
+    cloud(c, 618 + Math.round(Math.sin(time * 0.018 + 1) * 18), 78, 104, true);
+    cloud(c, 198 + Math.round(Math.sin(time * 0.021 + 2) * 15), 96, 68, false);
+    cloud(c, 488 + Math.round(Math.sin(time * 0.015 + 3) * 12), 118, 62, true);
 
     // 5b. Mid-left cut-stone harbor breakwater, watch-post & beacon obelisk
-    drawWesternBreakwater(c, px, py, time);
+    drawWesternBreakwater(c, time);
 
     // 6. Three sailing vessels at crisp 1:1 integer pixel scales (horizon, mid-bay, foreground)
     const fleet = [
-      { frames: farBoats, x: 204, y: 162, range: 12, speed: 0.021, parallax: 0.35 },
-      { frames: midBoats, x: 144, y: 196, range: 14, speed: 0.018, parallax: 0.55 },
-      { frames: nearBoats, x: 158, y: 292, range: 18, speed: 0.012, parallax: 0.75 },
+      { frames: farBoats, x: 204, y: 162, range: 12, speed: 0.021 },
+      { frames: midBoats, x: 144, y: 196, range: 14, speed: 0.018 },
+      { frames: nearBoats, x: 158, y: 292, range: 18, speed: 0.012 },
     ] as const;
 
     for (let i = 0; i < fleet.length; i++) {
       const vessel = fleet[i];
-      const bx = Math.round(vessel.x + Math.sin(time * vessel.speed + i * 1.4) * vessel.range + px * vessel.parallax);
-      const by = Math.round(vessel.y + Math.sin(time * 0.65 + i * 2.1) * 1.2 + py * vessel.parallax);
+      const bx = Math.round(vessel.x + Math.sin(time * vessel.speed + i * 1.4) * vessel.range);
+      const by = Math.round(vessel.y + Math.sin(time * 0.65 + i * 2.1) * 1.2);
       const image = vessel.frames[Math.floor(time * (2.6 + i * 0.4) + i) % vessel.frames.length];
       const base = by + image.height;
 
@@ -892,20 +951,20 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     }
 
     // 7. Main Rhakotis harbor settlement & brick-tiled limestone peninsula
-    c.drawImage(settlement, px, py);
+    c.drawImage(settlement, 0, 0);
 
     // Refracted water caustic glints dancing up onto the lower sea-wall masonry
     for (let row = 240; row < 452; row += 5) {
       c.globalAlpha = Math.max(0, Math.sin(row * 0.21 + time * 0.82)) * 0.16;
       c.fillStyle = '#eff4ca';
-      c.fillRect(Math.round(quayEdge(row) - 4 + px), row + py, 4, 1);
+      c.fillRect(Math.round(quayEdge(row) - 4), row, 4, 1);
     }
     c.globalAlpha = 1;
 
     // 8. Warm flickering terracotta oil lamps & harbor braziers
     for (let i = 0; i < lamps.length; i++) {
       const lamp = lamps[i];
-      const lx = lamp.x + px, ly = lamp.y + py;
+      const lx = lamp.x, ly = lamp.y;
       const flicker = Math.sin(time * 4.2 + i * 1.9);
       c.globalAlpha = 0.14 + flicker * 0.03;
       disk(c, lx + 2, ly, 9, '#ffdc96');
@@ -928,14 +987,14 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       const walkX = Math.round(quayEdge(y)) + 19 + w.laneOffset;
       c.globalAlpha = 0.36;
       c.fillStyle = '#2d2c36';
-      c.fillRect(walkX + 1 + px, y - 1 + py, 10, 2);
+      c.fillRect(walkX + 1, y - 1, 10, 2);
       c.globalAlpha = 1;
-      c.drawImage(spriteFrame, walkX + px, y - spriteFrame.height + py);
+      c.drawImage(spriteFrame, walkX, y - spriteFrame.height);
     }
 
     // Southern plaza citizen at matching village scale (17px tall, unobstructed on open stone tiles)
     const citizen = walkers[0][Math.floor(time * 2.2) % 4];
-    const cx = 672 + px, cy = 452 + py;
+    const cx = 672, cy = 452;
     c.globalAlpha = 0.36; c.fillStyle = '#2d2c36'; c.fillRect(cx + 1, cy - 1, 10, 2);
     c.globalAlpha = 1;
     c.drawImage(citizen, cx, cy - citizen.height);
@@ -955,8 +1014,8 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     for (let ray = 0; ray < 3; ray++) {
       const pulse = 0.018 + 0.008 * Math.sin(time * 0.35 + ray * 2.1);
       c.globalAlpha = pulse;
-      const rx = DAWN_SUN.x - 10 + ray * 14 + Math.round(px * 0.25);
-      const ry = DAWN_SUN.y + 4 + Math.round(py * 0.25);
+      const rx = DAWN_SUN.x - 10 + ray * 14;
+      const ry = DAWN_SUN.y + 4;
       polygon(c, [
         [rx - 6, ry],
         [rx + 10, ry],
@@ -966,9 +1025,8 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
     }
     c.globalAlpha = 1;
 
-    // 14. Foreground breakwater mole (1.8x parallax depth framing)
-    const fx = Math.round(px * 1.8), fy = Math.round(py * 1.8);
-    c.drawImage(near, fx, fy);
+    // 14. Foreground breakwater mole
+    c.drawImage(near, 0, 0);
 
     // 15. Sunlit airborne dust motes drifting through the morning light
     for (const p of dust) {
@@ -976,8 +1034,8 @@ export function createCoastalScene(canvas: HTMLCanvasElement) {
       if (alpha <= 0.02) continue;
       c.globalAlpha = alpha;
       c.fillStyle = p.size > 1 ? '#ffeab8' : '#f9d29b';
-      const dx = Math.round(p.x + Math.sin(time * 0.22 + p.phase) * 10 + px * 0.9);
-      const dy = Math.round(p.y - ((time * 1.1 + p.phase * 7) % 26) + py * 0.9);
+      const dx = Math.round(p.x + Math.sin(time * 0.22 + p.phase) * 10);
+      const dy = Math.round(p.y - ((time * 1.1 + p.phase * 7) % 26));
       c.fillRect(dx, dy, p.size, p.size);
     }
     c.globalAlpha = 1;

@@ -26,12 +26,29 @@ export default function LivingCoast({ running, active }: { running: boolean; act
   const clock = useRef(0);
   useEffect(() => {
     const canvas = element.current;
+    const home = canvas?.closest<HTMLElement>('.ef-home');
+    if (!canvas || !home) return;
+    const syncSize = () => {
+      const viewportWidth = canvas.clientWidth;
+      const sceneWidth = Math.max(viewportWidth, canvas.clientHeight * canvas.width / canvas.height);
+      home.style.setProperty('--coast-rendered-width', `${sceneWidth}px`);
+      home.style.setProperty('--coast-viewport-width', `${viewportWidth}px`);
+    };
+    const observer = new ResizeObserver(syncSize);
+    observer.observe(canvas);
+    syncSize();
+    return () => {
+      observer.disconnect();
+      home.style.removeProperty('--coast-rendered-width');
+      home.style.removeProperty('--coast-viewport-width');
+    };
+  }, []);
+  useEffect(() => {
+    const canvas = element.current;
     if (!canvas) return;
     const scene = createCoastalScene(canvas);
     if (!scene) return;
     let frame = 0, last = 0, inView = true, disposed = false;
-    let pointerX = 0, pointerY = 0;
-    const fine = matchMedia('(hover: hover) and (pointer: fine)');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const draw = (now: number) => {
       if (disposed) return;
@@ -39,44 +56,31 @@ export default function LivingCoast({ running, active }: { running: boolean; act
         if (!last || now - last >= 1000 / 30) {
           if (last) clock.current += Math.min((now - last) / 1000, .1);
           last = now;
-          scene.draw(clock.current, pointerX, pointerY);
+          scene.draw(clock.current);
         }
         frame = requestAnimationFrame(draw);
       }
     };
     const sync = () => {
       cancelAnimationFrame(frame); last = 0;
-      scene.draw(clock.current, 0, 0);
+      scene.draw(clock.current);
       if (running && active && !document.hidden && inView && !reduced.matches) frame = requestAnimationFrame(draw);
     };
-    const move = (event: PointerEvent) => {
-      if (!fine.matches || !running || !active || reduced.matches) return;
-      pointerX = event.clientX / window.innerWidth * 2 - 1;
-      pointerY = event.clientY / window.innerHeight * 2 - 1;
-    };
-    const leave = () => { pointerX = 0; pointerY = 0; };
     const observer = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver(entries => {
       inView = entries[0]?.isIntersecting ?? false; sync();
     });
     observer?.observe(canvas);
     document.addEventListener('visibilitychange', sync);
-    window.addEventListener('pointermove', move, { passive: true });
-    document.addEventListener('pointerleave', leave);
     reduced.addEventListener('change', sync);
     sync();
     return () => {
       disposed = true; cancelAnimationFrame(frame); observer?.disconnect(); scene.dispose();
       document.removeEventListener('visibilitychange', sync);
-      window.removeEventListener('pointermove', move);
-      document.removeEventListener('pointerleave', leave);
       reduced.removeEventListener('change', sync);
     };
   }, [running, active]);
   return <div className="ef-coast" aria-hidden="true">
     <canvas ref={element} width={768} height={480} className="ef-coast-canvas" />
-    <div className="ef-coast-sunlight" />
-    <div className="ef-coast-aureole" />
-    <div className="ef-coast-shade" />
     <div className="ef-coast-grain" />
   </div>;
 }

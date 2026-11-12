@@ -76,7 +76,7 @@
   color:#172426;
 }
 .life-choice-auto-btn.is-on{
-  background:linear-gradient(180deg,#23534d 0%,#173b36 100%);
+  background:#204843;
   color:#fff9e8;
   border-color:#e2b86b;
 }
@@ -321,7 +321,7 @@
   color:#172426;
 }
 .life-action-tabs button.is-active{
-  background:linear-gradient(180deg,#23534d 0%,#173b36 100%);
+  background:#204843;
   color:#fff9e8;
   border-color:#e2b86b;
   box-shadow:inset 0 1px 0 #3d7a6e;

@@ -3,6 +3,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
+import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import "../homepage/homepage.css";
 import "../homepage/luminous.css";
 import "../homepage/typeset.css";
@@ -45,26 +46,32 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
   return <main ref={lightRoot} className="ef-home" aria-labelledby={headingId} data-motion={running && active ? "running" : "paused"}>
     <LivingCoast running={running} active={active} />
     <div className="ef-light-air" aria-hidden="true">{Array.from({length:8}, (_,i) => <i key={i} className="ef-light-mote" />)}</div>
-    <div className="ef-home-frame" aria-hidden="true"><i /><i /><i /><i /></div>
     <div className="ef-home-shell">
-      <header className="ef-home-header">
-        <nav className="ef-home-links" aria-label="Main menu">
-          <a href="/skills">Skill tree</a>
-          {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
-          <button type="button" onClick={onPastLives}>Past lives</button>
-          {onLegacy && <button type="button" onClick={onLegacy}>Legacy gallery</button>}
-          <button type="button" onClick={onSources}>History &amp; sources</button>
-        </nav>
-        <div className="ef-home-era"><span className="ef-home-diamond" aria-hidden="true" /><span>THE ANCIENT WORLD</span><strong>{formatYear(world.startYear)}</strong></div>
-        <GameMusicPlayer variant="home" />
-        <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
-          <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
-        </button>
+      <header className="ef-home-weave-bar">
+        <div className="ef-home-weave-bar-main">
+          <a className="ef-home-weave-brand" href="#weave" aria-label="Everfolk Weave Mode">
+            <strong><EverfolkWordmark tone="cream" /></strong>
+            <span>WEAVING FATES</span>
+          </a>
+          <nav className="ef-home-weave-links" aria-label="Everfolk experiences">
+            <a href="#weave">Weave Mode</a>
+            <a href="#figures">Figures</a>
+            <a href="#market">Market</a>
+            <a href="#mine">My lives</a>
+            <button type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin}>Explore for free</button>
+          </nav>
+        </div>
+        {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry /></div>}
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
           {rankedLife && <p className="ef-home-eyebrow">WEAVE MODE · NEAR TESTNET</p>}
-          <h1 id={headingId} ref={heading} aria-label="Everfolk." tabIndex={-1}><span className="ef-title-wrap"><span className="ef-home-wordmark ef-royal-wordmark" aria-hidden="true">Everfolk</span>{[0,1,2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}</span></h1>
+          <h1 id={headingId} ref={heading} aria-label="Everfolk" tabIndex={-1}>
+            <span className="ef-title-wrap">
+              <img className="ef-home-wordmark" src="/assets/branding/everfolk-wordmark-cream.svg" alt="" width={1280} height={291} />
+              {[0, 1, 2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}
+            </span>
+          </h1>
           <div className="ef-home-logo-rule" aria-hidden="true"><span /><i>✦</i><span /></div>
           {hasBegun && <div className="ef-home-save" id={saveId}>
             <span className="ef-home-save-mark" aria-hidden="true" />
@@ -80,21 +87,19 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
           </div>
         </section>
       </div>
-      <footer className="ef-home-footer">
-        <div className="ef-home-footer-main">
-          <a className="ef-home-weave-brand" href="#weave" aria-label="Everfolk Weave Mode">
-            <strong>Everfolk</strong>
-            <span>WEAVING FATES</span>
-          </a>
-          <nav className="ef-home-weave-links" aria-label="Everfolk experiences">
-            <a href="#weave">Weave Mode</a>
-            <a href="#figures">Figures</a>
-            <a href="#market">Market</a>
-            <a href="#mine">My lives</a>
-            <button type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin}>Explore for free</button>
-          </nav>
-        </div>
-        {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry /></div>}
+      <footer className="ef-home-utility-bar">
+        <nav className="ef-home-links" aria-label="Main menu">
+          <a href="/skills">Skill tree</a>
+          {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
+          <button type="button" onClick={onPastLives}>Past lives</button>
+          {onLegacy && <button type="button" onClick={onLegacy}>Legacy gallery</button>}
+          <button type="button" onClick={onSources}>History &amp; sources</button>
+        </nav>
+        <div className="ef-home-era"><span className="ef-home-diamond" aria-hidden="true" /><span>THE ANCIENT WORLD</span><strong>{formatYear(world.startYear)}</strong></div>
+        <GameMusicPlayer variant="home" />
+        <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
+          <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
+        </button>
       </footer>
     </div>
   </main>;
