@@ -18,7 +18,7 @@ export default function LifeOverview({ life, world, onOpenWealth }: {
     </dl>
     {life.economy && wealth && <button type="button" className="overview-wealth" onClick={onOpenWealth} aria-label="Open total wealth and society comparison" aria-describedby={`${wealthId}-amount ${wealthId}-percentile ${wealthId}-cash`}>
       <span className="overview-wealth-metric"><span className="overview-wealth-label">Total wealth</span><strong id={`${wealthId}-amount`}>{formatMoney(wealth.netWorth, world)}</strong></span>
-      <span className="overview-wealth-metric"><span className="overview-wealth-label">Society percentile</span><strong id={`${wealthId}-percentile`}>{formatWealthStanding(wealth.percentile)}</strong></span>
+      <span className="overview-wealth-metric"><span className="overview-wealth-label">Assets rank among households</span><strong id={`${wealthId}-percentile`}>{formatWealthStanding(wealth.percentile)}</strong></span>
       <small className="overview-cash-note" id={`${wealthId}-cash`}>Cash available: {formatMoney(life.economy.cash, world)}</small>
       <span className="overview-wealth-details">Details <span aria-hidden="true">↗</span></span>
     </button>}
