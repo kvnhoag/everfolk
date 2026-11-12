@@ -34,6 +34,7 @@ import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { decidedByOthers, inTimeFrame } from "./life-stages/index.ts";
+import { advanceDistrict, initialPaths } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -100,6 +101,8 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.capabilities ? { capabilities: structuredClone(state.capabilities) } : {}),
+    ...(state.paths ? { paths: structuredClone(state.paths) } : {}),
+    ...(state.stageRecords ? { stageRecords: structuredClone(state.stageRecords) } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
     ...(state.character ? { character: {
@@ -710,6 +713,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.character?.identity) initializeIdentity(world, state);
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
     initializeFamily(world, state);
+    if (world.paths) state.paths = initialPaths(world, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
     if (world.economy) {
@@ -804,6 +808,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       openDemoYear(demoCtx(next));
       if (world.demo.startingResources) syncEconomyStat(world, next);
     }
+    // The district moves with this year's conditions (war, flood) once they are known.
+    if (world.paths && next.phase !== "ended") advanceDistrict(world, next);
     checkEndings(next);
     resolveEvents(next, true);
     if (world.economy?.market) syncEconomyStat(world, next);

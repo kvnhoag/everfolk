@@ -25,7 +25,7 @@ export function pathsDefinition(): PathsDefinition {
       soldiering: field("Soldiering", "soldier", ["warfare"], ["soldier"]),
     },
     districts: {
-      village: { title: "a Delta village", origins: ["farm"], profile: profile({ farming: { demand: 6, people: [2, 6, 2, 0] }, ceramics: { demand: 2, people: [1, 1, 0, 0] } }) },
+      village: { title: "a Delta village", origins: ["farm"], profile: profile({ farming: { demand: 8, people: [2, 6, 2, 0] }, ceramics: { demand: 2, people: [1, 1, 0, 0] } }) },
       city: { title: "the city quarter", origins: ["workshop"], profile: profile({ ceramics: { demand: 6, people: [3, 6, 2, 1] }, research: { demand: 4, people: [1, 2, 1, 1] }, soldiering: { demand: 3, people: [1, 3, 1, 0] } }) },
     },
     pay: { minBps: 7000, maxBps: 16000, scarceBps: 12000, crowdedBps: 8500 },
