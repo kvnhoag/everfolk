@@ -16,8 +16,11 @@ stage in which the player decides each kind of decision:
 | `household` | Shared grain, silver, land, cash, medical care, contracts with townspeople |
 
 Free-play Alexandria (`src/vocations/life-stage-content.ts`): infancy 0–2 (no decisions), early
-childhood 3–5 and childhood 6–11 (personal), adolescence 12–15 (+ work), youth 16–17
-(+ community), adulthood 18–59 and later life 60+ (+ household).
+childhood 3–5 and childhood 6–11 (personal), adolescence 12–13 (+ work), youth 14–15
+(+ community), adulthood 16–59 and later life 60+ (+ household). The ages follow the evidence from
+Graeco-Roman Egypt: apprenticeships often began before the teens, a boy entered the poll-tax
+register at 14 (Greek families also enrolled sons as ephebes then), and most women married by
+their later teens. The levy is a household answer (who goes, what is sent).
 
 ## Event fields
 

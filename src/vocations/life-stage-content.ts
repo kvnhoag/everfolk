@@ -10,9 +10,11 @@ export const ALEXANDRIA_LIFE_STAGES: LifeStagesDefinition = {
     { id: "infancy", title: "Infancy", minAge: 0 },
     { id: "early-childhood", title: "Early childhood", minAge: 3 },
     { id: "childhood", title: "Childhood", minAge: 6 },
+    // Graeco-Roman Egypt: apprenticeships often began before the teens; at 14 a boy entered the
+    // poll-tax register and, for Greek families, the ephebate; most women married by their later teens.
     { id: "adolescence", title: "Adolescence", minAge: 12 },
-    { id: "youth", title: "Youth", minAge: 16 },
-    { id: "adulthood", title: "Adulthood", minAge: 18 },
+    { id: "youth", title: "Youth", minAge: 14 },
+    { id: "adulthood", title: "Adulthood", minAge: 16 },
     { id: "later-life", title: "Later life", minAge: 60 },
   ],
   scopes: { personal: "early-childhood", work: "adolescence", community: "youth", household: "adulthood" },
@@ -74,7 +76,8 @@ const offerAnsweredByHousehold = (offer: string, what: string): DependentResolut
 /** Who decides each event that is not the player's own matter, and how others resolve it. */
 const SCOPED: Record<string, { scope: DecisionScope; dependent?: DependentResolution; dropAgeGate?: boolean }> = {
   "flood-failure": { scope: "household", dependent: FLOOD },
-  "levy-call": { scope: "community", dependent: LEVY, dropAgeGate: true },
+  // The household answers the levy: who goes, what is sent, whether a substitute fee is paid.
+  "levy-call": { scope: "household", dependent: LEVY, dropAgeGate: true },
   "agent-offer-grain-contract": { scope: "household", dependent: offerAnsweredByHousehold("grain-contract", "to buy grain from the store") },
   "agent-offer-seed-credit": { scope: "household", dependent: offerAnsweredByHousehold("seed-credit", "seed grain on credit") },
   "agent-offer-goods-deal": { scope: "household", dependent: offerAnsweredByHousehold("goods-deal", "goods for sale") },

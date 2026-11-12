@@ -26390,7 +26390,6 @@
       ],
       "exclusiveGroup": "early-wages",
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -26560,7 +26559,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -26620,7 +26618,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -26762,7 +26759,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -27349,7 +27345,6 @@
       ],
       "exclusiveGroup": "early-work",
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -27513,7 +27508,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -27600,7 +27594,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -27781,7 +27774,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -27878,7 +27870,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -27975,7 +27967,7 @@
         "alexandrian-terracottas"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28071,7 +28063,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28167,7 +28159,7 @@
         "strabo-alexandria"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28263,7 +28255,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28360,7 +28352,7 @@
         "education-apprenticeship"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28457,7 +28449,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28553,7 +28545,6 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -28649,7 +28640,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28741,7 +28732,6 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -28837,7 +28827,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -28923,7 +28913,6 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -29012,7 +29001,6 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -29107,7 +29095,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -29199,7 +29187,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -29286,7 +29274,7 @@
         "classical-rhakotis"
       ],
       "stages": [
-        "adolescence"
+        "youth"
       ]
     },
     {
@@ -29360,7 +29348,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -29430,7 +29417,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -29522,7 +29508,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -30768,7 +30753,6 @@
       "mode": "automatic",
       "effects": [],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -31238,7 +31222,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31279,7 +31264,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31314,7 +31300,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31349,7 +31336,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31384,7 +31372,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31419,7 +31408,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -31460,7 +31450,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -31496,7 +31485,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -31532,7 +31520,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -31568,7 +31555,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -31604,7 +31590,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -31640,7 +31625,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood"
       ]
@@ -32483,7 +32467,8 @@
       "cooldownYears": 16,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -32558,7 +32543,8 @@
       "cooldownYears": 16,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -33466,7 +33452,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -33507,7 +33494,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -33542,7 +33530,8 @@
       "cooldownYears": 12,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -33582,7 +33571,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -33619,7 +33607,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -33656,7 +33643,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -33699,7 +33685,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -33736,7 +33721,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -34229,7 +34213,8 @@
       "cooldownYears": 16,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -34309,7 +34294,8 @@
       "cooldownYears": 16,
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -35099,7 +35085,6 @@
       "maxOccurrences": 3,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -35149,7 +35134,6 @@
       "maxOccurrences": 3,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -35327,7 +35311,6 @@
       "maxOccurrences": 5,
       "cooldownYears": 8,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -35375,7 +35358,6 @@
       "maxOccurrences": 3,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -36166,7 +36148,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -36691,7 +36672,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -36983,7 +36963,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -40006,7 +39985,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40052,7 +40030,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40106,7 +40083,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40160,7 +40136,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40210,7 +40185,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40260,7 +40234,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40310,7 +40283,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40356,7 +40328,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40406,7 +40377,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40452,7 +40422,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -40508,7 +40477,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -40563,7 +40531,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -40944,7 +40911,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -40984,7 +40950,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41024,7 +40989,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41064,7 +41028,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41115,7 +41078,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41166,7 +41128,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41217,7 +41178,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41257,7 +41217,6 @@
       "maxOccurrences": 1,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41306,7 +41265,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41342,7 +41300,6 @@
       "maxOccurrences": 2,
       "cooldownYears": 12,
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -41940,7 +41897,8 @@
       ],
       "stages": [
         "adolescence",
-        "youth"
+        "youth",
+        "adulthood"
       ]
     },
     {
@@ -42537,7 +42495,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -42809,7 +42766,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -42897,7 +42853,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -42995,7 +42950,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -43501,7 +43455,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -43607,7 +43560,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -43709,7 +43661,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -43815,7 +43766,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -44019,7 +43969,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -44111,7 +44060,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -51125,7 +51073,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -51297,7 +51244,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -51408,7 +51354,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -51524,7 +51469,6 @@
         }
       ],
       "stages": [
-        "adolescence",
         "youth",
         "adulthood",
         "later-life"
@@ -51691,7 +51635,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -51895,7 +51838,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -52066,7 +52008,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -52154,7 +52095,6 @@
         }
       ],
       "stages": [
-        "youth",
         "adulthood",
         "later-life"
       ]
@@ -62625,7 +62565,7 @@
           ]
         }
       ],
-      "scope": "community",
+      "scope": "household",
       "dependent": {
         "text": "The levy comes to the district. Officers walk the lanes with a list of names, and the grown-ups answer for your household.",
         "responses": [
@@ -68966,12 +68906,12 @@
       {
         "id": "youth",
         "title": "Youth",
-        "minAge": 16
+        "minAge": 14
       },
       {
         "id": "adulthood",
         "title": "Adulthood",
-        "minAge": 18
+        "minAge": 16
       },
       {
         "id": "later-life",

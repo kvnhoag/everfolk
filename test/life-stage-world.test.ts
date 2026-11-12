@@ -13,7 +13,7 @@ import type { LifeState, WorldPack } from "../src/types.ts";
 const world = shipped as unknown as WorldPack;
 const engine = createEngine(world);
 const scopeOf = new Map(world.events.map(event => [event.id, event.scope ?? "personal"]));
-const SCOPE_START = { personal: 3, work: 12, community: 16, household: 18 } as const;
+const SCOPE_START = { personal: 3, work: 12, community: 14, household: 16 } as const;
 
 interface Played { state: LifeState; offered: Array<[number, string]> }
 
@@ -63,14 +63,14 @@ test("no decision is offered in infancy, and none below its scope's first stage"
 test("a child in a failed-flood year lives with the household's response, without a choice", () => {
   const children = lives.flatMap(({ state }) => state.journal
     .map((entry, i) => ({ entry, next: state.journal[i + 1] }))
-    .filter(({ entry }) => entry.type === "event" && entry.id === "flood-failure" && entry.age < 18));
+    .filter(({ entry }) => entry.type === "event" && entry.id === "flood-failure" && entry.age < 16));
   assert.ok(children.length > 0, "some sampled childhoods include a failed flood");
   for (const { entry, next } of children) {
     assert.match(entry.text, /grown-ups of your household decide/);
     assert.equal(next.type, "outcome");
     assert.match(next.id, /^household-(shares-grain|sells-silver|cuts-portions)$/);
   }
-  const adults = lives.flatMap(({ offered }) => offered.filter(([age, id]) => id === "flood-failure" && age >= 18));
+  const adults = lives.flatMap(({ offered }) => offered.filter(([age, id]) => id === "flood-failure" && age >= 16));
   assert.ok(adults.length > 0, "adults still decide the flood");
 });
 
@@ -85,7 +85,7 @@ test("a child in a levy year is affected by the household's answer to the levy",
 test("a sick child's care is arranged by the household", () => {
   const cared = lives.flatMap(({ state }) => state.journal.filter(entry => entry.type === "outcome" && /^household-(pays-healer|nurses-at-home)$/.test(entry.id)));
   assert.ok(cared.length > 0);
-  for (const entry of cared) assert.ok(entry.age < 18);
+  for (const entry of cared) assert.ok(entry.age < 16);
 });
 
 test("every event outside dated history and interrupts has a time frame", () => {
