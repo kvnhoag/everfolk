@@ -7,6 +7,7 @@ import RankedEntry from "./RankedEntry.tsx";
 import Market from "./Market.tsx";
 import TokenPage from "./TokenPage.tsx";
 import Web3Navigation from "./Web3Navigation.tsx";
+import "./harbor-theme.css";
 import { anotherDialogOpened } from "./wallet-host.ts";
 import PackPage from "./PackPage.tsx";
 import Figures from "./Figures.tsx";

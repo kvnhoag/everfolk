@@ -129,3 +129,13 @@ test("cosmetic arithmetic remains bounded for safe integer endpoints and fixed d
   }
   assert.equal(getCosmeticBirthValue({ id: "decimal", label: "Decimal", value: 70.5, range: { min: 70.5, max: 70.5 } }, "fixed", 5), 70.5);
 });
+
+test("the starting wealth range is shown in whole drachmas in the current free-play world", async () => {
+  const { default: lives5 } = await import("../worlds/demo/alexandria-lives-5.json", { with: { type: "json" } });
+  const engine = createEngine(lives5 as unknown as WorldPack);
+  for (const seed of ["round-a", "round-b", "round-c", "round-d", "round-e"]) {
+    const wealth = getBirthRollStats(engine.world, engine.start(seed)).find(stat => stat.id === engine.world.economy?.stat);
+    if (!wealth?.range) continue;
+    assert.ok(Number.isInteger(wealth.range.min) && Number.isInteger(wealth.range.max), `${seed}: ${wealth.range.min} - ${wealth.range.max}`);
+  }
+});

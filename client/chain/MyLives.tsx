@@ -35,7 +35,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
 
   return <section className="ledger-panel market" aria-labelledby={headingId}>
     <header className="ledger-heading">
-      <p className="ledger-kicker"><span className="cr-index">{String(rows?.length ?? 0).padStart(2, "0")}</span>{backend.mode === "preview" ? "Practice collection" : "Kept on NEAR"}</p>
+      <p className="ledger-kicker">{backend.mode === "preview" ? "Practice collection" : "Kept on NEAR"}</p>
       <h1 id={headingId} tabIndex={-1}>My lives</h1>
       <p>Your current Weave life, completed lives waiting to mint, and the NFTs {signin ? "you own" : "your wallet owns"}.</p>
     </header>

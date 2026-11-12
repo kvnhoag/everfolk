@@ -104,3 +104,19 @@ test("freeplay contract stub allows slot reroll and selection without on-chain e
   assert.equal(chosen.kind, pack.cards[0].kind);
   assert.equal(chosen.rarity, pack.cards[0].rarity);
 });
+
+test("a free pack's people-of-the-city cards do not all repeat the same action", async () => {
+  for (const seed of ["vary-a", "vary-b", "vary-c", "vary-d"]) {
+    const { pack } = await createFreePlayBooster(createMockLife(seed), mockWorld);
+    const npcActions = pack.cards.filter(card => card.kind === "npc").map(card => card.action_id);
+    if (npcActions.length > 1) assert.ok(new Set(npcActions).size > 1, `${seed}: ${npcActions.join(", ")}`);
+  }
+});
+
+test("a free life with no job is grouped by its strongest skill, not as a performer", async () => {
+  const life = createMockLife("no-job");
+  life.character = { ...life.character!, jobId: undefined, skills: { farming: 60, trading: 10 } } as LifeState["character"];
+  life.journal = life.journal.filter(entry => entry.type !== "activity");
+  const evidence = await generateFreePlayEvidence(life, mockWorld);
+  assert.equal(evidence.career_group, "farming");
+});

@@ -26,3 +26,12 @@ export function zoomMapCamera(camera: MapCamera, scale: number, anchor: MapPoint
   const next = clampMapZoom(scale), ratio = next / camera.scale;
   return { scale: next, x: anchor.x - (anchor.x - camera.x) * ratio, y: anchor.y - (anchor.y - camera.y) * ratio };
 }
+
+/** The skill tree opens at this zoom, where node titles are readable, instead of fitting the whole atlas. */
+export const READABLE_START_ZOOM = .85;
+
+/** Where the skill tree opens: the deepest learned skill, else the first one the player can learn now. */
+export function skillMapStartNode(view: readonly { id: string; state: string }[], depth: ReadonlyMap<string, number>, fallback: string): string {
+  const learned = view.filter(node => node.state === "learned").sort((a, b) => (depth.get(b.id) ?? 0) - (depth.get(a.id) ?? 0));
+  return learned[0]?.id ?? view.find(node => node.state === "available")?.id ?? fallback;
+}

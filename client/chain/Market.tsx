@@ -58,7 +58,7 @@ export function MarketBody({ rows, busy = false, error, notice, canConnect, onCo
   const filtered = filter.group !== "all" || filter.rarity !== "all";
   return <section className="ledger-panel market" aria-labelledby={headingId}>
     <header className="ledger-heading">
-      <p className="ledger-kicker"><span className="cr-index">{String(rows.length).padStart(2, "0")}</span>Lives kept by other players</p>
+      <p className="ledger-kicker">Lives kept by other players</p>
       <h1 id={headingId} tabIndex={-1}>Market</h1>
       <p>Buy a kept life and choose what it does in the lives it meets. Every sale pays a share to the people who shaped it.</p>
     </header>

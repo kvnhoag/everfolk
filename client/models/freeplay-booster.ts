@@ -2,6 +2,7 @@ import { sha256Hex } from "../../chain/hash.ts";
 import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import { figuresForWorld } from "../../chain/catalog/demo-figures.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "../../chain/match.ts";
+import type { CareerGroup } from "../../chain/ids.ts";
 import type { Evidence, MintCard, MintPack, MintResult } from "../../chain/types.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { DEFAULT_MARKET_TERMS } from "../chain/payout-preview.ts";
@@ -12,6 +13,21 @@ import type { LivesContract } from "../chain/types.ts";
 const NPC_RARITY_WEIGHTS = [6000n, 2500n, 1000n, 400n, 100n];
 const FIGURE_RARITY_WEIGHTS = [0n, 0n, 7000n, 2500n, 500n];
 
+/** Skill → career group, for free lives that never held a ranked job (for example a household farm). */
+const SKILL_GROUPS: Readonly<Record<string, CareerGroup>> = {
+  farming: "farming", craft: "craft", pottery: "craft", carving: "craft", sculpture: "craft", warfare: "military",
+  literacy: "letters", philosophy: "letters", oratory: "letters", reckoning: "commerce", trading: "commerce",
+  seamanship: "commerce", astronomy: "sky", astrology: "sky", music: "performance",
+};
+
+function freePlayCareerGroup(life: LifeState): CareerGroup {
+  if (peakJobOf(life)) return careerGroupOf(life);
+  const strongest = Object.entries(life.character?.skills ?? {})
+    .filter(([skill]) => SKILL_GROUPS[skill])
+    .sort(([, a], [, b]) => b - a)[0];
+  return strongest && strongest[1] > 0 ? SKILL_GROUPS[strongest[0]] : careerGroupOf(life);
+}
+
 function birthYearOf(life: LifeState, world: WorldPack): number {
   const birth = life.journal.find(entry => entry.type === "birth");
   return birth?.year ?? world.startYear;
@@ -21,7 +37,7 @@ function birthYearOf(life: LifeState, world: WorldPack): number {
 export async function generateFreePlayEvidence(life: LifeState, world: WorldPack): Promise<Evidence> {
   const seed = life.seed || "freeplay-seed";
   const birthYear = birthYearOf(life, world);
-  const careerGroup = careerGroupOf(life);
+  const careerGroup = freePlayCareerGroup(life);
   const worldVersion = world.version || "alexandria-demo-2";
   const matched = matchFigures(life, figuresForWorld(worldVersion));
 
@@ -61,10 +77,11 @@ async function rollCardOutcome(seed: string, evidence: Evidence) {
   return { figure, rarity, affection };
 }
 
-async function generatePackCard(seed: string, hash: string, slot: number, rerolled: boolean, evidence: Evidence, defaultAction: string): Promise<MintCard> {
+async function generatePackCard(seed: string, hash: string, slot: number, rerolled: boolean, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard> {
   const cardSeed = await sha256Hex(`${seed}:pack:${hash}:${slot}:${rerolled}`);
   const { figure, rarity, affection } = await rollCardOutcome(cardSeed, evidence);
-  const actionId = figure ? FIGURE_ACTIONS[figure][0] : defaultAction;
+  // Neighbouring slots offer the group's different deeds, so a pack never repeats one card three times.
+  const actionId = figure ? FIGURE_ACTIONS[figure][0] : groupActions[(slot + (rerolled ? 1 : 0)) % groupActions.length];
   return {
     kind: figure ? "figure" : "npc",
     figure_id: figure,
@@ -87,13 +104,13 @@ export interface FreePlayBoosterSession {
  */
 export async function createFreePlayBooster(life: LifeState, world: WorldPack): Promise<FreePlayBoosterSession> {
   const evidence = await generateFreePlayEvidence(life, world);
-  const defaultAction = NPC_ACTIONS[evidence.career_group]?.actions[0] ?? "letters.teach";
+  const groupActions: readonly string[] = NPC_ACTIONS[evidence.career_group]?.actions ?? ["letters.teach"];
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));
   const seed = evidence.seed;
 
   const cards: MintCard[] = [];
   for (let slot = 0; slot < 3; slot++) {
-    cards.push(await generatePackCard(seed, evidenceHash, slot, false, evidence, defaultAction));
+    cards.push(await generatePackCard(seed, evidenceHash, slot, false, evidence, groupActions));
   }
 
   const packView: MintPack = {
@@ -130,7 +147,7 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
       if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
       if (slot < 0 || slot > 2) throw new Error("Unknown slot");
       if (packRef.view.cards[slot].rerolled) throw new Error("Slot already rerolled");
-      const newCard = await generatePackCard(seed, evidenceHash, slot, true, evidence, defaultAction);
+      const newCard = await generatePackCard(seed, evidenceHash, slot, true, evidence, groupActions);
       packRef.view.cards[slot] = newCard;
       return structuredClone(packRef.view);
     },

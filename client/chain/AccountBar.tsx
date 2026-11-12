@@ -63,8 +63,10 @@ export default function AccountBar({ backend, compact = false }: { backend: Chai
       {view.status === "disconnected" && <>
         <span className="account-net">{view.network}</span>
         <span className="account-muted">{signin ? "Not signed in" : "No wallet connected"}</span>
+        {/* In the shared header one "Sign in" opens the email-or-wallet chooser; the page body keeps its own call to action. */}
+        {signin && compact ? <button className="account-action" type="button" disabled={busy} onClick={() => setSigningIn(true)}>Sign in</button> : <>
         {signin && <EmailSignIn available={signin.available.email} onOpen={() => setSigningIn(true)} />}
-        <button className="account-action" type="button" disabled={busy} onClick={() => { void run(signin?.useWallet ?? backend.connect, "The wallet could not connect."); }}>Connect wallet</button>
+        <button className="account-action" type="button" disabled={busy} onClick={() => { void run(signin?.useWallet ?? backend.connect, "The wallet could not connect."); }}>Connect wallet</button></>}
         {!signin && <EmailSignIn />}
         {signin && signingIn && <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={signin.useWallet} onClose={() => setSigningIn(false)} />}
       </>}

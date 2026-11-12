@@ -32,3 +32,12 @@ test("zoom limits and drag bounds keep the atlas recoverable in every direction"
     assert.ok(result.y < viewport.height && result.y + canvas.height * scale > 0);
   }
 });
+
+test("the skill tree opens on the player's deepest learned skill at a readable zoom", async () => {
+  const { READABLE_START_ZOOM, skillMapStartNode } = await import("../client/models/skill-map-camera.ts");
+  assert.ok(READABLE_START_ZOOM >= .8);
+  const depth = new Map([["F1", 1], ["F2", 2], ["C1", 1], ["C3", 3]]);
+  assert.equal(skillMapStartNode([{ id: "F1", state: "learned" }, { id: "F2", state: "learned" }, { id: "C3", state: "available" }], depth, "F1"), "F2");
+  assert.equal(skillMapStartNode([{ id: "F1", state: "available" }, { id: "C1", state: "locked" }], depth, "F1"), "F1");
+  assert.equal(skillMapStartNode([], depth, "F1"), "F1");
+});

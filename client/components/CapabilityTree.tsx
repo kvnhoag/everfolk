@@ -1,4 +1,4 @@
-import { useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
@@ -6,7 +6,7 @@ import { buildCapabilityLayout, CAPABILITY_BRANCHES, CAPABILITY_NODES, capabilit
 import CapabilityIcon from "./CapabilityIcon.tsx";
 import { capabilityPresentations, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
-import { MAP_MAX_ZOOM, MAP_MIN_ZOOM } from "../models/skill-map-camera.ts";
+import { MAP_MAX_ZOOM, MAP_MIN_ZOOM, READABLE_START_ZOOM, skillMapStartNode } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
@@ -122,6 +122,13 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
     const point = layout.nodes.find(item => item.node.id === id);
     if (point) focusPoint(point, scale);
   }
+  // Open on the player's own progress at a readable zoom rather than the whole atlas at ~38%.
+  useEffect(() => {
+    const start = skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes[0].id);
+    const frame = requestAnimationFrame(() => centerNode(start, READABLE_START_ZOOM));
+    return () => cancelAnimationFrame(frame);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- once per opening
+  }, []);
   function select(id: string, focus = false) {
     setSelectedId(id); setPathSelected(true);
     if (focus) requestAnimationFrame(() => { nodeRefs.current.get(id)?.focus({ preventScroll: true }); centerNode(id); });
