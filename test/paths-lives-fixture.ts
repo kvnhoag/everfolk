@@ -1,4 +1,4 @@
-/** The shipped free-play world with a test-only paths block (before the content task adds the real one). */
+/** The shipped free-play world with a small test-only paths block, so pay and moves can be checked against known counts. */
 import type { LifeState, WorldPack } from "../src/types.ts";
 import type { PathsDefinition } from "../src/paths/index.ts";
 import { refreshNeeds } from "../src/paths/index.ts";
@@ -7,7 +7,6 @@ import { profile } from "./paths-fixture.ts";
 
 export function livesWithPaths(): WorldPack {
   const world = structuredClone(shipped) as unknown as WorldPack;
-  if (world.paths) return world;
   const field = (title: string, practitioner: string, skills: string[], jobs: string[], specializations: string[]) =>
     ({ title, practitioner, skills, jobs, specializations });
   const paths: PathsDefinition = {

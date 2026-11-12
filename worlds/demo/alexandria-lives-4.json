@@ -282,6 +282,38 @@
     "v-public-accounts": {
       "label": "Published the district accounts",
       "initial": false
+    },
+    "met-renowned-farming": {
+      "label": "Met a renowned farmer",
+      "initial": false
+    },
+    "met-renowned-clothing": {
+      "label": "Met a renowned weaver",
+      "initial": false
+    },
+    "met-renowned-ceramics": {
+      "label": "Met a renowned potter",
+      "initial": false
+    },
+    "met-renowned-sculpture": {
+      "label": "Met a renowned sculptor",
+      "initial": false
+    },
+    "met-renowned-research": {
+      "label": "Met a renowned scholar",
+      "initial": false
+    },
+    "met-renowned-civic": {
+      "label": "Met a renowned official",
+      "initial": false
+    },
+    "met-renowned-trade": {
+      "label": "Met a renowned trader",
+      "initial": false
+    },
+    "met-renowned-soldiering": {
+      "label": "Met a renowned soldier",
+      "initial": false
     }
   },
   "origins": [
@@ -404,6 +436,66 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
+      ]
+    },
+    {
+      "id": "artisan-household",
+      "title": "A city artisan household",
+      "weight": 2,
+      "effects": [],
+      "evidence": "fictional",
+      "text": "You are born in a courtyard of potters and weavers in the city quarter near the harbour. Kilns smoke most mornings, clay dries by the door, and someone is always at a loom.",
+      "statRanges": {
+        "health": {
+          "min": 58,
+          "max": 80
+        },
+        "knowledge": {
+          "min": 0,
+          "max": 3
+        },
+        "wealth": {
+          "min": 15,
+          "max": 40
+        },
+        "bonds": {
+          "min": 50,
+          "max": 78
+        }
+      },
+      "sourceIds": [
+        "household-late-period",
+        "classical-rhakotis"
+      ]
+    },
+    {
+      "id": "royal-household",
+      "title": "A royal household",
+      "weight": 1,
+      "effects": [],
+      "evidence": "fictional",
+      "text": "You are born into a minor branch of Egypt's native royal family, on an estate near the court quarter. Scribes keep its accounts, tutors come to the house, and officials call on your elders.",
+      "statRanges": {
+        "health": {
+          "min": 64,
+          "max": 86
+        },
+        "knowledge": {
+          "min": 2,
+          "max": 8
+        },
+        "wealth": {
+          "min": 60,
+          "max": 90
+        },
+        "bonds": {
+          "min": 45,
+          "max": 72
+        }
+      },
+      "sourceIds": [
+        "household-royal-kin",
+        "classical-rhakotis"
       ]
     }
   ],
@@ -66242,6 +66334,38 @@
             "min": 0,
             "max": 10
           }
+        },
+        "artisan-household": {
+          "grain": {
+            "min": 150,
+            "max": 300
+          },
+          "flax": {
+            "min": 5,
+            "max": 15
+          },
+          "linen": {
+            "min": 0,
+            "max": 2
+          }
+        },
+        "royal-household": {
+          "grain": {
+            "min": 600,
+            "max": 900
+          },
+          "silver": {
+            "min": 2,
+            "max": 4
+          },
+          "gold": {
+            "min": 0,
+            "max": 1
+          },
+          "linen": {
+            "min": 1,
+            "max": 3
+          }
         }
       }
     }
@@ -68924,6 +69048,584 @@
       "work": "adolescence",
       "community": "youth",
       "household": "adulthood"
+    }
+  },
+  "paths": {
+    "fields": {
+      "farming": {
+        "title": "Farming",
+        "practitioner": "farmer",
+        "skills": [
+          "farming",
+          "reckoning"
+        ],
+        "jobs": [
+          "farmhand",
+          "tenant-farmer",
+          "grain-dealer",
+          "master-cultivator",
+          "master-household-farmer"
+        ],
+        "specializations": [
+          "Cultivation",
+          "Resilience"
+        ]
+      },
+      "clothing": {
+        "title": "Clothing",
+        "practitioner": "weaver",
+        "skills": [
+          "craft"
+        ],
+        "jobs": [
+          "tailor",
+          "master-tailor"
+        ],
+        "specializations": [
+          "Clothing"
+        ]
+      },
+      "ceramics": {
+        "title": "Ceramics",
+        "practitioner": "potter",
+        "skills": [
+          "pottery",
+          "craft"
+        ],
+        "jobs": [
+          "potter",
+          "ceramic-decorator",
+          "pottery-workshop-lead",
+          "master-potter"
+        ],
+        "specializations": [
+          "Ceramics"
+        ]
+      },
+      "sculpture": {
+        "title": "Sculpture",
+        "practitioner": "sculptor",
+        "skills": [
+          "sculpture",
+          "carving",
+          "craft"
+        ],
+        "jobs": [
+          "wood-carver",
+          "sculptor",
+          "carving-workshop-lead",
+          "sculpture-workshop-lead",
+          "master-sculptor"
+        ],
+        "specializations": [
+          "Sculpture"
+        ]
+      },
+      "research": {
+        "title": "Research",
+        "practitioner": "scholar",
+        "skills": [
+          "philosophy",
+          "literacy",
+          "astronomy"
+        ],
+        "jobs": [
+          "philosophy-tutor",
+          "scientist",
+          "patron-supported-reader",
+          "sky-table-calculator"
+        ],
+        "specializations": [
+          "Research"
+        ]
+      },
+      "civic": {
+        "title": "Civic life",
+        "practitioner": "official",
+        "skills": [
+          "oratory",
+          "literacy"
+        ],
+        "jobs": [
+          "clerk",
+          "copyist",
+          "court-adviser",
+          "politician"
+        ],
+        "specializations": [
+          "Civic practice"
+        ]
+      },
+      "trade": {
+        "title": "Trade",
+        "practitioner": "trader",
+        "skills": [
+          "reckoning"
+        ],
+        "jobs": [
+          "shopkeeper",
+          "merchant",
+          "trading-house-manager"
+        ],
+        "specializations": [
+          "Commercial planning"
+        ]
+      },
+      "soldiering": {
+        "title": "Soldiering",
+        "practitioner": "soldier",
+        "skills": [
+          "warfare"
+        ],
+        "jobs": [
+          "soldier",
+          "officer",
+          "general"
+        ],
+        "specializations": []
+      }
+    },
+    "districts": {
+      "delta-village": {
+        "title": "a Delta village",
+        "origins": [
+          "tenant-farming-household",
+          "delta-newcomers"
+        ],
+        "profile": {
+          "farming": {
+            "demand": 12,
+            "people": [
+              4,
+              12,
+              3,
+              0
+            ]
+          },
+          "clothing": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              0,
+              0
+            ]
+          },
+          "ceramics": {
+            "demand": 2,
+            "people": [
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "sculpture": {
+            "demand": 0,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "research": {
+            "demand": 1,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "civic": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "trade": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "soldiering": {
+            "demand": 1,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "garrison": {
+        "title": "the garrison",
+        "origins": [
+          "soldier-household"
+        ],
+        "profile": {
+          "farming": {
+            "demand": 4,
+            "people": [
+              1,
+              4,
+              1,
+              0
+            ]
+          },
+          "clothing": {
+            "demand": 1,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "ceramics": {
+            "demand": 1,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "sculpture": {
+            "demand": 0,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "research": {
+            "demand": 0,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "civic": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "trade": {
+            "demand": 2,
+            "people": [
+              0,
+              2,
+              0,
+              0
+            ]
+          },
+          "soldiering": {
+            "demand": 10,
+            "people": [
+              3,
+              10,
+              3,
+              1
+            ]
+          }
+        }
+      },
+      "estate": {
+        "title": "the estate lands",
+        "origins": [
+          "estate-household"
+        ],
+        "profile": {
+          "farming": {
+            "demand": 10,
+            "people": [
+              3,
+              10,
+              3,
+              1
+            ]
+          },
+          "clothing": {
+            "demand": 2,
+            "people": [
+              1,
+              2,
+              0,
+              0
+            ]
+          },
+          "ceramics": {
+            "demand": 1,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "sculpture": {
+            "demand": 1,
+            "people": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "research": {
+            "demand": 1,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "civic": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              0,
+              0
+            ]
+          },
+          "trade": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              1,
+              0
+            ]
+          },
+          "soldiering": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "city-quarter": {
+        "title": "the city quarter",
+        "origins": [
+          "artisan-household"
+        ],
+        "profile": {
+          "farming": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "clothing": {
+            "demand": 6,
+            "people": [
+              3,
+              6,
+              2,
+              0
+            ]
+          },
+          "ceramics": {
+            "demand": 6,
+            "people": [
+              3,
+              6,
+              2,
+              1
+            ]
+          },
+          "sculpture": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              1,
+              0
+            ]
+          },
+          "research": {
+            "demand": 2,
+            "people": [
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "civic": {
+            "demand": 4,
+            "people": [
+              1,
+              3,
+              1,
+              0
+            ]
+          },
+          "trade": {
+            "demand": 6,
+            "people": [
+              2,
+              5,
+              2,
+              1
+            ]
+          },
+          "soldiering": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      "court-quarter": {
+        "title": "the court quarter",
+        "origins": [
+          "royal-household"
+        ],
+        "profile": {
+          "farming": {
+            "demand": 1,
+            "people": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "clothing": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              1,
+              0
+            ]
+          },
+          "ceramics": {
+            "demand": 2,
+            "people": [
+              0,
+              1,
+              1,
+              0
+            ]
+          },
+          "sculpture": {
+            "demand": 3,
+            "people": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "research": {
+            "demand": 6,
+            "people": [
+              3,
+              4,
+              2,
+              1
+            ]
+          },
+          "civic": {
+            "demand": 6,
+            "people": [
+              2,
+              5,
+              2,
+              1
+            ]
+          },
+          "trade": {
+            "demand": 3,
+            "people": [
+              1,
+              2,
+              1,
+              0
+            ]
+          },
+          "soldiering": {
+            "demand": 4,
+            "people": [
+              1,
+              3,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    "pay": {
+      "minBps": 7000,
+      "maxBps": 16000,
+      "scarceBps": 12000,
+      "crowdedBps": 8500
+    },
+    "startingMaterials": {
+      "artisan-household": {
+        "clay": 4,
+        "fuel": 2
+      },
+      "royal-household": {
+        "papyrus": 6,
+        "ink": 4
+      }
+    },
+    "originAffinity": {
+      "tenant-farming-household": {
+        "farming": 10
+      },
+      "soldier-household": {
+        "soldiering": 10
+      },
+      "estate-household": {
+        "farming": 5,
+        "trade": 5
+      },
+      "artisan-household": {
+        "ceramics": 10,
+        "clothing": 5
+      },
+      "royal-household": {
+        "research": 5,
+        "civic": 10
+      },
+      "delta-newcomers": {
+        "farming": 5
+      }
     }
   }
 }

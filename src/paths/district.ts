@@ -4,6 +4,7 @@ import { nextRandom, seedToUint32 } from "../random.ts";
 import { FIELD_IDS } from "./types.ts";
 import type { FieldId, PathsState, TierCounts } from "./types.ts";
 import { refreshNeeds } from "./needs.ts";
+import { putItem } from "../capabilities/inventory.ts";
 
 const BPS = 10_000;
 const LEAVE_BPS = 500, LEARNER_PROMOTE_BPS = 2000, WORKER_PROMOTE_BPS = 500, RENOWN_CHANCE = 0.02;
@@ -23,6 +24,14 @@ export function derivedStream(life: LifeState, purpose: string): () => number {
 function share(count: number, bps: number, random: () => number): number {
   const exact = count * bps;
   return Math.floor(exact / BPS) + (random() < (exact % BPS) / BPS ? 1 : 0);
+}
+
+/** Places the birthplace's materials in the vocation inventory. Returns whether anything was added. */
+export function applyStartingMaterials(world: WorldPack, life: LifeState): boolean {
+  const materials = world.paths?.startingMaterials?.[life.originId];
+  if (!materials || !life.vocations) return false;
+  for (const [item, quantity] of Object.entries(materials)) if (quantity > 0) putItem(life, item, quantity);
+  return true;
 }
 
 export function districtOf(world: WorldPack, originId: string): string {

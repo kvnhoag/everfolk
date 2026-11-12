@@ -34,7 +34,7 @@ import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -749,6 +749,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
       if (world.demo.startingResources) syncEconomyStat(world, state);
     }
+    if (world.paths && applyStartingMaterials(world, state) && world.demo?.startingResources) syncEconomyStat(world, state);
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
