@@ -26,7 +26,7 @@ const DEMO_FIGURE_LIST: FigureRequirement[] = [
     accomplishmentsAny: [CONVOY_DISTINCTION],
     maxAgeAtAccomplishment: 32,
     stages: ["youth", "adulthood"],
-    minAge: 16,
+    minAge: 14,
     maxAge: 32,
   },
   ranked("aristotle"),

@@ -52,7 +52,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
     {rows !== null && rows.length > 0 && <ol className="ledger-rows market-ledger ledger-body">{rows.map(row => <li key={row.tokenId} className="ledger-row">
       <span className="ledger-label">No. {row.tokenId}<small>{row.isFigure ? "Famous figure" : "Person of the city"}</small></span>
       <div className="ledger-value">
-        <span className="market-thumb">{row.figureId ? <FigureArtwork figureId={row.figureId} /> : <span className="ledger-emblem" aria-hidden="true"><PixelIcon name={row.emblem ?? "sun"} size={26} /></span>}</span>
+        <span className="market-thumb">{row.portraitMedia ? <img src={row.portraitMedia} alt={row.title} className="stage-market-portrait" /> : row.figureId ? <FigureArtwork figureId={row.figureId} /> : <span className="ledger-emblem" aria-hidden="true"><PixelIcon name={row.emblem ?? "sun"} size={26} /></span>}</span>
         <h2><a href={row.href}>{row.title}</a></h2>
         <ul className="ledger-chips">
           <li className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>{row.rarityLabel}</li>

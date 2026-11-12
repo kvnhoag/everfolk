@@ -3,15 +3,21 @@ import type { FigureRequirement } from "./catalog/figures.ts";
 import { figureFrontPath, figureMediaPath } from "./figure-media.ts";
 import { figuresForWorld } from "./catalog/demo-figures.ts";
 
+export const YOCTO_PER_NEAR = 10n ** 24n;
+/** Testnet mint fee for generic stage portraits divided by 10 (0.002 NEAR). */
+export const TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO = (2n * YOCTO_PER_NEAR / 1000n).toString();
+/** Testnet mint fee for historical figures divided by 10 (0.01 NEAR). */
+export const TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO = (10n * YOCTO_PER_NEAR / 1000n).toString();
+
 export interface StageRecord {
   stageId: string;
   title: string;
   fromAge: number;
   toAge: number;
   district: string;
-  field: string;
-  tier: number;
-  jobId?: string;
+  field: string | null;
+  tier: string | number;
+  jobId?: string | null;
   topSkills: Record<string, number>;
   nodes: string[];
   reputation: number;
@@ -20,17 +26,20 @@ export interface StageRecord {
 }
 
 export interface StageCharacterContext {
-  characterName: string;
+  characterName?: string;
+  name?: string;
   originId: string;
   sex?: "male" | "female";
   avatarVariant?: number;
-  seed: string;
+  seed?: string;
   worldVersion?: string;
   stats?: Record<string, number>;
 }
 
 export interface MatchedStageFigure {
+  stageId: string;
   kind: "historical" | "generic";
+  figureId?: FigureId | null;
   historicalFigureId?: FigureId;
   title: string;
   name: string;
@@ -149,9 +158,13 @@ export function matchStageFigure(
   const figureCatalog = figures ?? figuresForWorld(context.worldVersion ?? "");
   const historical = matchStageRecordToHistorical(stage, context, figureCatalog);
 
+  const charName = context.characterName ?? context.name ?? "A citizen of Alexandria";
+
   if (historical) {
     return {
+      stageId: stage.stageId,
       kind: "historical",
+      figureId: historical.figure,
       historicalFigureId: historical.figure,
       title: historical.title,
       name: shortFigureName(historical.figure, historical.title),
@@ -170,15 +183,17 @@ export function matchStageFigure(
     avatarVariant: context.avatarVariant,
   });
 
-  const jobPart = stage.jobId ? formatWord(stage.jobId) : `${formatWord(stage.field)} Tier ${stage.tier}`;
+  const jobPart = stage.jobId ? formatWord(stage.jobId) : (stage.field ? `${formatWord(stage.field)} Tier ${stage.tier}` : `Tier ${stage.tier}`);
   const districtPart = formatWord(stage.district);
-  const title = `${context.characterName}, ${jobPart} in ${districtPart}`;
-  const summary = `Portrait from ${stage.title.toLowerCase()} (ages ${stage.fromAge}–${stage.toAge}) in ${districtPart}. Focused on ${stage.field} (tier ${stage.tier})${stage.jobId ? ` as ${formatWord(stage.jobId)}` : ""}.`;
+  const title = `${charName}, ${jobPart} in ${districtPart}`;
+  const summary = `Portrait from ${stage.title.toLowerCase()} (ages ${stage.fromAge}–${stage.toAge}) in ${districtPart}.${stage.field ? ` Focused on ${stage.field} (tier ${stage.tier})` : ""}${stage.jobId ? ` as ${formatWord(stage.jobId)}` : ""}.`;
 
   return {
+    stageId: stage.stageId,
     kind: "generic",
+    figureId: null,
     title,
-    name: context.characterName,
+    name: charName,
     summary,
     media,
     stageRecord: stage,

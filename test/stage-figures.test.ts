@@ -13,7 +13,7 @@ test("historical figure requirements define stage and age windows", () => {
   const alexander = FIGURES.find(f => f.figure === "alexander")!;
   assert.ok(alexander.stages?.includes("adulthood"), "Alexander includes adulthood");
   assert.ok(alexander.stages?.includes("youth"), "Alexander includes youth");
-  assert.equal(alexander.minAge, 16);
+  assert.equal(alexander.minAge, 14);
   assert.equal(alexander.maxAge, 32);
 
   const aristotle = FIGURES.find(f => f.figure === "aristotle")!;

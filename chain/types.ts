@@ -1,4 +1,5 @@
 import type { CareerGroup, Category, FigureId } from "./ids.ts";
+import type { MatchedStageFigure, StageRecord } from "./stage-figures.ts";
 
 /** JSON views returned by the Everfolk lives contract. Rust structs serialize to exactly these shapes. */
 export interface FigurePick { figure_id: FigureId; token_id: string; action_id: string; rarity: number }
@@ -22,16 +23,52 @@ export interface Evidence {
   stats: Record<string, number>; skills: Record<string, number>; origin_id: string; peak_job_id: string | null;
   accomplishments: { id: string; age: number }[]; death_age: number; birth_year: number; death_year: number;
   career_group: CareerGroup; matched_figures: FigureId[]; sources: SourceImpact[];
+  stage_records?: StageRecord[];
+  stage_figures?: MatchedStageFigure[];
 }
 
-export interface MintResult { token_id: string; kind: "figure" | "npc"; figure_id: FigureId | null; rarity: number; affection: number }
-export interface MintCard { kind: "figure" | "npc"; figure_id: FigureId | null; rarity: number; affection: number; action_id: string; rerolled: boolean }
+export interface MintResult {
+  token_id: string;
+  kind: "figure" | "npc";
+  figure_id: FigureId | null;
+  rarity: number;
+  affection: number;
+  stage_id?: string;
+  stage_title?: string;
+  character_name?: string;
+  portrait_media?: string;
+}
+export interface MintCard {
+  kind: "figure" | "npc";
+  figure_id: FigureId | null;
+  rarity: number;
+  affection: number;
+  action_id: string;
+  rerolled: boolean;
+  stage_id?: string;
+  stage_title?: string;
+  character_name?: string;
+  district?: string;
+  field?: string | null;
+  tier?: string | number;
+  portrait_media?: string;
+  stage_record?: StageRecord;
+}
 export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; reroll_fee: string; source_share_bps: number }
 export interface MintTerms { mint_fee: string; reroll_fee: string; source_share_bps: number; pack_version: number }
 export interface SourceShare { token_id: string; bps: number }
 export interface TokenExtra {
   kind: "figure" | "npc"; figure_id: FigureId | null; rarity: number; affection: number; action_id: string;
   life_id: string; birth_year: number; death_year: number; career_group: CareerGroup; sources: SourceShare[]; evidence_hash: string;
+  stage_id?: string;
+  stage_title?: string;
+  from_age?: number;
+  to_age?: number;
+  character_name?: string;
+  district?: string;
+  field?: string | null;
+  tier?: string | number;
+  portrait_media?: string;
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

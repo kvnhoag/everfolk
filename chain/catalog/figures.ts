@@ -45,7 +45,7 @@ const FIGURE_LIST: FigureRequirement[] = [
     accomplishmentsAny: ["military-first-work", "military-prestige"],
     maxAgeAtAccomplishment: 32,
     stages: ["youth", "adulthood"],
-    minAge: 16,
+    minAge: 14,
     maxAge: 32,
   },
   {
