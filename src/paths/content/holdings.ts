@@ -50,8 +50,9 @@ const SPECS: Spec[] = [
     scope: "household", max: 3, cooldown: 5, weight: PLENTY_WEIGHT,
     text: "The storeroom jars are full to the shoulders. There is more grain than the household will eat before the next flood.",
     choices: [
-      { key: "expand", text: "Rent the neighbouring strip and sow more", result: "You rent the strip and plan the sowing yourself.",
-        effects: [demo({ kind: "harvest-bonus", bps: 1000 }), pull("farming", 10, "planning a larger sowing"), skill("farming", 2)] },
+      { key: "expand", text: "Rent the neighbouring strip for 30 drachmas and sow more", when: { type: "cash", op: "gte", value: 30 },
+        result: "You pay the landholder, rent the strip and plan the sowing yourself.",
+        effects: [{ type: "cash", delta: -30 }, demo({ kind: "harvest-bonus", bps: 1000 }), pull("farming", 10, "planning a larger sowing"), skill("farming", 2)] },
       { key: "lend", text: "Lend seed to neighbours who are short", result: "Neighbours carry away seed and promise grain back at harvest.",
         effects: [demo({ kind: "share-grain", quantity: 100 }), demo({ kind: "reputation", delta: 3 }), stat("bonds", 1)] },
       { key: "prices", text: "Learn what the merchants pay before selling any", result: "You spend market days learning who pays what, and when.",

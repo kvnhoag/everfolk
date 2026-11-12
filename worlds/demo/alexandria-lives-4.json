@@ -65622,13 +65622,22 @@
       "choices": [
         {
           "id": "holdings-full-granary-expand",
-          "text": "Rent the neighbouring strip and sow more",
+          "text": "Rent the neighbouring strip for 30 drachmas and sow more",
+          "when": {
+            "type": "cash",
+            "op": "gte",
+            "value": 30
+          },
           "outcomes": [
             {
               "id": "holdings-full-granary-expand-done",
-              "text": "You rent the strip and plan the sowing yourself.",
+              "text": "You pay the landholder, rent the strip and plan the sowing yourself.",
               "weight": 1,
               "effects": [
+                {
+                  "type": "cash",
+                  "delta": -30
+                },
                 {
                   "type": "demo",
                   "effect": {

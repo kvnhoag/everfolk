@@ -208,3 +208,14 @@ test("a recruiting offer only comes when the life can act on it", () => {
   }
   assert.ok(offers > 10, `${offers} recruiting offers`);
 });
+
+test("a bigger harvest from a new event is always paid for in the same choice", () => {
+  const ids = [...Object.keys(HOLDINGS), ...Object.keys(NEEDS_AND_MOVES)];
+  for (const id of ids) for (const choice of byId.get(id)!.choices) for (const outcome of choice.outcomes) {
+    if (!outcome.effects.some(effect => effect.type === "demo" && effect.effect.kind === "harvest-bonus")) continue;
+    const paid = outcome.effects.some(effect => effect.type === "cash" && effect.delta < 0 ||
+      effect.type === "demo" && (effect.effect.kind === "grain" || effect.effect.kind === "item") && effect.effect.delta < 0);
+    assert.ok(paid, `${outcome.id} raises the harvest without paying for it`);
+    assert.ok(choice.when, `${choice.id} must require what it spends`);
+  }
+});
