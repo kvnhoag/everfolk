@@ -21,10 +21,12 @@ export function livesWithPaths(): WorldPack {
       soldiering: field("Soldiering", "soldier", ["warfare"], ["soldier", "officer", "general"], []),
     },
     districts: {
-      village: { title: "a Delta village", origins: world.origins.map(origin => origin.id), profile: profile({
+      // Real district IDs (content refers to them); test counts in the two used by the tests.
+      ...Object.fromEntries(Object.entries(world.paths!.districts).map(([id, district]) => [id, { ...district, origins: [] as string[], profile: profile() }])),
+      "delta-village": { title: "a Delta village", origins: world.origins.map(origin => origin.id), profile: profile({
         research: { demand: 4, people: [1, 4, 0, 0] }, soldiering: { demand: 6, people: [1, 6, 0, 0] }, trade: { demand: 4, people: [1, 4, 0, 0] },
       }) },
-      city: { title: "the city quarter", origins: [], profile: profile({
+      "city-quarter": { title: "the city quarter", origins: [], profile: profile({
         ceramics: { demand: 6, people: [3, 6, 2, 1] }, research: { demand: 2, people: [1, 1, 0, 0] }, soldiering: { demand: 3, people: [1, 3, 1, 0] },
       }) },
     },

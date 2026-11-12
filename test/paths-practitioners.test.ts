@@ -92,19 +92,19 @@ test("only the player moves; the household stays and the needs follow the new di
   life.age = 13;
   const household = structuredClone(life.demo!.household);
   const villageNeed = life.paths!.needs.ceramics.bps;
-  moveDistrict(world, life, "city", "an apprenticeship with a city potter");
-  assert.equal(life.paths!.district, "city");
-  assert.equal(life.paths!.home, "village");
+  moveDistrict(world, life, "city-quarter", "an apprenticeship with a city potter");
+  assert.equal(life.paths!.district, "city-quarter");
+  assert.equal(life.paths!.home, "delta-village");
   assert.deepEqual(life.demo!.household, household);
   assert.notEqual(life.paths!.needs.ceramics.bps, villageNeed);
   assert.equal(matchesCondition({ type: "away-from-home" }, life), true);
   assert.equal(matchesCondition({ type: "demo", condition: { kind: "item", item: "grain", op: "gte", value: 0 } } as never, life), true);
   const text = moveDistrict(world, life, "home", "homesick");
-  assert.equal(life.paths!.district, "city", "one move per life stage");
+  assert.equal(life.paths!.district, "city-quarter", "one move per life stage");
   assert.match(text, /already moved/);
   life.age = 16;
   moveDistrict(world, life, "home", "a return to the family plot");
-  assert.equal(life.paths!.district, "village");
+  assert.equal(life.paths!.district, "delta-village");
 });
 
 test("meeting and moving work as event effects and validate", () => {
