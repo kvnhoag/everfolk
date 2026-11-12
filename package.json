@@ -19,6 +19,7 @@
     "ranked:world": "node scripts/ranked/build-ranked-world.mjs",
     "demo:world": "node scripts/demo/build-demo-world.mjs",
     "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
+    "npc:provider-check": "node scripts/npc/check-provider.mjs",
     "check:structure": "node scripts/check-structure.mjs"
   },
   "packageManager": "pnpm@11.25.0",

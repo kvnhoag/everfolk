@@ -1,10 +1,12 @@
 import type { WorldPack } from "../../src/types.ts";
 import type { ContentDatabase } from "../db/types.ts";
 import type { NpcSessionState, NpcDecision } from "../../src/npc/types.ts";
+import type { NpcProviderStatus } from "./provider-status.ts";
 export interface SessionRecord {
   id: string;
   ownerHash: string;
   ownerId: string | null;
+  budgetSubject?: string;
   revision: number;
   worldFingerprint: string;
   state: NpcSessionState;
@@ -12,6 +14,7 @@ export interface SessionRecord {
   proposals: Record<string, { age: number; decision: NpcDecision }>;
   receipts: Record<string, { request: string; revision: number }>;
   llmAttempts: number;
+  provider?: NpcProviderStatus;
   turnLock: { key: string; until: number } | null;
 }
 export interface NpcSessionStore {

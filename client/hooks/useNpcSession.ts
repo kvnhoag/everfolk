@@ -55,7 +55,8 @@ export function useNpcSession() {
     }
   }
   async function act(
-    operation: "turn" | "step" | "answer" | "speak" | "lease",
+    operation:
+      "turn" | "step" | "answer" | "speak" | "lease" | "check-provider",
     input: Record<string, unknown> = {},
   ) {
     if (!connection || !session || locked.current) return;
