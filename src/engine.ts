@@ -865,12 +865,16 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function orderMarketInto(next: LifeState, request: MarketOrderRequest): void {
     assertPlayable(next);
-    placeMarketOrder(world, next, request);
-    next.commands.push({ type: "market-order", side: request.side, asset: request.asset, quantity: request.quantity });
-    const order = next.economy!.market!.orders.at(-1)!;
-    const title = world.economy!.assets.find(item => item.id === request.asset)!.title.toLowerCase();
-    journal(next, "activity", "market-order", `You contract to ${order.side} ${order.quantity} ${title} at ${order.unitPrice} ${world.economy!.currency.short} each. ${order.side === "buy" ? "Cash" : "Goods"} reserved; settlement at age ${order.settlesAtAge}.`);
-    syncEconomyStat(world, next);
+    recorded(next, () => next.journal.length - 1, () => {
+      placeMarketOrder(world, next, request);
+      next.commands.push({ type: "market-order", side: request.side, asset: request.asset, quantity: request.quantity });
+      const order = next.economy!.market!.orders.at(-1)!;
+      const title = world.economy!.assets.find(item => item.id === request.asset)!.title.toLowerCase();
+      journal(next, "activity", "market-order", `You contract to ${order.side} ${order.quantity} ${title} at ${order.unitPrice} ${world.economy!.currency.short} each. ${order.side === "buy" ? "Cash" : "Goods"} reserved; settlement at age ${order.settlesAtAge}.`);
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
   }
 
   function orderMarket(state: LifeState, request: MarketOrderRequest): LifeState {
@@ -882,10 +886,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function cancelMarketOrderInto(next: LifeState, orderId: number): void {
     assertPlayable(next);
-    cancelOrder(world, next, orderId);
-    next.commands.push({ type: "market-cancel", orderId });
-    journal(next, "activity", "market-cancel", `You cancel market contract ${orderId}. Its reserved cash or goods are returned.`);
-    syncEconomyStat(world, next);
+    recorded(next, () => next.journal.length - 1, () => {
+      cancelOrder(world, next, orderId);
+      next.commands.push({ type: "market-cancel", orderId });
+      journal(next, "activity", "market-cancel", `You cancel market contract ${orderId}. Its reserved cash or goods are returned.`);
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
   }
 
   function cancelMarketOrder(state: LifeState, orderId: number): LifeState {

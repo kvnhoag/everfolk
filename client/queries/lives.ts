@@ -3,6 +3,14 @@ import type { ArchivedLife, StorageLike } from "../types/session.ts";
 import { ARCHIVE_KEY, ARCHIVE_LIMIT, SAVE_KEY, engineForLife, presentationKeyFor, sampleEngine } from "../lib/world-session.ts";
 import { readEverfolkStorage } from "../lib/brand-storage.ts";
 
+export function readRawSavedLife(storage: StorageLike): string | null {
+  try {
+    return readEverfolkStorage(storage, SAVE_KEY);
+  } catch {
+    return null;
+  }
+}
+
 export function readSavedLife(storage: StorageLike): LifeState | null {
   let saved: string | null;
   try {

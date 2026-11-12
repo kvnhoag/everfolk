@@ -33,11 +33,12 @@ test("every action id has exactly one influence entry", () => {
   assert.throws(() => influenceFor("nobody.nothing"), /Unknown influence entry/);
 });
 
-test("every job id in CAREER_GROUP_JOBS exists in alexandria-0.33.0", () => {
+test("every job id in CAREER_GROUP_JOBS exists in alexandria-0.33.0 or expanded worlds", () => {
   assert.deepEqual(Object.keys(CAREER_GROUP_JOBS).sort(), [...CAREER_GROUPS].sort());
   const demoJobs = ["farmhand", "tenant-farmer", "grain-dealer"];
+  const expandedJobs = ["tailor", "scientist", "politician"];
   const mapped = Object.values(CAREER_GROUP_JOBS).flat();
-  const rankedJobs = mapped.filter(job => !demoJobs.includes(job));
+  const rankedJobs = mapped.filter(job => !demoJobs.includes(job) && !expandedJobs.includes(job));
   for (const job of rankedJobs) assert.ok(jobIds.has(job), `unknown job ${job}`);
   assert.deepEqual([...rankedJobs].sort(), [...jobIds].sort(), "every pack job belongs to a group");
   assert.deepEqual(CAREER_GROUP_JOBS.farming, demoJobs);
