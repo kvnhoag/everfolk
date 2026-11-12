@@ -178,6 +178,10 @@ export function validatePathsEffect(effect: DataObject, path: string, paths: unk
       requirePaths(paths, path, tools); field(effect, path, tools);
       if (!["child", "young", "adult", "elder"].includes(effect.band as string)) tools.fail(`${path}.band`, "expected child, young, adult or elder");
       return true;
+    case "introduce-field":
+      tools.object(effect, path, ["type", "field"]);
+      requirePaths(paths, path, tools); field(effect, path, tools);
+      return true;
     case "use-material":
       tools.object(effect, path, ["type", "item", "quantity", "cause"]);
       requireMaterial(effect.item, `${path}.item`, tools);

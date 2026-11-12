@@ -24,11 +24,14 @@ interface Spec {
   id: string; title: string; text: string; when: Condition; stages: string[]; fields: FieldId[];
   scope?: DecisionScope; effects?: Effect[];
   choices?: Array<{ key: string; text: string; result: string; effects: Effect[]; when?: Condition }>;
-  max?: number; cooldown?: number;
+  max?: number; cooldown?: number; weight?: number;
 }
 
+/** Holdings come up more often than ordinary stories (weight 1), so what a household owns is felt. */
+const HOLDINGS_WEIGHT = 2, PLENTY_WEIGHT = 3;
+
 function build(spec: Spec): LifeEvent {
-  const base = { id: spec.id, title: spec.title, text: spec.text, trigger: { type: "random" as const, weight: 1 }, when: spec.when,
+  const base = { id: spec.id, title: spec.title, text: spec.text, trigger: { type: "random" as const, weight: spec.weight ?? HOLDINGS_WEIGHT }, when: spec.when,
     stages: spec.stages, fields: spec.fields, maxOccurrences: spec.max ?? 2, cooldownYears: spec.cooldown ?? 4, evidence: "fictional" as const };
   if (!spec.choices) return { ...base, mode: "automatic", effects: spec.effects ?? [], choices: [] };
   const choices: Choice[] = spec.choices.map(choice => ({
@@ -40,11 +43,11 @@ function build(spec: Spec): LifeEvent {
 
 const SPECS: Spec[] = [
   { id: "holdings-harvest-carrying", title: "Sheaves to the threshing floor", fields: ["farming"], when: holds("grain", 400),
-    stages: ["early-childhood", "childhood"], max: 2, cooldown: 3,
+    stages: ["early-childhood", "childhood"], max: 2, cooldown: 3, weight: PLENTY_WEIGHT,
     text: "The harvest is good. Everyone carries, even the children, and the threshing floor is loud until dark.",
     effects: [pull("farming", 5, "carrying sheaves at a good harvest"), stat("health", 1)] },
   { id: "holdings-full-granary", title: "A full granary", fields: ["farming", "trade"], when: holds("grain", 600), stages: HOUSEHOLD_YEARS,
-    scope: "household", max: 3, cooldown: 5,
+    scope: "household", max: 3, cooldown: 5, weight: PLENTY_WEIGHT,
     text: "The storeroom jars are full to the shoulders. There is more grain than the household will eat before the next flood.",
     choices: [
       { key: "expand", text: "Rent the neighbouring strip and sow more", result: "You rent the strip and plan the sowing yourself.",

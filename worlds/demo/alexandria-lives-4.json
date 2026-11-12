@@ -64656,7 +64656,7 @@
       "text": "The harvest is good. Everyone carries, even the children, and the threshing floor is loud until dark.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 3
       },
       "when": {
         "type": "demo",
@@ -64699,7 +64699,7 @@
       "text": "The storeroom jars are full to the shoulders. There is more grain than the household will eat before the next flood.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 3
       },
       "when": {
         "type": "demo",
@@ -64818,7 +64818,7 @@
       "text": "After the low flood, a neighbour comes to the door asking for seed grain to sow.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "all",
@@ -64907,7 +64907,7 @@
       "text": "Someone gives you a handful of spare flax, and you twist it into string the way the grown-ups do.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -64944,7 +64944,7 @@
       "text": "There is flax in the storeroom, retted and ready.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -65025,7 +65025,7 @@
       "text": "A bolt of good linen lies folded in the household chest.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -65113,7 +65113,7 @@
       "text": "A lump of wet clay sits by the door, left from the morning's work.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "any",
@@ -65186,7 +65186,7 @@
       "text": "A neighbour's kiln has room for a few more pots this firing.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "all",
@@ -65274,7 +65274,7 @@
       "text": "There is a sheet of papyrus and a little ink in the house.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "material",
@@ -65349,7 +65349,7 @@
       "text": "You find a steward's old wax tablets, full of sums.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "any",
@@ -65420,7 +65420,7 @@
       "text": "The household accounts need a clean copy for the tax collector.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "material",
@@ -65496,7 +65496,7 @@
       "text": "The household keeps a piece of silver against bad years. A master would teach for less.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -65657,7 +65657,7 @@
       "text": "The money jar is heavier than it has been for years.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "cash",
@@ -65719,7 +65719,7 @@
       "text": "Neighbours without an ox ask whether yours could plough their plots too.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -65788,7 +65788,7 @@
       "text": "Neighbours ask whether your donkey could carry their goods to market.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "demo",
@@ -65856,7 +65856,7 @@
       "text": "A carver's yard throws out an offcut of good limestone.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "any",
@@ -65928,7 +65928,7 @@
       "text": "You find a parent's old army kit in a chest: a dented helmet, a belt and a short sword in its scabbard.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "origin",
@@ -65960,7 +65960,7 @@
       "text": "Boys from the garrison families join the soldiers' drill at the end of the yard.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "district",
@@ -66022,7 +66022,7 @@
       "text": "The household has goods to spare, and someone has to mind the family's market stall.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "any",
@@ -66108,7 +66108,7 @@
       "text": "The master you met sends you a potter's turning tool, worn smooth by years of use.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "introduced",
@@ -66142,7 +66142,7 @@
       "text": "The master you met sends you a weaver's shuttle, worn smooth by years of use.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "introduced",
@@ -66176,7 +66176,7 @@
       "text": "The master you met sends you a carver's chisel, worn smooth by years of use.",
       "trigger": {
         "type": "random",
-        "weight": 1
+        "weight": 2
       },
       "when": {
         "type": "introduced",
@@ -66203,6 +66203,1787 @@
         }
       ],
       "choices": []
+    },
+    {
+      "id": "need-scarce-farming",
+      "title": "Hands wanted in the fields",
+      "text": "Plots lie half-sown for want of farmers. Landholders are asking around for anyone who can work them, and paying more than usual.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "farming",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-farming-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-farming-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "farming"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-farming-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-farming-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-clothing",
+      "title": "Weavers wanted",
+      "text": "The weaving shops cannot keep up with orders. Cloth merchants are offering better rates to anyone who can spin or weave.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "clothing",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-clothing-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-clothing-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "clothing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-clothing-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-clothing-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-ceramics",
+      "title": "Potters wanted",
+      "text": "There are too few potters for the jars the district needs. Workshops pay better than usual for a pair of steady hands.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "ceramics",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-ceramics-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-ceramics-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "ceramics"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-ceramics-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-ceramics-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-sculpture",
+      "title": "Carvers wanted",
+      "text": "A new building needs carved stone and there are too few carvers. The yards pay well for anyone who can hold a chisel.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "sculpture",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-sculpture-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-sculpture-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "sculpture"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-sculpture-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-sculpture-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-research",
+      "title": "Scholars wanted",
+      "text": "Few here can read and reason well. Families pay a good fee for anyone who can teach their children or check a calculation.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "research",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-research-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-research-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "research"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-research-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-research-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-civic",
+      "title": "Scribes wanted",
+      "text": "The record office is short of scribes. Officials pay well for anyone who can copy a decree and keep an account.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "civic",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-civic-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-civic-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "civic"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-civic-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-civic-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-trade",
+      "title": "Traders wanted",
+      "text": "Few traders work the district and goods sit unsold. Suppliers pay a premium for anyone who will carry and sell their goods.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "trade",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-trade-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-trade-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "trade"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-trade-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-trade-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-scarce-soldiering",
+      "title": "Soldiers wanted",
+      "text": "The garrison is short of men. Its officers offer better pay than usual to anyone fit to serve.",
+      "trigger": {
+        "type": "random",
+        "weight": 4
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "when": {
+        "type": "field-need",
+        "field": "soldiering",
+        "label": "scarce"
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-scarce-soldiering-ask",
+          "text": "Ask for work there",
+          "outcomes": [
+            {
+              "id": "need-scarce-soldiering-ask-done",
+              "text": "You are told where to go and whom to ask. The pay is better than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "a district short of hands"
+                },
+                {
+                  "type": "introduce-field",
+                  "field": "soldiering"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-scarce-soldiering-pass",
+          "text": "It is not work for you",
+          "outcomes": [
+            {
+              "id": "need-scarce-soldiering-pass-done",
+              "text": "You leave it to others.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-farming",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "farming"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-farming-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-farming-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-farming-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-farming-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-clothing",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "clothing"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-clothing-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-clothing-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-clothing-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-clothing-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-ceramics",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "ceramics"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-ceramics-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-ceramics-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-ceramics-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-ceramics-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-sculpture",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "sculpture"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-sculpture-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-sculpture-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-sculpture-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-sculpture-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-research",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "research"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-research-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-research-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-research-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-research-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-civic",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "civic"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-civic-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-civic-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-civic-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-civic-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-trade",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "trade"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-trade-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-trade-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-trade-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-trade-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-master-offer-soldiering",
+      "title": "An offer from a master",
+      "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "introduced",
+        "field": "soldiering"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-master-offer-soldiering-accept",
+          "text": "Work beside the master for a season",
+          "outcomes": [
+            {
+              "id": "need-master-offer-soldiering-accept-done",
+              "text": "You work beside the master from first light, and learn more than you expected.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "a season beside a master"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-master-offer-soldiering-decline",
+          "text": "Decline politely",
+          "outcomes": [
+            {
+              "id": "need-master-offer-soldiering-decline-done",
+              "text": "You send your thanks and stay where you are.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-commission-ceramics",
+      "title": "A commission in a good year",
+      "text": "The harvest was good and people are spending. A neighbour asks whether you could make a set of storage jars.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "normal"
+                }
+              },
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "high"
+                }
+              }
+            ]
+          },
+          {
+            "type": "affinity",
+            "field": "ceramics",
+            "op": "gte",
+            "value": 20
+          }
+        ]
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-commission-ceramics-accept",
+          "text": "Take on the work",
+          "outcomes": [
+            {
+              "id": "need-commission-ceramics-accept-done",
+              "text": "You finish it late, but it is admired.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "a good-year commission"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-commission-ceramics-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "need-commission-ceramics-decline-done",
+              "text": "The neighbour asks someone else.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-commission-clothing",
+      "title": "A commission in a good year",
+      "text": "The harvest was good and people are spending. A neighbour asks whether you could make festival clothes for a wedding.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "normal"
+                }
+              },
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "high"
+                }
+              }
+            ]
+          },
+          {
+            "type": "affinity",
+            "field": "clothing",
+            "op": "gte",
+            "value": 20
+          }
+        ]
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-commission-clothing-accept",
+          "text": "Take on the work",
+          "outcomes": [
+            {
+              "id": "need-commission-clothing-accept-done",
+              "text": "You finish it late, but it is admired.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "a good-year commission"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-commission-clothing-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "need-commission-clothing-decline-done",
+              "text": "The neighbour asks someone else.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-commission-sculpture",
+      "title": "A commission in a good year",
+      "text": "The harvest was good and people are spending. A neighbour asks whether you could make a carved door lintel.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "normal"
+                }
+              },
+              {
+                "type": "demo",
+                "condition": {
+                  "kind": "year",
+                  "family": "flood",
+                  "level": "high"
+                }
+              }
+            ]
+          },
+          {
+            "type": "affinity",
+            "field": "sculpture",
+            "op": "gte",
+            "value": 20
+          }
+        ]
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-commission-sculpture-accept",
+          "text": "Take on the work",
+          "outcomes": [
+            {
+              "id": "need-commission-sculpture-accept-done",
+              "text": "You finish it late, but it is admired.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "a good-year commission"
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-commission-sculpture-decline",
+          "text": "You have no time this year",
+          "outcomes": [
+            {
+              "id": "need-commission-sculpture-decline-done",
+              "text": "The neighbour asks someone else.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-war-recruiting",
+      "title": "Recruiters in the market",
+      "text": "Recruiters stand in the market offering better pay than in quiet years. The army is short of men, and everyone knows why: some who march out will not come back.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "year",
+              "family": "army",
+              "level": "war"
+            }
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "job",
+              "job": "soldier"
+            }
+          }
+        ]
+      },
+      "stages": [
+        "youth",
+        "adulthood"
+      ],
+      "scope": "community",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-war-recruiting-enlist",
+          "text": "Enlist for the pay, and the danger",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "age",
+                "op": "gte",
+                "value": 18
+              },
+              {
+                "type": "skill",
+                "skill": "warfare",
+                "op": "gte",
+                "value": 10
+              }
+            ]
+          },
+          "outcomes": [
+            {
+              "id": "need-war-recruiting-enlist-done",
+              "text": "You put your mark on the roll and are told when to report.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "job",
+                  "job": "soldier"
+                },
+                {
+                  "type": "flag",
+                  "flag": "army-service",
+                  "value": true
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "enlisting in a war year"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-war-recruiting-stay",
+          "text": "Stay with the work you have",
+          "outcomes": [
+            {
+              "id": "need-war-recruiting-stay-done",
+              "text": "You walk past the recruiters.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "need-flood-trade",
+      "title": "Grain is dear",
+      "text": "After the low flood, grain fetches a high price. Merchants are asking households with stores what they would sell.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "year",
+              "family": "flood",
+              "level": "low"
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 200
+            }
+          }
+        ]
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "scope": "household",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "need-flood-trade-price",
+          "text": "Work out a fair price for what you can spare",
+          "outcomes": [
+            {
+              "id": "need-flood-trade-price-done",
+              "text": "You learn how far a fair price can go in a hungry year.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "pricing grain in a hungry year"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "need-flood-trade-keep",
+          "text": "Keep every measure for the household",
+          "outcomes": [
+            {
+              "id": "need-flood-trade-keep-done",
+              "text": "The jars stay sealed.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "move-city-apprenticeship",
+      "title": "An apprenticeship in the city",
+      "text": "Through the master you met, a city workshop offers to take you on and give you a corner to sleep in. Your family would stay at home.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "introduced",
+                "field": "clothing"
+              },
+              {
+                "type": "introduced",
+                "field": "ceramics"
+              },
+              {
+                "type": "introduced",
+                "field": "sculpture"
+              },
+              {
+                "type": "introduced",
+                "field": "trade"
+              }
+            ]
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "district",
+              "district": "city-quarter"
+            }
+          }
+        ]
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "ceramics",
+        "sculpture",
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "move-city-apprenticeship-go",
+          "text": "Go to the city",
+          "outcomes": [
+            {
+              "id": "move-city-apprenticeship-go-done",
+              "text": "You tie up a bundle and walk to the city with a cousin.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "move-district",
+                  "district": "city-quarter",
+                  "reason": "an apprenticeship in a city workshop"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "move-city-apprenticeship-stay",
+          "text": "Stay with your family",
+          "outcomes": [
+            {
+              "id": "move-city-apprenticeship-stay-done",
+              "text": "You send your thanks and stay at home.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "move-court-study",
+      "title": "A place to study near the court",
+      "text": "A scholar you met offers lodging near the court quarter in return for copying and errands, and time to study.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "introduced",
+                "field": "research"
+              },
+              {
+                "type": "introduced",
+                "field": "civic"
+              }
+            ]
+          },
+          {
+            "type": "skill",
+            "skill": "literacy",
+            "op": "gte",
+            "value": 20
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "district",
+              "district": "court-quarter"
+            }
+          }
+        ]
+      },
+      "stages": [
+        "youth",
+        "adulthood"
+      ],
+      "scope": "work",
+      "fields": [
+        "research",
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "move-court-study-go",
+          "text": "Go and study near the court",
+          "outcomes": [
+            {
+              "id": "move-court-study-go-done",
+              "text": "You find a room above a copyist's shop.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "move-district",
+                  "district": "court-quarter",
+                  "reason": "study and copying work near the court"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "move-court-study-stay",
+          "text": "Stay where you are",
+          "outcomes": [
+            {
+              "id": "move-court-study-stay-done",
+              "text": "You stay. The offer is not repeated.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "move-garrison-posting",
+      "title": "Posted to the garrison",
+      "text": "Your unit is posted to the garrison. Soldiers go where they are sent.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "job",
+            "job": "soldier"
+          },
+          {
+            "type": "not",
+            "condition": {
+              "type": "district",
+              "district": "garrison"
+            }
+          }
+        ]
+      },
+      "effects": [
+        {
+          "type": "move-district",
+          "district": "garrison",
+          "reason": "a posting with your unit"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "move-return-home",
+      "title": "Thinking of home",
+      "text": "Without work here, you think more and more of your family's home.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "away-from-home"
+          },
+          {
+            "type": "job",
+            "job": null
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "personal",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "move-return-home-return",
+          "text": "Go home to the family",
+          "outcomes": [
+            {
+              "id": "move-return-home-return-done",
+              "text": "You walk home with everything you own on your back.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "move-district",
+                  "district": "home",
+                  "reason": "going back to the family"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "move-return-home-stay",
+          "text": "Stay and look for work here",
+          "outcomes": [
+            {
+              "id": "move-return-home-stay-done",
+              "text": "You stay and keep looking.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "move-letter-from-home",
+      "title": "A letter from home",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "stages": [
+        "youth",
+        "adulthood",
+        "later-life"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "choices": [],
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "away-from-home"
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "year",
+              "family": "flood",
+              "level": "low"
+            }
+          }
+        ]
+      },
+      "text": "A letter comes from home: the flood was low and the family is eating less. There is little you can do from here.",
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "bonds",
+          "delta": -1
+        }
+      ]
     }
   ],
   "endings": [

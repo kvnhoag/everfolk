@@ -48,6 +48,7 @@ export type Effect =
   | { type: "meet-practitioner"; field: FieldId; band: "child" | "young" | "adult" | "elder" }
   | { type: "move-district"; district: string; reason: string }
   | { type: "use-material"; item: string; quantity: number; cause: string }
+  | { type: "introduce-field"; field: FieldId }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }

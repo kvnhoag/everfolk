@@ -305,6 +305,9 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           apply(state, meeting.effects);
           break;
         }
+        case "introduce-field":
+          if (!state.paths!.introductions.includes(effect.field)) state.paths!.introductions = [...state.paths!.introductions, effect.field];
+          break;
         case "use-material": {
           const held = state.vocations?.inventory[effect.item] ?? 0;
           if (held < effect.quantity) { journal(state, "activity", `paths-use-${effect.item}`, `There is not enough ${effect.item} left to use.`); break; }
