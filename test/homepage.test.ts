@@ -38,7 +38,7 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.doesNotMatch(html, /Your story is saved in this browser/);
   assert.doesNotMatch(html, /Before Alexandria/);
   assert.match(html, /<canvas/);
-  assert.match(html, /ef-royal-wordmark/);
+  assert.match(html, /everfolk-wordmark-cream\.svg/);
   assert.match(html, /THE ANCIENT WORLD/);
   assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-classical-wordmark/);
   for (const label of ['Begin your life','Choose a world','Past lives','Legacy gallery','History &amp; sources','Weave Mode']) assert.ok(html.includes(label),label);

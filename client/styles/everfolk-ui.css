@@ -1,6 +1,6 @@
 /* Everfolk: papyrus, fired clay, olive leaves and the blue of the Nile. */
 :root{--ink:#433729;--muted:#786c57;--line:#c5b28b;--accent:#a85e44;--green:#667951;--paper:#f4eddb;--serif:"Courier New",Courier,monospace;--ef-outline:#594630;--ef-blue:#527e8a;--ef-clay:#b57359;--ef-olive:#75805a;--ef-gold:#c59a4b;--ef-panel:#fbf6e9;--ef-shadow:3px 3px 0 #8c765a70;color:var(--ink);background:var(--paper)}
-body{background-color:var(--paper);background-image:conic-gradient(#d8ccb42b 25%,transparent 0 50%,#d8ccb42b 0 75%,transparent 0);background-size:14px 14px}
+body{background-color:var(--paper);background-image:none;background-size:14px 14px}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ef-blue);outline-offset:4px}
 button:hover{color:var(--accent)}
 .everfolk-game{padding:0 28px}
@@ -69,7 +69,7 @@ button:hover{color:var(--accent)}
 .overview-stat>strong{font-family:var(--serif);font-size:9px;line-height:1.4;font-weight:400;text-align:right}
 .segmented-stat-track{position:relative;height:16px;border:1px solid var(--ef-outline);padding:2px;background:#f5e9d0;isolation:isolate;overflow:hidden}
 .segmented-stat-track>span{display:block;height:100%;background:var(--stat-color);transition:width .3s steps(12,end)}
-.segmented-stat-track:after{content:"";position:absolute;inset:2px;pointer-events:none;background:repeating-linear-gradient(to right,transparent 0 10px,#fbf6e9 10px 12px)}
+.segmented-stat-track:after{content:"";position:absolute;inset:2px;pointer-events:none;background:none}
 .overview-wealth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;width:100%;padding:14px 12px;margin-bottom:18px;border:1px solid #8b7555;background:#f1e5c9;color:var(--ink);text-align:left}
 .overview-wealth:hover{background:#ecddbb;color:var(--ink)}
 .overview-wealth-metric{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0}

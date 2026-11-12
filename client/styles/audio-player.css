@@ -23,7 +23,7 @@
   padding: 0;
   border: 2px solid #3a626c;
   border-radius: 2px;
-  background: linear-gradient(180deg, #1d3f48 0%, #132c33 100%);
+  background: #17343d;
   color: #f9f1dc;
   box-shadow: inset 0 1px 0 #2d5a66;
   cursor: pointer;
@@ -87,7 +87,7 @@
   max-width: calc(100vw - 24px);
   border: 2px solid #3a626c;
   border-radius: 2px;
-  background: linear-gradient(180deg, #1d3f48 0%, #132c33 100%);
+  background: #17343d;
   box-shadow: inset 0 1px 0 #2d5a66, 0 10px 28px rgba(10, 24, 28, 0.55);
   padding: 12px;
   display: flex;
@@ -353,7 +353,7 @@
 }
 
 .music-track-item.is-active {
-  background: linear-gradient(180deg, #1b3d46 0%, #11282e 100%);
+  background: #17343d;
   border-color: #e6c173;
   box-shadow: inset 3px 0 0 #e6c173;
 }

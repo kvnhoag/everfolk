@@ -22,7 +22,7 @@
 .skill-delta-branches>button[aria-pressed=true]{color:#344e36;border-color:#b3bc93;background:#e3e9d0;box-shadow:0 2px 0 #c1c99f}
 .skill-delta-branches>button:hover{color:#344e36;border-color:#b39c68;background:#fffbed}
 .skill-river .skill-tree-scroll.skill-delta-viewport{overflow:visible;max-height:none;width:100%;outline-offset:-4px}
-.skill-river .skill-tree-board.skill-delta-board{min-width:0;width:100%;min-height:500px;padding:78px 18px 14px;position:relative;background-color:#faf4e2;background-image:radial-gradient(#c7b78745 .65px,transparent .65px);background-size:16px 16px;border-radius:0;box-sizing:border-box}
+.skill-river .skill-tree-board.skill-delta-board{min-width:0;width:100%;min-height:500px;padding:78px 18px 14px;position:relative;background-color:#faf4e2;background-image:none;background-size:16px 16px;border-radius:0;box-sizing:border-box}
 .skill-delta-source{position:absolute;top:15px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 24px);background:#fffbed;padding:5px 12px;border:1px solid #d8c8a0;border-radius:24px;color:#49685c;font:italic 15px/1.2 Georgia,serif;z-index:1;text-align:center;box-shadow:0 2px 0 #d4c39a55}
 .skill-delta-source>span:first-child{font-size:24px;font-style:normal;color:#608b85;line-height:1}
 .skill-delta-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}

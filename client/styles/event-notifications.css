@@ -14,7 +14,7 @@
   pointer-events:auto;
   border:1px solid #b59865;
   border-radius:6px;
-  background:linear-gradient(180deg,#fffdf7 0%,#f6ecda 100%);
+  background:#fff8ec;
   padding:11px 14px;
   box-shadow:inset 0 1px 0 #fff,0 3px 0 #cfbda0,0 6px 16px #2b231814;
   display:flex;
