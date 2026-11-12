@@ -42,11 +42,6 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
               y: -3, opacity: 0.5, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut',
             }));
           }
-          if (element.querySelector('.ef-home-tagline')) {
-            animations.push(gsap.fromTo('.ef-home-tagline', { '--subtitle-sweep': '130%' }, {
-              '--subtitle-sweep': '-30%', duration: 5.8, delay: 3, repeat: -1, repeatDelay: 13, ease: 'sine.inOut',
-            }));
-          }
           element.querySelectorAll('.ef-title-glint').forEach((glint, i) => {
             const pulse = gsap.timeline({ repeat: -1, repeatDelay: 9 + i * 3.7, delay: 2.5 + i * 4.3 });
             pulse.fromTo(glint, { opacity: 0, scale: 0.5 }, { opacity: 0.85, scale: 1, duration: 0.9, ease: 'sine.out' })
@@ -59,10 +54,6 @@ export function useLuminousLight(root: RefObject<HTMLElement | null>, enabled: b
               .to(mote, { y: -22, opacity: 0, duration: 4, ease: 'sine.inOut' });
             animations.push(drift);
           });
-          animations.push(gsap.fromTo('.ef-home-primary', { '--button-sheen': '-180%' }, {
-            '--button-sheen': '390%', duration: 3.4, delay: 4, repeat: -1, repeatDelay: 14, ease: 'sine.inOut',
-          }));
-          animations.push(gsap.to('.ef-coast-aureole', { opacity: 0.75, duration: 9, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
           let inView = true;
           const sync = () => {
             const resting = document.hidden || !inView;

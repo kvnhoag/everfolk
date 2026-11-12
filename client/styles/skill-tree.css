@@ -28,7 +28,7 @@
 .skill-tree-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:20px;align-items:start;min-width:0}
 .skill-tree-map-wrap{min-width:0;border:1px solid #d0d4bf;border-radius:6px;background:#f7f3e7;overflow:hidden;box-shadow:0 3px 0 #d2cbbd32}
 .skill-tree-scroll{width:100%;max-width:100%;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b0bca0 #eeebde;outline-offset:-3px}
-.skill-tree-board{position:relative;isolation:isolate;background-image:radial-gradient(#b7bba333 .7px,transparent .7px);background-size:12px 12px}
+.skill-tree-board{position:relative;isolation:isolate;background-image:none;background-size:12px 12px}
 .skill-tree-tier{position:absolute;top:13px;z-index:2;text-align:center;font-size:9px;font-weight:600;letter-spacing:.25px;color:#8c816a;line-height:1.4}
 .skill-tree-branch{position:absolute;left:0;z-index:-2;border-top:1px solid #d8d9c72b;background:#e7e9d92d}
 .skill-tree-branch:nth-of-type(even){background:#efe7d549}

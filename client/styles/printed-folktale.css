@@ -47,13 +47,10 @@ dialog.birth-roll-popover .birth-roll-number {
 .main-menu.storybook-menu h1 > .everfolk-wordmark { color: var(--wordmark-ink); }
 
 body {
-  background-image: url("/assets/branding/everfolk-parchment-grain.png"),
-    radial-gradient(ellipse at 12% 0%, #e8d1a757, transparent 50%),
-    radial-gradient(ellipse at 95% 80%, #d3d9cc40, transparent 55%);
+  background-image: none;
 }
 .main-menu.storybook-menu .main-menu-shell {
-  background-image: url("/assets/branding/everfolk-parchment-grain.png"),
-    radial-gradient(ellipse at 18% 12%, #fffaf080, transparent 65%);
+  background-image: none;
 }
 
 @media (max-width: 760px) {

@@ -1,6 +1,6 @@
 /* Atlas presentation: strong headings and quiet, colored paper behind the graph. */
 .detail-dialog.skill-wiki-dialog{background:#f3f1e7;border-color:#52674a;box-shadow:5px 5px 0 #314b3838}
-.skill-river .skill-tree-heading{padding:18px 22px;background:linear-gradient(110deg,#193f30,#2c6047);border:1px solid #173728;border-left:5px solid #d7ac54;box-shadow:0 4px 0 #163a2420;gap:18px;margin-bottom:16px}
+.skill-river .skill-tree-heading{padding:18px 22px;background:#244b38;border:1px solid #173728;border-left:5px solid #d7ac54;box-shadow:0 4px 0 #163a2420;gap:18px;margin-bottom:16px}
 .skill-river .skill-tree-heading h3{color:#fffdf2;font-size:34px;margin:4px 0 6px}
 .skill-river .skill-tree-heading p{color:#f1ecd8;font-size:13px}
 .skill-river .skill-tree-heading .skill-tree-eyebrow{color:#f0cb80;letter-spacing:2px}
@@ -20,7 +20,7 @@
 .skill-river .skill-delta-branches>button{border-color:#b1bb9f;background:#fffdf5;min-height:38px}
 .skill-river .skill-delta-branches>button[aria-pressed=true]{background:#245d40;color:#fff;border-color:#173f2b}
 /* Athens/Alexandria board art (user-supplied), dimmed with a parchment wash so skills stay in front. */
-.skill-river .skill-tree-board.skill-delta-board{background-color:#faf4e2;background-image:linear-gradient(#fdf7e9b3,#fdf7e9b3),url("/assets/ui/skill-map-background.png");background-size:cover;background-position:center,center;background-repeat:no-repeat}
+.skill-river .skill-tree-board.skill-delta-board{background-color:#faf4e2;background-image:url("/assets/ui/skill-map-background.png");background-size:cover;background-position:center,center;background-repeat:no-repeat}
 
 .skill-river .skill-delta-channel>header{background:#fffdf9;border:1px solid var(--skill-accent);border-top:3px solid var(--skill-accent);padding:5px 10px;min-width:128px;box-shadow:0 2px 0 #493e2d0c}
 .skill-river .skill-delta-channel>header h4{font-size:16px}
