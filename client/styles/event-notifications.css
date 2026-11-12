@@ -1,23 +1,22 @@
-/* Top-Right Event Notification Stack */
+/* Inline Docked Event Notification Strip (never overlaps ResourceBar or Dashboard panels) */
 .event-notification-stack{
-  position:fixed;
-  top:64px;
-  right:18px;
-  z-index:55;
-  width:min(310px,calc(100vw - 28px));
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  pointer-events:none;
+  position:static;
+  width:100%;
+  margin:0 0 16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:12px;
+  align-items:stretch;
+  pointer-events:auto;
 }
 
 .event-toast{
   pointer-events:auto;
-  border:2px solid #594630;
-  background:#fbf6e9f5;
-  backdrop-filter:blur(4px);
-  padding:10px 12px;
-  box-shadow:4px 4px 0 #2b231845;
+  border:1px solid #b59865;
+  border-radius:6px;
+  background:linear-gradient(180deg,#fffdf7 0%,#f6ecda 100%);
+  padding:11px 14px;
+  box-shadow:inset 0 1px 0 #fff,0 3px 0 #cfbda0,0 6px 16px #2b231814;
   display:flex;
   flex-direction:column;
   gap:5px;

@@ -1,7 +1,7 @@
 /* Stylized classical chiseled inscription, centered over the Mediterranean bay. */
 .ef-home h1 .ef-title-wrap{color:inherit;text-shadow:none;line-height:.96;max-width:100%;display:inline-flex;justify-content:center;align-items:center}
-.ef-royal-wordmark{display:block;margin:0 auto;width:3.85em;max-width:100%;height:.84em;overflow:visible;filter:drop-shadow(0 6px 18px #0d222c66)}
-.ef-logo-emblem,.ef-logo-lower-rule{filter:drop-shadow(0 2px 6px #0f242e4d)}
+.ef-royal-wordmark{display:block;margin:0 auto;width:3.85em;max-width:100%;height:.84em;overflow:visible;filter:drop-shadow(0 2px 0 #172b35) drop-shadow(0 6px 16px #0b1c24bf)}
+.ef-logo-emblem,.ef-logo-lower-rule{filter:drop-shadow(0 1px 2px #0b1c24) drop-shadow(0 2px 6px #0f242e80)}
 .ef-royal-letter{transform-box:fill-box;transform-origin:center bottom}
 .ef-logo-reflection{mix-blend-mode:screen}
 .ef-home .ef-title-glint:nth-of-type(1){left:9%;top:32%}

@@ -238,12 +238,13 @@
   margin-top:6px;
 }
 
-/* Yearly Personal Action Deck (Ready State) */
+/* Yearly Personal Action Deck (Ready State) — Crisp Roguelike Frame */
 .life-yearly-action-deck{
-  border:2px solid var(--ef-outline,#594630);
-  background:var(--ef-panel,#fbf6e9);
-  padding:12px 14px;
-  box-shadow:var(--ef-shadow,3px 3px 0 #8c765a70);
+  border:2px solid #5a4228;
+  border-radius:2px;
+  background:#f8f2e2;
+  padding:12px 15px;
+  box-shadow:inset 0 1px 0 #fffdf8;
 }
 .life-action-deck-header{
   display:flex;
@@ -251,41 +252,47 @@
   justify-content:space-between;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:8px;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid #cbb692;
 }
 .life-action-eyebrow{
   display:block;
-  font-size:10px;
+  font-size:9.5px;
   font-weight:700;
-  letter-spacing:.1em;
+  letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--muted,#786c57);
+  color:#7a5929;
 }
 .life-action-deck-header h3{
   margin:2px 0 0;
   font-size:16px;
   font-family:var(--serif,Georgia,serif);
-  font-weight:400;
+  font-weight:600;
+  color:#23190f;
 }
 .life-action-budget-pill{
   display:inline-block;
   padding:3px 8px;
-  font-size:11px;
+  border-radius:2px;
+  font-size:10.5px;
   font-weight:700;
-  background:#e6f2ec;
+  background:#e3f1e8;
   border:1px solid #2b6640;
-  color:#1e4d2f;
+  color:#194528;
 }
 .life-action-budget-pill.is-spent{
-  background:#eee6d5;
-  border-color:#9c896c;
-  color:#6b5c47;
+  background:#ebe1cd;
+  border-color:#8c7048;
+  color:#5e4c34;
 }
 .life-action-outcome{
   padding:8px 10px;
-  background:#eef4f0;
-  border-left:3px solid #2b6640;
-  font-size:12.5px;
+  background:#e9f2ee;
+  border:1px solid #2b6640;
+  border-left:4px solid #2b6640;
+  border-radius:2px;
+  font-size:12px;
   margin-top:6px;
 }
 .life-action-tabs{
@@ -295,30 +302,37 @@
   margin-bottom:10px;
 }
 .life-action-tabs button{
-  border:1px solid #8a7352;
-  background:#f3ebd9;
-  color:#2b2318;
+  border:1px solid #6b5033;
+  border-radius:2px;
+  background:#22180e;
+  color:#dfd0b6;
   padding:5px 10px;
-  font-size:11.5px;
-  font-weight:600;
+  font-size:11px;
+  font-weight:700;
   cursor:pointer;
   font-family:inherit;
 }
+.life-action-tabs button:hover{
+  background:#332415;
+  border-color:#b58d4d;
+  color:#fff8e7;
+}
 .life-action-tabs button.is-active{
-  background:#2d2419;
-  color:#fbf6e9;
-  border-color:#2d2419;
+  background:linear-gradient(180deg,#4d371f 0%,#332312 100%);
+  color:#fff9e8;
+  border-color:#e2b86b;
+  box-shadow:inset 0 1px 0 #8c6a3d;
 }
 .life-action-tabs button.life-action-open-people{
   margin-left:auto;
-  background:#e9f1ee;
-  border-color:#38665e;
-  color:#244740;
+  background:#233b34;
+  border-color:#5b9987;
+  color:#e9fbf5;
 }
 .life-action-empty{
   margin:4px 0 0;
-  font-size:12.5px;
-  color:var(--muted,#786c57);
+  font-size:12px;
+  color:#6b583f;
 }
 .life-action-cards{
   display:grid;
@@ -330,17 +344,18 @@
   align-items:center;
   gap:10px;
   padding:9px 10px;
-  border:1px solid #c6b699;
-  background:#fffcf4;
-  color:#2b2318;
+  border:1px solid #8c7048;
+  border-radius:2px;
+  background:#fcf8ee;
+  color:#23190f;
   text-align:left;
   cursor:pointer;
   font:inherit;
   transition:background .1s,border-color .1s;
 }
 .life-action-card:hover{
-  background:#f2ead8;
-  border-color:#594630;
+  background:#f0e5ce;
+  border-color:#5a4228;
 }
 .life-action-card-avatar{
   width:38px;

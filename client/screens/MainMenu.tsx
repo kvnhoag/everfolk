@@ -10,6 +10,7 @@ import "../homepage/luminous.css";
 import "../homepage/wordmark.css";
 import RoyalPixelWordmark from "../homepage/RoyalPixelWordmark.tsx";
 import { useLuminousLight } from "../homepage/useLuminousLight.ts";
+import GameMusicPlayer from "../components/GameMusicPlayer.tsx";
 
 export interface MainMenuProps {
   /** A ranked life is in progress: it can only be continued, never replaced from here. */
@@ -52,6 +53,7 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
       <header className="ef-home-header">
         <div className="ef-home-brand"><StorybookMark size={30} /><span><EverfolkWordmark tone="cream" /><small>{rankedLife ? "WEAVE MODE · NEAR TESTNET" : "LIVE ANOTHER STORY"}</small></span></div>
         <div className="ef-home-era"><span className="ef-home-diamond" aria-hidden="true" /><span>THE ANCIENT WORLD</span><strong>{formatYear(world.startYear)}</strong></div>
+        <GameMusicPlayer variant="home" />
         <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
           <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
         </button>
@@ -79,12 +81,25 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
         </section>
       </div>
       <footer className="ef-home-footer">
-        <nav className="ef-home-links" aria-label="Main menu">
-          {onWorlds && <button type="button" onClick={onWorlds}><span aria-hidden="true">⊕</span>Choose a world</button>}
-          <button type="button" onClick={onPastLives}><span aria-hidden="true">◷</span>Past lives</button>
-          {onLegacy && <button type="button" onClick={onLegacy}><span aria-hidden="true">♧</span>Legacy gallery</button>}
-          <button type="button" onClick={onSources}><span aria-hidden="true">⌘</span>History &amp; sources</button>
-        </nav>
+        <div className="ef-home-footer-main">
+          <a className="ef-home-weave-brand" href="#weave" aria-label="Everfolk Weave Mode">
+            <strong>Everfolk</strong>
+            <span>WEAVING FATES</span>
+          </a>
+          <nav className="ef-home-weave-links" aria-label="Everfolk experiences">
+            <a href="#weave">Weave Mode</a>
+            <a href="#figures">Figures</a>
+            <a href="#market">Market</a>
+            <a href="#mine">My lives</a>
+            <button type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin}>Explore for free</button>
+          </nav>
+          <nav className="ef-home-links" aria-label="Main menu">
+            {onWorlds && <button type="button" onClick={onWorlds}><span aria-hidden="true">⊕</span>Choose a world</button>}
+            <button type="button" onClick={onPastLives}><span aria-hidden="true">◷</span>Past lives</button>
+            {onLegacy && <button type="button" onClick={onLegacy}><span aria-hidden="true">♧</span>Legacy gallery</button>}
+            <button type="button" onClick={onSources}><span aria-hidden="true">⌘</span>History &amp; sources</button>
+          </nav>
+        </div>
         {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry /></div>}
       </footer>
     </div>

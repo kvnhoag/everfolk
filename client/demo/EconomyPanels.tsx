@@ -273,43 +273,50 @@ export default function EconomyPanels({
       ))}
 
       {(scenario || comparison) && (
-        <section aria-label="Demo scenario">
-          <h3>Demo scenario</h3>
-          {scenario ? (
-            <p>
-              <strong>{scenario.title}</strong> · seed {scenario.seed}. {scenario.summary}
-            </p>
-          ) : !comparison ? (
-            <p>The prepared demo scenario is not loaded yet.</p>
-          ) : null}
-          {comparison ? (
-            <div className="demo-compare">
-              <article>
-                <h4>{comparison.withDeed.label}</h4>
+        <section className="demo-scenario-section" aria-label="Demo scenario">
+          <details className="demo-scenario-drawer">
+            <summary>
+              <h3>Demo scenario</h3>
+              <span className="demo-scenario-toggle">Compare flood outcomes ▾</span>
+            </summary>
+            <div className="demo-scenario-body">
+              {scenario ? (
                 <p>
-                  Grain received {comparison.withDeed.grainReceived}. Hunger avoided:{" "}
-                  {comparison.withDeed.hungerAvoided ? "yes" : "no"}.
+                  <strong>{scenario.title}</strong> · seed {scenario.seed}. {scenario.summary}
                 </p>
-                <p>
-                  Source: {comparison.withDeed.sourceName ?? "none"}. Owner share:{" "}
-                  {comparison.withDeed.ownerShare ?? "none"}.
-                </p>
-              </article>
-              <article>
-                <h4>{comparison.withoutDeed.label}</h4>
-                <p>
-                  Grain received {comparison.withoutDeed.grainReceived}. Hunger avoided:{" "}
-                  {comparison.withoutDeed.hungerAvoided ? "yes" : "no"}.
-                </p>
-                <p>
-                  Source: {comparison.withoutDeed.sourceName ?? "none"}. Owner share:{" "}
-                  {comparison.withoutDeed.ownerShare ?? "none"}.
-                </p>
-              </article>
+              ) : !comparison ? (
+                <p>The prepared demo scenario is not loaded yet.</p>
+              ) : null}
+              {comparison ? (
+                <div className="demo-compare">
+                  <article>
+                    <h4>{comparison.withDeed.label}</h4>
+                    <p>
+                      Grain received {comparison.withDeed.grainReceived}. Hunger avoided:{" "}
+                      {comparison.withDeed.hungerAvoided ? "yes" : "no"}.
+                    </p>
+                    <p>
+                      Source: {comparison.withDeed.sourceName ?? "none"}. Owner share:{" "}
+                      {comparison.withDeed.ownerShare ?? "none"}.
+                    </p>
+                  </article>
+                  <article>
+                    <h4>{comparison.withoutDeed.label}</h4>
+                    <p>
+                      Grain received {comparison.withoutDeed.grainReceived}. Hunger avoided:{" "}
+                      {comparison.withoutDeed.hungerAvoided ? "yes" : "no"}.
+                    </p>
+                    <p>
+                      Source: {comparison.withoutDeed.sourceName ?? "none"}. Owner share:{" "}
+                      {comparison.withoutDeed.ownerShare ?? "none"}.
+                    </p>
+                  </article>
+                </div>
+              ) : (
+                <p>After a flood, the same life with and without an earlier farmer&apos;s deed will be compared here.</p>
+              )}
             </div>
-          ) : (
-            <p>After a flood, the same life with and without an earlier farmer&apos;s deed will be compared here.</p>
-          )}
+          </details>
         </section>
       )}
 

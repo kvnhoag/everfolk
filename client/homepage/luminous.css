@@ -6,8 +6,8 @@
 .ef-title-glint:before{width:1px;height:11px;left:1px;top:-4px}
 .ef-title-glint:after{width:9px;height:1px;left:-3px;top:1px}
 .ef-title-glint:nth-of-type(1){left:8%;top:17%}.ef-title-glint:nth-of-type(2){left:65%;top:26%;width:2px;height:2px}.ef-title-glint:nth-of-type(3){left:91%;top:77%}
-.ef-home-tagline{color:#fff0c6;background:linear-gradient(115deg,#e5c68b 25%,#ffffff 46%,#fff2cc 50%,#e5c68b 72%);background-size:230% 100%;background-position:var(--subtitle-sweep,130%) 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #1b303a) drop-shadow(0 2px 8px #0d1d24b3)}
-.ef-home-eyebrow,.ef-home-brand,.ef-home-era strong{color:#f5deae;text-shadow:0 1px 2px #102028,0 0 12px #10202888}
+.ef-home-tagline{color:#fff6dc;background:linear-gradient(115deg,#f7dfa8 18%,#ffffff 44%,#fff9e6 53%,#f5d696 80%);background-size:230% 100%;background-position:var(--subtitle-sweep,130%) 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #091820) drop-shadow(0 3px 8px #071319f5) drop-shadow(0 0 16px #091820cc)}
+.ef-home-eyebrow,.ef-home-brand,.ef-home-era strong{color:#fae6be;text-shadow:0 1px 2px #09151c,0 2px 6px #09151ce6,0 0 14px #102028aa}
 .ef-home-brand svg{filter:drop-shadow(0 0 4px #f6d08b77) drop-shadow(0 0 12px #e6aa462a)}
 .ef-home-world-note strong{color:#f5deae;text-shadow:0 1px 0 #8c7048,0 2px 5px #182b32,0 0 14px #e4b86a3d}
 .ef-home-rule{opacity:.92;filter:drop-shadow(0 1px 3px #0d1d24cc)}
