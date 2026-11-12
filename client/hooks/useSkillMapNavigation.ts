@@ -6,6 +6,9 @@ export function useSkillMapNavigation(canvas: MapSize) {
   const viewport = useRef<HTMLDivElement>(null), paper = useRef<HTMLDivElement>(null);
   const current = useRef<MapCamera>({ x: 0, y: 0, scale: .42 });
   const target = useRef(current.current), frame = useRef(0), fitting = useRef(true);
+  const zoomLabel = useRef<HTMLSpanElement>(null);
+  const lastFrame = useRef(0), direct = useRef(false), reducedMotion = useRef(false);
+  const summaryTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const [zoom, setZoom] = useState(.42), [dragging, setDragging] = useState(false);
   const pointers = useRef(new Map<number, MapPoint>());
   const gesture = useRef<{ origin: MapPoint; camera: MapCamera; distance?: number; moved: boolean } | null>(null);
@@ -15,30 +18,40 @@ export function useSkillMapNavigation(canvas: MapSize) {
   const bounded = (camera: MapCamera) => constrainMapCamera(camera, size(), canvas);
   function paint(camera: MapCamera) {
     current.current = camera;
-    if (paper.current) paper.current.style.transform = `translate(${camera.x}px, ${camera.y}px) scale(${camera.scale})`;
+    if (paper.current) paper.current.style.transform = `translate3d(${camera.x}px, ${camera.y}px, 0) scale(${camera.scale})`;
+    if (zoomLabel.current) zoomLabel.current.textContent = `${Math.round(camera.scale * 100)}%`;
   }
-  function stop() { cancelAnimationFrame(frame.current); frame.current = 0; }
+  // Update React controls after a gesture, rather than reconciling 74 nodes per wheel event.
+  function publish() {
+    clearTimeout(summaryTimer.current);
+    summaryTimer.current = setTimeout(() => setZoom(current.current.scale), 70);
+  }
+  function stop() { cancelAnimationFrame(frame.current); frame.current = 0; lastFrame.current = 0; }
+  function tick(time: number) {
+    frame.current = 0;
+    const before = current.current, end = target.current;
+    const dt = lastFrame.current ? Math.min(40, Math.max(1, time - lastFrame.current)) : 16;
+    lastFrame.current = time;
+    const amount = direct.current || reducedMotion.current ? 1 : 1 - Math.exp(-dt / 32);
+    const next = { x: before.x + (end.x - before.x) * amount, y: before.y + (end.y - before.y) * amount, scale: before.scale + (end.scale - before.scale) * amount };
+    if (Math.abs(end.x-next.x) < .1 && Math.abs(end.y-next.y) < .1 && Math.abs(end.scale-next.scale) < .0001) {
+      paint(end); lastFrame.current = 0; publish();
+    } else { paint(next); frame.current = requestAnimationFrame(tick); }
+  }
   function move(camera: MapCamera, animate = true) {
-    stop();
     target.current = bounded(camera);
-    setZoom(target.current.scale);
-    if (!animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { paint(target.current); return; }
-    const start = current.current, end = target.current;
-    let started: number | undefined;
-    const tick = (time: number) => {
-      started ??= time;
-      const t = Math.min(1, (time - started) / 190), eased = 1 - (1 - t) ** 3;
-      paint({ x: start.x + (end.x - start.x) * eased, y: start.y + (end.y - start.y) * eased, scale: start.scale + (end.scale - start.scale) * eased });
-      frame.current = t < 1 ? requestAnimationFrame(tick) : 0;
-    };
-    frame.current = requestAnimationFrame(tick);
+    direct.current = !animate;
+    if (reducedMotion.current) { stop(); paint(target.current); publish(); }
+    else if (!frame.current) frame.current = requestAnimationFrame(tick);
   }
   function fit(animate = true) { fitting.current = true; move(fitMapCamera(size(), canvas), animate); }
   function changeZoom(scale: number, anchor?: MapPoint) {
     fitting.current = false;
     const bounds = size();
-    move(zoomMapCamera(current.current, scale, anchor ?? { x: bounds.width / 2, y: bounds.height / 2 }));
+    // Compose input against the intended camera so queued wheel events share the same anchor.
+    move(zoomMapCamera(target.current, scale, anchor ?? { x: bounds.width / 2, y: bounds.height / 2 }));
   }
+  function zoomBy(factor: number) { changeZoom(target.current.scale * factor); }
   function focusPoint(point: MapPoint, scale = target.current.scale) {
     fitting.current = false;
     const bounds = size(), next = clampMapZoom(scale);
@@ -47,6 +60,9 @@ export function useSkillMapNavigation(canvas: MapSize) {
   useEffect(() => {
     const element = viewport.current;
     if (!element) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotion = () => { reducedMotion.current = motion.matches; };
+    updateMotion(); motion.addEventListener("change", updateMotion);
     const resize = () => { if (fitting.current) fit(false); else move(current.current, false); };
     resize();
     const observer = new ResizeObserver(resize);
@@ -56,7 +72,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
       if (pointers.current.size) return;
       const rect = element.getBoundingClientRect();
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? element.clientHeight : 1;
-      const delta = Math.max(-160, Math.min(160, event.deltaY * unit));
+      const delta = Math.max(-120, Math.min(120, event.deltaY * unit));
       changeZoom(target.current.scale * Math.exp(-delta * .003), { x: event.clientX - rect.left - element.clientLeft, y: event.clientY - rect.top - element.clientTop });
     };
     element.addEventListener("wheel", wheel, { passive: false });
@@ -70,7 +86,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
     window.addEventListener("pointercancel", endOutside);
     window.addEventListener("blur", blur);
     return () => {
-      stop(); observer.disconnect(); element.removeEventListener("wheel", wheel);
+      stop(); clearTimeout(summaryTimer.current); observer.disconnect(); element.removeEventListener("wheel", wheel); motion.removeEventListener("change", updateMotion);
       window.removeEventListener("pointerup", endOutside); window.removeEventListener("pointercancel", endOutside); window.removeEventListener("blur", blur);
     };
   }, [canvas.width, canvas.height]);
@@ -87,7 +103,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
   }
   function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.pointerType === "mouse" && event.button !== 0) return;
-    stop(); target.current = current.current; setZoom(current.current.scale);
+    stop(); clearTimeout(summaryTimer.current); target.current = current.current; setZoom(current.current.scale);
     if (!pointers.current.size) suppressClick.current = false;
     pointers.current.set(event.pointerId, local(event));
     beginGesture();
@@ -112,6 +128,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
     move(camera, false);
   }
   function onPointerUp(event: ReactPointerEvent<HTMLDivElement>) {
+    if (gesture.current?.moved) { stop(); paint(target.current); publish(); }
     pointers.current.delete(event.pointerId);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (!pointers.current.size) { gesture.current = null; setDragging(false); }
@@ -120,7 +137,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
   function onLostPointerCapture(event: ReactPointerEvent<HTMLDivElement>) {
     if (pointers.current.has(event.pointerId)) onPointerUp(event);
   }
-  return { viewport, paper, zoom, dragging, fit, changeZoom, focusPoint,
+  return { viewport, paper, zoomLabel, zoom, dragging, fit, zoomBy, focusPoint,
     pointerHandlers: { onPointerDown, onPointerMove, onPointerUp, onPointerCancel: onPointerUp, onLostPointerCapture,
       onClickCapture(event: ReactMouseEvent<HTMLDivElement>) { if (suppressClick.current && event.detail !== 0) { event.preventDefault(); event.stopPropagation(); } } } };
 }

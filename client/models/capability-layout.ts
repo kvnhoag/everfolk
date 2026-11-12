@@ -5,7 +5,7 @@ import type { CapabilityNode } from "../../src/capabilities/types.ts";
 export const CAPABILITY_NODES = ATTRIBUTE_NODES;
 export const CAPABILITY_BRANCHES = ATTRIBUTE_BRANCHES;
 export const CAPABILITY_NODE_WIDTH = 112;
-export const CAPABILITY_NODE_HEIGHT = 102;
+export const CAPABILITY_NODE_HEIGHT = 118;
 export const CAPABILITY_COLUMN_STEP = 142;
 
 export interface PositionedCapability { node: CapabilityNode; x: number; y: number }
