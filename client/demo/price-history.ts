@@ -72,6 +72,10 @@ function stepCommand(engine: LifeEngine, state: LifeState, cmd: Command): LifeSt
       return engine.orderMarket(state, cmd);
     case "market-cancel":
       return engine.cancelMarketOrder(state, cmd.orderId);
+    case "npc-turn":
+    case "npc-answer":
+    case "npc-speech":
+      return engine.npc(state, cmd);
     default:
       return engine.demo(state, cmd);
   }

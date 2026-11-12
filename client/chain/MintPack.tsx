@@ -77,33 +77,6 @@ export default function MintPack({ initialPack, evidence, walletPath = true, pra
         </button>
         <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? (walletPath ? "Confirm in wallet…" : "Confirming…") : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>
       </article>)}</div>
-      {evidence?.stage_figures && evidence.stage_figures.length > 0 && <section className="stage-album-section" aria-label="Lived Stages Album">
-        <h2>Lived Stages Album ({evidence.stage_figures.length} stage figures)</h2>
-        <p className="chain-fine">One life can mint a figure for each stage it completed (up to 7). Choose a stage below or one of your booster pack slots above.</p>
-        <div className="stage-album-grid">{evidence.stage_figures.map((fig, idx) => {
-          const matchingSlot = pack.cards.findIndex(c => c.stage_id === fig.stageId);
-          const isSelected = selected === (matchingSlot >= 0 ? matchingSlot : idx);
-          const feeText = fig.kind === "historical" ? "0.01 NEAR" : "0.002 NEAR";
-          return <article key={fig.stageId} className={`stage-album-card${isSelected ? " is-selected" : ""}`}>
-            <span className="stage-album-art"><img src={fig.media} alt={fig.name} className="stage-album-portrait" /></span>
-            <div className="stage-album-body">
-              <span className="chain-kicker">{fig.stageRecord.title} (Ages {fig.stageRecord.fromAge}–{fig.stageRecord.toAge})</span>
-              <strong>{fig.kind === "historical" && fig.figureId ? figureTitle(fig.figureId) : `${fig.name} · ${fig.title}`}</strong>
-              <span className={`chain-tag${fig.kind === "historical" ? " is-figure" : ""}`}>{fig.kind === "historical" ? "Historical figure" : "Stage portrait"}</span>
-              <small>{fig.stageRecord.district} · {fig.stageRecord.field} T{fig.stageRecord.tier}</small>
-              <span className="stage-album-fee">Fee: {feeText}</span>
-              <button
-                type="button"
-                className="chain-secondary stage-album-btn"
-                disabled={Boolean(busy)}
-                onClick={() => setSelected(matchingSlot >= 0 ? matchingSlot : (idx < pack.cards.length ? idx : 0))}
-              >
-                {isSelected ? "Selected ✓" : "Choose this stage"}
-              </button>
-            </div>
-          </article>;
-        })}</div>
-      </section>}
       <p className="chain-fine">One optional reroll per slot. A reroll replaces that card permanently. {practice ? "Practice rerolls update this local ledger; no NEAR is spent." : "Every paid reroll is saved on NEAR and added to your total mint fee."}</p>
     </>}
     <div className="pack-receipt"><strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong><span>{pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this life. {walletPath && "Network gas is separate."}</span></div>

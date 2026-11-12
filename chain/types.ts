@@ -1,5 +1,6 @@
 import type { CareerGroup, Category, FigureId } from "./ids.ts";
 import type { MatchedStageFigure, StageRecord } from "./stage-figures.ts";
+import type { NpcSessionAttestation } from "./npc-proof.ts";
 
 /** JSON views returned by the Everfolk lives contract. Rust structs serialize to exactly these shapes. */
 export interface FigurePick { figure_id: FigureId; token_id: string; action_id: string; rarity: number }
@@ -25,7 +26,16 @@ export interface Evidence {
   career_group: CareerGroup; matched_figures: FigureId[]; sources: SourceImpact[];
   stage_records?: StageRecord[];
   stage_figures?: MatchedStageFigure[];
+  /** Required only for the NPC world; signed with the rest of the finished-life evidence. */
+  npc_session?: NpcSessionAttestation;
 }
+
+export interface StageMintCard {
+  stage_id: string; figure_id: FigureId | null; title: string; character_name: string;
+  portrait_media: string; stage_record: StageRecord; fee: string; action_id: string;
+}
+export interface StageMintQuote { total_fee: string; source_share_bps: number; cards: StageMintCard[] }
+export interface StageMintResult { life_id: string; evidence_hash: string; total_fee: string; tokens: (MintResult & { stage_id: string })[] }
 
 export interface MintResult {
   token_id: string;
@@ -69,6 +79,7 @@ export interface TokenExtra {
   field?: string | null;
   tier?: string | number;
   portrait_media?: string;
+  stage_record?: StageRecord;
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

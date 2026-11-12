@@ -146,14 +146,14 @@ test("buildEvidence incorporates stage records and matched stage figures when pr
   assert.equal(infancy.stageId, "infancy");
   assert.equal(infancy.kind, "generic");
   assert.equal(infancy.name, "Kallias");
-  assert.ok(infancy.media.includes("/assets/pixel/portraits/court-household/male/infant-"));
+  assert.ok(infancy.media.includes("/assets/pixel/portraits/infant-"));
 
   // Childhood stage: generic stage portrait
   const childhood = evidence.stage_figures![1];
   assert.equal(childhood.stageId, "childhood");
   assert.equal(childhood.kind, "generic");
   assert.equal(childhood.name, "Kallias");
-  assert.ok(childhood.media.includes("/assets/pixel/portraits/court-household/male/child-"));
+  assert.ok(childhood.media.includes("/assets/pixel/portraits/child-"));
 
   // Youth stage meets Alexander's requirements (court origin, soldier, warfare >= 60, convoy distinction at age 15 <= 32)
   const youth = evidence.stage_figures![2];

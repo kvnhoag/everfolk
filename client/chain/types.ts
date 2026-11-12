@@ -1,7 +1,9 @@
 import type { Category } from "../../chain/ids.ts";
-import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
+import type { AccountProof } from "../../chain/npc-proof.ts";
+import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
 
-export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, TokenExtra, TokenStats } from "../../chain/types.ts";
+export type { AccountProof } from "../../chain/npc-proof.ts";
+export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, StageMintQuote, StageMintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 /**
  * What the verifier returns for a finished life. Local stand-in until lane E publishes it from
@@ -30,6 +32,10 @@ export interface LivesContract {
   getLife(lifeId: string): Promise<LifeView | null>;
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
+  stageMintQuote(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<StageMintQuote>;
+  mintStageFigures(lifeId: string, signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  retryStageMint(lifeId: string): Promise<StageMintResult>;
+  stageMintResult(lifeId: string): Promise<StageMintResult | null>;
   mintTerms(): Promise<MintTerms>;
   marketTerms(): Promise<MarketTerms>;
   mintPack(lifeId: string): Promise<MintPack | null>;
@@ -83,5 +89,7 @@ export interface WalletSession {
   onTransaction?(listener: (hash: string, method: string) => void): () => void;
   signIn(): Promise<void>;
   signOut(): Promise<void>;
+  /** Signs SHA-256 of a server ownership challenge with the current game key, without exposing that key. */
+  proveAccount?(message: string): Promise<AccountProof>;
   call(call: ContractCall): Promise<unknown>;
 }

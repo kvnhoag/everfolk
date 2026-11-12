@@ -5,6 +5,7 @@ mod lives;
 mod market;
 mod mint;
 mod mint_pack;
+mod stage_mint;
 mod nft;
 mod random;
 mod shares;
@@ -129,3 +130,5 @@ mod tests_nft;
 mod tests_market;
 #[cfg(test)]
 mod tests_demo_catalog;
+#[cfg(test)]
+mod tests_npc_session;

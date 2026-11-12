@@ -12,6 +12,40 @@ const FIGURE_RARITY_WEIGHTS: [u64; 5] = [0, 0, 7000, 2500, 500];
 /// Request validation/persistence plus the separate resolver receipt's fixed budget.
 const MIN_MINT_GAS: Gas = Gas::from_tgas(200);
 const FINALIZE_MINT_GAS: Gas = Gas::from_tgas(150);
+const MAX_NPC_SESSION_LIFETIME_MS: u64 = 120_000;
+const MAX_NPC_PROVIDER_CLOCK_SKEW_MS: u64 = 5_000;
+const MAX_NPC_SESSION_ID_BYTES: usize = 128;
+
+/// Validate only when committing a fee/outcome, never during recovery of an accepted mint.
+fn assert_npc_session(evidence: &Evidence) {
+    if evidence.world_version != NPC_WORLD_VERSION {
+        return;
+    }
+    let proof = evidence.npc_session.as_ref().unwrap_or_else(|| env::panic_str("NPC world evidence requires a session attestation"));
+    require!(
+        !proof.session_id.is_empty()
+            && proof.session_id.len() <= MAX_NPC_SESSION_ID_BYTES
+            && proof.session_id.bytes().all(|b| b.is_ascii_graphic()),
+        "NPC session id must be 1 to 128 printable ASCII characters without spaces"
+    );
+    require!(
+        proof.transcript_hash == evidence.save_hash
+            && proof.transcript_hash.len() == 64
+            && proof.transcript_hash.bytes().all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b)),
+        "NPC transcript hash must match the save hash as 64 lowercase hex characters"
+    );
+    let now = env::block_timestamp_ms();
+    require!(proof.expires_at > now, "NPC session attestation has expired");
+    require!(
+        proof.provider_checked_at <= now.saturating_add(MAX_NPC_PROVIDER_CLOCK_SKEW_MS),
+        "NPC provider check is too far in the future"
+    );
+    require!(
+        proof.expires_at.checked_sub(proof.provider_checked_at)
+            .is_some_and(|lifetime| lifetime > 0 && lifetime <= MAX_NPC_SESSION_LIFETIME_MS),
+        "NPC session attestation lifetime must be 1 to 120000 milliseconds"
+    );
+}
 
 /// Kept in its own appended storage prefix, preserving the existing Contract layout.
 #[near(serializers = [borsh])]
@@ -137,7 +171,7 @@ impl Contract {
     pub fn mint_result(&self, life_id: U64) -> Option<MintResult> {
         match mint_records().get(&life_id.0) {
             Some(MintRecord::Complete(result)) => Some(result.clone()),
-            _ => None,
+            _ => self.stage_mint_result(life_id).and_then(|album| album.tokens.first().map(|t| t.result.clone())),
         }
     }
 
@@ -215,6 +249,7 @@ impl Contract {
         );
         require!(evidence.seed == hex::encode(life.seed), "Evidence was made for a different life seed");
         require!(evidence.world_version == life.world_version, "Evidence is for a different world version");
+        assert_npc_session(evidence);
         let influenced = |token: &str| {
             life.figure_picks.iter().any(|p| p.token_id == token) || life.draws.iter().any(|d| d.token_id.as_deref() == Some(token))
         };
