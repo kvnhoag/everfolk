@@ -1,4 +1,5 @@
 import type { CharacterActivity, Choice, Effect, LifeState, WorldPack } from "../../src/types.ts";
+import { merchantSaleValue } from "../../src/demo/market-depth.ts";
 import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationHoldings, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
@@ -77,7 +78,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
       const quantity = item === "grain" || item === "flax" ? demo.household[item]
         : item === "ox" || item === "donkey" ? demo.household.animals[item] : demo.goods[item];
       if (quantity <= 0) continue;
-      assets.push({ id: `demo:${item}`, title: titles[item], description: "Household stores valued at the merchant’s current buying price.", value: demo.town.prices[item].buy, quantity });
+      assets.push({ id: `demo:${item}`, title: titles[item], description: world.demo.market.depth ? "Estimated proceeds from selling this store along the current market price curve." : "Household stores valued at the merchant’s current buying price.", value: merchantSaleValue(world.demo, demo, item, quantity) / quantity, quantity });
     }
   }
   if (world.vocations && life.vocations) {

@@ -16,7 +16,7 @@ Locked nodes explain missing requirements. Unavailable nodes remain inspectable 
 
 ## Saves and versions
 
-New free-play births use `alexandria-lives-4`. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
+New free-play births use `alexandria-lives-5`, with capability graph version 3. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, original `alexandria-lives-4`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
 
 ## Reproduce and verify
 
@@ -34,10 +34,10 @@ The focused-play evaluation uses ordinary accepted game commands, three of four 
 node scripts/skills/evaluate-focus.mjs 100
 ```
 
-The design's 50–60% mastery goal refers to reaching depth 10 on one specialization, not learning every sibling node. Numerical balance is an authored gameplay model; the evaluator's output is the evidence for any measured rate, rather than a promise about every seed.
+The current balance target is a 45–65% birth-cohort rate of reaching depth 10 on one specialization, not learning every sibling node. The earlier design proposed 50–60%. Numerical balance is an authored gameplay model; the evaluator's output is the evidence for any measured rate, rather than a promise about every seed.
 
 ## Current balance limit
 
 The retained `alexandria-lives-3` smoke cohort used 10 seeds for each specialization. Resilience reached mastery in 3 of 10 lives; the other seven paths reached none under that disclosed policy. This is below the design target. Food security, training time and financing need further balance work; the policy is not an optimal player. The mastery-path regression fixture deliberately supplies expertise and resources to verify proofs and replay, and does not measure ordinary-play attainment.
 
-The attribute revision has not been calibrated to that target. See [military crossovers](SKILL_CROSSOVERS.md) for Strength, Endurance, Health and career gates.
+Those retained-world smoke results do not estimate the current revision. The newer balance work includes a reproducible cohort runner; after integration changes, publish results with the exact world fingerprint, source revision, seeds and policy before claiming an achieved rate for lives-5. See [military crossovers](SKILL_CROSSOVERS.md) for Strength, Endurance, Health and career gates.

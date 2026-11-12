@@ -5,7 +5,7 @@ import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
 import { FIELD_IDS } from "../src/paths/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
@@ -86,6 +86,8 @@ test("military service builds the body it demands, and command builds the voice"
   const yearly = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.flatMap(effect => effect.type === "skill" ? [`${effect.skill}+${effect.delta}`] : []);
   for (const job of ["soldier", "officer", "general"]) for (const gain of ["warfare+2", "strength+1", "endurance+1"]) assert.ok(yearly(job).includes(gain), `${job}: ${yearly(job).join(", ")}`);
   for (const job of ["officer", "general"]) assert.ok(yearly(job).includes("oratory+1"), job);
+  const health = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.filter(effect => effect.type === "stat" && effect.stat === "health");
+  for (const job of ["soldier", "officer", "general"]) assert.deepEqual(health(job), [], `${job}: routine service costs no health; war carries the danger`);
   assert.ok(!yearly("soldier").includes("oratory+1"));
 });
 

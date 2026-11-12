@@ -7,7 +7,7 @@ import type {
 import { influenceCatalog, influenceDeltas, influenceMeasure, parseInfluenceCommand, scaleInfluenceEffects } from "./influence.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
-import { formatYear, yearAtAge } from "./calendar.ts";
+import { birthYearOf, formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
 import { MILITARY_QUALIFICATIONS } from "./capabilities/military.ts";
 import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
@@ -28,6 +28,7 @@ export { matchesCondition } from "./conditions.ts";
 import type { DemoCommand } from "./demo/types.ts";
 import { demoContext, initialDemo } from "./demo/state.ts";
 import { settleDemoYear, openDemoYear } from "./demo/settle.ts";
+import { settleVocationYear } from "./vocations/trade.ts";
 import { applyDemoEffect } from "./demo/effects.ts";
 import { DEMO_COMMAND_TYPES, parseDemoCommand } from "./demo/commands.ts";
 import { executeTrade } from "./demo/market.ts";
@@ -38,7 +39,10 @@ import { takeItem } from "./capabilities/inventory.ts";
 import { deathEndingFor, decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
 import { TIERS } from "./paths/types.ts";
 import type { FieldId, PathsState } from "./paths/types.ts";
+import { drawFromAccount, recordSuccessor } from "./paths/index.ts";
 import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import type { NpcCommand, NpcSessionState } from "./npc/types.ts";
+import { applyNpcCommand, createNpcState, settlePeople } from "./npc/runtime.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -109,6 +113,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.stageRecords ? { stageRecords: structuredClone(state.stageRecords) } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
+    ...(state.npcs ? { npcs: structuredClone(state.npcs) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
       children: state.character.children.map(child => ({ ...child })),
@@ -249,9 +254,9 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (applyEconomyEffect(world, state, effect)) {
         if (effect.type === "loan") {
           const currency = world.economy!.currency.short, loan = state.economy!.loan;
-          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          if (effect.action === "borrow") journal(state, "activity", "moneylender-loan-borrowed", `You borrow ${world.economy!.moneylender!.principal} ${currency}. The total owed is ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
           else if (effect.action === "repay") journal(state, "activity", "moneylender-loan-payment", `You pay ${beforeLoanBalance - (loan?.balance ?? 0)} ${currency} toward the moneylender loan.${loan ? ` ${loan.balance} ${currency} remains.` : " The loan is fully repaid."}`);
-          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(world.startYear, loan!.dueAge))}).`);
+          else journal(state, "activity", "moneylender-loan-extended", `The lender adds a fee of ${world.economy!.moneylender!.extensionFee} ${currency}. You now owe ${loan!.balance} ${currency}, due at age ${loan!.dueAge} (${formatYear(yearAtAge(birthYearOf(world, state), loan!.dueAge))}).`);
         }
         continue;
       }
@@ -328,6 +333,17 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           journal(state, "activity", `paths-use-${effect.item}`, `${effect.quantity} ${effect.item} used: ${effect.cause}.`);
           break;
         }
+        case "account-pay": {
+          const paid = drawFromAccount(state, effect.account, effect.amount);
+          if (paid > 0) {
+            apply(state, [{ type: "cash", delta: paid }]);
+            journal(state, "activity", `paths-pay-${effect.account}`, `You are paid ${paid} ${world.economy?.currency.short ?? "dr"}: ${effect.cause}.`);
+          } else journal(state, "activity", `paths-pay-${effect.account}`, `The payer's chest could not cover the fee (${effect.cause}), so nothing was paid.`);
+          break;
+        }
+        case "successor":
+          journal(state, "event", `paths-successor-${effect.field}`, recordSuccessor(state, effect.field, effect.relation, effect.cause));
+          break;
         case "move-district":
           journal(state, "event", "paths-move", moveDistrict(world, state, effect.district, effect.reason));
           break;
@@ -412,7 +428,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   /** Attribute-atlas worlds: a military appointment the army would refuse is not offered (older packs are unaffected). */
   function refusedAppointment(choice: Choice, state: LifeState): boolean {
-    if (world.capabilities?.version !== 2) return false;
+    if ((world.capabilities?.version ?? 0) < 2) return false;
     return choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job !== null && effect.job in MILITARY_QUALIFICATIONS &&
       characterEffectReason(world, state, effect, true) !== undefined));
   }
@@ -432,7 +448,13 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (!matches(event.when, state) || (event.mode !== "automatic" && !byOthers && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
-      case "year": return state.year >= event.trigger.at;
+      case "year": {
+        // Only a recurring dated event names a cooldown; older packs have none, so their dated events are unchanged.
+        const lastAge = event.cooldownYears === undefined ? undefined : state.lastEventAge[event.id];
+        // History dated before this life's birth does not happen to it; anchors dated at the world's start always can.
+        if (state.birthYear !== undefined && event.trigger.at > world.startYear && event.trigger.at < state.birthYear) return false;
+        return state.year >= event.trigger.at && (lastAge === undefined || state.age - lastAge >= event.cooldownYears!);
+      }
       case "random": {
         const lastAge = state.lastEventAge[event.id];
         return lastAge === undefined || state.age - lastAge >= (event.cooldownYears ?? 1);
@@ -755,6 +777,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
       ...(world.legacy ? { accomplishments: [] } : {}),
     };
+    if (world.birthYears) {
+      // A side stream of the seed, so the life's own random draws are unchanged.
+      const span = world.birthYears.to - world.birthYears.from + 1;
+      state.birthYear = world.birthYears.from + Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      state.year = state.birthYear;
+    }
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
@@ -782,6 +810,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     if (world.paths && applyStartingMaterials(world, state) && world.demo?.startingResources) syncEconomyStat(world, state);
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
+    if (world.npcAgents) {
+      const session = structuredClone(createNpcState(world, seed, state));
+      Object.assign(state, session.player);
+      const { player: _p, commands: _c, ...runtime } = session;
+      state.npcs = runtime;
+    }
     checkEndings(state);
     resolveEvents(state, true);
     return freeze(state);
@@ -790,6 +824,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function advanceInto(next: LifeState): void {
     assertPlayable(next);
     if (next.phase === "choice") throw new Error("Resolve the pending choice before advancing time.");
+    if (next.npcs && next.npcs.lastResolvedAge !== next.age) {
+      throw new Error("Resolve the NPC turn before advancing the year.");
+    }
+    const previousSnapshot = next.npcs ? mutableSnapshot(next) : undefined;
     next.commands.push({ type: "advance" });
     if (world.health) {
       const healthResult = progressHealth(world, next, healthHooks(next));
@@ -806,7 +844,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     recorded(next, next.journal.length, () => progressKnowledge(world, next, (id, text) => journal(next, "event", id, text)));
     const completedAge = next.age;
     next.age += 1;
-    next.year = yearAtAge(world.startYear, next.age);
+    next.year = yearAtAge(birthYearOf(world, next), next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
     const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);
@@ -838,6 +876,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       settleDemoYear(demoCtx(next));
       if (world.demo!.startingResources) syncEconomyStat(world, next);
     });
+    // Trade worlds: workshop buyers return and the supplier restocks for the new year.
+    if (world.vocations?.trade && next.phase !== "ended") settleVocationYear(world, next, (id, text) => journal(next, "activity", id, text));
     if (world.capabilities && next.phase !== "ended") {
       const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
       settleCapabilities(world, next, completedAge);
@@ -875,6 +915,16 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }
     checkEndings(next);
     resolveEvents(next, true);
+    if (next.npcs && previousSnapshot && next.phase !== "ended") {
+      const session: NpcSessionState = {
+        ...next.npcs,
+        player: next,
+        commands: [],
+      };
+      settlePeople(session, previousSnapshot);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
     if (world.economy?.market) syncEconomyStat(world, next);
   }
 
@@ -1084,6 +1134,33 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return freeze(next);
   }
 
+  function npcInto(next: LifeState, command: NpcCommand): void {
+    assertPlayable(next);
+    if (!world.npcAgents && !next.npcs) throw new Error("This world has no NPC companion system.");
+    if (!next.npcs) {
+      const session = structuredClone(createNpcState(world, next.seed, next));
+      Object.assign(next, session.player);
+      const { player: _p, commands: _c, ...runtime } = session;
+      next.npcs = runtime;
+    }
+    const session: NpcSessionState = {
+      ...next.npcs,
+      player: next,
+      commands: [],
+    };
+    applyNpcCommand(world, session, command);
+    const { player: _p, commands: _c, ...runtime } = session;
+    next.npcs = runtime;
+    next.commands.push(command);
+  }
+
+  function npc(state: LifeState, command: NpcCommand): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    npcInto(next, command);
+    return freeze(next);
+  }
+
   function replay(seed: string, commands: readonly Command[]): LifeState {
     if (!Array.isArray(commands) || commands.length > MAX_COMMANDS) throw new Error("Invalid command history length.");
     // Reconstruct privately in one pass; only the final state escapes to callers.
@@ -1106,6 +1183,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         cancelMarketOrderInto(state, command.orderId);
       } else if (command.type === "influence") influenceInto(state, command, ` at ${i}`);
       else if (DEMO_COMMAND_TYPES.has(command.type)) demoInto(state, command, ` at ${i}`);
+      else if (command.type === "npc-turn" || command.type === "npc-answer" || command.type === "npc-speech") npcInto(state, command);
       else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -1136,5 +1214,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
 }

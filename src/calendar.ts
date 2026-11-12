@@ -9,3 +9,8 @@ export function formatYear(year: number): string {
   if (!Number.isSafeInteger(year) || year === 0) throw new Error("Year must be a nonzero safe integer.");
   return year < 0 ? `${Math.abs(year)} BCE` : `${year} CE`;
 }
+
+/** The year a life was born: its own birth year where the world varies births, else the world's start year. */
+export function birthYearOf(world: { startYear: number }, life: { birthYear?: number }): number {
+  return life.birthYear ?? world.startYear;
+}

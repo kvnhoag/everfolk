@@ -22,7 +22,7 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
     return value as unknown[];
   };
   const root = object(input,path,["version","nodes"]);
-  if (root.version !== 1 && root.version !== 2) fail(path,"unsupported capability version");
+  if (root.version !== 1 && root.version !== 2 && root.version !== 3) fail(path,"unsupported capability version");
   const catalog = capabilityCatalog(Number(root.version));
   const nodes = array(root.nodes,catalog.length);
   if (nodes.length !== catalog.length) fail(path,"expected the complete versioned capability graph");

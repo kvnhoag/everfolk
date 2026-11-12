@@ -40,6 +40,18 @@ export function applyDemoEffect(ctx: DemoContext, effect: DemoEffect): void {
       demo.town.grower.grain += shared; // neighbours' households; stays in the town's grain
       break;
     }
+    case "grain-to": {
+      const moved = Math.min(effect.quantity, demo.household.grain);
+      demo.household.grain -= moved;
+      if (effect.to === "crown") demo.town.army.grain += moved; else demo.town.grower.grain += moved;
+      ctx.journal(`grain-${effect.cause}`, `${moved} measures of grain go to the ${effect.to === "crown" ? "royal granary" : "temple store"} (${effect.cause}).`);
+      break;
+    }
+    case "plot": {
+      demo.household.plots = Math.max(0, demo.household.plots + effect.delta);
+      ctx.journal(`plot-${effect.cause}`, `The household now holds ${demo.household.plots} plots (${effect.cause}).`);
+      break;
+    }
     case "harvest-bonus": demo.household.harvestBonusBps += effect.bps; break;
     case "convoy": applyConvoy(ctx, effect); break;
     case "offer": applyOffer(ctx, effect); break;
@@ -57,6 +69,7 @@ export function matchesDemoCondition(life: LifeState, condition: DemoCondition):
     case "convoy": return condition.stage === "none" ? demo.shipment === null : demo.shipment?.stage === condition.stage;
     case "offer": return demo.offer?.kind === condition.offer;
     case "hungry": return demo.household.lastShortfallBps > 0;
+    case "plots": return compare(demo.household.plots, condition.op, condition.value);
     case "head-of-plot": return (demo.household.headSinceAge !== null) === condition.value;
   }
 }

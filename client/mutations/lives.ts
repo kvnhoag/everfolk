@@ -1,3 +1,4 @@
+import { birthYearOf } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
 import { contentFingerprint } from "../../src/random.ts";
 import type { ArchivedLife, StorageLike } from "../types/session.ts";
@@ -72,7 +73,7 @@ export function archiveLife(storage: StorageLike, life: LifeState): ArchivedLife
     id: `${life.seed}:${contentFingerprint(saved)}`,
     age: life.age,
     year: life.year,
-    birthYear: world.startYear,
+    birthYear: birthYearOf(world, life),
     endingTitle: cause?.title ?? ending?.title ?? "Life ended",
     save: saved,
   };

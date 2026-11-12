@@ -4,7 +4,7 @@ import { createEngine } from "../src/engine.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { buildCrossoverWorld } from "../src/vocations/crossover-world.ts";
 import { buildCapabilityWorld } from "../src/vocations/capability-world.ts";
-import { ATTRIBUTE_NODES } from "../src/capabilities/attribute-catalog.ts";
+import { BALANCED_ATTRIBUTE_NODES as ATTRIBUTE_NODES } from "../src/capabilities/attribute-catalog.ts";
 import { buildCapabilityLayout,capabilityAncestors } from "../client/models/capability-layout.ts";
 import { characterEffectReason } from "../src/character.ts";
 import { militaryCareerReason } from "../src/capabilities/military.ts";
@@ -53,11 +53,12 @@ function learn(engine:LifeEngine,life:LifeState,id:string) {
 test("attribute graph has only two crossovers, no cycles, and skills rather than careers as nodes",()=>{
   const layout=buildCapabilityLayout(),links=layout.links.filter(l=>l.crossover);
   assert.equal(ATTRIBUTE_NODES.length,74);
-  assert.deepEqual(links.map(l=>`${l.from}>${l.to}`).sort(),['P1>M4','P4>M8']);
+  assert.deepEqual(links.map(l=>`${l.from}>${l.to}`).sort(),['P1>M4','P2>M8']);
   for(const link of layout.links)assert.ok(ATTRIBUTE_NODES.find(n=>n.id===link.from)!.depth<ATTRIBUTE_NODES.find(n=>n.id===link.to)!.depth);
   assert.ok(ATTRIBUTE_NODES.every(n=>!['Soldier','Officer','General'].includes(n.title)));
   const path=capabilityAncestors(ATTRIBUTE_NODES,'M10');
-  for(const id of ['F1','B2','B3','P1','P2','P3','P4','M4','M7','M8','M10'])assert.ok(path.has(id),id);
+  for(const id of ['F1','B2','B3','P1','P2','M4','M7','M8','M10'])assert.ok(path.has(id),id);
+  assert.ok(!path.has('P4'),'command builds on reasoned argument, not the deepest study');
   assert.ok(!path.has('FC10')&&!path.has('AT5')&&!path.has('PS10'));
 });
 

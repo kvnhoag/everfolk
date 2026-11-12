@@ -335,7 +335,7 @@ export function createNpcSessionService(options: {
     await commit(record, revision);
     const outcome = await model(
       record,
-      observeNpc(record.state, npcId),
+      observeNpc(record.state, npcId, recordEngine(record).world),
       "Confirm the live NPC service can respond. No game action or reward is requested.",
     );
     const latest = await owner(id, token);
@@ -462,7 +462,7 @@ export function createNpcSessionService(options: {
           "Resolve the current choice or advance to the next year.",
         );
       const active = Object.values(record.state.slots).filter(
-        (id) => availableNpcActions(record.state, id).length,
+        (id) => availableNpcActions(record.state, id, recordEngine(record).world).length,
       );
       let calls = canCall(record)
         ? active
@@ -491,9 +491,9 @@ export function createNpcSessionService(options: {
             if (pending?.age === record.state.player.age)
               return [npcId, pending.decision];
             if (record.leases[npcId]?.expires > now())
-              return [npcId, rulesDecision(record.state, npcId, "fallback")];
+              return [npcId, rulesDecision(record.state, npcId, "fallback", recordEngine(record).world)];
             const outcome = calls.includes(npcId)
-              ? await model(record, observeNpc(record.state, npcId))
+              ? await model(record, observeNpc(record.state, npcId, recordEngine(record).world))
               : null;
             if (outcome?.failure) failures.push(outcome.failure);
             const result = outcome?.value;
@@ -509,6 +509,7 @@ export function createNpcSessionService(options: {
                     record.state,
                     npcId,
                     options.controller ? "fallback" : "rules",
+                    recordEngine(record).world,
                   ),
             ];
           }),
@@ -546,7 +547,7 @@ export function createNpcSessionService(options: {
         throw new NpcError(409, "Wait for the NPC turn to finish.");
       if (record.state.player.phase === "ended")
         throw new NpcError(409, "This life has ended.");
-      const observation = observeNpc(record.state, npcId);
+      const observation = observeNpc(record.state, npcId, recordEngine(record).world);
       if (!record.state.people[npcId].introduced)
         throw new NpcError(409, "You have not met this person.");
       if (record.leases[npcId]?.expires > now())
@@ -609,7 +610,7 @@ export function createNpcSessionService(options: {
           "A lease token is shown only once. Revoke it and issue another if it was lost.",
         );
       }
-      observeNpc(record.state, npcId);
+      observeNpc(record.state, npcId, recordEngine(record).world);
       if (record.turnLock && record.turnLock.until > now())
         throw new NpcError(409, "Wait for the active NPC turn.");
       const leaseToken = secret();
@@ -630,7 +631,7 @@ export function createNpcSessionService(options: {
       return {
         revision: record.revision,
         decisionAge: record.state.player.age,
-        observation: observeNpc(record.state, npcId),
+        observation: observeNpc(record.state, npcId, recordEngine(record).world),
       };
     },
     async propose(
@@ -652,7 +653,7 @@ export function createNpcSessionService(options: {
           "The turn is resolving; submit during the next decision window.",
         );
       if (
-        !availableNpcActions(record.state, npcId).some(
+        !availableNpcActions(record.state, npcId, recordEngine(record).world).some(
           (a) => a.id === proposed.action,
         )
       )

@@ -24,4 +24,7 @@ export const ATTRIBUTE_NODES: readonly CapabilityNode[] = [
     ...(original.id === "F1" ? { title: "Physical work", proof: "Complete 1 fieldwork year with an actual seeded harvest. This work also develops Strength and Endurance.", reward: "Open physical conditioning and cultivation. Strength and Endurance improve through actual farm work; Health is a separate condition." } : {}),
   })), ...CROSSOVER_NODES,
 ].sort((a,b) => a.depth - b.depth || a.id.localeCompare(b.id));
-export const capabilityCatalog = (version: number) => version === 2 ? ATTRIBUTE_NODES : CAPABILITY_NODES;
+/** Version 2 is the immutable lives-4 graph; version 3 reduces the tactical crossover for new births. */
+export const BALANCED_ATTRIBUTE_NODES: readonly CapabilityNode[] = ATTRIBUTE_NODES.map(node => node.id === "M8"
+  ? { ...node, prerequisites: { all: ["M7", "P2"] } } : node);
+export const capabilityCatalog = (version: number) => version === 3 ? BALANCED_ATTRIBUTE_NODES : version === 2 ? ATTRIBUTE_NODES : CAPABILITY_NODES;

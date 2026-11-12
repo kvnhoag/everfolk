@@ -1,6 +1,6 @@
 import type { Condition, WorldPack } from "../types.ts";
 import { buildCapabilityWorld } from "./capability-world.ts";
-import { ATTRIBUTE_NODES, CROSSOVER_NODES } from "../capabilities/attribute-catalog.ts";
+import { BALANCED_ATTRIBUTE_NODES, CROSSOVER_NODES } from "../capabilities/attribute-catalog.ts";
 import { capabilityAction } from "../capabilities/catalog.ts";
 import { MILITARY_QUALIFICATIONS } from "../capabilities/military.ts";
 import { LIVES_WORLD_VERSION } from "./ids.ts";
@@ -11,7 +11,7 @@ export function buildCrossoverWorld(base:WorldPack):WorldPack {
   world.version=LIVES_WORLD_VERSION;
   world.title="Alexandria — Attributes and connected paths";
   world.description="Develop Physique, Handmade, Knowledge and Trade. A small military lane combines physical preparation, knowledge and proved service to open career opportunities.";
-  world.capabilities={version:2,nodes:structuredClone([...ATTRIBUTE_NODES])};
+  world.capabilities={version:3,nodes:structuredClone([...BALANCED_ATTRIBUTE_NODES])};
   for(const [id,label]of Object.entries({strength:"Strength",endurance:"Endurance"})) character.skills[id]={label,min:0,max:100,initial:0,branch:"Physique",tier:0,description:`Trainable ${label.toLowerCase()} developed through physical work and conditioning; distinct from current Health.`};
   for(const [id,skill]of Object.entries(character.skills)) skill.branch=["strength","endurance","farming","warfare","seamanship"].includes(id)?"Physique":["craft","pottery","carving","sculpture","music"].includes(id)?"Handmade":"Knowledge";
   const physicalWork=character.activities.find(a=>a.id===capabilityAction("F1"))!;
@@ -28,9 +28,9 @@ export function buildCrossoverWorld(base:WorldPack):WorldPack {
     const node=world.capabilities.nodes.find(n=>n.id===MILITARY_QUALIFICATIONS[job.id])!;
     job.requirements={...node.minimumProficiency};
     job.description=`A ${job.id} appointment requires demonstrated ${node.title.toLowerCase()}, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.`;
-    // Service trains the body it demands; command also trains the voice. It still costs health and time at home.
+    // Service trains the body it demands; command also trains the voice. Routine service costs time at home; war carries the danger.
     job.yearlyEffects=[{type:"skill",skill:"warfare",delta:2},{type:"skill",skill:"strength",delta:1},{type:"skill",skill:"endurance",delta:1},
-      ...(job.id==="soldier"?[]:[{type:"skill" as const,skill:"oratory",delta:1}]),{type:"stat",stat:"health",delta:-1},{type:"stat",stat:"bonds",delta:-1}];
+      ...(job.id==="soldier"?[]:[{type:"skill" as const,skill:"oratory",delta:1}]),{type:"stat",stat:"bonds",delta:-1}];
   }
   for(const activity of character.activities) {
     const military=activity.outcomes.flatMap(o=>o.effects).find(e=>e.type==="job"&&e.job&&MILITARY_QUALIFICATIONS[e.job]);

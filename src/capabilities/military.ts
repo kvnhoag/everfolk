@@ -6,7 +6,7 @@ export const OFFICER_SERVICE_YEARS = 2, GENERAL_SERVICE_YEARS = 5;
 export const MILITARY_QUALIFICATIONS: Record<string,string> = {soldier:"M4",officer:"M7",general:"M10"};
 export const provedServiceYears = (life:LifeState) => new Set((life.capabilities?.military?.service ?? []).filter(r=>r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations).map(r=>r.age)).size;
 export function militaryCareerReason(world:WorldPack,life:LifeState,job:string):string|undefined {
-  if(world.capabilities?.version!==2 || !MILITARY_QUALIFICATIONS[job]) return;
+  if((world.capabilities?.version ?? 0) < 2 || !MILITARY_QUALIFICATIONS[job]) return;
   const id=MILITARY_QUALIFICATIONS[job], node=world.capabilities.nodes.find(n=>n.id===id)!;
   if(!life.capabilities?.learned[id])return `Learn ${node.title} through demonstrated work before seeking this career.`;
   // An appointment checks fitness; knowledge was proved when the qualification was learned.
@@ -26,7 +26,7 @@ export function militaryWorkReason(life:LifeState,id:string):string|undefined {
 }
 /** Deeds settle after actual army payments/rations, never when the work button is clicked. */
 export function settleMilitaryProofs(world:WorldPack,life:LifeState,age:number):void {
-  if(world.capabilities?.version!==2 || !life.capabilities)return;
+  if((world.capabilities?.version ?? 0) < 2 || !life.capabilities)return;
   const receipt=life.capabilities.military?.service.find(r=>r.age===age);
   for(const evidence of life.capabilities.evidence.filter(e=>/^M(?:[5-9]|10)$/.test(e.nodeId)&&e.age===age&&e.data.awaitingService===true)) {
     const valid=Boolean(receipt && receipt.paid===receipt.wage && receipt.rations===receipt.ration && receipt.purseBefore-receipt.purseAfter===receipt.paid && receipt.grainBefore-receipt.grainAfter===receipt.rations);

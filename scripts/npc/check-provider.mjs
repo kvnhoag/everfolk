@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { loadEnvFile } from "node:process";
-import world from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import world from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import { npcProviderConfiguration } from "../../server/npc/composition.ts";
 import { createNpcSessionService } from "../../server/npc/service.ts";
 import { memoryNpcStore } from "../../server/npc/store.ts";

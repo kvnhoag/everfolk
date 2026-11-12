@@ -36,7 +36,7 @@ interface Spec {
   id: string; title: string; text: string; when: Condition; stages: string[]; scope: DecisionScope; fields: FieldId[];
   choices: Array<{ key: string; text: string; result: string; effects: Effect[]; when?: Condition }>;
   max?: number; cooldown?: number; weight?: number;
-  /** A direct consequence: offered once, as soon as its cause holds, instead of waiting for a random slot. */
+  /** A direct consequence: offered as soon as its cause holds, instead of waiting for a random slot; with `max` above one it recurs after `cooldown` years. */
   anchor?: boolean;
 }
 
@@ -48,8 +48,9 @@ export function buildDecision(spec: Spec): LifeEvent {
     id: `${spec.id}-${choice.key}`, text: choice.text, ...(choice.when ? { when: choice.when } : {}),
     outcomes: [{ id: `${spec.id}-${choice.key}-done`, text: choice.result, weight: 1, effects: choice.effects }],
   }));
+  // An anchor with `max` above one recurs, spaced by `cooldown` years.
   const timing = spec.anchor
-    ? { trigger: { type: "year" as const, at: ANCHOR_YEAR }, maxOccurrences: 1 }
+    ? { trigger: { type: "year" as const, at: ANCHOR_YEAR }, maxOccurrences: spec.max ?? 1, ...(spec.max && spec.max > 1 ? { cooldownYears: spec.cooldown ?? 4 } : {}) }
     : { trigger: { type: "random" as const, weight: spec.weight ?? 1 }, maxOccurrences: spec.max ?? 2, cooldownYears: spec.cooldown ?? 4 };
   return { id: spec.id, title: spec.title, text: spec.text, ...timing, when: spec.when,
     stages: spec.stages, scope: spec.scope, fields: spec.fields, evidence: "fictional", choices };

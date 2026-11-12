@@ -99,6 +99,16 @@ export function validateDemoEffect(value: Data, path: string, fail: Fail, allowG
     case "reputation": record(effect, at, fail, ["kind", "delta"]); whole(effect.delta, `${at}.delta`, fail, -100, 100); break;
     case "work": record(effect, at, fail, ["kind", "work", "progress"]); oneOf(effect.work, WORKS, `${at}.work`, fail); whole(effect.progress, `${at}.progress`, fail, 1, 100); break;
     case "share-grain": record(effect, at, fail, ["kind", "quantity"]); whole(effect.quantity, `${at}.quantity`, fail, 1); break;
+    case "grain-to":
+      record(effect, at, fail, ["kind", "to", "quantity", "cause"]);
+      oneOf(effect.to, ["crown", "temple"], `${at}.to`, fail); whole(effect.quantity, `${at}.quantity`, fail, 1);
+      if (typeof effect.cause !== "string" || !effect.cause) fail(`${at}.cause`, "expected a cause");
+      break;
+    case "plot":
+      record(effect, at, fail, ["kind", "delta", "cause"]);
+      whole(effect.delta, `${at}.delta`, fail, -10, 10);
+      if (typeof effect.cause !== "string" || !effect.cause) fail(`${at}.cause`, "expected a cause");
+      break;
     case "harvest-bonus": record(effect, at, fail, ["kind", "bps"]); whole(effect.bps, `${at}.bps`, fail, 0, 10_000); break;
     case "convoy":
       record(effect, at, fail, ["kind", "action", "lossBps", "riskCutBps"], ["kind", "action"]);
@@ -127,6 +137,7 @@ export function validateDemoCondition(value: Data, path: string, fail: Fail): vo
     case "work": record(condition, at, fail, ["kind", "work", "built"]); oneOf(condition.work, WORKS, `${at}.work`, fail); if (typeof condition.built !== "boolean") fail(`${at}.built`, "expected a boolean"); break;
     case "convoy": record(condition, at, fail, ["kind", "stage"]); oneOf(condition.stage, ["muster", "road", "none"], `${at}.stage`, fail); break;
     case "offer": record(condition, at, fail, ["kind", "offer"]); oneOf(condition.offer, OFFERS, `${at}.offer`, fail); break;
+    case "plots": record(condition, at, fail, ["kind", "op", "value"]); oneOf(condition.op, OPS, `${at}.op`, fail); whole(condition.value, `${at}.value`, fail, 0, 100); break;
     case "hungry": record(condition, at, fail, ["kind"]); break;
     case "head-of-plot": record(condition, at, fail, ["kind", "value"]); if (typeof condition.value !== "boolean") fail(`${at}.value`, "expected a boolean"); break;
     default: fail(`${at}.kind`, "unknown demo condition");

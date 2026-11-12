@@ -1,6 +1,7 @@
 import design from "../../design/skill-tree/catalog.json" with { type: "json" };
 import type { LifeState, WorldPack } from "../types.ts";
 import type { VocationAction } from "../vocations/types.ts";
+import { merchantBid } from "../vocations/bid.ts";
 
 export const hasCapability = (life: LifeState, id: string): boolean => Boolean(life.capabilities?.learned[id]);
 export function artisanLimits(life: LifeState, family: string): { quality: number; batch: number } {
@@ -36,7 +37,7 @@ export function productionQuote(world: WorldPack, life: LifeState, recipeId: str
   const quality = Math.min(cap, natural + (enabled && inspected ? 1 : 0) + (enabled && (recipeId === "dyed-garment" || controlledFiring) ? 1 : 0));
   const retail = Math.floor(recipe.baseAsk * [10000,11500,13000,15000,18000][family === "Intermediate" ? 0 : quality - 1] / 10000);
   return { recipeId, inputs, fee, output: recipe.output, outputQuantity: recipe.outputQuantity * quantity, quantity, quality, workYears: recipe.workYears,
-    primary: recipe.primary, supports: recipe.supports, family, bid: Math.floor(retail * 10000 / 12500) };
+    primary: recipe.primary, supports: recipe.supports, family, bid: merchantBid(world, retail) };
 }
 export function productionReason(world: WorldPack, life: LifeState, action: Extract<VocationAction, {kind:"make"}>): string | undefined {
   if (!world.capabilities) return;

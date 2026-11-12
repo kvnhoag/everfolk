@@ -157,6 +157,32 @@ export interface MarketConfig {
   minTradeAge?: number;
   /** Reputation for bringing grain to the merchant in a low-flood year (fair trade). */
   fairTradeReputation?: number;
+  /** Track B (lives-4 and later): the player's trades move prices. Absent: fixed quotes for every order. */
+  depth?: MarketDepthConfig;
+}
+
+/**
+ * Track B: market depth. What the player sells weighs on the merchant's price as the order fills and
+ * for the next years (the weight shrinks each year); what the player buys lifts it. Grain is quoted in
+ * hundredths of a drachma so its spread can be narrow. Prices only change who pays what; every drachma
+ * paid is received and every unit sold is delivered.
+ */
+export interface MarketDepthConfig {
+  /** Units the player trades that halve the price (selling); buying as many lifts it by the same share. */
+  halfUnits: Record<TradeItem, number>;
+  /** Share of the trade weight still felt the next year, basis points (it recovers by the rest). */
+  keepBps: number;
+  /** Lowest share of its clear-market level a glut can push a price to, basis points. */
+  minFactorBps: number;
+  /** Highest share of its clear-market level buying can lift a price to, basis points. */
+  maxFactorBps: number;
+  /** Grain ask as a share of the usual rule price, basis points; grain is quoted in hundredths. */
+  grainAskBps: number;
+  /** Grain ask over bid, basis points (other items use `spreadBps`). */
+  grainSpreadBps: number;
+  /** Lean-year sales earn one standing per this many measures (at least one), up to the cap. */
+  leanYearMeasuresPerStanding: number;
+  leanYearStandingCap: number;
 }
 
 /** Track C: wages, rations, convoy. */
@@ -269,6 +295,8 @@ export interface TownState {
   /** Current merchant quotes: what the merchant pays (`buy`) and asks (`sell`). */
   prices: Record<TradeItem, { buy: number; sell: number }>;
   armyGrainPrice: number;
+  /** Track B (worlds with `market.depth`): units the player has sold (+) or bought (−) lately, still weighing on prices. */
+  pressure?: Partial<Record<TradeItem, number>>;
 }
 
 export interface Shipment {
@@ -354,6 +382,10 @@ export type DemoEffect =
   /** Progress on a community work; costs are separate cash/grain effects on the same outcome. */
   | { kind: "work"; work: WorkId; progress: number }
   | { kind: "share-grain"; quantity: number }
+  /** Grain handed to the crown granary (army store) or the temple store (the town's growers); it moves, it is never destroyed. */
+  | { kind: "grain-to"; to: "crown" | "temple"; quantity: number; cause: string }
+  /** A household plot granted or leased (land, not goods or cash). */
+  | { kind: "plot"; delta: number; cause: string }
   | { kind: "harvest-bonus"; bps: number }
   | { kind: "convoy"; action: "provision" | "companion" | "depart" | "withdraw" | "resolve"; lossBps?: number; riskCutBps?: number }
   | { kind: "offer"; action: "accept" | "decline" };
@@ -366,6 +398,7 @@ export type DemoCondition =
   | { kind: "convoy"; stage: Shipment["stage"] | "none" }
   | { kind: "offer"; offer: OfferKind }
   | { kind: "hungry" }
+  | { kind: "plots"; op: "gte" | "lte" | "gt" | "lt" | "eq"; value: number }
   | { kind: "head-of-plot"; value: boolean };
 
 // ── Context passed to modules during engine steps ───────────────────────────

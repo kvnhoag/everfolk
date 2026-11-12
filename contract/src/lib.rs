@@ -130,3 +130,5 @@ mod tests_nft;
 mod tests_market;
 #[cfg(test)]
 mod tests_demo_catalog;
+#[cfg(test)]
+mod tests_npc_session;

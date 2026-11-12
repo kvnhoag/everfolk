@@ -1,5 +1,5 @@
 import { displayProse } from "./display-prose.ts";
-import { yearAtAge } from "../../src/calendar.ts";
+import { birthYearOf, yearAtAge } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { influenceMarker } from "./influence-marker.ts";
 import type { InfluenceMarker } from "./influence-marker.ts";
@@ -27,7 +27,7 @@ export interface LifeEventYear {
  */
 export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYear[] {
   const years = Array.from({ length: life.age + 1 }, (_, age): LifeEventYear => ({
-    age, year: yearAtAge(world.startYear, age), events: [],
+    age, year: yearAtAge(birthYearOf(world, life), age), events: [],
   }));
   const events = new Map(world.events.map(event => [event.id, event]));
   const activities = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);

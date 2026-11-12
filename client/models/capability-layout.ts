@@ -1,8 +1,8 @@
-import { ATTRIBUTE_BRANCHES, ATTRIBUTE_NODES } from "../../src/capabilities/attribute-catalog.ts";
+import { ATTRIBUTE_BRANCHES, BALANCED_ATTRIBUTE_NODES } from "../../src/capabilities/attribute-catalog.ts";
 import type { CapabilityNode } from "../../src/capabilities/types.ts";
 
 /** Geometry is independent of life state: earning a node never moves a path. */
-export const CAPABILITY_NODES = ATTRIBUTE_NODES;
+export const CAPABILITY_NODES = BALANCED_ATTRIBUTE_NODES;
 export const CAPABILITY_BRANCHES = ATTRIBUTE_BRANCHES;
 export const CAPABILITY_NODE_WIDTH = 112;
 export const CAPABILITY_NODE_HEIGHT = 118;

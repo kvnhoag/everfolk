@@ -2,6 +2,7 @@ import { bid, vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
 import { TRADE_ITEMS } from "./demo/types.ts";
+import { merchantSaleValue } from "./demo/market-depth.ts";
 import { marketCommittedQuantity, marketOrderValue, marketQuote } from "./market.ts";
 
 /** Deliberate numeric ceiling keeps all ledger arithmetic safely below 2^53. */
@@ -21,8 +22,8 @@ export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeS
     const quantity = item === "grain" ? demo.household.grain : item === "flax" ? demo.household.flax
       : item === "ox" || item === "donkey" ? demo.household.animals[item] : demo.goods[item];
     const held = amount(quantity, `Household ${item}`);
-    const price = amount(demo.town.prices[item].buy, `Market ${item} price`);
-    return sum + held * price;
+    const value = merchantSaleValue(world.demo!, demo, item, held);
+    return sum + amount(value, `Household ${item} sale value`);
   }, 0), "Household resource market value");
 }
 

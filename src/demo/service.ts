@@ -88,7 +88,7 @@ export function payWages(ctx: DemoContext): void {
     changeReputation(ctx, tuning(def).wageShortReputation, "the army could not pay its soldiers in full");
   }
   const rations=feedFromArmy(ctx);
-  if(ctx.world.capabilities?.version===2 && life.capabilities) (life.capabilities.military ??= {service:[]}).service.push({
+  if((ctx.world.capabilities?.version ?? 0) >= 2 && life.capabilities) (life.capabilities.military ??= {service:[]}).service.push({
     age:life.age-1,role:life.character!.jobId!,paid,wage,rations,ration:def.service.ration,purseBefore,purseAfter:army.purse,grainBefore,grainAfter:army.grain,
   });
 }

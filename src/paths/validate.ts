@@ -1,6 +1,6 @@
 /** Validation for the opt-in `world.paths` block and event field tags. */
 import type { LifeStageValidationTools } from "../life-stages/validate.ts";
-import { FIELD_IDS, TIERS } from "./types.ts";
+import { ACCOUNT_IDS, FIELD_IDS, TIERS } from "./types.ts";
 
 type DataObject = Record<string, unknown>;
 
@@ -164,6 +164,12 @@ export function validatePathsCondition(rule: DataObject, path: string, paths: un
       if (!tools.operators.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
       integer(rule.value, `${path}.value`, 0, 100_000);
       return true;
+    case "account":
+      object(rule, path, ["type", "account", "op", "value"]);
+      if (!(ACCOUNT_IDS as readonly string[]).includes(rule.account as string)) fail(`${path}.account`, `expected one of ${ACCOUNT_IDS.join(", ")}`);
+      if (!tools.operators.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+      integer(rule.value, `${path}.value`, 0, 1_000_000);
+      return true;
     default:
       return false;
   }
@@ -196,6 +202,18 @@ export function validatePathsEffect(effect: DataObject, path: string, paths: unk
       tools.object(effect, path, ["type", "item", "quantity", "cause"]);
       requireMaterial(effect.item, `${path}.item`, tools);
       tools.integer(effect.quantity, `${path}.quantity`, 1, 10_000);
+      tools.string(effect.cause, `${path}.cause`, 200);
+      return true;
+    case "account-pay":
+      tools.object(effect, path, ["type", "account", "amount", "cause"]);
+      if (!(ACCOUNT_IDS as readonly string[]).includes(effect.account as string)) tools.fail(`${path}.account`, `expected one of ${ACCOUNT_IDS.join(", ")}`);
+      tools.integer(effect.amount, `${path}.amount`, 1, 10_000);
+      tools.string(effect.cause, `${path}.cause`, 200);
+      return true;
+    case "successor":
+      tools.object(effect, path, ["type", "field", "relation", "cause"]);
+      requirePaths(paths, path, tools); field(effect, path, tools);
+      if (!["child", "apprentice"].includes(effect.relation as string)) tools.fail(`${path}.relation`, "expected child or apprentice");
       tools.string(effect.cause, `${path}.cause`, 200);
       return true;
     case "move-district": {

@@ -12,10 +12,10 @@ export function worldPlace(world: WorldPack, year: number): string {
   return foundation !== undefined && year < foundation ? "Rhakotis coast" : "Alexandria";
 }
 
-export function worldBeginning(world: WorldPack): string {
+export function worldBeginning(world: WorldPack, birthYear = world.startYear): string {
   const foundation = classicalFoundationYear(world);
-  if (foundation !== undefined && world.startYear < foundation) {
-    return `You are born near Rhakotis on Egypt's coast in ${formatYear(world.startYear)}. Alexandria will be founded here in ${formatYear(foundation)}.`;
+  if (foundation !== undefined && birthYear < foundation) {
+    return `You are born near Rhakotis on Egypt's coast in ${formatYear(birthYear)}. Alexandria will be founded here in ${formatYear(foundation)}.`;
   }
-  return `You are born in Alexandria in ${formatYear(world.startYear)}.`;
+  return `You are born in Alexandria in ${formatYear(birthYear)}.`;
 }

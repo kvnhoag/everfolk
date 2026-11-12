@@ -6,11 +6,12 @@ import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from ".
 import type { LegacyEntry } from "../storage/legacy-store.ts";
 
 /** Keep the personal collection available across archived and current lives. */
-export function useLegacyGallery(life: LifeState, world: WorldPack, archivedLives: readonly ArchivedLife[]) {
+export function useLegacyGallery(life: LifeState, world: WorldPack, archivedLives: readonly ArchivedLife[], enabled = true) {
   const [legacyEntries, setLegacyEntries] = useState<LegacyEntry[]>([]);
   const [legacyNotice, setLegacyNotice] = useState("");
 
   useEffect(() => {
+    if (!enabled) {setLegacyEntries(collectLegacyEntries(world, life, []));setLegacyNotice("");return;}
     try {
       let entries = readLegacyEntries(window.localStorage);
       for (const archived of archivedLives) {
@@ -25,13 +26,14 @@ export function useLegacyGallery(life: LifeState, world: WorldPack, archivedLive
       setLegacyEntries(previous => collectLegacyEntries(world, life, previous));
       setLegacyNotice(error instanceof Error ? error.message : "The legacy gallery could not be saved in this browser.");
     }
-  }, [life, world, archivedLives]);
+  }, [life, world, archivedLives, enabled]);
 
   useEffect(() => {
+    if (!enabled) return;
     const refresh = () => { try { setLegacyEntries(readLegacyEntries(window.localStorage)); } catch { /* Preserve the visible collection. */ } };
     window.addEventListener("everfolk:legacy-updated", refresh);
     return () => window.removeEventListener("everfolk:legacy-updated", refresh);
-  }, []);
+  }, [enabled]);
 
   return { legacyEntries, legacyNotice };
 }

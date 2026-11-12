@@ -1,5 +1,6 @@
 import type { CareerGroup, Category, FigureId } from "./ids.ts";
 import type { MatchedStageFigure, StageRecord } from "./stage-figures.ts";
+import type { NpcSessionAttestation } from "./npc-proof.ts";
 
 /** JSON views returned by the Everfolk lives contract. Rust structs serialize to exactly these shapes. */
 export interface FigurePick { figure_id: FigureId; token_id: string; action_id: string; rarity: number }
@@ -25,6 +26,8 @@ export interface Evidence {
   career_group: CareerGroup; matched_figures: FigureId[]; sources: SourceImpact[];
   stage_records?: StageRecord[];
   stage_figures?: MatchedStageFigure[];
+  /** Required only for the NPC world; signed with the rest of the finished-life evidence. */
+  npc_session?: NpcSessionAttestation;
 }
 
 export interface StageMintCard {
