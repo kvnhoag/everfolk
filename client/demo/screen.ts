@@ -76,7 +76,7 @@ export function demoScreen(world: WorldPack, life: LifeState): DemoScreen | null
   if (!world.demo || !life.demo) return null;
   const typed = life as LifeStateWithDemo;
   const def = world.demo;
-  const household = householdView(def, typed);
+  const household = householdView(def, typed, world);
   const holdings: Record<TradeItem, number> = {
     grain: typed.demo.household.grain,
     flax: typed.demo.household.flax,

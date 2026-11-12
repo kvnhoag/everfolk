@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alexandria-sample",
-  "version": "0.34.0",
+  "version": "0.37.0",
   "title": "From Rhakotis to Alexandria",
   "description": "Begin a fictional life near Rhakotis on Egypt's Mediterranean coast in 350 BCE. Grow up before Alexandria is founded, then live through Alexander's arrival and the first generations of the new city. Work, learn and build a household; chosen journeys and skilled work may bring you into the worlds of Aristotle, Alexander and Euclid.",
   "startYear": -350,
@@ -329,7 +329,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "artisan-household",
@@ -346,8 +356,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 2,
-          "max": 8
+          "min": 5,
+          "max": 12
         },
         "bonds": {
           "min": 58,
@@ -359,7 +369,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 2
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "harbor-household",
@@ -389,7 +409,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "fishing-household",
@@ -406,8 +436,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 1,
-          "max": 7
+          "min": 4,
+          "max": 10
         },
         "bonds": {
           "min": 62,
@@ -419,7 +449,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "bakery-household",
@@ -436,7 +476,7 @@
           "max": 3
         },
         "wealth": {
-          "min": 4,
+          "min": 5,
           "max": 12
         },
         "bonds": {
@@ -449,7 +489,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "clerk-household",
@@ -479,7 +529,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "weaver-household",
@@ -496,8 +556,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 2,
-          "max": 9
+          "min": 5,
+          "max": 11
         },
         "bonds": {
           "min": 60,
@@ -509,7 +569,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "delta-newcomers",
@@ -539,7 +609,17 @@
       "sourceIds": [
         "classical-rhakotis",
         "classical-rhakotis-archaeology"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "royal-household",
@@ -570,7 +650,17 @@
         "household-royal-kin",
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 1,
+          "max": 2
+        }
+      }
     },
     {
       "id": "estate-household",
@@ -601,7 +691,17 @@
         "household-late-period",
         "household-farming-context",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": "temple-household",
@@ -632,7 +732,17 @@
         "household-temple-family",
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "soldier-household",
@@ -662,7 +772,17 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "tenant-farming-household",
@@ -679,8 +799,8 @@
           "max": 2
         },
         "wealth": {
-          "min": 0,
-          "max": 7
+          "min": 4,
+          "max": 9
         },
         "bonds": {
           "min": 60,
@@ -692,7 +812,17 @@
       "sourceIds": [
         "household-farming-context",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 1
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "domestic-service-household",
@@ -722,7 +852,17 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": "boatbuilder-household",
@@ -739,8 +879,8 @@
           "max": 3
         },
         "wealth": {
-          "min": 3,
-          "max": 12
+          "min": 6,
+          "max": 14
         },
         "bonds": {
           "min": 56,
@@ -752,7 +892,17 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 1,
+          "max": 2
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": "musician-household",
@@ -782,7 +932,17 @@
       "sourceIds": [
         "household-late-period",
         "classical-rhakotis"
-      ]
+      ],
+      "assetRanges": {
+        "tool-chest": {
+          "min": 0,
+          "max": 0
+        },
+        "workshop-share": {
+          "min": 0,
+          "max": 0
+        }
+      }
     }
   ],
   "yearlyEffects": [],
@@ -6227,20 +6387,9 @@
         "id": "buy-tool-chest",
         "text": "Buy a tool chest",
         "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "cash",
-              "op": "gte",
-              "value": 30
-            },
-            {
-              "type": "asset",
-              "asset": "tool-chest",
-              "op": "eq",
-              "value": 0
-            }
-          ]
+          "type": "cash",
+          "op": "gte",
+          "value": 30
         },
         "outcomes": [
           {
@@ -6299,20 +6448,9 @@
         "id": "buy-workshop-share",
         "text": "Buy a workshop share",
         "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "cash",
-              "op": "gte",
-              "value": 120
-            },
-            {
-              "type": "asset",
-              "asset": "workshop-share",
-              "op": "eq",
-              "value": 0
-            }
-          ]
+          "type": "cash",
+          "op": "gte",
+          "value": 120
         },
         "outcomes": [
           {
@@ -57308,7 +57446,7 @@
       "short": "dr"
     },
     "unitsPerPoint": 10,
-    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified accounting unit is used across this lifetime's changes of ruler; it does not imply a fixed exchange rate or uniform historical coinage. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan.",
+    "description": "Household accounts use drachmas (dr). Net worth includes cash and the estimated sale value of possessions, less debt. Unpaid unavoidable costs can become debt. Amounts are fixed game values, not reconstructed historical prices or wages. There is no modern-currency conversion or automatic interest. The same simplified accounting unit is used across this lifetime's changes of ruler; it does not imply a fixed exchange rate or uniform historical coinage. A voluntarily accepted moneylender loan has its own balance and deadline. Ordinary household debt keeps automatic repayment; this loan must be paid deliberately. Its upfront charge and optional extension charge are fixed game terms, not measured ancient prices. Collectors pursue only that accepted loan. Starting household resources are rolled by background and count toward wealth at the listed market prices. Resource quantities and total wealth have no gameplay cap. Resource ranges and prices are authored game balance, not measured historical holdings or market prices.",
     "sourceIds": [
       "ucl-ptolemaic-coins"
     ],
@@ -57318,16 +57456,22 @@
         "title": "Tool chest",
         "description": "Unlocks hinge, strap and fitting repairs at Tool handling 15. Sell for 30 drachmas.",
         "value": 30,
-        "maxOwned": 1,
-        "yearlyIncome": 0
+        "yearlyIncome": 0,
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        }
       },
       {
         "id": "workshop-share",
         "title": "Workshop share",
         "description": "Earn 10 drachmas each year you survive. Sell for 120 drachmas.",
         "value": 120,
-        "maxOwned": 1,
-        "yearlyIncome": 10
+        "yearlyIncome": 10,
+        "initialRange": {
+          "min": 0,
+          "max": 0
+        }
       }
     ],
     "autoDebtRepayment": true,
@@ -57346,7 +57490,8 @@
         "threat": "lender-threat",
         "attack": "lender-confrontation"
       }
-    }
+    },
+    "uncappedResources": true
   },
   "health": {
     "description": "Early life keeps the easier health rules. From age 18, serious illness episodes use the full age-specific baseline from a Roman Egyptian female life-table comparison. Illness appears, Health falls and a care choice interrupts time before the condition can become fatal. Current Health, care and household support can change the outcome; dangerous choices retain their stated risks. Exact mortality for the Egyptian coast in this era is unknown. The later Roman comparison is an estimate for the setting, not a measured rate for this character. Disease selection, severity and care effects are authored game rules.",

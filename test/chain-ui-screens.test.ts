@@ -28,6 +28,7 @@ const { default: DeclineChoice } = await import("../client/chain/DeclineChoice.t
 const { default: ActiveLifeCard } = await import("../client/chain/ActiveLifeCard.tsx");
 const { default: MintRecovery } = await import("../client/chain/MintRecovery.tsx");
 const { default: RankedEnding } = await import("../client/chain/RankedEnding.tsx");
+const { default: Figures } = await import("../client/chain/Figures.tsx");
 hooks.deregister();
 
 const noop = () => {};
@@ -167,4 +168,17 @@ test("an on-chain paid pack can be reopened without a device save", () => {
   assert.match(html, /Open mint pack/);
   assert.match(html, /any device/);
   assert.doesNotMatch(html, /Keep this browser/);
+});
+
+
+test("figure directory separates historical writings from game qualification rules", () => {
+  const html = renderToStaticMarkup(createElement(Figures, { backend: { contract: {}, revision: 0 } as never }));
+  assert.match(html, /Aristotle, the philosopher and naturalist/);
+  assert.match(html, /Cleomenes of Naucratis, the financial administrator/);
+  assert.match(html, /Nicomachean Ethics/);
+  assert.match(html, /Elements/);
+  assert.match(html, /Authored writings/);
+  assert.match(html, /No authored literary work is securely identified/);
+  assert.match(html, /How a life qualifies/);
+  assert.doesNotMatch(html, /Keep to the Museum|Alexander, the conqueror/);
 });

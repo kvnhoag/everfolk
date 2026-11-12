@@ -1,3 +1,7 @@
+import { validateFigurePaths } from "./figures/validate.ts";
+import { CAPABILITY_OPERATIONS } from "./capabilities/operations.ts";
+import type { CapabilityRule } from "./capabilities/types.ts";
+import { validateCapabilityRules } from "./capabilities/rules.ts";
 import type { VocationDefinition } from "./vocations/types.ts";
 import { validateVocations } from "./vocations/validate.ts";
 import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
@@ -126,7 +130,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "figurePaths"], worldFields);
   let demoGrainGain = false;
   const requireDemo = (path: string): void => { if (!Object.hasOwn(world, "demo")) fail(path, "requires a demo world"); };
   if (world.schemaVersion !== 1) fail("world.schemaVersion", "only schema version 1 is supported");
@@ -241,17 +245,25 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     if (Object.hasOwn(definition, "gainCurve")) gainCurve(definition.gainCurve, `${path}.gainCurve`, definition);
   }
   const economy = Object.hasOwn(world, "economy") ? object(world.economy, "world.economy",
-    ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets", "autoDebtRepayment", "moneylender"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
+    ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets", "autoDebtRepayment", "uncappedResources", "moneylender"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
   const moneylender = economy && Object.hasOwn(economy, "moneylender") ? object(economy.moneylender, "world.economy.moneylender",
     ["title", "principal", "fee", "termYears", "threatAfterYears", "attackAfterYears", "extensionYears", "extensionFee", "maxExtensions", "events"]) : undefined;
   const moneyLimit = 1_000_000_000_000;
   const assets = economy ? array(economy.assets, "world.economy.assets", 0, 128) : [];
   const assetIds = unique(assets, "world.economy.assets");
+  const assetRange = (value: unknown, path: string): { min: number; max: number } => {
+    const range = object(value, path, ["min", "max"]);
+    const min = integer(range.min, `${path}.min`, 0, moneyLimit);
+    const max = integer(range.max, `${path}.max`, 0, moneyLimit);
+    if (min > max) fail(path, "minimum must not exceed maximum");
+    return { min, max };
+  };
   if (economy) {
     reference(economy.stat, "world.economy.stat", statIds, "stat");
     const scale = integer(economy.unitsPerPoint, "world.economy.unitsPerPoint", 1, 1_000_000);
     string(economy.description, "world.economy.description");
     if (Object.hasOwn(economy, "autoDebtRepayment")) bool(economy.autoDebtRepayment, "world.economy.autoDebtRepayment");
+    if (Object.hasOwn(economy, "uncappedResources")) bool(economy.uncappedResources, "world.economy.uncappedResources");
     const currency = object(economy.currency, "world.economy.currency", ["singular", "plural", "short"]);
     for (const field of ["singular", "plural", "short"]) string(currency[field], `world.economy.currency.${field}`, 100);
     if (Object.hasOwn(economy, "sourceIds")) sourceReferences(economy.sourceIds, "world.economy.sourceIds");
@@ -264,14 +276,17 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     let maximumAssetValue = 0, maximumAssetIncome = 0;
     assets.forEach((entry, i) => {
       const path = `world.economy.assets[${i}]`;
-      const asset = object(entry, path, ["id", "title", "description", "value", "maxOwned", "yearlyIncome"], ["id", "title", "description", "value", "maxOwned"]);
+      const asset = object(entry, path, ["id", "title", "description", "value", "maxOwned", "yearlyIncome", "initialRange"], ["id", "title", "description", "value"]);
       string(asset.title, `${path}.title`, 300);
       string(asset.description, `${path}.description`);
       const value = integer(asset.value, `${path}.value`, 0, 1_000_000_000);
-      const maxOwned = integer(asset.maxOwned, `${path}.maxOwned`, 1, 1_000_000);
+      const maxOwned = Object.hasOwn(asset, "maxOwned") ? integer(asset.maxOwned, `${path}.maxOwned`, 1, 1_000_000) : 0;
       const income = Object.hasOwn(asset, "yearlyIncome") ? integer(asset.yearlyIncome, `${path}.yearlyIncome`, 0, 1_000_000_000) : 0;
-      maximumAssetValue += value * maxOwned;
-      maximumAssetIncome += income * maxOwned;
+      const maximumStart = Object.hasOwn(asset, "initialRange") ? assetRange(asset.initialRange, `${path}.initialRange`).max : 0;
+      if (!economy.uncappedResources && maxOwned > 0 && maximumStart > maxOwned) fail(`${path}.initialRange`, "starting quantity must not exceed the legacy ownership limit");
+      const maximum = economy.uncappedResources ? maximumStart : Math.max(maximumStart, maxOwned);
+      maximumAssetValue += value * maximum;
+      maximumAssetIncome += income * maximum;
     });
     if (maximumAssetValue > moneyLimit || maximumAssetIncome > moneyLimit) fail("world.economy.assets", "maximum combined asset value and annual income must each stay within 1000000000000");
   }
@@ -360,9 +375,14 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   skillIds.forEach(visitSkill);
   if (Object.hasOwn(world, "vocations")) {
     if (!world.economy || !character) fail("world.vocations", "requires economy and characters");
-    validateVocations(world.vocations, skillIds, fail);
+    validateVocations(world.vocations, skillIds, fail, Boolean(world.capabilities), Boolean(world.figurePaths));
   }
 
+  if (Object.hasOwn(world, "capabilities")) {
+    const tree = object(world.capabilities, "world.capabilities", ["version", "rules"]);
+    if (tree.version !== "deep-1" || !world.vocations || !world.demo || !character) fail("world.capabilities", "deep-1 requires vocation, farming and character rules");
+    try { validateCapabilityRules(tree.rules as CapabilityRule[], skillIds); } catch (error) { fail("world.capabilities.rules", error instanceof Error ? error.message : "invalid capability rules"); }
+  }
   const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
   const jobIds = unique(jobs, "world.character.jobs");
   const legacy = Object.hasOwn(world, "legacy") ? object(world.legacy, "world.legacy", ["routes", "achievements"]) : undefined;
@@ -415,7 +435,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     string(achievement.description, `${path}.description`, 1000);
     string(achievement.nameTemplate, `${path}.nameTemplate`, 200);
     if (!["ordinary", "prestige", "ultimate"].includes(achievement.kind as string)) fail(`${path}.kind`, "expected ordinary, prestige or ultimate");
-    const people = array(achievement.people, `${path}.people`, 1, 8);
+    const people = array(achievement.people, `${path}.people`, Object.hasOwn(world, "figurePaths") && (achievement.routeId as string).startsWith("figure-") ? 0 : 1, 8);
     people.forEach((person, j) => string(person, `${path}.people[${j}]`, 100));
     if (new Set(people).size !== people.length) fail(`${path}.people`, "duplicate contact");
     evidence(achievement, path);
@@ -587,6 +607,14 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         object(rule, path, ["type", "condition"]);
         condition(rule.condition, `${path}.condition`, depth + 1);
         break;
+      case "capability": {
+        object(rule, path, ["type", "node", "learned"], ["type", "node"]);
+        const tree = world.capabilities as { rules: { id: string }[] } | undefined;
+        if (!tree) fail(path, "requires capability rules");
+        if (typeof rule.node !== "string" || !tree.rules.some(node => node.id === rule.node)) fail(`${path}.node`, "unknown capability node");
+        if (Object.hasOwn(rule, "learned")) bool(rule.learned, `${path}.learned`);
+        break;
+      }
       case "vocation":
         object(rule, path, ["type", "action", "count"]);
         if (!world.vocations) fail(path, "requires vocation rules");
@@ -742,7 +770,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           if (!world.vocations) fail(location, "requires vocation rules");
           reference(effect.action, `${location}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions)), "vocation action");
           const vocationAction = (world.vocations as VocationDefinition).actions[effect.action as string];
-          if ((vocationAction.kind === "make" || vocationAction.kind === "work") && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
+          if ((vocationAction.kind === "make" || vocationAction.kind === "work" || vocationAction.kind === "capability" && !CAPABILITY_OPERATIONS[vocationAction.operation].minor) && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
           break;
         case "demo":
           object(effect, location, ["type", "effect"]);
@@ -907,7 +935,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (activity.usesYearlyActivity === false && world.vocations && outcomes.some(outcome => ((outcome as DataObject).effects as DataObject[]).some(effect => {
         if (effect.type !== "vocation") return false;
         const action = (world.vocations as VocationDefinition).actions[effect.action as string];
-        return action.kind === "make" || action.kind === "work";
+        return action.kind === "make" || action.kind === "work" || action.kind === "capability" && !CAPABILITY_OPERATIONS[action.operation].minor;
       }))) fail(path, "vocation work must consume the annual activity");
     });
     for (const [key, entry] of Object.entries(skills)) {
@@ -940,7 +968,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const originWeights: number[] = [];
   origins.forEach((entry, i) => {
     const path = `world.origins[${i}]`;
-    const origin = object(entry, path, ["id", "title", "text", "weight", "effects", "sourceIds", "evidence", "statRanges"], ["id", "title", "text", "weight", "effects"]);
+    const origin = object(entry, path, ["id", "title", "text", "weight", "effects", "sourceIds", "evidence", "statRanges", "assetRanges"], ["id", "title", "text", "weight", "effects"]);
     string(origin.title, `${path}.title`, 300);
     string(origin.text, `${path}.text`);
     originWeights.push(weight(origin.weight, `${path}.weight`));
@@ -950,6 +978,23 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         reference(key, `${path}.statRanges.${key}`, statIds, "stat");
         statRange(range, `${path}.statRanges.${key}`, stats[key] as DataObject);
       }
+    }
+    if (Object.hasOwn(origin, "assetRanges")) {
+      requireEconomy(`${path}.assetRanges`);
+      const ranges = object(origin.assetRanges, `${path}.assetRanges`);
+      for (const [key, range] of Object.entries(ranges)) {
+        reference(key, `${path}.assetRanges.${key}`, assetIds, "asset");
+        assetRange(range, `${path}.assetRanges.${key}`);
+      }
+      let maximumValue = 0, maximumIncome = 0;
+      for (const asset of assets as DataObject[]) {
+        const range = ranges[asset.id as string] ?? asset.initialRange;
+        const maximum = range ? (range as DataObject).max as number : 0;
+        if (!economy!.uncappedResources && asset.maxOwned !== undefined && maximum > (asset.maxOwned as number)) fail(`${path}.assetRanges.${asset.id}`, "starting quantity must not exceed the legacy ownership limit");
+        maximumValue += (asset.value as number) * maximum;
+        maximumIncome += ((asset.yearlyIncome as number | undefined) ?? 0) * maximum;
+      }
+      if (maximumValue > moneyLimit || maximumIncome > moneyLimit) fail(`${path}.assetRanges`, "combined starting asset value and annual income must each stay within 1000000000000");
     }
     effects(origin.effects, `${path}.effects`);
     if ((origin.effects as DataObject[]).some(effect => ["cash", "debt", "asset", "loan"].includes(effect.type as string))) fail(`${path}.effects`, "origin money is derived from its starting economy stat; use finance effects in events and activities");
@@ -1213,11 +1258,12 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       return condition.kind === "illness" && (condition.weight as number) > 0 && !Object.hasOwn(condition, "when");
     })) fail(path, "requires an unconditional positive-weight illness fallback");
   }
+  if (Object.hasOwn(world, "figurePaths")) validateFigurePaths(world.figurePaths, world as unknown as WorldPack, condition);
   if (Object.hasOwn(world, "demo")) {
     const character = (world.character ?? {}) as DataObject;
     const legacy = (world.legacy ?? {}) as DataObject;
     const listIds = (list: unknown) => new Set(Array.isArray(list) ? list.map(item => (item as DataObject).id as string) : []);
-    validateDemoDefinition(world.demo, fail, { jobs: listIds(character.jobs), activities: listIds(character.activities),
+    validateDemoDefinition(world.demo, fail, { origins: originIds, jobs: listIds(character.jobs), activities: listIds(character.activities),
       skills: new Set(Object.keys((character.skills ?? {}) as DataObject)), achievements: listIds(legacy.achievements) });
     if (!Object.hasOwn(world, "economy") || !Object.hasOwn(world, "character")) fail("world.demo", "requires an economy and characters");
   }

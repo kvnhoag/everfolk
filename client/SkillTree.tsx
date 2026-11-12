@@ -1,3 +1,5 @@
+import FigurePaths from "./FigurePaths.tsx";
+import CapabilityTree from "./CapabilityTree.tsx";
 import { displayProse } from "./display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
@@ -72,7 +74,7 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
   </div>;
 }
 
-export default function SkillTree({ life, world, activities, onActivity, initialView = "current" }: {
+function LegacySkillTree({ life, world, activities, onActivity, initialView = "current" }: {
   life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void; initialView?: "current" | "wiki";
 }) {
   const [view, setView] = useState(initialView);
@@ -153,4 +155,8 @@ export default function SkillTree({ life, world, activities, onActivity, initial
     <details className="skill-icon-credits"><summary>Icon credits</summary><p>Icons made by Delapouite, Lorc and Willdabeast. Available on <a href="https://game-icons.net" target="_blank" rel="noreferrer">Game-icons.net</a>, under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>. Backgrounds removed; display colors and sizes adjusted.</p></details>
     <p className="skill-tree-footnote">One activity per year. Skills also improve through work and events.{world.character?.skills[selected.id]?.gainCurve && " Gains get smaller at higher proficiency."}</p>
   </div>;
+}
+
+export default function SkillTree(props: { life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id:string)=>void; initialView?: "current"|"wiki" }) {
+  return props.world.capabilities ? <><CapabilityTree {...props} /><FigurePaths {...props} readOnly={props.initialView === "wiki"} /></> : <LegacySkillTree {...props} />;
 }

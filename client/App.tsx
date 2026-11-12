@@ -12,15 +12,16 @@ import { useGame } from "./useGame.ts";
 import PaperScene from "./PaperScene.tsx";
 import CharacterPanel from "./CharacterPanel.tsx";
 import BirthRollPopover from "./BirthRollPopover.tsx";
-import PauseScreen from "./PauseScreen.tsx";
 import MainMenu from "./MainMenu.tsx";
 import DecisionDialog from "./DecisionDialog.tsx";
 import LifeEventFeed from "./LifeEventFeed.tsx";
 import InfluenceMarkerTag from "./InfluenceMarkerTag.tsx";
 import { influenceMarker } from "./influence-marker.ts";
 import LifeOverview from "./LifeOverview.tsx";
-import LifeMoment from "./LifeMoment.tsx";
 import LifeYearRail from "./LifeYearRail.tsx";
+import { buildImportantLifeEvents } from "./important-life-events.ts";
+import { eventNotificationLifeKey, MAX_EVENT_NOTIFICATIONS, NOTIFICATION_DURATION_MS } from "./event-notifications.ts";
+import { readSeenEventNotifications, rememberSeenEventNotifications } from "./event-notification-store.ts";
 import { readEverfolkStorage } from "./brand-storage.ts";
 import HouseholdSummary from "./HouseholdSummary.tsx";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
@@ -168,6 +169,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     const initial = ranked?.initial ?? startFreshFrom;
     return deferInitialDecision && initial?.phase === "choice" ? `${initial.seed}:${initial.age}:${initial.pendingEventId}` : null;
   });
+  const [requestedDecision, setRequestedDecision] = useState<string | null>(null);
   const [loanRequest, setLoanRequest] = useState<LoanRequest | null>(null);
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const loanWarningsSeen = useRef(new Set<string>());
@@ -210,8 +212,15 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     : decisionEvent && isLoanDecision && loanSummary ? { ...decisionEvent, text: `Remaining balance: ${formatMoney(loanSummary.balance, world)}. ${loanSummary.description} ${decisionEvent.text}` }
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
-  const dashboardVisible = game.hasBegun && !menuOpen && !game.resumeScreenOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
-  const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== null && deferredDecision !== decisionKey && !game.autoDecisions);
+  const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
+  const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
+
+  useEffect(() => {
+    if (!game.isPlaying) {
+      setReadingPause(false);
+      setRequestedDecision(null);
+    }
+  }, [game.isPlaying]);
 
   useEffect(() => {
     // Count reading time only on the visible life page. An interruption starts
@@ -231,7 +240,9 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const chronicleEnding = chronicleWorld.endings.find(item => item.id === chronicleLife.endingId);
   const stage = lifeStage(life.age);
   const isDead = life.phase === "ended" && ending?.kind === "death";
-  const [progressFeedback, setProgressFeedback] = useState<ProgressFeedback | null>(null);
+  const [progressFeedback, setProgressFeedback] = useState<(ProgressFeedback & { lifeKey: string }) | null>(null);
+  const progressNotification = useRef({ createdAt: 0, eventCount: 0 });
+  const importantEventCount = useMemo(() => buildImportantLifeEvents(life, world).reduce((count, year) => count + year.events.length, 0), [life, world]);
   const previousProgressLife = useRef(life);
   const [legacyEntries, setLegacyEntries] = useState<LegacyEntry[]>([]);
   const [legacyNotice, setLegacyNotice] = useState("");
@@ -251,12 +262,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   useEffect(() => {
     // Health and pending decisions keep priority. The clock waits as soon as
     // this reminder opens, including when Auto mode is enabled.
-    if (!repaymentWarning || readingPause || !game.hasBegun || menuOpen || game.resumeScreenOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest || life.phase !== "ready") return;
+    if (!repaymentWarning || readingPause || !game.isPlaying || !game.hasBegun || menuOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest || life.phase !== "ready") return;
     const key = repaymentWarning.key;
     if (loanWarningsSeen.current.has(key)) return;
     try { if (readEverfolkStorage(window.sessionStorage, `everfolk:loan-warning:${key}`) === "seen") return; } catch { /* An in-memory reminder still works. */ }
     setLoanWarningOpen(true);
-  }, [repaymentWarning?.key, readingPause, game.hasBegun, menuOpen, game.resumeScreenOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, loanRequest, life.phase]);
+  }, [repaymentWarning?.key, readingPause, game.isPlaying, game.hasBegun, menuOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, loanRequest, life.phase]);
 
   function dismissLoanWarning() {
     if (repaymentWarning) {
@@ -269,10 +280,34 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   useEffect(() => {
     const previous = previousProgressLife.current;
     previousProgressLife.current = life;
-    if (previous.worldFingerprint !== life.worldFingerprint || previous.seed !== life.seed) { setProgressFeedback(null); return; }
+    if (previous.worldFingerprint !== life.worldFingerprint || previous.seed !== life.seed || life.commands.length < previous.commands.length) { setProgressFeedback(null); return; }
     const feedback = choiceProgressFeedback(previous, life, world);
-    if (feedback) setProgressFeedback(feedback);
-  }, [life, world]);
+    if (feedback) {
+      const lifeKey = eventNotificationLifeKey(life);
+      const seen = new Set(readSeenEventNotifications(lifeKey));
+      const accomplishments = feedback.accomplishments.filter(record => !seen.has(`accomplishment:${record.id}`));
+      progressNotification.current = { createdAt: Date.now(), eventCount: importantEventCount };
+      setProgressFeedback({ ...feedback, accomplishments, lifeKey });
+    }
+  }, [life, world, importantEventCount]);
+
+  useEffect(() => {
+    if (progressFeedback?.accomplishments.length) {
+      rememberSeenEventNotifications(progressFeedback.lifeKey, progressFeedback.accomplishments.map(record => `accomplishment:${record.id}`));
+    }
+  }, [progressFeedback]);
+
+  useEffect(() => {
+    if (!progressFeedback) return;
+    const { createdAt, eventCount } = progressNotification.current;
+    const remainingMs = NOTIFICATION_DURATION_MS - (Date.now() - createdAt);
+    if (importantEventCount - eventCount >= MAX_EVENT_NOTIFICATIONS || remainingMs <= 0) {
+      setProgressFeedback(null);
+      return;
+    }
+    const timer = window.setTimeout(() => setProgressFeedback(null), remainingMs);
+    return () => window.clearTimeout(timer);
+  }, [importantEventCount, progressFeedback]);
 
   useEffect(() => {
     try {
@@ -299,10 +334,10 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (restartOpen || panel && (menuOpen || !game.resumeScreenOpen)) {
+    if (restartOpen || panel) {
       if (dialog && !dialog.open) dialog.showModal();
     } else if (dialog?.open) dialog.close();
-  }, [panel, restartOpen, game.resumeScreenOpen, menuOpen]);
+  }, [panel, restartOpen]);
 
   useEffect(() => {
     const identity = `${life.worldFingerprint}:${life.seed}`;
@@ -310,16 +345,18 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     const firstVisit = menuLifeRef.current === null;
     menuLifeRef.current = identity;
     setReadingPause(false);
+    if (!firstVisit) setDeferredDecision(null);
+    setRequestedDecision(null);
     // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
     setBirthPopoverOpen(!ranked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
     setMenuOpen(!ranked);
   }, [life.worldFingerprint, life.seed]);
 
   useEffect(() => {
-    if (game.hasBegun && !menuOpen && !game.resumeScreenOpen && !panel && !restartOpen && !birthPopoverOpen && (isBirthSituation || life.phase === "ended")) {
+    if (game.hasBegun && !menuOpen && !panel && !restartOpen && !birthPopoverOpen && (isBirthSituation || life.phase === "ended")) {
       sceneRef.current?.focus({ preventScroll: true });
     }
-  }, [game.hasBegun, menuOpen, game.resumeScreenOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen]);
+  }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen]);
 
   function openMainMenu() {
     game.pauseLife();
@@ -331,12 +368,12 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   function continueFromMenu() {
     if (!game.hasBegun) { setBirthPopoverOpen(true); return; }
     setMenuOpen(false);
-    if (life.phase !== "ended") continueWithReadingPause();
+    if (life.phase !== "ended") resumeLife();
   }
 
-  function continueWithReadingPause() {
+  function resumeLife() {
     if (life.phase === "ended" || document.hidden) return;
-    setReadingPause(true);
+    setReadingPause(false);
     game.continueLife();
   }
 
@@ -430,8 +467,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
 
   return <>
     {menuOpen && <MainMenu life={life} world={world} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
-    {!menuOpen && game.resumeScreenOpen && <PauseScreen life={life} world={world} onContinue={continueWithReadingPause} onReborn={() => { setPanel(null); setRestartOpen(true); }} onMainMenu={openMainMenu} />}
-    <div className="everfolk-game" hidden={game.resumeScreenOpen || menuOpen}>
+    <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
       <a className="brand" href="#" aria-label="Everfolk main menu" onClick={e => { e.preventDefault(); openMainMenu(); }}>
@@ -468,8 +504,8 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         <div className="life-session-age">Age <strong>{life.age}</strong></div><div className="life-session-year">{formatYear(life.year)} · {supportsLocationMap(world) ? <button type="button" className="location-map-open" aria-label={`Open location map: ${place}, Egypt`} onClick={() => setPanel("map")}><Icon name="pin" size={13} />{place}</button> : place}</div>
         <div className="playback-bar life-clock">
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
-          <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else continueWithReadingPause(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
-          <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
+          <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else resumeLife(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
+          <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
           <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection("children"); setPanel("character"); }}>Family &amp; life</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>Spend</button></div>
           <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options"><button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("children"); setPanel("character"); }}>Family &amp; life</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>Spend</button>{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
           {life.phase === "ready" && <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>}
@@ -478,7 +514,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
 
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
-      {dashboardVisible && <EventNotificationStack life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
+      {game.hasBegun && <EventNotificationStack visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
 
       <div className={`life-layout ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">

@@ -1,9 +1,12 @@
+import type { FigurePathDefinition } from "./figures/types.ts";
+import type { CapabilityRule, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
+  | { type: "capability"; node: string; learned?: boolean }
   | { type: "vocation"; action: string; count: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
@@ -121,6 +124,8 @@ export interface Origin extends EvidenceMetadata {
   effects: Effect[];
   /** Partial starting-range overrides, drawn before this origin's effects. */
   statRanges?: Record<string, StatRange>;
+  /** Inclusive starting possession ranges, overriding the asset defaults. */
+  assetRanges?: Record<string, StatRange>;
 }
 
 export interface OutcomeWeightModifier {
@@ -365,6 +370,8 @@ export interface EconomyDefinition {
   sourceIds?: string[];
   /** Settle outstanding debt from remaining cash after regular yearly costs. */
   autoDebtRepayment?: boolean;
+  /** New worlds can grow resources and wealth beyond legacy gameplay limits. */
+  uncappedResources?: boolean;
   /** An explicitly accepted risky contract, distinct from unpaid household bills. */
   moneylender?: {
     title: string;
@@ -378,7 +385,7 @@ export interface EconomyDefinition {
     maxExtensions: number;
     events: { due: string; threat: string; attack: string };
   };
-  assets: { id: string; title: string; description: string; value: number; maxOwned: number; yearlyIncome?: number }[];
+  assets: { id: string; title: string; description: string; value: number; maxOwned?: number; yearlyIncome?: number; initialRange?: StatRange }[];
 }
 
 export interface EconomyState {
@@ -503,6 +510,9 @@ export interface WorldPack {
   /** Opt-in Grain and Service economy; older packs omit it and keep their rules. */
   demo?: DemoDefinition;
   vocations?: VocationDefinition;
+  /** Immutable deep-tree rules for new free-play revisions only. */
+  capabilities?: { version: "deep-1"; rules: CapabilityRule[] };
+  figurePaths?: FigurePathDefinition[];
   endings: Ending[];
   /** Used at maxAge if no other ending applies. */
   defaultEnding: string;
@@ -561,6 +571,7 @@ export interface LifeState {
   /** Only in demo worlds. */
   demo?: DemoState;
   vocations?: VocationState;
+  capabilities?: CapabilityState;
   journal: JournalEntry[];
   commands: Command[];
 }

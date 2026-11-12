@@ -35,7 +35,7 @@ test("people of the city are faience, famous figures are gold, each with the act
   assert.equal(figure.kind, "figure");
   assert.equal(figure.material, "gold");
   assert.equal(figure.figureId, "alexander");
-  assert.equal(figure.who, "Alexander");
+  assert.equal(figure.who, "Alexander the Great");
   assert.equal(figure.actionLabel, "Levy the city");
   assert.equal(figure.tokenId, "1");
 });

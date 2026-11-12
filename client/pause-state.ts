@@ -1,7 +1,6 @@
 import type { LifeState } from "../src/types.ts";
 
 export interface PauseState {
-  screenOpen: boolean;
   playing: boolean;
 }
 
@@ -11,31 +10,31 @@ export interface PauseContext {
 }
 
 export type PauseEvent =
-  | { type: "show" | "continue" | "fresh" | "ended" }
+  | { type: "pause" | "continue" | "fresh" | "ended" }
   | { type: "playback"; playing: boolean };
 
 /** Restoring a living character never resumes simulation before the player agrees. */
-export function initialPauseState(context: PauseContext): PauseState {
-  return { screenOpen: context.hasBegun && context.phase !== "ended", playing: false };
+export function initialPauseState(): PauseState {
+  return { playing: false };
 }
 
 /** This changes presentation only; no life snapshot or accepted command is touched. */
 export function updatePauseState(state: PauseState, event: PauseEvent, context: PauseContext): PauseState {
-  if (event.type === "fresh" || event.type === "ended" || context.phase === "ended") return { screenOpen: false, playing: false };
-  if (event.type === "show") return initialPauseState(context);
-  if (event.type === "continue") return context.hasBegun ? { screenOpen: false, playing: true } : state;
-  if (event.type === "playback") return { screenOpen: state.screenOpen, playing: context.hasBegun && !state.screenOpen && event.playing };
+  if (event.type === "fresh" || event.type === "ended" || event.type === "pause" || !context.hasBegun || context.phase === "ended") return initialPauseState();
+  if (event.type === "continue") return { playing: true };
+  if (event.type === "playback") return { playing: event.playing };
   return state;
 }
 
-export function canUseLifeCommands(state: PauseState, context: PauseContext): boolean {
-  return context.hasBegun && !state.screenOpen && context.phase !== "ended";
+/** Pausing stops automatic time, while explicit player actions remain available. */
+export function canUseLifeCommands(context: PauseContext): boolean {
+  return context.hasBegun && context.phase !== "ended";
 }
 
 export function canRunLifeClock(state: PauseState, context: PauseContext, visible: boolean, overlayOpen: boolean): boolean {
-  return canUseLifeCommands(state, context) && state.playing && visible && !overlayOpen && context.phase === "ready";
+  return canUseLifeCommands(context) && state.playing && visible && !overlayOpen && context.phase === "ready";
 }
 
 export function canRunAutomaticDecision(state: PauseState, context: PauseContext, visible: boolean, overlayOpen: boolean, enabled: boolean): boolean {
-  return canUseLifeCommands(state, context) && state.playing && visible && !overlayOpen && enabled && context.phase === "choice";
+  return canUseLifeCommands(context) && state.playing && visible && !overlayOpen && enabled && context.phase === "choice";
 }

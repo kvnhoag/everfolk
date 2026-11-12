@@ -1,6 +1,7 @@
 import type { Condition, Effect, LifeEvent, WorldPack } from "../types.ts";
 import type { VocationAction, VocationDefinition } from "./types.ts";
 import design from "../../design/skill-tree/catalog.json" with { type: "json" };
+import { configureStartingResources } from "./starting-resources.ts";
 
 /** A new free-play revision. Contract-backed lives retain their deployed demo revision. */
 import { LIVES_WORLD_VERSION } from "./ids.ts";
@@ -13,7 +14,8 @@ const vocation = (action: string): Effect => ({ type: "vocation", action });
 
 export function buildVocationWorld(base: WorldPack): WorldPack {
   const world = structuredClone(base), character = world.character!;
-  world.version = LIVES_WORLD_VERSION;
+  world.version = "alexandria-lives-2";
+  configureStartingResources(world);
   world.title = "Alexandria — Handmade work and public life";
   world.description = "Grow up in a farming household, buy materials and make useful things, or pursue inquiry and public service. Work changes your skills, health, knowledge, bonds and household economy.";
   const definition: VocationDefinition = { materials: {}, recipes: {}, actions: {}, accounts: { merchant: 20000, workshop: 6000, school: 4000, council: 4000 }, demand: {} };

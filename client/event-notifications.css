@@ -121,3 +121,14 @@
     margin:0 0 10px;
   }
 }
+
+/* Completed event panel */
+.event-notifications{display:grid;gap:16px}
+.event-notification{min-width:0}
+.event-notification+.event-notification{border-top:1px solid var(--line,#cdbb95);padding-top:16px}
+.event-notification .life-moment-heading{align-items:flex-start;gap:10px;margin-bottom:10px}
+.event-notification .life-moment-heading h2{flex:1;min-width:0;overflow-wrap:anywhere}
+.event-notification-dismiss{display:grid;place-items:center;flex-shrink:0;min-width:30px;min-height:30px;padding:6px;background:transparent;color:var(--ink,#405443)}
+.event-notification-dismiss:hover{background:#e5d0a2}
+.event-notification-dismiss:focus-visible{outline:2px solid #927a46;outline-offset:2px}
+.event-notification .life-moment-copy{overflow-wrap:anywhere}

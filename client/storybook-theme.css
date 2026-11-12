@@ -176,13 +176,6 @@ dialog.birth-roll-popover .birth-roll-card{background:#fffaef;border:1px solid #
 dialog.birth-roll-popover .birth-popover-continue{background:var(--ef-blue);border:1px solid #24464b;border-radius:2px;box-shadow:0 3px 0 #b9a57d;color:#fff4dc}
 dialog.birth-roll-popover .birth-popover-continue:hover:not(:disabled){background:#315a5e;border-color:#315a5e}
 dialog.birth-roll-popover .birth-popover-reborn{background:#f5e9d2;border:1px solid #bca47b;border-radius:2px;box-shadow:0 2px 0 #d7c29e;color:var(--ef-seal)}
-.pause-screen{background:transparent}
-.pause-brand{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ef-blue)}
-.pause-brand span{color:#7b6c50;margin-top:0}
-.pause-card{border:1px solid #b19669;border-radius:3px;box-shadow:0 0 0 5px #e7d8b9,0 0 0 6px #c6ab7d,0 20px 50px #493c2420;background:#fcf6e8}
-.pause-content h1{color:var(--ef-blue)}
-.pause-content>p:not(.pause-eyebrow){color:#6f6a55}
-.pause-actions>button{border-radius:2px}
 .everfolk-game .site-footer{border-color:#c4ad83;color:#7b715a}
 .everfolk-game .site-footer>span{gap:8px;color:#536459}
 .everfolk-game .site-footer button{color:#776b52}

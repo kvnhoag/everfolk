@@ -65,7 +65,7 @@ Money never buys a better outcome: the fee is the same for every life, and the r
 
 ## 5. Figures
 
-Four famous figures can be minted: **Euclid**, **Aristotle**, **Cleomenes** and **Alexander**. Each has requirements on the verified life (career, skills, stats, an accomplishment; Alexander also needs a royal birth) and two actions its owner switches between (for example Euclid's *Open a school* or *Keep to the Museum*; Cleomenes' *Corner the grain* or *Fill the granaries*). Requirements are calibrated by simulation: a life that deliberately follows a figure's path qualifies in about 20–30% of runs, an unfocused life essentially never. Ordinary lives become NPCs in six career groups, each with two actions of its own.
+Four famous figures can be minted: **Euclid**, **Aristotle**, **Cleomenes** and **Alexander**. Each has requirements on the verified life (career, skills, stats, an accomplishment; Alexander also needs a royal birth) and two actions its owner switches between (for example Euclid's *Open a school* or *Check the proofs*; Cleomenes' *Corner the grain* or *Release grain reserves*). Requirements are calibrated by simulation: a life that deliberately follows a figure's path qualifies in about 20–30% of runs, an unfocused life essentially never. Ordinary lives become NPCs in six career groups, each with two actions of its own.
 
 ## 6. Evidence
 

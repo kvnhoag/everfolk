@@ -94,8 +94,8 @@ export default function WeaveLab({ initialPreset = "granary" }: { initialPreset?
     const state = prepared.session.state;
     const tokenId = prepared.granary.source.minted.token_id;
     const cf = withoutGranary(prepared.world, state, tokenId);
-    const withView = householdView(prepared.world.demo!, state as LifeStateWithDemo);
-    const withoutView = householdView(prepared.world.demo!, cf as LifeStateWithDemo);
+    const withView = householdView(prepared.world.demo!, state as LifeStateWithDemo, prepared.world);
+    const withoutView = householdView(prepared.world.demo!, cf as LifeStateWithDemo, prepared.world);
     return {
       withDeed: {
         label: `With the earlier granary (${withView.grain} grain in store, ${state.economy?.cash ?? 0} dr cash)`,

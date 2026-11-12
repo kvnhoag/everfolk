@@ -1,2 +1,2 @@
 /** New free-play births only; deployed ranked versions remain unchanged. */
-export const LIVES_WORLD_VERSION = "alexandria-lives-1";
+export const LIVES_WORLD_VERSION = "alexandria-lives-4";

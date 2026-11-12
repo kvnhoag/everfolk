@@ -27,8 +27,9 @@ function oneOf(value: unknown, allowed: readonly string[], path: string, fail: F
 }
 
 /** Shape check of the config. Tracks extend the checks for their own section. */
-export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: Set<string>; activities: Set<string>; skills: Set<string>; achievements: Set<string> }): void {
-  const def = record(value, "world.demo", fail, ["timeline", "household", "market", "service", "works", "agents", "availability"]);
+export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: Set<string>; activities: Set<string>; skills: Set<string>; achievements: Set<string>; origins?: Set<string> }): void {
+  const sections = ["timeline", "household", "market", "service", "works", "agents", "availability"];
+  const def = record(value, "world.demo", fail, [...sections, "startingResources"], sections);
   for (const section of ["timeline", "household", "market", "service", "works", "agents"]) record(def[section], `world.demo.${section}`, fail, Object.keys(def[section] as Data ?? {}));
   const availability = record(def.availability, "world.demo.availability", fail,
     ["playableJobs", "unavailableJobs", "unavailableActivities", "unavailableSkills", "unavailableAccomplishments", "futurePaths"]);
@@ -40,6 +41,37 @@ export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: 
   }
   const playable = new Set(availability.playableJobs as string[]);
   (availability.unavailableJobs as string[]).forEach((id, i) => { if (playable.has(id)) fail(`world.demo.availability.unavailableJobs[${i}]`, "a job cannot be playable and unavailable"); });
+  if (Object.hasOwn(def, "startingResources")) {
+    const at = "world.demo.startingResources", limit = 1_000_000_000_000;
+    const config = record(def.startingResources, at, fail, ["defaults", "origins"], ["defaults"]);
+    const rangeMap = (value: unknown, path: string, required: readonly string[]) => {
+      const ranges = record(value, path, fail, TRADE_ITEMS, required);
+      for (const [item, value] of Object.entries(ranges)) {
+        const range = record(value, `${path}.${item}`, fail, ["min", "max"]);
+        const min = whole(range.min, `${path}.${item}.min`, fail, 0, limit);
+        const max = whole(range.max, `${path}.${item}.max`, fail, 0, limit);
+        if (min > max) fail(`${path}.${item}`, "minimum must not exceed maximum");
+      }
+      return ranges;
+    };
+    const defaults = rangeMap(config.defaults, `${at}.defaults`, TRADE_ITEMS);
+    const market = def.market as Data;
+    const prices = record(market.basePrice, "world.demo.market.basePrice", fail, TRADE_ITEMS);
+    for (const item of TRADE_ITEMS) whole(prices[item], `world.demo.market.basePrice.${item}`, fail, 1, limit);
+    const safeValue = (ranges: Data, path: string) => {
+      const maximum = TRADE_ITEMS.reduce((sum, item) => sum + (((ranges[item] ?? defaults[item]) as Data).max as number) * (prices[item] as number), 0);
+      if (!Number.isSafeInteger(maximum) || maximum > limit) fail(path, "combined starting resource market value must stay within 1000000000000");
+    };
+    safeValue(defaults, `${at}.defaults`);
+    if (Object.hasOwn(config, "origins")) {
+      const origins = record(config.origins, `${at}.origins`, fail, Object.keys(config.origins as Data ?? {}));
+      for (const [origin, value] of Object.entries(origins)) {
+        if (ids.origins && !ids.origins.has(origin)) fail(`${at}.origins.${origin}`, "unknown origin");
+        const ranges = rangeMap(value, `${at}.origins.${origin}`, []);
+        safeValue(ranges, `${at}.origins.${origin}`);
+      }
+    }
+  }
 }
 
 /** `allowGrainGain`: only influence entries (NFT deeds) may add grain to the store. */

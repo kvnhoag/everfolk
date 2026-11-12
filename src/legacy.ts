@@ -1,3 +1,4 @@
+import { getFigurePathProgress } from "./figures/progress.ts";
 import type { AccomplishmentRecord, LegacyRouteProgress, LifeState, WorldPack } from "./types.ts";
 
 /** Reading progression never changes a life or consumes its random stream. */
@@ -39,10 +40,15 @@ export function awardAccomplishment(
   const definition = world.legacy?.achievements.find(item => item.id === achievementId);
   if (!definition || !state.accomplishments) throw new Error("Accomplishment requires a legacy-enabled life.");
   if (state.accomplishments.some(record => record.achievementId === achievementId)) return undefined;
+  const figurePath = world.figurePaths?.find(path => path.stages.some(stage => stage.achievementId === achievementId) || path.capstone.achievementId === achievementId || path.promotion?.achievementId === achievementId);
+  const figureStage = figurePath?.stages.find(stage => stage.achievementId === achievementId);
+  const figureProgress = figurePath ? getFigurePathProgress(world, figurePath, state) : undefined;
+  const figureName = figureStage ? figureProgress?.encounterMode === "tradition" ? figureStage.traditionTitle : figureStage.title : undefined;
+  const figureTitle = figureStage ? `${figureStage.rank} contribution to ${figurePath!.name}` : figurePath?.promotion?.achievementId === achievementId ? `Legendary figure outcome${figurePath.promotion.alternateHistory ? " · Alternate history" : ""}` : figurePath ? `${figurePath.baseRank} figure title` : undefined;
   const record: AccomplishmentRecord = {
     id: `${achievementId}:${state.age}`, achievementId, routeId: definition.routeId,
-    title: definition.title, description: definition.description, kind: definition.kind,
-    name: legacyText(world, state, definition.nameTemplate), age: state.age, year: state.year,
+    title: figureTitle ?? definition.title, description: definition.description, kind: definition.kind,
+    name: figureName ?? legacyText(world, state, definition.nameTemplate), age: state.age, year: state.year,
     sourceId, outcomeId, people: [...definition.people],
   };
   state.accomplishments.push(record);

@@ -1,3 +1,4 @@
+import { syncCapabilities, recordFarmSettlement, recordAcceptedTrade, initialCapabilities, protectedGrain } from "./capabilities/runtime.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
@@ -8,7 +9,7 @@ import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically, getNetWorth } from "./economy.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically, getNetWorth, syncEconomyStat } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
 import { applyStatDelta, skillEffectDelta } from "./progression.ts";
@@ -94,6 +95,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
+    ...(state.capabilities ? { capabilities: structuredClone(state.capabilities) } : {}),
     ...(state.demo ? { demo: structuredClone(state.demo) } : {}),
     ...(state.character ? { character: {
       ...state.character, skills: { ...state.character.skills },
@@ -266,10 +268,14 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           if (effect.job && isUnavailable(world.demo, "job", effect.job)) throw new Error("Character effect is unavailable: Not available in this demo.");
           state.character!.jobId = effect.job; break;
         case "vocation":
-          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action)); break;
+          journal(state, "activity", `vocation-${effect.action}`, applyVocation(world, state, effect.action));
+          if (world.demo?.startingResources) syncEconomyStat(world, state);
+          break;
         case "demo":
           if (!world.demo || !state.demo) throw new Error("Demo effects need a demo world.");
-          applyDemoEffect(demoCtx(state), effect.effect); break;
+          applyDemoEffect(demoCtx(state), effect.effect);
+          if (world.demo.startingResources) syncEconomyStat(world, state);
+          break;
         case "condition": addHealthCondition(world, state, effect.condition, decisionContext, healthHooks(state)); break;
         case "care": provideHealthCare(world, state, effect.amount); break;
         case "closeness": applyCloseness(world, state, effect); break;
@@ -316,6 +322,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       }
     }
     syncCharacterFlags(state);
+    syncCapabilities(world, state);
     if (world.health && state.phase !== "ended" && state.health?.conditions.length === 0 && state.stats[world.health.stat] <= world.health.criticalHealth) {
       addHealthCondition(world, state, world.health.declineCondition, "Your health has fallen to a critical level.", healthHooks(state));
     }
@@ -645,6 +652,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
       ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
+      ...(world.capabilities ? { capabilities: initialCapabilities() } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
       ...(world.knowledge ? { knowledge: initialKnowledge(world)! } : {}),
@@ -661,8 +669,18 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
-    if (world.economy) state.economy = initialEconomy(world, state)!;
-    if (world.demo) initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
+    if (world.economy) {
+      state.economy = initialEconomy(world, state)!;
+      for (const asset of world.economy.assets) {
+        const range = origin.assetRanges?.[asset.id] ?? asset.initialRange;
+        if (range) state.economy.assets[asset.id] = startingStat(range.min, range.max, state);
+      }
+      if (world.economy.uncappedResources || world.economy.assets.some(asset => origin.assetRanges?.[asset.id] || asset.initialRange)) syncEconomyStat(world, state);
+    }
+    if (world.demo) {
+      initialDemo(world, state, effects => apply(state, effects), (id, text) => journal(state, "event", id, text));
+      if (world.demo.startingResources) syncEconomyStat(world, state);
+    }
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
@@ -710,7 +728,13 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // Money-enabled years settle income before costs, avoiding bridge debt
     // created only by batching a whole year. Legacy worlds keep exact ordering.
     if (world.economy) annualIncome();
-    if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => settleDemoYear(demoCtx(next)));
+    if (world.demo && next.phase !== "ended") {
+      const grainBefore = next.demo!.household.grain, debtBefore = next.economy?.debt ?? 0;
+      recorded(next, () => next.journal.length - 1, () => settleDemoYear(demoCtx(next)));
+      recordFarmSettlement(world, next, grainBefore, debtBefore);
+      syncCapabilities(world, next);
+      if (world.demo.startingResources) syncEconomyStat(world, next);
+    }
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
@@ -721,7 +745,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
-    if (world.demo && next.phase !== "ended") openDemoYear(demoCtx(next));
+    if (world.demo && next.phase !== "ended") {
+      openDemoYear(demoCtx(next));
+      if (world.demo.startingResources) syncEconomyStat(world, next);
+    }
     checkEndings(next);
     resolveEvents(next, true);
   }
@@ -871,7 +898,9 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     switch (command.type) {
       case "trade":
         if (next.phase !== "ready") throw new Error("Resolve the current decision first.");
-        executeTrade(ctx, command); break;
+        if (world.capabilities && command.side === "sell" && command.item === "grain" && next.demo.household.grain - command.quantity < protectedGrain(world,next) && next.vocations?.capabilityWork?.reserveOverrideAge !== next.age) throw new Error("This sale would use protected food or seed. Explicitly authorise a reserve sale first.");
+        { const beforeCash = next.economy?.cash ?? 0; executeTrade(ctx, command); recordAcceptedTrade(world, next, command, beforeCash); }
+        break;
       case "plan": applyPlan(ctx, command); break;
       case "assign-agents":
         if (next.age !== 0 || next.commands.some(c => c.type === "advance")) throw new Error("Agents are assigned before the first year.");
@@ -880,6 +909,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       case "agent":
         applyAgentCommand(ctx, command, inner => runAsAgent(next, inner.command)); break;
     }
+    if (world.demo.startingResources) syncEconomyStat(world, next);
   }
 
   function demo(state: LifeState, command: DemoCommand): LifeState {

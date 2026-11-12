@@ -1,6 +1,7 @@
 import { getNetWorth } from "../src/economy.ts";
-import { applyStatDelta } from "../src/progression.ts";
-import type { Effect, LifeState, WorldPack } from "../src/types.ts";
+import type { LifeState, WorldPack } from "../src/types.ts";
+import { getSocietyWealthData } from "./society-wealth-data.ts";
+import type { SocietyWealthGroup, UniformRoll } from "./society-wealth-data.ts";
 
 export interface WealthComparison {
   netWorth: number;
@@ -9,14 +10,66 @@ export interface WealthComparison {
   medianWealth: number;
 }
 
-interface ReferenceHouseholds {
-  weight: number;
-  count: number;
-  wealthAt: (index: number) => number;
+/** Sum floor((a * i + b) / m), using whole-number arithmetic even for wide rolls. */
+function floorSum(n: bigint, m: bigint, a: bigint, b: bigint): bigint {
+  let sum = 0n;
+  while (true) {
+    sum += (n - 1n) * n * (a / m) / 2n + n * (b / m);
+    a %= m; b %= m;
+    const top = a * n + b;
+    if (top < m) return sum;
+    n = top / m; b = top % m;
+    [m, a] = [a, m];
+  }
+}
+
+/** Exact CDF of two independent, inclusive whole-number rolls. */
+function pairShare(a: UniformRoll, b: UniformRoll, ceiling: number): number {
+  if (ceiling < 0) return 0;
+  if (ceiling >= (a.count - 1) * a.step + (b.count - 1) * b.step) return 1;
+  if (!a.step) return Math.max(0, Math.min(b.count, Math.floor(ceiling / b.step) + 1)) / b.count;
+  if (!b.step) return Math.max(0, Math.min(a.count, Math.floor(ceiling / a.step) + 1)) / a.count;
+  const eligible = Math.min(a.count, Math.floor(ceiling / a.step) + 1);
+  const full = Math.max(0, Math.min(eligible, Math.floor((ceiling - (b.count - 1) * b.step) / a.step) + 1));
+  const remaining = eligible - full;
+  const pairs = BigInt(full) * BigInt(b.count) + BigInt(remaining) + floorSum(
+    BigInt(remaining), BigInt(b.step), BigInt(a.step), BigInt(ceiling - (eligible - 1) * a.step));
+  return Number(pairs) / (a.count * b.count);
+}
+
+function rollShare(rolls: UniformRoll[], ceiling: number): number {
+  if (ceiling < 0) return 0;
+  if (ceiling >= rolls.reduce((sum, roll) => sum + (roll.count - 1) * roll.step, 0)) return 1;
+  if (!rolls.length) return 1;
+  if (rolls.length === 1) return Math.min(rolls[0].count, Math.floor(ceiling / rolls[0].step) + 1) / rolls[0].count;
+  if (rolls.length === 2) return pairShare(rolls[0], rolls[1], ceiling);
+  const [roll, ...rest] = rolls;
+  const eligible = Math.min(roll.count, Math.floor(ceiling / roll.step) + 1);
+  let share = 0;
+  for (let index = 0; index < eligible; index++) share += rollShare(rest, ceiling - index * roll.step);
+  return share / roll.count;
+}
+
+/** Cash clamps can create repeated endpoints; the middle remains a uniform roll. */
+function householdShare(group: SocietyWealthGroup, wealth: number, step: number, includeEqual = false): number {
+  if (!group.resources.length) return countBelow(group, wealth, includeEqual) / group.count;
+  const first = group.wealthAt(0), last = group.wealthAt(group.count - 1);
+  const prefix = first === last ? group.count : countBelow(group, first, true);
+  const suffixStart = first === last ? group.count : countBelow(group, last);
+  const cash = [{ first, step: 0, count: 1, weight: prefix / group.count }];
+  if (suffixStart > prefix) cash.push({ first: group.wealthAt(prefix), step, count: suffixStart - prefix, weight: (suffixStart - prefix) / group.count });
+  if (suffixStart < group.count) cash.push({ first: last, step: 0, count: 1, weight: (group.count - suffixStart) / group.count });
+  return cash.reduce((share, segment) => {
+    const components = [segment, ...group.resources];
+    const base = components.reduce((sum, roll) => sum + roll.first, 0);
+    const rolls = components.filter(roll => roll.step > 0 && roll.count > 1).sort((a, b) => a.count - b.count);
+    const ceiling = Math.ceil(wealth - base) - 1 + (includeEqual && Number.isInteger(wealth - base) ? 1 : 0);
+    return share + segment.weight * rollShare(rolls, ceiling);
+  }, 0);
 }
 
 /** Count a monotone origin distribution without enumerating its starting range. */
-function countBelow(group: ReferenceHouseholds, wealth: number, includeEqual = false): number {
+function countBelow(group: SocietyWealthGroup, wealth: number, includeEqual = false): number {
   let low = 0, high = group.count;
   while (low < high) {
     const middle = low + Math.floor((high - low) / 2);
@@ -28,48 +81,28 @@ function countBelow(group: ReferenceHouseholds, wealth: number, includeEqual = f
 }
 
 /**
- * Compare current net worth with the pack's authored starting-household mixture.
- * Origin weights and inclusive, uniform starting rolls define this fixed game
- * baseline; it is not a measured historical or age-adjusted population.
+ * Compare current net worth with the retrieved society wealth population.
+ * Retrieval currently returns authored starting households as mock data;
+ * it is not a measured historical or age-adjusted population.
  * Reads only: no sampling, extra engine starts, or simulation RNG use.
  */
 export function getWealthComparison(world: WorldPack, life: LifeState): WealthComparison | null {
   const economy = world.economy;
   if (!economy || !life.economy) return null;
-  const definition = world.stats[economy.stat];
-  const maximumWeight = Math.max(...world.origins.map(origin => origin.weight));
-  const groups: ReferenceHouseholds[] = world.origins.map(origin => {
-    const range = origin.statRanges?.[economy.stat] ?? definition.initialRange;
-    const first = range?.min ?? definition.initial;
-    const count = range ? range.max - range.min + 1 : 1;
-    const effects: Extract<Effect, { type: "stat" }>[] = [];
-    for (const effect of origin.effects) {
-      if (effect.type === "end") break;
-      if (effect.type === "stat" && effect.stat === economy.stat) effects.push(effect);
-    }
-    return {
-      weight: origin.weight / maximumWeight,
-      count,
-      wealthAt(index) {
-        let value = first + index;
-        for (const effect of effects) {
-          value = applyStatDelta(definition, value, effect.delta);
-        }
-        return Math.round(value * economy.unitsPerPoint);
-      },
-    };
-  });
+  const groups = getSocietyWealthData(world);
   const totalWeight = groups.reduce((sum, group) => sum + group.weight, 0);
   const weightBelow = (wealth: number, includeEqual = false) => groups.reduce((sum, group) =>
-    sum + group.weight * (countBelow(group, wealth, includeEqual) / group.count), 0);
+    sum + group.weight * householdShare(group, wealth, economy.unitsPerPoint, includeEqual), 0);
   const netWorth = getNetWorth(world, life);
-  let low = Math.min(...groups.map(group => group.wealthAt(0)));
-  let high = Math.max(...groups.map(group => group.wealthAt(group.count - 1)));
+  let low = Math.min(...groups.map(group => group.wealthAt(0) + group.resources.reduce((sum, roll) => sum + roll.first, 0)));
+  let high = Math.max(...groups.map(group => group.wealthAt(group.count - 1) + group.resources.reduce((sum, roll) => sum + roll.first + (roll.count - 1) * roll.step, 0)));
   // Currency amounts are whole numbers. The first amount reaching half the
   // weighted population is a support value, including when clamps create ties.
   while (low < high) {
     const middle = low + Math.floor((high - low) / 2);
-    if (weightBelow(middle, true) >= totalWeight / 2) high = middle;
+    // Summing independent roll probabilities can round a true half a few ulps
+    // downward. Keep the lower median at that boundary.
+    if (weightBelow(middle, true) / totalWeight >= 0.5 - Number.EPSILON) high = middle;
     else low = middle + 1;
   }
   return { netWorth, percentile: Math.max(0, Math.min(100, weightBelow(netWorth) / totalWeight * 100)), medianWealth: low };

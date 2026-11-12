@@ -34,6 +34,7 @@ import proceduralPeopleAlexandria from "../worlds/alexandria-0.29.0.json" with {
 import socialRolesAlexandria from "../worlds/alexandria-0.30.0.json" with { type: "json" };
 import narrativeAlexandria from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import classicalAlexandria from "../worlds/alexandria-0.32.0.json" with { type: "json" };
+import beforeResourcesAlexandria from "../worlds/alexandria-0.34.0.json" with { type: "json" };
 import householdAlexandria from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import { MOTION_IDS, SCENE_IDS } from "../client/scene-model.ts";
 import type { EventVisuals, MotionId, SceneId } from "../client/scene-model.ts";
@@ -283,7 +284,7 @@ export function getPreviousWorld(): PublishedWorld {
 
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria]) {
+  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria, beforeResourcesAlexandria]) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -292,7 +293,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria, beforeResourcesAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

@@ -1,15 +1,16 @@
+import { CAPABILITY_OPERATIONS } from "../capabilities/operations.ts";
 import type { VocationDefinition } from "./types.ts";
 /** Strict, bounded JSON rules. All ids are local to this immutable pack. */
-export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never): asserts input is VocationDefinition {
+export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never, capabilities = false, figurePaths = false): asserts input is VocationDefinition {
   const path = "world.vocations";
-  function obj(v: unknown, p: string, fields?: string[]): Record<string, any> {
+  function obj(v: unknown, p: string, fields?: string[], required = fields): Record<string, any> {
     if (!v || typeof v !== "object" || Array.isArray(v) || Object.getPrototypeOf(v) !== Object.prototype) fail(p, "expected plain object");
     for (const key of Reflect.ownKeys(v as object)) {
       if (typeof key !== "string" || ["__proto__", "constructor", "prototype"].includes(key) || fields && !fields.includes(key)) fail(p, "unknown or reserved field");
       const d = Object.getOwnPropertyDescriptor(v, key)!;
       if (!("value" in d) || !d.enumerable) fail(p, "expected JSON data");
     }
-    if (fields) for (const key of fields) if (!Object.hasOwn(v as object, key)) fail(`${p}.${key}`, "required field");
+    if (required) for (const key of required) if (!Object.hasOwn(v as object, key)) fail(`${p}.${key}`, "required field");
     return v as Record<string, any>;
   }
   const n = (v: unknown, p: string, min = 0, max = 1000000): void => { if (!Number.isSafeInteger(v) || (v as number) < min || (v as number) > max) fail(p, `expected integer ${min}..${max}`); };
@@ -50,9 +51,19 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     const a = obj(value, path);
     if (a.kind === "buy") { obj(a, path, ["kind", "item", "quantity"]); if (typeof a.item !== "string" || !Object.hasOwn(materials, a.item)) fail(path, "unknown material"); n(a.quantity, path, 1, 1000); }
     else if (a.kind === "sell") { obj(a, path, ["kind", "item"]); if (!outputs.has(a.item)) fail(path, "unknown product"); }
-    else if (a.kind === "make") { obj(a, path, ["kind", "recipe"]); if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe"); }
+    else if (a.kind === "make") {
+      obj(a, path, capabilities ? ["kind", "recipe", "quantity", "inspected", "controlledFiring"] : ["kind", "recipe"], ["kind", "recipe"]);
+      if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe");
+      if (Object.hasOwn(a,"quantity")) n(a.quantity,path,1,1000);
+      for (const key of ["inspected","controlledFiring"]) if(Object.hasOwn(a,key)&&typeof a[key]!=="boolean")fail(path,"expected inspection/firing boolean");
+    } else if (a.kind === "capability") {
+      obj(a,path,["kind","operation"]);
+      if(!capabilities||typeof a.operation!=="string"||!Object.hasOwn(CAPABILITY_OPERATIONS,a.operation))fail(path,"unknown deep capability operation");
+    }
     else if (a.kind === "work") {
-      obj(a, path, ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]); training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
+      obj(a, path, figurePaths ? ["kind", "fee", "pay", "payer", "primary", "supports", "practice", "inputs"] : ["kind", "fee", "pay", "payer", "primary", "supports", "practice"], ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]);
+      if (Object.hasOwn(a, "inputs")) { if (a.practice) fail(path, "material-consuming project work cannot be marked as free practice"); mapping(a.inputs, figurePaths ? new Set([...items, "grain"]) : items, 1, 1000); }
+      training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
       if (!["workshop", "school", "council"].includes(a.payer) || typeof a.practice !== "boolean") fail(path, "invalid work account/practice");
     } else fail(path, "unknown action kind");
   }

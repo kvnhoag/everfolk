@@ -1,3 +1,4 @@
+import { capabilityActionReason, applyCapabilityAction } from "../capabilities/actions.ts";
 import { vocationInventory, vocationGains, bid } from "./view.ts";
 import type { LifeState, WorldPack } from "../types.ts";
 import type { VocationDefinition, VocationState } from "./types.ts";
@@ -13,9 +14,11 @@ function shared(life: LifeState, item: string): boolean { return Boolean(life.de
 function major(world: WorldPack, id: string): boolean {
   return ["make", "work"].includes(world.vocations!.actions[id].kind);
 }
-export function vocationReason(world: WorldPack, life: LifeState, id: string): string | undefined {
+export function vocationReason(world: WorldPack, life: LifeState, id: string, applying = false): string | undefined {
+  if (world.capabilities) return capabilityActionReason(world, life, id, applying);
   const def = world.vocations, ledger = life.vocations, action = def?.actions[id];
   if (!def || !ledger || !life.economy || !life.character || !action) return "This vocation action is unavailable in this world.";
+  if (action.kind === "capability") return "This world has no deep capability rules.";
   const cash = life.economy.cash;
   if (major(world, id) && ledger.workedAge === life.age) return "This year's work is complete.";
   if (major(world, id) && life.character.jobId === "soldier") return "Leave military service before taking a year of civilian work.";
@@ -72,9 +75,11 @@ function consume(life: LifeState, item: string, quantity: number): void {
 }
 /** Called only on the engine's detached candidate state. Rejection never changes a life. */
 export function applyVocation(world: WorldPack, life: LifeState, id: string): string {
+  if (world.capabilities) return applyCapabilityAction(world, life, id);
   const reason = vocationReason(world, life, id);
   if (reason) throw new Error(`Vocation action is unavailable: ${reason}`);
   const def = world.vocations!, ledger = life.vocations!, action = def.actions[id], cash = life.economy!;
+  if (action.kind === "capability") throw new Error("This world has no deep capability rules.");
   let text = "";
   if (action.kind === "buy") {
     const price = def.materials[action.item].price * action.quantity;

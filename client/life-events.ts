@@ -1,6 +1,7 @@
 import { displayProse } from "./display-prose.ts";
 import { yearAtAge } from "../src/calendar.ts";
-import type { LifeState, WorldPack } from "../src/types.ts";
+import { influenceCatalog } from "../src/influence.ts";
+import type { JournalEntry, LifeState, WorldPack } from "../src/types.ts";
 import { influenceMarker } from "./influence-marker.ts";
 import type { InfluenceMarker } from "./influence-marker.ts";
 
@@ -29,15 +30,17 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
   const years = Array.from({ length: life.age + 1 }, (_, age): LifeEventYear => ({
     age, year: yearAtAge(world.startYear, age), events: [],
   }));
-  const events = new Map(world.events.map(event => [event.id, event]));
+  const allEvents = influenceCatalog(world).events;
+  const events = new Map(allEvents.map(event => [event.id, event]));
   const activities = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
   const jobs = new Set(world.character?.jobs.map(job => job.id) ?? []);
   let lastWork: { id: string; age: number } | undefined;
   // Outcome IDs are unique within a world. Resolving by ID also handles several
   // decisions/actions in one year without mistaking introductions for actions.
-  const outcomes = new Map<string, { title: string; kind: "event" | "activity"; sourceIds: readonly string[] }>();
-  for (const event of world.events) for (const choice of event.choices) for (const outcome of choice.outcomes) {
-    outcomes.set(outcome.id, { title: event.title, kind: "event", sourceIds: event.sourceIds ?? [] });
+  const outcomes = new Map<string, { title: string; kind: "event" | "activity"; sourceIds: readonly string[]; eventId?: string }>();
+  const eventEntries = new Map<string, JournalEntry>();
+  for (const event of allEvents) for (const choice of event.choices) for (const outcome of choice.outcomes) {
+    outcomes.set(outcome.id, { title: event.title, kind: "event", sourceIds: event.sourceIds ?? [], eventId: event.id });
   }
   for (const activity of activities.values()) for (const outcome of activity.outcomes) {
     outcomes.set(outcome.id, { title: activity.text, kind: "activity", sourceIds: [] });
@@ -48,6 +51,7 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
     if (!group) return;
     const key = `${entry.age}-${index}-${entry.type}-${entry.id}`;
     if (entry.type === "event") {
+      eventEntries.set(entry.id, entry);
       const event = events.get(entry.id);
       // Health progression and individual relationship warnings are completed
       // facts recorded by the engine, rather than authored decision prompts.
@@ -59,15 +63,18 @@ export function buildLifeEvents(life: LifeState, world: WorldPack): LifeEventYea
       // An offered decision is still a question. Its accepted outcome is added
       // below, so prompts and selected option labels never fill the event feed.
       if (event.mode !== "automatic") return;
+      const marker = influenceMarker(entry, world);
       group.events.push({
         key, kind: event.trigger.type === "year" ? "history" : event.trigger.type === "age" ? "milestone" : "event",
         title: event.title,
         text: event.trigger.type === "age" ? event.title : event.text,
-        sourceIds: event.sourceIds ?? [],
+        sourceIds: event.sourceIds ?? [], ...(marker ? { marker } : {}),
       });
     } else if (entry.type === "outcome") {
       const owner = outcomes.get(entry.id);
-      group.events.push({ key, kind: owner?.kind ?? "event", title: owner?.title, text: entry.text, sourceIds: owner?.sourceIds ?? [] });
+      const source = owner?.eventId ? eventEntries.get(owner.eventId) : undefined;
+      const marker = source ? influenceMarker(source, world) : null;
+      group.events.push({ key, kind: owner?.kind ?? "event", title: owner?.title, text: entry.text, sourceIds: owner?.sourceIds ?? [], ...(marker ? { marker } : {}) });
     } else if (entry.type === "activity") {
       // Regular work is already represented in the yearly budget. Record its
       // first year, a changed job or a return after a gap, rather than repeating

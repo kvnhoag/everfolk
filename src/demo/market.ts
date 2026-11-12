@@ -275,7 +275,7 @@ function merchantReason(def: DemoDefinition, life: LifeStateWithDemo, command: T
   const held = householdHolding(life.demo, item);
   if (command.side === "buy") {
     const max = tuning(def.market).maxAnimals;
-    if ((item === "ox" || item === "donkey") && held + quantity > max) return `A household can keep at most ${max} ${label(item, max)}.`;
+    if (!def.startingResources && (item === "ox" || item === "donkey") && held + quantity > max) return `A household can keep at most ${max} ${label(item, max)}.`;
     const stock = merchantHolding(town, item);
     if (quantity > stock) return `The merchant has only ${stock} ${label(item, stock)} to sell.`;
     const cost = quantity * town.prices[item].sell, cash = playerCash(life);

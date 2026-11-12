@@ -1,4 +1,6 @@
 import type { Effect, LifeState, StatRange, WorldPack } from "../src/types.ts";
+import { TRADE_ITEMS } from "../src/demo/types.ts";
+import type { TradeItem } from "../src/demo/types.ts";
 import { getNetWorth } from "../src/economy.ts";
 
 export interface BirthRollStat {
@@ -7,6 +9,11 @@ export interface BirthRollStat {
   value: number;
   range?: StatRange;
   currency?: string;
+}
+
+export interface BirthRollResource extends BirthRollStat {
+  unitPrice: number;
+  marketValue: number;
 }
 
 export type BirthRollPhase = "waiting" | "rolling" | "settled";
@@ -131,8 +138,7 @@ export function getBirthDigitReels(stat: BirthRollStat, seed: string, elapsedMs:
   });
 }
 
-/** A display model only: the simulation has already chosen all these values. */
-export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollStat[] {
+function getBirthEffects(world: WorldPack, life: LifeState): Effect[] {
   const origin = world.origins.find(item => item.id === life.originId);
   const birthEffects: Effect[] = [...origin?.effects ?? []];
   for (const entry of life.journal) {
@@ -140,6 +146,64 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
     const event = world.events.find(item => item.id === entry.id);
     if (event?.mode === "automatic") birthEffects.push(...event.effects ?? []);
   }
+  return birthEffects;
+}
+
+function isUnplayedBirth(life: LifeState): boolean {
+  return life.age === 0 && !life.commands.some(command => command.type !== "avatar");
+}
+
+const demoResourceLabels: Record<TradeItem, string> = {
+  grain: "Grain", flax: "Flax", silver: "Silver", gold: "Gold",
+  silk: "Coan silk", linen: "Linen", ox: "Oxen", donkey: "Donkeys",
+};
+
+function demoHolding(life: LifeState, item: TradeItem): number {
+  const demo = life.demo;
+  if (!demo) return 0;
+  if (item === "grain" || item === "flax") return demo.household[item];
+  if (item === "ox" || item === "donkey") return demo.household.animals[item];
+  return demo.goods[item];
+}
+
+/** Read the actual simulation roll; displaying it never consumes randomness. */
+export function getBirthRollResources(world: WorldPack, life: LifeState): BirthRollResource[] {
+  const origin = world.origins.find(item => item.id === life.originId);
+  const birthEffects = getBirthEffects(world, life);
+  const classic = world.economy && life.economy ? world.economy.assets.map(asset => {
+    const value = life.economy!.assets[asset.id] ?? 0;
+    const range = origin?.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 };
+    const hasDirectEffect = birthEffects.some(effect => effect.type === "asset" && effect.asset === asset.id);
+    return { id: `resource:${asset.id}`, label: asset.title, value, unitPrice: asset.value, marketValue: value * asset.value,
+      ...(isUnplayedBirth(life) && !hasDirectEffect && value >= range.min && value <= range.max ? { range: { ...range } } : {}) };
+  }) : [];
+  const demo = world.demo && life.demo ? TRADE_ITEMS.map(item => {
+    const value = demoHolding(life, item);
+    const fixed = item === "grain" ? world.demo!.household.startingGrain : 0;
+    const range = world.demo!.startingResources?.origins?.[life.originId]?.[item] ?? world.demo!.startingResources?.defaults[item] ?? { min: fixed, max: fixed };
+    const unitPrice = life.demo!.town.prices[item].buy;
+    const changedAtBirth = birthEffects.some(effect => effect.type === "demo" &&
+      (effect.effect.kind === "grain" && item === "grain" || effect.effect.kind === "item" && effect.effect.item === item));
+    return { id: `demo-resource:${item}`, label: demoResourceLabels[item], value, unitPrice, marketValue: value * unitPrice,
+      ...(isUnplayedBirth(life) && !changedAtBirth && value >= range.min && value <= range.max ? { range: { ...range } } : {}) };
+  }) : [];
+  // Grain leads the live demo's inventory rather than unrelated legacy assets.
+  return [...demo, ...classic];
+}
+
+/** Keep possible household rolls visible even when their selected quantity is zero. */
+export function getVisibleBirthRollResources(world: WorldPack, life: LifeState): BirthRollResource[] {
+  const origin = world.origins.find(item => item.id === life.originId);
+  const configured = new Set(world.economy?.assets.filter(asset =>
+    ((origin?.assetRanges?.[asset.id] ?? asset.initialRange)?.max ?? 0) > 0 ||
+    !life.demo && world.economy?.uncappedResources && ["tool-chest", "workshop-share"].includes(asset.id)).map(asset => `resource:${asset.id}`));
+  return getBirthRollResources(world, life).filter(resource => resource.id.startsWith("demo-resource:") || resource.value > 0 || configured.has(resource.id));
+}
+
+/** A display model only: the simulation has already chosen all these values. */
+export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollStat[] {
+  const origin = world.origins.find(item => item.id === life.originId);
+  const birthEffects = getBirthEffects(world, life);
   return Object.entries(world.stats).map(([id, definition]) => {
     const value = life.stats[id];
     let range = origin?.statRanges?.[id] ?? definition.initialRange ?? { min: definition.initial, max: definition.initial };
@@ -151,13 +215,18 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
     }
     // Later actions are not part of a birth draw. Never label their values with
     // an earlier range, including imported records or terminal birth outcomes.
-    const isBirthValue = life.age === 0 && !life.commands.some(command => command.type !== "avatar") && value >= range.min && value <= range.max;
+    const isBirthValue = isUnplayedBirth(life) && value >= range.min && value <= range.max;
     if (world.economy?.stat === id && life.economy) {
       const moneyValue = getNetWorth(world, life);
-      const moneyRange = { min: range.min * world.economy.unitsPerPoint, max: range.max * world.economy.unitsPerPoint };
+      const resources = getBirthRollResources(world, life);
+      const knownResourceRanges = resources.every(resource => resource.range !== undefined);
+      const moneyRange = {
+        min: Math.round(range.min * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.min ?? 0) * resource.unitPrice, 0),
+        max: Math.round(range.max * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.max ?? 0) * resource.unitPrice, 0),
+      };
       const hasDirectFinance = birthEffects.some(effect => effect.type === "cash" || effect.type === "debt" || effect.type === "asset");
       return { id, label: "Total wealth", value: moneyValue, currency: world.economy.currency.short,
-        ...(isBirthValue && !hasDirectFinance && moneyValue >= moneyRange.min && moneyValue <= moneyRange.max ? { range: moneyRange } : {}) };
+        ...(isUnplayedBirth(life) && knownResourceRanges && !hasDirectFinance && moneyValue >= moneyRange.min && moneyValue <= moneyRange.max ? { range: moneyRange } : {}) };
     }
     return { id, label: definition.label, value, ...(isBirthValue ? { range } : {}) };
   });
