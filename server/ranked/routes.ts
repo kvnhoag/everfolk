@@ -1,6 +1,6 @@
 import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import type { SaveFile } from "../../src/types.ts";
-import type { ContentDatabase } from "../store.ts";
+import type { ContentDatabase } from "../db/types.ts";
 import { readEvidence, storeEvidence } from "./evidence-store.ts";
 import { viewLife } from "./near-view.ts";
 import { clientKey, defaultVerifyLimiter, type RateLimiter } from "./rate-limit.ts";

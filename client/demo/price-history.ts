@@ -68,6 +68,10 @@ function stepCommand(engine: LifeEngine, state: LifeState, cmd: Command): LifeSt
       return engine.chooseAvatar(state, cmd.variant);
     case "influence":
       return engine.influence(state, cmd);
+    case "market-order":
+      return engine.orderMarket(state, cmd);
+    case "market-cancel":
+      return engine.cancelMarketOrder(state, cmd.orderId);
     default:
       return engine.demo(state, cmd);
   }

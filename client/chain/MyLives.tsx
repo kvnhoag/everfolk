@@ -1,11 +1,12 @@
 import { useEffect, useId, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import { keptRows, type KeptRow } from "./token-page-model.ts";
 import "./ledger.css";
+import SignInPanel from "./SignInPanel.tsx";
 
 /** The signed-in player's kept lives, in the life-record ledger format. */
 export default function MyLives({ backend, onOpen }: { backend: ChainBackend; onOpen?(life: LifeView): Promise<void> }) {
@@ -13,13 +14,15 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
   const current = useActiveRankedLife(backend);
   const [busy, setBusy] = useState(false);
   async function openLife(life: LifeView) {
+    if (backend.signin?.needsPlayKey) { await backend.signin.useWallet().catch(cause => setError(errorText(cause, "Sign-in did not finish. Try again."))); return; }
     if (!onOpen) { window.location.hash = "#ranked"; return; }
     setBusy(true); setError("");
     try { await onOpen(life); } catch (cause) { setError(errorText(cause, "This life could not be opened.")); } finally { setBusy(false); }
   }
   const [rows, setRows] = useState<KeptRow[] | null>(null);
   const [error, setError] = useState("");
-  const { accountId, revision } = backend;
+  const { accountId, revision, signin } = backend;
+  const [signingIn, setSigningIn] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -34,10 +37,13 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
     <header className="ledger-heading">
       <p className="ledger-kicker"><span className="cr-index">{String(rows?.length ?? 0).padStart(2, "0")}</span>{backend.mode === "preview" ? "Practice collection" : "Kept on NEAR"}</p>
       <h1 id={headingId} tabIndex={-1}>My lives</h1>
-      <p>Your current Weave life, completed lives waiting to mint, and the NFTs your wallet owns.</p>
+      <p>Your current Weave life, completed lives waiting to mint, and the NFTs {signin ? "you own" : "your wallet owns"}.</p>
     </header>
-    {!accountId && <p className="market-empty">Connect a NEAR wallet to see the lives you keep.</p>}
-    {current.active && <ActiveLifeCard life={current.active.life} progress={current.active.progress} busy={busy} onOpen={() => { void openLife(current.active!.life); }} />}
+    {!accountId && !signin && <p className="market-empty">Connect a NEAR wallet to see the lives you keep.</p>}
+    {!accountId && signin && <div className="market-empty"><p>Sign in to see the lives you keep.</p>{signingIn
+      ? <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={signin.useWallet} onClose={() => setSigningIn(false)} />
+      : <button className="chain-secondary" type="button" onClick={() => setSigningIn(true)}>Sign in</button>}</div>}
+    {current.active && <ActiveLifeCard walletPath={signin?.method !== "email"} needsPlayKey={signin?.needsPlayKey} life={current.active.life} progress={current.active.progress} busy={busy} onOpen={() => { void openLife(current.active!.life); }} />}
     {current.loading && <p role="status" className="market-empty">Finding your Weave life…</p>}
     {current.error && <p className="chain-error" role="alert">{current.error}</p>}
     {error && <div className="ledger-body"><p className="chain-error" role="alert">{error}</p></div>}

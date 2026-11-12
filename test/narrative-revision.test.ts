@@ -3,9 +3,9 @@ import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import previous from "../worlds/alexandria-0.30.0.json" with { type: "json" };
 // This comparison certifies the literary-only 0.31 release, before the era revision.
 import current from "../worlds/alexandria-0.31.0.json" with { type: "json" };

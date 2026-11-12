@@ -6,7 +6,7 @@
  * Ownership: this file is the Step 0 contract. Each track may add optional fields to its own
  * config interface below (marked with its track letter); renaming or removing fields needs the lead.
  */
-import type { Command, Effect, LifeState, WorldPack } from "../types.ts";
+import type { Command, Effect, LifeState, StatRange, WorldPack } from "../types.ts";
 
 // ── Stable identifiers ───────────────────────────────────────────────────────
 
@@ -212,6 +212,13 @@ export interface AvailabilityConfig {
 }
 
 export interface DemoDefinition {
+  /** Inclusive birth rolls for the household's actual traded resources.
+   * Presence opts into market-valued holdings and uncapped animal ownership;
+   * archived worlds without it keep their original starts and rules. */
+  startingResources?: {
+    defaults: Record<TradeItem, StatRange>;
+    origins?: Record<string, Partial<Record<TradeItem, StatRange>>>;
+  };
   timeline: TimelineConfig;
   household: HouseholdConfig;
   market: MarketConfig;

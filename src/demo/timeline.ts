@@ -59,15 +59,15 @@ function scheduleFamily(ctx: DemoContext, family: ConditionFamily): Episode[] {
   const gap = ctx.def.timeline.episodeGapYears ?? DEFAULT_GAP_YEARS;
   // Episodes must be playable, not scheduled after a typical life has ended.
   const span = Math.max(1, Math.min(ctx.world.maxAge, 70));
-  const window = Math.min(span, draw(ctx, spec.windowYears.min, spec.windowYears.max));
-  const windowStart = draw(ctx, 0, span - window);
+  const episodeWindow = Math.min(span, draw(ctx, spec.windowYears.min, spec.windowYears.max));
+  const windowStart = draw(ctx, 0, span - episodeWindow);
   const wanted = draw(ctx, spec.episodes.min, spec.episodes.max);
-  const durations = Array.from({ length: wanted }, () => Math.min(window, draw(ctx, spec.durationYears.min, spec.durationYears.max)));
+  const durations = Array.from({ length: wanted }, () => Math.min(episodeWindow, draw(ctx, spec.durationYears.min, spec.durationYears.max)));
   const kept = durations.reduce<{ years: number[]; used: number }>((acc, years) => {
     const used = acc.used + years + (acc.years.length ? gap : 0);
-    return used > window ? acc : { years: [...acc.years, years], used };
+    return used > episodeWindow ? acc : { years: [...acc.years, years], used };
   }, { years: [], used: 0 });
-  const slack = window - kept.used;
+  const slack = episodeWindow - kept.used;
   const offsets = kept.years.map(() => draw(ctx, 0, slack)).sort((a, b) => a - b);
   return kept.years.map((years, index) => ({
     startAge: windowStart + offsets[index] + kept.years.slice(0, index).reduce((sum, value) => sum + value, 0) + index * gap,

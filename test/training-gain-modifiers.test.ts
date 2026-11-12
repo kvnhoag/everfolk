@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { applyStatDelta, skillEffectDelta } from "../src/progression.ts";
-import { getSkillImpact } from "../client/skill-impact.ts";
-import { trainingSkillChanges } from "../client/skill-tree.ts";
+import { getSkillImpact } from "../client/models/skill-impact.ts";
+import { trainingSkillChanges } from "../client/models/skill-tree.ts";
 import type { Effect, WorldPack } from "../src/types.ts";
 
 const modifiers = [

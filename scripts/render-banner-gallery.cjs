@@ -23,7 +23,7 @@ const samples = [
 (async () => {
   const { createBannerLayers } = await import(pathToFileURL(path.join(__dirname, "banner-art-scenes.mjs")));
   const { createActorLayers } = await import(pathToFileURL(path.join(__dirname, "banner-art-actors.mjs")));
-  const { AVATAR_APPEARANCE_ORIGINS } = await import(pathToFileURL(path.join(root, "client/avatar-appearance.ts")));
+  const { AVATAR_APPEARANCE_ORIGINS } = await import(pathToFileURL(path.join(root, "client/models/avatar-appearance.ts")));
   await withMcp("VectorCraft", { readRoot: root, writeRoot: root }, async ({ callTool }) => {
     unwrap(await callTool("run_command", { command: "file.new", params: { name: "Everfolk — layered banner library", width: 1000, height: 848, units: "Pixels", created: 0 } }));
     await callTool("draw_path", { d: "M0 0h1000v848h-1000z", fill: "#f7ecd4", stroke: "none", name: "Proof sheet background" });

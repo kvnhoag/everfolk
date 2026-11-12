@@ -1,3 +1,4 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, getAccomplishments, getLegacyRoutes, matchesCondition, validateWorld } from "../src/index.ts";
@@ -10,11 +11,15 @@ import { contentFingerprint } from "../src/random.ts";
 
 function controlled(prestige?: string, source = current): WorldPack {
   const world = structuredClone(source) as WorldPack;
+  withoutMarketSignals(world);
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.yearlyEffects = []; world.yearlyRules = []; delete world.knowledge;
+  // Accomplishment fixtures keep funding fixed instead of rolling passive income.
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) delete origin.assetRanges;
   const required = [world.health!.careDecision, ...Object.values(world.economy!.moneylender!.events)];
   world.events = world.events.filter(event => required.includes(event.id) || event.id.includes("-callback-") || event.id === prestige);
   if (prestige) world.eventPacing!.rareEvents = { annualChance: 1, cooldownYears: 12 };
@@ -147,7 +152,7 @@ test("legacy validation rejects forged references, passive awards and contacts a
 
 test("new content has seven ordinary career paths, seven rare prestige paths, fourteen callbacks and unchanged mortality", () => {
   const world = current as WorldPack;
-  assert.equal(world.version, "0.34.0");
+  assert.equal(world.version, "0.42.0");
   assert.equal(world.legacy!.routes.length, 7); assert.equal(world.legacy!.achievements.length, 43);
   assert.equal(world.events.filter(event => event.id.includes("-callback-")).length, 14);
   for (const route of world.legacy!.routes) {

@@ -5,7 +5,7 @@ import type { WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import birthRelease from "../worlds/alexandria-0.11.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.10.0.json" with { type: "json" };
-import { resolveLifeScenes, sceneContextLabel } from "../client/scene-model.ts";
+import { resolveLifeScenes, sceneContextLabel } from "../client/models/scene-model.ts";
 
 test("the birth-situation release changes only the birth event and content version", () => {
   assert.equal(birthRelease.version, "0.11.0");

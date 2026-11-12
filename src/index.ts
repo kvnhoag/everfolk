@@ -3,6 +3,7 @@ export { validateWorld } from "./validate.ts";
 export { formatYear, yearAtAge } from "./calendar.ts";
 export { getAccomplishments, getLegacyRoutes, legacyText } from "./legacy.ts";
 export { getNetWorth, getAssetValue, previewEconomyEffects, financeActivityReason, yearlyAssetIncome } from "./economy.ts";
+export { marketQuote, marketOrderValue, marketOrderReason, marketOrderCapacity, hasFullMarketAccess, productionCapacity, productionPlan } from "./market.ts";
 export { resolvePartner, personText } from "./people.ts";
 export { hasSocialRole, applySocialRole } from "./relationships.ts";
 export { createSeededPlayEngine, MAX_SEEDED_SAVE_LENGTH } from "./seeded-play.ts";

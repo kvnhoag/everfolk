@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { modelNote, sourceScope, sourceSummary } from "../client/source-copy.ts";
+import { modelNote, sourceScope, sourceSummary } from "../client/models/source-copy.ts";
 import pack from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import { contentFingerprint } from "../src/random.ts";
 

@@ -54,12 +54,13 @@ function rationShare(h: HouseholdConfig, age: number): number {
 }
 
 /** Everyone in the household at `age`: the player, the unseen parents, spouse and children. */
-function members(def: DemoDefinition, life: LifeStateWithDemo, age: number): Member[] {
+function members(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age): Member[] {
   const h = def.household, household = life.demo.household, list: Member[] = [];
   const parentsRun = household.parents === "working";
   // Farming jobs work full time; without other work the player helps at home by age; a soldier is away.
   const atHome = (life.character?.jobId ?? null) === null || parentsRun;
-  const playerLabour = isSoldier(life) ? 0 : isFarming(life) ? ADULT : atHome ? youngLabour(h, age) : 0;
+  const awayForWork = life.vocations?.workedAge === workAge;
+  const playerLabour = isSoldier(life) || awayForWork ? 0 : isFarming(life) ? ADULT : atHome ? youngLabour(h, age) : 0;
   if (!isSoldier(life)) list.push({ role: "player", labour: playerLabour, ration: rationShare(h, age) });
   if (household.parents !== "gone") {
     const labour = parentsRun ? ADULT : Math.floor(ADULT * (h.retiredParentLabourBps ?? 0) / FULL);
@@ -81,8 +82,8 @@ export function labourUnits(def: DemoDefinition, life: LifeState): number {
 export function mouths(def: DemoDefinition, life: LifeState): number {
   return members(def, life as LifeStateWithDemo, life.age).length;
 }
-function labourAt(def: DemoDefinition, life: LifeStateWithDemo, age: number): number {
-  return members(def, life, age).reduce((sum, member) => sum + member.labour, 0);
+function labourAt(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age): number {
+  return members(def, life, age, workAge).reduce((sum, member) => sum + member.labour, 0);
 }
 /** Grain the people of the household eat in a year. */
 function peopleRation(def: DemoDefinition, life: LifeStateWithDemo, age: number): number {
@@ -102,7 +103,7 @@ function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number
   const h = def.household, household = life.demo.household;
   const plots = household.plots;
   if (plots <= 0) return { grain: 0, flax: 0 };
-  const worked = Math.min(labourAt(def, life, age), ADULT * plots);
+  const worked = Math.min(labourAt(def, life, age, age - 1), ADULT * plots);
   const factor = (amount: number): number => {
     let value = bpsOf(amount, h.floodFactorBps[life.demo.year.flood]);
     value = bpsOf(value, FULL + skill(life, FARMING_SKILL) * h.skillBonusBps);
@@ -212,7 +213,7 @@ function spoilageOf(def: DemoDefinition, life: LifeStateWithDemo, grain: number)
 }
 
 function spareLabour(def: DemoDefinition, life: LifeStateWithDemo, age: number): number {
-  return Math.max(0, labourAt(def, life, age) - ADULT * life.demo.household.plots);
+  return Math.max(0, labourAt(def, life, age, age - 1) - ADULT * life.demo.household.plots);
 }
 
 /** Linen bolts that spare labour could spin from the flax in store. Pure. */
@@ -308,7 +309,7 @@ export function householdView(def: DemoDefinition, life: LifeStateWithDemo): Hou
   const expectedEating = peopleRation(def, life, age) + animalRation(def, h);
   const afterEating = Math.max(0, h.grain + crop.grain - expectedRent - expectedEating);
   return { grain: h.grain, capacity: storeCapacity(def, life), plots: h.plots, flaxPlots: h.flaxPlots, flax: h.flax, linen: life.demo.goods.linen,
-    animals: { ...h.animals }, mouths: members(def, life, age).length, labour: labourAt(def, life, age),
+    animals: { ...h.animals }, mouths: members(def, life, age).length, labour: labourAt(def, life, age, age - 1),
     expectedHarvest: crop.grain, expectedRent, expectedEating, expectedSpoilage: spoilageOf(def, life, afterEating), expectedFlax: crop.flax,
     shortfallBps: h.lastShortfallBps, headOfPlot: h.headSinceAge !== null, parents: h.parents };
 }

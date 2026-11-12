@@ -1,15 +1,15 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import { resolvePartner } from "../../src/people.ts";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
-import ChoiceImpact from "../ChoiceImpact.tsx";
-import { visibleFamilyActivities } from "../character-panel-model.ts";
-import { displayProse } from "../display-prose.ts";
-import { getLoanSummary } from "../loan-summary.ts";
-import PixelPortrait from "../PixelPortrait.tsx";
-import { relationshipLabels, visibleRelationshipPeople } from "../relationship-labels.ts";
+import ChoiceImpact from "../components/ChoiceImpact.tsx";
+import { visibleFamilyActivities } from "../models/character-panel-model.ts";
+import { displayProse } from "../models/display-prose.ts";
+import { getLoanSummary } from "../models/loan-summary.ts";
+import PixelPortrait from "../components/PixelPortrait.tsx";
+import { relationshipLabels, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
@@ -50,7 +50,7 @@ interface Props {
   occupations?: { id: string; label: string; unavailable: boolean; reason: string | null }[];
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({ label, value }: { label: ReactNode; value: string }) {
   return <div><dt>{label}</dt><dd>{value}</dd></div>;
 }
 
@@ -414,7 +414,7 @@ export default function EconomyPanels({
           {screen.market.quotes
             .filter(entry => entry.item === "grain" || entry.item === item)
             .map(entry => (
-              <Field key={entry.item} label={itemLabel(entry.item) + " buy / sell"} value={entry.buy + " / " + entry.sell} />
+              <Field key={entry.item} label={<><ResourceGlyph id={entry.item} /> {itemLabel(entry.item)} buy / sell</>} value={entry.buy + " / " + entry.sell} />
             ))}
           <Field label="Merchant can buy" value={String(quote?.merchantCanBuy ?? 0)} />
           <Field label="Merchant holds" value={String(quote?.merchantStock ?? 0)} />

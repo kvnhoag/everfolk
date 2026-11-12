@@ -8,7 +8,7 @@ import {
 } from "./validate.ts";
 import {
   parseDraw, parseLife, parseListing, parseMintFee, parseMintResult, parseOptionalLife, parseStringList,
-  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parsePoolEntries, parseFigureSupply,
+  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parseMarketTerms, parsePoolEntries, parseFigureSupply,
 } from "./wire.ts";
 
 const TGAS = 10n ** 12n;
@@ -157,6 +157,7 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       await call("set_action", { token_id: tokenId, action_id: actionId });
     },
     async mintTerms() { return parseMintTerms(await view("mint_terms", {})); },
+    async marketTerms() { return parseMarketTerms(await view("get_params", {})); },
     async mintPack(lifeId) {
       assertLifeId(lifeId);
       const value = await view("get_mint_pack", { life_id: lifeId });

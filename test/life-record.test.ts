@@ -4,8 +4,8 @@ import { createEngine } from "../src/index.ts";
 import { getNetWorth } from "../src/economy.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { lifeYearChanges, lifeYearHeadline } from "../client/life-record.ts";
-import type { LifeEventRow } from "../client/life-events.ts";
+import { lifeYearChanges, lifeYearHeadline } from "../client/models/life-record.ts";
+import type { LifeEventRow } from "../client/models/life-events.ts";
 
 const event = (kind: LifeEventRow["kind"], text: string, title?: string): LifeEventRow => ({ key: text, kind, text, title, sourceIds: [] });
 test("one highlight favors personal results and endings, with concise fallback and quiet years", () => {
@@ -55,7 +55,7 @@ test("annual arrows match actual end-of-year states, including clamping, net wea
 
 
 test("per-entry effects stay separate from other events and use clamped actual changes", async () => {
-  const { lifeRecordChanges } = await import("../client/life-record.ts");
+  const { lifeRecordChanges } = await import("../client/models/life-record.ts");
   const world: WorldPack = {
     schemaVersion: 1, id: "record-entry-test", version: "1", title: "Record test", description: "Synthetic fixture", startYear: -10, maxAge: 10,
     stats: { health: { label: "Health", min: 0, max: 100, initial: 95 }, knowledge: { label: "Knowledge", min: 0, max: 10, initial: 8 } }, flags: {},
@@ -84,7 +84,7 @@ test("per-entry effects stay separate from other events and use clamped actual c
 
 
 test("ranked record replays NFT influence commands and reports their actual changes", async () => {
-  const { lifeRecordChanges } = await import("../client/life-record.ts");
+  const { lifeRecordChanges } = await import("../client/models/life-record.ts");
   const world = structuredClone(pack) as WorldPack;
   world.influences = [{ id: "letters.teach", label: "Teach the young", baseWeight: 1,
     effects: [{ type: "stat", stat: "knowledge", delta: 5 }] }];

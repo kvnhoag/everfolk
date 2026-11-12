@@ -3,8 +3,8 @@ import test from "node:test";
 import { createEngine, matchesCondition, validateWorld } from "../src/index.ts";
 import { syncEconomyStat } from "../src/economy.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import type { LifeEvent, LifeState, WorldPack } from "../src/types.ts";
 // Keep this release's complete delta comparison exact; 0.28 tests its skill changes separately.

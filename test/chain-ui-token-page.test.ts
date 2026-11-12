@@ -1,9 +1,27 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
+import { registerHooks } from "node:module";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import ts from "typescript";
 import type { Listing, TokenExtra } from "../chain/types.ts";
+import { actionDescription, actionName, GROUP_TITLE } from "../client/chain/chain-copy.ts";
 import { formatNear, parseNearInput } from "../client/chain/near-amount.ts";
 import { marketRows, reachLine, tokenActionMenu, tokenPageView, tokenTitle } from "../client/chain/token-page-model.ts";
 import type { TokenView } from "../client/chain/types.ts";
+
+const hooks = registerHooks({
+  load(url, context, nextLoad) {
+    if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
+    if (url.endsWith(".tsx")) return { format: "module", shortCircuit: true, source: ts.transpileModule(readFileSync(new URL(url), "utf8"), {
+      compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 }, fileName: new URL(url).pathname,
+    }).outputText };
+    return nextLoad(url, context);
+  },
+});
+const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
+hooks.deregister();
 
 const NEAR = 10n ** 24n;
 const extra = (patch: Partial<TokenExtra> = {}): TokenExtra => ({
@@ -97,4 +115,36 @@ test("NEAR amounts format and parse", () => {
   assert.equal(parseNearInput("0").ok, false);
   assert.equal(parseNearInput("abc").ok, false);
   assert.equal(parseNearInput("-1").ok, false);
+});
+
+const farmer: TokenView = { owner_id: "alice.testnet", extra: extra({ career_group: "farming", action_id: "farming.stock-granary", birth_year: -312, death_year: -251 }) };
+const noop = () => {};
+const html = (view: ReturnType<typeof tokenPageView>) => renderToStaticMarkup(createElement(TokenPageBody, {
+  tokenId: "5", view, onSetAction: noop, onWithdraw: noop, onList: noop, onUnlist: noop, onBuy: noop,
+}));
+
+test("token page tells the life and its deed", () => {
+  const { story } = tokenPageView({ ...base, token: farmer });
+  assert.equal(story.career, GROUP_TITLE.farming);
+  assert.equal(story.lived, "Lived 312 BCE – 251 BCE");
+  assert.equal(story.deed.name, actionName("farming.stock-granary"));
+  assert.equal(story.deed.effect, actionDescription("farming.stock-granary"));
+  assert.notEqual(story.deed.effect, "");
+});
+
+test("a deed with no description gets a fallback effect", () => {
+  const { story } = tokenPageView({ ...base, token: { ...farmer, extra: extra({ action_id: "mystery.deed" }) } });
+  assert.notEqual(story.deed.effect, "");
+  assert.equal(story.deed.name, "An unknown deed");
+});
+
+test("token page markup shows the deed effect", () => {
+  const view = tokenPageView({ ...base, token: farmer });
+  const markup = html(view);
+  assert.match(markup, /aria-label="Life"/);
+  assert.ok(markup.includes(view.story.deed.effect));
+  assert.ok(markup.includes(view.story.deed.name));
+  assert.ok(markup.includes("Lived 312 BCE"));
+  assert.ok(markup.indexOf('aria-label="Life"') < markup.indexOf('aria-label="For sale"'));
+  assert.doesNotMatch(markup, /previous owner|Owner history/i);
 });

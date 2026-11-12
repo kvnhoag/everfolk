@@ -1,4 +1,4 @@
-import type { ContentDatabase } from "../store.ts";
+import type { ContentDatabase } from "../db/types.ts";
 
 interface EvidenceRow { evidence_json: string; save_json: string }
 

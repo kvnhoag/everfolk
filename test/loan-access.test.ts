@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { CharacterActivity, Choice, Effect, LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { activityLoanOffer, borrowAndAct, isBorrowChoice, requiredCash } from "../client/loan-access.ts";
+import { activityLoanOffer, borrowAndAct, isBorrowChoice, requiredCash } from "../client/models/loan-access.ts";
 
 const option = (id: string, effects: Effect[] = []): Choice => ({ id, text: id, outcomes: [{ id: `${id}-done`, text: `${id} is done.`, weight: 1, effects }] });
 const action = (id: string, effects: Effect[], category: CharacterActivity["category"] = "finance"): CharacterActivity => ({ ...option(id, effects), category, minAge: 18, cooldownYears: 1, ...(category === "finance" ? { usesYearlyActivity: false } : {}) });

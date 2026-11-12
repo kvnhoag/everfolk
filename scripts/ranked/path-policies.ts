@@ -1,7 +1,7 @@
 // Deterministic "deliberate player" policies for ranked lives: each path pursues one figure's
 // or one NPC career's route through the normal engine API, so a ranked session can adopt every
 // returned state with `session.sync(next)`. Used by test/chain-figure-calibration.test.ts.
-import { advanceYearWithFocus, selectAutomaticChoice, type YearlyFocusId } from "../../client/yearly-focus.ts";
+import { advanceYearWithFocus, selectAutomaticChoice, type YearlyFocusId } from "../../client/models/yearly-focus.ts";
 import type { Choice, LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
 
 export interface CareerPath {

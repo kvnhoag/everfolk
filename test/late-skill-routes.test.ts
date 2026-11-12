@@ -8,11 +8,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { getLegacyRoutes } from "../src/legacy.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { buildLateSkillRoutes } from "../client/late-skill-routes.ts";
-import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/legacy-store.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { buildLateSkillRoutes, routeRequirements } from "../client/models/late-skill-routes.ts";
+import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/storage/legacy-store.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.33.0.json" with { type: "json" };
+import vocational from "../worlds/demo/alexandria-lives-1.json" with { type: "json" };
 import figures from "../research/late-route-figures.json" with { type: "json" };
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
@@ -22,7 +23,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LateSkillRoutes } = await import("../client/LateSkillRoutes.tsx");
+const { default: LateSkillRoutes } = await import("../client/components/LateSkillRoutes.tsx");
 hooks.deregister();
 const world = current as WorldPack, engine = createEngine(world);
 
@@ -97,4 +98,21 @@ test("retained 0.33 lives continue with their original tree and deterministic re
   assert.equal(engineForLife(loaded).fingerprint, old.fingerprint);
   assert.deepEqual(engineForLife(loaded).replay(loaded.seed, loaded.commands), loaded);
   assert.deepEqual(buildLateSkillRoutes(old.world, loaded, old.getActivities(loaded)), []);
+});
+
+
+test("completed-work requirements describe the authored activity and use its recorded count", () => {
+  const vocationalWorld = vocational as unknown as WorldPack;
+  const life = structuredClone(createEngine(vocationalWorld).start("completed-work-requirement"));
+  const condition = { type: "vocation" as const, action: "measure-observations", count: 2 };
+  const activity = vocationalWorld.character!.activities.find(activity => activity.id === "v-measure-observations")!;
+  life.vocations!.completed[condition.action] = 1;
+  assert.deepEqual(routeRequirements(condition, vocationalWorld, life), [
+    { text: `${activity.text} · completed 2+ times`, met: false },
+  ]);
+  life.vocations!.completed[condition.action] = 2;
+  assert.equal(routeRequirements(condition, vocationalWorld, life)[0].met, true);
+  assert.deepEqual(routeRequirements(condition, vocationalWorld, engine.start("retained-no-work-ledger")), [
+    { text: `${activity.text} · completed 2+ times`, met: false },
+  ]);
 });

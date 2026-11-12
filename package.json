@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Everfolk \u2014 a storybook life simulator set on Egypt's ancient Mediterranean coast.",
+  "description": "Everfolk — a storybook life simulator set on Egypt's ancient Mediterranean coast.",
   "engines": {
     "node": ">=24"
   },
@@ -11,14 +11,15 @@
     "test": "node --test test/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "demo": "node examples/play.ts",
     "dev": "node scripts/run-framework.mjs dev",
-    "check": "tsc --noEmit",
-    "build": "tsc --noEmit && node scripts/run-framework.mjs build",
+    "check": "node scripts/check-structure.mjs && tsc --noEmit",
+    "build": "node scripts/check-structure.mjs && tsc --noEmit && node scripts/run-framework.mjs build",
     "preview": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "content": "node scripts/build-alexandria-world.mjs",
     "db:generate": "drizzle-kit generate",
     "ranked:world": "node scripts/ranked/build-ranked-world.mjs",
     "demo:world": "node scripts/demo/build-demo-world.mjs",
-    "art:collection": "node tools/character-creator/scripts/build-collection.mjs"
+    "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
+    "check:structure": "node scripts/check-structure.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {
@@ -26,13 +27,13 @@
     "react-dom": "19.2.6",
     "next": "16.3.4",
     "drizzle-orm": "0.45.2",
-    "@near-wallet-selector/core": "10.1.4",
-    "@near-wallet-selector/meteor-wallet": "10.1.4",
-    "@near-wallet-selector/modal-ui": "10.1.4",
-    "@near-wallet-selector/my-near-wallet": "10.1.4",
-    "buffer": "6.0.3",
+    "@hot-labs/near-connect": "0.12.0",
     "near-api-js": "7.4.0",
-    "gsap": "3.15.1"
+    "@privy-io/react-auth": "^3.51.3",
+    "@noble/hashes": "^2.4.0",
+    "@solana/kit": "^8.6.0",
+    "gsap": "3.15.1",
+    "jotai": "3.0.2"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",

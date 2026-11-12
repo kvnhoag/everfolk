@@ -31,3 +31,10 @@
 .market-buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:10px;border-top:1px solid #cdbb95}
 .market-buy strong{font-size:16px;font-variant-numeric:tabular-nums}
 @media(max-width:600px){.token-claim>button,.token-actions>button{width:100%}.market-grid{grid-template-columns:1fr}.market-buy>button{flex:0 0 auto}}
+.market-filters{display:flex;flex-wrap:wrap;gap:10px 16px;margin:0 0 12px}
+.market-filters label{display:grid;gap:4px;font-size:12px;font-weight:700}
+.market-filters select{font:inherit;font-weight:400;padding:6px 8px;border:2px solid #d9c79e;background:#fbf5e4;color:#263b43;min-width:150px}
+@media(max-width:600px){.market-filters label{flex:1 1 100%}.market-filters select{width:100%}}
+.sell-yours{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.sell-row{display:grid;gap:8px}
+.sell-row h2{margin:0}

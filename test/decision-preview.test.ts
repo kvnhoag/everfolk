@@ -18,10 +18,10 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: CompactSkillPanel } = await import("../client/CompactSkillPanel.tsx");
-const { default: ChoiceImpact } = await import("../client/ChoiceImpact.tsx");
-const { default: DecisionDialog } = await import("../client/DecisionDialog.tsx");
-const { CurrentLegacySummary } = await import("../client/LegacyGallery.tsx");
+const { default: CompactSkillPanel } = await import("../client/components/CompactSkillPanel.tsx");
+const { default: ChoiceImpact } = await import("../client/components/ChoiceImpact.tsx");
+const { default: DecisionDialog } = await import("../client/components/DecisionDialog.tsx");
+const { CurrentLegacySummary } = await import("../client/components/LegacyGallery.tsx");
 hooks.deregister();
 
 function sample() {

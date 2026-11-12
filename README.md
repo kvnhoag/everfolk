@@ -23,6 +23,17 @@ Begin a life near Rhakotis in 350 BCE and experience the world around the emergi
 
 The engine uses a recorded seed and accepted commands for deterministic replay. Existing saves retain their exact world revisions.
 
+### Classic Alexandria resource economy
+
+New lives record named parents and grandparents with their household backgrounds and occupations. Open Family for a table of living relatives, your spouse and children, with deceased relatives kept under Remembered family. Relationships lists friends, business partners, teachers, disciples, enemies and romantic relationships as they form, alongside backgrounds, work and recorded bonds.
+
+In the bundled classic Alexandria world, new lives offer work shaped by their household background, with farming as an optional livelihood. Independent material trades use purchased supplies to produce goods for sale. Place bulk market contracts during the year: cash or stock is reserved immediately, and deliveries and sale receipts settle at the next year end. Quotes respond to events reported in the life. Choosing the Trading focus puts ordinary work aside; repeated years of completed sales can open the trader occupation.
+
+The market shows resources useful to your current work and background, goods you own or have ordered, and supplies for tasks you can take. Traders, shopkeepers, merchants, estate stewards and quartermasters can browse the full catalogue with search and category filters because their work involves broad purchasing or resale. Other occupations keep a focused selection. Starting-resource displays focus on your household's rolls and possessions.
+
+New lives limit ordinary household contracts to 50 units per order and 100 total units per year. Roles with full market access can commit 100 units per order and 300 per year. Purchases and sales share that yearly allowance, including orders split across different goods. Cancelling a contract releases its allowance; completing the year renews it. At most eight contracts may be pending.
+
+
 ## Ranked lives on NEAR
 
 **Guides:** [project report](guide/REPORT.md) · [how to play](guide/TUTORIAL.md) · [a real life that became Euclid](guide/EXAMPLE_LIFE.md)
@@ -49,6 +60,12 @@ Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_
 
 Without a configured verifier, choose **Practice ranked life** to try the same screens and simulation using a browser-only ledger. It sends no transactions to NEAR. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above.
 
+## Career and economy tree
+
+Open **Character → Skills** to follow the full career and economy tree, or **Wiki → All skills & requirements** to browse it without taking actions. The tree connects authored skills, occupations and accomplishment paths. Filter by branch, follow a foundation skill into later careers, and inspect the real age, skill, cash, resource and accepted-work requirements.
+
+Occupation cards explain yearly income before costs, harvest and storage mechanics, or army wages and rations. Training and career actions use the existing yearly activity budget. **Locked** paths have unmet requirements; **Unavailable** paths remain inspectable but are excluded by the current world. Existing worlds retain their own rules.
+
 ## Development
 
 The standalone [character creator](tools/character-creator/README.md) includes editable historical presets, layered NFT artwork, and five rarity previews. Run `node tools/character-creator/server.mjs` to open it locally on port 4173, or visit `/collection.html` on that server to browse the collection.
@@ -64,7 +81,7 @@ pnpm preview
 
 Edit content generator modules and run `pnpm content` to rebuild the current world. Keep earlier packs available for their saves.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and architecture, and [ROADMAP.md](ROADMAP.md) for development phases.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, [ARCHITECTURE.md](ARCHITECTURE.md) for folder ownership and dependency rules, and [ROADMAP.md](ROADMAP.md) for development phases.
 
 ## Source and assets
 
@@ -74,4 +91,7 @@ Original pixel/vector artwork, source geometry and editable native masters are r
 
 ## Grain and Service demo
 
-New free-play and practice lives use `alexandria-demo-1`. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
+New free-play births use `alexandria-lives-2`, with household resource rolls shown beneath the four main stats, including zero results. Total wealth includes these holdings at current merchant bids. Begun lives retain their recorded revision; ranked and practice configurations remain unchanged. A finished farmer can mint a Farming NFT whose deed (stocked the granary, shared seed) is drawn into a later life at a harvest shock. A soldier who earns convoy distinction can mint as Alexander under the demo standard. Grain, wages and the convoy stay in the game; only the NFT is on chain. The owner calls that open this world on the demo contract are printed by `scripts/ranked/prepare-demo-owner-calls.sh` and are not run from here.
+
+
+The approved **Printed Folktale** identity uses locally bundled Eczar 600 for the wordmark and headings, with DM Sans 500 at 16px for narrative text. The textured wordmark keeps its clay-coloured period. Transparent SVG/PNG logos, the font licence and rebuild sources are packaged in [the brand kit](artwork/branding/everfolk-printed-folktale/README.md).

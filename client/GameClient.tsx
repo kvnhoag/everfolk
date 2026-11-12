@@ -1,17 +1,10 @@
 "use client";
-import { displayProse } from "./display-prose.ts";
 import { useEffect, useRef, useState } from "react";
-import App from "./App";
-import { getBuiltinWorld, getLegacyWorld, worldSummary } from "../server/content.ts";
-import type { PublishedCatalog, PublishedWorld, WorldSummary } from "../server/content.ts";
-import { engineForLife, hasLifeBegun, readSavedLife, registerWorldPack, selectWorldPack } from "./session.ts";
-import type { LifeState } from "../src/types.ts";
-import { contentFingerprint } from "../src/random.ts";
-import { selectFactoryWorld } from "./factory-world-selection.ts";
-import { readEverfolkStorage } from "./brand-storage.ts";
-import LoadingScreen from "./LoadingScreen.tsx";
-import type { LoadingPhase } from "./LoadingScreen.tsx";
-import { keepFreePlayOnRankedStart } from "./ranked-return.ts";
+import { displayProse } from "./models/display-prose.ts";
+import { useWorldLibrary } from "./hooks/useWorldLibrary.ts";
+import { registerWorldPack } from "./lib/world-session.ts";
+import App from "./screens/App.tsx";
+import LoadingScreen from "./screens/LoadingScreen.tsx";
 import ChainLayer, { useChainRoute } from "./chain/ChainLayer.tsx";
 import type { ChainBackend } from "./chain/chain-backend.ts";
 import Web3Navigation from "./chain/Web3Navigation.tsx";
@@ -19,44 +12,18 @@ import { useChainBackend, loadRankedConfig } from "./chain/chain-backend.ts";
 import { beginRankedSession, type RankedSession } from "./chain/ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
 import type { LifeView } from "../chain/types.ts";
-import type { WorldPack } from "../src/types.ts";
-import { DEMO_WORLD_VERSION } from "../chain/ids.ts";
 import { loadLifeWorld } from "./chain/life-world.ts";
-
-
-/** Loads the world a ranked life was started in. New practice lives use the demo world. */
-async function loadRankedWorld(version: string): Promise<WorldPack> {
+/** Register an exact ranked pack without changing free-play bindings. */
+async function loadRankedWorld(version: string) {
   const ready = await loadLifeWorld(version);
   registerWorldPack(ready);
   return ready;
 }
 
-async function loadDemoWorld(): Promise<WorldPack> {
-  return loadRankedWorld(DEMO_WORLD_VERSION);
-}
-
-const SELECTION_KEY = "everfolk:selected-world:v1";
-
-async function readApi<T>(path: string): Promise<T> {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12_000);
-  try {
-    const response = await fetch(path, { credentials: "same-origin", cache: "no-store", signal: controller.signal });
-    const data = await response.json() as { error?: string };
-    if (!response.ok) throw new Error(data.error ?? "The world library could not be opened.");
-    return data as T;
-  } finally { clearTimeout(timeout); }
-}
-
 export default function GameClient() {
   const backend = useChainBackend();
   const chainRoute = useChainRoute();
-  const [active, setActive] = useState<{ world: PublishedWorld; key: number; fresh: boolean; previousLife?: LifeState } | null>(null);
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const [worlds, setWorlds] = useState<WorldSummary[]>([]);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("opening");
+  const { active, pickerOpen, setPickerOpen, worlds, busy, error, loadingPhase, openWorlds, enterWorld, keepImportedWorld, holdFreePlayForRanked } = useWorldLibrary();
   const dialog = useRef<HTMLDialogElement>(null);
   // A ranked life replaces free play until its ending report is closed; free play's save is untouched meanwhile.
   const [rankedSession, setRankedSession] = useState<RankedSession | null>(null);
@@ -70,113 +37,14 @@ export default function GameClient() {
       verifyUrl: "/api/ranked/verify", world,
       ...(backend.mode === "preview" ? { verifyLocally: practiceVerifier(world, backend.contract) } : {}),
     }, life);
-    setActive(keepFreePlayOnRankedStart);
+    holdFreePlayForRanked();
     setRankedSession(session);
   }
-
-  useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      setLoadingPhase("restoring");
-      const builtin = getBuiltinWorld();
-      let world = builtin;
-      let restored = false;
-      let hadSelection = false;
-      try {
-        const saved = readEverfolkStorage(window.localStorage, SELECTION_KEY);
-        if (saved) {
-          hadSelection = true;
-          world = JSON.parse(saved) as PublishedWorld;
-          selectWorldPack(world.pack);
-          restored = true;
-          // Started lives retain their exact pack. Pending official births may
-          // refresh after any content revision, including one in the same era.
-          let hasBegunLife = true;
-          try {
-            const currentLife = readSavedLife(window.localStorage);
-            hasBegunLife = Boolean(currentLife && hasLifeBegun(window.localStorage, currentLife));
-          } catch { /* Keep an existing selection when its save cannot be checked. */ }
-          const selection = selectFactoryWorld(world, { hasBegunLife });
-          if (selection !== world) { world = selection; restored = false; }
-          if (!hasBegunLife && world.pack.version !== DEMO_WORLD_VERSION) { restored = false; hadSelection = false; }
-        }
-        else if (readEverfolkStorage(window.localStorage, "everfolk:alexandria-sample:v3") !== null) { world = getLegacyWorld(); restored = true; }
-      } catch { world = builtin; }
-      if (!restored && (!hadSelection || world.pack.version !== DEMO_WORLD_VERSION)) {
-        setLoadingPhase("world");
-        const demo = await loadDemoWorld();
-        world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
-      }
-      if (cancelled) return;
-      selectWorldPack(world.pack);
-      try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* In-memory play still works. */ }
-      setActive({ world, key: 0, fresh: false });
-    })();
-    return () => { cancelled = true; };
-  }, []);
 
   useEffect(() => {
     if (pickerOpen && !dialog.current?.open) dialog.current?.showModal();
     else if (!pickerOpen && dialog.current?.open) dialog.current?.close();
   }, [pickerOpen]);
-
-  useEffect(() => {
-    const holdWorldPicker = () => { if (document.hidden) setPickerOpen(false); };
-    document.addEventListener("visibilitychange", holdWorldPicker);
-    return () => document.removeEventListener("visibilitychange", holdWorldPicker);
-  }, []);
-
-  async function openWorlds() {
-    setPickerOpen(true);
-    setError("");
-    setBusy(true);
-    try { setWorlds((await readApi<PublishedCatalog>("/api/worlds")).worlds); }
-    catch (cause) { setWorlds([worldSummary(active?.world ?? getBuiltinWorld())]); setError(cause instanceof Error ? cause.message : "The world library is unavailable."); }
-    finally { setBusy(false); }
-  }
-
-  async function enterWorld(id: string, fresh: boolean, previousLife?: LifeState) {
-    setBusy(true);
-    setError("");
-    try {
-      const useDemo = fresh || id === "alexandria" || id === "alexandria-sample" || Boolean(active?.world.pack.demo);
-      const demo = useDemo ? await loadDemoWorld() : null;
-      let world: PublishedWorld = demo
-        ? { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] }
-        : await readApi<PublishedWorld>(`/api/worlds/${encodeURIComponent(id)}`);
-      if (fresh && !demo) world = selectFactoryWorld(world, { fresh: true });
-      else {
-        const refreshed = selectFactoryWorld(world);
-        if (refreshed !== world) {
-          selectWorldPack(world.pack);
-          try {
-            const savedLife = readSavedLife(window.localStorage);
-            if (!savedLife || !hasLifeBegun(window.localStorage, savedLife)) world = refreshed;
-          } catch { /* Preserve the selected world when its save cannot be checked. */ }
-        }
-      }
-      selectWorldPack(world.pack);
-      try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* Per-life saves still report their storage status. */ }
-      setActive(current => ({ world, key: (current?.key ?? 0) + 1, fresh, ...(fresh && previousLife ? { previousLife } : {}) }));
-      setPickerOpen(false);
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "This world could not be opened.");
-      setPickerOpen(true);
-    } finally { setBusy(false); }
-  }
-
-  function keepImportedWorld(life: LifeState) {
-    const pack = engineForLife(life).world;
-    const samePack = active && contentFingerprint(active.world.pack) === life.worldFingerprint;
-    const world: PublishedWorld = {
-      id: life.worldId, revisionId: `pack-${life.worldFingerprint}`, pack,
-      routes: active?.world.id === life.worldId ? active.world.routes.filter(route => Object.hasOwn(pack.flags, route.flag)) : [],
-      ...(samePack && active.world.eventVisuals ? { eventVisuals: active.world.eventVisuals } : {}),
-    };
-    selectWorldPack(world.pack);
-    try { window.localStorage.setItem(SELECTION_KEY, JSON.stringify(world)); } catch { /* The life controller reports save availability. */ }
-    setActive(current => current ? { ...current, world } : current);
-  }
 
   if (!active) return <LoadingScreen phase={loadingPhase} />;
   return <>

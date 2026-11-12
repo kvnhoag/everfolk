@@ -2,16 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { getNetWorth } from "../src/economy.ts";
-import type { BirthRollStat } from "../client/birth-stat-roll.ts";
+import type { BirthRollStat } from "../client/models/birth-stat-roll.ts";
 import {
   BIRTH_DIGIT_FRAME_MS, BIRTH_ROLL_DURATION_MS,
   canRepresentBirthReelValue, getBirthDigitReels, getBirthReelLayout, getBirthRollFrame,
   getBirthRollStats, getBirthRollTiming, getCosmeticBirthDigits,
-} from "../client/birth-stat-roll.ts";
-import {
-  hasBirthStatsBeenRevealed, hasLifeBegun, persistBirthStatsReveal,
-} from "../client/session.ts";
-import type { StorageLike } from "../client/session.ts";
+} from "../client/models/birth-stat-roll.ts";
+import { hasBirthStatsBeenRevealed, hasLifeBegun } from "../client/queries/lives.ts";
+import { persistBirthStatsReveal } from "../client/mutations/lives.ts";
+import type { StorageLike } from "../client/types/session.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import fixedStart from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 

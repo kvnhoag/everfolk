@@ -1,10 +1,11 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, hasSocialRole, matchesCondition, resolvePartner, validateWorld } from "../src/index.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import raw from "../worlds/alexandria-sample.json" with { type: "json" };
 import socialRelease from "../worlds/alexandria-0.31.0.json" with { type: "json" };
@@ -20,9 +21,9 @@ function withoutProse<T>(value: T): T {
 
 test("all sixteen encountered identities offer explicit friendship and bounded shared work", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.34.0");
+  assert.equal(world.version, "0.42.0");
   assert.equal(world.events.filter(event => event.id.startsWith("meet-person-")).length, 16);
-  assert.equal(world.character!.activities.length, 285);
+  assert.equal(world.character!.activities.filter(activity => /^(befriend|friend-time|form-business|joint-order|end-friendship|end-business)-person-/.test(activity.id)).length, 16 * 6);
   assert.equal(world.character!.socialRelationships, true);
   const engine = createEngine(world), birth = engine.start("social-content-inventory");
   assert.deepEqual(birth.character!.people, {});
@@ -38,7 +39,9 @@ test("all sixteen encountered identities offer explicit friendship and bounded s
     assert.deepEqual(friend.outcomes[0].effects, [{ type: "social-role", partner: id, role: "friend", active: true }, { type: "closeness", target: "partner", partner: id, delta: 3 }]);
     const invite = followup.choices.find(choice => choice.id === `invite-date-${id}`)!;
     const { opportunity, ...invitationRules } = invite;
-    assert.deepEqual(withoutProse(invitationRules), withoutProse(previous.events.find(event => event.id === followup.id)!.choices.find(choice => choice.id === invite.id)), "romantic acceptance keeps its actual guards and weights");
+    assert.ok(invitationRules.when?.type === "all");
+    assert.deepEqual(invitationRules.when.conditions[1], { type: "social-role", partner: id, role: "enemy", active: false });
+    assert.deepEqual(withoutProse({ ...invitationRules, when: invitationRules.when.conditions[0] }), withoutProse(previous.events.find(event => event.id === followup.id)!.choices.find(choice => choice.id === invite.id)), "romantic acceptance keeps its original guards and weights alongside the new hostile-role guard");
     assert.deepEqual(opportunity, { label: "Begin dating", outcomeIds: [`date-${id}-accepted`] });
     const business = world.events.find(event => event.id === `business-proposal-${id}`)!;
     assert.equal(business.trigger.type, "random"); assert.equal(business.maxOccurrences, 1);
@@ -78,6 +81,7 @@ test("social ties leave the economy, skills, household care and earlier story ru
 
 function fixture(): WorldPack {
   const value = structuredClone(world);
+  withoutMarketSignals(value);
   const retain = new Set([value.health!.careDecision, ...Object.values(value.economy!.moneylender!.events), "meet-person-harbor", "date-person-harbor", "business-proposal-person-harbor"]);
   value.events = value.events.filter(event => retain.has(event.id));
   for (const [id, at] of [["meet-person-harbor", 18], ["date-person-harbor", 19], ["business-proposal-person-harbor", 20]] as const) value.events.find(event => event.id === id)!.trigger = { type: "age", at };
@@ -85,6 +89,9 @@ function fixture(): WorldPack {
   value.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   value.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   value.yearlyEffects = []; value.yearlyRules = [];
+  // Social acceptance tests use a fixed cash budget without passive asset income.
+  for (const asset of value.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of value.origins) delete origin.assetRanges;
   value.character!.skills.reckoning.initial = 10;
   for (const origin of value.origins) { origin.effects = []; origin.statRanges = { wealth: { min: 20, max: 20 } }; }
   return value;

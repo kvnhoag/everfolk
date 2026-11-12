@@ -1,12 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {
-  advanceToTurningPoint, archiveLife, createSampleLife, exportLife, persistLife,
-  readArchivedLives, readSavedLife, sampleEngine, SAVE_KEY, ARCHIVE_KEY, PRESENTATION_KEY,
-  hasLifeBegun, persistBirthPresentation, hasBirthStatsBeenRevealed, persistBirthStatsReveal,
-  builtinEngine, legacyEngine, selectWorldPack, loadAnyLife,
-} from "../client/session.ts";
-import type { StorageLike } from "../client/session.ts";
+import { advanceToTurningPoint, archiveLife, createSampleLife, persistLife, persistBirthPresentation, persistBirthStatsReveal } from "../client/mutations/lives.ts";
+import { exportLife, sampleEngine, SAVE_KEY, ARCHIVE_KEY, PRESENTATION_KEY, builtinEngine, legacyEngine, selectWorldPack, loadAnyLife } from "../client/lib/world-session.ts";
+import { readArchivedLives, readSavedLife, hasLifeBegun, hasBirthStatsBeenRevealed } from "../client/queries/lives.ts";
+import type { StorageLike } from "../client/types/session.ts";
 import { createEngine } from "../src/index.ts";
 import namedCausesPack from "../worlds/alexandria-0.5.1.json" with { type: "json" };
 import originRangesPack from "../worlds/alexandria-0.6.0.json" with { type: "json" };

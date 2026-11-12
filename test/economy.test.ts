@@ -77,6 +77,63 @@ test("ownership limits block repeated purchases with an accurate reason", () => 
   assert.match(availability(world, state, "buy-tools").reason!, /at most 1/);
 });
 
+test("uncapped resource worlds permit repeated purchases and wealth above the old stat ceiling", () => {
+  const world = pack();
+  world.economy!.uncappedResources = true;
+  world.stats.wealth.initial = 100;
+  const engine = createEngine(world);
+  let life = engine.act(engine.start("uncapped-resources"), "buy-tools");
+  life = engine.advance(life);
+  assert.equal(availability(world, life, "buy-tools").available, true);
+  life = engine.act(life, "buy-tools");
+  assert.equal(life.economy!.assets.tools, 2, "Legacy maxOwned metadata does not cap the new rules.");
+  assert.equal(getNetWorth(world, life), 1000);
+  life = engine.act(engine.advance(life), "earn");
+  assert.equal(getNetWorth(world, life), 1020);
+  assert.equal(life.stats.wealth, 102);
+  assert.deepEqual(engine.load(engine.save(life)), life);
+  assert.deepEqual(engine.replay(life.seed, life.commands), life);
+});
+
+test("starting resources roll reproducibly with origin overrides and contribute their market prices", () => {
+  const world = pack();
+  world.economy!.uncappedResources = true;
+  world.economy!.assets[0].initialRange = { min: 0, max: 2 };
+  world.economy!.assets[1].initialRange = { min: 2, max: 4 };
+  world.origins[0].assetRanges = { tools: { min: 3, max: 7 } };
+  const engine = createEngine(world);
+  const tools = new Set<number>(), shares = new Set<number>();
+  for (let index = 0; index < 80; index++) {
+    const life = engine.start(`resource-birth-${index}`);
+    const quantities = life.economy!.assets;
+    assert.ok(quantities.tools >= 3 && quantities.tools <= 7);
+    assert.ok(quantities.share >= 2 && quantities.share <= 4);
+    assert.equal(life.economy!.cash, 100);
+    const marketValue = quantities.tools * 30 + quantities.share * 120;
+    assert.equal(getAssetValue(world, life), marketValue);
+    assert.equal(getNetWorth(world, life), 100 + marketValue);
+    assert.equal(life.stats.wealth, (100 + marketValue) / 10);
+    assert.deepEqual(engine.start(life.seed), life);
+    assert.deepEqual(engine.load(engine.save(life)), life);
+    tools.add(quantities.tools); shares.add(quantities.share);
+  }
+  assert.deepEqual([...tools].sort(), [3, 4, 5, 6, 7]);
+  assert.deepEqual([...shares].sort(), [2, 3, 4]);
+});
+
+test("fixed and zero starting resource quantities require no extra draw and pay income once per year", () => {
+  const world = pack(); world.economy!.uncappedResources = true;
+  const noRoll = createEngine(world).start("fixed-resources");
+  world.economy!.assets[0].initialRange = { min: 0, max: 0 };
+  world.economy!.assets[1].initialRange = { min: 3, max: 3 };
+  for (const asset of world.economy!.assets) delete asset.maxOwned;
+  const engine = createEngine(world), life = engine.start("fixed-resources");
+  assert.deepEqual(life.economy!.assets, { tools: 0, share: 3 });
+  assert.equal(life.rngState, noRoll.rngState);
+  assert.equal(getNetWorth(world, life), 460);
+  assert.equal(engine.advance(life).economy!.cash, 130);
+});
+
 test("mandatory expenses record unpaid debt; future income does not secretly repay it", () => {
   const world = pack(); world.stats.wealth.initial = 1;
   world.yearlyEffects = [{ type: "cash", delta: -30 }];
@@ -273,6 +330,14 @@ test("origin fractional index arithmetic removes only binary rounding residue", 
 });
 
 const invalid: [string, (world: WorldPack) => void, RegExp][] = [
+  ["nonboolean uncapped resources", world => { (world.economy as unknown as Record<string, unknown>).uncappedResources = "yes"; }, /uncappedResources/],
+  ["negative starting resource range", world => { world.economy!.assets[0].initialRange = { min: -1, max: 2 }; }, /initialRange/],
+  ["fractional starting resource range", world => { world.economy!.assets[0].initialRange = { min: 0, max: 1.5 }; }, /safe integer/],
+  ["reversed starting resource range", world => { world.economy!.assets[0].initialRange = { min: 2, max: 1 }; }, /minimum must not exceed/],
+  ["unknown origin resource", world => { world.origins[0].assetRanges = { missing: { min: 0, max: 1 } }; }, /unknown asset/],
+  ["starting resource above legacy ownership limit", world => { world.economy!.assets[0].initialRange = { min: 0, max: 2 }; }, /legacy ownership limit/],
+  ["origin resource above legacy ownership limit", world => { world.origins[0].assetRanges = { tools: { min: 2, max: 3 } }; }, /legacy ownership limit/],
+  ["unsafe starting market value", world => { world.economy!.uncappedResources = true; world.origins[0].assetRanges = { tools: { min: 0, max: 1_000_000_000_000 } }; }, /combined starting asset/],
   ["nonboolean automatic repayment", world => { (world.economy as unknown as Record<string, unknown>).autoDebtRepayment = "yes"; }, /autoDebtRepayment/],
   ["unknown economy stat", world => { world.economy!.stat = "missing"; }, /unknown stat/],
   ["fractional scale", world => { world.economy!.unitsPerPoint = 1.5; }, /safe integer/],

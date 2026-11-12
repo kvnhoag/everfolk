@@ -46,7 +46,7 @@ The preview command runs Wrangler in local mode. CI builds the application; it d
 ## Work within the architecture
 
 - `src/` owns deterministic simulation rules. Keep browser, storage, network and wall-clock behavior outside the core.
-- `client/` owns presentation, timing, local persistence and projections. Previews must use actual rules without consuming randomness.
+- `client/` separates views, hooks, queries, mutations, pure models, storage adapters, shared state and styles. Previews must use actual rules without consuming randomness. Follow [ARCHITECTURE.md](ARCHITECTURE.md) for folder ownership and dependency rules; `pnpm check` enforces them.
 - `scripts/`, `research/` and `worlds/` own content generation, evidence and immutable world revisions.
 - `server/`, `db/`, `drizzle/`, `app/` and `worker/` own the content service and application routing.
 - `public/` contains delivered artwork and fonts; `artwork/` contains editable native banner masters.
@@ -61,7 +61,7 @@ Edit the generator modules, then regenerate the current pack:
 pnpm content
 ```
 
-Preserve the previous exact world pack, increment the new pack version and register retained revisions in both `client/session.ts` and `server/content.ts`. Begun lives retain their original rules and text; do not silently reinterpret saves or rewrite custom worlds. Simulation changes must preserve replay semantics or explicitly version the save contract.
+Preserve the previous exact world pack, increment the new pack version and register retained revisions in both `client/lib/world-session.ts` and `server/content.ts`. Begun lives retain their original rules and text; do not silently reinterpret saves or rewrite custom worlds. Simulation changes must preserve replay semantics or explicitly version the save contract.
 
 Documented history, historically inspired fiction and numerical game balance are separate evidence categories. Preserve source dates, geography and limitations. A citation supporting a historical practice does not establish a character's biography, success probability, prices or mortality. Add behavior checks for changed rules and meaningful pacing evidence for changed routes.
 

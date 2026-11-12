@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeState } from "../src/types.ts";
-import { getMoneyImpact, getWealthSummary } from "../client/wealth.ts";
-import { getLoanSummary, loanEffectNotes } from "../client/loan-summary.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { getMoneyImpact, getWealthSummary } from "../client/models/wealth.ts";
+import { getLoanSummary, loanEffectNotes } from "../client/models/loan-summary.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const engine = createEngine(current);

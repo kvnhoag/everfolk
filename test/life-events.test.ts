@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import { yearAtAge } from "../src/calendar.ts";
 import type { JournalEntry, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { buildLifeEvents } from "../client/life-events.ts";
+import { buildLifeEvents } from "../client/models/life-events.ts";
 
 function entry(type: JournalEntry["type"], id: string, text: string, age = 6): JournalEntry {
   return { type, id, text, age, year: yearAtAge(pack.startYear, age) };

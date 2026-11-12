@@ -3,8 +3,9 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { ActivityAvailability, LifeState } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../client/character-panel-model.ts";
-import { practiceBlockReason } from "../client/skill-tree.ts";
+import retained from "../worlds/alexandria-0.41.0.json" with { type: "json" };
+import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../client/models/character-panel-model.ts";
+import { practiceBlockReason } from "../client/models/skill-tree.ts";
 
 const engine = createEngine(pack);
 function lifeAt(age: number): LifeState {
@@ -20,24 +21,39 @@ function action(id: string, patch: Partial<ActivityAvailability> = {}): Activity
   return { id, category: "family", text: id, minAge: 12, available: true, outcomes: [{ id: `${id}-result`, weight: 1, text: "Done.", effects: [] }], ...patch };
 }
 
-test("newborn management shows skills and household money without adult career or family prompts", () => {
+test("newborn management shows family and relationship records without adult activity prompts", () => {
   const life = lifeAt(0), before = structuredClone(life);
-  assert.deepEqual(ids(life), ["skills", "wealth"]);
+  assert.deepEqual(ids(life), ["skills", "wealth", "relationships", "children"]);
   assert.equal(characterActivitySummary(life, engine.getActivities(life)), "Activities unlock as you grow.");
   assert.deepEqual(visibleFamilyActivities(life, engine.getActivities(life)), []);
   assert.deepEqual(life, before);
 });
 
-test("family and career sections unlock at relevant ages, while relationships still require a known adult", () => {
-  assert.deepEqual(ids(lifeAt(11)), ["skills", "wealth"]);
-  assert.deepEqual(ids(lifeAt(12)), ["career", "skills", "wealth", "children"]);
-  assert.deepEqual(ids(lifeAt(16)), ["career", "skills", "wealth", "children"]);
-  assert.equal(ids(lifeAt(17), true).includes("relationships"), false);
-  assert.equal(ids(lifeAt(18)).includes("relationships"), false);
+test("career unlocks with age while family and social records remain visible throughout the current life", () => {
+  assert.deepEqual(ids(lifeAt(11)), ["skills", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(lifeAt(12)), ["career", "skills", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(lifeAt(16)), ["career", "skills", "wealth", "relationships", "children"]);
+  assert.equal(ids(lifeAt(17), true).includes("relationships"), true);
+  assert.equal(ids(lifeAt(18)).includes("relationships"), true);
   assert.equal(ids(lifeAt(18), true).includes("relationships"), true);
   const employed = lifeAt(15);
   employed.character!.jobId = "porter";
   assert.equal(ids(employed).includes("career"), true);
+});
+
+test("retained .41 lives keep their original family and relationship section unlocks", () => {
+  const oldEngine = createEngine(retained);
+  const oldLife = structuredClone(oldEngine.start("retained-character-sections"));
+  const sections = (age: number, known = false) => {
+    oldLife.age = age;
+    return visibleCharacterSections(oldLife, oldEngine.world, known).map(section => section.id);
+  };
+  assert.deepEqual(sections(0), ["skills", "wealth"]);
+  assert.deepEqual(sections(11), ["skills", "wealth"]);
+  assert.deepEqual(sections(12), ["career", "skills", "wealth", "children"]);
+  assert.equal(sections(17, true).includes("relationships"), false);
+  assert.equal(sections(18).includes("relationships"), false);
+  assert.equal(sections(18, true).includes("relationships"), true);
 });
 
 test("family activities omit future-age, childcare and family-planning actions until relevant", () => {

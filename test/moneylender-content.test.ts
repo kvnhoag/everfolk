@@ -1,9 +1,10 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import { getNetWorth } from "../src/economy.ts";
-import { getChoiceImpact } from "../client/choice-impact.ts";
+import { getChoiceImpact } from "../client/models/choice-impact.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.31.0.json" with { type: "json" };
@@ -12,10 +13,14 @@ import previous from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 /** Isolate lending from unrelated mortality, income and personal decisions. */
 function fixture(startingWealth = 0): WorldPack {
   const world = structuredClone(current) as WorldPack;
+  withoutMarketSignals(world);
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.yearlyEffects = []; world.yearlyRules = [];
+  // All available cash is supplied by this fixture or its accepted loan.
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) delete origin.assetRanges;
   const events = new Set([world.health!.careDecision, ...Object.values(world.economy!.moneylender!.events)]);
   world.events = world.events.filter(event => events.has(event.id));
   for (const origin of world.origins) {

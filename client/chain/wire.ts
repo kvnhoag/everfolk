@@ -1,4 +1,4 @@
-import type { Draw, LifeView, Listing, MintResult, TokenExtra, TokenStats, TokenView } from "./types.ts";
+import type { Draw, LifeView, Listing, MarketTerms, MintResult, TokenExtra, TokenStats, TokenView } from "./types.ts";
 import type { MintPack, MintTerms, PoolEntry } from "../../chain/types.ts";
 
 /** Shape checks for contract answers. The chain is external data: check what the UI relies on, fail loudly otherwise. */
@@ -116,4 +116,14 @@ export function parsePoolEntries(value: unknown): PoolEntry[] {
 export function parseFigureSupply(value: unknown): [number, number] {
   if (!Array.isArray(value) || value.length !== 2 || !value.every(n => Number.isInteger(n) && n >= 0)) fail("figure supply");
   return value as [number, number];
+}
+
+const MAX_BPS = 10_000;
+
+export function parseMarketTerms(value: unknown): MarketTerms {
+  const terms = record(value, "market terms", { royalty_sources_bps: "number", royalty_treasury_bps: "number" });
+  const sources = terms.royalty_sources_bps as number;
+  const treasury = terms.royalty_treasury_bps as number;
+  if (![sources, treasury].every(bps => Number.isInteger(bps) && bps >= 0) || sources + treasury > MAX_BPS) fail("market terms");
+  return { royaltySourcesBps: sources, royaltyTreasuryBps: treasury };
 }

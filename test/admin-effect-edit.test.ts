@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { Effect, WorldPack } from "../src/types.ts";
-import { validateEditedEffects } from "../client/admin/effect-edit.ts";
+import { validateEditedEffects } from "../client/models/admin/effect-edit.ts";
 import raw from "../worlds/alexandria-sample.json" with { type: "json" };
 
 test("an admin can revise commissioned-work rewards without losing its outcome-only accomplishment", () => {

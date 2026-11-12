@@ -1,3 +1,4 @@
+import fixturePack from "../worlds/alexandria-0.37.0.json" with { type: "json" };
 import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -8,7 +9,7 @@ import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" 
 import previous from "../worlds/alexandria-0.11.0.json" with { type: "json" };
 import timelineRelease from "../worlds/alexandria-0.13.0.json" with { type: "json" };
 
-function fixture(eventIds: string[] = [], source = pack): LifeEngine {
+function fixture(eventIds: string[] = [], source = fixturePack): LifeEngine {
   const world = withoutMoneylender(structuredClone(source) as WorldPack);
   world.events = world.events.filter(event => eventIds.includes(event.id) || event.id === world.health!.careDecision);
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });

@@ -10,6 +10,8 @@ import type { LivesContract } from "./types.ts";
 import MintRecovery from "./MintRecovery.tsx";
 import { rankedSaveKey } from "./ranked-session.ts";
 import "./ranked-entry.css";
+import SignInPanel from "./SignInPanel.tsx";
+import { accountLabel } from "./account-bar-model.ts";
 
 export interface RankedEntryProps {
   backend: ChainBackend;
@@ -35,6 +37,11 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [signingIn, setSigningIn] = useState(false);
+  const [choseWallet, setChoseWallet] = useState(false);
+  const { signin } = backend;
+  /** Gas, wallet approvals and wallet help are shown only to players on the NEAR wallet path. */
+  const walletPath = !signin || !signin.available.email || signin.method === "wallet" || (signin.method !== "email" && choseWallet);
 
   useEffect(() => {
     setLife(current.active?.life ?? null);
@@ -75,13 +82,14 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   }, "The mint could not finish. Please try again.");
 
   function begin() {
+    if (signin?.needsPlayKey) { void run(signin.useWallet, "Sign-in did not finish. Try again."); return; }
     if (!life) return;
     if (!onBegin) { setNotice("Ranked play isn't open in this build yet. Your place in this world is kept."); return; }
     void run(async () => { await onBegin(life); }, "This life could not begin. Try again in a moment.");
   }
 
   return <div className="ranked-entry">
-    {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
+    {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard walletPath={walletPath} needsPlayKey={signin?.needsPlayKey} life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
     {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack or rerolls, those fees are shared with its source lives and the protocol treasury; they are not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 
     <section className="chain-card ranked-entry-intro" aria-labelledby={headingId}>
@@ -93,16 +101,18 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
         <li>Other players' characters can help you when it matters.</li>
         <li>When your life ends, you can keep it. Everyone who shaped it shares the fee.</li>
       </ul>
-      <ol className="ranked-steps"><li><strong>Connect</strong><span>Use your existing NEAR testnet wallet. Meteor is supported.</span></li><li><strong>Live</strong><span>No entry fee. NEAR gas applies to recorded decisions and checkpoints. No rewinds.</span></li><li><strong>Open & choose</strong><span>When the life ends, open a 3-card pack for {formatNear(terms.mint_fee)} NEAR. Choose one card to mint. Each slot has one optional {formatNear(terms.reroll_fee)} NEAR reroll.</span></li></ol>
-      <p className="chain-fine">Base and reroll fees share the same source-life and protocol treasury split. Wallet approvals show the cost before payment; gas is separate. Testnet tokens have no real monetary value.</p>
-      {!life && !current.loading && !current.error && <div className="chain-actions">
+      <ol className="ranked-steps"><li><strong>{signin ? "Sign in" : "Connect"}</strong><span>{signin ? "With your email, or a NEAR testnet wallet you already use." : "Use your existing NEAR testnet wallet. Meteor is supported."}</span></li><li><strong>Live</strong><span>{walletPath ? "No entry fee. NEAR gas applies to recorded decisions and checkpoints. No rewinds." : "No entry fee. No rewinds."}</span></li><li><strong>Open & choose</strong><span>When the life ends, open a 3-card pack for {formatNear(terms.mint_fee)} NEAR. Choose one card to mint. Each slot has one optional {formatNear(terms.reroll_fee)} NEAR reroll.</span></li></ol>
+      <p className="chain-fine">Base and reroll fees share the same source-life and protocol treasury split. {walletPath ? "Wallet approvals show the cost before payment; gas is separate." : "You confirm each price before you pay."} Testnet tokens have no real monetary value.</p>
+      {!life && (!current.loading || signin?.needsPlayKey) && !current.error && <div className="chain-actions">
         {accountId
-          ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void start(); }}>{busy ? "Starting…" : "Start a Weave life"}<span aria-hidden="true">→</span></button>
+          ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void (signin?.needsPlayKey ? run(signin.useWallet, "Sign-in did not finish. Try again.") : start()); }}>{busy ? "Starting…" : signin?.needsPlayKey ? "Sign in again for popup-free play" : "Start a Weave life"}<span aria-hidden="true">→</span></button>
+          : signin ? <button className="chain-primary" type="button" disabled={busy || signingIn} onClick={() => setSigningIn(true)}>Sign in to play<span aria-hidden="true">→</span></button>
           : <><button className="chain-primary" type="button" disabled={busy} onClick={() => { void run(backend.connect, "The wallet could not connect."); }}>Connect a NEAR wallet<span aria-hidden="true">→</span></button><EmailSignIn /></>}
       </div>}
+      {!accountId && signin && signingIn && <SignInPanel available={signin.available} onEmail={signin.emailFlow} onWallet={async () => { setChoseWallet(true); await signin.useWallet(); }} onClose={() => setSigningIn(false)} />}
       <div className="chain-actions"><a className="chain-secondary" href="#figures">Meet the figures</a><a className="chain-secondary" href="#mine">My lives</a></div>
-      {accountId && <p className="chain-fine">Playing as {accountId}</p>}
-      {!accountId && backend.mode === "live" && <details className="wallet-help">
+      {accountId && <p className="chain-fine">Playing as {accountLabel(accountId, signin?.method ?? null, signin?.email ?? null)}</p>}
+      {!accountId && backend.mode === "live" && walletPath && <details className="wallet-help">
         <summary>Using Meteor Wallet?</summary>
         <p>Weave Mode runs on NEAR <strong>testnet</strong>. Meteor only lists testnet accounts it already holds in this browser. If it asks you to create a wallet, open Meteor, switch its network to <strong>Testnet</strong> and import your testnet account (recovery phrase or private key), or install the Meteor extension in this browser. Then connect again.</p>
         <p>MyNearWallet works too: sign in at testnet.mynearwallet.com first.</p>
@@ -112,6 +122,6 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
       {error && <p className="chain-error" role="alert">{error}</p>}
       {notice && <p className="chain-notice" role="status">{notice}</p>}
     </section>
-    {life?.status === "minting" ? <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={() => { window.location.hash = ""; }} /> : life && (!current.active || current.active.progress.status === "new") && <BornInto lines={bornIntoLines(life.figure_picks, owners)} beginLabel="Begin this life" busy={busy} onBegin={begin} onGiveUp={() => setClosing(true)} />}
+    {life?.status === "minting" ? <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={() => { window.location.hash = ""; }} /> : life && (!current.active || current.active.progress.status === "new") && <BornInto lines={bornIntoLines(life.figure_picks, owners)} beginLabel={signin?.needsPlayKey ? "Sign in again for popup-free play" : "Begin this life"} busy={busy} onBegin={begin} onGiveUp={() => setClosing(true)} />}
   </div>;
 }

@@ -1,3 +1,4 @@
+import { vocationReason } from "./vocations/engine.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { UNAVAILABLE_REASON } from "./demo/types.ts";
 import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, WorldPack } from "./types.ts";
@@ -36,6 +37,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
+  if (effect.type === "vocation") return vocationReason(world, state, effect.action);
   if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {
     if (effect.target === "skill" && (!world.character || !state.character)) return "This world has no character skills.";
@@ -71,6 +73,7 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (allowUnchanged && character.relationshipStatus === effect.status && character.partnerId === effect.partner) return;
     if (state.age < 18) return "Relationships unlock at age 18.";
     if (state.age + partner.ageOffset < 18) return `${partner.name} must be at least 18.`;
+    if (definition.extendedSocialRoles && character.relationships?.partners[partner.id]?.roles?.includes("enemy")) return `Settle your hostility with ${partner.name} before beginning a romantic relationship.`;
     if (effect.status === "courting") {
       if (character.relationshipStatus === "married") return "End your current marriage before beginning another courtship.";
       if (character.relationshipStatus === "courting" && character.partnerId === partner.id) return `You are already courting ${partner.name}.`;

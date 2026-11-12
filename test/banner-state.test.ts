@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { BANNER_SITUATION_IDS, BANNER_SITUATIONS, resolveLifeBanner } from "../client/banner-state.ts";
-import type { BannerSituationId } from "../client/banner-state.ts";
-import type { SceneContext } from "../client/scene-model.ts";
+import { BANNER_SITUATION_IDS, BANNER_SITUATIONS, resolveLifeBanner } from "../client/models/banner-state.ts";
+import type { BannerSituationId } from "../client/models/banner-state.ts";
+import type { SceneContext } from "../client/models/scene-model.ts";
 import worldInput from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const world = worldInput as WorldPack;
@@ -51,6 +51,9 @@ test("established occupations cover every current job, including all seven featu
     "philosophy-tutor": "philosophy", "sky-table-calculator": "astronomy", astrologer: "astronomy", soldier: "military",
     officer: "military", general: "military", "court-adviser": "civic", "patron-supported-reader": "study",
     "pottery-workshop-lead": "workshop", "carving-workshop-lead": "workshop", "sculpture-workshop-lead": "sculpture", performer: "music",
+    farmer: "home", weaver: "workshop", writer: "study", boatbuilder: "harbor", trader: "market",
+    fisher: "harbor", baker: "home", "household-worker": "home",
+    merchant: "market", "estate-steward": "civic", quartermaster: "military",
   };
   assert.deepEqual(Object.keys(expected).sort(), world.character!.jobs.map(job => job.id).sort());
   for (const [job, situation] of Object.entries(expected)) {

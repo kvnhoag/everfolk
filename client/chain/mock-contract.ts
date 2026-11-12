@@ -1,3 +1,4 @@
+import { DEFAULT_MARKET_TERMS } from "./payout-preview.ts";
 import { sha256Hex } from "../../chain/hash.ts";
 import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
 import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
@@ -148,6 +149,7 @@ function bind(state: MockState, account: string): MockLivesContract {
     seedToken: input => seedToken(state, input),
 
     async mintTerms() { return { mint_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
+    async marketTerms() { return { ...DEFAULT_MARKET_TERMS }; },
     async mintPack(lifeId) { return copy(state.packs.get(lifeId)?.view ?? null); },
     async openMintPack(lifeId, signed, action) {
       const life = ownedAliveLife(state, account, lifeId);

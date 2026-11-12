@@ -36,6 +36,19 @@ function yearText(year: number): string {
   return Number.isSafeInteger(year) && year !== 0 ? formatYear(year) : "?";
 }
 
+const NO_EFFECT_TEXT = "Its effect on later lives is not recorded.";
+
+export interface TokenStory { career: string; lived: string; deed: { name: string; effect: string } }
+
+function tokenStory(extra: TokenExtra): TokenStory {
+  const deed = actionOption(extra.action_id);
+  return {
+    career: GROUP_TITLE[extra.career_group] ?? extra.career_group,
+    lived: `Lived ${yearText(extra.birth_year)} – ${yearText(extra.death_year)}`,
+    deed: { name: deed.name, effect: deed.description || NO_EFFECT_TEXT },
+  };
+}
+
 export interface TokenPageInput {
   tokenId: string;
   token: TokenView;
@@ -57,6 +70,7 @@ export interface TokenPageView {
   affection: number;
   affectionText: string;
   lifeLine: string;
+  story: TokenStory;
   owner: string;
   isOwner: boolean;
   reach: string;
@@ -88,6 +102,7 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
     affection: extra.affection,
     affectionText: `Affection ${extra.affection} / 100`,
     lifeLine: `Lived ${yearText(extra.birth_year)} – ${yearText(extra.death_year)}`,
+    story: tokenStory(extra),
     owner,
     isOwner,
     reach: reachLine(input.stats),
@@ -129,6 +144,10 @@ export interface MarketRow {
   priceText: string;
   priceYocto: string;
   canBuy: boolean;
+  /** Null when the token could not be read. */
+  careerGroup: CareerGroup | null;
+  /** Null when the token could not be read. */
+  rarity: number | null;
   /** 1–100; absent when the token could not be read. */
   affection?: number;
   /** Skill icon for people of the city; null for figures, which show their art. */
@@ -165,6 +184,8 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
       priceText: `${formatNear(listing.price)} NEAR`,
       priceYocto: listing.price,
       canBuy: viewer !== null && viewer !== listing.seller_id,
+      careerGroup: token ? token.extra.career_group : null,
+      rarity: token ? token.extra.rarity : null,
       ...(token ? { affection: token.extra.affection, emblem: token.extra.kind === "figure" ? null : careerEmblem(token.extra.career_group) } : {}),
     };
   });

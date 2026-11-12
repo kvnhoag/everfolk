@@ -1,5 +1,8 @@
+import { vocationCashDelta } from "./vocations/view.ts";
 import type { Choice, EconomyState, Effect, LifeState, WorldPack } from "./types.ts";
 import { applyLoanEffect } from "./loans.ts";
+import { TRADE_ITEMS } from "./demo/types.ts";
+import { marketCommittedQuantity, marketOrderValue, marketQuote } from "./market.ts";
 
 /** Deliberate numeric ceiling keeps all ledger arithmetic safely below 2^53. */
 export const ECONOMY_LIMIT = 1_000_000_000_000;
@@ -9,12 +12,28 @@ function amount(value: number, label: string): number {
   return value;
 }
 
-export function getAssetValue(world: WorldPack, state: Pick<LifeState, "economy">): number {
-  if (!world.economy || !state.economy) return 0;
-  return world.economy.assets.reduce((sum, asset) => sum + asset.value * (state.economy!.assets[asset.id] ?? 0), 0);
+type ValuationState = Pick<LifeState, "economy"> & Partial<Pick<LifeState, "age" | "lastEventAge" | "eventCounts" | "demo">>;
+/** The merchant's current bid is the realizable market value of each holding. */
+export function getDemoResourceValue(world: WorldPack, state: Partial<Pick<LifeState, "demo">>): number {
+  if (!world.demo?.startingResources || !state.demo) return 0;
+  const demo = state.demo;
+  return amount(TRADE_ITEMS.reduce((sum, item) => {
+    const quantity = item === "grain" ? demo.household.grain : item === "flax" ? demo.household.flax
+      : item === "ox" || item === "donkey" ? demo.household.animals[item] : demo.goods[item];
+    const held = amount(quantity, `Household ${item}`);
+    const price = amount(demo.town.prices[item].buy, `Market ${item} price`);
+    return sum + held * price;
+  }, 0), "Household resource market value");
 }
 
-export function getNetWorth(world: WorldPack, state: Pick<LifeState, "economy">): number {
+export function getAssetValue(world: WorldPack, state: ValuationState): number {
+  if (!world.economy || !state.economy) return 0;
+  const valuation = { ...state, age: state.age ?? 0, lastEventAge: state.lastEventAge ?? {}, eventCounts: state.eventCounts ?? {} };
+  return amount(world.economy.assets.reduce((sum, asset) => sum + marketQuote(world, valuation, asset.id).sell * (state.economy!.assets[asset.id] ?? 0), 0)
+    + marketOrderValue(world, valuation) + getDemoResourceValue(world, state), "Resource market value");
+}
+
+export function getNetWorth(world: WorldPack, state: ValuationState): number {
   if (!world.economy || !state.economy) return 0;
   return state.economy.cash + getAssetValue(world, state) - state.economy.debt;
 }
@@ -24,13 +43,15 @@ export function initialEconomy(world: WorldPack, state: LifeState): EconomyState
   // Origin stat arithmetic can carry a binary float residue (0.1 + 0.2).
   // Validated bounds and deltas resolve to whole currency, so round that residue.
   return { cash: amount(Math.round(state.stats[world.economy.stat] * world.economy.unitsPerPoint), "Starting cash"), debt: 0,
-    assets: Object.fromEntries(world.economy.assets.map(asset => [asset.id, 0])) };
+    assets: Object.fromEntries(world.economy.assets.map(asset => [asset.id, 0])),
+    ...(world.economy.market ? { market: { orders: [], nextOrderId: 1, tradingYears: 0 } } : {}) };
 }
 
 export function syncEconomyStat(world: WorldPack, state: LifeState): void {
   if (!world.economy || !state.economy) return;
   const definition = world.stats[world.economy.stat];
-  state.stats[world.economy.stat] = Math.max(definition.min, Math.min(definition.max, getNetWorth(world, state) / world.economy.unitsPerPoint));
+  const value = getNetWorth(world, state) / world.economy.unitsPerPoint;
+  state.stats[world.economy.stat] = Math.max(definition.min, world.economy.uncappedResources ? value : Math.min(definition.max, value));
 }
 
 /** Settle debt only at the engine's annual boundary, after ordinary costs.
@@ -70,7 +91,7 @@ export function applyEconomyEffect(world: WorldPack, state: LifeState, effect: E
   } else if (effect.type === "asset") {
     const asset = world.economy.assets.find(candidate => candidate.id === effect.asset)!;
     const quantity = amount((economy.assets[effect.asset] ?? 0) + effect.delta, asset.title);
-    if (quantity > asset.maxOwned) throw new Error(`${asset.title} is limited to ${asset.maxOwned}.`);
+    if (!world.economy.uncappedResources && asset.maxOwned !== undefined && marketCommittedQuantity(state, effect.asset) + effect.delta > asset.maxOwned) throw new Error(`${asset.title} is limited to ${asset.maxOwned}.`);
     economy.assets[effect.asset] = quantity;
   } else return false;
   syncEconomyStat(world, state);
@@ -83,7 +104,7 @@ export function previewEconomyEffects(world: WorldPack, life: LifeState, effects
   const state = { ...life, stats: { ...life.stats }, economy: { ...life.economy, assets: { ...life.economy.assets }, ...(life.economy.loan ? { loan: { ...life.economy.loan } } : {}) } };
   for (const effect of effects) {
     if (effect.type === "end") break;
-    applyEconomyEffect(world, state, effect);
+    applyEconomyEffect(world, state, effect.type === "vocation" ? { type: "cash", delta: vocationCashDelta(world, life, effect.action) } : effect);
   }
   return state.economy;
 }
@@ -104,7 +125,7 @@ export function financeActivityReason(world: WorldPack, life: LifeState, activit
         const asset = world.economy.assets.find(candidate => candidate.id === effect.asset)!;
         const next = (state.economy.assets[effect.asset] ?? 0) + effect.delta;
         if (next < 0) return `You do not own enough ${asset.title.toLowerCase()}.`;
-        if (next > asset.maxOwned) return `You can own at most ${asset.maxOwned} ${asset.title.toLowerCase()}.`;
+        if (!world.economy.uncappedResources && asset.maxOwned !== undefined && marketCommittedQuantity(state, effect.asset) + effect.delta > asset.maxOwned) return `You can own at most ${asset.maxOwned} ${asset.title.toLowerCase()}.`;
       }
       try { applyEconomyEffect(world, state, effect); } catch (error) { return (error as Error).message; }
     }
@@ -113,5 +134,5 @@ export function financeActivityReason(world: WorldPack, life: LifeState, activit
 
 export function yearlyAssetIncome(world: WorldPack, state: LifeState): number {
   if (!world.economy || !state.economy) return 0;
-  return world.economy.assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * (state.economy!.assets[asset.id] ?? 0), 0);
+  return amount(world.economy.assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * (state.economy!.assets[asset.id] ?? 0), 0), "Resource annual income");
 }

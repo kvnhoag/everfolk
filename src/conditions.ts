@@ -16,6 +16,7 @@ function compare(left: number, op: Comparison, right: number): boolean {
 export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
   if (!condition) return true;
   switch (condition.type) {
+    case "vocation": return (state.vocations?.completed[condition.action] ?? 0) >= condition.count;
     case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
       state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);

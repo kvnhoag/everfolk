@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
+import { getNetWorth } from "../src/economy.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import beforeBalance from "../worlds/alexandria-0.17.0.json" with { type: "json" };
@@ -42,6 +43,7 @@ function withoutMortality(includeSocialEncounters = true): LifeEngine {
     // This qualification fixture isolates the selected occupation's follow-up.
     // Meeting/dating pacing and dated historical offers have their own integration tests.
     delete copy.character!.encounterPacing;
+    if (copy.eventPacing?.rareEvents) copy.eventPacing.rareEvents.annualChance = 0;
     copy.events = copy.events.filter(event => !event.id.startsWith("meet-person-") && !event.id.startsWith("date-person-") && !(event.id.startsWith("classical-") && event.mode !== "automatic"));
   }
   // These controlled qualification checks deliberately take the original
@@ -59,6 +61,8 @@ function withoutMortality(includeSocialEncounters = true): LifeEngine {
   // unmodified-pack mortality and bounded-stat coverage stays above.
   copy.stats.wealth.initial = 80;
   copy.stats.wealth.initialRange = { min: 80, max: 80 };
+  for (const asset of copy.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of copy.origins) delete origin.assetRanges;
   for (const origin of copy.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 80, max: 80 } };
   return createEngine(copy);
 }
@@ -86,8 +90,10 @@ test("Alexandria newborns vary within their household's configured starting rang
     for (const [stat, definition] of Object.entries(engine.world.stats)) {
       const range = origin.statRanges?.[stat] ?? definition.initialRange;
       assert.ok(range, `${origin.id}: ${stat} has a starting range`);
-      assert.ok(Number.isInteger(life.stats[stat]) && life.stats[stat] >= range.min && life.stats[stat] <= range.max, `${origin.id}: ${stat} follows its own range`);
+      const value = stat === engine.world.economy!.stat ? life.economy!.cash / engine.world.economy!.unitsPerPoint : life.stats[stat];
+      assert.ok(Number.isInteger(value) && value >= range.min && value <= range.max, `${origin.id}: ${stat} follows its own range`);
     }
+    assert.equal(life.stats.wealth * engine.world.economy!.unitsPerPoint, getNetWorth(engine.world, life));
     households.get(origin.id)!.add(JSON.stringify(life.stats));
     assert.deepEqual(engine.start(life.seed), life);
   }

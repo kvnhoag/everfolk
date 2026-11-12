@@ -1,5 +1,5 @@
 import { useId } from "react";
-import PixelIcon from "../PixelIcon.tsx";
+import PixelIcon from "../components/PixelIcon.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import type { MintRevealView } from "./life-report-model.ts";
 import "./life-report.css";
