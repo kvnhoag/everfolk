@@ -1,0 +1,204 @@
+.npc-lab {
+  max-width: 1240px;
+  margin: auto;
+  padding: 24px clamp(16px, 4vw, 42px) 60px;
+  color: var(--text, #293d35);
+  font-family: var(--font-body, "DM Sans", sans-serif);
+}
+.npc-lab nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  margin-bottom: 40px;
+}
+.npc-lab a {
+  color: inherit;
+}
+.npc-intro {
+  max-width: 660px;
+  margin-bottom: 30px;
+}
+.npc-intro h1 {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 500;
+  margin: 0 0 14px;
+}
+.npc-lab p {
+  line-height: 1.55;
+}
+.npc-lab button,
+.npc-lab input {
+  font: inherit;
+  border: 1px solid #b2a98b;
+  border-radius: 3px;
+  padding: 9px 12px;
+  background: #f5f0e2;
+  color: #284b3c;
+}
+.npc-lab button {
+  cursor: pointer;
+}
+.npc-lab button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.npc-lab label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+}
+.npc-lab input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.npc-start {
+  display: grid;
+  gap: 12px;
+  max-width: 480px;
+}
+.npc-session-bar {
+  border-block: 1px solid #bfb89f;
+  padding: 18px 0;
+  margin-bottom: 22px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.npc-session-bar h2 {
+  margin: 0;
+  font-size: 22px;
+}
+.npc-session-bar p {
+  font-size: 12px;
+  margin: 6px 0;
+}
+.npc-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.npc-cast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+.npc-person {
+  border: 1px solid #c9c2ab;
+  padding: 18px;
+  background: #f9f5e9;
+  min-width: 0;
+}
+.npc-person header p,
+.npc-person small {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.npc-person h2 {
+  font: 500 25px var(--font-display, Georgia, serif);
+  margin: 5px 0;
+}
+.npc-person > p {
+  font-size: 12px;
+  min-height: 52px;
+}
+.npc-person dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.npc-person dl div {
+  font-size: 11px;
+}
+.npc-person dd {
+  margin: 3px 0 0;
+  font-size: 16px;
+}
+.npc-person form {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+.npc-person details {
+  font-size: 11px;
+  margin-top: 16px;
+}
+.npc-lab summary {
+  cursor: pointer;
+}
+.npc-access {
+  border: 2px solid #b58d4b;
+  padding: 16px;
+  margin-top: 20px;
+}
+.npc-access code {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+.npc-offers,
+.npc-record {
+  margin-top: 28px;
+}
+.npc-offers article {
+  padding: 12px;
+  border-top: 1px solid #c7bea6;
+}
+.npc-offers button {
+  margin-right: 8px;
+}
+.npc-record ol {
+  list-style: none;
+  padding: 0;
+}
+.npc-record li {
+  border-top: 1px solid #d1c9b1;
+  padding: 10px 0;
+}
+.npc-record small {
+  font-size: 10px;
+}
+.npc-record p {
+  font-size: 13px;
+  margin: 4px 0;
+}
+.npc-choice {
+  padding: 18px;
+  border: 2px solid #8b9c77;
+  margin-bottom: 22px;
+}
+.npc-choice button {
+  display: block;
+  margin: 8px 0;
+}
+.npc-error {
+  border-left: 3px solid #9a493a;
+  padding-left: 12px;
+}
+.npc-lab > details > button {
+  margin: 5px;
+  max-width: 100%;
+  text-align: left;
+}
+@media (max-width: 650px) {
+  .npc-session-bar {
+    display: block;
+  }
+  .npc-controls {
+    margin-top: 15px;
+  }
+  .npc-lab nav {
+    font-size: 10px;
+  }
+  .npc-person > p {
+    min-height: 0;
+  }
+  .npc-lab button {
+    min-height: 42px;
+  }
+}

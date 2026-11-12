@@ -22,6 +22,27 @@
       "when": 1794417949861,
       "tag": "0002_signin_funding",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1794477903241,
+      "tag": "0003_ordinary_the_fury",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1794478260455,
+      "tag": "0004_familiar_rafael_vega",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1794478416365,
+      "tag": "0005_faithful_the_captain",
+      "breakpoints": true
     }
   ]
 }
