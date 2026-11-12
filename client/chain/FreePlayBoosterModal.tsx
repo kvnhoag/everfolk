@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { createFreePlayBooster, type FreePlayBoosterSession } from "../models/freeplay-booster.ts";
 import MintPack from "./MintPack.tsx";
+import LifeMomentsPack from "./LifeMomentsPack.tsx";
+import { freeLifeMoments } from "../models/free-life-moments.ts";
 import "./chain.css";
 
 export interface FreePlayBoosterModalProps {
@@ -16,6 +18,8 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
   const [session, setSession] = useState<FreePlayBoosterSession | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  // Lives that recorded their stages open a pack of those moments; older worlds keep the three-card preview.
+  const moments = useMemo(() => freeLifeMoments(life, world), [life, world]);
 
   useEffect(() => {
     if (!open) {
@@ -24,6 +28,7 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     }
     const dialog = dialogRef.current;
     if (dialog && !dialog.open) dialog.showModal();
+    if (moments.length) return;
 
     let cancelled = false;
     setLoading(true);
@@ -46,7 +51,7 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     return () => {
       cancelled = true;
     };
-  }, [open, life, world]);
+  }, [open, life, world, moments.length]);
 
   if (!open) return null;
 
@@ -69,6 +74,8 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
             </button>
           </nav>
         </header>
+
+        {moments.length > 0 && <LifeMomentsPack moments={moments} onClose={onClose} />}
 
         {loading && <p className="chain-loading" role="status">Rolling your life’s booster pack…</p>}
         {error && (

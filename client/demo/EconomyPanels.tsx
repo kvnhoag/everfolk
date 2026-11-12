@@ -340,16 +340,6 @@ export default function EconomyPanels({
           <p key={reason} className="demo-market-reason">{reason}</p>
         ))}
 
-        <PriceChart
-          item={item}
-          onSelectItem={setItem}
-          history={history}
-          basePrices={basePrices}
-          currentBuy={quote?.buy ?? 1}
-          currentSell={quote?.sell ?? 1}
-          armyGrainPrice={screen.market.armyGrainPrice}
-        />
-
         <div className="demo-commodity-table-wrap">
           <table className="demo-commodity-table" aria-label="Commodity prices and holdings">
             <thead>
@@ -619,6 +609,16 @@ export default function EconomyPanels({
         </div>
 
         {notice && <p className="demo-trade-notice" role="status">{notice}</p>}
+
+        {/* The chart follows the row chosen in the list above; there is no separate goods tab bar. */}
+        <PriceChart
+          item={item}
+          history={history}
+          basePrices={basePrices}
+          currentBuy={quote?.buy ?? 1}
+          currentSell={quote?.sell ?? 1}
+          armyGrainPrice={screen.market.armyGrainPrice}
+        />
       </section>
 
       {/* TAB 2: FARM & GRANARY */}

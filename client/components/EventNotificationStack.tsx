@@ -6,6 +6,7 @@ import { displayProse } from "../models/display-prose.ts";
 import { useEventNotifications } from "../hooks/useEventNotifications.ts";
 import { eventNotificationLifeKey } from "../models/event-notifications.ts";
 import { readSeenEventNotifications, rememberSeenEventNotifications } from "../state/event-notification-store.ts";
+import { learnedThisYear } from "../models/skill-learned-notice.ts";
 import "../styles/event-notifications.css";
 
 interface NotificationItem {
@@ -15,7 +16,7 @@ interface NotificationItem {
   year: number;
   title: string;
   body: string;
-  kind: "decision" | "offer" | "legacy" | "event";
+  kind: "decision" | "offer" | "legacy" | "event" | "skill";
   actionLabel: string;
   onAction(): void;
 }
@@ -34,6 +35,7 @@ export default function EventNotificationStack({
   onOpenDecision,
   onOpenChronicle,
   onOpenPeopleTab,
+  onOpenSkillTree,
 }: {
   life: LifeState;
   world: WorldPack;
@@ -43,6 +45,7 @@ export default function EventNotificationStack({
   onOpenDecision(): void;
   onOpenChronicle(): void;
   onOpenPeopleTab?(): void;
+  onOpenSkillTree?(): void;
 }) {
   const { notifications: completed, dismissNotification } = useEventNotifications(life, world);
   const lifeKey = eventNotificationLifeKey(life);
@@ -76,6 +79,16 @@ export default function EventNotificationStack({
         kind: "decision",
         actionLabel: "Open decision →",
         onAction: onOpenDecision,
+      });
+    }
+
+    // 2. Skills learned this year, with a direct way into the skill tree
+    if (onOpenSkillTree) for (const skill of learnedThisYear(life, world)) {
+      if (dismissed.has(skill.key)) continue;
+      items.push({
+        key: skill.key, badge: "Skill learned", age: skill.age, year: skill.year,
+        title: skill.title, body: "A new skill is yours. See what it opens next in the skill tree.",
+        kind: "skill", actionLabel: "Open skill tree →", onAction: onOpenSkillTree,
       });
     }
 
@@ -129,7 +142,7 @@ export default function EventNotificationStack({
     }
 
     return items.slice(0, 3);
-  }, [life, world, decisionEvent, demoView, dismissedKeys, completed, onOpenDecision, onOpenChronicle, onOpenPeopleTab]);
+  }, [life, world, decisionEvent, demoView, dismissedKeys, completed, onOpenDecision, onOpenChronicle, onOpenPeopleTab, onOpenSkillTree]);
 
   if (notifications.length === 0) return null;
 

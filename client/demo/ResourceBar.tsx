@@ -184,11 +184,11 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
           >
             <ResourceGlyph id="plots" />
             <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Plots</span>
+              <span className="aoe-cell-label">Fields</span>
               <strong className="aoe-cell-value">
                 {grainPlots}
-                <small>G</small>/{screen.household.flaxPlots}
-                <small>F</small>
+                <small> grain</small> · {screen.household.flaxPlots}
+                <small> flax</small>
               </strong>
             </span>
           </button>

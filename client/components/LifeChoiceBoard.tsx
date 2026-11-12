@@ -6,11 +6,8 @@ import ChoiceImpact from "./ChoiceImpact.tsx";
 import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import ImpactValue from "./ImpactValue.tsx";
-import LifeMoment from "./LifeMoment.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
 import { getSkillImpact } from "../models/skill-impact.ts";
-import YearlyFocus from "./YearlyFocus.tsx";
-import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/life-choice-board.css";
 
 function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
@@ -21,10 +18,6 @@ interface Props {
   life: LifeState;
   world: WorldPack;
   activities: readonly ActivityAvailability[];
-  focusId: YearlyFocusId;
-  onAdvance(): void;
-  onOpenChronicle(): void;
-  onFocusChange(focusId: YearlyFocusId): void;
   onActivity(id: string): void;
   onOpenPeopleTab?(): void;
 }
@@ -35,10 +28,6 @@ export default function LifeChoiceBoard({
   life,
   world,
   activities,
-  focusId,
-  onAdvance,
-  onOpenChronicle,
-  onFocusChange,
   onActivity,
   onOpenPeopleTab,
 }: Props) {
@@ -100,10 +89,6 @@ export default function LifeChoiceBoard({
 
   return (
     <div className="life-choice-board is-ready">
-      {life.phase === "ready" && (
-        <LifeMoment showNotifications={false} life={life} world={world} onAdvance={onAdvance} onOpenChronicle={onOpenChronicle} />
-      )}
-
       {life.phase === "ready" && life.age >= 6 && (
         <section className="life-yearly-action-deck" aria-label="Yearly personal action board">
           <header className="life-action-deck-header">
@@ -224,7 +209,6 @@ export default function LifeChoiceBoard({
         </section>
       )}
 
-      <YearlyFocus life={life} world={world} focusId={focusId} activities={activities} onChange={onFocusChange} />
     </div>
   );
 }

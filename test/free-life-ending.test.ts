@@ -46,3 +46,21 @@ test("a Weave life's ending sends minting back to Weave Mode instead of a free p
   assert.doesNotMatch(html, /Open your pack|Begin another life/);
   assert.match(html, /href="#market"/);
 });
+
+const { default: LifeMomentsPack } = await import("../client/chain/LifeMomentsPack.tsx");
+const moments = [
+  { stageId: "infancy", stageTitle: "Infancy", ages: "Ages 0–2", title: "Child of a farm", media: "/a.svg", historical: false },
+  { stageId: "youth", stageTitle: "Youth", ages: "Ages 14–17", title: "Euclid, the geometer", media: "/b.svg", historical: true },
+];
+
+test("a free life's pack opens into the moments of that life, with no mint", () => {
+  const sealed = renderToStaticMarkup(createElement(LifeMomentsPack, { moments, onClose() {} }));
+  assert.match(sealed, /Open your pack/);
+  assert.doesNotMatch(sealed, /Child of a farm/, "Cards stay hidden until the pack is opened.");
+  const opened = renderToStaticMarkup(createElement(LifeMomentsPack, { moments, onClose() {}, initiallyOpen: true }));
+  assert.match(opened, /You could have gotten/);
+  assert.match(opened, /Infancy[\s\S]*Child of a farm/);
+  assert.match(opened, /Youth[\s\S]*Euclid, the geometer/);
+  assert.match(opened, /href="#weave"[^>]*>Play Weave Mode to get real NFTs/);
+  assert.doesNotMatch(opened, /Mint|NEAR fee|Reroll/);
+});
