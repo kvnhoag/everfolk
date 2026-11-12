@@ -8,7 +8,7 @@ import { LIVES_WORLD_VERSION } from "./ids.ts";
 /** New births opt in. Version 1 capability packs and all previous saves remain immutable. */
 export function buildCrossoverWorld(base:WorldPack):WorldPack {
   const world=buildCapabilityWorld(base), character=world.character!, definition=world.vocations!;
-  world.version=LIVES_WORLD_VERSION;
+  world.version="alexandria-lives-5";
   world.title="Alexandria — Attributes and connected paths";
   world.description="Develop Physique, Handmade, Knowledge and Trade. A small military lane combines physical preparation, knowledge and proved service to open career opportunities.";
   world.capabilities={version:3,nodes:structuredClone([...BALANCED_ATTRIBUTE_NODES])};

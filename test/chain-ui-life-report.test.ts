@@ -24,7 +24,7 @@ test("each source shows who it was, what it did and its share", () => {
   assert.equal(euclid.who, "Euclid (alice.testnet)");
   assert.equal(euclid.kind, "figure");
   assert.equal(euclid.actionName, "Open a school");
-  assert.match(euclid.actionLabel, /school/iu);
+  assert.match(euclid.actionLabel, /geometrical teaching/iu);
   assert.equal(euclid.rarityLabel, "Rare");
   assert.equal(euclid.percentText, "75%");
   assert.equal(scholar.who, "A scholar");

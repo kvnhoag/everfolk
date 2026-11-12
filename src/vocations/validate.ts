@@ -1,6 +1,7 @@
+import { CAPABILITY_OPERATIONS } from "../deep-capabilities/operations.ts";
 import type { VocationDefinition } from "./types.ts";
 /** Strict, bounded JSON rules. All ids are local to this immutable pack. */
-export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never): asserts input is VocationDefinition {
+export function validateVocations(input: unknown, skills: Set<string>, fail: (path: string, message: string) => never, deepCapabilities = false, figurePaths = false): asserts input is VocationDefinition {
   const path = "world.vocations";
   function obj(v: unknown, p: string, fields?: string[], required = fields): Record<string, any> {
     if (!v || typeof v !== "object" || Array.isArray(v) || Object.getPrototypeOf(v) !== Object.prototype) fail(p, "expected plain object");
@@ -13,8 +14,8 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     return v as Record<string, any>;
   }
   const n = (v: unknown, p: string, min = 0, max = 1000000): void => { if (!Number.isSafeInteger(v) || (v as number) < min || (v as number) > max) fail(p, `expected integer ${min}..${max}`); };
-  const map = (v: unknown, p: string): Record<string, any> => {
-    const o = obj(v, p); if (Object.keys(o).length > 256) fail(p, "too many entries");
+  const map = (v: unknown, p: string, maximum = 256): Record<string, any> => {
+    const o = obj(v, p); if (Object.keys(o).length > maximum) fail(p, "too many entries");
     for (const k of Object.keys(o)) if (!/^[a-z][a-z0-9-]*$/.test(k)) fail(p, "invalid id");
     return o;
   };
@@ -51,18 +52,24 @@ export function validateVocations(input: unknown, skills: Set<string>, fail: (pa
     n(trade.bidBps, path + ".trade.bidBps", 1, 10000);
     mapping(trade.yearlyDemand, outputs, 0, 10000);
   }
-  for (const value of Object.values(map(root.actions, path + ".actions"))) {
+  for (const value of Object.values(map(root.actions, path + ".actions", figurePaths ? 512 : 256))) {
     const a = obj(value, path);
     if (a.kind === "buy") { obj(a, path, ["kind", "item", "quantity"]); if (typeof a.item !== "string" || !Object.hasOwn(materials, a.item)) fail(path, "unknown material"); n(a.quantity, path, 1, 1000); }
     else if (a.kind === "sell") { obj(a, path, ["kind", "item"]); if (!outputs.has(a.item)) fail(path, "unknown product"); }
     else if (a.kind === "make") {
       obj(a, path, ["kind", "recipe", "quantity", "inspected", "controlledFiring"], ["kind", "recipe"]);
       if (typeof a.recipe !== "string" || !Object.hasOwn(recipes, a.recipe)) fail(path, "unknown recipe");
-      if (a.quantity !== undefined) n(a.quantity, path, 1, 16);
+      if (a.quantity !== undefined) n(a.quantity, path, 1, deepCapabilities ? 1000 : 16);
       for (const field of ["inspected", "controlledFiring"]) if (a[field] !== undefined && typeof a[field] !== "boolean") fail(path, "expected boolean production option");
     }
+    else if (a.kind === "capability") {
+      obj(a, path, ["kind", "operation"]);
+      if (!deepCapabilities || typeof a.operation !== "string" || !Object.hasOwn(CAPABILITY_OPERATIONS, a.operation)) fail(path, "unknown deep capability operation");
+    }
     else if (a.kind === "work") {
-      obj(a, path, ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]); training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
+      obj(a, path, figurePaths ? ["kind", "fee", "pay", "payer", "primary", "supports", "practice", "inputs"] : ["kind", "fee", "pay", "payer", "primary", "supports", "practice"], ["kind", "fee", "pay", "payer", "primary", "supports", "practice"]);
+      if (Object.hasOwn(a, "inputs")) { if (a.practice) fail(path, "material-consuming project work cannot be free practice"); mapping(a.inputs, new Set([...items, "grain"]), 1, 1000); }
+      training(a); n(a.fee, path, 0, 10000); n(a.pay, path, 0, 10000);
       if (!["workshop", "school", "council"].includes(a.payer) || typeof a.practice !== "boolean") fail(path, "invalid work account/practice");
     } else fail(path, "unknown action kind");
   }

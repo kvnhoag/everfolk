@@ -1,5 +1,5 @@
 /**
- * Proof from everyday work (worlds whose capability graph sets `proofFromWork`, alexandria-lives-6 and later).
+ * Proof from everyday work (worlds whose capability graph sets `proofFromWork`, alexandria-lives-7 and later).
  * A year spent on a yearly activity that trains a skill, or a year worked in a job, records one proof toward
  * the next open step of the matching lane. Nothing is paid, bought or consumed; no random draw is made.
  * Older revisions never call into this rule, so their saves replay exactly.

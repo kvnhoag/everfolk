@@ -2,7 +2,7 @@
   "figures": [
     {
       "figure_id": "alexander",
-      "title": "Alexander, the conqueror",
+      "title": "Alexander the Great",
       "media": "/assets/figures/alexander.png",
       "supply_cap": 5,
       "action_ids": [
@@ -12,7 +12,7 @@
     },
     {
       "figure_id": "aristotle",
-      "title": "Aristotle, the philosopher",
+      "title": "Aristotle, the philosopher and naturalist",
       "media": "/assets/figures/aristotle.png",
       "supply_cap": 5,
       "action_ids": [
@@ -32,7 +32,7 @@
     },
     {
       "figure_id": "cleomenes",
-      "title": "Cleomenes of Naucratis, the grain administrator",
+      "title": "Cleomenes of Naucratis, the financial administrator",
       "media": "/assets/figures/cleomenes.png",
       "supply_cap": 5,
       "action_ids": [

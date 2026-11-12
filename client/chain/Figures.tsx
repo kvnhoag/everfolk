@@ -95,13 +95,15 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                       type="button"
                       className="chain-secondary"
                       style={{ width: "100%", justifyContent: "center", minHeight: "34px", fontSize: "11px" }}
+                      aria-expanded={isExpanded}
+                      aria-controls={`figure-panel-${figure.figure}`}
                       onClick={() => setExpandedFigure(isExpanded ? null : figure.figure)}
                     >
                       {isExpanded ? "Hide Requirements ▲" : "View Deeds & Requirements ▼"}
                     </button>
 
-                    {isExpanded && (
-                      <div className="figure-expanded-panel">
+                    {/* Kept in the page while closed so the records stay readable and searchable. */}
+                    <div className="figure-expanded-panel" id={`figure-panel-${figure.figure}`} hidden={!isExpanded}>
                         <h3 style={{ fontSize: "12px", margin: "8px 0 4px", color: "#263b43" }}>Owners &amp; deeds</h3>
                         {(!state?.copies || state.copies.length === 0) && (
                           <p className="chain-fine">No owner yet. This figure is available to qualifying ranked lives.</p>
@@ -127,6 +129,40 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                           </p>
                         ))}
 
+                        {figure.biography && (
+                          <>
+                            <h3 style={{ fontSize: "12px", margin: "10px 0 4px", color: "#263b43" }}>Life and work</h3>
+                            <p className="chain-fine">{figure.biography.period}</p>
+                            <h4 style={{ fontSize: "11px", margin: "8px 0 4px", color: "#263b43" }}>Authored writings</h4>
+                            {figure.biography.authoredWorks.length ? (
+                              <ul className="chain-fine" style={{ paddingLeft: "16px", margin: "0" }}>
+                                {figure.biography.authoredWorks.map(work => (
+                                  <li key={work.title}><em>{work.title}</em> — {work.status}. {work.note}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="chain-fine">No authored literary work is securely identified in the sources reviewed.</p>
+                            )}
+                            {figure.biography.otherWorks.length > 0 && (
+                              <>
+                                <h4 style={{ fontSize: "11px", margin: "8px 0 4px", color: "#263b43" }}>Other works and achievements</h4>
+                                <ul className="chain-fine" style={{ paddingLeft: "16px", margin: "0" }}>
+                                  {figure.biography.otherWorks.map(work => (
+                                    <li key={work.title}><strong>{work.title}</strong> — {work.note}</li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                            {figure.biography.cautions.map(note => <p className="chain-fine" key={note}>{note}</p>)}
+                            <p className="chain-fine">
+                              Sources:{" "}
+                              {figure.biography.sources.map((source, index) => (
+                                <span key={source.url}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span>
+                              ))}
+                            </p>
+                          </>
+                        )}
+
                         <h3 style={{ fontSize: "12px", margin: "10px 0 4px", color: "#263b43" }}>How a life qualifies</h3>
                         <ul className="chain-fine" style={{ paddingLeft: "16px", margin: "0" }}>
                           {figure.origins && figure.origins.length > 0 && (
@@ -148,8 +184,7 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                             </li>
                           )}
                         </ul>
-                      </div>
-                    )}
+                    </div>
                   </div>
                 }
               />

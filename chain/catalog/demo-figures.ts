@@ -18,7 +18,7 @@ const ranked = (id: FigureId): FigureRequirement => {
 const DEMO_FIGURE_LIST: FigureRequirement[] = [
   {
     figure: "alexander",
-    title: "Alexander, the conqueror",
+    title: ranked("alexander").title,
     summary: "A soldier who served, trained hard at warfare, and earned distinction leading a convoy while still young.",
     supplyCap: ranked("alexander").supplyCap,
     jobsAny: ["soldier"],
@@ -33,7 +33,7 @@ const DEMO_FIGURE_LIST: FigureRequirement[] = [
   ranked("euclid"),
   {
     figure: "cleomenes",
-    title: "Cleomenes of Naucratis, the grain administrator",
+    title: ranked("cleomenes").title,
     summary: "A grain dealer with a head for accounts who grew rich, kept a good name, and delivered a supply contract to the army.",
     supplyCap: ranked("cleomenes").supplyCap,
     jobsAny: ["grain-dealer"],

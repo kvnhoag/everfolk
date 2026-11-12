@@ -131,7 +131,7 @@ test("cosmetic arithmetic remains bounded for safe integer endpoints and fixed d
 });
 
 test("the starting wealth range is shown in whole drachmas in the current free-play world", async () => {
-  const { default: lives5 } = await import("../worlds/demo/alexandria-lives-7.json", { with: { type: "json" } });
+  const { default: lives5 } = await import("../worlds/demo/alexandria-lives-8.json", { with: { type: "json" } });
   const engine = createEngine(lives5 as unknown as WorldPack);
   for (const seed of ["round-a", "round-b", "round-c", "round-d", "round-e"]) {
     const wealth = getBirthRollStats(engine.world, engine.start(seed)).find(stat => stat.id === engine.world.economy?.stat);

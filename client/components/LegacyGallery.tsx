@@ -15,8 +15,8 @@ export function CurrentLegacySummary({ world, life, onOpenGallery }: { world: Wo
   if (!records.length) return null;
   return <section className="current-legacy" aria-label="Works and deeds from this life">
     <header><h3>Works &amp; deeds</h3><button type="button" onClick={onOpenGallery}>View collection <span aria-hidden="true">↗</span></button></header>
-    {records.length > 0 ? <ul>{records.slice(-3).reverse().map(record => <li key={record.id}><PixelIcon name={record.routeId} size={21} /><div><strong>{record.name}</strong><span>{record.title} · Age {record.age}</span></div>{distinction(record.kind) && <span className="legacy-prestige">{distinction(record.kind)}</span>}</li>)}</ul> : <p>No accomplishments recorded yet.</p>}
-    <div className="legacy-route-strip" aria-label="Life paths">{routes.map(route => <span key={route.id} className={route.earned.length ? "is-earned" : ""} title={`${route.title}: ${route.earned.length} accomplishments`}><PixelIcon name={route.id} size={15} /><span>{route.title}</span><strong>{route.earned.length}</strong></span>)}</div>
+    {records.length > 0 ? <ul>{records.slice(-3).reverse().map(record => <li key={record.id}><PixelIcon name={record.routeId.startsWith("figure-") ? "philosophy" : record.routeId} size={21} /><div><strong>{record.name}</strong><span>{record.title} · Age {record.age}</span></div>{distinction(record.kind) && <span className="legacy-prestige">{distinction(record.kind)}</span>}</li>)}</ul> : <p>No accomplishments recorded yet.</p>}
+    <div className="legacy-route-strip" aria-label="Life paths">{routes.map(route => <span key={route.id} className={route.earned.length ? "is-earned" : ""} title={`${route.title}: ${route.earned.length} accomplishments`}><PixelIcon name={route.id.startsWith("figure-") ? "philosophy" : route.id} size={15} /><span>{route.title}</span><strong>{route.earned.length}</strong></span>)}</div>
   </section>;
 }
 
@@ -40,7 +40,7 @@ export default function LegacyGallery({ entries, currentLifeKey, storageNotice }
     {filtered.length ? <div className="legacy-gallery-grid">{filtered.map(entry => {
       const record = entry.accomplishment;
       return <article className={`legacy-card${distinction(record.kind) ? " is-prestige" : ""}${record.kind === "ultimate" ? " is-ultimate" : ""}`} key={entry.key}>
-        <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId}.svg`} width={64} height={64} alt="" /><span>{distinction(record.kind) ? "✦" : "◆"}</span></div>
+        <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId.startsWith("figure-") ? "philosophy" : record.routeId}.svg`} width={64} height={64} alt="" /><span>{distinction(record.kind) ? "✦" : "◆"}</span></div>
         <div className="legacy-card-copy"><p className="legacy-card-path">{entry.routeTitle ?? record.routeId.replace(/-/g, " ")}{distinction(record.kind) && <span className="legacy-prestige">{distinction(record.kind)}</span>}</p><h3>{record.name}</h3><strong className="legacy-card-achievement">{record.title}</strong><p>{displayProse(record.description)}</p><div className="legacy-card-person"><strong>{entry.characterName}</strong><span>Age {record.age} · {formatYear(record.year)}</span></div>{record.people.length > 0 && <p className="legacy-card-people">Remembered with {record.people.join(", ")}</p>}<small className="legacy-card-world">{entry.worldTitle}</small>
         </div>
       </article>;

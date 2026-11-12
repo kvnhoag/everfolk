@@ -8,7 +8,7 @@ import { validateWorld } from "../src/validate.ts";
 import type { DemoContext } from "../src/demo/types.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const SEED_PER_PLOT = 10;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, nextExpiryDelay, syncEventNotifications } from "../models/event-notifications.ts";
 import type { EventNotificationState } from "../models/event-notifications.ts";
@@ -32,8 +32,10 @@ export function useEventNotifications(life: LifeState, world: WorldPack, enabled
     document.addEventListener("visibilitychange", expireOnReturn);
     return () => document.removeEventListener("visibilitychange", expireOnReturn);
   }, [enabled]);
+  const dismiss = useCallback((key: string) => setUpdates(previous => previous && dismissEventNotification(previous, key)), []);
   return {
     notifications: enabled && updates?.lifeKey === lifeKey ? updates.notifications : [],
-    dismissNotification(key: string) { setUpdates(previous => previous && dismissEventNotification(previous, key)); },
+    dismissNotification: dismiss,
+    dismiss,
   };
 }

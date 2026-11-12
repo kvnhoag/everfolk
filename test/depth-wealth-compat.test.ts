@@ -10,7 +10,7 @@ import { getWealthComparison } from "../client/models/wealth-comparison.ts";
 import { getSocietyWealthData } from "../client/models/society-wealth-data.ts";
 import { buildPriceHistory } from "../client/demo/price-history.ts";
 import { liveUntil } from "./fixtures/demo/world.ts";
-import current from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
 import type { WorldPack } from "../src/types.ts";

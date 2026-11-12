@@ -14,6 +14,7 @@ import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 function fixture(options: { craft?: number; cash?: number; job?: string; events?: boolean } = {}) {
   const world = buildVocationWorld(base as unknown as WorldPack);
   delete world.knowledge;
+  delete world.demo!.startingResources;
   for (const band of world.health!.incidenceBands) band.annualProbability = 0;
   for (const band of world.health!.declineBands) band.healthLoss = 0;
   for (const band of world.mortality!.bands) band.annualProbability = 0;

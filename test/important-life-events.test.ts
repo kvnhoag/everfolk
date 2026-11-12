@@ -106,9 +106,10 @@ test("vocation crises, completed community works and applied influences remain i
   const { world, life } = fixture();
   // The projection only needs the presence of the vocation economy, never its balances.
   world.demo = {} as NonNullable<WorldPack["demo"]>;
+  world.influences = [{ id: "past-life-granary", label: "An inherited granary lesson", baseWeight: 1, effects: [{ type: "stat", stat: "knowledge", delta: 1 }] }];
   life.journal = [entry("event", "household-harvest"), entry("event", "market-prices"),
     entry("event", "household-hunger"), entry("event", "convoy-loss"), entry("event", "work-well-progress"),
-    entry("event", "work-well-built"), entry("event", "year-road-dangerous"), entry("influence", "past-life-granary")];
+    entry("event", "work-well-built"), entry("event", "year-road-dangerous"), { ...entry("influence", "past-life-granary"), deltas: { knowledge: 1 } }];
   assert.deepEqual(new Set(ids(life, world)), new Set([
     "household-hunger", "convoy-loss", "work-well-built", "year-road-dangerous", "past-life-granary",
   ]));

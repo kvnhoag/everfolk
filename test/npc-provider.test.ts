@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createServer } from "node:http";
 import { once } from "node:events";
-import world from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import world from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import type { WorldPack } from "../src/types.ts";
 import {
   createNpcSimulation,

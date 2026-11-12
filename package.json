@@ -11,8 +11,8 @@
     "test": "node --test test/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "demo": "node examples/play.ts",
     "dev": "node scripts/run-framework.mjs dev",
-    "check": "node scripts/check-english-only.mjs && node scripts/check-structure.mjs && tsc --noEmit",
-    "build": "node scripts/check-english-only.mjs && node scripts/check-structure.mjs && tsc --noEmit && node scripts/run-framework.mjs build",
+    "check": "node scripts/check-english-only.mjs && node scripts/check-structure.mjs && node --max-old-space-size=6144 node_modules/typescript/bin/tsc --noEmit",
+    "build": "node scripts/check-english-only.mjs && node scripts/check-structure.mjs && node --max-old-space-size=6144 node_modules/typescript/bin/tsc --noEmit && node scripts/run-framework.mjs build",
     "preview": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "content": "node scripts/build-alexandria-world.mjs",
     "db:generate": "drizzle-kit generate",
@@ -20,7 +20,9 @@
     "demo:world": "node scripts/demo/build-demo-world.mjs",
     "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
     "npc:provider-check": "node scripts/npc/check-provider.mjs",
-    "check:structure": "node scripts/check-structure.mjs"
+    "check:structure": "node scripts/check-structure.mjs",
+    "figures:world": "node scripts/figures/build-world.mjs",
+    "deep:world": "node scripts/deep-capabilities/build-world.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {

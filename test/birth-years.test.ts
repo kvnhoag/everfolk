@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { birthYearOf, createEngine, yearAtAge } from "../src/index.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack, old = retained as unknown as WorldPack;

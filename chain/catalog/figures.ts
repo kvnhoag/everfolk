@@ -1,11 +1,13 @@
 import type { FigureId } from "../ids.ts";
 import { deepFreeze } from "./content.ts";
+import { biographyFor, type FigureBiography } from "./figure-biographies.ts";
 
 /** What a ranked life must show at its end to be eligible to mint as a historical figure. */
 export interface FigureRequirement {
   figure: FigureId;
   title: string;
   summary: string;
+  biography?: FigureBiography;
   supplyCap: number;
   origins?: string[];
   jobsAny?: string[];
@@ -36,8 +38,9 @@ export const FIGURE_SUPPLY_CAP = 5;
 const FIGURE_LIST: FigureRequirement[] = [
   {
     figure: "alexander",
-    title: "Alexander, the conqueror",
-    summary: "Born to royal kin, a commander who reached the rank of general and earned a recorded military distinction while still young.",
+    title: biographyFor("alexander").title,
+    summary: biographyFor("alexander").biography,
+    biography: biographyFor("alexander"),
     supplyCap: FIGURE_SUPPLY_CAP,
     origins: ["royal-household"],
     jobsAny: ["general"],
@@ -50,8 +53,9 @@ const FIGURE_LIST: FigureRequirement[] = [
   },
   {
     figure: "aristotle",
-    title: "Aristotle, the philosopher",
-    summary: "A widely read teacher of argument who tutored students or advised the court and left a remembered philosophical work.",
+    title: biographyFor("aristotle").title,
+    summary: biographyFor("aristotle").biography,
+    biography: biographyFor("aristotle"),
     supplyCap: FIGURE_SUPPLY_CAP,
     jobsAny: ["philosophy-tutor", "court-adviser"],
     minSkills: { literacy: 76, philosophy: 76, oratory: 50 },
@@ -62,8 +66,9 @@ const FIGURE_LIST: FigureRequirement[] = [
   },
   {
     figure: "euclid",
-    title: "Euclid, the geometer",
-    summary: "A careful reckoner and reader who worked among tables and demonstrations and left a credited piece of scholarship.",
+    title: biographyFor("euclid").title,
+    summary: biographyFor("euclid").biography,
+    biography: biographyFor("euclid"),
     supplyCap: FIGURE_SUPPLY_CAP,
     jobsAny: ["sky-table-calculator", "patron-supported-reader", "philosophy-tutor"],
     minSkills: { reckoning: 80, literacy: 70 },
@@ -74,8 +79,9 @@ const FIGURE_LIST: FigureRequirement[] = [
   },
   {
     figure: "cleomenes",
-    title: "Cleomenes of Naucratis, the grain administrator",
-    summary: "A trader or court official with a head for accounts who grew rich and closed recorded commercial agreements.",
+    title: biographyFor("cleomenes").title,
+    summary: biographyFor("cleomenes").biography,
+    biography: biographyFor("cleomenes"),
     supplyCap: FIGURE_SUPPLY_CAP,
     jobsAny: ["court-adviser", "shopkeeper"],
     minSkills: { reckoning: 80, literacy: 50 },

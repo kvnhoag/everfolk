@@ -1,13 +1,8 @@
-import type { Condition, Effect, LifeState, StatDefinition, WorldPack } from "../../src/types.ts";
+import type { Condition, Effect, JournalEntry, LifeState, StatDefinition, WorldPack } from "../../src/types.ts";
 import { applyStatDelta, skillEffectDelta } from "../../src/progression.ts";
+import { influenceCatalog } from "../../src/influence.ts";
 import { buildLifeEvents } from "./life-events.ts";
 import type { LifeEventYear } from "./life-events.ts";
-
-const DEMO_IMPORTANT_EVENTS = new Set([
-  "household-hunger", "household-ox-died", "household-donkey-died", "household-hand-over", "household-parents-gone",
-  "army-ration-shortfall", "army-wage-shortfall", "convoy-assigned", "convoy-contract", "convoy-withdrawn",
-  "convoy-loss", "convoy-delivered", "convoy-pay-shortfall", "offer-settled",
-]);
 
 const WORLD_STORY_FLAGS = new Set(["experienced-war", "alexander-in-egypt", "alexandria-founded", "ptolemy-governs-egypt", "ptolemy-king"]);
 
@@ -25,7 +20,7 @@ function flagReaders(world: WorldPack) {
     else if (value.type === "all" || value.type === "any") value.conditions.forEach(child => condition(child, owner, inverted));
     else if (value.type === "not") condition(value.condition, owner, !inverted);
   };
-  for (const source of [...world.events, ...(world.character?.activities ?? [])]) {
+  for (const source of [...influenceCatalog(world).events, ...(world.character?.activities ?? [])]) {
     condition(source.when, source.id);
     const choices = "choices" in source ? source.choices : [source];
     for (const choice of choices) {
@@ -43,6 +38,22 @@ function flagReaders(world: WorldPack) {
   return readers;
 }
 
+/** Demo settlements write many ledger lines; reserve notices for changed stakes. */
+function importantDemoFact(entry: JournalEntry, world: WorldPack): boolean {
+  if (!world.demo) return false;
+  if (["household-hand-over", "household-parents-gone", "household-hunger", "household-ox-died", "household-donkey-died",
+    "convoy-assigned", "convoy-contract", "convoy-withdrawn", "convoy-loss", "convoy-delivered", "convoy-pay-shortfall",
+    "army-ration-shortfall", "army-wage-shortfall", "army-sale-partial", "offer-settled",
+    "year-flood-low", "year-army-war", "year-road-dangerous"].includes(entry.id)) return true;
+  if (/^work-.+-built$/.test(entry.id)) return true;
+  if (entry.id === "household-marriage-gift") return Number(entry.text.match(/marriage gift of (\d+)/)?.[1] ?? 0) > 0;
+  if (entry.id !== "market-trade" && entry.id !== "army-sale") return false;
+  // These successful trade lines record the settled amount. A year's adult
+  // grain ration sets a world-scaled floor, so small routine purchases stay quiet.
+  const total = Number(entry.text.match(/for (\d+) (?:drachmas|dr)\./)?.[1] ?? 0);
+  return total >= Math.max(10, world.demo.household.adultRation * world.demo.market.basePrice.grain);
+}
+
 /**
  * A presentation filter over completed facts, without replaying the engine.
  * Numeric notices require a reliably known before/after value. Random birth
@@ -52,11 +63,13 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
   const years = buildLifeEvents(life, world);
   const important = new Set<string>();
   const suppressed = new Set<number>();
-  const events = new Map(world.events.map(event => [event.id, event]));
+  const allEvents = influenceCatalog(world).events;
+  const events = new Map(allEvents.map(event => [event.id, event]));
+  const influences = new Map((world.influences ?? []).map(entry => [entry.id, entry]));
   const activities = new Map(world.character?.activities.map(activity => [activity.id, activity]) ?? []);
   const jobs = new Map(world.character?.jobs.map(job => [job.id, job]) ?? []);
   const outcomes = new Map<string, { owner: string; effects: readonly Effect[] }>();
-  for (const event of world.events) for (const outcome of [...event.choices.flatMap(choice => choice.outcomes), ...event.dependent?.responses ?? []]) outcomes.set(outcome.id, { owner: event.id, effects: outcome.effects });
+  for (const event of allEvents) for (const outcome of [...event.choices.flatMap(choice => choice.outcomes), ...event.dependent?.responses ?? []]) outcomes.set(outcome.id, { owner: event.id, effects: outcome.effects });
   for (const activity of activities.values()) for (const outcome of activity.outcomes) outcomes.set(outcome.id, { owner: activity.id, effects: outcome.effects });
   const readers = flagReaders(world);
   const origin = world.origins.find(item => item.id === life.originId);
@@ -71,17 +84,22 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
   const known = new Set<string>();
   let job: string | null = null, partner: string | null = null, status = "single";
   let loanBalance = 0;
+  let shipmentStage: "muster" | "road" | null = null, shipmentRiskCut = 0;
   const keyAt = (index: number) => { const entry = life.journal[index]; return `${entry.age}-${index}-${entry.type}-${entry.id}`; };
   const sourceAt = (index: number) => {
     const entry = life.journal[index];
     if (entry.type === "outcome") return outcomes.get(entry.id);
+    if (entry.type === "influence") {
+      const influence = influences.get(entry.id);
+      if (influence) return { owner: influence.id, effects: influence.effects ?? [] };
+    }
     const event = entry.type === "event" ? events.get(entry.id) : undefined;
     if (event?.mode === "automatic") return { owner: event.id, effects: event.effects ?? [] };
     return undefined;
   };
   const boundary = (index: number) => {
     const entry = life.journal[index];
-    return entry.type === "birth" || entry.type === "year" || entry.type === "choice" || entry.type === "outcome" ||
+    return entry.type === "birth" || entry.type === "year" || entry.type === "choice" || entry.type === "outcome" || entry.type === "influence" ||
       entry.type === "event" && events.has(entry.id) || entry.type === "activity" && activities.has(entry.id);
   };
   function apply(effects: readonly Effect[], owner: string, generated: readonly number[] = []): boolean {
@@ -104,6 +122,32 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
         if (effect.active) roles.add(key); else roles.delete(key);
       } else if (effect.type === "introduce" && has(`met-${effect.partner}`)) known.add(effect.partner);
       else if (effect.type === "asset") assets.set(effect.asset, (assets.get(effect.asset) ?? 0) + effect.delta);
+      else if (effect.type === "demo") {
+        const change = effect.effect;
+        if (change.kind === "work" && has(`work-${change.work}-built`) ||
+          change.kind === "offer" && change.action === "accept" && has("offer-settled") ||
+          change.kind === "grain" && change.delta >= (world.demo?.household.adultRation ?? 1) ||
+          change.kind === "item" && change.delta > 0 ||
+          change.kind === "harvest-bonus" && change.bps !== 0) verifiedFact = true;
+        if (change.kind === "convoy" && shipmentStage) {
+          if (change.riskCutBps) {
+            const next = Math.min(10_000, shipmentRiskCut + change.riskCutBps);
+            verifiedFact ||= next !== shipmentRiskCut;
+            shipmentRiskCut = next;
+          }
+          if (change.action === "depart") { verifiedFact ||= shipmentStage !== "road"; shipmentStage = "road"; }
+          if (change.action === "withdraw" && has("convoy-withdrawn") || change.action === "resolve" && has("convoy-delivered")) {
+            verifiedFact = true; shipmentStage = null;
+          }
+        }
+      } else if (effect.type === "vocation") {
+        // Vocation gains depend on inventory and project state. Don't guess a
+        // later skill delta after this unrecorded training step.
+        for (const id of Object.keys(world.character?.skills ?? {})) skills.set(id, undefined);
+        const action = world.vocations?.actions[effect.action];
+        const recipe = action?.kind === "make" ? world.vocations?.recipes[action.recipe] : undefined;
+        if (recipe && recipe.workYears > 1 && generated.some(index => life.journal[index].id === `vocation-${effect.action}` && life.journal[index].text.startsWith("Completed "))) verifiedFact = true;
+      }
       else if (effect.type === "accomplishment" && has(`earned-${effect.achievement}`)) verifiedFact = true;
       else if (effect.type === "child" && generated.some(index => /^child-\d+$/.test(life.journal[index].id))) verifiedFact = true;
       else if (effect.type === "condition" && has(`health-onset-${effect.condition}`)) verifiedFact = true;
@@ -142,16 +186,21 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
     const numeric = (before: Map<string, number | undefined>, after: Map<string, number | undefined>, definitions: Record<string, StatDefinition>) =>
       [...before].some(([id, value]) => value !== undefined && after.get(id) !== undefined && definitions[id] &&
         Math.abs(after.get(id)! - value) >= (definitions[id].max - definitions[id].min) * .1 && after.get(id) !== value);
+    const routineWork = effects.some(effect => effect.type === "vocation" || effect.type === "demo" && effect.effect.kind === "work");
     const story = Object.entries(flags).some(([id, value]) => value !== beforeFlags[id] &&
       (WORLD_STORY_FLAGS.has(id) || [...(readers.get(`${id}:${value}`) ?? [])].some(reader => reader !== owner)));
     return verifiedFact || job !== beforeJob || partner !== beforePartner || status !== beforeStatus ||
       [...roles].sort().join("|") !== beforeRoles || assetState() !== beforeAssets || known.size !== beforeKnown || story ||
-      Boolean(world.economy && !["training", "career"].includes(activities.get(owner)?.category ?? "") &&
+      Boolean(!routineWork && world.economy && !["training", "career"].includes(activities.get(owner)?.category ?? "") &&
         Math.abs(money) >= (directMoney ? 10 : Math.max(10, 10 * world.economy.unitsPerPoint))) ||
-      numeric(beforeStats, stats, world.stats) || numeric(beforeSkills, skills, world.character?.skills ?? {});
+      !routineWork && (numeric(beforeStats, stats, world.stats) || numeric(beforeSkills, skills, world.character?.skills ?? {}));
   }
 
   life.journal.forEach((entry, index) => {
+    if (world.demo && entry.type === "event") {
+      if (entry.id === "convoy-assigned" || entry.id === "convoy-contract" || entry.id === "offer-settled" && entry.text.includes("agree to guard")) { shipmentStage = "muster"; shipmentRiskCut = 0; }
+      if (entry.id === "convoy-withdrawn" || entry.id === "convoy-delivered") shipmentStage = null;
+    }
     if (entry.type === "birth") { apply(origin?.effects ?? [], "birth"); return; }
     if (entry.type === "year") {
       apply(world.yearlyEffects, "annual");
@@ -170,7 +219,19 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
     if (source) {
       const generated: number[] = [];
       for (let next = index + 1; next < life.journal.length && !boundary(next); next++) generated.push(next);
-      const consequential = apply(source.effects, source.owner, generated);
+      // An applied NFT entry carries exact numeric evidence, including an
+      // empty object when every bounded effect was a no-op. Demo inventory and
+      // story effects use their own completed-fact evidence below.
+      const appliedEffects = entry.type === "influence"
+        ? source.effects.filter(effect => !["stat", "skill", "cash", "debt", "mastery"].includes(effect.type)) : source.effects;
+      const changed = apply(appliedEffects, source.owner, generated);
+      if (entry.type === "influence") for (const [id, delta] of Object.entries(entry.deltas ?? {})) {
+        const values = id.startsWith("skill:") ? skills : stats;
+        const key = id.startsWith("skill:") ? id.slice(6) : id;
+        if (values.has(key) && values.get(key) !== undefined) values.set(key, values.get(key)! + delta);
+      }
+      const consequential = !generated.some(index => life.journal[index].type === "ending") &&
+        (changed || entry.type === "influence" && Object.values(entry.deltas ?? {}).some(delta => delta !== 0));
       if (consequential) {
         important.add(keyAt(index));
       }
@@ -178,6 +239,9 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
         const generatedId = life.journal[generatedIndex].id;
         const represented = source.effects.some(effect =>
           effect.type === "loan" && generatedId.startsWith("moneylender-loan-") ||
+          consequential && effect.type === "demo" && (effect.effect.kind === "work" && generatedId === `work-${effect.effect.work}-built` ||
+            effect.effect.kind === "offer" && generatedId === "offer-settled" ||
+            effect.effect.kind === "convoy" && ["convoy-withdrawn", "convoy-loss", "convoy-delivered", "convoy-pay-shortfall"].includes(generatedId)) ||
           consequential && (effect.type === "child" && /^child-\d+$/.test(generatedId) ||
             effect.type === "introduce" && generatedId === `met-${effect.partner}` ||
             effect.type === "accomplishment" && generatedId === `earned-${effect.achievement}` ||
@@ -187,11 +251,10 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
       return;
     }
     if (suppressed.has(index)) return;
-    if (entry.type === "ending" || entry.type === "influence") { important.add(keyAt(index)); return; }
-    // These are recorded consequences from the vocation economy. Routine harvests,
-    // spending, prices and work-in-progress stay available in the full record.
-    if (world.demo && entry.type === "event" && (DEMO_IMPORTANT_EVENTS.has(entry.id) ||
-        /^work-.+-built$/.test(entry.id) || /^year-(?:flood|army|road)-/.test(entry.id))) {
+    if (entry.type === "ending") { important.add(keyAt(index)); return; }
+    if (entry.type === "event" && importantDemoFact(entry, world)) {
+      // One army order can write both its contract and its market ledger line.
+      if (entry.id === "market-trade" && ["convoy-contract", "army-sale", "army-sale-partial"].includes(life.journal[index - 1]?.id ?? "")) return;
       important.add(keyAt(index)); return;
     }
     if (entry.type === "event") {

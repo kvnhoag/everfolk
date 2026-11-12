@@ -9,10 +9,12 @@ import { activityProofSkills, jobProofSkills, laneOf, nextProofNode, proofFromWo
 import { learnedThisYear } from "../client/models/skill-learned-notice.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { runWoodworkerPolicy } from "./work-proof-policy.ts";
-import currentPack from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import currentPack from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retainedPack from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import figuresOnRetainedPack from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 
 const current = currentPack as unknown as WorldPack, retained = retainedPack as unknown as WorldPack;
+const figuresOnRetained = figuresOnRetainedPack as unknown as WorldPack;
 const adult = (world: WorldPack, age = 16): LifeState => {
   const life = structuredClone(createEngine(world).start("work-proof")) as LifeState;
   Object.assign(life, { age: age + 1, year: life.year + age + 1 });
@@ -23,11 +25,14 @@ const proofs = (life: LifeState) => life.capabilities!.evidence.filter(e => e.ki
 const handmade = (world: WorldPack, life: LifeState) => Object.keys(life.capabilities?.learned ?? {}).filter(id => laneOf(world.capabilities!.nodes.find(n => n.id === id)!).startsWith("Handmade/"));
 
 test("only the new revision opts in to proof from everyday work", () => {
-  assert.equal(current.version, "alexandria-lives-6");
+  assert.equal(current.version, "alexandria-lives-8");
   assert.equal(current.capabilities!.proofFromWork, true);
   assert.equal(proofFromWork(current), true);
+  assert.ok(current.figurePaths?.length, "proof from work runs alongside the figure paths");
   assert.equal(retained.capabilities!.proofFromWork, undefined);
   assert.equal(proofFromWork(retained), false);
+  assert.equal(figuresOnRetained.version, "alexandria-lives-6");
+  assert.equal(proofFromWork(figuresOnRetained), false, "the figure paths on lives-5 keep the lives-5 rules");
   const broken = structuredClone(current);
   (broken.capabilities as unknown as Record<string, unknown>).proofFromWork = "yes";
   assert.throws(() => validateWorld(broken), /proofFromWork/);
@@ -184,7 +189,7 @@ test("a serving soldier's woodwork does not prove civilian steps", () => {
   assert.deepEqual(proofs(life).filter(e => e.nodeId.startsWith("A")), []);
 });
 
-test("lives-6: a young woodworker learns a handmade skill by 20 and is told so; lives-5 learns none", () => {
+test("lives-8: a young woodworker learns a handmade skill by 20 and is told so; lives-5 learns none", () => {
   const notices: string[] = [];
   const life = runWoodworkerPolicy(current, "woodworker-0", 20, year => notices.push(...learnedThisYear(year, current).map(notice => notice.id)));
   assert.ok(handmade(current, life).length >= 1, JSON.stringify(life.capabilities!.learned));
@@ -195,7 +200,7 @@ test("lives-6: a young woodworker learns a handmade skill by 20 and is told so; 
   }
 });
 
-test("lives-6 proof from work replays deterministically", () => {
+test("lives-8 proof from work replays deterministically", () => {
   const engine = createEngine(current);
   const life = runWoodworkerPolicy(current, "woodworker-1", 24);
   assert.deepEqual(engine.load(engine.save(life)), life);

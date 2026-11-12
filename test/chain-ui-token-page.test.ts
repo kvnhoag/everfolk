@@ -102,7 +102,7 @@ test("market rows name each token and only offer buy to others", () => {
     ["5", "Scholar of Alexandria", "2 NEAR", false, false],
     ["9", "Euclid, the geometer", "12.5 NEAR", true, true],
   ]);
-  assert.equal(rows[1].actionName, "Keep to the Museum");
+  assert.equal(rows[1].actionName, "Check the proofs");
   assert.deepEqual(marketRows(listings, {}, null).map(row => row.canBuy), [false, false]);
 });
 

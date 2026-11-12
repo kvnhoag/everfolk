@@ -1,3 +1,5 @@
+import type { CapabilityRule as DeepCapabilityRule, CapabilityState as DeepCapabilityState } from "./deep-capabilities/types.ts";
+import type { FigurePathDefinition } from "./figures/types.ts";
 import type {NpcCommand,NpcRuntimeState} from "./npc/types.ts";
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
@@ -8,7 +10,7 @@ import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState 
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 
 export type Condition =
-  | { type: "capability"; node: string }
+  | { type: "capability"; node: string; learned?: boolean }
   | { type: "vocation"; action: string; count: number }
   | { type: "affinity"; field: FieldId; op: Comparison; value: number }
   | { type: "field-need"; field: FieldId; label: NeedLabel }
@@ -639,6 +641,8 @@ export interface WorldPack {
   demo?: DemoDefinition;
   vocations?: VocationDefinition;
   capabilities?: CapabilityDefinition;
+  deepCapabilities?: { version: "deep-1"; rules: DeepCapabilityRule[] };
+  figurePaths?: FigurePathDefinition[];
   /** Opt-in life stages: event time frames and who decides. */
   lifeStages?: LifeStagesDefinition;
   /** Opt-in fields of work, districts and their people. Requires lifeStages. */
@@ -705,6 +709,7 @@ export interface LifeState {
   demo?: DemoState;
   vocations?: VocationState;
   capabilities?: CapabilityState;
+  deepCapabilities?: DeepCapabilityState;
   /** Paths worlds only. */
   paths?: PathsState;
   /** Paths worlds only: one record per completed life stage. */
