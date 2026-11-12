@@ -1479,11 +1479,6 @@
           },
           {
             "type": "stat",
-            "stat": "health",
-            "delta": -1
-          },
-          {
-            "type": "stat",
             "stat": "bonds",
             "delta": -1
           }
@@ -1523,11 +1518,6 @@
           },
           {
             "type": "stat",
-            "stat": "health",
-            "delta": -1
-          },
-          {
-            "type": "stat",
             "stat": "bonds",
             "delta": -1
           }
@@ -1539,10 +1529,10 @@
         "description": "A general appointment requires demonstrated strategic command, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 28,
         "requirements": {
-          "warfare": 54,
+          "warfare": 48,
           "oratory": 28,
           "strength": 30,
-          "endurance": 34
+          "endurance": 30
         },
         "yearlyEffects": [
           {
@@ -1564,11 +1554,6 @@
             "type": "skill",
             "skill": "oratory",
             "delta": 1
-          },
-          {
-            "type": "stat",
-            "stat": "health",
-            "delta": -1
           },
           {
             "type": "stat",
@@ -81439,8 +81424,8 @@
         "proof": "Complete 1 pre-service drill years. Demonstrate equipment handling and comprehension of orders while medically fit.",
         "reward": "Qualify for Soldier enlistment at age 18. A career appointment is a separate action.",
         "minimumStats": {
-          "health": 45,
-          "knowledge": 8
+          "health": 35,
+          "knowledge": 4
         },
         "proofYears": 1
       },
@@ -81588,7 +81573,7 @@
         "proof": "Complete 1 active drill years while serving. Each proof settles only after a funded, fully rationed service year.",
         "reward": "Develop formation skills and open more demanding field exercises.",
         "minimumStats": {
-          "health": 45
+          "health": 35
         },
         "proofYears": 1
       },
@@ -81763,7 +81748,7 @@
         "proof": "Complete 1 service work years reconciling the army's actual wage and ration accounts.",
         "reward": "Learn to account for finite army stores and payments; employer funds remain outside personal cash.",
         "minimumStats": {
-          "health": 45
+          "health": 35
         },
         "proofYears": 1
       },
@@ -81932,7 +81917,7 @@
         "proof": "Complete 1 active unit exercises with settled service accounts and full rations.",
         "reward": "Qualify for Officer opportunities after at least 2 proved service years.",
         "minimumStats": {
-          "health": 45
+          "health": 35
         },
         "proofYears": 1
       },
@@ -82093,7 +82078,7 @@
         "prerequisites": {
           "all": [
             "M7",
-            "P4"
+            "P2"
           ]
         },
         "minimumProficiency": {
@@ -82104,8 +82089,8 @@
         "proof": "As an Officer, complete 1 tactical work years, joining reasoned inquiry with reconciled service evidence.",
         "reward": "Open advanced command preparation through Knowledge and practical military experience.",
         "minimumStats": {
-          "health": 45,
-          "knowledge": 16
+          "health": 35,
+          "knowledge": 10
         },
         "proofYears": 1
       },
@@ -82273,8 +82258,8 @@
         "proof": "As an Officer, complete 1 planning work years with itemized paid materials and actual army accounts.",
         "reward": "Prepare a registered strategic-command assessment; learning does not automatically grant rank.",
         "minimumStats": {
-          "health": 45,
-          "knowledge": 20
+          "health": 30,
+          "knowledge": 12
         },
         "proofYears": 1
       },
@@ -82351,7 +82336,8 @@
           "pottery": 48
         },
         "proof": "Complete 1 registered assessment over 2 work years: 12 quality-4 decorated vessels in total, including 1 accepted matched set.",
-        "reward": "Vessel quality cap 5; batch limit 16. Qualify for Master Potter career offers; unlock large commission bids."
+        "reward": "Vessel quality cap 5; batch limit 16. Qualify for Master Potter career offers; unlock large commission bids.",
+        "minimumAge": 58
       },
       {
         "id": "AS10",
@@ -82369,7 +82355,8 @@
           "sculpture": 48
         },
         "proof": "Complete 1 registered quality-4 monument assessment over 2 work years, with paid materials and accepted measurement/finish review.",
-        "reward": "Sculpture quality cap 5. Qualify for Master Sculptor career offers; unlock monumental/restoration commissions."
+        "reward": "Sculpture quality cap 5. Qualify for Master Sculptor career offers; unlock monumental/restoration commissions.",
+        "minimumAge": 58
       },
       {
         "id": "AT10",
@@ -82386,7 +82373,8 @@
           "craft": 72
         },
         "proof": "Complete 1 registered masterwork assessment over 2 work years: 4 quality-4 ceremonial garments in total, fully paid inputs and accepted inspection.",
-        "reward": "Garment quality cap becomes 5; batch limit 12. Qualify for Master Tailor career offers; unlock repair/restoration contracts. No cash awarded solely for learning."
+        "reward": "Garment quality cap becomes 5; batch limit 12. Qualify for Master Tailor career offers; unlock repair/restoration contracts. No cash awarded solely for learning.",
+        "minimumAge": 58
       },
       {
         "id": "FC10",
@@ -82403,7 +82391,8 @@
           "farming": 72
         },
         "proof": "Complete a 2-work-year integrated plan, each year providing full household rations and next-year seed.",
-        "reward": "Unlock one integrated annual action combining channel maintenance with crop care within available labour; pay both costs. Combined sowing/crop-care/flax plan bonuses are capped at +20%; flood-factor correction is separate. Qualify for master cultivator work offers."
+        "reward": "Unlock one integrated annual action combining channel maintenance with crop care within available labour; pay both costs. Combined sowing/crop-care/flax plan bonuses are capped at +20%; flood-factor correction is separate. Qualify for master cultivator work offers.",
+        "minimumAge": 58
       },
       {
         "id": "FR10",
@@ -82421,7 +82410,8 @@
           "reckoning": 32
         },
         "proof": "Complete 3 consecutive annual settlements with full rations, seed reserved and no new emergency food debt; the same years may be ordinary flood years.",
-        "reward": "Unlock a 2-year reserve/maintenance plan using existing resources; in-capacity spoilage reduction becomes 35% relative to base, replacing 30%. Qualify for master household-farmer work offers."
+        "reward": "Unlock a 2-year reserve/maintenance plan using existing resources; in-capacity spoilage reduction becomes 35% relative to base, replacing 30%. Qualify for master household-farmer work offers.",
+        "minimumAge": 58
       },
       {
         "id": "M10",
@@ -82435,17 +82425,18 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 54,
+          "warfare": 48,
           "oratory": 28,
           "strength": 30,
-          "endurance": 34
+          "endurance": 30
         },
         "proof": "Complete a registered assessment across 2 active Officer work years. Reconcile materials, wages and rations in both years; retain at least 5 proved service years.",
         "reward": "Qualify for General opportunities at age 28. Appointment still requires an available command and recorded service.",
         "minimumStats": {
-          "health": 50,
-          "knowledge": 24
-        }
+          "health": 30,
+          "knowledge": 12
+        },
+        "minimumAge": 45
       },
       {
         "id": "PP10",
@@ -82464,7 +82455,8 @@
           "literacy": 40
         },
         "proof": "Complete 1 registered civic assessment: present a funded plan, secure an agreement, deliver it and reconcile the public account across 2 work years. District reputation at least 60.",
-        "reward": "Qualify for Politician career offers; unlock seeking public office and proposing district policy. Appointment needs an available funded role; learning grants neither public money nor automatic office."
+        "reward": "Qualify for Politician career offers; unlock seeking public office and proposing district policy. Appointment needs an available funded role; learning grants neither public money nor automatic office.",
+        "minimumAge": 58
       },
       {
         "id": "PS10",
@@ -82483,7 +82475,8 @@
           "literacy": 48
         },
         "proof": "Complete 1 registered 2-work-year original-inquiry assessment: predeclared question, 2 distinct results, independent check and a defensible conclusion, including a valid negative finding.",
-        "reward": "Qualify for Scientist career offers; unlock leading a funded research project, whose complete fee and material budget are quoted before acceptance."
+        "reward": "Qualify for Scientist career offers; unlock leading a funded research project, whose complete fee and material budget are quoted before acceptance.",
+        "minimumAge": 58
       },
       {
         "id": "T10",
@@ -82502,7 +82495,8 @@
           "oratory": 32
         },
         "proof": "Complete a 2-work-year assessment delivering 2 funded orders to 2 distinct buyer accounts; reconcile cash, stock, fees and commitments in both years.",
-        "reward": "Qualify for Merchant or Trading-house manager career offers. Unlock an integrated 2-year stock/order/delivery plan within the existing action and visit limits; this grants no free goods, price immunity or personal ownership of employer funds."
+        "reward": "Qualify for Merchant or Trading-house manager career offers. Unlock an integrated 2-year stock/order/delivery plan within the existing action and visit limits; this grants no free goods, price immunity or personal ownership of employer funds.",
+        "minimumAge": 58
       }
     ]
   },

@@ -15,6 +15,7 @@ export function requirementReasons(world: WorldPack, life: LifeState, id: string
   if (!node || !life.capabilities) return ["This world's saved rules do not enable this capability."];
   const reasons: string[] = [];
   for (const parent of node.prerequisites.all) if (!life.capabilities.learned[parent]) reasons.push(`Learn ${world.capabilities?.nodes.find(n=>n.id===parent)?.title ?? parent} first.`);
+  if (node.minimumAge !== undefined && life.age < node.minimumAge) reasons.push(`This rank is recognised from age ${node.minimumAge}.`);
   for(const [stat,value]of Object.entries(node.minimumStats ?? {})) if(life.stats[stat]<value) reasons.push(`${world.stats[stat].label} ${value} required; you have ${Math.floor(life.stats[stat])}.`);
   for (const [skill, value] of Object.entries(node.minimumProficiency)) {
     if ((life.character?.skills[skill] ?? 0) < value) reasons.push(`${world.character?.skills[skill]?.label ?? skill} ${value} required; you have ${Math.floor(life.character?.skills[skill] ?? 0)}.`);

@@ -28,9 +28,9 @@ export function buildCrossoverWorld(base:WorldPack):WorldPack {
     const node=world.capabilities.nodes.find(n=>n.id===MILITARY_QUALIFICATIONS[job.id])!;
     job.requirements={...node.minimumProficiency};
     job.description=`A ${job.id} appointment requires demonstrated ${node.title.toLowerCase()}, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.`;
-    // Service trains the body it demands; command also trains the voice. It still costs health and time at home.
+    // Service trains the body it demands; command also trains the voice. Routine service costs time at home; war carries the danger.
     job.yearlyEffects=[{type:"skill",skill:"warfare",delta:2},{type:"skill",skill:"strength",delta:1},{type:"skill",skill:"endurance",delta:1},
-      ...(job.id==="soldier"?[]:[{type:"skill" as const,skill:"oratory",delta:1}]),{type:"stat",stat:"health",delta:-1},{type:"stat",stat:"bonds",delta:-1}];
+      ...(job.id==="soldier"?[]:[{type:"skill" as const,skill:"oratory",delta:1}]),{type:"stat",stat:"bonds",delta:-1}];
   }
   for(const activity of character.activities) {
     const military=activity.outcomes.flatMap(o=>o.effects).find(e=>e.type==="job"&&e.job&&MILITARY_QUALIFICATIONS[e.job]);

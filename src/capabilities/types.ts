@@ -8,6 +8,8 @@ export interface CapabilityNode {
   anyProficiency?: Record<string, number>[];
   /** Years of qualifying proof this world asks for; older packs use the catalog's count. */
   proofYears?: number;
+  /** Youngest age at which this world recognises the node; older packs have none. */
+  minimumAge?: number;
   proof: string; reward: string;
 }
 export interface CapabilityEvidence {

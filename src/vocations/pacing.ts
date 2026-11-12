@@ -7,6 +7,17 @@
 import type { WorldPack } from "../types.ts";
 import { MILITARY_QUALIFICATIONS } from "../capabilities/military.ts";
 
+/** A field's top rank (depth 10) comes with years: it is recognised from this age. */
+export const MASTERY_AGE = 58;
+/** Generals of the era commanded in their forties; strategic command (M10) is recognised from this age. */
+export const COMMAND_AGE = 45;
+
+/** Fitness and knowledge for the military path: a serving veteran loses health each year, and drill does not keep book-learning fresh. */
+export const STAT_GATES: Record<string, Record<string, number>> = {
+  M4: { health: 35, knowledge: 4 }, M5: { health: 35 }, M6: { health: 35 }, M7: { health: 35 },
+  M8: { health: 35, knowledge: 10 }, M9: { health: 30, knowledge: 12 }, M10: { health: 30, knowledge: 12 },
+};
+
 export const PROOF_YEARS: Record<string, number> = {
   // Clothing (74%) and Cultivation (66%) finished early, around 39 and 41: one more year per step.
   AT5: 3, AT6: 3, AT7: 3, AT8: 3, AT9: 3,
@@ -24,7 +35,7 @@ export const SKILL_GATES: Record<string, Record<string, number>> = {
   M7: { warfare: 30, oratory: 16, strength: 18, endurance: 22 },
   M8: { warfare: 36, oratory: 20, reckoning: 16 },
   M9: { warfare: 44, literacy: 22, oratory: 22 },
-  M10: { warfare: 54, oratory: 28, strength: 30, endurance: 34 },
+  M10: { warfare: 48, oratory: 28, strength: 30, endurance: 30 },
 };
 
 /** Appointment odds: an officer's commission used to need about seven tries three years apart. */
@@ -33,6 +44,10 @@ const APPOINTMENTS: Record<string, { cooldownYears: number; weights: Record<stri
 };
 
 export function applyPacing(world: WorldPack): void {
+  for (const node of world.capabilities?.nodes ?? []) {
+    if (node.depth === 10) node.minimumAge = node.id === "M10" ? COMMAND_AGE : MASTERY_AGE;
+    if (STAT_GATES[node.id]) node.minimumStats = { ...STAT_GATES[node.id] };
+  }
   for (const activity of world.character?.activities ?? []) {
     const odds = APPOINTMENTS[activity.id];
     if (!odds) continue;

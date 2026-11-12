@@ -86,6 +86,8 @@ test("military service builds the body it demands, and command builds the voice"
   const yearly = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.flatMap(effect => effect.type === "skill" ? [`${effect.skill}+${effect.delta}`] : []);
   for (const job of ["soldier", "officer", "general"]) for (const gain of ["warfare+2", "strength+1", "endurance+1"]) assert.ok(yearly(job).includes(gain), `${job}: ${yearly(job).join(", ")}`);
   for (const job of ["officer", "general"]) assert.ok(yearly(job).includes("oratory+1"), job);
+  const health = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.filter(effect => effect.type === "stat" && effect.stat === "health");
+  for (const job of ["soldier", "officer", "general"]) assert.deepEqual(health(job), [], `${job}: routine service costs no health; war carries the danger`);
   assert.ok(!yearly("soldier").includes("oratory+1"));
 });
 

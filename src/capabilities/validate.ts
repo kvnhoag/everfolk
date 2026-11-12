@@ -28,7 +28,7 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
   if (nodes.length !== catalog.length) fail(path,"expected the complete versioned capability graph");
   const ids = new Set<string>();
   for (const value of nodes) {
-    const node = object(value,path,["id","depth","title","branch","specialization","prerequisites","minimumProficiency","minimumStats","proof","reward","anyProficiency","proofYears"],["id","depth","title","branch","specialization","prerequisites","minimumProficiency","proof","reward"]);
+    const node = object(value,path,["id","depth","title","branch","specialization","prerequisites","minimumProficiency","minimumStats","proof","reward","anyProficiency","proofYears","minimumAge"],["id","depth","title","branch","specialization","prerequisites","minimumProficiency","proof","reward"]);
     if(typeof node.id!=="string" || ids.has(node.id)) fail(path,"invalid or duplicate capability id");
     const canonical=catalog.find(candidate=>candidate.id===node.id);
     if(!canonical || node.depth!==canonical.depth || node.branch!==canonical.branch || node.specialization!==canonical.specialization) fail(path,"unsupported node or graph position");
@@ -40,6 +40,7 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
       for (const [skill,n] of Object.entries(gates)) if (!skills.has(skill) || !Number.isInteger(n) || Number(n)<0 || Number(n)>100) fail(path,"invalid proficiency gate");
     };
     checkSkills(node.minimumProficiency);
+    if (node.minimumAge !== undefined && (!Number.isInteger(node.minimumAge) || Number(node.minimumAge) < 0 || Number(node.minimumAge) > 100)) fail(`${path}.minimumAge`,"minimumAge must be a whole age from 0 to 100");
     if (node.proofYears !== undefined && (!Number.isInteger(node.proofYears) || Number(node.proofYears) < 1 || Number(node.proofYears) > 6)) fail(`${path}.proofYears`,"proofYears must be a whole number from 1 to 6");
     if (node.minimumStats !== undefined) {
       const gates=object(node.minimumStats,path);

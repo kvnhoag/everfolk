@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { PROOF_YEARS, SKILL_GATES } from "../src/vocations/pacing.ts";
+import { COMMAND_AGE, MASTERY_AGE, PROOF_YEARS, SKILL_GATES, STAT_GATES } from "../src/vocations/pacing.ts";
+import { requirementReasons } from "../src/capabilities/engine.ts";
 import { capabilityProgress } from "../src/capabilities/engine.ts";
 import { farmProofProgress } from "../src/capabilities/farming.ts";
 import { militaryCareerReason } from "../src/capabilities/military.ts";
@@ -64,7 +65,7 @@ test("a qualified recruit whose book-learning has faded can still enlist; an unf
   life.stats.knowledge = 2; life.stats.health = 70;
   assert.equal(militaryCareerReason(fresh, life, "soldier"), undefined);
   life.stats.health = 30;
-  assert.match(militaryCareerReason(fresh, life, "soldier") ?? "", /Health 45/);
+  assert.match(militaryCareerReason(fresh, life, "soldier") ?? "", /Health 35/);
 });
 
 test("each military rank asks for exactly the skills of its qualification", () => {
@@ -78,4 +79,25 @@ test("an officer's commission is granted 40% of the time, with two years between
   assert.equal(seek.cooldownYears, 2);
   const weights = Object.fromEntries(seek.outcomes.map(outcome => [outcome.id, outcome.weight]));
   assert.deepEqual(weights, { "officer-appointed": 40, "officer-refused": 60 });
+});
+
+test("the top rank of a field is recognised only from the mastery age, in the new world only", () => {
+  for (const id of ["FC10", "AT10", "PS10"]) assert.equal(node(fresh, id)!.minimumAge, MASTERY_AGE, id);
+  const life = lifeIn(fresh);
+  life.age = MASTERY_AGE - 1;
+  assert.ok(requirementReasons(fresh, life, "AT10").some(reason => reason.includes(`age ${MASTERY_AGE}`)), "too young");
+  life.age = MASTERY_AGE;
+  assert.ok(!requirementReasons(fresh, life, "AT10").some(reason => reason.includes("age")), "old enough");
+  assert.equal(node(kept, "AT10")!.minimumAge, undefined);
+});
+
+test("the military path asks a fitness a serving veteran can keep, and strategic command comes at the command age", () => {
+  for (const [id, gates] of Object.entries(STAT_GATES)) assert.deepEqual(node(fresh, id)!.minimumStats, gates, id);
+  assert.equal(node(fresh, "M10")!.minimumAge, COMMAND_AGE);
+  assert.ok(COMMAND_AGE < MASTERY_AGE);
+});
+
+test("tactical reasoning builds on reasoned argument, not the deepest study of ethics, in the new world", () => {
+  assert.deepEqual(node(fresh, "M8")!.prerequisites.all, ["M7", "P2"]);
+  assert.deepEqual(node(kept, "M8"), undefined, "the retained world has no military lane");
 });
