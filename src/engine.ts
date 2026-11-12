@@ -34,7 +34,7 @@ import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { decidedByOthers, inTimeFrame } from "./life-stages/index.ts";
-import { advanceDistrict, initialPaths } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, changeAffinity, eventFieldWeight, fadeAffinity, initialPaths, notePractice, practiceBonus } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -171,9 +171,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function pickRandomEvent(events: readonly LifeEvent[], state: LifeState): LifeEvent {
     // The opt-in branch leaves legacy draw counts and floating-point arithmetic
     // untouched. Recency comes from the existing journal, so saves need no cache.
-    if (!world.eventPacing?.variety) return pick(events, event => event.trigger.type === "random" ? event.trigger.weight : 0, state);
+    // Paths worlds: affinity raises a field's events (×1 without affinity, so draws are unchanged).
+    const pull = (event: LifeEvent): number => eventFieldWeight(world, state, event);
+    if (!world.eventPacing?.variety) return pick(events, event => (event.trigger.type === "random" ? event.trigger.weight : 0) * pull(event), state);
     const weights = randomEventWeights(events, randomStoryById, state, world.eventPacing.variety);
-    return pick(events, event => weights.get(event.id)!, state);
+    return pick(events, event => weights.get(event.id)! * pull(event), state);
   }
 
   function journal(state: LifeState, type: JournalEntry["type"], id: string, text: string, extra?: Pick<JournalEntry, "source" | "deltas">): void {
@@ -270,7 +272,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         case "flag": state.flags[effect.flag] = effect.value; break;
         case "skill": {
           const definition = world.character!.skills[effect.skill];
-          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], skillEffectDelta(effect, state.flags));
+          const gain = skillEffectDelta(effect, state.flags);
+          // Paths worlds: practice grows faster in a field the life is drawn to.
+          const delta = state.paths ? practiceBonus(world, state, effect.skill, gain) : gain;
+          if (state.paths && delta > 0) notePractice(world, state, effect.skill);
+          state.character!.skills[effect.skill] = applyStatDelta(definition, state.character!.skills[effect.skill], delta);
           break;
         }
         case "job":
@@ -284,6 +290,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
             journal(state, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
           }
           syncEconomyStat(world, state);
+          break;
+        }
+        case "affinity": {
+          const text = changeAffinity(world, state, effect.field, effect.delta, effect.source);
+          if (text) journal(state, "event", affinityJournalId(effect.field), text);
           break;
         }
         case "vocation":
@@ -809,7 +820,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (world.demo.startingResources) syncEconomyStat(world, next);
     }
     // The district moves with this year's conditions (war, flood) once they are known.
-    if (world.paths && next.phase !== "ended") advanceDistrict(world, next);
+    if (world.paths && next.phase !== "ended") { advanceDistrict(world, next); fadeAffinity(world, next); }
     checkEndings(next);
     resolveEvents(next, true);
     if (world.economy?.market) syncEconomyStat(world, next);

@@ -34,7 +34,8 @@ export function initialPaths(world: WorldPack, life: LifeState): PathsState {
   const definition = world.paths!;
   const home = districtOf(world, life.originId);
   const random = derivedStream(life, "people:0");
-  const vary = (count: number): number => Math.max(0, count + Math.floor(random() * 3) - 1);
+  // ±1 variation; a tier the district does not have stays empty.
+  const vary = (count: number): number => count === 0 ? 0 : Math.max(0, count + Math.floor(random() * 3) - 1);
   const people = Object.fromEntries(FIELD_IDS.map(field =>
     [field, definition.districts[home].profile[field].people.map(vary) as TierCounts])) as PathsState["people"];
   const background = definition.originAffinity?.[life.originId] ?? {};

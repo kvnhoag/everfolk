@@ -18,6 +18,11 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
   switch (condition.type) {
     case "capability": return Boolean(state.capabilities?.learned[condition.node]);
     case "vocation": return (state.vocations?.completed[condition.action] ?? 0) >= condition.count;
+    case "affinity": return state.paths !== undefined && compare(state.paths.affinity[condition.field], condition.op, condition.value);
+    case "field-need": return state.paths?.needs[condition.field].label === condition.label;
+    case "field-people": return state.paths !== undefined && compare(state.paths.people[condition.field].reduce((sum, count) => sum + count, 0), condition.op, condition.value);
+    case "district": return state.paths?.district === condition.district;
+    case "away-from-home": return state.paths !== undefined && state.paths.district !== state.paths.home;
     case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
       state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);

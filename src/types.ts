@@ -1,7 +1,7 @@
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
-import type { FieldId, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
+import type { FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -9,6 +9,11 @@ export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
 export type Condition =
   | { type: "capability"; node: string }
   | { type: "vocation"; action: string; count: number }
+  | { type: "affinity"; field: FieldId; op: Comparison; value: number }
+  | { type: "field-need"; field: FieldId; label: NeedLabel }
+  | { type: "field-people"; field: FieldId; op: Comparison; value: number }
+  | { type: "district"; district: string }
+  | { type: "away-from-home" }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -37,6 +42,7 @@ export type Condition =
 export type Effect =
   | { type: "capability"; node: string }
   | { type: "vocation"; action: string }
+  | { type: "affinity"; field: FieldId; delta: number; source: string }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }

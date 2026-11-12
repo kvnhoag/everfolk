@@ -92,3 +92,72 @@ export function validateEventFields(event: DataObject, path: string, hasPaths: b
   });
   if (new Set(fields).size !== fields.length) tools.fail(`${path}.fields`, "duplicate field");
 }
+
+export interface PathsRuleTools {
+  fail(path: string, message: string): never;
+  object(value: unknown, path: string, fields?: readonly string[], required?: readonly string[]): DataObject;
+  integer(value: unknown, path: string, min: number, max: number): number;
+  string(value: unknown, path: string, max?: number): string;
+  operators: Set<string>;
+}
+
+const NEED_LABELS = ["scarce", "steady", "crowded"];
+
+function field(rule: DataObject, path: string, tools: PathsRuleTools): void {
+  if (!FIELD_IDS.includes(rule.field as never)) tools.fail(`${path}.field`, `unknown field '${String(rule.field)}'`);
+}
+
+function requirePaths(paths: unknown, path: string, tools: PathsRuleTools): DataObject {
+  if (paths === undefined) tools.fail(path, "requires world.paths");
+  return paths as DataObject;
+}
+
+/** Validates a paths condition; returns false when the type is not a paths condition. */
+export function validatePathsCondition(rule: DataObject, path: string, paths: unknown, tools: PathsRuleTools): boolean {
+  const { object, integer, fail } = tools;
+  switch (rule.type) {
+    case "affinity":
+      object(rule, path, ["type", "field", "op", "value"]);
+      requirePaths(paths, path, tools); field(rule, path, tools);
+      if (!tools.operators.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+      integer(rule.value, `${path}.value`, 0, 100);
+      return true;
+    case "field-need":
+      object(rule, path, ["type", "field", "label"]);
+      requirePaths(paths, path, tools); field(rule, path, tools);
+      if (!NEED_LABELS.includes(rule.label as string)) fail(`${path}.label`, "expected scarce, steady or crowded");
+      return true;
+    case "field-people":
+      object(rule, path, ["type", "field", "op", "value"]);
+      requirePaths(paths, path, tools); field(rule, path, tools);
+      if (!tools.operators.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+      integer(rule.value, `${path}.value`, 0, 100_000);
+      return true;
+    case "district": {
+      object(rule, path, ["type", "district"]);
+      const districts = (requirePaths(paths, path, tools).districts ?? {}) as DataObject;
+      if (!Object.hasOwn(districts, rule.district as string)) fail(`${path}.district`, `unknown district '${String(rule.district)}'`);
+      return true;
+    }
+    case "away-from-home":
+      object(rule, path, ["type"]);
+      requirePaths(paths, path, tools);
+      return true;
+    default:
+      return false;
+  }
+}
+
+/** Validates a paths effect; returns false when the type is not a paths effect. */
+export function validatePathsEffect(effect: DataObject, path: string, paths: unknown, tools: PathsRuleTools): boolean {
+  switch (effect.type) {
+    case "affinity":
+      tools.object(effect, path, ["type", "field", "delta", "source"]);
+      requirePaths(paths, path, tools); field(effect, path, tools);
+      tools.integer(effect.delta, `${path}.delta`, -100, 100);
+      tools.string(effect.source, `${path}.source`, 200);
+      return true;
+    default:
+      return false;
+  }
+}

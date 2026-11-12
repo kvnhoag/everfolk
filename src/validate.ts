@@ -4,7 +4,7 @@ import type { VocationDefinition } from "./vocations/types.ts";
 import { validateVocations } from "./vocations/validate.ts";
 import { validateLifeStagesDefinition, validateStagedEvent } from "./life-stages/validate.ts";
 import type { LifeStageValidationTools } from "./life-stages/validate.ts";
-import { validateEventFields, validatePathsDefinition } from "./paths/validate.ts";
+import { validateEventFields, validatePathsCondition, validatePathsDefinition, validatePathsEffect } from "./paths/validate.ts";
 import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
 
@@ -688,7 +688,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         validateDemoCondition(rule, path, fail);
         break;
       default:
-        fail(`${path}.type`, "unknown condition type");
+        if (!validatePathsCondition(rule, path, world.paths, { fail, object, integer, string, operators: OPERATORS })) fail(`${path}.type`, "unknown condition type");
     }
   };
   const effects = (value: unknown, path: string, allowMastery = false, allowAccomplishment = false, allowTrainingGainModifiers = false): void => {
@@ -844,7 +844,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           validateDemoEffect(effect, location, fail, demoGrainGain);
           break;
         default:
-          fail(`${location}.type`, "unknown effect type");
+          if (!validatePathsEffect(effect, location, world.paths, { fail, object, integer, string, operators: OPERATORS })) fail(`${location}.type`, "unknown effect type");
       }
     });
   };
