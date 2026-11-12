@@ -89,6 +89,8 @@ export interface HouseholdConfig {
   buySeedWhenShort?: boolean;
   /** Share of an unworked plot's crop the household keeps when a neighbour works it. Older packs: no lease. */
   leaseUnworkedBps?: number;
+  /** Rent is also paid on the flax harvest, in flax. Older packs: grain rent only. */
+  rentOnFlax?: boolean;
   /** Health lost per 10% of the household ration missing, capped. */
   hungerHealthPer10Pct: number;
   hungerHealthCap: number;
