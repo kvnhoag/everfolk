@@ -18,7 +18,7 @@ export function spendsShared(effect: Effect): boolean {
   if (effect.type === "cash") return effect.delta < -POCKET_MONEY;
   if (effect.type !== "demo") return false;
   const inner = effect.effect;
-  return (inner.kind === "grain" || inner.kind === "item") && inner.delta < 0 || inner.kind === "share-grain";
+  return (inner.kind === "grain" || inner.kind === "item") && inner.delta < 0 || inner.kind === "share-grain" || inner.kind === "grain-to";
 }
 
 function conditions(condition: Condition | undefined): Condition[] {

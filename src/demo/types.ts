@@ -352,6 +352,10 @@ export type DemoEffect =
   /** Progress on a community work; costs are separate cash/grain effects on the same outcome. */
   | { kind: "work"; work: WorkId; progress: number }
   | { kind: "share-grain"; quantity: number }
+  /** Grain handed to the crown granary (army store) or the temple store (the town's growers); it moves, it is never destroyed. */
+  | { kind: "grain-to"; to: "crown" | "temple"; quantity: number; cause: string }
+  /** A household plot granted or leased (land, not goods or cash). */
+  | { kind: "plot"; delta: number; cause: string }
   | { kind: "harvest-bonus"; bps: number }
   | { kind: "convoy"; action: "provision" | "companion" | "depart" | "withdraw" | "resolve"; lossBps?: number; riskCutBps?: number }
   | { kind: "offer"; action: "accept" | "decline" };
@@ -364,6 +368,7 @@ export type DemoCondition =
   | { kind: "convoy"; stage: Shipment["stage"] | "none" }
   | { kind: "offer"; offer: OfferKind }
   | { kind: "hungry" }
+  | { kind: "plots"; op: "gte" | "lte" | "gt" | "lt" | "eq"; value: number }
   | { kind: "head-of-plot"; value: boolean };
 
 // ── Context passed to modules during engine steps ───────────────────────────

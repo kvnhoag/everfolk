@@ -1215,7 +1215,9 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const count = integer(event.maxOccurrences, `${path}.maxOccurrences`, 1, Number.MAX_SAFE_INTEGER);
       // Demo worlds: a year-anchored decision gated by a demo condition (e.g. a fresh low flood) recurs once per episode.
       const demoAnchor = Object.hasOwn(world, "demo") && trigger.type === "year" && hasDemoCondition(event.when);
-      if (trigger.type !== "random" && count !== 1 && !demoAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
+      // Paths worlds: a dated decision that names a cooldown recurs, spaced by it (late-life offers).
+      const spacedAnchor = Object.hasOwn(world, "paths") && trigger.type === "year" && Object.hasOwn(event, "cooldownYears");
+      if (trigger.type !== "random" && count !== 1 && !demoAnchor && !spacedAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
     const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);
