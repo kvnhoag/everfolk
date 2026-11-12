@@ -17,6 +17,8 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   world.version = LIVES_WORLD_VERSION;
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
   addPaths(world);
+  // New births: a household keeps seed when the store runs short, and leases what it cannot work.
+  Object.assign(world.demo!.household, { buySeedWhenShort: true, leaseUnworkedBps: 5000 });
   const refitted = refitEvents(world);
   // Life-paths offers (war recruiting) follow the atlas rule: a rank needs its proved qualification.
   requireMilitaryQualification(refitted);

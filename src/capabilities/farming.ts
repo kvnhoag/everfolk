@@ -40,6 +40,8 @@ function seeds(life: LifeState, mode = life.capabilities?.farm?.actionAge === li
   const h = life.demo!.household;
   return { grain: Math.max(0, h.plots - h.flaxPlots) * (mode === "dense" ? 20 : GRAIN_SEED_PER_PLOT), flax: h.flaxPlots * FLAX_SEED_PER_PLOT };
 }
+/** Grain an ordinary sowing of the household's grain plots needs. */
+export function ordinarySeedGrain(life: LifeState): number { return seeds(life, "ordinary").grain; }
 function material(life: LifeState, item: string): number { return life.vocations?.inventory[item] ?? 0; }
 function consumeMaterial(life: LifeState, item: string, amount: number): void {
   if (!amount) return;

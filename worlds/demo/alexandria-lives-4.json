@@ -72108,7 +72108,9 @@
       "spinBoltsPer100Labour": 10,
       "dealerExtraCapacity": 1500,
       "reckoningSpoilageCutBpsPerPoint": 50,
-      "reckoningSpoilageCutCapBps": 4000
+      "reckoningSpoilageCutCapBps": 4000,
+      "buySeedWhenShort": true,
+      "leaseUnworkedBps": 5000
     },
     "market": {
       "start": {
