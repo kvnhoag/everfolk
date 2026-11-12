@@ -42,10 +42,12 @@ test("lives replay exactly", () => {
   for (const { life } of lives.slice(0, 3)) assert.deepEqual(engine.replay(life.seed, life.commands), life);
 });
 
-test("birthplace pulls a life toward its district's work by eighteen", () => {
+test("the events of a district, beyond the household background, pull a life toward its work by eighteen", () => {
   const mean = (home: string, fields: FieldId[]) => {
     const group = lives.filter(({ life, at18 }) => life.paths!.home === home && at18);
-    return { value: group.reduce((sum, { at18 }) => sum + fields.reduce((total, field) => total + at18![field], 0), 0) / Math.max(1, group.length), count: group.length };
+    // Affinity the life's events added, minus the household background it was born with (not circular).
+    const gained = (life: LifeState, at18: Record<FieldId, number>, field: FieldId) => at18[field] - (world.paths!.originAffinity?.[life.originId]?.[field] ?? 0);
+    return { value: group.reduce((sum, { life, at18 }) => sum + fields.reduce((total, field) => total + gained(life, at18!, field), 0), 0) / Math.max(1, group.length), count: group.length };
   };
   const villageFarming = mean("delta-village", ["farming"]), courtFarming = mean("court-quarter", ["farming"]);
   const villageLearning = mean("delta-village", ["research", "civic"]), courtLearning = mean("court-quarter", ["research", "civic"]);
