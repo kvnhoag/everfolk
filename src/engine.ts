@@ -35,7 +35,7 @@ import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { takeItem } from "./capabilities/inventory.ts";
-import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
+import { deathEndingFor, decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
 import { TIERS } from "./paths/types.ts";
 import type { FieldId, PathsState } from "./paths/types.ts";
 import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
@@ -794,7 +794,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.health) {
       const healthResult = progressHealth(world, next, healthHooks(next));
       if (healthResult.deathCause) {
-        const deathEnding = next.age === 0 ? "death-in-infancy" : next.age < 15 ? "death-in-childhood" : next.age < 60 ? "death-in-adulthood" : "death-in-later-life";
+        const deathEnding = deathEndingFor(world, next.age);
         const ending = endingById.has(deathEnding) ? deathEnding : world.endings.find(item => item.kind === "death")!.id;
         finish(next, ending, healthResult.deathCause, healthResult.context, "condition");
         return;

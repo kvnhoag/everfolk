@@ -33,6 +33,7 @@ export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: 
   for (const section of ["timeline", "household", "market", "service", "works", "agents"]) record(def[section], `world.demo.${section}`, fail, Object.keys(def[section] as Data ?? {}));
   const household = def.household as Data;
   if (Object.hasOwn(household, "buySeedWhenShort") && typeof household.buySeedWhenShort !== "boolean") fail("world.demo.household.buySeedWhenShort", "expected a boolean");
+  if (Object.hasOwn(household, "rentOnFlax") && typeof household.rentOnFlax !== "boolean") fail("world.demo.household.rentOnFlax", "expected a boolean");
   if (Object.hasOwn(household, "leaseUnworkedBps")) whole(household.leaseUnworkedBps, "world.demo.household.leaseUnworkedBps", fail, 0, 10_000);
   const availability = record(def.availability, "world.demo.availability", fail,
     ["playableJobs", "unavailableJobs", "unavailableActivities", "unavailableSkills", "unavailableAccomplishments", "futurePaths"]);

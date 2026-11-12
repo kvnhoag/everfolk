@@ -130,6 +130,7 @@ function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number
 
 /** This year's grain harvest, kept for the rent step of the same settlement only. */
 const harvested = new WeakMap<object, number>();
+const harvestedFlax = new WeakMap<object, number>();
 
 /** Grain and flax harvest from plots × labour × flood × skill × ox. */
 export function harvest(ctx: DemoContext): void {
@@ -147,6 +148,7 @@ export function harvest(ctx: DemoContext): void {
     ctx.journal("household-lease", `Your household could not work all of its plot, so a neighbour worked the rest and kept ${crop.neighbourGrain} measures of grain${crop.neighbourFlax ? ` and ${crop.neighbourFlax} bundles of flax` : ""} as their half.`);
   }
   harvested.set(ctx.demo, crop.grain);
+  harvestedFlax.set(ctx.demo, crop.flax);
   recordFarmFlow(ctx.life, "grainHarvest", crop.grain);
   recordFarmFlow(ctx.life, "flaxHarvest", crop.flax);
   const flood = ctx.demo.year.flood === "normal" ? "a normal flood" : `a ${ctx.demo.year.flood} flood`;
@@ -165,8 +167,14 @@ function rentOn(def: DemoDefinition, grain: number): number {
 
 /** Tenant rent: a share of the harvest leaves the store. */
 export function payRent(ctx: DemoContext): void {
-  const crop = harvested.get(ctx.demo) ?? 0;
-  harvested.delete(ctx.demo);
+  const crop = harvested.get(ctx.demo) ?? 0, flaxCrop = harvestedFlax.get(ctx.demo) ?? 0;
+  harvested.delete(ctx.demo); harvestedFlax.delete(ctx.demo);
+  // The landowner takes the same share of a flax crop, in flax (new free-play world only).
+  const flaxRent = ctx.def.household.rentOnFlax ? Math.min(rentOn(ctx.def, flaxCrop), ctx.demo.household.flax) : 0;
+  if (flaxRent > 0) {
+    ctx.demo.household.flax -= flaxRent;
+    ctx.journal("household-rent-flax", `You hand ${flaxRent} bundles of flax to the landowner as rent for the flax plots.`);
+  }
   const rent = Math.min(rentOn(ctx.def, crop), ctx.demo.household.grain);
   if (rent <= 0) return;
   ctx.demo.household.grain -= rent;

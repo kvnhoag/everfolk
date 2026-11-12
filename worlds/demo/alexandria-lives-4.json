@@ -55695,7 +55695,7 @@
       "text": "The last load hangs above the quay while two workers argue over its weight. A harbour worker steps into your patch of shade and remarks that the argument has lasted longer than the unloading.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -55897,7 +55897,7 @@
       "text": "A brief shower drives you beneath a market awning. A seller pulls a basket aside to make room, then asks whether you found the thing you came for.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -56099,7 +56099,7 @@
       "text": "A worker has finished binding a repaired handle and warns you not to test it yet. There is a place to sit beside the bench while it dries.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -56301,7 +56301,7 @@
       "text": "A linen worker asks you to hold one bundle while they compare two labels. The labels have been exchanged; putting them right leaves a moment to talk.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -56503,7 +56503,7 @@
       "text": "Someone ahead of you has brought the reader a long, troublesome letter. Another visitor shifts along the seat to make room while you wait your turns.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -56705,7 +56705,7 @@
       "text": "The first loaves are not ready. A bakery worker leans out to explain the delay, then stays in the doorway to ask what is happening further down the street.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -56907,7 +56907,7 @@
       "text": "Your jar tilts as the queue moves. Someone catches its shoulder, sets it straight and remarks that the waiting is easier with two people to complain about it.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -57109,7 +57109,7 @@
       "text": "The gathering has ended, but the stools still crowd the courtyard. Another guest takes one end of a stack while you take the other; the last row gives you time to compare the music.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -57311,7 +57311,7 @@
       "text": "The reader has finished, but one listener is still puzzling over a passage. You hear the question as you leave and stop to offer what you thought it meant.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -57519,7 +57519,7 @@
       "text": "A rehearsal breaks up amid laughter about one disastrous entrance. A performer beside you insists that the cue was late; from where you stood, it looked rather different.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -57727,7 +57727,7 @@
       "text": "You return a borrowed rope to the landing. A boat worker checks the coil, thanks you for bringing it back and asks what kept you busy along the way.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -57935,7 +57935,7 @@
       "text": "The practice is over, but the equipment count is short on one side and long on the other. Another participant stays to help you sort it out before anyone leaves.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -58143,7 +58143,7 @@
       "text": "A neighbour shifts along a low wall to make room beside a planted courtyard. Inside, someone is taking an unusually long time to finish an errand; outside, you both have time to talk.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -58345,7 +58345,7 @@
       "text": "Another worker notices you counting a quantity twice. They admit to having done the same, and you compare your methods until the two totals agree.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -58553,7 +58553,7 @@
       "text": "A pottery worker sets a small vessel on the bench and nudges it: one edge of the base is uneven. You hold a straight board beside it while they check where it touches.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -58761,7 +58761,7 @@
       "text": "Someone from a nearby household returns a borrowed basket and explains why it took so long. You set it down by the door; the explanation is turning into a story.",
       "trigger": {
         "type": "random",
-        "weight": 2
+        "weight": 1
       },
       "maxOccurrences": 1,
       "when": {
@@ -63465,7 +63465,7 @@
           "outcomes": [
             {
               "id": "flood-ration-keep-seed-result",
-              "text": "Everyone eats less this year, but the seed grain stays in its jars and the whole plot is sown when the water allows.",
+              "text": "Everyone goes a little hungry to stretch the store, but the seed grain stays in its jars and the whole plot is sown when the water allows.",
               "weight": 1,
               "effects": [
                 {
@@ -63482,7 +63482,16 @@
                 }
               ]
             }
-          ]
+          ],
+          "when": {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "lte",
+              "value": 1000
+            }
+          }
         },
         {
           "id": "flood-sell-silver",
@@ -74154,6 +74163,7 @@
       "dealerExtraCapacity": 1500,
       "reckoningSpoilageCutBpsPerPoint": 50,
       "reckoningSpoilageCutCapBps": 4000,
+      "rentOnFlax": true,
       "buySeedWhenShort": true,
       "leaseUnworkedBps": 5000
     },
@@ -77667,8 +77677,7 @@
       "delta-village": {
         "title": "a Delta village",
         "origins": [
-          "tenant-farming-household",
-          "delta-newcomers"
+          "tenant-farming-household"
         ],
         "farmEdge": {
           "inputBps": 7000,
@@ -77912,7 +77921,8 @@
       "city-quarter": {
         "title": "the city quarter",
         "origins": [
-          "artisan-household"
+          "artisan-household",
+          "delta-newcomers"
         ],
         "profile": {
           "farming": {

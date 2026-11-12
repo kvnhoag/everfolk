@@ -42,10 +42,19 @@ function drawTier(people: TierCounts, random: () => number): Tier | undefined {
   return TIERS[TIERS.length - 1];
 }
 
-function drawName(world: WorldPack, random: () => number): string {
+/** Egyptian names in the pools; before Alexandria (331 BCE) the people met are Egyptian. */
+const EGYPTIAN_NAMES: ReadonlySet<string> = new Set(["Horus", "Imouthes", "Pachrates", "Panebchounis", "Petosiris", "Psenamounis", "Psais", "Tesenouphis",
+  "Thermuthis", "Taesis", "Tanouphis", "Senamounis", "Taphis"]);
+/** Names of the Ptolemaic court and the Sarapis cult, in use only once Ptolemy is king (305 BCE). */
+const DYNASTIC_NAMES: ReadonlySet<string> = new Set(["Ptolemaios", "Soter", "Berenike", "Ptolemais", "Sarapion", "Kleopatra"]);
+const FOUNDING_YEAR = -331, KINGSHIP_YEAR = -305;
+
+function drawName(world: WorldPack, random: () => number, year: number): string {
   const pools = world.character?.identity?.namePools;
-  const names = pools ? [...pools[random() < 0.5 ? "male" : "female"]] : [];
-  return names.length ? names[Math.floor(random() * names.length)] : "A neighbour";
+  const all = pools ? [...pools[random() < 0.5 ? "male" : "female"]] : [];
+  const names = all.filter(name => year < FOUNDING_YEAR ? EGYPTIAN_NAMES.has(name) : year < KINGSHIP_YEAR ? !DYNASTIC_NAMES.has(name) : true);
+  const usable = names.length ? names : all;
+  return usable.length ? usable[Math.floor(random() * usable.length)] : "A neighbour";
 }
 
 /** Records the person met and returns the journal text and the effects for the engine to apply. */
@@ -55,8 +64,9 @@ export function meetPractitioner(world: WorldPack, life: LifeState, field: Field
   const random = derivedStream(life, `meet:${life.age}:${field}:${paths.practitioners.length}`);
   const tier = drawTier(paths.people[field], random);
   if (!tier) return { text: `No ${definition.practitioner} lives in ${district.title} for you to meet.`, effects: [] };
-  const name = drawName(world, random);
-  const who = `${name}, ${TIER_TITLE[tier]} ${definition.practitioner}`;
+  const name = drawName(world, random, life.year);
+  const title = TIER_TITLE[tier] === "a" && /^[aeiou]/i.test(definition.practitioner) ? "an" : TIER_TITLE[tier];
+  const who = `${name}, ${title} ${definition.practitioner}`;
   paths.practitioners = [...paths.practitioners, { id: `practitioner-${life.age}-${field}-${paths.practitioners.length}`, name, field, tier, district: paths.district, metAge: life.age }];
   const pull = PULL[tier];
   if (pull.introduce && !paths.introductions.includes(field)) paths.introductions = [...paths.introductions, field];
