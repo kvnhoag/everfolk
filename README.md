@@ -59,7 +59,8 @@ Ordinary play stays offline. A **ranked life** adds NEAR in four places, each on
 
 | | |
 |---|---|
-| Contract (testnet) | [`everfolk-lives-11101338.testnet`](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) — 5% figure drop, the real rules |
+| Contract (testnet) | [`everfolk-albums-11121956.testnet`](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) — current contract with stage albums, 5% figure drop, the real rules |
+| Earlier contract (testnet) | [`everfolk-lives-11101338.testnet`](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) — before stage albums; its lives and tokens remain there |
 | Demo contract (testnet) | [`demo.genesis-1794297139-6.testnet`](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) — used only to record the video: 100% figure drop, every key decision draws someone, no wait after closing a life |
 | Standards | NEP-171, 177, 178, 181, and NEP-199 payouts that include sources |
 | Contract code and tests | [`contract/`](contract/README.md) (Rust, `cargo test`) |
