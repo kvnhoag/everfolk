@@ -20,6 +20,10 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   addPaths(world);
   // New births: a household keeps seed when the store runs short, and leases what it cannot work.
   Object.assign(world.demo!.household, { buySeedWhenShort: true, leaseUnworkedBps: 5000 });
+  // The flax-seed price depends on the district (the village farm edge), so its label names no fixed price.
+  for (const activity of world.character!.activities) {
+    if (activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === "buy-flax-seed"))) activity.text = activity.text.replace(/ \(\d+ dr\)$/, "");
+  }
   const refitted = refitEvents(world);
   // Life-paths offers (war recruiting) follow the atlas rule: a rank needs its proved qualification.
   requireMilitaryQualification(refitted);

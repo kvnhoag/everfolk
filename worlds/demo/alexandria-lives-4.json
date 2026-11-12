@@ -19727,7 +19727,7 @@
       },
       {
         "id": "v-buy-flax-seed",
-        "text": "Buy 8 flax seed (24 dr)",
+        "text": "Buy 8 flax seed",
         "category": "career",
         "minAge": 12,
         "usesYearlyActivity": false,

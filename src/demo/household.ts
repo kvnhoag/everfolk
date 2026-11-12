@@ -201,6 +201,13 @@ function hungerHealthLoss(h: HouseholdConfig, shortfallBps: number): number {
   return Math.min(h.hungerHealthCap, Math.ceil(shortfallBps / 1_000) * h.hungerHealthPer10Pct);
 }
 
+/** The store a household must keep after eating so `seed` remains once the year's spoilage is taken. */
+function seedAfterSpoilage(def: DemoDefinition, life: LifeStateWithDemo, seed: number): number {
+  let kept = seed;
+  while (kept - spoilageOf(def, life, kept) < seed && kept < seed * 2 + 10) kept += 1;
+  return kept;
+}
+
 /** Animals then people eat; shortfall bought through `buyForHousehold`; hunger otherwise. */
 export function feedHousehold(ctx: DemoContext): void {
   const household = ctx.demo.household, life = ctx.life as LifeStateWithDemo;
@@ -213,7 +220,7 @@ export function feedHousehold(ctx: DemoContext): void {
     if (bought > 0) ctx.journal("household-bought-grain", `The store ran short, so the household bought ${bought} measures of grain from the merchant.`);
   }
   // Keep next year's seed: once everyone can eat, buy what the store lacks for sowing.
-  const seedShort = ctx.def.household.buySeedWhenShort ? need + animalNeed + ordinarySeedGrain(life) - household.grain : 0;
+  const seedShort = ctx.def.household.buySeedWhenShort ? need + animalNeed + seedAfterSpoilage(ctx.def, life, ordinarySeedGrain(life)) - household.grain : 0;
   if (seedShort > 0 && (life.economy?.cash ?? 0) > 0 && household.grain >= need + animalNeed) {
     const bought = whole(buyForHousehold(ctx, seedShort));
     if (bought > 0) recordFarmFlow(ctx.life, "boughtFood", bought);

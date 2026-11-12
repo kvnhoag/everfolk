@@ -38,7 +38,7 @@ import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
 import { TIERS } from "./paths/types.ts";
 import type { FieldId, PathsState } from "./paths/types.ts";
-import { advanceDistrict, affinityJournalId, farmEdgeHealth, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -315,6 +315,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           const counts = [...state.paths!.people[effect.field]] as PathsState["people"][FieldId];
           counts[TIERS.indexOf(effect.tier)] += 1;
           state.paths!.people = { ...state.paths!.people, [effect.field]: counts };
+          refreshNeeds(world, state);
           break;
         }
         case "introduce-field":

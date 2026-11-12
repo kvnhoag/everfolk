@@ -84,3 +84,8 @@ test("farm edges are validated", () => {
     assert.throws(() => validateWorld(bad), /farmEdge/, JSON.stringify(edge));
   }
 });
+
+test("the flax-seed purchase does not promise a fixed price that the village does not charge", () => {
+  const activity = world.character!.activities.find(item => item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === "buy-flax-seed")))!;
+  assert.doesNotMatch(activity.text, /\(\d+ dr\)/, activity.text);
+});

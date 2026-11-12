@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createEngine } from "../src/engine.ts";
 import { demoContext } from "../src/demo/state.ts";
-import { feedHousehold, harvest } from "../src/demo/household.ts";
+import { feedHousehold, harvest, spoilAndSpin } from "../src/demo/household.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { DemoContext } from "../src/demo/types.ts";
 import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
@@ -52,7 +52,7 @@ test("a short store buys next year's seed together with the food", () => {
   const shape = (life: LifeStateWithDemo) => { life.demo.household.grain = 0; life.economy!.cash = 10_000; };
   const withRule = draft(on, shape);
   feedHousehold(withRule.ctx);
-  assert.equal(withRule.life.demo.household.grain, seedFor(withRule.life), "seed stays in the store after eating");
+  assert.ok(withRule.life.demo.household.grain >= seedFor(withRule.life), "seed (with room for spoilage) stays in the store after eating");
   assert.ok(withRule.lines.some(line => line.id === "household-bought-seed"), withRule.lines.map(line => line.id).join(", "));
   const without = draft(off, shape);
   feedHousehold(without.ctx);
@@ -121,4 +121,11 @@ test("survival rule values are validated", () => {
     (world.demo!.household as Record<string, unknown>)[key] = value;
     assert.throws(() => validateWorld(world), new RegExp(key), `${key} = ${value}`);
   }
+});
+
+test("the seed bought for next year survives the year's spoilage", () => {
+  const withRule = draft(on, life => { life.demo.household.grain = 0; life.economy!.cash = 10_000; });
+  feedHousehold(withRule.ctx);
+  spoilAndSpin(withRule.ctx);
+  assert.ok(withRule.life.demo.household.grain >= seedFor(withRule.life), `${withRule.life.demo.household.grain} left for ${seedFor(withRule.life)} seed`);
 });

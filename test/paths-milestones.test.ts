@@ -92,3 +92,12 @@ test("the new events pass every event rule", () => {
   assert.ok(ids.size >= 29, `${ids.size} new events`);
   assert.deepEqual(auditEvents(world).filter(item => ids.has(item.eventId)), []);
 });
+
+test("joining the district's renowned updates its trade needs at once", async () => {
+  const { refreshNeeds } = await import("../src/paths/index.ts");
+  const life = adult(["FC10"]);
+  const { life: after } = play(life, 2, state => state.journal.some(entry => entry.id.startsWith("milestone-fc10")));
+  const fresh = structuredClone(after);
+  refreshNeeds(world, fresh);
+  assert.deepEqual(after.paths!.needs, fresh.paths!.needs);
+});
