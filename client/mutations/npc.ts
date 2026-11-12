@@ -8,7 +8,7 @@ export function startNpcSession(seed: string) {
 }
 export function changeNpcSession(
   connection: NpcConnection,
-  operation: "turn" | "step" | "answer" | "speak" | "lease",
+  operation: "turn" | "step" | "answer" | "speak" | "lease" | "check-provider",
   revision: number,
   input: Record<string, unknown> = {},
 ) {

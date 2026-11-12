@@ -51,7 +51,7 @@ export interface NpcOffer {
 export interface NpcDecision {
   action: NpcAction;
   speech: string;
-  source: "rules" | "llm" | "external" | "fallback";
+  source: "rules" | "llm" | "laya" | "external" | "fallback";
 }
 export interface NpcEvent {
   sequence: number;

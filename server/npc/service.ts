@@ -19,6 +19,12 @@ import {
 import type { NpcDecision, NpcObservation } from "../../src/npc/types.ts";
 import type { NpcController } from "./controller.ts";
 import type { NpcSessionStore, SessionRecord } from "./store.ts";
+import {
+  NpcProviderError,
+  providerFailure,
+  type NpcProviderFailure,
+  type NpcProviderStatus,
+} from "./provider-status.ts";
 export class NpcError extends Error {
   readonly status: number;
   constructor(status: number, message: string) {
@@ -45,27 +51,87 @@ export function createNpcSessionService(options: {
   maxModelCalls?: number;
   decisionTimeoutMs?: number;
   dailyModelCalls?: number;
+  configurationError?: boolean;
+  allowGuestProvider?: boolean;
 }) {
   const engine = createEngine(options.world),
     store = options.store,
     now = options.now ?? Date.now;
-  const maxCalls = Math.min(200, Math.max(0, options.maxModelCalls ?? 100)),
+  const maxCalls = Math.min(1000, Math.max(0, options.maxModelCalls ?? 100)),
     timeout = Math.min(10000, Math.max(20, options.decisionTimeoutMs ?? 4000));
   const worlds = new Map([[engine.fingerprint, engine]]);
   const recordEngine = (record: SessionRecord) =>
     worlds.get(record.worldFingerprint)!;
   const dailyLimit = Math.min(
-    1000,
+    5000,
     Math.max(0, options.dailyModelCalls ?? 200),
   );
   async function budget(record: SessionRecord, count: number) {
-    if (!count || !record.ownerId) return false;
+    if (!count || (!record.ownerId && !options.allowGuestProvider))
+      return false;
     const day = new Date(now()).toISOString().slice(0, 10);
     return store.reserveUsage(
-      `model:${day}:${await hash(record.ownerId)}`,
+      `model:${day}:${record.budgetSubject ?? (await hash(record.ownerId ?? record.id))}`,
       count,
       dailyLimit,
     );
+  }
+  function providerStatus(record: SessionRecord): NpcProviderStatus {
+    if (!options.controller)
+      return {
+        status: "fallback",
+        reason: options.configurationError ? "configuration" : "not-configured",
+        checkedAt: null,
+        retryAt: null,
+      };
+    if (!record.ownerId && !options.allowGuestProvider)
+      return {
+        status: "fallback",
+        reason: "sign-in-required",
+        checkedAt: null,
+        retryAt: null,
+      };
+    const status = record.provider;
+    if (
+      !status ||
+      (status.status === "live" && now() - (status.checkedAt ?? 0) > 30000) ||
+      (status.retryAt !== null && status.retryAt <= now())
+    )
+      return {
+        status: "waiting",
+        reason: "not-checked",
+        checkedAt: status?.checkedAt ?? null,
+        retryAt: null,
+      };
+    return status;
+  }
+  function canCall(record: SessionRecord) {
+    return Boolean(
+      options.controller &&
+      (record.ownerId || options.allowGuestProvider) &&
+      !(record.provider?.retryAt && record.provider.retryAt > now()),
+    );
+  }
+  function trackProvider(
+    record: SessionRecord,
+    failures: NpcProviderFailure[],
+    count: number,
+    quota = false,
+  ) {
+    if (count)
+      record.provider = {
+        status: failures.length ? "fallback" : "live",
+        reason: failures[0] ?? null,
+        checkedAt: now(),
+        retryAt: failures.length ? now() + 30000 : null,
+      };
+    else if (quota)
+      record.provider = {
+        status: "fallback",
+        reason: "quota",
+        checkedAt: now(),
+        retryAt: null,
+      };
   }
   function snapshot(record: SessionRecord) {
     const engine = recordEngine(record);
@@ -74,9 +140,18 @@ export function createNpcSessionService(options: {
       revision: record.revision,
       mode: "npc-free-play" as const,
       controller:
-        options.controller && record.ownerId
+        options.controller && (record.ownerId || options.allowGuestProvider)
           ? "model-with-rules-fallback"
           : "rules",
+      npcProvider: providerStatus(record),
+      rewards: {
+        providerEligible: providerStatus(record).status === "live",
+        nftEnabled: false,
+        accountCreditsEnabled: false,
+        mode: "preview-only" as const,
+      },
+      providerName:
+        options.controller?.kind === "laya" ? "Laya" : "AI provider",
       modelCalls: record.llmAttempts,
       modelCallLimit: maxCalls,
       life: record.state.player,
@@ -182,8 +257,12 @@ export function createNpcSessionService(options: {
     record: SessionRecord,
     observation: NpcObservation,
     message?: string,
-  ): Promise<{ action: NpcDecision["action"]; speech: string } | null> {
-    if (!options.controller || !record.ownerId) return null;
+  ): Promise<{
+    value: { action: NpcDecision["action"]; speech: string } | null;
+    failure: NpcProviderFailure | null;
+  }> {
+    if (!options.controller || (!record.ownerId && !options.allowGuestProvider))
+      return { value: null, failure: null };
     // Conversation may continue after the year's action is spent. Its reply has no game effect.
     const permitted: NpcObservation = message
       ? {
@@ -205,38 +284,100 @@ export function createNpcSessionService(options: {
         new Promise<never>((_, reject) => {
           timer = setTimeout(() => {
             abort.abort();
-            reject(new Error("NPC timeout"));
+            reject(new NpcProviderError("timeout", "NPC request timed out."));
           }, timeout);
         }),
       ]);
       const clean = object(result, ["action", "speech"]);
-      if (!permitted.actions.some((a) => a.id === clean.action)) return null;
+      if (!permitted.actions.some((a) => a.id === clean.action))
+        throw new NpcProviderError(
+          "invalid-response",
+          "Unavailable NPC action.",
+        );
       return {
-        action: clean.action as NpcDecision["action"],
-        speech: text(clean.speech, 500),
+        value: {
+          action: clean.action as NpcDecision["action"],
+          speech: text(clean.speech, 500),
+        },
+        failure: null,
       };
-    } catch {
-      return null;
+    } catch (error) {
+      return { value: null, failure: providerFailure(error) };
     } finally {
       clearTimeout(timer);
       abort.abort();
     }
   }
+  async function checkProvider(
+    id: string,
+    token: string,
+    revision: number,
+    key: string,
+  ) {
+    const record = await owner(id, token),
+      input = { op: "check-provider" };
+    if (request(record, revision, key, input)) return snapshot(record);
+    if (record.turnLock && record.turnLock.until > now())
+      throw new NpcError(409, "Wait for the current NPC request.");
+    if (!canCall(record)) return snapshot(record);
+    if (record.llmAttempts >= maxCalls || !(await budget(record, 1))) {
+      trackProvider(record, [], 0, true);
+      receipt(record, key, input);
+      return commit(record, revision);
+    }
+    const npcId = Object.values(record.state.slots).find(
+      (id) => record.state.people[id].introduced,
+    );
+    if (!npcId)
+      throw new NpcError(409, "Meet a core NPC before checking the provider.");
+    record.llmAttempts++;
+    record.turnLock = { key, until: now() + timeout + 2000 };
+    await commit(record, revision);
+    const outcome = await model(
+      record,
+      observeNpc(record.state, npcId),
+      "Confirm the live NPC service can respond. No game action or reward is requested.",
+    );
+    const latest = await owner(id, token);
+    if (latest.turnLock?.key !== key || latest.turnLock.until < now())
+      throw new NpcError(409, "Provider check expired.");
+    const before = latest.revision;
+    trackProvider(latest, outcome.failure ? [outcome.failure] : [], 1);
+    latest.turnLock = null;
+    receipt(latest, key, input);
+    return commit(latest, before);
+  }
   return {
+    checkProvider,
+    /** A reward issuer must call this immediately before awarding, rather than trusting a browser flag. */
+    async requireLiveProviderForRewards(id: string, token: string) {
+      const record = await owner(id, token);
+      const verified = await checkProvider(
+        id,
+        token,
+        record.revision,
+        crypto.randomUUID(),
+      );
+      if (verified.npcProvider.status !== "live")
+        throw new NpcError(
+          503,
+          "Live NPC provider is unavailable. NFT rewards and account credits are disabled.",
+        );
+      return {
+        sessionId: id,
+        revision: verified.revision,
+        checkedAt: verified.npcProvider.checkedAt,
+      };
+    },
     async start(
       seed: string,
       ownerId: string | null,
       guestIdentity = "anonymous",
     ) {
       text(seed, 256);
-      const day = new Date(now()).toISOString().slice(0, 10);
-      if (
-        !(await store.reserveUsage(
-          `create:${day}:${await hash(ownerId ?? guestIdentity)}`,
-          1,
-          20,
-        ))
-      )
+      const day = new Date(now()).toISOString().slice(0, 10),
+        budgetSubject = await hash(ownerId ?? guestIdentity);
+      if (!(await store.reserveUsage(`create:${day}:${budgetSubject}`, 1, 20)))
         throw new NpcError(
           429,
           "Daily NPC session creation limit reached. Continue an existing life.",
@@ -248,6 +389,7 @@ export function createNpcSessionService(options: {
         id,
         ownerHash: await hash(token),
         ownerId,
+        budgetSubject,
         revision: 0,
         worldFingerprint: engine.fingerprint,
         state: createNpcSimulation(engine.world, seed),
@@ -322,17 +464,22 @@ export function createNpcSessionService(options: {
       const active = Object.values(record.state.slots).filter(
         (id) => availableNpcActions(record.state, id).length,
       );
-      let calls =
-        options.controller && record.ownerId
-          ? active
-              .filter(
-                (id) =>
-                  !(record.leases[id]?.expires > now()) &&
-                  record.llmAttempts < maxCalls,
-              )
-              .slice(0, maxCalls - record.llmAttempts)
-          : [];
-      if (calls.length && !(await budget(record, calls.length))) calls = [];
+      let calls = canCall(record)
+        ? active
+            .filter(
+              (id) =>
+                !(record.leases[id]?.expires > now()) &&
+                record.proposals[id]?.age !== record.state.player.age &&
+                record.llmAttempts < maxCalls,
+            )
+            .slice(0, maxCalls - record.llmAttempts)
+        : [];
+      let quota = canCall(record) && record.llmAttempts >= maxCalls;
+      if (calls.length && !(await budget(record, calls.length))) {
+        calls = [];
+        quota = true;
+      }
+      const failures: NpcProviderFailure[] = [];
       const lockKey = secret();
       record.turnLock = { key: lockKey, until: now() + timeout + 2000 };
       record.llmAttempts += calls.length;
@@ -345,13 +492,19 @@ export function createNpcSessionService(options: {
               return [npcId, pending.decision];
             if (record.leases[npcId]?.expires > now())
               return [npcId, rulesDecision(record.state, npcId, "fallback")];
-            const result = calls.includes(npcId)
+            const outcome = calls.includes(npcId)
               ? await model(record, observeNpc(record.state, npcId))
               : null;
+            if (outcome?.failure) failures.push(outcome.failure);
+            const result = outcome?.value;
             return [
               npcId,
               result
-                ? decision({ ...result, source: "llm" })
+                ? decision({
+                    ...result,
+                    source:
+                      options.controller?.kind === "laya" ? "laya" : "llm",
+                  })
                 : rulesDecision(
                     record.state,
                     npcId,
@@ -372,6 +525,7 @@ export function createNpcSessionService(options: {
         type: "resolve",
         decisions,
       });
+      trackProvider(record, failures, calls.length, quota);
       record.turnLock = null;
       record.proposals = {};
       receipt(record, key, input);
@@ -406,10 +560,12 @@ export function createNpcSessionService(options: {
         ).length >= 5
       )
         throw new NpcError(429, "Conversation limit reached for this year.");
-      let use = Boolean(
-        options.controller && record.ownerId && record.llmAttempts < maxCalls,
-      );
-      if (use && !(await budget(record, 1))) use = false;
+      let use = Boolean(canCall(record) && record.llmAttempts < maxCalls);
+      let quota = canCall(record) && record.llmAttempts >= maxCalls;
+      if (use && !(await budget(record, 1))) {
+        use = false;
+        quota = true;
+      }
       if (use) record.llmAttempts++;
       record.turnLock = { key, until: now() + timeout + 2000 };
       await commit(record, revision);
@@ -423,9 +579,15 @@ export function createNpcSessionService(options: {
         npcId,
         text: message,
         reply:
-          response?.speech ??
+          response?.value?.speech ??
           `I am concerned with my own household and work. ${observation.actor.goal}`,
       });
+      trackProvider(
+        latest,
+        response?.failure ? [response.failure] : [],
+        use ? 1 : 0,
+        quota,
+      );
       latest.turnLock = null;
       receipt(latest, key, input);
       return commit(latest, before);

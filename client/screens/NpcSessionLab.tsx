@@ -171,9 +171,11 @@ export default function NpcSessionLab() {
                 Year {session.life.year} ·{" "}
                 {session.life.phase === "ended"
                   ? "Life ended"
-                  : session.controller === "rules"
-                    ? "Rule-based NPCs"
-                    : "AI with rules fallback"}{" "}
+                  : session.npcProvider.status === "live"
+                    ? `Live ${session.providerName} decisions`
+                    : session.npcProvider.status === "waiting"
+                      ? "Live provider not checked"
+                      : "Rules active"}{" "}
                 · {session.modelCalls}/{session.modelCallLimit} model calls
               </p>
               <p>
@@ -206,6 +208,22 @@ export default function NpcSessionLab() {
               </button>
             </div>
           </section>
+          <aside className="npc-provider-status" role="status">
+            <p>
+              {session.npcProvider.status === "live"
+                ? "Live NPC provider connected. This NPC mode currently offers reward previews only."
+                : "Live NPC provider unavailable or unverified. Rules keep your life playable; real NFT rewards and account credits are disabled."}
+            </p>
+            {session.providerName === "Laya" && (
+              <p>
+                Laya chooses actions and short authored responses. Free-form
+                chat needs a generative provider.
+              </p>
+            )}
+            <button disabled={busy} onClick={() => void act("check-provider")}>
+              Check live connection
+            </button>
+          </aside>
           {session.life.phase === "choice" && (
             <section className="npc-choice">
               <h2>Your decision</h2>
