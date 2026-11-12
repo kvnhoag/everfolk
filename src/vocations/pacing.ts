@@ -7,10 +7,6 @@
 import type { WorldPack } from "../types.ts";
 import { MILITARY_QUALIFICATIONS } from "../capabilities/military.ts";
 
-/** A field's top rank (depth 10) comes with years: it is recognised from this age. */
-export const MASTERY_AGE = 58;
-/** Generals of the era commanded in their forties; strategic command (M10) is recognised from this age. */
-export const COMMAND_AGE = 45;
 
 /** Fitness and knowledge for the military path: a serving veteran loses health each year, and drill does not keep book-learning fresh. */
 export const STAT_GATES: Record<string, Record<string, number>> = {
@@ -19,10 +15,17 @@ export const STAT_GATES: Record<string, Record<string, number>> = {
 };
 
 export const PROOF_YEARS: Record<string, number> = {
-  // Clothing (74%) and Cultivation (66%) finished early, around 39 and 41: one more year per step.
-  AT5: 3, AT6: 3, AT7: 3, AT8: 3, AT9: 3,
-  FC6: 3, FC7: 3, FC9: 3,
-  // The military lane (0%): officers came near 50. One proof year per step lets a soldier command by about 35.
+  // Longer lives (milder illness) pushed every path to 65–80%. With no age rule, the middle steps ask for
+  // more years of proven work, most on the paths that finished earliest. Depth-10 steps are fixed projects.
+  FC5: 3, FC6: 5, FC7: 5, FC9: 5, FC10: 4,   // FC8 needs two different crops, so it stays at two
+  FR5: 4, FR6: 4, FR7: 4, FR8: 5,
+  AT5: 6, AT6: 6, AT7: 6, AT8: 5, AT9: 5,
+  AC5: 6, AC6: 5, AC7: 5, AC8: 5, AC9: 5,
+  AS5: 5, AS6: 5, AS7: 5, AS8: 2,
+  PS5: 6, PS6: 5, PS7: 4, PS8: 4, PS9: 3,
+  PP5: 5, PP6: 5, PP7: 3, PP8: 5,
+  T3: 3, T4: 3, T5: 3, T6: 3, T7: 3, T8: 4, T9: 3,
+  // The military lane: one proof year per step, so a soldier can command by about 37.
   B2: 1, B3: 1, M4: 1, M5: 1, M6: 1, M7: 1, M8: 1, M9: 1,
 };
 
@@ -45,7 +48,6 @@ const APPOINTMENTS: Record<string, { cooldownYears: number; weights: Record<stri
 
 export function applyPacing(world: WorldPack): void {
   for (const node of world.capabilities?.nodes ?? []) {
-    if (node.depth === 10) node.minimumAge = node.id === "M10" ? COMMAND_AGE : MASTERY_AGE;
     if (STAT_GATES[node.id]) node.minimumStats = { ...STAT_GATES[node.id] };
   }
   for (const activity of world.character?.activities ?? []) {
@@ -59,7 +61,7 @@ export function applyPacing(world: WorldPack): void {
     const years = PROOF_YEARS[node.id];
     if (years === undefined) continue;
     node.proofYears = years;
-    node.proof = node.proof.replace(/\b2\b/, String(years));
+    node.proof = /^Complete \d+\b/.test(node.proof) ? node.proof.replace(/^Complete \d+\b/, `Complete ${years}`) : `${node.proof} (${years} proof years)`;
   }
   // A rank asks for the skills of its qualification, so the two stay the same.
   for (const job of world.character?.jobs ?? []) {
