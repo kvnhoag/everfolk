@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef } from "react";
 import { formatYear } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
-import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
+import SiteNav from "../components/SiteNav.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import "../homepage/homepage.css";
@@ -40,6 +40,7 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
   const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Begin your life";
+  const primaryAction = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
@@ -49,19 +50,12 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
     <div className="ef-home-shell">
       <header className="ef-home-weave-bar">
         <div className="ef-home-weave-bar-main">
-          <a className="ef-home-weave-brand" href="#weave" aria-label="Everfolk Weave Mode">
+          <a className="ef-home-weave-brand" href="#" aria-label="Everfolk home">
             <strong><EverfolkWordmark tone="cream" /></strong>
             <span>WEAVING FATES</span>
           </a>
-          <nav className="ef-home-weave-links" aria-label="Everfolk experiences">
-            <a href="#weave">Weave Mode</a>
-            <a href="#figures">Figures</a>
-            <a href="#market">Market</a>
-            <a href="#mine">My lives</a>
-            <button type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin}>Explore for free</button>
-          </nav>
+          <SiteNav className="ef-home-weave-links" onPlay={primaryAction} />
         </div>
-        {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry /></div>}
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
@@ -80,9 +74,10 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
           </div>}
           {notice && <p className="ef-home-notice" role="status">{notice}</p>}
           <div className="ef-home-actions">
-            <button className="ef-home-primary" type="button" onClick={rankedLife || continuing || pendingBirth ? onContinue : onBegin} aria-describedby={continuing ? saveId : undefined}>
+            <button className="ef-home-primary" type="button" onClick={primaryAction} aria-describedby={continuing ? saveId : undefined}>
               <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
             </button>
+            {!rankedLife && <a className="ef-home-weave-cta" href="#weave"><span>Weave Mode</span><small>Play a verified life and mint real NFTs on NEAR</small><span aria-hidden="true">→</span></a>}
             {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>
         </section>

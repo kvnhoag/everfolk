@@ -20,8 +20,8 @@ import { releaseOrder, sendDemoCommand } from "../demo/screen.ts";
 import { isUnavailable } from "../../src/demo/availability.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
-export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
-const YEAR_DURATION_MS = 25_000;
+import { DEFAULT_PLAYBACK_SPEED, YEAR_DURATION_MS, type PlaybackSpeed } from "../models/playback.ts";
+export type { PlaybackSpeed };
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : "Something interrupted this action. Please try again.";
@@ -147,7 +147,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const [autoDecisions, setAutoDecisionsState] = useState(false);
   const autoIntentRef = useRef(false);
   const autoAllowedRef = useRef(false);
-  const [speed, setSpeed] = useState<PlaybackSpeed>(1);
+  const [speed, setSpeed] = useState<PlaybackSpeed>(DEFAULT_PLAYBACK_SPEED);
   const [clockElapsedMs, setClockElapsedMs] = useState(0);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);

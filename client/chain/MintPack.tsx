@@ -21,10 +21,12 @@ export interface MintPackProps {
   onChoose?(slot: number): Promise<MintResult>;
   onClose(): void;
   txHash?: string | null;
+  /** A free life: show the cards it could have won, with no mint, reroll or fee. */
+  previewOnly?: boolean;
 }
 
 /** All outcomes and rerolls are contract values. Animation only reveals confirmed cards. */
-export default function MintPack({ initialPack, evidence, walletPath = true, practice = false, contract, careerGroup, onChoose, onClose, txHash }: MintPackProps) {
+export default function MintPack({ initialPack, evidence, walletPath = true, practice = false, contract, careerGroup, onChoose, onClose, txHash, previewOnly = false }: MintPackProps) {
   const [pack, setPack] = useState(initialPack);
   const [opened, setOpened] = useState(false);
   const [opening, setOpening] = useState(false);
@@ -62,28 +64,30 @@ export default function MintPack({ initialPack, evidence, walletPath = true, pra
   }
   if (result) return <MintReveal practice={practice} view={mintRevealView(result, group, { evidence, evidenceUrl: practice ? null : `/api/ranked/evidence/${pack.evidence_hash}`, actionId: selected === null ? null : pack.cards[selected].action_id, txHash })} affection={result.affection} onClose={onClose} />;
   return <section className={`chain-card mint-pack${opened ? " is-open" : ""}`} aria-labelledby="pack-title">
-    <p className="chain-kicker">Life #{pack.life_id} · {practice ? "Practice pack · not recorded on NEAR" : "Pack recorded on NEAR"}</p>
-    <h1 id="pack-title" tabIndex={-1}>{opened ? "Choose who weaves forward" : "A life. Three possibilities."}</h1>
-    <p>{opened ? "Choose one card to keep as your life NFT. The other two return to the story." : "Your three cards are ready. Open the pack to reveal them."}</p>
+    <p className="chain-kicker">{previewOnly ? "Free life · nothing is minted" : `Life #${pack.life_id} · ${practice ? "Practice pack · not recorded on NEAR" : "Pack recorded on NEAR"}`}</p>
+    <h1 id="pack-title" tabIndex={-1}>{previewOnly ? "You could have gotten…" : opened ? "Choose who weaves forward" : "A life. Three possibilities."}</h1>
+    <p>{previewOnly ? "In Weave Mode, a life like this one keeps one of these cards as a real NFT on NEAR." : opened ? "Choose one card to keep as your life NFT. The other two return to the story." : "Your three cards are ready. Open the pack to reveal them."}</p>
     {!opened ? <button className={`booster-pack${opening ? " is-opening" : ""}`} type="button" disabled={opening} onClick={() => setOpening(true)}><span className="booster-seal" aria-hidden="true">✦</span><strong>EVERFOLK</strong><span>Weaving fates</span><small>{opening ? "Opening your fate…" : "Open your pack →"}</small></button> : <>
       <div className="augment-cards" role="group" aria-label="Choose one of three mint cards">{pack.cards.map((card, slot) => <article key={slot} className={`augment-slot${selected === slot ? " is-selected" : ""}`} style={{ animationDelay: `${slot * 100}ms` }}>
-        <button className="augment-choice" type="button" disabled={Boolean(busy)} aria-pressed={selected === slot} onClick={() => setSelected(slot)}>
+        <button className={`augment-choice${previewOnly ? " is-preview" : ""}`} type="button" disabled={Boolean(busy) || previewOnly} aria-pressed={previewOnly ? undefined : selected === slot} onClick={() => setSelected(slot)}>
           <span className="chain-kicker">Slot {slot + 1} · {rarityLabel(card.rarity)}</span>
           <span className="augment-art">{card.portrait_media ? <img className="stage-card-portrait" src={card.portrait_media} alt={card.character_name ?? "Stage portrait"} /> : card.figure_id ? <FigureArtwork figureId={card.figure_id} /> : <PixelPortrait age={45} seed={`${pack.evidence_hash}:${slot}:${card.rerolled}`} name={GROUP_TITLE[group]} />}</span>
           <strong className="augment-title">{card.figure_id ? figureTitle(card.figure_id) : card.stage_title && card.character_name ? `${card.character_name} · ${card.stage_title}` : GROUP_TITLE[group]}</strong>
           <span className="chain-tag">{card.kind === "figure" ? "Historical figure" : card.stage_id ? `Stage portrait · ${card.stage_title ?? card.stage_id}` : "Person of the city"}</span>
           <strong>{actionName(card.action_id)}</strong><span>{actionDescription(card.action_id)}</span>
-          <span className="augment-affection">Affection {card.affection} / 100</span><span className="augment-select">{selected === slot ? "Selected ✓" : "Choose this card"}</span>
+          <span className="augment-affection">Affection {card.affection} / 100</span>{!previewOnly && <span className="augment-select">{selected === slot ? "Selected ✓" : "Choose this card"}</span>}
         </button>
-        <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? (walletPath ? "Confirm in wallet…" : "Confirming…") : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>
+        {!previewOnly && <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? (walletPath ? "Confirm in wallet…" : "Confirming…") : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>}
       </article>)}</div>
-      <p className="chain-fine">One optional reroll per slot. A reroll replaces that card permanently. {practice ? "Practice rerolls update this local ledger; no NEAR is spent." : "Every paid reroll is saved on NEAR and added to your total mint fee."}</p>
+      {!previewOnly && <p className="chain-fine">One optional reroll per slot. A reroll replaces that card permanently. {practice ? "Practice rerolls update this local ledger; no NEAR is spent." : "Every paid reroll is saved on NEAR and added to your total mint fee."}</p>}
     </>}
+    {previewOnly ? <div className="chain-actions"><a className="chain-primary" href="#weave" onClick={onClose}>Play Weave Mode to get real NFTs<span aria-hidden="true">→</span></a><button className="chain-secondary" type="button" onClick={onClose}>Back to your life</button></div> : <>
     <div className="pack-receipt"><strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong><span>{pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this life. {walletPath && "Network gas is separate."}</span></div>
     {busy && <p role="status" className="chain-notice">{!walletPath ? "Confirming…" : busy === "mint" ? "Confirm your chosen card in your wallet. Waiting for NEAR…" : "Confirm the reroll payment in your wallet. Waiting for NEAR…"}</p>}
     {error && <p className="chain-error" role="alert">{error}</p>}
     <div className="chain-actions">{opened && <button className="chain-primary" type="button" disabled={Boolean(busy) || selected === null} onClick={() => { void choose(); }}>{busy === "mint" ? "Minting…" : selected === null ? "Select a card above" : `Mint selected card · Slot ${selected + 1}`}<span aria-hidden="true">→</span></button>}<button className="chain-secondary" type="button" disabled={Boolean(busy)} onClick={onClose}>Save pack & leave</button></div>
     <p className="chain-fine">{practice ? "This practice pack lasts while this page stays open. No NEAR is spent." : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? "Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas." : "You’ll confirm your choice first."}`}</p>
+    </>}
     {!practice && <details className="pack-proof"><summary>Verify this pack</summary><p>Life #{pack.life_id} · Signed evidence hash <code>{pack.evidence_hash}</code></p><p>Opening, each reroll, and final selection have separate NEAR transactions. The contract stores the outcomes and enforces the one-reroll limit. Check their receipts from Account details.</p><a href={`/api/ranked/evidence/${pack.evidence_hash}`} target="_blank" rel="noreferrer">View the verified life & choices</a></details>}
   </section>;
 }

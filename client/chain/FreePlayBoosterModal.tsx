@@ -62,10 +62,10 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     >
       <div className="chain-shell">
         <header className="chain-topline">
-          <span className="chain-preview">OFFLINE PREVIEW · NOT-WEAVE LIFE</span>
+          <span className="chain-preview">FREE LIFE · PREVIEW</span>
           <nav>
             <button className="chain-link" type="button" onClick={onClose}>
-              Back to memorial ✕
+              Back to your life ✕
             </button>
           </nav>
         </header>
@@ -83,6 +83,7 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
 
         {session && !loading && !error && (
           <MintPack
+            previewOnly
             practice
             walletPath={false}
             initialPack={session.pack}
