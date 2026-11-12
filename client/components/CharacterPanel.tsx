@@ -1,3 +1,5 @@
+import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
+import FigurePaths from "./FigurePaths.tsx";
 import { vocationInventory } from "../../src/vocations/view.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { useId, useMemo, useRef, useState } from "react";
@@ -269,7 +271,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        <CapabilityTree activities={activities} {...props} />
+        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} />}
+        <FigurePaths activities={activities} {...props} />
         <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
           <CompactSkillPanel activities={activities} {...props} />
           <CareerEconomyTree activities={activities} {...props} />

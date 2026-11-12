@@ -43,6 +43,15 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
           {state?.copies.map(copy => <div className="figure-owner" key={copy.token_id}><a href={`#token/${copy.token_id}`}>Copy #{copy.token_id} · {copy.owner_id}</a><p>{rarityLabel(copy.extra.rarity)} · Affection {copy.extra.affection}</p><p><strong>{actionName(copy.extra.action_id)}</strong> · {actionDescription(copy.extra.action_id)}</p></div>)}
           <h3>Choices this figure can make</h3>
           {FIGURE_ACTIONS[figure.figure].map(id => <p key={id}><strong>{actionName(id)}</strong><br />{actionDescription(id)}</p>)}
+          {figure.biography && <>
+            <h3>Life and work</h3>
+            <p>{figure.biography.period}</p>
+            <h4>Authored writings</h4>
+            {figure.biography.authoredWorks.length ? <ul>{figure.biography.authoredWorks.map(work => <li key={work.title}><em>{work.title}</em> — {work.status}. {work.note}</li>)}</ul> : <p>No authored literary work is securely identified in the sources reviewed.</p>}
+            {figure.biography.otherWorks.length > 0 && <><h4>Other works and achievements</h4><ul>{figure.biography.otherWorks.map(work => <li key={work.title}><strong>{work.title}</strong> — {work.note}</li>)}</ul></>}
+            {figure.biography.cautions.map(note => <p className="chain-fine" key={note}>{note}</p>)}
+            <p className="chain-fine">Sources: {figure.biography.sources.map((source, index) => <span key={source.url}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span>)}</p>
+          </>}
           <h3>How a life qualifies</h3>
           <ul>{figure.origins && <li>Origin: {figure.origins.map(id => id.replaceAll("-", " ")).join(", ")}</li>}{figure.jobsAny && <li>Reach one of: {figure.jobsAny.map(id => id.replaceAll("-", " ")).join(", ")}</li>}{Object.entries(figure.minSkills ?? {}).map(([id, value]) => <li key={id}>{id}: {value}+</li>)}{Object.entries(figure.minStats ?? {}).map(([id, value]) => <li key={id}>{id}: {value}+</li>)}{figure.accomplishmentsAny && <li>Record a qualifying accomplishment: {figure.accomplishmentsAny.map(id => id.replaceAll("-", " ")).join(", ")}{figure.maxAgeAtAccomplishment ? ` by age ${figure.maxAgeAtAccomplishment}` : ""}.</li>}</ul>
         </details>

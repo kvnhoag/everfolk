@@ -160,7 +160,7 @@ test("buildEvidence incorporates stage records and matched stage figures when pr
   assert.equal(youth.stageId, "youth");
   assert.equal(youth.kind, "historical");
   assert.equal(youth.figureId, "alexander");
-  assert.equal(youth.name, "Alexander");
+  assert.equal(youth.name, "Alexander the Great");
   assert.equal(youth.media, "/assets/figures/alexander.png");
 });
 

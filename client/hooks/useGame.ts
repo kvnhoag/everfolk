@@ -1,3 +1,4 @@
+import { createPlaybackClock, playbackYearKey } from "../models/playback-clock.ts";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
@@ -148,7 +149,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const autoIntentRef = useRef(false);
   const autoAllowedRef = useRef(false);
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
-  const [clockElapsedMs, setClockElapsedMs] = useState(0);
+  const [yearClock] = useState(() => createPlaybackClock(playbackYearKey(initial.life), YEAR_DURATION_MS));
+  const [clockProgress, setClockProgress] = useState(0);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
@@ -162,13 +164,19 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     pauseStateRef.current = next;
     playbackIntentRef.current = next.playing;
     if (!next.playing) {
+      setClockProgress(yearClock.pause(performance.now()).progress);
       clockAllowedRef.current = false;
       autoAllowedRef.current = false;
     }
     setPauseState(next);
-  }, []);
+  }, [yearClock]);
 
   const adoptOnlineState = useCallback((next: LifeState, notice = "") => {
+    // An authoritative NPC response may finish an advance request without moving
+    // the calendar. Re-arm that completed interval when play becomes ready again.
+    if (notice || yearClock.isComplete() && next.phase === "ready" && next.age === lifeRef.current.age) yearClock.reset(playbackYearKey(next));
+    else yearClock.setYear(playbackYearKey(next));
+    setClockProgress(yearClock.read().progress);
     if (next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
       setFocusSelection({ key: yearlyFocusStorageKey(next), id: "everyday" });
     }
@@ -180,13 +188,14 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     setSaveStatus("saved");
     setNotice(notice);
     if (next.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: true, phase: next.phase }));
-  }, [commitPauseState]);
+  }, [commitPauseState, yearClock]);
 
   const submitOnline = useCallback((action: (play: OnlinePlay) => Promise<LifeState>) => {
     const play = onlineRef.current;
     if (!play) return false;
     void runOnlineAction(play, pendingRef, action, adoptOnlineState, pending => {
       if (pending) {
+        setClockProgress(yearClock.pause(performance.now()).progress);
         clockAllowedRef.current = false;
         autoAllowedRef.current = false;
         setSaveStatus("saving");
@@ -194,7 +203,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setSyncing(pending);
     });
     return true;
-  }, [adoptOnlineState]);
+  }, [adoptOnlineState, yearClock]);
 
   useEffect(() => {
     if (!online || pendingRef.current || online.initial === externalOnlineLifeRef.current) return;
@@ -234,6 +243,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [commitPauseState]);
 
   const commit = useCallback((next: LifeState, fresh = false) => {
+    setClockProgress(yearClock.pause(performance.now()).progress);
     const rankedPlay = rankedRef.current;
     if (rankedPlay && !fresh) {
       // Pause commands and the clock while key decisions draw and checkpoints post on chain.
@@ -241,6 +251,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setSaveStatus("saving");
       setSyncing(true);
       void rankedPlay.sync(next).then(adopted => {
+        yearClock.setYear(playbackYearKey(adopted));
+        setClockProgress(yearClock.read().progress);
         lifeRef.current = adopted;
         setLife(adopted);
         setSaveStatus("saved");
@@ -248,6 +260,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
         if (adopted.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: hasBegunRef.current, phase: adopted.phase }));
       }, error => {
         const current = rankedPlay.current();
+        yearClock.reset(playbackYearKey(current));
+        setClockProgress(0);
         lifeRef.current = current;
         setLife(current);
         setHasBegun(true);
@@ -261,11 +275,13 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (fresh || next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
       setFocusSelection({ key: yearlyFocusStorageKey(next), id: fresh ? "everyday" : savedFocus(next) });
     }
+    if (fresh) yearClock.reset(playbackYearKey(next)); else yearClock.setYear(playbackYearKey(next));
+    setClockProgress(yearClock.read().progress);
     lifeRef.current = next;
     setLife(next);
     setSaveStatus("saving");
     if (next.phase === "ended" || fresh) commitPauseState(updatePauseState(pauseStateRef.current, { type: next.phase === "ended" ? "ended" : "fresh" }, { hasBegun: hasBegunRef.current, phase: next.phase }));
-  }, [commitPauseState]);
+  }, [commitPauseState, yearClock]);
 
   const choose = useCallback((choiceId: string) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
@@ -424,6 +440,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       } catch { /* Keep the stat reveal available when browser storage is blocked. */ }
       hasBegunRef.current = begun;
       commitPauseState(initialPauseState());
+      yearClock.reset(playbackYearKey(restored));
+      setClockProgress(0);
       setAutoDecisions(false);
       setHasBegun(begun);
       setHasRevealedStats(revealed);
@@ -431,7 +449,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setNotice("The imported life is ready.");
       return restored;
     } catch (error) { setNotice(message(error)); return false; }
-  }, [commit, commitPauseState, setAutoDecisions]);
+  }, [commit, commitPauseState, setAutoDecisions, yearClock]);
 
   useEffect(() => {
     if (onlineRef.current) return;
@@ -485,26 +503,40 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [pauseLife]);
 
   useEffect(() => {
-    // Holds and speed changes begin a fresh interval. No missed years catch up.
-    setClockElapsedMs(0);
-    if (!isClockRunning) return;
-    const started = performance.now();
-    const countdown = window.setInterval(() => {
-      setClockElapsedMs(Math.min(yearDurationMs, performance.now() - started));
-    }, Math.min(100, yearDurationMs / 10));
-    const timer = window.setTimeout(() => {
-      // A pause, overlay or state change can precede effect cleanup in the same turn.
-      if (!document.hidden && clockAllowedRef.current && playbackIntentRef.current &&
-        lifeRef.current === life && lifeRef.current.phase === "ready") {
-        setClockElapsedMs(yearDurationMs);
+    const key = playbackYearKey(life);
+    if (!isClockRunning) {
+      setClockProgress(yearClock.hold(key, yearDurationMs, performance.now()).progress);
+      return;
+    }
+    const token = yearClock.resume(key, yearDurationMs, performance.now());
+    const publish = () => {
+      if (yearClock.isCurrent(token)) setClockProgress(yearClock.read(performance.now()).progress);
+    };
+    publish();
+    const countdown = window.setInterval(publish, Math.min(100, yearDurationMs / 10));
+    let timer: number;
+    const finishYear = () => {
+      // A pause, overlay or snapshot change may precede effect cleanup.
+      if (document.hidden || !yearClock.isCurrent(token) || !clockAllowedRef.current || !playbackIntentRef.current ||
+        lifeRef.current !== life || lifeRef.current.phase !== "ready") return;
+      const now = performance.now();
+      const remainingMs = yearClock.read(now).remainingMs;
+      if (remainingMs > 0) {
+        timer = window.setTimeout(finishYear, Math.max(1, Math.ceil(remainingMs)));
+        return;
+      }
+      if (yearClock.takeDue(token, now)) {
+        setClockProgress(1);
         advance();
       }
-    }, yearDurationMs);
+    };
+    timer = window.setTimeout(finishYear, Math.ceil(yearClock.read().remainingMs));
     return () => {
       window.clearTimeout(timer);
       window.clearInterval(countdown);
+      setClockProgress(yearClock.pause(performance.now()).progress);
     };
-  }, [advance, isClockRunning, life, yearDurationMs]);
+  }, [advance, isClockRunning, life, yearDurationMs, yearClock]);
 
   useEffect(() => {
     if (!canRunAutomaticDecision(pauseState, { hasBegun, phase: life.phase }, isVisible, isOverlayOpen, autoDecisions)) return;
@@ -564,8 +596,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     pauseLife,
     continueLife,
     isClockRunning,
-    clockRemainingMs: Math.max(0, yearDurationMs - clockElapsedMs),
-    clockProgress: Math.min(1, clockElapsedMs / yearDurationMs),
+    clockRemainingMs: Math.max(0, yearDurationMs * (1 - clockProgress)),
+    clockProgress,
     setPlaying,
     speed,
     setSpeed,

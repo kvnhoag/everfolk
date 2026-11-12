@@ -8,6 +8,7 @@ export const NOTIFICATION_DURATION_MS = 30_000;
 export const MAX_EVENT_NOTIFICATIONS = 3;
 
 export interface EventNotification extends LifeEventRow {
+  age: number;
   year: number;
   sequence: number;
   expiresAt: number;
@@ -45,12 +46,14 @@ export function syncEventNotifications(state: EventNotificationState | null, lif
     previous.journal.every((entry, index) => entry === journal[index]);
   // The projection is newest first. Creation order must stay chronological,
   // including several outcomes delivered in a single engine update.
-  const events = buildImportantLifeEvents(life, world).flatMap(group => group.events.map(event => ({
-    ...event, year: group.year,
+  const events = [
+    ...buildImportantLifeEvents(life, world).flatMap(group => group.events.map(event => ({ ...event, age: group.age, year: group.year }))).reverse(),
+  ].map(event => ({
+    ...event,
     // Journal position distinguishes real recurrences; content distinguishes
     // alternative branch facts recorded at that same position.
     key: `${event.key}:${contentFingerprint([event.title ?? null, event.text])}`,
-  }))).reverse();
+  })).sort((left, right) => left.age - right.age);
   const observed = new Set([...(previous?.observedKeys ?? []), ...seenKeys]);
   const created = events.filter(event => !observed.has(event.key));
   const previousCount = Math.max(previous?.createdCount ?? 0, observed.size);

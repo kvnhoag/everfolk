@@ -63,7 +63,7 @@ test("tokenTitle formats generic stage figures as character name and stage title
     stage_id: "youth",
     stage_title: "Cavalry Cadet",
   });
-  assert.equal(tokenTitle(historicalStage), "Alexander, the conqueror");
+  assert.equal(tokenTitle(historicalStage), "Alexander the Great");
 });
 
 test("tokenPageView exposes portrait media and stage information", () => {

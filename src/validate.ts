@@ -1,3 +1,7 @@
+import { CAPABILITY_OPERATIONS } from "./deep-capabilities/operations.ts";
+import type { CapabilityRule as DeepCapabilityRule } from "./deep-capabilities/types.ts";
+import { validateCapabilityRules } from "./deep-capabilities/rules.ts";
+import { validateFigurePaths } from "./figures/validate.ts";
 import type { CapabilityDefinition } from "./capabilities/types.ts";
 import { validateCapabilities } from "./capabilities/validate.ts";
 import type { VocationDefinition } from "./vocations/types.ts";
@@ -131,7 +135,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears", "npcAgents"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears", "npcAgents", "deepCapabilities", "figurePaths"], worldFields);
   if (Object.hasOwn(world, "npcAgents")) {
     const agents = object(world.npcAgents, "world.npcAgents", ["version"]);
     if (agents.version !== 1) fail("world.npcAgents.version", "only version 1 is supported");
@@ -393,15 +397,22 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   skillIds.forEach(visitSkill);
   if (Object.hasOwn(world, "vocations")) {
     if (!world.economy || !character) fail("world.vocations", "requires economy and characters");
-    validateVocations(world.vocations, skillIds, fail);
+    validateVocations(world.vocations, skillIds, fail, Boolean(world.deepCapabilities), Boolean(world.figurePaths));
   }
 
   if (Object.hasOwn(world, "capabilities")) {
     if (!world.vocations || !world.demo || !character || !world.economy) fail("world.capabilities", "requires a household economy, vocations and character skills");
     validateCapabilities(world.capabilities, skillIds, fail, statIds);
   }
+  if (Object.hasOwn(world, "deepCapabilities")) {
+    const tree = object(world.deepCapabilities, "world.deepCapabilities", ["version", "rules"]);
+    if (tree.version !== "deep-1" || !world.vocations || !world.demo || !character) fail("world.deepCapabilities", "requires deep-1 work, household and character rules");
+    if (world.capabilities) fail("world.deepCapabilities", "a world selects one capability engine");
+    try { validateCapabilityRules(tree.rules as DeepCapabilityRule[], skillIds); } catch (error) { fail("world.deepCapabilities.rules", error instanceof Error ? error.message : "invalid deep rules"); }
+  }
   const capabilityReference = (value: unknown, path: string): void => {
-    if (typeof value !== "string" || !world.capabilities || !(world.capabilities as CapabilityDefinition).nodes.some(node => node.id === value)) fail(path, "unknown capability node");
+    const known = world.deepCapabilities ? (world.deepCapabilities as {rules: DeepCapabilityRule[]}).rules : (world.capabilities as CapabilityDefinition | undefined)?.nodes;
+    if (typeof value !== "string" || !known?.some(node => node.id === value)) fail(path, "unknown capability node");
   };
   const jobs = character ? array(character.jobs, "world.character.jobs", 0, 128) : [];
   const jobIds = unique(jobs, "world.character.jobs");
@@ -511,7 +522,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     string(achievement.description, `${path}.description`, 1000);
     string(achievement.nameTemplate, `${path}.nameTemplate`, 200);
     if (!["ordinary", "prestige", "ultimate"].includes(achievement.kind as string)) fail(`${path}.kind`, "expected ordinary, prestige or ultimate");
-    const people = array(achievement.people, `${path}.people`, 1, 8);
+    const people = array(achievement.people, `${path}.people`, Object.hasOwn(world, "figurePaths") && (achievement.routeId as string).startsWith("figure-") ? 0 : 1, 8);
     people.forEach((person, j) => string(person, `${path}.people[${j}]`, 100));
     if (new Set(people).size !== people.length) fail(`${path}.people`, "duplicate contact");
     evidence(achievement, path);
@@ -685,7 +696,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         condition(rule.condition, `${path}.condition`, depth + 1);
         break;
       case "capability":
-        object(rule, path, ["type", "node"]);
+        object(rule, path, ["type", "node", "learned"], ["type", "node"]);
+        if (Object.hasOwn(rule, "learned")) bool(rule.learned, path + ".learned");
         capabilityReference(rule.node, `${path}.node`);
         break;
       case "vocation":
@@ -840,6 +852,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           break;
         case "capability":
           object(effect, location, ["type", "node"]);
+          if (!world.capabilities) fail(location, "numeric capability work requires its own world rules");
           capabilityReference(effect.node, `${location}.node`);
           if (!location.startsWith("world.character.activities[")) fail(location, "capability proof work requires an explicit annual activity");
           break;
@@ -848,7 +861,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           if (!world.vocations) fail(location, "requires vocation rules");
           reference(effect.action, `${location}.action`, new Set(Object.keys((world.vocations as VocationDefinition).actions)), "vocation action");
           const vocationAction = (world.vocations as VocationDefinition).actions[effect.action as string];
-          if ((vocationAction.kind === "make" || vocationAction.kind === "work") && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
+          if ((vocationAction.kind === "make" || vocationAction.kind === "work" || vocationAction.kind === "capability" && !CAPABILITY_OPERATIONS[vocationAction.operation].minor) && !location.startsWith("world.character.activities[")) fail(location, "vocation work requires an explicit annual activity");
           break;
         case "demo":
           object(effect, location, ["type", "effect"]);
@@ -1068,7 +1081,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       if (activity.usesYearlyActivity === false && world.vocations && outcomes.some(outcome => ((outcome as DataObject).effects as DataObject[]).some(effect => {
         if (effect.type !== "vocation") return false;
         const action = (world.vocations as VocationDefinition).actions[effect.action as string];
-        return action.kind === "make" || action.kind === "work";
+        return action.kind === "make" || action.kind === "work" || action.kind === "capability" && !CAPABILITY_OPERATIONS[action.operation].minor;
       }))) fail(path, "vocation work must consume the annual activity");
     });
     for (const [key, entry] of Object.entries(skills)) {
@@ -1443,4 +1456,6 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       skills: new Set(Object.keys((character.skills ?? {}) as DataObject)), achievements: listIds(legacy.achievements) });
     if (!Object.hasOwn(world, "economy") || !Object.hasOwn(world, "character")) fail("world.demo", "requires an economy and characters");
   }
+  if (Object.hasOwn(world, "figurePaths")) validateFigurePaths(world.figurePaths, world as unknown as WorldPack, condition);
+
 }

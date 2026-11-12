@@ -35,7 +35,7 @@ You need a NEAR **testnet** account in MyNearWallet or Meteor Wallet, with a lit
 
 **1. Start.** On the main menu choose **Ranked life**, then **Connect a NEAR wallet**. Signing in lets the game make the small, free calls a life needs (start, draws, checkpoints) without asking you each time. Anything that costs NEAR still opens your wallet.
 
-**2. See the world you are born into.** The contract chooses your seed, so nobody — not you, not the game — can pick a lucky birth. It also chooses one copy of every famous figure already minted, and shows what each is doing: *"Euclid (alice.testnet) has opened a school."* Press **Begin this life**.
+**2. See the world you are born into.** The contract chooses your seed, so nobody — not you, not the game — can pick a lucky birth. It also chooses one copy of every famous figure already minted, and shows what each is doing: *"Euclid (alice.testnet) will support geometrical teaching."* Press **Begin this life**.
 
 **3. Live it.** Play exactly as in free play. Two things are different:
 
@@ -63,12 +63,14 @@ Prefer not to? **Not this time** lets you **Keep it for later** (mint any time f
 
 A figure is a life that went a particular way. Requirements are checked on the verified replay:
 
+Historical figure biographies describe the real person; the eligibility rules below are authored game standards. A figure influence does not establish that your character personally met or studied with that person. The figure directory separates authored writings from later accounts and marks lost or incomplete works.
+
 | Figure | What the life needs | What its owner can make it do |
 |---|---|---|
-| **Euclid**, the geometer | Work as a sky-table calculator, patron-supported reader or philosophy tutor; reckoning 80, literacy 70, knowledge 60; a first work in astronomy or philosophy | *Open a school* (children learn letters and figures) · *Keep to the Museum* (gifted readers may get a scholar's post) |
-| **Aristotle**, the philosopher | Work as a philosophy tutor or court adviser; literacy 76, philosophy 76, oratory 50, knowledge 60; a philosophy accomplishment | *Found the Lyceum* · *Tutor the court* |
-| **Cleomenes**, the grain administrator | Work as a court adviser or shopkeeper; reckoning 80, literacy 50, wealth 90; a commerce accomplishment | *Corner the grain* (merchants profit, the poor go short) · *Fill the granaries* (rations in famine years) |
-| **Alexander**, the conqueror | Born into the royal household; become a general; warfare 70, oratory 50; a military accomplishment by age 32 | *Levy the city* (serve, flee or pay) · *Found and build* (new work and plots) |
+| **Euclid**, the geometer | Work as a sky-table calculator, patron-supported reader or philosophy tutor; reckoning 80, literacy 70, knowledge 60; a first work in astronomy or philosophy | *Open a school* (learners work through geometrical demonstrations) · *Check the proofs* (capable readers help check demonstrations) |
+| **Aristotle**, the philosopher and naturalist | Work as a philosophy tutor or court adviser; literacy 76, philosophy 76, oratory 50, knowledge 60; a philosophy accomplishment | *Found the Lyceum* · *Tutor the court* |
+| **Cleomenes of Naucratis**, the financial administrator | Work as a court adviser or shopkeeper; reckoning 80, literacy 50, wealth 90; a commerce accomplishment | *Corner the grain* (merchants profit, the poor go short) · *Release grain reserves* (rations in famine years) |
+| **Alexander the Great** | Born into the royal household; become a general; warfare 70, oratory 50; a military accomplishment by age 32 | *Levy the city* (serve, flee or pay) · *Found and build* (new work and plots) |
 
 A player who deliberately follows one of these paths meets the requirements in roughly a fifth to a third of lives; an aimless life almost never does. Royal births are 1 in 100, so Alexander is the rarest.
 

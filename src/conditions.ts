@@ -17,7 +17,7 @@ function compare(left: number, op: Comparison, right: number): boolean {
 export function matchesCondition(condition: Condition | undefined, state: LifeState): boolean {
   if (!condition) return true;
   switch (condition.type) {
-    case "capability": return Boolean(state.capabilities?.learned[condition.node]);
+    case "capability": return Boolean((state.deepCapabilities ?? state.capabilities)?.learned[condition.node]) === (condition.learned ?? true);
     case "vocation": return (state.vocations?.completed[condition.action] ?? 0) >= condition.count;
     case "affinity": return state.paths !== undefined && compare(state.paths.affinity[condition.field], condition.op, condition.value);
     case "field-need": return state.paths?.needs[condition.field].label === condition.label;

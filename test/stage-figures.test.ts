@@ -61,8 +61,8 @@ test("stage record meeting Alexander requirements at similar age matches histori
   const match = matchStageFigure(stage, context, FIGURES);
   assert.equal(match.kind, "historical");
   assert.equal(match.historicalFigureId, "alexander");
-  assert.equal(match.name, "Alexander");
-  assert.equal(match.title, "Alexander, the conqueror");
+  assert.equal(match.name, "Alexander the Great");
+  assert.equal(match.title, "Alexander the Great");
   assert.match(match.media, /alexander\.png/);
 });
 
@@ -163,7 +163,7 @@ test("stage record meeting Aristotle requirements matches Aristotle", () => {
   assert.equal(match.kind, "historical");
   assert.equal(match.historicalFigureId, "aristotle");
   assert.equal(match.name, "Aristotle");
-  assert.equal(match.title, "Aristotle, the philosopher");
+  assert.equal(match.title, "Aristotle, the philosopher and naturalist");
 });
 
 test("stage record for ordinary work resolves to generic stage portrait with character portrait", () => {

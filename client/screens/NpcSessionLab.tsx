@@ -5,8 +5,7 @@ import type { NpcPerson } from "../../src/npc/types.ts";
 import type { NpcSnapshot } from "../types/npc.ts";
 import "../styles/npc-session.css";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
-import npcWorld from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
-import type { WorldPack } from "../../src/types.ts";
+import { engineForLife } from "../lib/world-session.ts";
 function NpcCard({
   npc,
   session,
@@ -267,7 +266,7 @@ export default function NpcSessionLab() {
               <FreePlayBoosterModal
                 open={booster}
                 life={session.life}
-                world={npcWorld as unknown as WorldPack}
+                world={engineForLife(session.life).world}
                 onClose={() => setBooster(false)}
               />
             </section>

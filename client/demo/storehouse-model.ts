@@ -54,7 +54,7 @@ function flows(entries: readonly [string, number][]): StorehouseFlow[] {
 export function storehouseRows(world: WorldPack, life: LifeState): StorehouseRow[] | null {
   if (!world.demo || !life.demo) return null;
   const typed = life as LifeStateWithDemo;
-  const view = householdView(world.demo, typed);
+  const view = householdView(world.demo, typed, world);
   const { household, goods } = typed.demo;
   const amounts: Record<ResourceId, number> = {
     grain: household.grain, flax: household.flax, linen: goods.linen, drachmas: life.economy?.cash ?? 0,

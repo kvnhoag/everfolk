@@ -23,3 +23,7 @@ The current graph uses Physique, Handmade, Knowledge and Trade. Two Knowledge cr
 Open `/skills` for the complete read-only atlas or **Skill tree** in a life to inspect prerequisites, proof progress, work quotes, rewards and career offers. See [the player guide](../../guide/SKILL_TREE.md) for controls and the focused-play evaluator. All eight mastery paths have accepted-command, save/load and replay coverage in an authored fixture that isolates proofs from survival and training balance. The current 45–65% birth-cohort mastery rate is a balance target; measured results must identify their exact world revision and policy. Numerical stocks, budgets and progression are authored gameplay values.
 
 Existing worlds keep their original engine behavior. This revision introduces no NFT mint rule or on-chain resource inventory.
+
+## Historical title integration
+
+New births use `alexandria-lives-6`, built from the official life-stage/path revision 5 plus eleven figure-specific routes. Numeric capability, military, district, NPC and birth-era behavior is preserved. Qualified figure projects use the existing work ledger and actual material/payer balances. Build the combined release with `node scripts/figures/build-world.mjs`. Official worlds 1–5 remain unchanged; independent proof-tree packs are `alexandria-deep-1` and `alexandria-figures-1`.

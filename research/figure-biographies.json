@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "figures": [
+    {
+      "id": "alexander",
+      "title": "Alexander the Great",
+      "period": "356–323 BCE; king of Macedon from 336 BCE.",
+      "biography": "King of Macedon whose campaigns overthrew the Achaemenid Empire and extended Macedonian rule into Egypt and Asia. He founded Alexandria in 331 BCE; his death in 323 BCE opened a struggle among his successors.",
+      "authoredWorks": [],
+      "otherWorks": [
+        {
+          "title": "Foundation of Alexandria",
+          "note": "Founded in 331 BCE beside the older settlement of Rhakotis; the city developed over subsequent generations."
+        }
+      ],
+      "sources": [
+        {
+          "title": "The Metropolitan Museum of Art: Alexander",
+          "url": "https://www.metmuseum.org/essays/the-rise-of-macedonia-and-the-conquests-of-alexander-the-great"
+        }
+      ],
+      "cautions": [
+        "No authored literary treatise is securely identified in this review. Later biographies and reconstructed speeches are not books written by Alexander.",
+        "A player meeting or helping Alexander remains a fictional character; the historical biography does not certify that encounter."
+      ]
+    },
+    {
+      "id": "aristotle",
+      "title": "Aristotle, the philosopher and naturalist",
+      "period": "384–322 BCE; established his school at the Lyceum in Athens in 335 BCE.",
+      "biography": "A philosopher and naturalist whose investigations ranged across logic, ethics, politics, rhetoric and living things. He taught Alexander before establishing his school at the Lyceum in Athens.",
+      "authoredWorks": [
+        {
+          "title": "Nicomachean Ethics",
+          "status": "extant",
+          "note": "An inquiry into human flourishing, character, practical judgement and friendship."
+        },
+        {
+          "title": "Politics",
+          "status": "extant",
+          "note": "Examines political communities, constitutions and civic life."
+        },
+        {
+          "title": "History of Animals",
+          "status": "extant",
+          "note": "Collects and compares observations about animals; the biological works extend beyond this one treatise."
+        }
+      ],
+      "otherWorks": [
+        {
+          "title": "The Lyceum",
+          "note": "The Athenian school supported connected teaching and investigation across many subjects."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia of Philosophy: Aristotle",
+          "url": "https://plato.stanford.edu/entries/aristotle/"
+        },
+        {
+          "title": "Aristotle: Nicomachean Ethics",
+          "url": "https://classics.mit.edu/Aristotle/nicomachaen.html"
+        }
+      ],
+      "cautions": [
+        "The surviving Aristotelian corpus has a complex transmission; avoid treating every attributed text as unquestionably his.",
+        "Do not place the Lyceum before 335 BCE or turn an indirect lesson into personal discipleship."
+      ]
+    },
+    {
+      "id": "euclid",
+      "title": "Euclid, the geometer",
+      "period": "Associated with Alexandria around 300 BCE; exact life dates are uncertain.",
+      "biography": "A mathematician associated with teaching in Alexandria around 300 BCE. His Elements arranged earlier mathematical results and demonstrations into a connected exposition; very little is securely known about his personal life.",
+      "authoredWorks": [
+        {
+          "title": "Elements",
+          "status": "extant in later textual transmission",
+          "note": "Organises plane and solid geometry, proportion and number theory through definitions, assumptions and linked demonstrations."
+        },
+        {
+          "title": "Data",
+          "status": "extant",
+          "note": "Examines what can be determined from given geometrical information."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "University of St Andrews: Euclid",
+          "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/"
+        },
+        {
+          "title": "Clark University: Elements, Book I",
+          "url": "https://mathcs.clarku.edu/~djoyce/elements/bookI/bookI.html"
+        }
+      ],
+      "cautions": [
+        "Do not describe every result in the Elements as Euclid’s own discovery.",
+        "An exact appointment at the Mouseion is not securely established. Do not confuse this mathematician with Euclid of Megara.",
+        "Euclid-specific teaching belongs around 300 BCE onward in this cohort, not the player’s childhood in the 340s BCE."
+      ]
+    },
+    {
+      "id": "lysippos",
+      "title": "Lysippos of Sikyon, the sculptor",
+      "period": "Active approximately 370–300 BCE; exact life dates are uncertain.",
+      "biography": "A celebrated Greek bronze sculptor and Alexander's court portraitist, known for athletic figures and influential portrait types. His reputation rests on ancient testimony, surviving statue bases and later copies rather than a securely identified collection of original statues.",
+      "authoredWorks": [],
+      "otherWorks": [
+        {
+          "title": "Apoxyomenos",
+          "note": "Lost bronze sculpture associated with Lysippos. The Vatican marble is a Roman copy traditionally identified with his work; the identification of particular copy types remains a subject of scholarship."
+        },
+        {
+          "title": "Portraits of Alexander",
+          "note": "Sculptural portraits known through ancient testimony and later copies; these are artistic works, not authored books."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Getty Research Institute: Lysippos",
+          "url": "https://www.getty.edu/vow/ULANFullDisplay?find=&nation=&role=&subjectid=500012332"
+        },
+        {
+          "title": "Vatican Museums: Apoxyomenos",
+          "url": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/museo-pio-clementino/vestibolo-quadrato-e-gabinetto-dell-apoxyomenos/apoxyomenos.html"
+        },
+        {
+          "title": "The Metropolitan Museum of Art: Pergamon and the Hellenistic Kingdoms of the Ancient World",
+          "url": "https://resources.metmuseum.org/resources/metpublications/pdf/Pergamon_and_the_Hellenistic_Kingdoms_of_the_Ancient_World.pdf"
+        }
+      ],
+      "cautions": [
+        "No authored literary work is established by the consulted evidence; do not invent a sculptural treatise.",
+        "Distinguish an original statue, a signed base and a later copy. Do not present every attributed copy as secure evidence of an original design.",
+        "A player's workshop commissions must retain their own attribution rather than transferring authorship of Lysippos's historical works."
+      ]
+    },
+    {
+      "id": "pytheas",
+      "title": "Pytheas of Massalia, the navigator",
+      "period": "Late fourth century BCE; the expedition's precise dates and itinerary are uncertain.",
+      "biography": "A Greek voyager and geographical writer from Massalia whose account described Britain and northern seas. His work combined travel reports with geographical and astronomical observations, but survives through fragments and later authors whose assessments differ.",
+      "authoredWorks": [
+        {
+          "title": "On the Ocean",
+          "status": "lost; fragments and later testimony",
+          "note": "The complete text is lost. Its contents and itinerary must be reconstructed cautiously from quotations, paraphrases and reports by other authors."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "Cambridge University Press: Pytheas of Massalia",
+          "url": "https://www.cambridge.org/core/books/abs/geographers-of-the-ancient-greek-world/pytheas-of-massalia/32E5E5D0F603A690931494A0B15BD1DF"
+        },
+        {
+          "title": "Cambridge University Press: Geography in Pseudo-Aristotle's De Mundo",
+          "url": "https://www.cambridge.org/core/books/abs/pseudoaristotle-de-mundo-on-the-cosmos/geography-chapter-3-393a9394a6/D509174127391CCFFBECE4C2A12D042B"
+        }
+      ],
+      "cautions": [
+        "Avoid the title 'discoverer of Britain': Britain was already inhabited and connected to wider trade.",
+        "Do not assign an exact departure year, a settled location for Thule or a fully certain route without explicit evidence.",
+        "A modern reconstruction or paraphrase must not be presented as surviving prose written by Pytheas."
+      ]
+    },
+    {
+      "id": "menander",
+      "title": "Menander, the comic playwright",
+      "period": "Late fourth and early third centuries BCE; scholarly reconstructions of birth, death and debut dates differ.",
+      "biography": "An Athenian playwright and leading representative of New Comedy, known for stories about households, relationships and social complications. His plays remained influential after his lifetime and helped shape later Roman comedy.",
+      "authoredWorks": [
+        {
+          "title": "Dyskolos",
+          "status": "virtually complete",
+          "note": "Also translated as The Grouch or Old Cantankerous. It won at the Lenaea in 316 BCE; surviving text still has some gaps."
+        },
+        {
+          "title": "Samia",
+          "status": "substantially preserved",
+          "note": "Also translated as The Girl from Samos. Much of the play survives through papyri, but it should not be described as fully intact."
+        },
+        {
+          "title": "Epitrepontes",
+          "status": "partially preserved",
+          "note": "Also translated as The Arbitration. A substantial but incomplete play, recovered through papyri."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "Oxford Classical Dictionary: Menander, leading writer of New Comedy",
+          "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/549651704?login=false"
+        },
+        {
+          "title": "The Metropolitan Museum of Art: Theater in Ancient Greece",
+          "url": "https://www.metmuseum.org/essays/theater-in-ancient-greece"
+        },
+        {
+          "title": "Getty Museum: Portrait Bust of Menander",
+          "url": "https://www.getty.edu/art/collection/object/103SWA"
+        }
+      ],
+      "cautions": [
+        "Do not call him the inventor or father of all comedy; earlier Greek comic traditions preceded New Comedy.",
+        "Distinguish this playwright from the later author Menander Rhetor.",
+        "A player's fictional scripts or performances must not replace Menander's authorship of historical plays."
+      ]
+    },
+    {
+      "id": "demetrius",
+      "title": "Demetrius the Besieger",
+      "period": "Late fourth and early third centuries BCE; siege of Rhodes in 305–304 BCE. Exact life endpoints vary by chronology.",
+      "biography": "A successor king and naval commander associated with exceptionally ambitious siege operations and machinery. His prolonged attack on Rhodes ended in negotiated peace, showing that technical achievement and successful conquest were different outcomes.",
+      "authoredWorks": [],
+      "otherWorks": [
+        {
+          "title": "Siege machinery deployed at Rhodes",
+          "note": "Demetrius commissioned and deployed large siege assets, including the helepolis. This does not establish that he personally invented or built every machine."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Oxford University Press: The Great Siege of Rhodes",
+          "url": "https://academic.oup.com/book/40551/chapter-abstract/347966363"
+        },
+        {
+          "title": "Oxford University Press: The Young Demetrius Poliorcetes",
+          "url": "https://academic.oup.com/book/40551/chapter-abstract/347960962"
+        },
+        {
+          "title": "Plutarch: Life of Demetrius, Internet Classics Archive",
+          "url": "https://classics.mit.edu/Plutarch/demetrus.html"
+        }
+      ],
+      "cautions": [
+        "Poliorcetes means Besieger of Cities, not Conqueror of Rhodes; Rhodes was not captured in the famous siege.",
+        "No authored literary work is established by the consulted evidence. Plutarch's Life of Demetrius is a later work about him, not his own biography or memoir.",
+        "Do not confuse Demetrius Poliorcetes with Demetrius of Phalerum, the statesman and author."
+      ]
+    },
+    {
+      "id": "theophrastus",
+      "title": "Theophrastus, the naturalist",
+      "period": "Approximately 371–287 BCE; succeeded Aristotle at the Lyceum in 323 BCE.",
+      "biography": "Aristotle's close colleague and successor at the Lyceum, an original philosopher whose studies helped systematise the investigation of plants. His surviving work also includes concise sketches of character and investigations across natural philosophy.",
+      "authoredWorks": [
+        {
+          "title": "Enquiry into Plants",
+          "status": "extant",
+          "note": "A surviving botanical treatise in nine books, traditionally known as Historia plantarum."
+        },
+        {
+          "title": "Plant Explanations",
+          "status": "extant",
+          "note": "Also translated as On the Causes of Plants; a surviving botanical treatise in six books, traditionally known as De causis plantarum."
+        },
+        {
+          "title": "Characters",
+          "status": "extant",
+          "note": "A collection of thirty concise sketches of types of conduct in everyday life. Much of his wider philosophical corpus is lost."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia of Philosophy: Theophrastus",
+          "url": "https://plato.stanford.edu/entries/theophrastus/"
+        }
+      ],
+      "cautions": [
+        "Do not reduce him to Aristotle's junior disciple; the evidence supports a relationship of colleagues and associates alongside his independent work.",
+        "Distinguish his own writings from Aristotle's manuscripts, which he also inherited.",
+        "The label naturalist highlights the proposed route; it does not imply that his work was confined to botany."
+      ]
+    },
+    {
+      "id": "zeno",
+      "title": "Zeno of Citium, founder of Stoicism",
+      "period": "Founded the Stoic school at Athens around 300 BCE.",
+      "biography": "A philosopher who established the Stoic school at Athens, connecting ethics, logic and the investigation of nature. His teachings are reconstructed through fragments and later testimony because none of his complete works survives.",
+      "authoredWorks": [
+        {
+          "title": "Republic",
+          "status": "lost; fragments and later testimony",
+          "note": "An early work known through later discussion. Its proposals should not be reconstructed as a complete surviving text or confused with Plato's Republic."
+        },
+        {
+          "title": "On Life according to Nature",
+          "status": "lost; title and later testimony",
+          "note": "Listed among his writings by Diogenes Laertius. Surviving testimony does not justify inventing a detailed chapter sequence or quotation."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia of Philosophy: Stoicism",
+          "url": "https://plato.stanford.edu/entries/stoicism/"
+        },
+        {
+          "title": "Stanford Encyclopedia of Philosophy: Ancient Political Philosophy",
+          "url": "https://plato.stanford.edu/entries/ancient-political/"
+        },
+        {
+          "title": "Diogenes Laertius, Book VII: Lives of the Stoics, Fordham Internet History Sourcebooks",
+          "url": "https://sourcebooks.web.fordham.edu/ancient/diogeneslaertius-book7-stoics.asp"
+        }
+      ],
+      "cautions": [
+        "Zeno of Citium is not Zeno of Elea; do not assign the Eleatic paradoxes to the founder of Stoicism.",
+        "Epictetus's Discourses and Marcus Aurelius's Meditations are later Stoic works, not writings by Zeno.",
+        "Do not reduce early Stoicism to modern resilience slogans or present every later Stoic doctrine as Zeno's own formulation."
+      ]
+    },
+    {
+      "id": "ptolemy",
+      "title": "Ptolemy I Soter, the dynasty founder",
+      "period": "Governor of Egypt from 323 BCE; king from 305/304 BCE; died in 282 BCE.",
+      "biography": "A Macedonian commander who governed Egypt after Alexander's death and subsequently established an independent kingdom and dynasty. He also wrote an account of Alexander's campaigns that became an important source for Arrian's later history.",
+      "authoredWorks": [
+        {
+          "title": "Account of Alexander's campaigns",
+          "status": "lost; later quotations and use as a source",
+          "note": "Often called History of Alexander as a conventional description. Its original title is not assumed secure; the complete work is lost and its voice cannot simply be equated with Arrian's later narrative."
+        }
+      ],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "University of Canterbury: Ptolemy's Divine Alexander coin",
+          "url": "https://www.canterbury.ac.nz/about-uc/what-we-do/uc-in-the-community/exhibitions-and-collections/alexander-the-great-exhibition/the-coins-of-alexander-the-great/ptolemy-s-divine-alexander-coin"
+        },
+        {
+          "title": "Cambridge University Press: Alexander historical sources, excerpt",
+          "url": "https://assets.cambridge.org/97805218/28604/excerpt/9780521828604_excerpt.pdf"
+        },
+        {
+          "title": "Andrew Erskine: Culture and Power in Ptolemaic Egypt",
+          "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/11871537/Culture_and_Power_in_Ptolemaic_Egypt_the_Library_and_Museum_at_Alexandria.pdf"
+        }
+      ],
+      "cautions": [
+        "Keep governor and king distinct in scenes before and after his assumption of the royal title.",
+        "Do not confuse Ptolemy I with Claudius Ptolemy, the much later astronomer and geographer who wrote the Almagest and Geography.",
+        "The early history of the Library and Mouseion is poorly documented; do not attribute their complete foundation and development to Ptolemy I alone.",
+        "Soter is a historical epithet; the display subtitle dynasty founder is descriptive rather than an attested ancient office."
+      ]
+    },
+    {
+      "id": "cleomenes",
+      "title": "Cleomenes of Naucratis, the financial administrator",
+      "period": "Egyptian administration from 332/331 BCE; displaced and killed shortly after Alexander's death in 323 BCE.",
+      "biography": "Alexander's administrator in Egypt, responsible for major fiscal affairs and associated with grain management and Alexandria's early development. Surviving accounts of his conduct are often hostile and require attention to political and commercial interests.",
+      "authoredWorks": [],
+      "otherWorks": [],
+      "sources": [
+        {
+          "title": "Oxford Classical Dictionary: Cleomenes of Naucratis, financial administrator",
+          "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753033"
+        },
+        {
+          "title": "Marc Mendoza: Cleomenes of Naucratis, reality, sources and historiography",
+          "url": "https://www.ull.es/revistas/index.php/trabajos-egiptologia/article/view/5084"
+        },
+        {
+          "title": "Georges Le Rider: Cleomene de Naucratis",
+          "url": "https://www.persee.fr/doc/bch_0007-4217_1997_num_121_1_1627"
+        }
+      ],
+      "cautions": [
+        "No authored literary work is established by the consulted evidence. The pseudo-Aristotelian Oeconomica and Arrian are sources about his administration, not books by him.",
+        "Financial administrator describes a broader remit than grain administrator; do not invent a royal or dynastic title for him.",
+        "Present accusations of exploitation as reported and contested evidence rather than a neutral measurement of his character.",
+        "Distinguish Cleomenes of Naucratis from the Spartan kings with the same name."
+      ]
+    }
+  ],
+  "reviewScope": "Source-grounded biographies and writings, with a separate agreed gameplay-rank policy. Research biographies retain historical facts even when the game supports alternate outcomes.",
+  "storyRevision": {
+    "pack": "worlds/ranked/alexandria-ranked-2.json",
+    "status": "prepared historical revision; not selected as the live contract world",
+    "reason": "Dated influence corrections must not change the fingerprint of existing ranked-1 lives."
+  },
+  "rankPolicy": {
+    "status": "agreed roster design; candidate routes and legacy token minting are not connected yet",
+    "implementation": "chain/catalog/figure-ranks.ts",
+    "evidence": "Promotion requires a successful, figure-specific outcome from verified play, not a date, high skills or an announced intention.",
+    "demetrius": "Epic; Legendary only after capturing Rhodes in an explicit alternate-history branch.",
+    "ptolemy": "Epic; Legendary only after successful founding of the Ptolemaic dynasty.",
+    "zeno": "Epic to Legendary through establishment of an independent Stoic school; this gate is the working interpretation of could push Legend.",
+    "playerAffiliates": "Subordinate and disciple ranks remain based on demonstrated contribution; they do not copy the mentor’s tier."
+  }
+}

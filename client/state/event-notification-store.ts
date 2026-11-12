@@ -57,4 +57,3 @@ export function createEventNotificationStore() {
 }
 
 export const { readSeenEventNotifications, rememberSeenEventNotifications } = createEventNotificationStore();
-

@@ -493,7 +493,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
 
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
-      {dashboardVisible && demoView && <EventNotificationStack life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
+      {game.hasBegun && demoView && <EventNotificationStack visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">

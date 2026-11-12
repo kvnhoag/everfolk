@@ -1,3 +1,5 @@
+import FigurePaths from "./FigurePaths.tsx";
+import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
 import { displayProse } from "../models/display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
@@ -80,7 +82,8 @@ type SkillTreeProps = {
 /** The earned-capability map is first; older proficiency routes remain inspectable. */
 export default function SkillTree(props: SkillTreeProps) {
   return <div className="skill-tree-complete">
-    <CapabilityTree {...props} readOnly={props.initialView === "wiki"} />
+    {props.world.deepCapabilities ? <DeepCapabilityTree {...props} readOnly={props.initialView === "wiki"} /> : <CapabilityTree {...props} readOnly={props.initialView === "wiki"} />}
+    <FigurePaths {...props} readOnly={props.initialView === "wiki"} />
     <details className="capability-legacy-reference"><summary>Proficiency, occupations &amp; earlier skill paths</summary><LegacySkillTree {...props} /></details>
   </div>;
 }

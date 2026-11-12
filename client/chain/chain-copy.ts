@@ -2,6 +2,7 @@ import { groupOfNpcAction, DEMO_DEED_INFLUENCES } from "../../chain/catalog/demo
 import { FIGURE_ACTIONS, RARITY_LABELS } from "../../chain/ids.ts";
 import type { ActionId, CareerGroup, FigureId } from "../../chain/ids.ts";
 import { FIGURES, INFLUENCES } from "../../chain/catalog/index.ts";
+import { correctHistoricalInfluences } from "../../chain/catalog/historical-content.ts";
 
 /** Player-facing names for chain ids. Short menu names follow spec §6.7; descriptions come from the influence catalog. */
 
@@ -11,9 +12,9 @@ export const ACTION_NAMES = {
   "aristotle.lyceum": "Found the Lyceum",
   "aristotle.tutor-court": "Tutor the court",
   "euclid.school": "Open a school",
-  "euclid.museum": "Keep to the Museum",
+  "euclid.museum": "Check the proofs",
   "cleomenes.corner-grain": "Corner the grain",
-  "cleomenes.granaries": "Fill the granaries",
+  "cleomenes.granaries": "Release grain reserves",
   "letters.teach": "Teach the young",
   "letters.lend-books": "Lend books",
   "military.mentor": "Mentor a recruit",
@@ -34,16 +35,16 @@ const EXTRA_ACTION_NAMES = {
   "military.guard-road": "Guard the road",
 } as const;
 
-/** What a figure is doing in the world a ranked life is born into ("Euclid … has opened a school."). */
+/** What a figure is doing in the world a ranked life is born into ("Euclid … will support geometrical teaching."). */
 export const FIGURE_DEEDS = {
-  "alexander.levy": "has called a levy on the city",
-  "alexander.found": "is founding and building the city",
-  "aristotle.lyceum": "has founded the Lyceum",
-  "aristotle.tutor-court": "is tutoring the court",
-  "euclid.school": "has opened a school",
-  "euclid.museum": "keeps to the Museum",
-  "cleomenes.corner-grain": "has cornered the grain",
-  "cleomenes.granaries": "has filled the granaries",
+  "alexander.levy": "will call for service in Egypt",
+  "alexander.found": "will found Alexandria",
+  "aristotle.lyceum": "will establish the Lyceum",
+  "aristotle.tutor-court": "will support court tuition",
+  "euclid.school": "will support geometrical teaching",
+  "euclid.museum": "will support work on mathematical proofs",
+  "cleomenes.corner-grain": "will control grain exports",
+  "cleomenes.granaries": "will release grain reserves",
 } as const satisfies Record<(typeof FIGURE_ACTIONS)[FigureId][number], string>;
 
 /** One person of each career group, as a draw or a source is introduced. */
@@ -58,7 +59,7 @@ export const GROUP_TITLE: Record<CareerGroup, string> = {
   farming: "Farmer of Alexandria",
 };
 
-const descriptions = new Map([...INFLUENCES, ...DEMO_DEED_INFLUENCES].map(entry => [entry.id, entry.label]));
+const descriptions = new Map([...correctHistoricalInfluences(INFLUENCES), ...DEMO_DEED_INFLUENCES].map(entry => [entry.id, entry.label]));
 const figureTitles = new Map(FIGURES.map(figure => [figure.figure, figure.title]));
 
 export interface ActionOption { id: string; name: string; description: string }

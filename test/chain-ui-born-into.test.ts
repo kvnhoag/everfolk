@@ -8,15 +8,15 @@ const alexander: FigurePick = { figure_id: "alexander", token_id: "1", action_id
 const hash = "a".repeat(64);
 
 test("figure picks become plain lines naming the figure, its owner and its deed", () => {
-  assert.deepEqual(bornIntoLines([euclid], { "3": "alice.testnet" }), ["Euclid (alice.testnet) has opened a school."]);
+  assert.deepEqual(bornIntoLines([euclid], { "3": "alice.testnet" }), ["Euclid (alice.testnet) will support geometrical teaching."]);
   assert.deepEqual(bornIntoLines([alexander, euclid], { "1": "bob.testnet", "3": "alice.testnet" }), [
-    "Alexander (bob.testnet) has called a levy on the city.",
-    "Euclid (alice.testnet) has opened a school.",
+    "Alexander the Great (bob.testnet) will call for service in Egypt.",
+    "Euclid (alice.testnet) will support geometrical teaching.",
   ]);
 });
 
 test("a figure whose owner is unknown is still named", () => {
-  assert.deepEqual(bornIntoLines([euclid], {}), ["Euclid has opened a school."]);
+  assert.deepEqual(bornIntoLines([euclid], {}), ["Euclid will support geometrical teaching."]);
 });
 
 test("an empty world says so", () => {

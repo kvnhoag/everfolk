@@ -1,3 +1,5 @@
+import * as deepHousehold from "../deep-capabilities/household.ts";
+import type { WorldPack } from "../types.ts";
 /** Track A (+G) — household, farming, flax, family stages, hunger. */
 import type { DemoContext, DemoDefinition, HouseholdConfig, HouseholdState, LifeStateWithDemo, PlanCommand } from "./contracts.ts";
 import type { LifeState } from "../types.ts";
@@ -78,11 +80,13 @@ function members(def: DemoDefinition, life: LifeStateWithDemo, age: number, work
 }
 
 /** Household labour units working the plot (100 = one adult). Used by service and works. */
-export function labourUnits(def: DemoDefinition, life: LifeState): number {
+export function labourUnits(def: DemoDefinition, life: LifeState, world?: WorldPack): number {
+  if (life.deepCapabilities) return deepHousehold.labourUnits(def, life, world);
   return labourAt(def, life as LifeStateWithDemo, life.age);
 }
 /** Number of people eating from the household store this year (a soldier eats army rations). */
 export function mouths(def: DemoDefinition, life: LifeState): number {
+  if (life.deepCapabilities) return deepHousehold.mouths(def, life);
   return members(def, life as LifeStateWithDemo, life.age).length;
 }
 function labourAt(def: DemoDefinition, life: LifeStateWithDemo, age: number, workAge = age): number {
@@ -134,6 +138,7 @@ const harvestedFlax = new WeakMap<object, number>();
 
 /** Grain and flax harvest from plots × labour × flood × skill × ox. */
 export function harvest(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.harvest(ctx);
   const household = ctx.demo.household;
   const grainBeforeSeed = household.grain, flaxSeedBefore = ctx.life.vocations?.inventory["flax-seed"] ?? 0;
   beginFarmHarvest(ctx.world, ctx.life, ctx.life.age - 1);
@@ -167,6 +172,7 @@ function rentOn(def: DemoDefinition, grain: number): number {
 
 /** Tenant rent: a share of the harvest leaves the store. */
 export function payRent(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.payRent(ctx);
   const crop = harvested.get(ctx.demo) ?? 0, flaxCrop = harvestedFlax.get(ctx.demo) ?? 0;
   harvested.delete(ctx.demo); harvestedFlax.delete(ctx.demo);
   // The landowner takes the same share of a flax crop, in flax (new free-play world only).
@@ -218,6 +224,7 @@ function seedAfterSpoilage(def: DemoDefinition, life: LifeStateWithDemo, seed: n
 
 /** Animals then people eat; shortfall bought through `buyForHousehold`; hunger otherwise. */
 export function feedHousehold(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.feedHousehold(ctx);
   const household = ctx.demo.household, life = ctx.life as LifeStateWithDemo;
   const need = peopleRation(ctx.def, life, life.age), animalNeed = animalRation(ctx.def, household);
   const missing = need + animalNeed - household.grain;
@@ -282,6 +289,7 @@ function spinnable(def: DemoDefinition, life: LifeStateWithDemo, age: number, fl
 
 /** Spoilage and over-capacity loss; spinning flax into linen with spare labour. */
 export function spoilAndSpin(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.spoilAndSpin(ctx);
   const life = ctx.life as LifeStateWithDemo, household = ctx.demo.household;
   const spoiled = spoilageOf(ctx.def, life, household.grain);
   if (spoiled > 0) {
@@ -318,6 +326,7 @@ function giveMarriageGift(ctx: DemoContext): void {
 
 /** Parents hand over, retire and pass; called once per settled year. */
 export function advanceFamily(ctx: DemoContext): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.advanceFamily(ctx);
   const h = ctx.def.household, household = ctx.demo.household, age = ctx.life.age;
   if (household.parents === "working" && (isMarried(ctx.life) || age >= h.handOverAge)) {
     household.parents = "retired";
@@ -334,6 +343,7 @@ export function advanceFamily(ctx: DemoContext): void {
 
 /** Free planting plan; throws when invalid. */
 export function applyPlan(ctx: DemoContext, command: PlanCommand): void {
+  if (ctx.world.deepCapabilities) return deepHousehold.applyPlan(ctx, command);
   const plots = ctx.demo.household.plots, flaxPlots = command.flaxPlots;
   if (!Number.isSafeInteger(flaxPlots) || flaxPlots < 0) throw new Error("The number of flax plots must be a whole number of zero or more.");
   if (flaxPlots > plots) throw new Error(`You cannot plant flax on ${flaxPlots} plots: the household has only ${plots}.`);
@@ -360,7 +370,8 @@ export interface HouseholdView {
  * The coming settlement as it would run now (it settles at the next age, under this year's flood).
  * Pure: never changes the life and never draws randomness. Market purchases are not predicted.
  */
-export function householdView(def: DemoDefinition, life: LifeStateWithDemo): HouseholdView {
+export function householdView(def: DemoDefinition, life: LifeStateWithDemo, world?: WorldPack): HouseholdView {
+  if (life.deepCapabilities) return deepHousehold.householdView(def, life, world);
   const h = life.demo.household, age = life.age + 1;
   const crop = expectedYield(def, life, age);
   const expectedRent = rentOn(def, crop.grain);

@@ -1,3 +1,4 @@
+import { initialCapabilities as initialDeepCapabilities, syncCapabilities as syncDeepCapabilities, recordFarmSettlement, recordAcceptedTrade, protectedGrain } from "./deep-capabilities/runtime.ts";
 import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
@@ -109,6 +110,7 @@ function mutableSnapshot(state: LifeState): LifeState {
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.capabilities ? { capabilities: structuredClone(state.capabilities) } : {}),
+    ...(state.deepCapabilities ? { deepCapabilities: structuredClone(state.deepCapabilities) } : {}),
     ...(state.paths ? { paths: structuredClone(state.paths) } : {}),
     ...(state.stageRecords ? { stageRecords: structuredClone(state.stageRecords) } : {}),
     ...(state.vocations ? { vocations: structuredClone(state.vocations) } : {}),
@@ -402,6 +404,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       }
     }
     syncCharacterFlags(state);
+    syncDeepCapabilities(world, state);
     if (world.health && state.phase !== "ended" && state.health?.conditions.length === 0 && state.stats[world.health.stat] <= world.health.criticalHealth) {
       addHealthCondition(world, state, world.health.declineCondition, "Your health has fallen to a critical level.", healthHooks(state));
     }
@@ -771,6 +774,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       eventCounts: {}, lastEventAge: {}, journal: [], commands: [],
       ...(world.eventPacing ? { nextChoiceAge: world.eventPacing.minChoiceGapYears } : {}),
       ...(world.capabilities ? { capabilities: initialCapabilities() } : {}),
+      ...(world.deepCapabilities ? { deepCapabilities: initialDeepCapabilities() } : {}),
       ...(world.vocations ? { vocations: initialVocations(world.vocations) } : {}),
       ...(world.character ? { character: initialCharacter(world)! } : {}),
       ...(world.health ? { health: initialHealth(world)! } : {}),
@@ -873,7 +877,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     // created only by batching a whole year. Legacy worlds keep exact ordering.
     if (world.economy) annualIncome();
     if (world.demo && next.phase !== "ended") recorded(next, () => next.journal.length - 1, () => {
+      const beforeGrain = next.demo!.household.grain, beforeDebt = next.economy?.debt ?? 0;
       settleDemoYear(demoCtx(next));
+      recordFarmSettlement(world, next, beforeGrain, beforeDebt);
+      syncDeepCapabilities(world, next);
       if (world.demo!.startingResources) syncEconomyStat(world, next);
     });
     // Trade worlds: workshop buyers return and the supplier restocks for the new year.
@@ -1113,9 +1120,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     const ctx = demoCtx(next);
     next.commands.push(command);
     switch (command.type) {
-      case "trade":
+      case "trade": {
         if (next.phase !== "ready") throw new Error("Resolve the current decision first.");
-        executeTrade(ctx, command); break;
+        if (world.deepCapabilities && command.side === "sell" && command.item === "grain" && next.demo.household.grain - command.quantity < protectedGrain(world, next) && next.vocations?.capabilityWork?.reserveOverrideAge !== next.age) throw new Error("This sale would use protected food or seed. Explicitly authorise a reserve sale first.");
+        const beforeCash = next.economy?.cash ?? 0; executeTrade(ctx, command); recordAcceptedTrade(world, next, command, beforeCash); break;
+      }
       case "plan": applyPlan(ctx, command); break;
       case "assign-agents":
         if (next.age !== 0 || next.commands.some(c => c.type === "advance")) throw new Error("Agents are assigned before the first year.");

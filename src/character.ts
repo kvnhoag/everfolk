@@ -40,7 +40,7 @@ export function activityPartnerIds(activity: CharacterActivity): string[] {
 /** These invariants apply to authored event effects as well as voluntary actions. */
 export function characterEffectReason(world: WorldPack, state: LifeState, effect: Effect, allowUnchanged = false): string | undefined {
   if (effect.type === "capability") return capabilityReason(world, state, effect.node);
-  if (effect.type === "vocation") return vocationReason(world, state, effect.action);
+  if (effect.type === "vocation") return vocationReason(world, state, effect.action, allowUnchanged);
   if (effect.type === "social-role") return socialRoleEffectReason(world, state, effect, allowUnchanged);
   if (effect.type === "mastery") {
     if (effect.target === "skill" && (!world.character || !state.character)) return "This world has no character skills.";

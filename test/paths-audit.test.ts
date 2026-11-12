@@ -54,7 +54,7 @@ test("the free-play world has no rule 2 or rule 4 problems left", () => {
 });
 
 test("the audit script reports counts and exits cleanly", () => {
-  const output = execFileSync("node", ["scripts/events/audit.mjs"], { encoding: "utf8" });
+  const output = execFileSync(process.execPath, ["scripts/events/audit.mjs"], { encoding: "utf8" });
   assert.match(output, /rule 2: 0/);
   assert.match(output, /rule 4: 0/);
   assert.match(output, /rule 3: \d+/);

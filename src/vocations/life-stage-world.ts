@@ -20,7 +20,7 @@ import { applyTradeEconomy } from "./trade-economy.ts";
 /** New births: the attribute atlas and military lane, plus life stages and life paths. Older revisions keep their exact rules for replay. */
 export function buildLifeStageWorld(base: WorldPack): WorldPack {
   const world = applyLifeStageContent(buildCrossoverWorld(base));
-  world.version = LIVES_WORLD_VERSION;
+  world.version = "alexandria-lives-5";
   // Births spread from 350 to 300 BCE: some lives grow up with Alexander, others in the Ptolemaic city.
   world.birthYears = { from: world.startYear, to: -300 };
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;

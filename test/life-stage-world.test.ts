@@ -3,7 +3,6 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { lifeStageView } from "../src/life-stages/index.ts";
 import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
-import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
@@ -33,8 +32,7 @@ function live(seed: string, pick = 0): Played {
 
 const lives = Array.from({ length: 80 }, (_, i) => live(`stage-world-${i}`, i));
 
-test("the shipped free-play world is the current build with life stages", () => {
-  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-5");
+test("the retained free-play world remains its original life-stage build", () => {
   assert.equal(world.version, "alexandria-lives-5");
   assert.deepEqual(buildLifeStageWorld(base as unknown as WorldPack), world);
   assert.ok(world.lifeStages);

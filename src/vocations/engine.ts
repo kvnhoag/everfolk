@@ -1,3 +1,6 @@
+import { capabilityActionReason, applyCapabilityAction } from "../deep-capabilities/actions.ts";
+import { inventoryOf, takeItem } from "../capabilities/inventory.ts";
+import { farmSaleReason } from "../capabilities/farming.ts";
 import { materialCost } from "../paths/farm-edge.ts";
 import { productionQuote, productionReason } from "../capabilities/production.ts";
 import { vocationInventory, vocationGains, bid } from "./view.ts";
@@ -18,9 +21,11 @@ function shared(life: LifeState, item: string): boolean { return Boolean(life.de
 function major(world: WorldPack, id: string): boolean {
   return ["make", "work"].includes(world.vocations!.actions[id].kind);
 }
-export function vocationReason(world: WorldPack, life: LifeState, id: string): string | undefined {
+export function vocationReason(world: WorldPack, life: LifeState, id: string, applying = false): string | undefined {
+  if (world.deepCapabilities) return capabilityActionReason(world, life, id, applying);
   const def = world.vocations, ledger = life.vocations, action = def?.actions[id];
   if (!def || !ledger || !life.economy || !life.character || !action) return "This vocation action is unavailable in this world.";
+  if (action.kind === "capability") return "This world has no deep capability operation.";
   const cash = life.economy.cash;
   if (world.capabilities && id.startsWith("appointment-") && action.kind === "work" && ledger.accounts[action.payer] < 30) return "No funded appointment is available in this office right now.";
   if (major(world, id) && ledger.workedAge === life.age) return "This year's work is complete.";
@@ -37,6 +42,8 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
     if (def.trade ? lotSale(world, life, action.item).units <= 0 : ledger.accounts.merchant < price) return "The buyer cannot afford this product.";
   } else if (action.kind === "work") {
     if (cash < action.fee) return "You cannot afford this work's fee.";
+    if (Object.entries(action.inputs ?? {}).some(([item, quantity]) => (inventoryOf(life)[item] ?? 0) < quantity)) return "Supply the project's quoted materials first.";
+    if ((action.inputs?.grain ?? 0) > 0) { const reserve = farmSaleReason(world, life, action.inputs!.grain); if (reserve) return reserve; }
     if (ledger.accounts[action.payer] + (action.payer === "workshop" ? action.fee : 0) < action.pay) return "The employer has insufficient funds for this work.";
   } else {
     const recipe = def.recipes[action.recipe];
@@ -89,9 +96,11 @@ function consume(life: LifeState, item: string, quantity: number): void {
 }
 /** Called only on the engine's detached candidate state. Rejection never changes a life. */
 export function applyVocation(world: WorldPack, life: LifeState, id: string): string {
+  if (world.deepCapabilities) return applyCapabilityAction(world, life, id);
   const reason = vocationReason(world, life, id);
   if (reason) throw new Error(`Vocation action is unavailable: ${reason}`);
   const def = world.vocations!, ledger = life.vocations!, action = def.actions[id], cash = life.economy!;
+  if (action.kind === "capability") throw new Error("This world has no deep capability operation.");
   let text = "";
   if (action.kind === "buy") {
     // Farm inputs cost less in a farming district (paths worlds); the supplier receives exactly what is paid.
@@ -111,6 +120,11 @@ export function applyVocation(world: WorldPack, life: LifeState, id: string): st
     consume(life, action.item, 1);
     text = `Sold one grade-${quality} ${action.item} for ${price} dr.`;
   } else if (action.kind === "work") {
+    for (const [item, quantity] of Object.entries(action.inputs ?? {})) {
+      takeItem(life, item, quantity);
+      const basis = life.capabilities?.costBasis?.[item];
+      if (basis) { const used = Math.min(basis.quantity, quantity); const usedCost = basis.quantity > 0 ? Math.ceil(basis.cost * used / basis.quantity) : 0; basis.quantity -= used; basis.cost = Math.max(0, basis.cost - usedCost); }
+    }
     cash.cash -= action.fee; ledger.accounts.workshop += action.fee;
     ledger.accounts[action.payer] -= action.pay; cash.cash += action.pay;
     gain(world, life, id);
