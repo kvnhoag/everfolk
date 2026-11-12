@@ -32,7 +32,8 @@ test('homepage renders the historical world with live canvas and retains all men
   const before = structuredClone(life);
   const html = render();
   assert.match(html, /350 BCE/);
-  assert.match(html, /Before Alexandria, there was Rhakotis/);
+  assert.match(html, /Live another story/);
+  assert.doesNotMatch(html, /Before Alexandria/);
   assert.match(html, /<canvas/);
   assert.match(html, /ef-royal-wordmark/);
   assert.match(html, /THE ANCIENT WORLD/);
