@@ -67,7 +67,10 @@ export function runFocusedPolicy(world: WorldPack, target: string, seed: string)
     const work = actions.find(a => a.id === `cap-work-${workNode.toLowerCase()}`);
     reason = work?.reason ?? "Required work is unavailable.";
     // The military lane needs an appointment before service work: seek it as a player would.
-    const appointment = /Enlist and serve/.test(reason) ? "enlist-royal-army" : /Officer appointment is required/.test(reason) ? "seek-officer-commission" : null;
+    // On the military lane a player asks for promotion as soon as it is open, not only when the next step demands it.
+    const military = /^M\d+$/.test(target);
+    const appointment = /Enlist and serve/.test(reason) ? "enlist-royal-army"
+      : /Officer appointment is required/.test(reason) || military && life.character?.jobId === "soldier" ? "seek-officer-commission" : null;
     const appoint = appointment ? actions.find(a => a.id === appointment && a.available) : undefined;
     if (appoint) {
       try { life = engine.act(life, appoint.id); actions = engine.getActivities(life); } catch (error) { reason = error instanceof Error ? error.message : String(error); }

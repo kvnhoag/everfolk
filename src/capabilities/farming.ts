@@ -225,7 +225,7 @@ export function settleFarmCapabilities(world: WorldPack, life: LifeState, comple
 }
 
 export function farmProofProgress(world: WorldPack, life: LifeState, nodeId: string): { done: number; required: number; complete: boolean } {
-  const required = REQUIRED[nodeId] ?? 1;
+  const required = world.capabilities?.nodes.find(node => node.id === nodeId)?.proofYears ?? REQUIRED[nodeId] ?? 1;
   const receipts = (life.capabilities?.evidence ?? []).filter(e => e.nodeId === nodeId && e.kind === "farm-settlement" && e.data.qualifies === true);
   const unique = [...new Map(receipts.map(e => [e.age, e])).values()].sort((a, b) => a.age - b.age);
   let done = unique.length;

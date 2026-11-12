@@ -1412,10 +1412,10 @@
         "description": "A soldier appointment requires demonstrated drill and equipment, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 18,
         "requirements": {
-          "strength": 16,
-          "endurance": 16,
-          "warfare": 8,
-          "literacy": 8
+          "strength": 12,
+          "endurance": 12,
+          "warfare": 10,
+          "literacy": 6
         },
         "yearlyEffects": [
           {
@@ -1451,10 +1451,10 @@
         "description": "A officer appointment requires demonstrated small-unit coordination, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 22,
         "requirements": {
-          "warfare": 40,
-          "oratory": 24,
-          "strength": 24,
-          "endurance": 32
+          "warfare": 30,
+          "oratory": 16,
+          "strength": 18,
+          "endurance": 22
         },
         "yearlyEffects": [
           {
@@ -1495,10 +1495,10 @@
         "description": "A general appointment requires demonstrated strategic command, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 28,
         "requirements": {
-          "warfare": 72,
-          "oratory": 40,
-          "strength": 40,
-          "endurance": 48
+          "warfare": 54,
+          "oratory": 28,
+          "strength": 30,
+          "endurance": 34
         },
         "yearlyEffects": [
           {
@@ -4485,7 +4485,7 @@
                 "delta": 2
               }
             ],
-            "weight": 15,
+            "weight": 40,
             "weightModifiers": [
               {
                 "when": {
@@ -4562,7 +4562,7 @@
             "id": "officer-refused",
             "text": "No commission is offered. You return to your current duties.",
             "effects": [],
-            "weight": 85
+            "weight": 60
           }
         ],
         "when": {
@@ -4613,7 +4613,7 @@
         },
         "category": "career",
         "minAge": 22,
-        "cooldownYears": 3,
+        "cooldownYears": 2,
         "opportunity": {
           "label": "Receive an officer's commission",
           "outcomeIds": [
@@ -76189,10 +76189,11 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 8
+          "strength": 6
         },
-        "proof": "Complete 2 distinct years of controlled lifting and load handling, paying the exercise access fee.",
-        "reward": "Develop Strength through physical work. Health remains a separate current condition."
+        "proof": "Complete 1 distinct years of controlled lifting and load handling, paying the exercise access fee.",
+        "reward": "Develop Strength through physical work. Health remains a separate current condition.",
+        "proofYears": 1
       },
       {
         "id": "F2",
@@ -76277,11 +76278,12 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 12,
-          "endurance": 16
+          "strength": 10,
+          "endurance": 12
         },
-        "proof": "Complete 2 distinct years of paced endurance work with recovery and paid access.",
-        "reward": "Combine physical preparation with basic Knowledge to begin military foundations."
+        "proof": "Complete 1 distinct years of paced endurance work with recovery and paid access.",
+        "reward": "Combine physical preparation with basic Knowledge to begin military foundations.",
+        "proofYears": 1
       },
       {
         "id": "F3S",
@@ -76401,17 +76403,18 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 16,
-          "endurance": 16,
-          "warfare": 8,
-          "literacy": 8
+          "strength": 12,
+          "endurance": 12,
+          "warfare": 10,
+          "literacy": 6
         },
-        "proof": "Complete 2 pre-service drill years. Demonstrate equipment handling and comprehension of orders while medically fit.",
+        "proof": "Complete 1 pre-service drill years. Demonstrate equipment handling and comprehension of orders while medically fit.",
         "reward": "Qualify for Soldier enlistment at age 18. A career appointment is a separate action.",
         "minimumStats": {
           "health": 45,
           "knowledge": 8
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "P4",
@@ -76501,8 +76504,9 @@
         "minimumProficiency": {
           "craft": 32
         },
-        "proof": "Complete 2 basic-garment work years, each producing at least 1 quality-1 garment from paid materials.",
-        "reward": "Unlock fitted-garment method, quality cap 2; garment batch limit becomes 4."
+        "proof": "Complete 3 basic-garment work years, each producing at least 1 quality-1 garment from paid materials.",
+        "reward": "Unlock fitted-garment method, quality cap 2; garment batch limit becomes 4.",
+        "proofYears": 3
       },
       {
         "id": "FC5",
@@ -76550,14 +76554,15 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 24,
-          "endurance": 24
+          "warfare": 18,
+          "endurance": 18
         },
-        "proof": "Complete 2 active drill years while serving. Each proof settles only after a funded, fully rationed service year.",
+        "proof": "Complete 1 active drill years while serving. Each proof settles only after a funded, fully rationed service year.",
         "reward": "Develop formation skills and open more demanding field exercises.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP5",
@@ -76671,8 +76676,9 @@
         "minimumProficiency": {
           "craft": 40
         },
-        "proof": "Complete 2 quality-2 garment batches; each must reconcile cloth/thread consumption.",
-        "reward": "Garment quality cap becomes 3. Unlock dyed garments: 1 pigment/garment for +1 recipe quality before cap, base ask 130 dr; dye/colour-specific orders check actual pigment use."
+        "proof": "Complete 3 quality-2 garment batches; each must reconcile cloth/thread consumption.",
+        "reward": "Garment quality cap becomes 3. Unlock dyed garments: 1 pigment/garment for +1 recipe quality before cap, base ask 130 dr; dye/colour-specific orders check actual pigment use.",
+        "proofYears": 3
       },
       {
         "id": "FC6",
@@ -76688,8 +76694,9 @@
         "minimumProficiency": {
           "farming": 40
         },
-        "proof": "Complete 2 crop-care work years.",
-        "reward": "Crop-care activity gives +8% gross yield in its work year instead of the +5% soil-preparation action; they are alternative annual actions."
+        "proof": "Complete 3 crop-care work years.",
+        "reward": "Crop-care activity gives +8% gross yield in its work year instead of the +5% soil-preparation action; they are alternative annual actions.",
+        "proofYears": 3
       },
       {
         "id": "FR6",
@@ -76721,15 +76728,16 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 32,
-          "reckoning": 20,
-          "literacy": 16
+          "warfare": 24,
+          "reckoning": 14,
+          "literacy": 12
         },
-        "proof": "Complete 2 service work years reconciling the army's actual wage and ration accounts.",
+        "proof": "Complete 1 service work years reconciling the army's actual wage and ration accounts.",
         "reward": "Learn to account for finite army stores and payments; employer funds remain outside personal cash.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP6",
@@ -76837,8 +76845,9 @@
         "minimumProficiency": {
           "craft": 48
         },
-        "proof": "Complete 2 inspected quality-2 garment orders; all units must meet the quoted specification.",
-        "reward": "Garment quality cap becomes 3; batch limit 6. Unlock fit/finish commissions with explicit quoted payment."
+        "proof": "Complete 3 inspected quality-2 garment orders; all units must meet the quoted specification.",
+        "reward": "Garment quality cap becomes 3; batch limit 6. Unlock fit/finish commissions with explicit quoted payment.",
+        "proofYears": 3
       },
       {
         "id": "FC7",
@@ -76854,8 +76863,9 @@
         "minimumProficiency": {
           "farming": 48
         },
-        "proof": "Complete 2 maintained-channel harvests, under any flood condition.",
-        "reward": "Maintained-channel low-flood factor becomes 0.60; maintenance remains 8 dr/plot/year; replaces the 0.55 effect."
+        "proof": "Complete 3 maintained-channel harvests, under any flood condition.",
+        "reward": "Maintained-channel low-flood factor becomes 0.60; maintenance remains 8 dr/plot/year; replaces the 0.55 effect.",
+        "proofYears": 3
       },
       {
         "id": "FR7",
@@ -76886,16 +76896,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 40,
-          "oratory": 24,
-          "strength": 24,
-          "endurance": 32
+          "warfare": 30,
+          "oratory": 16,
+          "strength": 18,
+          "endurance": 22
         },
-        "proof": "Complete 2 active unit exercises with settled service accounts and full rations.",
-        "reward": "Qualify for Officer opportunities after at least 4 proved service years.",
+        "proof": "Complete 1 active unit exercises with settled service accounts and full rations.",
+        "reward": "Qualify for Officer opportunities after at least 2 proved service years.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP7",
@@ -77006,8 +77017,9 @@
           "craft": 56,
           "reckoning": 24
         },
-        "proof": "Complete 2 quality-3 garment batches of at least 4 units each.",
-        "reward": "Garment batch limit becomes 8. For batches of at least 4, total base cloth requirement becomes ceil(recipe cloth units * quantity * 7 / 8), applied to the actual recipe base cloth requirement; thread and pigment unchanged."
+        "proof": "Complete 3 quality-3 garment batches of at least 4 units each.",
+        "reward": "Garment batch limit becomes 8. For batches of at least 4, total base cloth requirement becomes ceil(recipe cloth units * quantity * 7 / 8), applied to the actual recipe base cloth requirement; thread and pigment unchanged.",
+        "proofYears": 3
       },
       {
         "id": "FC8",
@@ -77057,16 +77069,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 48,
-          "oratory": 28,
-          "reckoning": 24
+          "warfare": 36,
+          "oratory": 20,
+          "reckoning": 16
         },
-        "proof": "As an Officer, complete 2 tactical work years, joining reasoned inquiry with reconciled service evidence.",
+        "proof": "As an Officer, complete 1 tactical work years, joining reasoned inquiry with reconciled service evidence.",
         "reward": "Open advanced command preparation through Knowledge and practical military experience.",
         "minimumStats": {
           "health": 45,
           "knowledge": 16
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP8",
@@ -77174,8 +77187,9 @@
         "minimumProficiency": {
           "craft": 64
         },
-        "proof": "Deliver 2 quality-3 garment contracts on time, with recorded payment and no unpaid supplier balance.",
-        "reward": "Garment quality cap becomes 4; batch limit 10. Unlock ceremonial garment recipe."
+        "proof": "Deliver 3 quality-3 garment contracts on time, with recorded payment and no unpaid supplier balance.",
+        "reward": "Garment quality cap becomes 4; batch limit 10. Unlock ceremonial garment recipe.",
+        "proofYears": 3
       },
       {
         "id": "FC9",
@@ -77191,8 +77205,9 @@
         "minimumProficiency": {
           "farming": 64
         },
-        "proof": "Complete 2 planned harvests whose household grain ledger reconciles, with full household rations.",
-        "reward": "Unlock conservative planting: +15% gross yield during low flood, -5% at normal/high flood; alternative to dense sowing, never stacked with it."
+        "proof": "Complete 3 planned harvests whose household grain ledger reconciles, with full household rations.",
+        "reward": "Unlock conservative planting: +15% gross yield during low flood, -5% at normal/high flood; alternative to dense sowing, never stacked with it.",
+        "proofYears": 3
       },
       {
         "id": "FR9",
@@ -77223,16 +77238,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 60,
-          "literacy": 32,
-          "oratory": 32
+          "warfare": 44,
+          "literacy": 22,
+          "oratory": 22
         },
-        "proof": "As an Officer, complete 2 planning work years with itemized paid materials and actual army accounts.",
+        "proof": "As an Officer, complete 1 planning work years with itemized paid materials and actual army accounts.",
         "reward": "Prepare a registered strategic-command assessment; learning does not automatically grant rank.",
         "minimumStats": {
           "health": 45,
           "knowledge": 20
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP9",
@@ -77391,12 +77407,12 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 72,
-          "oratory": 40,
-          "strength": 40,
-          "endurance": 48
+          "warfare": 54,
+          "oratory": 28,
+          "strength": 30,
+          "endurance": 34
         },
-        "proof": "Complete a registered assessment across 2 active Officer work years. Reconcile materials, wages and rations in both years; retain at least 8 proved service years.",
+        "proof": "Complete a registered assessment across 2 active Officer work years. Reconcile materials, wages and rations in both years; retain at least 5 proved service years.",
         "reward": "Qualify for General opportunities at age 28. Appointment still requires an available command and recorded service.",
         "minimumStats": {
           "health": 50,
