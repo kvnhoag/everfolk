@@ -187,6 +187,11 @@ export function validatePathsEffect(effect: DataObject, path: string, paths: unk
       tools.object(effect, path, ["type", "field"]);
       requirePaths(paths, path, tools); field(effect, path, tools);
       return true;
+    case "join-district":
+      tools.object(effect, path, ["type", "field", "tier"]);
+      requirePaths(paths, path, tools); field(effect, path, tools);
+      if (!(TIERS as readonly string[]).includes(effect.tier as string)) tools.fail(`${path}.tier`, `expected one of ${TIERS.join(", ")}`);
+      return true;
     case "use-material":
       tools.object(effect, path, ["type", "item", "quantity", "cause"]);
       requireMaterial(effect.item, `${path}.item`, tools);

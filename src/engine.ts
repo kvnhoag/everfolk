@@ -36,6 +36,8 @@ import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
+import { TIERS } from "./paths/types.ts";
+import type { FieldId, PathsState } from "./paths/types.ts";
 import { advanceDistrict, affinityJournalId, farmEdgeHealth, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
@@ -303,6 +305,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           const meeting = meetPractitioner(world, state, effect.field, effect.band);
           journal(state, "event", `paths-meet-${effect.field}`, meeting.text);
           apply(state, meeting.effects);
+          break;
+        }
+        case "join-district": {
+          const counts = [...state.paths!.people[effect.field]] as PathsState["people"][FieldId];
+          counts[TIERS.indexOf(effect.tier)] += 1;
+          state.paths!.people = { ...state.paths!.people, [effect.field]: counts };
           break;
         }
         case "introduce-field":

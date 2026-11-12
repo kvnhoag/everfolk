@@ -8,6 +8,7 @@ import { inspirationEvents } from "../paths/content/inspiration.ts";
 import { holdingsEvents } from "../paths/content/holdings.ts";
 import { needsEvents } from "../paths/content/needs.ts";
 import { moveEvents } from "../paths/content/moves.ts";
+import { milestoneEvents, milestoneFlags } from "../paths/content/milestones.ts";
 import { refitEvents } from "../paths/content/refits.ts";
 import { auditEvents } from "../paths/audit.ts";
 
@@ -37,5 +38,6 @@ function addPaths(world: WorldPack): void {
   for (const field of FIELD_IDS) {
     world.flags[`met-renowned-${field}`] = { label: `Met a renowned ${world.paths.fields[field].practitioner}`, initial: false };
   }
-  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents()];
+  Object.assign(world.flags, milestoneFlags());
+  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents(), ...milestoneEvents()];
 }

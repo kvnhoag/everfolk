@@ -9,10 +9,11 @@ import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
 export const FOCUSED_TARGETS = ["FC10", "FR10", "AT10", "AC10", "AS10", "PS10", "PP10", "T10"] as const;
 export interface FocusedResult { seed: string; target: string; mastered: boolean; survived18: boolean; age: number; deepest: number; next: string | null; reason: string; commands: number; home: string | null }
 
-function pathTo(target: string): string[] {
+function nodesOf(world: WorldPack) { return world.capabilities?.nodes ?? CAPABILITY_NODES; }
+function pathTo(world: WorldPack, target: string): string[] {
   const path: string[] = [];
   function visit(id: string) {
-    const node = CAPABILITY_NODES.find(n => n.id === id);
+    const node = nodesOf(world).find(n => n.id === id);
     if (!node) throw new Error(`Unknown focus target ${id}`);
     for (const parent of node.prerequisites.all) visit(parent);
     if (!path.includes(id)) path.push(id);
@@ -22,7 +23,7 @@ function pathTo(target: string): string[] {
 
 /** A disclosed policy: ordinary accepted commands, 3 of 4 work years on the path. */
 export function runFocusedPolicy(world: WorldPack, target: string, seed: string): FocusedResult {
-  const engine = createEngine(world), path = pathTo(target);
+  const engine = createEngine(world), path = pathTo(world, target), nodes = nodesOf(world);
   let life = engine.start(seed), reason = "Not old enough for work.", survived18 = false;
   let turns = 0;
   while (life.phase !== "ended" && !life.capabilities?.learned[target] && turns++ < world.maxAge * 14) {
@@ -59,8 +60,8 @@ export function runFocusedPolicy(world: WorldPack, target: string, seed: string)
       if (life.demo.household.flaxPlots !== flaxPlots) life = engine.demo(life, { type: "plan", flaxPlots });
       const seed = engine.getActivities(life).find(a => a.id === "v-buy-flax-seed" && a.available);
       if (grainDone && (life.vocations?.inventory["flax-seed"] ?? 0) < flaxPlots * 4 && seed) life = engine.act(life, seed.id);
-    } else if (life.demo?.household.flaxPlots && !next.startsWith("FC")) life = engine.demo(life, { type: "plan", flaxPlots: 0 });
-    const node = CAPABILITY_NODES.find(n => n.id === next)!;
+    } else if (life.demo?.household.flaxPlots) life = engine.demo(life, { type: "plan", flaxPlots: 0 });
+    const node = nodes.find(n => n.id === next)!;
     let actions = engine.getActivities(life);
     const workNode = next === "PP10" && (life.demo?.reputation ?? 0) < 60 ? "PP8" : next;
     const work = actions.find(a => a.id === `cap-work-${workNode.toLowerCase()}`);
@@ -84,6 +85,6 @@ export function runFocusedPolicy(world: WorldPack, target: string, seed: string)
   }
   const next = path.find(id => !life.capabilities?.learned[id]) ?? null;
   return { seed, target, mastered: Boolean(life.capabilities?.learned[target]), survived18, age: life.age,
-    deepest: Math.max(0, ...path.filter(id => life.capabilities?.learned[id]).map(id => CAPABILITY_NODES.find(n => n.id === id)!.depth)), next,
+    deepest: Math.max(0, ...path.filter(id => life.capabilities?.learned[id]).map(id => nodes.find(n => n.id === id)!.depth)), next,
     reason, commands: life.commands.length, home: life.paths?.home ?? null };
 }
