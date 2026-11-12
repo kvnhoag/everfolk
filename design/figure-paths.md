@@ -68,3 +68,7 @@ Final repository regression result: **1,565 passing / 1,584 total**, with the **
 ## Integration with current main
 
 The combined default is `alexandria-lives-6`, built from the unchanged official `alexandria-lives-5`. It retains the attribute atlas, military lane, life stages, district paths and NPC systems while adding the eleven historical paths. Official worlds 1–5 remain byte-for-byte unchanged. The independent 65-node proof engine is preserved under `src/deep-capabilities`, using `alexandria-deep-1` and `alexandria-figures-1`; it does not replace the official numeric capability engine.
+
+## Integrated release validation
+
+After integrating current main, the canonical suite passes **2,279 tests** (2,265 Node simulation/UI tests plus 14 character-creator tests), with zero failures. Whole-repository TypeScript, English-only checks, folder/dependency boundaries and the production build pass. These results supersede the pre-integration baseline-failure totals above.
