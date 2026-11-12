@@ -94,6 +94,8 @@ export function validateEventFields(event: DataObject, path: string, hasPaths: b
 }
 
 export interface PathsRuleTools {
+  /** Material IDs the world's work inventory can hold. */
+  materials: Set<string>;
   fail(path: string, message: string): never;
   object(value: unknown, path: string, fields?: readonly string[], required?: readonly string[]): DataObject;
   integer(value: unknown, path: string, min: number, max: number): number;
@@ -102,6 +104,10 @@ export interface PathsRuleTools {
 }
 
 const NEED_LABELS = ["scarce", "steady", "crowded"];
+
+function requireMaterial(item: unknown, path: string, tools: PathsRuleTools): void {
+  if (!tools.materials.has(item as string)) tools.fail(path, `unknown material '${String(item)}'`);
+}
 
 function field(rule: DataObject, path: string, tools: PathsRuleTools): void {
   if (!FIELD_IDS.includes(rule.field as never)) tools.fail(`${path}.field`, `unknown field '${String(rule.field)}'`);
@@ -147,6 +153,12 @@ export function validatePathsCondition(rule: DataObject, path: string, paths: un
       object(rule, path, ["type", "field"]);
       requirePaths(paths, path, tools); field(rule, path, tools);
       return true;
+    case "material":
+      object(rule, path, ["type", "item", "op", "value"]);
+      requireMaterial(rule.item, `${path}.item`, tools);
+      if (!tools.operators.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+      integer(rule.value, `${path}.value`, 0, 100_000);
+      return true;
     default:
       return false;
   }
@@ -165,6 +177,12 @@ export function validatePathsEffect(effect: DataObject, path: string, paths: unk
       tools.object(effect, path, ["type", "field", "band"]);
       requirePaths(paths, path, tools); field(effect, path, tools);
       if (!["child", "young", "adult", "elder"].includes(effect.band as string)) tools.fail(`${path}.band`, "expected child, young, adult or elder");
+      return true;
+    case "use-material":
+      tools.object(effect, path, ["type", "item", "quantity", "cause"]);
+      requireMaterial(effect.item, `${path}.item`, tools);
+      tools.integer(effect.quantity, `${path}.quantity`, 1, 10_000);
+      tools.string(effect.cause, `${path}.cause`, 200);
       return true;
     case "move-district": {
       tools.object(effect, path, ["type", "district", "reason"]);

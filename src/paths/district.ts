@@ -7,7 +7,7 @@ import { refreshNeeds } from "./needs.ts";
 import { putItem } from "../capabilities/inventory.ts";
 
 const BPS = 10_000;
-const LEAVE_BPS = 500, LEARNER_PROMOTE_BPS = 2000, WORKER_PROMOTE_BPS = 500, RENOWN_CHANCE = 0.02;
+const LEAVE_BPS = 500, LEARNER_PROMOTE_BPS = 2000, WORKER_PROMOTE_BPS = 500, RENOWN_CHANCE = 0.005;
 const WAR_SOLDIER_LOSS_BPS = 1500, LOW_FLOOD_FARMER_LOSS_BPS = 1000, BUSY_SCARCE_BPS = 14_000;
 
 /** A random source separate from the life's main stream, so district detail never rerolls gameplay. */

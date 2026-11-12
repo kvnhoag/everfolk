@@ -64649,6 +64649,1560 @@
           "band": "elder"
         }
       ]
+    },
+    {
+      "id": "holdings-harvest-carrying",
+      "title": "Sheaves to the threshing floor",
+      "text": "The harvest is good. Everyone carries, even the children, and the threshing floor is loud until dark.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "grain",
+          "op": "gte",
+          "value": 400
+        }
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "farming",
+          "delta": 5,
+          "source": "carrying sheaves at a good harvest"
+        },
+        {
+          "type": "stat",
+          "stat": "health",
+          "delta": 1
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "holdings-full-granary",
+      "title": "A full granary",
+      "text": "The storeroom jars are full to the shoulders. There is more grain than the household will eat before the next flood.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "grain",
+          "op": "gte",
+          "value": 600
+        }
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "farming",
+        "trade"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 5,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-full-granary-expand",
+          "text": "Rent the neighbouring strip and sow more",
+          "outcomes": [
+            {
+              "id": "holdings-full-granary-expand-done",
+              "text": "You rent the strip and plan the sowing yourself.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "harvest-bonus",
+                    "bps": 1000
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 10,
+                  "source": "planning a larger sowing"
+                },
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-full-granary-lend",
+          "text": "Lend seed to neighbours who are short",
+          "outcomes": [
+            {
+              "id": "holdings-full-granary-lend-done",
+              "text": "Neighbours carry away seed and promise grain back at harvest.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "share-grain",
+                    "quantity": 100
+                  }
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 3
+                  }
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-full-granary-prices",
+          "text": "Learn what the merchants pay before selling any",
+          "outcomes": [
+            {
+              "id": "holdings-full-granary-prices-done",
+              "text": "You spend market days learning who pays what, and when.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "studying grain prices"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-seed-lending",
+      "title": "A neighbour short of seed",
+      "text": "After the low flood, a neighbour comes to the door asking for seed grain to sow.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 300
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "year",
+              "family": "flood",
+              "level": "low"
+            }
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-seed-lending-lend",
+          "text": "Lend fifty measures of seed",
+          "outcomes": [
+            {
+              "id": "holdings-seed-lending-lend-done",
+              "text": "The neighbour thanks you and sows the whole plot.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "share-grain",
+                    "quantity": 50
+                  }
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-seed-lending-refuse",
+          "text": "Keep the seed for your own plot",
+          "outcomes": [
+            {
+              "id": "holdings-seed-lending-refuse-done",
+              "text": "You keep your seed. The neighbour leaves without a word.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": -1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-spare-flax",
+      "title": "Spare flax",
+      "text": "Someone gives you a handful of spare flax, and you twist it into string the way the grown-ups do.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "flax",
+          "op": "gte",
+          "value": 10
+        }
+      },
+      "stages": [
+        "childhood"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "clothing",
+          "delta": 5,
+          "source": "twisting spare flax into string"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "holdings-flax-choice",
+      "title": "Flax in the store",
+      "text": "There is flax in the storeroom, retted and ready.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "flax",
+          "op": "gte",
+          "value": 10
+        }
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-flax-choice-spin",
+          "text": "Spin it into thread",
+          "outcomes": [
+            {
+              "id": "holdings-flax-choice-spin-done",
+              "text": "Your thread starts uneven and ends almost even.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "spinning the household's flax"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-flax-choice-price",
+          "text": "Ask what flax fetches in the market",
+          "outcomes": [
+            {
+              "id": "holdings-flax-choice-price-done",
+              "text": "You learn the price of flax by season.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "pricing flax"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-linen-bolt",
+      "title": "A bolt of linen",
+      "text": "A bolt of good linen lies folded in the household chest.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "linen",
+          "op": "gte",
+          "value": 2
+        }
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "clothing",
+        "trade"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 5,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-linen-bolt-sew",
+          "text": "Cut and sew clothes for the household",
+          "outcomes": [
+            {
+              "id": "holdings-linen-bolt-sew-done",
+              "text": "Everyone in the house has a new tunic by the festival.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "item",
+                    "item": "linen",
+                    "delta": -1,
+                    "cause": "cut and sewn into clothes for the household"
+                  }
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "sewing for the household"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-linen-bolt-keep",
+          "text": "Keep it to sell when the price is right",
+          "outcomes": [
+            {
+              "id": "holdings-linen-bolt-keep-done",
+              "text": "You watch the cloth market for a good price.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "waiting for a good price on linen"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-clay-play",
+      "title": "Clay by the door",
+      "text": "A lump of wet clay sits by the door, left from the morning's work.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "material",
+            "item": "clay",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "type": "district",
+            "district": "city-quarter"
+          }
+        ]
+      },
+      "stages": [
+        "early-childhood",
+        "childhood"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "scope": "personal",
+      "choices": [
+        {
+          "id": "holdings-clay-play-shape",
+          "text": "Shape a little pot",
+          "outcomes": [
+            {
+              "id": "holdings-clay-play-shape-done",
+              "text": "Your pot leans, but it holds water for a day.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "shaping clay by the door"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-clay-play-leave",
+          "text": "Leave it and run off to play",
+          "outcomes": [
+            {
+              "id": "holdings-clay-play-leave-done",
+              "text": "You run off. The clay dries hard by evening.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-kiln-share",
+      "title": "A neighbour's kiln",
+      "text": "A neighbour's kiln has room for a few more pots this firing.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "material",
+            "item": "clay",
+            "op": "gte",
+            "value": 2
+          },
+          {
+            "type": "material",
+            "item": "fuel",
+            "op": "gte",
+            "value": 1
+          }
+        ]
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-kiln-share-fire",
+          "text": "Shape pots and fire them in the kiln",
+          "outcomes": [
+            {
+              "id": "holdings-kiln-share-fire-done",
+              "text": "Most of your pots come out of the kiln whole.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "use-material",
+                  "item": "clay",
+                  "quantity": 2,
+                  "cause": "shaped and fired in a neighbour's kiln"
+                },
+                {
+                  "type": "use-material",
+                  "item": "fuel",
+                  "quantity": 1,
+                  "cause": "shaped and fired in a neighbour's kiln"
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "firing pots in a shared kiln"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-kiln-share-keep",
+          "text": "Keep the clay for later",
+          "outcomes": [
+            {
+              "id": "holdings-kiln-share-keep-done",
+              "text": "You wrap the clay to keep it damp.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-papyrus-letters",
+      "title": "A sheet of papyrus",
+      "text": "There is a sheet of papyrus and a little ink in the house.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "material",
+        "item": "papyrus",
+        "op": "gte",
+        "value": 1
+      },
+      "stages": [
+        "childhood"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 2,
+      "evidence": "fictional",
+      "scope": "personal",
+      "choices": [
+        {
+          "id": "holdings-papyrus-letters-copy",
+          "text": "Copy the letters a tutor wrote",
+          "outcomes": [
+            {
+              "id": "holdings-papyrus-letters-copy-done",
+              "text": "You copy every letter twice, and remember most of them.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "use-material",
+                  "item": "papyrus",
+                  "quantity": 1,
+                  "cause": "covered with practice letters"
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "copying letters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-papyrus-letters-draw",
+          "text": "Draw boats and birds instead",
+          "outcomes": [
+            {
+              "id": "holdings-papyrus-letters-draw-done",
+              "text": "You fill the margins with boats and birds.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-old-tablets",
+      "title": "Old wax tablets",
+      "text": "You find a steward's old wax tablets, full of sums.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "origin",
+            "origin": "royal-household"
+          },
+          {
+            "type": "origin",
+            "origin": "estate-household"
+          }
+        ]
+      },
+      "stages": [
+        "childhood",
+        "adolescence"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "personal",
+      "choices": [
+        {
+          "id": "holdings-old-tablets-sums",
+          "text": "Work out the sums",
+          "outcomes": [
+            {
+              "id": "holdings-old-tablets-sums-done",
+              "text": "You work the sums until they come out right.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "working a steward's sums"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-old-tablets-ignore",
+          "text": "Put them back",
+          "outcomes": [
+            {
+              "id": "holdings-old-tablets-ignore-done",
+              "text": "You put the tablets back on the shelf.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-copy-accounts",
+      "title": "The household accounts",
+      "text": "The household accounts need a clean copy for the tax collector.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "material",
+        "item": "papyrus",
+        "op": "gte",
+        "value": 2
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-copy-accounts-copy",
+          "text": "Make the clean copy",
+          "outcomes": [
+            {
+              "id": "holdings-copy-accounts-copy-done",
+              "text": "The tax collector accepts your copy without a question.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "use-material",
+                  "item": "papyrus",
+                  "quantity": 1,
+                  "cause": "used for a clean copy of the household accounts"
+                },
+                {
+                  "type": "skill",
+                  "skill": "literacy",
+                  "delta": 2
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "copying accounts for the tax collector"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-copy-accounts-leave",
+          "text": "Leave it to someone else",
+          "outcomes": [
+            {
+              "id": "holdings-copy-accounts-leave-done",
+              "text": "Someone else makes the copy.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-silver-heirloom",
+      "title": "A piece of silver",
+      "text": "The household keeps a piece of silver against bad years. A master would teach for less.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "silver",
+          "op": "gte",
+          "value": 1
+        }
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "ceramics",
+        "clothing",
+        "sculpture"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-silver-heirloom-potter",
+          "text": "Pay a master potter to teach you",
+          "when": {
+            "type": "affinity",
+            "field": "ceramics",
+            "op": "gte",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "holdings-silver-heirloom-potter-done",
+              "text": "The master potter takes your silver and your hands.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "item",
+                    "item": "silver",
+                    "delta": -1,
+                    "cause": "paid to a master potter for teaching"
+                  }
+                },
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 4
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 15,
+                  "source": "a master potter's teaching"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-silver-heirloom-weaver",
+          "text": "Pay a master weaver to teach you",
+          "when": {
+            "type": "affinity",
+            "field": "clothing",
+            "op": "gte",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "holdings-silver-heirloom-weaver-done",
+              "text": "The master weaver sets you at a loom.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "item",
+                    "item": "silver",
+                    "delta": -1,
+                    "cause": "paid to a master weaver for teaching"
+                  }
+                },
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 4
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 15,
+                  "source": "a master weaver's teaching"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-silver-heirloom-carver",
+          "text": "Pay a master carver to teach you",
+          "when": {
+            "type": "affinity",
+            "field": "sculpture",
+            "op": "gte",
+            "value": 10
+          },
+          "outcomes": [
+            {
+              "id": "holdings-silver-heirloom-carver-done",
+              "text": "The master carver hands you a chisel.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "item",
+                    "item": "silver",
+                    "delta": -1,
+                    "cause": "paid to a master carver for teaching"
+                  }
+                },
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 4
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 15,
+                  "source": "a master carver's teaching"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-silver-heirloom-keep",
+          "text": "Keep the silver for bad years",
+          "outcomes": [
+            {
+              "id": "holdings-silver-heirloom-keep-done",
+              "text": "The silver stays in its hiding place.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-savings-plan",
+      "title": "Savings in the jar",
+      "text": "The money jar is heavier than it has been for years.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "cash",
+        "op": "gte",
+        "value": 80
+      },
+      "stages": [
+        "adulthood"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 6,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-savings-plan-plan",
+          "text": "Plan a small trading venture",
+          "outcomes": [
+            {
+              "id": "holdings-savings-plan-plan-done",
+              "text": "You work out what to buy, where, and what it would sell for.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "planning a trading venture"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-savings-plan-keep",
+          "text": "Leave the savings untouched",
+          "outcomes": [
+            {
+              "id": "holdings-savings-plan-keep-done",
+              "text": "The jar goes back under the floor.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-ox-ploughing",
+      "title": "The ox and the neighbours' plots",
+      "text": "Neighbours without an ox ask whether yours could plough their plots too.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "ox",
+          "op": "gte",
+          "value": 1
+        }
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-ox-ploughing-plough",
+          "text": "Plough the neighbours' plots",
+          "outcomes": [
+            {
+              "id": "holdings-ox-ploughing-plough-done",
+              "text": "You plough until the ox will go no further.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 2
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-ox-ploughing-rest",
+          "text": "Rest the ox this year",
+          "outcomes": [
+            {
+              "id": "holdings-ox-ploughing-rest-done",
+              "text": "The ox rests, and so do you.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-donkey-hauling",
+      "title": "The donkey and the market road",
+      "text": "Neighbours ask whether your donkey could carry their goods to market.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "demo",
+        "condition": {
+          "kind": "item",
+          "item": "donkey",
+          "op": "gte",
+          "value": 1
+        }
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 3,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-donkey-hauling-haul",
+          "text": "Haul the neighbours' goods to market",
+          "outcomes": [
+            {
+              "id": "holdings-donkey-hauling-haul-done",
+              "text": "You learn every stall and price on the way.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "hauling goods to market"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-donkey-hauling-no",
+          "text": "Keep the donkey at home",
+          "outcomes": [
+            {
+              "id": "holdings-donkey-hauling-no-done",
+              "text": "The donkey stays in its stall.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-stone-offcut",
+      "title": "An offcut of stone",
+      "text": "A carver's yard throws out an offcut of good limestone.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "district",
+            "district": "city-quarter"
+          },
+          {
+            "type": "district",
+            "district": "court-quarter"
+          }
+        ]
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "work",
+      "choices": [
+        {
+          "id": "holdings-stone-offcut-carve",
+          "text": "Carve something from it",
+          "outcomes": [
+            {
+              "id": "holdings-stone-offcut-carve-done",
+              "text": "You carve a small head. It looks like no one in particular.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "carving a limestone offcut"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-stone-offcut-leave",
+          "text": "Leave it",
+          "outcomes": [
+            {
+              "id": "holdings-stone-offcut-leave-done",
+              "text": "Someone else takes the stone.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-army-kit",
+      "title": "The old army kit",
+      "text": "You find a parent's old army kit in a chest: a dented helmet, a belt and a short sword in its scabbard.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "origin",
+        "origin": "soldier-household"
+      },
+      "stages": [
+        "childhood"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "soldiering",
+          "delta": 5,
+          "source": "the family's old army kit"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "holdings-drill-yard",
+      "title": "The drill yard",
+      "text": "Boys from the garrison families join the soldiers' drill at the end of the yard.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "district",
+        "district": "garrison"
+      },
+      "stages": [
+        "adolescence",
+        "youth"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 2,
+      "cooldownYears": 2,
+      "evidence": "fictional",
+      "scope": "personal",
+      "choices": [
+        {
+          "id": "holdings-drill-yard-join",
+          "text": "Join the drill",
+          "outcomes": [
+            {
+              "id": "holdings-drill-yard-join-done",
+              "text": "You keep the step badly at first, then well.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "joining the garrison drill"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-drill-yard-watch",
+          "text": "Watch from the wall",
+          "outcomes": [
+            {
+              "id": "holdings-drill-yard-watch-done",
+              "text": "You watch until the drill ends.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-market-stall",
+      "title": "The family stall",
+      "text": "The household has goods to spare, and someone has to mind the family's market stall.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "linen",
+              "op": "gte",
+              "value": 1
+            }
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "item",
+              "item": "grain",
+              "op": "gte",
+              "value": 200
+            }
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 3,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "scope": "household",
+      "choices": [
+        {
+          "id": "holdings-market-stall-mind",
+          "text": "Mind the stall yourself",
+          "outcomes": [
+            {
+              "id": "holdings-market-stall-mind-done",
+              "text": "You learn who haggles and who pays.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "minding the family stall"
+                },
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "holdings-market-stall-others",
+          "text": "Leave it to others",
+          "outcomes": [
+            {
+              "id": "holdings-market-stall-others-done",
+              "text": "A cousin minds the stall.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holdings-gift-of-tools-ceramics",
+      "title": "A gift of tools",
+      "text": "The master you met sends you a potter's turning tool, worn smooth by years of use.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "introduced",
+        "field": "ceramics"
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "ceramics",
+          "delta": 5,
+          "source": "a gift of a potter's turning tool"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "holdings-gift-of-tools-clothing",
+      "title": "A gift of tools",
+      "text": "The master you met sends you a weaver's shuttle, worn smooth by years of use.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "introduced",
+        "field": "clothing"
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "clothing",
+          "delta": 5,
+          "source": "a gift of a weaver's shuttle"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "holdings-gift-of-tools-sculpture",
+      "title": "A gift of tools",
+      "text": "The master you met sends you a carver's chisel, worn smooth by years of use.",
+      "trigger": {
+        "type": "random",
+        "weight": 1
+      },
+      "when": {
+        "type": "introduced",
+        "field": "sculpture"
+      },
+      "stages": [
+        "adolescence",
+        "youth",
+        "adulthood"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "evidence": "fictional",
+      "mode": "automatic",
+      "effects": [
+        {
+          "type": "affinity",
+          "field": "sculpture",
+          "delta": 5,
+          "source": "a gift of a carver's chisel"
+        }
+      ],
+      "choices": []
     }
   ],
   "endings": [

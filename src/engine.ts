@@ -33,6 +33,7 @@ import { executeTrade } from "./demo/market.ts";
 import { applyPlan } from "./demo/household.ts";
 import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
+import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
 import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, notePractice, practiceBonus } from "./paths/index.ts";
 
@@ -302,6 +303,13 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           const meeting = meetPractitioner(world, state, effect.field, effect.band);
           journal(state, "event", `paths-meet-${effect.field}`, meeting.text);
           apply(state, meeting.effects);
+          break;
+        }
+        case "use-material": {
+          const held = state.vocations?.inventory[effect.item] ?? 0;
+          if (held < effect.quantity) { journal(state, "activity", `paths-use-${effect.item}`, `There is not enough ${effect.item} left to use.`); break; }
+          takeItem(state, effect.item, effect.quantity);
+          journal(state, "activity", `paths-use-${effect.item}`, `${effect.quantity} ${effect.item} used: ${effect.cause}.`);
           break;
         }
         case "move-district":

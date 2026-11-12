@@ -688,7 +688,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         validateDemoCondition(rule, path, fail);
         break;
       default:
-        if (!validatePathsCondition(rule, path, world.paths, { fail, object, integer, string, operators: OPERATORS })) fail(`${path}.type`, "unknown condition type");
+        if (!validatePathsCondition(rule, path, world.paths, { fail, object, integer, string, operators: OPERATORS, materials: new Set(Object.keys((world.vocations as VocationDefinition | undefined)?.materials ?? {})) })) fail(`${path}.type`, "unknown condition type");
     }
   };
   const effects = (value: unknown, path: string, allowMastery = false, allowAccomplishment = false, allowTrainingGainModifiers = false): void => {
@@ -844,7 +844,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           validateDemoEffect(effect, location, fail, demoGrainGain);
           break;
         default:
-          if (!validatePathsEffect(effect, location, world.paths, { fail, object, integer, string, operators: OPERATORS })) fail(`${location}.type`, "unknown effect type");
+          if (!validatePathsEffect(effect, location, world.paths, { fail, object, integer, string, operators: OPERATORS, materials: new Set(Object.keys((world.vocations as VocationDefinition | undefined)?.materials ?? {})) })) fail(`${location}.type`, "unknown effect type");
       }
     });
   };
