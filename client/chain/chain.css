@@ -1,7 +1,7 @@
 /* Ranked screens: full-page paper sheet over the game, in the pixel theme. */
-dialog.chain-screen{position:fixed;inset:0;z-index:60;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;overflow-y:auto;background:var(--paper,#f4e7c9);color:var(--ink,#263b43);padding:24px 32px 40px}
-dialog.chain-screen::backdrop{background:var(--paper,#f4e7c9)}
-.chain-shell{width:min(880px,100%);margin:0 auto}
+dialog.chain-screen{position:fixed;inset:0;z-index:60;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;overflow-y:auto;background:radial-gradient(ellipse at 50% 12%, #183142 0%, #0e1e28 50%, #071118 100%);color:var(--ink,#263b43);padding:24px 32px 48px}
+dialog.chain-screen::backdrop{background:rgba(7, 17, 24, 0.9)}
+.chain-shell{width:min(960px,100%);margin:0 auto}
 .chain-topline{display:flex;align-items:center;flex-wrap:wrap;gap:10px 20px;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c5aa79;font-size:11px}
 .chain-topline a{color:#41637b;text-decoration:none}
 .chain-topline a:hover{color:#a85e44;text-decoration:underline;text-underline-offset:3px}

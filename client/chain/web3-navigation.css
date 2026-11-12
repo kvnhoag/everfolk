@@ -34,3 +34,95 @@
 .web3-home-bar{position:sticky;top:0;z-index:35;background:var(--paper,#f4e7c9)}
 .life-choice-history{padding-left:20px;font-size:13px;line-height:1.7}
 .life-choice-history li{padding:10px 0;border-bottom:1px solid var(--cr-edge,#b39c68)}
+
+
+/* Everfolk Unified Web3 Header */
+.ef-web3-header {
+  background: radial-gradient(circle at 50% 0%, #1c3546 0%, #0d1e28 80%, #08141b 100%) !important;
+  border-bottom: 2px solid #d6aa52 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+.ef-web3-brand {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.ef-web3-mark-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: rgba(214, 170, 82, 0.15);
+  border: 1px solid #d6aa5266;
+}
+
+.ef-web3-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ef-web3-brand-text strong {
+  font-family: var(--serif, "Courier New", monospace);
+  font-size: 20px;
+  color: #fff4d6;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.ef-web3-brand-text span {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #d6aa52;
+  margin: 0;
+}
+
+.ef-web3-nav a {
+  color: #e5ecd9 !important;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 2px;
+  transition: all 0.15s ease;
+}
+
+.ef-web3-nav a:hover,
+.ef-web3-nav a[aria-current="page"] {
+  color: #ffd875 !important;
+  background: rgba(214, 170, 82, 0.15);
+  text-decoration: none !important;
+  border-bottom: 2px solid #d6aa52;
+}
+
+.ef-nav-explore-btn {
+  color: #d6aa52 !important;
+  font-size: 11px;
+  border: 1px solid #d6aa5255;
+  border-radius: 2px;
+  padding: 4px 10px !important;
+}
+
+.ef-nav-explore-btn:hover {
+  background: rgba(214, 170, 82, 0.2) !important;
+}
+
+.figure-showcase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.figure-expanded-panel {
+  text-align: left;
+  background: #fdf8ed;
+  border: 1px solid #d4c19c;
+  padding: 8px 12px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
