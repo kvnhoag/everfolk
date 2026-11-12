@@ -15,6 +15,12 @@ export interface FigureRequirement {
   maxAgeAtAccomplishment?: number;
   /** Demo-world only. Ranked figures omit it, so ranked matching is unchanged. */
   minReputation?: number;
+  /** Life stages in which a stage record can qualify for this historical figure. */
+  stages?: string[];
+  /** Minimum age at which this figure can be claimed. */
+  minAge?: number;
+  /** Maximum age at which this figure can be claimed. */
+  maxAge?: number;
 }
 
 export const FIGURE_SUPPLY_CAP = 5;
@@ -38,6 +44,9 @@ const FIGURE_LIST: FigureRequirement[] = [
     minSkills: { warfare: 70, oratory: 50 },
     accomplishmentsAny: ["military-first-work", "military-prestige"],
     maxAgeAtAccomplishment: 32,
+    stages: ["youth", "adulthood"],
+    minAge: 16,
+    maxAge: 32,
   },
   {
     figure: "aristotle",
@@ -48,6 +57,8 @@ const FIGURE_LIST: FigureRequirement[] = [
     minSkills: { literacy: 76, philosophy: 76, oratory: 50 },
     minStats: { knowledge: 60 },
     accomplishmentsAny: ["philosophy-first-work", "philosophy-prestige"],
+    stages: ["adulthood", "later-life"],
+    minAge: 30,
   },
   {
     figure: "euclid",
@@ -58,6 +69,8 @@ const FIGURE_LIST: FigureRequirement[] = [
     minSkills: { reckoning: 80, literacy: 70 },
     minStats: { knowledge: 60 },
     accomplishmentsAny: ["astronomy-calendar-first-work", "astronomy-calendar-prestige", "philosophy-prestige"],
+    stages: ["adulthood", "later-life"],
+    minAge: 25,
   },
   {
     figure: "cleomenes",
@@ -68,6 +81,8 @@ const FIGURE_LIST: FigureRequirement[] = [
     minSkills: { reckoning: 80, literacy: 50 },
     minStats: { wealth: 90 },
     accomplishmentsAny: ["commerce-first-work", "commerce-prestige"],
+    stages: ["adulthood", "later-life"],
+    minAge: 30,
   },
 ];
 

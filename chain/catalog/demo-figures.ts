@@ -25,6 +25,9 @@ const DEMO_FIGURE_LIST: FigureRequirement[] = [
     minSkills: { warfare: 70 },
     accomplishmentsAny: [CONVOY_DISTINCTION],
     maxAgeAtAccomplishment: 32,
+    stages: ["youth", "adulthood"],
+    minAge: 16,
+    maxAge: 32,
   },
   ranked("aristotle"),
   ranked("euclid"),
@@ -38,6 +41,8 @@ const DEMO_FIGURE_LIST: FigureRequirement[] = [
     minStats: { wealth: 90 },
     accomplishmentsAny: [ARMY_SUPPLY_CONTRACT],
     minReputation: CLEOMENES_MIN_REPUTATION,
+    stages: ["adulthood", "later-life"],
+    minAge: 30,
   },
 ];
 
