@@ -10,6 +10,7 @@ artifacts/
 .vinext/
 .next/
 .env*
+!.env.production.example
 .dev.vars*
 next-env.d.ts
 

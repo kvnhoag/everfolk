@@ -17,6 +17,22 @@ pnpm dev
 
 Open the local URL printed by the server. Ordinary play needs no account or hosted content service. Lives save in the browser, with JSON import/export for transfer.
 
+## Run with Docker (any server)
+
+The container serves the production build with the Workers runtime (workerd) and keeps the
+content database on a volume. Secrets are read at start, never baked into the image.
+
+```sh
+cp .env.production.example .env.production   # fill in the values on the server
+docker compose up -d --build                 # serves http://<server>:8787
+docker compose logs -f everfolk
+```
+
+Free play works with an empty `.env.production`. Weave Mode (ranked lives, minting, the
+Market) needs the verifier key, the play-key funder account and the Privy app ID; add the
+server's public address to the Privy app's allowed origins. Put a TLS proxy (for example
+Caddy or nginx) in front of port 8787 for a public HTTPS address.
+
 ## NPC companions
 
 Visit `/npc` or choose **NPC companions** from the main menu to play an online free-play life with five changing NPC slots. Characters share the real household/shop accounts, pursue their own needs and accept optional external MCP control. Every accepted NPC and player decision is recorded for exact replay; these NPCs never mint NFTs.
