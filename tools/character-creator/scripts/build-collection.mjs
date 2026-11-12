@@ -10,6 +10,7 @@ import { FIGURE_DESIGN, drawHistoricalFrame } from '../src/historical-frame.js';
 import { historicalStage, stageIndex } from '../src/historical-stages.js';
 import { FIGURES } from '../../../chain/catalog/figures.ts';
 import { NPC_INFLUENCES } from '../../../chain/catalog/npc-influences.ts';
+import { DEMO_DEED_INFLUENCES } from '../../../chain/catalog/demo-deeds.ts';
 import { FIGURE_ACTIONS, NPC_ACTIONS, RARITY_LABELS, RARITY_POWER_BPS } from '../../../chain/ids.ts';
 import { ACTION_NAMES, GROUP_TITLE } from '../../../client/chain/chain-copy.ts';
 
@@ -37,15 +38,17 @@ export function renderCard(profile,descriptor,rarity=null){
 
 export async function buildCollection(){
  await mkdir(out,{recursive:true});
- const manifest={schemaVersion:1,collection:'Everfolk / Living Legacies',purpose:'Editable collection artwork; no tokens are minted by this tool.',sourceCommit:'56f5d69631f9df2e717a22de3d7334f5a0a004ee',sources:['chain/ids.ts','chain/catalog/figures.ts','chain/catalog/npc-influences.ts','chain/catalog/figure-influences.ts','client/chain/chain-copy.ts','guide/TUTORIAL.md'],rarityRules:RARITY_LABELS.map((label,i)=>({label,powerBps:RARITY_POWER_BPS[i]})),historicalNote:'Fictional, stylized appearances. Euclid and Cleomenes are not authenticated portraits. Visual colors and costumes are art direction, not NFT rarity assignments. Five artwork variants do not allocate the five historical-figure token copies.',characters:[]};
- const contact=new Raster(1280,766);contact.rect(0,0,1280,766,'#efe6cc');contact.text('EVERFOLK / LIVING LEGACIES',28,22,3,'#3e4f3d');contact.text('4 HISTORICAL FIGURES + 6 PEOPLE OF ALEXANDRIA / CREATOR PIXEL ART',28,53,1,'#695140');
+ const manifest={schemaVersion:1,collection:'Everfolk / Living Legacies',purpose:'Editable collection artwork; no tokens are minted by this tool.',sourceCommit:'56f5d69631f9df2e717a22de3d7334f5a0a004ee',sources:['chain/ids.ts','chain/catalog/figures.ts','chain/catalog/npc-influences.ts','chain/catalog/demo-deeds.ts','chain/catalog/figure-influences.ts','client/chain/chain-copy.ts','guide/TUTORIAL.md'],rarityRules:RARITY_LABELS.map((label,i)=>({label,powerBps:RARITY_POWER_BPS[i]})),historicalNote:'Fictional, stylized appearances. Euclid and Cleomenes are not authenticated portraits. Visual colors and costumes are art direction, not NFT rarity assignments. Five artwork variants do not allocate the five historical-figure token copies.',characters:[]};
+ const figureCount=NFT_PROFILES.filter(profile=>profile.kind==='figure').length,npcCount=NFT_PROFILES.length-figureCount;
+ const contactHeight=82+Math.ceil(NFT_PROFILES.length/5)*336+12;
+ const contact=new Raster(1280,contactHeight);contact.rect(0,0,1280,contactHeight,'#efe6cc');contact.text('EVERFOLK / LIVING LEGACIES',28,22,3,'#3e4f3d');contact.text(`${figureCount} HISTORICAL FIGURES + ${npcCount} PEOPLE OF ALEXANDRIA / CREATOR PIXEL ART`,28,53,1,'#695140');
  const historicalContact=new Raster(1072,414);historicalContact.rect(0,0,1072,414,'#efe6cc');historicalContact.text('EVERFOLK / HISTORICAL FIGURES',24,18,3,'#3e4f3d');historicalContact.text('COMMON LIFE STAGES / DISTINCT SETTINGS / THE SAME CHARACTER AT EVERY TIER',24,48,1,'#695140');let historicalIndex=0;
  const progression=new Raster(1328,1472);progression.rect(0,0,1328,1472,'#efe6cc');progression.text('EVERFOLK / LIVES IN FIVE CHAPTERS',24,20,3,'#3e4f3d');progression.text('ONE IDENTITY / FIVE PRESTIGE STAGES / BACKGROUND AND FRAME PROGRESSION',24,51,1,'#695140');RARITY_LABELS.forEach((label,i)=>progression.text(label,32+i*260,80,2,'#3e4f3d'));
  for(const [index,profile]of NFT_PROFILES.entries()){
   if(profile.kind==='figure'&&(!FIGURE_DESIGN[profile.id]||profile.frame!==FIGURE_DESIGN[profile.id].frame||profile.state.figure!==profile.id||profile.state.backdrop!==FIGURE_DESIGN[profile.id].scene))throw new Error(`Historical frame/background rule violated: ${profile.id}`);
   if(profile.kind==='npc'&&(profile.frame!=='citizen'||profile.state.figure!=='none'))throw new Error(`NPC must use the citizen frame: ${profile.id}`);
   const figure=FIGURES.find(entry=>entry.figure===profile.id),ids=figure?FIGURE_ACTIONS[profile.id]:NPC_ACTIONS[profile.id].actions;
-  const descriptor={id:profile.id,kind:profile.kind,title:figure?.title??GROUP_TITLE[profile.id],summary:figure?.summary??NPC_INFLUENCES.filter(entry=>ids.includes(entry.id)).map(entry=>entry.label).join(' '),supplyCap:figure?.supplyCap??null,actions:ids.map(id=>({id,name:ACTION_NAMES[id]})),profile:`${profile.id}/profile.json`,card:`${profile.id}/card.png`,sprite:`${profile.id}/front-3x.png`,sheet:`${profile.id}/three-views-3x.png`,layeredCard:`${profile.id}/card.ora`,views:[],rarityVariants:RARITY_LABELS.map((label,i)=>({label,path:`${profile.id}/rarity-${i}.png`,artPreviewOnly:true}))};
+  const descriptor={id:profile.id,kind:profile.kind,title:figure?.title??GROUP_TITLE[profile.id],summary:figure?.summary??[...NPC_INFLUENCES,...DEMO_DEED_INFLUENCES].filter(entry=>ids.includes(entry.id)).map(entry=>entry.label).join(' '),supplyCap:figure?.supplyCap??null,actions:ids.map(id=>({id,name:ACTION_NAMES[id]})),profile:`${profile.id}/profile.json`,card:`${profile.id}/card.png`,sprite:`${profile.id}/front-3x.png`,sheet:`${profile.id}/three-views-3x.png`,layeredCard:`${profile.id}/card.ora`,views:[],rarityVariants:RARITY_LABELS.map((label,i)=>({label,path:`${profile.id}/rarity-${i}.png`,artPreviewOnly:true}))};
   await write(descriptor.profile,JSON.stringify(profile.state,null,2)+'\n');
   descriptor.frameFamily=profile.frame;descriptor.frameStyle='citizen';descriptor.background=`${profile.id}/background.png`;descriptor.face={shape:profile.state.face,eyes:profile.state.eyes,brows:profile.state.brows,nose:profile.state.nose,expression:profile.state.expression};
   const background=new Raster(240,190);drawLandscape(background,profile.state.birthplace,profile.state.backdrop);await write(descriptor.background,background.png());
@@ -89,7 +92,7 @@ export async function buildCollection(){
  await write('DESIGN.md',await readFile(path.join(root,'DESIGN.md')));
  await write('contact-sheet.png',contact.png());await write('manifest.json',JSON.stringify(manifest,null,2)+'\n');
  const archive=[];async function collect(dir){for(const entry of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name.localeCompare(b.name))){const full=path.join(dir,entry.name);if(entry.isDirectory())await collect(full);else if(entry.name!=='collection.zip')archive.push([path.relative(out,full).replaceAll('\\','/'),await readFile(full)]);}}await collect(out);await write('collection.zip',zip(archive));
- console.log(`Built ${manifest.characters.length} characters, 50 rarity art previews, 30 view masters, 60 layered cards and 20 historical stage backgrounds.`);
+ console.log(`Built ${manifest.characters.length} characters, ${manifest.characters.length*RARITY_LABELS.length} rarity art previews, ${manifest.characters.length*3} view masters, ${manifest.characters.length*(RARITY_LABELS.length+1)} layered cards and ${figureCount*RARITY_LABELS.length} historical stage backgrounds.`);
  return manifest;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await buildCollection();

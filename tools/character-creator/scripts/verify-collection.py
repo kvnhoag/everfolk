@@ -43,4 +43,6 @@ with zipfile.ZipFile(root / 'collection.zip') as archive:
     assert archive.testzip() is None
     for name in archive.namelist():
         assert archive.read(name) == (root / name).read_bytes(), name
-print(f'PASS: {checked} OpenRaster files reconstruct exactly; 30 sprites, 50 rarity previews and complete ZIP verified.')
+sprites = sum(len(character['views']) for character in manifest['characters'])
+previews = sum(len(character['rarityVariants']) for character in manifest['characters'])
+print(f'PASS: {checked} OpenRaster files reconstruct exactly; {sprites} sprites, {previews} rarity previews and complete ZIP verified.')

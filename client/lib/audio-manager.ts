@@ -27,7 +27,7 @@ export const PLAYLIST: readonly MusicTrack[] = [
   {
     id: "hidden-oasis",
     title: "Hidden Oasis",
-    composer: "Eric Matyas",
+    composer: "Trevor Lentz",
     src: "/assets/audio/hidden-oasis.mp3",
     tag: "Desert Oasis",
     origin: "Serene Palm Grove",

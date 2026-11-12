@@ -8,14 +8,25 @@ import { Raster } from '../scripts/raster.mjs';
 import { drawLandscape } from '../src/renderer.js';
 import { FIGURE_DESIGN, drawHistoricalFrame } from '../src/historical-frame.js';
 import { createHash } from 'node:crypto';
-import { FIGURE_IDS, CAREER_GROUPS, RARITY_LABELS } from '../../../chain/ids.ts';
+import { FIGURE_IDS, CAREER_GROUPS, NPC_ACTIONS, RARITY_LABELS } from '../../../chain/ids.ts';
 
 test('collection covers every figure and NPC career group in the NFT catalog',()=>{
  assert.deepEqual(NFT_PROFILES.filter(p=>p.kind==='figure').map(p=>p.id).sort(),[...FIGURE_IDS].sort());
  assert.deepEqual(NFT_PROFILES.filter(p=>p.kind==='npc').map(p=>p.id).sort(),[...CAREER_GROUPS].sort());
  for(const profile of NFT_PROFILES)assert.deepEqual(normalize(JSON.parse(JSON.stringify(profile.state))),profile.state);
  const manifest=JSON.parse(readFileSync(new URL('../nft-collection/manifest.json',import.meta.url)));
- assert.equal(manifest.characters.length,10);
+ const catalogIds=[...FIGURE_IDS,...CAREER_GROUPS];
+ assert.deepEqual(manifest.characters.map(entry=>entry.id).sort(),catalogIds.sort());
+ assert.equal(manifest.characters.length,FIGURE_IDS.length+CAREER_GROUPS.length);
+ for(const entry of manifest.characters){
+  assert.ok(entry.summary.trim(),`${entry.id} must retain its catalog description`);
+  if(entry.kind==='npc')assert.deepEqual(entry.actions.map(action=>action.id),[...NPC_ACTIONS[entry.id].actions]);
+ }
+ const farmer=manifest.characters.find(entry=>entry.id==='farming');
+ assert.equal(farmer.title,'Farmer of Alexandria');
+ assert.equal(JSON.parse(readFileSync(new URL('../nft-collection/'+farmer.profile,import.meta.url))).prop,'hoe');
+ const contact=readFileSync(new URL('../nft-collection/contact-sheet.png',import.meta.url));
+ assert.ok(contact.readUInt32BE(20)>=82+Math.floor((catalogIds.length-1)/5)*336+310,'every catalog card must fit on the contact sheet');
  for(const entry of manifest.characters){assert.equal(entry.actions.length,2);assert.deepEqual(entry.rarityVariants.map(v=>v.label),[...RARITY_LABELS]);assert.ok(entry.rarityVariants.every(v=>v.artPreviewOnly));assert.equal(entry.supplyCap,entry.kind==='figure'?5:null);}
 });
 
@@ -40,14 +51,14 @@ test('historical backgrounds advance through five stages, with gold frames only 
  assert.equal(frames.size,4);assert.equal(backgrounds.size,4);
 });
 
-test('all ten identities remain visually distinct when costume, hair, beard and skin are equalized',()=>{
+test('all catalog identities remain visually distinct when costume, hair, beard and skin are equalized',()=>{
  const heads=new Set();
  for(const profile of NFT_PROFILES){
   const state=normalize({...profile.state,outfit:'tunic',hair:'shaved',beard:'none',marks:'none',skin:'honey',height:'medium',build:'average',prop:'none',jewelry:'none'}),sprite=renderSprite(state),head=[];
   for(let y=18;y<43;y++)head.push(...sprite.data.subarray((y*64+18)*4,(y*64+46)*4));
   heads.add(createHash('sha256').update(Buffer.from(head)).digest('hex'));
  }
- assert.equal(heads.size,10,'face features must distinguish identities without relying on clothing, hair, beard or skin');
+ assert.equal(heads.size,FIGURE_IDS.length+CAREER_GROUPS.length,'face features must distinguish identities without relying on clothing, hair, beard or skin');
 });
 
 test('every collection view has editable paint layers that reconstruct its exact sprite',()=>{

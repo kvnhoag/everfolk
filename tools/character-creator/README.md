@@ -31,7 +31,7 @@ node --test tools/character-creator/tests/*.test.mjs
 
 Node.js 24+ is required for the collection build; it has no npm dependencies. The script reads the real figure/NPC action catalogs from `chain/` and copies the four figure cards/front sprites into `public/assets/figures/`, the paths already used by NFT reveal and market components.
 
-`nft-collection/` contains ten art masters: Alexander, Aristotle, Euclid, Cleomenes, and representatives of letters, military, commerce, craft, sky, and performance. It includes:
+`nft-collection/` contains eleven art masters: Alexander, Aristotle, Euclid, Cleomenes, and representatives of letters, military, commerce, craft, sky, performance, and farming. It includes:
 
 - 480×640 collectible PNG cards and layered `.ora` card masters.
 - 64×96 transparent front/side/back sprites, 3× exports, and three-view sheets.

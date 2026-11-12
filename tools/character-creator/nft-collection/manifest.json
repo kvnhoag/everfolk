@@ -7,6 +7,7 @@
     "chain/ids.ts",
     "chain/catalog/figures.ts",
     "chain/catalog/npc-influences.ts",
+    "chain/catalog/demo-deeds.ts",
     "chain/catalog/figure-influences.ts",
     "client/chain/chain-copy.ts",
     "guide/TUTORIAL.md"
@@ -2506,6 +2507,246 @@
         "expression": "thoughtful"
       },
       "sha256": "8c8eb379e08a1e84a7c812a7edf5f8ccc099dbb32197b838f190ca69d999f033"
+    },
+    {
+      "id": "farming",
+      "kind": "npc",
+      "title": "Farmer of Alexandria",
+      "summary": "A granary kept from an earlier life opens, and grain reaches your store. Seed from an earlier life arrives on easy terms, and the next harvest is fuller.",
+      "supplyCap": null,
+      "actions": [
+        {
+          "id": "farming.stock-granary",
+          "name": "Stock the granary"
+        },
+        {
+          "id": "farming.share-seed",
+          "name": "Share seed"
+        }
+      ],
+      "profile": "farming/profile.json",
+      "card": "farming/card.png",
+      "sprite": "farming/front-3x.png",
+      "sheet": "farming/three-views-3x.png",
+      "layeredCard": "farming/card.ora",
+      "views": [
+        {
+          "view": "front",
+          "path": "farming/front.png",
+          "layered": "farming/front.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "farming/layers/front/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "farming/layers/front/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "farming/layers/front/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "farming/layers/front/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "farming/layers/front/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "farming/layers/front/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "farming/layers/front/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "farming/layers/front/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "side",
+          "path": "farming/side.png",
+          "layered": "farming/side.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "farming/layers/side/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "farming/layers/side/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "farming/layers/side/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "farming/layers/side/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "farming/layers/side/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "09-face",
+              "path": "farming/layers/side/09-face.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "10-beard",
+              "path": "farming/layers/side/10-beard.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "farming/layers/side/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        },
+        {
+          "view": "back",
+          "path": "farming/back.png",
+          "layered": "farming/back.ora",
+          "layers": [
+            {
+              "name": "01-legs-and-feet",
+              "path": "farming/layers/back/01-legs-and-feet.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "03-body-and-base-garment",
+              "path": "farming/layers/back/03-body-and-base-garment.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "04-arms-and-sleeves",
+              "path": "farming/layers/back/04-arms-and-sleeves.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "07-head-and-neck",
+              "path": "farming/layers/back/07-head-and-neck.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "08-hair",
+              "path": "farming/layers/back/08-hair.png",
+              "width": 64,
+              "height": 96
+            },
+            {
+              "name": "12-prop-and-grip",
+              "path": "farming/layers/back/12-prop-and-grip.png",
+              "width": 64,
+              "height": 96
+            }
+          ]
+        }
+      ],
+      "rarityVariants": [
+        {
+          "label": "Common",
+          "path": "farming/rarity-0.png",
+          "artPreviewOnly": true,
+          "background": "farming/background-rarity-0.png",
+          "layeredCard": "farming/rarity-0.ora",
+          "profile": "farming/profile-rarity-0.json",
+          "stage": null,
+          "frameStyle": "citizen"
+        },
+        {
+          "label": "Uncommon",
+          "path": "farming/rarity-1.png",
+          "artPreviewOnly": true,
+          "background": "farming/background-rarity-1.png",
+          "layeredCard": "farming/rarity-1.ora",
+          "profile": "farming/profile-rarity-1.json",
+          "stage": null,
+          "frameStyle": "citizen"
+        },
+        {
+          "label": "Rare",
+          "path": "farming/rarity-2.png",
+          "artPreviewOnly": true,
+          "background": "farming/background-rarity-2.png",
+          "layeredCard": "farming/rarity-2.ora",
+          "profile": "farming/profile-rarity-2.json",
+          "stage": null,
+          "frameStyle": "citizen"
+        },
+        {
+          "label": "Epic",
+          "path": "farming/rarity-3.png",
+          "artPreviewOnly": true,
+          "background": "farming/background-rarity-3.png",
+          "layeredCard": "farming/rarity-3.ora",
+          "profile": "farming/profile-rarity-3.json",
+          "stage": null,
+          "frameStyle": "citizen"
+        },
+        {
+          "label": "Legendary",
+          "path": "farming/rarity-4.png",
+          "artPreviewOnly": true,
+          "background": "farming/background-rarity-4.png",
+          "layeredCard": "farming/rarity-4.ora",
+          "profile": "farming/profile-rarity-4.json",
+          "stage": null,
+          "frameStyle": "citizen"
+        }
+      ],
+      "frameFamily": "citizen",
+      "frameStyle": "citizen",
+      "background": "farming/background.png",
+      "face": {
+        "shape": "square",
+        "eyes": "relaxed",
+        "brows": "straight",
+        "nose": "broad",
+        "expression": "calm"
+      },
+      "sha256": "b265f11035eb196ed7cffb75a3e83e6758949ed93b5cd34e0e2903f2f7495fcb"
     },
     {
       "id": "performance",

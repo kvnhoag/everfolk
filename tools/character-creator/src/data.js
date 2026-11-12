@@ -35,6 +35,7 @@ export const ROLES = [
  {id:'geometer',name:'Geometer',short:'Geometry',icon:'geometry',nv:'NV16 · scholar variant',ng:'Early Ptolemaic Alexandria',outfit:'himation',prop:'geometry',jewelry:'none',description:'Find a clear proof in a set of simple geometric figures.',codes:'TP06/07 · DC44/45 · stylized geometry',hair:'curly'}
 ];
 ROLES.push(
+ {id:'farmer',name:'Farmer',short:'Farming',icon:'sprout',nv:'NFT / farming',ng:'Alexandria & Nile farms',outfit:'wrap',prop:'hoe',jewelry:'none',description:'Keep grain in store and share seed for the next harvest.',codes:'NFT farming · harvest',hair:'short'},
  {id:'philosopher',name:'Philosopher',short:'Philosophy',icon:'scroll',nv:'NFT / Aristotle',ng:'Lyceum & court',outfit:'himation',prop:'scroll',jewelry:'none',description:'Teach argument, read and discuss notes from lectures.',codes:'NFT letters · philosophy',hair:'wavy'},
  {id:'grain-official',name:'Grain administrator',short:'Grain',icon:'bag',nv:'NFT / Cleomenes',ng:'Naucratis & Alexandria',outfit:'mantle',prop:'grain',jewelry:'bracelet',description:'Manage accounts, trade and the grain stores.',codes:'NFT commerce · grain',hair:'short'},
  {id:'soldier',name:'Soldier',short:'Military',icon:'spear',nv:'NFT / military',ng:'Alexandria',outfit:'tunic',prop:'spear',jewelry:'none',description:'A veteran who mentors recruits and warns of the next levy.',codes:'NFT military · war',hair:'short'},
