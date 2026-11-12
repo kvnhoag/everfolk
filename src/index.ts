@@ -9,3 +9,6 @@ export { hasSocialRole, applySocialRole } from "./relationships.ts";
 export { createSeededPlayEngine, MAX_SEEDED_SAVE_LENGTH } from "./seeded-play.ts";
 export type { SeededPlayEngine, SeededPlayGrant, SeededPlaySave, SeededPlayToken, SeededScenarioDefinition, SeededScenarioMetadata } from "./seeded-play.ts";
 export type * from "./types.ts";
+export { lifeStageView } from "./life-stages/index.ts";
+export { affinityView, fieldNeedsView, stageRecordsView, districtOf } from "./paths/index.ts";
+export type { AffinityEntry, FieldNeed } from "./paths/index.ts";

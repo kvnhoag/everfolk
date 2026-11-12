@@ -6,6 +6,8 @@ export interface CapabilityNode {
   minimumProficiency: Record<string, number>;
   minimumStats?: Record<string, number>;
   anyProficiency?: Record<string, number>[];
+  /** Years of qualifying proof this world asks for; older packs use the catalog's count. */
+  proofYears?: number;
   proof: string; reward: string;
 }
 export interface CapabilityEvidence {

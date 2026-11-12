@@ -8,6 +8,8 @@ import { inspirationEvents } from "../paths/content/inspiration.ts";
 import { holdingsEvents } from "../paths/content/holdings.ts";
 import { needsEvents } from "../paths/content/needs.ts";
 import { moveEvents } from "../paths/content/moves.ts";
+import { milestoneEvents, milestoneFlags } from "../paths/content/milestones.ts";
+import { applyPacing } from "./pacing.ts";
 import { refitEvents } from "../paths/content/refits.ts";
 import { auditEvents } from "../paths/audit.ts";
 
@@ -16,7 +18,14 @@ export function buildLifeStageWorld(base: WorldPack): WorldPack {
   const world = applyLifeStageContent(buildCrossoverWorld(base));
   world.version = LIVES_WORLD_VERSION;
   world.description = `${world.description} Childhood unfolds by stage: floods, levies and illness reach a child through the household's decisions.`;
+  applyPacing(world);
   addPaths(world);
+  // New births: a household keeps seed when the store runs short, and leases what it cannot work.
+  Object.assign(world.demo!.household, { buySeedWhenShort: true, leaseUnworkedBps: 5000 });
+  // The flax-seed price depends on the district (the village farm edge), so its label names no fixed price.
+  for (const activity of world.character!.activities) {
+    if (activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === "buy-flax-seed"))) activity.text = activity.text.replace(/ \(\d+ dr\)$/, "");
+  }
   const refitted = refitEvents(world);
   // Life-paths offers (war recruiting) follow the atlas rule: a rank needs its proved qualification.
   requireMilitaryQualification(refitted);
@@ -35,5 +44,6 @@ function addPaths(world: WorldPack): void {
   for (const field of FIELD_IDS) {
     world.flags[`met-renowned-${field}`] = { label: `Met a renowned ${world.paths.fields[field].practitioner}`, initial: false };
   }
-  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents()];
+  Object.assign(world.flags, milestoneFlags());
+  world.events = [...world.events, ...inspirationEvents(), ...holdingsEvents(), ...needsEvents(), ...moveEvents(), ...milestoneEvents()];
 }

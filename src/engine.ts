@@ -36,7 +36,9 @@ import { applyAgentCommand, assignAgents, delegate } from "./demo/agents.ts";
 import { isUnavailable } from "./demo/availability.ts";
 import { takeItem } from "./capabilities/inventory.ts";
 import { decidedByOthers, inTimeFrame, lifeStageAt } from "./life-stages/index.ts";
-import { advanceDistrict, affinityJournalId, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
+import { TIERS } from "./paths/types.ts";
+import type { FieldId, PathsState } from "./paths/types.ts";
+import { advanceDistrict, affinityJournalId, farmEdgeHealth, refreshNeeds, applyStartingMaterials, changeAffinity, closeStage, eventFieldWeight, fadeAffinity, initialPaths, meetPractitioner, moveDistrict, practiceGain } from "./paths/index.ts";
 
 const MAX_COMMANDS = 50_000;
 const MAX_SAVE_LENGTH = 8_000_000;
@@ -190,7 +192,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function finish(state: LifeState, id: string, explicitCause?: string, causeContext?: string, causeKind: "choice" | "condition" = "choice"): void {
     if (state.phase === "ended") return;
-    if (world.paths) closeStage(world, state, state.age, state.age);
+    if (world.paths) {
+      // A death while the year settles can come before the finished stage was recorded.
+      if (state.age > 0 && lifeStageAt(world, state.age - 1)?.id !== lifeStageAt(world, state.age)?.id) closeStage(world, state, state.age - 1, state.age - 1);
+      closeStage(world, state, state.age, state.age);
+    }
     const ending = endingById.get(id);
     if (!ending) throw new Error(`Unknown ending: ${id}`);
     let causeText = "";
@@ -303,6 +309,13 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           const meeting = meetPractitioner(world, state, effect.field, effect.band);
           journal(state, "event", `paths-meet-${effect.field}`, meeting.text);
           apply(state, meeting.effects);
+          break;
+        }
+        case "join-district": {
+          const counts = [...state.paths!.people[effect.field]] as PathsState["people"][FieldId];
+          counts[TIERS.indexOf(effect.tier)] += 1;
+          state.paths!.people = { ...state.paths!.people, [effect.field]: counts };
+          refreshNeeds(world, state);
           break;
         }
         case "introduce-field":
@@ -795,8 +808,6 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
-    // Paths worlds: a stage that just ended is recorded as it stood at its last year.
-    if (world.paths && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
@@ -846,12 +857,22 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (repaid > 0) journal(next, "activity", "auto-debt-payment", `You repay ${repaid} ${world.economy!.currency.short} of debt from the cash left after yearly expenses.`);
     if (world.relationships) advanceRelationships(world, next, (id, text) => journal(next, "event", id, text));
     if (world.health) developHealthIncident(world, next, healthHooks(next));
+    // Paths worlds: a stage that just ended is recorded once its last year has settled.
+    if (world.paths && next.phase !== "ended" && lifeStageAt(world, completedAge)?.id !== lifeStageAt(world, next.age)?.id) closeStage(world, next, completedAge, completedAge);
     if (world.demo && next.phase !== "ended") {
       openDemoYear(demoCtx(next));
       if (world.demo.startingResources) syncEconomyStat(world, next);
     }
     // The district moves with this year's conditions (war, flood) once they are known.
-    if (world.paths && next.phase !== "ended") { advanceDistrict(world, next); fadeAffinity(world, next); }
+    if (world.paths && next.phase !== "ended") {
+      // Village edge: a year in the home fields is healthier than travelling to work.
+      const edgeHealth = farmEdgeHealth(world, next, completedAge);
+      if (edgeHealth > 0) {
+        apply(next, [{ type: "stat", stat: world.health?.stat ?? "health", delta: edgeHealth }]);
+        journal(next, "activity", "farm-edge-health", "A year of work in your own fields, close to home, leaves you stronger.");
+      }
+      advanceDistrict(world, next); fadeAffinity(world, next);
+    }
     checkEndings(next);
     resolveEvents(next, true);
     if (world.economy?.market) syncEconomyStat(world, next);

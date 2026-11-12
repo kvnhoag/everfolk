@@ -1,3 +1,4 @@
+import { materialCost } from "../paths/farm-edge.ts";
 import { productionQuote, productionReason } from "../capabilities/production.ts";
 import { vocationInventory, vocationGains, bid } from "./view.ts";
 import type { LifeState, WorldPack } from "../types.ts";
@@ -25,7 +26,7 @@ export function vocationReason(world: WorldPack, life: LifeState, id: string): s
   if (life.capabilities?.project && (action.kind === "make" || action.kind === "work" && !action.practice)) return "Finish the registered capability assessment before taking another work project.";
   if (action.kind === "buy") {
     if (ledger.stock[action.item] < action.quantity) return "The material supplier has insufficient stock.";
-    if (cash < def.materials[action.item].price * action.quantity) return "You cannot afford these materials.";
+    if (cash < materialCost(world, life, action.item, action.quantity)) return "You cannot afford these materials.";
   } else if (action.kind === "sell") {
     const lot = ledger.lots.find(l => l.item === action.item && l.quantity > 0);
     if (!(vocationInventory(life)[action.item] > 0)) return "Produce this item before selling it.";
@@ -84,7 +85,8 @@ export function applyVocation(world: WorldPack, life: LifeState, id: string): st
   const def = world.vocations!, ledger = life.vocations!, action = def.actions[id], cash = life.economy!;
   let text = "";
   if (action.kind === "buy") {
-    const price = def.materials[action.item].price * action.quantity;
+    // Farm inputs cost less in a farming district (paths worlds); the supplier receives exactly what is paid.
+    const price = materialCost(world, life, action.item, action.quantity);
     cash.cash -= price; ledger.accounts.merchant += price; ledger.stock[action.item] -= action.quantity;
     add(life, action.item, action.quantity, 1);
     text = `Bought ${action.quantity} ${action.item} for ${price} dr.`;

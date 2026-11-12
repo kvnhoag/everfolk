@@ -1,6 +1,6 @@
 /** Free-play Alexandria: fields of work, districts and the people living in them. */
 import type { Origin } from "../../types.ts";
-import type { FieldId, PathsDefinition, TierCounts } from "../types.ts";
+import type { FarmEdge, FieldId, PathsDefinition, TierCounts } from "../types.ts";
 
 type Row = Record<FieldId, [demand: number, people: TierCounts]>;
 
@@ -24,6 +24,12 @@ const PROFILES: Record<string, { title: string; origins: string[]; rows: Row }> 
     research: [6, [3, 4, 2, 2]], civic: [6, [2, 5, 2, 2]], trade: [3, [1, 2, 1, 0]], soldiering: [4, [1, 3, 1, 1]] } },
 };
 
+/**
+ * The village farms at home: neighbours share seed and channel work (inputs at 70%), and a year in
+ * one's own fields is healthier than travel to work (+1 health). The user's decision, 2026-11-12.
+ */
+const FARM_EDGES: Record<string, FarmEdge> = { "delta-village": { inputBps: 7000, healthPerYear: 1 } };
+
 const field = (title: string, practitioner: string, skills: string[], jobs: string[], specializations: string[]) =>
   ({ title, practitioner, skills, jobs, specializations });
 
@@ -39,7 +45,7 @@ export const ALEXANDRIA_PATHS: PathsDefinition = {
     soldiering: field("Soldiering", "soldier", ["warfare", "strength", "endurance"], ["soldier", "officer", "general"], ["Military practice", "Conditioning"]),
   },
   districts: Object.fromEntries(Object.entries(PROFILES).map(([id, { title, origins, rows }]) => [id, {
-    title, origins,
+    title, origins, ...(FARM_EDGES[id] ? { farmEdge: FARM_EDGES[id] } : {}),
     profile: Object.fromEntries(Object.entries(rows).map(([key, [demand, people]]) => [key, { demand, people }])) as PathsDefinition["districts"][string]["profile"],
   }])),
   pay: { minBps: 7000, maxBps: 16000, scarceBps: 12000, crowdedBps: 8500 },

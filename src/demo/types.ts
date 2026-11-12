@@ -85,6 +85,10 @@ export interface HouseholdConfig {
   parentsStopEatingAfterYears: number;
   /** Remaining field help after handing over management. Older packs default to none. */
   retiredParentLabourBps?: number;
+  /** When the store runs short, also buy next year's grain seed (food first). Older packs: off. */
+  buySeedWhenShort?: boolean;
+  /** Share of an unworked plot's crop the household keeps when a neighbour works it. Older packs: no lease. */
+  leaseUnworkedBps?: number;
   /** Health lost per 10% of the household ration missing, capped. */
   hungerHealthPer10Pct: number;
   hungerHealthCap: number;

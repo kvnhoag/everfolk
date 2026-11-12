@@ -28,6 +28,15 @@ export interface DistrictDefinition {
   origins: string[];
   /** Per field: the workers the district needs, and its starting people by tier. */
   profile: Record<FieldId, { demand: number; people: TierCounts }>;
+  /** A farming district: neighbours share seed and channel work, and the fields are at home. */
+  farmEdge?: FarmEdge;
+}
+
+export interface FarmEdge {
+  /** Price of farm inputs (flax seed, channel and store work) here, in basis points of the usual. */
+  inputBps: number;
+  /** Health gained in a year of farm work at home here. */
+  healthPerYear: number;
 }
 
 export interface PathsDefinition {

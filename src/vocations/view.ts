@@ -1,3 +1,4 @@
+import { materialCost } from "../paths/farm-edge.ts";
 import { productionQuote } from "../capabilities/production.ts";
 import type { LifeState, WorldPack } from "../types.ts";
 
@@ -21,7 +22,7 @@ export function vocationGains(world: WorldPack, id: string): Record<string, numb
 export function vocationCashDelta(world: WorldPack, life: LifeState, id: string): number {
   const action = world.vocations?.actions[id];
   if (!action) return 0;
-  if (action.kind === "buy") return -world.vocations!.materials[action.item].price * action.quantity;
+  if (action.kind === "buy") return -materialCost(world, life, action.item, action.quantity);
   if (action.kind === "work") return action.pay - action.fee;
   if (action.kind === "make") return life.vocations?.project?.recipe === action.recipe ? 0 : -productionQuote(world, life, action.recipe, action.quantity ?? 1, action.inspected, action.controlledFiring).fee;
   const lot = life.vocations?.lots.find(l => l.item === action.item && l.quantity > 0);

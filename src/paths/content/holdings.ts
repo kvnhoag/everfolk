@@ -169,8 +169,9 @@ const SPECS: Spec[] = [
     ] },
   ...(["ceramics", "clothing", "sculpture"] as const).map((field): Spec => {
     const tool = { ceramics: "a potter's turning tool", clothing: "a weaver's shuttle", sculpture: "a carver's chisel" }[field];
-    return { id: `holdings-gift-of-tools-${field}`, title: "A gift of tools", fields: [field], when: { type: "introduced", field }, stages: WORK_YEARS, max: 1,
-      text: `The master you met sends you ${tool}, worn smooth by years of use.`, effects: [pull(field, 5, `a gift of ${tool}`)] };
+    return { id: `holdings-gift-of-tools-${field}`, title: "The use of a master's tools", fields: [field], when: { type: "introduced", field }, stages: WORK_YEARS, max: 1,
+      // No item is added (events never create goods), so the master lends the use of the tool rather than giving it.
+      text: `The master you met lets you work with ${tool}, worn smooth by years of use, whenever you come by the workshop.`, effects: [pull(field, 5, `working with ${tool}`)] };
   }),
 ];
 

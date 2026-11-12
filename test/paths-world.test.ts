@@ -81,3 +81,21 @@ test("war recruiting offers drilling to anyone not yet qualified to sign, so the
   const drill = recruiting.choices.find(choice => choice.id.endsWith("-drill"))!;
   assert.deepEqual(drill.when, { type: "not", condition: { type: "capability", node: "M4" } });
 });
+
+test("military service builds the body it demands, and command builds the voice", () => {
+  const yearly = (job: string) => world.character!.jobs.find(item => item.id === job)!.yearlyEffects!.flatMap(effect => effect.type === "skill" ? [`${effect.skill}+${effect.delta}`] : []);
+  for (const job of ["soldier", "officer", "general"]) for (const gain of ["warfare+2", "strength+1", "endurance+1"]) assert.ok(yearly(job).includes(gain), `${job}: ${yearly(job).join(", ")}`);
+  for (const job of ["officer", "general"]) assert.ok(yearly(job).includes("oratory+1"), job);
+  assert.ok(!yearly("soldier").includes("oratory+1"));
+});
+
+test("a district that needs none of a trade says so plainly", async () => {
+  const { fieldNeedsView } = await import("../src/paths/index.ts");
+  const life = structuredClone(engine.start("no-demand")) as LifeState;
+  life.paths!.district = "delta-village";
+  const reason = () => fieldNeedsView(world, life).find(need => need.field === "sculpture")!.reason;
+  life.paths!.people = { ...life.paths!.people, sculpture: [0, 0, 0, 0] };
+  assert.equal(reason(), "No sculptors work in a Delta village, and none are needed.");
+  life.paths!.people = { ...life.paths!.people, sculpture: [0, 1, 0, 0] };
+  assert.equal(reason(), "1 sculptor works in a Delta village, though the district has no regular need of one.");
+});

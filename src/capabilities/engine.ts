@@ -24,7 +24,7 @@ export function requirementReasons(world: WorldPack, life: LifeState, id: string
 }
 export function capabilityProgress(world: WorldPack, life: LifeState, id: string): { done: number; required: number; complete: boolean } {
   if (id.startsWith("F")) return farmProofProgress(world, life, id);
-  const required = ruleFor(id)?.years ?? 1;
+  const required = world.capabilities?.nodes.find(node => node.id === id)?.proofYears ?? ruleFor(id)?.years ?? 1;
   const accepted = life.capabilities?.evidence.filter(e => e.nodeId === id && e.data.qualifies === true) ?? [];
   let done = new Set(accepted.map(e => e.age)).size;
   if (id === "AS5" && !["clay-model", "wood-relief-practice"].every(kind => accepted.some(e => e.data.exercise === kind))) done = Math.min(done, 1);

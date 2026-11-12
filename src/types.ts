@@ -1,7 +1,7 @@
 import type { CapabilityDefinition, CapabilityState } from "./capabilities/types.ts";
 import type { VocationDefinition, VocationState } from "./vocations/types.ts";
 import type { DecisionScope, DependentResolution, LifeStagesDefinition } from "./life-stages/types.ts";
-import type { FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
+import type { Tier, FieldId, NeedLabel, PathsDefinition, PathsState, StageRecord } from "./paths/types.ts";
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
@@ -49,6 +49,8 @@ export type Effect =
   | { type: "move-district"; district: string; reason: string }
   | { type: "use-material"; item: string; quantity: number; cause: string }
   | { type: "introduce-field"; field: FieldId }
+  /** Paths worlds: the life is counted among its current district's people of a field, at a tier. */
+  | { type: "join-district"; field: FieldId; tier: Tier }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }

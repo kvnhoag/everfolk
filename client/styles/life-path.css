@@ -1,0 +1,15 @@
+.life-path { display: grid; gap: 1rem; }
+.life-path-block h4 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+.life-path-block ul, .life-path-block ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.life-path-empty { margin: 0; opacity: 0.75; }
+.life-path-need { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 0.75rem; padding: 0.5rem 0.65rem; border: 1px solid currentColor; border-radius: 6px; border-color: color-mix(in srgb, currentColor 20%, transparent); }
+.life-path-need p { grid-column: 1 / -1; margin: 0; font-size: 0.85rem; opacity: 0.8; }
+.life-path-need.is-scarce .life-path-pay { font-weight: 700; }
+.life-path-affinities li { display: grid; grid-template-columns: minmax(6rem, 9rem) 1fr; align-items: center; gap: 0.25rem 0.75rem; }
+.life-path-affinities p { grid-column: 1 / -1; margin: 0; font-size: 0.85rem; opacity: 0.8; }
+.life-path-bar { display: block; height: 0.5rem; border-radius: 999px; background: color-mix(in srgb, currentColor 12%, transparent); overflow: hidden; }
+.life-path-bar > span { display: block; height: 100%; background: currentColor; opacity: 0.7; }
+.life-path-people li { font-size: 0.9rem; }
+.life-path-records li { display: grid; gap: 0.1rem; }
+.life-path-record-stage { font-size: 0.8rem; opacity: 0.75; }
+@media (max-width: 600px) { .life-path-affinities li { grid-template-columns: 1fr; } }

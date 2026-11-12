@@ -64,3 +64,18 @@ test("older free-play lives have no stage records", () => {
   for (let i = 0; i < 20 && life.phase !== "ended"; i++) life = life.phase === "choice" ? old.choose(life, old.getChoices(life)[0].id) : old.advance(life);
   assert.equal(life.stageRecords, undefined);
 });
+
+test("a stage's record includes its last year's work", async () => {
+  const { default: lives } = await import("../worlds/demo/alexandria-lives-4.json", { with: { type: "json" } });
+  const shippedWorld = lives as unknown as import("../src/types.ts").WorldPack;
+  const shippedEngine = createEngine(shippedWorld);
+  let life = shippedEngine.start("stage-record-last-year");
+  for (let guard = 0; life.age < 15 && life.phase !== "ended" && guard < 600; guard++) life = life.phase === "choice" ? shippedEngine.choose(life, shippedEngine.getChoices(life)[0].id) : shippedEngine.advance(life);
+  const draft = structuredClone(life);
+  draft.character!.jobId = "farmhand";
+  draft.phase = "ready"; draft.pendingEventId = null;
+  const after = shippedEngine.advance(draft);
+  const youth = after.stageRecords!.find(record => record.stageId === "youth")!;
+  assert.equal(youth.toAge, 15);
+  assert.equal(youth.topSkills.farming, after.character!.skills.farming, "the farmhand's last-year farming gain is in the record");
+});

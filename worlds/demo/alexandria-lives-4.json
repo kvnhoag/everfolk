@@ -314,6 +314,42 @@
     "met-renowned-soldiering": {
       "label": "Met a renowned soldier",
       "initial": false
+    },
+    "recognised-fc": {
+      "label": "Recognised among the growers",
+      "initial": false
+    },
+    "recognised-fr": {
+      "label": "Recognised among the growers",
+      "initial": false
+    },
+    "recognised-at": {
+      "label": "Recognised among the weavers",
+      "initial": false
+    },
+    "recognised-ac": {
+      "label": "Recognised among the potters",
+      "initial": false
+    },
+    "recognised-as": {
+      "label": "Recognised among the sculptors",
+      "initial": false
+    },
+    "recognised-ps": {
+      "label": "Recognised among the scholars",
+      "initial": false
+    },
+    "recognised-pp": {
+      "label": "Recognised among the officials",
+      "initial": false
+    },
+    "recognised-t": {
+      "label": "Recognised among the traders",
+      "initial": false
+    },
+    "recognised-m": {
+      "label": "Recognised among the soldiers",
+      "initial": false
     }
   },
   "origins": [
@@ -1376,16 +1412,26 @@
         "description": "A soldier appointment requires demonstrated drill and equipment, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 18,
         "requirements": {
-          "strength": 16,
-          "endurance": 16,
-          "warfare": 8,
-          "literacy": 8
+          "strength": 12,
+          "endurance": 12,
+          "warfare": 10,
+          "literacy": 6
         },
         "yearlyEffects": [
           {
             "type": "skill",
             "skill": "warfare",
             "delta": 2
+          },
+          {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
           },
           {
             "type": "stat",
@@ -1405,16 +1451,31 @@
         "description": "A officer appointment requires demonstrated small-unit coordination, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 22,
         "requirements": {
-          "warfare": 40,
-          "oratory": 24,
-          "strength": 24,
-          "endurance": 32
+          "warfare": 30,
+          "oratory": 16,
+          "strength": 18,
+          "endurance": 22
         },
         "yearlyEffects": [
           {
             "type": "skill",
             "skill": "warfare",
             "delta": 2
+          },
+          {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "oratory",
+            "delta": 1
           },
           {
             "type": "stat",
@@ -1434,16 +1495,31 @@
         "description": "A general appointment requires demonstrated strategic command, physical preparation and recorded Knowledge. Wages and rations come from finite army accounts.",
         "minAge": 28,
         "requirements": {
-          "warfare": 72,
-          "oratory": 40,
-          "strength": 40,
-          "endurance": 48
+          "warfare": 54,
+          "oratory": 28,
+          "strength": 30,
+          "endurance": 34
         },
         "yearlyEffects": [
           {
             "type": "skill",
             "skill": "warfare",
             "delta": 2
+          },
+          {
+            "type": "skill",
+            "skill": "strength",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "endurance",
+            "delta": 1
+          },
+          {
+            "type": "skill",
+            "skill": "oratory",
+            "delta": 1
           },
           {
             "type": "stat",
@@ -4409,7 +4485,7 @@
                 "delta": 2
               }
             ],
-            "weight": 15,
+            "weight": 40,
             "weightModifiers": [
               {
                 "when": {
@@ -4486,7 +4562,7 @@
             "id": "officer-refused",
             "text": "No commission is offered. You return to your current duties.",
             "effects": [],
-            "weight": 85
+            "weight": 60
           }
         ],
         "when": {
@@ -4537,7 +4613,7 @@
         },
         "category": "career",
         "minAge": 22,
-        "cooldownYears": 3,
+        "cooldownYears": 2,
         "opportunity": {
           "label": "Receive an officer's commission",
           "outcomeIds": [
@@ -19651,7 +19727,7 @@
       },
       {
         "id": "v-buy-flax-seed",
-        "text": "Buy 8 flax seed (24 dr)",
+        "text": "Buy 8 flax seed",
         "category": "career",
         "minAge": 12,
         "usesYearlyActivity": false,
@@ -67284,8 +67360,8 @@
     },
     {
       "id": "holdings-gift-of-tools-ceramics",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a potter's turning tool, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a potter's turning tool, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67311,15 +67387,15 @@
           "type": "affinity",
           "field": "ceramics",
           "delta": 5,
-          "source": "a gift of a potter's turning tool"
+          "source": "working with a potter's turning tool"
         }
       ],
       "choices": []
     },
     {
       "id": "holdings-gift-of-tools-clothing",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a weaver's shuttle, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a weaver's shuttle, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67345,15 +67421,15 @@
           "type": "affinity",
           "field": "clothing",
           "delta": 5,
-          "source": "a gift of a weaver's shuttle"
+          "source": "working with a weaver's shuttle"
         }
       ],
       "choices": []
     },
     {
       "id": "holdings-gift-of-tools-sculpture",
-      "title": "A gift of tools",
-      "text": "The master you met sends you a carver's chisel, worn smooth by years of use.",
+      "title": "The use of a master's tools",
+      "text": "The master you met lets you work with a carver's chisel, worn smooth by years of use, whenever you come by the workshop.",
       "trigger": {
         "type": "random",
         "weight": 2
@@ -67379,7 +67455,7 @@
           "type": "affinity",
           "field": "sculpture",
           "delta": 5,
-          "source": "a gift of a carver's chisel"
+          "source": "working with a carver's chisel"
         }
       ],
       "choices": []
@@ -69185,6 +69261,1975 @@
           "type": "stat",
           "stat": "bonds",
           "delta": -1
+        }
+      ]
+    },
+    {
+      "id": "milestone-fc5",
+      "title": "Word gets around",
+      "text": "Neighbours have noticed how your fields come up. A younger grower asks to work beside you and learn your sowing.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "FC5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-fc5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-fc5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "teaching other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-fc5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-fc5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-fc8",
+      "title": "An invitation",
+      "text": "The village elders ask you to sit with them when the channel shares and sowing days are set.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "FC8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-fc8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-fc8-accept-done",
+              "text": "You take your place among the growers who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 10,
+                  "source": "the respect of other growers"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-fc8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-fc8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-fc10",
+      "title": "Recognised",
+      "text": "People come from other villages to see how you sow. Your name is used when growers argue about the right way.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FC10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-fc",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "farming",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-fc",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-fr5",
+      "title": "Word gets around",
+      "text": "In a lean year your household still ate. A neighbour asks you to show their son how you keep your stores.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "FR5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-fr5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-fr5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "teaching other growers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-fr5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-fr5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-fr8",
+      "title": "An invitation",
+      "text": "The landholder asks you to advise on how the estate's stores should be kept against bad floods.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "FR8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-fr8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-fr8-accept-done",
+              "text": "You take your place among the growers who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 10,
+                  "source": "the respect of other growers"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-fr8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-fr8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-fr10",
+      "title": "Recognised",
+      "text": "Your stores carried your household through floods that emptied others. The village counts you among its wisest growers.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "FR10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-fr",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "farming"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "farming",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-fr",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-at5",
+      "title": "Word gets around",
+      "text": "Your cloth is noticed at the market. A girl from the next street asks to learn at your loom.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AT5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-at5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-at5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 5,
+                  "source": "teaching other weavers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-at5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-at5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "craft",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-at8",
+      "title": "An invitation",
+      "text": "The cloth merchants' association invites you to inspect cloth for them before it is sold on.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AT8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "clothing"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-at8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-at8-accept-done",
+              "text": "You take your place among the weavers who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "clothing",
+                  "delta": 10,
+                  "source": "the respect of other weavers"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-at8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-at8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-at10",
+      "title": "Recognised",
+      "text": "Buyers ask for cloth from your loom by name. You are counted among the finest weavers of the district.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AT10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-at",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "clothing"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "clothing",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-at",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-ac5",
+      "title": "Word gets around",
+      "text": "Your jars are sound and people say so. A boy asks to sweep your workshop if you will teach him the wheel.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AC5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-ac5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-ac5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 5,
+                  "source": "teaching other potters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-ac5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-ac5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "pottery",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-ac8",
+      "title": "An invitation",
+      "text": "A workshop master invites you to share his kiln and teach his apprentices.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AC8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "ceramics"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-ac8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-ac8-accept-done",
+              "text": "You take your place among the potters who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "ceramics",
+                  "delta": 10,
+                  "source": "the respect of other potters"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-ac8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-ac8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-ac10",
+      "title": "Recognised",
+      "text": "Your vessels are copied by other potters. You are counted among the master potters of the district.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AC10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-ac",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "ceramics"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "ceramics",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-ac",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-as5",
+      "title": "Word gets around",
+      "text": "A carved piece of yours stands where people pass. A young carver asks to hold your tools and learn.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AS5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-as5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-as5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 5,
+                  "source": "teaching other sculptors"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-as5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-as5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "sculpture",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-as8",
+      "title": "An invitation",
+      "text": "A temple builder invites you to carve for the new courtyard alongside the yard's masters.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "AS8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-as8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-as8-accept-done",
+              "text": "You take your place among the sculptors who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "sculpture",
+                  "delta": 10,
+                  "source": "the respect of other sculptors"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-as8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-as8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-as10",
+      "title": "Recognised",
+      "text": "Your figures are pointed out to visitors. You are counted among the renowned sculptors of the city.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "AS10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-as",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "sculpture"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "sculpture",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-as",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-ps5",
+      "title": "Word gets around",
+      "text": "Your careful observations are talked about. A student asks to copy your notes and follow your method.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "PS5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-ps5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-ps5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 5,
+                  "source": "teaching other scholars"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-ps5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-ps5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "philosophy",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-ps8",
+      "title": "An invitation",
+      "text": "Scholars near the court invite you to read your observations to them and answer their questions.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "PS8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "research"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-ps8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-ps8-accept-done",
+              "text": "You take your place among the scholars who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "research",
+                  "delta": 10,
+                  "source": "the respect of other scholars"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-ps8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-ps8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-ps10",
+      "title": "Recognised",
+      "text": "Your work is copied and argued over by other scholars. You are counted among the renowned scholars of Alexandria.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PS10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-ps",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "research"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "research",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-ps",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-pp5",
+      "title": "Word gets around",
+      "text": "Your fair settling of disputes is remembered. A young clerk asks to learn how you prepare a hearing.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "PP5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-pp5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-pp5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 5,
+                  "source": "teaching other officials"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-pp5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-pp5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "oratory",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-pp8",
+      "title": "An invitation",
+      "text": "The district's officials invite you to speak for the district at the next gathering.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "PP8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "civic"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-pp8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-pp8-accept-done",
+              "text": "You take your place among the officials who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "civic",
+                  "delta": 10,
+                  "source": "the respect of other officials"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-pp8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-pp8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-pp10",
+      "title": "Recognised",
+      "text": "People bring their disputes to you before they go to any office. You are counted among the respected officials of the city.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "PP10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-pp",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "civic"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "civic",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-pp",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-t5",
+      "title": "Word gets around",
+      "text": "Your accounts always balance and merchants say so. A young porter asks to learn your reckoning.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "T5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-t5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-t5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 5,
+                  "source": "teaching other traders"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-t5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-t5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "reckoning",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-t8",
+      "title": "An invitation",
+      "text": "A trading house invites you to its table when cargoes are bought and prices set.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "T8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "trade"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-t8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-t8-accept-done",
+              "text": "You take your place among the traders who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "trade",
+                  "delta": 10,
+                  "source": "the respect of other traders"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-t8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-t8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-t10",
+      "title": "Recognised",
+      "text": "Your word settles a price. You are counted among the renowned traders of the harbour.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "T10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-t",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "trade"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "trade",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-t",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "milestone-m5",
+      "title": "Word gets around",
+      "text": "Your drill is steady and the officers notice. A new recruit is placed beside you to learn from you.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "M5"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-m5-teach",
+          "text": "Take them on and teach",
+          "outcomes": [
+            {
+              "id": "milestone-m5-teach-done",
+              "text": "Teaching makes you explain what you only knew by hand. Your standing grows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 1
+                },
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 1
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "teaching other soldiers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-m5-own-work",
+          "text": "Keep to your own work",
+          "outcomes": [
+            {
+              "id": "milestone-m5-own-work-done",
+              "text": "You keep your hours for your own work, and it shows.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-m8",
+      "title": "An invitation",
+      "text": "The officers invite you to plan the season's exercises with them.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "maxOccurrences": 1,
+      "when": {
+        "type": "capability",
+        "node": "M8"
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "scope": "work",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "milestone-m8-accept",
+          "text": "Accept the invitation",
+          "outcomes": [
+            {
+              "id": "milestone-m8-accept-done",
+              "text": "You take your place among the soldiers who are asked for their judgement.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "demo",
+                  "effect": {
+                    "kind": "reputation",
+                    "delta": 2
+                  }
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "the respect of other soldiers"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "milestone-m8-decline",
+          "text": "Decline and keep working",
+          "outcomes": [
+            {
+              "id": "milestone-m8-decline-done",
+              "text": "You send your thanks. There is work waiting.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milestone-m10",
+      "title": "Recognised",
+      "text": "Soldiers tell stories about your command. You are counted among the renowned soldiers of the garrison.",
+      "trigger": {
+        "type": "year",
+        "at": -350
+      },
+      "mode": "automatic",
+      "when": {
+        "type": "all",
+        "conditions": [
+          {
+            "type": "capability",
+            "node": "M10"
+          },
+          {
+            "type": "flag",
+            "flag": "recognised-m",
+            "value": false
+          }
+        ]
+      },
+      "stages": [
+        "adulthood",
+        "later-life"
+      ],
+      "fields": [
+        "soldiering"
+      ],
+      "maxOccurrences": 1,
+      "evidence": "fictional",
+      "choices": [],
+      "effects": [
+        {
+          "type": "demo",
+          "effect": {
+            "kind": "reputation",
+            "delta": 3
+          }
+        },
+        {
+          "type": "join-district",
+          "field": "soldiering",
+          "tier": "renowned"
+        },
+        {
+          "type": "flag",
+          "flag": "recognised-m",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "youth-gymnasium",
+      "title": "Games at the gymnasium",
+      "text": "Young people race and wrestle in the gymnasium yard in the cool of the evening. A trainer is watching for anyone with promise.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "maxOccurrences": 2,
+      "cooldownYears": 2,
+      "when": {
+        "type": "stat",
+        "stat": "health",
+        "op": "gte",
+        "value": 40
+      },
+      "stages": [
+        "youth"
+      ],
+      "scope": "personal",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "youth-gymnasium-train",
+          "text": "Run and wrestle with them",
+          "outcomes": [
+            {
+              "id": "youth-gymnasium-train-done",
+              "text": "You are sore for days, and stronger for it.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "strength",
+                  "delta": 3
+                },
+                {
+                  "type": "skill",
+                  "skill": "endurance",
+                  "delta": 3
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 5,
+                  "source": "the gymnasium yard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "youth-gymnasium-watch",
+          "text": "Watch from the wall",
+          "outcomes": [
+            {
+              "id": "youth-gymnasium-watch-done",
+              "text": "You watch and go home before dark.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youth-drill-ground",
+      "title": "The drill ground",
+      "text": "Recruits drill outside the walls. An old soldier says that anyone who wants to serve at eighteen should learn drill and equipment first.",
+      "trigger": {
+        "type": "random",
+        "weight": 2
+      },
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "when": {
+        "type": "any",
+        "conditions": [
+          {
+            "type": "district",
+            "district": "garrison"
+          },
+          {
+            "type": "demo",
+            "condition": {
+              "kind": "year",
+              "family": "army",
+              "level": "war"
+            }
+          }
+        ]
+      },
+      "stages": [
+        "youth"
+      ],
+      "scope": "personal",
+      "fields": [
+        "soldiering"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "youth-drill-ground-drill",
+          "text": "Join the drill when you can",
+          "outcomes": [
+            {
+              "id": "youth-drill-ground-drill-done",
+              "text": "You learn to hold a line and carry the weight of equipment.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "delta": 3
+                },
+                {
+                  "type": "skill",
+                  "skill": "endurance",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "soldiering",
+                  "delta": 10,
+                  "source": "drilling with recruits"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "youth-drill-ground-leave",
+          "text": "It is not for you",
+          "outcomes": [
+            {
+              "id": "youth-drill-ground-leave-done",
+              "text": "You walk on.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "village-seed-exchange",
+      "title": "Seed from the neighbours",
+      "text": "Before sowing, the village families swap seed and share the work of clearing the channels. Nobody pays the merchant's price for what a neighbour has spare.",
+      "trigger": {
+        "type": "random",
+        "weight": 3
+      },
+      "maxOccurrences": 1,
+      "cooldownYears": 4,
+      "when": {
+        "type": "district",
+        "district": "delta-village"
+      },
+      "stages": [
+        "youth",
+        "adulthood"
+      ],
+      "scope": "work",
+      "fields": [
+        "farming"
+      ],
+      "evidence": "fictional",
+      "choices": [
+        {
+          "id": "village-seed-exchange-join",
+          "text": "Join the exchange and the channel work",
+          "outcomes": [
+            {
+              "id": "village-seed-exchange-join-done",
+              "text": "You learn whose seed comes up best, and the channels are clear before the water.",
+              "weight": 1,
+              "effects": [
+                {
+                  "type": "skill",
+                  "skill": "farming",
+                  "delta": 2
+                },
+                {
+                  "type": "affinity",
+                  "field": "farming",
+                  "delta": 5,
+                  "source": "the village seed exchange"
+                },
+                {
+                  "type": "stat",
+                  "stat": "bonds",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "village-seed-exchange-keep",
+          "text": "Keep to your own household",
+          "outcomes": [
+            {
+              "id": "village-seed-exchange-keep-done",
+              "text": "You keep your own seed and your own counsel.",
+              "weight": 1,
+              "effects": []
+            }
+          ]
         }
       ]
     }
@@ -72108,7 +74153,9 @@
       "spinBoltsPer100Labour": 10,
       "dealerExtraCapacity": 1500,
       "reckoningSpoilageCutBpsPerPoint": 50,
-      "reckoningSpoilageCutCapBps": 4000
+      "reckoningSpoilageCutCapBps": 4000,
+      "buySeedWhenShort": true,
+      "leaseUnworkedBps": 5000
     },
     "market": {
       "start": {
@@ -74142,10 +76189,11 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 8
+          "strength": 6
         },
-        "proof": "Complete 2 distinct years of controlled lifting and load handling, paying the exercise access fee.",
-        "reward": "Develop Strength through physical work. Health remains a separate current condition."
+        "proof": "Complete 1 distinct years of controlled lifting and load handling, paying the exercise access fee.",
+        "reward": "Develop Strength through physical work. Health remains a separate current condition.",
+        "proofYears": 1
       },
       {
         "id": "F2",
@@ -74230,11 +76278,12 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 12,
-          "endurance": 16
+          "strength": 10,
+          "endurance": 12
         },
-        "proof": "Complete 2 distinct years of paced endurance work with recovery and paid access.",
-        "reward": "Combine physical preparation with basic Knowledge to begin military foundations."
+        "proof": "Complete 1 distinct years of paced endurance work with recovery and paid access.",
+        "reward": "Combine physical preparation with basic Knowledge to begin military foundations.",
+        "proofYears": 1
       },
       {
         "id": "F3S",
@@ -74354,17 +76403,18 @@
           ]
         },
         "minimumProficiency": {
-          "strength": 16,
-          "endurance": 16,
-          "warfare": 8,
-          "literacy": 8
+          "strength": 12,
+          "endurance": 12,
+          "warfare": 10,
+          "literacy": 6
         },
-        "proof": "Complete 2 pre-service drill years. Demonstrate equipment handling and comprehension of orders while medically fit.",
+        "proof": "Complete 1 pre-service drill years. Demonstrate equipment handling and comprehension of orders while medically fit.",
         "reward": "Qualify for Soldier enlistment at age 18. A career appointment is a separate action.",
         "minimumStats": {
           "health": 45,
           "knowledge": 8
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "P4",
@@ -74454,8 +76504,9 @@
         "minimumProficiency": {
           "craft": 32
         },
-        "proof": "Complete 2 basic-garment work years, each producing at least 1 quality-1 garment from paid materials.",
-        "reward": "Unlock fitted-garment method, quality cap 2; garment batch limit becomes 4."
+        "proof": "Complete 3 basic-garment work years, each producing at least 1 quality-1 garment from paid materials.",
+        "reward": "Unlock fitted-garment method, quality cap 2; garment batch limit becomes 4.",
+        "proofYears": 3
       },
       {
         "id": "FC5",
@@ -74503,14 +76554,15 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 24,
-          "endurance": 24
+          "warfare": 18,
+          "endurance": 18
         },
-        "proof": "Complete 2 active drill years while serving. Each proof settles only after a funded, fully rationed service year.",
+        "proof": "Complete 1 active drill years while serving. Each proof settles only after a funded, fully rationed service year.",
         "reward": "Develop formation skills and open more demanding field exercises.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP5",
@@ -74624,8 +76676,9 @@
         "minimumProficiency": {
           "craft": 40
         },
-        "proof": "Complete 2 quality-2 garment batches; each must reconcile cloth/thread consumption.",
-        "reward": "Garment quality cap becomes 3. Unlock dyed garments: 1 pigment/garment for +1 recipe quality before cap, base ask 130 dr; dye/colour-specific orders check actual pigment use."
+        "proof": "Complete 3 quality-2 garment batches; each must reconcile cloth/thread consumption.",
+        "reward": "Garment quality cap becomes 3. Unlock dyed garments: 1 pigment/garment for +1 recipe quality before cap, base ask 130 dr; dye/colour-specific orders check actual pigment use.",
+        "proofYears": 3
       },
       {
         "id": "FC6",
@@ -74641,8 +76694,9 @@
         "minimumProficiency": {
           "farming": 40
         },
-        "proof": "Complete 2 crop-care work years.",
-        "reward": "Crop-care activity gives +8% gross yield in its work year instead of the +5% soil-preparation action; they are alternative annual actions."
+        "proof": "Complete 3 crop-care work years.",
+        "reward": "Crop-care activity gives +8% gross yield in its work year instead of the +5% soil-preparation action; they are alternative annual actions.",
+        "proofYears": 3
       },
       {
         "id": "FR6",
@@ -74674,15 +76728,16 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 32,
-          "reckoning": 20,
-          "literacy": 16
+          "warfare": 24,
+          "reckoning": 14,
+          "literacy": 12
         },
-        "proof": "Complete 2 service work years reconciling the army's actual wage and ration accounts.",
+        "proof": "Complete 1 service work years reconciling the army's actual wage and ration accounts.",
         "reward": "Learn to account for finite army stores and payments; employer funds remain outside personal cash.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP6",
@@ -74790,8 +76845,9 @@
         "minimumProficiency": {
           "craft": 48
         },
-        "proof": "Complete 2 inspected quality-2 garment orders; all units must meet the quoted specification.",
-        "reward": "Garment quality cap becomes 3; batch limit 6. Unlock fit/finish commissions with explicit quoted payment."
+        "proof": "Complete 3 inspected quality-2 garment orders; all units must meet the quoted specification.",
+        "reward": "Garment quality cap becomes 3; batch limit 6. Unlock fit/finish commissions with explicit quoted payment.",
+        "proofYears": 3
       },
       {
         "id": "FC7",
@@ -74807,8 +76863,9 @@
         "minimumProficiency": {
           "farming": 48
         },
-        "proof": "Complete 2 maintained-channel harvests, under any flood condition.",
-        "reward": "Maintained-channel low-flood factor becomes 0.60; maintenance remains 8 dr/plot/year; replaces the 0.55 effect."
+        "proof": "Complete 3 maintained-channel harvests, under any flood condition.",
+        "reward": "Maintained-channel low-flood factor becomes 0.60; maintenance remains 8 dr/plot/year; replaces the 0.55 effect.",
+        "proofYears": 3
       },
       {
         "id": "FR7",
@@ -74839,16 +76896,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 40,
-          "oratory": 24,
-          "strength": 24,
-          "endurance": 32
+          "warfare": 30,
+          "oratory": 16,
+          "strength": 18,
+          "endurance": 22
         },
-        "proof": "Complete 2 active unit exercises with settled service accounts and full rations.",
-        "reward": "Qualify for Officer opportunities after at least 4 proved service years.",
+        "proof": "Complete 1 active unit exercises with settled service accounts and full rations.",
+        "reward": "Qualify for Officer opportunities after at least 2 proved service years.",
         "minimumStats": {
           "health": 45
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP7",
@@ -74959,8 +77017,9 @@
           "craft": 56,
           "reckoning": 24
         },
-        "proof": "Complete 2 quality-3 garment batches of at least 4 units each.",
-        "reward": "Garment batch limit becomes 8. For batches of at least 4, total base cloth requirement becomes ceil(recipe cloth units * quantity * 7 / 8), applied to the actual recipe base cloth requirement; thread and pigment unchanged."
+        "proof": "Complete 3 quality-3 garment batches of at least 4 units each.",
+        "reward": "Garment batch limit becomes 8. For batches of at least 4, total base cloth requirement becomes ceil(recipe cloth units * quantity * 7 / 8), applied to the actual recipe base cloth requirement; thread and pigment unchanged.",
+        "proofYears": 3
       },
       {
         "id": "FC8",
@@ -75010,16 +77069,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 48,
-          "oratory": 28,
-          "reckoning": 24
+          "warfare": 36,
+          "oratory": 20,
+          "reckoning": 16
         },
-        "proof": "As an Officer, complete 2 tactical work years, joining reasoned inquiry with reconciled service evidence.",
+        "proof": "As an Officer, complete 1 tactical work years, joining reasoned inquiry with reconciled service evidence.",
         "reward": "Open advanced command preparation through Knowledge and practical military experience.",
         "minimumStats": {
           "health": 45,
           "knowledge": 16
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP8",
@@ -75127,8 +77187,9 @@
         "minimumProficiency": {
           "craft": 64
         },
-        "proof": "Deliver 2 quality-3 garment contracts on time, with recorded payment and no unpaid supplier balance.",
-        "reward": "Garment quality cap becomes 4; batch limit 10. Unlock ceremonial garment recipe."
+        "proof": "Deliver 3 quality-3 garment contracts on time, with recorded payment and no unpaid supplier balance.",
+        "reward": "Garment quality cap becomes 4; batch limit 10. Unlock ceremonial garment recipe.",
+        "proofYears": 3
       },
       {
         "id": "FC9",
@@ -75144,8 +77205,9 @@
         "minimumProficiency": {
           "farming": 64
         },
-        "proof": "Complete 2 planned harvests whose household grain ledger reconciles, with full household rations.",
-        "reward": "Unlock conservative planting: +15% gross yield during low flood, -5% at normal/high flood; alternative to dense sowing, never stacked with it."
+        "proof": "Complete 3 planned harvests whose household grain ledger reconciles, with full household rations.",
+        "reward": "Unlock conservative planting: +15% gross yield during low flood, -5% at normal/high flood; alternative to dense sowing, never stacked with it.",
+        "proofYears": 3
       },
       {
         "id": "FR9",
@@ -75176,16 +77238,17 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 60,
-          "literacy": 32,
-          "oratory": 32
+          "warfare": 44,
+          "literacy": 22,
+          "oratory": 22
         },
-        "proof": "As an Officer, complete 2 planning work years with itemized paid materials and actual army accounts.",
+        "proof": "As an Officer, complete 1 planning work years with itemized paid materials and actual army accounts.",
         "reward": "Prepare a registered strategic-command assessment; learning does not automatically grant rank.",
         "minimumStats": {
           "health": 45,
           "knowledge": 20
-        }
+        },
+        "proofYears": 1
       },
       {
         "id": "PP9",
@@ -75344,12 +77407,12 @@
           ]
         },
         "minimumProficiency": {
-          "warfare": 72,
-          "oratory": 40,
-          "strength": 40,
-          "endurance": 48
+          "warfare": 54,
+          "oratory": 28,
+          "strength": 30,
+          "endurance": 34
         },
-        "proof": "Complete a registered assessment across 2 active Officer work years. Reconcile materials, wages and rations in both years; retain at least 8 proved service years.",
+        "proof": "Complete a registered assessment across 2 active Officer work years. Reconcile materials, wages and rations in both years; retain at least 5 proved service years.",
         "reward": "Qualify for General opportunities at age 28. Appointment still requires an available command and recorded service.",
         "minimumStats": {
           "health": 50,
@@ -75607,6 +77670,10 @@
           "tenant-farming-household",
           "delta-newcomers"
         ],
+        "farmEdge": {
+          "inputBps": 7000,
+          "healthPerYear": 1
+        },
         "profile": {
           "farming": {
             "demand": 12,
