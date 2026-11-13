@@ -1,0 +1,52 @@
+/* Onboarding on the game screen: the numbered "This year" checklist, section numbers, locked sections and the
+   idle hint. Gold means "to do", green "done", grey "locked". */
+
+.year-checklist{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:8px 10px;border:2px solid #5a4228;background:#f8f2e2;overflow-x:auto}
+.year-checklist-title{flex:none;font:700 11px/1.2 var(--ef-font-body);letter-spacing:.08em;text-transform:uppercase;color:#5a4228}
+.year-checklist ol{display:flex;gap:6px;margin:0;padding:0;list-style:none}
+.year-check{display:flex;align-items:center;gap:7px;min-width:132px;padding:5px 8px;border:1px solid #cbbba0;border-radius:3px;background:#fffaf0;color:#2c2216;text-align:left;cursor:pointer;font-family:inherit}
+.year-check:hover{border-color:#5a4228}
+.year-check:focus-visible{outline:2px solid #173b44;outline-offset:2px}
+.year-check-step{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:#173b44;color:#e2bd73;font:700 12px/1 var(--ef-font-display)}
+.year-check-copy{display:grid;min-width:0}
+.year-check-copy strong{font-size:12px;line-height:1.2}
+.year-check-copy small{font-size:11px;line-height:1.2;color:#5b4c38;white-space:nowrap}
+.year-check-mark{display:grid;place-items:center;flex:none;width:16px;height:16px;margin-left:auto;border-radius:50%;font:700 11px/1 var(--ef-font-body)}
+.year-check.is-todo{border-color:#c79a3b;background:#fff3d4}
+.year-check.is-todo .year-check-mark{background:#c79a3b;color:#fff}
+.year-check.is-done .year-check-mark{background:#3f6b4a;color:#fff}
+.year-check.is-locked{background:#ece5d6;color:#7a7266}
+.year-check.is-locked .year-check-step{background:#8f877a;color:#ece5d6}
+.year-check.is-locked .year-check-mark{color:#7a7266}
+.year-check.is-info .year-check-mark{color:#8f877a}
+
+/* The number a section wears, matching its line in "This year" and the How to Play. */
+.section-step{display:inline-grid;place-items:center;flex:none;width:22px;height:22px;margin-right:8px;border-radius:50%;background:#173b44;color:#e2bd73;font:700 12px/1 var(--ef-font-display);vertical-align:middle}
+
+/* A section that has not opened yet: what it is and the age it opens. */
+.section-locked{display:flex;align-items:flex-start;gap:4px;margin:0 0 14px;padding:12px 14px;border:2px dashed #b7a27a;background:#efe8d8;color:#5d5446}
+.section-locked h2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 4px;font-family:var(--ef-font-display);font-size:18px;font-weight:600;color:#4b4335}
+.section-locked p{margin:0;font-size:12.5px;line-height:1.45}
+.section-locked-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid #b7a27a;border-radius:2px;background:#f8f2e2;font:700 11px/1.2 var(--ef-font-body);color:#6d5a37}
+.section-locked .section-step{background:#8f877a;color:#ece5d6}
+.tab-lock{display:inline-flex;align-items:center;gap:3px;margin-left:5px;padding:1px 5px;border-radius:2px;background:#0000001f;font-size:10px;font-weight:700}
+
+/* The idle hint: a pulsing ring on the button to press and a short bubble beside it. */
+.idle-nudge{position:fixed;inset:auto;top:0;left:0;z-index:60;margin:0;padding:0;border:0;background:transparent;overflow:visible;pointer-events:none}
+.idle-nudge-ring{position:fixed;border:3px solid #e2a93b;border-radius:6px;box-shadow:0 0 0 4px #e2a93b55,0 0 24px 6px #e2a93b88;animation:idle-ring 1.3s ease-in-out infinite}
+@keyframes idle-ring{0%,100%{box-shadow:0 0 0 2px #e2a93b66,0 0 14px 2px #e2a93b77}50%{box-shadow:0 0 0 8px #e2a93b22,0 0 30px 10px #e2a93b55}}
+.idle-nudge-bubble{position:fixed;width:max-content;max-width:min(280px,calc(100vw - 24px));padding:9px 11px;border:1px solid #b39c68;border-top:3px solid #173b44;border-radius:3px;background:#f8eed8;color:#263b43;box-shadow:0 8px 22px #10262c40;font:500 12.5px/1.45 var(--ef-font-body);pointer-events:none}
+.idle-nudge-bubble strong{display:flex;align-items:center;gap:6px;margin-bottom:2px;font-size:13px;color:#173b44}
+.idle-nudge-bubble button{pointer-events:auto;margin-top:6px;padding:3px 8px;border:1px solid #173b44;border-radius:2px;background:transparent;color:#173b44;font:600 11.5px/1.2 var(--ef-font-body);cursor:pointer}
+.idle-nudge-hand{display:inline-block;animation:idle-hand .9s ease-in-out infinite alternate}
+@keyframes idle-hand{from{transform:translateX(0)}to{transform:translateX(4px)}}
+@media(prefers-reduced-motion:reduce){.idle-nudge-ring,.idle-nudge-hand{animation:none}}
+@media(max-width:700px){.year-check{min-width:112px}}
+
+/* The header's How to play button, beside Tutorial. */
+.how-to-play-button{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 12px;border:1px solid #173b44;border-radius:2px;background:transparent;color:#173b44;font:600 13px/1 var(--ef-font-body);cursor:pointer}
+.how-to-play-button span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#e2bd73;color:#173b44;font:700 12px/1 var(--ef-font-display)}
+.how-to-play-button:hover{background:#173b44;color:#f8eed8}
+/* On the dark bars the number badge turns gold so it stays visible. */
+.life-session-bar .section-step,.aoe-resource-bar .section-step,.demo-deck-header .section-step,.life-record-panel summary .section-step{background:#e2bd73;color:#173b44}
+.aoe-resource-bar>.section-step{align-self:center;margin:0 4px 0 2px}

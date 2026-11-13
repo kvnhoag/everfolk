@@ -112,15 +112,17 @@ export function tutorialReducer(state: TutorialState, action: TutorialAction, co
       return { ...state, open: true, mode: "manual", hintId, queue: manualQueue(context, hintId), run: state.run + 1 };
     }
     case "close": return close(state, context);
+    // Paging is the player asking for the next tip, so it shows like a tip they opened: it never waits invisibly
+    // for a section that is not drawn right now (a faded notice, a board hidden during a decision).
     case "next": {
       if (!state.open) return state;
       const index = state.hintId ? state.queue.indexOf(state.hintId) : -1;
       if (index < 0 || index >= state.queue.length - 1) return close(state, context);
-      return { ...state, hintId: state.queue[index + 1], seen: markSeen(state.seen, state.hintId) };
+      return { ...state, mode: "manual", hintId: state.queue[index + 1], seen: markSeen(state.seen, state.hintId) };
     }
     case "back": {
       const index = state.hintId ? state.queue.indexOf(state.hintId) : -1;
-      return state.open && index > 0 ? { ...state, hintId: state.queue[index - 1] } : state;
+      return state.open && index > 0 ? { ...state, mode: "manual", hintId: state.queue[index - 1] } : state;
     }
     // The open card stays open; only the next new section changes how it is shown.
     case "tips": return state.tipsOn === action.on ? state : { ...state, tipsOn: action.on };

@@ -1,0 +1,72 @@
+/* How to Play: a two-page rule sheet in the game's papyrus and teal, shown whenever the game screen starts. */
+dialog.how-to-play{--htp-teal:#173b44;--htp-gold:#e2bd73;--htp-ink:#263b43;--htp-paper:#f8eed8;--htp-line:#d4c19a;width:min(980px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:2px solid #886447;border-radius:0;background:var(--htp-paper);color:var(--htp-ink);box-shadow:6px 6px 0 #263b4366;display:flex;flex-direction:column;overflow:hidden}
+dialog.how-to-play:not([open]){display:none}
+dialog.how-to-play::backdrop{background:#10262cc4;backdrop-filter:blur(3px)}
+.htp-header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;background:var(--htp-teal);color:#f8eed8}
+.htp-header h2{margin:0;font-family:var(--ef-font-display);font-size:26px;font-weight:600;letter-spacing:.01em}
+.htp-pages{display:flex;gap:6px;margin-left:auto}
+.htp-pages button{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid #f8eed855;border-radius:2px;background:transparent;color:#f8eed8;font:600 12px/1 var(--ef-font-body);cursor:pointer}
+.htp-pages button span{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#f8eed833;font-size:11px}
+.htp-pages button.is-active{background:var(--htp-gold);border-color:var(--htp-gold);color:var(--htp-teal)}
+.htp-pages button.is-active span{background:var(--htp-teal);color:var(--htp-gold)}
+.htp-close{width:32px;height:32px;padding:0;border:1px solid #f8eed855;background:transparent;color:#f8eed8;font-size:20px;line-height:1;cursor:pointer}
+.htp-body{flex:1;overflow:auto;padding:16px 20px 10px}
+.htp-goal{display:flex;gap:9px;align-items:flex-start;margin:0 0 12px;padding:10px 12px;border-left:4px solid var(--htp-gold);background:#fdf6e6;font-size:14px;line-height:1.5}
+.htp-goal svg{flex:none;margin-top:3px;color:#9a7232}
+.htp-steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.htp-step{display:grid;grid-template-columns:38px minmax(0,1fr) minmax(220px,auto);align-items:center;gap:6px 14px;padding:10px 12px;border:1px solid var(--htp-line);background:#fffaf0}
+.htp-step-number{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold);font:700 16px/1 var(--ef-font-display)}
+.htp-step-copy p{margin:0;font-size:13px;line-height:1.45;color:#3d4b4f}
+.htp-opens{display:inline-flex;align-items:center;gap:4px;padding:1px 6px;border:1px solid #c9b791;border-radius:2px;background:#efe6d2;color:#6d5a37;font-size:10.5px;font-weight:600}
+.htp-example{display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.htp-arrow{font-size:20px;color:#9a8c6b}
+.htp-results{display:inline-flex;gap:5px;flex-wrap:wrap}
+.htp-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid currentColor;border-radius:3px;font-size:12px;font-weight:600;white-space:nowrap}
+.htp-chip.is-action{color:#fff8eb;background:#405849;border-color:#405849}
+.htp-chip.is-gain{color:#2f6b3c;background:#e3f0e1}
+.htp-chip.is-loss{color:#a3361f;background:#f8e3dc}
+.htp-chip.is-neutral{color:#5d5446;background:#ece5d6}
+.htp-rhythm{margin:12px 0 4px;text-align:center;font:600 15px/1.4 var(--ef-font-display);color:var(--htp-teal)}
+.htp-rhythm span{display:block;margin-top:2px;font:400 12px/1.4 var(--ef-font-body);color:#6d6250}
+.htp-roadmap{position:relative;list-style:none;margin:0;padding:0 0 0 4px;display:grid;gap:4px}
+.htp-roadmap::before{content:"";position:absolute;left:19px;top:14px;bottom:14px;width:3px;background:repeating-linear-gradient(#c9b791 0 6px,transparent 6px 10px)}
+.htp-stage{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:8px 10px 8px 0}
+.htp-stage-dot{position:relative;z-index:1;display:grid;place-items:center;width:32px;height:32px;border:2px solid var(--htp-teal);border-radius:50%;background:var(--htp-paper);color:var(--htp-teal);font:700 14px/1 var(--ef-font-display)}
+.htp-stage.is-past .htp-stage-dot{background:#c9d8c4;border-color:#5d7a58;color:#2f4d2c}
+.htp-stage.is-current .htp-stage-dot{background:var(--htp-gold);box-shadow:0 0 0 4px #e2bd7355}
+.htp-stage.is-current .htp-stage-body{border-color:#c79a3b;background:#fff6dd}
+.htp-stage-body{padding:8px 12px;border:1px solid var(--htp-line);background:#fffaf0}
+.htp-here{padding:2px 7px;background:var(--htp-teal);color:var(--htp-gold);font:700 10px/1.3 var(--ef-font-body);letter-spacing:.06em;text-transform:uppercase}
+.htp-todo{margin:3px 0 6px;font-size:13px;line-height:1.45}
+.htp-unlocks{display:flex;flex-wrap:wrap;gap:5px;margin:0;padding:0;list-style:none}
+.htp-unlocks li{display:inline-flex;align-items:center;gap:5px;padding:2px 7px 2px 5px;border:1px solid #c9b791;border-radius:3px;background:#f1e8d3;font-size:11.5px;color:#3d2f1d}
+.htp-unlocks b{padding:0 4px;border-radius:2px;background:var(--htp-teal);color:var(--htp-gold);font-size:10.5px}
+.htp-stage.is-past .htp-unlocks li{opacity:.7}
+.htp-footer{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid var(--htp-line);background:#f3e7cc}
+.htp-tips{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer}
+.htp-tips input{appearance:none;position:relative;width:30px;height:17px;margin:0;border:1px solid var(--htp-teal);border-radius:9px;background:#e7d8b4;cursor:pointer}
+.htp-tips input::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--htp-teal);transition:transform .15s}
+.htp-tips input:checked{background:var(--htp-teal)}
+.htp-tips input:checked::after{background:var(--htp-gold);transform:translateX(13px)}
+.htp-nav{display:flex;gap:8px;margin-left:auto}
+.htp-nav button{min-height:40px;padding:0 16px;border-radius:2px;font:700 14px/1 var(--ef-font-body);cursor:pointer}
+.htp-back{border:1px solid var(--htp-ink);background:transparent;color:var(--htp-ink)}
+.htp-primary{border:1px solid var(--htp-teal);background:var(--htp-teal);color:#f8eed8}
+.htp-primary:hover{background:#0f2a32}
+/* After a few idle seconds the way forward pulses, so nobody is left wondering what to press. */
+.htp-primary.is-nudged{animation:htp-nudge 1.4s ease-in-out infinite}
+@keyframes htp-nudge{0%,100%{box-shadow:0 0 0 0 #e2bd73cc}50%{box-shadow:0 0 0 8px #e2bd7300}}
+@media(prefers-reduced-motion:reduce){.htp-primary.is-nudged{animation:none;outline:3px solid var(--htp-gold);outline-offset:2px}}
+@media(max-width:720px){
+  .htp-step{grid-template-columns:34px minmax(0,1fr)}
+  .htp-example{grid-column:2;justify-content:flex-start}
+  .htp-header h2{font-size:21px}
+  .htp-pages{margin-left:0;width:100%}
+}
+.htp-switches{display:grid;gap:6px}
+/* Headings keep the brand's display face, set large enough to read; small labels sit beside them, not inside. */
+.htp-title-row{display:flex;align-items:baseline;gap:4px 9px;flex-wrap:wrap;margin:0 0 3px}
+dialog.how-to-play .htp-title-row h3{margin:0;font-size:19px;font-weight:600;line-height:1.15;color:var(--htp-teal)}
+.htp-ages{font-size:12px;font-weight:600;color:#7a6a4d}
+.htp-close{position:absolute;top:12px;right:14px}
+.htp-header{position:relative;padding-right:60px}

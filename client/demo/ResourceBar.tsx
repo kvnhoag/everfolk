@@ -8,6 +8,8 @@ import { RESOURCES, type ResourceId } from "./resources.ts";
 import type { StorehouseRow } from "./storehouse-model.ts";
 import InventoryDrawer, { type WorkStatus } from "./InventoryDrawer.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
+import { SectionStep } from "../components/YearChecklist.tsx";
+import { sectionStep } from "../models/section-steps.ts";
 
 interface ResourceBarProps {
   screen: DemoScreen;
@@ -96,6 +98,7 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
     <section className="aoe-resource-hud has-section-help" aria-label="Household resources and inventory">
       <SectionHelp hint="resources" />
       <div className="aoe-resource-bar">
+        <SectionStep step={sectionStep("household")} />
         <div className="aoe-staples" role="list" aria-label="Pinned household resources">
           <button
             type="button"

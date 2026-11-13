@@ -187,3 +187,15 @@ test("turning tips off keeps the open card until the player closes it", () => {
   assert.equal(off.open, true);
   assert.equal(off.hintId, "welcome");
 });
+
+test("Next tip on an automatic card shows the next tip even when its section is not drawn right now", () => {
+  const context = game({ age: 12, decisionPending: true, notificationShown: true });
+  const opened = run(INITIAL_TUTORIAL, context, { type: "sync" });
+  assert.equal(opened.mode, "auto");
+  assert.ok(opened.queue.length > 1);
+  const next = run(opened, context, { type: "next" });
+  assert.equal(next.open, true);
+  assert.equal(next.hintId, opened.queue[1]);
+  assert.equal(next.mode, "manual", "a paged tip never waits invisibly for its section");
+  assert.equal(run(next, context, { type: "back" }).mode, "manual");
+});

@@ -20,6 +20,15 @@ import "./economy-panels.css";
 import SectionHelp from "../components/SectionHelp.tsx";
 import { flashSections } from "../lib/section-flash.ts";
 import WorksPanel from "./WorksPanel.tsx";
+import { tuning } from "../../src/demo/market-rules.ts";
+import PixelIcon from "../components/PixelIcon.tsx";
+import { SectionStep } from "../components/YearChecklist.tsx";
+import { sectionStep } from "../models/section-steps.ts";
+
+/** A small lock on a tab that has not opened yet, with the age it opens. */
+function TabLock({ age }: { age: number }) {
+  return <span className="tab-lock" title={`Opens at age ${age}`}><PixelIcon name="lock" size={11} />Age {age}</span>;
+}
 
 export interface ComparisonSide {
   label: string;
@@ -183,6 +192,13 @@ export default function EconomyPanels({
     }
   }
 
+  // Tabs that open later carry their opening age, so nothing looks broken before it is meant to work.
+  const age = life?.age ?? 0;
+  const tradeAge = world?.demo ? tuning(world.demo.market).minTradeAge : undefined;
+  const tradeLockedUntil = tradeAge !== undefined && age < tradeAge ? tradeAge : null;
+  const firstJobAge = Math.min(...(world?.character?.jobs ?? []).map(job => job.minAge ?? 0));
+  const careerLockedUntil = Number.isFinite(firstJobAge) && age < firstJobAge ? firstJobAge : null;
+
   const history = screen.priceHistory ?? [];
   const basePrices = screen.basePrices;
 
@@ -191,7 +207,7 @@ export default function EconomyPanels({
       <header className="demo-deck-header has-section-help">
         <SectionHelp hint="command-deck" />
         <div>
-          <span className="demo-deck-eyebrow">HOUSEHOLD &amp; TOWN COMMAND DECK</span>
+          <span className="demo-deck-eyebrow"><SectionStep step={sectionStep("town")} />HOUSEHOLD &amp; TOWN COMMAND DECK</span>
           <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
         </div>
         <div className="demo-deck-tabs" role="tablist" aria-label="Economy command deck">
@@ -202,7 +218,7 @@ export default function EconomyPanels({
             className={`demo-deck-tab${activeTab === "market" ? " is-active" : ""}`}
             onClick={() => setActiveTab("market")}
           >
-            Market &amp; Trade
+            Market &amp; Trade{tradeLockedUntil !== null && <TabLock age={tradeLockedUntil} />}
           </button>
           <button
             type="button"
@@ -220,7 +236,7 @@ export default function EconomyPanels({
             className={`demo-deck-tab${activeTab === "service" ? " is-active" : ""}`}
             onClick={() => setActiveTab("service")}
           >
-            Career &amp; Army
+            Career &amp; Army{careerLockedUntil !== null && <TabLock age={careerLockedUntil} />}
           </button>
           <button
             type="button"

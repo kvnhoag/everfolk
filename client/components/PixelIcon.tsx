@@ -47,6 +47,7 @@ const icons: Record<string, string[]> = {
   "flow-hunger": ["#.......#", ".#.....#.", "#########", ".#.....#.", "..#...#..", "...###...", "..#####.."],
   "flow-spoil": [".........", "..##.....", ".####.##.", "########.", ".######.#", "..#..#..#", "........#"],
   "flow-spin": ["....#....", "...###...", "..#####..", "....#....", "....#....", "...###...", "....#...."],
+  lock: ["...###...", "..#...#..", "..#...#..", ".#######.", ".###.###.", ".###.###.", ".#######."],
   "flow-fallow": ["#########", "#.......#", "#.#...#.#", "#..#.#..#", "#...#...#", "#..#.#..#", "#########"],
 };
 const aliases: Record<string, string> = { health: "heart", knowledge: "book", wealth: "coin", bonds: "people", seafaring: "ship", seamanship: "ship", astronomy: "astronomy-calendar", music: "music-performance", warfare: "military" };
