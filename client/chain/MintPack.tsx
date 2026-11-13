@@ -25,7 +25,7 @@ export interface MintPackProps {
   txHash?: string | null;
 }
 
-/** All outcomes and rerolls are contract values. Animation reveals confirmed cards individually. */
+/** All outcomes come from the opened pack with no rerolls. Animation reveals confirmed cards individually. */
 export default function MintPack({
   initialPack,
   evidence,
@@ -87,30 +87,6 @@ export default function MintPack({
     audioManager.playClickSound();
     if (!freePlay && selected === null && (pack?.cards?.length ?? 0) > 0) {
       setSelected(0);
-    }
-  }
-
-  async function reroll(slot: number) {
-    setBusy(`reroll:${slot}`);
-    setError("");
-    try {
-      const nextPack = await contract.rerollMintSlot(pack.life_id, slot, pack.reroll_fee);
-      setPack(nextPack);
-      // Ensure the newly rerolled card is flipped and visible
-      setFlippedCards(prev => ({ ...prev, [slot]: true }));
-      setSelected(slot);
-    } catch (cause) {
-      // Re-read once: a wallet can report a timeout after the paid reroll has already landed.
-      const landed = await contract.mintPack(pack.life_id).catch(() => null);
-      if (landed?.cards[slot]?.rerolled) {
-        setPack(landed);
-        setFlippedCards(prev => ({ ...prev, [slot]: true }));
-        setSelected(slot);
-      } else {
-        setError(errorText(cause, "The reroll was not confirmed. Your existing card is safe; try again."));
-      }
-    } finally {
-      setBusy(null);
     }
   }
 
@@ -283,7 +259,7 @@ export default function MintPack({
                     isFigure={card.kind === "figure"}
                     figureId={card.figure_id}
                     portraitMedia={card.portrait_media}
-                    pixelSeed={`${pack.evidence_hash}:${slot}:${card.rerolled}`}
+                    pixelSeed={`${pack.evidence_hash}:${slot}`}
                     rarity={card.rarity}
                     rarityLabel={rarityLabel(card.rarity)}
                     actionName={actionName(card.action_id)}
@@ -301,22 +277,6 @@ export default function MintPack({
                           >
                             {isSelected ? "Selected ✓" : "Choose this card"}
                           </button>
-                          <button
-                            className="chain-secondary augment-reroll"
-                            type="button"
-                            disabled={Boolean(busy) || card.rerolled}
-                            onClick={() => {
-                              void reroll(slot);
-                            }}
-                          >
-                            {busy === `reroll:${slot}`
-                              ? walletPath
-                                ? "Confirm in wallet…"
-                                : "Confirming…"
-                              : card.rerolled
-                                ? "Reroll used"
-                                : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}
-                          </button>
                         </div>
                       ) : undefined
                     }
@@ -329,10 +289,10 @@ export default function MintPack({
           <p className="chain-fine">
             {freePlay
               ? "Click any face-down card to reveal what you could have gotten. Only Weave Mode can mint cards to NFT."
-              : `Click any face-down card to reveal its identity and deed. One optional reroll per slot.${
+              : `Click any face-down card to reveal its identity and deed, then choose one to mint.${
                   practice
-                    ? " Practice rerolls update this local ledger; no NEAR is spent."
-                    : " Every paid reroll is saved on NEAR and added to your total mint fee."
+                    ? " Practice packs use a local ledger; no NEAR is spent."
+                    : " Outcomes are fixed once opened."
                 }`}
           </p>
         </>
@@ -353,9 +313,7 @@ export default function MintPack({
         <p role="status" className="chain-notice">
           {!walletPath
             ? "Confirming…"
-            : busy === "mint"
-              ? "Confirm your chosen card in your wallet. Waiting for NEAR…"
-              : "Confirm the reroll payment in your wallet. Waiting for NEAR…"}
+            : "Confirm your chosen card in your wallet. Waiting for NEAR…"}
         </p>
       )}
 
@@ -416,8 +374,8 @@ export default function MintPack({
             Life #{pack.life_id} · Signed evidence hash <code>{pack.evidence_hash}</code>
           </p>
           <p>
-            Opening, each reroll, and final selection have separate NEAR transactions. The contract stores the
-            outcomes and enforces the one-reroll limit. Check their receipts from Account details.
+            Opening the pack and final selection have separate NEAR transactions. The contract stores the opened
+            outcomes until you choose one card to mint. Check their receipts from Account details.
           </p>
           <a href={`/api/ranked/evidence/${pack.evidence_hash}`} target="_blank" rel="noreferrer">
             View the verified life & choices

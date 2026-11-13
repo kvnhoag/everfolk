@@ -11,7 +11,7 @@ import MintRecovery from "./MintRecovery.tsx";
 import MintReveal from "./MintReveal.tsx";
 import { mintRevealView } from "./life-report-model.ts";
 import DeclineChoice from "./DeclineChoice.tsx";
-import { DEFAULT_MINT_FEE_YOCTO, REROLL_FEE_YOCTO, formatNear } from "./near-amount.ts";
+import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
 
 /** The part of the ranked session (Task 17) the ending needs. `RankedSession` satisfies it structurally. */
@@ -131,7 +131,6 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     error={error}
     packMode
     cardCount={cardCount}
-    rerollFeeText={formatNear(terms?.reroll_fee ?? REROLL_FEE_YOCTO)}
     sourceSharePercent={(terms?.source_share_bps ?? 5000) / 100}
     onSelectAction={setSelected}
     onMint={() => { void mint(stage.signed); }}

@@ -2,7 +2,6 @@
 
 export const YOCTO_PER_NEAR = 10n ** 24n;
 export const DEFAULT_MINT_FEE_YOCTO = (YOCTO_PER_NEAR / 1000n).toString();
-export const REROLL_FEE_YOCTO = (YOCTO_PER_NEAR / 100n).toString();
 const SHOWN_DECIMALS = 4;
 
 /** "1", "0.5", "12.3456"; rounds down to 4 decimals; tiny non-zero amounts show as "<0.0001". */

@@ -24,7 +24,6 @@ export const CALL_GAS = {
   mint_stage_figures: gas(300n),
   retry_stage_mint: gas(300n),
   open_mint_pack: gas(250n),
-  reroll_mint_slot: gas(200n),
   choose_mint_slot: gas(250n),
   retry_mint: gas(200n),
   set_action: gas(50n),
@@ -214,10 +213,6 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       if (!npcActionId) throw new Error("Choose your life's deed first.");
       const terms = parseMintTerms(await view("mint_terms", {}));
       return parseMintPack(await call("open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, terms.mint_fee));
-    },
-    async rerollMintSlot(lifeId, slot, feeYocto) {
-      assertLifeId(lifeId); assertSlot(slot); assertPrice(feeYocto);
-      return parseMintPack(await call("reroll_mint_slot", { life_id: lifeId, slot }, feeYocto));
     },
     async chooseMintSlot(lifeId, slot) {
       assertLifeId(lifeId); assertSlot(slot);

@@ -9,7 +9,6 @@ export interface LifeReportProps {
   packMode?: boolean;
   cardCount?: number;
   walletPath?: boolean;
-  rerollFeeText?: string;
   sourceSharePercent?: number;
   spanLine?: string;
   feeText: string;
@@ -24,7 +23,7 @@ export interface LifeReportProps {
 }
 
 /** "Who shaped your life", then "Mint this life?" with the fee and the action picker. */
-export default function LifeReport({ report, walletPath = true, packMode = false, cardCount, rerollFeeText = "0.01", sourceSharePercent = 50, spanLine, feeText, menu, selectedAction, busy = false, error, onSelectAction, onMint, onDecline, onCloseTooEarly }: LifeReportProps) {
+export default function LifeReport({ report, walletPath = true, packMode = false, cardCount, sourceSharePercent = 50, spanLine, feeText, menu, selectedAction, busy = false, error, onSelectAction, onMint, onDecline, onCloseTooEarly }: LifeReportProps) {
   const headingId = useId();
   const mintId = useId();
   const shaped = report.rows.length > 0;
@@ -67,7 +66,7 @@ export default function LifeReport({ report, walletPath = true, packMode = false
       ) : (
         <>
           <p>{packMode ? packSummary : "Keep this life"} for {feeText} NEAR. {shaped ? `${sourceSharePercent}% goes to the source lives above, by their share. The rest goes to the protocol treasury.` : "No one shaped it, so the fee goes to the protocol treasury."}</p>
-          {packMode && <p>{revealSummary}, then choose one life NFT. Each slot has one optional reroll for {rerollFeeText} NEAR, added to the same mint fee pool. {walletPath ? "Your wallet confirms every payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
+          {packMode && <p>{revealSummary}, then choose one card from the opened pack to mint as your permanent Life NFT. Outcomes are final once opened. {walletPath ? "Your wallet confirms every payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
           <fieldset className="life-report-actions" disabled={busy}>
             <legend>What will you do for the lives that meet you?</legend>
             {menu.map(option => <label key={option.id} className={option.id === selectedAction ? "is-selected" : ""}>

@@ -114,19 +114,11 @@ test("different life seeds produce different booster card rolls", async () => {
   assert.notEqual(b1.pack.evidence_hash, b2.pack.evidence_hash);
 });
 
-test("freeplay contract stub blocks NFT minting while allowing local preview rerolls", async () => {
-  const life = createMockLife("seed-reroll-test", "grain-dealer");
+test("freeplay contract stub has fixed pack contents and blocks NFT minting", async () => {
+  const life = createMockLife("seed-fixed-pack-test", "grain-dealer");
   const { pack, contract } = await createFreePlayBooster(life, mockWorld);
 
-  // Reroll slot 1
-  const updatedPack = await contract.rerollMintSlot(pack.life_id, 1, "0");
-  assert.ok(updatedPack.cards[1].rerolled);
-  assert.equal(updatedPack.cards[0].rerolled, false);
-
-  // Second reroll on slot 1 should throw
-  await assert.rejects(async () => {
-    await contract.rerollMintSlot(pack.life_id, 1, "0");
-  }, /already rerolled/);
+  assert.equal("rerollMintSlot" in contract, false);
 
   // Only Weave Mode can mint cards to NFT
   await assert.rejects(async () => {
