@@ -61,10 +61,18 @@ export function PlayPage({ steps }: { steps: readonly PlayStep[] }) {
 }
 
 /** Who you are, drawn at each stage of life. */
-export interface RoadPortrait { seed: string; name: string; sex?: "male" | "female"; avatarVariant?: number }
+export interface RoadPortrait {
+  seed: string;
+  name: string;
+  sex?: "male" | "female";
+  avatarVariant?: number;
+  personKey?: string;
+  jobId?: string | null;
+  role?: "royalty" | "aristocrat";
+}
 
 function Portrait({ portrait, age, className }: { portrait: RoadPortrait; age: number; className: string }) {
-  return <PixelPortrait age={age} seed={portrait.seed} name={portrait.name} sex={portrait.sex} avatarVariant={portrait.avatarVariant} className={className} />;
+  return <PixelPortrait age={age} seed={portrait.seed} name={portrait.name} sex={portrait.sex} avatarVariant={portrait.avatarVariant} personKey={portrait.personKey} jobId={portrait.jobId} role={portrait.role} className={className} />;
 }
 
 function StageDetail({ stage, guide, portrait }: { stage: RoadmapStage; guide: StageGuide; portrait: RoadPortrait }) {

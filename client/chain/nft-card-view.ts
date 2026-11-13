@@ -63,7 +63,7 @@ export function boosterArtwork(figureId: MintCard["figure_id"], rarity: number, 
   }
   if (portraitMedia) return { art: portraitMedia };
   if (figureId) return { art: figureCardArt(figureId) };
-  return { art: resolvePortraitState({ age: PORTRAIT_AGE, seed, jobId: group ? CAREER_PORTRAIT_JOB[group] : undefined }).src };
+  return { art: resolvePortraitState({ age: PORTRAIT_AGE, seed, jobId: group ? CAREER_PORTRAIT_JOB[group] : undefined, portraitSet: "ordinary-v3" }).src };
 }
 
 /** One opened pack card, as the 3D scene draws it. */

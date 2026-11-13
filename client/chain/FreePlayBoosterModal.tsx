@@ -39,7 +39,8 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
   const options = useMemo<BoosterSceneOptions | null>(() => {
     if (!session) return null;
     // Each card shows the v14 card a Weave mint would record, in this life's own sex (client/chain/nft-card-view.ts).
-    const ownPortrait = playerPortraitState(world, life).src;
+    // People of the city keep their ordinary-v3 NFT portrait, not the in-game Hi-Bit one.
+    const ownPortrait = playerPortraitState(world, life, { portraitSet: "ordinary-v3" }).src;
     const cards = session.pack.cards.map(card => freePlayCardView(card, session.evidence.career_group, life, ownPortrait));
     const resolve = (selected: number[]) => {
       const collection = resolveBoosterPack(window.localStorage, {

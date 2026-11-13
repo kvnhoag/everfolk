@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-concept1-banners-v1",
+  "dimensions": {
+    "width": 480,
+    "height": 224
+  },
+  "scenes": [
+    {
+      "id": "event_alexander_332bce",
+      "file": "event_alexander_332bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-alexander-egypt",
+        "classical-alexander-shore-work",
+        "classical-alexandria-founded"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "f70a782ecd81ce10579470b97b8ae6e1eefe642324a4317a17f0305bbe0dc26f"
+    },
+    {
+      "id": "event_euclid_300bce",
+      "file": "event_euclid_300bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-euclid-teaching",
+        "classical-euclid-demonstration"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "1d2ba18394642746a235101a2004b3d298fad489fcdf87a54a10c39bd90d75ad"
+    },
+    {
+      "id": "event_ptolemy_305bce",
+      "file": "event_ptolemy_305bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-ptolemy-kingship",
+        "classical-alexander-death",
+        "classical-persian-reconquest"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_ptolemy_305bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "b8d9d34bf1760f6539b35f93ffade4b912b1439696c6733e1087a5a848bd18b8"
+    },
+    {
+      "id": "event_pharos_280bce",
+      "file": "event_pharos_280bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-pharos-completed",
+        "era-pharos-stone"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_pharos_280bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "41f521a099c9727b09728c54c6364dae369e47ea1a3ed5c88183cb1680018528"
+    },
+    {
+      "id": "event_library_museum",
+      "file": "event_library_museum_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-scholarly-households",
+        "era-museum-scholar",
+        "era-museum-steward",
+        "era-library-copyists",
+        "classical-aristotle-death",
+        "classical-aristotle-journey"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_library_museum_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "45f239d2cd9fd4953da85955c33af7bead986a60c4181297ede562a435a39e76"
+    },
+    {
+      "id": "event_succession_guard",
+      "file": "event_succession_guard_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-succession-guard",
+        "classical-garrison-account",
+        "royal-general-supply-order",
+        "era-cleruch-serving",
+        "era-cleruch-veteran"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_succession_guard_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "d4839fb84a8e7775c906269bd76bc23edb2d24be239e0b71677b76efe6b4e87c"
+    },
+    {
+      "id": "event_royal_harvest_tax",
+      "file": "event_royal_harvest_tax_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "era-royal-land-lease",
+        "era-royal-rent-due",
+        "era-royal-linen",
+        "era-royal-oil",
+        "era-royal-licence-trade"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_royal_harvest_tax_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "14098e32fdc31cc272993b3921b19b2e4041179e56cc61f1fac39d1d4dc7e445"
+    },
+    {
+      "id": "event_vessel_packing",
+      "file": "event_vessel_packing_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "early-training-potters-bench",
+        "inspire-ceramics-child",
+        "inspire-ceramics-young",
+        "inspire-ceramics-adult",
+        "inspire-ceramics-elder",
+        "holdings-gift-of-tools-ceramics"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_vessel_packing_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "0d36980e4ca576eb707fa31f21698fa9ef78b1cd29c3a74f24f880a5efe3cbc5"
+    },
+    {
+      "id": "bg_harbor_quay",
+      "file": "bg_harbor_quay_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "harbor",
+        "market",
+        "business",
+        "debt"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "5e52e3fff401d4cf414512e81a6e4f965be5b7f6390d3dcdeed24a59e1547027"
+    },
+    {
+      "id": "bg_nile_farm",
+      "file": "bg_nile_farm_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "farming"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_nile_farm_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "e877326651fd1b55189c2926f9a585726f9cce91e70a69c2e7a888096c620cf3"
+    },
+    {
+      "id": "bg_military_garrison",
+      "file": "bg_military_garrison_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "military",
+        "war",
+        "danger"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "e8e86eb2a9f84b4cbf6b5c1a750ddac43d83221c9c20501a42b384e6394e0775"
+    },
+    {
+      "id": "bg_mouseion_study",
+      "file": "bg_mouseion_study_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "study",
+        "philosophy",
+        "astronomy",
+        "civic"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "10a663629ad4e401777e49060b0c4489bcc91a720f98d15e71414d25f0685743"
+    },
+    {
+      "id": "bg_home_courtyard",
+      "file": "bg_home_courtyard_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "home",
+        "courtyard",
+        "parenthood",
+        "illness",
+        "recovery",
+        "retirement"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_home_courtyard_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "86834d202926d084c9ce6511de6546204a81a362de4f452f13844149032f6f3a"
+    },
+    {
+      "id": "bg_craft_workshop",
+      "file": "bg_craft_workshop_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "workshop",
+        "sculpture"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_craft_workshop_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "5c93ae3b730d2e882a9efae53caa69919451afc95556d93fb5907785b25de28b"
+    },
+    {
+      "id": "bg_pottery_kiln",
+      "file": "bg_pottery_kiln_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "pottery"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_pottery_kiln_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "8bb26118650d6fd4abb33a7b4d2f12e0d74746522fc0dae7c51c1edf79b2aafe"
+    },
+    {
+      "id": "bg_temple_shrine",
+      "file": "bg_temple_shrine_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "shrine",
+        "memorial"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_temple_shrine_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "446fb6709e55f2341dcb8e512070124d6edc7a05ed9baf990ed4a4a7c225fe85"
+    },
+    {
+      "id": "bg_festival_feast",
+      "file": "bg_festival_feast_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "feast",
+        "music",
+        "marriage",
+        "courtship",
+        "friendship"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_festival_feast_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "43a2e8d40da69b0f828e834d6b86525f76378ab4b51da0a5344a80cc6a4b0fc4"
+    }
+  ]
+}
