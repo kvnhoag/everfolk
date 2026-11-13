@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
-import { itemLabel, levelLabel } from "./labels.ts";
+import type { TradeItem } from "../../src/demo/types.ts";
+import { levelLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./resource-bar.css";
 import PixelIcon from "../components/PixelIcon.tsx";
 import { RESOURCES, type ResourceId } from "./resources.ts";
-import ResourceYearDetails from "./Storehouse.tsx";
 import type { StorehouseRow } from "./storehouse-model.ts";
+import InventoryDrawer, { type WorkStatus } from "./InventoryDrawer.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
 
 interface ResourceBarProps {
@@ -14,7 +14,11 @@ interface ResourceBarProps {
   cashText: string;
   rows?: StorehouseRow[] | null;
   onPlan?(flaxPlots: number): string | null;
+  /** Opens the market with this item chosen. */
   onSelectTradeItem?(item: TradeItem): void;
+  /** This year's personal action, for the drawer's Work card; null hides the card. */
+  work?: WorkStatus | null;
+  onWork?(): void;
 }
 
 const RESOURCE_PIXELS: Record<string, string[]> = {
@@ -74,18 +78,11 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ rows = null, screen, cashText, onPlan, onSelectTradeItem }: ResourceBarProps) {
+export default function ResourceBar({ rows = null, screen, cashText, onPlan, onSelectTradeItem, work = null, onWork }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
-  const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
-  const [planNotice, setPlanNotice] = useState("");
 
   const grainPlots = Math.max(0, screen.household.plots - screen.household.flaxPlots);
-  const netGrain =
-    screen.household.expectedHarvest -
-    screen.household.expectedRent -
-    (screen.household.expectedEating ?? 0) -
-    screen.household.expectedSpoilage;
   const overCapacity = screen.household.grain > screen.household.capacity;
   const luxuryHeld = holdingOf(screen, "silver") + holdingOf(screen, "gold") + holdingOf(screen, "silk");
   const hasLegacyGranary = (screen.legacyHelp?.length ?? 0) > 0;
@@ -234,125 +231,9 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
         </button>
       </div>
 
-      {drawerOpen && (
-        <div className="aoe-inventory-drawer" role="region" aria-label="Inventory and granary details">
-          {rows && <ResourceYearDetails rows={rows} />}
-          <div className="aoe-drawer-section">
-            <header className="aoe-drawer-header">
-              <div>
-                <span className="aoe-drawer-eyebrow">HOUSEHOLD INVENTORY</span>
-                <h3>All Goods, Crops &amp; Livestock</h3>
-              </div>
-              <button type="button" className="aoe-drawer-close" onClick={() => setDrawerOpen(false)}>
-                Close ×
-              </button>
-            </header>
-            <div className="aoe-holdings-grid">
-              {TRADE_ITEMS.map(item => {
-                const held = holdingOf(screen, item);
-                const quote = screen.market.quotes.find(q => q.item === item);
-                const active = selectedItem === item;
-                return (
-                  <div key={item} className={`aoe-holding-card${active ? " is-selected" : ""}${held > 0 ? " has-stock" : ""}`}>
-                    <div className="aoe-holding-top">
-                      <ResourceGlyph id={item} />
-                      <span className="aoe-holding-name">{itemLabel(item)}</span>
-                      <strong className="aoe-holding-qty">{held}</strong>
-                    </div>
-                    {quote && (
-                      <div className="aoe-holding-meta">
-                        <span>Sell {quote.buy} dr · Buy {quote.sell} dr</span>
-                        {onSelectTradeItem && (
-                          <button
-                            type="button"
-                            className="aoe-holding-trade"
-                            onClick={() => {
-                              onSelectTradeItem(item);
-                              setSelectedItem(item);
-                            }}
-                          >
-                            Trade →
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="aoe-drawer-section aoe-granary-breakdown">
-            <header className="aoe-drawer-header">
-              <div>
-                <span className="aoe-drawer-eyebrow">GRANARY &amp; PLOTS</span>
-                <h3>Annual Store Projection</h3>
-              </div>
-              <span className={`aoe-net-pill ${netGrain >= 0 ? "is-pos" : "is-neg"}`}>
-                {netGrain >= 0 ? `+${netGrain}` : netGrain} est. net grain
-              </span>
-            </header>
-
-            {screen.legacyHelp?.map(help => (
-              <aside className="aoe-legacy-banner" key={`${help.tokenId}:${help.age}`}>
-                <strong>A past life kept a granary for you</strong>
-                <p>{help.text}</p>
-                <a href={`#token/${help.tokenId}`}>Meet the farmer · Life NFT #{help.tokenId}</a>
-              </aside>
-            ))}
-
-            <dl className="aoe-granary-stats">
-              <div>
-                <dt>Stored / Capacity</dt>
-                <dd>{screen.household.grain} / {screen.household.capacity}</dd>
-              </div>
-              <div>
-                <dt>Expected harvest</dt>
-                <dd className="is-pos">+{screen.household.expectedHarvest} grain</dd>
-              </div>
-              <div>
-                <dt>Landowner rent</dt>
-                <dd className="is-neg">−{screen.household.expectedRent} grain</dd>
-              </div>
-              <div>
-                <dt>Expected spoilage</dt>
-                <dd className="is-neg">−{screen.household.expectedSpoilage} grain</dd>
-              </div>
-              <div>
-                <dt>Mouths fed</dt>
-                <dd>{screen.household.mouths} ({screen.service.serving ? "you are with the army" : "at the farm"})</dd>
-              </div>
-              <div>
-                <dt>Plot allocation</dt>
-                <dd>{grainPlots} grain · {screen.household.flaxPlots} flax</dd>
-              </div>
-            </dl>
-
-            {onPlan && (
-              <div className="aoe-planting-row">
-                <label>
-                  <span>Flax plots next year (0–{screen.household.plots})</span>
-                  <input
-                    inputMode="numeric"
-                    type="number"
-                    min={0}
-                    max={screen.household.plots}
-                    value={flaxPlots}
-                    onChange={e => setFlaxPlots(Math.max(0, Math.min(screen.household.plots, Number(e.target.value) || 0)))}
-                  />
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setPlanNotice(onPlan(flaxPlots) ?? "Planting plan updated.")}
-                >
-                  Set planting
-                </button>
-                {planNotice && <span className="aoe-plan-notice" role="status">{planNotice}</span>}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={selectedItem} holding={item => holdingOf(screen, item)} work={work}
+        onClose={() => setDrawerOpen(false)} onPlan={onPlan} onWork={onWork}
+        onTrade={onSelectTradeItem && (item => { onSelectTradeItem(item); setSelectedItem(item); })} />}
     </section>
   );
 }

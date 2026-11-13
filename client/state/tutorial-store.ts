@@ -31,16 +31,16 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     const saved = readTutorialProgress(storage());
     const seen = saved.seen.filter(isTutorialHintId);
     const hintId = isTutorialHintId(saved.current) ? saved.current : null;
-    if (seen.length || hintId) state = { ...state, seen, hintId };
+    if (seen.length || hintId || saved.tipsOff) state = { ...state, seen, hintId, tipsOn: !saved.tipsOff };
   }
 
   function dispatch(action: TutorialAction): void {
     load();
     const next = tutorialReducer(state, action, context);
     if (next === state) return;
-    const persist = next.seen !== state.seen || next.hintId !== state.hintId;
+    const persist = next.seen !== state.seen || next.hintId !== state.hintId || next.tipsOn !== state.tipsOn;
     state = next;
-    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId });
+    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId, tipsOff: !state.tipsOn });
     emit();
   }
 
@@ -78,6 +78,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
     close: () => dispatch({ type: "close" }),
+    /** Turns automatic tip cards on or off. Off: new sections glow instead. The Tutorial and "?" buttons always open cards. */
+    setTipsOn: (on: boolean) => dispatch({ type: "tips", on }),
   };
 }
 

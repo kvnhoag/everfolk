@@ -4,17 +4,23 @@ import { buildImportantLifeEvents } from "./important-life-events.ts";
 import type { LifeEventRow } from "./life-events.ts";
 import { contentFingerprint } from "../../src/random.ts";
 
-/** Routine life events leave the notification stack after five seconds. */
-export const NOTIFICATION_DURATION_MS = 5_000;
-const KEY_KINDS: ReadonlySet<LifeEventRow["kind"]> = new Set(["milestone", "ending", "influence"]);
+/** Life-event notices are text only: each shows for three seconds, then fades. Nothing waits to be closed. */
+export const NOTIFICATION_DURATION_MS = 3_000;
 
-/** Key events (health changes, life milestones, endings, NFT influences) stay until the player closes them. */
-export function isKeyLifeEvent(row: Pick<LifeEventRow, "key" | "kind">): boolean {
-  return KEY_KINDS.has(row.kind) || row.key.includes("-event-health-");
+/** Journal facts the player caused this year and already sees where they acted (their own trades). */
+const PLAYER_ACTION_IDS: readonly string[] = ["market-trade", "army-sale"];
+
+/**
+ * Notices that would only repeat what the player just did or already sees on screen: the result of their own
+ * yearly action (shown on the action board) and their own market trades (shown in the market). Other activity
+ * facts, such as a child born, a person met or a loan taken, still notify. The life record keeps every one of them.
+ */
+export function isObviousNotice(row: Pick<LifeEventRow, "key" | "kind">): boolean {
+  return (row.kind === "activity" && row.key.includes("-outcome-")) || PLAYER_ACTION_IDS.some(id => row.key.endsWith(`-${id}`));
 }
 
-export function notificationExpiry(row: Pick<LifeEventRow, "key" | "kind">, now: number): number {
-  return isKeyLifeEvent(row) ? Number.POSITIVE_INFINITY : now + NOTIFICATION_DURATION_MS;
+export function notificationExpiry(_row: Pick<LifeEventRow, "key" | "kind">, now: number): number {
+  return now + NOTIFICATION_DURATION_MS;
 }
 export const MAX_EVENT_NOTIFICATIONS = 3;
 
@@ -44,7 +50,7 @@ export function expireEventNotifications(state: EventNotificationState, now: num
   return notifications.length === state.notifications.length ? state : { ...state, notifications };
 }
 
-/** Milliseconds until the next timed notification expires, or null when every open notification is key. */
+/** Milliseconds until the next notification expires, or null when none is open. */
 export function nextExpiryDelay(notifications: readonly EventNotification[], now: number): number | null {
   const timed = notifications.map(notification => notification.expiresAt).filter(Number.isFinite);
   return timed.length ? Math.max(0, Math.min(...timed) - now) : null;
@@ -65,7 +71,7 @@ export function syncEventNotifications(state: EventNotificationState | null, lif
   // including several outcomes delivered in a single engine update.
   const events = [
     ...buildImportantLifeEvents(life, world).flatMap(group => group.events.map(event => ({ ...event, age: group.age, year: group.year }))).reverse(),
-  ].map(event => ({
+  ].filter(event => !isObviousNotice(event)).map(event => ({
     ...event,
     // Journal position distinguishes real recurrences; content distinguishes
     // alternative branch facts recorded at that same position.

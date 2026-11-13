@@ -46,6 +46,9 @@ const fromAge = (age: number): HintRule["triggered"] => (_context, life) => life
 const view = (name: TutorialView): HintRule => ({ available: context => context.view === name });
 const never = () => false;
 
+/** The age the "Plan your fields" tip opens; the yearly reminder to plan starts the same year. */
+export const PLANTING_HINT_AGE = 4;
+
 const RULES: Record<TutorialHintId, HintRule> = {
   "welcome": view("home"),
   "home-begin": { ...view("home"), triggered: never },
@@ -57,6 +60,7 @@ const RULES: Record<TutorialHintId, HintRule> = {
   "ending": { available: (context, life) => onGame(context, life) && life.ended },
   "rail": { available: onGame, triggered: fromAge(2) },
   "resources": { available: (context, life) => onGame(context, life) && life.resourcesShown, triggered: fromAge(3) },
+  "planting": { available: (context, life) => onGame(context, life) && life.resourcesShown && !life.ended, triggered: fromAge(PLANTING_HINT_AGE) },
   "scene": { available: onGame, triggered: fromAge(1) },
   "focus": { available: (context, life) => onGame(context, life) && life.focusShown },
   "wealth": { available: (context, life) => onGame(context, life) && life.wealthShown, triggered: fromAge(4) },
@@ -81,7 +85,7 @@ const RULES: Record<TutorialHintId, HintRule> = {
 const AUTO_ORDER: readonly TutorialHintId[] = [
   "welcome", "roll", "weave", "nft-market", "figures", "mine", "character", "skills",
   "time-bar", "decision", "ending", "notifications", "market", "yearly-action", "focus",
-  "scene", "rail", "resources", "wealth", "life-record", "command-deck",
+  "scene", "rail", "resources", "planting", "wealth", "life-record", "command-deck",
 ];
 
 export function hintAvailable(id: TutorialHintId, context: TutorialContext): boolean {

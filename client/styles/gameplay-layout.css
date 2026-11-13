@@ -2,13 +2,15 @@
    Loaded last so it settles earlier rules. */
 
 /* Life events: a toast column fixed at the right edge, outside the flow of the main section. */
-.everfolk-game .event-notification-stack{position:fixed;top:140px;right:16px;z-index:45;width:300px;max-width:calc(100vw - 32px);margin:0;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 160px);overflow-y:auto;pointer-events:none}
-.everfolk-game .event-notification-stack>*{pointer-events:auto;box-shadow:0 10px 26px #1a2a2e33;animation:toast-in .25s ease-out}
+.everfolk-game .event-notification-stack{position:fixed;top:140px;right:16px;z-index:45;width:216px;max-width:calc(100vw - 32px);margin:0;display:flex;flex-direction:column;gap:7px;max-height:calc(100vh - 160px);overflow-y:auto;pointer-events:none}
+.everfolk-game .event-notification-stack>*{pointer-events:auto;box-shadow:0 7px 18px #1a2a2e2e;animation:toast-in .25s ease-out}
+/* Text-only notices let clicks pass through to the page: there is nothing on them to press by mistake. */
+.everfolk-game .event-notification-stack>.event-toast.is-info{pointer-events:none}
 @keyframes toast-in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.everfolk-game .event-notification-stack>*{animation:none}}
 
 /* "Skill learned" notices. */
-.everfolk-game .event-toast.is-skill{border-left:4px solid #3f6b4a}
+.everfolk-game .event-toast.is-skill{border-left:3px solid #3f6b4a}
 .everfolk-game .event-toast-badge.is-skill{background:#3f6b4a;color:#f6efd9}
 
 /* Keep the two dashboard columns close in height: long lists scroll inside their panels. */

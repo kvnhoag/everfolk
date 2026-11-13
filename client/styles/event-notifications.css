@@ -10,48 +10,57 @@
   pointer-events:auto;
 }
 
+/* Notices are compact: info notices are text only and fade after three seconds with a draining bar;
+   decisions and offers keep their one button. */
 .event-toast{
+  position:relative;
   pointer-events:auto;
   border:1px solid #b59865;
-  border-radius:6px;
+  border-radius:5px;
   background:#fff8ec;
-  padding:11px 14px;
-  box-shadow:inset 0 1px 0 #fff,0 3px 0 #cfbda0,0 6px 16px #2b231814;
+  padding:7px 10px 8px;
+  box-shadow:inset 0 1px 0 #fff,0 2px 0 #cfbda0,0 4px 12px #2b231814;
   display:flex;
   flex-direction:column;
-  gap:5px;
+  gap:3px;
+  overflow:hidden;
   animation:eventToastSlideIn .22s ease-out;
 }
 .event-toast.is-decision{
   border-color:#9e3b24;
-  border-left-width:5px;
+  border-left-width:4px;
   background:#fff7f2;
-  box-shadow:4px 4px 0 #9e3b2438;
+  box-shadow:3px 3px 0 #9e3b2438;
 }
 .event-toast.is-offer,.event-toast.is-legacy{
   border-color:#2b5c53;
-  border-left-width:5px;
+  border-left-width:4px;
   background:#f1f7f5;
+}
+.event-toast.is-reminder{
+  border-color:#a7822f;
+  border-left-width:4px;
+  background:#fdf4dc;
 }
 
 @keyframes eventToastSlideIn{
-  from{opacity:0;transform:translateX(14px)}
+  from{opacity:0;transform:translateX(10px)}
   to{opacity:1;transform:translateX(0)}
 }
 
 .event-toast-top{
   display:flex;
   align-items:center;
-  gap:6px;
-  font-size:10.5px;
+  gap:5px;
+  font-size:9px;
 }
 .event-toast-badge{
   display:inline-block;
-  padding:1px 6px;
-  font-size:9.5px;
+  padding:1px 5px;
+  font-size:8px;
   font-weight:700;
   text-transform:uppercase;
-  letter-spacing:.07em;
+  letter-spacing:.06em;
   background:#594630;
   color:#fbf6e9;
 }
@@ -60,6 +69,9 @@
 }
 .event-toast-badge.is-offer,.event-toast-badge.is-legacy{
   background:#2b5c53;
+}
+.event-toast-badge.is-reminder{
+  background:#8a6a22;
 }
 .event-toast-meta{
   color:#6c5c43;
@@ -70,9 +82,9 @@
   border:none;
   background:transparent;
   color:#6c5c43;
-  font-size:15px;
+  font-size:13px;
   line-height:1;
-  padding:0 3px;
+  padding:0 2px;
   cursor:pointer;
 }
 .event-toast-dismiss:hover{
@@ -80,14 +92,14 @@
 }
 .event-toast-title{
   font-family:var(--ef-font-display);
-  font-size:14.5px;
-  line-height:1.25;
+  font-size:12px;
+  line-height:1.2;
   color:#231c13;
 }
 .event-toast-body{
   margin:0;
-  font-size:11.5px;
-  line-height:1.45;
+  font-size:10.5px;
+  line-height:1.38;
   color:#4f4332;
 }
 .event-toast-footer{
@@ -99,8 +111,8 @@
   border:1px solid #594630;
   background:#2d2419;
   color:#fbf6e9;
-  padding:4px 9px;
-  font-size:11px;
+  padding:3px 7px;
+  font-size:10px;
   font-weight:700;
   cursor:pointer;
   font-family:inherit;
@@ -111,6 +123,32 @@
 }
 .event-toast-action:hover{
   opacity:.92;
+}
+/* The time left: a bar along the bottom edge that drains to nothing as the notice fades. */
+.event-toast-timer{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:3px;
+  background:#00000012;
+}
+.event-toast-timer>span{
+  display:block;
+  height:100%;
+  width:100%;
+  background:#8a6a22;
+  transform-origin:left center;
+  animation:eventToastTimer linear forwards;
+}
+.event-toast.is-skill .event-toast-timer>span{background:#3f6b4a}
+.event-toast.is-legacy .event-toast-timer>span{background:#2b5c53}
+@keyframes eventToastTimer{
+  from{transform:scaleX(1)}
+  to{transform:scaleX(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .event-toast-timer>span{animation-timing-function:steps(3,end)}
 }
 
 @media (max-width:960px){

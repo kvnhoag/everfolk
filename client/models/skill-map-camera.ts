@@ -18,10 +18,14 @@ export function mapMinZoom(viewport: MapSize, canvas: MapSize): number {
   return Math.min(1, overviewScale(viewport, canvas));
 }
 
-/** Leave a margin at either end so a drag cannot lose the entire atlas. */
+/**
+ * Leave a margin at either end so a drag cannot lose the entire atlas. Along an axis where the whole tree already
+ * fits, it stays centred: at the overview there is nothing to drag, so the tree does not slide around.
+ */
 export function constrainMapCamera(camera: MapCamera, viewport: MapSize, canvas: MapSize): MapCamera {
   const scale = clampMapZoom(camera.scale, mapMinZoom(viewport, canvas)), margin = 48;
   const axis = (offset: number, space: number, content: number) => {
+    if (content * scale <= space) return (space - content * scale) / 2;
     const first = Math.min(margin, space / 4), last = space - content * scale - first;
     return Math.max(Math.min(first, last), Math.min(Math.max(first, last), offset));
   };
@@ -49,10 +53,7 @@ export function mapTransform(camera: MapCamera, devicePixelRatio: number): strin
   return `translate(${snap(camera.x)}px, ${snap(camera.y)}px) scale(${camera.scale})`;
 }
 
-/** The skill tree opens at the drawn size (100%), where text renders natively, instead of fitting the whole atlas. */
-export const READABLE_START_ZOOM = 1;
-
-/** Where the skill tree opens: the deepest learned skill, else the first one the player can learn now. */
+/** The skill selected when the tree opens: the deepest learned skill, else the first one the player can learn now. */
 export function skillMapStartNode(view: readonly { id: string; state: string }[], depth: ReadonlyMap<string, number>, fallback: string): string {
   const learned = view.filter(node => node.state === "learned").sort((a, b) => (depth.get(b.id) ?? 0) - (depth.get(a.id) ?? 0));
   return learned[0]?.id ?? view.find(node => node.state === "available")?.id ?? fallback;
