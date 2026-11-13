@@ -84,6 +84,17 @@ const FARMING_JOBS = new Set([
   "farmer", "farmhand", "tenant-farmer", "master-cultivator", "master-household-farmer",
 ]);
 
+const POTTERY_JOBS = new Set([
+  "potter", "ceramic-decorator", "pottery-workshop-lead", "master-potter",
+]);
+
+const POTTERY_EVENT_IDS = new Set([
+  "early-wages-kiln-order", "specialist-kiln-load", "variety-trade-potter-drying",
+  "variety-trade-potter-stack", "variety-choice-pottery-mark", "early-year-pottery-offcut",
+  "meet-person-pottery", "date-person-pottery", "business-proposal-person-pottery",
+  "holdings-kiln-share", "need-scarce-ceramics", "need-master-offer-ceramics", "need-commission-ceramics",
+]);
+
 const ROUTE_SITUATIONS: Record<string, BannerSituationId> = {
   sculpture: "sculpture", philosophy: "philosophy", seafaring: "harbor", military: "military", commerce: "market",
   "astronomy-calendar": "astronomy", "music-performance": "music",
@@ -105,20 +116,43 @@ const ACTIVITY_SITUATIONS: Record<string, BannerSituationId> = {
   "visit-a-friend": "friendship", "join-an-evening-song": "music", "take-an-easy-walk": "civic",
 };
 
-const CONCEPT1_SITUATION_PLATES: Partial<Record<BannerSituationId, string>> = {
-  harbor: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
-  market: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
-  business: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
-  military: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
-  war: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
-  danger: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
-  study: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
-  philosophy: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
-  astronomy: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
-  civic: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
-};
+const CONCEPT1_BANNERS = "/assets/pixel/banners-concept1";
+const NILE_FARM_PLATE = `${CONCEPT1_BANNERS}/bg_nile_farm_480x224.png`;
+const POTTERY_KILN_PLATE = `${CONCEPT1_BANNERS}/bg_pottery_kiln_480x224.png`;
+const HOME_COURTYARD_PLATE = `${CONCEPT1_BANNERS}/bg_home_courtyard_480x224.png`;
+const CRAFT_WORKSHOP_PLATE = `${CONCEPT1_BANNERS}/bg_craft_workshop_480x224.png`;
+const TEMPLE_SHRINE_PLATE = `${CONCEPT1_BANNERS}/bg_temple_shrine_480x224.png`;
+const FESTIVAL_FEAST_PLATE = `${CONCEPT1_BANNERS}/bg_festival_feast_480x224.png`;
+const HARBOR_QUAY_PLATE = `${CONCEPT1_BANNERS}/bg_harbor_quay_480x224.png`;
+const MILITARY_GARRISON_PLATE = `${CONCEPT1_BANNERS}/bg_military_garrison_480x224.png`;
+const MOUSEION_STUDY_PLATE = `${CONCEPT1_BANNERS}/bg_mouseion_study_480x224.png`;
 
-const NILE_FARM_PLATE = "/assets/pixel/banners-concept1/bg_nile_farm_480x224.png";
+const CONCEPT1_SITUATION_PLATES: Partial<Record<BannerSituationId, string>> = {
+  home: HOME_COURTYARD_PLATE,
+  courtyard: HOME_COURTYARD_PLATE,
+  parenthood: HOME_COURTYARD_PLATE,
+  illness: HOME_COURTYARD_PLATE,
+  recovery: HOME_COURTYARD_PLATE,
+  retirement: HOME_COURTYARD_PLATE,
+  workshop: CRAFT_WORKSHOP_PLATE,
+  sculpture: CRAFT_WORKSHOP_PLATE,
+  music: FESTIVAL_FEAST_PLATE,
+  marriage: FESTIVAL_FEAST_PLATE,
+  courtship: FESTIVAL_FEAST_PLATE,
+  friendship: FESTIVAL_FEAST_PLATE,
+  harbor: HARBOR_QUAY_PLATE,
+  market: HARBOR_QUAY_PLATE,
+  business: HARBOR_QUAY_PLATE,
+  debt: HARBOR_QUAY_PLATE,
+  military: MILITARY_GARRISON_PLATE,
+  war: MILITARY_GARRISON_PLATE,
+  danger: MILITARY_GARRISON_PLATE,
+  study: MOUSEION_STUDY_PLATE,
+  philosophy: MOUSEION_STUDY_PLATE,
+  astronomy: MOUSEION_STUDY_PLATE,
+  civic: MOUSEION_STUDY_PLATE,
+  memorial: TEMPLE_SHRINE_PLATE,
+};
 
 interface BackdropSpec {
   readonly src: string;
@@ -127,6 +161,19 @@ interface BackdropSpec {
   readonly height: number;
   readonly bakedActor: boolean;
   readonly bannerStyle: BannerStyle;
+}
+
+function concept1BackdropGroup(
+  file: string,
+  bakedActor: boolean,
+  entries: ReadonlyArray<readonly [string, string?]>,
+): Record<string, BackdropSpec> {
+  const src = `${CONCEPT1_BANNERS}/${file}`;
+  const bannerStyle: BannerStyle = bakedActor ? "concept1-event" : "concept1-plate";
+  return Object.fromEntries(entries.map(([eventId, label]) => [
+    eventId,
+    { src, ...(label ? { label } : {}), width: 480, height: 224, bakedActor, bannerStyle },
+  ]));
 }
 
 const EVENT_BACKDROPS: Readonly<Partial<Record<string, BackdropSpec>>> = {
@@ -154,46 +201,67 @@ const EVENT_BACKDROPS: Readonly<Partial<Record<string, BackdropSpec>>> = {
     bakedActor: false,
     bannerStyle: "legacy-svg",
   },
-  "classical-alexander-egypt": {
-    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
-    label: "Alexander arrives in Egypt",
-    width: 480,
-    height: 224,
-    bakedActor: true,
-    bannerStyle: "concept1-event",
-  },
-  "classical-alexander-shore-work": {
-    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
-    label: "Supplies for the king's party",
-    width: 480,
-    height: 224,
-    bakedActor: true,
-    bannerStyle: "concept1-event",
-  },
-  "classical-alexandria-founded": {
-    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
-    label: "Lines for a new city",
-    width: 480,
-    height: 224,
-    bakedActor: true,
-    bannerStyle: "concept1-event",
-  },
-  "classical-euclid-teaching": {
-    src: "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
-    label: "Euclid teaches in Alexandria",
-    width: 480,
-    height: 224,
-    bakedActor: true,
-    bannerStyle: "concept1-event",
-  },
-  "classical-euclid-demonstration": {
-    src: "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
-    label: "Euclid's geometry proof",
-    width: 480,
-    height: 224,
-    bakedActor: true,
-    bannerStyle: "concept1-event",
-  },
+  ...concept1BackdropGroup("event_alexander_332bce_480x224.png", true, [
+    ["classical-alexander-egypt", "Alexander arrives in Egypt"],
+    ["classical-alexander-shore-work", "Supplies for the king's party"],
+    ["classical-alexandria-founded", "Lines for a new city"],
+  ]),
+  ...concept1BackdropGroup("event_euclid_300bce_480x224.png", true, [
+    ["classical-euclid-teaching", "Euclid teaches in Alexandria"],
+    ["classical-euclid-demonstration", "Euclid's geometry proof"],
+  ]),
+  ...concept1BackdropGroup("event_ptolemy_305bce_480x224.png", true, [
+    ["classical-ptolemy-kingship", "Ptolemy takes the royal title"],
+    ["classical-alexander-death", "After Alexander in Alexandria"],
+    ["classical-persian-reconquest", "News along the Egyptian coast"],
+  ]),
+  ...concept1BackdropGroup("event_pharos_280bce_480x224.png", true, [
+    ["classical-pharos-completed", "A tower above the harbor"],
+    ["era-pharos-stone", "Stone for the great lighthouse"],
+  ]),
+  ...concept1BackdropGroup("event_library_museum_480x224.png", true, [
+    ["classical-scholarly-households", "Patrons make room for readers"],
+    ["era-museum-scholar", "A place at the Museum"],
+    ["era-museum-steward", "Stewards for the Mouseion"],
+    ["era-library-copyists", "Copyists for the great collection"],
+    ["classical-aristotle-death", "Readers in Alexandria recall Aristotle"],
+    ["classical-aristotle-journey", "Letters bound for Athens"],
+  ]),
+  ...concept1BackdropGroup("event_succession_guard_480x224.png", true, [
+    ["classical-succession-guard", "An order during the succession struggles"],
+    ["classical-garrison-account", "The loads and the equipment"],
+    ["royal-general-supply-order", "A command decision about supplies"],
+    ["era-cleruch-serving", "Land for those who serve"],
+    ["era-cleruch-veteran", "Land for a veteran"],
+  ]),
+  ...concept1BackdropGroup("event_royal_harvest_tax_480x224.png", true, [
+    ["era-royal-land-lease", "Crown land to lease"],
+    ["era-royal-rent-due", "The crown's share is due"],
+    ["era-royal-linen", "Linen under the royal licence"],
+    ["era-royal-oil", "Jars for the royal oil"],
+    ["era-royal-licence-trade", "Agents for the licensed trades"],
+  ]),
+  ...concept1BackdropGroup("event_vessel_packing_480x224.png", true, [
+    ["early-training-potters-bench", "Orders beside the clay"],
+    ["inspire-ceramics-child", "At the potter's wheel"],
+    ["inspire-ceramics-young", "At the potter's wheel"],
+    ["inspire-ceramics-adult", "At the potter's wheel"],
+    ["inspire-ceramics-elder", "At the potter's wheel"],
+    ["holdings-gift-of-tools-ceramics", "A master potter's tools"],
+  ]),
+  ...concept1BackdropGroup("bg_temple_shrine_480x224.png", false, [
+    ["background-temple-household-childhood"],
+    ["background-temple-household-practice"],
+    ["background-temple-household-opportunity"],
+    ["later-temple-visit"],
+    ["era-temple-land-lease"],
+  ]),
+  ...concept1BackdropGroup("bg_festival_feast_480x224.png", false, [
+    ["meet-person-festival"],
+    ["date-person-festival"],
+    ["business-proposal-person-festival"],
+    ["child-shared-laughter"],
+  ]),
 };
 
 function fromScene(scene: SceneId, life: LifeState): BannerSituationId {
@@ -280,6 +348,31 @@ function isAgriculturalBackdrop(
   return !life.flags.retired && FARMING_JOBS.has(life.character?.jobId ?? "");
 }
 
+function isPotteryBackdrop(
+  life: LifeState,
+  situation: BannerSituationId,
+  accepted: SceneContext | undefined,
+  options: BannerOptions,
+): boolean {
+  if (options.birthReveal || life.age < 3 || life.phase === "ended" || life.health?.conditions.length) return false;
+  const eventId = accepted?.eventId ?? "";
+  if (accepted?.kind !== "pending" && !options.eventVisuals?.[eventId] && POTTERY_EVENT_IDS.has(eventId)) return true;
+  if (situation !== "workshop" && situation !== "courtyard") return false;
+  return !life.flags.retired && POTTERY_JOBS.has(life.character?.jobId ?? "");
+}
+
+function concept1SituationPlate(
+  life: LifeState,
+  world: WorldPack,
+  situation: BannerSituationId,
+  accepted: SceneContext | undefined,
+  options: BannerOptions,
+): string | undefined {
+  if (isAgriculturalBackdrop(life, world, situation, accepted, options)) return NILE_FARM_PLATE;
+  if (isPotteryBackdrop(life, situation, accepted, options)) return POTTERY_KILN_PLATE;
+  return CONCEPT1_SITUATION_PLATES[situation];
+}
+
 /** Presentation only. No mutation, random draw, stored progress or engine command. */
 export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: SceneContext, options: BannerOptions = {}): LifeBanner {
   const stage = avatarStage(life.age), stageLabel = BANNER_STAGE_LABELS[stage];
@@ -346,9 +439,7 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
     bannerStyle = backdrop.bannerStyle;
     bakedActor = backdrop.bakedActor;
   } else {
-    const concept1Plate = isAgriculturalBackdrop(life, world, situation, accepted, options)
-      ? NILE_FARM_PLATE
-      : CONCEPT1_SITUATION_PLATES[situation];
+    const concept1Plate = concept1SituationPlate(life, world, situation, accepted, options);
     if (concept1Plate) {
       assetSrc = concept1Plate;
       assetWidth = 480;

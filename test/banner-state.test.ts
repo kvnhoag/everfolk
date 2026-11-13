@@ -173,9 +173,9 @@ test("all banner IDs have a stable asset path and reading the banner leaves life
   const workshopLife = lifeAt(24);
   workshopLife.character!.jobId = "potter";
   const workshopBanner = resolveLifeBanner(workshopLife, world);
-  assert.equal(workshopBanner.assetSrc, "/assets/pixel/banners/workshop.svg");
-  assert.equal(workshopBanner.assetWidth, 240);
-  assert.equal(workshopBanner.assetHeight, 112);
+  assert.equal(workshopBanner.assetSrc, "/assets/pixel/banners-concept1/bg_pottery_kiln_480x224.png");
+  assert.equal(workshopBanner.assetWidth, 480);
+  assert.equal(workshopBanner.assetHeight, 224);
   assert.ok(banner.caption.length > 0); assert.match(banner.alt, /middle years/);
   assert.deepEqual(life, before); assert.deepEqual(world, pack);
 });

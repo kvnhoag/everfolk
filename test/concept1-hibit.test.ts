@@ -67,7 +67,7 @@ function outcomeScene(eventId: string, scene: SceneContext["scene"]): SceneConte
   };
 }
 
-test("all 17 Concept 1 portrait PNGs and 6 Concept 1 480x224 scene PNGs match their manifests", () => {
+test("all 17 Concept 1 portrait PNGs and 17 Concept 1 480x224 scene PNGs match their manifests", () => {
   const portraits = Object.values(concept1Registry.portraits);
   assert.equal(portraits.length, 17);
   for (const portrait of portraits) {
@@ -77,7 +77,7 @@ test("all 17 Concept 1 portrait PNGs and 6 Concept 1 480x224 scene PNGs match th
     assert.equal(bytes[25], 2, portrait.file);
     assert.equal(sha(bytes), portrait.sha256, portrait.file);
   }
-  assert.equal(sceneManifest.scenes.length, 6);
+  assert.equal(sceneManifest.scenes.length, 17);
   for (const scene of sceneManifest.scenes) {
     const bytes = readFileSync(new URL(`../public${scene.src}`, import.meta.url));
     assert.equal(bytes.readUInt32BE(16), 480, scene.file);
@@ -294,7 +294,51 @@ test("Mixed Concept 1 480x224 banners suppress duplicate actors on baked events 
 
   const potter = { ...life, character: { ...life.character!, jobId: "master-potter" } };
   const potterBanner = resolveLifeBanner(potter, lives11World);
-  assert.equal(potterBanner.assetSrc, "/assets/pixel/banners/workshop.svg");
-  assert.equal(potterBanner.assetWidth, 240);
-  assert.equal(potterBanner.assetHeight, 112);
+  assert.equal(potterBanner.assetSrc, "/assets/pixel/banners-concept1/bg_pottery_kiln_480x224.png");
+  assert.equal(potterBanner.assetWidth, 480);
+  assert.equal(potterBanner.assetHeight, 224);
+  assert.equal(potterBanner.actorVisible, true);
+
+  for (const [jobId, expectedFile] of [
+    ["tailor", "bg_craft_workshop_480x224.png"],
+    ["master-tailor", "bg_craft_workshop_480x224.png"],
+    ["sculptor", "bg_craft_workshop_480x224.png"],
+    ["performer", "bg_festival_feast_480x224.png"],
+  ] as const) {
+    const crafter = { ...life, character: { ...life.character!, jobId } };
+    const banner = resolveLifeBanner(crafter, lives11World);
+    assert.equal(banner.assetSrc, `/assets/pixel/banners-concept1/${expectedFile}`, jobId);
+    assert.equal(banner.actorVisible, true, `${jobId} keeps swappable modular actor`);
+  }
+
+  assert.equal(
+    resolveLifeBanner(life, lives11World, { id: "infant-home", key: "infant-home", kind: "birth", scene: "birth", motion: "gather", title: "Birth", caption: "Born.", alt: "Birth" }, { birthReveal: true }).assetSrc,
+    "/assets/pixel/banners-concept1/bg_home_courtyard_480x224.png",
+  );
+  assert.equal(
+    resolveLifeBanner(life, lives11World, outcomeScene("later-temple-visit", "history-city")).assetSrc,
+    "/assets/pixel/banners-concept1/bg_temple_shrine_480x224.png",
+  );
+  assert.equal(
+    resolveLifeBanner(life, lives11World, outcomeScene("later-temple-visit", "history-city")).actorVisible,
+    true,
+  );
+
+  for (const [eventId, expectedFile] of [
+    ["classical-ptolemy-kingship", "event_ptolemy_305bce_480x224.png"],
+    ["classical-pharos-completed", "event_pharos_280bce_480x224.png"],
+    ["era-pharos-stone", "event_pharos_280bce_480x224.png"],
+    ["era-museum-scholar", "event_library_museum_480x224.png"],
+    ["era-library-copyists", "event_library_museum_480x224.png"],
+    ["classical-succession-guard", "event_succession_guard_480x224.png"],
+    ["era-cleruch-veteran", "event_succession_guard_480x224.png"],
+    ["era-royal-land-lease", "event_royal_harvest_tax_480x224.png"],
+    ["inspire-ceramics-adult", "event_vessel_packing_480x224.png"],
+  ] as const) {
+    const banner = resolveLifeBanner(life, lives11World, outcomeScene(eventId, "history-city"));
+    assert.equal(banner.assetSrc, `/assets/pixel/banners-concept1/${expectedFile}`, eventId);
+    assert.equal(banner.assetWidth, 480);
+    assert.equal(banner.assetHeight, 224);
+    assert.equal(banner.actorVisible, false, `${eventId} has baked actor`);
+  }
 });

@@ -199,10 +199,21 @@ const concept1Registry = {
 const SCENE_SPECS = [
   { id: "event_alexander_332bce", file: "event_alexander_332bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-alexander-egypt", "classical-alexander-shore-work", "classical-alexandria-founded"] },
   { id: "event_euclid_300bce", file: "event_euclid_300bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-euclid-teaching", "classical-euclid-demonstration"] },
-  { id: "bg_harbor_quay", file: "bg_harbor_quay_480x224.png", mode: "backdrop", bakedActor: false, situations: ["harbor", "market", "business"] },
+  { id: "event_ptolemy_305bce", file: "event_ptolemy_305bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-ptolemy-kingship", "classical-alexander-death", "classical-persian-reconquest"] },
+  { id: "event_pharos_280bce", file: "event_pharos_280bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-pharos-completed", "era-pharos-stone"] },
+  { id: "event_library_museum", file: "event_library_museum_480x224.png", mode: "event", bakedActor: true, events: ["classical-scholarly-households", "era-museum-scholar", "era-museum-steward", "era-library-copyists", "classical-aristotle-death", "classical-aristotle-journey"] },
+  { id: "event_succession_guard", file: "event_succession_guard_480x224.png", mode: "event", bakedActor: true, events: ["classical-succession-guard", "classical-garrison-account", "royal-general-supply-order", "era-cleruch-serving", "era-cleruch-veteran"] },
+  { id: "event_royal_harvest_tax", file: "event_royal_harvest_tax_480x224.png", mode: "event", bakedActor: true, events: ["era-royal-land-lease", "era-royal-rent-due", "era-royal-linen", "era-royal-oil", "era-royal-licence-trade"] },
+  { id: "event_vessel_packing", file: "event_vessel_packing_480x224.png", mode: "event", bakedActor: true, events: ["early-training-potters-bench", "inspire-ceramics-child", "inspire-ceramics-young", "inspire-ceramics-adult", "inspire-ceramics-elder", "holdings-gift-of-tools-ceramics"] },
+  { id: "bg_harbor_quay", file: "bg_harbor_quay_480x224.png", mode: "backdrop", bakedActor: false, situations: ["harbor", "market", "business", "debt"] },
   { id: "bg_nile_farm", file: "bg_nile_farm_480x224.png", mode: "backdrop", bakedActor: false, situations: ["farming"] },
   { id: "bg_military_garrison", file: "bg_military_garrison_480x224.png", mode: "backdrop", bakedActor: false, situations: ["military", "war", "danger"] },
   { id: "bg_mouseion_study", file: "bg_mouseion_study_480x224.png", mode: "backdrop", bakedActor: false, situations: ["study", "philosophy", "astronomy", "civic"] },
+  { id: "bg_home_courtyard", file: "bg_home_courtyard_480x224.png", mode: "backdrop", bakedActor: false, situations: ["home", "courtyard", "parenthood", "illness", "recovery", "retirement"] },
+  { id: "bg_craft_workshop", file: "bg_craft_workshop_480x224.png", mode: "backdrop", bakedActor: false, situations: ["workshop", "sculpture"] },
+  { id: "bg_pottery_kiln", file: "bg_pottery_kiln_480x224.png", mode: "backdrop", bakedActor: false, situations: ["pottery"] },
+  { id: "bg_temple_shrine", file: "bg_temple_shrine_480x224.png", mode: "backdrop", bakedActor: false, situations: ["shrine", "memorial"] },
+  { id: "bg_festival_feast", file: "bg_festival_feast_480x224.png", mode: "backdrop", bakedActor: false, situations: ["feast", "music", "marriage", "courtship", "friendship"] },
 ];
 
 const sceneManifest = {
