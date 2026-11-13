@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "featherInsidePixels": 16,
+  "sourceSize": [1122, 1402],
+  "cards": [
+    {
+      "id": "ptolemy-rare-male",
+      "original": "artwork/cards/figure-inner-art-v12/source/ptolemy-rare-male.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-head-generated.png",
+      "polygon": [[450,12],[755,15],[830,120],[845,290],[820,420],[780,495],[760,555],[675,600],[540,565],[475,525],[420,510],[378,440],[370,325],[365,210],[400,85]],
+      "protectedRects": [{"name":"Raised tablet and its hand","box":[800,470,1122,950]},{"name":"Foreground hand, seal, scales and sacks","box":[0,650,1122,1402]}],
+      "faceCenter": [490,275],
+      "faceRadius": [120,145]
+    },
+    {
+      "id": "ptolemy-rare-female",
+      "original": "artwork/cards/figure-inner-art-v12/source/ptolemy-rare-female.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-female-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-head-generated.png",
+      "polygon": [[455,12],[755,12],[835,85],[865,230],[870,365],[790,440],[780,520],[735,590],[640,620],[535,590],[475,535],[420,490],[385,400],[380,245],[405,110]],
+      "protectedRects": [{"name":"Raised tablet and its hand","box":[800,470,1122,950]},{"name":"Foreground hand, seal, scales and sacks","box":[0,650,1122,1402]}],
+      "faceCenter": [490,275],
+      "faceRadius": [128,145]
+    },
+    {
+      "id": "euclid-rare-male",
+      "original": "artwork/cards/figure-inner-art-v12/source/euclid-rare-male.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-male-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-head-generated.png",
+      "polygon": [[330,70],[570,60],[665,110],[700,260],[685,430],[650,520],[585,570],[470,570],[350,535],[280,490],[260,360],[270,220]],
+      "protectedRects": [{"name":"Both hands, compass, ruler and diagrams","box":[0,590,1122,1402]},{"name":"Foreground collaborator","box":[900,0,1122,1402]}],
+      "faceCenter": [400,270],
+      "faceRadius": [120,145]
+    },
+    {
+      "id": "demetrius-rare-female",
+      "original": "artwork/cards/figure-inner-art-v12/source/demetrius-rare-female.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-female-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-head-generated.png",
+      "polygon": [[365,55],[675,50],[790,120],[820,290],[790,450],[780,540],[705,640],[570,660],[430,615],[330,535],[290,450],[285,300],[310,140]],
+      "protectedRects": [{"name":"Resting hand and wooden support","box":[0,390,275,650]},{"name":"Measuring hand, rule, windlass and foreground tools","box":[0,680,1122,1402]}],
+      "faceCenter": [382,310],
+      "faceRadius": [120,140]
+    },
+    {
+      "id": "eumenes-rare-male",
+      "original": "artwork/cards/figure-inner-art-v14/source/eumenes-rare-male.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v14/assets/eumenes-rare-male-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-head-generated.png",
+      "polygon": [[420,35],[680,35],[775,115],[805,285],[790,400],[780,505],[720,595],[585,620],[510,600],[465,550],[465,480],[440,440],[390,370],[365,270],[375,140]],
+      "protectedRects": [{"name":"Gold cloak brooch","box":[365,475,455,565]},{"name":"Raised papyrus and holding hand","box":[580,630,1050,1010]},{"name":"Writing hand, map and foreground objects","box":[0,780,1122,1402]}],
+      "faceCenter": [445,290],
+      "faceRadius": [125,145]
+    },
+    {
+      "id": "eumenes-rare-female",
+      "original": "artwork/cards/figure-inner-art-v14/source/eumenes-rare-female.png",
+      "previousPixel": "artwork/cards/figure-inner-art-v14/assets/eumenes-rare-female-pixel.png",
+      "candidate": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-head-generated.png",
+      "polygon": [[475,45],[720,55],[810,145],[825,330],[790,450],[735,495],[695,550],[680,610],[590,650],[485,610],[420,550],[385,455],[365,320],[380,160]],
+      "protectedRects": [{"name":"Gold cloak brooch","box":[700,550,775,630]},{"name":"Both hands, pen, maps and foreground objects","box":[0,780,1122,1402]}],
+      "faceCenter": [440,300],
+      "faceRadius": [125,145]
+    }
+  ]
+}

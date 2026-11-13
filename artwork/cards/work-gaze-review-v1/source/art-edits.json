@@ -1,0 +1,36 @@
+{
+  "id": "everfolk-work-gaze-review-v1",
+  "scope": "Art-only work-facing head and gaze corrections, selected after 104-card male/female visual audit.",
+  "cards": [
+    {
+      "id": "ptolemy-rare-male",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-pixel.png",
+      "sceneBrief": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
+    },
+    {
+      "id": "ptolemy-rare-female",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-female-pixel.png",
+      "sceneBrief": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
+    },
+    {
+      "id": "euclid-rare-male",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-pixel.png",
+      "sceneBrief": "A proof checker works with a compass and ruler on a geometrical proof sheet. The head inclines gently forward in a natural three-quarter view and the eyes follow the compass tip on the sheet. Keep the neck relaxed above the shoulders and preserve the drafting hands, compass, ruler and nearby collaborator."
+    },
+    {
+      "id": "demetrius-rare-female",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-pixel.png",
+      "sceneBrief": "A siege engineer tests and measures a timber windlass. The head bows gently forward in a natural three-quarter view and the eyes follow the measuring rule and its contact point on the mechanism. Keep the neck relaxed above the shoulders and preserve both hands, rule, rope and timber mechanism."
+    },
+    {
+      "id": "eumenes-rare-male",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-pixel.png",
+      "sceneBrief": "A campaign correspondent compares a held dispatch with the map and writing surface under his pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
+    },
+    {
+      "id": "eumenes-rare-female",
+      "sourceArt": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-pixel.png",
+      "sceneBrief": "A campaign correspondent compares a held dispatch with the map and writing surface under her pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
+    }
+  ]
+}

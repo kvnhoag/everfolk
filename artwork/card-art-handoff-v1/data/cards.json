@@ -290,8 +290,8 @@
     "fonts": "licenses/fonts/fonts.json",
     "pngNeedsFonts": false
   },
-  "sourceCatalogSha256": "7fe9c865476590f77ce4eb14395b0347b54572cda9a9cdb412f6a34bee074592",
-  "sourceRegistrySha256": "a197a77625012746afcfe234c7011d0910deda876ef86f20c54d5c8c8b2daa0f",
+  "sourceCatalogSha256": "77786ac2a4e65cd8e3fd78e32402536c6095a1b153aceba4fa23dae04826be93",
+  "sourceRegistrySha256": "d0d347d7276cbcdbd8e936bdf89bb64dc1bfe61f5d5abadfba8ddd1db43d267e",
   "defaultOverlay": "footerlessFrame",
   "exampleSerialsAreIssuedCopies": false,
   "assets": [
@@ -2126,7 +2126,7 @@
       },
       "symbol": "reference/symbols/euclid.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+      "sourceArtworkSha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553",
       "hashes": {
         "frame": {
           "width": 900,
@@ -2143,17 +2143,18 @@
           "rgbaSha256": "63ca1b31c2ab19b3bcf114c344ab0a013c6fd7448849d861feebf342fdad3c57"
         },
         "sourcePortrait": {
-          "sha256": "107ccf01d954cb841357790fb6267b5d5d42681ffb36b0f272dffddad773d9c3",
-          "bytes": 215454,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 213012,
+          "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+          "rgbaSha256": "83241de4502bac3caefb379d8dc837088435114e70f8a2eb65e7ba66a9995082"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 180458,
-          "sha256": "d65820927dd80e4551972f96af8be056892757c65213b8ec5b1ed98ed85f4eca",
-          "rgbaSha256": "06423d4a487e01ed6e9d5e1b57be8a02d604c22d83fb92370fb63e6f757b785d"
+          "bytes": 179936,
+          "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d",
+          "rgbaSha256": "a6db3c2d25d1962beb3cd5a72430beacf1df76acd0061b4ac61eeefa23f7b313"
         },
         "overlaySvg": {
           "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7"
@@ -2161,7 +2162,8 @@
         "footerlessOverlaySvg": {
           "sha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062"
         }
-      }
+      },
+      "sceneBrief": "A proof checker works with a compass and ruler on a geometrical proof sheet. The head inclines gently forward in a natural three-quarter view and the eyes follow the compass tip on the sheet. Keep the neck relaxed above the shoulders and preserve the drafting hands, compass, ruler and nearby collaborator."
     },
     {
       "id": "euclid-rare-female",
@@ -5003,7 +5005,7 @@
       },
       "symbol": "reference/symbols/demetrius.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+      "sourceArtworkSha256": "645b4fccde2f7b65733f34d5126c1179a1477e0ff8b465dd2901106874078552",
       "hashes": {
         "frame": {
           "width": 900,
@@ -5020,17 +5022,18 @@
           "rgbaSha256": "32f64c83ab9d0acbea7c7c2600db7a147b481c8664c7fcf5c6a0f964cc3948f8"
         },
         "sourcePortrait": {
-          "sha256": "4c58be62cf0c018b7c970dcea3d1896d20afa315a8ad5138f0b7bd4871e8e5eb",
-          "bytes": 226426,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 224052,
+          "sha256": "620e97fb2c7e1d25d0fc0a3bb8f330a349c98da8a00aa4e42a6bdbbb040163ad",
+          "rgbaSha256": "f2587bc42f8b7528fe6ece0d88040b8dd5347f53510fd0bf341f3bad0504aab6"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 191322,
-          "sha256": "1c6e008a996cf92d7955fd38cb1a7aa74fe4705e872c6d958c3f7b013834ad9c",
-          "rgbaSha256": "4ef6491c918f3355f515bcb0ed630771db9f3c11ff7f590573fbc1f99e99e5cd"
+          "bytes": 191324,
+          "sha256": "00ddff226876a76d01ff5a8560a646e9be96bad41376b4879ab8df791be77fc7",
+          "rgbaSha256": "97cfa44ea518760bdaa9bfa9abe7605017dfa1d7140b018e813784d9dbc4f2c8"
         },
         "overlaySvg": {
           "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e"
@@ -5038,7 +5041,8 @@
         "footerlessOverlaySvg": {
           "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b"
         }
-      }
+      },
+      "sceneBrief": "A siege engineer tests and measures a timber windlass. The head bows gently forward in a natural three-quarter view and the eyes follow the measuring rule and its contact point on the mechanism. Keep the neck relaxed above the shoulders and preserve both hands, rule, rope and timber mechanism."
     },
     {
       "id": "demetrius-epic-male",
@@ -6671,17 +6675,17 @@
       "tier": "common",
       "gender": "male",
       "rarity": "common",
-      "title": "Court Records Apprentice",
-      "canonicalTitle": "Court Records Apprentice",
-      "displayTitle": "Court Records Apprentice",
-      "subtitle": "Learning the Court's Accounts",
-      "bodyTitle": "Order Begins in the Record",
-      "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.",
+      "title": "Junior Court Official",
+      "canonicalTitle": "Junior Court Official",
+      "displayTitle": "Junior Court Official",
+      "subtitle": "First Duties in Ptolemy's Service",
+      "bodyTitle": "A Place in the Administration",
+      "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.",
       "copy": {
-        "title": "Court Records Apprentice",
-        "subtitle": "Learning the Court's Accounts",
-        "bodyTitle": "Order Begins in the Record",
-        "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government."
+        "title": "Junior Court Official",
+        "subtitle": "First Duties in Ptolemy's Service",
+        "bodyTitle": "A Place in the Administration",
+        "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government."
       },
       "editionLimit": null,
       "exampleEdition": "001/∞",
@@ -6703,43 +6707,44 @@
       },
       "symbol": "reference/symbols/ptolemy.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "fe399787af9ca127d75e11a18affe6d0af34c5fd61295a8186d615a6bd56f3a1",
+      "sourceArtworkSha256": "d1fcfd6dc44207357e9bbfc34e7b35048364b0d6199feb016184bf1d2310e5bb",
       "hashes": {
         "frame": {
           "width": 900,
           "height": 1260,
-          "bytes": 57628,
-          "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
-          "rgbaSha256": "b8492e7f7667874d702dc6707f45d69fc66c94a4f027505cad755130216f7973"
+          "bytes": 59386,
+          "sha256": "74426d748b1b05446520bc6fbdf090a1132fa8a4432a2e4a1094ecce105fa44a",
+          "rgbaSha256": "5792703baf8edb4e937ddb1a21a2bf881f4fb947c591c57a14b4ffbf660d8658"
         },
         "footerlessFrame": {
           "width": 900,
           "height": 1260,
-          "bytes": 57065,
-          "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c",
-          "rgbaSha256": "37286c785ba0a2480ea16c4324ff2cffb43fdbafaaf00eda1bfea01bf13b439d"
+          "bytes": 58550,
+          "sha256": "0d702eff051a9618eaff3c2ae23fa2e123b27ed6079b98627e1c911093e4e779",
+          "rgbaSha256": "bdfbf3e7be3c84715ca30dcd9f0732c8e0fa84786d57a58b885db943f4ed5d49"
         },
         "sourcePortrait": {
           "width": 840,
           "height": 1050,
-          "bytes": 221638,
-          "sha256": "0b93c66dd31ef927c4b193416a735ded1cc505961c4a02e68b21c3039d26107f",
-          "rgbaSha256": "8fad8edc2034b2d7eb5465a0fc792bb9d5e40db44d0f6692463f85cfebf9008a"
+          "bytes": 220120,
+          "sha256": "5cde9df10dcc6268d550b5ec246901b6828f646d85e9aeed37ca034301c0c68b",
+          "rgbaSha256": "ceeeb8a97d98f5fcc5087113181b977224f5c6cdfcd9b2ddb265f84a485b6297"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 187598,
-          "sha256": "e626a411e53c11b16ef2e57aa4a32a598671c635b1b68846771df84f3b148c39",
-          "rgbaSha256": "73554607c3b323170f15e65facf50035632549975f9c6f7c18c64704ff953ce8"
+          "bytes": 182830,
+          "sha256": "78dc3cb202c7e1f719ae7a1c2235c56fe09abc64335e24714c2555bfe3855e5c",
+          "rgbaSha256": "e555e2ff5c996954779bdf3e5de467679360f4601a569d4171a57d2fb4cf3cdb"
         },
         "overlaySvg": {
-          "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
+          "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf"
         },
         "footerlessOverlaySvg": {
-          "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
+          "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf"
         }
-      }
+      },
+      "sceneBrief": "A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office."
     },
     {
       "id": "ptolemy-common-female",
@@ -6749,17 +6754,17 @@
       "tier": "common",
       "gender": "female",
       "rarity": "common",
-      "title": "Court Records Apprentice",
-      "canonicalTitle": "Court Records Apprentice",
-      "displayTitle": "Court Records Apprentice",
-      "subtitle": "Learning the Court's Accounts",
-      "bodyTitle": "Order Begins in the Record",
-      "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.",
+      "title": "Junior Court Official",
+      "canonicalTitle": "Junior Court Official",
+      "displayTitle": "Junior Court Official",
+      "subtitle": "First Duties in Ptolemy's Service",
+      "bodyTitle": "A Place in the Administration",
+      "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.",
       "copy": {
-        "title": "Court Records Apprentice",
-        "subtitle": "Learning the Court's Accounts",
-        "bodyTitle": "Order Begins in the Record",
-        "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government."
+        "title": "Junior Court Official",
+        "subtitle": "First Duties in Ptolemy's Service",
+        "bodyTitle": "A Place in the Administration",
+        "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government."
       },
       "editionLimit": null,
       "exampleEdition": "001/∞",
@@ -6781,43 +6786,44 @@
       },
       "symbol": "reference/symbols/ptolemy.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "a08ae26a00694926af3f04a754e982db7fdea9b6bc967bfafe5f714acaf1ab66",
+      "sourceArtworkSha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
       "hashes": {
         "frame": {
           "width": 900,
           "height": 1260,
-          "bytes": 57628,
-          "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
-          "rgbaSha256": "b8492e7f7667874d702dc6707f45d69fc66c94a4f027505cad755130216f7973"
+          "bytes": 59388,
+          "sha256": "51f2f7d4a66aaec44d2880c03730f9a3ec0722cfa9332377c6f7240aa149101a",
+          "rgbaSha256": "5792703baf8edb4e937ddb1a21a2bf881f4fb947c591c57a14b4ffbf660d8658"
         },
         "footerlessFrame": {
           "width": 900,
           "height": 1260,
-          "bytes": 57065,
-          "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c",
-          "rgbaSha256": "37286c785ba0a2480ea16c4324ff2cffb43fdbafaaf00eda1bfea01bf13b439d"
+          "bytes": 58552,
+          "sha256": "9e09d81b98ac263b89c011d9a88dd5e2a7340c7586a15202c201a6c097e75ebb",
+          "rgbaSha256": "bdfbf3e7be3c84715ca30dcd9f0732c8e0fa84786d57a58b885db943f4ed5d49"
         },
         "sourcePortrait": {
           "width": 840,
           "height": 1050,
-          "bytes": 223462,
-          "sha256": "b2d413010161d0a0a03a23a6cf29ed1393fd15fddf634dc0aeab3800f0981370",
-          "rgbaSha256": "67154e3b14b00dabb16610c3dc6c620e0c304b4c7b8f5c0d104c3a32775de804"
+          "bytes": 231434,
+          "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca",
+          "rgbaSha256": "44976ed969b44e278729a025ac95fb9d16b8832177753b6ed91d1cfb9cb28735"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 189370,
-          "sha256": "9192a635b7ec8ec34ce422145c3d0956a43408bbe325e0ecb57fe85dc7a6e404",
-          "rgbaSha256": "0bb8990af50ae878d786507d2986d374eca1462d0c6ecbc9f464a9e5428cf2a4"
+          "bytes": 193086,
+          "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade",
+          "rgbaSha256": "aabae5aca737e31ac29e19c7efa2e0d0a4dd0b18868264db467c541b1b8834b0"
         },
         "overlaySvg": {
-          "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
+          "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf"
         },
         "footerlessOverlaySvg": {
-          "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
+          "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf"
         }
-      }
+      },
+      "sceneBrief": "A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office."
     },
     {
       "id": "ptolemy-uncommon-male",
@@ -7013,7 +7019,7 @@
       },
       "symbol": "reference/symbols/ptolemy.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+      "sourceArtworkSha256": "76bb8cb05410568a68591ecb56c83d215c3bef5aa19dd9ef5e862d0f82a0e65a",
       "hashes": {
         "frame": {
           "width": 900,
@@ -7030,17 +7036,18 @@
           "rgbaSha256": "88a6fc7f6f38e64cb5a51d29c924c22aa636d868d912e18865eda0312df95023"
         },
         "sourcePortrait": {
-          "sha256": "8b5cd93d8e681a6f8aa7c8fa87457639a95176e32cf91c8ad8e5a242a028d142",
-          "bytes": 228312,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 225476,
+          "sha256": "da0e1a20313b7af443bb28f678b0f72e041dd97ef0b625fa0a0afee9ddebf9fd",
+          "rgbaSha256": "9a67c7280b1f8b27878824d5ed444998b6d41d96417539f401236e4063ebb183"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 194330,
-          "sha256": "21f3065e161577dceb47a662e297f3dee37c6ee26cadf7f77084f4ec3dd7de88",
-          "rgbaSha256": "d9816b60c467eab0f0eac41181bdcb48ef5cf356a88ff3572e1ec71f06eae2c2"
+          "bytes": 194142,
+          "sha256": "e6eb120866c479ee7b509175acbe3833e1f0815fb9fbff95061157beb0398314",
+          "rgbaSha256": "a05a65dcaf6ec9a9a45315e25cd7524c054dea22cf3d997208bd4f739f5316a8"
         },
         "overlaySvg": {
           "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc"
@@ -7048,7 +7055,8 @@
         "footerlessOverlaySvg": {
           "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a"
         }
-      }
+      },
+      "sceneBrief": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
     },
     {
       "id": "ptolemy-rare-female",
@@ -7090,7 +7098,7 @@
       },
       "symbol": "reference/symbols/ptolemy.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
+      "sourceArtworkSha256": "be000bc3c79ecae0d2900b8f1deaef40bf2a87a46560c3cd6af8db4c452de9c4",
       "hashes": {
         "frame": {
           "width": 900,
@@ -7107,17 +7115,18 @@
           "rgbaSha256": "88a6fc7f6f38e64cb5a51d29c924c22aa636d868d912e18865eda0312df95023"
         },
         "sourcePortrait": {
-          "sha256": "7cc20f15f5a7d7fce7ec54a56906a16a1fe96621906c7981bf9979105ccd4b71",
-          "bytes": 229890,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 229118,
+          "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+          "rgbaSha256": "490d41a59b142d07f7e4f58f2b9ae3cfc8150b1f5a6da22a9b72986b826692a2"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 196708,
-          "sha256": "57e890ecc2885d1e52306b06f56003c33fa056defca010b2a051c17b1a889cbd",
-          "rgbaSha256": "ef867c0465f8e9bcb016034f3301914cd91cf01683a953e9caffc21955caeb71"
+          "bytes": 197028,
+          "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda",
+          "rgbaSha256": "a7f096a5dc651748d7284693aea1839af2a7e82351bc694376cb2f11a0618122"
         },
         "overlaySvg": {
           "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc"
@@ -7125,7 +7134,8 @@
         "footerlessOverlaySvg": {
           "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a"
         }
-      }
+      },
+      "sceneBrief": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
     },
     {
       "id": "ptolemy-epic-male",
@@ -9108,7 +9118,7 @@
       },
       "symbol": "reference/symbols/eumenes.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
+      "sourceArtworkSha256": "db91466ff4dd95e5eae5ed429c5de74d53e58330661c53a9b0962022ecf19fa5",
       "hashes": {
         "frame": {
           "width": 900,
@@ -9125,17 +9135,18 @@
           "rgbaSha256": "fd442afc3ede82a6527bbbe8ee112c99a51c56942e76cda17170bb0bd55cb48f"
         },
         "sourcePortrait": {
-          "sha256": "e3c759fcfea64faba6d926182b95fca8cde3c20ff0a4cee2318185b260eebc23",
-          "bytes": 229182,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 227642,
+          "sha256": "4d68200a056f104e099da93f6c5d64ee8d9ccf3e30f0c694220acddc27faa1b3",
+          "rgbaSha256": "1ae01b90997d55e2da33dd61ff97bf06c34629ecae52b7a64a6638b5c0ae9548"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 194972,
-          "sha256": "74cfda6887268a03ff6c340080759b26a0799a4acf57177693e12e5295a2ab73",
-          "rgbaSha256": "17165f16e50a3f54223fc08c96fd7ef8b6e00f56be4e72664bed3da8951bfd17"
+          "bytes": 195340,
+          "sha256": "4248096f716c5f05e4f66bffe745baf56fd594808047f4d441d82745a7399920",
+          "rgbaSha256": "f5a880f84b6dd5fddeafc73b5300db4f23cfdd5696b5ae6c80f6c7e8e5b405fd"
         },
         "overlaySvg": {
           "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730"
@@ -9143,7 +9154,8 @@
         "footerlessOverlaySvg": {
           "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6"
         }
-      }
+      },
+      "sceneBrief": "A campaign correspondent compares a held dispatch with the map and writing surface under his pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
     },
     {
       "id": "eumenes-rare-female",
@@ -9185,7 +9197,7 @@
       },
       "symbol": "reference/symbols/eumenes.svg",
       "historicalSources": [],
-      "sourceArtworkSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
+      "sourceArtworkSha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e",
       "hashes": {
         "frame": {
           "width": 900,
@@ -9202,17 +9214,18 @@
           "rgbaSha256": "fd442afc3ede82a6527bbbe8ee112c99a51c56942e76cda17170bb0bd55cb48f"
         },
         "sourcePortrait": {
-          "sha256": "b166ed4845d3b0a84223e19d431f6c1f4eb7ce300d2895513478233739240cf9",
-          "bytes": 225326,
           "width": 840,
-          "height": 1050
+          "height": 1050,
+          "bytes": 224898,
+          "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+          "rgbaSha256": "6472838969da763eee91d4dae7b3815876748ef47bbcf85179f5a8c8f25972c5"
         },
         "preview": {
           "width": 450,
           "height": 630,
-          "bytes": 192614,
-          "sha256": "68dd8668497cdc255ff0c351d85e6688e9e95a41e20797c251a3b976c8b9c159",
-          "rgbaSha256": "a7d69f3aba3045c5b8011d33fc387a8fa2442ea9a830cde7e99feca81db45a05"
+          "bytes": 193156,
+          "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09",
+          "rgbaSha256": "efa172d8a222f702e755efcc1c740ce48e7e0803947c5106bf6c498b6686c81e"
         },
         "overlaySvg": {
           "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730"
@@ -9220,7 +9233,8 @@
         "footerlessOverlaySvg": {
           "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6"
         }
-      }
+      },
+      "sceneBrief": "A campaign correspondent compares a held dispatch with the map and writing surface under her pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
     },
     {
       "id": "eumenes-epic-male",
@@ -11342,6 +11356,7 @@
   ],
   "iconCredits": "licenses/icon-credits.html",
   "originalArtwork": "Approved existing artwork is included as visual reference. Replacing a portrait never requires regenerating the frame, symbols or biography.",
-  "editorialRoleRevision": "role-progression-v1",
-  "headerSpacingRevision": "subtitle-spacing-v1"
+  "editorialRoleRevision": "ptolemy-common-official-v1",
+  "headerSpacingRevision": "subtitle-spacing-v1",
+  "gazeRevision": "work-gaze-review-v1"
 }

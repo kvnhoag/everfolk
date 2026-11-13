@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const ROOT=path.resolve(__dirname,'..'),REPO=path.resolve(ROOT,'../../..');
+const OWN='artwork/cards/work-gaze-review-v1',LIB='artwork/cards/framed-collection-v14',KIT='artwork/card-art-handoff-v1';
+const at=p=>path.join(REPO,p),old=p=>path.join(ROOT,'backup',p);
+const load=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),sha=p=>hash(fs.readFileSync(p));
+const need=(v,m)=>{if(!v)throw Error(m);};
+const json=(p,v)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n');};
+const definitions=()=>load(path.join(__dirname,'art-edits.json')).cards;
+const copyKeys=['title','canonicalTitle','displayTitle','subtitle','bodyTitle','bodyText'];
+module.exports={fs,path,ROOT,REPO,OWN,LIB,KIT,at,old,load,hash,sha,need,json,definitions,copyKeys};

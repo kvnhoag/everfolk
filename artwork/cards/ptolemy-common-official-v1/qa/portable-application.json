@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-ptolemy-common-official-v1",
+  "target": "/home/wdrag/workspace/kvn_hoag/everfolk",
+  "applied": true,
+  "changedCards": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "copiedFiles": 102,
+  "skippedBodylessFiles": 3,
+  "sourceCatalogSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+  "preservedActiveOverrides": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "parentVariantsUnchanged": true,
+  "unselectedRegistryAndKitRowsUnchanged": true,
+  "retainedWorldsUnchanged": true,
+  "kitManifestSha256": "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24"
+}

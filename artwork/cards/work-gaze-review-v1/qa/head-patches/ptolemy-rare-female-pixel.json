@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\ptolemy-rare-female-gaze-fixed.png",
+  "sourceSha256": "f4caaacd66dda4f1f45972deafc73bef68a4d1c739f8cb906ea0025bf5bd5e17",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\assets\\ptolemy-rare-female-coarse.png",
+  "baseSha256": "7f5d3ce187660ca06510101f5fc54decd58eaa79b1851fde730b43faab91f77f",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-female-coarse.json",
+  "baseQaSha256": "7a9c30c19228e74ea992ccb523521bc965a240022d565d4e3f5800175ac46dad",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\ptolemy-rare-female-face.json",
+  "configSha256": "8329ed03d512f17434aa04e8a2b47e6ad0564d4b0d1312425e7d3f17ff8cc79e",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          490,
+          275
+        ],
+        "radius": [
+          128,
+          145
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-female-pixel-generated.png",
+  "outputSha256": "cd32762c9705117b110b63ecbac0139ec8a68487b20574e342e544acc8daa8bf",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "aff3c82406e4dbea8d88e9103091289a5bcf0859f169a4d9b05f6bd620004e67",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-female-face-detail-mask.png",
+  "maskSha256": "46dbb9f633c25d16e6c97e7cc90e9703d07bcb63fd9c3bb0eafda3ff5fee3db9",
+  "maskPixelSha256": "35a2eb53dec2fb4c31bd822309109f430928b1f1a243fc694906ed404b608fa3",
+  "selectedDetailCells": 1341,
+  "retainedCoarseCells": 23159,
+  "affectedPixels": 48276,
+  "changedPixels": 47576,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

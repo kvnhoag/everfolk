@@ -237,10 +237,10 @@
       },
       {
         "bounds": {
-          "height": 87.744,
+          "height": 87.74400000000001,
           "width": 733.376,
           "x": 83.31200000000001,
-          "y": 54.21600000000001
+          "y": 54.215999999999994
         },
         "fill": "#f0e6cf",
         "id": 74,
@@ -291,7 +291,7 @@
     "title": "eumenes-rare-male.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 341,
+    "uid": 14,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "eumenes-rare-male.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 341,
+    "uid": 14,
     "units": "Pixels"
   }
 }

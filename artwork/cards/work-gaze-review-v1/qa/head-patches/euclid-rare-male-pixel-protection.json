@@ -1,0 +1,53 @@
+{
+  "id": "euclid-rare-male",
+  "method": "Whole6×6 registered-cell selection between verified new PixelOE head and unchanged prior pixel portrait; no resampling or colour blending",
+  "previousPixel": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-male-pixel.png",
+  "previousPixelSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+  "rawPixelCandidate": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel-generated.png",
+  "rawPixelCandidateSha256": "962cb3fe8a25776e5ba196f244c11780caa6b136d2781867e314d164e347ac4f",
+  "paintingHeadMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-mask.png",
+  "selectionMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel-selection-mask.png",
+  "selectionMaskSha256": "7ef38dcf8e022f5fdbf3690034eb06b62aa773dbc64ca61b15c4f2e8ff0dc74a",
+  "dimensions": [
+    840,
+    1050
+  ],
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "selectedCells": 3092,
+  "expandedMaskPixels": 3830,
+  "excludedProtectedCells": 0,
+  "changedPixels": 109670,
+  "outsideSelectionChangedPixels": 0,
+  "protectedChangedPixels": 0,
+  "selectedCandidateDifferingPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Both hands, compass, ruler and diagrams",
+      "box": [
+        0,
+        441,
+        840,
+        1050
+      ]
+    },
+    {
+      "name": "Foreground collaborator",
+      "box": [
+        673,
+        0,
+        840,
+        1050
+      ]
+    }
+  ],
+  "wholeCommonCellSelection": true,
+  "unselectedPixelsEqualPriorPortrait": true,
+  "selectedPixelsEqualVerifiedPixelOeCandidate": true,
+  "exactPngReadback": true,
+  "output": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-pixel.png",
+  "outputSha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553"
+}

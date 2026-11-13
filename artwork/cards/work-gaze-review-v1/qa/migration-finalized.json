@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-work-gaze-review-v1",
+  "changedCards": [
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "euclid-rare-male",
+    "demetrius-rare-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female"
+  ],
+  "newArtwork": [
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "euclid-rare-male",
+    "demetrius-rare-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female"
+  ],
+  "oldSourceCatalogSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+  "sourceCatalogSha256": "77786ac2a4e65cd8e3fd78e32402536c6095a1b153aceba4fa23dae04826be93",
+  "oldKitManifestSha256": "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24",
+  "kitManifestSha256": "883806b75b80521d5acea19fd58c896999390cad40aa54fc362048ab5a49c947",
+  "copyAndTitlesUnchanged": true,
+  "approvedFrameBytesUnchanged": true,
+  "unselectedKitRowsUnchanged": 130,
+  "preservedActiveOverrides": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "activeEntryRecordsUnchanged": true,
+  "parentVariantsUnchanged": true,
+  "retainedWorldsUnchanged": true,
+  "nativeWorkerClosed": true
+}

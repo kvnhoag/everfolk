@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\demetrius-rare-female-gaze-fixed.png",
+  "sourceSha256": "27591148a083e5ead9674c264a1c06954eaa201da14615078ee4dc42c7dcbc54",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\assets\\demetrius-rare-female-coarse.png",
+  "baseSha256": "2a081bd4d9449201d6bae35bffdf95c5f886e3722e6a034110dbd1f2f17f927a",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\demetrius-rare-female-coarse.json",
+  "baseQaSha256": "5e21e2bfd92f4eb825684ef363d93f630bb7ab39a72679f2b431b015752c63b3",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\demetrius-rare-female-face.json",
+  "configSha256": "ff59e2bb40244fb743f2d9917b9e3db077eda4434a2dec27cbe5259339068646",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          382,
+          310
+        ],
+        "radius": [
+          120,
+          140
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\demetrius-rare-female-pixel-generated.png",
+  "outputSha256": "099c209f57ecba58cdde1ff274eaf5eb6715cf0f1cb12d389036c45114bd3414",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "88ee12fbb86698b185b394fb52b5cc7e32f3a780feebcaa9f810631d3a91428d",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\demetrius-rare-female-face-detail-mask.png",
+  "maskSha256": "e5be416db8d8881bc7260701d750e1aa913356362a8c95f45ce681cbda80aa95",
+  "maskPixelSha256": "dd85ffb0ab9996bc4152c90f1c7211c096a555f6f259ce84c4a407bb44aca882",
+  "selectedDetailCells": 1218,
+  "retainedCoarseCells": 23282,
+  "affectedPixels": 43848,
+  "changedPixels": 43425,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

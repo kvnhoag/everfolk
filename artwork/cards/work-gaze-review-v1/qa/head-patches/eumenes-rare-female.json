@@ -1,0 +1,109 @@
+{
+  "id": "eumenes-rare-female",
+  "original": "artwork/cards/figure-inner-art-v14/source/eumenes-rare-female.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      475,
+      45
+    ],
+    [
+      720,
+      55
+    ],
+    [
+      810,
+      145
+    ],
+    [
+      825,
+      330
+    ],
+    [
+      790,
+      450
+    ],
+    [
+      735,
+      495
+    ],
+    [
+      695,
+      550
+    ],
+    [
+      680,
+      610
+    ],
+    [
+      590,
+      650
+    ],
+    [
+      485,
+      610
+    ],
+    [
+      420,
+      550
+    ],
+    [
+      385,
+      455
+    ],
+    [
+      365,
+      320
+    ],
+    [
+      380,
+      160
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-mask.png",
+  "maskSha256": "bd98ab00d2e848a42a409421b66ce94599f8b1bd1300ca7d8f7a0a0427778965",
+  "maskedPixels": 216880,
+  "changedPixels": 213950,
+  "changedBounds": [
+    367,
+    46,
+    824,
+    649
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Gold cloak brooch",
+      "box": [
+        700,
+        550,
+        775,
+        630
+      ]
+    },
+    {
+      "name": "Both hands, pen, maps and foreground objects",
+      "box": [
+        0,
+        780,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "46b35b3fe9191f43ad9885f3c5b31b71b55e782778c3aabd4686f23601b7b63d",
+    "candidate": "93967776cdaf909bcc6b5a0573e41e47444be3659ce2b262f90b5368dfbcbd77"
+  },
+  "outputSha256": "8bd6ca0e0d0cf2dc33e6e2f402d88c985d12be2e89ce4ffc1eca4a6ea187fa7f",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

@@ -1,0 +1,62 @@
+{
+  "id": "eumenes-rare-male",
+  "method": "Whole6×6 registered-cell selection between verified new PixelOE head and unchanged prior pixel portrait; no resampling or colour blending",
+  "previousPixel": "artwork/cards/figure-inner-art-v14/assets/eumenes-rare-male-pixel.png",
+  "previousPixelSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
+  "rawPixelCandidate": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel-generated.png",
+  "rawPixelCandidateSha256": "26c5f581228be248ec6b069a114e028c66ef0bb739f09031d76edf01040084bc",
+  "paintingHeadMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-mask.png",
+  "selectionMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel-selection-mask.png",
+  "selectionMaskSha256": "2064aa0b3c11bcf5f037629455de1e926d037a44cd175ae8ea8f50ec21d7b870",
+  "dimensions": [
+    840,
+    1050
+  ],
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "selectedCells": 3345,
+  "expandedMaskPixels": 3767,
+  "excludedProtectedCells": 0,
+  "changedPixels": 118793,
+  "outsideSelectionChangedPixels": 0,
+  "protectedChangedPixels": 0,
+  "selectedCandidateDifferingPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Gold cloak brooch",
+      "box": [
+        273,
+        355,
+        341,
+        424
+      ]
+    },
+    {
+      "name": "Raised papyrus and holding hand",
+      "box": [
+        434,
+        471,
+        787,
+        757
+      ]
+    },
+    {
+      "name": "Writing hand, map and foreground objects",
+      "box": [
+        0,
+        584,
+        840,
+        1050
+      ]
+    }
+  ],
+  "wholeCommonCellSelection": true,
+  "unselectedPixelsEqualPriorPortrait": true,
+  "selectedPixelsEqualVerifiedPixelOeCandidate": true,
+  "exactPngReadback": true,
+  "output": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-pixel.png",
+  "outputSha256": "db91466ff4dd95e5eae5ed429c5de74d53e58330661c53a9b0962022ecf19fa5"
+}

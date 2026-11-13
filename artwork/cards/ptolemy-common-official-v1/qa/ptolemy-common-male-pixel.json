@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\source\\ptolemy-common-male.png",
+  "sourceSha256": "5e83703c33f0202f261d2cf32ce9624b33347d5c0ee2897ff3a7362d611e5918",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\assets\\ptolemy-common-male-coarse.png",
+  "baseSha256": "d1381b00f583d0770918f5f369307ad2721c9ca0ab83efe0165af402ab8f4e30",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\qa\\ptolemy-common-male-coarse.json",
+  "baseQaSha256": "2797e7ddedfb9a0fc40f04de0d025c2bd575ed0fbf8063efbd0faf3fe5ff2eb3",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\source\\ptolemy-common-male-face.json",
+  "configSha256": "bf3d68d5b406121065245eb499b64c7e6530f46e96b4e865e33cafd777ff43e6",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          455,
+          264
+        ],
+        "radius": [
+          112,
+          137
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\assets\\ptolemy-common-male-pixel.png",
+  "outputSha256": "d1fcfd6dc44207357e9bbfc34e7b35048364b0d6199feb016184bf1d2310e5bb",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "b7f5045c97cb03c6bc30dd82944cd32e2a5a14537c35b6311ebd61cb311d72f7",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\qa\\ptolemy-common-male-detail-mask.png",
+  "maskSha256": "19348f09da1a598f256107befb7508b5fa6b2814cdd65e9434c56d36cc5663e5",
+  "maskPixelSha256": "fd7eceade3ed88c4f60875d27eef9e48598dc24a91f40db6f24f4f52e11b4ea2",
+  "selectedDetailCells": 1118,
+  "retainedCoarseCells": 23382,
+  "affectedPixels": 40248,
+  "changedPixels": 39790,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

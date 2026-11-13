@@ -1,0 +1,113 @@
+{
+  "id": "ptolemy-rare-female",
+  "original": "artwork/cards/figure-inner-art-v12/source/ptolemy-rare-female.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      455,
+      12
+    ],
+    [
+      755,
+      12
+    ],
+    [
+      835,
+      85
+    ],
+    [
+      865,
+      230
+    ],
+    [
+      870,
+      365
+    ],
+    [
+      790,
+      440
+    ],
+    [
+      780,
+      520
+    ],
+    [
+      735,
+      590
+    ],
+    [
+      640,
+      620
+    ],
+    [
+      535,
+      590
+    ],
+    [
+      475,
+      535
+    ],
+    [
+      420,
+      490
+    ],
+    [
+      385,
+      400
+    ],
+    [
+      380,
+      245
+    ],
+    [
+      405,
+      110
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-mask.png",
+  "maskSha256": "5567382fd49abb57726d2eb55294ea6331006c596e500d11a7d4108b817b151d",
+  "maskedPixels": 240874,
+  "changedPixels": 238362,
+  "changedBounds": [
+    380,
+    12,
+    869,
+    619
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Raised tablet and its hand",
+      "box": [
+        800,
+        470,
+        1122,
+        950
+      ]
+    },
+    {
+      "name": "Foreground hand, seal, scales and sacks",
+      "box": [
+        0,
+        650,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "df7f2ee86384a6673e37d1f9ed217efb889d52c562a340d405a27cea60be5aeb",
+    "candidate": "094ec1ee6f2f70ac0827a3a8d048e949754efe5c7abf43f7e21be8c698f17094"
+  },
+  "outputSha256": "f4caaacd66dda4f1f45972deafc73bef68a4d1c739f8cb906ea0025bf5bd5e17",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

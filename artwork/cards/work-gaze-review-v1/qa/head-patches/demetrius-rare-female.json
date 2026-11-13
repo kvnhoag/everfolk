@@ -1,0 +1,105 @@
+{
+  "id": "demetrius-rare-female",
+  "original": "artwork/cards/figure-inner-art-v12/source/demetrius-rare-female.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      365,
+      55
+    ],
+    [
+      675,
+      50
+    ],
+    [
+      790,
+      120
+    ],
+    [
+      820,
+      290
+    ],
+    [
+      790,
+      450
+    ],
+    [
+      780,
+      540
+    ],
+    [
+      705,
+      640
+    ],
+    [
+      570,
+      660
+    ],
+    [
+      430,
+      615
+    ],
+    [
+      330,
+      535
+    ],
+    [
+      290,
+      450
+    ],
+    [
+      285,
+      300
+    ],
+    [
+      310,
+      140
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-mask.png",
+  "maskSha256": "781dabf30af8d9555b531269f8d320c7f7e3ae1a764ae24bdd19d71d6658f374",
+  "maskedPixels": 273250,
+  "changedPixels": 269633,
+  "changedBounds": [
+    286,
+    51,
+    820,
+    659
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Resting hand and wooden support",
+      "box": [
+        0,
+        390,
+        275,
+        650
+      ]
+    },
+    {
+      "name": "Measuring hand, rule, windlass and foreground tools",
+      "box": [
+        0,
+        680,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "43fdf62470645dbd9fb47440ecdc265d3fe5050ae748015d44e4f0727681be3a",
+    "candidate": "ac4f4d7a17e16ec6d89ae17ec9daec533ee563d1d9ee9bb39fd126acc71e7278"
+  },
+  "outputSha256": "27591148a083e5ead9674c264a1c06954eaa201da14615078ee4dc42c7dcbc54",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

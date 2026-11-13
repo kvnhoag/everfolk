@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "cards": 117,
+  "selectedCards": [
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "euclid-rare-male",
+    "demetrius-rare-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female"
+  ],
+  "perGenderArtworkPreserved": true,
+  "cardCopyPreserved": true
+}

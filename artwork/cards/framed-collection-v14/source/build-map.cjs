@@ -14,12 +14,13 @@ for(const figure of COPY.figures){
   const copy=figure.roles[tier];
   const old=INNER.assets.find(a=>a.roleId===copy.sourceRoleSlug&&a.gender===gender);
   const slug=figure.figureId+'-'+tier+'-'+gender;
-  const art=copy.sourceArtRoot?copy.sourceArtRoot+'/'+slug+'-pixel.png':old?'artwork/cards/figure-inner-art-v12/'+old.final:'artwork/cards/figure-inner-art-v14/assets/'+slug+'-pixel.png';
-  assets.push({...common,...copy,slug,kind:'contribution',gender,tier,rarity:tier,canonicalTitle:copy.title,frameLayout:'standard',sourceArt:art,sourceArtSlug:old?.slug||slug,editionLimit:LIMITS[tier],collectionIndex:assets.length+1,gameplayRarity:old&&old.tier?tier:null,raritySource:copy.newArt?'user-requested-four-tier-collection':old?.tier?'existing-figure-progression-tier':'editorial-four-tier-extension'});
+  const override=copy.sourceArtByGender?.[gender];
+  const art=override|| (copy.sourceArtRoot?copy.sourceArtRoot+'/'+slug+'-pixel.png':old?'artwork/cards/figure-inner-art-v12/'+old.final:'artwork/cards/figure-inner-art-v14/assets/'+slug+'-pixel.png');
+  assets.push({...common,...copy,...(override?{newArt:true,artRevision:override.split('/')[2]}:{}),...(copy.sceneBriefByGender?.[gender]?{sceneBrief:copy.sceneBriefByGender[gender]}:{}),slug,kind:'contribution',gender,tier,rarity:tier,canonicalTitle:copy.title,frameLayout:'standard',sourceArt:art,sourceArtSlug:old?.slug||slug,editionLimit:LIMITS[tier],collectionIndex:assets.length+1,gameplayRarity:old&&old.tier?tier:null,raritySource:override||copy.newArt?'user-requested-four-tier-collection':old?.tier?'existing-figure-progression-tier':'editorial-four-tier-extension'});
  }
 }
 for(const asset of assets)for(const key of ['typeLabel','footerLeft','footerRight','intendedEditionLimit','copySerial'])delete asset[key];
-const expectedNewArt=COPY.figures.reduce((sum,f)=>sum+Object.values(f.roles).filter(r=>r.newArt).length*2,0);
+const expectedNewArt=COPY.figures.reduce((sum,f)=>sum+Object.values(f.roles).reduce((n,r)=>n+['male','female'].filter(g=>r.newArt||r.sourceArtByGender?.[g]).length,0),0);
 if(assets.length!==117||assets.filter(a=>a.newArt).length!==expectedNewArt)throw Error('Roster count mismatch');
 fs.writeFileSync(path.join(ROOT,'source','framing-map.json'),JSON.stringify({libraryId:'everfolk-framed-collection-v14',date:'2026-11-13',expected:117,parents:13,subcards:104,rolePairs:52,newInnerArt:expectedNewArt,limits:LIMITS,notes:['Four subcard tiers for every figure, with male and female artwork.','New Common roles and Nearchus/Eumenes lower tiers are an editorial art collection extension; gameplay code is unchanged.','Edition numerators are display examples requested by the user, not an ownership assertion.'],assets},null,2));
 console.log(JSON.stringify({cards:assets.length,newArt:assets.filter(a=>a.newArt).length,rarities:Object.fromEntries(Object.keys(LIMITS).map(r=>[r,assets.filter(a=>a.rarity===r).length]))}));

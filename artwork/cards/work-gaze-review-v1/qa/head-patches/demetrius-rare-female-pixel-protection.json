@@ -1,0 +1,53 @@
+{
+  "id": "demetrius-rare-female",
+  "method": "Whole6×6 registered-cell selection between verified new PixelOE head and unchanged prior pixel portrait; no resampling or colour blending",
+  "previousPixel": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-female-pixel.png",
+  "previousPixelSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+  "rawPixelCandidate": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel-generated.png",
+  "rawPixelCandidateSha256": "099c209f57ecba58cdde1ff274eaf5eb6715cf0f1cb12d389036c45114bd3414",
+  "paintingHeadMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-mask.png",
+  "selectionMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel-selection-mask.png",
+  "selectionMaskSha256": "c27fea8a468f36905410a886cd99b7f5b1ba772548706b143360840a693d26e7",
+  "dimensions": [
+    840,
+    1050
+  ],
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "selectedCells": 4384,
+  "expandedMaskPixels": 4519,
+  "excludedProtectedCells": 0,
+  "changedPixels": 155259,
+  "outsideSelectionChangedPixels": 0,
+  "protectedChangedPixels": 0,
+  "selectedCandidateDifferingPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Resting hand and wooden support",
+      "box": [
+        0,
+        292,
+        206,
+        487
+      ]
+    },
+    {
+      "name": "Measuring hand, rule, windlass and foreground tools",
+      "box": [
+        0,
+        509,
+        840,
+        1050
+      ]
+    }
+  ],
+  "wholeCommonCellSelection": true,
+  "unselectedPixelsEqualPriorPortrait": true,
+  "selectedPixelsEqualVerifiedPixelOeCandidate": true,
+  "exactPngReadback": true,
+  "output": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-pixel.png",
+  "outputSha256": "645b4fccde2f7b65733f34d5126c1179a1477e0ff8b465dd2901106874078552"
+}

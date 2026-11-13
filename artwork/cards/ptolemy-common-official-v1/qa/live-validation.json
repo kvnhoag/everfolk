@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "baseUrl": "http://localhost:5173",
+  "role": "Junior Court Official",
+  "focusedTests": {
+    "passed": 37,
+    "failed": 0
+  },
+  "sourceChecks": {
+    "passed": 117,
+    "failed": 0
+  },
+  "editorialAuditPassed": true,
+  "liveVariantsVisuallyVerified": 2,
+  "assets": [
+    {
+      "id": "ptolemy-common-male",
+      "src": "/assets/cards/collection-v14/ptolemy-common-male-footerless.webp",
+      "sha256": "790c15f7ec559e550b77df1ae257117ec2fd5bd487a90226935703c7c777ea4d",
+      "bytes": 242542
+    },
+    {
+      "id": "ptolemy-common-female",
+      "src": "/assets/cards/collection-v14/ptolemy-common-female-footerless.webp",
+      "sha256": "1443d7b255f4a65496e143e4665756a0af541b5853b7ec519d32cd2dfe4d53e7",
+      "bytes": 254102
+    }
+  ]
+}

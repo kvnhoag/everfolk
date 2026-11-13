@@ -264,11 +264,11 @@
       "id": "euclid-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "dac9a914b1696e2a5bdb710cc34ea65ee2321a5f80c024690297fa6087b55102"
+        "rgbaSha256": "3eb1f0cb61691b3c9ea088bb3418bbed5f4e43246cd3f668646b51f6a32d391d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "13a3a0bf444fa1588b2e376ed26e456dc87c0e3b3cc7db7f21c969d23fc26add"
+        "rgbaSha256": "6762d9d250a5c56d211c80ee38e3784438e782460e84a3528746be180833bc53"
       }
     },
     {
@@ -671,11 +671,11 @@
       "id": "demetrius-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "244fb6829226fa27c5635768d3986b3c8e998a6055d257d1bf2bb30e034325bf"
+        "rgbaSha256": "20352ba2639fb88b1f50478726e019819ea1f59d1bc54403b9d0ae974ea0e712"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "077c678dc503c68f76c7b2b25655c0d5bf2b66ea086b786b2323c8e5ef39c2ba"
+        "rgbaSha256": "cac8f79f20c9848e0ab19faa09045169e169113cfc1a298c28a346dd956e7f3d"
       }
     },
     {
@@ -913,22 +913,22 @@
       "id": "ptolemy-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c440137478c3843d8d32acd344eead75eb3497637f939e1f6908b75cafaf0c6b"
+        "rgbaSha256": "d2c22511c7135eb34a23295e3aa0bc04d5873e7c9c32f89e9267342efd176e12"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0cde931fe03bc389a87acaedea3d39b84679bb5e608a1ea6dc6b89ac5cd09cab"
+        "rgbaSha256": "9f535c1e3981e6c6f4cb52047e1f058be25d44725dfcb88b79cc670898e6088e"
       }
     },
     {
       "id": "ptolemy-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0b67de78e5b194a29949e07f67afe49a28a29018635a2619dba6b6a39e2847e7"
+        "rgbaSha256": "da97a16982aa0f71c9ef19123fea15efb119f351d624bd1af7efa37844f99d77"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "da423001f93dd15d6b450d8cd0d30ee1703a10a55ab1bebf8ebcd304ed4abf58"
+        "rgbaSha256": "8ddf4d3b01576232dd301f579570d98aec4175b03c96370c51c86ed24a39b522"
       }
     },
     {
@@ -957,22 +957,22 @@
       "id": "ptolemy-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d05d7b2eb42839b8cbbd8b231fb9fc6149eadfa7e19ba0ccb99ceddffa803ec9"
+        "rgbaSha256": "427332696bdfa3dcb4e54d6450f7a919e0f9d6d2289dea08c72e52ab819aa396"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "06b19a6950129d25cfb54f7056d31c1415f173d6af33e85c7bf877eb773e5617"
+        "rgbaSha256": "5c8f30a0625bc1bb00655c2bcb51726c2a2819671a6bf9bedfc5d78bbd7c0c9c"
       }
     },
     {
       "id": "ptolemy-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "2da7977fefe0cc0f262fc60778da14fe9e8288b0803a9b9acb4605d798cbc555"
+        "rgbaSha256": "679c80a2e31fb0c1fe8af16a002614c66a35fdc987893a5786c753acfff110ee"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "78d4453efe54b821efc9516030eb5771b82eb67cdec870f18a35aeebf8f9d742"
+        "rgbaSha256": "5c2929816427169fb06c3efa7a2bbbc383cce9f9fb6e4f8a4c8b9b018b0cd104"
       }
     },
     {
@@ -1254,22 +1254,22 @@
       "id": "eumenes-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8502aa7febc86791202014a8f625962b5535f6878c1d60a7bd4881dbb86ef912"
+        "rgbaSha256": "4bc4010416dfdab03c6ab4906e596f1de4d0316c8d45088a22c5f857c3cd7d21"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0ca70b6a694aa8ae574decbcabd1aac0445b0a5e3238accf13a181a42e74258d"
+        "rgbaSha256": "045b2e043dae6a04db3d712179714c1a3ec098ed1537b80d3970a7840867b04c"
       }
     },
     {
       "id": "eumenes-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "eb91ba4fe07710c4b6e7867bc0424abcf279674bda82716429b7b88ae18e0a69"
+        "rgbaSha256": "9119bca2c8b6b39629f950013eb8eb8f05f4585ff23b75dbeffb38c87d083818"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b22b55a4e0fb887f2f9796ee98f30d6c374f1de5555b8d25ff1655d5f2c6f9f1"
+        "rgbaSha256": "4a186ea7f4613a1cb4efe92615d53d8d5d084f0128c0ff66329df7aa49f272fe"
       }
     },
     {
@@ -1485,6 +1485,7 @@
       }
     }
   ],
-  "editorialRoleRevision": "role-progression-v1",
-  "headerSpacingRevision": "subtitle-spacing-v1"
+  "editorialRoleRevision": "ptolemy-common-official-v1",
+  "headerSpacingRevision": "subtitle-spacing-v1",
+  "gazeRevision": "work-gaze-review-v1"
 }

@@ -1,0 +1,818 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-ptolemy-common-official-v1",
+  "changedCards": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "newArtwork": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "oldSourceCatalogSha256": "7fe9c865476590f77ce4eb14395b0347b54572cda9a9cdb412f6a34bee074592",
+  "sourceCatalogSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+  "acceptedOldKitManifestSha256": [
+    "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a"
+  ],
+  "windowsKitManifestSha256": "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24",
+  "targetGeneratedReports": [
+    "artwork/cards/framed-collection-v14/qa/collection-verification.json",
+    "artwork/cards/framed-collection-v14/qa/editorial-review.json"
+  ],
+  "files": [
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/ptolemy-common-female.md",
+      "sha256": "d9d92217465cce8018871a32b0a1c77fb2b886e971ad4a38e9105fac25ccd3cb",
+      "bytes": 4231,
+      "beforeSha256": "fc09c2b17af717916dbda86788b52a981c3050f874ec8ecdea6f0ab685f3c56b",
+      "normalizedBeforeSha256": "fc09c2b17af717916dbda86788b52a981c3050f874ec8ecdea6f0ab685f3c56b",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/ptolemy-common-male.md",
+      "sha256": "c82cfe7eff81febb2d39618525446b811a27c872f8b7b9344acca1276bb59edf",
+      "bytes": 4211,
+      "beforeSha256": "0a7fda8a1887c89e29c348ca68aad6ac11586979b9d50935311e5abb8c18e60d",
+      "normalizedBeforeSha256": "0a7fda8a1887c89e29c348ca68aad6ac11586979b9d50935311e5abb8c18e60d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/data/cards.csv",
+      "sha256": "7980b59399b7d87c0e7113c0777c35c19a6cef1d2137ba9affd99f98cb228298",
+      "bytes": 62521,
+      "beforeSha256": "be610440e1b5cef23fcaa4e316e7dc08611b09720de99d4cd350ade46b4c66d9",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-common-female-footerless.png",
+      "sha256": "9e09d81b98ac263b89c011d9a88dd5e2a7340c7586a15202c201a6c097e75ebb",
+      "bytes": 58552,
+      "beforeSha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-common-female.png",
+      "sha256": "51f2f7d4a66aaec44d2880c03730f9a3ec0722cfa9332377c6f7240aa149101a",
+      "bytes": 59388,
+      "beforeSha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-common-male-footerless.png",
+      "sha256": "0d702eff051a9618eaff3c2ae23fa2e123b27ed6079b98627e1c911093e4e779",
+      "bytes": 58550,
+      "beforeSha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-common-male.png",
+      "sha256": "74426d748b1b05446520bc6fbdf090a1132fa8a4432a2e4a1094ecce105fa44a",
+      "bytes": 59386,
+      "beforeSha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-common-female-footerless.svg",
+      "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf",
+      "bytes": 8547,
+      "beforeSha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5",
+      "normalizedBeforeSha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-common-female.svg",
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf",
+      "bytes": 8788,
+      "beforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "normalizedBeforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-common-male-footerless.svg",
+      "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf",
+      "bytes": 8547,
+      "beforeSha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5",
+      "normalizedBeforeSha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-common-male.svg",
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf",
+      "bytes": 8788,
+      "beforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "normalizedBeforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/ptolemy-common-female.webp",
+      "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade",
+      "bytes": 193086,
+      "beforeSha256": "9192a635b7ec8ec34ce422145c3d0956a43408bbe325e0ecb57fe85dc7a6e404",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/ptolemy-common-male.webp",
+      "sha256": "78dc3cb202c7e1f719ae7a1c2235c56fe09abc64335e24714c2555bfe3855e5c",
+      "bytes": 182830,
+      "beforeSha256": "e626a411e53c11b16ef2e57aa4a32a598671c635b1b68846771df84f3b148c39",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/index.html",
+      "sha256": "7969c8fb97e5bafb1feecdd549179920db57cd450130eae0181dea7d72911f18",
+      "bytes": 163275,
+      "beforeSha256": "23d5a665e1f28c2988e4dfb70e97035818a18c5d0e2d7c7146aaa6688d2ee1e3",
+      "normalizedBeforeSha256": "23d5a665e1f28c2988e4dfb70e97035818a18c5d0e2d7c7146aaa6688d2ee1e3",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/ptolemy-common-female.webp",
+      "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca",
+      "bytes": 231434,
+      "beforeSha256": "b2d413010161d0a0a03a23a6cf29ed1393fd15fddf634dc0aeab3800f0981370",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/ptolemy-common-male.webp",
+      "sha256": "5cde9df10dcc6268d550b5ec246901b6828f646d85e9aeed37ca034301c0c68b",
+      "bytes": 220120,
+      "beforeSha256": "0b93c66dd31ef927c4b193416a735ded1cc505961c4a02e68b21c3039d26107f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/ptolemy-common-female.png",
+      "sha256": "c1d5c5ff8cdd52a4103675c2b1ac7b82703ec01030f4b882e3e9f944ed94f8a5",
+      "bytes": 379734,
+      "beforeSha256": "e3038ef36d9ae9150993a260fc49c270fea94e53263623c386b25504e20922db",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/ptolemy-common-male.png",
+      "sha256": "492157eeb20768d9153b09bbb5c420952a582cce865830134394cb9636e37d70",
+      "bytes": 377254,
+      "beforeSha256": "6667a212b2d48ab22c1e8941cb098238e804b8215d2a4f6bb6c3c0755ae0b64f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/ptolemy-common-female-thumb.png",
+      "sha256": "4152f85d214396a35838553128f334626af5f661537fb542adb30914a8534221",
+      "bytes": 316167,
+      "beforeSha256": "67c344ee29839446f6485750e88bd1b24f0a520eea5aaad141240cebc72e2f54",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/ptolemy-common-male-thumb.png",
+      "sha256": "304638ca9a9dc21286ff2cad06ac80f2b10e85be21f4d5b36a2ff4d2bf370cde",
+      "bytes": 308134,
+      "beforeSha256": "09ec7f16a0cbafa1f05e5e1b13260afb3cf2354091675eef87f829795d164137",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/catalog.json",
+      "sha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+      "bytes": 372569,
+      "beforeSha256": "7fe9c865476590f77ce4eb14395b0347b54572cda9a9cdb412f6a34bee074592",
+      "normalizedBeforeSha256": "7fe9c865476590f77ce4eb14395b0347b54572cda9a9cdb412f6a34bee074592",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/ptolemy-common-female.png",
+      "sha256": "246e78933849ef2ff3676796bdf7962debb0f6282e5fcb69a38d636bd76dd66f",
+      "bytes": 425513,
+      "beforeSha256": "d7b93f9f39194884276367aac72d096424c12635af06eef8cb303af38261302c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/ptolemy-common-male.png",
+      "sha256": "b98dc48038fabf801e078c8adde932660d9dd355d300717da835a39ccfe0a108",
+      "bytes": 420908,
+      "beforeSha256": "b84d9523563ea68bfdb900109675c845e6020d94f3d85a9f8abaeb62bbbe25b6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/ptolemy-common-female.vectorcraft",
+      "sha256": "ddd165e5841c4ddc30bd6dba5538bb9df77e2fa4713c2645f9d6909079203e4b",
+      "bytes": 457299,
+      "beforeSha256": "635b7168806bd1526e14d78ad16e220b590b6eb8c94e9e973b5e15b0a796b0f6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/ptolemy-common-male.vectorcraft",
+      "sha256": "a0930d26690a0b43c349540cf84a2afa686b16abc1646cbc7d02cf8266699bfc",
+      "bytes": 451822,
+      "beforeSha256": "bc46f0f0ed992b3820b8efbbb0066a71802479b62f13cae92f0270076cd7c202",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-fit.json",
+      "sha256": "41498018d2198fea2cf27686cb88bf35309e2738ef3890ef476ffd4dce276459",
+      "bytes": 3431,
+      "beforeSha256": "a7a89aea9b8b94ad1cd32cdce6cb3d49a988997e5b30069b549cd236ae717f2d",
+      "normalizedBeforeSha256": "a7a89aea9b8b94ad1cd32cdce6cb3d49a988997e5b30069b549cd236ae717f2d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-native.json",
+      "sha256": "87ce497b95d10dcc0eb9316e0ab8b5487ab48efeff8f9ddc2163b715379c7eac",
+      "bytes": 8857,
+      "beforeSha256": "e27b47c50fc670514930710b138cbab47f67788e1920f05f365e5c4f4aba88d3",
+      "normalizedBeforeSha256": "e27b47c50fc670514930710b138cbab47f67788e1920f05f365e5c4f4aba88d3",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-native.png",
+      "sha256": "3a77ea0c1c39acc780cbf6b9f233f096b4e905a258a8e95b7a99d9ca9d1dccf0",
+      "bytes": 812739,
+      "beforeSha256": "0b121949d3664da379cbe1b9ecebb7cc3fd5ff998c200a918f8a48a2beee49c1",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-overlay.png",
+      "sha256": "51f2f7d4a66aaec44d2880c03730f9a3ec0722cfa9332377c6f7240aa149101a",
+      "bytes": 59388,
+      "beforeSha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-reopened.png",
+      "sha256": "3a77ea0c1c39acc780cbf6b9f233f096b4e905a258a8e95b7a99d9ca9d1dccf0",
+      "bytes": 812739,
+      "beforeSha256": "0b121949d3664da379cbe1b9ecebb7cc3fd5ff998c200a918f8a48a2beee49c1",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-fit.json",
+      "sha256": "8a7c91741318a3fa7e45c20ac2782cbeb2ad8145e46604fae9125568f22aeecb",
+      "bytes": 3411,
+      "beforeSha256": "78faf4fd1295d34703460641878672b283cba8d94937af774b2f4ed69e10ae8c",
+      "normalizedBeforeSha256": "78faf4fd1295d34703460641878672b283cba8d94937af774b2f4ed69e10ae8c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-native.json",
+      "sha256": "8268824ed9dee4eb1a10e301617d5c3238c0f5d937db0f3c79a7f28da350c64e",
+      "bytes": 8845,
+      "beforeSha256": "98f22bed9937519247bc2fc0f9b4038d0e1ad3ad819cbab56be5959011cf6659",
+      "normalizedBeforeSha256": "98f22bed9937519247bc2fc0f9b4038d0e1ad3ad819cbab56be5959011cf6659",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-native.png",
+      "sha256": "d15f55ef1987b47e36576b8375b686d8a8c744a32d90a107efffe32182b3feb0",
+      "bytes": 764552,
+      "beforeSha256": "655ba8066146e8900eb92b92ee384860bee6c32eaa7762d376d6a50ac2c0f25d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-overlay.png",
+      "sha256": "74426d748b1b05446520bc6fbdf090a1132fa8a4432a2e4a1094ecce105fa44a",
+      "bytes": 59386,
+      "beforeSha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-reopened.png",
+      "sha256": "d15f55ef1987b47e36576b8375b686d8a8c744a32d90a107efffe32182b3feb0",
+      "bytes": 764552,
+      "beforeSha256": "655ba8066146e8900eb92b92ee384860bee6c32eaa7762d376d6a50ac2c0f25d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/review/index.html",
+      "sha256": "24bebf97b62b9ce484f5b19d293b1b09877b25bcd0ce1e63727ea0895ede208b",
+      "bytes": 153642,
+      "beforeSha256": "b7b7d3b0914b048dc880bac92975dbac660da0f5c9bcf24316466d9cd2733f84",
+      "normalizedBeforeSha256": "b7b7d3b0914b048dc880bac92975dbac660da0f5c9bcf24316466d9cd2733f84",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/card-copy.json",
+      "sha256": "7ac48c974cdefeea43ece1df65319fe466f0cffb6102a88c70052117b3303d0e",
+      "bytes": 44454,
+      "beforeSha256": "4031cdabb0c29a1c1959b426f324f39fc92887f0fbd073c433aa70a1df7958cc",
+      "normalizedBeforeSha256": "4031cdabb0c29a1c1959b426f324f39fc92887f0fbd073c433aa70a1df7958cc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/ptolemy-common-female.svg",
+      "sha256": "451a69c8888c402817ceecf7a0c72ebdf455db6bfe6cafc1d7511cf84dfc99ba",
+      "bytes": 515356,
+      "beforeSha256": "b2fc519273f0f68aced62c58348f695d5fa8d42953510d9937bca7c45aed78e0",
+      "normalizedBeforeSha256": "b2fc519273f0f68aced62c58348f695d5fa8d42953510d9937bca7c45aed78e0",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/ptolemy-common-male.svg",
+      "sha256": "ee4edb0a5478d892aef7417d36509a987b01c7aaffe47f1ac295bc704aa0b66a",
+      "bytes": 512052,
+      "beforeSha256": "202ba26a7d0a6917c363b66dc0a6fb50c6a60532e194719fc385f533787c100d",
+      "normalizedBeforeSha256": "202ba26a7d0a6917c363b66dc0a6fb50c6a60532e194719fc385f533787c100d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/framing-map.json",
+      "sha256": "ab80fb361221b944805bbc5dd1ed76e45d376ebe106993f6a5b6968a75904185",
+      "bytes": 146214,
+      "beforeSha256": "9c426ef9c897c78bba55d64b992741ea4b76e39b720d82540d26f9359c503202",
+      "normalizedBeforeSha256": "9c426ef9c897c78bba55d64b992741ea4b76e39b720d82540d26f9359c503202",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/ptolemy-common-female.svg",
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf",
+      "bytes": 8788,
+      "beforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "normalizedBeforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/ptolemy-common-male.svg",
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf",
+      "bytes": 8788,
+      "beforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "normalizedBeforeSha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/README.md",
+      "sha256": "c82d30c3a05988547d96ea35c825a29a570288231160fdd3c69040fe001b5634",
+      "bytes": 2550,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-female-coarse.logical.png",
+      "sha256": "bae380450b07b78dac2e4eca61c765e98120a3e2e0c3ec341652d42681cd210a",
+      "bytes": 223005,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-female-coarse.png",
+      "sha256": "42ad99eadc0904b3db22e08b07a4d0b741d14e11deaa15a862cb71ebcbd97644",
+      "bytes": 941499,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-female-pixel.png",
+      "sha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
+      "bytes": 964532,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-male-coarse.logical.png",
+      "sha256": "277a4fa0c6f1fb335e2aff646be2ab761f2e6de7a1680784a3e9961474dcc276",
+      "bytes": 212120,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-male-coarse.png",
+      "sha256": "d1381b00f583d0770918f5f369307ad2721c9ca0ab83efe0165af402ab8f4e30",
+      "bytes": 907173,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/assets/ptolemy-common-male-pixel.png",
+      "sha256": "d1fcfd6dc44207357e9bbfc34e7b35048364b0d6199feb016184bf1d2310e5bb",
+      "bytes": 928791,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/artwork/card-art-handoff-v1/data/cards.json",
+      "sha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+      "bytes": 479600,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/archive.json",
+      "sha256": "9f7d94803007932e5b13e0815c63e408ac8703cb8e70a86846bac0c76a1bc30a",
+      "bytes": 1750,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/data/cards.json",
+      "sha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+      "bytes": 479600,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/cards/alexander-epic-male-footerless.png",
+      "sha256": "14e44cfc3b4ba5a5e90a4e27b0047f4bf314636f822d979aeea19c13b38d75ce",
+      "bytes": 58072,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/cards/alexander-epic-male.png",
+      "sha256": "7599d85922123472b092a9fd0e510fa09b6c100bf0c14156c020beb5a33328d5",
+      "bytes": 58696,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/cards/demetrius-rare-male-footerless.png",
+      "sha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9",
+      "bytes": 55096,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/cards/demetrius-rare-male.png",
+      "sha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "bytes": 55787,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/svg/alexander-epic-male-footerless.svg",
+      "sha256": "9685fab4aa9af51616e503b56cb1146a8103f5f3076cfd4944753e5164d0fb79",
+      "bytes": 10936,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/svg/alexander-epic-male.svg",
+      "sha256": "d8008fe571887dafb26ecf30241ee4c95a70486fbd97c33c309256886a67d7c5",
+      "bytes": 11177,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/svg/demetrius-rare-male-footerless.svg",
+      "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b",
+      "bytes": 10187,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/backup/bundle-kit-ddf06ea43ab7/frames/svg/demetrius-rare-male.svg",
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "bytes": 10428,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/derivatives/ptolemy-common-female.json",
+      "sha256": "7b0436caf0cfebbe157cdf350344cef88b2f7482d216ac3d78a1765abd2c73c7",
+      "bytes": 5885,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/derivatives/ptolemy-common-male.json",
+      "sha256": "3dec6d62ea3383db36dd7eec49e0a7e26dc6c3c91e55ad9c14d59e5f64415792",
+      "bytes": 5855,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/last-native-render.json",
+      "sha256": "2b6e08a653cc0f102c0e3d08ddea9799cac2938c3bf0e1cb5b1b4ff6b5acdc0f",
+      "bytes": 155,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/migration-finalized.json",
+      "sha256": "ba59d5796966190666ef67dc9cc9035d7ceabfb3ec2701f8768925a5eab76d92",
+      "bytes": 1242,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/migration-prepared.json",
+      "sha256": "0c87910854ab3f5151e70790f3b05b3bbbdf5ca549f352d18b30945587c49d80",
+      "bytes": 259,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-female-coarse.json",
+      "sha256": "07628e6440313ab84e640d6cc6a5d6a7d37e571a426e9299a133d69744d5fef7",
+      "bytes": 1946,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-female-detail-mask.png",
+      "sha256": "c72aee2f14c252c47052920971432c96f6456f9ef5d96918bb6568a0aa625288",
+      "bytes": 4930,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-female-pixel.json",
+      "sha256": "afcb137cc4ef62726f08ee1998c4d11168fd92464a377fe9f0030a5774555732",
+      "bytes": 3589,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-male-coarse.json",
+      "sha256": "2797e7ddedfb9a0fc40f04de0d025c2bd575ed0fbf8063efbd0faf3fe5ff2eb3",
+      "bytes": 1940,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-male-detail-mask.png",
+      "sha256": "19348f09da1a598f256107befb7508b5fa6b2814cdd65e9434c56d36cc5663e5",
+      "bytes": 4973,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/ptolemy-common-male-pixel.json",
+      "sha256": "f1336a3c5cc85e060f1a2b6b3767effe233fdc87e593aea18cfb3911ddfce1ee",
+      "bytes": 3577,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/reference-review.html",
+      "sha256": "60359104f246c24b6a471907748b8b8ae5745a5486af53aa1eb0e5a68e5ffd90",
+      "bytes": 1996,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/runtime-alias-files.json",
+      "sha256": "962f89674460c9e566d1c4bd8dc226d265250cb1a4ebc28e8bc867d1cb15fdd1",
+      "bytes": 1902,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/qa/windows-validation.json",
+      "sha256": "8e913ff234aa8ac67b16a8f7978d407026b7774120fa9556f025029cf4b83b00",
+      "bytes": 1288,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/references/credits.md",
+      "sha256": "3a1ab6938b5168f7d6357fbce7c9b3b57ffe735bf6a82e14d90a0aaadf3ec502",
+      "bytes": 2221,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/references/met-bronze-stylus.jpg",
+      "sha256": "c418d249d0dcefb802859592eb0e6ebc221e522d7fe74bd2bcdf72fe7b7be0e5",
+      "bytes": 29873,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/apply-portable-migration.cjs",
+      "sha256": "9ac80f19300292f021c225d29a49a80aa77537736aa068c1666f24bfeeede30a",
+      "bytes": 10147,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/archive-active-kit.cjs",
+      "sha256": "db78dff9484202030fc2f0f78f5bda7a6bdcf1e71d210c12d3538cc65437cc49",
+      "bytes": 1797,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/build-portable-release.cjs",
+      "sha256": "da68c64f5c41c1a2f02b5888a4da3d052a7d33a5a25f98bfa8c0a3002a654109",
+      "bytes": 3979,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/finalize-migration.cjs",
+      "sha256": "ca7f7df133450334d88f9b99b291d3f618db1b90089fd6eec25e6930797e3e0a",
+      "bytes": 7651,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/prepare-migration.cjs",
+      "sha256": "629c4bcd568fc12698ad653e382c1bd0c3a997edebb28e9a038b08497c918f31",
+      "bytes": 5309,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/prompts.json",
+      "sha256": "572338baaae7c605d0fd9b5fa6b3f01d8a26aed707e74f6ec9ed745ca4c106b8",
+      "bytes": 4314,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/ptolemy-common-female-face.json",
+      "sha256": "c89bbd6998d2f5406d731e99d45112d84a4a00b90dadca3d0f6a324b56e367c6",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/ptolemy-common-female.png",
+      "sha256": "e270208dc3f8f099be1297c238f9257f9068d3fb028c88fac29ad2719b77acaa",
+      "bytes": 2785551,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/ptolemy-common-male-face.json",
+      "sha256": "bf3d68d5b406121065245eb499b64c7e6530f46e96b4e865e33cafd777ff43e6",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/ptolemy-common-male.png",
+      "sha256": "5e83703c33f0202f261d2cf32ce9624b33347d5c0ee2897ff3a7362d611e5918",
+      "bytes": 2610286,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/render-derivatives.cjs",
+      "sha256": "f2d1376a499e17cdaeea804d3d6152f2ce2aa4f939786d8ee0ad56c9d7204466",
+      "bytes": 6738,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/role-edits.json",
+      "sha256": "d8b11d662690e002712108f2c85e92091f5ff6bf1a2b0b188d40b0eff9e1e650",
+      "bytes": 1209,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/stage-migration.cjs",
+      "sha256": "cbb4c8d97625c1428b447ec35d4a206e38165b909182e3d41a8ee70ebcd7752e",
+      "bytes": 2309,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/ptolemy-common-official-v1/source/update-review-index.cjs",
+      "sha256": "ceb65b53314ae6cb5a1a1730d09c52ac8d7e21c57591ab3a9b4521b7f0228bf5",
+      "bytes": 925,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "chain/catalog/figure-contribution-copy.ts",
+      "sha256": "19238a3ef6e423965dc5feea92f872307fe064addce7873d3df27ff19ccfc323",
+      "bytes": 2090,
+      "beforeSha256": "1ce7d8a4e2bf7ce6199cba6c8e6adcabd8f0ac55613ebe8a9c2eaae8ed5f6da6",
+      "normalizedBeforeSha256": "1ce7d8a4e2bf7ce6199cba6c8e6adcabd8f0ac55613ebe8a9c2eaae8ed5f6da6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/manifest.json",
+      "sha256": "dfa43acecc2ff952b16af408987933af4483e54866b86f32a0e7cf0d57827830",
+      "bytes": 104451,
+      "beforeSha256": "9608371d5d99c2ed56ff9623a6b15a58533772deaa40647d75f8216f833c717e",
+      "normalizedBeforeSha256": "9608371d5d99c2ed56ff9623a6b15a58533772deaa40647d75f8216f833c717e",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/ptolemy-common-female.webp",
+      "sha256": "23ee48ac5d37f813200a1a5118be93bcd8786f043f734abbe825425a9b4ab79b",
+      "bytes": 229460,
+      "beforeSha256": "ea1cfc85a6e366899f66f635938d9a3d24901b3d40e5a86cbaef0d82ac4380fd",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/ptolemy-common-male.webp",
+      "sha256": "d866be3bdb9e1a2598a55d423bc7e6d4e3c84b247e709681c00b7bed6110c39d",
+      "bytes": 218282,
+      "beforeSha256": "523aba43043fc04af72c92f6f8edaac25e69231e2be971b27370070849f00533",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-female-footerless.webp",
+      "sha256": "1443d7b255f4a65496e143e4665756a0af541b5853b7ec519d32cd2dfe4d53e7",
+      "bytes": 254102,
+      "beforeSha256": "afbc567e2196ccf86ad08a89f35ab30aa8a87f5f35ed2f994cf50fc236989f11",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-female-portrait.webp",
+      "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca",
+      "bytes": 231434,
+      "beforeSha256": "b2d413010161d0a0a03a23a6cf29ed1393fd15fddf634dc0aeab3800f0981370",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-female-thumb.webp",
+      "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade",
+      "bytes": 193086,
+      "beforeSha256": "9192a635b7ec8ec34ce422145c3d0956a43408bbe325e0ecb57fe85dc7a6e404",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-female.webp",
+      "sha256": "126477456cfbc8fdd800b230d62c692df793cb355b2c52926ed45c6c782fe239",
+      "bytes": 254634,
+      "beforeSha256": "bb891616e2f94410c54bdb36f8724755301d5fc2dbb70899f71ec7f4ce588757",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-male-footerless.webp",
+      "sha256": "790c15f7ec559e550b77df1ae257117ec2fd5bd487a90226935703c7c777ea4d",
+      "bytes": 242542,
+      "beforeSha256": "4c94ca3a2868dd93fb6fae0a9360526bf2c1275777ef579623e2e79a802fe0c6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-male-portrait.webp",
+      "sha256": "5cde9df10dcc6268d550b5ec246901b6828f646d85e9aeed37ca034301c0c68b",
+      "bytes": 220120,
+      "beforeSha256": "0b93c66dd31ef927c4b193416a735ded1cc505961c4a02e68b21c3039d26107f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-male-thumb.webp",
+      "sha256": "78dc3cb202c7e1f719ae7a1c2235c56fe09abc64335e24714c2555bfe3855e5c",
+      "bytes": 182830,
+      "beforeSha256": "e626a411e53c11b16ef2e57aa4a32a598671c635b1b68846771df84f3b148c39",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-common-male.webp",
+      "sha256": "c3dc8fee0599d8f3092162d1636e0cb78b5be72884e6e560dcd65ffdf05dc20d",
+      "bytes": 243064,
+      "beforeSha256": "aa6ebcfb5e9979f8083684a6deb93f22cb54e2f17d17f20c7125a41fb99f7d81",
+      "optionalBodyless": false
+    },
+    {
+      "file": "scripts/prepare-card-art-kit.mjs",
+      "sha256": "73ac75bbb6ad8a6e7cc09d1e8b82d7566b06ed93aaa49ed9a16d0b497c583d2b",
+      "bytes": 13738,
+      "beforeSha256": "b77f8ee1f1020b6303ea6302c5de11810d080ad8a0c1e6f0cccb54734934ec83",
+      "normalizedBeforeSha256": "b77f8ee1f1020b6303ea6302c5de11810d080ad8a0c1e6f0cccb54734934ec83",
+      "optionalBodyless": false
+    },
+    {
+      "file": "test/figure-card-requirements.test.ts",
+      "sha256": "cbef928a2e7ac6c93f1edc1bb5ed9c2a3949b7660c9cdeb7d68e96cf07f2a44d",
+      "bytes": 15200,
+      "beforeSha256": "1a05665a520c7725da5dfb5a410aa3c2bf0158ba0f77a4abe84b221868122930",
+      "normalizedBeforeSha256": "1a05665a520c7725da5dfb5a410aa3c2bf0158ba0f77a4abe84b221868122930",
+      "optionalBodyless": false
+    },
+    {
+      "file": "test/figure-contribution-ui.test.ts",
+      "sha256": "69105858d960a007250a30057a283bc10b1e18f860d8de6fbfd2b064d869f1fa",
+      "bytes": 13138,
+      "beforeSha256": "cfc3f5528907a46bb9ee1963feb884e7a44406972568a1f182af164dde400919",
+      "normalizedBeforeSha256": "cfc3f5528907a46bb9ee1963feb884e7a44406972568a1f182af164dde400919",
+      "optionalBodyless": false
+    }
+  ],
+  "metadataPolicy": "Patch only selected card/template/delivery records; preserve target parent variants and active override records. Rebase source catalogue fingerprint only after protected-frame verification.",
+  "retainedWorldsUnchanged": true
+}

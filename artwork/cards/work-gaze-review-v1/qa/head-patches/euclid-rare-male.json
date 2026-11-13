@@ -1,0 +1,101 @@
+{
+  "id": "euclid-rare-male",
+  "original": "artwork/cards/figure-inner-art-v12/source/euclid-rare-male.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      330,
+      70
+    ],
+    [
+      570,
+      60
+    ],
+    [
+      665,
+      110
+    ],
+    [
+      700,
+      260
+    ],
+    [
+      685,
+      430
+    ],
+    [
+      650,
+      520
+    ],
+    [
+      585,
+      570
+    ],
+    [
+      470,
+      570
+    ],
+    [
+      350,
+      535
+    ],
+    [
+      280,
+      490
+    ],
+    [
+      260,
+      360
+    ],
+    [
+      270,
+      220
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-mask.png",
+  "maskSha256": "a92438bca9a7aaf1bdce3851f443a3429053503698657e4f9eacf106f6289dec",
+  "maskedPixels": 191655,
+  "changedPixels": 187901,
+  "changedBounds": [
+    261,
+    61,
+    699,
+    570
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Both hands, compass, ruler and diagrams",
+      "box": [
+        0,
+        590,
+        1122,
+        1402
+      ]
+    },
+    {
+      "name": "Foreground collaborator",
+      "box": [
+        900,
+        0,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "b33ac3331d8d6cc4c56d808df80072f55a17cc74a52934293923263805ae12c4",
+    "candidate": "ada938298b8176a5c1e49785b2c4839ecac411d4cc193f2f34b8fd9479f11a39"
+  },
+  "outputSha256": "7afeb09c18632058679672e6642ef8e326befa50462d7b5665db048731835310",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

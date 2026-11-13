@@ -1,0 +1,127 @@
+{
+  "id": "ptolemy-common-female",
+  "template": {
+    "id": "ptolemy-common-female",
+    "figureId": "ptolemy",
+    "figureName": "Ptolemy I Soter",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "rarity": "common",
+    "title": "Junior Court Official",
+    "canonicalTitle": "Junior Court Official",
+    "displayTitle": "Junior Court Official",
+    "subtitle": "First Duties in Ptolemy's Service",
+    "bodyTitle": "A Place in the Administration",
+    "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.",
+    "copy": {
+      "title": "Junior Court Official",
+      "subtitle": "First Duties in Ptolemy's Service",
+      "bodyTitle": "A Place in the Administration",
+      "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government."
+    },
+    "editionLimit": null,
+    "exampleEdition": "001/∞",
+    "collectionIndex": 84,
+    "frameLayout": "standard",
+    "rarityCharacteristics": "plain iron, single rule, square corner joints",
+    "frame": "frames/cards/ptolemy-common-female.png",
+    "footerlessFrame": "frames/cards/ptolemy-common-female-footerless.png",
+    "overlaySvg": "frames/svg/ptolemy-common-female.svg",
+    "footerlessOverlaySvg": "frames/svg/ptolemy-common-female-footerless.svg",
+    "sourcePortrait": "reference/portraits/ptolemy-common-female.webp",
+    "preview": "reference/cards/ptolemy-common-female.webp",
+    "fit": "standard",
+    "artRect": {
+      "x": 154,
+      "y": 190,
+      "width": 592,
+      "height": 740
+    },
+    "symbol": "reference/symbols/ptolemy.svg",
+    "historicalSources": [],
+    "sourceArtworkSha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
+    "hashes": {
+      "frame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 59388,
+        "sha256": "51f2f7d4a66aaec44d2880c03730f9a3ec0722cfa9332377c6f7240aa149101a",
+        "rgbaSha256": "5792703baf8edb4e937ddb1a21a2bf881f4fb947c591c57a14b4ffbf660d8658"
+      },
+      "footerlessFrame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 58552,
+        "sha256": "9e09d81b98ac263b89c011d9a88dd5e2a7340c7586a15202c201a6c097e75ebb",
+        "rgbaSha256": "bdfbf3e7be3c84715ca30dcd9f0732c8e0fa84786d57a58b885db943f4ed5d49"
+      },
+      "sourcePortrait": {
+        "width": 840,
+        "height": 1050,
+        "bytes": 231434,
+        "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca",
+        "rgbaSha256": "44976ed969b44e278729a025ac95fb9d16b8832177753b6ed91d1cfb9cb28735"
+      },
+      "preview": {
+        "width": 450,
+        "height": 630,
+        "bytes": 193086,
+        "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade",
+        "rgbaSha256": "aabae5aca737e31ac29e19c7efa2e0d0a4dd0b18868264db467c541b1b8834b0"
+      },
+      "overlaySvg": {
+        "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf"
+      },
+      "footerlessOverlaySvg": {
+        "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf"
+      }
+    },
+    "sceneBrief": "A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office."
+  },
+  "delivery": {
+    "id": "ptolemy-common-female",
+    "sourcePNG": "exports/ptolemy-common-female.png",
+    "sourceSha256": "246e78933849ef2ff3676796bdf7962debb0f6282e5fcb69a38d636bd76dd66f",
+    "portraitSourceSha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
+    "symbolSha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "editionRemovedPixels": 426,
+    "outsideEditionChangedPixels": 0,
+    "full": {
+      "src": "/assets/cards/collection-v14/ptolemy-common-female.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 254634,
+      "sha256": "126477456cfbc8fdd800b230d62c692df793cb355b2c52926ed45c6c782fe239",
+      "rgbaSha256": "da97a16982aa0f71c9ef19123fea15efb119f351d624bd1af7efa37844f99d77"
+    },
+    "thumbnail": {
+      "src": "/assets/cards/collection-v14/ptolemy-common-female-thumb.webp",
+      "width": 450,
+      "height": 630,
+      "bytes": 193086,
+      "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade",
+      "rgbaSha256": "aabae5aca737e31ac29e19c7efa2e0d0a4dd0b18868264db467c541b1b8834b0"
+    },
+    "footerless": {
+      "src": "/assets/cards/collection-v14/ptolemy-common-female-footerless.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 254102,
+      "sha256": "1443d7b255f4a65496e143e4665756a0af541b5853b7ec519d32cd2dfe4d53e7",
+      "rgbaSha256": "8ddf4d3b01576232dd301f579570d98aec4175b03c96370c51c86ed24a39b522"
+    },
+    "portrait": {
+      "src": "/assets/cards/collection-v14/ptolemy-common-female-portrait.webp",
+      "width": 840,
+      "height": 1050,
+      "bytes": 231434,
+      "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca",
+      "rgbaSha256": "44976ed969b44e278729a025ac95fb9d16b8832177753b6ed91d1cfb9cb28735"
+    }
+  },
+  "nativeFrameExact": true,
+  "nativeWorkerFileClosed": true,
+  "uncoveredPixelDifferences": 0,
+  "outsideEditionChangedPixels": 0
+}

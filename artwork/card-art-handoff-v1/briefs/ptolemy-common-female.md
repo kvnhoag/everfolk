@@ -1,16 +1,16 @@
-# Court Records Apprentice — ptolemy-common-female
+# Junior Court Official — ptolemy-common-female
 
 **Figure family:** Ptolemy I Soter · **Type:** contribution · **Gender:** female · **Frame:** common
 
 Look first at [approved art](../reference/portraits/ptolemy-common-female.webp) and the [framed preview](../reference/cards/ptolemy-common-female.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Court Records Apprentice — Learning the Court's Accounts
+> Junior Court Official — First Duties in Ptolemy's Service
 >
-> Order Begins in the Record. A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.
+> A Place in the Administration. A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Court Records Apprentice**, belonging to the Ptolemy I Soter family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left profile with both eyes anatomically consistent. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Junior Court Official**, belonging to the Ptolemy I Soter family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman. A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

@@ -1,15 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { FIGURE_ROSTER, figureRosterEntry } from "../chain/catalog/figure-roster.ts";
-import { figureContributionTitleCopy } from "../chain/catalog/figure-contribution-copy.ts";
+import { figureContributionStageCopy, figureContributionTitleCopy } from "../chain/catalog/figure-contribution-copy.ts";
 import { buildFigureCardRequirements, changedRequirementIds } from "../client/models/figure-card-requirements.ts";
 import { getFigureCardProgress } from "../src/figures/card-progress.ts";
+import { getFigurePathProgress } from "../src/figures/progress.ts";
 import { createEngine } from "../src/engine.ts";
 import type { FigureCardRank } from "../chain/catalog/figure-roster.ts";
 import type { AccomplishmentRecord, WorldPack } from "../src/types.ts";
 import { yearAtAge } from "../src/calendar.ts";
 import current from "../worlds/demo/alexandria-lives-7-wsl-contributions.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import commonAdministration from "../worlds/demo/alexandria-lives-10.json" with { type: "json" };
+import retainedAdministration from "../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 const world = current as unknown as WorldPack;
 const figure = (id: string) => figureRosterEntry(id)!;
 const principal = (id: string, rank: FigureCardRank, pack = world) => buildFigureCardRequirements({ figure: figure(id), rank, mode: "principal", world: pack });
@@ -74,13 +77,47 @@ test("every authored contribution grade includes its exact project and prerequis
     for (const path of pack.figurePaths!) {
       for (const stage of [...path.stages, ...(path.legendaryContribution ? [path.legendaryContribution] : [])]) {
         const rows = buildFigureCardRequirements({ figure: figure(path.id), mode: "contribution", rank: stage.rank, world: pack });
-        assert.ok(rows[0].label.includes(figureContributionTitleCopy(stage.title)));
+        assert.ok(rows[0].label.includes(figureContributionStageCopy(stage).title));
         assert.equal(rows[0].detail, stage.description);
         assert.ok(rows.some(row => row.id === "contribution:accepted"));
         if ("workYears" in stage) assert.match(text(rows), new RegExp(`Complete ${stage.workYears} qualifying work year`));
         assert.doesNotMatch(text(rows), /Meet the authored/);
       }
     }
+  }
+});
+
+test("older Ptolemy Common labels display as a junior official without rewriting the saved world", () => {
+  for (const legacyTitle of ["Palace Messenger", "Court Records Apprentice", "Junior Court Official"]) {
+    const pack = structuredClone(world), path = pack.figurePaths!.find(path => path.id === "ptolemy")!;
+    const stage = path.stages.find(stage => stage.rank === "Common")!;
+    stage.title = legacyTitle;
+    const life = createEngine(pack).start("junior-court-official");
+    const beforeWorld = JSON.stringify(pack), beforeLife = JSON.stringify(life);
+    const displayed = getFigurePathProgress(pack, path, life).stages.find(item => item.definition.rank === "Common")!;
+    const rows = buildFigureCardRequirements({ figure: figure("ptolemy"), mode: "contribution", rank: "Common", world: pack, life });
+    assert.equal(displayed.definition.title, "Junior Court Official");
+    assert.match(rows[0].label, /Junior Court Official/);
+    assert.equal(figureContributionTitleCopy(`Recorded title: ${legacyTitle}`), "Recorded title: Junior Court Official");
+    assert.equal(JSON.stringify(pack), beforeWorld);
+    assert.equal(JSON.stringify(life), beforeLife);
+  }
+  assert.equal(figureContributionTitleCopy("Egyptian Administration Clerk"), "Egyptian Administration Clerk");
+});
+
+test("Ptolemy's junior Common label preserves the retained Uncommon administration title", () => {
+  for (const authored of [commonAdministration, retainedAdministration]) {
+    const pack = authored as unknown as WorldPack, path = pack.figurePaths!.find(path => path.id === "ptolemy")!;
+    const stage = path.stages[0], life = createEngine(pack).start("ptolemy-rank-labels");
+    const beforeWorld = JSON.stringify(pack), beforeLife = JSON.stringify(life);
+    const displayed = getFigurePathProgress(pack, path, life).stages[0].definition;
+    const rows = buildFigureCardRequirements({ figure: figure("ptolemy"), mode: "contribution", rank: stage.rank, world: pack, life });
+    assert.equal(stage.title, "Egyptian Administration Clerk");
+    assert.equal(displayed.title, stage.rank === "Common" ? "Junior Court Official" : stage.title);
+    assert.equal(displayed.traditionTitle, stage.rank === "Common" ? "Junior Official in Ptolemaic Administration" : stage.traditionTitle);
+    assert.ok(rows[0].label.includes(displayed.title));
+    assert.equal(JSON.stringify(pack), beforeWorld);
+    assert.equal(JSON.stringify(life), beforeLife);
   }
 });
 
