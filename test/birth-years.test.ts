@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { birthYearOf, createEngine, yearAtAge } from "../src/index.ts";
+import { birthYearOf, createEngine, formatYear, yearAtAge } from "../src/index.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
@@ -50,5 +50,50 @@ test("birth-year ranges are validated", () => {
     const bad = structuredClone(world);
     (bad as unknown as Record<string, unknown>).birthYears = range;
     assert.throws(() => validateWorld(bad), /birthYears/, JSON.stringify(range));
+  }
+});
+
+test("crossing birth-year ranges skip year zero cleanly across -1..1 and -2..2", () => {
+  for (const [from, to, expectedYears] of [
+    [-1, 1, [-1, 1]],
+    [-2, 2, [-2, -1, 1, 2]],
+    [-1, -1, [-1]],
+    [1, 1, [1]],
+  ] as const) {
+    const crossing: WorldPack = {
+      schemaVersion: 1,
+      id: "crossing-calendar",
+      version: "1",
+      title: "Crossing Calendar",
+      description: "Minimal fixture testing crossing BCE/CE birth ranges.",
+      startYear: from,
+      birthYears: { from, to },
+      maxAge: 5,
+      stats: { health: { label: "Health", min: 0, max: 100, initial: 70 } },
+      flags: {},
+      origins: [{ id: "home", title: "Home", text: "Born at home.", weight: 1, effects: [] }],
+      yearlyEffects: [],
+      events: [],
+      endings: [{ id: "done", title: "Done", text: "Complete.", kind: "chapter" }],
+      defaultEnding: "done",
+    };
+    validateWorld(crossing);
+    const crossingEngine = createEngine(crossing);
+    const seen = new Set<number>();
+    for (const seed of ["calendar-6", ...Array.from({ length: 48 }, (_, i) => `cross-${from}-${to}-${i}`)]) {
+      const life = crossingEngine.start(seed);
+      assert.notEqual(life.birthYear, 0);
+      assert.notEqual(life.year, 0);
+      assert.equal(life.year, life.birthYear);
+      assert.ok(expectedYears.includes(life.birthYear! as never), `unexpected ${life.birthYear}`);
+      assert.doesNotThrow(() => formatYear(life.year));
+      const later = crossingEngine.advance(life);
+      assert.notEqual(later.year, 0);
+      assert.equal(later.year, yearAtAge(life.birthYear!, later.age));
+      assert.doesNotThrow(() => formatYear(later.year));
+      assert.deepEqual(crossingEngine.replay(seed, later.commands), later);
+      seen.add(life.birthYear!);
+    }
+    assert.deepEqual([...seen].sort((a, b) => a - b), [...expectedYears]);
   }
 });

@@ -784,8 +784,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     };
     if (world.birthYears) {
       // A side stream of the seed, so the life's own random draws are unchanged.
-      const span = world.birthYears.to - world.birthYears.from + 1;
-      state.birthYear = world.birthYears.from + Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      const { from, to } = world.birthYears;
+      const toAstronomical = (y: number) => (y < 0 ? y + 1 : y);
+      const span = toAstronomical(to) - toAstronomical(from) + 1;
+      const offset = Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      state.birthYear = yearAtAge(from, offset);
       state.year = state.birthYear;
     }
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
