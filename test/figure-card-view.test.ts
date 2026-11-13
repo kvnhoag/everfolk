@@ -105,6 +105,14 @@ test("all three promotable figures have approved Epic and full-art Legendary fac
   }
 });
 
+test("only Legendary card faces receive decorative foil, with their edition still readable", () => {
+  const legendary = renderCard("ptolemy", "Legendary");
+  assert.match(legendary, /class="collection-card-foil" aria-hidden="true"/);
+  assert.match(legendary, /aria-label="Edition —\/010"/);
+  assert.doesNotMatch(renderCard("ptolemy", "Epic"), /collection-card-foil/);
+  assert.doesNotMatch(renderCard("ptolemy", "Rare", "contribution"), /collection-card-foil/);
+});
+
 test("the viewer is a labelled native modal with close controls and no mint action", () => {
   const html = renderViewer("demetrius");
   assert.match(html, /<dialog /);

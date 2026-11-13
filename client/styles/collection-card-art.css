@@ -1,4 +1,19 @@
 .collection-card-art{position:relative;display:block;width:100%;aspect-ratio:5/7;margin:0;isolation:isolate}
 .collection-card-art-image{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
-.collection-card-art-edition{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.collection-card-art-edition{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:3}
 .collection-card-art-caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* Foil stays over the illustration; the nameplate, biography and live serial stay clear. */
+.collection-card-art[data-rarity=legendary]{border-radius:4.667% / 3.333%}
+.collection-card-foil{position:absolute;inset:0;z-index:1;overflow:hidden;border-radius:inherit;pointer-events:none;mix-blend-mode:color-dodge;opacity:.4;mask-image:linear-gradient(180deg,transparent 9%,#000 20%,#000 67%,transparent 78%);transition:opacity .4s ease}
+.collection-card-foil:before,.collection-card-foil:after{content:"";position:absolute;pointer-events:none}
+.collection-card-foil:before{inset:-55%;background:repeating-linear-gradient(120deg,transparent 0 8%,#7be8df99 11%,#9793ffb3 15%,#f4a5d5b3 19%,#ffe79dcc 23%,#a7ead099 27%,transparent 32% 40%);background-size:160% 160%;animation:legendary-foil-drift 13s ease-in-out infinite alternate}
+.collection-card-foil:after{inset:-65%;background:linear-gradient(112deg,transparent 44%,#fff9d61a 47%,#fffce6b3 49%,#fff9d633 51%,transparent 55%);animation:legendary-foil-sweep 9s ease-in-out infinite}
+.collection-card-art[data-rarity=legendary]:after{content:"";position:absolute;inset:1.25%;z-index:2;border:1px solid #ffe4a366;border-radius:3.8% / 2.7%;pointer-events:none;background:radial-gradient(circle at 3% 3%,#fff7d3c9 0 1px,transparent 4px),radial-gradient(circle at 97% 97%,#fff7d3c9 0 1px,transparent 4px);box-shadow:0 0 13px #f3ce7433,inset 0 0 9px #e6bd5426;animation:legendary-edge-lustre 7s ease-in-out infinite alternate}
+.figure-card-stack-item.is-current[data-variant-rank=Legendary] .figure-card-float{filter:drop-shadow(0 22px 18px #0007) drop-shadow(0 0 12px #e9bd533b)}
+@media(hover:hover){.collection-card-art:hover>.collection-card-foil,.figure-card-stack:hover .is-current .collection-card-foil,.figure-card-preview-stack:hover .is-current .collection-card-foil{opacity:.56}}
+@keyframes legendary-foil-drift{from{transform:translate(-8%,-6%) rotate(-8deg)}to{transform:translate(8%,6%) rotate(8deg)}}
+@keyframes legendary-foil-sweep{0%,15%{transform:translateX(-34%);opacity:0}30%{opacity:.75}58%{transform:translateX(34%);opacity:0}100%{transform:translateX(34%);opacity:0}}
+@keyframes legendary-edge-lustre{from{opacity:.45}to{opacity:.9}}
+@media(prefers-reduced-motion:reduce){.collection-card-foil:before,.collection-card-foil:after,.collection-card-art[data-rarity=legendary]:after{animation:none}.collection-card-foil{opacity:.18;transition:none}.collection-card-foil:after{display:none}}
+@media(forced-colors:active){.collection-card-foil,.collection-card-art[data-rarity=legendary]:after{display:none}}
