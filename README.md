@@ -71,7 +71,7 @@ Ordinary play stays offline. A **ranked life** adds NEAR in four places, each on
 
 Run ranked mode locally with a verifier secret in `.dev.vars` (`RANKED_VERIFIER_SECRET=<64 hex>`); the contract id and RPC are set in `vite.config.ts`. Testnet tools live in [`scripts/ranked/`](scripts/ranked): deploy, smoke run and genesis seeding.
 
-Without a configured verifier, choose **Practice ranked life** to try the same screens and simulation using a browser-only ledger. It sends no transactions to NEAR. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above.
+The main menu starts with **Weave Mode** enabled and offers **Connect with NEAR wallet** or **Log in with email** when the corresponding service is configured. Turn Weave Mode off to **Play as guest** directly. Missing sign-in services show an availability notice without moving the menu or starting a practice ledger. Live mode requires deploying the updated contract and configuring its account; updating the application source does not replace the existing testnet deployments listed above. Mint verification separately requires a configured verifier.
 
 ## Career and economy tree
 

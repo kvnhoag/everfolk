@@ -44,7 +44,7 @@ export function drawBeatView(draw: Draw | null, pending: boolean, owner?: string
 }
 
 /** `GET /api/ranked/config` (lane E2). */
-export interface RankedConfig { contract_id: string; rpc_url: string; world_version: string; verifier_public_key: string }
+export interface RankedConfig { contract_id: string; rpc_url: string; world_version: string; verifier_public_key: string | null }
 
 const ACCOUNT_ID = /^(?=.{2,64}$)(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
 
@@ -52,11 +52,12 @@ const ACCOUNT_ID = /^(?=.{2,64}$)(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z
 export function parseRankedConfig(value: unknown): RankedConfig | null {
   if (!value || typeof value !== "object") return null;
   const record = value as Record<string, unknown>;
-  const fields = ["contract_id", "rpc_url", "world_version", "verifier_public_key"] as const;
-  if (!fields.every(field => typeof record[field] === "string" && (record[field] as string).length > 0)) return null;
-  const config = Object.fromEntries(fields.map(field => [field, record[field] as string])) as unknown as RankedConfig;
-  if (!ACCOUNT_ID.test(config.contract_id) || !/^https?:\/\//.test(config.rpc_url)) return null;
-  return config;
+  const { contract_id, rpc_url, world_version, verifier_public_key } = record;
+  if (typeof contract_id !== "string" || !ACCOUNT_ID.test(contract_id) ||
+      typeof rpc_url !== "string" || !/^https?:\/\//.test(rpc_url) ||
+      typeof world_version !== "string" || !world_version ||
+      (verifier_public_key !== null && (typeof verifier_public_key !== "string" || !verifier_public_key))) return null;
+  return { contract_id, rpc_url, world_version, verifier_public_key };
 }
 
 export type RankedAvailability = "checking" | "available" | "practice" | "unavailable";

@@ -31,6 +31,11 @@
 @media(prefers-reduced-motion:reduce){.mint-pack *{animation:none!important;transition:none!important}}
 
 .web3-header{position:sticky;top:0;background:var(--paper,#f4e7c9);z-index:20}
+.chain-screen .web3-header{position:sticky;inset-block-start:0;z-index:40}
+.chain-screen{--chain-header-gap:24px}
+dialog.chain-screen:has(.web3-header){padding-top:0}
+.chain-screen .web3-header{padding-block-start:var(--chain-header-gap)}
+@media(max-width:600px){.chain-screen{--chain-header-gap:16px}}
 .web3-home-bar{position:sticky;top:0;z-index:35;background:var(--paper,#f4e7c9)}
 .life-choice-history{padding-left:20px;font-size:13px;line-height:1.7}
 .life-choice-history li{padding:10px 0;border-bottom:1px solid var(--cr-edge,#b39c68)}

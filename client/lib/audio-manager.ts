@@ -73,7 +73,7 @@ const STORAGE_KEY_MUTED = "everfolk:audio:muted";
 const STORAGE_KEY_SFX = "everfolk:audio:sfx";
 
 const CLICK_SFX_SRC = "/assets/audio/button-click.mp3";
-const DEFAULT_VOLUME = 0.35;
+const DEFAULT_VOLUME = 0.60;
 
 export class AudioManager {
   private bgmAudio: HTMLAudioElement | null = null;

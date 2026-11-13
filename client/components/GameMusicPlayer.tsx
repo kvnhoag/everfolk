@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { useAudioManager } from "../hooks/useAudioManager.ts";
 import "../styles/audio-player.css";
 
@@ -24,6 +24,7 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const playlistHeadingId = useId();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -167,36 +168,29 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
             </div>
           </div>
 
-          <div className="music-playlist-section">
-            <span className="music-section-label">SELECT BACKGROUND TRACK ({playlist.length})</span>
-            <div className="music-playlist-list" role="listbox" aria-label="Available music tracks">
+          <section className="music-playlist-section" aria-labelledby={playlistHeadingId}>
+            <h5 className="music-section-label" id={playlistHeadingId}>Select background track <span>({playlist.length})</span></h5>
+            <ul className="music-playlist-list">
               {playlist.map((track, idx) => {
                 const isActive = idx === currentTrackIndex;
-                return (
-                  <div
-                    key={track.id}
+                return <li key={track.id}>
+                  <button
+                    type="button"
                     className={`music-track-item${isActive ? " is-active" : ""}`}
-                    role="option"
-                    aria-selected={isActive}
-                    tabIndex={0}
+                    aria-pressed={isActive}
                     onClick={() => selectTrack(idx)}
-                    onKeyDown={e => {
-                      if (e.key === "Enter" || e.key === " ") selectTrack(idx);
-                    }}
                   >
-                    <span className="music-track-badge">{isActive ? "▶" : idx + 1}</span>
-                    <div className="music-track-item-info">
+                    <span className="music-track-badge" aria-hidden="true">{isActive ? "✓" : idx + 1}</span>
+                    <span className="music-track-item-info">
                       <strong>{track.title}</strong>
-                      <small>
-                        {track.origin} · {track.composer}
-                      </small>
-                    </div>
-                    <span className="music-track-item-tag">{track.tag}</span>
-                  </div>
-                );
+                      <small>{track.origin} · {track.composer}</small>
+                      <span className="music-track-item-tag">{track.tag}</span>
+                    </span>
+                  </button>
+                </li>;
               })}
-            </div>
-          </div>
+            </ul>
+          </section>
 
           <div className="music-drawer-footer">
             <button

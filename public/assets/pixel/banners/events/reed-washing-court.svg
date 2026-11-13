@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="112" viewBox="0 0 240 112" shape-rendering="crispEdges">
+  <rect width="240" height="112" fill="#adcbc0"/>
+  <path fill="#f3e5bf" d="M23 15h23v3h8v3H15v-3h8zm131 7h18v3h12v3h-38v-3h8z"/>
+  <path fill="#d8c096" d="M0 40h30v-9h32v12h30v-7h32v10h33v-12h43v8h40v25H0z"/>
+  <path fill="#ead2a8" d="M24 31h40v2H24zm75 4h27v2H99zm55-2h48v2h-48z"/>
+  <path fill="#94a180" d="M81 49V37h3v-5h5v-3h9v4h4v10h-7v6zm66 1V39h3v-7h4v-3h8v5h4v9h-5v7z"/>
+  <path fill="#b1b18a" d="M84 35h7v-3h6v3h-3v3H84zm69 1h8v3h-8z"/>
+  <path fill="#ab906d" d="M35 37h5v6h-5zm17 0h4v6h-4zm58 5h5v7h-5zm77-1h5v7h-5z"/>
+  <path fill="#e9d4ac" d="M0 51h240v26H0z"/>
+  <path fill="#c6ab81" d="M0 54h240v2H0zm0 16h240v2H0zm15-12h2v11h-2zm42 0h2v11h-2zm43 0h2v11h-2zm43 0h2v11h-2zm43 0h2v11h-2zm43 0h2v11h-2z"/>
+  <path fill="#c8ae84" d="M0 75h240v37H0z"/>
+  <path stroke="#ad936f" d="M0 82h240M0 94h240M0 106h240M18 82v12m36-12v12m36-12v12m36-12v12m36-12v12m36-12v12m36-12v12M31 94v12m39-12v12m39-12v12m39-12v12m39-12v12m39-12v12"/>
+  <path fill="#f1dfb6" d="M11 8h43v4h-7v5H36v58h8v4H15v-4h8V17H11z"/>
+  <path fill="#b49a74" d="M33 17h5v58h-5z"/>
+  <path fill="#88684f" d="M144 16h96v3h-96zm9 4h2v47h-2zm75 0h2v49h-2z"/>
+  <path fill="#ab765d" d="M146 20h94v6h-5v3h-13v-2h-12v4h-16v-3h-13v3h-14v-4h-10v3h-11z"/>
+  <path fill="#d3a481" d="M147 21h13v6h-13zm27 0h13v6h-13zm28 0h13v5h-13zm27 0h9v5h-9z"/>
+  <path fill="#778363" d="M216 32h4v12h-3v6h-4v6h-6v-4h4v-6h4z"/>
+  <path fill="#a6a175" d="M210 38h5v4h-8v-2h3zm-6 12h5v4h-8v-2h3z"/>
+  <path fill="#a78e68" d="M40 95h61v3H40zm145-4h30v2h-30z"/>
+  <path fill="#d5bd86" d="M32 87h11v2h-1v7h-9v-7h-1z"/>
+  <path fill="#95724c" d="M33 89h9v1h-9zm1 3h7v1h-7zm0 2h7v1h-7z"/>
+  <path fill="#9d745a" d="M47 87h49v3h-5v5H52v-5h-5z"/>
+  <path fill="#6f9c99" d="M49 85h44v3H49z"/>
+  <path fill="#c2d8c4" d="M52 85h11v1H52zm27 1h9v1h-9z"/>
+  <path fill="#b6c9aa" d="M55 86h8v1h-8zm23 0h9v1h-9z"/>
+  <path fill="#6c5042" d="M52 94h39v2H52z"/>
+  <path fill="#c5916b" d="M49 88h45v2H49zm6 3h33v1H55z"/>
+  <path fill="#768053" d="M66 85h9v1h5v1H69v-1h-3z"/>
+  <path fill="#785f50" d="M83 87h4v1h-4z"/>
+  <path fill="#965c45" d="M200 62h11v3h-2v5h4v12h-15V70h4v-5h-2z"/>
+  <path fill="#c68f67" d="M200 72h4v8h-4z"/>
+  <path fill="#82906b" d="M217 66h3v-9h2v10h4v8h-9zm7-13h2v11h-2z"/>
+  <path fill="#b37554" d="M215 75h14v4h-2v6h-10v-6h-2z"/>
+  <path fill="#d8bc94" opacity=".45" d="M0 99h1v1h-1zM53 106h2v1h-2zM106 101h3v1h-3zM159 108h1v1h-1zM212 103h2v1h-2zM27 110h3v1h-3zM80 105h1v1h-1zM133 100h2v1h-2zM186 107h3v1h-3zM1 102h1v1h-1zM54 109h2v1h-2zM107 104h3v1h-3zM160 99h1v1h-1zM213 106h2v1h-2zM28 101h3v1h-3zM81 108h1v1h-1zM134 103h2v1h-2zM187 110h3v1h-3zM2 105h1v1h-1zM55 100h2v1h-2zM108 107h3v1h-3zM161 102h1v1h-1zM214 109h2v1h-2zM29 104h3v1h-3zM82 99h1v1h-1zM135 106h2v1h-2zM188 101h3v1h-3zM3 108h1v1h-1zM56 103h2v1h-2zM109 110h3v1h-3zM162 105h1v1h-1zM215 100h2v1h-2zM30 107h3v1h-3zM83 102h1v1h-1zM136 109h2v1h-2zM189 104h3v1h-3zM4 99h1v1h-1zM57 106h2v1h-2zM110 101h3v1h-3zM163 108h1v1h-1zM216 103h2v1h-2zM31 110h3v1h-3zM84 105h1v1h-1zM137 100h2v1h-2z"/>
+  <path fill="#b89b76" opacity=".45" d="M17 102h1v1h-1zM70 109h2v1h-2zM123 104h3v1h-3zM176 99h1v1h-1zM229 106h2v1h-2zM44 101h3v1h-3zM97 108h1v1h-1zM150 103h2v1h-2zM203 110h3v1h-3zM18 105h1v1h-1zM71 100h2v1h-2zM124 107h3v1h-3zM177 102h1v1h-1zM230 109h2v1h-2zM45 104h3v1h-3zM98 99h1v1h-1zM151 106h2v1h-2zM204 101h3v1h-3zM19 108h1v1h-1zM72 103h2v1h-2zM125 110h3v1h-3zM178 105h1v1h-1zM231 100h2v1h-2zM46 107h3v1h-3zM99 102h1v1h-1zM152 109h2v1h-2zM205 104h3v1h-3zM20 99h1v1h-1zM73 106h2v1h-2zM126 101h3v1h-3zM179 108h1v1h-1zM232 103h2v1h-2zM47 110h3v1h-3zM100 105h1v1h-1zM153 100h2v1h-2zM206 107h3v1h-3zM21 102h1v1h-1zM74 109h2v1h-2zM127 104h3v1h-3zM180 99h1v1h-1zM233 106h2v1h-2zM48 101h3v1h-3zM101 108h1v1h-1zM154 103h2v1h-2z"/>
+  <path fill="#e7cfaa" opacity=".45" d="M34 105h1v1h-1zM87 100h2v1h-2zM140 107h3v1h-3zM193 102h1v1h-1zM8 109h2v1h-2zM61 104h3v1h-3zM114 99h1v1h-1zM167 106h2v1h-2zM220 101h3v1h-3zM35 108h1v1h-1zM88 103h2v1h-2zM141 110h3v1h-3zM194 105h1v1h-1zM9 100h2v1h-2zM62 107h3v1h-3zM115 102h1v1h-1zM168 109h2v1h-2zM221 104h3v1h-3zM36 99h1v1h-1zM89 106h2v1h-2zM142 101h3v1h-3zM195 108h1v1h-1zM10 103h2v1h-2zM63 110h3v1h-3zM116 105h1v1h-1zM169 100h2v1h-2zM222 107h3v1h-3zM37 102h1v1h-1zM90 109h2v1h-2zM143 104h3v1h-3zM196 99h1v1h-1zM11 106h2v1h-2zM64 101h3v1h-3zM117 108h1v1h-1zM170 103h2v1h-2zM223 110h3v1h-3zM38 105h1v1h-1zM91 100h2v1h-2zM144 107h3v1h-3zM197 102h1v1h-1zM12 109h2v1h-2zM65 104h3v1h-3zM118 99h1v1h-1zM171 106h2v1h-2z"/>
+</svg>

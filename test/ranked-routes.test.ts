@@ -42,10 +42,12 @@ test("config exposes contract, rpc, world version and verifier key", async () =>
   assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-demo-2", verifier_public_key: "ed25519:Fake" });
 });
 
-test("missing secret returns 503", async () => {
-  const response = await handleRankedApi(new Request(`${ORIGIN}/api/ranked/config`), env({ RANKED_VERIFIER_SECRET: undefined }));
-  assert.equal(response.status, 503);
-  assert.match((await response.json()).error, /not set up/);
+test("sign-in can discover the contract without a signing secret, but verification stays unavailable", async () => {
+  const unsigned = env({ RANKED_VERIFIER_SECRET: undefined });
+  const response = await handleRankedApi(new Request(`${ORIGIN}/api/ranked/config`), unsigned);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-demo-2", verifier_public_key: null });
+  assert.equal((await handleRankedApi(post(verifyBody), unsigned)).status, 503);
 });
 
 test("verify stores evidence and returns its url", async () => {
