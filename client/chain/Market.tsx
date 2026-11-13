@@ -16,6 +16,7 @@ import SellYours, { type SellItem } from "./SellYours.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
 import "./token-market.css";
 import "./ledger.css";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 export interface MarketBodyProps {
   rows: readonly MarketRow[];
@@ -85,7 +86,8 @@ export function MarketBody({
   return (
     <section className="ledger-panel market ef-market-panel" aria-labelledby={headingId}>
       {/* Rhakotis Bazaar Hero Header in Everfolk aesthetic */}
-      <header className="ledger-heading ef-market-header">
+      <header className="ledger-heading ef-market-header has-section-help">
+        <SectionHelp hint="nft-market" />
         <div className="ef-market-hero-eyebrow">
           <StorybookMark size={20} />
           <p className="ledger-kicker">

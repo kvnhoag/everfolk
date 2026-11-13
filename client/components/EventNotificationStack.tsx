@@ -29,7 +29,7 @@ function truncateText(text: string, maxLen = 96): string {
 }
 
 export default function EventNotificationStack({ life, world, decisionEvent, demoView, decisionButtonRef,
-  onOpenDecision, onOpenChronicle, onOpenPeopleTab, onOpenSkillTree, visible = true,
+  onOpenDecision, onOpenChronicle, onOpenPeopleTab, onOpenSkillTree, onShownChange, visible = true,
 }: {
   life: LifeState;
   world: WorldPack;
@@ -40,6 +40,8 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   onOpenChronicle(): void;
   onOpenPeopleTab?(): void;
   onOpenSkillTree?(): void;
+  /** Reports whether any notification is on screen (the tutorial explains them the first time). */
+  onShownChange?(shown: boolean): void;
   visible?: boolean;
 }) {
   const completed = useEventNotifications(life, world);
@@ -96,7 +98,10 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
     });
   }
   const notifications = items.slice(0, 3);
-  if (!visible || !notifications.length) return null;
+  const shown = visible && notifications.length > 0;
+  useEffect(() => { onShownChange?.(shown); }, [shown]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => onShownChange?.(false), []); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!shown) return null;
   return <aside className="event-notification-stack" aria-label="Event notifications" role="region" aria-live="polite" aria-relevant="additions">
     {notifications.map(item => <article key={item.key} className={`event-toast is-${item.kind}`} role={item.kind === "decision" ? "status" : undefined}>
       <div className="event-toast-top">

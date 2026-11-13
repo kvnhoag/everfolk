@@ -11,6 +11,7 @@ import SignInPanel from "./SignInPanel.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
 import "./token-market.css";
 import "./ledger.css";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 /** The signed-in player's kept lives, with PokemonSim-style collection progress and card grid. */
 export default function MyLives({ backend, onOpen }: { backend: ChainBackend; onOpen?(life: LifeView): Promise<void> }) {
@@ -73,7 +74,8 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
   return (
     <section className="ledger-panel market ef-market-panel" aria-labelledby={headingId}>
       {/* Ancient Memorial Hero Header */}
-      <header className="ledger-heading ef-market-header">
+      <header className="ledger-heading ef-market-header has-section-help">
+        <SectionHelp hint="mine" />
         <div className="ef-market-hero-eyebrow">
           <StorybookMark size={20} />
           <p className="ledger-kicker">

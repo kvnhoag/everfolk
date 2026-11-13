@@ -80,3 +80,11 @@ test("a target inside a scrolling popup is clipped to the popup's visible area",
   assert.deepEqual(intersectRect({ top: 280, left: 250, width: 930, height: 1400 }, { top: 70, left: 220, width: 1000, height: 760 }), { top: 280, left: 250, width: 930, height: 550 });
   assert.equal(intersectRect({ top: 900, left: 0, width: 10, height: 10 }, { top: 0, left: 0, width: 100, height: 100 }), null);
 });
+
+test("automatic hints without a visible section wait in the bottom-right corner instead of the middle", () => {
+  const placed = placeTutorialCard(null, card, viewports[0], "corner");
+  assert.equal(placed.placement, "corner");
+  assert.equal(placed.left, 1440 - 360 - 12);
+  assert.equal(placed.top, 900 - 240 - 12);
+  assert.equal(placeTutorialCard(null, card, viewports[0]).placement, "center", "centered by default");
+});

@@ -2,7 +2,7 @@ import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
 import FigurePaths from "./FigurePaths.tsx";
 import { vocationInventory } from "../../src/vocations/view.ts";
 import { displayProse } from "../models/display-prose.ts";
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../../src/types.ts";
 import { activityPartnerIds } from "../../src/character.ts";
@@ -24,6 +24,7 @@ import PixelPortrait from "./PixelPortrait.tsx";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { familyRelationshipRows, socialRelationshipRows } from "../models/relationship-table.ts";
 import RelationshipTable from "./RelationshipTable.tsx";
+import SectionHelp from "./SectionHelp.tsx";
 import "../styles/birth-avatar.css";
 import "../styles/social-relationships.css";
 import type { CharacterSection } from "../models/character-panel-model.ts";
@@ -133,10 +134,13 @@ function SearchControls({ id, label, placeholder, value, onChange, filter, onFil
 }
 
 /** Personal actions share the simulation's yearly budget and command history. */
-export default function CharacterPanel({ life, world, onActivity, onMarketOrder, onCancelMarketOrder, initialSection = "career" }: {
+export default function CharacterPanel({ life, world, onActivity, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange }: {
   life: LifeState; world: WorldPack; onActivity: (id: string) => void; initialSection?: Section;
+  /** Reports the open tab, so tutorial hints know when the skill tree is on screen. */
+  onSectionChange?: (section: Section) => void;
 } & MarketActions) {
   const [section, setSection] = useState<Section>(initialSection);
+  useEffect(() => { onSectionChange?.(section); }, [section]); // eslint-disable-line react-hooks/exhaustive-deps
   const [jobSearch, setJobSearch] = useState("");
   const [jobAvailability, setJobAvailability] = useState<AvailabilityFilter>("all");
   const [relationshipFilter, setRelationshipFilter] = useState<RelationshipFilter>("all");
@@ -234,8 +238,9 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       <p>{budget}</p>
     </div>
     {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{displayProse(recentOutcome)}</p></div>}
-    <div className="character-tabs" role="tablist" aria-label="Life management sections">
+    <div className="character-tabs has-section-help" role="tablist" aria-label="Life management sections">
       {visibleSections.map((item, index) => <button type="button" role="tab" id={`${instanceId}-tab-${item.id}`} aria-selected={activeSection === item.id} aria-controls={`${instanceId}-panel-${item.id}`} tabIndex={activeSection === item.id ? 0 : -1} key={item.id} ref={element => { tabRefs.current[item.id] = element; }} onKeyDown={event => navigateTabs(event, index)} onClick={() => setSection(item.id)}>{item.label}</button>)}
+      <SectionHelp hint="character" />
     </div>
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
@@ -271,7 +276,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         <ActivityList activities={visibleOtherCareer} {...props} />
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
-      <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
+      <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
+        <SectionHelp hint="skills" />
         {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
         {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} />}
         <FigurePaths activities={activities} {...props} />

@@ -9,6 +9,7 @@ import { yearAtAge } from "../src/calendar.ts";
 import type { LifeState } from "../src/types.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
+  if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
   if (url.endsWith(".tsx")) return { format: "module", shortCircuit: true, source: ts.transpileModule(readFileSync(new URL(url), "utf8"), {
     compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 }, fileName: new URL(url).pathname,
   }).outputText };
@@ -17,9 +18,14 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
 const { default: LifeYearRail } = await import("../client/components/LifeYearRail.tsx");
 hooks.deregister();
 
+const HELP_BADGE = /<span class="section-help[^"]*"><button[^>]*>\?<\/button><span[^>]*role="tooltip"[^>]*>[^<]*<\/span><\/span>/;
+
+/** The rail itself has no controls; its only button is the tutorial's "?" help badge, removed here. */
 function render(age: number, birthYear = -350) {
   const life = { age, year: yearAtAge(birthYear, age) } as LifeState;
-  return renderToStaticMarkup(createElement(LifeYearRail, { life }));
+  const html = renderToStaticMarkup(createElement(LifeYearRail, { life }));
+  assert.match(html, HELP_BADGE, "the rail has a ? help badge");
+  return html.replace(HELP_BADGE, "");
 }
 
 test("the birth rail starts in the actual birth year and marks future decades without clickable controls", () => {

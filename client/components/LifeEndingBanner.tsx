@@ -1,4 +1,5 @@
 import "../styles/life-ending.css";
+import SectionHelp from "./SectionHelp.tsx";
 
 export interface LifeEndingBannerProps {
   name: string;
@@ -13,7 +14,7 @@ export interface LifeEndingBannerProps {
 
 /** Shown at the top of the game once a life ends, so the ending is never missed below the fold. */
 export default function LifeEndingBanner({ name, dates, lived, cause, ranked, onChronicle, onOpenPack, onNewLife }: LifeEndingBannerProps) {
-  return <section className="life-ending-banner" aria-labelledby="life-ending-title">
+  return <section className="life-ending-banner has-section-help" aria-labelledby="life-ending-title">
     <div className="life-ending-record">
       <p className="life-ending-eyebrow">LIFE COMPLETE</p>
       <h2 id="life-ending-title">{name}</h2>
@@ -31,5 +32,6 @@ export default function LifeEndingBanner({ name, dates, lived, cause, ranked, on
         {!ranked && <button type="button" className="text-button" onClick={onNewLife}>Begin another life <span aria-hidden="true">→</span></button>}
       </div>
     </div>
+    <SectionHelp hint="ending" />
   </section>;
 }

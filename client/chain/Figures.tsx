@@ -9,6 +9,7 @@ import StorybookMark from "../components/StorybookMark.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
 import "./web3-navigation.css";
 import "./token-market.css";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 type Copy = TokenView & { token_id: string };
 type FigureState = { copies: Copy[]; supply: [number, number] };
@@ -51,7 +52,8 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
 
   return (
     <section className="figure-directory ef-market-panel">
-      <header className="ledger-heading ef-market-header">
+      <header className="ledger-heading ef-market-header has-section-help">
+        <SectionHelp hint="figures" />
         <div className="ef-market-hero-eyebrow">
           <StorybookMark size={20} />
           <p className="ledger-kicker">The people who shape a city</p>

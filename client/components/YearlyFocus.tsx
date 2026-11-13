@@ -4,7 +4,8 @@ import { engineForLife } from "../lib/world-session.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
 import { trainingSkillChanges } from "../models/skill-tree.ts";
-import { focusActivity, focusStatus, yearlyDeclineNotes, YEARLY_FOCUSES } from "../models/yearly-focus.ts";
+import { focusActivity, focusStatus, yearlyDeclineNotes, yearlyFocusFirstAge, YEARLY_FOCUSES } from "../models/yearly-focus.ts";
+import SectionHelp from "./SectionHelp.tsx";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/yearly-focus.css";
 
@@ -13,14 +14,10 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
 }) {
   const id = useId();
   const activities = useMemo(() => providedActivities ?? engineForLife(life).getActivities(life), [providedActivities, life]);
-  const firstAge = Math.min(...YEARLY_FOCUSES.flatMap(focus => {
-    const activity = focusActivity(world, focus.id);
-    return activity ? [activity.minAge ?? 0] : [];
-  }));
-  if (life.age < firstAge || life.phase === "ended") return null;
+  if (life.age < yearlyFocusFirstAge(world) || life.phase === "ended") return null;
   const selected = activities.find(activity => activity.id === focusActivity(world, focusId)?.id);
   const skillChanges = selected ? trainingSkillChanges(selected, world, life) : [];
-  return <section className="yearly-focus" aria-labelledby={`${id}-title`}>
+  return <section className="yearly-focus has-section-help" aria-labelledby={`${id}-title`}>
     <h2 id={`${id}-title`}>This year’s focus <small>Change anytime</small></h2>
     <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{YEARLY_FOCUSES.map(focus => {
       const activity = focusActivity(world, focus.id);
@@ -38,5 +35,6 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
     </div>}
     <p className="yearly-focus-note" aria-live="polite">{focusStatus(life, world, focusId, activities)}</p>
     {yearlyDeclineNotes(life, world).map(note => <p className="yearly-focus-decay" key={note}>{note}</p>)}
+    <SectionHelp hint="focus" />
   </section>;
 }
