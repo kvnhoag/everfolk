@@ -36,9 +36,9 @@ const GAME = { kind: "game" } as const;
 const HOME_STEPS: readonly TutorialStep[] = [
   { id: "welcome", stage: "home", screen: HOME, targets: [], title: "Welcome to Everfolk",
     body: "Live one life on Egypt's ancient coast, from birth to old age. This tour opens each screen for you. Use Next and Back, or the arrow keys." },
-  { id: "begin", stage: "home", screen: HOME, targets: [".ef-home-primary"], title: "Begin or continue",
+  { id: "begin", stage: "home", screen: HOME, targets: [".ef-home-primary", ".ef-home-auth-button"], title: "Begin or continue",
     body: "Begin your life rolls a new character. Once a life is under way, this button reads Continue your life. Your game saves in this browser." },
-  { id: "weave-cta", stage: "home", screen: HOME, targets: [".ef-home-weave-cta"], title: "Weave Mode",
+  { id: "weave-cta", stage: "home", screen: HOME, targets: [".ef-home-weave-cta", ".ef-home-ranked"], title: "Weave Mode",
     body: "Weave Mode is the verified game: one life that counts, recorded on NEAR testnet. When it ends you can mint real NFTs from it." },
   { id: "header", stage: "home", screen: HOME, targets: [".ef-home-weave-links"], title: "One header everywhere",
     body: "Play, Weave Mode, Market, Figures and My lives sit at the top of every screen. The Tutorial button on the right reopens this tour." },
