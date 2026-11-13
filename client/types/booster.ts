@@ -1,3 +1,5 @@
+import type { BoosterLabels } from "../lib/booster/labels.mjs";
+
 export interface BoosterCardView {
   name: string;
   rarity: number;
@@ -15,6 +17,8 @@ export interface BoosterCollectionPack {
 
 export interface BoosterSceneOptions {
   cards: BoosterCardView[];
+  /** Words the scene shows; defaults to the free Legacy collection. Weave NFTs pass NFT_LABELS. */
+  labels?: Partial<BoosterLabels>;
   legacyCount?: number;
   reviewIndices?: number[];
   onSave(indices: number[]): number;

@@ -4,6 +4,7 @@ import {createPouchSurface,createPouchBridges,updatePouchGeometry,createCrimpedS
 import {isCompact,cardLayout,departure,legacyReviewLayout} from './layout.mjs';
 import {REFERENCE_MOTION,referenceLaunchRank,sampleReferenceCard,referenceImpactTime,advanceSpring,cardDepthOrder} from './motion.mjs';
 import {canCommitTear,tearProgress} from './tear-input.mjs';
+import {resolveBoosterLabels,reviewHint} from './labels.mjs';
 
 import {RAINBOW,rainbowPalette,sampleRainbowState,rainbowPoint} from './rainbow.mjs';
 
@@ -18,6 +19,7 @@ export function mountBooster(hostWindow,config){
  const requestAnimationFrame=cb=>frameId=window.requestAnimationFrame(cb);
  const devicePixelRatio=window.devicePixelRatio;
  const $=id=>document.getElementById(id);
+ const labels=resolveBoosterLabels(config.labels);
  const A={pack:'/assets/booster/pack-print.png',logo:'/assets/booster/wordmark.png'};
  function toggleCardSelection(selection,index,count){const next=new Set(selection);if(index<0||index>=count)return next;next.has(index)?next.delete(index):next.add(index);return next;}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -251,12 +253,12 @@ function focusSavedCard(index,animate=true){
  if(!reviewIndices.includes(index))return;inspected=index;inspection.x=inspection.y=0;gsap.killTweensOf(inspection);
  for(const slot of reviewSlots(index)){const c=cardList[slot.index];c.group.visible=true;gsap.killTweensOf(c.base);const {index:slotIndex,...poseSlot}=slot;gsap.to(c.base,{...poseSlot,duration:animate&&!reduced?.48:0,ease:'power3.inOut'});}
  [...$('card-nav').children].forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.card)===index)));
- $('hint').textContent=reviewIndices.length+' saved to Legacy · '+cardList[index].person.name+' · '+(reviewIndices.indexOf(index)+1)+' / '+reviewIndices.length;
- $('stage').setAttribute('aria-label','Saved Legacy review. Drag '+cardList[index].person.name+' to rotate. Click a thumbnail on the right to review that card.');announce($('hint').textContent);
+ $('hint').textContent=reviewHint(labels,reviewIndices.length,cardList[index].person.name,reviewIndices.indexOf(index));
+ $('stage').setAttribute('aria-label',labels.reviewLabel+'. Drag '+cardList[index].person.name+' to rotate. Click a thumbnail on the right to review that card.');announce($('hint').textContent);
 }
 function openSavedReview(){
- if(renderFailed){setPhase('saved');$('card-nav').hidden=true;$('keep').hidden=true;$('again').textContent='Back to memorial';$('again').onclick=config.onClose;$('hint').textContent=selection.size+' cards saved to your local Legacy';return;}
- setPhase('review');$('actions').hidden=true;$('inspection-actions').hidden=false;$('inspect-tip').hidden=false;$('inspect-tip').textContent='Drag to rotate · Choose a card on the right · F to flip';$('back').textContent='Back to memorial';
+ if(renderFailed){setPhase('saved');$('card-nav').hidden=true;$('keep').hidden=true;$('again').textContent=labels.back;$('again').onclick=config.onClose;$('hint').textContent=labels.showCount?selection.size+' cards saved to your local Legacy':'Your NFT is kept on NEAR';return;}
+ setPhase('review');$('actions').hidden=true;$('inspection-actions').hidden=false;$('inspect-tip').hidden=false;$('inspect-tip').textContent='Drag to rotate · Choose a card on the right · F to flip';$('back').textContent=labels.back;
  cardList.forEach((c,i)=>{if(!reviewIndices.includes(i))c.group.visible=false;});
  const nav=$('card-nav');nav.innerHTML='';nav.hidden=false;
  reviewIndices.forEach(index=>{const b=document.createElement('button');b.className='card-choice';b.dataset.card=String(index);b.textContent=cardList[index].person.name;b.setAttribute('aria-label','Review '+cardList[index].person.name);b.setAttribute('aria-pressed','false');b.onclick=()=>focusSavedCard(index);nav.append(b);});
@@ -382,7 +384,8 @@ function fallbackPack(){
 function fallbackOpen(){fallbackCards=chosenCards().map(([i,l])=>({person:people[i],level:l}));const f=$('fallback');f.innerHTML='';fallbackCards.forEach((c,i)=>{const im=document.createElement('img');im.src=frontCanvas(c.person,c.level).toDataURL();im.alt=c.person.name+', '+tiers[c.level].name;im.tabIndex=0;im.onclick=()=>selectCard(i);im.onkeydown=e=>{if(e.key==='Enter')selectCard(i);};f.append(im);});settle();$('card-nav').hidden=true;}
 function setMotion(value){reduced=value;$('motion').setAttribute('aria-pressed',String(value));if(value){openingTL?.isActive()&&openingTL.progress(1);resetTL?.progress(1);particles.length=0;rings.length=0;rays.length=0;flash=0;shake=0;}toast(value?'Reduced motion enabled.':'Full animation enabled.');}
 function bindUI(){
- if(config.onRevealed)document.querySelector('.version').textContent='WEAVE MODE · VERIFIED PACK';
+ document.querySelector('.preview-tag').textContent=labels.tag;$('legacy-count').hidden=!labels.showCount;$('collection-close').setAttribute('aria-label',labels.close);
+ document.querySelector('.version').textContent=config.onRevealed&&!config.labels?'WEAVE MODE · VERIFIED PACK':labels.footer;
  $('collection-close').onclick=config.onClose;
  $('sound').onclick=()=>{soundEnabled=!soundEnabled;updateSound();if(soundEnabled)sound('select');};
  $('lab-toggle').onclick=()=>{const open=$('lab').hidden;$('lab').hidden=!open;$('lab-toggle').setAttribute('aria-expanded',String(open));};
@@ -397,7 +400,7 @@ function bindUI(){
  motionQuery.addEventListener('change',motionChange);
  window.addEventListener('resize',resize);window.addEventListener('blur',()=>{drag.active=false;held=false;hovered=-1;keyboardTearHeld=false;if(phase==='sealed')gsap.to(foil,{flex:0,duration:.3});});
 }
-async function boot(){try{
+async function boot(){const loadingNote=$('loading')?.querySelector('p');if(loadingNote)loadingNote.textContent=labels.loading;try{
  const assets=await Promise.all([loadImage(A.pack),loadImage(A.logo),Promise.all(people.map(person=>loadImage(person.art))),document.fonts.load('600 40px Eczar')]);if(disposed)return;images.pack=assets[0];images.logo=assets[1];images.cards=assets[2];
  try{init3D();}catch(err){renderFailed=true;console.warn('WebGL unavailable; using accessible cards.',err);toast('3D is unavailable in this browser. Showing accessible cards.');}
  bindUI();updateSound();legacyCount=config.legacyCount||0;$('legacy-count').textContent='Legacy · '+legacyCount;ready=true;resetPack(false);$('stage').setAttribute('aria-busy','false');$('loading').style.opacity='0';setTimeout(()=>$('loading').hidden=true,reduced?0:430);requestAnimationFrame(frame);

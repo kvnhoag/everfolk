@@ -6,8 +6,7 @@ import { errorText } from "./chain-backend.ts";
 import { formatNear } from "./near-amount.ts";
 import MintReveal from "./MintReveal.tsx";
 import BoosterOpening from "../components/BoosterOpening.tsx";
-import { portraitSource } from "../models/life-background.ts";
-import { figureMediaPath } from "../../chain/figure-media.ts";
+import { packCardView } from "./nft-card-view.ts";
 import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";
 import EverfolkCard from "./EverfolkCard.tsx";
@@ -117,6 +116,7 @@ export default function MintPack({
           txHash,
         })}
         affection={result.affection}
+        card={selected !== null && pack.cards[selected] ? packCardView(pack.cards[selected], selected, pack.evidence_hash, group) : undefined}
         onClose={onClose}
       />
     );
@@ -128,12 +128,7 @@ export default function MintPack({
       <div className="verified-booster-stage">
         <BoosterOpening
           options={{
-            cards: (pack?.cards ?? []).map((card, slot) => ({
-              name: card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group],
-              rarity: card.rarity,
-              art: card.portrait_media ?? (card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: 45, seed: `${pack.evidence_hash}:${slot}` })),
-              sub: actionName(card.action_id),
-            })),
+            cards: (pack?.cards ?? []).map((card, slot) => packCardView(card, slot, pack.evidence_hash, group)),
             onSave: () => 0,
             onSkip: onClose,
             onClose,
