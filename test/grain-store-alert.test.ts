@@ -30,3 +30,22 @@ test("a store with room says nothing, and a world without a market only suggests
   assert.match(grainStoreAlert(facts({ grain: 1600, tradeAge: null, age: 16 }))!.text, /Plant more flax/);
   assert.equal(spoilageNote(facts()), "Stored grain loses about 8% a year; grain above the store's limit of 1500 loses about 40%.");
 });
+
+test("a harvest that will not feed everyone is warned about, with what the cash covers and what to do at this age", () => {
+  const short = { grain: 100, expectedHarvest: 300, expectedRent: 50, expectedEating: 600, grainPrice: 2 };
+  const covered = grainStoreAlert(facts({ ...short, cash: 1000, age: 20, flaxPlots: 2 }))!;
+  assert.equal(covered.tone, "warning");
+  assert.match(covered.text, /about 250 grain short/);
+  assert.match(covered.text, /buy it with about 500 of your cash/);
+  assert.match(covered.text, /Sow more plots with grain, or buy grain at the market/);
+  const uncovered = grainStoreAlert(facts({ ...short, cash: 100, age: 20, flaxPlots: 0 }))!;
+  assert.equal(uncovered.tone, "danger");
+  assert.match(uncovered.text, /your cash buys only about 50/);
+  assert.match(uncovered.text, /goes hungry and loses health/);
+  assert.doesNotMatch(uncovered.text, /Sow more plots/, "every plot already grows grain");
+  assert.match(grainStoreAlert(facts({ ...short, cash: 0, age: 8 }))!.text, /with no cash to buy it.*Your family runs the store for now/);
+});
+
+test("a food shortage outranks an overfull store, and a fed household hears nothing about food", () => {
+  assert.equal(grainStoreAlert(facts({ grain: 1000, expectedHarvest: 600, expectedEating: 600, cash: 0, grainPrice: 2 })), null);
+});

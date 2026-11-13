@@ -699,7 +699,7 @@ export default function EconomyPanels({
 
       {/* TAB 2: FARM & GRANARY */}
       <section aria-label="Farm and granary" hidden={activeTab !== "farm"}>
-        <FarmGranary screen={screen} world={world} age={life?.age ?? 0} cashText={cashText} holding={entry => heldQuantity(screen, entry)}
+        <FarmGranary screen={screen} world={world} age={life?.age ?? 0} cashText={cashText} cash={life?.economy?.cash ?? 0} holding={entry => heldQuantity(screen, entry)}
           onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil}
           onTrade={tradeItem => { setItem(tradeItem); setSide(heldQuantity(screen, tradeItem) > 0 ? "sell" : "buy"); setCounterparty("merchant"); setActiveTab("market"); setTradeJump(seq => seq + 1); }} />
       </section>

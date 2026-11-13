@@ -71,6 +71,8 @@ export interface FarmGranaryProps {
   world?: WorldPack;
   age: number;
   cashText: string;
+  /** The player's cash, to say how much of a food shortage it covers. */
+  cash?: number;
   holding(item: TradeItem): number;
   onPlan(flaxPlots: number): string | null;
   checkPlan?(flaxPlots: number): PlantingCheck;
@@ -78,11 +80,12 @@ export interface FarmGranaryProps {
   onTrade?(item: TradeItem): void;
 }
 
-export default function FarmGranary({ screen, world, age, cashText, holding, onPlan, checkPlan, plantingLockedUntil = null, onTrade }: FarmGranaryProps) {
+export default function FarmGranary({ screen, world, age, cashText, cash = 0, holding, onPlan, checkPlan, plantingLockedUntil = null, onTrade }: FarmGranaryProps) {
   const h = screen.household;
   const rates = world?.demo ? { capacity: h.capacity, spoilageBps: world.demo.household.spoilageBps, overCapacitySpoilageBps: world.demo.household.overCapacitySpoilageBps } : null;
   const alert = rates && world?.demo ? grainStoreAlert({ ...rates, grain: h.grain, expectedHarvest: h.expectedHarvest, expectedRent: h.expectedRent,
-    expectedEating: h.expectedEating, age, tradeAge: tuning(world.demo.market).minTradeAge, plantingAge: PLANTING_HINT_AGE }) : null;
+    expectedEating: h.expectedEating, age, tradeAge: tuning(world.demo.market).minTradeAge, plantingAge: PLANTING_HINT_AGE,
+    cash, grainPrice: screen.market.quotes.find(quote => quote.item === "grain")?.sell ?? 0, flaxPlots: h.flaxPlots }) : null;
   return <div className="farm-granary">
     <section aria-label="This year's conditions">
       <h3 className="farm-heading">This year</h3>

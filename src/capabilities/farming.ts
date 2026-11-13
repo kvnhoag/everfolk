@@ -52,6 +52,16 @@ export function plannedSeed(world: WorldPack, life: LifeState, flaxPlots: number
   const plots = life.demo!.household.plots, flax = Math.max(0, Math.min(plots, flaxPlots));
   return { grainNeed: (plots - flax) * GRAIN_SEED_PER_PLOT, flaxNeed: flax * FLAX_SEED_PER_PLOT, grainHeld: life.demo!.household.grain, flaxSeedHeld: material(life, "flax-seed") };
 }
+/**
+ * Flax plots sown with flax at the settlement after `completedAge`. A plan asking for more flax than the flax seed in
+ * store covers has its other plots sown with grain, as a household would rather than leave a field empty. Fieldwork
+ * already ordered (its seed taken then) is sown as ordered. Pure.
+ */
+export function sowableFlaxPlots(world: WorldPack | undefined, life: LifeState, completedAge = life.age): number {
+  const planned = life.demo?.household.flaxPlots ?? 0;
+  if (!world || !enabled(world, life) || planned === 0 || life.capabilities!.farm?.actionAge === completedAge) return planned;
+  return Math.min(planned, Math.floor(material(life, "flax-seed") / FLAX_SEED_PER_PLOT));
+}
 /** Grain an ordinary sowing of the household's grain plots needs. */
 export function ordinarySeedGrain(life: LifeState, def?: DemoDefinition): number { return seeds(life, "ordinary", def).grain; }
 function material(life: LifeState, item: string): number { return life.vocations?.inventory[item] ?? 0; }
