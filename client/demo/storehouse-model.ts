@@ -1,6 +1,7 @@
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import type { LifeStateWithDemo } from "../../src/demo/contracts.ts";
 import { householdView } from "../../src/demo/household.ts";
+import { marketView } from "../../src/demo/market.ts";
 import { RESOURCE_IDS, RESOURCES } from "./resources.ts";
 import type { ResourceId } from "./resources.ts";
 import { ledgerFlows, type LedgerFlow } from "./ledger-flows.ts";
@@ -29,6 +30,9 @@ const JOURNAL_RESOURCES: readonly { prefix: string; resources: readonly Resource
   ...["household-rent", "household-eat", "household-hunger", "household-bought-grain", "household-spoilage", "convoy-loss"]
     .map(prefix => ({ prefix, resources: ["grain"] as const })),
   { prefix: "household-rent-flax", resources: ["flax"] },
+  { prefix: "household-seed-loan", resources: ["grain"] },
+  { prefix: "household-flax-to-grain", resources: GRAIN_AND_FLAX },
+  { prefix: "household-sold-for-food", resources: ["drachmas", "linen", "flax", "ox", "donkey"] },
   { prefix: "household-spinning", resources: ["flax", "linen"] },
   { prefix: "household-feed-ox", resources: ["ox", "grain"] },
   { prefix: "household-feed-donkey", resources: ["donkey", "grain"] },
@@ -83,7 +87,8 @@ export function storehouseRows(world: WorldPack, life: LifeState): StorehouseRow
   };
   const rates = { capacity: view.capacity, spoilageBps: world.demo.household.spoilageBps, overCapacitySpoilageBps: world.demo.household.overCapacitySpoilageBps };
   const alert = grainStoreAlert({ ...rates, grain: view.grain, expectedHarvest: view.expectedHarvest, expectedRent: view.expectedRent,
-    expectedEating: view.expectedEating, age: life.age, tradeAge: tuning(world.demo.market).minTradeAge, plantingAge: PLANTING_HINT_AGE });
+    expectedEating: view.expectedEating, age: life.age, tradeAge: tuning(world.demo.market).minTradeAge, plantingAge: PLANTING_HINT_AGE,
+    cash: life.economy?.cash ?? 0, grainPrice: marketView(world.demo, typed).quotes.find(quote => quote.item === "grain")?.sell ?? 0, flaxPlots: view.flaxPlots });
   const coming: Partial<Record<ResourceId, StorehouseFlow[]>> = {
     grain: flows([["Harvest", view.expectedHarvest, "res-grain"], ["Rent", -view.expectedRent, "home"], ["Eating", -view.expectedEating, "flow-eat"], ["Spoilage", -view.expectedSpoilage, "flow-spoil"]])
       .map(flow => flow.text === "Spoilage" ? { ...flow, hint: spoilageNote(rates) } : flow),

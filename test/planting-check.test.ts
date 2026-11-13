@@ -27,13 +27,13 @@ test("a mixed plan without Crop allocation is refused before Set planting, with 
   assert.equal(plantingCheck(engine, life, 0).reason, null);
 });
 
-test("all-flax with no flax seed warns that the plots lie fallow and that no grain comes in", () => {
+test("all-flax with no flax seed warns that those plots will grow grain instead, and when flax seed can be bought", () => {
   const life = liveTo("plant-flax", 4);
   const plots = life.demo!.household.plots;
   const check = plantingCheck(engine, life, plots);
   assert.equal(check.reason, null, "a single-crop plan can be set");
-  assert.ok(check.warnings.some(line => /lie fallow and grow nothing/.test(line) && /from age 12/.test(line)));
-  assert.ok(check.warnings.some(line => /no new grain comes in/.test(line)));
+  assert.ok(check.warnings.some(line => /sown with grain instead/.test(line) && /from age 12/.test(line)));
+  assert.ok(!check.warnings.some(line => /no new grain comes in/.test(line)), "without flax seed the plots grow grain, so grain still comes in");
   assert.equal(flaxSeedAge(world), 12);
 });
 

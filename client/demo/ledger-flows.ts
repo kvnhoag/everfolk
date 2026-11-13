@@ -66,6 +66,9 @@ export function ledgerFlows(entry: { id: string; text: string }, touched: readon
   } else if (id === "household-harvest-bonus") parsed = { grain: flow("Help used", "res-labour", null) };
   else if (id === "household-rent") parsed = { grain: flow("Rent", "home", -(num(text, /hand (\d+)/) ?? 0)) };
   else if (id === "household-rent-flax") parsed = { flax: flow("Rent", "home", -(num(text, /hand (\d+)/) ?? 0)) };
+  else if (id === "household-seed-loan") parsed = { grain: flow("Seed loan", "res-grain", num(text, /borrows (\d+)/)) };
+  else if (id === "household-seed-loan-repaid") parsed = { grain: flow("Seed repaid", "home", -(num(text, /repays (?:only )?(?:the )?(\d+)/) ?? 0)) };
+  else if (id === "household-sold-for-food") parsed = { drachmas: flow("Sold for food", "commerce", num(text, /for (\d+) drachmas/)) };
   else if (id === "household-bought-grain") parsed = { grain: flow("Bought short", "commerce", num(text, /bought (\d+)/)) };
   else if (id === "household-eat") parsed = { grain: flow("Eating", "flow-eat", -(num(text, /eats (\d+)/) ?? 0)) };
   // Hunger is grain that was never in the store: a loss to note, not an amount taken out.

@@ -305,9 +305,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (next.phase === "ended" || fresh) commitPauseState(updatePauseState(pauseStateRef.current, { type: next.phase === "ended" ? "ended" : "fresh" }, { hasBegun: hasBegunRef.current, phase: next.phase }));
   }, [commitPauseState, yearClock, isPreview]);
 
-  const choose = useCallback((choiceId: string) => {
+  const choose = useCallback((choiceId: string, options?: { automatic?: boolean }) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    // After the player answers a turning point the clock stays paused until they press Resume (Auto mode carries on).
+    if (!options?.automatic && !autoIntentRef.current) pauseLife();
     if (submitOnline(play => play.dispatch({ type: "choose", choice: choiceId }))) return;
     try {
       const current = life;
@@ -317,7 +319,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life, submitOnline]);
+  }, [commit, hasBegun, life, submitOnline, pauseLife]);
 
   const act = useCallback((activityId: string, options?: { calendarDeadline?: boolean }) => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
@@ -610,7 +612,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     const choice = selectAutomaticChoice(engineForLife(life).getChoices(life), engineForLife(life).world, life);
     if (!choice) return;
     const timer = window.setTimeout(() => {
-      if (!document.hidden && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id);
+      if (!document.hidden && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id, { automatic: true });
     }, 700);
     return () => window.clearTimeout(timer);
   }, [autoDecisions, hasBegun, pauseState, isVisible, isOverlayOpen, life, choose]);

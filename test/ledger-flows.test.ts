@@ -66,3 +66,11 @@ test("flax rent lands on the flax row only, and animal feed on grain", async () 
   assert.ok(!byId.grain.lastYear.some(line => line.includes("bundles of flax")), "flax rent is not grain rent");
   assert.ok(byId.grain.lastYearFlows.some(flow => flow.label === "Animal feed" && flow.delta === -60));
 });
+
+test("the household's safety nets show as movements: seed borrowed and repaid, goods sold for food", () => {
+  assert.equal(read("household-seed-loan", "The store had too little seed, so the household borrows 20 measures of seed grain from the royal granary, to be repaid from the harvest.", ["grain"]).grain?.delta, 20);
+  assert.equal(read("household-seed-loan-repaid", "The household repays the 20 measures of seed grain to the royal granary.", ["grain"]).grain?.delta, -20);
+  assert.equal(read("household-seed-loan-repaid", "The harvest repays only 7 of the 20 measures of seed grain; the royal granary lets the rest go.", ["grain"]).grain?.delta, -7);
+  const sold = read("household-sold-for-food", "With no money left for food, the household sells 4 bolts of linen to the merchant for 96 drachmas to buy grain.", ["drachmas"]);
+  assert.deepEqual([sold.drachmas?.label, sold.drachmas?.delta], ["Sold for food", 96]);
+});

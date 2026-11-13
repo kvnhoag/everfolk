@@ -24,8 +24,10 @@ export function yearEndKeyOf(life: Pick<LifeState, "seed" | "age">): string {
   return `${life.seed}:${life.age}`;
 }
 
+/** Actions that spend the yearly action. Free ones (ending a friendship, resting while ill) would leave it unspent. */
 function yearlyChoices(world: WorldPack, activities: readonly ActivityAvailability[]): ActivityAvailability[] {
-  return activities.filter(activity => activity.available && YEARLY_KINDS.includes(activity.category ?? "") && !isUnavailable(world.demo, "activity", activity.id));
+  return activities.filter(activity => activity.available && activity.usesYearlyActivity !== false
+    && YEARLY_KINDS.includes(activity.category ?? "") && !isUnavailable(world.demo, "activity", activity.id));
 }
 
 /** True when the year is about to end with an action the player could still spend. */
@@ -34,16 +36,18 @@ export function yearEndChoiceNeeded(engine: Pick<LifeEngine, "world" | "getActiv
   return yearlyChoices(engine.world, engine.getActivities(life)).length > 0;
 }
 
-/** The focus's action first (recommended), then one option of each other kind, so the choice stays short. */
+/**
+ * The focus's action first (recommended), then one option of each other kind, so the choice stays short and varied.
+ * Without a focus action the list is filled from what remains, so the player always gets a real pick.
+ */
 export function yearEndOptions(world: WorldPack, activities: readonly ActivityAvailability[], focusId: YearlyFocusId): YearEndOption[] {
   const choices = yearlyChoices(world, activities);
   const focusId_ = focusActivity(world, focusId)?.id;
   const focus = choices.find(activity => activity.id === focusId_);
-  const others: ActivityAvailability[] = [];
-  for (const kind of YEARLY_KINDS) {
-    const next = choices.find(activity => activity.category === kind && activity.id !== focus?.id && !others.includes(activity));
-    if (next && others.length < OTHER_OPTIONS) others.push(next);
-  }
+  const room = OTHER_OPTIONS + (focus ? 0 : 1);
+  const rest = choices.filter(activity => activity !== focus);
+  const varied = YEARLY_KINDS.map(kind => rest.find(activity => activity.category === kind)).filter((activity): activity is ActivityAvailability => Boolean(activity));
+  const others = [...varied, ...rest.filter(activity => !varied.includes(activity))].slice(0, room);
   return [...(focus ? [focus] : []), ...others].map(activity => ({ id: activity.id, text: activity.text, category: activity.category ?? "", recommended: activity === focus }));
 }
 

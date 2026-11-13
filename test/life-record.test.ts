@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import { getNetWorth } from "../src/economy.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { lifeYearChanges, lifeYearHeadline } from "../client/models/life-record.ts";
+import { GOODS, lifeYearChanges, lifeYearHeadline } from "../client/models/life-record.ts";
 import type { LifeEventRow } from "../client/models/life-events.ts";
 
 const event = (kind: LifeEventRow["kind"], text: string, title?: string): LifeEventRow => ({ key: text, kind, text, title, sourceIds: [] });
@@ -18,7 +18,8 @@ test("one highlight favors personal results and endings, with concise fallback a
 });
 
 function metrics(life: LifeState, world: WorldPack): Record<string, number> {
-  return { ...life.stats, [world.economy!.stat]: getNetWorth(world, life), ...Object.fromEntries(Object.entries(life.character!.skills).map(([id, value]) => [`skill:${id}`, value])) };
+  // Wealth is recorded in two honest parts: cash, and the value of grain and goods (wealth minus cash).
+  return { ...life.stats, [world.economy!.stat]: life.economy!.cash, [GOODS]: getNetWorth(world, life) - life.economy!.cash, ...Object.fromEntries(Object.entries(life.character!.skills).map(([id, value]) => [`skill:${id}`, value])) };
 }
 
 test("annual arrows match actual end-of-year states, including clamping, net wealth and skills; projection is read-only", () => {

@@ -14,6 +14,8 @@ import { sectionStep } from "../models/section-steps.ts";
 
 interface ResourceCell {
   key: string;
+  /** One short word under the icons, so each is readable at a glance. */
+  word: string;
   parts: { glyph: string; value: string; small?: string }[];
   title: string;
   selected?: boolean;
@@ -118,19 +120,19 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
   // Icons and numbers only: each cell's name and detail are in its tooltip and screen-reader label,
   // and Inventory & Granary spells everything out.
   const cells: ResourceCell[] = [
-    { key: "grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }], selected: open("grain"),
+    { key: "grain", word: "Grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }], selected: open("grain"),
       extraClass: `${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`, onClick: () => openItemInDrawer("grain"),
       title: overCapacity
         ? `Grain: ${screen.household.grain}, over the store's limit of ${screen.household.capacity}. The extra spoils fast; open for what to do.`
         : `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
-    { key: "cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}` },
-    { key: "flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
-    { key: "linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
-    { key: "herd", parts: [{ glyph: "ox", value: String(holdingOf(screen, "ox")) }, { glyph: "donkey", value: String(holdingOf(screen, "donkey")) }],
+    { key: "cash", word: "Cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}. Cash pays for lessons, tools and market buys, and for food when the store runs short. Paid work and selling at the market bring it in.` },
+    { key: "flax", word: "Flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
+    { key: "linen", word: "Linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
+    { key: "herd", word: "Herd", parts: [{ glyph: "ox", value: String(holdingOf(screen, "ox")) }, { glyph: "donkey", value: String(holdingOf(screen, "donkey")) }],
       selected: open("ox") || open("donkey"), onClick: () => openItemInDrawer("ox"), title: `Herd: ${holdingOf(screen, "ox")} oxen, ${holdingOf(screen, "donkey")} donkeys` },
-    { key: "fields", parts: [{ glyph: "plots", value: String(grainPlots) }, { glyph: "flax-plots", value: String(screen.household.flaxPlots) }],
+    { key: "fields", word: "Fields", parts: [{ glyph: "plots", value: String(grainPlots) }, { glyph: "flax-plots", value: String(screen.household.flaxPlots) }],
       onClick: toggle, title: `Fields: ${grainPlots} grain plots, ${screen.household.flaxPlots} flax plots (of ${screen.household.plots})` },
-    { key: "reputation", parts: [{ glyph: "reputation", value: String(screen.works.reputation) }], onClick: toggle, title: `Reputation in town: ${screen.works.reputation}` },
+    { key: "reputation", word: "Standing", parts: [{ glyph: "reputation", value: String(screen.works.reputation) }], onClick: toggle, title: `Reputation in town: ${screen.works.reputation}` },
   ];
   const conditionTitle = (level: string, line?: string) => line ? `${levelLabel(level)}: ${line}` : levelLabel(level);
   const conditions = [
@@ -148,10 +150,11 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
           {cells.map(cell => <button key={cell.key} type="button" role="listitem"
             className={`aoe-cell is-icon-only${cell.selected ? " is-selected" : ""}${cell.extraClass ?? ""}`}
             title={cell.title} aria-label={cell.title} onClick={cell.onClick}>
-            {cell.parts.map(part => <span key={part.glyph} className="aoe-cell-part">
+            <span className="aoe-cell-parts">{cell.parts.map(part => <span key={part.glyph} className="aoe-cell-part">
               <ResourceGlyph id={part.glyph} />
               <strong className="aoe-cell-value">{part.value}{part.small && <small>{part.small}</small>}</strong>
-            </span>)}
+            </span>)}</span>
+            <span className="aoe-cell-word" aria-hidden="true">{cell.word}</span>
           </button>)}
         </div>
 
@@ -159,6 +162,7 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
           {conditions.map(condition => <span key={condition.kind} className={`aoe-cond is-icon-only aoe-cond-${condition.kind}-${condition.level}`}
             title={condition.title} aria-label={condition.title} role="img">
             <PixelIcon name={condition.icon} size={15} />
+            <span className="aoe-cell-word" aria-hidden="true">{condition.kind === "flood" ? "Flood" : condition.kind === "army" ? "Army" : "Road"}</span>
           </span>)}
         </div>
 

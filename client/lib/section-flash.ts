@@ -88,11 +88,18 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 }
 
-/** Brings the section into view unless it is already fully on screen. */
+/** Where the time bar pinned to the top of the screen ends; 0 when there is none. */
+function pinnedBarBottom(): number {
+  if (typeof document.querySelector !== "function") return 0;
+  return Math.max(0, document.querySelector(".life-session-bar")?.getBoundingClientRect().bottom ?? 0);
+}
+
+/** Brings the section into view unless it is already fully on screen (below the pinned time bar). */
 function bringIntoView(element: Element): void {
   const box = element.getBoundingClientRect();
   const height = document.documentElement.clientHeight || window.innerHeight;
-  if (box.top >= 0 && box.bottom <= height) return;
+  const covered = element.closest?.(".life-session-bar") ? 0 : pinnedBarBottom();
+  if (box.top >= covered && box.bottom <= height) return;
   const tall = box.height > height * 0.7;
   element.scrollIntoView({ block: tall ? "start" : "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
@@ -110,7 +117,8 @@ function showCallout(element: Element, label: string): { callout: HTMLElement | 
     // A popup opening over the page takes the player's attention: the focus behind it ends at once.
     if (popupOver(element)) { finish(); return; }
     const box = element.getBoundingClientRect();
-    const below = box.top < 56;
+    // The pinned time bar covers the top of the screen: a label that would sit under it goes below the section's top.
+    const below = box.top < pinnedBarBottom() + 56;
     callout.classList.toggle("is-below", below);
     callout.style.left = `${Math.round(Math.max(12, box.left + Math.min(box.width / 2, 160)))}px`;
     callout.style.top = `${Math.round(below ? box.bottom + 12 : box.top - 12)}px`;
