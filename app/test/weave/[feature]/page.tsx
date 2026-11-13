@@ -1,4 +1,4 @@
-import WeaveLab from "../../../../client/demo/WeaveLab.tsx";
+import { WeaveLabPage } from "../../../../client/screens/BrowserPages.tsx";
 
 export default async function WeaveFeatureTestPage({
   params,
@@ -6,5 +6,5 @@ export default async function WeaveFeatureTestPage({
   params: Promise<{ feature: string }> | { feature: string };
 }) {
   const resolved = await params;
-  return <WeaveLab initialPreset={resolved?.feature} />;
+  return <WeaveLabPage initialPreset={resolved?.feature} />;
 }

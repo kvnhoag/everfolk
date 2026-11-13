@@ -1,3 +1,3 @@
-import LegacyLab from "../../../client/demo/LegacyLab.tsx";
+import { LegacyLabPage } from "../../../client/screens/BrowserPages.tsx";
 
-export default function LegacyTestPage() { return <LegacyLab />; }
+export default function LegacyTestPage() { return <LegacyLabPage />; }
