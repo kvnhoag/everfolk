@@ -3,6 +3,13 @@ import type { BoosterCollectionPack } from "../types/booster.ts";
 
 export const BOOSTER_COLLECTION_KEY = "everfolk:booster-collection:v1";
 
+export class BoosterDecisionConflictError extends Error {
+  constructor() {
+    super("This pack was already resolved in another tab. Close and reopen it to see the saved decision.");
+    this.name = "BoosterDecisionConflictError";
+  }
+}
+
 function validPack(value: unknown): value is BoosterCollectionPack {
   if (!value || typeof value !== "object") return false;
   const pack = value as BoosterCollectionPack;
@@ -28,8 +35,15 @@ export function readBoosterCollection(storage: StorageLike): BoosterCollectionPa
 export function resolveBoosterPack(storage: StorageLike, pack: BoosterCollectionPack): BoosterCollectionPack[] {
   if (!validPack(pack)) throw new Error("Invalid booster selection.");
   const collection = readBoosterCollection(storage);
-  if (collection.some(entry => entry.id === pack.id)) return collection;
-  const next = [...collection, pack];
+  const selected = pack.selected.slice().sort((a, b) => a - b);
+  const existing = collection.find(entry => entry.id === pack.id);
+  if (existing) {
+    const committed = existing.selected.slice().sort((a, b) => a - b);
+    if (committed.length !== selected.length || committed.some((index, position) => index !== selected[position]))
+      throw new BoosterDecisionConflictError();
+    return collection;
+  }
+  const next = [...collection, { ...pack, selected }];
   storage.setItem(BOOSTER_COLLECTION_KEY, JSON.stringify(next));
   return next;
 }

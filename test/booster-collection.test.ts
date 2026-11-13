@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOOSTER_COLLECTION_KEY, readBoosterCollection, resolveBoosterPack } from "../client/storage/booster-collection.ts";
+import { BOOSTER_COLLECTION_KEY, BoosterDecisionConflictError, readBoosterCollection, resolveBoosterPack } from "../client/storage/booster-collection.ts";
 import type { BoosterCollectionPack } from "../client/types/booster.ts";
 
 function memory() {
@@ -25,8 +25,21 @@ test("any subset of one to five cards survives rereading without duplicate grant
 test("skip records an empty decision and reopening cannot grant a different selection", () => {
   const storage = memory();
   resolveBoosterPack(storage, pack("skipped-life", []));
-  resolveBoosterPack(storage, pack("skipped-life", [0, 4]));
+  assert.throws(() => resolveBoosterPack(storage, pack("skipped-life", [0, 4])), BoosterDecisionConflictError);
   assert.deepEqual(readBoosterCollection(storage)[0].selected, []);
+});
+
+test("a stale tab cannot report a different saved selection as successful", () => {
+  const storage = memory();
+  resolveBoosterPack(storage, pack("kept-life", [4, 0]));
+  const original = storage.getItem(BOOSTER_COLLECTION_KEY);
+  assert.throws(() => resolveBoosterPack(storage, pack("kept-life", [2])), BoosterDecisionConflictError);
+  assert.throws(() => resolveBoosterPack(storage, pack("kept-life", [])), BoosterDecisionConflictError);
+  assert.equal(storage.getItem(BOOSTER_COLLECTION_KEY), original);
+  assert.deepEqual(readBoosterCollection(storage)[0].selected, [0, 4]);
+  assert.doesNotThrow(() => resolveBoosterPack(storage, pack("kept-life", [0, 4])));
+  assert.doesNotThrow(() => resolveBoosterPack(storage, pack("kept-life", [4, 0])));
+  assert.equal(readBoosterCollection(storage).length, 1);
 });
 
 test("malformed, duplicate and out-of-range selections never overwrite a collection", () => {

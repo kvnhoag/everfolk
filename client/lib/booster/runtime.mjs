@@ -243,9 +243,9 @@ function saveSelected(){
  try{
   legacyCount=config.onSave([...selection]);$('legacy-count').textContent='Legacy · '+legacyCount;
   reviewIndices=[...selection].sort((a,b)=>a-b);openSavedReview();
- }catch{toast('Unable to save Legacy in this browser. Your selection is still available.');}
+ }catch(error){toast(error?.name==='BoosterDecisionConflictError'?error.message:'Unable to save Legacy in this browser. Your selection is still available.');}
 }
-function skipPack(){if(phase!=='settled')return;try{config.onSkip();}catch{toast('Unable to save this decision. Please try again.');}}
+function skipPack(){if(phase!=='settled')return;try{config.onSkip();}catch(error){toast(error?.name==='BoosterDecisionConflictError'?error.message:'Unable to save this decision. Please try again.');}}
 function reviewSlots(focus){return legacyReviewLayout(reviewIndices,focus,W,H);}
 function focusSavedCard(index,animate=true){
  if(!reviewIndices.includes(index))return;inspected=index;inspection.x=inspection.y=0;gsap.killTweensOf(inspection);
