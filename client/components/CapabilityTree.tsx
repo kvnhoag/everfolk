@@ -2,13 +2,15 @@ import { useId, useMemo, useRef, useState, type KeyboardEvent, type CSSPropertie
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
-import { buildCapabilityLayout, CAPABILITY_NODES, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../models/capability-layout.ts";
+import { CAPABILITY_NODES, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../models/capability-layout.ts";
+import { buildRadialLayout, NODE_RADIUS, ROOT_RADIUS, sectorPath } from "../models/capability-radial.ts";
 import CapabilityIcon from "./CapabilityIcon.tsx";
 import { capabilityPresentations, capabilityTier, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
 import { skillMapStartNode } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
 import "../styles/capability-tree-layout.css";
+import "../styles/capability-radial.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
 const BRANCH_DESCRIPTIONS: Record<string, string> = {
@@ -22,16 +24,6 @@ const EMPTY_VIEW: CapabilityNodeView = { id: "", state: "unavailable", reasons: 
 const BRANCH_INKS: Record<string, string> = { Physique: "#45664d", Knowledge: "#466a82", Handmade: "#986146", Trade: "#957128" };
 function sourceStyle(sources: readonly string[]): CSSProperties {
   return { "--cap-source-1": BRANCH_INKS[sources[0]], "--cap-source-2": BRANCH_INKS[sources[1]] } as CSSProperties;
-}
-function NodeShape({ branch, milestone = false, crossover = false }: { branch: string; milestone?: boolean; crossover?: boolean }) {
-  return <svg className="capability-node-shape" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-    {milestone || crossover ? <path d="M12 3h40l9 9v40l-9 9H12l-9-9V12l9-9Z" />
-      : branch === "Physique" ? <path d="M32 3C48 3 59 15 59 32S48 61 32 61 5 49 5 32 16 3 32 3Z" />
-        : branch === "Handmade" ? <path d="m32 3 26 14v30L32 61 6 47V17L32 3Z" />
-          : branch === "Knowledge" ? <path d="M13 5h38l8 8v38l-8 8H13l-8-8V13l8-8Z" /> : <path d="M32 2 61 32 32 62 3 32Z" />}
-    {milestone && <><path className="capability-milestone-frame" d="M15 8h34l7 7v34l-7 7H15l-7-7V15l7-7Z" /><path className="capability-milestone-crown" d="m25 3 2-6 5 4 5-4 2 6M3 25l-3 3v8l3 3m58-14 3 3v8l-3 3" /></>}
-    {crossover && <><path className="capability-source-ring source-one" d="M32 3H12l-9 9v40l9 9h20" /><path className="capability-source-ring source-two" d="M32 3h20l9 9v40l-9 9H32" /></>}
-  </svg>;
 }
 function SourceBranches({ sources }: { sources: readonly string[] }) {
   return <span className="capability-source-names" style={sourceStyle(sources)}>{sources.map((branch, index) => <span key={branch} className={`source-${index === 0 ? "one" : "two"}`}>{index > 0 && <b aria-hidden="true">+</b>}{branch}</span>)}</span>;
@@ -116,17 +108,18 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
   </aside>;
 }
 
-/** A fixed, inspectable skill DAG. Views only select and display engine-owned work. */
+/** A fixed, inspectable skill DAG drawn as a circle. Views only select and display engine-owned work. */
 export default function CapabilityTree({ world, life, activities, onActivity, onAssess, readOnly = false }: {
   world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[];
   onActivity(id: string, options?: { calendarDeadline?: boolean }): void; onAssess?(nodeId: string, jobIds: readonly string[]): void; readOnly?: boolean;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
-  const layout = useMemo(() => buildCapabilityLayout(nodes), [nodes]);
+  const layout = useMemo(() => buildRadialLayout(nodes), [nodes]);
   const presentations = useMemo(() => capabilityPresentations(nodes, world), [world]);
   const view = useMemo(() => capabilityView(world, life), [world, life]);
   const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
-  // The tree opens zoomed out on the whole atlas; the inspector starts on the player's own progress.
+  const colors = useMemo(() => new Map(layout.sectors.map(sector => [sector.branch, sector.color])), [layout]);
+  // The tree opens zoomed out on the whole circle; the panel starts on the player's own progress.
   const [selectedId, setSelectedId] = useState(() => skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes.find(node => node.id === "F1")?.id ?? nodes[0].id));
   const [pathSelected, setPathSelected] = useState(false);
   const [calendarDeadlines, setCalendarDeadlines] = useState<Record<string, boolean>>({});
@@ -153,32 +146,45 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
     if (!next) return;
     event.preventDefault(); select(next, true);
   }
-  return <section className="capability-tree" aria-labelledby={`${instanceId}-title`} data-capability-version={world.capabilities?.version ?? "reference"}>
+  return <section className="capability-tree is-radial" aria-labelledby={`${instanceId}-title`} data-capability-version={world.capabilities?.version ?? "reference"}>
     <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Learn the craft. Do the work. Let one skill open the next.</p></div><div className="capability-total"><strong>{learned}<span> / {nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
     {!view.enabled && <p className="capability-world-note" role="note">This life keeps its earlier skill rules. The complete atlas is shown as a reference; begin a new life in the current world to learn these nodes.</p>}
-    <div className="capability-legend" aria-label="Tree legend">{(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{state === "available" ? "Ready" : STATUS_LABEL[state]}</span>)}<span className="capability-legend-crossover"><NodeShape branch="Physique" crossover />Crossover</span><span className="capability-legend-milestone"><NodeShape branch="Physique" milestone />Title / key skill</span><span className="capability-legend-path"><i aria-hidden="true" />Selected path</span></div>
-    <p className="capability-map-help" id={`${instanceId}-help`}>The whole tree is shown · Scroll or pinch to zoom in, then drag to move · Click a skill to trace its roots · Arrow keys to navigate</p>
+    <div className="capability-legend" aria-label="Tree legend">
+      {layout.sectors.map(sector => <span key={sector.branch} className="capability-legend-branch" style={{ "--branch": sector.color } as CSSProperties}><i aria-hidden="true" />{sector.branch}<small>{BRANCH_DESCRIPTIONS[sector.branch]}</small></span>)}
+      {(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{state === "available" ? "Ready" : STATUS_LABEL[state]}</span>)}
+      <span className="capability-legend-crossover"><i aria-hidden="true" />Crossover</span><span className="capability-legend-milestone"><i aria-hidden="true" />Title / key skill</span><span className="capability-legend-path"><i aria-hidden="true" />Selected path</span>
+    </div>
+    <p className="capability-map-help" id={`${instanceId}-help`}>Every path starts from your life at the bottom · Click a skill to see what it needs and opens · Scroll or pinch to zoom, then drag · Arrow keys move along the paths</p>
     <div className="capability-workspace">
       <div className="capability-map-area"><div className={`capability-viewport${zoom < .55 ? " is-overview" : ""}${zoom <= minZoom + .001 ? " is-fitted" : ""}${dragging ? " is-dragging" : ""}`} ref={viewport} {...pointerHandlers} aria-label="Connected skill tree" aria-describedby={`${instanceId}-help`}>
-        <div className="capability-paper" ref={paper} style={{ width: layout.width, height: layout.height }}>
+        <div className="capability-paper is-radial" ref={paper} style={{ width: layout.width, height: layout.height }}>
           <svg className="capability-connections" viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true" focusable="false">
-            <defs><pattern id={`${instanceId}-fiber`} width="43" height="37" patternUnits="userSpaceOnUse"><path d="M3 7h4M26 29h6M15 19h2" stroke="currentColor" strokeWidth=".7" opacity=".12" /></pattern></defs>
-            <rect width={layout.width} height={layout.height} fill={`url(#${instanceId}-fiber)`} />
-            {layout.bands.map(band => <g key={band.branch}><line x1="24" x2={layout.width - 24} y1={band.top} y2={band.top} className="capability-band-rule" /><text x="34" y={band.titleY} className="capability-band-title">{band.branch}</text><text x="34" y={band.titleY + 19} className="capability-band-subtitle">{BRANCH_DESCRIPTIONS[band.branch]}</text></g>)}
-            {Array.from({ length: 10 }, (_, index) => <text key={index} x={100 + index * 142} y="26" textAnchor="middle" className="capability-depth-label">{index + 1}</text>)}
+            {layout.sectors.map(sector => <path key={sector.branch} className="radial-sector" d={sectorPath(sector, ROOT_RADIUS + 8, layout.rings.at(-1)! + NODE_RADIUS + 14)} style={{ fill: sector.color }} />)}
+            {layout.rings.map((radius, index) => <circle key={radius} className="radial-ring" cx={layout.cx} cy={layout.cy} r={radius}><title>{`Depth ${index + 1}`}</title></circle>)}
+            {layout.sectors.map(sector => <g key={`${sector.branch}-labels`} style={{ fill: sector.color }}>
+              <text className="radial-branch-label" x={sector.labelX} y={sector.labelY} textAnchor="middle" dominantBaseline="middle">{sector.branch}</text>
+              {sector.lanes.filter(lane => lane.name !== "Commercial planning" && lane.name !== "Conditioning").map(lane => <text key={lane.name} className="radial-lane-label" x={lane.x} y={lane.y} textAnchor={lane.anchor} dominantBaseline="middle">{lane.name}</text>)}
+            </g>)}
+            {layout.rootLinks.map(link => <path key={`root-${link.to}`} data-root-link={link.to} d={link.path} className={`radial-root-link${byId.get(link.to)?.state === "learned" ? " is-learned" : ""}`} style={{ stroke: colors.get(link.branch) }} />)}
             {layout.links.map(link => {
               const from = byId.get(link.from), to = byId.get(link.to);
-              const target = nodes.find(node => node.id === link.to)!;
               const lineage = ancestors.has(link.from) && ancestors.has(link.to);
-              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} data-crossover={link.crossover || undefined} d={link.path} className={`capability-link${link.crossover?" is-crossover":""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${capabilityTier(to?.state) === "unavailable" ? " is-unavailable" : ""}`} />;
+              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} data-crossover={link.crossover || undefined} d={link.path} style={{ stroke: colors.get(link.branch) }}
+                className={`capability-link radial-link${link.crossover ? " is-crossover" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${capabilityTier(to?.state) === "unavailable" ? " is-unavailable" : ""}`} />;
             })}
           </svg>
+          <div className="radial-root" style={{ left: layout.cx, top: layout.cy }} aria-hidden="true"><strong>{learned}</strong><span>of {nodes.length}</span><small>Your life</small></div>
           {layout.nodes.map(({ node, x, y }) => {
             const state = byId.get(node.id)?.state ?? "unavailable";
             const lineage = ancestors.has(node.id);
             const feature = presentations.get(node.id)!;
-            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state} tier-${capabilityTier(state)}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${feature.milestone ? " is-milestone" : ""}${feature.crossover ? " is-crossover" : ""}`} style={{ left: x, top: y, ...sourceStyle(feature.sources) }} data-capability-id={node.id} data-node-kind={feature.crossover ? "crossover" : feature.milestone ? "milestone" : "standard"} data-source-branches={feature.crossover ? feature.sources.join(" + ") : undefined} data-state={state} aria-label={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.crossover ? ` · Requires ${feature.sources.join(" and ")}` : ""}${feature.milestone ? " · Title or key skill" : ""}`} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.titles.length ? ` · Opens ${feature.titles.join(", ")}` : feature.keySkill ? " · Opens multiple skills" : ""}${feature.crossover ? ` · ${feature.sources.join(" + ")}` : ""}`} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
-              <span className="capability-seal"><NodeShape branch={node.branch} milestone={feature.milestone} crossover={feature.crossover} /><CapabilityIcon {...node} /><span className="capability-node-id">{node.id}</span>{state === "learned" && <span className="capability-earned-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg></span>}</span><span className="capability-node-name">{node.title}</span>{feature.crossover && <SourceBranches sources={feature.sources} />}
+            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }}
+              className={`capability-node radial-node is-${state} tier-${capabilityTier(state)}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${feature.milestone ? " is-milestone" : ""}${feature.crossover ? " is-crossover" : ""}`}
+              style={{ left: x, top: y, "--branch": colors.get(node.branch), ...sourceStyle(feature.sources) } as CSSProperties} data-capability-id={node.id} data-node-kind={feature.crossover ? "crossover" : feature.milestone ? "milestone" : "standard"} data-source-branches={feature.crossover ? feature.sources.join(" + ") : undefined} data-state={state}
+              aria-label={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.crossover ? ` · Requires ${feature.sources.join(" and ")}` : ""}${feature.milestone ? " · Title or key skill" : ""}`} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1}
+              title={`${node.title} · ${STATUS_LABEL[state]}${feature.titles.length ? ` · Opens ${feature.titles.join(", ")}` : ""}`} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
+              <span className="radial-orb"><CapabilityIcon {...node} />{state === "learned" && <span className="capability-earned-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg></span>}</span>
+              <span className="capability-node-name">{node.title}</span>
             </button>;
           })}
         </div>

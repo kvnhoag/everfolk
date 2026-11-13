@@ -230,3 +230,6 @@
   filter:none !important;
   backdrop-filter:none !important;
 }
+/* Signed in with Weave Mode on: one button, with where the life is kept underneath. */
+.ef-home .ef-home-primary.is-weave>span:not([aria-hidden]){display:grid;gap:2px}
+.ef-home .ef-home-primary.is-weave small{font-size:12px;font-weight:600;letter-spacing:.04em;color:#5b4c38}

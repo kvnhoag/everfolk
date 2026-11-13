@@ -15,7 +15,7 @@ export default function RankedMenuEntry({ checked, onChange }: { checked: boolea
         onFocus={() => setDismissed(false)} onClick={() => setDismissed(false)}
         onKeyDown={event => { if (event.key === "Escape") setDismissed(true); }}>i</button>
       <div id={helpId} role="tooltip" className="weave-mode-tooltip">
-        Weave Mode uses a NEAR wallet or email to sign in and play a life recorded on NEAR. No account? Play as guest below.
+        Weave Mode records your life on NEAR: sign in with a NEAR wallet or email. Turn it off to play a free life without an account.
       </div>
     </div>
   </div>;

@@ -65,8 +65,11 @@ function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notic
     }
   }
 
+  // Signed in, Weave Mode has one way in: a new life recorded on NEAR.
   if (live?.accountId) return <>
-    <button className="ef-home-auth-button" type="button" onClick={enterWeave}>Enter Weave Mode</button>
+    <button className="ef-home-primary is-weave" type="button" onClick={enterWeave}>
+      <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>Begin a new life<small>Weave Mode · recorded on NEAR</small></span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
+    </button>
     <HomeNotice notice={notice} />
   </>;
 
@@ -110,7 +113,10 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
   const openWeave = !rankedLife && weaveEnabled;
-  const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Play as guest";
+  // Signed in with Weave Mode on, the guest life is put aside: one button, not two ways to start.
+  const signedIn = chainBackend?.mode === "live" && Boolean(chainBackend.accountId);
+  const guestShown = !openWeave || !signedIn;
+  const primaryLabel = rankedLife || continuing ? "Continue your life" : ended ? "Begin a new life" : "Play as guest";
   const enterFreeLife = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
@@ -144,7 +150,7 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
             </span>
           </h1>
           <div className="ef-home-logo-rule" aria-hidden="true"><span /><i>✦</i><span /></div>
-          {hasBegun && <div className="ef-home-save" id={saveId}>
+          {hasBegun && (guestShown || rankedLife) && <div className="ef-home-save" id={saveId}>
             <span className="ef-home-save-mark" aria-hidden="true" />
             <div><span>{ended ? "YOUR LAST STORY" : "A STORY IN PROGRESS"}</span><strong>{life.character?.name ?? "Your character"}</strong></div>
             <span className="ef-home-save-age">Age {life.age}<small>{formatYear(life.year)}</small></span>
@@ -152,17 +158,15 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
           <div className="ef-home-actions">
             {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry checked={weaveEnabled} onChange={setWeaveEnabled} /></div>}
             <div className="ef-home-mode-actions">
-              {openWeave && <>
-                <WeaveSignIn backend={chainBackend} notice={notice} />
-                <div className="ef-home-auth-divider ef-home-guest-divider"><span>or play without an account</span></div>
-              </>}
-              {/* Guest play is always on the first screen; Weave Mode only adds the sign-in choices above it. */}
-              <button className={`ef-home-primary${openWeave ? " is-guest" : ""}`} type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
+              {openWeave && <WeaveSignIn backend={chainBackend} notice={notice} />}
+              {openWeave && guestShown && <div className="ef-home-auth-divider ef-home-guest-divider"><span>or play without an account</span></div>}
+              {/* Without an account, guest play stays on the first screen; Weave Mode only adds the sign-in choices above it. */}
+              {guestShown && <button className={`ef-home-primary${openWeave ? " is-guest" : ""}`} type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
                 <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
-              </button>
+              </button>}
               {!openWeave && <HomeNotice notice={notice} />}
             </div>
-            {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
+            {hasBegun && !rankedLife && guestShown && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>
         </section>
       </div>

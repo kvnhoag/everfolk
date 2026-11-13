@@ -1,0 +1,86 @@
+/* The skill tree as a circle: full screen, a dark map with one bright colour per branch, every path growing from the
+   shared root in the middle, and the chosen skill described beside it. Loaded after the older tree styles. */
+
+/* The Skills tab fills the screen; the map and the skill panel share it side by side, like a 16:9 game screen. */
+.detail-dialog.character-dialog:has(.character-management.is-skills){width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;border:0;border-radius:0}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content{padding:12px 20px}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content>.eyebrow{display:none}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content>h2{margin:0 0 6px;font-size:24px}
+.capability-tree.is-radial .capability-heading h3{font-size:24px}
+.capability-tree.is-radial .capability-heading p{display:none}
+.capability-tree.is-radial .capability-total strong{font-size:24px}
+.capability-tree.is-radial .capability-heading{margin-bottom:6px}
+.capability-tree.is-radial .capability-legend{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;font-size:12.5px}
+.capability-tree.is-radial .capability-legend>span{display:inline-flex;align-items:center;gap:6px}
+.capability-tree.is-radial .capability-legend i{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #6b7f86;background:#13252b}
+.capability-tree.is-radial .capability-legend-branch{font-weight:700}
+.capability-tree.is-radial .capability-legend-branch i{background:var(--branch);border-color:var(--branch)}
+.capability-tree.is-radial .capability-legend-branch small{font-weight:400;color:#6d6250}
+.capability-tree.is-radial .capability-legend .is-learned i{background:#f3e7cc;border-color:#f3e7cc}
+.capability-tree.is-radial .capability-legend .is-available i{border-color:#f3e7cc;box-shadow:0 0 0 3px #f3e7cc55}
+.capability-tree.is-radial .capability-legend .is-locked i{border-style:solid;opacity:.75}
+.capability-tree.is-radial .capability-legend .is-unavailable i{border-style:dashed;opacity:.5}
+.capability-tree.is-radial .capability-legend-crossover i{border-radius:2px;border-style:dashed;background:transparent}
+.capability-tree.is-radial .capability-legend-milestone i{border-width:3px;border-color:#f0c24e}
+.capability-tree.is-radial .capability-legend-path i{width:22px;height:4px;border:0;border-radius:2px;background:#f3e7cc}
+.capability-tree.is-radial .capability-map-help{margin:4px 0 8px;font-size:13px}
+
+.capability-tree.is-radial .capability-workspace{grid-template-columns:minmax(0,1fr) minmax(320px,400px);gap:16px;align-items:stretch}
+.capability-tree.is-radial .capability-viewport{height:clamp(520px,calc(100dvh - 230px),1400px);border:1px solid #0b1518;border-radius:4px;
+  background:radial-gradient(circle at 50% 50%,#1b3139 0%,#122228 55%,#0b1518 100%);background-image:radial-gradient(circle at 50% 50%,#1b3139 0%,#122228 55%,#0b1518 100%)}
+.capability-tree.is-radial .capability-inspector{display:block;max-height:clamp(520px,calc(100dvh - 230px),1400px);overflow:auto;padding:16px 18px;font-size:14px}
+.capability-tree.is-radial .capability-inspector h4{font-size:26px}
+@media(max-width:1000px){
+  .capability-tree.is-radial .capability-workspace{grid-template-columns:minmax(0,1fr)}
+  .capability-tree.is-radial .capability-viewport{height:min(80vw,640px)}
+  .capability-tree.is-radial .capability-inspector{max-height:none}
+}
+
+/* The map: faint wedges per branch, depth rings, branch and spoke names. */
+.capability-paper.is-radial{background:none}
+.capability-paper.is-radial .radial-sector{opacity:.07}
+.capability-paper.is-radial .radial-ring{fill:none;stroke:#ffffff14;stroke-width:1.5}
+.capability-paper.is-radial .radial-branch-label{font:700 30px/1 var(--ef-font-display);letter-spacing:.04em}
+.capability-paper.is-radial .radial-lane-label{font:600 15px/1 var(--ef-font-body);opacity:.9}
+.capability-paper.is-radial .radial-branch-note{font:500 14px/1 var(--ef-font-body);fill:#d9cdb3;opacity:.9}
+
+/* Links: each branch's colour; learned paths bright, the selected path brighter, the rest quiet but visible. */
+.capability-paper.is-radial .radial-root-link,.capability-paper.is-radial .radial-link{fill:none;stroke-width:3;stroke-linecap:round;opacity:.42}
+.capability-paper.is-radial .radial-link.is-unavailable{opacity:.2;stroke-dasharray:4 6}
+.capability-paper.is-radial .radial-link.is-crossover{stroke-dasharray:9 7;opacity:.55}
+.capability-paper.is-radial .radial-link.is-learned,.capability-paper.is-radial .radial-root-link.is-learned{opacity:1;stroke-width:4}
+.capability-paper.is-radial .radial-link.is-off-path{opacity:.16}
+.capability-paper.is-radial .radial-link.is-lineage{opacity:1;stroke:#fff8e6 !important;stroke-width:5;filter:drop-shadow(0 0 4px #fff8e6aa)}
+
+/* The shared root: your life, with how many skills it has learned. */
+.capability-paper.is-radial .radial-root{position:absolute;display:grid;place-items:center;align-content:center;width:104px;height:104px;margin:-52px 0 0 -52px;border:3px solid #f3e7cc;border-radius:50%;
+  background:radial-gradient(circle,#2b4a52,#163038);color:#f3e7cc;text-align:center;box-shadow:0 0 0 6px #f3e7cc22,0 0 24px #000a;pointer-events:none}
+.capability-paper.is-radial .radial-root strong{font:700 30px/1 var(--ef-font-display)}
+.capability-paper.is-radial .radial-root span{font-size:12px;opacity:.85}
+.capability-paper.is-radial .radial-root small{margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f0c24e}
+
+/* Skills: round orbs in the branch colour, bright against the dark map. */
+/* Centred exactly on its point: the older tree's offset (translate) would pull it off its lines. */
+.capability-tree .capability-paper.is-radial .radial-node{position:absolute;display:block;width:40px;height:40px;margin:-20px 0 0 -20px;padding:0;border:0;background:none;color:var(--branch);cursor:pointer;z-index:1;transform:none}
+.capability-paper.is-radial .radial-orb{position:relative;display:grid;place-items:center;width:40px;height:40px;border:3px solid var(--branch);border-radius:50%;background:#10232a;box-sizing:border-box;transition:transform .12s,box-shadow .12s}
+.capability-paper.is-radial .radial-orb .capability-icon{width:22px;height:22px;color:var(--branch)}
+.capability-paper.is-radial .radial-node.is-learned .radial-orb{background:var(--branch);box-shadow:0 0 12px var(--branch)}
+.capability-paper.is-radial .radial-node.is-learned .capability-icon{color:#10232a}
+.capability-paper.is-radial .radial-node.is-available .radial-orb{box-shadow:0 0 0 4px #f3e7cc66,0 0 16px var(--branch);animation:radial-ready 1.8s ease-in-out infinite}
+.capability-paper.is-radial .radial-node.is-locked .radial-orb{opacity:.78}
+.capability-paper.is-radial .radial-node.tier-unavailable .radial-orb{border-style:dashed;opacity:.42}
+.capability-paper.is-radial .radial-node.is-milestone .radial-orb{border-width:4px;outline:2px solid #f0c24e;outline-offset:2px}
+.capability-paper.is-radial .radial-node.is-crossover .radial-orb{border-color:var(--cap-source-1,var(--branch));border-right-color:var(--cap-source-2,var(--branch));border-bottom-color:var(--cap-source-2,var(--branch))}
+.capability-paper.is-radial .radial-node.is-off-path .radial-orb{opacity:.45}
+.capability-paper.is-radial .radial-node.is-lineage .radial-orb{opacity:1}
+.capability-paper.is-radial .radial-node:hover .radial-orb,.capability-paper.is-radial .radial-node:focus-visible .radial-orb{transform:scale(1.18)}
+.capability-paper.is-radial .radial-node.is-selected .radial-orb{transform:scale(1.25);border-color:#fff8e6;box-shadow:0 0 0 5px var(--branch),0 0 22px var(--branch);opacity:1}
+.capability-paper.is-radial .capability-earned-mark{position:absolute;right:-6px;bottom:-6px;width:16px;height:16px;border-radius:50%;background:#fff8e6}
+.capability-paper.is-radial .capability-earned-mark svg{width:16px;height:16px;fill:none;stroke:#1f5a32;stroke-width:2.4}
+
+/* Names stay out of the way: shown for the chosen skill and on hover or keyboard focus. */
+.capability-paper.is-radial .capability-node-name{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);display:none;padding:3px 8px;border-radius:3px;background:#0b1518ee;color:#fff8e6;font:600 13px/1.2 var(--ef-font-body);white-space:nowrap;pointer-events:none;z-index:3}
+.capability-paper.is-radial .radial-node:hover .capability-node-name,.capability-paper.is-radial .radial-node:focus-visible .capability-node-name,.capability-paper.is-radial .radial-node.is-selected .capability-node-name{display:block}
+.capability-paper.is-radial .radial-node:hover,.capability-paper.is-radial .radial-node.is-selected{z-index:2}
+@keyframes radial-ready{0%,100%{box-shadow:0 0 0 3px #f3e7cc55,0 0 10px var(--branch)}50%{box-shadow:0 0 0 7px #f3e7cc22,0 0 22px var(--branch)}}
+@media(prefers-reduced-motion:reduce){.capability-paper.is-radial .radial-node.is-available .radial-orb{animation:none}}
