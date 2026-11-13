@@ -1,25 +1,28 @@
 import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
 import type { SaveFile } from "../../src/types.ts";
 import type { ContentDatabase } from "../db/types.ts";
+import type { NpcEnvironment } from "../npc/composition.ts";
+import type { NpcRankedService } from "../npc/ranked-service.ts";
 import { readEvidence, storeEvidence } from "./evidence-store.ts";
 import { viewLife } from "./near-view.ts";
 import { clientKey, defaultVerifyLimiter, type RateLimiter } from "./rate-limit.ts";
 import { createEvidenceSigner } from "./signer.ts";
-import { VerificationError, type LifeVerifier } from "./verifier.ts";
+import { VerificationError, VerificationUnavailableError, type LifeVerifier } from "./verifier.ts";
 
 /** D1 rows top out near 2 MB; a full ranked life is far smaller. */
 export const MAX_RANKED_SAVE_BYTES = 1_900_000;
 const MAX_BODY_BYTES = MAX_RANKED_SAVE_BYTES + 4_096;
 const DEFAULT_RPC_URL = "https://test.rpc.fastnear.com";
 
-export interface RankedEnvironment {
+export interface RankedEnvironment extends NpcEnvironment {
   DB?: ContentDatabase; RANKED_VERIFIER_SECRET?: string; RANKED_CONTRACT_ID?: string; NEAR_RPC_URL?: string;
+  NPC_RANKED?: NpcRankedService;
   /** Optional Cloudflare rate-limit binding; without it a per-isolate limiter applies. */
   RANKED_RATE_LIMITER?: RateLimiter;
 }
 
 export interface RankedDependencies {
-  verifier?: (env: RankedEnvironment) => Promise<LifeVerifier>;
+  verifier?: (env: RankedEnvironment, deps?: RankedDependencies) => Promise<LifeVerifier>;
   fetch?: typeof fetch;
   now?: () => Date;
   limiter?: RateLimiter;
@@ -108,7 +111,7 @@ async function verify(request: Request, env: RankedEnvironment, deps: RankedDepe
   const { lifeId, saveJson, save } = parseVerifyRequest(await readBody(request));
   const life = await viewLife(rpcUrl, contractId, lifeId, deps.fetch ?? fetch);
   if (!life) throw new RouteError(404, "This ranked life was not found on NEAR.");
-  const signed = await (await deps.verifier(env)).verify(life, save);
+  const signed = await (await deps.verifier(env, deps)).verify(life, save);
   // Publishing evidence must never block a mint: the signature alone is what the contract checks.
   let stored = true;
   try {
@@ -132,7 +135,7 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
       if (!contractId) throw new RouteError(503, "Ranked lives are not set up on this server yet.");
       const rpcUrl = env.NEAR_RPC_URL || DEFAULT_RPC_URL;
       const secret = env.RANKED_VERIFIER_SECRET;
-      const publicKey = secret ? (deps.verifier ? (await deps.verifier(env)).publicKey : (await createEvidenceSigner(secret)).publicKey) : null;
+      const publicKey = secret ? (deps.verifier ? (await deps.verifier(env, deps)).publicKey : (await createEvidenceSigner(secret)).publicKey) : null;
       return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: DEMO_WORLD_VERSION, verifier_public_key: publicKey });
     }
     if (path === "/api/ranked/verify") {
@@ -152,6 +155,7 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
     return json({ error: "API route not found." }, 404);
   } catch (error) {
     if (error instanceof RouteError) return json({ error: error.message }, error.status);
+    if (error instanceof VerificationUnavailableError) return json({ error: error.message }, 503);
     if (error instanceof VerificationError) return json({ error: error.message }, 400);
     // Never expose keys, RPC payloads or stack traces to visitors.
     return json({ error: "Ranked lives are unavailable right now. Please try again later." }, 503);

@@ -6,6 +6,7 @@ import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import BornInto from "./BornInto.tsx";
 import { bornIntoLines, type OwnersByToken } from "./born-into-model.ts";
 import { backendSaveScope, errorText, type ChainBackend } from "./chain-backend.ts";
+import { isNpcRankedVersion, loadRankedNpcConfig, type RankedNpcConfig } from "./npc-online.ts";
 import type { LivesContract } from "./types.ts";
 import MintRecovery from "./MintRecovery.tsx";
 import { removeRankedSave } from "./ranked-session.ts";
@@ -39,6 +40,8 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const [notice, setNotice] = useState("");
   const [signingIn, setSigningIn] = useState(false);
   const [choseWallet, setChoseWallet] = useState(false);
+  const [npcConfig, setNpcConfig] = useState<RankedNpcConfig | null>(null);
+  const [useNpcWorld, setUseNpcWorld] = useState(false);
   const { signin } = backend;
   /** Gas, wallet approvals and wallet help are shown only to players on the NEAR wallet path. */
   const walletPath = !signin || !signin.available.email || signin.method === "wallet" || (signin.method !== "email" && choseWallet);
@@ -52,6 +55,12 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     void contract.mintTerms().then(value => { if (!cancelled) setTerms(value); }).catch(() => {});
     return () => { cancelled = true; };
   }, [contract]);
+  useEffect(() => {
+    if (backend.mode !== "live") return;
+    let cancelled = false;
+    void loadRankedNpcConfig().then(value => { if (!cancelled) setNpcConfig(value); }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [backend.mode]);
 
   async function run(action: () => Promise<void>, fallback: string) {
     setBusy(true);
@@ -60,7 +69,10 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   }
 
   const start = () => run(async () => {
-    const started = await contract.startLife(backend.worldVersion);
+    const worldVersion = useNpcWorld && npcConfig?.available && backend.mode === "live"
+      ? npcConfig.world_version
+      : backend.worldVersion;
+    const started = await contract.startLife(worldVersion);
     setOwners(await ownersOf(contract, started));
     setLife(started);
   }, "Your ranked life could not start. Try again in a moment.");
@@ -105,6 +117,20 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
       </ul>
       <ol className="ranked-steps"><li><strong>{signin ? "Sign in" : "Connect"}</strong><span>{signin ? "With your email, or a NEAR testnet wallet you already use." : "Use your existing NEAR testnet wallet. Meteor is supported."}</span></li><li><strong>Live</strong><span>{walletPath ? "No entry fee. NEAR gas applies to recorded decisions and checkpoints. No rewinds." : "No entry fee. No rewinds."}</span></li><li><strong>Open & choose</strong><span>When the life ends, open a 1–5 card pack (based on life span and titles; none before age 18) for {formatNear(terms.mint_fee)} NEAR, then choose one card from that pack to mint.</span></li></ol>
       <p className="chain-fine">The pack fee follows the source-life and protocol treasury split. {walletPath ? "Wallet approvals show the cost before payment; gas is separate." : "You confirm each price before you pay."} Testnet tokens have no real monetary value.</p>
+      {!life && accountId && !signin?.needsPlayKey && npcConfig?.available && backend.mode === "live" && (
+        <label className="chain-notice">
+          <input
+            type="checkbox"
+            checked={useNpcWorld}
+            disabled={busy}
+            onChange={event => setUseNpcWorld(event.target.checked)}
+          />{" "}
+          Play with live AI town agents ({npcConfig.world_version}) — verified server turns keep this life eligible for NFT rewards while the AI provider stays online.
+        </label>
+      )}
+      {life && isNpcRankedVersion(life.world_version) && (
+        <p className="chain-notice">Live AI NPC mode · Server-verified town agents (stays eligible for rewards while the AI provider remains online).</p>
+      )}
       {!life && (!current.loading || signin?.needsPlayKey) && !current.error && <div className="chain-actions">
         {accountId
           ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void (signin?.needsPlayKey ? run(signin.useWallet, "Sign-in did not finish. Try again.") : start()); }}>{busy ? "Starting…" : signin?.needsPlayKey ? "Sign in again for popup-free play" : "Start a Weave life"}<span aria-hidden="true">→</span></button>

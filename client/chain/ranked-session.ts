@@ -253,6 +253,7 @@ class Session implements RankedSession {
     const continues = next.seed === this.state.seed && theirs.length >= mine.length &&
       mine.every((command, index) => JSON.stringify(command) === JSON.stringify(theirs[index]));
     if (!continues) throw new Error("This state does not continue this ranked life.");
+    await this.settle();
     for (const command of theirs.slice(mine.length)) {
       if (this.state.phase === "ended") break;
       try {

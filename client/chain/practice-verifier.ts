@@ -1,5 +1,6 @@
 import { buildEvidence } from "../../chain/evidence.ts";
 import { sha256Hex } from "../../chain/hash.ts";
+import { NPC_WORLD_VERSION } from "../../chain/ids.ts";
 import { checkRankedObligations } from "../../chain/ranked-rules.ts";
 import type { LifeView } from "../../chain/types.ts";
 import { validateRankedSave } from "../../chain/validate-ranked.ts";
@@ -21,6 +22,9 @@ export function practiceVerifier(world: WorldPack, contract: LivesContract, cont
   const engine = createEngine(world);
   return async (life: LifeView, save: SaveFile): Promise<SignedEvidence> => {
     const current = (await contract.getLife(life.life_id)) ?? life;
+    if (current.world_version === NPC_WORLD_VERSION) {
+      throw new Error("Offline practice preview cannot mint live NPC rewards. Verify with a live server AI provider in Weave Mode.");
+    }
     const check = await validateRankedSave(current, save, contractId);
     if (!check.ok) throw new Error(check.reason);
     const replay = checkRankedObligations(engine, current, save);

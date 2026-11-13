@@ -1,4 +1,5 @@
 import type { RankedPlay } from "../hooks/useGame.ts";
+import type { OnlinePlay } from "../types/online-play.ts";
 import { findLifeEvent } from "../models/life-event-lookup.ts";
 import InfluenceMarkerTag from "../components/InfluenceMarkerTag.tsx";
 import { influenceMarker } from "../models/influence-marker.ts";
@@ -153,16 +154,17 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
 export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null;
 export type CharacterSection = "career" | "wealth" | "children" | "skills" | "relationships";
 
-function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, online, npcStatusNotice = null, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; online?: OnlinePlay; npcStatusNotice?: string | null; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+  const isRanked = Boolean(ranked || online);
   const [panel, setPanel] = useState<AppPanel>(initialPanel);
   const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [restartOpen, setRestartOpen] = useState(false);
   // A ranked life opens straight into play; free play starts at the main menu.
-  const [menuOpen, setMenuOpen] = useState(!ranked);
+  const [menuOpen, setMenuOpen] = useState(!isRanked);
   const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh);
   const [readingPause, setReadingPause] = useState(false);
   const [deferredDecision, setDeferredDecision] = useState<string | null>(() => {
-    const initial = ranked?.initial ?? startFreshFrom;
+    const initial = ranked?.initial ?? online?.initial ?? startFreshFrom;
     return deferInitialDecision && initial?.phase === "choice" ? `${initial.seed}:${initial.age}:${initial.pendingEventId}` : null;
   });
   const [requestedDecision, setRequestedDecision] = useState<string | null>(null);
@@ -172,7 +174,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const loanWarningsSeen = useRef(new Set<string>());
   // The guided tour never pauses play; it may begin a rolled life through the normal flow.
   const [tutorialBegin, setTutorialBegin] = useState(false);
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, online });
   const { life } = game;
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
@@ -325,8 +327,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     if (!firstVisit) setDeferredDecision(null);
     setRequestedDecision(null);
     // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
-    setBirthPopoverOpen(!ranked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
-    setMenuOpen(!ranked);
+    setBirthPopoverOpen(!isRanked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
+    setMenuOpen(!isRanked);
   }, [life.worldFingerprint, life.seed]);
 
   useEffect(() => {
@@ -467,7 +469,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
       <div><button type="button" onClick={() => downloadLife(game.unreadableSave!, "everfolk-protected-save.json")}>Download original save</button><button type="button" onClick={game.resetUnreadableSave}>Replace protected save with this life</button></div>
     </aside>}
-    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
+    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={isRanked} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
@@ -518,8 +520,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
         </div>
       </section>}
 
-      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={Boolean(ranked)}
-        packCardCount={!ranked ? lifePackCardCount(life, world) : undefined} onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
+      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked}
+        packCardCount={!isRanked ? lifePackCardCount(life, world) : undefined} onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
 
@@ -552,7 +554,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
             </div>)}
           </div>}
           <button className="secondary-button character-open" disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character <Icon name="arrow" size={16} /></button>
-          {!ranked && <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>}
+          {!isRanked && <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>}
         </aside>
         {game.hasBegun && life.phase !== "ended" && <YearlyFocus life={life} world={world} focusId={game.focusId} activities={activities} onChange={game.setFocus} />}
         {game.hasBegun && <LifeOverview life={life} world={world} onOpenWealth={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
@@ -616,6 +618,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           </>}
         </section>
       </div>
+      {npcStatusNotice && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{npcStatusNotice}</span></div>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
     {/* Notifications float at the right edge, so they never reorder or push the main section. */}
