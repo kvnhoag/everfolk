@@ -13,7 +13,7 @@
   <a href="https://everfolk.life/test/weave/granary"><img src="https://img.shields.io/badge/WEAVE_MODE-TRY_DEMO-9b553e?style=for-the-badge" alt="Try Weave Mode Demo"></a>
   <a href="https://everfolk.life/#market"><img src="https://img.shields.io/badge/NFT_MARKET-RHAKOTIS_BAZAAR-263b43?style=for-the-badge" alt="Rhakotis Bazaar NFT Market"></a>
   <a href="https://everfolk.life/skills"><img src="https://img.shields.io/badge/SKILL_ATLAS-74_NODES-3a6b65?style=for-the-badge" alt="74-Node Skill Atlas"></a>
-  <a href="https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet"><img src="https://img.shields.io/badge/NEAR_TESTNET-EXPLORER-1d3534?style=for-the-badge&logo=near&logoColor=e7e0c9" alt="NEAR Testnet Explorer"></a>
+  <a href="https://testnet.nearblocks.io/address/everfolk-albums-11131947.testnet"><img src="https://img.shields.io/badge/NEAR_TESTNET-EXPLORER-1d3534?style=for-the-badge&logo=near&logoColor=e7e0c9" alt="NEAR Testnet Explorer"></a>
 </p>
 
 <p>
@@ -191,7 +191,8 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 
 | Deployment | Account ID | Explorer | Purpose &amp; Live Rules |
 |---|---|---|---|
-| **Primary Live Contract** | `everfolk-albums-11121956.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) | Active production testnet contract supporting **Booster Packs**, **Stage Albums**, `5%` figure drop, and full source royalty graph (`alexandria-ranked-1`, `alexandria-demo-2`). |
+| **Primary Live Contract** | `everfolk-albums-11131947.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11131947.testnet) | Active testnet contract: **free pack opening, pay at mint** (`mint_terms.pack_version` 2), per-design rarity caps (Legendary 10, Epic 25, Rare 100; view `rarity_supply`), **Stage Albums**, `5%` figure drop, and the full source royalty graph (`alexandria-ranked-1`, `alexandria-demo-2`). |
+| **Previous Contract** | `everfolk-albums-11121956.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) | Pay-at-opening packs without rarity caps. Existing tokens remain readable on-chain. |
 | **Legacy v1 Contract** | `everfolk-lives-11101338.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) | Initial v1 deployment (`1 NEAR` mint fee, `alexandria-ranked-1`, pre-stage-albums). Existing tokens remain readable on-chain. |
 | **Rehearsal / Demo Contract** | `demo.genesis-1794297139-6.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) | Isolated demonstration deployment (`100%` qualified figure drop, `0` nobody draw weight, `0` abandon cooldown) used for walkthrough recording. |
 
@@ -205,11 +206,12 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
   <tr>
     <td width="50%" valign="top">
 
-**Fee &amp; Royalty Schedule (`everfolk-albums-11121956.testnet`)**
+**Fee &amp; Royalty Schedule (`everfolk-albums-11131947.testnet`)**
 
 | Parameter | Value | Description |
 |---|---|---|
-| `mint_fee` | `0.001 NEAR` | Minting &amp; booster pack settlement (`10^21` yoctoNEAR) |
+| `mint_fee` | `0.001 NEAR` | Paid when the chosen pack card is minted; opening a pack is free (`10^21` yoctoNEAR) |
+| Rarity caps | `10 / 25 / 100` | Legendary / Epic / Rare copies per card design; Common and Uncommon unlimited; a sold-out rarity rerolls among those left |
 | Stage Album Fee | `0.002 / 0.01 NEAR` | Generic stage record vs. historical figure stage stamp |
 | `source_mint_share_bps` | `5000` (`50%`) | Mint fee share distributed by impact to upstream sources |
 | `royalty_sources_bps` | `500` (`5%`) | Secondary sale royalty paid proportionally to sources |

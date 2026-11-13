@@ -99,12 +99,14 @@ export function createCliContract(contractId: string, accountId: string): LivesC
     marketTerms: unsupported("marketTerms"),
     mintPack: lifeId => viewMethod(contractId, "get_mint_pack", { life_id: lifeId }),
     async openMintPack(lifeId, signed, action) {
-      const terms = await viewMethod<{ mint_fee: string }>(contractId, "mint_terms", {});
-      await callMethod(accountId, contractId, "open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: action }, `${terms.mint_fee} yoctoNEAR`);
+      // Opening is free; the quoted fee is paid when a card is minted (mint_terms pack_version 2).
+      await callMethod(accountId, contractId, "open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: action }, "0 NEAR");
       return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
     },
     async chooseMintSlot(lifeId, slot) {
-      await callMethod(accountId, contractId, "choose_mint_slot", { life_id: lifeId, slot }, "1 yoctoNEAR");
+      const pack = await viewMethod<{ total_fee: string } | null>(contractId, "get_mint_pack", { life_id: lifeId });
+      if (!pack) throw new Error("Open this life's pack first.");
+      await callMethod(accountId, contractId, "choose_mint_slot", { life_id: lifeId, slot }, `${pack.total_fee} yoctoNEAR`);
       const tokens = await viewMethod<{ token_id: string; metadata: { extra: string } }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });
       const token = tokens.find(t => JSON.parse(t.metadata.extra).life_id === lifeId);
       if (!token) throw new Error("The selected card's token could not be found.");
