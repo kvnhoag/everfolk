@@ -52,6 +52,7 @@ import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import SiteNav from "../components/SiteNav.tsx";
 import LifeEndingBanner from "../components/LifeEndingBanner.tsx";
+import { lifePackCardCount } from "../../chain/pack-count.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "../models/source-copy.ts";
 import SkillTree from "../components/SkillTree.tsx";
@@ -518,7 +519,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       </section>}
 
       {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={Boolean(ranked)}
-        onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
+        packCardCount={!ranked ? lifePackCardCount(life, world) : undefined} onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
 

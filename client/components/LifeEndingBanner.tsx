@@ -6,13 +6,14 @@ export interface LifeEndingBannerProps {
   lived: string;
   cause?: string;
   ranked: boolean;
+  packCardCount?: number;
   onChronicle(): void;
   onOpenPack(): void;
   onNewLife(): void;
 }
 
 /** Shown at the top of the game once a life ends, so the ending is never missed below the fold. */
-export default function LifeEndingBanner({ name, dates, lived, cause, ranked, onChronicle, onOpenPack, onNewLife }: LifeEndingBannerProps) {
+export default function LifeEndingBanner({ name, dates, lived, cause, ranked, packCardCount, onChronicle, onOpenPack, onNewLife }: LifeEndingBannerProps) {
   return <section className="life-ending-banner" aria-labelledby="life-ending-title">
     <div className="life-ending-record">
       <p className="life-ending-eyebrow">LIFE COMPLETE</p>
@@ -23,7 +24,13 @@ export default function LifeEndingBanner({ name, dates, lived, cause, ranked, on
     </div>
     <div className="life-ending-next">
       {ranked ? <p>Your Weave life is complete. Its pack and mint continue in Weave Mode.</p> : <>
-        <button type="button" className="primary-button" onClick={onOpenPack}>Open your pack <span aria-hidden="true">✦</span></button>
+        {packCardCount === 0
+          ? <p className="hint-text">No fate cards unlocked (died before age 18).</p>
+          : <button type="button" className="primary-button" onClick={onOpenPack}>
+              {packCardCount && packCardCount > 0
+                ? `You could have gotten ${packCardCount} ${packCardCount === 1 ? "card" : "cards"}`
+                : "Open your pack"} <span aria-hidden="true">✦</span>
+            </button>}
         <a className="life-ending-weave" href="#weave"><strong>Play Weave Mode to get real NFTs</strong><span>A free life shows what you could have gotten. Weave lives are verified and minted on NEAR.</span></a>
       </>}
       <div className="life-ending-links">
