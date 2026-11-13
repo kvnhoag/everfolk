@@ -21,7 +21,7 @@ test("public skill reference defaults to its skill tab without mounting figure p
   assert.match(html, /role="tablist" aria-label="Reference sections"/);
   assert.match(html, /aria-selected="true" tabindex="0">Skill tree/);
   assert.match(html, /aria-selected="false" tabindex="-1">Historical Figures/);
-  assert.match(html, /class="capability-tree"/);
+  assert.match(html, /class="capability-tree(?: is-radial)?"/);
   assert.doesNotMatch(html, /class="figure-paths"|data-figure-path=/);
 });
 
