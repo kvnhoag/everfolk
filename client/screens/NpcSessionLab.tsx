@@ -7,6 +7,7 @@ import "../styles/npc-session.css";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import { engineForLife } from "../lib/world-session.ts";
+import { lifePackCardCount } from "../../chain/pack-count.ts";
 function NpcCard({
   npc,
   session,
@@ -248,16 +249,20 @@ export default function NpcSessionLab() {
               ))}
             </section>
           )}
-          {session.life.phase === "ended" && (
-            <section>
+          {session.life.phase === "ended" && (() => {
+            const cardCount = lifePackCardCount(session.life, engineForLife(session.life).world);
+            return <section>
               <h2>A life remembered</h2>
               <p>
-                Your NPCs do not mint NFTs. Open an offline preview of what this
-                life could have earned.
+                {cardCount > 0
+                  ? `Your NPCs do not mint NFTs. Preview the ${cardCount} fate ${cardCount === 1 ? "card" : "cards"} you could have gotten.`
+                  : "This life ended before adulthood (age 18), so no fate cards were earned."}
               </p>
-              <button onClick={() => setBooster(true)}>
-                Open booster preview
-              </button>
+              {cardCount > 0 && (
+                <button onClick={() => setBooster(true)}>
+                  You could have gotten {cardCount} {cardCount === 1 ? "card" : "cards"}
+                </button>
+              )}
               <button
                 disabled={busy}
                 onClick={() => void start(crypto.randomUUID())}
@@ -270,8 +275,8 @@ export default function NpcSessionLab() {
                 world={engineForLife(session.life).world}
                 onClose={() => setBooster(false)}
               />
-            </section>
-          )}
+            </section>;
+          })()}
           <section className="npc-cast" aria-label="Core NPCs">
             {Object.values(session.slots).map((id) => (
               <NpcCard

@@ -52,11 +52,28 @@ test("generateFreePlayEvidence creates accurate deterministic evidence without n
   assert.deepEqual(evidence.sources, []);
 });
 
-test("createFreePlayBooster generates exactly 3 cards seeded from the life seed", async () => {
-  const life = createMockLife("seed-beta-456", "tenant-farmer");
-  const { pack, evidence, contract } = await createFreePlayBooster(life, mockWorld);
+test("createFreePlayBooster scales 1-5 cards by duration & titles, and 0 cards before adulthood", async () => {
+  const earlyDeathLife = {
+    ...createMockLife("seed-early", "tenant-farmer"),
+    age: 16,
+    accomplishments: [{ achievementId: "first-day", age: 10 }],
+  };
+  const early = await createFreePlayBooster(earlyDeathLife, mockWorld);
+  assert.equal(early.pack.cards.length, 0);
 
-  assert.equal(pack.cards.length, 3);
+  const youngAdultLife = {
+    ...createMockLife("seed-young", "tenant-farmer"),
+    age: 22,
+    accomplishments: [],
+  };
+  const young = await createFreePlayBooster(youngAdultLife, mockWorld);
+  assert.equal(young.pack.cards.length, 1);
+
+  const life = createMockLife("seed-beta-456", "tenant-farmer");
+  const { pack, evidence } = await createFreePlayBooster(life, mockWorld);
+
+  // age 50 (base 2) + 1 accomplishment + matched figures >= 3, capped at 5
+  assert.ok(pack.cards.length >= 3 && pack.cards.length <= 5);
   assert.equal(pack.total_fee, "0");
   assert.equal(evidence.career_group, "farming");
 
@@ -71,6 +88,18 @@ test("createFreePlayBooster generates exactly 3 cards seeded from the life seed"
   const second = await createFreePlayBooster(life, mockWorld);
   assert.deepEqual(pack.cards, second.pack.cards);
   assert.equal(pack.evidence_hash, second.pack.evidence_hash);
+
+  const elderHighTitleLife = {
+    ...createMockLife("seed-elder", "tenant-farmer"),
+    age: 75,
+    accomplishments: [
+      { achievementId: "a", age: 20 },
+      { achievementId: "b", age: 35 },
+      { achievementId: "c", age: 50 },
+    ],
+  };
+  const elder = await createFreePlayBooster(elderHighTitleLife, mockWorld);
+  assert.equal(elder.pack.cards.length, 5);
 });
 
 test("different life seeds produce different booster card rolls", async () => {
@@ -85,24 +114,16 @@ test("different life seeds produce different booster card rolls", async () => {
   assert.notEqual(b1.pack.evidence_hash, b2.pack.evidence_hash);
 });
 
-test("freeplay contract stub allows slot reroll and selection without on-chain execution", async () => {
-  const life = createMockLife("seed-reroll-test", "grain-dealer");
+test("freeplay contract stub has fixed pack contents and blocks NFT minting", async () => {
+  const life = createMockLife("seed-fixed-pack-test", "grain-dealer");
   const { pack, contract } = await createFreePlayBooster(life, mockWorld);
 
-  // Reroll slot 1
-  const updatedPack = await contract.rerollMintSlot(pack.life_id, 1, "0");
-  assert.ok(updatedPack.cards[1].rerolled);
-  assert.equal(updatedPack.cards[0].rerolled, false);
+  assert.equal("rerollMintSlot" in contract, false);
 
-  // Second reroll on slot 1 should throw
+  // Only Weave Mode can mint cards to NFT
   await assert.rejects(async () => {
-    await contract.rerollMintSlot(pack.life_id, 1, "0");
-  }, /already rerolled/);
-
-  // Choose slot 0
-  const chosen = await contract.chooseMintSlot(pack.life_id, 0);
-  assert.equal(chosen.kind, pack.cards[0].kind);
-  assert.equal(chosen.rarity, pack.cards[0].rarity);
+    await contract.chooseMintSlot(pack.life_id, 0);
+  }, /Only Weave Mode can mint cards to NFT/);
 });
 
 test("a free pack's people-of-the-city cards do not all repeat the same action", async () => {

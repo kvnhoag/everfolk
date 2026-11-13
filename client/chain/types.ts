@@ -40,7 +40,6 @@ export interface LivesContract {
   marketTerms(): Promise<MarketTerms>;
   mintPack(lifeId: string): Promise<MintPack | null>;
   openMintPack(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintPack>;
-  rerollMintSlot(lifeId: string, slot: number, feeYocto: string): Promise<MintPack>;
   chooseMintSlot(lifeId: string, slot: number): Promise<MintResult>;
   figureCopies(figureId: string): Promise<PoolEntry[]>;
   figureSupply(figureId: string): Promise<[number, number]>;

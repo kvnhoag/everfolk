@@ -3,11 +3,11 @@ import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import { figuresForWorld } from "../../chain/catalog/demo-figures.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "../../chain/match.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
+import { packCardCount } from "../../chain/pack-count.ts";
 import type { Evidence, MintCard, MintPack, MintResult } from "../../chain/types.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { DEFAULT_MARKET_TERMS } from "../chain/payout-preview.ts";
 import { roll, weightedPick } from "../chain/mock-math.ts";
-import { REROLL_FEE_YOCTO } from "../chain/near-amount.ts";
 import type { LivesContract } from "../chain/types.ts";
 
 const NPC_RARITY_WEIGHTS = [6000n, 2500n, 1000n, 400n, 100n];
@@ -77,18 +77,17 @@ async function rollCardOutcome(seed: string, evidence: Evidence) {
   return { figure, rarity, affection };
 }
 
-async function generatePackCard(seed: string, hash: string, slot: number, rerolled: boolean, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard> {
-  const cardSeed = await sha256Hex(`${seed}:pack:${hash}:${slot}:${rerolled}`);
+async function generatePackCard(seed: string, hash: string, slot: number, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard> {
+  const cardSeed = await sha256Hex(`${seed}:pack:${hash}:${slot}`);
   const { figure, rarity, affection } = await rollCardOutcome(cardSeed, evidence);
-  // Neighbouring slots offer the group's different deeds, so a pack never repeats one card three times.
-  const actionId = figure ? FIGURE_ACTIONS[figure][0] : groupActions[(slot + (rerolled ? 1 : 0)) % groupActions.length];
+  // Neighbouring slots offer the group's different deeds, so a pack does not repeat one card.
+  const actionId = figure ? FIGURE_ACTIONS[figure][0] : groupActions[slot % groupActions.length];
   return {
     kind: figure ? "figure" : "npc",
     figure_id: figure,
     rarity,
     affection,
     action_id: actionId,
-    rerolled,
   };
 }
 
@@ -99,18 +98,19 @@ export interface FreePlayBoosterSession {
 }
 
 /**
- * Builds an offline, seeded 3-card booster pack for an ended free-play life.
- * No network calls, no on-chain actions, fully deterministic from life.seed.
+ * Builds an offline, seeded 1–5 card booster pack preview (0 before age 18) for an ended free-play life.
+ * No network calls, no on-chain actions, no rerolls, fully deterministic from life.seed.
  */
 export async function createFreePlayBooster(life: LifeState, world: WorldPack): Promise<FreePlayBoosterSession> {
   const evidence = await generateFreePlayEvidence(life, world);
   const groupActions: readonly string[] = NPC_ACTIONS[evidence.career_group]?.actions ?? ["letters.teach"];
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));
   const seed = evidence.seed;
+  const cardCount = packCardCount(evidence);
 
   const cards: MintCard[] = [];
-  for (let slot = 0; slot < 3; slot++) {
-    cards.push(await generatePackCard(seed, evidenceHash, slot, false, evidence, groupActions));
+  for (let slot = 0; slot < cardCount; slot++) {
+    cards.push(await generatePackCard(seed, evidenceHash, slot, evidence, groupActions));
   }
 
   const packView: MintPack = {
@@ -118,20 +118,19 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     evidence_hash: evidenceHash,
     cards,
     total_fee: "0",
-    reroll_fee: REROLL_FEE_YOCTO,
     source_share_bps: 5000,
   };
 
   const packRef = { view: structuredClone(packView) };
 
-  // Lightweight in-memory contract stub for preview rerolls & card choice
+  // Lightweight in-memory preview contract stub (minting is blocked outside Weave Mode)
   const contract: LivesContract = {
     async stageMintQuote() { throw new Error("Free-play albums are kept locally. Play Weave Mode to mint on NEAR."); },
     async mintStageFigures() { throw new Error("Free-play albums are kept locally. Play Weave Mode to mint on NEAR."); },
     async retryStageMint() { throw new Error("Free-play has no paid stage mint to recover."); },
     async stageMintResult() { return null; },
     async mintTerms() {
-      return { mint_fee: "0", reroll_fee: REROLL_FEE_YOCTO, source_share_bps: 5000, pack_version: 1 };
+      return { mint_fee: "0", source_share_bps: 5000, pack_version: 1 };
     },
     async marketTerms() {
       return { ...DEFAULT_MARKET_TERMS };
@@ -143,24 +142,8 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     async openMintPack() {
       return structuredClone(packRef.view);
     },
-    async rerollMintSlot(lifeId: string, slot: number) {
-      if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
-      if (slot < 0 || slot > 2) throw new Error("Unknown slot");
-      if (packRef.view.cards[slot].rerolled) throw new Error("Slot already rerolled");
-      const newCard = await generatePackCard(seed, evidenceHash, slot, true, evidence, groupActions);
-      packRef.view.cards[slot] = newCard;
-      return structuredClone(packRef.view);
-    },
-    async chooseMintSlot(lifeId: string, slot: number): Promise<MintResult> {
-      if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
-      const card = packRef.view.cards[slot];
-      return {
-        token_id: `freeplay-token-${slot}`,
-        kind: card.kind,
-        figure_id: card.figure_id,
-        rarity: card.rarity,
-        affection: card.affection,
-      };
+    async chooseMintSlot(): Promise<MintResult> {
+      throw new Error("Only Weave Mode can mint cards to NFT.");
     },
     async mintLife(): Promise<MintResult> {
       throw new Error("Free-play lives are not minted to NEAR. Play Weave Mode to mint on chain.");

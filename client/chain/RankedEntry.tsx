@@ -2,7 +2,7 @@ import EmailSignIn from "../demo/EmailSignIn.tsx";
 import { useEffect, useId, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
-import { DEFAULT_MINT_FEE_YOCTO, REROLL_FEE_YOCTO, formatNear } from "./near-amount.ts";
+import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import BornInto from "./BornInto.tsx";
 import { bornIntoLines, type OwnersByToken } from "./born-into-model.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
@@ -31,7 +31,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const { contract, accountId } = backend;
   const headingId = useId();
   const current = useActiveRankedLife(backend);
-  const [terms, setTerms] = useState({ mint_fee: DEFAULT_MINT_FEE_YOCTO, reroll_fee: REROLL_FEE_YOCTO });
+  const [terms, setTerms] = useState({ mint_fee: DEFAULT_MINT_FEE_YOCTO });
   const [life, setLife] = useState<LifeView | null>(null);
   const [owners, setOwners] = useState<OwnersByToken>({});
   const [closing, setClosing] = useState(false);
@@ -92,7 +92,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
 
   return <div className="ranked-entry">
     {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard walletPath={walletPath} needsPlayKey={signin?.needsPlayKey} life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
-    {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack or rerolls, those fees are shared with its source lives and the protocol treasury; they are not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
+    {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack, that fee is shared with its source lives and the protocol treasury; it is not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 
     <section className="chain-card ranked-entry-intro has-section-help" aria-labelledby={headingId}>
       <SectionHelp hint="weave" />
@@ -104,8 +104,8 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
         <li>Other players' characters can help you when it matters.</li>
         <li>When your life ends, you can keep it. Everyone who shaped it shares the fee.</li>
       </ul>
-      <ol className="ranked-steps"><li><strong>{signin ? "Sign in" : "Connect"}</strong><span>{signin ? "With your email, or a NEAR testnet wallet you already use." : "Use your existing NEAR testnet wallet. Meteor is supported."}</span></li><li><strong>Live</strong><span>{walletPath ? "No entry fee. NEAR gas applies to recorded decisions and checkpoints. No rewinds." : "No entry fee. No rewinds."}</span></li><li><strong>Open & choose</strong><span>When the life ends, open a 3-card pack for {formatNear(terms.mint_fee)} NEAR. Choose one card to mint. Each slot has one optional {formatNear(terms.reroll_fee)} NEAR reroll.</span></li></ol>
-      <p className="chain-fine">Base and reroll fees share the same source-life and protocol treasury split. {walletPath ? "Wallet approvals show the cost before payment; gas is separate." : "You confirm each price before you pay."} Testnet tokens have no real monetary value.</p>
+      <ol className="ranked-steps"><li><strong>{signin ? "Sign in" : "Connect"}</strong><span>{signin ? "With your email, or a NEAR testnet wallet you already use." : "Use your existing NEAR testnet wallet. Meteor is supported."}</span></li><li><strong>Live</strong><span>{walletPath ? "No entry fee. NEAR gas applies to recorded decisions and checkpoints. No rewinds." : "No entry fee. No rewinds."}</span></li><li><strong>Open & choose</strong><span>When the life ends, open a 1–5 card pack (based on life span and titles; none before age 18) for {formatNear(terms.mint_fee)} NEAR, then choose one card from that pack to mint.</span></li></ol>
+      <p className="chain-fine">The pack fee follows the source-life and protocol treasury split. {walletPath ? "Wallet approvals show the cost before payment; gas is separate." : "You confirm each price before you pay."} Testnet tokens have no real monetary value.</p>
       {!life && (!current.loading || signin?.needsPlayKey) && !current.error && <div className="chain-actions">
         {accountId
           ? <button className="chain-primary" type="button" disabled={busy} onClick={() => { void (signin?.needsPlayKey ? run(signin.useWallet, "Sign-in did not finish. Try again.") : start()); }}>{busy ? "Starting…" : signin?.needsPlayKey ? "Sign in again for popup-free play" : "Start a Weave life"}<span aria-hidden="true">→</span></button>

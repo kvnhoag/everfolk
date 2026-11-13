@@ -134,16 +134,18 @@
 
 /* Cards grid */
 .augment-cards.ef-booster-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   margin: 10px auto 24px;
-  max-width: 880px;
+  max-width: 920px;
   align-items: stretch;
 }
 
 .augment-slot {
   min-width: 0;
+  width: min(260px, 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,15 +194,6 @@
   box-shadow: 2px 2px 0 #263b4340;
 }
 
-.augment-reroll {
-  width: 100%;
-  justify-content: center;
-  gap: 6px;
-  font-size: 11px;
-  padding: 6px 8px;
-  min-height: 32px;
-}
-
 .pack-receipt {
   display: flex;
   flex-direction: column;
@@ -233,8 +226,10 @@
 
 @media (max-width: 760px) {
   .augment-cards.ef-booster-cards-grid {
-    grid-template-columns: 1fr;
     gap: 24px;
+  }
+  .augment-slot {
+    width: min(300px, 100%);
   }
   .mint-pack {
     padding: 20px 14px;

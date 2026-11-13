@@ -54,7 +54,6 @@ export interface MintCard {
   rarity: number;
   affection: number;
   action_id: string;
-  rerolled: boolean;
   stage_id?: string;
   stage_title?: string;
   character_name?: string;
@@ -64,8 +63,8 @@ export interface MintCard {
   portrait_media?: string;
   stage_record?: StageRecord;
 }
-export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; reroll_fee: string; source_share_bps: number }
-export interface MintTerms { mint_fee: string; reroll_fee: string; source_share_bps: number; pack_version: number }
+export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; source_share_bps: number }
+export interface MintTerms { mint_fee: string; source_share_bps: number; pack_version: number }
 export interface SourceShare { token_id: string; bps: number }
 export interface TokenExtra {
   kind: "figure" | "npc"; figure_id: FigureId | null; rarity: number; affection: number; action_id: string;
