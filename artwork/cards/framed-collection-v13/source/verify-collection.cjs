@@ -59,11 +59,11 @@ async function main() {
   const subcards = rows.filter(r => r.kind !== 'parent');
   const male = subcards.filter(r => r.gender === 'male');
   const female = subcards.filter(r => r.gender === 'female');
-  check(catalog.expected === 83 && rows.length === 83, `Expected83 cards; found${rows.length}.`);
+  check(catalog.expected === 83 && rows.length === 83, `Expected 83 cards; found ${rows.length}.`);
   check(new Set(rows.map(r => r.slug)).size === 83, 'Collection slugs must be unique.');
-  check(parents.length === 13, `Expected13 parents; found${parents.length}.`);
-  check(male.length === 35 && female.length === 35 && subcards.length === 70, `Expected35 male/35 female subcards; found${male.length}/${female.length}.`);
-  check(catalog.canvas?.[0] === W && catalog.canvas?.[1] === H, 'Catalogue canvas is not900x1260.');
+  check(parents.length === 13, `Expected 13 parents; found ${parents.length}.`);
+  check(male.length === 35 && female.length === 35 && subcards.length === 70, `Expected 35 male/35 female subcards; found ${male.length}/${female.length}.`);
+  check(catalog.canvas?.[0] === W && catalog.canvas?.[1] === H, 'Catalogue canvas is not 900x1260.');
   const rolePairs = new Map();
   for (const row of subcards) {
     const role = originals.get(row.slug)?.roleId;
@@ -71,7 +71,7 @@ async function main() {
     if (!rolePairs.has(role)) rolePairs.set(role, []);
     rolePairs.get(role).push(row);
   }
-  check(rolePairs.size === 35, `Expected35 paired roles; found${rolePairs.size}.`);
+  check(rolePairs.size === 35, `Expected 35 paired roles; found ${rolePairs.size}.`);
   for (const [role, pair] of rolePairs) {
     check(pair.length === 2 && new Set(pair.map(r => r.gender)).size === 2, `Incomplete gender pair: ${role}`);
     check(new Set(pair.map(r => r.title)).size === 1 && new Set(pair.map(r => r.rarity)).size === 1, `Gender pair title/rarity mismatch: ${role}`);
@@ -93,8 +93,8 @@ async function main() {
     check(fs.existsSync(at(row.master)), `Missing native master: ${row.slug}`);
     const nativeJson = json(at(`qa/${row.slug}-native.json`));
     const nodes = nativeJson.type?.nodes || [];
-    check(nodes.length >= 7, `Fewer than7 native editable text nodes: ${row.slug}`);
-    for (const node of nodes) check(inside(node.bounds), `Native text outside900x1260 card: ${row.slug}/${node.name}`);
+    check(nodes.length >= 7, `Fewer than 7 native editable text nodes: ${row.slug}`);
+    for (const node of nodes) check(inside(node.bounds), `Native text outside 900x1260 card: ${row.slug}/${node.name}`);
     const title = nodes.find(n => n.name === 'Card title live');
     check(title?.text === row.title && inside(title?.bounds), `Missing, mismatched or overflowing native title: ${row.slug}`);
     const board = nativeJson.type?.artboards?.[0];
@@ -130,7 +130,7 @@ async function main() {
     const thumb = await sharp(at(row.thumbnail)).metadata();
     check(thumb.width === 450 && thumb.height === 630, `Thumbnail size differs: ${row.slug}`);
     results.push({ slug: row.slug, passed: before === failures.length, exportSize: [exportData.info.width, exportData.info.height], sourceArtSha256: sourceHash, exportSha256: exportHash, nativeTextNodes: nodes.length, titleBounds: title?.bounds, nativeReopenPixelDifferences: reopenDifferences, sourceFitPixelDifferences: sourceFitDifferences, uncoveredPixelsChecked: checked, uncoveredRgbDifferences, transparentOuterCorners });
-    if ((index + 1) % 20 === 0 || index === rows.length - 1) console.log(`Verified${index + 1}/${rows.length}`);
+    if ((index + 1) % 20 === 0 || index === rows.length - 1) console.log(`Verified ${index + 1}/${rows.length}`);
   }
   let parentContactSheet = null;
   if (!failures.length && process.argv.includes('--parents')) parentContactSheet = await contactSheet(rows);

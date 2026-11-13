@@ -1,3 +1,4 @@
 * text=auto eol=lf
 artwork/cards/figure-inner-art-v11/everfolk-inner-art-v11.zip filter=lfs diff=lfs merge=lfs -text
 artwork/cards/figure-inner-art-v12/everfolk-inner-art-v12.zip filter=lfs diff=lfs merge=lfs -text
+artwork/cards/framed-collection-v13/everfolk-framed-collection-v13.zip filter=lfs diff=lfs merge=lfs -text
