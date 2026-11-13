@@ -1,0 +1,52 @@
+{
+  "slug": "menander-parent",
+  "figureId": "menander",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Menander",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-parent-pixel.png",
+  "intendedEditionLimit": 10,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 010",
+  "collectionIndex": 36,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/menander-parent.svg",
+  "fittedArt": "assets/fitted/menander-parent.png",
+  "overlaySvg": "source/overlays/menander-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+  "master": "masters/menander-parent.vectorcraft",
+  "export": "exports/menander-parent.png",
+  "thumbnail": "assets/menander-parent-thumb.png",
+  "exportSha256": "0cc344a9482acf4901e6c7facfcad04f59a399cd416abfcbd5ed437e95aac94d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 628992,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

@@ -1,0 +1,2279 @@
+{
+  "tool": "VectorCraft local MCP / headless native authoring",
+  "canvas": [
+    900,
+    1260
+  ],
+  "reference": "source/selected-reference.png",
+  "warnings": [],
+  "masters": [
+    "masters/Everfolk-Rarity-Frames.vectorcraft",
+    "review/Everfolk-Rarity-Frames-Proof.vectorcraft"
+  ],
+  "exports": [
+    {
+      "file": "exports/legendary-layout.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/legendary-layout-2x.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 2,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/legendary-layout.svg",
+      "format": "svg",
+      "artboard": 0,
+      "outlineText": true
+    },
+    {
+      "file": "exports/legendary-layout-live.svg",
+      "format": "svg",
+      "artboard": 0,
+      "outlineText": false
+    },
+    {
+      "file": "exports/legendary-frame.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/legendary-frame.svg",
+      "format": "svg",
+      "artboard": 0,
+      "outlineText": true
+    },
+    {
+      "file": "exports/epic-layout.png",
+      "format": "png",
+      "artboard": 1,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/epic-layout-2x.png",
+      "format": "png",
+      "artboard": 1,
+      "scale": 2,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/epic-layout.svg",
+      "format": "svg",
+      "artboard": 1,
+      "outlineText": true
+    },
+    {
+      "file": "exports/epic-layout-live.svg",
+      "format": "svg",
+      "artboard": 1,
+      "outlineText": false
+    },
+    {
+      "file": "exports/epic-frame.png",
+      "format": "png",
+      "artboard": 1,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/epic-frame.svg",
+      "format": "svg",
+      "artboard": 1,
+      "outlineText": true
+    },
+    {
+      "file": "exports/rare-layout.png",
+      "format": "png",
+      "artboard": 2,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/rare-layout-2x.png",
+      "format": "png",
+      "artboard": 2,
+      "scale": 2,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/rare-layout.svg",
+      "format": "svg",
+      "artboard": 2,
+      "outlineText": true
+    },
+    {
+      "file": "exports/rare-layout-live.svg",
+      "format": "svg",
+      "artboard": 2,
+      "outlineText": false
+    },
+    {
+      "file": "exports/rare-frame.png",
+      "format": "png",
+      "artboard": 2,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/rare-frame.svg",
+      "format": "svg",
+      "artboard": 2,
+      "outlineText": true
+    },
+    {
+      "file": "exports/uncommon-layout.png",
+      "format": "png",
+      "artboard": 3,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/uncommon-layout-2x.png",
+      "format": "png",
+      "artboard": 3,
+      "scale": 2,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/uncommon-layout.svg",
+      "format": "svg",
+      "artboard": 3,
+      "outlineText": true
+    },
+    {
+      "file": "exports/uncommon-layout-live.svg",
+      "format": "svg",
+      "artboard": 3,
+      "outlineText": false
+    },
+    {
+      "file": "exports/uncommon-frame.png",
+      "format": "png",
+      "artboard": 3,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/uncommon-frame.svg",
+      "format": "svg",
+      "artboard": 3,
+      "outlineText": true
+    },
+    {
+      "file": "exports/common-layout.png",
+      "format": "png",
+      "artboard": 4,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/common-layout-2x.png",
+      "format": "png",
+      "artboard": 4,
+      "scale": 2,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/common-layout.svg",
+      "format": "svg",
+      "artboard": 4,
+      "outlineText": true
+    },
+    {
+      "file": "exports/common-layout-live.svg",
+      "format": "svg",
+      "artboard": 4,
+      "outlineText": false
+    },
+    {
+      "file": "exports/common-frame.png",
+      "format": "png",
+      "artboard": 4,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "exports/common-frame.svg",
+      "format": "svg",
+      "artboard": 4,
+      "outlineText": true
+    },
+    {
+      "file": "qa/legendary-reopened.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "qa/epic-reopened.png",
+      "format": "png",
+      "artboard": 1,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "qa/rare-reopened.png",
+      "format": "png",
+      "artboard": 2,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "qa/uncommon-reopened.png",
+      "format": "png",
+      "artboard": 3,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "qa/common-reopened.png",
+      "format": "png",
+      "artboard": 4,
+      "scale": 1,
+      "options": {
+        "background": "transparent",
+        "includeArtboardFill": false
+      }
+    },
+    {
+      "file": "review/Everfolk-Rarity-Frames.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 1
+    },
+    {
+      "file": "review/Everfolk-Rarity-Frames-1570.png",
+      "format": "png",
+      "artboard": 0,
+      "scale": 0.5
+    },
+    {
+      "file": "review/Everfolk-Rarity-Frames.svg",
+      "format": "svg",
+      "artboard": 0,
+      "outlineText": true
+    }
+  ],
+  "text": [
+    {
+      "id": 64,
+      "name": "Card name / floating editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 78,
+        "y": 68.99999999999999
+      }
+    },
+    {
+      "id": 65,
+      "name": "Role / floating editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 82,
+        "y": 149
+      }
+    },
+    {
+      "id": 66,
+      "name": "Legendary label / editable",
+      "value": "LEGENDARY",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 159.76365234375,
+        "x": 78,
+        "y": 1037
+      }
+    },
+    {
+      "id": 67,
+      "name": "Description / floating editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 37,
+      "bounds": {
+        "height": 50.72700000000009,
+        "width": 471.528,
+        "x": 78,
+        "y": 1090
+      }
+    },
+    {
+      "id": 70,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 71,
+      "name": "Edition / Legendary / editable example",
+      "value": "001/010",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 101.16257812499998,
+        "x": 714.837421875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 124,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 125,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 126,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 127,
+      "name": "Rarity / Epic",
+      "value": "EPIC",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 61.54025390624997,
+        "x": 742.45974609375,
+        "y": 978
+      }
+    },
+    {
+      "id": 128,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 130,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 131,
+      "name": "Edition / Epic / editable example",
+      "value": "001/025",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 104.63865234374998,
+        "x": 711.36134765625,
+        "y": 1187
+      }
+    },
+    {
+      "id": 184,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 185,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 186,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 187,
+      "name": "Rarity / Rare",
+      "value": "RARE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 69.04611328124997,
+        "x": 734.95388671875,
+        "y": 978
+      }
+    },
+    {
+      "id": 188,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 190,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 191,
+      "name": "Edition / Rare / editable example",
+      "value": "001/050",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 105.07957031249998,
+        "x": 710.9204296875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 244,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 245,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 246,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 247,
+      "name": "Rarity / Uncommon",
+      "value": "UNCOMMON",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 161.79925781249995,
+        "x": 642.2007421875,
+        "y": 978
+      }
+    },
+    {
+      "id": 248,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 250,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 251,
+      "name": "Edition / Uncommon / editable example",
+      "value": "001/100",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 101.16257812499998,
+        "x": 714.837421875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 304,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 305,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 306,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 307,
+      "name": "Rarity / Common",
+      "value": "COMMON",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 123.23103515624996,
+        "x": 680.76896484375,
+        "y": 978
+      }
+    },
+    {
+      "id": 308,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 310,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 311,
+      "name": "Edition / Common / editable example",
+      "value": "UNLIMITED",
+      "font": "Inter",
+      "size": 18.5,
+      "bounds": {
+        "height": 22.38427734375,
+        "width": 117.87607421874998,
+        "x": 698.12392578125,
+        "y": 1187
+      }
+    },
+    {
+      "id": 3,
+      "name": "Review label / Legendary",
+      "value": "LEGENDARY / 10 COPIES",
+      "font": "Source Serif 4",
+      "size": 28,
+      "bounds": {
+        "height": 38.38799999999999,
+        "width": 393.036,
+        "x": 343.482,
+        "y": 68
+      }
+    },
+    {
+      "id": 67,
+      "name": "Card name / floating editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 78,
+        "y": 68.99999999999999
+      }
+    },
+    {
+      "id": 68,
+      "name": "Role / floating editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 82,
+        "y": 149
+      }
+    },
+    {
+      "id": 69,
+      "name": "Legendary label / editable",
+      "value": "LEGENDARY",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 159.76365234375,
+        "x": 78,
+        "y": 1037
+      }
+    },
+    {
+      "id": 70,
+      "name": "Description / floating editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 37,
+      "bounds": {
+        "height": 50.72700000000009,
+        "width": 471.528,
+        "x": 78,
+        "y": 1090
+      }
+    },
+    {
+      "id": 73,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 74,
+      "name": "Edition / Legendary / editable example",
+      "value": "001/010",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 101.16257812499998,
+        "x": 714.837421875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 78,
+      "name": "Review label / Epic",
+      "value": "EPIC / 25 COPIES",
+      "font": "Source Serif 4",
+      "size": 28,
+      "bounds": {
+        "height": 38.38799999999999,
+        "width": 274.6239999999998,
+        "x": 1432.688,
+        "y": 68
+      }
+    },
+    {
+      "id": 129,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 130,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 131,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 132,
+      "name": "Rarity / Epic",
+      "value": "EPIC",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 61.54025390624997,
+        "x": 742.45974609375,
+        "y": 978
+      }
+    },
+    {
+      "id": 133,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 135,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 136,
+      "name": "Edition / Epic / editable example",
+      "value": "001/025",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 104.63865234374998,
+        "x": 711.36134765625,
+        "y": 1187
+      }
+    },
+    {
+      "id": 140,
+      "name": "Review label / Rare",
+      "value": "RARE / 50 COPIES",
+      "font": "Source Serif 4",
+      "size": 28,
+      "bounds": {
+        "height": 38.38799999999999,
+        "width": 286.076,
+        "x": 2456.962,
+        "y": 68
+      }
+    },
+    {
+      "id": 191,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 192,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 193,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 194,
+      "name": "Rarity / Rare",
+      "value": "RARE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 69.04611328124997,
+        "x": 734.95388671875,
+        "y": 978
+      }
+    },
+    {
+      "id": 195,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 197,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 198,
+      "name": "Edition / Rare / editable example",
+      "value": "001/050",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 105.07957031249998,
+        "x": 710.9204296875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 202,
+      "name": "Review label / Uncommon",
+      "value": "UNCOMMON / 100 COPIES",
+      "font": "Source Serif 4",
+      "size": 28,
+      "bounds": {
+        "height": 38.38800000000015,
+        "width": 414.4000000000001,
+        "x": 847.8,
+        "y": 1508
+      }
+    },
+    {
+      "id": 253,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 254,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 255,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 256,
+      "name": "Rarity / Uncommon",
+      "value": "UNCOMMON",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 161.79925781249995,
+        "x": 642.2007421875,
+        "y": 978
+      }
+    },
+    {
+      "id": 257,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 259,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 260,
+      "name": "Edition / Uncommon / editable example",
+      "value": "001/100",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 101.16257812499998,
+        "x": 714.837421875,
+        "y": 1187
+      }
+    },
+    {
+      "id": 264,
+      "name": "Review label / Common",
+      "value": "COMMON / UNLIMITED",
+      "font": "Source Serif 4",
+      "size": 28,
+      "bounds": {
+        "height": 38.38800000000015,
+        "width": 375.64800000000014,
+        "x": 1897.176,
+        "y": 1508
+      }
+    },
+    {
+      "id": 315,
+      "name": "Card name / editable placeholder",
+      "value": "Card name",
+      "font": "Source Serif 4",
+      "size": 72,
+      "bounds": {
+        "height": 98.712,
+        "width": 350.568,
+        "x": 274.716,
+        "y": 63.999999999999986
+      }
+    },
+    {
+      "id": 316,
+      "name": "Role / editable placeholder",
+      "value": "TITLE / ROLE",
+      "font": "Inter",
+      "size": 22,
+      "bounds": {
+        "height": 26.619140625,
+        "width": 192.55328125000005,
+        "x": 353.723359375,
+        "y": 145
+      }
+    },
+    {
+      "id": 317,
+      "name": "Card type / editable placeholder",
+      "value": "CARD TYPE",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 151.12658203124997,
+        "x": 96,
+        "y": 978
+      }
+    },
+    {
+      "id": 318,
+      "name": "Rarity / Common",
+      "value": "COMMON",
+      "font": "Inter",
+      "size": 21,
+      "bounds": {
+        "height": 25.4091796875,
+        "width": 123.23103515624996,
+        "x": 680.76896484375,
+        "y": 978
+      }
+    },
+    {
+      "id": 319,
+      "name": "Description / editable placeholder",
+      "value": "A story worth remembering.",
+      "font": "Source Serif 4",
+      "size": 40,
+      "bounds": {
+        "height": 54.840000000000146,
+        "width": 509.76,
+        "x": 96,
+        "y": 1042
+      }
+    },
+    {
+      "id": 321,
+      "name": "Footer / original uppercase serif treatment",
+      "value": "EVERFOLK",
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 146.124,
+        "x": 96,
+        "y": 1182
+      }
+    },
+    {
+      "id": 322,
+      "name": "Edition / Common / editable example",
+      "value": "UNLIMITED",
+      "font": "Inter",
+      "size": 18.5,
+      "bounds": {
+        "height": 22.38427734375,
+        "width": 117.87607421874998,
+        "x": 698.12392578125,
+        "y": 1187
+      }
+    },
+    {
+      "id": 326,
+      "name": "Review annotation",
+      "value": "Edition limits per card  /  Legendary full art  /  Common unlimited",
+      "font": "Inter",
+      "size": 23,
+      "bounds": {
+        "height": 27.8291015625,
+        "width": 698.45654296875,
+        "x": 1220.771728515625,
+        "y": 2878
+      }
+    }
+  ],
+  "strokeWeights": {
+    "standardOuter": 2.6,
+    "standardInner": 1.3,
+    "standardFine": 1.2,
+    "artworkOutline": 2,
+    "legendaryPerimeter": 1.5,
+    "laurelStem": 1.65,
+    "footer": 1
+  },
+  "notes": [
+    "No raster tracing. Borders are native analytic shapes and cubic Bezier paths.",
+    "The reference wreath and uppercase footer are preserved; no scarab substituted."
+  ],
+  "editionConfiguration": {
+    "version": 1,
+    "date": "2026-11-13",
+    "numberingMeaning": "edition copy number / maximum copies per card",
+    "interpretation": "User-supplied rarity limits interpreted as per-card edition caps; these are visual templates, not issuance enforcement.",
+    "exampleCopyNumber": 1,
+    "rarities": [
+      {
+        "id": "legendary",
+        "label": "Legendary",
+        "editionLimitPerCard": 10,
+        "fullArt": true
+      },
+      {
+        "id": "epic",
+        "label": "Epic",
+        "editionLimitPerCard": 25,
+        "fullArt": false
+      },
+      {
+        "id": "rare",
+        "label": "Rare",
+        "editionLimitPerCard": 50,
+        "fullArt": false
+      },
+      {
+        "id": "uncommon",
+        "label": "Uncommon",
+        "editionLimitPerCard": 100,
+        "fullArt": false
+      },
+      {
+        "id": "common",
+        "label": "Common",
+        "editionLimitPerCard": null,
+        "fullArt": false
+      }
+    ],
+    "unlimitedDisplay": "UNLIMITED"
+  },
+  "fonts": [
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 14,
+      "resolved": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "runs": 14,
+      "status": "exact",
+      "style": "Medium"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 5,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 5,
+      "status": "exact",
+      "style": "Regular"
+    },
+    {
+      "family": "Source Serif 4",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 15,
+      "resolved": {
+        "family": "Source Serif 4",
+        "style": "Regular"
+      },
+      "runs": 15,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "01 Legendary / 001/010",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "02 Epic / 001/025",
+        "width": 900,
+        "x": 1040,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "03 Rare / 001/050",
+        "width": 900,
+        "x": 2080,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "04 Uncommon / 001/100",
+        "width": 900,
+        "x": 3120,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "05 Common / UNLIMITED",
+        "width": 900,
+        "x": 4160,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 255,
+    "dirty": true,
+    "fileInfoTitle": "Everfolk / five rarities and edition limits",
+    "history": [
+      "Artboard Options",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Layer",
+      "Rectangle",
+      "Rectangle",
+      "Rounded Rectangle",
+      "Make Clipping Mask",
+      "Object Properties",
+      "Rounded Rectangle",
+      "Top left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Top right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Wreath left / smooth native paths",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Pen",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "New Layer",
+      "Rounded Rectangle",
+      "Pen",
+      "Make Compound Shape",
+      "Object Properties",
+      "Concentric smooth native border geometry",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Top left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Top right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "New Layer",
+      "Rounded Rectangle",
+      "Pen",
+      "Make Compound Shape",
+      "Object Properties",
+      "Concentric smooth native border geometry",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Top left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Top right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "New Layer",
+      "Rounded Rectangle",
+      "Pen",
+      "Make Compound Shape",
+      "Object Properties",
+      "Concentric smooth native border geometry",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Top left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Top right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "New Layer",
+      "Rounded Rectangle",
+      "Pen",
+      "Make Compound Shape",
+      "Object Properties",
+      "Concentric smooth native border geometry",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Top left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Top right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom left laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Bottom right laurel / smooth native ornament",
+      "Group",
+      "Object Properties",
+      "Transform",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Group",
+      "Object Properties",
+      "Pen",
+      "Group",
+      "Object Properties",
+      "Transform"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      255
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 4160,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 4160,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 314,
+            "kind": "Group",
+            "locked": false,
+            "name": "COMMON / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4fff",
+        "dimImages": null,
+        "id": 255,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Common / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 3120,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 3120,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 254,
+            "kind": "Group",
+            "locked": false,
+            "name": "UNCOMMON / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 195,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Uncommon / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 2080,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 2080,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 194,
+            "kind": "Group",
+            "locked": false,
+            "name": "RARE / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 135,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Rare / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 1040,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 1040,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 134,
+            "kind": "Group",
+            "locked": false,
+            "name": "EPIC / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 75,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Epic / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 0,
+              "y": 0
+            },
+            "childCount": 8,
+            "id": 74,
+            "kind": "Group",
+            "locked": false,
+            "name": "LEGENDARY / full-art frame",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Legendary / full art",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 314,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#a7834f",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": null,
+    "redo": [],
+    "revision": 1205,
+    "selection": [
+      314
+    ],
+    "selectionBounds": {
+      "height": 1260,
+      "width": 900,
+      "x": 4160,
+      "y": 0
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "Everfolk / five rarities and edition limits",
+    "tool": "selection",
+    "uid": 2,
+    "units": "Pixels"
+  },
+  "rasterImages": 0,
+  "reopenedDocument": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "01 Legendary / 001/010",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "02 Epic / 001/025",
+        "width": 900,
+        "x": 1040,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "03 Rare / 001/050",
+        "width": 900,
+        "x": 2080,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "04 Uncommon / 001/100",
+        "width": 900,
+        "x": 3120,
+        "y": 0
+      },
+      {
+        "height": 1260,
+        "name": "05 Common / UNLIMITED",
+        "width": 900,
+        "x": 4160,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 255,
+    "dirty": false,
+    "fileInfoTitle": "Everfolk / five rarities and edition limits",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "layers": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 4160,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 4160,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 314,
+            "kind": "Group",
+            "locked": false,
+            "name": "COMMON / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4fff",
+        "dimImages": null,
+        "id": 255,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Common / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 3120,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 3120,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 254,
+            "kind": "Group",
+            "locked": false,
+            "name": "UNCOMMON / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 195,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Uncommon / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 2080,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 2080,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 194,
+            "kind": "Group",
+            "locked": false,
+            "name": "RARE / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 135,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Rare / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 1040,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 1040,
+              "y": 0
+            },
+            "childCount": 7,
+            "id": 134,
+            "kind": "Group",
+            "locked": false,
+            "name": "EPIC / selected jade and bronze",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 75,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Epic / standard frame",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 0,
+              "y": 0
+            },
+            "childCount": 8,
+            "id": 74,
+            "kind": "Group",
+            "locked": false,
+            "name": "LEGENDARY / full-art frame",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Legendary / full art",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 314,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#a7834f",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\frame-system-v4-rarities\\masters\\Everfolk-Rarity-Frames.vectorcraft",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "Everfolk-Rarity-Frames.vectorcraft",
+    "tool": "selection",
+    "uid": 3,
+    "units": "Pixels"
+  },
+  "reopenedFonts": [
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 14,
+      "resolved": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "runs": 14,
+      "status": "exact",
+      "style": "Medium"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 5,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 5,
+      "status": "exact",
+      "style": "Regular"
+    },
+    {
+      "family": "Source Serif 4",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 15,
+      "resolved": {
+        "family": "Source Serif 4",
+        "style": "Regular"
+      },
+      "runs": 15,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "reopenedImages": 0,
+  "nativeReopenIdentical": true
+}

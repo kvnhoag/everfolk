@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-uncommon-female.png",
+  "sourceSha256": "134a18473cd6c8e030860899671429ff0ca1bcdd395d8125f94ac53c63a8b717",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-uncommon-female-coarse.png",
+  "baseSha256": "7367d2ae6416acff8354ab90665df5a4b222ac7738d5a770a4da6ebdc9bfa504",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-uncommon-female-coarse.json",
+  "baseQaSha256": "8663cd92131a32c283cc5eff338aad9a089ce830339b08eb7d9f2d83af6d1cb1",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-uncommon-female-face.json",
+  "configSha256": "cdab17cb16c2f493da386ca6a0ff44fbae54301bbaa5af00e30c2fbf74d2148d",
+  "config": {
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "radius": [
+          109,
+          137
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          337,
+          202
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-uncommon-female-pixel.png",
+  "outputSha256": "04e2b529485f2afe5a8984871bd4a69c9de71ec9f8bab5c08c07f790e1c606ac",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "fa2ee378927bd7bf4acd8e9440dfd4a3150c48a4b0c6d9cb9eac50343aa69b2f",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-uncommon-female-face-mask.png",
+  "maskSha256": "882a19494ab577b599e5a696e3b1179326005b632f705629203e581df7934607",
+  "maskPixelSha256": "a65c7458fc174e6c99ef73ef71c1add522d20aa2722a2f76906ef45954e5b232",
+  "selectedDetailCells": 1083,
+  "retainedCoarseCells": 23417,
+  "affectedPixels": 38988,
+  "changedPixels": 38582,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

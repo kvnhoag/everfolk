@@ -5,6 +5,7 @@ import type { FigureId } from "../../chain/ids.ts";
 import { actionName, actionDescription, rarityLabel } from "./chain-copy.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import type { TokenView } from "./types.ts";
+import { editionLabel } from "./edition-label.ts";
 import StorybookMark from "../components/StorybookMark.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
 import "./web3-navigation.css";
@@ -113,7 +114,7 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                         {state?.copies?.map(copy => (
                           <div className="figure-owner" key={copy.token_id}>
                             <a href={`#token/${copy.token_id}`}>
-                              Copy #{copy.token_id} · {copy.owner_id}
+                              {editionLabel(copy.extra) ? `Edition ${editionLabel(copy.extra)}` : `Token #${copy.token_id}`} · {copy.owner_id}
                             </a>
                             <p className="chain-fine">
                               {rarityLabel(copy.extra.rarity)} · Affection {copy.extra.affection}

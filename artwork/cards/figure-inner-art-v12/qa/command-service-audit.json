@@ -1,0 +1,384 @@
+{
+  "count": 18,
+  "passed": true,
+  "checks": [
+    {
+      "slug": "alexander-uncommon-male",
+      "gender": "male",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "alexander-rare-male",
+      "gender": "male",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "alexander-epic-male",
+      "gender": "male",
+      "viewAngle": "three-quarter-left",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "gender": "female",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "alexander-rare-female",
+      "gender": "female",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "alexander-epic-female",
+      "gender": "female",
+      "viewAngle": "three-quarter-right",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "gender": "male",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "gender": "male",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "gender": "female",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "gender": "female",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "gender": "female",
+      "viewAngle": "three-quarter-right",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "gender": "female",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "gender": "female",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "gender": "male",
+      "viewAngle": "frontal",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "gender": "male",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "gender": "male",
+      "viewAngle": "three-quarter-right",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "nearchus-title-female",
+      "gender": "female",
+      "viewAngle": "left-profile",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    },
+    {
+      "slug": "eumenes-title-female",
+      "gender": "female",
+      "viewAngle": "frontal-down",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true,
+      "angleVerified": true
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\menander-rare.png",
+  "sourceSha256": "9225a004bbc32d663cc8f58d1c2edc179a4160774f1a3f085df0556d84d0bfe0",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\menander-rare-coarse.png",
+  "baseSha256": "a6ec863646d5cbc7054bff2b979c1496c61467fbc78b983acd1ead0d2d76f3fb",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\menander-rare-coarse.json",
+  "baseQaSha256": "4a8b25a84bce8c79d814bc08c3205eb849fcff7005f4b322369f6b6dee451f28",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\menander-rare-face.json",
+  "configSha256": "f1a5329375e30af5a9cc0974b55b112032c6d055878a57184d3f3e797467f4d6",
+  "config": {
+    "regions": [
+      {
+        "name": "face-eyes",
+        "radius": [
+          91,
+          102
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          330,
+          308
+        ]
+      }
+    ],
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\menander-rare-pixel.png",
+  "outputSha256": "a3e268c804e465a7d0b0e7fd09e07d2dbcfdbb3f65ce6d85d9623c9f515d928d",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "a055e8cf592131e5de4260c94bd3ac7903defad282ad45272f8429ae7b1fa346",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\menander-rare-face-mask.png",
+  "maskSha256": "64c408f29fb4bdfe5d555dd2b76642a2ecb57c901cafd06cf93df224f3f138cb",
+  "maskPixelSha256": "0f531693808ce3436b3f991c6cf775924e7f78ec56a8d87e6052dcb9dd2cac1d",
+  "selectedDetailCells": 670,
+  "retainedCoarseCells": 23830,
+  "affectedPixels": 24120,
+  "changedPixels": 23880,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

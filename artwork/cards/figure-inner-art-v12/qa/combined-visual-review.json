@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-13",
+  "assetCount": 83,
+  "namedParents": 13,
+  "subcardRoles": 35,
+  "maleSubcardVariants": 35,
+  "femaleSubcardVariants": 35,
+  "newSelectedAssets": 59,
+  "unchangedReusedAssets": 24,
+  "ptolemyCorrection": {
+    "reviewed": true,
+    "scope": "Arm routing and immediate robe/pose integration; original face and costume preserved.",
+    "result": "Image-left arm descends to the table from its own shoulder. Image-right arm holds his own scroll. The ambiguous across-body exchange is removed.",
+    "proof": "review/ptolemy-anatomy-comparison.png"
+  },
+  "workerReviews": {
+    "scholarly": {"newAssets":20,"manifest":"scholarly-manifest.json"},
+    "craftAndCivic": {"newAssets":20,"manifest":"craft-civic-manifest.json"},
+    "commandAndService": {"newAssets":18,"manifest":"command-service-manifest.json"},
+    "root": {"newAssets":1,"slug":"ptolemy-parent"}
+  },
+  "rootVisualCoverage": [
+    "Alexander male/female progression in revision-summary.png; front, left profile and opposing three-quarter command views.",
+    "All thirteen gender-angle proof sheets inspected: Alexander, Aristotle, Euclid, Lysippos, Pytheas, Menander, Demetrius, Theophrastus, Zeno, Ptolemy, Cleomenes, Nearchus and Eumenes.",
+    "Core progressions inspected for clear frontal, profile and oblique/three-quarter head-view variation, readable eyes, consistent contributor identity, and arm/hand routing.",
+    "Both classic title-role pairs inspected for distinct male/female contributors and different head views.",
+    "Single-role proof layout corrected and re-rendered so titles remain readable."
+  ],
+  "automatedValidation": [
+    "83 unique source images and83 unique filtered finals;35 complete male/female role pairs.",
+    "Source, coarse, final, region configuration and filter metadata hashes verified.",
+    "24 retained source/final image hashes independently matched against the previous library.",
+    "PixelOE determinism, lossless readback, whole-cell regional selection and zero outside-mask changes verified per image.",
+    "Gallery embedded JavaScript syntax checked locally."
+  ],
+  "galleryBrowserReview": {
+    "status": "Not performed",
+    "reason": "The browser URL policy rejected the local file protocol. No alternate browser or localhost workaround was attempted. Local syntax/data/link validation and raster proof inspection were used."
+  },
+  "limits": [
+    "Head-view labels describe observed artistic views, not measured angular degrees.",
+    "Visual inspection complements the exact pixel checks; it does not establish anatomical perfection or historical authentication.",
+    "Named figures are imaginative depictions; subcards are representative player contributors, not alternate genders of the historical figures.",
+    "The images are flattened raster illustrations. No independently rigged outfit or authored ArtCraft brush layers are claimed.",
+    "User acceptance of the revised collection is not assumed."
+  ]
+}

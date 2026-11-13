@@ -1,0 +1,353 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 82,
+    "dirty": false,
+    "fileInfoTitle": "alexander-parent.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 22.38427734375,
+          "width": 98.619873046875,
+          "x": 717.380126953125,
+          "y": 1189.422125
+        },
+        "fill": "#eee4ce",
+        "id": 81,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition limit live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "LIMIT 010",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 80,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 19.359375,
+          "width": 119.115625,
+          "x": 78,
+          "y": 1143.5
+        },
+        "fill": "#d7b47a",
+        "id": 79,
+        "kind": "Type",
+        "locked": false,
+        "name": "Preview status live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "ART PREVIEW",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 50.72700000000009,
+          "width": 269.138,
+          "x": 78,
+          "y": 1090
+        },
+        "fill": "#eee4ce",
+        "id": 78,
+        "kind": "Type",
+        "locked": false,
+        "name": "Collection live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Historical figure",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 157.87365234374997,
+          "x": 78,
+          "y": 1037.00025
+        },
+        "fill": "#d7b47a",
+        "id": 77,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "LEGENDARY",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 24.19921875,
+          "width": 240.59648437499993,
+          "x": 82,
+          "y": 150.937
+        },
+        "fill": "#d7b47a",
+        "id": 76,
+        "kind": "Type",
+        "locked": false,
+        "name": "Affiliation live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "HISTORICAL FIGURE",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 93.22800000000001,
+          "width": 606.9000000000001,
+          "x": 78,
+          "y": 65.69199999999998
+        },
+        "fill": "#eee4ce",
+        "id": 75,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Alexander the Great",
+        "visible": true
+      }
+    ],
+    "objects": 81,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v13\\source\\cards\\alexander-parent.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "alexander-parent.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 2,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 82,
+    "dirty": false,
+    "fileInfoTitle": "alexander-parent.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 81,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v13\\source\\cards\\alexander-parent.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "alexander-parent.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 2,
+    "units": "Pixels"
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "records": [
+    {
+      "name": "legendary-frame",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/010",
+      "editionLimitPerCard": 10,
+      "fullArt": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 501600,
+      "sha256": "24bdf262f9190f24a7a31ea6c4dca3a6ddb65f2c6f67d5a26e3ee5f0d83ab066"
+    },
+    {
+      "name": "legendary-layout",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/010",
+      "editionLimitPerCard": 10,
+      "fullArt": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 501600,
+      "sha256": "58346ca6ca8c856d5ad2567c78205b5192c06b4a0f2703ef650aeeae5e90baf8"
+    },
+    {
+      "name": "epic-frame",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/025",
+      "editionLimitPerCard": 25,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "4662ae8f2c18aea0a2370ccf6315f56fdf9080d5af3888480904f13a548653e3"
+    },
+    {
+      "name": "epic-layout",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/025",
+      "editionLimitPerCard": 25,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "444472fd9833389ee119e81e908cd41f9cef0c42a1a0af95de4dbac936597397"
+    },
+    {
+      "name": "rare-frame",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/050",
+      "editionLimitPerCard": 50,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "4662ae8f2c18aea0a2370ccf6315f56fdf9080d5af3888480904f13a548653e3"
+    },
+    {
+      "name": "rare-layout",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/050",
+      "editionLimitPerCard": 50,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "dbf71aea15d874d73d069ee61f0211b6602b9c72db2e7a23db82f0cd56943cfa"
+    },
+    {
+      "name": "uncommon-frame",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/100",
+      "editionLimitPerCard": 100,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "4662ae8f2c18aea0a2370ccf6315f56fdf9080d5af3888480904f13a548653e3"
+    },
+    {
+      "name": "uncommon-layout",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "001/100",
+      "editionLimitPerCard": 100,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "8ba3f377e58361364284f6ecc1dc40aa6ac9bf961ab098d2785290a288a65168"
+    },
+    {
+      "name": "common-frame",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "UNLIMITED",
+      "editionLimitPerCard": null,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "6e82680f3a0ecab67dde25c335a75e8759ef0c3428e5fe0a7588d35f280fc6f1"
+    },
+    {
+      "name": "common-layout",
+      "dimensions": [
+        900,
+        1260
+      ],
+      "editionDisplay": "UNLIMITED",
+      "editionLimitPerCard": null,
+      "fullArt": false,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsTransparent": 475200,
+      "sha256": "6b49bc7761db67a492793bdf7e52e24504d9238ed7244656b96121e53efdb96e"
+    }
+  ],
+  "nativeReopenIdentical": true,
+  "rasterImages": 0,
+  "warnings": [],
+  "proofVisuallyReviewed": "review/Everfolk-Rarity-Frames-1570.png"
+}

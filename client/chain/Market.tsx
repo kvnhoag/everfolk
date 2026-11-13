@@ -278,6 +278,7 @@ export function MarketBody({
                       {row.rarityLabel && (
                         <li key="rarity" className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>{row.rarityLabel}</li>
                       )}
+                      {row.editionText && <li key="edition" className="ledger-chip">Edition {row.editionText}</li>}
                       {row.actionName && <li key="action" className="ledger-chip">{row.actionName}</li>}
                       {row.affection !== undefined && (
                         <li key="affection" className="ledger-chip is-faience">Affection {row.affection}</li>
@@ -334,6 +335,7 @@ export function MarketBody({
                   {row.rarityLabel && (
                     <li className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>{row.rarityLabel}</li>
                   )}
+                  {row.editionText && <li className="ledger-chip">Edition {row.editionText}</li>}
                   {row.actionName && <li className="ledger-chip">{row.actionName}</li>}
                   {row.affection !== undefined && (
                     <li className="ledger-chip is-faience">Affection {row.affection}</li>

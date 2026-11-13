@@ -1,0 +1,73 @@
+EVERFOLK FIGURE INNER ART V11 — 13 NOVEMBER 2026
+
+User direction
+Use the supplied character's own armour reference for Alexander. Do not borrow
+another historical person's armour. Use the second supplied equipment sheet
+for simpler military contribution equipment. Extend inner art to the full
+collection and apply the established pixel filter.
+
+Scope
+13 named parent figures and 35 earned contribution/title subcard illustrations.
+The default current figure paths contain 11 figures with three contribution
+stages each. Nearchus and Eumenes are also included from the playable classic/
+sample title paths. This is an art library; the application's authored events,
+awards, ownership, drop rates and display components are not changed by it.
+Title aliases in catalog.json link the eight classic earned titles to suitable
+artwork; they do not add recognition or mutate a saved player's identity.
+
+Source authority
+src/figures/world.ts defines the 11 core figure paths, their work and stage titles.
+research/figure-biographies.json documents the figures and evidence boundaries.
+scripts/alexandria-historical-titles.mjs and worlds/alexandria-sample.json define
+the additional Nearchus and Eumenes title paths.
+
+User-supplied images
+references/user-alexander-character-armour.png is the definitive main-character
+outfit design reference, copied unchanged from the user's attachment. The body
+armour, edging, Gorgon motif, sash, scales, skirt and forearm equipment inform
+the painting. The bare-headed face and longer corrected sword are retained from
+the mounted composition anchor. The helmet is not imported into this pose.
+references/user-military-equipment-sheet.png is the user's simpler equipment
+reference for military service subcards. It remains unchanged. Neither source
+has been presented as an authenticated archaeological photograph, and no
+external provenance/artist attribution was supplied with these attachments.
+They are labelled as user-supplied design references in the review gallery.
+
+Interpretation
+Other named figures have imagined appearances and role-appropriate clothing
+informed by the local authored content. No exact ancient likeness or personal
+panoply is authenticated here. The same Greek armour is not applied to scholars,
+artisans, navigators or administrators. Subcards depict representative unnamed
+player contributors performing the authored tasks. Their scenes do not establish
+historical personal pupil relationships or undocumented real meetings. Tools,
+architecture, gestures and lighting are artistic reconstructions.
+
+Production
+Built-in image generation creates the painterly illustrations. Exact prompts,
+source PNGs and individually selected face-detail regions are retained. No API
+CLI fallback, editable ArtCraft brushwork or independently rigged clothing is
+claimed. All paintings are flattened illustration assets; previous versions
+and the ordinary portrait library remain unchanged.
+references/prior-mounted-edit-target-v10.png preserves the exact previous
+painting used as Alexander's edit target. Its old armour is superseded; its
+composition, identity and corrected sword are the retained elements. The new
+source/alexander-parent.png then serves as a style anchor for the other scenes.
+
+Pixel finish
+The bundled Everfolk pixelate.py applies PixelOE 1.0.0 legacy CPU to an exact
+280 x 350 logical coarse grid, enlarged 3x to 840 x 1050. pixelate_regions.py
+then selects whole registered cells from a 420 x 525 finer pass for the face,
+using the approved 3px-body / 2px-face method. This is a mixed-grid output.
+It does not smooth, sharpen or regenerate eyes. Each actual composition has its
+own explicit face ellipse. Repeat-render determinism, source preservation,
+integer-grid integrity, lossless PNG readback and zero changes outside the
+regional selection mask are checked by the scripts and recorded in qa/.
+source/build-catalog.mjs independently rechecks source/final hashes and required
+PixelOE flags before recording an asset complete.
+
+Review and delivery
+review/index.html contains the complete filterable gallery, per-image painting
+and pixel comparison, exact prompts and the supplied reference images.
+catalog.json records all assets, title aliases, hashes, dimensions and scope.
+The review sheets are resized presentation summaries; full source and filtered
+PNGs are retained separately. See per-worker manifests for visual review notes.

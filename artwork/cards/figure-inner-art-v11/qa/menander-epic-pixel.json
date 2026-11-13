@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\menander-epic.png",
+  "sourceSha256": "b88819f98ebc2249f78ed9ef8a106281a63bb806b62d8acbd12eaceda45fe7fa",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\menander-epic-coarse.png",
+  "baseSha256": "f4c851cd2f98a6c115227607bf3a76422c2ac41e0dd162ef420a682deb58d79a",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\menander-epic-coarse.json",
+  "baseQaSha256": "f228e96fd98a1184e60b09f8062f057d9d639f28ed5616c9439cbef755a22c4a",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\menander-epic-face.json",
+  "configSha256": "e8745cfa8472173d6755cd493696742cfdd12b499afa9b23265c4148c76e31db",
+  "config": {
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "center": [
+          350,
+          222
+        ],
+        "radius": [
+          94,
+          103
+        ]
+      }
+    ],
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\menander-epic-pixel.png",
+  "outputSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "3d8b78f1add22a49503e7127b4596980de770a81c7ea30d0f4f8da6ffbf425b6",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\menander-epic-face-mask.png",
+  "maskSha256": "3e7fd2c5324456e29d35147025cd7c1bcfa30e0a8ac65456b53b4421da0566e3",
+  "maskPixelSha256": "9b8728224c44777bc8e9346df3bb53d29ede714f6bf5afa73ec2e57d2f190541",
+  "selectedDetailCells": 704,
+  "retainedCoarseCells": 23796,
+  "affectedPixels": 25344,
+  "changedPixels": 25053,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

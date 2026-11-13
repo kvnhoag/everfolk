@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\demetrius-rare.png",
+  "sourceSha256": "c4093290b98b7e1b26873dc4119698e0b42bb2e06af73dbf551728b5e0e1d0c9",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\demetrius-rare-coarse.png",
+  "baseSha256": "2a81dc667c7a760a587aa7b3ce83e2e1a872cc14fd44cd815fcabc61156c88e4",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\demetrius-rare-coarse.json",
+  "baseQaSha256": "b88eca53190108584e0e9774e21da7c3d194b6100c4170120e9cff6c48b95c43",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\demetrius-rare-face.json",
+  "configSha256": "2a5d9a35a6f4082d0813211d19f8bac9a604856ebc39ac94a826e0ac027b8bcb",
+  "config": {
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "center": [
+          415,
+          294
+        ],
+        "radius": [
+          115,
+          142
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\demetrius-rare-pixel.png",
+  "outputSha256": "178fd13ea57f54af506dfa40faa9c8061bb010bdee354ae70a4ef5f6f34a73d8",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "f6d689c8ec837873df8a99fd5fdb7dc14937cf8a6fd70daaab87c7f6d07fd6a2",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\demetrius-rare-face-mask.png",
+  "maskSha256": "4bd8d213af73499aa375c8aea6c372867580bc8091cc120e8f5e60b09f345921",
+  "maskPixelSha256": "3540576694830996087e065b8bfcd202c7dab5d448877f8ff832732091e18409",
+  "selectedDetailCells": 1181,
+  "retainedCoarseCells": 23319,
+  "affectedPixels": 42516,
+  "changedPixels": 42274,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

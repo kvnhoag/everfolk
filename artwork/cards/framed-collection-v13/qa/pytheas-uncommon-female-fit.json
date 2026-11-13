@@ -1,0 +1,60 @@
+{
+  "slug": "pytheas-uncommon-female",
+  "figureId": "pytheas",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Expedition Provisioner",
+  "subtitle": "Pytheas of Massalia",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 31,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-uncommon-female.svg",
+  "fittedArt": "assets/fitted/pytheas-uncommon-female.png",
+  "overlaySvg": "source/overlays/pytheas-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+  "master": "masters/pytheas-uncommon-female.vectorcraft",
+  "export": "exports/pytheas-uncommon-female.png",
+  "thumbnail": "assets/pytheas-uncommon-female-thumb.png",
+  "exportSha256": "5ff72856051070a6b8d5e2a9d9cde9f19f3d5779f7b3def6c19e0c9280c9fddf",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "euclid-rare-male",
+  "figureId": "euclid",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Proof Checker",
+  "subtitle": "Euclid",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 18,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-rare-male.svg",
+  "fittedArt": "assets/fitted/euclid-rare-male.png",
+  "overlaySvg": "source/overlays/euclid-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+  "master": "masters/euclid-rare-male.vectorcraft",
+  "export": "exports/euclid-rare-male.png",
+  "thumbnail": "assets/euclid-rare-male-thumb.png",
+  "exportSha256": "20a5737e9eba3b16d1754cf685fc3589fdc2bdbd086eb4448f602c4484eb74aa",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-rare-female",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Campaign Staff Officer",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 5,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-rare-female.svg",
+  "fittedArt": "assets/fitted/alexander-rare-female.png",
+  "overlaySvg": "source/overlays/alexander-rare-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "23c2f9f17da71ebb080b652bb7328249125ff15bf7a0ae5817c4ae6b3377c906",
+  "master": "masters/alexander-rare-female.vectorcraft",
+  "export": "exports/alexander-rare-female.png",
+  "thumbnail": "assets/alexander-rare-female-thumb.png",
+  "exportSha256": "f6a587fe0fa058d1a5aa62324eaa1604cf888ff8c88882c35f2ae5134fd30d8d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

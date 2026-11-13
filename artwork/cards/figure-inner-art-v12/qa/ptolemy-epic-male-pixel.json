@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\ptolemy-epic-male.png",
+  "sourceSha256": "4e43aefc07ca04bfd40b9e15703b7a0349b9b8145aff250f8de8bc77c2a9090c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\ptolemy-epic-male-coarse.png",
+  "baseSha256": "9627115f74d3a715339722df2bde7b6e3e465ea310a1f04ffd1dedcde5cfa00a",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\ptolemy-epic-male-coarse.json",
+  "baseQaSha256": "0d0888c10c3beeffeba1ecf61b17f2c3ba2c2634bb945793a18c27568fd8af1d",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\ptolemy-epic-male-face.json",
+  "configSha256": "fc1c8adb34fbbd45e59cd62eedfe07380ca130d596db213a79bbe55d99ff774b",
+  "config": {
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "radius": [
+          120,
+          145
+        ],
+        "center": [
+          330,
+          220
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\ptolemy-epic-male-pixel.png",
+  "outputSha256": "c9581112f78d21e7207bac7b9ca19c9f808f78305a1a00c1b20798fd884918ed",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "8f6649a9522c51822af4fa953fad6a756759c2d377957bddadb7780cc5a18f1a",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\ptolemy-epic-male-face-mask.png",
+  "maskSha256": "d8e3b1947e55f8bdcecd6b9e800d7467f5c791c965673d09efcd435593a1869b",
+  "maskPixelSha256": "d696b1168a4ab3cdc923488a4ae5983dedc70b0cb96095613bb9a2a4877a48b5",
+  "selectedDetailCells": 1262,
+  "retainedCoarseCells": 23238,
+  "affectedPixels": 45432,
+  "changedPixels": 44974,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

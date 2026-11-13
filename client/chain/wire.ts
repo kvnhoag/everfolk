@@ -1,5 +1,6 @@
 import type { Draw, LifeView, Listing, MarketTerms, MintResult, TokenExtra, TokenStats, TokenView } from "./types.ts";
-import type { MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry } from "../../chain/types.ts";
+import type { EditionSupply, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry } from "../../chain/types.ts";
+import { editionLimit } from "../../chain/editions.ts";
 
 /** Shape checks for contract answers. The chain is external data: check what the UI relies on, fail loudly otherwise. */
 
@@ -29,6 +30,41 @@ function yocto(value: unknown, what: string): string {
   return value;
 }
 
+/** Legacy metadata has no edition fields; partially supplied or inconsistent new metadata is invalid. */
+function parseEditionFields(value: Json, what: string): void {
+  const fields = ["edition_key", "edition_number", "edition_limit"];
+  if (!fields.some(field => Object.hasOwn(value, field))) return;
+  if (!fields.every(field => Object.hasOwn(value, field))) fail(`${what} edition`);
+  if (typeof value.edition_key !== "string" || !value.edition_key.length || value.edition_key.length > 1024
+    || !Number.isSafeInteger(value.edition_number) || Number(value.edition_number) < 1
+    || !Number.isInteger(value.rarity) || Number(value.rarity) < 0 || Number(value.rarity) > 4
+    || !(value.edition_key as string).endsWith(`:rarity:${value.rarity}`)
+    // Minted records retain their original cap when current edition policy changes.
+    || !(value.edition_limit === editionLimit(Number(value.rarity))
+      || value.rarity === 1 && value.edition_limit === 100
+      || value.rarity === 2 && value.edition_limit === 50)) fail(`${what} edition`);
+}
+
+export function parseEditionSupply(value: unknown): EditionSupply {
+  const supply = record(value, "edition supply", { edition_key: "string", rarity: "number", minted: "number", edition_limit: "number|null", next_edition_number: "number|null" });
+  if (!(supply.edition_key as string).length || (supply.edition_key as string).length > 1024
+    || !Number.isInteger(supply.rarity) || Number(supply.rarity) < 0 || Number(supply.rarity) > 4
+    || !Number.isSafeInteger(supply.minted) || Number(supply.minted) < 0
+    || !(supply.edition_key as string).endsWith(`:rarity:${supply.rarity}`)
+    || supply.edition_limit !== editionLimit(Number(supply.rarity))) fail("edition supply");
+  const minted = supply.minted as number, limit = supply.edition_limit as number | null;
+  const expected = limit !== null && minted >= limit ? null : minted + 1;
+  if (!Number.isSafeInteger(minted + 1) || supply.next_edition_number !== expected) fail("next edition number");
+  return supply as unknown as EditionSupply;
+}
+
+function parseEditionPreview(value: Json, rarity: number, what: string): void {
+  const fields = ["edition_key", "edition_limit", "minted", "next_edition_number"];
+  if (!fields.some(field => Object.hasOwn(value, field))) return;
+  if (!fields.every(field => Object.hasOwn(value, field))) fail(`${what} edition preview`);
+  parseEditionSupply({ ...value, rarity });
+}
+
 export function parseDraw(value: unknown): Draw {
   return record(value, "draw", {
     step: "number", category: "string", token_id: "string|null", action_id: "string|null", rarity: "number|null", commands_hash: "string",
@@ -52,6 +88,7 @@ export function parseOptionalLife(value: unknown): LifeView | null {
 export function parseMintResult(value: unknown): MintResult {
   const result = record(value, "mint result", { token_id: "string", kind: "string", figure_id: "string|null", rarity: "number", affection: "number" });
   if (result.kind !== "figure" && result.kind !== "npc") fail("token kind");
+  parseEditionFields(result, "mint result");
   return result as unknown as MintResult;
 }
 
@@ -66,7 +103,8 @@ export function parseTokenView(value: unknown): TokenView | null {
   } catch {
     fail("token metadata extra");
   }
-  record(extra, "token extra", { kind: "string", rarity: "number", affection: "number", action_id: "string", life_id: "string", sources: "array", evidence_hash: "string" });
+  const checkedExtra = record(extra, "token extra", { kind: "string", rarity: "number", affection: "number", action_id: "string", life_id: "string", sources: "array", evidence_hash: "string" });
+  parseEditionFields(checkedExtra, "token extra");
   return { owner_id: token.owner_id as string, extra: extra as TokenExtra };
 }
 
@@ -107,6 +145,7 @@ export function parseMintPack(value: unknown): MintPack {
   for (const entry of pack.cards as unknown[]) {
     const card = record(entry, "mint card", { kind: "string", figure_id: "string|null", rarity: "number", affection: "number", action_id: "string" });
     if (!["npc", "figure"].includes(String(card.kind)) || !Number.isInteger(card.rarity) || Number(card.rarity) < 0 || Number(card.rarity) > 4 || !Number.isInteger(card.affection) || Number(card.affection) < 1 || Number(card.affection) > 100) fail("mint card");
+    parseEditionPreview(card, Number(card.rarity), "mint card");
   }
   return pack as unknown as MintPack;
 }
@@ -131,12 +170,14 @@ export function parseMarketTerms(value: unknown): MarketTerms {
 
 export function parseStageMintQuote(value: unknown): StageMintQuote {
   const quote = record(value, "stage mint quote", { total_fee: "string", source_share_bps: "number", cards: "array" });
+  if (Object.hasOwn(quote, "quote_hash") && (typeof quote.quote_hash !== "string" || !/^[0-9a-f]{64}$/.test(quote.quote_hash))) fail("stage quote hash");
   yocto(quote.total_fee, "stage mint fee");
   if (!Number.isInteger(quote.source_share_bps) || Number(quote.source_share_bps) < 0 || Number(quote.source_share_bps) > 10000) fail("stage source share");
   if (!(quote.cards as unknown[]).length || (quote.cards as unknown[]).length > 7) fail("stage cards");
   const ids = new Set(); let sum = 0n;
   for (const value of quote.cards as unknown[]) {
     const card = record(value, "stage card", { stage_id: "string", figure_id: "string|null", title: "string", character_name: "string", portrait_media: "string", stage_record: "object", fee: "string", action_id: "string" });
+    parseEditionPreview(card, card.rarity === undefined ? card.figure_id === null ? 1 : 2 : Number(card.rarity), "stage card");
     if (ids.has(card.stage_id)) fail("duplicate stage");
     ids.add(card.stage_id); sum += BigInt(yocto(card.fee, "stage fee"));
   }

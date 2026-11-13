@@ -20,7 +20,7 @@ export interface RankedEndingSession {
   life: LifeView;
   finish(): Promise<SignedEvidence>;
   chooseMint(slot: number): Promise<MintResult>;
-  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string, expectedQuoteHash?: string): Promise<StageMintResult>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   recoverMint(): Promise<MintResult>;
   abandon(): Promise<void>;
@@ -119,7 +119,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
   if (evidence.stage_figures?.length) return <StageAlbum signed={stage.signed} contract={contract} practice={practice} walletPath={walletPath}
-    onMint={(action, fee) => session.mintStages(stage.signed, action, fee)} onClose={onClose}
+    onMint={(action, fee, quoteHash) => session.mintStages(stage.signed, action, fee, quoteHash)} onClose={onClose}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }} />;
   return <LifeReport
     walletPath={walletPath}

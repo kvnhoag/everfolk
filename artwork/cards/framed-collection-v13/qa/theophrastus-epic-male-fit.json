@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-epic-male",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Peripatetic Botanical Scholar",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 55,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-epic-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-epic-male.png",
+  "overlaySvg": "source/overlays/theophrastus-epic-male.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "157526ad1111cbebc159563e3e10c3b6787a5144305168ed7edf23b876094c29",
+  "master": "masters/theophrastus-epic-male.vectorcraft",
+  "export": "exports/theophrastus-epic-male.png",
+  "thumbnail": "assets/theophrastus-epic-male-thumb.png",
+  "exportSha256": "400231affa69e6ad3c597a324dff39d987db26ce20a797dde9957ab8982abbff",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

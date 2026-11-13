@@ -1,0 +1,4247 @@
+{
+  "libraryId": "everfolk-figure-inner-art-v12",
+  "date": "2026-11-13",
+  "expected": 83,
+  "complete": 83,
+  "parentCount": 13,
+  "subcardRoleCount": 35,
+  "subcardVariantCount": 70,
+  "pairedRoles": 35,
+  "scope": "13 named main figures; each of 35 player contribution/title roles has both male and female variants. Frontal, profile and three-quarter face angles vary across core progressions.",
+  "revisions": [
+    "Ptolemy main arm routing corrected",
+    "Both genders provided per subcard role",
+    "Varied subcard face angles throughout all core figure sets"
+  ],
+  "titleArtAliases": {
+    "Right Hand of Alexander": {
+      "male": "alexander-rare-male",
+      "female": "alexander-rare-female"
+    },
+    "General of Alexander": {
+      "male": "alexander-epic-male",
+      "female": "alexander-epic-female"
+    },
+    "Disciple of Aristotle": {
+      "male": "aristotle-epic-male",
+      "female": "aristotle-epic-female"
+    },
+    "Disciple of Euclid": {
+      "male": "euclid-epic-male",
+      "female": "euclid-epic-female"
+    },
+    "Scholar of Theophrastus": {
+      "male": "theophrastus-epic-male",
+      "female": "theophrastus-epic-female"
+    },
+    "Trusted Adviser of Ptolemy": {
+      "male": "ptolemy-epic-male",
+      "female": "ptolemy-epic-female"
+    },
+    "Navigator of Nearchus": {
+      "male": "nearchus-title-male",
+      "female": "nearchus-title-female"
+    },
+    "Secretary of Eumenes": {
+      "male": "eumenes-title-male",
+      "female": "eumenes-title-female"
+    }
+  },
+  "filter": {
+    "method": "PixelOE 1.0.0 legacy CPU",
+    "output": [
+      840,
+      1050
+    ],
+    "bodyPixelSize": 3,
+    "facePixelSize": 2,
+    "gridType": "mixed grid; whole-cell regional selection"
+  },
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "roleId": "alexander-parent",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Alexander the Great",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/alexander-parent.png",
+      "prompt": "prompts/alexander-parent.txt",
+      "final": "assets/alexander-parent-pixel.png",
+      "qa": "qa/alexander-parent-pixel.json",
+      "coarse": "assets/alexander-parent-coarse.png",
+      "coarseQa": "qa/alexander-parent-coarse.json",
+      "faceConfig": "source/alexander-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "1ca0963e6e745afd3e4e96ad26c79b47cf3965ee45337c75f0fb7ef01ba7c89e",
+      "finalSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+      "faceRegions": [
+        {
+          "center": [
+            378,
+            307
+          ],
+          "radius": [
+            77,
+            94
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "alexander-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "roleId": "alexander-uncommon",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "alexander-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-uncommon-male.png",
+      "prompt": "prompts/alexander-uncommon-male.txt",
+      "final": "assets/alexander-uncommon-male-pixel.png",
+      "qa": "qa/alexander-uncommon-male-pixel.json",
+      "coarse": "assets/alexander-uncommon-male-coarse.png",
+      "coarseQa": "qa/alexander-uncommon-male-coarse.json",
+      "faceConfig": "source/alexander-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "89d4a06cb1ce07bd3de16440369ad3987aecc39e7169bc90496960475a56e7f8",
+      "finalSha256": "bd2da19f09cba801e5ddf469854f0d37f336e395b50b5bf62dbe7f52c5bc9626",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            350,
+            180
+          ],
+          "radius": [
+            100,
+            125
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "roleId": "alexander-uncommon",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "alexander-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-uncommon-female.png",
+      "prompt": "prompts/alexander-uncommon-female.txt",
+      "final": "assets/alexander-uncommon-female-pixel.png",
+      "qa": "qa/alexander-uncommon-female-pixel.json",
+      "coarse": "assets/alexander-uncommon-female-coarse.png",
+      "coarseQa": "qa/alexander-uncommon-female-coarse.json",
+      "faceConfig": "source/alexander-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3217f848745b1c3655cbc50c5286d42cd3cd5e3e6e1253eab72ddc188bf372d5",
+      "finalSha256": "924a15e1befd233494db20ff9a2e5775bea8a0cc1744f100a1f58c8bb11372e9",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            345,
+            165
+          ],
+          "radius": [
+            98,
+            120
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "alexander-rare-male",
+      "roleId": "alexander-rare",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Staff Officer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "alexander-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-rare-male.png",
+      "prompt": "prompts/alexander-rare-male.txt",
+      "final": "assets/alexander-rare-male-pixel.png",
+      "qa": "qa/alexander-rare-male-pixel.json",
+      "coarse": "assets/alexander-rare-male-coarse.png",
+      "coarseQa": "qa/alexander-rare-male-coarse.json",
+      "faceConfig": "source/alexander-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "dff12d06381ace1c64ce664f672d34b34c95ec790949da4dd81c2439ddfb29ba",
+      "finalSha256": "a9d4730cecffb17bc2ec7ec2b854d3c2812b773e544d043d6a1d29c8d4856d29",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            100,
+            130
+          ],
+          "center": [
+            360,
+            180
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "alexander-rare-female",
+      "roleId": "alexander-rare",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Staff Officer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "alexander-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-rare-female.png",
+      "prompt": "prompts/alexander-rare-female.txt",
+      "final": "assets/alexander-rare-female-pixel.png",
+      "qa": "qa/alexander-rare-female-pixel.json",
+      "coarse": "assets/alexander-rare-female-coarse.png",
+      "coarseQa": "qa/alexander-rare-female-coarse.json",
+      "faceConfig": "source/alexander-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "52aef2fb18bd73b1bc7004485daec0575a474ba3769a51e59ef58123221365a1",
+      "finalSha256": "23c2f9f17da71ebb080b652bb7328249125ff15bf7a0ae5817c4ae6b3377c906",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "center": [
+            350,
+            170
+          ],
+          "radius": [
+            98,
+            125
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "alexander-epic-male",
+      "roleId": "alexander-epic",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Trusted Campaign Commander",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "alexander-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-epic-male.png",
+      "prompt": "prompts/alexander-epic-male.txt",
+      "final": "assets/alexander-epic-male-pixel.png",
+      "qa": "qa/alexander-epic-male-pixel.json",
+      "coarse": "assets/alexander-epic-male-coarse.png",
+      "coarseQa": "qa/alexander-epic-male-coarse.json",
+      "faceConfig": "source/alexander-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "40a04a6091321998f53afe480e953f76300c3a1bb0c1b8e53711fa4bc3273b17",
+      "finalSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            580,
+            180
+          ],
+          "radius": [
+            108,
+            135
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter-left",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "alexander-epic-female",
+      "roleId": "alexander-epic",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Trusted Campaign Commander",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "alexander-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-epic-female.png",
+      "prompt": "prompts/alexander-epic-female.txt",
+      "final": "assets/alexander-epic-female-pixel.png",
+      "qa": "qa/alexander-epic-female-pixel.json",
+      "coarse": "assets/alexander-epic-female-coarse.png",
+      "coarseQa": "qa/alexander-epic-female-coarse.json",
+      "faceConfig": "source/alexander-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f045e811d38bcc09dac0857f926e01d073dedad688bf8c34bb415dd069565ded",
+      "finalSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+      "faceRegions": [
+        {
+          "center": [
+            265,
+            188
+          ],
+          "name": "face-eyes",
+          "radius": [
+            100,
+            130
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter-right",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-parent",
+      "roleId": "aristotle-parent",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Aristotle",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-parent.png",
+      "prompt": "prompts/aristotle-parent.txt",
+      "final": "assets/aristotle-parent-pixel.png",
+      "qa": "qa/aristotle-parent-pixel.json",
+      "coarse": "assets/aristotle-parent-coarse.png",
+      "coarseQa": "qa/aristotle-parent-coarse.json",
+      "faceConfig": "source/aristotle-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8579f2793664415fb8bf12063bc957a1fa47b332f64f2a9284ec4964c64b7008",
+      "finalSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            389,
+            232
+          ],
+          "radius": [
+            135,
+            160
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "aristotle-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "roleId": "aristotle-uncommon",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "aristotle-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-uncommon-male.png",
+      "prompt": "prompts/aristotle-uncommon-male.txt",
+      "final": "assets/aristotle-uncommon-male-pixel.png",
+      "qa": "qa/aristotle-uncommon-male-pixel.json",
+      "coarse": "assets/aristotle-uncommon-male-coarse.png",
+      "coarseQa": "qa/aristotle-uncommon-male-coarse.json",
+      "faceConfig": "source/aristotle-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d3f0b2a85d8801533ae8939c764497e022a86c5fc4aa0dfef8c8afb7ff161782",
+      "finalSha256": "aa76fdff4d64ce649b00f5de2447c9619e6e79586488e8a34f598bd6bdc96203",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            105,
+            142
+          ],
+          "center": [
+            404,
+            243
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "roleId": "aristotle-uncommon",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "aristotle-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-uncommon-female.png",
+      "prompt": "prompts/aristotle-uncommon-female.txt",
+      "final": "assets/aristotle-uncommon-female-pixel.png",
+      "qa": "qa/aristotle-uncommon-female-pixel.json",
+      "coarse": "assets/aristotle-uncommon-female-coarse.png",
+      "coarseQa": "qa/aristotle-uncommon-female-coarse.json",
+      "faceConfig": "source/aristotle-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+      "finalSha256": "85e85d1954b56c573ac26fc628005e7d373a7d3f12066b85117486f22abde2b2",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            404,
+            251
+          ],
+          "radius": [
+            110,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "roleId": "aristotle-rare",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Researcher",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "aristotle-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-rare-male.png",
+      "prompt": "prompts/aristotle-rare-male.txt",
+      "final": "assets/aristotle-rare-male-pixel.png",
+      "qa": "qa/aristotle-rare-male-pixel.json",
+      "coarse": "assets/aristotle-rare-male-coarse.png",
+      "coarseQa": "qa/aristotle-rare-male-coarse.json",
+      "faceConfig": "source/aristotle-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "eeb8c4c38d639b66f55f04265d77d4cf315847ba9639a094f1ce86e6cd73315c",
+      "finalSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            118,
+            138
+          ],
+          "center": [
+            479,
+            236
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "roleId": "aristotle-rare",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Researcher",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "aristotle-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-rare-female.png",
+      "prompt": "prompts/aristotle-rare-female.txt",
+      "final": "assets/aristotle-rare-female-pixel.png",
+      "qa": "qa/aristotle-rare-female-pixel.json",
+      "coarse": "assets/aristotle-rare-female-coarse.png",
+      "coarseQa": "qa/aristotle-rare-female-coarse.json",
+      "faceConfig": "source/aristotle-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f9dbed38954d584999b22480f9ad6a495c05d2e9288407b9b10ff2454af65ba2",
+      "finalSha256": "6bfd38423b21105c95436ebd242f8e89a639752971a15bd7216afb1e797f2484",
+      "faceRegions": [
+        {
+          "center": [
+            412,
+            187
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            108,
+            132
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "roleId": "aristotle-epic",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Peripatetic Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "aristotle-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-epic-male.png",
+      "prompt": "prompts/aristotle-epic-male.txt",
+      "final": "assets/aristotle-epic-male-pixel.png",
+      "qa": "qa/aristotle-epic-male-pixel.json",
+      "coarse": "assets/aristotle-epic-male-coarse.png",
+      "coarseQa": "qa/aristotle-epic-male-coarse.json",
+      "faceConfig": "source/aristotle-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0c14f40d4e5b46e7e017632b7f62a85bb838325b3b480265bba82d6dbc7c0f0c",
+      "finalSha256": "388822a8017504b3202f97d7ffd1b9d6a676f9fe748498dd1d39af37460ef716",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            375,
+            210
+          ],
+          "radius": [
+            105,
+            130
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "aristotle-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "roleId": "aristotle-epic",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Peripatetic Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "aristotle-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-epic-female.png",
+      "prompt": "prompts/aristotle-epic-female.txt",
+      "final": "assets/aristotle-epic-female-pixel.png",
+      "qa": "qa/aristotle-epic-female-pixel.json",
+      "coarse": "assets/aristotle-epic-female-coarse.png",
+      "coarseQa": "qa/aristotle-epic-female-coarse.json",
+      "faceConfig": "source/aristotle-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "a5f13d08722e1a1f661f4b6b86963a8157a3d2a0f5265cf6f0965cf4317b7937",
+      "finalSha256": "8e43ab5ba01599a744b296796eb31c15a5cee5c3a506472655cebd9b37ff10cf",
+      "faceRegions": [
+        {
+          "center": [
+            367,
+            225
+          ],
+          "inner_scale": 0.82,
+          "radius": [
+            110,
+            135
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-parent",
+      "roleId": "euclid-parent",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Euclid",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/euclid-parent.png",
+      "prompt": "prompts/euclid-parent.txt",
+      "final": "assets/euclid-parent-pixel.png",
+      "qa": "qa/euclid-parent-pixel.json",
+      "coarse": "assets/euclid-parent-coarse.png",
+      "coarseQa": "qa/euclid-parent-coarse.json",
+      "faceConfig": "source/euclid-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "bfe89a83e24ee77bd1e973e6e93d593faafcda45a61b12bdd0e9f97f597e78f7",
+      "finalSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+      "faceRegions": [
+        {
+          "center": [
+            384,
+            239
+          ],
+          "radius": [
+            133,
+            166
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "euclid-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "roleId": "euclid-uncommon",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometrical Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "euclid-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-uncommon-male.png",
+      "prompt": "prompts/euclid-uncommon-male.txt",
+      "final": "assets/euclid-uncommon-male-pixel.png",
+      "qa": "qa/euclid-uncommon-male-pixel.json",
+      "coarse": "assets/euclid-uncommon-male-coarse.png",
+      "coarseQa": "qa/euclid-uncommon-male-coarse.json",
+      "faceConfig": "source/euclid-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5c3f3021363103559d9eb0f9b0db209ea91a0935632084ea3568fbe7d4334489",
+      "finalSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+      "faceRegions": [
+        {
+          "radius": [
+            109,
+            145
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            357,
+            221
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "roleId": "euclid-uncommon",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometrical Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "euclid-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-uncommon-female.png",
+      "prompt": "prompts/euclid-uncommon-female.txt",
+      "final": "assets/euclid-uncommon-female-pixel.png",
+      "qa": "qa/euclid-uncommon-female-pixel.json",
+      "coarse": "assets/euclid-uncommon-female-coarse.png",
+      "coarseQa": "qa/euclid-uncommon-female-coarse.json",
+      "faceConfig": "source/euclid-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "327a8f16dbe3af7871ca19f9e3e24378383fba1e36f88b9300b9c6c89d6fe85c",
+      "finalSha256": "5e53259db601357cf948db37603a9198701f1a238abfe069b5663e0e3589b657",
+      "faceRegions": [
+        {
+          "center": [
+            397,
+            232
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            107,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-rare-male",
+      "roleId": "euclid-rare",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Proof Checker",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "euclid-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-rare-male.png",
+      "prompt": "prompts/euclid-rare-male.txt",
+      "final": "assets/euclid-rare-male-pixel.png",
+      "qa": "qa/euclid-rare-male-pixel.json",
+      "coarse": "assets/euclid-rare-male-coarse.png",
+      "coarseQa": "qa/euclid-rare-male-coarse.json",
+      "faceConfig": "source/euclid-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b33ac3331d8d6cc4c56d808df80072f55a17cc74a52934293923263805ae12c4",
+      "finalSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+      "faceRegions": [
+        {
+          "radius": [
+            107,
+            137
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            305,
+            213
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-rare-female",
+      "roleId": "euclid-rare",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Proof Checker",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "euclid-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-rare-female.png",
+      "prompt": "prompts/euclid-rare-female.txt",
+      "final": "assets/euclid-rare-female-pixel.png",
+      "qa": "qa/euclid-rare-female-pixel.json",
+      "coarse": "assets/euclid-rare-female-coarse.png",
+      "coarseQa": "qa/euclid-rare-female-coarse.json",
+      "faceConfig": "source/euclid-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "fae59f3ec9ff1739d176b3b097e05f343fa708896709c4d9d7e3f92ea0187dbd",
+      "finalSha256": "09a20ed16a060e215f05a7cc49dd4069ecc7e236d9997ab5365fbe16de8504b0",
+      "faceRegions": [
+        {
+          "center": [
+            363,
+            247
+          ],
+          "radius": [
+            108,
+            138
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-epic-male",
+      "roleId": "euclid-epic",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometer of the Teaching Circle",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "euclid-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-epic-male.png",
+      "prompt": "prompts/euclid-epic-male.txt",
+      "final": "assets/euclid-epic-male-pixel.png",
+      "qa": "qa/euclid-epic-male-pixel.json",
+      "coarse": "assets/euclid-epic-male-coarse.png",
+      "coarseQa": "qa/euclid-epic-male-coarse.json",
+      "faceConfig": "source/euclid-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "712e6a2e9ec85de62bf37a058bee15a4df5e0b265c9b2675a9116f1ea317b2de",
+      "finalSha256": "42cf2e57719d066b9b755f5ea91daff7210cbc5e81ad265d98bfbca0d252e7f8",
+      "faceRegions": [
+        {
+          "radius": [
+            105,
+            135
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            359,
+            210
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "euclid-epic-female",
+      "roleId": "euclid-epic",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometer of the Teaching Circle",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "euclid-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-epic-female.png",
+      "prompt": "prompts/euclid-epic-female.txt",
+      "final": "assets/euclid-epic-female-pixel.png",
+      "qa": "qa/euclid-epic-female-pixel.json",
+      "coarse": "assets/euclid-epic-female-coarse.png",
+      "coarseQa": "qa/euclid-epic-female-coarse.json",
+      "faceConfig": "source/euclid-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "340d743348e60ea71b44ba9b0d13e7cb2f2c459634eb6544de1050e6bf3243c3",
+      "finalSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            359,
+            199
+          ],
+          "radius": [
+            103,
+            130
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "euclid-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-parent",
+      "roleId": "lysippos-parent",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Lysippos",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-parent.png",
+      "prompt": "prompts/lysippos-parent.txt",
+      "final": "assets/lysippos-parent-pixel.png",
+      "qa": "qa/lysippos-parent-pixel.json",
+      "coarse": "assets/lysippos-parent-coarse.png",
+      "coarseQa": "qa/lysippos-parent-coarse.json",
+      "faceConfig": "source/lysippos-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "de377f679bb4589ea5c77621313ae883a675a839dc32dc25327fbd2ad7e271d1",
+      "finalSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            82,
+            99
+          ],
+          "center": [
+            335,
+            277
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "lysippos-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "roleId": "lysippos-uncommon",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Bronze Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "lysippos-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-uncommon-male.png",
+      "prompt": "prompts/lysippos-uncommon-male.txt",
+      "final": "assets/lysippos-uncommon-male-pixel.png",
+      "qa": "qa/lysippos-uncommon-male-pixel.json",
+      "coarse": "assets/lysippos-uncommon-male-coarse.png",
+      "coarseQa": "qa/lysippos-uncommon-male-coarse.json",
+      "faceConfig": "source/lysippos-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "cbe0cc84967518561bf6b3243c8e5acb3d8fd96b01248077cb39f9ba1fbca5fd",
+      "finalSha256": "e839ccb17fb2dbb9b8b70452f261fe2fa0e45059285f2bfab9f5cb13682613a4",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "radius": [
+            91,
+            105
+          ],
+          "name": "face-eyes",
+          "center": [
+            356,
+            290
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "roleId": "lysippos-uncommon",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Bronze Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "lysippos-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-uncommon-female.png",
+      "prompt": "prompts/lysippos-uncommon-female.txt",
+      "final": "assets/lysippos-uncommon-female-pixel.png",
+      "qa": "qa/lysippos-uncommon-female-pixel.json",
+      "coarse": "assets/lysippos-uncommon-female-coarse.png",
+      "coarseQa": "qa/lysippos-uncommon-female-coarse.json",
+      "faceConfig": "source/lysippos-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8afde55aa3454e2dbb4764a0328b6415382b6eeacf8c0c8311bff0dadb7e0081",
+      "finalSha256": "3c2e1953c292d3cdda1389a5f6372c9478d4f81167a2e5ed32298bd0f3a84fd5",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            339,
+            284
+          ],
+          "radius": [
+            89,
+            102
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "roleId": "lysippos-rare",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Portrait Modeller",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "lysippos-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-rare-male.png",
+      "prompt": "prompts/lysippos-rare-male.txt",
+      "final": "assets/lysippos-rare-male-pixel.png",
+      "qa": "qa/lysippos-rare-male-pixel.json",
+      "coarse": "assets/lysippos-rare-male-coarse.png",
+      "coarseQa": "qa/lysippos-rare-male-coarse.json",
+      "faceConfig": "source/lysippos-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5b3c70065218e9aa88b6572a0d86abbe983a3a6ff1e89199ea5c9d971769dfdc",
+      "finalSha256": "c01a384720223f13bf87db260c3e55795e9ed675fd7e1cbebdc5a069a8840c9e",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            590,
+            300
+          ],
+          "radius": [
+            90,
+            105
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "roleId": "lysippos-rare",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Portrait Modeller",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "lysippos-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-rare-female.png",
+      "prompt": "prompts/lysippos-rare-female.txt",
+      "final": "assets/lysippos-rare-female-pixel.png",
+      "qa": "qa/lysippos-rare-female-pixel.json",
+      "coarse": "assets/lysippos-rare-female-coarse.png",
+      "coarseQa": "qa/lysippos-rare-female-coarse.json",
+      "faceConfig": "source/lysippos-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "96ab93f3b608b7da5c23b94405c3f8dff53f2fb1ce76890b7a17dc7ef663981c",
+      "finalSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            585,
+            322
+          ],
+          "radius": [
+            91,
+            105
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "roleId": "lysippos-epic",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Master of Lysippan Form",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "lysippos-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-epic-male.png",
+      "prompt": "prompts/lysippos-epic-male.txt",
+      "final": "assets/lysippos-epic-male-pixel.png",
+      "qa": "qa/lysippos-epic-male-pixel.json",
+      "coarse": "assets/lysippos-epic-male-coarse.png",
+      "coarseQa": "qa/lysippos-epic-male-coarse.json",
+      "faceConfig": "source/lysippos-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f2b36a6cd4a402341fdebd2fb2ffe6d8afdcc7c498eb55a40616a2ae69671354",
+      "finalSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+      "faceRegions": [
+        {
+          "center": [
+            263,
+            325
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            85,
+            103
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "lysippos-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "roleId": "lysippos-epic",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Master of Lysippan Form",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "lysippos-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-epic-female.png",
+      "prompt": "prompts/lysippos-epic-female.txt",
+      "final": "assets/lysippos-epic-female-pixel.png",
+      "qa": "qa/lysippos-epic-female-pixel.json",
+      "coarse": "assets/lysippos-epic-female-coarse.png",
+      "coarseQa": "qa/lysippos-epic-female-coarse.json",
+      "faceConfig": "source/lysippos-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "02473d2e0e43cdd10e6c3c747f09e0ce323b9aaff40b1da7ee9f97d2267962ad",
+      "finalSha256": "98bc0f8ddf7282e3beddfad6c3aa50b32a4219831a28ec6b3c94a3bdda15a087",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            255,
+            337
+          ],
+          "radius": [
+            88,
+            101
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-parent",
+      "roleId": "pytheas-parent",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Pytheas of Massalia",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-parent.png",
+      "prompt": "prompts/pytheas-parent.txt",
+      "final": "assets/pytheas-parent-pixel.png",
+      "qa": "qa/pytheas-parent-pixel.json",
+      "coarse": "assets/pytheas-parent-coarse.png",
+      "coarseQa": "qa/pytheas-parent-coarse.json",
+      "faceConfig": "source/pytheas-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3052c828cc818d174dca388bac7fff7302835a27e6bb19754a5dcf1484f12583",
+      "finalSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+      "faceRegions": [
+        {
+          "radius": [
+            94,
+            108
+          ],
+          "center": [
+            388,
+            231
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "pytheas-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "roleId": "pytheas-uncommon",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Expedition Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "pytheas-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-uncommon-male.png",
+      "prompt": "prompts/pytheas-uncommon-male.txt",
+      "final": "assets/pytheas-uncommon-male-pixel.png",
+      "qa": "qa/pytheas-uncommon-male-pixel.json",
+      "coarse": "assets/pytheas-uncommon-male-coarse.png",
+      "coarseQa": "qa/pytheas-uncommon-male-coarse.json",
+      "faceConfig": "source/pytheas-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "e8bc46a39bd15d5010bd7e204009ccc7a83fc00cb2087056e79f1789378fc466",
+      "finalSha256": "2ead1fe820ec5a0bd298f2f14470708c35b15d257e139c4805959aa3c5fc22eb",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            96,
+            108
+          ],
+          "center": [
+            363,
+            316
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "roleId": "pytheas-uncommon",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Expedition Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "pytheas-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-uncommon-female.png",
+      "prompt": "prompts/pytheas-uncommon-female.txt",
+      "final": "assets/pytheas-uncommon-female-pixel.png",
+      "qa": "qa/pytheas-uncommon-female-pixel.json",
+      "coarse": "assets/pytheas-uncommon-female-coarse.png",
+      "coarseQa": "qa/pytheas-uncommon-female-coarse.json",
+      "faceConfig": "source/pytheas-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "9aa4ae81b0ca32e349110799a9e77977a76be7803303eb5ce4d19924a7d3773a",
+      "finalSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            372,
+            290
+          ],
+          "radius": [
+            94,
+            104
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "roleId": "pytheas-rare",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Navigation Observer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "pytheas-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-rare-male.png",
+      "prompt": "prompts/pytheas-rare-male.txt",
+      "final": "assets/pytheas-rare-male-pixel.png",
+      "qa": "qa/pytheas-rare-male-pixel.json",
+      "coarse": "assets/pytheas-rare-male-coarse.png",
+      "coarseQa": "qa/pytheas-rare-male-coarse.json",
+      "faceConfig": "source/pytheas-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "a3f8849f58301d11408f23eab03d3db6e586b5ac2a6ca7a93f241dcf2c21eabb",
+      "finalSha256": "1135ab771cc67bc726f2373f45284ea31888a4ad1de6014d4682987d45a399a6",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "center": [
+            547,
+            316
+          ],
+          "name": "face-eyes",
+          "radius": [
+            99,
+            110
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "roleId": "pytheas-rare",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Navigation Observer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "pytheas-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-rare-female.png",
+      "prompt": "prompts/pytheas-rare-female.txt",
+      "final": "assets/pytheas-rare-female-pixel.png",
+      "qa": "qa/pytheas-rare-female-pixel.json",
+      "coarse": "assets/pytheas-rare-female-coarse.png",
+      "coarseQa": "qa/pytheas-rare-female-coarse.json",
+      "faceConfig": "source/pytheas-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "217fcd22753632571af24db3ca05a7b299fb7b0463df940713546910736eec90",
+      "finalSha256": "84bbab275809ba5a493946a2e4e80533974cc451ac5ec1d400499c27be040808",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            515,
+            313
+          ],
+          "radius": [
+            95,
+            105
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "roleId": "pytheas-epic",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Keeper of the Northern Voyage Log",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "pytheas-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-epic-male.png",
+      "prompt": "prompts/pytheas-epic-male.txt",
+      "final": "assets/pytheas-epic-male-pixel.png",
+      "qa": "qa/pytheas-epic-male-pixel.json",
+      "coarse": "assets/pytheas-epic-male-coarse.png",
+      "coarseQa": "qa/pytheas-epic-male-coarse.json",
+      "faceConfig": "source/pytheas-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0f66ff0c61a4ecc2c70bc72bdf23ec7e0922bcb073b24355121918ae4706381d",
+      "finalSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            405,
+            310
+          ],
+          "radius": [
+            98,
+            108
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "pytheas-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "roleId": "pytheas-epic",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Keeper of the Northern Voyage Log",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "pytheas-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-epic-female.png",
+      "prompt": "prompts/pytheas-epic-female.txt",
+      "final": "assets/pytheas-epic-female-pixel.png",
+      "qa": "qa/pytheas-epic-female-pixel.json",
+      "coarse": "assets/pytheas-epic-female-coarse.png",
+      "coarseQa": "qa/pytheas-epic-female-coarse.json",
+      "faceConfig": "source/pytheas-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "262ac9ae04b334f85adb5aa9bb3eda4eaff3a54e5f36ddd23a1b23d369204ce2",
+      "finalSha256": "f29a06a43978ffeadb4bcb129522d2091c414c02b0d67071ad254276c008d60c",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            95,
+            104
+          ],
+          "center": [
+            408,
+            283
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-parent",
+      "roleId": "menander-parent",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Menander",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/menander-parent.png",
+      "prompt": "prompts/menander-parent.txt",
+      "final": "assets/menander-parent-pixel.png",
+      "qa": "qa/menander-parent-pixel.json",
+      "coarse": "assets/menander-parent-coarse.png",
+      "coarseQa": "qa/menander-parent-coarse.json",
+      "faceConfig": "source/menander-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5bbd36132bd344376879d291f7bd8b640e4cc5216eb945778d56bb875d898776",
+      "finalSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+      "faceRegions": [
+        {
+          "radius": [
+            103,
+            111
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            476,
+            257
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "menander-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "roleId": "menander-uncommon",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Stage Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "menander-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/menander-uncommon-male.png",
+      "prompt": "prompts/menander-uncommon-male.txt",
+      "final": "assets/menander-uncommon-male-pixel.png",
+      "qa": "qa/menander-uncommon-male-pixel.json",
+      "coarse": "assets/menander-uncommon-male-coarse.png",
+      "coarseQa": "qa/menander-uncommon-male-coarse.json",
+      "faceConfig": "source/menander-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5e59b8136c500b77831f70b029580356c253a1027b3d9c3e8bb0494b8b6c8250",
+      "finalSha256": "7b4de156d9caf297460f9a275a938ebcb8aad1d4d091b8630cfd27e2cac370d5",
+      "faceRegions": [
+        {
+          "center": [
+            345,
+            265
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            94,
+            105
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "roleId": "menander-uncommon",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Stage Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "menander-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/menander-uncommon-female.png",
+      "prompt": "prompts/menander-uncommon-female.txt",
+      "final": "assets/menander-uncommon-female-pixel.png",
+      "qa": "qa/menander-uncommon-female-pixel.json",
+      "coarse": "assets/menander-uncommon-female-coarse.png",
+      "coarseQa": "qa/menander-uncommon-female-coarse.json",
+      "faceConfig": "source/menander-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "e3ed602124c7576239e3914fd6a4983a7b75a2c85d4efa605fbab4de22d3ced7",
+      "finalSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            97,
+            104
+          ],
+          "center": [
+            368,
+            275
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-rare-male",
+      "roleId": "menander-rare",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "New Comedy Collaborator",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "menander-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/menander-rare-male.png",
+      "prompt": "prompts/menander-rare-male.txt",
+      "final": "assets/menander-rare-male-pixel.png",
+      "qa": "qa/menander-rare-male-pixel.json",
+      "coarse": "assets/menander-rare-male-coarse.png",
+      "coarseQa": "qa/menander-rare-male-coarse.json",
+      "faceConfig": "source/menander-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "bb8b7526a2f87c46c75310f2878e15e6615fa3b0899c060fc586907ee21d63d6",
+      "finalSha256": "b98ca2d1d620d95526d1861ff252d9801dcb95457951d9f41bf9f56f43a9b310",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            89,
+            103
+          ],
+          "center": [
+            579,
+            273
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-rare-female",
+      "roleId": "menander-rare",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "New Comedy Collaborator",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "menander-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/menander-rare-female.png",
+      "prompt": "prompts/menander-rare-female.txt",
+      "final": "assets/menander-rare-female-pixel.png",
+      "qa": "qa/menander-rare-female-pixel.json",
+      "coarse": "assets/menander-rare-female-coarse.png",
+      "coarseQa": "qa/menander-rare-female-coarse.json",
+      "faceConfig": "source/menander-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "7af523ba7e36588fa74966b09445cb2f7048c4f67e6b9c7b749b69baf9161514",
+      "finalSha256": "f3fbb1650229d011fdb664271789ababcad1e466ba6b8a2681d2d4d816dcf546",
+      "faceRegions": [
+        {
+          "center": [
+            563,
+            274
+          ],
+          "name": "face-eyes",
+          "radius": [
+            84,
+            101
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-epic-male",
+      "roleId": "menander-epic",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Dramatist of New Comedy",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "menander-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/menander-epic-male.png",
+      "prompt": "prompts/menander-epic-male.txt",
+      "final": "assets/menander-epic-male-pixel.png",
+      "qa": "qa/menander-epic-male-pixel.json",
+      "coarse": "assets/menander-epic-male-coarse.png",
+      "coarseQa": "qa/menander-epic-male-coarse.json",
+      "faceConfig": "source/menander-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "de81d4fa4577c8a470ce8b178877151daeb0463bbe028f159bc44aebcad14b78",
+      "finalSha256": "2f044b49d10b03ce939489f23f55f149f5ee0a8d6f3c9137c66b7e3ae9cff1e3",
+      "faceRegions": [
+        {
+          "center": [
+            334,
+            226
+          ],
+          "name": "face-eyes",
+          "radius": [
+            92,
+            103
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "menander-epic-female",
+      "roleId": "menander-epic",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Dramatist of New Comedy",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "menander-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/menander-epic-female.png",
+      "prompt": "prompts/menander-epic-female.txt",
+      "final": "assets/menander-epic-female-pixel.png",
+      "qa": "qa/menander-epic-female-pixel.json",
+      "coarse": "assets/menander-epic-female-coarse.png",
+      "coarseQa": "qa/menander-epic-female-coarse.json",
+      "faceConfig": "source/menander-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b88819f98ebc2249f78ed9ef8a106281a63bb806b62d8acbd12eaceda45fe7fa",
+      "finalSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            350,
+            222
+          ],
+          "radius": [
+            94,
+            103
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "menander-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-parent",
+      "roleId": "demetrius-parent",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Demetrius the Besieger",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-parent.png",
+      "prompt": "prompts/demetrius-parent.txt",
+      "final": "assets/demetrius-parent-pixel.png",
+      "qa": "qa/demetrius-parent-pixel.json",
+      "coarse": "assets/demetrius-parent-coarse.png",
+      "coarseQa": "qa/demetrius-parent-coarse.json",
+      "faceConfig": "source/demetrius-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "eba352c280401cb195533eaa543922ae321e9ce6d9fcebc5b6a592834d79269c",
+      "finalSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "faceRegions": [
+        {
+          "radius": [
+            108,
+            142
+          ],
+          "center": [
+            300,
+            205
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "demetrius-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "roleId": "demetrius-uncommon",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "demetrius-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-uncommon-male.png",
+      "prompt": "prompts/demetrius-uncommon-male.txt",
+      "final": "assets/demetrius-uncommon-male-pixel.png",
+      "qa": "qa/demetrius-uncommon-male-pixel.json",
+      "coarse": "assets/demetrius-uncommon-male-coarse.png",
+      "coarseQa": "qa/demetrius-uncommon-male-coarse.json",
+      "faceConfig": "source/demetrius-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "6d5868a288895a80173a83b28a48c1d93d35d680f82f392d365641d5d398b39d",
+      "finalSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+      "faceRegions": [
+        {
+          "center": [
+            435,
+            265
+          ],
+          "radius": [
+            120,
+            145
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "roleId": "demetrius-uncommon",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "demetrius-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-uncommon-female.png",
+      "prompt": "prompts/demetrius-uncommon-female.txt",
+      "final": "assets/demetrius-uncommon-female-pixel.png",
+      "qa": "qa/demetrius-uncommon-female-pixel.json",
+      "coarse": "assets/demetrius-uncommon-female-coarse.png",
+      "coarseQa": "qa/demetrius-uncommon-female-coarse.json",
+      "faceConfig": "source/demetrius-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3150308a2ccce500e9d07f42030727c20ab5cef198be572dc276697fbb8e0215",
+      "finalSha256": "e67b979c076a6add4a6f5b1ac30b7c90cc691732eac95c2216b1a5a08f80deb5",
+      "faceRegions": [
+        {
+          "center": [
+            445,
+            240
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            110,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "roleId": "demetrius-rare",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Engineer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "demetrius-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-rare-male.png",
+      "prompt": "prompts/demetrius-rare-male.txt",
+      "final": "assets/demetrius-rare-male-pixel.png",
+      "qa": "qa/demetrius-rare-male-pixel.json",
+      "coarse": "assets/demetrius-rare-male-coarse.png",
+      "coarseQa": "qa/demetrius-rare-male-coarse.json",
+      "faceConfig": "source/demetrius-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5bf73792078c39a7532bf12bcd9611d5430fecaaacc058e40343a39e2eb07eba",
+      "finalSha256": "6776d7912d3d58d7c192f65bbc0fe3eece0b1f9d43d8d15d0f1526ea105c0f97",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "center": [
+            350,
+            250
+          ],
+          "name": "face-eyes",
+          "radius": [
+            105,
+            135
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "roleId": "demetrius-rare",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Engineer",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "demetrius-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-rare-female.png",
+      "prompt": "prompts/demetrius-rare-female.txt",
+      "final": "assets/demetrius-rare-female-pixel.png",
+      "qa": "qa/demetrius-rare-female-pixel.json",
+      "coarse": "assets/demetrius-rare-female-coarse.png",
+      "coarseQa": "qa/demetrius-rare-female-coarse.json",
+      "faceConfig": "source/demetrius-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "43fdf62470645dbd9fb47440ecdc265d3fe5050ae748015d44e4f0727681be3a",
+      "finalSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "center": [
+            368,
+            240
+          ],
+          "name": "face-eyes",
+          "radius": [
+            100,
+            128
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "roleId": "demetrius-epic",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Director of Siege Works",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "demetrius-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-epic-male.png",
+      "prompt": "prompts/demetrius-epic-male.txt",
+      "final": "assets/demetrius-epic-male-pixel.png",
+      "qa": "qa/demetrius-epic-male-pixel.json",
+      "coarse": "assets/demetrius-epic-male-coarse.png",
+      "coarseQa": "qa/demetrius-epic-male-coarse.json",
+      "faceConfig": "source/demetrius-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "fd87ed06771055e78342b14c92f1198bf40178eb33f16dc82419067de33f4842",
+      "finalSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            115,
+            140
+          ],
+          "center": [
+            270,
+            215
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "demetrius-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "roleId": "demetrius-epic",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Director of Siege Works",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "demetrius-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-epic-female.png",
+      "prompt": "prompts/demetrius-epic-female.txt",
+      "final": "assets/demetrius-epic-female-pixel.png",
+      "qa": "qa/demetrius-epic-female-pixel.json",
+      "coarse": "assets/demetrius-epic-female-coarse.png",
+      "coarseQa": "qa/demetrius-epic-female-coarse.json",
+      "faceConfig": "source/demetrius-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0bb02913d735601ec78314332fb773b73ca2e71fbffe081071e430f998f3acb3",
+      "finalSha256": "6de5605046f7d8bbbfbe8ea31501f57953444026759a44b16f5b6ff594b922c7",
+      "faceRegions": [
+        {
+          "center": [
+            290,
+            190
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            105,
+            128
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter-right",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-parent",
+      "roleId": "theophrastus-parent",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Theophrastus",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-parent.png",
+      "prompt": "prompts/theophrastus-parent.txt",
+      "final": "assets/theophrastus-parent-pixel.png",
+      "qa": "qa/theophrastus-parent-pixel.json",
+      "coarse": "assets/theophrastus-parent-coarse.png",
+      "coarseQa": "qa/theophrastus-parent-coarse.json",
+      "faceConfig": "source/theophrastus-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d0a851113e9f6374c77cbba9772cd6d5731a82addd72ae647c148ff6dc61e1a6",
+      "finalSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+      "faceRegions": [
+        {
+          "center": [
+            311,
+            221
+          ],
+          "radius": [
+            125,
+            155
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "theophrastus-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "roleId": "theophrastus-uncommon",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Plant Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "theophrastus-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-uncommon-male.png",
+      "prompt": "prompts/theophrastus-uncommon-male.txt",
+      "final": "assets/theophrastus-uncommon-male-pixel.png",
+      "qa": "qa/theophrastus-uncommon-male-pixel.json",
+      "coarse": "assets/theophrastus-uncommon-male-coarse.png",
+      "coarseQa": "qa/theophrastus-uncommon-male-coarse.json",
+      "faceConfig": "source/theophrastus-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "ea8c5c4699ad899abbbac1f45f4dd1a74f50eea93630625d7d936ad2acc88f6b",
+      "finalSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+      "faceRegions": [
+        {
+          "center": [
+            312,
+            206
+          ],
+          "radius": [
+            105,
+            140
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "roleId": "theophrastus-uncommon",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Plant Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "theophrastus-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-uncommon-female.png",
+      "prompt": "prompts/theophrastus-uncommon-female.txt",
+      "final": "assets/theophrastus-uncommon-female-pixel.png",
+      "qa": "qa/theophrastus-uncommon-female-pixel.json",
+      "coarse": "assets/theophrastus-uncommon-female-coarse.png",
+      "coarseQa": "qa/theophrastus-uncommon-female-coarse.json",
+      "faceConfig": "source/theophrastus-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "134a18473cd6c8e030860899671429ff0ca1bcdd395d8125f94ac53c63a8b717",
+      "finalSha256": "04e2b529485f2afe5a8984871bd4a69c9de71ec9f8bab5c08c07f790e1c606ac",
+      "faceRegions": [
+        {
+          "radius": [
+            109,
+            137
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            337,
+            202
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "roleId": "theophrastus-rare",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Comparative Plant Investigator",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "theophrastus-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-rare-male.png",
+      "prompt": "prompts/theophrastus-rare-male.txt",
+      "final": "assets/theophrastus-rare-male-pixel.png",
+      "qa": "qa/theophrastus-rare-male-pixel.json",
+      "coarse": "assets/theophrastus-rare-male-coarse.png",
+      "coarseQa": "qa/theophrastus-rare-male-coarse.json",
+      "faceConfig": "source/theophrastus-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f5974c51a30e4585adc008ba1986468c8c6b0ebd99ccaf7f7f803285b8d1432d",
+      "finalSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+      "faceRegions": [
+        {
+          "center": [
+            372,
+            176
+          ],
+          "name": "face-eyes",
+          "radius": [
+            107,
+            132
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "roleId": "theophrastus-rare",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Comparative Plant Investigator",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "theophrastus-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-rare-female.png",
+      "prompt": "prompts/theophrastus-rare-female.txt",
+      "final": "assets/theophrastus-rare-female-pixel.png",
+      "qa": "qa/theophrastus-rare-female-pixel.json",
+      "coarse": "assets/theophrastus-rare-female-coarse.png",
+      "coarseQa": "qa/theophrastus-rare-female-coarse.json",
+      "faceConfig": "source/theophrastus-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0711e968f6a173650afbbe19db67d42bacf562d5d88ef6334ca69207d4c44b2a",
+      "finalSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            108,
+            132
+          ],
+          "center": [
+            397,
+            172
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "roleId": "theophrastus-epic",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Peripatetic Botanical Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "theophrastus-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-epic-male.png",
+      "prompt": "prompts/theophrastus-epic-male.txt",
+      "final": "assets/theophrastus-epic-male-pixel.png",
+      "qa": "qa/theophrastus-epic-male-pixel.json",
+      "coarse": "assets/theophrastus-epic-male-coarse.png",
+      "coarseQa": "qa/theophrastus-epic-male-coarse.json",
+      "faceConfig": "source/theophrastus-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0c52ebddd6cc3fd41ce705f9b98d50e99bd84fcd1ec6ec5c91f5b09dad8c6f71",
+      "finalSha256": "157526ad1111cbebc159563e3e10c3b6787a5144305168ed7edf23b876094c29",
+      "faceRegions": [
+        {
+          "radius": [
+            109,
+            135
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            325,
+            198
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "roleId": "theophrastus-epic",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Peripatetic Botanical Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "theophrastus-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-epic-female.png",
+      "prompt": "prompts/theophrastus-epic-female.txt",
+      "final": "assets/theophrastus-epic-female-pixel.png",
+      "qa": "qa/theophrastus-epic-female-pixel.json",
+      "coarse": "assets/theophrastus-epic-female-coarse.png",
+      "coarseQa": "qa/theophrastus-epic-female-coarse.json",
+      "faceConfig": "source/theophrastus-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "04ae4adc453826ffe6a79b1d1c6068f7ab458146d06e755c8fbe6e4b341f489a",
+      "finalSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            107,
+            130
+          ],
+          "center": [
+            329,
+            198
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "theophrastus-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-parent",
+      "roleId": "zeno-parent",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Zeno of Citium",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/zeno-parent.png",
+      "prompt": "prompts/zeno-parent.txt",
+      "final": "assets/zeno-parent-pixel.png",
+      "qa": "qa/zeno-parent-pixel.json",
+      "coarse": "assets/zeno-parent-coarse.png",
+      "coarseQa": "qa/zeno-parent-coarse.json",
+      "faceConfig": "source/zeno-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0f44bfbfd28f7665fdf6c328c642f1e276711b9c28997a38dd6edb6bfd885147",
+      "finalSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "faceRegions": [
+        {
+          "center": [
+            307,
+            187
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            101,
+            127
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "zeno-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "roleId": "zeno-uncommon",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Student of the Stoa",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "zeno-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-uncommon-male.png",
+      "prompt": "prompts/zeno-uncommon-male.txt",
+      "final": "assets/zeno-uncommon-male-pixel.png",
+      "qa": "qa/zeno-uncommon-male-pixel.json",
+      "coarse": "assets/zeno-uncommon-male-coarse.png",
+      "coarseQa": "qa/zeno-uncommon-male-coarse.json",
+      "faceConfig": "source/zeno-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "310663db9be77686bb696cd30b48a16bb83e5fa4d0fea6aac636b5ee3458286a",
+      "finalSha256": "08b1c06307efe6dc18a60b9aabac689adc94a8d8b0ccc6b272d3d80062388b08",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            369,
+            249
+          ],
+          "radius": [
+            110,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "roleId": "zeno-uncommon",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Student of the Stoa",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "zeno-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-uncommon-female.png",
+      "prompt": "prompts/zeno-uncommon-female.txt",
+      "final": "assets/zeno-uncommon-female-pixel.png",
+      "qa": "qa/zeno-uncommon-female-pixel.json",
+      "coarse": "assets/zeno-uncommon-female-coarse.png",
+      "coarseQa": "qa/zeno-uncommon-female-coarse.json",
+      "faceConfig": "source/zeno-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8fd6158881b61af587a9fb7e66bc65b4299e3803c2f08225f8d141edc9e193b9",
+      "finalSha256": "2b34cf531ac407f5bc1ab14fcceb8c423190fe782e1b43904f68860c67bb916a",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "radius": [
+            108,
+            140
+          ],
+          "name": "face-eyes",
+          "center": [
+            347,
+            254
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-rare-male",
+      "roleId": "zeno-rare",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Stoic Discussion Leader",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "zeno-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-rare-male.png",
+      "prompt": "prompts/zeno-rare-male.txt",
+      "final": "assets/zeno-rare-male-pixel.png",
+      "qa": "qa/zeno-rare-male-pixel.json",
+      "coarse": "assets/zeno-rare-male-coarse.png",
+      "coarseQa": "qa/zeno-rare-male-coarse.json",
+      "faceConfig": "source/zeno-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "dfa5eafb35e7e4e6bf25e6a4562c22e3b19ad06062c809f49bc70194244fa6f6",
+      "finalSha256": "1ef7163047ea08d8ed31a492998a9f105f2ebf583e1ac84e5130ce15b6e6247a",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            105,
+            135
+          ],
+          "center": [
+            505,
+            269
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-rare-female",
+      "roleId": "zeno-rare",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Stoic Discussion Leader",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "zeno-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-rare-female.png",
+      "prompt": "prompts/zeno-rare-female.txt",
+      "final": "assets/zeno-rare-female-pixel.png",
+      "qa": "qa/zeno-rare-female-pixel.json",
+      "coarse": "assets/zeno-rare-female-coarse.png",
+      "coarseQa": "qa/zeno-rare-female-coarse.json",
+      "faceConfig": "source/zeno-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "bb1838f5e3f1ff904ff690b31a706885d8afa34293c357533b747785508717eb",
+      "finalSha256": "6613d2b52adefd37bb955fbfc28790f48720e57941330333ff6a8ea769f5d746",
+      "faceRegions": [
+        {
+          "center": [
+            410,
+            273
+          ],
+          "name": "face-eyes",
+          "radius": [
+            108,
+            137
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-epic-male",
+      "roleId": "zeno-epic",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Scholar of Stoic Ethics",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "zeno-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-epic-male.png",
+      "prompt": "prompts/zeno-epic-male.txt",
+      "final": "assets/zeno-epic-male-pixel.png",
+      "qa": "qa/zeno-epic-male-pixel.json",
+      "coarse": "assets/zeno-epic-male-coarse.png",
+      "coarseQa": "qa/zeno-epic-male-coarse.json",
+      "faceConfig": "source/zeno-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "afde4bc191c783eb19e48a9e05cbaa814a89b774627f0ccf400a5641a6d6d3bd",
+      "finalSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            108,
+            135
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            353,
+            239
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "zeno-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "zeno-epic-female",
+      "roleId": "zeno-epic",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Scholar of Stoic Ethics",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "zeno-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-epic-female.png",
+      "prompt": "prompts/zeno-epic-female.txt",
+      "final": "assets/zeno-epic-female-pixel.png",
+      "qa": "qa/zeno-epic-female-pixel.json",
+      "coarse": "assets/zeno-epic-female-coarse.png",
+      "coarseQa": "qa/zeno-epic-female-coarse.json",
+      "faceConfig": "source/zeno-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "e4e67bb488383a1233c3bbc15236568fab6e2c5adc2b44f32eebaf5c463efaf0",
+      "finalSha256": "735e92e7d4f915b7ba2d998c018a3128f949575d97b329d1df3539b9a0712b1f",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            359,
+            247
+          ],
+          "radius": [
+            109,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-parent",
+      "roleId": "ptolemy-parent",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Ptolemy I Soter",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-parent.png",
+      "prompt": "prompts/ptolemy-parent.txt",
+      "final": "assets/ptolemy-parent-pixel.png",
+      "qa": "qa/ptolemy-parent-pixel.json",
+      "coarse": "assets/ptolemy-parent-coarse.png",
+      "coarseQa": "qa/ptolemy-parent-coarse.json",
+      "faceConfig": "source/ptolemy-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "68a1d5be44504bfe06c7492d837b58b86278de73569e8a011af9e6dcb89b33c5",
+      "finalSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            89,
+            103
+          ],
+          "center": [
+            365,
+            229
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "roleId": "ptolemy-uncommon",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Egyptian Administration Clerk",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "ptolemy-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-uncommon-male.png",
+      "prompt": "prompts/ptolemy-uncommon-male.txt",
+      "final": "assets/ptolemy-uncommon-male-pixel.png",
+      "qa": "qa/ptolemy-uncommon-male-pixel.json",
+      "coarse": "assets/ptolemy-uncommon-male-coarse.png",
+      "coarseQa": "qa/ptolemy-uncommon-male-coarse.json",
+      "faceConfig": "source/ptolemy-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "118c1d92f7d56f1a2db62f3f7a5fe03affeb0330ec2d65568d365cf602d8a6da",
+      "finalSha256": "ab83a7b80b2ba16c81447120efcf88466387645b663bfa163b35426a488ec2bc",
+      "faceRegions": [
+        {
+          "center": [
+            400,
+            220
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            110,
+            140
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "roleId": "ptolemy-uncommon",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Egyptian Administration Clerk",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "ptolemy-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-uncommon-female.png",
+      "prompt": "prompts/ptolemy-uncommon-female.txt",
+      "final": "assets/ptolemy-uncommon-female-pixel.png",
+      "qa": "qa/ptolemy-uncommon-female-pixel.json",
+      "coarse": "assets/ptolemy-uncommon-female-coarse.png",
+      "coarseQa": "qa/ptolemy-uncommon-female-coarse.json",
+      "faceConfig": "source/ptolemy-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "04d6be8fd9f17aaeac82e3b29beb067f409b36c70b8a991ebc01b28dca19936d",
+      "finalSha256": "4028229c73dc2d34266b7eeeb131b43bb1079a444cedaaa2366838745aa64585",
+      "faceRegions": [
+        {
+          "radius": [
+            115,
+            145
+          ],
+          "center": [
+            410,
+            250
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "roleId": "ptolemy-rare",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Ptolemaic Supply Commissioner",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "ptolemy-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-rare-male.png",
+      "prompt": "prompts/ptolemy-rare-male.txt",
+      "final": "assets/ptolemy-rare-male-pixel.png",
+      "qa": "qa/ptolemy-rare-male-pixel.json",
+      "coarse": "assets/ptolemy-rare-male-coarse.png",
+      "coarseQa": "qa/ptolemy-rare-male-coarse.json",
+      "faceConfig": "source/ptolemy-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "6b994a7a8d5bf273f095325105f77eae4c8e28978a86c5256ee8e6700222fb66",
+      "finalSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+      "faceRegions": [
+        {
+          "center": [
+            390,
+            200
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            108,
+            135
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "roleId": "ptolemy-rare",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Ptolemaic Supply Commissioner",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "ptolemy-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-rare-female.png",
+      "prompt": "prompts/ptolemy-rare-female.txt",
+      "final": "assets/ptolemy-rare-female-pixel.png",
+      "qa": "qa/ptolemy-rare-female-pixel.json",
+      "coarse": "assets/ptolemy-rare-female-coarse.png",
+      "coarseQa": "qa/ptolemy-rare-female-coarse.json",
+      "faceConfig": "source/ptolemy-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "df7f2ee86384a6673e37d1f9ed217efb889d52c562a340d405a27cea60be5aeb",
+      "finalSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            390,
+            200
+          ],
+          "radius": [
+            105,
+            130
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "roleId": "ptolemy-epic",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Steward of Egyptian Government",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "ptolemy-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-epic-male.png",
+      "prompt": "prompts/ptolemy-epic-male.txt",
+      "final": "assets/ptolemy-epic-male-pixel.png",
+      "qa": "qa/ptolemy-epic-male-pixel.json",
+      "coarse": "assets/ptolemy-epic-male-coarse.png",
+      "coarseQa": "qa/ptolemy-epic-male-coarse.json",
+      "faceConfig": "source/ptolemy-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "4e43aefc07ca04bfd40b9e15703b7a0349b9b8145aff250f8de8bc77c2a9090c",
+      "finalSha256": "c9581112f78d21e7207bac7b9ca19c9f808f78305a1a00c1b20798fd884918ed",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "radius": [
+            120,
+            145
+          ],
+          "center": [
+            330,
+            220
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter-right",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "roleId": "ptolemy-epic",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Steward of Egyptian Government",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "ptolemy-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-epic-female.png",
+      "prompt": "prompts/ptolemy-epic-female.txt",
+      "final": "assets/ptolemy-epic-female-pixel.png",
+      "qa": "qa/ptolemy-epic-female-pixel.json",
+      "coarse": "assets/ptolemy-epic-female-coarse.png",
+      "coarseQa": "qa/ptolemy-epic-female-coarse.json",
+      "faceConfig": "source/ptolemy-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "35ebbd8f6a29ab0d2fee66f71e3aa306519881769bf1848867bf3ba6419fa5c2",
+      "finalSha256": "9a2968114c122a637733a694f4fa6423826d8a73be3f855b18dd715785b6fa3f",
+      "faceRegions": [
+        {
+          "center": [
+            370,
+            232
+          ],
+          "radius": [
+            116,
+            142
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "ptolemy-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-parent",
+      "roleId": "cleomenes-parent",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Cleomenes of Naucratis",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-parent.png",
+      "prompt": "prompts/cleomenes-parent.txt",
+      "final": "assets/cleomenes-parent-pixel.png",
+      "qa": "qa/cleomenes-parent-pixel.json",
+      "coarse": "assets/cleomenes-parent-coarse.png",
+      "coarseQa": "qa/cleomenes-parent-coarse.json",
+      "faceConfig": "source/cleomenes-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "07877e7cf0e7abaae9ed1fa66354fac7676bf2064fa561a1e03e09f00801ea66",
+      "finalSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+      "faceRegions": [
+        {
+          "radius": [
+            103,
+            112
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            357,
+            201
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "cleomenes-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "roleId": "cleomenes-uncommon",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Revenue Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "contributorId": "cleomenes-player-male",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-uncommon-male.png",
+      "prompt": "prompts/cleomenes-uncommon-male.txt",
+      "final": "assets/cleomenes-uncommon-male-pixel.png",
+      "qa": "qa/cleomenes-uncommon-male-pixel.json",
+      "coarse": "assets/cleomenes-uncommon-male-coarse.png",
+      "coarseQa": "qa/cleomenes-uncommon-male-coarse.json",
+      "faceConfig": "source/cleomenes-uncommon-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b0fedc274ec27ecb4fe341f621eafb45f5f2f4302e519e8605736427dca0caf0",
+      "finalSha256": "07579156933da061e8a297f5b42cd83560779ed7a1a2537b244a318576c508d8",
+      "faceRegions": [
+        {
+          "radius": [
+            96,
+            105
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            411,
+            249
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "roleId": "cleomenes-uncommon",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Revenue Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "contributorId": "cleomenes-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-uncommon-female.png",
+      "prompt": "prompts/cleomenes-uncommon-female.txt",
+      "final": "assets/cleomenes-uncommon-female-pixel.png",
+      "qa": "qa/cleomenes-uncommon-female-pixel.json",
+      "coarse": "assets/cleomenes-uncommon-female-coarse.png",
+      "coarseQa": "qa/cleomenes-uncommon-female-coarse.json",
+      "faceConfig": "source/cleomenes-uncommon-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "551fc83c918c70d07e1fc23bae2a310b56795bdf10bf44e03479a3a9d1f5f68c",
+      "finalSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            400,
+            249
+          ],
+          "radius": [
+            93,
+            103
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "roleId": "cleomenes-rare",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Grain Supply Auditor",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "contributorId": "cleomenes-player-male",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-rare-male.png",
+      "prompt": "prompts/cleomenes-rare-male.txt",
+      "final": "assets/cleomenes-rare-male-pixel.png",
+      "qa": "qa/cleomenes-rare-male-pixel.json",
+      "coarse": "assets/cleomenes-rare-male-coarse.png",
+      "coarseQa": "qa/cleomenes-rare-male-coarse.json",
+      "faceConfig": "source/cleomenes-rare-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3dd056fa5dc66501d69317ec314bf0bf224d41d70e990643dc53d10010110027",
+      "finalSha256": "17ee5b4dfee11c0d3839de1df156c8f01628e54f9553a6e616bcb636bef77a95",
+      "faceRegions": [
+        {
+          "radius": [
+            94,
+            105
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            552,
+            252
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "roleId": "cleomenes-rare",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Grain Supply Auditor",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "contributorId": "cleomenes-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-rare-female.png",
+      "prompt": "prompts/cleomenes-rare-female.txt",
+      "final": "assets/cleomenes-rare-female-pixel.png",
+      "qa": "qa/cleomenes-rare-female-pixel.json",
+      "coarse": "assets/cleomenes-rare-female-coarse.png",
+      "coarseQa": "qa/cleomenes-rare-female-coarse.json",
+      "faceConfig": "source/cleomenes-rare-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "573453beb6b1f9c24ae2b846250f0588012473c52775d76c4fa29d2ef301a305",
+      "finalSha256": "115e0624eb6696a7051d3d38aac3fce6dcb6b2c5d986bfa840c4d78383703653",
+      "faceRegions": [
+        {
+          "radius": [
+            93,
+            103
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            530,
+            250
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "roleId": "cleomenes-epic",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Steward of Egyptian Grain Accounts",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "contributorId": "cleomenes-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-epic-male.png",
+      "prompt": "prompts/cleomenes-epic-male.txt",
+      "final": "assets/cleomenes-epic-male-pixel.png",
+      "qa": "qa/cleomenes-epic-male-pixel.json",
+      "coarse": "assets/cleomenes-epic-male-coarse.png",
+      "coarseQa": "qa/cleomenes-epic-male-coarse.json",
+      "faceConfig": "source/cleomenes-epic-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0cf2a69c8017984da1473c4a4e6df330e6d18a60d383f4586f5d3b4cc1877220",
+      "finalSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            411,
+            283
+          ],
+          "radius": [
+            96,
+            106
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "cleomenes-epic"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "roleId": "cleomenes-epic",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Steward of Egyptian Grain Accounts",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "contributorId": "cleomenes-player-female",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-epic-female.png",
+      "prompt": "prompts/cleomenes-epic-female.txt",
+      "final": "assets/cleomenes-epic-female-pixel.png",
+      "qa": "qa/cleomenes-epic-female-pixel.json",
+      "coarse": "assets/cleomenes-epic-female-coarse.png",
+      "coarseQa": "qa/cleomenes-epic-female-coarse.json",
+      "faceConfig": "source/cleomenes-epic-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "fb33c2b4dedd3d7593d72426c4b3336c2f2faf14c917df6074b315b70cc4e0d6",
+      "finalSha256": "944d4f8b0b16aa1d5d4d1fa522b91753b0c7859f33e62091b45ffc5aa01893e7",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "radius": [
+            96,
+            108
+          ],
+          "center": [
+            414,
+            266
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "three-quarter",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "nearchus-parent",
+      "roleId": "nearchus-parent",
+      "figureId": "nearchus",
+      "figureName": "Nearchus",
+      "title": "Nearchus",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "classic-title-paths",
+      "source": "source/nearchus-parent.png",
+      "prompt": "prompts/nearchus-parent.txt",
+      "final": "assets/nearchus-parent-pixel.png",
+      "qa": "qa/nearchus-parent-pixel.json",
+      "coarse": "assets/nearchus-parent-coarse.png",
+      "coarseQa": "qa/nearchus-parent-coarse.json",
+      "faceConfig": "source/nearchus-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "a32431ad6e25670797992ecc4327634c0c9b04994efa1eb7c0d4d4f3771edeae",
+      "finalSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+      "faceRegions": [
+        {
+          "radius": [
+            110,
+            140
+          ],
+          "center": [
+            375,
+            214
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "nearchus-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "nearchus-title-male",
+      "roleId": "nearchus-title",
+      "figureId": "nearchus",
+      "figureName": "Nearchus",
+      "title": "Navigator of Nearchus",
+      "kind": "title",
+      "tier": null,
+      "gender": "male",
+      "contributorId": "nearchus-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "classic-title-paths",
+      "source": "source/nearchus-title-male.png",
+      "prompt": "prompts/nearchus-title-male.txt",
+      "final": "assets/nearchus-title-male-pixel.png",
+      "qa": "qa/nearchus-title-male-pixel.json",
+      "coarse": "assets/nearchus-title-male-coarse.png",
+      "coarseQa": "qa/nearchus-title-male-coarse.json",
+      "faceConfig": "source/nearchus-title-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+      "finalSha256": "f56222c40695ee4e78ee41c8c5a196e5abee7a7549ed9b68a17c2043617d5311",
+      "faceRegions": [
+        {
+          "radius": [
+            105,
+            133
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            370,
+            230
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "nearchus-title"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "nearchus-title-female",
+      "roleId": "nearchus-title",
+      "figureId": "nearchus",
+      "figureName": "Nearchus",
+      "title": "Navigator of Nearchus",
+      "kind": "title",
+      "tier": null,
+      "gender": "female",
+      "contributorId": "nearchus-player-female",
+      "desiredViewAngle": "Left profile",
+      "collection": "classic-title-paths",
+      "source": "source/nearchus-title-female.png",
+      "prompt": "prompts/nearchus-title-female.txt",
+      "final": "assets/nearchus-title-female-pixel.png",
+      "qa": "qa/nearchus-title-female-pixel.json",
+      "coarse": "assets/nearchus-title-female-coarse.png",
+      "coarseQa": "qa/nearchus-title-female-coarse.json",
+      "faceConfig": "source/nearchus-title-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "69284de56c3bf29639b00c942cee195732335e5766b58352f9239e8480f84659",
+      "finalSha256": "2727507158d184ca5c540686515e4d8aa33a0c1fcf142a807313ac5d333920ea",
+      "faceRegions": [
+        {
+          "radius": [
+            100,
+            125
+          ],
+          "center": [
+            335,
+            220
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "left-profile",
+      "provenance": "female representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "eumenes-parent",
+      "roleId": "eumenes-parent",
+      "figureId": "eumenes",
+      "figureName": "Eumenes of Cardia",
+      "title": "Eumenes of Cardia",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "desiredViewAngle": null,
+      "collection": "classic-title-paths",
+      "source": "source/eumenes-parent.png",
+      "prompt": "prompts/eumenes-parent.txt",
+      "final": "assets/eumenes-parent-pixel.png",
+      "qa": "qa/eumenes-parent-pixel.json",
+      "coarse": "assets/eumenes-parent-coarse.png",
+      "coarseQa": "qa/eumenes-parent-coarse.json",
+      "faceConfig": "source/eumenes-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b10fe69bb09de9d61983f535e1a32c27fd8e0cef5b60ccf601f0258a023b08b0",
+      "finalSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            475,
+            182
+          ],
+          "radius": [
+            100,
+            135
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "eumenes-parent"
+      },
+      "contributorAngleReview": null,
+      "provenance": "Named historical figure; imaginative depiction."
+    },
+    {
+      "slug": "eumenes-title-male",
+      "roleId": "eumenes-title",
+      "figureId": "eumenes",
+      "figureName": "Eumenes of Cardia",
+      "title": "Secretary of Eumenes",
+      "kind": "title",
+      "tier": null,
+      "gender": "male",
+      "contributorId": "eumenes-player-male",
+      "desiredViewAngle": "Three-quarter",
+      "collection": "classic-title-paths",
+      "source": "source/eumenes-title-male.png",
+      "prompt": "prompts/eumenes-title-male.txt",
+      "final": "assets/eumenes-title-male-pixel.png",
+      "qa": "qa/eumenes-title-male-pixel.json",
+      "coarse": "assets/eumenes-title-male-coarse.png",
+      "coarseQa": "qa/eumenes-title-male-coarse.json",
+      "faceConfig": "source/eumenes-title-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "4c14cf893ea0736375f39abc66995a72c04e111b097d71b307fef529a08fd615",
+      "finalSha256": "f9cd417bc74b9a09faf95fb66598b3b552efd3cdc65a203e2110f48e8b286058",
+      "faceRegions": [
+        {
+          "center": [
+            370,
+            300
+          ],
+          "radius": [
+            123,
+            148
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "origin": {
+        "method": "Reused unchanged",
+        "library": "figure-inner-art-v11",
+        "originalSlug": "eumenes-title"
+      },
+      "contributorAngleReview": "Retained three-quarter scene",
+      "provenance": "male representative player contributor; not the named historical figure."
+    },
+    {
+      "slug": "eumenes-title-female",
+      "roleId": "eumenes-title",
+      "figureId": "eumenes",
+      "figureName": "Eumenes of Cardia",
+      "title": "Secretary of Eumenes",
+      "kind": "title",
+      "tier": null,
+      "gender": "female",
+      "contributorId": "eumenes-player-female",
+      "desiredViewAngle": "Frontal",
+      "collection": "classic-title-paths",
+      "source": "source/eumenes-title-female.png",
+      "prompt": "prompts/eumenes-title-female.txt",
+      "final": "assets/eumenes-title-female-pixel.png",
+      "qa": "qa/eumenes-title-female-pixel.json",
+      "coarse": "assets/eumenes-title-female-coarse.png",
+      "coarseQa": "qa/eumenes-title-female-coarse.json",
+      "faceConfig": "source/eumenes-title-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "feb0f1b2408f2e9d4e0c14356045f3be2a32d7e6b420fccc5097c5053a37266d",
+      "finalSha256": "01d215e0eb2986ae78a3703baab7bb8de6fbd67d496b0aacadd91bf7b96956f7",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            112,
+            140
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            375,
+            300
+          ]
+        }
+      ],
+      "origin": {
+        "method": "Built-in image generation/edit"
+      },
+      "contributorAngleReview": "frontal-down",
+      "provenance": "female representative player contributor; not the named historical figure."
+    }
+  ]
+}

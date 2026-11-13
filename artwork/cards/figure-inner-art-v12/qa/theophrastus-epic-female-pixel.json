@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\theophrastus-epic.png",
+  "sourceSha256": "04ae4adc453826ffe6a79b1d1c6068f7ab458146d06e755c8fbe6e4b341f489a",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\theophrastus-epic-coarse.png",
+  "baseSha256": "648799322d5a520838d564e70d392e4693b4513cc7d138c307a30fa2643b8fb6",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\theophrastus-epic-coarse.json",
+  "baseQaSha256": "1651968dd38e113fabc806eb3edc238736461a77ab3521f0d356493d948cbbc1",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\theophrastus-epic-face.json",
+  "configSha256": "caa7c8c674ae9b54366835ef84b7b8ebb736c0c639e2dc39c0fa7aaedde09362",
+  "config": {
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          107,
+          130
+        ],
+        "center": [
+          329,
+          198
+        ]
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\theophrastus-epic-pixel.png",
+  "outputSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "9fb38df7cc13faecf1e8016790c4ba5bf703489b4344de025b86d021dd49dec7",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\theophrastus-epic-face-mask.png",
+  "maskSha256": "5b1660912f07378de23bcfe6110c8a73509513723608aeb7db4c3609b1441d47",
+  "maskPixelSha256": "33d8d30042c6c7e01a20450bb020f9bf93a0353a6efb1420adad9f5bb33c7f16",
+  "selectedDetailCells": 1011,
+  "retainedCoarseCells": 23489,
+  "affectedPixels": 36396,
+  "changedPixels": 36117,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

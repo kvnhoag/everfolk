@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-epic-female",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Peripatetic Botanical Scholar",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 56,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-epic-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-epic-female.png",
+  "overlaySvg": "source/overlays/theophrastus-epic-female.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+  "master": "masters/theophrastus-epic-female.vectorcraft",
+  "export": "exports/theophrastus-epic-female.png",
+  "thumbnail": "assets/theophrastus-epic-female-thumb.png",
+  "exportSha256": "b072520adebdafe92e950936505726ddee700a7fe03213e3e3a6b8a8f22b0ff4",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

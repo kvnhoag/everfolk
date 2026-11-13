@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\demetrius-epic.png",
+  "sourceSha256": "fd87ed06771055e78342b14c92f1198bf40178eb33f16dc82419067de33f4842",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\demetrius-epic-coarse.png",
+  "baseSha256": "1657993ca2ec16c98bb3f871ef9953ad8791092ae560129d73146d839fb171cb",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\demetrius-epic-coarse.json",
+  "baseQaSha256": "0649e32aaf4f65ecf81d87ede4dda545a2f6be182e143584064fffcd03e80734",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\demetrius-epic-face.json",
+  "configSha256": "b5814da5ef6f896f552007bc256cd46fb6fddffafb97796189eb71265e8716b5",
+  "config": {
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          115,
+          140
+        ],
+        "center": [
+          270,
+          215
+        ]
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\demetrius-epic-pixel.png",
+  "outputSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "06ec51ba80155757036e57f3934c9701c31d752fd186fd71fd7b5419328e2ec0",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\demetrius-epic-face-mask.png",
+  "maskSha256": "2819aa115fcd4575aed2c2f50d88f8c068f7daacf5ed7e127ead426a5f97d1e6",
+  "maskPixelSha256": "0fa13479c2e38eb54f85e1f7432fd51e80918d4a242873b8266c9b9e7cea0ee6",
+  "selectedDetailCells": 1169,
+  "retainedCoarseCells": 23331,
+  "affectedPixels": 42084,
+  "changedPixels": 41883,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

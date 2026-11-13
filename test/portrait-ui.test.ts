@@ -20,7 +20,6 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   return nextLoad(url, context);
 } });
 const { default: PixelPortrait } = await import("../client/components/PixelPortrait.tsx");
-const { default: BirthPortraitPreview } = await import("../client/components/BirthPortraitPreview.tsx");
 const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
 const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
 const { default: RelationshipTable } = await import("../client/components/RelationshipTable.tsx");
@@ -66,16 +65,16 @@ test("the actual image component uses an explicit complete descriptor over loose
   assert.match(html, /Pixel portrait of Chosen portrait, a young person/);
 });
 
-test("the assigned birth portrait keeps its face through all six ages with role clothing from youth", () => {
+test("assigned portraits keep their face through all six ages with role clothing from youth", () => {
   for (const sex of ["male", "female"] as const) {
     const life = structuredClone(engine.start(`portrait-ui-role-picker-${sex}`));
     life.originId = pack.royalty.originId;
     life.character!.sex = sex; life.character!.avatarVariant = 1;
     const before = structuredClone(life);
-    const html = renderToStaticMarkup(createElement(BirthPortraitPreview, { world: engine.world, life }));
+    const html = [0, 7, 16, 28, 48, 70].map(age => renderToStaticMarkup(createElement(PixelPortrait, { portrait: playerPortraitState(engine.world, life, { age }), name: life.character!.name }))).join("");
     const identity = sex === "female" ? "f02" : "m02";
     assert.doesNotMatch(html, /<button|aria-pressed=|Portrait choices|Choose your portrait/);
-    assert.equal((html.match(/<img\b/g) ?? []).length, 7);
+    assert.equal((html.match(/<img\b/g) ?? []).length, 6);
     assert.ok((html.match(/<img\b[^>]*>/g) ?? []).every(tag => attribute(tag, "data-portrait-identity") === identity));
     for (const [stage, wardrobe] of [["infant", "infant"], ["child", "child"], ["youth", "royalty"], ["adult", "royalty"], ["middle", "royalty"], ["elder", "royalty"]]) {
       assert.ok(html.includes(`ef-p-${identity}-${stage}-${wardrobe}-v3.png`), `${sex} ${stage}`);
@@ -85,18 +84,18 @@ test("the assigned birth portrait keeps its face through all six ages with role 
   }
 });
 
-test("birth previews display the seeded assignment without changing the life or save replay", () => {
+test("portrait rendering preserves the seeded assignment without changing the life or save replay", () => {
   const assigned = new Set<string>();
   for (let index = 0; index < 12; index++) {
     const life = engine.start(`assigned-portrait-${index}`);
     const before = structuredClone(life), saved = engine.save(life);
     const identity = `${life.character!.sex === "female" ? "f" : "m"}${String(life.character!.avatarVariant! + 1).padStart(2, "0")}`;
     assigned.add(identity);
-    const render = () => renderToStaticMarkup(createElement(BirthPortraitPreview, { world: engine.world, life }));
+    const render = () => renderToStaticMarkup(createElement(PixelPortrait, { portrait: playerPortraitState(engine.world, life), name: life.character!.name }));
     const html = render();
-    assert.equal(render(), html, "Reopening the preview cannot reroll the face.");
+    assert.equal(render(), html, "Rendering again cannot reroll the face.");
     const portraits = html.match(/<img\b[^>]*>/g) ?? [];
-    assert.equal(portraits.length, 7);
+    assert.equal(portraits.length, 1);
     assert.ok(portraits.every(tag => attribute(tag, "data-portrait-identity") === identity));
     assert.doesNotMatch(html, /<button|aria-pressed=|Portrait choices/);
     assert.deepEqual(life, before);

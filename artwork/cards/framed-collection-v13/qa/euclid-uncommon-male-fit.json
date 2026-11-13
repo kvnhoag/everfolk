@@ -1,0 +1,60 @@
+{
+  "slug": "euclid-uncommon-male",
+  "figureId": "euclid",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Geometrical Copyist",
+  "subtitle": "Euclid",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 16,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-uncommon-male.svg",
+  "fittedArt": "assets/fitted/euclid-uncommon-male.png",
+  "overlaySvg": "source/overlays/euclid-uncommon-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+  "master": "masters/euclid-uncommon-male.vectorcraft",
+  "export": "exports/euclid-uncommon-male.png",
+  "thumbnail": "assets/euclid-uncommon-male-thumb.png",
+  "exportSha256": "4f905cbb1827c6677914df91930418a9c07f1032115072bb226a0cc717befb40",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

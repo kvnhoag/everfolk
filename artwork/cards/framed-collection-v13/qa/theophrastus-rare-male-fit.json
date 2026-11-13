@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-rare-male",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Comparative Plant Investigator",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 53,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-rare-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-rare-male.png",
+  "overlaySvg": "source/overlays/theophrastus-rare-male.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+  "master": "masters/theophrastus-rare-male.vectorcraft",
+  "export": "exports/theophrastus-rare-male.png",
+  "thumbnail": "assets/theophrastus-rare-male-thumb.png",
+  "exportSha256": "89e8cc76886c801102e6bb1fdb83fc61ba1bd89333dd1d9e99465689366384db",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

@@ -1,0 +1,197 @@
+{
+  "count": 24,
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "originalSlug": "alexander-parent",
+      "figureId": "alexander",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "aristotle-parent",
+      "originalSlug": "aristotle-parent",
+      "figureId": "aristotle",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "originalSlug": "aristotle-epic",
+      "figureId": "aristotle",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "euclid-parent",
+      "originalSlug": "euclid-parent",
+      "figureId": "euclid",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "euclid-epic-female",
+      "originalSlug": "euclid-epic",
+      "figureId": "euclid",
+      "gender": "female",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "lysippos-parent",
+      "originalSlug": "lysippos-parent",
+      "figureId": "lysippos",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "originalSlug": "lysippos-epic",
+      "figureId": "lysippos",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "pytheas-parent",
+      "originalSlug": "pytheas-parent",
+      "figureId": "pytheas",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "originalSlug": "pytheas-epic",
+      "figureId": "pytheas",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "menander-parent",
+      "originalSlug": "menander-parent",
+      "figureId": "menander",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "menander-epic-female",
+      "originalSlug": "menander-epic",
+      "figureId": "menander",
+      "gender": "female",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "demetrius-parent",
+      "originalSlug": "demetrius-parent",
+      "figureId": "demetrius",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "originalSlug": "demetrius-epic",
+      "figureId": "demetrius",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "theophrastus-parent",
+      "originalSlug": "theophrastus-parent",
+      "figureId": "theophrastus",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "originalSlug": "theophrastus-epic",
+      "figureId": "theophrastus",
+      "gender": "female",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "zeno-parent",
+      "originalSlug": "zeno-parent",
+      "figureId": "zeno",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "zeno-epic-male",
+      "originalSlug": "zeno-epic",
+      "figureId": "zeno",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "originalSlug": "ptolemy-epic",
+      "figureId": "ptolemy",
+      "gender": "female",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "cleomenes-parent",
+      "originalSlug": "cleomenes-parent",
+      "figureId": "cleomenes",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "originalSlug": "cleomenes-epic",
+      "figureId": "cleomenes",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained three-quarter epic scene; front and profile stages will be regenerated"
+    },
+    {
+      "slug": "nearchus-parent",
+      "originalSlug": "nearchus-parent",
+      "figureId": "nearchus",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "nearchus-title-male",
+      "originalSlug": "nearchus-title",
+      "figureId": "nearchus",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained male title scene; counterpart will use a different head angle"
+    },
+    {
+      "slug": "eumenes-parent",
+      "originalSlug": "eumenes-parent",
+      "figureId": "eumenes",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Unchanged parent portrait"
+    },
+    {
+      "slug": "eumenes-title-male",
+      "originalSlug": "eumenes-title",
+      "figureId": "eumenes",
+      "gender": "male",
+      "sourceLibrary": "figure-inner-art-v11",
+      "reason": "Retained male title scene; counterpart will use a different head angle"
+    }
+  ]
+}

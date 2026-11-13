@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\zeno-uncommon-male.png",
+  "sourceSha256": "310663db9be77686bb696cd30b48a16bb83e5fa4d0fea6aac636b5ee3458286a",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\zeno-uncommon-male-coarse.png",
+  "baseSha256": "07c3248aa8becaadad938c3517a5fd14ba7a533e246bb0e5a08f4e2695e16862",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\zeno-uncommon-male-coarse.json",
+  "baseQaSha256": "4de3be6ac4a5b11adfba0410581451e2726f24eaea0cc93b244f0be80c0cdd87",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\zeno-uncommon-male-face.json",
+  "configSha256": "e86c04eefb064271025fca416f87c6cc4c17415ca520bcf833a3772354d22c3b",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "center": [
+          369,
+          249
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\zeno-uncommon-male-pixel.png",
+  "outputSha256": "08b1c06307efe6dc18a60b9aabac689adc94a8d8b0ccc6b272d3d80062388b08",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "5ae114e36b2a69a225ec037423b63281cc1a672f72942e5b64fbfa97b0bafc0b",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\zeno-uncommon-male-face-mask.png",
+  "maskSha256": "71071448dc31178e7825905b2aa46b742fc62eb29a34c40a02cb16793cda4322",
+  "maskPixelSha256": "853a8c1cccea15333bff157fee2824703b89032dffd3cb322ca1429ebf031da7",
+  "selectedDetailCells": 1120,
+  "retainedCoarseCells": 23380,
+  "affectedPixels": 40320,
+  "changedPixels": 40070,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

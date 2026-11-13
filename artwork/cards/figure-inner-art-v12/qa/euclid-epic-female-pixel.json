@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\euclid-epic.png",
+  "sourceSha256": "340d743348e60ea71b44ba9b0d13e7cb2f2c459634eb6544de1050e6bf3243c3",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\euclid-epic-coarse.png",
+  "baseSha256": "7591d1b3682faae81c3e971af79e89745a83862e0e9e3d6736540e8650570354",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\euclid-epic-coarse.json",
+  "baseQaSha256": "6ba3387fd6c38c7771ef9b6e6831a3f6ca13f87df65a1720ccfdb811c4bbd313",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\euclid-epic-face.json",
+  "configSha256": "22a15847d188a711f21c061816ef65451140b3ef431bca62491904174faabed3",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          359,
+          199
+        ],
+        "radius": [
+          103,
+          130
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\euclid-epic-pixel.png",
+  "outputSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "a92de22c5d779ab92c9e788a66e138a53c1aa6006fc5c11270c323e0dff993db",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\euclid-epic-face-mask.png",
+  "maskSha256": "d0ee34811dfb0bb08c4470418241d3cf37f76c135e83bd31b78b26beee273141",
+  "maskPixelSha256": "eec81cd336758d94b98439b6e8b5965840c6c36726db38bfd66ace26678eb63f",
+  "selectedDetailCells": 965,
+  "retainedCoarseCells": 23535,
+  "affectedPixels": 34740,
+  "changedPixels": 34506,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "aristotle-parent",
+  "figureId": "aristotle",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Aristotle",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-parent-pixel.png",
+  "intendedEditionLimit": 10,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 010",
+  "collectionIndex": 8,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/aristotle-parent.svg",
+  "fittedArt": "assets/fitted/aristotle-parent.png",
+  "overlaySvg": "source/overlays/aristotle-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+  "master": "masters/aristotle-parent.vectorcraft",
+  "export": "exports/aristotle-parent.png",
+  "thumbnail": "assets/aristotle-parent-thumb.png",
+  "exportSha256": "197d227778fa0949ad5257eab20a4a68fd97225f1c0f72dc82ee0c636161155f",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 628992,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

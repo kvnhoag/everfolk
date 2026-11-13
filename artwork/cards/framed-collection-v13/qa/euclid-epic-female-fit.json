@@ -1,0 +1,60 @@
+{
+  "slug": "euclid-epic-female",
+  "figureId": "euclid",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Geometer of the Teaching Circle",
+  "subtitle": "Euclid",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 21,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-epic-female.svg",
+  "fittedArt": "assets/fitted/euclid-epic-female.png",
+  "overlaySvg": "source/overlays/euclid-epic-female.svg",
+  "titleSize": 46,
+  "sourceArtSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+  "master": "masters/euclid-epic-female.vectorcraft",
+  "export": "exports/euclid-epic-female.png",
+  "thumbnail": "assets/euclid-epic-female-thumb.png",
+  "exportSha256": "0a61999e2480b89bde04bc5fa1e86f3c6e3162280fda1359a1e0590d93caab2d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

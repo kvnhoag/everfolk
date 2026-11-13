@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-epic-female",
+  "figureId": "demetrius",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Director of Siege Works",
+  "subtitle": "Demetrius the Besieger",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 49,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-epic-female.svg",
+  "fittedArt": "assets/fitted/demetrius-epic-female.png",
+  "overlaySvg": "source/overlays/demetrius-epic-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "6de5605046f7d8bbbfbe8ea31501f57953444026759a44b16f5b6ff594b922c7",
+  "master": "masters/demetrius-epic-female.vectorcraft",
+  "export": "exports/demetrius-epic-female.png",
+  "thumbnail": "assets/demetrius-epic-female-thumb.png",
+  "exportSha256": "bb7a0fcbb6d3a20ee0b94b31c90995fb455c7e63babd8e72448a83071e526ed1",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

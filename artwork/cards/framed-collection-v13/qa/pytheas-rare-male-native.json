@@ -1,0 +1,388 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 82,
+    "dirty": false,
+    "fileInfoTitle": "pytheas-rare-male.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 264.6603515624999,
+          "x": 96,
+          "y": 979.93775
+        },
+        "fill": "#1a2b27",
+        "id": 81,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card type live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "PLAYER CONTRIBUTION",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.38427734375,
+          "width": 98.619873046875,
+          "x": 717.380126953125,
+          "y": 1189.422125
+        },
+        "fill": "#eee4ce",
+        "id": 80,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition limit live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "LIMIT 100",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 79,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 19.359375,
+          "width": 317.93750000000006,
+          "x": 96,
+          "y": 1110.5
+        },
+        "fill": "#59604f",
+        "id": 78,
+        "kind": "Type",
+        "locked": false,
+        "name": "Preview status live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "ART PREVIEW · MALE CONTRIBUTOR",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 54.840000000000146,
+          "width": 349.68000000000006,
+          "x": 96,
+          "y": 1042
+        },
+        "fill": "#1a2b27",
+        "id": 77,
+        "kind": "Type",
+        "locked": false,
+        "name": "Collection live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Pytheas of Massalia",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 69.04611328124997,
+          "x": 734.95388671875,
+          "y": 978.00025
+        },
+        "fill": "#1a2b27",
+        "id": 76,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "RARE",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 24.19921875,
+          "width": 284.46835937500003,
+          "x": 307.7658203125,
+          "y": 146.937
+        },
+        "fill": "#d7b47a",
+        "id": 75,
+        "kind": "Type",
+        "locked": false,
+        "name": "Affiliation live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "PYTHEAS OF MASSALIA",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 98.712,
+          "width": 656.064,
+          "x": 121.96799999999996,
+          "y": 63.468
+        },
+        "fill": "#eee4ce",
+        "id": 74,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          82
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Navigation Observer",
+        "visible": true
+      }
+    ],
+    "objects": 81,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v13\\source\\cards\\pytheas-rare-male.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "pytheas-rare-male.svg",
+    "tool": "selection",
+    "total": 8,
+    "uid": 95,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 82,
+    "dirty": false,
+    "fileInfoTitle": "pytheas-rare-male.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 81,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v13\\source\\cards\\pytheas-rare-male.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "pytheas-rare-male.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 95,
+    "units": "Pixels"
+  }
+}

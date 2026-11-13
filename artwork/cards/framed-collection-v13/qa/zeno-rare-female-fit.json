@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-rare-female",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Stoic Discussion Leader",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 61,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-rare-female.svg",
+  "fittedArt": "assets/fitted/zeno-rare-female.png",
+  "overlaySvg": "source/overlays/zeno-rare-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "6613d2b52adefd37bb955fbfc28790f48720e57941330333ff6a8ea769f5d746",
+  "master": "masters/zeno-rare-female.vectorcraft",
+  "export": "exports/zeno-rare-female.png",
+  "thumbnail": "assets/zeno-rare-female-thumb.png",
+  "exportSha256": "21f5b59790f0b87d3f1e9d742c50e4dcd329dc4c579290669b83c226f24a9503",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

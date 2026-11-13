@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-rare-female",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Comparative Plant Investigator",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 54,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-rare-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-rare-female.png",
+  "overlaySvg": "source/overlays/theophrastus-rare-female.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+  "master": "masters/theophrastus-rare-female.vectorcraft",
+  "export": "exports/theophrastus-rare-female.png",
+  "thumbnail": "assets/theophrastus-rare-female-thumb.png",
+  "exportSha256": "62b6bfdc1824b6c04824b0eeac8544c4d630d534accb59bfb9f8466adcc4b17b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

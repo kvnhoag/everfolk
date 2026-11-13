@@ -1,0 +1,60 @@
+{
+  "slug": "pytheas-parent",
+  "figureId": "pytheas",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Pytheas of Massalia",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 29,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-parent.svg",
+  "fittedArt": "assets/fitted/pytheas-parent.png",
+  "overlaySvg": "source/overlays/pytheas-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+  "master": "masters/pytheas-parent.vectorcraft",
+  "export": "exports/pytheas-parent.png",
+  "thumbnail": "assets/pytheas-parent-thumb.png",
+  "exportSha256": "4f33f9b2b9829da1f3064690e722e3891a12deca6d111d5022bbeb96b3376a50",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

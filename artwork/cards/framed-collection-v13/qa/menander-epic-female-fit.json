@@ -1,0 +1,60 @@
+{
+  "slug": "menander-epic-female",
+  "figureId": "menander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Dramatist of New Comedy",
+  "subtitle": "Menander",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 42,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-epic-female.svg",
+  "fittedArt": "assets/fitted/menander-epic-female.png",
+  "overlaySvg": "source/overlays/menander-epic-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+  "master": "masters/menander-epic-female.vectorcraft",
+  "export": "exports/menander-epic-female.png",
+  "thumbnail": "assets/menander-epic-female-thumb.png",
+  "exportSha256": "169c83e27562993e6c09870e34484516e2536d0f68bd0bfdc473a2398c5e4390",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

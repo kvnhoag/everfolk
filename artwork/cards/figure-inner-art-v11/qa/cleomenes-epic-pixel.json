@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\cleomenes-epic.png",
+  "sourceSha256": "0cf2a69c8017984da1473c4a4e6df330e6d18a60d383f4586f5d3b4cc1877220",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\cleomenes-epic-coarse.png",
+  "baseSha256": "19b746a6fa490792424e63da52611d02b5caa5033a4ca53b25e65331104ea9fd",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\cleomenes-epic-coarse.json",
+  "baseQaSha256": "6413b9afff424f61288cfdc273c3bd0529946670d12e3cb26ce23dab7a7f2d76",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\cleomenes-epic-face.json",
+  "configSha256": "dfb9fa75de1f7e9e63b1ce0fe05bbf9a32625a794f48853316bd76ecb1332d45",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          411,
+          283
+        ],
+        "radius": [
+          96,
+          106
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\cleomenes-epic-pixel.png",
+  "outputSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "ed2eb81060e1e58d58a5fc1878cd780a499650c3871b55b01597dde30f1f6361",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\cleomenes-epic-face-mask.png",
+  "maskSha256": "317c64ba32106bfd2daca094496ecd67441e40a3911860fff0ae821df140fb00",
+  "maskPixelSha256": "a0cbffef8fe8f08231f001993089986dcef8fcaa93121dff95db709d631f2659",
+  "selectedDetailCells": 735,
+  "retainedCoarseCells": 23765,
+  "affectedPixels": 26460,
+  "changedPixels": 26264,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

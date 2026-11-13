@@ -1,0 +1,2052 @@
+{
+  "libraryId": "everfolk-figure-inner-art-v11",
+  "date": "2026-11-13",
+  "expected": 48,
+  "complete": 48,
+  "parentCount": 13,
+  "subcardCount": 35,
+  "scope": "11 default figure paths with three contribution subcards each, plus Nearchus and Eumenes from playable classic/sample title paths.",
+  "sources": [
+    "../../../src/figures/world.ts",
+    "../../../scripts/alexandria-historical-titles.mjs",
+    "../../../research/figure-biographies.json"
+  ],
+  "filter": {
+    "name": "PixelOE 1.0.0 legacy CPU",
+    "output": [
+      840,
+      1050
+    ],
+    "bodyPixelSize": 3,
+    "facePixelSize": 2,
+    "gridType": "mixed grid with whole-cell regional selection"
+  },
+  "titleArtAliases": {
+    "Right Hand of Alexander": "alexander-rare",
+    "General of Alexander": "alexander-epic",
+    "Disciple of Aristotle": "aristotle-epic",
+    "Disciple of Euclid": "euclid-epic",
+    "Scholar of Theophrastus": "theophrastus-epic",
+    "Trusted Adviser of Ptolemy": "ptolemy-epic",
+    "Navigator of Nearchus": "nearchus-title",
+    "Secretary of Eumenes": "eumenes-title"
+  },
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Alexander the Great",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/alexander-parent.png",
+      "prompt": "prompts/alexander-parent.txt",
+      "final": "assets/alexander-parent-pixel.png",
+      "qa": "qa/alexander-parent-pixel.json",
+      "coarseQa": "qa/alexander-parent-coarse.json",
+      "coarse": "assets/alexander-parent-coarse.png",
+      "faceConfig": "source/alexander-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "1ca0963e6e745afd3e4e96ad26c79b47cf3965ee45337c75f0fb7ef01ba7c89e",
+      "finalSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+      "faceRegions": [
+        {
+          "center": [
+            378,
+            307
+          ],
+          "radius": [
+            77,
+            94
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; user-supplied character/equipment design reference."
+    },
+    {
+      "slug": "alexander-uncommon",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-uncommon.png",
+      "prompt": "prompts/alexander-uncommon.txt",
+      "final": "assets/alexander-uncommon-pixel.png",
+      "qa": "qa/alexander-uncommon-pixel.json",
+      "coarseQa": "qa/alexander-uncommon-coarse.json",
+      "coarse": "assets/alexander-uncommon-coarse.png",
+      "faceConfig": "source/alexander-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d5b1de4ac8a4370206da04f8fa7cf8d23c387bc20e04cf8cc852f55044f35764",
+      "finalSha256": "7fdc13b3f399fdc005ea100f3f55c397d44c1c71f6c11e5c7a21c3f1a6146d8e",
+      "faceRegions": [
+        {
+          "radius": [
+            116,
+            142
+          ],
+          "name": "face-eyes",
+          "center": [
+            348,
+            184
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; user-supplied character/equipment design reference."
+    },
+    {
+      "slug": "alexander-rare",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Campaign Staff Officer",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-rare.png",
+      "prompt": "prompts/alexander-rare.txt",
+      "final": "assets/alexander-rare-pixel.png",
+      "qa": "qa/alexander-rare-pixel.json",
+      "coarseQa": "qa/alexander-rare-coarse.json",
+      "coarse": "assets/alexander-rare-coarse.png",
+      "faceConfig": "source/alexander-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "7337596cf50239cacc98c4168862e95f74b0beb692d98e15b49666dbda3c226d",
+      "finalSha256": "964f83769a0c4648127823ba40a6021681687d84e3839a1af960ac805ec5597e",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            117,
+            142
+          ],
+          "center": [
+            349,
+            181
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; user-supplied character/equipment design reference."
+    },
+    {
+      "slug": "alexander-epic",
+      "figureId": "alexander",
+      "figureName": "Alexander the Great",
+      "title": "Trusted Campaign Commander",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/alexander-epic.png",
+      "prompt": "prompts/alexander-epic.txt",
+      "final": "assets/alexander-epic-pixel.png",
+      "qa": "qa/alexander-epic-pixel.json",
+      "coarseQa": "qa/alexander-epic-coarse.json",
+      "coarse": "assets/alexander-epic-coarse.png",
+      "faceConfig": "source/alexander-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3acffe0b96045322301aebc3fc32871fed27f8b82aa19a99dfb07e8a20d083c7",
+      "finalSha256": "8d0f35b2df4173faa6bd33d1160ece3c5dcaf6b31570b8f0a66ad266b189a6d2",
+      "faceRegions": [
+        {
+          "radius": [
+            115,
+            145
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            242,
+            197
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; user-supplied character/equipment design reference."
+    },
+    {
+      "slug": "aristotle-parent",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Aristotle",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-parent.png",
+      "prompt": "prompts/aristotle-parent.txt",
+      "final": "assets/aristotle-parent-pixel.png",
+      "qa": "qa/aristotle-parent-pixel.json",
+      "coarseQa": "qa/aristotle-parent-coarse.json",
+      "coarse": "assets/aristotle-parent-coarse.png",
+      "faceConfig": "source/aristotle-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8579f2793664415fb8bf12063bc957a1fa47b332f64f2a9284ec4964c64b7008",
+      "finalSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            389,
+            232
+          ],
+          "radius": [
+            135,
+            160
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "aristotle-uncommon",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-uncommon.png",
+      "prompt": "prompts/aristotle-uncommon.txt",
+      "final": "assets/aristotle-uncommon-pixel.png",
+      "qa": "qa/aristotle-uncommon-pixel.json",
+      "coarseQa": "qa/aristotle-uncommon-coarse.json",
+      "coarse": "assets/aristotle-uncommon-coarse.png",
+      "faceConfig": "source/aristotle-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d3bf95b3bf7425d588e7ab384a27c3760d7f0fa7c437da89e9028677622d26f4",
+      "finalSha256": "ed02636c40f7c22a4dc567393611b881f4c531ba115c88f0eec5c5a301fe26e6",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            409,
+            276
+          ],
+          "radius": [
+            112,
+            140
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "aristotle-rare",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Lyceum Researcher",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-rare.png",
+      "prompt": "prompts/aristotle-rare.txt",
+      "final": "assets/aristotle-rare-pixel.png",
+      "qa": "qa/aristotle-rare-pixel.json",
+      "coarseQa": "qa/aristotle-rare-coarse.json",
+      "coarse": "assets/aristotle-rare-coarse.png",
+      "faceConfig": "source/aristotle-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "ad6eefe61d4c2b25feeb2ba932e196552e1716bcbcf716f78cb517f3d766e7f9",
+      "finalSha256": "fd0f01e4ae6d46a09fee7ac64f2351a7241a092a29b33921911365f7ea729d9d",
+      "faceRegions": [
+        {
+          "center": [
+            397,
+            232
+          ],
+          "radius": [
+            110,
+            140
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "aristotle-epic",
+      "figureId": "aristotle",
+      "figureName": "Aristotle",
+      "title": "Peripatetic Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/aristotle-epic.png",
+      "prompt": "prompts/aristotle-epic.txt",
+      "final": "assets/aristotle-epic-pixel.png",
+      "qa": "qa/aristotle-epic-pixel.json",
+      "coarseQa": "qa/aristotle-epic-coarse.json",
+      "coarse": "assets/aristotle-epic-coarse.png",
+      "faceConfig": "source/aristotle-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0c14f40d4e5b46e7e017632b7f62a85bb838325b3b480265bba82d6dbc7c0f0c",
+      "finalSha256": "388822a8017504b3202f97d7ffd1b9d6a676f9fe748498dd1d39af37460ef716",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            375,
+            210
+          ],
+          "radius": [
+            105,
+            130
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "euclid-parent",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Euclid",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/euclid-parent.png",
+      "prompt": "prompts/euclid-parent.txt",
+      "final": "assets/euclid-parent-pixel.png",
+      "qa": "qa/euclid-parent-pixel.json",
+      "coarseQa": "qa/euclid-parent-coarse.json",
+      "coarse": "assets/euclid-parent-coarse.png",
+      "faceConfig": "source/euclid-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "bfe89a83e24ee77bd1e973e6e93d593faafcda45a61b12bdd0e9f97f597e78f7",
+      "finalSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+      "faceRegions": [
+        {
+          "center": [
+            384,
+            239
+          ],
+          "radius": [
+            133,
+            166
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "euclid-uncommon",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometrical Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-uncommon.png",
+      "prompt": "prompts/euclid-uncommon.txt",
+      "final": "assets/euclid-uncommon-pixel.png",
+      "qa": "qa/euclid-uncommon-pixel.json",
+      "coarseQa": "qa/euclid-uncommon-coarse.json",
+      "coarse": "assets/euclid-uncommon-coarse.png",
+      "faceConfig": "source/euclid-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "cd7d9069078c8affcd6fd665795e235f70111c3303b9e59d1c32d6674bb26182",
+      "finalSha256": "8b7811bf843ca1a57c051980495b099760b55fb728ab73eb047f688482ee4f78",
+      "faceRegions": [
+        {
+          "radius": [
+            108,
+            138
+          ],
+          "center": [
+            367,
+            243
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "euclid-rare",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Proof Checker",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-rare.png",
+      "prompt": "prompts/euclid-rare.txt",
+      "final": "assets/euclid-rare-pixel.png",
+      "qa": "qa/euclid-rare-pixel.json",
+      "coarseQa": "qa/euclid-rare-coarse.json",
+      "coarse": "assets/euclid-rare-coarse.png",
+      "faceConfig": "source/euclid-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "fd8c55112659e60fc3cb20147c1dc1727527f28e59e34b93ddd61591a7c24dbb",
+      "finalSha256": "956a94dbe5cb32b334e2c871a42a0c61c43f0c9db96863ee7f6122d9fbdf9520",
+      "faceRegions": [
+        {
+          "radius": [
+            105,
+            130
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            375,
+            238
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "euclid-epic",
+      "figureId": "euclid",
+      "figureName": "Euclid",
+      "title": "Geometer of the Teaching Circle",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/euclid-epic.png",
+      "prompt": "prompts/euclid-epic.txt",
+      "final": "assets/euclid-epic-pixel.png",
+      "qa": "qa/euclid-epic-pixel.json",
+      "coarseQa": "qa/euclid-epic-coarse.json",
+      "coarse": "assets/euclid-epic-coarse.png",
+      "faceConfig": "source/euclid-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "340d743348e60ea71b44ba9b0d13e7cb2f2c459634eb6544de1050e6bf3243c3",
+      "finalSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            359,
+            199
+          ],
+          "radius": [
+            103,
+            130
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "lysippos-parent",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Lysippos",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-parent.png",
+      "prompt": "prompts/lysippos-parent.txt",
+      "final": "assets/lysippos-parent-pixel.png",
+      "qa": "qa/lysippos-parent-pixel.json",
+      "coarseQa": "qa/lysippos-parent-coarse.json",
+      "coarse": "assets/lysippos-parent-coarse.png",
+      "faceConfig": "source/lysippos-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "de377f679bb4589ea5c77621313ae883a675a839dc32dc25327fbd2ad7e271d1",
+      "finalSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            82,
+            99
+          ],
+          "center": [
+            335,
+            277
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "lysippos-uncommon",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Bronze Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-uncommon.png",
+      "prompt": "prompts/lysippos-uncommon.txt",
+      "final": "assets/lysippos-uncommon-pixel.png",
+      "qa": "qa/lysippos-uncommon-pixel.json",
+      "coarseQa": "qa/lysippos-uncommon-coarse.json",
+      "coarse": "assets/lysippos-uncommon-coarse.png",
+      "faceConfig": "source/lysippos-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8fff5c552ab3c10568af81a5d96bed793bad6eaf541c9dc3b8d2a64f3be3218a",
+      "finalSha256": "bf0762b046efec7693c2d309a66c100ef992bdeb9de407136b371a74729c14a3",
+      "faceRegions": [
+        {
+          "center": [
+            350,
+            333
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            101,
+            113
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "lysippos-rare",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Portrait Modeller",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-rare.png",
+      "prompt": "prompts/lysippos-rare.txt",
+      "final": "assets/lysippos-rare-pixel.png",
+      "qa": "qa/lysippos-rare-pixel.json",
+      "coarseQa": "qa/lysippos-rare-coarse.json",
+      "coarse": "assets/lysippos-rare-coarse.png",
+      "faceConfig": "source/lysippos-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "1b0f3059fc23891316a541bed2bd8d5a343b6614afff5f4b883b44977936fcf3",
+      "finalSha256": "9572b00155a168576a3d78188f34aa4aeb89b18e8815ce8eb50e9157478cc512",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            375,
+            334
+          ],
+          "radius": [
+            104,
+            111
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "lysippos-epic",
+      "figureId": "lysippos",
+      "figureName": "Lysippos",
+      "title": "Master of Lysippan Form",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/lysippos-epic.png",
+      "prompt": "prompts/lysippos-epic.txt",
+      "final": "assets/lysippos-epic-pixel.png",
+      "qa": "qa/lysippos-epic-pixel.json",
+      "coarseQa": "qa/lysippos-epic-coarse.json",
+      "coarse": "assets/lysippos-epic-coarse.png",
+      "faceConfig": "source/lysippos-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f2b36a6cd4a402341fdebd2fb2ffe6d8afdcc7c498eb55a40616a2ae69671354",
+      "finalSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+      "faceRegions": [
+        {
+          "center": [
+            263,
+            325
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            85,
+            103
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "pytheas-parent",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Pytheas of Massalia",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-parent.png",
+      "prompt": "prompts/pytheas-parent.txt",
+      "final": "assets/pytheas-parent-pixel.png",
+      "qa": "qa/pytheas-parent-pixel.json",
+      "coarseQa": "qa/pytheas-parent-coarse.json",
+      "coarse": "assets/pytheas-parent-coarse.png",
+      "faceConfig": "source/pytheas-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3052c828cc818d174dca388bac7fff7302835a27e6bb19754a5dcf1484f12583",
+      "finalSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+      "faceRegions": [
+        {
+          "radius": [
+            94,
+            108
+          ],
+          "center": [
+            388,
+            231
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "pytheas-uncommon",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Expedition Provisioner",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-uncommon.png",
+      "prompt": "prompts/pytheas-uncommon.txt",
+      "final": "assets/pytheas-uncommon-pixel.png",
+      "qa": "qa/pytheas-uncommon-pixel.json",
+      "coarseQa": "qa/pytheas-uncommon-coarse.json",
+      "coarse": "assets/pytheas-uncommon-coarse.png",
+      "faceConfig": "source/pytheas-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "56fe4e15d2ea5437f3a505b792a7add21b2db0a48b45979a6e9162380e9144c3",
+      "finalSha256": "79b71445457852e301c78dc1262e46dfa0b220a6f8a5bcf3c965032145d17560",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "radius": [
+            95,
+            103
+          ],
+          "name": "face-eyes",
+          "center": [
+            402,
+            337
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "pytheas-rare",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Navigation Observer",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-rare.png",
+      "prompt": "prompts/pytheas-rare.txt",
+      "final": "assets/pytheas-rare-pixel.png",
+      "qa": "qa/pytheas-rare-pixel.json",
+      "coarseQa": "qa/pytheas-rare-coarse.json",
+      "coarse": "assets/pytheas-rare-coarse.png",
+      "faceConfig": "source/pytheas-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "efb0e5a618b7a0676c7e601709fe1748f9793a21ab88f684568bd9e192eac5cb",
+      "finalSha256": "cb564ae342304fe61dc3a25d0f680add8963186d6e40fd80eb96a3ca2114bcec",
+      "faceRegions": [
+        {
+          "center": [
+            345,
+            340
+          ],
+          "radius": [
+            93,
+            102
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "pytheas-epic",
+      "figureId": "pytheas",
+      "figureName": "Pytheas of Massalia",
+      "title": "Keeper of the Northern Voyage Log",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/pytheas-epic.png",
+      "prompt": "prompts/pytheas-epic.txt",
+      "final": "assets/pytheas-epic-pixel.png",
+      "qa": "qa/pytheas-epic-pixel.json",
+      "coarseQa": "qa/pytheas-epic-coarse.json",
+      "coarse": "assets/pytheas-epic-coarse.png",
+      "faceConfig": "source/pytheas-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0f66ff0c61a4ecc2c70bc72bdf23ec7e0922bcb073b24355121918ae4706381d",
+      "finalSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            405,
+            310
+          ],
+          "radius": [
+            98,
+            108
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "menander-parent",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Menander",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/menander-parent.png",
+      "prompt": "prompts/menander-parent.txt",
+      "final": "assets/menander-parent-pixel.png",
+      "qa": "qa/menander-parent-pixel.json",
+      "coarseQa": "qa/menander-parent-coarse.json",
+      "coarse": "assets/menander-parent-coarse.png",
+      "faceConfig": "source/menander-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5bbd36132bd344376879d291f7bd8b640e4cc5216eb945778d56bb875d898776",
+      "finalSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+      "faceRegions": [
+        {
+          "radius": [
+            103,
+            111
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            476,
+            257
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "menander-uncommon",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Stage Copyist",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/menander-uncommon.png",
+      "prompt": "prompts/menander-uncommon.txt",
+      "final": "assets/menander-uncommon-pixel.png",
+      "qa": "qa/menander-uncommon-pixel.json",
+      "coarseQa": "qa/menander-uncommon-coarse.json",
+      "coarse": "assets/menander-uncommon-coarse.png",
+      "faceConfig": "source/menander-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "5c4a7db47c9c19fe38aad01a41d43298f5196081dcbecdff072072fafae16649",
+      "finalSha256": "485ef1e73dcf2b5efbb541c0a16521e7ba26ea40338f733c3cdfae105cd696cd",
+      "faceRegions": [
+        {
+          "center": [
+            385,
+            318
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            104,
+            111
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "menander-rare",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "New Comedy Collaborator",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/menander-rare.png",
+      "prompt": "prompts/menander-rare.txt",
+      "final": "assets/menander-rare-pixel.png",
+      "qa": "qa/menander-rare-pixel.json",
+      "coarseQa": "qa/menander-rare-coarse.json",
+      "coarse": "assets/menander-rare-coarse.png",
+      "faceConfig": "source/menander-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "9225a004bbc32d663cc8f58d1c2edc179a4160774f1a3f085df0556d84d0bfe0",
+      "finalSha256": "a3e268c804e465a7d0b0e7fd09e07d2dbcfdbb3f65ce6d85d9623c9f515d928d",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            91,
+            102
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            330,
+            308
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "menander-epic",
+      "figureId": "menander",
+      "figureName": "Menander",
+      "title": "Dramatist of New Comedy",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/menander-epic.png",
+      "prompt": "prompts/menander-epic.txt",
+      "final": "assets/menander-epic-pixel.png",
+      "qa": "qa/menander-epic-pixel.json",
+      "coarseQa": "qa/menander-epic-coarse.json",
+      "coarse": "assets/menander-epic-coarse.png",
+      "faceConfig": "source/menander-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b88819f98ebc2249f78ed9ef8a106281a63bb806b62d8acbd12eaceda45fe7fa",
+      "finalSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            350,
+            222
+          ],
+          "radius": [
+            94,
+            103
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "demetrius-parent",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Demetrius the Besieger",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-parent.png",
+      "prompt": "prompts/demetrius-parent.txt",
+      "final": "assets/demetrius-parent-pixel.png",
+      "qa": "qa/demetrius-parent-pixel.json",
+      "coarseQa": "qa/demetrius-parent-coarse.json",
+      "coarse": "assets/demetrius-parent-coarse.png",
+      "faceConfig": "source/demetrius-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "eba352c280401cb195533eaa543922ae321e9ce6d9fcebc5b6a592834d79269c",
+      "finalSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "faceRegions": [
+        {
+          "radius": [
+            108,
+            142
+          ],
+          "center": [
+            300,
+            205
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "demetrius-uncommon",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Workshop Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-uncommon.png",
+      "prompt": "prompts/demetrius-uncommon.txt",
+      "final": "assets/demetrius-uncommon-pixel.png",
+      "qa": "qa/demetrius-uncommon-pixel.json",
+      "coarseQa": "qa/demetrius-uncommon-coarse.json",
+      "coarse": "assets/demetrius-uncommon-coarse.png",
+      "faceConfig": "source/demetrius-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d1fc5b02b7cf6eb4162d93e6e1a09e769aca1cc49aaa35038c971327374d9e34",
+      "finalSha256": "d070c00bd1280301731d2ca9ca6cd0cdcb8157c0111ab3b4ae9290f76693ea0d",
+      "faceRegions": [
+        {
+          "radius": [
+            128,
+            145
+          ],
+          "center": [
+            510,
+            280
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "demetrius-rare",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Engineer",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-rare.png",
+      "prompt": "prompts/demetrius-rare.txt",
+      "final": "assets/demetrius-rare-pixel.png",
+      "qa": "qa/demetrius-rare-pixel.json",
+      "coarseQa": "qa/demetrius-rare-coarse.json",
+      "coarse": "assets/demetrius-rare-coarse.png",
+      "faceConfig": "source/demetrius-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "c4093290b98b7e1b26873dc4119698e0b42bb2e06af73dbf551728b5e0e1d0c9",
+      "finalSha256": "178fd13ea57f54af506dfa40faa9c8061bb010bdee354ae70a4ef5f6f34a73d8",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "center": [
+            415,
+            294
+          ],
+          "radius": [
+            115,
+            142
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "demetrius-epic",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Director of Siege Works",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/demetrius-epic.png",
+      "prompt": "prompts/demetrius-epic.txt",
+      "final": "assets/demetrius-epic-pixel.png",
+      "qa": "qa/demetrius-epic-pixel.json",
+      "coarseQa": "qa/demetrius-epic-coarse.json",
+      "coarse": "assets/demetrius-epic-coarse.png",
+      "faceConfig": "source/demetrius-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "fd87ed06771055e78342b14c92f1198bf40178eb33f16dc82419067de33f4842",
+      "finalSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            115,
+            140
+          ],
+          "center": [
+            270,
+            215
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "theophrastus-parent",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Theophrastus",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-parent.png",
+      "prompt": "prompts/theophrastus-parent.txt",
+      "final": "assets/theophrastus-parent-pixel.png",
+      "qa": "qa/theophrastus-parent-pixel.json",
+      "coarseQa": "qa/theophrastus-parent-coarse.json",
+      "coarse": "assets/theophrastus-parent-coarse.png",
+      "faceConfig": "source/theophrastus-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d0a851113e9f6374c77cbba9772cd6d5731a82addd72ae647c148ff6dc61e1a6",
+      "finalSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+      "faceRegions": [
+        {
+          "center": [
+            311,
+            221
+          ],
+          "radius": [
+            125,
+            155
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "theophrastus-uncommon",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Plant Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-uncommon.png",
+      "prompt": "prompts/theophrastus-uncommon.txt",
+      "final": "assets/theophrastus-uncommon-pixel.png",
+      "qa": "qa/theophrastus-uncommon-pixel.json",
+      "coarseQa": "qa/theophrastus-uncommon-coarse.json",
+      "coarse": "assets/theophrastus-uncommon-coarse.png",
+      "faceConfig": "source/theophrastus-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "21e280c61cf9f7616c329e7319b53ec79f497f4491fd2f08625035ea67a39b82",
+      "finalSha256": "54af99bc7e59f3f45d069fd28c0f4a5c3052643cbb2c1757b95041649a4f2ef2",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "center": [
+            329,
+            214
+          ],
+          "radius": [
+            111,
+            140
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "theophrastus-rare",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Comparative Plant Investigator",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-rare.png",
+      "prompt": "prompts/theophrastus-rare.txt",
+      "final": "assets/theophrastus-rare-pixel.png",
+      "qa": "qa/theophrastus-rare-pixel.json",
+      "coarseQa": "qa/theophrastus-rare-coarse.json",
+      "coarse": "assets/theophrastus-rare-coarse.png",
+      "faceConfig": "source/theophrastus-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "f0bb4646ee5cfb5d5add2b0facc337c4caf29553a3e617665899cf8e48706a16",
+      "finalSha256": "389251b50a18c397b1e31452d39a3b0635b23a00cd46d502b518498a10fdf154",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            336,
+            211
+          ],
+          "radius": [
+            105,
+            135
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "theophrastus-epic",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Peripatetic Botanical Scholar",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/theophrastus-epic.png",
+      "prompt": "prompts/theophrastus-epic.txt",
+      "final": "assets/theophrastus-epic-pixel.png",
+      "qa": "qa/theophrastus-epic-pixel.json",
+      "coarseQa": "qa/theophrastus-epic-coarse.json",
+      "coarse": "assets/theophrastus-epic-coarse.png",
+      "faceConfig": "source/theophrastus-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "04ae4adc453826ffe6a79b1d1c6068f7ab458146d06e755c8fbe6e4b341f489a",
+      "finalSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            107,
+            130
+          ],
+          "center": [
+            329,
+            198
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "zeno-parent",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Zeno of Citium",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/zeno-parent.png",
+      "prompt": "prompts/zeno-parent.txt",
+      "final": "assets/zeno-parent-pixel.png",
+      "qa": "qa/zeno-parent-pixel.json",
+      "coarseQa": "qa/zeno-parent-coarse.json",
+      "coarse": "assets/zeno-parent-coarse.png",
+      "faceConfig": "source/zeno-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0f44bfbfd28f7665fdf6c328c642f1e276711b9c28997a38dd6edb6bfd885147",
+      "finalSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "faceRegions": [
+        {
+          "center": [
+            307,
+            187
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            101,
+            127
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "zeno-uncommon",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Student of the Stoa",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-uncommon.png",
+      "prompt": "prompts/zeno-uncommon.txt",
+      "final": "assets/zeno-uncommon-pixel.png",
+      "qa": "qa/zeno-uncommon-pixel.json",
+      "coarseQa": "qa/zeno-uncommon-coarse.json",
+      "coarse": "assets/zeno-uncommon-coarse.png",
+      "faceConfig": "source/zeno-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "17df04ac10f7428e81dd0136c68da7a3d59615f001b56c417e0682f464254864",
+      "finalSha256": "ac30082b783c507fcb260ddd4fe4d4741deefd22debe5124330a1c61319d0166",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "inner_scale": 0.82,
+          "radius": [
+            112,
+            138
+          ],
+          "center": [
+            344,
+            240
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "zeno-rare",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Stoic Discussion Leader",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-rare.png",
+      "prompt": "prompts/zeno-rare.txt",
+      "final": "assets/zeno-rare-pixel.png",
+      "qa": "qa/zeno-rare-pixel.json",
+      "coarseQa": "qa/zeno-rare-coarse.json",
+      "coarse": "assets/zeno-rare-coarse.png",
+      "faceConfig": "source/zeno-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "c39849b7f05f335946218223f93bafc6c35a230613f2f9b2cc9c48ea76c96cfb",
+      "finalSha256": "86ec41190f3f1f84c2b84154cd238326a7ab7702974e9ae6db23bb7bc6718af8",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            103,
+            130
+          ],
+          "center": [
+            344,
+            210
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "zeno-epic",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Scholar of Stoic Ethics",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/zeno-epic.png",
+      "prompt": "prompts/zeno-epic.txt",
+      "final": "assets/zeno-epic-pixel.png",
+      "qa": "qa/zeno-epic-pixel.json",
+      "coarseQa": "qa/zeno-epic-coarse.json",
+      "coarse": "assets/zeno-epic-coarse.png",
+      "faceConfig": "source/zeno-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "afde4bc191c783eb19e48a9e05cbaa814a89b774627f0ccf400a5641a6d6d3bd",
+      "finalSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "radius": [
+            108,
+            135
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            353,
+            239
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "ptolemy-parent",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Ptolemy I Soter",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-parent.png",
+      "prompt": "prompts/ptolemy-parent.txt",
+      "final": "assets/ptolemy-parent-pixel.png",
+      "qa": "qa/ptolemy-parent-pixel.json",
+      "coarseQa": "qa/ptolemy-parent-coarse.json",
+      "coarse": "assets/ptolemy-parent-coarse.png",
+      "faceConfig": "source/ptolemy-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "1df4f55dd70e09798283dbbf5655042ded0c3a0e31adad939668f2c4510e0ea9",
+      "finalSha256": "6d5d30468a32e7659350cc12f612f908e5c13fc25df2beae9fa86eb510a3669f",
+      "faceRegions": [
+        {
+          "radius": [
+            102,
+            135
+          ],
+          "center": [
+            385,
+            190
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "ptolemy-uncommon",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Egyptian Administration Clerk",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-uncommon.png",
+      "prompt": "prompts/ptolemy-uncommon.txt",
+      "final": "assets/ptolemy-uncommon-pixel.png",
+      "qa": "qa/ptolemy-uncommon-pixel.json",
+      "coarseQa": "qa/ptolemy-uncommon-coarse.json",
+      "coarse": "assets/ptolemy-uncommon-coarse.png",
+      "faceConfig": "source/ptolemy-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "81ee236558720cfaaf7fd520a89a076394fe48a60df04b1b9a7c3dc1cc25673b",
+      "finalSha256": "6391ad6d15d3912aa1533ada1d22650dad501900a2afd15834d3590a8cd1e93f",
+      "faceRegions": [
+        {
+          "center": [
+            410,
+            260
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            125,
+            150
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "ptolemy-rare",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Ptolemaic Supply Commissioner",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-rare.png",
+      "prompt": "prompts/ptolemy-rare.txt",
+      "final": "assets/ptolemy-rare-pixel.png",
+      "qa": "qa/ptolemy-rare-pixel.json",
+      "coarseQa": "qa/ptolemy-rare-coarse.json",
+      "coarse": "assets/ptolemy-rare-coarse.png",
+      "faceConfig": "source/ptolemy-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "8f52e0127868cd0960c021fff881ef481787989f2893230111576a75168f07d0",
+      "finalSha256": "3170f0b118a1c76c8da3adda34ff5b1cf53837f3367f9590a17047fe819f9789",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            440,
+            205
+          ],
+          "radius": [
+            112,
+            135
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "ptolemy-epic",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Steward of Egyptian Government",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/ptolemy-epic.png",
+      "prompt": "prompts/ptolemy-epic.txt",
+      "final": "assets/ptolemy-epic-pixel.png",
+      "qa": "qa/ptolemy-epic-pixel.json",
+      "coarseQa": "qa/ptolemy-epic-coarse.json",
+      "coarse": "assets/ptolemy-epic-coarse.png",
+      "faceConfig": "source/ptolemy-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "35ebbd8f6a29ab0d2fee66f71e3aa306519881769bf1848867bf3ba6419fa5c2",
+      "finalSha256": "9a2968114c122a637733a694f4fa6423826d8a73be3f855b18dd715785b6fa3f",
+      "faceRegions": [
+        {
+          "center": [
+            370,
+            232
+          ],
+          "radius": [
+            116,
+            142
+          ],
+          "name": "face-eyes",
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "cleomenes-parent",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Cleomenes of Naucratis",
+      "kind": "parent",
+      "tier": null,
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-parent.png",
+      "prompt": "prompts/cleomenes-parent.txt",
+      "final": "assets/cleomenes-parent-pixel.png",
+      "qa": "qa/cleomenes-parent-pixel.json",
+      "coarseQa": "qa/cleomenes-parent-coarse.json",
+      "coarse": "assets/cleomenes-parent-coarse.png",
+      "faceConfig": "source/cleomenes-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "07877e7cf0e7abaae9ed1fa66354fac7676bf2064fa561a1e03e09f00801ea66",
+      "finalSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+      "faceRegions": [
+        {
+          "radius": [
+            103,
+            112
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            357,
+            201
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "cleomenes-uncommon",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Revenue Records Assistant",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-uncommon.png",
+      "prompt": "prompts/cleomenes-uncommon.txt",
+      "final": "assets/cleomenes-uncommon-pixel.png",
+      "qa": "qa/cleomenes-uncommon-pixel.json",
+      "coarseQa": "qa/cleomenes-uncommon-coarse.json",
+      "coarse": "assets/cleomenes-uncommon-coarse.png",
+      "faceConfig": "source/cleomenes-uncommon-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "47871a91638b06f7ca580190372e53b26677413922aaf6ff099d4bfa9384c856",
+      "finalSha256": "b763056d2afd01036dd5c6252620aae995e3c49581a49f691ac394c11a71c001",
+      "faceRegions": [
+        {
+          "center": [
+            441,
+            295
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "radius": [
+            98,
+            104
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "cleomenes-rare",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Grain Supply Auditor",
+      "kind": "contribution",
+      "tier": "rare",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-rare.png",
+      "prompt": "prompts/cleomenes-rare.txt",
+      "final": "assets/cleomenes-rare-pixel.png",
+      "qa": "qa/cleomenes-rare-pixel.json",
+      "coarseQa": "qa/cleomenes-rare-coarse.json",
+      "coarse": "assets/cleomenes-rare-coarse.png",
+      "faceConfig": "source/cleomenes-rare-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "9b8231811242ffe611ec748527c2bd1784bc1c82102f1f8ad674494d9605c5d4",
+      "finalSha256": "75ab945e2958d1c97fa66edfc65f4c56e7666e72ed49d26166a76ccea8cbd740",
+      "faceRegions": [
+        {
+          "radius": [
+            98,
+            105
+          ],
+          "name": "face-eyes",
+          "center": [
+            417,
+            228
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "cleomenes-epic",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Steward of Egyptian Grain Accounts",
+      "kind": "contribution",
+      "tier": "epic",
+      "collection": "current-figure-paths",
+      "source": "source/cleomenes-epic.png",
+      "prompt": "prompts/cleomenes-epic.txt",
+      "final": "assets/cleomenes-epic-pixel.png",
+      "qa": "qa/cleomenes-epic-pixel.json",
+      "coarseQa": "qa/cleomenes-epic-coarse.json",
+      "coarse": "assets/cleomenes-epic-coarse.png",
+      "faceConfig": "source/cleomenes-epic-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "0cf2a69c8017984da1473c4a4e6df330e6d18a60d383f4586f5d3b4cc1877220",
+      "finalSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            411,
+            283
+          ],
+          "radius": [
+            96,
+            106
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "nearchus-parent",
+      "figureId": "nearchus",
+      "figureName": "Nearchus",
+      "title": "Nearchus",
+      "kind": "parent",
+      "tier": null,
+      "collection": "classic-title-paths",
+      "source": "source/nearchus-parent.png",
+      "prompt": "prompts/nearchus-parent.txt",
+      "final": "assets/nearchus-parent-pixel.png",
+      "qa": "qa/nearchus-parent-pixel.json",
+      "coarseQa": "qa/nearchus-parent-coarse.json",
+      "coarse": "assets/nearchus-parent-coarse.png",
+      "faceConfig": "source/nearchus-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "a32431ad6e25670797992ecc4327634c0c9b04994efa1eb7c0d4d4f3771edeae",
+      "finalSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+      "faceRegions": [
+        {
+          "radius": [
+            110,
+            140
+          ],
+          "center": [
+            375,
+            214
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "nearchus-title",
+      "figureId": "nearchus",
+      "figureName": "Nearchus",
+      "title": "Navigator of Nearchus",
+      "kind": "title",
+      "tier": null,
+      "collection": "classic-title-paths",
+      "source": "source/nearchus-title.png",
+      "prompt": "prompts/nearchus-title.txt",
+      "final": "assets/nearchus-title-pixel.png",
+      "qa": "qa/nearchus-title-pixel.json",
+      "coarseQa": "qa/nearchus-title-coarse.json",
+      "coarse": "assets/nearchus-title-coarse.png",
+      "faceConfig": "source/nearchus-title-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+      "finalSha256": "f56222c40695ee4e78ee41c8c5a196e5abee7a7549ed9b68a17c2043617d5311",
+      "faceRegions": [
+        {
+          "radius": [
+            105,
+            133
+          ],
+          "inner_scale": 0.82,
+          "center": [
+            370,
+            230
+          ],
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "eumenes-parent",
+      "figureId": "eumenes",
+      "figureName": "Eumenes of Cardia",
+      "title": "Eumenes of Cardia",
+      "kind": "parent",
+      "tier": null,
+      "collection": "classic-title-paths",
+      "source": "source/eumenes-parent.png",
+      "prompt": "prompts/eumenes-parent.txt",
+      "final": "assets/eumenes-parent-pixel.png",
+      "qa": "qa/eumenes-parent-pixel.json",
+      "coarseQa": "qa/eumenes-parent-coarse.json",
+      "coarse": "assets/eumenes-parent-coarse.png",
+      "faceConfig": "source/eumenes-parent-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b10fe69bb09de9d61983f535e1a32c27fd8e0cef5b60ccf601f0258a023b08b0",
+      "finalSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+      "faceRegions": [
+        {
+          "inner_scale": 0.82,
+          "name": "face-eyes",
+          "center": [
+            475,
+            182
+          ],
+          "radius": [
+            100,
+            135
+          ]
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    },
+    {
+      "slug": "eumenes-title",
+      "figureId": "eumenes",
+      "figureName": "Eumenes of Cardia",
+      "title": "Secretary of Eumenes",
+      "kind": "title",
+      "tier": null,
+      "collection": "classic-title-paths",
+      "source": "source/eumenes-title.png",
+      "prompt": "prompts/eumenes-title.txt",
+      "final": "assets/eumenes-title-pixel.png",
+      "qa": "qa/eumenes-title-pixel.json",
+      "coarseQa": "qa/eumenes-title-coarse.json",
+      "coarse": "assets/eumenes-title-coarse.png",
+      "faceConfig": "source/eumenes-title-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "4c14cf893ea0736375f39abc66995a72c04e111b097d71b307fef529a08fd615",
+      "finalSha256": "f9cd417bc74b9a09faf95fb66598b3b552efd3cdc65a203e2110f48e8b286058",
+      "faceRegions": [
+        {
+          "center": [
+            370,
+            300
+          ],
+          "radius": [
+            123,
+            148
+          ],
+          "inner_scale": 0.82,
+          "name": "face-eyes"
+        }
+      ],
+      "provenance": "Built-in generated illustration; imagined appearance and role-appropriate clothing informed by local authored content."
+    }
+  ]
+}

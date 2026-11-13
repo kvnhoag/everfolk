@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-epic-male.png",
+  "sourceSha256": "40a04a6091321998f53afe480e953f76300c3a1bb0c1b8e53711fa4bc3273b17",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-epic-male-coarse.png",
+  "baseSha256": "caaf274b294fe10e12dac999fce4b87d40e434f5eac893ad5a5b079fc923a232",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-epic-male-coarse.json",
+  "baseQaSha256": "5e84feb385a236a4b9b8c50a78259718b47d37f05a7909511cd785c5cbb5843a",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-epic-male-face.json",
+  "configSha256": "fa7ca47f58d8f972522e6db213d0065d5822bf1ff0749e9ca05c4378be436222",
+  "config": {
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "center": [
+          580,
+          180
+        ],
+        "radius": [
+          108,
+          135
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-epic-male-pixel.png",
+  "outputSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "ffdd0d2329f785c6afd8842e074b6ce9788ab279e6e32bb942b9ad61b2ac5535",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-epic-male-face-mask.png",
+  "maskSha256": "f00854ef09a42dee75a39135e2e60e447598e6fcf671b5b0eb9625def480683e",
+  "maskPixelSha256": "05d46378878a2b9732dcadf6527659d752e96887554ab4bbb44dd83975986e6c",
+  "selectedDetailCells": 1060,
+  "retainedCoarseCells": 23440,
+  "affectedPixels": 38160,
+  "changedPixels": 37953,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "date": "2026-11-13",
+  "numberingMeaning": "edition copy number / maximum copies per card",
+  "interpretation": "User-supplied rarity limits interpreted as per-card edition caps; these are visual templates, not issuance enforcement.",
+  "exampleCopyNumber": 1,
+  "rarities": [
+    { "id": "legendary", "label": "Legendary", "editionLimitPerCard": 10, "fullArt": true },
+    { "id": "epic", "label": "Epic", "editionLimitPerCard": 25, "fullArt": false },
+    { "id": "rare", "label": "Rare", "editionLimitPerCard": 50, "fullArt": false },
+    { "id": "uncommon", "label": "Uncommon", "editionLimitPerCard": 100, "fullArt": false },
+    { "id": "common", "label": "Common", "editionLimitPerCard": null, "fullArt": false }
+  ],
+  "unlimitedDisplay": "UNLIMITED"
+}

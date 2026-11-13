@@ -254,6 +254,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                       <li key="rarity" className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>
                         {row.rarityLabel}
                       </li>
+                      {row.editionText && <li key="edition" className="ledger-chip">Edition {row.editionText}</li>}
                       <li key="action" className="ledger-chip">{row.actionName}</li>
                       <li key="aff" className="ledger-chip is-faience">Affection {row.affection}</li>
                     </ul>
@@ -297,6 +298,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                 </h2>
                 <ul className="ledger-chips">
                   <li key="rarity" className={`ledger-chip ${row.isFigure ? "is-gold" : "is-faience"}`}>{row.rarityLabel}</li>
+                  {row.editionText && <li key="edition" className="ledger-chip">Edition {row.editionText}</li>}
                   <li key="action" className="ledger-chip">{row.actionName}</li>
                   <li key="aff" className="ledger-chip is-faience">Affection {row.affection}</li>
                 </ul>

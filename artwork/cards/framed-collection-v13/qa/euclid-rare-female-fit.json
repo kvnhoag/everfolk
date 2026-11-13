@@ -1,0 +1,60 @@
+{
+  "slug": "euclid-rare-female",
+  "figureId": "euclid",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Proof Checker",
+  "subtitle": "Euclid",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 19,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-rare-female.svg",
+  "fittedArt": "assets/fitted/euclid-rare-female.png",
+  "overlaySvg": "source/overlays/euclid-rare-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "09a20ed16a060e215f05a7cc49dd4069ecc7e236d9997ab5365fbe16de8504b0",
+  "master": "masters/euclid-rare-female.vectorcraft",
+  "export": "exports/euclid-rare-female.png",
+  "thumbnail": "assets/euclid-rare-female-thumb.png",
+  "exportSha256": "a24b47f5faa0649e89c67a7985aeb6f2e37593a956f9a3afb3c32fa20af582aa",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

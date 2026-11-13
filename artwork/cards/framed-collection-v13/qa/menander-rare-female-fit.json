@@ -1,0 +1,60 @@
+{
+  "slug": "menander-rare-female",
+  "figureId": "menander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "New Comedy Collaborator",
+  "subtitle": "Menander",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 40,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-rare-female.svg",
+  "fittedArt": "assets/fitted/menander-rare-female.png",
+  "overlaySvg": "source/overlays/menander-rare-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "f3fbb1650229d011fdb664271789ababcad1e466ba6b8a2681d2d4d816dcf546",
+  "master": "masters/menander-rare-female.vectorcraft",
+  "export": "exports/menander-rare-female.png",
+  "thumbnail": "assets/menander-rare-female-thumb.png",
+  "exportSha256": "fc7f111a1b365df3a7527ae838524ab3c2f13913d69b8ba34045a05263d89e86",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

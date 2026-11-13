@@ -1,0 +1,52 @@
+{
+  "slug": "alexander-parent",
+  "figureId": "alexander",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Alexander the Great",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-parent-pixel.png",
+  "intendedEditionLimit": 10,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 010",
+  "collectionIndex": 1,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/alexander-parent.svg",
+  "fittedArt": "assets/fitted/alexander-parent.png",
+  "overlaySvg": "source/overlays/alexander-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+  "master": "masters/alexander-parent.vectorcraft",
+  "export": "exports/alexander-parent.png",
+  "thumbnail": "assets/alexander-parent-thumb.png",
+  "exportSha256": "d0a0f0755e968ac5d3ad25e627a1df7eec94d1c126205474c983eaeba75d0d9d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 628992,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

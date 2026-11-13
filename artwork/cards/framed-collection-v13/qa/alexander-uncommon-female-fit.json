@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-uncommon-female",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Campaign Provisioner",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 3,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-uncommon-female.svg",
+  "fittedArt": "assets/fitted/alexander-uncommon-female.png",
+  "overlaySvg": "source/overlays/alexander-uncommon-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "924a15e1befd233494db20ff9a2e5775bea8a0cc1744f100a1f58c8bb11372e9",
+  "master": "masters/alexander-uncommon-female.vectorcraft",
+  "export": "exports/alexander-uncommon-female.png",
+  "thumbnail": "assets/alexander-uncommon-female-thumb.png",
+  "exportSha256": "4308d7ac7b99e991d0fc125211a60da5381ece9f34f52374c0acfd52d00e9a99",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

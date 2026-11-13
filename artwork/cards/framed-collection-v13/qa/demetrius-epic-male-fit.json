@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-epic-male",
+  "figureId": "demetrius",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Director of Siege Works",
+  "subtitle": "Demetrius the Besieger",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 48,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-epic-male.svg",
+  "fittedArt": "assets/fitted/demetrius-epic-male.png",
+  "overlaySvg": "source/overlays/demetrius-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+  "master": "masters/demetrius-epic-male.vectorcraft",
+  "export": "exports/demetrius-epic-male.png",
+  "thumbnail": "assets/demetrius-epic-male-thumb.png",
+  "exportSha256": "bfb27f8ec27f7a082fc8bb665339a6711d95bcfdae98f7da251a04d820d9e877",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}
