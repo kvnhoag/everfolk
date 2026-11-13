@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
 import type { OnlinePlay } from "../types/online-play.ts";
-import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife } from "../mutations/lives.ts";
+import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife, restoreWealthObservations, syncLifeWealthObservation } from "../mutations/lives.ts";
 import { engineForLife, loadAnyLife } from "../lib/world-session.ts";
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
@@ -45,15 +45,21 @@ interface SessionState {
 function initialSession(startFresh = false, startFreshFrom?: LifeState): SessionState {
   try {
     if (!startFresh && typeof window !== "undefined") {
+      restoreWealthObservations(window.localStorage);
       const restored = readSavedLife(window.localStorage);
-      if (restored) return {
-        life: restored, notice: "",
-        hasBegun: hasLifeBegun(window.localStorage, restored),
-        hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
-        unreadableSave: null,
-      };
+      if (restored) {
+        const hasBegun = hasLifeBegun(window.localStorage, restored);
+        if (hasBegun || restored.phase === "ended") syncLifeWealthObservation(window.localStorage, restored);
+        return {
+          life: restored, notice: "",
+          hasBegun,
+          hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
+          unreadableSave: null,
+        };
+      }
       return { life: createSampleLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
     }
+    if (typeof window !== "undefined") restoreWealthObservations(window.localStorage);
     return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
   } catch (error) {
     const raw = typeof window !== "undefined" ? readRawSavedLife(window.localStorage) : null;
@@ -180,6 +186,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
       setFocusSelection({ key: yearlyFocusStorageKey(next), id: "everyday" });
     }
+    if (typeof window !== "undefined") syncLifeWealthObservation(window.localStorage, next);
     lifeRef.current = next;
     setLife(next);
     hasBegunRef.current = true;
@@ -253,6 +260,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       void rankedPlay.sync(next).then(adopted => {
         yearClock.setYear(playbackYearKey(adopted));
         setClockProgress(yearClock.read().progress);
+        if (typeof window !== "undefined" && (hasBegunRef.current || adopted.phase === "ended")) {
+          syncLifeWealthObservation(window.localStorage, adopted);
+        }
         lifeRef.current = adopted;
         setLife(adopted);
         setSaveStatus("saved");
@@ -277,6 +287,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
     if (fresh) yearClock.reset(playbackYearKey(next)); else yearClock.setYear(playbackYearKey(next));
     setClockProgress(yearClock.read().progress);
+    if (typeof window !== "undefined" && !fresh && (hasBegunRef.current || next.phase === "ended")) {
+      syncLifeWealthObservation(window.localStorage, next);
+    }
     lifeRef.current = next;
     setLife(next);
     setSaveStatus("saving");
@@ -411,6 +424,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const beginLife = useCallback(() => {
     if (hasBegunRef.current || !hasRevealedStats || lifeRef.current !== life) return;
     hasBegunRef.current = true;
+    if (typeof window !== "undefined") syncLifeWealthObservation(window.localStorage, life);
     setHasBegun(true);
     setPlaying(true);
     setNotice("");

@@ -165,6 +165,7 @@ const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
 export const ARCHIVE_KEY = "everfolk:alexandria-lives:v3";
+export const WEALTH_OBSERVATIONS_KEY = "everfolk:wealth-observations:v1";
 export let PRESENTATION_KEY = presentationKeyFor(builtinEngine);
 export const ARCHIVE_LIMIT = 10;
 export function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-sample:v3" : `everfolk:active:${engine.world.id}:${engine.fingerprint}`; }
