@@ -447,3 +447,9 @@
 .aoe-plan-check li { display: flex; gap: 6px; align-items: flex-start; padding: 4px 8px; border-left: 3px solid #b98a2c; background: #fbefd2; color: #5c4210; font-size: 12px; line-height: 1.35; }
 .aoe-plan-check li.is-blocked { border-left-color: #a3361f; background: #f8e3dc; color: #7a2413; font-weight: 600; }
 .aoe-plan-check svg { flex: none; margin-top: 2px; }
+
+/* Each icon carries one short word underneath, so the bar reads without hovering. */
+.aoe-cell.is-icon-only { flex-direction: column; align-items: center; gap: 1px; }
+.aoe-cell-parts { display: inline-flex; align-items: center; gap: 8px; }
+.aoe-cell-word { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; line-height: 1.1; text-transform: uppercase; opacity: .85; }
+.aoe-cond.is-icon-only { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; }

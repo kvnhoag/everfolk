@@ -161,7 +161,8 @@ test("the decision dialog starts with the first choice's visible effects and has
   assert.match(html, /compact-skill-preview-label">Take the offered work/);
   assert.match(html, /Knowledge/);
   assert.match(html, /Tool handling/);
-  assert.equal((html.match(/Tool handling/g) ?? []).length, 1, "skills appear in the shared preview without duplicating inline summaries");
+  const firstOption = html.match(/<button class="life-choice-commit[^"]*"[\s\S]*?<\/button>/)?.[0] ?? "";
+  assert.match(firstOption, /Tool handling/, "every option shows its own skill changes without hovering");
   assert.doesNotMatch(html, /life-option-preview|aria-pressed=|Preview skills|>Preview[ <]|Early interest|Future practice|compact-skill-node/);
   assert.equal(chosen, 0);
 });

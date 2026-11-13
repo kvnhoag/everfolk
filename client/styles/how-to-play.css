@@ -104,7 +104,7 @@ dialog.how-to-play .htp-detail-block h4{display:flex;align-items:center;gap:8px;
 .htp-nav{display:flex;gap:10px;margin-left:auto}
 .htp-nav button{min-height:46px;padding:0 20px;border-radius:2px;font:700 16px/1 var(--ef-font-body);cursor:pointer}
 .htp-back{border:1px solid var(--htp-ink);background:transparent;color:var(--htp-ink)}
-.htp-primary{border:1px solid var(--htp-teal);background:var(--htp-teal);color:#f8eed8}
+.htp-primary{border:1px solid var(--htp-teal);background:var(--htp-teal);color:#fff;font-weight:800 !important}
 .htp-primary:hover{background:#0f2a32}
 .htp-primary.is-nudged{animation:htp-nudge 1.4s ease-in-out infinite}
 @keyframes htp-nudge{0%,100%{box-shadow:0 0 0 0 #e2bd73cc}50%{box-shadow:0 0 0 8px #e2bd7300}}

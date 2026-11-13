@@ -4,7 +4,7 @@ import { createEngine } from "../src/engine.ts";
 import { getNetWorth } from "../src/economy.ts";
 import type { LifeEngine, LifeState } from "../src/types.ts";
 import { buildPriceHistory } from "../client/demo/price-history.ts";
-import { lifeRecordChanges } from "../client/models/life-record.ts";
+import { GOODS, lifeRecordChanges } from "../client/models/life-record.ts";
 import { demoWorld } from "./fixtures/demo/world.ts";
 
 function fixture(): LifeEngine {
@@ -33,14 +33,16 @@ function ready(engine: LifeEngine, life: LifeState): LifeState {
 test("life records project market reservations and cancellation while retaining influence attribution", () => {
   const engine = fixture(), initial = ready(engine, engine.start("market-record-projection"));
   let life = engine.orderMarket(initial, { side: "buy", asset: "trade-stock", quantity: 2 });
-  assert.equal(lifeRecordChanges(life, engine).years.get(0)?.find(change => change.id === "wealth")?.delta, -4);
+  // Wealth is shown as cash plus the value of goods (here the reserved order); together they are the true change.
+  const money = (changes: readonly { id: string; delta: number }[] | undefined) => (changes ?? []).filter(change => change.id === "wealth" || change.id === GOODS).reduce((total, change) => total + change.delta, 0);
+  assert.equal(money(lifeRecordChanges(life, engine).years.get(0)), -4);
   life = engine.cancelMarketOrder(life, 1);
-  assert.equal(lifeRecordChanges(life, engine).years.get(0)?.find(change => change.id === "wealth"), undefined);
+  assert.equal(money(lifeRecordChanges(life, engine).years.get(0)), 0);
   life = engine.influence(life, { type: "influence", mode: "apply", entry: "projection.gift", power: 1, source: { contractId: "lives.testnet", tokenId: "1" } });
   life = engine.orderMarket(life, { side: "sell", asset: "trade-stock", quantity: 1 });
   life = ready(engine, engine.advance(life));
   const saved = engine.save(life), result = lifeRecordChanges(life, engine);
-  const changes = [...result.years.values()].flat().filter(change => change.id === "wealth").reduce((total, change) => total + change.delta, 0);
+  const changes = money([...result.years.values()].flat());
   assert.equal(changes, getNetWorth(engine.world, life) - getNetWorth(engine.world, initial));
   const influenceIndex = life.journal.findIndex(entry => entry.type === "influence");
   assert.equal(result.entries.get(influenceIndex)?.find(change => change.id === "wealth")?.delta, 10);

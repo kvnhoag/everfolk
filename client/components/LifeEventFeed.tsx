@@ -14,7 +14,7 @@ import "../styles/life-event-feed.css";
 function RecordChanges({ changes, label }: { changes: YearChange[]; label: string }) {
   if (!changes.length) return null;
   return <ul className="life-year-changes" aria-label={label}>{changes.map(change => <li key={change.id} className={`life-year-change ${change.delta > 0 ? "is-gain" : "is-loss"}`} title={`${change.label}: ${change.delta > 0 ? "+" : ""}${change.delta}${change.unit ? ` ${change.unit}` : ""}`} aria-label={`${change.label} ${change.delta > 0 ? "increased" : "decreased"} by ${Math.abs(change.delta)}${change.unit ? ` ${change.unit}` : ""}`}>
-              <PixelIcon name={change.id.replace("skill:", "")} size={17} /><span aria-hidden="true">{change.delta > 0 ? "↑" : "↓"} {Math.abs(change.delta)}{change.unit && <small> {change.unit}</small>}</span>
+              <PixelIcon name={change.icon ?? change.id.replace("skill:", "")} size={17} /><span aria-hidden="true">{change.delta > 0 ? "↑" : "↓"} {Math.abs(change.delta)}{change.unit && <small> {change.unit}</small>}</span>
             </li>)}</ul>;
 }
 

@@ -196,7 +196,7 @@ function OpenDecisionDialog({
             event.preventDefault();
             previewStack.current?.querySelector<HTMLElement>(".is-active .compact-skills")?.focus();
           }
-        }} onClick={() => onChoose(choice.id)}><span className="life-option-number" aria-hidden="true">{index + 1}</span><span><strong>{displayProse(choice.text)}</strong><ChoiceImpact choice={choice} life={life} world={world} /></span></button>)}</div>
+        }} onClick={() => onChoose(choice.id)}><span className="life-option-number" aria-hidden="true">{index + 1}</span><span><strong>{displayProse(choice.text)}</strong><ChoiceImpact choice={choice} life={life} world={world} showSkillChanges /></span></button>)}</div>
         {choices.length > 0 && <div ref={previewStack} id={`${id}-choice-preview`} className="life-choice-preview-stack" onKeyDown={event => {
           if (event.key === "ArrowLeft") {
             event.preventDefault();

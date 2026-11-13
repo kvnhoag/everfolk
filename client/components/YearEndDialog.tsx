@@ -38,7 +38,7 @@ export default function YearEndDialog({ age, options, activities, life, world, f
             <span className="year-end-kind"><PixelIcon name={KIND_ICON[option.category] ?? "check"} size={16} />{KIND_LABEL[option.category] ?? "Action"}</span>
             {option.recommended && <span className="year-end-badge">Recommended{focus ? ` · your focus: ${focus}` : ""}</span>}
             <strong>{option.text}</strong>
-            {activity && <ChoiceImpact choice={activity} life={life} world={world} hideSkills />}
+            {activity && <ChoiceImpact choice={activity} life={life} world={world} hideSkills showSkillChanges />}
           </button>
         </li>;
       })}

@@ -12,6 +12,8 @@ const HOLD_MS = 3000;
 const PAD = 6;
 const RADIUS = 6;
 const CLEAR_MS = 250;
+/** Never dimmed: the time bar, so Pause and Resume are always in reach. */
+const ALWAYS_BRIGHT = [".life-session-bar"];
 
 interface Spot { start: number; end: number }
 
@@ -84,10 +86,11 @@ function tick(): void {
   if (spots.size === 0 || !layer || !cutouts) { teardown(); return; }
   let strength = 0;
   const holes: SVGRectElement[] = [];
-  for (const [element, spot] of spots) {
+  const bright: [Element, Spot | null][] = [...spots, ...ALWAYS_BRIGHT.flatMap(selector => Array.from(document.querySelectorAll(selector)).map(element => [element, null] as [Element, null]))];
+  for (const [element, spot] of bright) {
     const box = element.getBoundingClientRect();
     if (box.width <= 0 || box.height <= 0) continue;
-    strength = Math.max(strength, spotlightStrength(spot, now));
+    if (spot) strength = Math.max(strength, spotlightStrength(spot, now));
     const hole = document.createElementNS(SVG_NS, "rect");
     hole.setAttribute("x", String(Math.round(box.left - PAD)));
     hole.setAttribute("y", String(Math.round(box.top - PAD)));

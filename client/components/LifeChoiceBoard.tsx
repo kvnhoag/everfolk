@@ -193,7 +193,7 @@ export default function LifeChoiceBoard({
                               ))}
                             </span>
                           )}
-                          <ChoiceImpact choice={act} life={life} world={world} hideSkills />
+                          <ChoiceImpact choice={act} life={life} world={world} hideSkills showSkillChanges />
                         </div>
                         <span className="life-action-card-do">Do →</span>
                       </button>
