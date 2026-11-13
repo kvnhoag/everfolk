@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "references": [
+    {
+      "path": "reference/brief/mounted-commander-style-anchor.png",
+      "provenance": "User-provided attachment in the card-art conversation",
+      "purpose": "Original supplied composition and painterly anchor; use pose and atmosphere, then correct equipment and grip.",
+      "sha256": "0492d29b9a05d49a359365b230df225a485d1bd93a7c79ea04e370b0c3f14ce3"
+    },
+    {
+      "path": "reference/brief/character-armour-reference.png",
+      "provenance": "User-provided attachment in the card-art conversation",
+      "purpose": "User-supplied character armour target for the Alexander military brief. Match this character; do not borrow another character's armour. This image is a design reference, not a verified archaeological reconstruction.",
+      "sha256": "5166714b2511fb07f52904abcddeb7e625ca44c8c913abc909e89b00fd706b10"
+    },
+    {
+      "path": "reference/brief/lower-military-equipment-reference.png",
+      "provenance": "User-provided attachment in the card-art conversation",
+      "purpose": "User-supplied lower military equipment reference. Scale equipment to the contributor's profession and tier; avoid main-character regalia on lower ranks.",
+      "sha256": "5cb5cff7e8d7a1a62e4438f253fd47d6a4ec563510f2abc89d70a7bb59051858"
+    }
+  ]
+}
