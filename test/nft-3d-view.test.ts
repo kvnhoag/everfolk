@@ -5,7 +5,7 @@ import { keptCardView, packCardView, resultCardView } from "../client/chain/nft-
 import { keptRows } from "../client/chain/token-page-model.ts";
 import { actionName, figureTitle } from "../client/chain/chain-copy.ts";
 import { figureMediaPath } from "../chain/figure-media.ts";
-import { LEGACY_LABELS, NFT_LABELS, resolveBoosterLabels, reviewHint } from "../client/lib/booster/labels.mjs";
+import { LEGACY_LABELS, NFT_LABELS, WEAVE_PACK_LABELS, resolveBoosterLabels, reviewHint } from "../client/lib/booster/labels.mjs";
 
 const npcCard: MintCard = { kind: "npc", figure_id: null, rarity: 1, affection: 60, action_id: "craft.weave" };
 const figureCard: MintCard = { kind: "figure", figure_id: "alexander", rarity: 3, affection: 80, action_id: "alexander.levy" };
@@ -45,4 +45,11 @@ test("NFT views name NEAR, not the free Legacy collection", () => {
   assert.doesNotMatch(JSON.stringify(NFT_LABELS), /Legacy|memorial|FREE TO PLAY/);
   assert.equal(reviewHint(NFT_LABELS, 1, "Alexander", 0), "Your NFT · Alexander");
   assert.equal(reviewHint(LEGACY_LABELS, 3, "Kallias", 1), "3 saved to Legacy · Kallias · 2 / 3");
+});
+
+test("a Weave pack is labelled as a verified pack, not the free Legacy collection", () => {
+  assert.equal(WEAVE_PACK_LABELS.tag, "WEAVE MODE PACK");
+  assert.equal(WEAVE_PACK_LABELS.footer, "WEAVE MODE · VERIFIED PACK");
+  assert.equal(WEAVE_PACK_LABELS.showCount, false);
+  assert.doesNotMatch(JSON.stringify(WEAVE_PACK_LABELS), /Legacy|PERSONAL|FREE TO PLAY/);
 });

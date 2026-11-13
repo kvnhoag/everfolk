@@ -7,6 +7,7 @@ import { formatNear } from "./near-amount.ts";
 import MintReveal from "./MintReveal.tsx";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import { packCardView } from "./nft-card-view.ts";
+import { WEAVE_PACK_LABELS } from "../lib/booster/labels.mjs";
 import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";
 import EverfolkCard from "./EverfolkCard.tsx";
@@ -138,6 +139,7 @@ export default function MintPack({
             onSave: () => 0,
             onSkip: onClose,
             onClose,
+            labels: freePlay ? undefined : WEAVE_PACK_LABELS,
             // Weave packs mint from the scene: click a card, then "Mint with … NEAR" under it.
             mint: freePlay ? undefined : {
               label: `Mint with ${formatNear(pack.total_fee)} NEAR`,
