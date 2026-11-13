@@ -18,6 +18,8 @@ import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
 import "./economy-panels.css";
 import SectionHelp from "../components/SectionHelp.tsx";
+import { flashSections } from "../lib/section-flash.ts";
+import WorksPanel from "./WorksPanel.tsx";
 
 export interface ComparisonSide {
   label: string;
@@ -104,7 +106,6 @@ export default function EconomyPanels({
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
   const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
-  const [agentName, setAgentName] = useState("");
   const [peopleFilter, setPeopleFilter] = useState<"all" | "friends" | "business" | "romance" | "family">("all");
   const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
@@ -125,11 +126,27 @@ export default function EconomyPanels({
     slot.current = false;
   }, [screen.market.visitUsed, pending]);
 
+  // A Trade button elsewhere (Inventory & Granary) opens the market here with that good chosen, scrolls the
+  // order ticket into view and lights it up, so the click visibly lands somewhere.
+  const marketRef = useRef<HTMLElement>(null);
+  const [tradeJump, setTradeJump] = useState(0);
   useEffect(() => {
     if (!externalTradeItem) return;
     setItem(externalTradeItem.item);
+    setSide(heldQuantity(screen, externalTradeItem.item) > 0 ? "sell" : "buy");
+    setCounterparty("merchant");
     setActiveTab("market");
+    setTradeJump(externalTradeItem.seq);
   }, [externalTradeItem?.seq]);
+  useEffect(() => {
+    if (!tradeJump) return;
+    const frame = requestAnimationFrame(() => {
+      const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      marketRef.current?.querySelector(".demo-trade-ticket")?.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" });
+      flashSections([[".demo-economy .demo-trade-ticket"]], 4000);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [tradeJump]);
 
   useEffect(() => {
     if (!externalTab) return;
@@ -326,7 +343,7 @@ export default function EconomyPanels({
       )}
 
       {/* TAB 1: MARKET & TRADE + ASSET PRICE GRAPHS */}
-      <section className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
+      <section ref={marketRef} className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
         <SectionHelp hint="market" />
         <div className="demo-market-top">
           <div>
@@ -1075,72 +1092,7 @@ export default function EconomyPanels({
       </section>
 
       {/* TAB 5: WORKS & STEWARDS */}
-      <section aria-label="Community works" hidden={activeTab !== "works"}>
-        <h3>Community works</h3>
-        <ul>
-          {screen.works.works.map(work => (
-            <li key={work.id}>
-              <strong>{work.title}</strong> · {work.built ? "Finished" : work.progress + " of " + work.needed} · costs{" "}
-              {work.cash} drachmas and {work.grain} grain{work.built ? " · effect is in place" : ""}
-            </li>
-          ))}
-        </ul>
-        <p>Reputation {screen.works.reputation}. Changes are listed in the life record when they happen.</p>
-      </section>
-
-      <section aria-label="Townspeople" hidden={activeTab !== "works"}>
-        <h3>Who decided</h3>
-        <ul>
-          {screen.agents.map(agent => (
-            <li key={agent.role}>{agent.text}</li>
-          ))}
-        </ul>
-        {screen.offerText && <p>{screen.offerText} It is shown here until it arrives as a decision.</p>}
-        <div className="demo-actions">
-          <button type="button" aria-pressed={autoPlay} onClick={() => onAutoPlay(!autoPlay)}>
-            {autoPlay ? "Auto-play is on" : "Auto-play is off"}
-          </button>
-          {autoPlay && (
-            <button type="button" onClick={() => onAutoPlay(false)}>
-              Take back
-            </button>
-          )}
-          <label>
-            Agent account
-            <input value={agentName} onChange={event => setAgentName(event.target.value)} placeholder="account.testnet" />
-          </label>
-          <button type="button" onClick={() => setNotice(onDelegate(agentName.trim() || null) ?? "Delegation sent.")}>
-            Hand decisions over
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAgentName("");
-              setNotice(onDelegate(null) ?? "You took the decisions back.");
-            }}
-          >
-            Take the decisions back
-          </button>
-        </div>
-      </section>
-
-      <section aria-label="Future paths" hidden={activeTab !== "works"}>
-        <h3>Future paths</h3>
-        {screen.futurePaths.length === 0 ? (
-          <p>No future paths are listed for this world.</p>
-        ) : (
-          <ul>
-            {screen.futurePaths.map(path => (
-              <li key={path.id}>
-                <strong>{path.title}</strong> <span className="demo-badge">Unavailable</span>
-                <p>{path.description}</p>
-                {path.prerequisites && <p>{path.prerequisites}</p>}
-                <p>Not available in this demo.</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <WorksPanel screen={screen} hidden={activeTab !== "works"} autoPlay={autoPlay} onAutoPlay={onAutoPlay} onDelegate={onDelegate} onNotice={setNotice} />
     </div>
   );
 }

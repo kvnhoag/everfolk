@@ -33,13 +33,26 @@ test("zoom limits and drag bounds keep the atlas recoverable in every direction"
   }
 });
 
-test("the skill tree opens on the player's deepest learned skill at a readable zoom", async () => {
-  const { READABLE_START_ZOOM, skillMapStartNode } = await import("../client/models/skill-map-camera.ts");
-  assert.ok(READABLE_START_ZOOM >= .8);
+test("the skill tree selects the player's deepest learned skill first", async () => {
+  const { skillMapStartNode } = await import("../client/models/skill-map-camera.ts");
   const depth = new Map([["F1", 1], ["F2", 2], ["C1", 1], ["C3", 3]]);
   assert.equal(skillMapStartNode([{ id: "F1", state: "learned" }, { id: "F2", state: "learned" }, { id: "C3", state: "available" }], depth, "F1"), "F2");
   assert.equal(skillMapStartNode([{ id: "F1", state: "available" }, { id: "C1", state: "locked" }], depth, "F1"), "F1");
   assert.equal(skillMapStartNode([], depth, "F1"), "F1");
+});
+
+test("at the whole-tree overview the tree stays centred: there is nothing to drag", () => {
+  for (const viewport of [{ width: 1600, height: 760 }, { width: 900, height: 600 }]) {
+    const fitted = fitMapCamera(viewport, canvas);
+    for (const offset of [-5000, -40, 0, 40, 5000]) {
+      const dragged = constrainMapCamera({ ...fitted, x: fitted.x + offset, y: fitted.y + offset }, viewport, canvas);
+      assert.ok(Math.abs(dragged.x - fitted.x) < 1e-9 && Math.abs(dragged.y - fitted.y) < 1e-9, `offset ${offset} is undone`);
+    }
+  }
+  const viewport = { width: 1600, height: 760 };
+  const zoomed = constrainMapCamera({ x: -300, y: -200, scale: 1 }, viewport, canvas);
+  assert.equal(zoomed.y, -200, "zoomed in, the tall axis can still be dragged");
+  assert.equal(zoomed.x, (viewport.width - canvas.width) / 2, "an axis that still fits stays centred");
 });
 
 test("the furthest zoom-out is the whole-tree overview for the current viewport", async () => {
@@ -53,10 +66,8 @@ test("the furthest zoom-out is the whole-tree overview for the current viewport"
   }
 });
 
-test("max zoom keeps detail readable without exceeding a sensible magnification", async () => {
-  const { READABLE_START_ZOOM } = await import("../client/models/skill-map-camera.ts");
+test("max zoom keeps detail readable without exceeding a sensible magnification", () => {
   assert.ok(MAP_MAX_ZOOM >= 1.8 && MAP_MAX_ZOOM <= 2.4);
-  assert.ok(READABLE_START_ZOOM <= MAP_MAX_ZOOM);
 });
 
 test("the map transform is 2D and snapped to whole device pixels so text stays crisp", async () => {

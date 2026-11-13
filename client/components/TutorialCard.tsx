@@ -20,6 +20,9 @@ export interface TutorialCardProps {
   spotlight?: Rect | null;
   cardRef?: Ref<HTMLDivElement>;
   panelRef?: Ref<HTMLDivElement>;
+  /** Automatic tip cards are on. Off: new sections glow instead. */
+  tipsOn?: boolean;
+  onTipsChange?(on: boolean): void;
   onBack(): void;
   onNext(): void;
   onClose(): void;
@@ -34,11 +37,11 @@ function classes(mode: TutorialMode, ready: boolean, settled: boolean, closing: 
  * One tutorial hint: a manual popover in the browser's top layer, labelled by its title. It is not modal, so the game
  * stays playable underneath. "Got it" and × mark the hint seen; Back and Next tip appear only when hints are queued.
  */
-export default function TutorialCard({ hint, index, total, mode, missing, ready = true, settled = false, closing = false, offscreen = false, position, spotlight = null, cardRef, panelRef, onBack, onNext, onClose, onReveal }: TutorialCardProps) {
+export default function TutorialCard({ hint, index, total, mode, missing, ready = true, settled = false, closing = false, offscreen = false, position, spotlight = null, cardRef, panelRef, tipsOn = true, onTipsChange, onBack, onNext, onClose, onReveal }: TutorialCardProps) {
   const paged = total > 1;
   const last = index >= total - 1;
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    const action = tutorialKeyAction(event.key, event.target instanceof HTMLButtonElement, paged);
+    const action = tutorialKeyAction(event.key, event.target instanceof HTMLButtonElement || event.target instanceof HTMLInputElement, paged);
     if (!action) return;
     event.preventDefault();
     event.stopPropagation();
@@ -67,6 +70,13 @@ export default function TutorialCard({ hint, index, total, mode, missing, ready 
           <button type="button" className="tutorial-card-primary" onClick={onClose}>Got it</button>
         </div>
       </div>
+      {onTipsChange && <label className="tutorial-card-toggle">
+        <input type="checkbox" role="switch" checked={tipsOn} onChange={event => onTipsChange(event.target.checked)} />
+        <span className="tutorial-card-toggle-copy">
+          <span>Show a tip for each new section</span>
+          <small aria-live="polite">{tipsOn ? "Turn off to have new sections glow for a few seconds instead." : "Off: new sections will glow for 10 seconds instead. The Tutorial and ? buttons still open tips."}</small>
+        </span>
+      </label>}
     </div>
   </div>;
 }

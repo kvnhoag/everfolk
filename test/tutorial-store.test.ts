@@ -111,3 +111,22 @@ test("blocked storage never breaks the tutorial", () => {
   assert.doesNotThrow(() => { store.setGameContext(game({ age: 0 })); store.close(); store.openFromButton(); });
   assert.equal(store.getSnapshot().open, true);
 });
+
+test("turning tips off is remembered across reloads; old saves keep tips on", () => {
+  const storage = memoryStorage();
+  const store = createTutorialStore({ storage: () => storage });
+  store.setGameContext(game({ age: 0 }));
+  store.setTipsOn(false);
+  assert.equal(store.getSnapshot().tipsOn, false);
+  assert.equal(JSON.parse(storage.data.get(TUTORIAL_STORAGE_KEY)!).tipsOff, true);
+  const reloaded = createTutorialStore({ storage: () => storage });
+  reloaded.setGameContext(game({ age: 4 }));
+  assert.equal(reloaded.getSnapshot().tipsOn, false);
+  assert.equal(reloaded.getSnapshot().open, false, "a reloaded game with tips off opens no card by itself");
+  assert.ok(reloaded.getSnapshot().flash?.ids.includes("planting"));
+  store.setTipsOn(true);
+  assert.equal(JSON.parse(storage.data.get(TUTORIAL_STORAGE_KEY)!).tipsOff, undefined);
+  const old = createTutorialStore({ storage: () => memoryStorage({ [TUTORIAL_STORAGE_KEY]: JSON.stringify({ seen: ["welcome"], current: null }) }) });
+  old.setGameContext(home);
+  assert.equal(old.getSnapshot().tipsOn, true);
+});

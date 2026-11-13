@@ -154,3 +154,36 @@ test("keyboard: Escape closes, arrows page only through queued tips, Enter on a 
   assert.equal(tutorialKeyAction("Enter", false, true), "next");
   assert.equal(tutorialKeyAction("a", false, true), null);
 });
+
+test("with tips off a new section glows instead of opening a card, once", () => {
+  const off = run(INITIAL_TUTORIAL, home, { type: "tips", on: false });
+  assert.equal(off.tipsOn, false);
+  const context = game({ age: 4 });
+  const flashed = run(off, context, { type: "sync" });
+  assert.equal(flashed.open, false, "no card opens by itself");
+  assert.ok(flashed.flash && flashed.flash.ids.includes("time-bar") && flashed.flash.ids.includes("planting"));
+  assert.ok(flashed.flash!.ids.every(id => flashed.seen.includes(id)), "a glowing section counts as seen");
+  assert.equal(run(flashed, game({ age: 4, notificationShown: false }), { type: "sync" }), flashed, "the same sections do not glow twice");
+  const later = run(flashed, game({ age: 5 }), { type: "sync" });
+  assert.deepEqual(later.flash?.ids, ["life-record"]);
+  assert.equal(later.flash!.run, flashed.flash!.run + 1);
+});
+
+test("the Tutorial and ? buttons still open cards with tips off; turning tips back on resumes cards", () => {
+  const context = game({ age: 12 });
+  const off = run(INITIAL_TUTORIAL, context, { type: "tips", on: false });
+  const manual = run(off, context, { type: "open", hintId: "focus" });
+  assert.equal(manual.open, true);
+  assert.equal(manual.hintId, "focus");
+  const on = run(INITIAL_TUTORIAL, home, { type: "tips", on: false }, { type: "tips", on: true }, { type: "sync" });
+  assert.equal(on.open, true);
+  assert.equal(on.hintId, "welcome");
+  assert.equal(run(on, home, { type: "tips", on: true }), on, "setting the same value changes nothing");
+});
+
+test("turning tips off keeps the open card until the player closes it", () => {
+  const opened = run(INITIAL_TUTORIAL, home, { type: "sync" });
+  const off = run(opened, home, { type: "tips", on: false });
+  assert.equal(off.open, true);
+  assert.equal(off.hintId, "welcome");
+});

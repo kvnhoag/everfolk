@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
+import { useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
@@ -6,7 +6,7 @@ import { buildCapabilityLayout, CAPABILITY_NODES, capabilityAncestors, capabilit
 import CapabilityIcon from "./CapabilityIcon.tsx";
 import { capabilityPresentations, capabilityTier, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
-import { READABLE_START_ZOOM, skillMapStartNode } from "../models/skill-map-camera.ts";
+import { skillMapStartNode } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
 import "../styles/capability-tree-layout.css";
 
@@ -126,11 +126,12 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
   const presentations = useMemo(() => capabilityPresentations(nodes, world), [world]);
   const view = useMemo(() => capabilityView(world, life), [world, life]);
   const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
-  const [selectedId, setSelectedId] = useState("F1");
+  // The tree opens zoomed out on the whole atlas; the inspector starts on the player's own progress.
+  const [selectedId, setSelectedId] = useState(() => skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes.find(node => node.id === "F1")?.id ?? nodes[0].id));
   const [pathSelected, setPathSelected] = useState(false);
   const [calendarDeadlines, setCalendarDeadlines] = useState<Record<string, boolean>>({});
   const [selectedJobsByNode, setSelectedJobsByNode] = useState<Record<string, string[]>>({});
-  const { viewport, paper, zoom, dragging, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
+  const { viewport, paper, zoom, minZoom, dragging, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
   const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
   const instanceId = useId();
   const selected = nodes.find(node => node.id === selectedId) ?? nodes[0];
@@ -143,13 +144,6 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
     const point = layout.nodes.find(item => item.node.id === id);
     if (point) focusPoint(point, scale);
   }
-  // Open on the player's own progress at a readable zoom rather than the whole atlas at ~38%.
-  useEffect(() => {
-    const start = skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes[0].id);
-    const frame = requestAnimationFrame(() => centerNode(start, READABLE_START_ZOOM));
-    return () => cancelAnimationFrame(frame);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- once per opening
-  }, []);
   function select(id: string, focus = false) {
     setSelectedId(id); setPathSelected(true);
     if (focus) requestAnimationFrame(() => { nodeRefs.current.get(id)?.focus({ preventScroll: true }); centerNode(id); });
@@ -163,9 +157,9 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
     <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Learn the craft. Do the work. Let one skill open the next.</p></div><div className="capability-total"><strong>{learned}<span> / {nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
     {!view.enabled && <p className="capability-world-note" role="note">This life keeps its earlier skill rules. The complete atlas is shown as a reference; begin a new life in the current world to learn these nodes.</p>}
     <div className="capability-legend" aria-label="Tree legend">{(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{state === "available" ? "Ready" : STATUS_LABEL[state]}</span>)}<span className="capability-legend-crossover"><NodeShape branch="Physique" crossover />Crossover</span><span className="capability-legend-milestone"><NodeShape branch="Physique" milestone />Title / key skill</span><span className="capability-legend-path"><i aria-hidden="true" />Selected path</span></div>
-    <p className="capability-map-help" id={`${instanceId}-help`}>Scroll or pinch to zoom · Drag to move · Click a skill to trace its roots · Arrow keys to navigate</p>
+    <p className="capability-map-help" id={`${instanceId}-help`}>The whole tree is shown · Scroll or pinch to zoom in, then drag to move · Click a skill to trace its roots · Arrow keys to navigate</p>
     <div className="capability-workspace">
-      <div className="capability-map-area"><div className={`capability-viewport${zoom < .55 ? " is-overview" : ""}${dragging ? " is-dragging" : ""}`} ref={viewport} {...pointerHandlers} aria-label="Connected skill tree" aria-describedby={`${instanceId}-help`}>
+      <div className="capability-map-area"><div className={`capability-viewport${zoom < .55 ? " is-overview" : ""}${zoom <= minZoom + .001 ? " is-fitted" : ""}${dragging ? " is-dragging" : ""}`} ref={viewport} {...pointerHandlers} aria-label="Connected skill tree" aria-describedby={`${instanceId}-help`}>
         <div className="capability-paper" ref={paper} style={{ width: layout.width, height: layout.height }}>
           <svg className="capability-connections" viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true" focusable="false">
             <defs><pattern id={`${instanceId}-fiber`} width="43" height="37" patternUnits="userSpaceOnUse"><path d="M3 7h4M26 29h6M15 19h2" stroke="currentColor" strokeWidth=".7" opacity=".12" /></pattern></defs>

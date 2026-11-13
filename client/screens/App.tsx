@@ -91,6 +91,10 @@ import SectionHelp from "../components/SectionHelp.tsx";
 import { useTutorialGameContext } from "../hooks/useTutorial.ts";
 import { NO_TUTORIAL_CONTEXT, gameTutorialContext } from "../models/tutorial-triggers.ts";
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
+import { useYearReminder } from "../hooks/useYearReminder.ts";
+import { YEARLY_ACTION_AGE } from "../models/year-reminder.ts";
+import { flashSections } from "../lib/section-flash.ts";
+import type { WorkStatus } from "../demo/InventoryDrawer.tsx";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -240,6 +244,24 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       deckShown: Boolean(demoView) && life.phase !== "ended", notificationShown: notificationShown && Boolean(demoView), tradeAge: world.demo ? world.demo.market.minTradeAge ?? 12 : null,
     },
   }));
+  // Once a year: the fields, the focus and the yearly action glow, with a short notice naming them.
+  const actionUsed = life.character?.lastActivityAge === life.age;
+  const focusShown = life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world);
+  const yearReminder = useYearReminder({ age: life.age, phase: life.phase, hasFields: Boolean(demoView), focusShown, actionUsed },
+    eventNotificationLifeKey(life), dashboardVisible && game.hasBegun);
+  const workStatus: WorkStatus | null = !focusShown && life.age < YEARLY_ACTION_AGE ? null : {
+    open: life.phase === "ready" && life.age >= YEARLY_ACTION_AGE && !actionUsed,
+    note: life.phase === "choice" ? "A decision is waiting first."
+      : life.age < YEARLY_ACTION_AGE ? `Yearly actions start at age ${YEARLY_ACTION_AGE}; your focus practises for you.`
+      : actionUsed ? "Done for this year; it returns next year." : "1 action left this year.",
+  };
+  /** Brings this year's action board into view and lights it up; the focus instead once the action is spent or not open yet. */
+  function showYearlyWork() {
+    const selectors = workStatus?.open ? [".life-yearly-action-deck", ".yearly-focus"] : [".yearly-focus"];
+    const target = selectors.map(selector => document.querySelector(selector)).find(Boolean);
+    target?.scrollIntoView({ block: "center", behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    flashSections([selectors], 4000);
+  }
   // A reopened Character popup starts on the tab it was opened with.
   useEffect(() => { if (panel !== "character") setCharacterTab(null); }, [panel]);
 
@@ -564,7 +586,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked || game.isPreview ? 0 : lifePackCardCount(life, world)}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
-      {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
+      {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
@@ -665,7 +687,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
     {/* Notifications float at the right edge, so they never reorder or push the main section. */}
-    {game.hasBegun && demoView && <EventNotificationStack persistent={!game.isPreview} visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} onOpenSkillTree={() => { setCharacterSection("skills"); setPanel("character"); }} onShownChange={setNotificationShown} />}
+    {game.hasBegun && demoView && <EventNotificationStack persistent={!game.isPreview} visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} reminder={yearReminder} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} onShownChange={setNotificationShown} />}
 
     <footer className="site-footer">
       <span><EverfolkWordmark /> · {place} · <small>Weaving Fates</small></span>

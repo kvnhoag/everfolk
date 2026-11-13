@@ -8,6 +8,7 @@ import { useTutorialSpotlight } from "../hooks/useTutorialSpotlight.ts";
 import { tutorialHint } from "../models/tutorial-hints.ts";
 import { tutorialPosition, type TutorialState } from "../models/tutorial-navigation.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
+import { flashSections } from "../lib/section-flash.ts";
 import TutorialCard from "./TutorialCard.tsx";
 
 function showOnTop(card: HTMLDivElement): void {
@@ -43,6 +44,7 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
   const { index, total } = tutorialPosition(state);
   return <TutorialCard cardRef={card} panelRef={panel} hint={hint} index={index} total={total} mode={state.mode} missing={layout.missing}
     ready={layout.ready} settled={settled} closing={closing} offscreen={layout.offscreen} position={layout.card} spotlight={layout.spotlight}
+    tipsOn={state.tipsOn} onTipsChange={tutorialStore.setTipsOn}
     onBack={tutorialStore.back} onNext={tutorialStore.next} onClose={tutorialStore.close} onReveal={layout.reveal} />;
 }
 
@@ -56,6 +58,12 @@ export default function TutorialOverlay() {
   const host = useTutorialHost();
   const [settledRun, setSettledRun] = useState(0);
   const onClosed = useCallback(() => setSettledRun(state.run), [state.run]);
+  // Tips off: a new section's border glows and fades instead of opening a card.
+  const flashRun = state.flash?.run ?? 0;
+  useEffect(() => {
+    if (!state.flash) return;
+    return flashSections(state.flash.ids.map(id => tutorialHint(id)?.targets ?? []));
+  }, [flashRun]); // eslint-disable-line react-hooks/exhaustive-deps
   if (typeof document === "undefined") return null;
   const visible = state.hintId !== null && (state.open || settledRun !== state.run) && !hidesTutorial(host);
   const announcement = state.open && state.mode === "auto" ? `New tip: ${tutorialHint(state.hintId)?.title ?? ""}` : "";
