@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "currentAuthoringLibraryId": "everfolk-ordinary-portraits-v3",
+  "runtimeIntegrated": true,
+  "libraries": [
+    {
+      "id": "everfolk-ordinary-portraits-v3",
+      "root": "ordinary-v3",
+      "status": "runtime-integrated",
+      "readme": "ordinary-v3/README.md",
+      "agentMap": "ordinary-v3/AGENT_MAP.md",
+      "manifest": "ordinary-v3/manifest.json",
+      "sourceIndex": "ordinary-v3/source-index.json",
+      "gallery": "ordinary-v3/review/index.html",
+      "verification": "ordinary-v3/qa/library-audit.json",
+      "visualReview": "ordinary-v3/qa/anatomy-visual-review.json",
+      "portraits": 240,
+      "completeAnatomicalModels": 12,
+      "userReviewStatus": "awaiting-user-review",
+      "anatomicalApproval": false,
+      "runtimeIntegrated": true,
+      "runtimeIntegration": "runtime-integration.json",
+      "runtimeMap": "RUNTIME_MAP.md"
+    },
+    {
+      "id": "everfolk-ordinary-portraits-v2",
+      "root": "ordinary-v2",
+      "status": "rejected-neck-anatomy",
+      "readme": "ordinary-v2/README.md",
+      "agentMap": "ordinary-v2/AGENT_MAP.md",
+      "manifest": "ordinary-v2/manifest.json",
+      "sourceIndex": "ordinary-v2/source-index.json",
+      "gallery": "ordinary-v2/review/index.html",
+      "reason": "User rejected cut/reconstructed neck; preserve original complete-model neck and shoulders and change only face features.",
+      "replacement": "everfolk-ordinary-portraits-v3"
+    },
+    {
+      "id": "everfolk-ordinary-portraits-v1",
+      "root": "ordinary-v1",
+      "status": "superseded-final-art-retained-source-dependency",
+      "replacement": "everfolk-ordinary-portraits-v3",
+      "retainedDependencies": [
+        "36 original heads",
+        "head provenance",
+        "content mappings",
+        "PixelOE build engine"
+      ],
+      "reason": "Independent head/shirt bounding-box positioning lacked the shared physical body and fitted neckline required by the user."
+    },
+    {
+      "id": "everfolk-ordinary-v3-face-only-proof",
+      "root": "ordinary-v3-neck-proof",
+      "status": "approved-method-proof-retained",
+      "readme": "ordinary-v3-neck-proof/README.md",
+      "preservationQA": "ordinary-v3-neck-proof/qa/model-preservation.json",
+      "preview": "ordinary-v3-neck-proof/review/face-only-proof.png",
+      "fullLibraryRebuilt": true,
+      "fullLibrary": "everfolk-ordinary-portraits-v3"
+    }
+  ],
+  "activeProofLibraryId": null,
+  "lastCompleteLibraryId": "everfolk-ordinary-portraits-v3",
+  "statusNote": "V3 is integrated into the game through a read-only portrait state and exact240-PNG registry. Existing seeded random birth/encounter identities remain authoritative; no portrait chooser or save-schema/RNG changes. Source authoring manifests retain their historical metadata.",
+  "runtimeIntegration": "runtime-integration.json",
+  "runtimeMap": "RUNTIME_MAP.md"
+}

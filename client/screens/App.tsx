@@ -1,3 +1,8 @@
+import { householdManagement } from "../models/household-management.ts";
+import { playerPortraitState } from "../models/portrait-state.ts";
+import type { GamePreviewSession } from "../types/game-preview.ts";
+import HouseholdWelcome from "../components/HouseholdWelcome.tsx";
+import HistoricalTitlePaths from "../components/HistoricalTitlePaths.tsx";
 import type { RankedPlay } from "../hooks/useGame.ts";
 import { findLifeEvent } from "../models/life-event-lookup.ts";
 import InfluenceMarkerTag from "../components/InfluenceMarkerTag.tsx";
@@ -148,13 +153,14 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
 export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null;
 export type CharacterSection = "career" | "wealth" | "children" | "skills" | "relationships";
 
-function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, enterGame = false, previewSession, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; enterGame?: boolean; previewSession?: GamePreviewSession; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
   const [panel, setPanel] = useState<AppPanel>(initialPanel);
   const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [restartOpen, setRestartOpen] = useState(false);
   // A ranked life opens straight into play; free play starts at the main menu.
-  const [menuOpen, setMenuOpen] = useState(!ranked);
-  const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh);
+  const [menuOpen, setMenuOpen] = useState(!ranked && !enterGame);
+  const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh || Boolean(previewSession?.atBirth));
+  const [householdWelcomeOpen, setHouseholdWelcomeOpen] = useState(false);
   const [readingPause, setReadingPause] = useState(false);
   const [deferredDecision, setDeferredDecision] = useState<string | null>(() => {
     const initial = ranked?.initial ?? startFreshFrom;
@@ -165,12 +171,13 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
   const loanWarningsSeen = useRef(new Set<string>());
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, previewSession });
   const { life } = game;
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
   const world = lifeEngine.world;
+  const management = householdManagement(world, life);
   const demoView = useMemo(() => demoScreen(world, life), [world, life]);
   const intro = freePlayIntro(world);
   const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life]);
@@ -204,7 +211,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     : decisionEvent && isLoanDecision && loanSummary ? { ...decisionEvent, text: `Remaining balance: ${formatMoney(loanSummary.balance, world)}. ${loanSummary.description} ${decisionEvent.text}` }
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
-  const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !loanRequest && !loanWarningOpen;
+  const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !householdWelcomeOpen && !loanRequest && !loanWarningOpen;
   const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
 
   useEffect(() => {
@@ -236,9 +243,10 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const stageTitle = lifeStageView(world, life.age)?.title;
   const [progressFeedback, setProgressFeedback] = useState<(ProgressFeedback & { lifeKey: string }) | null>(null);
   const progressNotification = useRef({ createdAt: 0, eventCount: 0 });
+  const previewSeenNotifications = useRef(new Set<string>());
   const importantEventCount = useMemo(() => buildImportantLifeEvents(life, world).reduce((count, year) => count + year.events.length, 0), [life, world]);
   const previousProgressLife = useRef(life);
-  const { legacyEntries, legacyNotice } = useLegacyGallery(life, world, game.archivedLives);
+  const { legacyEntries, legacyNotice } = useLegacyGallery(life, world, game.archivedLives, !game.isPreview);
   const activities = useMemo(() => lifeEngine.getActivities(life), [lifeEngine, life]);
   const repaymentWarning = loanDeadlineWarning(world, life);
   const requestedLoanChoice = loanRequest?.kind === "choice" ? choices.find(choice => choice.id === loanRequest.id)
@@ -255,17 +263,17 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   useEffect(() => {
     // Health and pending decisions keep priority. The clock waits as soon as
     // this reminder opens, including when Auto mode is enabled.
-    if (!repaymentWarning || readingPause || !game.isPlaying || !game.hasBegun || menuOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest || life.phase !== "ready") return;
+    if (!repaymentWarning || readingPause || !game.isPlaying || !game.hasBegun || menuOpen || panel || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || loanRequest || life.phase !== "ready") return;
     const key = repaymentWarning.key;
     if (loanWarningsSeen.current.has(key)) return;
-    try { if (readEverfolkStorage(window.sessionStorage, `everfolk:loan-warning:${key}`) === "seen") return; } catch { /* An in-memory reminder still works. */ }
+    if (!game.isPreview) try { if (readEverfolkStorage(window.sessionStorage, `everfolk:loan-warning:${key}`) === "seen") return; } catch { /* An in-memory reminder still works. */ }
     setLoanWarningOpen(true);
-  }, [repaymentWarning?.key, readingPause, game.isPlaying, game.hasBegun, menuOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, loanRequest, life.phase]);
+  }, [repaymentWarning?.key, readingPause, game.isPlaying, game.hasBegun, menuOpen, panel, restartOpen, worldPickerOpen, birthPopoverOpen, householdWelcomeOpen, loanRequest, life.phase]);
 
   function dismissLoanWarning() {
     if (repaymentWarning) {
       loanWarningsSeen.current.add(repaymentWarning.key);
-      try { window.sessionStorage.setItem(`everfolk:loan-warning:${repaymentWarning.key}`, "seen"); } catch { /* Session memory is enough when storage is unavailable. */ }
+      if (!game.isPreview) try { window.sessionStorage.setItem(`everfolk:loan-warning:${repaymentWarning.key}`, "seen"); } catch { /* Session memory is enough when storage is unavailable. */ }
     }
     setLoanWarningOpen(false);
   }
@@ -277,18 +285,20 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     const feedback = choiceProgressFeedback(previous, life, world);
     if (feedback) {
       const lifeKey = eventNotificationLifeKey(life);
-      const seen = new Set(readSeenEventNotifications(lifeKey));
+      const seen = game.isPreview ? previewSeenNotifications.current : new Set(readSeenEventNotifications(lifeKey));
       const accomplishments = feedback.accomplishments.filter(record => !seen.has(`accomplishment:${record.id}`));
       progressNotification.current = { createdAt: Date.now(), eventCount: importantEventCount };
       setProgressFeedback({ ...feedback, accomplishments, lifeKey });
     }
-  }, [life, world, importantEventCount]);
+  }, [life, world, importantEventCount, game.isPreview]);
 
   useEffect(() => {
     if (progressFeedback?.accomplishments.length) {
-      rememberSeenEventNotifications(progressFeedback.lifeKey, progressFeedback.accomplishments.map(record => `accomplishment:${record.id}`));
+      const keys = progressFeedback.accomplishments.map(record => `accomplishment:${record.id}`);
+      if (game.isPreview) keys.forEach(key => previewSeenNotifications.current.add(key));
+      else rememberSeenEventNotifications(progressFeedback.lifeKey, keys);
     }
-  }, [progressFeedback]);
+  }, [progressFeedback, game.isPreview]);
 
   useEffect(() => {
     if (!progressFeedback) return;
@@ -313,25 +323,28 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     const identity = `${life.worldFingerprint}:${life.seed}`;
     if (menuLifeRef.current === identity) return;
     const firstVisit = menuLifeRef.current === null;
+    const directEntry = enterGame && firstVisit;
     menuLifeRef.current = identity;
     setReadingPause(false);
     if (!firstVisit) setDeferredDecision(null);
     setRequestedDecision(null);
     // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
-    setBirthPopoverOpen(!ranked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
-    setMenuOpen(!ranked);
-  }, [life.worldFingerprint, life.seed]);
+    setBirthPopoverOpen(!ranked && (!firstVisit || startFresh || directEntry || Boolean(previewSession?.atBirth)) && !game.hasBegun && life.phase !== "ended");
+    setHouseholdWelcomeOpen(Boolean(previewSession && !previewSession.atBirth && householdManagement(world, life)));
+    setMenuOpen(!ranked && !directEntry);
+  }, [life.worldFingerprint, life.seed, enterGame]);
 
   useEffect(() => {
-    if (game.hasBegun && !menuOpen && !panel && !restartOpen && !birthPopoverOpen && (isBirthSituation || life.phase === "ended")) {
+    if (game.hasBegun && !menuOpen && !panel && !restartOpen && !birthPopoverOpen && !householdWelcomeOpen && (isBirthSituation || life.phase === "ended")) {
       sceneRef.current?.focus({ preventScroll: true });
     }
-  }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen]);
+  }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen, householdWelcomeOpen]);
 
   function openMainMenu() {
     game.pauseLife();
     closeDialog();
     setBirthPopoverOpen(false);
+    setHouseholdWelcomeOpen(false);
     setMenuOpen(true);
   }
 
@@ -348,11 +361,25 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   }
 
   function beginWithReadingPause() {
-    if (!game.hasRevealedStats) return;
+    if (!game.hasRevealedStats || game.hasBegun) return;
     setReadingPause(true);
     setBirthPopoverOpen(false);
     setMenuOpen(false);
+    setHouseholdWelcomeOpen(Boolean(management));
     game.beginLife();
+  }
+
+  function replayHouseholdGuide() {
+    game.pauseLife();
+    setReadingPause(false);
+    closeDialog();
+    setHouseholdWelcomeOpen(true);
+  }
+
+  function exploreHouseholdCouncil() {
+    setHouseholdWelcomeOpen(false);
+    setCharacterSection("wealth");
+    setPanel("character");
   }
 
   function beginFromMenu() {
@@ -464,7 +491,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         <GameMusicPlayer />
         <div className={`save-indicator ${game.saveStatus === "unavailable" ? "save-warning" : ""}`} role="status">
           <Icon name={game.saveStatus === "saved" ? "check" : "feather"} size={15} />
-          <span>{game.saveStatus === "saved" ? "Saved" : game.saveStatus === "saving" ? "Saving…" : "Save unavailable"}</span>
+          <span>{game.isPreview ? "Test session · not saved" : game.saveStatus === "saved" ? "Saved" : game.saveStatus === "saving" ? "Saving…" : "Save unavailable"}</span>
         </div>
       </div>
     </header>
@@ -485,38 +512,38 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else continueWithReadingPause(); }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
           <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
-          <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>Spend</button></div>
-          <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options"><button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>Spend</button>{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
+          <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button></div>
+          <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options"><button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
           {life.phase === "ready" && <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>}
         </div>
       </section>}
 
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
-      {game.hasBegun && demoView && <EventNotificationStack visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenChronicle={openChronicle} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
+      {game.hasBegun && demoView && <EventNotificationStack visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
           {game.hasBegun && <div className="life-scene-frame" ref={sceneRef} tabIndex={-1} aria-label={life.phase === "ended" ? "Life summary" : "Your life now"}>
-            <PaperScene life={life} compact dashboard eventVisuals={eventVisuals} paused={!game.isClockRunning} />
+            <PaperScene life={life} compact dashboard eventVisuals={eventVisuals} paused={!game.isClockRunning} persistentPreferences={!game.isPreview} />
             <div className="life-scene-location"><span><Icon name="pin" size={13} />{place}, Egypt</span><span>{formatYear(life.year)}</span></div>
           </div>}
         <aside className="character-panel" aria-label="Your character">
-          <div className="portrait-frame"><PixelPortrait age={life.age} name={displayName} seed={life.seed} sex={life.character?.sex} originId={life.originId} avatarVariant={life.character?.avatarVariant} /><span className="portrait-label">{isDead ? "DECEASED" : "YOUR LIFE"}</span></div>
+          <div className="portrait-frame"><PixelPortrait portrait={playerPortraitState(world, life)} name={displayName} loading="eager" /><span className="portrait-label">{isDead ? "DECEASED" : "YOUR LIFE"}</span></div>
           <h2>{displayName}</h2><p className="character-origin">Of {place}</p>
           <div className="age-line"><span>{isDead && life.age === 0 ? "Died in infancy" : <>Age <strong>{life.age}</strong></>}</span><span className="tiny-divider" /><span>{isDead ? "Life ended" : stage}</span></div>
           {!game.hasBegun && <div className="character-details">
             <div><span>BACKGROUND</span><p>{game.hasRevealedStats ? origin.title : "Not revealed yet"}</p></div>
-            {life.age >= 16 && <div><span>OCCUPATION</span><p>{world.character?.jobs.find(job => job.id === life.character?.jobId)?.title ?? (life.flags.retired ? "Retired" : "Unemployed")}</p></div>}
+            {life.age >= 16 && <div><span>{management ? management.houseLabel.toUpperCase() : "OCCUPATION"}</span><p>{management ? management.roleLabel : world.character?.jobs.find(job => job.id === life.character?.jobId)?.title ?? (life.flags.retired ? "Retired" : "Unemployed")}</p></div>}
             <div><span>HOUSEHOLD</span><p>{life.character?.partnerId ? `${resolvePartner(world, life, life.character.partnerId)?.name ?? "Your partner"} · ${romanticPartnerLabel(world, life) ?? life.character.relationshipStatus}` : "Your family home"}{life.character && life.character.children.length > 0 ? ` · ${life.character.children.length} ${life.character.children.length === 1 ? "child" : "children"}` : ""}</p></div>
             <div><span>BORN</span><p>{formatYear(birthYearOf(world, life))}</p></div>
           </div>}
           {!game.hasBegun && <div className="stats" aria-label="Life attributes" aria-busy={!game.hasRevealedStats}>
             {Object.entries(world.stats).map(([id, definition]) => world.economy?.stat === id && life.economy ? <div className={`stat stat-${id} stat-financial`} key={id}>
-              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label="Open total wealth and society comparison" title="Total wealth is cash + possessions − debt. Society percentile currently compares your wealth with the game's starting households." onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>
-                <div className="stat-heading"><span><Icon name="coin" size={16} />Total wealth</span><strong>{game.hasRevealedStats && wealthComparison ? formatMoney(wealthComparison.netWorth, world) : "—"}</strong></div>
-                <span className="stat-wealth-percentile"><span>Society percentile</span><strong>{game.hasRevealedStats && wealthComparison ? formatWealthStanding(wealthComparison.percentile) : "—"}</strong></span>
-                <span className="stat-wealth-cash"><span>{game.hasRevealedStats ? `Cash ${formatMoney(life.economy.cash, world)}` : "Money not yet revealed"}</span><span aria-hidden="true">Details ↗</span></span>
+              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label={management ? management.kind === "royal" ? "Open royal treasury and council" : "Open estate treasury and council" : "Open total wealth and society comparison"} title={management ? management.description : "Total wealth is cash + possessions − debt. Society percentile currently compares your wealth with the game's starting households."} onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>
+                <div className="stat-heading"><span><Icon name="coin" size={16} />{management?.treasuryLabel ?? "Total wealth"}</span><strong>{game.hasRevealedStats ? management ? formatMoney(management.treasury, world) : wealthComparison ? formatMoney(wealthComparison.netWorth, world) : "—" : "—"}</strong></div>
+                {!management && <span className="stat-wealth-percentile"><span>Society percentile</span><strong>{game.hasRevealedStats && wealthComparison ? formatWealthStanding(wealthComparison.percentile) : "—"}</strong></span>}
+                <span className="stat-wealth-cash"><span>{game.hasRevealedStats ? management ? management.kind === "royal" ? "Your royal house" : "Your aristocratic estate" : `Cash ${formatMoney(life.economy.cash, world)}` : "Money not yet revealed"}</span><span aria-hidden="true">Details ↗</span></span>
               </button>
             </div> : <div className={`stat stat-${id}`} key={id}>
               <div className="stat-heading"><span><Icon name={statIcons[id] ?? "sun"} size={16} />{definition.label}</span><strong key={life.stats[id]}>{game.hasRevealedStats ? <>{Number(life.stats[id].toFixed(1))}<small> / {definition.max}</small></> : "—"}</strong></div>
@@ -529,17 +556,18 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
         {game.hasBegun && <LifeOverview life={life} world={world} onOpenWealth={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
         {game.hasBegun && <div className="life-info-sidebar dashboard-skills"><CompactSkillPanel life={life} world={world} activities={activities} onOpenWiki={() => setPanel("wiki")} /></div>}
         {game.hasBegun && <LifeHealthPanel life={life} world={world} onActivity={requestActivity} />}
-        {game.hasBegun && <MoneylenderNotice life={life} world={world} onManage={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
+        {game.hasBegun && !management && <MoneylenderNotice life={life} world={world} onManage={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
         {game.hasBegun && demoView && <aside className="life-support-grid" aria-label="Household and life records">
           <HouseholdSummary life={life} world={world} activities={activities} onActivity={requestActivity} onOpenCharacter={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }} onOpenRelationships={() => { setCharacterSection("relationships"); setPanel("character"); }} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} />
           <div className="life-support-records">
-            {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
+            {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /><HistoricalTitlePaths life={life} world={world} /></details>}
             <details className="chronicle-preview compact-life-record life-record-panel" open><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>
           </div>
         </aside>}
         </div>
 
         <section className="story-column" aria-label="Your life">
+          {game.hasBegun && !life.accomplishments?.length && <HistoricalTitlePaths life={life} world={world} />}
           {!game.hasBegun ? <section className="birth-record birth-intro-record" aria-labelledby="birth-title">
             <div className="birth-intro-art"><img src="/assets/pixel/scenes/birth.svg" alt="Pixel illustration of a newborn and caregiver" /></div>
             <h2 id="birth-title">{game.hasRevealedStats ? `${characterName} is born.` : "A new life begins."}</h2>
@@ -585,7 +613,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
             <aside className="life-support-grid" aria-label="Household and life records">
               <HouseholdSummary life={life} world={world} activities={activities} onActivity={requestActivity} onOpenCharacter={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }} onOpenRelationships={() => { setCharacterSection("relationships"); setPanel("character"); }} />
               <div className="life-support-records">
-                {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /></details>}
+                {Boolean(life.accomplishments?.length) && <details className="compact-life-record compact-legacy-record"><summary><span>Works &amp; deeds</span><span className="life-record-count">View accomplishments <span aria-hidden="true">+</span></span></summary><CurrentLegacySummary life={life} world={world} onOpenGallery={() => setPanel("legacy")} /><HistoricalTitlePaths life={life} world={world} /></details>}
                 <details className="chronicle-preview compact-life-record life-record-panel" open><summary><span className="life-record-title"><Icon name="feather" size={18} />Life record</span><span className="life-record-count">{life.age + 1} {life.age === 0 ? "year" : "years"} recorded <span aria-hidden="true">+</span></span></summary><div className="life-record-toolbar"><p className="chronicle-description">Newest first</p><button className="text-button" onClick={openChronicle}>Full chronicle <Icon name="arrow" size={15} /></button></div><LifeEventFeed life={life} world={world} /></details>
               </div>
             </aside>
@@ -626,18 +654,20 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       </div>
     </footer>
     </div>
-    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onChooseAvatar={game.chooseAvatar} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
+    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
     {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} demoView={demoView} isLoanDecision={Boolean(isLoanDecision)} isLoanOffer={Boolean(isLoanOffer)} loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
+    <HouseholdWelcome open={householdWelcomeOpen} life={life} world={world} onClose={() => setHouseholdWelcomeOpen(false)} onOpenCouncil={exploreHouseholdCouncil} />
     <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : panel === "legacy" ? "legacy-dialog" : panel === "wiki" ? "skill-wiki-dialog" : panel === "map" ? "location-map-dialog" : panel === "character" ? "character-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
         {(dialogError || downloadError) && <p className="dialog-error" role="alert">{dialogError || downloadError}</p>}
         {restartOpen ? <>
-          <p className="eyebrow">NEW LIFE</p><h2 id="dialog-title">Start a new life?</h2>
-          <p>Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first.</p>
+          <p className="eyebrow">{game.isPreview ? "TEST LIFE" : "NEW LIFE"}</p><h2 id="dialog-title">{game.isPreview ? "Reset this test life?" : "Start a new life?"}</h2>
+          <p>{game.isPreview ? "Return to this preset’s starting age and values. Your normal saved life is kept separate." : "Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first."}</p>
           {(world.character?.playerNames?.length ?? 0) > 1 && world.origins.length > 1 && <p>A new name, household and starting stats will be rolled.</p>}
           <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
         </> : panel === "character" ? <>
           <p className="eyebrow">CHARACTER</p><h2 id="dialog-title">{characterName}</h2>
+          {management && <button type="button" className="text-button" onClick={replayHouseholdGuide}><Icon name="book" size={16} /> Household guide</button>}
           <CharacterPanel key={characterSection} life={life} world={world} onActivity={requestActivity} onMarketOrder={game.orderMarket} onCancelMarketOrder={game.cancelMarketOrder} initialSection={characterSection} />
         </> : panel === "wiki" ? <>
           <p className="eyebrow">SKILL REFERENCE</p><h2 id="dialog-title">Skill wiki</h2>
@@ -649,12 +679,13 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
           <p className="eyebrow">{chronicleNameKnown ? chronicleName.toLocaleUpperCase() : "CHRONICLE"}</p><h2 id="dialog-title">Life history</h2>
           <p className="dialog-subtitle">{chronicleLife.phase === "ended" ? `${formatYear(birthYearOf(chronicleWorld, chronicleLife))} — ${formatYear(chronicleLife.year)} · ${yearsLived(chronicleLife.age)}` : "Your life record, grouped by year."}</p>
           {chronicleLife.deathCauseContext && <p><strong>{chronicleLife.deathCauseKind === "condition" ? "Health history:" : "What led to it:"}</strong> {displayProse(chronicleLife.deathCauseContext)}</p>}{chronicleCause ? <p><strong>Cause of death: {chronicleCause.title}.</strong> {displayProse(chronicleCause.text)}</p> : chronicleEnding && <p>{displayProse(chronicleEnding.text)}</p>}
-          {chronicleNameKnown && chronicleWealthComparison && chronicleLife.economy && <div className="wealth-summary-line"><p><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Total wealth at record end" : "Total wealth at death" : "Total wealth"}:</strong> {formatMoney(chronicleWealthComparison.netWorth, chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p><p><strong>Society percentile:</strong> {formatWealthStanding(chronicleWealthComparison.percentile)} · Median household wealth {formatMoney(chronicleWealthComparison.medianWealth, chronicleWorld)}. Game estimate currently using this world’s starting-household benchmark.</p></div>}
+          {chronicleNameKnown && householdManagement(chronicleWorld, chronicleLife) && <p><strong>{householdManagement(chronicleWorld, chronicleLife)!.treasuryLabel} at record end:</strong> {formatMoney(householdManagement(chronicleWorld, chronicleLife)!.treasury, chronicleWorld)}.</p>}
+          {chronicleNameKnown && !householdManagement(chronicleWorld, chronicleLife) && chronicleWealthComparison && chronicleLife.economy && <div className="wealth-summary-line"><p><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Total wealth at record end" : "Total wealth at death" : "Total wealth"}:</strong> {formatMoney(chronicleWealthComparison.netWorth, chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p><p><strong>Society percentile:</strong> {formatWealthStanding(chronicleWealthComparison.percentile)} · Median household wealth {formatMoney(chronicleWealthComparison.medianWealth, chronicleWorld)}. Game estimate currently using this world’s starting-household benchmark.</p></div>}
           {chronicleNameKnown ? <LifeJournal life={chronicleLife} /> : <p>Your starting stats are still being revealed. Return to your life to finish the reveal.</p>}
           <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `everfolk-${chronicleName.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "character"}-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
         </> : panel === "legacy" ? <>
           <p className="eyebrow">ACROSS YOUR LIVES</p><h2 id="dialog-title">Works &amp; deeds</h2>
-          <LegacyGallery entries={legacyEntries.filter(entry => entry.lifeKey === legacyLifeKey(life))} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} />
+          <LegacyGallery entries={legacyEntries.filter(entry => entry.lifeKey === legacyLifeKey(life))} currentLifeKey={legacyLifeKey(life)} storageNotice={legacyNotice} preview={game.isPreview} />
         </> : panel === "archive" ? <>
           <p className="eyebrow">SAVED LIVES</p><h2 id="dialog-title">Past lives</h2>
           <p>Up to ten completed lives are kept here, newest first. Download a save to keep a copy outside this browser.</p>

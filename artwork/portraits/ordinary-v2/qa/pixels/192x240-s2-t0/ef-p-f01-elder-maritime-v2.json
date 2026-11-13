@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f01-elder-maritime-v2",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f01-elder-maritime-v2.png",
+  "sourceSha256": "111f7f11c26349fa83247743e2473494b932aa304af27d79a121025a5df936c8",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      192,
+      240
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    192,
+    240
+  ],
+  "scale": 2,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/192x240-s2-t0/ef-p-f01-elder-maritime-v2.logical.png",
+  "logicalSha256": "2ee37940a11f8eddda4b1e68b0043b656474615791269573661de0869cb85917",
+  "outputPath": "portraits/192x240-s2-t0/ef-p-f01-elder-maritime-v2.png",
+  "outputSha256": "a3cde88b9157e6e106c559b4463beaf6aa8b085e195cbdb0b690feeb1df91959",
+  "logicalPixelSha256": "1b8e8eb8e7db48f56f03ad186cf407c3a1d3d75cd23d070f956f9474fee60707",
+  "uniqueColours": 10651,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

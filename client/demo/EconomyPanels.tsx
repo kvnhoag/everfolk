@@ -9,9 +9,10 @@ import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { getLoanSummary } from "../models/loan-summary.ts";
 import PixelPortrait from "../components/PixelPortrait.tsx";
+import { childPortraitState, personPortraitState, resolvePortraitState } from "../models/portrait-state.ts";
 import { relationshipLabels, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
-import type { DemoScreen } from "./screen.ts";
+import type { DemoScreen, TownFigureView } from "./screen.ts";
 import { itemLabel, levelLabel } from "./labels.ts";
 import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
@@ -62,6 +63,12 @@ function heldQuantity(screen: DemoScreen, item: TradeItem): number {
   if (item === "ox") return screen.household.animals.ox;
   if (item === "donkey") return screen.household.animals.donkey;
   return 0;
+}
+
+function townFigurePortrait(figure: TownFigureView) {
+  const jobId = { merchant: "merchant", grower: "farmer", army: "quartermaster" }[figure.role];
+  return resolvePortraitState({ personKey: `town:${figure.role}`, age: figure.age, sex: figure.sex,
+    avatarVariant: figure.avatarVariant, jobId });
 }
 
 export default function EconomyPanels({
@@ -222,12 +229,8 @@ export default function EconomyPanels({
         <aside className="demo-town-offer-card" aria-label="Town counterparty offer">
           {offerFigure && (
             <PixelPortrait
-              age={offerFigure.age}
+              portrait={townFigurePortrait(offerFigure)}
               name={offerFigure.name}
-              sex={offerFigure.sex}
-              originId={offerFigure.originId}
-              avatarVariant={offerFigure.avatarVariant}
-              seed={`town:${offerFigure.role}`}
               className="demo-town-figure-avatar"
             />
           )}
@@ -258,12 +261,9 @@ export default function EconomyPanels({
       {screen.legacyHelp?.map(help => (
         <aside className="demo-legacy-arrival demo-legacy-figure-card" key={`${help.tokenId}:${help.age}`} aria-label="Granary from a past life">
           <PixelPortrait
-            age={56}
+            portrait={resolvePortraitState({ age: 56, sex: "male", avatarVariant: 1,
+              personKey: `legacy:${help.tokenId}`, occupation: "Independent farmer" })}
             name={`Life NFT #${help.tokenId}`}
-            sex="male"
-            originId="artisan-household"
-            avatarVariant={1}
-            seed={`legacy:${help.tokenId}`}
             className="demo-town-figure-avatar"
           />
           <div className="demo-legacy-figure-copy">
@@ -793,12 +793,8 @@ export default function EconomyPanels({
                   <article key={fig.role} className={`demo-town-figure-card${figureOffer ? " has-offer" : ""}`}>
                     <div className="demo-town-figure-top">
                       <PixelPortrait
-                        age={fig.age}
+                        portrait={townFigurePortrait(fig)}
                         name={fig.name}
-                        sex={fig.sex}
-                        originId={fig.originId}
-                        avatarVariant={fig.avatarVariant}
-                        seed={`town:${fig.role}`}
                         className="demo-town-figure-avatar"
                       />
                       <div className="demo-town-figure-meta">
@@ -883,12 +879,9 @@ export default function EconomyPanels({
                 <article className={`demo-town-figure-card${loanSummary?.dueSoon || loanSummary?.due ? " has-offer" : ""}`}>
                   <div className="demo-town-figure-top">
                     <PixelPortrait
-                      age={52}
+                      portrait={resolvePortraitState({ age: 52, sex: "male", avatarVariant: 2,
+                        personKey: "town:moneylender", occupation: world.economy.moneylender.title })}
                       name="Syros the Banker"
-                      sex="male"
-                      originId="merchant-household"
-                      avatarVariant={2}
-                      seed="town:moneylender"
                       className="demo-town-figure-avatar"
                     />
                     <div className="demo-town-figure-meta">
@@ -964,10 +957,8 @@ export default function EconomyPanels({
                       <article key={`child:${child.id}`} className="demo-person-card is-family">
                         <div className="demo-town-figure-top">
                           <PixelPortrait
-                            age={Math.max(0, childAge)}
+                            portrait={childPortraitState(world, life, child)}
                             name={child.name}
-                            seed={`${life.seed}:child:${child.id}`}
-                            originId={life.originId}
                             className="demo-town-figure-avatar"
                           />
                           <div className="demo-town-figure-meta">
@@ -1032,12 +1023,8 @@ export default function EconomyPanels({
                         <div className="demo-town-figure-top">
                           {"sex" in person && (
                             <PixelPortrait
-                              age={life.age + person.ageOffset}
+                              portrait={personPortraitState(world, life, person)}
                               name={person.name}
-                              sex={person.sex}
-                              originId={person.originId}
-                              avatarVariant={person.avatarVariant}
-                              seed={`${life.seed}:${person.id}`}
                               className="demo-town-figure-avatar"
                             />
                           )}

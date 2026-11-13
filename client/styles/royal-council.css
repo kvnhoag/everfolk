@@ -1,0 +1,38 @@
+/* Class management uses the existing wealth and character-panel components. */
+.royal-council .household-treasury{margin-bottom:14px}
+.royal-council .household-yearly-budget{margin-bottom:20px}
+.royal-council .household-budget-total dt,.royal-council .household-budget-total dd{font-weight:600;color:#405e45}
+.royal-council .household-standing{margin:0 0 15px}
+.royal-council .household-standing .character-skill-heading>span{font-size:11px;font-weight:600;color:#53684c}
+.royal-council .household-standing-strained{--skill-color:#aa7950;background:#f0e8d9;border-color:#d8c7ac}
+.royal-council .household-decisions-heading{margin-top:24px}
+.household-conditions{margin:18px 0 24px;border-top:1px solid #d4d9c5;border-bottom:1px solid #d4d9c5}
+.household-conditions>summary{display:flex;justify-content:space-between;gap:12px;padding:14px 0;cursor:pointer;font-size:12px;font-weight:600;color:#536b48}
+.household-conditions>summary>span{font-size:10px;font-weight:400;color:#857052}
+.household-conditions ul{margin:0;padding:0;list-style:none}
+.household-conditions li{padding:12px 0;border-top:1px solid #e0e4d8}
+.household-conditions li>div{display:flex;flex-direction:column;gap:4px}
+.household-conditions li>div>span{font-size:9px;color:#889078}
+.household-conditions li>div>strong{font-size:11px;font-weight:500;line-height:1.7;color:#68775d}
+.household-conditions li>p{margin:5px 0 0;font-size:10px;line-height:1.7;color:#79826a}
+.household-conditions li.is-active>div>span,.household-conditions li.is-active>p{color:#a06e43}
+.household-title-paths{margin-top:24px}
+.household-title-path{margin:14px 0}
+.household-title-path>summary>strong{font-size:12px;font-weight:600;line-height:1.6}
+.household-title-path>p{margin:0 0 12px}
+.household-title-progress{list-style:decimal;margin:0 0 18px;padding-left:20px}
+.household-title-progress li{padding:8px 0 8px 3px;font-size:11px;line-height:1.6;color:#79826a}
+.household-title-progress li>small{display:block;font-size:9px;color:#938267}
+.household-title-progress li.is-earned,.household-title-progress li.is-earned>small{color:#56764b}
+.household-title-progress li.is-next{font-weight:600;color:#46633e}
+.household-current-project{padding:0 0 6px}
+.household-current-project h5,.household-later-projects h5{font-size:12px;line-height:1.7;margin:0;color:#536b48}
+.household-title-path .household-project-requirements{display:grid;gap:6px;margin:12px 0 15px}
+.household-title-path .household-project-requirements li{display:flex;align-items:baseline;gap:7px;padding:0;border:0;font-size:10px;line-height:1.7;color:#92774f}
+.household-title-path .household-project-requirements li.is-met{color:#5c7b53}
+.household-title-path .household-project-requirements li>span:first-child{flex-shrink:0}
+.household-project-cooldown{font-size:10px;margin:8px 0 12px}
+.household-later-projects{border-top:1px solid #e0e4d8;margin-top:10px}
+.household-later-projects>summary{padding:12px 0;font-size:10px;color:#68775d;cursor:pointer}
+.household-later-projects>article{padding:10px 0;border-top:1px solid #e0e4d8}
+@media(max-width:600px){.royal-council .household-yearly-budget dl>div{flex-wrap:wrap;gap:3px}.royal-council .household-yearly-budget dd{white-space:normal}}

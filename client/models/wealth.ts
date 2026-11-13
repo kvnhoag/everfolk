@@ -9,8 +9,9 @@ import type { TradeItem } from "../../src/demo/types.ts";
 
 export function formatMoney(amount: number, world: WorldPack, full = false): string {
   const currency = world.economy?.currency;
-  const value = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 2 }).format(amount);
-  return currency ? `${value} ${full ? Math.abs(amount) === 1 ? currency.singular : currency.plural : currency.short}` : value;
+  const rounded = Math.round(amount) || 0;
+  const value = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(rounded);
+  return currency ? `${value} ${full ? Math.abs(rounded) === 1 ? currency.singular : currency.plural : currency.short}` : value;
 }
 
 export function assetValue(world: WorldPack, assets: Record<string, number>, life?: LifeState): number {

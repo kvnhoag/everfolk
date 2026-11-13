@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\source\\alexander-aura-revised.png",
+  "sourceSha256": "19a9272a6074bc57ec3aa79387957ea5a59c64a57e2c42f64fa7f58c61b7a833",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 31204,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 2,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\qa\\reusable-workflow-pixel.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\qa\\reusable-workflow-pixel.png",
+  "logicalSha256": "45eb672e0d0b66877989d41d5275038659d88568fd631d2bca662304258765ea",
+  "outputSha256": "929b74291c8f427131bc8d757049b91d063c484cd9ada795723e9a080b6693db",
+  "logicalPixelSha256": "cb921ca53e3848c2d777cf32cbbc8bf929b2587eb15ab6b5733a1074bfa9a968",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

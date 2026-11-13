@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "fbdb15737cbb32ef4416a4ca08c99fffc29baaa45aab6ebd6f403d0656406b57",
+  "finePixelSha256": "a1fd68052fb0cd91541f4f65a0610df8b83a5ebb95bc1985b930e4cdcadf0752",
+  "mixedPixelSha256": "79f0093dd1436b21663cb9f4a2ee356613e80c8262b0427f2da6c3a390bde876",
+  "maskPixelSha256": "0e6721f7d7daad32a4217c1ebe1043101d01870d128d97d3f086279e0257031b",
+  "selectedDetailCells": 358,
+  "retainedCoarseCells": 4762,
+  "criticalForcedAdditionalCells": 0,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12888,
+  "changedPixels": 12671,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        147,
+        74,
+        240,
+        95
+      ],
+      "selectedPixels": 1953,
+      "totalPixels": 1953,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-m02-middle-everyday-v3",
+  "source": "portraits/assembled/ef-p-m02-middle-everyday-v3.png",
+  "sourceSha256": "26ab9c9e8e680e28bd1757c79d74b5943906e793da5c5e29b9bbe74b15cf0a80",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-m02-middle-everyday-v3.png",
+  "coarseSha256": "b2b2aba1e80558ce9d3588af82404d5d27007504a68d87e0fce5468d9ac5c850",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-m02-middle-everyday-v3.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-m02-middle-everyday-v3.png",
+  "fineSha256": "2d85d857c3d09390eddcab5bc4af8df12d0b67119071c2cfbf126df6de2e6218",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-m02-middle-everyday-v3.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-m02-middle-everyday-v3.png",
+  "outputSha256": "43cf58a72fbd5d4e3d21dcd164caf495806fe80fdd27ad783f16f9026d33641b",
+  "maskPath": "qa/regional-masks/ef-p-m02-middle-everyday-v3.png",
+  "maskSha256": "a50e2a53ef21620f0ba64eab0525c986e11356daef74d580783ca7da6e3cfb38",
+  "configPath": "qa/regions/ef-p-m02-middle-everyday-v3.json",
+  "configSha256": "112a960431d5a94cb949812526ab8570d8b1901b81ef4fe4263f6840433d3a16",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "measured eye/chin on the complete original model after one uniform whole-canvas scale"
+}

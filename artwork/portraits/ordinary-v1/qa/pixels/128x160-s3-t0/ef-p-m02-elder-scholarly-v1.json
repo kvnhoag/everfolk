@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m02-elder-scholarly-v1",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m02-elder-scholarly-v1.png",
+  "sourceSha256": "a9c919440004e0b5dba0459174d294d3a0799e5ae8ae83cc09247d21dac076c6",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-m02-elder-scholarly-v1.logical.png",
+  "logicalSha256": "17bc161421e7f55b5a264d16e3f8bb7eded3e112f7a187092cd34bef4d07238c",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-m02-elder-scholarly-v1.png",
+  "outputSha256": "b8b018a2f700d46b19e5fa403ed9936f55f10449159d6d8288b2d91cc8c5d5d3",
+  "logicalPixelSha256": "8e16fa6f7cb786824aec256734c8af195417dae2402fa32e8fdfee249ee7cf17",
+  "uniqueColours": 6400,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

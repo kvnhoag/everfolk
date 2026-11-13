@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>17 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_17_Archive_Seal___color_device" data-name="17 Archive Seal / color device">
+      <circle id="Archive_ring" data-name="Archive ring" cx="80" cy="80" r="48.64" fill="none" stroke="#24464b" stroke-width="5.12" stroke-miterlimit="10"/>
+      <path id="Open_chronicle" data-name="Open chronicle" d="M50.56 68.48 C60.8 64.213 70.613 65.493 80 72.32 C89.387 65.493 99.2 64.213 109.44 68.48 L109.44 100.48 C99.2 97.067 89.387 98.773 80 105.6 C70.613 98.773 60.8 97.067 50.56 100.48 Z M80 72.32 L80 105.6" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon id="Guiding_star" data-name="Guiding star" points="80,37.76 83.84,48 94.08,51.84 83.84,55.68 80,65.92 76.16,55.68 65.92,51.84 76.16,48" fill="#b58a49"/>
+      <circle id="Archive_punctuation" data-name="Archive punctuation" cx="80" cy="118.4" r="3.84" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

@@ -1,0 +1,310 @@
+{
+  "artboards": [
+    {
+      "height": 600,
+      "name": "04 Transparent primary",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "04 Presentation proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "04 One colour",
+      "width": 1000,
+      "x": 2200,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 51,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / reference-led 04 A Life in Time",
+  "history": [
+    "Artboard Options",
+    "New Artboard",
+    "New Artboard",
+    "New Layer",
+    "Pen",
+    "New Layer",
+    "E / custom monumental letter 1",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "V / custom monumental letter 2",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "E / custom monumental letter 3",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "R / custom monumental letter 4",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "F / custom monumental letter 5",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "O / custom monumental letter 6",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "L / custom monumental letter 7",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "K / custom monumental letter 8",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "Everfolk signature details",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "New Layer",
+    "E / custom monumental letter 1",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "V / custom monumental letter 2",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "E / custom monumental letter 3",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "R / custom monumental letter 4",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "F / custom monumental letter 5",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "O / custom monumental letter 6",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "L / custom monumental letter 7",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "K / custom monumental letter 8",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "Everfolk signature details",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform"
+  ],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [
+    51
+  ],
+  "layers": [
+    {
+      "bounds": {
+        "height": 295.859375,
+        "width": 748,
+        "x": 2326,
+        "y": 162
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 295.859375,
+            "width": 748,
+            "x": 2326,
+            "y": 162
+          },
+          "childCount": 3,
+          "id": 74,
+          "kind": "Group",
+          "locked": false,
+          "name": "04 A Life in Time / one colour game logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 51,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 One-colour lettering",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 295.859375,
+        "width": 1848,
+        "x": 126,
+        "y": 162
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 295.859375,
+            "width": 748,
+            "x": 1226,
+            "y": 162
+          },
+          "childCount": 3,
+          "id": 28,
+          "kind": "Group",
+          "locked": false,
+          "name": "04 A Life in Time / primary game logo",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 295.859375,
+            "width": 748,
+            "x": 126,
+            "y": 162
+          },
+          "childCount": 3,
+          "id": 27,
+          "kind": "Group",
+          "locked": false,
+          "name": "04 A Life in Time / primary game logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 4,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Original lettering and signature",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 600,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "children": [
+        {
+          "anchors": 4,
+          "bounds": {
+            "height": 600,
+            "width": 1000,
+            "x": 1100,
+            "y": 0
+          },
+          "closed": true,
+          "fill": "#182c32",
+          "id": 3,
+          "kind": "Path",
+          "locked": false,
+          "name": "Proof ground",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Presentation ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 74,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#24464b",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 0
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-game-logos-v3\\masters\\04-a-life-in-time.vectorcraft",
+  "redo": [],
+  "revision": 181,
+  "selection": [
+    74
+  ],
+  "selectionBounds": {
+    "height": 295.859375,
+    "width": 748,
+    "x": 2326,
+    "y": 162
+  },
+  "selectionRotation": 0,
+  "target": null,
+  "title": "04-a-life-in-time.vectorcraft",
+  "tool": "selection",
+  "uid": 5,
+  "units": "Pixels"
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "onlyHeadGeometryChanged": true,
+  "svgExports": 8,
+  "pathsOnly": true,
+  "transparentPngs": true,
+  "nativeArtboards": 8,
+  "rasterImages": 0
+}

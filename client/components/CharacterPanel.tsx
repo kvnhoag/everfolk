@@ -14,6 +14,11 @@ import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import CareerEconomyTree from "./CareerEconomyTree.tsx";
 import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
+import RoyalCouncil from "./RoyalCouncil.tsx";
+import AristocratEstate from "./AristocratEstate.tsx";
+import { isRoyalLife } from "../../src/royalty.ts";
+import { isAristocratLife, isPrivilegedLife } from "../../src/aristocracy.ts";
+import { personPortraitState } from "../models/portrait-state.ts";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { careerOpeningNotes } from "../models/career-openings.ts";
@@ -159,8 +164,11 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
   const knownPartners = visibleRelationshipPeople(world, life);
   const visiblePeopleIds = new Set(knownPartners.map(person => person.id));
   const hasRelationships = definition.proceduralPartners ? knownPartners.length > 0 : !definition.requireIntroductions || knownPartners.length > 0;
+  const royal = isRoyalLife(world, life);
+  const aristocrat = isAristocratLife(world, life);
+  const privileged = isPrivilegedLife(world, life);
   const visibleSections = visibleCharacterSections(life, world, hasRelationships);
-  const activeSection = visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
+  const activeSection = privileged && section === "career" ? "wealth" : visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
   // Keep undiscovered people out of the DOM as well as the visible cards.
   const activities = allActivities.filter(activity => activityPartnerIds(activity).every(knowsPartner));
   const currentJob = definition.jobs.find(job => job.id === character.jobId);
@@ -281,8 +289,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />
       </div>}
-      {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
-        <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />
+      {(privileged || world.economy && life.economy) && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
+        {royal ? <RoyalCouncil activities={activities} {...props} /> : aristocrat ? <AristocratEstate activities={activities} {...props} /> : <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />}
       </div>}
       {visibleSections.some(item => item.id === "relationships") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-relationships`} aria-labelledby={`${instanceId}-tab-relationships`} tabIndex={0} hidden={activeSection !== "relationships"}>
         <div className="character-section-heading"><span>Relationships</span><h3>{currentRomanceLabel && currentPartner ? `${currentRomanceLabel}: ${currentPartner.name}` : definition.socialRelationships ? "People in your life" : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{definition.extendedSocialRoles ? "Keep track of friends, teachers, disciples, enemies and the people you love or work with." : definition.socialRelationships ? "Spend time with friends, work with business partners and care for your close relationships." : character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
@@ -290,7 +298,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         <RelationshipTable rows={socialRows} world={world} caption="Social relationships" emptyText={adults.length === 0 ? "No social relationships recorded yet. People appear here as friendships, romances and other relationships form." : "No relationships in this group yet."} />
         {shownPeople.length > 0 && <h4 className="relationship-actions-title">Relationship activities</h4>}
         <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
-          {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
+          <PixelPortrait portrait={personPortraitState(world, life, partner)} name={partner.name} className="character-person-avatar" />
           <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).length ? relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>) : <span className="character-status-tag">Contact</span>}</div></div>
           <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{displayProse(partner.description)}</p>
           {character.relationships?.partners[partner.id] && <Closeness lastContactAge={character.relationships.partners[partner.id].lastContactAge} world={world} value={character.relationships.partners[partner.id].closeness} />}

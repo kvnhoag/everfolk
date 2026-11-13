@@ -1,0 +1,236 @@
+{
+  "artboards": [
+    {
+      "height": 600,
+      "name": "03 Transparent logo",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "03 Storybook proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 5,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / illustrated story 03 The Scribe’s Tale",
+  "history": [
+    "Artboard Options",
+    "New Artboard",
+    "New Layer",
+    "Proof ground",
+    "Group",
+    "Object Properties",
+    "New Layer",
+    "Two illustrated counters of the initial",
+    "Group",
+    "Object Properties",
+    "The Scribe’s Day / narrative vignette",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Seed and scroll within the initial",
+    "Group",
+    "Object Properties",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Ink grain in E",
+    "Pen",
+    "Make Clipping Mask",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "The path continuing from the story",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform"
+  ],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [
+    5
+  ],
+  "layers": [
+    {
+      "bounds": {
+        "height": 363.6181640625,
+        "width": 1931.61755357045,
+        "x": 69.56338028169014,
+        "y": 116
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 363.6181640625,
+            "width": 831.6175535704499,
+            "x": 1169.5633802816901,
+            "y": 116
+          },
+          "childCount": 7,
+          "id": 82,
+          "kind": "Group",
+          "locked": false,
+          "name": "03 The Scribe’s Tale / complete illustrated logo",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 363.6181640625,
+            "width": 831.6175535704499,
+            "x": 69.56338028169014,
+            "y": 116
+          },
+          "childCount": 7,
+          "id": 81,
+          "kind": "Group",
+          "locked": false,
+          "name": "03 The Scribe’s Tale / complete illustrated logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 5,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Editable lettering, grain and story illustrations",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 600,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 600,
+            "width": 1000,
+            "x": 1100,
+            "y": 0
+          },
+          "childCount": 1,
+          "id": 4,
+          "kind": "Group",
+          "locked": false,
+          "name": "Proof ground",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Proof ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 157,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "None",
+    "fillActive": false,
+    "stroke": "#c8a04e",
+    "strokeWidth": 2.7
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-story-logos-v4\\masters\\03-the-scribes-tale.vectorcraft",
+  "redo": [],
+  "revision": 378,
+  "selection": [
+    82
+  ],
+  "selectionBounds": {
+    "height": 363.6181640625,
+    "width": 831.6175535704499,
+    "x": 1169.5633802816901,
+    "y": 116
+  },
+  "selectionRotation": 0,
+  "target": null,
+  "title": "03-the-scribes-tale.vectorcraft",
+  "tool": "selection",
+  "uid": 4,
+  "units": "Pixels"
+}

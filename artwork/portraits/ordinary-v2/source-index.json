@@ -1,0 +1,2281 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v2",
+  "generator": "built-in image_gen",
+  "indexer": "scripts/index-sources.py",
+  "counts": {
+    "body-references": 2,
+    "bodies": 2,
+    "wardrobe": 18,
+    "newGenerated": 22,
+    "reusedHeads": 36,
+    "total": 58
+  },
+  "sourcePolicy": "Immutable originals; project pointers are relative to this library and remain inside artwork/portraits. Absolute toolOriginalPath fields preserve external tool provenance only. Prompt text is local and ignored. Reused v1 heads remain in their original location.",
+  "defaultSourceAssetIds": [
+    "ef-b-female-v2",
+    "ef-b-male-v2",
+    "ef-w-female-commerce-v2",
+    "ef-w-female-elite-v2",
+    "ef-w-female-everyday-v2",
+    "ef-w-female-infant-v2",
+    "ef-w-female-maritime-v2",
+    "ef-w-female-military-v2",
+    "ef-w-female-performance-v2",
+    "ef-w-female-scholarly-v2",
+    "ef-w-female-work-v2",
+    "ef-w-male-commerce-v2",
+    "ef-w-male-elite-v2",
+    "ef-w-male-everyday-v2",
+    "ef-w-male-infant-v2",
+    "ef-w-male-maritime-v2",
+    "ef-w-male-military-v2",
+    "ef-w-male-performance-v2",
+    "ef-w-male-scholarly-v2",
+    "ef-w-male-work-v2"
+  ],
+  "completeBodyReferenceIds": [
+    "ef-r-female-waist-v2",
+    "ef-r-male-waist-v2"
+  ],
+  "reusedHeadSourceIndex": "../ordinary-v1/source-index.json",
+  "originalCopiesVerified": 58,
+  "originalToolFilesUnavailable": [],
+  "assets": [
+    {
+      "id": "ef-r-female-waist-v2",
+      "kind": "body-references",
+      "sourceStatus": "new-generated",
+      "role": "complete-body-reference",
+      "path": "source/body-references/ef-r-female-waist-v2.png",
+      "sha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        91,
+        12,
+        1026,
+        1402
+      ],
+      "prompt": "source/prompts/ef-r-female-waist-v2-prompt.txt",
+      "promptSha256": "ca9780231fdd93b2c46f91c5146f93adbedea547234a0375569beb6a11006004",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/body-references/ef-r-female-waist-v2.generation.json"
+      ],
+      "provenanceSha256": "e9c66ab9c21b58ddb8826c784ba4c5abb045376a27502b2621b0ffbed1cdcf67",
+      "referencePaths": [],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-909be5a2-c63d-4132-b287-0bbe4db9800b.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-r-male-waist-v2",
+      "kind": "body-references",
+      "sourceStatus": "new-generated",
+      "role": "complete-body-reference",
+      "path": "source/body-references/ef-r-male-waist-v2.png",
+      "sha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        7,
+        1101,
+        1402
+      ],
+      "prompt": "source/prompts/ef-r-male-waist-v2-prompt.txt",
+      "promptSha256": "761a174feeb46a5ddc9465335b6d9be30755013e178a7169cd80117e9f51d748",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/body-references/ef-r-male-waist-v2.generation.json"
+      ],
+      "provenanceSha256": "afdf7bd7374743336d19f73c680c09c76d6d940681e020cb3d3d79e79ade54e9",
+      "referencePaths": [],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-69a5159e-2739-437c-aaac-376f8deb8e01.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-b-female-v2",
+      "kind": "bodies",
+      "sourceStatus": "new-generated",
+      "role": "default-body",
+      "path": "source/bodies/ef-b-female-v2.png",
+      "sha256": "70315291753cfe617b774aacd814edefaa00bea20c7ce89c9814e8ae5bbe178d",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        91,
+        496,
+        1028,
+        1402
+      ],
+      "prompt": "source/prompts/ef-b-female-v2-prompt.txt",
+      "promptSha256": "ef4f10db384834eec5671068573a956adda3a2c6064f251114f3f481e00f17f8",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/bodies/ef-b-female-v2.generation.json"
+      ],
+      "provenanceSha256": "4bdc23da775757ce2241e5f89d1880e9acc7c71949ce8d9ee23ec322908f8e6c",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-275fbfa7-c6d8-434c-bb9b-b447e5d0a351.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "70315291753cfe617b774aacd814edefaa00bea20c7ce89c9814e8ae5bbe178d",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-b-male-v2",
+      "kind": "bodies",
+      "sourceStatus": "new-generated",
+      "role": "default-body",
+      "path": "source/bodies/ef-b-male-v2.png",
+      "sha256": "9d1a4156c1a118cd11125ff72f717907cbaf3170aefd7ec890e963c168e75d7f",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        464,
+        1102,
+        1402
+      ],
+      "prompt": "source/prompts/ef-b-male-v2-prompt.txt",
+      "promptSha256": "ef4f10db384834eec5671068573a956adda3a2c6064f251114f3f481e00f17f8",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/bodies/ef-b-male-v2.generation.json"
+      ],
+      "provenanceSha256": "6ec8ecfec02ce6ede0ac4182cf15c181b9e4481ed4123b0c11c7c97a4c927009",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-02e97140-9446-41f3-8a95-af79ff3eb088.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "9d1a4156c1a118cd11125ff72f717907cbaf3170aefd7ec890e963c168e75d7f",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-commerce-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-commerce-v2.png",
+      "sha256": "e07568a73530fb45b867854670b458e5a5cd7ad7bfc6e34ec728922543a80d48",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        42,
+        624,
+        1012,
+        1467
+      ],
+      "prompt": "source/prompts/ef-w-female-commerce-v2-prompt.txt",
+      "promptSha256": "52a64fdd9a77d6ad79112f9963f6968d0fb5388cd1e6eb3349d7dc937ca9cdd6",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-commerce-v2.generation.json"
+      ],
+      "provenanceSha256": "eceec13aaa5d8b9ed2598d2ee5752581fbff9beccf99ffd8828684ba0059406c",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "commerce",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-65d1cf12-08ff-48f0-8e23-82eb81517fd5.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "e07568a73530fb45b867854670b458e5a5cd7ad7bfc6e34ec728922543a80d48",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-elite-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-elite-v2.png",
+      "sha256": "c6c76fac07e2b364a48a683a966098155aa596bb8577aee16f97d6ac76433ca6",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        48,
+        619,
+        1021,
+        1467
+      ],
+      "prompt": "source/prompts/ef-w-female-elite-v2-prompt.txt",
+      "promptSha256": "dc8f36394962e8335050a4ae0e0da70700283c34b54dc02628fbc9ab39c67042",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-elite-v2.generation.json"
+      ],
+      "provenanceSha256": "0e65ad680141b83c501712a06a2de9cfc7fa87e4e4e2661a704ffc34b5a8e393",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "elite",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-0a31bd4c-42fe-4474-82d2-de26a48d72b1.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "c6c76fac07e2b364a48a683a966098155aa596bb8577aee16f97d6ac76433ca6",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-everyday-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-everyday-v2.png",
+      "sha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        600,
+        1030,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-female-everyday-v2-prompt.txt",
+      "promptSha256": "498cf5af79bd6fab2df3acda5a77dd28af2529d7a916711e5745579d24686812",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-everyday-v2.generation.json"
+      ],
+      "provenanceSha256": "c1fc2ba4bd17828da5b75539547107a12ddfefee2a5b3469832e176bbd0d9c94",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "everyday",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-1951b6a7-5504-42da-bcd7-454af3838c95.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-infant-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-infant-v2.png",
+      "sha256": "906418b2053c7a18dbe9d66e61ab867279e2f6f3bbf2f70f6f01049a7f6d3600",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        144,
+        598,
+        958,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-female-infant-v2-prompt.txt",
+      "promptSha256": "a07d804ec4e6dcbd8ede1d69c12f5222d5e7efdc245908a7bf37262a5655af65",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-infant-v2.generation.json"
+      ],
+      "provenanceSha256": "98b539e5530ee1e672d0b9966482d8532ed32837db319c426368a1d003a60a22",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "infant",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-96c98178-7e63-4219-933a-65d3cc4b261b.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "906418b2053c7a18dbe9d66e61ab867279e2f6f3bbf2f70f6f01049a7f6d3600",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-maritime-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-maritime-v2.png",
+      "sha256": "548404aae86358eacc7edb8c348bd9c9f3417a90742559d082ce4322c6896d73",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        49,
+        625,
+        976,
+        1467
+      ],
+      "prompt": "source/prompts/ef-w-female-maritime-v2-prompt.txt",
+      "promptSha256": "b9051d236ab37c233627560d910fa45e2beddfabf0784465ad70d58443b7d768",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-maritime-v2.generation.json"
+      ],
+      "provenanceSha256": "9794d74144d104d501f73a23a0a79b599a9cef1e444628d7086949463ad05ffa",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "maritime",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-e241ddbe-e64d-41c2-b9be-6bbf8416a955.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "548404aae86358eacc7edb8c348bd9c9f3417a90742559d082ce4322c6896d73",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-military-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-military-v2.png",
+      "sha256": "616e2f290c4090246c0c715ae1d14674103f9518cfddd6c2808ccbe73b7a03a6",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        597,
+        1012,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-female-military-v2-prompt.txt",
+      "promptSha256": "db119c3919c55f890b143460a2a5815de2731145d0f1f00844363129433bcf6e",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-military-v2.generation.json"
+      ],
+      "provenanceSha256": "8be2832faaebd48d143ceda4535072dc9a1e6bbaaaa5df7efc01cdcae4381ebb",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "military",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-ccee4296-6f90-4ffa-9e18-77f5f5b3406d.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "616e2f290c4090246c0c715ae1d14674103f9518cfddd6c2808ccbe73b7a03a6",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-performance-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-performance-v2.png",
+      "sha256": "3aa08e5918618f0f452e61fca790c8d624fb91a3679fc0587d3f7a58e844917c",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        51,
+        628,
+        1021,
+        1467
+      ],
+      "prompt": "source/prompts/ef-w-female-performance-v2-prompt.txt",
+      "promptSha256": "d384109a8f714651217106198c4ad6151ed08fca9bbc45bcf54eca099e2541d8",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-performance-v2.generation.json"
+      ],
+      "provenanceSha256": "9e57c6358114cfdf94fe959dccacbfe7aa5cb4ee7e375c6306d448bb5952f821",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "performance",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-a3bdff19-18b7-4628-9bdc-a7ea8d128563.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "3aa08e5918618f0f452e61fca790c8d624fb91a3679fc0587d3f7a58e844917c",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-scholarly-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-scholarly-v2.png",
+      "sha256": "86ab72660b478c9d651ba59da2ee9b9d7758d6f5570883d627c347818962a96d",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        62,
+        625,
+        1008,
+        1467
+      ],
+      "prompt": "source/prompts/ef-w-female-scholarly-v2-prompt.txt",
+      "promptSha256": "66169ad4b8fb541906546b0efdeaa092ceba697d7394e5db55fb0a20ba67dac5",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-scholarly-v2.generation.json"
+      ],
+      "provenanceSha256": "4c0f0dc8d0e0e9de65977301d80de48588fbcb72b207ea9e5e649e89f2d512a4",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "scholarly",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-ac5891e7-5ec4-4c3f-bb32-2dd86a446e11.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "86ab72660b478c9d651ba59da2ee9b9d7758d6f5570883d627c347818962a96d",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-female-work-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-female-work-v2.png",
+      "sha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        55,
+        615,
+        994,
+        1459
+      ],
+      "prompt": "source/prompts/ef-w-female-work-v2-prompt.txt",
+      "promptSha256": "396e2678c03ae7bde9909d9436421471a1095f0ceea662991dd00f4230e12c3b",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-work-v2.generation.json"
+      ],
+      "provenanceSha256": "a172232177a00c0f6e6bafb0ae823fe803c65261945665cc76e2b16a67ef2596",
+      "referencePaths": [
+        "source/body-references/ef-r-female-waist-v2.png",
+        "source/bodies/ef-b-female-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "work",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d3c5a0e4-631f-4e3a-8db3-c80d43317a1c.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-commerce-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-commerce-v2.png",
+      "sha256": "6cb001633e18368afcf46ec47c621a7d044cd4998c67cdec84bb9fa590b53fef",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        526,
+        1103,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-commerce-v2-prompt.txt",
+      "promptSha256": "3b5a587ac7794238fafbfd87b1481b14a7983eae906039dd79241315e688ebc4",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-commerce-v2.generation.json"
+      ],
+      "provenanceSha256": "8f2efdcec9cfbbfa6ea96777d668ce255b4387e7c3e36eadbd02848b245b1177",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "commerce",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-9a77b6e1-9f82-4261-8d32-3adfdfc5609e.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "6cb001633e18368afcf46ec47c621a7d044cd4998c67cdec84bb9fa590b53fef",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-elite-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-elite-v2.png",
+      "sha256": "b82842fed10799f0f9d1700931fd3e9997f1595f3d6193ca7635ff7d3547477c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        520,
+        1098,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-elite-v2-prompt.txt",
+      "promptSha256": "41667211480e2a2b63a17051bcf1aac3815df5860338ab8786a6990424be9987",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-elite-v2.generation.json"
+      ],
+      "provenanceSha256": "124d38c65664959c1949cf25255f1f835eb1b245b2e3753af5ea4b0d20cda442",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "elite",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-aba8ba99-47bd-4edd-9a5c-cb18932c61d4.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "b82842fed10799f0f9d1700931fd3e9997f1595f3d6193ca7635ff7d3547477c",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-everyday-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-everyday-v2.png",
+      "sha256": "5b50261f8da45f5d0dc448e85e773a3020aa1d117b4ea4cef516b40ed7f9d602",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        526,
+        1102,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-everyday-v2-prompt.txt",
+      "promptSha256": "43d4f3520e00514fccf7f397c744d765a6d3c8c43b3e2dbd901d1ed49255f643",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-everyday-v2.generation.json"
+      ],
+      "provenanceSha256": "3152c21c3e977267ec006c800a5f7a0a3b36115da5e0df9265567989c0f0c8fd",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "everyday",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-76fbe9b8-0013-4bc6-804e-a84910f8cdac.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "5b50261f8da45f5d0dc448e85e773a3020aa1d117b4ea4cef516b40ed7f9d602",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-infant-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-infant-v2.png",
+      "sha256": "a1eb4a273494bfbc8e9faba35caaff269d251208c2c0a7303dfc463541e62173",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        34,
+        525,
+        1082,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-infant-v2-prompt.txt",
+      "promptSha256": "26ac96048326c16998c99739c50cc42b2e5ba03c937edd82a40476d3456dc1bf",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-infant-v2.generation.json"
+      ],
+      "provenanceSha256": "626929be05836b16e64d9cf50e582c14797a7a387525a18d434fab79da807c67",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "infant",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-5596cabc-7751-47aa-8076-ee6e1d9363a8.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "a1eb4a273494bfbc8e9faba35caaff269d251208c2c0a7303dfc463541e62173",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-maritime-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-maritime-v2.png",
+      "sha256": "14dd0bd4e1437970bdc027037ec5e89d48ea3553b2a77a6aa50c47f8b5ccbb16",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        24,
+        525,
+        1099,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-maritime-v2-prompt.txt",
+      "promptSha256": "f6269722dbe5959981df25e8d9b54bf93ef3fe1a951ec0c1d55b828dc2f64e2d",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-maritime-v2.generation.json"
+      ],
+      "provenanceSha256": "0ec09ece25ce7de8b58b8422dc578c4b1def23adde661982d27b6b1552464574",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "maritime",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-e57f6570-9930-4f10-bf80-3580c24aa1d9.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "14dd0bd4e1437970bdc027037ec5e89d48ea3553b2a77a6aa50c47f8b5ccbb16",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-military-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-military-v2.png",
+      "sha256": "5652eaebea944e62791159d39dec0959db312db13a23899e9e600d35ab3b742b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        20,
+        524,
+        1099,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-military-v2-prompt.txt",
+      "promptSha256": "e383bfdf8fbb40aba50137440dc7a70ae572bd9df507967fe5ccf749083db190",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-military-v2.generation.json"
+      ],
+      "provenanceSha256": "9f43dd8b8e507904965711d7ad3c204d624263563209fda4418dd9b6dc10dfac",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "military",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-5722668f-cc9e-420a-b848-0729330ca88b.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "5652eaebea944e62791159d39dec0959db312db13a23899e9e600d35ab3b742b",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-performance-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-performance-v2.png",
+      "sha256": "21e77507bd7216e7b69da3ed048c14a51083fab460ba1926e53049fc5a582bb7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        529,
+        1101,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-performance-v2-prompt.txt",
+      "promptSha256": "b7e8b40dbf708b0984831137d2ba95e9815e732d3433d5da0459883dd7594bed",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-performance-v2.generation.json"
+      ],
+      "provenanceSha256": "0f37d4e7826ab08f00778829efef2686f2cf4f0226691b9f1ce9c68b07785fca",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "performance",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-3dbc74dc-4ed8-47e1-9999-09780ae6aaa9.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "21e77507bd7216e7b69da3ed048c14a51083fab460ba1926e53049fc5a582bb7",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-scholarly-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-scholarly-v2.png",
+      "sha256": "aeb9f6142938a50399807edad5b07f080778e429867dda0100024b563a05ce0b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        530,
+        1101,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-scholarly-v2-prompt.txt",
+      "promptSha256": "e7822a9a7df801a9f66bfe08e35e22e6917a5e8d9e45e84c363ccea67f36cbdf",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-scholarly-v2.generation.json"
+      ],
+      "provenanceSha256": "1984c2199c021a9f296ae6e5a41e39ab0f04a31ff8fd8aa5e13b7d6f2907fdb6",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "scholarly",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-c9e8c7c7-6e85-4549-acd9-8a8ba9936827.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "aeb9f6142938a50399807edad5b07f080778e429867dda0100024b563a05ce0b",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-w-male-work-v2",
+      "kind": "wardrobe",
+      "sourceStatus": "new-generated",
+      "role": "default-wardrobe",
+      "path": "source/wardrobe/ef-w-male-work-v2.png",
+      "sha256": "fc1827d9c003d6b2c2f7c89726f47d8cc06b2f3a1c7e270b3fb6c161292eccb7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        527,
+        1102,
+        1402
+      ],
+      "prompt": "source/prompts/ef-w-male-work-v2-prompt.txt",
+      "promptSha256": "d1d9c29543c04c04c845f7fae1a7add5ccfa4c972263b6619b4dcde7c74b9582",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-work-v2.generation.json"
+      ],
+      "provenanceSha256": "132a7c72583df7fffc3202ae3b2afad741c4fb50a9d3cba4f514b4c9cff58da9",
+      "referencePaths": [
+        "source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "work",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-4587545a-2388-4317-864a-792cadb2e476.png",
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "fc1827d9c003d6b2c2f7c89726f47d8cc06b2f3a1c7e270b3fb6c161292eccb7",
+      "originalCopyExact": true,
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-adult-v1.png",
+      "sha256": "d1dbf9277825843a614df489bac6a552e86ba63c5101bb8c1898109ef630d0c9",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        137,
+        41,
+        967,
+        1362
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-adult-v1-prompt.txt",
+      "promptSha256": "4666f5843d18c8704b1d1f7df95fc253885df715f49b787194fdff66cc2f5884",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-adult-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-3e0f816e-7d2b-4ef9-8fd9-ad2008c28e9f.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "d1dbf9277825843a614df489bac6a552e86ba63c5101bb8c1898109ef630d0c9",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-child-v1.png",
+      "sha256": "d06198d6e675fa049e80fa2cf4929bb5da0e3c6552ed930e410d2b3fbc5d07ac",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        136,
+        134,
+        971,
+        1284
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-child-v1-prompt.txt",
+      "promptSha256": "eeb033e4810db4c730b11b6f2c108553bae2dfe90f894de266bff4b35a511f68",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-child-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-0c092c2b-2e5d-41d0-abfd-940e9f980983.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "d06198d6e675fa049e80fa2cf4929bb5da0e3c6552ed930e410d2b3fbc5d07ac",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-elder-v1.png",
+      "sha256": "fc8f52c37acf167bc12ea4b1424ed2de955f0bde948a5bd6b411ffeedb536b96",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        136,
+        33,
+        981,
+        1364
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-elder-v1-prompt.txt",
+      "promptSha256": "8164ec4d00180c20eb0a953834cb24f9359c6ef519e0bb09df9fce60c09ba056",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-elder-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-928e343a-6d49-4fb5-a20f-2ab813dff722.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "fc8f52c37acf167bc12ea4b1424ed2de955f0bde948a5bd6b411ffeedb536b96",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-infant-v1.png",
+      "sha256": "f6fc38e0266948fd7b5b24d9223bc17e567352e880078c00eb371c047bfaea88",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        134,
+        150,
+        983,
+        1283
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-infant-v1-prompt.txt",
+      "promptSha256": "6f9db7ee0f56aba5a91a9d8b994bb2ebd7f744e16fa1b5af1ffae5e7b96e6195",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-infant-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-615d3197-b814-4ef2-add2-0f4532030385.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f6fc38e0266948fd7b5b24d9223bc17e567352e880078c00eb371c047bfaea88",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-middle-v1.png",
+      "sha256": "6f6788ab541c673a1998ec42003d0f15b673a21926d7949513ff06fa24909772",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        132,
+        34,
+        967,
+        1365
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-middle-v1-prompt.txt",
+      "promptSha256": "80e649f5937fea79c58943a283ac879663d99ef1ef328df861e19cad72ead6a8",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-middle-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-813b1923-8be4-46ae-9a75-010d1cea5fdd.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "6f6788ab541c673a1998ec42003d0f15b673a21926d7949513ff06fa24909772",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f01-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f01-youth-v1.png",
+      "sha256": "06efbdc93bff28387e0c09055d8cda57e006e7d2036b2f1dbdbe454e2863b9d6",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        128,
+        34,
+        978,
+        1362
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f01-youth-v1-prompt.txt",
+      "promptSha256": "d9438298ad8548e0292ac91481e2130d6b89142141bbbb57a3872c8a7bf7baf1",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f01-youth-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-857c64f4-d33e-455c-8092-b2f741dc6bf0.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "06efbdc93bff28387e0c09055d8cda57e006e7d2036b2f1dbdbe454e2863b9d6",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-adult-v1.png",
+      "sha256": "597a561978a174c3c453554c15e20e0f15e11729afb1f94ab9f9133bcca2db7c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        140,
+        24,
+        977,
+        1372
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-adult-v1-prompt.txt",
+      "promptSha256": "dc075cec967ae9035634e6707e24a47cb3402aec75ce56a051c174233c22ba97",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-adult-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-ccff6e95-391e-4b5f-8480-703e7bf7e611.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "597a561978a174c3c453554c15e20e0f15e11729afb1f94ab9f9133bcca2db7c",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-child-v1.png",
+      "sha256": "dadfcbc55036a26e3550869ff7f4489cbca47d6ad51b231b7b2226e8c843003c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        149,
+        103,
+        946,
+        1346
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-child-v1-prompt.txt",
+      "promptSha256": "25a40f5315163b64534008badba475cd1349403f938c4f3dec06c6d14be20e6d",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-child-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-a86bf8ae-bedb-43f2-931b-d75f51fc23c1.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "dadfcbc55036a26e3550869ff7f4489cbca47d6ad51b231b7b2226e8c843003c",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-elder-v1.png",
+      "sha256": "7232567b3c992a2a69115d0c927b3543a1a601c97012f0e9985e9e5eb25ee340",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        139,
+        17,
+        981,
+        1387
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-elder-v1-prompt.txt",
+      "promptSha256": "9f8259d3699a9fcee284d13b98e71c5cab20e708c64de2c361e80fa4567050c5",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-elder-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-3732471e-09b8-4418-b04d-2215d5c6c2b6.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "7232567b3c992a2a69115d0c927b3543a1a601c97012f0e9985e9e5eb25ee340",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-infant-v1.png",
+      "sha256": "19511c55316e69a4ad3b5f7d2c43aaab095d279c48ca65af7daa0ecef322c62c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        114,
+        103,
+        997,
+        1273
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-infant-v1-prompt.txt",
+      "promptSha256": "73f90019fb8b54b6dd0b03f770ab95d8780751af34d3a5fdbee19850ec162d0d",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-infant-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-8b30497d-3cba-4dd1-85e4-7ebe73444794.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "19511c55316e69a4ad3b5f7d2c43aaab095d279c48ca65af7daa0ecef322c62c",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-middle-v1.png",
+      "sha256": "cd1e86f3dcb34126999b95531ce5c8cdc7b48a5809a4f2235fd6653290cc46a3",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        139,
+        21,
+        978,
+        1378
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-middle-v1-prompt.txt",
+      "promptSha256": "b7eafd8085805b4581133d8e6b7501ab21e493d157f9479fb21fa79b2c9f9424",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-middle-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-f29d1ab4-7b09-42fc-9059-d9998c643960.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "cd1e86f3dcb34126999b95531ce5c8cdc7b48a5809a4f2235fd6653290cc46a3",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f02-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f02-youth-v1.png",
+      "sha256": "1bfe0e103fc4f8d5f972222e5ebdb2d3588724c34e3cb437aad77206faca78fb",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        138,
+        18,
+        978,
+        1385
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f02-youth-v1-prompt.txt",
+      "promptSha256": "8fa9857f117478beab30a950bd9fd85a1013363b35e92b2b6592bfc6f63a887e",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/prompts/ef-h-f02-youth-v1-generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-50928bd7-4f27-4795-94d8-3b805ab96acf.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "1bfe0e103fc4f8d5f972222e5ebdb2d3588724c34e3cb437aad77206faca78fb",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-adult-v1.png",
+      "sha256": "bf851e2fcb24acfb422ea847d2ec84c919e0c851f76c5628b737e259f300028e",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        257,
+        15,
+        1051,
+        1173
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-adult-v1-prompt.txt",
+      "promptSha256": "ebdaf3d795ac4550f95bc6898149e4c749bea2a4e5562cb2adb2f451fca1c450",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-adult-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-d88a5fad-6a85-4ed4-9061-fac9d00fc6f1.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "bf851e2fcb24acfb422ea847d2ec84c919e0c851f76c5628b737e259f300028e",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-child-v1.png",
+      "sha256": "744f015fb139016f93788d9d02ca85d5478c5bb3008689fa7dde8bf0bf2dfa83",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        245,
+        34,
+        1066,
+        1126
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-child-v1-prompt.txt",
+      "promptSha256": "b6e03dbad8eeb70f50123bed7da6bcbc1972bc9bf0376bffacc94e869acce2e3",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-child-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-d55077d7-b6ee-4472-87f1-c12fd610ab64.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "744f015fb139016f93788d9d02ca85d5478c5bb3008689fa7dde8bf0bf2dfa83",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-elder-v1.png",
+      "sha256": "f2c6847540c6654b11a4a505995d2326673f50cf17729c77d71768377e5d6c4d",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        252,
+        10,
+        1059,
+        1173
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-elder-v1-prompt.txt",
+      "promptSha256": "7136de50cac6621077f9419dd64499804baf72a6ac5640da217f2265e4d9e908",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-elder-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-b209cfa9-4bd9-4178-920b-e040b9bd6b04.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f2c6847540c6654b11a4a505995d2326673f50cf17729c77d71768377e5d6c4d",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-infant-v1.png",
+      "sha256": "f87ccedf4212f6af2c97c79b1c40b608d3711fcb2a8aab257727a73737de0ee9",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        258,
+        62,
+        1034,
+        1134
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-infant-v1-prompt.txt",
+      "promptSha256": "e09e3caf15d23918bafda0637210ad5bae71d2ed2d7a5db62228e5a8ceb9f828",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-infant-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-f6bfe10b-dd92-414f-8280-8694e7775ee9.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f87ccedf4212f6af2c97c79b1c40b608d3711fcb2a8aab257727a73737de0ee9",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-middle-v1.png",
+      "sha256": "1aed61337b3493be67a3a8947a5cf9360bae825b98d5e13924fcc89b78a7b13d",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        261,
+        14,
+        1054,
+        1178
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-middle-v1-prompt.txt",
+      "promptSha256": "d873eb05180c9842ff5079eae88ea6c6c8222a745c53ab67fc90dce8409afba2",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-middle-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-54ffe4fb-c39b-493b-8deb-f92ff73bf532.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "1aed61337b3493be67a3a8947a5cf9360bae825b98d5e13924fcc89b78a7b13d",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-f03-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-f03-youth-v1.png",
+      "sha256": "8746622bdaf953dd8937b31d7c02a68938e808d0043f3d22c243bbca959308ae",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        263,
+        16,
+        1046,
+        1160
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-f03-youth-v1-prompt.txt",
+      "promptSha256": "3b145ca2cea97a6735f9279cad8d45ddde041c8ef429b0e4c1f57611f33e6192",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-f03-youth-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-64f69dbd-1cd2-4cf5-96cf-f22941beef4e.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "8746622bdaf953dd8937b31d7c02a68938e808d0043f3d22c243bbca959308ae",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-adult-v1.png",
+      "sha256": "4eb2f06f236313793911f4fe2e899434b4af549c5bd8ff1ecb51a45e38112ac7",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        191,
+        11,
+        970,
+        1253
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-adult-v1-prompt.txt",
+      "promptSha256": "2e8f154ded30b6fe4e03aecfce5b1cdf333479a9c782bfc0dd0f1b6fba8da6e7",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-adult-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-1e3efa55-d163-4d76-8500-a0d0d71f19d6.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "4eb2f06f236313793911f4fe2e899434b4af549c5bd8ff1ecb51a45e38112ac7",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-child-v1.png",
+      "sha256": "f6995fd6133e67dfca191c1ad3af533c931d59cd0e640a6165cbbc8b2ea26d4a",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        259,
+        49,
+        1028,
+        1136
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-child-v1-prompt.txt",
+      "promptSha256": "7a4c92657a5cc65c59c1f8292f6bfb9a2449fb88d583d6b3013370066a667e39",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-child-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-af23f6ba-15c4-41d2-9871-8f07235eb0ac.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f6995fd6133e67dfca191c1ad3af533c931d59cd0e640a6165cbbc8b2ea26d4a",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-elder-v1.png",
+      "sha256": "c08ac00caddcedfee0cff5415f4275e249a3e488e11fb398920afe0378b491ea",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        192,
+        9,
+        982,
+        1258
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-elder-v1-prompt.txt",
+      "promptSha256": "17c90ba86d5828c34d8f8645a8ce3d47bbf8463c3631fccfbf4b8686e63bcf66",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-elder-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-0bdd6349-6686-4ebb-93d5-256e2e0eb104.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "c08ac00caddcedfee0cff5415f4275e249a3e488e11fb398920afe0378b491ea",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-infant-v1.png",
+      "sha256": "6edc43b54004ee4a7fda2dae4910da1f38f22f92817cbf6ef97a6fd1dddb81fa",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        156,
+        44,
+        1059,
+        1219
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-infant-v1-prompt.txt",
+      "promptSha256": "68b732f71b6c3e81cf89e7c905852a1f92f69b47121cffb9d91978181cfefb40",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-infant-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-b41808f4-9011-4063-bae1-45f62a75b455.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "6edc43b54004ee4a7fda2dae4910da1f38f22f92817cbf6ef97a6fd1dddb81fa",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-middle-v1.png",
+      "sha256": "043f2a899e4b439a8b4c0368b5576bbfc1721d698bbf6fe8acc43752a2b4d578",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        195,
+        16,
+        973,
+        1272
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-middle-v1-prompt.txt",
+      "promptSha256": "3cb0c1d2988e10a9e517e261116aab588de874006057a2bdae211efb0ee76954",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-middle-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-0b9be19d-bdf2-4b51-bffb-c358e64b85cd.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "043f2a899e4b439a8b4c0368b5576bbfc1721d698bbf6fe8acc43752a2b4d578",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m01-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m01-youth-v1.png",
+      "sha256": "f2e581fb3fb8dee0810fbd22692bd1f970c49e277d1641a82a337b6daa292267",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        207,
+        15,
+        976,
+        1248
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m01-youth-v1-prompt.txt",
+      "promptSha256": "45973c73efdecea60f96033a02f0b926caa80ae86674bfe945d42e0872a6f853",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/heads/ef-h-m01-youth-v1.generation.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-c6b76923-34d5-4af8-b193-002632ecd93f.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f2e581fb3fb8dee0810fbd22692bd1f970c49e277d1641a82a337b6daa292267",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-adult-v1.png",
+      "sha256": "5630059923eb4baa4ea2a8aa43cd4dcce38141c6364a115b105e0ecc49683738",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        198,
+        64,
+        908,
+        1319
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-adult-v1-prompt.txt",
+      "promptSha256": "07dd1a4a29af5b8b8b16a488ab97ce90ecd603749195264cc6ab78f4eb1ba841",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-adult-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-6d87cc98-f485-46e7-aa05-e516b28e9c8a.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "5630059923eb4baa4ea2a8aa43cd4dcce38141c6364a115b105e0ecc49683738",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-child-v1.png",
+      "sha256": "2eee00bea588353c513a4881db48cfaa95498aa44971006995f7ffbc4cb2b0de",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        193,
+        119,
+        926,
+        1232
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-child-v1-prompt.txt",
+      "promptSha256": "2f50140004fe753ee174ab7605a2106b46c3612f7ad656beb3e5a2ca82464233",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-child-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-645f114c-7e80-41da-9d73-eab95bfd2f99.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "2eee00bea588353c513a4881db48cfaa95498aa44971006995f7ffbc4cb2b0de",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-elder-v1.png",
+      "sha256": "977bdf56ac77614bbb21cf858db888b25a83626973557bee58c14900cd023683",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        191,
+        61,
+        916,
+        1320
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-elder-v1-prompt.txt",
+      "promptSha256": "6c755e6b9ef114e4b2a7c2bfffc3ac5ea12c3198254ccf6a6bbf0cab3536e449",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-elder-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-6a015fa3-5003-4f24-bc63-cb56f1a7d4d3.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "977bdf56ac77614bbb21cf858db888b25a83626973557bee58c14900cd023683",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-infant-v1.png",
+      "sha256": "c8071ddccd0b7fc3d6dd8bff9b2344aaa9d314d1029a8634fa9c8408e044d087",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        168,
+        171,
+        942,
+        1203
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-infant-v1-prompt.txt",
+      "promptSha256": "f4cfc7919ea5e4faafa167e38d3ec8d6f9969b1cc80c8eb6e812e40ddfd4acb4",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-infant-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-7a7ee2df-6547-4193-b9c2-3deb1a8cd87e.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "c8071ddccd0b7fc3d6dd8bff9b2344aaa9d314d1029a8634fa9c8408e044d087",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-middle-v1.png",
+      "sha256": "c0e59fb0d2c801da5fe18689fb415eef4801bd76425313600938da8f429db6a1",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        193,
+        58,
+        912,
+        1320
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-middle-v1-prompt.txt",
+      "promptSha256": "73f568bfcce65a2853d1e766753f14d11d14de58ab7dc4e82430c1fcf6e4d689",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-middle-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-45321751-7ad2-474c-93b2-b581d4b1daff.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "c0e59fb0d2c801da5fe18689fb415eef4801bd76425313600938da8f429db6a1",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m02-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m02-youth-v1.png",
+      "sha256": "4dbc941ad6bc97ef146ffa923f6874248e823a2d9a923754d291c0cbe2ad2d43",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        201,
+        63,
+        913,
+        1289
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m02-youth-v1-prompt.txt",
+      "promptSha256": "14e7997ac48b52815698a2fbdeddf69c3e555e1886c91af0b54de9ff3a83b35f",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m02-youth-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-71afa3bf-b6f9-490c-8de3-7ae5fb5fc7e4.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "4dbc941ad6bc97ef146ffa923f6874248e823a2d9a923754d291c0cbe2ad2d43",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-adult-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-adult-v1.png",
+      "sha256": "a1ce6911689cc5d3fe2147a5dbc61740c3ebce308d0797326c873811fdda0440",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        171,
+        78,
+        952,
+        1334
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-adult-v1-prompt.txt",
+      "promptSha256": "94561fb01b4d6acb51e9e0d6862961384ff84c0b3959fcedab4d56a9ee311757",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-adult-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-d7426d01-f9a8-4c4f-9a3d-29bec6d72195.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "a1ce6911689cc5d3fe2147a5dbc61740c3ebce308d0797326c873811fdda0440",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-child-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-child-v1.png",
+      "sha256": "f3e9a1a92ff4a2ab3ac8ca83141bda4c5cc7a3d94baac2c9b852b2ed1e59ed38",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        173,
+        96,
+        938,
+        1251
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-child-v1-prompt.txt",
+      "promptSha256": "d4edadffa20b6d4f03b481a3907187e4622deea379df9da98d82561be8464c8e",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-child-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-9cc8b5bd-edf9-4193-b076-04ed4461268f.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "f3e9a1a92ff4a2ab3ac8ca83141bda4c5cc7a3d94baac2c9b852b2ed1e59ed38",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-elder-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-elder-v1.png",
+      "sha256": "b47e4735d9038932188fc16fd2effdea2c737a3ebf850eee8270a877d40fb4b8",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        167,
+        78,
+        955,
+        1338
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-elder-v1-prompt.txt",
+      "promptSha256": "a84d762df31df9c537ef5df1ec6a0c93e1e5885e4f7fd253522df64c8a5faf9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-elder-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-5d13ddde-23d7-4019-bc09-9260136d5eb1.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "b47e4735d9038932188fc16fd2effdea2c737a3ebf850eee8270a877d40fb4b8",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-infant-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-infant-v1.png",
+      "sha256": "af198501b413580b4774f413962ab5a999880ad7465734df81337b0f106c4f95",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        168,
+        146,
+        951,
+        1213
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-infant-v1-prompt.txt",
+      "promptSha256": "6cc41c59548dbb964c0257468a8f6b5990fb7c7dd48331c107eb585389ac1de3",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-infant-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-4e481f49-b1f8-4895-b07d-35311e28a089.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "af198501b413580b4774f413962ab5a999880ad7465734df81337b0f106c4f95",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-middle-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-middle-v1.png",
+      "sha256": "567bfa4c5d4843378f827140d15df9d9a2334322d2032e46c824cd4ce4bf16f2",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        170,
+        74,
+        954,
+        1338
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-middle-v1-prompt.txt",
+      "promptSha256": "28a56e1426808ff4d67316df425c65e60c4bb173ccad9737fcdcf6abb1e32ece",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-middle-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-55ba7a19-e85a-4922-ab31-598bb29fdb35.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "567bfa4c5d4843378f827140d15df9d9a2334322d2032e46c824cd4ce4bf16f2",
+      "originalCopyCheck": "verified"
+    },
+    {
+      "id": "ef-h-m03-youth-v1",
+      "kind": "heads",
+      "path": "../ordinary-v1/source/heads/ef-h-m03-youth-v1.png",
+      "sha256": "0349b17e61b690b594bfec238513964a9a3e9d427cc8a3f0b1e9f2f189353155",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        177,
+        74,
+        943,
+        1328
+      ],
+      "prompt": "../ordinary-v1/source/prompts/ef-h-m03-youth-v1-prompt.txt",
+      "promptSha256": "f89bb2a4c659511a07a4fc00f6a1773f7b9417f5ba90f758bbb2d7a38fac5162",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v1/source/provenance/ef-h-m03-youth-v1.json"
+      ],
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-94138205-ab6f-44cb-bf0c-12fb4c636b76.png",
+      "originalCopyExact": true,
+      "sourceStatus": "reused",
+      "identityRole": "reused",
+      "role": "reused-identity-head",
+      "reusedFrom": "../ordinary-v1/source-index.json",
+      "reusedOriginalPreserved": true,
+      "toolOriginalAvailable": true,
+      "toolOriginalSha256": "0349b17e61b690b594bfec238513964a9a3e9d427cc8a3f0b1e9f2f189353155",
+      "originalCopyCheck": "verified"
+    }
+  ]
+}

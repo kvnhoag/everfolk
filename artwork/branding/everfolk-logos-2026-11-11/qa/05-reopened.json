@@ -1,0 +1,158 @@
+{
+  "artboards": [
+    {
+      "height": 340,
+      "name": "05 Primary lockup",
+      "width": 720,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "05 Colour device",
+      "width": 160,
+      "x": 760,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "05 One-colour device",
+      "width": 160,
+      "x": 960,
+      "y": 0
+    },
+    {
+      "height": 340,
+      "name": "05 Reverse lockup",
+      "width": 720,
+      "x": 0,
+      "y": 400
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 16,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 05 Chapter E",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 119.13937499999997,
+        "width": 476.2115625,
+        "x": 90.64,
+        "y": 510.72
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 16,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Reverse lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 94.71999999999998,
+        "width": 78.07999999999993,
+        "x": 999.04,
+        "y": 33.92
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 12,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 One-colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 94.71999999999998,
+        "width": 78.08000000000004,
+        "x": 799.04,
+        "y": 33.92
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 8,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 119.139375,
+        "width": 476.2115625,
+        "x": 90.64,
+        "y": 110.72
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Primary lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "childCount": 0,
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 21,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#b58a49",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 4.5
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\05-chapter-e.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "05-chapter-e.vectorcraft",
+  "tool": "selection",
+  "uid": 28,
+  "units": "Pixels"
+}

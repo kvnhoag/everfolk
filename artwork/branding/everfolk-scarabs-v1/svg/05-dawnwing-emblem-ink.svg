@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>01 Standalone emblem / ink</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+    <g id="_05_Dawnwing___standalone_scarab" data-name="05 Dawnwing / standalone scarab">
+      <path id="Left_great_wing" data-name="Left great wing" d="M217.684 197.614 C162.947 157.474 110.035 131.93 48 115.509 C55.298 157.474 71.719 186.667 97.263 206.737 C130.105 223.158 166.596 232.281 217.684 235.93 Z" fill="#284744"/>
+      <path id="Left_middle_wing" data-name="Left middle wing" d="M219.509 254.175 C157.474 248.702 117.333 232.281 86.316 212.211 C100.912 252.351 133.754 287.018 204.912 310.737 L223.158 283.368 Z" fill="#284744"/>
+      <path id="Left_lower_wing" data-name="Left lower wing" d="M221.333 321.684 C170.246 314.386 146.526 301.614 126.456 283.368 C144.702 323.509 173.895 347.228 223.158 360 Z" fill="#284744"/>
+      <polygon id="Left_foreleg" data-name="Left foreleg" points="223.158,197.614 195.789,175.719 181.193,122.807 197.614,91.789 214.035,102.737 201.263,128.281 212.211,162.947 235.93,179.368" fill="#284744"/>
+      <polygon id="Left_middle_leg" data-name="Left middle leg" points="224.982,279.719 206.737,297.965 206.737,321.684 228.632,305.263" fill="#284744"/>
+      <polygon id="Left_hind_leg" data-name="Left hind leg" points="215.86,338.105 184.842,372.772 164.772,411.088 181.193,420.211 201.263,385.544 234.105,358.175" fill="#284744"/>
+      <path id="Left_closed_wingcase" data-name="Left closed wingcase" d="M246.877 252.351 C224.982 246.877 206.737 259.649 203.088 287.018 C197.614 321.684 215.86 365.474 246.877 389.193 Z" fill="#284744"/>
+      <path id="Right_great_wing" data-name="Right great wing" d="M294.316 197.614 C349.053 157.474 401.965 131.93 464 115.509 C456.702 157.474 440.281 186.667 414.737 206.737 C381.895 223.158 345.404 232.281 294.316 235.93 Z" fill="#284744"/>
+      <path id="Right_middle_wing" data-name="Right middle wing" d="M292.491 254.175 C354.526 248.702 394.667 232.281 425.684 212.211 C411.088 252.351 378.246 287.018 307.088 310.737 L288.842 283.368 Z" fill="#284744"/>
+      <path id="Right_lower_wing" data-name="Right lower wing" d="M290.667 321.684 C341.754 314.386 365.474 301.614 385.544 283.368 C367.298 323.509 338.105 347.228 288.842 360 Z" fill="#284744"/>
+      <polygon id="Right_foreleg" data-name="Right foreleg" points="288.842,197.614 316.211,175.719 330.807,122.807 314.386,91.789 297.965,102.737 310.737,128.281 299.789,162.947 276.07,179.368" fill="#284744"/>
+      <polygon id="Right_middle_leg" data-name="Right middle leg" points="287.018,279.719 305.263,297.965 305.263,321.684 283.368,305.263" fill="#284744"/>
+      <polygon id="Right_hind_leg" data-name="Right hind leg" points="296.14,338.105 327.158,372.772 347.228,411.088 330.807,420.211 310.737,385.544 277.895,358.175" fill="#284744"/>
+      <path id="Right_closed_wingcase" data-name="Right closed wingcase" d="M265.123 252.351 C287.018 246.877 305.263 259.649 308.912 287.018 C314.386 321.684 296.14 365.474 265.123 389.193 Z" fill="#284744"/>
+      <polygon id="Scalloped_head" data-name="Scalloped head" points="226.807,155.649 234.105,135.579 246.877,141.053 256,131.93 265.123,141.053 277.895,135.579 285.193,155.649 277.895,173.895 234.105,173.895" fill="#284744"/>
+      <path id="Broad_thorax" data-name="Broad thorax" d="M217.684 190.316 C243.228 183.018 268.772 183.018 294.316 190.316 L305.263 226.807 C272.421 237.754 239.579 237.754 206.737 226.807 Z" fill="#284744"/>
+    </g>
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

@@ -1,0 +1,233 @@
+{
+  "artboards": [
+    {
+      "height": 600,
+      "name": "14 Transparent logo",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "14 Storybook proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 5,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / illustrated story 14 The Road Together",
+  "history": [
+    "Artboard Options",
+    "New Artboard",
+    "New Layer",
+    "Proof ground",
+    "Group",
+    "Object Properties",
+    "New Layer",
+    "Fellow Travellers / illustrated lettering extension",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Ink grain in E",
+    "Pen",
+    "Make Clipping Mask",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Ink grain in E",
+    "Pen",
+    "Make Clipping Mask",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Pen",
+    "Transform",
+    "Pen",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform"
+  ],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [
+    5
+  ],
+  "layers": [
+    {
+      "bounds": {
+        "height": 285.1451192038155,
+        "width": 1876.4713914291397,
+        "x": 112.62179927236195,
+        "y": 209.4730448586845
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 285.1451192038155,
+            "width": 776.4713914291401,
+            "x": 1212.6217992723616,
+            "y": 209.4730448586845
+          },
+          "childCount": 3,
+          "id": 95,
+          "kind": "Group",
+          "locked": false,
+          "name": "14 The Road Together / complete illustrated logo",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 285.1451192038155,
+            "width": 776.4713914291398,
+            "x": 112.62179927236195,
+            "y": 209.4730448586845
+          },
+          "childCount": 3,
+          "id": 94,
+          "kind": "Group",
+          "locked": false,
+          "name": "14 The Road Together / complete illustrated logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 5,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Editable lettering, grain and story illustrations",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 600,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 600,
+            "width": 1000,
+            "x": 1100,
+            "y": 0
+          },
+          "childCount": 1,
+          "id": 4,
+          "kind": "Group",
+          "locked": false,
+          "name": "Proof ground",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Proof ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 183,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#f1e4c4",
+    "fillActive": false,
+    "stroke": "#18383e",
+    "strokeWidth": 1.35
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-story-logos-v4\\masters\\14-the-road-together.vectorcraft",
+  "redo": [],
+  "revision": 425,
+  "selection": [
+    95
+  ],
+  "selectionBounds": {
+    "height": 285.1451192038155,
+    "width": 776.4713914291401,
+    "x": 1212.6217992723616,
+    "y": 209.4730448586845
+  },
+  "selectionRotation": 0,
+  "target": null,
+  "title": "14-the-road-together.vectorcraft",
+  "tool": "selection",
+  "uid": 2,
+  "units": "Pixels"
+}

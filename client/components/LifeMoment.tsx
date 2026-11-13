@@ -6,10 +6,10 @@ import { displayProse } from "../models/display-prose.ts";
 import "../styles/event-notifications.css";
 
 /** A completed moment, never a pending choice or an invented outcome. */
-export default function LifeMoment({ life, world, onAdvance, onOpenChronicle, showNotifications = true }: {
-  life: LifeState; world: WorldPack; onAdvance(): void; onOpenChronicle(): void; showNotifications?: boolean;
+export default function LifeMoment({ life, world, onAdvance, onOpenChronicle, showNotifications = true, persistent = true }: {
+  life: LifeState; world: WorldPack; onAdvance(): void; onOpenChronicle(): void; showNotifications?: boolean; persistent?: boolean;
 }) {
-  const { notifications, dismissNotification } = useEventNotifications(life, world, showNotifications);
+  const { notifications, dismissNotification } = useEventNotifications(life, world, showNotifications, persistent);
   return <section className="life-moment" aria-labelledby="life-moment-title">
     <p className="life-moment-intro" id="life-moment-title">{showNotifications ? "Important life events" : "Your life this year"}</p>
     <div className="event-notifications" role="log" aria-label="Important life events" aria-live="polite" aria-relevant="additions">

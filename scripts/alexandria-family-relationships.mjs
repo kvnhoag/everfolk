@@ -26,9 +26,17 @@ function guardCooperation(record, people) {
 }
 
 export function applyFamilyRelationships(world) {
-  world.version = "0.42.0";
+  world.version = "0.43.0";
   world.character.familyBackgrounds = true;
+  world.character.familyLivingGrandparentChance = 0.1;
   world.character.extendedSocialRoles = true;
+  // Care can come from other relatives; these scenes do not guarantee a living
+  // grandparent in a household that did not receive the rare survival roll.
+  for (const origin of world.origins) origin.text = origin.text.replaceAll("A grandparent", "A relative");
+  for (const id of ["background-fishing-household-childhood", "background-temple-household-childhood"]) {
+    const event = world.events.find(item => item.id === id);
+    event.text = event.text.replaceAll("a grandparent", "a relative").replaceAll("A grandparent", "A relative");
+  }
   for (const template of world.character.partners) {
     const id = template.id, person = `{person:${id}}`, skillId = teachingSkills[id.replace(/^person-/, "")];
     const definition = world.character.skills[skillId], label = definition.label.toLocaleLowerCase();

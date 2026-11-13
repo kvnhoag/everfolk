@@ -1,0 +1,66 @@
+EVERFOLK — ALEXANDER / REFERENCE-BASED CARD / VERSION2
+12 November 2026
+
+USER STEERING
+Use a different image, with pose and scene grounded in real sculptures,
+drawings and movies. Preserve the eyes and gaze rather than reducing them
+until Alexander becomes hard to recognize. Keep the current card layout.
+
+REFERENCE STUDY
+1. Naples, Museo Archeologico Nazionale, inv.4996, Alexander on Horseback.
+   Getty conservation publication:
+   https://www.getty.edu/publications/artistryinbronze/conservation-and-analysis/44-siano/
+   Image credit: Salvatore Siano, by permission of MANN. The source is used
+   to study the rider's three-quarter torso, raised sword arm, low rein hand
+   and energetic horse. It is not pasted into the generated card. The object's
+   restorations and attribution have scholarly qualifications; this card is
+   an original imagined illustration, not an archaeological reconstruction.
+2. Taddeo Zuccaro, Alexander the Great and Bucephalus, c.1553, NGA1991.182.1.
+   https://www.nga.gov/artworks/73841-alexander-great-and-bucephalus
+   NGA labels the media public domain. Used for the rider/horse diagonal,
+   gesture and movement, not as evidence of ancient costume.
+3. Warner Bros. official production-book excerpt for Alexander(2004), chapter1.
+   https://pdl.warnerbros.com/wbol/uk/movies/alexander/downloads/book/chapter_one.pdf
+   Printed page3: Alexander reviews the phalanx at Gaugamela. Used for the
+   mounted commander, horse foreground, receding pike ranks and sense of scale.
+   The actor's likeness and exact photographic composition are not reproduced.
+   The generated dawn lighting is an authored Chiaroscuro reinterpretation.
+4. The previous hybrid anime/Chiaroscuro portrait supplies the working imagined
+   identity and rendering language, while the new pose and setting replace the
+   former seated harbour scene.
+
+GENERATION AND PIXEL PASS
+source/alexander-card-clean.png — new4:5 clean source from built-in imagegen.
+source/generation-prompt.txt — exact prompt, reference roles and eye constraints.
+assets/alexander-card-pixel.png — selected840×1050 card illustration.
+assets/alexander-card-pixel.logical.png —420×525 native logical canvas.
+The selected pass uses PixelOE with a finer exact2× enlargement to preserve
+eyelids, iris/pupil separation and gaze. No palette reduction is imposed.
+The3× comparison is retained as assets/alexander-card-pixel-bold.png.
+source/pixelate-card.py is the selected finer rebuild; pixelate-card-bold.py
+rebuilds the optional coarser test. Both use the existing isolated CPU runtime.
+
+CARD AND DELIVERY
+review/Alexander-The-Great-card.png —900×1260 card, same frame and metadata.
+review/Alexander-The-Great-card-450.png —450×630 thumbnail.
+masters/Alexander-The-Great.vectorcraft — native independently editable frame,
+title, rarity, typography, brand and embedded portrait component.
+The card text/rarity remain prototype choices from version1.
+
+REBUILD
+1. Run source/pixelate-card.py with the installed isolated PixelOE Python runtime.
+2. node source/build-card.cjs
+3. node source/export-composite-layers.cjs
+4. node source/export-crisp-card.cjs
+The final composite retains the exact original portrait pixels because native
+VectorCraft PNG export slightly interpolates raster pixel edges. Frame and
+type come from the native transparent overlay. All layer states are restored.
+
+QA
+Source unchanged; repeated pixel passes identical; exact2× blocks.
+All765234 unobscured portrait pixels in the final card match the selected art
+exactly. Outer card corners are transparent. Native fonts, bounds and identical
+reopening passed. Root and delegated reviewer inspected full and half-size
+images: eyes/gaze, full head, title and raised sword remain readable.
+Version1 remains unchanged. The figure and scene are original illustrations,
+not a claim of exact historical likeness or a reproduction of the film frame.

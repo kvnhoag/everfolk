@@ -165,12 +165,12 @@ test("comparison preserves the world, state and RNG and leaves legacy scores alo
   assert.equal(getWealthComparison(world, beforeLife), null);
 });
 
-test("percentile text keeps useful precision without rounding partial ranks to endpoints", () => {
+test("percentile labels use whole percentages without rounding partial ranks to endpoints", () => {
   assert.equal(formatWealthPercentile(0), "0%");
-  assert.equal(formatWealthPercentile(0.001), "<0.1%");
-  assert.equal(formatWealthPercentile(0.1), "0.1%");
-  assert.equal(formatWealthPercentile(75.678), "75.7%");
-  assert.equal(formatWealthPercentile(99.9), "99.9%");
-  assert.equal(formatWealthPercentile(99.999), ">99.9%");
+  assert.equal(formatWealthPercentile(0.001), "<1%");
+  assert.equal(formatWealthPercentile(0.1), "<1%");
+  assert.equal(formatWealthPercentile(75.678), "76%");
+  assert.equal(formatWealthPercentile(99.9), ">99%");
+  assert.equal(formatWealthPercentile(99.999), ">99%");
   assert.equal(formatWealthPercentile(100), "100%");
 });

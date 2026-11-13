@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "status": "passed RGBA/alpha/source integrity checks",
+  "registrationStatus": "Requires canonical body registration and visual fit review; native source dimensions vary.",
+  "garments": [
+    {
+      "assetId": "ef-w-female-everyday-v2",
+      "wardrobeId": "everyday",
+      "path": "source/wardrobe/ef-w-female-everyday-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1081191,
+      "opaquePixels": 534,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        88,
+        599,
+        1031,
+        1401
+      ],
+      "collarFrontAtCanvasCenter": [
+        561,
+        738
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 683,
+          "segs": [
+            [
+              185,
+              399
+            ],
+            [
+              718,
+              925
+            ]
+          ]
+        },
+        {
+          "y": 645,
+          "segs": [
+            [
+              235,
+              372
+            ],
+            [
+              743,
+              869
+            ]
+          ]
+        },
+        {
+          "y": 701,
+          "segs": [
+            [
+              173,
+              425
+            ],
+            [
+              694,
+              937
+            ]
+          ]
+        },
+        {
+          "y": 1234,
+          "segs": [
+            [
+              320,
+              778
+            ]
+          ]
+        },
+        {
+          "y": 1401,
+          "segs": [
+            [
+              236,
+              860
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-work-v2",
+      "wardrobeId": "work",
+      "path": "source/wardrobe/ef-w-female-work-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1023083,
+      "opaquePixels": 150,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        54,
+        614,
+        994,
+        1460
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        755
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 700,
+          "segs": [
+            [
+              157,
+              360
+            ],
+            [
+              690,
+              907
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              188,
+              340
+            ],
+            [
+              713,
+              879
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              135,
+              418
+            ],
+            [
+              632,
+              933
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              258,
+              773
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": []
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-maritime-v2",
+      "wardrobeId": "maritime",
+      "path": "source/wardrobe/ef-w-female-maritime-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1054340,
+      "opaquePixels": 122,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        48,
+        624,
+        976,
+        1466
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        768
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "548404aae86358eacc7edb8c348bd9c9f3417a90742559d082ce4322c6896d73",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 713,
+          "segs": [
+            [
+              152,
+              357
+            ],
+            [
+              672,
+              885
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              209,
+              332
+            ],
+            [
+              698,
+              845
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              137,
+              385
+            ],
+            [
+              648,
+              896
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              270,
+              741
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": [
+            [
+              174,
+              832
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-commerce-v2",
+      "wardrobeId": "commerce",
+      "path": "source/wardrobe/ef-w-female-commerce-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1033087,
+      "opaquePixels": 146,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        41,
+        623,
+        1012,
+        1466
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        770
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "e07568a73530fb45b867854670b458e5a5cd7ad7bfc6e34ec728922543a80d48",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 715,
+          "segs": [
+            [
+              135,
+              369
+            ],
+            [
+              689,
+              916
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              181,
+              340
+            ],
+            [
+              719,
+              874
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              124,
+              397
+            ],
+            [
+              664,
+              929
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              277,
+              750
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": [
+            [
+              191,
+              838
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-scholarly-v2",
+      "wardrobeId": "scholarly",
+      "path": "source/wardrobe/ef-w-female-scholarly-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1006509,
+      "opaquePixels": 161,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        61,
+        624,
+        1008,
+        1466
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        771
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "86ab72660b478c9d651ba59da2ee9b9d7758d6f5570883d627c347818962a96d",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 716,
+          "segs": [
+            [
+              154,
+              368
+            ],
+            [
+              699,
+              929
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              199,
+              335
+            ],
+            [
+              731,
+              886
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              145,
+              394
+            ],
+            [
+              673,
+              940
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              276,
+              858
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": [
+            [
+              195,
+              878
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-military-v2",
+      "wardrobeId": "military",
+      "path": "source/wardrobe/ef-w-female-military-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1056643,
+      "opaquePixels": 394,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        87,
+        596,
+        1012,
+        1401
+      ],
+      "collarFrontAtCanvasCenter": [
+        561,
+        736
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "616e2f290c4090246c0c715ae1d14674103f9518cfddd6c2808ccbe73b7a03a6",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 681,
+          "segs": [
+            [
+              196,
+              393
+            ],
+            [
+              705,
+              920
+            ]
+          ]
+        },
+        {
+          "y": 645,
+          "segs": [
+            [
+              253,
+              368
+            ],
+            [
+              727,
+              874
+            ]
+          ]
+        },
+        {
+          "y": 701,
+          "segs": [
+            [
+              182,
+              419
+            ],
+            [
+              682,
+              937
+            ]
+          ]
+        },
+        {
+          "y": 1234,
+          "segs": [
+            [
+              317,
+              856
+            ]
+          ]
+        },
+        {
+          "y": 1401,
+          "segs": [
+            [
+              237,
+              857
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-elite-v2",
+      "wardrobeId": "elite",
+      "path": "source/wardrobe/ef-w-female-elite-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 942792,
+      "opaquePixels": 136,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        47,
+        618,
+        1021,
+        1466
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        763
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "c6c76fac07e2b364a48a683a966098155aa596bb8577aee16f97d6ac76433ca6",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 708,
+          "segs": [
+            [
+              149,
+              376
+            ],
+            [
+              689,
+              894
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              173,
+              349
+            ],
+            [
+              713,
+              866
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              130,
+              418
+            ],
+            [
+              652,
+              919
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              268,
+              945
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": [
+            [
+              169,
+              1005
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-performance-v2",
+      "wardrobeId": "performance",
+      "path": "source/wardrobe/ef-w-female-performance-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 981714,
+      "opaquePixels": 152,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        50,
+        627,
+        1021,
+        1466
+      ],
+      "collarFrontAtCanvasCenter": [
+        536,
+        776
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "3aa08e5918618f0f452e61fca790c8d624fb91a3679fc0587d3f7a58e844917c",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 721,
+          "segs": [
+            [
+              148,
+              364
+            ],
+            [
+              693,
+              911
+            ]
+          ]
+        },
+        {
+          "y": 675,
+          "segs": [
+            [
+              190,
+              331
+            ],
+            [
+              724,
+              841
+            ]
+          ]
+        },
+        {
+          "y": 734,
+          "segs": [
+            [
+              140,
+              383
+            ],
+            [
+              677,
+              919
+            ]
+          ]
+        },
+        {
+          "y": 1291,
+          "segs": [
+            [
+              275,
+              754
+            ],
+            [
+              762,
+              942
+            ]
+          ]
+        },
+        {
+          "y": 1466,
+          "segs": [
+            [
+              195,
+              980
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "ef-w-female-infant-v2",
+      "wardrobeId": "infant",
+      "path": "source/wardrobe/ef-w-female-infant-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 1009378,
+      "opaquePixels": 167,
+      "upper35PercentAlphaPixels": 0,
+      "alphaBounds": [
+        142,
+        596,
+        958,
+        1401
+      ],
+      "collarFrontAtCanvasCenter": [
+        561,
+        736
+      ],
+      "unchangedCopyMatchesOriginal": true,
+      "sha256": "906418b2053c7a18dbe9d66e61ab867279e2f6f3bbf2f70f6f01049a7f6d3600",
+      "visualReview": "Garment only. No exposed skin, head or arms retained. Neck opening and outside fabric visibly transparent. Waist-length torso preserved; registration to canonical body still required.",
+      "measurementRows": [
+        {
+          "y": 681,
+          "segs": [
+            [
+              204,
+              393
+            ],
+            [
+              723,
+              896
+            ]
+          ]
+        },
+        {
+          "y": 645,
+          "segs": [
+            [
+              254,
+              367
+            ],
+            [
+              752,
+              849
+            ]
+          ]
+        },
+        {
+          "y": 701,
+          "segs": [
+            [
+              191,
+              421
+            ],
+            [
+              695,
+              909
+            ]
+          ]
+        },
+        {
+          "y": 1234,
+          "segs": [
+            [
+              181,
+              904
+            ]
+          ]
+        },
+        {
+          "y": 1401,
+          "segs": [
+            [
+              194,
+              891
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "reviewer": "independent heads_third_pair agent",
+  "scope": "Ordinary-v2 smooth body/clothing fit and bounded mixed PixelOE preview. This does not claim individual visual inspection of all192 final exports.",
+  "coverage": {
+    "smoothLifetimeSamples": 36,
+    "smoothAdultWardrobeSamples": 48,
+    "smoothOverlapSamples": 6,
+    "uniqueSmoothAssemblies": 78,
+    "nativeScaleNeckCloseupViews": 52,
+    "uniqueNativeScaleNeckCases": 50,
+    "mixedPixelPreviewCases": 8,
+    "mixedPixelAdultIdentities": 6,
+    "mixedPixelWorkCases": 2,
+    "thumbnailSizes": [
+      [
+        64,
+        80
+      ],
+      [
+        48,
+        60
+      ],
+      [
+        40,
+        50
+      ]
+    ],
+    "all192IndividuallyVisuallyInspected": false
+  },
+  "reviewedSmoothFiles": [
+    "review/proof/smooth-lifetimes-6x6.png",
+    "review/proof/smooth-adult-wardrobe-6x8.png",
+    "qa/final-neck-m01-6ages.png",
+    "qa/final-neck-m02-6ages.png",
+    "qa/final-neck-m03-6ages.png",
+    "qa/final-neck-f01-6ages.png",
+    "qa/final-neck-f02-6ages.png",
+    "qa/final-neck-f03-6ages.png",
+    "qa/final-neck-m01-8outfits.png",
+    "qa/final-neck-f01-8outfits.png"
+  ],
+  "reviewedPixelFiles": [
+    "review/proof/mixed-adult-six.png",
+    "review/proof/mixed-pixel-comparison.png",
+    "review/proof/mixed-adult-64x80.png",
+    "review/proof/mixed-adult-48x60.png",
+    "review/proof/mixed-adult-40x50.png"
+  ],
+  "smoothChecks": {
+    "canonicalMaleFemaleBodyShapeStableAcrossIdentityAndCostume": true,
+    "bodyShadeVariationVisibleAcrossIdentitiesAndAgeStages": true,
+    "collarFollowsPhysicalNeckOpening": true,
+    "originalLongNeckNoLongerPastedOverFrontCollar": true,
+    "noExposedNeckCapTabs": true,
+    "noDiagonalLedgesOrHorizontalCutoutSlits": true,
+    "noResidualThinAlphaGhostStripFromBodyExtractionCut": true,
+    "infantSwaddleOpeningFilled": true,
+    "noInfantTshirtSleeveOrAdultArmProtrusion": true,
+    "braidAndBunPreservedWithoutNeckSkinSpike": true,
+    "childYouthSkinTextureModulationVisible": true,
+    "sourceFacesRecognizableAcrossAges": true
+  },
+  "pixelChecks": {
+    "coarseBodyFineFaceProfile": "Coarse128x160logical at3x; fine192x240logical at2x; aligned6px whole-cell selection. Finishing worker supplies deterministic/grid provenance.",
+    "pupilsAndGazeRetainedAtFull384x480": true,
+    "noVisibleFacePatchBoundary": true,
+    "noNeckOrCollarRegressionInEightCases": true,
+    "wholeFigureAndCostumeRemainReadableAtThumbnailSizes": true,
+    "thumbnailLimit": "Whole waist-up faces are intrinsically tiny at40x50. Individual iris/pupil structure is not asserted at that size; a UI needing facial detail should use a closer portrait crop or larger display."
+  },
+  "limitations": [
+    "Younger stages reuse age-scaled M/F geometry with skin-surface modulation and infant swaddle coverage. Their anatomy is stylized; this is not an independently generated or anatomically validated infant/child body set.",
+    "Manually annotated source eye/chin/mask coordinates are approximate; the final judgment here relies on reviewed joined smooth proofs, not nominal anchor labels.",
+    "The complete192-export set still requires its automated integrity/grid checks and final delivery gallery spot review; this report's individual mixed-pixel coverage is eight cases."
+  ],
+  "sourceIntegrity": {
+    "reviewerModifiedSourceImages": false,
+    "independentV1SourceHashVerification": {
+      "count": 47,
+      "allHashesMatchSourceIndex": true,
+      "mismatches": []
+    }
+  },
+  "blockingFindings": [],
+  "decision": "Smooth geometry accepted and bounded mixed profile accepted for full192 generation. Preserve the coverage limits above in delivery claims.",
+  "priorCorrection": "EarlierV1 QA was insufficient because contact sheets and absence of alpha holes did not establish anatomical fit. V2 review uses native-scale neck/collar crops and explicit canonical-body checks.",
+  "diagnosisReference": "qa/body-fit-diagnosis.json"
+}

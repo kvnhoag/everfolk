@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "sourceIndex": "source-index.json",
+  "status": "passed",
+  "counts": {
+    "body-references": 2,
+    "bodies": 2,
+    "wardrobe": 18,
+    "newGenerated": 22,
+    "reusedHeads": 36,
+    "total": 58
+  },
+  "defaultSourceAssetCount": 20,
+  "expectedDefaultSourceAssets": {
+    "bodies": 2,
+    "wardrobe": 18
+  },
+  "promptsLocated": 58,
+  "sourceProvenanceLocated": 58,
+  "originalCopiesVerified": 58,
+  "originalToolFilesUnavailable": [],
+  "copyMismatches": [],
+  "reusedHeadsMatchV1Index": 36,
+  "sourceImagesModified": false,
+  "checks": [
+    "22 new PNGs and 36 reused heads",
+    "new sources retain real RGBA alpha",
+    "exact prompt path and prompt hash",
+    "per-asset provenance",
+    "available original-tool PNG hash equality",
+    "reused head and prompt hashes match v1 index",
+    "portable project paths remain inside portraits"
+  ],
+  "sourceIndexSha256": "c1ffc8d713c866739d8843ea5627fe084af03b4d0f4f020c346dfc6e55c661ad"
+}

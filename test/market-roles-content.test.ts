@@ -11,6 +11,9 @@ const broadRoles = ["trader", "shopkeeper", "merchant", "estate-steward", "quart
 
 function controlledWorld(): WorldPack {
   const pack = withoutMoneylender(structuredClone(world));
+  // Occupation thresholds are tested independently of birth-route restrictions.
+  if (pack.royalty) pack.royalty.originId = "fixture-unselected-royal-origin";
+  if (pack.aristocracy) pack.aristocracy.originId = "fixture-unselected-estate-origin";
   pack.events = pack.events.filter(event => event.id === pack.health!.careDecision);
   pack.economy!.market!.shocks = [];
   pack.yearlyEffects = []; pack.yearlyRules = [];

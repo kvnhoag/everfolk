@@ -1,0 +1,16 @@
+{
+  "id": "ef-model-female-youth-v3",
+  "role": "continuous-whole-person-age-model",
+  "sex": "female",
+  "stage": "youth",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-6df94caa-3865-4d6b-9cd2-5c71894f35fd.png",
+  "promptPath": "source/prompts/ef-model-female-youth-v3-prompt.txt",
+  "referencePaths": [
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+  ],
+  "tool": "built-in image_gen",
+  "transparentRequested": true,
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v3/source/models/ef-model-female-youth-v3.png",
+  "anatomyPolicy": "Generated head, neck, shoulders, torso and arms continuously as one age-appropriate person. No manual head/neck cuts.",
+  "priorAttempt": "Prompt simplified before first generation."
+}

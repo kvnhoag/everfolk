@@ -7,6 +7,7 @@ import { financeActivityReason } from "./economy.ts";
 import { marriageRelationshipReason, socialRoleEffectReason } from "./relationships.ts";
 import { militaryCareerReason } from "./capabilities/military.ts";
 import { resolvePartner } from "./people.ts";
+import { royalAudienceAllowed } from "./royalty.ts";
 
 export function initialCharacter(world: WorldPack): CharacterState | undefined {
   if (!world.character) return undefined;
@@ -108,6 +109,9 @@ export function activityReason(
   world: WorldPack, state: LifeState, activity: CharacterActivity,
   matches: (condition: Condition | undefined, state: LifeState) => boolean,
 ): string | undefined {
+  if (!royalAudienceAllowed(world, state, activity.audience)) return activity.audience === "royal"
+    ? "This activity belongs to a royal household." : activity.audience === "aristocrat"
+      ? "This activity belongs to an aristocratic estate." : "Privileged households delegate ordinary work and manage their own affairs.";
   if (!state.character || !world.character) return "This world has no character activities.";
   if (state.phase === "ended") return "This life has ended.";
   if (state.phase !== "ready") return "Resolve the current decision first.";

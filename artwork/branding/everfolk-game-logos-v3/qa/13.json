@@ -1,0 +1,304 @@
+{
+  "artboards": [
+    {
+      "height": 600,
+      "name": "13 Transparent primary",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "13 Presentation proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    },
+    {
+      "height": 600,
+      "name": "13 One colour",
+      "width": 1000,
+      "x": 2200,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 43,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / reference-led 13 Living Stone",
+  "history": [
+    "Artboard Options",
+    "New Artboard",
+    "New Artboard",
+    "New Layer",
+    "Pen",
+    "New Layer",
+    "e / custom organic letter 1",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "v / custom organic letter 2",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "e / custom organic letter 3",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "r / custom organic letter 4",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "f / custom organic letter 5",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "o / custom organic letter 6",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "l / custom organic letter 7",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "k / custom organic letter 8",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "New Layer",
+    "e / custom organic letter 1",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "v / custom organic letter 2",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "e / custom organic letter 3",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "r / custom organic letter 4",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "f / custom organic letter 5",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "o / custom organic letter 6",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "l / custom organic letter 7",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "k / custom organic letter 8",
+    "Group",
+    "Object Properties",
+    "Transform",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform"
+  ],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [
+    43
+  ],
+  "layers": [
+    {
+      "bounds": {
+        "height": 260.859375,
+        "width": 829.9601593625503,
+        "x": 2285.019920318725,
+        "y": 177
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 260.859375,
+            "width": 829.9601593625503,
+            "x": 2285.019920318725,
+            "y": 177
+          },
+          "childCount": 2,
+          "id": 62,
+          "kind": "Group",
+          "locked": false,
+          "name": "13 Living Stone / one colour game logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 43,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 One-colour lettering",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 260.859375,
+        "width": 1929.9601593625498,
+        "x": 85.0199203187251,
+        "y": 177
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 260.859375,
+            "width": 829.9601593625498,
+            "x": 1185.019920318725,
+            "y": 177
+          },
+          "childCount": 2,
+          "id": 24,
+          "kind": "Group",
+          "locked": false,
+          "name": "13 Living Stone / primary game logo",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 260.859375,
+            "width": 829.9601593625498,
+            "x": 85.0199203187251,
+            "y": 177
+          },
+          "childCount": 2,
+          "id": 23,
+          "kind": "Group",
+          "locked": false,
+          "name": "13 Living Stone / primary game logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 4,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Original lettering and signature",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 600,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "children": [
+        {
+          "anchors": 4,
+          "bounds": {
+            "height": 600,
+            "width": 1000,
+            "x": 1100,
+            "y": 0
+          },
+          "closed": true,
+          "fill": "#203d35",
+          "id": 3,
+          "kind": "Path",
+          "locked": false,
+          "name": "Proof ground",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Presentation ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 62,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#24464b",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 0
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-game-logos-v3\\masters\\13-living-stone.vectorcraft",
+  "redo": [],
+  "revision": 143,
+  "selection": [
+    62
+  ],
+  "selectionBounds": {
+    "height": 260.859375,
+    "width": 829.9601593625503,
+    "x": 2285.019920318725,
+    "y": 177
+  },
+  "selectionRotation": 0,
+  "target": null,
+  "title": "13-living-stone.vectorcraft",
+  "tool": "selection",
+  "uid": 14,
+  "units": "Pixels"
+}

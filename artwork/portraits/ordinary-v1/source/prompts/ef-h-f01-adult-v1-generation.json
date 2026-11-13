@@ -1,0 +1,13 @@
+{
+  "assetId": "ef-h-f01-adult-v1",
+  "sourcePath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-3e0f816e-7d2b-4ef9-8fd9-ad2008c28e9f.png",
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v1/source/heads/ef-h-f01-adult-v1.png",
+  "promptPath": "source/prompts/ef-h-f01-adult-v1-prompt.txt",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "transparentBackground": true,
+  "referencePaths": [
+    "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v1\\source\\heads\\ef-h-m01-adult-v1.png"
+  ],
+  "provenanceNote": "Input m01 adult is style and lighting reference, not identity. Generated image copied unchanged; original retained."
+}

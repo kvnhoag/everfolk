@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>02 Standalone emblem / cream</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+    <g id="_10_Toward_the_Horizon___standalone_scarab" data-name="10 Toward the Horizon / standalone scarab">
+      <path id="Sweeping_raised_foreleg___left" data-name="Sweeping raised foreleg / left" d="M205.857 251.357 L172.429 240.214 C131.571 214.214 107.429 186.357 107.429 145.5 C107.429 106.5 129.714 80.5 161.286 67.5 L172.429 89.786 C142.714 100.929 131.571 121.357 131.571 147.357 C131.571 177.071 153.857 197.5 191 217.929 L220.714 230.929 Z" fill="#e7e0c9"/>
+      <path id="Sweeping_raised_foreleg___right" data-name="Sweeping raised foreleg / right" d="M306.143 251.357 L339.571 240.214 C380.429 214.214 404.571 186.357 404.571 145.5 C404.571 106.5 382.286 80.5 350.714 67.5 L339.571 89.786 C369.286 100.929 380.429 121.357 380.429 147.357 C380.429 177.071 358.143 197.5 321 217.929 L291.286 230.929 Z" fill="#e7e0c9"/>
+      <polygon id="Lateral_middle_leg___left" data-name="Lateral middle leg / left" points="153.857,297.786 100,286.643 55.429,305.214 48,331.214 72.143,342.357 87,320.071 140.857,327.5" fill="#e7e0c9"/>
+      <polygon id="Lateral_middle_leg___right" data-name="Lateral middle leg / right" points="358.143,297.786 412,286.643 456.571,305.214 464,331.214 439.857,342.357 425,320.071 371.143,327.5" fill="#e7e0c9"/>
+      <polygon id="Outward_hindleg___left" data-name="Outward hindleg / left" points="168.714,355.357 129.714,383.214 100,414.786 79.571,412.929 64.714,435.214 105.571,444.5 148.286,411.071 191,383.214" fill="#e7e0c9"/>
+      <polygon id="Outward_hindleg___right" data-name="Outward hindleg / right" points="343.286,355.357 382.286,383.214 412,414.786 432.429,412.929 447.286,435.214 406.429,444.5 363.714,411.071 321,383.214" fill="#e7e0c9"/>
+      <path id="Rounded_scarab_head" data-name="Rounded scarab head" d="M222.571 193.786 C222.571 175.214 233.714 165.929 256 165.929 C278.286 165.929 289.429 175.214 289.429 193.786 L280.143 217.929 L231.857 217.929 Z" fill="#e7e0c9"/>
+      <path id="Broad_horizon_thorax" data-name="Broad horizon thorax" d="M187.286 245.786 C220.714 225.357 291.286 225.357 324.714 245.786 L311.714 271.786 C276.429 262.5 235.571 262.5 200.286 271.786 Z" fill="#e7e0c9"/>
+      <path id="Low_horizon_wing_case___left" data-name="Low horizon wing case / left" d="M246.714 279.214 C211.429 258.786 163.143 266.214 139 297.786 C124.143 327.5 137.143 370.214 170.571 383.214 C191 392.5 220.714 399.929 246.714 403.643 Z" fill="#e7e0c9"/>
+      <path id="Low_horizon_wing_case___right" data-name="Low horizon wing case / right" d="M265.286 279.214 C300.571 258.786 348.857 266.214 373 297.786 C387.857 327.5 374.857 370.214 341.429 383.214 C321 392.5 291.286 399.929 265.286 403.643 Z" fill="#e7e0c9"/>
+    </g>
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

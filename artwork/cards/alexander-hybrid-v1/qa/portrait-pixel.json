@@ -1,0 +1,38 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-hybrid-v1\\source\\alexander-card-clean.png",
+  "sourceSha256": "557d58a85f03eadc8036f6977947a836f0827ac4026850ffbec9e87697d65fa5",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "method": "PixelOE 1.0.0 legacy CPU API",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      140,
+      175
+    ],
+    "patch_size": 4,
+    "pixel_size": 6,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    140,
+    175
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "outputSha256": "263bd50ba4c2fa6c4fb3dab3ed35ff4e20c7a86757c3a8ccf0d04bb6c2846c14",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "sourceUnchanged": true
+}

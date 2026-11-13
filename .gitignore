@@ -30,6 +30,13 @@ contract/target/
 /artwork/history-live/
 /tools/character-creator/
 
-# Optional local NPC inference artifacts
+# Local image-generation prompts
+/artwork/**/*prompt*.txt
+
+# Downloaded third-party reference scans stay local.
+/artwork/cards/alexander-reference-v2/references/warner-alexander-making-of-chapter-one.pdf
+/artwork/cards/alexander-reference-v2/references/warner-page-*.png
+
+# Local Python bytecode caches.
 __pycache__/
-*.pyc
+*.py[cod]

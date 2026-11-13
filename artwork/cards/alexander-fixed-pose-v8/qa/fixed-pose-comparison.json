@@ -1,0 +1,97 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\masters\\Alexander-Fixed-Pose-Comparison.vectorcraft",
+  "png": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\review\\Alexander-Fixed-Pose-Comparison.png",
+  "reviewOnly": true,
+  "unchanged": true,
+  "inputs": [
+    {
+      "label": "Actual Greek machaira",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\references\\greek-machaira-met-2001.346.jpg",
+      "x": 40,
+      "kind": "Actual public-domain photograph / upper specimen",
+      "sha256": "9e4b550659b348dd1c8dbf37034a15db6147271c2a8b342aab65ded0414f993f",
+      "view": {
+        "scale": 0.5,
+        "sourcePolygon": [
+          [
+            40,
+            55
+          ],
+          [
+            1140,
+            55
+          ],
+          [
+            1140,
+            285
+          ],
+          [
+            290,
+            285
+          ],
+          [
+            260,
+            355
+          ],
+          [
+            40,
+            355
+          ]
+        ]
+      }
+    },
+    {
+      "label": "Blade-only painting",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\source\\alexander-blade-only.png",
+      "x": 630,
+      "kind": "Original approved pose / metal and nearby sky patch only",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "crop": [
+        0,
+        0,
+        1122,
+        900
+      ],
+      "sha256": "bdcc4654a4253aabccb656231cd85fbcb0ab66c08c6eb1cf8bb52bf791feb55f",
+      "view": {
+        "scale": 0.49019607843137253,
+        "sourceCrop": [
+          0,
+          0,
+          1122,
+          900
+        ]
+      }
+    },
+    {
+      "label": "Coarser pixel finish / 280×350 · 3×",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\assets\\alexander-card-pixel.png",
+      "x": 1220,
+      "kind": "PixelOE / 280×350 logical grid at exact 3× output",
+      "dimensions": [
+        840,
+        1050
+      ],
+      "crop": [
+        0,
+        0,
+        840,
+        674
+      ],
+      "sha256": "7ebbb312e9ecd7d7c05874764eae5165f2b988f7da3eccdfe7f83a0a47e5dd2e",
+      "view": {
+        "scale": 0.6547619047619048,
+        "sourceCrop": [
+          0,
+          0,
+          840,
+          674
+        ]
+      }
+    }
+  ],
+  "warnings": []
+}

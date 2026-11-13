@@ -8,6 +8,9 @@ import type { AccountId, Tier, FieldId, NeedLabel, PathsDefinition, PathsState, 
 /** JSON-only contracts. The engine has no DOM, network, clock or Node dependencies. */
 import type { DemoCommand, DemoCondition, DemoDefinition, DemoEffect, DemoState } from "./demo/types.ts";
 export type Comparison = "eq" | "ne" | "gt" | "gte" | "lt" | "lte";
+export type RoyalMetric = "treasury" | "influence" | "stability" | "security" | "succession";
+export type AristocratMetric = "treasury" | "standing" | "prosperity" | "loyalty" | "inheritance";
+export type LifeAudience = "common" | "royal" | "aristocrat";
 
 export type Condition =
   | { type: "capability"; node: string; learned?: boolean }
@@ -21,6 +24,8 @@ export type Condition =
   | { type: "material"; item: string; op: Comparison; value: number }
   /** Paths worlds: what a finite payer (a vocation account or the army purse) holds. */
   | { type: "account"; account: AccountId; op: Comparison; value: number }
+  | { type: "aristocrat"; metric: AristocratMetric; op: Comparison; value: number }
+  | { type: "royal"; metric: RoyalMetric; op: Comparison; value: number }
   | { type: "accomplishment"; achievement: string; minYears?: number }
   | { type: "cash" | "debt"; op: Comparison; value: number }
   | { type: "loan"; status: "none" | "active" | "due" | "overdue" }
@@ -60,6 +65,8 @@ export type Effect =
   | { type: "introduce-field"; field: FieldId }
   /** Paths worlds: the life is counted among its current district's people of a field, at a tier. */
   | { type: "join-district"; field: FieldId; tier: Tier }
+  | { type: "aristocrat"; metric: AristocratMetric; delta: number }
+  | { type: "royal"; metric: RoyalMetric; delta: number }
   | { type: "accomplishment"; achievement: string }
   | { type: "mastery"; target: "stat" | "skill"; id: string }
   | { type: "cash" | "debt"; delta: number }
@@ -180,6 +187,8 @@ export interface Choice {
 
 export interface LifeEvent extends EvidenceMetadata {
   id: string;
+  /** Omitted events are shared by ordinary and royal lives. */
+  audience?: LifeAudience;
   /** Seeded alternatives at one age; offering any member consumes the group. */
   exclusiveGroup?: string;
   title: string;
@@ -189,8 +198,9 @@ export interface LifeEvent extends EvidenceMetadata {
     | { type: "year"; at: number }
     | { type: "random"; weight: number };
   when?: Condition;
-  /** Scheduled events occur once. Random events default to once. */
+  /** Defaults to once. Scheduled repeats require an explicit positive cooldown. */
   maxOccurrences?: number;
+  /** Minimum years between offers, including unsuccessful scheduled tasks. */
   cooldownYears?: number;
   /** Opt-in annual surprise lane, separate from ordinary weighted stories. */
   rarity?: "rare";
@@ -220,6 +230,7 @@ export interface Ending extends EvidenceMetadata {
 
 export interface YearlyRule {
   id: string;
+  audience?: LifeAudience;
   when?: Condition;
   effects: Effect[];
 }
@@ -365,6 +376,7 @@ export interface EncounteredPerson extends PartnerDefinition {
 }
 
 export interface CharacterActivity extends Choice {
+  audience?: LifeAudience;
   category: "training" | "career" | "relationship" | "family" | "finance";
   minAge?: number;
   cooldownYears?: number;
@@ -394,6 +406,8 @@ export interface CharacterDefinition {
   identity?: { namePools: { male: string[]; female: string[] }; avatarVariants: number };
   /** Generate parents and grandparents at birth; omitted packs preserve their state. */
   familyBackgrounds?: boolean;
+  /** Chance of one living grandparent at birth; all others remain family history. */
+  familyLivingGrandparentChance?: number;
   /** Partner definitions are encounter templates, not a pre-existing named pool. */
   proceduralPartners?: boolean;
   /** Explicit nonromantic roles for encountered people; older packs omit them. */
@@ -564,6 +578,8 @@ export interface LegacyAchievementDefinition extends EvidenceMetadata {
   nameTemplate: string;
   /** Fictional contacts explicitly introduced by the awarding outcome. */
   people: string[];
+  /** Historical figure or intellectual tradition associated with this title; not proof of contact. */
+  figure?: { id: string; name: string };
 }
 export interface AccomplishmentRecord {
   id: string;
@@ -578,6 +594,8 @@ export interface AccomplishmentRecord {
   sourceId: string;
   outcomeId: string;
   people: string[];
+  /** Saved with the card so attribution survives changes to world content. */
+  figure?: { id: string; name: string };
 }
 export interface LegacyRouteProgress extends LegacyRouteDefinition {
   earned: readonly AccomplishmentRecord[];
@@ -620,6 +638,20 @@ export interface WorldPack {
   origins: Origin[];
   yearlyEffects: Effect[];
   yearlyRules?: YearlyRule[];
+  /** An opt-in royal household route; old revisions retain their exact rules. */
+  royalty?: {
+    originId: string;
+    minAge: number;
+    metrics: Record<RoyalMetric, StatDefinition>;
+    yearlyEffects: { metric: RoyalMetric; delta: number }[];
+  };
+  /** An opt-in landed household route, separate from the royal court. */
+  aristocracy?: {
+    originId: string;
+    minAge: number;
+    metrics: Record<AristocratMetric, StatDefinition>;
+    yearlyEffects: { metric: AristocratMetric; delta: number }[];
+  };
   /** Separate annual background stories from decisions with a seeded global gap. */
   eventPacing?: {
     minChoiceGapYears: number; maxChoiceGapYears: number; variety?: EventVariety;
@@ -682,6 +714,8 @@ export interface LifeState {
   /** The life's own birth year, in worlds that vary births. */
   birthYear?: number;
   originId: string;
+  royalty?: Record<RoyalMetric, number>;
+  aristocracy?: Record<AristocratMetric, number>;
   stats: Record<string, number>;
   flags: Record<string, boolean>;
   phase: "ready" | "choice" | "ended";

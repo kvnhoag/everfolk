@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>02 Standalone emblem / cream</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+    <g id="_09_Another_Beginning___standalone_scarab" data-name="09 Another Beginning / standalone scarab">
+      <polygon id="Uplifted_foreleg___left" data-name="Uplifted foreleg / left" points="196.853,158.408 151.507,170.237 110.104,132.777 100.246,89.403 74.616,91.374 82.502,146.578 137.706,199.81 185.024,186.009" fill="#e7e0c9"/>
+      <polygon id="Uplifted_foreleg___right" data-name="Uplifted foreleg / right" points="315.147,158.408 360.493,170.237 401.896,132.777 411.754,89.403 437.384,91.374 429.498,146.578 374.294,199.81 326.976,186.009" fill="#e7e0c9"/>
+      <polygon id="Braced_middle_leg___left" data-name="Braced middle leg / left" points="143.621,262.9 90.389,251.071 52.929,278.673 58.844,304.303 96.303,278.673 137.706,290.502" fill="#e7e0c9"/>
+      <polygon id="Braced_middle_leg___right" data-name="Braced middle leg / right" points="368.379,262.9 421.611,251.071 459.071,278.673 453.156,304.303 415.697,278.673 374.294,290.502" fill="#e7e0c9"/>
+      <polygon id="Descending_hindleg___left" data-name="Descending hindleg / left" points="167.28,363.45 123.905,381.194 108.133,432.455 78.559,438.37 84.474,464 129.82,456.114 147.564,402.882 183.052,389.081" fill="#e7e0c9"/>
+      <polygon id="Descending_hindleg___right" data-name="Descending hindleg / right" points="344.72,363.45 388.095,381.194 403.867,432.455 433.441,438.37 427.526,464 382.18,456.114 364.436,402.882 328.948,389.081" fill="#e7e0c9"/>
+      <polygon id="Blunt_scarab_head" data-name="Blunt scarab head" points="216.569,99.261 224.455,73.63 240.227,65.744 246.142,48 265.858,48 271.773,65.744 287.545,73.63 295.431,99.261 285.573,117.005 226.427,117.005" fill="#e7e0c9"/>
+      <path id="Threshold_crown_thorax" data-name="Threshold crown thorax" d="M212.626 136.72 C241.542 126.205 270.458 126.205 299.374 136.72 L323.033 164.322 L295.431 178.123 L216.569 178.123 L188.967 164.322 Z" fill="#e7e0c9"/>
+      <path id="Threshold_wing_case___left" data-name="Threshold wing case / left" d="M248.114 193.896 C179.109 186.009 131.791 235.299 131.791 310.218 C131.791 367.393 161.365 410.768 210.654 434.427 L210.654 308.246 C210.654 272.758 228.398 251.071 248.114 247.128 Z" fill="#e7e0c9"/>
+      <path id="Threshold_wing_case___right" data-name="Threshold wing case / right" d="M263.886 193.896 C332.891 186.009 380.209 235.299 380.209 310.218 C380.209 367.393 350.635 410.768 301.346 434.427 L301.346 308.246 C301.346 272.758 283.602 251.071 263.886 247.128 Z" fill="#e7e0c9"/>
+    </g>
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "worldVersion": "0.43.0",
+  "generatedHeads": 36,
+  "generatedGarments": 11,
+  "verifiedSourceOriginals": 47,
+  "portraits": 192,
+  "headComponents": 36,
+  "garmentPlacements": 16,
+  "legacyBridges": 288,
+  "jobs": 33,
+  "origins": 16,
+  "encounters": 16,
+  "jobEligibilityCoverage": true,
+  "hashesMatch": true,
+  "pixelQAPassed": true,
+  "runtimeIntegrated": false
+}

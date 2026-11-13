@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "scope": "runtime integration",
+  "targetedTests": 92,
+  "typeScript": true,
+  "folderDependencyBoundaries": true,
+  "all240DeliveredSourceHashes": true,
+  "all240CombinationsReachable": true,
+  "birthAssignment": "existing seeded random LifeEngine identity",
+  "portraitChooserPresent": false,
+  "savesCommandsRngUnchanged": true,
+  "browser": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "royalPlayerKey": "m02:adult:royalty",
+    "aristocratPlayerKey": "m01:adult:aristocrat",
+    "sharedFamilyKeysVerified": [
+      "f01:middle:royalty",
+      "m03:middle:royalty"
+    ],
+    "birthPreviewIdentity": "m01",
+    "birthPreviewStages": 6,
+    "allObservedPortraitPNGsLoaded": true,
+    "objectFit": "contain",
+    "consoleErrorsObserved": 0
+  },
+  "validationCommands": [
+    "node --test --test-concurrency=2 test/portrait-state.test.ts test/portrait-delivery.test.ts test/portrait-ui.test.ts test/people-ui.test.ts test/relationship-table.test.ts test/avatar-assets.test.ts test/birth-roll-popover.test.ts test/scene-avatar-identity.test.ts test/avatar-appearance.test.ts test/procedural-people.test.ts test/family-records.test.ts test/royal-engine.test.ts test/aristocrat-engine.test.ts test/gender-name-pools.test.ts test/seeded-play.test.ts",
+    "node scripts/check-structure.mjs",
+    "node node_modules/typescript/bin/tsc --noEmit"
+  ],
+  "productionDeploymentPerformed": false
+}

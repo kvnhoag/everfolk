@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "d716a144ffd09e3ba67b406360899572ad536add352932d8792027dc3051c11d",
+  "finePixelSha256": "ef63035b7b3c1b1ae2c7d3275a17e6a3cfdc08fb84f2391f60854a7ee6535bd9",
+  "mixedPixelSha256": "419aa39885f1d5485173966d5fa9ca90b12a3daa43e6628be191a7dfd4d4d552",
+  "maskPixelSha256": "c3c7bc60a09bda73cafca9ea3f33a560d3a117d77056dbc12e83114567e0e47b",
+  "selectedDetailCells": 349,
+  "retainedCoarseCells": 4771,
+  "criticalForcedAdditionalCells": 0,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12564,
+  "changedPixels": 12175,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        148,
+        75,
+        239,
+        95
+      ],
+      "selectedPixels": 1820,
+      "totalPixels": 1820,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-m03-adult-military-v3",
+  "source": "portraits/assembled/ef-p-m03-adult-military-v3.png",
+  "sourceSha256": "5fd4a822768869173da9e403c787968c7a97ac5d3a404257b279343af511b711",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-m03-adult-military-v3.png",
+  "coarseSha256": "b0c9a57fb12d464de30473316fe35a6890d2553ea9841132c4896082c3f118ba",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-m03-adult-military-v3.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-m03-adult-military-v3.png",
+  "fineSha256": "a43288521bf964d28192810677716a3fdc3b86ba8c6301d86f1e3e68d26751bf",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-m03-adult-military-v3.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-m03-adult-military-v3.png",
+  "outputSha256": "0e69cd0d5d2e2655b4d367be279539d1890811af4c1895d0f37b40cbb6ccbb0c",
+  "maskPath": "qa/regional-masks/ef-p-m03-adult-military-v3.png",
+  "maskSha256": "6c54f3079fdd01eddcf51e3ae1ed5cb0b2d6505f1c97c2302a47e423df162c40",
+  "configPath": "qa/regions/ef-p-m03-adult-military-v3.json",
+  "configSha256": "24217629deac844f269934c1b5f9c0a75367e6c8f52b1dce5c8d6bf191b05676",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "measured eye/chin on the complete original model after one uniform whole-canvas scale"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f01-elder-work-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f01-elder-work-v3.png",
+  "sourceSha256": "d7880b6776813f6b393bac89aa4de8b0cc1f53b373f30a172d3adda906921284",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      192,
+      240
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    192,
+    240
+  ],
+  "scale": 2,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/192x240-s2-t0/ef-p-f01-elder-work-v3.logical.png",
+  "logicalSha256": "111766adeeee887727cd237c00a58ca386d594a8f6dbf8cc00ec6c76567eebd3",
+  "outputPath": "portraits/192x240-s2-t0/ef-p-f01-elder-work-v3.png",
+  "outputSha256": "8e4585fc3fef0916472c5e7a23f70fd01ade09d0bbe480c13625e45152d11251",
+  "logicalPixelSha256": "6a4236cbcc0381edc689a5871bbac227d26dc2bca47f4a04d8d395bb09d6429e",
+  "uniqueColours": 12237,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

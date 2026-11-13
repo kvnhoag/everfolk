@@ -1,0 +1,1496 @@
+{
+  "artboards": [
+    {
+      "height": 1520,
+      "name": "Artboard 1",
+      "width": 2500,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 397,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / ten scarab directions",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 637.376953125,
+        "width": 2340,
+        "x": 80,
+        "y": 849
+      },
+      "childCount": 11,
+      "children": [
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 710.4453125,
+            "x": 80,
+            "y": 1469.4375
+          },
+          "fill": "#b4b59e",
+          "id": 437,
+          "kind": "Type",
+          "locked": false,
+          "name": "Symbol: becoming, possibility an",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "Symbol: becoming, possibility and another beginning.  /  Lettering: the approved Printed Folktale wordmark.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 29,
+            "width": 32,
+            "x": 2357,
+            "y": 1385.5
+          },
+          "childCount": 10,
+          "id": 436,
+          "kind": "Group",
+          "locked": false,
+          "name": "10 Toward the Horizon / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1993,
+            "y": 1397.3125
+          },
+          "fill": "#b4b59e",
+          "id": 425,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 43.5517578125,
+            "x": 1993,
+            "y": 1358.4375
+          },
+          "fill": "#b4b59e",
+          "id": 424,
+          "kind": "Type",
+          "locked": false,
+          "name": "future.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "future.",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#008000",
+      "dimImages": null,
+      "id": 397,
+      "kind": "Layer",
+      "locked": false,
+      "name": "10 Toward the Horizon",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 1496,
+        "y": 849
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 32,
+            "width": 31.241706161137472,
+            "x": 1885.3791469194314,
+            "y": 1384
+          },
+          "childCount": 10,
+          "id": 396,
+          "kind": "Group",
+          "locked": false,
+          "name": "09 Another Beginning / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1521,
+            "y": 1397.3125
+          },
+          "fill": "#b4b59e",
+          "id": 385,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 149.9189453125,
+            "x": 1521,
+            "y": 1358.4375
+          },
+          "fill": "#b4b59e",
+          "id": 384,
+          "kind": "Type",
+          "locked": false,
+          "name": "possibilities of its own.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "possibilities of its own.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 295.189453125,
+            "x": 1521,
+            "y": 1337.4375
+          },
+          "fill": "#b4b59e",
+          "id": 383,
+          "kind": "Type",
+          "locked": false,
+          "name": "Every new life opens into circum",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "Every new life opens into circumstances and",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff6600",
+      "dimImages": null,
+      "id": 357,
+      "kind": "Layer",
+      "locked": false,
+      "name": "09 Another Beginning",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 1024,
+        "y": 849
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 29.28301886792451,
+            "width": 32,
+            "x": 1413,
+            "y": 1385.3584905660377
+          },
+          "childCount": 10,
+          "id": 356,
+          "kind": "Group",
+          "locked": false,
+          "name": "08 Heart of a Life / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1049,
+            "y": 1397.3125
+          },
+          "fill": "#b4b59e",
+          "id": 345,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 308.9775390625,
+            "x": 1049,
+            "y": 1358.4375
+          },
+          "fill": "#b4b59e",
+          "id": 344,
+          "kind": "Type",
+          "locked": false,
+          "name": "belonging and the people who giv",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "belonging and the people who give it meaning.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 254.1259765625,
+            "x": 1049,
+            "y": 1337.4375
+          },
+          "fill": "#b4b59e",
+          "id": 343,
+          "kind": "Type",
+          "locked": false,
+          "name": "A life has a human centre: attac",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "A life has a human centre: attachment,",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#000000",
+      "dimImages": null,
+      "id": 317,
+      "kind": "Layer",
+      "locked": false,
+      "name": "08 Heart of a Life",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 552,
+        "y": 849
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 30.945054945055062,
+            "width": 32,
+            "x": 941,
+            "y": 1384.5274725274726
+          },
+          "childCount": 11,
+          "id": 316,
+          "kind": "Group",
+          "locked": false,
+          "name": "07 Unfolding / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 577,
+            "y": 1397.3125
+          },
+          "fill": "#b4b59e",
+          "id": 304,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 102.4228515625,
+            "x": 577,
+            "y": 1358.4375
+          },
+          "fill": "#b4b59e",
+          "id": 303,
+          "kind": "Type",
+          "locked": false,
+          "name": "a story unfolds.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "a story unfolds.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 295.3330078125,
+            "x": 577,
+            "y": 1337.4375
+          },
+          "fill": "#b4b59e",
+          "id": 302,
+          "kind": "Type",
+          "locked": false,
+          "name": "A living possibility revealed an",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "A living possibility revealed and protected as",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#808080",
+      "dimImages": null,
+      "id": 275,
+      "kind": "Layer",
+      "locked": false,
+      "name": "07 Unfolding",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 80,
+        "y": 849
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 32,
+            "width": 23.15000137403348,
+            "x": 473.42499931298323,
+            "y": 1384
+          },
+          "childCount": 12,
+          "id": 274,
+          "kind": "Group",
+          "locked": false,
+          "name": "06 Upward / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 105,
+            "y": 1397.3125
+          },
+          "fill": "#b4b59e",
+          "id": 261,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 69.671875,
+            "x": 105,
+            "y": 1358.4375
+          },
+          "fill": "#b4b59e",
+          "id": 260,
+          "kind": "Type",
+          "locked": false,
+          "name": "becoming.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "becoming.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 243.017578125,
+            "x": 105,
+            "y": 1337.4375
+          },
+          "fill": "#b4b59e",
+          "id": 259,
+          "kind": "Type",
+          "locked": false,
+          "name": "Potential, effort and the possib",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "Potential, effort and the possibility of",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fffff",
+      "dimImages": null,
+      "id": 231,
+      "kind": "Layer",
+      "locked": false,
+      "name": "06 Upward",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 1968,
+        "y": 239
+      },
+      "childCount": 9,
+      "children": [
+        {
+          "bounds": {
+            "height": 25.263157894736878,
+            "width": 32,
+            "x": 2357,
+            "y": 777.3684210526316
+          },
+          "childCount": 16,
+          "id": 230,
+          "kind": "Group",
+          "locked": false,
+          "name": "05 Dawnwing / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1993,
+            "y": 787.3125
+          },
+          "fill": "#b4b59e",
+          "id": 213,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 275.26953125,
+            "x": 1993,
+            "y": 727.4375
+          },
+          "fill": "#b4b59e",
+          "id": 212,
+          "kind": "Type",
+          "locked": false,
+          "name": "A life opening outward into a wi",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "A life opening outward into a wider world.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 26.619140625,
+            "width": 110.494140625,
+            "x": 1993,
+            "y": 685.6875
+          },
+          "fill": "#e7e0c9",
+          "id": 211,
+          "kind": "Type",
+          "locked": false,
+          "name": "Dawnwing",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "Dawnwing",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4fff",
+      "dimImages": null,
+      "id": 180,
+      "kind": "Layer",
+      "locked": false,
+      "name": "05 Dawnwing",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 1496,
+        "y": 239
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 28.8888888888888,
+            "width": 32,
+            "x": 1885,
+            "y": 775.5555555555555
+          },
+          "childCount": 10,
+          "id": 179,
+          "kind": "Group",
+          "locked": false,
+          "name": "04 Earth Seal / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1521,
+            "y": 787.3125
+          },
+          "fill": "#b4b59e",
+          "id": 168,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 136.458984375,
+            "x": 1521,
+            "y": 748.4375
+          },
+          "fill": "#b4b59e",
+          "id": 167,
+          "kind": "Type",
+          "locked": false,
+          "name": "imprint on the world.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "imprint on the world.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 273.232421875,
+            "x": 1521,
+            "y": 727.4375
+          },
+          "fill": "#b4b59e",
+          "id": 166,
+          "kind": "Type",
+          "locked": false,
+          "name": "An individual life leaves its ow",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "An individual life leaves its own imperfect",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 140,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Earth Seal",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 1024,
+        "y": 239
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 27.85454545454536,
+            "width": 32,
+            "x": 1413,
+            "y": 776.0727272727274
+          },
+          "childCount": 11,
+          "id": 139,
+          "kind": "Group",
+          "locked": false,
+          "name": "03 Crossroads / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 1049,
+            "y": 787.3125
+          },
+          "fill": "#b4b59e",
+          "id": 127,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 169.791015625,
+            "x": 1049,
+            "y": 748.4375
+          },
+          "fill": "#b4b59e",
+          "id": 126,
+          "kind": "Type",
+          "locked": false,
+          "name": "possibilities branch away.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "possibilities branch away.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 228.115234375,
+            "x": 1049,
+            "y": 727.4375
+          },
+          "fill": "#b4b59e",
+          "id": 125,
+          "kind": "Type",
+          "locked": false,
+          "name": "A life takes one course while ot",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "A life takes one course while other",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 98,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 Crossroads",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 552,
+        "y": 239
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 31.685131195335316,
+            "width": 32,
+            "x": 941,
+            "y": 774.1574344023322
+          },
+          "childCount": 10,
+          "id": 97,
+          "kind": "Group",
+          "locked": false,
+          "name": "02 Quiet Amulet / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 577,
+            "y": 787.3125
+          },
+          "fill": "#b4b59e",
+          "id": 86,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 144.935546875,
+            "x": 577,
+            "y": 748.4375
+          },
+          "fill": "#b4b59e",
+          "id": 85,
+          "kind": "Type",
+          "locked": false,
+          "name": "simple enduring form.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "simple enduring form.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 283.595703125,
+            "x": 577,
+            "y": 727.4375
+          },
+          "fill": "#b4b59e",
+          "id": 84,
+          "kind": "Type",
+          "locked": false,
+          "name": "The value of a single ordinary l",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "The value of a single ordinary life, held in a",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 58,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Quiet Amulet",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 580,
+        "width": 452,
+        "x": 80,
+        "y": 239
+      },
+      "childCount": 10,
+      "children": [
+        {
+          "bounds": {
+            "height": 32,
+            "width": 31.150442477876084,
+            "x": 469.42477876106193,
+            "y": 774
+          },
+          "childCount": 11,
+          "id": 57,
+          "kind": "Group",
+          "locked": false,
+          "name": "01 Becoming / standalone scarab",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 12.099609375,
+            "width": 104.267578125,
+            "x": 105,
+            "y": 787.3125
+          },
+          "fill": "#b4b59e",
+          "id": 45,
+          "kind": "Type",
+          "locked": false,
+          "name": "STANDALONE / 32 PX",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "STANDALONE / 32 PX",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 153.1591796875,
+            "x": 105,
+            "y": 748.4375
+          },
+          "fill": "#b4b59e",
+          "id": 44,
+          "kind": "Type",
+          "locked": false,
+          "name": "lifting a new beginning.",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "lifting a new beginning.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 16.939453125,
+            "width": 268.9599609375,
+            "x": 105,
+            "y": 727.4375
+          },
+          "fill": "#b4b59e",
+          "id": 43,
+          "kind": "Type",
+          "locked": false,
+          "name": "A life coming into being; a smal",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "A life coming into being; a small creature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 16,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Becoming",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 1520,
+        "width": 2500,
+        "x": 0,
+        "y": 0
+      },
+      "childCount": 5,
+      "children": [
+        {
+          "anchors": 4,
+          "bounds": {
+            "height": 1,
+            "width": 2340,
+            "x": 80,
+            "y": 204
+          },
+          "closed": true,
+          "fill": "#505548",
+          "id": 15,
+          "kind": "Path",
+          "locked": false,
+          "name": "Header divider",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 21.779296875,
+            "width": 435.005859375,
+            "x": 1984.994140625,
+            "y": 114.5625
+          },
+          "fill": "#b4b59e",
+          "id": 14,
+          "kind": "Type",
+          "locked": false,
+          "name": "An emblem in its own right. A na",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "An emblem in its own right. A name in its own right.",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 29.0390625,
+            "width": 304.7578125,
+            "x": 2115.2421875,
+            "y": 69.75
+          },
+          "fill": "#e7e0c9",
+          "id": 13,
+          "kind": "Type",
+          "locked": false,
+          "name": "TEN SCARAB DIRECTIONS",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "text": "TEN SCARAB DIRECTIONS",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 131.6999242232887,
+            "width": 641.6620358676432,
+            "x": 82.16898206617833,
+            "y": 48.16898206617833
+          },
+          "childCount": 9,
+          "id": 12,
+          "kind": "Group",
+          "locked": false,
+          "name": "Everfolk. / independent approved Eczar wordmark",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 437,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#db9c78",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarabs-v1\\review\\Everfolk-10-Scarab-Directions.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "Everfolk-10-Scarab-Directions.vectorcraft",
+  "tool": "selection",
+  "uid": 35,
+  "units": "Pixels",
+  "rasterImages": 0
+}

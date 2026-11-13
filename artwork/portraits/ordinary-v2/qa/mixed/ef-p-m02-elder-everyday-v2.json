@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "5398f6b87196cbae043e9cfca195343ec534257f9f644597839dd388d7852777",
+  "finePixelSha256": "08a69113eab2fefc18661d03598102421c0d0b9faec4b917e427439585800530",
+  "mixedPixelSha256": "dd5f55833b10e1ca62820c62ab6bafd79db65d073fc67406cc0068f0ac8bb8ce",
+  "maskPixelSha256": "d43f5b6e52052af382e61e3d7d1c0149ceb77ab8df75078f4d7a95964a0d0bcd",
+  "selectedDetailCells": 355,
+  "retainedCoarseCells": 4765,
+  "criticalForcedAdditionalCells": 0,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12780,
+  "changedPixels": 12379,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        146,
+        74,
+        238,
+        94
+      ],
+      "selectedPixels": 1840,
+      "totalPixels": 1840,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-m02-elder-everyday-v2",
+  "source": "portraits/assembled/ef-p-m02-elder-everyday-v2.png",
+  "sourceSha256": "70c97f8aafe9e562a106bd479f34ba2351dfa72556a96161b720a951792840b8",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-m02-elder-everyday-v2.png",
+  "coarseSha256": "6b94b01d99397cb23feff48802f3543941fa719c969b47ea14c77aef6401d90d",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-m02-elder-everyday-v2.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-m02-elder-everyday-v2.png",
+  "fineSha256": "48d0fd31725969b2a4362ef09adbdfbafbdadacd32d5cf61ed527dbc5ba2908b",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-m02-elder-everyday-v2.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-m02-elder-everyday-v2.png",
+  "outputSha256": "b5ef0b606d7c1f6a2edb61f1e3393ffb5eea6afadc46542ae6fdd0d35ddd051b",
+  "maskPath": "qa/regional-masks/ef-p-m02-elder-everyday-v2.png",
+  "maskSha256": "b28151df448856dba091d2a8971cd8fb5cf7742a47ec6e205dabec75154521b9",
+  "configPath": "qa/regions/ef-p-m02-elder-everyday-v2.json",
+  "configSha256": "8d1f6ee2c81c2d5d4095167e19937e5f9048a1821e3033b11b00576100c7790e",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "This portrait's source head eye/chin registration; no reused card coordinates"
+}

@@ -6,6 +6,8 @@ export { getNetWorth, getAssetValue, previewEconomyEffects, financeActivityReaso
 export { marketQuote, marketOrderValue, marketOrderReason, marketOrderCapacity, hasFullMarketAccess, productionCapacity, productionPlan } from "./market.ts";
 export { resolvePartner, personText } from "./people.ts";
 export { hasSocialRole, applySocialRole } from "./relationships.ts";
+export { isRoyalLife, royalAudienceAllowed, ROYAL_METRICS } from "./royalty.ts";
+export { isAristocratLife, isPrivilegedLife, ARISTOCRAT_METRICS } from "./aristocracy.ts";
 export { createSeededPlayEngine, MAX_SEEDED_SAVE_LENGTH } from "./seeded-play.ts";
 export type { SeededPlayEngine, SeededPlayGrant, SeededPlaySave, SeededPlayToken, SeededScenarioDefinition, SeededScenarioMetadata } from "./seeded-play.ts";
 export type * from "./types.ts";

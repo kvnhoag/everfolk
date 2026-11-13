@@ -1,0 +1,251 @@
+{
+  "passed": true,
+  "distinctScarabs": 10,
+  "productionNativeMasters": 11,
+  "svgExports": 42,
+  "allSvgPathsOnly": true,
+  "nativeReopeningsPassed": true,
+  "exportWarnings": [],
+  "pngChecks": [
+    {
+      "file": "png/01-becoming-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/01-becoming-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/01-becoming-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/01-becoming-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/02-quiet-amulet-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/02-quiet-amulet-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/02-quiet-amulet-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/02-quiet-amulet-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/03-crossroads-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/03-crossroads-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/03-crossroads-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/03-crossroads-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/04-earth-seal-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/04-earth-seal-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/04-earth-seal-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/04-earth-seal-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/05-dawnwing-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/05-dawnwing-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/05-dawnwing-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/05-dawnwing-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/06-upward-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/06-upward-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/06-upward-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/06-upward-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/07-unfolding-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/07-unfolding-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/07-unfolding-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/07-unfolding-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/08-heart-of-a-life-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/08-heart-of-a-life-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/08-heart-of-a-life-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/08-heart-of-a-life-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/09-another-beginning-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/09-another-beginning-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/09-another-beginning-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/09-another-beginning-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "png/10-toward-the-horizon-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/10-toward-the-horizon-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "png/10-toward-the-horizon-stacked-cream.png",
+      "width": 1200,
+      "height": 820,
+      "transparent": true
+    },
+    {
+      "file": "png/10-toward-the-horizon-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    }
+  ]
+}

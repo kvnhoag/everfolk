@@ -4,7 +4,7 @@ import { engineForLife } from "../lib/world-session.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import ImpactValue from "./ImpactValue.tsx";
 import { trainingSkillChanges } from "../models/skill-tree.ts";
-import { focusActivity, focusStatus, yearlyDeclineNotes, YEARLY_FOCUSES } from "../models/yearly-focus.ts";
+import { focusActivity, focusStatus, yearlyDeclineNotes, availableYearlyFocuses } from "../models/yearly-focus.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/yearly-focus.css";
 
@@ -13,7 +13,8 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
 }) {
   const id = useId();
   const activities = useMemo(() => providedActivities ?? engineForLife(life).getActivities(life), [providedActivities, life]);
-  const firstAge = Math.min(...YEARLY_FOCUSES.flatMap(focus => {
+  const focuses = availableYearlyFocuses(world, life);
+  const firstAge = Math.min(...focuses.flatMap(focus => {
     const activity = focusActivity(world, focus.id);
     return activity ? [activity.minAge ?? 0] : [];
   }));
@@ -22,7 +23,7 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
   const skillChanges = selected ? trainingSkillChanges(selected, world, life) : [];
   return <section className="yearly-focus" aria-labelledby={`${id}-title`}>
     <h2 id={`${id}-title`}>This year’s focus <small>Change anytime</small></h2>
-    <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{YEARLY_FOCUSES.map(focus => {
+    <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{focuses.map(focus => {
       const activity = focusActivity(world, focus.id);
       if (focus.activityId && !activity) return null;
       const ageLocked = Boolean(activity && life.age < (activity.minAge ?? 0));

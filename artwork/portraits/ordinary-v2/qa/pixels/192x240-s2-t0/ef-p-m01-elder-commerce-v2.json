@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m01-elder-commerce-v2",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m01-elder-commerce-v2.png",
+  "sourceSha256": "c9d7ad43c8dfa228370d937e346ccf0dbcc5d10c094a2400ddd2e24aaf7b114a",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      192,
+      240
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    192,
+    240
+  ],
+  "scale": 2,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/192x240-s2-t0/ef-p-m01-elder-commerce-v2.logical.png",
+  "logicalSha256": "a6fd4a76f4de45b6c5debdc30d61e1017955cab8d6a1effa7de0c4829c471bb9",
+  "outputPath": "portraits/192x240-s2-t0/ef-p-m01-elder-commerce-v2.png",
+  "outputSha256": "429a641d4514b4b22291ea197aa5ba4ce26b44d0aa5bdca52f97b48b178fc7ad",
+  "logicalPixelSha256": "fefc64be14a0d930b8af0c816ae635913cdfdd0a4bcc470459690d5830f0aa38",
+  "uniqueColours": 11653,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

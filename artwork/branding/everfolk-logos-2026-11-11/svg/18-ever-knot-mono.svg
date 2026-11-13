@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>18 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_18_Ever_Knot___mono_device" data-name="18 Ever Knot / mono device">
+      <path id="Continuous_life_loop" data-name="Continuous life loop" d="M51.84 112 C28.8 112 28.8 48 51.84 48 C73.6 48 86.4 112 108.16 112 C131.2 112 131.2 48 108.16 48 C86.4 48 73.6 112 51.84 112 Z" fill="none" stroke="#24464b" stroke-width="10.24" stroke-linecap="round" stroke-linejoin="round"/>
+      <line id="Woven_golden_crossing" data-name="Woven golden crossing" x1="72.32" y1="65.92" x2="87.68" y2="94.08" fill="none" stroke="#24464b" stroke-width="10.24" stroke-linecap="round" stroke-miterlimit="10"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

@@ -170,7 +170,6 @@ test("DecisionDialog popup, EventNotificationStack, LifeChoiceBoard, and styled 
     decisionEvent,
     demoView: screen,
     onOpenDecision: () => {},
-    onOpenChronicle: () => {},
   }));
   assert.match(notifHtml, /event-notification-stack/);
   assert.match(notifHtml, /Open decision/);

@@ -112,6 +112,9 @@ export function buildImportantLifeEvents(life: LifeState, world: WorldPack): Lif
     const has = (id: string) => generated.some(index => life.journal[index].id === id);
     for (const effect of effects) {
       if (effect.type === "end") { ended = true; break; }
+      // Council decisions and dynastic shocks belong in the royal life record.
+      // Small annual pressures are not journaled as accepted story outcomes.
+      if ((effect.type === "royal" || effect.type === "aristocrat") && Math.abs(effect.delta) >= (effect.metric === "treasury" ? 25 : 5)) verifiedFact = true;
       if (effect.type === "flag") flags[effect.flag] = effect.value;
       else if (effect.type === "job") job = effect.job;
       else if (effect.type === "relationship") { partner = effect.partner; status = effect.status; }

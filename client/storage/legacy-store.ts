@@ -45,6 +45,9 @@ function validEntry(value: unknown): value is LegacyEntry {
     !Number.isSafeInteger(record.year) || record.year === 0 || !Array.isArray(record.people) || !record.people.every(value => text(value, 200))) return false;
   if (entry.verifiedRunId !== undefined && !text(entry.verifiedRunId, 300)) return false;
   if (entry.routeTitle !== undefined && !text(entry.routeTitle, 200)) return false;
+  if (record.figure !== undefined && (!record.figure || typeof record.figure !== "object" ||
+    !text(record.figure.id, 100) || !/^[a-z][a-z0-9-]*$/.test(record.figure.id) ||
+    !text(record.figure.name, 100) || !record.figure.name.length)) return false;
   if (entry.nft && (!text(entry.nft.tokenId) || !text(entry.nft.explorerUrl) || !safeExplorerUrl(entry.nft.explorerUrl))) return false;
   return true;
 }

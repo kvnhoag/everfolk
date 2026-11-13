@@ -27,11 +27,13 @@ export function useWorldLibrary() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("opening");
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     void (async () => {
       setLoadingPhase("restoring");
+      setLoadingProgress(20);
       const builtin = getBuiltinWorld();
       let world = builtin;
       let restored = false;
@@ -58,13 +60,16 @@ export function useWorldLibrary() {
       } catch { world = builtin; restored = false; hadSelection = false; }
       if (!restored && !hadSelection) {
         setLoadingPhase("world");
+        setLoadingProgress(45);
         const demo = await loadDemoWorld();
         world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
       }
       if (cancelled) return;
+      setLoadingProgress(90);
       selectWorldPack(world.pack);
       try { persistSelectedWorld(window.localStorage, world); } catch { /* In-memory play still works. */ }
       setActive({ world, key: 0, fresh: false });
+      setLoadingProgress(100);
     })();
     return () => { cancelled = true; };
   }, []);
@@ -79,8 +84,17 @@ export function useWorldLibrary() {
     setPickerOpen(true);
     setError("");
     setBusy(true);
-    try { setWorlds((await readWorldCatalog()).worlds); }
-    catch (cause) { setWorlds([worldSummary(active?.world ?? getBuiltinWorld())]); setError(cause instanceof Error ? cause.message : "The world library is unavailable."); }
+    try {
+      const catalog = (await readWorldCatalog()).worlds;
+      const builtin = worldSummary(getBuiltinWorld());
+      setWorlds(catalog.some(world => world.id === builtin.id) ? catalog : [...catalog, builtin]);
+    }
+    catch (cause) {
+      const current = worldSummary(active?.world ?? getBuiltinWorld());
+      const builtin = worldSummary(getBuiltinWorld());
+      setWorlds(current.id === builtin.id ? [current] : [current, builtin]);
+      setError(cause instanceof Error ? cause.message : "The world library is unavailable.");
+    }
     finally { setBusy(false); }
   }
 
@@ -138,5 +152,5 @@ export function useWorldLibrary() {
 
   function holdFreePlayForRanked() { setActive(keepFreePlayOnRankedStart); }
 
-  return { holdFreePlayForRanked, active, pickerOpen, setPickerOpen, worlds, busy, error, loadingPhase, openWorlds, enterWorld, keepImportedWorld };
+  return { holdFreePlayForRanked, active, pickerOpen, setPickerOpen, worlds, busy, error, loadingPhase, loadingProgress, openWorlds, enterWorld, keepImportedWorld };
 }

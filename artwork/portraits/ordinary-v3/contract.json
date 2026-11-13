@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 3,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "canvas": [
+    800,
+    1000
+  ],
+  "scope": "240 ordinary portraits from twelve COMPLETE anatomical paintings (two sexes across six ages), including scholarly, military, aristocratic and royal wardrobe families. Internal facial features, explicit skin palettes and fitted garments may vary; source jaw/neck/shoulder/body geometry remains intact.",
+  "identityIds": [
+    "m01",
+    "m02",
+    "m03",
+    "f01",
+    "f02",
+    "f03"
+  ],
+  "stages": [
+    "infant",
+    "child",
+    "youth",
+    "adult",
+    "middle",
+    "elder"
+  ],
+  "ageExamples": {
+    "infant": 1,
+    "child": 8,
+    "youth": 16,
+    "adult": 28,
+    "middle": 49,
+    "elder": 72
+  },
+  "modelNaming": "source/models/ef-model-{sex}-{stage}-v3.png",
+  "faceNaming": "source/faces/ef-face-{identityId}-{stage}-v3.png",
+  "annotations": "model-annotations.json",
+  "mappings": "../ordinary-v1/mappings.json",
+  "wardrobeSources": "../ordinary-v2/source/wardrobe/ef-w-{sex}-{wardrobeId}-v2.png",
+  "wardrobeSourceOverrides": {
+    "aristocrat": "source/wardrobe/ef-w-{sex}-aristocrat-v3.png",
+    "royalty": "source/wardrobe/ef-w-{sex}-royalty-v3.png"
+  },
+  "adultWardrobes": [
+    "everyday",
+    "work",
+    "maritime",
+    "commerce",
+    "scholarly",
+    "military",
+    "elite",
+    "performance",
+    "aristocrat",
+    "royalty"
+  ],
+  "expectedPortraitCount": 240,
+  "wardrobeSourceAnnotations": "../ordinary-v2/female-wardrobe-anchors.json",
+  "additionalWardrobeSourceAnnotations": "wardrobe-anchors.json",
+  "faceRegistrationPath": "face-edit-registrations.json",
+  "facePolicy": "Use only generated internal features inside the approved ellipse. A meaningful constant donor-skin Lab bias is corrected inside skin before blending; relative painted lighting is retained. Original whole-model alpha and all pixels outside that ellipse remain exact before palette changes. Never paste a head, cut a jaw, reconstruct a neck, or narrow a body.",
+  "palettePolicy": "Per identity and age, CIELAB offset from old source-head skin samples is confined to an explicitly reviewed skin-only mask. Original alpha and pixels outside that skin mask remain exact.",
+  "wardrobePolicy": "Everyday, child/youth defaults and infant wraps are the complete source model's own clothing. Professional clothing is registered onto its original shirt frame; all skin and the complete upper head/jaw are protected, and original whole-model alpha is restored exactly. No body/neck shape transformation.",
+  "normalization": "One uniform scale of the COMPLETE native canvas, centred and letterboxed onto800x1000. No separate face/head/body normalization and no cropping.",
+  "background": "#35483e",
+  "pixelProfile": {
+    "gridType": "mixed-grid; no single logical grid",
+    "coarseLogical": [
+      128,
+      160
+    ],
+    "coarseScale": 3,
+    "fineLogical": [
+      192,
+      240
+    ],
+    "fineScale": 2,
+    "outlineThickness": 0,
+    "commonCell": 6
+  },
+  "assemblyDependencies": "Only complete model inputs, reviewed annotation/mask data and clothing inputs. V2 anatomical assembly code and components are forbidden.",
+  "runtimeIntegrated": false,
+  "userReviewStatus": "awaiting-user-review",
+  "anatomicalApproval": false,
+  "youthWardrobes": [
+    "youth",
+    "work",
+    "maritime",
+    "scholarly",
+    "performance",
+    "aristocrat",
+    "royalty"
+  ],
+  "contentCompatibility": "content-compatibility.json",
+  "incrementalBaseline": {
+    "path": "qa/review-inputs/manifest-228-reviewed.json",
+    "sha256": "f22fa774ebc06d78f83b98ca6aafb8432fd51302ef0500964d977e53d65a3e5f",
+    "retained": 228,
+    "additions": 12
+  }
+}

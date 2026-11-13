@@ -2,6 +2,8 @@ import type { ActivityAvailability, CharacterActivity, Condition, JobDefinition,
 import { getSkillImpact } from "./skill-impact.ts";
 import { formatYear } from "../../src/calendar.ts";
 import { availability } from "../../src/demo/availability.ts";
+import { royalAudienceAllowed } from "../../src/royalty.ts";
+import { isPrivilegedLife } from "../../src/aristocracy.ts";
 
 export type SkillState = "locked" | "ready" | "learning" | "mastered";
 export interface SkillRequirement { id: string; label: string; value: number; required: number; met: boolean }
@@ -109,6 +111,10 @@ export function skillActionRequirements(activity: CharacterActivity, world: Worl
       return [`Own ${asset?.title.toLocaleLowerCase() ?? condition.asset}${condition.value > 1 ? ` (${condition.value})` : ""}`];
     }
     if (condition.type === "cash" && condition.op === "gte" && condition.value > 0) return [`Cash at least ${condition.value} ${world.economy?.currency.short ?? ""}`.trim()];
+    if ((condition.type === "royal" || condition.type === "aristocrat") && condition.metric === "treasury" && condition.op === "gte" && condition.value > 0) {
+      const config = condition.type === "royal" ? world.royalty : world.aristocracy;
+      return [`${config?.metrics.treasury.label ?? "Household treasury"} at least ${condition.value} ${world.economy?.currency.short ?? ""}`.trim()];
+    }
     if (condition.type === "year" && condition.value !== 0) {
       const relation = { gte: "From", gt: "After", lt: "Before", lte: "Through", eq: "In", ne: undefined }[condition.op];
       return relation ? [`${relation} ${formatYear(condition.value)}`] : [];
@@ -142,7 +148,7 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
   const definitions = world.character.skills;
   const current = life.character.skills;
   // Read unlock metadata even in a choice preview that has no activity buttons.
-  const declaredActivities = world.character.activities.map(activity => ({ ...activity, available: false }));
+  const declaredActivities = world.character.activities.filter(activity => royalAudienceAllowed(world, life, activity.audience)).map(activity => ({ ...activity, available: false }));
   const requirement = (id: string, required: number): SkillRequirement => ({ id, label: definitions[id]?.label ?? id, value: current[id] ?? definitions[id]?.min ?? 0, required, met: (current[id] ?? definitions[id]?.min ?? 0) >= required });
   const nodes = Object.entries(definitions).map(([id, definition]): SkillNode => {
     const training = trainingFor(id, definition, activities);
@@ -157,7 +163,7 @@ export function buildSkillTree(world: WorldPack, life: LifeState, activities: re
     const value = current[id] ?? definition.min;
     const ageMet = life.age >= minAge;
     const unlocked = ageMet && requirements.every(item => item.met);
-    const careers = world.character!.jobs.filter(job => id in (job.requirements ?? {}) || gainsSkill(job.yearlyEffects, id)).map((job): SkillCareer => {
+    const careers = world.character!.jobs.filter(job => !isPrivilegedLife(world, life) && (id in (job.requirements ?? {}) || gainsSkill(job.yearlyEffects, id))).map((job): SkillCareer => {
       const requirements = Object.entries(job.requirements ?? {}).map(([skill, threshold]) => requirement(skill, threshold));
       return {
         job, requirements, ageMet: life.age >= job.minAge,

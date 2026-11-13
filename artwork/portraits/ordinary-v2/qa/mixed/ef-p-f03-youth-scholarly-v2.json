@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "5e63e302ede45f39ae6ac4bf43e2842f4168b08f62148472e6e3af7dcef622da",
+  "finePixelSha256": "88c0ac2830f57d61ca70b7fc96f3002f70bcf99bc38bce2b6edf76bb94e4dd16",
+  "mixedPixelSha256": "b75794e20e811a7c5eeb75cbf567d32c2494a86e7066de160b3c0e5d85787000",
+  "maskPixelSha256": "262a083e596362f3ebbb19772a2b05fa5fac21483c797d09bced31b467cfee40",
+  "selectedDetailCells": 350,
+  "retainedCoarseCells": 4770,
+  "criticalForcedAdditionalCells": 1,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12600,
+  "changedPixels": 12111,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        147,
+        88,
+        237,
+        109
+      ],
+      "selectedPixels": 1890,
+      "totalPixels": 1890,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-f03-youth-scholarly-v2",
+  "source": "portraits/assembled/ef-p-f03-youth-scholarly-v2.png",
+  "sourceSha256": "d098a285c0e963f596c7aca089f310350f76beea56a03936b544b651b58bbf1a",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-f03-youth-scholarly-v2.png",
+  "coarseSha256": "58d0c3f5e3446c817d2cacc1df744057d8ba662feb610c2c30a282ce5be3331d",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-f03-youth-scholarly-v2.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-f03-youth-scholarly-v2.png",
+  "fineSha256": "ad9524b54abcf318d825a2a86068223183fb97e4eec5cdc66cae59f95d65edd8",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-f03-youth-scholarly-v2.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-f03-youth-scholarly-v2.png",
+  "outputSha256": "72bb8fcb5bb000d6911ec9b8494e349d2e62af4c7162ba5458d25049f8aa5850",
+  "maskPath": "qa/regional-masks/ef-p-f03-youth-scholarly-v2.png",
+  "maskSha256": "acba8aa450ddad7c64562355b0c43593e0b0911edf32f38927147da71493ad5e",
+  "configPath": "qa/regions/ef-p-f03-youth-scholarly-v2.json",
+  "configSha256": "bd934deef4f50531023ae2cae8c38b9bf39fe4cff5a5ae8b792bd01a03b38ecb",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "This portrait's source head eye/chin registration; no reused card coordinates"
+}

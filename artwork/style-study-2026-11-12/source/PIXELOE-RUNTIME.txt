@@ -1,0 +1,45 @@
+PixelOE anime-first benchmark runtime
+12 November 2026
+
+Uses the published PixelOE 1.0.0 package (Apache 2.0) and its legacy CPU API.
+Official project: https://github.com/KohakuBlueleaf/PixelOE
+Original package licence is retained in:
+artifacts/pixeloe-runtime/site-packages/pixeloe-1.0.0.dist-info/licenses/LICENSE
+
+The local minimal runtime is in the project's git-ignored
+artifacts/pixeloe-runtime/site-packages directory. No global Python packages,
+root package.json or game runtime dependencies were changed.
+Downloads totalled about 270 MB. The extracted runtime occupies about 1.47 GB,
+mostly Torch CPU binaries. It has no server, worker or directory-holding
+background process. Keep the directory to reproduce this benchmark.
+
+Python used:
+C:/Users/Legion/.codex/runtimes/nature-skills/venv/Scripts/python.exe
+The read-only existing runtime provides NumPy, Pillow and typing_extensions.
+All newly downloaded libraries were installed only into the ignored target.
+
+Reproduce from this project root:
+& 'C:/Users/Legion/.codex/runtimes/nature-skills/venv/Scripts/python.exe' 'artwork/style-study-2026-11-12/source/build-anime-pixeloe-v3.py'
+
+To reconstruct the minimal target in a fresh compatible Python 3.12 environment:
+python -m pip install --target artifacts/pixeloe-runtime/site-packages --no-deps --extra-index-url https://download.pytorch.org/whl/cpu -r artwork/style-study-2026-11-12/source/pixeloe-cpu-requirements.txt
+
+This deliberately uses only the upstream legacy API's imported dependencies.
+The optional/newer torchvision, Kornia and Slang processing backends are not
+installed. The complete current PixelOE distribution has additional declared
+dependencies that this minimal benchmark does not exercise.
+
+Pipeline: clean anime source -> PixelOE contrast-aware outline expansion
+(thickness 1) -> source colour matching -> contrast-aware downsampling ->
+literal 3x or 4x nearest-neighbour enlargement. No palette reduction was applied.
+Fine logical grid 640x360, output 1920x1080; strong logical 480x270, output 1920x1080.
+No crop was used. Explicit 16:9 target causes less than 0.06% aspect normalization.
+QA records package versions, parameters, hashes, deterministic repeat renders,
+PNG exact integer blocks and unchanged source in qa/anime-v3-pixeloe.json.
+
+The hybrid anime + chiaroscuro v5 benchmark reuses this exact runtime:
+& 'C:/Users/Legion/.codex/runtimes/nature-skills/venv/Scripts/python.exe' 'artwork/style-study-2026-11-12/source/build-hybrid-pixeloe-v5.py'
+It reads the clean source/alexander-anime-chiaroscuro-before-v5.png image.
+Outputs are under review/hybrid-v5: bold 320x180 at 6x and chunky 240x135 at 8x,
+both 1920x1080. Parameters remain thickness 1, source colour matching and no
+palette reduction. QA is recorded in qa/hybrid-v5-pixeloe.json.

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>15 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_15_Shared_Table___color_device" data-name="15 Shared Table / color device">
+      <path id="Two_equal_companions" data-name="Two equal companions" d="M62.08 51.84 C62.08 58.202 56.922 63.36 50.56 63.36 C44.198 63.36 39.04 58.202 39.04 51.84 C39.04 45.478 44.198 40.32 50.56 40.32 C56.922 40.32 62.08 45.478 62.08 51.84 Z M120.96 51.84 C120.96 58.202 115.802 63.36 109.44 63.36 C103.078 63.36 97.92 58.202 97.92 51.84 C97.92 45.478 103.078 40.32 109.44 40.32 C115.802 40.32 120.96 45.478 120.96 51.84 Z" fill="#24464b"/>
+      <path id="Seated_conversation" data-name="Seated conversation" d="M36.48 95.36 L36.48 90.24 C36.48 73.6 58.24 71.04 67.2 86.4 L76.16 100.48 M123.52 95.36 L123.52 90.24 C123.52 73.6 101.76 71.04 92.8 86.4 L83.84 100.48 M36.48 103.04 C39.04 132.48 120.96 132.48 123.52 103.04" fill="none" stroke="#24464b" stroke-width="8.32" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Common_table" data-name="Common table" d="M55.68 100.48 L104.32 100.48 M80 100.48 L80 118.4" fill="none" stroke="#b58a49" stroke-width="7.68" stroke-linecap="round" stroke-miterlimit="10"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+EVERFOLK / OUROBOROS IDENTITY
+11 November 2026
+
+CONCEPT
+An original serpent bites its own tapered tail, closing a circular form.
+The open centre and continuous body express the repeated lives and stories
+behind Everfolk. Endless Life is the working name of the mark; Everfolk
+remains the game name and Live another story remains its motto.
+
+REFERENCE
+The official Assassin's Creed title and emblem assets were visually studied
+for sharp silhouette, high contrast, generous negative space and restrained
+uppercase title treatment. The Everfolk serpent and title outlines are
+original geometry. No Assassin's Creed artwork is included in this pack.
+https://www.ubisoft.com/en-us/game/assassins-creed
+
+START HERE
+review/Everfolk-Ouroboros-Identity.png is the full identity sheet.
+review/everfolk-ouroboros-reverse-proof.png is the primary monochrome proof.
+review/everfolk-ouroboros-heritage-proof.png shows the gold and teal treatment.
+review/everfolk-ouroboros-light-proof.png shows the ink-on-paper treatment.
+
+EDITABLE MASTER
+masters/Everfolk-Ouroboros.vectorcraft contains eight transparent artboards:
+01 Primary ink signature, 1200 x 800
+02 Primary reverse signature, 1200 x 800
+03 Primary heritage gold signature, 1200 x 800
+04 Horizontal signature, 1200 x 300
+05 Ouroboros integrated as the O, 1200 x 300
+06 Separate wordmark, 1200 x 260
+07 Detailed serpent emblem, 512 x 512
+08 Compact serpent emblem, 256 x 256
+
+The serpent is native filled vector geometry, with a true transparent
+centre, mouth opening and eye slit. The head and body were united in
+VectorCraft to remove a shared-edge rendering seam. The compact version
+omits the eye. Title letters are individually editable vector outlines;
+supporting motto text remains live in the master.
+
+EXPORTS
+svg/ includes the eight artboards, reverse and gold emblem variants, and
+a teal-background favicon. All exported lettering is outlined.
+png/ includes transparent exports, emblem sizes from 16 to 1024 pixels,
+reverse/gold emblems, and teal-background favicon sizes from 16 to 256.
+Use the reverse files on dark backgrounds.
+
+PALETTE
+Ink #203c42; carbon #111b20; deep teal #183b40;
+ivory #f4f0e3; gold #b59a61.
+
+VERIFICATION
+The native master was saved, closed and reopened with all eight artboards.
+The reopened emblem was rendered and visually checked. The primary proof,
+identity sheet, integrated O and compact icon were reviewed. No export
+warnings or supporting-font substitutions were reported. SVGs contain
+vector geometry without embedded raster images.
+
+source/ contains the emblem construction, title glyphs and native MCP
+build script. manifest.json records artboards, exports, palette and reference.
+qa/ contains the native inspections and validation record.

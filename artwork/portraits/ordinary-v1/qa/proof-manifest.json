@@ -1,0 +1,1051 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v1",
+  "scope": "bounded-proof",
+  "canvas": [
+    800,
+    1000
+  ],
+  "style": "Mature anime anatomical character design, painterly chiaroscuro, warm upper-left light/cool jade umber shadows, restrained earth colours. Generate smooth components first; PixelOE finish after composition. No glossy actor likeness or uniform heroic scowl.",
+  "runtimeIntegrated": false,
+  "identities": [
+    {
+      "id": "m01",
+      "sex": "male",
+      "avatarVariant": 0
+    },
+    {
+      "id": "m02",
+      "sex": "male",
+      "avatarVariant": 1
+    },
+    {
+      "id": "m03",
+      "sex": "male",
+      "avatarVariant": 2
+    },
+    {
+      "id": "f01",
+      "sex": "female",
+      "avatarVariant": 0
+    },
+    {
+      "id": "f02",
+      "sex": "female",
+      "avatarVariant": 1
+    },
+    {
+      "id": "f03",
+      "sex": "female",
+      "avatarVariant": 2
+    }
+  ],
+  "stages": [
+    "infant",
+    "child",
+    "youth",
+    "adult",
+    "middle",
+    "elder"
+  ],
+  "stageWardrobes": {
+    "infant": [
+      "infant"
+    ],
+    "child": [
+      "child",
+      "work"
+    ],
+    "youth": [
+      "youth",
+      "work",
+      "maritime",
+      "scholarly",
+      "performance"
+    ],
+    "adult": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ],
+    "middle": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ],
+    "elder": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ]
+  },
+  "defaultWardrobes": {
+    "infant": "infant",
+    "child": "child",
+    "youth": "youth",
+    "adult": "everyday",
+    "middle": "everyday",
+    "elder": "everyday"
+  },
+  "heads": [
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-adult-v1.png",
+      "sourceSha256": "4eb2f06f236313793911f4fe2e899434b4af549c5bd8ff1ecb51a45e38112ac7",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        190,
+        11,
+        971,
+        1254
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        196,
+        85
+      ],
+      "placedSize": [
+        408,
+        650
+      ],
+      "uniformScale": 0.5229283990345938,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-adult-v1.png",
+      "sha256": "7783b36df73cbf8ff83e6eb7edf299725b17d386706b157aa98d21c765662452",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-adult-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m02-adult-v1.png",
+      "sourceSha256": "5630059923eb4baa4ea2a8aa43cd4dcce38141c6364a115b105e0ecc49683738",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        197,
+        63,
+        909,
+        1320
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        216,
+        85
+      ],
+      "placedSize": [
+        368,
+        650
+      ],
+      "uniformScale": 0.5171042163882259,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m02-adult-v1.png",
+      "sha256": "fcf6a69ac1a6ee166ed81f162cd08c50f77276bec7613748d584148316b83884",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m02-adult-v1",
+      "identityId": "m02",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m03-adult-v1.png",
+      "sourceSha256": "a1ce6911689cc5d3fe2147a5dbc61740c3ebce308d0797326c873811fdda0440",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        171,
+        76,
+        952,
+        1335
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        198,
+        85
+      ],
+      "placedSize": [
+        403,
+        650
+      ],
+      "uniformScale": 0.5162827640984908,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m03-adult-v1.png",
+      "sha256": "a12a0e30974ab3866a835788c579229bb48ecdb1ab642a87d445ee53a27b7982",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m03-adult-v1",
+      "identityId": "m03",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-f01-adult-v1.png",
+      "sourceSha256": "d1dbf9277825843a614df489bac6a552e86ba63c5101bb8c1898109ef630d0c9",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        134,
+        36,
+        968,
+        1363
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        196,
+        85
+      ],
+      "placedSize": [
+        409,
+        650
+      ],
+      "uniformScale": 0.4898266767143934,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-f01-adult-v1.png",
+      "sha256": "3b9f6475b6edfca33500425bad109c0a9c10f72c4b47e2dc4681f8c5735f2d4b",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-f01-adult-v1",
+      "identityId": "f01",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-f02-adult-v1.png",
+      "sourceSha256": "597a561978a174c3c453554c15e20e0f15e11729afb1f94ab9f9133bcca2db7c",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        139,
+        23,
+        978,
+        1377
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        198,
+        85
+      ],
+      "placedSize": [
+        403,
+        650
+      ],
+      "uniformScale": 0.48005908419497784,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-f02-adult-v1.png",
+      "sha256": "4dc369722184252d8fed9c7b9c65cc253b26ac605580b16ee14a1b68cec38ea2",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-f02-adult-v1",
+      "identityId": "f02",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-f03-adult-v1.png",
+      "sourceSha256": "bf851e2fcb24acfb422ea847d2ec84c919e0c851f76c5628b737e259f300028e",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        256,
+        10,
+        1053,
+        1174
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        178,
+        85
+      ],
+      "placedSize": [
+        445,
+        650
+      ],
+      "uniformScale": 0.5584192439862543,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-f03-adult-v1.png",
+      "sha256": "813fca4146c3f269c60eb36abe466746b1eff3bf76394a255a09bac29df9bcd3",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-f03-adult-v1",
+      "identityId": "f03",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    }
+  ],
+  "garments": [
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-everyday-v1.png",
+      "sourceSha256": "3213f62c89ab46246ddb111e2256ad36015ac4f6301ee191249266633029ce42",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        254
+      ],
+      "sourceCropBox": [
+        13,
+        150,
+        1523,
+        954
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        35,
+        625,
+        765,
+        1000
+      ],
+      "placedAt": [
+        48,
+        625
+      ],
+      "placedSize": [
+        704,
+        375
+      ],
+      "uniformScale": 0.4664179104477612,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-everyday-adult-v1.png",
+      "sha256": "12d58e03b85a2d988259be905a591b60811bf7d9076319637aa5b9b466851b04",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-everyday-adult-v1",
+      "wardrobeId": "everyday",
+      "placementStage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    },
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-work-v1.png",
+      "sourceSha256": "ac742ff4fe16074428615aac01bf543a6f2856addd6bed211b1fc93322c7afe5",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        254
+      ],
+      "sourceCropBox": [
+        4,
+        21,
+        1530,
+        1005
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        35,
+        625,
+        765,
+        1000
+      ],
+      "placedAt": [
+        109,
+        625
+      ],
+      "placedSize": [
+        582,
+        375
+      ],
+      "uniformScale": 0.38109756097560976,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-work-adult-v1.png",
+      "sha256": "16648e396520038547c2c6f07a5802f5da01b40cccfdc6f13aa7435db22598e9",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-work-adult-v1",
+      "wardrobeId": "work",
+      "placementStage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    }
+  ],
+  "portraits": [
+    {
+      "id": "ef-p-m01-adult-everyday-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v1.png",
+      "assembledSha256": "c0698915e5bda77cfd68b392e2a74b627961a88851e949e26ec8301c320b58e6",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-m01-adult-everyday-v1.png",
+      "sha256": "053d022dd2adfcb4e25d6ed7a2056e8eefe995b1329214cadc0cce85a8c71467",
+      "logical": "portraits/96x120-s4-t1/ef-p-m01-adult-everyday-v1.logical.png",
+      "logicalSha256": "60aef7409f790c7d86d8ac15d88aa684fa26f6574a393645f19624f197c3f163",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-m01-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m01-adult-everyday-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v1.png",
+      "assembledSha256": "c0698915e5bda77cfd68b392e2a74b627961a88851e949e26ec8301c320b58e6",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-m01-adult-everyday-v1.png",
+      "sha256": "de0650f6be5e502bc77429ab039b9e7cd205ec39345775decece381f747c045e",
+      "logical": "portraits/128x160-s3-t1/ef-p-m01-adult-everyday-v1.logical.png",
+      "logicalSha256": "d24954b1b17d64d6aeeed068949a196a39d34b802410e7f6d25612d6e2d0add6",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-m01-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m01-adult-work-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-work-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-work-v1.png",
+      "assembledSha256": "20be5289496af9b263821423eec66cd25a72d3819086b49adb18c3319bbf4afb",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-m01-adult-work-v1.png",
+      "sha256": "127fc9978afe00bc0fd129fa87241e1194cf04b19b3dbe75ed2deb5b818410f4",
+      "logical": "portraits/96x120-s4-t1/ef-p-m01-adult-work-v1.logical.png",
+      "logicalSha256": "e236ead237fdb5deb5db592d407f6daff4a8d202db3342b7d4f4718e4cc0918c",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-m01-adult-work-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m01-adult-work-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-work-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-work-v1.png",
+      "assembledSha256": "20be5289496af9b263821423eec66cd25a72d3819086b49adb18c3319bbf4afb",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-m01-adult-work-v1.png",
+      "sha256": "676944569fb191079f93582aaf5665014b6c9d4653baafbb4170e642ae8a78c9",
+      "logical": "portraits/128x160-s3-t1/ef-p-m01-adult-work-v1.logical.png",
+      "logicalSha256": "34317e9b9d2250117e6ab3880ef8f57e625c9ac177f70d366d1c0a4a62d24458",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-m01-adult-work-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v1",
+      "identityId": "m02",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m02-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v1.png",
+      "assembledSha256": "07826428c111dd257cc625a2c5a6d8bfc8c74cf4392223c0d7554ebf5d1eb8c1",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-m02-adult-everyday-v1.png",
+      "sha256": "d4955455eb7fe7b9bf3b5716f2063e1df5c7106fefebc24402fc35e211f65e11",
+      "logical": "portraits/96x120-s4-t1/ef-p-m02-adult-everyday-v1.logical.png",
+      "logicalSha256": "c73427f713d01d8c140875f2d4c290f6ac680c6474570f0d9545f50967af429d",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-m02-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v1",
+      "identityId": "m02",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m02-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v1.png",
+      "assembledSha256": "07826428c111dd257cc625a2c5a6d8bfc8c74cf4392223c0d7554ebf5d1eb8c1",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-m02-adult-everyday-v1.png",
+      "sha256": "46bed7651aaf0fda71b40dbd00cbbbccbfa49de209f1af6d928bdee9a8232c00",
+      "logical": "portraits/128x160-s3-t1/ef-p-m02-adult-everyday-v1.logical.png",
+      "logicalSha256": "93e79d4418ff7aff641b2f7f8b03808b33eeef71662ad5ce37eb181903daf595",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-m02-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v1",
+      "identityId": "m03",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m03-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v1.png",
+      "assembledSha256": "b43e2924cfe3cd9f455fc412630e74a82a0becd651b284b8f79b2ea924319838",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-m03-adult-everyday-v1.png",
+      "sha256": "c1d06b20a44d3f7f139d07d7b7e9c85c36e71771aa726b2454aee7db24969982",
+      "logical": "portraits/96x120-s4-t1/ef-p-m03-adult-everyday-v1.logical.png",
+      "logicalSha256": "78fb08b20da65e27c31c1d8f8e3f76d02a2d54cc93d90ab4f9246605947ab0fb",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-m03-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v1",
+      "identityId": "m03",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m03-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v1.png",
+      "assembledSha256": "b43e2924cfe3cd9f455fc412630e74a82a0becd651b284b8f79b2ea924319838",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-m03-adult-everyday-v1.png",
+      "sha256": "1f743b2a42f81ff7c58eeca26f9b1559912bec338faade624130545bdfc7a288",
+      "logical": "portraits/128x160-s3-t1/ef-p-m03-adult-everyday-v1.logical.png",
+      "logicalSha256": "b130be11139f76554f40646f0973e9e6539e0147c181ad46741cd1aaa12ab4b4",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-m03-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v1",
+      "identityId": "f01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v1.png",
+      "assembledSha256": "b5142ad8910593164f590ea5f399107ea7d7e616f54cecf36436e0fc4b223296",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-f01-adult-everyday-v1.png",
+      "sha256": "d193d620ce702032edc0cb2ca4e255f101ecc982ec818804cdd3e506d1214c6e",
+      "logical": "portraits/96x120-s4-t1/ef-p-f01-adult-everyday-v1.logical.png",
+      "logicalSha256": "c612a8e6d361775a56f761b2ad3c634012d95ffdfbb39ae98294d46c5cab98c0",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-f01-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v1",
+      "identityId": "f01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v1.png",
+      "assembledSha256": "b5142ad8910593164f590ea5f399107ea7d7e616f54cecf36436e0fc4b223296",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-f01-adult-everyday-v1.png",
+      "sha256": "4295e0e577ebe7555f07b9cd0cf042e96a41caa101f26945201d911e7e12d29f",
+      "logical": "portraits/128x160-s3-t1/ef-p-f01-adult-everyday-v1.logical.png",
+      "logicalSha256": "52f103528308d5bcb3cee5c0a8712f743b7cce3493a50074778c41e36e1b3402",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-f01-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v1",
+      "identityId": "f02",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f02-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v1.png",
+      "assembledSha256": "baa4ff23b47c061b5adc44216abad161898fe0212f09c9cfd11daa8dcc32e649",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-f02-adult-everyday-v1.png",
+      "sha256": "78577050c62d93a6ac016252ec340d6320f391c14f559703c1b24c87627db9e0",
+      "logical": "portraits/96x120-s4-t1/ef-p-f02-adult-everyday-v1.logical.png",
+      "logicalSha256": "1983c77f8b308db1486c42187563beffb508bde9fcdbad9c790f454ff78865e1",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-f02-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v1",
+      "identityId": "f02",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f02-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v1.png",
+      "assembledSha256": "baa4ff23b47c061b5adc44216abad161898fe0212f09c9cfd11daa8dcc32e649",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-f02-adult-everyday-v1.png",
+      "sha256": "42f4786c6fdb4c4ca104e5deb59fee8ff7513f312fe519063921c0f188622a00",
+      "logical": "portraits/128x160-s3-t1/ef-p-f02-adult-everyday-v1.logical.png",
+      "logicalSha256": "944479949895fea211615d90555ec006c2ef81e6f55093eb370cc45a81c7feb7",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-f02-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v1",
+      "identityId": "f03",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f03-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v1.png",
+      "assembledSha256": "2faa51b5874fa8af8ed1747400536acf2c68bb9929b9612d561fe394aa985003",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "96x120-s4-t1",
+      "path": "portraits/96x120-s4-t1/ef-p-f03-adult-everyday-v1.png",
+      "sha256": "4eb14fed9ce43d8f4a829465224645be9a8d8106c60ad45efee0aef458687cc5",
+      "logical": "portraits/96x120-s4-t1/ef-p-f03-adult-everyday-v1.logical.png",
+      "logicalSha256": "3bd2d3a3a9c56e47576809b024c55f438d17964c3a3b6c85c85bd84902dbb25b",
+      "qa": "qa/pixels/96x120-s4-t1/ef-p-f03-adult-everyday-v1.json",
+      "logicalSize": [
+        96,
+        120
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v1",
+      "identityId": "f03",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-f03-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v1.png",
+      "assembledSha256": "2faa51b5874fa8af8ed1747400536acf2c68bb9929b9612d561fe394aa985003",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-f03-adult-everyday-v1.png",
+      "sha256": "2f06313501f179ca8386bbe96bc6d01654bf8ffe1c041dc1dfac1b3ee9955d7c",
+      "logical": "portraits/128x160-s3-t1/ef-p-f03-adult-everyday-v1.logical.png",
+      "logicalSha256": "0349c8db168659c51b9d8237f29a6f896c6bda3bc18a11b6cce428ff92e5e01b",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-f03-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    }
+  ],
+  "mappingPath": "mappings.json",
+  "mappingSha256": "f9bf9de67c838df2557f0f06d9c993bb6e5b705812c210d1176a040f477cfb9c",
+  "contractPath": "contract.json",
+  "contractSha256": "add3cfef7c2e3304ac6fcbdf3012524246d351d694bdda8103d15078fa5b3403",
+  "sourceIntegrity": {
+    "allProtectedInputsUnchanged": true,
+    "inputCount": 10
+  },
+  "limitations": [
+    "Components are generated painterly RGBA, not rigged anatomy or hand-authored brushwork.",
+    "Clothing is an authored visual grouping, not attested occupational uniform.",
+    "Pixel integrity checks do not certify likeness, pupil visibility or anatomical seam quality; inspect review sheets.",
+    "Existing runtime assets remain retained; family/child binding requires the documented identity/UI work."
+  ]
+}

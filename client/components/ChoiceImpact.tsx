@@ -1,5 +1,5 @@
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
-import { getChoiceImpact } from "../models/choice-impact.ts";
+import { getAccomplishmentPreviews, getAristocratImpact, getChoiceImpact, getRoyalImpact } from "../models/choice-impact.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import PixelIcon from "./PixelIcon.tsx";
 import { getMoneyImpact } from "../models/wealth.ts";
@@ -81,6 +81,8 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
+  const royalImpact = [...getRoyalImpact(choice, life, world), ...getAristocratImpact(choice, life, world)];
+  const accomplishments = getAccomplishmentPreviews(choice, life, world);
   const connections = closenessEffects(choice, life, world);
   const health = healthEffects(choice, life, world);
   const opportunity = getOpportunityPreview(world, life, choice);
@@ -91,11 +93,12 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
   const skillImpact = showSkillChanges || !hideSkills ? getSkillImpact(choice, life, world) : [];
   const early = hideSkills ? [] : previewEarlyInfluences(choice, world, life);
   const social = socialRoleImpact(choice, life, world);
-  const hasRange = changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
-  if (changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0 && early.length === 0 && social.length === 0) return emptyText ? <span className="compact-skill-empty">{emptyText}</span> : null;
+  const hasRange = royalImpact.some(item => item.variable) || changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
+  if (royalImpact.length === 0 && accomplishments.length === 0 && changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0 && early.length === 0 && social.length === 0) return emptyText ? <span className="compact-skill-empty">{emptyText}</span> : null;
   return <span className="choice-impact">
     <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
+      {royalImpact.map(item => <span className="impact-stat" key={`royal-${item.id}`}><span className="impact-stat-label">{item.label}</span>{" "}<ImpactValue min={item.min} max={item.max} suffix={item.id === "treasury" ? world.economy?.currency.short : undefined} /></span>)}
       {changedStats.map(stat => {
         return <span className={`impact-stat impact-attribute stat-${stat.id}`} key={stat.id}>
           <span className="impact-stat-label"><PixelIcon name={stat.id} size={12} />{stat.label}</span>{" "}<ImpactValue min={stat.min} max={stat.max} />
@@ -108,6 +111,7 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
       {health.map(item => <span className={`impact-stat impact-${item.gain ? "gain" : "loss"}`} key={item.text}>{item.text}</span>)}
       {loanNotes.map(note => <span className="impact-stat" key={note}>{note}</span>)}
       {social.map(note => <span className={`impact-stat impact-${note.gain ? "gain" : "loss"}`} key={note.text}>{note.text}</span>)}
+      {accomplishments.map(item => <span className="impact-stat impact-gain" key={`card-${item.id}`}>{item.kind === "ordinary" ? "Work card" : "Title card"}: {item.title} · {item.probability >= 1 ? "Awarded on acceptance" : `${Number((item.probability * 100).toPrecision(3))}% chance`}</span>)}
     </span>
     {early.map(item => <span className="choice-early-influence" key={item.routeId}><span>{item.possible ? "Possible early interest" : item.reinforced ? "Interest reinforced" : "Early interest"}: <strong>{item.title}</strong></span>{item.multiplier > 1 && <small>Future practice gains up to {practiceBonus(item.multiplier)}</small>}</span>)}
     {opportunity && <span className="choice-opportunity"><strong>{opportunity.label}: {Number((opportunity.probability * 100).toFixed(1))}%</strong>{!hideSkills && opportunity.factors.length > 0 && <span className="choice-opportunity-factors">{opportunity.factors.map((factor, index) => <span className={factor.multiplier >= 1 ? "opportunity-help" : "opportunity-hinder"} key={`${factor.reason}-${index}`}>{factor.reason}</span>)}</span>}</span>}
