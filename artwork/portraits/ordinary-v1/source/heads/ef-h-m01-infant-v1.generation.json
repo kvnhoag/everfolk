@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "ef-h-m01-infant-v1",
+  "identityId": "m01",
+  "stage": "infant",
+  "ageExample": 1,
+  "tool": "built-in image_gen",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-b41808f4-9011-4063-bae1-45f62a75b455.png",
+  "reference": "source/heads/ef-h-m01-adult-v1.png",
+  "prompt": "source/prompts/ef-h-m01-infant-v1-prompt.txt",
+  "intermediate": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-4bb7dfa0-2de1-44c3-969b-f8f8dd4a2a02.png",
+  "alphaRequested": true,
+  "notes": "Acquired cheek marks removed through targeted built-in edit."
+}

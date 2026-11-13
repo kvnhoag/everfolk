@@ -1,0 +1,642 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "status": "reviewed",
+  "reviewer": "older_final_portrait_review",
+  "reviewedAtUtc": "2026-11-13T03:42:30.417670+00:00",
+  "readinessEvidence": "Review began only after heads_third_pair reported the full 228-export worker exited 0 and the stable final manifest and QA sheets were ready.",
+  "reviewIndexPath": "qa/independent-review-sheets/index.json",
+  "reviewIndexSha256": "9cddfba5fdec6417f0d743418fd7f75d343f4dfc1087de50ccd98c99aa7ac3fa",
+  "manifestPath": "manifest.json",
+  "manifestSha256AtInspection": "f22fa774ebc06d78f83b98ca6aafb8432fd51302ef0500964d977e53d65a3e5f",
+  "inspectionMethod": "Actually opened and visually viewed every assigned unmodified contact sheet using view_image, including every labelled portrait. Six listed final PNGs were also opened at native dimensions. File hashes are provenance checks only and are not treated as visual inspection.",
+  "scope": {
+    "sheetArrayIndicesInclusive": [
+      19,
+      37
+    ],
+    "sheetCount": 19,
+    "portraitCount": 114,
+    "inspectionScale": [
+      288,
+      360
+    ],
+    "sheetDimensions": [
+      900,
+      840
+    ],
+    "coverage": "Nine remaining middle-age wardrobe sheets (commerce, elite, everyday, maritime, military, performance, royalty, scholarly, work) and all ten elder wardrobe sheets, across f01/f02/f03/m01/m02/m03.",
+    "portraitIds": [
+      "ef-p-f01-middle-commerce-v3",
+      "ef-p-f02-middle-commerce-v3",
+      "ef-p-f03-middle-commerce-v3",
+      "ef-p-m01-middle-commerce-v3",
+      "ef-p-m02-middle-commerce-v3",
+      "ef-p-m03-middle-commerce-v3",
+      "ef-p-f01-middle-elite-v3",
+      "ef-p-f02-middle-elite-v3",
+      "ef-p-f03-middle-elite-v3",
+      "ef-p-m01-middle-elite-v3",
+      "ef-p-m02-middle-elite-v3",
+      "ef-p-m03-middle-elite-v3",
+      "ef-p-f01-middle-everyday-v3",
+      "ef-p-f02-middle-everyday-v3",
+      "ef-p-f03-middle-everyday-v3",
+      "ef-p-m01-middle-everyday-v3",
+      "ef-p-m02-middle-everyday-v3",
+      "ef-p-m03-middle-everyday-v3",
+      "ef-p-f01-middle-maritime-v3",
+      "ef-p-f02-middle-maritime-v3",
+      "ef-p-f03-middle-maritime-v3",
+      "ef-p-m01-middle-maritime-v3",
+      "ef-p-m02-middle-maritime-v3",
+      "ef-p-m03-middle-maritime-v3",
+      "ef-p-f01-middle-military-v3",
+      "ef-p-f02-middle-military-v3",
+      "ef-p-f03-middle-military-v3",
+      "ef-p-m01-middle-military-v3",
+      "ef-p-m02-middle-military-v3",
+      "ef-p-m03-middle-military-v3",
+      "ef-p-f01-middle-performance-v3",
+      "ef-p-f02-middle-performance-v3",
+      "ef-p-f03-middle-performance-v3",
+      "ef-p-m01-middle-performance-v3",
+      "ef-p-m02-middle-performance-v3",
+      "ef-p-m03-middle-performance-v3",
+      "ef-p-f01-middle-royalty-v3",
+      "ef-p-f02-middle-royalty-v3",
+      "ef-p-f03-middle-royalty-v3",
+      "ef-p-m01-middle-royalty-v3",
+      "ef-p-m02-middle-royalty-v3",
+      "ef-p-m03-middle-royalty-v3",
+      "ef-p-f01-middle-scholarly-v3",
+      "ef-p-f02-middle-scholarly-v3",
+      "ef-p-f03-middle-scholarly-v3",
+      "ef-p-m01-middle-scholarly-v3",
+      "ef-p-m02-middle-scholarly-v3",
+      "ef-p-m03-middle-scholarly-v3",
+      "ef-p-f01-middle-work-v3",
+      "ef-p-f02-middle-work-v3",
+      "ef-p-f03-middle-work-v3",
+      "ef-p-m01-middle-work-v3",
+      "ef-p-m02-middle-work-v3",
+      "ef-p-m03-middle-work-v3",
+      "ef-p-f01-elder-aristocrat-v3",
+      "ef-p-f02-elder-aristocrat-v3",
+      "ef-p-f03-elder-aristocrat-v3",
+      "ef-p-m01-elder-aristocrat-v3",
+      "ef-p-m02-elder-aristocrat-v3",
+      "ef-p-m03-elder-aristocrat-v3",
+      "ef-p-f01-elder-commerce-v3",
+      "ef-p-f02-elder-commerce-v3",
+      "ef-p-f03-elder-commerce-v3",
+      "ef-p-m01-elder-commerce-v3",
+      "ef-p-m02-elder-commerce-v3",
+      "ef-p-m03-elder-commerce-v3",
+      "ef-p-f01-elder-elite-v3",
+      "ef-p-f02-elder-elite-v3",
+      "ef-p-f03-elder-elite-v3",
+      "ef-p-m01-elder-elite-v3",
+      "ef-p-m02-elder-elite-v3",
+      "ef-p-m03-elder-elite-v3",
+      "ef-p-f01-elder-everyday-v3",
+      "ef-p-f02-elder-everyday-v3",
+      "ef-p-f03-elder-everyday-v3",
+      "ef-p-m01-elder-everyday-v3",
+      "ef-p-m02-elder-everyday-v3",
+      "ef-p-m03-elder-everyday-v3",
+      "ef-p-f01-elder-maritime-v3",
+      "ef-p-f02-elder-maritime-v3",
+      "ef-p-f03-elder-maritime-v3",
+      "ef-p-m01-elder-maritime-v3",
+      "ef-p-m02-elder-maritime-v3",
+      "ef-p-m03-elder-maritime-v3",
+      "ef-p-f01-elder-military-v3",
+      "ef-p-f02-elder-military-v3",
+      "ef-p-f03-elder-military-v3",
+      "ef-p-m01-elder-military-v3",
+      "ef-p-m02-elder-military-v3",
+      "ef-p-m03-elder-military-v3",
+      "ef-p-f01-elder-performance-v3",
+      "ef-p-f02-elder-performance-v3",
+      "ef-p-f03-elder-performance-v3",
+      "ef-p-m01-elder-performance-v3",
+      "ef-p-m02-elder-performance-v3",
+      "ef-p-m03-elder-performance-v3",
+      "ef-p-f01-elder-royalty-v3",
+      "ef-p-f02-elder-royalty-v3",
+      "ef-p-f03-elder-royalty-v3",
+      "ef-p-m01-elder-royalty-v3",
+      "ef-p-m02-elder-royalty-v3",
+      "ef-p-m03-elder-royalty-v3",
+      "ef-p-f01-elder-scholarly-v3",
+      "ef-p-f02-elder-scholarly-v3",
+      "ef-p-f03-elder-scholarly-v3",
+      "ef-p-m01-elder-scholarly-v3",
+      "ef-p-m02-elder-scholarly-v3",
+      "ef-p-m03-elder-scholarly-v3",
+      "ef-p-f01-elder-work-v3",
+      "ef-p-f02-elder-work-v3",
+      "ef-p-f03-elder-work-v3",
+      "ef-p-m01-elder-work-v3",
+      "ef-p-m02-elder-work-v3",
+      "ef-p-m03-elder-work-v3"
+    ]
+  },
+  "sheets": [
+    {
+      "index": 19,
+      "path": "qa/independent-review-sheets/middle-02.png",
+      "sha256": "cc1fb645b03692ff06f6a65039ddd4476f3c25b95805eb475985b449ce6a69ac",
+      "portraitIds": [
+        "ef-p-f01-middle-commerce-v3",
+        "ef-p-f02-middle-commerce-v3",
+        "ef-p-f03-middle-commerce-v3",
+        "ef-p-m01-middle-commerce-v3",
+        "ef-p-m02-middle-commerce-v3",
+        "ef-p-m03-middle-commerce-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 20,
+      "path": "qa/independent-review-sheets/middle-03.png",
+      "sha256": "a2a9e523944620fedca1449e5cd1b16a56a352ad4d6b03f5fc6f297ce89a894c",
+      "portraitIds": [
+        "ef-p-f01-middle-elite-v3",
+        "ef-p-f02-middle-elite-v3",
+        "ef-p-f03-middle-elite-v3",
+        "ef-p-m01-middle-elite-v3",
+        "ef-p-m02-middle-elite-v3",
+        "ef-p-m03-middle-elite-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 21,
+      "path": "qa/independent-review-sheets/middle-04.png",
+      "sha256": "425b75c74787434ea00c92d414f7cbc4ea88c122e6bd405df9d802b318f661b2",
+      "portraitIds": [
+        "ef-p-f01-middle-everyday-v3",
+        "ef-p-f02-middle-everyday-v3",
+        "ef-p-f03-middle-everyday-v3",
+        "ef-p-m01-middle-everyday-v3",
+        "ef-p-m02-middle-everyday-v3",
+        "ef-p-m03-middle-everyday-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 22,
+      "path": "qa/independent-review-sheets/middle-05.png",
+      "sha256": "aef76677b905ad924285cbbbb7e6143cdc64d014ac557a4a155b258f57c2a553",
+      "portraitIds": [
+        "ef-p-f01-middle-maritime-v3",
+        "ef-p-f02-middle-maritime-v3",
+        "ef-p-f03-middle-maritime-v3",
+        "ef-p-m01-middle-maritime-v3",
+        "ef-p-m02-middle-maritime-v3",
+        "ef-p-m03-middle-maritime-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 23,
+      "path": "qa/independent-review-sheets/middle-06.png",
+      "sha256": "d664cfa694db8dab2a5f8932f11fa7095bbc02bf771eb155d2eb7d7885ded330",
+      "portraitIds": [
+        "ef-p-f01-middle-military-v3",
+        "ef-p-f02-middle-military-v3",
+        "ef-p-f03-middle-military-v3",
+        "ef-p-m01-middle-military-v3",
+        "ef-p-m02-middle-military-v3",
+        "ef-p-m03-middle-military-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 24,
+      "path": "qa/independent-review-sheets/middle-07.png",
+      "sha256": "60320088841e2bbe4b96e71f92fe325821ef6cf34f16e659ec6b20284f34570f",
+      "portraitIds": [
+        "ef-p-f01-middle-performance-v3",
+        "ef-p-f02-middle-performance-v3",
+        "ef-p-f03-middle-performance-v3",
+        "ef-p-m01-middle-performance-v3",
+        "ef-p-m02-middle-performance-v3",
+        "ef-p-m03-middle-performance-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 25,
+      "path": "qa/independent-review-sheets/middle-08.png",
+      "sha256": "7c98925415dcb59512f69bb4c77360fbffc7a7241e1bb979d017e33f5ea1a001",
+      "portraitIds": [
+        "ef-p-f01-middle-royalty-v3",
+        "ef-p-f02-middle-royalty-v3",
+        "ef-p-f03-middle-royalty-v3",
+        "ef-p-m01-middle-royalty-v3",
+        "ef-p-m02-middle-royalty-v3",
+        "ef-p-m03-middle-royalty-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 26,
+      "path": "qa/independent-review-sheets/middle-09.png",
+      "sha256": "5f10d2393dc8d7cdf9b7f9a6f6ac1f7de924734ef3712421ceb775139f2b5331",
+      "portraitIds": [
+        "ef-p-f01-middle-scholarly-v3",
+        "ef-p-f02-middle-scholarly-v3",
+        "ef-p-f03-middle-scholarly-v3",
+        "ef-p-m01-middle-scholarly-v3",
+        "ef-p-m02-middle-scholarly-v3",
+        "ef-p-m03-middle-scholarly-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 27,
+      "path": "qa/independent-review-sheets/middle-10.png",
+      "sha256": "f3e0d2ed4835043a434d10837bb68480314aa6cca498702a9c942fe551f74a43",
+      "portraitIds": [
+        "ef-p-f01-middle-work-v3",
+        "ef-p-f02-middle-work-v3",
+        "ef-p-f03-middle-work-v3",
+        "ef-p-m01-middle-work-v3",
+        "ef-p-m02-middle-work-v3",
+        "ef-p-m03-middle-work-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 28,
+      "path": "qa/independent-review-sheets/elder-01.png",
+      "sha256": "9f6bd22ce508f9c74a7340e00765f3b835a8f13f401b29c5c4e96e121c4b3c69",
+      "portraitIds": [
+        "ef-p-f01-elder-aristocrat-v3",
+        "ef-p-f02-elder-aristocrat-v3",
+        "ef-p-f03-elder-aristocrat-v3",
+        "ef-p-m01-elder-aristocrat-v3",
+        "ef-p-m02-elder-aristocrat-v3",
+        "ef-p-m03-elder-aristocrat-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 29,
+      "path": "qa/independent-review-sheets/elder-02.png",
+      "sha256": "466e8cb6488556732e950162378eb3029e4a550b773d20d433ba723149a9ddad",
+      "portraitIds": [
+        "ef-p-f01-elder-commerce-v3",
+        "ef-p-f02-elder-commerce-v3",
+        "ef-p-f03-elder-commerce-v3",
+        "ef-p-m01-elder-commerce-v3",
+        "ef-p-m02-elder-commerce-v3",
+        "ef-p-m03-elder-commerce-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 30,
+      "path": "qa/independent-review-sheets/elder-03.png",
+      "sha256": "fe0f03a2a3d5e2512d1b83d4c6e7462eff5ad49dab09e63ca50b6864e17afe81",
+      "portraitIds": [
+        "ef-p-f01-elder-elite-v3",
+        "ef-p-f02-elder-elite-v3",
+        "ef-p-f03-elder-elite-v3",
+        "ef-p-m01-elder-elite-v3",
+        "ef-p-m02-elder-elite-v3",
+        "ef-p-m03-elder-elite-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 31,
+      "path": "qa/independent-review-sheets/elder-04.png",
+      "sha256": "8616e1dcec33592f866817c3ba676f28ec9ed7eaf9273860ba2595f31a52c88d",
+      "portraitIds": [
+        "ef-p-f01-elder-everyday-v3",
+        "ef-p-f02-elder-everyday-v3",
+        "ef-p-f03-elder-everyday-v3",
+        "ef-p-m01-elder-everyday-v3",
+        "ef-p-m02-elder-everyday-v3",
+        "ef-p-m03-elder-everyday-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 32,
+      "path": "qa/independent-review-sheets/elder-05.png",
+      "sha256": "5cf7650840c94a9e06e216696e370701a1e7108123555e6dca4aab7066ca3224",
+      "portraitIds": [
+        "ef-p-f01-elder-maritime-v3",
+        "ef-p-f02-elder-maritime-v3",
+        "ef-p-f03-elder-maritime-v3",
+        "ef-p-m01-elder-maritime-v3",
+        "ef-p-m02-elder-maritime-v3",
+        "ef-p-m03-elder-maritime-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 33,
+      "path": "qa/independent-review-sheets/elder-06.png",
+      "sha256": "2af1ec6534383b0e6a57b4a938c9816d5f872ba7134b5ae0d3af7d227a812b3c",
+      "portraitIds": [
+        "ef-p-f01-elder-military-v3",
+        "ef-p-f02-elder-military-v3",
+        "ef-p-f03-elder-military-v3",
+        "ef-p-m01-elder-military-v3",
+        "ef-p-m02-elder-military-v3",
+        "ef-p-m03-elder-military-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 34,
+      "path": "qa/independent-review-sheets/elder-07.png",
+      "sha256": "8d719a12a3e3b97404f626fcc49156e38a0d1bbe6bd194137e50721de23437c8",
+      "portraitIds": [
+        "ef-p-f01-elder-performance-v3",
+        "ef-p-f02-elder-performance-v3",
+        "ef-p-f03-elder-performance-v3",
+        "ef-p-m01-elder-performance-v3",
+        "ef-p-m02-elder-performance-v3",
+        "ef-p-m03-elder-performance-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 35,
+      "path": "qa/independent-review-sheets/elder-08.png",
+      "sha256": "e46842eee4372ee0354d9ccbf6cce9ebdab28579b87935b74a83c1dd13272b72",
+      "portraitIds": [
+        "ef-p-f01-elder-royalty-v3",
+        "ef-p-f02-elder-royalty-v3",
+        "ef-p-f03-elder-royalty-v3",
+        "ef-p-m01-elder-royalty-v3",
+        "ef-p-m02-elder-royalty-v3",
+        "ef-p-m03-elder-royalty-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 36,
+      "path": "qa/independent-review-sheets/elder-09.png",
+      "sha256": "ab86a48108f5589ab860f858d13fb053a4e8c81aa6bd133061b96123d97c85dc",
+      "portraitIds": [
+        "ef-p-f01-elder-scholarly-v3",
+        "ef-p-f02-elder-scholarly-v3",
+        "ef-p-f03-elder-scholarly-v3",
+        "ef-p-m01-elder-scholarly-v3",
+        "ef-p-m02-elder-scholarly-v3",
+        "ef-p-m03-elder-scholarly-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "index": 37,
+      "path": "qa/independent-review-sheets/elder-10.png",
+      "sha256": "a380892638f0b0e8c78806a8ef28c8988da0b109a11e2ccf6ce95e0f45000195",
+      "portraitIds": [
+        "ef-p-f01-elder-work-v3",
+        "ef-p-f02-elder-work-v3",
+        "ef-p-f03-elder-work-v3",
+        "ef-p-m01-elder-work-v3",
+        "ef-p-m02-elder-work-v3",
+        "ef-p-m03-elder-work-v3"
+      ],
+      "inspectionScale": [
+        288,
+        360
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    }
+  ],
+  "nativeSpotChecks": [
+    {
+      "portraitId": "ef-p-f03-middle-royalty-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-middle-royalty-v3.png",
+      "sha256": "8788e8a4f015a668542f1e5b73dfa1a95d316cc524c464b4bfdbf3ae0a19f0c7",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "portraitId": "ef-p-m02-middle-military-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m02-middle-military-v3.png",
+      "sha256": "9022edb8c8295bf08041d66b0a49676971777a0175dd4d2ca39004e16d5d0717",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "portraitId": "ef-p-f03-elder-everyday-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-elder-everyday-v3.png",
+      "sha256": "357724726976b68c5a52d964c754986242c793fb7f813ca49f32fb3a04aa8ec9",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "portraitId": "ef-p-f02-elder-aristocrat-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-elder-aristocrat-v3.png",
+      "sha256": "098ab51b28c0c09c63c4d4306b8c91e7aa92ae2e9a26b31c0d400e65c3934787",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "portraitId": "ef-p-m02-elder-royalty-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m02-elder-royalty-v3.png",
+      "sha256": "cfada1aae0d8a31b67b3ab7d0acd2bb6629bf49f489083e0a6b5b7415bf9f9c9",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    },
+    {
+      "portraitId": "ef-p-m03-elder-scholarly-v3",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-elder-scholarly-v3.png",
+      "sha256": "f641e6d537cf79e9af6a069fd6632630161c3e2131b6e117daf335baea513638",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "actuallyViewed": true,
+      "materialFindings": [],
+      "reviewed": true
+    }
+  ],
+  "reviewCriteria": [
+    {
+      "criterion": "Natural continuous jaw, neck and shoulders",
+      "result": "No material blocker observed; necks descend continuously into original-looking shoulder anatomy without pasted caps, detached tabs or narrow slit-like joins."
+    },
+    {
+      "criterion": "Clothed torso and garment fit",
+      "result": "All reviewed waist-up bodies are clothed. Collars, sleeves and drapes follow the shoulders and torso; no material skin cutout, missing torso region or exposed assembly gap observed."
+    },
+    {
+      "criterion": "Face, neck and arm colour continuity",
+      "result": "Identity palettes remain visually coherent across face, neck and exposed arms. Painted shadow and highlight differences remain visible without an obvious hard recolour boundary."
+    },
+    {
+      "criterion": "Gray hair and beard colour",
+      "result": "Elder gray hair and male beards remain naturally silver-gray with warm lighting; no obvious unnatural skin-recolour tint observed."
+    },
+    {
+      "criterion": "Mixed PixelOE face/body transition",
+      "result": "No obvious internal-face ellipse, rectangular patch or blend seam observed at the listed inspection scales."
+    },
+    {
+      "criterion": "Role wardrobe colour readability",
+      "result": "Reviewed royal purple/gold, elder aristocratic indigo, scholarly jade and military red remain distinct and readable."
+    }
+  ],
+  "materialFindings": [],
+  "observations": [
+    "All 114 assigned portraits were individually visible in the 19 opened six-card sheets; review was not inferred from metadata or sample-only viewing.",
+    "Native spot checks specifically included a dark middle female royal outfit, a light middle male military outfit, dark elder female everyday clothing, light elder female aristocratic clothing, light elder male royal clothing, and dark elder male scholarly clothing.",
+    "No image, source, mask, pipeline or other documentation file was modified by this review."
+  ],
+  "limits": [
+    "All 114 assigned finals were visually inspected at 288x360 portrait display size; only the six listed finals were additionally inspected at native 384x480.",
+    "This report does not cover sheet indices 0..18, which belong to the other reviewer.",
+    "Visual review cannot establish byte-for-byte preservation of canonical source geometry or masks; static source-preservation and mixed-grid evidence are separate records.",
+    "No exhaustive native-resolution or enlarged-pixel review is claimed for the remaining assigned portraits.",
+    "No historical-uniform accuracy audit or runtime integration check was performed.",
+    "Reviewed status records agent visual QA only and does not imply user acceptance."
+  ]
+}

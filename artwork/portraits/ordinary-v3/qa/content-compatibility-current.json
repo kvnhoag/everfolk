@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "compatible",
+  "scope": "Artwork mapping verification; no runtime selector or simulation state changed.",
+  "authoredMap": "../ordinary-v1/mappings.json",
+  "authoredMapSha256": "f9bf9de67c838df2557f0f06d9c993bb6e5b705812c210d1176a040f477cfb9c",
+  "authoredMapWorldVersion": "0.43.0",
+  "validatedWorld": "worlds/alexandria-sample.json",
+  "validatedWorldVersion": "0.47.0",
+  "validatedWorldSha256": "c00730036d59d05b6524133739b295fecbdd09aebf5117e98e84d4640e5bf546",
+  "portraitRelevantContentSha256": "cc53c55080cb2136e7cd42c7790f70326d267ac9ae71ed5b8ddb11e69c9944a2",
+  "jobs": 33,
+  "origins": 16,
+  "encounters": 16,
+  "jobIdsTitlesMinimumAgesMatch": true,
+  "originIdCoverageMatch": true,
+  "reviewedOriginTitleOverrides": [
+    {
+      "id": "estate-household",
+      "authoredTitle": "A landowning estate household",
+      "currentTitle": "An aristocratic estate household"
+    }
+  ],
+  "encounterIdsOccupationsMatch": true,
+  "snapshotVersionDiffers": true,
+  "privilegedRoutes": [
+    {
+      "worldField": "royalty",
+      "wardrobeId": "royalty",
+      "originId": "royal-household",
+      "routeMinAge": 16,
+      "availablePortraitStages": [
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "selection": "Use the life's own world revision. Require world.royalty to be enabled and life.originId == world.royalty.originId; apply the role outfit from age16. Earlier ages retain their age-appropriate complete-model clothes.",
+      "authorityModule": "src/royalty.ts",
+      "authorityModuleSha256": "f277c22c871c78798fa9ad66489161e86b32010ad884f2a07c173c288fb61e89"
+    },
+    {
+      "worldField": "aristocracy",
+      "wardrobeId": "aristocrat",
+      "originId": "estate-household",
+      "routeMinAge": 16,
+      "availablePortraitStages": [
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "selection": "Use the life's own world revision. Require world.aristocracy to be enabled and life.originId == world.aristocracy.originId; apply the role outfit from age16. Earlier ages retain their age-appropriate complete-model clothes.",
+      "authorityModule": "src/aristocracy.ts",
+      "authorityModuleSha256": "72b329802f7845aed8537a1259171294f672a8d019ac1da9365e8390673fcbea"
+    }
+  ],
+  "notes": [
+    "The retained0.43 authored map is immutable. Current content adds explicit royal/aristocratic route gates without changing its33jobs,16origin IDs or16encounter occupations. The reviewed estate-origin display-title override is recorded above.",
+    "Royal/aristocrat youth outfits cover the routes' ages16\u201317; adult/middle/elder outfits continue those roles.",
+    "World opt-in and the life's own world revision matter; do not assign a royal/aristocrat uniform from wealth, a name or an origin alone in older world revisions."
+  ]
+}

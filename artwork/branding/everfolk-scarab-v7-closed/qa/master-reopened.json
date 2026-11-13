@@ -1,0 +1,142 @@
+{
+  "artboards": [
+    {
+      "height": 512,
+      "name": "01 Primary colour emblem",
+      "width": 512,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 256,
+      "name": "02 Compact colour emblem",
+      "width": 256,
+      "x": 650,
+      "y": 0
+    },
+    {
+      "height": 800,
+      "name": "03 Stacked / light surfaces",
+      "width": 1200,
+      "x": 0,
+      "y": 650
+    },
+    {
+      "height": 800,
+      "name": "04 Stacked / dark surfaces",
+      "width": 1200,
+      "x": 1350,
+      "y": 650
+    },
+    {
+      "height": 380,
+      "name": "05 Horizontal / light surfaces",
+      "width": 1400,
+      "x": 0,
+      "y": 1600
+    },
+    {
+      "height": 380,
+      "name": "06 Horizontal / dark surfaces",
+      "width": 1400,
+      "x": 1550,
+      "y": 1600
+    },
+    {
+      "height": 300,
+      "name": "07 Name alone / ink",
+      "width": 1200,
+      "x": 0,
+      "y": 2130
+    },
+    {
+      "height": 300,
+      "name": "08 Name alone / cream",
+      "width": 1200,
+      "x": 1350,
+      "y": 2130
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 1,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / crowned scarab with closed wing cases",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 2359.9752462743118,
+        "width": 2807.093045488408,
+        "x": 59.84810126582288,
+        "y": 24
+      },
+      "childCount": 12,
+      "children": [
+        {
+          "bounds": {
+            "height": 207.52715332154594,
+            "width": 1011.1038140944679,
+            "x": 1444.4480929527658,
+            "y": 2176.448092952766
+          },
+          "childCount": 9,
+          "id": 133,
+          "kind": "Group",
+          "locked": false,
+          "name": "Independent Everfolk. / approved Eczar 600",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 207.52715332154594,
+            "width": 1011.1038140944681,
+            "x": 94.44809295276585,
+            "y": 2176.448092952766
+          },
+          "childCount": 9,
+          "id": 123,
+          "kind": "Group",
+          "locked": false,
+          "name": "Independent Everfolk. / approved Eczar 600",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 133,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#b89c64",
+    "fillActive": false,
+    "stroke": "#203f3b",
+    "strokeWidth": 1.3
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarab-v7-closed\\masters\\Everfolk-Crowned-Scarab-Closed.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "Everfolk-Crowned-Scarab-Closed.vectorcraft",
+  "tool": "selection",
+  "uid": 5,
+  "units": "Pixels",
+  "rasterImages": 0
+}

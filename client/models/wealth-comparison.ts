@@ -101,9 +101,9 @@ function countBelow(group: SocietyWealthGroup, wealth: number, includeEqual = fa
 }
 
 /**
- * Compare current net worth with the retrieved society wealth population.
- * Retrieval currently returns authored starting households as mock data;
- * it is not a measured historical or age-adjusted population.
+ * Compare total household assets with the recorded-life or authored-household
+ * benchmark, preserving net worth separately. The benchmark is neither a
+ * measured historical population nor an age-adjusted comparison.
  * Reads only: no sampling, extra engine starts, or simulation RNG use.
  */
 export function getWealthComparison(world: WorldPack, life: LifeState, explicitObservations?: readonly number[]): WealthComparison | null {
@@ -130,14 +130,14 @@ export function getWealthComparison(world: WorldPack, life: LifeState, explicitO
 }
 
 export function formatWealthPercentile(percentile: number): string {
-  if (percentile > 0 && percentile < 0.1) return "<0.1%";
-  if (percentile > 99.9 && percentile < 100) return ">99.9%";
-  return `${new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 }).format(percentile)}%`;
+  if (percentile > 0 && percentile < 1) return "<1%";
+  if (percentile > 99 && percentile < 100) return ">99%";
+  return `${Math.round(percentile)}%`;
 }
 
 /** Describe the nearest end of society's wealth ranking. */
 export function formatWealthStanding(percentile: number): string {
   if (percentile === 50) return "At the median";
   const share = percentile < 50 ? percentile : 100 - percentile;
-  return `${percentile < 50 ? "Bottom" : "Top"} ${share === 0 ? "<0.1%" : formatWealthPercentile(share)}`;
+  return `${percentile < 50 ? "Bottom" : "Top"} ${share === 0 ? "<1%" : formatWealthPercentile(share)}`;
 }

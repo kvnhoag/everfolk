@@ -1,0 +1,230 @@
+{
+  "brand": "Everfolk",
+  "revision": 2,
+  "direction": "Historical strategy",
+  "motto": "Live another story",
+  "createdWith": "ArtCraft VectorCraft native paths, outlined and customised lettering, vector extrusion and bevels",
+  "concepts": [
+    {
+      "id": "01",
+      "name": "Dawnforged",
+      "slug": "dawnforged",
+      "font": "Georgia",
+      "metal": "bronze",
+      "layout": "wide",
+      "master": "masters/01-dawnforged.vectorcraft",
+      "svg": "svg/01-dawnforged.svg",
+      "proof": "png/01-dawnforged-dark.png"
+    },
+    {
+      "id": "02",
+      "name": "Chronicle Gate",
+      "slug": "chronicle-gate",
+      "font": "Palatino Linotype",
+      "metal": "silver",
+      "layout": "arch",
+      "master": "masters/02-chronicle-gate.vectorcraft",
+      "svg": "svg/02-chronicle-gate.svg",
+      "proof": "png/02-chronicle-gate-dark.png"
+    },
+    {
+      "id": "03",
+      "name": "Living Standard",
+      "slug": "living-standard",
+      "font": "Book Antiqua",
+      "metal": "bronze",
+      "layout": "wide",
+      "master": "masters/03-living-standard.vectorcraft",
+      "svg": "svg/03-living-standard.svg",
+      "proof": "png/03-living-standard-dark.png"
+    },
+    {
+      "id": "04",
+      "name": "Wheel of Lives",
+      "slug": "wheel-of-lives",
+      "font": "Georgia",
+      "metal": "silver",
+      "layout": "bookends",
+      "master": "masters/04-wheel-of-lives.vectorcraft",
+      "svg": "svg/04-wheel-of-lives.svg",
+      "proof": "png/04-wheel-of-lives-dark.png"
+    },
+    {
+      "id": "05",
+      "name": "Chronicle Plate",
+      "slug": "chronicle-plate",
+      "font": "Times New Roman",
+      "metal": "copper",
+      "layout": "wide",
+      "master": "masters/05-chronicle-plate.vectorcraft",
+      "svg": "svg/05-chronicle-plate.svg",
+      "proof": "png/05-chronicle-plate-dark.png"
+    },
+    {
+      "id": "06",
+      "name": "Woven Histories",
+      "slug": "woven-histories",
+      "font": "Palatino Linotype",
+      "metal": "bronze",
+      "layout": "wide",
+      "master": "masters/06-woven-histories.vectorcraft",
+      "svg": "svg/06-woven-histories.svg",
+      "proof": "png/06-woven-histories-dark.png"
+    },
+    {
+      "id": "07",
+      "name": "Roots of Legacy",
+      "slug": "roots-of-legacy",
+      "font": "Book Antiqua",
+      "metal": "bronze",
+      "layout": "arch",
+      "master": "masters/07-roots-of-legacy.vectorcraft",
+      "svg": "svg/07-roots-of-legacy.svg",
+      "proof": "png/07-roots-of-legacy-dark.png"
+    },
+    {
+      "id": "08",
+      "name": "Crossroads",
+      "slug": "crossroads",
+      "font": "Georgia",
+      "metal": "silver",
+      "layout": "bookends",
+      "master": "masters/08-crossroads.vectorcraft",
+      "svg": "svg/08-crossroads.svg",
+      "proof": "png/08-crossroads-dark.png"
+    },
+    {
+      "id": "09",
+      "name": "The Great Ledger",
+      "slug": "great-ledger",
+      "font": "Palatino Linotype",
+      "metal": "copper",
+      "layout": "stacked",
+      "master": "masters/09-great-ledger.vectorcraft",
+      "svg": "svg/09-great-ledger.svg",
+      "proof": "png/09-great-ledger-dark.png"
+    },
+    {
+      "id": "10",
+      "name": "Horizon Tablet",
+      "slug": "horizon-tablet",
+      "font": "Georgia",
+      "metal": "bronze",
+      "layout": "wide",
+      "master": "masters/10-horizon-tablet.vectorcraft",
+      "svg": "svg/10-horizon-tablet.svg",
+      "proof": "png/10-horizon-tablet-dark.png"
+    },
+    {
+      "id": "11",
+      "name": "Legacy Crest",
+      "slug": "legacy-crest",
+      "font": "Palatino Linotype",
+      "metal": "bronze",
+      "layout": "bookends",
+      "master": "masters/11-legacy-crest.vectorcraft",
+      "svg": "svg/11-legacy-crest.svg",
+      "proof": "png/11-legacy-crest-dark.png"
+    },
+    {
+      "id": "12",
+      "name": "Atlas of Lives",
+      "slug": "atlas-of-lives",
+      "font": "Times New Roman",
+      "metal": "silver",
+      "layout": "wide",
+      "master": "masters/12-atlas-of-lives.vectorcraft",
+      "svg": "svg/12-atlas-of-lives.svg",
+      "proof": "png/12-atlas-of-lives-dark.png"
+    },
+    {
+      "id": "13",
+      "name": "The Living Tome",
+      "slug": "the-living-tome",
+      "font": "Georgia",
+      "metal": "bronze",
+      "layout": "stacked",
+      "master": "masters/13-the-living-tome.vectorcraft",
+      "svg": "svg/13-the-living-tome.svg",
+      "proof": "png/13-the-living-tome-dark.png"
+    },
+    {
+      "id": "14",
+      "name": "Iron Epoch",
+      "slug": "iron-epoch",
+      "font": "Georgia",
+      "metal": "silver",
+      "layout": "wide",
+      "master": "masters/14-iron-epoch.vectorcraft",
+      "svg": "svg/14-iron-epoch.svg",
+      "proof": "png/14-iron-epoch-dark.png"
+    },
+    {
+      "id": "15",
+      "name": "Age Rings",
+      "slug": "age-rings",
+      "font": "Book Antiqua",
+      "metal": "copper",
+      "layout": "arch",
+      "master": "masters/15-age-rings.vectorcraft",
+      "svg": "svg/15-age-rings.svg",
+      "proof": "png/15-age-rings-dark.png"
+    },
+    {
+      "id": "16",
+      "name": "The Sundial",
+      "slug": "the-sundial",
+      "font": "Times New Roman",
+      "metal": "bronze",
+      "layout": "bookends",
+      "master": "masters/16-the-sundial.vectorcraft",
+      "svg": "svg/16-the-sundial.svg",
+      "proof": "png/16-the-sundial-dark.png"
+    },
+    {
+      "id": "17",
+      "name": "Many Beginnings",
+      "slug": "many-beginnings",
+      "font": "Palatino Linotype",
+      "metal": "bronze",
+      "layout": "wide",
+      "master": "masters/17-many-beginnings.vectorcraft",
+      "svg": "svg/17-many-beginnings.svg",
+      "proof": "png/17-many-beginnings-dark.png"
+    },
+    {
+      "id": "18",
+      "name": "Golden Thread",
+      "slug": "golden-thread",
+      "font": "Palatino Linotype",
+      "metal": "silver",
+      "layout": "arch",
+      "master": "masters/18-golden-thread.vectorcraft",
+      "svg": "svg/18-golden-thread.svg",
+      "proof": "png/18-golden-thread-dark.png"
+    },
+    {
+      "id": "19",
+      "name": "Heirloom Medallion",
+      "slug": "heirloom-medallion",
+      "font": "Book Antiqua",
+      "metal": "copper",
+      "layout": "stacked",
+      "master": "masters/19-heirloom-medallion.vectorcraft",
+      "svg": "svg/19-heirloom-medallion.svg",
+      "proof": "png/19-heirloom-medallion-dark.png"
+    },
+    {
+      "id": "20",
+      "name": "Everlasting Horizon",
+      "slug": "everlasting-horizon",
+      "font": "Georgia",
+      "metal": "bronze",
+      "layout": "bookends",
+      "master": "masters/20-everlasting-horizon.vectorcraft",
+      "svg": "svg/20-everlasting-horizon.svg",
+      "proof": "png/20-everlasting-horizon-dark.png"
+    }
+  ],
+  "warnings": []
+}

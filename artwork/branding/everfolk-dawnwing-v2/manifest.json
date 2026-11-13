@@ -1,0 +1,36 @@
+{
+  "name": "Dawnwing / continuous flow",
+  "parent": "../everfolk-scarabs-v1/05-dawnwing",
+  "changes": [
+    "Continuous wing and body contours replace the separate, stepped wing roots.",
+    "Both sweeping negative-space channels end in rounded curves inside their own wing.",
+    "The abdomen seam opens with a rounded cap; the lower wingcases end in soft curves.",
+    "Foreleg elbows, hindleg ends and head scallops are rounded.",
+    "The three outer wing tips retain their pointed silhouette."
+  ],
+  "master": "masters/Everfolk-Dawnwing-Refined.vectorcraft",
+  "artboards": 8,
+  "exports": [
+    "emblem-ink",
+    "emblem-cream",
+    "stacked-ink",
+    "stacked-cream",
+    "horizontal-ink",
+    "horizontal-cream",
+    "wordmark-ink",
+    "wordmark-cream"
+  ],
+  "palette": {
+    "olive": "#292c25",
+    "card": "#33372e",
+    "cream": "#e7e0c9",
+    "ink": "#284744",
+    "clay": "#db9c78",
+    "clayInk": "#9b553e",
+    "paper": "#f1ead8",
+    "muted": "#b4b59e",
+    "darkMuted": "#6b7566",
+    "light": "#e8e2d2"
+  },
+  "warnings": []
+}

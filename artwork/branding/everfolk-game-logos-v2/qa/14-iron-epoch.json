@@ -1,0 +1,249 @@
+{
+  "artboards": [
+    {
+      "height": 560,
+      "name": "14 Transparent logo",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 560,
+      "name": "14 Dark proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 4,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / game title 14 Iron Epoch",
+  "history": [
+    "Artboard Options",
+    "New Artboard",
+    "New Layer",
+    "Pen",
+    "New Layer",
+    "Architectural emblem / behind title",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Create Outlines",
+    "Ungroup",
+    "Transform",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Fill Color",
+    "Stroke Color",
+    "Stroke",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Create Outlines",
+    "Ungroup",
+    "Transform",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Stroke Color",
+    "Stroke",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Create Outlines",
+    "Ungroup",
+    "Transform",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Object Properties",
+    "Fill Color",
+    "Stroke Color",
+    "Stroke",
+    "Extrude & Bevel",
+    "Group",
+    "Object Properties",
+    "Group",
+    "Object Properties",
+    "Engraved finishing details",
+    "Group",
+    "Object Properties",
+    "Type",
+    "Character",
+    "Group",
+    "Object Properties",
+    "Transform"
+  ],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [
+    4
+  ],
+  "layers": [
+    {
+      "bounds": {
+        "height": 288.72705078125,
+        "width": 1970,
+        "x": 65,
+        "y": 140
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 288.72705078125,
+            "width": 870,
+            "x": 1165,
+            "y": 140
+          },
+          "childCount": 4,
+          "id": 61,
+          "kind": "Group",
+          "locked": false,
+          "name": "14 Iron Epoch / complete game title logo",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 288.72705078125,
+            "width": 870,
+            "x": 65,
+            "y": 140
+          },
+          "childCount": 4,
+          "id": 60,
+          "kind": "Group",
+          "locked": false,
+          "name": "14 Iron Epoch / complete game title logo",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 4,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Game title / editable vector lettering and emblem",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 560,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "children": [
+        {
+          "anchors": 4,
+          "bounds": {
+            "height": 560,
+            "width": 1000,
+            "x": 1100,
+            "y": 0
+          },
+          "closed": true,
+          "fill": "Radial gradient",
+          "id": 3,
+          "kind": "Path",
+          "locked": false,
+          "name": "Dark teal proof ground",
+          "stroke": "None",
+          "strokeOptions": {
+            "align": "center",
+            "alignDashes": false,
+            "arrowAlign": "extend",
+            "cap": "butt",
+            "dash": null,
+            "dashOffset": 0,
+            "endArrow": null,
+            "gradientMode": "within",
+            "join": "miter",
+            "miterLimit": 10,
+            "profile": "uniform",
+            "startArrow": null,
+            "widthPoints": null
+          },
+          "strokeWidth": 0,
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Dark proof ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 104,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "None",
+    "fillActive": false,
+    "stroke": "Linear gradient",
+    "strokeWidth": 2
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-game-logos-v2\\masters\\14-iron-epoch.vectorcraft",
+  "redo": [],
+  "revision": 121,
+  "selection": [
+    61
+  ],
+  "selectionBounds": {
+    "height": 288.72705078125,
+    "width": 870,
+    "x": 1165,
+    "y": 140
+  },
+  "selectionRotation": 0,
+  "target": null,
+  "title": "14-iron-epoch.vectorcraft",
+  "tool": "selection",
+  "uid": 15,
+  "units": "Pixels"
+}

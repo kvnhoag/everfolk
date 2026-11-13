@@ -1,0 +1,3411 @@
+{
+  "schemaVersion": 2,
+  "libraryId": "everfolk-ordinary-portraits-v2",
+  "scope": "bounded-complete-body-proof",
+  "runtimeIntegrated": false,
+  "canvas": [
+    800,
+    1000
+  ],
+  "canonicalBodyGeometryCount": 2,
+  "canonicalBodies": [
+    {
+      "id": "ef-b-male-canonical-v2",
+      "sex": "male",
+      "source": "source/bodies/ef-b-male-v2.png",
+      "sourceSha256": "9d1a4156c1a118cd11125ff72f717907cbaf3170aefd7ec890e963c168e75d7f",
+      "path": "components/body-geometry/ef-b-male-canonical-v2.png",
+      "sha256": "d8c1a4e2e43661c2995bf366062ba38ea714dd61972d96da49e82df01c4daa49",
+      "skinMask": "components/masks/ef-b-male-skin-v2.png",
+      "skinMaskSha256": "3748d69996374e71a0a6473538867c53f72608c009a3074e000ced232f59458a",
+      "canvas": [
+        800,
+        1000
+      ],
+      "geometryChangesBetweenIdentities": false
+    },
+    {
+      "id": "ef-b-female-canonical-v2",
+      "sex": "female",
+      "source": "source/bodies/ef-b-female-v2.png",
+      "sourceSha256": "70315291753cfe617b774aacd814edefaa00bea20c7ce89c9814e8ae5bbe178d",
+      "path": "components/body-geometry/ef-b-female-canonical-v2.png",
+      "sha256": "d65e1992995d4703000115be0e7bfc3aca3cf5ccd0c3e83b2aea6eba95cf469a",
+      "skinMask": "components/masks/ef-b-female-skin-v2.png",
+      "skinMaskSha256": "541aa1977323d2e7f44607e2861c442cd536fe03f677d5abece02a7a01da9097",
+      "canvas": [
+        800,
+        1000
+      ],
+      "geometryChangesBetweenIdentities": false
+    }
+  ],
+  "skinPaletteBodies": [
+    {
+      "id": "ef-b-m01-adult-v2",
+      "identityId": "m01",
+      "stage": "adult",
+      "sex": "male",
+      "geometryId": "ef-b-male-canonical-v2",
+      "path": "components/body-palettes/ef-b-m01-adult-v2.png",
+      "sha256": "7e8a948e3b1965d0302a447bb645e59f6feed53d79c51be7a9ae6b14e790dcc2",
+      "sourceSkinSampleLab": [
+        40.570068359375,
+        20.828125,
+        30.96875
+      ],
+      "targetSkinSampleLab": [
+        35.418701171875,
+        18.984375,
+        29.765625
+      ],
+      "labOffset": [
+        -5.1513671875,
+        -1.84375,
+        -1.203125
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-m01-adult-v1.png",
+      "skinReferenceBox": [
+        540,
+        1060,
+        680,
+        1120
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    },
+    {
+      "id": "ef-b-m02-adult-v2",
+      "identityId": "m02",
+      "stage": "adult",
+      "sex": "male",
+      "geometryId": "ef-b-male-canonical-v2",
+      "path": "components/body-palettes/ef-b-m02-adult-v2.png",
+      "sha256": "e30f0e2f21321255d40ab076c65444b3aaa8797e13c8e45816008151951877a7",
+      "sourceSkinSampleLab": [
+        40.570068359375,
+        20.828125,
+        30.96875
+      ],
+      "targetSkinSampleLab": [
+        46.075439453125,
+        19.0546875,
+        33.703125
+      ],
+      "labOffset": [
+        5.50537109375,
+        -1.7734375,
+        2.734375
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-m02-adult-v1.png",
+      "skinReferenceBox": [
+        480,
+        1070,
+        640,
+        1130
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    },
+    {
+      "id": "ef-b-m03-adult-v2",
+      "identityId": "m03",
+      "stage": "adult",
+      "sex": "male",
+      "geometryId": "ef-b-male-canonical-v2",
+      "path": "components/body-palettes/ef-b-m03-adult-v2.png",
+      "sha256": "242affe692133cecc1267c1b5d8ebb165fd130131f895727286b130a4bd7eaa3",
+      "sourceSkinSampleLab": [
+        40.570068359375,
+        20.828125,
+        30.96875
+      ],
+      "targetSkinSampleLab": [
+        27.215576171875,
+        14.359375,
+        23.171875
+      ],
+      "labOffset": [
+        -13.3544921875,
+        -6.46875,
+        -7.796875
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-m03-adult-v1.png",
+      "skinReferenceBox": [
+        485,
+        1085,
+        645,
+        1145
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    },
+    {
+      "id": "ef-b-f01-adult-v2",
+      "identityId": "f01",
+      "stage": "adult",
+      "sex": "female",
+      "geometryId": "ef-b-female-canonical-v2",
+      "path": "components/body-palettes/ef-b-f01-adult-v2.png",
+      "sha256": "aa5c25dd60e22572857b9dcfb5b83ca1caf2ab06ad08d996e6aa11b74b677c1a",
+      "sourceSkinSampleLab": [
+        49.420166015625,
+        22.546875,
+        35.046875
+      ],
+      "targetSkinSampleLab": [
+        37.786865234375,
+        18.3125,
+        28.609375
+      ],
+      "labOffset": [
+        -11.63330078125,
+        -4.234375,
+        -6.4375
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-f01-adult-v1.png",
+      "skinReferenceBox": [
+        480,
+        1080,
+        640,
+        1140
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    },
+    {
+      "id": "ef-b-f02-adult-v2",
+      "identityId": "f02",
+      "stage": "adult",
+      "sex": "female",
+      "geometryId": "ef-b-female-canonical-v2",
+      "path": "components/body-palettes/ef-b-f02-adult-v2.png",
+      "sha256": "0faf4949cf84e22ac8159da51ee9c1f9359f586ae50d1071f4b2bc002e44378b",
+      "sourceSkinSampleLab": [
+        49.420166015625,
+        22.546875,
+        35.046875
+      ],
+      "targetSkinSampleLab": [
+        46.8505859375,
+        18.921875,
+        32.8125
+      ],
+      "labOffset": [
+        -2.569580078125,
+        -3.625,
+        -2.234375
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-f02-adult-v1.png",
+      "skinReferenceBox": [
+        470,
+        1085,
+        625,
+        1145
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    },
+    {
+      "id": "ef-b-f03-adult-v2",
+      "identityId": "f03",
+      "stage": "adult",
+      "sex": "female",
+      "geometryId": "ef-b-female-canonical-v2",
+      "path": "components/body-palettes/ef-b-f03-adult-v2.png",
+      "sha256": "2314bdbb15267052cdf5655bf93613035d522cd730fdd3029f6ceb632f84b095",
+      "sourceSkinSampleLab": [
+        49.420166015625,
+        22.546875,
+        35.046875
+      ],
+      "targetSkinSampleLab": [
+        21.405029296875,
+        17.796875,
+        22.265625
+      ],
+      "labOffset": [
+        -28.01513671875,
+        -4.75,
+        -12.78125
+      ],
+      "skinReference": "../ordinary-v1/source/heads/ef-h-f03-adult-v1.png",
+      "skinReferenceBox": [
+        570,
+        995,
+        735,
+        1050
+      ],
+      "bodyAlphaUnchanged": true,
+      "outsideSkinMaskPixelsUnchanged": true
+    }
+  ],
+  "ageBodyPlacements": [
+    {
+      "id": "ef-b-m01-adult-placed-v2",
+      "identityId": "m01",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-m01-adult-v2",
+      "path": "components/bodies/ef-b-m01-adult-placed-v2.png",
+      "sha256": "7e8a948e3b1965d0302a447bb645e59f6feed53d79c51be7a9ae6b14e790dcc2",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    },
+    {
+      "id": "ef-b-m02-adult-placed-v2",
+      "identityId": "m02",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-m02-adult-v2",
+      "path": "components/bodies/ef-b-m02-adult-placed-v2.png",
+      "sha256": "e30f0e2f21321255d40ab076c65444b3aaa8797e13c8e45816008151951877a7",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    },
+    {
+      "id": "ef-b-m03-adult-placed-v2",
+      "identityId": "m03",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-m03-adult-v2",
+      "path": "components/bodies/ef-b-m03-adult-placed-v2.png",
+      "sha256": "242affe692133cecc1267c1b5d8ebb165fd130131f895727286b130a4bd7eaa3",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    },
+    {
+      "id": "ef-b-f01-adult-placed-v2",
+      "identityId": "f01",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-f01-adult-v2",
+      "path": "components/bodies/ef-b-f01-adult-placed-v2.png",
+      "sha256": "aa5c25dd60e22572857b9dcfb5b83ca1caf2ab06ad08d996e6aa11b74b677c1a",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    },
+    {
+      "id": "ef-b-f02-adult-placed-v2",
+      "identityId": "f02",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-f02-adult-v2",
+      "path": "components/bodies/ef-b-f02-adult-placed-v2.png",
+      "sha256": "0faf4949cf84e22ac8159da51ee9c1f9359f586ae50d1071f4b2bc002e44378b",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    },
+    {
+      "id": "ef-b-f03-adult-placed-v2",
+      "identityId": "f03",
+      "placementStage": "adult",
+      "paletteBodyId": "ef-b-f03-adult-v2",
+      "path": "components/bodies/ef-b-f03-adult-placed-v2.png",
+      "sha256": "2314bdbb15267052cdf5655bf93613035d522cd730fdd3029f6ceb632f84b095",
+      "ageMatrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "sameSexAndAgeSilhouetteAcrossIdentities": true
+    }
+  ],
+  "identities": [
+    {
+      "id": "m01",
+      "sex": "male",
+      "avatarVariant": 0
+    },
+    {
+      "id": "m02",
+      "sex": "male",
+      "avatarVariant": 1
+    },
+    {
+      "id": "m03",
+      "sex": "male",
+      "avatarVariant": 2
+    },
+    {
+      "id": "f01",
+      "sex": "female",
+      "avatarVariant": 0
+    },
+    {
+      "id": "f02",
+      "sex": "female",
+      "avatarVariant": 1
+    },
+    {
+      "id": "f03",
+      "sex": "female",
+      "avatarVariant": 2
+    }
+  ],
+  "heads": [
+    {
+      "id": "ef-h-m01-adult-v2",
+      "identityId": "m01",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-m01-adult-v1.png",
+      "sourceSha256": "4eb2f06f236313793911f4fe2e899434b4af549c5bd8ff1ecb51a45e38112ac7",
+      "path": "components/heads/ef-h-m01-adult-v2.png",
+      "sha256": "29384579a5aa7f27877c7d914e5d0aa82bde53e8c84e18d59854d179bdb545e3",
+      "frontHairPath": "components/hair-front/ef-hair-m01-adult-v2.png",
+      "frontHairSha256": "24aba7f559938ff661a19eb8d138d600f3fdd29db4e3f777ed0ea1574aeb97af",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          790
+        ],
+        [
+          300,
+          790
+        ],
+        [
+          350,
+          875
+        ],
+        [
+          425,
+          940
+        ],
+        [
+          510,
+          985
+        ],
+        [
+          615,
+          1005
+        ],
+        [
+          715,
+          985
+        ],
+        [
+          800,
+          930
+        ],
+        [
+          875,
+          840
+        ],
+        [
+          900,
+          790
+        ],
+        [
+          1199,
+          790
+        ],
+        [
+          1199,
+          1312
+        ],
+        [
+          0,
+          1312
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [],
+      "eyeTarget": [
+        400,
+        175
+      ],
+      "chinTarget": [
+        400,
+        347
+      ],
+      "matrix": [
+        [
+          0.3339805825242718,
+          0,
+          191.26213592233012
+        ],
+        [
+          0,
+          0.3339805825242718,
+          14.689320388349529
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    },
+    {
+      "id": "ef-h-m02-adult-v2",
+      "identityId": "m02",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-m02-adult-v1.png",
+      "sourceSha256": "5630059923eb4baa4ea2a8aa43cd4dcce38141c6364a115b105e0ecc49683738",
+      "path": "components/heads/ef-h-m02-adult-v2.png",
+      "sha256": "7fd66cb067bccaeccba3230f3438e76bedd7340a28dd0e133c98a6e92fef25c3",
+      "frontHairPath": "components/hair-front/ef-hair-m02-adult-v2.png",
+      "frontHairSha256": "72bde2abca6743364a92375c391eed2c4e50e6cb38136771409a579546ffab40",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          790
+        ],
+        [
+          310,
+          790
+        ],
+        [
+          350,
+          855
+        ],
+        [
+          420,
+          925
+        ],
+        [
+          495,
+          975
+        ],
+        [
+          560,
+          995
+        ],
+        [
+          635,
+          975
+        ],
+        [
+          715,
+          920
+        ],
+        [
+          775,
+          845
+        ],
+        [
+          810,
+          790
+        ],
+        [
+          1122,
+          790
+        ],
+        [
+          1122,
+          1402
+        ],
+        [
+          0,
+          1402
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [],
+      "eyeTarget": [
+        400,
+        175
+      ],
+      "chinTarget": [
+        400,
+        347
+      ],
+      "matrix": [
+        [
+          0.38222222222222224,
+          0,
+          184.04444444444442
+        ],
+        [
+          0,
+          0.38222222222222224,
+          -29.48888888888891
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    },
+    {
+      "id": "ef-h-m03-adult-v2",
+      "identityId": "m03",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-m03-adult-v1.png",
+      "sourceSha256": "a1ce6911689cc5d3fe2147a5dbc61740c3ebce308d0797326c873811fdda0440",
+      "path": "components/heads/ef-h-m03-adult-v2.png",
+      "sha256": "a2e7eb5adf5d2f27610f32a17b5dcc1e34db30936ade28165e501f0e67152b52",
+      "frontHairPath": "components/hair-front/ef-hair-m03-adult-v2.png",
+      "frontHairSha256": "b7109390d547998316a23bf2ab5221c1619f016baade70777fe58787e461c4cb",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          770
+        ],
+        [
+          260,
+          770
+        ],
+        [
+          305,
+          835
+        ],
+        [
+          390,
+          910
+        ],
+        [
+          480,
+          980
+        ],
+        [
+          560,
+          1015
+        ],
+        [
+          660,
+          985
+        ],
+        [
+          750,
+          925
+        ],
+        [
+          815,
+          845
+        ],
+        [
+          855,
+          770
+        ],
+        [
+          1122,
+          770
+        ],
+        [
+          1122,
+          1402
+        ],
+        [
+          0,
+          1402
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [],
+      "eyeTarget": [
+        400,
+        175
+      ],
+      "chinTarget": [
+        400,
+        347
+      ],
+      "matrix": [
+        [
+          0.354639175257732,
+          0,
+          199.62886597938143
+        ],
+        [
+          0,
+          0.354639175257732,
+          -9.412371134020617
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    },
+    {
+      "id": "ef-h-f01-adult-v2",
+      "identityId": "f01",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-f01-adult-v1.png",
+      "sourceSha256": "d1dbf9277825843a614df489bac6a552e86ba63c5101bb8c1898109ef630d0c9",
+      "path": "components/heads/ef-h-f01-adult-v2.png",
+      "sha256": "e76f2b0c10669c65142f4823c26eb0b6bcbdb7e334f7e51ede0e8c1ee530de66",
+      "frontHairPath": "components/hair-front/ef-hair-f01-adult-v2.png",
+      "frontHairSha256": "b1ad119c6df5daf0e4becad94d2a40f3d53ebcd6cab62157be20f6d56a554ef7",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          790
+        ],
+        [
+          270,
+          790
+        ],
+        [
+          315,
+          850
+        ],
+        [
+          385,
+          920
+        ],
+        [
+          475,
+          975
+        ],
+        [
+          560,
+          1000
+        ],
+        [
+          650,
+          975
+        ],
+        [
+          740,
+          920
+        ],
+        [
+          805,
+          850
+        ],
+        [
+          850,
+          790
+        ],
+        [
+          1122,
+          790
+        ],
+        [
+          1122,
+          1402
+        ],
+        [
+          0,
+          1402
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [
+        [
+          [
+            210,
+            720
+          ],
+          [
+            285,
+            745
+          ],
+          [
+            320,
+            825
+          ],
+          [
+            340,
+            930
+          ],
+          [
+            335,
+            985
+          ],
+          [
+            285,
+            970
+          ],
+          [
+            230,
+            920
+          ]
+        ],
+        [
+          [
+            845,
+            725
+          ],
+          [
+            930,
+            725
+          ],
+          [
+            930,
+            930
+          ],
+          [
+            850,
+            985
+          ],
+          [
+            800,
+            985
+          ],
+          [
+            805,
+            840
+          ]
+        ]
+      ],
+      "eyeTarget": [
+        400,
+        200
+      ],
+      "chinTarget": [
+        400,
+        365
+      ],
+      "matrix": [
+        [
+          0.3548387096774194,
+          0,
+          201.29032258064515
+        ],
+        [
+          0,
+          0.3548387096774194,
+          13.709677419354819
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    },
+    {
+      "id": "ef-h-f02-adult-v2",
+      "identityId": "f02",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-f02-adult-v1.png",
+      "sourceSha256": "597a561978a174c3c453554c15e20e0f15e11729afb1f94ab9f9133bcca2db7c",
+      "path": "components/heads/ef-h-f02-adult-v2.png",
+      "sha256": "ccf6485b215504b66f3e87766f25ff97a11121e7e40b95ad6cf7dd296b9da62c",
+      "frontHairPath": "components/hair-front/ef-hair-f02-adult-v2.png",
+      "frontHairSha256": "8ebfd5a358946503b45539d71f984883c6ce0e47ed6fc9663d433dd3d35b9cb0",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          800
+        ],
+        [
+          285,
+          800
+        ],
+        [
+          330,
+          865
+        ],
+        [
+          405,
+          940
+        ],
+        [
+          485,
+          985
+        ],
+        [
+          555,
+          1005
+        ],
+        [
+          635,
+          985
+        ],
+        [
+          715,
+          935
+        ],
+        [
+          780,
+          865
+        ],
+        [
+          825,
+          800
+        ],
+        [
+          1122,
+          800
+        ],
+        [
+          1122,
+          1402
+        ],
+        [
+          0,
+          1402
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [
+        [
+          [
+            875,
+            730
+          ],
+          [
+            940,
+            760
+          ],
+          [
+            955,
+            900
+          ],
+          [
+            930,
+            1030
+          ],
+          [
+            900,
+            1150
+          ],
+          [
+            880,
+            1250
+          ],
+          [
+            845,
+            1340
+          ],
+          [
+            795,
+            1402
+          ],
+          [
+            735,
+            1402
+          ],
+          [
+            735,
+            1340
+          ],
+          [
+            755,
+            1270
+          ],
+          [
+            755,
+            1210
+          ],
+          [
+            765,
+            1130
+          ],
+          [
+            780,
+            1050
+          ],
+          [
+            790,
+            980
+          ],
+          [
+            805,
+            910
+          ],
+          [
+            815,
+            850
+          ],
+          [
+            840,
+            790
+          ]
+        ]
+      ],
+      "eyeTarget": [
+        400,
+        200
+      ],
+      "chinTarget": [
+        400,
+        365
+      ],
+      "matrix": [
+        [
+          0.358695652173913,
+          0,
+          200.92391304347828
+        ],
+        [
+          0,
+          0.358695652173913,
+          8.09782608695653
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    },
+    {
+      "id": "ef-h-f03-adult-v2",
+      "identityId": "f03",
+      "stage": "adult",
+      "source": "../ordinary-v1/source/heads/ef-h-f03-adult-v1.png",
+      "sourceSha256": "bf851e2fcb24acfb422ea847d2ec84c919e0c851f76c5628b737e259f300028e",
+      "path": "components/heads/ef-h-f03-adult-v2.png",
+      "sha256": "88c4a687b7344a1c6e8cb4d895e536c46e127e005c812b3529fed850d737fabf",
+      "frontHairPath": "components/hair-front/ef-hair-f03-adult-v2.png",
+      "frontHairSha256": "3220f16a4cc3d56fa70d2f06bf138ad7a2b5846cf7dade9a68d82aff8a15a1b9",
+      "longSourceNeckRemoved": true,
+      "neckRemovalPolygon": [
+        [
+          0,
+          725
+        ],
+        [
+          360,
+          725
+        ],
+        [
+          405,
+          790
+        ],
+        [
+          480,
+          855
+        ],
+        [
+          570,
+          905
+        ],
+        [
+          655,
+          925
+        ],
+        [
+          745,
+          905
+        ],
+        [
+          830,
+          850
+        ],
+        [
+          900,
+          785
+        ],
+        [
+          945,
+          725
+        ],
+        [
+          1312,
+          725
+        ],
+        [
+          1312,
+          1199
+        ],
+        [
+          0,
+          1199
+        ]
+      ],
+      "throatOverlapNativePixels": 15,
+      "throatEdgeFeatherNativePixels": 6,
+      "hairProtectionPolygons": [
+        [
+          [
+            250,
+            620
+          ],
+          [
+            345,
+            650
+          ],
+          [
+            385,
+            735
+          ],
+          [
+            395,
+            820
+          ],
+          [
+            365,
+            875
+          ],
+          [
+            285,
+            850
+          ]
+        ],
+        [
+          [
+            990,
+            620
+          ],
+          [
+            1070,
+            620
+          ],
+          [
+            1070,
+            835
+          ],
+          [
+            1000,
+            875
+          ],
+          [
+            960,
+            840
+          ],
+          [
+            970,
+            745
+          ]
+        ]
+      ],
+      "eyeTarget": [
+        400,
+        200
+      ],
+      "chinTarget": [
+        400,
+        365
+      ],
+      "matrix": [
+        [
+          0.38372093023255816,
+          0,
+          148.6627906976744
+        ],
+        [
+          0,
+          0.38372093023255816,
+          13.895348837209298
+        ]
+      ],
+      "faceAspectPreserved": true,
+      "annotationStatus": "Manual source measurements; requires smooth anatomical seam review"
+    }
+  ],
+  "garments": [
+    {
+      "id": "ef-w-male-everyday-adult-v2",
+      "sex": "male",
+      "wardrobeId": "everyday",
+      "placementStage": "adult",
+      "source": "source/wardrobe/ef-w-male-everyday-v2.png",
+      "sourceSha256": "5b50261f8da45f5d0dc448e85e773a3020aa1d117b4ea4cef516b40ed7f9d602",
+      "path": "components/wardrobe/ef-w-male-everyday-adult-v2.png",
+      "sha256": "51422d053412832991c84004ba9467b5a9eece4b1857abe45dc54bb14893cb0b",
+      "registration": "shared full canonical canvas; no bounding-box fitting",
+      "registrationMatrix": [
+        [
+          0.7130124568939209,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7132667899131775,
+          0.0
+        ]
+      ],
+      "bodyEnvelopeClipped": true,
+      "occlusion": "foreground clothing and collar, below protected braid"
+    },
+    {
+      "id": "ef-w-female-everyday-adult-v2",
+      "sex": "female",
+      "wardrobeId": "everyday",
+      "placementStage": "adult",
+      "source": "source/wardrobe/ef-w-female-everyday-v2.png",
+      "sourceSha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d",
+      "path": "components/wardrobe/ef-w-female-everyday-adult-v2.png",
+      "sha256": "19b4a49a2b80e49ed798f705a087d9260f1d916584eb980b68710db8c6167162",
+      "registration": "measured shoulder/waist affine tailoring to fixed canonical body",
+      "registrationMatrix": [
+        [
+          0.70337712055928,
+          8.35368491329223e-05,
+          5.2905433615832145
+        ],
+        [
+          1.113823747948265e-16,
+          0.7293369022151213,
+          -13.115680873084148
+        ]
+      ],
+      "bodyEnvelopeClipped": true,
+      "occlusion": "foreground clothing and collar, below protected braid"
+    },
+    {
+      "id": "ef-w-male-work-adult-v2",
+      "sex": "male",
+      "wardrobeId": "work",
+      "placementStage": "adult",
+      "source": "source/wardrobe/ef-w-male-work-v2.png",
+      "sourceSha256": "fc1827d9c003d6b2c2f7c89726f47d8cc06b2f3a1c7e270b3fb6c161292eccb7",
+      "path": "components/wardrobe/ef-w-male-work-adult-v2.png",
+      "sha256": "3b6d8838b98a03540d294a211d4d8a5ee9c44a8f4d455c322fe6297775537d11",
+      "registration": "shared full canonical canvas; no bounding-box fitting",
+      "registrationMatrix": [
+        [
+          0.7130124568939209,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7132667899131775,
+          0.0
+        ]
+      ],
+      "bodyEnvelopeClipped": true,
+      "occlusion": "foreground clothing and collar, below protected braid"
+    },
+    {
+      "id": "ef-w-female-work-adult-v2",
+      "sex": "female",
+      "wardrobeId": "work",
+      "placementStage": "adult",
+      "source": "source/wardrobe/ef-w-female-work-v2.png",
+      "sourceSha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511",
+      "path": "components/wardrobe/ef-w-female-work-adult-v2.png",
+      "sha256": "3c3275f27f4c460583bb74dcefbcf9d6cdc3bfb9d959f721c0466843a4804cbf",
+      "registration": "measured shoulder/waist affine tailoring to fixed canonical body",
+      "registrationMatrix": [
+        [
+          0.693998758951823,
+          0.01427640284306579,
+          16.52107918742557
+        ],
+        [
+          5.483791786461633e-17,
+          0.7132667670815677,
+          -14.265313617253689
+        ]
+      ],
+      "bodyEnvelopeClipped": true,
+      "occlusion": "foreground clothing and collar, below protected braid"
+    }
+  ],
+  "assemblies": [
+    {
+      "id": "ef-p-m01-adult-everyday-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headId": "ef-h-m01-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v2.png",
+      "assembledSha256": "342ffd1d098565efbdc4f60dbe63aaa54ae891d578d23aef1e6d5d838445849f",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m01-adult-everyday-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headBodyOverlapPixels": 1842,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v2",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m02-adult-placed-v2",
+      "headId": "ef-h-m02-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v2.png",
+      "assembledSha256": "7494f9c0044df265564dfacccf9df2093f506d1f9cb53f824abf0f0e00b64316",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m02-adult-everyday-v2",
+        "identityId": "m02",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m02-adult-placed-v2",
+        "headBodyOverlapPixels": 1630,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 126,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v2",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m03-adult-placed-v2",
+      "headId": "ef-h-m03-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v2.png",
+      "assembledSha256": "1b3cbeac290252f548993391bc385bc553bfaa960b2a1ec1ff7a0e95824dc847",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m03-adult-everyday-v2",
+        "identityId": "m03",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m03-adult-placed-v2",
+        "headBodyOverlapPixels": 1484,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 160,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headId": "ef-h-f01-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v2.png",
+      "assembledSha256": "6bb6164fa280072f80e9cf8366458af048144467053344d8cb1506942c8ff892",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f01-adult-everyday-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headBodyOverlapPixels": 1122,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v2",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f02-adult-placed-v2",
+      "headId": "ef-h-f02-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v2.png",
+      "assembledSha256": "a651c36f97871a6d476ec439ef99c4702d86e2f685f5f850f9740fb9696e3e78",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f02-adult-everyday-v2",
+        "identityId": "f02",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f02-adult-placed-v2",
+        "headBodyOverlapPixels": 4212,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 2,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v2",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f03-adult-placed-v2",
+      "headId": "ef-h-f03-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v2.png",
+      "assembledSha256": "2b268954a62c9681140aac0b6c76e112b723081524fc1d7f90088e500bf224c4",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f03-adult-everyday-v2",
+        "identityId": "f03",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f03-adult-placed-v2",
+        "headBodyOverlapPixels": 1282,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 0,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-m01-adult-work-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headId": "ef-h-m01-adult-v2",
+      "garmentId": "ef-w-male-work-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m01-adult-work-v2.png",
+      "assembledSha256": "66afcc74952f7e20eede7df68c216bf29f126846a6707535e8944e22daf65b2d",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m01-adult-work-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "work",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headBodyOverlapPixels": 1842,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    },
+    {
+      "id": "ef-p-f01-adult-work-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headId": "ef-h-f01-adult-v2",
+      "garmentId": "ef-w-female-work-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f01-adult-work-v2.png",
+      "assembledSha256": "766c96abebd5f06ff8f5cf57153529487879b9d75be10cc058372cfdb9965146",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f01-adult-work-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "work",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headBodyOverlapPixels": 1122,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      }
+    }
+  ],
+  "portraits": [
+    {
+      "id": "ef-p-m01-adult-everyday-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headId": "ef-h-m01-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v2.png",
+      "assembledSha256": "342ffd1d098565efbdc4f60dbe63aaa54ae891d578d23aef1e6d5d838445849f",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m01-adult-everyday-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headBodyOverlapPixels": 1842,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m01-adult-everyday-v2.png",
+      "sha256": "66550819e0e88814d410b4dd2f8bc2e0a513a4277c1636b513462a9d63de1308",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-m01-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-m01-adult-everyday-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headId": "ef-h-m01-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v2.png",
+        "assembledSha256": "342ffd1d098565efbdc4f60dbe63aaa54ae891d578d23aef1e6d5d838445849f",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m01-adult-everyday-v2",
+          "identityId": "m01",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m01-adult-placed-v2",
+          "headBodyOverlapPixels": 1842,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-m01-adult-everyday-v2.png",
+        "sha256": "455681ec6be0b37c0716b83cf058bd82f75dc0a1c3970586a56ede897835dfa4",
+        "logical": "portraits/128x160-s3-t0/ef-p-m01-adult-everyday-v2.logical.png",
+        "logicalSha256": "8ba4e30035d3bed594de28deedae08cbdf938efd8a9b35899a9f437592d23de8",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-m01-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-m01-adult-everyday-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headId": "ef-h-m01-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v2.png",
+        "assembledSha256": "342ffd1d098565efbdc4f60dbe63aaa54ae891d578d23aef1e6d5d838445849f",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m01-adult-everyday-v2",
+          "identityId": "m01",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m01-adult-placed-v2",
+          "headBodyOverlapPixels": 1842,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-m01-adult-everyday-v2.png",
+        "sha256": "3d1fcc083bbfede09d30135154aa7c362182f02b548ac4c578f1ef9b07c03ba1",
+        "logical": "portraits/192x240-s2-t0/ef-p-m01-adult-everyday-v2.logical.png",
+        "logicalSha256": "c18f9484c2a7b386d88cf077ef503ebdd0d1d33a4042c42dee3f632acb945af4",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-m01-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-m01-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-m01-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v2",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m02-adult-placed-v2",
+      "headId": "ef-h-m02-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v2.png",
+      "assembledSha256": "7494f9c0044df265564dfacccf9df2093f506d1f9cb53f824abf0f0e00b64316",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m02-adult-everyday-v2",
+        "identityId": "m02",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m02-adult-placed-v2",
+        "headBodyOverlapPixels": 1630,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 126,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m02-adult-everyday-v2.png",
+      "sha256": "ea89b1289b645fc1f61c1b026aabbe8185ba05250b5fe9236791bff36e53b248",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-m02-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-m02-adult-everyday-v2",
+        "identityId": "m02",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m02-adult-placed-v2",
+        "headId": "ef-h-m02-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v2.png",
+        "assembledSha256": "7494f9c0044df265564dfacccf9df2093f506d1f9cb53f824abf0f0e00b64316",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m02-adult-everyday-v2",
+          "identityId": "m02",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m02-adult-placed-v2",
+          "headBodyOverlapPixels": 1630,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 126,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-m02-adult-everyday-v2.png",
+        "sha256": "665cec4792f4ae3cb07b656affb38f578555794e554f3ac200b3aec1e917fdc2",
+        "logical": "portraits/128x160-s3-t0/ef-p-m02-adult-everyday-v2.logical.png",
+        "logicalSha256": "de6329de869646978b3085e54b6c27bed6cd13f1228bf34361419e78e275a6e5",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-m02-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-m02-adult-everyday-v2",
+        "identityId": "m02",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m02-adult-placed-v2",
+        "headId": "ef-h-m02-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m02-adult-everyday-v2.png",
+        "assembledSha256": "7494f9c0044df265564dfacccf9df2093f506d1f9cb53f824abf0f0e00b64316",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m02-adult-everyday-v2",
+          "identityId": "m02",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m02-adult-placed-v2",
+          "headBodyOverlapPixels": 1630,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 126,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-m02-adult-everyday-v2.png",
+        "sha256": "8f96a0480ba8bae3eafc6188b7e9188b54d4e1cd812afc66dc84c23e5d76171c",
+        "logical": "portraits/192x240-s2-t0/ef-p-m02-adult-everyday-v2.logical.png",
+        "logicalSha256": "fb104a5cda0b6c24e817fcdbda4f1d5ee6ee7aa33146f84650f4ed75a4d40ace",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-m02-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-m02-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-m02-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v2",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m03-adult-placed-v2",
+      "headId": "ef-h-m03-adult-v2",
+      "garmentId": "ef-w-male-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v2.png",
+      "assembledSha256": "1b3cbeac290252f548993391bc385bc553bfaa960b2a1ec1ff7a0e95824dc847",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m03-adult-everyday-v2",
+        "identityId": "m03",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m03-adult-placed-v2",
+        "headBodyOverlapPixels": 1484,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 160,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-adult-everyday-v2.png",
+      "sha256": "da61b8c31d8a7f003e462bbd95a268ee3057b3cd454775fd245a299012a4b232",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-m03-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-m03-adult-everyday-v2",
+        "identityId": "m03",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m03-adult-placed-v2",
+        "headId": "ef-h-m03-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v2.png",
+        "assembledSha256": "1b3cbeac290252f548993391bc385bc553bfaa960b2a1ec1ff7a0e95824dc847",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m03-adult-everyday-v2",
+          "identityId": "m03",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m03-adult-placed-v2",
+          "headBodyOverlapPixels": 1484,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 160,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-m03-adult-everyday-v2.png",
+        "sha256": "51b9817e3d4762ed445f82c3260a63350e42ba49eb1f36fe3b1608c1dfef26b4",
+        "logical": "portraits/128x160-s3-t0/ef-p-m03-adult-everyday-v2.logical.png",
+        "logicalSha256": "3dbc9f36bf05f730342b500bf8373ad684fb5198ff874c4da599c94c02933456",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-m03-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-m03-adult-everyday-v2",
+        "identityId": "m03",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-m03-adult-placed-v2",
+        "headId": "ef-h-m03-adult-v2",
+        "garmentId": "ef-w-male-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m03-adult-everyday-v2.png",
+        "assembledSha256": "1b3cbeac290252f548993391bc385bc553bfaa960b2a1ec1ff7a0e95824dc847",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m03-adult-everyday-v2",
+          "identityId": "m03",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-m03-adult-placed-v2",
+          "headBodyOverlapPixels": 1484,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 160,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-m03-adult-everyday-v2.png",
+        "sha256": "38479180e7294b50ddef4fbe91a101aee2403e2f059acab9306c3f64bacfbca6",
+        "logical": "portraits/192x240-s2-t0/ef-p-m03-adult-everyday-v2.logical.png",
+        "logicalSha256": "50f31eadd40ab9e1b35d19ba46b4cfa8e80bdfcf29189c9e84496d264c8b684b",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-m03-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-m03-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-m03-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headId": "ef-h-f01-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v2.png",
+      "assembledSha256": "6bb6164fa280072f80e9cf8366458af048144467053344d8cb1506942c8ff892",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f01-adult-everyday-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headBodyOverlapPixels": 1122,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f01-adult-everyday-v2.png",
+      "sha256": "9a6afe24e0d374902944c58d8f5409e0e3c1b9ac01c0f2f42b47335da9d102c3",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-f01-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-f01-adult-everyday-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headId": "ef-h-f01-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v2.png",
+        "assembledSha256": "6bb6164fa280072f80e9cf8366458af048144467053344d8cb1506942c8ff892",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f01-adult-everyday-v2",
+          "identityId": "f01",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f01-adult-placed-v2",
+          "headBodyOverlapPixels": 1122,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-f01-adult-everyday-v2.png",
+        "sha256": "94f2d56a3b23b69bffdb27482dc01787f095c864b8457c481a7291555ab1e574",
+        "logical": "portraits/128x160-s3-t0/ef-p-f01-adult-everyday-v2.logical.png",
+        "logicalSha256": "5bdaf683034295a5bfaa33063e5cb89a9951c51eb535115a26d03d39f4aff273",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-f01-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-f01-adult-everyday-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headId": "ef-h-f01-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f01-adult-everyday-v2.png",
+        "assembledSha256": "6bb6164fa280072f80e9cf8366458af048144467053344d8cb1506942c8ff892",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f01-adult-everyday-v2",
+          "identityId": "f01",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f01-adult-placed-v2",
+          "headBodyOverlapPixels": 1122,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-f01-adult-everyday-v2.png",
+        "sha256": "161dee5e3b1c01bcb2e4febbad86705c7d6a7aecab4482adeee950ba1500f20d",
+        "logical": "portraits/192x240-s2-t0/ef-p-f01-adult-everyday-v2.logical.png",
+        "logicalSha256": "bbef90a54d1a588babe22947382c1173a08ef260ff99f1f08b5551b7f93682dd",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-f01-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-f01-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-f01-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v2",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f02-adult-placed-v2",
+      "headId": "ef-h-f02-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v2.png",
+      "assembledSha256": "a651c36f97871a6d476ec439ef99c4702d86e2f685f5f850f9740fb9696e3e78",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f02-adult-everyday-v2",
+        "identityId": "f02",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f02-adult-placed-v2",
+        "headBodyOverlapPixels": 4212,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 2,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-adult-everyday-v2.png",
+      "sha256": "1d8556fe167ce97d17b59f937157037d4efc43d53759ad0467e8a80c373d4ef4",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-f02-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-f02-adult-everyday-v2",
+        "identityId": "f02",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f02-adult-placed-v2",
+        "headId": "ef-h-f02-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v2.png",
+        "assembledSha256": "a651c36f97871a6d476ec439ef99c4702d86e2f685f5f850f9740fb9696e3e78",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f02-adult-everyday-v2",
+          "identityId": "f02",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f02-adult-placed-v2",
+          "headBodyOverlapPixels": 4212,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 2,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-f02-adult-everyday-v2.png",
+        "sha256": "d5d04bf9d96d197939c852f497da7932bc4dec8ac81d0a555856d968d0d942de",
+        "logical": "portraits/128x160-s3-t0/ef-p-f02-adult-everyday-v2.logical.png",
+        "logicalSha256": "ec39de0173fa372c5c4267d201678529ca8e311e3191e0623117e708f0f8f75e",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-f02-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-f02-adult-everyday-v2",
+        "identityId": "f02",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f02-adult-placed-v2",
+        "headId": "ef-h-f02-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f02-adult-everyday-v2.png",
+        "assembledSha256": "a651c36f97871a6d476ec439ef99c4702d86e2f685f5f850f9740fb9696e3e78",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f02-adult-everyday-v2",
+          "identityId": "f02",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f02-adult-placed-v2",
+          "headBodyOverlapPixels": 4212,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 2,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-f02-adult-everyday-v2.png",
+        "sha256": "404dc679281208962e5aee974639752ce220a3530c965de667b189cc70d4f16e",
+        "logical": "portraits/192x240-s2-t0/ef-p-f02-adult-everyday-v2.logical.png",
+        "logicalSha256": "6213c9fd2a99f32d3f2597aedced74b9188d99c85a76c507e8db3dafd43c204c",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-f02-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-f02-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-f02-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v2",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f03-adult-placed-v2",
+      "headId": "ef-h-f03-adult-v2",
+      "garmentId": "ef-w-female-everyday-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v2.png",
+      "assembledSha256": "2b268954a62c9681140aac0b6c76e112b723081524fc1d7f90088e500bf224c4",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f03-adult-everyday-v2",
+        "identityId": "f03",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f03-adult-placed-v2",
+        "headBodyOverlapPixels": 1282,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 0,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-adult-everyday-v2.png",
+      "sha256": "157031689488e30c15f95e9cc799600764d25556f848cf4c17dd2838a64dd313",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-f03-adult-everyday-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-f03-adult-everyday-v2",
+        "identityId": "f03",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f03-adult-placed-v2",
+        "headId": "ef-h-f03-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v2.png",
+        "assembledSha256": "2b268954a62c9681140aac0b6c76e112b723081524fc1d7f90088e500bf224c4",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f03-adult-everyday-v2",
+          "identityId": "f03",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f03-adult-placed-v2",
+          "headBodyOverlapPixels": 1282,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 0,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-f03-adult-everyday-v2.png",
+        "sha256": "75303c514b16e8bae88e26b1d4709b819ad1bd144526c57bcc81aec06e2d96e7",
+        "logical": "portraits/128x160-s3-t0/ef-p-f03-adult-everyday-v2.logical.png",
+        "logicalSha256": "d32777b3309dbe82d0b0e2d28b2b83574dd18bc77a7e1111a0a8a975b9e33a87",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-f03-adult-everyday-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-f03-adult-everyday-v2",
+        "identityId": "f03",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "everyday",
+        "bodyId": "ef-b-f03-adult-placed-v2",
+        "headId": "ef-h-f03-adult-v2",
+        "garmentId": "ef-w-female-everyday-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f03-adult-everyday-v2.png",
+        "assembledSha256": "2b268954a62c9681140aac0b6c76e112b723081524fc1d7f90088e500bf224c4",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f03-adult-everyday-v2",
+          "identityId": "f03",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "everyday",
+          "bodyId": "ef-b-f03-adult-placed-v2",
+          "headBodyOverlapPixels": 1282,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 0,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-f03-adult-everyday-v2.png",
+        "sha256": "cf16953d562faded660b0ad5d8476c6849474892207be7e39d7ed73e66dcd814",
+        "logical": "portraits/192x240-s2-t0/ef-p-f03-adult-everyday-v2.logical.png",
+        "logicalSha256": "05254c076a761d7171b2dc1be6a535cc01a2e9b9a46e298800e058e4aed7ffe4",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-f03-adult-everyday-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-f03-adult-everyday-v2.png",
+      "regionalConfig": "qa/regions/ef-p-f03-adult-everyday-v2.json"
+    },
+    {
+      "id": "ef-p-m01-adult-work-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headId": "ef-h-m01-adult-v2",
+      "garmentId": "ef-w-male-work-adult-v2",
+      "assembled": "portraits/assembled/ef-p-m01-adult-work-v2.png",
+      "assembledSha256": "66afcc74952f7e20eede7df68c216bf29f126846a6707535e8944e22daf65b2d",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-m01-adult-work-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "wardrobeId": "work",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headBodyOverlapPixels": 1842,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m01-adult-work-v2.png",
+      "sha256": "7b6f07eb7f23775bae2a0926349b043704e7816264fa630831c515b50122f23a",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-m01-adult-work-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-m01-adult-work-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "work",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headId": "ef-h-m01-adult-v2",
+        "garmentId": "ef-w-male-work-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m01-adult-work-v2.png",
+        "assembledSha256": "66afcc74952f7e20eede7df68c216bf29f126846a6707535e8944e22daf65b2d",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m01-adult-work-v2",
+          "identityId": "m01",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "work",
+          "bodyId": "ef-b-m01-adult-placed-v2",
+          "headBodyOverlapPixels": 1842,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-m01-adult-work-v2.png",
+        "sha256": "3bc72f9cefd95be3cc7c82f80f5406c74fcc8390442b797f7cfed0504eb26bd0",
+        "logical": "portraits/128x160-s3-t0/ef-p-m01-adult-work-v2.logical.png",
+        "logicalSha256": "5655149981f44efab55f8aaab64297bd6424d69a02a9901b1d60d17fb47be4a0",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-m01-adult-work-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-m01-adult-work-v2",
+        "identityId": "m01",
+        "sex": "male",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "work",
+        "bodyId": "ef-b-m01-adult-placed-v2",
+        "headId": "ef-h-m01-adult-v2",
+        "garmentId": "ef-w-male-work-adult-v2",
+        "assembled": "portraits/assembled/ef-p-m01-adult-work-v2.png",
+        "assembledSha256": "66afcc74952f7e20eede7df68c216bf29f126846a6707535e8944e22daf65b2d",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-m01-adult-work-v2",
+          "identityId": "m01",
+          "sex": "male",
+          "stage": "adult",
+          "wardrobeId": "work",
+          "bodyId": "ef-b-m01-adult-placed-v2",
+          "headBodyOverlapPixels": 1842,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-m01-adult-work-v2.png",
+        "sha256": "b6f56a79d87b56831e23d798699ce11e4860ce1a9e56ac6dd3f4062016de728d",
+        "logical": "portraits/192x240-s2-t0/ef-p-m01-adult-work-v2.logical.png",
+        "logicalSha256": "27ddca40fbe8a5dd5a73c32f5dd9d55e327b0b1a06c74423c61c335f12086c16",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-m01-adult-work-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-m01-adult-work-v2.png",
+      "regionalConfig": "qa/regions/ef-p-m01-adult-work-v2.json"
+    },
+    {
+      "id": "ef-p-f01-adult-work-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "work",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headId": "ef-h-f01-adult-v2",
+      "garmentId": "ef-w-female-work-adult-v2",
+      "assembled": "portraits/assembled/ef-p-f01-adult-work-v2.png",
+      "assembledSha256": "766c96abebd5f06ff8f5cf57153529487879b9d75be10cc058372cfdb9965146",
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "layerOrder": [
+        "background",
+        "skin-calibrated-canonical-body",
+        "jaw-trimmed-head",
+        "fitted-clothing-and-front-collar",
+        "protected-front-hair"
+      ],
+      "joinQA": {
+        "id": "ef-p-f01-adult-work-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "wardrobeId": "work",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headBodyOverlapPixels": 1122,
+        "neckCorridorCoverage": 1.0,
+        "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+        "garmentPixelsOutsideCanonicalBody": 0,
+        "frontCollarAfterHead": true,
+        "protectedBraidAfterCollar": true,
+        "headAspectPreserved": true,
+        "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+      },
+      "profile": "mixed-3px-body-2px-face",
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f01-adult-work-v2.png",
+      "sha256": "9c308508b439de39c97ee583f7a16a86b92734e56e2f8b1cf22c3c58a3afc655",
+      "logical": null,
+      "logicalSha256": null,
+      "qa": "qa/mixed/ef-p-f01-adult-work-v2.json",
+      "logicalSize": null,
+      "outputSize": [
+        384,
+        480
+      ],
+      "gridType": "mixed-grid: coarse3px body / fine2px face, aligned6px common cells",
+      "coarsePass": {
+        "id": "ef-p-f01-adult-work-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "work",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headId": "ef-h-f01-adult-v2",
+        "garmentId": "ef-w-female-work-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f01-adult-work-v2.png",
+        "assembledSha256": "766c96abebd5f06ff8f5cf57153529487879b9d75be10cc058372cfdb9965146",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f01-adult-work-v2",
+          "identityId": "f01",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "work",
+          "bodyId": "ef-b-f01-adult-placed-v2",
+          "headBodyOverlapPixels": 1122,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "128x160-s3-t0",
+        "path": "portraits/128x160-s3-t0/ef-p-f01-adult-work-v2.png",
+        "sha256": "d95df1fe146822386c4b00da237d31781f9e997c4e22c1ff4b1ac93069d53756",
+        "logical": "portraits/128x160-s3-t0/ef-p-f01-adult-work-v2.logical.png",
+        "logicalSha256": "ace09b437fa827051c4905172654aea60e21f85c26e8169e8eadd2bcec2c60b1",
+        "qa": "qa/pixels/128x160-s3-t0/ef-p-f01-adult-work-v2.json",
+        "logicalSize": [
+          128,
+          160
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "finePass": {
+        "id": "ef-p-f01-adult-work-v2",
+        "identityId": "f01",
+        "sex": "female",
+        "stage": "adult",
+        "ageExample": 28,
+        "wardrobeId": "work",
+        "bodyId": "ef-b-f01-adult-placed-v2",
+        "headId": "ef-h-f01-adult-v2",
+        "garmentId": "ef-w-female-work-adult-v2",
+        "assembled": "portraits/assembled/ef-p-f01-adult-work-v2.png",
+        "assembledSha256": "766c96abebd5f06ff8f5cf57153529487879b9d75be10cc058372cfdb9965146",
+        "opaque": true,
+        "sourceCanvas": [
+          800,
+          1000
+        ],
+        "layerOrder": [
+          "background",
+          "skin-calibrated-canonical-body",
+          "jaw-trimmed-head",
+          "fitted-clothing-and-front-collar",
+          "protected-front-hair"
+        ],
+        "joinQA": {
+          "id": "ef-p-f01-adult-work-v2",
+          "identityId": "f01",
+          "sex": "female",
+          "stage": "adult",
+          "wardrobeId": "work",
+          "bodyId": "ef-b-f01-adult-placed-v2",
+          "headBodyOverlapPixels": 1122,
+          "neckCorridorCoverage": 1.0,
+          "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+          "garmentPixelsOutsideCanonicalBody": 0,
+          "frontCollarAfterHead": true,
+          "protectedBraidAfterCollar": true,
+          "headAspectPreserved": true,
+          "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+        },
+        "profile": "192x240-s2-t0",
+        "path": "portraits/192x240-s2-t0/ef-p-f01-adult-work-v2.png",
+        "sha256": "076f56971dec2a68e7b0cdc1cdb389ff1d854ab2b5366b666be532be1bd98bdf",
+        "logical": "portraits/192x240-s2-t0/ef-p-f01-adult-work-v2.logical.png",
+        "logicalSha256": "4cad052b1385389271684a10ca6381a1fc78085c3d37e1a5939598b498e7ee7d",
+        "qa": "qa/pixels/192x240-s2-t0/ef-p-f01-adult-work-v2.json",
+        "logicalSize": [
+          192,
+          240
+        ],
+        "outputSize": [
+          384,
+          480
+        ]
+      },
+      "regionalMask": "qa/regional-masks/ef-p-f01-adult-work-v2.png",
+      "regionalConfig": "qa/regions/ef-p-f01-adult-work-v2.json"
+    }
+  ],
+  "joins": [
+    {
+      "id": "ef-p-m01-adult-everyday-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headBodyOverlapPixels": 1842,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v2",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m02-adult-placed-v2",
+      "headBodyOverlapPixels": 1630,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 126,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v2",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-m03-adult-placed-v2",
+      "headBodyOverlapPixels": 1484,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 160,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headBodyOverlapPixels": 1122,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v2",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f02-adult-placed-v2",
+      "headBodyOverlapPixels": 4212,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 2,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v2",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "bodyId": "ef-b-f03-adult-placed-v2",
+      "headBodyOverlapPixels": 1282,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 0,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-m01-adult-work-v2",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "bodyId": "ef-b-m01-adult-placed-v2",
+      "headBodyOverlapPixels": 1842,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 46,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    },
+    {
+      "id": "ef-p-f01-adult-work-v2",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "bodyId": "ef-b-f01-adult-placed-v2",
+      "headBodyOverlapPixels": 1122,
+      "neckCorridorCoverage": 1.0,
+      "upperCapPixelsNotCoveredByJawDiagnostic": 1,
+      "garmentPixelsOutsideCanonicalBody": 0,
+      "frontCollarAfterHead": true,
+      "protectedBraidAfterCollar": true,
+      "headAspectPreserved": true,
+      "meaning": "Geometric acceptance only; 100% smooth neck/collar image review remains required."
+    }
+  ],
+  "legacySlotBridges": [],
+  "originSelectors": [
+    {
+      "id": "merchant-household",
+      "title": "A merchant household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "artisan-household",
+      "title": "A pottery-worker household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "harbor-household",
+      "title": "A quay-laborer household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "fishing-household",
+      "title": "A fishing household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "bakery-household",
+      "title": "A bakery household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "clerk-household",
+      "title": "A clerk's household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "weaver-household",
+      "title": "A weaving household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "delta-newcomers",
+      "title": "Newcomers from the Delta",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "royal-household",
+      "title": "Royal kin on a coastal estate",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "estate-household",
+      "title": "A landowning estate household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "temple-household",
+      "title": "A temple-service household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "soldier-household",
+      "title": "A garrison family",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "tenant-farming-household",
+      "title": "A tenant-farming household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "domestic-service-household",
+      "title": "A household of hired domestic workers",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "boatbuilder-household",
+      "title": "A boatbuilding household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "musician-household",
+      "title": "A household of traveling musicians",
+      "defaultWardrobeId": "everyday"
+    }
+  ],
+  "jobWardrobeBindings": [
+    {
+      "id": "apprentice",
+      "title": "Workshop apprentice",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "id": "porter",
+      "title": "Quay porter",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "potter",
+      "title": "Potter",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "clerk",
+      "title": "Merchant's clerk",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "copyist",
+      "title": "Workshop copyist",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "sailor",
+      "title": "Merchant sailor",
+      "wardrobeId": "maritime",
+      "minAge": 16
+    },
+    {
+      "id": "shopkeeper",
+      "title": "Small-shop keeper",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "ceramic-decorator",
+      "title": "Ceramic decorator",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "wood-carver",
+      "title": "Wood carver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "sculptor",
+      "title": "Sculptor",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "philosophy-tutor",
+      "title": "Philosophy tutor",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "sky-table-calculator",
+      "title": "Sky-table calculator",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "astrologer",
+      "title": "Sky-omen interpreter",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "soldier",
+      "title": "Royal army soldier",
+      "wardrobeId": "military",
+      "minAge": 18
+    },
+    {
+      "id": "officer",
+      "title": "Royal army officer",
+      "wardrobeId": "military",
+      "minAge": 22
+    },
+    {
+      "id": "general",
+      "title": "Royal army general",
+      "wardrobeId": "military",
+      "minAge": 28
+    },
+    {
+      "id": "court-adviser",
+      "title": "Royal court adviser",
+      "wardrobeId": "elite",
+      "minAge": 24
+    },
+    {
+      "id": "patron-supported-reader",
+      "title": "Patron-supported reader",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "pottery-workshop-lead",
+      "title": "Pottery workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "carving-workshop-lead",
+      "title": "Wood-carving workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "sculpture-workshop-lead",
+      "title": "Sculpture workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "performer",
+      "title": "Hired musician",
+      "wardrobeId": "performance",
+      "minAge": 16
+    },
+    {
+      "id": "farmer",
+      "title": "Independent farmer",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "weaver",
+      "title": "Independent weaver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "writer",
+      "title": "Independent writer",
+      "wardrobeId": "scholarly",
+      "minAge": 16
+    },
+    {
+      "id": "boatbuilder",
+      "title": "Boat-fittings maker",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "trader",
+      "title": "Market trader",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "baker",
+      "title": "Independent baker",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "fisher",
+      "title": "Independent fisher",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "household-worker",
+      "title": "Household worker",
+      "wardrobeId": "everyday",
+      "minAge": 14
+    },
+    {
+      "id": "merchant",
+      "title": "Merchant",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "estate-steward",
+      "title": "Estate steward",
+      "wardrobeId": "elite",
+      "minAge": 18
+    },
+    {
+      "id": "quartermaster",
+      "title": "Quartermaster",
+      "wardrobeId": "military",
+      "minAge": 18
+    }
+  ],
+  "encounterWardrobeBindings": [
+    {
+      "id": "person-harbor",
+      "title": "Harbor worker",
+      "jobId": "porter",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-market",
+      "title": "Market seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    },
+    {
+      "id": "person-workshop",
+      "title": "Workshop worker",
+      "jobId": "apprentice",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-linen",
+      "title": "Linen worker",
+      "jobId": "weaver",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-copies",
+      "title": "Document copyist",
+      "jobId": "copyist",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-bakery",
+      "title": "Bakery worker",
+      "jobId": "baker",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-well",
+      "title": "Household provisioner",
+      "jobId": "household-worker",
+      "wardrobeId": "everyday"
+    },
+    {
+      "id": "person-festival",
+      "title": "Garland maker",
+      "jobId": null,
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-library",
+      "title": "Reader's assistant",
+      "jobId": "patron-supported-reader",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-music",
+      "title": "Musician",
+      "jobId": "performer",
+      "wardrobeId": "performance"
+    },
+    {
+      "id": "person-boat",
+      "title": "Boat worker",
+      "jobId": "boatbuilder",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-drill",
+      "title": "Equipment keeper",
+      "jobId": "quartermaster",
+      "wardrobeId": "military"
+    },
+    {
+      "id": "person-garden",
+      "title": "Garden attendant",
+      "jobId": "farmer",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-accounts",
+      "title": "Accounts assistant",
+      "jobId": "clerk",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-pottery",
+      "title": "Pottery worker",
+      "jobId": "potter",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-neighbors",
+      "title": "Cloth seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    }
+  ],
+  "sourceIntegrity": {
+    "allProtectedInputsUnchanged": true,
+    "inputCount": 18
+  },
+  "sourceDependencies": {
+    "headSourcesAndPixelEngine": "../ordinary-v1",
+    "mappings": "../ordinary-v1/mappings.json"
+  },
+  "physicalBodyPresentInEveryAssembly": true,
+  "smoothSeamReviewRequired": true
+}

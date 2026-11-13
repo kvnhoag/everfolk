@@ -39,7 +39,7 @@
 
 ---
 
-**Everfolk** is a deterministic browser-based life simulation set in Ptolemaic Alexandria (350–300 BCE), paired with an on-chain **Living-Legacy NFT protocol** on NEAR.
+**Everfolk** is a deterministic browser-based life simulation set around Rhakotis and the emerging city of Alexandria, with new free-play births across 400–300 BCE, paired with an on-chain **Living-Legacy NFT protocol** on NEAR.
 
 In **Free Play**, every life runs locally from a seed and command log with zero account setup. In **Weave Mode**, NEAR coordinates four structural mechanics that cannot live off-chain alone:
 1. **Verifiable Genesis:** `start_life` assigns each life's seed from NEAR validator randomness so no player can farm ideal births.
@@ -451,6 +451,32 @@ pnpm content
 ```
 
 </details>
+
+---
+
+## Classic Alexandria households and portraits
+
+Classic Alexandria lives record named parents and grandparents with their household backgrounds and occupations. Living grandparents are rare: 10% of new households start with one. Open Family for a table of living relatives, your spouse and children, with deceased relatives kept under Remembered family. Relationships lists friends, business partners, teachers, disciples, enemies and romantic relationships as they form, alongside backgrounds, work and recorded bonds.
+
+Classic Alexandria lives offer work shaped by their household background, with farming as an optional livelihood. Independent material trades use purchased supplies to produce goods for sale. Place bulk market contracts during the year: cash or stock is reserved immediately, and deliveries and sale receipts settle at the next year end. Quotes respond to events reported in the life. Choosing the Trading focus puts ordinary work aside; repeated years of completed sales can open the trader occupation.
+
+The market shows resources useful to your current work and background, goods you own or have ordered, and supplies for tasks you can take. Traders, shopkeepers, merchants, estate stewards and quartermasters can browse the full catalogue with search and category filters because their work involves broad purchasing or resale. Other occupations keep a focused selection. Starting-resource displays focus on your household's rolls and possessions.
+
+In new classic Alexandria lives, royal births follow a separate household council path. Guide the house treasury, court influence, household stability, security and succession, with private lessons from age eight and council responsibilities from sixteen. Household staff handle trade and ordinary work; royal decisions concern envoys, guards, petitions, estate obligations and family agreements. Personal health, family and historical changes still shape the life. This fictional minor royal branch does not automatically inherit Egypt's throne. Earlier saves retain their original rules.
+
+Aristocrats born into the landowning estate household manage an Estate council: invest in land and storage, settle tenant agreements, maintain local patronage, collect rents and plan the family's inheritance. Estate prosperity and tenant loyalty affect annual returns. Their staff handle ordinary trade and paid work. New lives have a 6% chance of an aristocratic birth and a 2% chance of a royal birth; these are authored game probabilities, increased from 3% and 1%. Begun lives keep their original world revision.
+
+For a local preview of the full game and ready-to-play class scenarios, run `node scripts/preview-lives.mjs`. The game opens at `http://localhost:5175/`, with isolated adult scenarios at `/test-aristocrat` and `/test-royalty`. Both test routes use the regular life screen, year controls, event feed and management dialog, with a small preset selector. Test sessions do not write personal saves; normal play at the root uses browser saves. The preview serves the bundled worlds locally without a database.
+
+Royal and aristocratic births receive a congratulations popup after the starting-stat reveal and **Begin life**. A skippable four-step tour introduces their treasury, household conditions, yearly council decisions and earned titles; time waits while the tour is open. **Household guide** in the character panel reopens it. Both class test pages show the introduction and include **Try birth welcome** to test the complete newborn reveal and tutorial without personal saves.
+
+Each council contains three earned title paths. Royal households pursue Ambassador of the House, Guardian of the House or Unifier of the House; estate households pursue Restorer of the Estate, Trusted Patron or Keeper of the Family Lands. A path requires an actual council service, three accepted duties across several years, maintained household conditions and a final recognition action. The two middle projects can fail, spend their budget and require two years before a retry. Recognition adds 5 drachmas to the household treasury each year. These are fictional household distinctions. They also develop practical skills; treasury-funded lessons and historical service opportunities let either class pursue the existing historical titles within their original dates and recognition odds.
+
+New lives limit ordinary household contracts to 50 units per order and 100 total units per year. Roles with full market access can commit 100 units per order and 300 per year. Purchases and sales share that yearly allowance, including orders split across different goods. Cancelling a contract releases its allowance; completing the year renews it. At most eight contracts may be pending.
+
+The bundled classic Alexandria world groups eight earned historical title paths and their milestone sub-cards, including Right Hand of Alexander, General of Alexander, and scholarly work associated with Aristotle, Euclid and Theophrastus. Scholarly paths use independent study and reviewed work, without requiring personal lessons or teaching-window deadlines. Complete a path's tasks and recognition review to collect its sub-cards under your character's name. Works & deeds shows preparation and progress; the collection can filter by historical figure.
+
+The portrait libraries retain their source manifests, QA records and dependencies. The application delivers 240 v3 portrait PNGs. Begun lives retain their exact world revision.
 
 ---
 

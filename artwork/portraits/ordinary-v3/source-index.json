@@ -1,0 +1,2622 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "indexer": "scripts/index-sources.py",
+  "generator": "built-in image_gen",
+  "counts": {
+    "models": 12,
+    "internalFaceEdits": 24,
+    "newWardrobeSources": 4,
+    "sourcePNGs": 40,
+    "wardrobeDependencies": 16,
+    "wrapDependencies": 2,
+    "dependencyPNGs": 18,
+    "totalIndexedPNGs": 58,
+    "copiedAdultOriginals": 4
+  },
+  "sourcePolicy": "All PNGs are immutable raw image-generation outputs or exact copies. Project paths are portable relative pointers within artwork/portraits; absolute toolOriginalPath fields preserve original external tool provenance. Exact prompts remain local and ignored. No source image, prompt or sidecar is modified by this indexer.",
+  "anatomyPolicy": "Each sex/age model is a continuously painted complete person. Face edits supply interior facial features only; preserve the complete canonical head, jaw, neck, shoulders and body outside the internal-face region.",
+  "assets": [
+    {
+      "id": "ef-model-female-adult-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-adult-v3.png",
+      "sha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        91,
+        12,
+        1026,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-r-female-waist-v2-prompt.txt",
+      "promptSha256": "ca9780231fdd93b2c46f91c5146f93adbedea547234a0375569beb6a11006004",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.generation.json"
+      ],
+      "provenanceSha256": "e9c66ab9c21b58ddb8826c784ba4c5abb045376a27502b2621b0ffbed1cdcf67",
+      "provenanceAssetId": "ef-r-female-waist-v2",
+      "referencePaths": [],
+      "sourceStatus": "copied-preserved-original",
+      "generator": "built-in image_gen",
+      "copiedFrom": "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+      "copyMatchesPreservedSource": true,
+      "sex": "female",
+      "stage": "adult",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-909be5a2-c63d-4132-b287-0bbe4db9800b.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c"
+    },
+    {
+      "id": "ef-model-female-child-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-child-v3.png",
+      "sha256": "9cb027916167d75d1d27383613657ae75903bf8cdb12bc485e06a7d6659f7668",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        118,
+        8,
+        1003,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-female-child-v3-prompt.txt",
+      "promptSha256": "ab7b51373c731d420aba85afa68f30735ee2e66b6835002f8d01e84dd974a62c",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-female-child-v3.generation.json"
+      ],
+      "provenanceSha256": "30ff95b6862ab895817cc3f100caafe5b91010241a0a02f9797dd8e2f9d289ed",
+      "provenanceAssetId": "ef-model-female-child-v3",
+      "referencePaths": [],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "stage": "child",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-14703692-bd10-47ba-87a2-b0eef1a0159b.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "9cb027916167d75d1d27383613657ae75903bf8cdb12bc485e06a7d6659f7668"
+    },
+    {
+      "id": "ef-model-female-elder-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-elder-v3.png",
+      "sha256": "115d9df590a0feb9e2e17a8280c8efac2ff83edfb88f308b0ed762407d340bdb",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        28,
+        9,
+        1043,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-female-elder-v3-prompt.txt",
+      "promptSha256": "0fab8e3dec11d07b61202c85469ca6951524135fd879f575fa353c3476e868ec",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-female-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "ef2b26d5c25020231cfcb8bf850241fb64d808ec5a15adc633dcf711e187dd55",
+      "provenanceAssetId": "ef-model-female-elder-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "stage": "elder",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d7de9eef-c8fe-41a7-8cbb-c91859417d01.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "115d9df590a0feb9e2e17a8280c8efac2ff83edfb88f308b0ed762407d340bdb"
+    },
+    {
+      "id": "ef-model-female-infant-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-infant-v3.png",
+      "sha256": "d4ca819827e1d127969a1e73e1fd922d57c788ccf933d6067e5c32f1dace0ced",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        208,
+        91,
+        883,
+        1388
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-female-infant-v3-prompt.txt",
+      "promptSha256": "ca01c86c8892b4d3715d21254987bbf0b02d40624ff2125b49793133955744c3",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-female-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "1eb311bf0e065d170fdf6e1f862415bfd3336a582c49f0e8897e2cc2f671869e",
+      "provenanceAssetId": "ef-model-female-infant-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "stage": "infant",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-2c3be01c-7111-4172-a16e-07c210b025e8.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "d4ca819827e1d127969a1e73e1fd922d57c788ccf933d6067e5c32f1dace0ced"
+    },
+    {
+      "id": "ef-model-female-middle-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-middle-v3.png",
+      "sha256": "427edf5a38b71530404413b4b4866687ec6d2ff7b344ccb04609683847306af6",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        83,
+        11,
+        1035,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-female-middle-v3-prompt.txt",
+      "promptSha256": "c6fde5637911a33e3da1a3f9726f2b27d04f76bef67f516f06fba7cac3b9e06b",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-female-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "c1a688b8defce0a7a55233703c40c1066d95229748f4cbd4b0783d9263da5518",
+      "provenanceAssetId": "ef-model-female-middle-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "stage": "middle",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-98fff65f-d9b7-425b-95cf-f9a960cf2d92.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "427edf5a38b71530404413b4b4866687ec6d2ff7b344ccb04609683847306af6"
+    },
+    {
+      "id": "ef-model-female-youth-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-female-youth-v3.png",
+      "sha256": "23ca9f5882019a3be80046d17c43b5b7b3623b2e33da6ebb5fcf7acd00bf9716",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        96,
+        13,
+        1022,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-female-youth-v3-prompt.txt",
+      "promptSha256": "8f803c8fe741c9aa662e771fe3a1fd1d9e3a94db33189535a036f3590ff41b73",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-female-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "bc78d164078aad4776a9b14a75bd233512d19b577159f17e4d3c2cdf90adeb7d",
+      "provenanceAssetId": "ef-model-female-youth-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "stage": "youth",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-6df94caa-3865-4d6b-9cd2-5c71894f35fd.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "23ca9f5882019a3be80046d17c43b5b7b3623b2e33da6ebb5fcf7acd00bf9716"
+    },
+    {
+      "id": "ef-model-male-adult-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-adult-v3.png",
+      "sha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        7,
+        1101,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-r-male-waist-v2-prompt.txt",
+      "promptSha256": "761a174feeb46a5ddc9465335b6d9be30755013e178a7169cd80117e9f51d748",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.generation.json"
+      ],
+      "provenanceSha256": "afdf7bd7374743336d19f73c680c09c76d6d940681e020cb3d3d79e79ade54e9",
+      "provenanceAssetId": "ef-r-male-waist-v2",
+      "referencePaths": [],
+      "sourceStatus": "copied-preserved-original",
+      "generator": "built-in image_gen",
+      "copiedFrom": "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png",
+      "copyMatchesPreservedSource": true,
+      "sex": "male",
+      "stage": "adult",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-69a5159e-2739-437c-aaac-376f8deb8e01.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7"
+    },
+    {
+      "id": "ef-model-male-child-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-child-v3.png",
+      "sha256": "7196a8f282a91ad121a0dc3b09a442c2d6430a0561b4bda8eb6a53b6faced7f4",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        5,
+        1005,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-male-child-v3-prompt.txt",
+      "promptSha256": "9de74db2b8a1015c36bb0a5ce65d331d4c0abb0c88d946847b2be591a3343ed1",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-male-child-v3.generation.json"
+      ],
+      "provenanceSha256": "d49ff8958ac31c5ffaa1fd840130cd74422c31187e0dab3ba6311ecf1e9d170d",
+      "provenanceAssetId": "ef-model-male-child-v3",
+      "referencePaths": [],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "stage": "child",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-11452fab-4451-4421-a271-a05c5ce66aed.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "7196a8f282a91ad121a0dc3b09a442c2d6430a0561b4bda8eb6a53b6faced7f4"
+    },
+    {
+      "id": "ef-model-male-elder-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-elder-v3.png",
+      "sha256": "165fcbfe6369aa0f894dc5870cc7958291d015ffb40fe6591bc72461eff745f3",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        1,
+        9,
+        1071,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-male-elder-v3-prompt.txt",
+      "promptSha256": "d3dbeb1d1579ebd94fe54c3dbc5be15bf98dce630b6831821ed5b797da9fdfdd",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-male-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "a3d22c2352980583bf9a64b6b9a2a8c7c3f6f29618f41f4152dd4523f6b24fd2",
+      "provenanceAssetId": "ef-model-male-elder-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "stage": "elder",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-9093c3b2-a1be-4e07-9c30-e56a6e9151a0.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "165fcbfe6369aa0f894dc5870cc7958291d015ffb40fe6591bc72461eff745f3"
+    },
+    {
+      "id": "ef-model-male-infant-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-infant-v3.png",
+      "sha256": "4c67dc162f0c35c0b81ef4f4fe2d0e4ef2a746e1ed7709d6df78f796cb77b793",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBoundsAlpha128": [
+        176,
+        43,
+        875,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": false,
+      "prompt": "source/prompts/ef-model-male-infant-v3-prompt.txt",
+      "promptSha256": "4e5feab06f2cc320bb87453a01cf2be368ac8c8045aec012c21feb264440c90b",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-male-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "249f3d40e8f65c4eb471bc999ede28af681649797885b1b1a71e5c62ad87b528",
+      "provenanceAssetId": "ef-model-male-infant-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "stage": "infant",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-53b0c69a-cf60-4784-b586-10b854616766.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "4c67dc162f0c35c0b81ef4f4fe2d0e4ef2a746e1ed7709d6df78f796cb77b793"
+    },
+    {
+      "id": "ef-model-male-middle-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-middle-v3.png",
+      "sha256": "a7f7a5ad8a17d6cde8b215222b5f6ebc1e88e2d018a2a1fd65210733098088cc",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        8,
+        1101,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-male-middle-v3-prompt.txt",
+      "promptSha256": "70c2e744b5b53a2b271b32478bf29d0c0bb41eafc533cc9becd332e59d96eda3",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-male-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "822bff8442f0d93526bcc9dcde2bee6c593bcfdd5b54635e165ab1ab06a6e0a1",
+      "provenanceAssetId": "ef-model-male-middle-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "stage": "middle",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-57269d46-3052-4fd8-9f4a-a333bce0863a.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "a7f7a5ad8a17d6cde8b215222b5f6ebc1e88e2d018a2a1fd65210733098088cc"
+    },
+    {
+      "id": "ef-model-male-youth-v3",
+      "kind": "models",
+      "role": "continuous-whole-person-age-model",
+      "path": "source/models/ef-model-male-youth-v3.png",
+      "sha256": "7846983af048ce0346a6f9fea468878da24e7fabeabd94a335bf5952451913e7",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        61,
+        12,
+        1011,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-model-male-youth-v3-prompt.txt",
+      "promptSha256": "0b648275932dbf17d973b2a6acc5def1c0b9baac9c1ecf3f50f78b75a8e6886a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/models/ef-model-male-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "4815f72ca69eb7e29970facc7461c59d0024d37add7bd4c2f6216d18821eca76",
+      "provenanceAssetId": "ef-model-male-youth-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "stage": "youth",
+      "noManualHeadOrNeckCut": true,
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-38572fdb-e3aa-4aa4-8323-9758888bb133.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "7846983af048ce0346a6f9fea468878da24e7fabeabd94a335bf5952451913e7"
+    },
+    {
+      "id": "ef-face-f02-adult-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-adult-v3.png",
+      "sha256": "ba0be7b14f8152409d92827fbc431ddaa8cb9a3d1d3e7cff9a8dd8c53c506744",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        89,
+        12,
+        1029,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v3-neck-proof/source/prompts/ef-face-only-female-v3-prompt.txt",
+      "promptSha256": "b3fa9c21013da55c181833726ae8077fa81e3c9e9c594d517629e4f9d958e3a3",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v3-neck-proof/source/ef-face-only-female-v3.generation.json"
+      ],
+      "provenanceSha256": "b45b778109cf7e36b2061d011a6eef4488db707ae999510e42a7f0690a4cd0fa",
+      "provenanceAssetId": "ef-face-only-female-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v1/source/heads/ef-h-f02-adult-v1.png"
+      ],
+      "sourceStatus": "copied-preserved-original",
+      "generator": "built-in image_gen",
+      "copiedFrom": "../ordinary-v3-neck-proof/source/ef-face-only-female-v3.png",
+      "copyMatchesPreservedSource": true,
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "canonicalModel": "source/models/ef-model-female-adult-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-2038cdb1-5f47-4ff4-9dfb-c3b6b1f2e42f.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "ba0be7b14f8152409d92827fbc431ddaa8cb9a3d1d3e7cff9a8dd8c53c506744"
+    },
+    {
+      "id": "ef-face-f02-child-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-child-v3.png",
+      "sha256": "3535ba560a99ae3053543a8b7010b4e0d21aee8697a70eff2b0576955c4089b7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        117,
+        6,
+        1005,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f02-child-v3-prompt.txt",
+      "promptSha256": "52516bda8b98b14bde15884a2bdda6d9aa4c3c76bca17d382dd50cc8c37199c9",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f02-child-v3.generation.json"
+      ],
+      "provenanceSha256": "eb4723c2e42ade8279ef6fab4e3526ac8f845a74d091ebda80da3989765aa010",
+      "provenanceAssetId": "ef-face-f02-child-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-child-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f02-child-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "child",
+      "canonicalModel": "source/models/ef-model-female-child-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d37b6ad0-e049-4b5e-8c9b-46731b0da794.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "3535ba560a99ae3053543a8b7010b4e0d21aee8697a70eff2b0576955c4089b7"
+    },
+    {
+      "id": "ef-face-f02-elder-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-elder-v3.png",
+      "sha256": "64eea32921048792626c2cc40e1603ac7a48d64f8ff6d7914e3ac3270d6ce4b7",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        25,
+        6,
+        1045,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f02-elder-v3-prompt.txt",
+      "promptSha256": "52516bda8b98b14bde15884a2bdda6d9aa4c3c76bca17d382dd50cc8c37199c9",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f02-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "74b1c5853a2f290db6e233ce9562e5c382dfb282104b286f141590e60d99f9ea",
+      "provenanceAssetId": "ef-face-f02-elder-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-elder-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f02-elder-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "canonicalModel": "source/models/ef-model-female-elder-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-257f9aea-26c7-419c-ba17-f3e4e9f73ec6.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "64eea32921048792626c2cc40e1603ac7a48d64f8ff6d7914e3ac3270d6ce4b7"
+    },
+    {
+      "id": "ef-face-f02-infant-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-infant-v3.png",
+      "sha256": "174fb098094d66cb066ed3e9574c1322e9e6f8ce63ed7436ab8338ea1d2cacb8",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        207,
+        85,
+        887,
+        1389
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f02-infant-v3-prompt.txt",
+      "promptSha256": "52516bda8b98b14bde15884a2bdda6d9aa4c3c76bca17d382dd50cc8c37199c9",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f02-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "9612cf591f36ce1826658131b3bc8f4112961f92037d84413bb9f9d00d1c526f",
+      "provenanceAssetId": "ef-face-f02-infant-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-infant-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f02-infant-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "infant",
+      "canonicalModel": "source/models/ef-model-female-infant-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-70aa8fdf-cecf-44a0-b0b3-a1ea52c7e37c.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "174fb098094d66cb066ed3e9574c1322e9e6f8ce63ed7436ab8338ea1d2cacb8"
+    },
+    {
+      "id": "ef-face-f02-middle-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-middle-v3.png",
+      "sha256": "23f7ae442bc776f2c828dfdbecedbbc9e28afd8d3c4202cab7a819560165f27a",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        83,
+        13,
+        1036,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f02-middle-v3-prompt.txt",
+      "promptSha256": "52516bda8b98b14bde15884a2bdda6d9aa4c3c76bca17d382dd50cc8c37199c9",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f02-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "7cbd09df4d4f158346fa7d5cd4bbb2672ac1240901e084f77336326099c8cb0e",
+      "provenanceAssetId": "ef-face-f02-middle-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-middle-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f02-middle-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "canonicalModel": "source/models/ef-model-female-middle-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-0b428bff-3b12-442c-9e97-1044a2bb3758.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "23f7ae442bc776f2c828dfdbecedbbc9e28afd8d3c4202cab7a819560165f27a"
+    },
+    {
+      "id": "ef-face-f02-youth-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f02-youth-v3.png",
+      "sha256": "60d5432ef45c75e10b4ea32b44c0df4c64e3d3c59c2dc7f72ca2a820b924ce8b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        96,
+        15,
+        1021,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f02-youth-v3-prompt.txt",
+      "promptSha256": "52516bda8b98b14bde15884a2bdda6d9aa4c3c76bca17d382dd50cc8c37199c9",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f02-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "ebe74f29f4850d0af3b8612350b1f09bb225bcc6538c79d20511a0b27f850967",
+      "provenanceAssetId": "ef-face-f02-youth-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-youth-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f02-youth-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "canonicalModel": "source/models/ef-model-female-youth-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-8f132b47-877f-4adb-a967-d5e6e365cf01.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "60d5432ef45c75e10b4ea32b44c0df4c64e3d3c59c2dc7f72ca2a820b924ce8b"
+    },
+    {
+      "id": "ef-face-f03-adult-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-adult-v3.png",
+      "sha256": "7d832a082b9fc58ca50b7eea1d76cbb661a36173e1a1133d19eac03446851086",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        89,
+        12,
+        1028,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-adult-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-adult-v3.generation.json"
+      ],
+      "provenanceSha256": "69f93c50f21db251281bcb072a617caf26133393686878891396f287d33f0489",
+      "provenanceAssetId": "ef-face-f03-adult-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-adult-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-adult-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "canonicalModel": "source/models/ef-model-female-adult-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-dd039182-b86f-4408-825c-5ce06cf0ac84.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "7d832a082b9fc58ca50b7eea1d76cbb661a36173e1a1133d19eac03446851086"
+    },
+    {
+      "id": "ef-face-f03-child-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-child-v3.png",
+      "sha256": "68d9b1c3ac0c306444d24edb263fb267e41dbf33a2b9c0b1eab9d6fb9011e5f1",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        117,
+        8,
+        1005,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-child-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-child-v3.generation.json"
+      ],
+      "provenanceSha256": "f492d83e01d24278c07eff3e0da6512e0735558e4f80fc465601317f22649062",
+      "provenanceAssetId": "ef-face-f03-child-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-child-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-child-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "child",
+      "canonicalModel": "source/models/ef-model-female-child-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-40395d96-c321-4bfe-95b2-4bf6849bb994.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "68d9b1c3ac0c306444d24edb263fb267e41dbf33a2b9c0b1eab9d6fb9011e5f1"
+    },
+    {
+      "id": "ef-face-f03-elder-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-elder-v3.png",
+      "sha256": "19b77f0c58207b4d5877ee0780329f9839cde29b8c17179f5286c4771ee38087",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        28,
+        6,
+        1043,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-elder-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "54613debc294c36437c80fedefc62a59c232f8f1e853768de333095a4b20f911",
+      "provenanceAssetId": "ef-face-f03-elder-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-elder-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-elder-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "canonicalModel": "source/models/ef-model-female-elder-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-8d0ab557-ffa8-4dae-870a-d51d64880856.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "19b77f0c58207b4d5877ee0780329f9839cde29b8c17179f5286c4771ee38087"
+    },
+    {
+      "id": "ef-face-f03-infant-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-infant-v3.png",
+      "sha256": "9b3f3528e286d4eef4e05ed3699fe7d288779a2f6a867a46dda7d7e4c7364b03",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        209,
+        88,
+        881,
+        1388
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-infant-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "60b0de05428da9f0ab1aacf703f906bc9b924a1798b8579463a6e36553017388",
+      "provenanceAssetId": "ef-face-f03-infant-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-infant-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-infant-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "infant",
+      "canonicalModel": "source/models/ef-model-female-infant-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-640ec9c9-f3d0-462e-9029-efc9efe23a88.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "9b3f3528e286d4eef4e05ed3699fe7d288779a2f6a867a46dda7d7e4c7364b03"
+    },
+    {
+      "id": "ef-face-f03-middle-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-middle-v3.png",
+      "sha256": "a89899eb6515be37f1fbcab5273aa44608563c93f753db1f966678662299e61a",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        83,
+        12,
+        1035,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-middle-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "fb360a23788e433677b7fad67de18e12f2ffca2d21dc081ac81201f1a04e9d06",
+      "provenanceAssetId": "ef-face-f03-middle-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-middle-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-middle-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "canonicalModel": "source/models/ef-model-female-middle-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-5fd0d84f-6229-4ea0-b010-d68e0f23721d.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "a89899eb6515be37f1fbcab5273aa44608563c93f753db1f966678662299e61a"
+    },
+    {
+      "id": "ef-face-f03-youth-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-f03-youth-v3.png",
+      "sha256": "dff272f5f4e489d486b3bc585c2c51de15ea0fea3c470eed355ed830fd6cd88a",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        96,
+        16,
+        1020,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-f03-youth-v3-prompt.txt",
+      "promptSha256": "5eaec48e9d0e047f09d79adcb5b9efdb0d5e8d4da987a163714310b384cb9d9a",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-f03-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "91cd2a9409118e8834fa1a8028c3607b1407393d85470fe1feb0e388c7fe0653",
+      "provenanceAssetId": "ef-face-f03-youth-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-youth-v3.png",
+        "../ordinary-v1/source/heads/ef-h-f03-youth-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "canonicalModel": "source/models/ef-model-female-youth-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-03c54353-0719-44c0-a7aa-b1304dfd816d.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "dff272f5f4e489d486b3bc585c2c51de15ea0fea3c470eed355ed830fd6cd88a"
+    },
+    {
+      "id": "ef-face-m02-adult-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-adult-v3.png",
+      "sha256": "d8ec89da2eb29456b34e799dadd0c9427f1b91dc860c50c44dc06775f3c3bf69",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        2,
+        1105,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v3-neck-proof/source/prompts/ef-face-only-male-v3-prompt.txt",
+      "promptSha256": "ced49a5b0da34da845aebc7e5f4c0f775306ddcffdfb0ee80a6f540332c12d8f",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v3-neck-proof/source/ef-face-only-male-v3.generation.json"
+      ],
+      "provenanceSha256": "d84e2ce65331556e7035e978f07ada1e4bba4df1461a6efa70a672986da90e1e",
+      "provenanceAssetId": "ef-face-only-male-v3",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png",
+        "../ordinary-v1/source/heads/ef-h-m02-adult-v1.png"
+      ],
+      "sourceStatus": "copied-preserved-original",
+      "generator": "built-in image_gen",
+      "copiedFrom": "../ordinary-v3-neck-proof/source/ef-face-only-male-v3.png",
+      "copyMatchesPreservedSource": true,
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "canonicalModel": "source/models/ef-model-male-adult-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-dc6b0b02-81e5-4636-a48a-424b29e3ab31.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "d8ec89da2eb29456b34e799dadd0c9427f1b91dc860c50c44dc06775f3c3bf69"
+    },
+    {
+      "id": "ef-face-m02-child-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-child-v3.png",
+      "sha256": "85737e3a818305aa4ed79f13e69039ae401a34803c99928bc0361fa878ad5aee",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        84,
+        0,
+        1008,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m02-child-v3-prompt.txt",
+      "promptSha256": "d418f2644fcb71aee2e623aa101ea9484a5837e36934cb54835c7f0f73a2ee3b",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m02-child-v3.generation.json"
+      ],
+      "provenanceSha256": "fb26f9e12be3b07b8035d190c3468094b5af3b722b5dbe7afbb586d36fa56a4a",
+      "provenanceAssetId": "ef-face-m02-child-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-child-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m02-child-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "child",
+      "canonicalModel": "source/models/ef-model-male-child-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-e25011b5-d91e-4b4b-b9a3-aefe4300d05d.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "85737e3a818305aa4ed79f13e69039ae401a34803c99928bc0361fa878ad5aee"
+    },
+    {
+      "id": "ef-face-m02-elder-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-elder-v3.png",
+      "sha256": "4cc962340dc0cb0a1c5f60d6532940223d9023178b4da9389a21b62db48106d7",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        1,
+        3,
+        1071,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m02-elder-v3-prompt.txt",
+      "promptSha256": "027e3f037d4b7ea8b993aa3c5abab87667af58b5de78e6d8e03b02ec127ac856",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m02-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "43690eaa19b88c3e2e0ef283c3ebfcae11e2e9bd2bc0bddb9501144abf402015",
+      "provenanceAssetId": "ef-face-m02-elder-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-elder-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m02-elder-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "canonicalModel": "source/models/ef-model-male-elder-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-e4beb2c0-358e-4c2e-9461-b238799984ae.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "4cc962340dc0cb0a1c5f60d6532940223d9023178b4da9389a21b62db48106d7"
+    },
+    {
+      "id": "ef-face-m02-infant-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-infant-v3.png",
+      "sha256": "0f5b6559d507eb3b2e89e2a076916d0a7b9e05d8dee84984c87b2075ff86f2ae",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        177,
+        30,
+        880,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m02-infant-v3-prompt.txt",
+      "promptSha256": "bcd9f328d694f8c64f5cbbca10a0999fb4a66db0e2c6351850b7b0732f054d56",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m02-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "94e1f70e21e73a85069e23f3d0d9a226a7ca2ba881c44f0e5a58542468e3ea7f",
+      "provenanceAssetId": "ef-face-m02-infant-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-infant-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m02-infant-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "infant",
+      "canonicalModel": "source/models/ef-model-male-infant-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-50dfa360-528a-40c4-b4b3-0cc7b812d833.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "0f5b6559d507eb3b2e89e2a076916d0a7b9e05d8dee84984c87b2075ff86f2ae"
+    },
+    {
+      "id": "ef-face-m02-middle-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-middle-v3.png",
+      "sha256": "95ac66f60126bda58b366a7670affc1cbc747faeafae23be1e5bcfd48f00b5a1",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        2,
+        1103,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m02-middle-v3-prompt.txt",
+      "promptSha256": "3d057eac6a56443f3ddd9195be6c4fdde98fa6f0064676f9b27a517200498fb0",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m02-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "d1ec56e4cdd62bc9d568b1e06eb7317d2d7b526de0bfc1914c52e55bcba16e56",
+      "provenanceAssetId": "ef-face-m02-middle-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-middle-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m02-middle-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "canonicalModel": "source/models/ef-model-male-middle-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-ec730e46-f1df-48d9-a956-26800ef470bc.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "95ac66f60126bda58b366a7670affc1cbc747faeafae23be1e5bcfd48f00b5a1"
+    },
+    {
+      "id": "ef-face-m02-youth-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m02-youth-v3.png",
+      "sha256": "f6b256ef12c028703ad4b44457058a04f0961bc4d5084925eda37cc1c65b4742",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        61,
+        12,
+        1013,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m02-youth-v3-prompt.txt",
+      "promptSha256": "3d057eac6a56443f3ddd9195be6c4fdde98fa6f0064676f9b27a517200498fb0",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m02-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "5ff0608329668c70cea7621c0f8f54bb85a85d45a0d49711b8bbdba9ffd8e931",
+      "provenanceAssetId": "ef-face-m02-youth-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-youth-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m02-youth-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "canonicalModel": "source/models/ef-model-male-youth-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-0383e4e1-0fa6-447d-948e-32bb6413c003.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "f6b256ef12c028703ad4b44457058a04f0961bc4d5084925eda37cc1c65b4742"
+    },
+    {
+      "id": "ef-face-m03-adult-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-adult-v3.png",
+      "sha256": "5227494a5b04fe926937d989a2160f25f9f196e58b95f7b37752d8ea05ab7f76",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        22,
+        8,
+        1100,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-adult-v3-prompt.txt",
+      "promptSha256": "25c6792320ee043c26a496da952393a5f8ebd0f80b8a6cc06ea736078b8bf985",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-adult-v3.generation.json"
+      ],
+      "provenanceSha256": "10e0cba7c3278d295e0a387348a21ac367a0e34f07f0e5a3642ee0e2d71768aa",
+      "provenanceAssetId": "ef-face-m03-adult-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-adult-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "canonicalModel": "source/models/ef-model-male-adult-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-cc96b5a6-3d3f-4ff7-90cd-f14e65fa3f80.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "5227494a5b04fe926937d989a2160f25f9f196e58b95f7b37752d8ea05ab7f76"
+    },
+    {
+      "id": "ef-face-m03-child-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-child-v3.png",
+      "sha256": "35c41c405958a86f4e61babf640cd2fb16f7e2ea4ecaba3d32130136da0d339e",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        84,
+        0,
+        1010,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-child-v3-prompt.txt",
+      "promptSha256": "d4343382fb57202406024611f83cf8298024f93198e5dab9e9799aa8d1a6a8d6",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-child-v3.generation.json"
+      ],
+      "provenanceSha256": "59d7abc1838f852026626f00eb97f99d3b73195c78f7bfe22ec8a3c139c7f19e",
+      "provenanceAssetId": "ef-face-m03-child-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-child-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-child-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "child",
+      "canonicalModel": "source/models/ef-model-male-child-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-ba7dc5d5-8a92-4a80-88af-d04963237d39.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "35c41c405958a86f4e61babf640cd2fb16f7e2ea4ecaba3d32130136da0d339e"
+    },
+    {
+      "id": "ef-face-m03-elder-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-elder-v3.png",
+      "sha256": "86fa41072719f40587fa8f6bab77995f9856b68f53b42a29dddfa305d41dc6ea",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        0,
+        2,
+        1072,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-elder-v3-prompt.txt",
+      "promptSha256": "34371f2cb58667221afeacbe309e9f80da158583e2a74a19c4ee7999e85293eb",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-elder-v3.generation.json"
+      ],
+      "provenanceSha256": "5cf97934d7946d799f24e6ffe7994fd41e5809f51dfe7b27c4711170fde90965",
+      "provenanceAssetId": "ef-face-m03-elder-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-elder-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-elder-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "canonicalModel": "source/models/ef-model-male-elder-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-1c7b25a3-62dc-4c72-9538-d491690707fa.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "86fa41072719f40587fa8f6bab77995f9856b68f53b42a29dddfa305d41dc6ea"
+    },
+    {
+      "id": "ef-face-m03-infant-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-infant-v3.png",
+      "sha256": "0e0608c7bee338cca121a336944ef6d705ba0da79e1cc9495fa84b892aae7957",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        172,
+        31,
+        882,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-infant-v3-prompt.txt",
+      "promptSha256": "d4343382fb57202406024611f83cf8298024f93198e5dab9e9799aa8d1a6a8d6",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-infant-v3.generation.json"
+      ],
+      "provenanceSha256": "da267cc68d847a2dd9608cf1c748ad0ecab4dfe7521f132d228af04af6adc4ac",
+      "provenanceAssetId": "ef-face-m03-infant-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-infant-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-infant-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "infant",
+      "canonicalModel": "source/models/ef-model-male-infant-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-82e82032-5669-481b-a261-268fe5ffb90b.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "0e0608c7bee338cca121a336944ef6d705ba0da79e1cc9495fa84b892aae7957"
+    },
+    {
+      "id": "ef-face-m03-middle-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-middle-v3.png",
+      "sha256": "b77164cf177a494cb84bf60051200b81f7b56ab97d1088ac38920c1010432f61",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        5,
+        1102,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-middle-v3-prompt.txt",
+      "promptSha256": "34371f2cb58667221afeacbe309e9f80da158583e2a74a19c4ee7999e85293eb",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-middle-v3.generation.json"
+      ],
+      "provenanceSha256": "cc7a08898b33161d0ec981a08a665238e620a17041408966956b681061bdaca1",
+      "provenanceAssetId": "ef-face-m03-middle-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-middle-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-middle-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "canonicalModel": "source/models/ef-model-male-middle-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-0937c534-b1d8-4611-9561-99ce94347344.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "b77164cf177a494cb84bf60051200b81f7b56ab97d1088ac38920c1010432f61"
+    },
+    {
+      "id": "ef-face-m03-youth-v3",
+      "kind": "faces",
+      "role": "internal-face-feature-edit-on-whole-model",
+      "path": "source/faces/ef-face-m03-youth-v3.png",
+      "sha256": "3291f1e65eb69cfe3e98980c1a6386ea00922c29e11c294f2621848654104f86",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        59,
+        11,
+        1017,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-face-m03-youth-v3-prompt.txt",
+      "promptSha256": "20a11bf633fc5fb135fce74b1510abbbcff36112036bf7e05df382e986a2d8cd",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/faces/ef-face-m03-youth-v3.generation.json"
+      ],
+      "provenanceSha256": "1154dcda2a78abe0243349c13411b964709f030efe55b0742534477810bd06cb",
+      "provenanceAssetId": "ef-face-m03-youth-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-youth-v3.png",
+        "../ordinary-v1/source/heads/ef-h-m03-youth-v1.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "canonicalModel": "source/models/ef-model-male-youth-v3.png",
+      "preservationPolicy": "Use only the interior face from this raw edit; canonical complete model remains authoritative outside that face region. Never cut or substitute the head/neck.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-0734ff7b-314c-454e-aa2b-268ac6d81eea.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "3291f1e65eb69cfe3e98980c1a6386ea00922c29e11c294f2621848654104f86"
+    },
+    {
+      "id": "ef-w-female-aristocrat-v3",
+      "kind": "wardrobe",
+      "role": "clothing-only-overlay-on-canonical-adult-model",
+      "path": "source/wardrobe/ef-w-female-aristocrat-v3.png",
+      "sha256": "2b5abb993cdbff40336bc5292e47ed11ff539dfe0e954e4406da37f91e3366a4",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        600,
+        1024,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-w-female-aristocrat-v3-prompt.txt",
+      "promptSha256": "1326add6143356b8a73ec4b6f67abc6948b18ca0924b2e9a4a2b3c666c17b224",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-aristocrat-v3.generation.json"
+      ],
+      "provenanceSha256": "657fbbf000d7984a4341e180439c536de0583f51dbf56d0220caeeb299be874f",
+      "provenanceAssetId": "ef-w-female-aristocrat-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "aristocrat",
+      "dependencyUse": "New clothing-only royalty/aristocrat overlay; does not create or replace a body model.",
+      "canonicalModel": "source/models/ef-model-female-adult-v3.png",
+      "fitPolicy": "Original adult canonical model is the body authority. Clothing-only overlay, requested original native-frame placement; register and verify fit in derived pipeline.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-0e01c412-d91e-47f0-82a5-6a56c05532aa.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "2b5abb993cdbff40336bc5292e47ed11ff539dfe0e954e4406da37f91e3366a4"
+    },
+    {
+      "id": "ef-w-female-royalty-v3",
+      "kind": "wardrobe",
+      "role": "clothing-only-overlay-on-canonical-adult-model",
+      "path": "source/wardrobe/ef-w-female-royalty-v3.png",
+      "sha256": "5dd578d14c7022729405f37e88709b34433b61437363534c4db65dba342a5740",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        89,
+        599,
+        1042,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-w-female-royalty-v3-prompt.txt",
+      "promptSha256": "89d23e167e61a915414d8aa1ca5dd9eb3e590b8f402161434431174d0bd570cf",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-female-royalty-v3.generation.json"
+      ],
+      "provenanceSha256": "f63431fec1781c0889acba57e46a0e76cbb28bef2d59f6e84cfe4d4de5cff28a",
+      "provenanceAssetId": "ef-w-female-royalty-v3",
+      "referencePaths": [
+        "source/models/ef-model-female-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "royalty",
+      "dependencyUse": "New clothing-only royalty/aristocrat overlay; does not create or replace a body model.",
+      "canonicalModel": "source/models/ef-model-female-adult-v3.png",
+      "fitPolicy": "Original adult canonical model is the body authority. Clothing-only overlay, requested original native-frame placement; register and verify fit in derived pipeline.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-6b0221ec-da58-498c-a39a-dc668999402c.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "5dd578d14c7022729405f37e88709b34433b61437363534c4db65dba342a5740"
+    },
+    {
+      "id": "ef-w-male-aristocrat-v3",
+      "kind": "wardrobe",
+      "role": "clothing-only-overlay-on-canonical-adult-model",
+      "path": "source/wardrobe/ef-w-male-aristocrat-v3.png",
+      "sha256": "f90e4e0431418be9ef16f1bef5fe1ce002bf0b45536ad50951bdacd9b95b4deb",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        2,
+        545,
+        1058,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-w-male-aristocrat-v3-prompt.txt",
+      "promptSha256": "5760315d1b83fd9f82cd5d2e0f950cf563f93a077b550365a3fa22363eadb806",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-aristocrat-v3.generation.json"
+      ],
+      "provenanceSha256": "6804ae245a5b1519b9315ec2713055bc368c4c3c91777499d4eb5ce40b6724aa",
+      "provenanceAssetId": "ef-w-male-aristocrat-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "aristocrat",
+      "dependencyUse": "New clothing-only royalty/aristocrat overlay; does not create or replace a body model.",
+      "canonicalModel": "source/models/ef-model-male-adult-v3.png",
+      "fitPolicy": "Original adult canonical model is the body authority. Clothing-only overlay, requested original native-frame placement; register and verify fit in derived pipeline.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-f83bc851-e0eb-46ef-a3ba-609dee8650bc.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "f90e4e0431418be9ef16f1bef5fe1ce002bf0b45536ad50951bdacd9b95b4deb"
+    },
+    {
+      "id": "ef-w-male-royalty-v3",
+      "kind": "wardrobe",
+      "role": "clothing-only-overlay-on-canonical-adult-model",
+      "path": "source/wardrobe/ef-w-male-royalty-v3.png",
+      "sha256": "b632c55a1a745b86025dc5622b3007ab1e59c6f813935ed5f5d3f2b036ae1b6b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        527,
+        1100,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "source/prompts/ef-w-male-royalty-v3-prompt.txt",
+      "promptSha256": "84725560bf9800ae2d03ff39a894f2804d71ad3e49789413156cf4352dcdadc7",
+      "promptLocalOnly": true,
+      "provenance": [
+        "source/wardrobe/ef-w-male-royalty-v3.generation.json"
+      ],
+      "provenanceSha256": "a9c5b0f612b837d0060a473f266f6aa8e90bf3d60b02ef394c592592f6983726",
+      "provenanceAssetId": "ef-w-male-royalty-v3",
+      "referencePaths": [
+        "source/models/ef-model-male-adult-v3.png"
+      ],
+      "sourceStatus": "new-generated",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "royalty",
+      "dependencyUse": "New clothing-only royalty/aristocrat overlay; does not create or replace a body model.",
+      "canonicalModel": "source/models/ef-model-male-adult-v3.png",
+      "fitPolicy": "Original adult canonical model is the body authority. Clothing-only overlay, requested original native-frame placement; register and verify fit in derived pipeline.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-a5e86514-dda3-4c2d-a44b-66429c8fbcd9.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "b632c55a1a745b86025dc5622b3007ab1e59c6f813935ed5f5d3f2b036ae1b6b"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "ef-w-male-everyday-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-everyday-v2.png",
+      "sha256": "5b50261f8da45f5d0dc448e85e773a3020aa1d117b4ea4cef516b40ed7f9d602",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        526,
+        1102,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-everyday-v2-prompt.txt",
+      "promptSha256": "43d4f3520e00514fccf7f397c744d765a6d3c8c43b3e2dbd901d1ed49255f643",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-everyday-v2.generation.json"
+      ],
+      "provenanceSha256": "3152c21c3e977267ec006c800a5f7a0a3b36115da5e0df9265567989c0f0c8fd",
+      "provenanceAssetId": "ef-w-male-everyday-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "everyday",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-76fbe9b8-0013-4bc6-804e-a84910f8cdac.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "5b50261f8da45f5d0dc448e85e773a3020aa1d117b4ea4cef516b40ed7f9d602"
+    },
+    {
+      "id": "ef-w-male-work-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-work-v2.png",
+      "sha256": "fc1827d9c003d6b2c2f7c89726f47d8cc06b2f3a1c7e270b3fb6c161292eccb7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        527,
+        1102,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-work-v2-prompt.txt",
+      "promptSha256": "d1d9c29543c04c04c845f7fae1a7add5ccfa4c972263b6619b4dcde7c74b9582",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-work-v2.generation.json"
+      ],
+      "provenanceSha256": "132a7c72583df7fffc3202ae3b2afad741c4fb50a9d3cba4f514b4c9cff58da9",
+      "provenanceAssetId": "ef-w-male-work-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "work",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-4587545a-2388-4317-864a-792cadb2e476.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "fc1827d9c003d6b2c2f7c89726f47d8cc06b2f3a1c7e270b3fb6c161292eccb7"
+    },
+    {
+      "id": "ef-w-male-maritime-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-maritime-v2.png",
+      "sha256": "14dd0bd4e1437970bdc027037ec5e89d48ea3553b2a77a6aa50c47f8b5ccbb16",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        24,
+        525,
+        1099,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-maritime-v2-prompt.txt",
+      "promptSha256": "f6269722dbe5959981df25e8d9b54bf93ef3fe1a951ec0c1d55b828dc2f64e2d",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-maritime-v2.generation.json"
+      ],
+      "provenanceSha256": "0ec09ece25ce7de8b58b8422dc578c4b1def23adde661982d27b6b1552464574",
+      "provenanceAssetId": "ef-w-male-maritime-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "maritime",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-e57f6570-9930-4f10-bf80-3580c24aa1d9.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "14dd0bd4e1437970bdc027037ec5e89d48ea3553b2a77a6aa50c47f8b5ccbb16"
+    },
+    {
+      "id": "ef-w-male-commerce-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-commerce-v2.png",
+      "sha256": "6cb001633e18368afcf46ec47c621a7d044cd4998c67cdec84bb9fa590b53fef",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        526,
+        1103,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-commerce-v2-prompt.txt",
+      "promptSha256": "3b5a587ac7794238fafbfd87b1481b14a7983eae906039dd79241315e688ebc4",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-commerce-v2.generation.json"
+      ],
+      "provenanceSha256": "8f2efdcec9cfbbfa6ea96777d668ce255b4387e7c3e36eadbd02848b245b1177",
+      "provenanceAssetId": "ef-w-male-commerce-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "commerce",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-9a77b6e1-9f82-4261-8d32-3adfdfc5609e.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "6cb001633e18368afcf46ec47c621a7d044cd4998c67cdec84bb9fa590b53fef"
+    },
+    {
+      "id": "ef-w-male-scholarly-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-scholarly-v2.png",
+      "sha256": "aeb9f6142938a50399807edad5b07f080778e429867dda0100024b563a05ce0b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        530,
+        1101,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-scholarly-v2-prompt.txt",
+      "promptSha256": "e7822a9a7df801a9f66bfe08e35e22e6917a5e8d9e45e84c363ccea67f36cbdf",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-scholarly-v2.generation.json"
+      ],
+      "provenanceSha256": "1984c2199c021a9f296ae6e5a41e39ab0f04a31ff8fd8aa5e13b7d6f2907fdb6",
+      "provenanceAssetId": "ef-w-male-scholarly-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "scholarly",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-c9e8c7c7-6e85-4549-acd9-8a8ba9936827.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "aeb9f6142938a50399807edad5b07f080778e429867dda0100024b563a05ce0b"
+    },
+    {
+      "id": "ef-w-male-military-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-military-v2.png",
+      "sha256": "5652eaebea944e62791159d39dec0959db312db13a23899e9e600d35ab3b742b",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        20,
+        524,
+        1099,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-military-v2-prompt.txt",
+      "promptSha256": "e383bfdf8fbb40aba50137440dc7a70ae572bd9df507967fe5ccf749083db190",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-military-v2.generation.json"
+      ],
+      "provenanceSha256": "9f43dd8b8e507904965711d7ad3c204d624263563209fda4418dd9b6dc10dfac",
+      "provenanceAssetId": "ef-w-male-military-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "military",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-5722668f-cc9e-420a-b848-0729330ca88b.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "5652eaebea944e62791159d39dec0959db312db13a23899e9e600d35ab3b742b"
+    },
+    {
+      "id": "ef-w-male-elite-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-elite-v2.png",
+      "sha256": "b82842fed10799f0f9d1700931fd3e9997f1595f3d6193ca7635ff7d3547477c",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        19,
+        520,
+        1098,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-elite-v2-prompt.txt",
+      "promptSha256": "41667211480e2a2b63a17051bcf1aac3815df5860338ab8786a6990424be9987",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-elite-v2.generation.json"
+      ],
+      "provenanceSha256": "124d38c65664959c1949cf25255f1f835eb1b245b2e3753af5ea4b0d20cda442",
+      "provenanceAssetId": "ef-w-male-elite-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "elite",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-aba8ba99-47bd-4edd-9a5c-cb18932c61d4.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "b82842fed10799f0f9d1700931fd3e9997f1595f3d6193ca7635ff7d3547477c"
+    },
+    {
+      "id": "ef-w-male-performance-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-performance-v2.png",
+      "sha256": "21e77507bd7216e7b69da3ed048c14a51083fab460ba1926e53049fc5a582bb7",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        21,
+        529,
+        1101,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-performance-v2-prompt.txt",
+      "promptSha256": "b7e8b40dbf708b0984831137d2ba95e9815e732d3433d5da0459883dd7594bed",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-performance-v2.generation.json"
+      ],
+      "provenanceSha256": "0f37d4e7826ab08f00778829efef2686f2cf4f0226691b9f1ce9c68b07785fca",
+      "provenanceAssetId": "ef-w-male-performance-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "performance",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-3dbc74dc-4ed8-47e1-9999-09780ae6aaa9.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "21e77507bd7216e7b69da3ed048c14a51083fab460ba1926e53049fc5a582bb7"
+    },
+    {
+      "id": "ef-w-male-infant-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-male-infant-v2.png",
+      "sha256": "a1eb4a273494bfbc8e9faba35caaff269d251208c2c0a7303dfc463541e62173",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        34,
+        525,
+        1082,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-male-infant-v2-prompt.txt",
+      "promptSha256": "26ac96048326c16998c99739c50cc42b2e5ba03c937edd82a40476d3456dc1bf",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-male-infant-v2.generation.json"
+      ],
+      "provenanceSha256": "626929be05836b16e64d9cf50e582c14797a7a387525a18d434fab79da807c67",
+      "provenanceAssetId": "ef-w-male-infant-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-male-waist-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "male",
+      "wardrobeId": "infant",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f2-dd3b-7771-9289-a8544050c5b9\\exec-5596cabc-7751-47aa-8076-ee6e1d9363a8.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "a1eb4a273494bfbc8e9faba35caaff269d251208c2c0a7303dfc463541e62173"
+    },
+    {
+      "id": "ef-w-female-everyday-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-everyday-v2.png",
+      "sha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        600,
+        1030,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-everyday-v2-prompt.txt",
+      "promptSha256": "498cf5af79bd6fab2df3acda5a77dd28af2529d7a916711e5745579d24686812",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-everyday-v2.generation.json"
+      ],
+      "provenanceSha256": "c1fc2ba4bd17828da5b75539547107a12ddfefee2a5b3469832e176bbd0d9c94",
+      "provenanceAssetId": "ef-w-female-everyday-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "everyday",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-1951b6a7-5504-42da-bcd7-454af3838c95.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "a547330f278ad6891eadaf8873973d654537a9d4b49c3d0a9d207d6c2aa1658d"
+    },
+    {
+      "id": "ef-w-female-work-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-work-v2.png",
+      "sha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        55,
+        615,
+        994,
+        1459
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-work-v2-prompt.txt",
+      "promptSha256": "396e2678c03ae7bde9909d9436421471a1095f0ceea662991dd00f4230e12c3b",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-work-v2.generation.json"
+      ],
+      "provenanceSha256": "a172232177a00c0f6e6bafb0ae823fe803c65261945665cc76e2b16a67ef2596",
+      "provenanceAssetId": "ef-w-female-work-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "work",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d3c5a0e4-631f-4e3a-8db3-c80d43317a1c.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "743080ef75514b7b00d8d13e9ba2634e8d2c0ec9483e3ab441b7d9ec9b42f511"
+    },
+    {
+      "id": "ef-w-female-maritime-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-maritime-v2.png",
+      "sha256": "548404aae86358eacc7edb8c348bd9c9f3417a90742559d082ce4322c6896d73",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        49,
+        625,
+        976,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-maritime-v2-prompt.txt",
+      "promptSha256": "b9051d236ab37c233627560d910fa45e2beddfabf0784465ad70d58443b7d768",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-maritime-v2.generation.json"
+      ],
+      "provenanceSha256": "9794d74144d104d501f73a23a0a79b599a9cef1e444628d7086949463ad05ffa",
+      "provenanceAssetId": "ef-w-female-maritime-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "maritime",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-e241ddbe-e64d-41c2-b9be-6bbf8416a955.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "548404aae86358eacc7edb8c348bd9c9f3417a90742559d082ce4322c6896d73"
+    },
+    {
+      "id": "ef-w-female-commerce-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-commerce-v2.png",
+      "sha256": "e07568a73530fb45b867854670b458e5a5cd7ad7bfc6e34ec728922543a80d48",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        42,
+        624,
+        1012,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-commerce-v2-prompt.txt",
+      "promptSha256": "52a64fdd9a77d6ad79112f9963f6968d0fb5388cd1e6eb3349d7dc937ca9cdd6",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-commerce-v2.generation.json"
+      ],
+      "provenanceSha256": "eceec13aaa5d8b9ed2598d2ee5752581fbff9beccf99ffd8828684ba0059406c",
+      "provenanceAssetId": "ef-w-female-commerce-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "commerce",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-65d1cf12-08ff-48f0-8e23-82eb81517fd5.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "e07568a73530fb45b867854670b458e5a5cd7ad7bfc6e34ec728922543a80d48"
+    },
+    {
+      "id": "ef-w-female-scholarly-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-scholarly-v2.png",
+      "sha256": "86ab72660b478c9d651ba59da2ee9b9d7758d6f5570883d627c347818962a96d",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        62,
+        625,
+        1008,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-scholarly-v2-prompt.txt",
+      "promptSha256": "66169ad4b8fb541906546b0efdeaa092ceba697d7394e5db55fb0a20ba67dac5",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-scholarly-v2.generation.json"
+      ],
+      "provenanceSha256": "4c0f0dc8d0e0e9de65977301d80de48588fbcb72b207ea9e5e649e89f2d512a4",
+      "provenanceAssetId": "ef-w-female-scholarly-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "scholarly",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-ac5891e7-5ec4-4c3f-bb32-2dd86a446e11.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "86ab72660b478c9d651ba59da2ee9b9d7758d6f5570883d627c347818962a96d"
+    },
+    {
+      "id": "ef-w-female-military-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-military-v2.png",
+      "sha256": "616e2f290c4090246c0c715ae1d14674103f9518cfddd6c2808ccbe73b7a03a6",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        88,
+        597,
+        1012,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-military-v2-prompt.txt",
+      "promptSha256": "db119c3919c55f890b143460a2a5815de2731145d0f1f00844363129433bcf6e",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-military-v2.generation.json"
+      ],
+      "provenanceSha256": "8be2832faaebd48d143ceda4535072dc9a1e6bbaaaa5df7efc01cdcae4381ebb",
+      "provenanceAssetId": "ef-w-female-military-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "military",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-ccee4296-6f90-4ffa-9e18-77f5f5b3406d.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "616e2f290c4090246c0c715ae1d14674103f9518cfddd6c2808ccbe73b7a03a6"
+    },
+    {
+      "id": "ef-w-female-elite-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-elite-v2.png",
+      "sha256": "c6c76fac07e2b364a48a683a966098155aa596bb8577aee16f97d6ac76433ca6",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        48,
+        619,
+        1021,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-elite-v2-prompt.txt",
+      "promptSha256": "dc8f36394962e8335050a4ae0e0da70700283c34b54dc02628fbc9ab39c67042",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-elite-v2.generation.json"
+      ],
+      "provenanceSha256": "0e65ad680141b83c501712a06a2de9cfc7fa87e4e4e2661a704ffc34b5a8e393",
+      "provenanceAssetId": "ef-w-female-elite-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "elite",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-0a31bd4c-42fe-4474-82d2-de26a48d72b1.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "c6c76fac07e2b364a48a683a966098155aa596bb8577aee16f97d6ac76433ca6"
+    },
+    {
+      "id": "ef-w-female-performance-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-performance-v2.png",
+      "sha256": "3aa08e5918618f0f452e61fca790c8d624fb91a3679fc0587d3f7a58e844917c",
+      "size": [
+        1072,
+        1467
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        51,
+        628,
+        1021,
+        1467
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-performance-v2-prompt.txt",
+      "promptSha256": "d384109a8f714651217106198c4ad6151ed08fca9bbc45bcf54eca099e2541d8",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-performance-v2.generation.json"
+      ],
+      "provenanceSha256": "9e57c6358114cfdf94fe959dccacbfe7aa5cb4ee7e375c6306d448bb5952f821",
+      "provenanceAssetId": "ef-w-female-performance-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "performance",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-a3bdff19-18b7-4628-9bdc-a7ea8d128563.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "3aa08e5918618f0f452e61fca790c8d624fb91a3679fc0587d3f7a58e844917c"
+    },
+    {
+      "id": "ef-w-female-infant-v2",
+      "kind": "wardrobe",
+      "role": "reused-wardrobe-dependency",
+      "path": "../ordinary-v2/source/wardrobe/ef-w-female-infant-v2.png",
+      "sha256": "906418b2053c7a18dbe9d66e61ab867279e2f6f3bbf2f70f6f01049a7f6d3600",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBoundsAlpha128": [
+        144,
+        598,
+        958,
+        1402
+      ],
+      "fullyOpaquePixelsPresent": true,
+      "prompt": "../ordinary-v2/source/prompts/ef-w-female-infant-v2-prompt.txt",
+      "promptSha256": "a07d804ec4e6dcbd8ede1d69c12f5222d5e7efdc245908a7bf37262a5655af65",
+      "promptLocalOnly": true,
+      "provenance": [
+        "../ordinary-v2/source/wardrobe/ef-w-female-infant-v2.generation.json"
+      ],
+      "provenanceSha256": "98b539e5530ee1e672d0b9966482d8532ed32837db319c426368a1d003a60a22",
+      "provenanceAssetId": "ef-w-female-infant-v2",
+      "referencePaths": [
+        "../ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+        "../ordinary-v2/source/bodies/ef-b-female-v2.png"
+      ],
+      "sourceStatus": "reused-dependency",
+      "generator": "built-in image_gen",
+      "sex": "female",
+      "wardrobeId": "infant",
+      "dependencyUse": "Recorded raw wardrobe source; infant wrap retained as a dependency even when the continuous infant model's swaddle is used instead.",
+      "toolOriginalPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-96c98178-7e63-4219-933a-65d3cc4b261b.png",
+      "toolOriginalAvailable": true,
+      "originalCopyExact": true,
+      "toolOriginalSha256": "906418b2053c7a18dbe9d66e61ab867279e2f6f3bbf2f70f6f01049a7f6d3600"
+    }
+  ],
+  "audit": {
+    "status": "passed",
+    "sourcePNGsIndexed": 40,
+    "dependenciesIndexed": 18,
+    "exactPromptsLocated": 58,
+    "generationSidecarsLocated": 58,
+    "originalCopiesVerified": 58,
+    "originalToolFilesUnavailable": [],
+    "copyMismatches": [],
+    "sourcesWithoutAlpha255": [
+      "ef-model-male-infant-v3"
+    ],
+    "allSourcePNGAlphaVerified": true,
+    "sourceImagesModified": false,
+    "copiedAdultPromptsAndSidecars": "Portable pointers to original v2 complete-body and v3-neck-proof raw-edit provenance."
+  }
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "number": 1,
+    "name": "Becoming",
+    "bounds": {
+      "height": 226,
+      "width": 220,
+      "x": 18,
+      "y": 12
+    }
+  },
+  {
+    "number": 2,
+    "name": "Quiet Amulet",
+    "bounds": {
+      "height": 194.07142857142856,
+      "width": 196,
+      "x": 30,
+      "y": 39.92857142857143
+    }
+  },
+  {
+    "number": 3,
+    "name": "Crossroads",
+    "bounds": {
+      "height": 191.5,
+      "width": 220,
+      "x": 18,
+      "y": 47.5
+    }
+  },
+  {
+    "number": 4,
+    "name": "Earth Seal",
+    "bounds": {
+      "height": 195,
+      "width": 216,
+      "x": 20,
+      "y": 39
+    }
+  },
+  {
+    "number": 5,
+    "name": "Dawnwing",
+    "bounds": {
+      "height": 180,
+      "width": 228,
+      "x": 14,
+      "y": 53
+    }
+  },
+  {
+    "number": 6,
+    "name": "Upward",
+    "bounds": {
+      "height": 216,
+      "width": 156.26250927472572,
+      "x": 49.86874536263713,
+      "y": 18
+    }
+  },
+  {
+    "number": 7,
+    "name": "Unfolding",
+    "bounds": {
+      "height": 176,
+      "width": 182,
+      "x": 37,
+      "y": 44
+    }
+  },
+  {
+    "number": 8,
+    "name": "Heart of a Life",
+    "bounds": {
+      "height": 194,
+      "width": 212,
+      "x": 22,
+      "y": 31
+    }
+  },
+  {
+    "number": 9,
+    "name": "Another Beginning",
+    "bounds": {
+      "height": 211,
+      "width": 206,
+      "x": 25,
+      "y": 31
+    }
+  },
+  {
+    "number": 10,
+    "name": "Toward the Horizon",
+    "bounds": {
+      "height": 203,
+      "width": 224,
+      "x": 16,
+      "y": 29
+    }
+  }
+]

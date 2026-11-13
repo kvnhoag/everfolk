@@ -1,0 +1,54 @@
+EVERFOLK / ALEXANDER / FACE AND EYE PIXEL CALIBRATION V9
+
+Scope
+Filter recalibration only. The existing approved painting, raised pose, blade,
+hand, clothing and cape are not regenerated or painted again. The input is an
+unchanged copy of v8/source/alexander-blade-only.png; its source SHA-256 is
+bdcc4654a4253aabccb656231cd85fbcb0ab66c08c6eb1cf8bb52bf791feb55f.
+The prior 280 x 350 / 3x pixel image is retained as the coarse base.
+
+Calibration
+Keep the exact existing 3-pixel coarse blocks outside the head selection.
+Use a 420 x 525 / 2x PixelOE contrast detail pass for the face, with outline
+expansion thickness 0. This avoids merging small eyelid/pupil structures into
+heavy dark marks. Pure area downsampling and a 60%-area/40%-contrast mixture
+were inspected and rejected because they muted iris highlights.
+No pupil, iris or catchlight is newly drawn. Existing source detail is sampled
+on the finer grid; the source's chiaroscuro shadow remains.
+
+Regional composition
+The ellipse and critical eye rectangles are defined in OUTPUT pixel coordinates
+in source/face-detail-config.json, specifically for this approved composition.
+Coarse and fine grids share origin (0,0). Whole 6 x 6 cells, the least common
+multiple of 3 and 2, choose either complete coarse or complete fine pixels.
+The outer ring uses a fixed Bayer threshold to choose whole cells, with no
+colour/alpha blending or boundary blur. This is a mixed-grid finish, not a
+single uniform logical image. 603 common cells select detail (21,708 pixels),
+with 21,485 changed pixels. Every unselected pixel matches the old coarse base.
+Both configured eye rectangles are covered entirely by the detail pass.
+
+Reproducibility
+New optional helper installed with the existing Everfolk asset skill:
+C:/Users/Legion/.codex/skills/everfolk-asset-workflow/scripts/pixelate_regions.py
+The original whole-image helper and its defaults remain unchanged.
+source/pixelate-face.ps1 records the invocation; -Overwrite allows an explicit
+rerun into this version. Source/base/config hashes, exact blocks, critical eye
+coverage, deterministic repeat, PNG readback and unchanged input checks pass.
+The same profile reproduced byte-identical output across separate processes.
+Wrong-source metadata was rejected before rendering. No dependencies installed.
+
+Output
+Pixel portrait: assets/alexander-card-pixel.png (840 x 1050).
+SHA-256: 89fe6da957a7cd8c5612a27056b6e195a9f9d5bc8f3a2b6443c148699057025c.
+Mask/detail pass and QA: qa/face-detail-mask.png, qa/portrait-detail-pass.png,
+qa/face-detail.json. Comparison: review/Alexander-Eye-Detail-Comparison.png.
+The comparison uses matched source/current/recalibrated face crops and exact
+nearest-neighbour enlargement for both pixel panels.
+
+Card
+Native ArtCraft card master retains independent frame, live type, emblem,
+rarity and footer. Character art remains flattened. The delivery PNG uses the
+mixed-grid portrait at 100% under native type/frame exports; all 765,234 checked
+unobscured portrait pixels match exactly. Fonts resolve exactly and reopening
+the native card reproduces its render. Full and half-size previews reviewed.
+No historic-reference, painting, prompt, game code or NFT-minting change.

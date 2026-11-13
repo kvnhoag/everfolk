@@ -1,0 +1,50 @@
+[
+  {
+    "sex": "male",
+    "baseline": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v2\\source\\body-references\\ef-r-male-waist-v2.png",
+    "baselineSha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7",
+    "generatedEdit": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-face-only-male-v3.png",
+    "generatedEditSha256": "d8ec89da2eb29456b34e799dadd0c9427f1b91dc860c50c44dc06775f3c3bf69",
+    "faceFeatureMask": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\qa\\face-feature-mask-male.png",
+    "faceFeatureBoxNative": [
+      409,
+      175,
+      715,
+      445
+    ],
+    "protectedFromNativeRow": 455,
+    "allPixelsOutsideFaceUnchanged": true,
+    "neckShouldersTorsoRGBAExact": true,
+    "originalAlphaExact": true,
+    "neckCutOrWarpApplied": false,
+    "result": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-model-male-face-variant-v3.png",
+    "resultSha256": "cccfe2903571bc6ef2c3e931e71102f5a476c6f2b3fbdf43f8321125aec4c68c",
+    "opaqueSource": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-model-male-opaque-v3.png",
+    "opaqueSourceSha256": "ba6c8425ca3017e5561860450fbea90dc785dd6fb1766587da2bef8dc9bee4f4",
+    "status": "bounded proof; no 192-image rebuild claimed"
+  },
+  {
+    "sex": "female",
+    "baseline": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v2\\source\\body-references\\ef-r-female-waist-v2.png",
+    "baselineSha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c",
+    "generatedEdit": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-face-only-female-v3.png",
+    "generatedEditSha256": "ba0be7b14f8152409d92827fbc431ddaa8cb9a3d1d3e7cff9a8dd8c53c506744",
+    "faceFeatureMask": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\qa\\face-feature-mask-female.png",
+    "faceFeatureBoxNative": [
+      410,
+      184,
+      714,
+      466
+    ],
+    "protectedFromNativeRow": 480,
+    "allPixelsOutsideFaceUnchanged": true,
+    "neckShouldersTorsoRGBAExact": true,
+    "originalAlphaExact": true,
+    "neckCutOrWarpApplied": false,
+    "result": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-model-female-face-variant-v3.png",
+    "resultSha256": "b57a2145b1a5443f1a5e0b67d0650dc9ceed621180631ea7f37800eb29f3a60a",
+    "opaqueSource": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-model-female-opaque-v3.png",
+    "opaqueSourceSha256": "fec7af6403832b3d78c610aa53e3de6657361b3c906e91898fec1246c82f623c",
+    "status": "bounded proof; no 192-image rebuild claimed"
+  }
+]

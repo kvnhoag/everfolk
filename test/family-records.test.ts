@@ -25,7 +25,7 @@ function fixture(): WorldPack {
   };
 }
 
-test("new births record distinct parents and both grandparent lines with coherent ages and work", () => {
+test("family rules without a rarity override retain both grandparent lines, coherent ages and work", () => {
   const engine = createEngine(fixture());
   const identities = new Set<string>();
   for (let index = 0; index < 32; index++) {

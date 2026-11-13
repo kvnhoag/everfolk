@@ -21,7 +21,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
 } });
 const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
 const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
-const { default: BirthAvatarPicker } = await import("../client/components/BirthAvatarPicker.tsx");
+const { default: BirthPortraitPreview } = await import("../client/components/BirthPortraitPreview.tsx");
 hooks.deregister();
 const engine = createEngine(pack);
 
@@ -57,7 +57,7 @@ test("dating reveals the generated person with a matching portrait and household
   const html = renderToStaticMarkup(createElement(CharacterPanel, { life, world: engine.world, initialSection: "relationships", onActivity() {} }));
   assert.match(html, />Relationships<\/button>/);
   assert.match(html, /Love interest: Kleopatra/);
-  assert.match(html, /portraits\/merchant-household\/female\/adult-2.svg/);
+  assert.match(html, /portraits\/ordinary-v3\/ef-p-f03-adult-maritime-v3.png/);
   assert.doesNotMatch(html, /\{person:|<h4>A harbor acquaintance<\/h4>/);
   const household = renderToStaticMarkup(createElement(HouseholdSummary, { life, world: engine.world, onOpenCharacter() {} }));
   assert.match(household, /Kleopatra/);
@@ -72,18 +72,18 @@ test("former dated people remain in history without exposing undated acquaintanc
   assert.equal((html.match(/character-person-avatar/g) ?? []).length, 1);
 });
 
-test("birth offers three appearance choices with all six matching life stages for either sex", () => {
-  let chosen = 0;
+test("birth shows the randomly assigned face through all six stages with no portrait controls", () => {
   for (const sex of ["male", "female"] as const) {
     const life = structuredClone(engine.start(`avatar-ui-${sex}`));
     life.character!.sex = sex; life.character!.avatarVariant = 1;
-    const html = renderToStaticMarkup(createElement(BirthAvatarPicker, { life, world: engine.world, onChoose() { chosen++; } }));
-    assert.equal((html.match(/aria-pressed=/g) ?? []).length, 3);
-    assert.equal((html.match(/aria-pressed="true"/g) ?? []).length, 1);
-    for (const stage of ["infant", "child", "youth", "adult", "middle", "elder"]) assert.ok(html.includes(`/${sex}/${stage}-1.svg`));
+    const before = structuredClone(life);
+    const html = renderToStaticMarkup(createElement(BirthPortraitPreview, { life, world: engine.world }));
+    assert.doesNotMatch(html, /<button|aria-pressed=|Portrait choices|Choose your portrait/);
+    assert.equal((html.match(/<img\b/g) ?? []).length, 7);
+    for (const stage of ["infant", "child", "youth", "adult", "middle", "elder"]) assert.ok(html.includes(`ef-p-${sex === "female" ? "f" : "m"}02-${stage}-`));
     assert.match(html, new RegExp(sex === "female" ? "Born a girl" : "Born a boy"));
+    assert.deepEqual(life, before);
   }
-  assert.equal(chosen, 0, "Rendering must not accept a selection.");
 });
 
 test("an avatar command preserves the unrevealed birth and its exact starting ranges", () => {

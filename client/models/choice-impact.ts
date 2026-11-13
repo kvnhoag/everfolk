@@ -1,6 +1,8 @@
-import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
+import type { AristocratMetric, Choice, LifeState, RoyalMetric, WorldPack } from "../../src/types.ts";
 import { applyStatDelta } from "../../src/progression.ts";
 import { getOutcomeProbabilities } from "../../src/outcomes.ts";
+import { isRoyalLife, ROYAL_METRICS } from "../../src/royalty.ts";
+import { ARISTOCRAT_METRICS, isAristocratLife } from "../../src/aristocracy.ts";
 
 export interface ChoiceStatImpact {
   id: string;
@@ -19,6 +21,72 @@ export interface ChoiceImpact {
   canEndLife: boolean;
   /** Direct authored fatal-outcome probability, separate from annual mortality. */
   deathRisk: number;
+}
+
+export interface AccomplishmentPreview {
+  id: string;
+  title: string;
+  kind: "ordinary" | "prestige" | "ultimate";
+  probability: number;
+}
+
+/** Only direct, not-yet-earned cards count; accepted outcomes remain the authority. */
+export function getAccomplishmentPreviews(choice: Choice, life: LifeState, world: WorldPack): AccomplishmentPreview[] {
+  const rewards = new Map<string, AccomplishmentPreview>();
+  const earned = new Set(life.accomplishments?.map(record => record.achievementId));
+  for (const { outcome, probability } of getOutcomeProbabilities(world, life, choice)) {
+    const counted = new Set<string>();
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type !== "accomplishment" || counted.has(effect.achievement) || earned.has(effect.achievement)) continue;
+      counted.add(effect.achievement);
+      const achievement = world.legacy?.achievements.find(item => item.id === effect.achievement);
+      if (!achievement || probability <= 0) continue;
+      const preview = rewards.get(achievement.id) ?? { id: achievement.id, title: achievement.title, kind: achievement.kind, probability: 0 };
+      preview.probability = Math.min(1, preview.probability + probability);
+      rewards.set(achievement.id, preview);
+    }
+  }
+  return [...rewards.values()];
+}
+
+/** Royal funds and standing are separate from personal cash and attributes. */
+export function getRoyalImpact(choice: Choice, life: LifeState, world: WorldPack): ChoiceStatImpact[] {
+  if (!world.royalty || !life.royalty || !isRoyalLife(world, life) || !choice.outcomes.length) return [];
+  const initial = life.royalty;
+  const definitions = world.royalty.metrics;
+  const branches = choice.outcomes.map(outcome => {
+    const metrics: Record<RoyalMetric, number> = { ...initial };
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type === "royal") metrics[effect.metric] = applyStatDelta(definitions[effect.metric], metrics[effect.metric], effect.delta);
+    }
+    return metrics;
+  });
+  return ROYAL_METRICS.flatMap(metric => {
+    const deltas = branches.map(branch => branch[metric] - initial[metric]);
+    const min = Math.min(...deltas), max = Math.max(...deltas);
+    return min === 0 && max === 0 ? [] : [{ id: metric, label: definitions[metric].label, min, max, variable: min !== max }];
+  });
+}
+
+/** Estate previews preserve sequential bounds, just like accepted estate effects. */
+export function getAristocratImpact(choice: Choice, life: LifeState, world: WorldPack): ChoiceStatImpact[] {
+  if (!world.aristocracy || !life.aristocracy || !isAristocratLife(world, life) || !choice.outcomes.length) return [];
+  const initial = life.aristocracy, definitions = world.aristocracy.metrics;
+  const branches = choice.outcomes.map(outcome => {
+    const metrics: Record<AristocratMetric, number> = { ...initial };
+    for (const effect of outcome.effects) {
+      if (effect.type === "end") break;
+      if (effect.type === "aristocrat") metrics[effect.metric] = applyStatDelta(definitions[effect.metric], metrics[effect.metric], effect.delta);
+    }
+    return metrics;
+  });
+  return ARISTOCRAT_METRICS.flatMap(metric => {
+    const deltas = branches.map(branch => branch[metric] - initial[metric]);
+    const min = Math.min(...deltas), max = Math.max(...deltas);
+    return min === 0 && max === 0 ? [] : [{ id: metric, label: definitions[metric].label, min, max, variable: min !== max }];
+  });
 }
 
 /**

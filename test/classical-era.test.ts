@@ -52,7 +52,7 @@ function reach(engine: LifeEngine, life: LifeState, eventId: string, maxAge: num
 
 test("350 BCE births precede the foundation; retained 66 BCE lives keep their original pack", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.42.0"); assert.equal(world.startYear, -350);
+  assert.equal(world.version, "0.48.0"); assert.equal(world.startYear, -350);
   const engine = createEngine(world), life = engine.start("classical-birth");
   assert.equal(life.age, 0); assert.equal(life.year, -350);
   assert.equal(worldPlace(world, -350), "Rhakotis coast");
@@ -126,8 +126,11 @@ test("dated fiction distinguishes uncertain chronology and keeps the old era out
   assert.match(world.events.find(event => event.id === "classical-aristotle-journey")!.text, /Athens.*Lyceum/);
 });
 
-test("the era revision keeps the seven routes, avatar identities, growth curves and mortality values", () => {
-  assert.equal(world.legacy!.routes.length, 7); assert.equal(world.legacy!.achievements.length, 43);
+test("the era revision keeps the seven common routes alongside household routes, avatar identities, growth curves and mortality values", () => {
+  const commonRouteIds = new Set(previous.legacy.routes.map(route => route.id));
+  assert.deepEqual(world.legacy!.routes.filter(route => commonRouteIds.has(route.id)).map(route => route.id), previous.legacy.routes.map(route => route.id));
+  assert.equal(world.legacy!.routes.filter(route => !commonRouteIds.has(route.id)).length, 6);
+  assert.equal(world.legacy!.achievements.filter(item => !item.figure && commonRouteIds.has(item.routeId)).length, 43);
   assert.deepEqual(world.origins.slice(0, previous.origins.length).map(origin => origin.id), previous.origins.map(origin => origin.id));
   assert.equal(world.origins.length, 16);
   assert.deepEqual(world.character!.identity, previous.character.identity);

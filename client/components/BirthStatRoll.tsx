@@ -1,3 +1,5 @@
+import { isRoyalLife } from "../../src/royalty.ts";
+import { isAristocratLife } from "../../src/aristocracy.ts";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { BIRTH_ROLL_DURATION_MS, canRepresentBirthReelValue, getBirthDigitReels, getBirthReelLayout, getBirthRollFrame, getVisibleBirthRollResources, getBirthRollStats } from "../models/birth-stat-roll.ts";
@@ -133,6 +135,8 @@ function BirthStatRollSession({ life, world, revealed, onComplete, paused = fals
         <span className="birth-roll-card-state">{phase === "settled" ? "Set" : phase === "rolling" ? "Rolling" : "Waiting"}<i /></span>
       </div>;
     })}</div>
+    {(frame.originRevealed || settled) && isRoyalLife(world, life) && <p className="birth-royal-note">Your royal house has its own treasury. As you grow, guide its diplomacy, security and succession through the Royal council.</p>}
+    {(frame.originRevealed || settled) && isAristocratLife(world, life) && <p className="birth-royal-note">Your aristocratic estate has its own treasury. As you grow, guide its improvements, tenant agreements, patronage and inheritance through the Estate council.</p>}
     {resources.length > 0 && <div className={`birth-roll-resources is-${resourcePhase}`} aria-hidden="true">
       <div className="birth-resources-heading"><h4>Starting resources</h4><span>{resourcePhase === "settled" ? "Counted in total wealth" : resourcePhase === "rolling" ? "Rolling…" : "Waiting to roll"}</span></div>
       <table><caption className="sr-only">Starting resource quantities and market values</caption>

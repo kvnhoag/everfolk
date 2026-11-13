@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>11 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_11_Common_Hearth___color_device" data-name="11 Common Hearth / color device">
+      <polyline id="Welcoming_roof" data-name="Welcoming roof" points="31.36,74.88 80,35.2 128.64,74.88" fill="none" stroke="#24464b" stroke-width="7.68" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Open_hearth_doorway" data-name="Open hearth doorway" d="M48 71.04 L48 123.52 L68.48 123.52 L68.48 99.2 C76.16 90.667 83.84 90.667 91.52 99.2 L91.52 123.52 L112 123.52 L112 71.04" fill="none" stroke="#24464b" stroke-width="7.68" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon id="Hearth_spark" data-name="Hearth spark" points="80,55.68 84.48,69.12 97.92,73.6 84.48,78.08 80,91.52 75.52,78.08 62.08,73.6 75.52,69.12" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+EVERFOLK / ALEXANDER / BLADE ANGLE CORRECTION V7
+
+Requested correction
+The previous weapon looked oddly angled. Its handle rose steeply while the
+proximal blade turned into a shallow sweep immediately beyond the guard.
+The selected revision lowers the fist, bends the forearm naturally and raises
+the entire weapon on a coherent diagonal. Handle/tang/proximal blade share a
+continuous direction. The forward curve develops farther along the blade.
+Heroic blade scale and the flying cape are retained as artistic choices.
+
+Image provenance
+Built-in image editing performed a first join correction, retained as
+source/alexander-blade-draft-1.png with its prompt. That draft still swept too
+flatly; a second localized edit produced source/alexander-blade-revised.png.
+Selected final prompt: source/generation-prompt.txt.
+The edits preserve the existing v6 character and equipment direction while
+changing the right arm/hand/weapon assembly. This is generated painting, not
+a new individually authored ArtCraft brush pass or a literal reconstruction.
+
+Real weapon reference
+Official public-domain photograph, former Met record 2001.346, Greek iron
+machaira/kopis, fifth-fourth century BCE; upper weapon in the photograph.
+https://www.metmuseum.org/art/collection/search/257576
+https://collectionapi.metmuseum.org/api/collection/v1/iiif/257576/1752237/main-image
+Local: references/greek-machaira-met-2001.346.jpg, unchanged source photograph.
+The object was restituted in September 2025 and is no longer in the Met
+collection. It supports weapon type, not Alexander's personal weapon or the
+enlarged dimensions in this illustration. The comparison board labels the
+actual reference separately from both generated candidates.
+
+Inherited equipment and face direction
+MANN Alexander Mosaic inv.10020: shoulder pieces, edged cuirass and skirt
+strips; exact materials remain reconstructed. Photo: MANN / Giorgio Albano.
+Naples mounted bronze inv.4996: rider's right-shoulder rosette and mantle
+layering. Photo: Salvatore Siano, by permission of MANN, via Getty.
+These actual reference images are retained in references. See the source
+URLs and qualifications in ../alexander-equipment-v5/REFERENCE-NOTES.txt.
+The imagined face follows the Azara portrait direction established in v4.
+
+Pixel finish and card
+source/pixelate-card.ps1 invokes the installed everfolk-asset-workflow helper.
+PixelOE 1.0.0 uses a 420 x 525 logical grid and exact nearest-neighbour 2x
+enlargement to 840 x 1050, with palette reduction off. Deterministic repeat,
+exact integer blocks, PNG readback and unchanged source hash checks pass.
+The ArtCraft master keeps card frame, type, emblem, rarity and footer separate;
+the character painting remains a flattened illustration, not a clothing rig.
+Final PNG uses the original pixel portrait at 100% beneath the exported native
+frame/type overlay. It preserves every checked unobscured portrait RGB value:
+765,234 pixels checked, zero differing channels. Fonts resolve exactly, native
+reopening reproduces the card render, and the 450 x 630 review remains legible.
+QA: qa/portrait-pixel.json, qa/card-build.json, qa/final-crisp-export.json.
+
+Earlier variants remain unchanged. Card rarity, flavour and numbering are
+exploratory. No NFT was minted.

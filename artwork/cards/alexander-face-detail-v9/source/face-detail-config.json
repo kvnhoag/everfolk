@@ -1,0 +1,17 @@
+{
+  "base_pixel_size": 3,
+  "detail_pixel_size": 2,
+  "detail_outline_thickness": 0,
+  "regions": [
+    {
+      "name": "face-eyes",
+      "center": [360, 302],
+      "radius": [87, 96],
+      "inner_scale": 0.82
+    }
+  ],
+  "critical_boxes": [
+    {"name": "near-eye", "box": [341, 263, 375, 285]},
+    {"name": "far-eye", "box": [394, 267, 421, 288]}
+  ]
+}

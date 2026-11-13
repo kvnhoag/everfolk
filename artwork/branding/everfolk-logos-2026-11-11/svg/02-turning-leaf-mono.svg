@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>02 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_02_Turning_Leaf___mono_device" data-name="02 Turning Leaf / mono device">
+      <polygon id="Turning_Leaf___element_1" data-name="Turning Leaf / element 1" points="46.72,33.92 92.8,33.92 118.4,60.8 118.4,124.8 46.72,124.8" fill="none" stroke="#24464b" stroke-width="6.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon id="Turning_Leaf___element_2" data-name="Turning Leaf / element 2" points="92.8,33.92 92.8,62.08 118.4,62.08" fill="#24464b"/>
+      <path id="Turning_Leaf___element_3" data-name="Turning Leaf / element 3" d="M63.36 78.72 L97.92 78.72 M63.36 94.08 L97.92 94.08 M63.36 109.44 L83.84 109.44" fill="none" stroke="#24464b" stroke-width="5.12" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon id="Turning_Leaf___element_4" data-name="Turning Leaf / element 4" points="33.92,42.88 39.04,42.88 39.04,132.48 106.88,132.48 106.88,137.6 33.92,137.6" fill="#24464b"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

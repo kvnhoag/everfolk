@@ -3,6 +3,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { formatMoney } from "../models/wealth.ts";
 import { formatWealthStanding, getWealthComparison } from "../models/wealth-comparison.ts";
+import { householdManagement } from "../models/household-management.ts";
 import SectionHelp from "./SectionHelp.tsx";
 
 /** The dashboard uses the world's actual attributes and currency. */
@@ -10,6 +11,7 @@ export default function LifeOverview({ life, world, onOpenWealth }: {
   life: LifeState; world: WorldPack; onOpenWealth(): void;
 }) {
   const wealthId = useId();
+  const management = householdManagement(world, life);
   const wealth = getWealthComparison(world, life);
   return <section className="life-overview has-section-help" aria-label="Life at a glance">
     <dl className={`life-overview-facts${wealth ? " has-wealth" : ""}`}>
@@ -17,7 +19,12 @@ export default function LifeOverview({ life, world, onOpenWealth }: {
       <div><dt>Year</dt><dd>{formatYear(life.year)}</dd></div>
       {!wealth && <div><dt>Life stage</dt><dd>{life.age < 18 ? "Growing up" : "Adult"}</dd></div>}
     </dl>
-    {life.economy && wealth && <button type="button" className="overview-wealth" onClick={onOpenWealth} aria-label="Open total wealth and society comparison" aria-describedby={`${wealthId}-amount ${wealthId}-percentile ${wealthId}-cash`}>
+    {management ? <button type="button" className="overview-wealth" onClick={onOpenWealth} aria-label={management.kind === "royal" ? "Open royal treasury and council" : "Open estate treasury and council"}>
+      <span className="overview-wealth-metric"><span className="overview-wealth-label">{management.treasuryLabel}</span><strong>{formatMoney(management.treasury, world)}</strong></span>
+      <span className="overview-wealth-metric"><span className="overview-wealth-label">{management.houseLabel}</span><strong>{life.age < management.minAge ? "In family care" : management.roleLabel}</strong></span>
+      <small className="overview-cash-note">{management.concerns}</small>
+      <span className="overview-wealth-details">{management.title} <span aria-hidden="true">↗</span></span>
+    </button> : life.economy && wealth && <button type="button" className="overview-wealth" onClick={onOpenWealth} aria-label="Open total wealth and society comparison" aria-describedby={`${wealthId}-amount ${wealthId}-percentile ${wealthId}-cash`}>
       <span className="overview-wealth-metric"><span className="overview-wealth-label">Total wealth</span><strong id={`${wealthId}-amount`}>{formatMoney(wealth.netWorth, world)}</strong></span>
       <span className="overview-wealth-metric"><span className="overview-wealth-label">Assets rank among households</span><strong id={`${wealthId}-percentile`}>{formatWealthStanding(wealth.percentile)}</strong></span>
       <small className="overview-cash-note" id={`${wealthId}-cash`}>Cash available: {formatMoney(life.economy.cash, world)}</small>

@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-13",
+  "reference": "../../frame-system-v1/review/Everfolk-frame-concept.png",
+  "referenceRole": "Board organization and standard/full-art distinction only",
+  "records": [
+    {
+      "direction": "01 / SCRIBE'S FOLIO",
+      "slug": "01-scribes-folio",
+      "prompt": "source/01-scribes-folio-prompt.txt",
+      "image": "review/01-scribes-folio.png",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d488-0a7b-7d91-9ad5-4379f05d6a0b\\exec-c55788af-716d-4f1f-ba9c-0409804b4667.png",
+      "tool": "built-in image_gen.imagegen",
+      "status": "concept for selection"
+    },
+    {
+      "direction": "02 / CIVIC MONUMENT",
+      "slug": "02-civic-monument",
+      "prompt": "source/02-civic-monument-prompt.txt",
+      "image": "review/02-civic-monument.png",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d488-0a7b-7d91-9ad5-4379f05d6a0b\\exec-8a36886d-02a5-4ae1-8f7c-0a8236bbbd57.png",
+      "tool": "built-in image_gen.imagegen",
+      "status": "concept for selection"
+    },
+    {
+      "direction": "03 / LIVING MOSAIC",
+      "slug": "03-living-mosaic",
+      "prompt": "source/03-living-mosaic-prompt.txt",
+      "image": "review/03-living-mosaic.png",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d488-0a7b-7d91-9ad5-4379f05d6a0b\\exec-a0b5370f-1902-42de-8d3c-d1e5be91b3b8.png",
+      "tool": "built-in image_gen.imagegen",
+      "status": "concept for selection"
+    },
+    {
+      "direction": "04 / WOVEN HEIRLOOM",
+      "slug": "04-woven-heirloom",
+      "prompt": "source/04-woven-heirloom-prompt.txt",
+      "image": "review/04-woven-heirloom.png",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d488-0a7b-7d91-9ad5-4379f05d6a0b\\exec-94b74aa0-24a0-4134-a6eb-6f9b9ab247c5.png",
+      "tool": "built-in image_gen.imagegen",
+      "status": "concept for selection"
+    },
+    {
+      "direction": "05 / NIGHT ARCHIVE",
+      "slug": "05-night-archive",
+      "prompt": "source/05-night-archive-prompt.txt",
+      "image": "review/05-night-archive.png",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d488-0a7b-7d91-9ad5-4379f05d6a0b\\exec-4b57cbd0-c555-48bc-85ed-6fbd37d3972e.png",
+      "tool": "built-in image_gen.imagegen",
+      "status": "concept for selection"
+    }
+  ]
+}

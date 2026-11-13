@@ -1,5 +1,7 @@
 import type { LifeState, RelationshipTie, WorldPack } from "../../src/types.ts";
 import { resolvePartner } from "../../src/people.ts";
+import { childPortraitState, familyPortraitState, personPortraitState } from "./portrait-state.ts";
+import type { PortraitState } from "./portrait-state.ts";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "./relationship-labels.ts";
 
 export interface RelationshipRow {
@@ -10,6 +12,7 @@ export interface RelationshipRow {
   background: string;
   backgroundDetail?: string;
   occupation: string;
+  portrait: PortraitState;
   tie?: RelationshipTie;
   deceased?: boolean;
 }
@@ -25,6 +28,7 @@ function personRow(world: WorldPack, life: LifeState, id: string): RelationshipR
     background: origin?.title ?? "Not recorded",
     ...(origin ? { backgroundDetail: origin.text } : {}),
     occupation: person.occupation,
+    portrait: personPortraitState(world, life, person),
     tie: life.character?.relationships?.partners[id],
   };
 }
@@ -55,6 +59,7 @@ export function familyRelationshipRows(world: WorldPack, life: LifeState): Relat
       background: origin?.title ?? "Family background",
       backgroundDetail: member.background,
       occupation: member.occupation, deceased,
+      portrait: familyPortraitState(world, life, member),
     };
   });
   if (character.partnerId && character.relationshipStatus === "married") {
@@ -70,6 +75,7 @@ export function familyRelationshipRows(world: WorldPack, life: LifeState): Relat
       background: "Your household",
       backgroundDetail: `Other parent: ${resolvePartner(world, life, child.otherParentId)?.name ?? "Not recorded"}.`,
       occupation: age < 18 ? "No occupation yet" : "Not recorded",
+      portrait: childPortraitState(world, life, child),
       tie: character.relationships?.children[child.id],
     });
   }

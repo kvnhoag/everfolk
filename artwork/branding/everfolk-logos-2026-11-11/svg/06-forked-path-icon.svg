@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>06 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_06_Forked_Path___color_device" data-name="06 Forked Path / color device">
+      <path id="Forked_Path___element_1" data-name="Forked Path / element 1" d="M80 129.92 L80 91.52 C80 71.04 51.84 71.04 41.6 49.28" fill="none" stroke="#24464b" stroke-width="10.24" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Forked_Path___element_2" data-name="Forked Path / element 2" d="M80 91.52 C80 68.48 109.44 68.48 119.68 46.72" fill="none" stroke="#24464b" stroke-width="10.24" stroke-linecap="round" stroke-linejoin="round"/>
+      <line id="Forked_Path___element_3" data-name="Forked Path / element 3" x1="80" y1="91.52" x2="80" y2="44.16" fill="none" stroke="#24464b" stroke-width="10.24" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Forked_Path___element_4" data-name="Forked Path / element 4" d="M80 22.4 C81.075 27.298 84.062 30.285 88.96 31.36 C84.062 32.435 81.075 35.422 80 40.32 C78.925 35.422 75.938 32.435 71.04 31.36 C75.938 30.285 78.925 27.298 80 22.4 Z" fill="#b58a49"/>
+      <polygon id="Forked_Path___element_5" data-name="Forked Path / element 5" points="32.64,32.64 44.16,28.8 50.56,40.32 39.04,44.16" fill="#72805a"/>
+      <polygon id="Forked_Path___element_6" data-name="Forked Path / element 6" points="112,32.64 122.24,27.52 128.64,37.76 118.4,42.88" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

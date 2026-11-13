@@ -1,0 +1,67 @@
+EVERFOLK / ALEXANDER / PAINTERLY STUDY V3
+
+Purpose
+Test a more realistic model of flesh and selective, form-following brushwork
+while retaining the mounted Alexander composition and clear gaze. This is an
+exploratory visual treatment, not a final card specification.
+
+Painting references (rendering, not sitter identity)
+Rembrandt van Rijn, Self-Portrait, 1659. National Gallery of Art.
+https://www.nga.gov/artworks/79-self-portrait
+https://www.nga.gov/research/publications/dutch-paintings-seventeenth-century/rembrandt-van-rijn-self-portrait-1659
+Local: references/rembrandt-self-portrait-1659.jpg (official public-domain image).
+
+Diego Velazquez, Juan de Pareja, 1650. The Metropolitan Museum of Art.
+https://www.metmuseum.org/art/collection/search/437869
+Local: references/velazquez-juan-de-pareja.jpg (official public-domain image).
+
+Art-direction interpretation
+Warm ochre/rose highlights, cool gray-brown halftones, connected facial planes,
+selective sharp accents at the eyes and nose, lost edges in deep shadow.
+Directional varied strokes for skin, broad cloth masses and sparse fold accents.
+The references do not establish Alexander's appearance or ancient clothing.
+
+Inherited pose and staging
+Composition preserved from alexander-reference-v2: Naples mounted bronze
+(Getty conservation publication), Zuccaro's Alexander and Bucephalus (NGA),
+and phalanx staging from Warner Bros' Alexander production material.
+See ../alexander-reference-v2/REFERENCE-NOTES.txt for source details.
+This imagined Alexander is not a verified reconstruction or an actor likeness.
+
+Production and provenance
+The base was created with the built-in image generation/editing tool, using
+the v2 clean mounted illustration and the two museum painting references.
+Exact prompt: source/generation-prompt.txt.
+Generated base: source/alexander-painterly-base.png.
+Actual selected ArtCraft brush marks are authored separately over that base;
+the brush ledger, native painting document and transparent overlay preserve
+their contribution. The illustration is not wholly painted by hand.
+Brushwork is applied before PixelOE, not as an all-over texture filter.
+Completed pass: 30 native brush.freehand strokes across four paint layers.
+The overpaint is intentionally subtle: 8,143 source pixels changed (about
+0.52% of the canvas); the museum-guided generated base supplies the main
+rendering. The brush master reopened with all 30 marks and reproduced its
+transparent brush export exactly. See qa/brush-proof.json and
+qa/native-brush-reopen.json. Actual stroke ledger:
+source/ArtCraft-brush-stroke-ledger.json.
+
+Pixel finishing and assembly
+source/pixelate-card.py uses the installed isolated PixelOE 1.0.0 CPU runtime.
+Logical image grid 420 x 525, exact nearest-neighbour 2x to 840 x 1050.
+No palette reduction; facial colours and pupils are retained for legibility.
+The ArtCraft card layout is 900 x 1260 with independently editable frame,
+type, emblem, rarity and footer. The portrait remains a flattened artwork.
+Source painting brush layers are independently editable; clothing variants
+are not yet a fully separable character rig.
+Native raster export slightly interpolates pixel edges, so the final card PNG
+composites the original pixel image at exact 100% under exported native type
+and frame layers. The final pixel check is in qa/final-crisp-export.json.
+Completed export: 765,234 unobscured portrait pixels checked with no differing
+RGB channels. Live card fonts resolved exactly and native reopening reproduced
+the renderer's export. Final visual review included the 450 x 630 thumbnail.
+
+Scope
+One bounded generated base and a focused brush overpaint, followed by pixel
+finishing. A full manually authored repaint was intentionally outside this
+proof because it would require substantially more drawing operations/tokens.
+No exact token-cost claim is made. Rarity, card number and flavour are concepts.

@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m03-adult-aristocrat-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m03-adult-aristocrat-v3.png",
+  "sourceSha256": "a1078747b64fe477a5bd821ebc312c9337b0de7be69bc9d098af7d783a11cb1a",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-m03-adult-aristocrat-v3.logical.png",
+  "logicalSha256": "b6c5b401502651a11698b87ac3713db7057cd5a012d4dacceedd1ad25a901417",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-m03-adult-aristocrat-v3.png",
+  "outputSha256": "282f9a7f280bc665922887bc43f12d924ba3ab7b668435b5d7578f4fd73772f1",
+  "logicalPixelSha256": "e7884fdf46e9c20abd298205b063f52b3195caadfea2c587433db6bfc5ce4785",
+  "uniqueColours": 6558,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

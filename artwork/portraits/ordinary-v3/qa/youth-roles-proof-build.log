@@ -1,0 +1,14 @@
+{"verifiedReuse": 228, "imageInputAndPassFiles": 2326, "renderNewOnly": 12}
+{"assembled": "ef-p-m01-youth-aristocrat-v3"}
+{"assembled": "ef-p-m01-youth-royalty-v3"}
+{"assembled": "ef-p-m02-youth-aristocrat-v3"}
+{"assembled": "ef-p-m02-youth-royalty-v3"}
+{"assembled": "ef-p-m03-youth-aristocrat-v3"}
+{"assembled": "ef-p-m03-youth-royalty-v3"}
+{"assembled": "ef-p-f01-youth-aristocrat-v3"}
+{"assembled": "ef-p-f01-youth-royalty-v3"}
+{"assembled": "ef-p-f02-youth-aristocrat-v3"}
+{"assembled": "ef-p-f02-youth-royalty-v3"}
+{"assembled": "ef-p-f03-youth-aristocrat-v3"}
+{"assembled": "ef-p-f03-youth-royalty-v3"}
+{"manifest": "qa/proof-youth-roles-manifest.json", "completeModels": 12, "featurePalettes": 36, "assemblies": 12, "selectedPixels": 0, "originalSourceAnatomyPreserved": true, "sourcesUnchanged": true}

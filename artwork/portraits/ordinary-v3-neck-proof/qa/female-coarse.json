@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\ef-model-female-opaque-v3.png",
+  "sourceSha256": "fec7af6403832b3d78c610aa53e3de6657361b3c906e91898fec1246c82f623c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 0,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\source\\pixel-config.json",
+  "configSha256": "6129e8e015e6ae9e5ec935cde36a2b4e3629e220e317222feaa0b70678304cde",
+  "paletteSeed": null,
+  "uniqueColors": 6325,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    128,
+    160
+  ],
+  "output": [
+    384,
+    480
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\review\\female-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v3-neck-proof\\review\\female-coarse.png",
+  "logicalSha256": "dd91426f666ed0e3e3210cbc88fefdc10183d707fe6bb37cd6ec66198244f77a",
+  "outputSha256": "d2144447120751517cfa157a34d92806555c1158b861ab0822da0b00f913e81a",
+  "logicalPixelSha256": "299dc001d759fc3ec776a8aff132cc95ea7f1507684d3979434904af5250c6eb",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

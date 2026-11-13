@@ -1,0 +1,37 @@
+{
+  "name": "Dawnwing / crowned scarab",
+  "parent": "../everfolk-dawnwing-v3-crown",
+  "changes": [
+    "The central body is a substantial oval with two convex wing cases and a clear centre seam.",
+    "A distinct broad thorax separates the head from the abdomen.",
+    "The three-point crown is integrated into a rounded beetle head.",
+    "Three pairs of legs are visible: raised forelegs, outward middle legs and descending hindlegs.",
+    "The sweeping outer wings sit behind the beetle, separated by curved transparent channels.",
+    "The inner wing channels retain rounded terminals and the outer wing tips remain pointed."
+  ],
+  "master": "masters/Everfolk-Dawnwing-Scarab.vectorcraft",
+  "artboards": 8,
+  "exports": [
+    "emblem-ink",
+    "emblem-cream",
+    "stacked-ink",
+    "stacked-cream",
+    "horizontal-ink",
+    "horizontal-cream",
+    "wordmark-ink",
+    "wordmark-cream"
+  ],
+  "palette": {
+    "olive": "#292c25",
+    "card": "#33372e",
+    "cream": "#e7e0c9",
+    "ink": "#284744",
+    "clay": "#db9c78",
+    "clayInk": "#9b553e",
+    "paper": "#f1ead8",
+    "muted": "#b4b59e",
+    "darkMuted": "#6b7566",
+    "light": "#e8e2d2"
+  },
+  "warnings": []
+}

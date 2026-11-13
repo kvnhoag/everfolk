@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "worldVersion": "0.43.0",
+  "canonicalBodyGeometries": 2,
+  "identityAgeSkinPalettes": 36,
+  "sameBodyAlphaAcrossSkinVariations": true,
+  "sourceAssets": 58,
+  "portraits": 192,
+  "legacyBridges": 288,
+  "jobs": 33,
+  "origins": 16,
+  "encounters": 16,
+  "sourceHashesAndPaths": true,
+  "agreedCoarse3Fine2Filter": true,
+  "outsideFaceExactCoarsePixels": true,
+  "whole6PixelCells": true,
+  "finerEyeCoverage": true,
+  "runtimeIntegrated": false,
+  "visualReview": "See qa/body-fit-visual-review.json; geometry/hash checks alone do not establish anatomical fit."
+}

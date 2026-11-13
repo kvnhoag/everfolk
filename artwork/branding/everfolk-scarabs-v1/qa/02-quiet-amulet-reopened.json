@@ -1,0 +1,219 @@
+{
+  "artboards": [
+    {
+      "height": 512,
+      "name": "01 Standalone emblem / ink",
+      "width": 512,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 512,
+      "name": "02 Standalone emblem / cream",
+      "width": 512,
+      "x": 620,
+      "y": 0
+    },
+    {
+      "height": 820,
+      "name": "03 Stacked signature / cream",
+      "width": 1200,
+      "x": 0,
+      "y": 640
+    },
+    {
+      "height": 380,
+      "name": "04 Horizontal signature / ink",
+      "width": 1400,
+      "x": 0,
+      "y": 1600
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 49,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 02 Quiet Amulet",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 257.4416909620993,
+        "width": 1256.9411467542309,
+        "x": 60,
+        "y": 1661.2791545189502
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 257.4416909620993,
+            "width": 1256.9411467542309,
+            "x": 60,
+            "y": 1661.2791545189502
+          },
+          "childCount": 2,
+          "id": 71,
+          "kind": "Group",
+          "locked": false,
+          "name": "Quiet Amulet / horizontal signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 49,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Scarab beside name / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 615.5165618876281,
+        "width": 816.6607729224552,
+        "x": 191.6696135387724,
+        "y": 733.7711370262391
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 615.5165618876281,
+            "width": 816.6607729224552,
+            "x": 191.6696135387724,
+            "y": 733.7711370262391
+          },
+          "childCount": 2,
+          "id": 48,
+          "kind": "Group",
+          "locked": false,
+          "name": "Quiet Amulet / stacked signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 26,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 Scarab and name / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 411.90670553935865,
+        "width": 416,
+        "x": 668,
+        "y": 50.0466472303207
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 411.90670553935865,
+            "width": 416,
+            "x": 668,
+            "y": 50.0466472303207
+          },
+          "childCount": 10,
+          "id": 25,
+          "kind": "Group",
+          "locked": false,
+          "name": "02 Quiet Amulet / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 14,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Standalone scarab / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 411.90670553935865,
+        "width": 416,
+        "x": 48,
+        "y": 50.0466472303207
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 411.90670553935865,
+            "width": 416,
+            "x": 48,
+            "y": 50.0466472303207
+          },
+          "childCount": 10,
+          "id": 13,
+          "kind": "Group",
+          "locked": false,
+          "name": "02 Quiet Amulet / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Standalone scarab / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 71,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#9b553e",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarabs-v1\\masters\\02-quiet-amulet.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "02-quiet-amulet.vectorcraft",
+  "tool": "selection",
+  "uid": 7,
+  "units": "Pixels",
+  "rasterImages": 0
+}

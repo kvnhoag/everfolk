@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f02-youth-maritime-v1",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f02-youth-maritime-v1.png",
+  "sourceSha256": "1556020d7a22619a0aab5c33a7280487ef87bef8a93f859d4242984cb5d01f88",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-f02-youth-maritime-v1.logical.png",
+  "logicalSha256": "4d2bc197fa3c683fc2ce4fc9fbb4ba5d386a6862b8b1395c33639a08c84eb856",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-f02-youth-maritime-v1.png",
+  "outputSha256": "97e097dd18e1c8e11f0b30991aac8ff72f332d8648744537a9ac30e6c75d8e23",
+  "logicalPixelSha256": "5232c8a833828d0004e8a978aa2565c94627e0b72e0efa8422ebcf1037a1adf0",
+  "uniqueColours": 6579,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

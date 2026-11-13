@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 2,
+  "libraryId": "everfolk-ordinary-portraits-v2",
+  "canvas": [800, 1000],
+  "scope": "Complete waist-up ordinary portraits: one male and one female physical body geometry, age-scaled; original v1 sources retained.",
+  "style": "Mature anime anatomy and painterly chiaroscuro; warm upper-left key light and cool jade/umber shadows. Smooth complete-body assembly first, PixelOE after anatomical seam review.",
+  "mappingPath": "../ordinary-v1/mappings.json",
+  "headAnchorsPath": "head-anchors.json",
+  "identityIds": ["m01", "m02", "m03", "f01", "f02", "f03"],
+  "ageExamples": {"infant": 1, "child": 8, "youth": 16, "adult": 28, "middle": 49, "elder": 72},
+  "bodies": {
+    "male": {
+      "path": "source/bodies/ef-b-male-v2.png",
+      "sourceCanvas": [1122, 1402],
+      "neckTop": [400, 330], "eyeTarget": [400, 175], "chinTarget": [400, 347],
+      "sourceSkinSampleBox": [500, 515, 630, 580],
+      "sourceLandmarks": {"leftShoulder": [160, 660], "rightShoulder": [962, 660], "collarFrontCenter": [560, 660], "waistCenter": [560, 1280]},
+      "skinPolygons": [
+        [[430,463],[695,463],[699,495],[735,518],[770,543],[752,590],[715,625],[650,649],[565,658],[480,642],[410,615],[371,585],[355,550],[393,525],[427,500]],
+        [[55,975],[223,1020],[246,1080],[242,1150],[216,1240],[190,1402],[37,1402],[34,1250],[47,1100]],
+        [[878,1020],[1051,980],[1070,1130],[1083,1402],[912,1402],[882,1230]]
+      ]
+    },
+    "female": {
+      "path": "source/bodies/ef-b-female-v2.png",
+      "sourceCanvas": [1122, 1402],
+      "neckTop": [400, 353], "eyeTarget": [400, 200], "chinTarget": [400, 365],
+      "sourceSkinSampleBox": [480, 535, 640, 610],
+      "sourceLandmarks": {"leftShoulder": [190, 680], "rightShoulder": [920, 680], "collarFrontCenter": [560, 730], "waistCenter": [560, 1270]},
+      "skinPolygons": [
+        [[455,495],[660,495],[665,540],[705,574],[753,605],[735,650],[700,688],[638,716],[563,729],[491,715],[428,690],[387,655],[372,610],[411,580],[448,540]],
+        [[133,951],[263,1010],[277,1130],[252,1220],[226,1402],[108,1402],[104,1220],[113,1080]],
+        [[840,1005],[972,957],[986,1115],[1008,1402],[889,1402],[851,1240]]
+      ]
+    }
+  },
+  "ageProfiles": {
+    "infant": {"bodyScale": 0.55, "neckTopY": 415, "eyeTarget": [400, 260], "chinTarget": [400, 430]},
+    "child": {"bodyScale": 0.72, "neckTopY": 395, "eyeTarget": [400, 245], "chinTarget": [400, 410]},
+    "youth": {"bodyScale": 0.9, "neckTopY": 360, "eyeTarget": [400, 205], "chinTarget": [400, 375]},
+    "adult": {"bodyScale": 1}, "middle": {"bodyScale": 1}, "elder": {"bodyScale": 1}
+  },
+  "layerOrder": ["background", "skin-calibrated-canonical-body", "jaw-trimmed-head", "fitted-clothing-and-front-collar", "protected-front-hair"],
+  "registrationPolicy": "Same-canvas garments retain complete canonical frame; different canvases require measured shoulder/waist registration. Never independently fit head and shirt alpha bounding boxes.",
+  "skinPolicy": "Thirty-six identity/stage palettes derived from each actual head skin sample; CIELAB median transfer only inside explicit neck/forearm masks. Child/youth forearm texture contrast is softened within the same mask. Two sex geometries, cream undergarment and belt remain fixed.",
+  "validation": {"minimumHeadBodyOverlapPixels": 50, "minimumNeckCorridorCoverage": 0.98, "maximumGarmentPixelsOutsideCanonicalBody": 0, "requireSmooth100PercentSeamReview": true},
+  "pixelProfile": {"gridType": "mixed-grid; no single logical grid", "coarseLogical": [128, 160], "coarseScale": 3, "fineLogical": [192, 240], "fineScale": 2, "thickness": 0, "commonCell": 6, "faceRegion": "Derived from this source head eye/chin registration, critical eye band entirely fine"},
+  "runtimeIntegration": "Staged asset library only; no runtime edits. V1 is preserved."
+}

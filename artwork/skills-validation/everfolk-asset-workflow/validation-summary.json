@@ -1,0 +1,13 @@
+{
+  "opaqueRGBAAccepted": true,
+  "opaqueRGBAMatchesRGB": true,
+  "partialAlphaRejected": true,
+  "alphaRejectionWroteNoOutput": true,
+  "sourceOverwriteRejected": true,
+  "sourceUnchanged": true,
+  "defaultMatchesV5EnlargedPNG": true,
+  "defaultMatchesV5LogicalPNG": true,
+  "defaultOutputSha256": "bbf2d798435385045833a692c80d6ea31b0f391ebbe8d262054212530c4d0d66",
+  "defaultLogicalSha256": "29e29666b7e49a56b80bac38a276d772726f4a5ae3de6759e319003f8e102dd3",
+  "transparentError": "pixelate.py: Transparent input: deliberately composite onto an opaque background before PixelOE"
+}

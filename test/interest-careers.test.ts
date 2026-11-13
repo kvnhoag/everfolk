@@ -10,6 +10,9 @@ import interestRelease from "../worlds/alexandria-0.14.0.json" with { type: "jso
 const commissionIds = ["small-pottery-order", "small-carving-order", "small-figure-order", "teach-a-reading-lesson", "copy-a-sky-table", "prepare-a-chart-reading"];
 function controlledWorld(): WorldPack {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  // Isolate ordinary commission mechanics while retaining all sampled birth origins.
+  if (world.royalty) world.royalty.originId = "fixture-unselected-royal-origin";
+  if (world.aristocracy) world.aristocracy.originId = "fixture-unselected-estate-origin";
   withoutMarketSignals(world);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });

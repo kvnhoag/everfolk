@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m01-middle-military-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m01-middle-military-v3.png",
+  "sourceSha256": "c4d7f1c254e30edf0ed3353da4d88c18cb6db999edb630470915c2f65f3e450c",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-m01-middle-military-v3.logical.png",
+  "logicalSha256": "8657782a5f6f1a0784d85aa76ad170b4a101045c6a36da94bbd1e800af75a2cc",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-m01-middle-military-v3.png",
+  "outputSha256": "a561a8d7969eff3d0f35bc668cea58c91da050d4e30d058393a1e0de0bf2b793",
+  "logicalPixelSha256": "b953c25edc5d49c633e7c7d183b7caf9824228e04a94a468bdeabaffa2cd0aca",
+  "uniqueColours": 7618,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

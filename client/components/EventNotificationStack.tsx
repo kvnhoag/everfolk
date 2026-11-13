@@ -29,7 +29,7 @@ function truncateText(text: string, maxLen = 96): string {
 }
 
 export default function EventNotificationStack({ life, world, decisionEvent, demoView, decisionButtonRef,
-  onOpenDecision, onOpenChronicle, onOpenPeopleTab, onOpenSkillTree, onShownChange, visible = true,
+  onOpenDecision, onOpenChronicle = () => {}, onOpenPeopleTab, onOpenSkillTree, onShownChange, visible = true, persistent = true,
 }: {
   life: LifeState;
   world: WorldPack;
@@ -37,20 +37,21 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   demoView?: DemoScreen | null;
   decisionButtonRef?: RefObject<HTMLButtonElement | null>;
   onOpenDecision(): void;
-  onOpenChronicle(): void;
+  onOpenChronicle?(): void;
   onOpenPeopleTab?(): void;
   onOpenSkillTree?(): void;
   /** Reports whether any notification is on screen (the tutorial explains them the first time). */
   onShownChange?(shown: boolean): void;
   visible?: boolean;
+  persistent?: boolean;
 }) {
-  const completed = useEventNotifications(life, world);
+  const completed = useEventNotifications(life, world, true, persistent);
   const lifeKey = eventNotificationLifeKey(life);
   // Offers and skill notices the player closed stay closed for this life.
-  const [dismissedKeys, setDismissedKeys] = useState(() => new Set(readSeenEventNotifications(lifeKey)));
-  useEffect(() => setDismissedKeys(new Set(readSeenEventNotifications(lifeKey))), [lifeKey]);
+  const [dismissedKeys, setDismissedKeys] = useState(() => new Set(persistent ? readSeenEventNotifications(lifeKey) : []));
+  useEffect(() => setDismissedKeys(new Set(persistent ? readSeenEventNotifications(lifeKey) : [])), [lifeKey, persistent]);
   const dismissKey = (key: string) => () => {
-    rememberSeenEventNotifications(lifeKey, [key]);
+    if (persistent) rememberSeenEventNotifications(lifeKey, [key]);
     setDismissedKeys(previous => new Set(previous).add(key));
   };
   const items: NotificationItem[] = [];

@@ -11,6 +11,8 @@ import type { LifeStageValidationTools } from "./life-stages/validate.ts";
 import { validateEventFields, validatePathsCondition, validatePathsDefinition, validatePathsEffect } from "./paths/validate.ts";
 import { validateDemoCondition, validateDemoDefinition, validateDemoEffect } from "./demo/validate.ts";
 import type { WorldPack } from "./types.ts";
+import { ROYAL_METRICS } from "./royalty.ts";
+import { ARISTOCRAT_METRICS } from "./aristocracy.ts";
 
 type DataObject = Record<string, unknown>;
 const BAD_KEYS = new Set(["__proto__", "constructor", "prototype"]);
@@ -135,7 +137,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     "schemaVersion", "id", "version", "title", "description", "startYear", "maxAge",
     "stats", "flags", "origins", "yearlyEffects", "events", "endings", "defaultEnding",
   ];
-  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears", "npcAgents", "deepCapabilities", "figurePaths"], worldFields);
+  const world = object(input, "world", [...worldFields, "sources", "yearlyRules", "mortality", "eventPacing", "character", "economy", "health", "relationships", "knowledge", "legacy", "influences", "demo", "vocations", "capabilities", "lifeStages", "paths", "birthYears", "npcAgents", "deepCapabilities", "figurePaths", "royalty", "aristocracy"], worldFields);
   if (Object.hasOwn(world, "npcAgents")) {
     const agents = object(world.npcAgents, "world.npcAgents", ["version"]);
     if (agents.version !== 1) fail("world.npcAgents.version", "only version 1 is supported");
@@ -272,6 +274,60 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     if (Object.hasOwn(definition, "initialRange")) statRange(definition.initialRange, `${path}.initialRange`, definition);
     if (Object.hasOwn(definition, "gainCurve")) gainCurve(definition.gainCurve, `${path}.gainCurve`, definition);
   }
+  const royalty = Object.hasOwn(world, "royalty") ? object(world.royalty, "world.royalty", ["originId", "minAge", "metrics", "yearlyEffects"]) : undefined;
+  const royalMetricIds = new Set<string>(ROYAL_METRICS);
+  if (royalty) {
+    // A reduced scenario may intentionally omit this origin; its route remains inactive.
+    id(royalty.originId, "world.royalty.originId");
+    integer(royalty.minAge, "world.royalty.minAge", 0, maxAge);
+    const metrics = object(royalty.metrics, "world.royalty.metrics", ROYAL_METRICS);
+    for (const metric of ROYAL_METRICS) {
+      const path = `world.royalty.metrics.${metric}`;
+      const definition = object(metrics[metric], path, ["label", "min", "max", "initial", "gainCurve"], ["label", "min", "max", "initial"]);
+      string(definition.label, `${path}.label`, 300);
+      const min = number(definition.min, `${path}.min`), max = number(definition.max, `${path}.max`);
+      const initial = number(definition.initial, `${path}.initial`);
+      if (min >= max || !Number.isFinite(max - min)) fail(path, "min must be less than max with a finite span");
+      if (initial < min || initial > max) fail(`${path}.initial`, "must be within royal metric bounds");
+      if (Object.hasOwn(definition, "gainCurve")) gainCurve(definition.gainCurve, `${path}.gainCurve`, definition);
+    }
+    array(royalty.yearlyEffects, "world.royalty.yearlyEffects", 0, 128).forEach((entry, i) => {
+      const path = `world.royalty.yearlyEffects[${i}]`;
+      const effect = object(entry, path, ["metric", "delta"]);
+      reference(effect.metric, `${path}.metric`, royalMetricIds, "royal metric");
+      number(effect.delta, `${path}.delta`);
+    });
+  }
+  const aristocracy = Object.hasOwn(world, "aristocracy") ? object(world.aristocracy, "world.aristocracy", ["originId", "minAge", "metrics", "yearlyEffects"]) : undefined;
+  const aristocratMetricIds = new Set<string>(ARISTOCRAT_METRICS);
+  if (aristocracy) {
+    // Reduced scenarios may omit the household without changing the saved rules.
+    id(aristocracy.originId, "world.aristocracy.originId");
+    if (royalty && aristocracy.originId === royalty.originId) fail("world.aristocracy.originId", "must differ from the royal household origin");
+    integer(aristocracy.minAge, "world.aristocracy.minAge", 0, maxAge);
+    const metrics = object(aristocracy.metrics, "world.aristocracy.metrics", ARISTOCRAT_METRICS);
+    for (const metric of ARISTOCRAT_METRICS) {
+      const path = `world.aristocracy.metrics.${metric}`;
+      const definition = object(metrics[metric], path, ["label", "min", "max", "initial", "gainCurve"], ["label", "min", "max", "initial"]);
+      string(definition.label, `${path}.label`, 300);
+      const min = number(definition.min, `${path}.min`), max = number(definition.max, `${path}.max`);
+      const initial = number(definition.initial, `${path}.initial`);
+      if (min >= max || !Number.isFinite(max - min)) fail(path, "min must be less than max with a finite span");
+      if (initial < min || initial > max) fail(`${path}.initial`, "must be within aristocrat metric bounds");
+      if (Object.hasOwn(definition, "gainCurve")) gainCurve(definition.gainCurve, `${path}.gainCurve`, definition);
+    }
+    array(aristocracy.yearlyEffects, "world.aristocracy.yearlyEffects", 0, 128).forEach((entry, i) => {
+      const path = `world.aristocracy.yearlyEffects[${i}]`;
+      const effect = object(entry, path, ["metric", "delta"]);
+      reference(effect.metric, `${path}.metric`, aristocratMetricIds, "aristocrat metric");
+      number(effect.delta, `${path}.delta`);
+    });
+  }
+  const audience = (entry: DataObject, path: string): void => {
+    if (Object.hasOwn(entry, "audience") && !["common", "royal", "aristocrat"].includes(entry.audience as string)) {
+      fail(`${path}.audience`, "expected common or royal or aristocrat");
+    }
+  };
   const economy = Object.hasOwn(world, "economy") ? object(world.economy, "world.economy",
     ["stat", "currency", "unitsPerPoint", "description", "sourceIds", "assets", "autoDebtRepayment", "uncappedResources", "moneylender", "market"], ["stat", "currency", "unitsPerPoint", "description", "assets"]) : undefined;
   const market = economy && Object.hasOwn(economy, "market") ? object(economy.market, "world.economy.market",
@@ -358,7 +414,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   reference(world.defaultEnding, "world.defaultEnding", endingIds, "ending");
 
   const character = Object.hasOwn(world, "character") ? object(world.character, "world.character",
-    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship", "identity", "proceduralPartners", "socialRelationships", "extendedSocialRoles", "familyBackgrounds", "encounterPacing"],
+    ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription", "playerNames", "requireIntroductions", "exclusiveCourtship", "identity", "proceduralPartners", "socialRelationships", "extendedSocialRoles", "familyBackgrounds", "familyLivingGrandparentChance", "encounterPacing"],
     ["skills", "jobs", "partners", "activities", "childNames", "deathCauses", "deathCauseDescription"]) : undefined;
   if (moneylender && (!character || maxAge < 19)) fail("world.economy.moneylender", "requires a character definition and a life extending beyond age 18");
   const skills = character ? object(character.skills, "world.character.skills") : {};
@@ -525,7 +581,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   });
   achievements.forEach((entry, i) => {
     const path = `world.legacy.achievements[${i}]`;
-    const achievement = object(entry, path, ["id", "routeId", "title", "description", "kind", "nameTemplate", "people", "evidence", "sourceIds"], ["id", "routeId", "title", "description", "kind", "nameTemplate", "people"]);
+    const achievement = object(entry, path, ["id", "routeId", "title", "description", "kind", "nameTemplate", "people", "figure", "evidence", "sourceIds"], ["id", "routeId", "title", "description", "kind", "nameTemplate", "people"]);
     reference(achievement.routeId, `${path}.routeId`, legacyRouteIds, "legacy route");
     const route = legacyRoutes.find(item => (item as DataObject).id === achievement.routeId) as DataObject;
     if (!(route.achievementIds as string[]).includes(achievement.id as string)) fail(path, "achievement must be listed in its route");
@@ -536,6 +592,15 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     const people = array(achievement.people, `${path}.people`, Object.hasOwn(world, "figurePaths") && (achievement.routeId as string).startsWith("figure-") ? 0 : 1, 8);
     people.forEach((person, j) => string(person, `${path}.people[${j}]`, 100));
     if (new Set(people).size !== people.length) fail(`${path}.people`, "duplicate contact");
+    if (Object.hasOwn(achievement, "figure")) {
+      const figure = object(achievement.figure, `${path}.figure`, ["id", "name"]);
+      id(figure.id, `${path}.figure.id`);
+      string(figure.name, `${path}.figure.name`, 100);
+      for (const other of achievements) {
+        const linked = (other as DataObject).figure as DataObject | undefined;
+        if (linked && linked.id === figure.id && linked.name !== figure.name) fail(`${path}.figure`, "historical figure names must be consistent");
+      }
+    }
     evidence(achievement, path);
   });
   const partners = character ? array(character.partners, "world.character.partners", 0, 128) : [];
@@ -593,6 +658,20 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     if (depth > 32) fail(path, "condition nesting exceeds 32 levels");
     const rule = object(value, path, undefined, ["type"]);
     switch (rule.type) {
+      case "aristocrat":
+        object(rule, path, ["type", "metric", "op", "value"]);
+        if (!aristocracy) fail(path, "requires an aristocracy definition");
+        reference(rule.metric, `${path}.metric`, aristocratMetricIds, "aristocrat metric");
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        number(rule.value, `${path}.value`);
+        break;
+      case "royal":
+        object(rule, path, ["type", "metric", "op", "value"]);
+        if (!royalty) fail(path, "requires a royalty definition");
+        reference(rule.metric, `${path}.metric`, royalMetricIds, "royal metric");
+        if (!OPERATORS.has(rule.op as string)) fail(`${path}.op`, "unknown comparison operator");
+        number(rule.value, `${path}.value`);
+        break;
       case "accomplishment":
         object(rule, path, ["type", "achievement", "minYears"], ["type", "achievement"]);
         reference(rule.achievement, `${path}.achievement`, achievementIds, "achievement");
@@ -769,6 +848,18 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
           reference(effect.asset, `${location}.asset`, assetIds, "asset");
           integer(effect.delta, `${location}.delta`, -1_000_000, 1_000_000);
           break;
+        case "aristocrat":
+          object(effect, location, ["type", "metric", "delta"]);
+          if (!aristocracy) fail(location, "requires an aristocracy definition");
+          reference(effect.metric, `${location}.metric`, aristocratMetricIds, "aristocrat metric");
+          number(effect.delta, `${location}.delta`);
+          break;
+        case "royal":
+          object(effect, location, ["type", "metric", "delta"]);
+          if (!royalty) fail(location, "requires a royalty definition");
+          reference(effect.metric, `${location}.metric`, royalMetricIds, "royal metric");
+          number(effect.delta, `${location}.delta`);
+          break;
         case "stat":
           object(effect, location, ["type", "stat", "delta"]);
           reference(effect.stat, `${location}.stat`, statIds, "stat");
@@ -897,9 +988,10 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       for (const effect of effectList) {
         if (effect.type === "end") break;
         if (effect.type === "cash" && (effect.delta as number) < 0 ||
-          effect.type === "stat" && effect.stat === (economy?.stat ?? "wealth") && (effect.delta as number) < 0) paid = true;
+          effect.type === "stat" && effect.stat === (economy?.stat ?? "wealth") && (effect.delta as number) < 0 ||
+          (effect.type === "royal" || effect.type === "aristocrat") && effect.metric === "treasury" && (effect.delta as number) < 0) paid = true;
       }
-      if (!paid) fail(`${path}.effects`, "training gain modifiers require an actual cash or Wealth payment before the outcome ends");
+      if (!paid) fail(`${path}.effects`, "training gain modifiers require an actual cash or Wealth payment, or a household treasury payment, before the outcome ends");
     }
     for (const effect of outcome.effects as DataObject[]) if (effect.type === "accomplishment") {
       const achievement = achievements.find(item => (item as DataObject).id === effect.achievement) as DataObject;
@@ -980,6 +1072,12 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
         if (pools.male.length < 4 || pools.female.length < 4) fail(path, "needs at least four names per sex for the player and natal relatives");
         if (new Set([...pools.male, ...pools.female]).size < partners.length + 7) fail(path, "needs enough distinct names for the player, natal relatives and every encounter template");
       }
+    }
+    if (Object.hasOwn(character, "familyLivingGrandparentChance")) {
+      const path = "world.character.familyLivingGrandparentChance";
+      if (character.familyBackgrounds !== true) fail(path, "requires familyBackgrounds");
+      const chance = number(character.familyLivingGrandparentChance, path);
+      if (chance < 0 || chance > 1) fail(path, "probability must be between zero and one");
     }
     if (Object.hasOwn(character, "encounterPacing")) {
       const path = "world.character.encounterPacing";
@@ -1073,7 +1171,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     }
     activities.forEach((entry, i) => {
       const path = `world.character.activities[${i}]`;
-      const activity = object(entry, path, ["id", "text", "when", "outcomes", "category", "minAge", "cooldownYears", "usesYearlyActivity", "opportunity"], ["id", "text", "outcomes", "category"]);
+      const activity = object(entry, path, ["id", "text", "when", "outcomes", "category", "minAge", "cooldownYears", "usesYearlyActivity", "opportunity", "audience"], ["id", "text", "outcomes", "category"]);
+      audience(activity, path);
       string(activity.text, `${path}.text`);
       if (!["training", "career", "relationship", "family", "finance"].includes(activity.category as string)) fail(`${path}.category`, "unknown activity category");
       if (Object.hasOwn(activity, "minAge")) integer(activity.minAge, `${path}.minAge`, 0, maxAge);
@@ -1190,7 +1289,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
     unique(rules, "world.yearlyRules");
     rules.forEach((entry, i) => {
       const path = `world.yearlyRules[${i}]`;
-      const rule = object(entry, path, ["id", "when", "effects"], ["id", "effects"]);
+      const rule = object(entry, path, ["id", "when", "effects", "audience"], ["id", "effects"]);
+      audience(rule, path);
       if (Object.hasOwn(rule, "when")) condition(rule.when, `${path}.when`);
       effects(rule.effects, `${path}.effects`);
       if ((rule.effects as DataObject[]).some(effect => effect.type === "loan")) fail(`${path}.effects`, "loan actions require an explicit player choice or activity");
@@ -1211,7 +1311,8 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   const hasPaths = Object.hasOwn(world, "paths");
   if (hasPaths) validatePathsDefinition(world.paths, Boolean(stageRules), { ...stageTools, skills: skillIds, jobs: jobIds, origins: originIds });
   const eventDefinition = (entry: unknown, path: string): void => {
-    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence", "stages", "scope", "dependent", "fields"], ["id", "title", "text", "trigger", "choices"]);
+    const event = object(entry, path, ["id", "title", "text", "trigger", "when", "maxOccurrences", "cooldownYears", "rarity", "exclusiveGroup", "choices", "mode", "effects", "sourceIds", "evidence", "stages", "scope", "dependent", "fields", "audience"], ["id", "title", "text", "trigger", "choices"]);
+    audience(event, path);
     string(event.title, `${path}.title`, 300);
     string(event.text, `${path}.text`);
     evidence(event, path);
@@ -1253,7 +1354,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       const demoAnchor = Object.hasOwn(world, "demo") && trigger.type === "year" && hasDemoCondition(event.when);
       // Paths worlds: a dated decision that names a cooldown recurs, spaced by it (late-life offers).
       const spacedAnchor = Object.hasOwn(world, "paths") && trigger.type === "year" && Object.hasOwn(event, "cooldownYears");
-      if (trigger.type !== "random" && count !== 1 && !demoAnchor && !spacedAnchor) fail(`${path}.maxOccurrences`, "scheduled events permit maxOccurrences of 1 only");
+      if (trigger.type !== "random" && count !== 1 && !demoAnchor && !spacedAnchor && !(typeof event.cooldownYears === "number" && event.cooldownYears >= 1)) fail(`${path}.maxOccurrences`, "repeating scheduled events require an explicit annual cooldownYears");
     }
     if (Object.hasOwn(event, "cooldownYears")) integer(event.cooldownYears, `${path}.cooldownYears`, 0, Number.MAX_SAFE_INTEGER);
     const choices = array(event.choices, `${path}.choices`, event.mode === "automatic" ? 0 : 1, 32);

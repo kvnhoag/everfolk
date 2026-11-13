@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>16 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_16_EF_Ligature___color_device" data-name="16 EF Ligature / color device">
+      <polygon id="Everfolk_E" data-name="Everfolk E" points="32.64,39.04 82.56,39.04 82.56,51.84 46.72,51.84 46.72,73.6 76.16,73.6 76.16,86.4 46.72,86.4 46.72,108.16 82.56,108.16 82.56,120.96 32.64,120.96" fill="#24464b"/>
+      <polygon id="Everfolk_F" data-name="Everfolk F" points="91.52,39.04 128.64,39.04 128.64,51.84 105.6,51.84 105.6,73.6 124.8,73.6 124.8,86.4 105.6,86.4 105.6,120.96 91.52,120.96" fill="#24464b"/>
+      <rect id="Shared_headline" data-name="Shared headline" x="69.76" y="39.04" width="35.84" height="12.8" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

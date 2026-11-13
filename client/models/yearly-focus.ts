@@ -3,6 +3,8 @@ import { getOutcomeProbabilities } from "../../src/outcomes.ts";
 import { severeHealthRisk } from "./health-risk.ts";
 import { isUnavailable } from "../../src/demo/availability.ts";
 import { choiceIsUnavailable } from "../demo/screen.ts";
+import { isRoyalLife, royalAudienceAllowed } from "../../src/royalty.ts";
+import { isAristocratLife } from "../../src/aristocracy.ts";
 
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
@@ -16,14 +18,42 @@ export const YEARLY_FOCUSES = [
   { id: "trade", label: "Trading", activityId: "focus-market-trading" },
   { id: "friends", label: "Friends", activityId: "visit-a-friend" },
   { id: "health", label: "Health", activityId: "take-an-easy-walk" },
+  { id: "council", label: "Council", activityId: "royal-hold-council" },
+  { id: "diplomacy", label: "Diplomacy", activityId: "royal-send-envoys" },
+  { id: "security", label: "Security", activityId: "royal-inspect-guard" },
+  { id: "stewardship", label: "Petitions", activityId: "royal-hear-petitions" },
+  { id: "succession", label: "Succession", activityId: "royal-plan-succession" },
+  { id: "statecraft", label: "Statecraft", activityId: "royal-study-statecraft" },
+  { id: "estate", label: "Estate council", activityId: "aristocrat-meet-stewards" },
+  { id: "improvements", label: "Improvements", activityId: "aristocrat-improve-irrigation" },
+  { id: "tenants", label: "Tenant agreements", activityId: "aristocrat-settle-tenancy" },
+  { id: "patronage", label: "Patronage", activityId: "aristocrat-host-patrons" },
+  { id: "inheritance", label: "Inheritance", activityId: "aristocrat-plan-inheritance" },
+  { id: "estate-study", label: "Estate studies", activityId: "aristocrat-study-estates" },
 ] as const;
 
 export type YearlyFocusId = typeof YEARLY_FOCUSES[number]["id"];
 export interface FocusStorage { getItem(key: string): string | null; setItem(key: string, value: string): void }
 
-export function normalizeYearlyFocus(value: unknown, world?: WorldPack): YearlyFocusId {
+export function availableYearlyFocuses(world?: WorldPack, life?: Pick<LifeState, "originId">) {
+  const royal = Boolean(world && life && isRoyalLife(world, life));
+  const aristocrat = Boolean(world && life && isAristocratLife(world, life));
+  return YEARLY_FOCUSES.filter(focus => {
+    const isRoyalFocus = ["council", "diplomacy", "security", "stewardship", "succession", "statecraft"].includes(focus.id);
+    const isEstateFocus = ["estate", "improvements", "tenants", "patronage", "inheritance", "estate-study"].includes(focus.id);
+    if (isRoyalFocus && !royal) return false;
+    if (isEstateFocus && !aristocrat) return false;
+    if ((royal && !isRoyalFocus || aristocrat && !isEstateFocus) && !["everyday", "health", "friends"].includes(focus.id)) return false;
+    const activity = focus.activityId && world?.character?.activities.find(activity => activity.id === focus.activityId);
+    if (focus.activityId && world && !activity) return false;
+    return !activity || !world || !life || royalAudienceAllowed(world, life, activity.audience);
+  });
+}
+
+export function normalizeYearlyFocus(value: unknown, world?: WorldPack, life?: Pick<LifeState, "originId">): YearlyFocusId {
   const focus = YEARLY_FOCUSES.find(focus => focus.id === value);
   if (!focus) return "everyday";
+  if (world && life && !availableYearlyFocuses(world, life).some(candidate => candidate.id === focus.id)) return "everyday";
   if (focus.activityId && world && !world.character?.activities.some(activity => activity.id === focus.activityId)) return "everyday";
   return focus.id;
 }
@@ -39,8 +69,9 @@ export function focusActivity(world: WorldPack, focusId: YearlyFocusId) {
 }
 
 /** The youngest age at which This year's focus appears; Infinity when the world has no focus activity. */
-export function yearlyFocusFirstAge(world: WorldPack): number {
-  return Math.min(...YEARLY_FOCUSES.flatMap(focus => {
+export function yearlyFocusFirstAge(world: WorldPack, life?: Pick<LifeState, "originId">): number {
+  const focuses = life ? availableYearlyFocuses(world, life) : YEARLY_FOCUSES;
+  return Math.min(...focuses.flatMap(focus => {
     const activity = focusActivity(world, focus.id);
     return activity ? [activity.minAge ?? 0] : [];
   }));
@@ -82,7 +113,7 @@ export function focusStatus(life: LifeState, world: WorldPack, focusId: YearlyFo
 export function advanceYearWithFocus(engine: LifeEngine, life: LifeState, focusId: YearlyFocusId): LifeState {
   if (life.phase !== "ready") return life;
   let next = life;
-  const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world));
+  const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world, life));
   if (activity && !isUnavailable(engine.world.demo, "activity", activity.id) && life.character?.lastActivityAge !== life.age) {
     const available = engine.getActivities(life).find(candidate => candidate.id === activity.id);
     if (available?.available) next = engine.act(life, activity.id);

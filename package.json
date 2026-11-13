@@ -22,7 +22,8 @@
     "npc:provider-check": "node scripts/npc/check-provider.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "figures:world": "node scripts/figures/build-world.mjs",
-    "deep:world": "node scripts/deep-capabilities/build-world.mjs"
+    "deep:world": "node scripts/deep-capabilities/build-world.mjs",
+    "portraits:sync": "node scripts/sync-portrait-assets.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {

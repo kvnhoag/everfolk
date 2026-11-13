@@ -1,0 +1,17 @@
+{
+  "Eczar": {
+    "error": "command_run: invalid parameters for `text.fontList`: font family `Eczar` is not available"
+  },
+  "DM Sans": {
+    "error": "command_run: invalid parameters for `text.fontList`: font family `DM Sans` is not available"
+  },
+  "Inter": {
+    "axes": [],
+    "family": "Inter",
+    "styles": [
+      "Regular",
+      "Medium",
+      "SemiBold"
+    ]
+  }
+}

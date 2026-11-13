@@ -1,0 +1,41 @@
+{
+  "input": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\chiaroscuro-source.png",
+  "inputSha256": "2ebca752589737c962efc6d311539c902dff4decc3f1d8a8f7db8d5e6d831097",
+  "outputSha256": "04516fbb498f22d236030414ecbe1c027dc1f6e29eb31824f421f62a5d8e1be4",
+  "source": {
+    "width": 397,
+    "height": 793
+  },
+  "logical": {
+    "width": 100,
+    "height": 200
+  },
+  "output": {
+    "width": 400,
+    "height": 800
+  },
+  "options": {
+    "width": 100,
+    "height": 200,
+    "colors": 24,
+    "scale": 4,
+    "palette": "adaptive"
+  },
+  "stats": {
+    "paletteSize": 24,
+    "coloursUsed": 24,
+    "removedSpeckles": 248,
+    "scale": 4,
+    "dither": 0,
+    "alphaMode": "binary",
+    "sampling": "perceptual-medoid",
+    "enlargement": "integer-nearest",
+    "blur": false
+  },
+  "paths": {
+    "image": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\filter-v2\\chiaroscuro-pixel-24.png",
+    "logical": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\filter-v2\\chiaroscuro-pixel-24.logical.png",
+    "palette": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\filter-v2\\chiaroscuro-pixel-24.palette.json",
+    "metadata": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\filter-v2\\chiaroscuro-pixel-24.filter.json"
+  }
+}

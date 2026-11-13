@@ -1,0 +1,37 @@
+EVERFOLK / TWENTY ILLUSTRATED STORY LOGOS / REVISION 4
+11 November 2026
+
+START HERE
+review/Everfolk-20-illustrated-story-logos.png is the numbered overview.
+The corresponding .vectorcraft review board is editable.
+REFERENCE-STUDY.txt records the selected game references and design lessons.
+
+FILES
+masters/ : 20 individual .vectorcraft masters, each with two artboards:
+  1. Transparent primary logo, 1000 x 600.
+  2. Colour presentation proof, 1000 x 600.
+svg/ : 20 transparent vector logos with supporting lettering outlined.
+png/ : 20 transparent PNGs at 2000 x 1200 and 20 colour proofs at 1500 x 900.
+
+All title letters, illustrated scenes, texture lines and flourishes are
+native editable vectors. The paper-grain treatment uses vector paths and
+clipping masks. There are no embedded bitmap images in the SVG exports.
+The motto remains editable supporting type in the native masters.
+Coloured paper panels inside the illuminated E are part of that artwork.
+
+FAMILIES
+01-05 Illuminated initial
+06-10 Printed tale
+11-15 Lettering in bloom
+16-20 Living chronicle
+
+Open individual masters in VectorCraft to edit named letter and illustration
+groups. The source folder contains the original geometry, composition data
+and native MCP build script. manifest.json maps concepts to their files.
+
+VALIDATION
+Every master was saved, closed and reopened in VectorCraft. All retained
+their two artboards. The full comparison and representative large proofs
+were visually reviewed; the travellers in 14 were moved clear of the title.
+All title bounds fit the canvas. No export warnings or font substitutions
+were reported. qa/ contains the inspections and validation record.

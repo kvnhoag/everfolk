@@ -1,0 +1,257 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\masters\\anime-chiaroscuro-v5-review.ecproj",
+  "output": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\hybrid-aura-face-comparison.png",
+  "inputs": [
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-chiaroscuro-before-v5.png",
+      "key": "before",
+      "name": "BEFORE — hybrid clean painting / native 1672×941, centered at 100%",
+      "x": 124,
+      "y": 70,
+      "sha256": "cca2222bbe55864dd4a829963ac38e1c836a18d09f41f5500c78b307d9d2ed4b",
+      "item": 2,
+      "stageLayer": 3
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "key": "previous",
+      "name": "PREVIOUS ANIME — 320×180 / exact 6×",
+      "label": "ANIME / 320×180 / 6×",
+      "sha256": "1d8a85089e1c103c1096cb374e50a9f0ce4cad077f2912aa972c2f590fae4a75",
+      "item": 26,
+      "stageLayer": 27,
+      "cropComp": 98
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-bold.png",
+      "key": "bold",
+      "name": "HYBRID BOLD — 320×180 / exact 6×",
+      "label": "HYBRID BOLD / 320×180 / 6×",
+      "sha256": "0d095d966f161564e8ae85ea784dc62c23e01dae48cfefefc69ffa6ade320759",
+      "item": 50,
+      "stageLayer": 51,
+      "cropComp": 122
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-chunky.png",
+      "key": "chunky",
+      "name": "HYBRID CHUNKY — 240×135 / exact 8×",
+      "label": "HYBRID CHUNKY / 240×135 / 8×",
+      "sha256": "0402aa0272a5e9b1dba5c71d346505a79ab24cfaebf1dc419efbf812ac9cb1ef",
+      "item": 74,
+      "stageLayer": 75,
+      "cropComp": 146
+    }
+  ],
+  "fullStageChecks": [
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-chiaroscuro-before-v5.png",
+      "destinationX": 124,
+      "destinationY": 70,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "destinationX": 0,
+      "destinationY": 0,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-bold.png",
+      "destinationX": 0,
+      "destinationY": 0,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-chunky.png",
+      "destinationX": 0,
+      "destinationY": 0,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  ],
+  "faceChecks": [
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 20,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-bold.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 540,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-chunky.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 1060,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  ],
+  "stageComp": {
+    "background": [
+      0.06666667014360428,
+      0.09019608050584793,
+      0.0784313753247261
+    ],
+    "duration": 1,
+    "frameRate": 1,
+    "height": 1080,
+    "id": 1,
+    "layers": [
+      {
+        "blendMode": "Normal",
+        "id": 75,
+        "in": 0,
+        "index": 1,
+        "label": "Lavender",
+        "name": "HYBRID CHUNKY — 240×135 / exact 8× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 51,
+        "in": 0,
+        "index": 2,
+        "label": "Lavender",
+        "name": "HYBRID BOLD — 320×180 / exact 6× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": true
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 27,
+        "in": 0,
+        "index": 3,
+        "label": "Lavender",
+        "name": "PREVIOUS ANIME — 320×180 / exact 6× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 3,
+        "in": 0,
+        "index": 4,
+        "label": "Lavender",
+        "name": "BEFORE — hybrid clean painting / native 1672×941, centered at 100% / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      }
+    ],
+    "name": "01 — HYBRID ANIME + CHIAROSCURO / 1920×1080 / toggle named layers",
+    "preserveFrameRate": false,
+    "preserveResolution": false,
+    "resolution": "Auto",
+    "resolutionFactor": null,
+    "width": 1920,
+    "workArea": [
+      0,
+      1
+    ]
+  },
+  "faceComp": 170,
+  "nativeReopenMatches": true,
+  "inputsUnchanged": true
+}

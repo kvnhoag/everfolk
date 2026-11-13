@@ -1,18 +1,15 @@
 import { useEffect, useRef } from "react";
-import type { ActivityAvailability, EncounteredPerson, LifeState, PartnerDefinition, WorldPack } from "../../src/types.ts";
+import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import { activityPartnerIds } from "../../src/character.ts";
 import { resolvePartner } from "../../src/people.ts";
 import { displayProse } from "../models/display-prose.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
+import { childPortraitState, personPortraitState } from "../models/portrait-state.ts";
 import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { familyRelationshipRows, socialRelationshipRows } from "../models/relationship-table.ts";
 import "../styles/health.css";
 import "../styles/relationship-table.css";
-
-function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
-  return "sex" in person;
-}
 
 const closenessLabel = (value: number, world: WorldPack) => value >= (world.relationships?.supportThreshold ?? 60) ? "Close" : value < (world.relationships?.marriageMinimum ?? 40) ? "Strained" : "Steady";
 
@@ -60,10 +57,10 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
           {origin && <div className="household-background"><span className="household-field-label">Background</span><p>{origin.title}</p><p className="household-background-detail">{displayProse(origin.text)}</p></div>}
           {job && <div className="household-work"><span className="household-field-label">Your work</span><p>{job.title}</p></div>}
         </div>
-        {parents.length > 0 && <div className="household-natal-family"><span className="household-field-label">Parents</span><ul>{parents.map(parent => <li key={parent.id}><strong>{parent.name}</strong><span>{parent.roles[0]}{parent.deceased ? " · Deceased" : ""}</span><span>{parent.occupation}</span></li>)}</ul></div>}
+        {parents.length > 0 && <div className="household-natal-family"><span className="household-field-label">Parents</span><ul>{parents.map(parent => <li key={parent.id} className="household-person-row"><PixelPortrait portrait={parent.portrait} name={parent.name} className="household-person-portrait" /><div className="household-person-copy"><strong>{parent.name}</strong><span>{parent.roles[0]}{parent.deceased ? " · Deceased" : ""}</span><span>{parent.occupation}</span></div></li>)}</ul></div>}
         {partner && <div className="household-person household-person-card">
           <div className="household-person-top">
-            {isEncountered(partner) && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="household-mini-avatar" />}
+            <PixelPortrait portrait={personPortraitState(world, life, partner)} name={partner.name} className="household-mini-avatar" />
             <div className="household-person-copy">
               <span className="household-field-label">{romanticPartnerLabel(world, life, partner.id)}</span><strong>{partner.name}</strong>
               <p>{partner.occupation} · Age {life.age + partner.ageOffset}</p>
@@ -81,7 +78,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
           const age = life.age - child.birthAge;
           const tie = character?.relationships?.children[child.id];
           return <li key={child.id} className="household-child-row">
-            <PixelPortrait age={Math.max(0, age)} name={child.name} seed={`${life.seed}:child:${child.id}`} originId={life.originId} className="household-mini-avatar is-child" />
+            <PixelPortrait portrait={childPortraitState(world, life, child)} name={child.name} className="household-mini-avatar is-child" />
             <div className="household-child-info">
               <strong>{child.name}</strong>
               <span className={tie ? "household-child-tie" : undefined}>{age === 0 ? "Newborn" : `Age ${age}`}{tie && <small>{closenessLabel(tie.closeness, world)} · {tie.closeness}/100</small>}</span>
@@ -98,7 +95,7 @@ export default function HouseholdSummary({ life, world, onOpenCharacter, activit
           const actions = quickPartnerActions(person.id);
           return <li key={person.id} className="household-person-card is-circle">
             <div className="household-person-top">
-              {"sex" in person && <PixelPortrait age={life.age + person.ageOffset} name={person.name} sex={person.sex} originId={person.originId} avatarVariant={person.avatarVariant} seed={`${life.seed}:${person.id}`} className="household-mini-avatar" />}
+              <PixelPortrait portrait={personPortraitState(world, life, person)} name={person.name} className="household-mini-avatar" />
               <div className="household-person-copy">
                 <div className="household-circle-tags">{tags.map(tag => <span key={tag} className="household-role-badge">{tag}</span>)}</div>
                 <strong>{person.name}</strong>

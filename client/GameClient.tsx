@@ -32,9 +32,10 @@ async function loadRankedWorld(version: string) {
 }
 
 export default function GameClient() {
+  const [enterGame] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("enter") === "1");
   const backend = useChainBackend();
   const chainRoute = useChainRoute();
-  const { active, pickerOpen, setPickerOpen, worlds, busy, error, loadingPhase, openWorlds, enterWorld, keepImportedWorld, holdFreePlayForRanked } = useWorldLibrary();
+  const { active, pickerOpen, setPickerOpen, worlds, busy, error, loadingPhase, loadingProgress, openWorlds, enterWorld, keepImportedWorld, holdFreePlayForRanked } = useWorldLibrary();
   const dialog = useRef<HTMLDialogElement>(null);
   // A ranked life replaces free play until its ending report is closed; free play's save is untouched meanwhile.
   const [rankedSession, setRankedSession] = useState<RankedSession | null>(null);
@@ -118,7 +119,7 @@ export default function GameClient() {
     else if (!pickerOpen && dialog.current?.open) dialog.current?.close();
   }, [pickerOpen]);
 
-  if (!active) return <LoadingScreen phase={loadingPhase} />;
+  if (!active) return <LoadingScreen phase={loadingPhase} progress={loadingProgress} />;
   return <>
     {rankedSession
       ? rankedOnline
@@ -127,7 +128,7 @@ export default function GameClient() {
           initial: rankedSession.state, current: () => rankedSession.state,
           sync: next => rankedSession.sync(next), onSynced: () => setRankedRevision(value => value + 1),
         }} />
-      : <App key={active.key} chainBackend={backend} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
+      : <App key={active.key} enterGame={enterGame} chainBackend={backend} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}

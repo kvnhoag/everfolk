@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f03-middle-everyday-v2",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f03-middle-everyday-v2.png",
+  "sourceSha256": "511e5c9b0eeb3f5fc686ead05ee407fbe0f6272465c28cdf7f20cea310b0d494",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-f03-middle-everyday-v2.logical.png",
+  "logicalSha256": "c22d2ecf3cf09742f68b9aeabfe0160f8f6dd79085febbdf6be08bdfc1f7ab73",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-f03-middle-everyday-v2.png",
+  "outputSha256": "2c5c8464fdcc242c1b0310e767704db86fb9941f078ff606cf3413145fe741da",
+  "logicalPixelSha256": "89f153289d52af810adcd61199ae3808945111174706d52d3a573ccdd5660b7f",
+  "uniqueColours": 6790,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

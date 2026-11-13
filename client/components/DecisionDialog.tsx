@@ -1,20 +1,17 @@
 import { displayProse } from "../models/display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
-import type { Choice, EncounteredPerson, LifeEvent, LifeState, PartnerDefinition, WorldPack } from "../../src/types.ts";
+import type { Choice, LifeEvent, LifeState, WorldPack } from "../../src/types.ts";
 import { formatYear } from "../../src/index.ts";
 import { resolvePartner } from "../../src/people.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import { ChoicePreview } from "./CompactSkillPanel.tsx";
 import type { DemoScreen, TownFigureView } from "../demo/screen.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
+import { playerPortraitState, personPortraitState } from "../models/portrait-state.ts";
 import { relationshipLabels } from "../models/relationship-labels.ts";
 import "../styles/decision-dialog.css";
 import "../styles/decision-storybook.css";
 import "../styles/life-choice-board.css";
-
-function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
-  return "sex" in person;
-}
 
 interface Props {
   open: boolean;
@@ -118,15 +115,7 @@ function OpenDecisionDialog({
     <header className="life-decision-meta"><span>{event.rarity === "rare" ? "Rare encounter" : demoView?.activeOffer ? "Town offer" : isLoanDecision || isLoanOffer ? "Moneylender" : "Turning point"}</span><span>Age {life.age} · {formatYear(life.year)}</span><button type="button" onClick={onSetAside}>Set aside</button></header>
     <div className="life-encounter-banner" aria-label="Characters in this decision">
       <div className="life-encounter-side is-player">
-        <PixelPortrait
-          age={life.age}
-          name={playerName}
-          seed={life.seed}
-          sex={life.character?.sex}
-          originId={life.originId}
-          avatarVariant={life.character?.avatarVariant}
-          className="life-encounter-avatar"
-        />
+        <PixelPortrait portrait={playerPortraitState(world, life)} name={playerName} className="life-encounter-avatar" />
         <div>
           <span className="life-encounter-role">You</span>
           <strong>{playerName}</strong>
@@ -138,16 +127,8 @@ function OpenDecisionDialog({
 
       {involvedPerson ? (
         <div className="life-encounter-side is-counterpart">
-          {isEncountered(involvedPerson) && (
-            <PixelPortrait
-              age={life.age + involvedPerson.ageOffset}
-              name={involvedPerson.name}
-              sex={involvedPerson.sex}
-              originId={involvedPerson.originId}
-              avatarVariant={involvedPerson.avatarVariant}
-              seed={`${life.seed}:${involvedPerson.id}`}
-              className="life-encounter-avatar"
-            />
+          {involvedPerson && (
+            <PixelPortrait portrait={personPortraitState(world, life, involvedPerson)} name={involvedPerson.name} className="life-encounter-avatar" />
           )}
           <div>
             <div className="life-encounter-tags">

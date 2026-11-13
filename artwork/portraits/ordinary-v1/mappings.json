@@ -1,0 +1,632 @@
+{
+  "schemaVersion": 1,
+  "worldVersion": "0.43.0",
+  "mappingStatus": "Authored production interpretation, not historically attested occupational uniforms. Current job or recorded occupation wins; origins are upbringing, not a current job.",
+  "jobs": [
+    {
+      "id": "apprentice",
+      "title": "Workshop apprentice",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "id": "porter",
+      "title": "Quay porter",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "potter",
+      "title": "Potter",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "clerk",
+      "title": "Merchant's clerk",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "copyist",
+      "title": "Workshop copyist",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "sailor",
+      "title": "Merchant sailor",
+      "wardrobeId": "maritime",
+      "minAge": 16
+    },
+    {
+      "id": "shopkeeper",
+      "title": "Small-shop keeper",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "ceramic-decorator",
+      "title": "Ceramic decorator",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "wood-carver",
+      "title": "Wood carver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "sculptor",
+      "title": "Sculptor",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "philosophy-tutor",
+      "title": "Philosophy tutor",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "sky-table-calculator",
+      "title": "Sky-table calculator",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "astrologer",
+      "title": "Sky-omen interpreter",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "soldier",
+      "title": "Royal army soldier",
+      "wardrobeId": "military",
+      "minAge": 18
+    },
+    {
+      "id": "officer",
+      "title": "Royal army officer",
+      "wardrobeId": "military",
+      "minAge": 22
+    },
+    {
+      "id": "general",
+      "title": "Royal army general",
+      "wardrobeId": "military",
+      "minAge": 28
+    },
+    {
+      "id": "court-adviser",
+      "title": "Royal court adviser",
+      "wardrobeId": "elite",
+      "minAge": 24
+    },
+    {
+      "id": "patron-supported-reader",
+      "title": "Patron-supported reader",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "pottery-workshop-lead",
+      "title": "Pottery workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "carving-workshop-lead",
+      "title": "Wood-carving workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "sculpture-workshop-lead",
+      "title": "Sculpture workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "performer",
+      "title": "Hired musician",
+      "wardrobeId": "performance",
+      "minAge": 16
+    },
+    {
+      "id": "farmer",
+      "title": "Independent farmer",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "weaver",
+      "title": "Independent weaver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "writer",
+      "title": "Independent writer",
+      "wardrobeId": "scholarly",
+      "minAge": 16
+    },
+    {
+      "id": "boatbuilder",
+      "title": "Boat-fittings maker",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "trader",
+      "title": "Market trader",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "baker",
+      "title": "Independent baker",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "fisher",
+      "title": "Independent fisher",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "household-worker",
+      "title": "Household worker",
+      "wardrobeId": "everyday",
+      "minAge": 14
+    },
+    {
+      "id": "merchant",
+      "title": "Merchant",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "estate-steward",
+      "title": "Estate steward",
+      "wardrobeId": "elite",
+      "minAge": 18
+    },
+    {
+      "id": "quartermaster",
+      "title": "Quartermaster",
+      "wardrobeId": "military",
+      "minAge": 18
+    }
+  ],
+  "origins": [
+    {
+      "id": "merchant-household",
+      "title": "A merchant household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "artisan-household",
+      "title": "A pottery-worker household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "harbor-household",
+      "title": "A quay-laborer household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "fishing-household",
+      "title": "A fishing household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "bakery-household",
+      "title": "A bakery household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "clerk-household",
+      "title": "A clerk's household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "weaver-household",
+      "title": "A weaving household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "delta-newcomers",
+      "title": "Newcomers from the Delta",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "royal-household",
+      "title": "Royal kin on a coastal estate",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "estate-household",
+      "title": "A landowning estate household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "temple-household",
+      "title": "A temple-service household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "soldier-household",
+      "title": "A garrison family",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "tenant-farming-household",
+      "title": "A tenant-farming household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "domestic-service-household",
+      "title": "A household of hired domestic workers",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "boatbuilder-household",
+      "title": "A boatbuilding household",
+      "defaultWardrobeId": "everyday"
+    },
+    {
+      "id": "musician-household",
+      "title": "A household of traveling musicians",
+      "defaultWardrobeId": "everyday"
+    }
+  ],
+  "originHouseholdCues": [
+    {
+      "originId": "merchant-household",
+      "householdCueWardrobeId": "commerce",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "artisan-household",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "harbor-household",
+      "householdCueWardrobeId": "maritime",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "fishing-household",
+      "householdCueWardrobeId": "maritime",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "bakery-household",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "clerk-household",
+      "householdCueWardrobeId": "scholarly",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "weaver-household",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "delta-newcomers",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "royal-household",
+      "householdCueWardrobeId": "elite",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "estate-household",
+      "householdCueWardrobeId": "elite",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "temple-household",
+      "householdCueWardrobeId": "scholarly",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "soldier-household",
+      "householdCueWardrobeId": "military",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "tenant-farming-household",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "domestic-service-household",
+      "householdCueWardrobeId": "everyday",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "boatbuilder-household",
+      "householdCueWardrobeId": "work",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    },
+    {
+      "originId": "musician-household",
+      "householdCueWardrobeId": "performance",
+      "use": "Context only; never automatically equip player or dependant from natal origin."
+    }
+  ],
+  "encounters": [
+    {
+      "id": "person-harbor",
+      "title": "Harbor worker",
+      "jobId": "porter",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-market",
+      "title": "Market seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    },
+    {
+      "id": "person-workshop",
+      "title": "Workshop worker",
+      "jobId": "apprentice",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-linen",
+      "title": "Linen worker",
+      "jobId": "weaver",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-copies",
+      "title": "Document copyist",
+      "jobId": "copyist",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-bakery",
+      "title": "Bakery worker",
+      "jobId": "baker",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-well",
+      "title": "Household provisioner",
+      "jobId": "household-worker",
+      "wardrobeId": "everyday"
+    },
+    {
+      "id": "person-festival",
+      "title": "Garland maker",
+      "jobId": null,
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-library",
+      "title": "Reader's assistant",
+      "jobId": "patron-supported-reader",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-music",
+      "title": "Musician",
+      "jobId": "performer",
+      "wardrobeId": "performance"
+    },
+    {
+      "id": "person-boat",
+      "title": "Boat worker",
+      "jobId": "boatbuilder",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-drill",
+      "title": "Equipment keeper",
+      "jobId": "quartermaster",
+      "wardrobeId": "military"
+    },
+    {
+      "id": "person-garden",
+      "title": "Garden attendant",
+      "jobId": "farmer",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-accounts",
+      "title": "Accounts assistant",
+      "jobId": "clerk",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-pottery",
+      "title": "Pottery worker",
+      "jobId": "potter",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-neighbors",
+      "title": "Cloth seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    }
+  ],
+  "wardrobeFamilies": [
+    {
+      "id": "everyday",
+      "title": "Everyday household dress",
+      "stages": [
+        "infant",
+        "child",
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "work",
+      "title": "Workshop, field and domestic trades",
+      "stages": [
+        "child",
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "maritime",
+      "title": "Harbor, fishing and seafaring",
+      "stages": [
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "commerce",
+      "title": "Market and merchant work",
+      "stages": [
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "scholarly",
+      "title": "Writing, accounts and learned work",
+      "stages": [
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "military",
+      "title": "Military service",
+      "stages": [
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "elite",
+      "title": "Court and estate administration",
+      "stages": [
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    },
+    {
+      "id": "performance",
+      "title": "Musical performance",
+      "stages": [
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "referenceIds": [
+        "met-greek-dress",
+        "met-child-shirt",
+        "met-wrapped-man"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "met-greek-dress",
+      "url": "https://www.metmuseum.org/essays/ancient-greek-dress",
+      "title": "Ancient Greek Dress",
+      "use": "Chiton, peplos, himation and work exomis form comparators. Greek evidence does not establish universal Egyptian dress."
+    },
+    {
+      "id": "met-child-shirt",
+      "url": "https://www.metmuseum.org/art/collection/search/548288",
+      "title": "Child shirt 25.3.215",
+      "date": "650-400 BCE",
+      "use": "Adjacent earlier-period Egyptian linen comparator; not exact 350-250 BCE reconstruction."
+    },
+    {
+      "id": "met-wrapped-man",
+      "url": "https://www.metmuseum.org/art/collection/search/587739",
+      "title": "Standing man holding statuette of Nebethetepet or Nehemetaway",
+      "date": "600-200 BCE",
+      "use": "Egyptian wrapped fringed garment; possible priest identity uncertain."
+    },
+    {
+      "id": "met-tjahapimu",
+      "url": "https://www.metmuseum.org/art/collection/search/551806",
+      "title": "The General Tjahapimu",
+      "date": "360-343 BCE",
+      "use": "Egyptian elite sculptural comparator, not ordinary wardrobe survey."
+    },
+    {
+      "id": "met-cuirass",
+      "url": "https://www.metmuseum.org/art/collection/search/256134",
+      "title": "Bronze cuirass (body armor), Greek Apulian",
+      "date": "4th century BCE",
+      "use": "Regional armor-form comparator, not universal Egyptian military equipment."
+    },
+    {
+      "id": "cairo-djedhor",
+      "url": "https://egyptianmuseumcairo.eg/artefacts/statue-of-the-priest-of-god-amun-called-djedhor/",
+      "title": "Statue of Djed-Hor Holding a Stela of Horus on Crocodiles",
+      "date": "323-317 BCE",
+      "use": "Egyptian enveloping garment in ritual statue; inscriptions and divine attributes excluded."
+    }
+  ]
+}

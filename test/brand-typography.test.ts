@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 
-const root = new URL("..", import.meta.url).pathname;
+const root = fileURLToPath(new URL("..", import.meta.url));
 const TOKEN_FILE = "client/styles/typography.css";
 /** Stylesheets that keep their own font stacks: the admin studio. */
 const ALLOWLIST = new Set(["client/styles/admin.css"]);
@@ -21,7 +22,7 @@ function cssFiles(dir: string): string[] {
   });
 }
 
-const sheets = [...cssFiles("client"), ...cssFiles("app")].map(file => ({ file: relative(".", file), css: readFileSync(join(root, file), "utf8") }));
+const sheets = [...cssFiles("client"), ...cssFiles("app")].map(file => ({ file: relative(".", file).replaceAll("\\", "/"), css: readFileSync(join(root, file), "utf8") }));
 
 /** Every `font-family` / `font` declaration outside @font-face blocks, with its file. */
 function fontDeclarations(css: string) {

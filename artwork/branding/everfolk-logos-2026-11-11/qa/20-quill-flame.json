@@ -1,0 +1,402 @@
+{
+  "fonts": [
+    {
+      "family": "Georgia",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Georgia",
+        "style": "Bold"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Bold"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 340,
+        "name": "20 Primary lockup",
+        "width": 720,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "20 Colour device",
+        "width": 160,
+        "x": 760,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "20 One-colour device",
+        "width": 160,
+        "x": 960,
+        "y": 0
+      },
+      {
+        "height": 340,
+        "name": "20 Reverse lockup",
+        "width": 720,
+        "x": 0,
+        "y": 400
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 19,
+    "dirty": false,
+    "fileInfoTitle": "Everfolk / 20 Quill Flame",
+    "history": [
+      "Artboard Options",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Layer",
+      "Draw Quill Flame",
+      "Type",
+      "Type",
+      "New Layer",
+      "Draw Quill Flame",
+      "New Layer",
+      "Draw Quill Flame",
+      "New Layer",
+      "Draw Quill Flame",
+      "Type",
+      "Type"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      19
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 128.01937500000003,
+          "width": 435.4691796875,
+          "x": 105.44,
+          "y": 501.84
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 253,
+              "y": 610.5
+            },
+            "fill": "#b58a49",
+            "id": 25,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.9912109375,
+              "width": 290.9091796875,
+              "x": 250,
+              "y": 527.478515625
+            },
+            "fill": "#fbf3df",
+            "id": 24,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 116.92000000000002,
+              "width": 90.28,
+              "x": 105.44,
+              "y": 501.84
+            },
+            "childCount": 3,
+            "id": 23,
+            "kind": "Group",
+            "locked": false,
+            "name": "20 Quill Flame / reverse device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 19,
+        "kind": "Layer",
+        "locked": false,
+        "name": "04 Reverse lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 101.12,
+          "width": 78.08000000000004,
+          "x": 1011.84,
+          "y": 26.240000000000002
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 101.12,
+              "width": 78.08000000000004,
+              "x": 1011.84,
+              "y": 26.240000000000002
+            },
+            "childCount": 3,
+            "id": 18,
+            "kind": "Group",
+            "locked": false,
+            "name": "20 Quill Flame / mono device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 14,
+        "kind": "Layer",
+        "locked": false,
+        "name": "03 One-colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 101.12,
+          "width": 78.07999999999993,
+          "x": 811.84,
+          "y": 26.240000000000002
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 101.12,
+              "width": 78.07999999999993,
+              "x": 811.84,
+              "y": 26.240000000000002
+            },
+            "childCount": 3,
+            "id": 13,
+            "kind": "Group",
+            "locked": false,
+            "name": "20 Quill Flame / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 9,
+        "kind": "Layer",
+        "locked": false,
+        "name": "02 Colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 128.019375,
+          "width": 435.4691796875,
+          "x": 105.44,
+          "y": 101.84
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 253,
+              "y": 210.5
+            },
+            "fill": "#736957",
+            "id": 8,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.9912109375,
+              "width": 290.9091796875,
+              "x": 250,
+              "y": 127.478515625
+            },
+            "fill": "#24464b",
+            "id": 7,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 116.91999999999999,
+              "width": 90.28,
+              "x": 105.44,
+              "y": 101.84
+            },
+            "childCount": 3,
+            "id": 6,
+            "kind": "Group",
+            "locked": false,
+            "name": "20 Quill Flame / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "01 Primary lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 25,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#b58a49",
+      "fillActive": false,
+      "stroke": "None",
+      "strokeWidth": 4.5
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\20-quill-flame.vectorcraft",
+    "redo": [],
+    "revision": 105,
+    "selection": [
+      25
+    ],
+    "selectionBounds": {
+      "height": 19.359375,
+      "width": 136.390625,
+      "x": 253,
+      "y": 610.5
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "20-quill-flame.vectorcraft",
+    "tool": "selection",
+    "uid": 21,
+    "units": "Pixels"
+  }
+}

@@ -1,0 +1,59 @@
+EVERFOLK / ALEXANDER / APPROVED POSE + BLADE-ONLY CORRECTION V8
+
+User's approved pose
+The exact attached image is retained as source/approved-pose-original.png.
+It is the first blade-correction draft, exec-d173380d-7ff8-4efb-8391-beef66e8f8a3,
+with the high raised fist. V7's lowered-arm pose is not the target for this
+revision. Only the metal blade and immediately adjacent upper sky are edited.
+Hand, wrist, arm, hilt, guard, face, body and flying cape remain the original.
+
+Production
+Built-in image editing produced source/blade-edit-generated.png, using the
+approved source and actual Greek machaira photograph. The generated candidate
+is restricted to a blade-area mask over the original, so a whole-frame model
+redraw does not alter the approved figure. The native ArtCraft painting master
+retains the original base and separate clipped blade candidate. No new
+individually authored brush pass is claimed.
+Exact prompt: source/generation-prompt.txt (local and Git-ignored).
+
+Equipment reference
+Upper Greek iron machaira/kopis in the official public-domain photograph,
+former Met record 2001.346, fifth-fourth century BCE.
+https://www.metmuseum.org/art/collection/search/257576
+https://collectionapi.metmuseum.org/api/collection/v1/iiif/257576/1752237/main-image
+Local: references/greek-machaira-met-2001.346.jpg, source photograph unchanged.
+The object was restituted September 2025. It is a weapon-type reference, not
+Alexander's documented personal weapon or a literal scale specification.
+The card deliberately retains a heroically enlarged blade and moving mantle.
+Inherited armour/clothing/face sources are documented in the v4-v6 notes;
+actual MANN mosaic and mounted-bronze reference photographs are retained here.
+
+Coarser pixel finish
+PixelOE 1.0.0 via the installed everfolk-asset-workflow helper.
+Logical 280 x 350, exact nearest-neighbour 3x to 840 x 1050; palette reduction
+off. This replaces the prior 420 x 525 / 2x finish with 50% larger pixel blocks
+at the same artwork display size. Frame and text remain separate and crisp.
+The helper checks repeat-render determinism, exact grid and blocks, lossless
+readback and unchanged source hash. Review the pupils at full and card size.
+source/pixelate-card.ps1 records the reproducible invocation.
+
+Card construction
+ArtCraft native card layers retain independent frame, text, emblem, rarity
+and footer. The illustration remains flattened; its clothes are not a rig.
+Delivery PNG composites the original coarse pixel art at 100% under native
+type/frame exports so the renderer cannot interpolate the pixel grid.
+
+Earlier versions remain unchanged. Rarity, flavour and card number are
+exploratory; no NFT is minted.
+
+Completed checks
+qa/blade-only-patch.json records zero differences in all protected regions
+(all y >= 280; all x < 250 with y >= 210) and outside the blade patch. Original
+and generated candidate hashes remain unchanged. The blade edge was visually
+checked after a small mask-boundary correction to remove a metal splice.
+The final card's 765,234 checked unobscured portrait pixels match exactly;
+live fonts resolve without substitution, and native reopening is identical.
+The independent scarab component is lowered slightly to clear the long tip.
+Full and half-size card previews and the reference/painting/coarse comparison
+were visually reviewed. QA: qa/portrait-pixel.json, qa/card-build.json,
+qa/final-crisp-export.json and qa/fixed-pose-comparison.json.

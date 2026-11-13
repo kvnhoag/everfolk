@@ -1,0 +1,118 @@
+{
+  "selection": {
+    "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+    "gridType": "mixed-grid; no single logical grid",
+    "output": [
+      384,
+      480
+    ],
+    "baseLogical": [
+      128,
+      160
+    ],
+    "detailLogical": [
+      192,
+      240
+    ],
+    "basePixelSize": 3,
+    "detailPixelSize": 2,
+    "detailOutlineThicknessRequired": 0,
+    "commonCellSize": 6,
+    "gridOrigin": [
+      0,
+      0
+    ],
+    "sourceCanvas": [
+      800.0,
+      1000.0
+    ],
+    "coarsePixelSha256": "b965748b7af98b847cb8b26bb2b43f9450d3259b276cef1bde0d75ce117920bb",
+    "finePixelSha256": "6da2a2b99151215d76f4d615c96655229f6ec195787e82f05e40cb549bcd84bd",
+    "mixedPixelSha256": "784e7489bf5d5acc4b7c2d0660239cc520edc001a1e7a94c476812e59464d001",
+    "maskPixelSha256": "28d614b533ec523d44aec155bb97f6f0206777ac0c0de0067b010eb67cd9a3e0",
+    "selectedDetailCells": 325,
+    "retainedCoarseCells": 4795,
+    "criticalForcedAdditionalCells": 1,
+    "criticalForcedOutsideEllipseSupportCells": 0,
+    "affectedPixels": 11700,
+    "changedPixels": 11359,
+    "outsideMaskChangedPixels": 0,
+    "selectedDetailDifferingPixels": 0,
+    "criticalCoverage": [
+      {
+        "name": "eyes",
+        "box": [
+          148,
+          86,
+          236,
+          106
+        ],
+        "selectedPixels": 1760,
+        "totalPixels": 1760,
+        "detailCoverage": 1.0
+      }
+    ],
+    "innerRegionFullDetail": true,
+    "cellCenterEllipseSampling": true,
+    "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+    "registeredExactIntegerBlocks": true,
+    "wholeCommonCells": true,
+    "deterministicComposition": true,
+    "coarseUnchanged": true,
+    "fineUnchanged": true,
+    "interpolatingUpscale": false,
+    "colourBlend": false,
+    "alphaBlend": false,
+    "paletteQuantization": false,
+    "callerChecksRequired": [
+      "fine PixelOE outline thickness 0",
+      "repeat PixelOE render equality",
+      "source/base/fine/mixed PNG hashes",
+      "PNG write/readback equality"
+    ]
+  },
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "coordinateSpace": "output pixels; origin upper-left",
+    "source_canvas": [
+      800.0,
+      1000.0
+    ],
+    "eye_target": [
+      400.0,
+      200.0
+    ],
+    "chin_target": [
+      400.0,
+      365.0
+    ],
+    "regions": [
+      {
+        "name": "face",
+        "center": [
+          192.0,
+          115.8
+        ],
+        "radius": [
+          57.023999999999994,
+          79.2
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": [
+      {
+        "name": "eyes",
+        "box": [
+          148,
+          86,
+          236,
+          106
+        ]
+      }
+    ],
+    "critical_selection": "Force every common 6x6 cell intersecting an eye box"
+  }
+}

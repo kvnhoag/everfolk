@@ -22,7 +22,10 @@ test("specific cause names preserve the previous life mechanics and mortality ou
 });
 
 test("the authored night cargo risk can cause its exact death and replays that decision", () => {
-  assert.deepEqual(pack.character.activities.find(activity => activity.id === "take-night-cargo-work"),
+  const latest = pack.character.activities.find(activity => activity.id === "take-night-cargo-work")!;
+  assert.equal(latest.audience, "common", "Cargo work belongs to the ordinary livelihood route.");
+  const { audience: _audience, ...unchangedRisk } = latest;
+  assert.deepEqual(unchangedRisk,
     nightRiskRelease.character.activities.find(activity => activity.id === "take-night-cargo-work"),
     "The latest pack retains the authored cargo-risk action and its exact fatal branch.");
   // Keep this historical seed check on its retained release. New opening story

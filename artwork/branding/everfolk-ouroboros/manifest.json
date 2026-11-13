@@ -1,0 +1,68 @@
+{
+  "brand": "Everfolk",
+  "concept": "Endless Life / Ouroboros",
+  "reference": "https://www.ubisoft.com/en-us/game/assassins-creed",
+  "master": "masters/Everfolk-Ouroboros.vectorcraft",
+  "artboards": 8,
+  "files": [
+    {
+      "artboard": 0,
+      "svg": "svg/everfolk-ouroboros-primary.svg",
+      "png": "png/everfolk-ouroboros-primary.png"
+    },
+    {
+      "artboard": 1,
+      "svg": "svg/everfolk-ouroboros-reverse.svg",
+      "png": "png/everfolk-ouroboros-reverse.png"
+    },
+    {
+      "artboard": 2,
+      "svg": "svg/everfolk-ouroboros-gold.svg",
+      "png": "png/everfolk-ouroboros-gold.png"
+    },
+    {
+      "artboard": 3,
+      "svg": "svg/everfolk-ouroboros-horizontal.svg",
+      "png": "png/everfolk-ouroboros-horizontal.png"
+    },
+    {
+      "artboard": 4,
+      "svg": "svg/everfolk-ouroboros-inline-o.svg",
+      "png": "png/everfolk-ouroboros-inline-o.png"
+    },
+    {
+      "artboard": 5,
+      "svg": "svg/everfolk-wordmark.svg",
+      "png": "png/everfolk-wordmark.png"
+    },
+    {
+      "artboard": 6,
+      "svg": "svg/everfolk-ouroboros-emblem.svg",
+      "png": "png/everfolk-ouroboros-emblem.png"
+    },
+    {
+      "artboard": 7,
+      "svg": "svg/everfolk-ouroboros-compact.svg",
+      "png": "png/everfolk-ouroboros-compact.png"
+    }
+  ],
+  "variants": [
+    {
+      "svg": "svg/everfolk-ouroboros-emblem-reverse.svg",
+      "png": "png/everfolk-ouroboros-emblem-reverse.png"
+    },
+    {
+      "svg": "svg/everfolk-ouroboros-emblem-gold.svg",
+      "png": "png/everfolk-ouroboros-emblem-gold.png"
+    }
+  ],
+  "palette": {
+    "ink": "#203c42",
+    "carbon": "#111b20",
+    "teal": "#183b40",
+    "paper": "#f4f0e3",
+    "gold": "#b59a61",
+    "muted": "#9c916f"
+  },
+  "warnings": []
+}

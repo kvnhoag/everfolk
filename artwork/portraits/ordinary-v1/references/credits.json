@@ -1,0 +1,38 @@
+[
+  {
+    "id": "met-child-shirt",
+    "title": "Child's Shirt · 25.3.215",
+    "date": "650–400 BCE",
+    "path": "references/met-child-shirt-25.3.215-original.jpg",
+    "url": "https://www.metmuseum.org/art/collection/search/548288",
+    "imageUrl": "https://collectionapi.metmuseum.org/api/collection/v1/iiif/548288/1408188/main-image",
+    "credit": "The Metropolitan Museum of Art, Rogers Fund, 1925. Public Domain.",
+    "use": "Egyptian linen and simple shirt construction; earlier adjacent-period comparator. Not an exact pattern for our garment.",
+    "sha256": "221a230df3401fbdbcf7703ba203c523b28cb9c6df10ca3c8a9e37185764861c",
+    "unmodifiedDownload": true
+  },
+  {
+    "id": "met-wrapped-man",
+    "title": "Standing man · 30.8.98",
+    "date": "600–200 BCE",
+    "path": "references/met-wrapped-man-30.8.98-original.jpg",
+    "url": "https://www.metmuseum.org/art/collection/search/587739",
+    "imageUrl": "https://collectionapi.metmuseum.org/api/collection/v1/iiif/587739/1212609/main-image",
+    "credit": "The Metropolitan Museum of Art, Theodore M. Davis Collection, Bequest of Theodore M. Davis, 1915. Public Domain.",
+    "use": "Wrapped/fringed garment context. A metal figure is not evidence for the generated cloth's material or color; possible priest identification is uncertain.",
+    "sha256": "ee6eddc072db89be618d9ee89e40ccaf7025bfe532218201849e47c54863a00f",
+    "unmodifiedDownload": true
+  },
+  {
+    "id": "met-family-stele",
+    "title": "Family grave stele · 11.100.2",
+    "date": "About 360 BCE · Greek, Attic",
+    "path": "references/met-family-stele-original.jpg",
+    "url": "https://www.metmuseum.org/art/collection/search/248483",
+    "imageUrl": "https://collectionapi.metmuseum.org/api/collection/v1/iiif/248483/538344/main-image",
+    "credit": "The Metropolitan Museum of Art, Rogers Fund, 1911. Public Domain.",
+    "use": "Comparative draped-cloth forms. Marble surface is not a textile/color claim or a likeness reference for the fictional cast.",
+    "sha256": "9a7953d240dac0a886d2069bdced8051a0c5883dad2c5e5f6dff27b8e01e31ab",
+    "unmodifiedDownload": true
+  }
+]

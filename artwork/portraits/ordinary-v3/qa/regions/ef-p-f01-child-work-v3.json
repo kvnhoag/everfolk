@@ -1,0 +1,44 @@
+{
+  "base_pixel_size": 3,
+  "detail_pixel_size": 2,
+  "detail_outline_thickness": 0,
+  "coordinateSpace": "output pixels; origin upper-left",
+  "source_canvas": [
+    800.0,
+    1000.0
+  ],
+  "eye_target": [
+    402.85204991087346,
+    201.06951871657753
+  ],
+  "chin_target": [
+    402.13903743315507,
+    352.94117647058823
+  ],
+  "regions": [
+    {
+      "name": "face",
+      "center": [
+        193.36898395721926,
+        114.73816876191704
+      ],
+      "radius": [
+        52.48742336052427,
+        72.89919911183927
+      ],
+      "inner_scale": 0.82
+    }
+  ],
+  "critical_boxes": [
+    {
+      "name": "eyes",
+      "box": [
+        153,
+        87,
+        234,
+        106
+      ]
+    }
+  ],
+  "critical_selection": "Force every common 6x6 cell intersecting an eye box"
+}

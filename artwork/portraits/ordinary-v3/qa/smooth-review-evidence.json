@@ -1,0 +1,57 @@
+{
+  "reviewer": "heads_third_pair",
+  "reviewedAtUtc": "2026-11-13T03:29:09.004636+00:00",
+  "scope": {
+    "smoothLifetimeCards": 36,
+    "smoothAdultWardrobeCards": 60,
+    "smoothDistinctAssemblies": 90,
+    "adultEverydayOverlap": 6,
+    "boundedPixelAdultCards": 6
+  },
+  "reviewedArtifacts": [
+    {
+      "path": "review/proof/smooth-lifetimes-6x6.png",
+      "sha256": "7670c1bfef4f652d0c9fdd4ade4317f547bfb3aa89855bd3a1f10cc290a9a418"
+    },
+    {
+      "path": "review/proof/smooth-adult-wardrobe-6x10.png",
+      "sha256": "50d41435998061a9046959f5e20c50080c0cd2d4ac2697ada3048b6990014e74"
+    },
+    {
+      "path": "review/proof/mixed-pixel-preview.png",
+      "sha256": "c5eb4c1572c2a0af9a728abfa7317bedf97a69d8d0becca3db5c7dd6c6e62dc5"
+    },
+    {
+      "path": "components/models/ef-model-f03-middle-v3.png",
+      "sha256": "d041938699f01dd8c5e98b8f34d58221c0f5bf7f4f99e1f88683d0aab57fb134"
+    },
+    {
+      "path": "components/models/ef-model-m03-infant-v3.png",
+      "sha256": "5e3ad16ef67bee5cdecbaaca889c861a8ecca1727189a2a7e768e89a9d1d6870"
+    },
+    {
+      "path": "components/models/ef-model-m03-elder-v3.png",
+      "sha256": "4241cbe277545175eab25f1104f9d15aef16be96705381cbb2a1a063c6e50bf5"
+    },
+    {
+      "path": "components/outfits/ef-p-m01-adult-aristocrat-v3.png",
+      "sha256": "1a6619378797111d2e37daa848b879a184a992175768c5777b8a656b72c2cb1b"
+    },
+    {
+      "path": "components/outfits/ef-p-f03-adult-royalty-v3.png",
+      "sha256": "31f131d849ccdf92f806f79500e4211bad3beb4e9eac4dd1d707c37df1cb6566"
+    }
+  ],
+  "findings": [
+    "No material neck tabs, ghost slits, collar gaps, body discontinuities or palette panels found in these reviewed proofs.",
+    "Infants retain original soft short-neck swaddled models; children and older adults retain their own source body anatomy.",
+    "Native aristocrat collar and royalty sleeve/neck boundaries are coherent.",
+    "Gray beard remains natural; elderly cool temple shadows follow painted planes rather than broad mask islands.",
+    "Fine face and coarse body PixelOE transition has no visible patch seam in six-adult bounded proof."
+  ],
+  "limits": [
+    "Smooth contact sheets are overview inspection; native checks are explicitly listed, not all assemblies inspected at native resolution.",
+    "This reviewer inspection is not user acceptance.",
+    "Full 228 final outputs still require inspection after complete manifest is announced."
+  ]
+}

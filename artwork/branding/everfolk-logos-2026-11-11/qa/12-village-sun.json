@@ -1,0 +1,402 @@
+{
+  "fonts": [
+    {
+      "family": "Georgia",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Georgia",
+        "style": "Bold"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Bold"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 340,
+        "name": "12 Primary lockup",
+        "width": 720,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "12 Colour device",
+        "width": 160,
+        "x": 760,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "12 One-colour device",
+        "width": 160,
+        "x": 960,
+        "y": 0
+      },
+      {
+        "height": 340,
+        "name": "12 Reverse lockup",
+        "width": 720,
+        "x": 0,
+        "y": 400
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 19,
+    "dirty": false,
+    "fileInfoTitle": "Everfolk / 12 Village Sun",
+    "history": [
+      "Artboard Options",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Layer",
+      "Draw Village Sun",
+      "Type",
+      "Type",
+      "New Layer",
+      "Draw Village Sun",
+      "New Layer",
+      "Draw Village Sun",
+      "New Layer",
+      "Draw Village Sun",
+      "Type",
+      "Type"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      19
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 206.81937499999998,
+          "width": 290.9091796875,
+          "x": 215.302734375,
+          "y": 446.04
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 291.8046875,
+              "y": 633.5
+            },
+            "fill": "#b58a49",
+            "id": 25,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.9912109375,
+              "width": 290.9091796875,
+              "x": 215.302734375,
+              "y": 551.478515625
+            },
+            "fill": "#fbf3df",
+            "id": 24,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 67.16000000000003,
+              "width": 69.92000000000002,
+              "x": 325.04,
+              "y": 446.04
+            },
+            "childCount": 3,
+            "id": 23,
+            "kind": "Group",
+            "locked": false,
+            "name": "12 Village Sun / reverse device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 19,
+        "kind": "Layer",
+        "locked": false,
+        "name": "04 Reverse lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 93.44,
+          "width": 97.28000000000009,
+          "x": 991.36,
+          "y": 31.36
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 93.44,
+              "width": 97.28000000000009,
+              "x": 991.36,
+              "y": 31.36
+            },
+            "childCount": 3,
+            "id": 18,
+            "kind": "Group",
+            "locked": false,
+            "name": "12 Village Sun / mono device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 14,
+        "kind": "Layer",
+        "locked": false,
+        "name": "03 One-colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 93.44,
+          "width": 97.27999999999997,
+          "x": 791.36,
+          "y": 31.36
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 93.44,
+              "width": 97.27999999999997,
+              "x": 791.36,
+              "y": 31.36
+            },
+            "childCount": 3,
+            "id": 13,
+            "kind": "Group",
+            "locked": false,
+            "name": "12 Village Sun / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 9,
+        "kind": "Layer",
+        "locked": false,
+        "name": "02 Colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 206.819375,
+          "width": 290.9091796875,
+          "x": 215.302734375,
+          "y": 46.04
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 291.8046875,
+              "y": 233.5
+            },
+            "fill": "#736957",
+            "id": 8,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.9912109375,
+              "width": 290.9091796875,
+              "x": 215.302734375,
+              "y": 151.478515625
+            },
+            "fill": "#24464b",
+            "id": 7,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 67.16,
+              "width": 69.92000000000002,
+              "x": 325.04,
+              "y": 46.04
+            },
+            "childCount": 3,
+            "id": 6,
+            "kind": "Group",
+            "locked": false,
+            "name": "12 Village Sun / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "01 Primary lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 25,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#b58a49",
+      "strokeWidth": 4
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\12-village-sun.vectorcraft",
+    "redo": [],
+    "revision": 103,
+    "selection": [
+      25
+    ],
+    "selectionBounds": {
+      "height": 19.359375,
+      "width": 136.390625,
+      "x": 291.8046875,
+      "y": 633.5
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "12-village-sun.vectorcraft",
+    "tool": "selection",
+    "uid": 13,
+    "units": "Pixels"
+  }
+}

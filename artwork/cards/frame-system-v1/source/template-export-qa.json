@@ -1,0 +1,102 @@
+{
+  "dimensions": [
+    900,
+    1260
+  ],
+  "method": "Code-authored SVG geometry with live editable placeholder text; native existing logo vector paths; sharp PNG export.",
+  "fontPolicy": "SVG embeds the existing Eczar and DM Sans WOFF2 assets for supporting browsers. Raster export uses installed Georgia/Arial fallbacks because sharp/librsvg does not load CSS webfonts and Eczar/DM Sans are not system-installed. The exact approved Eczar wordmark is vector geometry in every layout.",
+  "records": [
+    {
+      "name": "standard-frame-only",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentArtPixels": 514624,
+      "transparentCheckRegion": [
+        76,
+        216,
+        824,
+        904
+      ],
+      "centerAlpha": 0,
+      "sha256": "8ca0e2a81aabab8ccef4a35ff47b0515f3088b126e971c9201f11ba0a3995b57",
+      "liveText": false,
+      "rasterImages": 0
+    },
+    {
+      "name": "standard-layout",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentArtPixels": 514624,
+      "transparentCheckRegion": [
+        76,
+        216,
+        824,
+        904
+      ],
+      "centerAlpha": 0,
+      "sha256": "f3d924ba30e4d4ab1e03b7f6d55da0859e305d241718028c29042239c5881d7b",
+      "liveText": true,
+      "rasterImages": 0
+    },
+    {
+      "name": "legendary-full-art-frame-only",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentArtPixels": 514800,
+      "transparentCheckRegion": [
+        60,
+        270,
+        840,
+        930
+      ],
+      "centerAlpha": 0,
+      "sha256": "18283ef430325f5f9cba99b75918523e9a188fd5db41f5dbd86a706a2a213bfe",
+      "liveText": false,
+      "rasterImages": 0
+    },
+    {
+      "name": "legendary-full-art-layout",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentArtPixels": 514800,
+      "transparentCheckRegion": [
+        60,
+        270,
+        840,
+        930
+      ],
+      "centerAlpha": 0,
+      "sha256": "58cde4f7d20855092813f4575a9c1b04a46a075a9b66bf6f66b0c5ca1766ce40",
+      "liveText": true,
+      "rasterImages": 0
+    }
+  ]
+}

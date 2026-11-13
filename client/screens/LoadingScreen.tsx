@@ -1,5 +1,8 @@
+"use client";
+
 import { useId } from "react";
 import type { LoadingPhase } from "../types/loading.ts";
+import "../styles/loading-screen.css";
 import { BRAND_TAGLINE } from "../components/EverfolkBrand.tsx";
 
 const phaseLabels: Record<LoadingPhase, string> = {
@@ -8,11 +11,16 @@ const phaseLabels: Record<LoadingPhase, string> = {
   world: "Loading world…",
 };
 
+const phaseProgress: Record<LoadingPhase, number> = { opening: 5, restoring: 20, world: 45 };
+
 /** Renders in the server response before the game boots. */
-export default function LoadingScreen({ phase = "opening", preview = false }: { phase?: LoadingPhase; preview?: boolean }) {
+export default function LoadingScreen({ phase = "opening", preview = false, progress }: { phase?: LoadingPhase; preview?: boolean; progress?: number }) {
   const titleId = useId();
+  const suppliedProgress = progress !== undefined && Number.isFinite(progress) ? progress : phaseProgress[phase];
+  const percent = preview ? 100 : Math.min(100, Math.max(0, Math.round(suppliedProgress)));
+  const label = preview ? "Ready to play" : phaseLabels[phase];
   // Keep the first frame sized and legible even before the streamed CSS arrives.
-  return <main className="storybook-loading" aria-labelledby={titleId} aria-busy={preview ? undefined : true}
+  return <main className="storybook-loading" aria-labelledby={titleId} aria-busy={percent < 100}
     style={{ boxSizing: "border-box", minHeight: "100svh", display: "grid", placeItems: "center", padding: "clamp(20px, 5vw, 48px)", background: "#102e37", color: "#e7e0c9" }}>
     <div style={{ width: "min(100%, 680px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
       <h1 id={titleId} style={{ width: "min(78%, 410px)", margin: "0 0 10px" }}>
@@ -20,7 +28,7 @@ export default function LoadingScreen({ phase = "opening", preview = false }: { 
       </h1>
       <p className="everfolk-brand-tagline" style={{ margin: "0 0 18px", color: "#f1cf88", fontSize: 13, fontWeight: 500, letterSpacing: "4px", lineHeight: 1.2, textTransform: "uppercase" }}>{BRAND_TAGLINE}</p>
       <div role="status" aria-live="polite" aria-atomic="true"
-        style={{ marginBottom: "clamp(18px, 3vh, 30px)", color: "#ead6b7", fontSize: 14, lineHeight: 1.5 }}>{phaseLabels[phase]}</div>
+        style={{ marginBottom: "clamp(18px, 3vh, 30px)", color: "#ead6b7", fontSize: 14, lineHeight: 1.5 }}>{label}</div>
       <svg viewBox="0 0 240 106" width={240} height={106} style={{ display: "block", width: "100%", height: "auto" }}
         shapeRendering="crispEdges" aria-hidden="true" focusable="false">
         <path fill="#31525d" d="M0 0h240v66H0z" />
@@ -65,7 +73,13 @@ export default function LoadingScreen({ phase = "opening", preview = false }: { 
           </g>
         </g>
       </svg>
-      {preview && <a className="loading-preview-enter" href="/">Enter Everfolk <span aria-hidden="true">→</span></a>}
+      <div className="loading-progress-status" style={{ width: "min(100%, 360px)", marginTop: 24 }}>
+        <div className="loading-progress-label" style={{ display: "flex", justifyContent: "space-between", gap: 16, marginBottom: 9, fontSize: 13 }}>
+          <span>{preview ? "Ready" : "Loading progress"}</span><span aria-hidden="true">{percent}%</span>
+        </div>
+        <progress className="loading-progress" value={percent} max={100} aria-label="Loading Everfolk" aria-valuetext={`${percent}% — ${label}`}
+          style={{ display: "block", width: "100%", height: 8, accentColor: "#d9bc93" }}>{percent}%</progress>
+      </div>
     </div>
   </main>;
 }

@@ -1,0 +1,12 @@
+{
+  "externalRepeatExact": true,
+  "wrongSourceMetadataRejected": true,
+  "rejectionWroteNoOutput": true,
+  "protectedV8FilesUnchanged": true,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalBoxesFullFine": true,
+  "affectedPixels": 21708,
+  "outputSha256": "89fe6da957a7cd8c5612a27056b6e195a9f9d5bc8f3a2b6443c148699057025c",
+  "rejectionError": "pixelate_regions.py: Base QA sourceSha256 does not match the painting input"
+}

@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "artboards": 8,
+  "svgPathsOnly": true,
+  "pngChecks": [
+    {
+      "file": "dawnwing-emblem-cream.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-emblem-ink.png",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-horizontal-cream.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-horizontal-ink.png",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-stacked-cream.png",
+      "width": 1200,
+      "height": 800,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-stacked-ink.png",
+      "width": 1200,
+      "height": 800,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-wordmark-cream.png",
+      "width": 1200,
+      "height": 300,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-wordmark-ink.png",
+      "width": 1200,
+      "height": 300,
+      "transparent": true
+    }
+  ],
+  "rasterImages": 0,
+  "exportWarnings": []
+}

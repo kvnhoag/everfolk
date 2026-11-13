@@ -1,0 +1,93 @@
+{
+  "method": "Published PixelOE, legacy CPU API",
+  "package": "1.0.0",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-chiaroscuro-before-v5.png",
+  "sourceSha256": "cca2222bbe55864dd4a829963ac38e1c836a18d09f41f5500c78b307d9d2ed4b",
+  "sourceSize": [
+    1672,
+    941
+  ],
+  "sourceCrop": null,
+  "aspectNormalizationPercent": 0.053163,
+  "aspectNote": "Explicit 16:9 target; PixelOE normalizes source aspect. No source crop.",
+  "upstream": "https://github.com/KohakuBlueleaf/PixelOE",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "torch": "2.7.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "presets": [
+    {
+      "name": "bold",
+      "width": 320,
+      "height": 180,
+      "scale": 6,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          320,
+          180
+        ],
+        "patch_size": 4,
+        "pixel_size": 6,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-bold.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-bold.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "0d095d966f161564e8ae85ea784dc62c23e01dae48cfefefc69ffa6ade320759",
+      "logicalSha256": "a27713eca05fe4d36d1f99f1238888dd1b8e7858e1abab0dada602b037121a2a",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "nonblank": true,
+      "colourQuantization": false,
+      "uniqueColours": 11654,
+      "elapsedSeconds": 1.66
+    },
+    {
+      "name": "chunky",
+      "width": 240,
+      "height": 135,
+      "scale": 8,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          240,
+          135
+        ],
+        "patch_size": 4,
+        "pixel_size": 8,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-chunky.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\hybrid-v5\\alexander-hybrid-pixel-chunky.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "0402aa0272a5e9b1dba5c71d346505a79ab24cfaebf1dc419efbf812ac9cb1ef",
+      "logicalSha256": "2f2b6fd5178d16bdacafad7fdf21cbec0039da0b03f563e7f8d94dee53d39a16",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "nonblank": true,
+      "colourQuantization": false,
+      "uniqueColours": 8617,
+      "elapsedSeconds": 0.988
+    }
+  ],
+  "sourceUnchanged": true
+}
