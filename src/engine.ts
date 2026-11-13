@@ -140,6 +140,17 @@ function mutableSnapshot(state: LifeState): LifeState {
 /** Detached telemetry for record projections; never persisted in saves. */
 export interface JournalObserver { onChange(index: number, changes: Readonly<Record<string, number>>): void }
 
+/** The birth-year offset a roll in [0, 1) lands on, where each year's chance follows its weight. */
+function weightedOffset(weights: readonly number[], roll: number): number {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  let remaining = Math.floor(roll * total);
+  for (let offset = 0; offset < weights.length; offset++) {
+    remaining -= weights[offset];
+    if (remaining < 0) return offset;
+  }
+  return weights.length - 1;
+}
+
 export function createEngine(input: unknown, observer?: JournalObserver): LifeEngine {
   validateWorld(input);
   // Own a detached immutable pack so the caller cannot change rules mid-life.
@@ -798,10 +809,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     };
     if (world.birthYears) {
       // A side stream of the seed, so the life's own random draws are unchanged.
-      const { from, to } = world.birthYears;
+      const { from, to, weights } = world.birthYears;
       const toAstronomical = (y: number) => (y < 0 ? y + 1 : y);
       const span = toAstronomical(to) - toAstronomical(from) + 1;
-      const offset = Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      const roll = nextRandom(seedToUint32(`${seed}:birth-year`)).value;
+      const offset = weights ? weightedOffset(weights, roll) : Math.floor(roll * span);
       state.birthYear = yearAtAge(from, offset);
       state.year = state.birthYear;
     }

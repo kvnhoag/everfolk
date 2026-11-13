@@ -53,6 +53,9 @@ import lives3World from "../../worlds/demo/alexandria-lives-3.json" with { type:
 import lives4World from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
 import lives5World from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import lives6World from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
+import lives7World from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import lives8World from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import lives9World from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import deepWorld from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 import figureWorld from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import familyRecordsWorld from "../../worlds/alexandria-0.42.0.json" with { type: "json" };
@@ -61,8 +64,6 @@ import royalCouncilWorld from "../../worlds/alexandria-0.44.0.json" with { type:
 import aristocraticEstatesWorld from "../../worlds/alexandria-0.45.0.json" with { type: "json" };
 import historicalTitlesWorld from "../../worlds/alexandria-0.46.0.json" with { type: "json" };
 import resourceAdjustedWorld from "../../worlds/alexandria-0.47.0.json" with { type: "json" };
-import lives7World from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
-import lives8World from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -126,6 +127,7 @@ const historicalTitlesEngine = createEngine(historicalTitlesWorld);
 const resourceAdjustedEngine = createEngine(resourceAdjustedWorld);
 const lives7Engine = createEngine(lives7World as unknown as WorldPack);
 const lives8Engine = createEngine(lives8World as unknown as WorldPack);
+const lives9Engine = createEngine(lives9World as unknown as WorldPack);
 const npcRankedEngine = createEngine(buildNpcWorld(lives8World as unknown as WorldPack));
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
@@ -178,6 +180,7 @@ engines.set(historicalTitlesEngine.fingerprint, historicalTitlesEngine);
 engines.set(resourceAdjustedEngine.fingerprint, resourceAdjustedEngine);
 engines.set(lives7Engine.fingerprint, lives7Engine);
 engines.set(lives8Engine.fingerprint, lives8Engine);
+engines.set(lives9Engine.fingerprint, lives9Engine);
 engines.set(npcRankedEngine.fingerprint, npcRankedEngine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.

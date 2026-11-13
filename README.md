@@ -39,7 +39,7 @@
 
 ---
 
-**Everfolk** is a deterministic browser-based life simulation set in Ptolemaic Alexandria (350–300 BCE), paired with an on-chain **Living-Legacy NFT protocol** on NEAR.
+**Everfolk** is a deterministic browser-based life simulation set around Rhakotis and the emerging city of Alexandria, with new free-play births across 400–300 BCE, paired with an on-chain **Living-Legacy NFT protocol** on NEAR.
 
 In **Free Play**, every life runs locally from a seed and command log with zero account setup. In **Weave Mode**, NEAR coordinates four structural mechanics that cannot live off-chain alone:
 1. **Verifiable Genesis:** `start_life` assigns each life's seed from NEAR validator randomness so no player can farm ideal births.

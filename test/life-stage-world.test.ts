@@ -3,11 +3,12 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { lifeStageView } from "../src/life-stages/index.ts";
 import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
-import { buildLivesWorld } from "../src/vocations/lives-world.ts";
-import { LIVES_RULES_WORLD_VERSION, LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
+import { buildBornAcrossHistoryWorld, buildLivesWorld } from "../src/vocations/lives-world.ts";
+import { LIVES_FIGURES_WORLD_VERSION, LIVES_RULES_WORLD_VERSION, LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import rules from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import type { LifeState, WorldPack } from "../src/types.ts";
@@ -36,12 +37,14 @@ function live(seed: string, pick = 0): Played {
 const lives = Array.from({ length: 80 }, (_, i) => live(`stage-world-${i}`, i));
 
 test("the shipped free-play world is the current life-stage build with figure paths", () => {
-  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-8");
+  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-9");
+  assert.equal(LIVES_FIGURES_WORLD_VERSION, "alexandria-lives-8");
   assert.equal(LIVES_RULES_WORLD_VERSION, "alexandria-lives-7");
   assert.equal(world.version, "alexandria-lives-8");
   const built = buildLifeStageWorld(base as unknown as WorldPack);
   assert.deepEqual(built, rules, "the life-stage builder still reproduces the retained lives-7 rules");
   assert.deepEqual(buildLivesWorld(built), world);
+  assert.deepEqual(buildBornAcrossHistoryWorld(world), current, "new births are lives-8 born across 400–300 BCE");
   assert.equal(world.figurePaths!.length, 11);
   assert.ok(world.lifeStages);
   assert.equal((retained as unknown as WorldPack).version, "alexandria-lives-3");
