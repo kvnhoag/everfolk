@@ -3,7 +3,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
 import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
 import { errorText, type ChainBackend } from "../chain/chain-backend.ts";
-import SignInPanel from "../chain/SignInPanel.tsx";
+import SignInPanel, { EMAIL_UNAVAILABLE } from "../chain/SignInPanel.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import "../homepage/homepage.css";
@@ -32,6 +32,11 @@ function HomeNotice({ notice, error }: { notice?: string; error?: string }) {
     {error && <p className="ef-home-notice" role="alert">{error}</p>}
   </div>;
 }
+
+const unavailableEmailFlow = {
+  async sendCode() { throw new Error(EMAIL_UNAVAILABLE); },
+  async verify() { throw new Error(EMAIL_UNAVAILABLE); },
+};
 
 function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notice?: string }) {
   const [emailOpen, setEmailOpen] = useState(false);
@@ -68,17 +73,19 @@ function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notic
       {connecting ? "Connecting…" : "Connect with NEAR wallet"}
     </button>
     <div className="ef-home-auth-divider"><span>or</span></div>
-    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={!signIn?.available.email || connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
+    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
       Log in with email
     </button>
     <HomeNotice notice={notice || signInNotice} error={error} />
-    {emailOpen && signIn && <dialog className="ef-home-email-dialog" aria-label="Email sign-in"
+    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in"
       ref={dialog => { if (dialog && !dialog.open) dialog.showModal(); }}
       onClose={() => setEmailOpen(false)}>
-      <SignInPanel available={signIn.available} onEmail={{
-        sendCode: signIn.emailFlow.sendCode,
-        verify: async code => { await signIn.emailFlow.verify(code); enterWeave(); },
-      }} onWallet={async () => { await signIn.useWallet(); enterWeave(); }} onClose={() => setEmailOpen(false)} />
+      <SignInPanel available={signIn?.available ?? { email: false }} onEmail={signIn?.emailFlow ?? unavailableEmailFlow}
+        onSuccess={() => { setEmailOpen(false); enterWeave(); }}
+        onWallet={async () => {
+          if (!live) throw new Error("Sign-in could not connect. Please try again.");
+          await (signIn?.useWallet ?? live.connect)(); enterWeave();
+        }} onClose={() => setEmailOpen(false)} />
     </dialog>}
   </>;
 }

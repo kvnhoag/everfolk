@@ -43,6 +43,7 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.match(html, /<header[^>]*>.*href="#figures".*href="#market".*href="#mine".*<\/header>/);
   assert.match(html, /ef-home-ranked.*role="switch" aria-checked="true"/);
   assert.match(html, /Connect with NEAR wallet.*ef-home-auth-divider.*Log in with email/);
+  assert.doesNotMatch(html, /class="ef-home-auth-button ef-home-auth-email"[^>]*disabled/);
   assert.doesNotMatch(html, /Choose a world|Past lives|Explore for free/);
   assert.doesNotMatch(html, /medieval-europe|ottoman-constantinople|A STORY IN PROGRESS/);
   assert.deepEqual(life,before,'opening the menu cannot advance, reroll or replace the life');
