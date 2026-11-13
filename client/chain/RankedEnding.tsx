@@ -10,6 +10,7 @@ import StageAlbum, { StageAlbumReceipt } from "./StageAlbum.tsx";
 import MintRecovery from "./MintRecovery.tsx";
 import MintReveal from "./MintReveal.tsx";
 import { mintRevealView } from "./life-report-model.ts";
+import { resultCardView } from "./nft-card-view.ts";
 import DeclineChoice from "./DeclineChoice.tsx";
 import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
@@ -105,7 +106,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
 
   if (stage.kind === "album-recovered") return <StageAlbumReceipt result={stage.result} onClose={onClose} />;
   if (stage.kind === "committed") return <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={onClose} />;
-  if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} onClose={onClose} />;
+  if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} card={resultCardView(stage.result)} onClose={onClose} />;
   if (stage.kind === "verifying") return <p className="chain-loading" role="status">Checking your life against its record…</p>;
   if (stage.kind === "failed") return <section className="chain-card">
     <h1 tabIndex={-1}>We couldn't check this life</h1>

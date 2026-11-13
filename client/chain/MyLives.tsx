@@ -9,6 +9,8 @@ import { keptRows, type KeptRow } from "./token-page-model.ts";
 import { FIGURES } from "../../chain/catalog/index.ts";
 import SignInPanel from "./SignInPanel.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
+import NftCardViewer from "./NftCardViewer.tsx";
+import { keptCardView } from "./nft-card-view.ts";
 import "./token-market.css";
 import "./ledger.css";
 import SectionHelp from "../components/SectionHelp.tsx";
@@ -20,6 +22,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
   const [busy, setBusy] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "ledger">("grid");
   const [activeTab, setActiveTab] = useState<"owned" | "set">("owned");
+  const [viewing, setViewing] = useState<KeptRow | null>(null);
 
   async function openLife(life: LifeView) {
     if (backend.signin?.needsPlayKey) {
@@ -255,6 +258,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                       <li key="aff" className="ledger-chip is-faience">Affection {row.affection}</li>
                     </ul>
                     <div className="ef-market-card-bottom">
+                      <button className="chain-secondary" type="button" onClick={() => setViewing(row)}>View in 3D</button>
                       <a className="chain-secondary" href={row.href}>
                         Open<span aria-hidden="true">→</span>
                       </a>
@@ -298,6 +302,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                 </ul>
               </div>
               <div className="market-price">
+                <button className="chain-secondary" type="button" onClick={() => setViewing(row)}>View in 3D</button>
                 <a className="chain-secondary" href={row.href}>
                   Open<span aria-hidden="true">→</span>
                 </a>
@@ -342,6 +347,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
           })}
         </div>
       )}
+      {viewing && <NftCardViewer key={viewing.tokenId} cards={[keptCardView(viewing)]} onClose={() => setViewing(null)} />}
     </section>
   );
 }
