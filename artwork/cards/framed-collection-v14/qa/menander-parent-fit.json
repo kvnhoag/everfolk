@@ -1,0 +1,78 @@
+{
+  "slug": "menander-parent",
+  "figureId": "menander",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Menander",
+  "subtitle": "Master of New Comedy",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-parent-pixel.png",
+  "collectionIndex": 46,
+  "owner": null,
+  "figureName": "Menander",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "comedy-mask",
+  "bodyTitle": "The Human Stage",
+  "bodyText": "Menander made Athenian New Comedy a theatre of recognisable lives, misunderstandings, and uneasy relationships. His plays shaped later comic drama, giving ordinary human motives a place beside the grand stories of heroes.",
+  "sources": [
+    {
+      "title": "Menander — Oxford Classical Dictionary",
+      "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/549651704?login=false"
+    },
+    {
+      "title": "Menander: author, transmission, and text — Dickinson College Commentaries",
+      "url": "https://dcc.dickinson.edu/menander-epitrepontes/intro/intro"
+    }
+  ],
+  "canonicalTitle": "Menander",
+  "editionLimit": 10,
+  "iconSource": {
+    "file": "source/icons/menander.svg",
+    "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/010",
+  "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+  "bodySize": 24,
+  "bodyLines": [
+    "Menander made Athenian New Comedy a theatre of recognisable",
+    "lives, misunderstandings, and uneasy relationships. His plays",
+    "shaped later comic drama, giving ordinary human motives a",
+    "place beside the grand stories of heroes."
+  ],
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/menander-parent.svg",
+  "fittedArt": "assets/fitted/menander-parent.png",
+  "overlaySvg": "source/overlays/menander-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+  "master": "masters/menander-parent.vectorcraft",
+  "export": "exports/menander-parent.png",
+  "thumbnail": "assets/menander-parent-thumb.png",
+  "exportSha256": "957777a857cff3cc1d7e82c87af34467e162f96cdd901207d4c74a4ac4f248d6",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 599644,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Everfolk · Framed collection</title>
+  <style>
+    :root{--bg:#0b1412;--surface:#11211d;--line:#2d443a;--jade:#a6c2af;--bronze:#bd9862;--text:#e8ebe1;--muted:#98aaa0;--ink:#0c1813;--radius:8px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% 0,#173b2d55,transparent 48%),var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-underline-offset:4px}button,input,select{font:inherit}button,select{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--bronze);outline-offset:4px}.shell{width:min(1680px,calc(100% - 88px));margin:auto}.site-header{display:flex;justify-content:space-between;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);gap:20px}.brand{font-family:Georgia,serif;font-size:23px;letter-spacing:.22em;text-decoration:none}.brand-mark{color:var(--bronze);padding-right:10px}.header-links{display:flex;gap:24px;color:var(--muted);font-size:12px;letter-spacing:.04em}.header-links a{text-decoration:none}.header-links a:hover{color:var(--text)}.hero{display:flex;justify-content:space-between;align-items:end;gap:40px;padding:65px 0 47px}.eyebrow{margin:0 0 15px;font-size:11px;font-weight:650;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}h1{margin:0;font:clamp(36px,4.2vw,64px)/1.08 Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.025em}.intro{max-width:650px;color:var(--muted);margin:21px 0 0;font-size:15px}.stats{display:flex;gap:40px;padding-bottom:3px}.stat-value{display:block;font:34px/1.15 Georgia,serif;color:var(--jade)}.stat-label{display:block;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:7px}.toolbar{position:sticky;top:0;z-index:3;background:#0b1412f5;backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:19px 0}.toolbar-inner{display:flex;align-items:end;justify-content:space-between;gap:22px;flex-wrap:wrap}.variant-filter{display:flex;gap:4px;align-items:center;padding:4px;background:#07100e;border:1px solid #20392f;border-radius:var(--radius)}.filter-button{border:0;background:transparent;color:var(--muted);padding:8px 15px;border-radius:5px;font-size:12px;white-space:nowrap}.filter-button[aria-pressed="true"]{background:#294d3d;color:#eaf0e7}.filter-button:hover{color:var(--text)}.select-filters{display:flex;gap:13px;align-items:end;flex-wrap:wrap}label{display:flex;flex-direction:column;gap:5px;color:var(--muted);font-size:10px;letter-spacing:.11em;text-transform:uppercase}select,input{height:38px;border:1px solid var(--line);border-radius:5px;background:#11221c;color:var(--text);padding:0 12px;font-size:12px;letter-spacing:normal;text-transform:none}select{min-width:135px}input{width:205px}input::placeholder{color:#71877a}.result-bar{display:flex;align-items:center;justify-content:space-between;padding:22px 0 3px;color:var(--muted);font-size:12px;gap:16px}.reset-button{border:0;background:none;color:var(--jade);padding:0;text-decoration:underline;text-underline-offset:4px;font-size:12px}.figure-section{padding-top:34px;padding-bottom:29px}.figure-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--line);margin-bottom:24px;padding-bottom:17px}.figure-heading>div{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}.section-index{color:var(--bronze);font-size:11px;font-variant-numeric:tabular-nums}.figure-heading h2{margin:0;font:27px/1.2 Georgia,serif;font-weight:400}.figure-count{color:var(--muted);font-size:11px}.master-link{font-size:11px;color:var(--jade);text-decoration:none;white-space:nowrap}.master-link span{color:var(--bronze);padding-left:6px}.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:29px 22px;align-items:start}.card{min-width:0}.card-image{display:block;position:relative;aspect-ratio:5/7;border-radius:7px;overflow:hidden;background:#14231c;box-shadow:0 9px 25px #0005;border:1px solid #56704d55}.card-image img{display:block;width:100%;height:100%;object-fit:contain;image-rendering:auto}.image-action{position:absolute;bottom:0;left:0;right:0;padding:18px 13px 10px;background:linear-gradient(transparent,#07140ff2);color:#f2f2e8;display:flex;justify-content:space-between;font-size:11px;opacity:0;transition:opacity .18s}.card-image:hover .image-action,.card-image:focus-visible .image-action{opacity:1}.card-image:hover{border-color:var(--bronze)}.card-meta{display:flex;justify-content:space-between;align-items:center;gap:5px;margin-top:13px;font-size:9px;letter-spacing:.065em;text-transform:uppercase}.variant{color:var(--muted)}.rarity{color:var(--bronze);white-space:nowrap}.editorial{padding-left:2px}h3{margin:7px 0 12px;font:18px/1.22 Georgia,serif;font-weight:400;min-height:44px;letter-spacing:-.01em}.card-links{display:flex;align-items:center;gap:11px;padding-top:10px;border-top:1px solid #223a2e;color:var(--muted);font-size:10px}.card-index{margin-right:auto;color:#788f80;font-variant-numeric:tabular-nums;font-size:9px}.card-links a{text-decoration:none}.card-links a:hover{color:var(--jade)}.empty-state{text-align:center;padding:90px 25px;color:var(--muted);border:1px solid var(--line);margin:35px 0;border-radius:var(--radius)}.empty-state strong{display:block;font:27px Georgia,serif;color:var(--text);margin-bottom:12px}footer{margin-top:30px;border-top:1px solid var(--line);padding:29px 0 36px;display:flex;justify-content:space-between;gap:28px;color:#81978a;font-size:11px}footer p{margin:0;max-width:780px}footer span{white-space:nowrap;color:var(--bronze)}[hidden]{display:none!important}
+    @media(min-width:1500px){.card-grid{grid-template-columns:repeat(7,minmax(0,1fr))}}@media(max-width:1000px){.shell{width:calc(100% - 48px)}.hero{align-items:start;flex-direction:column;gap:30px;padding-top:46px}.stats{gap:34px}.toolbar{position:static}.toolbar-inner{align-items:start;flex-direction:column}.select-filters{width:100%}.card-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}.header-links{gap:16px}}@media(max-width:560px){.shell{width:calc(100% - 32px)}.site-header{padding:22px 0}.brand{font-size:19px}.header-links{font-size:10px;gap:12px}.header-links a:last-child{display:none}.hero{padding:38px 0 31px}.intro{font-size:13px}.stat-value{font-size:28px}.stats{width:100%;justify-content:space-between;gap:15px}.stat-label{font-size:9px}.filter-button{padding:8px 12px}.select-filters{gap:10px}label{flex:1;min-width:calc(50% - 10px)}label:last-child{min-width:100%}select,input{width:100%;min-width:0}.card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 14px}.figure-heading h2{font-size:23px}.figure-heading>div{gap:10px}.figure-count{display:none}.master-link{font-size:10px}h3{font-size:16px}.card-meta{font-size:8px;letter-spacing:0}.card-links{gap:9px;font-size:9px}.card-index{display:none}footer{flex-direction:column}.result-bar{font-size:11px}.image-action{display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.image-action{transition:none}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header class="site-header"><a href="#" class="brand"><span class="brand-mark" aria-hidden="true">◇</span>EVERFOLK</a><nav class="header-links" aria-label="Collection resources"><a href="../source/framing-map.json">Framing map ↗</a><a href="../exports/">PNG exports ↗</a></nav></header>
+  <main>
+    <section class="hero" aria-labelledby="page-title"><div><p class="eyebrow">Historical Lives · Collection 13</p><h1 id="page-title">The framed collection.</h1><p class="intro">Historical figures and the people who contribute to their worlds. Browse the finished card art, compare both contributor variants, and open the editable sources.</p></div><div class="stats" aria-label="Collection totals"><div><span class="stat-value">83</span><span class="stat-label">Framed cards</span></div><div><span class="stat-value">13</span><span class="stat-label">Historical figures</span></div><div><span class="stat-value">70</span><span class="stat-label">Contributor cards</span></div></div></section>
+    <div class="toolbar" aria-label="Card filters"><div class="toolbar-inner"><div class="variant-filter" role="group" aria-label="Card variant"><button type="button" class="filter-button" data-view="all" aria-pressed="true">All cards</button><button type="button" class="filter-button" data-view="parent" aria-pressed="false">Parents</button><button type="button" class="filter-button" data-view="male" aria-pressed="false">Male</button><button type="button" class="filter-button" data-view="female" aria-pressed="false">Female</button></div><div class="select-filters"><label>Rarity<select id="rarity-filter"><option value="all">All rarities</option value="legendary">Legendary</option><option value="epic">Epic</option><option value="rare">Rare</option><option value="uncommon">Uncommon</option></select></label><label>Figure<select id="figure-filter"><option value="all">All figures</option><option value="alexander">Alexander the Great</option><option value="aristotle">Aristotle</option><option value="euclid">Euclid</option><option value="lysippos">Lysippos</option><option value="pytheas">Pytheas of Massalia</option><option value="menander">Menander</option><option value="demetrius">Demetrius the Besieger</option><option value="theophrastus">Theophrastus</option><option value="zeno">Zeno of Citium</option><option value="ptolemy">Ptolemy I Soter</option><option value="cleomenes">Cleomenes of Naucratis</option><option value="nearchus">Nearchus</option><option value="eumenes">Eumenes of Cardia</option></select></label><label>Search<input id="search-filter" type="search" placeholder="Find a title or figure" autocomplete="off"></label></div></div></div>
+    <div class="result-bar"><span id="result-count" role="status" aria-live="polite">Showing all 83 cards across 13 figures</span><button type="button" class="reset-button" id="reset-filters">Reset filters</button></div>
+    <div id="collection">
+    <section class="figure-section" data-figure-section="alexander" aria-labelledby="figure-alexander">
+      <div class="figure-heading"><div><span class="section-index">01</span><h2 id="figure-alexander">Alexander the Great</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/alexander-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="alexander" data-kind="parent" data-gender="male" data-rarity="legendary" data-search="alexander the great alexander the great historical figure legendary">
+        <a class="card-image" href="../exports/alexander-parent.png" aria-label="Open full size: Alexander the Great, Historical figure">
+          <img src="../assets/alexander-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Alexander the Great — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Legendary</span></div>
+        <h3>Alexander the Great</h3>
+        <div class="card-links"><span class="card-index">01 / 83</span><a href="../source/cards/alexander-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="campaign provisioner alexander the great male contributor uncommon">
+        <a class="card-image" href="../exports/alexander-uncommon-male.png" aria-label="Open full size: Campaign Provisioner, Male contributor">
+          <img src="../assets/alexander-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Campaign Provisioner — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Campaign Provisioner</h3>
+        <div class="card-links"><span class="card-index">02 / 83</span><a href="../source/cards/alexander-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="campaign provisioner alexander the great female contributor uncommon">
+        <a class="card-image" href="../exports/alexander-uncommon-female.png" aria-label="Open full size: Campaign Provisioner, Female contributor">
+          <img src="../assets/alexander-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Campaign Provisioner — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Campaign Provisioner</h3>
+        <div class="card-links"><span class="card-index">03 / 83</span><a href="../source/cards/alexander-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="campaign staff officer alexander the great male contributor rare">
+        <a class="card-image" href="../exports/alexander-rare-male.png" aria-label="Open full size: Campaign Staff Officer, Male contributor">
+          <img src="../assets/alexander-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Campaign Staff Officer — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Campaign Staff Officer</h3>
+        <div class="card-links"><span class="card-index">04 / 83</span><a href="../source/cards/alexander-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="campaign staff officer alexander the great female contributor rare">
+        <a class="card-image" href="../exports/alexander-rare-female.png" aria-label="Open full size: Campaign Staff Officer, Female contributor">
+          <img src="../assets/alexander-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Campaign Staff Officer — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Campaign Staff Officer</h3>
+        <div class="card-links"><span class="card-index">05 / 83</span><a href="../source/cards/alexander-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="trusted campaign commander alexander the great male contributor epic">
+        <a class="card-image" href="../exports/alexander-epic-male.png" aria-label="Open full size: Trusted Campaign Commander, Male contributor">
+          <img src="../assets/alexander-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Trusted Campaign Commander — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Trusted Campaign Commander</h3>
+        <div class="card-links"><span class="card-index">06 / 83</span><a href="../source/cards/alexander-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="alexander" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="trusted campaign commander alexander the great female contributor epic">
+        <a class="card-image" href="../exports/alexander-epic-female.png" aria-label="Open full size: Trusted Campaign Commander, Female contributor">
+          <img src="../assets/alexander-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Trusted Campaign Commander — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Trusted Campaign Commander</h3>
+        <div class="card-links"><span class="card-index">07 / 83</span><a href="../source/cards/alexander-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/alexander-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/alexander-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="aristotle" aria-labelledby="figure-aristotle">
+      <div class="figure-heading"><div><span class="section-index">02</span><h2 id="figure-aristotle">Aristotle</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/aristotle-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="aristotle" data-kind="parent" data-gender="male" data-rarity="legendary" data-search="aristotle aristotle historical figure legendary">
+        <a class="card-image" href="../exports/aristotle-parent.png" aria-label="Open full size: Aristotle, Historical figure">
+          <img src="../assets/aristotle-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Aristotle — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Legendary</span></div>
+        <h3>Aristotle</h3>
+        <div class="card-links"><span class="card-index">08 / 83</span><a href="../source/cards/aristotle-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="lyceum copyist aristotle male contributor uncommon">
+        <a class="card-image" href="../exports/aristotle-uncommon-male.png" aria-label="Open full size: Lyceum Copyist, Male contributor">
+          <img src="../assets/aristotle-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Lyceum Copyist — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Lyceum Copyist</h3>
+        <div class="card-links"><span class="card-index">09 / 83</span><a href="../source/cards/aristotle-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="lyceum copyist aristotle female contributor uncommon">
+        <a class="card-image" href="../exports/aristotle-uncommon-female.png" aria-label="Open full size: Lyceum Copyist, Female contributor">
+          <img src="../assets/aristotle-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Lyceum Copyist — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Lyceum Copyist</h3>
+        <div class="card-links"><span class="card-index">10 / 83</span><a href="../source/cards/aristotle-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="lyceum researcher aristotle male contributor rare">
+        <a class="card-image" href="../exports/aristotle-rare-male.png" aria-label="Open full size: Lyceum Researcher, Male contributor">
+          <img src="../assets/aristotle-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Lyceum Researcher — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Lyceum Researcher</h3>
+        <div class="card-links"><span class="card-index">11 / 83</span><a href="../source/cards/aristotle-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="lyceum researcher aristotle female contributor rare">
+        <a class="card-image" href="../exports/aristotle-rare-female.png" aria-label="Open full size: Lyceum Researcher, Female contributor">
+          <img src="../assets/aristotle-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Lyceum Researcher — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Lyceum Researcher</h3>
+        <div class="card-links"><span class="card-index">12 / 83</span><a href="../source/cards/aristotle-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="peripatetic scholar aristotle male contributor epic">
+        <a class="card-image" href="../exports/aristotle-epic-male.png" aria-label="Open full size: Peripatetic Scholar, Male contributor">
+          <img src="../assets/aristotle-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Peripatetic Scholar — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Peripatetic Scholar</h3>
+        <div class="card-links"><span class="card-index">13 / 83</span><a href="../source/cards/aristotle-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="aristotle" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="peripatetic scholar aristotle female contributor epic">
+        <a class="card-image" href="../exports/aristotle-epic-female.png" aria-label="Open full size: Peripatetic Scholar, Female contributor">
+          <img src="../assets/aristotle-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Peripatetic Scholar — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Peripatetic Scholar</h3>
+        <div class="card-links"><span class="card-index">14 / 83</span><a href="../source/cards/aristotle-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/aristotle-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/aristotle-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="euclid" aria-labelledby="figure-euclid">
+      <div class="figure-heading"><div><span class="section-index">03</span><h2 id="figure-euclid">Euclid</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/euclid-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="euclid" data-kind="parent" data-gender="male" data-rarity="legendary" data-search="euclid euclid historical figure legendary">
+        <a class="card-image" href="../exports/euclid-parent.png" aria-label="Open full size: Euclid, Historical figure">
+          <img src="../assets/euclid-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Euclid — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Legendary</span></div>
+        <h3>Euclid</h3>
+        <div class="card-links"><span class="card-index">15 / 83</span><a href="../source/cards/euclid-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="geometrical copyist euclid male contributor uncommon">
+        <a class="card-image" href="../exports/euclid-uncommon-male.png" aria-label="Open full size: Geometrical Copyist, Male contributor">
+          <img src="../assets/euclid-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Geometrical Copyist — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Geometrical Copyist</h3>
+        <div class="card-links"><span class="card-index">16 / 83</span><a href="../source/cards/euclid-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="geometrical copyist euclid female contributor uncommon">
+        <a class="card-image" href="../exports/euclid-uncommon-female.png" aria-label="Open full size: Geometrical Copyist, Female contributor">
+          <img src="../assets/euclid-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Geometrical Copyist — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Geometrical Copyist</h3>
+        <div class="card-links"><span class="card-index">17 / 83</span><a href="../source/cards/euclid-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="proof checker euclid male contributor rare">
+        <a class="card-image" href="../exports/euclid-rare-male.png" aria-label="Open full size: Proof Checker, Male contributor">
+          <img src="../assets/euclid-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Proof Checker — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Proof Checker</h3>
+        <div class="card-links"><span class="card-index">18 / 83</span><a href="../source/cards/euclid-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="proof checker euclid female contributor rare">
+        <a class="card-image" href="../exports/euclid-rare-female.png" aria-label="Open full size: Proof Checker, Female contributor">
+          <img src="../assets/euclid-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Proof Checker — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Proof Checker</h3>
+        <div class="card-links"><span class="card-index">19 / 83</span><a href="../source/cards/euclid-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="geometer of the teaching circle euclid male contributor epic">
+        <a class="card-image" href="../exports/euclid-epic-male.png" aria-label="Open full size: Geometer of the Teaching Circle, Male contributor">
+          <img src="../assets/euclid-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Geometer of the Teaching Circle — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Geometer of the Teaching Circle</h3>
+        <div class="card-links"><span class="card-index">20 / 83</span><a href="../source/cards/euclid-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="euclid" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="geometer of the teaching circle euclid female contributor epic">
+        <a class="card-image" href="../exports/euclid-epic-female.png" aria-label="Open full size: Geometer of the Teaching Circle, Female contributor">
+          <img src="../assets/euclid-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Geometer of the Teaching Circle — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Geometer of the Teaching Circle</h3>
+        <div class="card-links"><span class="card-index">21 / 83</span><a href="../source/cards/euclid-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/euclid-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/euclid-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="lysippos" aria-labelledby="figure-lysippos">
+      <div class="figure-heading"><div><span class="section-index">04</span><h2 id="figure-lysippos">Lysippos</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/lysippos-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="lysippos" data-kind="parent" data-gender="male" data-rarity="legendary" data-search="lysippos lysippos historical figure legendary">
+        <a class="card-image" href="../exports/lysippos-parent.png" aria-label="Open full size: Lysippos, Historical figure">
+          <img src="../assets/lysippos-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Lysippos — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Legendary</span></div>
+        <h3>Lysippos</h3>
+        <div class="card-links"><span class="card-index">22 / 83</span><a href="../source/cards/lysippos-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="bronze workshop assistant lysippos male contributor uncommon">
+        <a class="card-image" href="../exports/lysippos-uncommon-male.png" aria-label="Open full size: Bronze Workshop Assistant, Male contributor">
+          <img src="../assets/lysippos-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Bronze Workshop Assistant — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Bronze Workshop Assistant</h3>
+        <div class="card-links"><span class="card-index">23 / 83</span><a href="../source/cards/lysippos-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="bronze workshop assistant lysippos female contributor uncommon">
+        <a class="card-image" href="../exports/lysippos-uncommon-female.png" aria-label="Open full size: Bronze Workshop Assistant, Female contributor">
+          <img src="../assets/lysippos-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Bronze Workshop Assistant — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Bronze Workshop Assistant</h3>
+        <div class="card-links"><span class="card-index">24 / 83</span><a href="../source/cards/lysippos-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="portrait modeller lysippos male contributor rare">
+        <a class="card-image" href="../exports/lysippos-rare-male.png" aria-label="Open full size: Portrait Modeller, Male contributor">
+          <img src="../assets/lysippos-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Portrait Modeller — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Portrait Modeller</h3>
+        <div class="card-links"><span class="card-index">25 / 83</span><a href="../source/cards/lysippos-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="portrait modeller lysippos female contributor rare">
+        <a class="card-image" href="../exports/lysippos-rare-female.png" aria-label="Open full size: Portrait Modeller, Female contributor">
+          <img src="../assets/lysippos-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Portrait Modeller — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Portrait Modeller</h3>
+        <div class="card-links"><span class="card-index">26 / 83</span><a href="../source/cards/lysippos-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="master of lysippan form lysippos male contributor epic">
+        <a class="card-image" href="../exports/lysippos-epic-male.png" aria-label="Open full size: Master of Lysippan Form, Male contributor">
+          <img src="../assets/lysippos-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Master of Lysippan Form — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Master of Lysippan Form</h3>
+        <div class="card-links"><span class="card-index">27 / 83</span><a href="../source/cards/lysippos-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="lysippos" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="master of lysippan form lysippos female contributor epic">
+        <a class="card-image" href="../exports/lysippos-epic-female.png" aria-label="Open full size: Master of Lysippan Form, Female contributor">
+          <img src="../assets/lysippos-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Master of Lysippan Form — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Master of Lysippan Form</h3>
+        <div class="card-links"><span class="card-index">28 / 83</span><a href="../source/cards/lysippos-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/lysippos-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/lysippos-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="pytheas" aria-labelledby="figure-pytheas">
+      <div class="figure-heading"><div><span class="section-index">05</span><h2 id="figure-pytheas">Pytheas of Massalia</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/pytheas-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="pytheas" data-kind="parent" data-gender="male" data-rarity="epic" data-search="pytheas of massalia pytheas of massalia historical figure epic">
+        <a class="card-image" href="../exports/pytheas-parent.png" aria-label="Open full size: Pytheas of Massalia, Historical figure">
+          <img src="../assets/pytheas-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Pytheas of Massalia — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Pytheas of Massalia</h3>
+        <div class="card-links"><span class="card-index">29 / 83</span><a href="../source/cards/pytheas-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="expedition provisioner pytheas of massalia male contributor uncommon">
+        <a class="card-image" href="../exports/pytheas-uncommon-male.png" aria-label="Open full size: Expedition Provisioner, Male contributor">
+          <img src="../assets/pytheas-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Expedition Provisioner — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Expedition Provisioner</h3>
+        <div class="card-links"><span class="card-index">30 / 83</span><a href="../source/cards/pytheas-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="expedition provisioner pytheas of massalia female contributor uncommon">
+        <a class="card-image" href="../exports/pytheas-uncommon-female.png" aria-label="Open full size: Expedition Provisioner, Female contributor">
+          <img src="../assets/pytheas-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Expedition Provisioner — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Expedition Provisioner</h3>
+        <div class="card-links"><span class="card-index">31 / 83</span><a href="../source/cards/pytheas-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="navigation observer pytheas of massalia male contributor rare">
+        <a class="card-image" href="../exports/pytheas-rare-male.png" aria-label="Open full size: Navigation Observer, Male contributor">
+          <img src="../assets/pytheas-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Navigation Observer — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Navigation Observer</h3>
+        <div class="card-links"><span class="card-index">32 / 83</span><a href="../source/cards/pytheas-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="navigation observer pytheas of massalia female contributor rare">
+        <a class="card-image" href="../exports/pytheas-rare-female.png" aria-label="Open full size: Navigation Observer, Female contributor">
+          <img src="../assets/pytheas-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Navigation Observer — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Navigation Observer</h3>
+        <div class="card-links"><span class="card-index">33 / 83</span><a href="../source/cards/pytheas-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="keeper of the northern voyage log pytheas of massalia male contributor epic">
+        <a class="card-image" href="../exports/pytheas-epic-male.png" aria-label="Open full size: Keeper of the Northern Voyage Log, Male contributor">
+          <img src="../assets/pytheas-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Keeper of the Northern Voyage Log — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Keeper of the Northern Voyage Log</h3>
+        <div class="card-links"><span class="card-index">34 / 83</span><a href="../source/cards/pytheas-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="pytheas" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="keeper of the northern voyage log pytheas of massalia female contributor epic">
+        <a class="card-image" href="../exports/pytheas-epic-female.png" aria-label="Open full size: Keeper of the Northern Voyage Log, Female contributor">
+          <img src="../assets/pytheas-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Keeper of the Northern Voyage Log — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Keeper of the Northern Voyage Log</h3>
+        <div class="card-links"><span class="card-index">35 / 83</span><a href="../source/cards/pytheas-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/pytheas-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/pytheas-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="menander" aria-labelledby="figure-menander">
+      <div class="figure-heading"><div><span class="section-index">06</span><h2 id="figure-menander">Menander</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/menander-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="menander" data-kind="parent" data-gender="male" data-rarity="legendary" data-search="menander menander historical figure legendary">
+        <a class="card-image" href="../exports/menander-parent.png" aria-label="Open full size: Menander, Historical figure">
+          <img src="../assets/menander-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Menander — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Legendary</span></div>
+        <h3>Menander</h3>
+        <div class="card-links"><span class="card-index">36 / 83</span><a href="../source/cards/menander-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="stage copyist menander male contributor uncommon">
+        <a class="card-image" href="../exports/menander-uncommon-male.png" aria-label="Open full size: Stage Copyist, Male contributor">
+          <img src="../assets/menander-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Stage Copyist — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Stage Copyist</h3>
+        <div class="card-links"><span class="card-index">37 / 83</span><a href="../source/cards/menander-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="stage copyist menander female contributor uncommon">
+        <a class="card-image" href="../exports/menander-uncommon-female.png" aria-label="Open full size: Stage Copyist, Female contributor">
+          <img src="../assets/menander-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Stage Copyist — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Stage Copyist</h3>
+        <div class="card-links"><span class="card-index">38 / 83</span><a href="../source/cards/menander-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="new comedy collaborator menander male contributor rare">
+        <a class="card-image" href="../exports/menander-rare-male.png" aria-label="Open full size: New Comedy Collaborator, Male contributor">
+          <img src="../assets/menander-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="New Comedy Collaborator — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>New Comedy Collaborator</h3>
+        <div class="card-links"><span class="card-index">39 / 83</span><a href="../source/cards/menander-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="new comedy collaborator menander female contributor rare">
+        <a class="card-image" href="../exports/menander-rare-female.png" aria-label="Open full size: New Comedy Collaborator, Female contributor">
+          <img src="../assets/menander-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="New Comedy Collaborator — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>New Comedy Collaborator</h3>
+        <div class="card-links"><span class="card-index">40 / 83</span><a href="../source/cards/menander-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="dramatist of new comedy menander male contributor epic">
+        <a class="card-image" href="../exports/menander-epic-male.png" aria-label="Open full size: Dramatist of New Comedy, Male contributor">
+          <img src="../assets/menander-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Dramatist of New Comedy — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Dramatist of New Comedy</h3>
+        <div class="card-links"><span class="card-index">41 / 83</span><a href="../source/cards/menander-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="menander" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="dramatist of new comedy menander female contributor epic">
+        <a class="card-image" href="../exports/menander-epic-female.png" aria-label="Open full size: Dramatist of New Comedy, Female contributor">
+          <img src="../assets/menander-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Dramatist of New Comedy — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Dramatist of New Comedy</h3>
+        <div class="card-links"><span class="card-index">42 / 83</span><a href="../source/cards/menander-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/menander-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/menander-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="demetrius" aria-labelledby="figure-demetrius">
+      <div class="figure-heading"><div><span class="section-index">07</span><h2 id="figure-demetrius">Demetrius the Besieger</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/demetrius-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="demetrius" data-kind="parent" data-gender="male" data-rarity="epic" data-search="demetrius the besieger demetrius the besieger historical figure epic">
+        <a class="card-image" href="../exports/demetrius-parent.png" aria-label="Open full size: Demetrius the Besieger, Historical figure">
+          <img src="../assets/demetrius-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Demetrius the Besieger — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Demetrius the Besieger</h3>
+        <div class="card-links"><span class="card-index">43 / 83</span><a href="../source/cards/demetrius-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="siege workshop assistant demetrius the besieger male contributor uncommon">
+        <a class="card-image" href="../exports/demetrius-uncommon-male.png" aria-label="Open full size: Siege Workshop Assistant, Male contributor">
+          <img src="../assets/demetrius-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Siege Workshop Assistant — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Siege Workshop Assistant</h3>
+        <div class="card-links"><span class="card-index">44 / 83</span><a href="../source/cards/demetrius-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="siege workshop assistant demetrius the besieger female contributor uncommon">
+        <a class="card-image" href="../exports/demetrius-uncommon-female.png" aria-label="Open full size: Siege Workshop Assistant, Female contributor">
+          <img src="../assets/demetrius-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Siege Workshop Assistant — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Siege Workshop Assistant</h3>
+        <div class="card-links"><span class="card-index">45 / 83</span><a href="../source/cards/demetrius-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="siege engineer demetrius the besieger male contributor rare">
+        <a class="card-image" href="../exports/demetrius-rare-male.png" aria-label="Open full size: Siege Engineer, Male contributor">
+          <img src="../assets/demetrius-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Siege Engineer — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Siege Engineer</h3>
+        <div class="card-links"><span class="card-index">46 / 83</span><a href="../source/cards/demetrius-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="siege engineer demetrius the besieger female contributor rare">
+        <a class="card-image" href="../exports/demetrius-rare-female.png" aria-label="Open full size: Siege Engineer, Female contributor">
+          <img src="../assets/demetrius-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Siege Engineer — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Siege Engineer</h3>
+        <div class="card-links"><span class="card-index">47 / 83</span><a href="../source/cards/demetrius-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="director of siege works demetrius the besieger male contributor epic">
+        <a class="card-image" href="../exports/demetrius-epic-male.png" aria-label="Open full size: Director of Siege Works, Male contributor">
+          <img src="../assets/demetrius-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Director of Siege Works — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Director of Siege Works</h3>
+        <div class="card-links"><span class="card-index">48 / 83</span><a href="../source/cards/demetrius-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="demetrius" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="director of siege works demetrius the besieger female contributor epic">
+        <a class="card-image" href="../exports/demetrius-epic-female.png" aria-label="Open full size: Director of Siege Works, Female contributor">
+          <img src="../assets/demetrius-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Director of Siege Works — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Director of Siege Works</h3>
+        <div class="card-links"><span class="card-index">49 / 83</span><a href="../source/cards/demetrius-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/demetrius-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/demetrius-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="theophrastus" aria-labelledby="figure-theophrastus">
+      <div class="figure-heading"><div><span class="section-index">08</span><h2 id="figure-theophrastus">Theophrastus</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/theophrastus-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="theophrastus" data-kind="parent" data-gender="male" data-rarity="epic" data-search="theophrastus theophrastus historical figure epic">
+        <a class="card-image" href="../exports/theophrastus-parent.png" aria-label="Open full size: Theophrastus, Historical figure">
+          <img src="../assets/theophrastus-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Theophrastus — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Theophrastus</h3>
+        <div class="card-links"><span class="card-index">50 / 83</span><a href="../source/cards/theophrastus-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="plant records assistant theophrastus male contributor uncommon">
+        <a class="card-image" href="../exports/theophrastus-uncommon-male.png" aria-label="Open full size: Plant Records Assistant, Male contributor">
+          <img src="../assets/theophrastus-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Plant Records Assistant — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Plant Records Assistant</h3>
+        <div class="card-links"><span class="card-index">51 / 83</span><a href="../source/cards/theophrastus-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="plant records assistant theophrastus female contributor uncommon">
+        <a class="card-image" href="../exports/theophrastus-uncommon-female.png" aria-label="Open full size: Plant Records Assistant, Female contributor">
+          <img src="../assets/theophrastus-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Plant Records Assistant — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Plant Records Assistant</h3>
+        <div class="card-links"><span class="card-index">52 / 83</span><a href="../source/cards/theophrastus-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="comparative plant investigator theophrastus male contributor rare">
+        <a class="card-image" href="../exports/theophrastus-rare-male.png" aria-label="Open full size: Comparative Plant Investigator, Male contributor">
+          <img src="../assets/theophrastus-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Comparative Plant Investigator — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Comparative Plant Investigator</h3>
+        <div class="card-links"><span class="card-index">53 / 83</span><a href="../source/cards/theophrastus-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="comparative plant investigator theophrastus female contributor rare">
+        <a class="card-image" href="../exports/theophrastus-rare-female.png" aria-label="Open full size: Comparative Plant Investigator, Female contributor">
+          <img src="../assets/theophrastus-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Comparative Plant Investigator — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Comparative Plant Investigator</h3>
+        <div class="card-links"><span class="card-index">54 / 83</span><a href="../source/cards/theophrastus-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="peripatetic botanical scholar theophrastus male contributor epic">
+        <a class="card-image" href="../exports/theophrastus-epic-male.png" aria-label="Open full size: Peripatetic Botanical Scholar, Male contributor">
+          <img src="../assets/theophrastus-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Peripatetic Botanical Scholar — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Peripatetic Botanical Scholar</h3>
+        <div class="card-links"><span class="card-index">55 / 83</span><a href="../source/cards/theophrastus-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="theophrastus" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="peripatetic botanical scholar theophrastus female contributor epic">
+        <a class="card-image" href="../exports/theophrastus-epic-female.png" aria-label="Open full size: Peripatetic Botanical Scholar, Female contributor">
+          <img src="../assets/theophrastus-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Peripatetic Botanical Scholar — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Peripatetic Botanical Scholar</h3>
+        <div class="card-links"><span class="card-index">56 / 83</span><a href="../source/cards/theophrastus-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/theophrastus-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/theophrastus-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="zeno" aria-labelledby="figure-zeno">
+      <div class="figure-heading"><div><span class="section-index">09</span><h2 id="figure-zeno">Zeno of Citium</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/zeno-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="zeno" data-kind="parent" data-gender="male" data-rarity="epic" data-search="zeno of citium zeno of citium historical figure epic">
+        <a class="card-image" href="../exports/zeno-parent.png" aria-label="Open full size: Zeno of Citium, Historical figure">
+          <img src="../assets/zeno-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Zeno of Citium — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Zeno of Citium</h3>
+        <div class="card-links"><span class="card-index">57 / 83</span><a href="../source/cards/zeno-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="student of the stoa zeno of citium male contributor uncommon">
+        <a class="card-image" href="../exports/zeno-uncommon-male.png" aria-label="Open full size: Student of the Stoa, Male contributor">
+          <img src="../assets/zeno-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Student of the Stoa — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Student of the Stoa</h3>
+        <div class="card-links"><span class="card-index">58 / 83</span><a href="../source/cards/zeno-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="student of the stoa zeno of citium female contributor uncommon">
+        <a class="card-image" href="../exports/zeno-uncommon-female.png" aria-label="Open full size: Student of the Stoa, Female contributor">
+          <img src="../assets/zeno-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Student of the Stoa — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Student of the Stoa</h3>
+        <div class="card-links"><span class="card-index">59 / 83</span><a href="../source/cards/zeno-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="stoic discussion leader zeno of citium male contributor rare">
+        <a class="card-image" href="../exports/zeno-rare-male.png" aria-label="Open full size: Stoic Discussion Leader, Male contributor">
+          <img src="../assets/zeno-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Stoic Discussion Leader — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Stoic Discussion Leader</h3>
+        <div class="card-links"><span class="card-index">60 / 83</span><a href="../source/cards/zeno-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="stoic discussion leader zeno of citium female contributor rare">
+        <a class="card-image" href="../exports/zeno-rare-female.png" aria-label="Open full size: Stoic Discussion Leader, Female contributor">
+          <img src="../assets/zeno-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Stoic Discussion Leader — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Stoic Discussion Leader</h3>
+        <div class="card-links"><span class="card-index">61 / 83</span><a href="../source/cards/zeno-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="scholar of stoic ethics zeno of citium male contributor epic">
+        <a class="card-image" href="../exports/zeno-epic-male.png" aria-label="Open full size: Scholar of Stoic Ethics, Male contributor">
+          <img src="../assets/zeno-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Scholar of Stoic Ethics — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Scholar of Stoic Ethics</h3>
+        <div class="card-links"><span class="card-index">62 / 83</span><a href="../source/cards/zeno-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="zeno" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="scholar of stoic ethics zeno of citium female contributor epic">
+        <a class="card-image" href="../exports/zeno-epic-female.png" aria-label="Open full size: Scholar of Stoic Ethics, Female contributor">
+          <img src="../assets/zeno-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Scholar of Stoic Ethics — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Scholar of Stoic Ethics</h3>
+        <div class="card-links"><span class="card-index">63 / 83</span><a href="../source/cards/zeno-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/zeno-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/zeno-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="ptolemy" aria-labelledby="figure-ptolemy">
+      <div class="figure-heading"><div><span class="section-index">10</span><h2 id="figure-ptolemy">Ptolemy I Soter</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/ptolemy-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="ptolemy" data-kind="parent" data-gender="male" data-rarity="epic" data-search="ptolemy i soter ptolemy i soter historical figure epic">
+        <a class="card-image" href="../exports/ptolemy-parent.png" aria-label="Open full size: Ptolemy I Soter, Historical figure">
+          <img src="../assets/ptolemy-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Ptolemy I Soter — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Ptolemy I Soter</h3>
+        <div class="card-links"><span class="card-index">64 / 83</span><a href="../source/cards/ptolemy-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="egyptian administration clerk ptolemy i soter male contributor uncommon">
+        <a class="card-image" href="../exports/ptolemy-uncommon-male.png" aria-label="Open full size: Egyptian Administration Clerk, Male contributor">
+          <img src="../assets/ptolemy-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Egyptian Administration Clerk — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Egyptian Administration Clerk</h3>
+        <div class="card-links"><span class="card-index">65 / 83</span><a href="../source/cards/ptolemy-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="egyptian administration clerk ptolemy i soter female contributor uncommon">
+        <a class="card-image" href="../exports/ptolemy-uncommon-female.png" aria-label="Open full size: Egyptian Administration Clerk, Female contributor">
+          <img src="../assets/ptolemy-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Egyptian Administration Clerk — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Egyptian Administration Clerk</h3>
+        <div class="card-links"><span class="card-index">66 / 83</span><a href="../source/cards/ptolemy-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="ptolemaic supply commissioner ptolemy i soter male contributor rare">
+        <a class="card-image" href="../exports/ptolemy-rare-male.png" aria-label="Open full size: Ptolemaic Supply Commissioner, Male contributor">
+          <img src="../assets/ptolemy-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Ptolemaic Supply Commissioner — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Ptolemaic Supply Commissioner</h3>
+        <div class="card-links"><span class="card-index">67 / 83</span><a href="../source/cards/ptolemy-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="ptolemaic supply commissioner ptolemy i soter female contributor rare">
+        <a class="card-image" href="../exports/ptolemy-rare-female.png" aria-label="Open full size: Ptolemaic Supply Commissioner, Female contributor">
+          <img src="../assets/ptolemy-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Ptolemaic Supply Commissioner — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Ptolemaic Supply Commissioner</h3>
+        <div class="card-links"><span class="card-index">68 / 83</span><a href="../source/cards/ptolemy-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="steward of egyptian government ptolemy i soter male contributor epic">
+        <a class="card-image" href="../exports/ptolemy-epic-male.png" aria-label="Open full size: Steward of Egyptian Government, Male contributor">
+          <img src="../assets/ptolemy-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Steward of Egyptian Government — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Steward of Egyptian Government</h3>
+        <div class="card-links"><span class="card-index">69 / 83</span><a href="../source/cards/ptolemy-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="ptolemy" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="steward of egyptian government ptolemy i soter female contributor epic">
+        <a class="card-image" href="../exports/ptolemy-epic-female.png" aria-label="Open full size: Steward of Egyptian Government, Female contributor">
+          <img src="../assets/ptolemy-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Steward of Egyptian Government — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Steward of Egyptian Government</h3>
+        <div class="card-links"><span class="card-index">70 / 83</span><a href="../source/cards/ptolemy-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/ptolemy-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/ptolemy-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="cleomenes" aria-labelledby="figure-cleomenes">
+      <div class="figure-heading"><div><span class="section-index">11</span><h2 id="figure-cleomenes">Cleomenes of Naucratis</h2><span class="figure-count">7 cards</span></div><a class="master-link" href="../masters/cleomenes-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="cleomenes" data-kind="parent" data-gender="male" data-rarity="epic" data-search="cleomenes of naucratis cleomenes of naucratis historical figure epic">
+        <a class="card-image" href="../exports/cleomenes-parent.png" aria-label="Open full size: Cleomenes of Naucratis, Historical figure">
+          <img src="../assets/cleomenes-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Cleomenes of Naucratis — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic</span></div>
+        <h3>Cleomenes of Naucratis</h3>
+        <div class="card-links"><span class="card-index">71 / 83</span><a href="../source/cards/cleomenes-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="male" data-rarity="uncommon" data-search="revenue records assistant cleomenes of naucratis male contributor uncommon">
+        <a class="card-image" href="../exports/cleomenes-uncommon-male.png" aria-label="Open full size: Revenue Records Assistant, Male contributor">
+          <img src="../assets/cleomenes-uncommon-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Revenue Records Assistant — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Revenue Records Assistant</h3>
+        <div class="card-links"><span class="card-index">72 / 83</span><a href="../source/cards/cleomenes-uncommon-male.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-uncommon-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-uncommon-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="female" data-rarity="uncommon" data-search="revenue records assistant cleomenes of naucratis female contributor uncommon">
+        <a class="card-image" href="../exports/cleomenes-uncommon-female.png" aria-label="Open full size: Revenue Records Assistant, Female contributor">
+          <img src="../assets/cleomenes-uncommon-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Revenue Records Assistant — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Uncommon</span></div>
+        <h3>Revenue Records Assistant</h3>
+        <div class="card-links"><span class="card-index">73 / 83</span><a href="../source/cards/cleomenes-uncommon-female.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-uncommon-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-uncommon-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="male" data-rarity="rare" data-search="grain supply auditor cleomenes of naucratis male contributor rare">
+        <a class="card-image" href="../exports/cleomenes-rare-male.png" aria-label="Open full size: Grain Supply Auditor, Male contributor">
+          <img src="../assets/cleomenes-rare-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Grain Supply Auditor — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Rare</span></div>
+        <h3>Grain Supply Auditor</h3>
+        <div class="card-links"><span class="card-index">74 / 83</span><a href="../source/cards/cleomenes-rare-male.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-rare-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-rare-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="female" data-rarity="rare" data-search="grain supply auditor cleomenes of naucratis female contributor rare">
+        <a class="card-image" href="../exports/cleomenes-rare-female.png" aria-label="Open full size: Grain Supply Auditor, Female contributor">
+          <img src="../assets/cleomenes-rare-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Grain Supply Auditor — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Rare</span></div>
+        <h3>Grain Supply Auditor</h3>
+        <div class="card-links"><span class="card-index">75 / 83</span><a href="../source/cards/cleomenes-rare-female.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-rare-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-rare-female-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="male" data-rarity="epic" data-search="steward of egyptian grain accounts cleomenes of naucratis male contributor epic">
+        <a class="card-image" href="../exports/cleomenes-epic-male.png" aria-label="Open full size: Steward of Egyptian Grain Accounts, Male contributor">
+          <img src="../assets/cleomenes-epic-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Steward of Egyptian Grain Accounts — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic</span></div>
+        <h3>Steward of Egyptian Grain Accounts</h3>
+        <div class="card-links"><span class="card-index">76 / 83</span><a href="../source/cards/cleomenes-epic-male.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-epic-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-epic-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="cleomenes" data-kind="contribution" data-gender="female" data-rarity="epic" data-search="steward of egyptian grain accounts cleomenes of naucratis female contributor epic">
+        <a class="card-image" href="../exports/cleomenes-epic-female.png" aria-label="Open full size: Steward of Egyptian Grain Accounts, Female contributor">
+          <img src="../assets/cleomenes-epic-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Steward of Egyptian Grain Accounts — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic</span></div>
+        <h3>Steward of Egyptian Grain Accounts</h3>
+        <div class="card-links"><span class="card-index">77 / 83</span><a href="../source/cards/cleomenes-epic-female.svg" title="Editable card SVG">SVG</a><a href="../masters/cleomenes-epic-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/cleomenes-epic-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="nearchus" aria-labelledby="figure-nearchus">
+      <div class="figure-heading"><div><span class="section-index">12</span><h2 id="figure-nearchus">Nearchus</h2><span class="figure-count">3 cards</span></div><a class="master-link" href="../masters/nearchus-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="nearchus" data-kind="parent" data-gender="male" data-rarity="epic" data-search="nearchus nearchus historical figure epic">
+        <a class="card-image" href="../exports/nearchus-parent.png" aria-label="Open full size: Nearchus, Historical figure">
+          <img src="../assets/nearchus-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Nearchus — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Nearchus</h3>
+        <div class="card-links"><span class="card-index">78 / 83</span><a href="../source/cards/nearchus-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/nearchus-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/nearchus-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="nearchus" data-kind="title" data-gender="male" data-rarity="epic" data-search="navigator of nearchus nearchus male contributor epic">
+        <a class="card-image" href="../exports/nearchus-title-male.png" aria-label="Open full size: Navigator of Nearchus, Male contributor">
+          <img src="../assets/nearchus-title-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Navigator of Nearchus — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Navigator of Nearchus</h3>
+        <div class="card-links"><span class="card-index">79 / 83</span><a href="../source/cards/nearchus-title-male.svg" title="Editable card SVG">SVG</a><a href="../masters/nearchus-title-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/nearchus-title-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="nearchus" data-kind="title" data-gender="female" data-rarity="epic" data-search="navigator of nearchus nearchus female contributor epic">
+        <a class="card-image" href="../exports/nearchus-title-female.png" aria-label="Open full size: Navigator of Nearchus, Female contributor">
+          <img src="../assets/nearchus-title-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Navigator of Nearchus — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Navigator of Nearchus</h3>
+        <div class="card-links"><span class="card-index">80 / 83</span><a href="../source/cards/nearchus-title-female.svg" title="Editable card SVG">SVG</a><a href="../masters/nearchus-title-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/nearchus-title-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    <section class="figure-section" data-figure-section="eumenes" aria-labelledby="figure-eumenes">
+      <div class="figure-heading"><div><span class="section-index">13</span><h2 id="figure-eumenes">Eumenes of Cardia</h2><span class="figure-count">3 cards</span></div><a class="master-link" href="../masters/eumenes-parent.vectorcraft">Native master <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">
+      <article class="card" data-figure="eumenes" data-kind="parent" data-gender="male" data-rarity="epic" data-search="eumenes of cardia eumenes of cardia historical figure epic">
+        <a class="card-image" href="../exports/eumenes-parent.png" aria-label="Open full size: Eumenes of Cardia, Historical figure">
+          <img src="../assets/eumenes-parent-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Eumenes of Cardia — Historical figure framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Historical figure</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Eumenes of Cardia</h3>
+        <div class="card-links"><span class="card-index">81 / 83</span><a href="../source/cards/eumenes-parent.svg" title="Editable card SVG">SVG</a><a href="../masters/eumenes-parent.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/eumenes-parent-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="eumenes" data-kind="title" data-gender="male" data-rarity="epic" data-search="secretary of eumenes eumenes of cardia male contributor epic">
+        <a class="card-image" href="../exports/eumenes-title-male.png" aria-label="Open full size: Secretary of Eumenes, Male contributor">
+          <img src="../assets/eumenes-title-male-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Secretary of Eumenes — Male contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Male contributor</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Secretary of Eumenes</h3>
+        <div class="card-links"><span class="card-index">82 / 83</span><a href="../source/cards/eumenes-title-male.svg" title="Editable card SVG">SVG</a><a href="../masters/eumenes-title-male.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/eumenes-title-male-pixel.png">Inner art</a></div>
+      </article>
+      <article class="card" data-figure="eumenes" data-kind="title" data-gender="female" data-rarity="epic" data-search="secretary of eumenes eumenes of cardia female contributor epic">
+        <a class="card-image" href="../exports/eumenes-title-female.png" aria-label="Open full size: Secretary of Eumenes, Female contributor">
+          <img src="../assets/eumenes-title-female-thumb.png" width="450" height="630" loading="lazy" decoding="async" alt="Secretary of Eumenes — Female contributor framed card">
+          <span class="image-action" aria-hidden="true">View full size <span>↗</span></span>
+        </a>
+        <div class="card-meta"><span class="variant">Female contributor</span><span class="rarity">Epic<span class="editorial" title="Epic frame styling is an editorial default; gameplay rarity is unspecified.">*</span></span></div>
+        <h3>Secretary of Eumenes</h3>
+        <div class="card-links"><span class="card-index">83 / 83</span><a href="../source/cards/eumenes-title-female.svg" title="Editable card SVG">SVG</a><a href="../masters/eumenes-title-female.vectorcraft" title="Editable native VectorCraft master">Master</a><a href="../../figure-inner-art-v12/assets/eumenes-title-female-pixel.png">Inner art</a></div>
+      </article>
+      </div>
+    </section>
+    </div>
+    <div class="empty-state" id="empty-state" hidden><strong>No cards match these filters.</strong>Try another figure, rarity, or search.</div>
+  </main>
+  <footer><p>Art previews · 900 × 1260 px. Collection numbers identify designs, not issued copies. * Epic frame styling for Nearchus and Eumenes is an editorial default; gameplay rarity is unspecified. Parent ranks use current base policy.</p><span>Jade & bronze · v13</span></footer>
+</div>
+<script>
+(() => {
+  const buttons = [...document.querySelectorAll('[data-view]')];
+  const cards = [...document.querySelectorAll('.card')];
+  const sections = [...document.querySelectorAll('[data-figure-section]')];
+  const rarity = document.getElementById('rarity-filter');
+  const figure = document.getElementById('figure-filter');
+  const search = document.getElementById('search-filter');
+  let view = 'all';
+  function update() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    for (const card of cards) {
+      const variantMatch = view === 'all' || (view === 'parent' ? card.dataset.kind === 'parent' : card.dataset.kind !== 'parent' && card.dataset.gender === view);
+      const matches = variantMatch && (rarity.value === 'all' || card.dataset.rarity === rarity.value) && (figure.value === 'all' || card.dataset.figure === figure.value) && (!query || card.dataset.search.includes(query));
+      card.hidden = !matches;
+      if (matches) visible++;
+    }
+    let figureCount = 0;
+    for (const section of sections) {
+      const count = [...section.querySelectorAll('.card')].filter(card => !card.hidden).length;
+      section.hidden = count === 0;
+      section.querySelector('.figure-count').textContent = count + (count === 1 ? ' card' : ' cards');
+      if (count) figureCount++;
+    }
+    document.getElementById('result-count').textContent = 'Showing ' + visible + ' of 83 cards across ' + figureCount + (figureCount === 1 ? ' figure' : ' figures');
+    document.getElementById('empty-state').hidden = visible !== 0;
+  }
+  for (const button of buttons) button.addEventListener('click', () => {
+    view = button.dataset.view;
+    for (const other of buttons) other.setAttribute('aria-pressed', String(other === button));
+    update();
+  });
+  for (const filter of [rarity, figure]) filter.addEventListener('change', update);
+  search.addEventListener('input', update);
+  document.getElementById('reset-filters').addEventListener('click', () => {
+    view = 'all'; rarity.value = 'all'; figure.value = 'all'; search.value = '';
+    for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.view === 'all'));
+    update();
+  });
+})();
+</script>
+</body>
+</html>

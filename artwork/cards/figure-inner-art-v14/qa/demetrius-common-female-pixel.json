@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\demetrius-common-female.png",
+  "sourceSha256": "4eaea6f21b64aa41ad4930398b19ccc82db1eecd17d30a2b488175ceb214514c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\demetrius-common-female-coarse.png",
+  "baseSha256": "4ef46e01ab0725e492ee2b468c8b767c4f74b3475223581a3cb210e564905f6b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\demetrius-common-female-coarse.json",
+  "baseQaSha256": "3e8421d7f469bb6ae312cd677b32da5c2af5a02ff784274fdfa61d7fa14fb918",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\demetrius-common-female-face.json",
+  "configSha256": "ea60ada7aa3c7236d96ac4b7f0796644dcfdf8800ad96af30ac3a0799007d538",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          419,
+          220
+        ],
+        "radius": [
+          93,
+          116
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\demetrius-common-female-pixel.png",
+  "outputSha256": "546692ff63c4815818b18f2519635d98472dc4778f48e65d4d69e86bc1e1a35c",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "83e0ffc406834313ca64837efcd309b220b42232492b2b9a0951866308c1fc13",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": null,
+  "maskSha256": null,
+  "maskPixelSha256": "5b69281c5ef647845674a34a7e5587d3b84812b1c2f388752db6ea6e4f7eb92c",
+  "selectedDetailCells": 784,
+  "retainedCoarseCells": 23716,
+  "affectedPixels": 28224,
+  "changedPixels": 28034,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

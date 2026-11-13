@@ -180,5 +180,11 @@ test("figure directory separates historical writings from game qualification rul
   assert.match(html, /Authored writings/);
   assert.match(html, /No authored literary work is securely identified/);
   assert.match(html, /How a life qualifies/);
+  assert.equal((html.match(/data-roster-figure=/g) ?? []).length, 11);
+  assert.equal((html.match(/data-placeholder-art="true"/g) ?? []).length, 7);
+  assert.match(html, /Menander/);
+  assert.match(html, /Lysippos/);
+  assert.match(html, /Catalogue variants are previews/);
+  assert.match(html, /Collectible minting for this figure is not available yet/);
   assert.doesNotMatch(html, /Keep to the Museum|Alexander, the conqueror/);
 });

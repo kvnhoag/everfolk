@@ -1,0 +1,81 @@
+{
+  "figureId": "nearchus",
+  "figureName": "Nearchus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Fleet Deckhand",
+  "displayTitle": "Fleet Deckhand",
+  "subtitle": "Crew of Nearchus' Ships",
+  "bodyTitle": "The Ship Stays Ready",
+  "bodyText": "A fleet deckhand tends lines, stows gear, and answers the work of another tide. Dependable hands keep the vessel ready for orders, giving the admiral's distant destination a practical beginning on deck.",
+  "sourceRoleSlug": "nearchus-common",
+  "newArt": true,
+  "sceneBrief": "A humble fleet deckhand tends rigging on an ancient expedition ship, simple working tunic, salt-worn rope, coastal water behind.",
+  "slug": "nearchus-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Fleet Deckhand",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/nearchus-common-female-pixel.png",
+  "sourceArtSlug": "nearchus-common-female",
+  "editionLimit": null,
+  "collectionIndex": 102,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/nearchus.svg",
+    "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A fleet deckhand tends lines, stows gear, and answers the",
+    "work of another tide. Dependable hands keep the vessel",
+    "ready for orders, giving the admiral's distant destination",
+    "a practical beginning on deck."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-common-female.svg",
+  "fittedArt": "assets/fitted/nearchus-common-female.png",
+  "overlaySvg": "source/overlays/nearchus-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "91820282ed875a23617b3df4ec43550e263f1999bdedd81dc24782d1883c5f54",
+  "master": "masters/nearchus-common-female.vectorcraft",
+  "export": "exports/nearchus-common-female.png",
+  "thumbnail": "assets/nearchus-common-female-thumb.png",
+  "exportSha256": "0990ccd3429c2a073a08e41d04b32a8ae1b0f49e407ea72a72e744d167c753c9",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582273,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

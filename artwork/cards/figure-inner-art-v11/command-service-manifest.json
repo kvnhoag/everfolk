@@ -1,0 +1,364 @@
+{
+  "assets": [
+    {
+      "slug": "alexander-uncommon",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Campaign Provisioner",
+      "source": "source/alexander-uncommon.png",
+      "prompt": "prompts/alexander-uncommon.txt",
+      "final": "assets/alexander-uncommon-pixel.png",
+      "qa": "qa/alexander-uncommon-pixel.json",
+      "face": {
+        "center": [
+          348,
+          184
+        ],
+        "radius": [
+          116,
+          142
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-7b89471f-b1db-4523-b343-cdf875d66134.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "alexander-rare",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Campaign Staff Officer",
+      "source": "source/alexander-rare.png",
+      "prompt": "prompts/alexander-rare.txt",
+      "final": "assets/alexander-rare-pixel.png",
+      "qa": "qa/alexander-rare-pixel.json",
+      "face": {
+        "center": [
+          349,
+          181
+        ],
+        "radius": [
+          117,
+          142
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-d7ce7788-baee-4801-9898-dc34c936a1b0.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "alexander-epic",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Trusted Campaign Commander",
+      "source": "source/alexander-epic.png",
+      "prompt": "prompts/alexander-epic.txt",
+      "final": "assets/alexander-epic-pixel.png",
+      "qa": "qa/alexander-epic-pixel.json",
+      "face": {
+        "center": [
+          242,
+          197
+        ],
+        "radius": [
+          115,
+          145
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-859d3304-e298-48ee-8329-fcfaf00accc9.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "demetrius-parent",
+      "figureId": "demetrius",
+      "kind": "parent",
+      "tier": null,
+      "title": "Demetrius the Besieger",
+      "source": "source/demetrius-parent.png",
+      "prompt": "prompts/demetrius-parent.txt",
+      "final": "assets/demetrius-parent-pixel.png",
+      "qa": "qa/demetrius-parent-pixel.json",
+      "face": {
+        "center": [
+          300,
+          205
+        ],
+        "radius": [
+          108,
+          142
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-a3559b32-759e-467f-97b1-9a769adafe50.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "demetrius-uncommon",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Siege Workshop Assistant",
+      "source": "source/demetrius-uncommon.png",
+      "prompt": "prompts/demetrius-uncommon.txt",
+      "final": "assets/demetrius-uncommon-pixel.png",
+      "qa": "qa/demetrius-uncommon-pixel.json",
+      "face": {
+        "center": [
+          510,
+          280
+        ],
+        "radius": [
+          128,
+          145
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-4439e815-649a-41b5-8dd3-5aeee1db3c63.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "demetrius-rare",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Siege Engineer",
+      "source": "source/demetrius-rare.png",
+      "prompt": "prompts/demetrius-rare.txt",
+      "final": "assets/demetrius-rare-pixel.png",
+      "qa": "qa/demetrius-rare-pixel.json",
+      "face": {
+        "center": [
+          415,
+          294
+        ],
+        "radius": [
+          115,
+          142
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-de48c59a-4949-4967-a945-b56c19df8a1f.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "demetrius-epic",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Director of Siege Works",
+      "source": "source/demetrius-epic.png",
+      "prompt": "prompts/demetrius-epic.txt",
+      "final": "assets/demetrius-epic-pixel.png",
+      "qa": "qa/demetrius-epic-pixel.json",
+      "face": {
+        "center": [
+          270,
+          215
+        ],
+        "radius": [
+          115,
+          140
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-d9b11e1f-4883-4fce-b8b9-5b29c12a3b5a.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "ptolemy-parent",
+      "figureId": "ptolemy",
+      "kind": "parent",
+      "tier": null,
+      "title": "Ptolemy I Soter",
+      "source": "source/ptolemy-parent.png",
+      "prompt": "prompts/ptolemy-parent.txt",
+      "final": "assets/ptolemy-parent-pixel.png",
+      "qa": "qa/ptolemy-parent-pixel.json",
+      "face": {
+        "center": [
+          385,
+          190
+        ],
+        "radius": [
+          102,
+          135
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-3fa711e6-c0c5-44ea-bf92-92d03f071654.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "ptolemy-uncommon",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Egyptian Administration Clerk",
+      "source": "source/ptolemy-uncommon.png",
+      "prompt": "prompts/ptolemy-uncommon.txt",
+      "final": "assets/ptolemy-uncommon-pixel.png",
+      "qa": "qa/ptolemy-uncommon-pixel.json",
+      "face": {
+        "center": [
+          410,
+          260
+        ],
+        "radius": [
+          125,
+          150
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-e77d5ace-1115-4344-87bd-71102f2a6795.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "ptolemy-rare",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Ptolemaic Supply Commissioner",
+      "source": "source/ptolemy-rare.png",
+      "prompt": "prompts/ptolemy-rare.txt",
+      "final": "assets/ptolemy-rare-pixel.png",
+      "qa": "qa/ptolemy-rare-pixel.json",
+      "face": {
+        "center": [
+          440,
+          205
+        ],
+        "radius": [
+          112,
+          135
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-24c12177-db18-43f4-a40d-ffdf67722682.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "ptolemy-epic",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Steward of Egyptian Government",
+      "source": "source/ptolemy-epic.png",
+      "prompt": "prompts/ptolemy-epic.txt",
+      "final": "assets/ptolemy-epic-pixel.png",
+      "qa": "qa/ptolemy-epic-pixel.json",
+      "face": {
+        "center": [
+          370,
+          232
+        ],
+        "radius": [
+          116,
+          142
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-0a210d5d-fdb4-414c-9b8a-3f3b348ba55d.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "nearchus-parent",
+      "figureId": "nearchus",
+      "kind": "parent",
+      "tier": null,
+      "title": "Nearchus",
+      "source": "source/nearchus-parent.png",
+      "prompt": "prompts/nearchus-parent.txt",
+      "final": "assets/nearchus-parent-pixel.png",
+      "qa": "qa/nearchus-parent-pixel.json",
+      "face": {
+        "center": [
+          375,
+          214
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-beaf4703-2360-4e63-88a6-682950039947.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "nearchus-title",
+      "figureId": "nearchus",
+      "kind": "title",
+      "tier": null,
+      "title": "Navigator of Nearchus",
+      "source": "source/nearchus-title.png",
+      "prompt": "prompts/nearchus-title.txt",
+      "final": "assets/nearchus-title-pixel.png",
+      "qa": "qa/nearchus-title-pixel.json",
+      "face": {
+        "center": [
+          370,
+          230
+        ],
+        "radius": [
+          105,
+          133
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-c3b2c5f2-4c9f-42c9-8efb-14c17c0d4ba0.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "eumenes-parent",
+      "figureId": "eumenes",
+      "kind": "parent",
+      "tier": null,
+      "title": "Eumenes of Cardia",
+      "source": "source/eumenes-parent.png",
+      "prompt": "prompts/eumenes-parent.txt",
+      "final": "assets/eumenes-parent-pixel.png",
+      "qa": "qa/eumenes-parent-pixel.json",
+      "face": {
+        "center": [
+          475,
+          182
+        ],
+        "radius": [
+          100,
+          135
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-255f6572-93d1-4a3b-89f3-625b3ed17f39.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    },
+    {
+      "slug": "eumenes-title",
+      "figureId": "eumenes",
+      "kind": "title",
+      "tier": null,
+      "title": "Secretary of Eumenes",
+      "source": "source/eumenes-title.png",
+      "prompt": "prompts/eumenes-title.txt",
+      "final": "assets/eumenes-title-pixel.png",
+      "qa": "qa/eumenes-title-pixel.json",
+      "face": {
+        "center": [
+          370,
+          300
+        ],
+        "radius": [
+          123,
+          148
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-7eff4795-3a44-400f-a458-c3b0bcb86c97.png",
+      "provenance": "Built-in image generation; local authored role and user equipment sheet for Alexander military subcards; imagined appearance. Alexander parent is style-only reference.",
+      "reviewed": true
+    }
+  ]
+}

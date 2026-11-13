@@ -1,0 +1,60 @@
+{
+  "slug": "lysippos-epic-male",
+  "figureId": "lysippos",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Master of Lysippan Form",
+  "subtitle": "Lysippos",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 27,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-epic-male.svg",
+  "fittedArt": "assets/fitted/lysippos-epic-male.png",
+  "overlaySvg": "source/overlays/lysippos-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+  "master": "masters/lysippos-epic-male.vectorcraft",
+  "export": "exports/lysippos-epic-male.png",
+  "thumbnail": "assets/lysippos-epic-male-thumb.png",
+  "exportSha256": "ce2aa54a79fc119bf7d4eaf5e31225863a5465e9cb028fc4e8a49e8095b373a0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

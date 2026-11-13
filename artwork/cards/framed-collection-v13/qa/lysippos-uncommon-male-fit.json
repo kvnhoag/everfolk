@@ -1,0 +1,60 @@
+{
+  "slug": "lysippos-uncommon-male",
+  "figureId": "lysippos",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Bronze Workshop Assistant",
+  "subtitle": "Lysippos",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 23,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-uncommon-male.svg",
+  "fittedArt": "assets/fitted/lysippos-uncommon-male.png",
+  "overlaySvg": "source/overlays/lysippos-uncommon-male.svg",
+  "titleSize": 58,
+  "sourceArtSha256": "e839ccb17fb2dbb9b8b70452f261fe2fa0e45059285f2bfab9f5cb13682613a4",
+  "master": "masters/lysippos-uncommon-male.vectorcraft",
+  "export": "exports/lysippos-uncommon-male.png",
+  "thumbnail": "assets/lysippos-uncommon-male-thumb.png",
+  "exportSha256": "fab5962b45675ae6fa7e779dbe884b6a75e94a88614b1b08c93c84052beb4f25",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

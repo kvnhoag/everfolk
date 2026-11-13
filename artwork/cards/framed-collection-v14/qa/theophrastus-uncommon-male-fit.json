@@ -1,0 +1,80 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Plant Records Assistant",
+  "displayTitle": "Plant Records Assistant",
+  "subtitle": "Scribe of Theophrastus' Garden",
+  "bodyTitle": "The Detail Preserved",
+  "bodyText": "A plant records assistant notes where a specimen grows and how it changes through the season. Careful description saves details that memory would blur, giving later comparisons a dependable place to begin.",
+  "sourceRoleSlug": "theophrastus-uncommon",
+  "newArt": false,
+  "slug": "theophrastus-uncommon-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Plant Records Assistant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-uncommon-male-pixel.png",
+  "sourceArtSlug": "theophrastus-uncommon-male",
+  "editionLimit": null,
+  "collectionIndex": 67,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A plant records assistant notes where a specimen grows and",
+    "how it changes through the season. Careful description",
+    "saves details that memory would blur, giving later",
+    "comparisons a dependable place to begin."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-uncommon-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-uncommon-male.png",
+  "overlaySvg": "source/overlays/theophrastus-uncommon-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+  "master": "masters/theophrastus-uncommon-male.vectorcraft",
+  "export": "exports/theophrastus-uncommon-male.png",
+  "thumbnail": "assets/theophrastus-uncommon-male-thumb.png",
+  "exportSha256": "5da4f106a48acc23830ff8e04cfe3131745d4d9581e8d738c904203a6057ca9c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582547,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -9,6 +9,7 @@ import BoosterOpening from "../components/BoosterOpening.tsx";
 import { packCardView } from "./nft-card-view.ts";
 import { WEAVE_PACK_LABELS } from "../lib/booster/labels.mjs";
 import { mintRevealView } from "./life-report-model.ts";
+import { nextEditionLabel } from "./edition-label.ts";
 import type { LivesContract } from "./types.ts";
 import EverfolkCard from "./EverfolkCard.tsx";
 import { audioManager } from "../lib/audio-manager.ts";
@@ -61,7 +62,7 @@ export default function MintPack({
   function flipCard(slot: number) {
     setFlippedCards(prev => ({ ...prev, [slot]: true }));
     // Auto-select if nothing is selected yet
-    if (!freePlay && selected === null) {
+    if (!freePlay && selected === null && pack.cards[slot]?.next_edition_number !== null) {
       setSelected(slot);
     }
   }
@@ -73,17 +74,24 @@ export default function MintPack({
     });
     setFlippedCards(revealed);
     audioManager.playClickSound();
-    if (!freePlay && selected === null && (pack?.cards?.length ?? 0) > 0) {
-      setSelected(0);
+    const availableSlot = (pack?.cards ?? []).findIndex(card => card.next_edition_number !== null);
+    if (!freePlay && selected === null && availableSlot >= 0) {
+      setSelected(availableSlot);
     }
   }
 
   /** Mints one card. A lost wallet response is recovered from the chain; any other failure is thrown with a readable message. */
   async function mintSlot(slot: number): Promise<void> {
     setSelected(slot);
+    if (pack.cards[slot]?.next_edition_number === null) throw new Error("This card's edition is sold out. Choose another card.");
     try {
       setResult(await (onChoose ? onChoose(slot) : contract.chooseMintSlot(pack.life_id, slot)));
     } catch (cause) {
+      const landed = await contract.mintResult(pack.life_id).catch(() => null);
+      if (landed) {
+        setResult(landed);
+        return;
+      }
       const life = await contract.getLife(pack.life_id).catch(() => null);
       const token =
         life?.status === "minted"
@@ -96,6 +104,9 @@ export default function MintPack({
           figure_id: token.extra.figure_id,
           rarity: token.extra.rarity,
           affection: token.extra.affection,
+          edition_key: token.extra.edition_key,
+          edition_number: token.extra.edition_number,
+          edition_limit: token.extra.edition_limit,
         });
       } else {
         throw new Error(errorText(cause, "The mint was not confirmed. Your pack is saved on NEAR; try again."));
@@ -104,7 +115,7 @@ export default function MintPack({
   }
 
   async function choose() {
-    if (freePlay || selected === null) return;
+    if (freePlay || selected === null || pack.cards[selected]?.next_edition_number === null) return;
     setBusy("mint");
     setError("");
     try { await mintSlot(selected); }
@@ -236,6 +247,7 @@ export default function MintPack({
             {(pack?.cards ?? []).map((card, slot) => {
               const isFlipped = Boolean(flippedCards[slot]);
               const isSelected = selected === slot;
+              const soldOut = card.next_edition_number === null;
               const cardTitle = card.figure_id
                 ? figureTitle(card.figure_id)
                 : card.stage_title && card.character_name
@@ -259,7 +271,7 @@ export default function MintPack({
                     isFaceDown={!isFlipped}
                     onFlip={() => flipCard(slot)}
                     onClick={() => {
-                      if (!freePlay) setSelected(slot);
+                      if (!freePlay && !busy && !soldOut) setSelected(slot);
                     }}
                     selected={!freePlay && isSelected}
                     slotNumber={slot + 1}
@@ -271,6 +283,8 @@ export default function MintPack({
                     pixelSeed={`${pack.evidence_hash}:${slot}`}
                     rarity={card.rarity}
                     rarityLabel={rarityLabel(card.rarity)}
+                    editionText={nextEditionLabel(card)}
+                    badge={isFlipped ? nextEditionLabel(card) ?? undefined : undefined}
                     actionName={actionName(card.action_id)}
                     actionDescription={actionDescription(card.action_id)}
                     affection={card.affection}
@@ -280,7 +294,7 @@ export default function MintPack({
                           <button
                             type="button"
                             className={`augment-choice-btn ${isSelected ? "is-selected" : ""}`}
-                            disabled={Boolean(busy)}
+                            disabled={Boolean(busy) || soldOut}
                             aria-pressed={isSelected}
                             onClick={() => setSelected(slot)}
                           >
@@ -348,7 +362,7 @@ export default function MintPack({
               <button
                 className="chain-primary"
                 type="button"
-                disabled={Boolean(busy) || selected === null || !flippedCards[selected]}
+                disabled={Boolean(busy) || selected === null || !flippedCards[selected] || pack.cards[selected]?.next_edition_number === null}
                 onClick={() => {
                   void choose();
                 }}

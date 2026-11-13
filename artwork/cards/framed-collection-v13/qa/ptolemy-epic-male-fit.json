@@ -1,0 +1,60 @@
+{
+  "slug": "ptolemy-epic-male",
+  "figureId": "ptolemy",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Steward of Egyptian Government",
+  "subtitle": "Ptolemy I Soter",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 69,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-epic-male.svg",
+  "fittedArt": "assets/fitted/ptolemy-epic-male.png",
+  "overlaySvg": "source/overlays/ptolemy-epic-male.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "c9581112f78d21e7207bac7b9ca19c9f808f78305a1a00c1b20798fd884918ed",
+  "master": "masters/ptolemy-epic-male.vectorcraft",
+  "export": "exports/ptolemy-epic-male.png",
+  "thumbnail": "assets/ptolemy-epic-male-thumb.png",
+  "exportSha256": "cbf0c3b944d0f39962fc506915bcd3223344ff8182c22f0027836dde1fbc71f0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

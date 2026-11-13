@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-uncommon-female",
+  "figureId": "demetrius",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Siege Workshop Assistant",
+  "subtitle": "Demetrius the Besieger",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 45,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-uncommon-female.svg",
+  "fittedArt": "assets/fitted/demetrius-uncommon-female.png",
+  "overlaySvg": "source/overlays/demetrius-uncommon-female.svg",
+  "titleSize": 60,
+  "sourceArtSha256": "e67b979c076a6add4a6f5b1ac30b7c90cc691732eac95c2216b1a5a08f80deb5",
+  "master": "masters/demetrius-uncommon-female.vectorcraft",
+  "export": "exports/demetrius-uncommon-female.png",
+  "thumbnail": "assets/demetrius-uncommon-female-thumb.png",
+  "exportSha256": "d0ab6b12ae9692399d414b12f6d3672678643ee343dbdb5e7f68e1f7394fa590",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

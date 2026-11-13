@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-uncommon-male.png",
+  "sourceSha256": "89d4a06cb1ce07bd3de16440369ad3987aecc39e7169bc90496960475a56e7f8",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-uncommon-male-coarse.png",
+  "baseSha256": "1e24d39c19ec21360bcd44a1cbe755aee57983ea6b0dc436be471415ee4974fe",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-uncommon-male-coarse.json",
+  "baseQaSha256": "40dcb8bdca7680addb9370716690999880d7e87a7a3adbc8314eff3720c3a0f9",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-uncommon-male-face.json",
+  "configSha256": "d672c7bd437619b23f7a912e58b77673c45c58c5662056c2de80eecabe398a98",
+  "config": {
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "center": [
+          350,
+          180
+        ],
+        "radius": [
+          100,
+          125
+        ]
+      }
+    ],
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-uncommon-male-pixel.png",
+  "outputSha256": "bd2da19f09cba801e5ddf469854f0d37f336e395b50b5bf62dbe7f52c5bc9626",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "dc9e6c4e2afc8a8929472c5702d4f33970a4c32cbcd66a551b53cd3d8ee707e8",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-uncommon-male-face-mask.png",
+  "maskSha256": "283fea18da5ae6f7720e538da6dc5e9bb2b4074a2199cf588942962cf56c3e4b",
+  "maskPixelSha256": "bf28ba5f2ce679b1393ce01b950ea588d3bb8c48fbb90d99e8d9e73ab097f436",
+  "selectedDetailCells": 908,
+  "retainedCoarseCells": 23592,
+  "affectedPixels": 32688,
+  "changedPixels": 32572,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

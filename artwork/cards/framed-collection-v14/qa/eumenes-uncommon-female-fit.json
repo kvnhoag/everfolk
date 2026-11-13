@@ -1,0 +1,81 @@
+{
+  "figureId": "eumenes",
+  "figureName": "Eumenes of Cardia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Royal Dispatch Copyist",
+  "displayTitle": "Royal Dispatch Copyist",
+  "subtitle": "Scribe in Eumenes' Service",
+  "bodyTitle": "The King's Words Intact",
+  "bodyText": "A dispatch copyist preserves the wording of orders before they travel far from court. Exact attention keeps authority from changing with each retelling, giving officials a shared instruction they can read and answer.",
+  "sourceRoleSlug": "eumenes-uncommon",
+  "newArt": true,
+  "sceneBrief": "A royal dispatch copyist uses a reed pen to copy a letter beside a sealed roll at a modest royal-office desk; no quill pen.",
+  "slug": "eumenes-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Royal Dispatch Copyist",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/eumenes-uncommon-female-pixel.png",
+  "sourceArtSlug": "eumenes-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 113,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/eumenes.svg",
+    "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A dispatch copyist preserves the wording of orders before",
+    "they travel far from court. Exact attention keeps authority",
+    "from changing with each retelling, giving officials a",
+    "shared instruction they can read and answer."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-uncommon-female.svg",
+  "fittedArt": "assets/fitted/eumenes-uncommon-female.png",
+  "overlaySvg": "source/overlays/eumenes-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "2d72bdf66ba090c662fdf5e73734b46594daaa002f66157ba85848bdcfb64a71",
+  "master": "masters/eumenes-uncommon-female.vectorcraft",
+  "export": "exports/eumenes-uncommon-female.png",
+  "thumbnail": "assets/eumenes-uncommon-female-thumb.png",
+  "exportSha256": "4dbf11992f4f76cc03bd168f36dec539769ba9542a5550916729efc1a8ceb821",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582396,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,743 @@
+{
+  "reviewedAt": "2026-11-13T14:50:33.207Z",
+  "passed": true,
+  "copyScope": {
+    "parents": 13,
+    "roles": 52,
+    "variants": 104,
+    "total": 117
+  },
+  "renderedCardsChecked": 117,
+  "approvedExistingPortraitFitsChecked": 83,
+  "visualReview": [
+    "euclid-parent",
+    "alexander-rare-female",
+    "aristotle-epic-male",
+    "alexander-common-male",
+    "alexander-uncommon-female"
+  ],
+  "rarityReview": {
+    "common": "iron single rule and square corner joints",
+    "uncommon": "jade/bronze paired rules and leaves",
+    "rare": "silver-blue faceted gems and chamfer brackets",
+    "epic": "amethyst/gold knots and jewel rails",
+    "legendary": "full art with radiant gilt cartouche and symbolic figure badge"
+  },
+  "checks": {
+    "fourSubcardTiersPerFigure": true,
+    "integratedProseRatherThanLists": true,
+    "professionAndResponsibilityInCopy": true,
+    "shortElevatingConsequencePresent": true,
+    "figureSpecificSubtitlesAndEmblems": true,
+    "rejectedGenericLabelsAbsentFromRenderedType": true,
+    "numberedExampleFooter": true,
+    "paragraphBoundsContained": true,
+    "approvedPortraitFitsPreserved": true
+  },
+  "problems": [],
+  "warnings": [],
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "editableParagraph": true,
+      "editionText": "001/010",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "alexander-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "alexander-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-parent",
+      "editableParagraph": true,
+      "editionText": "001/010",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "aristotle-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-parent",
+      "editableParagraph": true,
+      "editionText": "001/010",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "euclid-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "euclid-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-parent",
+      "editableParagraph": true,
+      "editionText": "001/010",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "lysippos-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "pytheas-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-parent",
+      "editableParagraph": true,
+      "editionText": "001/010",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "menander-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "menander-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "demetrius-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "zeno-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "zeno-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "nearchus-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "nearchus-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "nearchus-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "nearchus-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "eumenes-parent",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "eumenes-common-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-common-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "editableParagraph": true,
+      "editionText": "001/∞",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "editableParagraph": true,
+      "editionText": "001/100",
+      "approvedPortraitFitPreserved": null
+    },
+    {
+      "slug": "eumenes-epic-male",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    },
+    {
+      "slug": "eumenes-epic-female",
+      "editableParagraph": true,
+      "editionText": "001/025",
+      "approvedPortraitFitPreserved": true
+    }
+  ]
+}

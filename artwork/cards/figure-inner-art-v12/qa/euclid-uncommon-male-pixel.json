@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\euclid-uncommon-male.png",
+  "sourceSha256": "5c3f3021363103559d9eb0f9b0db209ea91a0935632084ea3568fbe7d4334489",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\euclid-uncommon-male-coarse.png",
+  "baseSha256": "8132ac85b45fce32fc9256645f43c0f7a6ea30e647da3541a11fe9d9f7ecfd47",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\euclid-uncommon-male-coarse.json",
+  "baseQaSha256": "6e82ed8cc850291f44e50ac1aff699ac3b25e775799a8f7413d436d6d26422a5",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\euclid-uncommon-male-face.json",
+  "configSha256": "e731e6c4a28fc4d62af3b132a9f34ca73ef6fcd80579e2136ede885a7c79196c",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "radius": [
+          109,
+          145
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          357,
+          221
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\euclid-uncommon-male-pixel.png",
+  "outputSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "670c0d1dd57ff430bbba7e0b164505e1e9ba6947f8d9c89751664f62a3da5690",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\euclid-uncommon-male-face-mask.png",
+  "maskSha256": "338b2ca199eec4fd017c5a3cd97d80b1474787a560ab3880828a091b6ad144ca",
+  "maskPixelSha256": "0034af6ff67844c021a5417274337444cf5e26bea45192e121622d482a6c920a",
+  "selectedDetailCells": 1153,
+  "retainedCoarseCells": 23347,
+  "affectedPixels": 41508,
+  "changedPixels": 41152,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

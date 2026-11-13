@@ -1,0 +1,80 @@
+{
+  "figureId": "lysippos",
+  "figureName": "Lysippos",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Portrait Modeller",
+  "displayTitle": "Portrait Modeller",
+  "subtitle": "Student of Lysippos",
+  "bodyTitle": "A Likeness Takes Shape",
+  "bodyText": "A portrait modeller studies the turn of a head and the balance of a stance. Sensitive hands give character to the clay, finding the living presence that a successful casting must preserve.",
+  "sourceRoleSlug": "lysippos-rare",
+  "newArt": false,
+  "slug": "lysippos-rare-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Portrait Modeller",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-rare-female-pixel.png",
+  "sourceArtSlug": "lysippos-rare-female",
+  "editionLimit": 100,
+  "collectionIndex": 34,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/lysippos.svg",
+    "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A portrait modeller studies the turn of a head and the",
+    "balance of a stance. Sensitive hands give character to the",
+    "clay, finding the living presence that a successful casting",
+    "must preserve."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-rare-female.svg",
+  "fittedArt": "assets/fitted/lysippos-rare-female.png",
+  "overlaySvg": "source/overlays/lysippos-rare-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+  "master": "masters/lysippos-rare-female.vectorcraft",
+  "export": "exports/lysippos-rare-female.png",
+  "thumbnail": "assets/lysippos-rare-female-thumb.png",
+  "exportSha256": "cf5d586946c5fe814454aaa88204f9ac7ad0d0733b550dd28bfbca328e81afcd",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582673,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

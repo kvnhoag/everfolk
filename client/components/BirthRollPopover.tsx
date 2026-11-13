@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import BirthStatRoll from "./BirthStatRoll.tsx";
-import BirthPortraitPreview from "./BirthPortraitPreview.tsx";
 import PixelIcon from "./PixelIcon.tsx";
 import "../styles/birth-roll-popover.css";
 
@@ -40,7 +39,7 @@ function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onC
       <div><h2 ref={headingRef} id={`${id}-title`} tabIndex={-1}>A new life</h2><p id={`${id}-description`}>{rollComplete ? "Starting stats ready" : "Rolling stats…"}</p></div>
       <button className="birth-popover-close" type="button" aria-label="Close starting stats" onClick={onClose}><span aria-hidden="true">×</span></button>
     </header>
-    <div className="birth-popover-content"><BirthStatRoll life={life} world={world} revealed={rollComplete} onComplete={completeRoll} autoStart />{rollComplete && <BirthPortraitPreview life={life} world={world} />}</div>
+    <div className="birth-popover-content"><BirthStatRoll life={life} world={world} revealed={rollComplete} onComplete={completeRoll} autoStart /></div>
     <footer className="birth-popover-footer">
       {onReborn && <button className="birth-popover-reborn" type="button" title="Roll a new name, background and starting stats" onClick={onReborn}><PixelIcon name="restart" size={16} />Reborn</button>}
       <button className="birth-popover-continue" type="button" disabled={!rollComplete} onClick={() => { if (rollComplete) onContinue(); }}>Begin life <span aria-hidden="true">↗</span></button>

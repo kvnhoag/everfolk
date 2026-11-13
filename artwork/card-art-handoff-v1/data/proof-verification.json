@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "count": 2,
+  "nativeRenderer": "VectorCraft",
+  "results": [
+    {
+      "id": "alexander-parent",
+      "frame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "1604887b74a4bbd105d66ce2883b06ba905e4a16829274ed827c3f1388e60d70"
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "0652554ee9472b2694c0d96c07f102b12e38fa87d4c4dd87acac96f08eb562b9"
+      }
+    },
+    {
+      "id": "alexander-common-male",
+      "frame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "4ee99853ada662d9fc54e27bf2c692cac842ac418fd68e350f114519bdae1c06"
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "2446a1e4c7b0e63f13062a37acf8859ab69163a23454201407c19e74e0bb992d"
+      }
+    }
+  ]
+}

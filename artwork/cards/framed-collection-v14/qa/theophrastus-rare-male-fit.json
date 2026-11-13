@@ -1,0 +1,81 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Comparative Plant Investigator",
+  "displayTitle": "Plant Investigator",
+  "subtitle": "Student of Theophrastus",
+  "bodyTitle": "Differences Reveal Order",
+  "bodyText": "A plant investigator compares roots, leaves, habitats, and patterns of growth across living specimens. Discerning attention turns a garden of separate examples into evidence, helping the school recognise the order within abundance.",
+  "sourceRoleSlug": "theophrastus-rare",
+  "newArt": false,
+  "slug": "theophrastus-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Comparative Plant Investigator",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-male-pixel.png",
+  "sourceArtSlug": "theophrastus-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 69,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A plant investigator compares roots, leaves, habitats, and",
+    "patterns of growth across living specimens. Discerning",
+    "attention turns a garden of separate examples into",
+    "evidence, helping the school recognise the order within",
+    "abundance."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-rare-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-rare-male.png",
+  "overlaySvg": "source/overlays/theophrastus-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+  "master": "masters/theophrastus-rare-male.vectorcraft",
+  "export": "exports/theophrastus-rare-male.png",
+  "thumbnail": "assets/theophrastus-rare-male-thumb.png",
+  "exportSha256": "d997f6fd75b85e1c254f670035b13d9a4aae4fc54f111f95a9aa47920e5bc089",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582523,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

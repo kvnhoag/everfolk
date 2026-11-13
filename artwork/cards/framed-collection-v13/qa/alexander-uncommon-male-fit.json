@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-uncommon-male",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Campaign Provisioner",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 2,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-uncommon-male.svg",
+  "fittedArt": "assets/fitted/alexander-uncommon-male.png",
+  "overlaySvg": "source/overlays/alexander-uncommon-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "bd2da19f09cba801e5ddf469854f0d37f336e395b50b5bf62dbe7f52c5bc9626",
+  "master": "masters/alexander-uncommon-male.vectorcraft",
+  "export": "exports/alexander-uncommon-male.png",
+  "thumbnail": "assets/alexander-uncommon-male-thumb.png",
+  "exportSha256": "39b71e6dfb6ae240210363a792497176b7684668663d08efebeecb4e7832247a",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

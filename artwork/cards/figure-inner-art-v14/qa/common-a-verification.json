@@ -1,0 +1,1344 @@
+{
+  "passed": true,
+  "total": 12,
+  "genders": {
+    "male": 6,
+    "female": 6
+  },
+  "uniqueArt": 12,
+  "contactSheet": "qa/common-a-contact.png",
+  "results": [
+    {
+      "slug": "alexander-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-male.png",
+        "sourceSha256": "c07e7c912fdb18cfb1ba80afc19735b6dc9947503c62c61003a1fab6ea4db67e",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-male-coarse.png",
+        "baseSha256": "d7e6b64e1ff8d68bc8295933357cf426d295b5164767255011a30be2b832edc0",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-male-coarse.json",
+        "baseQaSha256": "e1991efd2df26f28f875c4c2429ea0229350e9cda806b1aa8e2a6d202a9383e7",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-male-face.json",
+        "configSha256": "c60a25ced3975406b9fa800244722ba621a23dd13e9d9d201b2210cdc0188275",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                404,
+                242
+              ],
+              "radius": [
+                105,
+                135
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-male-pixel.png",
+        "outputSha256": "b74eac03c0586eb3aa22b6d6908a0ad8e709ebf868a0145ca40c747440467870",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "0749ddf0d3a3430e5f0c0ff2bc0c7a9af8f9c714eab27550319c22f06e525bc0",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-male-face-mask.png",
+        "maskSha256": "d4d45dcd32b357d5be35f0c557b96514fdf86c1926466c2af24a79510d602176",
+        "maskPixelSha256": "bbf016a5ac1e1d42d87caccaaee7bef13a3157ff7b340eabb3dd439929f1cead",
+        "selectedDetailCells": 1024,
+        "retainedCoarseCells": 23476,
+        "affectedPixels": 36864,
+        "changedPixels": 36383,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "alexander-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-female.png",
+        "sourceSha256": "c9c8e7ae7d5a8295ca8a00ab98fc996ea5d721a6c62ecccbc5abdd1c3bdb054f",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-female-coarse.png",
+        "baseSha256": "1f2b919b1fca37507e08d886280eb8c88dfd54596567439658e556d96a4f6acf",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-female-coarse.json",
+        "baseQaSha256": "7b23d7111c4615a92003ca1b6c2871d55757fb252dcfbee133dd137634e8d1ee",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-female-face.json",
+        "configSha256": "10ceecef1a1bbc760a4fbc1c06f2f089e9090637599956370a276f83c7a75bde",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                398,
+                226
+              ],
+              "radius": [
+                100,
+                135
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-female-pixel.png",
+        "outputSha256": "88da887ec7815fd3b93e32e4b5df3dac438ea44626bfe727aae75f3c9d87f055",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "c30d485441d16dbef463461c444f812fc1b30857c4e091c73c59930e23fb50d0",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-female-face-mask.png",
+        "maskSha256": "afff9112acb91019e71b3fc7b2724d3ae17ea60f46bbb1b19eae7b3ca97963c0",
+        "maskPixelSha256": "74508af66442e21c9783f227c94ecae404a9b94beeb18973249ce1dac7f90002",
+        "selectedDetailCells": 985,
+        "retainedCoarseCells": 23515,
+        "affectedPixels": 35460,
+        "changedPixels": 35153,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "aristotle-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-male.png",
+        "sourceSha256": "3699de787a0f51a16ca0cf732cf08e0eb63c5b780ccb7a0dd34eb8af4cd6ad68",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-male-coarse.png",
+        "baseSha256": "b85dd12ffd2c167e4549151f90c336bfa5586b7ddf0195264878429119bf1ec5",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-male-coarse.json",
+        "baseQaSha256": "311f869260aa73fbecf163e843f750dc72d93c09fb338d28d6b2ccc5b8284658",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-male-face.json",
+        "configSha256": "9b7baf66a4f1fab1915de82be59d4f02cbe99b02fb8836d9f8c1e6fa97f7f278",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                423,
+                244
+              ],
+              "radius": [
+                102,
+                132
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-male-pixel.png",
+        "outputSha256": "01e296d07ce64c618f9ca7f0e0f306ee958de34a01dc17d2860c7c32fe6e417d",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "6452f686dc5419070a00260fbb50c52660124262e09ab231139b28c26cbf6ace",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-male-face-mask.png",
+        "maskSha256": "49245ecc4f5415f00da3ce6c8d46fdc4e3f90d827a96aa174d36df7ba62dd1aa",
+        "maskPixelSha256": "25a065d1428fc55087d2e610909d301d00d3a4d8d0047d2fd8540805e78bbe53",
+        "selectedDetailCells": 986,
+        "retainedCoarseCells": 23514,
+        "affectedPixels": 35496,
+        "changedPixels": 35320,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "aristotle-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-female.png",
+        "sourceSha256": "8b707d17cab46c948efc74b00c3072cbb868a195fea62a9dc4b9d14b31b8c6b0",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-female-coarse.png",
+        "baseSha256": "70a298a64fd150f970a414e7e41b643e8b09b7d3846534e4f2771fff42a14374",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-female-coarse.json",
+        "baseQaSha256": "2fa6426682ee906faf64806fa7c1191b8d031caa991d798d437bca0c0a856808",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-female-face.json",
+        "configSha256": "1df72c7e58ebd5b7e358a8c63e8a0b4d122a3f500babd6074dcb7d344664e8f6",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                420,
+                253
+              ],
+              "radius": [
+                105,
+                138
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-female-pixel.png",
+        "outputSha256": "bb488778ee2ae9b46b10d9db5ab67185294c42850413a90b74b85919cf2ccf8d",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "3e5036d28966c7f39b17c7617ad31a66b1a47ea8eefc94db97a7c2661dea9cc7",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-female-face-mask.png",
+        "maskSha256": "26c7a879c886d918d37076b1458c8b0d0f60c6f3cbad7198da1de491bacd9136",
+        "maskPixelSha256": "35e2f1688b7dc5745d28baa722005ced60dd6fb938ce4ae6dcce60ee67fe20e8",
+        "selectedDetailCells": 1051,
+        "retainedCoarseCells": 23449,
+        "affectedPixels": 37836,
+        "changedPixels": 37470,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "euclid-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\euclid-common-male.png",
+        "sourceSha256": "f374429bf7f49a8cc7c2d14f9b4781efe0df18a8727218cd00e58dc42df54d1a",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\euclid-common-male-coarse.png",
+        "baseSha256": "b2a9ffe9dee8af03e546a4c3102a8e39f4f35a4adf465c3a00976b66ef6a3d46",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\euclid-common-male-coarse.json",
+        "baseQaSha256": "eb280dd2faf5bdfc2bdda7d2ec3b72cc7ff2f2f88283fcea4e8760e626973865",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\euclid-common-male-face.json",
+        "configSha256": "e608c9a4a44f1aebceaffa5e867c3a430dddd7958d776a94c131b6d10e7d8ac8",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                454,
+                275
+              ],
+              "radius": [
+                108,
+                140
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\euclid-common-male-pixel.png",
+        "outputSha256": "2ffa9c276d0173492942d5e57cfebfd4087566ce9eb672bba9e2564f8c1e2b4f",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "3f3719373d133180e8f3d7b3ffac712da2bab4f58adc991e81990a6d917d2b57",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\euclid-common-male-face-mask.png",
+        "maskSha256": "27aac1aadc705af4086905c57aee8de4d6c5a35db170410e743e63a05e8e42ef",
+        "maskPixelSha256": "2012666b7be9383fff6fafafa72649308a81ebefca785d76cfa4d9a9e80da98d",
+        "selectedDetailCells": 1095,
+        "retainedCoarseCells": 23405,
+        "affectedPixels": 39420,
+        "changedPixels": 39116,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "euclid-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\euclid-common-female.png",
+        "sourceSha256": "a4cf35e53c2d11470881479bfd46c229f9fa7c565b33416f5f5dfebfabcbad04",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\euclid-common-female-coarse.png",
+        "baseSha256": "176ac26cda41ae5efa79f76df51818bce3de88796ee6b61b6f1dc50cf96c58c3",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\euclid-common-female-coarse.json",
+        "baseQaSha256": "6ed814fe570a211aa375cbc3bb7bb5f471819f07c26f2c9159abd7a389141314",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\euclid-common-female-face.json",
+        "configSha256": "94d2e92d39e8ac91fbbb0984cd919ec66eb82351ee5ae5afb57801b4b8b59a36",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                415,
+                255
+              ],
+              "radius": [
+                112,
+                142
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\euclid-common-female-pixel.png",
+        "outputSha256": "d736d408442079d8caf4340d4f42f2820c801c142327a605944dc9b33db9e82a",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "beae9fe0ce93f3c9c9802cbf556b11336fd2bf7fdddd7e9633dea2617d6c0e10",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\euclid-common-female-face-mask.png",
+        "maskSha256": "0d6f70e163445ada735db6d17a7aca78018437bd12d91d348bde3e30a75bc9f5",
+        "maskPixelSha256": "d31a5b9a497e8a70c54fdf3fdaa987c1047c3ecfb59d5cd0fe3dbf16c3fe71c6",
+        "selectedDetailCells": 1152,
+        "retainedCoarseCells": 23348,
+        "affectedPixels": 41472,
+        "changedPixels": 41104,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "lysippos-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\lysippos-common-male.png",
+        "sourceSha256": "dc0ae2555d939e56d71297cf37bcbe617da3c273654110d3f8dc18ab06339251",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\lysippos-common-male-coarse.png",
+        "baseSha256": "8ffcfb7d8a36260a40110ab0acde9cc184d0dd796b7c0ee766df8423d398c9fc",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\lysippos-common-male-coarse.json",
+        "baseQaSha256": "3a6ac423451684a4944738c3447511a3198b067b22327a175351cf7d336a7419",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\lysippos-common-male-face.json",
+        "configSha256": "d9c9c2663a94c3b892652351e15561519744dcdccd3a767a813394c0d6eab81b",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                368,
+                298
+              ],
+              "radius": [
+                100,
+                126
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\lysippos-common-male-pixel.png",
+        "outputSha256": "0ab734e493ace5d4584ed592923418aea3984f32c41255ce2b88e3b1939232ae",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "878e59b415417c66c7004538cd53ab8f802e5419a2e40daa9350b0a4f9d494df",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\lysippos-common-male-face-mask.png",
+        "maskSha256": "e36b5942a80213a76660ce218de57cea9a11651c042f28343dec0f23d4c492b3",
+        "maskPixelSha256": "92bc49d3ea821c77a366f6790079ef1b6d276dd7331dff6bf5982ce6602a57a0",
+        "selectedDetailCells": 911,
+        "retainedCoarseCells": 23589,
+        "affectedPixels": 32796,
+        "changedPixels": 32336,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "lysippos-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\lysippos-common-female.png",
+        "sourceSha256": "a3f6053e138788adcdae1a9e72c76dbe7e7d2093e72735344f7fc104bc7a2ab7",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\lysippos-common-female-coarse.png",
+        "baseSha256": "a1c26786c142483251f1c5d505c848a2ff2adb922ad1edf5bdd21bf479bffc5f",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\lysippos-common-female-coarse.json",
+        "baseQaSha256": "3f0781e239ffddcff7ec545b76079a469449963ec4ff7e7cd4c13d448d9c3e5f",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\lysippos-common-female-face.json",
+        "configSha256": "54f05dfb36d33a41aa4f078ddd7a4633cbb7ed7e5f41a0d7ebda957c0338b544",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                433,
+                289
+              ],
+              "radius": [
+                106,
+                139
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\lysippos-common-female-pixel.png",
+        "outputSha256": "e3abb00e3ca56e8cb524e8cf7ca5500498ff22267a8d179410a42c61d407fe2f",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "38cb7ad8784e188c6dffc75be84d91e931ce783eefed4f089e3c7b91fe9c1a60",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\lysippos-common-female-face-mask.png",
+        "maskSha256": "f4b597ce9ed4edab025249c3b9825c83d7ee766f7ccb31d074886e3fc04ffd52",
+        "maskPixelSha256": "aa403954ea088d413bd08ca4d7878a3a0fea2e04f67d99446d9c9036745e17fc",
+        "selectedDetailCells": 1074,
+        "retainedCoarseCells": 23426,
+        "affectedPixels": 38664,
+        "changedPixels": 38349,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "pytheas-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\pytheas-common-male.png",
+        "sourceSha256": "7a75a7c63b2f808c417f56eab10d35faf0e6004d4ae7484a93aee53c1d8df127",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\pytheas-common-male-coarse.png",
+        "baseSha256": "32171877768454013effa14b17607b66b9b79037e3310c5ec4cdc3b2360eb1d2",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\pytheas-common-male-coarse.json",
+        "baseQaSha256": "2572d07aa1b0bd3f461fd0ce0f1da665250c64c87f4ad4deb77e0589b70bbd3a",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\pytheas-common-male-face.json",
+        "configSha256": "ca8a54d3a5216285e8f8dcd20e39193fa485ae16c0287c672cf5abc797b83a60",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                391,
+                203
+              ],
+              "radius": [
+                95,
+                123
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\pytheas-common-male-pixel.png",
+        "outputSha256": "d2d5ef79909fae8782d84024a9116d4fdd732eea3b51eba651445a0342721730",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "a155b69f96a887529093b31f33cc0f69e65da8fee8e13c2ee8deae4f11d3acdf",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\pytheas-common-male-face-mask.png",
+        "maskSha256": "3ef3036097fc27397ec087eda7adced8c73b98929b29cbb6f44008852c704c11",
+        "maskPixelSha256": "2fec6c387a3b5e8cd6ec8ace5ea81278c81c95f947e38296e7359b4dcfb12e11",
+        "selectedDetailCells": 849,
+        "retainedCoarseCells": 23651,
+        "affectedPixels": 30564,
+        "changedPixels": 30451,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "pytheas-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\pytheas-common-female.png",
+        "sourceSha256": "49d7b1cebd66af9b0ba95f32f5d08947b52adc7b8923b096c20422ca449682ce",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\pytheas-common-female-coarse.png",
+        "baseSha256": "d3cc14c49e0ac895cbcd1f003151908c147e93b3a8f08608243ecb6242bb1e11",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\pytheas-common-female-coarse.json",
+        "baseQaSha256": "8fc8c380a430ec08ed1f14a095df43b23909f60522790f12ace5dcb0180c2d99",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\pytheas-common-female-face.json",
+        "configSha256": "e162cdb28b02dcd86945ac53c4aecb04d2c0d0885836e7413740fd9faa01fb4f",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                406,
+                260
+              ],
+              "radius": [
+                105,
+                135
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\pytheas-common-female-pixel.png",
+        "outputSha256": "ff24e5457398830f5f4642c217eadbb5a66a84aefe35ee5981d6240a47b06904",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "d133a94c379251a7e5f769b254453459f6ab03be15001eb5a57e8a4158106ba8",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\pytheas-common-female-face-mask.png",
+        "maskSha256": "d6c93ded9451923737ad993e8780ecf52a7df6f2d21c20701f60f7cb917db25a",
+        "maskPixelSha256": "cef5efc856d57c089f1bdbda0ab4f3fd23942ef35ccbf080b70b592c3cdd322b",
+        "selectedDetailCells": 1026,
+        "retainedCoarseCells": 23474,
+        "affectedPixels": 36936,
+        "changedPixels": 36495,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "menander-common-male",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\menander-common-male.png",
+        "sourceSha256": "6d3665a3c8a019c64d78bedab4aa95efadd1ec4ac50c675a7d6b6a7f1646d5af",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\menander-common-male-coarse.png",
+        "baseSha256": "95a63c5060e1851b3bfabcae87c36b47690dee5c4519ced8c303a212be96f8da",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\menander-common-male-coarse.json",
+        "baseQaSha256": "b2d2d084aca6324460464539a05741aff4e15d2be54ba9a36f837ba18afe8404",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\menander-common-male-face.json",
+        "configSha256": "094afecb8e0e9decbfcecece8ce2352f691454074eb994ccfe76c887b32772c7",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                396,
+                242
+              ],
+              "radius": [
+                105,
+                135
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\menander-common-male-pixel.png",
+        "outputSha256": "1aa098a9aa6c65108e53a066cf87d1c9621eedb96a655a07b05da884f8d1c298",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "c799816c59f21b67c0bcb0dfb17d8944f6e52886d76677d2a080214d8b1af24d",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\menander-common-male-face-mask.png",
+        "maskSha256": "b59f54951b37cc028ac1f604b97ecb116e76275fe0da4e9df02bab5a85924628",
+        "maskPixelSha256": "143c30495bb3373c226df2ab7f9a1ee02aa619fbe850ab9c036a0ecabaea081b",
+        "selectedDetailCells": 1028,
+        "retainedCoarseCells": 23472,
+        "affectedPixels": 37008,
+        "changedPixels": 36796,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    },
+    {
+      "slug": "menander-common-female",
+      "sourceUnchanged": true,
+      "finalSize": [
+        840,
+        1050
+      ],
+      "mixedGridQa": {
+        "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+        "gridType": "mixed-grid; no single logical grid",
+        "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\menander-common-female.png",
+        "sourceSha256": "ad316cedb9a32429379ae13e13e8f6b1ba0055c3d2923f689482f9477620272e",
+        "sourceSize": [
+          1122,
+          1402
+        ],
+        "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\menander-common-female-coarse.png",
+        "baseSha256": "47275f7b39d04bd4a626a4441014d825e9f57e0fa02989a857b9054a8192d791",
+        "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\menander-common-female-coarse.json",
+        "baseQaSha256": "3474b2deee66891aef90b7785dfcb4286fcb583bed6c339c938764b03d82c2b0",
+        "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\menander-common-female-face.json",
+        "configSha256": "0bc04f97e819b2029e08c219829398062620b8acdb055197eacef0e28a9f8a4c",
+        "config": {
+          "base_pixel_size": 3,
+          "detail_pixel_size": 2,
+          "critical_boxes": [],
+          "regions": [
+            {
+              "name": "face-eyes",
+              "center": [
+                401,
+                237
+              ],
+              "radius": [
+                105,
+                133
+              ],
+              "inner_scale": 0.82
+            }
+          ],
+          "detail_outline_thickness": 0
+        },
+        "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+        "versions": {
+          "pixeloe": "1.0.0",
+          "opencv": "5.0.0",
+          "numpy": "2.5.4",
+          "torch": "2.7.1+cpu"
+        },
+        "output": [
+          840,
+          1050
+        ],
+        "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\menander-common-female-pixel.png",
+        "outputSha256": "871460d9417c71495ac0b70b6c9d3ea9872c2df62c6619af41991cb30d6b3cf8",
+        "basePixelSize": 3,
+        "detailPixelSize": 2,
+        "commonCellSize": 6,
+        "gridOrigin": [
+          0,
+          0
+        ],
+        "detailLogical": [
+          420,
+          525
+        ],
+        "detailOptions": {
+          "mode": "contrast",
+          "target_size": [
+            420,
+            525
+          ],
+          "patch_size": 4,
+          "pixel_size": 2,
+          "thickness": 0,
+          "color_matching": true,
+          "contrast": 1,
+          "saturation": 1,
+          "colors": null,
+          "no_upscale": true,
+          "no_downscale": true
+        },
+        "detailPixelSha256": "7e57a2b57ce899c7d6290e9707cc382c7707446c404a3648f5314d09a9187662",
+        "detailOutputPath": null,
+        "detailOutputSha256": null,
+        "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\menander-common-female-face-mask.png",
+        "maskSha256": "8aa4a2a5d88b6301c3767eab1bfd539d202bfd24d93a612dc3ef8f62ff45ba81",
+        "maskPixelSha256": "88e8ceaa9a1cb31d196999d2fcc2c0fb075786d5d63019b35cb6c26c7b6513f8",
+        "selectedDetailCells": 1019,
+        "retainedCoarseCells": 23481,
+        "affectedPixels": 36684,
+        "changedPixels": 36356,
+        "outsideMaskChangedPixels": 0,
+        "selectedDetailDifferingPixels": 0,
+        "criticalCoverage": [],
+        "innerRegionFullDetail": true,
+        "cellCenterEllipseSampling": true,
+        "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+        "explicitGridRoundingEpsilon": 0.000001,
+        "registeredExactIntegerBlocks": true,
+        "wholeCommonCells": true,
+        "deterministic": true,
+        "pngReadbackExact": true,
+        "sourceUnchanged": true,
+        "baseUnchanged": true,
+        "metadataUnchanged": true,
+        "interpolatingUpscale": false,
+        "colourBlend": false,
+        "alphaBlend": false
+      }
+    }
+  ]
+}

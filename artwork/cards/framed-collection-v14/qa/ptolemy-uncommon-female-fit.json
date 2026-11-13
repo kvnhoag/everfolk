@@ -1,0 +1,80 @@
+{
+  "figureId": "ptolemy",
+  "figureName": "Ptolemy I Soter",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Egyptian Administration Clerk",
+  "displayTitle": "Administration Clerk",
+  "subtitle": "Scribe of Ptolemy's Court",
+  "bodyTitle": "The Record Can Be Trusted",
+  "bodyText": "An administration clerk keeps petitions, accounts, and orders in a form officials can use. Exact records give authority a memory, allowing the machinery of government to answer practical needs beyond the palace walls.",
+  "sourceRoleSlug": "ptolemy-uncommon",
+  "newArt": false,
+  "slug": "ptolemy-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Egyptian Administration Clerk",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-uncommon-female-pixel.png",
+  "sourceArtSlug": "ptolemy-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 86,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/ptolemy.svg",
+    "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "An administration clerk keeps petitions, accounts, and",
+    "orders in a form officials can use. Exact records give",
+    "authority a memory, allowing the machinery of government to",
+    "answer practical needs beyond the palace walls."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-uncommon-female.svg",
+  "fittedArt": "assets/fitted/ptolemy-uncommon-female.png",
+  "overlaySvg": "source/overlays/ptolemy-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "4028229c73dc2d34266b7eeeb131b43bb1079a444cedaaa2366838745aa64585",
+  "master": "masters/ptolemy-uncommon-female.vectorcraft",
+  "export": "exports/ptolemy-uncommon-female.png",
+  "thumbnail": "assets/ptolemy-uncommon-female-thumb.png",
+  "exportSha256": "92f619d949535968001451dd773590b24c34a4dc1d2a2e5707934e22fa0926eb",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582492,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-rare-female.png",
+  "sourceSha256": "ad9e4bac3f3e3b40fb4c29990c67e3de0fe03076c58b4e3c117d56bccadcf86c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-rare-female-coarse.png",
+  "baseSha256": "0e73c65a69b8fa3816db00c43c8b13b73913a5e1c8cebf18c974e328e5f5e399",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\nearchus-rare-female-coarse.json",
+  "baseQaSha256": "77ca8d5ed11815ab389d2d79742e0af02f759e48f46690ea0e1079528c07d80c",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-rare-female-face.json",
+  "configSha256": "67e624380033ec9dc8f8bd6563761ab04ea0e7474b2f779372b31e172c04384f",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          202
+        ],
+        "radius": [
+          105,
+          129
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-rare-female-pixel.png",
+  "outputSha256": "f27238f4ef3f2648e0f8c5075881db276b7dcffe6d5f3307eaeb8b35ffcd0dd4",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "f435869b9feee19c78671d440ad47869be38360221a8cdc7ab2219e9b85c6a4c",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\nearchus-rare-female-face-mask.png",
+  "maskSha256": "b1163845850e51018a10198ef9e795943762d0238748cd885acd352e0ac75b71",
+  "maskPixelSha256": "3bb7fcf0ffc1adf900d89d1e49dd7d1111e9c94bb240f771e1b5f79f6d09853c",
+  "selectedDetailCells": 980,
+  "retainedCoarseCells": 23520,
+  "affectedPixels": 35280,
+  "changedPixels": 34946,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

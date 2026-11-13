@@ -1,0 +1,80 @@
+{
+  "figureId": "aristotle",
+  "figureName": "Aristotle",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Lyceum Copyist",
+  "displayTitle": "Lyceum Copyist",
+  "subtitle": "Scribe of Aristotle's School",
+  "bodyTitle": "Thought Given Endurance",
+  "bodyText": "A copyist preserves arguments with a steady hand, protecting distinctions that careless writing could erase. The work carries a lesson beyond the speaker's voice, giving the Lyceum's inquiry a lasting memory.",
+  "sourceRoleSlug": "aristotle-uncommon",
+  "newArt": false,
+  "slug": "aristotle-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Lyceum Copyist",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-uncommon-female-pixel.png",
+  "sourceArtSlug": "aristotle-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 14,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/aristotle.svg",
+    "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A copyist preserves arguments with a steady hand,",
+    "protecting distinctions that careless writing could erase.",
+    "The work carries a lesson beyond the speaker's voice,",
+    "giving the Lyceum's inquiry a lasting memory."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-uncommon-female.svg",
+  "fittedArt": "assets/fitted/aristotle-uncommon-female.png",
+  "overlaySvg": "source/overlays/aristotle-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "85e85d1954b56c573ac26fc628005e7d373a7d3f12066b85117486f22abde2b2",
+  "master": "masters/aristotle-uncommon-female.vectorcraft",
+  "export": "exports/aristotle-uncommon-female.png",
+  "thumbnail": "assets/aristotle-uncommon-female-thumb.png",
+  "exportSha256": "8bc36156a16cc3f749429c2c308c994b93615d806ee7e8e851d24c81de7b644e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582014,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

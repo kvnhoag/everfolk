@@ -1,0 +1,86 @@
+{
+  "slug": "nearchus-parent",
+  "figureId": "nearchus",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Nearchus",
+  "subtitle": "Admiral of Alexander's Fleet",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-parent-pixel.png",
+  "collectionIndex": 100,
+  "owner": null,
+  "figureName": "Nearchus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "ship-anchor",
+  "bodyTitle": "The Sea Route Home",
+  "bodyText": "Nearchus commanded Alexander's fleet from the Indus towards the Persian Gulf. His account of the difficult coastal voyage, preserved through later writers, joined practical seamanship to an enduring record of unfamiliar shores.",
+  "sources": [
+    {
+      "title": "Arrian, Indica — Fordham University Ancient History Sourcebook",
+      "url": "https://sourcebooks.fordham.edu/ancient/arrian-bookVIII-India.asp"
+    },
+    {
+      "title": "Arrian on Nearchus' voyage home — Livius",
+      "url": "https://www.livius.org/sources/content/arrian/anabasis/nearchus-voyage-home/"
+    }
+  ],
+  "canonicalTitle": "Nearchus",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/nearchus.svg",
+    "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Nearchus commanded Alexander's fleet from the Indus towards",
+    "the Persian Gulf. His account of the difficult coastal",
+    "voyage, preserved through later writers, joined practical",
+    "seamanship to an enduring record of unfamiliar shores."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-parent.svg",
+  "fittedArt": "assets/fitted/nearchus-parent.png",
+  "overlaySvg": "source/overlays/nearchus-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+  "master": "masters/nearchus-parent.vectorcraft",
+  "export": "exports/nearchus-parent.png",
+  "thumbnail": "assets/nearchus-parent-thumb.png",
+  "exportSha256": "86897dd5c604d0826fe5c2e7a83b42768642f2528dbf1d374941b00205069a6d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582201,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "pytheas",
+  "figureName": "Pytheas of Massalia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Keeper of the Northern Voyage Log",
+  "displayTitle": "Keeper of the Voyage Log",
+  "subtitle": "Witness to Pytheas' Horizon",
+  "bodyTitle": "Wonder Given a Record",
+  "bodyText": "The keeper of the voyage log joins scattered observations into an account others can examine. Disciplined memory carries the expedition beyond its own lifetime, preserving the difficult boundary between witnessed fact and wonder.",
+  "sourceRoleSlug": "pytheas-epic",
+  "newArt": false,
+  "slug": "pytheas-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Keeper of the Northern Voyage Log",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-epic-female-pixel.png",
+  "sourceArtSlug": "pytheas-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 45,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/pytheas.svg",
+    "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "The keeper of the voyage log joins scattered observations",
+    "into an account others can examine. Disciplined memory",
+    "carries the expedition beyond its own lifetime, preserving",
+    "the difficult boundary between witnessed fact and wonder."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-epic-female.svg",
+  "fittedArt": "assets/fitted/pytheas-epic-female.png",
+  "overlaySvg": "source/overlays/pytheas-epic-female.svg",
+  "titleSize": 60,
+  "sourceArtSha256": "f29a06a43978ffeadb4bcb129522d2091c414c02b0d67071ad254276c008d60c",
+  "master": "masters/pytheas-epic-female.vectorcraft",
+  "export": "exports/pytheas-epic-female.png",
+  "thumbnail": "assets/pytheas-epic-female-thumb.png",
+  "exportSha256": "fe711c6e62ab495b65278a90174097113062e387f10a9f77a5ed86f580930c11",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582551,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

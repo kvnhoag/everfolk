@@ -52,3 +52,22 @@ test("malformed, duplicate and out-of-range selections never overwrite a collect
   storage.setItem(BOOSTER_COLLECTION_KEY, JSON.stringify([pack("unsafe", [0])].map(entry => ({ ...entry, cards: [{ ...cards[0], art: "https://example.com/tracker.png" }] }))));
   assert.throws(() => readBoosterCollection(storage));
 });
+
+test("approved framed cards retain their serial and coexist with older saved packs", () => {
+  const storage = memory();
+  resolveBoosterPack(storage, pack("old-life", [0]));
+  const framed = { ...cards[0], art: "/assets/cards/collection-v14/portraits/euclid-parent.webp", framedArt: "/assets/cards/collection-v14/euclid-parent-footerless.webp", editionText: "—/010" };
+  resolveBoosterPack(storage, { ...pack("new-life", [0]), cards: [framed] });
+  const saved = readBoosterCollection(storage);
+  assert.deepEqual(saved[0].cards, cards);
+  assert.deepEqual(saved[1].cards, [framed]);
+  assert.deepEqual(saved.map(entry => entry.selected), [[0], [0]]);
+});
+
+test("unsafe framed image URLs and prose masquerading as copy serials do not enter the collection", () => {
+  const storage = memory();
+  for (const fields of [{ framedArt: "https://example.com/card.webp" }, { framedArt: "/assets/cards/collection-v14/../outside.webp" }, { editionText: "001/025 <script>" }]) {
+    assert.throws(() => resolveBoosterPack(storage, { ...pack("bad-framed", [0]), cards: [{ ...cards[0], ...fields }] }));
+  }
+  assert.equal(storage.getItem(BOOSTER_COLLECTION_KEY), null);
+});

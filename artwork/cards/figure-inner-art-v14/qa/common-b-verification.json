@@ -1,0 +1,163 @@
+{
+  "passed": true,
+  "total": 10,
+  "male": 5,
+  "female": 5,
+  "bodyPixelSize": 3,
+  "facePixelSize": 2,
+  "allSourceHashesUnchanged": true,
+  "allOutsideMaskChangedPixels": 0,
+  "contactSheet": "qa/common-b-contact.png",
+  "assets": [
+    {
+      "slug": "demetrius-common-male",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "demetrius-common-female",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "zeno-common-male",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "zeno-common-female",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "sourceUnchanged": true,
+      "output": [
+        840,
+        1050
+      ],
+      "mixedGrid": [
+        3,
+        2
+      ],
+      "deterministic": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0
+    }
+  ]
+}

@@ -288,8 +288,10 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
         <SectionHelp hint="skills" />
         {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
         {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} />}
-        <FigurePaths activities={activities} {...props} />
       </div>
+      {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
+        {activeSection === "figures" && <FigurePaths activities={activities} {...props} />}
+      </div>}
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />
       </div>}

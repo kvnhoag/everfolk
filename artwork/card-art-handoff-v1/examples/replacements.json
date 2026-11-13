@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "art": [
+    { "id": "alexander-common-female", "art": "../input/alexander-common-female.png", "standardArt": "../input/alexander-common-female-standard.png", "mode": "native-pixel" },
+    { "id": "euclid-parent", "art": "../input/euclid-parent.png", "standardArt": "../input/euclid-parent-standard.png", "mode": "native-pixel" }
+  ]
+}

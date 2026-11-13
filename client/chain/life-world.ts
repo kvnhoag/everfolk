@@ -1,6 +1,6 @@
-import { LIVES_FIGURES_WORLD_VERSION, LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
-import currentLife from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
-/** NPC sessions run on lives-8, as the server does. */
+import { lives11World as currentLife, lives10World as life10, figure2World as figures2, figure3World as figures3 } from "../../worlds/demo/wsl-world-packs.mjs";
+import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
+import life9 from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import life8 from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import life7 from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import life6 from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
@@ -22,11 +22,13 @@ import ranked from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "
 export async function loadLifeWorld(version: string): Promise<WorldPack> {
   if (version === NPC_WORLD_VERSION) return buildNpcWorld(life8 as unknown as WorldPack);
   const packs: Record<string, unknown> = {
-    [LIVES_WORLD_VERSION]: currentLife, [LIVES_FIGURES_WORLD_VERSION]: life8,
-    "alexandria-lives-7": life7, "alexandria-lives-6": life6,
-    "alexandria-lives-5": life5, "alexandria-lives-4": life4, "alexandria-lives-3": life3,
+    [LIVES_WORLD_VERSION]: currentLife,
+    "alexandria-lives-10": life10,
+    "alexandria-lives-9": life9,
+    "alexandria-lives-8": life8,
+    "alexandria-lives-7": life7, "alexandria-lives-6": life6, "alexandria-lives-5": life5, "alexandria-lives-4": life4, "alexandria-lives-3": life3,
     "alexandria-lives-2": life2, "alexandria-lives-1": life1,
-    "alexandria-deep-1": deep1, "alexandria-figures-1": figures1,
+    "alexandria-deep-1": deep1, "alexandria-figures-1": figures1, "alexandria-figures-2": figures2, "alexandria-figures-3": figures3,
     [DEMO_WORLD_VERSION]: currentDemo, [LEGACY_DEMO_WORLD_VERSION]: legacyDemo, [RANKED_WORLD_VERSION]: ranked,
   };
   if (!Object.hasOwn(packs, version)) throw new Error(`Unknown life world: ${version}`);

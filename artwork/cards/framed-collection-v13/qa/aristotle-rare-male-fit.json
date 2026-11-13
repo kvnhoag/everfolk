@@ -1,0 +1,60 @@
+{
+  "slug": "aristotle-rare-male",
+  "figureId": "aristotle",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Lyceum Researcher",
+  "subtitle": "Aristotle",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 11,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-rare-male.svg",
+  "fittedArt": "assets/fitted/aristotle-rare-male.png",
+  "overlaySvg": "source/overlays/aristotle-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+  "master": "masters/aristotle-rare-male.vectorcraft",
+  "export": "exports/aristotle-rare-male.png",
+  "thumbnail": "assets/aristotle-rare-male-thumb.png",
+  "exportSha256": "20f1fa26dda138004a2154cb429d2fcce63f4be293ae687c25c94df28be1bd1d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

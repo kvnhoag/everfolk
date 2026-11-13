@@ -2,7 +2,7 @@
 
 The game now uses the 240 ordinary-v3 portraits for the player, encountered NPCs, natal family, spouses and children. `LifeEngine` remains the saved-state authority. `client/models/portrait-state.ts` projects its recorded facts into an immutable `PortraitState`; `PixelPortrait` renders that descriptor.
 
-Portraits are assigned randomly by the existing seeded birth/encounter identity engine. The birth screen shows the assigned portrait through life. Players have no portrait selection controls. Rendering never draws gameplay RNG, appends a command or writes a new identity to a save.
+Portraits are assigned randomly by the existing seeded birth/encounter identity engine and appear naturally in the character and relationship views. The birth dialog contains starting stats only, without a portrait announcement, age-preview gallery or selection controls. Rendering never draws gameplay RNG, appends a command or writes a new identity to a save.
 
 ## Data convention
 
@@ -55,7 +55,7 @@ An encountered NPC's randomly generated origin is upbringing, not an active roya
 | Generated 240-combination lookup | `client/models/portrait-asset-registry.json` |
 | Descriptor renderer | `client/components/PixelPortrait.tsx` |
 | Player portrait | `client/screens/App.tsx` |
-| Assigned birth portrait and six-age preview | `client/components/BirthPortraitPreview.tsx` |
+| Starting stats only; no portrait introduction | `client/components/BirthRollPopover.tsx` |
 | Stable family / social rows | `client/models/relationship-table.ts` |
 | Family, NPC and household views | `CharacterPanel.tsx`, `RelationshipTable.tsx`, `HouseholdSummary.tsx` |
 | Source-to-public asset delivery | `scripts/sync-portrait-assets.mjs` |

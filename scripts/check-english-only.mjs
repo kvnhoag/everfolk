@@ -16,7 +16,8 @@ const VIETNAMESE_REGEX = new RegExp(
 );
 
 const IGNORE_DIRS = new Set([
-  ".git", "node_modules", "dist", "build", ".cache", ".sites-runtime", ".venv",
+  ".git", "node_modules", "dist", "build", "artifacts", "target", ".cache", ".sites-runtime", ".sites-checkout", ".venv",
+  ".next", ".vinext", ".wrangler",
   "artwork", "tools", "research", "docs"
 ]);
 const TEXT_EXTS = new Set([

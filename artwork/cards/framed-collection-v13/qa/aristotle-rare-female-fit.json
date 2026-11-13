@@ -1,0 +1,60 @@
+{
+  "slug": "aristotle-rare-female",
+  "figureId": "aristotle",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Lyceum Researcher",
+  "subtitle": "Aristotle",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 12,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-rare-female.svg",
+  "fittedArt": "assets/fitted/aristotle-rare-female.png",
+  "overlaySvg": "source/overlays/aristotle-rare-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "6bfd38423b21105c95436ebd242f8e89a639752971a15bd7216afb1e797f2484",
+  "master": "masters/aristotle-rare-female.vectorcraft",
+  "export": "exports/aristotle-rare-female.png",
+  "thumbnail": "assets/aristotle-rare-female-thumb.png",
+  "exportSha256": "42606879705153a5e15b796470b74f64ef75e84cf1add6c5c1e9a34ab8f3d57c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

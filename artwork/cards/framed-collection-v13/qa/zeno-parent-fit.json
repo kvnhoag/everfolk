@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-parent",
+  "figureId": "zeno",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Zeno of Citium",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 57,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-parent.svg",
+  "fittedArt": "assets/fitted/zeno-parent.png",
+  "overlaySvg": "source/overlays/zeno-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+  "master": "masters/zeno-parent.vectorcraft",
+  "export": "exports/zeno-parent.png",
+  "thumbnail": "assets/zeno-parent-thumb.png",
+  "exportSha256": "af4afc11d8727047392979bf0ab6c73652863f63991bdcb2bddf8cf638cc1651",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

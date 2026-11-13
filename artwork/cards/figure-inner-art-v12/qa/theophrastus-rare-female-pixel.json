@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-rare-female.png",
+  "sourceSha256": "0711e968f6a173650afbbe19db67d42bacf562d5d88ef6334ca69207d4c44b2a",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-rare-female-coarse.png",
+  "baseSha256": "89bf8d1334acf0b5e4a4c5cf9053d9467edd5b600239be9e1af7be18d94865f8",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-rare-female-coarse.json",
+  "baseQaSha256": "53fc6d93e69c633b6a9a801bd958c0cbc31611228348e5d23fae7e287a3fea4c",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-rare-female-face.json",
+  "configSha256": "ebec557144eb92215c1a66c5c3e8fbaf5631794a521ac72b8a69ba600819b17b",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          108,
+          132
+        ],
+        "center": [
+          397,
+          172
+        ]
+      }
+    ],
+    "detail_pixel_size": 2,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-rare-female-pixel.png",
+  "outputSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "a81d8e41db6fc54ce19f04ce276c89cecffa1e962a096c26feca8c2736c84fb1",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-rare-female-face-mask.png",
+  "maskSha256": "46bc7059a6364cad7744925f9f68cf19a4c0c9224d75faf7fe9c934abaf108b1",
+  "maskPixelSha256": "70f2d485f7b574fa2805bf41f4d204a9b59c249073a53aea2c968ff9903a7c5c",
+  "selectedDetailCells": 1030,
+  "retainedCoarseCells": 23470,
+  "affectedPixels": 37080,
+  "changedPixels": 36815,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

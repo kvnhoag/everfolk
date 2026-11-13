@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-uncommon-male",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Plant Records Assistant",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 51,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-uncommon-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-uncommon-male.png",
+  "overlaySvg": "source/overlays/theophrastus-uncommon-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+  "master": "masters/theophrastus-uncommon-male.vectorcraft",
+  "export": "exports/theophrastus-uncommon-male.png",
+  "thumbnail": "assets/theophrastus-uncommon-male-thumb.png",
+  "exportSha256": "7c5e1544c669b6850bc9219eac8ef0ae8e8b63b8da973201c6b08e06333d4c5c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

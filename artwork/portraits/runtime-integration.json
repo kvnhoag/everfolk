@@ -5,6 +5,7 @@
   "runtimeIntegrated": true,
   "combinations": 240,
   "assignment": "Existing LifeEngine seeded random identity at birth/encounter; no player portrait chooser.",
+  "birthPresentation": "Starting stats only; portraits appear in normal character and relationship views without an announcement or age-preview gallery.",
   "stateAuthority": "src/engine.ts + src/people.ts (existing saved identity and canonical replay)",
   "projection": "client/models/portrait-state.ts",
   "registry": "client/models/portrait-asset-registry.json",

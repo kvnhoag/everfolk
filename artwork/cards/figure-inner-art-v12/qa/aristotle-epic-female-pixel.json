@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\aristotle-epic-female.png",
+  "sourceSha256": "a5f13d08722e1a1f661f4b6b86963a8157a3d2a0f5265cf6f0965cf4317b7937",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\aristotle-epic-female-coarse.png",
+  "baseSha256": "e4a605aed09ad1573445eb6ccda26e0c3a528865f11ba75cde21aea89b6cb168",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\aristotle-epic-female-coarse.json",
+  "baseQaSha256": "0c45dcf5fbd2409d358663df16c381e9cf5e24b0116b19620b46430445497f18",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\aristotle-epic-female-face.json",
+  "configSha256": "33b4e6ac879841fca28a1b9eb337e2693d9205d93005e922b985e19e1251b591",
+  "config": {
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "center": [
+          367,
+          225
+        ],
+        "inner_scale": 0.82,
+        "radius": [
+          110,
+          135
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\aristotle-epic-female-pixel.png",
+  "outputSha256": "8e43ab5ba01599a744b296796eb31c15a5cee5c3a506472655cebd9b37ff10cf",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "1e6c15e942b07437f34e81893a9a6a06ce8f2566d848ba56b5f131de99f5b511",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\aristotle-epic-female-face-mask.png",
+  "maskSha256": "69b1e449f6c19b01ded0bc71f1c838710be17a62373edf4a8cf4e994e1a8b71b",
+  "maskPixelSha256": "b366c3d2e921a9d1e0eb28ca6e78816b4771ad442ff7940d696fc0d982455e62",
+  "selectedDetailCells": 1077,
+  "retainedCoarseCells": 23423,
+  "affectedPixels": 38772,
+  "changedPixels": 38512,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

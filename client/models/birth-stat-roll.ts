@@ -1,4 +1,5 @@
 import type { Effect, LifeState, StatRange, WorldPack } from "../../src/types.ts";
+import { birthYearOf, formatYear } from "../../src/calendar.ts";
 import { merchantSaleValue } from "../../src/demo/market-depth.ts";
 import { getNetWorth } from "../../src/economy.ts";
 import { getRelevantResources } from "./market.ts";
@@ -14,6 +15,25 @@ export interface BirthRollStat {
   value: number;
   range?: StatRange;
   currency?: string;
+}
+
+export interface BirthRollYear extends BirthRollStat {
+  era: "BCE" | "CE";
+  text: string;
+  rangeLabel: string;
+}
+
+/** Reveal the engine's recorded birth year; presentation never rerolls it. */
+export function getBirthRollYear(world: WorldPack, life: LifeState): BirthRollYear {
+  const year = birthYearOf(world, life), value = Math.abs(year);
+  const years = world.birthYears;
+  const sameEra = years && (years.from < 0) === (years.to < 0) && (year < 0) === (years.from < 0);
+  const range = sameEra && year >= years.from && year <= years.to
+    ? { min: Math.min(Math.abs(years.from), Math.abs(years.to)), max: Math.max(Math.abs(years.from), Math.abs(years.to)) }
+    : { min: value, max: value };
+  return { id: "birth-year", label: "Birth year", value, range,
+    era: year < 0 ? "BCE" : "CE", text: formatYear(year),
+    rangeLabel: years ? `${formatYear(years.from)} – ${formatYear(years.to)}` : "Starting year" };
 }
 
 export interface BirthRollResource extends BirthRollStat {

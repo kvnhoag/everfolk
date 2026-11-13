@@ -246,12 +246,16 @@ export interface AvailabilityConfig {
 }
 
 export interface DemoDefinition {
+  /** Bulk crop quantities and farming reserves use this divisor in opted-in free-play worlds. */
+  resourceScaleDivisor?: number;
   /** Inclusive birth rolls for the household's actual traded resources.
    * Presence opts into market-valued holdings and uncapped animal ownership;
    * archived worlds without it keep their original starts and rules. */
   startingResources?: {
     defaults: Record<TradeItem, StatRange>;
     origins?: Record<string, Partial<Record<TradeItem, StatRange>>>;
+    /** Birth storage capacity by background; absent origins use household.storeCapacity. */
+    storeCapacityByOrigin?: Record<string, number>;
   };
   timeline: TimelineConfig;
   household: HouseholdConfig;

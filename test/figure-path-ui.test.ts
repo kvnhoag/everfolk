@@ -168,3 +168,16 @@ test("retained worlds without figure metadata render no new progression panel", 
   const life = createEngine(world).start("retained-figure-panel");
   assert.equal(render(world, life), "");
 });
+
+
+test("conditional principals advertise Epic–Legendary while retaining the actual current rank", () => {
+  const { world, life } = fixture();
+  const html = render(world, life, "demetrius");
+  const roster = html.match(/<nav class="figure-roster"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  assert.equal((roster.match(/Epic–Legendary/g) ?? []).length, 3);
+  assert.match(html, /Figure · Epic–Legendary · Current: Epic/);
+  assert.doesNotMatch(html, /Special title earned:/);
+  assert.match(html, /Press to preview/);
+  const fixed = render(world, life, "pytheas");
+  assert.match(fixed, /Figure · Epic<\/p>/);
+});

@@ -6,7 +6,7 @@ import { legacyLifeKey } from "../storage/legacy-store.ts";
 import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
 import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
-import { figureCardArt } from "./nft-card-view.ts";
+import { boosterArtwork } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
 import "../styles/booster-opening.css";
@@ -42,8 +42,8 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     const cards = session.pack.cards.map(card => ({
       name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
       rarity: card.rarity,
-      // People of the city show this life's own v3 portrait; figures show their card painting.
-      art: card.figure_id ? figureCardArt(card.figure_id) : playerPortraitState(world, life).src,
+      // Figures use the approved collection card; people of the city show this life's own v3 portrait.
+      ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : playerPortraitState(world, life).src, life.seed),
       sub: actionName(card.action_id),
       role: card.figure_id ? "Historical figure" : "Person of the city",
     }));

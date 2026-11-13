@@ -37,6 +37,12 @@ export function fitMapCamera(viewport: MapSize, canvas: MapSize): MapCamera {
   return { scale, x: (viewport.width - canvas.width * scale) / 2, y: (viewport.height - canvas.height * scale) / 2 };
 }
 
+/** Open at a readable width, leaving later depths below the viewport. */
+export function fitMapWidthCamera(viewport: MapSize, canvas: MapSize): MapCamera {
+  const scale = clampMapZoom((viewport.width - 24) / canvas.width);
+  return { scale, x: (viewport.width - canvas.width * scale) / 2, y: 12 };
+}
+
 /** Preserve the world point beneath the cursor while changing scale. */
 export function zoomMapCamera(camera: MapCamera, scale: number, anchor: MapPoint, min = MAP_MIN_ZOOM): MapCamera {
   const next = clampMapZoom(scale, min), ratio = next / camera.scale;

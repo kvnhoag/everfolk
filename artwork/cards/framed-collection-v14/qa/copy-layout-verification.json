@@ -1,0 +1,943 @@
+{
+  "passed": true,
+  "total": 117,
+  "maxBioLines": 5,
+  "rows": [
+    {
+      "slug": "alexander-parent",
+      "titleSize": 68,
+      "bodySize": 24,
+      "lines": 3,
+      "edition": "001/010",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "alexander-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-parent",
+      "titleSize": 68,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/010",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-parent",
+      "titleSize": 68,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/010",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "euclid-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-parent",
+      "titleSize": 68,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/010",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "titleSize": 58,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "titleSize": 58,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-parent",
+      "titleSize": 68,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/010",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-rare-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-rare-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-epic-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "menander-epic-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-parent",
+      "titleSize": 56,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-rare-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-rare-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-epic-male",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "zeno-epic-female",
+      "titleSize": 62,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-parent",
+      "titleSize": 56,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "titleSize": 58,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "titleSize": 58,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "titleSize": 60,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "nearchus-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 5,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-parent",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-common-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-common-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/∞",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/100",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-epic-male",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    },
+    {
+      "slug": "eumenes-epic-female",
+      "titleSize": 64,
+      "bodySize": 24,
+      "lines": 4,
+      "edition": "001/025",
+      "bodyWords": 1
+    }
+  ]
+}

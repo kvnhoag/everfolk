@@ -1,0 +1,60 @@
+{
+  "slug": "lysippos-rare-male",
+  "figureId": "lysippos",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Portrait Modeller",
+  "subtitle": "Lysippos",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 25,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-rare-male.svg",
+  "fittedArt": "assets/fitted/lysippos-rare-male.png",
+  "overlaySvg": "source/overlays/lysippos-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "c01a384720223f13bf87db260c3e55795e9ed675fd7e1cbebdc5a069a8840c9e",
+  "master": "masters/lysippos-rare-male.vectorcraft",
+  "export": "exports/lysippos-rare-male.png",
+  "thumbnail": "assets/lysippos-rare-male-thumb.png",
+  "exportSha256": "98fa1e183303e16fb4f84ccccef45aae3c47dd0d2a8eae9711048566339390f7",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "cleomenes-parent",
+  "figureId": "cleomenes",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Cleomenes of Naucratis",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 71,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-parent.svg",
+  "fittedArt": "assets/fitted/cleomenes-parent.png",
+  "overlaySvg": "source/overlays/cleomenes-parent.svg",
+  "titleSize": 66,
+  "sourceArtSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+  "master": "masters/cleomenes-parent.vectorcraft",
+  "export": "exports/cleomenes-parent.png",
+  "thumbnail": "assets/cleomenes-parent-thumb.png",
+  "exportSha256": "f1e49744f65cd7201d1e4a9a617233507f901cea96c9aab24e641be9368c8457",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "ptolemy-uncommon-female",
+  "figureId": "ptolemy",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Egyptian Administration Clerk",
+  "subtitle": "Ptolemy I Soter",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 66,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-uncommon-female.svg",
+  "fittedArt": "assets/fitted/ptolemy-uncommon-female.png",
+  "overlaySvg": "source/overlays/ptolemy-uncommon-female.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "4028229c73dc2d34266b7eeeb131b43bb1079a444cedaaa2366838745aa64585",
+  "master": "masters/ptolemy-uncommon-female.vectorcraft",
+  "export": "exports/ptolemy-uncommon-female.png",
+  "thumbnail": "assets/ptolemy-uncommon-female-thumb.png",
+  "exportSha256": "e208ad8318a1761f81ace101e78a641e3d4115ce097472e1e5b7f267653a804b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

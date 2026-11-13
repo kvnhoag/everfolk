@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-uncommon-male.png",
+  "sourceSha256": "ea8c5c4699ad899abbbac1f45f4dd1a74f50eea93630625d7d936ad2acc88f6b",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-uncommon-male-coarse.png",
+  "baseSha256": "3c2a164455ab4dd5be1ac2dae0ea281c98540d7581afba76db7ed1b16eac85b6",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-uncommon-male-coarse.json",
+  "baseQaSha256": "4cd3d5e403d067d69fcdf4d98b4ed0345969ce2cb4eaace90067771201dd1559",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-uncommon-male-face.json",
+  "configSha256": "c39fd60cd62b3e856629cdcfd75f194242f9b0143044f6d0bd04dc947875d454",
+  "config": {
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "center": [
+          312,
+          206
+        ],
+        "radius": [
+          105,
+          140
+        ],
+        "inner_scale": 0.82,
+        "name": "face-eyes"
+      }
+    ],
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-uncommon-male-pixel.png",
+  "outputSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "7b064f4fd853c0fbdfc3d7eb6a6d35b5ee3aa33fefff05e1d78dde852fbf16f5",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-uncommon-male-face-mask.png",
+  "maskSha256": "084b5703ab0a2e05cd8431f2bc092fbc576dae957327bf2b1ab54644874c3bcf",
+  "maskPixelSha256": "8ddac0d5673c5f4505b39cb700828d9615302e647cd71a4a3e49bbb23529425f",
+  "selectedDetailCells": 1070,
+  "retainedCoarseCells": 23430,
+  "affectedPixels": 38520,
+  "changedPixels": 38252,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

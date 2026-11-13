@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import { lifeStageView } from "../src/life-stages/index.ts";
 import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
 import { buildBornAcrossHistoryWorld, buildLivesWorld } from "../src/vocations/lives-world.ts";
-import { LIVES_FIGURES_WORLD_VERSION, LIVES_RULES_WORLD_VERSION, LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
+import { LIVES_FIGURES_WORLD_VERSION, LIVES_RULES_WORLD_VERSION, LIVES_BORN_HISTORY_WORLD_VERSION } from "../src/vocations/ids.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
@@ -37,7 +37,7 @@ function live(seed: string, pick = 0): Played {
 const lives = Array.from({ length: 80 }, (_, i) => live(`stage-world-${i}`, i));
 
 test("the shipped free-play world is the current life-stage build with figure paths", () => {
-  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-9");
+  assert.equal(LIVES_BORN_HISTORY_WORLD_VERSION, "alexandria-lives-9");
   assert.equal(LIVES_FIGURES_WORLD_VERSION, "alexandria-lives-8");
   assert.equal(LIVES_RULES_WORLD_VERSION, "alexandria-lives-7");
   assert.equal(world.version, "alexandria-lives-8");

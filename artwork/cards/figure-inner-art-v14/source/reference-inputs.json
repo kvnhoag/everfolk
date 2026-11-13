@@ -1,0 +1,206 @@
+[
+  {
+    "slug": "alexander-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "alexander-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "aristotle-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "aristotle-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "euclid-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "euclid-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "lysippos-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "lysippos-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "pytheas-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "pytheas-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "menander-common-male",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "menander-common-female",
+    "reference": "figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "sha256": "d616259adc237ea74666e5dc59bd6d3cf33ef6f7b31854f286a1260f4a921263",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "demetrius-common-male",
+    "reference": "figure-inner-art-v12/source/demetrius-uncommon-male.png",
+    "sha256": "6d5868a288895a80173a83b28a48c1d93d35d680f82f392d365641d5d398b39d",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "demetrius-common-female",
+    "reference": "figure-inner-art-v12/source/demetrius-uncommon-female.png",
+    "sha256": "3150308a2ccce500e9d07f42030727c20ab5cef198be572dc276697fbb8e0215",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "theophrastus-common-male",
+    "reference": "figure-inner-art-v12/source/theophrastus-uncommon-male.png",
+    "sha256": "ea8c5c4699ad899abbbac1f45f4dd1a74f50eea93630625d7d936ad2acc88f6b",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "theophrastus-common-female",
+    "reference": "figure-inner-art-v12/source/theophrastus-uncommon-female.png",
+    "sha256": "134a18473cd6c8e030860899671429ff0ca1bcdd395d8125f94ac53c63a8b717",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "zeno-common-male",
+    "reference": "figure-inner-art-v12/source/zeno-uncommon-male.png",
+    "sha256": "310663db9be77686bb696cd30b48a16bb83e5fa4d0fea6aac636b5ee3458286a",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "zeno-common-female",
+    "reference": "figure-inner-art-v12/source/zeno-uncommon-female.png",
+    "sha256": "8fd6158881b61af587a9fb7e66bc65b4299e3803c2f08225f8d141edc9e193b9",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "ptolemy-common-male",
+    "reference": "figure-inner-art-v12/source/ptolemy-uncommon-male.png",
+    "sha256": "118c1d92f7d56f1a2db62f3f7a5fe03affeb0330ec2d65568d365cf602d8a6da",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "ptolemy-common-female",
+    "reference": "figure-inner-art-v12/source/ptolemy-uncommon-female.png",
+    "sha256": "04d6be8fd9f17aaeac82e3b29beb067f409b36c70b8a991ebc01b28dca19936d",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "cleomenes-common-male",
+    "reference": "figure-inner-art-v12/source/cleomenes-uncommon-male.png",
+    "sha256": "b0fedc274ec27ecb4fe341f621eafb45f5f2f4302e519e8605736427dca0caf0",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "cleomenes-common-female",
+    "reference": "figure-inner-art-v12/source/cleomenes-uncommon-female.png",
+    "sha256": "551fc83c918c70d07e1fc23bae2a310b56795bdf10bf44e03479a3a9d1f5f68c",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-common-male",
+    "reference": "figure-inner-art-v12/source/nearchus-title-male.png",
+    "sha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-common-female",
+    "reference": "figure-inner-art-v12/source/nearchus-title-female.png",
+    "sha256": "69284de56c3bf29639b00c942cee195732335e5766b58352f9239e8480f84659",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-uncommon-male",
+    "reference": "figure-inner-art-v12/source/nearchus-title-male.png",
+    "sha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-uncommon-female",
+    "reference": "figure-inner-art-v12/source/nearchus-title-female.png",
+    "sha256": "69284de56c3bf29639b00c942cee195732335e5766b58352f9239e8480f84659",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-rare-male",
+    "reference": "figure-inner-art-v12/source/nearchus-title-male.png",
+    "sha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "nearchus-rare-female",
+    "reference": "figure-inner-art-v12/source/nearchus-title-female.png",
+    "sha256": "69284de56c3bf29639b00c942cee195732335e5766b58352f9239e8480f84659",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-common-male",
+    "reference": "figure-inner-art-v12/source/eumenes-title-male.png",
+    "sha256": "4c14cf893ea0736375f39abc66995a72c04e111b097d71b307fef529a08fd615",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-common-female",
+    "reference": "figure-inner-art-v12/source/eumenes-title-female.png",
+    "sha256": "feb0f1b2408f2e9d4e0c14356045f3be2a32d7e6b420fccc5097c5053a37266d",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-uncommon-male",
+    "reference": "figure-inner-art-v12/source/eumenes-title-male.png",
+    "sha256": "4c14cf893ea0736375f39abc66995a72c04e111b097d71b307fef529a08fd615",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-uncommon-female",
+    "reference": "figure-inner-art-v12/source/eumenes-title-female.png",
+    "sha256": "feb0f1b2408f2e9d4e0c14356045f3be2a32d7e6b420fccc5097c5053a37266d",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-rare-male",
+    "reference": "figure-inner-art-v12/source/eumenes-title-male.png",
+    "sha256": "4c14cf893ea0736375f39abc66995a72c04e111b097d71b307fef529a08fd615",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  },
+  {
+    "slug": "eumenes-rare-female",
+    "reference": "figure-inner-art-v12/source/eumenes-title-female.png",
+    "sha256": "feb0f1b2408f2e9d4e0c14356045f3be2a32d7e6b420fccc5097c5053a37266d",
+    "credit": "Previously approved Everfolk generated painting; actual style/identity input, not an archaeological photograph."
+  }
+]

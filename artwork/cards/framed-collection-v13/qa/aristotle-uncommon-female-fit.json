@@ -1,0 +1,60 @@
+{
+  "slug": "aristotle-uncommon-female",
+  "figureId": "aristotle",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Lyceum Copyist",
+  "subtitle": "Aristotle",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 10,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-uncommon-female.svg",
+  "fittedArt": "assets/fitted/aristotle-uncommon-female.png",
+  "overlaySvg": "source/overlays/aristotle-uncommon-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "85e85d1954b56c573ac26fc628005e7d373a7d3f12066b85117486f22abde2b2",
+  "master": "masters/aristotle-uncommon-female.vectorcraft",
+  "export": "exports/aristotle-uncommon-female.png",
+  "thumbnail": "assets/aristotle-uncommon-female-thumb.png",
+  "exportSha256": "5de0fe22130a4e801de2b2a52a4497ff26a4c8ea5f056d8324777dbcec916021",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

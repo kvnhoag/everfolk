@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\nearchus-title.png",
+  "sourceSha256": "d51f254d34c2991e5cd47b2c1ca9cd14df173e7d9ea02f6336abac7b680c0d47",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\nearchus-title-coarse.png",
+  "baseSha256": "3016c7a2f3607ccfb45a4084d3fd56ce7cf67d808e0305600b67147c6abd6c7f",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\nearchus-title-coarse.json",
+  "baseQaSha256": "dad94b5a9f5fd42aa8bca9f1ab7862060cf2751342d348feaa6deb657f8cb1ea",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\nearchus-title-face.json",
+  "configSha256": "137a681b0c4f2416bf3a8c70d31433af3357b62428e45db0a433f0d54b4ac39a",
+  "config": {
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "radius": [
+          105,
+          133
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          370,
+          230
+        ],
+        "name": "face-eyes"
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\nearchus-title-pixel.png",
+  "outputSha256": "f56222c40695ee4e78ee41c8c5a196e5abee7a7549ed9b68a17c2043617d5311",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "80f8eb57ef2f33e7f459288c67ce0769400dc01d43a4e4539f1e456749bf9894",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\nearchus-title-face-mask.png",
+  "maskSha256": "ad2cd2d30e982a7a73f30b9a25a9562a5b8579133df1b5b1683a2191cdd2234d",
+  "maskPixelSha256": "cdb8ac7036e57e2128d3fe736bb041302a67f6d54b47a4c46e9bff832fe2e537",
+  "selectedDetailCells": 1008,
+  "retainedCoarseCells": 23492,
+  "affectedPixels": 36288,
+  "changedPixels": 36141,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

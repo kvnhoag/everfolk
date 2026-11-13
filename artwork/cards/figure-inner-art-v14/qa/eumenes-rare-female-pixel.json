@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\eumenes-rare-female.png",
+  "sourceSha256": "46b35b3fe9191f43ad9885f3c5b31b71b55e782778c3aabd4686f23601b7b63d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-rare-female-coarse.png",
+  "baseSha256": "67c07b7df2a211ca6920049d21dd4b160971e6747fc6cbf3f15806aff7e5c1f2",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\eumenes-rare-female-coarse.json",
+  "baseQaSha256": "494e18c5f236045aad0053758c68ac4f5854968ef61324b9c8f7779087bb95ad",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\eumenes-rare-female-face.json",
+  "configSha256": "eba9fc2e2dfb3a9929d30647c39aa17375a75494f2db554718bffe0ffcc1d55b",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          225
+        ],
+        "radius": [
+          105,
+          125
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-rare-female-pixel.png",
+  "outputSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "40f6b65f273438de0e187b37262d3e1968b1d3765af5df58deb98ae2b8fa9f63",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\eumenes-rare-female-face-mask.png",
+  "maskSha256": "7e2951f9ad91078b84c04da83da1e6d7511f16d504d1c7900285045d3ec57d3c",
+  "maskPixelSha256": "2659e426c0904ad492cf246469bb2af1cb29c57275fe10fd64f99233334c0ac2",
+  "selectedDetailCells": 949,
+  "retainedCoarseCells": 23551,
+  "affectedPixels": 34164,
+  "changedPixels": 33824,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

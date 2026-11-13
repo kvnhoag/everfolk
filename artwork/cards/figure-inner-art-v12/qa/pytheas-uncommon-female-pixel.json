@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\pytheas-uncommon-female.png",
+  "sourceSha256": "9aa4ae81b0ca32e349110799a9e77977a76be7803303eb5ce4d19924a7d3773a",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\pytheas-uncommon-female-coarse.png",
+  "baseSha256": "ddc81501ec62431f8ae80409920a8fa3846241d81436fe0345aa6e56ed8b51fb",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\pytheas-uncommon-female-coarse.json",
+  "baseQaSha256": "80aac6a1d24b9f2285f6190744fb6bb3653ac8daba90b6f1a0e2f87777411694",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\pytheas-uncommon-female-face.json",
+  "configSha256": "d7e1ef46caaa63e28dce0c57ddb29d53945318369005df17286b1f331693178c",
+  "config": {
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "center": [
+          372,
+          290
+        ],
+        "radius": [
+          94,
+          104
+        ]
+      }
+    ],
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\pytheas-uncommon-female-pixel.png",
+  "outputSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "31bbcaebe981b370a5624622c10d897944d0d5e70a521b1808b25370f6487ff6",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\pytheas-uncommon-female-face-mask.png",
+  "maskSha256": "1a204075366203bea36107ff206a6399f6629965b3e0b8157bf77973b7a4c765",
+  "maskPixelSha256": "588f9fbafc827d8baf18340e4fb5fde34cbfcb7a14c1b061b7dc9ae64c22b13b",
+  "selectedDetailCells": 711,
+  "retainedCoarseCells": 23789,
+  "affectedPixels": 25596,
+  "changedPixels": 25416,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

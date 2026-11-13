@@ -1,0 +1,2600 @@
+{
+  "verifiedAt": "2026-11-13T14:50:42.919Z",
+  "libraryId": "everfolk-framed-collection-v14",
+  "catalogComplete": true,
+  "passed": true,
+  "counts": {
+    "total": 117,
+    "parents": 13,
+    "maleSubcards": 52,
+    "femaleSubcards": 52,
+    "pairedRoles": 52
+  },
+  "canvas": [
+    900,
+    1260
+  ],
+  "sourceArtHashesMatch": true,
+  "allNativeReopenPixelIdentical": true,
+  "allFittedSourcePixelsMatch": true,
+  "uncoveredPixelRgbDifferences": 0,
+  "allTransparentOuterCorners": true,
+  "parentContactSheet": "review/parents.png",
+  "failures": [],
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+      "exportSha256": "6f850d1fd14c95abc834254e1ffdb2dbdccc4d01ced5aa1dd3cbb9dc817726aa",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 93.22800000000001,
+        "width": 606.9000000000001,
+        "x": 78,
+        "y": 65.69199999999998
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "b74eac03c0586eb3aa22b6d6908a0ad8e709ebf868a0145ca40c747440467870",
+      "exportSha256": "5932f25ab9c5a455cb8fc242975ce1a5b997fd445b025958db655e447edc57ff",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 397.11999999999995,
+        "x": 251.44,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582528,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "88da887ec7815fd3b93e32e4b5df3dac438ea44626bfe727aae75f3c9d87f055",
+      "exportSha256": "81c1ab25616405b965c5fc16b090752ab1776f982f41443e90f596e4d9518fe7",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 397.11999999999995,
+        "x": 251.44,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582528,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "bd2da19f09cba801e5ddf469854f0d37f336e395b50b5bf62dbe7f52c5bc9626",
+      "exportSha256": "82e3c8e3f0b47b6bf11e2d34ea763b3108d6806b89c8902a85ef2d1b7edabfff",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 635.6480000000001,
+        "x": 132.176,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582504,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "924a15e1befd233494db20ff9a2e5775bea8a0cc1744f100a1f58c8bb11372e9",
+      "exportSha256": "7b4bdd2c7edc2d5449246c217e260faf3b01a5ccf8c89f1d9069cd666ee8cf49",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 635.6480000000001,
+        "x": 132.176,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582504,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "a9d4730cecffb17bc2ec7ec2b854d3c2812b773e544d043d6a1d29c8d4856d29",
+      "exportSha256": "f540526941c363b55c90fd9cf5b2255678e15044561c0ae582c8bc3972d65432",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582480,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "23c2f9f17da71ebb080b652bb7328249125ff15bf7a0ae5817c4ae6b3377c906",
+      "exportSha256": "67bc29ab84fecb860a81b3aea923ea6f0111cbca81e6eae6191de0bad07a45d9",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582480,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+      "exportSha256": "2de4da87e48a5111f7bab590dbd1e5071696ba63068af3dedaf4f73ac1578b61",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582456,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "alexander-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+      "exportSha256": "65b8385b15bc0d2e19f8043f7e1e5faccf1ca6d4650c7bf7ebf1d18c997d7e6e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582456,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+      "exportSha256": "50da02f6a9f1beaf66c7394ba121ee33d617e73cb33d28956af6a0da743f64ad",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 93.22800000000001,
+        "width": 259.488,
+        "x": 78,
+        "y": 65.69199999999998
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "01e296d07ce64c618f9ca7f0e0f306ee958de34a01dc17d2860c7c32fe6e417d",
+      "exportSha256": "618ae15cb90464db6f635d950b3845db833ec2fe8b8dea98c72e05eeba0c3d01",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 523.392,
+        "x": 188.30400000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582038,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "bb488778ee2ae9b46b10d9db5ab67185294c42850413a90b74b85919cf2ccf8d",
+      "exportSha256": "9ee5862c4d698490547ca7aa769ae57483389393803e0366a60f69f90a8d83e5",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 523.392,
+        "x": 188.30400000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582038,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "aa76fdff4d64ce649b00f5de2447c9619e6e79586488e8a34f598bd6bdc96203",
+      "exportSha256": "9b897a1697370e4d1d3fde0cd19b14d27afef218ee185c9c02bc71a0f5efd54a",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582014,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "85e85d1954b56c573ac26fc628005e7d373a7d3f12066b85117486f22abde2b2",
+      "exportSha256": "8bc36156a16cc3f749429c2c308c994b93615d806ee7e8e851d24c81de7b644e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582014,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+      "exportSha256": "003ef41baa424423db386d80d4832ab86508b760e8f2f40d71a432fa13368f3e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 581990,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "6bfd38423b21105c95436ebd242f8e89a639752971a15bd7216afb1e797f2484",
+      "exportSha256": "718848b78a53c1d32c4ac4ae82fa254ea95803ef8b6fa0512a656011ad78a785",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 581990,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "388822a8017504b3202f97d7ffd1b9d6a676f9fe748498dd1d39af37460ef716",
+      "exportSha256": "61e284501a95135da4afcf213a49e0a9d45cbe2b84e23390468f374d938794dd",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 581966,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "8e43ab5ba01599a744b296796eb31c15a5cee5c3a506472655cebd9b37ff10cf",
+      "exportSha256": "c3e175762614fef6aae685dacbbb21b054bc2278d11b0380cf30d316f3240e5f",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 581966,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+      "exportSha256": "66559cf38163c98a49fa610290c35b28b590bc627cfbdf3ac7f2522b586750b5",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 93.22800000000001,
+        "width": 190.80800000000005,
+        "x": 78,
+        "y": 65.69199999999998
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2ffa9c276d0173492942d5e57cfebfd4087566ce9eb672bba9e2564f8c1e2b4f",
+      "exportSha256": "eab3c885db2342a9cc1d939161ad7b0fd4a22e657a4cdcad0770fcf3383eaf1e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582894,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "d736d408442079d8caf4340d4f42f2820c801c142327a605944dc9b33db9e82a",
+      "exportSha256": "af238b74aea64ab19b35dc2297794798f999dc81e7bda06cd064f577303a3c77",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582894,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+      "exportSha256": "56ba55f2a56a1e349dbd67985fc689cd7d581608e37bb0f7101f57f9d8da380f",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582870,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "5e53259db601357cf948db37603a9198701f1a238abfe069b5663e0e3589b657",
+      "exportSha256": "7779b494078a99e514528222a147be8181a09c08ba760fa8df0322da7482e234",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582870,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+      "exportSha256": "797600c42869ddf6b268f79281b35201e8bbac49fd8eb3d9fb98b9162e466afe",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582846,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "09a20ed16a060e215f05a7cc49dd4069ecc7e236d9997ab5365fbe16de8504b0",
+      "exportSha256": "408f4e8cd5b915a3d2904e9a5a72faf787098ef3356236447503134cbcd8ce14",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582846,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "42cf2e57719d066b9b755f5ea91daff7210cbc5e81ad265d98bfbca0d252e7f8",
+      "exportSha256": "ebf04ff12fdd4092f9779a32bae7fbc4ffc38361492e3d8a7ea9eb17dd23501e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582822,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "euclid-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+      "exportSha256": "092a4cdca6d1b28f34782c0b3681672467be0f682572a51c282ee0b8790d3acd",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582822,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+      "exportSha256": "833fb5c589c4a2f112b3402279332e683dca0ada831ca8b925ebb0c3199dd7bf",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 93.22800000000001,
+        "width": 267.10400000000004,
+        "x": 78,
+        "y": 65.69199999999998
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "0ab734e493ace5d4584ed592923418aea3984f32c41255ce2b88e3b1939232ae",
+      "exportSha256": "ed7cd464273198a3b7ccd82428c925fba2d01a2c42fde58573d7307931d40ffa",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582721,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "e3abb00e3ca56e8cb524e8cf7ca5500498ff22267a8d179410a42c61d407fe2f",
+      "exportSha256": "eae0d4942a18972ff78da8652937b23c0821be124ba791fbd2ec4e871e8c417c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582721,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "e839ccb17fb2dbb9b8b70452f261fe2fa0e45059285f2bfab9f5cb13682613a4",
+      "exportSha256": "4ea15e165d84bc85532d1aa55dee7f7ce9db70cdccd3cbe202d773aabf02fba2",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 67.852
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582697,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "3c2e1953c292d3cdda1389a5f6372c9478d4f81167a2e5ed32298bd0f3a84fd5",
+      "exportSha256": "ec1fb5903b9b07f0171185d6b0803cd13175896daf8b6bccd14573977fddeddc",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 67.852
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582697,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c01a384720223f13bf87db260c3e55795e9ed675fd7e1cbebdc5a069a8840c9e",
+      "exportSha256": "4732192569c4873cdaf3fde83bac9452d026d21365ee65cf3fbac5741dbdd91a",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582673,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+      "exportSha256": "cf5d586946c5fe814454aaa88204f9ac7ad0d0733b550dd28bfbca328e81afcd",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582673,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+      "exportSha256": "a83eb7828049aaf4db0e609d7898d81b3c822ebf39c2b182534566ecbf6e1e5c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582649,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "98bc0f8ddf7282e3beddfad6c3aa50b32a4219831a28ec6b3c94a3bdda15a087",
+      "exportSha256": "9d5fdaafe84ecc9963206ebbf7aebb73f50d34cabc819f9297579c0facda6d27",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582649,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+      "exportSha256": "3cf83c39f468ff8bc9337d78d0fa57a5c4e334f6301459f60f98c4cc1840198f",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 559.488,
+        "x": 145.25599999999997,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582551,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "d2d5ef79909fae8782d84024a9116d4fdd732eea3b51eba651445a0342721730",
+      "exportSha256": "442be16dfe9cd636845617a38a1a866c82e0d7553848a665cb76364f28df1dce",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582623,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "ff24e5457398830f5f4642c217eadbb5a66a84aefe35ee5981d6240a47b06904",
+      "exportSha256": "7142c668490a0297b162297ee66693e7fb8cff622144a0a762b61e1b3fe361c0",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582623,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2ead1fe820ec5a0bd298f2f14470708c35b15d257e139c4805959aa3c5fc22eb",
+      "exportSha256": "2db18032695f5f00f9625b05605186b974c8788c3983b1c8c08a081f72ecedc4",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 655.488,
+        "x": 122.25600000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582599,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+      "exportSha256": "f84b33d3b5d7b7a8412062efc81d44893f4a37a2b377c56189644756f492b9f9",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 655.488,
+        "x": 122.25600000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582599,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "1135ab771cc67bc726f2373f45284ea31888a4ad1de6014d4682987d45a399a6",
+      "exportSha256": "6e287cb1694df4807310315b4d8ec3bda8397297825d6602e809bfca49178443",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582575,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "84bbab275809ba5a493946a2e4e80533974cc451ac5ec1d400499c27be040808",
+      "exportSha256": "9ce56c9c349ecf9117554ccea86b496b90f185588c04fefc1784f26f79658fb1",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582575,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+      "exportSha256": "4a9140cfbd3c3ad567f654829f57f6e84e7f0d11136b3f6ceef32912bfdf032e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582551,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f29a06a43978ffeadb4bcb129522d2091c414c02b0d67071ad254276c008d60c",
+      "exportSha256": "fe711c6e62ab495b65278a90174097113062e387f10a9f77a5ed86f580930c11",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582551,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+      "exportSha256": "957777a857cff3cc1d7e82c87af34467e162f96cdd901207d4c74a4ac4f248d6",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 93.22800000000001,
+        "width": 313.34400000000005,
+        "x": 78,
+        "y": 65.69199999999998
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "1aa098a9aa6c65108e53a066cf87d1c9621eedb96a655a07b05da884f8d1c298",
+      "exportSha256": "64ad3b2b92426d3c22b2be89bc0d2c1d9fb67c115fed85ac9be2320cb107a641",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 295.16800000000006,
+        "x": 302.416,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582313,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "871460d9417c71495ac0b70b6c9d3ea9872c2df62c6619af41991cb30d6b3cf8",
+      "exportSha256": "093e1aa10f19b8fbeea50f56a347b65b22564dab24762e6f851609e63e120506",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 295.16800000000006,
+        "x": 302.416,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582313,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "7b4de156d9caf297460f9a275a938ebcb8aad1d4d091b8630cfd27e2cac370d5",
+      "exportSha256": "5430736147fce092d19ebb8c6f21496a88d49fc9b94fdffb1986648f5fbad556",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582289,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+      "exportSha256": "d4c98f4d16a842b0c71626ad83c96a20c6f414699ee220f551560c41d16d6130",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582289,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "b98ca2d1d620d95526d1861ff252d9801dcb95457951d9f41bf9f56f43a9b310",
+      "exportSha256": "cfaa95dd8756767ca59deec2e9cf7fdbe6cda448bb3d110cbd883a18461a371b",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582265,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f3fbb1650229d011fdb664271789ababcad1e466ba6b8a2681d2d4d816dcf546",
+      "exportSha256": "29ccfd30642f947dbf7a59ccb56c553f1dd48e3a3161ecbb3a846c40bfd3eb67",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582265,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2f044b49d10b03ce939489f23f55f149f5ee0a8d6f3c9137c66b7e3ae9cff1e3",
+      "exportSha256": "1befdbeb87a35709e162b6cc0e48f450cfd086cd4c84886f32707d0c814dfca7",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582241,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "menander-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+      "exportSha256": "f81f68f613aab8477fb8c8a10229024a50f623855d789b6d575a435f274c774b",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582241,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "exportSha256": "45a279b2c6c021b41b613154c2765e31eb93ef0f11cfb388266ccd785d1163f7",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 76.77600000000001,
+        "width": 583.4079999999999,
+        "x": 133.296,
+        "y": 69.064
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582585,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "850faf40b274d05c6eec6ceaca8bab7117fc14b304c0facd08ede769a4e4a4e7",
+      "exportSha256": "952ea50574c096c2e4a7b53460653fe5ef70c27072216f42dc2cc2d875f47cca",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582657,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "546692ff63c4815818b18f2519635d98472dc4778f48e65d4d69e86bc1e1a35c",
+      "exportSha256": "d73460b61cc03061a79d24435cc5c7f83b4fb2b25f9965e0d6ab32ccf26b8137",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582657,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+      "exportSha256": "cce29d0fa16172ac16c96444f8833b098f7204ec1eb3b7491b61eccb228c4a2c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582633,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "e67b979c076a6add4a6f5b1ac30b7c90cc691732eac95c2216b1a5a08f80deb5",
+      "exportSha256": "3344a1059daa375b8e5219819cce348302c1b01e106cc3b57c90f1facb0eb251",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582633,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "6776d7912d3d58d7c192f65bbc0fe3eece0b1f9d43d8d15d0f1526ea105c0f97",
+      "exportSha256": "fe1fad0614dacbde590dd85e3ab8330dab7c63455a98ba31f532f3b62ac17f5c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582609,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+      "exportSha256": "f0e85f77a2f73d9afeb63201cb886f327d9a10251a2a1dffc3c8c8c98168e668",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582609,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+      "exportSha256": "64265412cc9c87fb50a12323d89dd8dbbbc4b57858fed3f5767fab91b9e8c5d7",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582585,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "6de5605046f7d8bbbfbe8ea31501f57953444026759a44b16f5b6ff594b922c7",
+      "exportSha256": "d37939b30d082870653c80b0512271be43240cf805b31e751c3dfee83cf3da71",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582585,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+      "exportSha256": "2784057b4df4de7fd7cf003a75f8bc320452f30462661e049b4432b6fe1280b9",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 392,
+        "x": 228.99999999999997,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582499,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "e5cfcc584c2f911ae8c1901a027757b128ce2dff942ace5f53d53b76677aac68",
+      "exportSha256": "0fc8ec30e2c8a30fc42aef22dfbdf775f7d51955299e8b23550802535ab992fb",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582571,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "87702b53abf2a6ce7193ebcc2a8f83c2f2573cb3a62717ad988b400c26db3e1c",
+      "exportSha256": "a12a40c1f5c1054c47c0385cba51bb1554444743a3cd2e404a8c4e1f064a34e6",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582571,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+      "exportSha256": "5da4f106a48acc23830ff8e04cfe3131745d4d9581e8d738c904203a6057ca9c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582547,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "04e2b529485f2afe5a8984871bd4a69c9de71ec9f8bab5c08c07f790e1c606ac",
+      "exportSha256": "128d8f919dfa1ea9a150e1977f865a2d036443174d8cf20a8aa368ef4283849c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582547,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+      "exportSha256": "d997f6fd75b85e1c254f670035b13d9a4aae4fc54f111f95a9aa47920e5bc089",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582523,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+      "exportSha256": "b6728fb2660821b146103465090badb35f0754ef17150fa9a097af3127231baa",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582523,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "157526ad1111cbebc159563e3e10c3b6787a5144305168ed7edf23b876094c29",
+      "exportSha256": "18163ceb20c0d9e7fcacf08aceb0643a8bd83818ffc0eaf2bb5a0e2b8ccbd4eb",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582499,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+      "exportSha256": "478cb32834b7bf6731fb02b7f4b4fca34a59f85c7d654a9494602366517b9c5d",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582499,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "exportSha256": "dba0646766975185c74de626554d39dc472dfd3ac465351b5771e4f99149c294",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 423.74399999999997,
+        "x": 213.128,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582402,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "afa02393649b198225a17f168a6ae0b7c94668d83948bcc363823bd513e04164",
+      "exportSha256": "bb2276946b54d653b2c23591dbd2ea6937176f3ec5527a4fdb99e719f651f52e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582474,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "9636a0c1dd265207e24f77e20298939c8bb37bd6aaa42d1c6f1ca5ead27f8cbd",
+      "exportSha256": "6dd139f7d2961c10248a19dd8cbaa8d99cd3b32af8680188a0f52140e2537612",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582474,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "08b1c06307efe6dc18a60b9aabac689adc94a8d8b0ccc6b272d3d80062388b08",
+      "exportSha256": "6fb6a2f6ee270b2628dd21c682aa8311cddbc78dffb6a1aa0a589dd8741b8fbb",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582450,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2b34cf531ac407f5bc1ab14fcceb8c423190fe782e1b43904f68860c67bb916a",
+      "exportSha256": "7a90fbbcf0a16d3205c6fbb774f2d7fc9086568035d3b1bac2830a1de25100be",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582450,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "1ef7163047ea08d8ed31a492998a9f105f2ebf583e1ac84e5130ce15b6e6247a",
+      "exportSha256": "bbba3c89b77fd5c5b7583f6a96fd8ce1bbe4ba2c36a73a95c68d3cd15f3d1cd5",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582426,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "6613d2b52adefd37bb955fbfc28790f48720e57941330333ff6a8ea769f5d746",
+      "exportSha256": "5d299a5b81f0ca01af879ff9d6607e5d0936f752f73b2c69d34b376a51566899",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582426,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+      "exportSha256": "3cec2a00d1bdb5f51de79c6511ce4158ac574d6378f2c1424d05ce287db65d18",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582402,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "zeno-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "735e92e7d4f915b7ba2d998c018a3128f949575d97b329d1df3539b9a0712b1f",
+      "exportSha256": "7011afb2e434c7f258374c5551293b24569d66612c739f1e488d7b10cc1f6403",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 65.428
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582402,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+      "exportSha256": "4a8073531135b0e33fc4d8ae9853386290a7e3c5855eb5becb0bdbf92ffaa7e2",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 435.77600000000007,
+        "x": 207.112,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582444,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "fe399787af9ca127d75e11a18affe6d0af34c5fd61295a8186d615a6bd56f3a1",
+      "exportSha256": "2391182b98a2dfd8daf1037cc591bd6f296879bdbdf993d225190cc57b20406d",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 508.3519999999999,
+        "x": 195.824,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582516,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "a08ae26a00694926af3f04a754e982db7fdea9b6bc967bfafe5f714acaf1ab66",
+      "exportSha256": "358bf19f01d11a8e23ab78553a3912d4c9aef645d33d12224092b2aacfb4fe73",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 508.3519999999999,
+        "x": 195.824,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582516,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "ab83a7b80b2ba16c81447120efcf88466387645b663bfa163b35426a488ec2bc",
+      "exportSha256": "6b5167365a788fa5a6ecf876a63e3cb28623b5040be18f5f9a4d2bf9b1c3593b",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582492,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "4028229c73dc2d34266b7eeeb131b43bb1079a444cedaaa2366838745aa64585",
+      "exportSha256": "92f619d949535968001451dd773590b24c34a4dc1d2a2e5707934e22fa0926eb",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582492,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+      "exportSha256": "39465d9450b8418c2102decc79a1b1966d9fc1f924f291202129541b966c9b2c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582468,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
+      "exportSha256": "7f44c5c3661b5bcca06739c663b5875570fba0c325c3fbf5aad1881553cef925",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582468,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c9581112f78d21e7207bac7b9ca19c9f808f78305a1a00c1b20798fd884918ed",
+      "exportSha256": "37133f67252f95995f2101a3b812ce881c411f344d97607781ed15688e9060f1",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582444,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "9a2968114c122a637733a694f4fa6423826d8a73be3f855b18dd715785b6fa3f",
+      "exportSha256": "e7111fbf404c7849f0964fa66f6d2373f31c20db95e787d60f501be59e4ba178",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582444,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+      "exportSha256": "1d02db1878b223a734eb82cf777c87fc0251c3a9c0db6021d77ccaf0e8362d3e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 76.77600000000001,
+        "width": 592.9839999999999,
+        "x": 128.50799999999998,
+        "y": 69.064
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582575,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "4c0e2711d7d208ee1fe7ccddc022d3bd754bae2b545a4acdc185ab87334d51ae",
+      "exportSha256": "de71e1c8aac79e184fa7ac9da072b19d2e700bf815ff25c0ac21c3cbe312fc5b",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 429.05600000000004,
+        "x": 235.47199999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582647,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "1ed2321223c7b9996de29cc881a2ea85b473fc8538c50abdaeaaa6df46b75dc1",
+      "exportSha256": "2908e51ca2eebd884a6efcd80f286e2e63947b60fa90d026913310c859f2989e",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 429.05600000000004,
+        "x": 235.47199999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582647,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "07579156933da061e8a297f5b42cd83560779ed7a1a2537b244a318576c508d8",
+      "exportSha256": "9fa9c0030df27f8b55599cbc7fa45edcb3b40847869f8c45ae6dc08e3d185bb2",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 67.852
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582623,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+      "exportSha256": "642c9661c2601b8bcc7e056f4230340454e544ad082a05151ad86bd3e606f2bc",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 67.852
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582623,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "17ee5b4dfee11c0d3839de1df156c8f01628e54f9553a6e616bcb636bef77a95",
+      "exportSha256": "e2db502b8202d88e274c9fb47772807e8231fb0e3450fd6da82de83a0514fb86",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582599,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "115e0624eb6696a7051d3d38aac3fce6dcb6b2c5d986bfa840c4d78383703653",
+      "exportSha256": "67bfe7380e2c960cd7d41e9271efe87e1b1ca1a62b810e9a2d5ddfa6492b5a32",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582599,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+      "exportSha256": "13c900f4028694c4da5a5b7fb66c5859416e4e5b38d06a56803aaebcb4c34ee0",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582575,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "944d4f8b0b16aa1d5d4d1fa522b91753b0c7859f33e62091b45ffc5aa01893e7",
+      "exportSha256": "495d404788e5015b51496bb4cbff6aa61acd076cafd6b83a8c48ef0254fa4edc",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582575,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+      "exportSha256": "86897dd5c604d0826fe5c2e7a83b42768642f2528dbf1d374941b00205069a6d",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 270.72,
+        "x": 289.64,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582201,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f087744a731eef69176165b3749c0fbf7ec10fb7bae280d7b8fc46aa4df9316f",
+      "exportSha256": "59883e0330bc44ff749d6781f06752775778e537a2fdb248e91cc01f543550f6",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582273,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "91820282ed875a23617b3df4ec43550e263f1999bdedd81dc24782d1883c5f54",
+      "exportSha256": "0990ccd3429c2a073a08e41d04b32a8ae1b0f49e407ea72a72e744d167c753c9",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582273,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "377dccc7e265c35e436249d401d057a30cc5a9c7196ad0b711a8396f5217fb8c",
+      "exportSha256": "df62aea7b675fd2b1e972c21a9ac695e7f9caec0afecf929ce1f678c0d0864f2",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582249,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "b77f4cdbd9d60b49ca45d742567f3d2e85139a3fa14ea45a69fb39c616257798",
+      "exportSha256": "f43a24fd1991f09fd7e89dc102770c8b3ce86fc778240c33302fc83d19e4f6f2",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582249,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "76c1ce865cc743406c34eebd0474bd9de87e20165cb6af7d04e1d279a842aa22",
+      "exportSha256": "03242eef0e36e64f09efa3ae6b4cc4301d56270be83b7ad001adb5cd0336c16f",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582225,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f27238f4ef3f2648e0f8c5075881db276b7dcffe6d5f3307eaeb8b35ffcd0dd4",
+      "exportSha256": "a473e0c4501828121b2fcae3c01f71ad063064dd573e07d3e44bf5eb5b6813e5",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 66.64000000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582225,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f56222c40695ee4e78ee41c8c5a196e5abee7a7549ed9b68a17c2043617d5311",
+      "exportSha256": "1058fd398bf1acd2af40e0c919002bc82e0e25ea0e2764dd51885238e4725ab1",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582201,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "nearchus-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2727507158d184ca5c540686515e4d8aa33a0c1fcf142a807313ac5d333920ea",
+      "exportSha256": "375fc0ae9bdd7225efdaccb167025f5bfc30511364be37cf5ce746ad7902de4c",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582201,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-parent",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+      "exportSha256": "35e987f2e94192879cdd59abc2f71f9d6fccf9c1507e5c687dd9db4de34c06d9",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 539.392,
+        "x": 155.30399999999997,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582348,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-common-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "c40d5be871e7072701921152feeceda6d164e3322d10eaf345a822c78c9b7210",
+      "exportSha256": "8870ff972359bf9a40843187d2fddca6185dca08042fc74320ba91c17a4e361f",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582420,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-common-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "fca02cb9035fbd60ccb1055b16b86045c33628913dc41da6f081afc82b3f69e5",
+      "exportSha256": "0bdbad0fc15b20049beba5f92e6669328dea9a6a2f855a5bfd229fc8b5d0aab4",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582420,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2a80d7784d5f81f8d50be37a47139cbfbc321490756f93fda31f258f8f9ad910",
+      "exportSha256": "e97a1364e9a3134a8d452f7bda5dc4190cd14a161294c533903370d043d90bb5",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582396,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "2d72bdf66ba090c662fdf5e73734b46594daaa002f66157ba85848bdcfb64a71",
+      "exportSha256": "4dbf11992f4f76cc03bd168f36dec539769ba9542a5550916729efc1a8ceb821",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582396,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
+      "exportSha256": "217ef99712d2015142cf7f92022e0ebca5ba0f657ca597741c861632f3505055",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582372,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
+      "exportSha256": "ac0454b2f03ce1012bed20bf32952951fe1d5fffb646f6cc25468fd579067723",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582372,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-epic-male",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "f9cd417bc74b9a09faf95fb66598b3b552efd3cdc65a203e2110f48e8b286058",
+      "exportSha256": "51b4c0bed2f7fc6aea76ac9ce37456fda0c50433b7ebeeb4768c7658cc5852e0",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582348,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    },
+    {
+      "slug": "eumenes-epic-female",
+      "passed": true,
+      "exportSize": [
+        900,
+        1260
+      ],
+      "sourceArtSha256": "01d215e0eb2986ae78a3703baab7bb8de6fbd67d496b0aacadd91bf7b96956f7",
+      "exportSha256": "063c29847ff6d4f44c0c29cedf389b69a30b4530bf78615401730eb1cce92f91",
+      "nativeTextNodes": 7,
+      "titleBounds": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 64.21600000000001
+      },
+      "nativeReopenPixelDifferences": 0,
+      "sourceFitPixelDifferences": 0,
+      "uncoveredPixelsChecked": 582348,
+      "uncoveredRgbDifferences": 0,
+      "transparentOuterCorners": true
+    }
+  ]
+}

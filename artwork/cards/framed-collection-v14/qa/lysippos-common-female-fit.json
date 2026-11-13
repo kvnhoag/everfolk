@@ -1,0 +1,81 @@
+{
+  "figureId": "lysippos",
+  "figureName": "Lysippos",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Workshop Apprentice",
+  "displayTitle": "Workshop Apprentice",
+  "subtitle": "At the Sculptor's Bench",
+  "bodyTitle": "Hands Learn the Form",
+  "bodyText": "A workshop apprentice prepares clay, tends tools, and watches experienced hands shape a figure. Familiarity with the material slowly becomes judgment, laying the humble foundation from which convincing bronze can rise.",
+  "sourceRoleSlug": "lysippos-common",
+  "newArt": true,
+  "sceneBrief": "A simply dressed workshop apprentice prepares clay or wax at a low bench, bronze casting workshop behind, no master portrait pose.",
+  "slug": "lysippos-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Workshop Apprentice",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/lysippos-common-female-pixel.png",
+  "sourceArtSlug": "lysippos-common-female",
+  "editionLimit": null,
+  "collectionIndex": 30,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/lysippos.svg",
+    "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A workshop apprentice prepares clay, tends tools, and",
+    "watches experienced hands shape a figure. Familiarity with",
+    "the material slowly becomes judgment, laying the humble",
+    "foundation from which convincing bronze can rise."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-common-female.svg",
+  "fittedArt": "assets/fitted/lysippos-common-female.png",
+  "overlaySvg": "source/overlays/lysippos-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "e3abb00e3ca56e8cb524e8cf7ca5500498ff22267a8d179410a42c61d407fe2f",
+  "master": "masters/lysippos-common-female.vectorcraft",
+  "export": "exports/lysippos-common-female.png",
+  "thumbnail": "assets/lysippos-common-female-thumb.png",
+  "exportSha256": "eae0d4942a18972ff78da8652937b23c0821be124ba791fbd2ec4e871e8c417c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582721,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "figureId": "aristotle",
+  "figureName": "Aristotle",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Peripatetic Scholar",
+  "displayTitle": "Peripatetic Scholar",
+  "subtitle": "A Voice of the Lyceum",
+  "bodyTitle": "Inquiry Carried Forward",
+  "bodyText": "A Peripatetic scholar joins observation to disciplined argument and guides others through difficult questions. Independent judgment keeps the school alive, carrying Aristotle's spirit of inquiry into minds capable of challenging it.",
+  "sourceRoleSlug": "aristotle-epic",
+  "newArt": false,
+  "slug": "aristotle-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Peripatetic Scholar",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-epic-female-pixel.png",
+  "sourceArtSlug": "aristotle-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 18,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/aristotle.svg",
+    "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A Peripatetic scholar joins observation to disciplined",
+    "argument and guides others through difficult questions.",
+    "Independent judgment keeps the school alive, carrying",
+    "Aristotle's spirit of inquiry into minds capable of",
+    "challenging it."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-epic-female.svg",
+  "fittedArt": "assets/fitted/aristotle-epic-female.png",
+  "overlaySvg": "source/overlays/aristotle-epic-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "8e43ab5ba01599a744b296796eb31c15a5cee5c3a506472655cebd9b37ff10cf",
+  "master": "masters/aristotle-epic-female.vectorcraft",
+  "export": "exports/aristotle-epic-female.png",
+  "thumbnail": "assets/aristotle-epic-female-thumb.png",
+  "exportSha256": "c3e175762614fef6aae685dacbbb21b054bc2278d11b0380cf30d316f3240e5f",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 581966,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

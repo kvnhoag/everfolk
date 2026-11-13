@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { readBoosterCollection } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack } from "../types/booster.ts";
 import BoosterOpening from "./BoosterOpening.tsx";
+import { refreshSavedBoosterCard } from "../chain/nft-card-view.ts";
 
 /** Saved local cards remain inspectable without redrawing a pack or signing a transaction. */
 export default function BoosterCollection() {
@@ -20,7 +21,7 @@ export default function BoosterCollection() {
     return () => { window.removeEventListener("everfolk:legacy-updated", refresh); window.removeEventListener("storage", refresh); };
   }, []);
   useEffect(() => { if (review && !dialog.current?.open) dialog.current?.showModal(); }, [review]);
-  const kept = packs.filter(pack => pack.selected.length);
+  const kept = packs.filter(pack => pack.selected.length).map(pack => ({ ...pack, cards: pack.cards.map(refreshSavedBoosterCard) }));
   if (!kept.length && !error) return null;
   const count = packs.reduce((sum, pack) => sum + pack.selected.length, 0);
   return <section className="booster-collection" aria-label="Saved booster cards">
@@ -28,7 +29,7 @@ export default function BoosterCollection() {
     <p>Your Free to Play collection is saved on this device. Select a life to rotate and review its cards.</p>
     {error && <p role="status">{error}</p>}
     <div className="booster-collection-packs">{kept.map(pack => <button key={pack.id} onClick={() => setReview(pack)}>
-      <img src={pack.cards[pack.selected[0]].art} alt="" />
+      <img src={pack.cards[pack.selected[0]].framedArt ?? pack.cards[pack.selected[0]].art} alt="" />
       <span>{pack.characterName}<small>{pack.selected.length} {pack.selected.length === 1 ? "card" : "cards"} · Review collection →</small></span>
     </button>)}</div>
     {review && <dialog ref={dialog} className="booster-review-dialog" aria-label="Review saved Legacy cards" onCancel={event => { event.preventDefault(); setReview(null); }}>

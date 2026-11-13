@@ -4,6 +4,8 @@ import type { LivesContract, SignedEvidence } from "./types.ts";
 import { npcActionMenu } from "./life-report-model.ts";
 import { errorText } from "./chain-backend.ts";
 import { formatNear } from "./near-amount.ts";
+import { rarityLabel } from "./chain-copy.ts";
+import { editionLabel, nextEditionLabel } from "./edition-label.ts";
 import "./mint-pack.css";
 
 export function StageAlbumReceipt({ result, onClose }: { result: StageMintResult; onClose(): void }) {
@@ -12,13 +14,14 @@ export function StageAlbumReceipt({ result, onClose }: { result: StageMintResult
     <div className="stage-album-grid">{result.tokens.map(token => <article className="stage-album-card" key={token.stage_id}>
       <span className="stage-album-art"><img className="stage-album-portrait" src={token.portrait_media} alt={token.character_name ?? "Stage portrait"} /></span>
       <a href={`#token/${token.token_id}`}>{token.character_name} · {token.stage_title}</a>
+      <span>{rarityLabel(token.rarity)}{editionLabel(token) && ` · Edition ${editionLabel(token)}`}</span>
     </article>)}</div><button type="button" className="chain-secondary" onClick={onClose}>Back to My lives</button></section>;
 }
 
 /** All stages share one verified post-life payment. Legacy lives and already-paid packs keep their existing UI. */
 export default function StageAlbum({ signed, contract, onMint, onClose, onDecline, practice = false, walletPath = true }: {
   signed: SignedEvidence; contract: LivesContract;
-  onMint(action: string, fee: string): Promise<StageMintResult>; onClose(): void; onDecline(): void;
+  onMint(action: string, fee: string, quoteHash?: string): Promise<StageMintResult>; onClose(): void; onDecline(): void;
   practice?: boolean; walletPath?: boolean;
 }) {
   const menu = npcActionMenu(signed.evidence.career_group);
@@ -36,7 +39,7 @@ export default function StageAlbum({ signed, contract, onMint, onClose, onDeclin
   }, [contract, signed, action, id, attempt]);
   async function mint() {
     setBusy(true); setError("");
-    try { setResult(await onMint(action, quote?.total_fee ?? "0")); }
+    try { setResult(await onMint(action, quote?.total_fee ?? "0", quote?.quote_hash)); }
     catch (cause) {
       const landed = await contract.stageMintResult(id).catch(() => null);
       if (landed) setResult(landed);
@@ -60,6 +63,8 @@ export default function StageAlbum({ signed, contract, onMint, onClose, onDeclin
       <span className="stage-album-art"><img className="stage-album-portrait" src={card.portrait_media} alt={card.character_name} /></span>
       <div className="stage-album-body"><span className="chain-kicker">{card.stage_id} · Ages {card.stage_record.fromAge}–{card.stage_record.toAge}</span>
         <strong>{card.character_name} · {card.title}</strong><span>{card.figure_id ? "Historical figure" : "Stage portrait"} · {formatNear(card.fee)} NEAR</span>
+        {card.rarity !== undefined && <span>{rarityLabel(card.rarity)}</span>}
+        {nextEditionLabel(card) && <span>{nextEditionLabel(card)}</span>}
       </div></article>)}</div><p>Total: <strong>{formatNear(quote.total_fee)} NEAR</strong>. {quote.source_share_bps / 100}% goes to source tokens by impact; the remainder goes to the treasury.</p></>}
     <p className="chain-fine">Historical names use their shared supply caps. When a name is full, its stage keeps your own character’s portrait at the generic price. {practice ? "This is a local practice mint; no NEAR is spent." : walletPath ? "Confirm one payment in your wallet. Network gas is separate." : "Confirm one payment for the album."}</p>
     {error && <p role="alert" className="chain-error">{error}</p>}

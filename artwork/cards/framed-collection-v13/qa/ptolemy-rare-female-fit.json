@@ -1,0 +1,60 @@
+{
+  "slug": "ptolemy-rare-female",
+  "figureId": "ptolemy",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Ptolemaic Supply Commissioner",
+  "subtitle": "Ptolemy I Soter",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 68,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-rare-female.svg",
+  "fittedArt": "assets/fitted/ptolemy-rare-female.png",
+  "overlaySvg": "source/overlays/ptolemy-rare-female.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
+  "master": "masters/ptolemy-rare-female.vectorcraft",
+  "export": "exports/ptolemy-rare-female.png",
+  "thumbnail": "assets/ptolemy-rare-female-thumb.png",
+  "exportSha256": "6d25a0670ad7cfebe827691e13eeb032111b992e672e319a63093e539cde3c23",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

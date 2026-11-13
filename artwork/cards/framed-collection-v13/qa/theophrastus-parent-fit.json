@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-parent",
+  "figureId": "theophrastus",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Theophrastus",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 50,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-parent.svg",
+  "fittedArt": "assets/fitted/theophrastus-parent.png",
+  "overlaySvg": "source/overlays/theophrastus-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+  "master": "masters/theophrastus-parent.vectorcraft",
+  "export": "exports/theophrastus-parent.png",
+  "thumbnail": "assets/theophrastus-parent-thumb.png",
+  "exportSha256": "286a6edc478310824dad5047d1e9e14c09305a378d0ad032bbd75f52db2507b4",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

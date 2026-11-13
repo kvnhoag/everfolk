@@ -7,6 +7,10 @@ export interface BoosterCardView {
   sub: string;
   /** The line under the name on the card frame, e.g. "Historical figure". */
   role?: string;
+  /** Complete approved card face, without a baked example edition number. */
+  framedArt?: string;
+  /** A recorded serial or an unassigned placeholder; never inferred from a token id. */
+  editionText?: string;
 }
 
 export interface BoosterCollectionPack {

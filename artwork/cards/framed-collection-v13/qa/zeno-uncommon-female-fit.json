@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-uncommon-female",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Student of the Stoa",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 59,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-uncommon-female.svg",
+  "fittedArt": "assets/fitted/zeno-uncommon-female.png",
+  "overlaySvg": "source/overlays/zeno-uncommon-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "2b34cf531ac407f5bc1ab14fcceb8c423190fe782e1b43904f68860c67bb916a",
+  "master": "masters/zeno-uncommon-female.vectorcraft",
+  "export": "exports/zeno-uncommon-female.png",
+  "thumbnail": "assets/zeno-uncommon-female-thumb.png",
+  "exportSha256": "984d2da0f0ef5eceec055b9bb9421f698eb301fd68a3c2eea776c02e8f2d3626",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

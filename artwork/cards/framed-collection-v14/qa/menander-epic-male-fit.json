@@ -1,0 +1,80 @@
+{
+  "figureId": "menander",
+  "figureName": "Menander",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Dramatist of New Comedy",
+  "displayTitle": "Dramatist of New Comedy",
+  "subtitle": "Heir to the Comic Stage",
+  "bodyTitle": "Ordinary Lives, Lasting Art",
+  "bodyText": "A dramatist of New Comedy finds the hidden stakes in ordinary households and troubled affection. Command of character gives laughter its depth, carrying the tradition onward through stories audiences recognise as their own.",
+  "sourceRoleSlug": "menander-epic",
+  "newArt": false,
+  "slug": "menander-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Dramatist of New Comedy",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-epic-male-pixel.png",
+  "sourceArtSlug": "menander-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 53,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/menander.svg",
+    "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A dramatist of New Comedy finds the hidden stakes in",
+    "ordinary households and troubled affection. Command of",
+    "character gives laughter its depth, carrying the tradition",
+    "onward through stories audiences recognise as their own."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-epic-male.svg",
+  "fittedArt": "assets/fitted/menander-epic-male.png",
+  "overlaySvg": "source/overlays/menander-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "2f044b49d10b03ce939489f23f55f149f5ee0a8d6f3c9137c66b7e3ae9cff1e3",
+  "master": "masters/menander-epic-male.vectorcraft",
+  "export": "exports/menander-epic-male.png",
+  "thumbnail": "assets/menander-epic-male-thumb.png",
+  "exportSha256": "1befdbeb87a35709e162b6cc0e48f450cfd086cd4c84886f32707d0c814dfca7",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582241,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

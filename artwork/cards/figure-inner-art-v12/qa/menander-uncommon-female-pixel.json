@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-uncommon-female.png",
+  "sourceSha256": "e3ed602124c7576239e3914fd6a4983a7b75a2c85d4efa605fbab4de22d3ced7",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-uncommon-female-coarse.png",
+  "baseSha256": "6b969377989a9d52346802b300dbd456da2e026bf706eb620a94e64340e1dd8a",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-uncommon-female-coarse.json",
+  "baseQaSha256": "b69e0c4b9967e48382d5fe1d21bac7bcc55ccf991c39e93992b1c3c01dff7e8f",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-uncommon-female-face.json",
+  "configSha256": "fa2eb875ae720e05f191c7c69fb541376bb50c94db3010c66a8d6f92dbce8d85",
+  "config": {
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "radius": [
+          97,
+          104
+        ],
+        "center": [
+          368,
+          275
+        ]
+      }
+    ],
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-uncommon-female-pixel.png",
+  "outputSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "6efe62246310cf646383064efde38655e6c6ea9854ae12f00cc1493d288d0938",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-uncommon-female-face-mask.png",
+  "maskSha256": "b7ae7c249a311e2d97d3eb0c824c2a6a6784ed9b6170770474e602d3285bc2d0",
+  "maskPixelSha256": "94ac799adb61f9951cdd5ccc0e1cf30dde8055acd1cfe2802e6325e7a40469dc",
+  "selectedDetailCells": 734,
+  "retainedCoarseCells": 23766,
+  "affectedPixels": 26424,
+  "changedPixels": 26047,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

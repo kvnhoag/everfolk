@@ -1,0 +1,52 @@
+{
+  "slug": "lysippos-parent",
+  "figureId": "lysippos",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Lysippos",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-parent-pixel.png",
+  "intendedEditionLimit": 10,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 010",
+  "collectionIndex": 22,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/lysippos-parent.svg",
+  "fittedArt": "assets/fitted/lysippos-parent.png",
+  "overlaySvg": "source/overlays/lysippos-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+  "master": "masters/lysippos-parent.vectorcraft",
+  "export": "exports/lysippos-parent.png",
+  "thumbnail": "assets/lysippos-parent-thumb.png",
+  "exportSha256": "5e2b7512812396f2efbb01c9bb4634b94818eda7d035a8c741a483814523ac9b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 628992,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

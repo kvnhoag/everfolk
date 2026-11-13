@@ -1,0 +1,166 @@
+{
+  "count": 20,
+  "passed": true,
+  "checks": [
+    {
+      "slug": "lysippos-uncommon-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-rare-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-rare-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-epic-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "grid": true,
+      "readback": true,
+      "noBlend": true
+    }
+  ]
+}

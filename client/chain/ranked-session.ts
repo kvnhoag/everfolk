@@ -55,7 +55,7 @@ export interface RankedSession {
   sync(next: LifeState): Promise<LifeState>;
   finish(fetcher?: typeof fetch): Promise<SignedEvidence>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
-  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string, expectedQuoteHash?: string): Promise<StageMintResult>;
   chooseMint(slot: number): Promise<MintResult>;
   /** Resumes a committed mint without asking the verifier or paying a second fee. */
   recoverMint(): Promise<MintResult>;
@@ -368,8 +368,8 @@ class Session implements RankedSession {
     return this.completeMint(result);
   }
 
-  async mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult> {
-    const result = await this.options.contract.mintStageFigures(this.life.life_id, signed, npcActionId, expectedFee);
+  async mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string, expectedQuoteHash?: string): Promise<StageMintResult> {
+    const result = await this.options.contract.mintStageFigures(this.life.life_id, signed, npcActionId, expectedFee, expectedQuoteHash);
     this.completeMint(result.tokens[0]);
     return result;
   }

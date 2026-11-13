@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\euclid-rare-female.png",
+  "sourceSha256": "fae59f3ec9ff1739d176b3b097e05f343fa708896709c4d9d7e3f92ea0187dbd",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\euclid-rare-female-coarse.png",
+  "baseSha256": "637448026aca3e184b57fd0f73e4277f2b94b50d51468c5eafe0cf3100afdacf",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\euclid-rare-female-coarse.json",
+  "baseQaSha256": "b7c5be8eacc11ea6a89f70ce43c66d1beef6457f1c5db199e0ef625d7aef3ddb",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\euclid-rare-female-face.json",
+  "configSha256": "da7db712b309f455e8ca2c4f1fd1171864fef164233323330159e2452dca7921",
+  "config": {
+    "regions": [
+      {
+        "center": [
+          363,
+          247
+        ],
+        "radius": [
+          108,
+          138
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\euclid-rare-female-pixel.png",
+  "outputSha256": "09a20ed16a060e215f05a7cc49dd4069ecc7e236d9997ab5365fbe16de8504b0",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "6baf3f0b05e1edeb2eb8598fa0d1c65a80f90ff1a0dfff65f4da480137bb2c75",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\euclid-rare-female-face-mask.png",
+  "maskSha256": "f150be5479e8cbca8bf6af3cdd3dcaa1f5808e65e5ffa69de1fa96962a71f019",
+  "maskPixelSha256": "0327ccb8c0543464abda03bad4d9a20a0673ff4d9a0cf33db7d72bf9a48cc9e2",
+  "selectedDetailCells": 1079,
+  "retainedCoarseCells": 23421,
+  "affectedPixels": 38844,
+  "changedPixels": 38208,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

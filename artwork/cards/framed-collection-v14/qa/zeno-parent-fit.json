@@ -1,0 +1,82 @@
+{
+  "slug": "zeno-parent",
+  "figureId": "zeno",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Zeno of Citium",
+  "subtitle": "Founder of the Stoa",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-parent-pixel.png",
+  "collectionIndex": 73,
+  "owner": null,
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "portico",
+  "bodyTitle": "A Life Governed by Reason",
+  "bodyText": "Teaching at Athens' Painted Porch, Zeno founded the Stoic school around 300 BCE. His philosophy placed virtue and reason at the centre of a demanding vision of how a life should be lived.",
+  "sources": [
+    {
+      "title": "Stoicism — Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/stoicism/"
+    }
+  ],
+  "canonicalTitle": "Zeno of Citium",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Teaching at Athens' Painted Porch, Zeno founded the Stoic",
+    "school around 300 BCE. His philosophy placed virtue and",
+    "reason at the centre of a demanding vision of how a life",
+    "should be lived."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-parent.svg",
+  "fittedArt": "assets/fitted/zeno-parent.png",
+  "overlaySvg": "source/overlays/zeno-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+  "master": "masters/zeno-parent.vectorcraft",
+  "export": "exports/zeno-parent.png",
+  "thumbnail": "assets/zeno-parent-thumb.png",
+  "exportSha256": "dba0646766975185c74de626554d39dc472dfd3ac465351b5771e4f99149c294",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582402,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

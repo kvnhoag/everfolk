@@ -1,0 +1,60 @@
+{
+  "slug": "cleomenes-rare-male",
+  "figureId": "cleomenes",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Grain Supply Auditor",
+  "subtitle": "Cleomenes of Naucratis",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 74,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-rare-male.svg",
+  "fittedArt": "assets/fitted/cleomenes-rare-male.png",
+  "overlaySvg": "source/overlays/cleomenes-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "17ee5b4dfee11c0d3839de1df156c8f01628e54f9553a6e616bcb636bef77a95",
+  "master": "masters/cleomenes-rare-male.vectorcraft",
+  "export": "exports/cleomenes-rare-male.png",
+  "thumbnail": "assets/cleomenes-rare-male-thumb.png",
+  "exportSha256": "45a4c2f2b81010e3a3f238bae4edcd0601157e085393a5645a29f0a3e4e7d0ca",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

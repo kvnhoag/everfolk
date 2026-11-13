@@ -1,0 +1,81 @@
+{
+  "figureId": "ptolemy",
+  "figureName": "Ptolemy I Soter",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Ptolemaic Supply Commissioner",
+  "displayTitle": "Supply Commissioner",
+  "subtitle": "Keeper of Ptolemy's Lifelines",
+  "bodyTitle": "The Realm Remains Supplied",
+  "bodyText": "A supply commissioner coordinates stores and transport across competing demands. Judgment turns figures on a tablet into provisions where they are needed, giving Ptolemy's government the material strength to maintain its hold on Egypt.",
+  "sourceRoleSlug": "ptolemy-rare",
+  "newArt": false,
+  "slug": "ptolemy-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Ptolemaic Supply Commissioner",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png",
+  "sourceArtSlug": "ptolemy-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 87,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/ptolemy.svg",
+    "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A supply commissioner coordinates stores and transport",
+    "across competing demands. Judgment turns figures on a",
+    "tablet into provisions where they are needed, giving",
+    "Ptolemy's government the material strength to maintain its",
+    "hold on Egypt."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-rare-male.svg",
+  "fittedArt": "assets/fitted/ptolemy-rare-male.png",
+  "overlaySvg": "source/overlays/ptolemy-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+  "master": "masters/ptolemy-rare-male.vectorcraft",
+  "export": "exports/ptolemy-rare-male.png",
+  "thumbnail": "assets/ptolemy-rare-male-thumb.png",
+  "exportSha256": "39465d9450b8418c2102decc79a1b1966d9fc1f924f291202129541b966c9b2c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582468,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

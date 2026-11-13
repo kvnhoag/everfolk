@@ -1,0 +1,80 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Campaign Provisioner",
+  "displayTitle": "Campaign Provisioner",
+  "subtitle": "Keeper of the King's Stores",
+  "bodyTitle": "Strength Before Battle",
+  "bodyText": "A campaign provisioner gathers grain, checks pack animals, and keeps the stores ready for departure. Behind every celebrated advance stands this patient discipline, giving hungry soldiers the strength to follow their king.",
+  "sourceRoleSlug": "alexander-uncommon",
+  "newArt": false,
+  "slug": "alexander-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Campaign Provisioner",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-uncommon-female-pixel.png",
+  "sourceArtSlug": "alexander-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 5,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A campaign provisioner gathers grain, checks pack animals,",
+    "and keeps the stores ready for departure. Behind every",
+    "celebrated advance stands this patient discipline, giving",
+    "hungry soldiers the strength to follow their king."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-uncommon-female.svg",
+  "fittedArt": "assets/fitted/alexander-uncommon-female.png",
+  "overlaySvg": "source/overlays/alexander-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "924a15e1befd233494db20ff9a2e5775bea8a0cc1744f100a1f58c8bb11372e9",
+  "master": "masters/alexander-uncommon-female.vectorcraft",
+  "export": "exports/alexander-uncommon-female.png",
+  "thumbnail": "assets/alexander-uncommon-female-thumb.png",
+  "exportSha256": "7b4bdd2c7edc2d5449246c217e260faf3b01a5ccf8c89f1d9069cd666ee8cf49",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582504,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

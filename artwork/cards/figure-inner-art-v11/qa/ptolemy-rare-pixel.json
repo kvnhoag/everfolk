@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\ptolemy-rare.png",
+  "sourceSha256": "8f52e0127868cd0960c021fff881ef481787989f2893230111576a75168f07d0",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\ptolemy-rare-coarse.png",
+  "baseSha256": "212f1107a9c94de137411f55d2bcdaeb1fe40c3830daa93d31b1a962592fbfd7",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\ptolemy-rare-coarse.json",
+  "baseQaSha256": "13d1815b4271d01e03fe934d938c2363c55f383beee642e35988ebfa6ce2ccfd",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\ptolemy-rare-face.json",
+  "configSha256": "71f58bd6d16ce1a0f2bf6feeef56cbc82d7fca47e5ce7f82a36b302626570c90",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          440,
+          205
+        ],
+        "radius": [
+          112,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\ptolemy-rare-pixel.png",
+  "outputSha256": "3170f0b118a1c76c8da3adda34ff5b1cf53837f3367f9590a17047fe819f9789",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "69b65ab3d042a55258a21223b43a58464fe32ce8d71a9dc4c882fb8c6cd09797",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\ptolemy-rare-face-mask.png",
+  "maskSha256": "af00b82a443aeda4766501cf2ab530b7d3944c19562487cd2051ae27ab3dd82a",
+  "maskPixelSha256": "4c9a54a34359bc726f576bad3fdc1072c54788b017fe08a638c7963e12b7939b",
+  "selectedDetailCells": 1101,
+  "retainedCoarseCells": 23399,
+  "affectedPixels": 39636,
+  "changedPixels": 39315,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "cleomenes",
+  "figureName": "Cleomenes of Naucratis",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Steward of Egyptian Grain Accounts",
+  "displayTitle": "Egyptian Grain Steward",
+  "subtitle": "Keeper of the Harvest Reckoning",
+  "bodyTitle": "The Harvest in Balance",
+  "bodyText": "A senior grain steward reconciles reports from granaries, markets, and transport routes into one accountable picture. Command of the whole system makes this office a powerful guardian of Egypt's reserves and obligations.",
+  "sourceRoleSlug": "cleomenes-epic",
+  "newArt": false,
+  "slug": "cleomenes-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Steward of Egyptian Grain Accounts",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-epic-male-pixel.png",
+  "sourceArtSlug": "cleomenes-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 98,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/cleomenes.svg",
+    "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A senior grain steward reconciles reports from granaries,",
+    "markets, and transport routes into one accountable picture.",
+    "Command of the whole system makes this office a powerful",
+    "guardian of Egypt's reserves and obligations."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-epic-male.svg",
+  "fittedArt": "assets/fitted/cleomenes-epic-male.png",
+  "overlaySvg": "source/overlays/cleomenes-epic-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+  "master": "masters/cleomenes-epic-male.vectorcraft",
+  "export": "exports/cleomenes-epic-male.png",
+  "thumbnail": "assets/cleomenes-epic-male-thumb.png",
+  "exportSha256": "13c900f4028694c4da5a5b7fb66c5859416e4e5b38d06a56803aaebcb4c34ee0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582575,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

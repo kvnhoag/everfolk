@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-epic-male",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Scholar of Stoic Ethics",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 62,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-epic-male.svg",
+  "fittedArt": "assets/fitted/zeno-epic-male.png",
+  "overlaySvg": "source/overlays/zeno-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+  "master": "masters/zeno-epic-male.vectorcraft",
+  "export": "exports/zeno-epic-male.png",
+  "thumbnail": "assets/zeno-epic-male-thumb.png",
+  "exportSha256": "82e35037b714ad66758b6b2449be96994018e5c989685ae8cd8e3f06238eaa07",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

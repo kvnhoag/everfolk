@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { fitMapCamera, zoomMapCamera, constrainMapCamera, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../client/models/skill-map-camera.ts";
+import { fitMapCamera, fitMapWidthCamera, zoomMapCamera, constrainMapCamera, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../client/models/skill-map-camera.ts";
 
 const canvas = { width: 1480, height: 1340 };
 test("zoom keeps the same skill-space point beneath an off-center pointer", () => {
@@ -19,6 +19,18 @@ test("fit centers the complete graph within desktop and phone viewports", () => 
     assert.ok(camera.x + canvas.width * camera.scale <= viewport.width - 12);
     assert.ok(camera.y + canvas.height * camera.scale <= viewport.height - 12);
     assert.equal(camera.x * 2 + canvas.width * camera.scale, viewport.width);
+  }
+});
+
+test("opening view fits the width and starts at the top regardless of tree height", () => {
+  for (const viewport of [{ width: 900, height: 400 }, { width: 320, height: 200 }]) {
+    const camera = fitMapWidthCamera(viewport, canvas);
+    assert.equal(camera.scale, (viewport.width - 24) / canvas.width);
+    assert.ok(Math.abs(camera.x - 12) < 1e-9);
+    assert.equal(camera.y, 12);
+    assert.ok(camera.y + canvas.height * camera.scale > viewport.height);
+    assert.deepEqual(constrainMapCamera(camera, viewport, canvas), camera);
+    assert.deepEqual(fitMapWidthCamera(viewport, { ...canvas, height: canvas.height * 2 }), camera);
   }
 });
 

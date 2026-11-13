@@ -1,0 +1,372 @@
+{
+  "assets": [
+    {
+      "slug": "aristotle-parent",
+      "figureId": "aristotle",
+      "kind": "parent",
+      "tier": null,
+      "title": "Aristotle",
+      "source": "source/aristotle-parent.png",
+      "prompt": "prompts/aristotle-parent.txt",
+      "final": "assets/aristotle-parent-pixel.png",
+      "qa": "qa/aristotle-parent-pixel.json",
+      "face": {
+        "center": [
+          389,
+          232
+        ],
+        "radius": [
+          135,
+          160
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-762c5662-4947-4a01-ae30-6188638037d6.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "aristotle-uncommon",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Lyceum Copyist",
+      "source": "source/aristotle-uncommon.png",
+      "prompt": "prompts/aristotle-uncommon.txt",
+      "final": "assets/aristotle-uncommon-pixel.png",
+      "qa": "qa/aristotle-uncommon-pixel.json",
+      "face": {
+        "center": [
+          409,
+          276
+        ],
+        "radius": [
+          112,
+          140
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-bf7d804b-1d72-4161-8eb4-9e6957ffd3bf.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "aristotle-rare",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Lyceum Researcher",
+      "source": "source/aristotle-rare.png",
+      "prompt": "prompts/aristotle-rare.txt",
+      "final": "assets/aristotle-rare-pixel.png",
+      "qa": "qa/aristotle-rare-pixel.json",
+      "face": {
+        "center": [
+          397,
+          232
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-d6583a15-bd74-4230-8ef5-81cb140ccd00.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "aristotle-epic",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Peripatetic Scholar",
+      "source": "source/aristotle-epic.png",
+      "prompt": "prompts/aristotle-epic.txt",
+      "final": "assets/aristotle-epic-pixel.png",
+      "qa": "qa/aristotle-epic-pixel.json",
+      "face": {
+        "center": [
+          375,
+          210
+        ],
+        "radius": [
+          105,
+          130
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-88ec3bf3-b252-4fa7-94c4-6d8d41e3b5a5.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "euclid-parent",
+      "figureId": "euclid",
+      "kind": "parent",
+      "tier": null,
+      "title": "Euclid",
+      "source": "source/euclid-parent.png",
+      "prompt": "prompts/euclid-parent.txt",
+      "final": "assets/euclid-parent-pixel.png",
+      "qa": "qa/euclid-parent-pixel.json",
+      "face": {
+        "center": [
+          384,
+          239
+        ],
+        "radius": [
+          133,
+          166
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-5372eead-ff5a-486a-b15e-aef0c5944b60.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "euclid-uncommon",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Geometrical Copyist",
+      "source": "source/euclid-uncommon.png",
+      "prompt": "prompts/euclid-uncommon.txt",
+      "final": "assets/euclid-uncommon-pixel.png",
+      "qa": "qa/euclid-uncommon-pixel.json",
+      "face": {
+        "center": [
+          367,
+          243
+        ],
+        "radius": [
+          108,
+          138
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-dbd80fd4-9d4e-4056-9a32-762e14a8ddf1.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "euclid-rare",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Proof Checker",
+      "source": "source/euclid-rare.png",
+      "prompt": "prompts/euclid-rare.txt",
+      "final": "assets/euclid-rare-pixel.png",
+      "qa": "qa/euclid-rare-pixel.json",
+      "face": {
+        "center": [
+          375,
+          238
+        ],
+        "radius": [
+          105,
+          130
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-79580a32-969f-4021-86f2-06131b8227de.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "euclid-epic",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Geometer of the Teaching Circle",
+      "source": "source/euclid-epic.png",
+      "prompt": "prompts/euclid-epic.txt",
+      "final": "assets/euclid-epic-pixel.png",
+      "qa": "qa/euclid-epic-pixel.json",
+      "face": {
+        "center": [
+          359,
+          199
+        ],
+        "radius": [
+          103,
+          130
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-82ef8941-f47d-4ce2-a9fc-a839b440c974.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "theophrastus-parent",
+      "figureId": "theophrastus",
+      "kind": "parent",
+      "tier": null,
+      "title": "Theophrastus",
+      "source": "source/theophrastus-parent.png",
+      "prompt": "prompts/theophrastus-parent.txt",
+      "final": "assets/theophrastus-parent-pixel.png",
+      "qa": "qa/theophrastus-parent-pixel.json",
+      "face": {
+        "center": [
+          311,
+          221
+        ],
+        "radius": [
+          125,
+          155
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-8a2008c5-b1cc-44cb-b02c-0b8be6364329.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "theophrastus-uncommon",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Plant Records Assistant",
+      "source": "source/theophrastus-uncommon.png",
+      "prompt": "prompts/theophrastus-uncommon.txt",
+      "final": "assets/theophrastus-uncommon-pixel.png",
+      "qa": "qa/theophrastus-uncommon-pixel.json",
+      "face": {
+        "center": [
+          329,
+          214
+        ],
+        "radius": [
+          111,
+          140
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-96eed7ab-4f6a-43de-939f-e76c5b526d5e.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "theophrastus-rare",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Comparative Plant Investigator",
+      "source": "source/theophrastus-rare.png",
+      "prompt": "prompts/theophrastus-rare.txt",
+      "final": "assets/theophrastus-rare-pixel.png",
+      "qa": "qa/theophrastus-rare-pixel.json",
+      "face": {
+        "center": [
+          336,
+          211
+        ],
+        "radius": [
+          105,
+          135
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-ce2e8f89-6bcd-4ad6-bf01-eca18c9a1031.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "theophrastus-epic",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Peripatetic Botanical Scholar",
+      "source": "source/theophrastus-epic.png",
+      "prompt": "prompts/theophrastus-epic.txt",
+      "final": "assets/theophrastus-epic-pixel.png",
+      "qa": "qa/theophrastus-epic-pixel.json",
+      "face": {
+        "center": [
+          329,
+          198
+        ],
+        "radius": [
+          107,
+          130
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-8ed4f3b5-d540-49d3-8b89-f371fd22db5d.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "zeno-parent",
+      "figureId": "zeno",
+      "kind": "parent",
+      "tier": null,
+      "title": "Zeno of Citium",
+      "source": "source/zeno-parent.png",
+      "prompt": "prompts/zeno-parent.txt",
+      "final": "assets/zeno-parent-pixel.png",
+      "qa": "qa/zeno-parent-pixel.json",
+      "face": {
+        "center": [
+          307,
+          187
+        ],
+        "radius": [
+          101,
+          127
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-2a18d5c3-3671-4873-b002-e9bdc169baaa.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "zeno-uncommon",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Student of the Stoa",
+      "source": "source/zeno-uncommon.png",
+      "prompt": "prompts/zeno-uncommon.txt",
+      "final": "assets/zeno-uncommon-pixel.png",
+      "qa": "qa/zeno-uncommon-pixel.json",
+      "face": {
+        "center": [
+          344,
+          240
+        ],
+        "radius": [
+          112,
+          138
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-92fb1a85-88d5-4da4-be66-c078bc984d4e.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "zeno-rare",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Stoic Discussion Leader",
+      "source": "source/zeno-rare.png",
+      "prompt": "prompts/zeno-rare.txt",
+      "final": "assets/zeno-rare-pixel.png",
+      "qa": "qa/zeno-rare-pixel.json",
+      "face": {
+        "center": [
+          344,
+          210
+        ],
+        "radius": [
+          103,
+          130
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-6641b4e6-09c2-422e-857e-2337f9ad98cb.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    },
+    {
+      "slug": "zeno-epic",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Scholar of Stoic Ethics",
+      "source": "source/zeno-epic.png",
+      "prompt": "prompts/zeno-epic.txt",
+      "final": "assets/zeno-epic-pixel.png",
+      "qa": "qa/zeno-epic-pixel.json",
+      "face": {
+        "center": [
+          353,
+          239
+        ],
+        "radius": [
+          108,
+          135
+        ]
+      },
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-25cb21b9-f844-4e9b-bd19-71085e753f3b.png",
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance"
+    }
+  ]
+}

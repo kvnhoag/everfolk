@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\eumenes-uncommon-male.png",
+  "sourceSha256": "ed39f8faae68aa1a42930a02ab71686c24b27923a58b319c1fe203db6093e033",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-uncommon-male-coarse.png",
+  "baseSha256": "80a4cef5f80f392b620310cd8411c70c4017b18200e2db7690c5d8d8bc5f47f4",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\eumenes-uncommon-male-coarse.json",
+  "baseQaSha256": "6737c81dffe0b12c4a56c1b80a09a78312db6ef9e41138437d6e906bb8e8338d",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\eumenes-uncommon-male-face.json",
+  "configSha256": "1ac963cce80cae4cf82ce5febde48fb7545c8cf38f190560b31fdebb4b27b752",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          315
+        ],
+        "radius": [
+          94,
+          118
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-uncommon-male-pixel.png",
+  "outputSha256": "2a80d7784d5f81f8d50be37a47139cbfbc321490756f93fda31f258f8f9ad910",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "411ba9c270a97010505e642a0a19166f6410f5ddf2b6ee64800beb463777fa24",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\eumenes-uncommon-male-face-mask.png",
+  "maskSha256": "f6fa3cb1fa2f0f100ce49b25507c0148ae356857170ac96479917eea16ac163e",
+  "maskPixelSha256": "36739e45bfaed28d1b033a59d98683e65c331f89208414ac200a3e519cd0b9c5",
+  "selectedDetailCells": 801,
+  "retainedCoarseCells": 23699,
+  "affectedPixels": 28836,
+  "changedPixels": 28574,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "pytheas",
+  "figureName": "Pytheas of Massalia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Navigation Observer",
+  "displayTitle": "Navigation Observer",
+  "subtitle": "Eyes of the Northern Voyage",
+  "bodyTitle": "A Course Through Signs",
+  "bodyText": "A navigation observer records winds, daylight, and the changing outline of the shore. Attentive comparison turns passing impressions into useful knowledge, helping the expedition find order beyond the waters it already knows.",
+  "sourceRoleSlug": "pytheas-rare",
+  "newArt": false,
+  "slug": "pytheas-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Navigation Observer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-rare-male-pixel.png",
+  "sourceArtSlug": "pytheas-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 42,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/pytheas.svg",
+    "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A navigation observer records winds, daylight, and the",
+    "changing outline of the shore. Attentive comparison turns",
+    "passing impressions into useful knowledge, helping the",
+    "expedition find order beyond the waters it already knows."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-rare-male.svg",
+  "fittedArt": "assets/fitted/pytheas-rare-male.png",
+  "overlaySvg": "source/overlays/pytheas-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "1135ab771cc67bc726f2373f45284ea31888a4ad1de6014d4682987d45a399a6",
+  "master": "masters/pytheas-rare-male.vectorcraft",
+  "export": "exports/pytheas-rare-male.png",
+  "thumbnail": "assets/pytheas-rare-male-thumb.png",
+  "exportSha256": "6e287cb1694df4807310315b4d8ec3bda8397297825d6602e809bfca49178443",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582575,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

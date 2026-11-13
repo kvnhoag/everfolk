@@ -1,0 +1,52 @@
+{
+  "slug": "euclid-parent",
+  "figureId": "euclid",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Euclid",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-parent-pixel.png",
+  "intendedEditionLimit": 10,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 010",
+  "collectionIndex": 15,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/euclid-parent.svg",
+  "fittedArt": "assets/fitted/euclid-parent.png",
+  "overlaySvg": "source/overlays/euclid-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+  "master": "masters/euclid-parent.vectorcraft",
+  "export": "exports/euclid-parent.png",
+  "thumbnail": "assets/euclid-parent-thumb.png",
+  "exportSha256": "a98c8ee5d475af5e52cade1e19723e3d3f78694e05818b79cf8bfa3ba112ce3d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 628992,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

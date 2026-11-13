@@ -1,0 +1,361 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "lysippos-epic-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 95.81865234375005,
+          "x": 720.18134765625,
+          "y": 1187.00025
+        },
+        "fill": "#eee4ce",
+        "id": 82,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition number live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "001/025",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 81,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 20.5693359375,
+          "width": 46.49072265625,
+          "x": 757.50927734375,
+          "y": 978.53125
+        },
+        "fill": "#372b40",
+        "id": 80,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EPIC",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 110.904,
+          "width": 641.9759999999999,
+          "x": 96,
+          "y": 1015.136
+        },
+        "fill": "#372b40",
+        "id": 79,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography / editable paragraph",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "A master sculptor unites proportion, gesture, and command\nof bronze into a figure that seems alive. Such judgment\ncarries the workshop's tradition forward, making technical\nmastery serve an unmistakable human presence.",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 39.759000000000015,
+          "width": 357.3960000000001,
+          "x": 96,
+          "y": 964.956
+        },
+        "fill": "#372b40",
+        "id": 78,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography title live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Presence Beyond the Model",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 367.11083984375,
+          "x": 266.444580078125,
+          "y": 144.59375
+        },
+        "fill": "#efd29a",
+        "id": 77,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card subtitle live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "BEARER OF THE MASTER'S CRAFT",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 85.00200000000001,
+          "width": 691.3620000000001,
+          "x": 104.31900000000002,
+          "y": 65.428
+        },
+        "fill": "#f0e6cf",
+        "id": 76,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          1,
+          83
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Master of Lysippan Form",
+        "visible": true
+      }
+    ],
+    "objects": 84,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\lysippos-epic-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "lysippos-epic-female.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 107,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "lysippos-epic-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          1,
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 84,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\lysippos-epic-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "lysippos-epic-female.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 107,
+    "units": "Pixels"
+  }
+}
