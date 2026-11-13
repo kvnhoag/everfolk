@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-common-female.png",
+  "sourceSha256": "fcf1b4236f13a6f06485f69592f5d657fea85358c4c656cf2470ab9a88f6525b",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      280,
+      350
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 36861,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    280,
+    350
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-common-female-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-common-female-coarse.png",
+  "logicalSha256": "2dcc4a360caf954e85f351d82200fba900d216405da13115388809d0e3a2ec0a",
+  "outputSha256": "32b50d462d42d5a3942302d109655cce3cbb08bec59fcd32798fe022a0a1d40c",
+  "logicalPixelSha256": "c85378191bbc9ba23f9a54f92fa54714acc1e151021615bddd395899396de0a0",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

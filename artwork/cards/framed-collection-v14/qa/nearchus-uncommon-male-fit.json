@@ -1,0 +1,81 @@
+{
+  "figureId": "nearchus",
+  "figureName": "Nearchus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Coastal Scout",
+  "displayTitle": "Coastal Scout",
+  "subtitle": "Eyes Along Nearchus' Shore",
+  "bodyTitle": "The Landing Found",
+  "bodyText": "A coastal scout studies headlands, landing places, and signs of fresh water ahead of the ships. Alert observation gives the fleet its next safe pause, making unfamiliar coastline a place it can approach.",
+  "sourceRoleSlug": "nearchus-uncommon",
+  "newArt": true,
+  "sceneBrief": "A coastal scout studies headland landmarks from a low ancient ship, holds a simple wax note tablet, practical tunic and cloak.",
+  "slug": "nearchus-uncommon-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Coastal Scout",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/nearchus-uncommon-male-pixel.png",
+  "sourceArtSlug": "nearchus-uncommon-male",
+  "editionLimit": null,
+  "collectionIndex": 103,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/nearchus.svg",
+    "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A coastal scout studies headlands, landing places, and",
+    "signs of fresh water ahead of the ships. Alert observation",
+    "gives the fleet its next safe pause, making unfamiliar",
+    "coastline a place it can approach."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-uncommon-male.svg",
+  "fittedArt": "assets/fitted/nearchus-uncommon-male.png",
+  "overlaySvg": "source/overlays/nearchus-uncommon-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "377dccc7e265c35e436249d401d057a30cc5a9c7196ad0b711a8396f5217fb8c",
+  "master": "masters/nearchus-uncommon-male.vectorcraft",
+  "export": "exports/nearchus-uncommon-male.png",
+  "thumbnail": "assets/nearchus-uncommon-male-thumb.png",
+  "exportSha256": "df62aea7b675fd2b1e972c21a9ac695e7f9caec0afecf929ce1f678c0d0864f2",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582249,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

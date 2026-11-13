@@ -1,0 +1,80 @@
+{
+  "figureId": "euclid",
+  "figureName": "Euclid",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Geometrical Copyist",
+  "displayTitle": "Geometrical Copyist",
+  "subtitle": "Scribe of the Elements",
+  "bodyTitle": "Every Mark Matters",
+  "bodyText": "A geometrical copyist preserves diagrams alongside their arguments, keeping each letter faithful to its place. Exact work lets another reader follow the same path, protecting a proof from the smallest careless mark.",
+  "sourceRoleSlug": "euclid-uncommon",
+  "newArt": false,
+  "slug": "euclid-uncommon-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Geometrical Copyist",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-uncommon-male-pixel.png",
+  "sourceArtSlug": "euclid-uncommon-male",
+  "editionLimit": null,
+  "collectionIndex": 22,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/euclid.svg",
+    "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A geometrical copyist preserves diagrams alongside their",
+    "arguments, keeping each letter faithful to its place. Exact",
+    "work lets another reader follow the same path, protecting a",
+    "proof from the smallest careless mark."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-uncommon-male.svg",
+  "fittedArt": "assets/fitted/euclid-uncommon-male.png",
+  "overlaySvg": "source/overlays/euclid-uncommon-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+  "master": "masters/euclid-uncommon-male.vectorcraft",
+  "export": "exports/euclid-uncommon-male.png",
+  "thumbnail": "assets/euclid-uncommon-male-thumb.png",
+  "exportSha256": "56ba55f2a56a1e349dbd67985fc689cd7d581608e37bb0f7101f57f9d8da380f",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582870,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

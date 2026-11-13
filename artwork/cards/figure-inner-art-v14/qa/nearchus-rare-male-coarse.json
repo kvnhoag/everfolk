@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-rare-male.png",
+  "sourceSha256": "2c4a2e8fd4186c01dd48b13321bf3c3c197ee43951b6903392384678739dff5d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      280,
+      350
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 36920,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    280,
+    350
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-rare-male-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-rare-male-coarse.png",
+  "logicalSha256": "9f7438bae31f8233130e557712db6dbcee7ec3cc2d234ca7503a8babf8f4b734",
+  "outputSha256": "84df42074ff01181ff79eda83e8ad3d4e083539c85bd3a2b4436d3bd595c6068",
+  "logicalPixelSha256": "ddb4d803c5ae5338f7c86c5d62ad088654e41328342c85b970cca0312f8e03f1",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

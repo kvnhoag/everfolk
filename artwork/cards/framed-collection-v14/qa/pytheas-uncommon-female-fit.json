@@ -1,0 +1,80 @@
+{
+  "figureId": "pytheas",
+  "figureName": "Pytheas of Massalia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Expedition Provisioner",
+  "displayTitle": "Expedition Provisioner",
+  "subtitle": "Keeper of Pytheas' Stores",
+  "bodyTitle": "Endurance for the Unknown",
+  "bodyText": "An expedition provisioner measures food, water, and the demands of another day at sea. Careful stores give the crew room to endure uncertainty, supporting discovery with the practical strength of preparation.",
+  "sourceRoleSlug": "pytheas-uncommon",
+  "newArt": false,
+  "slug": "pytheas-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Expedition Provisioner",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-uncommon-female-pixel.png",
+  "sourceArtSlug": "pytheas-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 41,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/pytheas.svg",
+    "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "An expedition provisioner measures food, water, and the",
+    "demands of another day at sea. Careful stores give the crew",
+    "room to endure uncertainty, supporting discovery with the",
+    "practical strength of preparation."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-uncommon-female.svg",
+  "fittedArt": "assets/fitted/pytheas-uncommon-female.png",
+  "overlaySvg": "source/overlays/pytheas-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+  "master": "masters/pytheas-uncommon-female.vectorcraft",
+  "export": "exports/pytheas-uncommon-female.png",
+  "thumbnail": "assets/pytheas-uncommon-female-thumb.png",
+  "exportSha256": "f84b33d3b5d7b7a8412062efc81d44893f4a37a2b377c56189644756f492b9f9",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582599,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -269,6 +269,7 @@ export function MarketBody({
                 portraitMedia={row.portraitMedia}
                 rarity={row.rarity}
                 rarityLabel={row.rarityLabel}
+                editionText={row.editionText}
                 actionName={row.actionName}
                 affection={row.affection}
                 priceNear={row.priceText ? row.priceText.replace(" NEAR", "") : undefined}

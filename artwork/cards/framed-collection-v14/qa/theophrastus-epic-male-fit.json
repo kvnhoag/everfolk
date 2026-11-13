@@ -1,0 +1,81 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Peripatetic Botanical Scholar",
+  "displayTitle": "Botanical Scholar",
+  "subtitle": "A Voice of Theophrastus' School",
+  "bodyTitle": "A Living Body of Knowledge",
+  "bodyText": "A botanical scholar brings many observations together and teaches others how to question them. Broad understanding gives the garden a lasting intellectual life, carrying Theophrastus' investigation beyond a single place or season.",
+  "sourceRoleSlug": "theophrastus-epic",
+  "newArt": false,
+  "slug": "theophrastus-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Peripatetic Botanical Scholar",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-male-pixel.png",
+  "sourceArtSlug": "theophrastus-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 71,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A botanical scholar brings many observations together and",
+    "teaches others how to question them. Broad understanding",
+    "gives the garden a lasting intellectual life, carrying",
+    "Theophrastus' investigation beyond a single place or",
+    "season."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-epic-male.svg",
+  "fittedArt": "assets/fitted/theophrastus-epic-male.png",
+  "overlaySvg": "source/overlays/theophrastus-epic-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "157526ad1111cbebc159563e3e10c3b6787a5144305168ed7edf23b876094c29",
+  "master": "masters/theophrastus-epic-male.vectorcraft",
+  "export": "exports/theophrastus-epic-male.png",
+  "thumbnail": "assets/theophrastus-epic-male-thumb.png",
+  "exportSha256": "18163ceb20c0d9e7fcacf08aceb0643a8bd83818ffc0eaf2bb5a0e2b8ccbd4eb",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582499,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

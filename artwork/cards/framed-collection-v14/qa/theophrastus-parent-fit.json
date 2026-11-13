@@ -1,0 +1,83 @@
+{
+  "slug": "theophrastus-parent",
+  "figureId": "theophrastus",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Theophrastus",
+  "subtitle": "Scholar of the Living World",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-parent-pixel.png",
+  "collectionIndex": 64,
+  "owner": null,
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "botanical-sprig",
+  "bodyTitle": "Nature Closely Observed",
+  "bodyText": "Aristotle's colleague and successor at the Lyceum, Theophrastus explored philosophy and the natural world. His surviving botanical treatises gathered and compared plant knowledge, establishing a foundation for the systematic study of plants.",
+  "sources": [
+    {
+      "title": "Theophrastus — Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/theophrastus/"
+    }
+  ],
+  "canonicalTitle": "Theophrastus",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Aristotle's colleague and successor at the Lyceum,",
+    "Theophrastus explored philosophy and the natural world. His",
+    "surviving botanical treatises gathered and compared plant",
+    "knowledge, establishing a foundation for the systematic",
+    "study of plants."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-parent.svg",
+  "fittedArt": "assets/fitted/theophrastus-parent.png",
+  "overlaySvg": "source/overlays/theophrastus-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+  "master": "masters/theophrastus-parent.vectorcraft",
+  "export": "exports/theophrastus-parent.png",
+  "thumbnail": "assets/theophrastus-parent-thumb.png",
+  "exportSha256": "2784057b4df4de7fd7cf003a75f8bc320452f30462661e049b4432b6fe1280b9",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582499,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

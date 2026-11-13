@@ -1,4 +1,4 @@
-import type { AccomplishmentRecord, LifeState, WorldPack } from "../../src/types.ts";
+import type { AccomplishmentRecord, CharacterSex, LifeState, WorldPack } from "../../src/types.ts";
 import type { StorageLike } from "../types/session.ts";
 import { getAccomplishments } from "../../src/legacy.ts";
 import { readEverfolkStorage } from "../lib/brand-storage.ts";
@@ -12,6 +12,8 @@ export interface LegacyEntry {
   worldFingerprint: string;
   seed: string;
   characterName: string;
+  /** Optional for compatibility with older collections, which did not save it. */
+  characterSex?: CharacterSex;
   worldTitle: string;
   routeTitle?: string;
   accomplishment: AccomplishmentRecord;
@@ -45,6 +47,7 @@ function validEntry(value: unknown): value is LegacyEntry {
     !Number.isSafeInteger(record.year) || record.year === 0 || !Array.isArray(record.people) || !record.people.every(value => text(value, 200))) return false;
   if (entry.verifiedRunId !== undefined && !text(entry.verifiedRunId, 300)) return false;
   if (entry.routeTitle !== undefined && !text(entry.routeTitle, 200)) return false;
+  if (entry.characterSex !== undefined && entry.characterSex !== "male" && entry.characterSex !== "female") return false;
   if (record.figure !== undefined && (!record.figure || typeof record.figure !== "object" ||
     !text(record.figure.id, 100) || !/^[a-z][a-z0-9-]*$/.test(record.figure.id) ||
     !text(record.figure.name, 100) || !record.figure.name.length)) return false;
@@ -74,6 +77,7 @@ export function collectLegacyEntries(world: WorldPack, life: LifeState, previous
     entries.set(key, {
       key, lifeKey, worldId: life.worldId, worldVersion: life.worldVersion, worldFingerprint: life.worldFingerprint,
       seed: life.seed, characterName: life.character?.name ?? "Your character", worldTitle: world.title,
+      ...(life.character?.sex ? { characterSex: life.character.sex } : existing?.characterSex ? { characterSex: existing.characterSex } : {}),
       routeTitle: world.legacy?.routes.find(route => route.id === accomplishment.routeId)?.title ?? accomplishment.routeId,
       accomplishment: structuredClone(accomplishment),
       ...(existing?.verifiedRunId || verifiedRunId ? { verifiedRunId: existing?.verifiedRunId ?? verifiedRunId } : {}),

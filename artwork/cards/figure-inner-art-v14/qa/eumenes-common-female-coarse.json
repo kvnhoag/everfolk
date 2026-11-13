@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\eumenes-common-female.png",
+  "sourceSha256": "5e15c8fd501b93faf716974989b432d84db73649687e07fa45e4ccd5eee22a10",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      280,
+      350
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 29686,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    280,
+    350
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-common-female-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\eumenes-common-female-coarse.png",
+  "logicalSha256": "4013f89702eb9b7119a59802488fb621c4aa1732a33c3d86cad2fb1d0ada9b18",
+  "outputSha256": "01f5a9155fef9567fc18ff5328921d5f0bea9f2b8d896aa36dc9f030ec6100e5",
+  "logicalPixelSha256": "485fc2422f6b03a879203802632803297d72775428506ec7ad8ecfdcd41752f7",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

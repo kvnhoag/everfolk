@@ -1,0 +1,78 @@
+{
+  "slug": "lysippos-parent",
+  "figureId": "lysippos",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Lysippos",
+  "subtitle": "Master Sculptor of Sikyon",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-parent-pixel.png",
+  "collectionIndex": 28,
+  "owner": null,
+  "figureName": "Lysippos",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "chisel-bust",
+  "bodyTitle": "Bronze Given Presence",
+  "bodyText": "A celebrated sculptor from Sikyon, Lysippos worked chiefly in bronze and portrayed Alexander the Great. His lost originals survive through ancient testimony and later copies, preserving the influence of an extraordinary workshop.",
+  "sources": [
+    {
+      "title": "Lysippos — Getty Union List of Artist Names",
+      "url": "https://www.getty.edu/vow/ULANFullDisplay?find=&nation=&role=&subjectid=500012332"
+    },
+    {
+      "title": "Power and Pathos: exhibition checklist — J. Paul Getty Museum",
+      "url": "https://www.getty.edu/art/exhibitions/power_pathos/BRONZES_EXHIBITION_CHECKLIST.pdf"
+    }
+  ],
+  "canonicalTitle": "Lysippos",
+  "editionLimit": 10,
+  "iconSource": {
+    "file": "source/icons/lysippos.svg",
+    "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/010",
+  "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+  "bodySize": 24,
+  "bodyLines": [
+    "A celebrated sculptor from Sikyon, Lysippos worked chiefly in",
+    "bronze and portrayed Alexander the Great. His lost originals",
+    "survive through ancient testimony and later copies, preserving",
+    "the influence of an extraordinary workshop."
+  ],
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/lysippos-parent.svg",
+  "fittedArt": "assets/fitted/lysippos-parent.png",
+  "overlaySvg": "source/overlays/lysippos-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+  "master": "masters/lysippos-parent.vectorcraft",
+  "export": "exports/lysippos-parent.png",
+  "thumbnail": "assets/lysippos-parent-thumb.png",
+  "exportSha256": "833fb5c589c4a2f112b3402279332e683dca0ada831ca8b925ebb0c3199dd7bf",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 599644,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

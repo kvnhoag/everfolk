@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\cleomenes-common-female.png",
+  "sourceSha256": "b59d4f5d4e10aefe9235c1d054c41426553955fee8c1115ee4dd39eee7801c48",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      280,
+      350
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 23275,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    280,
+    350
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\cleomenes-common-female-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\cleomenes-common-female-coarse.png",
+  "logicalSha256": "bf9ec0e29864acf30c637102b11265c55203f51872f7ce05cfdae580a34ef7f8",
+  "outputSha256": "a11a620bcf7d6e8b7b8b7598009fd538691fcfe5f3b9e7e8658866c1360c3b5b",
+  "logicalPixelSha256": "d3ec16110eb7615a79d4950443dcb5fcd352105fea47057cf75fa4096fa795be",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

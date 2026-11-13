@@ -1,0 +1,80 @@
+{
+  "figureId": "euclid",
+  "figureName": "Euclid",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Geometer of the Teaching Circle",
+  "displayTitle": "Geometer of the Circle",
+  "subtitle": "Heir to the Elements",
+  "bodyTitle": "Reason Made Visible",
+  "bodyText": "A teaching geometer leads others from a simple construction to an unexpected truth. Mastery turns difficult reasoning into a path others can follow, extending Euclid's enduring architecture one clear proof at a time.",
+  "sourceRoleSlug": "euclid-epic",
+  "newArt": false,
+  "slug": "euclid-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Geometer of the Teaching Circle",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-epic-male-pixel.png",
+  "sourceArtSlug": "euclid-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 26,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/euclid.svg",
+    "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A teaching geometer leads others from a simple construction",
+    "to an unexpected truth. Mastery turns difficult reasoning",
+    "into a path others can follow, extending Euclid's enduring",
+    "architecture one clear proof at a time."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-epic-male.svg",
+  "fittedArt": "assets/fitted/euclid-epic-male.png",
+  "overlaySvg": "source/overlays/euclid-epic-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "42cf2e57719d066b9b755f5ea91daff7210cbc5e81ad265d98bfbca0d252e7f8",
+  "master": "masters/euclid-epic-male.vectorcraft",
+  "export": "exports/euclid-epic-male.png",
+  "thumbnail": "assets/euclid-epic-male-thumb.png",
+  "exportSha256": "ebf04ff12fdd4092f9779a32bae7fbc4ffc38361492e3d8a7ea9eb17dd23501e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582822,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Trusted Campaign Commander",
+  "displayTitle": "Trusted Commander",
+  "subtitle": "The King's Proven Companion",
+  "bodyTitle": "Command Worth Following",
+  "bodyText": "A trusted commander bears responsibility for troops when orders become dust, noise, and danger. Courage joined to judgment makes the king's design hold together, earning loyalty that survives the hardest march.",
+  "sourceRoleSlug": "alexander-epic",
+  "newArt": false,
+  "slug": "alexander-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Trusted Campaign Commander",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-male-pixel.png",
+  "sourceArtSlug": "alexander-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 8,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A trusted commander bears responsibility for troops when",
+    "orders become dust, noise, and danger. Courage joined to",
+    "judgment makes the king's design hold together, earning",
+    "loyalty that survives the hardest march."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-epic-male.svg",
+  "fittedArt": "assets/fitted/alexander-epic-male.png",
+  "overlaySvg": "source/overlays/alexander-epic-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+  "master": "masters/alexander-epic-male.vectorcraft",
+  "export": "exports/alexander-epic-male.png",
+  "thumbnail": "assets/alexander-epic-male-thumb.png",
+  "exportSha256": "2de4da87e48a5111f7bab590dbd1e5071696ba63068af3dedaf4f73ac1578b61",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582456,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -5,6 +5,10 @@ export interface BoosterCardView {
   rarity: number;
   art: string;
   sub: string;
+  /** Complete approved card face, without a baked example edition number. */
+  framedArt?: string;
+  /** A recorded serial or an unassigned placeholder; never inferred from a token id. */
+  editionText?: string;
 }
 
 export interface BoosterCollectionPack {

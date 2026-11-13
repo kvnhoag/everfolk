@@ -1,0 +1,80 @@
+{
+  "figureId": "demetrius",
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Siege Workshop Assistant",
+  "displayTitle": "Siege Workshop Assistant",
+  "subtitle": "Artisan of the Besieger",
+  "bodyTitle": "Every Joint Holds",
+  "bodyText": "A workshop assistant shapes fittings and checks the ropes that larger engines depend upon. Exact preparation keeps immense forces under control, making the smallest sound component a quiet ally against the strongest wall.",
+  "sourceRoleSlug": "demetrius-uncommon",
+  "newArt": false,
+  "slug": "demetrius-uncommon-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Siege Workshop Assistant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-uncommon-male-pixel.png",
+  "sourceArtSlug": "demetrius-uncommon-male",
+  "editionLimit": null,
+  "collectionIndex": 58,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A workshop assistant shapes fittings and checks the ropes",
+    "that larger engines depend upon. Exact preparation keeps",
+    "immense forces under control, making the smallest sound",
+    "component a quiet ally against the strongest wall."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-uncommon-male.svg",
+  "fittedArt": "assets/fitted/demetrius-uncommon-male.png",
+  "overlaySvg": "source/overlays/demetrius-uncommon-male.svg",
+  "titleSize": 60,
+  "sourceArtSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+  "master": "masters/demetrius-uncommon-male.vectorcraft",
+  "export": "exports/demetrius-uncommon-male.png",
+  "thumbnail": "assets/demetrius-uncommon-male-thumb.png",
+  "exportSha256": "cce29d0fa16172ac16c96444f8833b098f7204ec1eb3b7491b61eccb228c4a2c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582633,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

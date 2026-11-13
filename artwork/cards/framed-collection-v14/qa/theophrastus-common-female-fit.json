@@ -1,0 +1,81 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Garden Attendant",
+  "displayTitle": "Garden Attendant",
+  "subtitle": "Tending the Scholar's Garden",
+  "bodyTitle": "Care Before Discovery",
+  "bodyText": "A garden attendant waters specimens and notices the small changes of another growing day. Patient care keeps living examples within reach, giving the school's larger questions roots in plants that can be observed.",
+  "sourceRoleSlug": "theophrastus-common",
+  "newArt": true,
+  "sceneBrief": "A modest garden attendant waters or tends several plant specimens in a Greek courtyard garden; simple tunic, no master scholar's collection of instruments.",
+  "slug": "theophrastus-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Garden Attendant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/theophrastus-common-female-pixel.png",
+  "sourceArtSlug": "theophrastus-common-female",
+  "editionLimit": null,
+  "collectionIndex": 66,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A garden attendant waters specimens and notices the small",
+    "changes of another growing day. Patient care keeps living",
+    "examples within reach, giving the school's larger questions",
+    "roots in plants that can be observed."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-common-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-common-female.png",
+  "overlaySvg": "source/overlays/theophrastus-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "87702b53abf2a6ce7193ebcc2a8f83c2f2573cb3a62717ad988b400c26db3e1c",
+  "master": "masters/theophrastus-common-female.vectorcraft",
+  "export": "exports/theophrastus-common-female.png",
+  "thumbnail": "assets/theophrastus-common-female-thumb.png",
+  "exportSha256": "a12a40c1f5c1054c47c0385cba51bb1554444743a3cd2e404a8c4e1f064a34e6",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582571,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

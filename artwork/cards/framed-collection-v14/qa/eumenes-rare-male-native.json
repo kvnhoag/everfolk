@@ -1,0 +1,361 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "eumenes-rare-male.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 92.34257812500005,
+          "x": 723.657421875,
+          "y": 1187.00025
+        },
+        "fill": "#eee4ce",
+        "id": 80,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition number live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "001/100",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 79,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 20.5693359375,
+          "width": 52.8408203125,
+          "x": 751.1591796875,
+          "y": 978.53125
+        },
+        "fill": "#203849",
+        "id": 78,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "RARE",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 110.904,
+          "width": 661.488,
+          "x": 96,
+          "y": 1015.136
+        },
+        "fill": "#203849",
+        "id": 77,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography / editable paragraph",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "A campaign correspondent compares dispatches with the\nmovement of forces and the needs of command. Clear writing\ndraws scattered events into focus, allowing distant\nofficers to act with a better understanding of one another.",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 39.759000000000015,
+          "width": 343.099,
+          "x": 96,
+          "y": 964.956
+        },
+        "fill": "#203849",
+        "id": 76,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography title live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "The Reports Become Clear",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 350.8974609375,
+          "x": 274.55126953125,
+          "y": 144.59375
+        },
+        "fill": "#cfedf1",
+        "id": 75,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card subtitle live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "VOICE ACROSS EUMENES' LINES",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 87.744,
+          "width": 733.376,
+          "x": 83.31200000000001,
+          "y": 64.21600000000001
+        },
+        "fill": "#f0e6cf",
+        "id": 74,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          1,
+          81
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Campaign Correspondent",
+        "visible": true
+      }
+    ],
+    "objects": 82,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\eumenes-rare-male.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "eumenes-rare-male.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 341,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "eumenes-rare-male.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          1,
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 82,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\eumenes-rare-male.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "eumenes-rare-male.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 341,
+    "units": "Pixels"
+  }
+}

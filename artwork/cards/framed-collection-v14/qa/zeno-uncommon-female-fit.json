@@ -1,0 +1,80 @@
+{
+  "figureId": "zeno",
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Student of the Stoa",
+  "displayTitle": "Student of the Stoa",
+  "subtitle": "Pupil of Zeno",
+  "bodyTitle": "Judgment Under Examination",
+  "bodyText": "A student of the Stoa tests inherited opinions against reason and daily conduct. Perseverance gives the lesson substance, beginning the difficult work of making thoughtful judgment stronger than passing fear or appetite.",
+  "sourceRoleSlug": "zeno-uncommon",
+  "newArt": false,
+  "slug": "zeno-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Student of the Stoa",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-uncommon-female-pixel.png",
+  "sourceArtSlug": "zeno-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 77,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A student of the Stoa tests inherited opinions against",
+    "reason and daily conduct. Perseverance gives the lesson",
+    "substance, beginning the difficult work of making",
+    "thoughtful judgment stronger than passing fear or appetite."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-uncommon-female.svg",
+  "fittedArt": "assets/fitted/zeno-uncommon-female.png",
+  "overlaySvg": "source/overlays/zeno-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "2b34cf531ac407f5bc1ab14fcceb8c423190fe782e1b43904f68860c67bb916a",
+  "master": "masters/zeno-uncommon-female.vectorcraft",
+  "export": "exports/zeno-uncommon-female.png",
+  "thumbnail": "assets/zeno-uncommon-female-thumb.png",
+  "exportSha256": "7a90fbbcf0a16d3205c6fbb774f2d7fc9086568035d3b1bac2830a1de25100be",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582450,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Camp Runner",
+  "displayTitle": "Camp Runner",
+  "subtitle": "Messenger of the Host",
+  "bodyTitle": "The Order Arrives",
+  "bodyText": "A camp runner carries dispatches between scattered tents and marching units. Speed and dependable memory turn a commander's distant intention into action, keeping the great host moving as one.",
+  "sourceRoleSlug": "alexander-common",
+  "newArt": true,
+  "sceneBrief": "A plainly dressed camp runner carries a sealed dispatch between Macedonian campaign tents; no ornate command armour.",
+  "slug": "alexander-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Camp Runner",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/alexander-common-male-pixel.png",
+  "sourceArtSlug": "alexander-common-male",
+  "editionLimit": null,
+  "collectionIndex": 2,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A camp runner carries dispatches between scattered tents",
+    "and marching units. Speed and dependable memory turn a",
+    "commander's distant intention into action, keeping the",
+    "great host moving as one."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-common-male.svg",
+  "fittedArt": "assets/fitted/alexander-common-male.png",
+  "overlaySvg": "source/overlays/alexander-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "b74eac03c0586eb3aa22b6d6908a0ad8e709ebf868a0145ca40c747440467870",
+  "master": "masters/alexander-common-male.vectorcraft",
+  "export": "exports/alexander-common-male.png",
+  "thumbnail": "assets/alexander-common-male-thumb.png",
+  "exportSha256": "5932f25ab9c5a455cb8fc242975ce1a5b997fd445b025958db655e447edc57ff",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582528,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

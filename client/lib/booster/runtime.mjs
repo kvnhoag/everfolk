@@ -5,6 +5,7 @@ import {isCompact,cardLayout,departure,legacyReviewLayout} from './layout.mjs';
 import {REFERENCE_MOTION,referenceLaunchRank,sampleReferenceCard,referenceImpactTime,advanceSpring,cardDepthOrder} from './motion.mjs';
 import {canCommitTear,tearProgress} from './tear-input.mjs';
 import {resolveBoosterLabels,reviewHint} from './labels.mjs';
+import {drawApprovedCardFace} from './card-face.mjs';
 
 import {RAINBOW,rainbowPalette,sampleRainbowState,rainbowPoint} from './rainbow.mjs';
 
@@ -54,6 +55,7 @@ function tex(canvas,crisp=false){const t=new THREE.CanvasTexture(canvas);t.color
 function loadImage(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(Error('An embedded artwork could not be decoded.'));i.src=src;});}
 function frontCanvas(person,level){
  const key=person.tile+':'+level;if(cardsFront.has(key))return cardsFront.get(key);
+ if(person.framedArt){const c=drawApprovedCardFace(makeCanvas(900,1260),images.cards[person.tile],person.editionText);cardsFront.set(key,c);return c;}
  const c=makeCanvas(768,1064),g=c.getContext('2d'),color=tiers[level].color;
  g.fillStyle=level===4?'#c99b47':'#afc4bf';rounded(g,0,0,768,1064,32);g.fill();
  g.fillStyle='#103d3d';rounded(g,7,7,754,1050,27);g.fill();g.save();rounded(g,17,17,734,1030,20);g.clip();
@@ -83,7 +85,7 @@ function buildCard(person,level,index){
  const shape=roundedShape(2.05,2.88,.085);const geo=new THREE.ExtrudeGeometry(shape,{depth:.042,bevelEnabled:true,bevelSegments:3,steps:1,bevelSize:.018,bevelThickness:.012,curveSegments:10});geo.translate(0,0,-.023);
  const clipPlane=new THREE.Plane(new THREE.Vector3(0,1,0),100);
  const edge=new THREE.Mesh(geo,keepMat(new THREE.MeshStandardMaterial({color:level===4?'#cb9d48':tiers[level].color,roughness:.34,metalness:.68,transparent:true,depthTest:false,depthWrite:false,clippingPlanes:[clipPlane]})));edge.castShadow=true;group.add(edge);
- const face=new THREE.Mesh(faceGeometry(2.035,2.865),keepMat(new THREE.MeshBasicMaterial({map:tex(frontCanvas(person,level)),transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));face.position.z=.035;group.add(face);
+ const face=new THREE.Mesh(faceGeometry(2.035,person.framedArt?2.849:2.865),keepMat(new THREE.MeshBasicMaterial({map:tex(frontCanvas(person,level),Boolean(person.framedArt)),transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));face.position.z=.035;group.add(face);
  const back=new THREE.Mesh(faceGeometry(2.035,2.865),keepMat(new THREE.MeshBasicMaterial({map:sharedBack,transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));back.position.z=-.043;back.rotation.y=Math.PI;group.add(back);
  const sheen=new THREE.Mesh(faceGeometry(2.03,2.86),keepMat(new THREE.MeshBasicMaterial({map:sheenTexture(level),transparent:true,opacity:0,depthTest:false,depthWrite:false,toneMapped:false,blending:THREE.AdditiveBlending})));sheen.position.z=.041;group.add(sheen);
  for(const surface of [face,back,sheen])surface.material.clippingPlanes=[clipPlane];
@@ -401,7 +403,7 @@ function bindUI(){
  window.addEventListener('resize',resize);window.addEventListener('blur',()=>{drag.active=false;held=false;hovered=-1;keyboardTearHeld=false;if(phase==='sealed')gsap.to(foil,{flex:0,duration:.3});});
 }
 async function boot(){const loadingNote=$('loading')?.querySelector('p');if(loadingNote)loadingNote.textContent=labels.loading;try{
- const assets=await Promise.all([loadImage(A.pack),loadImage(A.logo),Promise.all(people.map(person=>loadImage(person.art))),document.fonts.load('600 40px Eczar')]);if(disposed)return;images.pack=assets[0];images.logo=assets[1];images.cards=assets[2];
+ const assets=await Promise.all([loadImage(A.pack),loadImage(A.logo),Promise.all(people.map(person=>loadImage(person.framedArt||person.art))),document.fonts.load('600 40px Eczar'),document.fonts.load('400 21px Inter')]);if(disposed)return;images.pack=assets[0];images.logo=assets[1];images.cards=assets[2];
  try{init3D();}catch(err){renderFailed=true;console.warn('WebGL unavailable; using accessible cards.',err);toast('3D is unavailable in this browser. Showing accessible cards.');}
  bindUI();updateSound();legacyCount=config.legacyCount||0;$('legacy-count').textContent='Legacy · '+legacyCount;ready=true;resetPack(false);$('stage').setAttribute('aria-busy','false');$('loading').style.opacity='0';setTimeout(()=>$('loading').hidden=true,reduced?0:430);requestAnimationFrame(frame);
  if(config.reviewIndices?.length){if(renderFailed){fallbackOpen();}selection=new Set(config.reviewIndices);reviewIndices=[...config.reviewIndices];cardList.forEach(c=>{Object.assign(c.base,cardPositions(c.index),{reveal:1});c.group.visible=true;c.clipPlane.constant=100;});if(pack)pack.visible=false;openSavedReview();}

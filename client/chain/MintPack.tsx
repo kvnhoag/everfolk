@@ -269,6 +269,7 @@ export default function MintPack({
                     pixelSeed={`${pack.evidence_hash}:${slot}`}
                     rarity={card.rarity}
                     rarityLabel={rarityLabel(card.rarity)}
+                    editionText={nextEditionLabel(card)}
                     badge={isFlipped ? nextEditionLabel(card) ?? undefined : undefined}
                     actionName={actionName(card.action_id)}
                     actionDescription={actionDescription(card.action_id)}

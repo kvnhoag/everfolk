@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-male.png",
+  "sourceSha256": "c07e7c912fdb18cfb1ba80afc19735b6dc9947503c62c61003a1fab6ea4db67e",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-male-coarse.png",
+  "baseSha256": "d7e6b64e1ff8d68bc8295933357cf426d295b5164767255011a30be2b832edc0",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-male-coarse.json",
+  "baseQaSha256": "e1991efd2df26f28f875c4c2429ea0229350e9cda806b1aa8e2a6d202a9383e7",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-male-face.json",
+  "configSha256": "c60a25ced3975406b9fa800244722ba621a23dd13e9d9d201b2210cdc0188275",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          404,
+          242
+        ],
+        "radius": [
+          105,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-male-pixel.png",
+  "outputSha256": "b74eac03c0586eb3aa22b6d6908a0ad8e709ebf868a0145ca40c747440467870",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "0749ddf0d3a3430e5f0c0ff2bc0c7a9af8f9c714eab27550319c22f06e525bc0",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-male-face-mask.png",
+  "maskSha256": "d4d45dcd32b357d5be35f0c557b96514fdf86c1926466c2af24a79510d602176",
+  "maskPixelSha256": "bbf016a5ac1e1d42d87caccaaee7bef13a3157ff7b340eabb3dd439929f1cead",
+  "selectedDetailCells": 1024,
+  "retainedCoarseCells": 23476,
+  "affectedPixels": 36864,
+  "changedPixels": 36383,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

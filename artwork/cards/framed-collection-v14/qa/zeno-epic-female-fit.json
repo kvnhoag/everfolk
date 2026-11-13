@@ -1,0 +1,80 @@
+{
+  "figureId": "zeno",
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Scholar of Stoic Ethics",
+  "displayTitle": "Scholar of Stoic Ethics",
+  "subtitle": "Bearer of the Stoa's Teaching",
+  "bodyTitle": "Conviction Made Conduct",
+  "bodyText": "A scholar of Stoic ethics connects rigorous argument with the demands of a human life. Authority grows through consistency, giving the school a persuasive witness that reason can guide action when fortune turns.",
+  "sourceRoleSlug": "zeno-epic",
+  "newArt": false,
+  "slug": "zeno-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Scholar of Stoic Ethics",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-female-pixel.png",
+  "sourceArtSlug": "zeno-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 81,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A scholar of Stoic ethics connects rigorous argument with",
+    "the demands of a human life. Authority grows through",
+    "consistency, giving the school a persuasive witness that",
+    "reason can guide action when fortune turns."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-epic-female.svg",
+  "fittedArt": "assets/fitted/zeno-epic-female.png",
+  "overlaySvg": "source/overlays/zeno-epic-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "735e92e7d4f915b7ba2d998c018a3128f949575d97b329d1df3539b9a0712b1f",
+  "master": "masters/zeno-epic-female.vectorcraft",
+  "export": "exports/zeno-epic-female.png",
+  "thumbnail": "assets/zeno-epic-female-thumb.png",
+  "exportSha256": "7011afb2e434c7f258374c5551293b24569d66612c739f1e488d7b10cc1f6403",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582402,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

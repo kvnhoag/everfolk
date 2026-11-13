@@ -1,0 +1,81 @@
+{
+  "figureId": "cleomenes",
+  "figureName": "Cleomenes of Naucratis",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Grain Supply Auditor",
+  "displayTitle": "Grain Supply Auditor",
+  "subtitle": "Examiner of the Granaries",
+  "bodyTitle": "What the Ledger Conceals",
+  "bodyText": "A grain auditor compares the ledger with the storehouse and questions what fails to agree. Independent scrutiny gives administration its necessary resistance, exposing the costly distance between a promising account and an empty bin.",
+  "sourceRoleSlug": "cleomenes-rare",
+  "newArt": false,
+  "slug": "cleomenes-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Grain Supply Auditor",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-rare-male-pixel.png",
+  "sourceArtSlug": "cleomenes-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 96,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/cleomenes.svg",
+    "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A grain auditor compares the ledger with the storehouse and",
+    "questions what fails to agree. Independent scrutiny gives",
+    "administration its necessary resistance, exposing the",
+    "costly distance between a promising account and an empty",
+    "bin."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-rare-male.svg",
+  "fittedArt": "assets/fitted/cleomenes-rare-male.png",
+  "overlaySvg": "source/overlays/cleomenes-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "17ee5b4dfee11c0d3839de1df156c8f01628e54f9553a6e616bcb636bef77a95",
+  "master": "masters/cleomenes-rare-male.vectorcraft",
+  "export": "exports/cleomenes-rare-male.png",
+  "thumbnail": "assets/cleomenes-rare-male-thumb.png",
+  "exportSha256": "e2db502b8202d88e274c9fb47772807e8231fb0e3450fd6da82de83a0514fb86",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582599,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

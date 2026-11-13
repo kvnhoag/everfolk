@@ -70,3 +70,22 @@ test("old packs add no fabricated achievements and blocked storage reports failu
   assert.throws(() => readLegacyEntries(blocked), /cannot access/);
   assert.throws(() => persistLegacyEntries(blocked, collectLegacyEntries(pack, accomplished("quota"), [])), /could not save/);
 });
+
+test("new legacy records retain character sex for artwork while old records remain valid without it", () => {
+  const disk = storage();
+  const life = structuredClone(accomplished("saved-art-identity"));
+  life.character!.sex = "female";
+  const before = structuredClone(life);
+  const entries = collectLegacyEntries(pack, life, []);
+  assert.equal(entries[0].characterSex, "female");
+  persistLegacyEntries(disk, entries);
+  assert.equal(readLegacyEntries(disk)[0].characterSex, "female");
+  assert.deepEqual(life, before, "collecting art metadata does not mutate the life or accepted work");
+
+  const older = structuredClone(entries);
+  delete older[0].characterSex;
+  persistLegacyEntries(disk, older);
+  assert.equal(readLegacyEntries(disk)[0].characterSex, undefined, "a missing recorded identity is not guessed from the name");
+  (older[0] as unknown as { characterSex: string }).characterSex = "unknown";
+  assert.throws(() => persistLegacyEntries(disk, older), /could not be saved/);
+});

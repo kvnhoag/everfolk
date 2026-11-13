@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\ptolemy-common-female.png",
+  "sourceSha256": "245032d3616e56663fadc0e6fd301ac02564c49b32f19cc1cff3d9b61deabc3c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      280,
+      350
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 37904,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    280,
+    350
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\ptolemy-common-female-coarse.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\ptolemy-common-female-coarse.png",
+  "logicalSha256": "a9b63fff922bb429cd1acc0135a264b2421c0b63d2dcc265754fc47b4e711034",
+  "outputSha256": "db1f79dd08577c47f61a89b5e99d858bb89f506a29010ecda1e94552a3973112",
+  "logicalPixelSha256": "712e7482acd026da923dd6563e1d3a395f923fcbf018433f43736478931bc395",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

@@ -5,6 +5,8 @@ import { getAccomplishments, getLegacyRoutes } from "../../src/legacy.ts";
 import { formatYear } from "../../src/calendar.ts";
 import type { LegacyEntry } from "../storage/legacy-store.ts";
 import { groupFigureCards } from "../models/figure-card-collection.ts";
+import { findCardArt, getFigureCardArt, type CardArtRank } from "../models/card-art.ts";
+import CollectionCardArtwork from "./CollectionCardArtwork.tsx";
 import PixelIcon from "./PixelIcon.tsx";
 import BoosterCollection from "./BoosterCollection.tsx";
 import "../styles/legacy-gallery.css";
@@ -15,8 +17,14 @@ const cardLabel = (record: AccomplishmentRecord) => record.figure ? record.kind 
 function CollectionCard({ entry, subcard = false }: { entry: LegacyEntry; subcard?: boolean }) {
   const record = entry.accomplishment;
   const Heading = subcard ? "h4" : "h3";
-  return <article className={`legacy-card${!subcard && distinction(record.kind) ? " is-prestige" : ""}${!subcard && record.kind === "ultimate" ? " is-ultimate" : ""}${subcard ? " is-figure-subcard" : ""}`}>
-    <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId.startsWith("figure-") ? "philosophy" : record.routeId}.svg`} width={64} height={64} alt="" /><span>{subcard ? "◆" : distinction(record.kind) ? "✦" : "◆"}</span></div>
+  const tier = record.figure ? (["common", "uncommon", "rare", "epic"] as CardArtRank[])
+    .find(rank => record.achievementId === `fig-${record.figure!.id}-${rank}`) : undefined;
+  const art = subcard && record.figure ? findCardArt({ figureId: record.figure.id, kind: "contribution", tier,
+    title: record.title, gender: entry.characterSex, seed: entry.seed }) : undefined;
+  return <article className={`legacy-card${!subcard && distinction(record.kind) ? " is-prestige" : ""}${!subcard && record.kind === "ultimate" ? " is-ultimate" : ""}${subcard ? " is-figure-subcard" : ""}${art ? " has-collection-art" : ""}`}>
+    {art ? <a href={art.footerlessSrc} target="_blank" rel="noreferrer" className="legacy-card-art-link" aria-label={`View full artwork: ${art.displayTitle}`}>
+      <CollectionCardArtwork art={art} />
+    </a> : <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId.startsWith("figure-") ? "philosophy" : record.routeId}.svg`} width={64} height={64} alt="" /><span>{subcard ? "◆" : distinction(record.kind) ? "✦" : "◆"}</span></div>}
     <div className="legacy-card-copy"><p className="legacy-card-path">{entry.routeTitle ?? record.routeId.replace(/-/g, " ")}{cardLabel(record) && <span className="legacy-prestige">{cardLabel(record)}</span>}</p><Heading>{record.name}</Heading><strong className="legacy-card-achievement">{record.title}</strong><p>{displayProse(record.description)}</p><div className="legacy-card-person"><strong>{entry.characterName}</strong><span>Age {record.age} · {formatYear(record.year)}</span></div>{record.people.length > 0 && <p className="legacy-card-people">Remembered with {record.people.join(", ")}</p>}<small className="legacy-card-world">{entry.worldTitle}</small>
     </div>
   </article>;
@@ -56,10 +64,17 @@ export default function LegacyGallery({ entries, currentLifeKey, storageNotice, 
     <div className="legacy-gallery-tally"><span><strong>{entries.length}</strong> accomplishments</span><span><strong>{lives}</strong> {lives === 1 ? "life" : "lives"}</span>{figures.length > 0 && <><span><strong>{figures.length}</strong> figure {figures.length === 1 ? "card" : "cards"}</span><span><strong>{entries.filter(entry => entry.accomplishment.figure).length}</strong> earned sub-cards</span></>}</div>
     <div className="legacy-gallery-filters"><label htmlFor={`${id}-search`}>Search accomplishments<input id={`${id}-search`} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Work, person or achievement" /></label><label htmlFor={`${id}-route`}>Path<select id={`${id}-route`} value={route} onChange={event => setRoute(event.target.value)}><option value="all">All paths</option>{routes.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>{figures.length > 0 && <label htmlFor={`${id}-figure`}>Historical figure<select id={`${id}-figure`} value={figure} onChange={event => setFigure(event.target.value)}><option value="all">All figures</option>{figures.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>}{currentLifeKey && <label htmlFor={`${id}-scope`}>Lives<select id={`${id}-scope`} value={scope} onChange={event => setScope(event.target.value)}><option value="all">All lives</option><option value="current">Current life</option></select></label>}</div>
     {filtered.length ? <>
-      {collection.figures.length > 0 && <section className="legacy-figure-collection" aria-label="Historical figure cards"><p className="legacy-figure-guidance">Each figure card holds the title and milestone sub-cards you have earned across your lives.</p>{collection.figures.map(card => <article className="legacy-figure-card" key={card.figure.id} aria-labelledby={`${id}-${card.figure.id}`}>
+      {collection.figures.length > 0 && <section className="legacy-figure-collection" aria-label="Historical figure cards"><p className="legacy-figure-guidance">Each figure card holds the title and milestone sub-cards you have earned across your lives.</p>{collection.figures.map(card => {
+        const parent = getFigureCardArt(card.figure.id);
+        return <article className="legacy-figure-card" key={card.figure.id} aria-labelledby={`${id}-${card.figure.id}`}>
         <header><div><p>Historical figure card</p><h3 id={`${id}-${card.figure.id}`}>{card.figure.name}</h3></div><span>{card.entries.length} earned {card.entries.length === 1 ? "sub-card" : "sub-cards"}</span></header>
-        <div className="legacy-figure-subcards">{card.entries.map(entry => <CollectionCard key={entry.key} entry={entry} subcard />)}</div>
-      </article>)}</section>}
+        <div className={`legacy-figure-layout${parent ? " has-parent-art" : ""}`}>
+          {parent && <a className="legacy-parent-art legacy-card-art-link" href={parent.footerlessSrc} target="_blank" rel="noreferrer" aria-label={`View full artwork: ${parent.displayTitle}`}>
+            <CollectionCardArtwork art={parent} />
+          </a>}
+          <div className="legacy-figure-subcards">{card.entries.map(entry => <CollectionCard key={entry.key} entry={entry} subcard />)}</div>
+        </div>
+      </article>;})}</section>}
       {collection.otherEntries.length > 0 && <section className="legacy-other-records" aria-label="Works and deeds">{collection.figures.length > 0 && <h3>Other works &amp; deeds</h3>}<div className="legacy-gallery-grid">{collection.otherEntries.map(entry => <CollectionCard key={entry.key} entry={entry} />)}</div></section>}
     </> : <p className="legacy-empty">{entries.length ? "No accomplishments match these filters." : "No accomplishments yet. Your first one will appear here."}</p>}
   </div>;

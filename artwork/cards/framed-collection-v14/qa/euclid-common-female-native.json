@@ -1,0 +1,361 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "euclid-common-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 72.76171875,
+          "x": 743.23828125,
+          "y": 1187.00025
+        },
+        "fill": "#eee4ce",
+        "id": 48,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition number live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "001/∞",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 47,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 20.5693359375,
+          "width": 94.9248046875,
+          "x": 709.0751953125,
+          "y": 978.53125
+        },
+        "fill": "#26332d",
+        "id": 46,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "COMMON",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 110.904,
+          "width": 654.5519999999997,
+          "x": 96,
+          "y": 1015.136
+        },
+        "fill": "#26332d",
+        "id": 45,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography / editable paragraph",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "A geometry apprentice learns to draw a circle and name what\na figure contains. Small acts of precision begin a greater\ndiscipline, turning a curious eye toward the certainty of\nproof.",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 39.759000000000015,
+          "width": 255.72199999999998,
+          "x": 96,
+          "y": 964.956
+        },
+        "fill": "#26332d",
+        "id": 44,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography title live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "The First Clear Line",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 387.48291015625,
+          "x": 256.258544921875,
+          "y": 144.59375
+        },
+        "fill": "#d3d4c7",
+        "id": 43,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card subtitle live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "LEARNER OF THE FIRST PRINCIPLES",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 87.744,
+          "width": 613.76,
+          "x": 143.12,
+          "y": 64.21600000000001
+        },
+        "fill": "#f0e6cf",
+        "id": 42,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          1,
+          49
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Geometry Apprentice",
+        "visible": true
+      }
+    ],
+    "objects": 50,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\euclid-common-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "euclid-common-female.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 62,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "euclid-common-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          1,
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 50,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\euclid-common-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "euclid-common-female.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 62,
+    "units": "Pixels"
+  }
+}

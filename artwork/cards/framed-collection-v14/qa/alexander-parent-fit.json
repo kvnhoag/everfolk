@@ -1,0 +1,73 @@
+{
+  "slug": "alexander-parent",
+  "figureId": "alexander",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Alexander the Great",
+  "subtitle": "King of Macedon",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-parent-pixel.png",
+  "collectionIndex": 1,
+  "owner": null,
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "sword-shield",
+  "bodyTitle": "An Empire Unbound",
+  "bodyText": "King of Macedon from 336 to 323 BCE, Alexander overthrew the Persian Empire and led his army into India. His conquests reshaped the ancient world and opened the Hellenistic age.",
+  "sources": [
+    {
+      "title": "The Rise of Macedon and the Conquests of Alexander the Great — Metropolitan Museum of Art",
+      "url": "https://www.metmuseum.org/essays/the-rise-of-macedonia-and-the-conquests-of-alexander-the-great"
+    }
+  ],
+  "canonicalTitle": "Alexander the Great",
+  "editionLimit": 10,
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/010",
+  "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+  "bodySize": 24,
+  "bodyLines": [
+    "King of Macedon from 336 to 323 BCE, Alexander overthrew the",
+    "Persian Empire and led his army into India. His conquests",
+    "reshaped the ancient world and opened the Hellenistic age."
+  ],
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/alexander-parent.svg",
+  "fittedArt": "assets/fitted/alexander-parent.png",
+  "overlaySvg": "source/overlays/alexander-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+  "master": "masters/alexander-parent.vectorcraft",
+  "export": "exports/alexander-parent.png",
+  "thumbnail": "assets/alexander-parent-thumb.png",
+  "exportSha256": "6f850d1fd14c95abc834254e1ffdb2dbdccc4d01ced5aa1dd3cbb9dc817726aa",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 599644,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

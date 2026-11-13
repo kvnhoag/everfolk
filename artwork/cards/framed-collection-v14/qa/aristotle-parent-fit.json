@@ -1,0 +1,78 @@
+{
+  "slug": "aristotle-parent",
+  "figureId": "aristotle",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Aristotle",
+  "subtitle": "Philosopher of the Lyceum",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-parent-pixel.png",
+  "collectionIndex": 10,
+  "owner": null,
+  "figureName": "Aristotle",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "scroll-stylus",
+  "bodyTitle": "A Mind Without Bounds",
+  "bodyText": "Aristotle made inquiry a life's work, examining logic, ethics, politics, and the living world. At the Lyceum in Athens, his investigations helped establish enduring ways to observe, classify, and reason.",
+  "sources": [
+    {
+      "title": "Aristotle — Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/aristotle/"
+    },
+    {
+      "title": "Aristotle's Biology — Stanford Encyclopedia of Philosophy",
+      "url": "https://plato.stanford.edu/entries/aristotle-biology/"
+    }
+  ],
+  "canonicalTitle": "Aristotle",
+  "editionLimit": 10,
+  "iconSource": {
+    "file": "source/icons/aristotle.svg",
+    "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/010",
+  "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+  "bodySize": 24,
+  "bodyLines": [
+    "Aristotle made inquiry a life's work, examining logic, ethics,",
+    "politics, and the living world. At the Lyceum in Athens, his",
+    "investigations helped establish enduring ways to observe,",
+    "classify, and reason."
+  ],
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/aristotle-parent.svg",
+  "fittedArt": "assets/fitted/aristotle-parent.png",
+  "overlaySvg": "source/overlays/aristotle-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+  "master": "masters/aristotle-parent.vectorcraft",
+  "export": "exports/aristotle-parent.png",
+  "thumbnail": "assets/aristotle-parent-thumb.png",
+  "exportSha256": "50da02f6a9f1beaf66c7394ba121ee33d617e73cb33d28956af6a0da743f64ad",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 599644,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Campaign Staff Officer",
+  "displayTitle": "Campaign Staff Officer",
+  "subtitle": "Right Hand of the Great",
+  "bodyTitle": "The Campaign's Pulse",
+  "bodyText": "A staff officer turns reports, routes, and supply figures into decisions the army can trust. Close to the command tent, careful judgment keeps scattered forces aligned with Alexander's astonishing ambition.",
+  "sourceRoleSlug": "alexander-rare",
+  "newArt": false,
+  "slug": "alexander-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Campaign Staff Officer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-male-pixel.png",
+  "sourceArtSlug": "alexander-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 6,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A staff officer turns reports, routes, and supply figures",
+    "into decisions the army can trust. Close to the command",
+    "tent, careful judgment keeps scattered forces aligned with",
+    "Alexander's astonishing ambition."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-rare-male.svg",
+  "fittedArt": "assets/fitted/alexander-rare-male.png",
+  "overlaySvg": "source/overlays/alexander-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "a9d4730cecffb17bc2ec7ec2b854d3c2812b773e544d043d6a1d29c8d4856d29",
+  "master": "masters/alexander-rare-male.vectorcraft",
+  "export": "exports/alexander-rare-male.png",
+  "thumbnail": "assets/alexander-rare-male-thumb.png",
+  "exportSha256": "f540526941c363b55c90fd9cf5b2255678e15044561c0ae582c8bc3972d65432",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582480,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

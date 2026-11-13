@@ -1,0 +1,361 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "demetrius-epic-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 95.81865234375005,
+          "x": 720.18134765625,
+          "y": 1187.00025
+        },
+        "fill": "#eee4ce",
+        "id": 95,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition number live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "001/025",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 94,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 20.5693359375,
+          "width": 46.49072265625,
+          "x": 757.50927734375,
+          "y": 978.53125
+        },
+        "fill": "#372b40",
+        "id": 93,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EPIC",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 136.904,
+          "width": 655.1520000000002,
+          "x": 96,
+          "y": 1015.136
+        },
+        "fill": "#372b40",
+        "id": 92,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography / editable paragraph",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "The director of siege works commands workshops, materials,\nand crews as parts of one great undertaking. Decisive\ncoordination makes formidable machines possible, giving\nDemetrius' ambition a structure strong enough to bear its\nown weight.",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 39.759000000000015,
+          "width": 262.56600000000003,
+          "x": 96,
+          "y": 964.956
+        },
+        "fill": "#372b40",
+        "id": 91,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography title live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "An Army of Builders",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 334.29443359375,
+          "x": 282.852783203125,
+          "y": 144.59375
+        },
+        "fill": "#efd29a",
+        "id": 90,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card subtitle live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "RIGHT HAND OF THE BESIEGER",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 85.00200000000001,
+          "width": 647.838,
+          "x": 126.08100000000002,
+          "y": 65.428
+        },
+        "fill": "#f0e6cf",
+        "id": 89,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          1,
+          96
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Director of Siege Works",
+        "visible": true
+      }
+    ],
+    "objects": 97,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\demetrius-epic-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "demetrius-epic-female.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 188,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "demetrius-epic-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          1,
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 97,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\demetrius-epic-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "demetrius-epic-female.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 188,
+    "units": "Pixels"
+  }
+}

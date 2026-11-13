@@ -19,6 +19,7 @@
     "ranked:world": "node scripts/ranked/build-ranked-world.mjs",
     "demo:world": "node scripts/demo/build-demo-world.mjs",
     "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
+    "art:cards": "node scripts/sync-card-assets.mjs",
     "npc:provider-check": "node scripts/npc/check-provider.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "figures:world": "node scripts/figures/build-world.mjs",

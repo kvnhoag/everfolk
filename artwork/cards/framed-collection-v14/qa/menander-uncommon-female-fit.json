@@ -1,0 +1,80 @@
+{
+  "figureId": "menander",
+  "figureName": "Menander",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Stage Copyist",
+  "displayTitle": "Stage Copyist",
+  "subtitle": "Scribe of Menander's Stage",
+  "bodyTitle": "The Cue Remembered",
+  "bodyText": "A stage copyist keeps dialogue and cues in dependable order as the company rehearses. Careful words protect the rhythm of an exchange, allowing comic misunderstanding to land exactly where the playwright intended.",
+  "sourceRoleSlug": "menander-uncommon",
+  "newArt": false,
+  "slug": "menander-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Stage Copyist",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-uncommon-female-pixel.png",
+  "sourceArtSlug": "menander-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 50,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/menander.svg",
+    "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A stage copyist keeps dialogue and cues in dependable order",
+    "as the company rehearses. Careful words protect the rhythm",
+    "of an exchange, allowing comic misunderstanding to land",
+    "exactly where the playwright intended."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-uncommon-female.svg",
+  "fittedArt": "assets/fitted/menander-uncommon-female.png",
+  "overlaySvg": "source/overlays/menander-uncommon-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+  "master": "masters/menander-uncommon-female.vectorcraft",
+  "export": "exports/menander-uncommon-female.png",
+  "thumbnail": "assets/menander-uncommon-female-thumb.png",
+  "exportSha256": "d4c98f4d16a842b0c71626ad83c96a20c6f414699ee220f551560c41d16d6130",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582289,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

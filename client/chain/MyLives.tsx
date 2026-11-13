@@ -245,7 +245,9 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                 isFigure={row.isFigure}
                 figureId={row.figureId}
                 portraitMedia={row.portraitMedia}
+                rarity={row.rarity}
                 rarityLabel={row.rarityLabel}
+                editionText={row.editionText}
                 actionName={row.actionName}
                 affection={row.affection}
                 actions={
@@ -336,7 +338,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
                       <p className="chain-fine" style={{ margin: "4px 0" }}>
                         {isCollected
                           ? "You have immortalized this figure in your collection."
-                          : "Qualify in Weave Mode to unlock this legendary card."}
+                          : "Qualify in Weave Mode to unlock this figure card."}
                       </p>
                       <a href="#figures" className="chain-link ef-market-inspect-btn">
                         View requirements &amp; deeds ↗

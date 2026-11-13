@@ -4,7 +4,7 @@ import { SITE_LINKS, siteSectionForHash } from "../client/models/site-nav.ts";
 
 test("every screen shares one header with Market visible from the start", () => {
   assert.deepEqual(SITE_LINKS.map(link => link.label), ["Play", "Weave Mode", "Market", "Figures", "My lives"]);
-  assert.deepEqual(SITE_LINKS.map(link => link.href), ["#", "#weave", "#market", "#figures", "#mine"]);
+  assert.deepEqual(SITE_LINKS.map(link => link.href), ["#", "#weave", "#market", "/cards", "#mine"]);
 });
 
 test("the current section follows the chain route in the address", () => {

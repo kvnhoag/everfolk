@@ -1,0 +1,537 @@
+{
+  "libraryId": "everfolk-figure-inner-art-v14-common-b",
+  "expected": 10,
+  "complete": true,
+  "assets": [
+    {
+      "slug": "demetrius-common-male",
+      "roleId": "demetrius-common",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Labourer",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "male",
+      "desiredViewAngle": "three-quarter right",
+      "source": "source/demetrius-common-male.png",
+      "prompt": "prompts/demetrius-common-male.txt",
+      "final": "assets/demetrius-common-male-pixel.png",
+      "qa": "qa/demetrius-common-male-pixel.json",
+      "coarse": "assets/demetrius-common-male-coarse.png",
+      "coarseQa": "qa/demetrius-common-male-coarse.json",
+      "faceConfig": "source/demetrius-common-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "7be7428db34249debdb2313b991f9820b53d3c6e35e6063b680d79bd008f8957",
+      "finalSha256": "850faf40b274d05c6eec6ceaca8bab7117fc14b304c0facd08ede769a4e4a4e7",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            408,
+            223
+          ],
+          "radius": [
+            93,
+            110
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "demetrius-uncommon-male"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter right",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "demetrius-common-female",
+      "roleId": "demetrius-common",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "title": "Siege Labourer",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "female",
+      "desiredViewAngle": "left profile",
+      "source": "source/demetrius-common-female.png",
+      "prompt": "prompts/demetrius-common-female.txt",
+      "final": "assets/demetrius-common-female-pixel.png",
+      "qa": "qa/demetrius-common-female-pixel.json",
+      "coarse": "assets/demetrius-common-female-coarse.png",
+      "coarseQa": "qa/demetrius-common-female-coarse.json",
+      "faceConfig": "source/demetrius-common-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "4eaea6f21b64aa41ad4930398b19ccc82db1eecd17d30a2b488175ceb214514c",
+      "finalSha256": "546692ff63c4815818b18f2519635d98472dc4778f48e65d4d69e86bc1e1a35c",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            419,
+            220
+          ],
+          "radius": [
+            93,
+            116
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "demetrius-uncommon-female"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "left profile",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "roleId": "theophrastus-common",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Garden Attendant",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "male",
+      "desiredViewAngle": "three-quarter left",
+      "source": "source/theophrastus-common-male.png",
+      "prompt": "prompts/theophrastus-common-male.txt",
+      "final": "assets/theophrastus-common-male-pixel.png",
+      "qa": "qa/theophrastus-common-male-pixel.json",
+      "coarse": "assets/theophrastus-common-male-coarse.png",
+      "coarseQa": "qa/theophrastus-common-male-coarse.json",
+      "faceConfig": "source/theophrastus-common-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3761d775a017741a4415f617d1cbad23fef6c81af4c1759580f581765d5d3b7b",
+      "finalSha256": "e5cfcc584c2f911ae8c1901a027757b128ce2dff942ace5f53d53b76677aac68",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            500,
+            223
+          ],
+          "radius": [
+            105,
+            120
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "theophrastus-uncommon-male"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter left",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "roleId": "theophrastus-common",
+      "figureId": "theophrastus",
+      "figureName": "Theophrastus",
+      "title": "Garden Attendant",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "female",
+      "desiredViewAngle": "three-quarter right",
+      "source": "source/theophrastus-common-female.png",
+      "prompt": "prompts/theophrastus-common-female.txt",
+      "final": "assets/theophrastus-common-female-pixel.png",
+      "qa": "qa/theophrastus-common-female-pixel.json",
+      "coarse": "assets/theophrastus-common-female-coarse.png",
+      "coarseQa": "qa/theophrastus-common-female-coarse.json",
+      "faceConfig": "source/theophrastus-common-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "3387434fd0462ccb83bf84d0467847437c49722a26cca6e181fb3796d825e91d",
+      "finalSha256": "87702b53abf2a6ce7193ebcc2a8f83c2f2573cb3a62717ad988b400c26db3e1c",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            426,
+            228
+          ],
+          "radius": [
+            95,
+            118
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "theophrastus-uncommon-female"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter right",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "zeno-common-male",
+      "roleId": "zeno-common",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Listener at the Stoa",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "male",
+      "desiredViewAngle": "three-quarter right",
+      "source": "source/zeno-common-male.png",
+      "prompt": "prompts/zeno-common-male.txt",
+      "final": "assets/zeno-common-male-pixel.png",
+      "qa": "qa/zeno-common-male-pixel.json",
+      "coarse": "assets/zeno-common-male-coarse.png",
+      "coarseQa": "qa/zeno-common-male-coarse.json",
+      "faceConfig": "source/zeno-common-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "1f84261cb3679871a075ec6425e565b291ce1cb23e9debddb1e071fb96672759",
+      "finalSha256": "afa02393649b198225a17f168a6ae0b7c94668d83948bcc363823bd513e04164",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            420,
+            242
+          ],
+          "radius": [
+            105,
+            123
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "zeno-uncommon-male"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter right",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "zeno-common-female",
+      "roleId": "zeno-common",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "title": "Listener at the Stoa",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "female",
+      "desiredViewAngle": "left profile",
+      "source": "source/zeno-common-female.png",
+      "prompt": "prompts/zeno-common-female.txt",
+      "final": "assets/zeno-common-female-pixel.png",
+      "qa": "qa/zeno-common-female-pixel.json",
+      "coarse": "assets/zeno-common-female-coarse.png",
+      "coarseQa": "qa/zeno-common-female-coarse.json",
+      "faceConfig": "source/zeno-common-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "ba578cbcd1e0f083c807563eb05aef295565cb715a21c85d7d20c03d6b002ad0",
+      "finalSha256": "9636a0c1dd265207e24f77e20298939c8bb37bd6aaa42d1c6f1ca5ead27f8cbd",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            450,
+            242
+          ],
+          "radius": [
+            112,
+            128
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "zeno-uncommon-female"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "left profile",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "roleId": "ptolemy-common",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Palace Messenger",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "male",
+      "desiredViewAngle": "right profile",
+      "source": "source/ptolemy-common-male.png",
+      "prompt": "prompts/ptolemy-common-male.txt",
+      "final": "assets/ptolemy-common-male-pixel.png",
+      "qa": "qa/ptolemy-common-male-pixel.json",
+      "coarse": "assets/ptolemy-common-male-coarse.png",
+      "coarseQa": "qa/ptolemy-common-male-coarse.json",
+      "faceConfig": "source/ptolemy-common-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "9e9c6ea6b8ea6f5c96336ca110addea23c8975065240ae8be63805ad19ab7d19",
+      "finalSha256": "fe399787af9ca127d75e11a18affe6d0af34c5fd61295a8186d615a6bd56f3a1",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            440,
+            169
+          ],
+          "radius": [
+            105,
+            126
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "ptolemy-uncommon-male"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "right profile",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "roleId": "ptolemy-common",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "title": "Palace Messenger",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "female",
+      "desiredViewAngle": "three-quarter left",
+      "source": "source/ptolemy-common-female.png",
+      "prompt": "prompts/ptolemy-common-female.txt",
+      "final": "assets/ptolemy-common-female-pixel.png",
+      "qa": "qa/ptolemy-common-female-pixel.json",
+      "coarse": "assets/ptolemy-common-female-coarse.png",
+      "coarseQa": "qa/ptolemy-common-female-coarse.json",
+      "faceConfig": "source/ptolemy-common-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "245032d3616e56663fadc0e6fd301ac02564c49b32f19cc1cff3d9b61deabc3c",
+      "finalSha256": "a08ae26a00694926af3f04a754e982db7fdea9b6bc967bfafe5f714acaf1ab66",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            377,
+            184
+          ],
+          "radius": [
+            101,
+            120
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "ptolemy-uncommon-female"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter left",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "roleId": "cleomenes-common",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Granary Porter",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "male",
+      "desiredViewAngle": "nearly frontal, gaze lowered",
+      "source": "source/cleomenes-common-male.png",
+      "prompt": "prompts/cleomenes-common-male.txt",
+      "final": "assets/cleomenes-common-male-pixel.png",
+      "qa": "qa/cleomenes-common-male-pixel.json",
+      "coarse": "assets/cleomenes-common-male-coarse.png",
+      "coarseQa": "qa/cleomenes-common-male-coarse.json",
+      "faceConfig": "source/cleomenes-common-male-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "09daf2537665d044fbaccafaf3ace1404a5eed9cb38b9ed1a91f9b3eca73dc74",
+      "finalSha256": "4c0e2711d7d208ee1fe7ccddc022d3bd754bae2b545a4acdc185ab87334d51ae",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            440,
+            213
+          ],
+          "radius": [
+            99,
+            120
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "cleomenes-uncommon-male"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "nearly frontal, gaze lowered",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "roleId": "cleomenes-common",
+      "figureId": "cleomenes",
+      "figureName": "Cleomenes of Naucratis",
+      "title": "Granary Porter",
+      "kind": "contribution",
+      "tier": "common",
+      "gender": "female",
+      "desiredViewAngle": "three-quarter right",
+      "source": "source/cleomenes-common-female.png",
+      "prompt": "prompts/cleomenes-common-female.txt",
+      "final": "assets/cleomenes-common-female-pixel.png",
+      "qa": "qa/cleomenes-common-female-pixel.json",
+      "coarse": "assets/cleomenes-common-female-coarse.png",
+      "coarseQa": "qa/cleomenes-common-female-coarse.json",
+      "faceConfig": "source/cleomenes-common-female-face.json",
+      "status": "complete",
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceSha256": "b59d4f5d4e10aefe9235c1d054c41426553955fee8c1115ee4dd39eee7801c48",
+      "finalSha256": "1ed2321223c7b9996de29cc881a2ea85b473fc8538c50abdaeaaa6df46b75dc1",
+      "faceRegions": [
+        {
+          "name": "face-eyes",
+          "center": [
+            428,
+            220
+          ],
+          "radius": [
+            98,
+            119
+          ],
+          "inner_scale": 0.82
+        }
+      ],
+      "origin": {
+        "method": "New generated Common duty scene, v12 contributor identity/style reference",
+        "reference": "cleomenes-uncommon-female"
+      },
+      "provenance": "Fictional representative contributor; original illustration, not historical evidence.",
+      "contributorAngleReview": {
+        "requested": "three-quarter right",
+        "reviewed": true
+      },
+      "pixelFinish": "PixelOE mixed3px body/2px face"
+    }
+  ]
+}

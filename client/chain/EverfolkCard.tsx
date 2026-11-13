@@ -1,5 +1,7 @@
 import { type ReactNode } from "react";
-import type { FigureId } from "../../chain/ids.ts";
+import { RARITY_LABELS, type FigureId } from "../../chain/ids.ts";
+import { getFigureCardArt } from "../models/card-art.ts";
+import CollectionCardArtwork from "../components/CollectionCardArtwork.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import PixelIcon from "../components/PixelIcon.tsx";
@@ -29,6 +31,8 @@ export interface EverfolkCardProps {
   pixelSeed?: string;
   rarity?: number | null;
   rarityLabel?: string;
+  /** The recorded copy serial, never a token id or the artwork's example number. */
+  editionText?: string | null;
   actionName?: string;
   actionDescription?: string;
   affection?: number;
@@ -53,8 +57,9 @@ export default function EverfolkCard({
   figureId,
   portraitMedia,
   pixelSeed,
-  rarity = 1,
+  rarity,
   rarityLabel,
+  editionText,
   actionName,
   actionDescription,
   affection,
@@ -64,8 +69,11 @@ export default function EverfolkCard({
   className = "",
   badge,
 }: EverfolkCardProps) {
-  const rarityNum = rarity ?? (isFigure ? 5 : 1);
-  const displayRarity = rarityLabel ?? (isFigure ? "Historical Figure" : rarityNum >= 4 ? "Legendary" : rarityNum === 3 ? "Epic" : rarityNum === 2 ? "Rare" : "Common");
+  const customPortrait = portraitMedia && !/\/assets\/figures\/[^/]+\.png(?:[?#].*)?$/.test(portraitMedia);
+  const collectionArt = isFigure && figureId && !customPortrait ? getFigureCardArt(figureId, rarity ?? undefined) : undefined;
+  const artRarity = collectionArt ? ["common", "uncommon", "rare", "epic", "legendary"].indexOf(collectionArt.rarity) : -1;
+  const rarityNum = rarity ?? (artRarity >= 0 ? artRarity : isFigure ? 4 : 1);
+  const displayRarity = rarityLabel ?? RARITY_LABELS[rarityNum] ?? "Common";
 
   const handleCardClick = () => {
     if (!interactive) return;
@@ -79,7 +87,7 @@ export default function EverfolkCard({
   };
 
   return (
-    <div className={`ef-card-perspective ${className}`}>
+    <div className={`ef-card-perspective ${collectionArt ? "has-collection-art" : ""} ${className}`}>
       <div
         className={`ef-card-inner ${isFaceDown ? "is-face-down" : "is-flipped"} ${selected ? "is-selected" : ""}`}
         role={interactive ? "button" : undefined}
@@ -112,7 +120,9 @@ export default function EverfolkCard({
         </div>
 
         {/* Card Front: High-res collectible card */}
-        <div
+        {collectionArt ? <div className={`ef-card-face ef-card-front is-collection-art rarity-${rarityNum} ${isSilhouette ? "is-silhouette" : ""}`}>
+          <CollectionCardArtwork art={collectionArt} editionText={editionText} />
+        </div> : <div
           className={`ef-card-face ef-card-front rarity-${rarityNum} ${isFigure ? "is-figure" : ""} ${isSilhouette ? "is-silhouette" : ""}`}
         >
           <header className="ef-card-header">
@@ -182,8 +192,16 @@ export default function EverfolkCard({
               {actions}
             </div>
           )}
-        </div>
+        </div>}
       </div>
+      {collectionArt && !isFaceDown && (badge || affection !== undefined || priceNear || actions) && <div className="ef-card-collection-details">
+        {(badge || affection !== undefined || priceNear) && <div className="ef-card-collection-facts">
+          {badge && <span>{badge}</span>}
+          {affection !== undefined && <span>Affection {affection}/100</span>}
+          {priceNear && <strong>{priceNear} NEAR</strong>}
+        </div>}
+        {actions && <div className="ef-card-actions" onClick={event => event.stopPropagation()}>{actions}</div>}
+      </div>}
     </div>
   );
 }

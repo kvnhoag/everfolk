@@ -1,0 +1,81 @@
+{
+  "figureId": "menander",
+  "figureName": "Menander",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Stagehand",
+  "displayTitle": "Stagehand",
+  "subtitle": "Behind Menander's Curtain",
+  "bodyTitle": "Before the First Entrance",
+  "bodyText": "A stagehand sets props and prepares the space before an actor steps into view. Quiet readiness makes each entrance possible, giving the playwright's imagined household a convincing place to come alive.",
+  "sourceRoleSlug": "menander-common",
+  "newArt": true,
+  "sceneBrief": "A modest Greek stagehand arranges a theatrical mask and simple household props behind a theatre stage, plain tunic, no celebrity playwright pose.",
+  "slug": "menander-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Stagehand",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/menander-common-male-pixel.png",
+  "sourceArtSlug": "menander-common-male",
+  "editionLimit": null,
+  "collectionIndex": 47,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/menander.svg",
+    "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A stagehand sets props and prepares the space before an",
+    "actor steps into view. Quiet readiness makes each entrance",
+    "possible, giving the playwright's imagined household a",
+    "convincing place to come alive."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-common-male.svg",
+  "fittedArt": "assets/fitted/menander-common-male.png",
+  "overlaySvg": "source/overlays/menander-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "1aa098a9aa6c65108e53a066cf87d1c9621eedb96a655a07b05da884f8d1c298",
+  "master": "masters/menander-common-male.vectorcraft",
+  "export": "exports/menander-common-male.png",
+  "thumbnail": "assets/menander-common-male-thumb.png",
+  "exportSha256": "64ad3b2b92426d3c22b2be89bc0d2c1d9fb67c115fed85ac9be2320cb107a641",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582313,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

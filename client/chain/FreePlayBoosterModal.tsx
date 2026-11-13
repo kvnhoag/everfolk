@@ -6,7 +6,7 @@ import { legacyLifeKey } from "../storage/legacy-store.ts";
 import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
 import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
-import { figureMediaPath } from "../../chain/figure-media.ts";
+import { boosterArtwork } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
 import "../styles/booster-opening.css";
@@ -42,7 +42,7 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     const cards = session.pack.cards.map(card => ({
       name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
       rarity: card.rarity,
-      art: card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: life.age, seed: life.seed, originId: life.originId, sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }),
+      ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : portraitSource({ age: life.age, seed: life.seed, originId: life.originId, sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }), life.seed),
       sub: actionName(card.action_id),
     }));
     const resolve = (selected: number[]) => {

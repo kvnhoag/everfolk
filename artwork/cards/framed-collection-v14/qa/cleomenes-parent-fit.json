@@ -1,0 +1,87 @@
+{
+  "slug": "cleomenes-parent",
+  "figureId": "cleomenes",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Cleomenes of Naucratis",
+  "subtitle": "Financier of Alexander's Egypt",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-parent-pixel.png",
+  "collectionIndex": 91,
+  "owner": null,
+  "figureName": "Cleomenes of Naucratis",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "grain-scales",
+  "bodyTitle": "Wealth Along the Nile",
+  "bodyText": "Appointed by Alexander to administer Egyptian revenue, Cleomenes became a powerful financial official. His control of grain and taxation amassed wealth, while ancient accounts also preserve accusations of ruthless exploitation and profiteering.",
+  "sources": [
+    {
+      "title": "Cleomenes of Naucratis — Oxford Classical Dictionary",
+      "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753033"
+    },
+    {
+      "title": "Money and Prices in the Papyri, Ptolemaic Period — Oxford University Press",
+      "url": "https://academic.oup.com/edited-volume/43505/chapter/364128623"
+    }
+  ],
+  "canonicalTitle": "Cleomenes of Naucratis",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/cleomenes.svg",
+    "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Appointed by Alexander to administer Egyptian revenue,",
+    "Cleomenes became a powerful financial official. His control",
+    "of grain and taxation amassed wealth, while ancient",
+    "accounts also preserve accusations of ruthless exploitation",
+    "and profiteering."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-parent.svg",
+  "fittedArt": "assets/fitted/cleomenes-parent.png",
+  "overlaySvg": "source/overlays/cleomenes-parent.svg",
+  "titleSize": 56,
+  "sourceArtSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+  "master": "masters/cleomenes-parent.vectorcraft",
+  "export": "exports/cleomenes-parent.png",
+  "thumbnail": "assets/cleomenes-parent-thumb.png",
+  "exportSha256": "1d02db1878b223a734eb82cf777c87fc0251c3a9c0db6021d77ccaf0e8362d3e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582575,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

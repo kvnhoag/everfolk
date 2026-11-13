@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const ROOT=path.resolve(__dirname,'..');const [slug,generated,...values]=process.argv.slice(2);
+const full=require('./common-c-jobs.json').find(x=>x.slug===slug);if(!full)throw Error('Unknown job '+slug);
+const {promptText,...job}=full;
+const source=path.join(ROOT,'source',slug+'.png');fs.copyFileSync(generated,source);const bytes=fs.readFileSync(source);
+const [cx,cy,rx,ry]=values.map(Number);if(values.length!==4||values.some(v=>!Number.isFinite(Number(v))))throw Error('Face coordinates required');
+const region={name:'face-eyes',center:[cx,cy],radius:[rx,ry],inner_scale:.82};
+fs.writeFileSync(path.join(ROOT,'source',slug+'-face.json'),JSON.stringify({base_pixel_size:3,detail_pixel_size:2,detail_outline_thickness:0,regions:[region],critical_boxes:[]},null,2));
+const partial=path.join(ROOT,'source/common-c-catalog.json');const rows=fs.existsSync(partial)?JSON.parse(fs.readFileSync(partial)):[];
+const row={...job,source:`source/${slug}.png`,final:`assets/${slug}-pixel.png`,coarse:`assets/${slug}-coarse.png`,qa:`qa/${slug}-pixel.json`,coarseQa:`qa/${slug}-coarse.json`,faceConfig:`source/${slug}-face.json`,sourceSize:[bytes.readUInt32BE(16),bytes.readUInt32BE(20)],finalSize:[840,1050],sourceSha256:crypto.createHash('sha256').update(bytes).digest('hex'),faceRegions:[region],generatedPath:generated,status:'source-ready',provenance:'Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.'};
+const map=new Map(rows.map(x=>[x.slug,x]));map.set(slug,row);fs.writeFileSync(partial,JSON.stringify([...map.values()],null,2));console.log(JSON.stringify({slug,source,size:row.sourceSize}));

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-female.png",
+  "sourceSha256": "8b707d17cab46c948efc74b00c3072cbb868a195fea62a9dc4b9d14b31b8c6b0",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-female-coarse.png",
+  "baseSha256": "70a298a64fd150f970a414e7e41b643e8b09b7d3846534e4f2771fff42a14374",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-female-coarse.json",
+  "baseQaSha256": "2fa6426682ee906faf64806fa7c1191b8d031caa991d798d437bca0c0a856808",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-female-face.json",
+  "configSha256": "1df72c7e58ebd5b7e358a8c63e8a0b4d122a3f500babd6074dcb7d344664e8f6",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          420,
+          253
+        ],
+        "radius": [
+          105,
+          138
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-female-pixel.png",
+  "outputSha256": "bb488778ee2ae9b46b10d9db5ab67185294c42850413a90b74b85919cf2ccf8d",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "3e5036d28966c7f39b17c7617ad31a66b1a47ea8eefc94db97a7c2661dea9cc7",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-female-face-mask.png",
+  "maskSha256": "26c7a879c886d918d37076b1458c8b0d0f60c6f3cbad7198da1de491bacd9136",
+  "maskPixelSha256": "35e2f1688b7dc5745d28baa722005ced60dd6fb938ce4ae6dcce60ee67fe20e8",
+  "selectedDetailCells": 1051,
+  "retainedCoarseCells": 23449,
+  "affectedPixels": 37836,
+  "changedPixels": 37470,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "demetrius",
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Siege Engineer",
+  "displayTitle": "Siege Engineer",
+  "subtitle": "Mind of the Siege Train",
+  "bodyTitle": "Force Given Direction",
+  "bodyText": "A siege engineer brings measurement and mechanical judgment to a battlefield problem. By balancing reach, weight, and stability, the engineer turns raw power into a deliberate answer to the enemy's defences.",
+  "sourceRoleSlug": "demetrius-rare",
+  "newArt": false,
+  "slug": "demetrius-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Siege Engineer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-male-pixel.png",
+  "sourceArtSlug": "demetrius-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 60,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A siege engineer brings measurement and mechanical judgment",
+    "to a battlefield problem. By balancing reach, weight, and",
+    "stability, the engineer turns raw power into a deliberate",
+    "answer to the enemy's defences."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-rare-male.svg",
+  "fittedArt": "assets/fitted/demetrius-rare-male.png",
+  "overlaySvg": "source/overlays/demetrius-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "6776d7912d3d58d7c192f65bbc0fe3eece0b1f9d43d8d15d0f1526ea105c0f97",
+  "master": "masters/demetrius-rare-male.vectorcraft",
+  "export": "exports/demetrius-rare-male.png",
+  "thumbnail": "assets/demetrius-rare-male-thumb.png",
+  "exportSha256": "fe1fad0614dacbde590dd85e3ab8330dab7c63455a98ba31f532f3b62ac17f5c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582609,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "lysippos",
+  "figureName": "Lysippos",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Bronze Workshop Assistant",
+  "displayTitle": "Bronze Workshop Assistant",
+  "subtitle": "Hand of the Lysippan Workshop",
+  "bodyTitle": "Ready for the Casting",
+  "bodyText": "A bronze workshop assistant prepares moulds and materials with care the finished statue will never reveal. Reliable craft protects the sculptor's intention, helping fragile beginnings survive the demanding passage into metal.",
+  "sourceRoleSlug": "lysippos-uncommon",
+  "newArt": false,
+  "slug": "lysippos-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Bronze Workshop Assistant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-uncommon-female-pixel.png",
+  "sourceArtSlug": "lysippos-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 32,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/lysippos.svg",
+    "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A bronze workshop assistant prepares moulds and materials",
+    "with care the finished statue will never reveal. Reliable",
+    "craft protects the sculptor's intention, helping fragile",
+    "beginnings survive the demanding passage into metal."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-uncommon-female.svg",
+  "fittedArt": "assets/fitted/lysippos-uncommon-female.png",
+  "overlaySvg": "source/overlays/lysippos-uncommon-female.svg",
+  "titleSize": 58,
+  "sourceArtSha256": "3c2e1953c292d3cdda1389a5f6372c9478d4f81167a2e5ed32298bd0f3a84fd5",
+  "master": "masters/lysippos-uncommon-female.vectorcraft",
+  "export": "exports/lysippos-uncommon-female.png",
+  "thumbnail": "assets/lysippos-uncommon-female-thumb.png",
+  "exportSha256": "ec1fb5903b9b07f0171185d6b0803cd13175896daf8b6bccd14573977fddeddc",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582697,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "zeno",
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Scholar of Stoic Ethics",
+  "displayTitle": "Scholar of Stoic Ethics",
+  "subtitle": "Bearer of the Stoa's Teaching",
+  "bodyTitle": "Conviction Made Conduct",
+  "bodyText": "A scholar of Stoic ethics connects rigorous argument with the demands of a human life. Authority grows through consistency, giving the school a persuasive witness that reason can guide action when fortune turns.",
+  "sourceRoleSlug": "zeno-epic",
+  "newArt": false,
+  "slug": "zeno-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Scholar of Stoic Ethics",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-male-pixel.png",
+  "sourceArtSlug": "zeno-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 80,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A scholar of Stoic ethics connects rigorous argument with",
+    "the demands of a human life. Authority grows through",
+    "consistency, giving the school a persuasive witness that",
+    "reason can guide action when fortune turns."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-epic-male.svg",
+  "fittedArt": "assets/fitted/zeno-epic-male.png",
+  "overlaySvg": "source/overlays/zeno-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+  "master": "masters/zeno-epic-male.vectorcraft",
+  "export": "exports/zeno-epic-male.png",
+  "thumbnail": "assets/zeno-epic-male-thumb.png",
+  "exportSha256": "3cec2a00d1bdb5f51de79c6511ce4158ac574d6378f2c1424d05ce287db65d18",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582402,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

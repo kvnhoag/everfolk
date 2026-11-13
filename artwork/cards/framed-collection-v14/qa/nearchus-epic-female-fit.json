@@ -1,0 +1,81 @@
+{
+  "figureId": "nearchus",
+  "figureName": "Nearchus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Navigator of Nearchus",
+  "displayTitle": "Navigator of Nearchus",
+  "subtitle": "Right Hand of the Admiral",
+  "bodyTitle": "The Fleet Finds Its Way",
+  "bodyText": "A senior navigator joins pilots' reports, coastal knowledge, and the needs of the whole fleet. Responsibility reaches beyond one ship, helping Nearchus carry an exhausted expedition through the last demanding miles of its voyage.",
+  "sourceRoleSlug": "nearchus-title",
+  "newArt": false,
+  "slug": "nearchus-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Navigator of Nearchus",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-title-female-pixel.png",
+  "sourceArtSlug": "nearchus-title-female",
+  "editionLimit": 25,
+  "collectionIndex": 108,
+  "gameplayRarity": null,
+  "raritySource": "editorial-four-tier-extension",
+  "iconSource": {
+    "file": "source/icons/nearchus.svg",
+    "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A senior navigator joins pilots' reports, coastal",
+    "knowledge, and the needs of the whole fleet. Responsibility",
+    "reaches beyond one ship, helping Nearchus carry an",
+    "exhausted expedition through the last demanding miles of",
+    "its voyage."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-epic-female.svg",
+  "fittedArt": "assets/fitted/nearchus-epic-female.png",
+  "overlaySvg": "source/overlays/nearchus-epic-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "2727507158d184ca5c540686515e4d8aa33a0c1fcf142a807313ac5d333920ea",
+  "master": "masters/nearchus-epic-female.vectorcraft",
+  "export": "exports/nearchus-epic-female.png",
+  "thumbnail": "assets/nearchus-epic-female-thumb.png",
+  "exportSha256": "375fc0ae9bdd7225efdaccb167025f5bfc30511364be37cf5ce746ad7902de4c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582201,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-female.png",
+  "sourceSha256": "c9c8e7ae7d5a8295ca8a00ab98fc996ea5d721a6c62ecccbc5abdd1c3bdb054f",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-female-coarse.png",
+  "baseSha256": "1f2b919b1fca37507e08d886280eb8c88dfd54596567439658e556d96a4f6acf",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-female-coarse.json",
+  "baseQaSha256": "7b23d7111c4615a92003ca1b6c2871d55757fb252dcfbee133dd137634e8d1ee",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\alexander-common-female-face.json",
+  "configSha256": "10ceecef1a1bbc760a4fbc1c06f2f089e9090637599956370a276f83c7a75bde",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          398,
+          226
+        ],
+        "radius": [
+          100,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\alexander-common-female-pixel.png",
+  "outputSha256": "88da887ec7815fd3b93e32e4b5df3dac438ea44626bfe727aae75f3c9d87f055",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "c30d485441d16dbef463461c444f812fc1b30857c4e091c73c59930e23fb50d0",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\alexander-common-female-face-mask.png",
+  "maskSha256": "afff9112acb91019e71b3fc7b2724d3ae17ea60f46bbb1b19eae7b3ca97963c0",
+  "maskPixelSha256": "74508af66442e21c9783f227c94ecae404a9b94beeb18973249ce1dac7f90002",
+  "selectedDetailCells": 985,
+  "retainedCoarseCells": 23515,
+  "affectedPixels": 35460,
+  "changedPixels": 35153,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

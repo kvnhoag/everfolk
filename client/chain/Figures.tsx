@@ -11,6 +11,7 @@ import EverfolkCard from "./EverfolkCard.tsx";
 import "./web3-navigation.css";
 import "./token-market.css";
 import SectionHelp from "../components/SectionHelp.tsx";
+import CardArtCatalogue from "../components/CardArtCatalogue.tsx";
 
 type Copy = TokenView & { token_id: string };
 type FigureState = { copies: Copy[]; supply: [number, number] };
@@ -61,8 +62,8 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
         </div>
         <h1 tabIndex={-1}>Historical figures</h1>
         <p className="ef-market-hero-desc">
-          Meet every legendary figure of Rhakotis. Open a record to see its owners, chosen deeds, and the path a life
-          must follow to qualify.
+          Explore the card collection, then open an onchain figure's record to see its owners, chosen deeds, and
+          the path a life must follow to qualify.
         </p>
         <p className="chain-fine" style={{ color: "#d6bc8e" }}>
           Meeting a figure's requirements makes a life eligible for its drop; it does not guarantee a figure card.
@@ -70,6 +71,8 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
         {error && <p role="alert" className="chain-error">{error}</p>}
       </header>
 
+      <CardArtCatalogue />
+      <h2 className="figure-ownership-heading">Onchain figures &amp; deeds</h2>
       <div className="ef-market-card-grid ledger-body">
         {FIGURES.map((figure, idx) => {
           const state = figures[figure.figure];
@@ -85,11 +88,9 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
               <EverfolkCard
                 slotNumber={idx + 1}
                 title={figure.title}
-                subtitle="Historical Figure"
                 isFigure={true}
                 figureId={figure.figure}
                 badge={supplyText}
-                rarityLabel="Mythic Figure"
                 actionName="Historic Deeds"
                 actionDescription={figure.summary}
                 actions={
