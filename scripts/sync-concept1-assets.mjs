@@ -1,0 +1,230 @@
+/** Verify delivered Concept 1 384x480 portrait and 480x224 scene PNGs and emit compact runtime metadata. */
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { relative, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const repo = fileURLToPath(new URL("../", import.meta.url));
+const v3RegistryPath = resolve(repo, "client/models/portrait-asset-registry.json");
+const portraitDir = resolve(repo, "public/assets/portraits/concept1-v4");
+const portraitRegistryPath = resolve(repo, "client/models/portrait-concept1-registry.json");
+const sceneDir = resolve(repo, "public/assets/pixel/banners-concept1");
+const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+
+function need(ok, message) {
+  if (!ok) throw new Error(message);
+}
+
+function sha256(bytes) {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
+function writeChanged(path, value) {
+  const bytes = Buffer.from(JSON.stringify(value, null, 2) + "\n");
+  if (existsSync(path) && readFileSync(path).equals(bytes)) return false;
+  writeFileSync(path, bytes);
+  return true;
+}
+
+function verifyPng(path, width, height) {
+  need(existsSync(path), `Missing Concept 1 PNG: ${path}`);
+  const bytes = readFileSync(path);
+  need(bytes.subarray(0, 8).equals(PNG_SIGNATURE) && bytes.toString("ascii", 12, 16) === "IHDR", `Invalid PNG: ${path}`);
+  need(
+    bytes.readUInt32BE(16) === width && bytes.readUInt32BE(20) === height && bytes[24] === 8 && bytes[25] === 2,
+    `Concept 1 asset must be an unmodified ${width}x${height} RGB PNG: ${path}`,
+  );
+  return { sha256: sha256(bytes), bytes: bytes.length };
+}
+
+const PORTRAIT_SPECS = [
+  { id: "merchant-heron", file: "merchant-heron.png", role: "Harbor merchant Heron / male adult commerce" },
+  { id: "banker-syros", file: "banker-syros.png", role: "Harbor banker Syros / moneylender / elder male commerce" },
+  { id: "pakhom-grower", file: "pakhom-grower.png", role: "Nile grower Pakhom / male farm and craft work" },
+  { id: "ptolemaios-military", file: "ptolemaios-military.png", role: "Army quartermaster Ptolemaios / military" },
+  { id: "teacher-scholar", file: "teacher-scholar.png", role: "Female philosophy teacher / scholarly / mentor NPC" },
+  { id: "scholar-clerk-m01", file: "scholar-clerk-m01.png", role: "Male scholar and clerk / scientist / scholarly" },
+  { id: "citizen-mother-f01", file: "citizen-mother-f01.png", role: "Adult female citizen and mother / caregiver-a" },
+  { id: "citizen-adult-m02", file: "citizen-adult-m02.png", role: "Adult male citizen / caregiver-b / peer" },
+  { id: "merchant-woman-f03", file: "merchant-woman-f03.png", role: "Adult female merchant / commerce" },
+  { id: "elite-citizen-m02", file: "elite-citizen-m02.png", role: "Noble citizen / politician / aristocrat / royalty / elite" },
+  { id: "youth-student", file: "youth-student.png", role: "Male youth student" },
+  { id: "youth-girl-f02", file: "youth-girl-f02.png", role: "Female youth" },
+  { id: "child-boy-m01", file: "child-boy-m01.png", role: "Male child" },
+  { id: "child-girl-f01", file: "child-girl-f01.png", role: "Female child" },
+  { id: "infant-c1", file: "infant-c1.png", role: "Infant" },
+  { id: "elder-woman-f01", file: "elder-woman-f01.png", role: "Elder woman" },
+  { id: "elder-man-m01", file: "elder-man-m01.png", role: "Elder man" },
+];
+
+const EXPANDED_JOBS = [
+  { id: "farmhand", title: "Farmhand", wardrobeId: "work", minAge: 12 },
+  { id: "tenant-farmer", title: "Tenant farmer", wardrobeId: "work", minAge: 16 },
+  { id: "master-cultivator", title: "Master cultivator", wardrobeId: "work", minAge: 18 },
+  { id: "master-household-farmer", title: "Master household farmer", wardrobeId: "work", minAge: 18 },
+  { id: "tailor", title: "Tailor", wardrobeId: "work", minAge: 18 },
+  { id: "master-tailor", title: "Master tailor", wardrobeId: "work", minAge: 18 },
+  { id: "master-potter", title: "Master potter", wardrobeId: "work", minAge: 18 },
+  { id: "master-sculptor", title: "Master sculptor", wardrobeId: "work", minAge: 18 },
+  { id: "grain-dealer", title: "Grain dealer", wardrobeId: "commerce", minAge: 20 },
+  { id: "trading-house-manager", title: "Trading-house manager", wardrobeId: "commerce", minAge: 18 },
+  { id: "scientist", title: "Scientist", wardrobeId: "scholarly", minAge: 18 },
+  { id: "politician", title: "Politician", wardrobeId: "elite", minAge: 18 },
+  { id: "banker", title: "Harbor moneylender", wardrobeId: "banker", minAge: 18 },
+  { id: "moneylender", title: "Moneylender", wardrobeId: "banker", minAge: 18 },
+];
+
+const OCCUPATION_ALIASES = [
+  { title: "Artisan apprentice", wardrobeId: "work", minAge: 12 },
+  { title: "Philosopher and tutor", wardrobeId: "scholarly", minAge: 18 },
+  { title: "Astrologer", wardrobeId: "scholarly", minAge: 18 },
+  { title: "Trading house manager", wardrobeId: "commerce", minAge: 18 },
+  { title: "Banker", wardrobeId: "banker", minAge: 18 },
+  { title: "Syros the Banker", wardrobeId: "banker", minAge: 18 },
+];
+
+const PERSON_OVERRIDES = {
+  "town:moneylender": { file: "banker-syros.png", wardrobeId: "banker" },
+  "town:merchant": { file: "merchant-heron.png", wardrobeId: "commerce" },
+  "town:grower": { file: "pakhom-grower.png", wardrobeId: "work" },
+  "town:army": { file: "ptolemaios-military.png", wardrobeId: "military" },
+};
+
+function selectPortraitFile(sex, stage, wardrobeId) {
+  if (wardrobeId === "banker") return "banker-syros.png";
+  if (stage === "infant") return "infant-c1.png";
+  if (stage === "child") return sex === "female" ? "child-girl-f01.png" : "child-boy-m01.png";
+  if (stage === "youth") {
+    if (sex === "male" && (wardrobeId === "royalty" || wardrobeId === "aristocrat")) return "elite-citizen-m02.png";
+    return sex === "female" ? "youth-girl-f02.png" : "youth-student.png";
+  }
+  if (wardrobeId === "military") return sex === "male" ? "ptolemaios-military.png" : stage === "elder" ? "elder-woman-f01.png" : "citizen-mother-f01.png";
+  if (wardrobeId === "scholarly") return sex === "female" ? "teacher-scholar.png" : "scholar-clerk-m01.png";
+  if (wardrobeId === "commerce") {
+    if (sex === "female") return "merchant-woman-f03.png";
+    return stage === "elder" ? "banker-syros.png" : "merchant-heron.png";
+  }
+  if (wardrobeId === "elite" || wardrobeId === "aristocrat" || wardrobeId === "royalty") {
+    if (sex === "male") return "elite-citizen-m02.png";
+    return stage === "elder" ? "elder-woman-f01.png" : "merchant-woman-f03.png";
+  }
+  if (wardrobeId === "work" || wardrobeId === "maritime") {
+    if (sex === "female") return stage === "elder" ? "elder-woman-f01.png" : "citizen-mother-f01.png";
+    return stage === "elder" ? "elder-man-m01.png" : "pakhom-grower.png";
+  }
+  if (wardrobeId === "performance") {
+    if (sex === "female") return stage === "elder" ? "elder-woman-f01.png" : "merchant-woman-f03.png";
+    return stage === "elder" ? "elder-man-m01.png" : "citizen-adult-m02.png";
+  }
+  if (stage === "elder") return sex === "female" ? "elder-woman-f01.png" : "elder-man-m01.png";
+  return sex === "female" ? "citizen-mother-f01.png" : "citizen-adult-m02.png";
+}
+
+const v3 = JSON.parse(readFileSync(v3RegistryPath, "utf8"));
+const stageWardrobes = {
+  ...v3.stageWardrobes,
+  adult: [...v3.stageWardrobes.adult, "banker"],
+  middle: [...v3.stageWardrobes.middle, "banker"],
+  elder: [...v3.stageWardrobes.elder, "banker"],
+};
+
+const actualPortraitPngs = new Set(readdirSync(portraitDir).filter(name => name.endsWith(".png")));
+need(actualPortraitPngs.size === PORTRAIT_SPECS.length, `Expected ${PORTRAIT_SPECS.length} Concept 1 PNGs, got ${actualPortraitPngs.size}`);
+
+const portraits = {};
+for (const spec of PORTRAIT_SPECS) {
+  need(actualPortraitPngs.has(spec.file), `Missing expected Concept 1 portrait: ${spec.file}`);
+  const meta = verifyPng(resolve(portraitDir, spec.file), 384, 480);
+  portraits[spec.file] = {
+    id: spec.id,
+    file: spec.file,
+    src: `/assets/portraits/concept1-v4/${spec.file}`,
+    width: 384,
+    height: 480,
+    nativeGrid: { width: 64, height: 80, scale: 6 },
+    role: spec.role,
+    sha256: meta.sha256,
+  };
+}
+
+for (const override of Object.values(PERSON_OVERRIDES)) {
+  need(portraits[override.file], `Person override references unknown portrait ${override.file}`);
+}
+
+const combinationRoutes = {};
+const usedFiles = new Set();
+for (const sex of ["male", "female"]) {
+  for (const [stage, wardrobes] of Object.entries(stageWardrobes)) {
+    for (const wardrobeId of wardrobes) {
+      const file = selectPortraitFile(sex, stage, wardrobeId);
+      need(portraits[file], `Route ${sex}:${stage}:${wardrobeId} points to missing portrait ${file}`);
+      usedFiles.add(file);
+      combinationRoutes[`${sex}:${stage}:${wardrobeId}`] = {
+        id: portraits[file].id,
+        file,
+        src: portraits[file].src,
+      };
+    }
+  }
+}
+for (const override of Object.values(PERSON_OVERRIDES)) usedFiles.add(override.file);
+need(usedFiles.size === PORTRAIT_SPECS.length, `Unused Concept 1 portrait files: ${PORTRAIT_SPECS.filter(s => !usedFiles.has(s.file)).map(s => s.file).join(", ")}`);
+
+const jobs = [...v3.jobs, ...EXPANDED_JOBS];
+const roles = [
+  ...v3.roles.slice(0, 2),
+  { roleAlias: "banker", wardrobeId: "banker", minAge: 18 },
+  ...v3.roles.slice(2),
+];
+
+const concept1Registry = {
+  schemaVersion: 1,
+  libraryId: "everfolk-concept1-portraits-v4",
+  assetVersion: "c1-v4",
+  publicPrefix: "/assets/portraits/concept1-v4/",
+  dimensions: { width: 384, height: 480 },
+  nativeGrid: { width: 64, height: 80, scale: 6 },
+  identities: v3.identities,
+  defaultWardrobes: v3.defaultWardrobes,
+  stageWardrobes,
+  jobs,
+  occupationAliases: OCCUPATION_ALIASES,
+  encounters: v3.encounters,
+  roles,
+  personOverrides: PERSON_OVERRIDES,
+  portraits,
+  combinationRoutes,
+};
+
+const SCENE_SPECS = [
+  { id: "event_alexander_332bce", file: "event_alexander_332bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-alexander-egypt", "classical-alexander-shore-work", "classical-alexandria-founded"] },
+  { id: "event_euclid_300bce", file: "event_euclid_300bce_480x224.png", mode: "event", bakedActor: true, events: ["classical-euclid-teaching", "classical-euclid-demonstration"] },
+  { id: "bg_harbor_quay", file: "bg_harbor_quay_480x224.png", mode: "backdrop", bakedActor: false, situations: ["harbor", "market", "business"] },
+  { id: "bg_nile_farm", file: "bg_nile_farm_480x224.png", mode: "backdrop", bakedActor: false, situations: ["farming"] },
+  { id: "bg_military_garrison", file: "bg_military_garrison_480x224.png", mode: "backdrop", bakedActor: false, situations: ["military", "war", "danger"] },
+  { id: "bg_mouseion_study", file: "bg_mouseion_study_480x224.png", mode: "backdrop", bakedActor: false, situations: ["study", "philosophy", "astronomy", "civic"] },
+];
+
+const sceneManifest = {
+  schemaVersion: 1,
+  libraryId: "everfolk-concept1-banners-v1",
+  dimensions: { width: 480, height: 224 },
+  scenes: SCENE_SPECS.map(spec => {
+    const meta = verifyPng(resolve(sceneDir, spec.file), 480, 224);
+    return { ...spec, src: `/assets/pixel/banners-concept1/${spec.file}`, width: 480, height: 224, sha256: meta.sha256 };
+  }),
+};
+
+const registryChanged = writeChanged(portraitRegistryPath, concept1Registry);
+const portraitManifestChanged = writeChanged(resolve(portraitDir, "manifest.json"), concept1Registry);
+const sceneManifestChanged = writeChanged(resolve(sceneDir, "manifest.json"), sceneManifest);
+
+console.log(JSON.stringify({
+  portraits: PORTRAIT_SPECS.length,
+  jobs: jobs.length,
+  scenes: SCENE_SPECS.length,
+  registryChanged,
+  portraitManifestChanged,
+  sceneManifestChanged,
+  registry: relative(repo, portraitRegistryPath).replaceAll("\\", "/"),
+}));

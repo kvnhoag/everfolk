@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-concept1-banners-v1",
+  "dimensions": {
+    "width": 480,
+    "height": 224
+  },
+  "scenes": [
+    {
+      "id": "event_alexander_332bce",
+      "file": "event_alexander_332bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-alexander-egypt",
+        "classical-alexander-shore-work",
+        "classical-alexandria-founded"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "f70a782ecd81ce10579470b97b8ae6e1eefe642324a4317a17f0305bbe0dc26f"
+    },
+    {
+      "id": "event_euclid_300bce",
+      "file": "event_euclid_300bce_480x224.png",
+      "mode": "event",
+      "bakedActor": true,
+      "events": [
+        "classical-euclid-teaching",
+        "classical-euclid-demonstration"
+      ],
+      "src": "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "1d2ba18394642746a235101a2004b3d298fad489fcdf87a54a10c39bd90d75ad"
+    },
+    {
+      "id": "bg_harbor_quay",
+      "file": "bg_harbor_quay_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "harbor",
+        "market",
+        "business"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "5e52e3fff401d4cf414512e81a6e4f965be5b7f6390d3dcdeed24a59e1547027"
+    },
+    {
+      "id": "bg_nile_farm",
+      "file": "bg_nile_farm_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "farming"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_nile_farm_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "e877326651fd1b55189c2926f9a585726f9cce91e70a69c2e7a888096c620cf3"
+    },
+    {
+      "id": "bg_military_garrison",
+      "file": "bg_military_garrison_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "military",
+        "war",
+        "danger"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "e8e86eb2a9f84b4cbf6b5c1a750ddac43d83221c9c20501a42b384e6394e0775"
+    },
+    {
+      "id": "bg_mouseion_study",
+      "file": "bg_mouseion_study_480x224.png",
+      "mode": "backdrop",
+      "bakedActor": false,
+      "situations": [
+        "study",
+        "philosophy",
+        "astronomy",
+        "civic"
+      ],
+      "src": "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+      "width": 480,
+      "height": 224,
+      "sha256": "10a663629ad4e401777e49060b0c4489bcc91a720f98d15e71414d25f0685743"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ export const BANNER_SITUATION_IDS = [
 ] as const;
 export type BannerSituationId = typeof BANNER_SITUATION_IDS[number];
 export type BannerActorPose = "cradle" | "standing" | "seated" | "reclined";
+export type BannerStyle = "concept1-event" | "concept1-plate" | "legacy-svg";
 
 export const BANNER_STAGE_LABELS: Record<AvatarStage, string> = {
   infant: "Infancy", child: "Childhood", youth: "Youth", adult: "Adulthood", middle: "Middle years", elder: "Later life",
@@ -55,6 +56,10 @@ export interface LifeBanner {
   alt: string;
   motion: MotionId;
   assetSrc: string;
+  fallbackAssetSrc: string;
+  assetWidth: number;
+  assetHeight: number;
+  bannerStyle: BannerStyle;
   actorVisible: boolean;
   actorPose: BannerActorPose;
 }
@@ -70,11 +75,20 @@ const JOB_SITUATIONS: Record<string, BannerSituationId> = {
   farmer: "home", weaver: "workshop", writer: "study", boatbuilder: "harbor", trader: "market",
   fisher: "harbor", baker: "home", "household-worker": "home",
   merchant: "market", "estate-steward": "civic", quartermaster: "military",
+  farmhand: "home", "tenant-farmer": "home", "master-cultivator": "home", "master-household-farmer": "home",
+  tailor: "workshop", "master-tailor": "workshop", "master-potter": "workshop", "master-sculptor": "sculpture",
+  "grain-dealer": "market", "trading-house-manager": "market", scientist: "study", politician: "civic",
 };
+
+const FARMING_JOBS = new Set([
+  "farmer", "farmhand", "tenant-farmer", "master-cultivator", "master-household-farmer",
+]);
+
 const ROUTE_SITUATIONS: Record<string, BannerSituationId> = {
   sculpture: "sculpture", philosophy: "philosophy", seafaring: "harbor", military: "military", commerce: "market",
   "astronomy-calendar": "astronomy", "music-performance": "music",
 };
+
 const ACTIVITY_SITUATIONS: Record<string, BannerSituationId> = {
   "train-sculpture": "sculpture", "small-figure-order": "sculpture", "sculpture-commission": "sculpture",
   "train-philosophy": "philosophy", "teach-a-reading-lesson": "philosophy",
@@ -85,9 +99,101 @@ const ACTIVITY_SITUATIONS: Record<string, BannerSituationId> = {
   "train-warfare": "military", "drill-a-unit": "military", "complete-service-assignment": "military",
   "organise-war-supplies": "military", "fulfil-significant-order": "market",
   "focus-market-trading": "market",
+  "work-farmer": "home",
   "rest-for-recovery": "recovery", "seek-a-healer": "recovery", "ask-household-care": "recovery", "take-a-rest-day": "recovery",
   "grow-household": "parenthood", "care-for-children": "parenthood", "cook-a-shared-meal": "home",
   "visit-a-friend": "friendship", "join-an-evening-song": "music", "take-an-easy-walk": "civic",
+};
+
+const CONCEPT1_SITUATION_PLATES: Partial<Record<BannerSituationId, string>> = {
+  harbor: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
+  market: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
+  business: "/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png",
+  military: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
+  war: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
+  danger: "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png",
+  study: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+  philosophy: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+  astronomy: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+  civic: "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png",
+};
+
+const NILE_FARM_PLATE = "/assets/pixel/banners-concept1/bg_nile_farm_480x224.png";
+
+interface BackdropSpec {
+  readonly src: string;
+  readonly label?: string;
+  readonly width: number;
+  readonly height: number;
+  readonly bakedActor: boolean;
+  readonly bannerStyle: BannerStyle;
+}
+
+const EVENT_BACKDROPS: Readonly<Partial<Record<string, BackdropSpec>>> = {
+  "child-route-care-floating-reed": {
+    src: "/assets/pixel/banners/events/reed-washing-court.svg",
+    label: "A reed on the water",
+    width: 240,
+    height: 112,
+    bakedActor: false,
+    bannerStyle: "legacy-svg",
+  },
+  "child-route-learning-shadow-marks": {
+    src: "/assets/pixel/banners/events/shadow-mark-terrace.svg",
+    label: "Measuring shadows on the terrace",
+    width: 240,
+    height: 112,
+    bakedActor: false,
+    bannerStyle: "legacy-svg",
+  },
+  "child-route-training-vessel-packing": {
+    src: "/assets/pixel/banners/events/pottery-packing-room.svg",
+    label: "Packing a vessel in the workshop",
+    width: 240,
+    height: 112,
+    bakedActor: false,
+    bannerStyle: "legacy-svg",
+  },
+  "classical-alexander-egypt": {
+    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
+    label: "Alexander arrives in Egypt",
+    width: 480,
+    height: 224,
+    bakedActor: true,
+    bannerStyle: "concept1-event",
+  },
+  "classical-alexander-shore-work": {
+    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
+    label: "Supplies for the king's party",
+    width: 480,
+    height: 224,
+    bakedActor: true,
+    bannerStyle: "concept1-event",
+  },
+  "classical-alexandria-founded": {
+    src: "/assets/pixel/banners-concept1/event_alexander_332bce_480x224.png",
+    label: "Lines for a new city",
+    width: 480,
+    height: 224,
+    bakedActor: true,
+    bannerStyle: "concept1-event",
+  },
+  "classical-euclid-teaching": {
+    src: "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
+    label: "Euclid teaches in Alexandria",
+    width: 480,
+    height: 224,
+    bakedActor: true,
+    bannerStyle: "concept1-event",
+  },
+  "classical-euclid-demonstration": {
+    src: "/assets/pixel/banners-concept1/event_euclid_300bce_480x224.png",
+    label: "Euclid's geometry proof",
+    width: 480,
+    height: 224,
+    bakedActor: true,
+    bannerStyle: "concept1-event",
+  },
 };
 
 function fromScene(scene: SceneId, life: LifeState): BannerSituationId {
@@ -158,11 +264,21 @@ function twoSentences(text: string): string {
   return text.trim().split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
 }
 
-const EVENT_BACKDROPS: Readonly<Partial<Record<string, { file: string; label: string }>>> = {
-  "child-route-care-floating-reed": { file: "reed-washing-court", label: "A reed on the water" },
-  "child-route-learning-shadow-marks": { file: "shadow-mark-terrace", label: "Measuring shadows on the terrace" },
-  "child-route-training-vessel-packing": { file: "pottery-packing-room", label: "Packing a vessel in the workshop" },
-};
+function isAgriculturalBackdrop(
+  life: LifeState,
+  world: WorldPack,
+  situation: BannerSituationId,
+  accepted: SceneContext | undefined,
+  options: BannerOptions,
+): boolean {
+  if (options.birthReveal || life.age < 3) return false;
+  if (situation !== "home" && situation !== "workshop" && situation !== "courtyard") return false;
+  const eventId = accepted?.eventId ?? "";
+  if (eventId === "farmer-checks-seed" || eventId.startsWith("background-tenant-farming-household-")) return true;
+  if (accepted && latestActivity(accepted, life, world)?.id === "work-farmer") return true;
+  if (accepted && accepted.kind !== "fallback" && accepted.kind !== "birth" && accepted.scene === "family") return false;
+  return !life.flags.retired && FARMING_JOBS.has(life.character?.jobId ?? "");
+}
 
 /** Presentation only. No mutation, random draw, stored progress or engine command. */
 export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: SceneContext, options: BannerOptions = {}): LifeBanner {
@@ -171,7 +287,7 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
   let caption: string | undefined;
   let situationLabel: string | undefined;
   let motion: MotionId | undefined;
-  let backdrop: { file: string; label: string } | undefined;
+  let backdrop: BackdropSpec | undefined;
   const ending = life.phase === "ended" ? world.endings.find(item => item.id === life.endingId) : undefined;
   // The dashboard must not turn a proposed route into a completed scene.
   const candidate = context ?? resolveLifeScenes(life, world, options.eventVisuals)[0];
@@ -217,14 +333,41 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
     }
   }
   const definition = BANNER_SITUATIONS[situation];
+  const fallbackAssetSrc = `/assets/pixel/banners/${situation}.svg`;
+  let assetSrc = fallbackAssetSrc;
+  let assetWidth = 240;
+  let assetHeight = 112;
+  let bannerStyle: BannerStyle = "legacy-svg";
+  let bakedActor = false;
+  if (backdrop) {
+    assetSrc = backdrop.src;
+    assetWidth = backdrop.width;
+    assetHeight = backdrop.height;
+    bannerStyle = backdrop.bannerStyle;
+    bakedActor = backdrop.bakedActor;
+  } else {
+    const concept1Plate = isAgriculturalBackdrop(life, world, situation, accepted, options)
+      ? NILE_FARM_PLATE
+      : CONCEPT1_SITUATION_PLATES[situation];
+    if (concept1Plate) {
+      assetSrc = concept1Plate;
+      assetWidth = 480;
+      assetHeight = 224;
+      bannerStyle = "concept1-plate";
+    }
+  }
   return {
     situation, stage, stageLabel, title: life.phase === "ended" ? ending?.kind === "chapter" ? "Life complete" : "Life ended" : stageLabel,
     situationLabel: situationLabel ?? definition.label,
     caption: twoSentences(caption ?? definition.caption),
     alt: `Layered pixel scene: ${stageLabel.toLowerCase()}, ${(situationLabel ?? definition.label).toLowerCase()}`,
     motion: motion ?? (life.age < 3 && situation === "home" ? "cradle" : definition.motion),
-    assetSrc: backdrop ? `/assets/pixel/banners/events/${backdrop.file}.svg` : `/assets/pixel/banners/${situation}.svg`,
-    actorVisible: situation !== "memorial",
+    assetSrc,
+    fallbackAssetSrc,
+    assetWidth,
+    assetHeight,
+    bannerStyle,
+    actorVisible: situation !== "memorial" && !bakedActor,
     actorPose: life.age < 3 ? "cradle" : definition.pose,
   };
 }

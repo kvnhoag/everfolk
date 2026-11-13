@@ -144,6 +144,7 @@ export default function EverfolkCard({
                 age={36}
                 seed={pixelSeed ?? `${title}:${tokenId ?? slotNumber ?? 1}`}
                 name={title}
+                portraitSet="ordinary-v3"
               />
             )}
           </div>

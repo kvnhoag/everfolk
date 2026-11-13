@@ -52,7 +52,15 @@ export function PlayPage({ steps, active, onActive }: { steps: readonly PlayStep
 }
 
 /** Who you are, drawn at each stage of life. */
-export interface RoadPortrait { seed: string; name: string; sex?: "male" | "female"; avatarVariant?: number }
+export interface RoadPortrait {
+  seed: string;
+  name: string;
+  sex?: "male" | "female";
+  avatarVariant?: number;
+  personKey?: string;
+  jobId?: string | null;
+  role?: "royalty" | "aristocrat";
+}
 
 export function LifePage({ stages, portrait }: { stages: readonly RoadmapStage[]; portrait: RoadPortrait }) {
   return <div className="htp-life">
@@ -76,7 +84,7 @@ export function LifePage({ stages, portrait }: { stages: readonly RoadmapStage[]
       <h3 className="htp-section-title">Your life, stage by stage</h3>
       <ol className="htp-road">
         {stages.map(stage => <li key={stage.id} className={`htp-stage is-${stage.state}`}>
-          <div className="htp-stage-portrait"><PixelPortrait age={stage.fromAge} seed={portrait.seed} name={portrait.name} sex={portrait.sex} avatarVariant={portrait.avatarVariant} className="htp-portrait" /></div>
+          <div className="htp-stage-portrait"><PixelPortrait age={stage.fromAge} seed={portrait.seed} name={portrait.name} sex={portrait.sex} avatarVariant={portrait.avatarVariant} personKey={portrait.personKey} jobId={portrait.jobId} role={portrait.role} className="htp-portrait" /></div>
           {stage.state === "current" && <span className="htp-here">You are here</span>}
           <strong className="htp-stage-name">{stage.title}</strong>
           <small className="htp-ages">{stageAges(stage)}</small>

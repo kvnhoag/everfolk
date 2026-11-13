@@ -42,8 +42,8 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     const cards = session.pack.cards.map(card => ({
       name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
       rarity: card.rarity,
-      // Figures use the approved collection card; people of the city show this life's own v3 portrait.
-      ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : playerPortraitState(world, life).src, life.seed),
+      // Figures use the approved collection card; people of the city keep their ordinary-v3 NFT fallback.
+      ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : playerPortraitState(world, life, { portraitSet: "ordinary-v3" }).src, life.seed),
       sub: actionName(card.action_id),
       role: card.figure_id ? "Historical figure" : "Person of the city",
     }));

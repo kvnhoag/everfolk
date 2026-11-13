@@ -166,7 +166,16 @@ test("all banner IDs have a stable asset path and reading the banner leaves life
   assert.deepEqual(Object.keys(BANNER_SITUATIONS).sort(), [...BANNER_SITUATION_IDS].sort());
   const life = lifeAt(42), before = structuredClone(life), pack = structuredClone(world);
   const banner = resolveLifeBanner(life, world, context());
-  assert.equal(banner.assetSrc, `/assets/pixel/banners/${banner.situation}.svg`);
+  assert.equal(banner.assetSrc, "/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png");
+  assert.equal(banner.fallbackAssetSrc, `/assets/pixel/banners/${banner.situation}.svg`);
+  assert.equal(banner.assetWidth, 480);
+  assert.equal(banner.assetHeight, 224);
+  const workshopLife = lifeAt(24);
+  workshopLife.character!.jobId = "potter";
+  const workshopBanner = resolveLifeBanner(workshopLife, world);
+  assert.equal(workshopBanner.assetSrc, "/assets/pixel/banners/workshop.svg");
+  assert.equal(workshopBanner.assetWidth, 240);
+  assert.equal(workshopBanner.assetHeight, 112);
   assert.ok(banner.caption.length > 0); assert.match(banner.alt, /middle years/);
   assert.deepEqual(life, before); assert.deepEqual(world, pack);
 });

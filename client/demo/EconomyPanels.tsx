@@ -9,7 +9,13 @@ import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { getLoanSummary } from "../models/loan-summary.ts";
 import PixelPortrait from "../components/PixelPortrait.tsx";
-import { childPortraitState, personPortraitState, resolvePortraitState } from "../models/portrait-state.ts";
+import {
+  childPortraitState,
+  moneylenderPortraitState,
+  personPortraitState,
+  resolvePortraitState,
+  townFigurePortraitState,
+} from "../models/portrait-state.ts";
 import { relationshipLabels, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen, TownFigureView } from "./screen.ts";
@@ -82,9 +88,7 @@ function heldQuantity(screen: DemoScreen, item: TradeItem): number {
 }
 
 function townFigurePortrait(figure: TownFigureView) {
-  const jobId = { merchant: "merchant", grower: "farmer", army: "quartermaster" }[figure.role];
-  return resolvePortraitState({ personKey: `town:${figure.role}`, age: figure.age, sex: figure.sex,
-    avatarVariant: figure.avatarVariant, jobId });
+  return townFigurePortraitState(figure);
 }
 
 export default function EconomyPanels({
@@ -948,8 +952,7 @@ export default function EconomyPanels({
                 <article className={`demo-town-figure-card${loanSummary?.dueSoon || loanSummary?.due ? " has-offer" : ""}`}>
                   <div className="demo-town-figure-top">
                     <PixelPortrait
-                      portrait={resolvePortraitState({ age: 52, sex: "male", avatarVariant: 2,
-                        personKey: "town:moneylender", occupation: world.economy.moneylender.title })}
+                      portrait={moneylenderPortraitState(world)}
                       name="Syros the Banker"
                       className="demo-town-figure-avatar"
                     />
