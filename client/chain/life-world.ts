@@ -1,5 +1,5 @@
+import { lives10World as currentLife, figure2World as figures2, figure3World as figures3 } from "../../worlds/demo/wsl-world-packs.mjs";
 import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
-import currentLife from "../../worlds/demo/alexandria-lives-10.json" with { type: "json" };
 import life9 from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import life8 from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import life7 from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
@@ -10,8 +10,6 @@ import life3 from "../../worlds/demo/alexandria-lives-3.json" with { type: "json
 import life2 from "../../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import life1 from "../../worlds/demo/alexandria-lives-1.json" with { type: "json" };
 import deep1 from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
-import figures3 from "../../worlds/demo/alexandria-figures-3.json" with { type: "json" };
-import figures2 from "../../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 import figures1 from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import type { WorldPack } from "../../src/types.ts";
 import { DEMO_WORLD_VERSION, LEGACY_DEMO_WORLD_VERSION, NPC_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";

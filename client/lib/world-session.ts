@@ -1,3 +1,4 @@
+import { wslLives7World, wslLives8World, wslLives9World, lives10World, figure2World, figure3World } from "../../worlds/demo/wsl-world-packs.mjs";
 import { createEngine } from "../../src/index.ts";
 import { buildNpcWorld } from "../../chain/npc-world.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
@@ -54,15 +55,9 @@ import lives4World from "../../worlds/demo/alexandria-lives-4.json" with { type:
 import lives5World from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import lives8World from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import lives9World from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
-import lives10World from "../../worlds/demo/alexandria-lives-10.json" with { type: "json" };
-import wslLives7World from "../../worlds/demo/alexandria-lives-7-wsl-contributions.json" with { type: "json" };
-import wslLives8World from "../../worlds/demo/alexandria-lives-8-wsl-contributions.json" with { type: "json" };
-import wslLives9World from "../../worlds/demo/alexandria-lives-9-wsl-resources.json" with { type: "json" };
 import lives7World from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import lives6World from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import deepWorld from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
-import figure3World from "../../worlds/demo/alexandria-figures-3.json" with { type: "json" };
-import figure2World from "../../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 import figureWorld from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import familyRecordsWorld from "../../worlds/alexandria-0.42.0.json" with { type: "json" };
 import grandparentRarityWorld from "../../worlds/alexandria-0.43.0.json" with { type: "json" };

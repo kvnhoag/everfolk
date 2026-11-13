@@ -1,8 +1,8 @@
 "use client";
+import { lives10World as current } from "../../worlds/demo/wsl-world-packs.mjs";
 import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { createEngine } from "../../src/engine.ts";
 import type { WorldPack } from "../../src/types.ts";
-import current from "../../worlds/demo/alexandria-lives-10.json" with { type: "json" };
 import CapabilityTree from "../components/CapabilityTree.tsx";
 import FigurePaths from "../components/FigurePaths.tsx";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
