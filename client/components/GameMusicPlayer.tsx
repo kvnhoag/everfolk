@@ -25,17 +25,44 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const wasOpenRef = useRef(false);
+  const restoreFocusOnCloseRef = useRef(false);
   const playlistHeadingId = useId();
 
+  function openDrawer() {
+    restoreFocusOnCloseRef.current = false;
+    setDrawerOpen(true);
+  }
+
+  function closeDrawer(restoreFocus: boolean) {
+    restoreFocusOnCloseRef.current = restoreFocus;
+    setDrawerOpen(false);
+  }
+
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
+    if (drawerOpen && !wasOpenRef.current) {
+      const target = closeButtonRef.current ?? drawerRef.current;
+      target?.focus({ preventScroll: true });
+    } else if (!drawerOpen && wasOpenRef.current && restoreFocusOnCloseRef.current) {
+      restoreFocusOnCloseRef.current = false;
+      triggerRef.current?.focus({ preventScroll: true });
+    }
+    wasOpenRef.current = drawerOpen;
+  }, [drawerOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(e: Event) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setDrawerOpen(false);
+        closeDrawer(false);
       }
     }
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setDrawerOpen(false);
+        e.preventDefault();
+        closeDrawer(true);
       }
     }
     if (drawerOpen) {
@@ -54,9 +81,10 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
   return (
     <div className={`game-music-player variant-${variant}`} ref={containerRef}>
       <button
+        ref={triggerRef}
         type="button"
         className={`music-square-trigger${isAudible ? " is-playing" : " is-muted"}${drawerOpen ? " is-open" : ""}`}
-        onClick={() => setDrawerOpen(prev => !prev)}
+        onClick={() => (drawerOpen ? closeDrawer(false) : openDrawer())}
         aria-expanded={drawerOpen}
         aria-haspopup="dialog"
         aria-label={`Audio settings (${isAudible ? `Playing: ${currentTrack.title}` : "Muted or paused"})`}
@@ -68,16 +96,24 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
       </button>
 
       {drawerOpen && (
-        <div className="music-drawer" role="dialog" aria-label="Everfolk Audio & Music Settings">
+        <div
+          ref={drawerRef}
+          className="music-drawer"
+          role="dialog"
+          aria-modal="false"
+          tabIndex={-1}
+          aria-label="Everfolk Audio & Music Settings"
+        >
           <div className="music-drawer-header">
             <div>
               <span className="music-drawer-eyebrow">AUDIO &amp; AMBIENCE</span>
               <h4 className="music-drawer-title">Soundscapes of the Nile</h4>
             </div>
             <button
+              ref={closeButtonRef}
               type="button"
               className="music-drawer-close"
-              onClick={() => setDrawerOpen(false)}
+              onClick={() => closeDrawer(true)}
               aria-label="Close audio settings"
             >
               ×
@@ -180,6 +216,12 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
                     className={`music-track-item${isActive ? " is-active" : ""}`}
                     aria-pressed={isActive}
                     onClick={() => selectTrack(idx)}
+                    onKeyDown={e => {
+                      if (e.key === " " || e.key === "Spacebar") {
+                        e.preventDefault();
+                        if (!e.repeat) selectTrack(idx);
+                      }
+                    }}
                   >
                     <span className="music-track-badge" aria-hidden="true">{isActive ? "✓" : idx + 1}</span>
                     <span className="music-track-item-info">
