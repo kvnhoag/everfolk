@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useId } from "react";
+import { CLICK_SFX_CREDIT } from "../lib/audio-manager.ts";
 import { useAudioManager } from "../hooks/useAudioManager.ts";
 import "../styles/audio-player.css";
 
@@ -89,8 +90,8 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
                 {muted ? "MUTED" : isPlaying ? "NOW PLAYING" : "PAUSED"}
               </span>
               <strong className="music-track-title">{currentTrack.title}</strong>
-              <span className="music-track-origin">
-                {currentTrack.origin} · {currentTrack.composer}
+              <span className="music-track-origin" title={currentTrack.attribution}>
+                {currentTrack.origin} · {currentTrack.attribution}
               </span>
             </div>
             <div className="music-transport-row">
@@ -183,7 +184,7 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
                     <span className="music-track-badge" aria-hidden="true">{isActive ? "✓" : idx + 1}</span>
                     <span className="music-track-item-info">
                       <strong>{track.title}</strong>
-                      <small>{track.origin} · {track.composer}</small>
+                      <small>{track.origin} · {track.composer} · {track.license}</small>
                       <span className="music-track-item-tag">{track.tag}</span>
                     </span>
                   </button>
@@ -202,6 +203,10 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
               <span>✦</span>
               <span>UI Click Sound: {sfxEnabled ? "ON" : "OFF"}</span>
             </button>
+            <p className="music-credits-note">
+              Click SFX: {CLICK_SFX_CREDIT.attribution}.{" "}
+              <a href="/assets/audio/ATTRIBUTION.md" target="_blank" rel="noreferrer">Audio notices</a>
+            </p>
           </div>
         </div>
       )}

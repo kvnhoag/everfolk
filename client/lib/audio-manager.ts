@@ -1,60 +1,108 @@
 export interface MusicTrack {
   id: string;
   title: string;
+  sourceTitle: string;
   composer: string;
   src: string;
   tag: string;
   origin: string;
+  license: string;
+  attribution: string;
+  sourceUrl: string;
 }
+
+export interface AudioSfxCredit {
+  id: string;
+  title: string;
+  creator: string;
+  src: string;
+  license: string;
+  attribution: string;
+  sourceUrl: string;
+}
+
+export const CLICK_SFX_CREDIT: AudioSfxCredit = {
+  id: "button-click",
+  title: "Menu Selection Click",
+  creator: "NenadSimic",
+  src: "/assets/audio/button-click.mp3",
+  license: "CC-BY 3.0",
+  attribution: "Menu Selection Click by NenadSimic · CC-BY 3.0",
+  sourceUrl: "https://opengameart.org/content/menu-selection-click",
+};
 
 export const PLAYLIST: readonly MusicTrack[] = [
   {
     id: "egyptian-meditation",
     title: "Egyptian Meditation",
-    composer: "cynicmusic",
+    sourceTitle: "Egyptian meditation music",
+    composer: "brandon75689",
     src: "/assets/audio/egyptian-meditation.ogg",
     tag: "Ancient Egypt",
     origin: "Nile Flute & Sacred Harp",
+    license: "CC0 1.0 / OGA-BY 3.0",
+    attribution: "Egyptian meditation music by brandon75689 (submitted by HaelDB, CC0 1.0 / OGA-BY 3.0)",
+    sourceUrl: "https://opengameart.org/content/egyptian-meditation-music",
   },
   {
     id: "temple-of-the-mystics",
     title: "Temple of the Mystics",
-    composer: "Matthew Pablo",
+    sourceTitle: "Temple of the Mystics",
+    composer: "Jason Dagenet (jdagenet)",
     src: "/assets/audio/temple-of-the-mystics.mp3",
     tag: "Mystic Alexandria",
     origin: "Ambient Temple Strings",
+    license: "CC-BY-SA 3.0",
+    attribution: "Temple of the Mystics by Jason Dagenet (jdagenet) · CC-BY-SA 3.0",
+    sourceUrl: "https://opengameart.org/content/temple-of-the-mystics",
   },
   {
     id: "hidden-oasis",
     title: "Hidden Oasis",
+    sourceTitle: "Hidden Oasis",
     composer: "Trevor Lentz",
     src: "/assets/audio/hidden-oasis.mp3",
     tag: "Desert Oasis",
     origin: "Serene Palm Grove",
+    license: "CC-BY-SA 3.0",
+    attribution: "Hidden Oasis by Trevor Lentz · CC-BY-SA 3.0",
+    sourceUrl: "https://opengameart.org/content/hidden-oasis",
   },
   {
     id: "mediterranean-breeze",
     title: "Mediterranean Breeze",
+    sourceTitle: "Mediterranean Breeze (Looping)",
     composer: "Eric Matyas",
     src: "/assets/audio/mediterranean-breeze.ogg",
     tag: "Rhakotis Shore",
     origin: "Coastal Lute & Gentle Winds",
+    license: "Soundimage International Public License",
+    attribution: "\"Mediterranean Breeze\" by Eric Matyas · www.soundimage.org",
+    sourceUrl: "https://soundimage.org/world/",
   },
   {
     id: "desert-caravan",
     title: "Desert Caravan",
-    composer: "Rezoner",
+    sourceTitle: "Desert theme",
+    composer: "yd",
     src: "/assets/audio/desert-caravan.ogg",
     tag: "Eastern Market",
     origin: "Acoustic Oud & Percussion",
+    license: "CC0 1.0",
+    attribution: "Desert theme (caravan.ogg) by yd · CC0 1.0 Public Domain",
+    sourceUrl: "https://opengameart.org/content/desert-theme",
   },
   {
     id: "minstrel-dance",
     title: "Medieval: Minstrel Dance",
+    sourceTitle: "Medieval: Minstrel Dance",
     composer: "RandomMind",
     src: "/assets/audio/medieval-minstrel-dance.mp3",
     tag: "Harbor Tavern",
     origin: "Lively Minstrel Lute",
+    license: "CC0 1.0",
+    attribution: "Medieval: Minstrel Dance by RandomMind · CC0 1.0 Public Domain",
+    sourceUrl: "https://opengameart.org/content/medieval-minstrel-dance",
   },
 ] as const;
 
@@ -72,13 +120,16 @@ const STORAGE_KEY_VOLUME = "everfolk:audio:volume";
 const STORAGE_KEY_MUTED = "everfolk:audio:muted";
 const STORAGE_KEY_SFX = "everfolk:audio:sfx";
 
-const CLICK_SFX_SRC = "/assets/audio/button-click.mp3";
+const CLICK_SFX_SRC = CLICK_SFX_CREDIT.src;
 const DEFAULT_VOLUME = 0.60;
 
 export class AudioManager {
   private bgmAudio: HTMLAudioElement | null = null;
   private sfxAudioPool: HTMLAudioElement[] = [];
   private sfxPoolIndex = 0;
+  private sfxAssetUnavailable = false;
+  private failedTrackIds = new Set<string>();
+  private wantsPlayback = false;
   private audioCtx: AudioContext | null = null;
   private listeners = new Set<() => void>();
   private globalClickInstalled = false;
@@ -166,14 +217,25 @@ export class AudioManager {
       this.bgmAudio.addEventListener("ended", () => {
         this.nextTrack();
       });
+      this.bgmAudio.addEventListener("error", () => {
+        this.handleBgmFailure();
+      });
     }
 
-    if (this.sfxAudioPool.length === 0) {
-      for (let i = 0; i < 4; i++) {
-        const sfx = new Audio(CLICK_SFX_SRC);
-        sfx.preload = "auto";
-        sfx.volume = Math.min(1, this.state.volume * 0.9);
-        this.sfxAudioPool.push(sfx);
+    if (this.sfxAudioPool.length === 0 && !this.sfxAssetUnavailable) {
+      try {
+        for (let i = 0; i < 4; i++) {
+          const sfx = new Audio(CLICK_SFX_SRC);
+          sfx.preload = "auto";
+          sfx.volume = Math.min(1, this.state.volume * 0.9);
+          sfx.addEventListener("error", () => {
+            this.sfxAssetUnavailable = true;
+          });
+          this.sfxAudioPool.push(sfx);
+        }
+      } catch {
+        this.sfxAssetUnavailable = true;
+        this.sfxAudioPool = [];
       }
     }
 
@@ -229,17 +291,24 @@ export class AudioManager {
     if (now - this.lastClickTime < 25) return; // Debounce rapid multi-events
     this.lastClickTime = now;
 
-    // Use audio pool
-    if (this.sfxAudioPool.length > 0) {
+    // Use bundled click asset when available, falling back cleanly to synthesized click audio.
+    if (!this.sfxAssetUnavailable && this.sfxAudioPool.length > 0) {
       const sfx = this.sfxAudioPool[this.sfxPoolIndex];
       this.sfxPoolIndex = (this.sfxPoolIndex + 1) % this.sfxAudioPool.length;
       if (sfx) {
-        sfx.volume = Math.min(1, Math.max(0.1, this.state.volume * 0.85));
-        sfx.currentTime = 0;
-        void sfx.play().catch(() => {
-          this.synthesizeClickFallback();
-        });
-        return;
+        try {
+          sfx.volume = Math.min(1, Math.max(0.1, this.state.volume * 0.85));
+          sfx.currentTime = 0;
+          const result = sfx.play();
+          if (result && typeof result.catch === "function") {
+            void result.catch(() => {
+              this.synthesizeClickFallback();
+            });
+          }
+          return;
+        } catch {
+          this.sfxAssetUnavailable = true;
+        }
       }
     }
 
@@ -294,22 +363,53 @@ export class AudioManager {
     }
   }
 
+  private handleBgmFailure() {
+    const failedTrack = this.state.currentTrack;
+    this.failedTrackIds.add(failedTrack.id);
+    const shouldTryFallback = (this.wantsPlayback || this.state.isPlaying) && !this.state.muted;
+    const nextPlayable = PLAYLIST.findIndex(track => !this.failedTrackIds.has(track.id));
+
+    if (shouldTryFallback && nextPlayable !== -1 && nextPlayable !== this.state.currentTrackIndex) {
+      this.selectTrack(nextPlayable);
+      return;
+    }
+
+    this.wantsPlayback = false;
+    if (this.state.isPlaying) {
+      this.state = { ...this.state, isPlaying: false };
+      this.notify();
+    }
+  }
+
   public play() {
     this.init();
     if (!this.bgmAudio) return;
+    this.wantsPlayback = true;
     this.bgmAudio.muted = false;
     this.bgmAudio.volume = this.state.volume;
-    void this.bgmAudio.play().then(() => {
-      this.state = { ...this.state, isPlaying: true, muted: false };
-      this.persistSettings();
-      this.notify();
-    }).catch(() => {
+    try {
+      const playResult = this.bgmAudio.play();
+      if (playResult && typeof playResult.then === "function") {
+        void playResult.then(() => {
+          this.failedTrackIds.delete(this.state.currentTrack.id);
+          this.state = { ...this.state, isPlaying: true, muted: false };
+          this.persistSettings();
+          this.notify();
+        }).catch(() => {
+          this.wantsPlayback = false;
+          this.state = { ...this.state, isPlaying: false };
+          this.notify();
+        });
+      }
+    } catch {
+      this.wantsPlayback = false;
       this.state = { ...this.state, isPlaying: false };
       this.notify();
-    });
+    }
   }
 
   public pause() {
+    this.wantsPlayback = false;
     if (this.bgmAudio) {
       this.bgmAudio.pause();
     }
@@ -328,13 +428,25 @@ export class AudioManager {
   public toggleMute() {
     this.init();
     const nextMuted = !this.state.muted;
+    this.wantsPlayback = !nextMuted;
     if (this.bgmAudio) {
       this.bgmAudio.muted = nextMuted;
       if (nextMuted) {
         this.bgmAudio.pause();
       } else {
         this.bgmAudio.volume = this.state.volume;
-        void this.bgmAudio.play().catch(() => {});
+        try {
+          const playResult = this.bgmAudio.play();
+          if (playResult && typeof playResult.catch === "function") {
+            void playResult.catch(() => {
+              this.wantsPlayback = false;
+              this.state = { ...this.state, isPlaying: false };
+              this.notify();
+            });
+          }
+        } catch {
+          this.wantsPlayback = false;
+        }
       }
     }
     this.state = {
@@ -383,7 +495,7 @@ export class AudioManager {
     }
 
     const nextTrack = PLAYLIST[index];
-    const wasPlaying = this.state.isPlaying;
+    const wasPlaying = this.state.isPlaying || this.wantsPlayback;
 
     this.state = {
       ...this.state,
@@ -396,7 +508,25 @@ export class AudioManager {
       this.bgmAudio.src = nextTrack.src;
       this.bgmAudio.currentTime = 0;
       if (wasPlaying && !this.state.muted) {
-        void this.bgmAudio.play().catch(() => {});
+        try {
+          const playResult = this.bgmAudio.play();
+          if (playResult && typeof playResult.then === "function") {
+            void playResult.then(() => {
+              this.failedTrackIds.delete(nextTrack.id);
+              if (!this.state.isPlaying) {
+                this.state = { ...this.state, isPlaying: true };
+                this.notify();
+              }
+            }).catch(() => {
+              this.wantsPlayback = false;
+              this.state = { ...this.state, isPlaying: false };
+              this.notify();
+            });
+          }
+        } catch {
+          this.wantsPlayback = false;
+          this.state = { ...this.state, isPlaying: false };
+        }
       }
     }
 
