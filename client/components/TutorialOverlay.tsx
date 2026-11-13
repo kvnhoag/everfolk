@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useTutorial } from "../hooks/useTutorial.ts";
 import { findTutorialButton, useTutorialFlight } from "../hooks/useTutorialFlight.ts";
 import { useTutorialHost } from "../hooks/useTutorialHost.ts";
+import { hidesTutorial } from "../models/tutorial-host.ts";
 import { useTutorialSpotlight } from "../hooks/useTutorialSpotlight.ts";
 import { tutorialHint } from "../models/tutorial-hints.ts";
 import { tutorialPosition, type TutorialState } from "../models/tutorial-navigation.ts";
@@ -56,7 +57,7 @@ export default function TutorialOverlay() {
   const [settledRun, setSettledRun] = useState(0);
   const onClosed = useCallback(() => setSettledRun(state.run), [state.run]);
   if (typeof document === "undefined") return null;
-  const visible = state.hintId !== null && (state.open || settledRun !== state.run);
+  const visible = state.hintId !== null && (state.open || settledRun !== state.run) && !hidesTutorial(host);
   const announcement = state.open && state.mode === "auto" ? `New tip: ${tutorialHint(state.hintId)?.title ?? ""}` : "";
   return <>
     {createPortal(<p className="tutorial-announcer" aria-live="polite" role="status">{announcement}</p>, document.body)}

@@ -82,7 +82,7 @@ function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notic
       Log in with email
     </button>
     <HomeNotice notice={notice || signInNotice} error={error} />
-    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in"
+    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in" data-tutorial="hide"
       ref={dialog => { if (dialog && !dialog.open) dialog.showModal(); }}
       onClose={() => setEmailOpen(false)}>
       <SignInPanel available={signIn?.available ?? { email: false }} onEmail={signIn?.emailFlow ?? unavailableEmailFlow}
