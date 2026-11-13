@@ -54,6 +54,7 @@ test("draw beat while waiting, after an empty draw and after a draw", () => {
 test("ranked config is read defensively", () => {
   const ok = { contract_id: "everfolk-lives.testnet", rpc_url: "https://rpc.testnet.near.org", world_version: "alexandria-ranked-1", verifier_public_key: "ed25519:abc" };
   assert.deepEqual(parseRankedConfig(ok), ok);
+  assert.deepEqual(parseRankedConfig({ ...ok, verifier_public_key: null }), { ...ok, verifier_public_key: null });
   assert.equal(parseRankedConfig(null), null);
   assert.equal(parseRankedConfig({ ...ok, contract_id: 7 }), null);
   assert.equal(parseRankedConfig({ ...ok, rpc_url: "ftp://x" }), null);

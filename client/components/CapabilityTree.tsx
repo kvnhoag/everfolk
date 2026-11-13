@@ -1,13 +1,14 @@
-import { useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
-import { buildCapabilityLayout, CAPABILITY_BRANCHES, CAPABILITY_NODES, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../models/capability-layout.ts";
+import { buildCapabilityLayout, CAPABILITY_NODES, capabilityAncestors, capabilityNodeLabel, nextCapabilityNode } from "../models/capability-layout.ts";
 import CapabilityIcon from "./CapabilityIcon.tsx";
-import { capabilityPresentations, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
+import { capabilityPresentations, capabilityTier, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
-import { MAP_MAX_ZOOM, MAP_MIN_ZOOM } from "../models/skill-map-camera.ts";
+import { READABLE_START_ZOOM, skillMapStartNode } from "../models/skill-map-camera.ts";
 import "../styles/capability-tree.css";
+import "../styles/capability-tree-layout.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
 const BRANCH_DESCRIPTIONS: Record<string, string> = {
@@ -55,10 +56,12 @@ function practiceFor(world: WorldPack, node: CapabilityNode, activities: readonl
   }))).slice(0, 3);
 }
 
-export function CapabilityInspector({ node, view, world, life, activities, readOnly, onActivity, onSelect, detailId, presentation }: {
+export function CapabilityInspector({ node, view, world, life, activities, readOnly, onActivity, onAssess, onSelect, detailId, presentation, calendarDeadline = false, onCalendarDeadlineChange, selectedJobIds = [], onToggleJobId }: {
   node: CapabilityNode; view: CapabilityNodeView; world: WorldPack; life: LifeState;
-  activities: readonly ActivityAvailability[]; readOnly: boolean; onActivity(id: string): void;
-  onSelect(id: string): void; detailId: string; presentation?: CapabilityPresentation;
+  activities: readonly ActivityAvailability[]; readOnly: boolean; onActivity(id: string, options?: { calendarDeadline?: boolean }): void;
+  onAssess?(nodeId: string, jobIds: readonly string[]): void; onSelect(id: string): void; detailId: string; presentation?: CapabilityPresentation;
+  calendarDeadline?: boolean; onCalendarDeadlineChange?(checked: boolean): void;
+  selectedJobIds?: readonly string[]; onToggleJobId?(jobId: string): void;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
   const action = activities.find(activity => activity.id === view.actionId);
@@ -66,6 +69,9 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
   const jobs = relatedJobs(world, node), training = practiceFor(world, node, activities);
   const canWork = Boolean(action?.available) && life.phase === "ready";
   const learned = life.capabilities?.learned[node.id];
+  const activeProject = life.capabilities?.project?.nodeId === node.id ? life.capabilities.project : undefined;
+  const terms = view.terms;
+  const eligibleJobs = view.eligibleJobs ?? [];
   const blocker = !canWork ? action?.reason || view.reasons[0] : undefined;
   const gates = [
     ...Object.entries(node.minimumProficiency).map(([id, target]) => ({ id, label: world.character?.skills[id]?.label ?? id, current: life.character?.skills[id] ?? 0, target })),
@@ -83,8 +89,24 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
       {node.anyProficiency && <p className="capability-alternative">Also one of: {node.anyProficiency.map(group => Object.entries(group).map(([id, value]) => `${world.character?.skills[id]?.label ?? id} ${value}`).join(" + ")).join(" or ")}.</p>}
     </section>
     <section><h5>Demonstrated work</h5><p>{firstSentence(node.proof)}</p><div className="capability-proof-progress"><progress aria-label={`${node.title} demonstrated work`} max={Math.max(1, view.progress.required)} value={Math.min(view.progress.done, Math.max(1, view.progress.required))} /><span>{view.progress.done} / {view.progress.required} work steps</span></div></section>
-    {!readOnly && view.actionId && <div className="capability-work-action"><button className="capability-work-button" type="button" disabled={!canWork || view.state === "unavailable"} onClick={() => { if (canWork && action) onActivity(action.id); }}>{view.actionLabel}<span aria-hidden="true">→</span></button></div>}
+    {terms && <section className="capability-terms"><h5>Commission terms</h5><ul>
+      <li>Materials: {terms.materialsOwner === "employer" ? "Employer-supplied" : terms.materialsOwner === "worker" ? "Worker-provided" : "None required"}</li>
+      <li>Quantity: {terms.quantity} · Minimum quality: Grade {terms.minimumQuality}</li>
+      <li>Total payment: {terms.totalPayment} dr · Payer: {terms.payers ? terms.payers.join(" & ") : terms.payer}</li>
+      <li>Work-year deadline: {terms.workYearDeadline} active work year{terms.workYearDeadline === 1 ? "" : "s"}{terms.completedWorkYears !== undefined ? ` (${terms.completedWorkYears} complete)` : ""}</li>
+      {terms.calendarDeadlineYear !== undefined
+        ? <li>Calendar deadline: year {terms.calendarDeadlineYear} (unpaid future payment forfeits if missed)</li>
+        : terms.calendarDeadlineYears !== undefined && <li>Optional calendar deadline: {terms.calendarDeadlineYears} calendar years from start (unpaid future payment forfeits if missed)</li>}
+      {terms.reservedMissing && Object.keys(terms.reservedMissing).length > 0 && <li>Missing reserved stock: {Object.entries(terms.reservedMissing).map(([item, qty]) => `${qty} ${item}`).join(", ")} (replace before resuming)</li>}
+    </ul></section>}
+    {!readOnly && view.actionId && !activeProject && terms?.calendarDeadlineYears && <label className="capability-deadline-toggle"><input type="checkbox" checked={calendarDeadline} onChange={event => onCalendarDeadlineChange?.(event.target.checked)} /> Commit to {terms.calendarDeadlineYears}-year calendar deadline</label>}
+    {!readOnly && view.actionId && <div className="capability-work-action"><button className="capability-work-button" type="button" disabled={!canWork || view.state === "unavailable"} onClick={() => { if (canWork && action) { if (!activeProject && calendarDeadline) onActivity(action.id, { calendarDeadline: true }); else onActivity(action.id); } }}>{view.actionLabel}<span aria-hidden="true">→</span></button></div>}
     {blocker && <p className="capability-blocker">{blocker}</p>}
+    {!learned && eligibleJobs.length > 0 && <section className="capability-assess-jobs"><h5>Qualify via completed jobs</h5><p>Select 2 distinct completed ordinary jobs from this path for assessment (qualification only; payouts and goods are not repeated).</p><ul>{eligibleJobs.map(job => {
+      const checked = selectedJobIds.includes(job.jobId);
+      const limitReached = !checked && selectedJobIds.length >= 2;
+      return <li key={job.jobId}><label><input type="checkbox" checked={checked} disabled={readOnly || Boolean(life.capabilities?.project) || limitReached} onChange={() => onToggleJobId?.(job.jobId)} /><span>{job.title} ({job.jobId}) · age {job.age} · year {job.year} · {job.payment} dr</span></label></li>;
+    })}</ul>{!readOnly && onAssess && <button type="button" className="capability-assess-button" disabled={life.phase !== "ready" || Boolean(life.capabilities?.project) || selectedJobIds.length !== 2} onClick={() => onAssess(node.id, selectedJobIds)}>Assess 2 selected jobs</button>}</section>}
     {readOnly && <p className="capability-read-only">Preview · take work in a new life.</p>}
     {!readOnly && training.length > 0 && <details className="capability-practice"><summary>Training options</summary>{training.map(activity => <div key={activity.id}><p>{activity.text}</p><button type="button" disabled={!activity.available || life.phase !== "ready"} onClick={() => onActivity(activity.id)}>Practice</button>{activity.reason && <small>{activity.reason}</small>}</div>)}</details>}
     <details className="capability-full-rules"><summary>Full rules &amp; career opportunities</summary><section><h5>Work proof</h5><p>{node.proof}</p><h5>Full reward</h5><p>{node.reward}</p></section>{jobs.map(job => {
@@ -95,8 +117,9 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
 }
 
 /** A fixed, inspectable skill DAG. Views only select and display engine-owned work. */
-export default function CapabilityTree({ world, life, activities, onActivity, readOnly = false }: {
-  world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[]; onActivity(id: string): void; readOnly?: boolean;
+export default function CapabilityTree({ world, life, activities, onActivity, onAssess, readOnly = false }: {
+  world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[];
+  onActivity(id: string, options?: { calendarDeadline?: boolean }): void; onAssess?(nodeId: string, jobIds: readonly string[]): void; readOnly?: boolean;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
   const layout = useMemo(() => buildCapabilityLayout(nodes), [nodes]);
@@ -105,16 +128,14 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
   const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
   const [selectedId, setSelectedId] = useState("F1");
   const [pathSelected, setPathSelected] = useState(false);
-  const [branch, setBranch] = useState("all");
-  const [query, setQuery] = useState("");
-  const { viewport, paper, zoomLabel, zoom, dragging, fit, zoomBy, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
+  const [calendarDeadlines, setCalendarDeadlines] = useState<Record<string, boolean>>({});
+  const [selectedJobsByNode, setSelectedJobsByNode] = useState<Record<string, string[]>>({});
+  const { viewport, paper, zoom, dragging, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
   const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
   const instanceId = useId();
   const selected = nodes.find(node => node.id === selectedId) ?? nodes[0];
   const selectedView = byId.get(selected.id) ?? { ...EMPTY_VIEW, id: selected.id };
   const ancestors = useMemo(() => pathSelected ? capabilityAncestors(nodes, selected.id) : new Set<string>(), [pathSelected, selected.id, nodes]);
-  const needle = query.trim().toLocaleLowerCase();
-  const matches = (node: CapabilityNode) => !needle || `${node.id} ${node.title} ${node.branch} ${node.specialization ?? ""}`.toLocaleLowerCase().includes(needle);
   const learned = view.nodes.filter(node => node.state === "learned").length;
   const mastered = nodes.filter(node => node.depth === 10 && byId.get(node.id)?.state === "learned").length;
 
@@ -122,16 +143,16 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
     const point = layout.nodes.find(item => item.node.id === id);
     if (point) focusPoint(point, scale);
   }
+  // Open on the player's own progress at a readable zoom rather than the whole atlas at ~38%.
+  useEffect(() => {
+    const start = skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes[0].id);
+    const frame = requestAnimationFrame(() => centerNode(start, READABLE_START_ZOOM));
+    return () => cancelAnimationFrame(frame);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- once per opening
+  }, []);
   function select(id: string, focus = false) {
     setSelectedId(id); setPathSelected(true);
     if (focus) requestAnimationFrame(() => { nodeRefs.current.get(id)?.focus({ preventScroll: true }); centerNode(id); });
-  }
-  function highlight(value: string) {
-    setBranch(value); setPathSelected(false);
-    if (value !== "all") {
-      const root = nodes.find(node => node.branch === value)!;
-      setSelectedId(root.id);
-    }
   }
   function navigate(event: KeyboardEvent<HTMLButtonElement>, id: string) {
     const next = nextCapabilityNode(layout, id, event.key);
@@ -141,8 +162,6 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
   return <section className="capability-tree" aria-labelledby={`${instanceId}-title`} data-capability-version={world.capabilities?.version ?? "reference"}>
     <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Learn the craft. Do the work. Let one skill open the next.</p></div><div className="capability-total"><strong>{learned}<span> / {nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
     {!view.enabled && <p className="capability-world-note" role="note">This life keeps its earlier skill rules. The complete atlas is shown as a reference; begin a new life in the current world to learn these nodes.</p>}
-    <div className="capability-branches" role="group" aria-label="Highlight a skill branch"><button type="button" aria-pressed={branch === "all"} onClick={() => highlight("all")}>Whole tree</button>{CAPABILITY_BRANCHES.map(label => <button key={label} type="button" aria-pressed={branch === label} onClick={() => highlight(label)}><CapabilityIcon id="" branch={label} specialization={null} /><span>{label}<small>{BRANCH_DESCRIPTIONS[label]}</small></span></button>)}</div>
-    <div className="capability-toolbar"><label htmlFor={`${instanceId}-find`}>Find a skill<input id={`${instanceId}-find`} type="search" placeholder="Try soil, pottery or inquiry" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && needle) { const match = nodes.find(matches); if (match) select(match.id, true); } }} /></label><div className="capability-map-controls" role="group" aria-label="Skill map zoom"><button type="button" aria-label="Zoom out skill map" disabled={zoom <= MAP_MIN_ZOOM} onClick={() => zoomBy(1 / 1.3)}>−</button><span ref={zoomLabel} aria-label="Map zoom">{Math.round(zoom * 100)}%</span><button type="button" aria-label="Zoom in skill map" disabled={zoom >= MAP_MAX_ZOOM} onClick={() => zoomBy(1.3)}>+</button><button type="button" onClick={() => fit()}>Fit whole tree</button><button type="button" onClick={() => { setPathSelected(true); centerNode(selected.id, 1); }}>Read selected path</button></div></div>
     <div className="capability-legend" aria-label="Tree legend">{(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{state === "available" ? "Ready" : STATUS_LABEL[state]}</span>)}<span className="capability-legend-crossover"><NodeShape branch="Physique" crossover />Crossover</span><span className="capability-legend-milestone"><NodeShape branch="Physique" milestone />Title / key skill</span><span className="capability-legend-path"><i aria-hidden="true" />Selected path</span></div>
     <p className="capability-map-help" id={`${instanceId}-help`}>Scroll or pinch to zoom · Drag to move · Click a skill to trace its roots · Arrow keys to navigate</p>
     <div className="capability-workspace">
@@ -151,26 +170,34 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
           <svg className="capability-connections" viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true" focusable="false">
             <defs><pattern id={`${instanceId}-fiber`} width="43" height="37" patternUnits="userSpaceOnUse"><path d="M3 7h4M26 29h6M15 19h2" stroke="currentColor" strokeWidth=".7" opacity=".12" /></pattern></defs>
             <rect width={layout.width} height={layout.height} fill={`url(#${instanceId}-fiber)`} />
-            {layout.bands.map(band => <g key={band.branch} className={branch !== "all" && branch !== band.branch ? "is-muted" : ""}><line x1="24" x2={layout.width - 24} y1={band.top} y2={band.top} className="capability-band-rule" /><text x="34" y={band.titleY} className="capability-band-title">{band.branch}</text><text x="34" y={band.titleY + 19} className="capability-band-subtitle">{BRANCH_DESCRIPTIONS[band.branch]}</text></g>)}
+            {layout.bands.map(band => <g key={band.branch}><line x1="24" x2={layout.width - 24} y1={band.top} y2={band.top} className="capability-band-rule" /><text x="34" y={band.titleY} className="capability-band-title">{band.branch}</text><text x="34" y={band.titleY + 19} className="capability-band-subtitle">{BRANCH_DESCRIPTIONS[band.branch]}</text></g>)}
             {Array.from({ length: 10 }, (_, index) => <text key={index} x={100 + index * 142} y="26" textAnchor="middle" className="capability-depth-label">{index + 1}</text>)}
             {layout.links.map(link => {
               const from = byId.get(link.from), to = byId.get(link.to);
               const target = nodes.find(node => node.id === link.to)!;
               const lineage = ancestors.has(link.from) && ancestors.has(link.to);
-              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} data-crossover={link.crossover || undefined} d={link.path} className={`capability-link${link.crossover?" is-crossover":""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${branch !== "all" && target.branch !== branch && !lineage ? " is-muted" : ""}`} />;
+              return <path key={`${link.from}-${link.to}`} data-from={link.from} data-to={link.to} data-crossover={link.crossover || undefined} d={link.path} className={`capability-link${link.crossover?" is-crossover":""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${from?.state === "learned" && to?.state === "learned" ? " is-learned" : ""}${capabilityTier(to?.state) === "unavailable" ? " is-unavailable" : ""}`} />;
             })}
           </svg>
           {layout.nodes.map(({ node, x, y }) => {
             const state = byId.get(node.id)?.state ?? "unavailable";
             const lineage = ancestors.has(node.id);
             const feature = presentations.get(node.id)!;
-            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${feature.milestone ? " is-milestone" : ""}${feature.crossover ? " is-crossover" : ""}${!lineage && (branch !== "all" && node.branch !== branch || !matches(node)) ? " is-muted" : ""}`} style={{ left: x, top: y, ...sourceStyle(feature.sources) }} data-capability-id={node.id} data-node-kind={feature.crossover ? "crossover" : feature.milestone ? "milestone" : "standard"} data-source-branches={feature.crossover ? feature.sources.join(" + ") : undefined} data-state={state} aria-label={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.crossover ? ` · Requires ${feature.sources.join(" and ")}` : ""}${feature.milestone ? " · Title or key skill" : ""}`} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.titles.length ? ` · Opens ${feature.titles.join(", ")}` : feature.keySkill ? " · Opens multiple skills" : ""}${feature.crossover ? ` · ${feature.sources.join(" + ")}` : ""}`} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
+            return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state} tier-${capabilityTier(state)}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${feature.milestone ? " is-milestone" : ""}${feature.crossover ? " is-crossover" : ""}`} style={{ left: x, top: y, ...sourceStyle(feature.sources) }} data-capability-id={node.id} data-node-kind={feature.crossover ? "crossover" : feature.milestone ? "milestone" : "standard"} data-source-branches={feature.crossover ? feature.sources.join(" + ") : undefined} data-state={state} aria-label={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.crossover ? ` · Requires ${feature.sources.join(" and ")}` : ""}${feature.milestone ? " · Title or key skill" : ""}`} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.titles.length ? ` · Opens ${feature.titles.join(", ")}` : feature.keySkill ? " · Opens multiple skills" : ""}${feature.crossover ? ` · ${feature.sources.join(" + ")}` : ""}`} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
               <span className="capability-seal"><NodeShape branch={node.branch} milestone={feature.milestone} crossover={feature.crossover} /><CapabilityIcon {...node} /><span className="capability-node-id">{node.id}</span>{state === "learned" && <span className="capability-earned-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg></span>}</span><span className="capability-node-name">{node.title}</span>{feature.crossover && <SourceBranches sources={feature.sources} />}
             </button>;
           })}
         </div>
-      </div>{needle && <p className="capability-map-summary" role="status">{nodes.filter(matches).length} matching skills. Press Enter to jump to the first.</p>}</div>
-      <CapabilityInspector key={selected.id} node={selected} presentation={presentations.get(selected.id)} view={selectedView} {...{ world, life, activities, readOnly, onActivity }} onSelect={id => select(id, true)} detailId={`${instanceId}-detail`} />
+      </div></div>
+      <CapabilityInspector key={selected.id} node={selected} presentation={presentations.get(selected.id)} view={selectedView} {...{ world, life, activities, readOnly, onActivity, onAssess }}
+        calendarDeadline={Boolean(calendarDeadlines[selected.id])}
+        onCalendarDeadlineChange={checked => setCalendarDeadlines(prev => ({ ...prev, [selected.id]: checked }))}
+        selectedJobIds={selectedJobsByNode[selected.id] ?? []}
+        onToggleJobId={jobId => setSelectedJobsByNode(prev => {
+          const current = prev[selected.id] ?? [];
+          return { ...prev, [selected.id]: current.includes(jobId) ? current.filter(id => id !== jobId) : [...current, jobId].slice(0, 2) };
+        })}
+        onSelect={id => select(id, true)} detailId={`${instanceId}-detail`} />
     </div>
     <p className="capability-footnote">One major work action per year. Skills require practice and demonstrated work.</p>
   </section>;

@@ -231,8 +231,9 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
       const resources = getBirthRollResources(world, life);
       const knownResourceRanges = resources.every(resource => resource.range !== undefined);
       const moneyRange = {
-        min: Math.round(range.min * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.min ?? 0) * resource.unitPrice, 0),
-        max: Math.round(range.max * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.max ?? 0) * resource.unitPrice, 0),
+        // Whole drachmas: fractional resource prices otherwise show as 460.6488011283498 dr.
+        min: Math.floor(Math.round(range.min * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.min ?? 0) * resource.unitPrice, 0)),
+        max: Math.ceil(Math.round(range.max * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.max ?? 0) * resource.unitPrice, 0)),
       };
       const hasDirectFinance = birthEffects.some(effect => effect.type === "cash" || effect.type === "debt" || effect.type === "asset");
       return { id, label: "Total wealth", value: moneyValue, currency: world.economy.currency.short,

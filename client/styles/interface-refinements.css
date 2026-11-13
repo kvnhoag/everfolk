@@ -1,10 +1,6 @@
-/* Two fonts across the game, menus, dialogs and content studio. */
 .compact-skills .compact-skill-tree-open{display:flex;align-items:center;justify-content:center;gap:10px;width:fit-content;max-width:calc(100% - 28px);margin:10px 14px 12px auto;padding:6px 12px;min-height:32px;border:1px solid #3d7069;border-radius:2px;background:#1c423e;color:#f8f1df;font-size:11px;font-weight:700;cursor:pointer;box-shadow:none}
 .compact-skills .compact-skill-tree-open:hover{background:#2a5e58;border-color:#e2b86b;color:#fff8e7}
-:root{--ef-body:"DM Sans",sans-serif;--ef-heading:"Libre Caslon Display",serif}
-body{font-family:var(--ef-body)!important}
-body *{font-family:inherit!important}
-body :is(h1,h2,h3),body .brand{font-family:var(--ef-heading)!important}
+/* Font families and the global type rules live in typography.css. */
 /* Sharp Roguelike / ResourceBar aesthetic across all main dashboard panels */
 .life-scene-frame,.game-dashboard .character-panel,.life-overview,.life-moment,.game-dashboard .inline-decision,.life-year-rail,.compact-life-record,.game-dashboard .dashboard-skills>.compact-skills,.game-dashboard .life-support-grid>.household-summary{
   border-radius:2px;

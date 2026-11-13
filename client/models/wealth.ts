@@ -3,6 +3,7 @@ import { merchantSaleValue } from "../../src/demo/market-depth.ts";
 import { financeActivityReason, getAssetValue, getDemoResourceValue, getNetWorth, getVocationHoldings, getVocationInventoryValue, previewEconomyEffects } from "../../src/economy.ts";
 import { matchesCondition } from "../../src/engine.ts";
 import { getWealthComparison } from "./wealth-comparison.ts";
+import { getSocietyWealthBenchmarkInfo } from "./society-wealth-data.ts";
 import { marketOrderValue, marketQuote } from "../../src/market.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import type { TradeItem } from "../../src/demo/types.ts";
@@ -106,7 +107,7 @@ export function getWealthSummary(world: WorldPack, life: LifeState) {
     .filter(amount => amount > 0))].sort((a, b) => a - b);
   return {
     cash: life.economy.cash, debt: life.economy.debt, normalDebt: life.economy.debt - (life.economy.loan?.balance ?? 0), assets, assetTotal: assetValue(world, life.economy.assets, life) + getDemoResourceValue(world, life) + getVocationInventoryValue(world, life), committedValue,
-    netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), job, jobCash, trading, fixedYearlyCash, conditionalCosts,
+    netWorth: getNetWorth(world, life), comparison: getWealthComparison(world, life), benchmark: getSocietyWealthBenchmarkInfo(world), job, jobCash, trading, fixedYearlyCash, conditionalCosts,
     assetIncome: assets.reduce((sum, asset) => sum + (asset.yearlyIncome ?? 0) * asset.quantity, 0),
     currentCosts: -Math.min(0, fixedYearlyCash) + conditionalCosts.filter(item => item.active).reduce((sum, item) => sum + item.amount, 0),
     lessonPrices, affordableLessons: lessonPrices.length ? Math.floor(life.economy.cash / lessonPrices[0]) : 0,

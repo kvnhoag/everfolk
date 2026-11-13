@@ -3,7 +3,7 @@ import test from "node:test";
 import { capabilityPresentations, firstSentence } from "../client/models/capability-presentation.ts";
 import { ATTRIBUTE_NODES } from "../src/capabilities/attribute-catalog.ts";
 import type { WorldPack } from "../src/types.ts";
-import current from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 
 const world=current as unknown as WorldPack;
 test("crossover badges identify the actual branches and exclude joins within one branch",()=>{
@@ -29,4 +29,13 @@ test("compact summaries preserve decimal values and leave complete rules intact"
   const text='Low-flood factor becomes 0.60. Maintenance still costs 8 dr.';
   assert.equal(firstSentence(text),'Low-flood factor becomes 0.60.');
   assert.equal(firstSentence('No extra sentence'),'No extra sentence');
+});
+
+test("node visibility tiers separate learned, learnable and not-yet-in-game skills", async () => {
+  const { capabilityTier } = await import("../client/models/capability-presentation.ts");
+  assert.equal(capabilityTier("learned"), "learned");
+  assert.equal(capabilityTier("available"), "learnable");
+  assert.equal(capabilityTier("locked"), "learnable");
+  assert.equal(capabilityTier("unavailable"), "unavailable");
+  assert.equal(capabilityTier(undefined), "unavailable");
 });

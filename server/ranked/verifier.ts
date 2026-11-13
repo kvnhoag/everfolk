@@ -1,11 +1,13 @@
 import { sha256Hex } from "../../chain/hash.ts";
+import { NPC_WORLD_VERSION } from "../../chain/ids.ts";
+import type { NpcSessionAttestation } from "../../chain/npc-proof.ts";
 import type { Evidence, LifeView } from "../../chain/types.ts";
 import { checkRankedObligations } from "../../chain/ranked-rules.ts";
 import { validateRankedSave } from "../../chain/validate-ranked.ts";
 import { createEngine } from "../../src/index.ts";
 import { canonicalJson } from "../../src/random.ts";
 import type { LifeState, SaveFile, WorldPack } from "../../src/types.ts";
-import { createEvidenceSigner } from "./signer.ts";
+import { createEvidenceSigner, type EvidenceSigner } from "./signer.ts";
 
 export type VerifierKind = "server-signer" | "tee";
 
@@ -28,19 +30,48 @@ export class VerificationError extends Error {
   }
 }
 
+/** A transient dependency outage (such as the live AI provider) that may recover on retry without invalidating the life. */
+export class VerificationUnavailableError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "VerificationUnavailableError";
+  }
+}
+
+export interface NpcRewardVerification {
+  world: WorldPack;
+  attestation: NpcSessionAttestation;
+}
+
 export type BuildEvidence = (input: { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string }) => Promise<Evidence>;
 
 export async function createServerSignerVerifier(options: {
-  secretHex: string; contractId: string; loadWorld(version: string): WorldPack | null; buildEvidence: BuildEvidence;
+  secretHex: string;
+  contractId: string;
+  loadWorld(version: string): WorldPack | null;
+  buildEvidence: BuildEvidence;
+  verifyNpcSession?: (life: LifeView, save: SaveFile) => Promise<NpcRewardVerification>;
+  signer?: EvidenceSigner;
 }): Promise<LifeVerifier> {
-  const signer = await createEvidenceSigner(options.secretHex);
+  const signer = options.signer ?? (await createEvidenceSigner(options.secretHex));
   return {
     kind: "server-signer",
     publicKey: signer.publicKey,
     async verify(life, save) {
       const check = await validateRankedSave(life, save, options.contractId);
       if (!check.ok) throw new VerificationError(check.reason);
-      const world = options.loadWorld(life.world_version);
+      let world: WorldPack | null;
+      let npcSession: NpcSessionAttestation | undefined;
+      if (life.world_version === NPC_WORLD_VERSION) {
+        if (!options.verifyNpcSession) {
+          throw new VerificationUnavailableError("Live NPC reward verification is not configured on this server.");
+        }
+        const verified = await options.verifyNpcSession(life, save);
+        world = verified.world;
+        npcSession = verified.attestation;
+      } else {
+        world = options.loadWorld(life.world_version);
+      }
       if (!world) throw new VerificationError("This world version is not supported by the verifier.");
       const engine = createEngine(world);
       if (save.worldFingerprint !== engine.fingerprint) throw new VerificationError("This save was played on different world content.");
@@ -49,7 +80,8 @@ export async function createServerSignerVerifier(options: {
       if (!replay.ok) throw new VerificationError(replay.reason);
       const state: LifeState = replay.state;
       if (state.phase !== "ended") throw new VerificationError("This life has not ended yet.");
-      const evidence = await options.buildEvidence({ life, save, state, worldFingerprint: engine.fingerprint });
+      const baseEvidence = await options.buildEvidence({ life, save, state, worldFingerprint: engine.fingerprint });
+      const evidence: Evidence = npcSession ? { ...baseEvidence, npc_session: npcSession } : baseEvidence;
       const evidenceJson = canonicalJson(evidence);
       return {
         evidence, evidence_json: evidenceJson, evidence_hash: await sha256Hex(evidenceJson),

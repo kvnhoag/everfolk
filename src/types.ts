@@ -687,7 +687,8 @@ export interface WorldPack {
 /** Issued by a ranked life's NFT sources; free play never contains one. */
 export interface InfluenceCommand { type: "influence"; source: InfluenceSource; entry: string; power: number; mode: "activate" | "apply" }
 
-export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string } | { type: "avatar"; variant: number }
+export type Command = { type: "advance" } | { type: "choose"; choice: string } | { type: "act"; activity: string; calendarDeadline?: true } | { type: "avatar"; variant: number }
+  | { type: "assess-jobs"; nodeId: string; jobIds: readonly string[] }
   | ({ type: "market-order" } & MarketOrderRequest) | { type: "market-cancel"; orderId: number } | InfluenceCommand | DemoCommand | NpcCommand;
 
 export interface JournalEntry {
@@ -771,7 +772,8 @@ export interface LifeEngine {
   choose(state: LifeState, choiceId: string): LifeState;
   getChoices(state: LifeState): readonly Choice[];
   getActivities(state: LifeState): readonly ActivityAvailability[];
-  act(state: LifeState, activityId: string): LifeState;
+  act(state: LifeState, activityId: string, options?: { calendarDeadline?: boolean }): LifeState;
+  assess(state: LifeState, nodeId: string, jobIds: readonly string[]): LifeState;
   orderMarket(state: LifeState, order: MarketOrderRequest): LifeState;
   cancelMarketOrder(state: LifeState, orderId: number): LifeState;
   chooseAvatar(state: LifeState, variant: number): LifeState;

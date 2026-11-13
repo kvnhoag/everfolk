@@ -5,7 +5,7 @@
 .token-affection>span:first-child{white-space:nowrap;font-weight:700}
 .token-affection .life-report-bar{flex:1;display:block;height:10px;background:#efe0bb;border:1px solid #baa47a}
 .token-affection .life-report-bar>span{display:block;height:100%;background:#a85e44}
-.token-reach{font-family:var(--serif,"Courier New",monospace);font-size:18px!important;font-weight:700;line-height:1.35!important}
+.token-reach{font-family:var(--ef-font-display);font-size:18px!important;font-weight:700;line-height:1.35!important}
 .token-links{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:6px}
 .token-links li{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;background:#fbf5e4;border:1px solid #cdbb95;font-size:13px}
 .token-links a{color:#41637b;overflow-wrap:anywhere}
@@ -38,3 +38,229 @@
 .sell-yours{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 .sell-row{display:grid;gap:8px}
 .sell-row h2{margin:0}
+
+
+/* Everfolk Unified Marketplace Styling */
+.ef-market-panel {
+  border: 2px solid #886447;
+  background: #fffdf5;
+  box-shadow: 4px 4px 0 rgba(136, 100, 71, 0.25);
+  margin-bottom: 30px;
+}
+
+.ef-market-header {
+  padding: 20px 24px 18px;
+  background: radial-gradient(circle at 50% 10%, #20413b 0%, #152b27 75%, #0d1c19 100%);
+  border-bottom: 2px solid #d6aa52;
+  color: #fff9e9;
+}
+
+.ef-market-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ef-market-hero-eyebrow .ledger-kicker {
+  margin: 0;
+  color: #e5ecd9;
+}
+
+.ef-market-hero-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #e8ebdf;
+  max-width: 650px;
+  margin: 10px 0 16px;
+}
+
+.ef-market-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #d6aa5240;
+  border-radius: 4px;
+  margin-top: 14px;
+}
+
+.ef-market-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ef-market-stat span {
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #baa47a;
+}
+
+.ef-market-stat strong {
+  font-family: var(--ef-font-display);
+  font-size: 14px;
+  color: #ffe699;
+}
+
+.ef-market-stat.is-network strong {
+  color: #6caaa0;
+}
+
+.ef-market-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid #cdbb95;
+  background: #faf4e2;
+}
+
+.ef-view-toggle {
+  display: inline-flex;
+  border: 2px solid #baa47a;
+  background: #f5e6bf;
+  margin-left: auto;
+}
+
+.ef-view-btn {
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  color: #5d6150;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ef-view-btn.is-active {
+  background: #41637b;
+  color: #fff2d1;
+}
+
+/* Collectible Card Grid */
+.ef-market-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 24px 20px;
+  background: #fcf9f0;
+}
+
+.ef-market-grid-item {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.ef-market-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.ef-market-chips {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ef-market-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px dashed #baa47a;
+}
+
+.ef-market-inspect-btn {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ef-buy-action-btn {
+  font-size: 12px;
+  padding: 6px 14px;
+  min-height: 34px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+/* Collection Progress Tracker (PokemonSim set style) */
+.ef-collection-tracker {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #d6aa5255;
+  border-radius: 4px;
+  padding: 14px 18px 12px;
+}
+
+.ef-collection-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+}
+
+.ef-collection-cta {
+  margin-left: auto;
+}
+
+.ef-open-pack-btn {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 16px;
+  min-height: 38px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(110deg, #f1dcb4, #e2bc87);
+  color: #2c4145;
+  border: 1px solid #f6e2be;
+}
+
+.ef-open-pack-btn:hover {
+  background: #fae4bb;
+  transform: translateY(-2px);
+}
+
+.ef-collection-progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #886447;
+  border-radius: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.ef-collection-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #d6aa52 0%, #ffe08a 60%, #ffd875 100%);
+  box-shadow: 0 0 10px rgba(214, 170, 82, 0.6);
+  transition: width 0.4s ease;
+}
+
+.ef-empty-collection {
+  padding: 40px 20px;
+  text-align: center;
+}

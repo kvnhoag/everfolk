@@ -1,99 +1,66 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { createFreePlayBooster, type FreePlayBoosterSession } from "../models/freeplay-booster.ts";
-import MintPack from "./MintPack.tsx";
+import { portraitSource } from "../models/life-background.ts";
+import { legacyLifeKey } from "../storage/legacy-store.ts";
+import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
+import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
+import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
+import { figureMediaPath } from "../../chain/figure-media.ts";
+import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
+import "../styles/booster-opening.css";
 
 export interface FreePlayBoosterModalProps {
-  open: boolean;
-  life: LifeState;
-  world: WorldPack;
-  onClose(): void;
+  open: boolean; life: LifeState; world: WorldPack; onClose(): void;
 }
 
+/** Local collectibles from a finished free life: 1–5 cards, none before age 18. Only Weave Mode mints NFTs. */
 export default function FreePlayBoosterModal({ open, life, world, onClose }: FreePlayBoosterModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [session, setSession] = useState<FreePlayBoosterSession | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [kept, setKept] = useState<BoosterCollectionPack | undefined>();
+  const [legacyCount, setLegacyCount] = useState(0);
   const [error, setError] = useState("");
-
   useEffect(() => {
-    if (!open) {
-      if (dialogRef.current?.open) dialogRef.current.close();
-      return;
-    }
-    const dialog = dialogRef.current;
-    if (dialog && !dialog.open) dialog.showModal();
-
+    if (!open) return;
+    dialogRef.current?.showModal();
     let cancelled = false;
-    setLoading(true);
-    setError("");
-
-    void createFreePlayBooster(life, world)
-      .then(result => {
-        if (!cancelled) {
-          setSession(result);
-          setLoading(false);
-        }
-      })
-      .catch(cause => {
-        if (!cancelled) {
-          setError(cause instanceof Error ? cause.message : "Could not prepare the booster pack.");
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
+    setSession(null); setError(""); setKept(undefined);
+    void createFreePlayBooster(life, world).then(result => {
+      if (cancelled) return;
+      const collection = readBoosterCollection(window.localStorage);
+      setKept(collection.find(pack => pack.id === result.pack.evidence_hash));
+      setLegacyCount(collection.reduce((sum, pack) => sum + pack.selected.length, 0));
+      setSession(result);
+    }).catch(cause => { if (!cancelled) setError(cause instanceof Error ? cause.message : "Could not prepare this life’s pack."); });
+    return () => { cancelled = true; };
   }, [open, life, world]);
 
+  const options = useMemo<BoosterSceneOptions | null>(() => {
+    if (!session) return null;
+    const cards = session.pack.cards.map(card => ({
+      name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
+      rarity: card.rarity,
+      art: card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: life.age, seed: life.seed, originId: life.originId, sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }),
+      sub: actionName(card.action_id),
+    }));
+    const resolve = (selected: number[]) => {
+      const collection = resolveBoosterPack(window.localStorage, {
+        id: session.pack.evidence_hash, lifeKey: legacyLifeKey(life), characterName: life.character?.name ?? "A life in Alexandria", cards, selected,
+      });
+      window.dispatchEvent(new Event("everfolk:legacy-updated"));
+      return collection.reduce((sum, pack) => sum + pack.selected.length, 0);
+    };
+    return { cards, legacyCount, reviewIndices: kept?.selected, onSave: resolve, onSkip: () => { resolve([]); onClose(); }, onClose };
+  }, [session, life, legacyCount, kept, onClose]);
+
   if (!open) return null;
-
-  return (
-    <dialog
-      ref={dialogRef}
-      className="chain-screen freeplay-booster-screen"
-      aria-label="Booster pack preview"
-      onCancel={e => {
-        e.preventDefault();
-        onClose();
-      }}
-    >
-      <div className="chain-shell">
-        <header className="chain-topline">
-          <span className="chain-preview">OFFLINE PREVIEW · NOT-WEAVE LIFE</span>
-          <nav>
-            <button className="chain-link" type="button" onClick={onClose}>
-              Back to memorial ✕
-            </button>
-          </nav>
-        </header>
-
-        {loading && <p className="chain-loading" role="status">Rolling your life’s booster pack…</p>}
-        {error && (
-          <section className="chain-card">
-            <h1>Could not load pack</h1>
-            <p className="chain-error" role="alert">{error}</p>
-            <div className="chain-actions">
-              <button className="chain-secondary" type="button" onClick={onClose}>Close</button>
-            </div>
-          </section>
-        )}
-
-        {session && !loading && !error && (
-          <MintPack
-            practice
-            walletPath={false}
-            initialPack={session.pack}
-            evidence={session.evidence}
-            contract={session.contract}
-            careerGroup={session.evidence.career_group}
-            onChoose={slot => session.contract.chooseMintSlot(session.pack.life_id, slot)}
-            onClose={onClose}
-          />
-        )}
-      </div>
-    </dialog>
-  );
+  return <dialog ref={dialogRef} className="chain-screen freeplay-booster-screen" aria-label="Your life’s booster pack" onCancel={event => { event.preventDefault(); onClose(); }}>
+    {error ? <section className="freeplay-booster-message"><p role="alert">{error}</p><button onClick={onClose}>Back to memorial</button></section>
+      : session && !session.pack.cards.length ? <section className="freeplay-booster-message"><h1>No pack this time</h1><p>This life ended at age {session.evidence.death_age}, before adulthood. Lives that reach age 18 open 1 to 5 cards, and titles add more.</p><a href="#weave" onClick={onClose}>Play Weave Mode to get real NFTs →</a><button onClick={onClose}>Back to memorial</button></section>
+      : kept && !kept.selected.length ? <section className="freeplay-booster-message"><h1>This pack was skipped</h1><p>No cards were added to your Legacy. Complete another life to discover a new pack.</p><button onClick={onClose}>Back to memorial</button></section>
+      : options ? <BoosterOpening key={session!.pack.evidence_hash} options={options} />
+      : <section className="freeplay-booster-message" role="status">Preparing your life’s legacy pack…<br /><button onClick={onClose}>Back to memorial</button></section>}
+  </dialog>;
 }

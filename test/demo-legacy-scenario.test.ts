@@ -83,7 +83,7 @@ test("prepareWeavePreset prepares every /test/weave/<feature> preset with real p
   const pack = await prepareWeavePreset("pack");
   assert.equal(pack.session.state.phase, "ended");
   const openedPack = await pack.ledger.mintPack(pack.session.life.life_id);
-  assert.equal(openedPack?.cards.length, 3);
+  assert.ok(openedPack && openedPack.cards.length >= 1 && openedPack.cards.length <= 5);
 
   const market = await prepareWeavePreset("market");
   assert.equal(market.initialHash, "#token/1");

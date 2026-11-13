@@ -1,4 +1,4 @@
-.game-preview-controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;padding:10px 28px;background:#e8ebdf;border-bottom:1px solid #cbd3be;color:#526047;font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;line-height:1.5}
+.game-preview-controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;padding:10px 28px;background:#e8ebdf;border-bottom:1px solid #cbd3be;color:#526047;font-family:var(--ef-font-body);font-size:11px;line-height:1.5}
 .game-preview-controls label{font-weight:650;white-space:nowrap}
 .game-preview-controls select{max-width:300px;padding:6px 25px 6px 9px;border:1px solid #bfcbb0;border-radius:3px;background:#fbfcf6;color:#405239;font:inherit}
 .game-preview-controls button{padding:6px 9px;border:1px solid #c4ceb7;border-radius:3px;background:#f3f5eb;color:#506143;font:inherit;cursor:pointer}

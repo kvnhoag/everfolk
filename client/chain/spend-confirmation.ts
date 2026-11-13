@@ -11,7 +11,6 @@ export interface SpendText { title: string; price: string; note?: string }
 const TITLES: Record<string, string> = {
   open_mint_pack: "Mint this life",
   mint_life: "Mint this life",
-  reroll_mint_slot: "Reroll this card",
   choose_mint_slot: "Keep this card",
   buy: "Buy",
   list: "List for sale",

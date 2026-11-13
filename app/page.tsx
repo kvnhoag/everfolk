@@ -1,2 +1,2 @@
-import GameClient from "../client/GameClient";
-export default function Page() { return <GameClient />; }
+import { GamePage } from "../client/screens/BrowserPages.tsx";
+export default function Page() { return <GamePage />; }

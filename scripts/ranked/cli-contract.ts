@@ -103,10 +103,6 @@ export function createCliContract(contractId: string, accountId: string): LivesC
       await callMethod(accountId, contractId, "open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: action }, `${terms.mint_fee} yoctoNEAR`);
       return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
     },
-    async rerollMintSlot(lifeId, slot, fee) {
-      await callMethod(accountId, contractId, "reroll_mint_slot", { life_id: lifeId, slot }, `${fee} yoctoNEAR`);
-      return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
-    },
     async chooseMintSlot(lifeId, slot) {
       await callMethod(accountId, contractId, "choose_mint_slot", { life_id: lifeId, slot }, "1 yoctoNEAR");
       const tokens = await viewMethod<{ token_id: string; metadata: { extra: string } }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });

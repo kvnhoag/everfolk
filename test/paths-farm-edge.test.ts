@@ -7,7 +7,7 @@ import { vocationCashDelta } from "../src/vocations/view.ts";
 import { farmEdgeHealth } from "../src/paths/index.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;

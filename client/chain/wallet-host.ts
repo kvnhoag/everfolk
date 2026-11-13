@@ -1,3 +1,5 @@
+import { TUTORIAL_LAYER_CLASS } from "../models/tutorial-placement.ts";
+
 /** Class NEAR Connect (`@hot-labs/near-connect`) gives every popup root it appends to `<body>`. */
 export const WALLET_POPUP_CLASS = "hot-connector-popup";
 /** Class of the dialog that hosts NEAR Connect popups above the ranked screen. */
@@ -37,6 +39,12 @@ export function isWalletHost(node: unknown): boolean {
   return Boolean(host?.classList?.contains(WALLET_HOST_CLASS));
 }
 
+/** The guided tour's own top-layer dialog; it explains the screen beneath it, so it stays on top. */
+export function isTutorialLayer(node: unknown): boolean {
+  const layer = node as PopupLike | null;
+  return Boolean(layer?.classList?.contains(TUTORIAL_LAYER_CLASS));
+}
+
 export function isSpendSheet(node: unknown): boolean {
   const sheet = node as PopupLike | null;
   return Boolean(sheet?.classList?.contains(SPEND_SHEET_CLASS));
@@ -44,10 +52,10 @@ export function isSpendSheet(node: unknown): boolean {
 
 /**
  * For the ranked screen's raise observer: true when a dialog other than `self` opened, so the ranked screen
- * should lift itself back on top. The wallet host and the spend sheet are exempt: they must stay above it.
+ * should lift itself back on top. The wallet host, the spend sheet and the guided tour are exempt: they must stay above it.
  */
 export function anotherDialogOpened(records: ArrayLike<{ target: unknown }>, self: unknown): boolean {
-  return Array.from(records).some(({ target }) => target !== self && !isWalletHost(target) && !isSpendSheet(target) && Boolean((target as { open?: boolean } | null)?.open));
+  return Array.from(records).some(({ target }) => target !== self && !isWalletHost(target) && !isSpendSheet(target) && !isTutorialLayer(target) && Boolean((target as { open?: boolean } | null)?.open));
 }
 
 /** Moves the wallet popups among `nodes` into `host`; other nodes stay where they are. */

@@ -148,6 +148,8 @@ export default function WeaveLab({ initialPreset = "granary" }: { initialPreset?
           const nextSession = await beginRankedSession({
             contract: prepared.ledger,
             contractId: PRACTICE_CONTRACT_ID,
+            networkId: "testnet",
+            practice: true,
             world: prepared.world,
             verifyUrl: "",
             verifyLocally: practiceVerifier(prepared.world, prepared.ledger),

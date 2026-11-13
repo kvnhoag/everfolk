@@ -68,6 +68,15 @@ export function focusActivity(world: WorldPack, focusId: YearlyFocusId) {
   return id ? world.character?.activities.find(activity => activity.id === id) : undefined;
 }
 
+/** The youngest age at which This year's focus appears; Infinity when the world has no focus activity. */
+export function yearlyFocusFirstAge(world: WorldPack, life?: Pick<LifeState, "originId">): number {
+  const focuses = life ? availableYearlyFocuses(world, life) : YEARLY_FOCUSES;
+  return Math.min(...focuses.flatMap(focus => {
+    const activity = focusActivity(world, focus.id);
+    return activity ? [activity.minAge ?? 0] : [];
+  }));
+}
+
 /** Authored base rules at the current age, not a prediction of the net outcome. */
 export function yearlyDeclineNotes(life: LifeState, world: WorldPack): string[] {
   if (life.phase === "ended") return [];

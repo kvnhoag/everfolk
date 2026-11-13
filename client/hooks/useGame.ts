@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
 import type { OnlinePlay } from "../types/online-play.ts";
-import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife } from "../mutations/lives.ts";
+import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife, restoreWealthObservations, syncLifeWealthObservation } from "../mutations/lives.ts";
 import { engineForLife, loadAnyLife, registerLifeEngine } from "../lib/world-session.ts";
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
@@ -22,8 +22,8 @@ import { isUnavailable } from "../../src/demo/availability.ts";
 import type { GamePreviewSession } from "../types/game-preview.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
-export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
-const YEAR_DURATION_MS = 25_000;
+import { DEFAULT_PLAYBACK_SPEED, YEAR_DURATION_MS, type PlaybackSpeed } from "../models/playback.ts";
+export type { PlaybackSpeed };
 
 function message(error: unknown): string {
   return error instanceof Error ? error.message : "Something interrupted this action. Please try again.";
@@ -50,15 +50,21 @@ function initialSession(startFresh = false, startFreshFrom?: LifeState, previewS
   }
   try {
     if (!startFresh && typeof window !== "undefined") {
+      restoreWealthObservations(window.localStorage);
       const restored = readSavedLife(window.localStorage);
-      if (restored) return {
-        life: restored, notice: "",
-        hasBegun: hasLifeBegun(window.localStorage, restored),
-        hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
-        unreadableSave: null,
-      };
+      if (restored) {
+        const hasBegun = hasLifeBegun(window.localStorage, restored);
+        if (hasBegun || restored.phase === "ended") syncLifeWealthObservation(window.localStorage, restored);
+        return {
+          life: restored, notice: "",
+          hasBegun,
+          hasRevealedStats: hasBirthStatsBeenRevealed(window.localStorage, restored),
+          unreadableSave: null,
+        };
+      }
       return { life: createSampleLife(newLifeSeed()), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
     }
+    if (typeof window !== "undefined") restoreWealthObservations(window.localStorage);
     return { life: startFresh && startFreshFrom ? createDifferentSampleLife(startFreshFrom) : createSampleLife(), notice: "", hasBegun: false, hasRevealedStats: false, unreadableSave: null };
   } catch (error) {
     const raw = typeof window !== "undefined" ? readRawSavedLife(window.localStorage) : null;
@@ -154,7 +160,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const [autoDecisions, setAutoDecisionsState] = useState(false);
   const autoIntentRef = useRef(false);
   const autoAllowedRef = useRef(false);
-  const [speed, setSpeed] = useState<PlaybackSpeed>(1);
+  const [speed, setSpeed] = useState<PlaybackSpeed>(DEFAULT_PLAYBACK_SPEED);
   const [yearClock] = useState(() => createPlaybackClock(playbackYearKey(initial.life), YEAR_DURATION_MS));
   const [clockProgress, setClockProgress] = useState(0);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online || isPreview ? "saved" : "saving");
@@ -186,6 +192,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
       setFocusSelection({ key: yearlyFocusStorageKey(next), id: "everyday" });
     }
+    if (!isPreview && typeof window !== "undefined") syncLifeWealthObservation(window.localStorage, next);
     lifeRef.current = next;
     setLife(next);
     hasBegunRef.current = true;
@@ -194,7 +201,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     setSaveStatus("saved");
     setNotice(notice);
     if (next.phase === "ended") commitPauseState(updatePauseState(pauseStateRef.current, { type: "ended" }, { hasBegun: true, phase: next.phase }));
-  }, [commitPauseState, yearClock]);
+  }, [commitPauseState, yearClock, isPreview]);
 
   const submitOnline = useCallback((action: (play: OnlinePlay) => Promise<LifeState>) => {
     const play = onlineRef.current;
@@ -259,6 +266,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       void rankedPlay.sync(next).then(adopted => {
         yearClock.setYear(playbackYearKey(adopted));
         setClockProgress(yearClock.read().progress);
+        if (!isPreview && typeof window !== "undefined" && (hasBegunRef.current || adopted.phase === "ended")) {
+          syncLifeWealthObservation(window.localStorage, adopted);
+        }
         lifeRef.current = adopted;
         setLife(adopted);
         setSaveStatus("saved");
@@ -283,6 +293,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
     if (fresh) yearClock.reset(playbackYearKey(next)); else yearClock.setYear(playbackYearKey(next));
     setClockProgress(yearClock.read().progress);
+    if (!isPreview && typeof window !== "undefined" && !fresh && (hasBegunRef.current || next.phase === "ended")) {
+      syncLifeWealthObservation(window.localStorage, next);
+    }
     lifeRef.current = next;
     setLife(next);
     setSaveStatus(isPreview ? "saved" : "saving");
@@ -303,12 +316,25 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
   }, [commit, hasBegun, life, submitOnline]);
 
-  const act = useCallback((activityId: string) => {
+  const act = useCallback((activityId: string, options?: { calendarDeadline?: boolean }) => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
-    if (submitOnline(play => play.dispatch({ type: "act", activity: activityId }))) return;
+    if (submitOnline(play => play.dispatch(options?.calendarDeadline ? { type: "act", activity: activityId, calendarDeadline: true } : { type: "act", activity: activityId }))) return;
     try {
       const current = life;
-      const next = engineForLife(current).act(current, activityId);
+      const next = engineForLife(current).act(current, activityId, options);
+      commit(next);
+      setNotice("");
+    } catch (error) {
+      setNotice(message(error));
+    }
+  }, [commit, hasBegun, life, submitOnline]);
+
+  const assess = useCallback((nodeId: string, jobIds: readonly string[]) => {
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "assess-jobs", nodeId, jobIds: [...jobIds] }))) return;
+    try {
+      const current = life;
+      const next = engineForLife(current).assess(current, nodeId, jobIds);
       commit(next);
       setNotice("");
     } catch (error) {
@@ -404,10 +430,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const beginLife = useCallback(() => {
     if (hasBegunRef.current || !hasRevealedStats || lifeRef.current !== life) return;
     hasBegunRef.current = true;
+    if (!isPreview && typeof window !== "undefined") syncLifeWealthObservation(window.localStorage, life);
     setHasBegun(true);
     setPlaying(true);
     setNotice("");
-  }, [hasRevealedStats, life, setPlaying]);
+  }, [hasRevealedStats, life, setPlaying, isPreview]);
 
   const restart = useCallback(() => {
     if (onlineRef.current || rankedRef.current) return; // Authoritative lives are replaced only by their container.
@@ -591,6 +618,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     life,
     choose,
     act,
+    assess,
     runDemo,
     actWithLoan,
     orderMarket,

@@ -1,7 +1,6 @@
-/* Approved Printed Folktale: Eczar 600, -.025em display tracking,
-   with DM Sans 500 / 16px for the life story. Keep compact UI at its own scale. */
-:root { --serif: var(--font-display); }
-body { font-family: var(--font-body); font-weight: 500; }
+/* Printed Folktale: display headings at -.025em tracking, with the body face at
+   500 / 16px for the life story. Keep compact UI at its own scale. */
+body { font-family: var(--ef-font-body); font-weight: 500; }
 
 .everfolk-game h1,
 .everfolk-game h2,
@@ -17,7 +16,7 @@ dialog .birth-roll-heading h2,
 dialog .birth-roll-heading h3,
 dialog.birth-roll-popover .birth-popover-heading h2,
 dialog.life-decision-dialog.choice-popup .life-decision-content > h2 {
-  font-family: var(--font-display);
+  font-family: var(--ef-font-display);
   font-weight: 600;
   letter-spacing: -.025em;
 }
@@ -30,7 +29,7 @@ dialog.life-decision-dialog.choice-popup .life-decision-content > h2 {
 dialog.life-decision-dialog.choice-popup .life-decision-content > p,
 dialog.detail-dialog .dialog-content > p,
 dialog.birth-roll-popover .birth-popover-heading p {
-  font-family: var(--font-body);
+  font-family: var(--ef-font-body);
   font-size: 16px;
   font-weight: 500;
   line-height: 1.75;
@@ -38,7 +37,7 @@ dialog.birth-roll-popover .birth-popover-heading p {
 
 .birth-stat-roll .birth-roll-number,
 dialog.birth-roll-popover .birth-roll-number {
-  font-family: var(--font-body);
+  font-family: var(--ef-font-body);
   font-variant-numeric: lining-nums tabular-nums;
 }
 

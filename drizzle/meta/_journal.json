@@ -43,6 +43,13 @@
       "when": 1794478416365,
       "tag": "0005_faithful_the_captain",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1794560334125,
+      "tag": "0006_mean_tarot",
+      "breakpoints": true
     }
   ]
 }

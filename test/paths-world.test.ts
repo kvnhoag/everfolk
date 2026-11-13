@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { buildLifeStageWorld } from "../src/vocations/life-stage-world.ts";
+import { buildLivesWorld } from "../src/vocations/lives-world.ts";
 import { FIELD_IDS } from "../src/paths/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
@@ -21,7 +22,7 @@ function bornAs(origin: string): LifeState {
 }
 
 test("the free-play world carries fields, districts and the two new birthplaces", () => {
-  assert.deepEqual(buildLifeStageWorld(base as unknown as WorldPack), world);
+  assert.deepEqual(buildLivesWorld(buildLifeStageWorld(base as unknown as WorldPack)), world);
   assert.deepEqual(Object.keys(world.paths!.fields), [...FIELD_IDS]);
   assert.deepEqual(Object.keys(world.paths!.districts), ["delta-village", "garrison", "estate", "city-quarter", "court-quarter"]);
   assert.equal(world.origins.length, 6);

@@ -1,11 +1,11 @@
 import { DEFAULT_MARKET_TERMS } from "./payout-preview.ts";
 import { sha256Hex } from "../../chain/hash.ts";
 import { categoryOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
-import { FIGURE_ACTIONS, FIGURE_IDS } from "../../chain/ids.ts";
+import { FIGURE_ACTIONS, FIGURE_IDS, NPC_WORLD_VERSION } from "../../chain/ids.ts";
 import type { Category, FigureId } from "../../chain/ids.ts";
 import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO } from "../../chain/stage-figures.ts";
 import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack, StageMintQuote } from "../../chain/types.ts";
-import { REROLL_FEE_YOCTO } from "./near-amount.ts";
+import { packCardCount } from "../../chain/pack-count.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
 import {
@@ -81,11 +81,30 @@ function parseEvidence(signed: SignedEvidence): Evidence {
   }
 }
 
-function assertEvidence(life: LifeView, evidence: Evidence, npcActionId: string): void {
+function assertNpcSession(evidence: Evidence, nowMs: number): void {
+  if (evidence.world_version !== NPC_WORLD_VERSION) return;
+  const proof = evidence.npc_session;
+  if (!proof) throw new Error("NPC world evidence requires a session attestation");
+  if (!proof.session_id || proof.session_id.length > 128 || !/^[\x21-\x7e]+$/.test(proof.session_id)) {
+    throw new Error("NPC session id must be 1 to 128 printable ASCII characters without spaces");
+  }
+  if (proof.transcript_hash !== evidence.save_hash || !/^[0-9a-f]{64}$/.test(proof.transcript_hash)) {
+    throw new Error("NPC transcript hash must match the save hash as 64 lowercase hex characters");
+  }
+  if (!(proof.expires_at > nowMs)) throw new Error("NPC session attestation has expired");
+  if (proof.provider_checked_at > nowMs + 5000) throw new Error("NPC provider check is too far in the future");
+  const lifetime = proof.expires_at - proof.provider_checked_at;
+  if (!(lifetime > 0 && lifetime <= 120_000)) {
+    throw new Error("NPC session attestation lifetime must be 1 to 120000 milliseconds");
+  }
+}
+
+function assertEvidence(life: LifeView, evidence: Evidence, npcActionId: string, nowMs: number): void {
   if (evidence.v !== 1) throw new Error("Unsupported evidence version");
   if (evidence.life_id !== life.life_id || evidence.account_id !== life.account_id) throw new Error("Evidence belongs to a different life or account");
   if (evidence.seed !== life.seed) throw new Error("Evidence was made for a different life seed");
   if (evidence.world_version !== life.world_version) throw new Error("Evidence is for a different world version");
+  assertNpcSession(evidence, nowMs);
   const influenced = new Set([...life.figure_picks.map(pick => pick.token_id), ...life.draws.map(draw => draw.token_id)]);
   if (!evidence.sources.every(source => influenced.has(source.token_id))) throw new Error("A source did not influence this life on chain");
   if (!evidence.matched_figures.every(figure => (FIGURE_IDS as readonly string[]).includes(figure))) throw new Error("Unknown figure");
@@ -110,7 +129,7 @@ async function rollOutcome(state: MockState, seed: string, evidence: Evidence) {
 async function mintLife(state: MockState, account: string, lifeId: string, signed: SignedEvidence, npcActionId: string, chosen?: MintCard, fee?: bigint): Promise<MintResult> {
   const evidence = parseEvidence(signed);
   const life = ownedAliveLife(state, account, lifeId);
-  assertEvidence(life, evidence, npcActionId);
+  assertEvidence(life, evidence, npcActionId, state.params.now());
   const evidenceHash = await sha256Hex(signed.evidence_json);
   if (state.packs.has(lifeId) && !chosen) throw new Error("Choose a card from the open mint pack");
   const { figure, rarity, affection } = chosen ? { figure: chosen.figure_id, rarity: chosen.rarity, affection: chosen.affection } : await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence);
@@ -156,7 +175,7 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
   };
 }
 
-async function packCard(state: MockState, life: LifeView, hash: string, slot: number, rerolled: boolean, evidence: Evidence, action: string): Promise<MintCard> {
+async function packCard(state: MockState, life: LifeView, hash: string, slot: number, evidence: Evidence, action: string): Promise<MintCard> {
   const stageFigures = evidence.stage_figures;
   if (stageFigures && stageFigures.length > 0) {
     const stageFig = stageFigures[slot % stageFigures.length];
@@ -164,7 +183,7 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
     const kind = figure ? "figure" : "npc";
     const rarity = figure ? 2 : 1;
     const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
-    const affection = Math.max(1, Math.min(100, 1 + Number((await roll(life.seed, `aff:${slot}:${rerolled}`)) % 100n) + Math.trunc((bonds - 50) / 5)));
+    const affection = Math.max(1, Math.min(100, 1 + Number((await roll(life.seed, `aff:${slot}`)) % 100n) + Math.trunc((bonds - 50) / 5)));
     const actionId = figure ? FIGURE_ACTIONS[figure][0] : action;
     return {
       kind,
@@ -172,7 +191,6 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
       rarity,
       affection,
       action_id: actionId,
-      rerolled,
       stage_id: stageFig.stageId,
       stage_title: stageFig.title,
       character_name: stageFig.name,
@@ -183,8 +201,8 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
       stage_record: stageFig.stageRecord,
     };
   }
-  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}:${rerolled}`), evidence);
-  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, rerolled };
+  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}`), evidence);
+  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action };
 }
 
 function bind(state: MockState, account: string): MockLivesContract {
@@ -205,7 +223,7 @@ function bind(state: MockState, account: string): MockLivesContract {
   async function stageMintQuote(lifeId: string, signed: SignedEvidence, action: string): Promise<StageMintQuote> {
     const life = state.lives.get(lifeId);
     if (!life) throw new Error("Life not found");
-    const evidence = parseEvidence(signed); assertEvidence(life, evidence, action);
+    const evidence = parseEvidence(signed); assertEvidence(life, evidence, action, state.params.now());
     if (!evidence.stage_figures?.length) throw new Error("Stage records and signed portraits are required");
     const allocated = new Map<FigureId, number>();
     const cards = evidence.stage_figures.map(fig => {
@@ -263,39 +281,29 @@ function bind(state: MockState, account: string): MockLivesContract {
     as: other => bind(state, other),
     seedToken: input => seedToken(state, input),
 
-    async mintTerms() { return { mint_fee: state.params.mintFee.toString(), reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
+    async mintTerms() { return { mint_fee: state.params.mintFee.toString(), source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
     async marketTerms() { return { ...DEFAULT_MARKET_TERMS }; },
     async mintPack(lifeId) { return copy(state.packs.get(lifeId)?.view ?? null); },
     async openMintPack(lifeId, signed, action) {
       const life = ownedAliveLife(state, account, lifeId);
       if (state.packs.has(lifeId)) throw new Error("Resume your existing pack without paying again");
       const evidence = parseEvidence(signed);
-      assertEvidence(life, evidence, action);
+      assertEvidence(life, evidence, action, state.params.now());
+      const cardCount = packCardCount(evidence);
+      if (cardCount === 0) throw new Error("This life ended too early to open a mint pack");
       const evidenceHash = await sha256Hex(signed.evidence_json);
       const hasStageFigures = Boolean(evidence.stage_figures && evidence.stage_figures.length > 0);
       const initialFee = hasStageFigures ? TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO : state.params.mintFee.toString();
-      const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: initialFee, reroll_fee: REROLL_FEE_YOCTO, source_share_bps: state.params.sourceMintShareBps };
+      const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: initialFee, source_share_bps: state.params.sourceMintShareBps };
       const pack = { view, evidence, signed, action };
       state.packs.set(lifeId, pack);
-      for (let slot = 0; slot < 3; slot++) view.cards.push(await packCard(state, life, evidenceHash, slot, false, evidence, action));
+      for (let slot = 0; slot < cardCount; slot++) view.cards.push(await packCard(state, life, evidenceHash, slot, evidence, action));
       return copy(view);
-    },
-    async rerollMintSlot(lifeId, slot, fee) {
-      const life = ownedAliveLife(state, account, lifeId);
-      const pack = state.packs.get(lifeId);
-      if (!pack || !Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Unknown mint slot");
-      if (pack.view.cards[slot].rerolled) throw new Error("This slot has already been rerolled");
-      if (fee !== pack.view.reroll_fee) throw new Error("Attach exactly the quoted fee");
-      const old = pack.view.cards[slot];
-      pack.view.cards[slot] = { ...old, figure_id: null };
-      pack.view.cards[slot] = await packCard(state, life, pack.view.evidence_hash, slot, true, pack.evidence, pack.action);
-      pack.view.total_fee = (BigInt(pack.view.total_fee) + BigInt(fee)).toString();
-      return copy(pack.view);
     },
     async chooseMintSlot(lifeId, slot) {
       ownedAliveLife(state, account, lifeId);
       const pack = state.packs.get(lifeId);
-      if (!pack || !Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Unknown mint slot");
+      if (!pack || !Number.isInteger(slot) || slot < 0 || slot >= pack.view.cards.length) throw new Error("Unknown mint slot");
       const result = await mintLife(state, account, lifeId, pack.signed, pack.action, pack.view.cards[slot], BigInt(pack.view.total_fee));
       state.packs.delete(lifeId);
       return result;

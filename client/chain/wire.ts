@@ -94,17 +94,18 @@ export function parseMintFee(value: unknown): string {
 }
 
 export function parseMintTerms(value: unknown): MintTerms {
-  const terms = record(value, "mint terms", { mint_fee: "string", reroll_fee: "string", source_share_bps: "number", pack_version: "number" });
-  yocto(terms.mint_fee, "mint fee"); yocto(terms.reroll_fee, "reroll fee");
+  const terms = record(value, "mint terms", { mint_fee: "string", source_share_bps: "number", pack_version: "number" });
+  yocto(terms.mint_fee, "mint fee");
   if (terms.pack_version !== 1 || !Number.isInteger(terms.source_share_bps) || Number(terms.source_share_bps) < 0 || Number(terms.source_share_bps) > 10000) fail("mint terms");
   return terms as unknown as MintTerms;
 }
 export function parseMintPack(value: unknown): MintPack {
-  const pack = record(value, "mint pack", { life_id: "string", evidence_hash: "string", cards: "array", total_fee: "string", reroll_fee: "string", source_share_bps: "number" });
-  yocto(pack.total_fee, "total mint fee"); yocto(pack.reroll_fee, "reroll fee");
-  if ((pack.cards as unknown[]).length !== 3) fail("mint slots");
+  const pack = record(value, "mint pack", { life_id: "string", evidence_hash: "string", cards: "array", total_fee: "string", source_share_bps: "number" });
+  yocto(pack.total_fee, "total mint fee");
+  const slotCount = (pack.cards as unknown[]).length;
+  if (slotCount < 1 || slotCount > 5) fail("mint slots");
   for (const entry of pack.cards as unknown[]) {
-    const card = record(entry, "mint card", { kind: "string", figure_id: "string|null", rarity: "number", affection: "number", action_id: "string", rerolled: "boolean" });
+    const card = record(entry, "mint card", { kind: "string", figure_id: "string|null", rarity: "number", affection: "number", action_id: "string" });
     if (!["npc", "figure"].includes(String(card.kind)) || !Number.isInteger(card.rarity) || Number(card.rarity) < 0 || Number(card.rarity) > 4 || !Number.isInteger(card.affection) || Number(card.affection) < 1 || Number(card.affection) > 100) fail("mint card");
   }
   return pack as unknown as MintPack;

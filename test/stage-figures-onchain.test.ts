@@ -99,7 +99,7 @@ test("practice album keeps all seven stages, their records, and an immutable min
 test("every portrait path from supported origins, aliases, variants and historical figures exists", () => {
   const base = new URL("../public/assets/pixel/portraits/", import.meta.url);
   const origins = new Set(readdirSync(base, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name));
-  for (const path of ["../worlds/alexandria-0.42.0.json", "../worlds/demo/alexandria-lives-4.json", "../worlds/demo/alexandria-lives-5.json"]) {
+  for (const path of ["../worlds/alexandria-0.42.0.json", "../worlds/demo/alexandria-lives-4.json", "../worlds/demo/alexandria-lives-5.json", "../worlds/demo/alexandria-lives-6.json", "../worlds/demo/alexandria-lives-7.json", "../worlds/demo/alexandria-lives-8.json"]) {
     const url = new URL(path, import.meta.url); if (!existsSync(url)) continue;
     const w = JSON.parse(readFileSync(url, "utf8")); for (const origin of w.origins) origins.add(origin.id);
   }

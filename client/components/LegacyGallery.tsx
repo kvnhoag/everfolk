@@ -6,6 +6,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LegacyEntry } from "../storage/legacy-store.ts";
 import { groupFigureCards } from "../models/figure-card-collection.ts";
 import PixelIcon from "./PixelIcon.tsx";
+import BoosterCollection from "./BoosterCollection.tsx";
 import "../styles/legacy-gallery.css";
 
 const distinction = (kind: string) => kind === "ultimate" ? "Ultimate title" : kind === "prestige" ? "Prestige" : undefined;
@@ -49,6 +50,7 @@ export default function LegacyGallery({ entries, currentLifeKey, storageNotice, 
   const lives = new Set(entries.map(entry => entry.lifeKey)).size;
   const collection = groupFigureCards(filtered);
   return <div className="legacy-gallery">
+    {!preview && <BoosterCollection />}
     <p className="legacy-intro">{preview ? "Accomplishments earned in this test life stay in the preview. Your personal collection is kept separate." : "Accomplishments earned in your current life. Previous lives remain saved in the archive."}</p>
     {storageNotice && <p className="legacy-storage-notice" role="status">{storageNotice}</p>}
     <div className="legacy-gallery-tally"><span><strong>{entries.length}</strong> accomplishments</span><span><strong>{lives}</strong> {lives === 1 ? "life" : "lives"}</span>{figures.length > 0 && <><span><strong>{figures.length}</strong> figure {figures.length === 1 ? "card" : "cards"}</span><span><strong>{entries.filter(entry => entry.accomplishment.figure).length}</strong> earned sub-cards</span></>}</div>
