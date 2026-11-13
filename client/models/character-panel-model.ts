@@ -1,10 +1,11 @@
 import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../../src/types.ts";
 
-export type CharacterSection = "career" | "skills" | "path" | "wealth" | "relationships" | "children";
+export type CharacterSection = "career" | "skills" | "figures" | "path" | "wealth" | "relationships" | "children";
 
 export const CHARACTER_SECTIONS: { id: CharacterSection; label: string }[] = [
   { id: "career", label: "Career" },
   { id: "skills", label: "Skills" },
+  { id: "figures", label: "Historical Figures" },
   { id: "path", label: "Life path" },
   { id: "wealth", label: "Wealth" },
   { id: "relationships", label: "Relationships" },
@@ -16,6 +17,7 @@ export function visibleCharacterSections(life: LifeState, world: WorldPack, hasR
   const firstJobAge = Math.min(...(world.character?.jobs.map(job => job.minAge) ?? []));
   return CHARACTER_SECTIONS.filter(section => {
     if (section.id === "career") return Boolean(life.character?.jobId) || life.age >= firstJobAge;
+    if (section.id === "figures") return Boolean(world.figurePaths?.length);
     if (section.id === "path") return Boolean(world.paths && life.paths);
     if (section.id === "wealth") return Boolean(world.economy && life.economy);
     if (section.id === "relationships") return world.character?.extendedSocialRoles === true || life.age >= 18 && hasRelationships;

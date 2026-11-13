@@ -18,10 +18,12 @@
     "db:generate": "drizzle-kit generate",
     "ranked:world": "node scripts/ranked/build-ranked-world.mjs",
     "demo:world": "node scripts/demo/build-demo-world.mjs",
+    "resources:world": "node scripts/vocations/build-household-resources.mjs",
     "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
     "npc:provider-check": "node scripts/npc/check-provider.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "figures:world": "node scripts/figures/build-world.mjs",
+    "figures:contributions": "node scripts/figures/build-contribution-world.mjs",
     "deep:world": "node scripts/deep-capabilities/build-world.mjs"
   },
   "packageManager": "pnpm@11.25.0",

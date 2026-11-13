@@ -52,8 +52,10 @@ export function validateFigurePaths(input: unknown, world: WorldPack, condition:
     return { activity, achievement, activityId, achievementId };
   };
   for (let index = 0; index < paths.length; index++) {
-    const path = `world.figurePaths[${index}]`, value = obj(paths[index], path, ["id", "name", "summary", "baseRank", "maximumRank", "sources", "encounter", "tradition", "stages", "capstone", "promotion"], ["id", "name", "summary", "baseRank", "maximumRank", "sources", "encounter", "stages", "capstone"]);
+    const path = `world.figurePaths[${index}]`, value = obj(paths[index], path, ["id", "name", "summary", "baseRank", "maximumRank", "sources", "encounter", "tradition", "stages", "capstone", "promotion", "contributionTiering", "contributionStartRank", "legendaryContribution"], ["id", "name", "summary", "baseRank", "maximumRank", "sources", "encounter", "stages", "capstone"]);
     const figureId = id(value.id, path + ".id"); if (usedIds.has(figureId)) fail(path, "duplicate figure"); usedIds.add(figureId);
+    if (value.contributionTiering !== undefined && value.contributionTiering !== "below-principal") fail(path + ".contributionTiering", "unknown contribution tiering policy");
+    if (value.contributionStartRank !== undefined && (value.contributionStartRank !== "Common" || value.contributionTiering !== "below-principal" || value.baseRank !== "Legendary" || value.maximumRank !== "Legendary")) fail(path + ".contributionStartRank", "Common entry policy requires a fixed Legendary principal under the below-principal policy");
     text(value.name, path + ".name", 200); text(value.summary, path + ".summary");
     if (!["Epic", "Legendary"].includes(value.baseRank as string) || !["Epic", "Legendary"].includes(value.maximumRank as string) || value.baseRank === "Legendary" && value.maximumRank !== "Legendary") fail(path, "invalid principal ranks");
     for (const [i, sourceValue] of array(value.sources, path + ".sources", 1, 12).entries()) {
@@ -74,17 +76,24 @@ export function validateFigurePaths(input: unknown, world: WorldPack, condition:
     }
     let previous: string | undefined;
     const stageWork = new Set<string>();
-    for (const [i, stageValue] of array(value.stages, path + ".stages", 3, 3).entries()) {
+    const stageActivities = new Set<string>();
+    const ranks = value.contributionStartRank === "Common" ? ["Common", "Uncommon", "Rare", "Epic"] : value.contributionTiering === "below-principal" && value.baseRank === "Epic" ? ["Common", "Uncommon", "Rare"] : ["Uncommon", "Rare", "Epic"];
+    for (const [i, stageValue] of array(value.stages, path + ".stages", ranks.length, ranks.length).entries()) {
       const stagePath = `${path}.stages[${i}]`, stage = obj(stageValue, stagePath, ["rank", "title", "traditionTitle", "achievementId", "activityId", "workActionId", "workYears", "description", "requires"]);
-      if (stage.rank !== ["Uncommon", "Rare", "Epic"][i]) fail(stagePath, "association stages must be Uncommon, Rare, Epic in order");
+      if (stage.rank !== ranks[i]) fail(stagePath, `association stages must be ${ranks.join(", ")} in order`);
       for (const field of ["title", "traditionTitle", "description"]) text(stage[field], stagePath + "." + field);
       const workId = id(stage.workActionId, stagePath), years = integer(stage.workYears, stagePath, 1, 10), work = world.vocations.actions[workId];
       if (!work || work.kind !== "work" || work.practice || stageWork.has(workId)) fail(stagePath, "each contribution needs its own real project work");
       stageWork.add(workId); condition(stage.requires, stagePath + ".requires");
       const title = source(stagePath, figureId, stage), required = stage.requires as Condition;
+      stageActivities.add(title.activityId);
       const workGate = (rule: Condition) => rule.type === "vocation" && rule.action === workId && rule.count >= years;
       if (!mandatory(required, workGate) || !mandatory(title.activity.when, workGate)) fail(stagePath, "title must require its completed project years");
       if (previous && (!checksAchievement(required, previous) || !checksAchievement(title.activity.when, previous))) fail(stagePath, "contribution titles must require the previous earned tier");
+      if (previous && value.contributionStartRank === "Common") {
+        const workActivities = [...activities.values()].filter(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === workId)));
+        if (!workActivities.length || workActivities.some(activity => !checksAchievement(activity.when, previous!))) fail(stagePath, "contribution work must require the previous earned tier");
+      }
       previous = title.achievementId;
     }
     const capstone = obj(value.capstone, path + ".capstone", ["title", "achievementId", "activityId", "description", "requires", "attemptAchievementId"], ["title", "achievementId", "activityId", "description", "requires"]);
@@ -94,7 +103,7 @@ export function validateFigurePaths(input: unknown, world: WorldPack, condition:
       const attempt = source(path + ".capstone.attemptAchievementId", figureId, { activityId: capstone.activityId, achievementId: capstone.attemptAchievementId });
       if (!mandatory(final.activity.when, rule => rule.type === "not" && rule.condition.type === "accomplishment" && rule.condition.achievement === attempt.achievementId)) fail(path, "one-shot capstone must reject an already resolved attempt");
     }
-    if (!checksAchievement(capRule, previous!) || !checksAchievement(final.activity.when, previous!)) fail(path, "figure-defining capstone requires the Epic contribution");
+    if (!checksAchievement(capRule, previous!) || !checksAchievement(final.activity.when, previous!)) fail(path, value.contributionTiering ? "figure-defining capstone requires the senior contribution" : "figure-defining capstone requires the Epic contribution");
     const independentWork = (rule: Condition) => rule.type === "vocation" && !stageWork.has(rule.action) && rule.count >= 2 && world.vocations!.actions[rule.action]?.kind === "work";
     if (!mandatory(capRule, independentWork) || !mandatory(final.activity.when, independentWork)) fail(path, "special title needs separate sustained capstone work");
     if (value.promotion !== undefined) {
@@ -110,5 +119,33 @@ export function validateFigurePaths(input: unknown, world: WorldPack, condition:
       if (promoted.activityId !== final.activityId && !checksAchievement(promoted.activity.when, final.achievementId)) fail(path, "promotion source must require its earned capstone");
       if (promoted.activityId === final.activityId && !promoted.activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === promoted.achievementId) && outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === final.achievementId))) fail(path, "successful milestone must be paired with actual capstone completion");
     } else if (value.baseRank !== value.maximumRank) fail(path, "conditional principal needs an explicit successful milestone");
+    if (value.legendaryContribution !== undefined) {
+      if (value.contributionTiering !== "below-principal" || value.baseRank !== "Epic" || value.maximumRank !== "Legendary" || value.promotion === undefined) fail(path + ".legendaryContribution", "Epic recognition requires a conditional Legendary principal under the below-principal policy");
+      const recognitionPath = path + ".legendaryContribution";
+      const recognition = obj(value.legendaryContribution, recognitionPath, ["rank", "title", "traditionTitle", "description", "achievementId", "activityId", "requires"]);
+      if (recognition.rank !== "Epic") fail(recognitionPath, "post-promotion contribution must be Epic");
+      for (const field of ["title", "traditionTitle", "description"]) text(recognition[field], recognitionPath + "." + field);
+      condition(recognition.requires, recognitionPath + ".requires");
+      const accepted = source(recognitionPath, figureId, recognition);
+      const promotion = value.promotion as Data;
+      if (stageActivities.has(accepted.activityId) || accepted.activityId === final.activityId || accepted.activityId === promotion.activityId) fail(recognitionPath, "Epic recognition needs a separate post-promotion claim");
+      const requires = recognition.requires as Condition;
+      const checks = (rule: Condition | undefined) => checksAchievement(rule, previous!) && checksAchievement(rule, promotion.achievementId as string) &&
+        mandatory(rule, child => child.type === "not" && child.condition.type === "accomplishment" && child.condition.achievement === accepted.achievementId);
+      if (!checks(requires) || !checks(accepted.activity.when)) fail(recognitionPath, "Epic recognition must require the senior Rare contribution, successful Legendary promotion and an unclaimed recognition");
+      if (accepted.activity.usesYearlyActivity !== false) fail(recognitionPath, "post-promotion recognition must be a minor title claim");
+      // Neither the senior ladder nor the capstone/promotion may depend on this later recognition.
+      const dependsOnRecognition = (rule: Condition | undefined): boolean => {
+        if (!rule) return false;
+        if (rule.type === "accomplishment") return rule.achievement === accepted.achievementId;
+        if (rule.type === "all" || rule.type === "any") return rule.conditions.some(dependsOnRecognition);
+        if (rule.type === "not") return dependsOnRecognition(rule.condition);
+        return false;
+      };
+      if (dependsOnRecognition(capRule) || dependsOnRecognition(final.activity.when) || dependsOnRecognition(activities.get(promotion.activityId as string)?.when) ||
+        (value.stages as Data[]).some(stage => dependsOnRecognition(stage.requires as Condition) || dependsOnRecognition(activities.get(stage.activityId as string)?.when))) fail(recognitionPath, "post-promotion recognition cannot gate an earlier stage or create a promotion cycle");
+    } else if (value.contributionTiering === "below-principal" && value.baseRank === "Epic" && value.maximumRank === "Legendary") {
+      fail(path + ".legendaryContribution", "conditional principal needs separate Epic recognition after its Legendary outcome");
+    }
   }
 }

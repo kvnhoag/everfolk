@@ -29,7 +29,8 @@ function oneOf(value: unknown, allowed: readonly string[], path: string, fail: F
 /** Shape check of the config. Tracks extend the checks for their own section. */
 export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: Set<string>; activities: Set<string>; skills: Set<string>; achievements: Set<string>; origins?: Set<string> }): void {
   const sections = ["timeline", "household", "market", "service", "works", "agents", "availability"];
-  const def = record(value, "world.demo", fail, [...sections, "startingResources"], sections);
+  const def = record(value, "world.demo", fail, [...sections, "startingResources", "resourceScaleDivisor"], sections);
+  if (Object.hasOwn(def, "resourceScaleDivisor")) whole(def.resourceScaleDivisor, "world.demo.resourceScaleDivisor", fail, 1, 100);
   for (const section of ["timeline", "household", "market", "service", "works", "agents"]) record(def[section], `world.demo.${section}`, fail, Object.keys(def[section] as Data ?? {}));
   const household = def.household as Data;
   if (Object.hasOwn(household, "buySeedWhenShort") && typeof household.buySeedWhenShort !== "boolean") fail("world.demo.household.buySeedWhenShort", "expected a boolean");
@@ -47,7 +48,7 @@ export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: 
   (availability.unavailableJobs as string[]).forEach((id, i) => { if (playable.has(id)) fail(`world.demo.availability.unavailableJobs[${i}]`, "a job cannot be playable and unavailable"); });
   if (Object.hasOwn(def, "startingResources")) {
     const at = "world.demo.startingResources", limit = 1_000_000_000_000;
-    const config = record(def.startingResources, at, fail, ["defaults", "origins"], ["defaults"]);
+    const config = record(def.startingResources, at, fail, ["defaults", "origins", "storeCapacityByOrigin"], ["defaults"]);
     const rangeMap = (value: unknown, path: string, required: readonly string[]) => {
       const ranges = record(value, path, fail, TRADE_ITEMS, required);
       for (const [item, value] of Object.entries(ranges)) {
@@ -67,6 +68,14 @@ export function validateDemoDefinition(value: unknown, fail: Fail, ids: { jobs: 
       if (!Number.isSafeInteger(maximum) || maximum > limit) fail(path, "combined starting resource market value must stay within 1000000000000");
     };
     safeValue(defaults, `${at}.defaults`);
+    if (Object.hasOwn(config, "storeCapacityByOrigin")) {
+      const storagePath = `${at}.storeCapacityByOrigin`;
+      const capacities = record(config.storeCapacityByOrigin, storagePath, fail, Object.keys(config.storeCapacityByOrigin as Data ?? {}));
+      for (const [origin, capacity] of Object.entries(capacities)) {
+        if (ids.origins && !ids.origins.has(origin)) fail(`${storagePath}.${origin}`, "unknown origin");
+        whole(capacity, `${storagePath}.${origin}`, fail, 0, limit);
+      }
+    }
     if (Object.hasOwn(config, "origins")) {
       const origins = record(config.origins, `${at}.origins`, fail, Object.keys(config.origins as Data ?? {}));
       for (const [origin, value] of Object.entries(origins)) {

@@ -7,6 +7,26 @@ export default defineConfig(async () => {
   configureToolEnvironment(process.cwd());
   const { cloudflare } = await import("@cloudflare/vite-plugin");
   return {
+    environments: {
+      client: {
+        build: {
+          rolldownOptions: {
+            output: {
+              codeSplitting: {
+                // Retain every save-compatible pack without combining their data
+                // into a browser asset above Cloudflare's 25 MiB size limit.
+                groups: [{
+                  name(moduleId: string) {
+                    const world = /[\\/]worlds[\\/](.+)\.json(?:\?.*)?$/.exec(moduleId);
+                    return world ? `world-${world[1].replace(/[\\/]/g, "-")}` : null;
+                  },
+                }],
+              },
+            },
+          },
+        },
+      },
+    },
     plugins: [vinext(), sites({ mockAuth: true }), cloudflare({
       viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
       inspectorPort: false,

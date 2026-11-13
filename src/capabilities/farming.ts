@@ -2,6 +2,8 @@
 import type { LifeState, WorldPack } from "../types.ts";
 import type { CapabilityEvidence } from "./types.ts";
 import { hasServiceRole } from "../demo/service-role.ts";
+import type { DemoDefinition } from "../demo/types.ts";
+import { scaleCropQuantity } from "../demo/resource-scale.ts";
 
 const BPS = 10_000;
 const GRAIN_SEED_PER_PLOT = 10;
@@ -36,12 +38,12 @@ function animalNeed(world: Pick<WorldPack, "demo">, life: LifeState): number {
   return life.demo.household.animals.ox * world.demo.household.animalFeed.ox
     + life.demo.household.animals.donkey * world.demo.household.animalFeed.donkey;
 }
-function seeds(life: LifeState, mode = life.capabilities?.farm?.actionAge === life.age ? life.capabilities.farm.mode : "ordinary"): { grain: number; flax: number } {
+function seeds(life: LifeState, mode = life.capabilities?.farm?.actionAge === life.age ? life.capabilities.farm.mode : "ordinary", def?: DemoDefinition): { grain: number; flax: number } {
   const h = life.demo!.household;
-  return { grain: Math.max(0, h.plots - h.flaxPlots) * (mode === "dense" ? 20 : GRAIN_SEED_PER_PLOT), flax: h.flaxPlots * FLAX_SEED_PER_PLOT };
+  return { grain: Math.max(0, h.plots - h.flaxPlots) * scaleCropQuantity(def, mode === "dense" ? 20 : GRAIN_SEED_PER_PLOT), flax: h.flaxPlots * FLAX_SEED_PER_PLOT };
 }
 /** Grain an ordinary sowing of the household's grain plots needs. */
-export function ordinarySeedGrain(life: LifeState): number { return seeds(life, "ordinary").grain; }
+export function ordinarySeedGrain(life: LifeState, def?: DemoDefinition): number { return seeds(life, "ordinary", def).grain; }
 function material(life: LifeState, item: string): number { return life.vocations?.inventory[item] ?? 0; }
 function consumeMaterial(life: LifeState, item: string, amount: number): void {
   if (!amount) return;
@@ -76,7 +78,7 @@ function workFee(life: LifeState, nodeId: string): number {
 function contingency(life: LifeState, world: WorldPack, nodeId: string): { quantity: number; cost: number } {
   if (!has(life, "FR9") || !["FR9", "FR10"].includes(nodeId)) return { quantity: 0, cost: 0 };
   const years = nodeId === "FR10" && has(life, "FR10") ? 2 : 1;
-  const target = farmRationNeed(world, life) * years + animalNeed(world, life) + seeds(life, modeFor(life, nodeId)).grain;
+  const target = farmRationNeed(world, life) * years + animalNeed(world, life) + seeds(life, modeFor(life, nodeId), world.demo).grain;
   const price = life.demo!.town.prices.grain.sell;
   const budget = Math.max(0, life.economy!.cash - workFee(life, nodeId) - (life.capabilities?.farm?.extension ? EXTENSION_UPKEEP : 0));
   const quantity = Math.max(0, Math.min(target - life.demo!.household.grain, life.demo!.town.merchant.grain, Math.floor(budget / price)));
@@ -85,7 +87,7 @@ function contingency(life: LifeState, world: WorldPack, nodeId: string): { quant
 
 export function farmWorkQuote(world: WorldPack, life: LifeState, nodeId: string): { grainSeed: number; flaxSeed: number; fee: number; contingencyBought: number; contingencyCost: number; materials: Record<string, number> } {
   if (!enabled(world, life)) return { grainSeed: 0, flaxSeed: 0, fee: 0, contingencyBought: 0, contingencyCost: 0, materials: {} };
-  const seed = seeds(life, modeFor(life, nodeId)), purchase = contingency(life, world, nodeId);
+  const seed = seeds(life, modeFor(life, nodeId), world.demo), purchase = contingency(life, world, nodeId);
   const builds = nodeId === "FR7" && has(life, "FR7") && !life.capabilities!.farm?.extension;
   return { grainSeed: seed.grain, flaxSeed: seed.flax, fee: workFee(life, nodeId), contingencyBought: purchase.quantity, contingencyCost: purchase.cost, materials: builds ? { timber: 4, clay: 5 } : {} };
 }
@@ -95,7 +97,7 @@ export function farmWorkReason(world: WorldPack, life: LifeState, nodeId: string
   const h = life.demo!.household;
   if (h.plots < 1) return "This household has no plot to cultivate.";
   if (life.character?.jobId === "soldier") return "Leave military service before working a household plot.";
-  const seed = seeds(life, modeFor(life, nodeId));
+  const seed = seeds(life, modeFor(life, nodeId), world.demo);
   if (h.grain + contingency(life, world, nodeId).quantity < seed.grain) return `Reserve ${seed.grain} grain for the seed actually sown on these plots.`;
   if (material(life, "flax-seed") < seed.flax) return `Buy ${seed.flax} flax-seed units before sowing these flax plots.`;
   if (life.economy.cash < workFee(life, nodeId)) return `This work costs ${workFee(life, nodeId)} dr; no money is borrowed automatically.`;
@@ -107,7 +109,7 @@ export function farmWorkReason(world: WorldPack, life: LifeState, nodeId: string
 export function applyFarmWork(world: WorldPack, life: LifeState, nodeId: string): { text: string; complete: boolean; data: Record<string, number | string | boolean> } {
   const reason = farmWorkReason(world, life, nodeId);
   if (reason) throw new Error(reason);
-  const state = life.capabilities!, h = life.demo!.household, mode = modeFor(life, nodeId), seed = seeds(life, mode), fee = workFee(life, nodeId);
+  const state = life.capabilities!, h = life.demo!.household, mode = modeFor(life, nodeId), seed = seeds(life, mode, world.demo), fee = workFee(life, nodeId);
   const extension = state.farm?.extension === true || nodeId === "FR7" && has(life, "FR7");
   const builds = extension && state.farm?.extension !== true;
   const purchase = contingency(life, world, nodeId);
@@ -127,7 +129,7 @@ export function applyFarmWork(world: WorldPack, life: LifeState, nodeId: string)
 export function beginFarmHarvest(world: WorldPack, life: LifeState, completedAge: number): void {
   if (!enabled(world, life) || latest(life, "farm-ledger", completedAge)) return;
   const h = life.demo!.household, state = life.capabilities!, pending = state.farm?.actionAge === completedAge ? state.farm : undefined;
-  const plan = latest(life, "farm-plan", completedAge), seed = seeds(life, pending?.mode ?? "ordinary");
+  const plan = latest(life, "farm-plan", completedAge), seed = seeds(life, pending?.mode ?? "ordinary", world.demo);
   const grainStart = h.grain;
   const grainSeed = pending ? pending.seed : Math.min(seed.grain, h.grain);
   const flaxSeed = pending ? value(plan, "flaxSeedPaid") : Math.min(seed.flax, material(life, "flax-seed"));
@@ -150,7 +152,7 @@ export function recordFarmFlow(life: LifeState, key: string, quantity: number): 
 }
 
 /** Only paid plans change yields. Bonuses stack additively and cap at 20%; flood repair is separate. */
-export function farmYieldPlan(life: LifeState, settlementAge = life.age): { floodFactorBps?: number; grainBonusBps: number; flaxBonusBps: number; grainSeedBps: number; flaxSeedBps: number } {
+export function farmYieldPlan(life: LifeState, settlementAge = life.age, def?: DemoDefinition): { floodFactorBps?: number; grainBonusBps: number; flaxBonusBps: number; grainSeedBps: number; flaxSeedBps: number } {
   if (!life.capabilities) return { grainBonusBps: 0, flaxBonusBps: 0, grainSeedBps: BPS, flaxSeedBps: BPS };
   const ledger = latest(life, "farm-ledger", settlementAge - 1), plan = life.capabilities.farm;
   const active = plan?.actionAge === settlementAge - 1;
@@ -161,16 +163,16 @@ export function farmYieldPlan(life: LifeState, settlementAge = life.age): { floo
   if (active && plan?.mode === "conservative" && has(life, "FC9")) bonus += flood === "low" ? 1500 : -500;
   const maintained = active && WATER_WORK.has(node) && (value(ledger, "maintenancePaid") > 0 || plan!.fee >= CHANNEL_FEE_PER_PLOT * life.demo!.household.plots);
   const floodFactorBps = flood === "low" && maintained && has(life, "F3W") ? has(life, "FC7") ? 6000 : 5500 : undefined;
-  const seed = seeds(life, active ? plan?.mode : "ordinary");
+  const seed = seeds(life, active ? plan?.mode : "ordinary", def);
   const grainSeedBps = active ? BPS : seed.grain ? Math.floor(Math.min(life.demo!.household.grain, seed.grain) * BPS / seed.grain) : BPS;
   const flaxSeedBps = active ? BPS : seed.flax ? Math.floor(Math.min(material(life, "flax-seed"), seed.flax) * BPS / seed.flax) : BPS;
   return { ...(floodFactorBps !== undefined ? { floodFactorBps } : {}), grainBonusBps: Math.min(2000, bonus), flaxBonusBps: Math.min(2000, bonus + (has(life, "FC8") ? 500 : 0)), grainSeedBps: ledger ? value(ledger, "grainSeedBps") : grainSeedBps, flaxSeedBps: ledger ? value(ledger, "flaxSeedBps") : flaxSeedBps };
 }
 
-export function farmCapacityBonus(life: LifeState, settlementAge = life.age): number {
+export function farmCapacityBonus(life: LifeState, settlementAge = life.age, def?: DemoDefinition): number {
   if (!life.capabilities?.farm?.extension) return 0;
   const ledger = latest(life, "farm-ledger", settlementAge - 1);
-  return (ledger ? value(ledger, "upkeepPaid") >= EXTENSION_UPKEEP : (life.economy?.cash ?? 0) >= EXTENSION_UPKEEP) ? EXTENSION_CAPACITY : 0;
+  return (ledger ? value(ledger, "upkeepPaid") >= EXTENSION_UPKEEP : (life.economy?.cash ?? 0) >= EXTENSION_UPKEEP) ? scaleCropQuantity(def, EXTENSION_CAPACITY) : 0;
 }
 /** Relative in-capacity reduction; earlier reductions still apply, with a 75% total limit. */
 export function farmSpoilageCut(life: LifeState): number {
@@ -182,7 +184,7 @@ export function farmSpoilageCut(life: LifeState): number {
 
 export function farmReserve(world: Pick<WorldPack, "demo">, life: LifeState): number {
   if (!world.demo || !life.demo || !has(life, "F2")) return 0;
-  let reserve = seeds(life).grain;
+  let reserve = seeds(life, undefined, world.demo).grain;
   if (has(life, "FR6")) reserve += farmRationNeed(world, life) * (has(life, "FR10") ? life.capabilities?.farm?.reserveYears ?? 1 : 1);
   if (has(life, "FR8")) reserve += animalNeed(world, life);
   return reserve;
@@ -201,7 +203,7 @@ function qualifies(world: WorldPack, life: LifeState, nodeId: string, d: Capabil
     case "F2": case "F4": case "FC8": return seed;
     case "F3W": case "FC7": return Number(d.maintenancePaid) >= CHANNEL_FEE_PER_PLOT * life.demo!.household.plots;
     case "FC9": case "FC10": return full && seed;
-    case "FR5": return full && Number(d.grainEnd) >= 240;
+    case "FR5": return full && Number(d.grainEnd) >= scaleCropQuantity(world.demo, 240);
     case "FR6": case "FR8": return full && Number(d.grainEnd) >= Number(d.nextRations) + Number(d.nextSeed);
     case "FR7": return Number(d.cashPaid) >= INSPECTION_FEE;
     case "FR9": return full && (d.flood === "low" && Number(d.grainStart) >= Number(d.rationsNeed) && Number(d.boughtFood) === 0 || Number(d.grainEnd) >= Math.ceil(Number(d.nextRations) * 1.5) + Number(d.nextSeed));
@@ -214,7 +216,7 @@ export function settleFarmCapabilities(world: WorldPack, life: LifeState, comple
   if (!enabled(world, life)) return;
   const ledger = latest(life, "farm-ledger", completedAge), plan = life.capabilities!.farm;
   if (!ledger || !plan || plan.actionAge !== completedAge || latest(life, "farm-settlement", completedAge)) return;
-  const h = life.demo!.household, seed = seeds(life), nextRations = farmRationNeed(world, life);
+  const h = life.demo!.household, seed = seeds(life, undefined, world.demo), nextRations = farmRationNeed(world, life);
   const equation = value(ledger, "grainStart") - value(ledger, "seedDuringSettlement") + value(ledger, "grainHarvest") - value(ledger, "rent") - value(ledger, "rationsServed") - value(ledger, "animalFeed") - value(ledger, "spoiled") + value(ledger, "boughtFood");
   const data: CapabilityEvidence["data"] = { ...ledger.data, grainEnd: h.grain, fullRations: h.lastShortfallBps === 0 && value(ledger, "rationsServed") === value(ledger, "rationsNeed"), reconciled: equation === h.grain,
     fullSeed: value(ledger, "grainSeedBps") === BPS && value(ledger, "flaxSeedBps") === BPS,

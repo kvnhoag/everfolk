@@ -113,7 +113,7 @@ function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number
   if (plots <= 0) return { grain: 0, flax: 0, neighbourGrain: 0, neighbourFlax: 0 };
   const worked = Math.min(labourAt(def, life, age, age - 1), ADULT * plots);
   const leased = h.leaseUnworkedBps === undefined ? 0 : ADULT * plots - worked;
-  const plan = farmYieldPlan(life, age);
+  const plan = farmYieldPlan(life, age, def);
   const factor = (amount: number, flax = false): number => {
     let value = bpsOf(amount, plan.floodFactorBps ?? h.floodFactorBps[life.demo.year.flood]);
     value = bpsOf(value, flax ? plan.flaxSeedBps : plan.grainSeedBps);
@@ -235,7 +235,7 @@ export function feedHousehold(ctx: DemoContext): void {
     if (bought > 0) ctx.journal("household-bought-grain", `The store ran short, so the household bought ${bought} measures of grain from the merchant.`);
   }
   // Keep next year's seed: once everyone can eat, buy what the store lacks for sowing.
-  const seedShort = ctx.def.household.buySeedWhenShort ? need + animalNeed + seedAfterSpoilage(ctx.def, life, ordinarySeedGrain(life)) - household.grain : 0;
+  const seedShort = ctx.def.household.buySeedWhenShort ? need + animalNeed + seedAfterSpoilage(ctx.def, life, ordinarySeedGrain(life, ctx.def)) - household.grain : 0;
   if (seedShort > 0 && (life.economy?.cash ?? 0) > 0 && household.grain >= need + animalNeed) {
     const bought = whole(buyForHousehold(ctx, seedShort));
     if (bought > 0) recordFarmFlow(ctx.life, "boughtFood", bought);
@@ -257,7 +257,7 @@ export function feedHousehold(ctx: DemoContext): void {
 
 function storeCapacity(def: DemoDefinition, life: LifeStateWithDemo, age = life.age): number {
   const dealer = life.character?.jobId === "grain-dealer" ? def.household.dealerExtraCapacity ?? 0 : 0;
-  return life.demo.household.capacity + dealer + farmCapacityBonus(life, age);
+  return life.demo.household.capacity + dealer + farmCapacityBonus(life, age, def);
 }
 
 /** Grain lost to spoilage from a store holding `grain`. Pure. */

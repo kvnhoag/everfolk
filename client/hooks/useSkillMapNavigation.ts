@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from "react";
-import { clampMapZoom, constrainMapCamera, fitMapCamera, zoomMapCamera, type MapCamera, type MapPoint, type MapSize } from "../models/skill-map-camera.ts";
+import { clampMapZoom, constrainMapCamera, fitMapCamera, fitMapWidthCamera, zoomMapCamera, type MapCamera, type MapPoint, type MapSize } from "../models/skill-map-camera.ts";
 
 /** Animate only the canvas transform; the skill graph does not re-render every frame. */
 export function useSkillMapNavigation(canvas: MapSize) {
   const viewport = useRef<HTMLDivElement>(null), paper = useRef<HTMLDivElement>(null);
   const current = useRef<MapCamera>({ x: 0, y: 0, scale: .42 });
-  const target = useRef(current.current), frame = useRef(0), fitting = useRef(true);
+  const target = useRef(current.current), frame = useRef(0), fitting = useRef<"width" | "all" | false>("width");
   const zoomLabel = useRef<HTMLSpanElement>(null);
   const lastFrame = useRef(0), direct = useRef(false), reducedMotion = useRef(false);
   const summaryTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -44,7 +44,7 @@ export function useSkillMapNavigation(canvas: MapSize) {
     if (reducedMotion.current) { stop(); paint(target.current); publish(); }
     else if (!frame.current) frame.current = requestAnimationFrame(tick);
   }
-  function fit(animate = true) { fitting.current = true; move(fitMapCamera(size(), canvas), animate); }
+  function fit(animate = true) { fitting.current = "all"; move(fitMapCamera(size(), canvas), animate); }
   function changeZoom(scale: number, anchor?: MapPoint) {
     fitting.current = false;
     const bounds = size();
@@ -63,7 +63,11 @@ export function useSkillMapNavigation(canvas: MapSize) {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotion = () => { reducedMotion.current = motion.matches; };
     updateMotion(); motion.addEventListener("change", updateMotion);
-    const resize = () => { if (fitting.current) fit(false); else move(current.current, false); };
+    const resize = () => {
+      if (fitting.current === "width") move(fitMapWidthCamera(size(), canvas), false);
+      else if (fitting.current === "all") fit(false);
+      else move(current.current, false);
+    };
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(element);

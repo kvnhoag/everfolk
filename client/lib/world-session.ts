@@ -51,8 +51,14 @@ import lives2World from "../../worlds/demo/alexandria-lives-2.json" with { type:
 import lives3World from "../../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import lives4World from "../../worlds/demo/alexandria-lives-4.json" with { type: "json" };
 import lives5World from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import lives8World from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import lives9World from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
+import lives10World from "../../worlds/demo/alexandria-lives-10.json" with { type: "json" };
+import lives7World from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import lives6World from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import deepWorld from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
+import figure3World from "../../worlds/demo/alexandria-figures-3.json" with { type: "json" };
+import figure2World from "../../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 import figureWorld from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
@@ -106,8 +112,14 @@ const lives2Engine = createEngine(lives2World as unknown as WorldPack);
 const lives3Engine = createEngine(lives3World as unknown as WorldPack);
 const lives4Engine = createEngine(lives4World as unknown as WorldPack);
 const lives5Engine = createEngine(lives5World as unknown as WorldPack);
+const lives8Engine = createEngine(lives8World as unknown as WorldPack);
+const lives9Engine = createEngine(lives9World as unknown as WorldPack);
+const lives10Engine = createEngine(lives10World as unknown as WorldPack);
+const lives7Engine = createEngine(lives7World as unknown as WorldPack);
 const lives6Engine = createEngine(lives6World as unknown as WorldPack);
 const deepEngine = createEngine(deepWorld as unknown as WorldPack);
+const figure3Engine = createEngine(figure3World as unknown as WorldPack);
+const figure2Engine = createEngine(figure2World as unknown as WorldPack);
 const figureEngine = createEngine(figureWorld as unknown as WorldPack);
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
@@ -150,8 +162,14 @@ engines.set(lives3Engine.fingerprint, lives3Engine);
 engines.set(lives4Engine.fingerprint, lives4Engine);
 engines.set(lives5Engine.fingerprint, lives5Engine);
 engines.set(lives6Engine.fingerprint, lives6Engine);
+engines.set(lives8Engine.fingerprint, lives8Engine);
+engines.set(lives9Engine.fingerprint, lives9Engine);
+engines.set(lives10Engine.fingerprint, lives10Engine);
+engines.set(lives7Engine.fingerprint, lives7Engine);
 engines.set(deepEngine.fingerprint, deepEngine);
 engines.set(figureEngine.fingerprint, figureEngine);
+engines.set(figure3Engine.fingerprint, figure3Engine);
+engines.set(figure2Engine.fingerprint, figure2Engine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);

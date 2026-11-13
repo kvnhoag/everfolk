@@ -272,12 +272,14 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       </div>}
       <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
         {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} />}
-        <FigurePaths activities={activities} {...props} />
         <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
           <CompactSkillPanel activities={activities} {...props} />
           <CareerEconomyTree activities={activities} {...props} />
         </details>
       </div>
+      {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
+        {activeSection === "figures" && <FigurePaths activities={activities} {...props} />}
+      </div>}
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />
       </div>}

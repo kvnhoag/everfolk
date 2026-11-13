@@ -1,3 +1,4 @@
+import { figureContributionTitleCopy } from "../../chain/catalog/figure-contribution-copy.ts";
 /** Reviewed wording changes for display only. Saved worlds and journals stay intact. */
 const substitutions: readonly (readonly [string, string])[] = [
   ["You practise knots, loads and the movements expected aboard a ship. Repetition teaches more than watching from the quay.", "You practise tying knots and handling cargo aboard a ship."],
@@ -24,5 +25,5 @@ const longestFirst = [...substitutions].sort(([a], [b]) => b.length - a.length);
 export function displayProse(text: string): string {
   let result = text;
   for (const [before, after] of longestFirst) result = result.replaceAll(before, after);
-  return result;
+  return figureContributionTitleCopy(result);
 }

@@ -8,6 +8,7 @@
 .birth-roll-origin>span{font-size:7px;font-weight:600;letter-spacing:1.4px;color:#8c927f}
 .birth-roll-origin>strong{font-size:12px;font-weight:500;color:#8b927e}
 .birth-roll-origin.is-revealed>strong{color:#4c644b}
+.birth-roll-year>strong{display:inline-flex;align-items:center;font:400 23px/1.1 var(--serif,Georgia,serif);font-variant-numeric:tabular-nums}.birth-roll-year>strong>small{margin-left:5px;font:400 10px/1.2 var(--sans,Arial,sans-serif)}.birth-roll-year>small{margin-left:auto;font-size:9px;color:#929784}
 .birth-roll-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
 .birth-roll-card{--roll-accent:#76866a;position:relative;min-width:0;padding:14px 10px 10px;background:#f7f4eb;border:1px solid #d7d8c8;box-shadow:0 3px 0 #d8dac9;transform-origin:50% 90%;border-radius:2px;overflow:hidden}
 .birth-roll-health{--roll-accent:#a47158}.birth-roll-wealth{--roll-accent:#aa9565}.birth-roll-bonds{--roll-accent:#8a9380}
