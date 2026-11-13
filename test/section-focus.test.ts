@@ -44,7 +44,7 @@ test("sections asked for together light one at a time, and each is scrolled into
   sections.clear();
   sections.set(".a", new FakeElement("a", false, 1200));
   sections.set(".b", new FakeElement("b"));
-  flashSections([[".a"], [".b"]], 300);
+  flashSections([{ selectors: [".a"], label: "Look here: A" }, { selectors: [".b"], label: "Look here: B" }], 300);
   await wait(30);
   assert.deepEqual(lit(), ["a"], "only the first is in focus");
   assert.equal(sections.get(".a")!.scrolled, 1, "an off-screen section is brought into view");
@@ -57,12 +57,12 @@ test("a locked section is never pointed at, and nothing lights while a popup is 
   resetSectionFocus();
   sections.clear();
   sections.set(".locked", new FakeElement("locked", true));
-  flashSections([[".locked"]], 100);
+  flashSections([{ selectors: [".locked"], label: "Locked" }], 100);
   await wait(1500);
   assert.deepEqual(lit(), [], "locked sections are skipped");
   sections.set(".open", new FakeElement("open"));
   modalOpen = true;
-  flashSections([[".open"]], 3000);
+  flashSections([{ selectors: [".open"], label: "Open" }], 3000);
   await wait(200);
   assert.deepEqual(lit(), [], "waits while a popup has the player's attention");
   modalOpen = false;
@@ -75,10 +75,10 @@ test("a section the player asked for replaces whatever is waiting or lit", async
   sections.clear();
   sections.set(".slow", new FakeElement("slow"));
   sections.set(".asked", new FakeElement("asked"));
-  flashSections([[".slow"]], 5000);
+  flashSections([{ selectors: [".slow"], label: "Slow" }], 5000);
   await wait(30);
   assert.deepEqual(lit(), ["slow"]);
-  focusSection([".asked"], 3000);
+  focusSection({ selectors: [".asked"], label: "Asked" }, 3000);
   await wait(100);
   assert.deepEqual(lit(), ["asked"], "the asked-for section takes focus at once");
   resetSectionFocus();

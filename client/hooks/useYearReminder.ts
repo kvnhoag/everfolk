@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { YearReminder } from "../components/EventNotificationStack.tsx";
 import { flashSections } from "../lib/section-flash.ts";
-import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTasks, type YearTaskFacts } from "../models/year-reminder.ts";
+import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTaskLabel, yearTasks, type YearTaskFacts } from "../models/year-reminder.ts";
 
 /**
  * Once a year, when the year is running, returns a short notice naming what the player can still do (fields, focus,
@@ -27,7 +27,7 @@ export function useYearReminder(facts: YearTaskFacts, lifeKey: string, enabled: 
   useEffect(() => {
     if (!reminder || flashed.current === reminder.key) return;
     flashed.current = reminder.key;
-    if (tasks[0]) flashSections([YEAR_TASK_TARGETS[tasks[0]]]);
+    if (tasks[0]) flashSections([{ selectors: YEAR_TASK_TARGETS[tasks[0]], label: `This year: ${yearTaskLabel(tasks[0])}` }]);
   }, [reminder?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return reminder && reminder.key.startsWith(`year-reminder:${lifeKey}:`) ? reminder : null;

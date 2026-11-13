@@ -7,7 +7,7 @@ import "./resource-bar.css";
 import PixelIcon from "../components/PixelIcon.tsx";
 import { RESOURCES, type ResourceId } from "./resources.ts";
 import type { StorehouseRow } from "./storehouse-model.ts";
-import InventoryDrawer, { type WorkStatus } from "./InventoryDrawer.tsx";
+import InventoryDrawer from "./InventoryDrawer.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
@@ -31,8 +31,6 @@ interface ResourceBarProps {
   /** Opens the market with this item chosen. */
   onSelectTradeItem?(item: TradeItem): void;
   /** This year's personal action, for the drawer's Work card; null hides the card. */
-  work?: WorkStatus | null;
-  onWork?(): void;
 }
 
 const RESOURCE_PIXELS: Record<string, string[]> = {
@@ -101,7 +99,7 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, plantingLockedUntil = null, onSelectTradeItem, work = null, onWork }: ResourceBarProps) {
+export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, plantingLockedUntil = null, onSelectTradeItem }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
 
@@ -176,8 +174,8 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
         </button>
       </div>
 
-      {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={selectedItem} holding={item => holdingOf(screen, item)} work={work}
-        onClose={() => setDrawerOpen(false)} onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onWork={onWork}
+      {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={selectedItem} holding={item => holdingOf(screen, item)}
+        onClose={() => setDrawerOpen(false)} onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil}
         onTrade={onSelectTradeItem && (item => { onSelectTradeItem(item); setSelectedItem(item); })} />}
     </section>
   );

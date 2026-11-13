@@ -120,7 +120,8 @@ export default function EconomyPanels({
 }: Props) {
   const titleId = useId();
   const slot = useRef(false);
-  const [activeTab, setActiveTab] = useState<EconomyTabId>("market");
+  // Opens on a tab the player can use: Farm & Granary while the market is still closed to them.
+  const [activeTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
   const [quantity, setQuantity] = useState(1);
@@ -169,7 +170,7 @@ export default function EconomyPanels({
   }, [externalTradeItem?.seq]);
   useEffect(() => {
     if (!tradeJump) return;
-    const frame = requestAnimationFrame(() => focusSection([".demo-economy .demo-trade-ticket"]));
+    const frame = requestAnimationFrame(() => focusSection({ selectors: [".demo-economy .demo-trade-ticket"], label: "Your order: set the quantity, then Preview order" }));
     return () => cancelAnimationFrame(frame);
   }, [tradeJump]);
 
@@ -433,13 +434,17 @@ export default function EconomyPanels({
                     </td>
                     <td>
                       <div className="demo-row-btns">
+                        {/* A row's Sell or Buy fills the order below and takes the player there, labelled. */}
                         <button
                           type="button"
+                          disabled={heldQuantity(screen, entry.item) <= 0}
+                          title={heldQuantity(screen, entry.item) <= 0 ? `You hold no ${itemLabel(entry.item).toLowerCase()} to sell` : undefined}
                           onClick={e => {
                             e.stopPropagation();
                             setItem(entry.item);
                             setSide("sell");
                             setCounterparty("merchant");
+                            setTradeJump(seq => seq + 1);
                           }}
                         >
                           Sell
@@ -451,6 +456,7 @@ export default function EconomyPanels({
                             setItem(entry.item);
                             setSide("buy");
                             setCounterparty("merchant");
+                            setTradeJump(seq => seq + 1);
                           }}
                         >
                           Buy

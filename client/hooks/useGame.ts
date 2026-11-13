@@ -8,6 +8,7 @@ import { engineForLife, loadAnyLife, registerLifeEngine } from "../lib/world-ses
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../models/yearly-focus.ts";
+import { yearEndChoiceNeeded, yearEndKeyOf } from "../models/year-end-choice.ts";
 import { persistYearlyFocus } from "../mutations/yearly-focus.ts";
 import { readYearlyFocus } from "../queries/yearly-focus.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
@@ -128,7 +129,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const isPreview = Boolean(previewSession);
   const [syncing, setSyncing] = useState(false);
   const pendingRef = useRef(false);
-  const isOverlayOpen = overlayFromApp || syncing;
+  // A year whose action is still unspent waits for the player at its end (see yearEndKey below).
+  const [yearEndKey, setYearEndKey] = useState<string | null>(null);
+  const isOverlayOpen = overlayFromApp || syncing || yearEndKey !== null;
   const rankedRef = useRef(ranked);
   rankedRef.current = ranked;
   const onlineRef = useRef(online);
@@ -381,11 +384,25 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) { setNotice(message(error)); }
   }, [commit, life, submitOnline]);
 
+  const letGoRef = useRef<string | null>(null);
+  /** The player chose to let this year's action go: the year ends without it. */
+  const letYearEndGo = useCallback(() => {
+    letGoRef.current = yearEndKeyOf(lifeRef.current);
+    setYearEndKey(null);
+  }, []);
+  /** The player spent the action (or the life moved on): the year carries on. */
+  const closeYearEnd = useCallback(() => setYearEndKey(null), []);
+  useEffect(() => {
+    if (yearEndKey !== null && (yearEndKey !== yearEndKeyOf(life) || life.phase !== "ready" || life.character?.lastActivityAge === life.age)) setYearEndKey(null);
+  }, [life, yearEndKey]);
+
   const advance = useCallback(() => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
-    if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focusIdRef.current))) return;
+    // The player let this year's action go: the focus does not act for them.
+    const focus = letGoRef.current === yearEndKeyOf(life) ? "everyday" : focusIdRef.current;
+    if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focus))) return;
     try {
-      commit(advanceYearWithFocus(engineForLife(life), life, focusIdRef.current));
+      commit(advanceYearWithFocus(engineForLife(life), life, focus));
       setNotice("");
     } catch (error) {
       setNotice(message(error));
@@ -570,6 +587,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
         timer = window.setTimeout(finishYear, Math.max(1, Math.ceil(remainingMs)));
         return;
       }
+      // An unspent yearly action is never decided for the player: the year waits for their choice (unless Auto mode is on).
+      if (!isPreview && !autoIntentRef.current && letGoRef.current !== yearEndKeyOf(life) && yearEndChoiceNeeded(engineForLife(life), life)) {
+        setYearEndKey(yearEndKeyOf(life));
+        return;
+      }
       if (yearClock.takeDue(token, now)) {
         setClockProgress(1);
         advance();
@@ -633,6 +655,10 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     nextTurningPoint,
     focusId,
     setFocus,
+    /** The year has ended with its action unspent and waits for the player's choice. */
+    yearEndPending: yearEndKey !== null && yearEndKey === yearEndKeyOf(life) && life.phase === "ready" && life.character?.lastActivityAge !== life.age,
+    letYearEndGo,
+    closeYearEnd,
     autoDecisions,
     setAutoDecisions,
     importLife,

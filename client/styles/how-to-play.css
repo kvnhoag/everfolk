@@ -19,10 +19,13 @@ dialog.how-to-play::backdrop{background:#10262cc4;backdrop-filter:blur(3px)}
 /* Page 1: the goal, the year in order, then one card per numbered section. */
 .htp-goal{display:flex;gap:12px;align-items:center;margin:0;padding:14px 18px;border:2px solid var(--htp-gold);background:#fff6dd;font-size:18px;line-height:1.4}
 .htp-goal svg{flex:none;color:#b07a19}
-.htp-loop{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px;margin:0;padding:0;list-style:none}
+.htp-loop{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px;margin:0 0 14px;padding:0;list-style:none}
 .htp-loop li{position:relative;display:grid;justify-items:center;align-content:start;gap:4px;padding:12px 8px;border:1px solid var(--htp-line);background:#fffaf0;text-align:center}
 .htp-loop li:not(:last-child)::after{content:"→";position:absolute;right:-19px;top:24px;font-size:18px;color:#9a8c6b}
-.htp-loop li:last-child::after{content:"↻";position:absolute;right:-19px;top:24px;font-size:18px;color:#9a8c6b}
+/* The year is a loop: a line runs back under the boxes from the last to the first, with its arrow pointing up into box 1. */
+.htp-loop-back{position:relative;height:26px;margin:0 calc(100% / 12);border:3px solid #9a8c6b;border-top:0;border-radius:0 0 12px 12px}
+.htp-loop-back::before{content:"";position:absolute;left:-10px;top:-14px;border:8px solid transparent;border-bottom:12px solid #9a8c6b;border-top:0}
+.htp-loop-back span{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);padding:0 10px;background:var(--htp-paper);font-size:13.5px;font-weight:700;color:#6d5a37;white-space:nowrap}
 .htp-loop li.is-you{border-color:#c79a3b;background:#fff3d4}
 .htp-loop-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold)}
 .htp-loop strong{font-size:15.5px;line-height:1.25}
@@ -110,6 +113,7 @@ dialog.how-to-play .htp-detail-block h4{display:flex;align-items:center;gap:8px;
   .htp-step{grid-template-columns:1fr;grid-template-areas:"head" "shot" "copy"}
   .htp-loop{grid-template-columns:repeat(3,minmax(0,1fr))}
   .htp-loop li::after{display:none}
+  .htp-loop-back{display:none}
   .htp-detail-grid{grid-template-columns:1fr}
 }
 @media(max-width:640px){

@@ -3,14 +3,14 @@ import test from "node:test";
 import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTasks, type YearTaskFacts } from "../client/models/year-reminder.ts";
 import { liveNoticeKeys, nextNoticeFade, startNoticeClocks } from "../client/models/timed-notices.ts";
 
-const facts = (over: Partial<YearTaskFacts> = {}): YearTaskFacts => ({ age: 8, phase: "ready", hasFields: true, focusShown: true, actionUsed: false, plantingAttention: true, ...over });
+const facts = (over: Partial<YearTaskFacts> = {}): YearTaskFacts => ({ age: 16, phase: "ready", hasFields: true, focusShown: true, actionUsed: false, plantingAttention: true, ...over });
 
 test("the yearly reminder names fields, focus and yearly action while each is open", () => {
   assert.deepEqual(yearTasks(facts()), ["planting", "focus", "action"]);
-  assert.equal(yearReminderText(yearTasks(facts())), "Plan your fields, check your focus and choose this year's action.");
+  assert.equal(yearReminderText(yearTasks(facts())), "Plan your fields in Inventory & Granary, check your focus and choose this year's action.");
   assert.deepEqual(yearTasks(facts({ actionUsed: true })), ["planting", "focus"], "a spent action is not asked for again");
-  assert.deepEqual(yearTasks(facts({ age: 5, focusShown: false })), ["planting"], "the yearly action opens at 6");
-  assert.deepEqual(yearTasks(facts({ age: 3, focusShown: false })), [], "planting reminders start with the planting tip");
+  assert.deepEqual(yearTasks(facts({ age: 5, focusShown: false })), [], "a small child is asked about nothing; the yearly action opens at 6");
+  assert.deepEqual(yearTasks(facts({ age: 15 })), ["focus", "action"], "the fields are the household's to plan until 16");
   assert.deepEqual(yearTasks(facts({ hasFields: false })), ["focus", "action"]);
   assert.equal(yearReminderText(["action"]), "Choose this year's action.");
   assert.deepEqual(yearTasks(facts({ plantingAttention: false })), ["focus", "action"], "a plan that needs nothing is not asked about");

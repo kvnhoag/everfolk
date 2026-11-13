@@ -30,7 +30,7 @@ export const YEAR_TASK_TARGETS: Record<YearTask, readonly string[]> = {
   action: [".life-yearly-action-deck"],
 };
 
-const LABELS: Record<YearTask, string> = { planting: "plan your fields", focus: "check your focus", action: "choose this year's action" };
+const LABELS: Record<YearTask, string> = { planting: "plan your fields in Inventory & Granary", focus: "check your focus", action: "choose this year's action" };
 
 /** The tasks still open this year, in the order they appear on screen. */
 export function yearTasks(facts: YearTaskFacts): YearTask[] {
@@ -40,6 +40,12 @@ export function yearTasks(facts: YearTaskFacts): YearTask[] {
     ...(facts.focusShown ? ["focus" as const] : []),
     ...(facts.age >= YEARLY_ACTION_AGE && !facts.actionUsed ? ["action" as const] : []),
   ];
+}
+
+/** "Plan your fields", for the label on the section being pointed at. */
+export function yearTaskLabel(task: YearTask): string {
+  const text = LABELS[task];
+  return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
 }
 
 /** "Plan your fields, check your focus and choose this year's action." */

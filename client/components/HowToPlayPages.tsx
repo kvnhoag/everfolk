@@ -45,9 +45,10 @@ export function PlayPage({ steps }: { steps: readonly PlayStep[] }) {
           <span className="htp-loop-icon"><PixelIcon name={beat.icon} size={20} /></span>
           <strong>{index + 1}. {beat.title}</strong>
           <small>{beat.detail}</small>
-          {beat.you && <em>Your part</em>}
+          {beat.you && <em>Your action matters</em>}
         </li>)}
       </ol>
+      <div className="htp-loop-back" aria-hidden="true"><span>Next year starts again at 1</span></div>
     </section>
     <h3 className="htp-section-title">The screen, section by section</h3>
     <p className="htp-lead">The same numbers are on the game screen. Work through them in order each year.</p>

@@ -21,7 +21,7 @@ import "../styles/creator-system.css";
 import "../styles/interface-refinements.css";
 import { storehouseRows } from "../demo/storehouse-model.ts";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { birthYearOf, lifeStageView, formatYear } from "../../src/index.ts";
+import { birthYearOf, formatYear } from "../../src/index.ts";
 import type { LifeState, JournalEntry, WorldPack } from "../../src/types.ts";
 import type { WorldRoute } from "../../server/content.ts";
 import type { EventVisuals } from "../models/scene-model.ts";
@@ -93,6 +93,9 @@ import HowToPlay from "../components/HowToPlay.tsx";
 import IdleNudge from "../components/IdleNudge.tsx";
 import { howToPlayFacts, howToPlaySteps } from "../models/how-to-play.ts";
 import { stageGuide } from "../models/stage-guide.ts";
+import { lifePhaseAt } from "../models/life-phases.ts";
+import { focusLabel, yearEndOptions } from "../models/year-end-choice.ts";
+import YearEndDialog from "../components/YearEndDialog.tsx";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
 import { yearChecklist } from "../models/year-checklist.ts";
 import { idleNudge } from "../models/idle-nudge.ts";
@@ -107,10 +110,8 @@ import { NO_TUTORIAL_CONTEXT, PLANTING_HINT_AGE, gameTutorialContext } from "../
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
 import { useYearReminder } from "../hooks/useYearReminder.ts";
 import { YEARLY_ACTION_AGE } from "../models/year-reminder.ts";
-import { focusSection } from "../lib/section-flash.ts";
 import YearChecklist, { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
-import type { WorkStatus } from "../demo/InventoryDrawer.tsx";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -317,16 +318,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   }, [demoView, life, lifeEngine, storehouse]);
   const yearReminder = useYearReminder({ age: life.age, phase: life.phase, hasFields: Boolean(demoView), focusShown, actionUsed, plantingAttention },
     eventNotificationLifeKey(life), dashboardVisible && game.hasBegun);
-  const workStatus: WorkStatus | null = !focusShown && life.age < YEARLY_ACTION_AGE ? null : {
-    open: life.phase === "ready" && life.age >= YEARLY_ACTION_AGE && !actionUsed,
-    note: life.phase === "choice" ? "A decision is waiting first."
-      : life.age < YEARLY_ACTION_AGE ? `Yearly actions start at age ${YEARLY_ACTION_AGE}; your focus practises for you.`
-      : actionUsed ? "Done for this year; it returns next year." : "1 action left this year.",
-  };
-  /** Brings this year's action board into view and lights it up; the focus instead once the action is spent or not open yet. */
-  function showYearlyWork() {
-    focusSection(workStatus?.open ? [".life-yearly-action-deck", ".yearly-focus"] : [".yearly-focus"]);
-  }
   // A reopened Character popup starts on the tab it was opened with.
   useEffect(() => { if (panel !== "character") setCharacterTab(null); }, [panel]);
 
@@ -357,7 +348,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const stage = lifeStage(life.age);
   const isDead = life.phase === "ended" && ending?.kind === "death";
   const hasFamilySection = Boolean(life.character?.family?.length || life.age >= 12 || life.character?.children?.length);
-  const stageTitle = lifeStageView(world, life.age)?.title;
+  const stageTitle = lifePhaseAt(life.age).title;
   const [progressFeedback, setProgressFeedback] = useState<(ProgressFeedback & { lifeKey: string }) | null>(null);
   const progressNotification = useRef({ createdAt: 0, eventCount: 0 });
   const previewSeenNotifications = useRef(new Set<string>());
@@ -639,7 +630,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && <section className="life-session-bar has-section-help" aria-label="Time controls">
         <div className="life-session-age"><SectionStep step={sectionStep("time")} />Age <strong>{life.age}</strong>{stageTitle && <span className="life-session-stage"> · {stageTitle}</span>}</div><div className="life-session-year">{formatYear(life.year)} · {supportsLocationMap(world) ? <button type="button" className="location-map-open" aria-label={`Open location map: ${place}, Egypt`} onClick={() => setPanel("map")}><Icon name="pin" size={13} />{place}</button> : place}</div>
         <div className="playback-bar life-clock">
-          <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "ready" && game.isPlaying && !game.isClockRunning && (tipShown || howToPlayOpen) ? "Waiting while you read" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
+          <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : game.yearEndPending ? "Waiting for this year's action" : life.phase === "ready" && game.isPlaying && !game.isClockRunning && (tipShown || howToPlayOpen) ? "Waiting while you read" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else { setReadingPause(false); game.continueLife(); } }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
           <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
           <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button></div>
@@ -653,7 +644,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked || game.isPreview ? 0 : lifePackCardCount(life, world)}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
-      {game.hasBegun && demoView && <ResourceBar rows={storehouse} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
+      {game.hasBegun && demoView && <ResourceBar rows={storehouse} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
@@ -758,6 +749,9 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       portrait={{ seed: life.seed, name: game.hasRevealedStats ? characterName : "You", sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }} onTipsChange={tutorialStore.setTipsOn}
       showAtStart={howToPlayAtStart} onShowAtStartChange={on => { setHowToPlayAtStart(on); if (!game.isPreview) writeHowToPlayAtStart(on); }} onClose={() => setHowToPlayOpen(false)} />
     {game.hasBegun && <IdleNudge nudge={howToPlayOpen ? null : nudge} />}
+    {game.yearEndPending && !howToPlayOpen && <YearEndDialog key={`${life.seed}:${life.age}`} age={life.age} life={life} world={world} activities={activities}
+      options={yearEndOptions(world, activities, game.focusId)} focus={focusLabel(game.focusId)}
+      onChoose={id => { game.closeYearEnd(); requestActivity(id); }} onLetGo={game.letYearEndGo} />}
     {game.hasBegun && demoView && <EventNotificationStack persistent={!game.isPreview} visible={dashboardVisible} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} reminder={yearReminder} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} onShownChange={setNotificationShown} />}
 
     <footer className="site-footer">

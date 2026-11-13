@@ -158,15 +158,17 @@ test("keyboard: Escape closes, arrows page only through queued tips, Enter on a 
 test("with tips off a new section glows instead of opening a card, once", () => {
   const off = run(INITIAL_TUTORIAL, home, { type: "tips", on: false });
   assert.equal(off.tipsOn, false);
-  const context = game({ age: 4 });
-  const flashed = run(off, context, { type: "sync" });
+  const flashed = run(off, game({ age: 4 }), { type: "sync" });
   assert.equal(flashed.open, false, "no card opens by itself");
-  assert.ok(flashed.flash && flashed.flash.ids.includes("time-bar") && flashed.flash.ids.includes("planting"));
+  assert.ok(flashed.flash && flashed.flash.ids.includes("time-bar"));
+  assert.ok(!flashed.flash!.ids.includes("planting"), "a small child is not pointed at the fields");
   assert.ok(flashed.flash!.ids.every(id => flashed.seen.includes(id)), "a glowing section counts as seen");
   assert.equal(run(flashed, game({ age: 4, notificationShown: false }), { type: "sync" }), flashed, "the same sections do not glow twice");
   const later = run(flashed, game({ age: 5 }), { type: "sync" });
   assert.deepEqual(later.flash?.ids, ["life-record"]);
   assert.equal(later.flash!.run, flashed.flash!.run + 1);
+  const grown = run(later, game({ age: 16 }), { type: "sync" });
+  assert.ok(grown.flash?.ids.includes("planting"), "the fields glow once they are the player's to plan");
 });
 
 test("the Tutorial and ? buttons still open cards with tips off; turning tips back on resumes cards", () => {

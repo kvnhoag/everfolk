@@ -15,6 +15,8 @@ export interface GrainStoreFacts {
   age: number;
   /** First age the market takes orders; null when this life has no market. */
   tradeAge: number | null;
+  /** First age the player plans the household's fields. */
+  plantingAge: number;
 }
 
 export interface GrainStoreAlert { tone: "danger" | "warning"; text: string }
@@ -28,10 +30,15 @@ export function spoilageNote(facts: Pick<GrainStoreFacts, "capacity" | "spoilage
   return `Stored grain loses about ${percent(facts.spoilageBps)} a year; grain above the store's limit of ${facts.capacity} loses about ${percent(facts.overCapacitySpoilageBps)}.`;
 }
 
+/** Only what the player can do now; before that, when they will be able to. Never advice they cannot follow. */
 function remedy(facts: GrainStoreFacts): string {
-  if (facts.tradeAge === null) return "Plant more flax so less grain comes in.";
-  if (facts.age >= facts.tradeAge) return "Sell the extra at the market this year, or plant more flax so less grain comes in.";
-  return `You can sell at the market from age ${facts.tradeAge}; until then, plant more flax so less grain comes in.`;
+  const canSell = facts.tradeAge !== null && facts.age >= facts.tradeAge;
+  const canPlant = facts.age >= facts.plantingAge;
+  if (canSell && canPlant) return "Sell the extra at the market this year, or plant more flax so less grain comes in.";
+  if (canSell) return "Sell the extra at the market this year.";
+  if (canPlant) return "Plant more flax so less grain comes in.";
+  const sellAt = facts.tradeAge !== null ? facts.tradeAge : null;
+  return sellAt !== null ? `Your family runs the store for now; from age ${sellAt} you can sell the extra at the market.` : "Your family runs the store for now.";
 }
 
 export function grainStoreAlert(facts: GrainStoreFacts): GrainStoreAlert | null {

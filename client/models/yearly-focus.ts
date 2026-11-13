@@ -99,14 +99,14 @@ export function yearlyDeclineNotes(life: LifeState, world: WorldPack): string[] 
 export function focusStatus(life: LifeState, world: WorldPack, focusId: YearlyFocusId, activities: readonly ActivityAvailability[]): string {
   if (life.phase === "ended") return "This life has ended.";
   if (life.phase === "choice") return "Choose an option to continue.";
-  if (focusId === "everyday") return "No activity will be chosen for you.";
+  if (focusId === "everyday") return "No action is recommended; at year end you pick freely.";
   const activity = focusActivity(world, focusId);
   if (!activity) return "This focus is unavailable in this world.";
-  if (life.character?.lastActivityAge === life.age) return "You already chose an activity this year. Focus resumes next year.";
+  if (life.character?.lastActivityAge === life.age) return "You already chose an action this year. Your focus is recommended again next year.";
   const available = activities.find(candidate => candidate.id === activity.id);
   if (!available?.available) return `Skipped this year: ${available?.reason ?? "This activity is unavailable."}`;
   return focusId === "trade" ? "Uses this year's activity and puts paid work aside. Place your own market orders; complete sales to build a trader's livelihood."
-    : "Repeats before the next year, when available. Uses your yearly activity.";
+    : "Recommended at year end if your action is still unused. You choose; nothing is spent for you.";
 }
 
 /** Both timed years and fast-forward accept the same normal engine commands. */

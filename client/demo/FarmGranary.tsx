@@ -6,6 +6,7 @@ import type { PlantingCheck } from "../models/planting-check.ts";
 import { grainStoreAlert, spoilageNote } from "./grain-store-alert.ts";
 import { Holdings, PlantingTask } from "./InventoryDrawer.tsx";
 import { levelLabel } from "./labels.ts";
+import { PLANTING_HINT_AGE } from "../models/tutorial-triggers.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./farm-granary.css";
 
@@ -81,7 +82,7 @@ export default function FarmGranary({ screen, world, age, cashText, holding, onP
   const h = screen.household;
   const rates = world?.demo ? { capacity: h.capacity, spoilageBps: world.demo.household.spoilageBps, overCapacitySpoilageBps: world.demo.household.overCapacitySpoilageBps } : null;
   const alert = rates && world?.demo ? grainStoreAlert({ ...rates, grain: h.grain, expectedHarvest: h.expectedHarvest, expectedRent: h.expectedRent,
-    expectedEating: h.expectedEating, age, tradeAge: tuning(world.demo.market).minTradeAge }) : null;
+    expectedEating: h.expectedEating, age, tradeAge: tuning(world.demo.market).minTradeAge, plantingAge: PLANTING_HINT_AGE }) : null;
   return <div className="farm-granary">
     <section aria-label="This year's conditions">
       <h3 className="farm-heading">This year</h3>

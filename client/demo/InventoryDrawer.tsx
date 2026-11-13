@@ -10,20 +10,11 @@ import type { DemoScreen } from "./screen.ts";
 import ResourceYearDetails from "./Storehouse.tsx";
 import type { StorehouseRow } from "./storehouse-model.ts";
 
-/** This year's personal action, as the drawer's Work card shows it. */
-export interface WorkStatus {
-  /** The action can still be spent this year. */
-  open: boolean;
-  /** One line: what is left to do, or why nothing is. */
-  note: string;
-}
-
 export interface InventoryDrawerProps {
   screen: DemoScreen;
   rows: StorehouseRow[] | null;
   selectedItem: TradeItem | null;
   holding(item: TradeItem): number;
-  work?: WorkStatus | null;
   onClose(): void;
   onPlan?(flaxPlots: number): string | null;
   /** What a plan would do, checked before Set planting. */
@@ -31,7 +22,6 @@ export interface InventoryDrawerProps {
   /** The age the player starts planning the fields; null once it is open. */
   plantingLockedUntil?: number | null;
   onTrade?(item: TradeItem): void;
-  onWork?(): void;
 }
 
 /** The split of the household's plots, one square per plot, grain first. */
@@ -94,17 +84,6 @@ function TradeTask({ screen, onTrade }: { screen: DemoScreen; onTrade?(item: Tra
   </article>;
 }
 
-function WorkTask({ work, onWork }: { work: WorkStatus; onWork?(): void }) {
-  return <article className="aoe-task" aria-labelledby="aoe-task-work">
-    <h4 id="aoe-task-work"><PixelIcon name="res-labour" size={14} />Work &amp; practice</h4>
-    <p className="aoe-task-how">Your yearly action and this year’s focus decide what you practise; that is how skills grow.</p>
-    <div className="aoe-task-actions">
-      <button type="button" className="aoe-task-primary" disabled={!onWork} onClick={onWork}>{work.open ? "Choose this year’s action →" : "See your focus →"}</button>
-      <span className={work.open ? "aoe-task-hint" : "aoe-task-hint is-closed"}>{work.note}</span>
-    </div>
-  </article>;
-}
-
 /** Goods with what you hold and their prices, each with a Trade button. Shared with Farm & Granary. */
 export function Holdings({ screen, holding, selectedItem, onTrade }: Pick<InventoryDrawerProps, "screen" | "holding" | "selectedItem" | "onTrade">) {
   const closed = screen.market.reasons[0];
@@ -132,7 +111,7 @@ export function Holdings({ screen, holding, selectedItem, onTrade }: Pick<Invent
 }
 
 /** Inventory & Granary: this year's tasks first, then the store ledger, then goods with their prices. */
-export default function InventoryDrawer({ screen, rows, selectedItem, holding, work = null, onClose, onPlan, checkPlan, plantingLockedUntil = null, onTrade, onWork }: InventoryDrawerProps) {
+export default function InventoryDrawer({ screen, rows, selectedItem, holding, onClose, onPlan, checkPlan, plantingLockedUntil = null, onTrade }: InventoryDrawerProps) {
   return <div className="aoe-inventory-drawer" role="region" aria-label="Inventory and granary details">
     <header className="aoe-drawer-header aoe-drawer-top">
       <div><span className="aoe-drawer-eyebrow">THIS YEAR</span><h3>What you can do</h3></div>
@@ -141,7 +120,6 @@ export default function InventoryDrawer({ screen, rows, selectedItem, holding, w
     <div className="aoe-year-tasks">
       {onPlan && <PlantingTask screen={screen} onPlan={onPlan} checkPlan={checkPlan} lockedUntil={plantingLockedUntil} />}
       <TradeTask screen={screen} onTrade={onTrade} />
-      {work && <WorkTask work={work} onWork={onWork} />}
     </div>
     {screen.legacyHelp?.map(help => <aside className="aoe-legacy-banner" key={`${help.tokenId}:${help.age}`}>
       <strong>A past life kept a granary for you</strong>

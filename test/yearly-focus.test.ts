@@ -73,7 +73,7 @@ test("an explicitly chosen activity wins over the automatic focus", () => {
   const next = advanceYearWithFocus(engine, life, "study");
   assert.deepEqual(next, engine.advance(life));
   assert.equal(next.character!.skills.literacy, 0);
-  assert.match(focusStatus(life, engine.world, "study", engine.getActivities(life)), /already chose an activity/);
+  assert.match(focusStatus(life, engine.world, "study", engine.getActivities(life)), /already chose an action/);
 });
 
 test("an unaffordable focus is skipped without borrowing, substitution, or failure", () => {

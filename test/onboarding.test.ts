@@ -32,16 +32,19 @@ hooks.deregister();
 
 const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-9.json", import.meta.url), "utf8")) as WorldPack;
 
-test("the roadmap follows the world's own life stages, with what opens in each", () => {
+test("the roadmap has five long stages with clear turning ages, and what opens in each comes from the world", () => {
   const stages = lifeRoadmap(world, 9);
-  assert.deepEqual(stages.map(stage => stage.id), world.lifeStages!.stages.map(stage => stage.id));
-  assert.ok(stages.length >= 5 && stages.length <= 10);
-  assert.deepEqual(stages.map(stage => stage.state), ["past", "past", "current", "future", "future", "future", "future"]);
+  assert.deepEqual(stages.map(stage => [stage.title, stageAges(stage)]), [
+    ["Early years", "Ages 0–5"], ["Childhood", "Ages 6–11"], ["Youth", "Ages 12–17"], ["Adulthood", "Ages 18–59"], ["Later life", "Age 60+"],
+  ]);
+  assert.deepEqual(stages.map(stage => stage.state), ["past", "current", "future", "future", "future"]);
+  for (const [index, stage] of stages.entries()) if (index > 0) assert.equal(stage.fromAge, stages[index - 1].toAge! + 1, "no gaps between stages");
   const childhood = stages.find(stage => stage.id === "childhood")!;
-  assert.equal(stageAges(childhood), "Ages 6–11");
   assert.ok(childhood.unlocks.some(unlock => unlock.age === 6 && /yearly action/i.test(unlock.text)));
   assert.ok(childhood.unlocks.some(unlock => unlock.age === world.demo!.market.minTradeAge && /Trade/.test(unlock.text)));
-  assert.equal(stageAges(stages.at(-1)!), "Age 60+");
+  const youth = stages.find(stage => stage.id === "youth")!;
+  assert.ok(youth.unlocks.some(unlock => unlock.age === 16 && /fields/.test(unlock.text)), "the household's fields open at 16, not as a small child");
+  assert.ok(youth.unlocks.some(unlock => /You decide for the household/.test(unlock.text)));
   for (const stage of stages) {
     assert.ok(stage.todo.length > 0, `${stage.id} says what to do`);
     assert.ok(stage.unlocks.filter(unlock => unlock.text.startsWith("Work: ")).length <= 1, `${stage.id} lists its jobs on one line`);

@@ -58,7 +58,7 @@ export const TUTORIAL_HINTS: readonly TutorialHint[] = [
     body: "The scene follows your age and surroundings. The Character button opens a popup with your career, skills, wealth and family." },
   { id: "focus", targets: [".yearly-focus"], title: "This year's focus",
     help: "What you practise each year. Change it any time.",
-    body: "Pick one button, such as Study, Farming or Friends, and each year your yearly action is spent on it for you, so its skills grow without a click. Everyday life leaves the action to you. Locked focuses show the age they open." },
+    body: "Pick what you want to practise, such as Study, Farming or Friends. If a year ends with your yearly action unused, the game stops and asks you to choose, with your focus's action recommended. Locked focuses show the age they open." },
   { id: "wealth", targets: [".life-overview"], title: "Wealth and rank",
     help: "Total wealth and where your household ranks. Click it for details.",
     body: "Total wealth is cash plus possessions minus debt. The assets rank shows where your household stands among all households; click it for details." },

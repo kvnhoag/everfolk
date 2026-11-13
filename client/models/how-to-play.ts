@@ -119,8 +119,8 @@ export function howToPlaySteps(ages: { focus: number; action: number; fields: nu
     }),
     step("focus", {
       title: "Choose a focus", body: "Pick what you practise: Study, Farming, Friends and more.",
-      result: "At the end of each year your focus runs by itself, if you did not spend your yearly action.",
-      example: study ? `Focus on Study: "${study.text}" runs each year, ${study.skill} +${study.gain}${study.cost ? ` (needs ${study.cost} dr in hand)` : ""}.` : "Your focus practises a skill every year without a click.",
+      result: "If a year ends with your action unused, the game stops and asks you to choose, with your focus's action recommended.",
+      example: study ? `Focus on Study: at year end "${study.text}" is recommended, ${study.skill} +${study.gain}${study.cost ? ` (needs ${study.cost} dr in hand)` : ""}.` : "Your focus's action is the one recommended at the end of each year.",
       shot: shot("focus", 1144, 152, "This year's focus: Everyday life, Study, Farming, Friends and more"),
       opens: Number.isFinite(ages.focus) ? `Age ${ages.focus}` : undefined, warning: "Skills you stop practising slowly fade.",
     }),

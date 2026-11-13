@@ -67,7 +67,7 @@ export default function TutorialOverlay() {
   const flashRun = state.flash?.run ?? 0;
   useEffect(() => {
     if (!state.flash) return;
-    return flashSections(state.flash.ids.map(id => tutorialHint(id)?.targets ?? []));
+    return flashSections(state.flash.ids.map(id => ({ selectors: tutorialHint(id)?.targets ?? [], label: `New here: ${tutorialHint(id)?.title ?? "a new section"}` })));
   }, [flashRun]); // eslint-disable-line react-hooks/exhaustive-deps
   if (typeof document === "undefined") return null;
   const visible = state.hintId !== null && (state.open || settledRun !== state.run) && !hidesTutorial(host);

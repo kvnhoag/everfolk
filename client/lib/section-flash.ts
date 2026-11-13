@@ -1,6 +1,7 @@
 /**
- * Draws the player's eye to one section at a time: the page scrolls to it, its border lights up and the rest of the
- * page dims, then both fade. Sections asked for together wait their turn instead of glowing at once.
+ * Draws the player's eye to one section at a time: the page scrolls to it, its border lights up, the rest of the page
+ * dims, and a "Look here" label with an arrow sits on it saying what it is and why. Then all of it fades. Sections
+ * asked for together wait their turn instead of glowing at once. The view never moves without that label.
  *
  * A section is never lit while it cannot be used (locked, greyed out or unclickable), and nothing is lit while a tip
  * card or a popup has the player's attention; those requests wait until the screen is free.
@@ -28,8 +29,11 @@ export interface FocusOptions {
   asked?: boolean;
 }
 
-interface Request { selectors: readonly string[]; durationMs: number; asked: boolean; tries: number; owner: symbol }
-interface Active { element: Element; timer: number; request: Request }
+/** A section to bring into focus, and the words shown on it: what it is and why the player is looking. */
+export interface FocusTarget { selectors: readonly string[]; label: string }
+
+interface Request { selectors: readonly string[]; label: string; durationMs: number; asked: boolean; tries: number; owner: symbol }
+interface Active { element: Element; timer: number; request: Request; callout: HTMLElement | null; frame: number }
 
 let queue: Request[] = [];
 let active: Active | null = null;
@@ -65,6 +69,13 @@ export function firstMatching(alternatives: readonly string[]): Element[] {
   return [];
 }
 
+/** An open popup that does not contain the section covers it. */
+function popupOver(element: Element): boolean {
+  return Array.from(document.querySelectorAll("dialog[open]")).some(dialog => {
+    try { return dialog.matches(":modal") && !dialog.contains(element); } catch { return false; }
+  });
+}
+
 /** A tip card on screen or an open popup owns the player's attention. */
 function busy(): boolean {
   if (tipShownStore.get()) return true;
@@ -86,9 +97,35 @@ function bringIntoView(element: Element): void {
   element.scrollIntoView({ block: tall ? "start" : "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
+/** The "Look here" label: an arrow and words, kept on the section's top edge (or below it near the top of the screen). */
+function showCallout(element: Element, label: string): { callout: HTMLElement | null; frame: number } {
+  if (typeof document.createElement !== "function") return { callout: null, frame: 0 };
+  const callout = document.createElement("div");
+  callout.className = "focus-callout";
+  callout.setAttribute("role", "status");
+  callout.textContent = label;
+  document.body.appendChild(callout);
+  let frame = 0;
+  const follow = () => {
+    // A popup opening over the page takes the player's attention: the focus behind it ends at once.
+    if (popupOver(element)) { finish(); return; }
+    const box = element.getBoundingClientRect();
+    const below = box.top < 56;
+    callout.classList.toggle("is-below", below);
+    callout.style.left = `${Math.round(Math.max(12, box.left + Math.min(box.width / 2, 160)))}px`;
+    callout.style.top = `${Math.round(below ? box.bottom + 12 : box.top - 12)}px`;
+    frame = window.requestAnimationFrame(follow);
+    if (active?.callout === callout) active.frame = frame;
+  };
+  follow();
+  return { callout, frame };
+}
+
 function finish(): void {
   if (!active) return;
   window.clearTimeout(active.timer);
+  window.cancelAnimationFrame(active.frame);
+  active.callout?.remove();
   active.element.classList.remove(SECTION_FLASH_CLASS);
   active = null;
   schedule(BETWEEN_MS);
@@ -113,7 +150,10 @@ function light(element: Element, request: Request): void {
   (element as HTMLElement).style?.setProperty("--section-flash-ms", `${request.durationMs}ms`);
   element.classList.add(SECTION_FLASH_CLASS);
   spotlightSection(element, request.durationMs);
-  active = { element, request, timer: window.setTimeout(finish, request.durationMs) };
+  active = { element, request, timer: window.setTimeout(finish, request.durationMs), callout: null, frame: 0 };
+  const { callout, frame } = showCallout(element, request.label);
+  active.callout = callout;
+  active.frame = frame;
 }
 
 function schedule(delay: number): void {
@@ -138,15 +178,14 @@ function pump(): void {
 }
 
 /**
- * Lights each section given as selector alternatives (one list per section), one after another. Returns a function
- * that withdraws the ones still waiting.
+ * Lights each section, one after another, with its label. Returns a function that withdraws the ones still waiting.
  */
-export function flashSections(sections: readonly (readonly string[])[], durationMs = SECTION_FLASH_MS, options: Omit<FocusOptions, "durationMs"> = {}): () => void {
+export function flashSections(sections: readonly FocusTarget[], durationMs = SECTION_FLASH_MS, options: Omit<FocusOptions, "durationMs"> = {}): () => void {
   if (typeof document === "undefined") return () => {};
   listen();
   const owner = Symbol("focus");
   const asked = Boolean(options.asked);
-  const requests = sections.filter(section => section.length > 0).map(selectors => ({ selectors, durationMs, asked, tries: 0, owner }));
+  const requests = sections.filter(section => section.selectors.length > 0).map(section => ({ selectors: section.selectors, label: section.label, durationMs, asked, tries: 0, owner }));
   if (requests.length === 0) return () => {};
   if (asked) {
     queue = [...requests, ...queue.filter(request => !request.asked)];
@@ -158,14 +197,14 @@ export function flashSections(sections: readonly (readonly string[])[], duration
   return () => { queue = queue.filter(request => request.owner !== owner); };
 }
 
-/** Scrolls to one section and lights it at once, because the player asked (a checklist line, a button). */
-export function focusSection(selectors: readonly string[], durationMs = 4000): void {
-  flashSections([selectors], durationMs, { asked: true });
+/** Scrolls to one section and lights it at once, with its label, because the player asked (a checklist line, a button). */
+export function focusSection(target: FocusTarget, durationMs = 4000): void {
+  flashSections([target], durationMs, { asked: true });
 }
 
 /** For tests: forget everything waiting or lit. */
 export function resetSectionFocus(): void {
-  if (active) { window.clearTimeout(active.timer); active.element.classList.remove(SECTION_FLASH_CLASS); }
+  if (active) { window.clearTimeout(active.timer); window.cancelAnimationFrame(active.frame); active.callout?.remove(); active.element.classList.remove(SECTION_FLASH_CLASS); }
   active = null;
   queue = [];
   if (typeof window !== "undefined") window.clearTimeout(pumpTimer);

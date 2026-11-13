@@ -47,7 +47,8 @@ const view = (name: TutorialView): HintRule => ({ available: context => context.
 const never = () => false;
 
 /** The age the "Plan your fields" tip opens; the yearly reminder to plan starts the same year. */
-export const PLANTING_HINT_AGE = 4;
+/** The household's decisions, fields included, become the player's at 16 (adulthood in the world's decision stages). */
+export const PLANTING_HINT_AGE = 16;
 
 const RULES: Record<TutorialHintId, HintRule> = {
   "welcome": view("home"),

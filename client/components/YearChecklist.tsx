@@ -1,5 +1,5 @@
 import { focusSection } from "../lib/section-flash.ts";
-import { SECTION_TARGETS, type SectionStepId } from "../models/section-steps.ts";
+import { SECTION_TARGETS, SECTION_TITLES, sectionStep, type SectionStepId } from "../models/section-steps.ts";
 import type { ChecklistItem } from "../models/year-checklist.ts";
 import PixelIcon from "./PixelIcon.tsx";
 import "../styles/onboarding.css";
@@ -11,7 +11,7 @@ function Mark({ state }: { state: ChecklistItem["state"] }) {
 
 /** Scrolls a numbered section into view and lights it up for a few seconds. */
 export function showSection(id: SectionStepId): void {
-  focusSection(SECTION_TARGETS[id]);
+  focusSection({ selectors: SECTION_TARGETS[id], label: `Look here: ${sectionStep(id)} · ${SECTION_TITLES[id]}` });
 }
 
 /** The small numbered badge a section wears, matching its line in "This year" and the How to Play. */
