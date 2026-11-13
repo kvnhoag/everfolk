@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { MintPack as Pack, MintResult, Evidence } from "../../chain/types.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import { actionName, actionDescription, figureTitle, GROUP_TITLE, groupOfAction, rarityLabel } from "./chain-copy.ts";
@@ -7,6 +7,9 @@ import { formatNear } from "./near-amount.ts";
 import FigureArtwork from "./FigureArtwork.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import MintReveal from "./MintReveal.tsx";
+import BoosterOpening from "../components/BoosterOpening.tsx";
+import { portraitSource } from "../models/life-background.ts";
+import { figureMediaPath } from "../../chain/figure-media.ts";
 import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";
 import "./mint-pack.css";
@@ -27,12 +30,6 @@ export interface MintPackProps {
 export default function MintPack({ initialPack, evidence, walletPath = true, practice = false, contract, careerGroup, onChoose, onClose, txHash }: MintPackProps) {
   const [pack, setPack] = useState(initialPack);
   const [opened, setOpened] = useState(false);
-  const [opening, setOpening] = useState(false);
-  useEffect(() => {
-    if (!opening) return;
-    const timer = setTimeout(() => { setOpened(true); setOpening(false); }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650);
-    return () => clearTimeout(timer);
-  }, [opening]);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<number | null>(null);
@@ -61,11 +58,20 @@ export default function MintPack({ initialPack, evidence, walletPath = true, pra
     } finally { setBusy(null); }
   }
   if (result) return <MintReveal practice={practice} view={mintRevealView(result, group, { evidence, evidenceUrl: practice ? null : `/api/ranked/evidence/${pack.evidence_hash}`, actionId: selected === null ? null : pack.cards[selected].action_id, txHash })} affection={result.affection} onClose={onClose} />;
+  if (!opened) return <div className="verified-booster-stage"><BoosterOpening options={{
+    cards: pack.cards.map((card, slot) => ({
+      name: card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group],
+      rarity: card.rarity,
+      art: card.portrait_media ?? (card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: 45, seed: `${pack.evidence_hash}:${slot}:${card.rerolled}` })),
+      sub: actionName(card.action_id),
+    })),
+    onSave: () => 0, onSkip: onClose, onClose, onRevealed: () => setOpened(true),
+  }} /><p className="verified-booster-disclosure">{walletPath ? "No transaction happens during the reveal. Continue to choose your life NFT." : "You’ll confirm your choice first."}</p></div>;
   return <section className={`chain-card mint-pack${opened ? " is-open" : ""}`} aria-labelledby="pack-title">
     <p className="chain-kicker">Life #{pack.life_id} · {practice ? "Practice pack · not recorded on NEAR" : "Pack recorded on NEAR"}</p>
     <h1 id="pack-title" tabIndex={-1}>{opened ? "Choose who weaves forward" : "A life. Three possibilities."}</h1>
     <p>{opened ? "Choose one card to keep as your life NFT. The other two return to the story." : "Your three cards are ready. Open the pack to reveal them."}</p>
-    {!opened ? <button className={`booster-pack${opening ? " is-opening" : ""}`} type="button" disabled={opening} onClick={() => setOpening(true)}><span className="booster-seal" aria-hidden="true">✦</span><strong>EVERFOLK</strong><span>Weaving fates</span><small>{opening ? "Opening your fate…" : "Open your pack →"}</small></button> : <>
+    <>
       <div className="augment-cards" role="group" aria-label="Choose one of three mint cards">{pack.cards.map((card, slot) => <article key={slot} className={`augment-slot${selected === slot ? " is-selected" : ""}`} style={{ animationDelay: `${slot * 100}ms` }}>
         <button className="augment-choice" type="button" disabled={Boolean(busy)} aria-pressed={selected === slot} onClick={() => setSelected(slot)}>
           <span className="chain-kicker">Slot {slot + 1} · {rarityLabel(card.rarity)}</span>
@@ -78,7 +84,7 @@ export default function MintPack({ initialPack, evidence, walletPath = true, pra
         <button className="chain-secondary augment-reroll" type="button" disabled={Boolean(busy) || card.rerolled} onClick={() => { void reroll(slot); }}>{busy === `reroll:${slot}` ? (walletPath ? "Confirm in wallet…" : "Confirming…") : card.rerolled ? "Reroll used" : `↻ Reroll · ${formatNear(pack.reroll_fee)} NEAR`}</button>
       </article>)}</div>
       <p className="chain-fine">One optional reroll per slot. A reroll replaces that card permanently. {practice ? "Practice rerolls update this local ledger; no NEAR is spent." : "Every paid reroll is saved on NEAR and added to your total mint fee."}</p>
-    </>}
+    </>
     <div className="pack-receipt"><strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong><span>{pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this life. {walletPath && "Network gas is separate."}</span></div>
     {busy && <p role="status" className="chain-notice">{!walletPath ? "Confirming…" : busy === "mint" ? "Confirm your chosen card in your wallet. Waiting for NEAR…" : "Confirm the reroll payment in your wallet. Waiting for NEAR…"}</p>}
     {error && <p className="chain-error" role="alert">{error}</p>}

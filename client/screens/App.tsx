@@ -51,6 +51,8 @@ import PixelIcon from "../components/PixelIcon.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
+import { readBoosterCollection } from "../storage/booster-collection.ts";
+import { legacyLifeKey as boosterLifeKey } from "../storage/legacy-store.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "../models/source-copy.ts";
 import CompactSkillPanel from "../components/CompactSkillPanel.tsx";
@@ -164,6 +166,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const [loanRequest, setLoanRequest] = useState<LoanRequest | null>(null);
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
+  const offeredBooster = useRef("");
   const loanWarningsSeen = useRef(new Set<string>());
   const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
   const { life } = game;
@@ -327,6 +330,16 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       sceneRef.current?.focus({ preventScroll: true });
     }
   }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen]);
+
+  useEffect(() => {
+    if (ranked || life.phase !== "ended" || menuOpen || panel || restartOpen || birthPopoverOpen) return;
+    const key = boosterLifeKey(life);
+    if (offeredBooster.current === key) return;
+    offeredBooster.current = key;
+    try {
+      if (!readBoosterCollection(window.localStorage).some(pack => pack.lifeKey === key)) setFreePlayBoosterOpen(true);
+    } catch { /* Keep the memorial and manual pack action available when storage fails. */ }
+  }, [ranked, life, menuOpen, panel, restartOpen, birthPopoverOpen]);
 
   function openMainMenu() {
     game.pauseLife();
@@ -598,7 +611,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
               <div className="choice-list">
                   <div className="memorial-summary"><span className="eyebrow">{characterName.toLocaleUpperCase()} OF ALEXANDRIA</span>{deathCause && <p className="memorial-cause"><span>CAUSE OF DEATH</span><strong>{deathCause.title}</strong></p>}{life.deathCauseContext && <p className="death-context"><strong>{life.deathCauseKind === "condition" ? "Health history" : "What led to it"}</strong>{displayProse(life.deathCauseContext)}</p>}<p className="memorial-dates">{formatYear(birthYearOf(world, life))} <span>—</span> {formatYear(life.year)}</p><strong>{yearsLived(life.age)}</strong>{!deathCause && <p>{ending?.kind === "chapter" ? displayProse(ending.text) : life.age === 0 ? "You died before your first birthday." : life.age < 18 ? "You died before reaching adulthood." : life.flags.parent ? "Your children and household are listed in the character record." : "Read the chronicle to review this life."}</p>}</div>
                   <button className="primary-button" onClick={openChronicle}>Read your life’s chronicle <Icon name="book" size={19} /></button>
-                  {!ranked && <button className="secondary-button freeplay-booster-trigger" type="button" onClick={() => setFreePlayBoosterOpen(true)}>Open booster pack preview <Icon name="sun" size={18} /></button>}
+                  {!ranked && <button className="secondary-button freeplay-booster-trigger" type="button" onClick={() => setFreePlayBoosterOpen(true)}>Open legacy pack <Icon name="sun" size={18} /></button>}
                   {!ranked && <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>}
                   <SourceLinks ids={ending?.sourceIds} />
               </div>

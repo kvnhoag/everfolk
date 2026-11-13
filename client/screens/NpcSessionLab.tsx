@@ -252,11 +252,11 @@ export default function NpcSessionLab() {
             <section>
               <h2>A life remembered</h2>
               <p>
-                Your NPCs do not mint NFTs. Open an offline preview of what this
-                life could have earned.
+                Your NPCs do not mint NFTs. Keep local collectible cards from this
+                completed life.
               </p>
               <button onClick={() => setBooster(true)}>
-                Open booster preview
+                Open legacy pack
               </button>
               <button
                 disabled={busy}

@@ -179,7 +179,7 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
     tokensOf: async () => [],
   } as unknown as Parameters<typeof MintPack>[0]["contract"];
 
-  // Initial state renders the unopened booster pack seal button
+  // Confirmed outcomes are revealed in an isolated drag-to-tear canvas before mint selection.
   const htmlUnopened = renderToStaticMarkup(
     createElement(MintPack, {
       initialPack: pack,
@@ -187,6 +187,7 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
       onClose: () => {},
     }),
   );
-  assert.ok(htmlUnopened.includes("booster-pack"), "Should render booster pack button");
-  assert.ok(htmlUnopened.includes("Open your pack"), "Should show open prompt");
+  assert.ok(htmlUnopened.includes("Your Everfolk legacy pack"), "Should render the production scene");
+  assert.ok(htmlUnopened.includes("Hold the top seal and drag right"), "Should explain drag-to-tear input");
+  assert.ok(!htmlUnopened.includes("Open your pack →"), "Click-to-open must not bypass the tear gesture");
 });

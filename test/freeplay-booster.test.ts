@@ -85,6 +85,19 @@ test("different life seeds produce different booster card rolls", async () => {
   assert.notEqual(b1.pack.evidence_hash, b2.pack.evidence_hash);
 });
 
+test("finished-life packs support one to five stable slots and reject unfinished lives", async () => {
+  const life = createMockLife("complete-life", "copyist");
+  const full = await createFreePlayBooster(life, mockWorld, 5);
+  for (let count = 1; count <= 5; count++) {
+    const result = await createFreePlayBooster(life, mockWorld, count);
+    assert.deepEqual(result.pack.cards, full.pack.cards.slice(0, count));
+  }
+  for (const count of [0, 6, 1.5, NaN]) await assert.rejects(createFreePlayBooster(life, mockWorld, count));
+  await assert.rejects(createFreePlayBooster({ ...life, phase: "ready" }, mockWorld, 5), /Complete this life/);
+  await assert.rejects(full.contract.chooseMintSlot(full.pack.life_id, 5), /Unknown slot/);
+  assert.ok((await full.contract.rerollMintSlot(full.pack.life_id, 4, "0")).cards[4].rerolled);
+});
+
 test("freeplay contract stub allows slot reroll and selection without on-chain execution", async () => {
   const life = createMockLife("seed-reroll-test", "grain-dealer");
   const { pack, contract } = await createFreePlayBooster(life, mockWorld);

@@ -5,6 +5,7 @@ import { getAccomplishments, getLegacyRoutes } from "../../src/legacy.ts";
 import { formatYear } from "../../src/calendar.ts";
 import type { LegacyEntry } from "../storage/legacy-store.ts";
 import PixelIcon from "./PixelIcon.tsx";
+import BoosterCollection from "./BoosterCollection.tsx";
 import "../styles/legacy-gallery.css";
 
 const distinction = (kind: string) => kind === "ultimate" ? "Ultimate title" : kind === "prestige" ? "Prestige" : undefined;
@@ -33,6 +34,7 @@ export default function LegacyGallery({ entries, currentLifeKey, storageNotice }
     `${entry.accomplishment.name} ${entry.accomplishment.title} ${entry.characterName} ${entry.accomplishment.people.join(" ")}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())).slice().reverse();
   const lives = new Set(entries.map(entry => entry.lifeKey)).size;
   return <div className="legacy-gallery">
+    <BoosterCollection />
     <p className="legacy-intro">Accomplishments earned in your current life. Previous lives remain saved in the archive.</p>
     {storageNotice && <p className="legacy-storage-notice" role="status">{storageNotice}</p>}
     <div className="legacy-gallery-tally"><span><strong>{entries.length}</strong> accomplishments</span><span><strong>{lives}</strong> {lives === 1 ? "life" : "lives"}</span><span><strong>{entries.filter(entry => entry.accomplishment.kind === "prestige").length}</strong> prestige</span><span><strong>{entries.filter(entry => entry.accomplishment.kind === "ultimate").length}</strong> ultimate titles</span></div>

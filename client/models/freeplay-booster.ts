@@ -82,17 +82,19 @@ export interface FreePlayBoosterSession {
 }
 
 /**
- * Builds an offline, seeded 3-card booster pack for an ended free-play life.
+ * Builds an offline, seeded booster pack for an ended free-play life.
  * No network calls, no on-chain actions, fully deterministic from life.seed.
  */
-export async function createFreePlayBooster(life: LifeState, world: WorldPack): Promise<FreePlayBoosterSession> {
+export async function createFreePlayBooster(life: LifeState, world: WorldPack, count = 3): Promise<FreePlayBoosterSession> {
+  if (life.phase !== "ended") throw new Error("Complete this life before opening its booster pack.");
+  if (!Number.isInteger(count) || count < 1 || count > 5) throw new Error("A booster pack must contain between 1 and 5 cards.");
   const evidence = await generateFreePlayEvidence(life, world);
   const defaultAction = NPC_ACTIONS[evidence.career_group]?.actions[0] ?? "letters.teach";
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));
   const seed = evidence.seed;
 
   const cards: MintCard[] = [];
-  for (let slot = 0; slot < 3; slot++) {
+  for (let slot = 0; slot < count; slot++) {
     cards.push(await generatePackCard(seed, evidenceHash, slot, false, evidence, defaultAction));
   }
 
@@ -128,7 +130,7 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     },
     async rerollMintSlot(lifeId: string, slot: number) {
       if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
-      if (slot < 0 || slot > 2) throw new Error("Unknown slot");
+      if (!Number.isInteger(slot) || slot < 0 || slot >= count) throw new Error("Unknown slot");
       if (packRef.view.cards[slot].rerolled) throw new Error("Slot already rerolled");
       const newCard = await generatePackCard(seed, evidenceHash, slot, true, evidence, defaultAction);
       packRef.view.cards[slot] = newCard;
@@ -136,6 +138,7 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     },
     async chooseMintSlot(lifeId: string, slot: number): Promise<MintResult> {
       if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
+      if (!Number.isInteger(slot) || slot < 0 || slot >= count) throw new Error("Unknown slot");
       const card = packRef.view.cards[slot];
       return {
         token_id: `freeplay-token-${slot}`,
