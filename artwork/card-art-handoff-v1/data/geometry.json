@@ -1,0 +1,219 @@
+{
+  "canvas": {
+    "width": 900,
+    "height": 1260,
+    "outerCornerRadius": 42
+  },
+  "sourcePortrait": {
+    "width": 840,
+    "height": 1050,
+    "aspectRatio": "4:5"
+  },
+  "standard": {
+    "portraitRect": {
+      "x": 154,
+      "y": 190,
+      "width": 592,
+      "height": 740
+    },
+    "apertureRect": {
+      "x": 50,
+      "y": 190,
+      "width": 800,
+      "height": 740
+    },
+    "aperturePath": "M73.7574 194.2426Q78 190 84 190L816 190Q822 190 826.2426 194.2426L845.7574 213.7574Q850 218 850 224L850 896Q850 902 845.7574 906.2426L826.2426 925.7574Q822 930 816 930L84 930Q78 930 73.7574 925.7574L54.2426 906.2426Q50 902 50 896L50 224Q50 218 54.2426 213.7574Z",
+    "biographyPanelPath": "M63.1716 953.8284Q66 951 70 951L830 951Q834 951 836.8284 953.8284L847.1716 964.1716Q850 967 850 971L850 1140Q850 1144 847.1716 1146.8284L836.8284 1157.1716Q834 1160 830 1160L70 1160Q66 1160 63.1716 1157.1716L52.8284 1146.8284Q50 1144 50 1140L50 971Q50 967 52.8284 964.1716Z",
+    "portraitScaling": "nearest",
+    "sourceCropped": false,
+    "inlay": {
+      "left": {
+        "x": 50,
+        "y": 190,
+        "width": 104,
+        "height": 740
+      },
+      "right": {
+        "x": 746,
+        "y": 190,
+        "width": 104,
+        "height": 740
+      },
+      "colorFrom": "palettes[rarity].matte"
+    },
+    "mask": "frames/masks/standard-aperture.svg"
+  },
+  "legendary": {
+    "portraitRect": {
+      "x": 30,
+      "y": 140,
+      "width": 840,
+      "height": 1050
+    },
+    "sourceCropped": false,
+    "portraitScaling": "native",
+    "outerCornerRadius": 42,
+    "mask": "frames/masks/legendary-card.svg",
+    "extension": {
+      "top": {
+        "sourceRow": 0,
+        "target": {
+          "x": 30,
+          "y": 0,
+          "width": 840,
+          "height": 140
+        },
+        "kernel": "nearest"
+      },
+      "bottom": {
+        "sourceRow": 1049,
+        "target": {
+          "x": 30,
+          "y": 1190,
+          "width": 840,
+          "height": 70
+        },
+        "kernel": "nearest"
+      },
+      "sides": {
+        "sourceEdgeWidth": 12,
+        "targetWidth": 30,
+        "targetHeight": 1260,
+        "reducedWidth": 10,
+        "reducedHeight": 420,
+        "firstKernel": "lanczos3",
+        "finalKernel": "nearest"
+      }
+    },
+    "fades": {
+      "top": {
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 900,
+          "height": 240
+        },
+        "gradientUnits": "userSpaceOnUse",
+        "from": [
+          0,
+          0
+        ],
+        "to": [
+          0,
+          240
+        ],
+        "stops": [
+          {
+            "offset": 0,
+            "color": "#07110f",
+            "opacity": 0.7
+          },
+          {
+            "offset": 1,
+            "color": "#07110f",
+            "opacity": 0
+          }
+        ]
+      },
+      "bottom": {
+        "rect": {
+          "x": 0,
+          "y": 920,
+          "width": 900,
+          "height": 340
+        },
+        "gradientUnits": "userSpaceOnUse",
+        "from": [
+          0,
+          920
+        ],
+        "to": [
+          0,
+          1260
+        ],
+        "stops": [
+          {
+            "offset": 0,
+            "color": "#07110f",
+            "opacity": 0
+          },
+          {
+            "offset": 0.25,
+            "color": "#07110f",
+            "opacity": 0.78
+          },
+          {
+            "offset": 1,
+            "color": "#07110f",
+            "opacity": 0.96
+          }
+        ]
+      },
+      "gold": {
+        "from": [
+          0,
+          0
+        ],
+        "to": [
+          0,
+          1
+        ],
+        "stops": [
+          {
+            "offset": 0,
+            "color": "#fff1bf"
+          },
+          {
+            "offset": 0.5,
+            "color": "#d8ac57"
+          },
+          {
+            "offset": 1,
+            "color": "#ffdf8a"
+          }
+        ]
+      },
+      "aura": {
+        "center": [
+          450,
+          965
+        ],
+        "radius": [
+          380,
+          64
+        ],
+        "stops": [
+          {
+            "offset": 0,
+            "color": "#ffd56d",
+            "opacity": 0.42
+          },
+          {
+            "offset": 0.58,
+            "color": "#dbab44",
+            "opacity": 0.13
+          },
+          {
+            "offset": 1,
+            "color": "#dbab44",
+            "opacity": 0
+          }
+        ]
+      }
+    }
+  },
+  "edition": {
+    "right": 84,
+    "baseline": 1207.344,
+    "fontSize": 21,
+    "letterSpacing": 2.1,
+    "fontFamily": "Inter",
+    "exampleOnly": true,
+    "removalBounds": {
+      "left": 700,
+      "top": 1180,
+      "width": 126,
+      "height": 44
+    }
+  }
+}

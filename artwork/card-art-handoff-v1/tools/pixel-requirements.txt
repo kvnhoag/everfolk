@@ -1,0 +1,8 @@
+# Optional legacy CPU conversion dependencies, observed with Python 3.12.14.
+# Install these normally, then install pixeloe==1.0.0 with --no-deps separately.
+# Only pixeloe.legacy is used; its GPU and UI extras are unnecessary here.
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+Pillow==12.3.0
+torch==2.7.1+cpu

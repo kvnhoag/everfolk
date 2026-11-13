@@ -20,6 +20,8 @@
     "demo:world": "node scripts/demo/build-demo-world.mjs",
     "art:collection": "node tools/character-creator/scripts/build-collection.mjs",
     "art:cards": "node scripts/sync-card-assets.mjs",
+    "art:cards:kit": "node scripts/prepare-card-art-kit.mjs",
+    "art:cards:import": "node scripts/import-card-art.mjs",
     "npc:provider-check": "node scripts/npc/check-provider.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "figures:world": "node scripts/figures/build-world.mjs",

@@ -1,0 +1,6 @@
+node_modules/
+output/
+.venv/
+.pixeloe-runtime/
+__pycache__/
+*.pyc

@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { mergeActiveCardArtReplacements } from "../scripts/lib/card-art-replacements.mjs";
 
 interface CardArt {
   id: string;
@@ -31,13 +33,42 @@ interface VariantDelivery { id: string; variantOf: string; rarity: string; symbo
 const registry = JSON.parse(readFileSync(new URL("../client/models/card-art-registry.json", import.meta.url), "utf8"));
 const manifest = JSON.parse(readFileSync(new URL("../public/assets/cards/collection-v14/manifest.json", import.meta.url), "utf8"));
 const symbolCredits = JSON.parse(readFileSync(new URL("../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
-const assets = registry.assets as CardArt[];
-const variants = registry.parentVariants as CardArt[];
+// The reviewed v14 source library remains testable after a versioned pixel-art
+// import changes the app's active artwork URLs.
+const assets = manifest.assets as CardArt[];
+const variants = manifest.parentVariants as CardArt[];
 const deliveries = manifest.deliveries as Delivery[];
 const variantDeliveries = manifest.parentVariantDeliveries as VariantDelivery[];
 const ranks = ["common", "uncommon", "rare", "epic", "legendary"];
 const caps: Record<string, number | null> = { common: null, uncommon: null, rare: 100, epic: 25, legendary: 10 };
 const sha = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
+test("active artwork preserves every reviewed card identity, biography, rank and live edition cap", () => {
+  const allowed = new Set(["src", "footerlessSrc", "thumbnailSrc", "portraitSrc", "sha256", "artworkVersion"]);
+  for (const [baseline, current] of [[assets, registry.assets], [variants, registry.parentVariants]]) {
+    assert.equal(current.length, baseline.length);
+    assert.deepEqual(current.map((card: CardArt) => card.id), baseline.map((card: CardArt) => card.id));
+    for (const original of baseline as CardArt[]) {
+      const active = current.find((card: CardArt) => card.id === original.id);
+      for (const key of Object.keys(original)) if (!allowed.has(key)) assert.deepEqual(active[key], original[key as keyof CardArt], `${original.id}/${key}`);
+    }
+  }
+  const repo = fileURLToPath(new URL("../", import.meta.url));
+  const expected = mergeActiveCardArtReplacements({ repo, registry: { ...registry, assets, parentVariants: variants } });
+  assert.deepEqual(registry.assets, expected.assets);
+  assert.deepEqual(registry.parentVariants, expected.parentVariants);
+  const activePath = new URL("../artwork/cards/replacements/active.json", import.meta.url);
+  if (existsSync(activePath)) {
+    const active = JSON.parse(readFileSync(activePath, "utf8"));
+    assert.equal(registry.artReplacements.count, active.entries.length);
+    for (const entry of active.entries) for (const [key, file] of Object.entries(entry.files) as [string, DeliveredFile][]) {
+      const bytes = readFileSync(new URL("../public" + file.src, import.meta.url));
+      assert.equal(bytes.length, file.bytes);
+      assert.equal(sha(bytes), file.sha256);
+      if (key !== "standardArt") assert.deepEqual(losslessWebPSize(bytes), [file.width, file.height]);
+    }
+  }
+});
 
 function losslessWebPSize(bytes: Buffer): [number, number] {
   assert.equal(bytes.toString("ascii", 0, 4), "RIFF");

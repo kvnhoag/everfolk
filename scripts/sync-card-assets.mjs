@@ -5,6 +5,7 @@ import { homedir } from "node:os";
 import { createRequire } from "node:module";
 import { isAbsolute, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { mergeActiveCardArtReplacements } from "./lib/card-art-replacements.mjs";
 
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(import.meta.url);
@@ -110,6 +111,9 @@ if (process.argv.includes("--registry-only")) {
   await main();
   await syncParentVariants();
 }
+// A reviewed pixel-art import remains active when the original library is rebuilt.
+const activeRegistry = mergeActiveCardArtReplacements({ repo, registry: common });
+if (activeRegistry !== common) writeChanged(registryPath, json(activeRegistry));
 
 function beneath(root, file) {
   const rel = relative(realpathSync(root), realpathSync(file));

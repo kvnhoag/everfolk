@@ -1,0 +1,10 @@
+{
+  "name": "everfolk-card-art-handoff",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "description": "Portable pixel-art replacement kit for Everfolk's approved card frames",
+  "scripts": { "cards": "node tools/card-art.mjs", "verify": "node tools/card-art.mjs verify-kit" },
+  "dependencies": { "sharp": "0.35.5" }
+}
