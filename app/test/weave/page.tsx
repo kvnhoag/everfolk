@@ -1,5 +1,5 @@
-import WeaveLab from "../../../client/demo/WeaveLab.tsx";
+import { WeaveLabPage } from "../../../client/screens/BrowserPages.tsx";
 
 export default function WeaveTestPage() {
-  return <WeaveLab />;
+  return <WeaveLabPage />;
 }

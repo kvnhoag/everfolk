@@ -1,12 +1,13 @@
 import WikiLibrary from "../../client/components/WikiLibrary.tsx";
 import { sourceSummary, sourceScope } from "../../client/models/source-copy.ts";
-import { loadLifeWorld } from "../../client/chain/life-world.ts";
-import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
+import { ensureDemoDeeds } from "../../chain/catalog/demo-deeds.ts";
+import type { WorldPack } from "../../src/types.ts";
 
 export const metadata = { title: "Wiki · Everfolk" };
 
 export default async function WikiPage() {
-  const world = await loadLifeWorld(LIVES_WORLD_VERSION);
+  // Only the current births' world: the full registry holds every retained pack and exhausts the Worker's memory.
+  const world = ensureDemoDeeds((await import("../../worlds/demo/alexandria-lives-9.json")).default as unknown as WorldPack);
 
   return <main className="page-shell">
     <a className="secondary-button" href="/">← Back to Everfolk</a>
