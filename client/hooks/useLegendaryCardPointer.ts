@@ -10,7 +10,7 @@ export function useLegendaryCardPointer(enabled: boolean, identity: string) {
     if (!enabled || !card || !view) return;
     const host = card.closest<HTMLElement>(".figure-card-stack, .figure-card-preview-stack") ?? card;
     const media = view.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
-    const properties = ["--foil-x", "--foil-y", "--foil-rotate-x", "--foil-rotate-y", "--foil-sweep", "--foil-angle"];
+    const properties = ["--foil-rotate-x", "--foil-rotate-y"];
     let frame = 0;
     let pose: ReturnType<typeof legendaryCardPointer> = null;
     const reset = () => {
@@ -23,7 +23,7 @@ export function useLegendaryCardPointer(enabled: boolean, identity: string) {
     const draw = () => {
       frame = 0;
       if (!pose) return;
-      const values = [pose.lightX + "%", pose.lightY + "%", pose.rotateX + "deg", pose.rotateY + "deg", pose.sweep + "%", pose.angle + "deg"];
+      const values = [pose.rotateX + "deg", pose.rotateY + "deg"];
       properties.forEach((property, index) => card.style.setProperty(property, values[index]!));
       card.dataset.pointerActive = "true";
     };
