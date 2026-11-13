@@ -31,8 +31,13 @@ function worldImportsReachedFrom(entry: string): string[] {
   return worlds;
 }
 
-for (const page of ["app/page.tsx", "app/npc/page.tsx", "app/skills/page.tsx"]) {
+for (const page of ["app/page.tsx", "app/npc/page.tsx", "app/skills/page.tsx", "app/test/weave/page.tsx", "app/test/weave/[feature]/page.tsx", "app/test/legacy/page.tsx"]) {
   test(`${page} does not load world packs during server rendering`, () => {
     assert.deepEqual(worldImportsReachedFrom(page), []);
   });
 }
+
+test("the wiki renders on the server from the current world alone", () => {
+  const worlds = worldImportsReachedFrom("app/wiki/page.tsx");
+  assert.deepEqual(worlds, [], "the wiki loads its one world with a dynamic import, not the whole world registry");
+});

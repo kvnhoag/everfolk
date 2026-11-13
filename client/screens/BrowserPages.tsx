@@ -7,3 +7,5 @@ import LoadingScreen from "./LoadingScreen.tsx";
 export const GamePage = dynamic(() => import("../GameClient.tsx"), { ssr: false, loading: () => <LoadingScreen /> });
 export const NpcLabPage = dynamic(() => import("./NpcSessionLab.tsx"), { ssr: false, loading: () => <LoadingScreen /> });
 export const SkillTreePage = dynamic(() => import("./SkillTreePreview.tsx"), { ssr: false, loading: () => <LoadingScreen /> });
+export const WeaveLabPage = dynamic(() => import("../demo/WeaveLab.tsx"), { ssr: false, loading: () => <LoadingScreen /> });
+export const LegacyLabPage = dynamic(() => import("../demo/LegacyLab.tsx"), { ssr: false, loading: () => <LoadingScreen /> });
