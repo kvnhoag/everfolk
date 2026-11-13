@@ -32,7 +32,8 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
   const hint = tutorialHint(state.hintId) ?? tutorialHint("about")!;
   const hintKey = `${state.run}:${hint.id}`;
   const manual = state.mode === "manual";
-  const layout = useTutorialSpotlight(hint, hintKey, card, { waitForTarget: !manual, scroll: manual });
+  // Every tip brings its section into view, so the one thing in focus is always on screen.
+  const layout = useTutorialSpotlight(hint, hintKey, card, { waitForTarget: !manual, scroll: true });
   const settled = useTutorialFlight({ panel, ready: layout.ready, closing, run: state.run, onClosed: useCallback(() => {
     // Focus follows the card back to the Tutorial button, so keyboard players do not lose their place.
     if (card.current?.contains(document.activeElement)) findTutorialButton(card.current, false)?.focus({ preventScroll: true });

@@ -3,7 +3,7 @@ import test from "node:test";
 import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTasks, type YearTaskFacts } from "../client/models/year-reminder.ts";
 import { liveNoticeKeys, nextNoticeFade, startNoticeClocks } from "../client/models/timed-notices.ts";
 
-const facts = (over: Partial<YearTaskFacts> = {}): YearTaskFacts => ({ age: 8, phase: "ready", hasFields: true, focusShown: true, actionUsed: false, ...over });
+const facts = (over: Partial<YearTaskFacts> = {}): YearTaskFacts => ({ age: 8, phase: "ready", hasFields: true, focusShown: true, actionUsed: false, plantingAttention: true, ...over });
 
 test("the yearly reminder names fields, focus and yearly action while each is open", () => {
   assert.deepEqual(yearTasks(facts()), ["planting", "focus", "action"]);
@@ -13,6 +13,7 @@ test("the yearly reminder names fields, focus and yearly action while each is op
   assert.deepEqual(yearTasks(facts({ age: 3, focusShown: false })), [], "planting reminders start with the planting tip");
   assert.deepEqual(yearTasks(facts({ hasFields: false })), ["focus", "action"]);
   assert.equal(yearReminderText(["action"]), "Choose this year's action.");
+  assert.deepEqual(yearTasks(facts({ plantingAttention: false })), ["focus", "action"], "a plan that needs nothing is not asked about");
 });
 
 test("no reminder during a decision or after the life ends; one key per year", () => {

@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useIdle } from "../hooks/useIdle.ts";
 import type { PlayStep } from "../models/how-to-play.ts";
 import type { RoadmapStage } from "../models/life-roadmap.ts";
+import type { StageGuide } from "../models/stage-guide.ts";
 import { LifePage, PlayPage, type RoadPortrait } from "./HowToPlayPages.tsx";
 import "../styles/how-to-play.css";
 
@@ -15,6 +16,8 @@ export interface HowToPlayProps {
   open: boolean;
   steps: readonly PlayStep[];
   stages: readonly RoadmapStage[];
+  /** Each stage's guide, opened by clicking it on the road. */
+  guides: readonly StageGuide[];
   /** The player's own character, drawn at each stage on the Your life page. */
   portrait: RoadPortrait;
   tipsOn: boolean;
@@ -26,21 +29,23 @@ export interface HowToPlayProps {
 }
 
 /**
- * The rule sheet shown whenever the game screen starts: page 1 the game's own screens with numbered steps, page 2 a
- * year in order and the road of a life, drawn with the player's own character. The clock waits while it is open. After a few idle seconds the main button pulses.
+ * The rule card shown whenever the game screen starts: page 1 the year in order and each numbered section as "do this →
+ * this happens" with its screen and an example in the player's own numbers; page 2 the road of a life, where each stage
+ * opens its own guide. The clock waits while it is open. After a few idle seconds the main button pulses.
  */
-export default function HowToPlay({ open, steps, stages, portrait, tipsOn, onTipsChange, showAtStart, onShowAtStartChange, onClose }: HowToPlayProps) {
+export default function HowToPlay({ open, steps, stages, guides, portrait, tipsOn, onTipsChange, showAtStart, onShowAtStartChange, onClose }: HowToPlayProps) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const [page, setPage] = useState(0);
-  const [active, setActive] = useState<string | null>(null);
+  const current = stages.find(stage => stage.state === "current")?.id ?? stages[0]?.id ?? "";
+  const [stageId, setStageId] = useState(current);
   const idle = useIdle(HOW_TO_PLAY_IDLE_MS, open, String(page));
   const last = page === PAGES.length - 1;
 
   useEffect(() => {
     const element = dialog.current;
     if (!element) return;
-    if (open && !element.open) { setPage(0); element.showModal(); }
+    if (open && !element.open) { setPage(0); setStageId(current); element.showModal(); }
     else if (!open && element.open) element.close();
   }, [open]);
 
@@ -55,7 +60,7 @@ export default function HowToPlay({ open, steps, stages, portrait, tipsOn, onTip
       <button type="button" className="htp-close" aria-label="Close How to play" onClick={onClose}>×</button>
     </header>
     <div className="htp-body" role="tabpanel">
-      {page === 0 ? <PlayPage steps={steps} active={active} onActive={setActive} /> : <LifePage stages={stages} portrait={portrait} />}
+      {page === 0 ? <PlayPage steps={steps} /> : <LifePage stages={stages} guides={guides} portrait={portrait} selected={stageId} onSelect={setStageId} />}
     </div>
     <footer className="htp-footer">
       <div className="htp-switches">

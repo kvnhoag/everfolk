@@ -14,6 +14,11 @@ export interface YearTaskFacts {
   focusShown: boolean;
   /** The yearly action has already been spent this year. */
   actionUsed: boolean;
+  /**
+   * The field plan needs a look this year: the first year it opens, or the store or the plan has a problem (overfull,
+   * no seed, no grain plots). A plan carries over by itself, so a good plan is not asked about again.
+   */
+  plantingAttention: boolean;
 }
 
 export type YearTask = "planting" | "focus" | "action";
@@ -31,7 +36,7 @@ const LABELS: Record<YearTask, string> = { planting: "plan your fields", focus: 
 export function yearTasks(facts: YearTaskFacts): YearTask[] {
   if (facts.phase !== "ready") return [];
   return [
-    ...(facts.hasFields && facts.age >= PLANTING_HINT_AGE ? ["planting" as const] : []),
+    ...(facts.hasFields && facts.age >= PLANTING_HINT_AGE && facts.plantingAttention ? ["planting" as const] : []),
     ...(facts.focusShown ? ["focus" as const] : []),
     ...(facts.age >= YEARLY_ACTION_AGE && !facts.actionUsed ? ["action" as const] : []),
   ];

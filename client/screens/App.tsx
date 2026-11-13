@@ -91,7 +91,8 @@ import SectionHelp from "../components/SectionHelp.tsx";
 import { useTutorial, useTutorialGameContext } from "../hooks/useTutorial.ts";
 import HowToPlay from "../components/HowToPlay.tsx";
 import IdleNudge from "../components/IdleNudge.tsx";
-import { howToPlaySteps } from "../models/how-to-play.ts";
+import { howToPlayFacts, howToPlaySteps } from "../models/how-to-play.ts";
+import { stageGuide } from "../models/stage-guide.ts";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
 import { yearChecklist } from "../models/year-checklist.ts";
 import { idleNudge } from "../models/idle-nudge.ts";
@@ -102,11 +103,11 @@ import { YEARLY_FOCUSES } from "../models/yearly-focus.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
 import { useTipShown } from "../state/tip-shown.ts";
 import { readHowToPlayAtStart, writeHowToPlayAtStart } from "../storage/how-to-play-storage.ts";
-import { NO_TUTORIAL_CONTEXT, gameTutorialContext } from "../models/tutorial-triggers.ts";
+import { NO_TUTORIAL_CONTEXT, PLANTING_HINT_AGE, gameTutorialContext } from "../models/tutorial-triggers.ts";
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
 import { useYearReminder } from "../hooks/useYearReminder.ts";
 import { YEARLY_ACTION_AGE } from "../models/year-reminder.ts";
-import { flashSections } from "../lib/section-flash.ts";
+import { focusSection } from "../lib/section-flash.ts";
 import YearChecklist, { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import type { WorkStatus } from "../demo/InventoryDrawer.tsx";
@@ -224,6 +225,9 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const world = lifeEngine.world;
   const management = householdManagement(world, life);
   const demoView = useMemo(() => demoScreen(world, life), [world, life]);
+  const storehouse = useMemo(() => storehouseRows(world, life), [world, life]);
+  /** The family plans the fields until the player is old enough; then the planting card opens. */
+  const plantingLockedUntil = life.age < PLANTING_HINT_AGE ? PLANTING_HINT_AGE : null;
   const intro = freePlayIntro(world);
   const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life, game.hasBegun]);
   const wealthBenchmark = useMemo(() => getSocietyWealthBenchmarkInfo(world), [world, life, game.hasBegun]);
@@ -285,20 +289,33 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   }, [onGameScreen, menuOpen, birthPopoverOpen, lifeId]); // eslint-disable-line react-hooks/exhaustive-deps
   const tradeAge = world.demo ? tuning(world.demo.market).minTradeAge : null;
   const focusAge = yearlyFocusFirstAge(world, life);
-  const howToPlay = useMemo(() => ({
-    steps: howToPlaySteps({ focus: focusAge, action: YEARLY_ACTION_AGE, fields: 0, trade: tradeAge }),
-    stages: lifeRoadmap(world, game.hasBegun ? life.age : null),
-  }), [world, focusAge, tradeAge, game.hasBegun, life.age]);
+  // Built when How to Play opens, so its examples use this life's numbers at that moment.
+  const howToPlay = useMemo(() => {
+    if (!howToPlayOpen) return { steps: [], stages: [], guides: [] };
+    const stages = lifeRoadmap(world, game.hasBegun ? life.age : null);
+    const facts = howToPlayFacts(world, life, game.hasRevealedStats ? characterName : "You", game.speed);
+    return {
+      steps: howToPlaySteps({ focus: focusAge, action: YEARLY_ACTION_AGE, fields: PLANTING_HINT_AGE, trade: tradeAge }, facts),
+      stages, guides: stages.map(stage => stageGuide(world, stage)),
+    };
+  }, [howToPlayOpen]); // eslint-disable-line react-hooks/exhaustive-deps
   const checklist = yearChecklist({
     age: life.age, phase: life.phase, playing: game.isPlaying,
     focusLabel: game.focusId === "everyday" ? null : YEARLY_FOCUSES.find(focus => focus.id === game.focusId)?.label ?? null,
-    focusAge, actionAge: YEARLY_ACTION_AGE, actionUsed, hasFields: Boolean(demoView), fieldsAge: 0,
+    focusAge, actionAge: YEARLY_ACTION_AGE, actionUsed, hasFields: Boolean(demoView), fieldsAge: PLANTING_HINT_AGE,
     grainPlots: demoView ? Math.max(0, demoView.household.plots - demoView.household.flaxPlots) : 0, flaxPlots: demoView?.household.flaxPlots ?? 0,
     tradeAge, marketVisited: Boolean(demoView?.market.visitUsed), recordYears: life.age + 1,
   });
   const nudge = idleNudge({ onGame: dashboardVisible && !readingPause, phase: life.phase, playing: game.isPlaying, decisionOpen, tipOpen: tutorial.open && tutorial.mode === "manual" });
   const focusShown = life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world, life);
-  const yearReminder = useYearReminder({ age: life.age, phase: life.phase, hasFields: Boolean(demoView), focusShown, actionUsed },
+  // The field plan carries over; it is pointed at only the year it opens or when the store or plan has a problem.
+  const plantingAttention = useMemo(() => {
+    if (!demoView || life.phase !== "ready") return false;
+    if (life.age === PLANTING_HINT_AGE) return true;
+    if (storehouse?.find(row => row.id === "grain")?.alert) return true;
+    return plantingCheck(lifeEngine, life, demoView.household.flaxPlots).warnings.length > 0;
+  }, [demoView, life, lifeEngine, storehouse]);
+  const yearReminder = useYearReminder({ age: life.age, phase: life.phase, hasFields: Boolean(demoView), focusShown, actionUsed, plantingAttention },
     eventNotificationLifeKey(life), dashboardVisible && game.hasBegun);
   const workStatus: WorkStatus | null = !focusShown && life.age < YEARLY_ACTION_AGE ? null : {
     open: life.phase === "ready" && life.age >= YEARLY_ACTION_AGE && !actionUsed,
@@ -308,10 +325,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   };
   /** Brings this year's action board into view and lights it up; the focus instead once the action is spent or not open yet. */
   function showYearlyWork() {
-    const selectors = workStatus?.open ? [".life-yearly-action-deck", ".yearly-focus"] : [".yearly-focus"];
-    const target = selectors.map(selector => document.querySelector(selector)).find(Boolean);
-    target?.scrollIntoView({ block: "center", behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-    flashSections([selectors], 4000);
+    focusSection(workStatus?.open ? [".life-yearly-action-deck", ".yearly-focus"] : [".yearly-focus"]);
   }
   // A reopened Character popup starts on the tab it was opened with.
   useEffect(() => { if (panel !== "character") setCharacterTab(null); }, [panel]);
@@ -639,7 +653,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked || game.isPreview ? 0 : lifePackCardCount(life, world)}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
-      {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} checkPlan={checkPlan} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
+      {game.hasBegun && demoView && <ResourceBar rows={storehouse} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
@@ -705,7 +719,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
               onActivity={requestActivity}
               onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined}
             />
-            {demoView && life.phase !== "ended" && <EconomyPanels screen={demoView} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
+            {demoView && life.phase !== "ended" && <EconomyPanels screen={demoView} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
               onActivity={requestActivity} onOpenCharacterSection={sec => { setCharacterSection(sec); setPanel("character"); }} training={activities.filter(item => ["train-farming", "train-craft", "train-warfare", "train-reckoning"].includes(item.id)).map(item => ({ id: item.id, label: item.text, reason: item.available ? null : item.reason ?? "Locked" }))}
               onOccupation={jobId => { const activity = activities.find(item => item.category === "career" && item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job === jobId))); if (activity) requestActivity(activity.id); }} occupations={(world.character?.jobs ?? []).filter(job => job.id === "farmhand" || job.id === "tenant-farmer" || job.id === "grain-dealer" || job.id === "soldier").map(job => { const badge = occupationBadge(world, job.id, life.character?.jobId === job.id, activities.some(item => item.available && item.outcomes.some(effect => effect.effects.some(e => e.type === "job" && e.job === job.id)))); return { id: job.id, label: job.title, unavailable: badge.label === "Unavailable", reason: badge.detail }; })} />}
             </> : <>
@@ -740,7 +754,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
     {/* Notifications float at the right edge, so they never reorder or push the main section. */}
-    <HowToPlay open={howToPlayOpen} steps={howToPlay.steps} stages={howToPlay.stages} tipsOn={tutorial.tipsOn}
+    <HowToPlay open={howToPlayOpen} steps={howToPlay.steps} stages={howToPlay.stages} guides={howToPlay.guides} tipsOn={tutorial.tipsOn}
       portrait={{ seed: life.seed, name: game.hasRevealedStats ? characterName : "You", sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }} onTipsChange={tutorialStore.setTipsOn}
       showAtStart={howToPlayAtStart} onShowAtStartChange={on => { setHowToPlayAtStart(on); if (!game.isPreview) writeHowToPlayAtStart(on); }} onClose={() => setHowToPlayOpen(false)} />
     {game.hasBegun && <IdleNudge nudge={howToPlayOpen ? null : nudge} />}

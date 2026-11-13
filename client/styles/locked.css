@@ -1,5 +1,5 @@
 /* Locked parts of the screen: greyed out and crossed through, with the condition that opens them in large type. */
-.locked-area{position:relative;max-height:300px;overflow:hidden;border:2px dashed #9c8f78;background:#e6e0d4}
+.locked-area{position:relative;min-height:150px;max-height:300px;overflow:hidden;border:2px dashed #9c8f78;background:#e6e0d4}
 .locked-area-content{filter:grayscale(1);opacity:.22;pointer-events:none;user-select:none}
 .locked-cover{position:absolute;inset:0;display:grid;place-items:center;padding:16px;text-align:center}
 .locked-cross{position:absolute;inset:0;width:100%;height:100%;overflow:visible}

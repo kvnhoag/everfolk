@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { PlantingCheck } from "../models/planting-check.ts";
+import { LockedArea } from "../components/Locked.tsx";
+import "./resource-bar.css";
 import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import PixelIcon from "../components/PixelIcon.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
@@ -26,6 +28,8 @@ export interface InventoryDrawerProps {
   onPlan?(flaxPlots: number): string | null;
   /** What a plan would do, checked before Set planting. */
   checkPlan?(flaxPlots: number): PlantingCheck;
+  /** The age the player starts planning the fields; null once it is open. */
+  plantingLockedUntil?: number | null;
   onTrade?(item: TradeItem): void;
   onWork?(): void;
 }
@@ -37,7 +41,8 @@ function PlotSquares({ plots, flax }: { plots: number; flax: number }) {
   </span>;
 }
 
-function PlantingTask({ screen, onPlan, checkPlan }: { screen: DemoScreen; onPlan(flaxPlots: number): string | null; checkPlan?(flaxPlots: number): PlantingCheck }) {
+/** Plan your fields: the split, what it would do (checked before the click) and Set planting. Shared with Farm & Granary. */
+export function PlantingTask({ screen, onPlan, checkPlan, lockedUntil = null }: { screen: DemoScreen; onPlan(flaxPlots: number): string | null; checkPlan?(flaxPlots: number): PlantingCheck; lockedUntil?: number | null }) {
   const { plots } = screen.household;
   const [flax, setFlax] = useState(screen.household.flaxPlots);
   const [notice, setNotice] = useState("");
@@ -46,6 +51,12 @@ function PlantingTask({ screen, onPlan, checkPlan }: { screen: DemoScreen; onPla
   const unchanged = flax === screen.household.flaxPlots;
   // Checked as the split changes, so a plan the game would refuse never needs a click to find out.
   const check = useMemo(() => checkPlan?.(flax) ?? { reason: null, warnings: [] }, [checkPlan, flax, screen]);
+  if (lockedUntil !== null) return <article className="aoe-task aoe-planting-row" aria-labelledby="aoe-task-planting">
+    <h4 id="aoe-task-planting"><PixelIcon name="res-grain" size={14} />Plan your fields</h4>
+    <LockedArea locked title="Plan your fields" unlock={`Unlocks at age ${lockedUntil}`} note="Your family plans the fields until then.">
+      <p className="aoe-task-how">Split the plots between grain and flax.</p>
+    </LockedArea>
+  </article>;
   return <article className="aoe-task aoe-planting-row has-section-help" aria-labelledby="aoe-task-planting">
     <SectionHelp hint="planting" />
     <h4 id="aoe-task-planting"><PixelIcon name="res-grain" size={14} />Plan your fields</h4>
@@ -94,7 +105,8 @@ function WorkTask({ work, onWork }: { work: WorkStatus; onWork?(): void }) {
   </article>;
 }
 
-function Holdings({ screen, holding, selectedItem, onTrade }: Pick<InventoryDrawerProps, "screen" | "holding" | "selectedItem" | "onTrade">) {
+/** Goods with what you hold and their prices, each with a Trade button. Shared with Farm & Granary. */
+export function Holdings({ screen, holding, selectedItem, onTrade }: Pick<InventoryDrawerProps, "screen" | "holding" | "selectedItem" | "onTrade">) {
   const closed = screen.market.reasons[0];
   return <div className="aoe-drawer-section">
     <header className="aoe-drawer-header"><div><span className="aoe-drawer-eyebrow">GOODS &amp; PRICES</span><h3>What you hold</h3></div></header>
@@ -120,14 +132,14 @@ function Holdings({ screen, holding, selectedItem, onTrade }: Pick<InventoryDraw
 }
 
 /** Inventory & Granary: this year's tasks first, then the store ledger, then goods with their prices. */
-export default function InventoryDrawer({ screen, rows, selectedItem, holding, work = null, onClose, onPlan, checkPlan, onTrade, onWork }: InventoryDrawerProps) {
+export default function InventoryDrawer({ screen, rows, selectedItem, holding, work = null, onClose, onPlan, checkPlan, plantingLockedUntil = null, onTrade, onWork }: InventoryDrawerProps) {
   return <div className="aoe-inventory-drawer" role="region" aria-label="Inventory and granary details">
     <header className="aoe-drawer-header aoe-drawer-top">
       <div><span className="aoe-drawer-eyebrow">THIS YEAR</span><h3>What you can do</h3></div>
       <button type="button" className="aoe-drawer-close" onClick={onClose}>Close ×</button>
     </header>
     <div className="aoe-year-tasks">
-      {onPlan && <PlantingTask screen={screen} onPlan={onPlan} checkPlan={checkPlan} />}
+      {onPlan && <PlantingTask screen={screen} onPlan={onPlan} checkPlan={checkPlan} lockedUntil={plantingLockedUntil} />}
       <TradeTask screen={screen} onTrade={onTrade} />
       {work && <WorkTask work={work} onWork={onWork} />}
     </div>

@@ -4,8 +4,9 @@ import { flashSections } from "../lib/section-flash.ts";
 import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTasks, type YearTaskFacts } from "../models/year-reminder.ts";
 
 /**
- * Once a year, when the year is running, lights up the sections the player can still act on (fields, focus,
- * yearly action) and returns a short notice naming them. Each year is announced once per life on this page.
+ * Once a year, when the year is running, returns a short notice naming what the player can still do (fields, focus,
+ * yearly action) and lights up only the first of them, so one thing is in focus at a time. Each year is announced
+ * once per life on this page.
  */
 export function useYearReminder(facts: YearTaskFacts, lifeKey: string, enabled: boolean): YearReminder | null {
   const [reminder, setReminder] = useState<YearReminder | null>(null);
@@ -26,7 +27,7 @@ export function useYearReminder(facts: YearTaskFacts, lifeKey: string, enabled: 
   useEffect(() => {
     if (!reminder || flashed.current === reminder.key) return;
     flashed.current = reminder.key;
-    flashSections(tasks.map(task => YEAR_TASK_TARGETS[task]));
+    if (tasks[0]) flashSections([YEAR_TASK_TARGETS[tasks[0]]]);
   }, [reminder?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return reminder && reminder.key.startsWith(`year-reminder:${lifeKey}:`) ? reminder : null;

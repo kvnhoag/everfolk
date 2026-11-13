@@ -9,7 +9,8 @@ import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
 import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
-import { BAR_LEGEND, CHECKLIST_SHOT, DECISION_SHOT, howToPlaySteps, KEY_FACTS, SCREEN_SHOT, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
+import { BAR_LEGEND, HOW_TO_WIN, howToPlayFacts, howToPlaySteps, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
+import { createEngine } from "../src/index.ts";
 import { SECTION_STEPS, sectionStep } from "../client/models/section-steps.ts";
 import { HOW_TO_PLAY_STORAGE_KEY, readHowToPlayAtStart, writeHowToPlayAtStart } from "../client/storage/how-to-play-storage.ts";
 
@@ -25,6 +26,8 @@ const hooks = registerHooks({
 const { default: YearChecklist } = await import("../client/components/YearChecklist.tsx");
 const { LockedSection, LockedArea } = await import("../client/components/Locked.tsx");
 const { iconCells } = await import("../client/components/PixelIcon.tsx");
+const { LifePage } = await import("../client/components/HowToPlayPages.tsx");
+const { default: FarmGranary } = await import("../client/demo/FarmGranary.tsx");
 hooks.deregister();
 
 const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-9.json", import.meta.url), "utf8")) as WorldPack;
@@ -131,8 +134,8 @@ test("How to Play opens at every start unless the player switches it off", () =>
   assert.equal(readHowToPlayAtStart({ getItem() { throw new Error("blocked"); }, setItem() {} }), true);
 });
 
-test("the rule sheet frames play in three facts, warns where people trip, and scripts the year in the engine's order", () => {
-  assert.equal(KEY_FACTS.length, 3);
+test("the rule card states the goal, warns where people trip, and scripts the year in the engine's order", () => {
+  assert.match(HOW_TO_WIN, /Reach 18/);
   const steps = howToPlaySteps({ focus: 6, action: 6, fields: 0, trade: 10 });
   assert.ok(steps.filter(step => step.warning).length >= 4, "the common mistakes carry a warning sign");
   assert.deepEqual(YEAR_SCRIPT.map(beat => beat.title), ["The year opens", "You act", "Turning points", "Harvest settled", "The town moves", "A year older"]);
@@ -142,18 +145,57 @@ test("the rule sheet frames play in three facts, warns where people trip, and sc
   assert.deepEqual(order, [...order].sort((a, b) => a - b), "settlement reads in the engine's order (src/demo/settle.ts)");
 });
 
-test("How to Play shows real screens: every shot exists, the map outlines each numbered section, icons are real", () => {
-  const steps = howToPlaySteps({ focus: 6, action: 6, fields: 0, trade: 10 });
-  const shots = [SCREEN_SHOT, CHECKLIST_SHOT, DECISION_SHOT, ...steps.map(step => step.shot)];
-  for (const shot of shots) {
+test("How to Play shows real screens: every shot exists, captured sharp, and icons are real", () => {
+  const steps = howToPlaySteps({ focus: 6, action: 6, fields: 4, trade: 10 });
+  for (const shot of steps.map(step => step.shot)) {
     assert.ok(existsSync(new URL(`../public${shot.src}`, import.meta.url)), `${shot.src} is in public/`);
     assert.ok(shot.width > 0 && shot.height > 0 && shot.alt.length > 0, `${shot.src} has a size and alt text`);
+    assert.equal(shot.width % 2, 0, `${shot.src} is captured at twice its shown size`);
   }
-  assert.deepEqual(Object.keys(SCREEN_SHOT.areas).map(id => sectionStep(id as never)).sort((a, b) => a - b), [1, 2, 3, 4, 5, 6]);
-  for (const [id, box] of Object.entries(SCREEN_SHOT.areas)) {
-    assert.ok(box.x >= 0 && box.y >= 0 && box.x + box.w <= 100.01 && box.y + box.h <= 100.01, `${id} stays inside the screen`);
-  }
+  for (const step of steps) assert.ok(step.result.length > 0 && step.example.length > 0, `${step.id} says what happens and gives an example`);
   assert.ok(BAR_LEGEND.length >= 10);
   for (const item of BAR_LEGEND) assert.ok(iconCells(item.icon), `${item.label} has a pixel icon`);
   for (const beat of YEAR_SCRIPT) assert.ok(iconCells(beat.icon), `${beat.title} has a pixel icon`);
+});
+
+test("How to Play examples use the player's own character and the world's real numbers", () => {
+  const engine = createEngine(world);
+  const life = engine.start("htp-facts");
+  const facts = howToPlayFacts(world, life, "Lysimachos", 4);
+  assert.equal(facts.secondsPerYear, 6);
+  assert.ok(facts.household && facts.household.capacity > 0 && facts.household.mouths > 0);
+  assert.equal(facts.study?.text, "Read and practise writing");
+  assert.equal(facts.study?.gain, 6);
+  const steps = howToPlaySteps({ focus: 6, action: 6, fields: 4, trade: 10 }, facts);
+  const household = steps.find(step => step.id === "household")!.example;
+  assert.match(household, new RegExp(`Lysimachos's household: ${facts.household!.mouths} people eat ${facts.household!.eating} grain`));
+  assert.match(steps.find(step => step.id === "action")!.example, /Literacy \+6/);
+  if (facts.sale) assert.match(steps.find(step => step.id === "town")!.example, new RegExp(`brings ${facts.sale.total} dr`));
+});
+
+test("Your life: every stage is a tab, and the chosen one opens its role, unlocks, actions and turning points", async () => {
+  const { stageGuide } = await import("../client/models/stage-guide.ts");
+  const stages = lifeRoadmap(world, 9);
+  const guides = stages.map(stage => stageGuide(world, stage));
+  const html = renderToStaticMarkup(createElement(LifePage, { stages, guides, portrait: { seed: "s", name: "Lysimachos" }, selected: "childhood", onSelect() {} }));
+  assert.equal((html.match(/role="tab"/g) ?? []).length, stages.length, "each stage can be clicked");
+  assert.match(html, /aria-selected="true"[^>]*class="htp-stage is-current is-selected"/);
+  assert.match(html, /Your role\./);
+  assert.match(html, /Opens in this stage/);
+  assert.match(html, /Read and practise writing/);
+  assert.match(html, /Turning points you may meet/);
+});
+
+test("Farm & Granary shows every number as an icon tile and locks planting until it opens", async () => {
+  const { createEngine } = await import("../src/index.ts");
+  const { demoScreen } = await import("../client/demo/screen.ts");
+  const engine = createEngine(world);
+  const life = engine.start("farm-tiles");
+  const screen = demoScreen(world, life)!;
+  const html = renderToStaticMarkup(createElement(FarmGranary, { screen, world, age: 0, cashText: "70 dr", holding: () => 0, onPlan: () => null, plantingLockedUntil: 4 }));
+  for (const label of ["Store", "Mouths", "Next harvest", "Rent", "Eating", "Spoilage", "Cash", "Grain plots", "Flax plots", "Oxen", "Donkeys"]) {
+    assert.match(html, new RegExp(`<li class="farm-tile[^"]*"[^>]*><svg[^>]*class="pixel-icon[\\s\\S]*?<span class="farm-tile-label">${label}</span>`), `${label} has an icon tile`);
+  }
+  assert.match(html, /Unlocks at age 4/);
+  assert.doesNotMatch(html, />Set planting</, "no planting button before it opens");
 });

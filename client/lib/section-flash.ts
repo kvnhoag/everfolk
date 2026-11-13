@@ -1,10 +1,15 @@
 /**
- * Lights up a section's border while the rest of the page dims, then lets both fade, so the player's eye is drawn
- * without a popup.
- * Used when tips are off (a new section glows instead of opening a card) and for the yearly reminder.
+ * Draws the player's eye to one section at a time: the page scrolls to it, its border lights up and the rest of the
+ * page dims, then both fade. Sections asked for together wait their turn instead of glowing at once.
+ *
+ * A section is never lit while it cannot be used (locked, greyed out or unclickable), and nothing is lit while a tip
+ * card or a popup has the player's attention; those requests wait until the screen is free.
+ * Used when tips are off (a new section glows instead of opening a card), for the yearly reminder, and when the
+ * player picks a line in "This year".
  */
 
 import { spotlightSection } from "./section-spotlight.ts";
+import { tipShownStore } from "../state/tip-shown.ts";
 
 export const SECTION_FLASH_CLASS = "section-flash";
 /** How long a section glows before the effect has faded completely. */
@@ -12,19 +17,46 @@ export const SECTION_FLASH_MS = 10_000;
 /** A section that renders a moment after its stage begins gets a few more tries to be found. */
 const RETRY_MS = 150;
 const RETRIES = 8;
+/** While a tip or popup is open, a waiting request checks again this often. */
+const BUSY_RETRY_MS = 500;
+/** A short breath between one lit section and the next. */
+const BETWEEN_MS = 600;
 
-const timers = new WeakMap<Element, number>();
-
-function matches(selector: string): Element[] {
-  try {
-    return Array.from(document.querySelectorAll(selector)).filter(element => {
-      const box = element.getBoundingClientRect();
-      return box.width > 0 && box.height > 0;
-    });
-  } catch { return []; }
+export interface FocusOptions {
+  durationMs?: number;
+  /** The player asked for this one (a click): it replaces whatever is waiting and shows at once. */
+  asked?: boolean;
 }
 
-/** The first selector alternative that has anything on screen, as hints pick their targets. */
+interface Request { selectors: readonly string[]; durationMs: number; asked: boolean; tries: number; owner: symbol }
+interface Active { element: Element; timer: number; request: Request }
+
+let queue: Request[] = [];
+let active: Active | null = null;
+let pumpTimer = 0;
+let listening = false;
+
+/** Locked, greyed-out or unclickable sections are never pointed at. */
+export function actionable(element: Element): boolean {
+  if (element.closest(".section-locked, .locked-area, [inert], [aria-hidden='true']")) return false;
+  const lock = element.querySelector(".locked-area, .section-locked");
+  if (!lock) return true;
+  // A lock covering most of the section makes the whole section unavailable.
+  const box = element.getBoundingClientRect(), covered = lock.getBoundingClientRect();
+  return covered.height < box.height * 0.5;
+}
+
+function visible(element: Element): boolean {
+  const box = element.getBoundingClientRect();
+  return box.width > 0 && box.height > 0;
+}
+
+function matches(selector: string): Element[] {
+  try { return Array.from(document.querySelectorAll(selector)).filter(element => visible(element) && actionable(element)); }
+  catch { return []; }
+}
+
+/** The first selector alternative that has anything usable on screen, as hints pick their targets. */
 export function firstMatching(alternatives: readonly string[]): Element[] {
   for (const selector of alternatives) {
     const found = matches(selector);
@@ -33,38 +65,108 @@ export function firstMatching(alternatives: readonly string[]): Element[] {
   return [];
 }
 
-function light(element: Element, durationMs: number): void {
-  const previous = timers.get(element);
-  if (previous !== undefined) window.clearTimeout(previous);
+/** A tip card on screen or an open popup owns the player's attention. */
+function busy(): boolean {
+  if (tipShownStore.get()) return true;
+  return Array.from(document.querySelectorAll("dialog[open]")).some(dialog => {
+    try { return dialog.matches(":modal"); } catch { return false; }
+  });
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+}
+
+/** Brings the section into view unless it is already fully on screen. */
+function bringIntoView(element: Element): void {
+  const box = element.getBoundingClientRect();
+  const height = document.documentElement.clientHeight || window.innerHeight;
+  if (box.top >= 0 && box.bottom <= height) return;
+  const tall = box.height > height * 0.7;
+  element.scrollIntoView({ block: tall ? "start" : "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
+}
+
+function finish(): void {
+  if (!active) return;
+  window.clearTimeout(active.timer);
+  active.element.classList.remove(SECTION_FLASH_CLASS);
+  active = null;
+  schedule(BETWEEN_MS);
+}
+
+function onPointerDown(event: Event): void {
+  // A click ends the current light, so the next waiting section can have its turn.
+  if (active && !(event.target instanceof Node && active.element.contains(event.target))) finish();
+}
+
+function listen(): void {
+  if (listening || typeof window === "undefined") return;
+  window.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
+  listening = true;
+}
+
+function light(element: Element, request: Request): void {
+  bringIntoView(element);
   // Restart the animation when a section that is still glowing is lit again.
   element.classList.remove(SECTION_FLASH_CLASS);
   void (element as HTMLElement).offsetWidth;
-  (element as HTMLElement).style?.setProperty("--section-flash-ms", `${durationMs}ms`);
+  (element as HTMLElement).style?.setProperty("--section-flash-ms", `${request.durationMs}ms`);
   element.classList.add(SECTION_FLASH_CLASS);
-  spotlightSection(element, durationMs);
-  timers.set(element, window.setTimeout(() => {
-    element.classList.remove(SECTION_FLASH_CLASS);
-    timers.delete(element);
-  }, durationMs));
+  spotlightSection(element, request.durationMs);
+  active = { element, request, timer: window.setTimeout(finish, request.durationMs) };
+}
+
+function schedule(delay: number): void {
+  window.clearTimeout(pumpTimer);
+  pumpTimer = window.setTimeout(pump, delay);
+}
+
+function pump(): void {
+  if (active || queue.length === 0) return;
+  const request = queue[0];
+  if (!request.asked && busy()) { schedule(BUSY_RETRY_MS); return; }
+  const [element] = firstMatching(request.selectors);
+  if (!element) {
+    // Not drawn yet (or not usable now): a few more tries, then it is dropped.
+    if (request.tries++ < RETRIES) { schedule(RETRY_MS); return; }
+    queue = queue.slice(1);
+    schedule(0);
+    return;
+  }
+  queue = queue.slice(1);
+  light(element, request);
 }
 
 /**
- * Lights every section given as selector alternatives (one list per section). Sections not drawn yet are looked
- * for again a few times, then skipped. Returns a function that cancels pending retries.
+ * Lights each section given as selector alternatives (one list per section), one after another. Returns a function
+ * that withdraws the ones still waiting.
  */
-export function flashSections(sections: readonly (readonly string[])[], durationMs = SECTION_FLASH_MS): () => void {
+export function flashSections(sections: readonly (readonly string[])[], durationMs = SECTION_FLASH_MS, options: Omit<FocusOptions, "durationMs"> = {}): () => void {
   if (typeof document === "undefined") return () => {};
-  let pending = sections.filter(section => section.length > 0);
-  let tries = 0;
-  let timer = 0;
-  const attempt = () => {
-    pending = pending.filter(section => {
-      const found = firstMatching(section);
-      found.forEach(element => light(element, durationMs));
-      return found.length === 0;
-    });
-    if (pending.length && tries++ < RETRIES) timer = window.setTimeout(attempt, RETRY_MS);
-  };
-  attempt();
-  return () => window.clearTimeout(timer);
+  listen();
+  const owner = Symbol("focus");
+  const asked = Boolean(options.asked);
+  const requests = sections.filter(section => section.length > 0).map(selectors => ({ selectors, durationMs, asked, tries: 0, owner }));
+  if (requests.length === 0) return () => {};
+  if (asked) {
+    queue = [...requests, ...queue.filter(request => !request.asked)];
+    if (active) finish();
+  } else {
+    queue = [...queue, ...requests];
+  }
+  schedule(0);
+  return () => { queue = queue.filter(request => request.owner !== owner); };
+}
+
+/** Scrolls to one section and lights it at once, because the player asked (a checklist line, a button). */
+export function focusSection(selectors: readonly string[], durationMs = 4000): void {
+  flashSections([selectors], durationMs, { asked: true });
+}
+
+/** For tests: forget everything waiting or lit. */
+export function resetSectionFocus(): void {
+  if (active) { window.clearTimeout(active.timer); active.element.classList.remove(SECTION_FLASH_CLASS); }
+  active = null;
+  queue = [];
+  if (typeof window !== "undefined") window.clearTimeout(pumpTimer);
 }
