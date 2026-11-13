@@ -43,7 +43,7 @@ export default function YearEndDialog({ age, options, activities, life, world, f
         </li>;
       })}
     </ul>
-    {options.length > 0 && !options.some(option => option.recommended) && <p className="year-end-note">Your focus has no action you can take this year, so pick any of these.</p>}
-    <button type="button" className="year-end-let-go" onClick={onLetGo}>Let this year's action go</button>
+    {options.length > 0 && !options.some(option => option.recommended) && <p className="year-end-note">{focus ? `Nothing for your focus (${focus}) can be done this year. Pick any of these.` : "You have no focus set, so nothing is recommended. Pick any of these."}</p>}
+    <button type="button" className="year-end-let-go" onClick={onLetGo}>Skip this year's action (nothing happens)</button>
   </dialog>;
 }

@@ -43,3 +43,34 @@ test("the focus's own action comes first and is marked recommended; the list sta
   assert.equal(focusLabel("study"), "Study");
   assert.equal(focusLabel("everyday"), null);
 });
+
+test("every year-end option spends the yearly action, so picking one never brings the same question back", () => {
+  for (const [seed, age] of [["year-end-spend-a", 9], ["year-end-spend-b", 20], ["year-end-spend-c", 30]] as const) {
+    const life = liveTo(seed, age);
+    if (life.phase !== "ready" || !yearEndChoiceNeeded(engine, life)) continue;
+    const activities = engine.getActivities(life);
+    for (const option of yearEndOptions(world, activities, "everyday")) {
+      const activity = activities.find(entry => entry.id === option.id)!;
+      assert.notEqual(activity.usesYearlyActivity, false, `${option.id} must use up the yearly action`);
+    }
+  }
+});
+
+test("without a focus action the player still gets a real pick of several actions", () => {
+  const life = liveTo("year-end-many", 14);
+  if (life.phase !== "ready" || !yearEndChoiceNeeded(engine, life)) return;
+  const usable = engine.getActivities(life).filter(activity => activity.available && activity.usesYearlyActivity !== false
+    && ["training", "relationship", "family", "career"].includes(activity.category ?? ""));
+  const options = yearEndOptions(world, engine.getActivities(life), "everyday");
+  assert.equal(options.length, Math.min(4, usable.length), "up to four options whenever that many exist");
+});
+
+test("free actions (ending a friendship, resting while ill) are never offered as this year's action", () => {
+  const free = { id: "end-friendship-x", text: "End a friendship", category: "relationship", outcomes: [], available: true, usesYearlyActivity: false } as never;
+  const paid = { id: "train-x", text: "Practise reading", category: "training", outcomes: [], available: true } as never;
+  const options = yearEndOptions(world, [free, paid], "everyday");
+  assert.deepEqual(options.map(option => option.id), ["train-x"]);
+  const life = liveTo("year-end-free", 9);
+  const onlyFree = { ...engine, getActivities: () => [free] };
+  assert.equal(yearEndChoiceNeeded(onlyFree, life), false, "a year with only free actions left does not wait");
+});
