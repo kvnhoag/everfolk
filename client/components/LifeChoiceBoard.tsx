@@ -9,6 +9,7 @@ import ImpactValue from "./ImpactValue.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
 import { getSkillImpact } from "../models/skill-impact.ts";
 import "../styles/life-choice-board.css";
+import SectionHelp from "./SectionHelp.tsx";
 
 function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
   return "sex" in person;
@@ -90,7 +91,8 @@ export default function LifeChoiceBoard({
   return (
     <div className="life-choice-board is-ready">
       {life.phase === "ready" && life.age >= 6 && (
-        <section className="life-yearly-action-deck" aria-label="Yearly personal action board">
+        <section className="life-yearly-action-deck has-section-help" aria-label="Yearly personal action board">
+          <SectionHelp hint="yearly-action" />
           <header className="life-action-deck-header">
             <div>
               <span className="life-action-eyebrow">YEARLY PERSONAL ACTION SLOT</span>

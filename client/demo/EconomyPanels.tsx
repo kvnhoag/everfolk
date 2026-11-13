@@ -16,6 +16,7 @@ import { itemLabel, levelLabel } from "./labels.ts";
 import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
 import "./economy-panels.css";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 export interface ComparisonSide {
   label: string;
@@ -163,7 +164,8 @@ export default function EconomyPanels({
 
   return (
     <div className="demo-economy" aria-labelledby={titleId}>
-      <header className="demo-deck-header">
+      <header className="demo-deck-header has-section-help">
+        <SectionHelp hint="command-deck" />
         <div>
           <span className="demo-deck-eyebrow">HOUSEHOLD &amp; TOWN COMMAND DECK</span>
           <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
@@ -324,7 +326,8 @@ export default function EconomyPanels({
       )}
 
       {/* TAB 1: MARKET & TRADE + ASSET PRICE GRAPHS */}
-      <section aria-label="Grain market" hidden={activeTab !== "market"}>
+      <section className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
+        <SectionHelp hint="market" />
         <div className="demo-market-top">
           <div>
             <h3>Grain market</h3>

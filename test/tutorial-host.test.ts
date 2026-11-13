@@ -22,3 +22,10 @@ test("reopening a window moves it to the top once", () => {
 test("excluded windows (wallet and payment prompts) never host the tour", () => {
   assert.deepEqual(nextHostStack([a], wallet, true, false), [a]);
 });
+
+test("a sign-in window hides the tip until it closes, so the tip never covers the form", async () => {
+  const { hidesTutorial } = await import("../client/models/tutorial-host.ts");
+  assert.equal(hidesTutorial({ dataset: { tutorial: "hide" } }), true);
+  assert.equal(hidesTutorial({ dataset: {} }), false);
+  assert.equal(hidesTutorial(null), false, "With no window open the tip floats over the page.");
+});

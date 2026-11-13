@@ -47,14 +47,14 @@
 .life-timeline .journal-year{border:1px solid var(--cr-edge);border-radius:0;background:var(--cr-paper);box-shadow:var(--cr-hard)}
 .life-timeline .journal-year-heading{background:#f5efda;border-bottom:1px solid var(--cr-line);padding:11px 16px}
 .life-timeline .journal-year-heading h3{color:var(--cr-ink);font-size:23px}
-.life-timeline .journal-year-heading>span{display:inline-grid;place-items:center;min-height:22px;padding:2px 8px;background:var(--cr-olive);color:var(--cr-paper);font:700 10px/1.2 var(--cr-mono);letter-spacing:.6px}
+.life-timeline .journal-year-heading>span{display:inline-grid;place-items:center;min-height:22px;padding:2px 8px;background:var(--cr-olive);color:var(--cr-paper);font:700 10px/1.2 var(--ef-font-numeric);letter-spacing:.6px}
 .life-timeline ol.journal-year-entries{padding:12px 14px;gap:8px}
 .life-timeline li.journal-row{padding:10px 12px;border:1px solid var(--cr-line);background:#fffbee;box-shadow:var(--cr-hard)}
 .life-timeline li.journal-row:last-child{border-bottom:1px solid var(--cr-line)}
 .life-timeline li.journal-row.is-gold:last-child{border-bottom-color:var(--cr-gold-0)}
 .life-timeline li.journal-row.is-faience:last-child{border-bottom-color:var(--cr-faience-0)}
 .life-timeline .journal-point{width:7px;height:7px;margin-top:5px;background:var(--cr-olive);transform:rotate(45deg)}
-.life-timeline .journal-kind{color:var(--cr-olive-dark);font:700 9px/1.5 var(--cr-mono);letter-spacing:1px}
+.life-timeline .journal-kind{color:var(--cr-olive-dark);font:700 9px/1.5 var(--ef-font-numeric);letter-spacing:1px}
 .life-timeline .journal-copy>p{color:var(--cr-ink)}
 .life-timeline .journal-choice{background:var(--cr-linen-wash)}
 .life-timeline .journal-choice .journal-point{background:var(--cr-pottery-1)}

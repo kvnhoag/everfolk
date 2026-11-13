@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { MintPack as Pack, MintResult, Evidence } from "../../chain/types.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
 import { actionName, actionDescription, figureTitle, GROUP_TITLE, groupOfAction, rarityLabel } from "./chain-copy.ts";
 import { errorText } from "./chain-backend.ts";
 import { formatNear } from "./near-amount.ts";
 import MintReveal from "./MintReveal.tsx";
+import BoosterOpening from "../components/BoosterOpening.tsx";
+import { portraitSource } from "../models/life-background.ts";
+import { figureMediaPath } from "../../chain/figure-media.ts";
 import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";
 import EverfolkCard from "./EverfolkCard.tsx";
@@ -40,23 +43,8 @@ export default function MintPack({
 }: MintPackProps) {
   const [pack, setPack] = useState(initialPack);
   const [opened, setOpened] = useState(false);
-  const [opening, setOpening] = useState(false);
-
-  // PokemonSim-style card flip state: cards start face-down, revealed individually on click
+  // Cards start face-down in the chooser unless the cinematic opening already revealed them.
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
-
-  useEffect(() => {
-    if (!opening) return;
-    const timer = setTimeout(
-      () => {
-        setOpened(true);
-        setOpening(false);
-        audioManager.playClickSound();
-      },
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650,
-    );
-    return () => clearTimeout(timer);
-  }, [opening]);
 
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -134,6 +122,39 @@ export default function MintPack({
     );
   }
 
+  // The cinematic opening reveals every card, so the chooser that follows starts face-up.
+  if (!opened) {
+    return (
+      <div className="verified-booster-stage">
+        <BoosterOpening
+          options={{
+            cards: (pack?.cards ?? []).map((card, slot) => ({
+              name: card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group],
+              rarity: card.rarity,
+              art: card.portrait_media ?? (card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: 45, seed: `${pack.evidence_hash}:${slot}` })),
+              sub: actionName(card.action_id),
+            })),
+            onSave: () => 0,
+            onSkip: onClose,
+            onClose,
+            onRevealed: () => {
+              setFlippedCards(Object.fromEntries((pack?.cards ?? []).map((_, slot) => [slot, true])));
+              if (!freePlay && (pack?.cards?.length ?? 0) === 1) setSelected(0);
+              setOpened(true);
+            },
+          }}
+        />
+        <p className="verified-booster-disclosure">
+          {freePlay
+            ? "Free Play never mints on NEAR. Play Weave Mode to get real NFTs."
+            : walletPath
+              ? "No transaction happens during the reveal. Continue to choose your life NFT."
+              : "You’ll confirm your choice first."}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <section className={`chain-card mint-pack${opened ? " is-open" : ""}`} aria-labelledby="pack-title">
       <div className="mint-pack-header">
@@ -175,27 +196,7 @@ export default function MintPack({
         </p>
       </div>
 
-      {!opened ? (
-        <div className="booster-pack-stage">
-          <button
-            className={`booster-pack${opening ? " is-opening" : ""}`}
-            type="button"
-            disabled={opening}
-            onClick={() => setOpening(true)}
-            aria-label="Open your booster pack"
-          >
-            <span className="booster-seal" aria-hidden="true">
-              ✦
-            </span>
-            <strong>EVERFOLK</strong>
-            <span>{freePlay ? "Free Play preview" : "Weaving fates"}</span>
-            <small>{opening ? "Breaking the golden seal…" : "Open your pack →"}</small>
-          </button>
-          <p className="chain-fine">
-            {totalCards} {cardNoun} {totalCards === 1 ? "is" : "are"} sealed within. Each echoes a chapter and deed.
-          </p>
-        </div>
-      ) : (
+      {(
         <>
           {/* Card Reveal Status Banner */}
           <div className="mint-pack-reveal-bar" role="status">

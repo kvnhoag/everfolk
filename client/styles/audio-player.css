@@ -3,7 +3,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  font-family: var(--ef-body, "DM Sans", sans-serif);
+  font-family: var(--ef-font-body);
   font-size: 11px;
   z-index: 30;
 }
@@ -118,7 +118,7 @@
 }
 
 .music-drawer-title {
-  font-family: var(--ef-heading, "Libre Caslon Display", serif);
+  font-family: var(--ef-font-display);
   font-size: 16px;
   font-weight: 600;
   margin: 2px 0 0;

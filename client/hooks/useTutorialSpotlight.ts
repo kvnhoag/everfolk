@@ -1,21 +1,30 @@
-import { useLayoutEffect, useState, type RefObject } from "react";
+import { useCallback, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { intersectRect, placeTutorialCard, spotlightRect, tutorialScrollPlan, unionRect, type CardPosition, type Rect } from "../models/tutorial-placement.ts";
-import type { TutorialStep } from "../models/tutorial-steps.ts";
+import type { TutorialHint } from "../models/tutorial-hints.ts";
 
 export interface TutorialLayout {
   spotlight: Rect | null;
   card: CardPosition;
-  /** The step's feature is not on screen; the card is centered and explains it instead. */
+  /** The hint's section is not on screen; the card explains it instead. */
   missing: boolean;
-  /** False while the tour is still waiting for the step's screen to appear. */
+  /** False while the card is still waiting for its section to appear. */
   ready: boolean;
+  /** The section is drawn but scrolled out of view; the card offers to show it. */
+  offscreen: boolean;
 }
 
-/** How long a step waits for its screen to render before falling back to a centered card. */
+export interface SpotlightOptions {
+  /** Automatic hints wait for their section instead of showing a card about something not drawn. */
+  waitForTarget: boolean;
+  /** Automatic hints scroll nothing: the player keeps their place in the game. */
+  scroll: boolean;
+}
+
+/** How long an opened hint waits for its section to render before explaining it without a highlight. */
 const SEARCH_MS = 900;
 const PADDING = 8;
 const FALLBACK_CARD = { width: 360, height: 240 };
-const INITIAL: TutorialLayout = { spotlight: null, card: { top: 0, left: 0, placement: "center" }, missing: false, ready: false };
+const INITIAL: TutorialLayout = { spotlight: null, card: { top: 0, left: 0, placement: "center" }, missing: false, ready: false, offscreen: false };
 
 interface Found {
   first: Element;
@@ -85,44 +94,52 @@ function bringIntoView({ first, rect }: Found, viewportHeight: number, behavior:
   if (plan.marginTop && element.style) element.style.scrollMarginTop = previousMargin;
 }
 
-function prefersReducedMotion(): boolean {
+export function prefersReducedMotion(): boolean {
   return typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 /**
- * Finds the step's target, scrolls it into view once, and keeps the spotlight and card positioned on every
- * frame while the step is shown, so scrolling, resizing and layout changes are followed.
+ * Finds the hint's section, scrolls it into view once when the player asked, and keeps the spotlight and card
+ * positioned on every frame while the hint is shown, so scrolling, resizing and layout changes are followed.
  */
-export function useTutorialSpotlight(step: TutorialStep | undefined, stepKey: string, cardRef: RefObject<HTMLElement | null>): TutorialLayout {
+export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: string, cardRef: RefObject<HTMLElement | null>, { waitForTarget, scroll }: SpotlightOptions): TutorialLayout & { reveal(): void } {
   const [layout, setLayout] = useState<TutorialLayout>(INITIAL);
+  const target = useRef<Found | null>(null);
   useLayoutEffect(() => {
-    if (!step) return;
+    if (!hint) return;
     const startedAt = performance.now();
     const behavior: ScrollBehavior = prefersReducedMotion() ? "auto" : "smooth";
-    let scrolled = false;
+    let everFound = false;
     let frame = 0;
     let previous = INITIAL;
     const tick = () => {
-      const found = findTarget(step.targets);
+      const found = findTarget(hint.targets);
+      target.current = found;
       const viewport = { width: document.documentElement.clientWidth || window.innerWidth, height: document.documentElement.clientHeight || window.innerHeight };
-      if (found && !scrolled) {
-        scrolled = true;
-        bringIntoView(found, viewport.height, behavior);
-      }
-      const searching = !found && step.targets.length > 0 && performance.now() - startedAt < SEARCH_MS;
+      if (found && !everFound && scroll) bringIntoView(found, viewport.height, behavior);
+      if (found) everFound = true;
+      const waiting = waitForTarget ? !everFound : performance.now() - startedAt < SEARCH_MS;
+      const searching = !found && hint.targets.length > 0 && waiting;
       const card = cardRef.current;
       const size = card && card.offsetWidth > 0 ? { width: card.offsetWidth, height: card.offsetHeight } : FALLBACK_CARD;
       const spotlight = round(spotlightRect(found?.visible ?? null, viewport, PADDING));
-      const next: TutorialLayout = { spotlight, card: placeTutorialCard(spotlight, size, viewport), missing: !found && !searching && step.targets.length > 0, ready: !searching };
-      const rounded = { ...next, card: { ...next.card, top: Math.round(next.card.top), left: Math.round(next.card.left) } };
-      if (!sameLayout(rounded, previous)) {
-        previous = rounded;
-        setLayout(rounded);
+      const missing = !found && !searching && hint.targets.length > 0;
+      const offscreen = Boolean(found) && !spotlight;
+      const placed = placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center");
+      const next: TutorialLayout = { spotlight, card: { ...placed, top: Math.round(placed.top), left: Math.round(placed.left) }, missing, ready: !searching, offscreen };
+      if (!sameLayout(next, previous)) {
+        previous = next;
+        setLayout(next);
       }
       frame = window.requestAnimationFrame(tick);
     };
     tick();
     return () => window.cancelAnimationFrame(frame);
-  }, [stepKey]); // eslint-disable-line react-hooks/exhaustive-deps
-  return layout;
+  }, [hintKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  /** Scrolls the section into view, only when the player asks. */
+  const reveal = useCallback(() => {
+    const found = target.current;
+    if (found) bringIntoView(found, document.documentElement.clientHeight || window.innerHeight, prefersReducedMotion() ? "auto" : "smooth");
+  }, []);
+  return { ...layout, reveal };
 }

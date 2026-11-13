@@ -1,11 +1,12 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { formatYear } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
+import SiteNav from "../components/SiteNav.tsx";
 import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
 import { errorText, type ChainBackend } from "../chain/chain-backend.ts";
-import SignInPanel from "../chain/SignInPanel.tsx";
+import SignInPanel, { EMAIL_UNAVAILABLE } from "../chain/SignInPanel.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
-import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
+import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import "../homepage/homepage.css";
 import "../homepage/luminous.css";
 import "../homepage/typeset.css";
@@ -26,6 +27,9 @@ export interface MainMenuProps {
   chainBackend?: ChainBackend | null;
 }
 
+/** The home header also reaches the NPC companions and the wiki, which have no place in the game header. */
+const HOME_EXTRA_LINKS = [{ href: "/npc", label: "NPC companions" }, { href: "/wiki", label: "Wiki" }] as const;
+
 function HomeNotice({ notice, error }: { notice?: string; error?: string }) {
   if (!notice && !error) return null;
   return <div className="ef-home-notice-stack">
@@ -33,6 +37,11 @@ function HomeNotice({ notice, error }: { notice?: string; error?: string }) {
     {error && <p className="ef-home-notice" role="alert">{error}</p>}
   </div>;
 }
+
+const unavailableEmailFlow = {
+  async sendCode() { throw new Error(EMAIL_UNAVAILABLE); },
+  async verify() { throw new Error(EMAIL_UNAVAILABLE); },
+};
 
 function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notice?: string }) {
   const [emailOpen, setEmailOpen] = useState(false);
@@ -69,17 +78,19 @@ function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notic
       {connecting ? "Connecting…" : "Connect with NEAR wallet"}
     </button>
     <div className="ef-home-auth-divider"><span>or</span></div>
-    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={!signIn?.available.email || connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
+    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
       Log in with email
     </button>
     <HomeNotice notice={notice || signInNotice} error={error} />
-    {emailOpen && signIn && <dialog className="ef-home-email-dialog" aria-label="Email sign-in"
+    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in" data-tutorial="hide"
       ref={dialog => { if (dialog && !dialog.open) dialog.showModal(); }}
       onClose={() => setEmailOpen(false)}>
-      <SignInPanel available={signIn.available} onEmail={{
-        sendCode: signIn.emailFlow.sendCode,
-        verify: async code => { await signIn.emailFlow.verify(code); enterWeave(); },
-      }} onWallet={async () => { await signIn.useWallet(); enterWeave(); }} onClose={() => setEmailOpen(false)} />
+      <SignInPanel available={signIn?.available ?? { email: false }} onEmail={signIn?.emailFlow ?? unavailableEmailFlow}
+        onSuccess={() => { setEmailOpen(false); enterWeave(); }}
+        onWallet={async () => {
+          if (!live) throw new Error("Sign-in could not connect. Please try again.");
+          await (signIn?.useWallet ?? live.connect)(); enterWeave();
+        }} onClose={() => setEmailOpen(false)} />
     </dialog>}
   </>;
 }
@@ -99,7 +110,7 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
   const openWeave = !rankedLife && weaveEnabled;
-  const primaryLabel = rankedLife ? "Return to Weave Mode" : "Play as guest";
+  const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Play as guest";
   const enterFreeLife = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
@@ -110,16 +121,10 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
     <div className="ef-home-shell">
       <header className="ef-home-weave-bar ef-home-top-bar">
         <div className="ef-home-weave-bar-main">
-          <a className="ef-home-weave-brand" href="/" aria-label="Everfolk home">
-            <strong><EverfolkWordmark tone="cream" /></strong>
+          <a className="ef-home-weave-brand" href="#" aria-label="Everfolk home">
+            <EverfolkBrand tone="cream" />
           </a>
-          <nav className="ef-home-weave-links" aria-label="Main menu">
-            <a href="/npc">NPC companions</a>
-            <a href="/wiki">Wiki</a>
-            <a href="#figures">Figures</a>
-            <a href="#market">Market</a>
-            <a href="#mine">My lives</a>
-          </nav>
+          <SiteNav className="ef-home-weave-links" onPlay={enterFreeLife} extra={HOME_EXTRA_LINKS} />
         </div>
         <div className="ef-home-settings">
           <TutorialButton tone="dark" />

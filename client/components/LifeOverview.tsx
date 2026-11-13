@@ -3,6 +3,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { formatMoney } from "../models/wealth.ts";
 import { formatWealthStanding, getWealthComparison } from "../models/wealth-comparison.ts";
+import SectionHelp from "./SectionHelp.tsx";
 
 /** The dashboard uses the world's actual attributes and currency. */
 export default function LifeOverview({ life, world, onOpenWealth }: {
@@ -10,7 +11,7 @@ export default function LifeOverview({ life, world, onOpenWealth }: {
 }) {
   const wealthId = useId();
   const wealth = getWealthComparison(world, life);
-  return <section className="life-overview" aria-label="Life at a glance">
+  return <section className="life-overview has-section-help" aria-label="Life at a glance">
     <dl className={`life-overview-facts${wealth ? " has-wealth" : ""}`}>
       <div><dt>Age</dt><dd>{life.age}</dd></div>
       <div><dt>Year</dt><dd>{formatYear(life.year)}</dd></div>
@@ -33,5 +34,6 @@ export default function LifeOverview({ life, world, onOpenWealth }: {
         </div>;
       })}
     </div>
+    <SectionHelp hint="wealth" />
   </section>;
 }

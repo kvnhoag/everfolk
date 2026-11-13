@@ -5,12 +5,10 @@ import { useWorldLibrary } from "./hooks/useWorldLibrary.ts";
 import { registerWorldPack } from "./lib/world-session.ts";
 import App from "./screens/App.tsx";
 import LoadingScreen from "./screens/LoadingScreen.tsx";
-import ChainLayer, { leaveChainRoute, useChainRoute } from "./chain/ChainLayer.tsx";
-import { parseChainRoute } from "./chain/chain-route.ts";
+import ChainLayer, { useChainRoute } from "./chain/ChainLayer.tsx";
 import TutorialOverlay from "./components/TutorialOverlay.tsx";
-import { useTutorialNavigator } from "./hooks/useTutorial.ts";
-import type { TutorialScreen } from "./models/tutorial-steps.ts";
-import { tutorialStore } from "./state/tutorial-store.ts";
+import { useTutorialChainView } from "./hooks/useTutorial.ts";
+import { chainTutorialView } from "./models/tutorial-triggers.ts";
 import type { ChainBackend } from "./chain/chain-backend.ts";
 import { DEFAULT_CHAIN_CONFIG } from "./chain/config.ts";
 import { useChainBackend, loadRankedConfig } from "./chain/chain-backend.ts";
@@ -31,13 +29,6 @@ async function loadRankedWorld(version: string) {
   const ready = await loadLifeWorld(version);
   registerWorldPack(ready);
   return ready;
-}
-
-/** Tour steps on the Weave screens use their hash routes; every other step leaves them for the game. */
-function navigateChainForTutorial(screen: TutorialScreen): void {
-  if (screen.kind === "chain") {
-    if (window.location.hash !== screen.hash) window.location.hash = screen.hash;
-  } else if (parseChainRoute(window.location.hash)) leaveChainRoute();
 }
 
 export default function GameClient() {
@@ -118,11 +109,9 @@ export default function GameClient() {
     setRankedSession(session);
   }
 
-  useTutorialNavigator(navigateChainForTutorial);
-  // First visit only, once the game is on screen. A shared link straight into a Weave screen is left alone.
-  useEffect(() => {
-    if (active && !parseChainRoute(window.location.hash)) tutorialStore.autoOpen();
-  }, [Boolean(active)]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Tutorial hints follow the screen on view: a Weave screen covers the game, and so does a ranked life's ending report.
+  const rankedReportOpen = rankedSession?.state.phase === "ended" && Boolean(backend) && !chainRoute;
+  useTutorialChainView(rankedReportOpen || pickerOpen ? "elsewhere" : chainTutorialView(chainRoute?.kind ?? null));
 
   useEffect(() => {
     if (pickerOpen && !dialog.current?.open) dialog.current?.showModal();

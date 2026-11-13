@@ -13,6 +13,7 @@ import { removeRankedSave } from "./ranked-session.ts";
 import "./ranked-entry.css";
 import SignInPanel from "./SignInPanel.tsx";
 import { accountLabel } from "./account-bar-model.ts";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 export interface RankedEntryProps {
   backend: ChainBackend;
@@ -106,7 +107,8 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard walletPath={walletPath} needsPlayKey={signin?.needsPlayKey} life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
     {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack, that fee is shared with its source lives and the protocol treasury; it is not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 
-    <section className="chain-card ranked-entry-intro" aria-labelledby={headingId}>
+    <section className="chain-card ranked-entry-intro has-section-help" aria-labelledby={headingId}>
+      <SectionHelp hint="weave" />
       <p className="chain-kicker">Weaving fates · Live another story, for keeps</p>
       <h1 id={headingId} tabIndex={-1}>Weave Mode</h1>
       <p>One life that counts. Famous figures owned by other players shape the city you are born into, and people from their past lives weave into your big decisions.</p>

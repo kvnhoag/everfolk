@@ -3,5 +3,5 @@
 .skill-tree-preview-header a{color:inherit;text-decoration:none}
 .skill-tree-preview-header>a:last-child{text-decoration:underline;text-underline-offset:4px}
 .skill-tree-preview-intro{max-width:780px;margin:20px 0 32px}
-.skill-tree-preview-intro h1{font-family:Eczar,Georgia,serif;font-size:clamp(30px,5vw,52px);line-height:1.12;margin:0 0 16px;font-weight:600}
+.skill-tree-preview-intro h1{font-family:var(--ef-font-display);font-size:clamp(30px,5vw,52px);line-height:1.12;margin:0 0 16px;font-weight:600}
 .skill-tree-preview-intro p{line-height:1.6;margin:10px 0}

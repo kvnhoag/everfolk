@@ -80,7 +80,7 @@ async function rollCardOutcome(seed: string, evidence: Evidence) {
 async function generatePackCard(seed: string, hash: string, slot: number, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard> {
   const cardSeed = await sha256Hex(`${seed}:pack:${hash}:${slot}`);
   const { figure, rarity, affection } = await rollCardOutcome(cardSeed, evidence);
-  // Neighbouring slots offer the group's different deeds, so a pack never repeats one card three times.
+  // Neighbouring slots offer the group's different deeds, so a pack does not repeat one card.
   const actionId = figure ? FIGURE_ACTIONS[figure][0] : groupActions[slot % groupActions.length];
   return {
     kind: figure ? "figure" : "npc",
@@ -102,6 +102,7 @@ export interface FreePlayBoosterSession {
  * No network calls, no on-chain actions, no rerolls, fully deterministic from life.seed.
  */
 export async function createFreePlayBooster(life: LifeState, world: WorldPack): Promise<FreePlayBoosterSession> {
+  if (life.phase !== "ended") throw new Error("Complete this life before opening its booster pack.");
   const evidence = await generateFreePlayEvidence(life, world);
   const groupActions: readonly string[] = NPC_ACTIONS[evidence.career_group]?.actions ?? ["letters.teach"];
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));

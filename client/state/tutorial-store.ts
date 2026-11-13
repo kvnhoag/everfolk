@@ -1,68 +1,87 @@
-import { CLOSED_TUTORIAL, tutorialTransition, type TutorialAction, type TutorialState } from "../models/tutorial-navigation.ts";
-import { TUTORIAL_STEPS, type TutorialScreen, type TutorialStep } from "../models/tutorial-steps.ts";
-import { browserTutorialStorage, hasSeenTutorial, rememberTutorial, type TutorialStorage } from "../storage/tutorial-storage.ts";
-
-export type TutorialNavigator = (screen: TutorialScreen) => void;
+import { isTutorialHintId, type TutorialHintId } from "../models/tutorial-hints.ts";
+import { INITIAL_TUTORIAL, tutorialReducer, type TutorialAction, type TutorialState } from "../models/tutorial-navigation.ts";
+import { NO_TUTORIAL_CONTEXT, type TutorialContext, type TutorialView } from "../models/tutorial-triggers.ts";
+import { browserTutorialStorage, readTutorialProgress, writeTutorialProgress, type TutorialStorage } from "../storage/tutorial-storage.ts";
 
 export interface TutorialStoreOptions {
-  steps: readonly TutorialStep[];
   storage(): TutorialStorage | undefined;
 }
 
 /**
- * The tour controller: an external store for useSyncExternalStore plus a registry of screen navigators.
- * Screens (the game, the Weave layer) register how to open themselves; each step change asks them to.
+ * The tutorial controller: an external store for useSyncExternalStore. Screens report what is on screen;
+ * the store opens the hint for each new stage. It never navigates and never pauses the game.
  */
-export function createTutorialStore({ steps, storage }: TutorialStoreOptions) {
-  let state: TutorialState = CLOSED_TUTORIAL;
+export function createTutorialStore({ storage }: TutorialStoreOptions) {
+  let state: TutorialState = INITIAL_TUTORIAL;
+  let loaded = false;
+  let game: TutorialContext = NO_TUTORIAL_CONTEXT;
+  let chain: TutorialView | null = null;
+  let context: TutorialContext = NO_TUTORIAL_CONTEXT;
+  let contextKey = JSON.stringify(context);
   const listeners = new Set<() => void>();
-  const navigators = new Set<TutorialNavigator>();
 
-  function navigate(screen: TutorialScreen): void {
-    for (const navigator of [...navigators]) {
-      try { navigator(screen); }
-      catch (error) { console.error("Everfolk tutorial: a screen could not open for this step.", error); }
-    }
+  function emit(): void {
+    for (const listener of [...listeners]) listener();
+  }
+
+  /** Saved progress is read on first use, so server rendering never touches storage. */
+  function load(): void {
+    if (loaded) return;
+    loaded = true;
+    const saved = readTutorialProgress(storage());
+    const seen = saved.seen.filter(isTutorialHintId);
+    const hintId = isTutorialHintId(saved.current) ? saved.current : null;
+    if (seen.length || hintId) state = { ...state, seen, hintId };
   }
 
   function dispatch(action: TutorialAction): void {
-    const next = tutorialTransition(state, action, steps.length);
+    load();
+    const next = tutorialReducer(state, action, context);
     if (next === state) return;
-    const moved = next.open && (next.index !== state.index || next.run !== state.run || !state.open);
+    const persist = next.seen !== state.seen || next.hintId !== state.hintId;
     state = next;
-    if (!next.open) rememberTutorial(storage(), "closed");
-    if (moved) navigate(steps[next.index].screen);
-    for (const listener of [...listeners]) listener();
+    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId });
+    emit();
+  }
+
+  function updateContext(): void {
+    const next = chain ? { view: chain, characterSection: null, life: game.life } : game;
+    const key = JSON.stringify(next);
+    if (key === contextKey) return;
+    context = next;
+    contextKey = key;
+    dispatch({ type: "sync" });
   }
 
   return {
     getSnapshot: (): TutorialState => state,
-    getServerSnapshot: (): TutorialState => CLOSED_TUTORIAL,
+    getServerSnapshot: (): TutorialState => INITIAL_TUTORIAL,
+    getContext: (): TutorialContext => context,
     subscribe(listener: () => void): () => void {
       listeners.add(listener);
       return () => { listeners.delete(listener); };
     },
-    registerNavigator(navigator: TutorialNavigator): () => void {
-      navigators.add(navigator);
-      return () => { navigators.delete(navigator); };
+    /** What the game shows; null when no game is mounted. */
+    setGameContext(next: TutorialContext | null): void {
+      game = next ?? NO_TUTORIAL_CONTEXT;
+      updateContext();
     },
-    start: (index = 0) => dispatch({ type: "start", index }),
+    /** The Weave screen over the game, or null when none is open. */
+    setChainView(next: TutorialView | null): void {
+      chain = next;
+      updateContext();
+    },
+    /** The Tutorial button: the current step if it is on screen, else this screen's most relevant hint. */
+    openFromButton: () => dispatch({ type: "open" }),
+    /** A section's "?" button: that section's hint, even when already seen. */
+    openHint: (hintId: TutorialHintId) => dispatch({ type: "open", hintId }),
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
-    goTo: (index: number) => dispatch({ type: "go", index }),
     close: () => dispatch({ type: "close" }),
-    /** Opens the tour on a first visit only. Returns whether it opened. */
-    autoOpen(): boolean {
-      const store = storage();
-      if (state.open || hasSeenTutorial(store)) return false;
-      rememberTutorial(store, "started");
-      dispatch({ type: "start", index: 0 });
-      return true;
-    },
   };
 }
 
 export type TutorialStore = ReturnType<typeof createTutorialStore>;
 
-/** The app's one tour. */
-export const tutorialStore: TutorialStore = createTutorialStore({ steps: TUTORIAL_STEPS, storage: browserTutorialStorage });
+/** The app's one tutorial. */
+export const tutorialStore: TutorialStore = createTutorialStore({ storage: browserTutorialStorage });

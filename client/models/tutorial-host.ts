@@ -10,3 +10,8 @@ export function nextHostStack<T>(stack: readonly T[], host: T, open: boolean, el
 export function topTutorialHost<T>(stack: readonly T[]): T | null {
   return stack.length ? stack[stack.length - 1] : null;
 }
+
+/** A window marked `data-tutorial="hide"` (a sign-in form) hides the tip while it is open; the tip returns when it closes. */
+export function hidesTutorial(host: { dataset: { tutorial?: string } } | null): boolean {
+  return host?.dataset.tutorial === "hide";
+}
