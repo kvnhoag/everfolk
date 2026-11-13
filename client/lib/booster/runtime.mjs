@@ -20,6 +20,8 @@ export function mountBooster(hostWindow,config){
  const devicePixelRatio=window.devicePixelRatio;
  const $=id=>document.getElementById(id);
  const labels=resolveBoosterLabels(config.labels);
+ // Weave packs: one card is chosen and minted from inside the scene.
+ const mintMode=Boolean(config.mint);let minting=false;
  const A={pack:'/assets/booster/pack-print.png',logo:'/assets/booster/wordmark.png'};
  function toggleCardSelection(selection,index,count){const next=new Set(selection);if(index<0||index>=count)return next;next.has(index)?next.delete(index):next.add(index);return next;}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -139,7 +141,7 @@ function resetPack(animate=true){
   pack.userData.count=activePackSize;
  }
  openingTL?.kill();resetTL?.kill();motionPaused=false;gsap.killTweensOf(foil);gsap.killTweensOf(inspection);inspection.x=inspection.y=0;openingClock.time=-1;foil.curl=0;if(plume)plume.userData.releaseOrigin=null;particles.length=0;rings.length=0;rays.length=0;ambientGlints.length=0;flash=0;shake=0;exposureKick=0;stepIndex=0;selected=-1;inspected=-1;drag.active=false;held=false;keyboardTearHeld=false;
- $('actions').hidden=true;$('inspection-actions').hidden=true;$('inspect-tip').hidden=true;$('card-nav').hidden=true;$('card-nav').innerHTML='';$('keep').disabled=true;$('keep').textContent='Save to Legacy (0)';$('hint').innerHTML='Hold the top seal and drag right to tear <span class="hint-gem"></span> Drag the body to rotate';$('stage').setAttribute('aria-label','Everfolk booster pack. Hold and drag the top seal right to tear. Drag the body to rotate. Keyboard: hold Space and press Right Arrow repeatedly.');
+ $('actions').hidden=true;$('mint-card').hidden=true;$('inspection-actions').hidden=true;$('inspect-tip').hidden=true;$('card-nav').hidden=true;$('card-nav').innerHTML='';$('keep').disabled=true;$('keep').textContent='Save to Legacy (0)';$('hint').innerHTML='Hold the top seal and drag right to tear <span class="hint-gem"></span> Drag the body to rotate';$('stage').setAttribute('aria-label','Everfolk booster pack. Hold and drag the top seal right to tear. Drag the body to rotate. Keyboard: hold Space and press Right Arrow repeatedly.');
  if(renderFailed){setPhase('sealed');fallbackPack();return;}
  disposeCards();chosenCards().forEach(([p,l],i)=>buildCard(people[p],l,i));
  // Warm the clipping and foil programs while the new deck is still hidden.
@@ -222,15 +224,16 @@ function updatePlume(t){
 function settle(){
  motionPaused=false;if(!renderFailed)applyReferenceCards(REFERENCE_MOTION.end);
  if(!renderFailed)pack.visible=false;setPhase('settled');$('actions').hidden=false;
- $('stage').setAttribute('aria-label',activePackSize+' revealed cards. Click to select any cards to save. Double-click to inspect.');
+ $('stage').setAttribute('aria-label',activePackSize+(mintMode?' revealed cards. Click a card to choose it, then mint it.':' revealed cards. Click to select any cards to save. Double-click to inspect.'));
  const nav=$('card-nav');nav.hidden=false;nav.innerHTML='';
  const cards=renderFailed?fallbackCards:cardList;
  cards.forEach((c,i)=>{const b=document.createElement('button');b.className='card-choice';b.textContent=c.person.name;
   b.setAttribute('aria-label','Select '+c.person.name+', '+tiers[c.level].name);b.setAttribute('aria-pressed','false');
   b.addEventListener('click',()=>selectCard(i));b.addEventListener('focus',()=>{hovered=i;});b.addEventListener('blur',()=>{hovered=-1;});nav.append(b);});
- updateSelectionUI();announce('All '+activePackSize+' cards revealed. Select any cards to save, or skip this pack.');
+ updateSelectionUI();announce('All '+activePackSize+' cards revealed. '+(mintMode?'Click the card you want to mint.':'Select any cards to save, or skip this pack.'));
 }
 function updateSelectionUI(){
+ if(mintMode){updateMintUI();return;}
  if(config.onRevealed){$('again').hidden=true;$('keep').disabled=false;$('keep').textContent='Review confirmed pack';$('keep').onclick=config.onRevealed;$('hint').textContent='Confirmed outcomes · Continue to choose your life NFT';return;}
 
  const cards=renderFailed?fallbackCards:cardList;
@@ -274,9 +277,45 @@ function landingImpact(c){
  rings.push({x:p.x,y:p.y,r:6,maxR:radius,life:.22,max:.22,color:tiers[c.level].color,width:c.level===4?2:1.4});
  for(let i=0;i<5+c.level*2;i++){const side=i%2?1:-1;particles.push({x:p.x+side*Math.random()*radius*.6,y:p.y,vx:side*(35+Math.random()*65),vy:-20-Math.random()*25,life:.15+Math.random()*.13,max:.28,size:1+Math.random()*2,color:tiers[c.level].color,rot:0,spin:0,star:false,gravity:190});}
 }
+function updateMintUI(){
+ const cards=renderFailed?fallbackCards:cardList;
+ cards.forEach((c,i)=>{c.selected=selection.has(i);});
+ [...$('card-nav').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(selection.has(i))));
+ $('again').hidden=true;$('keep').hidden=true;
+ const chosen=selected>=0&&selection.has(selected)?cards[selected]:null;
+ $('hint').textContent=chosen?chosen.person.name+' · '+tiers[chosen.level].name+' · '+config.mint.label:'Click the card you want to keep as your life NFT';
+ const button=$('mint-card');button.hidden=!chosen;if(!minting)button.textContent=config.mint.label;
+ if(renderFailed)[...$('fallback').querySelectorAll('img')].forEach((im,i)=>im.classList.toggle('selected',selection.has(i)));
+}
+async function mintChosen(){
+ if(!mintMode||minting||phase!=='settled'||selected<0)return;
+ minting=true;const button=$('mint-card');button.disabled=true;button.textContent=config.mint.busyLabel??'Confirming…';announce(button.textContent);
+ try{await config.mint.onMint(selected);}
+ catch(error){toast(error?.message||'The mint was not confirmed. Your pack is saved; try again.');}
+ finally{minting=false;if(!disposed){button.disabled=false;button.textContent=config.mint.label;}}
+}
+/** Screen-space guides that follow the 3D scene: the cut line on a sealed pack and the mint button under the chosen card. */
+function updateOverlays(){
+ const guide=$('cut-guide');
+ const showGuide=phase==='sealed'&&!renderFailed&&pack&&foil.tear<.08;
+ guide.hidden=!showGuide;
+ if(showGuide){
+  pack.updateMatrixWorld();
+  const a=project(pack.localToWorld(new THREE.Vector3(-1.3,1.84,.06))),b=project(pack.localToWorld(new THREE.Vector3(1.3,1.84,.06)));
+  const length=Math.hypot(b.x-a.x,b.y-a.y),angle=Math.atan2(b.y-a.y,b.x-a.x);
+  guide.style.left=a.x+'px';guide.style.top=a.y+'px';guide.style.width=length+'px';guide.style.transform='rotate('+angle+'rad)';
+ }
+ const button=$('mint-card');
+ if(!mintMode||button.hidden||selected<0)return;
+ button.style.visibility=phase==='settled'?'visible':'hidden';
+ let x,y;
+ if(renderFailed){const im=$('fallback').querySelectorAll('img')[selected];if(!im)return;const r=im.getBoundingClientRect();x=r.left+r.width/2;y=r.bottom;}
+ else{const c=cardList[selected];if(!c)return;c.group.updateMatrixWorld();const p=project(c.group.localToWorld(new THREE.Vector3(0,-1.5,0)));x=p.x;y=p.y;}
+ button.style.left=Math.max(90,Math.min(W-90,x))+'px';button.style.top=Math.min(H-70,y+10)+'px';
+}
 function selectCard(index){
  if(phase!=='settled')return;
- selected=index;selection=toggleCardSelection(selection,index,activePackSize);updateSelectionUI();
+ selected=index;selection=mintMode?new Set([index]):toggleCardSelection(selection,index,activePackSize);updateSelectionUI();
  const c=(renderFailed?fallbackCards:cardList)[index];announce(c.person.name+(selection.has(index)?' selected.':' deselected.'));sound('select',c.level);
 }
 function inspectCard(index){if(phase!=='settled'||renderFailed)return;selected=index;inspectSelected();}
@@ -370,6 +409,7 @@ function frame(now){if(disposed)return;requestAnimationFrame(frame);const dt=mot
   });
   const jitter=reduced?0:shake;renderer.domElement.style.transform=jitter>.08?`translate(${(Math.random()-.5)*jitter}px,${(Math.random()-.5)*jitter}px)`:'none';shake*=Math.pow(.012,dt);renderer.toneMappingExposure=1.13+exposureKick;exposureKick*=Math.pow(.01,dt);renderer.render(scene,camera);
  }
+ updateOverlays();
  drawFX(dt);
 }
 let fallbackCards=[];
@@ -385,7 +425,8 @@ function fallbackOpen(){fallbackCards=chosenCards().map(([i,l])=>({person:people
 function setMotion(value){reduced=value;$('motion').setAttribute('aria-pressed',String(value));if(value){openingTL?.isActive()&&openingTL.progress(1);resetTL?.progress(1);particles.length=0;rings.length=0;rays.length=0;flash=0;shake=0;}toast(value?'Reduced motion enabled.':'Full animation enabled.');}
 function bindUI(){
  document.querySelector('.preview-tag').textContent=labels.tag;$('legacy-count').hidden=!labels.showCount;$('collection-close').setAttribute('aria-label',labels.close);
- document.querySelector('.version').textContent=config.onRevealed&&!config.labels?'WEAVE MODE · VERIFIED PACK':labels.footer;
+ document.querySelector('.version').textContent=(config.onRevealed||mintMode)&&!config.labels?'WEAVE MODE · VERIFIED PACK':labels.footer;
+ $('mint-card').onclick=mintChosen;
  $('collection-close').onclick=config.onClose;
  $('sound').onclick=()=>{soundEnabled=!soundEnabled;updateSound();if(soundEnabled)sound('select');};
  $('lab-toggle').onclick=()=>{const open=$('lab').hidden;$('lab').hidden=!open;$('lab-toggle').setAttribute('aria-expanded',String(open));};

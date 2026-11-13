@@ -267,7 +267,7 @@ fn expired_npc_proof_cannot_open_a_mint_pack_or_reserve_a_figure() {
     let mut e = evidence(&c, id);
     e["matched_figures"] = json!(["euclid"]);
     let raw = e.to_string();
-    receipt(ALICE, START_MS + 60_000, c.get_params().mint_fee.0);
+    receipt(ALICE, START_MS + 60_000, 0);
     let storage = env::storage_usage();
     let tokens = c.next_token_id;
     rejects(|| { c.open_mint_pack(U64(id), raw.clone(), sign(&raw), "letters.teach".into()); }, "has expired");

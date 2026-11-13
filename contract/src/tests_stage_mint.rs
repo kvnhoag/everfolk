@@ -179,7 +179,7 @@ fn reservations_leave_no_room_for_a_racing_legacy_mint() {
     let mut params = c.get_params();
     params.drop_rate_bps = 10_000;
     assert!(c
-        .roll_outcome(&[4; 32], &parsed, &params, &c.get_catalog())
+        .roll_outcome(&[4; 32], &parsed, &params, &c.get_catalog(), "letters.teach")
         .figure
         .is_none());
     finish(&mut c, id);

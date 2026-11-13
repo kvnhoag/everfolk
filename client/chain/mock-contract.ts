@@ -6,6 +6,7 @@ import type { Category, FigureId } from "../../chain/ids.ts";
 import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL_FEE_YOCTO } from "../../chain/stage-figures.ts";
 import type { Draw, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack, StageMintQuote } from "../../chain/types.ts";
 import { packCardCount } from "../../chain/pack-count.ts";
+import { designKey, openRarityWeights } from "../../chain/rarity-caps.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
 import {
@@ -111,16 +112,30 @@ function assertEvidence(life: LifeView, evidence: Evidence, npcActionId: string,
   if (groupOfNpcAction(npcActionId) !== evidence.career_group) throw new Error("This action does not belong to the life's career");
 }
 
-async function rollOutcome(state: MockState, seed: string, evidence: Evidence) {
+/** Minted copies plus copies held in opened packs, for one design and rarity (chain/rarity-caps.ts). */
+function rarityTaken(state: MockState, design: string, rarity: number): number {
+  let taken = 0;
+  for (const token of state.tokens.values()) if (token.rarity === rarity && designKey(token.figure_id, token.action_id) === design) taken++;
+  for (const pack of state.packs.values()) for (const card of pack.view.cards) if (card.rarity === rarity && designKey(card.figure_id, card.action_id) === design) taken++;
+  return taken;
+}
+
+function openWeights(state: MockState, design: string, weights: readonly bigint[]): bigint[] {
+  return openRarityWeights(weights.map(Number), rarity => rarityTaken(state, design, rarity)).map(BigInt);
+}
+
+async function rollOutcome(state: MockState, seed: string, evidence: Evidence, npcActionId: string) {
   let figure: FigureId | null = null;
   for (const candidate of evidence.matched_figures) {
     const minted = (state.figureCopies.get(candidate)?.length ?? 0) + [...state.packs.values()].reduce((n, p) => n + p.view.cards.filter(c => c.figure_id === candidate).length, 0);
-    if (minted < state.params.figureSupplyCap && (await roll(seed, `drop:${candidate}`)) % 10_000n < BigInt(state.params.dropRateBps)) {
+    const hasRarity = openWeights(state, designKey(candidate, npcActionId), FIGURE_RARITY_WEIGHTS).some(weight => weight > 0n);
+    if (minted < state.params.figureSupplyCap && hasRarity && (await roll(seed, `drop:${candidate}`)) % 10_000n < BigInt(state.params.dropRateBps)) {
       figure = candidate;
       break;
     }
   }
-  const rarity = weightedPick(figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS, await roll(seed, "rarity")) ?? 0;
+  const weights = openWeights(state, designKey(figure, npcActionId), figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS);
+  const rarity = weightedPick(weights, await roll(seed, "rarity")) ?? 0;
   const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
   const affection = Math.max(1, Math.min(100, 1 + Number((await roll(seed, "aff")) % 100n) + Math.trunc((bonds - 50) / 5)));
   return { figure, rarity, affection };
@@ -132,7 +147,7 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
   assertEvidence(life, evidence, npcActionId, state.params.now());
   const evidenceHash = await sha256Hex(signed.evidence_json);
   if (state.packs.has(lifeId) && !chosen) throw new Error("Choose a card from the open mint pack");
-  const { figure, rarity, affection } = chosen ? { figure: chosen.figure_id, rarity: chosen.rarity, affection: chosen.affection } : await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence);
+  const { figure, rarity, affection } = chosen ? { figure: chosen.figure_id, rarity: chosen.rarity, affection: chosen.affection } : await rollOutcome(state, await sha256Hex(`${life.seed}:${evidenceHash}`), evidence, npcActionId);
   const actionId = figure ? FIGURE_ACTIONS[figure][0] : npcActionId;
   const kind = figure ? "figure" : "npc";
   const category = figure ? null : categoryOfNpcAction(npcActionId);
@@ -201,7 +216,7 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
       stage_record: stageFig.stageRecord,
     };
   }
-  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}`), evidence);
+  const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}`), evidence, action);
   return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action };
 }
 
@@ -281,12 +296,12 @@ function bind(state: MockState, account: string): MockLivesContract {
     as: other => bind(state, other),
     seedToken: input => seedToken(state, input),
 
-    async mintTerms() { return { mint_fee: state.params.mintFee.toString(), source_share_bps: state.params.sourceMintShareBps, pack_version: 1 }; },
+    async mintTerms() { return { mint_fee: state.params.mintFee.toString(), source_share_bps: state.params.sourceMintShareBps, pack_version: 2 }; },
     async marketTerms() { return { ...DEFAULT_MARKET_TERMS }; },
     async mintPack(lifeId) { return copy(state.packs.get(lifeId)?.view ?? null); },
     async openMintPack(lifeId, signed, action) {
       const life = ownedAliveLife(state, account, lifeId);
-      if (state.packs.has(lifeId)) throw new Error("Resume your existing pack without paying again");
+      if (state.packs.has(lifeId)) throw new Error("This life already has an open pack; resume it to choose a card");
       const evidence = parseEvidence(signed);
       assertEvidence(life, evidence, action, state.params.now());
       const cardCount = packCardCount(evidence);
@@ -337,16 +352,8 @@ function bind(state: MockState, account: string): MockLivesContract {
     async abandonLife(lifeId) {
       const life = ownedAliveLife(state, account, lifeId);
       const pack = state.packs.get(lifeId);
+      // An unminted pack was never paid for: closing it just frees its cards.
       if (pack) {
-        // Account for a forfeited paid pack using the same split, without inventing an NFT.
-        const child = `closed:${lifeId}`;
-        payMintFee(state, child, pack.evidence.sources, BigInt(pack.view.total_fee));
-        for (const source of state.sources.get(child) ?? []) {
-          state.children.set(source.token_id, (state.children.get(source.token_id) ?? []).filter(id => id !== child));
-          const stats = state.stats.get(source.token_id);
-          if (stats) stats.lives_influenced--;
-        }
-        state.sources.delete(child);
         state.packs.delete(lifeId);
       }
       state.lives.delete(lifeId);

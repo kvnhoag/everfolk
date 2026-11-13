@@ -27,4 +27,6 @@ export interface BoosterSceneOptions {
   onReady?(): void;
   /** Verified packs continue to the contract's existing single-card decision UI. */
   onRevealed?(): void;
+  /** Weave packs: clicking a card shows `label` under it; pressing it mints that card. A rejection keeps the pack open. */
+  mint?: { label: string; busyLabel?: string; onMint(index: number): Promise<void> };
 }

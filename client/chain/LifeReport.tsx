@@ -65,8 +65,8 @@ export default function LifeReport({ report, walletPath = true, packMode = false
         </>
       ) : (
         <>
-          <p>{packMode ? packSummary : "Keep this life"} for {feeText} NEAR. {shaped ? `${sourceSharePercent}% goes to the source lives above, by their share. The rest goes to the protocol treasury.` : "No one shaped it, so the fee goes to the protocol treasury."}</p>
-          {packMode && <p>{revealSummary}, then choose one card from the opened pack to mint as your permanent Life NFT. Outcomes are final once opened. {walletPath ? "Your wallet confirms every payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
+          <p>{packMode ? `${packSummary} for free, then mint one card for ${feeText} NEAR.` : `Keep this life for ${feeText} NEAR.`} {shaped ? `${sourceSharePercent}% goes to the source lives above, by their share. The rest goes to the protocol treasury.` : "No one shaped it, so the fee goes to the protocol treasury."}</p>
+          {packMode && <p>{revealSummary}, then click the card you want and mint it as your permanent Life NFT. Outcomes are final once opened. {walletPath ? "Your wallet confirms the payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
           <fieldset className="life-report-actions" disabled={busy}>
             <legend>What will you do for the lives that meet you?</legend>
             {menu.map(option => <label key={option.id} className={option.id === selectedAction ? "is-selected" : ""}>
@@ -77,7 +77,7 @@ export default function LifeReport({ report, walletPath = true, packMode = false
           </fieldset>
           {error && <p className="chain-error" role="alert">{error}</p>}
           <div className="chain-actions">
-            <button className="chain-primary" type="button" disabled={busy || !selectedAction} onClick={onMint}>{busy ? (walletPath ? "Confirm in wallet…" : "Confirming…") : packMode ? `Open pack · ${feeText} NEAR` : `Mint for ${feeText} NEAR`}<span aria-hidden="true">→</span></button>
+            <button className="chain-primary" type="button" disabled={busy || !selectedAction} onClick={onMint}>{busy ? (walletPath ? "Confirm in wallet…" : "Confirming…") : packMode ? "Open pack · free" : `Mint for ${feeText} NEAR`}<span aria-hidden="true">→</span></button>
             <button className="chain-secondary" type="button" disabled={busy} onClick={onDecline}>Not this time</button>
           </div>
         </>

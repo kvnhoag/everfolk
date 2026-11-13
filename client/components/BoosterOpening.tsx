@@ -21,6 +21,7 @@ export default function BoosterOpening({ options }: { options: BoosterSceneOptio
         onSkip: () => latest.current.onSkip(),
         onClose: () => latest.current.onClose(),
         onRevealed: latest.current.onRevealed ? () => latest.current.onRevealed?.() : undefined,
+        mint: latest.current.mint ? { ...latest.current.mint, onMint: index => latest.current.mint!.onMint(index) } : undefined,
       });
     }).catch(() => { if (!cancelled) setError("The pack could not load. Close and try again."); });
     return () => { cancelled = true; dispose?.(); };

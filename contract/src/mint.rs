@@ -1,3 +1,4 @@
+use crate::rarity_caps::design_key;
 use crate::random::{block_seed, roll, weighted_pick};
 use crate::shares::compute_shares;
 use crate::types::*;
@@ -187,7 +188,7 @@ impl Contract {
         require!(life.status == LifeStatus::Minting, "This life is not awaiting its mint");
         let evidence: Evidence = serde_json::from_str(&request.evidence_json).expect("validated evidence");
         self.flush_mint_storage();
-        let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog);
+        let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog, &request.npc_action_id);
         let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
         let evidence_hash = env::sha256_array(request.evidence_json.as_bytes());
         let token_id = self.mint_token(&life.account_id, life_id.0, &evidence, &outcome, &request.npc_action_id, &shares, &evidence_hash, &request.params, &request.catalog);
@@ -263,17 +264,21 @@ impl Contract {
         );
     }
 
-    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig) -> Outcome {
+    /// Rolls a card. Sold-out rarities of its design (crate::rarity_caps) are skipped; the others keep their relative odds.
+    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig, npc_action_id: &str) -> Outcome {
         let figure = evidence
             .matched_figures
             .iter()
             .find(|figure| {
                 let minted = self.figure_copies.get(*figure).map(|copies| copies.len() as u32).unwrap_or(0);
                 let cap = catalog.figures.iter().find(|item| &item.figure_id == *figure).map(|item| item.supply_cap).unwrap_or(0);
-                minted + self.pack_reserved(figure) < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
+                let design = design_key(Some(figure.as_str()), npc_action_id);
+                let has_rarity = self.open_rarity_weights(&design, FIGURE_RARITY_WEIGHTS).iter().any(|w| *w > 0);
+                minted + self.pack_reserved(figure) < cap && has_rarity && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
             })
             .cloned();
-        let weights = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
+        let base = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
+        let weights = self.open_rarity_weights(&design_key(figure.as_deref(), npc_action_id), base);
         let rarity = weighted_pick(&weights, roll(seed, b"rarity")).expect("rarity weights") as u8;
         Outcome { figure, rarity, affection: affection(seed, evidence) }
     }
@@ -303,6 +308,7 @@ impl Contract {
         let action_id = figure.as_ref().map(|f| f.action_ids[0].clone()).unwrap_or_else(|| npc_action_id.to_string());
         let category = catalog.npc_actions.iter().find(|a| a.action_id == npc_action_id).map(|a| a.category.clone());
         let kind = self.record_kind(outcome);
+        self.count_minted_rarity(&design_key(outcome.figure.as_deref(), npc_action_id), outcome.rarity);
         let record = TokenRecord {
             kind,
             figure_id: outcome.figure.clone(),

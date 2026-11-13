@@ -211,12 +211,16 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       assertLifeId(lifeId);
       await assertEvidenceFor(lifeId, signed);
       if (!npcActionId) throw new Error("Choose your life's deed first.");
-      const terms = parseMintTerms(await view("mint_terms", {}));
-      return parseMintPack(await call("open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, terms.mint_fee));
+      // Opening is free; the fee it quotes is paid when a card is minted.
+      return parseMintPack(await call("open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }));
     },
     async chooseMintSlot(lifeId, slot) {
       assertLifeId(lifeId); assertSlot(slot);
-      return parseMintResult(await call("choose_mint_slot", { life_id: lifeId, slot }, ONE_YOCTO));
+      const pack = await view("get_mint_pack", { life_id: lifeId });
+      if (pack === null) throw new Error("Open this life's pack first.");
+      const fee = parseMintPack(pack).total_fee;
+      assertPrice(fee);
+      return parseMintResult(await call("choose_mint_slot", { life_id: lifeId, slot }, fee));
     },
     async figureCopies(figureId) { return parsePoolEntries(await view("figure_copies", { figure_id: figureId })); },
     async figureSupply(figureId) { return parseFigureSupply(await view("figure_supply", { figure_id: figureId })); },

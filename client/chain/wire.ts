@@ -96,7 +96,7 @@ export function parseMintFee(value: unknown): string {
 export function parseMintTerms(value: unknown): MintTerms {
   const terms = record(value, "mint terms", { mint_fee: "string", source_share_bps: "number", pack_version: "number" });
   yocto(terms.mint_fee, "mint fee");
-  if (terms.pack_version !== 1 || !Number.isInteger(terms.source_share_bps) || Number(terms.source_share_bps) < 0 || Number(terms.source_share_bps) > 10000) fail("mint terms");
+  if (terms.pack_version !== 2 || !Number.isInteger(terms.source_share_bps) || Number(terms.source_share_bps) < 0 || Number(terms.source_share_bps) > 10000) fail("mint terms");
   return terms as unknown as MintTerms;
 }
 export function parseMintPack(value: unknown): MintPack {
