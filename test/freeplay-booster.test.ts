@@ -114,6 +114,11 @@ test("different life seeds produce different booster card rolls", async () => {
   assert.notEqual(b1.pack.evidence_hash, b2.pack.evidence_hash);
 });
 
+test("only finished lives open a free pack", async () => {
+  const life = createMockLife("complete-life", "copyist");
+  await assert.rejects(createFreePlayBooster({ ...life, phase: "ready" }, mockWorld), /Complete this life/);
+});
+
 test("freeplay contract stub has fixed pack contents and blocks NFT minting", async () => {
   const life = createMockLife("seed-fixed-pack-test", "grain-dealer");
   const { pack, contract } = await createFreePlayBooster(life, mockWorld);

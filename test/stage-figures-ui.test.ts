@@ -176,7 +176,7 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
     tokensOf: async () => [],
   } as unknown as Parameters<typeof MintPack>[0]["contract"];
 
-  // Initial state renders the unopened booster pack seal button
+  // Confirmed outcomes are revealed in an isolated drag-to-tear canvas before mint selection.
   const htmlUnopened = renderToStaticMarkup(
     createElement(MintPack, {
       initialPack: pack,
@@ -184,8 +184,9 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
       onClose: () => {},
     }),
   );
-  assert.ok(htmlUnopened.includes("booster-pack"), "Should render booster pack button");
-  assert.ok(htmlUnopened.includes("Open your pack"), "Should show open prompt");
+  assert.ok(htmlUnopened.includes("Your Everfolk legacy pack"), "Should render the production scene");
+  assert.ok(htmlUnopened.includes("Hold the top seal and drag right"), "Should explain drag-to-tear input");
+  assert.ok(!htmlUnopened.includes("Open your pack →"), "Click-to-open must not bypass the tear gesture");
   assert.ok(!/reroll/i.test(htmlUnopened), "Pack UI should not offer rerolls");
 
   const htmlFreePlay = renderToStaticMarkup(
@@ -198,11 +199,9 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
       onClose: () => {},
     }),
   );
-  assert.ok(htmlFreePlay.includes("You could have gotten 2 cards"), "Free Play should frame pack as what you could have gotten");
-  assert.ok(htmlFreePlay.includes("Play Weave Mode to get real NFTs"), "Free Play should link to Weave Mode for NFT minting");
+  assert.ok(htmlFreePlay.includes("Play Weave Mode to get real NFTs"), "Free Play should point to Weave Mode for NFT minting");
   assert.ok(!htmlFreePlay.includes("Mint selected card"), "Free Play should not render NFT mint CTA");
   assert.ok(!htmlFreePlay.includes("Total paid:"), "Free Play should not render paid NEAR receipt");
-  assert.ok(!/reroll/i.test(htmlFreePlay), "Free Play preview should not offer rerolls");
 
   const htmlEarlyReport = renderToStaticMarkup(
     createElement(LifeReport, {

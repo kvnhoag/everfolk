@@ -58,7 +58,7 @@ test("sign-in panel offers email first and no chain words on the email step", ()
   assert.match(steps[2], /Setting up your account…/);
 });
 
-test("email sign-in falls back to the note without a Privy App ID", () => {
+test("email sign-in exposes its form but cannot submit without a configured provider", () => {
   assert.deepEqual(parseSignInConfig({ privyAppId: null, funding: false, dripYocto: "1" }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig({ privyAppId: "  " }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig("nonsense"), { privyAppId: null });
@@ -68,8 +68,9 @@ test("email sign-in falls back to the note without a Privy App ID", () => {
   assert.equal(emailButtonAction(true, () => {}), "open");
   assert.match(EMAIL_SIGN_IN_NOTE, /not connected/i);
   const html = renderToStaticMarkup(createElement(SignInPanel, { available: { email: false }, onEmail: flow, onWallet: noop, onClose() {} }));
-  assert.doesNotMatch(html, /Continue with email/);
-  assert.match(html, /Sign in with email/);
+  assert.match(html, /type="email"/);
+  assert.match(html, /type="submit" disabled=""/);
+  assert.match(html, /Email sign-in is not available yet/);
   assert.match(html, /Use a NEAR wallet/);
   assert.match(renderToStaticMarkup(createElement(EmailSignIn, { available: true, onOpen() {} })), /Sign in with email/);
 });

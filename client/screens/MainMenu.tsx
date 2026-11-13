@@ -1,7 +1,10 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { formatYear } from "../../src/calendar.ts";
-import type { LifeState, WorldPack } from "../../src/types.ts";
+import type { LifeState } from "../../src/types.ts";
 import SiteNav from "../components/SiteNav.tsx";
+import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
+import { errorText, type ChainBackend } from "../chain/chain-backend.ts";
+import SignInPanel, { EMAIL_UNAVAILABLE } from "../chain/SignInPanel.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import "../homepage/homepage.css";
@@ -14,34 +17,101 @@ import TutorialButton from "../components/TutorialButton.tsx";
 export interface MainMenuProps {
   /** A ranked life is in progress: it can only be continued, never replaced from here. */
   rankedLife?: boolean;
-  world: WorldPack;
   life: LifeState;
   hasBegun: boolean;
   hasRevealedStats: boolean;
   onBegin(): void;
   onContinue(): void;
-  onWorlds?(): void;
-  onPastLives(): void;
-  onLegacy?(): void;
-  onSources(): void;
   notice?: string;
   active?: boolean;
+  chainBackend?: ChainBackend | null;
+}
+
+/** The home header also reaches the NPC companions and the wiki, which have no place in the game header. */
+const HOME_EXTRA_LINKS = [{ href: "/npc", label: "NPC companions" }, { href: "/wiki", label: "Wiki" }] as const;
+
+function HomeNotice({ notice, error }: { notice?: string; error?: string }) {
+  if (!notice && !error) return null;
+  return <div className="ef-home-notice-stack">
+    {notice && <p className="ef-home-notice" role="status">{notice}</p>}
+    {error && <p className="ef-home-notice" role="alert">{error}</p>}
+  </div>;
+}
+
+const unavailableEmailFlow = {
+  async sendCode() { throw new Error(EMAIL_UNAVAILABLE); },
+  async verify() { throw new Error(EMAIL_UNAVAILABLE); },
+};
+
+function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notice?: string }) {
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const [error, setError] = useState("");
+  const live = backend?.mode === "live" ? backend : null;
+  const signIn = live?.signin;
+  const enterWeave = () => { window.location.hash = "#weave"; };
+
+  async function connectWallet() {
+    if (!live) return;
+    setConnecting(true);
+    setError("");
+    try {
+      await (signIn?.useWallet ?? live.connect)();
+      enterWeave();
+    } catch (cause) {
+      setError(errorText(cause, "The NEAR wallet could not connect."));
+    } finally {
+      setConnecting(false);
+    }
+  }
+
+  if (live?.accountId) return <>
+    <button className="ef-home-auth-button" type="button" onClick={enterWeave}>Enter Weave Mode</button>
+    <HomeNotice notice={notice} />
+  </>;
+
+  const signInNotice = !live ? "Weave Mode sign-in is unavailable right now."
+    : !signIn?.available.email ? "Email sign-in is unavailable on this server." : undefined;
+
+  return <>
+    <button className="ef-home-auth-button" type="button" disabled={!live || connecting || emailOpen} onClick={() => { void connectWallet(); }}>
+      {connecting ? "Connecting…" : "Connect with NEAR wallet"}
+    </button>
+    <div className="ef-home-auth-divider"><span>or</span></div>
+    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
+      Log in with email
+    </button>
+    <HomeNotice notice={notice || signInNotice} error={error} />
+    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in"
+      ref={dialog => { if (dialog && !dialog.open) dialog.showModal(); }}
+      onClose={() => setEmailOpen(false)}>
+      <SignInPanel available={signIn?.available ?? { email: false }} onEmail={signIn?.emailFlow ?? unavailableEmailFlow}
+        onSuccess={() => { setEmailOpen(false); enterWeave(); }}
+        onWallet={async () => {
+          if (!live) throw new Error("Sign-in could not connect. Please try again.");
+          await (signIn?.useWallet ?? live.connect)(); enterWeave();
+        }} onClose={() => setEmailOpen(false)} />
+    </dialog>}
+  </>;
 }
 
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
-export default function MainMenu({ rankedLife = false, world, life, hasBegun, hasRevealedStats, onBegin, onContinue, onWorlds, onPastLives, onLegacy, onSources, notice, active = true }: MainMenuProps) {
+export default function MainMenu({ rankedLife = false, life, hasBegun, hasRevealedStats, onBegin, onContinue, notice, active = true, chainBackend }: MainMenuProps) {
   const lightRoot = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
+
   const headingId = useId();
   const saveId = useId();
+  const [weaveEnabled, setWeaveEnabled] = useState(true);
   const motion = useCoastMotion();
   const running = motion.enabled && !motion.reduced;
   useLuminousLight(lightRoot, running && active);
   const ended = life.phase === "ended";
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
-  const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Begin your life";
-  const primaryAction = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
+  const openWeave = !rankedLife && weaveEnabled;
+  const primaryLabel = rankedLife ? "Return to Weave Mode" : continuing ? "Continue your life" : ended ? "Begin a new life" : "Play as guest";
+  const enterFreeLife = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
@@ -49,14 +119,20 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
     <LivingCoast running={running} active={active} />
     <div className="ef-light-air" aria-hidden="true">{Array.from({length:8}, (_,i) => <i key={i} className="ef-light-mote" />)}</div>
     <div className="ef-home-shell">
-      <header className="ef-home-weave-bar">
+      <header className="ef-home-weave-bar ef-home-top-bar">
         <div className="ef-home-weave-bar-main">
           <a className="ef-home-weave-brand" href="#" aria-label="Everfolk home">
             <EverfolkBrand tone="cream" />
           </a>
-          <SiteNav className="ef-home-weave-links" onPlay={primaryAction} />
+          <SiteNav className="ef-home-weave-links" onPlay={enterFreeLife} extra={HOME_EXTRA_LINKS} />
         </div>
-        <TutorialButton tone="dark" />
+        <div className="ef-home-settings">
+          <TutorialButton tone="dark" />
+          <GameMusicPlayer variant="home" />
+          <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
+            <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
+          </button>
+        </div>
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
@@ -73,31 +149,20 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
             <div><span>{ended ? "YOUR LAST STORY" : "A STORY IN PROGRESS"}</span><strong>{life.character?.name ?? "Your character"}</strong></div>
             <span className="ef-home-save-age">Age {life.age}<small>{formatYear(life.year)}</small></span>
           </div>}
-          {notice && <p className="ef-home-notice" role="status">{notice}</p>}
           <div className="ef-home-actions">
-            <button className="ef-home-primary" type="button" onClick={primaryAction} aria-describedby={continuing ? saveId : undefined}>
-              <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
-            </button>
-            {!rankedLife && <a className="ef-home-weave-cta" href="#weave"><span>Weave Mode</span><small>Play a verified life and mint real NFTs on NEAR</small><span aria-hidden="true">→</span></a>}
+            {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry checked={weaveEnabled} onChange={setWeaveEnabled} /></div>}
+            <div className="ef-home-mode-actions">
+              {openWeave ? <WeaveSignIn backend={chainBackend} notice={notice} /> : <>
+                <button className="ef-home-primary" type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
+                  <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
+                </button>
+                <HomeNotice notice={notice} />
+              </>}
+            </div>
             {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>
         </section>
       </div>
-      <footer className="ef-home-utility-bar">
-        <nav className="ef-home-links" aria-label="Main menu">
-          <a href="/skills">Skill tree</a>
-          <a href="/npc">NPC companions</a>
-          {onWorlds && <button type="button" onClick={onWorlds}>Choose a world</button>}
-          <button type="button" onClick={onPastLives}>Past lives</button>
-          {onLegacy && <button type="button" onClick={onLegacy}>Legacy gallery</button>}
-          <button type="button" onClick={onSources}>History &amp; sources</button>
-        </nav>
-        <div className="ef-home-era"><span className="ef-home-diamond" aria-hidden="true" /><span>THE ANCIENT WORLD</span><strong>{formatYear(world.startYear)}</strong></div>
-        <GameMusicPlayer variant="home" />
-        <button type="button" className="ef-motion-toggle" onClick={motion.toggle} aria-label="Animate the coastal scene" aria-pressed={running} disabled={motion.reduced} title={motion.reduced ? "Reduced motion follows your device preference." : "Pause or resume the living coast"}>
-          <span className="ef-motion-icon" aria-hidden="true">{running ? "Ⅱ" : "▷"}</span><span>{motion.reduced ? "Reduced motion" : running ? "Scene motion on" : "Scene motion off"}</span>
-        </button>
-      </footer>
     </div>
   </main>;
 }

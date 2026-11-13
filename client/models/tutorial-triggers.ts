@@ -113,7 +113,7 @@ export interface GameTutorialInput {
   panel: string | null;
   characterSection: string | null;
   decisionOpen: boolean;
-  /** A popup without hints covers the game (new life, loans, the moments pack, the world library). */
+  /** A popup without hints covers the game (new life, loans, the legacy pack, the world library). */
   blockingDialog: boolean;
   life: TutorialLifeFacts;
 }

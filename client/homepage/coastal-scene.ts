@@ -689,14 +689,18 @@ function foreground() {
     c.fillStyle = '#32343a'; c.fillRect(x + 21, y + 3, 1, 18);
   }
 
-  // Foreground stone mooring bollards on the western breakwater
-  c.fillStyle = '#1b242c'; c.fillRect(38, 377, 10, 16);
-  c.fillStyle = '#38373c'; c.fillRect(39, 377, 8, 15);
-  c.fillStyle = '#d8b284'; c.fillRect(39, 376, 8, 2);
-
-  c.fillStyle = '#1b242c'; c.fillRect(142, 391, 9, 14);
-  c.fillStyle = '#38373c'; c.fillRect(143, 391, 7, 13);
-  c.fillStyle = '#d8b284'; c.fillRect(143, 390, 7, 2);
+  // Each bollard sits on a stone footing inside the coping line.
+  for (const { x, baseY, width, height } of [
+    { x: 38, baseY: 401, width: 10, height: 16 },
+    { x: 142, baseY: 414, width: 9, height: 14 },
+  ]) {
+    const top = baseY - height;
+    c.fillStyle = '#302e32'; c.fillRect(x - 2, baseY - 1, width + 4, 3);
+    c.fillStyle = '#1b242c'; c.fillRect(x, top, width, height);
+    c.fillStyle = '#38373c'; c.fillRect(x + 1, top + 1, width - 2, height - 2);
+    c.fillStyle = '#776258'; c.fillRect(x + 1, top + 2, 1, height - 4);
+    c.fillStyle = '#d8b284'; c.fillRect(x + 1, top, width - 2, 2);
+  }
 
   return canvas;
 }

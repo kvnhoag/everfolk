@@ -158,6 +158,12 @@ function twoSentences(text: string): string {
   return text.trim().split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
 }
 
+const EVENT_BACKDROPS: Readonly<Partial<Record<string, { file: string; label: string }>>> = {
+  "child-route-care-floating-reed": { file: "reed-washing-court", label: "A reed on the water" },
+  "child-route-learning-shadow-marks": { file: "shadow-mark-terrace", label: "Measuring shadows on the terrace" },
+  "child-route-training-vessel-packing": { file: "pottery-packing-room", label: "Packing a vessel in the workshop" },
+};
+
 /** Presentation only. No mutation, random draw, stored progress or engine command. */
 export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: SceneContext, options: BannerOptions = {}): LifeBanner {
   const stage = avatarStage(life.age), stageLabel = BANNER_STAGE_LABELS[stage];
@@ -165,6 +171,7 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
   let caption: string | undefined;
   let situationLabel: string | undefined;
   let motion: MotionId | undefined;
+  let backdrop: { file: string; label: string } | undefined;
   const ending = life.phase === "ended" ? world.endings.find(item => item.id === life.endingId) : undefined;
   // The dashboard must not turn a proposed route into a completed scene.
   const candidate = context ?? resolveLifeScenes(life, world, options.eventVisuals)[0];
@@ -199,6 +206,8 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
       situation = situationForContext(accepted, life, world);
       caption = accepted.caption;
       motion = accepted.motion;
+      backdrop = accepted.eventId ? EVENT_BACKDROPS[accepted.eventId] : undefined;
+      situationLabel = backdrop?.label;
     } else {
       situation = fallbackSituation(life);
       if (life.age < 3) {
@@ -214,7 +223,7 @@ export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: S
     caption: twoSentences(caption ?? definition.caption),
     alt: `Layered pixel scene: ${stageLabel.toLowerCase()}, ${(situationLabel ?? definition.label).toLowerCase()}`,
     motion: motion ?? (life.age < 3 && situation === "home" ? "cradle" : definition.motion),
-    assetSrc: `/assets/pixel/banners/${situation}.svg`,
+    assetSrc: backdrop ? `/assets/pixel/banners/events/${backdrop.file}.svg` : `/assets/pixel/banners/${situation}.svg`,
     actorVisible: situation !== "memorial",
     actorPose: life.age < 3 ? "cradle" : definition.pose,
   };

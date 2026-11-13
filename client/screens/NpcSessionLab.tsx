@@ -255,12 +255,12 @@ export default function NpcSessionLab() {
               <h2>A life remembered</h2>
               <p>
                 {cardCount > 0
-                  ? `Your NPCs do not mint NFTs. Preview the ${cardCount} fate ${cardCount === 1 ? "card" : "cards"} you could have gotten.`
-                  : "This life ended before adulthood (age 18), so no fate cards were earned."}
+                  ? `Your NPCs do not mint NFTs. Open this life's ${cardCount}-card legacy pack and keep local collectible cards.`
+                  : "This life ended before adulthood (age 18), so no legacy pack was earned."}
               </p>
               {cardCount > 0 && (
                 <button onClick={() => setBooster(true)}>
-                  You could have gotten {cardCount} {cardCount === 1 ? "card" : "cards"}
+                  Open legacy pack · {cardCount} {cardCount === 1 ? "card" : "cards"}
                 </button>
               )}
               <button

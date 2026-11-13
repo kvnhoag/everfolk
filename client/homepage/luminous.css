@@ -6,20 +6,18 @@
 .ef-title-glint:before{width:1px;height:11px;left:1px;top:-4px}
 .ef-title-glint:after{width:9px;height:1px;left:-3px;top:1px}
 .ef-title-glint:nth-of-type(1){left:8%;top:17%}.ef-title-glint:nth-of-type(2){left:65%;top:26%;width:2px;height:2px}.ef-title-glint:nth-of-type(3){left:91%;top:77%}
-.ef-home-eyebrow,.ef-home-brand,.ef-home-era strong{color:#fae6be;text-shadow:0 1px 2px #09151c,0 2px 6px #09151ce6,0 0 14px #102028aa}
-.ef-home-brand svg{filter:drop-shadow(0 0 4px #f6d08b77) drop-shadow(0 0 12px #e6aa462a)}
+.ef-home-eyebrow{color:#fae6be;text-shadow:0 1px 2px #09151c,0 2px 6px #09151ce6,0 0 14px #102028aa}
 .ef-home-world-note strong{color:#f5deae;text-shadow:0 1px 0 #8c7048,0 2px 5px #182b32,0 0 14px #e4b86a3d}
 .ef-home-rule{opacity:.92;filter:drop-shadow(0 1px 3px #0d1d24cc)}
 .ef-home-rule span:first-child{background:#e7e0c9}
 .ef-home-rule span:last-child{background:#e7e0c9}
-.ef-home-utility-bar,.ef-home-weave-bar{border-color:#dfbd7d3d}
+.ef-home-weave-bar{border-color:#dfbd7d3d}
 .ef-home-primary{overflow:hidden;border-color:#fff0c8;background:#f5ddb0;box-shadow:inset 0 1px 0 #fff9df,inset 0 0 0 3px #e5c18a,inset 0 0 0 4px #a67a425c,0 4px 0 #8a683e,0 7px 20px #101f2d66,0 0 22px #e5b36927}
 .ef-home-primary:hover{background:#fae8c0;border-color:#fff8dc;box-shadow:inset 0 1px #fffef1,inset 0 0 0 3px #edcf9d,inset 0 0 0 4px #bc96544d,0 6px 0 #8a683e,0 10px 25px #101f2d66,0 0 30px #efbd7150}
 .ef-home-primary:active{box-shadow:inset 0 1px 4px #9c744755,inset 0 0 0 3px #e5c18a,0 1px 0 #8a683e,0 0 16px #e5b36930}
-.ef-motion-icon,.ef-home-diamond{border-color:#eac8879c;box-shadow:inset 0 1px #ffe3ac26,0 0 9px #e8b4641a}
-.ef-home-links>button,.ef-home-secondary,.ef-motion-toggle{transition:color .3s,text-shadow .3s,filter .3s}
-.ef-home-links>button:hover,.ef-home-secondary:hover,.ef-motion-toggle:hover:not(:disabled){color:#ffedc3;text-shadow:0 0 9px #f3cb7b66}
-.ef-home-links>button>span{filter:drop-shadow(0 0 4px #e8b76633)}
+.ef-motion-icon{border-color:#eac8879c;box-shadow:inset 0 1px #ffe3ac26,0 0 9px #e8b4641a}
+.ef-home-secondary,.ef-motion-toggle{transition:color .3s,text-shadow .3s,filter .3s}
+.ef-home-secondary:hover,.ef-motion-toggle:hover:not(:disabled){color:#ffedc3;text-shadow:0 0 9px #f3cb7b66}
 .ef-home .main-menu-ranked>button:not(:disabled){border-color:#d7b57a9c;box-shadow:inset 0 1px #f9d99c22,0 0 13px #e2b56112,0 2px 0 #142b31}
 .ef-light-air{position:absolute;z-index:1;inset:0;pointer-events:none;overflow:hidden}
 .ef-light-mote{position:absolute;width:2px;height:2px;background:#ffe6a6;opacity:0;box-shadow:0 0 6px #ffdb8a66}

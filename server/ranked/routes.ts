@@ -128,8 +128,11 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
   try {
     if (path === "/api/ranked/config") {
       if (request.method !== "GET") return json({ error: "Method not allowed." }, 405);
-      const { secret, contractId, rpcUrl } = configured(env);
-      const publicKey = deps.verifier ? (await deps.verifier(env)).publicKey : (await createEvidenceSigner(secret)).publicKey;
+      const contractId = env.RANKED_CONTRACT_ID;
+      if (!contractId) throw new RouteError(503, "Ranked lives are not set up on this server yet.");
+      const rpcUrl = env.NEAR_RPC_URL || DEFAULT_RPC_URL;
+      const secret = env.RANKED_VERIFIER_SECRET;
+      const publicKey = secret ? (deps.verifier ? (await deps.verifier(env)).publicKey : (await createEvidenceSigner(secret)).publicKey) : null;
       return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: DEMO_WORLD_VERSION, verifier_public_key: publicKey });
     }
     if (path === "/api/ranked/verify") {

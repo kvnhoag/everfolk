@@ -54,6 +54,8 @@ import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import SiteNav from "../components/SiteNav.tsx";
 import LifeEndingBanner from "../components/LifeEndingBanner.tsx";
 import { lifePackCardCount } from "../../chain/pack-count.ts";
+import { readBoosterCollection } from "../storage/booster-collection.ts";
+import { legacyLifeKey as boosterLifeKey } from "../storage/legacy-store.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "../models/source-copy.ts";
 import SkillTree from "../components/SkillTree.tsx";
@@ -156,7 +158,7 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
 export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null;
 export type CharacterSection = "career" | "wealth" | "children" | "skills" | "relationships";
 
-function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
   const [panel, setPanel] = useState<AppPanel>(initialPanel);
   const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [restartOpen, setRestartOpen] = useState(false);
@@ -172,6 +174,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
   const [loanRequest, setLoanRequest] = useState<LoanRequest | null>(null);
   const [loanWarningOpen, setLoanWarningOpen] = useState(false);
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
+  const offeredBooster = useRef("");
   const loanWarningsSeen = useRef(new Set<string>());
   // Tutorial hints read the screen and the life; they never pause play or change screens.
   const [characterTab, setCharacterTab] = useState<string | null>(null);
@@ -350,6 +353,17 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     }
   }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen]);
 
+  useEffect(() => {
+    if (ranked || life.phase !== "ended" || menuOpen || panel || restartOpen || birthPopoverOpen) return;
+    if (lifePackCardCount(life, world) === 0) return; // Lives that end before 18 have no pack to offer.
+    const key = boosterLifeKey(life);
+    if (offeredBooster.current === key) return;
+    offeredBooster.current = key;
+    try {
+      if (!readBoosterCollection(window.localStorage).some(pack => pack.lifeKey === key)) setFreePlayBoosterOpen(true);
+    } catch { /* Keep the memorial and manual pack action available when storage fails. */ }
+  }, [ranked, life, world, menuOpen, panel, restartOpen, birthPopoverOpen]);
+
   function openMainMenu() {
     game.pauseLife();
     closeDialog();
@@ -463,7 +477,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
       <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
       <div><button type="button" onClick={() => downloadLife(game.unreadableSave!, "everfolk-protected-save.json")}>Download original save</button><button type="button" onClick={game.resetUnreadableSave}>Replace protected save with this life</button></div>
     </aside>}
-    {menuOpen && <MainMenu life={life} world={world} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} onWorlds={onChooseWorld} onPastLives={() => setPanel("archive")} onLegacy={() => setPanel("legacy")} onSources={() => setPanel("sources")} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
+    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
