@@ -3934,6 +3934,96 @@
       "variantOf": "euclid-parent"
     },
     {
+      "id": "demetrius-parent-legendary",
+      "slug": "demetrius-parent-legendary",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "title": "Demetrius the Besieger",
+      "canonicalTitle": "Demetrius the Besieger",
+      "displayTitle": "Demetrius the Besieger",
+      "subtitle": "King of Siegecraft",
+      "bodyTitle": "Ambition Against the Walls",
+      "bodyText": "Demetrius Poliorcetes pursued kingship through bold campaigns and spectacular siege machinery. His famous assault on Rhodes ended in negotiation, yet its scale fixed his enduring reputation as the Besieger of Cities.",
+      "rarity": "legendary",
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 55,
+      "src": "/assets/cards/collection-v14/demetrius-parent-legendary-footerless.webp",
+      "footerlessSrc": "/assets/cards/collection-v14/demetrius-parent-legendary-footerless.webp",
+      "thumbnailSrc": "/assets/cards/collection-v14/demetrius-parent-legendary-footerless.webp",
+      "portraitSrc": "/assets/cards/collection-v14/demetrius-parent-portrait.webp",
+      "symbolSha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+      "sha256": "71e99a3d7054b53dfa49357e546453eb538944f9a6d630fd540ec0ab41dd7733",
+      "width": 900,
+      "height": 1260,
+      "variantOf": "demetrius-parent"
+    },
+    {
+      "id": "zeno-parent-legendary",
+      "slug": "zeno-parent-legendary",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "title": "Zeno of Citium",
+      "canonicalTitle": "Zeno of Citium",
+      "displayTitle": "Zeno of Citium",
+      "subtitle": "Founder of the Stoa",
+      "bodyTitle": "A Life Governed by Reason",
+      "bodyText": "Teaching at Athens' Painted Porch, Zeno founded the Stoic school around 300 BCE. His philosophy placed virtue and reason at the centre of a demanding vision of how a life should be lived.",
+      "rarity": "legendary",
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 73,
+      "src": "/assets/cards/collection-v14/zeno-parent-legendary-footerless.webp",
+      "footerlessSrc": "/assets/cards/collection-v14/zeno-parent-legendary-footerless.webp",
+      "thumbnailSrc": "/assets/cards/collection-v14/zeno-parent-legendary-footerless.webp",
+      "portraitSrc": "/assets/cards/collection-v14/zeno-parent-portrait.webp",
+      "symbolSha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+      "sha256": "4db0aa6cecf7e110aaf734641fdbd210f4eea3e5428a156eb2971eec3973bec4",
+      "width": 900,
+      "height": 1260,
+      "variantOf": "zeno-parent"
+    },
+    {
+      "id": "ptolemy-parent-legendary",
+      "slug": "ptolemy-parent-legendary",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "title": "Ptolemy I Soter",
+      "canonicalTitle": "Ptolemy I Soter",
+      "displayTitle": "Ptolemy I Soter",
+      "subtitle": "Founder of a Dynasty",
+      "bodyTitle": "A Kingdom Secured",
+      "bodyText": "A general of Alexander, Ptolemy secured Egypt after the conqueror's death and later ruled as king. His dynasty made Alexandria a royal capital and endured until the age of Cleopatra.",
+      "rarity": "legendary",
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 82,
+      "src": "/assets/cards/collection-v14/ptolemy-parent-legendary-footerless.webp",
+      "footerlessSrc": "/assets/cards/collection-v14/ptolemy-parent-legendary-footerless.webp",
+      "thumbnailSrc": "/assets/cards/collection-v14/ptolemy-parent-legendary-footerless.webp",
+      "portraitSrc": "/assets/cards/collection-v14/ptolemy-parent-portrait.webp",
+      "symbolSha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+      "sha256": "1afb9cf477978fa48dbf4c735bdbddd3436505179719edc6b4519b98cd15fec7",
+      "width": 900,
+      "height": 1260,
+      "variantOf": "ptolemy-parent"
+    },
+    {
       "id": "cleomenes-parent-common",
       "slug": "cleomenes-parent-common",
       "figureId": "cleomenes",
@@ -4057,7 +4147,7 @@
   "runtimeIntegrated": true,
   "losslessRGBAReadbackVerified": true,
   "outsideEditionChangedPixels": 0,
-  "totalBytes": 108480446,
+  "totalBytes": 109434434,
   "deliveries": [
     {
       "id": "alexander-parent",
@@ -9341,7 +9431,7 @@
         "sha256": "fb3ad310898ba4b92631440b073d4e4b8325d8b0137b4adbd12263ff0e72c444",
         "rgbaSha256": "faa10929c76c6c41c786ee7d970eb50b9f8f959f55f4290d1e85ff2ff7ca0eb7",
         "bytes": 215484,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9359,7 +9449,7 @@
         "sha256": "57b031d11effef379c32f4159ead344a4ce8a416bd462277c44827dce4e5723c",
         "rgbaSha256": "d731bf6a8e12791a0178b28063a274dd86bd00d730cd36a6b525b8b72c2ab385",
         "bytes": 217326,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9377,7 +9467,7 @@
         "sha256": "77d36ca75ce3128846bd2990840b90ec94bb98925e1b5e135d588948fde109c9",
         "rgbaSha256": "03fe9cf2e6bfd7d620fcb01f3ac5aa516ad9e29e0effd2c17e6a4321603ba613",
         "bytes": 215930,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9395,7 +9485,7 @@
         "sha256": "230c2bfed0548a3ef2e0824113bbdacb4382d43bad37deabc8573abf34b7b65d",
         "rgbaSha256": "8ba639c2eae5b457a4552f12d331b099b33494b63d0bbb1662e8b3a7ff740613",
         "bytes": 218062,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9413,7 +9503,7 @@
         "sha256": "0e0fcaf6769845bbeaf3d501f39156ed70a0145ed29f3eb416977556fee4bd1c",
         "rgbaSha256": "e5c288f15db0d7ac779539bb52b55306f4967ad13a832a824ba5ef9b6bf2e4bc",
         "bytes": 239166,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9431,7 +9521,7 @@
         "sha256": "b0bb6efe7925c3fbfbf1631043d7879969e97c15e5a4b09c279aecc9737932cf",
         "rgbaSha256": "6abf6493a82dd5a3e8a991fc0137ddebdfef95cba81c476fe148a3632c056038",
         "bytes": 241224,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9449,7 +9539,7 @@
         "sha256": "d1d281d607d7241008c12ca9edaf4a14fd971b236b84a29a806d02c8c98527f3",
         "rgbaSha256": "89b86cea0b4b2a8d8295b5e9a5a954ddaa07ac16127fa6a514819970a4e08999",
         "bytes": 239310,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9467,7 +9557,7 @@
         "sha256": "013f3f935c958c1792ebf378fc1c925f11a9e12cb5a580d62c0c7fc7ae845aed",
         "rgbaSha256": "043f4826b31b6d703a13056f2c437ae0311f0debd663577a027c3b30c59ddedd",
         "bytes": 241306,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9485,7 +9575,7 @@
         "sha256": "1434b84f1f4f90b88e0fafa1e2024c00cecfd57b02e7372361b93712f7e57706",
         "rgbaSha256": "15b5128b6a0d89785964046c0e19b9d96428d1289559d985b78a2831a621de30",
         "bytes": 241064,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9503,7 +9593,7 @@
         "sha256": "62bd6b69571e4dade444dc25d034830da9a86a3a0e52df70c7ef8cf79bc625d0",
         "rgbaSha256": "58733bbc47398c567ede455ee31ae5b3a7920b7759a9e4d00bcfad4e035d28ca",
         "bytes": 242334,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9521,7 +9611,7 @@
         "sha256": "b259f16311068206ec008ac2fd71c3df6395ab120f1f2904292dce9657d95e95",
         "rgbaSha256": "d9757bcc2cf3fd7a22e827b40546a55acd32fbd0e598afcb27c93e79037566b7",
         "bytes": 240500,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9539,6 +9629,60 @@
         "sha256": "c7f9866ed1d28c21f82cc1d23abe7b9f354116921e43a0e648b2eff1f9d4e9d7",
         "rgbaSha256": "21f0cc1a8302d425ce4c1acd80a8b6ea28884318d1a5c3377a3b54042767a3b9",
         "bytes": 242362,
+        "reused": true
+      }
+    },
+    {
+      "id": "demetrius-parent-legendary",
+      "variantOf": "demetrius-parent",
+      "rarity": "legendary",
+      "portraitSourceSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "symbolSha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredPixelDifferences": 0,
+      "footerless": {
+        "src": "/assets/cards/collection-v14/demetrius-parent-legendary-footerless.webp",
+        "width": 900,
+        "height": 1260,
+        "sha256": "71e99a3d7054b53dfa49357e546453eb538944f9a6d630fd540ec0ab41dd7733",
+        "rgbaSha256": "cae1e21f2cdb6bb993a27ecb3ae5a71322c2a12f406c7d395db9662ad09b962b",
+        "bytes": 336364,
+        "reused": false
+      }
+    },
+    {
+      "id": "zeno-parent-legendary",
+      "variantOf": "zeno-parent",
+      "rarity": "legendary",
+      "portraitSourceSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "symbolSha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredPixelDifferences": 0,
+      "footerless": {
+        "src": "/assets/cards/collection-v14/zeno-parent-legendary-footerless.webp",
+        "width": 900,
+        "height": 1260,
+        "sha256": "4db0aa6cecf7e110aaf734641fdbd210f4eea3e5428a156eb2971eec3973bec4",
+        "rgbaSha256": "8f989dee21bef4a047e103598e4480171e6ad84b1f9e34bfdc83e9088bc17d95",
+        "bytes": 304566,
+        "reused": false
+      }
+    },
+    {
+      "id": "ptolemy-parent-legendary",
+      "variantOf": "ptolemy-parent",
+      "rarity": "legendary",
+      "portraitSourceSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+      "symbolSha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+      "uncoveredPixelsChecked": 599644,
+      "uncoveredPixelDifferences": 0,
+      "footerless": {
+        "src": "/assets/cards/collection-v14/ptolemy-parent-legendary-footerless.webp",
+        "width": 900,
+        "height": 1260,
+        "sha256": "1afb9cf477978fa48dbf4c735bdbddd3436505179719edc6b4519b98cd15fec7",
+        "rgbaSha256": "f902513d51ab777e2ee63eb3fc8e0833e5099aa6df7a31a80391dc2ae3877dfa",
+        "bytes": 313058,
         "reused": false
       }
     },
@@ -9557,7 +9701,7 @@
         "sha256": "dd66f89dc1694261a3bf9a8c4858d9ea64779eb90a06e0fe4dc44e7d74b3897c",
         "rgbaSha256": "baa910c7ae0ec07d97ef0ed01995ba0927ef403304859918fe4ede50aa780e7c",
         "bytes": 242410,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9575,7 +9719,7 @@
         "sha256": "4ef67258e5f3fb2b215666fc4f854cda8ef1c7cbc5969c929c0851d661822479",
         "rgbaSha256": "87fcff0e6b2852ff71a55562f939060a63fcbc95a3ad86eccf4a39a0ce9cd18e",
         "bytes": 244218,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9593,7 +9737,7 @@
         "sha256": "abb62594dae67e868a3dab2eeacf958e4dd296032e4cc942b6c9f82529ebf992",
         "rgbaSha256": "645f784739616306732b6bd474057cd7b409113e9c571fd6eec3df4afb91c52a",
         "bytes": 241580,
-        "reused": false
+        "reused": true
       }
     },
     {
@@ -9611,7 +9755,7 @@
         "sha256": "ceeca7b671557a8da999c32cfa4e68216b5f5137de5b4f27ddc3183bbd650f68",
         "rgbaSha256": "76508d9ec4e20eeeee222bc27c59d2ac8196ae37decc913ff8f8bc5dcc13c61d",
         "bytes": 331254,
-        "reused": false
+        "reused": true
       }
     }
   ]

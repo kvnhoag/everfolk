@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "id": "everfolk-card-art-handoff-v1",
-  "kitManifestSha256": "730fbfded3c7654f94ffcc0f39a3b2b6be1c538f29a8c3baf416715955b7966a",
+  "kitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863",
   "cards": 117,
-  "runtimeVariants": 16,
+  "runtimeVariants": 19,
   "blankFrames": 5,
   "perCardBriefs": 117,
   "userReferenceImages": 3,
-  "totalBytes": 71779972,
+  "totalBytes": 72663941,
   "files": [
     {
       "path": ".gitignore",
@@ -606,8 +606,8 @@
     },
     {
       "path": "data/cards.json",
-      "bytes": 439008,
-      "sha256": "730fbfded3c7654f94ffcc0f39a3b2b6be1c538f29a8c3baf416715955b7966a"
+      "bytes": 448976,
+      "sha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863"
     },
     {
       "path": "data/geometry.json",
@@ -621,13 +621,13 @@
     },
     {
       "path": "data/verification.json",
-      "bytes": 47297,
-      "sha256": "36158c344139a3d77b1640224b8d34d103110e5930ce6a8f996ac0664c4a690c"
+      "bytes": 48109,
+      "sha256": "e5c50d929d019227070a7aef9cc82831ddaba1287e01281e7ffaf11c2d6e2b5e"
     },
     {
       "path": "docs/artist-quickstart.md",
-      "bytes": 7583,
-      "sha256": "736f2f06782d5dc780041d224003769f33252428b5b00955c62e08b476be07de"
+      "bytes": 7835,
+      "sha256": "ef645adcd31a301376c4b210990dcc12febb715fff68eff1dead4090dd14b3dc"
     },
     {
       "path": "docs/prompt-templates.md",
@@ -636,8 +636,8 @@
     },
     {
       "path": "docs/system-map.md",
-      "bytes": 6030,
-      "sha256": "f47ef86d0129f3e1a111bd5f016a11b4fd31df0f44c9df404361ce0ce81fcb9f"
+      "bytes": 6279,
+      "sha256": "c2e1e36de7d2cf80e6c3aadc2388374467b78c076ab89d7eefa385a096f89f64"
     },
     {
       "path": "examples/replacements.json",
@@ -1133,6 +1133,16 @@
       "path": "frames/cards/demetrius-parent-footerless.png",
       "bytes": 58431,
       "sha256": "62e4905d00baecec6e8616ccaff8bb1586fedc3c6e69acc5627c7bf15bb4ffab"
+    },
+    {
+      "path": "frames/cards/demetrius-parent-legendary-footerless.png",
+      "bytes": 142205,
+      "sha256": "4ae7fa0f4bee1cdda00949342e0e5ecde74e74b35039db2349b6c8c123ab6810"
+    },
+    {
+      "path": "frames/cards/demetrius-parent-legendary.png",
+      "bytes": 143369,
+      "sha256": "15be7972671ee3177f3df0eebd8565fbf95584a0febff867fc56a15f01f1f8e9"
     },
     {
       "path": "frames/cards/demetrius-parent.png",
@@ -1715,6 +1725,16 @@
       "sha256": "00378fa8e3045b87bfdc1f08e51bf64d05726a4aef0c1c6519b7facccc3e777d"
     },
     {
+      "path": "frames/cards/ptolemy-parent-legendary-footerless.png",
+      "bytes": 133901,
+      "sha256": "7ef46c558dfca7d836bfc79d079877df379e50778a9ff13cbbdabb55a25ae2a1"
+    },
+    {
+      "path": "frames/cards/ptolemy-parent-legendary.png",
+      "bytes": 135064,
+      "sha256": "efc125c9ff9abd6177671302b31a4fd8e8b8fe6f9537a1d5d039c82e306429f2"
+    },
+    {
       "path": "frames/cards/ptolemy-parent.png",
       "bytes": 54220,
       "sha256": "0448c4061fed85a36d0745abdf02897fafd9ca48a105e1e6b777dd100ffc21e5"
@@ -1983,6 +2003,16 @@
       "path": "frames/cards/zeno-parent-footerless.png",
       "bytes": 51247,
       "sha256": "8e4af56e888f29ed617ef3486b30b7a1d825db0f7a541bc3289f8383f8a5dd89"
+    },
+    {
+      "path": "frames/cards/zeno-parent-legendary-footerless.png",
+      "bytes": 132586,
+      "sha256": "7dd735e6bd583f3f80ec487d3bbe11a6ae64f0cfb3d568e94d5ce66d914a16fa"
+    },
+    {
+      "path": "frames/cards/zeno-parent-legendary.png",
+      "bytes": 133717,
+      "sha256": "ff9f1c3f32f6660a73c54c161188511e0fe2e42fc33ea369f55a7fa821fdf9d9"
     },
     {
       "path": "frames/cards/zeno-parent.png",
@@ -2473,6 +2503,16 @@
       "path": "frames/svg/demetrius-parent-footerless.svg",
       "bytes": 12687,
       "sha256": "d14210a9a8c9fb800aaa5361e2cfba750b151909d802cbe2d5e7c9052c6bc73d"
+    },
+    {
+      "path": "frames/svg/demetrius-parent-legendary-footerless.svg",
+      "bytes": 8892,
+      "sha256": "39400ca5fd29ad14fb35ad7e10e67315932e4aa3abb4cc640a3aeb45b6215b35"
+    },
+    {
+      "path": "frames/svg/demetrius-parent-legendary.svg",
+      "bytes": 9133,
+      "sha256": "bf046868dab3ea38bad5d2c02a1ae80801cc8ae6065f3a117089168489dc87c2"
     },
     {
       "path": "frames/svg/demetrius-parent.svg",
@@ -3055,6 +3095,16 @@
       "sha256": "86815e6dc503963d3db1c51f58e4e15abf7e4264697edefd40d1995f3c6d83d1"
     },
     {
+      "path": "frames/svg/ptolemy-parent-legendary-footerless.svg",
+      "bytes": 8849,
+      "sha256": "26c71bb0e64568754c0d0ba2ae30f3175ecbc78a41e4ca76dc6d3e7b4a61c986"
+    },
+    {
+      "path": "frames/svg/ptolemy-parent-legendary.svg",
+      "bytes": 9090,
+      "sha256": "033ed4cf8e04a5afcdb6ec9cf80c95af7cf041d56d4d8beeffd8117a6c55d225"
+    },
+    {
       "path": "frames/svg/ptolemy-parent.svg",
       "bytes": 12897,
       "sha256": "d6bd7a4220339ef9590d6d484d3b80d9157a66e0029f6567e8b535bd324719cf"
@@ -3325,6 +3375,16 @@
       "sha256": "9f0dafc4931e01be862fd113f959489f6f450aed569e55e53c40c6b05e693801"
     },
     {
+      "path": "frames/svg/zeno-parent-legendary-footerless.svg",
+      "bytes": 7689,
+      "sha256": "0845116a3be1eb0580c7d83ee616623fc94ed3b00ce8d30be59c0cec4f690b58"
+    },
+    {
+      "path": "frames/svg/zeno-parent-legendary.svg",
+      "bytes": 7930,
+      "sha256": "5f843cafe5cf4f057fd6a64f14f14d859594ce5e23213a673d0ad5054b1231eb"
+    },
+    {
       "path": "frames/svg/zeno-parent.svg",
       "bytes": 10567,
       "sha256": "e7673fd9f924b9abbece7e4d426e881e31fd38e112729f3838cbf5cc8978d840"
@@ -3421,8 +3481,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10090,
-      "sha256": "479370643c0b1665810c3bb4414272a08fdd9beb9ae07965631a293b15145740"
+      "bytes": 10346,
+      "sha256": "fbe95fd72ad65e9931b22507ce832b462a7f064d6059f7836268f94e2f72aa4b"
     },
     {
       "path": "reference/brief/character-armour-reference.png",
@@ -4686,8 +4746,8 @@
     },
     {
       "path": "tools/card-art.mjs",
-      "bytes": 21805,
-      "sha256": "fe37db26e6bda15f8b207373598ce3d3e9798c6ab437971b26f32a6d64937acd"
+      "bytes": 21812,
+      "sha256": "0e5bae8e0128533894753ab46dddcefb861c4ddb952c548524cf7fd48f67e253"
     },
     {
       "path": "tools/pixel-requirements.txt",

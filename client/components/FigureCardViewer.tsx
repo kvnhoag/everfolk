@@ -5,7 +5,7 @@ import { getFigureCardProgress } from "../../src/figures/card-progress.ts";
 import HistoricalFigureCard, { displayedFigureCardRank, type FigureCardMode } from "./HistoricalFigureCard.tsx";
 import { stepVariantIndex, initialWheelGesture, reduceVariantWheel, swipeVariantStep, variantStackSlot } from "../models/figure-card-carousel.ts";
 import { contributionCardRanks, figureCardRanks } from "../models/figure-contribution-ranks.ts";
-import { findCardArt, cardArtRank } from "../models/card-art.ts";
+import { findCardArt, cardArtRank, type CardArtGender } from "../models/card-art.ts";
 import { buildFigureCardRequirements, changedRequirementIds, type FigureCardRequirement } from "../models/figure-card-requirements.ts";
 import "../styles/figure-cards.css";
 import "../styles/figure-card-viewer.css";
@@ -18,6 +18,7 @@ export interface FigureCardViewerProps {
   life?: LifeState;
   mode?: FigureCardMode;
   contributionTitle?: string;
+  gender?: CardArtGender;
   upgradeAction?: { label: string; enabled: boolean; reason?: string; onActivate(): void };
 }
 
@@ -26,7 +27,7 @@ export default function FigureCardViewer(props: FigureCardViewerProps) {
   if (!props.figure) return null;
   return <OpenFigureCardViewer key={props.figure.id + "-" + (props.initialRank ?? "") + "-" + (props.mode ?? "principal")} {...props} figure={props.figure} />;
 }
-function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode = "principal", contributionTitle, upgradeAction }: Omit<FigureCardViewerProps, "figure"> & { figure: FigureRosterEntry }) {
+function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode = "principal", contributionTitle, upgradeAction, gender }: Omit<FigureCardViewerProps, "figure"> & { figure: FigureRosterEntry }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -165,7 +166,7 @@ function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode 
               const current = slot === 0;
               return <div key={option} className={`figure-card-stack-item${current ? " is-current" : ""}`} data-stack-slot={slot} data-stack-side={slot < 0 ? "left" : slot > 0 ? "right" : "active"} data-variant-rank={option} style={{ "--stack-slot": slot, "--stack-depth": Math.abs(slot), zIndex: options.length - Math.abs(slot) } as CSSProperties}>
                 <div className="figure-card-float" aria-hidden={!current || undefined}>
-                  <HistoricalFigureCard figure={figure} rank={option} mode={mode} contributionRanks={options} title={mode === "contribution" ? titleFor(option) : figure.name} traits={shownTraits.length ? shownTraits : undefined} gender={life?.character?.sex} artSeed={life?.seed} />
+                  <HistoricalFigureCard figure={figure} rank={option} mode={mode} contributionRanks={options} title={mode === "contribution" ? titleFor(option) : figure.name} traits={shownTraits.length ? shownTraits : undefined} gender={gender} />
                 </div>
                 {!current && <button type="button" className="figure-card-stack-select" aria-label={`Preview ${option} variant`} onClick={() => { stageRef.current?.focus({ preventScroll: true }); selectVariant(option); }}><span>{option}</span><span aria-hidden="true">↗</span></button>}
               </div>;

@@ -291,7 +291,7 @@
     "pngNeedsFonts": false
   },
   "sourceCatalogSha256": "afb51edd9792b24cd671880e146e5ed072ba00610a3adebb8498b74b859778a1",
-  "sourceRegistrySha256": "42fb3276631c941a7c9c54039de7373fe738c5e373e6b4e92b698ecb18002e2e",
+  "sourceRegistrySha256": "054b756f6f2dd42a1394cae8f4cea6a53adfe3abb567a34355d6e0c88f2fbd48",
   "defaultOverlay": "footerlessFrame",
   "exampleSerialsAreIssuedCopies": false,
   "assets": [
@@ -10041,6 +10041,250 @@
         },
         "footerlessOverlaySvg": {
           "sha256": "3bfc6b52ce138f303f45022f5732165a106ef9d605e103ffe67f4a9f8f7f007b"
+        }
+      }
+    },
+    {
+      "id": "demetrius-parent-legendary",
+      "figureId": "demetrius",
+      "figureName": "Demetrius the Besieger",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "rarity": "legendary",
+      "variantOf": "demetrius-parent",
+      "title": "Demetrius the Besieger",
+      "canonicalTitle": "Demetrius the Besieger",
+      "displayTitle": "Demetrius the Besieger",
+      "subtitle": "King of Siegecraft",
+      "bodyTitle": "Ambition Against the Walls",
+      "bodyText": "Demetrius Poliorcetes pursued kingship through bold campaigns and spectacular siege machinery. His famous assault on Rhodes ended in negotiation, yet its scale fixed his enduring reputation as the Besieger of Cities.",
+      "copy": {
+        "title": "Demetrius the Besieger",
+        "subtitle": "King of Siegecraft",
+        "bodyTitle": "Ambition Against the Walls",
+        "bodyText": "Demetrius Poliorcetes pursued kingship through bold campaigns and spectacular siege machinery. His famous assault on Rhodes ended in negotiation, yet its scale fixed his enduring reputation as the Besieger of Cities."
+      },
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 55,
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "frame": "frames/cards/demetrius-parent-legendary.png",
+      "footerlessFrame": "frames/cards/demetrius-parent-legendary-footerless.png",
+      "overlaySvg": "frames/svg/demetrius-parent-legendary.svg",
+      "footerlessOverlaySvg": "frames/svg/demetrius-parent-legendary-footerless.svg",
+      "sourcePortrait": "reference/portraits/demetrius-parent.webp",
+      "preview": "reference/cards/demetrius-parent.webp",
+      "fit": "legendary",
+      "artRect": {
+        "x": 30,
+        "y": 140,
+        "width": 840,
+        "height": 1050
+      },
+      "symbol": "reference/symbols/demetrius.svg",
+      "historicalSources": [
+        {
+          "title": "Demetrius I of Macedonia, Poliorcetes — Oxford Classical Dictionary",
+          "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753179"
+        },
+        {
+          "title": "The Great Siege of Rhodes — Oxford University Press",
+          "url": "https://academic.oup.com/book/40551/chapter-abstract/347966363"
+        }
+      ],
+      "sourceArtworkSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "hashes": {
+        "frame": {
+          "sha256": "15be7972671ee3177f3df0eebd8565fbf95584a0febff867fc56a15f01f1f8e9",
+          "bytes": 143369,
+          "width": 900,
+          "height": 1260
+        },
+        "footerlessFrame": {
+          "sha256": "4ae7fa0f4bee1cdda00949342e0e5ecde74e74b35039db2349b6c8c123ab6810",
+          "bytes": 142205,
+          "width": 900,
+          "height": 1260
+        },
+        "sourcePortrait": {
+          "sha256": "a7e86b47622bfff0d4dbbe72fcfc9df6454cc80b1d4c16ebea639ab4ac35e28b",
+          "bytes": 224544,
+          "width": 840,
+          "height": 1050
+        },
+        "preview": {
+          "sha256": "284624a40e42c39970b00caf0b32e356273679b07338837ccc063a32b514800c",
+          "bytes": 189204,
+          "width": 450,
+          "height": 630
+        },
+        "overlaySvg": {
+          "sha256": "bf046868dab3ea38bad5d2c02a1ae80801cc8ae6065f3a117089168489dc87c2"
+        },
+        "footerlessOverlaySvg": {
+          "sha256": "39400ca5fd29ad14fb35ad7e10e67315932e4aa3abb4cc640a3aeb45b6215b35"
+        }
+      }
+    },
+    {
+      "id": "zeno-parent-legendary",
+      "figureId": "zeno",
+      "figureName": "Zeno of Citium",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "rarity": "legendary",
+      "variantOf": "zeno-parent",
+      "title": "Zeno of Citium",
+      "canonicalTitle": "Zeno of Citium",
+      "displayTitle": "Zeno of Citium",
+      "subtitle": "Founder of the Stoa",
+      "bodyTitle": "A Life Governed by Reason",
+      "bodyText": "Teaching at Athens' Painted Porch, Zeno founded the Stoic school around 300 BCE. His philosophy placed virtue and reason at the centre of a demanding vision of how a life should be lived.",
+      "copy": {
+        "title": "Zeno of Citium",
+        "subtitle": "Founder of the Stoa",
+        "bodyTitle": "A Life Governed by Reason",
+        "bodyText": "Teaching at Athens' Painted Porch, Zeno founded the Stoic school around 300 BCE. His philosophy placed virtue and reason at the centre of a demanding vision of how a life should be lived."
+      },
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 73,
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "frame": "frames/cards/zeno-parent-legendary.png",
+      "footerlessFrame": "frames/cards/zeno-parent-legendary-footerless.png",
+      "overlaySvg": "frames/svg/zeno-parent-legendary.svg",
+      "footerlessOverlaySvg": "frames/svg/zeno-parent-legendary-footerless.svg",
+      "sourcePortrait": "reference/portraits/zeno-parent.webp",
+      "preview": "reference/cards/zeno-parent.webp",
+      "fit": "legendary",
+      "artRect": {
+        "x": 30,
+        "y": 140,
+        "width": 840,
+        "height": 1050
+      },
+      "symbol": "reference/symbols/zeno.svg",
+      "historicalSources": [
+        {
+          "title": "Stoicism — Stanford Encyclopedia of Philosophy",
+          "url": "https://plato.stanford.edu/entries/stoicism/"
+        }
+      ],
+      "sourceArtworkSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "hashes": {
+        "frame": {
+          "sha256": "ff9f1c3f32f6660a73c54c161188511e0fe2e42fc33ea369f55a7fa821fdf9d9",
+          "bytes": 133717,
+          "width": 900,
+          "height": 1260
+        },
+        "footerlessFrame": {
+          "sha256": "7dd735e6bd583f3f80ec487d3bbe11a6ae64f0cfb3d568e94d5ce66d914a16fa",
+          "bytes": 132586,
+          "width": 900,
+          "height": 1260
+        },
+        "sourcePortrait": {
+          "sha256": "1d521e19474beef5bce35d0b200132de66fe432edfcff606577084e7b8f7fa25",
+          "bytes": 204348,
+          "width": 840,
+          "height": 1050
+        },
+        "preview": {
+          "sha256": "24ace4d4ed24d210de5c2891d0b8b2d510c122435188c223051ff0fb24dfe720",
+          "bytes": 169420,
+          "width": 450,
+          "height": 630
+        },
+        "overlaySvg": {
+          "sha256": "5f843cafe5cf4f057fd6a64f14f14d859594ce5e23213a673d0ad5054b1231eb"
+        },
+        "footerlessOverlaySvg": {
+          "sha256": "0845116a3be1eb0580c7d83ee616623fc94ed3b00ce8d30be59c0cec4f690b58"
+        }
+      }
+    },
+    {
+      "id": "ptolemy-parent-legendary",
+      "figureId": "ptolemy",
+      "figureName": "Ptolemy I Soter",
+      "kind": "parent",
+      "tier": null,
+      "gender": "male",
+      "rarity": "legendary",
+      "variantOf": "ptolemy-parent",
+      "title": "Ptolemy I Soter",
+      "canonicalTitle": "Ptolemy I Soter",
+      "displayTitle": "Ptolemy I Soter",
+      "subtitle": "Founder of a Dynasty",
+      "bodyTitle": "A Kingdom Secured",
+      "bodyText": "A general of Alexander, Ptolemy secured Egypt after the conqueror's death and later ruled as king. His dynasty made Alexandria a royal capital and endured until the age of Cleopatra.",
+      "copy": {
+        "title": "Ptolemy I Soter",
+        "subtitle": "Founder of a Dynasty",
+        "bodyTitle": "A Kingdom Secured",
+        "bodyText": "A general of Alexander, Ptolemy secured Egypt after the conqueror's death and later ruled as king. His dynasty made Alexandria a royal capital and endured until the age of Cleopatra."
+      },
+      "editionLimit": 10,
+      "exampleEdition": "001/010",
+      "collectionIndex": 82,
+      "frameLayout": "full-art",
+      "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+      "frame": "frames/cards/ptolemy-parent-legendary.png",
+      "footerlessFrame": "frames/cards/ptolemy-parent-legendary-footerless.png",
+      "overlaySvg": "frames/svg/ptolemy-parent-legendary.svg",
+      "footerlessOverlaySvg": "frames/svg/ptolemy-parent-legendary-footerless.svg",
+      "sourcePortrait": "reference/portraits/ptolemy-parent.webp",
+      "preview": "reference/cards/ptolemy-parent.webp",
+      "fit": "legendary",
+      "artRect": {
+        "x": 30,
+        "y": 140,
+        "width": 840,
+        "height": 1050
+      },
+      "symbol": "reference/symbols/ptolemy.svg",
+      "historicalSources": [
+        {
+          "title": "Ptolemy I Soter — Digital Egypt, University College London",
+          "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/chronology/ptolemyi.html"
+        }
+      ],
+      "sourceArtworkSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+      "hashes": {
+        "frame": {
+          "sha256": "efc125c9ff9abd6177671302b31a4fd8e8b8fe6f9537a1d5d039c82e306429f2",
+          "bytes": 135064,
+          "width": 900,
+          "height": 1260
+        },
+        "footerlessFrame": {
+          "sha256": "7ef46c558dfca7d836bfc79d079877df379e50778a9ff13cbbdabb55a25ae2a1",
+          "bytes": 133901,
+          "width": 900,
+          "height": 1260
+        },
+        "sourcePortrait": {
+          "sha256": "457bf4d5f46ea210b2630f3ad343dea59726ab878b2c1d76df0e98b9f31e8fc6",
+          "bytes": 209140,
+          "width": 840,
+          "height": 1050
+        },
+        "preview": {
+          "sha256": "eaa13c794ab84c7f9cdfa1d796ef816d1232d987402796838c61391a0541fc98",
+          "bytes": 177420,
+          "width": 450,
+          "height": 630
+        },
+        "overlaySvg": {
+          "sha256": "033ed4cf8e04a5afcdb6ec9cf80c95af7cf041d56d4d8beeffd8117a6c55d225"
+        },
+        "footerlessOverlaySvg": {
+          "sha256": "26c71bb0e64568754c0d0ba2ae30f3175ecbc78a41e4ca76dc6d3e7b4a61c986"
         }
       }
     },

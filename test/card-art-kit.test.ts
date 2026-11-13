@@ -22,18 +22,18 @@ test("the portable kit contains every approved frame and reference without priva
   const result = await verifyKit();
   assert.equal(result.passed, true);
   assert.equal(result.cards, 117);
-  assert.equal(result.variants, 16);
+  assert.equal(result.variants, 19);
   assert.equal(result.blankFrames, 5);
   assert.ok(result.filesChecked >= 800);
   const bytes = readFileSync(resolve(kitRoot, "data/cards.json"), "utf8");
   assert.doesNotMatch(bytes, /[A-Z]:[\\/]|Users[\\/]Legion/);
 });
 
-test("portable fitting reproduces approved Alexander main, Common contributor and Euclid cards", { timeout: 120000 }, async () => {
+test("portable fitting reproduces approved parents, contributors and all three Legendary promotions", { timeout: 120000 }, async () => {
   const temp = workspace();
   try {
     const kit = loadKit();
-    const ids = ["alexander-parent", "alexander-common-female", "euclid-parent"];
+    const ids = ["alexander-parent", "alexander-common-female", "euclid-parent", "demetrius-parent", "zeno-parent", "ptolemy-parent"];
     const items = [];
     for (const id of ids) {
       const row = kit.data.assets.find((row: { id: string }) => row.id === id);
@@ -43,8 +43,8 @@ test("portable fitting reproduces approved Alexander main, Common contributor an
     }
     const out = resolve(temp, "rendered");
     const result = await renderBatch({ items, out });
-    assert.equal(result.baseCards, 3);
-    assert.equal(result.runtimeVariants, 8);
+    assert.equal(result.baseCards, 6);
+    assert.equal(result.runtimeVariants, 11);
     const manifest = load(resolve(out, "replacement.json"));
     const registry = load(resolve(repo, "public/assets/cards/collection-v14/manifest.json"));
     const production = [...registry.assets, ...registry.parentVariants];

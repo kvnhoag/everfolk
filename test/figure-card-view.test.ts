@@ -87,6 +87,24 @@ test("contributor faces use their recorded gender and never invent an issued edi
   }
 });
 
+test("catalogue contributors default to male regardless of the life seed", () => {
+  for (const seed of ["", "old-save", "female-life", "alexander", "1"]) {
+    const art = findCardArt({ figureId: "alexander", kind: "contribution", tier: "common", seed });
+    assert.equal(art?.gender, "male");
+  }
+  assert.equal(findCardArt({ figureId: "alexander", kind: "contribution", tier: "common", gender: "female" })?.gender, "female");
+});
+
+test("all three promotable figures have approved Epic and full-art Legendary faces", () => {
+  for (const id of ["demetrius", "zeno", "ptolemy"]) {
+    const epic = renderCard(id, "Epic"), legendary = renderCard(id, "Legendary");
+    assert.match(epic, new RegExp(`data-card-art="${id}-parent"`));
+    assert.match(legendary, new RegExp(`data-card-art="${id}-parent-legendary"`));
+    assert.doesNotMatch(legendary, /figure-tcg-placeholder|figure-tcg-architecture|figure-placeholders/);
+    assert.match(legendary, /Edition —\/010/);
+  }
+});
+
 test("the viewer is a labelled native modal with close controls and no mint action", () => {
   const html = renderViewer("demetrius");
   assert.match(html, /<dialog /);

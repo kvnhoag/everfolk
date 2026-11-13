@@ -250,3 +250,5 @@ Use these filenames so every image can be matched to its intended artwork. Main 
 - [ ] `eumenes-rare-female.png` — Campaign Correspondent; adult female; rare.
 - [ ] `eumenes-epic-male.png` — Secretary of Eumenes; adult male; epic.
 - [ ] `eumenes-epic-female.png` — Secretary of Eumenes; adult female; epic.
+
+The runtime set now includes 19 alternate parent frames: the 16 retained onchain variants plus full-art Legendary promotions for Demetrius, Zeno and Ptolemy. Each promotion reuses its approved main portrait; no additional illustration is required.

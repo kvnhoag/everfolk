@@ -41,7 +41,7 @@ Legendary cards show the **840 × 1050** portrait at native size at `(30,140)`. 
 | Clothing/equipment details supported by the brief | Frame, sourced symbol, card prose and edition policy |
 | Versioned working files | Approved baseline and production registry consistency |
 
-The roster has **117 designs**: 13 main portraits plus 52 professions × two genders. There are another **16 runtime rarity-frame variants**, using four existing main portraits, which need no separate painting. V14 contains 34 newly made illustrations and preserves 83 earlier approved ones.
+The roster has **117 designs**: 13 main portraits plus 52 professions × two genders. The original set has **16 runtime rarity-frame variants**, using four existing main portraits, which need no separate painting. V14 contains 34 newly made illustrations and preserves 83 earlier approved ones.
 
 Contributor portraits represent fictional game professions. Both genders should look capable and appropriately equipped for the same job. Vary faces and angles across the roster; do not turn every contributor into the parent figure. Lower military tiers use plainer kit, not the commander's decorative set. Match the supplied character reference; do not lift armour from another named character.
 
@@ -69,3 +69,5 @@ These preview numbers are examples. The game uses the **footerless** image and d
 - Pixel finish is honestly labelled; reference credits, editable source and prompt/conversion notes are included.
 
 The supplied frames, live copy, sourced icons and icon licenses remain part of the handoff. The symbols are visual associations rather than attested ancient personal badges. Keep their credits with any redistributed card system.
+
+The runtime set now includes 19 alternate parent frames: the 16 retained onchain variants plus full-art Legendary promotions for Demetrius, Zeno and Ptolemy. Each promotion reuses its approved main portrait; no additional illustration is required.

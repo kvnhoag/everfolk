@@ -1,8 +1,8 @@
 {
   "passed": true,
-  "count": 133,
+  "count": 136,
   "baseCards": 117,
-  "runtimeParentVariants": 16,
+  "runtimeParentVariants": 19,
   "blankFrames": 5,
   "nativeRenderer": "VectorCraft",
   "nativeWorkerClosed": true,
@@ -1412,6 +1412,36 @@
       "footerlessFrame": {
         "exactProductionPixels": true,
         "rgbaSha256": "21f0cc1a8302d425ce4c1acd80a8b6ea28884318d1a5c3377a3b54042767a3b9"
+      }
+    },
+    {
+      "id": "demetrius-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "cae1e21f2cdb6bb993a27ecb3ae5a71322c2a12f406c7d395db9662ad09b962b"
+      }
+    },
+    {
+      "id": "zeno-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "8f989dee21bef4a047e103598e4480171e6ad84b1f9e34bfdc83e9088bc17d95"
+      }
+    },
+    {
+      "id": "ptolemy-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "f902513d51ab777e2ee63eb3fc8e0833e5099aa6df7a31a80391dc2ae3877dfa"
       }
     },
     {

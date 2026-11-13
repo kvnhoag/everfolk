@@ -35,9 +35,9 @@ export function containedPath(root, name) {
 export function loadKit(root = kitRoot) {
   const bytes = readFileSync(resolve(root, 'data/cards.json'));
   const data = JSON.parse(bytes.toString('utf8'));
-  need(data.id === 'everfolk-card-art-handoff-v1' && data.complete && data.assets.length === 117 && data.parentVariants.length === 16, 'Incomplete or incompatible card-art kit');
+  need(data.id === 'everfolk-card-art-handoff-v1' && data.complete && data.assets.length === 117 && data.parentVariants.length >= 16, 'Incomplete or incompatible card-art kit');
   const rows = [...data.assets, ...data.parentVariants];
-  need(new Set(rows.map(row => row.id)).size === 133, 'Duplicate kit card IDs');
+  need(new Set(rows.map(row => row.id)).size === rows.length, 'Duplicate kit card IDs');
   return { root, data, rows, manifestSha256: sha256(bytes) };
 }
 

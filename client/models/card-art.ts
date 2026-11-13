@@ -50,15 +50,6 @@ const aliases: Readonly<Record<string, { figureId: string; tier: CardArtRank }>>
   "trusted adviser of ptolemy": { figureId: "ptolemy", tier: "epic" },
 });
 
-function artworkGender(gender: CardArtGender | undefined, seed: string | undefined): CardArtGender {
-  if (gender) return gender;
-  // An older save may not record sex. This selects representative art only;
-  // it never rewrites the saved identity or infers sex from a person's name.
-  let hash = 2166136261;
-  for (const char of seed ?? "") hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
-  return seed && (hash >>> 0) % 2 ? "female" : "male";
-}
-
 export interface CardArtQuery {
   figureId?: string | null;
   kind?: "parent" | "contribution";
@@ -77,7 +68,7 @@ export function findCardArt(query: CardArtQuery): CardArtwork | undefined {
   const figureId = query.figureId?.toLowerCase() || alias?.figureId || (titleOwner ? titleOwner.figureId : undefined);
   if (figureId && !allCardArt.some(art => art.figureId === figureId)) return undefined;
   if (alias && figureId !== alias.figureId) return undefined;
-  const gender = artworkGender(query.gender, query.seed);
+  const gender = query.gender ?? "male";
   const matchesFigure = (art: CardArtwork) => !figureId || art.figureId === figureId;
   const matchesKind = (art: CardArtwork) => !query.kind || art.kind === query.kind;
   if (query.kind === "parent") return figureId ? getFigureCardArt(figureId, query.tier) : undefined;
