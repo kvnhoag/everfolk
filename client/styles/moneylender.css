@@ -4,7 +4,7 @@
 .moneylender-panel>p{font-size:12px;line-height:1.7;color:#6d725c;margin:9px 0}
 .moneylender-panel>p.lender-risk{font-size:11px;color:#92543b}
 .lender-balance{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 9px}
-.lender-balance>strong{font:400 30px/1.3 var(--serif,Georgia,serif);font-variant-numeric:tabular-nums;color:#7f5536}
+.lender-balance>strong{font:400 30px/1.3 var(--ef-font-display);font-variant-numeric:tabular-nums;color:#7f5536}
 .lender-balance>span{font-size:10px;color:#88806b}
 .lender-balance>b{font-size:11px;font-weight:500;color:#966040;margin-left:auto}
 .moneylender-notice{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 16px;margin-bottom:16px;background:#f4eedf;border:1px solid #d1c4a6;border-left:3px solid #ac8a4e;border-radius:4px}
@@ -18,9 +18,9 @@
 .moneylender-notice.lender-overdue{border:2px solid #a7513f;border-left-width:5px;border-radius:0}
 .loan-deadline-dialog{width:min(500px,calc(100% - 28px));max-height:88dvh;overflow:auto;padding:0;border:2px solid #baa47a;border-radius:0;background:#f7ecd4;color:#263b43;box-shadow:6px 6px 0 #88644755,0 18px 75px #172a3555}
 .loan-deadline-dialog::backdrop{background:#25383199;backdrop-filter:blur(2px)}
-.loan-deadline-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 21px;border-bottom:2px solid #baa47a;background:#edcf91;color:#765121;font:700 11px/1.5 var(--serif,"Courier New",monospace);letter-spacing:.8px}
+.loan-deadline-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 21px;border-bottom:2px solid #baa47a;background:#edcf91;color:#765121;font:700 11px/1.5 var(--ef-font-display);letter-spacing:.8px}
 .loan-deadline-content{padding:23px}
-.loan-deadline-content>h2{font:700 30px/1.2 var(--serif,"Courier New",monospace);letter-spacing:-.5px;margin:0 0 14px;outline:none}
+.loan-deadline-content>h2{font:700 30px/1.2 var(--ef-font-display);letter-spacing:-.5px;margin:0 0 14px;outline:none}
 .loan-deadline-content>p{font-size:13px;line-height:1.7;color:#526255;margin:12px 0}
 .loan-deadline-facts{display:grid;gap:12px;margin:20px 0;padding:16px;border:1px solid #baa47a;background:#fff2d1}
 .loan-deadline-facts>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px}

@@ -9,6 +9,7 @@ import { mintRevealView } from "./life-report-model.ts";
 import type { LivesContract } from "./types.ts";
 import EverfolkCard from "./EverfolkCard.tsx";
 import { audioManager } from "../lib/audio-manager.ts";
+import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import "./mint-pack.css";
 
 export interface MintPackProps {
@@ -188,8 +189,7 @@ export default function MintPack({
             <span className="booster-seal" aria-hidden="true">
               ✦
             </span>
-            <strong>EVERFOLK</strong>
-            <span>Weaving fates</span>
+            <EverfolkBrand tone="cream" />
             <small>{opening ? "Breaking the golden seal…" : "Open your pack →"}</small>
           </button>
           <p className="chain-fine">Three cards are sealed within. Each echoes a different chapter and deed.</p>

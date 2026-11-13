@@ -4,6 +4,7 @@ import FigureArtwork from "./FigureArtwork.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import PixelIcon from "../components/PixelIcon.tsx";
 import StorybookMark from "../components/StorybookMark.tsx";
+import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import { audioManager } from "../lib/audio-manager.ts";
 import "./everfolk-card.css";
 
@@ -100,7 +101,7 @@ export default function EverfolkCard({
             <div className="ef-card-back-medallion">
               <StorybookMark size={46} />
             </div>
-            <strong className="ef-card-back-brand">EVERFOLK</strong>
+            <strong className="ef-card-back-brand"><EverfolkWordmark tone="cream" /></strong>
             <span className="ef-card-back-realm">ANCIENT CHRONICLES</span>
           </div>
           <div className="ef-card-back-prompt">
@@ -138,7 +139,7 @@ export default function EverfolkCard({
           </div>
 
           <div className="ef-card-identity">
-            <strong className="ef-card-title" title={title}>
+            <strong className="ef-card-title ef-type-display" title={title}>
               {title}
             </strong>
             <span className="ef-card-kind">

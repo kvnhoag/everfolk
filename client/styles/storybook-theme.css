@@ -150,7 +150,7 @@ body{
 .life-info-sidebar .compact-skills>header>button{font-size:10px;color:#2b1f13}
 .life-info-sidebar .compact-skill-help,.life-info-sidebar .compact-skill-empty{font-size:11px;line-height:1.65;color:#5e4c34}
 .life-info-sidebar .compact-branch-selector label{font-size:10px}
-.life-info-sidebar .compact-branch-selector select{font-family:"DM Sans","Segoe UI",sans-serif;font-size:11px;background:#fffdf8;border:1px solid #7c603c;border-radius:2px;padding:6px 9px;min-height:34px}
+.life-info-sidebar .compact-branch-selector select{font-family:var(--ef-font-body);font-size:11px;background:#fffdf8;border:1px solid #7c603c;border-radius:2px;padding:6px 9px;min-height:34px}
 .life-info-sidebar .compact-skill-node{background:#fcf8ee;border:1px solid #8c7048;border-radius:2px;padding:8px}
 .life-info-sidebar .compact-skill-name,.life-info-sidebar .compact-skill-name strong{font-size:11px}
 .life-info-sidebar .compact-skill-state{font-size:9px}

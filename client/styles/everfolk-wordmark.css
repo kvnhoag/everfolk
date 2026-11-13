@@ -1,32 +1,10 @@
-@font-face {
-  font-family: "Eczar";
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url("/fonts/eczar-latin-ext-variable.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Eczar";
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url("/fonts/eczar-latin-variable.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-:root {
-  --font-display: "Eczar", Georgia, serif;
-  --font-body: "DM Sans", "Segoe UI", sans-serif;
-}
-
+/* The Printed Folktale wordmark. Its face, Eczar, is loaded in typography.css. */
 .everfolk-wordmark {
   --wordmark-ink: #284744;
   --wordmark-stop: #9b553e;
   display: inline-block;
   color: var(--wordmark-ink);
-  font-family: var(--font-display);
+  font-family: var(--ef-font-wordmark);
   font-size: inherit;
   font-style: normal;
   font-weight: 600;
@@ -44,4 +22,32 @@
   mask-mode: alpha;
   mask-repeat: repeat;
   mask-size: 256px 256px;
+}
+
+/* The one brand lockup: wordmark over the "Weaving fates" tagline, used by every header. */
+.everfolk-brand {
+  --brand-tagline: #7a5a26;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--everfolk-brand-size, 32px);
+  line-height: 1;
+  text-decoration: none;
+}
+.everfolk-brand[data-tone="cream"] { --brand-tagline: #f1cf88; }
+.everfolk-brand > .everfolk-wordmark { font-size: 1em; line-height: 1.02; }
+.everfolk-brand-tagline {
+  color: var(--brand-tagline);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .everfolk-brand { --everfolk-brand-size: 26px; gap: 4px; }
+  .everfolk-brand-tagline { font-size: 9px; letter-spacing: 2.2px; }
 }

@@ -5,7 +5,7 @@
 .token-affection>span:first-child{white-space:nowrap;font-weight:700}
 .token-affection .life-report-bar{flex:1;display:block;height:10px;background:#efe0bb;border:1px solid #baa47a}
 .token-affection .life-report-bar>span{display:block;height:100%;background:#a85e44}
-.token-reach{font-family:var(--serif,"Courier New",monospace);font-size:18px!important;font-weight:700;line-height:1.35!important}
+.token-reach{font-family:var(--ef-font-display);font-size:18px!important;font-weight:700;line-height:1.35!important}
 .token-links{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:6px}
 .token-links li{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;background:#fbf5e4;border:1px solid #cdbb95;font-size:13px}
 .token-links a{color:#41637b;overflow-wrap:anywhere}
@@ -100,7 +100,7 @@
 }
 
 .ef-market-stat strong {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: 14px;
   color: #ffe699;
 }

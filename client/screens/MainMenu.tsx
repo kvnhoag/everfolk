@@ -3,7 +3,7 @@ import { formatYear } from "../../src/calendar.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import SiteNav from "../components/SiteNav.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
-import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
+import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import "../homepage/homepage.css";
 import "../homepage/luminous.css";
 import "../homepage/typeset.css";
@@ -52,8 +52,7 @@ export default function MainMenu({ rankedLife = false, world, life, hasBegun, ha
       <header className="ef-home-weave-bar">
         <div className="ef-home-weave-bar-main">
           <a className="ef-home-weave-brand" href="#" aria-label="Everfolk home">
-            <strong><EverfolkWordmark tone="cream" /></strong>
-            <span>WEAVING FATES</span>
+            <EverfolkBrand tone="cream" />
           </a>
           <SiteNav className="ef-home-weave-links" onPlay={primaryAction} />
         </div>
