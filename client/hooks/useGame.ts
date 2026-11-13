@@ -297,12 +297,25 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
   }, [commit, hasBegun, life, submitOnline]);
 
-  const act = useCallback((activityId: string) => {
+  const act = useCallback((activityId: string, options?: { calendarDeadline?: boolean }) => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
-    if (submitOnline(play => play.dispatch({ type: "act", activity: activityId }))) return;
+    if (submitOnline(play => play.dispatch(options?.calendarDeadline ? { type: "act", activity: activityId, calendarDeadline: true } : { type: "act", activity: activityId }))) return;
     try {
       const current = life;
-      const next = engineForLife(current).act(current, activityId);
+      const next = engineForLife(current).act(current, activityId, options);
+      commit(next);
+      setNotice("");
+    } catch (error) {
+      setNotice(message(error));
+    }
+  }, [commit, hasBegun, life, submitOnline]);
+
+  const assess = useCallback((nodeId: string, jobIds: readonly string[]) => {
+    if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    if (submitOnline(play => play.dispatch({ type: "assess-jobs", nodeId, jobIds: [...jobIds] }))) return;
+    try {
+      const current = life;
+      const next = engineForLife(current).assess(current, nodeId, jobIds);
       commit(next);
       setNotice("");
     } catch (error) {
@@ -572,6 +585,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     life,
     choose,
     act,
+    assess,
     runDemo,
     actWithLoan,
     orderMarket,

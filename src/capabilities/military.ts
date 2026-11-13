@@ -37,6 +37,7 @@ export function settleMilitaryProofs(world:WorldPack,life:LifeState,age:number):
   for(const evidence of life.capabilities.evidence.filter(e=>/^M(?:[5-9]|10)$/.test(e.nodeId)&&e.age===age&&e.data.awaitingService===true)) {
     const valid=Boolean(receipt && receipt.paid===receipt.wage && receipt.rations===receipt.ration && receipt.purseBefore-receipt.purseAfter===receipt.paid && receipt.grainBefore-receipt.grainAfter===receipt.rations);
     Object.assign(evidence.data,{awaitingService:false,qualifies:valid && evidence.data.cashConserved===true,
+      jobId: evidence.data.jobId ?? `${evidence.nodeId.toLowerCase()}-${age}-${evidence.year}-${life.capabilities.evidence.filter(e => e.nodeId === evidence.nodeId && typeof e.data.jobId === "string").length + 1}`,
       serviceRole:receipt?.role ?? 'none',wagePaid:receipt?.paid ?? 0,rationsServed:receipt?.rations ?? 0,
       armyPurseOpening:receipt?.purseBefore ?? 0,armyPurseClosing:receipt?.purseAfter ?? 0,
       armyGrainOpening:receipt?.grainBefore ?? 0,armyGrainClosing:receipt?.grainAfter ?? 0,serviceReconciled:valid});

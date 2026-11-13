@@ -107,3 +107,80 @@ test("skill details keep full rules collapsed and show requirements only once", 
   assert.equal((html.match(/Serve as an Officer first\./g)??[]).length,1);
   assert.match(html,/Full rules &amp; career opportunities/);
 });
+
+test("Issue #6: inspector renders commission terms, accepted deadlines, missing stock and multi-job assessments", () => {
+  const node = CAPABILITY_NODES.find(n => n.id === "AT10")!;
+  const view: CapabilityNodeView = {
+    id: node.id,
+    state: "available",
+    reasons: [],
+    progress: { done: 0, required: 2 },
+    actionId: "cap-work-at10",
+    actionLabel: "Work on this capability · 180 dr payment",
+    requirementText: [],
+    terms: {
+      materialsOwner: "worker",
+      quantity: 1,
+      minimumQuality: 4,
+      totalPayment: 180,
+      payer: "workshop",
+      workYearDeadline: 2,
+      calendarDeadlineYears: 4,
+    },
+    eligibleJobs: [
+      { jobId: "at3-14-5-1", nodeId: "AT3", age: 14, year: 5, kind: "craft", title: "Fine yarn", payment: 18, quantity: 1 },
+      { jobId: "at4-15-6-1", nodeId: "AT4", age: 15, year: 6, kind: "craft", title: "Woven cloth", payment: 24, quantity: 1 },
+    ],
+  };
+  const actor = { ...life, age: 20, phase: "ready" as const };
+  const activity = { id: "cap-work-at10", text: "Work AT10", available: true, outcomes: [] } as unknown as ActivityAvailability;
+  const html = renderToStaticMarkup(createElement(CapabilityInspector, {
+    node, view, world, life: actor, activities: [activity], readOnly: false, onActivity() {}, onSelect() {}, detailId: "terms",
+    onAssess() {},
+  }));
+  assert.match(html, /Commission terms/);
+  assert.match(html, /Worker-provided/);
+  assert.match(html, /Minimum quality: Grade 4/);
+  assert.match(html, /Total payment: 180 dr · Payer: workshop/);
+  assert.match(html, /Work-year deadline: 2 active work years/);
+  assert.match(html, /Optional calendar deadline: 4 calendar years from start/);
+  assert.match(html, /Commit to 4-year calendar deadline/);
+  assert.match(html, /Qualify via completed jobs/);
+  assert.match(html, /at3-14-5-1/);
+  assert.match(html, /at4-15-6-1/);
+
+  const calls: Array<[string, unknown]> = [];
+  const assessments: Array<[string, readonly string[]]> = [];
+  const withDeadlineBtn = buttonWithClass(CapabilityInspector({
+    node, view, world, life: actor, activities: [activity], readOnly: false,
+    calendarDeadline: true,
+    selectedJobIds: ["at3-14-5-1", "at4-15-6-1"],
+    onActivity: (id, opts) => calls.push([id, opts]),
+    onAssess: (nid, ids) => assessments.push([nid, ids]),
+    onSelect() {}, detailId: "terms",
+  }), "capability-work-button")!;
+  withDeadlineBtn.props.onClick();
+  assert.deepEqual(calls, [["cap-work-at10", { calendarDeadline: true }]]);
+
+  const assessBtn = buttonWithClass(CapabilityInspector({
+    node, view, world, life: actor, activities: [activity], readOnly: false,
+    selectedJobIds: ["at3-14-5-1", "at4-15-6-1"],
+    onActivity() {},
+    onAssess: (nid, ids) => assessments.push([nid, ids]),
+    onSelect() {}, detailId: "terms",
+  }), "capability-assess-button")!;
+  assert.equal(assessBtn.props.disabled, false);
+  assessBtn.props.onClick();
+  assert.deepEqual(assessments, [["AT10", ["at3-14-5-1", "at4-15-6-1"]]]);
+
+  const activeHtml = renderToStaticMarkup(createElement(CapabilityInspector, {
+    node,
+    view: {
+      ...view,
+      terms: { ...view.terms!, calendarDeadlineYear: 25, completedWorkYears: 1, reservedMissing: { silk: 1 } },
+    },
+    world, life: actor, activities: [activity], readOnly: false, onActivity() {}, onSelect() {}, detailId: "active-terms",
+  }));
+  assert.match(activeHtml, /Calendar deadline: year 25/);
+  assert.match(activeHtml, /Missing reserved stock: 1 silk/);
+});

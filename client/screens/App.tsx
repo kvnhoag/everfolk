@@ -421,13 +421,13 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     else game.choose(id);
   }
 
-  function requestActivity(id: string) {
+  function requestActivity(id: string, options?: { calendarDeadline?: boolean }) {
     const activity = activities.find(activity => activity.id === id);
     const gate = activityGate(world, activity, Boolean(activity && activityLoanOffer(world, life, activity)), Boolean(activity && activity.available && isBorrowChoice(activity)));
     if (gate.action === "ignore" || !activity) return;
     if (gate.action === "blocked") { game.setNotice(gate.reason); return; }
     if (gate.action === "loan") setLoanRequest({ kind: activityLoanOffer(world, life, activity) ? "fund-activity" : "activity", id, snapshot: life });
-    else game.act(id);
+    else game.act(id, options);
   }
 
   function confirmLoan() {
@@ -645,7 +645,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
         </> : panel === "character" ? <>
           <p className="eyebrow">CHARACTER</p><h2 id="dialog-title">{characterName}</h2>
-          <CharacterPanel key={characterSection} life={life} world={world} onActivity={requestActivity} onMarketOrder={game.orderMarket} onCancelMarketOrder={game.cancelMarketOrder} initialSection={characterSection} />
+          <CharacterPanel key={characterSection} life={life} world={world} onActivity={requestActivity} onAssess={game.assess} onMarketOrder={game.orderMarket} onCancelMarketOrder={game.cancelMarketOrder} initialSection={characterSection} />
         </> : panel === "wiki" ? <>
           <p className="eyebrow">SKILL REFERENCE</p><h2 id="dialog-title">Skill wiki</h2>
           <SkillTree life={life} world={world} activities={activities} onActivity={requestActivity} initialView="wiki" />

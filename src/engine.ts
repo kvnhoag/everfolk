@@ -1,5 +1,5 @@
 import { initialCapabilities as initialDeepCapabilities, syncCapabilities as syncDeepCapabilities, recordFarmSettlement, recordAcceptedTrade, protectedGrain } from "./deep-capabilities/runtime.ts";
-import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
+import { initialCapabilities, applyCapability, assessCapabilityJobs, isAssessmentNode, settleCapabilities } from "./capabilities/engine.ts";
 import { recordActivityProof } from "./capabilities/work-proof.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
@@ -251,7 +251,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (Object.hasOwn(state.flags, "parent")) state.flags.parent = state.character.children.length > 0;
   }
 
-  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string, provenance?: { sourceId: string; outcomeId: string }): void {
+  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string, provenance?: { sourceId: string; outcomeId: string }, options?: { calendarDeadline?: boolean }): void {
     for (const effect of effects) {
       const beforeLoanBalance = effect.type === "loan" ? state.economy?.loan?.balance ?? 0 : 0;
       if (applyEconomyEffect(world, state, effect)) {
@@ -300,7 +300,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           state.character!.jobId = effect.job; break;
         case "capability": {
           const previous = new Set(Object.keys(state.capabilities?.learned ?? {}));
-          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node));
+          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node, options));
           for (const id of Object.keys(state.capabilities?.learned ?? {})) if (!previous.has(id)) {
             const node = world.capabilities!.nodes.find(node => node.id === id)!;
             journal(state, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
@@ -995,13 +995,19 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }));
   }
 
-  function actInto(next: LifeState, activityId: string): void {
+  function actInto(next: LifeState, activityId: string, options?: { calendarDeadline?: boolean }): void {
     assertPlayable(next);
+    if (options !== undefined && (typeof options !== "object" || options === null || Array.isArray(options))) {
+      throw new Error("Invalid activity options.");
+    }
     const activity = activityById.get(activityId);
     if (!activity) throw new Error(`Unknown activity: ${activityId}`);
+    if (options?.calendarDeadline && (next.capabilities?.project || !activity.outcomes.some(o => o.effects.some(e => e.type === "capability" && isAssessmentNode(e.node))))) {
+      throw new Error("A calendar deadline can only be chosen when starting a commission.");
+    }
     const reason = activityReason(world, next, activity, matches);
     if (reason) throw new Error(`Activity is unavailable: ${reason}`);
-    next.commands.push({ type: "act", activity: activityId });
+    next.commands.push(options?.calendarDeadline ? { type: "act", activity: activityId, calendarDeadline: true } : { type: "act", activity: activityId });
     if (activity.usesYearlyActivity !== false) next.character!.lastActivityAge = next.age;
     next.character!.lastActivityAges[activityId] = next.age;
     journal(next, "activity", activity.id, activity.text);
@@ -1009,16 +1015,41 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     journal(next, "outcome", outcome.id, outcome.text);
     // Proof-from-work worlds: the year's practice proves the next open step, judged before the practice's gains.
     if (world.capabilities?.proofFromWork) recordActivityProof(world, next, activity.id);
-    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
+    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }, options));
     checkEndings(next);
     resolveEvents(next, false);
     if (world.economy?.market) syncEconomyStat(world, next);
   }
 
-  function act(state: LifeState, activityId: string): LifeState {
+  function act(state: LifeState, activityId: string, options?: { calendarDeadline?: boolean }): LifeState {
     assertPlayable(state);
     const next = mutableSnapshot(state);
-    actInto(next, activityId);
+    actInto(next, activityId, options);
+    return freeze(next);
+  }
+
+  function assessInto(next: LifeState, nodeId: string, jobIds: readonly string[]): void {
+    assertPlayable(next);
+    const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
+    recorded(next, () => next.journal.length - 1, () => {
+      const summary = assessCapabilityJobs(world, next, nodeId, jobIds);
+      next.commands.push({ type: "assess-jobs", nodeId, jobIds: [...jobIds] });
+      journal(next, "activity", `capability-assess-${nodeId.toLowerCase()}`, summary);
+      for (const id of Object.keys(next.capabilities?.learned ?? {})) if (!previous.has(id)) {
+        const node = world.capabilities!.nodes.find(candidate => candidate.id === id)!;
+        journal(next, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+      }
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
+  }
+
+  function assess(state: LifeState, nodeId: string, jobIds: readonly string[]): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    assessInto(next, nodeId, jobIds);
     return freeze(next);
   }
 
@@ -1186,8 +1217,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (command.type === "advance" && Object.keys(command).length === 1) advanceInto(state);
       else if (command.type === "choose" && typeof command.choice === "string" && Object.keys(command).length === 2) {
         chooseInto(state, command.choice);
-      } else if (command.type === "act" && typeof command.activity === "string" && Object.keys(command).length === 2) {
-        actInto(state, command.activity);
+      } else if (command.type === "act" && typeof command.activity === "string"
+        && (Object.keys(command).length === 2 || (Object.keys(command).length === 3 && command.calendarDeadline === true))) {
+        actInto(state, command.activity, command.calendarDeadline ? { calendarDeadline: true } : undefined);
+      } else if (command.type === "assess-jobs" && Object.keys(command).length === 3 && typeof command.nodeId === "string"
+        && Array.isArray(command.jobIds) && command.jobIds.every((id: unknown) => typeof id === "string")) {
+        assessInto(state, command.nodeId, command.jobIds);
       } else if (command.type === "avatar" && typeof command.variant === "number" && Object.keys(command).length === 2) {
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
@@ -1229,5 +1264,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, assess, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
 }

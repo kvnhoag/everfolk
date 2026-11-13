@@ -136,8 +136,23 @@ function parseClientStepCommand(value: unknown): Command {
       object(raw, ["type", "choice"]);
       return { type: "choose", choice: text(raw.choice, 128) };
     case "act":
+      if ("calendarDeadline" in raw) {
+        object(raw, ["type", "activity", "calendarDeadline"]);
+        if (raw.calendarDeadline !== true) throw new RankedNpcHttpError(400, "calendarDeadline must be true when supplied.");
+        return { type: "act", activity: text(raw.activity, 128), calendarDeadline: true };
+      }
       object(raw, ["type", "activity"]);
       return { type: "act", activity: text(raw.activity, 128) };
+    case "assess-jobs":
+      object(raw, ["type", "nodeId", "jobIds"]);
+      if (!Array.isArray(raw.jobIds) || raw.jobIds.length < 2 || raw.jobIds.length > 8) {
+        throw new RankedNpcHttpError(400, "Select distinct completed job IDs for assessment.");
+      }
+      return {
+        type: "assess-jobs",
+        nodeId: text(raw.nodeId, 32),
+        jobIds: raw.jobIds.map(id => text(id, 64)),
+      };
     case "avatar":
       object(raw, ["type", "variant"]);
       return { type: "avatar", variant: integer(raw.variant, 0, 12) };

@@ -1,7 +1,7 @@
 import type { LifeState, WorldPack } from "../types.ts";
-import type { CapabilityState } from "./types.ts";
+import type { CapabilityState, EligibleJobRecord } from "./types.ts";
 import { ruleFor } from "./rules.ts";
-import { performWork, workQuote } from "./work.ts";
+import { expireMissedCommissions, performWork, workQuote } from "./work.ts";
 import { applyFarmWork, farmWorkReason, farmProofProgress, settleFarmCapabilities } from "./farming.ts";
 import { applyStatDelta } from "../progression.ts";
 import { syncEconomyStat } from "../economy.ts";
@@ -29,7 +29,8 @@ export function capabilityProgress(world: WorldPack, life: LifeState, id: string
   const accepted = life.capabilities?.evidence.filter(e => e.nodeId === id && e.data.qualifies === true) ?? [];
   let done = new Set(accepted.map(e => e.age)).size;
   if (id === "AS5" && !["clay-model", "wood-relief-practice"].every(kind => accepted.some(e => e.data.exercise === kind))) done = Math.min(done, 1);
-  if (id === "T10" && new Set(accepted.map(e => e.data.payer)).size < 2) done = Math.min(done, 1);
+  if (id === "T10" && new Set(accepted.map(e => e.data.payer)).size < 2 && !accepted.some(e => e.kind === "job-assessment" && e.data.completedAssessment === true)) done = Math.min(done, 1);
+  if (accepted.some(e => e.kind === "job-assessment" && e.data.completedAssessment === true && Number(e.data.distinctJobCount) >= 2)) done = Math.max(done, required);
   if (ruleFor(id)?.project && !accepted.some(e => e.data.completedAssessment === true)) done = Math.min(done, required - 1);
   return { done, required, complete: done >= required };
 }
@@ -72,7 +73,7 @@ function gains(world: WorldPack, life: LifeState, id: string): void {
   }
   if((world.capabilities?.version ?? 0) >= 2 && (id.startsWith("P") || id.startsWith("M"))) life.stats.knowledge=applyStatDelta(world.stats.knowledge,life.stats.knowledge,id.startsWith("P")?2:1);
 }
-export function applyCapability(world: WorldPack, life: LifeState, id: string): string {
+export function applyCapability(world: WorldPack, life: LifeState, id: string, options?: { calendarDeadline?: boolean }): string {
   const reason = capabilityReason(world, life, id);
   if (reason) throw new Error(reason);
   let text: string;
@@ -80,7 +81,7 @@ export function applyCapability(world: WorldPack, life: LifeState, id: string): 
     const result = applyFarmWork(world, life, id);
     text = result.text;
   } else {
-    const evidence = performWork(world, life, id);
+    const evidence = performWork(world, life, id, options);
     if((world.capabilities?.version ?? 0) >= 2 && /^M(?:[5-9]|10)$/.test(id)) Object.assign(evidence.data,{qualifies:false,awaitingService:true});
     life.capabilities!.evidence.push(evidence);
     text = `${world.capabilities!.nodes.find(n=>n.id===id)!.title}: completed recorded ${evidence.kind} work. Materials ${evidence.data.materialsPaid} dr; fees ${evidence.data.feePaid} dr; quoted payment ${evidence.data.quotedPayment} dr.${evidence.data.awaitingService ? " Proof awaits the actual service-year accounts." : ""}${life.capabilities!.project ? " Assessment saved; remaining work can resume in a later year." : ""}`;
@@ -93,11 +94,101 @@ export function applyCapability(world: WorldPack, life: LifeState, id: string): 
   syncEconomyStat(world, life);
   return text;
 }
+
+export const isAssessmentNode = (nodeId: string): boolean => Boolean(ruleFor(nodeId)?.project) || nodeId === "PS9";
+
+function ancestorSet(world: WorldPack, targetId: string): Set<string> {
+  const nodes = world.capabilities?.nodes ?? [];
+  const seen = new Set<string>();
+  function visit(id: string) {
+    if (seen.has(id)) return;
+    seen.add(id);
+    const node = nodes.find(candidate => candidate.id === id);
+    if (node) for (const parent of node.prerequisites.all) visit(parent);
+  }
+  visit(targetId);
+  return seen;
+}
+
+/** Ordinary qualifying jobs with stable IDs eligible for an assessment without repeating payouts or goods. */
+export function eligibleJobsForAssessment(world: WorldPack, life: LifeState, nodeId: string): EligibleJobRecord[] {
+  if (!world.capabilities || !life.capabilities || !isAssessmentNode(nodeId)) return [];
+  const lineage = ancestorSet(world, nodeId);
+  const consumedIds = new Set(
+    life.capabilities.evidence
+      .filter(e => e.kind === "job-assessment" && e.data.qualifies === true && typeof e.data.assessedJobIds === "string")
+      .flatMap(e => String(e.data.assessedJobIds).split(",").filter(Boolean)),
+  );
+  const results: EligibleJobRecord[] = [];
+  for (const entry of life.capabilities.evidence) {
+    const jobId = typeof entry.data.jobId === "string" ? entry.data.jobId : "";
+    if (!jobId || entry.data.qualifies !== true || entry.data.completedAssessment === true || entry.kind === "job-assessment") continue;
+    if (ruleFor(entry.nodeId)?.project || !lineage.has(entry.nodeId) || consumedIds.has(jobId)) continue;
+    const node = world.capabilities.nodes.find(candidate => candidate.id === entry.nodeId);
+    results.push({
+      jobId,
+      nodeId: entry.nodeId,
+      age: entry.age,
+      year: entry.year,
+      kind: entry.kind,
+      title: node?.title ?? entry.nodeId,
+      payment: Number(entry.data.quotedPayment ?? 0),
+      quantity: Number(entry.data.quantity ?? 0),
+    });
+  }
+  return results;
+}
+
+/** Assess two distinct completed ordinary job IDs, granting qualification once with zero duplicate pay/goods. */
+export function assessCapabilityJobs(world: WorldPack, life: LifeState, nodeId: string, submittedJobIds: readonly string[]): string {
+  if (!world.capabilities || !life.capabilities) throw new Error("This world does not enable capability work.");
+  if (life.phase !== "ready") throw new Error("Resolve the current decision or life ending before submitting an assessment.");
+  const node = world.capabilities.nodes.find(candidate => candidate.id === nodeId);
+  if (!node || !isAssessmentNode(nodeId)) throw new Error(`${nodeId} is not a multi-job assessment.`);
+  if (life.capabilities.learned[nodeId]) throw new Error(`${node.title} qualification has already been granted.`);
+  if (life.capabilities.project) throw new Error("Finish or close the active assessment project before submitting job records.");
+  const reqs = requirementReasons(world, life, nodeId);
+  if (reqs.length) throw new Error(reqs[0]);
+  if (submittedJobIds.length < 2) throw new Error("This assessment requires 2 distinct completed job IDs.");
+  const seen = new Set<string>();
+  for (const jobId of submittedJobIds) {
+    if (seen.has(jobId)) throw new Error(`Duplicate job ID submitted in assessment: ${jobId}.`);
+    seen.add(jobId);
+  }
+  const eligible = eligibleJobsForAssessment(world, life, nodeId);
+  const byId = new Map(eligible.map(job => [job.jobId, job]));
+  for (const jobId of submittedJobIds) {
+    if (!byId.has(jobId)) throw new Error(`Job ID ${jobId} is not an eligible completed ordinary job for ${nodeId}.`);
+  }
+  life.capabilities.evidence.push({
+    nodeId,
+    age: life.age,
+    year: life.year,
+    kind: "job-assessment",
+    data: {
+      qualifies: true,
+      reconciled: true,
+      cashConserved: true,
+      completedAssessment: true,
+      assessedJobIds: submittedJobIds.join(","),
+      distinctJobCount: submittedJobIds.length,
+      materialsPaid: 0,
+      feePaid: 0,
+      quotedPayment: 0,
+      paymentReceived: 0,
+      quantity: 0,
+    },
+  });
+  evaluateCapabilities(world, life);
+  return `${node.title}: recorded assessment across ${submittedJobIds.length} distinct jobs (${submittedJobIds.join(", ")}) for qualification only; no constituent goods or payments repeated.`;
+}
+
 export function settleCapabilities(world: WorldPack, life: LifeState, completedAge: number): void {
   if (!world.capabilities || !life.capabilities) return;
   settleFarmCapabilities(world, life, completedAge);
   settleMilitaryProofs(world,life,completedAge);
   // Proof-from-work worlds only: the year's practice and job count toward the next step of their lanes.
   recordWorkProofs(world, life, completedAge);
+  expireMissedCommissions(world, life);
   evaluateCapabilities(world, life);
 }
