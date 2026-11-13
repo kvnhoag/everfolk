@@ -1,13 +1,14 @@
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, JournalEntry,
-  LifeEngine, LifeEvent, LifeState, SaveFile, WorldPack,
+  LifeEngine, LifeEvent, LifeState, MarketOrderRequest, SaveFile, WorldPack,
 } from "./types.ts";
 import { validateWorld } from "./validate.ts";
 import { canonicalJson, contentFingerprint, nextRandom, seedToUint32 } from "./random.ts";
 import { formatYear, yearAtAge } from "./calendar.ts";
 import { activityPartnerIds, activityReason, characterEffectReason, initialCharacter } from "./character.ts";
-import { applyEconomyEffect, financeActivityReason, initialEconomy, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
+import { applyEconomyEffect, financeActivityReason, initialEconomy, syncEconomyStat, yearlyAssetIncome, repayDebtAutomatically } from "./economy.ts";
 import { loanCollectionEventId } from "./loans.ts";
+import { placeMarketOrder, cancelMarketOrder as cancelOrder, settleMarketYear } from "./market.ts";
 import { initialKnowledge, recordKnowledgePractice, progressKnowledge } from "./knowledge.ts";
 import { applyStatDelta, skillEffectDelta } from "./progression.ts";
 import { initialHealth, addHealthCondition, provideHealthCare, progressHealth, developHealthIncident } from "./health.ts";
@@ -18,6 +19,9 @@ import { outcomeWeight } from "./outcomes.ts";
 import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
 import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
+import { initializeFamily } from "./family.ts";
+import { applyRoyalEffect, initialRoyalty, isRoyalLife, progressRoyalty, royalAudienceAllowed } from "./royalty.ts";
+import { applyAristocratEffect, initialAristocracy, isAristocratLife, isPrivilegedLife, progressAristocracy } from "./aristocracy.ts";
 export { matchesCondition } from "./conditions.ts";
 
 const MAX_COMMANDS = 50_000;
@@ -74,10 +78,14 @@ function mutableSnapshot(state: LifeState): LifeState {
   return {
     ...state,
     stats: { ...state.stats }, flags: { ...state.flags },
+    ...(state.royalty ? { royalty: { ...state.royalty } } : {}),
+    ...(state.aristocracy ? { aristocracy: { ...state.aristocracy } } : {}),
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
     ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
-    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}) } } : {}),
+    ...(state.economy ? { economy: { ...state.economy, assets: { ...state.economy.assets }, ...(state.economy.loan ? { loan: { ...state.economy.loan } } : {}),
+      ...(state.economy.market ? { market: { ...state.economy.market, orders: state.economy.market.orders.map(order => ({ ...order })),
+        ...(state.economy.market.history ? { history: [...state.economy.market.history] } : {}) } } : {}) } } : {}),
     ...(state.health ? { health: { ...state.health, conditions: state.health.conditions.map(item => ({ ...item })) } } : {}),
     ...(state.knowledge ? { knowledge: { ...state.knowledge } } : {}),
     ...(state.character ? { character: {
@@ -86,6 +94,7 @@ function mutableSnapshot(state: LifeState): LifeState {
       lastActivityAges: { ...state.character.lastActivityAges },
       ...(state.character.knownPartnerIds ? { knownPartnerIds: [...state.character.knownPartnerIds] } : {}),
       ...(state.character.people ? { people: Object.fromEntries(Object.entries(state.character.people).map(([id, person]) => [id, { ...person }])) } : {}),
+      ...(state.character.family ? { family: state.character.family.map(member => ({ ...member })) } : {}),
       ...(state.character.datedPartnerIds ? { datedPartnerIds: [...state.character.datedPartnerIds] } : {}),
       ...(state.character.relationships ? { relationships: {
         partners: Object.fromEntries(Object.entries(state.character.relationships.partners).map(([id, tie]) => [id, { ...tie, ...(tie.roles ? { roles: [...tie.roles] } : {}) }])),
@@ -190,6 +199,8 @@ export function createEngine(input: unknown): LifeEngine {
       const reason = characterEffectReason(world, state, effect, true);
       if (reason) throw new Error(`Character effect is unavailable: ${reason}`);
       switch (effect.type) {
+        case "royal": applyRoyalEffect(world, state, effect); break;
+        case "aristocrat": applyAristocratEffect(world, state, effect); break;
         case "accomplishment": {
           if (!provenance) throw new Error("Accomplishments require an accepted decision or activity outcome.");
           const record = awardAccomplishment(world, state, effect.achievement, provenance.sourceId, provenance.outcomeId);
@@ -280,12 +291,18 @@ export function createEngine(input: unknown): LifeEngine {
   }
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
+    if (!royalAudienceAllowed(world, state, event.audience)) return false;
     // Medical decisions are interrupts from the health lifecycle, never an
     // unrelated random story or a repeat after care was already chosen.
     if (world.health?.careDecision === event.id) return false;
     if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
     if (event.exclusiveGroup && exclusiveGroups.get(event.exclusiveGroup)!.some(member => (state.eventCounts[member.id] ?? 0) > 0)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
+    // Explicit cooldowns also apply to recurring scheduled invitations. A failed
+    // task cannot offer its next annual review again during the same year.
+    const previousAge = state.lastEventAge[event.id];
+    if (event.trigger.type !== "random" && event.cooldownYears !== undefined && previousAge !== undefined &&
+      state.age - previousAge < event.cooldownYears) return false;
     if (!matches(event.when, state) || (event.mode !== "automatic" && choicesFor(event, state).length === 0)) return false;
     switch (event.trigger.type) {
       case "age": return state.age >= event.trigger.at;
@@ -300,6 +317,7 @@ export function createEngine(input: unknown): LifeEngine {
   function recordEvent(state: LifeState, event: LifeEvent): void {
     state.eventCounts[event.id] = (state.eventCounts[event.id] ?? 0) + 1;
     state.lastEventAge[event.id] = state.age;
+    if (world.economy?.market) syncEconomyStat(world, state);
     journal(state, "event", event.id, `${event.title}: ${event.text}`);
   }
 
@@ -544,6 +562,8 @@ export function createEngine(input: unknown): LifeEngine {
     if (world.economy && !state.economy) throw new Error("State is missing its economy record.");
     if (world.health && !state.health) throw new Error("State is missing its health record.");
     if (world.knowledge && !state.knowledge) throw new Error("State is missing its knowledge record.");
+    if (isRoyalLife(world, state) && !state.royalty) throw new Error("State is missing its royal household record.");
+    if (isAristocratLife(world, state) && !state.aristocracy) throw new Error("State is missing its aristocratic estate record.");
   }
 
   function start(seed: string): LifeState {
@@ -567,15 +587,27 @@ export function createEngine(input: unknown): LifeEngine {
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
+    const royalty = initialRoyalty(world, state);
+    if (royalty) state.royalty = royalty;
+    const aristocracy = initialAristocracy(world, state);
+    if (aristocracy) state.aristocracy = aristocracy;
     for (const [id, definition] of Object.entries(world.stats)) {
       const range = origin.statRanges?.[id] ?? definition.initialRange;
       if (range) state.stats[id] = startingStat(range.min, range.max, state);
     }
     if (world.character?.identity) initializeIdentity(world, state);
     else if (world.character?.playerNames) state.character!.name = pick(world.character.playerNames, () => 1, state);
+    initializeFamily(world, state);
     journal(state, "birth", origin.id, `${origin.title}: ${origin.text}`);
     apply(state, origin.effects);
-    if (world.economy) state.economy = initialEconomy(world, state)!;
+    if (world.economy) {
+      state.economy = initialEconomy(world, state)!;
+      for (const asset of world.economy.assets) {
+        const range = origin.assetRanges?.[asset.id] ?? asset.initialRange;
+        if (range) state.economy.assets[asset.id] = startingStat(range.min, range.max, state);
+      }
+      if (world.economy.uncappedResources || world.economy.assets.some(asset => origin.assetRanges?.[asset.id] || asset.initialRange)) syncEconomyStat(world, state);
+    }
     if (world.health && state.stats[world.health.stat] <= world.health.criticalHealth) addHealthCondition(world, state, world.health.declineCondition, "Your health starts at a critical level.", healthHooks(state));
     checkEndings(state);
     resolveEvents(state, true);
@@ -599,14 +631,23 @@ export function createEngine(input: unknown): LifeEngine {
     // before the first birthday is therefore recorded at age zero, not age one.
     if (mortalityCheck(next)) return;
     progressKnowledge(world, next, (id, text) => journal(next, "event", id, text));
+    const completedAge = next.age;
     next.age += 1;
     next.year = yearAtAge(world.startYear, next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
+    const privileged = isPrivilegedLife(world, next);
+    const marketYear = privileged ? { focused: false, productionBatches: 0 }
+      : settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
+    if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
+      if (privileged) return;
       if (next.phase !== "ended" && next.character?.jobId) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
-        apply(next, job.yearlyEffects);
-        journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+        if (marketYear.focused) journal(next, "activity", "work-set-aside-for-trade", `You set aside your ${job.title.toLowerCase()} work to focus on market trading this year. No job income or production is earned.`);
+        else if (!job.production || marketYear.productionBatches > 0) {
+          apply(next, job.yearlyEffects);
+          journal(next, "activity", job.id, `You continue your work as ${job.title.toLowerCase()}.`);
+        }
       }
       if (next.phase !== "ended") {
         const income = yearlyAssetIncome(world, next);
@@ -622,7 +663,11 @@ export function createEngine(input: unknown): LifeEngine {
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
-      if (matches(rule.when, next)) apply(next, rule.effects);
+      if (royalAudienceAllowed(world, next, rule.audience) && matches(rule.when, next)) apply(next, rule.effects);
+    }
+    if (next.phase !== "ended") {
+      progressRoyalty(world, next);
+      progressAristocracy(world, next);
     }
     if (!world.economy) annualIncome();
     const repaid = repayDebtAutomatically(world, next);
@@ -631,6 +676,7 @@ export function createEngine(input: unknown): LifeEngine {
     if (world.health) developHealthIncident(world, next, healthHooks(next));
     checkEndings(next);
     resolveEvents(next, true);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function chooseInto(next: LifeState, choiceId: string): void {
@@ -649,6 +695,7 @@ export function createEngine(input: unknown): LifeEngine {
     checkEndings(next);
     // Resolve other due scheduled events at this age, without generating extra random events.
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function advance(state: LifeState): LifeState {
@@ -674,6 +721,7 @@ export function createEngine(input: unknown): LifeEngine {
   function getActivities(state: LifeState): readonly ActivityAvailability[] {
     assertCompatible(state);
     return freeze((world.character?.activities ?? []).filter(activity => {
+      if (!royalAudienceAllowed(world, state, activity.audience)) return false;
       if (!world.character?.requireIntroductions) return true;
       const known = state.character?.knownPartnerIds ?? [];
       const introduced = new Set(activity.outcomes.flatMap(outcome => outcome.effects.flatMap(effect => effect.type === "introduce" ? [effect.partner] : [])));
@@ -702,12 +750,45 @@ export function createEngine(input: unknown): LifeEngine {
     apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id });
     checkEndings(next);
     resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
   }
 
   function act(state: LifeState, activityId: string): LifeState {
     assertPlayable(state);
     const next = mutableSnapshot(state);
     actInto(next, activityId);
+    return freeze(next);
+  }
+
+  function orderMarketInto(next: LifeState, request: MarketOrderRequest): void {
+    assertPlayable(next);
+    placeMarketOrder(world, next, request);
+    next.commands.push({ type: "market-order", side: request.side, asset: request.asset, quantity: request.quantity });
+    const order = next.economy!.market!.orders.at(-1)!;
+    const title = world.economy!.assets.find(item => item.id === request.asset)!.title.toLowerCase();
+    journal(next, "activity", "market-order", `You contract to ${order.side} ${order.quantity} ${title} at ${order.unitPrice} ${world.economy!.currency.short} each. ${order.side === "buy" ? "Cash" : "Goods"} reserved; settlement at age ${order.settlesAtAge}.`);
+    syncEconomyStat(world, next);
+  }
+
+  function orderMarket(state: LifeState, request: MarketOrderRequest): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    orderMarketInto(next, request);
+    return freeze(next);
+  }
+
+  function cancelMarketOrderInto(next: LifeState, orderId: number): void {
+    assertPlayable(next);
+    cancelOrder(world, next, orderId);
+    next.commands.push({ type: "market-cancel", orderId });
+    journal(next, "activity", "market-cancel", `You cancel market contract ${orderId}. Its reserved cash or goods are returned.`);
+    syncEconomyStat(world, next);
+  }
+
+  function cancelMarketOrder(state: LifeState, orderId: number): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    cancelMarketOrderInto(next, orderId);
     return freeze(next);
   }
 
@@ -745,6 +826,10 @@ export function createEngine(input: unknown): LifeEngine {
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
         if (state.commands.length === count) throw new Error(`Invalid redundant avatar command at ${i}.`);
+      } else if (command.type === "market-order" && Object.keys(command).length === 4 && typeof command.asset === "string" && typeof command.quantity === "number") {
+        orderMarketInto(state, command);
+      } else if (command.type === "market-cancel" && Object.keys(command).length === 2 && typeof command.orderId === "number") {
+        cancelMarketOrderInto(state, command.orderId);
       } else throw new Error(`Invalid command at ${i}.`);
     }
     return freeze(state);
@@ -775,5 +860,5 @@ export function createEngine(input: unknown): LifeEngine {
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, chooseAvatar, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, replay, save, load });
 }

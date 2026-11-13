@@ -1,0 +1,81 @@
+{
+  "records": [
+    {
+      "name": "standard-frame",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "trimCornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsVerifiedTransparent": 475200,
+      "centerAlpha": 0,
+      "rasterImages": 0,
+      "sha256": "8ac92ab29354f1beaca3398aad7574f71d3b9e2c5d56ff80694fd4be1a3e93c3"
+    },
+    {
+      "name": "standard-layout",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "trimCornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsVerifiedTransparent": 475200,
+      "centerAlpha": 0,
+      "rasterImages": 0,
+      "sha256": "c46c3c68328a5c1ee5b0845710ed6a851ff85562958297960cca7e3be3739e44"
+    },
+    {
+      "name": "legendary-full-art-frame",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "trimCornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsVerifiedTransparent": 501600,
+      "centerAlpha": 0,
+      "rasterImages": 0,
+      "sha256": "7c8ad6fb11937d24fcfc62c05c79900e97b073093ee900d2d488de2fed3247fd"
+    },
+    {
+      "name": "legendary-full-art-layout",
+      "width": 900,
+      "height": 1260,
+      "hasAlpha": true,
+      "trimCornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "centralArtPixelsVerifiedTransparent": 501600,
+      "centerAlpha": 0,
+      "rasterImages": 0,
+      "sha256": "83c38186312acfb70ec839440a7d3e8fcd1c40e8ee0c5aa86aed62552df675b5"
+    }
+  ],
+  "referenceSha256": "ac078847e270964ed624ab84dd9837612353a7445f7b15c3541d8a399bab6e0b",
+  "viewedProofs": [
+    "review/Everfolk-Selected-Frames.png",
+    "review/Everfolk-Selected-Frames-1060.png"
+  ],
+  "nativeReopenCheck": "qa/native-build.json",
+  "method": "Native VectorCraft export, not a generated or traced bitmap",
+  "notes": [
+    "All four outer corners have zero alpha.",
+    "Standard aperture and legendary central artwork fields are unobscured.",
+    "Legendary has transparent readability fades only at top and bottom.",
+    "Native master contains two artboards with live Source Serif 4 and Inter type and zero raster images."
+  ]
+}

@@ -2,6 +2,7 @@ import type { CharacterActivity, CharacterState, Condition, Effect, LifeState, W
 import { financeActivityReason } from "./economy.ts";
 import { marriageRelationshipReason, socialRoleEffectReason } from "./relationships.ts";
 import { resolvePartner } from "./people.ts";
+import { royalAudienceAllowed } from "./royalty.ts";
 
 export function initialCharacter(world: WorldPack): CharacterState | undefined {
   if (!world.character) return undefined;
@@ -69,6 +70,7 @@ export function characterEffectReason(world: WorldPack, state: LifeState, effect
     if (allowUnchanged && character.relationshipStatus === effect.status && character.partnerId === effect.partner) return;
     if (state.age < 18) return "Relationships unlock at age 18.";
     if (state.age + partner.ageOffset < 18) return `${partner.name} must be at least 18.`;
+    if (definition.extendedSocialRoles && character.relationships?.partners[partner.id]?.roles?.includes("enemy")) return `Settle your hostility with ${partner.name} before beginning a romantic relationship.`;
     if (effect.status === "courting") {
       if (character.relationshipStatus === "married") return "End your current marriage before beginning another courtship.";
       if (character.relationshipStatus === "courting" && character.partnerId === partner.id) return `You are already courting ${partner.name}.`;
@@ -98,6 +100,9 @@ export function activityReason(
   world: WorldPack, state: LifeState, activity: CharacterActivity,
   matches: (condition: Condition | undefined, state: LifeState) => boolean,
 ): string | undefined {
+  if (!royalAudienceAllowed(world, state, activity.audience)) return activity.audience === "royal"
+    ? "This activity belongs to a royal household." : activity.audience === "aristocrat"
+      ? "This activity belongs to an aristocratic estate." : "Privileged households delegate ordinary work and manage their own affairs.";
   if (!state.character || !world.character) return "This world has no character activities.";
   if (state.phase === "ended") return "This life has ended.";
   if (state.phase !== "ready") return "Resolve the current decision first.";

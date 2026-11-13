@@ -1,4 +1,4 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, yearAtAge } from "../src/index.ts";
@@ -10,12 +10,19 @@ import interestRelease from "../worlds/alexandria-0.14.0.json" with { type: "jso
 const commissionIds = ["small-pottery-order", "small-carving-order", "small-figure-order", "teach-a-reading-lesson", "copy-a-sky-table", "prepare-a-chart-reading"];
 function controlledWorld(): WorldPack {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  // Isolate ordinary commission mechanics while retaining all sampled birth origins.
+  if (world.royalty) world.royalty.originId = "fixture-unselected-royal-origin";
+  if (world.aristocracy) world.aristocracy.originId = "fixture-unselected-estate-origin";
+  withoutMarketSignals(world);
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.yearlyEffects = [];
   world.yearlyRules = [];
+  // This work-income fixture excludes possessions and passive household income.
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) delete origin.assetRanges;
   world.stats.wealth.initialRange = { min: 80, max: 80 };
   for (const origin of world.origins) origin.statRanges!.wealth = { min: 80, max: 80 };
   return world;
@@ -50,9 +57,11 @@ test("a practiced interest earns alongside a day job and can become the regular 
   assert.equal(availability(engine, ageTo(engine, life, 19), "small-pottery-order").available, false, "The two-year commission cooldown remains in force.");
   life = engine.act(ageTo(engine, life, 19), "work-ceramic-decorator");
   assert.equal(life.character!.jobId, "ceramic-decorator");
+  life = engine.orderMarket(life, { side: "buy", asset: "clay", quantity: 4 });
   const startCash = life.economy!.cash;
   life = engine.advance(life);
-  assert.equal(life.economy!.cash, startCash + 30);
+  assert.equal(life.economy!.cash, startCash, "Independent craft creates stock for sale rather than an automatic salary.");
+  assert.ok(life.economy!.assets["pottery-goods"] > 0, "The purchased clay supplies the first year of regular craft work.");
   assert.ok(life.character!.skills.pottery > pottery + 2);
   assert.deepEqual(engine.replay(life.seed, life.commands), life);
   assert.deepEqual(engine.load(engine.save(life)), life);

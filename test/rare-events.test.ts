@@ -1,3 +1,4 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, validateWorld } from "../src/index.ts";
@@ -119,11 +120,14 @@ test("dated anchors and due automatic history keep priority over rare encounters
 });
 
 test("recorded illness and moneylender collection keep priority over the rare annual lane", () => {
-  const pack = structuredClone(alexandria) as WorldPack;
+  const pack = withoutMarketSignals(structuredClone(alexandria) as WorldPack);
   delete pack.health!.mortalityCalibration;
   pack.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   pack.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   pack.yearlyEffects = []; pack.yearlyRules = [];
+  // Keep this seeded interrupt sequence independent of starting resource draws.
+  for (const asset of pack.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of pack.origins) delete origin.assetRanges;
   for (const origin of pack.origins) origin.statRanges = { ...origin.statRanges, health: { min: 80, max: 80 }, wealth: { min: 50, max: 50 } };
   pack.eventPacing = { minChoiceGapYears: 3, maxChoiceGapYears: 3, rareEvents: { annualChance: 1, cooldownYears: 12 } };
   const keep = new Set([pack.health!.careDecision, ...Object.values(pack.economy!.moneylender!.events)]);

@@ -1,3 +1,4 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
@@ -7,7 +8,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { applyNamePoolEdits } from "../client/admin/name-pools.ts";
+import { applyNamePoolEdits } from "../client/models/admin/name-pools.ts";
 import raw from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.28.0.json" with { type: "json" };
 
@@ -17,7 +18,7 @@ const hooks = registerHooks({ load(url, context, next) {
   }).outputText };
   return next(url, context);
 } });
-const { default: PlayerNamesEditor } = await import("../client/admin/PlayerNamesEditor.tsx");
+const { default: PlayerNamesEditor } = await import("../client/components/admin/PlayerNamesEditor.tsx");
 hooks.deregister();
 
 const world = raw as WorldPack;
@@ -46,6 +47,10 @@ test("the guided editor rejects case-insensitive duplicates, cross-pool overlap 
 
 function encounterFixture(pack: WorldPack): WorldPack {
   const copy = structuredClone(pack), keep = new Set([copy.health!.careDecision, ...Object.values(copy.economy!.moneylender!.events), "meet-person-harbor"]);
+  // Name acceptance is independent of the sampled household's management route.
+  if (copy.royalty) copy.royalty.originId = "fixture-unselected-royal-origin";
+  if (copy.aristocracy) copy.aristocracy.originId = "fixture-unselected-estate-origin";
+  withoutMarketSignals(copy);
   copy.events = copy.events.filter(event => keep.has(event.id));
   const meet = copy.events.find(event => event.id === "meet-person-harbor")!;
   meet.trigger = { type: "age", at: 18 }; delete meet.when;

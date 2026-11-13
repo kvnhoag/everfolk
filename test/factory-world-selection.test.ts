@@ -3,7 +3,7 @@ import test from "node:test";
 import { compilePublishedWorld, getBuiltinCatalog, getBuiltinWorld } from "../server/content.ts";
 import type { PublishedWorld } from "../server/content.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { selectFactoryWorld } from "../client/factory-world-selection.ts";
+import { selectFactoryWorld } from "../client/models/factory-world-selection.ts";
 import classical from "../worlds/alexandria-0.32.0.json" with { type: "json" };
 import older from "../worlds/alexandria-0.25.0.json" with { type: "json" };
 
@@ -17,7 +17,7 @@ test("new births use the current bundled factory for an exact older official pac
     const published = factory(pack), before = structuredClone(published);
     const selected = selectFactoryWorld(published);
     assert.deepEqual(selected, getBuiltinWorld());
-    assert.equal(selected.pack.version, "0.34.0");
+    assert.equal(selected.pack.version, getBuiltinWorld().pack.version);
     assert.ok(selected.pack.origins.some(origin => origin.id === "royal-household"));
     assert.deepEqual(published, before);
   }
@@ -27,7 +27,7 @@ test("an untouched published factory revision refreshes using its canonical publ
   for (const pack of [classical, older]) {
     const published = compilePublishedWorld(getBuiltinCatalog(pack).worlds[0]);
     assert.notEqual(published.revisionId, factory(pack).revisionId);
-    assert.equal(selectFactoryWorld(published).pack.version, "0.34.0");
+    assert.equal(selectFactoryWorld(published).pack.version, getBuiltinWorld().pack.version);
     const unexpectedRevision = { ...published, revisionId: "pack-unrecognized-publication" };
     assert.equal(selectFactoryWorld(unexpectedRevision), unexpectedRevision);
   }

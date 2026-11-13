@@ -15,9 +15,19 @@ export function socialRoleEffectReason(world: WorldPack, state: LifeState, effec
   const person = resolvePartner(world, state, effect.partner);
   if (!person || !("metAge" in person)) return "Meet this person before establishing a social relationship.";
   if (state.age < 18 || state.age + person.ageOffset < 18) return "Both people must be at least 18.";
+  if (!["friend", "business-partner"].includes(effect.role) && !world.character.extendedSocialRoles) return "This world has no teaching or enemy relationships.";
+  if (effect.active && world.character.extendedSocialRoles) {
+    const roles = state.character.relationships.partners[effect.partner]?.roles ?? [];
+    if (effect.role === "enemy") {
+      if (roles.some(role => role !== "enemy")) return `End your cooperative relationships with ${person.name} before becoming enemies.`;
+      if (state.character.partnerId === effect.partner && (state.character.relationshipStatus === "courting" || state.character.relationshipStatus === "married")) return "End your romantic relationship before becoming enemies.";
+    } else if (roles.includes("enemy")) return `Settle your hostility with ${person.name} before beginning a cooperative relationship.`;
+    if (effect.role === "teacher" && roles.includes("disciple") || effect.role === "disciple" && roles.includes("teacher")) return "End the current teaching arrangement before reversing teacher and disciple roles.";
+  }
   if (!allowUnchanged && hasSocialRole(state, effect.partner, effect.role) === effect.active) {
     if (effect.role === "friend") return effect.active ? `You are already friends with ${person.name}.` : `You and ${person.name} have not established a friendship.`;
-    return effect.active ? `${person.name} is already your business partner.` : `You have no business partnership with ${person.name}.`;
+    if (effect.role === "business-partner") return effect.active ? `${person.name} is already your business partner.` : `You have no business partnership with ${person.name}.`;
+    return effect.active ? `${person.name} already has the ${effect.role} role in your life.` : `${person.name} has no ${effect.role} relationship with you.`;
   }
 }
 

@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { loadAnyLife } from "../client/session.ts";
+import { loadAnyLife } from "../client/lib/world-session.ts";
 import { getBuiltinCatalog, compileWorld, getArchivedBuiltinWorld } from "../server/content.ts";
-import { getChoiceImpact } from "../client/choice-impact.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { getChoiceImpact } from "../client/models/choice-impact.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import type { Choice } from "../src/types.ts";
 import previous from "../worlds/alexandria-0.18.0.json" with { type: "json" };
 

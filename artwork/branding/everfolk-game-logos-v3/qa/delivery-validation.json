@@ -1,0 +1,16 @@
+{
+  "logos": 20,
+  "families": [
+    "monumental",
+    "uncial",
+    "geometric",
+    "organic",
+    "display"
+  ],
+  "masters": 20,
+  "svg": 40,
+  "png": 40,
+  "nativeArtboards": 60,
+  "warnings": [],
+  "problems": []
+}

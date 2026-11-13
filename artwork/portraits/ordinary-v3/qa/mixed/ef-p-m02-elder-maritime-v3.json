@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "569f374b5d3aea4eb753ee2dfa9739563ce135036d7929072593ec862eaf9505",
+  "finePixelSha256": "8eeba70de82c49022ad67484265cd1982430af01079cbbf5955088871c3d9d0d",
+  "mixedPixelSha256": "3563d8bd2a8bc54263676fa5b5484487a660e3ef8afcdf4be188ea4164557654",
+  "maskPixelSha256": "5bfcd28127f86e4483a9f1c3d2497ea102ecd7165da08a1e6aa8123be1af2288",
+  "selectedDetailCells": 340,
+  "retainedCoarseCells": 4780,
+  "criticalForcedAdditionalCells": 0,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12240,
+  "changedPixels": 12065,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        148,
+        76,
+        238,
+        96
+      ],
+      "selectedPixels": 1800,
+      "totalPixels": 1800,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-m02-elder-maritime-v3",
+  "source": "portraits/assembled/ef-p-m02-elder-maritime-v3.png",
+  "sourceSha256": "00f9d915411afcd702167f33945e8cec5015dc5fd4c1fa17af45d52d7d6c05e9",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-m02-elder-maritime-v3.png",
+  "coarseSha256": "a35c39f43a74d72a8089fbf1214656941acf1ddf4dd26df2ced3c6f1c6da5bef",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-m02-elder-maritime-v3.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-m02-elder-maritime-v3.png",
+  "fineSha256": "f6817baad9934eb48c6efb3a00dbc6b6cc1c1e8f4f6ed85a2abe2e267bdd91e1",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-m02-elder-maritime-v3.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-m02-elder-maritime-v3.png",
+  "outputSha256": "957c1012983b507fbcb7f9fe7117ea4faeac8034135ce6fc866db4a7ab04601e",
+  "maskPath": "qa/regional-masks/ef-p-m02-elder-maritime-v3.png",
+  "maskSha256": "b0b2adfb2ae3a5c3e763a67df77234a1fcca92304f570ea5472997d940fe2a31",
+  "configPath": "qa/regions/ef-p-m02-elder-maritime-v3.json",
+  "configSha256": "815112d207dc3381d7f8c14cf2bf3da3c1371f8824fa8028becb1f415578d930",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "measured eye/chin on the complete original model after one uniform whole-canvas scale"
+}

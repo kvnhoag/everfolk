@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { contentFingerprint } from "../src/random.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import retained from "../worlds/alexandria-0.32.0.json" with { type: "json" };
 

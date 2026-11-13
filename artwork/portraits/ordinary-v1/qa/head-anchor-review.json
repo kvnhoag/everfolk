@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "heads_third_pair",
+  "status": "Visual review and approximate landmark guidance; not automatic landmark detection",
+  "coordinateSpace": "Native source image pixels, top-left origin. Eye centres estimated visually (roughly \u00c2\u00b115\u00e2\u20ac\u201c25px); neckJoin is the centre of the cut neck BASE, not the anatomical clavicle.",
+  "normalizationRecommendation": {
+    "preserveAspect": true,
+    "eyeTarget": [
+      400,
+      350
+    ],
+    "neckBaseTarget": [
+      400,
+      735
+    ],
+    "method": "Scale using eye-to-neck-base vertical distance, then align eye midpoint horizontally and vertically; preserve native pose. Check neck overlap into garment after assembly. Do not force horizontal neck/eye differences to zero by warping.",
+    "alphaBounds": "Use main visible connected component or alpha>=128 bbox for content measurement; raw alpha>0 includes faint stray speckles.",
+    "f02Exception": "Braid extends below actual neck cut and should not determine face scale. It can remain foreground over clothing."
+  },
+  "adults": [
+    {
+      "identityId": "m01",
+      "source": "source/heads/ef-h-m01-adult-v1.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "eyeMidpoint": [
+        625,
+        480
+      ],
+      "eyeCenters": [
+        [
+          495,
+          480
+        ],
+        [
+          755,
+          480
+        ]
+      ],
+      "neckJoin": [
+        590,
+        1250
+      ],
+      "mainFaceBox": [
+        300,
+        245,
+        910,
+        995
+      ],
+      "visualNotes": "Broad bearded face with slight gaze to viewer right. Neck is long; source eye midpoint is slightly right of neck centre. Preserve pose rather than warp."
+    },
+    {
+      "identityId": "m02",
+      "source": "source/heads/ef-h-m02-adult-v1.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "eyeMidpoint": [
+        565,
+        535
+      ],
+      "eyeCenters": [
+        [
+          440,
+          535
+        ],
+        [
+          690,
+          535
+        ]
+      ],
+      "neckJoin": [
+        560,
+        1315
+      ],
+      "mainFaceBox": [
+        300,
+        295,
+        825,
+        990
+      ],
+      "visualNotes": "Narrow angular clean-shaven face. Coherent scale and level eyes; needs same eye target as others."
+    },
+    {
+      "identityId": "m03",
+      "source": "source/heads/ef-h-m03-adult-v1.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "eyeMidpoint": [
+        565,
+        520
+      ],
+      "eyeCenters": [
+        [
+          430,
+          520
+        ],
+        [
+          700,
+          520
+        ]
+      ],
+      "neckJoin": [
+        560,
+        1330
+      ],
+      "mainFaceBox": [
+        275,
+        275,
+        850,
+        1000
+      ],
+      "visualNotes": "Broader rounded face and short chin beard distinguish him. Warm small smile; no visible anatomy fault."
+    },
+    {
+      "identityId": "f01",
+      "source": "source/heads/ef-h-f01-adult-v1.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "eyeMidpoint": [
+        560,
+        525
+      ],
+      "eyeCenters": [
+        [
+          425,
+          525
+        ],
+        [
+          695,
+          525
+        ]
+      ],
+      "neckJoin": [
+        560,
+        1355
+      ],
+      "mainFaceBox": [
+        275,
+        265,
+        850,
+        995
+      ],
+      "visualNotes": "Broad oval face with compact low bun. Neck base is long; align eye/neck rather than hair bounding box alone."
+    },
+    {
+      "identityId": "f02",
+      "source": "source/heads/ef-h-f02-adult-v1.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "eyeMidpoint": [
+        555,
+        535
+      ],
+      "eyeCenters": [
+        [
+          425,
+          535
+        ],
+        [
+          685,
+          535
+        ]
+      ],
+      "neckJoin": [
+        555,
+        1340
+      ],
+      "mainFaceBox": [
+        280,
+        285,
+        830,
+        1000
+      ],
+      "visualNotes": "Narrower oval face and side braid. Braid continues to about y1372, below actual neck base. Treat braid as hair overlay, not a neck-bottom measurement."
+    },
+    {
+      "identityId": "f03",
+      "source": "source/heads/ef-h-f03-adult-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "eyeMidpoint": [
+        655,
+        485
+      ],
+      "eyeCenters": [
+        [
+          525,
+          485
+        ],
+        [
+          785,
+          485
+        ]
+      ],
+      "neckJoin": [
+        655,
+        1170
+      ],
+      "mainFaceBox": [
+        360,
+        245,
+        990,
+        920
+      ],
+      "visualNotes": "Rounded broad face, dark copper-brown skin and coily hairband silhouette. Source aspect differs from other adults; do not stretch to canvas."
+    }
+  ],
+  "ageReview": [
+    {
+      "identityId": "m01",
+      "stages": [
+        "infant",
+        "child",
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "result": "Consistent broad-cheek/rounded-nose/dark-eye family with plausible age anatomy. Infant and child remove acquired scar; youth has no beard. Beard develops in adult and greys progressively in middle/elder. No source regeneration required."
+    },
+    {
+      "identityId": "f03",
+      "stages": [
+        "infant",
+        "child",
+        "youth",
+        "adult",
+        "middle",
+        "elder"
+      ],
+      "result": "Coherent rounded-face/broad-nose/full-lip/coily-hair family and dark skin through ages. Infant has soft baby hair and no adult band. Child/youth retain recognizable facial family; middle/elder grey and wrinkle progressively. No source regeneration required."
+    }
+  ],
+  "sourceAlphaQA": "qa/heads-third-pair.json",
+  "proofReview": "Passed independent visual review of profile and outline proofs, M01 smooth six-age assemblies, final 36-lifetime grid, 48 adult wardrobe samples and actual-size 48x60 grid.",
+  "finalVisualReview": {
+    "status": "passed",
+    "reviewedFiles": [
+      "review/lifetimes-6x6.png",
+      "review/adult-wardrobe-6x8.png",
+      "review/actual-size-48x60.png"
+    ],
+    "visualCoverage": {
+      "lifetimeSamples": 36,
+      "adultWardrobeSamples": 48,
+      "all192IndividuallyInspected": false
+    },
+    "criticalIssues": [],
+    "checks": [
+      "Recognizable identity through ageing",
+      "Plausible infant and child facial proportions",
+      "Readable pupils and gaze at intended small size",
+      "No floating neck, exposed neck cut, collar hole or braid/collar gap",
+      "Consistent lighting and shared painterly pixel finish"
+    ],
+    "nonblockingObservations": [
+      "Everyday clothing is roomier in shoulder silhouette than work, maritime and commerce; current variation is acceptable as loose clothing rather than fixed-body pose matching.",
+      "Scholarly, maritime and performance families share related teal drapes; their distinctions become subtle at 48x60 and could be strengthened in a future costume refinement."
+    ],
+    "requestedRerender": false
+  }
+}

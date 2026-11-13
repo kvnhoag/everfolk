@@ -2,8 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createEngine } from "../src/index.ts";
 import { severeEpisodeFatalityProbability } from "../src/health.ts";
-import { severeHealthRisk, formatHealthRisk } from "../client/health-risk.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { severeHealthRisk, formatHealthRisk } from "../client/models/health-risk.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 
 test("care choices disclose exact severe-episode risk without changing the life or randomness", () => {

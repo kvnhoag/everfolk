@@ -1,0 +1,90 @@
+{
+  "method": "Published PixelOE, legacy CPU API",
+  "package": "1.0.0",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-before-v3.png",
+  "sourceSha256": "5c7a9cdadeeb736ff579461c776c590921261631052ea714da3d54e1dd8d567a",
+  "sourceSize": [
+    1672,
+    941
+  ],
+  "sourceCrop": null,
+  "aspectNote": "Explicit target16:9; PixelOE normalizes the source aspect by less than0.06%. No source crop.",
+  "upstream": "https://github.com/KohakuBlueleaf/PixelOE",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "torch": "2.7.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "presets": [
+    {
+      "name": "bold",
+      "width": 320,
+      "height": 180,
+      "scale": 6,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          320,
+          180
+        ],
+        "patch_size": 4,
+        "pixel_size": 6,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "1d8a85089e1c103c1096cb374e50a9f0ce4cad077f2912aa972c2f590fae4a75",
+      "logicalSha256": "58e701c6dc1551bd8127beb3b49f38cfa21082701f6dd15684f7720ddc1502ee",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "colourQuantization": false,
+      "uniqueColours": 20979,
+      "elapsedSeconds": 1.295
+    },
+    {
+      "name": "chunky",
+      "width": 240,
+      "height": 135,
+      "scale": 8,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          240,
+          135
+        ],
+        "patch_size": 4,
+        "pixel_size": 8,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-chunky.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-chunky.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "9667471575c13c9e212ec33102106d981196dc5c9fe001663c987eea27613769",
+      "logicalSha256": "d5578395e23097a6abeb59be931e99a54f88857c89695f16a7f354253d5c41bb",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "colourQuantization": false,
+      "uniqueColours": 15112,
+      "elapsedSeconds": 0.639
+    }
+  ],
+  "sourceUnchanged": true
+}

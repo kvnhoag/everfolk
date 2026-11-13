@@ -1,0 +1,81 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-face-detail-v9\\masters\\Alexander-Eye-Detail-Comparison.vectorcraft",
+  "output": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-face-detail-v9\\review\\Alexander-Eye-Detail-Comparison.png",
+  "layout": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-face-detail-v9\\qa\\eye-detail-layout.png",
+  "inputs": [
+    {
+      "label": "Painting reference",
+      "file": "source/alexander-painting.png",
+      "x": 35,
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "roi": [
+        369,
+        264,
+        240,
+        304
+      ],
+      "scale": 2.25,
+      "caption": "Existing generated painting / unchanged",
+      "sha256": "bdcc4654a4253aabccb656231cd85fbcb0ab66c08c6eb1cf8bb52bf791feb55f",
+      "layerId": 13
+    },
+    {
+      "label": "Current coarse face",
+      "file": "assets/alexander-card-pixel-coarse.png",
+      "x": 610,
+      "dimensions": [
+        840,
+        1050
+      ],
+      "roi": [
+        276,
+        198,
+        180,
+        228
+      ],
+      "scale": 3,
+      "caption": "Current uniform coarse finish / exact pixel crop",
+      "sha256": "7ebbb312e9ecd7d7c05874764eae5165f2b988f7da3eccdfe7f83a0a47e5dd2e",
+      "layerId": 17
+    },
+    {
+      "label": "Recalibrated face + eyes",
+      "file": "assets/alexander-card-pixel.png",
+      "x": 1185,
+      "dimensions": [
+        840,
+        1050
+      ],
+      "roi": [
+        276,
+        198,
+        180,
+        228
+      ],
+      "scale": 3,
+      "caption": "Regional face detail / exact pixel crop",
+      "sha256": "89fe6da957a7cd8c5612a27056b6e195a9f9d5bc8f3a2b6443c148699057025c",
+      "layerId": 21
+    }
+  ],
+  "pixelChecks": [
+    {
+      "label": "Current coarse face",
+      "comparedPixels": 369360,
+      "differingChannels": 0,
+      "nearestScale": 3
+    },
+    {
+      "label": "Recalibrated face + eyes",
+      "comparedPixels": 369360,
+      "differingChannels": 0,
+      "nearestScale": 3
+    }
+  ],
+  "unchanged": true,
+  "warnings": [],
+  "paintingProvenance": "Existing generated painting, unchanged. This board does not synthesize historical references or paint eyes."
+}

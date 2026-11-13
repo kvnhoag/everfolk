@@ -1,0 +1,402 @@
+{
+  "fonts": [
+    {
+      "family": "Courier New",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Courier New",
+        "style": "Bold"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Bold"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 340,
+        "name": "13 Primary lockup",
+        "width": 720,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "13 Colour device",
+        "width": 160,
+        "x": 760,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "13 One-colour device",
+        "width": 160,
+        "x": 960,
+        "y": 0
+      },
+      {
+        "height": 340,
+        "name": "13 Reverse lockup",
+        "width": 720,
+        "x": 0,
+        "y": 400
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 22,
+    "dirty": false,
+    "fileInfoTitle": "Everfolk / 13 Gathering",
+    "history": [
+      "Artboard Options",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Layer",
+      "Draw Gathering",
+      "Type",
+      "Type",
+      "New Layer",
+      "Draw Gathering",
+      "New Layer",
+      "Draw Gathering",
+      "New Layer",
+      "Draw Gathering",
+      "Type",
+      "Type"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      22
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 119.13937499999997,
+          "width": 486.5715625,
+          "x": 80.28,
+          "y": 510.72
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 253,
+              "y": 610.5
+            },
+            "fill": "#b58a49",
+            "id": 29,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.765625,
+              "width": 316.8515625,
+              "x": 250,
+              "y": 533.0537109375
+            },
+            "fill": "#fbf3df",
+            "id": 28,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 106.55999999999995,
+              "width": 115.44,
+              "x": 80.28,
+              "y": 510.72
+            },
+            "childCount": 4,
+            "id": 27,
+            "kind": "Group",
+            "locked": false,
+            "name": "13 Gathering / reverse device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 22,
+        "kind": "Layer",
+        "locked": false,
+        "name": "04 Reverse lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 92.16,
+          "width": 99.84000000000003,
+          "x": 990.08,
+          "y": 33.92
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 92.16,
+              "width": 99.84000000000003,
+              "x": 990.08,
+              "y": 33.92
+            },
+            "childCount": 4,
+            "id": 21,
+            "kind": "Group",
+            "locked": false,
+            "name": "13 Gathering / mono device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 16,
+        "kind": "Layer",
+        "locked": false,
+        "name": "03 One-colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 92.16,
+          "width": 99.83999999999992,
+          "x": 790.08,
+          "y": 33.92
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 92.16,
+              "width": 99.83999999999992,
+              "x": 790.08,
+              "y": 33.92
+            },
+            "childCount": 4,
+            "id": 15,
+            "kind": "Group",
+            "locked": false,
+            "name": "13 Gathering / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 10,
+        "kind": "Layer",
+        "locked": false,
+        "name": "02 Colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 119.139375,
+          "width": 486.5715625,
+          "x": 80.28,
+          "y": 110.72
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 253,
+              "y": 210.5
+            },
+            "fill": "#736957",
+            "id": 9,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 74.765625,
+              "width": 316.8515625,
+              "x": 250,
+              "y": 133.0537109375
+            },
+            "fill": "#24464b",
+            "id": 8,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 106.56,
+              "width": 115.44,
+              "x": 80.28,
+              "y": 110.72
+            },
+            "childCount": 4,
+            "id": 7,
+            "kind": "Group",
+            "locked": false,
+            "name": "13 Gathering / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "01 Primary lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 29,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#fbf3df",
+      "strokeWidth": 6
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\13-gathering.vectorcraft",
+    "redo": [],
+    "revision": 129,
+    "selection": [
+      29
+    ],
+    "selectionBounds": {
+      "height": 19.359375,
+      "width": 136.390625,
+      "x": 253,
+      "y": 610.5
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "13-gathering.vectorcraft",
+    "tool": "selection",
+    "uid": 14,
+    "units": "Pixels"
+  }
+}

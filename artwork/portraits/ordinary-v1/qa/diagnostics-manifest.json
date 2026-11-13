@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v1",
+  "scope": "bounded-proof",
+  "canvas": [
+    800,
+    1000
+  ],
+  "style": "Mature anime anatomical character design, painterly chiaroscuro, warm upper-left light/cool jade umber shadows, restrained earth colours. Generate smooth components first; PixelOE finish after composition. No glossy actor likeness or uniform heroic scowl.",
+  "runtimeIntegrated": false,
+  "identities": [
+    {
+      "id": "m01",
+      "sex": "male",
+      "avatarVariant": 0
+    },
+    {
+      "id": "m02",
+      "sex": "male",
+      "avatarVariant": 1
+    },
+    {
+      "id": "m03",
+      "sex": "male",
+      "avatarVariant": 2
+    },
+    {
+      "id": "f01",
+      "sex": "female",
+      "avatarVariant": 0
+    },
+    {
+      "id": "f02",
+      "sex": "female",
+      "avatarVariant": 1
+    },
+    {
+      "id": "f03",
+      "sex": "female",
+      "avatarVariant": 2
+    }
+  ],
+  "stages": [
+    "infant",
+    "child",
+    "youth",
+    "adult",
+    "middle",
+    "elder"
+  ],
+  "stageWardrobes": {
+    "infant": [
+      "infant"
+    ],
+    "child": [
+      "child",
+      "work"
+    ],
+    "youth": [
+      "youth",
+      "work",
+      "maritime",
+      "scholarly",
+      "performance"
+    ],
+    "adult": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ],
+    "middle": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ],
+    "elder": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance"
+    ]
+  },
+  "defaultWardrobes": {
+    "infant": "infant",
+    "child": "child",
+    "youth": "youth",
+    "adult": "everyday",
+    "middle": "everyday",
+    "elder": "everyday"
+  },
+  "heads": [
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-adult-v1.png",
+      "sourceSha256": "4eb2f06f236313793911f4fe2e899434b4af549c5bd8ff1ecb51a45e38112ac7",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        190,
+        11,
+        971,
+        1254
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        196,
+        85
+      ],
+      "placedSize": [
+        408,
+        650
+      ],
+      "uniformScale": 0.5229283990345938,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-adult-v1.png",
+      "sha256": "7783b36df73cbf8ff83e6eb7edf299725b17d386706b157aa98d21c765662452",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-adult-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-infant-v1.png",
+      "sourceSha256": "6edc43b54004ee4a7fda2dae4910da1f38f22f92817cbf6ef97a6fd1dddb81fa",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        155,
+        44,
+        1059,
+        1220
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        170,
+        137
+      ],
+      "placedSize": [
+        460,
+        598
+      ],
+      "uniformScale": 0.5088495575221239,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-infant-v1.png",
+      "sha256": "bfbb8a91eb0f4e0273801cca258b901dd9329d143dd8e79b98e39f6073580e76",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-infant-v1",
+      "identityId": "m01",
+      "stage": "infant",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-child-v1.png",
+      "sourceSha256": "f6995fd6133e67dfca191c1ad3af533c931d59cd0e640a6165cbbc8b2ea26d4a",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        259,
+        48,
+        1029,
+        1136
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        170,
+        85
+      ],
+      "placedSize": [
+        460,
+        650
+      ],
+      "uniformScale": 0.5974025974025974,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-child-v1.png",
+      "sha256": "97fc981888ed3bf8ae4b356b7d65ff5cad19c2e7b796b0606b409ca6775974b1",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-child-v1",
+      "identityId": "m01",
+      "stage": "child",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-youth-v1.png",
+      "sourceSha256": "f2e581fb3fb8dee0810fbd22692bd1f970c49e277d1641a82a337b6daa292267",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        206,
+        14,
+        977,
+        1249
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        197,
+        85
+      ],
+      "placedSize": [
+        406,
+        650
+      ],
+      "uniformScale": 0.5263157894736842,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-youth-v1.png",
+      "sha256": "80f83ef508fea7910b4b63b97cf9a24989d6278c6cd92d8e47185f0049871a8d",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-youth-v1",
+      "identityId": "m01",
+      "stage": "youth",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-middle-v1.png",
+      "sourceSha256": "043f2a899e4b439a8b4c0368b5576bbfc1721d698bbf6fe8acc43752a2b4d578",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        193,
+        13,
+        974,
+        1272
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        198,
+        85
+      ],
+      "placedSize": [
+        403,
+        650
+      ],
+      "uniformScale": 0.5162827640984908,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-middle-v1.png",
+      "sha256": "02b2c1b3fd256ae2d14c5832d4b623a42ce105b16a203b8adab66ba8f56cc777",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-middle-v1",
+      "identityId": "m01",
+      "stage": "middle",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    },
+    {
+      "kind": "head-and-neck",
+      "source": "source/heads/ef-h-m01-elder-v1.png",
+      "sourceSha256": "c08ac00caddcedfee0cff5415f4275e249a3e488e11fb398920afe0378b491ea",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        191,
+        5,
+        982,
+        1258
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        170,
+        85,
+        630,
+        735
+      ],
+      "placedAt": [
+        195,
+        85
+      ],
+      "placedSize": [
+        410,
+        650
+      ],
+      "uniformScale": 0.518754988028731,
+      "aspectRatioPreserved": true,
+      "path": "components/heads/ef-h-m01-elder-v1.png",
+      "sha256": "8a3f268f8a7674e4f69eda7d36d6f3bbb33832d13d165b788536e6ca4354312f",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-h-m01-elder-v1",
+      "identityId": "m01",
+      "stage": "elder",
+      "neckAnchor": [
+        400,
+        700
+      ],
+      "neckBottom": 735
+    }
+  ],
+  "garments": [
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-everyday-v1.png",
+      "sourceSha256": "3213f62c89ab46246ddb111e2256ad36015ac4f6301ee191249266633029ce42",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        254
+      ],
+      "sourceCropBox": [
+        13,
+        150,
+        1523,
+        954
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        35,
+        625,
+        765,
+        1000
+      ],
+      "placedAt": [
+        48,
+        625
+      ],
+      "placedSize": [
+        704,
+        375
+      ],
+      "uniformScale": 0.4664179104477612,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-everyday-adult-v1.png",
+      "sha256": "12d58e03b85a2d988259be905a591b60811bf7d9076319637aa5b9b466851b04",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-everyday-adult-v1",
+      "wardrobeId": "everyday",
+      "placementStage": "adult",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    },
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-infant-v1.png",
+      "sourceSha256": "c2572e0d0c4551e6c74382030408aa0edd7155c0d5cd1776115b53e1a9fff709",
+      "sourceSize": [
+        1199,
+        1312
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "sourceCropBox": [
+        184,
+        112,
+        1007,
+        1227
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        120,
+        625,
+        680,
+        1000
+      ],
+      "placedAt": [
+        262,
+        625
+      ],
+      "placedSize": [
+        277,
+        375
+      ],
+      "uniformScale": 0.336322869955157,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-infant-infant-v1.png",
+      "sha256": "521351b09d1cc5f90dfd2e673936d71f7463257c24dbe6f8d8b78bad259110e9",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-infant-infant-v1",
+      "wardrobeId": "infant",
+      "placementStage": "infant",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    },
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-child-v1.png",
+      "sourceSha256": "ebba3f968bad760a4054f6c4b72a90baf1d2c150aada8eaa87130a5f8eb66f66",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        254
+      ],
+      "sourceCropBox": [
+        126,
+        100,
+        1406,
+        923
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        100,
+        625,
+        700,
+        1000
+      ],
+      "placedAt": [
+        108,
+        625
+      ],
+      "placedSize": [
+        583,
+        375
+      ],
+      "uniformScale": 0.4556500607533414,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-child-child-v1.png",
+      "sha256": "b37e4a53eb49c3edae47c2efcb11aa8addb27027e3e25b2c1be712232e10c07f",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-child-child-v1",
+      "wardrobeId": "child",
+      "placementStage": "child",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    },
+    {
+      "kind": "garment",
+      "source": "source/wardrobe/ef-w-youth-v1.png",
+      "sourceSha256": "05d59bfcd0733aea515fa3d5c246bb52368dddeea10e920d8ea8b390973dc5f8",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceAlphaExtrema": [
+        0,
+        254
+      ],
+      "sourceCropBox": [
+        1,
+        97,
+        1535,
+        965
+      ],
+      "cropAlphaThreshold": 32,
+      "targetBox": [
+        60,
+        625,
+        740,
+        1000
+      ],
+      "placedAt": [
+        68,
+        625
+      ],
+      "placedSize": [
+        663,
+        375
+      ],
+      "uniformScale": 0.43202764976958524,
+      "aspectRatioPreserved": true,
+      "path": "components/wardrobe/ef-w-youth-youth-v1.png",
+      "sha256": "3794057a0c3ffe0cf5c8cdc39a0f13b1e28d520d8c3ffa1c94e70e5ea7e006ac",
+      "canvas": [
+        800,
+        1000
+      ],
+      "rgba": true,
+      "sourceUnchanged": true,
+      "losslessReadbackExact": true,
+      "id": "ef-w-youth-youth-v1",
+      "wardrobeId": "youth",
+      "placementStage": "youth",
+      "neckAnchor": [
+        400,
+        700
+      ]
+    }
+  ],
+  "portraits": [
+    {
+      "id": "ef-p-m01-adult-everyday-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v1.png",
+      "assembledSha256": "c0698915e5bda77cfd68b392e2a74b627961a88851e949e26ec8301c320b58e6",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t0",
+      "path": "portraits/128x160-s3-t0/ef-p-m01-adult-everyday-v1.png",
+      "sha256": "c08357f1170c7c47ce5fb67f99bd96fb944a95a2cdd4731632c8ae6cf6fd89e8",
+      "logical": "portraits/128x160-s3-t0/ef-p-m01-adult-everyday-v1.logical.png",
+      "logicalSha256": "8c599aa981ae9abe7397e15e947047684af12cc8256e938a3471a563de768601",
+      "qa": "qa/pixels/128x160-s3-t0/ef-p-m01-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    },
+    {
+      "id": "ef-p-m01-adult-everyday-v1",
+      "identityId": "m01",
+      "stage": "adult",
+      "ageExample": 28,
+      "wardrobeId": "everyday",
+      "headId": "ef-h-m01-adult-v1",
+      "garmentId": "ef-w-everyday-adult-v1",
+      "assembled": "portraits/assembled/ef-p-m01-adult-everyday-v1.png",
+      "assembledSha256": "c0698915e5bda77cfd68b392e2a74b627961a88851e949e26ec8301c320b58e6",
+      "backgroundId": "jade-umber-v1",
+      "layerOrder": [
+        "background",
+        "garment",
+        "head-and-neck"
+      ],
+      "opaque": true,
+      "sourceCanvas": [
+        800,
+        1000
+      ],
+      "profile": "128x160-s3-t1",
+      "path": "portraits/128x160-s3-t1/ef-p-m01-adult-everyday-v1.png",
+      "sha256": "de0650f6be5e502bc77429ab039b9e7cd205ec39345775decece381f747c045e",
+      "logical": "portraits/128x160-s3-t1/ef-p-m01-adult-everyday-v1.logical.png",
+      "logicalSha256": "d24954b1b17d64d6aeeed068949a196a39d34b802410e7f6d25612d6e2d0add6",
+      "qa": "qa/pixels/128x160-s3-t1/ef-p-m01-adult-everyday-v1.json",
+      "logicalSize": [
+        128,
+        160
+      ],
+      "outputSize": [
+        384,
+        480
+      ]
+    }
+  ],
+  "mappingPath": "mappings.json",
+  "mappingSha256": "f9bf9de67c838df2557f0f06d9c993bb6e5b705812c210d1176a040f477cfb9c",
+  "contractPath": "contract.json",
+  "contractSha256": "add3cfef7c2e3304ac6fcbdf3012524246d351d694bdda8103d15078fa5b3403",
+  "sourceIntegrity": {
+    "allProtectedInputsUnchanged": true,
+    "inputCount": 12
+  },
+  "limitations": [
+    "Components are generated painterly RGBA, not rigged anatomy or hand-authored brushwork.",
+    "Clothing is an authored visual grouping, not attested occupational uniform.",
+    "Pixel integrity checks do not certify likeness, pupil visibility or anatomical seam quality; inspect review sheets.",
+    "Existing runtime assets remain retained; family/child binding requires the documented identity/UI work."
+  ]
+}

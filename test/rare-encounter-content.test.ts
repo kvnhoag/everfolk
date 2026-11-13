@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, matchesCondition } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { getChoiceImpact } from "../client/choice-impact.ts";
+import { getChoiceImpact } from "../client/models/choice-impact.ts";
 import { getOpportunityPreview } from "../src/outcomes.ts";
 import current from "../worlds/alexandria-0.23.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.22.0.json" with { type: "json" };

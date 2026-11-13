@@ -1,0 +1,1064 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "status": "reviewed",
+  "reviewedAtUtc": "2026-11-13T03:44:37.319447+00:00",
+  "reviewCoordinator": "heads_third_pair",
+  "reviewers": [
+    "heads_third_pair",
+    "older_final_portrait_review"
+  ],
+  "userReviewStatus": "awaiting-user-review",
+  "anatomicalApproval": false,
+  "manifestPath": "manifest.json",
+  "manifestSha256": "f22fa774ebc06d78f83b98ca6aafb8432fd51302ef0500964d977e53d65a3e5f",
+  "readinessEvidence": "Full228 export completion and worker exit0 explicitly announced by pipeline owner before final sheet preparation.",
+  "rawCompleteModelReview": {
+    "modelCount": 12,
+    "reviewScale": "Native complete-model canvases, directly inspected before feature blending and clothing assembly.",
+    "reviewer": "heads_third_pair",
+    "allSourceHashesStillExact": true,
+    "userAcceptance": false,
+    "models": [
+      {
+        "sex": "male",
+        "stage": "infant",
+        "source": "source/models/ef-model-male-infant-v3.png",
+        "sha256": "4c67dc162f0c35c0b81ef4f4fe2d0e4ef2a746e1ed7709d6df78f796cb77b793",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Plausible rounded infant head, short soft neck and continuous enclosing swaddle; no adult arms or clavicle patch."
+      },
+      {
+        "sex": "male",
+        "stage": "child",
+        "source": "source/models/ef-model-male-child-v3.png",
+        "sha256": "7196a8f282a91ad121a0dc3b09a442c2d6430a0561b4bda8eb6a53b6faced7f4",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Plausible child proportions and natural continuous neck. Loose keyhole-neck tunic is original model clothing; preserve the entire original neck opening."
+      },
+      {
+        "sex": "male",
+        "stage": "youth",
+        "source": "source/models/ef-model-male-youth-v3.png",
+        "sha256": "7846983af048ce0346a6f9fea468878da24e7fabeabd94a335bf5952451913e7",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Slender youthful torso with continuous original neck and appropriate no-beard face."
+      },
+      {
+        "sex": "male",
+        "stage": "adult",
+        "source": "source/models/ef-model-male-adult-v3.png",
+        "sha256": "61689af2d686eda8b5118fcaa1bea8de381d1cc763aa752eab22391d2c241ba7",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Head/jaw/neck/clavicles/shoulders form one uncut painting. No cut cap or pasted neck."
+      },
+      {
+        "sex": "male",
+        "stage": "middle",
+        "source": "source/models/ef-model-male-middle-v3.png",
+        "sha256": "a7f7a5ad8a17d6cde8b215222b5f6ebc1e88e2d018a2a1fd65210733098088cc",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Whole-model middle-age greying and facial/neck texture; neck-to-collar anatomy remains continuous."
+      },
+      {
+        "sex": "male",
+        "stage": "elder",
+        "source": "source/models/ef-model-male-elder-v3.png",
+        "sha256": "165fcbfe6369aa0f894dc5870cc7958291d015ffb40fe6591bc72461eff745f3",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Plausible elder face/neck/forearm ageing, natural continuous shoulders and collar. No cut or reconstructed neck."
+      },
+      {
+        "sex": "female",
+        "stage": "infant",
+        "source": "source/models/ef-model-female-infant-v3.png",
+        "sha256": "d4ca819827e1d127969a1e73e1fd922d57c788ccf933d6067e5c32f1dace0ced",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Plausible infant forehead/cheeks, short soft neck and original continuous swaddle. No independent anatomical assembly."
+      },
+      {
+        "sex": "female",
+        "stage": "child",
+        "source": "source/models/ef-model-female-child-v3.png",
+        "sha256": "9cb027916167d75d1d27383613657ae75903bf8cdb12bc485e06a7d6659f7668",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Plausible eight-year-old face, natural continuous neck/shoulders and loose belted tunic; no pasted anatomy or adult muscular body."
+      },
+      {
+        "sex": "female",
+        "stage": "youth",
+        "source": "source/models/ef-model-female-youth-v3.png",
+        "sha256": "23ca9f5882019a3be80046d17c43b5b7b3623b2e33da6ebb5fcf7acd00bf9716",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Youthful whole-model physique and neck proportions remain natural; original collar/body untouched."
+      },
+      {
+        "sex": "female",
+        "stage": "adult",
+        "source": "source/models/ef-model-female-adult-v3.png",
+        "sha256": "a60cec909f0a6e030b25b38ce961372ba6c14062ca4be148e22a96ba971da53c",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Head/jaw/neck/clavicles/shoulders form one uncut painting. No cut cap or pasted neck."
+      },
+      {
+        "sex": "female",
+        "stage": "middle",
+        "source": "source/models/ef-model-female-middle-v3.png",
+        "sha256": "427edf5a38b71530404413b4b4866687ec6d2ff7b344ccb04609683847306af6",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Whole-model age texture and greying preserve continuous jaw, natural neck, clavicles and shoulders."
+      },
+      {
+        "sex": "female",
+        "stage": "elder",
+        "source": "source/models/ef-model-female-elder-v3.png",
+        "sha256": "115d9df590a0feb9e2e17a8280c8efac2ff83edfb88f308b0ed762407d340bdb",
+        "reviewerStatus": "anatomy-reviewed",
+        "observation": "Elder whole-model skin/neck ageing and grey hair are coherent. Original anatomical neck and collar remain intact."
+      }
+    ]
+  },
+  "skinMaskReview": {
+    "maskSetRevision": "continuous-final-1",
+    "publishedMasks": 12,
+    "allPublishedMaskHashesStillExact": true,
+    "colourTargets": 36,
+    "method": "Continuous native face/ear/neck/forearm contours, inward feathering, softly weighted actual dark or grey hair and tiny eye highlights; no broad excluded eye islands.",
+    "inputEditsDuringFinalBuild": false
+  },
+  "smoothReview": {
+    "lifetimeCards": 36,
+    "adultWardrobeCards": 60,
+    "adultEverydayOverlap": 6,
+    "distinctAssemblies": 90,
+    "evidencePath": "qa/smooth-review-evidence.json",
+    "evidenceSha256": "da3fbba84f74411458039b450307fd893a562c2d5bb818a075134f2cfa3b52b9",
+    "nativeSpotCheckArtifacts": [
+      {
+        "path": "components/models/ef-model-f03-middle-v3.png",
+        "sha256": "d041938699f01dd8c5e98b8f34d58221c0f5bf7f4f99e1f88683d0aab57fb134"
+      },
+      {
+        "path": "components/models/ef-model-m03-infant-v3.png",
+        "sha256": "5e3ad16ef67bee5cdecbaaca889c861a8ecca1727189a2a7e768e89a9d1d6870"
+      },
+      {
+        "path": "components/models/ef-model-m03-elder-v3.png",
+        "sha256": "4241cbe277545175eab25f1104f9d15aef16be96705381cbb2a1a063c6e50bf5"
+      },
+      {
+        "path": "components/outfits/ef-p-m01-adult-aristocrat-v3.png",
+        "sha256": "1a6619378797111d2e37daa848b879a184a992175768c5777b8a656b72c2cb1b"
+      },
+      {
+        "path": "components/outfits/ef-p-f03-adult-royalty-v3.png",
+        "sha256": "31f131d849ccdf92f806f79500e4211bad3beb4e9eac4dd1d707c37df1cb6566"
+      }
+    ]
+  },
+  "finalPixelReview": {
+    "expectedPortraitCount": 228,
+    "actualDistinctPortraitCardsViewed": 228,
+    "all228IndividuallyVisibleAtContactCardScale": true,
+    "all228ViewedAtNativeResolution": false,
+    "sheetCount": 38,
+    "portraitDisplayPixels": [
+      288,
+      360
+    ],
+    "sheetDimensions": [
+      900,
+      840
+    ],
+    "nativeFinalPixelSpotCheckCount": 9,
+    "nativeFinalPixelSpotChecks": [
+      {
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-child-work-v3.png",
+        "sha256": "e68480cbb1515625a02c9958c02e93476190f666b1e50c8835bfe7808c50d8ad",
+        "displayPixels": [
+          384,
+          480
+        ],
+        "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found.",
+        "reviewer": "heads_third_pair",
+        "actuallyViewed": true,
+        "reviewed": true
+      },
+      {
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-youth-maritime-v3.png",
+        "sha256": "805b39f8945f44d4fec5a74da77dcd1cfd7ebc044bc381f87de8c2729d887c04",
+        "displayPixels": [
+          384,
+          480
+        ],
+        "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found.",
+        "reviewer": "heads_third_pair",
+        "actuallyViewed": true,
+        "reviewed": true
+      },
+      {
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-adult-royalty-v3.png",
+        "sha256": "6f81d2f58c764b3bac9cb7c1aa7a545501d68a38d2e30029deadd336588d7b47",
+        "displayPixels": [
+          384,
+          480
+        ],
+        "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found.",
+        "reviewer": "heads_third_pair",
+        "actuallyViewed": true,
+        "reviewed": true
+      },
+      {
+        "portraitId": "ef-p-f03-middle-royalty-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-middle-royalty-v3.png",
+        "sha256": "8788e8a4f015a668542f1e5b73dfa1a95d316cc524c464b4bfdbf3ae0a19f0c7",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      },
+      {
+        "portraitId": "ef-p-m02-middle-military-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-m02-middle-military-v3.png",
+        "sha256": "9022edb8c8295bf08041d66b0a49676971777a0175dd4d2ca39004e16d5d0717",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      },
+      {
+        "portraitId": "ef-p-f03-elder-everyday-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-elder-everyday-v3.png",
+        "sha256": "357724726976b68c5a52d964c754986242c793fb7f813ca49f32fb3a04aa8ec9",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      },
+      {
+        "portraitId": "ef-p-f02-elder-aristocrat-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-elder-aristocrat-v3.png",
+        "sha256": "098ab51b28c0c09c63c4d4306b8c91e7aa92ae2e9a26b31c0d400e65c3934787",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      },
+      {
+        "portraitId": "ef-p-m02-elder-royalty-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-m02-elder-royalty-v3.png",
+        "sha256": "cfada1aae0d8a31b67b3ab7d0acd2bb6629bf49f489083e0a6b5b7415bf9f9c9",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      },
+      {
+        "portraitId": "ef-p-m03-elder-scholarly-v3",
+        "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-elder-scholarly-v3.png",
+        "sha256": "f641e6d537cf79e9af6a069fd6632630161c3e2131b6e117daf335baea513638",
+        "inspectionScale": [
+          384,
+          480
+        ],
+        "actuallyViewed": true,
+        "materialFindings": [],
+        "reviewed": true,
+        "reviewer": "older_final_portrait_review"
+      }
+    ],
+    "reviewIndexPath": "qa/independent-review-sheets/index.json",
+    "reviewIndexSha256": "9cddfba5fdec6417f0d743418fd7f75d343f4dfc1087de50ccd98c99aa7ac3fa",
+    "reportEvidence": [
+      {
+        "path": "qa/final-first-half-visual-review.json",
+        "sha256": "13917e38ad2e81773fb096508c13b96a00599016c5827672af16f351e958073f"
+      },
+      {
+        "path": "qa/final-older-visual-review.json",
+        "sha256": "c486157e24b7d7fcba7132ce6b3666a08745f6ab8188714a92961590c1d53b94"
+      }
+    ],
+    "reviewedSheets": [
+      {
+        "index": 0,
+        "path": "qa/independent-review-sheets/infant-01.png",
+        "sha256": "7a485f83df5d5eda2e85547758165da812f5b58cef9993f0ed1a840447abf743",
+        "portraitIds": [
+          "ef-p-f01-infant-infant-v3",
+          "ef-p-f02-infant-infant-v3",
+          "ef-p-f03-infant-infant-v3",
+          "ef-p-m01-infant-infant-v3",
+          "ef-p-m02-infant-infant-v3",
+          "ef-p-m03-infant-infant-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 1,
+        "path": "qa/independent-review-sheets/child-01.png",
+        "sha256": "0d17fc3af14eed52b76e569ee3ff4bb71188956651ae2b8599c658e125a67232",
+        "portraitIds": [
+          "ef-p-f01-child-child-v3",
+          "ef-p-f02-child-child-v3",
+          "ef-p-f03-child-child-v3",
+          "ef-p-m01-child-child-v3",
+          "ef-p-m02-child-child-v3",
+          "ef-p-m03-child-child-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 2,
+        "path": "qa/independent-review-sheets/child-02.png",
+        "sha256": "f5da22e892066d3695901d7a622825ae5f6b6543fcaeb2f00f491bcbf199496e",
+        "portraitIds": [
+          "ef-p-f01-child-work-v3",
+          "ef-p-f02-child-work-v3",
+          "ef-p-f03-child-work-v3",
+          "ef-p-m01-child-work-v3",
+          "ef-p-m02-child-work-v3",
+          "ef-p-m03-child-work-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 3,
+        "path": "qa/independent-review-sheets/youth-01.png",
+        "sha256": "7645fe42712777520c6d3645d820a41a097f5611e2b971ed0d7987b36f9d5467",
+        "portraitIds": [
+          "ef-p-f01-youth-maritime-v3",
+          "ef-p-f02-youth-maritime-v3",
+          "ef-p-f03-youth-maritime-v3",
+          "ef-p-m01-youth-maritime-v3",
+          "ef-p-m02-youth-maritime-v3",
+          "ef-p-m03-youth-maritime-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 4,
+        "path": "qa/independent-review-sheets/youth-02.png",
+        "sha256": "4ca7d496cf474d8932cdc6342cfc13555586a991d3d1667d8204261c9c9b141c",
+        "portraitIds": [
+          "ef-p-f01-youth-performance-v3",
+          "ef-p-f02-youth-performance-v3",
+          "ef-p-f03-youth-performance-v3",
+          "ef-p-m01-youth-performance-v3",
+          "ef-p-m02-youth-performance-v3",
+          "ef-p-m03-youth-performance-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 5,
+        "path": "qa/independent-review-sheets/youth-03.png",
+        "sha256": "356ee7d78a0e382b3747c455c2c45446a6349c99977b5d2d8b67750204a1c9c6",
+        "portraitIds": [
+          "ef-p-f01-youth-scholarly-v3",
+          "ef-p-f02-youth-scholarly-v3",
+          "ef-p-f03-youth-scholarly-v3",
+          "ef-p-m01-youth-scholarly-v3",
+          "ef-p-m02-youth-scholarly-v3",
+          "ef-p-m03-youth-scholarly-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 6,
+        "path": "qa/independent-review-sheets/youth-04.png",
+        "sha256": "fd2b0b7b066b9e5d291dcb1d594fb134afc1381785ec55dd3f6ba0476e8975c2",
+        "portraitIds": [
+          "ef-p-f01-youth-work-v3",
+          "ef-p-f02-youth-work-v3",
+          "ef-p-f03-youth-work-v3",
+          "ef-p-m01-youth-work-v3",
+          "ef-p-m02-youth-work-v3",
+          "ef-p-m03-youth-work-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 7,
+        "path": "qa/independent-review-sheets/youth-05.png",
+        "sha256": "b4a59a88227cc6731d3aa0f4e616dbee9d39acd97ed78e8b199aa0a613a62cb7",
+        "portraitIds": [
+          "ef-p-f01-youth-youth-v3",
+          "ef-p-f02-youth-youth-v3",
+          "ef-p-f03-youth-youth-v3",
+          "ef-p-m01-youth-youth-v3",
+          "ef-p-m02-youth-youth-v3",
+          "ef-p-m03-youth-youth-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 8,
+        "path": "qa/independent-review-sheets/adult-01.png",
+        "sha256": "440c1ca3530a3ae9efa8acdf77b652c7c4b8d90d5a0d0e869481d08c6dfb2772",
+        "portraitIds": [
+          "ef-p-f01-adult-aristocrat-v3",
+          "ef-p-f02-adult-aristocrat-v3",
+          "ef-p-f03-adult-aristocrat-v3",
+          "ef-p-m01-adult-aristocrat-v3",
+          "ef-p-m02-adult-aristocrat-v3",
+          "ef-p-m03-adult-aristocrat-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 9,
+        "path": "qa/independent-review-sheets/adult-02.png",
+        "sha256": "a8155adc22d8aa932c0c36597ff47aefe905cc93233026f6079013278a9600e5",
+        "portraitIds": [
+          "ef-p-f01-adult-commerce-v3",
+          "ef-p-f02-adult-commerce-v3",
+          "ef-p-f03-adult-commerce-v3",
+          "ef-p-m01-adult-commerce-v3",
+          "ef-p-m02-adult-commerce-v3",
+          "ef-p-m03-adult-commerce-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 10,
+        "path": "qa/independent-review-sheets/adult-03.png",
+        "sha256": "80f81ee69ac5c9cdc8d1506284524f8ef14fc7d4baa96f147fc549cc74a623a0",
+        "portraitIds": [
+          "ef-p-f01-adult-elite-v3",
+          "ef-p-f02-adult-elite-v3",
+          "ef-p-f03-adult-elite-v3",
+          "ef-p-m01-adult-elite-v3",
+          "ef-p-m02-adult-elite-v3",
+          "ef-p-m03-adult-elite-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 11,
+        "path": "qa/independent-review-sheets/adult-04.png",
+        "sha256": "6581f606d215450016daa530eca42b94aa4d4abf5d7c05fdbb693b5b208f3dde",
+        "portraitIds": [
+          "ef-p-f01-adult-everyday-v3",
+          "ef-p-f02-adult-everyday-v3",
+          "ef-p-f03-adult-everyday-v3",
+          "ef-p-m01-adult-everyday-v3",
+          "ef-p-m02-adult-everyday-v3",
+          "ef-p-m03-adult-everyday-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 12,
+        "path": "qa/independent-review-sheets/adult-05.png",
+        "sha256": "20b6505f0293077918a4c0c5d61402fc83049792b343cc6b7b6ca3dd44bfc4d0",
+        "portraitIds": [
+          "ef-p-f01-adult-maritime-v3",
+          "ef-p-f02-adult-maritime-v3",
+          "ef-p-f03-adult-maritime-v3",
+          "ef-p-m01-adult-maritime-v3",
+          "ef-p-m02-adult-maritime-v3",
+          "ef-p-m03-adult-maritime-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 13,
+        "path": "qa/independent-review-sheets/adult-06.png",
+        "sha256": "6d7a7959db74d119260ad717692e6c4f01f23d4c4bc00e030591a59db4185776",
+        "portraitIds": [
+          "ef-p-f01-adult-military-v3",
+          "ef-p-f02-adult-military-v3",
+          "ef-p-f03-adult-military-v3",
+          "ef-p-m01-adult-military-v3",
+          "ef-p-m02-adult-military-v3",
+          "ef-p-m03-adult-military-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 14,
+        "path": "qa/independent-review-sheets/adult-07.png",
+        "sha256": "01b811d129767344bb980247fa8c5e3573d100268d2a71786880e85cddf3ae7a",
+        "portraitIds": [
+          "ef-p-f01-adult-performance-v3",
+          "ef-p-f02-adult-performance-v3",
+          "ef-p-f03-adult-performance-v3",
+          "ef-p-m01-adult-performance-v3",
+          "ef-p-m02-adult-performance-v3",
+          "ef-p-m03-adult-performance-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 15,
+        "path": "qa/independent-review-sheets/adult-08.png",
+        "sha256": "293f43292abd834d19a1a2e4917f79ab583701143477adc418f8aaa0cfab1a28",
+        "portraitIds": [
+          "ef-p-f01-adult-royalty-v3",
+          "ef-p-f02-adult-royalty-v3",
+          "ef-p-f03-adult-royalty-v3",
+          "ef-p-m01-adult-royalty-v3",
+          "ef-p-m02-adult-royalty-v3",
+          "ef-p-m03-adult-royalty-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 16,
+        "path": "qa/independent-review-sheets/adult-09.png",
+        "sha256": "9aa16f251bda2560bc0edb1630775cb13625f3b943f869c2185b9ddb185c1f48",
+        "portraitIds": [
+          "ef-p-f01-adult-scholarly-v3",
+          "ef-p-f02-adult-scholarly-v3",
+          "ef-p-f03-adult-scholarly-v3",
+          "ef-p-m01-adult-scholarly-v3",
+          "ef-p-m02-adult-scholarly-v3",
+          "ef-p-m03-adult-scholarly-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 17,
+        "path": "qa/independent-review-sheets/adult-10.png",
+        "sha256": "bd7c8982f4ecc035003aa6f8611efa906965f6809dcbe3749fda01ffb2b648d9",
+        "portraitIds": [
+          "ef-p-f01-adult-work-v3",
+          "ef-p-f02-adult-work-v3",
+          "ef-p-f03-adult-work-v3",
+          "ef-p-m01-adult-work-v3",
+          "ef-p-m02-adult-work-v3",
+          "ef-p-m03-adult-work-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 18,
+        "path": "qa/independent-review-sheets/middle-01.png",
+        "sha256": "7fdc8ba96b7214a1b61bdbf7ccf9e4779bd0de898dbbe4a17b10b4f40cd20e11",
+        "portraitIds": [
+          "ef-p-f01-middle-aristocrat-v3",
+          "ef-p-f02-middle-aristocrat-v3",
+          "ef-p-f03-middle-aristocrat-v3",
+          "ef-p-m01-middle-aristocrat-v3",
+          "ef-p-m02-middle-aristocrat-v3",
+          "ef-p-m03-middle-aristocrat-v3"
+        ],
+        "reviewer": "heads_third_pair",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 19,
+        "path": "qa/independent-review-sheets/middle-02.png",
+        "sha256": "cc1fb645b03692ff06f6a65039ddd4476f3c25b95805eb475985b449ce6a69ac",
+        "portraitIds": [
+          "ef-p-f01-middle-commerce-v3",
+          "ef-p-f02-middle-commerce-v3",
+          "ef-p-f03-middle-commerce-v3",
+          "ef-p-m01-middle-commerce-v3",
+          "ef-p-m02-middle-commerce-v3",
+          "ef-p-m03-middle-commerce-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 20,
+        "path": "qa/independent-review-sheets/middle-03.png",
+        "sha256": "a2a9e523944620fedca1449e5cd1b16a56a352ad4d6b03f5fc6f297ce89a894c",
+        "portraitIds": [
+          "ef-p-f01-middle-elite-v3",
+          "ef-p-f02-middle-elite-v3",
+          "ef-p-f03-middle-elite-v3",
+          "ef-p-m01-middle-elite-v3",
+          "ef-p-m02-middle-elite-v3",
+          "ef-p-m03-middle-elite-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 21,
+        "path": "qa/independent-review-sheets/middle-04.png",
+        "sha256": "425b75c74787434ea00c92d414f7cbc4ea88c122e6bd405df9d802b318f661b2",
+        "portraitIds": [
+          "ef-p-f01-middle-everyday-v3",
+          "ef-p-f02-middle-everyday-v3",
+          "ef-p-f03-middle-everyday-v3",
+          "ef-p-m01-middle-everyday-v3",
+          "ef-p-m02-middle-everyday-v3",
+          "ef-p-m03-middle-everyday-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 22,
+        "path": "qa/independent-review-sheets/middle-05.png",
+        "sha256": "aef76677b905ad924285cbbbb7e6143cdc64d014ac557a4a155b258f57c2a553",
+        "portraitIds": [
+          "ef-p-f01-middle-maritime-v3",
+          "ef-p-f02-middle-maritime-v3",
+          "ef-p-f03-middle-maritime-v3",
+          "ef-p-m01-middle-maritime-v3",
+          "ef-p-m02-middle-maritime-v3",
+          "ef-p-m03-middle-maritime-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 23,
+        "path": "qa/independent-review-sheets/middle-06.png",
+        "sha256": "d664cfa694db8dab2a5f8932f11fa7095bbc02bf771eb155d2eb7d7885ded330",
+        "portraitIds": [
+          "ef-p-f01-middle-military-v3",
+          "ef-p-f02-middle-military-v3",
+          "ef-p-f03-middle-military-v3",
+          "ef-p-m01-middle-military-v3",
+          "ef-p-m02-middle-military-v3",
+          "ef-p-m03-middle-military-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 24,
+        "path": "qa/independent-review-sheets/middle-07.png",
+        "sha256": "60320088841e2bbe4b96e71f92fe325821ef6cf34f16e659ec6b20284f34570f",
+        "portraitIds": [
+          "ef-p-f01-middle-performance-v3",
+          "ef-p-f02-middle-performance-v3",
+          "ef-p-f03-middle-performance-v3",
+          "ef-p-m01-middle-performance-v3",
+          "ef-p-m02-middle-performance-v3",
+          "ef-p-m03-middle-performance-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 25,
+        "path": "qa/independent-review-sheets/middle-08.png",
+        "sha256": "7c98925415dcb59512f69bb4c77360fbffc7a7241e1bb979d017e33f5ea1a001",
+        "portraitIds": [
+          "ef-p-f01-middle-royalty-v3",
+          "ef-p-f02-middle-royalty-v3",
+          "ef-p-f03-middle-royalty-v3",
+          "ef-p-m01-middle-royalty-v3",
+          "ef-p-m02-middle-royalty-v3",
+          "ef-p-m03-middle-royalty-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 26,
+        "path": "qa/independent-review-sheets/middle-09.png",
+        "sha256": "5f10d2393dc8d7cdf9b7f9a6f6ac1f7de924734ef3712421ceb775139f2b5331",
+        "portraitIds": [
+          "ef-p-f01-middle-scholarly-v3",
+          "ef-p-f02-middle-scholarly-v3",
+          "ef-p-f03-middle-scholarly-v3",
+          "ef-p-m01-middle-scholarly-v3",
+          "ef-p-m02-middle-scholarly-v3",
+          "ef-p-m03-middle-scholarly-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 27,
+        "path": "qa/independent-review-sheets/middle-10.png",
+        "sha256": "f3e0d2ed4835043a434d10837bb68480314aa6cca498702a9c942fe551f74a43",
+        "portraitIds": [
+          "ef-p-f01-middle-work-v3",
+          "ef-p-f02-middle-work-v3",
+          "ef-p-f03-middle-work-v3",
+          "ef-p-m01-middle-work-v3",
+          "ef-p-m02-middle-work-v3",
+          "ef-p-m03-middle-work-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 28,
+        "path": "qa/independent-review-sheets/elder-01.png",
+        "sha256": "9f6bd22ce508f9c74a7340e00765f3b835a8f13f401b29c5c4e96e121c4b3c69",
+        "portraitIds": [
+          "ef-p-f01-elder-aristocrat-v3",
+          "ef-p-f02-elder-aristocrat-v3",
+          "ef-p-f03-elder-aristocrat-v3",
+          "ef-p-m01-elder-aristocrat-v3",
+          "ef-p-m02-elder-aristocrat-v3",
+          "ef-p-m03-elder-aristocrat-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 29,
+        "path": "qa/independent-review-sheets/elder-02.png",
+        "sha256": "466e8cb6488556732e950162378eb3029e4a550b773d20d433ba723149a9ddad",
+        "portraitIds": [
+          "ef-p-f01-elder-commerce-v3",
+          "ef-p-f02-elder-commerce-v3",
+          "ef-p-f03-elder-commerce-v3",
+          "ef-p-m01-elder-commerce-v3",
+          "ef-p-m02-elder-commerce-v3",
+          "ef-p-m03-elder-commerce-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 30,
+        "path": "qa/independent-review-sheets/elder-03.png",
+        "sha256": "fe0f03a2a3d5e2512d1b83d4c6e7462eff5ad49dab09e63ca50b6864e17afe81",
+        "portraitIds": [
+          "ef-p-f01-elder-elite-v3",
+          "ef-p-f02-elder-elite-v3",
+          "ef-p-f03-elder-elite-v3",
+          "ef-p-m01-elder-elite-v3",
+          "ef-p-m02-elder-elite-v3",
+          "ef-p-m03-elder-elite-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 31,
+        "path": "qa/independent-review-sheets/elder-04.png",
+        "sha256": "8616e1dcec33592f866817c3ba676f28ec9ed7eaf9273860ba2595f31a52c88d",
+        "portraitIds": [
+          "ef-p-f01-elder-everyday-v3",
+          "ef-p-f02-elder-everyday-v3",
+          "ef-p-f03-elder-everyday-v3",
+          "ef-p-m01-elder-everyday-v3",
+          "ef-p-m02-elder-everyday-v3",
+          "ef-p-m03-elder-everyday-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 32,
+        "path": "qa/independent-review-sheets/elder-05.png",
+        "sha256": "5cf7650840c94a9e06e216696e370701a1e7108123555e6dca4aab7066ca3224",
+        "portraitIds": [
+          "ef-p-f01-elder-maritime-v3",
+          "ef-p-f02-elder-maritime-v3",
+          "ef-p-f03-elder-maritime-v3",
+          "ef-p-m01-elder-maritime-v3",
+          "ef-p-m02-elder-maritime-v3",
+          "ef-p-m03-elder-maritime-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 33,
+        "path": "qa/independent-review-sheets/elder-06.png",
+        "sha256": "2af1ec6534383b0e6a57b4a938c9816d5f872ba7134b5ae0d3af7d227a812b3c",
+        "portraitIds": [
+          "ef-p-f01-elder-military-v3",
+          "ef-p-f02-elder-military-v3",
+          "ef-p-f03-elder-military-v3",
+          "ef-p-m01-elder-military-v3",
+          "ef-p-m02-elder-military-v3",
+          "ef-p-m03-elder-military-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 34,
+        "path": "qa/independent-review-sheets/elder-07.png",
+        "sha256": "8d719a12a3e3b97404f626fcc49156e38a0d1bbe6bd194137e50721de23437c8",
+        "portraitIds": [
+          "ef-p-f01-elder-performance-v3",
+          "ef-p-f02-elder-performance-v3",
+          "ef-p-f03-elder-performance-v3",
+          "ef-p-m01-elder-performance-v3",
+          "ef-p-m02-elder-performance-v3",
+          "ef-p-m03-elder-performance-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 35,
+        "path": "qa/independent-review-sheets/elder-08.png",
+        "sha256": "e46842eee4372ee0354d9ccbf6cce9ebdab28579b87935b74a83c1dd13272b72",
+        "portraitIds": [
+          "ef-p-f01-elder-royalty-v3",
+          "ef-p-f02-elder-royalty-v3",
+          "ef-p-f03-elder-royalty-v3",
+          "ef-p-m01-elder-royalty-v3",
+          "ef-p-m02-elder-royalty-v3",
+          "ef-p-m03-elder-royalty-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 36,
+        "path": "qa/independent-review-sheets/elder-09.png",
+        "sha256": "ab86a48108f5589ab860f858d13fb053a4e8c81aa6bd133061b96123d97c85dc",
+        "portraitIds": [
+          "ef-p-f01-elder-scholarly-v3",
+          "ef-p-f02-elder-scholarly-v3",
+          "ef-p-f03-elder-scholarly-v3",
+          "ef-p-m01-elder-scholarly-v3",
+          "ef-p-m02-elder-scholarly-v3",
+          "ef-p-m03-elder-scholarly-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      },
+      {
+        "index": 37,
+        "path": "qa/independent-review-sheets/elder-10.png",
+        "sha256": "a380892638f0b0e8c78806a8ef28c8988da0b109a11e2ccf6ce95e0f45000195",
+        "portraitIds": [
+          "ef-p-f01-elder-work-v3",
+          "ef-p-f02-elder-work-v3",
+          "ef-p-f03-elder-work-v3",
+          "ef-p-m01-elder-work-v3",
+          "ef-p-m02-elder-work-v3",
+          "ef-p-m03-elder-work-v3"
+        ],
+        "reviewer": "older_final_portrait_review",
+        "reviewed": true,
+        "portraitDisplayPixels": [
+          288,
+          360
+        ]
+      }
+    ],
+    "additionalOverviewGalleries": [
+      {
+        "path": "review/lifetimes-6x6.png",
+        "sha256": "6f2fbf1c505af2eafe0a0610165fd87e70c385f56a67e7df2416a30d1ef262db",
+        "reviewer": "heads_third_pair",
+        "reviewed": true
+      },
+      {
+        "path": "review/adult-wardrobe-6x10.png",
+        "sha256": "c5c38c5e74ba4924e45627d7102ebc7ee2bf72c4367157461609e567d89ccd07",
+        "reviewer": "heads_third_pair",
+        "reviewed": true
+      },
+      {
+        "path": "review/actual-size-48x60.png",
+        "sha256": "925431c3890db5caa3eae59ca4fc739dcab3ebccd4a84aeac7f3ea64432c73f5",
+        "reviewer": "heads_third_pair",
+        "reviewed": true
+      }
+    ]
+  },
+  "criteriaReviewed": {
+    "completeAnatomy": "Whole original model head, jaw, neck, clavicles and shoulders remain visually continuous across variants. No independent neck cut, cap, tapered tab or floating-head appearance found.",
+    "ageAnatomy": "Infants retain soft short-neck swaddled models, children retain actual child proportions, and middle/elder skin, neck and arms retain their source ageing.",
+    "collarsAndSleeves": "No material collar gap, ghost slit, detached shoulder or disconnected forearm found. Child work outfits read as layered clothing. Navy aristocrat registration and purple/gold royalty fit original neck openings.",
+    "skinPalette": "Face, ears, neck and arms read as continuous skin under the painted light. No broad forehead/cheek panel, eye island or hard diagonal forearm recolour boundary found. Gray hair/beards remain natural.",
+    "mixedPixelFinish": "Fine2px facial region retains eye/pupil structure at native output size; coarse3px body remains stylistically consistent with no material visible patch edge.",
+    "wardrobeReadability": "Ten adult groups are distinguishable, including retained gold elite, navy aristocrat and purple/gold royalty."
+  },
+  "materialBlockingFindings": [],
+  "limitations": [
+    "All228 final portraits were actually reviewed as labelled 288x360 contact cards by two reviewers; only the nine listed final outputs were additionally viewed at native384x480.",
+    "The 36 lifetime and60 adult wardrobe overview sheets contain six overlapping adult everyday portraits; they represent90 distinct combinations, not96.",
+    "The additional48x60 overview is a small-size legibility check. Iris detail and subtle facial distinctions are necessarily limited at that size.",
+    "Raw source anatomy review, image hashes, and byte-preservation checks are separate evidence. None substitutes for user acceptance.",
+    "Historical uniform accuracy and runtime integration were outside this visual review.",
+    "Reviewed records agent visual QA only; the complete library still awaits user review."
+  ]
+}

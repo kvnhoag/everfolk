@@ -1,3 +1,4 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, personText, resolvePartner } from "../src/index.ts";
@@ -46,6 +47,10 @@ test("current births always choose a name from the recorded sex pool and retain 
 
 function encounterWorld(): WorldPack {
   const copy = structuredClone(world);
+  // This naming fixture exercises ordinary encounters for every sampled natal origin.
+  if (copy.royalty) copy.royalty.originId = "fixture-unselected-royal-origin";
+  if (copy.aristocracy) copy.aristocracy.originId = "fixture-unselected-estate-origin";
+  withoutMarketSignals(copy);
   const required = new Set([copy.health!.careDecision, ...Object.values(copy.economy!.moneylender!.events), "meet-person-harbor", "meet-person-market"]);
   copy.events = copy.events.filter(event => required.has(event.id));
   for (const [id, at] of [["meet-person-harbor", 18], ["meet-person-market", 19]] as const) {

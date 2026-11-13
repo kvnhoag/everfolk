@@ -1,0 +1,69 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\masters\\Alexander-Blade-Only.vectorcraft",
+  "output": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\source\\alexander-blade-only.png",
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\qa\\blade-patch-mask.png",
+  "width": 1122,
+  "height": 1402,
+  "polygon": [
+    [
+      250,
+      180
+    ],
+    [
+      300,
+      130
+    ],
+    [
+      450,
+      40
+    ],
+    [
+      550,
+      0
+    ],
+    [
+      1122,
+      0
+    ],
+    [
+      1122,
+      150
+    ],
+    [
+      700,
+      175
+    ],
+    [
+      550,
+      195
+    ],
+    [
+      420,
+      225
+    ],
+    [
+      310,
+      260
+    ],
+    [
+      250,
+      265
+    ]
+  ],
+  "feather": "Native mask antialias only; no broad feather",
+  "protectedRegions": [
+    "all y>=280",
+    "all x<250 and y>=210, including hand and guard"
+  ],
+  "coveredPixels": 144113,
+  "changedPixels": 139134,
+  "protectedDifferences": 0,
+  "outsideDifferences": 0,
+  "unchangedSources": true,
+  "hashes": {
+    "original": "09cc0c90324039b62ad812473509c6d4a2ac10139cdea1fdeef3345d6c80ad83",
+    "candidate": "0d7701f556373930a1b4eac0af2f5d712feccb5eddc87b46a4b85ab4e7750f67"
+  },
+  "outputSha256": "bdcc4654a4253aabccb656231cd85fbcb0ab66c08c6eb1cf8bb52bf791feb55f",
+  "warnings": []
+}

@@ -1,3 +1,4 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, getAccomplishments, getLegacyRoutes, matchesCondition, validateWorld } from "../src/index.ts";
@@ -8,13 +9,23 @@ import previous from "../worlds/alexandria-0.24.0.json" with { type: "json" };
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import { contentFingerprint } from "../src/random.ts";
 
+const careerRouteIds = new Set(romanEra.legacy.routes.map(route => route.id));
+const careerRoutes = (current as WorldPack).legacy!.routes.filter(route => careerRouteIds.has(route.id));
+
 function controlled(prestige?: string, source = current): WorldPack {
   const world = structuredClone(source) as WorldPack;
+  // Career legacy fixtures exercise the ordinary route for every sampled natal origin.
+  if (world.royalty) world.royalty.originId = "fixture-unselected-royal-origin";
+  if (world.aristocracy) world.aristocracy.originId = "fixture-unselected-estate-origin";
+  withoutMarketSignals(world);
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.mortality!.bands.forEach(band => { band.annualProbability = 0; });
   world.yearlyEffects = []; world.yearlyRules = []; delete world.knowledge;
+  // Accomplishment fixtures keep funding fixed instead of rolling passive income.
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) delete origin.assetRanges;
   const required = [world.health!.careDecision, ...Object.values(world.economy!.moneylender!.events)];
   world.events = world.events.filter(event => required.includes(event.id) || event.id.includes("-callback-") || event.id === prestige);
   if (prestige) world.eventPacing!.rareEvents = { annualChance: 1, cooldownYears: 12 };
@@ -90,7 +101,8 @@ test("prestige refusal preserves the ordinary record and accepted prestige earns
 });
 
 test("all seven routes award real ordinary work, both callbacks and a replayable accepted prestige outcome", () => {
-  for (const route of (current as WorldPack).legacy!.routes) {
+  assert.equal(careerRoutes.length, 7);
+  for (const route of careerRoutes) {
     const [first, prestige] = route.achievementIds;
     const activity = (current as WorldPack).character!.activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === first)))!;
     let accepted: LifeState | undefined;
@@ -147,10 +159,12 @@ test("legacy validation rejects forged references, passive awards and contacts a
 
 test("new content has seven ordinary career paths, seven rare prestige paths, fourteen callbacks and unchanged mortality", () => {
   const world = current as WorldPack;
-  assert.equal(world.version, "0.34.0");
-  assert.equal(world.legacy!.routes.length, 7); assert.equal(world.legacy!.achievements.length, 43);
+  assert.equal(world.version, "0.48.0");
+  assert.deepEqual(careerRoutes.map(route => route.id), romanEra.legacy.routes.map(route => route.id));
+  assert.equal(world.legacy!.routes.filter(route => !careerRouteIds.has(route.id)).length, 6);
+  assert.equal(world.legacy!.achievements.filter(item => !item.figure && careerRouteIds.has(item.routeId)).length, 43);
   assert.equal(world.events.filter(event => event.id.includes("-callback-")).length, 14);
-  for (const route of world.legacy!.routes) {
+  for (const route of careerRoutes) {
     const [ordinary, prestige] = route.achievementIds;
     assert.ok(world.character!.activities.some(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === ordinary))), route.id);
     assert.ok(world.events.some(event => event.rarity === "rare" && event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === prestige)))), route.id);

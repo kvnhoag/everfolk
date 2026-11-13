@@ -1,0 +1,53 @@
+EVERFOLK / TWENTY LOGO DIRECTIONS
+Created 11 November 2026 in ArtCraft VectorCraft through its native MCP commands.
+
+Brand: Everfolk
+Motto: Live another story
+Palette: deep teal #24464b, antique gold #b58a49, clay #98584b,
+olive #72805a, parchment #fbf3df.
+
+START HERE
+review/Everfolk-20-logo-directions.png shows all 20 wordmark compositions.
+review/Everfolk-symbol-tests.png shows colour, one-colour and reverse devices.
+The corresponding .vectorcraft review documents remain editable.
+
+EDITABLE MASTERS
+masters/ contains 20 individual .vectorcraft files. Each has four artboards:
+1. Primary logo with live editable wordmark and motto, 720 x 340.
+2. Colour device, 160 x 160.
+3. One-colour device, 160 x 160.
+4. Reverse logo with live editable wordmark and motto, 720 x 340.
+Named layers separate each treatment; devices contain editable vector paths.
+Open a master with VectorCraft to edit geometry, colour or type.
+
+EXPORTS
+svg/ contains 80 transparent SVG files: primary, icon, mono and reverse.
+SVG lettering is converted to outlines so it displays without installed fonts.
+Reverse files use light lettering and should be placed on a dark teal ground.
+png/ contains 40 transparent PNG files: 1440 x 680 primary logos and
+320 x 320 colour devices. The black area some viewers show is transparency.
+
+TYPE
+The current Courier New Bold brand treatment is retained in several options.
+Source Serif 4 Regular and Georgia Regular/Bold explore literary alternatives.
+Inter Regular supports the motto. Native files use installed fonts; SVGs
+do not require those fonts. Font files are not redistributed in this package.
+
+CONCEPT INDEX
+01 Guiding Book       06 Forked Path        11 Common Hearth   16 EF Ligature
+02 Turning Leaf       07 Woven Lives        12 Village Sun     17 Archive Seal
+03 Story Door         08 Life Rings         13 Gathering       18 Ever Knot
+04 Chronicle Ribbon   09 Sprouting Story    14 Open Window     19 Wayfinder
+05 Chapter E          10 Returning Dawn     15 Shared Table    20 Quill Flame
+
+VALIDATION
+All 20 native masters were saved, closed and reopened in VectorCraft.
+Each retained four artboards. No font substitutions or export warnings.
+Primary and contrast sheets were rendered in VectorCraft and visually reviewed.
+SVGs contain vector art with outlined type, without embedded raster images.
+These are logo design concepts for review; none has been applied to the game.
+
+REPRODUCTION
+source/ contains the concept geometry and build script. The build script
+uses the installed local artcraft-mcp skill helper and VectorCraft CLI.
+manifest.json records each concept, rationale, type and exported filenames.

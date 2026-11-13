@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "closedWingCases": true,
+  "spreadWings": false,
+  "crownedBodyPreserved": true,
+  "legPairs": 3,
+  "nativeArtboards": 8,
+  "svgExports": 8,
+  "rasterImages": 0,
+  "transparentPngs": true,
+  "exportWarnings": []
+}

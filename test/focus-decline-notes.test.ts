@@ -3,7 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import legacyPack from "../worlds/alexandria-0.15.0.json" with { type: "json" };
-import { yearlyDeclineNotes } from "../client/yearly-focus.ts";
+import { yearlyDeclineNotes } from "../client/models/yearly-focus.ts";
 
 function fixture(age: number): { life: LifeState; world: WorldPack } {
   const engine = createEngine(legacyPack);

@@ -5,7 +5,7 @@ import { activityPartnerIds, characterEffectReason } from "../src/character.ts";
 import { relationshipSupport } from "../src/relationships.ts";
 import type { Choice, Condition, Effect, LifeEngine, LifeState, SocialRole, WorldPack } from "../src/types.ts";
 import retained from "../worlds/alexandria-0.29.0.json" with { type: "json" };
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 
 const role = (value: SocialRole, active = true, partner = "person-a"): Extract<Effect, { type: "social-role" }> => ({ type: "social-role", partner, role: value, active });
 const option = (id: string, effects: Effect[] = []): Choice => ({ id, text: `${id} with {person:person-a}`, outcomes: [{ id: `${id}-done`, text: `You and {person:person-a} ${id}.`, weight: 1, effects }] });

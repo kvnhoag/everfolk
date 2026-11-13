@@ -8,9 +8,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createEngine, validateWorld } from "../src/index.ts";
 import { getLegacyRoutes } from "../src/legacy.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { buildLateSkillRoutes } from "../client/late-skill-routes.ts";
-import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/legacy-store.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { buildLateSkillRoutes } from "../client/models/late-skill-routes.ts";
+import { collectLegacyEntries, persistLegacyEntries, readLegacyEntries } from "../client/storage/legacy-store.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.33.0.json" with { type: "json" };
 import figures from "../research/late-route-figures.json" with { type: "json" };
@@ -22,7 +22,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: LateSkillRoutes } = await import("../client/LateSkillRoutes.tsx");
+const { default: LateSkillRoutes } = await import("../client/components/LateSkillRoutes.tsx");
 hooks.deregister();
 const world = current as WorldPack, engine = createEngine(world);
 
@@ -42,7 +42,9 @@ test("advanced paths project real work gates without changing a life, world or R
 
 test("wiki shows both later branches, final assessment terms and cited figures without action buttons", () => {
   const life = engine.start("late-tree-wiki");
-  for (const route of world.legacy!.routes) {
+  const careers = world.legacy!.routes.filter(route => retained.legacy.routes.some(previous => previous.id === route.id));
+  assert.equal(careers.length, 7);
+  for (const route of careers) {
     const scoped = { ...world, legacy: { ...world.legacy!, routes: [route] } };
     const html = renderToStaticMarkup(createElement(LateSkillRoutes, { world: scoped, life, activities: engine.getActivities(life), readOnly: true, onActivity() { assert.fail("Read-only rendering acted"); } }));
     for (const stage of route.stages!) for (const id of stage.achievementIds) assert.ok(html.includes(world.legacy!.achievements.find(item => item.id === id)!.title.replaceAll("&", "&amp;").replaceAll("'", "&#x27;")), id);

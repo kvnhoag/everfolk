@@ -1,0 +1,29 @@
+{
+  "method": "ArtCraft base + original pixel art at100% + ArtCraft transparent vector/text overlay",
+  "final": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\review\\Alexander-The-Great-card.png",
+  "finalSha256": "5deab99a55177ecc40e897ee93373aa3ec7067735bacf0a2183eb6a7eaea7c2b",
+  "portraitSha256": "b6c683dceef69b12abcd2fed3243585c3704d18e9ed7dfaff9b0db6185c983d3",
+  "nativeIntermediate": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\qa\\VectorCraft-native-export.png",
+  "nativeIntermediateSha256": "ca9957702a63ac7a29e286f0fbef6f30100f1132234c102a25f466b477eb796e",
+  "portraitPixelsChecked": 765234,
+  "differingChannels": 0,
+  "maxChannelDifference": 0,
+  "transparentCornerAlpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "artPosition": [
+    30,
+    30
+  ],
+  "artSize": [
+    840,
+    1050
+  ],
+  "clippingRadius": 10,
+  "interpolatingResize": false,
+  "thumbnailKernel": "nearest",
+  "sourcePortraitUnchanged": true
+}

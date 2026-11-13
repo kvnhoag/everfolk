@@ -8,7 +8,7 @@ import ts from "typescript";
 import { createEngine, yearAtAge } from "../src/index.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.28.0.json" with { type: "json" };
-import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../client/relationship-labels.ts";
+import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../client/models/relationship-labels.ts";
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith(".css")) return { format: "module", source: "export {};", shortCircuit: true };
@@ -17,8 +17,8 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   }).outputText };
   return nextLoad(url, context);
 } });
-const { default: CharacterPanel } = await import("../client/CharacterPanel.tsx");
-const { default: HouseholdSummary } = await import("../client/HouseholdSummary.tsx");
+const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
+const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
 hooks.deregister();
 
 function socialFixture() {
@@ -147,6 +147,14 @@ test("the actual relationship panel reveals a friend or business partner without
   }
 });
 
+function householdField(html: string, label: string): string {
+  const marker = `<span class="household-field-label">${label}</span>`;
+  assert.ok(html.includes(marker), `The household must show ${label}.`);
+  // Portraits may sit between the label and name; keep the assertion scoped
+  // to this field so a matching name elsewhere cannot satisfy it.
+  return html.split(marker)[1]!.split('<span class="household-field-label">')[0]!;
+}
+
 test("the actual relationship and household panels show wife or husband alongside independent social tags", () => {
   for (const [index, label, name] of [[0, "Wife", "Kleopatra"], [1, "Husband", "Petosiris"]] as const) {
     const { world, life, ids } = socialFixture(), id = ids[index];
@@ -158,7 +166,7 @@ test("the actual relationship and household panels show wife or husband alongsid
     for (const tag of [label, "Friend", "Business partner"]) assert.ok(html.includes(`<span class="character-status-tag">${tag}</span>`));
     assert.doesNotMatch(html, /Former partner/);
     const household = renderToStaticMarkup(createElement(HouseholdSummary, { world, life, onOpenCharacter() {} }));
-    assert.ok(household.includes(`<span class="household-field-label">${label}</span><strong>${name}</strong>`));
+    assert.ok(householdField(household, label).includes(`<strong>${name}</strong>`));
     assert.doesNotMatch(household, /Courting|Spouse/);
   }
 });
@@ -166,12 +174,17 @@ test("the actual relationship and household panels show wife or husband alongsid
 test("the actual panel keeps a plain acquaintance hidden and uses love interest for accepted dating", () => {
   const { world, life, ids } = socialFixture(), id = ids[0];
   const met = renderToStaticMarkup(createElement(CharacterPanel, { world, life, initialSection: "relationships", onActivity() {} }));
-  assert.doesNotMatch(met, />Relationships<\/button>|class="relationship-tags"/);
+  assert.match(met, />Relationships<\/button>/);
+  assert.match(met, /No social relationships recorded yet/);
+  // A relative can share a fixture name; scope identity privacy to the social panel.
+  const socialPanel = met.split(/id="[^"]+-panel-relationships"/)[1]?.split(/id="[^"]+-panel-children"/)[0];
+  assert.ok(socialPanel);
+  assert.doesNotMatch(socialPanel, /Kleopatra|Petosiris|Eirene|class="relationship-tags"|aria-label="Relationship with /);
   life.character!.partnerId = id; life.character!.relationshipStatus = "courting";
   life.character!.datedPartnerIds = [id];
   const dating = renderToStaticMarkup(createElement(CharacterPanel, { world, life, initialSection: "relationships", onActivity() {} }));
   assert.match(dating, /Love interest: Kleopatra/);
   assert.match(dating, /<span class="character-status-tag">Love interest<\/span>/);
   const household = renderToStaticMarkup(createElement(HouseholdSummary, { world, life, onOpenCharacter() {} }));
-  assert.match(household, /<span class="household-field-label">Love interest<\/span><strong>Kleopatra<\/strong>/);
+  assert.match(householdField(household, "Love interest"), /<strong>Kleopatra<\/strong>/);
 });

@@ -3,7 +3,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { deflateSync } from "node:zlib";
 import { resolve } from "node:path";
-import { AVATAR_APPEARANCE_ORIGINS, getAvatarAppearance } from "../client/avatar-appearance.ts";
+import { AVATAR_APPEARANCE_ORIGINS, getAvatarAppearance } from "../client/models/avatar-appearance.ts";
 
 const base = new URL("../public/assets/pixel/", import.meta.url);
 const P = JSON.parse(readFileSync(new URL("manifest.json", base), "utf8")).palette;

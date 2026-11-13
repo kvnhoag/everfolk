@@ -1,0 +1,41 @@
+{
+  "name": "Dawnwing / one connected scarab",
+  "parent": "../everfolk-dawnwing-v5-wings",
+  "master": "masters/Everfolk-Dawnwing-Unified.vectorcraft",
+  "artboards": 8,
+  "exports": [
+    "emblem-color",
+    "emblem-compact-color",
+    "stacked-light",
+    "stacked-dark",
+    "horizontal-light",
+    "horizontal-dark",
+    "wordmark-ink",
+    "wordmark-cream"
+  ],
+  "palette": {
+    "wing": "#b97854",
+    "feather": "#dfbd7d",
+    "featherShade": "#d59a6a",
+    "limb": "#d8bc7b",
+    "core": "#214942",
+    "crown": "#dfad79",
+    "thorax": "#4e7c67",
+    "shell": "#ddc383",
+    "shellShade": "#b89c64",
+    "detail": "#214942"
+  },
+  "references": [
+    {
+      "title": "UNL scarab morphology",
+      "url": "https://unsm-ento.unl.edu/Guide/Guide-introduction/key%20tools/Morphology/Morphology.html",
+      "use": "Body structure and leg distribution"
+    },
+    {
+      "title": "Vincenzo Famoso / scarab logo",
+      "url": "https://dribbble.com/shots/14751873-scarab-logo",
+      "use": "Reference for compact composition and shared wing roots; original geometry used"
+    }
+  ],
+  "warnings": []
+}

@@ -7,7 +7,8 @@ import { fileURLToPath } from "node:url";
 import { createEngine } from "../src/index.ts";
 import { getAssetValue, getNetWorth } from "../src/economy.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+// These contracts exercise retained immediate purchases; annual orders have their own suite.
+import pack from "../worlds/alexandria-0.37.0.json" with { type: "json" };
 import economyRelease from "../worlds/alexandria-0.9.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.8.0.json" with { type: "json" };
 
@@ -18,7 +19,11 @@ function controlledWorld(): WorldPack {
   world.health!.declineBands.forEach(band => { band.healthLoss = 0; });
   world.stats.wealth.initial = 80;
   world.stats.wealth.initialRange = { min: 80, max: 80 };
-  for (const origin of world.origins) origin.statRanges!.wealth = { min: 80, max: 80 };
+  for (const asset of world.economy!.assets) asset.initialRange = { min: 0, max: 0 };
+  for (const origin of world.origins) {
+    origin.statRanges!.wealth = { min: 80, max: 80 };
+    delete origin.assetRanges;
+  }
   world.events = world.events.filter(event => ["the-first-household", world.health!.careDecision].includes(event.id));
   world.yearlyEffects = [];
   world.yearlyRules = [];
@@ -115,7 +120,7 @@ test("buying and selling preserve net worth while only ownership produces annual
   life = engine.advance(life);
   assert.equal(life.economy!.cash - purchased.economy!.cash, 10);
   assert.equal(life.journal.filter(entry => entry.id === "asset-income").length, 1);
-  assert.equal(engine.getActivities(life).find(activity => activity.id === "buy-workshop-share")!.available, false);
+  assert.equal(engine.getActivities(life).find(activity => activity.id === "buy-workshop-share")!.available, true, "Another share remains purchasable after the yearly activity resets.");
   const beforeSale = getNetWorth(engine.world, life);
   life = engine.act(life, "sell-workshop-share");
   assert.equal(life.economy!.cash, 810);

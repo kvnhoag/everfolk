@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "assetId": "ef-h-f01-infant-v1",
+      "path": "source/heads/ef-h-f01-infant-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 851597,
+      "opaquePixels": 293,
+      "alphaBounds": [
+        113,
+        147,
+        991,
+        1283
+      ],
+      "sha256": "f6fc38e0266948fd7b5b24d9223bc17e567352e880078c00eb371c047bfaea88",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f01-child-v1",
+      "path": "source/heads/ef-h-f01-child-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 868993,
+      "opaquePixels": 89,
+      "alphaBounds": [
+        134,
+        131,
+        971,
+        1284
+      ],
+      "sha256": "d06198d6e675fa049e80fa2cf4929bb5da0e3c6552ed930e410d2b3fbc5d07ac",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f01-youth-v1",
+      "path": "source/heads/ef-h-f01-youth-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 793709,
+      "opaquePixels": 403,
+      "alphaBounds": [
+        126,
+        33,
+        978,
+        1364
+      ],
+      "sha256": "06efbdc93bff28387e0c09055d8cda57e006e7d2036b2f1dbdbe454e2863b9d6",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f01-adult-v1",
+      "path": "source/heads/ef-h-f01-adult-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 778881,
+      "opaquePixels": 380,
+      "alphaBounds": [
+        133,
+        36,
+        967,
+        1364
+      ],
+      "sha256": "d1dbf9277825843a614df489bac6a552e86ba63c5101bb8c1898109ef630d0c9",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f01-middle-v1",
+      "path": "source/heads/ef-h-f01-middle-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 776696,
+      "opaquePixels": 404,
+      "alphaBounds": [
+        131,
+        33,
+        968,
+        1365
+      ],
+      "sha256": "6f6788ab541c673a1998ec42003d0f15b673a21926d7949513ff06fa24909772",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f01-elder-v1",
+      "path": "source/heads/ef-h-f01-elder-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 756231,
+      "opaquePixels": 230,
+      "alphaBounds": [
+        133,
+        32,
+        983,
+        1364
+      ],
+      "sha256": "fc8f52c37acf167bc12ea4b1424ed2de955f0bde948a5bd6b411ffeedb536b96",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-infant-v1",
+      "path": "source/heads/ef-h-f02-infant-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 802162,
+      "opaquePixels": 242,
+      "alphaBounds": [
+        104,
+        96,
+        1019,
+        1273
+      ],
+      "sha256": "19511c55316e69a4ad3b5f7d2c43aaab095d279c48ca65af7daa0ecef322c62c",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-child-v1",
+      "path": "source/heads/ef-h-f02-child-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 900015,
+      "opaquePixels": 87,
+      "alphaBounds": [
+        148,
+        100,
+        957,
+        1351
+      ],
+      "sha256": "dadfcbc55036a26e3550869ff7f4489cbca47d6ad51b231b7b2226e8c843003c",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-youth-v1",
+      "path": "source/heads/ef-h-f02-youth-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 717997,
+      "opaquePixels": 246,
+      "alphaBounds": [
+        136,
+        17,
+        978,
+        1387
+      ],
+      "sha256": "1bfe0e103fc4f8d5f972222e5ebdb2d3588724c34e3cb437aad77206faca78fb",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-adult-v1",
+      "path": "source/heads/ef-h-f02-adult-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 726349,
+      "opaquePixels": 302,
+      "alphaBounds": [
+        139,
+        21,
+        977,
+        1377
+      ],
+      "sha256": "597a561978a174c3c453554c15e20e0f15e11729afb1f94ab9f9133bcca2db7c",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-middle-v1",
+      "path": "source/heads/ef-h-f02-middle-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 707727,
+      "opaquePixels": 182,
+      "alphaBounds": [
+        137,
+        19,
+        980,
+        1380
+      ],
+      "sha256": "cd1e86f3dcb34126999b95531ce5c8cdc7b48a5809a4f2235fd6653290cc46a3",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    },
+    {
+      "assetId": "ef-h-f02-elder-v1",
+      "path": "source/heads/ef-h-f02-elder-v1.png",
+      "width": 1122,
+      "height": 1402,
+      "pngColorType": 6,
+      "minAlpha": 0,
+      "maxAlpha": 255,
+      "transparentPixels": 702955,
+      "opaquePixels": 236,
+      "alphaBounds": [
+        138,
+        16,
+        981,
+        1391
+      ],
+      "sha256": "7232567b3c992a2a69115d0c927b3543a1a601c97012f0e9985e9e5eb25ee340",
+      "unchangedCopyMatchesOriginal": true,
+      "promptPresent": true,
+      "provenancePresent": true,
+      "visualReview": "Inspected generated output: isolated frontal head/neck, no shoulders/clothes/props; plausible age progression and recognizable identity."
+    }
+  ],
+  "status": "passed source integrity and alpha checks",
+  "scope": "Source head PNG QA only. Normalized component anchors, clothing composites and PixelOE finish are subsequent production steps."
+}

@@ -18,7 +18,7 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: CompactSkillPanel } = await import("../client/CompactSkillPanel.tsx");
+const { default: CompactSkillPanel } = await import("../client/components/CompactSkillPanel.tsx");
 hooks.deregister();
 
 test("the infant sidebar keeps the wiki accessible without locked skills or an empty branch selector", () => {

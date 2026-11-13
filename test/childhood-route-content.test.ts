@@ -3,7 +3,7 @@ import test from "node:test";
 import { createEngine, matchesCondition, validateWorld } from "../src/index.ts";
 import { getOutcomeProbabilities, outcomeWeight } from "../src/outcomes.ts";
 import { skillEffectDelta } from "../src/progression.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import type { Choice, Effect, LifeState, WorldPack } from "../src/types.ts";
 // Preserve the childhood release's complete before/after comparison as later skills evolve.
 import input from "../worlds/alexandria-0.27.0.json" with { type: "json" };

@@ -1,0 +1,402 @@
+{
+  "fonts": [
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    },
+    {
+      "family": "Source Serif 4",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Source Serif 4",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 340,
+        "name": "07 Primary lockup",
+        "width": 720,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "07 Colour device",
+        "width": 160,
+        "x": 760,
+        "y": 0
+      },
+      {
+        "height": 160,
+        "name": "07 One-colour device",
+        "width": 160,
+        "x": 960,
+        "y": 0
+      },
+      {
+        "height": 340,
+        "name": "07 Reverse lockup",
+        "width": 720,
+        "x": 0,
+        "y": 400
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 19,
+    "dirty": false,
+    "fileInfoTitle": "Everfolk / 07 Woven Lives",
+    "history": [
+      "Artboard Options",
+      "New Artboard",
+      "New Artboard",
+      "New Artboard",
+      "New Layer",
+      "Draw Woven Lives",
+      "Type",
+      "Type",
+      "New Layer",
+      "Draw Woven Lives",
+      "New Layer",
+      "Draw Woven Lives",
+      "New Layer",
+      "Draw Woven Lives",
+      "Type",
+      "Type"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      19
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 200.23636750622995,
+          "width": 245.71800000000005,
+          "x": 237.141,
+          "y": 452.62300749377005
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 291.8046875,
+              "y": 633.5
+            },
+            "fill": "#b58a49",
+            "id": 25,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 90.48599999999999,
+              "width": 245.71800000000005,
+              "x": 237.141,
+              "y": 543.624
+            },
+            "fill": "#fbf3df",
+            "id": 24,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 57.24415508692931,
+              "width": 68.69298057783868,
+              "x": 325.555442531458,
+              "y": 452.62300749377005
+            },
+            "childCount": 3,
+            "id": 23,
+            "kind": "Group",
+            "locked": false,
+            "name": "07 Woven Lives / reverse device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 19,
+        "kind": "Layer",
+        "locked": false,
+        "name": "04 Reverse lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 79.64404186007565,
+          "width": 95.57284254308001,
+          "x": 992.077137435072,
+          "y": 40.51896694785385
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 79.64404186007565,
+              "width": 95.57284254308001,
+              "x": 992.077137435072,
+              "y": 40.51896694785385
+            },
+            "childCount": 3,
+            "id": 18,
+            "kind": "Group",
+            "locked": false,
+            "name": "07 Woven Lives / mono device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 14,
+        "kind": "Layer",
+        "locked": false,
+        "name": "03 One-colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 79.64404186007565,
+          "width": 95.57284254308024,
+          "x": 792.0771374350718,
+          "y": 40.51896694785385
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 79.64404186007565,
+              "width": 95.57284254308024,
+              "x": 792.0771374350718,
+              "y": 40.51896694785385
+            },
+            "childCount": 3,
+            "id": 13,
+            "kind": "Group",
+            "locked": false,
+            "name": "07 Woven Lives / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 9,
+        "kind": "Layer",
+        "locked": false,
+        "name": "02 Colour device",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 200.23636750623004,
+          "width": 245.71800000000005,
+          "x": 237.141,
+          "y": 52.623007493769954
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 19.359375,
+              "width": 136.390625,
+              "x": 291.8046875,
+              "y": 233.5
+            },
+            "fill": "#736957",
+            "id": 8,
+            "kind": "Type",
+            "locked": false,
+            "name": "Live another story",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Live another story",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 90.48600000000002,
+              "width": 245.71800000000005,
+              "x": 237.141,
+              "y": 143.624
+            },
+            "fill": "#24464b",
+            "id": 7,
+            "kind": "Type",
+            "locked": false,
+            "name": "Everfolk",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Everfolk",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 57.244155086929375,
+              "width": 68.69298057783868,
+              "x": 325.555442531458,
+              "y": 52.623007493769954
+            },
+            "childCount": 3,
+            "id": 6,
+            "kind": "Group",
+            "locked": false,
+            "name": "07 Woven Lives / color device",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 2,
+        "kind": "Layer",
+        "locked": false,
+        "name": "01 Primary lockup / live type",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": null,
+        "children": [],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "Layer 1",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 25,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#b58a49",
+      "strokeWidth": 8
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\07-woven-lives.vectorcraft",
+    "redo": [],
+    "revision": 97,
+    "selection": [
+      25
+    ],
+    "selectionBounds": {
+      "height": 19.359375,
+      "width": 136.390625,
+      "x": 291.8046875,
+      "y": 633.5
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "07-woven-lives.vectorcraft",
+    "tool": "selection",
+    "uid": 8,
+    "units": "Pixels"
+  }
+}

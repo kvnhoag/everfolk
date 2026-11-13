@@ -1,0 +1,14 @@
+{
+  "assetId": "ef-w-female-work-v2",
+  "sourcePath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d3c5a0e4-631f-4e3a-8db3-c80d43317a1c.png",
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/wardrobe/ef-w-female-work-v2.png",
+  "promptPath": "source/prompts/ef-w-female-work-v2-prompt.txt",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "transparentBackgroundRequested": true,
+  "referencePaths": [
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/body-references/ef-r-female-waist-v2.png",
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/bodies/ef-b-female-v2.png"
+  ],
+  "provenanceNote": "Canonical female body garment edit/extraction requested at original canvas placement. Copied unchanged; original retained. Actual registration requires measured QA."
+}

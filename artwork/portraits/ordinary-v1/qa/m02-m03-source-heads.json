@@ -1,0 +1,366 @@
+{
+  "assets": [
+    {
+      "assetId": "ef-h-m02-infant-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        3,
+        1112,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        163,
+        168,
+        948,
+        1204
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 975857,
+      "opaquePixels": 370,
+      "sha256": "c8071ddccd0b7fc3d6dd8bff9b2344aaa9d314d1029a8634fa9c8408e044d087",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m02-child-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        28,
+        1108,
+        1386
+      ],
+      "alpha32BoundingBox": [
+        192,
+        118,
+        927,
+        1232
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 988039,
+      "opaquePixels": 436,
+      "sha256": "2eee00bea588353c513a4881db48cfaa95498aa44971006995f7ffbc4cb2b0de",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m02-youth-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        137,
+        43,
+        1066,
+        1348
+      ],
+      "alpha32BoundingBox": [
+        199,
+        62,
+        914,
+        1289
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 929025,
+      "opaquePixels": 435,
+      "sha256": "4dbc941ad6bc97ef146ffa923f6874248e823a2d9a923754d291c0cbe2ad2d43",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m02-adult-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        29,
+        1104,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        197,
+        63,
+        909,
+        1320
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 894320,
+      "opaquePixels": 534,
+      "sha256": "5630059923eb4baa4ea2a8aa43cd4dcce38141c6364a115b105e0ecc49683738",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m02-middle-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        20,
+        1090,
+        1386
+      ],
+      "alpha32BoundingBox": [
+        192,
+        57,
+        913,
+        1321
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 884870,
+      "opaquePixels": 483,
+      "sha256": "c0e59fb0d2c801da5fe18689fb415eef4801bd76425313600938da8f429db6a1",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m02-elder-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        20,
+        1102,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        190,
+        60,
+        917,
+        1321
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 881304,
+      "opaquePixels": 385,
+      "sha256": "977bdf56ac77614bbb21cf858db888b25a83626973557bee58c14900cd023683",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-infant-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        21,
+        0,
+        1102,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        167,
+        140,
+        952,
+        1213
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 926207,
+      "opaquePixels": 478,
+      "sha256": "af198501b413580b4774f413962ab5a999880ad7465734df81337b0f106c4f95",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-child-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        25,
+        41,
+        1106,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        173,
+        95,
+        938,
+        1252
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 915579,
+      "opaquePixels": 479,
+      "sha256": "f3e9a1a92ff4a2ab3ac8ca83141bda4c5cc7a3d94baac2c9b852b2ed1e59ed38",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-youth-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        22,
+        1092,
+        1370
+      ],
+      "alpha32BoundingBox": [
+        176,
+        73,
+        944,
+        1329
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 856280,
+      "opaquePixels": 573,
+      "sha256": "0349b17e61b690b594bfec238513964a9a3e9d427cc8a3f0b1e9f2f189353155",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-adult-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        30,
+        1108,
+        1384
+      ],
+      "alpha32BoundingBox": [
+        171,
+        76,
+        952,
+        1335
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 808046,
+      "opaquePixels": 604,
+      "sha256": "a1ce6911689cc5d3fe2147a5dbc61740c3ebce308d0797326c873811fdda0440",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-middle-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        23,
+        1121,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        169,
+        72,
+        955,
+        1339
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 793257,
+      "opaquePixels": 534,
+      "sha256": "567bfa4c5d4843378f827140d15df9d9a2334322d2032e46c824cd4ce4bf16f2",
+      "promptExists": true,
+      "provenanceExists": true
+    },
+    {
+      "assetId": "ef-h-m03-elder-v1",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBoundingBox": [
+        0,
+        0,
+        1098,
+        1402
+      ],
+      "alpha32BoundingBox": [
+        167,
+        75,
+        955,
+        1338
+      ],
+      "solidSubjectContained": true,
+      "transparentPixels": 800131,
+      "opaquePixels": 911,
+      "sha256": "b47e4735d9038932188fc16fd2effdea2c737a3ebf850eee8270a877d40fb4b8",
+      "promptExists": true,
+      "provenanceExists": true
+    }
+  ],
+  "count": 12,
+  "visualReview": "Head-only components, no shoulders/clothes, forward gaze; all juvenile stages clean-shaven. Raw generated dimensions retained. Normalized alignment and garment-seam QA are downstream. Alpha>0 bounding boxes may contain faint edge noise; alpha>=32 subject extents recorded separately."
+}

@@ -1,9 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readEverfolkStorage } from "../client/brand-storage.ts";
-import { builtinEngine, createSampleLife, exportLife, hasBirthStatsBeenRevealed, hasLifeBegun, persistLife, readArchivedLives, readSavedLife, SAVE_KEY, PRESENTATION_KEY } from "../client/session.ts";
-import { persistYearlyFocus, readYearlyFocus, yearlyFocusStorageKey } from "../client/yearly-focus.ts";
-import { LEGACY_GALLERY_KEY, readLegacyEntries } from "../client/legacy-store.ts";
+import { readEverfolkStorage } from "../client/lib/brand-storage.ts";
+import { builtinEngine, exportLife, SAVE_KEY, PRESENTATION_KEY } from "../client/lib/world-session.ts";
+import { createSampleLife, persistLife } from "../client/mutations/lives.ts";
+import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readSavedLife } from "../client/queries/lives.ts";
+import { persistYearlyFocus } from "../client/mutations/yearly-focus.ts";
+import { readYearlyFocus } from "../client/queries/yearly-focus.ts";
+import { yearlyFocusStorageKey } from "../client/models/yearly-focus.ts";
+import { LEGACY_GALLERY_KEY, readLegacyEntries } from "../client/storage/legacy-store.ts";
 
 function storage() {
   const values = new Map<string, string>();

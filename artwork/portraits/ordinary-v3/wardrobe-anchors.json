@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "coordinateSpace": "Native garment pixels; observations only, not a body transform.",
+  "garments": [
+    {
+      "sex": "male",
+      "wardrobeId": "aristocrat",
+      "source": "source/wardrobe/ef-w-male-aristocrat-v3.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "sourceSha256": "f90e4e0431418be9ef16f1bef5fe1ce002bf0b45536ad50951bdacd9b95b4deb",
+      "sourcePoints": {
+        "leftShoulder": [
+          145,
+          655
+        ],
+        "rightShoulder": [
+          925,
+          665
+        ],
+        "waistCenter": [
+          525,
+          1340
+        ],
+        "collarFrontCenter": [
+          525,
+          690
+        ],
+        "leftUpperNeckRim": [
+          350,
+          545
+        ],
+        "rightUpperNeckRim": [
+          710,
+          548
+        ]
+      },
+      "targetPoints": {
+        "leftShoulder": [
+          160,
+          660
+        ],
+        "rightShoulder": [
+          962,
+          660
+        ],
+        "waistCenter": [
+          560,
+          1280
+        ],
+        "collarFrontCenter": [
+          560,
+          660
+        ]
+      },
+      "measurementUncertaintyPx": 8,
+      "occlusionNote": "Cloak covers the right anatomical shoulder; shoulder slope estimates are weaker than collar-front and belt-center.",
+      "suggestedClothingOnlyAffine": [
+        [
+          1.046641791044776,
+          0,
+          10.51305970149258
+        ],
+        [
+          0,
+          0.9538461538461539,
+          1.8461538461538112
+        ]
+      ],
+      "fitPolicy": "Prioritize visible collar-front and belt-center. Use whole-canvas clothing horizontal scale for initial fit. Never alter original complete-model head, neck, shoulders, body geometry or alpha. Approve registration only after the composed collar and sleeve proof is visually reviewed.",
+      "reviewEvidence": "qa/male-aristocrat-anchor-grid.png"
+    }
+  ]
+}

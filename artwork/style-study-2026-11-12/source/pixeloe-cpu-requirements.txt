@@ -1,0 +1,15 @@
+# Minimal dependencies for the tested PixelOE legacy CPU API, not all backends.
+# Install with --no-deps --extra-index-url https://download.pytorch.org/whl/cpu
+pixeloe==1.0.0
+opencv-python-headless==5.0.0.93
+torch==2.7.1+cpu
+numpy==2.5.4
+pillow==12.3.0
+filelock==4.2.10
+sympy==1.13.3
+networkx==3.7
+jinja2==3.1.6
+fsspec==2026.9.0
+MarkupSafe==3.0.4
+mpmath==1.3.0
+typing_extensions==4.16.0

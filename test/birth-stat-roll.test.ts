@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import { getNetWorth } from "../src/economy.ts";
+import { marketQuote } from "../src/market.ts";
+import { pruneRemovedOriginActivities } from "./fixture-features.ts";
 import type { Condition, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import legacy from "../worlds/alexandria-0.5.1.json" with { type: "json" };
-import { BIRTH_ORIGIN_REVEAL_MS, BIRTH_ROLL_DURATION_MS, getBirthRollFrame, getBirthRollStats, getCosmeticBirthValue } from "../client/birth-stat-roll.ts";
+import { BIRTH_ORIGIN_REVEAL_MS, BIRTH_ROLL_DURATION_MS, getBirthRollFrame, getBirthRollStats, getCosmeticBirthValue } from "../client/models/birth-stat-roll.ts";
 
 /** Synthetic one-origin fixtures must also prune conditional odds for removed households. */
 function pruneRemovedOriginModifiers(world: WorldPack): void {
@@ -54,7 +56,11 @@ test("cosmetic values stay within each selected origin range and are reproducibl
   for (const stat of stats) {
     const sourceRange = origin.statRanges![stat.id];
     const scale = engine.world.economy?.stat === stat.id ? engine.world.economy.unitsPerPoint : 1;
-    assert.deepEqual(stat.range, { min: sourceRange.min * scale, max: sourceRange.max * scale });
+    const resourceRanges = scale === 1 ? [] : engine.world.economy!.assets.map(asset => ({ asset, range: origin.assetRanges?.[asset.id] ?? asset.initialRange ?? { min: 0, max: 0 } }));
+    assert.deepEqual(stat.range, {
+      min: sourceRange.min * scale + resourceRanges.reduce((sum, { asset, range }) => sum + range.min * marketQuote(engine.world, life, asset.id).sell, 0),
+      max: sourceRange.max * scale + resourceRanges.reduce((sum, { asset, range }) => sum + range.max * marketQuote(engine.world, life, asset.id).sell, 0),
+    });
     if (scale !== 1) assert.equal(stat.currency, engine.world.economy!.currency.short);
     const seen = new Set<number>();
     for (let frame = 0; frame < 100; frame++) {
@@ -98,6 +104,7 @@ test("birth effect clamping is reflected without mutating the pack ranges", () =
   world.origins = [world.origins[0]];
   world.events = world.events.filter(event => !event.id.startsWith("background-"));
   pruneRemovedOriginModifiers(world);
+  pruneRemovedOriginActivities(world);
   world.origins[0].statRanges = { health: { min: 90, max: 99 } };
   world.origins[0].effects = [{ type: "stat", stat: "health", delta: 8 }];
   const engine = createEngine(world);

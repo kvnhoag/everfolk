@@ -1,0 +1,52 @@
+EVERFOLK / GAME TITLE LOGOS / REVISION 2
+11 November 2026
+
+Direction selected by the user: historical strategy, with bold lettering,
+engraved metal and stronger emblems. This describes the visual direction.
+
+Twenty new title compositions were created in ArtCraft VectorCraft using
+native editable paths, customised outlined lettering, metallic gradients,
+vector extrusion and bevels. Bronze, copper and silver finishes extend
+Everfolk's deep teal and antique gold branding.
+
+VIEW THE SET
+review/Everfolk-20-game-title-logos.png
+review/Everfolk-20-game-title-logos.vectorcraft
+The PNG is a numbered overview. The native review board is editable.
+
+INDIVIDUAL LOGOS
+masters/ : 20 editable VectorCraft documents.
+Each master has two artboards:
+  1. Transparent logo, 1000 x 560.
+  2. Logo on a dark teal proof background, 1000 x 560.
+Letter shapes, metal treatments, emblems and ornaments remain editable.
+The title lettering is outlined geometry; it can be edited as paths.
+
+svg/ : 20 transparent SVG logos with outlined lettering and vector finishes.
+png/ : 20 transparent PNGs at 2000 x 1120, plus 20 dark proofs at 1500 x 840.
+No fonts are required to display the SVG or PNG exports.
+Dark fills within plaques and emblems are part of the metal design.
+
+INDEX
+01 Dawnforged              11 Legacy Crest
+02 Chronicle Gate         12 Atlas of Lives
+03 Living Standard        13 The Living Tome
+04 Wheel of Lives         14 Iron Epoch
+05 Chronicle Plate        15 Age Rings
+06 Woven Histories        16 The Sundial
+07 Roots of Legacy        17 Many Beginnings
+08 Crossroads             18 Golden Thread
+09 The Great Ledger       19 Heirloom Medallion
+10 Horizon Tablet         20 Everlasting Horizon
+
+VALIDATION
+All 20 native masters were saved, closed and reopened in VectorCraft.
+Each retained its two artboards and editable artwork. The set was rendered
+and visually reviewed, including corrected motto and ornament collisions.
+SVG exports contain vector art and outlined lettering without raster images.
+No export warnings or font substitutions were reported.
+The logos have not been applied to the game.
+
+source/ contains the geometry modules and native MCP build script.
+manifest.json lists each concept, typeface, finish and deliverable paths.
+qa/ contains the native inspection and delivery-validation records.

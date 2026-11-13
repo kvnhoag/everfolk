@@ -1,0 +1,77 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\masters\\Alexander-Blade-Comparison.vectorcraft",
+  "png": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\review\\Alexander-Blade-Comparison.png",
+  "reviewOnly": true,
+  "unchanged": true,
+  "inputs": [
+    {
+      "label": "Actual Greek machaira",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\references\\greek-machaira-met-2001.346.jpg",
+      "x": 40,
+      "kind": "Actual public-domain photograph / upper specimen",
+      "sha256": "9e4b550659b348dd1c8dbf37034a15db6147271c2a8b342aab65ded0414f993f",
+      "view": {
+        "scale": 0.5,
+        "sourcePolygon": [
+          [
+            40,
+            55
+          ],
+          [
+            1140,
+            55
+          ],
+          [
+            1140,
+            285
+          ],
+          [
+            290,
+            285
+          ],
+          [
+            260,
+            355
+          ],
+          [
+            40,
+            355
+          ]
+        ]
+      }
+    },
+    {
+      "label": "Previous shallow angle",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\source\\alexander-aura-revised.png",
+      "x": 630,
+      "kind": "V6 generated reconstruction / prior shallow angle",
+      "sha256": "19a9272a6074bc57ec3aa79387957ea5a59c64a57e2c42f64fa7f58c61b7a833",
+      "view": {
+        "scale": 0.5851063829787234,
+        "sourceCrop": [
+          0,
+          0,
+          940,
+          800
+        ]
+      }
+    },
+    {
+      "label": "Corrected grip and diagonal",
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\source\\alexander-blade-revised.png",
+      "x": 1220,
+      "kind": "V7 generated reconstruction / revised grip and whole-weapon angle",
+      "sha256": "478261e87093a7ddc8d25e4d3db09dea95d8b85328f904e2d0174eaed052697c",
+      "view": {
+        "scale": 0.5851063829787234,
+        "sourceCrop": [
+          0,
+          0,
+          940,
+          800
+        ]
+      }
+    }
+  ],
+  "warnings": []
+}

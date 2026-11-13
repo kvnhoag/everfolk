@@ -1,0 +1,29 @@
+{
+  "method": "ArtCraft base + original pixel art at100% + ArtCraft transparent vector/text overlay",
+  "final": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\review\\Alexander-The-Great-card.png",
+  "finalSha256": "4143c156507b2e022ad85c3bc11fb8dc580cf5de6f457c3bffdeed734f21419e",
+  "portraitSha256": "7ebbb312e9ecd7d7c05874764eae5165f2b988f7da3eccdfe7f83a0a47e5dd2e",
+  "nativeIntermediate": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\qa\\VectorCraft-native-export.png",
+  "nativeIntermediateSha256": "633bd2ef5e59333f89e9fc49377adbc2000b1e11f34558690d107b52885b01ff",
+  "portraitPixelsChecked": 765234,
+  "differingChannels": 0,
+  "maxChannelDifference": 0,
+  "transparentCornerAlpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "artPosition": [
+    30,
+    30
+  ],
+  "artSize": [
+    840,
+    1050
+  ],
+  "clippingRadius": 10,
+  "interpolatingResize": false,
+  "thumbnailKernel": "nearest",
+  "sourcePortraitUnchanged": true
+}

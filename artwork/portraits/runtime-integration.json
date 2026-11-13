@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "sourceManifestSha256": "8f6804ea56edbfae12e5ddea4f6aef7d878f3155d6a465a53565258d39e49e9e",
+  "runtimeIntegrated": true,
+  "combinations": 240,
+  "assignment": "Existing LifeEngine seeded random identity at birth/encounter; no player portrait chooser.",
+  "stateAuthority": "src/engine.ts + src/people.ts (existing saved identity and canonical replay)",
+  "projection": "client/models/portrait-state.ts",
+  "registry": "client/models/portrait-asset-registry.json",
+  "publicAssetRoot": "public/assets/portraits/ordinary-v3/",
+  "syncScript": "scripts/sync-portrait-assets.mjs",
+  "convention": "{identityId}:{stage}:{wardrobeId}",
+  "assetConvention": "ef-p-{identityId}-{stage}-{wardrobeId}-v3.png",
+  "documentation": "artwork/portraits/RUNTIME_MAP.md",
+  "saveSchemaChanged": false,
+  "gameplayRngChanged": false,
+  "legacyReplayCommandsRetained": true,
+  "validation": {
+    "combinationCoverage": 240,
+    "sourcePNGCopies": "SHA256 exact",
+    "pureProjection": "No LifeState/commands/RNG mutation",
+    "browser": "Royal and aristocrat desktop/mobile contexts, family identity consistency, read-only six-age birth preview",
+    "targetedTestsPassed": 92,
+    "typeScript": "passed",
+    "structure": "passed",
+    "browserViewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "birthPreview": "Assigned portrait plus six ages; no selection buttons; one stable identity across all previews."
+  }
+}

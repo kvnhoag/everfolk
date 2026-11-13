@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "legPairs": 3,
+  "legRootY": [
+    118,
+    146,
+    170
+  ],
+  "nativeArtboards": 8,
+  "rasterImages": 0,
+  "svgExports": 8,
+  "svgPathsOnly": true,
+  "primaryPaletteColors": 10,
+  "pngChecks": [
+    {
+      "file": "dawnwing-emblem-color.svg",
+      "width": 1024,
+      "height": 1024,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-emblem-compact-color.svg",
+      "width": 512,
+      "height": 512,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-horizontal-dark.svg",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-horizontal-light.svg",
+      "width": 1400,
+      "height": 380,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-stacked-dark.svg",
+      "width": 1200,
+      "height": 800,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-stacked-light.svg",
+      "width": 1200,
+      "height": 800,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-wordmark-cream.svg",
+      "width": 1200,
+      "height": 300,
+      "transparent": true
+    },
+    {
+      "file": "dawnwing-wordmark-ink.svg",
+      "width": 1200,
+      "height": 300,
+      "transparent": true
+    }
+  ],
+  "exportWarnings": []
+}

@@ -22,3 +22,14 @@ next-env.d.ts
 /assets/source/worlds/README.md
 /artwork/life-banners/README.md
 /public/assets/pixel/README.md
+
+# Local image-generation prompts
+/artwork/**/*prompt*.txt
+
+# Downloaded third-party reference scans stay local.
+/artwork/cards/alexander-reference-v2/references/warner-alexander-making-of-chapter-one.pdf
+/artwork/cards/alexander-reference-v2/references/warner-page-*.png
+
+# Local Python bytecode caches.
+__pycache__/
+*.py[cod]

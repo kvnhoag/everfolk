@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "ef-h-f03-adult-v1",
+  "identityId": "f03",
+  "stage": "adult",
+  "ageExample": 28,
+  "tool": "built-in image_gen",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-d88a5fad-6a85-4ed4-9061-fac9d00fc6f1.png",
+  "reference": null,
+  "prompt": "source/prompts/ef-h-f03-adult-v1-prompt.txt",
+  "intermediate": null,
+  "alphaRequested": true,
+  "notes": "Independent identity generation to preserve facial and skin-tone variety."
+}

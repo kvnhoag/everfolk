@@ -1,3 +1,4 @@
+import fixturePack from "../worlds/alexandria-0.37.0.json" with { type: "json" };
 import { withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -8,7 +9,7 @@ import current from "../worlds/alexandria-sample.json" with { type: "json" };
 import romanEra from "../worlds/alexandria-0.31.0.json" with { type: "json" };
 import previous from "../worlds/alexandria-0.18.0.json" with { type: "json" };
 
-function fixture(source = current): WorldPack {
+function fixture(source = fixturePack): WorldPack {
   const world = withoutMoneylender(structuredClone(source) as WorldPack);
   // This fixture isolates career qualifications from all illness onset paths.
   delete world.health!.mortalityCalibration;
@@ -167,16 +168,19 @@ test("rare appointments keep skill requirements and older lives keep their autho
   }
 });
 
-test("civilian leadership pays more than the corresponding ordinary occupation", () => {
-  const income = (id: string) => current.character.jobs.find(job => job.id === id)!.yearlyEffects.reduce((sum, effect) => {
-    if (effect.type === "cash") return sum + effect.delta;
-    if (effect.type === "stat" && effect.stat === current.economy.stat) return sum + effect.delta * current.economy.unitsPerPoint;
-    return sum;
-  }, 0);
+test("civilian workshop leadership increases production capacity while patron-supported reading pays a salary", () => {
+  const job = (id: string) => (current as WorldPack).character!.jobs.find(job => job.id === id)!;
+  assert.ok(job("patron-supported-reader").yearlyEffects.some(effect =>
+    effect.type === "cash" && effect.delta > 0 || effect.type === "stat" && effect.stat === current.economy.stat && effect.delta > 0));
+  assert.equal(job("patron-supported-reader").production, undefined);
   for (const [higher, ordinary] of [
-    ["patron-supported-reader", "sky-table-calculator"],
     ["pottery-workshop-lead", "potter"],
     ["carving-workshop-lead", "wood-carver"],
     ["sculpture-workshop-lead", "sculptor"],
-  ]) assert.ok(income(higher) > income(ordinary), `${higher} should pay more than ${ordinary}`);
+  ]) {
+    const leader = job(higher).production!, worker = job(ordinary).production!;
+    assert.ok(leader.baseBatches > worker.baseBatches && leader.maxBatches > worker.maxBatches, `${higher} can fulfil more batches than ${ordinary}`);
+    assert.deepEqual(leader.inputs, worker.inputs, "the larger workshop still pays for every batch of material");
+    assert.deepEqual(leader.outputs, worker.outputs);
+  }
 });

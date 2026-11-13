@@ -1,13 +1,15 @@
+import { withoutMarketSignals } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Choice, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import { advanceToDecisionWithFocus, advanceYearWithFocus, selectAutomaticChoice } from "../client/yearly-focus.ts";
-import { loanDeadlineWarning } from "../client/loan-summary.ts";
+import { advanceToDecisionWithFocus, advanceYearWithFocus, selectAutomaticChoice } from "../client/models/yearly-focus.ts";
+import { loanDeadlineWarning } from "../client/models/loan-summary.ts";
 
 test("fast-forward stops a normal borrowed life before its repayment deadline", () => {
   const world = structuredClone(pack) as WorldPack;
+  withoutMarketSignals(world);
   const interrupts = new Set([...Object.values(world.economy!.moneylender!.events), world.health!.careDecision]);
   world.events = world.events.filter(event => interrupts.has(event.id));
   delete world.eventPacing;

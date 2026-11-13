@@ -6,7 +6,7 @@ import { matchesCondition } from "../src/conditions.ts";
 import { developHealthIncident, progressHealth, provideHealthCare } from "../src/health.ts";
 import { nextRandom, seedToUint32 } from "../src/random.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { advanceYearWithFocus, selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { advanceYearWithFocus, selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import rawPack from "../worlds/alexandria-sample.json" with { type: "json" };
 
 const pack = rawPack as WorldPack;

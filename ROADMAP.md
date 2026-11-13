@@ -9,7 +9,7 @@
 | 3. Alexandria | A historically grounded setting with varied beginnings and careers | Playable |
 | 4. Player experience | World selection, birth, decisions, scenes, records and accessibility | Implemented; ongoing refinement |
 | 5. Authoring and release | Owner content studio, immutable publication, reproducible builds and CI | Implemented |
-| 6. Deeper ambitions | Sustained historical careers, scholarly work and lasting consequences | Planned beyond the current generic later-career routes |
+| 6. Deeper ambitions | Historical figure cards, earned title/milestone sub-cards and lasting consequences | Bounded title paths implemented; broader careers and consequences planned |
 | 7. More world choices | Another complete historical setting using the shared engine | Future; setting and order unresolved |
 | 8. Optional connected services | Accounts, shared stories and community creation | Separate future decisions |
 

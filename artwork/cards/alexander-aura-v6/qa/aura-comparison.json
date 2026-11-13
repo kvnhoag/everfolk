@@ -1,0 +1,165 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\masters\\Alexander-Aura-Comparison.vectorcraft",
+  "png": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-aura-v6\\review\\Alexander-Aura-Comparison.png",
+  "reviewOnly": true,
+  "unchanged": true,
+  "panels": [
+    {
+      "label": "Actual machaira / upper blade",
+      "file": "references/greek-machaira-met-2001.346.jpg",
+      "dimensions": [
+        1200,
+        591
+      ],
+      "roi": [
+        205,
+        55,
+        940,
+        240
+      ],
+      "x": 40,
+      "y": 170,
+      "note": "Upper blade profile; handle partly outside crop",
+      "provenance": "Actual public-domain object photograph / former Met record 2001.346",
+      "sha256": "9e4b550659b348dd1c8dbf37034a15db6147271c2a8b342aab65ded0414f993f",
+      "display": {
+        "left": 40,
+        "top": 324.7872340425532,
+        "width": 550,
+        "height": 140.4255319148936,
+        "scale": 0.5851063829787234
+      }
+    },
+    {
+      "label": "Actual mosaic / Alexander’s armour",
+      "file": "references/mann-alexander-mosaic-10020.jpg",
+      "dimensions": [
+        2560,
+        1670
+      ],
+      "roi": [
+        520,
+        580,
+        315,
+        280
+      ],
+      "x": 630,
+      "y": 170,
+      "note": "Shoulder guards, cuirass and pteruges",
+      "provenance": "Actual MANN photograph / Giorgio Albano",
+      "sha256": "9fa16bfe672af7eb3ce1ffb00a5c93d27d148c4195130e382c7c5f838b688036",
+      "display": {
+        "left": 651.875,
+        "top": 170,
+        "width": 506.25,
+        "height": 450,
+        "scale": 1.6071428571428572
+      }
+    },
+    {
+      "label": "Actual bronze / rider’s cloak",
+      "file": "references/naples-alexander-mounted-cloak.jpg",
+      "dimensions": [
+        1140,
+        1200
+      ],
+      "roi": [
+        290,
+        50,
+        360,
+        500
+      ],
+      "x": 1220,
+      "y": 170,
+      "note": "Rider’s right-shoulder fastening and front drape",
+      "provenance": "Actual MANN bronze photograph / Salvatore Siano, by permission MANN",
+      "sha256": "97c904e79c89698259c94e8c56837f7184b3623b9df0b66523cde8c563b867c9",
+      "display": {
+        "left": 1333,
+        "top": 170,
+        "width": 324,
+        "height": 450,
+        "scale": 0.9
+      }
+    },
+    {
+      "label": "Heroic scale / reference-derived form",
+      "file": "source/alexander-aura-revised.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "roi": [
+        100,
+        15,
+        820,
+        345
+      ],
+      "x": 40,
+      "y": 730,
+      "note": "Enlarged for aura; not a literal-scale replica",
+      "provenance": "Generated game-art reconstruction / deliberately heroic blade scale",
+      "sha256": "19a9272a6074bc57ec3aa79387957ea5a59c64a57e2c42f64fa7f58c61b7a833",
+      "display": {
+        "left": 40,
+        "top": 839.2987804878048,
+        "width": 550,
+        "height": 231.40243902439025,
+        "scale": 0.6707317073170732
+      }
+    },
+    {
+      "label": "Generated armour detail",
+      "file": "source/alexander-aura-revised.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "roi": [
+        225,
+        540,
+        460,
+        640
+      ],
+      "x": 630,
+      "y": 730,
+      "note": "Revised painting / reconstruction",
+      "provenance": "Generated game-art reconstruction, not an ancient-object photograph",
+      "sha256": "19a9272a6074bc57ec3aa79387957ea5a59c64a57e2c42f64fa7f58c61b7a833",
+      "display": {
+        "left": 743.28125,
+        "top": 730,
+        "width": 323.4375,
+        "height": 450,
+        "scale": 0.703125
+      }
+    },
+    {
+      "label": "Wind-swept mantle / stylized motion",
+      "file": "source/alexander-aura-revised.png",
+      "dimensions": [
+        1122,
+        1402
+      ],
+      "roi": [
+        0,
+        235,
+        680,
+        990
+      ],
+      "x": 1220,
+      "y": 730,
+      "note": "Reference-derived fastening; freely interpreted drape",
+      "provenance": "Generated game-art reconstruction, not an ancient-object photograph",
+      "sha256": "19a9272a6074bc57ec3aa79387957ea5a59c64a57e2c42f64fa7f58c61b7a833",
+      "display": {
+        "left": 1340.4545454545455,
+        "top": 730,
+        "width": 309.09090909090907,
+        "height": 450,
+        "scale": 0.45454545454545453
+      }
+    }
+  ],
+  "warnings": []
+}

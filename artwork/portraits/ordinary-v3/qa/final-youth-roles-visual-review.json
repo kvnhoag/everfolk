@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed",
+  "reviewer": "heads_third_pair",
+  "reviewedAtUtc": "2026-11-13T06:11:18.458860+00:00",
+  "manifestSha256": "8f6804ea56edbfae12e5ddea4f6aef7d878f3155d6a465a53565258d39e49e9e",
+  "smoothCards": 12,
+  "pixelCards": 12,
+  "smoothArtifacts": [
+    {
+      "path": "review/proof/smooth-youth-aristocrat-6.png",
+      "sha256": "ad79158aacf72c0c94d8e580df7e86d09dcd150e32fe27bfc82a432632c03efd",
+      "reviewed": true
+    },
+    {
+      "path": "review/proof/smooth-youth-royalty-6.png",
+      "sha256": "54fee3222f9073a9be754266c2c3de409659bcc3dc545fcc99e599a61c80ab28",
+      "reviewed": true
+    },
+    {
+      "path": "components/outfits/ef-p-m03-youth-royalty-v3.png",
+      "sha256": "4dbb363df11b4993119dda33b1751c153c97bf4702048715b49a6e2261224752",
+      "reviewed": true
+    },
+    {
+      "path": "components/outfits/ef-p-f02-youth-aristocrat-v3.png",
+      "sha256": "d1925233b336d4f32978e8a93b48a53bfd09d54c3618d722aa993bcdbf8f3396",
+      "reviewed": true
+    }
+  ],
+  "reviewedSheets": [
+    {
+      "path": "qa/independent-review-sheets/youth-added-aristocrat-pixel.png",
+      "sha256": "74b96067df823308f05f8ab34edd4b368062345f5f9c04019afcf25db2ba2aa0",
+      "kind": "pixel",
+      "portraitIds": [
+        "ef-p-f01-youth-aristocrat-v3",
+        "ef-p-f02-youth-aristocrat-v3",
+        "ef-p-f03-youth-aristocrat-v3",
+        "ef-p-m01-youth-aristocrat-v3",
+        "ef-p-m02-youth-aristocrat-v3",
+        "ef-p-m03-youth-aristocrat-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "actuallyViewed": true
+    },
+    {
+      "path": "qa/independent-review-sheets/youth-added-royalty-pixel.png",
+      "sha256": "c7375b526103ba612a844bda3edf5a151beede4edaa69722b87711c873ad99d5",
+      "kind": "pixel",
+      "portraitIds": [
+        "ef-p-f01-youth-royalty-v3",
+        "ef-p-f02-youth-royalty-v3",
+        "ef-p-f03-youth-royalty-v3",
+        "ef-p-m01-youth-royalty-v3",
+        "ef-p-m02-youth-royalty-v3",
+        "ef-p-m03-youth-royalty-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "actuallyViewed": true
+    }
+  ],
+  "nativeFinalPixelSpotChecks": [
+    {
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-youth-royalty-v3.png",
+      "sha256": "03984152600bb662e16133f41ce230cb0c3e9fcbcba6878c7186b7d63e2c0a2f",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "reviewer": "heads_third_pair",
+      "actuallyViewed": true,
+      "reviewed": true,
+      "materialFindings": []
+    },
+    {
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-youth-aristocrat-v3.png",
+      "sha256": "98cbdbb301d7a26b9a0ccfd4c90b24617b343a51f4329a7e0803c21f3c3ad935",
+      "inspectionScale": [
+        384,
+        480
+      ],
+      "reviewer": "heads_third_pair",
+      "actuallyViewed": true,
+      "reviewed": true,
+      "materialFindings": []
+    }
+  ],
+  "findings": [
+    "Original youth neck/collar, shoulders and forearms remain coherent across both new role outfits.",
+    "Navy aristocrat and purple/gold royalty remain distinct and the fine facial finish has no material seam."
+  ],
+  "nonBlockingObservation": "Two native smooth spot checks show an affine garment-source bottom edge in the final roughly40 native rows of the canvas. This is not materially visible in the delivered384x480 mixed pixel portraits; no anatomical discontinuity or rerender request.",
+  "old228FinalPngHashesUnchanged": true
+}

@@ -1,0 +1,49 @@
+.storybook-loading {
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+}
+
+.loading-progress-label {
+  color: #ead6b7;
+  font-variant-numeric: tabular-nums;
+}
+
+.loading-progress {
+  appearance: none;
+  overflow: hidden;
+  border: 1px solid #728b8d;
+  border-radius: 4px;
+  background: #254953;
+}
+
+.loading-progress::-webkit-progress-bar { background: #254953; }
+.loading-progress::-webkit-progress-value { background: #d9bc93; transition: width .3s ease; }
+.loading-progress::-moz-progress-bar { background: #d9bc93; }
+
+.loading-soldier {
+  animation: loading-patrol 5.5s steps(48) infinite;
+}
+
+.loading-soldier-leg {
+  transform-origin: 12px 20px;
+  animation: loading-stride .48s steps(2, jump-none) infinite alternate;
+}
+
+.loading-soldier-leg-back { animation-direction: alternate-reverse; }
+
+@keyframes loading-patrol {
+  0% { transform: translateX(-91px); opacity: 0; }
+  6% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { transform: translateX(91px); opacity: 0; }
+}
+
+@keyframes loading-stride {
+  from { transform: rotate(-20deg); }
+  to { transform: rotate(20deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-soldier, .loading-soldier-leg { animation: none; }
+  .loading-progress::-webkit-progress-value { transition: none; }
+}
+

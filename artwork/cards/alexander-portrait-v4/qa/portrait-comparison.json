@@ -1,0 +1,94 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-portrait-v4\\masters\\Alexander-Portrait-Comparison.vectorcraft",
+  "png": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-portrait-v4\\review\\Alexander-Portrait-Comparison.png",
+  "width": 1810,
+  "height": 920,
+  "reviewOnly": true,
+  "actualUnmodifiedPhotograph": "references/louvre-alexander-azara-full.jpg",
+  "inputsUnchanged": true,
+  "panels": [
+    {
+      "label": "Ancient reference / Azara Herm",
+      "file": "references/louvre-alexander-azara-full.jpg",
+      "x": 40,
+      "width": 1146,
+      "height": 1500,
+      "scale": 1,
+      "cropX": 330,
+      "cropY": 20,
+      "kind": "Actual museum photograph / source unchanged",
+      "sourceSha256": "b645e140c08e6cdbe4f10fdb1d19cd493cf187b703e0f06669d37966fd7b4b4f",
+      "nativeImage": {
+        "colorMode": "RGB",
+        "height": 1500,
+        "id": 9,
+        "link": null,
+        "linked": false,
+        "name": "Actual museum photograph / source unchanged",
+        "pixelHeight": 1500,
+        "pixelWidth": 1146,
+        "ppi": [
+          72,
+          72
+        ],
+        "width": 1146
+      }
+    },
+    {
+      "label": "Revised painting",
+      "file": "source/alexander-portrait-revised.png",
+      "x": 630,
+      "width": 1122,
+      "height": 1402,
+      "scale": 2,
+      "cropX": 330,
+      "cropY": 228,
+      "kind": "Generated game-art interpretation",
+      "sourceSha256": "ebaf34a2ae9f4802213166b87b1f72d7f3de739cf399c1bffd954b2c293a4783",
+      "nativeImage": {
+        "colorMode": "RGB",
+        "height": 2804,
+        "id": 14,
+        "link": null,
+        "linked": false,
+        "name": "Generated game-art interpretation",
+        "pixelHeight": 1402,
+        "pixelWidth": 1122,
+        "ppi": [
+          36,
+          36
+        ],
+        "width": 2244
+      }
+    },
+    {
+      "label": "Pixel finish",
+      "file": "assets/alexander-card-pixel.png",
+      "x": 1220,
+      "width": 840,
+      "height": 1050,
+      "scale": 2.5,
+      "cropX": 248,
+      "cropY": 171,
+      "kind": "Finished game-art interpretation",
+      "sourceSha256": "a72342110d2940edfe4bc22fe7cd3eab53cfd0a05e4eaa4159ecf204f200c54b",
+      "nativeImage": {
+        "colorMode": "RGB",
+        "height": 2625,
+        "id": 19,
+        "link": null,
+        "linked": false,
+        "name": "Finished game-art interpretation",
+        "pixelHeight": 1050,
+        "pixelWidth": 840,
+        "ppi": [
+          28.8,
+          28.8
+        ],
+        "width": 2100
+      }
+    }
+  ],
+  "photoCredit": "© GrandPalaisRmn (musée du Louvre) / Hervé Lewandowski",
+  "warnings": []
+}

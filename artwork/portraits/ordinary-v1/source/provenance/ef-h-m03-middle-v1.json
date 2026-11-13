@@ -1,0 +1,13 @@
+{
+  "assetId": "ef-h-m03-middle-v1",
+  "identityId": "m03",
+  "stage": "middle",
+  "age": 49,
+  "toolOrigin": "built-in image_gen.imagegen",
+  "toolFile": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-435d-7673-bac7-2ff12792092e\\exec-55ba7a19-e85a-4922-ab31-598bb29fdb35.png",
+  "path": "source/heads/ef-h-m03-middle-v1.png",
+  "prompt": "source/prompts/ef-h-m03-middle-v1-prompt.txt",
+  "parentPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v1/source/heads/ef-h-m03-adult-v1.png",
+  "referenceRole": "identity-and-style-reference",
+  "transparentRequested": true
+}

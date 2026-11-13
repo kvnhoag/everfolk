@@ -1,0 +1,219 @@
+{
+  "artboards": [
+    {
+      "height": 512,
+      "name": "01 Standalone emblem / ink",
+      "width": 512,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 512,
+      "name": "02 Standalone emblem / cream",
+      "width": 512,
+      "x": 620,
+      "y": 0
+    },
+    {
+      "height": 820,
+      "name": "03 Stacked signature / cream",
+      "width": 1200,
+      "x": 0,
+      "y": 640
+    },
+    {
+      "height": 380,
+      "name": "04 Horizontal signature / ink",
+      "width": 1400,
+      "x": 0,
+      "y": 1600
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 49,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 08 Heart of a Life",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 237.92452830188677,
+        "width": 1256.9411467542309,
+        "x": 60,
+        "y": 1671.0377358490566
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 237.92452830188677,
+            "width": 1256.9411467542309,
+            "x": 60,
+            "y": 1671.0377358490566
+          },
+          "childCount": 2,
+          "id": 71,
+          "kind": "Group",
+          "locked": false,
+          "name": "Heart of a Life / horizontal signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 49,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Scarab beside name / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 602.0046800459427,
+        "width": 816.6607729224552,
+        "x": 191.6696135387724,
+        "y": 747.2830188679245
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 602.0046800459427,
+            "width": 816.6607729224552,
+            "x": 191.6696135387724,
+            "y": 747.2830188679245
+          },
+          "childCount": 2,
+          "id": 48,
+          "kind": "Group",
+          "locked": false,
+          "name": "Heart of a Life / stacked signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 26,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 Scarab and name / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 380.6792452830189,
+        "width": 416,
+        "x": 668,
+        "y": 65.66037735849056
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 380.6792452830189,
+            "width": 416,
+            "x": 668,
+            "y": 65.66037735849056
+          },
+          "childCount": 10,
+          "id": 25,
+          "kind": "Group",
+          "locked": false,
+          "name": "08 Heart of a Life / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 14,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Standalone scarab / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 380.6792452830189,
+        "width": 416,
+        "x": 48,
+        "y": 65.66037735849056
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 380.6792452830189,
+            "width": 416,
+            "x": 48,
+            "y": 65.66037735849056
+          },
+          "childCount": 10,
+          "id": 13,
+          "kind": "Group",
+          "locked": false,
+          "name": "08 Heart of a Life / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Standalone scarab / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 71,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#9b553e",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarabs-v1\\masters\\08-heart-of-a-life.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "08-heart-of-a-life.vectorcraft",
+  "tool": "selection",
+  "uid": 25,
+  "units": "Pixels",
+  "rasterImages": 0
+}

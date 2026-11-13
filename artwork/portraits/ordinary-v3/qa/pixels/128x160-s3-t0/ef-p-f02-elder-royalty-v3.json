@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f02-elder-royalty-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f02-elder-royalty-v3.png",
+  "sourceSha256": "981691fff9b1f85d59add8e382524d15e3a220d7e5bc7b2b32bc8ed86f6be500",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-f02-elder-royalty-v3.logical.png",
+  "logicalSha256": "352ceead74e47f03f2082a34f46fbccdf962fb36b045b3fe6ddbc12834dc9d75",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-f02-elder-royalty-v3.png",
+  "outputSha256": "9ed182e190fec9e23fd16647e043427b1b3c8c724bca8105aae6023aac27478f",
+  "logicalPixelSha256": "af12deb85a02ba1bcd4b1c7abd11cfaff8cd3b8f43cf47a37eb42b046aa988d1",
+  "uniqueColours": 8032,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

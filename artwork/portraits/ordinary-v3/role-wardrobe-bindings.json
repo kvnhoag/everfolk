@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "scope": "Artwork authoring aliases; this file does not assume or modify the runtime simulation schema.",
+  "ageStages": ["youth", "adult", "middle", "elder"],
+  "currentContentGuide": "content-compatibility.json",
+  "sexVariants": ["male", "female"],
+  "bindings": [
+    {"roleAlias": "scholar", "wardrobeId": "scholarly", "selection": "Recorded scholarly occupation; current job IDs are in ../ordinary-v1/mappings.json."},
+    {"roleAlias": "warrior", "wardrobeId": "military", "selection": "Recorded martial occupation; current job IDs are in ../ordinary-v1/mappings.json."},
+    {"roleAlias": "aristocrat", "wardrobeId": "aristocrat", "minAge": 16, "selection": "Use the life's own world revision with world.aristocracy enabled and life.originId == world.aristocracy.originId, or deliberate authoring selection. No name/wealth inference."},
+    {"roleAlias": "royalty", "wardrobeId": "royalty", "minAge": 16, "selection": "Use the life's own world revision with world.royalty enabled and life.originId == world.royalty.originId, or deliberate authoring selection. Fictional ordinary-character wardrobe, no historical-figure/TCG likeness."}
+  ],
+  "notes": ["The existing elite family remains court/estate clothing and is distinct from the new aristocrat and royalty outfits.", "No crown or head ornament is baked into these clothing-only layers. Their trims, clasps and sashes sit on fabric below the preserved neckline."]
+}

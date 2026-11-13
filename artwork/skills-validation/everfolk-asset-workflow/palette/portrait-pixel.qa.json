@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\source\\alexander-equipment-revised.png",
+  "sourceSha256": "e06342cbcdb8ddc56d90e9e3bf048b52383509dc256209fe44c6f39ae3414454",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      96,
+      120
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": 32
+  },
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\palette-config.json",
+  "configSha256": "419c1ea453664537ff1deed8a351c9e70c4a987a09bd3d9d6a7471c224e79def",
+  "paletteSeed": 0,
+  "uniqueColors": 32,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    96,
+    120
+  ],
+  "output": [
+    288,
+    360
+  ],
+  "scale": 3,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\palette\\portrait-pixel.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\palette\\portrait-pixel.png",
+  "logicalSha256": "0fe78fa04911aff79d42e04b42924686a7b73a45dfd8ea2850cdce5f2282b4ce",
+  "outputSha256": "d231e331af450f3a6a97516f93734ccf9907cc2632257d08a8a6d3f35b99ef8c",
+  "logicalPixelSha256": "899fb092a76171027be255cf9d1f3364f460d2b3553299e9d8cfb8a877f07040",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

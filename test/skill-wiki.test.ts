@@ -18,7 +18,7 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: SkillTree } = await import("../client/SkillTree.tsx");
+const { default: SkillTree } = await import("../client/components/SkillTree.tsx");
 hooks.deregister();
 
 function fixture(): WorldPack {

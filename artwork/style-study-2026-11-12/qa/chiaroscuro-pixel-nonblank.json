@@ -1,0 +1,90 @@
+[
+  {
+    "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\chiaroscuro-source.png",
+    "width": 397,
+    "height": 793,
+    "channels": 3,
+    "min": [
+      6,
+      4,
+      1
+    ],
+    "max": [
+      232,
+      182,
+      126
+    ],
+    "rgbStddev": [
+      51.98482410244567,
+      32.06996549762864,
+      16.621877033530925
+    ],
+    "nonblank": true
+  },
+  {
+    "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\chiaroscuro-pixel-fine.png",
+    "width": 397,
+    "height": 793,
+    "channels": 3,
+    "min": [
+      6,
+      4,
+      1
+    ],
+    "max": [
+      226,
+      178,
+      126
+    ],
+    "rgbStddev": [
+      52.06720550799843,
+      32.056698110625824,
+      16.567631198348206
+    ],
+    "nonblank": true
+  },
+  {
+    "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\chiaroscuro-pixel-medium.png",
+    "width": 397,
+    "height": 793,
+    "channels": 3,
+    "min": [
+      16,
+      15,
+      6
+    ],
+    "max": [
+      223,
+      174,
+      125
+    ],
+    "rgbStddev": [
+      52.02253955414086,
+      32.02242483924559,
+      16.605035975877513
+    ],
+    "nonblank": true
+  },
+  {
+    "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\chiaroscuro-pixel-coarse.png",
+    "width": 397,
+    "height": 793,
+    "channels": 3,
+    "min": [
+      16,
+      16,
+      6
+    ],
+    "max": [
+      219,
+      168,
+      112
+    ],
+    "rgbStddev": [
+      52.29201315106342,
+      32.356420314212265,
+      16.88070279562369
+    ],
+    "nonblank": true
+  }
+]

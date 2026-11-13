@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine, matchesCondition, resolvePartner, validateWorld } from "../src/index.ts";
-import { engineForLife, loadAnyLife } from "../client/session.ts";
+import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import { getArchivedBuiltinWorld, getBuiltinCatalog, isLegacyFactoryDraft } from "../server/content.ts";
 import { contentFingerprint } from "../src/random.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
-import { selectAutomaticChoice } from "../client/yearly-focus.ts";
+import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 // Keep the 0.29 introduction-only release comparison exact; 0.30 social ties have independent tests.
 import raw from "../worlds/alexandria-0.29.0.json" with { type: "json" };
 import old from "../worlds/alexandria-0.28.0.json" with { type: "json" };

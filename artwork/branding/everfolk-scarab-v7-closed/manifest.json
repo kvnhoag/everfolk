@@ -1,0 +1,28 @@
+{
+  "name": "Everfolk / crowned scarab at rest",
+  "parent": "../everfolk-dawnwing-v6-unified",
+  "master": "masters/Everfolk-Crowned-Scarab-Closed.vectorcraft",
+  "pose": "At rest: closed paired elytra; no spread flight wings",
+  "crownRetained": true,
+  "artboards": 8,
+  "exports": [
+    "emblem-color",
+    "emblem-compact-color",
+    "stacked-light",
+    "stacked-dark",
+    "horizontal-light",
+    "horizontal-dark",
+    "wordmark-ink",
+    "wordmark-cream"
+  ],
+  "palette": {
+    "limb": "#d8bc7b",
+    "core": "#214942",
+    "crown": "#dfad79",
+    "thorax": "#4e7c67",
+    "shell": "#ddc383",
+    "shellShade": "#b89c64",
+    "detail": "#214942"
+  },
+  "warnings": []
+}

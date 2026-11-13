@@ -1,15 +1,18 @@
-import { withoutMoneylender } from "./fixture-features.ts";
+import { withoutMarketSignals, withoutMoneylender } from "./fixture-features.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with {type:"json"};
 import legacy from "../worlds/alexandria-0.4.0.json" with {type:"json"};
-import { advanceYearWithFocus, focusActivity, focusStatus, normalizeYearlyFocus, persistYearlyFocus, readYearlyFocus, YEARLY_FOCUSES } from "../client/yearly-focus.ts";
-import { trainingSkillChanges } from "../client/skill-tree.ts";
+import { advanceYearWithFocus, focusActivity, focusStatus, normalizeYearlyFocus, YEARLY_FOCUSES } from "../client/models/yearly-focus.ts";
+import { persistYearlyFocus } from "../client/mutations/yearly-focus.ts";
+import { readYearlyFocus } from "../client/queries/yearly-focus.ts";
+import { trainingSkillChanges } from "../client/models/skill-tree.ts";
 
 function controlledWorld(qualified = true): WorldPack {
   const world = withoutMoneylender(structuredClone(pack) as WorldPack);
+  withoutMarketSignals(world);
   // Focus tests isolate accepted craft actions from all illness onset paths.
   delete world.health!.mortalityCalibration;
   world.events = world.events.filter(event => event.id === world.health!.careDecision);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>01 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_01_Guiding_Book___color_device" data-name="01 Guiding Book / color device">
+      <path id="Guiding_Book___element_1" data-name="Guiding Book / element 1" d="M80 24.96 C82.458 36.156 89.284 42.982 100.48 45.44 C89.284 47.898 82.458 54.724 80 65.92 C77.542 54.724 70.716 47.898 59.52 45.44 C70.716 42.982 77.542 36.156 80 24.96 Z" fill="#b58a49"/>
+      <path id="Guiding_Book___element_2" data-name="Guiding Book / element 2" d="M31.36 74.88 C46.72 70.613 62.933 73.6 80 83.84 C97.067 73.6 113.28 70.613 128.64 74.88 L128.64 119.68 C113.28 115.413 97.067 118.827 80 129.92 C62.933 118.827 46.72 115.413 31.36 119.68 Z" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+      <line id="Guiding_Book___element_3" data-name="Guiding Book / element 3" x1="80" y1="83.84" x2="80" y2="129.92" fill="none" stroke="#24464b" stroke-width="4.48" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Guiding_Book___element_4" data-name="Guiding Book / element 4" d="M45.44 88.96 C53.973 88.96 61.653 91.093 68.48 95.36 M45.44 101.76 C53.973 101.76 61.653 103.893 68.48 108.16 M114.56 88.96 C106.027 88.96 98.347 91.093 91.52 95.36 M114.56 101.76 C106.027 101.76 98.347 103.893 91.52 108.16" fill="none" stroke="#24464b" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

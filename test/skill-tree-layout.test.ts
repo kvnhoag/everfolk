@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
-import { buildSkillTree, layoutSkillTree } from "../client/skill-tree.ts";
-import type { SkillNode, SkillPosition, SkillTreeLayout, SkillTreeModel } from "../client/skill-tree.ts";
+import { buildSkillTree, layoutSkillTree } from "../client/models/skill-tree.ts";
+import type { SkillNode, SkillPosition, SkillTreeLayout, SkillTreeModel } from "../client/models/skill-tree.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 
 function oldLayout(model: SkillTreeModel): SkillTreeLayout {

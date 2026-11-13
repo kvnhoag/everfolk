@@ -1,0 +1,2242 @@
+{
+  "files": {
+    "portrait": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\assets\\alexander-card-pixel.png",
+    "scarab": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\assets\\everfolk-scarab.png",
+    "wordmark": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\assets\\everfolk-wordmark-cream.png",
+    "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\masters\\Alexander-The-Great.vectorcraft",
+    "png": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\review\\Alexander-The-Great-card.png",
+    "thumbnail": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\review\\Alexander-The-Great-card-450.png"
+  },
+  "inputHashes": {
+    "portrait": "bbf2d798435385045833a692c80d6ea31b0f391ebbe8d262054212530c4d0d66",
+    "scarab": "b4ffcf8864852d878125d69905aae09af05fb180416cb2980b316e8cb5026a5d",
+    "wordmark": "969ef0b6b5f546e07c1eec761dc800c79feb97cae242e83fba7e5182eb02d988"
+  },
+  "concept": "Exploratory legendary treatment; rarity is not a locked game specification.",
+  "text": [
+    {
+      "name": "Alexander / live title",
+      "value": "Alexander",
+      "id": 21,
+      "font": "Source Serif 4",
+      "size": 64,
+      "bounds": {
+        "height": 87.744,
+        "width": 294.016,
+        "x": 68,
+        "y": 44
+      }
+    },
+    {
+      "name": "The Great / live subtitle",
+      "value": "THE GREAT",
+      "id": 22,
+      "font": "Inter",
+      "size": 18,
+      "tracking": 220,
+      "style": "Medium",
+      "bounds": {
+        "height": 21.779296875,
+        "width": 135.37828125000004,
+        "x": 72,
+        "y": 118
+      }
+    },
+    {
+      "name": "Rarity / replaceable legendary label",
+      "value": "LEGENDARY",
+      "id": 26,
+      "font": "Inter",
+      "size": 15,
+      "tracking": 160,
+      "style": "SemiBold",
+      "bounds": {
+        "height": 18.1494140625,
+        "width": 112.09804687500002,
+        "x": 64,
+        "y": 1100
+      }
+    },
+    {
+      "name": "Historical role / live type",
+      "value": "MACEDONIAN KING",
+      "id": 27,
+      "font": "Inter",
+      "size": 15,
+      "tracking": 100,
+      "justify": "right",
+      "style": "Medium",
+      "bounds": {
+        "height": 18.1494140625,
+        "width": 167.01416015625,
+        "x": 666.98583984375,
+        "y": 1100
+      }
+    },
+    {
+      "name": "Original flavour line / not a historical quotation",
+      "value": "A legacy beyond the horizon.",
+      "id": 29,
+      "font": "Source Serif 4",
+      "size": 27,
+      "bounds": {
+        "height": 37.01700000000005,
+        "width": 348.84,
+        "x": 64,
+        "y": 1137
+      }
+    },
+    {
+      "name": "Historical life dates / live text",
+      "value": "356–323 BCE",
+      "id": 33,
+      "font": "Inter",
+      "size": 14,
+      "justify": "center",
+      "tracking": 30,
+      "bounds": {
+        "height": 16.939453125,
+        "width": 94.82703125,
+        "x": 402.586484375,
+        "y": 1204
+      }
+    },
+    {
+      "name": "Catalogue / concept series and card number",
+      "value": "ALEXANDRIA / 001",
+      "id": 34,
+      "font": "Inter",
+      "size": 12,
+      "justify": "right",
+      "tracking": 80,
+      "bounds": {
+        "height": 14.51953125,
+        "width": 122.12367187500001,
+        "x": 711.876328125,
+        "y": 1204
+      }
+    }
+  ],
+  "warnings": [],
+  "portraitImage": {
+    "colorMode": "RGB",
+    "height": 1050,
+    "id": 5,
+    "link": null,
+    "linked": false,
+    "name": "Alexander / reference-grounded mounted commander / 420×525 logical pixels, exact 2×",
+    "pixelHeight": 1050,
+    "pixelWidth": 840,
+    "ppi": [
+      72,
+      72
+    ],
+    "width": 840
+  },
+  "fonts": [
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Medium"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 1,
+      "resolved": {
+        "family": "Inter",
+        "style": "SemiBold"
+      },
+      "runs": 1,
+      "status": "exact",
+      "style": "SemiBold"
+    },
+    {
+      "family": "Source Serif 4",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Source Serif 4",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "document": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Alexander the Great / front / 900×1260",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 31,
+    "dirty": true,
+    "fileInfoTitle": "Alexander the Great — reference-grounded commander card concept",
+    "history": [
+      "Artboard Options",
+      "Layer Options",
+      "Rounded Rectangle",
+      "Rectangle",
+      "New Layer",
+      "Place",
+      "Object Properties",
+      "Rounded Rectangle",
+      "Make Clipping Mask",
+      "Object Properties",
+      "New Layer",
+      "Pen",
+      "New Layer",
+      "Rounded Rectangle",
+      "Rounded Rectangle",
+      "Pen",
+      "Pen",
+      "Pen",
+      "Pen",
+      "Pen",
+      "Pen",
+      "Pen",
+      "New Layer",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "New Layer",
+      "Place",
+      "Object Properties",
+      "New Layer",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "New Layer",
+      "Type",
+      "Move",
+      "Object Properties",
+      "Pen",
+      "New Layer",
+      "Place",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties",
+      "Type",
+      "Character",
+      "Move",
+      "Object Properties"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      31
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 37.5,
+          "width": 770,
+          "x": 64,
+          "y": 1188
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 14.51953125,
+              "width": 122.12367187500001,
+              "x": 711.876328125,
+              "y": 1204
+            },
+            "fill": "#b7bba9",
+            "id": 34,
+            "kind": "Type",
+            "locked": false,
+            "name": "Catalogue / concept series and card number",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "ALEXANDRIA / 001",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 16.939453125,
+              "width": 94.82703125,
+              "x": 402.586484375,
+              "y": 1204
+            },
+            "fill": "#b7bba9",
+            "id": 33,
+            "kind": "Type",
+            "locked": false,
+            "name": "Historical life dates / live text",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "356–323 BCE",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 37.5,
+              "width": 150,
+              "x": 64,
+              "y": 1188
+            },
+            "fill": "None",
+            "id": 32,
+            "kind": "Image",
+            "locked": false,
+            "name": "Everfolk / approved cream wordmark, independent image",
+            "stroke": "None",
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#000000",
+        "dimImages": null,
+        "id": 31,
+        "kind": "Layer",
+        "locked": false,
+        "name": "70 Brand Date Catalogue / independent components",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 47,
+          "width": 772,
+          "x": 64,
+          "y": 1137
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0,
+              "width": 772,
+              "x": 64,
+              "y": 1184
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 30,
+            "kind": "Path",
+            "locked": false,
+            "name": "Footer fine bronze rule",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 37.01700000000005,
+              "width": 348.84,
+              "x": 64,
+              "y": 1137
+            },
+            "fill": "#eee4cf",
+            "id": 29,
+            "kind": "Type",
+            "locked": false,
+            "name": "Original flavour line / not a historical quotation",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "A legacy beyond the horizon.",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#808080",
+        "dimImages": null,
+        "id": 28,
+        "kind": "Layer",
+        "locked": false,
+        "name": "60 Flavour / original authored line and divider",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 18.1494140625,
+          "width": 770,
+          "x": 64,
+          "y": 1100
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 18.1494140625,
+              "width": 167.01416015625,
+              "x": 666.98583984375,
+              "y": 1100
+            },
+            "fill": "#eee4cf",
+            "id": 27,
+            "kind": "Type",
+            "locked": false,
+            "name": "Historical role / live type",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "MACEDONIAN KING",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 18.1494140625,
+              "width": 112.09804687500002,
+              "x": 64,
+              "y": 1100
+            },
+            "fill": "#d4b47c",
+            "id": 26,
+            "kind": "Type",
+            "locked": false,
+            "name": "Rarity / replaceable legendary label",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "LEGENDARY",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fffff",
+        "dimImages": null,
+        "id": 25,
+        "kind": "Layer",
+        "locked": false,
+        "name": "50 Rarity and Type / exploratory legendary treatment",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 58,
+          "width": 58,
+          "x": 765,
+          "y": 62
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 58,
+              "width": 58,
+              "x": 765,
+              "y": 62
+            },
+            "fill": "None",
+            "id": 24,
+            "kind": "Image",
+            "locked": false,
+            "name": "Everfolk / approved crowned scarab, independent image",
+            "stroke": "None",
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4fff",
+        "dimImages": null,
+        "id": 23,
+        "kind": "Layer",
+        "locked": false,
+        "name": "40 Emblem / approved crowned scarab",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 95.779296875,
+          "width": 294.016,
+          "x": 68,
+          "y": 44
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 21.779296875,
+              "width": 135.37828125000004,
+              "x": 72,
+              "y": 118
+            },
+            "fill": "#d4b47c",
+            "id": 22,
+            "kind": "Type",
+            "locked": false,
+            "name": "The Great / live subtitle",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "THE GREAT",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 87.744,
+              "width": 294.016,
+              "x": 68,
+              "y": 44
+            },
+            "fill": "#eee4cf",
+            "id": 21,
+            "kind": "Type",
+            "locked": false,
+            "name": "Alexander / live title",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Alexander",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 20,
+        "kind": "Layer",
+        "locked": false,
+        "name": "30 Title / editable Source Serif 4 and Inter",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1236,
+          "width": 876,
+          "x": 12,
+          "y": 12
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0,
+              "width": 804,
+              "x": 48,
+              "y": 1080
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 19,
+            "kind": "Path",
+            "locked": false,
+            "name": "Portrait / footer bronze divider",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.4,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 8,
+              "width": 8,
+              "x": 446,
+              "y": 1238
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 18,
+            "kind": "Path",
+            "locked": false,
+            "name": "Small centred frame lozenge",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 8,
+              "width": 8,
+              "x": 446,
+              "y": 14
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 17,
+            "kind": "Path",
+            "locked": false,
+            "name": "Small centred frame lozenge",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 846,
+              "y": 1206
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 16,
+            "kind": "Path",
+            "locked": false,
+            "name": "Bottom right accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 18,
+              "y": 1206
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 15,
+            "kind": "Path",
+            "locked": false,
+            "name": "Bottom left accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 846,
+              "y": 18
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 14,
+            "kind": "Path",
+            "locked": false,
+            "name": "Top right accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 18,
+              "y": 18
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 13,
+            "kind": "Path",
+            "locked": false,
+            "name": "Top left accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1214,
+              "width": 854,
+              "x": 23,
+              "y": 23
+            },
+            "closed": true,
+            "fill": "None",
+            "id": 12,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Inner pale bronze rule / editable 1.2 px stroke",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.2,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1236,
+              "width": 876,
+              "x": 12,
+              "y": 12
+            },
+            "closed": true,
+            "fill": "None",
+            "id": 11,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Outer bronze border / editable 3 px stroke",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 3,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 10,
+        "kind": "Layer",
+        "locked": false,
+        "name": "20 Frame / bronze borders and native corner accents",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 138,
+          "width": 840,
+          "x": 30,
+          "y": 30
+        },
+        "children": [
+          {
+            "anchors": 6,
+            "bounds": {
+              "height": 138,
+              "width": 840,
+              "x": 30,
+              "y": 30
+            },
+            "closed": true,
+            "fill": "Linear gradient",
+            "id": 9,
+            "kind": "Path",
+            "locked": false,
+            "name": "Subdued jade fade / title readability",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 8,
+        "kind": "Layer",
+        "locked": false,
+        "name": "15 Header / optional translucent readability field",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1050,
+          "width": 840,
+          "x": 30,
+          "y": 30
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1050,
+              "width": 840,
+              "x": 30,
+              "y": 30
+            },
+            "children": [
+              {
+                "bounds": {
+                  "height": 1050,
+                  "width": 840,
+                  "x": 30,
+                  "y": 30
+                },
+                "fill": "None",
+                "id": 5,
+                "kind": "Image",
+                "locked": false,
+                "name": "Alexander / reference-grounded mounted commander / 420×525 logical pixels, exact 2×",
+                "stroke": "None",
+                "strokeWidth": 0,
+                "visible": true
+              },
+              {
+                "anchors": 8,
+                "bounds": {
+                  "height": 1050,
+                  "width": 840,
+                  "x": 30,
+                  "y": 30
+                },
+                "closed": true,
+                "fill": "None",
+                "id": 6,
+                "kind": "Rounded Rectangle",
+                "locked": false,
+                "name": "Portrait window / native rounded clipping path",
+                "stroke": "None",
+                "strokeOptions": {
+                  "align": "center",
+                  "alignDashes": false,
+                  "arrowAlign": "extend",
+                  "cap": "butt",
+                  "dash": null,
+                  "dashOffset": 0,
+                  "endArrow": null,
+                  "gradientMode": "within",
+                  "join": "miter",
+                  "miterLimit": 10,
+                  "profile": "uniform",
+                  "startArrow": null,
+                  "widthPoints": null
+                },
+                "strokeWidth": 0,
+                "visible": true
+              }
+            ],
+            "id": 7,
+            "kind": "Clip Group",
+            "locked": false,
+            "name": "Portrait window / replace image inside native clip",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 4,
+        "kind": "Layer",
+        "locked": false,
+        "name": "10 Portrait / replaceable embedded pixel art",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "children": [
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 150,
+              "width": 840,
+              "x": 30,
+              "y": 1080
+            },
+            "closed": true,
+            "fill": "#0e1817",
+            "id": 3,
+            "kind": "Rectangle",
+            "locked": false,
+            "name": "Footer field / independent from portrait",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 0,
+              "y": 0
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 2,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Rounded card body / transparent outer corners",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "00 Card Body / rounded jade field and footer",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 34,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#96754c",
+      "strokeWidth": 0.8
+    },
+    "pasteRemembersLayers": false,
+    "path": null,
+    "redo": [],
+    "revision": 112,
+    "selection": [
+      34
+    ],
+    "selectionBounds": {
+      "height": 14.51953125,
+      "width": 122.12367187500001,
+      "x": 711.876328125,
+      "y": 1204
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "Alexander the Great — reference-grounded commander card concept",
+    "tool": "selection",
+    "uid": 2,
+    "units": "Pixels"
+  },
+  "export": {
+    "bytes": 1068888,
+    "format": "png",
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\review\\Alexander-The-Great-card.png",
+    "warnings": []
+  },
+  "thumbnailExport": {
+    "bytes": 412104,
+    "format": "png",
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\review\\Alexander-The-Great-card-450.png",
+    "warnings": []
+  },
+  "reopenedDocument": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Alexander the Great / front / 900×1260",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 31,
+    "dirty": false,
+    "fileInfoTitle": "Alexander the Great — reference-grounded commander card concept",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "layers": [
+      {
+        "bounds": {
+          "height": 37.5,
+          "width": 770,
+          "x": 64,
+          "y": 1188
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 14.51953125,
+              "width": 122.12367187500001,
+              "x": 711.876328125,
+              "y": 1204
+            },
+            "fill": "#b7bba9",
+            "id": 34,
+            "kind": "Type",
+            "locked": false,
+            "name": "Catalogue / concept series and card number",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "ALEXANDRIA / 001",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 16.939453125,
+              "width": 94.82703125,
+              "x": 402.586484375,
+              "y": 1204
+            },
+            "fill": "#b7bba9",
+            "id": 33,
+            "kind": "Type",
+            "locked": false,
+            "name": "Historical life dates / live text",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "356–323 BCE",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 37.5,
+              "width": 150,
+              "x": 64,
+              "y": 1188
+            },
+            "fill": "None",
+            "id": 32,
+            "kind": "Image",
+            "locked": false,
+            "name": "Everfolk / approved cream wordmark, independent image",
+            "stroke": "None",
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#000000",
+        "dimImages": null,
+        "id": 31,
+        "kind": "Layer",
+        "locked": false,
+        "name": "70 Brand Date Catalogue / independent components",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 47,
+          "width": 772,
+          "x": 64,
+          "y": 1137
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0,
+              "width": 772,
+              "x": 64,
+              "y": 1184
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 30,
+            "kind": "Path",
+            "locked": false,
+            "name": "Footer fine bronze rule",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 37.01700000000005,
+              "width": 348.84,
+              "x": 64,
+              "y": 1137
+            },
+            "fill": "#eee4cf",
+            "id": 29,
+            "kind": "Type",
+            "locked": false,
+            "name": "Original flavour line / not a historical quotation",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "A legacy beyond the horizon.",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#808080",
+        "dimImages": null,
+        "id": 28,
+        "kind": "Layer",
+        "locked": false,
+        "name": "60 Flavour / original authored line and divider",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 18.1494140625,
+          "width": 770,
+          "x": 64,
+          "y": 1100
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 18.1494140625,
+              "width": 167.01416015625,
+              "x": 666.98583984375,
+              "y": 1100
+            },
+            "fill": "#eee4cf",
+            "id": 27,
+            "kind": "Type",
+            "locked": false,
+            "name": "Historical role / live type",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "MACEDONIAN KING",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 18.1494140625,
+              "width": 112.09804687500002,
+              "x": 64,
+              "y": 1100
+            },
+            "fill": "#d4b47c",
+            "id": 26,
+            "kind": "Type",
+            "locked": false,
+            "name": "Rarity / replaceable legendary label",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "LEGENDARY",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fffff",
+        "dimImages": null,
+        "id": 25,
+        "kind": "Layer",
+        "locked": false,
+        "name": "50 Rarity and Type / exploratory legendary treatment",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 58,
+          "width": 58,
+          "x": 765,
+          "y": 62
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 58,
+              "width": 58,
+              "x": 765,
+              "y": 62
+            },
+            "fill": "None",
+            "id": 24,
+            "kind": "Image",
+            "locked": false,
+            "name": "Everfolk / approved crowned scarab, independent image",
+            "stroke": "None",
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4fff",
+        "dimImages": null,
+        "id": 23,
+        "kind": "Layer",
+        "locked": false,
+        "name": "40 Emblem / approved crowned scarab",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 95.779296875,
+          "width": 294.016,
+          "x": 68,
+          "y": 44
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 21.779296875,
+              "width": 135.37828125000004,
+              "x": 72,
+              "y": 118
+            },
+            "fill": "#d4b47c",
+            "id": 22,
+            "kind": "Type",
+            "locked": false,
+            "name": "The Great / live subtitle",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "THE GREAT",
+            "visible": true
+          },
+          {
+            "bounds": {
+              "height": 87.744,
+              "width": 294.016,
+              "x": 68,
+              "y": 44
+            },
+            "fill": "#eee4cf",
+            "id": 21,
+            "kind": "Type",
+            "locked": false,
+            "name": "Alexander / live title",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "text": "Alexander",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 20,
+        "kind": "Layer",
+        "locked": false,
+        "name": "30 Title / editable Source Serif 4 and Inter",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1236,
+          "width": 876,
+          "x": 12,
+          "y": 12
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0,
+              "width": 804,
+              "x": 48,
+              "y": 1080
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 19,
+            "kind": "Path",
+            "locked": false,
+            "name": "Portrait / footer bronze divider",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.4,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 8,
+              "width": 8,
+              "x": 446,
+              "y": 1238
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 18,
+            "kind": "Path",
+            "locked": false,
+            "name": "Small centred frame lozenge",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 8,
+              "width": 8,
+              "x": 446,
+              "y": 14
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 17,
+            "kind": "Path",
+            "locked": false,
+            "name": "Small centred frame lozenge",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 846,
+              "y": 1206
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 16,
+            "kind": "Path",
+            "locked": false,
+            "name": "Bottom right accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 18,
+              "y": 1206
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 15,
+            "kind": "Path",
+            "locked": false,
+            "name": "Bottom left accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 846,
+              "y": 18
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 14,
+            "kind": "Path",
+            "locked": false,
+            "name": "Top right accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 36,
+              "width": 36,
+              "x": 18,
+              "y": 18
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 13,
+            "kind": "Path",
+            "locked": false,
+            "name": "Top left accent",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.9,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1214,
+              "width": 854,
+              "x": 23,
+              "y": 23
+            },
+            "closed": true,
+            "fill": "None",
+            "id": 12,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Inner pale bronze rule / editable 1.2 px stroke",
+            "stroke": "#d4b47c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.2,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1236,
+              "width": 876,
+              "x": 12,
+              "y": 12
+            },
+            "closed": true,
+            "fill": "None",
+            "id": 11,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Outer bronze border / editable 3 px stroke",
+            "stroke": "#96754c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 3,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 10,
+        "kind": "Layer",
+        "locked": false,
+        "name": "20 Frame / bronze borders and native corner accents",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 138,
+          "width": 840,
+          "x": 30,
+          "y": 30
+        },
+        "children": [
+          {
+            "anchors": 6,
+            "bounds": {
+              "height": 138,
+              "width": 840,
+              "x": 30,
+              "y": 30
+            },
+            "closed": true,
+            "fill": "Linear gradient",
+            "id": 9,
+            "kind": "Path",
+            "locked": false,
+            "name": "Subdued jade fade / title readability",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 8,
+        "kind": "Layer",
+        "locked": false,
+        "name": "15 Header / optional translucent readability field",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1050,
+          "width": 840,
+          "x": 30,
+          "y": 30
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1050,
+              "width": 840,
+              "x": 30,
+              "y": 30
+            },
+            "childCount": 2,
+            "id": 7,
+            "kind": "Clip Group",
+            "locked": false,
+            "name": "Portrait window / replace image inside native clip",
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 4,
+        "kind": "Layer",
+        "locked": false,
+        "name": "10 Portrait / replaceable embedded pixel art",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "children": [
+          {
+            "anchors": 4,
+            "bounds": {
+              "height": 150,
+              "width": 840,
+              "x": 30,
+              "y": 1080
+            },
+            "closed": true,
+            "fill": "#0e1817",
+            "id": 3,
+            "kind": "Rectangle",
+            "locked": false,
+            "name": "Footer field / independent from portrait",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          },
+          {
+            "anchors": 8,
+            "bounds": {
+              "height": 1260,
+              "width": 900,
+              "x": 0,
+              "y": 0
+            },
+            "closed": true,
+            "fill": "#101d1c",
+            "id": 2,
+            "kind": "Rounded Rectangle",
+            "locked": false,
+            "name": "Rounded card body / transparent outer corners",
+            "stroke": "None",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": false,
+        "name": "00 Card Body / rounded jade field and footer",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 34,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\masters\\Alexander-The-Great.vectorcraft",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "Alexander-The-Great.vectorcraft",
+    "tool": "selection",
+    "uid": 2,
+    "units": "Pixels"
+  },
+  "reopenedFonts": [
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Medium"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    },
+    {
+      "family": "Inter",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 1,
+      "resolved": {
+        "family": "Inter",
+        "style": "SemiBold"
+      },
+      "runs": 1,
+      "status": "exact",
+      "style": "SemiBold"
+    },
+    {
+      "family": "Source Serif 4",
+      "missing": false,
+      "missingGlyphs": 0,
+      "objects": 2,
+      "resolved": {
+        "family": "Source Serif 4",
+        "style": "Regular"
+      },
+      "runs": 2,
+      "status": "exact",
+      "style": "Regular"
+    }
+  ],
+  "reopenedExport": {
+    "bytes": 1068888,
+    "format": "png",
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-equipment-v5\\qa\\Alexander-The-Great-reopened.png",
+    "warnings": []
+  },
+  "nativeReopenIdentical": true,
+  "inputsUnchanged": true
+}

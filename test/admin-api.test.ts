@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
 import { handleApi } from "../server/api.ts";
 import { MAX_CATALOG_BYTES, compileWorld, getBuiltinCatalog, getBuiltinWorld, getLegacyWorld, validateCatalog } from "../server/content.ts";
-import type { ContentDatabase, D1Statement, StatementResult } from "../server/store.ts";
+import type { ContentDatabase, D1Statement, StatementResult } from "../server/db/types.ts";
 import type { ApiEnvironment } from "../server/api.ts";
 import { createEngine } from "../src/index.ts";
 import type { Condition, LifeEvent, WorldPack } from "../src/types.ts";
@@ -16,6 +16,8 @@ import skillTreePack from "../worlds/alexandria-0.8.0.json" with { type: "json" 
 import economyPack from "../worlds/alexandria-0.9.0.json" with { type: "json" };
 import variedPack from "../worlds/alexandria-0.10.0.json" with { type: "json" };
 import birthPack from "../worlds/alexandria-0.11.0.json" with { type: "json" };
+import compactWorldPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
+import { pruneRemovedOriginActivities } from "./fixture-features.ts";
 import { contentFingerprint } from "../src/random.ts";
 
 const OWNER = "owner@example.test";
@@ -228,6 +230,7 @@ test("origin stat ranges survive draft persistence and publication and determine
   // This isolated one-origin fixture excludes the other households' stories.
   pack.events = pack.events.filter(event => !event.id.startsWith("background-"));
   pruneRemovedOriginModifiers(pack);
+  pruneRemovedOriginActivities(pack);
   const response = await call("/api/admin/catalog", "PUT", draft);
   assert.equal(response.status, 200);
   const saved = await response.json();
@@ -241,7 +244,10 @@ test("origin stat ranges survive draft persistence and publication and determine
   for (const life of births) {
     assert.equal(life.originId, pack.origins[0].id);
     for (const [stat, min, max] of [["health", 41, 43], ["wealth", 10, 12], ["knowledge", 3, 4], ["bonds", 51, 52]] as const) {
-      assert.ok(Number.isInteger(life.stats[stat]) && life.stats[stat] >= min && life.stats[stat] <= max, `${stat} must follow its published origin override or world fallback`);
+      // The economy starting range draws spendable cash; the synchronized
+      // wealth stat also includes the household's rolled possessions.
+      const value = stat === pack.economy!.stat ? life.economy!.cash / pack.economy!.unitsPerPoint : life.stats[stat];
+      assert.ok(Number.isInteger(value) && value >= min && value <= max, `${stat} must follow its published origin override or world fallback`);
     }
     assert.deepEqual(engine.load(engine.save(life)), life);
   }
@@ -466,13 +472,13 @@ test("disabled routes and events affect only the next published pack", async t =
 test("disabled worlds leave the public catalog while their old revisions remain readable", async t => {
   const { db, call } = setup(t);
   const draft = getBuiltinCatalog();
-  const second = structuredClone(draft.worlds[0]);
+  const second = getBuiltinCatalog(compactWorldPack).worlds[0];
   second.id = second.pack.id = "another-world";
   second.pack.title = "Another world";
   draft.worlds.push(second);
-  assert.ok(new TextEncoder().encode(JSON.stringify(draft)).byteLength < MAX_CATALOG_BYTES, "two complete current worlds must fit the bounded catalog");
+  assert.ok(new TextEncoder().encode(JSON.stringify(draft)).byteLength < MAX_CATALOG_BYTES, "the current expanded world and a distinct compact world fit the bounded catalog");
   let response = await call("/api/admin/catalog", "PUT", draft);
-  assert.equal(response.status, 200, "the full duplicated catalog can be saved");
+  assert.equal(response.status, 200, "the two-world catalog can be saved");
   let saved = await response.json();
   assert.equal((await call("/api/admin/publish", "POST", { revision: saved.revision })).status, 200);
   const storedDraft = db.sqlite.prepare("SELECT draft_json FROM content_catalog WHERE id = 1").get()!.draft_json as string;
@@ -554,7 +560,8 @@ test("UTF-8 catalog limits reject otherwise valid large imports before any datab
   // Derive padding from the actual remaining structure, rather than assuming
   // the release's existing story text leaves a particular amount of headroom.
   for (const event of events) event.text = "x";
-  const textLength = 1 + Math.floor((MAX_CATALOG_BYTES * 0.8 - JSON.stringify(draft).length) / events.length);
+  const headroom = MAX_CATALOG_BYTES - JSON.stringify(draft).length;
+  const textLength = 1 + Math.floor(headroom * 0.6 / events.length);
   assert.ok(textLength > 0 && textLength <= 20_000, "padding stays inside the world's text field limit");
   for (const event of events) event.text = "界".repeat(textLength);
   const serialized = JSON.stringify(draft);
