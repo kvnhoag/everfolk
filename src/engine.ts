@@ -932,7 +932,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         player: next,
         commands: [],
       };
-      settlePeople(session, previousSnapshot);
+      settlePeople(session, previousSnapshot, world);
       const { player: _p, commands: _c, ...runtime } = session;
       next.npcs = runtime;
     }
