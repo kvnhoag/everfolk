@@ -433,3 +433,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Icons and numbers only; names live in tooltips and in Inventory & Granary. */
+.aoe-cell.is-icon-only{gap:10px;padding-right:10px}
+.aoe-cell-part{display:inline-flex;align-items:center;gap:6px}
+.aoe-cell.is-icon-only .aoe-cell-value{font-size:15px}
+.aoe-glyph-flax-plots{color:#8fc27f}
+.aoe-cond.is-icon-only{justify-content:center;width:32px;height:30px;padding:0}
+.aoe-cond-flood-normal,.aoe-cond-army-quiet,.aoe-cond-road-safe{border-color:#5d7a58;background:#1d2a1b;color:#b7e0a8}

@@ -2,19 +2,21 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useIdle } from "../hooks/useIdle.ts";
 import type { PlayStep } from "../models/how-to-play.ts";
 import type { RoadmapStage } from "../models/life-roadmap.ts";
-import { BasicsPage, LookupPage, RoadmapPage, ScreenPage, YearPage } from "./HowToPlayPages.tsx";
+import { LifePage, PlayPage, type RoadPortrait } from "./HowToPlayPages.tsx";
 import "../styles/how-to-play.css";
 
 /** How long the player may sit on a page before its main button starts to pulse. */
 export const HOW_TO_PLAY_IDLE_MS = 5000;
 
-/** Learn first (basics, screen, a year), then plan (life stages), then look things up. */
-const PAGES = ["How to play", "Your screen", "A year, in order", "Life stages", "Look it up"] as const;
+/** Two pages: how to play a year, with the game's own screens; then a life, year by year and stage by stage. */
+const PAGES = ["How to play", "Your life"] as const;
 
 export interface HowToPlayProps {
   open: boolean;
   steps: readonly PlayStep[];
   stages: readonly RoadmapStage[];
+  /** The player's own character, drawn at each stage on the Your life page. */
+  portrait: RoadPortrait;
   tipsOn: boolean;
   onTipsChange(on: boolean): void;
   /** Opens whenever the game screen starts. */
@@ -24,13 +26,14 @@ export interface HowToPlayProps {
 }
 
 /**
- * The rule sheet shown whenever the game screen starts: the basics in numbered steps, the screen annotated, a year
- * in order, the roadmap of life stages and a resource lookup. The clock waits while it is open. After a few idle seconds the main button pulses.
+ * The rule sheet shown whenever the game screen starts: page 1 the game's own screens with numbered steps, page 2 a
+ * year in order and the road of a life, drawn with the player's own character. The clock waits while it is open. After a few idle seconds the main button pulses.
  */
-export default function HowToPlay({ open, steps, stages, tipsOn, onTipsChange, showAtStart, onShowAtStartChange, onClose }: HowToPlayProps) {
+export default function HowToPlay({ open, steps, stages, portrait, tipsOn, onTipsChange, showAtStart, onShowAtStartChange, onClose }: HowToPlayProps) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const [page, setPage] = useState(0);
+  const [active, setActive] = useState<string | null>(null);
   const idle = useIdle(HOW_TO_PLAY_IDLE_MS, open, String(page));
   const last = page === PAGES.length - 1;
 
@@ -52,11 +55,7 @@ export default function HowToPlay({ open, steps, stages, tipsOn, onTipsChange, s
       <button type="button" className="htp-close" aria-label="Close How to play" onClick={onClose}>×</button>
     </header>
     <div className="htp-body" role="tabpanel">
-      {page === 0 && <BasicsPage steps={steps} />}
-      {page === 1 && <ScreenPage />}
-      {page === 2 && <YearPage />}
-      {page === 3 && <RoadmapPage stages={stages} />}
-      {page === 4 && <LookupPage />}
+      {page === 0 ? <PlayPage steps={steps} active={active} onActive={setActive} /> : <LifePage stages={stages} portrait={portrait} />}
     </div>
     <footer className="htp-footer">
       <div className="htp-switches">

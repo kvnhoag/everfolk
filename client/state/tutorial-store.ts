@@ -54,7 +54,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
   }
 
   return {
-    getSnapshot: (): TutorialState => state,
+    /** Reads saved progress on first use, so the switch shows the remembered On/Off before any screen reports in. */
+    getSnapshot: (): TutorialState => { load(); return state; },
     getServerSnapshot: (): TutorialState => INITIAL_TUTORIAL,
     getContext: (): TutorialContext => context,
     subscribe(listener: () => void): () => void {

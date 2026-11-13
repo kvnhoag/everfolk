@@ -11,6 +11,15 @@ import SectionHelp from "../components/SectionHelp.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 
+interface ResourceCell {
+  key: string;
+  parts: { glyph: string; value: string; small?: string }[];
+  title: string;
+  selected?: boolean;
+  extraClass?: string;
+  onClick(): void;
+}
+
 interface ResourceBarProps {
   screen: DemoScreen;
   cashText: string;
@@ -24,6 +33,15 @@ interface ResourceBarProps {
 }
 
 const RESOURCE_PIXELS: Record<string, string[]> = {
+  "flax-plots": [
+    "#.#.#.#.#",
+    ".#.#.#.#.",
+    "#.#.#.#.#",
+    ".........",
+    "#.#.#.#.#",
+    ".#.#.#.#.",
+    "#.#.#.#.#",
+  ],
   plots: [
     "####.####",
     "####.####",
@@ -94,132 +112,51 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
     setDrawerOpen(true);
   }
 
+  const open = (item: TradeItem) => drawerOpen && selectedItem === item;
+  const toggle = () => setDrawerOpen(v => !v);
+  // Icons and numbers only: each cell's name and detail are in its tooltip and screen-reader label,
+  // and Inventory & Granary spells everything out.
+  const cells: ResourceCell[] = [
+    { key: "grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }], selected: open("grain"),
+      extraClass: `${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`, onClick: () => openItemInDrawer("grain"),
+      title: `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
+    { key: "cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}` },
+    { key: "flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
+    { key: "linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
+    { key: "herd", parts: [{ glyph: "ox", value: String(holdingOf(screen, "ox")) }, { glyph: "donkey", value: String(holdingOf(screen, "donkey")) }],
+      selected: open("ox") || open("donkey"), onClick: () => openItemInDrawer("ox"), title: `Herd: ${holdingOf(screen, "ox")} oxen, ${holdingOf(screen, "donkey")} donkeys` },
+    { key: "fields", parts: [{ glyph: "plots", value: String(grainPlots) }, { glyph: "flax-plots", value: String(screen.household.flaxPlots) }],
+      onClick: toggle, title: `Fields: ${grainPlots} grain plots, ${screen.household.flaxPlots} flax plots (of ${screen.household.plots})` },
+    { key: "reputation", parts: [{ glyph: "reputation", value: String(screen.works.reputation) }], onClick: toggle, title: `Reputation in town: ${screen.works.reputation}` },
+  ];
+  const conditionTitle = (level: string, line?: string) => line ? `${levelLabel(level)}: ${line}` : levelLabel(level);
+  const conditions = [
+    { kind: "flood", icon: "flood", level: screen.year.flood, title: conditionTitle(screen.year.flood, screen.year.lines[0]) },
+    { kind: "army", icon: "military", level: screen.year.army, title: conditionTitle(screen.year.army, screen.year.lines[1]) },
+    { kind: "road", icon: "road", level: screen.year.road, title: conditionTitle(screen.year.road, screen.year.lines[2]) },
+  ];
+
   return (
     <section className="aoe-resource-hud has-section-help" aria-label="Household resources and inventory">
       <SectionHelp hint="resources" />
       <div className="aoe-resource-bar">
         <SectionStep step={sectionStep("household")} />
         <div className="aoe-staples" role="list" aria-label="Pinned household resources">
-          <button
-            type="button"
-            role="listitem"
-            className={`aoe-cell${selectedItem === "grain" && drawerOpen ? " is-selected" : ""}${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`}
-            title={`Grain in store: ${screen.household.grain} / ${screen.household.capacity} capacity (Expected harvest +${screen.household.expectedHarvest}, spoilage -${screen.household.expectedSpoilage})`}
-            onClick={() => openItemInDrawer("grain")}
-          >
-            <ResourceGlyph id="grain" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Grain</span>
-              <strong className="aoe-cell-value">
-                {screen.household.grain}
-                <small>/{screen.household.capacity}</small>
-              </strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className="aoe-cell"
-            title={`Cash on hand: ${cashText}`}
-            onClick={() => setDrawerOpen(v => !v)}
-          >
-            <ResourceGlyph id="cash" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Cash</span>
-              <strong className="aoe-cell-value">{cashText}</strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className={`aoe-cell${selectedItem === "flax" && drawerOpen ? " is-selected" : ""}`}
-            title={`Flax bundles stored: ${holdingOf(screen, "flax")}`}
-            onClick={() => openItemInDrawer("flax")}
-          >
-            <ResourceGlyph id="flax" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Flax</span>
-              <strong className="aoe-cell-value">{holdingOf(screen, "flax")}</strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className={`aoe-cell${selectedItem === "linen" && drawerOpen ? " is-selected" : ""}`}
-            title={`Spun linen bolts: ${holdingOf(screen, "linen")}`}
-            onClick={() => openItemInDrawer("linen")}
-          >
-            <ResourceGlyph id="linen" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Linen</span>
-              <strong className="aoe-cell-value">{holdingOf(screen, "linen")}</strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className={`aoe-cell${(selectedItem === "ox" || selectedItem === "donkey") && drawerOpen ? " is-selected" : ""}`}
-            title={`Livestock: ${holdingOf(screen, "ox")} oxen, ${holdingOf(screen, "donkey")} donkeys`}
-            onClick={() => openItemInDrawer("ox")}
-          >
-            <ResourceGlyph id="ox" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Herd</span>
-              <strong className="aoe-cell-value">
-                {holdingOf(screen, "ox")}
-                <small>ox</small> · {holdingOf(screen, "donkey")}
-                <small>dk</small>
-              </strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className="aoe-cell"
-            title={`Plots: ${grainPlots} grain, ${screen.household.flaxPlots} flax (of ${screen.household.plots} total)`}
-            onClick={() => setDrawerOpen(v => !v)}
-          >
-            <ResourceGlyph id="plots" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Fields</span>
-              <strong className="aoe-cell-value">
-                {grainPlots}
-                <small> grain</small> · {screen.household.flaxPlots}
-                <small> flax</small>
-              </strong>
-            </span>
-          </button>
-
-          <button
-            type="button"
-            role="listitem"
-            className="aoe-cell"
-            title={`Community reputation: ${screen.works.reputation}`}
-            onClick={() => setDrawerOpen(v => !v)}
-          >
-            <ResourceGlyph id="reputation" />
-            <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Rep</span>
-              <strong className="aoe-cell-value">{screen.works.reputation}</strong>
-            </span>
-          </button>
+          {cells.map(cell => <button key={cell.key} type="button" role="listitem"
+            className={`aoe-cell is-icon-only${cell.selected ? " is-selected" : ""}${cell.extraClass ?? ""}`}
+            title={cell.title} aria-label={cell.title} onClick={cell.onClick}>
+            {cell.parts.map(part => <span key={part.glyph} className="aoe-cell-part">
+              <ResourceGlyph id={part.glyph} />
+              <strong className="aoe-cell-value">{part.value}{part.small && <small>{part.small}</small>}</strong>
+            </span>)}
+          </button>)}
         </div>
 
         <div className="aoe-world-strip" aria-label="This year's conditions">
-          <span className={`aoe-cond aoe-cond-flood-${screen.year.flood}`} title={screen.year.lines[0] ?? levelLabel(screen.year.flood)}>
-            {levelLabel(screen.year.flood)}
-          </span>
-          <span className={`aoe-cond aoe-cond-army-${screen.year.army}`} title={screen.year.lines[1] ?? levelLabel(screen.year.army)}>
-            {levelLabel(screen.year.army)}
-          </span>
-          <span className={`aoe-cond aoe-cond-road-${screen.year.road}`} title={screen.year.lines[2] ?? levelLabel(screen.year.road)}>
-            {levelLabel(screen.year.road)}
-          </span>
+          {conditions.map(condition => <span key={condition.kind} className={`aoe-cond is-icon-only aoe-cond-${condition.kind}-${condition.level}`}
+            title={condition.title} aria-label={condition.title} role="img">
+            <PixelIcon name={condition.icon} size={15} />
+          </span>)}
         </div>
 
         <button

@@ -119,3 +119,13 @@ span.section-help,span.section-help.is-edge,span.section-help.is-inset{top:7px;r
 .demo-deck-header.has-section-help{padding-right:40px}
 .life-overview.has-section-help>:first-child{padding-right:30px}
 .life-ending-banner.has-section-help{padding-right:40px}
+
+/* While a section is highlighted the rest of the page dims (section-spotlight.ts). Clicks pass through. */
+.section-spotlight{position:fixed;inset:0;z-index:40;width:100vw;height:100vh;pointer-events:none;opacity:0;transition:opacity .25s ease-out}
+@media(prefers-reduced-motion:reduce){.section-spotlight{transition:none}}
+
+/* The header switch shows the tutorial's state at a glance. */
+.tutorial-button-state{display:grid;place-items:center;min-width:34px;height:20px;padding:0 6px;border-radius:10px;font:700 10.5px/1 var(--ef-font-body);letter-spacing:.06em;text-transform:uppercase}
+.tutorial-button.is-on .tutorial-button-state{background:#3f6b4a;color:#f6efd9}
+.tutorial-button.is-off .tutorial-button-state{background:#c9bfae;color:#4b4335}
+.tutorial-button.is-off{opacity:.92}

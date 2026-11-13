@@ -130,3 +130,10 @@ test("turning tips off is remembered across reloads; old saves keep tips on", ()
   old.setGameContext(home);
   assert.equal(old.getSnapshot().tipsOn, true);
 });
+
+test("the saved On/Off is shown before any screen reports in", () => {
+  const storage = memoryStorage({ [TUTORIAL_STORAGE_KEY]: JSON.stringify({ seen: ["welcome"], current: null, tipsOff: true }) });
+  const store = createTutorialStore({ storage: () => storage });
+  assert.equal(store.getSnapshot().tipsOn, false, "no reset to On while the page is still starting");
+  assert.deepEqual(store.getSnapshot().seen, ["welcome"]);
+});

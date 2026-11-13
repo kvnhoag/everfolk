@@ -11,7 +11,8 @@ import { personPortraitState } from "../models/portrait-state.ts";
 import { getSkillImpact } from "../models/skill-impact.ts";
 import "../styles/life-choice-board.css";
 import SectionHelp from "./SectionHelp.tsx";
-import { LockedSection, SectionStep } from "./YearChecklist.tsx";
+import { SectionStep } from "./YearChecklist.tsx";
+import { LockedSection } from "./Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import { YEARLY_ACTION_AGE } from "../models/year-reminder.ts";
 
@@ -90,9 +91,8 @@ export default function LifeChoiceBoard({
 
   return (
     <div className="life-choice-board is-ready">
-      {life.phase === "ready" && life.age < YEARLY_ACTION_AGE && <LockedSection step={sectionStep("action")} id="action" title="Your yearly action" opensAt={`Opens at age ${YEARLY_ACTION_AGE}`}>
-        One action a year from Childhood: time with people, training or work. Until then your family decides how your days go.
-      </LockedSection>}
+      {life.phase === "ready" && life.age < YEARLY_ACTION_AGE && <LockedSection step={sectionStep("action")} id="action" title="Your yearly action" unlock={`Unlocks at age ${YEARLY_ACTION_AGE}`}
+        note="Then spend one action a year: time with people, training or work." />}
       {life.phase === "ready" && life.age >= YEARLY_ACTION_AGE && (
         <section className="life-yearly-action-deck has-section-help" aria-label="Yearly personal action board">
           <SectionHelp hint="yearly-action" />

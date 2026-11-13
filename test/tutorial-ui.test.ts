@@ -30,7 +30,9 @@ const escape = (text: string) => text.replace(/&/g, "&amp;").replace(/'/g, "&#x2
 test("the Tutorial button is a real button with an accessible label", () => {
   const html = renderToStaticMarkup(createElement(TutorialButton, {}));
   assert.match(html, /^<button[^>]*type="button"/);
-  assert.match(html, /aria-label="Open the tutorial for this screen"/);
+  assert.match(html, /role="switch" aria-checked="true"/, "the header switch shows the tutorial is on");
+  assert.match(html, /aria-label="Tutorial tips"/);
+  assert.match(html, />On</);
   assert.match(html, /data-tutorial-button=""/, "the closing card can find it");
   assert.match(html, />Tutorial</);
   assert.match(renderToStaticMarkup(createElement(TutorialButton, { tone: "dark" })), /tutorial-button is-dark/);

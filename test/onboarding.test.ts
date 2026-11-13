@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -9,7 +9,7 @@ import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
 import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
-import { howToPlaySteps, KEY_FACTS, RESOURCE_GUIDE, screenAreas, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
+import { BAR_LEGEND, CHECKLIST_SHOT, DECISION_SHOT, howToPlaySteps, KEY_FACTS, SCREEN_SHOT, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
 import { SECTION_STEPS, sectionStep } from "../client/models/section-steps.ts";
 import { HOW_TO_PLAY_STORAGE_KEY, readHowToPlayAtStart, writeHowToPlayAtStart } from "../client/storage/how-to-play-storage.ts";
 
@@ -22,7 +22,8 @@ const hooks = registerHooks({
     return nextLoad(url, context);
   },
 });
-const { default: YearChecklist, LockedSection } = await import("../client/components/YearChecklist.tsx");
+const { default: YearChecklist } = await import("../client/components/YearChecklist.tsx");
+const { LockedSection, LockedArea } = await import("../client/components/Locked.tsx");
 const { iconCells } = await import("../client/components/PixelIcon.tsx");
 hooks.deregister();
 
@@ -78,9 +79,19 @@ test("the checklist renders numbered buttons; locked lines say when they open", 
   assert.match(html, /aria-label="This year, in order"/);
   assert.match(html, /aria-label="2\. Focus: Opens at age 6"/);
   assert.match(html, /class="year-check is-locked"/);
-  const locked = renderToStaticMarkup(createElement(LockedSection, { step: 3, id: "action", title: "Your yearly action", opensAt: "Opens at age 6", children: "One action a year." }));
+  const locked = renderToStaticMarkup(createElement(LockedSection, { step: 3, id: "action", title: "Your yearly action", unlock: "Unlocks at age 6", note: "One action a year." }));
   assert.match(locked, /data-step="action"/);
-  assert.match(locked, /Opens at age 6/);
+  assert.match(locked, /class="locked-cross"/, "a locked section is crossed out");
+  assert.match(locked, /class="locked-cover-unlock">Unlocks at age 6</);
+});
+
+test("a locked area greys out and disables its content under a cross and the unlock condition", () => {
+  const open = renderToStaticMarkup(createElement(LockedArea, { locked: false, title: "Market & Trade", unlock: "Unlocks at age 10", children: createElement("button", null, "Sell") }));
+  assert.equal(open, "<button>Sell</button>", "an open area renders as itself");
+  const shut = renderToStaticMarkup(createElement(LockedArea, { locked: true, title: "Market & Trade", unlock: "Unlocks at age 10", children: createElement("button", null, "Sell") }));
+  assert.match(shut, /class="locked-area-content" inert="" aria-hidden="true"><button>Sell<\/button>/);
+  assert.match(shut, /Unlocks at age 10/);
+  assert.match(shut, /class="locked-cross"/);
 });
 
 const idle = (over: Partial<IdleFacts> = {}): IdleFacts => ({ onGame: true, phase: "ready", playing: false, decisionOpen: false, tipOpen: false, ...over });
@@ -101,7 +112,7 @@ test("How to Play steps use the same numbers as the screen and state when each o
   const steps = howToPlaySteps({ focus: 6, action: 6, fields: 4, trade: 10 });
   assert.deepEqual(steps.map(step => step.id), [...SECTION_STEPS]);
   assert.deepEqual(steps.map(step => step.step), SECTION_STEPS.map(sectionStep));
-  assert.equal(steps.find(step => step.id === "town")!.opens, "Trade at 10");
+  assert.equal(steps.find(step => step.id === "town")!.opens, "Age 10");
   assert.equal(steps.find(step => step.id === "time")!.opens, undefined, "time runs from birth");
   assert.equal(howToPlaySteps({ focus: Infinity, action: 6, fields: 4, trade: null }).find(step => step.id === "focus")!.opens, undefined);
   for (const step of steps) assert.ok(step.body.split(/(?<=[.!?])\s+/).length <= 3, `${step.id} stays short`);
@@ -124,19 +135,25 @@ test("the rule sheet frames play in three facts, warns where people trip, and sc
   assert.equal(KEY_FACTS.length, 3);
   const steps = howToPlaySteps({ focus: 6, action: 6, fields: 0, trade: 10 });
   assert.ok(steps.filter(step => step.warning).length >= 4, "the common mistakes carry a warning sign");
-  assert.deepEqual(YEAR_SCRIPT.map(beat => beat.title), ["The year opens", "You act", "Turning points", "The harvest is settled", "The town moves", "A year older"]);
+  assert.deepEqual(YEAR_SCRIPT.map(beat => beat.title), ["The year opens", "You act", "Turning points", "Harvest settled", "The town moves", "A year older"]);
   assert.deepEqual(YEAR_SCRIPT.filter(beat => beat.you).map(beat => beat.title), ["You act", "Turning points"]);
-  const settled = YEAR_SCRIPT.find(beat => beat.title === "The harvest is settled")!.detail;
+  const settled = YEAR_SCRIPT.find(beat => beat.title === "Harvest settled")!.detail;
   const order = ["Harvest", "rent", "wages", "eats", "spoils", "spun"].map(word => settled.indexOf(word));
   assert.deepEqual(order, [...order].sort((a, b) => a - b), "settlement reads in the engine's order (src/demo/settle.ts)");
 });
 
-test("the screen map numbers every section once and the lookup covers resources and stats with real icons", () => {
-  assert.deepEqual(screenAreas().map(area => area.step), [1, 2, 3, 4, 5, 6]);
-  assert.ok(RESOURCE_GUIDE.length >= 10);
-  for (const row of RESOURCE_GUIDE) {
-    assert.ok(iconCells(row.icon), `${row.name} has a pixel icon`);
-    assert.ok(row.use && row.gain && row.loss, `${row.name} says what it is for, where it comes from and where it goes`);
+test("How to Play shows real screens: every shot exists, the map outlines each numbered section, icons are real", () => {
+  const steps = howToPlaySteps({ focus: 6, action: 6, fields: 0, trade: 10 });
+  const shots = [SCREEN_SHOT, CHECKLIST_SHOT, DECISION_SHOT, ...steps.map(step => step.shot)];
+  for (const shot of shots) {
+    assert.ok(existsSync(new URL(`../public${shot.src}`, import.meta.url)), `${shot.src} is in public/`);
+    assert.ok(shot.width > 0 && shot.height > 0 && shot.alt.length > 0, `${shot.src} has a size and alt text`);
   }
+  assert.deepEqual(Object.keys(SCREEN_SHOT.areas).map(id => sectionStep(id as never)).sort((a, b) => a - b), [1, 2, 3, 4, 5, 6]);
+  for (const [id, box] of Object.entries(SCREEN_SHOT.areas)) {
+    assert.ok(box.x >= 0 && box.y >= 0 && box.x + box.w <= 100.01 && box.y + box.h <= 100.01, `${id} stays inside the screen`);
+  }
+  assert.ok(BAR_LEGEND.length >= 10);
+  for (const item of BAR_LEGEND) assert.ok(iconCells(item.icon), `${item.label} has a pixel icon`);
   for (const beat of YEAR_SCRIPT) assert.ok(iconCells(beat.icon), `${beat.title} has a pixel icon`);
 });

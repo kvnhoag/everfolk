@@ -1,7 +1,10 @@
 /**
- * Lights up a section's border and lets the glow fade, so the player's eye is drawn without a popup.
+ * Lights up a section's border while the rest of the page dims, then lets both fade, so the player's eye is drawn
+ * without a popup.
  * Used when tips are off (a new section glows instead of opening a card) and for the yearly reminder.
  */
+
+import { spotlightSection } from "./section-spotlight.ts";
 
 export const SECTION_FLASH_CLASS = "section-flash";
 /** How long a section glows before the effect has faded completely. */
@@ -38,6 +41,7 @@ function light(element: Element, durationMs: number): void {
   void (element as HTMLElement).offsetWidth;
   (element as HTMLElement).style?.setProperty("--section-flash-ms", `${durationMs}ms`);
   element.classList.add(SECTION_FLASH_CLASS);
+  spotlightSection(element, durationMs);
   timers.set(element, window.setTimeout(() => {
     element.classList.remove(SECTION_FLASH_CLASS);
     timers.delete(element);

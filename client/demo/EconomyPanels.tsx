@@ -23,6 +23,7 @@ import WorksPanel from "./WorksPanel.tsx";
 import { tuning } from "../../src/demo/market-rules.ts";
 import PixelIcon from "../components/PixelIcon.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
+import { LockedArea } from "../components/Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 
 /** A small lock on a tab that has not opened yet, with the age it opens. */
@@ -361,6 +362,7 @@ export default function EconomyPanels({
       {/* TAB 1: MARKET & TRADE + ASSET PRICE GRAPHS */}
       <section ref={marketRef} className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
         <SectionHelp hint="market" />
+        <LockedArea locked={tradeLockedUntil !== null} title="Market & Trade" unlock={`Unlocks at age ${tradeLockedUntil ?? 0}`} note="Then buy and sell grain and goods once a year.">
         <div className="demo-market-top">
           <div>
             <h3>Grain market</h3>
@@ -656,6 +658,7 @@ export default function EconomyPanels({
 
         {notice && <p className="demo-trade-notice" role="status">{notice}</p>}
 
+        </LockedArea>
       </section>
 
       {/* TAB 2: FARM & GRANARY */}
@@ -732,6 +735,7 @@ export default function EconomyPanels({
 
       {/* TAB 3: CAREER & ARMY */}
       <section aria-label="Service" hidden={activeTab !== "service"}>
+        <LockedArea locked={careerLockedUntil !== null} title="Career & Army" unlock={`Unlocks at age ${careerLockedUntil ?? 0}`} note="Then take your first work, train for a career or serve in the army.">
         <h3>Farm or serve</h3>
         <p>
           {screen.service.serving
@@ -801,6 +805,7 @@ export default function EconomyPanels({
               ))}
           </div>
         )}
+        </LockedArea>
       </section>
 
       {/* TAB 4: PEOPLE & TOWN FIGURES */}

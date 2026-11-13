@@ -42,14 +42,3 @@ export default function YearChecklist({ items }: { items: readonly ChecklistItem
     </ol>
   </nav>;
 }
-
-/** Stands in for a section that has not opened yet: what it is and the age it opens. */
-export function LockedSection({ step, id, title, opensAt, children }: { step: number; id: SectionStepId; title: string; opensAt: string; children: string }) {
-  return <section className="section-locked" data-step={id} aria-label={`${title}, locked`}>
-    <SectionStep step={step} />
-    <div>
-      <h2>{title} <span className="section-locked-badge"><PixelIcon name="lock" size={11} />{opensAt}</span></h2>
-      <p>{children}</p>
-    </div>
-  </section>;
-}

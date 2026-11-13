@@ -8,7 +8,8 @@ import { focusActivity, focusStatus, yearlyDeclineNotes, availableYearlyFocuses 
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
 import SectionHelp from "./SectionHelp.tsx";
 import PixelIcon from "./PixelIcon.tsx";
-import { LockedSection, SectionStep } from "./YearChecklist.tsx";
+import { SectionStep } from "./YearChecklist.tsx";
+import { LockedSection } from "./Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/yearly-focus.css";
@@ -21,13 +22,12 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
   const focuses = availableYearlyFocuses(world, life);
   const firstAge = yearlyFocusFirstAge(world, life);
   if (life.phase === "ended" || !Number.isFinite(firstAge)) return null;
-  if (life.age < firstAge) return <LockedSection step={sectionStep("focus")} id="focus" title="This year’s focus" opensAt={`Opens at age ${firstAge}`}>
-    {`Pick what you practise each year, such as Study or Farming; its skills then grow on their own. ${focuses.filter(focus => focus.activityId).slice(0, 3).map(focus => focus.label).join(", ")} and more.`}
-  </LockedSection>;
+  if (life.age < firstAge) return <LockedSection step={sectionStep("focus")} id="focus" title="This year’s focus" unlock={`Unlocks at age ${firstAge}`}
+    note={`Then pick what you practise each year: ${focuses.filter(focus => focus.activityId).slice(0, 3).map(focus => focus.label).join(", ")} and more.`} />;
   const selected = activities.find(activity => activity.id === focusActivity(world, focusId)?.id);
   const skillChanges = selected ? trainingSkillChanges(selected, world, life) : [];
   return <section className="yearly-focus has-section-help" aria-labelledby={`${id}-title`}>
-    <h2 id={`${id}-title`}><SectionStep step={sectionStep("focus")} />This year’s focus <small>Change anytime</small></h2>
+    <h2 id={`${id}-title`}><span className="yearly-focus-title"><SectionStep step={sectionStep("focus")} />This year’s focus</span> <small>Change anytime</small></h2>
     <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{focuses.map(focus => {
       const activity = focusActivity(world, focus.id);
       if (focus.activityId && !activity) return null;
