@@ -129,8 +129,8 @@
       },
       {
         "bounds": {
-          "height": 110.904,
-          "width": 631.4399999999998,
+          "height": 136.904,
+          "width": 635.0639999999999,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "An expedition provisioner measures food, water, and the\ndemands of another day at sea. Careful stores give the crew\nroom to endure uncertainty, supporting discovery with the\npractical strength of preparation.",
+        "text": "A navigation assistant checks bearings, compares coastal\nlandmarks, and records the observations needed to keep an\nexpedition on course. Practical work beside experienced\nnavigators prepares the eye and judgment for independent\nobservation.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 368.01000000000005,
+          "width": 296.902,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Endurance for the Unknown",
+        "text": "A Course Made Legible",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 326.5791015625,
-          "x": 286.71044921875,
-          "y": 144.59375
+          "width": 367.2998046875,
+          "x": 266.35009765625,
+          "y": 152.59375
         },
         "fill": "#d9bc80",
         "id": 57,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "KEEPER OF PYTHEAS' STORES",
+        "text": "LEARNING THE NORTHERN ROUTE",
         "visible": true
       },
       {
         "bounds": {
           "height": 87.744,
-          "width": 655.488,
-          "x": 122.25600000000003,
-          "y": 64.21600000000001
+          "width": 579.328,
+          "x": 160.336,
+          "y": 54.21600000000001
         },
         "fill": "#f0e6cf",
         "id": 56,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Expedition Provisioner",
+        "text": "Navigation Assistant",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "pytheas-uncommon-male.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 119,
+    "uid": 8,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "pytheas-uncommon-male.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 119,
+    "uid": 8,
     "units": "Pixels"
   }
 }

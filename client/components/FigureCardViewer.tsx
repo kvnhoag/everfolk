@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import type { FigureCardRank, FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
+import { figureCardBiography, type FigureCardRank, type FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { getFigureCardProgress } from "../../src/figures/card-progress.ts";
 import HistoricalFigureCard, { displayedFigureCardRank, type FigureCardMode } from "./HistoricalFigureCard.tsx";
@@ -187,7 +187,7 @@ function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode 
         <div className="figure-card-detail-header"><p className="figure-card-eyebrow">{mode === "contribution" ? "Contributor card" : "Historical figure card"} · {rank}</p><h2 id={id + "-title"}>{title}</h2>
         <p className={earned ? "figure-card-status is-earned" : "figure-card-status"} id={id + "-status"}>{earned ? "Earned in this life" : world && life ? "Preview · Not earned in this life" : "Catalogue preview"}</p>
         <p className="figure-card-viewer-period">{figure.biography.period}</p></div>
-        <p className="figure-card-viewer-summary">{figure.biography.biography}</p>
+        <p className="figure-card-viewer-summary">{mode === "principal" ? figureCardBiography(figure, rank) : figure.biography.biography}</p>
         {figure.art.placeholder && !findCardArt({ figureId: figure.id, kind: mode === "contribution" ? "contribution" : "parent", tier: cardArtRank(rank) }) && <p className="figure-card-art-note">Temporary game artwork stands in for this portrait.</p>}
         <section className="figure-card-conditions" aria-label="Rarity conditions"><h3>{earned ? "Achievement recorded" : `Earn the ${rank} ${mode === "contribution" ? "contribution" : "figure"} card`}</h3>
           {mode === "contribution" && <p>Contribution ranks reflect work completed for the figure or tradition.{progress?.pathProgress?.definition.contributionTiering === "below-principal" && progress.pathProgress.principalRank === "Epic" && " Contributions are capped at Rare while this figure is Epic."}</p>}

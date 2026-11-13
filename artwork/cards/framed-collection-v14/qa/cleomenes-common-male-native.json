@@ -130,7 +130,7 @@
       {
         "bounds": {
           "height": 110.904,
-          "width": 624.1919999999999,
+          "width": 619.7760000000001,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A granary porter moves and checks the sacks that fill the\nstorehouse. Honest attention at the doorway gives distant\naccounts a solid foundation, making the harvest a quantity\nthat officials can actually find.",
+        "text": "A granary tally assistant counts grain measures, compares\nreceipts, and records stores entering or leaving the\ngranary. A checked tally begins the accounting discipline\nneeded to manage revenue and the supply of a province.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 334.109,
+          "width": 351.074,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Every Sack Accounted For",
+        "text": "The First Checked Measure",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 336.029296875,
-          "x": 281.9853515625,
-          "y": 144.59375
+          "width": 292.4951171875,
+          "x": 303.75244140625,
+          "y": 152.59375
         },
         "fill": "#d3d4c7",
         "id": 79,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "HAND OF THE NILE GRANARIES",
+        "text": "COUNTING EGYPT'S GRAIN",
         "visible": true
       },
       {
         "bounds": {
-          "height": 87.744,
-          "width": 429.05600000000004,
-          "x": 235.47199999999998,
-          "y": 64.21600000000001
+          "height": 85.00200000000001,
+          "width": 637.856,
+          "x": 131.07199999999995,
+          "y": 55.428
         },
         "fill": "#f0e6cf",
         "id": 78,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Granary Porter",
+        "text": "Granary Tally Assistant",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "cleomenes-common-male.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 275,
+    "uid": 20,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "cleomenes-common-male.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 275,
+    "uid": 20,
     "units": "Pixels"
   }
 }

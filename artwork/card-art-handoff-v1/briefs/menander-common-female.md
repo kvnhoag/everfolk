@@ -1,16 +1,16 @@
-# Stagehand — menander-common-female
+# Rehearsal Assistant — menander-common-female
 
 **Figure family:** Menander · **Type:** contribution · **Gender:** female · **Frame:** common
 
 Look first at [approved art](../reference/portraits/menander-common-female.webp) and the [framed preview](../reference/cards/menander-common-female.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Stagehand — Behind Menander's Curtain
+> Rehearsal Assistant — Learning the Comic Stage
 >
-> Before the First Entrance. A stagehand sets props and prepares the space before an actor steps into view. Quiet readiness makes each entrance possible, giving the playwright's imagined household a convincing place to come alive.
+> The Scene Takes Shape. A rehearsal assistant follows scene copies, records cues, and helps the company try a comic exchange in performance. Attention to dialogue and timing gives early practice in the dramatic work that will grow into writing and staging.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Stagehand**, belonging to the Menander family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left profile with both eyes anatomically consistent. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Rehearsal Assistant**, belonging to the Menander family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left profile with both eyes anatomically consistent. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

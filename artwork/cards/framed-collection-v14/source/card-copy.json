@@ -6,8 +6,8 @@
   "parentCount": 13,
   "roleCount": 52,
   "roleVariants": 104,
-  "newArtRoleCount": 17,
-  "newArtVariantCount": 34,
+  "newArtRoleCount": 19,
+  "newArtVariantCount": 38,
   "genderPolicy": "Each role uses identical copy for its male and female artwork variants. These are fictional representative contributors, not newly identified historical people.",
   "editionExamples": {
     "common": "UNLIMITED",
@@ -36,23 +36,28 @@
       },
       "roles": {
         "common": {
-          "title": "Camp Runner",
-          "displayTitle": "Camp Runner",
-          "subtitle": "Messenger of the Host",
-          "bodyTitle": "The Order Arrives",
-          "bodyText": "A camp runner carries dispatches between scattered tents and marching units. Speed and dependable memory turn a commander's distant intention into action, keeping the great host moving as one.",
+          "title": "Campaign Soldier",
+          "displayTitle": "Campaign Soldier",
+          "subtitle": "In the King's Ranks",
+          "bodyTitle": "Discipline in the Line",
+          "bodyText": "A campaign soldier drills with spear and shield, keeps equipment ready, and holds position beside the rest of the unit. Dependable service under orders lays the foundation for the judgment and responsibility of command.",
           "sourceRoleSlug": "alexander-common",
           "newArt": true,
-          "sceneBrief": "A plainly dressed camp runner carries a sealed dispatch between Macedonian campaign tents; no ornate command armour."
+          "sceneBrief": "An adult Macedonian campaign soldier practising formation with spear and shield beside fellow soldiers; practical equipment, no messenger dispatch or stores duties.",
+          "editorialRoleRevision": "role-progression-v1",
+          "sourceArtRoot": "artwork/cards/role-progression-v1/assets"
         },
         "uncommon": {
-          "title": "Campaign Provisioner",
-          "displayTitle": "Campaign Provisioner",
-          "subtitle": "Keeper of the King's Stores",
-          "bodyTitle": "Strength Before Battle",
-          "bodyText": "A campaign provisioner gathers grain, checks pack animals, and keeps the stores ready for departure. Behind every celebrated advance stands this patient discipline, giving hungry soldiers the strength to follow their king.",
+          "title": "Campaign Squad Leader",
+          "displayTitle": "Campaign Squad Leader",
+          "subtitle": "Steadying a Small Command",
+          "bodyTitle": "Orders Into Action",
+          "bodyText": "A campaign squad leader directs a small group of soldiers on the march and in the field. Clear instructions, shared discipline, and care for the unit turn individual service into the first responsibility of command.",
           "sourceRoleSlug": "alexander-uncommon",
-          "newArt": false
+          "newArt": true,
+          "sceneBrief": "An adult small-unit leader gives clear directions to a few equipped Macedonian campaign soldiers; a modest field command, not a granary or provisioner scene.",
+          "editorialRoleRevision": "role-progression-v1",
+          "sourceArtRoot": "artwork/cards/role-progression-v1/assets"
         },
         "rare": {
           "title": "Campaign Staff Officer",
@@ -96,14 +101,15 @@
       },
       "roles": {
         "common": {
-          "title": "Lyceum Attendant",
-          "displayTitle": "Lyceum Attendant",
-          "subtitle": "At the Threshold of Wisdom",
-          "bodyTitle": "A Place for Inquiry",
-          "bodyText": "A Lyceum attendant prepares tablets, gathers scrolls, and makes room for the next discussion. Quiet attention gives the school its daily rhythm, allowing greater questions to begin without needless interruption.",
+          "title": "Lyceum Student",
+          "displayTitle": "Lyceum Student",
+          "subtitle": "First Questions of the Lyceum",
+          "bodyTitle": "Learning Through Inquiry",
+          "bodyText": "A Lyceum student records questions, studies arguments, and checks simple observations with the school. Careful notes and a willingness to test an explanation begin the habits that later support independent research and teaching.",
           "sourceRoleSlug": "aristotle-common",
           "newArt": true,
-          "sceneBrief": "A modest Lyceum attendant sets wax tablets and scrolls beside a shaded teaching bench; listening expression, simple tunic."
+          "sceneBrief": "An adult student records questions and simple observations while learning in the Lyceum; introductory inquiry rather than general courier work.",
+          "editorialRoleRevision": "role-progression-v1"
         },
         "uncommon": {
           "title": "Lyceum Copyist",
@@ -286,13 +292,16 @@
           "sceneBrief": "A common deckhand coils hemp rope aboard a simple Massaliot merchant vessel; coarse tunic, harbour or calm sea, no elite equipment."
         },
         "uncommon": {
-          "title": "Expedition Provisioner",
-          "displayTitle": "Expedition Provisioner",
-          "subtitle": "Keeper of Pytheas' Stores",
-          "bodyTitle": "Endurance for the Unknown",
-          "bodyText": "An expedition provisioner measures food, water, and the demands of another day at sea. Careful stores give the crew room to endure uncertainty, supporting discovery with the practical strength of preparation.",
+          "title": "Navigation Assistant",
+          "displayTitle": "Navigation Assistant",
+          "subtitle": "Learning the Northern Route",
+          "bodyTitle": "A Course Made Legible",
+          "bodyText": "A navigation assistant checks bearings, compares coastal landmarks, and records the observations needed to keep an expedition on course. Practical work beside experienced navigators prepares the eye and judgment for independent observation.",
           "sourceRoleSlug": "pytheas-uncommon",
-          "newArt": false
+          "newArt": true,
+          "sceneBrief": "An adult navigation assistant works on bearings, coastal landmarks or a voyage record aboard an ancient expedition vessel; no provision-loading task.",
+          "editorialRoleRevision": "role-progression-v1",
+          "sourceArtRoot": "artwork/cards/role-progression-v1/assets"
         },
         "rare": {
           "title": "Navigation Observer",
@@ -336,14 +345,15 @@
       },
       "roles": {
         "common": {
-          "title": "Stagehand",
-          "displayTitle": "Stagehand",
-          "subtitle": "Behind Menander's Curtain",
-          "bodyTitle": "Before the First Entrance",
-          "bodyText": "A stagehand sets props and prepares the space before an actor steps into view. Quiet readiness makes each entrance possible, giving the playwright's imagined household a convincing place to come alive.",
+          "title": "Rehearsal Assistant",
+          "displayTitle": "Rehearsal Assistant",
+          "subtitle": "Learning the Comic Stage",
+          "bodyTitle": "The Scene Takes Shape",
+          "bodyText": "A rehearsal assistant follows scene copies, records cues, and helps the company try a comic exchange in performance. Attention to dialogue and timing gives early practice in the dramatic work that will grow into writing and staging.",
           "sourceRoleSlug": "menander-common",
           "newArt": true,
-          "sceneBrief": "A modest Greek stagehand arranges a theatrical mask and simple household props behind a theatre stage, plain tunic, no celebrity playwright pose."
+          "sceneBrief": "An adult rehearsal assistant follows a scene copy and records performance cues beside a New Comedy company.",
+          "editorialRoleRevision": "role-progression-v1"
         },
         "uncommon": {
           "title": "Stage Copyist",
@@ -564,14 +574,15 @@
       },
       "roles": {
         "common": {
-          "title": "Palace Messenger",
-          "displayTitle": "Palace Messenger",
-          "subtitle": "Bearer of Ptolemy's Dispatches",
-          "bodyTitle": "The Seal Reaches Its Hand",
-          "bodyText": "A palace messenger carries sealed orders through crowded courtyards and unfamiliar streets. Dependability gives distant officials a common purpose, keeping the first threads of government joined by a message delivered intact and on time.",
+          "title": "Court Records Apprentice",
+          "displayTitle": "Court Records Apprentice",
+          "subtitle": "Learning the Court's Accounts",
+          "bodyTitle": "Order Begins in the Record",
+          "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.",
           "sourceRoleSlug": "ptolemy-common",
           "newArt": true,
-          "sceneBrief": "A modest messenger carries a sealed papyrus dispatch through an Egyptian administrative colonnade, simple pale tunic and satchel, no royal diadem."
+          "sceneBrief": "An adult court records apprentice carries and checks administrative papers in an early Ptolemaic office.",
+          "editorialRoleRevision": "role-progression-v1"
         },
         "uncommon": {
           "title": "Egyptian Administration Clerk",
@@ -624,14 +635,15 @@
       },
       "roles": {
         "common": {
-          "title": "Granary Porter",
-          "displayTitle": "Granary Porter",
-          "subtitle": "Hand of the Nile Granaries",
-          "bodyTitle": "Every Sack Accounted For",
-          "bodyText": "A granary porter moves and checks the sacks that fill the storehouse. Honest attention at the doorway gives distant accounts a solid foundation, making the harvest a quantity that officials can actually find.",
+          "title": "Granary Tally Assistant",
+          "displayTitle": "Granary Tally Assistant",
+          "subtitle": "Counting Egypt's Grain",
+          "bodyTitle": "The First Checked Measure",
+          "bodyText": "A granary tally assistant counts grain measures, compares receipts, and records stores entering or leaving the granary. A checked tally begins the accounting discipline needed to manage revenue and the supply of a province.",
           "sourceRoleSlug": "cleomenes-common",
           "newArt": true,
-          "sceneBrief": "A plain linen-clothed granary porter checks a tied grain sack at an Egyptian storehouse doorway, humble work setting and simple tally marks."
+          "sceneBrief": "An adult granary tally assistant checks grain measures and receipts while recording stores entering or leaving the granary.",
+          "editorialRoleRevision": "role-progression-v1"
         },
         "uncommon": {
           "title": "Revenue Records Assistant",

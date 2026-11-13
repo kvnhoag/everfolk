@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "version": "trusted-commander-v2",
+  "bundleSha256": "0fca0f271f2d311f8999c130473c279e10c54059239b54f2c9a0c1d96690dded",
+  "kitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863",
+  "cards": [
+    "alexander-epic-male"
+  ],
+  "installed": true,
+  "sourceLibraryUnchanged": true,
+  "identityCopyRanksAndEditionCapsUnchanged": true,
+  "liveEditionPreserved": true,
+  "changedFields": [
+    "src",
+    "footerlessSrc",
+    "thumbnailSrc",
+    "portraitSrc",
+    "sha256",
+    "artworkVersion"
+  ],
+  "stagePath": "artifacts/card-art-import/trusted-commander-v2-0fca0f271f2d",
+  "publicPath": "/assets/cards/trusted-commander-v2/",
+  "entries": [
+    {
+      "id": "alexander-epic-male",
+      "artMode": "finished",
+      "inputSha256": "172d9ac7736ddb8e315b42e596f464862348baa267f7d97bb8b0f4acc5d0c12f",
+      "inputSize": [
+        840,
+        1050
+      ],
+      "portraitSha256": "793dee2524c66d43f1ec2a594a34f25cd2cbe2915b79845715af6e5dfd849bfe",
+      "frameSha256": "e0759efa49fa358ca6c0da88316f01fdc85d6da97d5ed220fd517eaf6e03bba0",
+      "footerlessFrameSha256": "68d65918b69f66c3980f59125ebad15b796fe8951aaabf35976fa5c701eddd97",
+      "fit": {
+        "layout": "standard",
+        "rect": {
+          "x": 154,
+          "y": 190,
+          "width": 592,
+          "height": 740
+        },
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "standardGridPreserved": false,
+        "logicalEnlargement": 1,
+        "note": "840×1050 to 592×740 is fractional nearest fitting. Supply --standard-art for a separately finished, regular pixel grid."
+      },
+      "qa": {
+        "uncoveredPixelsChecked": 582456,
+        "uncoveredPixelDifferences": 0,
+        "transparentOuterCorners": true,
+        "losslessRGBAReadback": true
+      },
+      "version": "trusted-commander-v2",
+      "files": {
+        "footerless": {
+          "sha256": "e8ba86c6a8a22c499252445e7c73d0be8f853c5cbd0cec99f18600168b875eef",
+          "rgbaSha256": "cbae864da6e4dbfb1826e91a550b021fbf8314a4a0e29c1cad29f47c0a62916e",
+          "width": 900,
+          "height": 1260,
+          "bytes": 251202,
+          "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-footerless.webp"
+        },
+        "full": {
+          "sha256": "8677836879e51ada420baee55a41d16a8e719789d5fb233b29a9be1e5b767afc",
+          "rgbaSha256": "3feb7035f3bdd242e9a7a4c6278d4b62691d1acf15af83df0bbd6c1ad42a69c6",
+          "width": 900,
+          "height": 1260,
+          "bytes": 252052,
+          "src": "/assets/cards/trusted-commander-v2/alexander-epic-male.webp"
+        },
+        "thumbnail": {
+          "sha256": "023a82e99f34d821228be2e7e7e21dfec377483f25bb742912e7d81a44c9b913",
+          "rgbaSha256": "58e8c64c2c17f2160515aaa7e704b18bcb5d1f7a3e89670f54fba5f611e2c619",
+          "width": 450,
+          "height": 630,
+          "bytes": 194988,
+          "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-thumb.webp"
+        },
+        "portrait": {
+          "sha256": "793dee2524c66d43f1ec2a594a34f25cd2cbe2915b79845715af6e5dfd849bfe",
+          "rgbaSha256": "086da9f9518d8518fcfeef3543291d56b0ca2c22fee437e0195d24b2b5246319",
+          "width": 840,
+          "height": 1050,
+          "bytes": 229804,
+          "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-portrait.webp"
+        }
+      },
+      "bundleSha256": "0fca0f271f2d311f8999c130473c279e10c54059239b54f2c9a0c1d96690dded",
+      "kitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863"
+    }
+  ]
+}

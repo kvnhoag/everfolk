@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-13T14:50:33.207Z",
+  "reviewedAt": "2026-11-13T18:10:39.645Z",
   "passed": true,
   "copyScope": {
     "parents": 13,
@@ -8,7 +8,7 @@
     "total": 117
   },
   "renderedCardsChecked": 117,
-  "approvedExistingPortraitFitsChecked": 83,
+  "approvedExistingPortraitFitsChecked": 79,
   "visualReview": [
     "euclid-parent",
     "alexander-rare-female",
@@ -59,13 +59,13 @@
       "slug": "alexander-uncommon-male",
       "editableParagraph": true,
       "editionText": "001/∞",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "alexander-uncommon-female",
       "editableParagraph": true,
       "editionText": "001/∞",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "alexander-rare-male",
@@ -275,13 +275,13 @@
       "slug": "pytheas-uncommon-male",
       "editableParagraph": true,
       "editionText": "001/∞",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "pytheas-uncommon-female",
       "editableParagraph": true,
       "editionText": "001/∞",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "pytheas-rare-male",

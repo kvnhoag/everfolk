@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "version": "subtitle-spacing-v1",
+  "bundleSha256": "5ce44b1d528e38af7c0a3a4a6db3863f47814479d17d68303503e6d0f8fef677",
+  "bundleSrc": "/assets/cards/subtitle-spacing-v1/header-migration.json",
+  "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+  "cards": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "installed": true,
+  "explicitProtectedHeaderMigration": true,
+  "identityCopyRanksAndEditionCapsUnchanged": true,
+  "portraitImagesUnchanged": true,
+  "entries": [
+    {
+      "id": "alexander-epic-male",
+      "artMode": "finished",
+      "inputSha256": "172d9ac7736ddb8e315b42e596f464862348baa267f7d97bb8b0f4acc5d0c12f",
+      "inputSize": [
+        840,
+        1050
+      ],
+      "portraitSha256": "793dee2524c66d43f1ec2a594a34f25cd2cbe2915b79845715af6e5dfd849bfe",
+      "frameSha256": "7599d85922123472b092a9fd0e510fa09b6c100bf0c14156c020beb5a33328d5",
+      "footerlessFrameSha256": "14e44cfc3b4ba5a5e90a4e27b0047f4bf314636f822d979aeea19c13b38d75ce",
+      "fit": {
+        "layout": "standard",
+        "rect": {
+          "x": 154,
+          "y": 190,
+          "width": 592,
+          "height": 740
+        },
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "standardGridPreserved": false,
+        "logicalEnlargement": 1,
+        "note": "840×1050 to 592×740 is fractional nearest fitting. Supply --standard-art for a separately finished, regular pixel grid."
+      },
+      "qa": {
+        "uncoveredPixelsChecked": 582456,
+        "uncoveredPixelDifferences": 0,
+        "transparentOuterCorners": true,
+        "losslessRGBAReadback": true
+      },
+      "version": "subtitle-spacing-v1",
+      "files": {
+        "footerless": {
+          "width": 900,
+          "height": 1260,
+          "bytes": 249674,
+          "sha256": "041590e6aed88b32a44176a96f8109072160a1e18e0fb4233911f4bf75856a31",
+          "rgbaSha256": "1fbdd0130cefb8d78ec84fb318bbb6d49316558537b900385ab298c066626f80",
+          "src": "/assets/cards/subtitle-spacing-v1/alexander-epic-male-footerless.webp"
+        },
+        "full": {
+          "width": 900,
+          "height": 1260,
+          "bytes": 250582,
+          "sha256": "5f7c948b2f9b52dcaa26dcd422cb186d2aadd478794e68ace27e03bb83923a4a",
+          "rgbaSha256": "e11a84363cb7a0af014d258f9f714fe3364288cc0dcf75787aa0fb01cd4b28cc",
+          "src": "/assets/cards/subtitle-spacing-v1/alexander-epic-male.webp"
+        },
+        "thumbnail": {
+          "width": 450,
+          "height": 630,
+          "bytes": 197516,
+          "sha256": "2a1c2f888cc25e08dee8727b81457127d58ae23cefe5458acb5b39845bf58a8c",
+          "rgbaSha256": "e1b170361ca556e2851063f0d3e7f3878f83daaf459e590ccb84fcb15393c636",
+          "src": "/assets/cards/subtitle-spacing-v1/alexander-epic-male-thumb.webp"
+        },
+        "portrait": {
+          "sha256": "793dee2524c66d43f1ec2a594a34f25cd2cbe2915b79845715af6e5dfd849bfe",
+          "rgbaSha256": "086da9f9518d8518fcfeef3543291d56b0ca2c22fee437e0195d24b2b5246319",
+          "width": 840,
+          "height": 1050,
+          "bytes": 229804,
+          "src": "/assets/cards/subtitle-spacing-v1/alexander-epic-male-portrait.webp"
+        }
+      },
+      "bundleSha256": "5ce44b1d528e38af7c0a3a4a6db3863f47814479d17d68303503e6d0f8fef677",
+      "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+      "headerMigration": {
+        "id": "subtitle-spacing-v1",
+        "previousVersion": "trusted-commander-v2",
+        "previousFrameSha256": "e0759efa49fa358ca6c0da88316f01fdc85d6da97d5ed220fd517eaf6e03bba0",
+        "previousFooterlessFrameSha256": "68d65918b69f66c3980f59125ebad15b796fe8951aaabf35976fa5c701eddd97",
+        "previousBundleSha256": "0fca0f271f2d311f8999c130473c279e10c54059239b54f2c9a0c1d96690dded",
+        "previousKitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863",
+        "previousFiles": {
+          "footerless": {
+            "sha256": "e8ba86c6a8a22c499252445e7c73d0be8f853c5cbd0cec99f18600168b875eef",
+            "rgbaSha256": "cbae864da6e4dbfb1826e91a550b021fbf8314a4a0e29c1cad29f47c0a62916e",
+            "width": 900,
+            "height": 1260,
+            "bytes": 251202,
+            "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-footerless.webp"
+          },
+          "full": {
+            "sha256": "8677836879e51ada420baee55a41d16a8e719789d5fb233b29a9be1e5b767afc",
+            "rgbaSha256": "3feb7035f3bdd242e9a7a4c6278d4b62691d1acf15af83df0bbd6c1ad42a69c6",
+            "width": 900,
+            "height": 1260,
+            "bytes": 252052,
+            "src": "/assets/cards/trusted-commander-v2/alexander-epic-male.webp"
+          },
+          "thumbnail": {
+            "sha256": "023a82e99f34d821228be2e7e7e21dfec377483f25bb742912e7d81a44c9b913",
+            "rgbaSha256": "58e8c64c2c17f2160515aaa7e704b18bcb5d1f7a3e89670f54fba5f611e2c619",
+            "width": 450,
+            "height": 630,
+            "bytes": 194988,
+            "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-thumb.webp"
+          },
+          "portrait": {
+            "sha256": "793dee2524c66d43f1ec2a594a34f25cd2cbe2915b79845715af6e5dfd849bfe",
+            "rgbaSha256": "086da9f9518d8518fcfeef3543291d56b0ca2c22fee437e0195d24b2b5246319",
+            "width": 840,
+            "height": 1050,
+            "bytes": 229804,
+            "src": "/assets/cards/trusted-commander-v2/alexander-epic-male-portrait.webp"
+          }
+        },
+        "portraitUnchanged": true,
+        "outsideHeaderChangedPixels": 0
+      }
+    },
+    {
+      "id": "demetrius-rare-male",
+      "artMode": "finished",
+      "inputSha256": "f33ac9b966f7a639b0eaca06a49688541695caaa4394418bda79bd44de36a8f0",
+      "inputSize": [
+        840,
+        1050
+      ],
+      "portraitSha256": "324029ca444b465cecafc7f0ad0de0ad82520076ffbaa2880133f748ef934b20",
+      "frameSha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "footerlessFrameSha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9",
+      "fit": {
+        "layout": "standard",
+        "rect": {
+          "x": 154,
+          "y": 190,
+          "width": 592,
+          "height": 740
+        },
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "standardGridPreserved": false,
+        "logicalEnlargement": 1,
+        "note": "840×1050 to 592×740 is fractional nearest fitting. Supply --standard-art for a separately finished, regular pixel grid."
+      },
+      "qa": {
+        "uncoveredPixelsChecked": 582609,
+        "uncoveredPixelDifferences": 0,
+        "transparentOuterCorners": true,
+        "losslessRGBAReadback": true
+      },
+      "version": "subtitle-spacing-v1",
+      "files": {
+        "footerless": {
+          "width": 900,
+          "height": 1260,
+          "bytes": 243904,
+          "sha256": "cb3510db97acf876056804c606fd7b29fae6f91d00b7728714f5db229ae092c1",
+          "rgbaSha256": "7c2ad9055a930aeea55785a463021f4e867b50184506865b8d29de6bb9d2984b",
+          "src": "/assets/cards/subtitle-spacing-v1/demetrius-rare-male-footerless.webp"
+        },
+        "full": {
+          "width": 900,
+          "height": 1260,
+          "bytes": 244658,
+          "sha256": "849daaf7017be34ff2d674cdd53441881846f87e823a375c54deffd6b7e34580",
+          "rgbaSha256": "c596b6ded3c9c08ce2db0c4a22b5fc24d6c467b85194f9ff2613c5d8adb728aa",
+          "src": "/assets/cards/subtitle-spacing-v1/demetrius-rare-male.webp"
+        },
+        "thumbnail": {
+          "width": 450,
+          "height": 630,
+          "bytes": 192556,
+          "sha256": "38bd3296c80b288e250130c0fa85d02210c1f7f601d28e7ce80d2101796f6a04",
+          "rgbaSha256": "43be370906f14561c881c631ef1e55968a0773dc9b67b4fd3e898def5ca3a930",
+          "src": "/assets/cards/subtitle-spacing-v1/demetrius-rare-male-thumb.webp"
+        },
+        "portrait": {
+          "sha256": "324029ca444b465cecafc7f0ad0de0ad82520076ffbaa2880133f748ef934b20",
+          "rgbaSha256": "689be6bd0825c75e2975b900024742febd78badf8b5fba45e6f860f8c8321542",
+          "width": 840,
+          "height": 1050,
+          "bytes": 228912,
+          "src": "/assets/cards/subtitle-spacing-v1/demetrius-rare-male-portrait.webp"
+        }
+      },
+      "bundleSha256": "5ce44b1d528e38af7c0a3a4a6db3863f47814479d17d68303503e6d0f8fef677",
+      "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+      "headerMigration": {
+        "id": "subtitle-spacing-v1",
+        "previousVersion": "siege-engineer-gaze-v1",
+        "previousFrameSha256": "d78571cd9d3cff48e2ed37e74bcc7af151f14bb2c1ade3c522aea073a2c35bd3",
+        "previousFooterlessFrameSha256": "4d969f0d753e52fc014a1e09019c02c7f33f82b070155d519e41ad3b65e08a6a",
+        "previousBundleSha256": "605cf3aa582848674eb690b7f6b5b12e6f4535e31f153694022c5811e1820bad",
+        "previousKitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863",
+        "previousFiles": {
+          "footerless": {
+            "sha256": "ab84e5b96aa93943b4068088dfbd58303273a61e0205d0cfd063679b9e635c1b",
+            "rgbaSha256": "7d44743f1c6a0b39d53fa419d9be32fe7a256fb38aabae36582b7880f8f06b9f",
+            "width": 900,
+            "height": 1260,
+            "bytes": 245442,
+            "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-footerless.webp"
+          },
+          "full": {
+            "sha256": "55890c5e6da99b6a1a427e582121a61c11916cd99dd23ddf1446d6d425a75eb8",
+            "rgbaSha256": "c1414b51ca23aa85a74eb8b51059887bf5b5d672c2cc93e51fb436a46bf91485",
+            "width": 900,
+            "height": 1260,
+            "bytes": 246190,
+            "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male.webp"
+          },
+          "thumbnail": {
+            "sha256": "3c9fb11676b6981bd6f29c42a35ec051dbe30b76a17ae7c12874cc1096f4c43b",
+            "rgbaSha256": "5977387c4629cb4cf24456b83d55e6ae925f6916f44cde4bcb2e27074e33d419",
+            "width": 450,
+            "height": 630,
+            "bytes": 191166,
+            "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-thumb.webp"
+          },
+          "portrait": {
+            "sha256": "324029ca444b465cecafc7f0ad0de0ad82520076ffbaa2880133f748ef934b20",
+            "rgbaSha256": "689be6bd0825c75e2975b900024742febd78badf8b5fba45e6f860f8c8321542",
+            "width": 840,
+            "height": 1050,
+            "bytes": 228912,
+            "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-portrait.webp"
+          }
+        },
+        "portraitUnchanged": true,
+        "outsideHeaderChangedPixels": 0
+      }
+    }
+  ]
+}

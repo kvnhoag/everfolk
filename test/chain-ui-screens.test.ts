@@ -181,7 +181,7 @@ test("figure directory separates historical writings from game qualification rul
   assert.match(html, /No authored literary work is securely identified/);
   assert.match(html, /How a life qualifies/);
   assert.equal((html.match(/data-roster-figure=/g) ?? []).length, 11);
-  assert.equal((html.match(/data-placeholder-art="true"/g) ?? []).length, 7);
+  assert.equal((html.match(/data-placeholder-art="true"/g) ?? []).length, 0);
   assert.match(html, /Menander/);
   assert.match(html, /Lysippos/);
   assert.match(html, /Catalogue variants are previews/);

@@ -51,7 +51,7 @@ function toast(message){$('toast').textContent=message;gsap.killTweensOf($('toas
 function setPhase(value){phase=value;document.body.dataset.phase=value;$('stage').setAttribute('aria-busy',String(value==='opening'||value==='loading'));}
 function makeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 function rounded(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r);}
-function tex(canvas,crisp=false){const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer?Math.min(8,renderer.capabilities.getMaxAnisotropy()):4;t.magFilter=crisp?THREE.NearestFilter:THREE.LinearFilter;textures.add(t);return t;}
+function tex(canvas){const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer?Math.min(8,renderer.capabilities.getMaxAnisotropy()):4;t.magFilter=THREE.LinearFilter;textures.add(t);return t;}
 function loadImage(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(Error('An embedded artwork could not be decoded.'));i.src=src;});}
 function frontCanvas(person,level){
  const key=person.tile+':'+level;if(cardsFront.has(key))return cardsFront.get(key);
@@ -85,7 +85,7 @@ function buildCard(person,level,index){
  const shape=roundedShape(2.05,2.88,.085);const geo=new THREE.ExtrudeGeometry(shape,{depth:.042,bevelEnabled:true,bevelSegments:3,steps:1,bevelSize:.018,bevelThickness:.012,curveSegments:10});geo.translate(0,0,-.023);
  const clipPlane=new THREE.Plane(new THREE.Vector3(0,1,0),100);
  const edge=new THREE.Mesh(geo,keepMat(new THREE.MeshStandardMaterial({color:level===4?'#cb9d48':tiers[level].color,roughness:.34,metalness:.68,transparent:true,depthTest:false,depthWrite:false,clippingPlanes:[clipPlane]})));edge.castShadow=true;group.add(edge);
- const face=new THREE.Mesh(faceGeometry(2.035,person.framedArt?2.849:2.865),keepMat(new THREE.MeshBasicMaterial({map:tex(frontCanvas(person,level),Boolean(person.framedArt)),transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));face.position.z=.035;group.add(face);
+ const face=new THREE.Mesh(faceGeometry(2.035,person.framedArt?2.849:2.865),keepMat(new THREE.MeshBasicMaterial({map:tex(frontCanvas(person,level)),transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));face.position.z=.035;group.add(face);
  const back=new THREE.Mesh(faceGeometry(2.035,2.865),keepMat(new THREE.MeshBasicMaterial({map:sharedBack,transparent:true,depthTest:false,depthWrite:false,toneMapped:false})));back.position.z=-.043;back.rotation.y=Math.PI;group.add(back);
  const sheen=new THREE.Mesh(faceGeometry(2.03,2.86),keepMat(new THREE.MeshBasicMaterial({map:sheenTexture(level),transparent:true,opacity:0,depthTest:false,depthWrite:false,toneMapped:false,blending:THREE.AdditiveBlending})));sheen.position.z=.041;group.add(sheen);
  for(const surface of [face,back,sheen])surface.material.clippingPlanes=[clipPlane];

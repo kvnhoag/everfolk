@@ -1,0 +1,1680 @@
+{
+  "applied": true,
+  "files": 209,
+  "changed": 209,
+  "filesVerified": true,
+  "plan": [
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-common-male.vectorcraft",
+      "beforeSha256": "eed709560427e5c2485d0ee8c3f92ee4d116cef30a46edc543019809e6f13128",
+      "afterSha256": "4d31d98eb7b20ec1d1af4bbedcb237b8385226e916a9939dbcb5d860167d74d9",
+      "bytes": 358118,
+      "currentSha256": "eed709560427e5c2485d0ee8c3f92ee4d116cef30a46edc543019809e6f13128",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-common-male-native.json",
+      "beforeSha256": "d5c2859cd44111c7d12c178419810a6b0163e9be372eabf2c0308e48b7045e3c",
+      "afterSha256": "d266f30e72368bc913f0ce62712bd6a81a2f061a3808a3e9f54db18abd2d703f",
+      "bytes": 8800,
+      "currentSha256": "d5c2859cd44111c7d12c178419810a6b0163e9be372eabf2c0308e48b7045e3c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-common-female.vectorcraft",
+      "beforeSha256": "6836296ec8ef05ac875965660deb7dc8452c12c32fdea12fe50f3641c57e83f3",
+      "afterSha256": "808e7280249e2e29810191a67ba873d17ba757c9d997b76cd90311ff449d3478",
+      "bytes": 371205,
+      "currentSha256": "6836296ec8ef05ac875965660deb7dc8452c12c32fdea12fe50f3641c57e83f3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-common-female-native.json",
+      "beforeSha256": "fc654629aeb1e7bc8570089c863de75f2a22cefc2f65f34e20fbe6b901b926db",
+      "afterSha256": "5cbdec9cc774f50a2d6d5329ba65e1a4bc009734c1e29a30074e7a0f49a9c288",
+      "bytes": 8812,
+      "currentSha256": "fc654629aeb1e7bc8570089c863de75f2a22cefc2f65f34e20fbe6b901b926db",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-uncommon-male.vectorcraft",
+      "beforeSha256": "bc645e916c9543936926203c226917567c2f5af858548fefb5576bde1e8290fe",
+      "afterSha256": "7c23055b267de0e37e815462dcede9b4f7af664acf4b24a3a5522987247b8dea",
+      "bytes": 373561,
+      "currentSha256": "bc645e916c9543936926203c226917567c2f5af858548fefb5576bde1e8290fe",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-uncommon-male-native.json",
+      "beforeSha256": "7391f211e7f8c489e9c4c87d04e2d9716190dc1bf57268c7c911f7f0483f8798",
+      "afterSha256": "a6eb78975daf770378e8c05b82b43f0e36f2ae098cd34374d94d4811369fdd61",
+      "bytes": 8794,
+      "currentSha256": "7391f211e7f8c489e9c4c87d04e2d9716190dc1bf57268c7c911f7f0483f8798",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-uncommon-female.vectorcraft",
+      "beforeSha256": "b4f155ff0075372379b6fd5862a224c2042255b0a27c493463c8851cc859d407",
+      "afterSha256": "a11c652b7da3a589282c80c86dc8da350b9afaec67be294588f9eb016ca21656",
+      "bytes": 367594,
+      "currentSha256": "b4f155ff0075372379b6fd5862a224c2042255b0a27c493463c8851cc859d407",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-uncommon-female-native.json",
+      "beforeSha256": "23c9925dc9f8d945e031993fbbc13336137d0101bd719f84f11f2e2b045e9678",
+      "afterSha256": "262dbbcf88396080c0c6d913802a658b06702b1de660f033775549b1ea2c3009",
+      "bytes": 8806,
+      "currentSha256": "23c9925dc9f8d945e031993fbbc13336137d0101bd719f84f11f2e2b045e9678",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-rare-male.vectorcraft",
+      "beforeSha256": "c2645f591f13b59cbbf99c897d0be94518bdc2413b64042c9b185d1258812e9e",
+      "afterSha256": "1403ef48656455aa523e507f54bfd063afe72cbfa70263a0ddde2ad57e7baf82",
+      "bytes": 368405,
+      "currentSha256": "c2645f591f13b59cbbf99c897d0be94518bdc2413b64042c9b185d1258812e9e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-rare-male-native.json",
+      "beforeSha256": "8eca89b14d22363d93fd2444a0e85bc3d863bead88c9bc5e9739b437c7b83e06",
+      "afterSha256": "6c18d8368e5b7a46d104ceab5dca7b36e8522754fce8b1d29483b4c2fa74402e",
+      "bytes": 8778,
+      "currentSha256": "8eca89b14d22363d93fd2444a0e85bc3d863bead88c9bc5e9739b437c7b83e06",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-rare-female.vectorcraft",
+      "beforeSha256": "1ac1b1c3801c9fec9f13a20ca5b37e957092bcfdbf6e5fe44492a2c0b7cbce15",
+      "afterSha256": "53a77119cdb221ccbf44ed9e5eff23ebf037a72df938e2b0c6d33941716f0ed5",
+      "bytes": 368637,
+      "currentSha256": "1ac1b1c3801c9fec9f13a20ca5b37e957092bcfdbf6e5fe44492a2c0b7cbce15",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-rare-female-native.json",
+      "beforeSha256": "0877444634925602e962da0133f3ee4346e1cfce067c735510bda9e2dfaf8a67",
+      "afterSha256": "c670eb592a65a1a613193e660d42b5e3350522200c127db9ff76dd78a88c0570",
+      "bytes": 8790,
+      "currentSha256": "0877444634925602e962da0133f3ee4346e1cfce067c735510bda9e2dfaf8a67",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-epic-male.vectorcraft",
+      "beforeSha256": "f78a52cd6ccc848a3911860cbdce74e5dd43155b0e7bb2c0fb3dc8aac0c4d23c",
+      "afterSha256": "375ecdcab22ba585471236d6e749cefd17e7cc351a76925c7caf3f2ce1c6e319",
+      "bytes": 369543,
+      "currentSha256": "f78a52cd6ccc848a3911860cbdce74e5dd43155b0e7bb2c0fb3dc8aac0c4d23c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-epic-male-native.json",
+      "beforeSha256": "640a46378a5d05e9b455907018dade2ae5669548b506860469bfbcf5e032a8a4",
+      "afterSha256": "210e878add212d1f2e870273e0485ec6051c7dedd02c9b21318cc77ee88f3a1e",
+      "bytes": 8782,
+      "currentSha256": "640a46378a5d05e9b455907018dade2ae5669548b506860469bfbcf5e032a8a4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/alexander-epic-female.vectorcraft",
+      "beforeSha256": "05caa1c30650e3a26c5ae53f64ef3391bc03bb15556876588630dd1b55077a92",
+      "afterSha256": "dace243c3737be11cc65e28b7e2ec43ef935abab7fcf3e10dc885732659c1d19",
+      "bytes": 366226,
+      "currentSha256": "05caa1c30650e3a26c5ae53f64ef3391bc03bb15556876588630dd1b55077a92",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/alexander-epic-female-native.json",
+      "beforeSha256": "bbfdf79ee8f8620ca0001f82821c925395b37186387663cfdb6f04590c3eb65d",
+      "afterSha256": "cf6276187890b6ad38de6ca311170c6a7807becf312c0c7a25b6d983b1fe6d75",
+      "bytes": 8794,
+      "currentSha256": "bbfdf79ee8f8620ca0001f82821c925395b37186387663cfdb6f04590c3eb65d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-common-male.vectorcraft",
+      "beforeSha256": "40e6e6b1532aa491b3260a8799174b81f9e99554af15741271e2155da877f1fb",
+      "afterSha256": "20bddad2fd1f2d6aa5b6d199f45f780ddab2cfcb8a62790e0ef592866989cc63",
+      "bytes": 373157,
+      "currentSha256": "40e6e6b1532aa491b3260a8799174b81f9e99554af15741271e2155da877f1fb",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-common-male-native.json",
+      "beforeSha256": "0ac5a0153af9ee84ef0781ce088f3ed25c4287149fe1e139407a4dae8aa6136a",
+      "afterSha256": "e5cd043934bf5dfcb8abcda5be51079103dffaa51dc2bf19d4f52ef7ddacce6b",
+      "bytes": 8818,
+      "currentSha256": "0ac5a0153af9ee84ef0781ce088f3ed25c4287149fe1e139407a4dae8aa6136a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-common-female.vectorcraft",
+      "beforeSha256": "d86f8a1c4a104ec834cbd2c334f6229ce9d0dac669225a1b3d6f1b289ed8b8b2",
+      "afterSha256": "c39f36927dd7b94e5de082ddf112162748f34655024c5a46846f535e59d37a9a",
+      "bytes": 367446,
+      "currentSha256": "d86f8a1c4a104ec834cbd2c334f6229ce9d0dac669225a1b3d6f1b289ed8b8b2",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-common-female-native.json",
+      "beforeSha256": "a1890656ed26506b3a0f1b62f4a51c15f0443799495ea78e21990fa29e7a92e8",
+      "afterSha256": "723e194e35aaff0bfa0112aa8dd9241ff345e8c112d751f89f618ce673348bc9",
+      "bytes": 8830,
+      "currentSha256": "a1890656ed26506b3a0f1b62f4a51c15f0443799495ea78e21990fa29e7a92e8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-uncommon-male.vectorcraft",
+      "beforeSha256": "fd0e308bcc17789e8d1a28ecea10e4f3cb37ea93d4eeed4938726fda7839d2ae",
+      "afterSha256": "60d4acc784f919a01441f6e3dfe1b80de37ec2ce1710d9563c492580cf9d2ea7",
+      "bytes": 366969,
+      "currentSha256": "fd0e308bcc17789e8d1a28ecea10e4f3cb37ea93d4eeed4938726fda7839d2ae",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-uncommon-male-native.json",
+      "beforeSha256": "b02ff42f98a907b1a954baf6628d99b8ed730337e71f86693a0b5931362f5d1d",
+      "afterSha256": "2d664e8c04b580b79ca7fbdff13459f52dab0fcfb5b8fe7889fc8caa43eaa67c",
+      "bytes": 8787,
+      "currentSha256": "b02ff42f98a907b1a954baf6628d99b8ed730337e71f86693a0b5931362f5d1d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-uncommon-female.vectorcraft",
+      "beforeSha256": "995e757b1d9c4ab27ea94cfcec782e603d703217297e9cb9394f0e6ec3268045",
+      "afterSha256": "e140c897ad8c2ba629e1012bdeb21380791a9f51959e64f0644075b865f4eb44",
+      "bytes": 366962,
+      "currentSha256": "995e757b1d9c4ab27ea94cfcec782e603d703217297e9cb9394f0e6ec3268045",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-uncommon-female-native.json",
+      "beforeSha256": "006a881dd49160ea363e7ae49ffd00781707a0c213ee859adc6d6d3bfdf34d52",
+      "afterSha256": "67fada7650ea0e7ccfa213d2c6606821de39e0d4603a1a0083d5d0ff76aaf894",
+      "bytes": 8799,
+      "currentSha256": "006a881dd49160ea363e7ae49ffd00781707a0c213ee859adc6d6d3bfdf34d52",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-rare-male.vectorcraft",
+      "beforeSha256": "e8d1ee3a6b1cf699a5814d36083c07e0e655cdb0a2f3c977f1c4e521149aa2a9",
+      "afterSha256": "e0d58fb3acbb7194a58fbe4dad3c5e851b9e80559566ba8aa0351559ff1055f9",
+      "bytes": 381016,
+      "currentSha256": "e8d1ee3a6b1cf699a5814d36083c07e0e655cdb0a2f3c977f1c4e521149aa2a9",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-rare-male-native.json",
+      "beforeSha256": "8984e6fc2b522fe98615b7b227b11d0787e417b244e2128c2d87db2d6314ecee",
+      "afterSha256": "64bd9f0deb6801e859fe2e2fd9c16123cd39e6a5885d7e08aeef56189acbec99",
+      "bytes": 8801,
+      "currentSha256": "8984e6fc2b522fe98615b7b227b11d0787e417b244e2128c2d87db2d6314ecee",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-rare-female.vectorcraft",
+      "beforeSha256": "a071c3c2914b6a6cd2e17099166ceb1393d0ca6c971abe022fb469c84aa573d3",
+      "afterSha256": "921b677c5f8dbc935569b4b2b3c088ec2e97e1254ed23196fc97d00479fda998",
+      "bytes": 374029,
+      "currentSha256": "a071c3c2914b6a6cd2e17099166ceb1393d0ca6c971abe022fb469c84aa573d3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-rare-female-native.json",
+      "beforeSha256": "66f1d77eb7124e71682029fe3393ea204280957ba7cd1194e94cdba25321fa26",
+      "afterSha256": "affc5ad5ec73deb1643a99a846fef8d287df93ff98b70c0e90c2c4c071807285",
+      "bytes": 8813,
+      "currentSha256": "66f1d77eb7124e71682029fe3393ea204280957ba7cd1194e94cdba25321fa26",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-epic-male.vectorcraft",
+      "beforeSha256": "32820a217bfe431d309adc52a77a6e13ade117a87440ba8176179924362e73e9",
+      "afterSha256": "e3837629750ce6cb59086496f893dc2148ca374fccfe4403bbd568c33e2963c5",
+      "bytes": 371153,
+      "currentSha256": "32820a217bfe431d309adc52a77a6e13ade117a87440ba8176179924362e73e9",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-epic-male-native.json",
+      "beforeSha256": "60c2c3d247a181442a56e11f1427d7ed4516f1df1594168f64d444e75c695126",
+      "afterSha256": "0ac996f0468b27ca68c55f7bf6acc70bdeac59a7e23afffbf284e4085c0916da",
+      "bytes": 8785,
+      "currentSha256": "60c2c3d247a181442a56e11f1427d7ed4516f1df1594168f64d444e75c695126",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/aristotle-epic-female.vectorcraft",
+      "beforeSha256": "050191beeb3c5d25472582964b2cf8fab353d0fdd0dda3a3b0a7fb377985b948",
+      "afterSha256": "2204325fdcb111a32a188f37e95426224fb2eecbb9abb66ff18839abbdf0a08d",
+      "bytes": 373593,
+      "currentSha256": "050191beeb3c5d25472582964b2cf8fab353d0fdd0dda3a3b0a7fb377985b948",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/aristotle-epic-female-native.json",
+      "beforeSha256": "6a16ff2eb46b043fd49e375368ff7a17ac3f70640cf4fb77ae18364bc53ebb63",
+      "afterSha256": "b8cf4281dadcb1d0e22fc348eb4812ceb4ffc5a216e3e179d422e945b83ca47c",
+      "bytes": 8797,
+      "currentSha256": "6a16ff2eb46b043fd49e375368ff7a17ac3f70640cf4fb77ae18364bc53ebb63",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-common-male.vectorcraft",
+      "beforeSha256": "2aa739ff16181b26c9b2f6f36940c3fa91480d20060737cdc6d19e1dab4fade8",
+      "afterSha256": "bcee757bfb1ec535e0072e10c038eba495c9075d18875256940073eb88cae6de",
+      "bytes": 369162,
+      "currentSha256": "2aa739ff16181b26c9b2f6f36940c3fa91480d20060737cdc6d19e1dab4fade8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-common-male-native.json",
+      "beforeSha256": "496fa7dbaae12e2778d7baa683f48f7a1bc0cf991c9b3355dfd76b34c5388b1a",
+      "afterSha256": "4fea42b6e36d94d8648bf4853c28b3393c3ca5d875d59c8a5f558712184df50d",
+      "bytes": 8737,
+      "currentSha256": "496fa7dbaae12e2778d7baa683f48f7a1bc0cf991c9b3355dfd76b34c5388b1a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-common-female.vectorcraft",
+      "beforeSha256": "40fab2afae8a66b1e19b8e59708ed0e5d31a3c9fea00376de92027c2f1e20978",
+      "afterSha256": "e0641db1a8f9a7e2e8d2a983bf96eb36a7c38fd3ef0df629c834c172503ba7f2",
+      "bytes": 368505,
+      "currentSha256": "40fab2afae8a66b1e19b8e59708ed0e5d31a3c9fea00376de92027c2f1e20978",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-common-female-native.json",
+      "beforeSha256": "02f711e646f246373d424c712f294f2dbc8112f41bd26305c3bfcf6895c23665",
+      "afterSha256": "fefb4367f44d8900467b5030845f11c902baff47888605c6febb5dd3b6b94bce",
+      "bytes": 8749,
+      "currentSha256": "02f711e646f246373d424c712f294f2dbc8112f41bd26305c3bfcf6895c23665",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-uncommon-male.vectorcraft",
+      "beforeSha256": "7cdecaec96814adcf0db29f5145674db7da3e2825281e58b40d468d3a0ed60a0",
+      "afterSha256": "6bc049dc649aa75ef6faf082aa120971a8b8792d22085b56a7b156efe9df4075",
+      "bytes": 366655,
+      "currentSha256": "7cdecaec96814adcf0db29f5145674db7da3e2825281e58b40d468d3a0ed60a0",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-uncommon-male-native.json",
+      "beforeSha256": "7af86c9e742bcb8092bf19f6164fab3af64606bc0a13fc5f188df0116e50a64f",
+      "afterSha256": "de0f5c990ec83eb42368e6a43e8fc764be67180f58a9d19c0b9b3fbbe3245463",
+      "bytes": 8772,
+      "currentSha256": "7af86c9e742bcb8092bf19f6164fab3af64606bc0a13fc5f188df0116e50a64f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-uncommon-female.vectorcraft",
+      "beforeSha256": "52cc27ee967d57624763b698d2a9f4e8a2e573ef6f5f4cbdb283a94a239b9817",
+      "afterSha256": "5e5f51f27297dcadacc98c470517df7a73e92f464e484d0758ff3cfc4cf4b0e0",
+      "bytes": 370797,
+      "currentSha256": "52cc27ee967d57624763b698d2a9f4e8a2e573ef6f5f4cbdb283a94a239b9817",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-uncommon-female-native.json",
+      "beforeSha256": "7fd63bf7e5615e5dd0091082253ccad766dcb05a88e05eb25a6bf7eed29f1186",
+      "afterSha256": "ed5ffd38bfec006ecab623a2e503bc8e6a8eeea5993c625c06785ceee78fbb44",
+      "bytes": 8784,
+      "currentSha256": "7fd63bf7e5615e5dd0091082253ccad766dcb05a88e05eb25a6bf7eed29f1186",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-rare-male.vectorcraft",
+      "beforeSha256": "06657e30ea1a731ef0e494a083419219512971427cf73426031859c8ba8ba654",
+      "afterSha256": "e3093d2689b3930f0796771e8ea32bd8a87e7fc7d98a0e0fc58e80aae23a4aff",
+      "bytes": 356790,
+      "currentSha256": "06657e30ea1a731ef0e494a083419219512971427cf73426031859c8ba8ba654",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-native.json",
+      "beforeSha256": "1be122a237fd597ade01010f1406558d2dcbf0cd9e751838b6ad186fe0d16b53",
+      "afterSha256": "a3d1151286d2c3e06a07f8ebabed10a07e5f9fa79efba0baf306456b0300bd0a",
+      "bytes": 8729,
+      "currentSha256": "1be122a237fd597ade01010f1406558d2dcbf0cd9e751838b6ad186fe0d16b53",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-rare-female.vectorcraft",
+      "beforeSha256": "4a5adcdf5a9bc61a679461e06d4f688afadb3ddd0a1b74951589b72446c6c872",
+      "afterSha256": "033bef6a404cccbfc38fad6aeecb094ec388cee1ba27bf770ec8ac0f915f7a31",
+      "bytes": 353352,
+      "currentSha256": "4a5adcdf5a9bc61a679461e06d4f688afadb3ddd0a1b74951589b72446c6c872",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-rare-female-native.json",
+      "beforeSha256": "046e85bae3cba17ddf26e3fb7f81fac9815f9568e444c67b6e29722e1d1f0786",
+      "afterSha256": "055a04b3eb32a9ba4662e6aa1594709e2624f9f96a5f3b09cc25db8b252a6d3b",
+      "bytes": 8741,
+      "currentSha256": "046e85bae3cba17ddf26e3fb7f81fac9815f9568e444c67b6e29722e1d1f0786",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-epic-male.vectorcraft",
+      "beforeSha256": "6ab69095c95e45b77d38912987e6ee3b6acfb92002e98cdf81eb132421629e4a",
+      "afterSha256": "ebbf943562eb7c730c80e6e5a5457ceff86e953d007300fa94a752ae09b43618",
+      "bytes": 368070,
+      "currentSha256": "6ab69095c95e45b77d38912987e6ee3b6acfb92002e98cdf81eb132421629e4a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-epic-male-native.json",
+      "beforeSha256": "c0a7a6370e07f697ed916114fb2a41d96c54cebacb13dbd17d24d1263642ea89",
+      "afterSha256": "25ffa5540ea0e1f0113cf56dafd15f3a4ba570f647bff58384e4bf476f49020c",
+      "bytes": 8779,
+      "currentSha256": "c0a7a6370e07f697ed916114fb2a41d96c54cebacb13dbd17d24d1263642ea89",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/euclid-epic-female.vectorcraft",
+      "beforeSha256": "b26c8704a8e2aab164c8956423ce71e976b2716c9c185a569ef9c5ae380c1fd3",
+      "afterSha256": "911b4f22022fa14604918e219b53d4751e98d1d1fd70642a135c4d903bd6db86",
+      "bytes": 368140,
+      "currentSha256": "b26c8704a8e2aab164c8956423ce71e976b2716c9c185a569ef9c5ae380c1fd3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/euclid-epic-female-native.json",
+      "beforeSha256": "ff007816ef88e49350e0bcdbbecd53e525d8eec0a9ee1b9f80a1e99100aa6ad8",
+      "afterSha256": "7ac6e8ba24174a12aab7bab2ad4dfdb922c4673540a88f6a33ba9eabec32c18f",
+      "bytes": 8791,
+      "currentSha256": "ff007816ef88e49350e0bcdbbecd53e525d8eec0a9ee1b9f80a1e99100aa6ad8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-common-male.vectorcraft",
+      "beforeSha256": "278178c63c342dda99407e93742d9410f022f1f589dd31aedd93b4acbca05faf",
+      "afterSha256": "45926ef95469e049f99e214217310c5fd2c431764bd1ae1e47c5659aeccc7a32",
+      "bytes": 350812,
+      "currentSha256": "278178c63c342dda99407e93742d9410f022f1f589dd31aedd93b4acbca05faf",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-common-male-native.json",
+      "beforeSha256": "475bfecfbda4b84d408aeab2a2ef819fda0dcc449ef7bf251df71df3a07ffa9e",
+      "afterSha256": "d92c32a27d9e4642edfbd71e20cff1d42f23e899f4120fed2cfdb91ae9bc292a",
+      "bytes": 8774,
+      "currentSha256": "475bfecfbda4b84d408aeab2a2ef819fda0dcc449ef7bf251df71df3a07ffa9e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-common-female.vectorcraft",
+      "beforeSha256": "9fff3f1ecca0556fecad4e509dd1a562baa5c80fa702d3191fa31b66028ff473",
+      "afterSha256": "58b3c49215205e8e49b197f00558d2bd2cb97912337cf6e0ade83878f098cb8c",
+      "bytes": 358006,
+      "currentSha256": "9fff3f1ecca0556fecad4e509dd1a562baa5c80fa702d3191fa31b66028ff473",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-common-female-native.json",
+      "beforeSha256": "43f786fdd90f8a10259915a6f6289a8a96a35519f356afc171ae08e53dc0cd71",
+      "afterSha256": "37c903195ad7c100a6cf029630b0b047c4fb04b24f0f8160c3d863bf21bfa543",
+      "bytes": 8786,
+      "currentSha256": "43f786fdd90f8a10259915a6f6289a8a96a35519f356afc171ae08e53dc0cd71",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-uncommon-male.vectorcraft",
+      "beforeSha256": "5fe8c9cdd1b03e12061bb3bdd8d9df3e79efaf937e93873a31782559978b09e3",
+      "afterSha256": "b2fdba762cc8e1c02dbdd4752e65f20f030702952dda993f4d29de7d63ce1d4e",
+      "bytes": 352725,
+      "currentSha256": "5fe8c9cdd1b03e12061bb3bdd8d9df3e79efaf937e93873a31782559978b09e3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-uncommon-male-native.json",
+      "beforeSha256": "ede7cc517c619e44f1a297faddf73951af76009a57c895171bb947fc05ed6534",
+      "afterSha256": "7dce3ca90b00ca3bfff680ca94379cea2c0ecf31ad9f6d8e2fa19457331ba0bd",
+      "bytes": 8795,
+      "currentSha256": "ede7cc517c619e44f1a297faddf73951af76009a57c895171bb947fc05ed6534",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-uncommon-female.vectorcraft",
+      "beforeSha256": "48b866ec7260b8bd7f30925f9078a39b5b837d7f2a97440a46aecca2dca33840",
+      "afterSha256": "43e8039a0dbc1bac0622bf26eac06e1126a721089e52cf19ee32c795effaabf5",
+      "bytes": 348333,
+      "currentSha256": "48b866ec7260b8bd7f30925f9078a39b5b837d7f2a97440a46aecca2dca33840",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-uncommon-female-native.json",
+      "beforeSha256": "67c5f83692601518961f030853d694c30e655a7eb36a70b04b9742757683b82f",
+      "afterSha256": "0bcde51eebacd7e68d5156911a7fdddd6ca9f11b6b022aa8f9903e2b3cf8a845",
+      "bytes": 8807,
+      "currentSha256": "67c5f83692601518961f030853d694c30e655a7eb36a70b04b9742757683b82f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-rare-male.vectorcraft",
+      "beforeSha256": "943b6d83c83a4ae56e4af9e67ce382bee23fb85157eb2f08764904689a62eac4",
+      "afterSha256": "05d0e7335d54be8933e10b98d4559a57d7a83f31693e7c10a394f19172140e24",
+      "bytes": 348155,
+      "currentSha256": "943b6d83c83a4ae56e4af9e67ce382bee23fb85157eb2f08764904689a62eac4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-rare-male-native.json",
+      "beforeSha256": "22f7276ed4ef55e2efe7e5eeb63c27d55759a09f1139365e5bcfc49b684860d3",
+      "afterSha256": "68f564fc43b8b4c736bb6250602395a1b9777b2264def8e6058dcb66196d73fc",
+      "bytes": 8737,
+      "currentSha256": "22f7276ed4ef55e2efe7e5eeb63c27d55759a09f1139365e5bcfc49b684860d3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-rare-female.vectorcraft",
+      "beforeSha256": "5e69b44d37f536f702a2dc70cc6bbab6a5f402dec653df57e4acea4b8e136066",
+      "afterSha256": "fe76918a5d4549eb5be381a9b63c70e06f8ddc6f8779607725d109c1b4399da9",
+      "bytes": 349635,
+      "currentSha256": "5e69b44d37f536f702a2dc70cc6bbab6a5f402dec653df57e4acea4b8e136066",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-rare-female-native.json",
+      "beforeSha256": "d1799aa1b43a47c92ef2e2dc1ffcb69ec68e98c0f1dcfc4b76c6284865f93f53",
+      "afterSha256": "cd229077c5c1110637e80260ace85f1bc6f1ff255f7859f90556e405d1c058d7",
+      "bytes": 8751,
+      "currentSha256": "d1799aa1b43a47c92ef2e2dc1ffcb69ec68e98c0f1dcfc4b76c6284865f93f53",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-epic-male.vectorcraft",
+      "beforeSha256": "f02a5bdbce884dd8992408b621308a4d4204d3992b70c99960ab6e1dabcdbd05",
+      "afterSha256": "956e9917a7a7567a845f332f5c8d69f383b302314fa8aedb7c5ae2567111f703",
+      "bytes": 348484,
+      "currentSha256": "f02a5bdbce884dd8992408b621308a4d4204d3992b70c99960ab6e1dabcdbd05",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-epic-male-native.json",
+      "beforeSha256": "49e74453ef87d51e017d8ebfacb087586b5f7c30f36995f6ea3560cfb59148ac",
+      "afterSha256": "4f4733a5b35779c8fa1cd34168d1e91b0f7693f2e8cc3674a037bdba6a5ab42c",
+      "bytes": 8811,
+      "currentSha256": "49e74453ef87d51e017d8ebfacb087586b5f7c30f36995f6ea3560cfb59148ac",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/lysippos-epic-female.vectorcraft",
+      "beforeSha256": "11446f15946d4f3bf5d883cb03dad7f7c602579c0e8a58e1b72981309f0a62d9",
+      "afterSha256": "06d5b3efa8a57a91fdb0988701a18abf41fb3e7287a367643dcac21313371319",
+      "bytes": 349534,
+      "currentSha256": "11446f15946d4f3bf5d883cb03dad7f7c602579c0e8a58e1b72981309f0a62d9",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/lysippos-epic-female-native.json",
+      "beforeSha256": "96577c753eb2c100fc1910aa57644ac853d097e374f83594024309fc0665bc8f",
+      "afterSha256": "7224a4f78490cfa5bc175285fee9ed49ece60460772acb7728a26b5bbb8509cb",
+      "bytes": 8823,
+      "currentSha256": "96577c753eb2c100fc1910aa57644ac853d097e374f83594024309fc0665bc8f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-common-male.vectorcraft",
+      "beforeSha256": "e33ff91559e15d4662ccb64014166124149d65f0ec47bc3d2229f7608ead2618",
+      "afterSha256": "877a62f76fc19c01e98fe83fabbfd48fd84a050202e5accf96c47ed386997500",
+      "bytes": 371193,
+      "currentSha256": "e33ff91559e15d4662ccb64014166124149d65f0ec47bc3d2229f7608ead2618",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-common-male-native.json",
+      "beforeSha256": "b0d0593260985f19ad99f9c16741573c3b613fc14c6541ee7d9db39135c2f53f",
+      "afterSha256": "f0104897679cc75b3324e639dd285cf5a26a690486d558fcc796b86df1999c36",
+      "bytes": 8755,
+      "currentSha256": "b0d0593260985f19ad99f9c16741573c3b613fc14c6541ee7d9db39135c2f53f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-common-female.vectorcraft",
+      "beforeSha256": "28d080c96b6879577d25f0d87ee10aca805f3c8f07528beefadf20b47dd4823a",
+      "afterSha256": "b6ed5fb0cec237e892182b34c6f6f3b72c4ae8d138bdbd88b4ce6aa6b2c73bca",
+      "bytes": 364899,
+      "currentSha256": "28d080c96b6879577d25f0d87ee10aca805f3c8f07528beefadf20b47dd4823a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-common-female-native.json",
+      "beforeSha256": "d1e1fcb274a687b3a7d648d4cfb3a3ad9f5709406f076bdae59fbb81f5080bec",
+      "afterSha256": "f53a6f30c285c1d71a5ed3d1b114ed9b9612341e9d69bfe21361c52df3cf8caa",
+      "bytes": 8767,
+      "currentSha256": "d1e1fcb274a687b3a7d648d4cfb3a3ad9f5709406f076bdae59fbb81f5080bec",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-uncommon-male.vectorcraft",
+      "beforeSha256": "42a136fb4ec53fac21fc3403f4c6097ad9de7b4570e946e14b006cb3e38f6740",
+      "afterSha256": "609e41a4de2dace9c6d8876085de739fe97e552df383d05b8c02e9ebe0dec363",
+      "bytes": 378038,
+      "currentSha256": "42a136fb4ec53fac21fc3403f4c6097ad9de7b4570e946e14b006cb3e38f6740",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-uncommon-male-native.json",
+      "beforeSha256": "f2b34cacb8600cf7e2efc2060730c6ca1e8ed08447461084335d7f7dbd8fab4a",
+      "afterSha256": "fd99ad768c463789eedd2715610b57ec37b2c8a460d35deabcabac3ec6e81383",
+      "bytes": 8799,
+      "currentSha256": "f2b34cacb8600cf7e2efc2060730c6ca1e8ed08447461084335d7f7dbd8fab4a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-uncommon-female.vectorcraft",
+      "beforeSha256": "3a840bb0e3144a68d499ce72459f3d0b1417c7b1b93f76b7537ccdc7e636b457",
+      "afterSha256": "7e4951bc2007bca0f01ad13c8903748653c728ef90e24c7d189699c196f16733",
+      "bytes": 377257,
+      "currentSha256": "3a840bb0e3144a68d499ce72459f3d0b1417c7b1b93f76b7537ccdc7e636b457",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-uncommon-female-native.json",
+      "beforeSha256": "a5dec41628b9c73c3326341257fb56aeb8f75b9278633c5d6ee6866250d114e6",
+      "afterSha256": "768d423d001530f645876a0a1f380f4729bc855259435841084e61b3fc985a7a",
+      "bytes": 8813,
+      "currentSha256": "a5dec41628b9c73c3326341257fb56aeb8f75b9278633c5d6ee6866250d114e6",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-rare-male.vectorcraft",
+      "beforeSha256": "9ff009a6b31267f8e1257e8f2a9d2fe9d366f2244d0d889537408956d3557f8c",
+      "afterSha256": "1d501c33fe85b387ed68fe6b5fa9c4601bef0e5e68ce2e240985ecc02dd730d6",
+      "bytes": 346186,
+      "currentSha256": "9ff009a6b31267f8e1257e8f2a9d2fe9d366f2244d0d889537408956d3557f8c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-rare-male-native.json",
+      "beforeSha256": "29ddceda79844eeb42801c7362b2c5982dd16bfee946ee765a079f22c8a59b95",
+      "afterSha256": "08ad303ade19c306740eb1c923973d90b4a4c4a427c1bc182bf181b8ff941cff",
+      "bytes": 8781,
+      "currentSha256": "29ddceda79844eeb42801c7362b2c5982dd16bfee946ee765a079f22c8a59b95",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-rare-female.vectorcraft",
+      "beforeSha256": "ad2f9ed0528050b2c029b435e82d740d5d2806d9261e9cc2c7a3b9c3a300662e",
+      "afterSha256": "9ad9b2a738a75cb3e8f5785635faf430fa8d3367401bcba77c31f9b466c46704",
+      "bytes": 346073,
+      "currentSha256": "ad2f9ed0528050b2c029b435e82d740d5d2806d9261e9cc2c7a3b9c3a300662e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-rare-female-native.json",
+      "beforeSha256": "13c050b51b22ae5fd46f7a356bffe6437c28d5527bbd63a0203a8c3fe57c5e87",
+      "afterSha256": "4a933467000bbb6b3e5d16932b0848ba5f59197a03ad6b74ad0fbf47763cbc08",
+      "bytes": 8793,
+      "currentSha256": "13c050b51b22ae5fd46f7a356bffe6437c28d5527bbd63a0203a8c3fe57c5e87",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-epic-male.vectorcraft",
+      "beforeSha256": "cfd3babf704dbb3798ec4da8bb0ef82b2424bdd81a90abb7c37fd51bb316866f",
+      "afterSha256": "ef39eff99d45a1764bd37b4883f6825bfa8e66f686d63bc0759e350ed07459c6",
+      "bytes": 362685,
+      "currentSha256": "cfd3babf704dbb3798ec4da8bb0ef82b2424bdd81a90abb7c37fd51bb316866f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-epic-male-native.json",
+      "beforeSha256": "9c771ef55e135e2da6ff0f065def2dc5a1166d5a2900d131bc9a860711468a21",
+      "afterSha256": "6182db874f40181b5f59c3467155a4544e8407fbc7f289f0fd5665a98114697d",
+      "bytes": 8819,
+      "currentSha256": "9c771ef55e135e2da6ff0f065def2dc5a1166d5a2900d131bc9a860711468a21",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/pytheas-epic-female.vectorcraft",
+      "beforeSha256": "1e76a44c538a32451067759f7e3383d987d3abc785a6fd94de0b1f8504480356",
+      "afterSha256": "c3279b00a83db1529194fac47ae97d7221d906ab4a48b7279a9c3b30be184a8f",
+      "bytes": 362421,
+      "currentSha256": "1e76a44c538a32451067759f7e3383d987d3abc785a6fd94de0b1f8504480356",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/pytheas-epic-female-native.json",
+      "beforeSha256": "6e96f8350b2b23e1d81a06e485f533dbe56d236c1ad2a59d467267103f4ebdd2",
+      "afterSha256": "0d46eea35cc0637f3884f303d2570d7ffd19683384abe6f9166545ef634a697e",
+      "bytes": 8831,
+      "currentSha256": "6e96f8350b2b23e1d81a06e485f533dbe56d236c1ad2a59d467267103f4ebdd2",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-common-male.vectorcraft",
+      "beforeSha256": "bd1d6381a5a8cf483032b421d98c85d2524151314ecce5136f77c041b3ffe2b2",
+      "afterSha256": "9a29bc3935c2d31b5a624deed1858c0561a452bc4bc553aed029dbfd5fed7c45",
+      "bytes": 374733,
+      "currentSha256": "bd1d6381a5a8cf483032b421d98c85d2524151314ecce5136f77c041b3ffe2b2",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-common-male-native.json",
+      "beforeSha256": "e0287cb054fd17877e3bd9ec3fc658ab33008c74ff4de59cd83558bf6627b975",
+      "afterSha256": "f051d4bbdc773d3bb8dcb04f0b1a04a53298510d934d43c7a905ab412cce0218",
+      "bytes": 8802,
+      "currentSha256": "e0287cb054fd17877e3bd9ec3fc658ab33008c74ff4de59cd83558bf6627b975",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-common-female.vectorcraft",
+      "beforeSha256": "7bc198768af6f50704d1b210a212281eb1d654aafd18f8bf142b9739190169a7",
+      "afterSha256": "82dc045fbc709a134211def614471551184b7b786230381e296054013b2c90a2",
+      "bytes": 371631,
+      "currentSha256": "7bc198768af6f50704d1b210a212281eb1d654aafd18f8bf142b9739190169a7",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-common-female-native.json",
+      "beforeSha256": "aadd60012a27b54617421d9e9ce630f992633604ad44b4b0f92f3594751c61c3",
+      "afterSha256": "297c4cb20dab2fba96ed19ceb36b9da80cbc3d93dcee7bca32fe4166abe9395a",
+      "bytes": 8816,
+      "currentSha256": "aadd60012a27b54617421d9e9ce630f992633604ad44b4b0f92f3594751c61c3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-uncommon-male.vectorcraft",
+      "beforeSha256": "ea8ebccf585680602b2fdd94e301774bc4ae5b8c2518046a9a5cf65448851483",
+      "afterSha256": "91fd47e047c98c6a75b2893ecac2e801ae06c0a66768b7d0f3dd5b4646aee6b1",
+      "bytes": 344198,
+      "currentSha256": "ea8ebccf585680602b2fdd94e301774bc4ae5b8c2518046a9a5cf65448851483",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-uncommon-male-native.json",
+      "beforeSha256": "0d7ef7991d4593a4a3025314d9b90c5cfd533af5596259167642e078d2f173ca",
+      "afterSha256": "122c0a4f70125a6714aca1960f946c345cb7fd4a6859e7a7f321b5e8fdaced98",
+      "bytes": 8783,
+      "currentSha256": "0d7ef7991d4593a4a3025314d9b90c5cfd533af5596259167642e078d2f173ca",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-uncommon-female.vectorcraft",
+      "beforeSha256": "09a454ab21b10740493e25fc562f6418fae7fd76e870618b018413ed7b09dae0",
+      "afterSha256": "73008cb62d1317bafd7757146389fbceee85bc7cd3a500a1bb1852df9632e219",
+      "bytes": 344124,
+      "currentSha256": "09a454ab21b10740493e25fc562f6418fae7fd76e870618b018413ed7b09dae0",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-uncommon-female-native.json",
+      "beforeSha256": "7ac16460b5f6f330290166674024b83b658b08302badf8ac015948bab8b0d8bf",
+      "afterSha256": "d65c4c273abbc88b8b25895350643d733fa3e39d67c02e78ff354247a0a6cdb9",
+      "bytes": 8795,
+      "currentSha256": "7ac16460b5f6f330290166674024b83b658b08302badf8ac015948bab8b0d8bf",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-rare-male.vectorcraft",
+      "beforeSha256": "361806334d58b5e1c5756edd7aa82ece08ba32b1d45257c0a088acc8812ed0e4",
+      "afterSha256": "067b7199c224b60e264f06807624e042a4d65e6ac9f1165598341aa216840ac3",
+      "bytes": 354618,
+      "currentSha256": "361806334d58b5e1c5756edd7aa82ece08ba32b1d45257c0a088acc8812ed0e4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-rare-male-native.json",
+      "beforeSha256": "f7f89148e9a006cdee23d1b5e31334a113d836d5fc8341e159981d1c4fef45d7",
+      "afterSha256": "1252033e29991ec786cc181b4467f459ef5caec6a34146d953e64973d04cf4f7",
+      "bytes": 8768,
+      "currentSha256": "f7f89148e9a006cdee23d1b5e31334a113d836d5fc8341e159981d1c4fef45d7",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-rare-female.vectorcraft",
+      "beforeSha256": "6e0fcb8911b058a1dd649300d0c15243185b55af94df3510f1bc273db577c5af",
+      "afterSha256": "3022a4904d8c335b314b964d7378a1b060b9c254dacf6a28cdacd64d7089e0b1",
+      "bytes": 362000,
+      "currentSha256": "6e0fcb8911b058a1dd649300d0c15243185b55af94df3510f1bc273db577c5af",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-rare-female-native.json",
+      "beforeSha256": "a2363ae4a82b01a8f047d23a6701998318c9ceed4bfd3c61f9683e410b21213d",
+      "afterSha256": "63595df3fb47c3fc08586a589ee9a55b4cecbd9df8b4894bcef4ff5029c9ba2e",
+      "bytes": 8780,
+      "currentSha256": "a2363ae4a82b01a8f047d23a6701998318c9ceed4bfd3c61f9683e410b21213d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-epic-male.vectorcraft",
+      "beforeSha256": "c8f96041bf4e44c246a0d364f15c3dfa085de7f56a8114125cac904e380cff8a",
+      "afterSha256": "1c4a4d947f2b16df35c1fee62bbacf69756b804349ba8543defbb18c889ce011",
+      "bytes": 357197,
+      "currentSha256": "c8f96041bf4e44c246a0d364f15c3dfa085de7f56a8114125cac904e380cff8a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-epic-male-native.json",
+      "beforeSha256": "eb9116282fcd3266efe9429877138ce4c41c3a1e5777d3a605c473b0aff09a18",
+      "afterSha256": "26108854fd0aa2125e6d4c6384445ac2f550e0a01b3380958a2c099337d03e1a",
+      "bytes": 8790,
+      "currentSha256": "eb9116282fcd3266efe9429877138ce4c41c3a1e5777d3a605c473b0aff09a18",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/menander-epic-female.vectorcraft",
+      "beforeSha256": "c8daa050e204ebfaeb523c276fdea184550a88f4d3625c9a4a0879669c9273cd",
+      "afterSha256": "41a27cd6efc31c8e9c57876476dde90f1afbd022512eda08a56866dfe1e21d7c",
+      "bytes": 359296,
+      "currentSha256": "c8daa050e204ebfaeb523c276fdea184550a88f4d3625c9a4a0879669c9273cd",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/menander-epic-female-native.json",
+      "beforeSha256": "cb9fdf73b52454cad45980c95ed2d6d9efc21a4e0963f913476e46cc7b2a92cb",
+      "afterSha256": "4e45dda1199b998abdc51ad57e0b0edde2f46998501d04b60ee8710786682cc3",
+      "bytes": 8802,
+      "currentSha256": "cb9fdf73b52454cad45980c95ed2d6d9efc21a4e0963f913476e46cc7b2a92cb",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-common-male.vectorcraft",
+      "beforeSha256": "d6df8729458bda9b3c568eef6d3afa1da62f8c6f714564887d5462c3796186f4",
+      "afterSha256": "e7e691765d81780c1a86913d883e43d59105272ede4c4d1a029d4b995c4ff22f",
+      "bytes": 379242,
+      "currentSha256": "d6df8729458bda9b3c568eef6d3afa1da62f8c6f714564887d5462c3796186f4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-common-male-native.json",
+      "beforeSha256": "8e6cddf10a2a571d27d654a1f6a7ffb2ef700e73447fb42bde8cbbae2050ae06",
+      "afterSha256": "888049d3427f5a29a437100c0d5e7b591477dae922038d8a61b8ab45d2dc3608",
+      "bytes": 8772,
+      "currentSha256": "8e6cddf10a2a571d27d654a1f6a7ffb2ef700e73447fb42bde8cbbae2050ae06",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-common-female.vectorcraft",
+      "beforeSha256": "b11de2c332ea6d9daed29188bf1fa0b1c8c2fd1b78ded4f5a7ff01ea469ba6f6",
+      "afterSha256": "c5ad76a3a5685dfc5f5a797dc983cdebcb5aa74f2a60f8e2a2f26d6360a5853a",
+      "bytes": 379452,
+      "currentSha256": "b11de2c332ea6d9daed29188bf1fa0b1c8c2fd1b78ded4f5a7ff01ea469ba6f6",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-common-female-native.json",
+      "beforeSha256": "7bd637b03e0d67f8edb7b6f8a769da8724d4a611646a843babbef018566924c3",
+      "afterSha256": "6671c1f204a631b5328d38add241e1604c8bd21655694bed38197343baf87c25",
+      "bytes": 8784,
+      "currentSha256": "7bd637b03e0d67f8edb7b6f8a769da8724d4a611646a843babbef018566924c3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-uncommon-male.vectorcraft",
+      "beforeSha256": "2cdd30f164ef77736e051b3875e21bf65a0fda3d3ef32362a87b340782988da3",
+      "afterSha256": "e3cd751ffdba50f596bbbc02e4e9ba5b9f432d6227b7f026f7311ac15794ff39",
+      "bytes": 378966,
+      "currentSha256": "2cdd30f164ef77736e051b3875e21bf65a0fda3d3ef32362a87b340782988da3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-uncommon-male-native.json",
+      "beforeSha256": "088cbede14f397abdd2b59ed11c87065430e3b7c6b108a5665c6143df7fd6144",
+      "afterSha256": "0a4d3bfa021fd8d87c284c907c551e464c74c0bccd493453830cd072f49acad3",
+      "bytes": 8804,
+      "currentSha256": "088cbede14f397abdd2b59ed11c87065430e3b7c6b108a5665c6143df7fd6144",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-uncommon-female.vectorcraft",
+      "beforeSha256": "80c14d13312d50562dd7df2634c1b6422ce4ed81dab82874abb31434c0ff02cc",
+      "afterSha256": "09645ffcca12125ee39c9058cfd72bdab3575924c326391a541428c7f16eb763",
+      "bytes": 377942,
+      "currentSha256": "80c14d13312d50562dd7df2634c1b6422ce4ed81dab82874abb31434c0ff02cc",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-uncommon-female-native.json",
+      "beforeSha256": "e9a96cf96fb121f09052fbc67235d284aec3b5231d8a23a01cdb8865f6c2000f",
+      "afterSha256": "c7a571105beefa66dba0975f695e59c32ef93bcf3ab80f817ba45c190306742e",
+      "bytes": 8816,
+      "currentSha256": "e9a96cf96fb121f09052fbc67235d284aec3b5231d8a23a01cdb8865f6c2000f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-rare-male.vectorcraft",
+      "beforeSha256": "77ccbb51eaae2bfdb20097511c874af8e21d61f02fc0082c0e5d6c83aedfba27",
+      "afterSha256": "1be53d95f7c2e1da2d464855689267074168945e5b4dbc8e87fb67b4fa98304b",
+      "bytes": 377578,
+      "currentSha256": "77ccbb51eaae2bfdb20097511c874af8e21d61f02fc0082c0e5d6c83aedfba27",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-rare-male-native.json",
+      "beforeSha256": "878ee7ca0e2fb88c7c46bef3a3f798c0befda7bf6fcc69031442628a21d07c30",
+      "afterSha256": "ec49f77c9f078f146c5ff2ffb45ab6c4a02e80d325adb99f9923d5f9e2b43b6f",
+      "bytes": 8762,
+      "currentSha256": "878ee7ca0e2fb88c7c46bef3a3f798c0befda7bf6fcc69031442628a21d07c30",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-rare-female.vectorcraft",
+      "beforeSha256": "d703b0d47293c9614694c8a31ba5d4210b313107c6874f13ab64a10f61b096ac",
+      "afterSha256": "2caf4690d32a2a35ac587309a36b9ad74167521da400d372506907fc6d693d2a",
+      "bytes": 369041,
+      "currentSha256": "d703b0d47293c9614694c8a31ba5d4210b313107c6874f13ab64a10f61b096ac",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-native.json",
+      "beforeSha256": "44682cef424092b06ae09bfdab517ef1104709aa352cf980855d30feef4a23e8",
+      "afterSha256": "ad3bc5ed639ab5acb76c68f03f97d77fbb95a11584257fd62c7fa62b948db8a2",
+      "bytes": 8774,
+      "currentSha256": "44682cef424092b06ae09bfdab517ef1104709aa352cf980855d30feef4a23e8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-epic-male.vectorcraft",
+      "beforeSha256": "3adaf060e59134b2ae6dae1f5624c82413c7295da84335e4661f43a1fd43c246",
+      "afterSha256": "a2937aece81a64f04c266ab876f9257accde3c5c7b2db65e6688d1f22b4cdc29",
+      "bytes": 382733,
+      "currentSha256": "3adaf060e59134b2ae6dae1f5624c82413c7295da84335e4661f43a1fd43c246",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-epic-male-native.json",
+      "beforeSha256": "833b5023eccadad109619389c707cb6ca8beee51e041d55fafb2d3840a85fee8",
+      "afterSha256": "5d055cc3e64e2c64987bc20a4195339db955ba77977bba9b41a644eb8d5fdfef",
+      "bytes": 8821,
+      "currentSha256": "833b5023eccadad109619389c707cb6ca8beee51e041d55fafb2d3840a85fee8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/demetrius-epic-female.vectorcraft",
+      "beforeSha256": "675a8ecd8eb91a5ac90d9c680cec986165887665ccd461695ed339fbb5cae4af",
+      "afterSha256": "1a345606da9a32e7b47e7de899e0d6da56f23fd39925f1e4f9246665a358d4cc",
+      "bytes": 377949,
+      "currentSha256": "675a8ecd8eb91a5ac90d9c680cec986165887665ccd461695ed339fbb5cae4af",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/demetrius-epic-female-native.json",
+      "beforeSha256": "b3c09e7cdfb7bbb7e3d34b138ebb7fc49cb010cec8a7080746a4e808703465b4",
+      "afterSha256": "d93ef62376da6a86bebb0706d0e41f67d507d18ae83ff27e1729a2be44ff927a",
+      "bytes": 8833,
+      "currentSha256": "b3c09e7cdfb7bbb7e3d34b138ebb7fc49cb010cec8a7080746a4e808703465b4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-common-male.vectorcraft",
+      "beforeSha256": "deda2bdb5e215eb9faaa01ae61bae7b1c71188aa40f0822222e6fc3528838d06",
+      "afterSha256": "d50499149200e54e60f60c1ca4071bc480153c7f8f21f3de42aad67c879b1de8",
+      "bytes": 383590,
+      "currentSha256": "deda2bdb5e215eb9faaa01ae61bae7b1c71188aa40f0822222e6fc3528838d06",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-common-male-native.json",
+      "beforeSha256": "33c3dedb66ed85e7a30516c17d79244b10990035494e8253228e9ebb615de9ad",
+      "afterSha256": "b7913dba49fede3ea0dbea83b9bca59230f29ccec5725663ec1590e117094afd",
+      "bytes": 8813,
+      "currentSha256": "33c3dedb66ed85e7a30516c17d79244b10990035494e8253228e9ebb615de9ad",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-common-female.vectorcraft",
+      "beforeSha256": "105ebb226862c023f7ca6b2d8a4490d692b4ccef1841bf670e1a0ec91f0d82bd",
+      "afterSha256": "bedc8059760543c27488884d2063a7062311799723e93e169a021ce75d6c9d79",
+      "bytes": 381535,
+      "currentSha256": "105ebb226862c023f7ca6b2d8a4490d692b4ccef1841bf670e1a0ec91f0d82bd",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-common-female-native.json",
+      "beforeSha256": "5cc046ae1c4e0269e76dafb64cab768646cc536da4f71643c1aa5ac94aa4dbd4",
+      "afterSha256": "6affcdbaffe64a310247643fca25313bd085b71068fa75ef01cfdc6c53b117be",
+      "bytes": 8825,
+      "currentSha256": "5cc046ae1c4e0269e76dafb64cab768646cc536da4f71643c1aa5ac94aa4dbd4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-uncommon-male.vectorcraft",
+      "beforeSha256": "628dc5cf3b245ace1b68210cc6e0c995d9507c0d0f36adda175bcb076c332917",
+      "afterSha256": "e1fa05277d66dd3f8012fd146e7278cbfaa061de43fe19847c100eb19efcaaf2",
+      "bytes": 374114,
+      "currentSha256": "628dc5cf3b245ace1b68210cc6e0c995d9507c0d0f36adda175bcb076c332917",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-uncommon-male-native.json",
+      "beforeSha256": "d1bf76d0f6f9ac1dc9adc82709eeb432d8d7ac975bbe3c41cb6ae1b557869402",
+      "afterSha256": "b25c2fd886fad307c21b4bd51e4cc891936f4ed7187ce0abc9df77f73faf3604",
+      "bytes": 8800,
+      "currentSha256": "d1bf76d0f6f9ac1dc9adc82709eeb432d8d7ac975bbe3c41cb6ae1b557869402",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-uncommon-female.vectorcraft",
+      "beforeSha256": "750adef31fb0f68dc6e0d26dabfc5f6d1423b1256a431ecffebfb1e99f75d90f",
+      "afterSha256": "006e7620f9dde5cbdb25292236cdd91d43289da157ab269c2e822d6531ab6ef9",
+      "bytes": 376885,
+      "currentSha256": "750adef31fb0f68dc6e0d26dabfc5f6d1423b1256a431ecffebfb1e99f75d90f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-uncommon-female-native.json",
+      "beforeSha256": "95680b9e7e73e67eba73890246381972cd6334caaf9aecf7f01d0bc4c466e6e6",
+      "afterSha256": "b43f264812b89daf9099aa816d865af8ee15890ecb6f9f149fccd992c61b1d3a",
+      "bytes": 8812,
+      "currentSha256": "95680b9e7e73e67eba73890246381972cd6334caaf9aecf7f01d0bc4c466e6e6",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-rare-male.vectorcraft",
+      "beforeSha256": "68816da95db943f5bd2cfc1b9bae7c4bcef6ea6c162639edd298c3b0fd0d68dd",
+      "afterSha256": "4361fbfbdafa0c30ddb0a1fdf6e79d7cbfba2a10b7b45768ba3551461e5ece55",
+      "bytes": 375823,
+      "currentSha256": "68816da95db943f5bd2cfc1b9bae7c4bcef6ea6c162639edd298c3b0fd0d68dd",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-rare-male-native.json",
+      "beforeSha256": "d4ac5f6c2656889bdd569aa28a472e60ec60b52b2f5bab01a2300b74a3c7ec1a",
+      "afterSha256": "ea1641fb709561811c1aba0a91d81d0739af6ad24fdf73aa482d651f073964fb",
+      "bytes": 8823,
+      "currentSha256": "d4ac5f6c2656889bdd569aa28a472e60ec60b52b2f5bab01a2300b74a3c7ec1a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-rare-female.vectorcraft",
+      "beforeSha256": "c0d984939d001b3a95830404ecd58c0e57e9bffb7d9f54f89896b11e2bc86a91",
+      "afterSha256": "0d9dfc1e50bbe6b5eead9642de2927d4562fe6f6925734ab7e4b3f80bb273b94",
+      "bytes": 375877,
+      "currentSha256": "c0d984939d001b3a95830404ecd58c0e57e9bffb7d9f54f89896b11e2bc86a91",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-rare-female-native.json",
+      "beforeSha256": "cc3562cd4357d775c61ebbd1cbcb791ffcfb2e9d334d23b993a9ffbf8f614fac",
+      "afterSha256": "1b75ebaea36d6f51aed4d5eab02d0312990f0d87f7c6ca9c6d8b4deca4c802a7",
+      "bytes": 8835,
+      "currentSha256": "cc3562cd4357d775c61ebbd1cbcb791ffcfb2e9d334d23b993a9ffbf8f614fac",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-epic-male.vectorcraft",
+      "beforeSha256": "53ca78e6b6aadda4053b5ff8a6ad5c756bef1769c7a62a73de390b0450441319",
+      "afterSha256": "1f249e73c38c921d9cb4df906658439777367b57af0c374dd7bfc8f8e38ad7a7",
+      "bytes": 377989,
+      "currentSha256": "53ca78e6b6aadda4053b5ff8a6ad5c756bef1769c7a62a73de390b0450441319",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-epic-male-native.json",
+      "beforeSha256": "ccfe708c89029c0237efd49ed4579144cf348a663b9e2a6dc9f619b5298af803",
+      "afterSha256": "a3e3500e6ec47334dc8c3bd2a39378f808bdc23aec8dbeacb6353a0be7ceec0f",
+      "bytes": 8821,
+      "currentSha256": "ccfe708c89029c0237efd49ed4579144cf348a663b9e2a6dc9f619b5298af803",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/theophrastus-epic-female.vectorcraft",
+      "beforeSha256": "b0feab262ec8e19afe7ec520ac1ef75a90a67dfd813ac8b4a07a2dcb6cdebe5a",
+      "afterSha256": "8a0c40b13871411be893efc669c2f38051c0f920d959b365bfb3d12352c0f111",
+      "bytes": 376930,
+      "currentSha256": "b0feab262ec8e19afe7ec520ac1ef75a90a67dfd813ac8b4a07a2dcb6cdebe5a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/theophrastus-epic-female-native.json",
+      "beforeSha256": "58d189e55d9d1035683fa193e552b3108d7c5d2a0986698012d2b2a8ee647983",
+      "afterSha256": "f52060a62db584bdc90a2ac655cd9d7d08124f124e3f39db4c897a81c3ef40d8",
+      "bytes": 8833,
+      "currentSha256": "58d189e55d9d1035683fa193e552b3108d7c5d2a0986698012d2b2a8ee647983",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-common-male.vectorcraft",
+      "beforeSha256": "726ad8af97f68ca057249f4896f401373c6bd25bf32fca31dfbd4c38d75fd3da",
+      "afterSha256": "60bb84cf49610d87cb77ffe59626bb67cbe4be4e5de6c02c3a6529068654e25a",
+      "bytes": 365788,
+      "currentSha256": "726ad8af97f68ca057249f4896f401373c6bd25bf32fca31dfbd4c38d75fd3da",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-common-male-native.json",
+      "beforeSha256": "20ef04cffe196e8c9ba619740f591bb51935e0db60f5ff42eb52d87258fa7001",
+      "afterSha256": "df84d5e6d0c1f97b0f534ee73f0073b3f556e1dc17332daa71c2125884297c98",
+      "bytes": 8732,
+      "currentSha256": "20ef04cffe196e8c9ba619740f591bb51935e0db60f5ff42eb52d87258fa7001",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-common-female.vectorcraft",
+      "beforeSha256": "7a54f3e15ff3242a8cacbc3e74f0daa41edf7653d91da7c86dc4295fba94b524",
+      "afterSha256": "7adb6b7d690c48aa4d5d7478c5a4a2ba3a511fd10f77b4b651aaee029f61e8a8",
+      "bytes": 352139,
+      "currentSha256": "7a54f3e15ff3242a8cacbc3e74f0daa41edf7653d91da7c86dc4295fba94b524",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-common-female-native.json",
+      "beforeSha256": "c3ebf1efda58abfcd0217bd6bceb1e18ead0a4a25b63e026463f331a81a9f7ba",
+      "afterSha256": "49a6dd0a9d2154fc4d061df069869b8b98adbb2f1ff62001ac6da85266c9ff3b",
+      "bytes": 8744,
+      "currentSha256": "c3ebf1efda58abfcd0217bd6bceb1e18ead0a4a25b63e026463f331a81a9f7ba",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-uncommon-male.vectorcraft",
+      "beforeSha256": "216451b1d1a848558c817bd6ef6365e0f507a0f8033b0f45f8fcd8ebcc918b8c",
+      "afterSha256": "437dd3e0fc9a3f33ee59336b56615a681af6a356de8c88280f95ed8a80edd495",
+      "bytes": 363773,
+      "currentSha256": "216451b1d1a848558c817bd6ef6365e0f507a0f8033b0f45f8fcd8ebcc918b8c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-uncommon-male-native.json",
+      "beforeSha256": "9d96a6f7b5abd36fefbce9af3cea0a84a6590ac15f3654999f2574aaadf84a15",
+      "afterSha256": "aecfe381ae2afb13e3b7f3c44ea75b9e7e213cdcf5cfeb7a0ae91ff85a1ff16c",
+      "bytes": 8782,
+      "currentSha256": "9d96a6f7b5abd36fefbce9af3cea0a84a6590ac15f3654999f2574aaadf84a15",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-uncommon-female.vectorcraft",
+      "beforeSha256": "ba0786ab65d59b357d16f64ce893607fcad1de9d7e6a2c24bf6ac54fda292993",
+      "afterSha256": "dbe57530e7bf577212746e4827666fd3322824afdb7eeea12d9b363d0c5e7932",
+      "bytes": 358775,
+      "currentSha256": "ba0786ab65d59b357d16f64ce893607fcad1de9d7e6a2c24bf6ac54fda292993",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-uncommon-female-native.json",
+      "beforeSha256": "9161eabffac4db2f8bd228070b495870e054222d05c8cf8ab4a7937ab69fe168",
+      "afterSha256": "96cec269f8e2e8ead6e78bc3d686121ff9d48852ed7ae1ca69f39fff4869ecd7",
+      "bytes": 8794,
+      "currentSha256": "9161eabffac4db2f8bd228070b495870e054222d05c8cf8ab4a7937ab69fe168",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-rare-male.vectorcraft",
+      "beforeSha256": "8e17fe557587b1df3605163f50180ac1b29b272d6f891f70dcb40ddefde068c4",
+      "afterSha256": "6bf967d76f1d2c306e4ddb1fc6354bc1641ae496897911734c739d661c03b7af",
+      "bytes": 352656,
+      "currentSha256": "8e17fe557587b1df3605163f50180ac1b29b272d6f891f70dcb40ddefde068c4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-rare-male-native.json",
+      "beforeSha256": "5e7500503a8e92c586e530d8a3663bcda762eac410a7fa6131d18aed9182813c",
+      "afterSha256": "018759b80d6aef343b05ffc1c1545d5c9abefb3f41f7137cb72be2223af80ea0",
+      "bytes": 8754,
+      "currentSha256": "5e7500503a8e92c586e530d8a3663bcda762eac410a7fa6131d18aed9182813c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-rare-female.vectorcraft",
+      "beforeSha256": "6c8bbee518679bf7828d99bf4a6422743aad455cea6cca6402d77f12e6aed8c6",
+      "afterSha256": "e3725dad987a9065af6c105813b2c629e2fd8e00bffa324aa83b68ea54e8c8ba",
+      "bytes": 355940,
+      "currentSha256": "6c8bbee518679bf7828d99bf4a6422743aad455cea6cca6402d77f12e6aed8c6",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-rare-female-native.json",
+      "beforeSha256": "99b6f6210f7e85c74ec71255b2ff906734e9ef2acbe517e6c745804562f33f53",
+      "afterSha256": "bb3f5bb9e348a354fe584abae5eeb2d0ab625629a0d43a55baf974298ba32943",
+      "bytes": 8766,
+      "currentSha256": "99b6f6210f7e85c74ec71255b2ff906734e9ef2acbe517e6c745804562f33f53",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-epic-male.vectorcraft",
+      "beforeSha256": "00e7bcdc6bd05a9d860b0e33f85475a50128a1af74fc5f63be45a6d03d24aa5f",
+      "afterSha256": "b261290c663b336c0453a5362f2aabdcb523cee71b7422896426fa3d310b46d7",
+      "bytes": 357094,
+      "currentSha256": "00e7bcdc6bd05a9d860b0e33f85475a50128a1af74fc5f63be45a6d03d24aa5f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-epic-male-native.json",
+      "beforeSha256": "2520b563f085913d9e1aeada16c69bc58d0ab8a882177adf803968186e45423e",
+      "afterSha256": "e1567e1e3cba97a77b3205c5aced04c3014baf7c8f801fde299092f9f9d07d3c",
+      "bytes": 8750,
+      "currentSha256": "2520b563f085913d9e1aeada16c69bc58d0ab8a882177adf803968186e45423e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/zeno-epic-female.vectorcraft",
+      "beforeSha256": "1088bd9d47f6e245e2fdcd1ae5465b939172cdd838b437bcee46d1c75dbb1ff4",
+      "afterSha256": "604b4ecfd6b356903b45ff41edf0e9676f9e40f5b95b0744e874a7cc0ce5937a",
+      "bytes": 361880,
+      "currentSha256": "1088bd9d47f6e245e2fdcd1ae5465b939172cdd838b437bcee46d1c75dbb1ff4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/zeno-epic-female-native.json",
+      "beforeSha256": "bba7f3759fb7ed145501bd2f47aabac6cc288e5c67941bc1b7d16447b15d8cb9",
+      "afterSha256": "b571ee88efd42e8e2154c8e20cdf06306e3c70c1601c7b18905ad0d89c24116a",
+      "bytes": 8762,
+      "currentSha256": "bba7f3759fb7ed145501bd2f47aabac6cc288e5c67941bc1b7d16447b15d8cb9",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-common-male.vectorcraft",
+      "beforeSha256": "dcbddd9d6edc65ff09a0d9ec4dd3a70db7ebef96cc76b1bb7a56b0a79a93f4ba",
+      "afterSha256": "bc46f0f0ed992b3820b8efbbb0066a71802479b62f13cae92f0270076cd7c202",
+      "bytes": 382035,
+      "currentSha256": "dcbddd9d6edc65ff09a0d9ec4dd3a70db7ebef96cc76b1bb7a56b0a79a93f4ba",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-common-male-native.json",
+      "beforeSha256": "40283bfeb861fbfc34ab350d9afbc716a5352c1e75811574a645ad515f585885",
+      "afterSha256": "98f22bed9937519247bc2fc0f9b4038d0e1ad3ad819cbab56be5959011cf6659",
+      "bytes": 8806,
+      "currentSha256": "40283bfeb861fbfc34ab350d9afbc716a5352c1e75811574a645ad515f585885",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-common-female.vectorcraft",
+      "beforeSha256": "e51fd2caa6e3c38b9dbe6164c19240b38f8e720a2048521915b22d093c969106",
+      "afterSha256": "635b7168806bd1526e14d78ad16e220b590b6eb8c94e9e973b5e15b0a796b0f6",
+      "bytes": 383265,
+      "currentSha256": "e51fd2caa6e3c38b9dbe6164c19240b38f8e720a2048521915b22d093c969106",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-common-female-native.json",
+      "beforeSha256": "12df0dd1b05a088fd1a65d12bfb25887585ed2a01373ed732d5ad0b2849a3728",
+      "afterSha256": "e27b47c50fc670514930710b138cbab47f67788e1920f05f365e5c4f4aba88d3",
+      "bytes": 8818,
+      "currentSha256": "12df0dd1b05a088fd1a65d12bfb25887585ed2a01373ed732d5ad0b2849a3728",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-uncommon-male.vectorcraft",
+      "beforeSha256": "2552559ac71f8c32155e55932dccf5e4473550ac9051d3f9c3fc7486a2dd3b29",
+      "afterSha256": "c5076aa9510a554ad96cb6b8151b44e0a76fbb16cee8640a0ac0c5062f869fd2",
+      "bytes": 375720,
+      "currentSha256": "2552559ac71f8c32155e55932dccf5e4473550ac9051d3f9c3fc7486a2dd3b29",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-uncommon-male-native.json",
+      "beforeSha256": "3be4c5feaf720bd3c3d70e75e6a34752c9ec9301e7881b4bcbd8385f10c4f9c4",
+      "afterSha256": "9d49aaa33da6d0c5f0580bf613b6a2f3bd044c559e6e6f15ae56e8de21898421",
+      "bytes": 8797,
+      "currentSha256": "3be4c5feaf720bd3c3d70e75e6a34752c9ec9301e7881b4bcbd8385f10c4f9c4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-uncommon-female.vectorcraft",
+      "beforeSha256": "e9aaeb98d8d4a006f8379701ac91fcced4258e9347915d71de9f9458c9e279bb",
+      "afterSha256": "92cad62e9088bfe201dedda692dda1a063ed4f425a2bef9277e5d7f75ca18066",
+      "bytes": 377018,
+      "currentSha256": "e9aaeb98d8d4a006f8379701ac91fcced4258e9347915d71de9f9458c9e279bb",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-uncommon-female-native.json",
+      "beforeSha256": "45441d5510683cb31b1ced2b618172331d0f1052472cdb5ceb2d6581470a507e",
+      "afterSha256": "7d8d8148c19630ffd09bbc6199c551b9b4e1c3794aaf143366f00cd110341314",
+      "bytes": 8809,
+      "currentSha256": "45441d5510683cb31b1ced2b618172331d0f1052472cdb5ceb2d6581470a507e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-rare-male.vectorcraft",
+      "beforeSha256": "f025a97dcfeed44929ea0ea9f803249f21325a0c9a82023c11c37d7e19a43d77",
+      "afterSha256": "dd665fd22617f26bfea7d73d8f5bb5bc024e64a8e368de76686e065d0536fb78",
+      "bytes": 382442,
+      "currentSha256": "f025a97dcfeed44929ea0ea9f803249f21325a0c9a82023c11c37d7e19a43d77",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-native.json",
+      "beforeSha256": "ac066affdcd688ab0505a339e4dd0a44dd778ca9da2d02620751ad641f082031",
+      "afterSha256": "2db8209db03bd08ac5ab76d92613dbf68c4d74d419570b82cfe5de0cade08c3d",
+      "bytes": 8776,
+      "currentSha256": "ac066affdcd688ab0505a339e4dd0a44dd778ca9da2d02620751ad641f082031",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-rare-female.vectorcraft",
+      "beforeSha256": "03aba21c471061453a833752e5d850864a56edf334a952b40f1bef9c09146cf5",
+      "afterSha256": "5c62f0bd807cb1244589ae36e0c53f0672c48d26f0ea69b69239fc5727dfa024",
+      "bytes": 380868,
+      "currentSha256": "03aba21c471061453a833752e5d850864a56edf334a952b40f1bef9c09146cf5",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-native.json",
+      "beforeSha256": "02e0a3af830c205807793860830769114a39cffa219cd0b1e58eb4c246794a64",
+      "afterSha256": "d775e38d6fcdf613de55ef782d941bf5c1ef279f29b93464404b214d2f5c23e6",
+      "bytes": 8788,
+      "currentSha256": "02e0a3af830c205807793860830769114a39cffa219cd0b1e58eb4c246794a64",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-epic-male.vectorcraft",
+      "beforeSha256": "9c5020298057267af4a198be3f59af44af14970b64f924176d28d5260ee47ded",
+      "afterSha256": "02578be091380f4f8b94150f56d775f15a04f483440337cdd500670ca804a886",
+      "bytes": 383462,
+      "currentSha256": "9c5020298057267af4a198be3f59af44af14970b64f924176d28d5260ee47ded",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-epic-male-native.json",
+      "beforeSha256": "186261f0ef5f4d632f11740d270201d389961f996edd014b4e665d0febd7433a",
+      "afterSha256": "4ceb6e9732a71839cb9a5c06d96095d09f1f23f18a7e5afc112013177be2c465",
+      "bytes": 8799,
+      "currentSha256": "186261f0ef5f4d632f11740d270201d389961f996edd014b4e665d0febd7433a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/ptolemy-epic-female.vectorcraft",
+      "beforeSha256": "406a70670a0f6bff88ed47086bb96e20520ba61f5a6c50438623605f7ab6a949",
+      "afterSha256": "a10e2571e6824aa899c2acc9dab467b4eb672322179bc379f2e26ff30859eae1",
+      "bytes": 379207,
+      "currentSha256": "406a70670a0f6bff88ed47086bb96e20520ba61f5a6c50438623605f7ab6a949",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/ptolemy-epic-female-native.json",
+      "beforeSha256": "2e63db8bc9515b3247157fca07a0a543acd4e94d4dd93ebdcf89962e051e8830",
+      "afterSha256": "bae74f8d51501d2e5e9c6e518996ed1d2953865a20ed4002aae28e7fdbdfa0f2",
+      "bytes": 8811,
+      "currentSha256": "2e63db8bc9515b3247157fca07a0a543acd4e94d4dd93ebdcf89962e051e8830",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-common-male.vectorcraft",
+      "beforeSha256": "9132eab3d18958bf47ead5aff621a5e47d44d573bd5b1904a02b68098d34e7c4",
+      "afterSha256": "ad535d13b32943e4f67d7ad9361c4dc314a12e789cf99b8a1bd0b8a6d5395e1d",
+      "bytes": 372108,
+      "currentSha256": "9132eab3d18958bf47ead5aff621a5e47d44d573bd5b1904a02b68098d34e7c4",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-common-male-native.json",
+      "beforeSha256": "f6a2bb8e1dd7fdac1973814bca2b40ef993950b1bc6b7a958912fc268f7cd95a",
+      "afterSha256": "0178fb2a88286113e232126fb5511eb073221b2581dd9b59861214adecb7992b",
+      "bytes": 8795,
+      "currentSha256": "f6a2bb8e1dd7fdac1973814bca2b40ef993950b1bc6b7a958912fc268f7cd95a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-common-female.vectorcraft",
+      "beforeSha256": "acaf2e6ecc622bc11422793ee6b3e2fa7da20e835490f951ba79c7d40559288a",
+      "afterSha256": "20edbd4e0216af3aae76ec515bccb6cf84c5fd9e7aa1d982a1e03fc6c0b42d11",
+      "bytes": 369920,
+      "currentSha256": "acaf2e6ecc622bc11422793ee6b3e2fa7da20e835490f951ba79c7d40559288a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-common-female-native.json",
+      "beforeSha256": "bd4856ca3c8bba3237c121802d6b4730a8fc921487c45671b2a106854994108a",
+      "afterSha256": "d191dc69bf1954d04cde31da58f1529b8424ee1b716a061b5df2d4f08e0d10db",
+      "bytes": 8807,
+      "currentSha256": "bd4856ca3c8bba3237c121802d6b4730a8fc921487c45671b2a106854994108a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-uncommon-male.vectorcraft",
+      "beforeSha256": "53d5e10ba41d04b4c201e92846ac41b2024d37141883b373560c199867fd4b9e",
+      "afterSha256": "7e37c46d8eb158927f33267a10d0f7f89d9dbb092a0ff9d05c2cfd20656a512b",
+      "bytes": 353537,
+      "currentSha256": "53d5e10ba41d04b4c201e92846ac41b2024d37141883b373560c199867fd4b9e",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-uncommon-male-native.json",
+      "beforeSha256": "3933a8db790c4dfad36ec23a9f0f51d91544c55a1aa372577af1983c74e2d2de",
+      "afterSha256": "9e1c706b53b5932ff5e686046f2a4a63834fa56895ead61ef9e2b07f50516c08",
+      "bytes": 8814,
+      "currentSha256": "3933a8db790c4dfad36ec23a9f0f51d91544c55a1aa372577af1983c74e2d2de",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-uncommon-female.vectorcraft",
+      "beforeSha256": "abd462d643e50abe678be078c54ef92f24dd4d73aef930990343ca4898b76f11",
+      "afterSha256": "11471ea38ddbead3c6cff1e365f793696dd91313bbde469c1450d1aa22bb239f",
+      "bytes": 347306,
+      "currentSha256": "abd462d643e50abe678be078c54ef92f24dd4d73aef930990343ca4898b76f11",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-uncommon-female-native.json",
+      "beforeSha256": "2408acf622201857b7985182e51fdbe05f82baa82b0dfc0955086822c3b0b220",
+      "afterSha256": "d0255ff0dc260cbfaf0057c6fe2a1cd229c351d3c0c0fe2aed312a34e2380955",
+      "bytes": 8826,
+      "currentSha256": "2408acf622201857b7985182e51fdbe05f82baa82b0dfc0955086822c3b0b220",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-rare-male.vectorcraft",
+      "beforeSha256": "6d5afc7d25988d4f2cc6802b3619e77f046263428dc46d5881192b4288e3e5ea",
+      "afterSha256": "340b55202f2b1f31c9680e088d03b7b8f81d0301cfbf38a89fd81fa2261ff550",
+      "bytes": 354386,
+      "currentSha256": "6d5afc7d25988d4f2cc6802b3619e77f046263428dc46d5881192b4288e3e5ea",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-rare-male-native.json",
+      "beforeSha256": "1f3f2a8b5b018287122056a9281ffd48b0b742120c73138c7fb2198196e6d640",
+      "afterSha256": "51c3cffc81da634d6ef4330f0427fb0c80dda3e32365e8d4594fa38be54897a4",
+      "bytes": 8805,
+      "currentSha256": "1f3f2a8b5b018287122056a9281ffd48b0b742120c73138c7fb2198196e6d640",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-rare-female.vectorcraft",
+      "beforeSha256": "abebbb1f2b152862fa38e95d363750dea938f9cecdf77bfc4425abc56e967511",
+      "afterSha256": "37e21739dd536815939813a1b51fab2d732103899bf06e1d3d77d0e48dfce6f3",
+      "bytes": 353911,
+      "currentSha256": "abebbb1f2b152862fa38e95d363750dea938f9cecdf77bfc4425abc56e967511",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-rare-female-native.json",
+      "beforeSha256": "09c4071214373542d8f41a050d3af1dfd2e0f89cdca1cf2e9b92db7717c13f91",
+      "afterSha256": "9f9eee99178c30bd53d3a5c66fd3e3958f2f137ce9b004eef8e56565eff387d0",
+      "bytes": 8817,
+      "currentSha256": "09c4071214373542d8f41a050d3af1dfd2e0f89cdca1cf2e9b92db7717c13f91",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-epic-male.vectorcraft",
+      "beforeSha256": "356c462f13d6c78b87ba67773f45e12230084cd468ab628711c6f73b1c79ef09",
+      "afterSha256": "6a5503108d8f35d2762a7ac3123536f2001d6e153e5a95d2b8db0b4e89a55ad5",
+      "bytes": 354379,
+      "currentSha256": "356c462f13d6c78b87ba67773f45e12230084cd468ab628711c6f73b1c79ef09",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-epic-male-native.json",
+      "beforeSha256": "2e0934b24ac638790e9a6c42398f04ec6832d6bc13a1dc5c6ddf9acca7e1d533",
+      "afterSha256": "3663bda7f7cb034b97e80f34e219d9e39ad8a0b9dc1f11936ae3bad1bee623a8",
+      "bytes": 8824,
+      "currentSha256": "2e0934b24ac638790e9a6c42398f04ec6832d6bc13a1dc5c6ddf9acca7e1d533",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/cleomenes-epic-female.vectorcraft",
+      "beforeSha256": "87d0e63f7dff37f0df1e2ce8e74dece82a26d7121bfffebeb2c0dce8b7d44047",
+      "afterSha256": "798d4c24e01efbc3c793e95ceecdef9d189331fd8ee57c2d7380fe7c25479725",
+      "bytes": 356535,
+      "currentSha256": "87d0e63f7dff37f0df1e2ce8e74dece82a26d7121bfffebeb2c0dce8b7d44047",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/cleomenes-epic-female-native.json",
+      "beforeSha256": "e5d6927ab04fd8462d68302681bbf3b14720fe20ad3c86ea6289651800a00f45",
+      "afterSha256": "bf134da83cfacf94d0d46734cd3295167f24ad31637f0b517f9d038727570833",
+      "bytes": 8836,
+      "currentSha256": "e5d6927ab04fd8462d68302681bbf3b14720fe20ad3c86ea6289651800a00f45",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-common-male.vectorcraft",
+      "beforeSha256": "6feb191e4129d69ec3efbea325febaedcae694a70f15467834f9429608127af7",
+      "afterSha256": "59a395c4e0a89159f6712245df9beb22ef36bd52869c828a73ab267d0b2a176d",
+      "bytes": 376490,
+      "currentSha256": "6feb191e4129d69ec3efbea325febaedcae694a70f15467834f9429608127af7",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-common-male-native.json",
+      "beforeSha256": "ffa3c73a49f2d3feaf4bb0b0de7bb4a895fb047071849e9d114457803363e300",
+      "afterSha256": "39eb29cd31fce7702e98bdd1ea773839717c6f735afec8338bd451780b5e9b84",
+      "bytes": 8746,
+      "currentSha256": "ffa3c73a49f2d3feaf4bb0b0de7bb4a895fb047071849e9d114457803363e300",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-common-female.vectorcraft",
+      "beforeSha256": "128bc8a59321943e2fa45d399ade7fbc3f812dd262fb145493fef7208d7ad4fc",
+      "afterSha256": "fa4a25b2e2eb2ec64f0136fd66b9f1f60d52b7abe17fafaae41af51ccae0bb2c",
+      "bytes": 380764,
+      "currentSha256": "128bc8a59321943e2fa45d399ade7fbc3f812dd262fb145493fef7208d7ad4fc",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-common-female-native.json",
+      "beforeSha256": "d89996383db4762004fe3f8619175d627c886e60bdd05c401f0a80899b827541",
+      "afterSha256": "1d2d41e5889ba3cc897b55cd9bcafabc08ccb2856f5581cdf22b17e924be498e",
+      "bytes": 8758,
+      "currentSha256": "d89996383db4762004fe3f8619175d627c886e60bdd05c401f0a80899b827541",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-uncommon-male.vectorcraft",
+      "beforeSha256": "1890e803fa07a807257f6a70bebe1de6a3772f414f76874eac67b98d5438a58c",
+      "afterSha256": "f9ee62306dd7e242021a077d7e8f73edc11b8a38ff87c723a31440612a81fc1a",
+      "bytes": 379070,
+      "currentSha256": "1890e803fa07a807257f6a70bebe1de6a3772f414f76874eac67b98d5438a58c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-uncommon-male-native.json",
+      "beforeSha256": "6a418693a83f214cb20706dc1a8bad05a4b2e7dd035bfa86cc83bebb275d5bc8",
+      "afterSha256": "0fa081c3e912ee1cc0a95ecdbb3b999d2422e403a7a9e0e26fc36bafb7e68e6a",
+      "bytes": 8780,
+      "currentSha256": "6a418693a83f214cb20706dc1a8bad05a4b2e7dd035bfa86cc83bebb275d5bc8",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-uncommon-female.vectorcraft",
+      "beforeSha256": "7d91cb31dd6715d3a2f58e3e442f6a536bf1e3f34dc8f25e14bbb1635de28678",
+      "afterSha256": "3328fb33809996f8de808e923297f0b30b499216c23e4fad479f64419421acaa",
+      "bytes": 373082,
+      "currentSha256": "7d91cb31dd6715d3a2f58e3e442f6a536bf1e3f34dc8f25e14bbb1635de28678",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-uncommon-female-native.json",
+      "beforeSha256": "c7710719d5e5e2d5a379fe94913e2190cdb982dfd7f7f0f158cfcea6290c0e61",
+      "afterSha256": "c379ae3b701c08ef4c1e5392b0bef6ae5604f03a349d806f734be82c6a460158",
+      "bytes": 8792,
+      "currentSha256": "c7710719d5e5e2d5a379fe94913e2190cdb982dfd7f7f0f158cfcea6290c0e61",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-rare-male.vectorcraft",
+      "beforeSha256": "6b9088c466c955d8be6093f01d163e744ecda75538b862e2c9fd6d2d3480606f",
+      "afterSha256": "51b9aed7529dcb9ff3f42ae65ce8bbe57727b18682dc7499a0bb6efaba6ab255",
+      "bytes": 377831,
+      "currentSha256": "6b9088c466c955d8be6093f01d163e744ecda75538b862e2c9fd6d2d3480606f",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-rare-male-native.json",
+      "beforeSha256": "233a49d93e4e0097c58de97ec151eac4c1415bf57b8bdee5135caba16aa22def",
+      "afterSha256": "342720e1ac8ef6f0193de67b3460dc5f3d975fcfd3cf4883087a3a5a610a3e2d",
+      "bytes": 8823,
+      "currentSha256": "233a49d93e4e0097c58de97ec151eac4c1415bf57b8bdee5135caba16aa22def",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-rare-female.vectorcraft",
+      "beforeSha256": "0335dc73646533398c4668967a6348ab821ec60818073b0d3a0105e93f71b371",
+      "afterSha256": "4a64b882052d95a7f2687eb452ba6f914bff2281f98852487f05e8302430781a",
+      "bytes": 384252,
+      "currentSha256": "0335dc73646533398c4668967a6348ab821ec60818073b0d3a0105e93f71b371",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-rare-female-native.json",
+      "beforeSha256": "9a16ef525511997dee5300c5ac841b50d9fd1f823d126b47656039ae579f4313",
+      "afterSha256": "a023b0850fa980015a0c9dc9350d1bee8078d3c26afa020b0c5775fa1e4ad9c8",
+      "bytes": 8835,
+      "currentSha256": "9a16ef525511997dee5300c5ac841b50d9fd1f823d126b47656039ae579f4313",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-epic-male.vectorcraft",
+      "beforeSha256": "afe527f030fc6b181357ff6adb887dd2cc6f132bb927e71fe7c3325fc786ef44",
+      "afterSha256": "8aa0556048a60164d78151795f1d1389698b84e91965b691902bfc04cd7ae96a",
+      "bytes": 377790,
+      "currentSha256": "afe527f030fc6b181357ff6adb887dd2cc6f132bb927e71fe7c3325fc786ef44",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-epic-male-native.json",
+      "beforeSha256": "15b04d74bd6ea2d0530292194066054a05ec2302040bb92166d6a06dd3bf3450",
+      "afterSha256": "e34f00fb50e17b846da9220ba8a47463e41eccec3bda96164be5b5d4703980ca",
+      "bytes": 8804,
+      "currentSha256": "15b04d74bd6ea2d0530292194066054a05ec2302040bb92166d6a06dd3bf3450",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/nearchus-epic-female.vectorcraft",
+      "beforeSha256": "0206daf4a0c2578ebd97c791b0c40086847b5754de804134931407afe55b3ad7",
+      "afterSha256": "e4557d0136119f2d90d115ccfad981088ddad5f6c200e445b7244ff98675cdd5",
+      "bytes": 376473,
+      "currentSha256": "0206daf4a0c2578ebd97c791b0c40086847b5754de804134931407afe55b3ad7",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/nearchus-epic-female-native.json",
+      "beforeSha256": "12e81c745b7785cb8adb8bd65c30bcccbd3d356f77aacb4f57b8e0447739ba8d",
+      "afterSha256": "8698dd6041595f41715c6627da2060874ddcb6ce59ac4796e38f625069678e1e",
+      "bytes": 8816,
+      "currentSha256": "12e81c745b7785cb8adb8bd65c30bcccbd3d356f77aacb4f57b8e0447739ba8d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-common-male.vectorcraft",
+      "beforeSha256": "cb4616e9913d5af8a56e7a62e2cb6087014fe4eea37d33d2a1b65d39412fb9a3",
+      "afterSha256": "c39393830d1dcd73d2fd4be1ccf77ec0eb614fec33118db4a19d94b7e2ab7fd2",
+      "bytes": 365898,
+      "currentSha256": "cb4616e9913d5af8a56e7a62e2cb6087014fe4eea37d33d2a1b65d39412fb9a3",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-common-male-native.json",
+      "beforeSha256": "a05a9588b981014c6bf2832b9d1620c6384483dc15f3259007f15bd63a2ceb9a",
+      "afterSha256": "ff06ce61ebf43a545147d8a33ba4956e0e19f0aaff027736fbb6b103f7b84279",
+      "bytes": 8764,
+      "currentSha256": "a05a9588b981014c6bf2832b9d1620c6384483dc15f3259007f15bd63a2ceb9a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-common-female.vectorcraft",
+      "beforeSha256": "023685e504445008d0661f01879bd1fed5f232f0003dca677d0127ccaa5b8c86",
+      "afterSha256": "3860a622721b5cecb19c8968fdf108d6c5fb5d5a58b34342a5578859cf0c1a0f",
+      "bytes": 365165,
+      "currentSha256": "023685e504445008d0661f01879bd1fed5f232f0003dca677d0127ccaa5b8c86",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-common-female-native.json",
+      "beforeSha256": "29e220b6c239b23727e00b0d4c7b56db5e099200de54569e1cd35e2e2ba29671",
+      "afterSha256": "86cb2a7da0a51ed3a1a8dadd7daa65bd45ce47fe4091cecc2b592a05a0666dfd",
+      "bytes": 8776,
+      "currentSha256": "29e220b6c239b23727e00b0d4c7b56db5e099200de54569e1cd35e2e2ba29671",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-uncommon-male.vectorcraft",
+      "beforeSha256": "1d413093685b28e055dfe4b86d8c6fa9898d99d4516b78409826e84590eaada1",
+      "afterSha256": "f4f10881342e60afcffe7b0c684c83505b59c6a1b8d2b70f020ac0f2a3a0da7a",
+      "bytes": 365966,
+      "currentSha256": "1d413093685b28e055dfe4b86d8c6fa9898d99d4516b78409826e84590eaada1",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-uncommon-male-native.json",
+      "beforeSha256": "333ad30a43a0ffa551be9c666508b9f0b651083a2aa10868509fa3d873e7d663",
+      "afterSha256": "94f03ca0af1cef5c11373eaf2ce941b9ff5a508a26e380b874bbdcb513952638",
+      "bytes": 8802,
+      "currentSha256": "333ad30a43a0ffa551be9c666508b9f0b651083a2aa10868509fa3d873e7d663",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-uncommon-female.vectorcraft",
+      "beforeSha256": "f4847544499d1d6cbf211a28ab781b4616d1805cc62c814d6b593a68afaaa78b",
+      "afterSha256": "1dc972cf6f34750e0192b1e53dc55210116e1cad5653f2399b3b721c16e6cbfd",
+      "bytes": 368161,
+      "currentSha256": "f4847544499d1d6cbf211a28ab781b4616d1805cc62c814d6b593a68afaaa78b",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-uncommon-female-native.json",
+      "beforeSha256": "5073d5c0f858b079247b557899c41caf661fee4173001d494a6a6a102a140b6c",
+      "afterSha256": "f815dcafa87fdfb2a628eb404357ad5803b6710162c1f81991bb5098c310c210",
+      "bytes": 8814,
+      "currentSha256": "5073d5c0f858b079247b557899c41caf661fee4173001d494a6a6a102a140b6c",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-rare-male.vectorcraft",
+      "beforeSha256": "a03bead749154be90207d08293bb22f2fcf4fb1e1257a5b22f7ee68cabb30aba",
+      "afterSha256": "6ff92feedbfa91483b7c05f56b799ce48997b63a533859e72bc2dd05a5bc7dd2",
+      "bytes": 375131,
+      "currentSha256": "a03bead749154be90207d08293bb22f2fcf4fb1e1257a5b22f7ee68cabb30aba",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-native.json",
+      "beforeSha256": "3dd4c2c1ff2b8a46a39b43769ab584c7be231a4506f712f628260e592845344d",
+      "afterSha256": "3401b00cc27cd47acff7bb792d217ada72ba70db90e65b51e2c02986a654ab1d",
+      "bytes": 8771,
+      "currentSha256": "3dd4c2c1ff2b8a46a39b43769ab584c7be231a4506f712f628260e592845344d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-rare-female.vectorcraft",
+      "beforeSha256": "26231f5283b6858392e3d2dc2b427e2841a244644132a912972d2b81bdc5db20",
+      "afterSha256": "2dd9e0b0f66e4880274647ea613263c83476ee1b1b3dfa5ed324811241038d3b",
+      "bytes": 372908,
+      "currentSha256": "26231f5283b6858392e3d2dc2b427e2841a244644132a912972d2b81bdc5db20",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-native.json",
+      "beforeSha256": "78f8aa86a02a86c7258fcefdcde3ac8d18b4f3899057b8104c667c27c1128c01",
+      "afterSha256": "3698fb0230fdd0eaa149560d8549d00a05324e4fe4b6b27db58f806abea98545",
+      "bytes": 8783,
+      "currentSha256": "78f8aa86a02a86c7258fcefdcde3ac8d18b4f3899057b8104c667c27c1128c01",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-epic-male.vectorcraft",
+      "beforeSha256": "eb2b2ad3bc8f8f610ac0e9226d37bce94a0d5a7d407fb8e024ca6e64df0b20ca",
+      "afterSha256": "18e629ad74d8d72ef1f8f4c97fba5ac71c628a11de6becfa7ab0c25da69a9a9f",
+      "bytes": 369894,
+      "currentSha256": "eb2b2ad3bc8f8f610ac0e9226d37bce94a0d5a7d407fb8e024ca6e64df0b20ca",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-epic-male-native.json",
+      "beforeSha256": "04216a409523e7b5b2d0ab300675c8b2527964103d679405d3805abd1164c5e7",
+      "afterSha256": "d9847bf983bdb56a19952f81ebaf0312379fdca796438e72e385fb67c7a75395",
+      "bytes": 8789,
+      "currentSha256": "04216a409523e7b5b2d0ab300675c8b2527964103d679405d3805abd1164c5e7",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/masters/eumenes-epic-female.vectorcraft",
+      "beforeSha256": "d7350be0b415128e5d47010816bcf8f9bb95f4f533d4fa7ca75682093eaa522a",
+      "afterSha256": "4061c233a995571c61d9d87dac53768450b153037b8c84bec8e40e976d6faffc",
+      "bytes": 366582,
+      "currentSha256": "d7350be0b415128e5d47010816bcf8f9bb95f4f533d4fa7ca75682093eaa522a",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/framed-collection-v14/qa/eumenes-epic-female-native.json",
+      "beforeSha256": "e9fd5c2516ded67a71127c3a838d53ce3dc752ccc3d67ef2ee4cba753d3ec54d",
+      "afterSha256": "d1fe67af2facefc3d4df31c57f32b926eab016364e422bf80ce1b5b8fcbe0c36",
+      "bytes": 8801,
+      "currentSha256": "e9fd5c2516ded67a71127c3a838d53ce3dc752ccc3d67ef2ee4cba753d3ec54d",
+      "unchanged": false
+    },
+    {
+      "path": "artwork/cards/subtitle-spacing-v1/qa/native/report.json",
+      "beforeSha256": null,
+      "afterSha256": "019843e1d834851331d42c1bd474189abce8802fe99e8932d38a35bfa821a742",
+      "bytes": 99859,
+      "currentSha256": null,
+      "unchanged": false
+    }
+  ]
+}

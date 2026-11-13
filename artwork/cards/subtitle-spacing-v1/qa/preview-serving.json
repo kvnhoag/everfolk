@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "baseUrl": "http://localhost:5173",
+  "assets": [
+    {
+      "id": "alexander-common-male",
+      "src": "/assets/cards/collection-v14/alexander-common-male-footerless.webp",
+      "sha256": "606f5d777d1caaa224bd71ce16aa5db39819b6402d9e3650e958c399e62c2210",
+      "bytes": 222402
+    },
+    {
+      "id": "alexander-epic-male",
+      "src": "/assets/cards/subtitle-spacing-v1/alexander-epic-male-footerless.webp",
+      "sha256": "041590e6aed88b32a44176a96f8109072160a1e18e0fb4233911f4bf75856a31",
+      "bytes": 249674
+    },
+    {
+      "id": "demetrius-rare-male",
+      "src": "/assets/cards/subtitle-spacing-v1/demetrius-rare-male-footerless.webp",
+      "sha256": "cb3510db97acf876056804c606fd7b29fae6f91d00b7728714f5db229ae092c1",
+      "bytes": 243904
+    }
+  ]
+}

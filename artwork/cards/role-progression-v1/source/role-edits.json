@@ -1,0 +1,55 @@
+{
+  "id": "everfolk-role-progression-v1",
+  "scope": "Editorial collection roles and depictions; recorded gameplay worlds and unlock logic are retained.",
+  "roles": [
+    {
+      "figureId": "alexander", "tier": "common", "newArtwork": true,
+      "title": "Campaign Soldier", "displayTitle": "Campaign Soldier",
+      "subtitle": "In the King's Ranks", "bodyTitle": "Discipline in the Line",
+      "bodyText": "A campaign soldier drills with spear and shield, keeps equipment ready, and holds position beside the rest of the unit. Dependable service under orders lays the foundation for the judgment and responsibility of command.",
+      "sceneBrief": "An adult Macedonian campaign soldier practising formation with spear and shield beside fellow soldiers; practical equipment, no messenger dispatch or stores duties."
+    },
+    {
+      "figureId": "alexander", "tier": "uncommon", "newArtwork": true,
+      "title": "Campaign Squad Leader", "displayTitle": "Campaign Squad Leader",
+      "subtitle": "Steadying a Small Command", "bodyTitle": "Orders Into Action",
+      "bodyText": "A campaign squad leader directs a small group of soldiers on the march and in the field. Clear instructions, shared discipline, and care for the unit turn individual service into the first responsibility of command.",
+      "sceneBrief": "An adult small-unit leader gives clear directions to a few equipped Macedonian campaign soldiers; a modest field command, not a granary or provisioner scene."
+    },
+    {
+      "figureId": "pytheas", "tier": "uncommon", "newArtwork": true,
+      "title": "Navigation Assistant", "displayTitle": "Navigation Assistant",
+      "subtitle": "Learning the Northern Route", "bodyTitle": "A Course Made Legible",
+      "bodyText": "A navigation assistant checks bearings, compares coastal landmarks, and records the observations needed to keep an expedition on course. Practical work beside experienced navigators prepares the eye and judgment for independent observation.",
+      "sceneBrief": "An adult navigation assistant works on bearings, coastal landmarks or a voyage record aboard an ancient expedition vessel; no provision-loading task."
+    },
+    {
+      "figureId": "aristotle", "tier": "common", "newArtwork": false,
+      "title": "Lyceum Student", "displayTitle": "Lyceum Student",
+      "subtitle": "First Questions of the Lyceum", "bodyTitle": "Learning Through Inquiry",
+      "bodyText": "A Lyceum student records questions, studies arguments, and checks simple observations with the school. Careful notes and a willingness to test an explanation begin the habits that later support independent research and teaching.",
+      "sceneBrief": "An adult student records questions and simple observations while learning in the Lyceum; introductory inquiry rather than general courier work."
+    },
+    {
+      "figureId": "menander", "tier": "common", "newArtwork": false,
+      "title": "Rehearsal Assistant", "displayTitle": "Rehearsal Assistant",
+      "subtitle": "Learning the Comic Stage", "bodyTitle": "The Scene Takes Shape",
+      "bodyText": "A rehearsal assistant follows scene copies, records cues, and helps the company try a comic exchange in performance. Attention to dialogue and timing gives early practice in the dramatic work that will grow into writing and staging.",
+      "sceneBrief": "An adult rehearsal assistant follows a scene copy and records performance cues beside a New Comedy company."
+    },
+    {
+      "figureId": "ptolemy", "tier": "common", "newArtwork": false,
+      "title": "Court Records Apprentice", "displayTitle": "Court Records Apprentice",
+      "subtitle": "Learning the Court's Accounts", "bodyTitle": "Order Begins in the Record",
+      "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.",
+      "sceneBrief": "An adult court records apprentice carries and checks administrative papers in an early Ptolemaic office."
+    },
+    {
+      "figureId": "cleomenes", "tier": "common", "newArtwork": false,
+      "title": "Granary Tally Assistant", "displayTitle": "Granary Tally Assistant",
+      "subtitle": "Counting Egypt's Grain", "bodyTitle": "The First Checked Measure",
+      "bodyText": "A granary tally assistant counts grain measures, compares receipts, and records stores entering or leaving the granary. A checked tally begins the accounting discipline needed to manage revenue and the supply of a province.",
+      "sceneBrief": "An adult granary tally assistant checks grain measures and receipts while recording stores entering or leaving the granary."
+    }
+  ]
+}

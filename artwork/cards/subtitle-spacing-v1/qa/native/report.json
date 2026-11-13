@@ -1,0 +1,3369 @@
+{
+  "started": "2026-11-13T18:29:39.191Z",
+  "operation": {
+    "titleDy": -10,
+    "subtitleDy": 8,
+    "savePreview": false
+  },
+  "cards": [
+    {
+      "slug": "alexander-common-male",
+      "beforeHash": "eed709560427e5c2485d0ee8c3f92ee4d116cef30a46edc543019809e6f13128",
+      "afterHash": "4d31d98eb7b20ec1d1af4bbedcb237b8385226e916a9939dbcb5d860167d74d9",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 506.56000000000006,
+        "x": 196.72000000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 506.56000000000006,
+        "x": 196.72000000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 236.34033203125,
+        "x": 331.829833984375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 236.34033203125,
+        "x": 331.829833984375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-common-female",
+      "beforeHash": "6836296ec8ef05ac875965660deb7dc8452c12c32fdea12fe50f3641c57e83f3",
+      "afterHash": "808e7280249e2e29810191a67ba873d17ba757c9d997b76cd90311ff449d3478",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 506.56000000000006,
+        "x": 196.72000000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 506.56000000000006,
+        "x": 196.72000000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 236.34033203125,
+        "x": 331.829833984375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 236.34033203125,
+        "x": 331.829833984375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "beforeHash": "bc645e916c9543936926203c226917567c2f5af858548fefb5576bde1e8290fe",
+      "afterHash": "7c23055b267de0e37e815462dcede9b4f7af664acf4b24a3a5522987247b8dea",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 693.376,
+        "x": 103.31200000000001,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 693.376,
+        "x": 103.31200000000001,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 351.21044921875,
+        "x": 274.394775390625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 351.21044921875,
+        "x": 274.394775390625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "beforeHash": "b4f155ff0075372379b6fd5862a224c2042255b0a27c493463c8851cc859d407",
+      "afterHash": "a11c652b7da3a589282c80c86dc8da350b9afaec67be294588f9eb016ca21656",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 693.376,
+        "x": 103.31200000000001,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 693.376,
+        "x": 103.31200000000001,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 351.21044921875,
+        "x": 274.394775390625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 351.21044921875,
+        "x": 274.394775390625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-rare-male",
+      "beforeHash": "c2645f591f13b59cbbf99c897d0be94518bdc2413b64042c9b185d1258812e9e",
+      "afterHash": "1403ef48656455aa523e507f54bfd063afe72cbfa70263a0ddde2ad57e7baf82",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 300.43310546875,
+        "x": 299.783447265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 300.43310546875,
+        "x": 299.783447265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-rare-female",
+      "beforeHash": "1ac1b1c3801c9fec9f13a20ca5b37e957092bcfdbf6e5fe44492a2c0b7cbce15",
+      "afterHash": "53a77119cdb221ccbf44ed9e5eff23ebf037a72df938e2b0c6d33941716f0ed5",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 642.1759999999999,
+        "x": 128.91200000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 300.43310546875,
+        "x": 299.783447265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 300.43310546875,
+        "x": 299.783447265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-epic-male",
+      "beforeHash": "f78a52cd6ccc848a3911860cbdce74e5dd43155b0e7bb2c0fb3dc8aac0c4d23c",
+      "afterHash": "375ecdcab22ba585471236d6e749cefd17e7cc351a76925c7caf3f2ce1c6e319",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 361.70556640625,
+        "x": 269.147216796875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 361.70556640625,
+        "x": 269.147216796875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "alexander-epic-female",
+      "beforeHash": "05caa1c30650e3a26c5ae53f64ef3391bc03bb15556876588630dd1b55077a92",
+      "afterHash": "dace243c3737be11cc65e28b7e2ec43ef935abab7fcf3e10dc885732659c1d19",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 591.424,
+        "x": 154.288,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 361.70556640625,
+        "x": 269.147216796875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 361.70556640625,
+        "x": 269.147216796875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-common-male",
+      "beforeHash": "40e6e6b1532aa491b3260a8799174b81f9e99554af15741271e2155da877f1fb",
+      "afterHash": "20bddad2fd1f2d6aa5b6d199f45f780ddab2cfcb8a62790e0ef592866989cc63",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 459.20000000000005,
+        "x": 220.39999999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 459.20000000000005,
+        "x": 220.39999999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 378.21240234375,
+        "x": 260.893798828125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 378.21240234375,
+        "x": 260.893798828125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-common-female",
+      "beforeHash": "d86f8a1c4a104ec834cbd2c334f6229ce9d0dac669225a1b3d6f1b289ed8b8b2",
+      "afterHash": "c39f36927dd7b94e5de082ddf112162748f34655024c5a46846f535e59d37a9a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 459.20000000000005,
+        "x": 220.39999999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 459.20000000000005,
+        "x": 220.39999999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 378.21240234375,
+        "x": 260.893798828125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 378.21240234375,
+        "x": 260.893798828125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "beforeHash": "fd0e308bcc17789e8d1a28ecea10e4f3cb37ea93d4eeed4938726fda7839d2ae",
+      "afterHash": "60d4acc784f919a01441f6e3dfe1b80de37ec2ce1710d9563c492580cf9d2ea7",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 359.5869140625,
+        "x": 270.20654296875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 359.5869140625,
+        "x": 270.20654296875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "beforeHash": "995e757b1d9c4ab27ea94cfcec782e603d703217297e9cb9394f0e6ec3268045",
+      "afterHash": "e140c897ad8c2ba629e1012bdeb21380791a9f51959e64f0644075b865f4eb44",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 453.3760000000001,
+        "x": 223.312,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 359.5869140625,
+        "x": 270.20654296875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 359.5869140625,
+        "x": 270.20654296875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "beforeHash": "e8d1ee3a6b1cf699a5814d36083c07e0e655cdb0a2f3c977f1c4e521149aa2a9",
+      "afterHash": "e0d58fb3acbb7194a58fbe4dad3c5e851b9e80559566ba8aa0351559ff1055f9",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 265.01318359375,
+        "x": 317.493408203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 265.01318359375,
+        "x": 317.493408203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "beforeHash": "a071c3c2914b6a6cd2e17099166ceb1393d0ca6c971abe022fb469c84aa573d3",
+      "afterHash": "921b677c5f8dbc935569b4b2b3c088ec2e97e1254ed23196fc97d00479fda998",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 562.24,
+        "x": 168.87999999999994,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 265.01318359375,
+        "x": 317.493408203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 265.01318359375,
+        "x": 317.493408203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "beforeHash": "32820a217bfe431d309adc52a77a6e13ade117a87440ba8176179924362e73e9",
+      "afterHash": "e3837629750ce6cb59086496f893dc2148ca374fccfe4403bbd568c33e2963c5",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 271.28125,
+        "x": 314.359375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 271.28125,
+        "x": 314.359375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "beforeHash": "050191beeb3c5d25472582964b2cf8fab353d0fdd0dda3a3b0a7fb377985b948",
+      "afterHash": "2204325fdcb111a32a188f37e95426224fb2eecbb9abb66ff18839abbdf0a08d",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 537.92,
+        "x": 181.03999999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 271.28125,
+        "x": 314.359375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 271.28125,
+        "x": 314.359375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-common-male",
+      "beforeHash": "2aa739ff16181b26c9b2f6f36940c3fa91480d20060737cdc6d19e1dab4fade8",
+      "afterHash": "bcee757bfb1ec535e0072e10c038eba495c9075d18875256940073eb88cae6de",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 387.48291015625,
+        "x": 256.258544921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 387.48291015625,
+        "x": 256.258544921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-common-female",
+      "beforeHash": "40fab2afae8a66b1e19b8e59708ed0e5d31a3c9fea00376de92027c2f1e20978",
+      "afterHash": "e0641db1a8f9a7e2e8d2a983bf96eb36a7c38fd3ef0df629c834c172503ba7f2",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 613.76,
+        "x": 143.12,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 387.48291015625,
+        "x": 256.258544921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 387.48291015625,
+        "x": 256.258544921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "beforeHash": "7cdecaec96814adcf0db29f5145674db7da3e2825281e58b40d468d3a0ed60a0",
+      "afterHash": "6bc049dc649aa75ef6faf082aa120971a8b8792d22085b56a7b156efe9df4075",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 286.56689453125,
+        "x": 306.716552734375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 286.56689453125,
+        "x": 306.716552734375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "beforeHash": "52cc27ee967d57624763b698d2a9f4e8a2e573ef6f5f4cbdb283a94a239b9817",
+      "afterHash": "5e5f51f27297dcadacc98c470517df7a73e92f464e484d0758ff3cfc4cf4b0e0",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 578.432,
+        "x": 160.78400000000005,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 286.56689453125,
+        "x": 306.716552734375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 286.56689453125,
+        "x": 306.716552734375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-rare-male",
+      "beforeHash": "06657e30ea1a731ef0e494a083419219512971427cf73426031859c8ba8ba654",
+      "afterHash": "e3093d2689b3930f0796771e8ea32bd8a87e7fc7d98a0e0fc58e80aae23a4aff",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 361.3125,
+        "x": 269.34375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 361.3125,
+        "x": 269.34375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-rare-female",
+      "beforeHash": "4a5adcdf5a9bc61a679461e06d4f688afadb3ddd0a1b74951589b72446c6c872",
+      "afterHash": "033bef6a404cccbfc38fad6aeecb094ec388cee1ba27bf770ec8ac0f915f7a31",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 406.78400000000005,
+        "x": 246.608,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 361.3125,
+        "x": 269.34375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 361.3125,
+        "x": 269.34375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-epic-male",
+      "beforeHash": "6ab69095c95e45b77d38912987e6ee3b6acfb92002e98cdf81eb132421629e4a",
+      "afterHash": "ebbf943562eb7c730c80e6e5a5457ceff86e953d007300fa94a752ae09b43618",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 259.1591796875,
+        "x": 320.42041015625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 259.1591796875,
+        "x": 320.42041015625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "euclid-epic-female",
+      "beforeHash": "b26c8704a8e2aab164c8956423ce71e976b2716c9c185a569ef9c5ae380c1fd3",
+      "afterHash": "911b4f22022fa14604918e219b53d4751e98d1d1fd70642a135c4d903bd6db86",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 644.8000000000001,
+        "x": 127.60000000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 259.1591796875,
+        "x": 320.42041015625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 259.1591796875,
+        "x": 320.42041015625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-common-male",
+      "beforeHash": "278178c63c342dda99407e93742d9410f022f1f589dd31aedd93b4acbca05faf",
+      "afterHash": "45926ef95469e049f99e214217310c5fd2c431764bd1ae1e47c5659aeccc7a32",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 304.208984375,
+        "x": 297.8955078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 304.208984375,
+        "x": 297.8955078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-common-female",
+      "beforeHash": "9fff3f1ecca0556fecad4e509dd1a562baa5c80fa702d3191fa31b66028ff473",
+      "afterHash": "58b3c49215205e8e49b197f00558d2bd2cb97912337cf6e0ade83878f098cb8c",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 621.056,
+        "x": 139.47200000000004,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 304.208984375,
+        "x": 297.8955078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 304.208984375,
+        "x": 297.8955078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "beforeHash": "5fe8c9cdd1b03e12061bb3bdd8d9df3e79efaf937e93873a31782559978b09e3",
+      "afterHash": "b2fdba762cc8e1c02dbdd4752e65f20f030702952dda993f4d29de7d63ce1d4e",
+      "titleBefore": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 67.852
+      },
+      "titleAfter": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 57.852
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 393.529296875,
+        "x": 253.2353515625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 393.529296875,
+        "x": 253.2353515625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "beforeHash": "48b866ec7260b8bd7f30925f9078a39b5b837d7f2a97440a46aecca2dca33840",
+      "afterHash": "43e8039a0dbc1bac0622bf26eac06e1126a721089e52cf19ee32c795effaabf5",
+      "titleBefore": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 67.852
+      },
+      "titleAfter": {
+        "height": 79.518,
+        "width": 704.932,
+        "x": 97.53399999999993,
+        "y": 57.852
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 393.529296875,
+        "x": 253.2353515625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 393.529296875,
+        "x": 253.2353515625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "beforeHash": "943b6d83c83a4ae56e4af9e67ce382bee23fb85157eb2f08764904689a62eac4",
+      "afterHash": "05d0e7335d54be8933e10b98d4559a57d7a83f31693e7c10a394f19172140e24",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 251.38818359375,
+        "x": 324.305908203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 251.38818359375,
+        "x": 324.305908203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "beforeHash": "5e69b44d37f536f702a2dc70cc6bbab6a5f402dec653df57e4acea4b8e136066",
+      "afterHash": "fe76918a5d4549eb5be381a9b63c70e06f8ddc6f8779607725d109c1b4399da9",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 492.096,
+        "x": 203.95199999999997,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 251.38818359375,
+        "x": 324.305908203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 251.38818359375,
+        "x": 324.305908203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "beforeHash": "f02a5bdbce884dd8992408b621308a4d4204d3992b70c99960ab6e1dabcdbd05",
+      "afterHash": "956e9917a7a7567a845f332f5c8d69f383b302314fa8aedb7c5ae2567111f703",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 367.11083984375,
+        "x": 266.444580078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 367.11083984375,
+        "x": 266.444580078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "beforeHash": "11446f15946d4f3bf5d883cb03dad7f7c602579c0e8a58e1b72981309f0a62d9",
+      "afterHash": "06d5b3efa8a57a91fdb0988701a18abf41fb3e7287a367643dcac21313371319",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 691.3620000000001,
+        "x": 104.31900000000002,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 367.11083984375,
+        "x": 266.444580078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 367.11083984375,
+        "x": 266.444580078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-common-male",
+      "beforeHash": "e33ff91559e15d4662ccb64014166124149d65f0ec47bc3d2229f7608ead2618",
+      "afterHash": "877a62f76fc19c01e98fe83fabbfd48fd84a050202e5accf96c47ed386997500",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 385.2666015625,
+        "x": 257.36669921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 385.2666015625,
+        "x": 257.36669921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-common-female",
+      "beforeHash": "28d080c96b6879577d25f0d87ee10aca805f3c8f07528beefadf20b47dd4823a",
+      "afterHash": "b6ed5fb0cec237e892182b34c6f6f3b72c4ae8d138bdbd88b4ce6aa6b2c73bca",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 624.896,
+        "x": 137.55199999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 385.2666015625,
+        "x": 257.36669921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 385.2666015625,
+        "x": 257.36669921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "beforeHash": "42a136fb4ec53fac21fc3403f4c6097ad9de7b4570e946e14b006cb3e38f6740",
+      "afterHash": "609e41a4de2dace9c6d8876085de739fe97e552df383d05b8c02e9ebe0dec363",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 579.328,
+        "x": 160.336,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 579.328,
+        "x": 160.336,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 367.2998046875,
+        "x": 266.35009765625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 367.2998046875,
+        "x": 266.35009765625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "beforeHash": "3a840bb0e3144a68d499ce72459f3d0b1417c7b1b93f76b7537ccdc7e636b457",
+      "afterHash": "7e4951bc2007bca0f01ad13c8903748653c728ef90e24c7d189699c196f16733",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 579.328,
+        "x": 160.336,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 579.328,
+        "x": 160.336,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 367.2998046875,
+        "x": 266.35009765625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 367.2998046875,
+        "x": 266.35009765625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "beforeHash": "9ff009a6b31267f8e1257e8f2a9d2fe9d366f2244d0d889537408956d3557f8c",
+      "afterHash": "1d501c33fe85b387ed68fe6b5fa9c4601bef0e5e68ce2e240985ecc02dd730d6",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 362.54052734375,
+        "x": 268.729736328125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 362.54052734375,
+        "x": 268.729736328125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "beforeHash": "ad2f9ed0528050b2c029b435e82d740d5d2806d9261e9cc2c7a3b9c3a300662e",
+      "afterHash": "9ad9b2a738a75cb3e8f5785635faf430fa8d3367401bcba77c31f9b466c46704",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 583.168,
+        "x": 158.41600000000005,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 362.54052734375,
+        "x": 268.729736328125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 362.54052734375,
+        "x": 268.729736328125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "beforeHash": "cfd3babf704dbb3798ec4da8bb0ef82b2424bdd81a90abb7c37fd51bb316866f",
+      "afterHash": "ef39eff99d45a1764bd37b4883f6825bfa8e66f686d63bc0759e350ed07459c6",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 357.85546875,
+        "x": 271.072265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 357.85546875,
+        "x": 271.072265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "beforeHash": "1e76a44c538a32451067759f7e3383d987d3abc785a6fd94de0b1f8504480356",
+      "afterHash": "c3279b00a83db1529194fac47ae97d7221d906ab4a48b7279a9c3b30be184a8f",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 673.9199999999998,
+        "x": 113.04000000000002,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 357.85546875,
+        "x": 271.072265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 357.85546875,
+        "x": 271.072265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-common-male",
+      "beforeHash": "bd1d6381a5a8cf483032b421d98c85d2524151314ecce5136f77c041b3ffe2b2",
+      "afterHash": "9a29bc3935c2d31b5a624deed1858c0561a452bc4bc553aed029dbfd5fed7c45",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 553.7280000000001,
+        "x": 173.13599999999997,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 553.7280000000001,
+        "x": 173.13599999999997,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 317.62060546875,
+        "x": 291.189697265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 317.62060546875,
+        "x": 291.189697265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-common-female",
+      "beforeHash": "7bc198768af6f50704d1b210a212281eb1d654aafd18f8bf142b9739190169a7",
+      "afterHash": "82dc045fbc709a134211def614471551184b7b786230381e296054013b2c90a2",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 553.7280000000001,
+        "x": 173.13599999999997,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 553.7280000000001,
+        "x": 173.13599999999997,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 317.62060546875,
+        "x": 291.189697265625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 317.62060546875,
+        "x": 291.189697265625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "beforeHash": "ea8ebccf585680602b2fdd94e301774bc4ae5b8c2518046a9a5cf65448851483",
+      "afterHash": "91fd47e047c98c6a75b2893ecac2e801ae06c0a66768b7d0f3dd5b4646aee6b1",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 342.16162109375,
+        "x": 278.919189453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 342.16162109375,
+        "x": 278.919189453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "beforeHash": "09a454ab21b10740493e25fc562f6418fae7fd76e870618b018413ed7b09dae0",
+      "afterHash": "73008cb62d1317bafd7757146389fbceee85bc7cd3a500a1bb1852df9632e219",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 376.896,
+        "x": 261.55199999999996,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 342.16162109375,
+        "x": 278.919189453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 342.16162109375,
+        "x": 278.919189453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-rare-male",
+      "beforeHash": "361806334d58b5e1c5756edd7aa82ece08ba32b1d45257c0a088acc8812ed0e4",
+      "afterHash": "067b7199c224b60e264f06807624e042a4d65e6ac9f1165598341aa216840ac3",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 359.080078125,
+        "x": 270.4599609375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 359.080078125,
+        "x": 270.4599609375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-rare-female",
+      "beforeHash": "6e0fcb8911b058a1dd649300d0c15243185b55af94df3510f1bc273db577c5af",
+      "afterHash": "3022a4904d8c335b314b964d7378a1b060b9c254dacf6a28cdacd64d7089e0b1",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 726.764,
+        "x": 86.61799999999994,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 359.080078125,
+        "x": 270.4599609375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 359.080078125,
+        "x": 270.4599609375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-epic-male",
+      "beforeHash": "c8f96041bf4e44c246a0d364f15c3dfa085de7f56a8114125cac904e380cff8a",
+      "afterHash": "1c4a4d947f2b16df35c1fee62bbacf69756b804349ba8543defbb18c889ce011",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 294.3193359375,
+        "x": 302.84033203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 294.3193359375,
+        "x": 302.84033203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "menander-epic-female",
+      "beforeHash": "c8daa050e204ebfaeb523c276fdea184550a88f4d3625c9a4a0879669c9273cd",
+      "afterHash": "41a27cd6efc31c8e9c57876476dde90f1afbd022512eda08a56866dfe1e21d7c",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 723.3539999999999,
+        "x": 88.32299999999998,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 294.3193359375,
+        "x": 302.84033203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 294.3193359375,
+        "x": 302.84033203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-common-male",
+      "beforeHash": "d6df8729458bda9b3c568eef6d3afa1da62f8c6f714564887d5462c3796186f4",
+      "afterHash": "e7e691765d81780c1a86913d883e43d59105272ede4c4d1a029d4b995c4ff22f",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 292.28759765625,
+        "x": 303.856201171875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 292.28759765625,
+        "x": 303.856201171875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-common-female",
+      "beforeHash": "b11de2c332ea6d9daed29188bf1fa0b1c8c2fd1b78ded4f5a7ff01ea469ba6f6",
+      "afterHash": "c5ad76a3a5685dfc5f5a797dc983cdebcb5aa74f2a60f8e2a2f26d6360a5853a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 430.144,
+        "x": 234.928,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 292.28759765625,
+        "x": 303.856201171875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 292.28759765625,
+        "x": 303.856201171875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "beforeHash": "2cdd30f164ef77736e051b3875e21bf65a0fda3d3ef32362a87b340782988da3",
+      "afterHash": "e3cd751ffdba50f596bbbc02e4e9ba5b9f432d6227b7f026f7311ac15794ff39",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 293.41943359375,
+        "x": 303.290283203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 293.41943359375,
+        "x": 303.290283203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "beforeHash": "80c14d13312d50562dd7df2634c1b6422ce4ed81dab82874abb31434c0ff02cc",
+      "afterHash": "09645ffcca12125ee39c9058cfd72bdab3575924c326391a541428c7f16eb763",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 679.74,
+        "x": 110.13,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 293.41943359375,
+        "x": 303.290283203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 293.41943359375,
+        "x": 303.290283203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "beforeHash": "77ccbb51eaae2bfdb20097511c874af8e21d61f02fc0082c0e5d6c83aedfba27",
+      "afterHash": "1be53d95f7c2e1da2d464855689267074168945e5b4dbc8e87fb67b4fa98304b",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 287.18505859375,
+        "x": 306.407470703125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 287.18505859375,
+        "x": 306.407470703125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "beforeHash": "d703b0d47293c9614694c8a31ba5d4210b313107c6874f13ab64a10f61b096ac",
+      "afterHash": "2caf4690d32a2a35ac587309a36b9ad74167521da400d372506907fc6d693d2a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 425.2800000000001,
+        "x": 237.36,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 287.18505859375,
+        "x": 306.407470703125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 287.18505859375,
+        "x": 306.407470703125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "beforeHash": "3adaf060e59134b2ae6dae1f5624c82413c7295da84335e4661f43a1fd43c246",
+      "afterHash": "a2937aece81a64f04c266ab876f9257accde3c5c7b2db65e6688d1f22b4cdc29",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 334.29443359375,
+        "x": 282.852783203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 334.29443359375,
+        "x": 282.852783203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "beforeHash": "675a8ecd8eb91a5ac90d9c680cec986165887665ccd461695ed339fbb5cae4af",
+      "afterHash": "1a345606da9a32e7b47e7de899e0d6da56f23fd39925f1e4f9246665a358d4cc",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 647.838,
+        "x": 126.08100000000002,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 334.29443359375,
+        "x": 282.852783203125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 334.29443359375,
+        "x": 282.852783203125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "beforeHash": "deda2bdb5e215eb9faaa01ae61bae7b1c71188aa40f0822222e6fc3528838d06",
+      "afterHash": "d50499149200e54e60f60c1ca4071bc480153c7f8f21f3de42aad67c879b1de8",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 376.61083984375,
+        "x": 261.694580078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 376.61083984375,
+        "x": 261.694580078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "beforeHash": "105ebb226862c023f7ca6b2d8a4490d692b4ccef1841bf670e1a0ec91f0d82bd",
+      "afterHash": "bedc8059760543c27488884d2063a7062311799723e93e169a021ce75d6c9d79",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 506.94399999999996,
+        "x": 196.52800000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 376.61083984375,
+        "x": 261.694580078125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 376.61083984375,
+        "x": 261.694580078125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "beforeHash": "628dc5cf3b245ace1b68210cc6e0c995d9507c0d0f36adda175bcb076c332917",
+      "afterHash": "e1fa05277d66dd3f8012fd146e7278cbfaa061de43fe19847c100eb19efcaaf2",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 401.587890625,
+        "x": 249.2060546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 401.587890625,
+        "x": 249.2060546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "beforeHash": "750adef31fb0f68dc6e0d26dabfc5f6d1423b1256a431ecffebfb1e99f75d90f",
+      "afterHash": "006e7620f9dde5cbdb25292236cdd91d43289da157ab269c2e822d6531ab6ef9",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 644.4279999999999,
+        "x": 127.786,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 401.587890625,
+        "x": 249.2060546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 401.587890625,
+        "x": 249.2060546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "beforeHash": "68816da95db943f5bd2cfc1b9bae7c4bcef6ea6c162639edd298c3b0fd0d68dd",
+      "afterHash": "4361fbfbdafa0c30ddb0a1fdf6e79d7cbfba2a10b7b45768ba3551461e5ece55",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 322.2255859375,
+        "x": 288.88720703125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 322.2255859375,
+        "x": 288.88720703125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "beforeHash": "c0d984939d001b3a95830404ecd58c0e57e9bffb7d9f54f89896b11e2bc86a91",
+      "afterHash": "0d9dfc1e50bbe6b5eead9642de2927d4562fe6f6925734ab7e4b3f80bb273b94",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 501.95199999999994,
+        "x": 199.02399999999994,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 322.2255859375,
+        "x": 288.88720703125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 322.2255859375,
+        "x": 288.88720703125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "beforeHash": "53ca78e6b6aadda4053b5ff8a6ad5c756bef1769c7a62a73de390b0450441319",
+      "afterHash": "1f249e73c38c921d9cb4df906658439777367b57af0c374dd7bfc8f8e38ad7a7",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 413.357421875,
+        "x": 243.3212890625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 413.357421875,
+        "x": 243.3212890625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "beforeHash": "b0feab262ec8e19afe7ec520ac1ef75a90a67dfd813ac8b4a07a2dcb6cdebe5a",
+      "afterHash": "8a0c40b13871411be893efc669c2f38051c0f920d959b365bfb3d12352c0f111",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 497.472,
+        "x": 201.264,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 413.357421875,
+        "x": 243.3212890625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 413.357421875,
+        "x": 243.3212890625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-common-male",
+      "beforeHash": "726ad8af97f68ca057249f4896f401373c6bd25bf32fca31dfbd4c38d75fd3da",
+      "afterHash": "60bb84cf49610d87cb77ffe59626bb67cbe4be4e5de6c02c3a6529068654e25a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 288.3076171875,
+        "x": 305.84619140625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 288.3076171875,
+        "x": 305.84619140625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-common-female",
+      "beforeHash": "7a54f3e15ff3242a8cacbc3e74f0daa41edf7653d91da7c86dc4295fba94b524",
+      "afterHash": "7adb6b7d690c48aa4d5d7478c5a4a2ba3a511fd10f77b4b651aaee029f61e8a8",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 547.5840000000001,
+        "x": 176.20800000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 288.3076171875,
+        "x": 305.84619140625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 288.3076171875,
+        "x": 305.84619140625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "beforeHash": "216451b1d1a848558c817bd6ef6365e0f507a0f8033b0f45f8fcd8ebcc918b8c",
+      "afterHash": "437dd3e0fc9a3f33ee59336b56615a681af6a356de8c88280f95ed8a80edd495",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 165.57470703125,
+        "x": 367.212646484375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 165.57470703125,
+        "x": 367.212646484375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "beforeHash": "ba0786ab65d59b357d16f64ce893607fcad1de9d7e6a2c24bf6ac54fda292993",
+      "afterHash": "dbe57530e7bf577212746e4827666fd3322824afdb7eeea12d9b363d0c5e7932",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 532.864,
+        "x": 183.56799999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 165.57470703125,
+        "x": 367.212646484375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 165.57470703125,
+        "x": 367.212646484375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-rare-male",
+      "beforeHash": "8e17fe557587b1df3605163f50180ac1b29b272d6f891f70dcb40ddefde068c4",
+      "afterHash": "6bf967d76f1d2c306e4ddb1fc6354bc1641ae496897911734c739d661c03b7af",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 332.021484375,
+        "x": 283.9892578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 332.021484375,
+        "x": 283.9892578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-rare-female",
+      "beforeHash": "6c8bbee518679bf7828d99bf4a6422743aad455cea6cca6402d77f12e6aed8c6",
+      "afterHash": "e3725dad987a9065af6c105813b2c629e2fd8e00bffa324aa83b68ea54e8c8ba",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 655.154,
+        "x": 122.423,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 332.021484375,
+        "x": 283.9892578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 332.021484375,
+        "x": 283.9892578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-epic-male",
+      "beforeHash": "00e7bcdc6bd05a9d860b0e33f85475a50128a1af74fc5f63be45a6d03d24aa5f",
+      "afterHash": "b261290c663b336c0453a5362f2aabdcb523cee71b7422896426fa3d310b46d7",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 374.7890625,
+        "x": 262.60546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 374.7890625,
+        "x": 262.60546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "zeno-epic-female",
+      "beforeHash": "1088bd9d47f6e245e2fdcd1ae5465b939172cdd838b437bcee46d1c75dbb1ff4",
+      "afterHash": "604b4ecfd6b356903b45ff41edf0e9676f9e40f5b95b0744e874a7cc0ce5937a",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 611.134,
+        "x": 144.433,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 374.7890625,
+        "x": 262.60546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 374.7890625,
+        "x": 262.60546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "beforeHash": "dcbddd9d6edc65ff09a0d9ec4dd3a70db7ebef96cc76b1bb7a56b0a79a93f4ba",
+      "afterHash": "bc46f0f0ed992b3820b8efbbb0066a71802479b62f13cae92f0270076cd7c202",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 691.3799999999999,
+        "x": 104.31,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 691.3799999999999,
+        "x": 104.31,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 393.8447265625,
+        "x": 253.07763671875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 393.8447265625,
+        "x": 253.07763671875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "beforeHash": "e51fd2caa6e3c38b9dbe6164c19240b38f8e720a2048521915b22d093c969106",
+      "afterHash": "635b7168806bd1526e14d78ad16e220b590b6eb8c94e9e973b5e15b0a796b0f6",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 691.3799999999999,
+        "x": 104.31,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 691.3799999999999,
+        "x": 104.31,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 393.8447265625,
+        "x": 253.07763671875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 393.8447265625,
+        "x": 253.07763671875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "beforeHash": "2552559ac71f8c32155e55932dccf5e4473550ac9051d3f9c3fc7486a2dd3b29",
+      "afterHash": "c5076aa9510a554ad96cb6b8151b44e0a76fbb16cee8640a0ac0c5062f869fd2",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 329.1953125,
+        "x": 285.40234375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 329.1953125,
+        "x": 285.40234375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "beforeHash": "e9aaeb98d8d4a006f8379701ac91fcced4258e9347915d71de9f9458c9e279bb",
+      "afterHash": "92cad62e9088bfe201dedda692dda1a063ed4f425a2bef9277e5d7f75ca18066",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 601.792,
+        "x": 149.10399999999993,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 329.1953125,
+        "x": 285.40234375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 329.1953125,
+        "x": 285.40234375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "beforeHash": "f025a97dcfeed44929ea0ea9f803249f21325a0c9a82023c11c37d7e19a43d77",
+      "afterHash": "dd665fd22617f26bfea7d73d8f5bb5bc024e64a8e368de76686e065d0536fb78",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 365.81787109375,
+        "x": 267.091064453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 365.81787109375,
+        "x": 267.091064453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "beforeHash": "03aba21c471061453a833752e5d850864a56edf334a952b40f1bef9c09146cf5",
+      "afterHash": "5c62f0bd807cb1244589ae36e0c53f0672c48d26f0ea69b69239fc5727dfa024",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 626.432,
+        "x": 136.784,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 365.81787109375,
+        "x": 267.091064453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 365.81787109375,
+        "x": 267.091064453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "beforeHash": "9c5020298057267af4a198be3f59af44af14970b64f924176d28d5260ee47ded",
+      "afterHash": "02578be091380f4f8b94150f56d775f15a04f483440337cdd500670ca804a886",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 347.52392578125,
+        "x": 276.238037109375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 347.52392578125,
+        "x": 276.238037109375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "beforeHash": "406a70670a0f6bff88ed47086bb96e20520ba61f5a6c50438623605f7ab6a949",
+      "afterHash": "a10e2571e6824aa899c2acc9dab467b4eb672322179bc379f2e26ff30859eae1",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 477.3760000000001,
+        "x": 211.31199999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 347.52392578125,
+        "x": 276.238037109375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 347.52392578125,
+        "x": 276.238037109375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "beforeHash": "9132eab3d18958bf47ead5aff621a5e47d44d573bd5b1904a02b68098d34e7c4",
+      "afterHash": "ad535d13b32943e4f67d7ad9361c4dc314a12e789cf99b8a1bd0b8a6d5395e1d",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 637.856,
+        "x": 131.07199999999995,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 637.856,
+        "x": 131.07199999999995,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 292.4951171875,
+        "x": 303.75244140625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 292.4951171875,
+        "x": 303.75244140625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "beforeHash": "acaf2e6ecc622bc11422793ee6b3e2fa7da20e835490f951ba79c7d40559288a",
+      "afterHash": "20edbd4e0216af3aae76ec515bccb6cf84c5fd9e7aa1d982a1e03fc6c0b42d11",
+      "titleBefore": {
+        "height": 85.00200000000001,
+        "width": 637.856,
+        "x": 131.07199999999995,
+        "y": 65.428
+      },
+      "titleAfter": {
+        "height": 85.00200000000001,
+        "width": 637.856,
+        "x": 131.07199999999995,
+        "y": 55.428
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 292.4951171875,
+        "x": 303.75244140625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 292.4951171875,
+        "x": 303.75244140625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "beforeHash": "53d5e10ba41d04b4c201e92846ac41b2024d37141883b373560c199867fd4b9e",
+      "afterHash": "7e37c46d8eb158927f33267a10d0f7f89d9dbb092a0ff9d05c2cfd20656a512b",
+      "titleBefore": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 67.852
+      },
+      "titleAfter": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 57.852
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 341.6015625,
+        "x": 279.19921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 341.6015625,
+        "x": 279.19921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "beforeHash": "abd462d643e50abe678be078c54ef92f24dd4d73aef930990343ca4898b76f11",
+      "afterHash": "11471ea38ddbead3c6cff1e365f793696dd91313bbde469c1450d1aa22bb239f",
+      "titleBefore": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 67.852
+      },
+      "titleAfter": {
+        "height": 79.518,
+        "width": 690.606,
+        "x": 104.69699999999995,
+        "y": 57.852
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 341.6015625,
+        "x": 279.19921875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 341.6015625,
+        "x": 279.19921875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "beforeHash": "6d5afc7d25988d4f2cc6802b3619e77f046263428dc46d5881192b4288e3e5ea",
+      "afterHash": "340b55202f2b1f31c9680e088d03b7b8f81d0301cfbf38a89fd81fa2261ff550",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 330.6611328125,
+        "x": 284.66943359375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 330.6611328125,
+        "x": 284.66943359375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "beforeHash": "abebbb1f2b152862fa38e95d363750dea938f9cecdf77bfc4425abc56e967511",
+      "afterHash": "37e21739dd536815939813a1b51fab2d732103899bf06e1d3d77d0e48dfce6f3",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 599.8080000000001,
+        "x": 150.096,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 330.6611328125,
+        "x": 284.66943359375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 330.6611328125,
+        "x": 284.66943359375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "beforeHash": "356c462f13d6c78b87ba67773f45e12230084cd468ab628711c6f73b1c79ef09",
+      "afterHash": "6a5503108d8f35d2762a7ac3123536f2001d6e153e5a95d2b8db0b4e89a55ad5",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 412.08642578125,
+        "x": 243.956787109375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 412.08642578125,
+        "x": 243.956787109375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "beforeHash": "87d0e63f7dff37f0df1e2ce8e74dece82a26d7121bfffebeb2c0dce8b7d44047",
+      "afterHash": "798d4c24e01efbc3c793e95ceecdef9d189331fd8ee57c2d7380fe7c25479725",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 670.1440000000001,
+        "x": 114.928,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 412.08642578125,
+        "x": 243.956787109375,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 412.08642578125,
+        "x": 243.956787109375,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-common-male",
+      "beforeHash": "6feb191e4129d69ec3efbea325febaedcae694a70f15467834f9429608127af7",
+      "afterHash": "59a395c4e0a89159f6712245df9beb22ef36bd52869c828a73ab267d0b2a176d",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 306.0087890625,
+        "x": 296.99560546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 306.0087890625,
+        "x": 296.99560546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-common-female",
+      "beforeHash": "128bc8a59321943e2fa45d399ade7fbc3f812dd262fb145493fef7208d7ad4fc",
+      "afterHash": "fa4a25b2e2eb2ec64f0136fd66b9f1f60d52b7abe17fafaae41af51ccae0bb2c",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 446.528,
+        "x": 226.736,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 306.0087890625,
+        "x": 296.99560546875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 306.0087890625,
+        "x": 296.99560546875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "beforeHash": "1890e803fa07a807257f6a70bebe1de6a3772f414f76874eac67b98d5438a58c",
+      "afterHash": "f9ee62306dd7e242021a077d7e8f73edc11b8a38ff87c723a31440612a81fc1a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 352.66357421875,
+        "x": 273.668212890625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 352.66357421875,
+        "x": 273.668212890625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "beforeHash": "7d91cb31dd6715d3a2f58e3e442f6a536bf1e3f34dc8f25e14bbb1635de28678",
+      "afterHash": "3328fb33809996f8de808e923297f0b30b499216c23e4fad479f64419421acaa",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 379.84000000000003,
+        "x": 260.08000000000004,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 352.66357421875,
+        "x": 273.668212890625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 352.66357421875,
+        "x": 273.668212890625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "beforeHash": "6b9088c466c955d8be6093f01d163e744ecda75538b862e2c9fd6d2d3480606f",
+      "afterHash": "51b9aed7529dcb9ff3f42ae65ce8bbe57727b18682dc7499a0bb6efaba6ab255",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 344.05419921875,
+        "x": 277.972900390625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 344.05419921875,
+        "x": 277.972900390625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "beforeHash": "0335dc73646533398c4668967a6348ab821ec60818073b0d3a0105e93f71b371",
+      "afterHash": "4a64b882052d95a7f2687eb452ba6f914bff2281f98852487f05e8302430781a",
+      "titleBefore": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 66.64000000000001
+      },
+      "titleAfter": {
+        "height": 82.25999999999999,
+        "width": 606.1800000000001,
+        "x": 146.9099999999999,
+        "y": 56.640000000000015
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 344.05419921875,
+        "x": 277.972900390625,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 344.05419921875,
+        "x": 277.972900390625,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-epic-male",
+      "beforeHash": "afe527f030fc6b181357ff6adb887dd2cc6f132bb927e71fe7c3325fc786ef44",
+      "afterHash": "8aa0556048a60164d78151795f1d1389698b84e91965b691902bfc04cd7ae96a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 327.9521484375,
+        "x": 286.02392578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 327.9521484375,
+        "x": 286.02392578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "nearchus-epic-female",
+      "beforeHash": "0206daf4a0c2578ebd97c791b0c40086847b5754de804134931407afe55b3ad7",
+      "afterHash": "e4557d0136119f2d90d115ccfad981088ddad5f6c200e445b7244ff98675cdd5",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 634.752,
+        "x": 132.62400000000002,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 327.9521484375,
+        "x": 286.02392578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 327.9521484375,
+        "x": 286.02392578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-common-male",
+      "beforeHash": "cb4616e9913d5af8a56e7a62e2cb6087014fe4eea37d33d2a1b65d39412fb9a3",
+      "afterHash": "c39393830d1dcd73d2fd4be1ccf77ec0eb614fec33118db4a19d94b7e2ab7fd2",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 380.7265625,
+        "x": 259.63671875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 380.7265625,
+        "x": 259.63671875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-common-female",
+      "beforeHash": "023685e504445008d0661f01879bd1fed5f232f0003dca677d0127ccaa5b8c86",
+      "afterHash": "3860a622721b5cecb19c8968fdf108d6c5fb5d5a58b34342a5578859cf0c1a0f",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 516.608,
+        "x": 191.69600000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 380.7265625,
+        "x": 259.63671875,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 380.7265625,
+        "x": 259.63671875,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "beforeHash": "1d413093685b28e055dfe4b86d8c6fa9898d99d4516b78409826e84590eaada1",
+      "afterHash": "f4f10881342e60afcffe7b0c684c83505b59c6a1b8d2b70f020ac0f2a3a0da7a",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 325.9912109375,
+        "x": 287.00439453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 325.9912109375,
+        "x": 287.00439453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "beforeHash": "f4847544499d1d6cbf211a28ab781b4616d1805cc62c814d6b593a68afaaa78b",
+      "afterHash": "1dc972cf6f34750e0192b1e53dc55210116e1cad5653f2399b3b721c16e6cbfd",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 652.0320000000002,
+        "x": 123.98399999999998,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 325.9912109375,
+        "x": 287.00439453125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 325.9912109375,
+        "x": 287.00439453125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "beforeHash": "a03bead749154be90207d08293bb22f2fcf4fb1e1257a5b22f7ee68cabb30aba",
+      "afterHash": "6ff92feedbfa91483b7c05f56b799ce48997b63a533859e72bc2dd05a5bc7dd2",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 350.8974609375,
+        "x": 274.55126953125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 350.8974609375,
+        "x": 274.55126953125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "beforeHash": "26231f5283b6858392e3d2dc2b427e2841a244644132a912972d2b81bdc5db20",
+      "afterHash": "2dd9e0b0f66e4880274647ea613263c83476ee1b1b3dfa5ed324811241038d3b",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 733.376,
+        "x": 83.31200000000001,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 350.8974609375,
+        "x": 274.55126953125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 350.8974609375,
+        "x": 274.55126953125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-epic-male",
+      "beforeHash": "eb2b2ad3bc8f8f610ac0e9226d37bce94a0d5a7d407fb8e024ca6e64df0b20ca",
+      "afterHash": "18e629ad74d8d72ef1f8f4c97fba5ac71c628a11de6becfa7ab0c25da69a9a9f",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 397.2646484375,
+        "x": 251.36767578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 397.2646484375,
+        "x": 251.36767578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    },
+    {
+      "slug": "eumenes-epic-female",
+      "beforeHash": "d7350be0b415128e5d47010816bcf8f9bb95f4f533d4fa7ca75682093eaa522a",
+      "afterHash": "4061c233a995571c61d9d87dac53768450b153037b8c84bec8e40e976d6faffc",
+      "titleBefore": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 64.21600000000001
+      },
+      "titleAfter": {
+        "height": 87.744,
+        "width": 621.6320000000001,
+        "x": 139.18400000000003,
+        "y": 54.21600000000001
+      },
+      "subtitleBefore": {
+        "height": 22.9892578125,
+        "width": 397.2646484375,
+        "x": 251.36767578125,
+        "y": 144.59375
+      },
+      "subtitleAfter": {
+        "height": 22.9892578125,
+        "width": 397.2646484375,
+        "x": 251.36767578125,
+        "y": 152.59375
+      },
+      "embeddedImageBytesPreserved": true,
+      "onlyTwoHeaderTransformsChanged": true
+    }
+  ],
+  "samples": [
+    {
+      "slug": "alexander-common-male",
+      "reopenTypeNodesIdentical": true,
+      "export": "artwork/cards/subtitle-spacing-v1/qa/native/alexander-common-male-reopened.png",
+      "sha256": "193d89fe1cf6f83764d4adfc3f6ef3b975d366d5b808db4a468dae7f5d95c1d0"
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "reopenTypeNodesIdentical": true,
+      "export": "artwork/cards/subtitle-spacing-v1/qa/native/aristotle-uncommon-female-reopened.png",
+      "sha256": "cfe2cc37c53f4d49ee6c576a3c9bf52aeab3b3293d0787cb0a543f71dc46eec9"
+    },
+    {
+      "slug": "euclid-rare-male",
+      "reopenTypeNodesIdentical": true,
+      "export": "artwork/cards/subtitle-spacing-v1/qa/native/euclid-rare-male-reopened.png",
+      "sha256": "b4b8c9c11eccbb541e6c2071e17e91c4ca4bb5ab89a9e399cbd528f06747a1e1"
+    },
+    {
+      "slug": "eumenes-epic-female",
+      "reopenTypeNodesIdentical": true,
+      "export": "artwork/cards/subtitle-spacing-v1/qa/native/eumenes-epic-female-reopened.png",
+      "sha256": "7a86110774fdcc79274d0c9670b8253dd4ddd9551f6838491415bc4c157cd087"
+    }
+  ],
+  "completed": "2026-11-13T18:29:42.976Z",
+  "reopenedCards": [
+    "alexander-common-male",
+    "alexander-common-female",
+    "alexander-uncommon-male",
+    "alexander-uncommon-female",
+    "alexander-rare-male",
+    "alexander-rare-female",
+    "alexander-epic-male",
+    "alexander-epic-female",
+    "aristotle-common-male",
+    "aristotle-common-female",
+    "aristotle-uncommon-male",
+    "aristotle-uncommon-female",
+    "aristotle-rare-male",
+    "aristotle-rare-female",
+    "aristotle-epic-male",
+    "aristotle-epic-female",
+    "euclid-common-male",
+    "euclid-common-female",
+    "euclid-uncommon-male",
+    "euclid-uncommon-female",
+    "euclid-rare-male",
+    "euclid-rare-female",
+    "euclid-epic-male",
+    "euclid-epic-female",
+    "lysippos-common-male",
+    "lysippos-common-female",
+    "lysippos-uncommon-male",
+    "lysippos-uncommon-female",
+    "lysippos-rare-male",
+    "lysippos-rare-female",
+    "lysippos-epic-male",
+    "lysippos-epic-female",
+    "pytheas-common-male",
+    "pytheas-common-female",
+    "pytheas-uncommon-male",
+    "pytheas-uncommon-female",
+    "pytheas-rare-male",
+    "pytheas-rare-female",
+    "pytheas-epic-male",
+    "pytheas-epic-female",
+    "menander-common-male",
+    "menander-common-female",
+    "menander-uncommon-male",
+    "menander-uncommon-female",
+    "menander-rare-male",
+    "menander-rare-female",
+    "menander-epic-male",
+    "menander-epic-female",
+    "demetrius-common-male",
+    "demetrius-common-female",
+    "demetrius-uncommon-male",
+    "demetrius-uncommon-female",
+    "demetrius-rare-male",
+    "demetrius-rare-female",
+    "demetrius-epic-male",
+    "demetrius-epic-female",
+    "theophrastus-common-male",
+    "theophrastus-common-female",
+    "theophrastus-uncommon-male",
+    "theophrastus-uncommon-female",
+    "theophrastus-rare-male",
+    "theophrastus-rare-female",
+    "theophrastus-epic-male",
+    "theophrastus-epic-female",
+    "zeno-common-male",
+    "zeno-common-female",
+    "zeno-uncommon-male",
+    "zeno-uncommon-female",
+    "zeno-rare-male",
+    "zeno-rare-female",
+    "zeno-epic-male",
+    "zeno-epic-female",
+    "ptolemy-common-male",
+    "ptolemy-common-female",
+    "ptolemy-uncommon-male",
+    "ptolemy-uncommon-female",
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "ptolemy-epic-male",
+    "ptolemy-epic-female",
+    "cleomenes-common-male",
+    "cleomenes-common-female",
+    "cleomenes-uncommon-male",
+    "cleomenes-uncommon-female",
+    "cleomenes-rare-male",
+    "cleomenes-rare-female",
+    "cleomenes-epic-male",
+    "cleomenes-epic-female",
+    "nearchus-common-male",
+    "nearchus-common-female",
+    "nearchus-uncommon-male",
+    "nearchus-uncommon-female",
+    "nearchus-rare-male",
+    "nearchus-rare-female",
+    "nearchus-epic-male",
+    "nearchus-epic-female",
+    "eumenes-common-male",
+    "eumenes-common-female",
+    "eumenes-uncommon-male",
+    "eumenes-uncommon-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female",
+    "eumenes-epic-male",
+    "eumenes-epic-female"
+  ],
+  "reopenVerifiedAt": "2026-11-13T18:30:38.568Z",
+  "originalQaHeaderBoundsUpdated": 104
+}

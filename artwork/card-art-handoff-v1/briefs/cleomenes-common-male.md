@@ -1,16 +1,16 @@
-# Granary Porter — cleomenes-common-male
+# Granary Tally Assistant — cleomenes-common-male
 
 **Figure family:** Cleomenes of Naucratis · **Type:** contribution · **Gender:** male · **Frame:** common
 
 Look first at [approved art](../reference/portraits/cleomenes-common-male.webp) and the [framed preview](../reference/cards/cleomenes-common-male.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Granary Porter — Hand of the Nile Granaries
+> Granary Tally Assistant — Counting Egypt's Grain
 >
-> Every Sack Accounted For. A granary porter moves and checks the sacks that fill the storehouse. Honest attention at the doorway gives distant accounts a solid foundation, making the harvest a quantity that officials can actually find.
+> The First Checked Measure. A granary tally assistant counts grain measures, compares receipts, and records stores entering or leaving the granary. A checked tally begins the accounting discipline needed to manage revenue and the supply of a province.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Granary Porter**, belonging to the Cleomenes of Naucratis family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Granary Tally Assistant**, belonging to the Cleomenes of Naucratis family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

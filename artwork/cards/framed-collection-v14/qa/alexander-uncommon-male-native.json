@@ -130,7 +130,7 @@
       {
         "bounds": {
           "height": 110.904,
-          "width": 642.4799999999999,
+          "width": 614.7840000000001,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A campaign provisioner gathers grain, checks pack animals,\nand keeps the stores ready for departure. Behind every\ncelebrated advance stands this patient discipline, giving\nhungry soldiers the strength to follow their king.",
+        "text": "A campaign squad leader directs a small group of soldiers\non the march and in the field. Clear instructions, shared\ndiscipline, and care for the unit turn individual service\ninto the first responsibility of command.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 284.51900000000006,
+          "width": 239.714,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Strength Before Battle",
+        "text": "Orders Into Action",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 342.85400390625,
-          "x": 278.572998046875,
-          "y": 144.59375
+          "width": 351.21044921875,
+          "x": 274.394775390625,
+          "y": 152.59375
         },
         "fill": "#d9bc80",
         "id": 56,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "KEEPER OF THE KING'S STORES",
+        "text": "STEADYING A SMALL COMMAND",
         "visible": true
       },
       {
         "bounds": {
           "height": 87.744,
-          "width": 635.6480000000001,
-          "x": 132.176,
-          "y": 64.21600000000001
+          "width": 693.376,
+          "x": 103.31200000000001,
+          "y": 54.21600000000001
         },
         "fill": "#f0e6cf",
         "id": 55,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Campaign Provisioner",
+        "text": "Campaign Squad Leader",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "alexander-uncommon-male.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 11,
+    "uid": 2,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "alexander-uncommon-male.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 11,
+    "uid": 2,
     "units": "Pixels"
   }
 }

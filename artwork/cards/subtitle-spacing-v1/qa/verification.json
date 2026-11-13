@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "target": "/home/wdrag/workspace/kvn_hoag/everfolk",
+  "contributors": 104,
+  "filesHashed": 1588,
+  "rastersComparedAgainstBackups": 1144,
+  "changedHeaderPixels": 13030672,
+  "outsideHeaderChangedPixels": 0,
+  "priorImmutableVersionsUnchanged": true,
+  "portraitImagesUnchanged": true,
+  "parentRowsAndVariantsUnchanged": true,
+  "activeBundleCheck": {
+    "passed": true,
+    "baseCards": 2,
+    "runtimeVariants": 0,
+    "framePixelsVerified": true,
+    "assets": 2
+  },
+  "bundleSha256": "5ce44b1d528e38af7c0a3a4a6db3863f47814479d17d68303503e6d0f8fef677",
+  "backupFiles": 1569
+}
