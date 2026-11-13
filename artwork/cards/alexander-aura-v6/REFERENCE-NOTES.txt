@@ -1,0 +1,69 @@
+EVERFOLK / ALEXANDER / HEROIC AURA REVISION V6
+
+Requested revision
+Enlarge the blade and open the cape into a strong flying sweep. Reference-
+derived equipment forms remain the foundation; the user explicitly chose
+greater heroic scale and cloth motion over literal object proportions.
+
+Generation
+Built-in image editing used v5/source/alexander-equipment-revised.png as the
+target and v3/source/alexander-painterly-brushed.png only for cape energy.
+Exact prompt: source/generation-prompt.txt.
+Result: source/alexander-aura-revised.png, 1122 x 1402.
+The new face/hair, mosaic-derived armour, rosette and plain chiton follow v5;
+the expanded blade and mantle sweep are intentional game-art exaggerations.
+No new individually authored brush pass is claimed in v6.
+
+Actual references retained in this folder
+Greek iron machaira/kopis, former Met object 2001.346, 5th-4th century BCE.
+https://www.metmuseum.org/art/collection/search/257576
+references/greek-machaira-met-2001.346.jpg (official public-domain photo).
+Upper weapon used for the type; its catalogued 56.5 cm length is NOT the scale
+of this deliberately enlarged game-art blade. Object restituted September 2025.
+
+Alexander Mosaic, MANN inv.10020, late second century BCE after a painting.
+https://www.museoarcheologiconapoli.it/mosaici/
+references/mann-alexander-mosaic-10020.jpg; detail view crop also retained.
+Photo: MANN / Giorgio Albano. Guides shoulder pieces, edged cuirass, chest
+device, waist ties and skirt strips. Exact material is a reconstruction.
+
+Mounted Alexander bronze, MANN inv.4996, first century BCE, potentially a
+Roman adaptation of a Hellenistic prototype, with restorations.
+https://www.getty.edu/publications/artistryinbronze/conservation-and-analysis/44-siano/
+references/naples-alexander-mounted-cloak.jpg.
+Photo: Salvatore Siano, by permission of MANN. Guides mantle fastening on the
+rider's right shoulder and layering, not the v6 expanded cape dimensions.
+The horse's larger bridle rosettes are separate from the rider's clasp.
+
+See ../alexander-equipment-v5/REFERENCE-NOTES.txt for equipment source details
+and ../alexander-portrait-v4/REFERENCE-NOTES.txt for the Azara face reference.
+These are ancient object/depiction references, not Alexander's authenticated
+personal equipment or a verified exact likeness. Actual photographs are kept
+separate from the generated artwork and credited on the review board.
+
+Pixel and card finishing
+PixelOE 1.0.0, logical 420 x 525, exact nearest-neighbour 2x to 840 x 1050;
+no palette reduction. Deterministic repeat, integer blocks and source hash
+checks pass. The native ArtCraft card retains separate frame, live type,
+emblem, rarity and footer; the figure painting is flattened, not a clothing rig.
+Final PNG composites the original pixel art at 100% under ArtCraft's native
+frame/type overlay. Fonts resolve exactly; native reopening reproduces the
+render. All 765,234 unobscured checked portrait pixels match exactly.
+See qa/portrait-pixel.json, qa/card-build.json, qa/final-crisp-export.json.
+
+Earlier versions remain unchanged. Card rarity, flavour and number are concepts;
+no NFT was minted.
+
+Reusable skill saved and installed
+Name: everfolk-asset-workflow (automatic selection enabled).
+Installed: C:/Users/Legion/.codex/skills/everfolk-asset-workflow/SKILL.md
+Project copy: ../../skills/everfolk-asset-workflow/SKILL.md
+Includes reference/aura direction, ArtCraft provenance and modular components,
+and an executable PixelOE helper with optional grid/scale/palette controls.
+It uses the existing isolated runtime rather than bundling its dependencies.
+Skill metadata validation passed. The installed helper was independently run
+on the v6 source and reproduced the final pixel image byte-for-byte:
+929b74291c8f427131bc8d757049b91d063c484cd9ada795723e9a080b6693db.
+See qa/skill-v6-reproduction.json. Meaningful source alpha is explicitly
+rejected by this opaque-art helper; modular transparent masters are retained,
+then a chosen variant is composed onto its background before pixel finishing.

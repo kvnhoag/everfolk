@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-13",
+  "reviewedAssetCount": 48,
+  "namedParentCount": 13,
+  "contributionAndTitleCount": 35,
+  "authoringReviews": [
+    "Alexander parent: root reviewed generated painting, full filtered PNG and supplied-character comparison.",
+    "16 scholarly assets: authoring worker reviewed paintings and filtered artwork with individually selected face regions.",
+    "16 craft/civic assets: authoring worker reviewed paintings and 420 x 525 filtered previews.",
+    "15 command/service assets: authoring worker reviewed paintings, filtered PNGs and card-size proof sheet."
+  ],
+  "rootCombinedReview": [
+    "All 48 finished images inspected in collection-sheet-01.png, collection-sheet-02.png and collection-sheet-03.png.",
+    "Parent overview inspected for distinct roles, facial silhouettes, coherent palette and consistent painterly-to-pixel finish.",
+    "Alexander source/reference/filter comparison inspected: supplied pale red-edged armour, Gorgon device, sash, scales and asymmetric forearm protection are retained.",
+    "Military contribution sequence inspected: simpler service equipment and task progression, without cloning Alexander.",
+    "Nearchus source inspected full size for visible gaze, credible holding hands, period sailing scene and absence of modern navigation hardware."
+  ],
+  "galleryControlReview": {
+    "figureFilter": "Verified in local browser preview",
+    "subcardFilter": "Verified in local browser preview",
+    "paintingPixelComparison": "Verified side by side in local browser preview",
+    "scope": "Controls tested on the initial populated gallery; same rendering code now embeds the independently verified complete 48-asset catalogue."
+  },
+  "observations": [
+    "Task scenes distinguish provision, command, research, geometry, bronze work, navigation, theatre, siege engineering, botany, discussion and administration.",
+    "Subcard contributor identity is consistent within each three-stage progression.",
+    "No card typography or frame is baked into final inner-art PNGs.",
+    "Faces and gaze remain legible at review scale; close-up sources are preserved for future refinement."
+  ],
+  "limits": [
+    "These are generated, flattened game illustrations, not authenticated ancient portraits or exact archaeological reconstructions.",
+    "Clothing, architecture and incidental scholarly armillary props are imaginative design choices, not documented personal possessions.",
+    "Visual inspection complements automated pixel checks; it does not prove anatomical or historical perfection.",
+    "User acceptance of the new artwork is not asserted."
+  ],
+  "workers": "All authoring filter processes finished; image handles disposed. Temporary localhost preview processes stopped."
+}

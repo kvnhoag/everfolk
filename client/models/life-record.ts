@@ -46,7 +46,8 @@ export function lifeRecordChanges(life: LifeState, engine: LifeEngine): { years:
     const before = values(projection.state, engine), command = life.commands[index];
     const after = command.type === "advance" ? projection.tracer.advance(projection.state)
       : command.type === "choose" ? projection.tracer.choose(projection.state, command.choice)
-      : command.type === "act" ? projection.tracer.act(projection.state, command.activity)
+      : command.type === "act" ? projection.tracer.act(projection.state, command.activity, command.calendarDeadline ? { calendarDeadline: true } : undefined)
+      : command.type === "assess-jobs" ? projection.tracer.assess(projection.state, command.nodeId, command.jobIds)
       : command.type === "influence" ? projection.tracer.influence(projection.state, command)
       : command.type === "avatar" ? projection.tracer.chooseAvatar(projection.state, command.variant)
       : command.type === "market-order" ? projection.tracer.orderMarket(projection.state, command)

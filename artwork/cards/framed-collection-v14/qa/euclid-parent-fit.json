@@ -1,0 +1,78 @@
+{
+  "slug": "euclid-parent",
+  "figureId": "euclid",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Euclid",
+  "subtitle": "Geometer of Alexandria",
+  "rarity": "legendary",
+  "gameplayRarity": "legendary",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "full-art",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-parent-pixel.png",
+  "collectionIndex": 19,
+  "owner": null,
+  "figureName": "Euclid",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "compass-triangle",
+  "bodyTitle": "The Architecture of Proof",
+  "bodyText": "Euclid's Elements organized geometry and number into a powerful sequence of definitions, propositions, and proofs. Associated with Alexandria, this elusive mathematician gave generations a model of knowledge built through reason.",
+  "sources": [
+    {
+      "title": "Euclid — MacTutor, University of St Andrews",
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/"
+    },
+    {
+      "title": "Who was Euclid? — Princeton University Press",
+      "url": "https://press.princeton.edu/ideas/who-was-euclid"
+    }
+  ],
+  "canonicalTitle": "Euclid",
+  "editionLimit": 10,
+  "iconSource": {
+    "file": "source/icons/euclid.svg",
+    "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/010",
+  "rarityCharacteristics": "full art, gilded perimeter, radiant nameplate and figure emblem",
+  "bodySize": 24,
+  "bodyLines": [
+    "Euclid's Elements organized geometry and number into a",
+    "powerful sequence of definitions, propositions, and proofs.",
+    "Associated with Alexandria, this elusive mathematician gave",
+    "generations a model of knowledge built through reason."
+  ],
+  "fit": {
+    "method": "native-size portrait with low-detail source-edge atmosphere",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      30,
+      140,
+      840,
+      1050
+    ],
+    "sourceCropped": false,
+    "kernel": "none for original artwork"
+  },
+  "sourceSvg": "source/cards/euclid-parent.svg",
+  "fittedArt": "assets/fitted/euclid-parent.png",
+  "overlaySvg": "source/overlays/euclid-parent.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+  "master": "masters/euclid-parent.vectorcraft",
+  "export": "exports/euclid-parent.png",
+  "thumbnail": "assets/euclid-parent-thumb.png",
+  "exportSha256": "66559cf38163c98a49fa610290c35b28b590bc627cfbdf3ac7f2522b586750b5",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 599644,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

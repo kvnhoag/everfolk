@@ -1,0 +1,60 @@
+EVERFOLK / GAME LOGO REFERENCE STUDY
+11 November 2026
+
+This revision starts from visual inspection of published game logos on
+official publisher and developer pages. The title lettering was then drawn
+as original vector paths for Everfolk. Reference artwork is not included
+in the Everfolk logo files.
+
+01-04 / INSCRIPTION
+References: Civilization VII and Anno 1800.
+Observed principles: widely spaced capitals, strong contrast between fine
+and broad strokes, restrained ornament and an open title silhouette.
+Everfolk response: Horizon Inscription, a new set of E/V/R/F/O/L/K paths,
+with wedge terminals, tapered strokes, a long R leg and a clear oval O.
+Official sources:
+https://newsroom.2k.com/resources/sid-meier-s-civilization-vii-logo-2-2
+https://www.anno-union.com/games/anno-1800-lead-the-industrial-revolution/
+https://www.ubisoft.com/en-us/game/anno/1800
+
+05-08 / CALLIGRAPHY
+Reference: Crusader Kings III.
+Observed principles: character comes from calligraphic cuts, angular
+terminals and a distinctive word shape; a flat pale treatment can work.
+Everfolk response: Chisel Uncial, eight original capital/lowercase glyphs
+with asymmetric bowls, flared ascenders, an open E and angled crossbars.
+Official source:
+https://www.paradoxinteractive.com/games/crusader-kings-iii/about
+
+09-12 / GEOMETRY
+Reference: Manor Lords.
+Observed principles: restrained geometric capitals, compact stacked words,
+flat contrast and a simple divider create a clear title silhouette.
+Everfolk response: Threshold Capitals, seven original capitals with
+clipped corners, diagonal V/K rhythm and transparent polygonal counters.
+Official source:
+https://manorlords.com/
+
+13-16 / LIVING LETTERS
+Reference: Old World.
+Observed principles: organic lowercase lettering and a human, living
+character can distinguish a historical title from a monumental inscription.
+Everfolk response: Living Stone, seven new lowercase forms with broad
+curves, swept feet, flared terminals and slight asymmetry.
+Official sources:
+https://www.oldworldgame.com/
+https://mohawkgames.com/
+
+17-20 / DISPLAY TITLE
+Reference: Age of Empires IV.
+Observed principles: scale relationships, nested lines and tall proportions
+produce an identifiable title silhouette with restrained supporting rules.
+Everfolk response: large and small custom capitals, nested EVER/FOLK and
+one hybrid capital/lowercase signature. Everfolk has no added sequel number.
+Official source:
+https://www.ageofempires.com/games/age-of-empires-iv
+
+The comparison board labels these references so the design rationale can
+be assessed alongside the twenty Everfolk options. The directions reflect
+the user's historical strategy visual preference and preserve the brand
+name and motto, Live another story.

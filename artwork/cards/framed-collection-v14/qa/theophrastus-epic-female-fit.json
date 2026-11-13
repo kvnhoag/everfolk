@@ -1,0 +1,81 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Peripatetic Botanical Scholar",
+  "displayTitle": "Botanical Scholar",
+  "subtitle": "A Voice of Theophrastus' School",
+  "bodyTitle": "A Living Body of Knowledge",
+  "bodyText": "A botanical scholar brings many observations together and teaches others how to question them. Broad understanding gives the garden a lasting intellectual life, carrying Theophrastus' investigation beyond a single place or season.",
+  "sourceRoleSlug": "theophrastus-epic",
+  "newArt": false,
+  "slug": "theophrastus-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Peripatetic Botanical Scholar",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-female-pixel.png",
+  "sourceArtSlug": "theophrastus-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 72,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A botanical scholar brings many observations together and",
+    "teaches others how to question them. Broad understanding",
+    "gives the garden a lasting intellectual life, carrying",
+    "Theophrastus' investigation beyond a single place or",
+    "season."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-epic-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-epic-female.png",
+  "overlaySvg": "source/overlays/theophrastus-epic-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+  "master": "masters/theophrastus-epic-female.vectorcraft",
+  "export": "exports/theophrastus-epic-female.png",
+  "thumbnail": "assets/theophrastus-epic-female-thumb.png",
+  "exportSha256": "478cb32834b7bf6731fb02b7f4b4fca34a59f85c7d654a9494602366517b9c5d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582499,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

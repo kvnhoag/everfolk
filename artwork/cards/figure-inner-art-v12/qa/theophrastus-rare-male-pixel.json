@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-rare-male.png",
+  "sourceSha256": "f5974c51a30e4585adc008ba1986468c8c6b0ebd99ccaf7f7f803285b8d1432d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-rare-male-coarse.png",
+  "baseSha256": "4a49cbc08d519721b448c24dfc07e5244948d8e90d2d52c92f1e38e5d31ad39b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-rare-male-coarse.json",
+  "baseQaSha256": "409efce9a7014bdff8d3c6d17e7d41116cf82725ecece65f8dfeff53abc0628e",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\theophrastus-rare-male-face.json",
+  "configSha256": "d62d3c108e9ffdcd98a42b1182e3eef182603819543ba3466d9f86563117e16c",
+  "config": {
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "center": [
+          372,
+          176
+        ],
+        "name": "face-eyes",
+        "radius": [
+          107,
+          132
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\theophrastus-rare-male-pixel.png",
+  "outputSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "56fc58165778a4514967d6d398ddb7d140e3fae3c61728a8fbfc8f1b6e20197d",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\theophrastus-rare-male-face-mask.png",
+  "maskSha256": "dfce9fbdbb66941bf6e98c8ba546732dac00cea82e08c5a7afe31637be10acc7",
+  "maskPixelSha256": "68fc6d976c0616857e554c8eadd2645ab461fdec21c1319bb76d521b65c36286",
+  "selectedDetailCells": 1025,
+  "retainedCoarseCells": 23475,
+  "affectedPixels": 36900,
+  "changedPixels": 36600,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -5,8 +5,8 @@ import { buildHouseholdResourceWorld, LARGE_RESERVE_ORIGINS } from "../src/vocat
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import { engineForLife, loadAnyLife } from "../client/lib/world-session.ts";
 import type { WorldPack } from "../src/types.ts";
-import original from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
-import previous from "../worlds/demo/alexandria-lives-9.json" with { type: "json" };
+import original from "../worlds/demo/alexandria-lives-8-wsl-contributions.json" with { type: "json" };
+import previous from "../worlds/demo/alexandria-lives-9-wsl-resources.json" with { type: "json" };
 import current from "../worlds/demo/alexandria-lives-10.json" with { type: "json" };
 
 const world = current as unknown as WorldPack;

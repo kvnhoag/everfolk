@@ -1,0 +1,158 @@
+{
+  "artboards": [
+    {
+      "height": 340,
+      "name": "09 Primary lockup",
+      "width": 720,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "09 Colour device",
+      "width": 160,
+      "x": 760,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "09 One-colour device",
+      "width": 160,
+      "x": 960,
+      "y": 0
+    },
+    {
+      "height": 340,
+      "name": "09 Reverse lockup",
+      "width": 720,
+      "x": 0,
+      "y": 400
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 22,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 09 Sprouting Story",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 126.54629923296176,
+        "width": 412.478,
+        "x": 83.24,
+        "y": 503.31307576703824
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 22,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Reverse lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 102.40598852580479,
+        "width": 94.71999999999991,
+        "x": 992.64,
+        "y": 27.51401147419522
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 16,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 One-colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 102.40598852580479,
+        "width": 94.72000000000003,
+        "x": 792.64,
+        "y": 27.51401147419522
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 10,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 126.54629923296177,
+        "width": 412.478,
+        "x": 83.24,
+        "y": 103.31307576703823
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Primary lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "childCount": 0,
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 29,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#b58a49",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 4.5
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\09-sprouting-story.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "09-sprouting-story.vectorcraft",
+  "tool": "selection",
+  "uid": 32,
+  "units": "Pixels"
+}

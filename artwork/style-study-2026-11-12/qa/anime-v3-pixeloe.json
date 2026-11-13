@@ -1,0 +1,90 @@
+{
+  "method": "Published PixelOE, legacy CPU API",
+  "package": "1.0.0",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-before-v3.png",
+  "sourceSha256": "5c7a9cdadeeb736ff579461c776c590921261631052ea714da3d54e1dd8d567a",
+  "sourceSize": [
+    1672,
+    941
+  ],
+  "sourceCrop": null,
+  "aspectNote": "Explicit target16:9; PixelOE normalizes the source aspect by less than0.06%. No source crop.",
+  "upstream": "https://github.com/KohakuBlueleaf/PixelOE",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "torch": "2.7.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "presets": [
+    {
+      "name": "fine",
+      "width": 640,
+      "height": 360,
+      "scale": 3,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          640,
+          360
+        ],
+        "patch_size": 4,
+        "pixel_size": 3,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-fine.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-fine.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "a4a673d5cf504727864cfb313008cabd74b5efa7b75c789a1e9b26415733ffd9",
+      "logicalSha256": "0c4531835ee0aedfdf21ac9e02826051291fa308caa0c48bb1fd99f8df4f7a10",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "colourQuantization": false,
+      "uniqueColours": 42143,
+      "elapsedSeconds": 5.983
+    },
+    {
+      "name": "strong",
+      "width": 480,
+      "height": 270,
+      "scale": 4,
+      "options": {
+        "mode": "contrast",
+        "target_size": [
+          480,
+          270
+        ],
+        "patch_size": 4,
+        "pixel_size": 4,
+        "thickness": 1,
+        "color_matching": true,
+        "contrast": 1.0,
+        "saturation": 1.0,
+        "colors": null,
+        "no_upscale": true
+      },
+      "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.logical.png",
+      "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "outputSha256": "bbde61c87f73ecb1ff582e1416d43caf8650d5805c1f569d3bfd90b51d0f38ae",
+      "logicalSha256": "0e733a9f42d82580d01d922ac8781ba25b96705f6491de7fb7a53f2605faa41c",
+      "exactIntegerBlocks": true,
+      "deterministic": true,
+      "colourQuantization": false,
+      "uniqueColours": 32180,
+      "elapsedSeconds": 3.129
+    }
+  ],
+  "sourceUnchanged": true
+}

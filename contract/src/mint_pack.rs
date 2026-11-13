@@ -1,4 +1,4 @@
-//! Paid, persistent three-card mint packs. Raw keys extend existing deployments without changing Contract's Borsh layout.
+//! Paid, persistent 1–5 card mint packs. Raw keys extend existing deployments without changing Contract's Borsh layout.
 use crate::mint::Outcome;
 use crate::random::block_seed;
 use crate::shares::{bps_of, compute_shares};
@@ -7,7 +7,6 @@ use crate::{Contract, ContractExt};
 use near_sdk::json_types::{U128, U64};
 use near_sdk::{env, near, require, serde_json, Gas};
 
-const REROLL_FEE: u128 = 10_000_000_000_000_000_000_000; // 0.01 NEAR
 fn key(id: u64) -> Vec<u8> {
     format!("everfolk:mint-pack:{id}").into_bytes()
 }
@@ -23,7 +22,6 @@ pub struct MintCard {
     pub rarity: u8,
     pub affection: u8,
     pub action_id: String,
-    pub rerolled: bool,
 }
 #[near(serializers = [json])]
 #[derive(Clone, Debug)]
@@ -32,7 +30,6 @@ pub struct MintPack {
     pub evidence_hash: String,
     pub cards: Vec<MintCard>,
     pub total_fee: U128,
-    pub reroll_fee: U128,
     pub source_share_bps: u16,
 }
 #[near(serializers = [json])]
@@ -44,7 +41,6 @@ struct StoredPack {
 #[near(serializers = [json])]
 pub struct MintTerms {
     pub mint_fee: U128,
-    pub reroll_fee: U128,
     pub source_share_bps: u16,
     pub pack_version: u8,
 }
@@ -77,12 +73,37 @@ fn event(name: &str, data: serde_json::Value) {
     ));
 }
 
+const MIN_PACK_AGE: u16 = 18;
+const MAX_PACK_CARDS: u8 = 5;
+
+/// Returns 0 cards if the life ended before adulthood (`death_age < 18`), or 1–5 cards
+/// based on life duration and earned titles (`accomplishments` + `matched_figures`).
+pub fn pack_card_count(evidence: &Evidence) -> u8 {
+    let age = evidence.death_age as u32;
+    if age < MIN_PACK_AGE as u32 {
+        return 0;
+    }
+    let duration_base: usize = if age >= 60 {
+        3
+    } else if age >= 40 {
+        2
+    } else {
+        1
+    };
+    let titles_count = evidence
+        .accomplishments
+        .len()
+        .saturating_add(evidence.matched_figures.len());
+    duration_base
+        .saturating_add(titles_count)
+        .min(MAX_PACK_CARDS as usize) as u8
+}
+
 #[near]
 impl Contract {
     pub fn mint_terms(&self) -> MintTerms {
         MintTerms {
             mint_fee: self.params.mint_fee,
-            reroll_fee: U128(REROLL_FEE),
             source_share_bps: self.params.source_mint_share_bps,
             pack_version: 1,
         }
@@ -91,7 +112,7 @@ impl Contract {
         read(life_id.0).map(|p| p.view)
     }
 
-    /// Only signed, finished lives can open a pack. The cards are rolled and saved atomically with payment.
+    /// Only signed, finished lives can open a pack. The cards are rolled and saved atomically with payment; no rerolls.
     #[payable]
     pub fn open_mint_pack(
         &mut self,
@@ -110,10 +131,15 @@ impl Contract {
         self.assert_signed(&evidence_json, &signature);
         let evidence: Evidence = serde_json::from_str(&evidence_json).expect("life evidence json");
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
+        let card_count = pack_card_count(&evidence);
+        require!(
+            card_count > 0,
+            "This life ended too early to open a mint pack"
+        );
         let hash = hex::encode(env::sha256_array(evidence_json.as_bytes()));
         let mut cards = Vec::new();
-        for slot in 0..3 {
-            cards.push(self.pack_card(life_id.0, &hash, slot, false, &evidence, &npc_action_id));
+        for slot in 0..card_count {
+            cards.push(self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id));
         }
         let pack = StoredPack {
             view: MintPack {
@@ -121,7 +147,6 @@ impl Contract {
                 evidence_hash: hash,
                 cards,
                 total_fee: self.params.mint_fee,
-                reroll_fee: U128(REROLL_FEE),
                 source_share_bps: self.params.source_mint_share_bps,
             },
             evidence_json,
@@ -135,45 +160,14 @@ impl Contract {
         pack.view
     }
 
-    /// Each slot can be replaced once. A failed or rejected transaction leaves both the slot and the fee unchanged.
-    #[payable]
-    pub fn reroll_mint_slot(&mut self, life_id: U64, slot: u8) -> MintPack {
-        gas_floor();
-        self.owned_alive_life(life_id.0);
-        let mut pack = read(life_id.0).expect("Open a mint pack first");
-        exact_fee(pack.view.reroll_fee.0);
-        require!(slot < 3, "Unknown mint slot");
-        require!(
-            !pack.view.cards[slot as usize].rerolled,
-            "This slot has already been rerolled"
-        );
-        self.release_card(&pack.view.cards[slot as usize]);
-        let evidence: Evidence = serde_json::from_str(&pack.evidence_json).unwrap();
-        pack.view.cards[slot as usize] = self.pack_card(
-            life_id.0,
-            &pack.view.evidence_hash,
-            slot,
-            true,
-            &evidence,
-            &pack.npc_action_id,
-        );
-        pack.view.total_fee.0 += pack.view.reroll_fee.0;
-        write(&pack);
-        event(
-            "mint_pack_rerolled",
-            serde_json::json!({"slot":slot, "pack":pack.view}),
-        );
-        pack.view
-    }
-
-    /// Select exactly one stored outcome, mint it, and distribute the entire base + reroll fee using the source shares.
+    /// Select exactly one stored outcome from the opened pack, mint it, and distribute the pack fee using the source shares.
     #[payable]
     pub fn choose_mint_slot(&mut self, life_id: U64, slot: u8) -> MintResult {
         gas_floor();
         exact_fee(1); // wallet approval for the final selection
         let mut life = self.owned_alive_life(life_id.0);
         let pack = read(life_id.0).expect("Open a mint pack first");
-        require!(slot < 3, "Unknown mint slot");
+        require!((slot as usize) < pack.view.cards.len(), "Unknown mint slot");
         let card = &pack.view.cards[slot as usize];
         let evidence: Evidence = serde_json::from_str(&pack.evidence_json).unwrap();
         let shares = compute_shares(
@@ -262,11 +256,10 @@ impl Contract {
         id: u64,
         hash: &str,
         slot: u8,
-        rerolled: bool,
         evidence: &Evidence,
         npc: &str,
     ) -> MintCard {
-        let seed = block_seed(id, format!("mint-pack:{hash}:{slot}:{rerolled}").as_bytes());
+        let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
         let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog);
         let action_id = outcome
             .figure
@@ -295,7 +288,6 @@ impl Contract {
             rarity: outcome.rarity,
             affection: outcome.affection,
             action_id,
-            rerolled,
         }
     }
     /// Closing a paid pack forfeits its outcomes but still pays every source and the treasury.
@@ -363,11 +355,64 @@ mod tests {
             "letters.teach".into(),
         )
     }
+    fn custom_evidence_json(
+        seed: &str,
+        life_id: u64,
+        account_id: &str,
+        sources: &[(String, u64)],
+        matched: &[&str],
+        accomplishments: &[(&str, u16)],
+        death_age: u16,
+    ) -> String {
+        serde_json::json!({
+            "v": 1, "seed": seed, "life_id": life_id.to_string(), "account_id": account_id,
+            "world_version": "alexandria-ranked-1",
+            "world_fingerprint": "f".repeat(64), "save_hash": "a".repeat(64),
+            "stats": { "health": 40, "knowledge": 70, "wealth": 20, "bonds": 50 },
+            "skills": { "literacy": 80 }, "origin_id": "clerk-household", "peak_job_id": "copyist",
+            "accomplishments": accomplishments.iter().map(|(id, age)| serde_json::json!({ "id": id, "age": age })).collect::<Vec<_>>(),
+            "death_age": death_age, "birth_year": -350, "death_year": -350 + death_age as i32,
+            "career_group": "letters", "matched_figures": matched,
+            "sources": sources.iter().map(|(t, i)| serde_json::json!({ "token_id": t, "impact": i })).collect::<Vec<_>>(),
+        })
+        .to_string()
+    }
     #[test]
-    fn pack_is_persistent_then_mints_one_stored_card_and_splits_every_paid_fee() {
+    fn pack_card_count_scales_from_1_to_5_and_returns_zero_before_adulthood() {
+        let mut c = fresh();
+        c.set_catalog(sample_catalog());
+        c.set_world_versions(vec!["alexandria-ranked-1".into()]);
+        as_account(ALICE);
+        let id = c.start_life("alexandria-ranked-1".into()).life_id.0;
+        let seed = seed_of(&c, id);
+        let ev = |age: u16, acc: &[(&str, u16)], figs: &[&str]| -> Evidence {
+            serde_json::from_str(&custom_evidence_json(&seed, id, ALICE, &[], figs, acc, age)).unwrap()
+        };
+        assert_eq!(pack_card_count(&ev(0, &[("first-copy", 0)], &["euclid"])), 0);
+        assert_eq!(pack_card_count(&ev(17, &[("first-copy", 12)], &[])), 0);
+        assert_eq!(pack_card_count(&ev(18, &[], &[])), 1);
+        assert_eq!(pack_card_count(&ev(39, &[("first-copy", 20)], &[])), 2);
+        assert_eq!(pack_card_count(&ev(40, &[], &[])), 2);
+        assert_eq!(pack_card_count(&ev(59, &[("first-copy", 20)], &["euclid"])), 4);
+        assert_eq!(pack_card_count(&ev(60, &[], &[])), 3);
+        assert_eq!(pack_card_count(&ev(75, &[("a", 20), ("b", 35), ("c", 50)], &["euclid", "alexander"])), 5);
+    }
+    #[test]
+    #[should_panic(expected = "This life ended too early to open a mint pack")]
+    fn early_death_cannot_open_pack() {
+        let mut c = fresh();
+        c.set_catalog(sample_catalog());
+        c.set_world_versions(vec!["alexandria-ranked-1".into()]);
+        as_account(ALICE);
+        let id = c.start_life("alexandria-ranked-1".into()).life_id.0;
+        let ev = custom_evidence_json(&seed_of(&c, id), id, ALICE, &[], &[], &[("childhood", 10)], 16);
+        open(&mut c, id, &ev);
+    }
+    #[test]
+    fn pack_is_persistent_then_mints_one_stored_card_and_splits_the_fee() {
         let (mut c, id, e, source) = ready();
         let first = open(&mut c, id, &e);
-        assert_eq!(first.cards.len(), 3);
+        assert_eq!(first.cards.len(), 5);
         assert_eq!(
             c.get_mint_pack(U64(id)).unwrap().evidence_hash,
             first.evidence_hash
@@ -380,75 +425,53 @@ mod tests {
         context(
             ALICE,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(REROLL_FEE),
-            [9; 32],
-        );
-        let changed = c.reroll_mint_slot(U64(id), 1);
-        assert!(changed.cards[1].rerolled);
-        assert_eq!(changed.total_fee.0, BASE + REROLL_FEE);
-        assert_eq!(
-            serde_json::to_string(&first.cards[0]).unwrap(),
-            serde_json::to_string(&changed.cards[0]).unwrap()
-        );
-        assert_eq!(
-            serde_json::to_string(&first.cards[2]).unwrap(),
-            serde_json::to_string(&changed.cards[2]).unwrap()
-        );
-        context(
-            ALICE,
-            START_MS,
             near_sdk::NearToken::from_yoctonear(1),
             [10; 32],
         );
         let result = c.choose_mint_slot(U64(id), 1);
-        assert_eq!(result.figure_id, changed.cards[1].figure_id);
-        assert_eq!(result.rarity, changed.cards[1].rarity);
-        assert_eq!(result.affection, changed.cards[1].affection);
+        assert_eq!(result.figure_id, first.cards[1].figure_id);
+        assert_eq!(result.rarity, first.cards[1].rarity);
+        assert_eq!(result.affection, first.cards[1].affection);
         assert!(c.get_mint_pack(U64(id)).is_none());
         assert!(c.active_life_of(account(ALICE)).is_none());
         assert_eq!(c.get_life(U64(id)).unwrap().status, LifeStatus::Minted);
-        assert_eq!(c.balance_of(account(CAROL)).0, (BASE + REROLL_FEE) / 2);
-        assert_eq!(c.balance_of(account(TREASURY)).0, (BASE + REROLL_FEE) / 2);
+        assert_eq!(c.balance_of(account(CAROL)).0, BASE / 2);
+        assert_eq!(c.balance_of(account(TREASURY)).0, BASE / 2);
         assert_eq!(c.children_of(source.clone(), 0, 100), vec![result.token_id]);
         assert_eq!(c.token_stats(source).lives_influenced, 1);
         assert_eq!(c.pack_reserved("euclid"), 0);
     }
     #[test]
-    fn every_slot_can_reroll_once_and_close_still_distributes_the_total() {
+    fn abandoning_open_pack_distributes_fee_and_releases_reserves() {
         let (mut c, id, e, source) = ready();
-        open(&mut c, id, &e);
-        for slot in 0..3 {
-            context(
-                ALICE,
-                START_MS,
-                near_sdk::NearToken::from_yoctonear(REROLL_FEE),
-                [slot; 32],
-            );
-            c.reroll_mint_slot(U64(id), slot);
-        }
-        assert_eq!(
-            c.get_mint_pack(U64(id)).unwrap().total_fee.0,
-            BASE + 3 * REROLL_FEE
-        );
+        let opened = open(&mut c, id, &e);
+        assert_eq!(opened.cards.len(), 5);
+        assert_eq!(c.get_mint_pack(U64(id)).unwrap().total_fee.0, BASE);
         as_account(ALICE);
         c.abandon_life(U64(id));
-        assert_eq!(c.balance_of(account(CAROL)).0, (BASE + 3 * REROLL_FEE) / 2);
-        assert_eq!(
-            c.balance_of(account(TREASURY)).0,
-            (BASE + 3 * REROLL_FEE) / 2
-        );
+        assert_eq!(c.balance_of(account(CAROL)).0, BASE / 2);
+        assert_eq!(c.balance_of(account(TREASURY)).0, BASE / 2);
         assert_eq!(c.token_stats(source).lives_influenced, 0);
         assert_eq!(c.pack_reserved("euclid"), 0);
         assert!(c.get_mint_pack(U64(id)).is_none());
     }
     #[test]
     fn figure_cards_reserve_supply_until_released() {
-        let (mut c, id, e, _) = ready();
+        let (mut c, id, _, _) = ready();
         as_account(OWNER);
         let mut p = c.get_params();
         p.drop_rate_bps = 10_000;
         c.set_params(p);
-        let pack = open(&mut c, id, &e);
+        let three_card_ev = custom_evidence_json(
+            &seed_of(&c, id),
+            id,
+            ALICE,
+            &[],
+            &["euclid"],
+            &[],
+            40,
+        );
+        let pack = open(&mut c, id, &three_card_ev);
         assert_eq!(
             pack.cards
                 .iter()
@@ -489,26 +512,6 @@ mod tests {
         assert_eq!(c.pack_reserved("euclid"), 1);
     }
     #[test]
-    #[should_panic(expected = "This slot has already been rerolled")]
-    fn second_reroll_rejected() {
-        let (mut c, id, e, _) = ready();
-        open(&mut c, id, &e);
-        context(
-            ALICE,
-            START_MS,
-            near_sdk::NearToken::from_yoctonear(REROLL_FEE),
-            [3; 32],
-        );
-        c.reroll_mint_slot(U64(id), 0);
-        context(
-            ALICE,
-            START_MS,
-            near_sdk::NearToken::from_yoctonear(REROLL_FEE),
-            [4; 32],
-        );
-        c.reroll_mint_slot(U64(id), 0);
-    }
-    #[test]
     #[should_panic(expected = "This life already has an open pack")]
     fn reopening_cannot_buy_new_outcomes() {
         let (mut c, id, e, _) = ready();
@@ -529,30 +532,17 @@ mod tests {
         c.choose_mint_slot(U64(id), 0);
     }
     #[test]
-    #[should_panic(expected = "Attach exactly the quoted fee")]
-    fn underpaid_reroll_rejected() {
-        let (mut c, id, e, _) = ready();
-        open(&mut c, id, &e);
-        context(
-            ALICE,
-            START_MS,
-            near_sdk::NearToken::from_yoctonear(REROLL_FEE - 1),
-            [3; 32],
-        );
-        c.reroll_mint_slot(U64(id), 0);
-    }
-    #[test]
     #[should_panic(expected = "Unknown mint slot")]
     fn invalid_slot_rejected() {
         let (mut c, id, e, _) = ready();
-        open(&mut c, id, &e);
+        let pack = open(&mut c, id, &e);
         context(
             ALICE,
             START_MS,
             near_sdk::NearToken::from_yoctonear(1),
             [3; 32],
         );
-        c.choose_mint_slot(U64(id), 3);
+        c.choose_mint_slot(U64(id), pack.cards.len() as u8);
     }
     #[test]
     #[should_panic(expected = "The life evidence signature is not valid")]

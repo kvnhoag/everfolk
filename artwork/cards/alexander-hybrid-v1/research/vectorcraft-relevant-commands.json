@@ -1,0 +1,404 @@
+[
+  {
+    "enabled": true,
+    "id": "file.close",
+    "label": "Close",
+    "menu": [
+      "File"
+    ],
+    "params": "{index?}",
+    "shortcut": "Cmd+W"
+  },
+  {
+    "disabled_reason": "nothing selected",
+    "enabled": false,
+    "id": "object.group",
+    "label": "Group",
+    "menu": [
+      "Object"
+    ],
+    "params": "{ids?: [id…] (selected first; default: the selection)} → {id}",
+    "shortcut": "Cmd+G"
+  },
+  {
+    "disabled_reason": "select at least two objects",
+    "enabled": false,
+    "id": "object.clippingMask.make",
+    "label": "Make",
+    "menu": [
+      "Object",
+      "Clipping Mask"
+    ],
+    "params": "{ids?: [id…] (selected first; default: the selection)} the topmost selected object (a path, compound path or text, which loses its paint) clips the others: compound holes, even-odd fills and glyph outlines clip as drawn. Paint given to the clipping path later (paint commands with its id) shows: its fill behind the clipped art, its stroke over it → {id} of the clip group",
+    "shortcut": "Cmd+7"
+  },
+  {
+    "enabled": true,
+    "id": "object.setProps",
+    "label": "Object Properties",
+    "menu": [],
+    "params": "{ids?|id?, name?, visible?, locked? (visible: false or locked: true deselects every selected object hidden or locked after the call, the key object included), opacity?: 0..100, blend?: \"Multiply\"…, isolate?, knockout?: \"on\"|\"off\"|\"neutral\"|bool (true = on, false = neutral), knockoutShape?: bool, data?: {key: \"value\" | null (removes it)} (the object's own data, SVG data-* attributes: {pivot: \"100,180\"} is data-pivot; document.node → attrs.data)}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.new",
+    "label": "New Layer…",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{name?, top?: bool, below?: bool, color?, template?, locked?, visible?, printable?, preview?, dimImages?} a layer directly above the current layer, at its level (a sublayer beside a current sublayer); `top`: above all layers (Ctrl/Cmd-click the button); `below`: directly below the current layer, at its level (Ctrl/Cmd+Alt-click the button), not with `top`. Options as layer.setProps; refused while an opacity mask is edited (the Layers panel lists only the mask) → {id}",
+    "shortcut": "Cmd+L"
+  },
+  {
+    "enabled": true,
+    "id": "layer.newSublayer",
+    "label": "New Sublayer…",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{parent?: layer id (default: the highlighted row's layer, else the current layer), bottom?: bool, name?, …options as layer.new} a sublayer on top of the parent's contents; `bottom`: under the parent's contents, above a clipping layer's clipping path (Ctrl/Cmd+Alt-click the button); refused while an opacity mask is edited → {id}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.delete",
+    "label": "Delete Selection",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} delete rows: layers, sublayers, groups or objects with what they hold (default: the highlighted rows, else the current layer). The last layer stays → {deleted}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.duplicate",
+    "label": "Duplicate Selection",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} copy rows (default: the highlighted rows, else the current layer), each just above its original; a layer's copy is named `<name> copy`. The copies are highlighted → {ids}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.setCurrent",
+    "label": "Set Current Layer",
+    "menu": [],
+    "params": "{id} click a row: it alone is highlighted, and the layer it is (or the layer it is in) becomes the current layer, where new art goes. Not an undo step → {id, layer}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.highlight",
+    "label": "Highlight Rows",
+    "menu": [],
+    "params": "{ids, mode?: \"set\"|\"add\"|\"toggle\"} highlight Layers panel rows (Shift-click: a range, Ctrl-click: toggle one); the last one's layer becomes current. Not an undo step → {rows}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.setProps",
+    "label": "Layer Options…",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id? (default: the highlighted rows, else the current layer), name? (with prefs.identifyObjectsBy xmlId: a valid XML ID, stored as the object name), visible?, locked?, template?, printable?, preview?, dimImages?: 0..100|false, color?: index 0..26|\"#rrggbb\"|preset name} Layer Options; rows that are not layers take name, visible and locked. Template on also locks the layer and dims its images to 50% (unless given); off unlocks it and stops dimming. One undo step",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.collectInNew",
+    "label": "Collect in New Layer",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?} move rows (default: the highlighted rows, else the selected objects) into a new layer where the topmost of them was (a sublayer when they are in a layer), deselecting every selected object left hidden or locked (the key object too) → {id}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.selectAll",
+    "label": "Select Art",
+    "menu": [],
+    "params": "{id, add?: bool} the Layers panel's selection column: select the visible, unlocked art of a layer (its sublayers' too), or the object itself; `add` (Shift-click) adds it to the selection, or removes it when it is all selected already → {selected: [..]}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.move",
+    "label": "Move Rows",
+    "menu": [],
+    "params": "{ids|id, target, place?: \"above\"|\"below\"|\"inside\" (default inside), copy?: bool} drag rows in the Layers panel: above or below the target row (beside it, in its layer or group), or inside a layer or group (on top of its contents). Layers go only in layers or at the top level, objects in layers and groups; an object placed beside a top-level layer goes inside it. A row never goes into itself; a locked layer or group takes nothing. `copy` (Alt-drag) moves copies. Every selected object left hidden or locked, such as one moved into a hidden layer or group, is deselected (the key object too). One undo step → {ids}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.clippingMask.toggle",
+    "label": "Make/Release Clipping Mask",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{id?: layer or group (default: the one highlighted layer or group row, else the one selected group, else the current layer)} make: its top object (a path, compound path or text, which loses its paint) clips the rest and moves to the bottom (new art added on top is clipped); release: it stops clipping, the clipping path stays unpainted → {clip}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.target",
+    "label": "Target",
+    "menu": [],
+    "params": "{id, add?: bool (Shift-click: the item joins the selection, or leaves it when all selected; nothing is targeted)} target a layer, group or object as clicking its target circle in the Layers panel does: a layer gets its visible, unlocked art (its sublayers' too) selected and becomes the current layer, and appearance.*, effect.*, transparency.* and the opacity-mask commands without `ids` then act on the layer itself; anything else is selected. Any other selection change ends the targeting (`document.inspect` → target) → {id, selected: [..]}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.pasteRemembersLayers",
+    "label": "Paste Remembers Layers",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{on?} (default: toggle) the document option: on, the Paste commands put objects back into the layers they were copied from (by name; a missing one is made on top), off into the current layer; one undo step when it changes (document.inspect → pasteRemembersLayers) → {on}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.merge",
+    "label": "Merge Selected",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} (default: the highlighted rows) merge two or more rows into the layer listed (highlighted) last: the other layers' contents and the other rows move into it, keeping their stacking order, and the emptied layers go. Every selected object left hidden or locked, such as one merged into a hidden or locked layer, is deselected (the key object too). One undo step → {id}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.flatten",
+    "label": "Flatten Artwork",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{id?} (default: the highlighted row's top-level layer, else the current one's) move the art of every other visible top-level layer into this one, keeping the stacking order; hidden layers and their art are deleted, template layers stay. Every selected object left hidden or locked, such as one flattened into a locked layer, is deselected (the key object too). One undo step → {id, discarded}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.releaseToLayers",
+    "label": "Release to Layers (Sequence)",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{id?: layer or group (default: the highlighted row, else the current layer), build?: bool} each object in it goes into a new sublayer of its own, in stacking order (a group's objects go into sublayers of its layer, where the group was). `build`: Release to Layers (Build), each new sublayer holds copies of the objects up to its own, so the layers add up. One undo step → {ids}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.releaseToLayersBuild",
+    "label": "Release to Layers (Build)",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{id?} layer.releaseToLayers with build: true → {ids}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.reverse",
+    "label": "Reverse Order",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} (default: the highlighted rows) reverse the stacking order of two or more rows that share a layer or group; each keeps the places the others held. One undo step",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.template",
+    "label": "Template",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?, on?: bool (default: toggle the first)} make layers templates (locked, dimmed, left out of print and export) or ordinary layers again (layer.setProps template) → {on}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.hideOthers",
+    "label": "Hide Others",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} hide every top-level layer but those holding the highlighted rows (else the current layer), which show. One undo step → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.showAll",
+    "label": "Show All Layers",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{} show every layer and sublayer → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.outlineOthers",
+    "label": "Outline Others",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} turn Preview off (outline view) for every top-level layer but those holding the highlighted rows (else the current layer), which preview → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.previewAll",
+    "label": "Preview All Layers",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{} turn Preview on for every layer and sublayer → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.lockOthers",
+    "label": "Lock Others",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{ids?|id?} lock every top-level layer but those holding the highlighted rows (else the current layer), which unlock → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.unlockAll",
+    "label": "Unlock All Layers",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{} unlock every layer and sublayer → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "layer.locate",
+    "label": "Locate Object",
+    "menu": [
+      "Window",
+      "Layers"
+    ],
+    "params": "{id?} (default: the last selected object) highlight the object's row; the Layers panel opens the layers around it and scrolls to it → {id, ancestry: [layer…, id]}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "text.setStyle",
+    "label": "Character",
+    "menu": [],
+    "params": "{ids?|id?, font?, style? (font alone: the style is kept when the new family has it, else its closest), size?: pt, leading?: pt|\"auto\", tracking?: 1/1000 em, justify?: \"auto\" (the start of each paragraph's direction)|\"left\"|\"center\"|\"right\"|\"justifyAll\", fill?: colour, keepModel?: bool (as paint.setFill), features?: [\"dlig\", \"-liga\", …] OpenType, featureChanges?: [\"tnum\", \"-onum\", …] (OpenType features turned on, or with - off, on top of each character's own; its other features are kept), start?: byte, end?: byte} (size/leading are document points after object scaling; with a range: the character attributes style that range and justify the paragraphs it touches; without: all the text) → {ids, overflow?: [id…] (area type and type on a path whose text no longer fits; left out when all fits), warning?: text (the font or style set isn't available: its type is drawn in the fallback font or the family's closest style)}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "text.fonts",
+    "label": "Fonts in Document",
+    "menu": [],
+    "params": "{selectionOnly?} (the type in the art of the symbols in scope included: all of the document's, or those the selected instances show) → [{family, style, runs, objects, missing, status: exact|substitute|missing, resolved: {family, style}, missingGlyphs, version?: the installed version the type names (when it names one)}] sorted by name. A font is found by any of its names (ヒラギノ角ゴシック = Hiragino Sans) among the loaded and installed fonts; substitute: the family is there but not the style (resolved names the stand-in); missing: the family is unknown (the fallback family stands in); missingGlyphs: characters of its text the resolved font lacks (drawn by a fallback font)",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "select.font",
+    "label": "Select Text by Font",
+    "menu": [],
+    "params": "{family, style?} select the text objects using the font, and the instances of the symbols whose art uses it, that are not hidden or locked, in a hidden or locked group or layer, or on a locked artboard → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "text.fontList",
+    "label": "Font List",
+    "menu": [],
+    "params": "{family?, style?} → {families: [names]} sorted: the bundled fonts, fonts added and the fonts installed on the system (none on the web), each the family's English (canonical) name for `text.setStyle` and documents (without the system's hidden families, whose names start with a dot; they still resolve by name). Preferences › Type › Show Font Names in English only changes the UI menu labels, not this list; with family: {family, styles: [names] (upright styles by weight, then italics; an error when the family isn't available), axes: [{tag, name, min, default, max, value, hidden}] (a variable font's variation axes, the Character panel's Variable Font sliders, with `value` the setting of `style`, else of the first style; empty for a static font; `hidden`: the font asks for the axis not to be shown)}",
+    "shortcut": null
+  },
+  {
+    "disabled_reason": "nothing selected",
+    "enabled": false,
+    "id": "select.same.fontFamily",
+    "label": "Font Family",
+    "menu": [
+      "Select",
+      "Same"
+    ],
+    "params": "{} → {count}",
+    "shortcut": null
+  },
+  {
+    "disabled_reason": "nothing selected",
+    "enabled": false,
+    "id": "select.same.fontFamilyStyle",
+    "label": "Font Family & Style",
+    "menu": [
+      "Select",
+      "Same"
+    ],
+    "params": "{} → {count}",
+    "shortcut": null
+  },
+  {
+    "disabled_reason": "nothing selected",
+    "enabled": false,
+    "id": "select.same.fontFamilyStyleSize",
+    "label": "Font Family, Style & Size",
+    "menu": [
+      "Select",
+      "Same"
+    ],
+    "params": "{} → {count}",
+    "shortcut": null
+  },
+  {
+    "disabled_reason": "nothing selected",
+    "enabled": false,
+    "id": "select.same.fontSize",
+    "label": "Font Size",
+    "menu": [
+      "Select",
+      "Same"
+    ],
+    "params": "{} → {count}",
+    "shortcut": null
+  },
+  {
+    "enabled": true,
+    "id": "file.place",
+    "label": "Place…",
+    "menu": [
+      "File"
+    ],
+    "params": "{path | name | dataBase64 (a file's path, or its name with its bytes), link?: true (a raster image keeps its file's path; a VectorCraft document at path becomes one locked placed document showing artboard `page`, linked to the file and read again when it changes (links.update; saving it in this app updates it at once), drawn as vectors in every output; so does a PDF/.ai page at path, showing its `crop` box, unless password or textAs: \"outlines\" is given; false: an editable copy of its art, as from dataBase64; other files are embedded), text?: {characterSet?: \"unicode\" (UTF-8, or UTF-16 with a byte-order mark; other bytes as the platform's 8-bit set) | \"ansi\" (the platform's 8-bit set), platform?: \"windows\" (Windows-1252) | \"mac\" (Mac Roman), removeLineReturns?: false (each block of lines becomes one paragraph; blank lines end paragraphs), removeParagraphReturns?: false (drop blank lines), replaceSpaces?: n (runs of n ≥ 2 spaces become a tab)} (a .txt file, placed as area type filling rect, the replaced object's bounds, or else the artboard less a 36 pt margin), template?: false (onto a new locked template layer below the current layer), replace?: false (swap the one selected object, keeping its stacking place and transform; no at/rect), at?: [x, y] centre (default: the first artboard's centre), rect?: [x, y, width, height] fit inside; aspect kept (wins over at), page?: 1 (PDF/.ai page, or a native document's artboard), crop?: \"crop\" (clipped to that page or artboard, default; an SVG, only when given: framed and clipped by its viewBox, else by its art's bounds) | \"bounding\" (the bounds of the art that shows, with its strokes and effects, as an export measures them: hidden objects and guides left out) | \"art\" | \"trim\" | \"bleed\" | \"media\" (a PDF page's boxes), password? (an encrypted PDF), dxf?: {…the DXF options of document.open} (a .dxf drawing: fit fills the artboard under at, else the first; fitted or uncentred art lands with its drawing's artboard on that artboard, else it is centred on at)} → {ids, name, format, linked, width, height, warnings}. Raster images come in at 100% of their physical size (the file's ppi, else 72); SVG, DXF, PDF/.ai, EMF/WMF (clipped to the picture's frame), EPS (clipped to its bounding box; as document.open reads it), a .ai saved without PDF compatibility (from its editing data, as document.open reads it: the art of the layers that show on artboard `page`, clipped to that artboard unless crop is \"bounding\") and native documents as one group, with the images, symbols, patterns and swatches they use. One undo step; selects what it placed (unless on a template layer); never touches the clipboard. A PNG, JPEG, GIF or WebP image whose pixels can't be read (a file cut short) is an error, and nothing is placed",
+    "shortcut": "Cmd+Shift+P"
+  }
+]

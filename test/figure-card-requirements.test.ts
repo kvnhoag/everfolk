@@ -7,7 +7,7 @@ import { createEngine } from "../src/engine.ts";
 import type { FigureCardRank } from "../chain/catalog/figure-roster.ts";
 import type { AccomplishmentRecord, WorldPack } from "../src/types.ts";
 import { yearAtAge } from "../src/calendar.ts";
-import current from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-7-wsl-contributions.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 const world = current as unknown as WorldPack;
 const figure = (id: string) => figureRosterEntry(id)!;

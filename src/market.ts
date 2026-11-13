@@ -1,4 +1,6 @@
 import type { JobDefinition, LifeState, MarketOrderRequest, MarketSettlement, WorldPack } from "./types.ts";
+import { isRoyalLife } from "./royalty.ts";
+import { isAristocratLife } from "./aristocracy.ts";
 
 const LIMIT = 1_000_000_000_000;
 function safe(value: number): number {
@@ -79,6 +81,8 @@ export function productionPlan(world: WorldPack, life: LifeState, job: JobDefini
 }
 
 export function marketOrderReason(world: WorldPack, life: LifeState, request: MarketOrderRequest): string | undefined {
+  if (isRoyalLife(world, life)) return "Royal households delegate trade to their stewards. Manage the royal treasury through the court.";
+  if (isAristocratLife(world, life)) return "Aristocratic households delegate trade to their stewards. Manage rents, improvements and dependants through the estate.";
   const model = world.economy?.market, economy = life.economy;
   if (!model || !economy?.market) return "There is no annual market in this world.";
   if (life.phase !== "ready") return life.phase === "ended" ? "This life has ended." : "Resolve the current decision first.";

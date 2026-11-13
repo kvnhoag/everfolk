@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\demetrius-uncommon-female.png",
+  "sourceSha256": "3150308a2ccce500e9d07f42030727c20ab5cef198be572dc276697fbb8e0215",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\demetrius-uncommon-female-coarse.png",
+  "baseSha256": "a9eb49b1f07e582d5460e1e61fa173455efa54f00b11250439429bc8647eab8b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\demetrius-uncommon-female-coarse.json",
+  "baseQaSha256": "4b05002a8df60b8bca2ee09dca35226a04e3534b3fae30c946e725bd35c0d5e9",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\demetrius-uncommon-female-face.json",
+  "configSha256": "ac19486849cdfb9690ebccffc5e9a50b4d4c51d9e8ad81a2afca2e911b79f131",
+  "config": {
+    "base_pixel_size": 3,
+    "regions": [
+      {
+        "center": [
+          445,
+          240
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          110,
+          140
+        ]
+      }
+    ],
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\demetrius-uncommon-female-pixel.png",
+  "outputSha256": "e67b979c076a6add4a6f5b1ac30b7c90cc691732eac95c2216b1a5a08f80deb5",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "b459b6b700ea3882585c4b83540be1d7544e0637453224d931265e2312c26324",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\demetrius-uncommon-female-face-mask.png",
+  "maskSha256": "47956667856dafaf1cf71f86577d8cad2cbed192c4ad5061edae4e6615bb243f",
+  "maskPixelSha256": "167d419b4dc4f4e2e4c70bc9322176370b54e0ecd72270f55ba54dfa15eb2234",
+  "selectedDetailCells": 1107,
+  "retainedCoarseCells": 23393,
+  "affectedPixels": 39852,
+  "changedPixels": 39534,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

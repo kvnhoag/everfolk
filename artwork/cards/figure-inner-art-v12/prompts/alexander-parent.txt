@@ -1,0 +1,14 @@
+Use case: precise-object-edit. Produce a clean 4:5 painterly inner illustration for an Everfolk character card.
+
+Image 1 is the edit target: the mounted Alexander painting. Image 2 is the USER'S DEFINITIVE CHARACTER ARMOUR REFERENCE. Use only that character's visible equipment for the outfit. Do not use the existing iron-and-gold lion-head cuirass, or armour associated with another named person.
+
+Replace only the outfit/armour to match Image 2 closely, fitted naturally to the raised-arm mounted pose:
+- fitted pale ivory/grey cuirass with muted red edging, fine geometric/meander trim and a prominent dark silver Gorgon-face device centred high on the chest;
+- broad pale shoulder straps bordered red with small gold rosette fastenings, narrow gold neckline trim, short overlapping burgundy shoulder strips over upper arms;
+- plain brown diagonal baldric from his right shoulder toward opposite hip;
+- deep purple waist sash with knotted hanging ends; restrained silver overlapping scale panels just below the sash;
+- two tiers of narrow burgundy pteruges with light stitched edges over a short pale chiton;
+- asymmetric forearm protection matching the reference: simple pale bronze rigid guard on his sword arm and dark leather wraps on the reins arm.
+Translate the reference's construction into the painting's oil brushwork and lighting. Remove the prior lion-head rings, broad gold torso framework, extra horizontal gold bands and gold-edged metal-looking skirt. The armour should read as this character's reference outfit rather than a replacement archaeological object.
+
+KEEP the character bare-headed to preserve the anchor's face, expressive eyes, hair and silhouette; use the reference's BODY ARMOUR, not its helmet, plumes, face or standing pose. Preserve the red cloak, rider's recognizable face/head angle/gaze, dark horse, army, sunset, storm sky, crop and commanding gesture exactly as closely as possible. Keep the corrected right-hand grip and LONG STRAIGHT SWORD from Image 1 unchanged: same blade length, position, rotation, coherent hilt/tang/blade axis, five plausible fingers and wrist. Preserve reins and left-hand position. No additional weapons, text, card frame, border, watermark, pixelation or reference collage. One finished oil-painted illustration.

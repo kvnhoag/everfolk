@@ -1,0 +1,81 @@
+{
+  "figureId": "demetrius",
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Siege Labourer",
+  "displayTitle": "Siege Labourer",
+  "subtitle": "Hand of the Siege Train",
+  "bodyTitle": "The Timber Must Rise",
+  "bodyText": "A siege labourer moves timber, rope, and stone where the builders need them. Endurance turns the engineer's design into solid material, raising the patient groundwork beneath a machine meant to challenge walls.",
+  "sourceRoleSlug": "demetrius-common",
+  "newArt": true,
+  "sceneBrief": "A plain-clothed siege labourer carries timber or coils of heavy rope at a construction yard, unfinished timber tower behind; no advanced engineering instruments.",
+  "slug": "demetrius-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Siege Labourer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/demetrius-common-male-pixel.png",
+  "sourceArtSlug": "demetrius-common-male",
+  "editionLimit": null,
+  "collectionIndex": 56,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A siege labourer moves timber, rope, and stone where the",
+    "builders need them. Endurance turns the engineer's design",
+    "into solid material, raising the patient groundwork beneath",
+    "a machine meant to challenge walls."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-common-male.svg",
+  "fittedArt": "assets/fitted/demetrius-common-male.png",
+  "overlaySvg": "source/overlays/demetrius-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "850faf40b274d05c6eec6ceaca8bab7117fc14b304c0facd08ede769a4e4a4e7",
+  "master": "masters/demetrius-common-male.vectorcraft",
+  "export": "exports/demetrius-common-male.png",
+  "thumbnail": "assets/demetrius-common-male-thumb.png",
+  "exportSha256": "952ea50574c096c2e4a7b53460653fe5ef70c27072216f42dc2cc2d875f47cca",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582657,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "figureId": "pytheas",
+  "figureName": "Pytheas of Massalia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Deckhand of Massalia",
+  "displayTitle": "Deckhand of Massalia",
+  "subtitle": "Crew of the Northern Venture",
+  "bodyTitle": "The Voyage Begins Here",
+  "bodyText": "A deckhand handles rope, cargo, and the small repairs that keep a vessel ready. Steady labour gives the expedition its footing, making the next unfamiliar coast possible long before it appears.",
+  "sourceRoleSlug": "pytheas-common",
+  "newArt": true,
+  "sceneBrief": "A common deckhand coils hemp rope aboard a simple Massaliot merchant vessel; coarse tunic, harbour or calm sea, no elite equipment.",
+  "slug": "pytheas-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Deckhand of Massalia",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/pytheas-common-female-pixel.png",
+  "sourceArtSlug": "pytheas-common-female",
+  "editionLimit": null,
+  "collectionIndex": 39,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/pytheas.svg",
+    "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A deckhand handles rope, cargo, and the small repairs that",
+    "keep a vessel ready. Steady labour gives the expedition its",
+    "footing, making the next unfamiliar coast possible long",
+    "before it appears."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-common-female.svg",
+  "fittedArt": "assets/fitted/pytheas-common-female.png",
+  "overlaySvg": "source/overlays/pytheas-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "ff24e5457398830f5f4642c217eadbb5a66a84aefe35ee5981d6240a47b06904",
+  "master": "masters/pytheas-common-female.vectorcraft",
+  "export": "exports/pytheas-common-female.png",
+  "thumbnail": "assets/pytheas-common-female-thumb.png",
+  "exportSha256": "7142c668490a0297b162297ee66693e7fb8cff622144a0a762b61e1b3fe361c0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582623,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

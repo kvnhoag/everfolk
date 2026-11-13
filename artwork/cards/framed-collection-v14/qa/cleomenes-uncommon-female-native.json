@@ -1,0 +1,361 @@
+{
+  "type": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "cleomenes-uncommon-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 25.4091796875,
+          "width": 72.76171875,
+          "x": 743.23828125,
+          "y": 1187.00025
+        },
+        "fill": "#eee4ce",
+        "id": 98,
+        "kind": "Type",
+        "locked": false,
+        "name": "Edition number live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "001/∞",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 37.01700000000005,
+          "width": 146.124,
+          "x": 96,
+          "y": 1182
+        },
+        "fill": "#eee4ce",
+        "id": 97,
+        "kind": "Type",
+        "locked": false,
+        "name": "Everfolk brand live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "EVERFOLK",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 20.5693359375,
+          "width": 124.341796875,
+          "x": 679.658203125,
+          "y": 978.53125
+        },
+        "fill": "#23332b",
+        "id": 96,
+        "kind": "Type",
+        "locked": false,
+        "name": "Rarity live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "UNCOMMON",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 110.904,
+          "width": 636.5999999999999,
+          "x": 96,
+          "y": 1015.136
+        },
+        "fill": "#23332b",
+        "id": 95,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography / editable paragraph",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "A revenue assistant checks receipts and records the passage\nof money and grain. Patient accuracy makes the treasury's\nfigures traceable, giving its larger decisions a firmer\nbasis than rumour, pressure, or convenient memory.",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 39.759000000000015,
+          "width": 366.2120000000001,
+          "x": 96,
+          "y": 964.956
+        },
+        "fill": "#23332b",
+        "id": 94,
+        "kind": "Type",
+        "locked": false,
+        "name": "Biography title live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "The Account Holds Together",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 22.9892578125,
+          "width": 341.6015625,
+          "x": 279.19921875,
+          "y": 144.59375
+        },
+        "fill": "#d9bc80",
+        "id": 93,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card subtitle live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "SCRIBE OF THE NILE TREASURY",
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 79.518,
+          "width": 690.606,
+          "x": 104.69699999999995,
+          "y": 67.852
+        },
+        "fill": "#f0e6cf",
+        "id": 92,
+        "kind": "Type",
+        "locked": false,
+        "name": "Card title live",
+        "path": [
+          1,
+          99
+        ],
+        "stroke": "None",
+        "strokeOptions": {
+          "align": "center",
+          "alignDashes": false,
+          "arrowAlign": "extend",
+          "cap": "butt",
+          "dash": null,
+          "dashOffset": 0,
+          "endArrow": null,
+          "gradientMode": "within",
+          "join": "miter",
+          "miterLimit": 10,
+          "profile": "uniform",
+          "startArrow": null,
+          "widthPoints": null
+        },
+        "strokeWidth": 0,
+        "text": "Revenue Records Assistant",
+        "visible": true
+      }
+    ],
+    "objects": 100,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\cleomenes-uncommon-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "cleomenes-uncommon-female.svg",
+    "tool": "selection",
+    "total": 7,
+    "uid": 284,
+    "units": "Pixels"
+  },
+  "art": {
+    "artboards": [
+      {
+        "height": 1260,
+        "name": "Artboard 1",
+        "width": 900,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 1,
+    "dirty": false,
+    "fileInfoTitle": "cleomenes-uncommon-female.svg",
+    "history": [],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [],
+    "nodes": [
+      {
+        "bounds": {
+          "height": 1260,
+          "width": 900,
+          "x": 0,
+          "y": 0
+        },
+        "fill": "None",
+        "id": 2,
+        "kind": "Image",
+        "locked": false,
+        "name": "<Image>",
+        "path": [
+          1,
+          4,
+          3
+        ],
+        "stroke": "None",
+        "strokeWidth": 0,
+        "visible": true
+      }
+    ],
+    "objects": 100,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "#ffffff",
+      "fillActive": true,
+      "stroke": "#000000",
+      "strokeWidth": 1
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\framed-collection-v14\\source\\cards\\cleomenes-uncommon-female.svg",
+    "redo": [],
+    "revision": 1,
+    "selection": [],
+    "selectionBounds": null,
+    "selectionRotation": 0,
+    "target": null,
+    "title": "cleomenes-uncommon-female.svg",
+    "tool": "selection",
+    "total": 1,
+    "uid": 284,
+    "units": "Pixels"
+  }
+}

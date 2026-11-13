@@ -12,7 +12,7 @@ export function getLegacyRoutes(world: WorldPack, state: LifeState): readonly Le
     const earned = records.filter(record => record.routeId === route.id);
     const achieved = (id: string) => earned.some(record => record.achievementId === id);
     const definitions = route.achievementIds.map(id => world.legacy!.achievements.find(item => item.id === id)!);
-    const firstWork = definitions.filter(item => item.kind === "ordinary" && !route.stages?.some(stage => stage.achievementIds.includes(item.id)));
+    const firstWork = definitions.filter(item => !item.figure && item.kind === "ordinary" && !route.stages?.some(stage => stage.achievementIds.includes(item.id)));
     const assessed = (id: string) => definitions.find(item => item.id === id)?.kind === "ultimate" &&
       world.character?.activities.some(activity => state.character?.lastActivityAges[activity.id] !== undefined &&
         activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === id)));
@@ -50,6 +50,7 @@ export function awardAccomplishment(
     title: figureTitle ?? definition.title, description: definition.description, kind: definition.kind,
     name: figureName ?? legacyText(world, state, definition.nameTemplate), age: state.age, year: state.year,
     sourceId, outcomeId, people: [...definition.people],
+    ...(definition.figure ? { figure: { ...definition.figure } } : {}),
   };
   state.accomplishments.push(record);
   return record;

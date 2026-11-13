@@ -3,7 +3,7 @@ import test from "node:test";
 import { scaleCropQuantity } from "../src/demo/resource-scale.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { WorldPack } from "../src/types.ts";
-import retained from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import retained from "../worlds/demo/alexandria-lives-8-wsl-contributions.json" with { type: "json" };
 
 test("bulk crop scaling is opt-in and retains positive whole seed inputs", () => {
   for (const value of [0, 1, 2, 10, 20, 240, 500]) assert.equal(scaleCropQuantity(undefined, value), value);

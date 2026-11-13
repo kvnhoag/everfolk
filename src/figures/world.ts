@@ -4,6 +4,7 @@ import type { VocationAction } from "../vocations/types.ts";
 import { biographyFor } from "../../chain/catalog/figure-biographies.ts";
 import { FIGURE_RANK_POLICY } from "../../chain/catalog/figure-ranks.ts";
 
+/** Retained: figure paths on the unchanged lives-5 pack. Current births use LIVES_WORLD_VERSION (src/vocations/ids.ts). */
 export const FIGURE_PATH_WORLD_VERSION = "alexandria-lives-6";
 export const DEEP_FIGURE_PATH_WORLD_VERSION = "alexandria-figures-1";
 const all = (...conditions: Condition[]): Condition => ({ type: "all", conditions });
@@ -150,11 +151,15 @@ const specs: Spec[] = [
 ];
 
 /** Build only a new revision; retained packs are never amended at load time. */
-export function buildFigurePathWorld(base: WorldPack): WorldPack {
+/**
+ * Add the figure paths to a retained world. By default the revision follows the base: deep-1 → figures-1, lives-5 → lives-6.
+ * Pass `version` to publish the same figure paths on another rules base (alexandria-lives-8 on the lives-7 rules).
+ */
+export function buildFigurePathWorld(base: WorldPack, version?: string): WorldPack {
   if ((!base.deepCapabilities && !base.capabilities) || !base.character || !base.vocations || !base.legacy || !base.demo) throw new Error("Figure paths require the completed deep-skill world.");
   if (base.figurePaths) throw new Error("Build figure paths from a retained world without figure-path metadata.");
   const world = structuredClone(base);
-  world.version = world.deepCapabilities ? DEEP_FIGURE_PATH_WORLD_VERSION : FIGURE_PATH_WORLD_VERSION;
+  world.version = version ?? (world.deepCapabilities ? DEEP_FIGURE_PATH_WORLD_VERSION : FIGURE_PATH_WORLD_VERSION);
   world.title = "Alexandria — Historical lives and earned legacies";
   world.description = "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements.";
   world.figurePaths = [];

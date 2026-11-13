@@ -6,6 +6,8 @@ import { getRelevantResources } from "./market.ts";
 import { marketQuote } from "../../src/market.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
 import type { TradeItem } from "../../src/demo/types.ts";
+import { isPrivilegedLife } from "../../src/aristocracy.ts";
+import { householdManagement } from "./household-management.ts";
 
 export interface BirthRollStat {
   id: string;
@@ -219,12 +221,14 @@ export function getBirthRollResources(world: WorldPack, life: LifeState): BirthR
 /** Keep the birth reveal about this household rather than the world's complete
  * catalogue. An actual possession is shown even when unrelated to its origin. */
 export function getVisibleBirthRollResources(world: WorldPack, life: LifeState): BirthRollResource[] {
+  if (isPrivilegedLife(world, life)) return [];
   const visible = new Set(getRelevantResources(world, life).map(item => `resource:${item.asset.id}`));
   return getBirthRollResources(world, life).filter(resource => resource.id.startsWith("demo-resource:") || resource.value > 0 || visible.has(resource.id) || (resource.range?.max ?? 0) > 0);
 }
 
 /** A display model only: the simulation has already chosen all these values. */
 export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollStat[] {
+  const management = householdManagement(world, life);
   const origin = world.origins.find(item => item.id === life.originId);
   const birthEffects = getBirthEffects(world, life);
   return Object.entries(world.stats).map(([id, definition]) => {
@@ -239,13 +243,17 @@ export function getBirthRollStats(world: WorldPack, life: LifeState): BirthRollS
     // Later actions are not part of a birth draw. Never label their values with
     // an earlier range, including imported records or terminal birth outcomes.
     const isBirthValue = isUnplayedBirth(life) && value >= range.min && value <= range.max;
+    if (world.economy?.stat === id && management) {
+      return { id, label: management.treasuryLabel, value: management.treasury, currency: world.economy.currency.short };
+    }
     if (world.economy?.stat === id && life.economy) {
       const moneyValue = getNetWorth(world, life);
       const resources = getBirthRollResources(world, life);
       const knownResourceRanges = resources.every(resource => resource.range !== undefined);
       const moneyRange = {
-        min: Math.round(range.min * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.min ?? 0) * resource.unitPrice, 0),
-        max: Math.round(range.max * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.max ?? 0) * resource.unitPrice, 0),
+        // Whole drachmas: fractional resource prices otherwise show as 460.6488011283498 dr.
+        min: Math.floor(Math.round(range.min * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.min ?? 0) * resource.unitPrice, 0)),
+        max: Math.ceil(Math.round(range.max * world.economy.unitsPerPoint) + resources.reduce((sum, resource) => sum + (resource.range?.max ?? 0) * resource.unitPrice, 0)),
       };
       const hasDirectFinance = birthEffects.some(effect => effect.type === "cash" || effect.type === "debt" || effect.type === "asset");
       return { id, label: "Total wealth", value: moneyValue, currency: world.economy.currency.short,

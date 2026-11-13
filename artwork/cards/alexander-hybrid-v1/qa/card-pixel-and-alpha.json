@@ -1,0 +1,45 @@
+{
+  "card": {
+    "width": 900,
+    "height": 1260,
+    "channels": 4,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "centreAlpha": 255
+  },
+  "thumbnail": {
+    "width": 450,
+    "height": 630,
+    "channels": 4,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "portraitReadback": {
+    "sourceX": 12,
+    "sourceY": 150,
+    "width": 816,
+    "height": 890,
+    "cardOffset": [
+      30,
+      30
+    ],
+    "comparedPixels": 726240,
+    "differingPixels": 234586,
+    "maxChannelDifference": 39,
+    "blockCentrePixelsCompared": 322592,
+    "blockCentreDifferences": 0,
+    "blockCentreMaxChannelDifference": 0,
+    "interpretation": "Native embedded raster remains 840x1050 at 72ppi and 100%; VectorCraft export antialiases pixel-block edges. The central 4x4 pixels of each 6x6 source block retain exact RGB. Original source PNG unchanged."
+  },
+  "exactSizes": true,
+  "transparentOuterCorners": true,
+  "exactBlockCentres": true
+}

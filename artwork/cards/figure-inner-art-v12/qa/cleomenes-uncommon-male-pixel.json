@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\cleomenes-uncommon-male.png",
+  "sourceSha256": "b0fedc274ec27ecb4fe341f621eafb45f5f2f4302e519e8605736427dca0caf0",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\cleomenes-uncommon-male-coarse.png",
+  "baseSha256": "30faaac7edc05b1f50400f4234cc6e22652433bdc59d0c414a2c8d9292fb505a",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\cleomenes-uncommon-male-coarse.json",
+  "baseQaSha256": "69ab524837a4a2c4777741077b93d8581b8c2895a5123715a1c15abafa447773",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\cleomenes-uncommon-male-face.json",
+  "configSha256": "fb5a94d953089a21423d247ba230b035cb300f7b8a60e29bc00afa55e78c2fd8",
+  "config": {
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "regions": [
+      {
+        "radius": [
+          96,
+          105
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          411,
+          249
+        ],
+        "name": "face-eyes"
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\cleomenes-uncommon-male-pixel.png",
+  "outputSha256": "07579156933da061e8a297f5b42cd83560779ed7a1a2537b244a318576c508d8",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "ab360ed7e189a79179cdfdff81c52f554eb73a25fabe3cadd65083f3bd2c0fda",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\cleomenes-uncommon-male-face-mask.png",
+  "maskSha256": "352717841984e84f17ec6bd5189cb5caca1d6fae57850a567931ef00b387afca",
+  "maskPixelSha256": "c6e33df6f933dcd2870303eec1f2cdee73e24e2cf6c7dfb73354e8ee429dee7c",
+  "selectedDetailCells": 736,
+  "retainedCoarseCells": 23764,
+  "affectedPixels": 26496,
+  "changedPixels": 26271,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

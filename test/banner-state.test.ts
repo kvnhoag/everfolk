@@ -29,6 +29,28 @@ function context(change: Partial<SceneContext> = {}): SceneContext {
   };
 }
 
+test("resolved events select their authored backdrop without changing the actor situation", () => {
+  for (const [eventId, scene, file] of [
+    ["child-route-care-floating-reed", "childhood", "reed-washing-court"],
+    ["child-route-learning-shadow-marks", "learning", "shadow-mark-terrace"],
+    ["child-route-training-vessel-packing", "work", "pottery-packing-room"],
+  ] as const) {
+    assert.ok(world.events.some(event => event.id === eventId), eventId);
+    const life = lifeAt(10);
+    const accepted = resolveLifeBanner(life, world, context({ kind: "outcome", eventId, scene }));
+    const generic = resolveLifeBanner(life, world, context({ kind: "outcome", scene }));
+    assert.equal(accepted.assetSrc, `/assets/pixel/banners/events/${file}.svg`);
+    assert.equal(accepted.situation, generic.situation);
+    assert.equal(accepted.actorPose, generic.actorPose);
+    const pending = resolveLifeBanner(life, world, context({ kind: "pending", eventId, scene }));
+    assert.doesNotMatch(pending.assetSrc, /\/events\//);
+    const overridden = resolveLifeBanner(life, world, context({ kind: "outcome", eventId, scene }), {
+      eventVisuals: { [eventId]: { scene: "family", motion: "gather" } },
+    });
+    assert.doesNotMatch(overridden.assetSrc, /\/events\//);
+  }
+});
+
 test("the banner phase follows all six exact age boundaries and a high skill never creates a career", () => {
   for (const [age, stage, label, situation] of [
     [0, "infant", "Infancy", "home"], [2, "infant", "Infancy", "home"], [3, "child", "Childhood", "courtyard"],

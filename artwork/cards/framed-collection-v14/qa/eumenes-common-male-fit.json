@@ -1,0 +1,81 @@
+{
+  "figureId": "eumenes",
+  "figureName": "Eumenes of Cardia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Archive Attendant",
+  "displayTitle": "Archive Attendant",
+  "subtitle": "Keeper of the Ordered Shelves",
+  "bodyTitle": "Nothing Important Lost",
+  "bodyText": "An archive attendant sorts bundles and returns each document to the place where it can be found. Quiet order gives the royal office a dependable memory, saving crucial words from the confusion of a crowded day.",
+  "sourceRoleSlug": "eumenes-common",
+  "newArt": true,
+  "sceneBrief": "A humble archive attendant orders tied papyrus scroll bundles on wooden shelves in a Macedonian royal office, plain tunic and attentive expression.",
+  "slug": "eumenes-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Archive Attendant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/eumenes-common-male-pixel.png",
+  "sourceArtSlug": "eumenes-common-male",
+  "editionLimit": null,
+  "collectionIndex": 110,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/eumenes.svg",
+    "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "An archive attendant sorts bundles and returns each",
+    "document to the place where it can be found. Quiet order",
+    "gives the royal office a dependable memory, saving crucial",
+    "words from the confusion of a crowded day."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-common-male.svg",
+  "fittedArt": "assets/fitted/eumenes-common-male.png",
+  "overlaySvg": "source/overlays/eumenes-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "c40d5be871e7072701921152feeceda6d164e3322d10eaf345a822c78c9b7210",
+  "master": "masters/eumenes-common-male.vectorcraft",
+  "export": "exports/eumenes-common-male.png",
+  "thumbnail": "assets/eumenes-common-male-thumb.png",
+  "exportSha256": "8870ff972359bf9a40843187d2fddca6185dca08042fc74320ba91c17a4e361f",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582420,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

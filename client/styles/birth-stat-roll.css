@@ -2,7 +2,7 @@
 .birth-stat-roll::before{content:'';position:absolute;inset:5px;border:1px solid #f7f5eb;border-radius:2px;pointer-events:none;z-index:-1}
 .birth-roll-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
 .birth-roll-eyebrow{display:block;font-size:8px;letter-spacing:1.6px;font-weight:600;color:#85907a}
-.birth-roll-heading h3{font-family:var(--serif,Georgia,serif);font-size:29px;font-weight:400;line-height:1.08;margin:7px 0 0;color:#405443}
+.birth-roll-heading h3{font-family:var(--ef-font-display);font-size:29px;font-weight:400;line-height:1.08;margin:7px 0 0;color:#405443}
 .birth-roll-seal{display:grid;place-items:center;flex-shrink:0;width:37px;height:39px;background:#d6dfca;border:1px solid #c7d1b9;clip-path:polygon(8% 0,91% 3%,100% 91%,8% 100%,0 15%);font-size:21px;color:#788b64;transform:rotate(6deg)}
 .birth-roll-origin{padding:12px 14px;background:#f6f3e9;border:1px solid #dfdfd0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 13px;margin-bottom:15px;min-height:44px}
 .birth-roll-origin>span{font-size:7px;font-weight:600;letter-spacing:1.4px;color:#8c927f}
@@ -14,14 +14,14 @@
 .birth-roll-health{--roll-accent:#a47158}.birth-roll-wealth{--roll-accent:#aa9565}.birth-roll-bonds{--roll-accent:#8a9380}
 .birth-roll-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--roll-accent);opacity:.7}
 .birth-roll-stat-name{display:block;font-size:9px;font-weight:500;line-height:1.35;color:#72816b;min-height:13px}
-.birth-roll-number{display:flex;align-items:center;gap:0;font-family:var(--serif,Georgia,serif);font-weight:400;font-size:42px;line-height:1.15;min-height:49px;margin:6px 0 2px;color:var(--roll-accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.birth-roll-number{display:flex;align-items:center;gap:0;font-family:var(--ef-font-display);font-weight:400;font-size:42px;line-height:1.15;min-height:49px;margin:6px 0 2px;color:var(--roll-accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .birth-roll-final{min-width:0}
 .birth-roll-digits{display:inline-flex;align-items:center;line-height:1.1;white-space:nowrap;position:relative}
 .birth-digit-place{display:inline-flex;align-items:center}.birth-digit-sign{width:.4em;text-align:center}.birth-digit-decimal{width:.23em;text-align:center}.birth-roll-raw-final{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;white-space:nowrap}
 .birth-digit-window{display:block;width:.64em;height:1.1em;overflow:hidden;position:relative;contain:paint}
 .birth-digit-reel{display:block;will-change:transform;transition:none}
 .birth-digit-reel>span{display:block;height:1.1em;line-height:1.1;text-align:center}
-.birth-roll-number>small{font:400 11px/1.2 var(--sans,Arial,sans-serif);margin-left:3px;color:#8b8c72}
+.birth-roll-number>small{font:400 11px/1.2 var(--ef-font-body);margin-left:3px;color:#8b8c72}
 .birth-roll-range{display:block;font-size:9px;line-height:1.4;color:#929784;font-variant-numeric:tabular-nums}
 .birth-roll-card-state{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:7px;letter-spacing:.9px;text-transform:uppercase;color:#9aa18d;border-top:1px solid #e1e2d4;margin-top:10px;padding-top:8px}
 .birth-roll-card-state i{height:4px;width:4px;border-radius:50%;background:#b8c0ab}
@@ -32,9 +32,9 @@
 .birth-stat-roll.is-paused *{animation-play-state:paused!important}
 .birth-roll-resources{margin-top:16px;padding-top:12px;border-top:1px solid #ced3bf;color:var(--ink-muted,#68765f)}
 .birth-resources-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin-bottom:7px}
-.birth-resources-heading h4{font:600 11px/1.4 var(--sans,Arial,sans-serif);margin:0;color:var(--ink,#405443)}
+.birth-resources-heading h4{font:600 11px/1.4 var(--ef-font-body);margin:0;color:var(--ink,#405443)}
 .birth-resources-heading>span{font-size:9px;line-height:1.4}
-.birth-roll-resources table{width:100%;border-collapse:collapse;table-layout:fixed;font:400 10px/1.4 var(--sans,Arial,sans-serif);font-variant-numeric:tabular-nums}
+.birth-roll-resources table{width:100%;border-collapse:collapse;table-layout:fixed;font:400 10px/1.4 var(--ef-font-body);font-variant-numeric:tabular-nums}
 .birth-roll-resources th,.birth-roll-resources td{padding:6px 0;border-bottom:1px solid #d8dccb;vertical-align:middle;overflow-wrap:anywhere}
 .birth-roll-resources thead th{font-size:8px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-muted,#7c856e)}
 .birth-roll-resources th{text-align:left;font-weight:500}.birth-roll-resources th:first-child{width:48%}
@@ -42,7 +42,7 @@
 .birth-roll-resources th:last-child,.birth-roll-resources td:last-child{text-align:right}
 .birth-roll-resources tbody th{padding-right:10px;color:var(--ink,#4c644b)}
 .birth-roll-resources tbody th small{display:block;font-size:8px;font-weight:400;color:var(--ink-muted,#7c856e);margin-top:2px}
-.birth-resource-number{display:inline-flex;align-items:center;justify-content:center;min-height:22px;font:400 20px/1.1 var(--serif,Georgia,serif);color:var(--ink,#52684d)}
+.birth-resource-number{display:inline-flex;align-items:center;justify-content:center;min-height:22px;font:400 20px/1.1 var(--ef-font-display);color:var(--ink,#52684d)}
 .birth-roll-resources tfoot th,.birth-roll-resources tfoot td{padding-top:8px;padding-bottom:0;border:0;font-weight:600;font-size:9px}
 .birth-roll-resources tfoot th{padding-right:10px}
 .birth-roll-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:17px;min-height:34px}
@@ -55,3 +55,4 @@
 @media(max-width:900px){.birth-roll-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.birth-roll-card{padding:13px 14px 10px}.birth-roll-number{font-size:39px}.birth-roll-stat-name{font-size:10px}.birth-roll-range{font-size:10px}}
 @media(max-width:480px){.birth-stat-roll{padding:17px;margin:20px 0}.birth-roll-heading h3{font-size:26px}.birth-roll-heading{gap:10px}.birth-roll-origin{padding:11px}.birth-roll-origin>strong{font-size:11px}.birth-roll-card{padding:12px}.birth-roll-footer{align-items:flex-start}.birth-roll-button{width:100%}}
 @media(prefers-reduced-motion:reduce){.birth-stat-roll *,.birth-stat-roll *::before{animation:none!important;transition:none!important}}
+.birth-royal-note{margin:14px 0 0;padding:12px 14px;border:1px solid #d7cbab;border-radius:6px;background:#f4efdf;font-size:12px;line-height:1.65;color:#75674b}

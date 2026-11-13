@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\euclid-parent.png",
+  "sourceSha256": "bfe89a83e24ee77bd1e973e6e93d593faafcda45a61b12bdd0e9f97f597e78f7",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\euclid-parent-coarse.png",
+  "baseSha256": "5a53eea30983881a0b9c95814c83100f56a32157b8ff71bd9607f54d75b6b473",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\euclid-parent-coarse.json",
+  "baseQaSha256": "f89f161da044f87805cfb2b30323738560f77e16be58ab7ecae7a2023a9c3db0",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\euclid-parent-face.json",
+  "configSha256": "5011e6119a5cf07357d6ea0c516824b10f9f9fe63fb0d8d257e1621fa060efd9",
+  "config": {
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "center": [
+          384,
+          239
+        ],
+        "radius": [
+          133,
+          166
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\euclid-parent-pixel.png",
+  "outputSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "9f2f762033915c86f21f14d8b4974d5f79351b6ed8d3fb95c305ea83b5f912ad",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\euclid-parent-face-mask.png",
+  "maskSha256": "400a5b8265bbc889502dc901aefd74fae18f75eb5d3bac638af0dea85f4ad6db",
+  "maskPixelSha256": "fa5bc2641c9cc70491a513edc59e97f2e8b3c5d6f2cf69fe43fc0bdf05d447b0",
+  "selectedDetailCells": 1609,
+  "retainedCoarseCells": 22891,
+  "affectedPixels": 57924,
+  "changedPixels": 57667,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

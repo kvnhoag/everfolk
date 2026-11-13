@@ -8,7 +8,6 @@ import ts from 'typescript';
 import { createEngine } from '../src/engine.ts';
 import world from '../worlds/alexandria-sample.json' with { type: 'json' };
 import sprites from '../client/homepage/scene-assets.json' with { type: 'json' };
-import type { WorldPack } from '../src/types.ts';
 
 const hooks = registerHooks({ load(url, context, nextLoad) {
   if (url.endsWith('.css')) return { format: 'module', source: 'export {};', shortCircuit: true };
@@ -23,15 +22,14 @@ const engine = createEngine(world);
 const noop = () => {};
 const life = engine.start('homepage-regression');
 function render(overrides = {}) {
-  return renderToStaticMarkup(createElement(MainMenu, { world: world as WorldPack, life,
+  return renderToStaticMarkup(createElement(MainMenu, { life,
     hasBegun: false, hasRevealedStats: false, onBegin: noop, onContinue: noop,
-    onWorlds: noop, onPastLives: noop, onLegacy: noop, onSources: noop, ...overrides }));
+    ...overrides }));
 }
 
 test('homepage renders the historical world with live canvas and retains all menu destinations', () => {
   const before = structuredClone(life);
   const html = render();
-  assert.match(html, /350 BCE/);
   assert.match(html, /Everfolk/);
   assert.doesNotMatch(html, /Live another story/);
   assert.doesNotMatch(html, /A LIFE SIMULATOR/);
@@ -39,21 +37,26 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.doesNotMatch(html, /Before Alexandria/);
   assert.match(html, /<canvas/);
   assert.match(html, /everfolk-wordmark-cream\.svg/);
-  assert.match(html, /THE ANCIENT WORLD/);
+  assert.doesNotMatch(html, /THE ANCIENT WORLD|350 BCE/);
   assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-classical-wordmark/);
-  for (const label of ['Begin your life','Choose a world','Past lives','Legacy gallery','History &amp; sources','Weave Mode']) assert.ok(html.includes(label),label);
+  assert.match(html, /<header[^>]*>.*href="\/npc".*href="\/wiki".*<\/header>/);
+  assert.match(html, /<header[^>]*>.*href="#market".*href="\/cards".*href="#mine".*<\/header>/);
+  assert.match(html, /ef-home-ranked.*role="switch" aria-checked="true"/);
+  assert.match(html, /Connect with NEAR wallet.*ef-home-auth-divider.*Log in with email/);
+  assert.doesNotMatch(html, /class="ef-home-auth-button ef-home-auth-email"[^>]*disabled/);
+  assert.doesNotMatch(html, /Choose a world|Past lives|Explore for free/);
   assert.doesNotMatch(html, /medieval-europe|ottoman-constantinople|A STORY IN PROGRESS/);
   assert.deepEqual(life,before,'opening the menu cannot advance, reroll or replace the life');
 });
 
 test('homepage preserves pending birth, continuing and ended-life states', () => {
-  assert.match(render({hasRevealedStats:true}), /Begin your life/);
+  assert.match(render({hasRevealedStats:true}), /Connect with NEAR wallet/);
   const continuing = render({hasBegun:true});
-  assert.match(continuing,/Continue your life/);
+  assert.match(continuing,/Connect with NEAR wallet/);
   assert.match(continuing,/Begin a different story/);
   assert.match(continuing,/A STORY IN PROGRESS/);
   const ended = render({hasBegun:true,life:{...life,phase:'ended'}});
-  assert.match(ended,/Begin a new life/);
+  assert.match(ended,/Connect with NEAR wallet/);
   assert.match(ended,/Revisit your last life/);
   assert.match(ended,/YOUR LAST STORY/);
 });

@@ -1,26 +1,26 @@
 /* The atlas uses the existing Printed Folktale ink, paper, Eczar and DM Sans.
    Desktop canvas + inspector = remaining width + 286px + one 18px gutter. */
-.capability-tree{--cap-ink:#284744;--cap-muted:#746f60;--cap-line:#c9bea7;--cap-paper:#fbf7ea;--cap-ready:#8c6827;--cap-earned:#3f614a;width:100%;max-width:100%;min-width:0;color:#303b32;font-family:var(--font-body,"DM Sans",sans-serif);text-align:left}
+.capability-tree{--cap-ink:#284744;--cap-muted:#746f60;--cap-line:#c9bea7;--cap-paper:#fbf7ea;--cap-ready:#8c6827;--cap-earned:#3f614a;width:100%;max-width:100%;min-width:0;color:#303b32;font-family:var(--ef-font-body);text-align:left}
 .capability-tree *{box-sizing:border-box}
 .capability-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:6px 0 20px}
 .capability-heading .capability-overline{margin:0 0 8px;color:var(--cap-muted);font-size:10px;font-weight:500;letter-spacing:.13em}
-.capability-heading h3{margin:0 0 7px;font:500 clamp(24px,3vw,32px)/1.15 var(--font-display,"Eczar",Georgia,serif);color:var(--cap-ink)}
+.capability-heading h3{margin:0 0 7px;font:500 clamp(24px,3vw,32px)/1.15 var(--ef-font-display);color:var(--cap-ink)}
 .capability-heading p{margin:0;font-size:14px;line-height:1.5}
 .capability-total{display:grid;text-align:right;flex-shrink:0;font-size:11px;color:var(--cap-muted)}
 .capability-total strong{color:var(--cap-ink);font-size:29px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
 .capability-total strong span{font-size:17px;color:var(--cap-muted);font-weight:400}
 .capability-world-note{margin:0 0 16px;padding:12px 14px;border-left:3px solid #aa8c55;background:#f2ecd9;font-size:13px;line-height:1.55}
 .capability-branches{display:flex;flex-wrap:wrap;align-items:stretch;gap:5px;margin:0 0 18px;border-bottom:1px solid var(--cap-line)}
-.capability-branches button{display:flex;gap:8px;align-items:center;min-height:48px;padding:8px 12px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#5d6459;box-shadow:none;font:500 12px/1.3 var(--font-body,"DM Sans",sans-serif);text-align:left}
+.capability-branches button{display:flex;gap:8px;align-items:center;min-height:48px;padding:8px 12px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#5d6459;box-shadow:none;font:500 12px/1.3 var(--ef-font-body);text-align:left}
 .capability-branches button[aria-pressed=true]{color:var(--cap-ink);border-bottom-color:var(--cap-ink)}
 .capability-branches button:hover{background:#e9e7d9}
 .capability-branches button>.capability-icon{width:22px;height:22px;flex-shrink:0}
 .capability-branches small{display:block;font-weight:400;font-size:10px;color:var(--cap-muted);margin-top:3px;max-width:140px}
 .capability-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .capability-toolbar>label{display:grid;gap:5px;font-size:11px;flex:1 1 220px;max-width:340px}
-.capability-toolbar input{width:100%;min-width:0;border:1px solid #c7b895;background:#fffaf0;border-radius:2px;padding:9px 10px;font:400 13px var(--font-body,"DM Sans",sans-serif);color:var(--cap-ink);min-height:38px}
+.capability-toolbar input{width:100%;min-width:0;border:1px solid #c7b895;background:#fffaf0;border-radius:2px;padding:9px 10px;font:400 13px var(--ef-font-body);color:var(--cap-ink);min-height:38px}
 .capability-map-controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap;max-width:100%}
-.capability-map-controls button{border:1px solid #c7b895;background:transparent;border-radius:2px;min-height:36px;min-width:36px;padding:7px 9px;color:var(--cap-ink);font:500 11px var(--font-body,"DM Sans",sans-serif);box-shadow:none}
+.capability-map-controls button{border:1px solid #c7b895;background:transparent;border-radius:2px;min-height:36px;min-width:36px;padding:7px 9px;color:var(--cap-ink);font:500 11px var(--ef-font-body);box-shadow:none}
 .capability-map-controls>span{min-width:37px;text-align:center;font-size:11px;font-variant-numeric:tabular-nums;color:var(--cap-muted)}
 .capability-map-controls button:hover:not(:disabled){background:#e9e7d9}
 .capability-map-controls button:disabled{opacity:.4;cursor:not-allowed}
@@ -39,16 +39,16 @@
 .capability-paper{position:absolute;inset:0 auto auto 0;transform-origin:top left;color:#80734f;will-change:transform}
 .capability-connections{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .capability-band-rule{stroke:#baae94;stroke-width:1;stroke-dasharray:2 5;opacity:.6}
-.capability-band-title{font:500 26px var(--font-display,"Eczar",Georgia,serif);fill:#455d48}
-.capability-band-subtitle{font:400 12px var(--font-body,"DM Sans",sans-serif);fill:#8a806b}
-.capability-depth-label{font:400 13px var(--font-body,"DM Sans",sans-serif);fill:#8a806b}
+.capability-band-title{font:500 26px var(--ef-font-display);fill:#455d48}
+.capability-band-subtitle{font:400 12px var(--ef-font-body);fill:#8a806b}
+.capability-depth-label{font:400 13px var(--ef-font-body);fill:#8a806b}
 .capability-link{fill:none;stroke:#b4b09f;stroke-width:2;stroke-linecap:round;transition:opacity .18s,stroke .18s,stroke-width .18s}
 .capability-link.is-learned{stroke:var(--cap-earned)}
 .capability-link.is-crossover{stroke-dasharray:7 5;stroke-width:2.5}
 .capability-link.is-lineage{stroke:#b47b20;stroke-width:4;opacity:1}
 .capability-link.is-off-path{opacity:.35}
 .capability-link.is-muted,.capability-connections g.is-muted{opacity:.22}
-.capability-tree .capability-node{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:112px;height:118px;padding:0;transform:translate(-50%,-32px);border:0;background:transparent;color:#8d8d7d;font-family:var(--font-body,"DM Sans",sans-serif);box-shadow:none;cursor:pointer;outline:none;transition:opacity .15s,color .15s}
+.capability-tree .capability-node{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:112px;height:118px;padding:0;transform:translate(-50%,-32px);border:0;background:transparent;color:#8d8d7d;font-family:var(--ef-font-body);box-shadow:none;cursor:pointer;outline:none;transition:opacity .15s,color .15s}
 .capability-seal{position:relative;display:block;width:64px;height:64px;flex-shrink:0}
 .capability-node-shape{display:block;width:64px;height:64px;overflow:visible;fill:#f0eddf;stroke:#a8a595;stroke-width:1.5}
 .capability-node-engraving{fill:none;stroke:currentColor;stroke-width:1;opacity:.4}
@@ -83,7 +83,7 @@
 .capability-detail-mark{display:grid;place-items:center;flex-shrink:0;width:34px;height:34px;color:var(--cap-ink)}
 .capability-detail-mark .capability-icon{width:30px;height:30px}
 .capability-detail-heading p{margin:0 0 3px;font-size:10px;color:var(--cap-muted)}
-.capability-detail-heading h4{margin:0;color:var(--cap-ink);font:500 22px/1.15 var(--font-display,"Eczar",Georgia,serif)}
+.capability-detail-heading h4{margin:0;color:var(--cap-ink);font:500 22px/1.15 var(--ef-font-display)}
 .capability-detail-meta{display:flex;gap:8px;justify-content:space-between;margin:10px 0;padding-bottom:8px;border-bottom:1px solid var(--cap-line);font-size:10px;color:var(--cap-muted)}
 .capability-detail-meta strong{font-weight:500;color:var(--cap-ink)}
 .capability-inspector section{margin-top:12px}
@@ -94,7 +94,7 @@
 .is-milestone>.capability-unlock-summary{border-left-color:#a47c38;background:#f3e9cf}
 .capability-crossover-note{display:grid;gap:5px;margin:9px 0;color:var(--cap-muted);font-size:10px}
 .capability-parent-links{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
-.capability-parent-links button{display:flex;align-items:center;gap:6px;border:1px solid var(--cap-line);border-radius:2px;background:transparent;padding:4px 6px;text-align:left;color:var(--cap-ink);font:500 10px/1.35 var(--font-body,"DM Sans",sans-serif);box-shadow:none}
+.capability-parent-links button{display:flex;align-items:center;gap:6px;border:1px solid var(--cap-line);border-radius:2px;background:transparent;padding:4px 6px;text-align:left;color:var(--cap-ink);font:500 10px/1.35 var(--ef-font-body);box-shadow:none}
 .capability-parent-links button span{color:var(--cap-muted);font-size:9px}
 .capability-proficiency-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px}
 .capability-proficiency-list li{display:flex;justify-content:space-between;gap:5px;font-size:10px;color:var(--cap-muted)}
@@ -105,7 +105,7 @@
 .capability-proof-progress progress{flex:1;min-width:0;height:4px;border:0;accent-color:#526d4b;background:#e1d8c2}
 .capability-proof-progress span{white-space:nowrap}
 .capability-work-action{margin-top:12px}
-.capability-work-button{display:flex;gap:8px;justify-content:space-between;align-items:center;width:100%;min-height:40px;background:#344d3c;border:1px solid #344d3c;border-radius:2px;padding:8px 10px;text-align:left;color:#fcf7e9;font:500 11px/1.4 var(--font-body,"DM Sans",sans-serif);box-shadow:none}
+.capability-work-button{display:flex;gap:8px;justify-content:space-between;align-items:center;width:100%;min-height:40px;background:#344d3c;border:1px solid #344d3c;border-radius:2px;padding:8px 10px;text-align:left;color:#fcf7e9;font:500 11px/1.4 var(--ef-font-body);box-shadow:none}
 .capability-work-button:disabled{background:#e2dfd3;color:#878578;border-color:#d0c9b6;cursor:not-allowed}
 .capability-blocker,.capability-read-only{margin-top:7px!important;color:var(--cap-muted);font-size:10px}
 .capability-practice,.capability-full-rules{margin-top:12px;border-top:1px solid var(--cap-line);padding-top:8px}

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createEngine } from "../src/index.ts";
+import { createEngine, isRoyalLife, isAristocratLife } from "../src/index.ts";
 import type { WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
 import birthRelease from "../worlds/alexandria-0.11.0.json" with { type: "json" };
@@ -91,7 +91,9 @@ test("time advances from birth and the first actual decision occurs later in chi
     assert.equal(life.phase, "choice");
     assert.equal(life.age, 3);
     const event = engine.world.events.find(event => event.id === life.pendingEventId)!;
-    assert.equal(event.exclusiveGroup, "early-care");
+    if (isRoyalLife(engine.world, life)) assert.equal(event.id, "royal-first-audience");
+    else if (isAristocratLife(engine.world, life)) assert.equal(event.id, "aristocrat-family-visitors");
+    else assert.equal(event.exclusiveGroup, "early-care");
     openings.add(event.id);
     assert.equal(life.commands.some(command => command.type === "choose"), false);
     assert.deepEqual(engine.load(engine.save(life)), life);

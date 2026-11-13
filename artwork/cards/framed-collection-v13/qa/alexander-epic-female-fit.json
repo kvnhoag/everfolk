@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-epic-female",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Trusted Campaign Commander",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 7,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-epic-female.svg",
+  "fittedArt": "assets/fitted/alexander-epic-female.png",
+  "overlaySvg": "source/overlays/alexander-epic-female.svg",
+  "titleSize": 54,
+  "sourceArtSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+  "master": "masters/alexander-epic-female.vectorcraft",
+  "export": "exports/alexander-epic-female.png",
+  "thumbnail": "assets/alexander-epic-female-thumb.png",
+  "exportSha256": "42e9e7930ab8295b498f20e8fb10c785983af47b4ca86657614d503e795f9f76",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

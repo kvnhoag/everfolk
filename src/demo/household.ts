@@ -7,6 +7,7 @@ import { FARMING_JOBS, FARMING_SKILL, LIVESTOCK } from "./types.ts";
 import { buyForHousehold } from "./market.ts";
 import { spoilageCutBps } from "./works.ts";
 import { beginFarmHarvest, farmCapacityBonus, farmSpoilageCut, farmYieldPlan, ordinarySeedGrain, recordFarmFlow } from "../capabilities/farming.ts";
+import { loseReservedStock } from "../capabilities/work.ts";
 import { hasServiceRole } from "./service-role.ts";
 
 const FULL = 10_000;
@@ -297,6 +298,15 @@ export function spoilAndSpin(ctx: DemoContext): void {
     recordFarmFlow(ctx.life, "spoiled", spoiled);
     const over = household.grain + spoiled > storeCapacity(ctx.def, life) ? " The store was overfull, so more of it spoiled." : "";
     ctx.journal("household-spoilage", `${spoiled} measures of stored grain spoil over the year.${over}`);
+  }
+  const reservedGrain = life.capabilities?.project?.reservedStock?.grain ?? 0;
+  if (reservedGrain > 0) {
+    const reservedSpoiled = Math.min(reservedGrain, Math.max(0, spoilageOf(ctx.def, life, household.grain + spoiled + reservedGrain) - spoiled));
+    const lostReserved = loseReservedStock(life, "grain", reservedSpoiled);
+    if (lostReserved > 0) {
+      recordFarmFlow(ctx.life, "spoiled", lostReserved);
+      ctx.journal("household-spoilage", `${lostReserved} measures of reserved commission grain spoil over the year.`);
+    }
   }
   const bolts = spinnable(ctx.def, life, life.age, household.flax);
   if (bolts > 0) {

@@ -1,0 +1,51 @@
+EVERFOLK INNER ART V12 — 13 NOVEMBER 2026
+
+User corrections
+Correct Ptolemy's confusing main-card arm routing. Every subcard role must cover
+both male and female contributors. Vary face angles for all subcard sets, not
+only Alexander. Preserve recognizable contributor identity across a progression.
+
+Scope
+13 main historical figures, plus 35 player roles with two gender variants each:
+70 subcards and 83 total artwork files. 11 core figures have three contribution
+stages; Nearchus and Eumenes each have a playable classic/sample title role.
+The named figures remain themselves; male/female variant labels refer to the
+representative player contributor, not alternate genders of those figures.
+
+Pose and angle revision
+Ptolemy's right arm on image-left now descends clearly from its own shoulder
+and rests on the document stack. His left arm on image-right holds his own
+scroll near the waist. The ambiguous across-body hand-to-hand exchange is
+removed. Face, diadem, clothes, background and painterly character remain.
+The old painting is retained as references/ptolemy-anatomy-edit-target.png.
+
+Uncommon contribution scenes use frontal head views, Rare scenes use left-
+facing profiles, and Epic scenes use three-quarter views. Existing original-
+gender Epic scenes are retained where suitable, except Alexander's full set
+is revised. Nearchus female title uses a profile view and Eumenes female title
+a frontal view. The two retained male title scenes keep their existing views.
+Face-angle intent is a visual design contract, not an automated anatomical test.
+
+Artwork sources
+24 unchanged v11 assets are copied with original image bytes and original QA,
+as recorded in reuse-manifest.json. Old absolute paths within those original
+QA records are provenance; copied source, coarse, final and config hashes are
+independently rechecked in the new catalogue. 59 new paintings/edits use the
+built-in image generator. Exact prompts and original generated PNGs are saved.
+Input scene/identity references from v11 remain preserved in that library.
+
+The user-supplied Alexander character armour and military equipment sheet are
+copied unchanged in references/. The Alexander source painting is a style
+anchor, not another person's costume to be transferred. No other named ruler's
+armour is researched or borrowed. Other appearances and role settings remain
+imaginative, not authenticated portraits or archaeological reconstructions.
+
+Finish and validation
+All selected paintings use the approved PixelOE 1.0.0 CPU finish: 280 x 350 coarse
+logical grid enlarged 3x to 840 x 1050, with whole-cell regional selection from a
+420 x 525 finer pass for individually selected face regions. This is a mixed
+3px-body/2px-face grid, without smoothing or generated eye details. Source,
+coarse, final, config and QA hashes; repeated-render determinism; PNG readback;
+whole-cell integrity; and zero outside-mask changes are checked. Originals,
+per-image QA and stage/gender metadata are retained. No application code or
+gameplay state is changed. User acceptance of the new art is not assumed.

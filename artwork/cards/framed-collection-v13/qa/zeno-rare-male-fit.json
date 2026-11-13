@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-rare-male",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Stoic Discussion Leader",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 60,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-rare-male.svg",
+  "fittedArt": "assets/fitted/zeno-rare-male.png",
+  "overlaySvg": "source/overlays/zeno-rare-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "1ef7163047ea08d8ed31a492998a9f105f2ebf583e1ac84e5130ce15b6e6247a",
+  "master": "masters/zeno-rare-male.vectorcraft",
+  "export": "exports/zeno-rare-male.png",
+  "thumbnail": "assets/zeno-rare-male-thumb.png",
+  "exportSha256": "e0e39ec54e6d2516902d6ff9494cf140261615eab5d99f5aa9c514428ce9b453",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

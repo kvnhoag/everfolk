@@ -1,0 +1,60 @@
+{
+  "slug": "eumenes-title-female",
+  "figureId": "eumenes",
+  "kind": "title",
+  "gender": "female",
+  "title": "Secretary of Eumenes",
+  "subtitle": "Eumenes of Cardia",
+  "typeLabel": "PLAYER TITLE",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-title-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 83,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-title-female.svg",
+  "fittedArt": "assets/fitted/eumenes-title-female.png",
+  "overlaySvg": "source/overlays/eumenes-title-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "01d215e0eb2986ae78a3703baab7bb8de6fbd67d496b0aacadd91bf7b96956f7",
+  "master": "masters/eumenes-title-female.vectorcraft",
+  "export": "exports/eumenes-title-female.png",
+  "thumbnail": "assets/eumenes-title-female-thumb.png",
+  "exportSha256": "f57df76dde9b13691a48d07434922328e4cdb3d66e65d5af301e7c9b99e96a23",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

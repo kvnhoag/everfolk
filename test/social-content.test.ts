@@ -21,7 +21,7 @@ function withoutProse<T>(value: T): T {
 
 test("all sixteen encountered identities offer explicit friendship and bounded shared work", () => {
   validateWorld(world);
-  assert.equal(world.version, "0.42.0");
+  assert.equal(world.version, "0.48.0");
   assert.equal(world.events.filter(event => event.id.startsWith("meet-person-")).length, 16);
   assert.equal(world.character!.activities.filter(activity => /^(befriend|friend-time|form-business|joint-order|end-friendship|end-business)-person-/.test(activity.id)).length, 16 * 6);
   assert.equal(world.character!.socialRelationships, true);
@@ -32,8 +32,11 @@ test("all sixteen encountered identities offer explicit friendship and bounded s
   for (const template of world.character!.partners) {
     const id = template.id;
     const meeting = world.events.find(event => event.id === `meet-${id}`)!;
-    assert.deepEqual(withoutProse(meeting), withoutProse(previous.events.find(event => event.id === meeting.id)), "meeting alone must not establish any social role");
+    const { audience, ...meetingRules } = meeting;
+    assert.equal(audience, "common", "Ordinary introductions use the livelihood route; royal introductions have court scenes.");
+    assert.deepEqual(withoutProse(meetingRules), withoutProse(previous.events.find(event => event.id === meeting.id)), "meeting alone must not establish any social role");
     const followup = world.events.find(event => event.id === `date-${id}`)!;
+    assert.equal(followup.audience, undefined, "Friendship and romance remain shared after an introduction.");
     assert.deepEqual(followup.choices[0].outcomes[0].effects, []);
     const friend = followup.choices.find(choice => choice.id === `keep-friendly-${id}`)!;
     assert.deepEqual(friend.outcomes[0].effects, [{ type: "social-role", partner: id, role: "friend", active: true }, { type: "closeness", target: "partner", partner: id, delta: 3 }]);

@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-epic-male",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Trusted Campaign Commander",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 6,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-epic-male.svg",
+  "fittedArt": "assets/fitted/alexander-epic-male.png",
+  "overlaySvg": "source/overlays/alexander-epic-male.svg",
+  "titleSize": 54,
+  "sourceArtSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+  "master": "masters/alexander-epic-male.vectorcraft",
+  "export": "exports/alexander-epic-male.png",
+  "thumbnail": "assets/alexander-epic-male-thumb.png",
+  "exportSha256": "e21b250dc4ddd067d87f0258b215229d4850614305394e797a85e767ea415a9b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

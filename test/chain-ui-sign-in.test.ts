@@ -58,7 +58,7 @@ test("sign-in panel offers email first and no chain words on the email step", ()
   assert.match(steps[2], /Setting up your account…/);
 });
 
-test("email sign-in falls back to the note without a Privy App ID", () => {
+test("email sign-in exposes its form but cannot submit without a configured provider", () => {
   assert.deepEqual(parseSignInConfig({ privyAppId: null, funding: false, dripYocto: "1" }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig({ privyAppId: "  " }), { privyAppId: null });
   assert.deepEqual(parseSignInConfig("nonsense"), { privyAppId: null });
@@ -68,8 +68,9 @@ test("email sign-in falls back to the note without a Privy App ID", () => {
   assert.equal(emailButtonAction(true, () => {}), "open");
   assert.match(EMAIL_SIGN_IN_NOTE, /not connected/i);
   const html = renderToStaticMarkup(createElement(SignInPanel, { available: { email: false }, onEmail: flow, onWallet: noop, onClose() {} }));
-  assert.doesNotMatch(html, /Continue with email/);
-  assert.match(html, /Sign in with email/);
+  assert.match(html, /type="email"/);
+  assert.match(html, /type="submit" disabled=""/);
+  assert.match(html, /Email sign-in is not available yet/);
   assert.match(html, /Use a NEAR wallet/);
   assert.match(renderToStaticMarkup(createElement(EmailSignIn, { available: true, onOpen() {} })), /Sign in with email/);
 });
@@ -130,7 +131,7 @@ test("the spend queue asks one question at a time and never for free calls", asy
 });
 
 function fakeBackend(signin: Record<string, unknown> | undefined, accountId: string | null = null) {
-  const contract = { mintTerms: async () => ({ mint_fee: "1000000000000000000000", reroll_fee: "10000000000000000000000" }), activeLifeOf: async () => null, tokensOf: async () => [] };
+  const contract = { mintTerms: async () => ({ mint_fee: "1000000000000000000000" }), activeLifeOf: async () => null, tokensOf: async () => [] };
   return {
     mode: "live", contract, accountId, walletId: null, worldVersion: "w", contractId: "c.testnet", lastTransaction: null, revision: 0,
     connect: noop, disconnect: noop, nearBalance: async () => null,
@@ -241,9 +242,9 @@ test("transaction toasts never interrupt email play or popup-free game methods",
 
 test("email mint screens use account and confirmation copy", () => {
   const report = renderToStaticMarkup(createElement(LifeReport, { walletPath: false, packMode: true, busy: true, report: { rows: [] }, feeText: "0.001", menu: [], selectedAction: "letters.teach", onSelectAction() {}, onMint() {}, onDecline() {} } as never));
-  const pack = renderToStaticMarkup(createElement(MintPack, { walletPath: false, initialPack: { life_id: "1", cards: [], evidence_hash: "a".repeat(64), total_fee: "1000000000000000000000", reroll_fee: "10000000000000000000000", source_share_bps: 5000 }, contract: {} as never, onClose() {} }));
+  const pack = renderToStaticMarkup(createElement(MintPack, { walletPath: false, initialPack: { life_id: "1", cards: [], evidence_hash: "a".repeat(64), total_fee: "1000000000000000000000", source_share_bps: 5000 }, contract: {} as never, onClose() {} }));
   const active = renderToStaticMarkup(createElement(ActiveLifeCard, { walletPath: false, life: { life_id: "1" } as never, progress: { status: "ended", pack: true }, onOpen() {} }));
-  for (const html of [report, pack, active]) assert.doesNotMatch(html, /wallet|gas|yocto/i);
+  for (const html of [report, pack, active]) assert.doesNotMatch(html, /wallet|gas|yocto|reroll/i);
   assert.match(report, /Confirming/);
   assert.match(pack, /confirm your choice first/);
   const rekey = renderToStaticMarkup(createElement(ActiveLifeCard, { life: { life_id: "1" } as never, progress: { status: "playing" } as never, needsPlayKey: true, onOpen() {} }));

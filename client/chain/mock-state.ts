@@ -1,7 +1,9 @@
 import { categoryOfNpcAction, groupOfNpcAction as catalogGroupOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
-import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, NPC_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import type { CareerGroup, Category, FigureId } from "../../chain/ids.ts";
 import type { LifeView, Listing, MintPack, StageMintResult, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
+import { editionKey, editionLimit } from "../../chain/editions.ts";
+import { FIGURE_SUPPLY_CAP } from "../../chain/catalog/figures.ts";
 
 /** In-memory ledger behind `createMockContract`. Mirrors the contract's storage, not its gas or storage costs. */
 
@@ -66,6 +68,7 @@ export interface MockState {
   activeLife: Map<string, string>;
   abandonedAt: Map<string, number>;
   tokens: Map<string, MockToken>;
+  editionCounts: Map<string, number>;
   npcPools: Map<Category, string[]>;
   figureCopies: Map<FigureId, string[]>;
   balances: Map<string, bigint>;
@@ -93,15 +96,15 @@ export function createState(options: MockOptions): MockState {
       mintFee: BigInt(options.mintFeeYocto ?? (10n ** 21n).toString()),
       dropRateBps: options.dropRateBps ?? 500,
       nobodyWeightBps: options.nobodyWeightBps ?? 5000,
-      figureSupplyCap: options.figureSupplyCap ?? 25,
-      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION, DEMO_WORLD_VERSION],
+      figureSupplyCap: options.figureSupplyCap ?? FIGURE_SUPPLY_CAP,
+      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION, DEMO_WORLD_VERSION, NPC_WORLD_VERSION],
       treasuryId: options.treasuryId ?? "treasury.testnet",
       sourceMintShareBps: 5000,
       royaltySourcesBps: 500,
       royaltyTreasuryBps: 500,
     },
     counters: { nextLifeId: 1, nextTokenId: 1 },
-    stageMints: new Map(), packs: new Map(), lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(),
+    stageMints: new Map(), packs: new Map(), lives: new Map(), activeLife: new Map(), abandonedAt: new Map(), tokens: new Map(), editionCounts: new Map(),
     npcPools: new Map(), figureCopies: new Map(), balances: new Map(), sources: new Map(),
     children: new Map(), stats: new Map(), listings: new Map(),
   };
@@ -118,8 +121,15 @@ export function addToPool(state: MockState, tokenId: string, token: MockToken): 
 }
 
 export function registerToken(state: MockState, token: MockToken): string {
+  const key = editionKey({ ...token.extra, figure_id: token.figure_id, rarity: token.rarity });
+  const limit = editionLimit(token.rarity);
+  const number = (state.editionCounts.get(key) ?? 0) + 1;
+  if (limit !== null && number > limit) throw new Error("This card edition is sold out");
+  if (!Number.isSafeInteger(number)) throw new Error("Edition number overflow");
   const tokenId = String(state.counters.nextTokenId);
+  token = { ...token, extra: { ...token.extra, edition_key: key, edition_number: number, edition_limit: limit } };
   state.counters = { ...state.counters, nextTokenId: state.counters.nextTokenId + 1 };
+  state.editionCounts.set(key, number);
   state.tokens.set(tokenId, token);
   addToPool(state, tokenId, token);
   return tokenId;

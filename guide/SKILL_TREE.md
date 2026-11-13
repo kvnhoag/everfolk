@@ -16,7 +16,7 @@ Locked nodes explain missing requirements. Unavailable nodes remain inspectable 
 
 ## Saves and versions
 
-New free-play births use `alexandria-lives-5`, with capability graph version 3. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, original `alexandria-lives-4`, demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
+New free-play births use `alexandria-lives-8`, with capability graph version 3, proof from work (introduced in `alexandria-lives-7`) and the historical figure paths: each year of a matching yearly activity (such as woodwork or writing practice) and each year worked in a job counts as one proof year toward the next open skill on that lane, and the skill is learned automatically once its proof years are done. Like recorded work, the step must already be open when the year's practice begins. Steps whose recorded work feeds the next step or is itself the assessment (T2, PS8, AS5, FC8, T10 and every project step) still need recorded work. Already-started lives retain their exact immutable world. The retained `alexandria-lives-1`, `alexandria-lives-2`, `alexandria-lives-3`, original `alexandria-lives-4`, `alexandria-lives-5` (recorded work only), `alexandria-lives-6` (figure paths on lives-5, recorded work only), `alexandria-lives-7` (no figure paths), demo and ranked packs remain available for save/load and replay. An old life can inspect the atlas as a reference; it is not silently granted new proofs or replay rules. Start another life to play the new progression.
 
 ## Reproduce and verify
 
@@ -34,10 +34,35 @@ The focused-play evaluation uses ordinary accepted game commands, three of four 
 node scripts/skills/evaluate-focus.mjs 100
 ```
 
-The current balance target is a 45–65% birth-cohort rate of reaching depth 10 on one specialization, not learning every sibling node. The earlier design proposed 50–60%. Numerical balance is an authored gameplay model; the evaluator's output is the evidence for any measured rate, rather than a promise about every seed.
+The current balance target is a **45–65%** birth-cohort rate of reaching depth 10 on one specialization (not learning every sibling node; the earlier design proposed 50–60%). Numerical balance is an authored gameplay model; the cohort evaluator's published output is the evidence for any measured rate, rather than a promise about every seed.
 
-## Current balance limit
+To regenerate and write the evidence bundle locally:
 
-The retained `alexandria-lives-3` smoke cohort used 10 seeds for each specialization. Resilience reached mastery in 3 of 10 lives; the other seven paths reached none under that disclosed policy. This is below the design target. Food security, training time and financing need further balance work; the policy is not an optimal player. The mastery-path regression fixture deliberately supplies expertise and resources to verify proofs and replay, and does not measure ordinary-play attainment.
+```sh
+node scripts/skills/evaluate-focus.mjs 100 "" design/skill-tree/mastery-cohort-evidence.json
+```
 
-Those retained-world smoke results do not estimate the current revision. The newer balance work includes a reproducible cohort runner; after integration changes, publish results with the exact world fingerprint, source revision, seeds and policy before claiming an achieved rate for lives-5. See [military crossovers](SKILL_CROSSOVERS.md) for Strength, Endurance, Health and career gates.
+## Measured cohort evidence (`alexandria-lives-8`)
+
+Published dataset: [`design/skill-tree/mastery-cohort-evidence.json`](../design/skill-tree/mastery-cohort-evidence.json)
+- **World revision**: `alexandria-lives-8` (`worldFingerprint`: `fnv1a64-ae23b3454c2d9e4d`, recorded at commit `3e0fc88`)
+- **Cohort & seeds**: 100 seeded lives per specialization (`skill-focus-0` … `skill-focus-99`, 800 total runs)
+- **Disclosed policy**: Three of every four eligible adult work years focus the chosen path (`age % 4 !== 3`), using ordinary accepted commands only (surplus grain sold after reserving next-year seed and household rations, deliberate practice on unmet proficiencies, `PP8` civic work while district reputation is below 60, Auto-mode safe choices, apprentice fallback on cash/material blocks, zero state or cash injection). Early deaths before age 18 remain in the primary completion rate and are reported alongside the adult-survivor rate.
+
+| Target | Rate (n=100) | 95% Wilson CI | Died &lt;18 | Adult Mastery | Median Age | Low-wealth (`delta-newcomers`, n=29) | Ordinary starts (n=71) | Main non-completion bottlenecks |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `FC10` | 59.0% | 49.2–68.1% | 1 | 59.6% (59/99) | 58 | 65.5% (19/29) | 56.3% (40/71) | 37 proof, 2 materials (`64` seed-blocked turns), 1 skills, 1 early death |
+| `FR10` | 64.0% | 54.2–72.7% | 1 | 64.6% (64/99) | 59 | 62.1% (18/29) | 64.8% (46/71) | 31 proof, 4 skills (`650` detour turns), 1 early death |
+| `AT10` | 57.0% | 47.2–66.3% | 1 | 57.6% (57/99) | 61 | 69.0% (20/29) | 52.1% (37/71) | 42 proof (`2,911` proof turns; `337` skill detours), 1 early death |
+| `AC10` | 62.0% | 52.2–70.9% | 1 | 62.6% (62/99) | 58 | 65.5% (19/29) | 60.6% (43/71) | 34 proof, 3 skills (`341` detour turns), 1 early death |
+| `AS10` | 55.0% | 45.2–64.4% | 1 | 55.6% (55/99) | 57 | 72.4% (21/29) | 47.9% (34/71) | 32 proof, 12 skills (`951` detour turns), 1 early death |
+| `PS10` | 62.0% | 52.2–70.9% | 1 | 62.6% (62/99) | 60 | 79.3% (23/29) | 54.9% (39/71) | 31 proof, 6 skills (`849` detour turns), 1 early death |
+| `PP10` | 62.0% | 52.2–70.9% | 1 | 62.6% (62/99) | 58 | 72.4% (21/29) | 57.7% (41/71) | 28 proof, 9 skills (`937` detour turns), 1 early death |
+| `T10` | 60.0% | 50.2–69.1% | 1 | 60.6% (60/99) | 57 | 65.5% (19/29) | 57.7% (41/71) | 30 proof, 9 skills (`871` detour turns), 1 early death |
+
+**Resource, proof and start-wealth diagnostics:**
+- **Proof duration & skill detours** (`2,104–2,911` proof-advancing adult turns and `337–951` proficiency-detour turns per 100-life cohort) account for virtually all missed finishes before late-life mortality.
+- **Materials & cash**: Because the policy markets annual grain surpluses after reserving next-year rations and seed, direct cash (`0` turns) and commercial opportunity blocks (`0` turns) were avoided in the 100-seed cohorts (`PP10` explicitly works `PP8` until reputation 60); `FC10` still recorded `64` seed-material blocked turns (2 final stops at `FC9`).
+- **Low-wealth vs. ordinary starts**: Under `proofFromWork`, `delta-newcomers` starts (20–80 dr initial cash, 207–417 dr net worth) matched or exceeded ordinary household starts across paths (62.1%–79.3% vs. 47.9%–64.8%).
+
+Earlier historical baseline: the older retained `alexandria-lives-3` 10-seed smoke cohort reached mastery only on Resilience (3/10; 0/10 on the other seven paths) prior to proof-from-work and pacing revisions. For the military lane (`M10`), see [military crossovers](SKILL_CROSSOVERS.md).

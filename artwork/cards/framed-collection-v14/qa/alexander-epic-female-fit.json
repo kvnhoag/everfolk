@@ -1,0 +1,80 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Trusted Campaign Commander",
+  "displayTitle": "Trusted Commander",
+  "subtitle": "The King's Proven Companion",
+  "bodyTitle": "Command Worth Following",
+  "bodyText": "A trusted commander bears responsibility for troops when orders become dust, noise, and danger. Courage joined to judgment makes the king's design hold together, earning loyalty that survives the hardest march.",
+  "sourceRoleSlug": "alexander-epic",
+  "newArt": false,
+  "slug": "alexander-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Trusted Campaign Commander",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-female-pixel.png",
+  "sourceArtSlug": "alexander-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 9,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A trusted commander bears responsibility for troops when",
+    "orders become dust, noise, and danger. Courage joined to",
+    "judgment makes the king's design hold together, earning",
+    "loyalty that survives the hardest march."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-epic-female.svg",
+  "fittedArt": "assets/fitted/alexander-epic-female.png",
+  "overlaySvg": "source/overlays/alexander-epic-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+  "master": "masters/alexander-epic-female.vectorcraft",
+  "export": "exports/alexander-epic-female.png",
+  "thumbnail": "assets/alexander-epic-female-thumb.png",
+  "exportSha256": "65b8385b15bc0d2e19f8043f7e1e5faccf1ca6d4650c7bf7ebf1d18c997d7e6e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582456,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

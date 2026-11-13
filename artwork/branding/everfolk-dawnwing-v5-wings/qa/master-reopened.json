@@ -1,0 +1,142 @@
+{
+  "artboards": [
+    {
+      "height": 512,
+      "name": "01 Standalone scarab / ink",
+      "width": 512,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 512,
+      "name": "02 Standalone scarab / cream",
+      "width": 512,
+      "x": 620,
+      "y": 0
+    },
+    {
+      "height": 800,
+      "name": "03 Stacked / ink",
+      "width": 1200,
+      "x": 0,
+      "y": 650
+    },
+    {
+      "height": 800,
+      "name": "04 Stacked / cream",
+      "width": 1200,
+      "x": 1350,
+      "y": 650
+    },
+    {
+      "height": 380,
+      "name": "05 Horizontal / ink",
+      "width": 1400,
+      "x": 0,
+      "y": 1600
+    },
+    {
+      "height": 380,
+      "name": "06 Horizontal / cream",
+      "width": 1400,
+      "x": 1550,
+      "y": 1600
+    },
+    {
+      "height": 300,
+      "name": "07 Independent name / ink",
+      "width": 1200,
+      "x": 0,
+      "y": 2130
+    },
+    {
+      "height": 300,
+      "name": "08 Independent name / cream",
+      "width": 1200,
+      "x": 1350,
+      "y": 2130
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 1,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / Dawnwing lifted wings",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 2315.7227832201247,
+        "width": 2818.941146754231,
+        "x": 48,
+        "y": 68.25246305418717
+      },
+      "childCount": 12,
+      "children": [
+        {
+          "bounds": {
+            "height": 207.52715332154594,
+            "width": 1011.1038140944679,
+            "x": 1444.4480929527658,
+            "y": 2176.448092952766
+          },
+          "childCount": 9,
+          "id": 193,
+          "kind": "Group",
+          "locked": false,
+          "name": "Everfolk. / independent approved wordmark",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 207.52715332154594,
+            "width": 1011.1038140944681,
+            "x": 94.44809295276585,
+            "y": 2176.448092952766
+          },
+          "childCount": 9,
+          "id": 183,
+          "kind": "Group",
+          "locked": false,
+          "name": "Everfolk. / independent approved wordmark",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 121,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#284744",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-dawnwing-v5-wings\\masters\\Everfolk-Dawnwing-Lifted-Wings.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "Everfolk-Dawnwing-Lifted-Wings.vectorcraft",
+  "tool": "selection",
+  "uid": 5,
+  "units": "Pixels",
+  "rasterImages": 0
+}

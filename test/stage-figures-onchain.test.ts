@@ -85,6 +85,27 @@ test("wire rejects malformed stage totals and duplicate stage results", async ()
   assert.throws(() => parseStageMintResult({ ...receipt, tokens: [receipt.tokens[0], receipt.tokens[0]] }), /duplicate stage token/);
   assert.throws(() => parseStageMintResult({ ...receipt, tokens: [] }), /stage tokens/);
 });
+
+test("stage adapter forwards the reviewed quote hash and rejects a same-fee replacement", async () => {
+  const { signed, quote: oldQuote, receipt } = await fixture();
+  const reviewed = { ...oldQuote, quote_hash: "a".repeat(64) };
+  const { contract, calls } = client({ stage_mint_quote: reviewed, get_life: life }, () => receipt);
+  await contract.mintStageFigures("7", signed, "letters.teach", reviewed.total_fee, reviewed.quote_hash);
+  assert.equal(calls[0].args.expected_quote_hash, reviewed.quote_hash);
+  const changed = { ...reviewed, quote_hash: "b".repeat(64) };
+  const stale = client({ stage_mint_quote: changed, get_life: life }, () => { throw new Error("Must not pay for changed cards"); });
+  await assert.rejects(stale.contract.mintStageFigures("7", signed, "letters.teach", reviewed.total_fee, reviewed.quote_hash), /Stage cards changed/);
+  assert.equal(stale.calls.length, 0);
+  assert.throws(() => parseStageMintQuote({ ...reviewed, quote_hash: "invalid" }), /stage quote hash/);
+});
+
+test("adapter attaches the fresh hash for callers without a previously reviewed hash", async () => {
+  const { signed, quote, receipt } = await fixture(), hash = "c".repeat(64);
+  const { contract, calls } = client({ stage_mint_quote: { ...quote, quote_hash: hash }, get_life: life }, () => receipt);
+  await contract.mintStageFigures("7", signed, "letters.teach");
+  assert.equal(calls[0].args.expected_quote_hash, hash);
+});
+
 test("practice album keeps all seven stages, their records, and an immutable mint receipt", async () => {
   const contract = createMockContract({ genesis: false }); const current = await contract.startLife(RANKED_WORLD_VERSION);
   const signed = await signedFor(current), result = await contract.mintStageFigures(current.life_id, signed, "letters.teach");
@@ -99,7 +120,7 @@ test("practice album keeps all seven stages, their records, and an immutable min
 test("every portrait path from supported origins, aliases, variants and historical figures exists", () => {
   const base = new URL("../public/assets/pixel/portraits/", import.meta.url);
   const origins = new Set(readdirSync(base, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name));
-  for (const path of ["../worlds/alexandria-0.42.0.json", "../worlds/demo/alexandria-lives-4.json", "../worlds/demo/alexandria-lives-5.json"]) {
+  for (const path of ["../worlds/alexandria-0.42.0.json", "../worlds/demo/alexandria-lives-4.json", "../worlds/demo/alexandria-lives-5.json", "../worlds/demo/alexandria-lives-6.json", "../worlds/demo/alexandria-lives-7.json", "../worlds/demo/alexandria-lives-8.json"]) {
     const url = new URL(path, import.meta.url); if (!existsSync(url)) continue;
     const w = JSON.parse(readFileSync(url, "utf8")); for (const origin of w.origins) origins.add(origin.id);
   }

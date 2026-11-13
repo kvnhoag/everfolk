@@ -1,0 +1,165 @@
+{
+  "count": 16,
+  "checks": [
+    {
+      "slug": "lysippos-parent",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-uncommon",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-rare",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "lysippos-epic",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-parent",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-uncommon",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-rare",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "pytheas-epic",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-parent",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-uncommon",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-rare",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "menander-epic",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-parent",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-uncommon",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-rare",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    },
+    {
+      "slug": "cleomenes-epic",
+      "exists": true,
+      "face": true,
+      "sourceUnchanged": true,
+      "deterministic": true,
+      "pngReadback": true,
+      "grid": true,
+      "noBlend": true
+    }
+  ]
+}

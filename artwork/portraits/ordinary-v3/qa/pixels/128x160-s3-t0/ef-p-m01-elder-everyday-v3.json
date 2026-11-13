@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m01-elder-everyday-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m01-elder-everyday-v3.png",
+  "sourceSha256": "9b97fecfc2bbf4ebdf9bfb905da8d5346d8e0e68247831764426a20aac0abbc2",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-m01-elder-everyday-v3.logical.png",
+  "logicalSha256": "53ff5085fe2c1ab449876ca3d6f92318993de82661c9c949b3bbd1d5dbf2467a",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-m01-elder-everyday-v3.png",
+  "outputSha256": "a3098906191b4973af0d2ca631d389187049c80d778bc15c71b46d026a55679f",
+  "logicalPixelSha256": "22260194611bc66da0d7a2236b6e8fa4759a8f47b871998b170c61913f0f6d8d",
+  "uniqueColours": 6226,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

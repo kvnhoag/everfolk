@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "scope": "Diagnosis of ordinary-v1 body/neck/clothing mismatch and acceptance criteria for ordinary-v2. V1 assets untouched.",
+  "priorQaCorrection": "Previous visual QA incorrectly accepted absence of transparent gaps as evidence of anatomical fit. Contact-sheet and tiny-UI review hid the collar/neck geometry and shoulder-scale mismatch. The previous 'passed' assessment was insufficient for body/clothing fit.",
+  "groundTruth": [
+    {
+      "issue": "No canonical anatomical body",
+      "evidence": "V1 garment() selects one unisex garment per wardrobe and stage; garmentId contains no sex/body reference. All six faces are pasted onto unrelated generated torso silhouettes.",
+      "source": "../ordinary-v1/scripts/build-library.py:173"
+    },
+    {
+      "issue": "Bounding boxes are not neck registration",
+      "evidence": "normalise() independently fits head and garment alpha bounding boxes to separate envelopes, bottom-aligns each, and writes a nominal [400,700] anchor. It never measures or constrains the actual throat, collar, clavicles or shoulder joints.",
+      "source": "../ordinary-v1/scripts/build-library.py:119"
+    },
+    {
+      "issue": "Original long neck covers the front collar",
+      "evidence": "assemble() composites garment, then the complete head-and-neck component last. There is no foreground collar mask; the generated neck's flat lower edge is allowed to replace garment neckline pixels.",
+      "source": "../ordinary-v1/scripts/build-library.py:191"
+    },
+    {
+      "issue": "Wardrobe swaps alter apparent torso width",
+      "evidence": "All adult garments fit375px height; independent source aspect ratios produce widths582\u00e2\u20ac\u201c704px. At canvas y800 visible width ranges523\u00e2\u20ac\u201c634px (work vs everyday). At y900 commerce spans441px vs everyday689px. These are garment raster spans, not anatomical shoulder measurements, but demonstrate uncontrolled scale variation.",
+      "source": "../ordinary-v1/manifest.json"
+    }
+  ],
+  "measuredGarmentGeometry": [
+    {
+      "wardrobeId": "everyday",
+      "placedSize": [
+        704,
+        375
+      ],
+      "visibleSpanY800": [
+        79,
+        713
+      ],
+      "visibleSpanY900": [
+        62,
+        751
+      ]
+    },
+    {
+      "wardrobeId": "work",
+      "placedSize": [
+        582,
+        375
+      ],
+      "visibleSpanY800": [
+        136,
+        659
+      ],
+      "visibleSpanY900": [
+        131,
+        674
+      ]
+    },
+    {
+      "wardrobeId": "maritime",
+      "placedSize": [
+        612,
+        375
+      ],
+      "visibleSpanY800": [
+        117,
+        677
+      ],
+      "visibleSpanY900": [
+        137,
+        661
+      ]
+    },
+    {
+      "wardrobeId": "commerce",
+      "placedSize": [
+        598,
+        375
+      ],
+      "visibleSpanY800": [
+        121,
+        677
+      ],
+      "visibleSpanY900": [
+        184,
+        625
+      ]
+    },
+    {
+      "wardrobeId": "scholarly",
+      "placedSize": [
+        649,
+        375
+      ],
+      "visibleSpanY800": [
+        89,
+        703
+      ],
+      "visibleSpanY900": [
+        96,
+        690
+      ]
+    },
+    {
+      "wardrobeId": "military",
+      "placedSize": [
+        599,
+        375
+      ],
+      "visibleSpanY800": [
+        119,
+        684
+      ],
+      "visibleSpanY900": [
+        144,
+        657
+      ]
+    },
+    {
+      "wardrobeId": "elite",
+      "placedSize": [
+        652,
+        375
+      ],
+      "visibleSpanY800": [
+        99,
+        687
+      ],
+      "visibleSpanY900": [
+        76,
+        725
+      ]
+    },
+    {
+      "wardrobeId": "performance",
+      "placedSize": [
+        636,
+        375
+      ],
+      "visibleSpanY800": [
+        112,
+        683
+      ],
+      "visibleSpanY900": [
+        127,
+        667
+      ]
+    }
+  ],
+  "v2ConstructionRequirements": [
+    "Exactly two named canonical body geometry families M/F, each with fixed torso pose, neck, clavicles, shoulder joints and waist anchors. Six face identities are independent of these two body shapes.",
+    "Use36 source-specific native eye/chin landmarks for uniform head registration. Remove source skin below jaw before assembly. Never scale a whole long-neck source to fit a shirt opening.",
+    "Body neck extends behind jaw; identity skin tone is applied inside a fixed body skin mask without changing body geometry. A different skin tone does not create a new body type.",
+    "Each clothing family is authored against the same corresponding M/F template. Match anatomical collar and shoulder landmarks, not outer raster bounding boxes. Garment drape can differ, but underlying shoulder placement and torso pose remain fixed.",
+    "Explicitly separate garment rear/body layer and foreground collar. Foreground collar occludes lower neck skin; it must not cross the jaw or cut the throat at an unnatural horizontal line.",
+    "Preserve braids and side buns using original hair masks. Inspect for preserved neck-skin spikes inside hair-protection polygons.",
+    "Age proportions require deliberate stage treatment within each M/F body family. Do not put infant heads on adult shoulders, or treat an adult body shrunk uniformly as anatomically age-appropriate."
+  ],
+  "recommendedLayerOrder": [
+    "background",
+    "rear hair if required",
+    "canonical M/F body with identity skin tone",
+    "garment main/back",
+    "head with original long neck removed",
+    "foreground collar/contact-shadow",
+    "front braid/hair where appropriate"
+  ],
+  "proofAcceptance": {
+    "requiredBeforeBulkExport": [
+      "One smooth complete M/F reference each at800x1000, viewed100%.",
+      "All6adultface swaps on everyday clothing, viewed100%, including neck/jaw close-ups.",
+      "One same face across all8M and8F garments; overlay canonical neck/shoulder/waist guides.",
+      "All6age stages for oneM and oneF identity, including infant/childbody proportion review.",
+      "F02 braid and F01 low-bun join close-ups.",
+      "Final PixelOE samples at full output plus64x80,48x60,40x50."
+    ],
+    "failConditions": [
+      "Visible lower-neck cut or rectangular neck stump",
+      "Garment collar tucked behind an entire pasted neck",
+      "Neck floating above collar or touching one collar side only",
+      "Apparent shoulder/body width changes caused by independent fit-to-box scale",
+      "Two neck silhouettes, mismatched skin band, hair-protection skin spike, or missing jaw edge",
+      "A numeral grid check or opaque-alpha check substituted for visual anatomical fit"
+    ],
+    "quantitativeChecks": [
+      "Canonical body geometry IDs exactly M/F; identity/costume changes retain corresponding geometry reference.",
+      "Actual eye/chin registration residuals recorded rather than nominal-anchor labels alone.",
+      "Foreground collar mask exists and has nonzero overlap with lower body-neck skin region.",
+      "Head sources remain unchanged; all derived crops retain source/crop provenance."
+    ],
+    "status": "Initial and rounded-cap v2 proofs not approved; refreshed canonical-neck correction pending."
+  },
+  "headAnnotations": {
+    "path": "../head-anchors.json",
+    "count": 36,
+    "maskRevision": 3,
+    "reviewSheet": "head-cuts-6x6-r3.png",
+    "limit": "Manually estimated landmarks and masks; independent smooth joined-body proof still required."
+  },
+  "v2ProofReviews": [
+    {
+      "proof": "qa/rejected-rounded-cap-proof.png",
+      "sha256": "d1382fdc097870a263806a48402957561ee00d344cb78c6691e8a1369ae099d4",
+      "status": "not-approved",
+      "blockingFindings": [
+        "Rounded upper-body neck cap appears as tan/orange tabs outside lower jaw on M02; related cap-edge exposure on M01 and F01/F02.",
+        "Ninety native pixels of throat overlap can reintroduce a substantial part of each identity-specific neck, undermining the intended canonical neck join.",
+        "F01 infant retains a small underlying shirt/sleeve protrusion outside the swaddle."
+      ],
+      "additionalAgeConcern": "M01 child forearms retain adult muscular shaping from uniformly scaled adult body; do not certify juvenile anatomy without an appropriate stage treatment.",
+      "requestedCorrections": [
+        "Narrow canonical upper cervical silhouette so it lies behind the lower jaw; use smooth side curves rather than a wide cap or conical bevel.",
+        "Reduce retained source throat overlap after canonical neck shape is corrected.",
+        "Clip infant underbody to swaddle coverage so no adult sleeves or forearms protrude.",
+        "Review child-stage body proportions and arm definition separately."
+      ],
+      "positiveFindings": [
+        "Foreground collar follows canonical body opening and no longer floats beneath pasted long neck.",
+        "M/F body families retain fixed torso pose across face swaps."
+      ],
+      "approvalLimit": "No final body-fit approval. Re-review refreshed smooth neck close-ups before bulk output."
+    }
+  ]
+}

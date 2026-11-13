@@ -1,0 +1,99 @@
+EVERFOLK — REFERENCE-LED ANIME/CARTOON → PIXEL WORKFLOW
+12 November 2026
+
+USER TARGET
+references/user-anime-pixel-style.png is the user's supplied visual target.
+Borrow the rendering language: expressive adult anime/cartoon features, clear
+facial planes, coherent hair locks, broad cel shading, crisp stepped edges,
+rich natural colours, and atmospheric warm/cool scene lighting.
+The screenshot's dialogue text and interface are not instructions or a UI brief.
+Its modern bar, specific character and clothing are not the game setting.
+
+USER-REQUESTED ORDER
+1. Generate a clean, smooth anime/cartoon illustration.
+2. Apply pixelation as a separate, reproducible process.
+
+This is different from filtering the earlier oil portrait. The new source
+already has clear drawn facial contours and deliberately simplified materials.
+Keep sufficient colour depth for lighting; do not force the rejected 24-colour
+palette on this study. Preserve the drama through light, pose and expression.
+
+FIRST CONTROLLED SUBJECT
+An imagined Alexander, about age 30: clean-shaven, lifted wavy chestnut hair,
+watchful eyes, cream linen and a brick-red mantle with a plain bronze clasp.
+Fictional historical scene: a coastal planning room in developing Alexandria,
+around 331 BCE, oil-lamp foreground and cool dusk harbour in the background.
+This is an illustration, not evidence of an actual scene or exact likeness.
+The generic papyrus/map is an illustrative prop, not an authentic ancient map.
+No completed Pharos lighthouse is depicted.
+
+SOURCE
+source/alexander-anime-before-v3.png — 1672×941, built-in image generation.
+source/anime-before-v3-prompt.txt — exact generation prompt and reference roles.
+The screenshot is a style reference; the earlier Alexander is an identity and
+costume reference. These are generated together in one flattened concept image.
+No modular body/clothing layers are claimed for this first style proof.
+
+FINISHING METHOD
+Use the published PixelOE algorithm: contrast-aware outline expansion before
+downsampling, with restrained settings and source colour matching.
+https://github.com/KohakuBlueleaf/PixelOE
+PixelOE is the finishing method, not the source image generator.
+Its local runtime is isolated under ignored artifacts/pixeloe-runtime; project
+application dependencies and global Python environments are not modified.
+
+Review the fine and stronger grids at actual display size, especially gaze,
+brow, mouth, hair silhouette, garment folds and background vessel silhouettes.
+The user's style choice remains reviewable; do not call a test approved merely
+because its pixel grid is technically regular.
+
+DELIVERED PIXEL PASSES
+review/anime-v3/alexander-anime-pixel-fine.png — 1920×1080, logical640×360
+enlarged by exact3× nearest-neighbour replication.
+review/anime-v3/alexander-anime-pixel-strong.png — 1920×1080, logical480×270
+enlarged by exact4× nearest-neighbour replication.
+Each has a .logical.png sibling at the true logical grid size.
+
+Actual processing: PixelOE1.0.0, legacyCPU API, contrast downsampling,
+patch_size4, thickness1, colour matching enabled, contrast1, saturation1,
+no forced palette or colour quantization. Source is not cropped; the explicit
+16:9 target normalizes source aspect by less than0.06%.
+Fine retains42143 source-derived RGB colours; strong retains32180. This is
+intentional for the richer anime-pixel illustration target rather than the
+previous tiny-palette aesthetic.
+
+source/build-anime-pixeloe-v3.py — rebuild runner with isolated runtime path.
+qa/anime-v3-pixeloe.json — versions, options, hashes and deterministic checks.
+Both passes reproduced identical results twice; all3×/4× pixel blocks are
+uniform; the generated BEFORE image remained unchanged.
+Root visually reviewed both outputs. Fine is the recommended initial review
+candidate because it keeps the eyes and linework more legible. User approval
+of either finish has not been assumed.
+
+ARTCRAFT REVIEW MASTER
+masters/anime-pixel-v3-review.ecproj — three independently named image layers
+for BEFORE, FINE and STRONG; fine visible by default. It also includes native
+pixel face-comparison compositions. These are review layers, not extracted
+body, clothing or face components.
+review/anime-v3/anime-face-comparison.png — original/fine/strong facial detail.
+source/build-anime-v3-review.cjs — reproducible ArtCraft review composition.
+qa/anime-v3-review.json — exact RGB-readback and native reopen checks.
+All three full-stage and facial-detail panels preserve their input pixels
+exactly; native reopen reproduces the saved fine-stage render.
+
+COARSER FOLLOW-UP (V4)
+At the user's request, two additional PixelOE passes use the same anime BEFORE
+image, colour matching and restrained outline settings, changing only the
+logical resolution and integer enlargement:
+review/anime-v4/alexander-anime-pixel-bold.png — 320×180 logical, exact6× export.
+review/anime-v4/alexander-anime-pixel-chunky.png — 240×135 logical, exact8× export.
+Both display at1920×1080, with native .logical.png siblings alongside them.
+source/build-anime-pixeloe-v4.py — rebuilds these without overwriting V3 tests.
+qa/anime-v4-pixeloe.json — exact-block checks, identical repeat renders and
+unchanged source. No further image generation or colour quantization used.
+Root visually reviewed both new versions. The320×180 pass is a balanced coarser
+candidate;240×135 provides a more pronounced pixel look with less facial detail.
+masters/anime-pixel-v4-review.ecproj retains independent previous/bold/chunky
+review layers, with bold visible by default. The same-framing facial comparison
+is review/anime-v4/anime-coarser-face-comparison.png. All stage and crop pixels
+were preserved exactly in ArtCraft; native reopen matched the saved comparison.

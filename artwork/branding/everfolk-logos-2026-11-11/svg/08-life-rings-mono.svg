@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>08 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_08_Life_Rings___mono_device" data-name="08 Life Rings / mono device">
+      <path id="Life_Rings___element_1" data-name="Life Rings / element 1" d="M120.96 53.12 C103.04 24.96 56.96 24.96 37.76 54.4 C19.84 83.84 36.48 120.96 69.76 128.64 C95.36 133.76 118.4 120.96 128.64 97.92" fill="none" stroke="#24464b" stroke-width="7.04" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Life_Rings___element_2" data-name="Life Rings / element 2" d="M110.72 64.64 C99.2 41.6 65.92 41.6 53.12 63.36 C37.76 87.68 55.68 113.28 80 113.28 C97.92 113.28 110.72 103.04 115.84 86.4" fill="none" stroke="#24464b" stroke-width="7.04" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Life_Rings___element_3" data-name="Life Rings / element 3" d="M99.2 76.16 C92.8 62.08 72.32 60.8 65.92 73.6 C59.52 85.12 67.2 99.2 80 99.2 C90.24 99.2 96.64 94.08 99.2 86.4" fill="none" stroke="#24464b" stroke-width="7.04" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

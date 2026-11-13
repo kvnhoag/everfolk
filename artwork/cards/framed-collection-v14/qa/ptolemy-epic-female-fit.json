@@ -1,0 +1,81 @@
+{
+  "figureId": "ptolemy",
+  "figureName": "Ptolemy I Soter",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Steward of Egyptian Government",
+  "displayTitle": "Steward of Egypt",
+  "subtitle": "Trusted Adviser of Ptolemy",
+  "bodyTitle": "Power Given Continuity",
+  "bodyText": "A senior steward draws revenue, supply, and official reports into a coherent view of the realm. Trusted judgment turns separate offices into lasting government, helping Ptolemy's authority endure beyond a single command or campaign.",
+  "sourceRoleSlug": "ptolemy-epic",
+  "newArt": false,
+  "slug": "ptolemy-epic-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Steward of Egyptian Government",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-epic-female-pixel.png",
+  "sourceArtSlug": "ptolemy-epic-female",
+  "editionLimit": 25,
+  "collectionIndex": 90,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/ptolemy.svg",
+    "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A senior steward draws revenue, supply, and official",
+    "reports into a coherent view of the realm. Trusted judgment",
+    "turns separate offices into lasting government, helping",
+    "Ptolemy's authority endure beyond a single command or",
+    "campaign."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-epic-female.svg",
+  "fittedArt": "assets/fitted/ptolemy-epic-female.png",
+  "overlaySvg": "source/overlays/ptolemy-epic-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "9a2968114c122a637733a694f4fa6423826d8a73be3f855b18dd715785b6fa3f",
+  "master": "masters/ptolemy-epic-female.vectorcraft",
+  "export": "exports/ptolemy-epic-female.png",
+  "thumbnail": "assets/ptolemy-epic-female-thumb.png",
+  "exportSha256": "e7111fbf404c7849f0964fa66f6d2373f31c20db95e787d60f501be59e4ba178",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582444,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

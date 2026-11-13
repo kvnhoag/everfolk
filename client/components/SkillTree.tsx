@@ -75,7 +75,7 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
 }
 
 type SkillTreeProps = {
-  life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string) => void; initialView?: "current" | "wiki";
+  life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string, options?: { calendarDeadline?: boolean }) => void; onAssess?: (nodeId: string, jobIds: readonly string[]) => void; initialView?: "current" | "wiki";
 };
 
 /** The earned-capability map is first; older proficiency routes remain inspectable. */

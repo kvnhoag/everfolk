@@ -1,0 +1,81 @@
+{
+  "figureId": "eumenes",
+  "figureName": "Eumenes of Cardia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Campaign Correspondent",
+  "displayTitle": "Campaign Correspondent",
+  "subtitle": "Voice Across Eumenes' Lines",
+  "bodyTitle": "The Reports Become Clear",
+  "bodyText": "A campaign correspondent compares dispatches with the movement of forces and the needs of command. Clear writing draws scattered events into focus, allowing distant officers to act with a better understanding of one another.",
+  "sourceRoleSlug": "eumenes-rare",
+  "newArt": true,
+  "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond.",
+  "slug": "eumenes-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Campaign Correspondent",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/eumenes-rare-male-pixel.png",
+  "sourceArtSlug": "eumenes-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 114,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/eumenes.svg",
+    "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A campaign correspondent compares dispatches with the",
+    "movement of forces and the needs of command. Clear writing",
+    "draws scattered events into focus, allowing distant",
+    "officers to act with a better understanding of one another."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-rare-male.svg",
+  "fittedArt": "assets/fitted/eumenes-rare-male.png",
+  "overlaySvg": "source/overlays/eumenes-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
+  "master": "masters/eumenes-rare-male.vectorcraft",
+  "export": "exports/eumenes-rare-male.png",
+  "thumbnail": "assets/eumenes-rare-male-thumb.png",
+  "exportSha256": "217ef99712d2015142cf7f92022e0ebca5ba0f657ca597741c861632f3505055",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582372,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

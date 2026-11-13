@@ -1,4 +1,5 @@
 import { createEngine } from "../../src/index.ts";
+import { buildNpcWorld } from "../../chain/npc-world.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
 import { readEverfolkStorage } from "./brand-storage.ts";
 import sampleWorld from "../../worlds/alexandria-sample.json" with { type: "json" };
@@ -54,12 +55,21 @@ import lives5World from "../../worlds/demo/alexandria-lives-5.json" with { type:
 import lives8World from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import lives9World from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import lives10World from "../../worlds/demo/alexandria-lives-10.json" with { type: "json" };
+import wslLives7World from "../../worlds/demo/alexandria-lives-7-wsl-contributions.json" with { type: "json" };
+import wslLives8World from "../../worlds/demo/alexandria-lives-8-wsl-contributions.json" with { type: "json" };
+import wslLives9World from "../../worlds/demo/alexandria-lives-9-wsl-resources.json" with { type: "json" };
 import lives7World from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import lives6World from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import deepWorld from "../../worlds/demo/alexandria-deep-1.json" with { type: "json" };
 import figure3World from "../../worlds/demo/alexandria-figures-3.json" with { type: "json" };
 import figure2World from "../../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 import figureWorld from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
+import familyRecordsWorld from "../../worlds/alexandria-0.42.0.json" with { type: "json" };
+import grandparentRarityWorld from "../../worlds/alexandria-0.43.0.json" with { type: "json" };
+import royalCouncilWorld from "../../worlds/alexandria-0.44.0.json" with { type: "json" };
+import aristocraticEstatesWorld from "../../worlds/alexandria-0.45.0.json" with { type: "json" };
+import historicalTitlesWorld from "../../worlds/alexandria-0.46.0.json" with { type: "json" };
+import resourceAdjustedWorld from "../../worlds/alexandria-0.47.0.json" with { type: "json" };
 
 /** The sample scene owns its pack; the shared simulation stays setting-independent. */
 export const builtinEngine = createEngine(sampleWorld);
@@ -115,12 +125,23 @@ const lives5Engine = createEngine(lives5World as unknown as WorldPack);
 const lives8Engine = createEngine(lives8World as unknown as WorldPack);
 const lives9Engine = createEngine(lives9World as unknown as WorldPack);
 const lives10Engine = createEngine(lives10World as unknown as WorldPack);
+// Local published revisions retain their fingerprints alongside the upstream archives.
+const wslLives7Engine = createEngine(wslLives7World as unknown as WorldPack);
+const wslLives8Engine = createEngine(wslLives8World as unknown as WorldPack);
+const wslLives9Engine = createEngine(wslLives9World as unknown as WorldPack);
 const lives7Engine = createEngine(lives7World as unknown as WorldPack);
 const lives6Engine = createEngine(lives6World as unknown as WorldPack);
 const deepEngine = createEngine(deepWorld as unknown as WorldPack);
 const figure3Engine = createEngine(figure3World as unknown as WorldPack);
 const figure2Engine = createEngine(figure2World as unknown as WorldPack);
 const figureEngine = createEngine(figureWorld as unknown as WorldPack);
+const familyRecordsEngine = createEngine(familyRecordsWorld);
+const grandparentRarityEngine = createEngine(grandparentRarityWorld);
+const royalCouncilEngine = createEngine(royalCouncilWorld);
+const aristocraticEstatesEngine = createEngine(aristocraticEstatesWorld);
+const historicalTitlesEngine = createEngine(historicalTitlesWorld);
+const resourceAdjustedEngine = createEngine(resourceAdjustedWorld);
+const npcRankedEngine = createEngine(buildNpcWorld(lives8World as unknown as WorldPack));
 export let sampleEngine = builtinEngine;
 const engines = new Map<string, LifeEngine>([[builtinEngine.fingerprint, builtinEngine], [legacyEngine.fingerprint, legacyEngine], [characterPreviewEngine.fingerprint, characterPreviewEngine], [previousEngine.fingerprint, previousEngine], [specialistEngine.fingerprint, specialistEngine], [namedCausesEngine.fingerprint, namedCausesEngine], [originRangesEngine.fingerprint, originRangesEngine], [longerLivesEngine.fingerprint, longerLivesEngine], [peopleEngine.fingerprint, peopleEngine], [skillTreeEngine.fingerprint, skillTreeEngine], [economyEngine.fingerprint, economyEngine], [variedEngine.fingerprint, variedEngine]]);
 engines.set(birthEngine.fingerprint, birthEngine);
@@ -165,19 +186,35 @@ engines.set(lives6Engine.fingerprint, lives6Engine);
 engines.set(lives8Engine.fingerprint, lives8Engine);
 engines.set(lives9Engine.fingerprint, lives9Engine);
 engines.set(lives10Engine.fingerprint, lives10Engine);
+engines.set(wslLives7Engine.fingerprint, wslLives7Engine);
+engines.set(wslLives8Engine.fingerprint, wslLives8Engine);
+engines.set(wslLives9Engine.fingerprint, wslLives9Engine);
 engines.set(lives7Engine.fingerprint, lives7Engine);
 engines.set(deepEngine.fingerprint, deepEngine);
 engines.set(figureEngine.fingerprint, figureEngine);
 engines.set(figure3Engine.fingerprint, figure3Engine);
 engines.set(figure2Engine.fingerprint, figure2Engine);
+engines.set(familyRecordsEngine.fingerprint, familyRecordsEngine);
+engines.set(grandparentRarityEngine.fingerprint, grandparentRarityEngine);
+engines.set(royalCouncilEngine.fingerprint, royalCouncilEngine);
+engines.set(aristocraticEstatesEngine.fingerprint, aristocraticEstatesEngine);
+engines.set(historicalTitlesEngine.fingerprint, historicalTitlesEngine);
+engines.set(resourceAdjustedEngine.fingerprint, resourceAdjustedEngine);
+engines.set(npcRankedEngine.fingerprint, npcRankedEngine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
 export const ARCHIVE_KEY = "everfolk:alexandria-lives:v3";
+export const WEALTH_OBSERVATIONS_KEY = "everfolk:wealth-observations:v1";
 export let PRESENTATION_KEY = presentationKeyFor(builtinEngine);
 export const ARCHIVE_LIMIT = 10;
 export function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-sample:v3" : `everfolk:active:${engine.world.id}:${engine.fingerprint}`; }
 export function presentationKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-presentation:v3" : `${saveKeyFor(engine)}:presentation`; }
+
+/** Make an isolated life resolvable without selecting a world or writing a save. */
+export function registerLifeEngine(engine: LifeEngine): void {
+  engines.set(engine.fingerprint, engine);
+}
 
 /** Pin a life to its own immutable world revision; publishing never rewrites it. */
 export function selectWorldPack(pack: WorldPack): void {

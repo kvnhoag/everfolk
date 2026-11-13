@@ -8,6 +8,7 @@ import { chainHref } from "./chain-route.ts";
 import { formatPercent } from "./life-report-model.ts";
 import { formatNear } from "./near-amount.ts";
 import type { TokenView } from "./types.ts";
+import { editionLabel } from "./edition-label.ts";
 
 /** Pure view models for a kept life's page and the market (Task 20). */
 
@@ -65,6 +66,7 @@ export interface TokenPageInput {
 }
 
 export interface TokenPageView {
+  editionText?: string | null;
   title: string;
   kindLabel: string;
   isFigure: boolean;
@@ -122,6 +124,7 @@ export function tokenPageView(input: TokenPageInput): TokenPageView {
       tier: extra.tier,
     } : null,
     rarityLabel: rarityLabel(extra.rarity),
+    editionText: editionLabel(extra),
     affection: extra.affection,
     affectionText: `Affection ${extra.affection} / 100`,
     lifeLine: `Lived ${yearText(extra.birth_year)} – ${yearText(extra.death_year)}`,
@@ -156,6 +159,7 @@ export function careerEmblem(group: string): string {
 }
 
 export interface MarketRow {
+  editionText?: string | null;
   tokenId: string;
   href: string;
   title: string;
@@ -204,6 +208,7 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
       figureId: token?.extra.kind === "figure" ? token.extra.figure_id : null,
       portraitMedia: token?.extra.portrait_media ?? null,
       rarityLabel: token ? rarityLabel(token.extra.rarity) : "",
+      editionText: token ? editionLabel(token.extra) : null,
       actionName: token ? actionName(token.extra.action_id) : "",
       seller: listing.seller_id,
       priceText: `${formatNear(listing.price)} NEAR`,
@@ -216,7 +221,7 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
   });
 }
 
-export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; portraitMedia?: string | null; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
+export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; portraitMedia?: string | null; rarity: number; rarityLabel: string; editionText?: string | null; actionName: string; affection: number; emblem: string | null }
 
 /** The signed-in player's own kept lives. */
 export function keptRows(tokens: readonly (TokenView & { token_id: string })[]): KeptRow[] {
@@ -224,8 +229,9 @@ export function keptRows(tokens: readonly (TokenView & { token_id: string })[]):
     const isFigure = token.extra.kind === "figure" && token.extra.figure_id !== null;
     return {
       tokenId: token.token_id, href: chainHref({ kind: "token", tokenId: token.token_id }), title: tokenTitle(token.extra), isFigure,
-      figureId: isFigure ? token.extra.figure_id : null, portraitMedia: token.extra.portrait_media ?? null, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
+      figureId: isFigure ? token.extra.figure_id : null, portraitMedia: token.extra.portrait_media ?? null, rarity: token.extra.rarity, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
       affection: token.extra.affection, emblem: isFigure ? null : careerEmblem(token.extra.career_group),
+      editionText: editionLabel(token.extra),
     };
   });
 }

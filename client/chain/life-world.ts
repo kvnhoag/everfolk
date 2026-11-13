@@ -14,13 +14,15 @@ import figures3 from "../../worlds/demo/alexandria-figures-3.json" with { type: 
 import figures2 from "../../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 import figures1 from "../../worlds/demo/alexandria-figures-1.json" with { type: "json" };
 import type { WorldPack } from "../../src/types.ts";
-import { DEMO_WORLD_VERSION, LEGACY_DEMO_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION, LEGACY_DEMO_WORLD_VERSION, NPC_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import { ensureDemoDeeds } from "../../chain/catalog/demo-deeds.ts";
+import { buildNpcWorld } from "../../chain/npc-world.ts";
 import currentDemo from "../../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 import legacyDemo from "../../worlds/demo/alexandria-demo-1.json" with { type: "json" };
 import ranked from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
 /** Resolve the exact revision recorded in the life; never replace retained packs. */
 export async function loadLifeWorld(version: string): Promise<WorldPack> {
+  if (version === NPC_WORLD_VERSION) return buildNpcWorld(life8 as unknown as WorldPack);
   const packs: Record<string, unknown> = {
     [LIVES_WORLD_VERSION]: currentLife,
     "alexandria-lives-9": life9,

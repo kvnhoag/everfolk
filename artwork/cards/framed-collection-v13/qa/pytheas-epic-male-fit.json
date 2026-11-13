@@ -1,0 +1,60 @@
+{
+  "slug": "pytheas-epic-male",
+  "figureId": "pytheas",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Keeper of the Northern Voyage Log",
+  "subtitle": "Pytheas of Massalia",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 34,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-epic-male.svg",
+  "fittedArt": "assets/fitted/pytheas-epic-male.png",
+  "overlaySvg": "source/overlays/pytheas-epic-male.svg",
+  "titleSize": 42,
+  "sourceArtSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+  "master": "masters/pytheas-epic-male.vectorcraft",
+  "export": "exports/pytheas-epic-male.png",
+  "thumbnail": "assets/pytheas-epic-male-thumb.png",
+  "exportSha256": "1457c1d2a176f2e9c07af34e5dc8c68ea788a9c051584864a7f37f24ac6b1204",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

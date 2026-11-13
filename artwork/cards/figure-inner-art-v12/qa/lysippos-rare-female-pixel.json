@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\lysippos-rare-female.png",
+  "sourceSha256": "96ab93f3b608b7da5c23b94405c3f8dff53f2fb1ce76890b7a17dc7ef663981c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\lysippos-rare-female-coarse.png",
+  "baseSha256": "a316e866bfd4aadb730f017e61f97c8bcf7b252db2a2497c8a3096290db9c11b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\lysippos-rare-female-coarse.json",
+  "baseQaSha256": "9f794f274d5e41e2f700a69f40855e9eef081c8fe3c3afa157bc6082fe991c69",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\lysippos-rare-female-face.json",
+  "configSha256": "c931b71e3473253239c05802896a49ef304b09f9fd357e4992cb49342759a1f5",
+  "config": {
+    "critical_boxes": [],
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "center": [
+          585,
+          322
+        ],
+        "radius": [
+          91,
+          105
+        ]
+      }
+    ],
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\lysippos-rare-female-pixel.png",
+  "outputSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "41e2c1bfe2504bb9eaeb11d8f65035e76ad8387dd66446517a012bccae1fad34",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\lysippos-rare-female-face-mask.png",
+  "maskSha256": "2877a10615d1648bdf02cdbb8d9f5d029a34ee010bbce97de352a8dd814976fb",
+  "maskPixelSha256": "04913c5dc8831af37fd5245cc4a2ff44821cd7f8f5f897c6d66c7aeb12a455b1",
+  "selectedDetailCells": 693,
+  "retainedCoarseCells": 23807,
+  "affectedPixels": 24948,
+  "changedPixels": 24664,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

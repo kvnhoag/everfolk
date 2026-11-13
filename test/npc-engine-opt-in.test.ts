@@ -4,9 +4,13 @@ import { createEngine } from "../src/engine.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import type { NpcCommand, NpcDecision } from "../src/npc/types.ts";
 import { availableNpcActions, createNpcSimulation, npcStateFromLife, replayNpcSimulation, stepNpcSimulation } from "../src/npc/simulation.ts";
+import { settlePeople } from "../src/npc/runtime.ts";
+import { createNpcSessionService } from "../server/npc/service.ts";
+import { memoryNpcStore } from "../server/npc/store.ts";
 import { orderValue } from "../src/demo/market-depth.ts";
 import { TRADE_ITEMS } from "../src/demo/types.ts";
 import retainedWorld from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import lives5World from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 
 // Deliberately retain lives-4 as the base: new engine behavior requires a custom opt-in.
 function fixture(optIn = true): WorldPack {
@@ -198,4 +202,139 @@ test("NPC study pays the quantity quote in depth worlds and retains the old fixe
     assert.equal(next.demo!.town.pressure?.grain, world.demo!.market.depth ? 1498 : undefined);
     assert.equal(money(next), money(life));
   }
+});
+
+function lives5NpcFixture(optIn: boolean): WorldPack {
+  const world = structuredClone(lives5World) as unknown as WorldPack;
+  world.id = "npc-annual-audit-fixture";
+  if (optIn) world.npcAgents = { version: 1 };
+  else delete world.npcAgents;
+  for (const event of world.events) {
+    event.when = { type: "age", op: "gte", value: 1000 };
+    event.maxOccurrences = 1;
+  }
+  delete world.eventPacing;
+  delete world.character!.encounterPacing;
+  world.character!.familyBackgrounds = false;
+  for (const band of world.mortality!.bands) band.annualProbability = 0;
+  for (const band of world.health!.incidenceBands) band.annualProbability = 0;
+  for (const band of world.health!.declineBands) band.healthLoss = 0;
+  delete world.health!.mortalityCalibration;
+  world.stats.health.initial = 100;
+  delete world.stats.health.initialRange;
+  world.yearlyRules = [];
+  world.yearlyEffects = [];
+  return world;
+}
+
+test("annual NPC food settlement uses depth quotes and pressure across direct, engine opt-in and server paths", async () => {
+  // 1. Direct settlePeople audit matching calm lives-5 seed with grain pressure 1500
+  const world5 = lives5NpcFixture(false), engine5 = createEngine(world5);
+  const baseSim = createNpcSimulation(world5, "npc-annual-price-audit");
+  const prepareAnnual = (cash: number, pressure: number) => {
+    const state = structuredClone(baseSim);
+    const peerId = state.slots.peer;
+    for (const [id, npc] of Object.entries(state.people)) {
+      npc.health = 60;
+      npc.cash = id === peerId ? cash : 0;
+    }
+    state.player.demo!.year = { flood: "normal", army: "quiet", road: "safe", fresh: [] };
+    state.player.demo!.town.prices.grain = { buy: 1, sell: 2 };
+    state.player.demo!.town.merchant.grain = 1000;
+    state.player.demo!.town.pressure = { grain: pressure };
+    return { state, peerId };
+  };
+
+  const { state: s100, peerId: p100 } = prepareAnnual(100, 1500);
+  const expectedQuote = orderValue(world5.demo!, s100.player.demo!, "grain", "buy", 10).total;
+  assert.equal(expectedQuote, 11);
+  const sessionCash = (s: typeof s100) =>
+    money(s.player) + Object.values(s.people).reduce((sum, npc) => sum + npc.cash, 0);
+  const prevMerchantCash = s100.player.demo!.town.merchant.cash;
+  const beforeMoney100 = sessionCash(s100);
+  settlePeople(s100, s100.player, world5);
+  assert.equal(s100.people[p100].cash, 89);
+  assert.equal(s100.people[p100].health, 60);
+  assert.equal(s100.player.demo!.town.merchant.cash, prevMerchantCash + 11);
+  // Merchant eats 10 grain directly from shop stock; peer buys 10 grain -> 980
+  assert.equal(s100.player.demo!.town.merchant.grain, 980);
+  assert.equal(s100.player.demo!.town.pressure!.grain, 1490);
+  assert.equal(sessionCash(s100), beforeMoney100);
+
+  const { state: s11, peerId: p11 } = prepareAnnual(11, 1500);
+  settlePeople(s11, s11.player, world5);
+  assert.equal(s11.people[p11].cash, 0);
+  assert.equal(s11.people[p11].health, 60);
+  assert.equal(s11.player.demo!.town.merchant.grain, 980);
+  assert.equal(s11.player.demo!.town.pressure!.grain, 1490);
+
+  const { state: s10, peerId: p10 } = prepareAnnual(10, 1500);
+  settlePeople(s10, s10.player, world5);
+  assert.equal(s10.people[p10].cash, 10);
+  assert.equal(s10.people[p10].health, 56);
+  assert.equal(s10.player.demo!.town.merchant.grain, 990);
+  assert.equal(s10.player.demo!.town.pressure!.grain, 1500);
+
+  // 2. Engine opt-in path (world.npcAgents = { version: 1 }): compare affordable (8 dr) vs unaffordable (7 dr)
+  const optInWorld = lives5NpcFixture(true), optEngine = createEngine(optInWorld);
+  const runOptAdvance = (cash: number) => {
+    const life = structuredClone(optEngine.start("npc-annual-price-audit"));
+    const peer = life.npcs!.slots.peer;
+    for (const [id, npc] of Object.entries(life.npcs!.people)) {
+      npc.health = 60;
+      npc.cash = id === peer ? cash : 0;
+    }
+    life.demo!.town.merchant.grain = 1000;
+    // keepBps is 3000 (30%), so starting pressure 5000 recovers to 1500 during advance before settlePeople (post-harvest depth quote is 8 dr < fixed 20 dr)
+    life.demo!.town.pressure = { grain: 5000 };
+    const turned = optEngine.npc(life, { type: "npc-turn", decisions: restDecisions(optInWorld, life) });
+    return { peer, next: optEngine.advance(turned) };
+  };
+  const optAfford = runOptAdvance(8), optShort = runOptAdvance(7);
+  assert.equal(optAfford.next.npcs!.people[optAfford.peer].cash, 0);
+  assert.equal(optAfford.next.npcs!.people[optAfford.peer].health, 60);
+  assert.equal(optShort.next.npcs!.people[optShort.peer].cash, 7);
+  assert.equal(optShort.next.npcs!.people[optShort.peer].health, 56);
+  assert.equal(optAfford.next.demo!.town.merchant.cash - optShort.next.demo!.town.merchant.cash, 8);
+  assert.equal(optShort.next.demo!.town.merchant.grain - optAfford.next.demo!.town.merchant.grain, 10);
+  assert.equal(optAfford.next.demo!.town.pressure!.grain, 1490);
+  assert.equal(optShort.next.demo!.town.pressure!.grain, 1500);
+
+  // 3. Server NPC simulation path (!world.npcAgents -> createNpcSessionService & stepNpcSimulation)
+  const serverWorld = lives5NpcFixture(false), store = memoryNpcStore();
+  const service = createNpcSessionService({ world: serverWorld, store });
+  const started = await service.start("npc-annual-price-audit", null);
+  const stored = (await store.read(started.id))!;
+  const srvPeer = stored.state.slots.peer;
+  for (const [id, npc] of Object.entries(stored.state.people)) {
+    npc.health = 60;
+    npc.cash = id === srvPeer ? 8 : 0;
+  }
+  stored.state.player.demo!.town.merchant.grain = 1000;
+  stored.state.player.demo!.town.pressure = { grain: 5000 };
+  await store.compareAndSwap(stored.revision, { ...stored, revision: stored.revision + 1 });
+  const turned = await service.turn(started.id, started.token, 1, "npc-turn-audit");
+  const afterServerAdvance = await service.step(started.id, started.token, turned.revision, "adv-audit", { type: "advance" });
+  assert.equal(afterServerAdvance.people[srvPeer].cash, 0);
+  assert.equal(afterServerAdvance.people[srvPeer].health, 60);
+  assert.equal(afterServerAdvance.life.demo!.town.pressure!.grain, 1490);
+  assert.equal(afterServerAdvance.life.demo!.town.merchant.cash, optAfford.next.demo!.town.merchant.cash);
+  assert.equal(afterServerAdvance.life.demo!.town.merchant.grain, optAfford.next.demo!.town.merchant.grain);
+
+  // 4. Fixed-price legacy compatibility (!market.depth)
+  const legacyWorld = fixture(false);
+  const legacySim = createNpcSimulation(legacyWorld, "npc-annual-price-audit");
+  const legacyPeer = legacySim.slots.peer;
+  const legacyPrep = structuredClone(legacySim);
+  for (const [id, npc] of Object.entries(legacyPrep.people)) {
+    npc.health = 60;
+    npc.cash = id === legacyPeer ? 25 : 0;
+  }
+  legacyPrep.player.demo!.town.prices.grain = { buy: 1, sell: 2 };
+  legacyPrep.player.demo!.town.merchant.grain = 1000;
+  settlePeople(legacyPrep, legacyPrep.player, legacyWorld);
+  assert.equal(legacyPrep.people[legacyPeer].cash, 5);
+  assert.equal(legacyPrep.people[legacyPeer].health, 60);
+  assert.equal(legacyPrep.player.demo!.town.merchant.grain, 980);
+  assert.equal(legacyPrep.player.demo!.town.pressure, undefined);
 });

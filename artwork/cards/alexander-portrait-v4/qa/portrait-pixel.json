@@ -1,0 +1,38 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-portrait-v4\\source\\alexander-portrait-revised.png",
+  "sourceSha256": "ebaf34a2ae9f4802213166b87b1f72d7f3de739cf399c1bffd954b2c293a4783",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "method": "PixelOE 1.0.0 legacy CPU API",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "outputSha256": "a72342110d2940edfe4bc22fe7cd3eab53cfd0a05e4eaa4159ecf204f200c54b",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "sourceUnchanged": true
+}

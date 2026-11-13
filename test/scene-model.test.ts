@@ -24,6 +24,9 @@ function fixture(id: string, age = 20, change?: (event: LifeEvent) => void, prep
   for (const origin of world.origins) origin.statRanges = { ...origin.statRanges, wealth: { min: 80, max: 80 } };
   const event = structuredClone(world.events.find(event => event.id === id)!);
   assert.ok(event, `Unknown fixture ${id}`);
+  // A scene for an ordinary livelihood must remain on that route for every natal seed.
+  if (event.audience === "common" && world.royalty) world.royalty.originId = "fixture-unselected-royal-origin";
+  if (event.audience === "common" && world.aristocracy) world.aristocracy.originId = "fixture-unselected-estate-origin";
   event.trigger = { type: "age", at: age };
   delete event.when;
   delete event.maxOccurrences;

@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-13",
+  "newAssets": 20,
+  "figures": [
+    "aristotle",
+    "euclid",
+    "theophrastus",
+    "zeno"
+  ],
+  "source": "scholarly-manifest.json",
+  "review": {
+    "originalPaintings": true,
+    "pixelOutputs": true,
+    "displayPreviews420x525": true,
+    "uncommonFrontal": 8,
+    "rareLeftProfile": 8,
+    "newEpicThreeQuarter": 4,
+    "viewAnglesVisuallyVerified": true,
+    "twoArmRoutingVisuallyVerified": true,
+    "handsAndToolContactsVisuallyVerified": true,
+    "contributorIdentityRecognizableWithinGender": true,
+    "retainedEpicFilesUntouched": true,
+    "unchangedParentsNotRegenerated": true
+  },
+  "filter": {
+    "output": [
+      840,
+      1050
+    ],
+    "method": "PixelOE verified 3px body / 2px face mixed grid",
+    "all20SourceHashesUnchanged": true,
+    "all20Deterministic": true,
+    "all20RegisteredExactIntegerBlocks": true,
+    "all20PngReadbackExact": true,
+    "outsideMaskChangedPixels": 0
+  },
+  "provenance": "Built-in image editing; representative male/female player contributors, not gender-swapped historical figures or personal historical pupils.",
+  "workers": "All filter sessions completed; preview image handles disposed."
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>03 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_03_Story_Door___mono_device" data-name="03 Story Door / mono device">
+      <path id="Story_Door___element_1" data-name="Story Door / element 1" d="M30.08 76.16 C43.733 71.04 56.533 71.893 68.48 78.72 M91.52 78.72 C103.467 71.893 116.267 71.04 129.92 76.16 L129.92 122.24 C117.12 117.973 104.32 118.827 91.52 124.8 M68.48 124.8 C56.533 118.827 43.733 117.973 30.08 122.24 L30.08 76.16" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Story_Door___element_2" data-name="Story Door / element 2" d="M58.24 128.64 L58.24 64.64 C58.24 33.92 101.76 33.92 101.76 64.64 L101.76 128.64" fill="none" stroke="#24464b" stroke-width="7.68" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon id="Story_Door___element_3" data-name="Story Door / element 3" points="73.6,67.2 92.8,59.52 92.8,128.64 73.6,120.96" fill="#24464b"/>
+      <line id="Story_Door___element_4" data-name="Story Door / element 4" x1="49.28" y1="133.76" x2="110.72" y2="133.76" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

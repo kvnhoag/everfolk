@@ -1,30 +1,21 @@
 import { useMemo, useState } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import { resolvePartner } from "../../src/people.ts";
-import type { ActivityAvailability, EncounteredPerson, LifeState, PartnerDefinition, WorldPack } from "../../src/types.ts";
+import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import ImpactValue from "./ImpactValue.tsx";
-import LifeMoment from "./LifeMoment.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
+import { personPortraitState } from "../models/portrait-state.ts";
 import { getSkillImpact } from "../models/skill-impact.ts";
-import YearlyFocus from "./YearlyFocus.tsx";
-import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/life-choice-board.css";
-
-function isEncountered(person: PartnerDefinition | EncounteredPerson): person is EncounteredPerson {
-  return "sex" in person;
-}
+import SectionHelp from "./SectionHelp.tsx";
 
 interface Props {
   life: LifeState;
   world: WorldPack;
   activities: readonly ActivityAvailability[];
-  focusId: YearlyFocusId;
-  onAdvance(): void;
-  onOpenChronicle(): void;
-  onFocusChange(focusId: YearlyFocusId): void;
   onActivity(id: string): void;
   onOpenPeopleTab?(): void;
 }
@@ -35,10 +26,6 @@ export default function LifeChoiceBoard({
   life,
   world,
   activities,
-  focusId,
-  onAdvance,
-  onOpenChronicle,
-  onFocusChange,
   onActivity,
   onOpenPeopleTab,
 }: Props) {
@@ -100,12 +87,9 @@ export default function LifeChoiceBoard({
 
   return (
     <div className="life-choice-board is-ready">
-      {life.phase === "ready" && (
-        <LifeMoment showNotifications={false} life={life} world={world} onAdvance={onAdvance} onOpenChronicle={onOpenChronicle} />
-      )}
-
       {life.phase === "ready" && life.age >= 6 && (
-        <section className="life-yearly-action-deck" aria-label="Yearly personal action board">
+        <section className="life-yearly-action-deck has-section-help" aria-label="Yearly personal action board">
+          <SectionHelp hint="yearly-action" />
           <header className="life-action-deck-header">
             <div>
               <span className="life-action-eyebrow">YEARLY PERSONAL ACTION SLOT</span>
@@ -184,16 +168,8 @@ export default function LifeChoiceBoard({
                         className="life-action-card"
                         onClick={() => onActivity(act.id)}
                       >
-                        {person && isEncountered(person) && (
-                          <PixelPortrait
-                            age={life.age + person.ageOffset}
-                            name={person.name}
-                            sex={person.sex}
-                            originId={person.originId}
-                            avatarVariant={person.avatarVariant}
-                            seed={`${life.seed}:${person.id}`}
-                            className="life-action-card-avatar"
-                          />
+                        {person && (
+                          <PixelPortrait portrait={personPortraitState(world, life, person)} name={person.name} className="life-action-card-avatar" />
                         )}
                         <div className="life-action-card-body">
                           <strong>{displayProse(act.text)}</strong>
@@ -224,7 +200,6 @@ export default function LifeChoiceBoard({
         </section>
       )}
 
-      <YearlyFocus life={life} world={world} focusId={focusId} activities={activities} onChange={onFocusChange} />
     </div>
   );
 }

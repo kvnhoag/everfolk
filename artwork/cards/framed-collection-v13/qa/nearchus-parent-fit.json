@@ -1,0 +1,60 @@
+{
+  "slug": "nearchus-parent",
+  "figureId": "nearchus",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Nearchus",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 78,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-parent.svg",
+  "fittedArt": "assets/fitted/nearchus-parent.png",
+  "overlaySvg": "source/overlays/nearchus-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+  "master": "masters/nearchus-parent.vectorcraft",
+  "export": "exports/nearchus-parent.png",
+  "thumbnail": "assets/nearchus-parent-thumb.png",
+  "exportSha256": "5c539e4bb4e63891f714d6d7d97257e9128efab51839bdcd916b7c2aedb1fa02",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

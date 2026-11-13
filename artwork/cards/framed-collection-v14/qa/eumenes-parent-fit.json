@@ -1,0 +1,82 @@
+{
+  "slug": "eumenes-parent",
+  "figureId": "eumenes",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Eumenes of Cardia",
+  "subtitle": "Secretary and Strategist",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-parent-pixel.png",
+  "collectionIndex": 109,
+  "owner": null,
+  "figureName": "Eumenes of Cardia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "stylus-seal",
+  "bodyTitle": "From Records to Command",
+  "bodyText": "Eumenes served Philip II and Alexander as a royal secretary before becoming a commander in the wars of the Successors. His career joined administrative skill to striking victories amid the struggle for Alexander's inheritance.",
+  "sources": [
+    {
+      "title": "Eumenes of Cardia — Oxford Classical Dictionary",
+      "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548934031?login=false"
+    }
+  ],
+  "canonicalTitle": "Eumenes of Cardia",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/eumenes.svg",
+    "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Eumenes served Philip II and Alexander as a royal secretary",
+    "before becoming a commander in the wars of the Successors.",
+    "His career joined administrative skill to striking",
+    "victories amid the struggle for Alexander's inheritance."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-parent.svg",
+  "fittedArt": "assets/fitted/eumenes-parent.png",
+  "overlaySvg": "source/overlays/eumenes-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+  "master": "masters/eumenes-parent.vectorcraft",
+  "export": "exports/eumenes-parent.png",
+  "thumbnail": "assets/eumenes-parent-thumb.png",
+  "exportSha256": "35e987f2e94192879cdd59abc2f71f9d6fccf9c1507e5c687dd9db4de34c06d9",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582348,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

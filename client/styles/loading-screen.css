@@ -1,6 +1,23 @@
 .storybook-loading {
-  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-family: var(--ef-font-body);
 }
+
+.loading-progress-label {
+  color: #ead6b7;
+  font-variant-numeric: tabular-nums;
+}
+
+.loading-progress {
+  appearance: none;
+  overflow: hidden;
+  border: 1px solid #728b8d;
+  border-radius: 4px;
+  background: #254953;
+}
+
+.loading-progress::-webkit-progress-bar { background: #254953; }
+.loading-progress::-webkit-progress-value { background: #d9bc93; transition: width .3s ease; }
+.loading-progress::-moz-progress-bar { background: #d9bc93; }
 
 .loading-soldier {
   animation: loading-patrol 5.5s steps(48) infinite;
@@ -42,4 +59,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .loading-soldier, .loading-soldier-leg { animation: none; }
+  .loading-progress::-webkit-progress-value { transition: none; }
 }

@@ -3,10 +3,11 @@
   margin: auto;
   padding: 24px clamp(16px, 4vw, 42px) 60px;
   color: var(--text, #293d35);
-  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-family: var(--ef-font-body);
 }
 .npc-lab nav {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   font-size: 12px;
@@ -15,12 +16,15 @@
 .npc-lab a {
   color: inherit;
 }
+.npc-lab .npc-lab-brand {
+  text-decoration: none;
+}
 .npc-intro {
   max-width: 660px;
   margin-bottom: 30px;
 }
 .npc-intro h1 {
-  font-family: var(--font-display, Georgia, serif);
+  font-family: var(--ef-font-display);
   font-size: clamp(30px, 5vw, 48px);
   font-weight: 500;
   margin: 0 0 14px;
@@ -99,7 +103,7 @@
   letter-spacing: 0.04em;
 }
 .npc-person h2 {
-  font: 500 25px var(--font-display, Georgia, serif);
+  font: 500 25px var(--ef-font-display);
   margin: 5px 0;
 }
 .npc-person > p {

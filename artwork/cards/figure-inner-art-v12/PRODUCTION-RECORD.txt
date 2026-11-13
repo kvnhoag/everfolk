@@ -1,0 +1,25 @@
+V12 COMPLETE — 13 NOVEMBER 2026
+
+Ptolemy main arm routing is corrected. Every one of35 player subcard roles now
+has male and female versions, for70 subcard variants plus13 named main figures.
+Total83 final illustrations, all840 x1050 with PixelOE3px body/2px face finish.
+
+59 new selected images were generated/edited with the built-in image tool:
+root1, scholarly worker20, craft/civic worker20, command/service worker18.
+24 earlier images were retained unchanged, with source/final hashes matched
+against the prior library. Sources, prompts, filter regions, QA and reusable
+metadata are preserved. No app code or gameplay state has been changed.
+
+Core subcard progressions show frontal, profile and three-quarter head views.
+Each contributor remains recognizable within a gender/figure progression.
+The main figures remain themselves; gender variants depict representative
+players performing earned contribution work.
+
+catalog.json and qa/library-verification.json record83 complete unique final
+assets,35 complete role pairs, no failed source/filter/hash checks, and all
+24 retained assets matched to their source library.
+
+review/index.html is the revised gallery with gender filtering and painting/
+pixel comparison. review/revision-summary.png shows Ptolemy's correction and
+both Alexander progressions. review/gender-angle-*.png covers every figure.
+All task-owned generation/filter workers completed; image handles disposed.

@@ -1,0 +1,184 @@
+{
+  "reviewedBy": "craft_civic_art",
+  "date": "2026-11-13",
+  "count": 20,
+  "filter": "Verified PixelOE3pxbody/2pxface;840x1050mixed-grid finals",
+  "displayReview": "All20 filtered finals inspected individually as420x525 nearest-neighbour review thumbnails; source paintings inspected in native generation output.",
+  "criteria": {
+    "uncommon": "Frontal glance up; centred nose and both eyes comparably visible.",
+    "rare": "Strong left-facing profile; single near eye, far cheek obscured; torso/work recomposed naturally.",
+    "epic": "New counterpart epics visibly three-quarter, distinguishable from frontal/profile stages.",
+    "anatomy": "Two connected arms traced from respective shoulders through elbows to wrists and hands; primary tools have credible grips/contact; neck and shoulder transitions inspected."
+  },
+  "assets": [
+    {
+      "slug": "lysippos-uncommon-male",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/lysippos-uncommon-male-420.png"
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/lysippos-rare-male-420.png"
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/lysippos-uncommon-female-420.png"
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/lysippos-rare-female-420.png"
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "viewAngle": "three-quarter",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/lysippos-epic-female-420.png"
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/pytheas-uncommon-male-420.png"
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/pytheas-rare-male-420.png"
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/pytheas-uncommon-female-420.png"
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/pytheas-rare-female-420.png"
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "viewAngle": "three-quarter",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/pytheas-epic-female-420.png"
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/menander-uncommon-female-420.png"
+    },
+    {
+      "slug": "menander-rare-female",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/menander-rare-female-420.png"
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/menander-uncommon-male-420.png"
+    },
+    {
+      "slug": "menander-rare-male",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/menander-rare-male-420.png"
+    },
+    {
+      "slug": "menander-epic-male",
+      "viewAngle": "three-quarter",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/menander-epic-male-420.png"
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/cleomenes-uncommon-male-420.png"
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/cleomenes-rare-male-420.png"
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "viewAngle": "frontal",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/cleomenes-uncommon-female-420.png"
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "viewAngle": "left-profile",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/cleomenes-rare-female-420.png"
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "viewAngle": "three-quarter",
+      "anglePassed": true,
+      "anatomyPassed": true,
+      "filterVisuallyReviewed": true,
+      "thumbnail": "review/craft-civic/cleomenes-epic-female-420.png"
+    }
+  ],
+  "limits": [
+    "Appearances and costume details remain imaginative game illustrations.",
+    "Visual inspection is not anatomical proof or user approval.",
+    "Four pre-existing epic sources/finals were retained by root and not altered by this worker."
+  ],
+  "workers": {
+    "remaining": [],
+    "status": "All20 task-owned filter workers completed and their sessions were collected; thumbnail Drawing handles disposed."
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-uncommon.png",
+  "sourceSha256": "8fff5c552ab3c10568af81a5d96bed793bad6eaf541c9dc3b8d2a64f3be3218a",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-uncommon-coarse.png",
+  "baseSha256": "e2b1846496762e952ce99c5c2a774d185b5f934a14774212c9f07362862fbc48",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-uncommon-coarse.json",
+  "baseQaSha256": "b14eeff795f40c0a04542680505474b9b745ceeed8836e11aa3940f6bc71906c",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-uncommon-face.json",
+  "configSha256": "29820b00f6f79ff0f8584b7529af8bb81207feaada6c2782f621652944c914c6",
+  "config": {
+    "critical_boxes": [],
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "center": [
+          350,
+          333
+        ],
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "radius": [
+          101,
+          113
+        ]
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-uncommon-pixel.png",
+  "outputSha256": "bf0762b046efec7693c2d309a66c100ef992bdeb9de407136b371a74729c14a3",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "ca63568f39ab021cd0c6492a773009829a9631c38b2e18ade57493d82f05b529",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-uncommon-face-mask.png",
+  "maskSha256": "62a63e9916a18cd2dc11da6327b73d47fee484097b6607939730f014b2cf2cba",
+  "maskPixelSha256": "11caa020de9d1e2a649504377fe9e1a782a98247be780a3fdea4eec2032f007f",
+  "selectedDetailCells": 822,
+  "retainedCoarseCells": 23678,
+  "affectedPixels": 29592,
+  "changedPixels": 29226,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

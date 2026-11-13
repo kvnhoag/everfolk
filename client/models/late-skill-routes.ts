@@ -2,6 +2,8 @@ import type { ActivityAvailability, Condition, LegacyAchievementDefinition, Life
 import { matchesCondition } from "../../src/conditions.ts";
 import { practiceBlockReason } from "./skill-tree.ts";
 import { formatYear } from "../../src/calendar.ts";
+import { royalAudienceAllowed } from "../../src/royalty.ts";
+import { formatMoney } from "./wealth.ts";
 
 export interface RouteRequirement { text: string; met: boolean }
 export interface LateRouteNode {
@@ -45,6 +47,16 @@ export function routeRequirements(condition: Condition | undefined, world: World
       case "age": return `Age ${amount(rule)}`;
       case "flag": return rule.flag.includes("final") ? rule.value === false ? "Final assessment unused" : "Final assessment used"
         : `${rule.flag.replaceAll("-", " ")}: ${rule.value ? "completed" : "not active"}`;
+      case "royal": {
+        const comparison = { eq: "at", ne: "other than", gt: "above", gte: "at least", lt: "below", lte: "at most" }[rule.op];
+        const value = rule.metric === "treasury" ? formatMoney(rule.value, world) : rule.value;
+        return `${world.royalty?.metrics[rule.metric].label ?? rule.metric} ${comparison} ${value}`;
+      }
+      case "aristocrat": {
+        const comparison = { eq: "at", ne: "other than", gt: "above", gte: "at least", lt: "below", lte: "at most" }[rule.op];
+        const value = rule.metric === "treasury" ? formatMoney(rule.value, world) : rule.value;
+        return `${world.aristocracy?.metrics[rule.metric].label ?? rule.metric} ${comparison} ${value}`;
+      }
       case "not": return rule.condition.type === "accomplishment" ? "Not already completed" : `Without: ${label(rule.condition)}`;
       default: return "Other project requirements";
     }
@@ -56,7 +68,8 @@ export function routeRequirements(condition: Condition | undefined, world: World
 /** Availability is supplied by the engine; projecting the tree never draws or acts. */
 export function buildLateSkillRoutes(world: WorldPack, life: LifeState, activities: readonly ActivityAvailability[]) {
   const definitions = world.legacy?.achievements ?? [];
-  return (world.legacy?.routes ?? []).filter(route => route.stages?.length).map(route => {
+  return (world.legacy?.routes ?? []).filter(route => route.stages?.length && route.achievementIds.some(id =>
+    life.accomplishments?.some(record => record.achievementId === id) || world.character?.activities.some(activity => royalAudienceAllowed(world, life, activity.audience) && activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === id))))).map(route => {
     const nodes = (ids: string[]): LateRouteNode[] => ids.map(id => {
         const achievement = definitions.find(item => item.id === id)!;
         const declared = world.character?.activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "accomplishment" && effect.achievement === id)));
@@ -70,7 +83,7 @@ export function buildLateSkillRoutes(world: WorldPack, life: LifeState, activiti
           requirements: [
             ...(activity?.minAge ? [{ text: `Age ${activity.minAge}+`, met: life.age >= activity.minAge }] : []),
             ...routeRequirements(activity?.when, world, life),
-          ],
+          ].filter((requirement, index, requirements) => requirements.findIndex(item => item.text === requirement.text) === index),
           ...(reason ? { reason } : {}),
         } satisfies LateRouteNode;
       });
@@ -78,7 +91,7 @@ export function buildLateSkillRoutes(world: WorldPack, life: LifeState, activiti
       ...route,
       discovered: route.skillIds.some(id => (life.character?.skills[id] ?? 0) >= 20) ||
         (life.accomplishments ?? []).some(record => record.routeId === route.id),
-      entries: nodes(route.achievementIds.filter(id => definitions.find(item => item.id === id)?.kind === "ordinary" &&
+      entries: nodes(route.achievementIds.filter(id => definitions.some(item => item.id === id && !item.figure && item.kind === "ordinary") &&
         !route.stages!.some(stage => stage.achievementIds.includes(id)))),
       stages: route.stages!.map(stage => ({ ...stage, nodes: nodes(stage.achievementIds) })),
     };

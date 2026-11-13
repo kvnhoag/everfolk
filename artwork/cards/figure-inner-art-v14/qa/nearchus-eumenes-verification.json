@@ -1,0 +1,200 @@
+{
+  "passed": true,
+  "count": 12,
+  "sourceArt": "12 distinct builtin imagegen scenes",
+  "filter": "PixelOE 1.0.0 mixed3body2face",
+  "checks": [
+    {
+      "slug": "nearchus-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "young adult man, open frontal face angled slightly down toward his work, short dark hair, clean shaven"
+    },
+    {
+      "slug": "nearchus-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "young adult woman, nearly frontal face with a slight turn to image right, practical tied-back dark hair"
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "adult man in a clear left-facing profile looking toward a coastal headland, sun-weathered skin, short dark beard"
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "adult woman in a clear right-facing profile looking toward a coastal headland, practical braided hair"
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "mature adult man in a strong right-facing three-quarter view, composed gaze toward the route, close dark beard"
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "mature adult woman nearly frontal, head tilted slightly up and gaze directed to image left, dark hair tied at the nape"
+    },
+    {
+      "slug": "eumenes-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "young adult man in a left-facing three-quarter view looking down toward a scroll bundle, short dark wavy hair, clean shaven"
+    },
+    {
+      "slug": "eumenes-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "young adult woman nearly frontal with chin lowered toward the bundle in her hands, practical dark hair tied up"
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "adult man in a clear left-facing profile, eyes lowered toward the letter, short straight dark hair, clean shaven"
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "adult woman in a right-facing three-quarter view, eyes lowered toward the letter, loosely bound dark hair"
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "mature adult man with a frontal face looking slightly upward toward image right, short dark hair and restrained beard"
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceUnchanged": true,
+      "outsideMaskChangedPixels": 0,
+      "deterministic": true,
+      "desiredViewAngle": "mature adult woman in a left-facing three-quarter view looking up from the dispatch, confident thoughtful gaze, dark hair secured behind the head"
+    }
+  ]
+}

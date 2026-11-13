@@ -3,7 +3,7 @@
   "id": "alexandria",
   "version": "alexandria-lives-8",
   "title": "Alexandria — Historical lives and earned legacies",
-  "description": "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements. Contribution cards stay below the principal figure's earned tier; Epic recognition follows a successful Legendary outcome. Fixed Legendary figure contributions begin with a separate Common project before Uncommon, Rare and Epic work.",
+  "description": "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements.",
   "startYear": -350,
   "maxAge": 100,
   "stats": {
@@ -24109,61 +24109,52 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-alexander-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "warfare",
-                      "op": "gte",
-                      "value": 24
-                    },
-                    {
-                      "type": "capability",
-                      "node": "T3"
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-alexander-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 24
+                },
+                {
+                  "type": "capability",
+                  "node": "T3"
+                }
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-alexander-uncommon"
+              }
             }
           ]
         },
@@ -24196,73 +24187,64 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-alexander-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-alexander-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "warfare",
-                      "op": "gte",
-                      "value": 24
-                    },
-                    {
-                      "type": "capability",
-                      "node": "T3"
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-alexander-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-alexander-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 24
+                },
+                {
+                  "type": "capability",
+                  "node": "T3"
+                }
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-alexander-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-alexander-claim-uncommon-accepted",
-            "text": "A delivered, itemised supply assignment is a contribution; merely joining the army is not. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A delivered, itemised supply assignment is a contribution; merely joining the army is not. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -24886,50 +24868,41 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-aristotle-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "capability",
-                  "node": "P3"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-aristotle-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
+                }
+              ]
+            },
+            {
+              "type": "capability",
+              "node": "P3"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-aristotle-uncommon"
+              }
             }
           ]
         },
@@ -24962,62 +24935,53 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-aristotle-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-aristotle-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "P3"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-aristotle-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-aristotle-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "P3"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-aristotle-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-aristotle-claim-uncommon-accepted",
-            "text": "An annotated comparison is useful work, rather than attendance at a lecture. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "An annotated comparison is useful work, rather than attendance at a lecture. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -25516,31 +25480,22 @@
           "conditions": [
             {
               "type": "accomplishment",
-              "achievement": "fig-euclid-common"
+              "achievement": "fig-euclid-encounter"
             },
             {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "capability",
-                  "node": "PS6"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-uncommon"
-                  }
-                }
-              ]
+              "type": "accomplishment",
+              "achievement": "fig-euclid-encounter"
+            },
+            {
+              "type": "capability",
+              "node": "PS6"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-euclid-uncommon"
+              }
             }
           ]
         },
@@ -25574,43 +25529,34 @@
           "conditions": [
             {
               "type": "accomplishment",
-              "achievement": "fig-euclid-common"
+              "achievement": "fig-euclid-encounter"
             },
             {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-euclid-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "PS6"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-uncommon"
-                  }
-                }
-              ]
+              "type": "accomplishment",
+              "achievement": "fig-euclid-encounter"
+            },
+            {
+              "type": "vocation",
+              "action": "fig-euclid-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "PS6"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-euclid-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-euclid-claim-uncommon-accepted",
-            "text": "Careful copying includes the reasons behind the diagram, not merely a finished picture. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Careful copying includes the reasons behind the diagram, not merely a finished picture. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -26131,50 +26077,41 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-lysippos-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "capability",
-                  "node": "AS5"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-lysippos-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
+                }
+              ]
+            },
+            {
+              "type": "capability",
+              "node": "AS5"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-lysippos-uncommon"
+              }
             }
           ]
         },
@@ -26207,62 +26144,53 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-lysippos-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-lysippos-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "AS5"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-lysippos-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-lysippos-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "AS5"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-lysippos-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-lysippos-claim-uncommon-accepted",
-            "text": "A model records pose and proportions for the bronze workshop. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A model records pose and proportions for the bronze workshop. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -26926,7 +26854,7 @@
       },
       {
         "id": "figure-pytheas-claim-uncommon",
-        "text": "Record the Common contribution: Expedition Provisioner",
+        "text": "Record the Uncommon contribution: Expedition Provisioner",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -26993,7 +26921,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-uncommon-accepted",
-            "text": "Paid preparation and a working log are a genuine expedition contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "Paid preparation and a working log are a genuine expedition contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27077,7 +27005,7 @@
       },
       {
         "id": "figure-pytheas-claim-rare",
-        "text": "Record the Uncommon contribution: Navigation Observer",
+        "text": "Record the Rare contribution: Navigation Observer",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -27135,7 +27063,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-rare-accepted",
-            "text": "Observations are compared across seasons rather than granting a discovery for one conversation. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Observations are compared across seasons rather than granting a discovery for one conversation. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27219,7 +27147,7 @@
       },
       {
         "id": "figure-pytheas-claim-epic",
-        "text": "Record the Rare contribution: Keeper of the Northern Voyage Log",
+        "text": "Record the Epic contribution: Keeper of the Northern Voyage Log",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -27277,7 +27205,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-epic-accepted",
-            "text": "The substantial contribution is the retained, tested account and its safe delivery; it does not settle every later geographical identification. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "The substantial contribution is the retained, tested account and its safe delivery; it does not settle every later geographical identification. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27619,63 +27547,54 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-menander-common"
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
             },
             {
               "type": "all",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 32
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "all",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "literacy",
-                      "op": "gte",
-                      "value": 32
-                    },
-                    {
-                      "type": "skill",
-                      "skill": "oratory",
-                      "op": "gte",
-                      "value": 24
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-menander-uncommon"
-                  }
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 24
                 }
               ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-menander-uncommon"
+              }
             }
           ]
         },
@@ -27708,75 +27627,66 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-menander-common"
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-menander-work-uncommon",
+              "count": 1
             },
             {
               "type": "all",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 32
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-menander-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "all",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "literacy",
-                      "op": "gte",
-                      "value": 32
-                    },
-                    {
-                      "type": "skill",
-                      "skill": "oratory",
-                      "op": "gte",
-                      "value": 24
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-menander-uncommon"
-                  }
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 24
                 }
               ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-menander-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-menander-claim-uncommon-accepted",
-            "text": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A usable dramatic scene and rehearsal notes are the first contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28456,7 +28366,7 @@
       },
       {
         "id": "figure-demetrius-claim-uncommon",
-        "text": "Record the Common contribution: Siege Workshop Assistant",
+        "text": "Record the Uncommon contribution: Siege Workshop Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28521,7 +28431,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-uncommon-accepted",
-            "text": "Early work establishes a real engineering contribution, without claiming a victory. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "Early work establishes a real engineering contribution, without claiming a victory. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28603,7 +28513,7 @@
       },
       {
         "id": "figure-demetrius-claim-rare",
-        "text": "Record the Uncommon contribution: Siege Engineer",
+        "text": "Record the Rare contribution: Siege Engineer",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28659,7 +28569,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-rare-accepted",
-            "text": "Two seasons of construction and revision establish engineering responsibility. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Two seasons of construction and revision establish engineering responsibility. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28741,7 +28651,7 @@
       },
       {
         "id": "figure-demetrius-claim-epic",
-        "text": "Record the Rare contribution: Director of Siege Works",
+        "text": "Record the Epic contribution: Director of Siege Works",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28797,7 +28707,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-epic-accepted",
-            "text": "Senior contribution requires delivered projects and operational accounting, not merely impressive plans. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "Senior contribution requires delivered projects and operational accounting, not merely impressive plans. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29248,7 +29158,7 @@
       },
       {
         "id": "figure-theophrastus-claim-uncommon",
-        "text": "Record the Common contribution: Plant Records Assistant",
+        "text": "Record the Uncommon contribution: Plant Records Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29302,7 +29212,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-uncommon-accepted",
-            "text": "A real comparative record starts the botanical contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A real comparative record starts the botanical contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29384,7 +29294,7 @@
       },
       {
         "id": "figure-theophrastus-claim-rare",
-        "text": "Record the Uncommon contribution: Comparative Plant Investigator",
+        "text": "Record the Rare contribution: Comparative Plant Investigator",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29440,7 +29350,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-rare-accepted",
-            "text": "Repeated comparison matters more than merely collecting names. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated comparison matters more than merely collecting names. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29522,7 +29432,7 @@
       },
       {
         "id": "figure-theophrastus-claim-epic",
-        "text": "Record the Rare contribution: Peripatetic Botanical Scholar",
+        "text": "Record the Epic contribution: Peripatetic Botanical Scholar",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29578,7 +29488,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-epic-accepted",
-            "text": "A sustained botanical contribution reflects Theophrastus's independent research and school leadership. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "A sustained botanical contribution reflects Theophrastus's independent research and school leadership. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29961,7 +29871,7 @@
       },
       {
         "id": "figure-zeno-claim-uncommon",
-        "text": "Record the Common contribution: Student of the Stoa",
+        "text": "Record the Uncommon contribution: Student of the Stoa",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30015,7 +29925,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-uncommon-accepted",
-            "text": "A defensible contribution goes beyond attendance or assent. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A defensible contribution goes beyond attendance or assent. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30099,7 +30009,7 @@
       },
       {
         "id": "figure-zeno-claim-rare",
-        "text": "Record the Uncommon contribution: Stoic Discussion Leader",
+        "text": "Record the Rare contribution: Stoic Discussion Leader",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30157,7 +30067,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-rare-accepted",
-            "text": "Repeated teaching must answer objections and preserve its reasons. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated teaching must answer objections and preserve its reasons. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30248,7 +30158,7 @@
       },
       {
         "id": "figure-zeno-claim-epic",
-        "text": "Record the Rare contribution: Scholar of Stoic Ethics",
+        "text": "Record the Epic contribution: Scholar of Stoic Ethics",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30313,7 +30223,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-epic-accepted",
-            "text": "An independent body of inquiry is a major contribution, while founding a school remains a separate outcome. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "An independent body of inquiry is a major contribution, while founding a school remains a separate outcome. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30867,7 +30777,7 @@
       },
       {
         "id": "figure-ptolemy-claim-uncommon",
-        "text": "Record the Common contribution: Egyptian Administration Clerk",
+        "text": "Record the Uncommon contribution: Egyptian Administration Clerk",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30930,7 +30840,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-uncommon-accepted",
-            "text": "A completed account is useful work; holding an administrative title is insufficient. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A completed account is useful work; holding an administrative title is insufficient. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31010,7 +30920,7 @@
       },
       {
         "id": "figure-ptolemy-claim-rare",
-        "text": "Record the Uncommon contribution: Ptolemaic Supply Commissioner",
+        "text": "Record the Rare contribution: Ptolemaic Supply Commissioner",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31064,7 +30974,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-rare-accepted",
-            "text": "Two seasons connect administration to actual funded delivery. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Two seasons connect administration to actual funded delivery. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31155,7 +31065,7 @@
       },
       {
         "id": "figure-ptolemy-claim-epic",
-        "text": "Record the Rare contribution: Steward of Egyptian Government",
+        "text": "Record the Epic contribution: Steward of Egyptian Government",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31220,7 +31130,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-epic-accepted",
-            "text": "A major contribution combines operating accounts with workable institutions and support. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "A major contribution combines operating accounts with workable institutions and support. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31735,7 +31645,7 @@
       },
       {
         "id": "figure-cleomenes-claim-uncommon",
-        "text": "Record the Common contribution: Revenue Records Assistant",
+        "text": "Record the Uncommon contribution: Revenue Records Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31789,7 +31699,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-uncommon-accepted",
-            "text": "A genuine balanced account starts the contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A genuine balanced account starts the contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31860,7 +31770,7 @@
       },
       {
         "id": "figure-cleomenes-claim-rare",
-        "text": "Record the Uncommon contribution: Grain Supply Auditor",
+        "text": "Record the Rare contribution: Grain Supply Auditor",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31905,7 +31815,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-rare-accepted",
-            "text": "Repeated delivery and accounting show impact beyond a wealthy balance sheet. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated delivery and accounting show impact beyond a wealthy balance sheet. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31985,7 +31895,7 @@
       },
       {
         "id": "figure-cleomenes-claim-epic",
-        "text": "Record the Rare contribution: Steward of Egyptian Grain Accounts",
+        "text": "Record the Epic contribution: Steward of Egyptian Grain Accounts",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -32039,7 +31949,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-epic-accepted",
-            "text": "The senior contribution requires actual supply and public accounting; coercion is not silently praised as relief. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "The senior contribution requires actual supply and public accounting; coercion is not silently praised as relief. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -32200,808 +32110,6 @@
               {
                 "type": "accomplishment",
                 "achievement": "fig-cleomenes-capstone"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-demetrius-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Demetrius the Besieger's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-demetrius-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-zeno-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Zeno of Citium's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-zeno-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-ptolemy-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Ptolemy I Soter's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-ptolemy-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-alexander-common-work",
-        "text": "Sort and tally a small issue of campaign stores (1 dr fee, 4 dr paid; consumes 10 grain, 1 papyrus; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "op": "gte",
-                  "value": 12
-                },
-                {
-                  "type": "capability",
-                  "node": "T1"
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-alexander-common-work-done",
-            "text": "Sort and tally a small issue of campaign stores. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-alexander-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-alexander-claim-common",
-        "text": "Record the Common contribution: Campaign Stores Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-alexander-common-work",
-              "count": 1
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "op": "gte",
-                  "value": 12
-                },
-                {
-                  "type": "capability",
-                  "node": "T1"
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-alexander-claim-common-accepted",
-            "text": "A checked tally of a small stores issue establishes useful entry-level campaign work. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-aristotle-common-work",
-        "text": "Organise inquiry notes and check their labels (1 dr fee, 3 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "capability",
-              "node": "P1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-aristotle-common-work-done",
-            "text": "Organise inquiry notes and check their labels. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-aristotle-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-aristotle-claim-common",
-        "text": "Record the Common contribution: Inquiry Note Keeper",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-aristotle-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "P1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-aristotle-claim-common-accepted",
-            "text": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-euclid-common-work",
-        "text": "Label and check an elementary geometrical diagram (1 dr fee, 4 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "capability",
-              "node": "P3"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-euclid-common-work-done",
-            "text": "Label and check an elementary geometrical diagram. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-euclid-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-euclid-claim-common",
-        "text": "Record the Common contribution: Diagram Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "vocation",
-              "action": "fig-euclid-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "P3"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-euclid-claim-common-accepted",
-            "text": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-lysippos-common-work",
-        "text": "Prepare clay and measure a small workshop study (2 dr fee, 5 dr paid; consumes 1 clay, 1 timber; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "capability",
-              "node": "A1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-lysippos-common-work-done",
-            "text": "Prepare clay and measure a small workshop study. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-lysippos-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-lysippos-claim-common",
-        "text": "Record the Common contribution: Bronze Workshop Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-lysippos-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "A1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-lysippos-claim-common-accepted",
-            "text": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-menander-common-work",
-        "text": "Organise scene copies and record rehearsal cues (1 dr fee, 4 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "literacy",
-                  "op": "gte",
-                  "value": 16
-                },
-                {
-                  "type": "skill",
-                  "skill": "oratory",
-                  "op": "gte",
-                  "value": 12
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-menander-common-work-done",
-            "text": "Organise scene copies and record rehearsal cues. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-menander-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-menander-claim-common",
-        "text": "Record the Common contribution: Rehearsal Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-menander-common-work",
-              "count": 1
-            },
-            {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "literacy",
-                  "op": "gte",
-                  "value": 16
-                },
-                {
-                  "type": "skill",
-                  "skill": "oratory",
-                  "op": "gte",
-                  "value": 12
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-menander-claim-common-accepted",
-            "text": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
               }
             ]
           }
@@ -85400,7 +84508,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-alexander-credit",
@@ -85473,7 +84585,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-aristotle-first-contribution",
@@ -85567,7 +84683,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-aristotle-credit",
@@ -85640,7 +84759,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-euclid-first-contribution",
@@ -85725,7 +84848,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-euclid-credit",
@@ -85798,7 +84924,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-lysippos-first-contribution",
@@ -85892,7 +85022,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "sculpture"
+      ]
     },
     {
       "id": "fig-story-lysippos-credit",
@@ -85965,7 +85099,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ]
     },
     {
       "id": "fig-story-pytheas-first-contribution",
@@ -86132,7 +85269,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-menander-first-contribution",
@@ -86226,7 +85366,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic"
+      ]
     },
     {
       "id": "fig-story-menander-credit",
@@ -86299,7 +85442,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic"
+      ]
     },
     {
       "id": "fig-story-demetrius-first-contribution",
@@ -86393,7 +85539,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-demetrius-credit",
@@ -86466,7 +85616,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-theophrastus-first-contribution",
@@ -86560,7 +85714,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "farming",
+        "research"
+      ]
     },
     {
       "id": "fig-story-theophrastus-credit",
@@ -86633,7 +85791,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-zeno-first-contribution",
@@ -86727,7 +85888,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "civic"
+      ]
     },
     {
       "id": "fig-story-zeno-credit",
@@ -86800,7 +85965,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-ptolemy-first-contribution",
@@ -86894,7 +86062,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-ptolemy-credit",
@@ -86967,7 +86139,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-cleomenes-first-contribution",
@@ -87061,7 +86236,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-cleomenes-credit",
@@ -87134,7 +86312,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "trade"
+      ]
     }
   ],
   "endings": [
@@ -88437,7 +87619,6 @@
         "achievementIds": [
           "fig-alexander-encounter",
           "fig-alexander-tradition",
-          "fig-alexander-common",
           "fig-alexander-uncommon",
           "fig-alexander-rare",
           "fig-alexander-epic",
@@ -88445,12 +87626,6 @@
           "fig-alexander-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-alexander-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88490,19 +87665,12 @@
         "achievementIds": [
           "fig-aristotle-encounter",
           "fig-aristotle-tradition",
-          "fig-aristotle-common",
           "fig-aristotle-uncommon",
           "fig-aristotle-rare",
           "fig-aristotle-epic",
           "fig-aristotle-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-aristotle-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88541,19 +87709,12 @@
         "jobIds": [],
         "achievementIds": [
           "fig-euclid-encounter",
-          "fig-euclid-common",
           "fig-euclid-uncommon",
           "fig-euclid-rare",
           "fig-euclid-epic",
           "fig-euclid-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-euclid-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88593,19 +87754,12 @@
         "achievementIds": [
           "fig-lysippos-encounter",
           "fig-lysippos-tradition",
-          "fig-lysippos-common",
           "fig-lysippos-uncommon",
           "fig-lysippos-rare",
           "fig-lysippos-epic",
           "fig-lysippos-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-lysippos-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88652,19 +87806,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-pytheas-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-pytheas-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-pytheas-epic"
             ]
@@ -88690,19 +87844,12 @@
         "achievementIds": [
           "fig-menander-encounter",
           "fig-menander-tradition",
-          "fig-menander-common",
           "fig-menander-uncommon",
           "fig-menander-rare",
           "fig-menander-epic",
           "fig-menander-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-menander-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88747,24 +87894,23 @@
           "fig-demetrius-epic",
           "fig-demetrius-capstone",
           "fig-demetrius-promotion-attempt",
-          "fig-demetrius-promotion",
-          "fig-demetrius-legendary-contribution"
+          "fig-demetrius-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-demetrius-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-demetrius-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-demetrius-epic"
             ]
@@ -88780,12 +87926,6 @@
             "achievementIds": [
               "fig-demetrius-promotion",
               "fig-demetrius-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-demetrius-legendary-contribution"
             ]
           }
         ]
@@ -88810,19 +87950,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-theophrastus-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-theophrastus-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-theophrastus-epic"
             ]
@@ -88853,24 +87993,23 @@
           "fig-zeno-epic",
           "fig-zeno-capstone",
           "fig-zeno-promotion-attempt",
-          "fig-zeno-promotion",
-          "fig-zeno-legendary-contribution"
+          "fig-zeno-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-zeno-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-zeno-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-zeno-epic"
             ]
@@ -88886,12 +88025,6 @@
             "achievementIds": [
               "fig-zeno-promotion",
               "fig-zeno-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-zeno-legendary-contribution"
             ]
           }
         ]
@@ -88914,24 +88047,23 @@
           "fig-ptolemy-epic",
           "fig-ptolemy-capstone",
           "fig-ptolemy-promotion-attempt",
-          "fig-ptolemy-promotion",
-          "fig-ptolemy-legendary-contribution"
+          "fig-ptolemy-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-ptolemy-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-ptolemy-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-ptolemy-epic"
             ]
@@ -88947,12 +88079,6 @@
             "achievementIds": [
               "fig-ptolemy-promotion",
               "fig-ptolemy-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-ptolemy-legendary-contribution"
             ]
           }
         ]
@@ -88977,19 +88103,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-cleomenes-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-cleomenes-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-cleomenes-epic"
             ]
@@ -89704,7 +88830,7 @@
         "id": "fig-menander-uncommon",
         "routeId": "figure-menander",
         "title": "Copyist of New Comedy",
-        "description": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution. The player-facing title depends on whether access was through direct contact or a later tradition.",
+        "description": "A usable dramatic scene and rehearsal notes are the first contribution. The player-facing title depends on whether access was through direct contact or a later tradition.",
         "kind": "ordinary",
         "nameTemplate": "{name}: Copyist of New Comedy",
         "people": [],
@@ -90218,110 +89344,6 @@
         "evidence": "historically-inspired",
         "sourceIds": [
           "figure-source-cleomenes"
-        ]
-      },
-      {
-        "id": "fig-demetrius-legendary-contribution",
-        "routeId": "figure-demetrius",
-        "title": "Distinguished Custodian of Demetrian Siege Methods",
-        "description": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Demetrian Siege Methods",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-demetrius"
-        ]
-      },
-      {
-        "id": "fig-zeno-legendary-contribution",
-        "routeId": "figure-zeno",
-        "title": "Distinguished Custodian of Early Stoic Inquiry",
-        "description": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Early Stoic Inquiry",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-zeno"
-        ]
-      },
-      {
-        "id": "fig-ptolemy-legendary-contribution",
-        "routeId": "figure-ptolemy",
-        "title": "Distinguished Custodian of Early Ptolemaic Statecraft",
-        "description": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Early Ptolemaic Statecraft",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-ptolemy"
-        ]
-      },
-      {
-        "id": "fig-alexander-common",
-        "routeId": "figure-alexander",
-        "title": "Aide in Macedonian Supply Studies",
-        "description": "A checked tally of a small stores issue establishes useful entry-level campaign work. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Macedonian Supply Studies",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-alexander"
-        ]
-      },
-      {
-        "id": "fig-aristotle-common",
-        "routeId": "figure-aristotle",
-        "title": "Keeper of Aristotelian Inquiry Notes",
-        "description": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Keeper of Aristotelian Inquiry Notes",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-aristotle"
-        ]
-      },
-      {
-        "id": "fig-euclid-common",
-        "routeId": "figure-euclid",
-        "title": "Aide in Geometrical Diagram Studies",
-        "description": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Geometrical Diagram Studies",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-euclid"
-        ]
-      },
-      {
-        "id": "fig-lysippos-common",
-        "routeId": "figure-lysippos",
-        "title": "Aide in Lysippan Workshop Practice",
-        "description": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Lysippan Workshop Practice",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-lysippos"
-        ]
-      },
-      {
-        "id": "fig-menander-common",
-        "routeId": "figure-menander",
-        "title": "Aide in New Comedy Rehearsal",
-        "description": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in New Comedy Rehearsal",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-menander"
         ]
       }
     ]
@@ -91913,7 +90935,7 @@
         "high": -2500
       },
       "maxAnimals": 3,
-      "minTradeAge": 12,
+      "minTradeAge": 10,
       "fairTradeReputation": 1,
       "depth": {
         "halfUnits": {
@@ -91932,7 +90954,8 @@
         "grainAskBps": 7000,
         "grainSpreadBps": 2000,
         "leanYearMeasuresPerStanding": 250,
-        "leanYearStandingCap": 4
+        "leanYearStandingCap": 4,
+        "monotoneOrder": true
       }
     },
     "service": {
@@ -94900,86 +93923,6 @@
           "papyrus": 4,
           "ink": 2
         }
-      },
-      "fig-alexander-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "workshop",
-        "primary": "warfare",
-        "supports": [
-          "oratory",
-          "reckoning"
-        ],
-        "practice": false,
-        "inputs": {
-          "grain": 10,
-          "papyrus": 1
-        }
-      },
-      "fig-aristotle-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 3,
-        "payer": "school",
-        "primary": "philosophy",
-        "supports": [
-          "literacy",
-          "reckoning"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
-        }
-      },
-      "fig-euclid-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "council",
-        "primary": "reckoning",
-        "supports": [
-          "literacy",
-          "philosophy"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
-        }
-      },
-      "fig-lysippos-common-work": {
-        "kind": "work",
-        "fee": 2,
-        "pay": 5,
-        "payer": "workshop",
-        "primary": "sculpture",
-        "supports": [
-          "craft",
-          "carving"
-        ],
-        "practice": false,
-        "inputs": {
-          "clay": 1,
-          "timber": 1
-        }
-      },
-      "fig-menander-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "school",
-        "primary": "oratory",
-        "supports": [
-          "literacy",
-          "music"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
-        }
       }
     },
     "accounts": {
@@ -96434,7 +95377,8 @@
         "proof": "Complete a 2-work-year assessment delivering 2 funded orders to 2 distinct buyer accounts; reconcile cash, stock, fees and commitments in both years.",
         "reward": "Qualify for Merchant or Trading-house manager career offers. Unlock an integrated 2-year stock/order/delivery plan within the existing action and visit limits; this grants no free goods, price immunity or personal ownership of employer funds."
       }
-    ]
+    ],
+    "proofFromWork": true
   },
   "lifeStages": {
     "stages": [
@@ -97100,14 +96044,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Campaign Stores Aide",
-          "traditionTitle": "Aide in Macedonian Supply Studies",
-          "description": "A checked tally of a small stores issue establishes useful entry-level campaign work.",
-          "achievementId": "fig-alexander-common",
-          "activityId": "figure-alexander-claim-common",
-          "workActionId": "fig-alexander-common-work",
+          "rank": "Uncommon",
+          "title": "Campaign Provisioner",
+          "traditionTitle": "Reader of Macedonian Supply Records",
+          "achievementId": "fig-alexander-uncommon",
+          "activityId": "figure-alexander-claim-uncommon",
+          "workActionId": "fig-alexander-work-uncommon",
           "workYears": 1,
+          "description": "A delivered, itemised supply assignment is a contribution; merely joining the army is not.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -97139,7 +96083,7 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-alexander-common-work",
+                "action": "fig-alexander-work-uncommon",
                 "count": 1
               },
               {
@@ -97149,11 +96093,11 @@
                     "type": "skill",
                     "skill": "warfare",
                     "op": "gte",
-                    "value": 12
+                    "value": 24
                   },
                   {
                     "type": "capability",
-                    "node": "T1"
+                    "node": "T3"
                   }
                 ]
               },
@@ -97161,85 +96105,8 @@
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-alexander-common"
+                  "achievement": "fig-alexander-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Campaign Provisioner",
-          "traditionTitle": "Reader of Macedonian Supply Records",
-          "achievementId": "fig-alexander-uncommon",
-          "activityId": "figure-alexander-claim-uncommon",
-          "workActionId": "fig-alexander-work-uncommon",
-          "workYears": 1,
-          "description": "A delivered, itemised supply assignment is a contribution; merely joining the army is not.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-alexander-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "skill",
-                        "skill": "warfare",
-                        "op": "gte",
-                        "value": 24
-                      },
-                      {
-                        "type": "capability",
-                        "node": "T3"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -97440,9 +96307,7 @@
           ]
         },
         "attemptAchievementId": "fig-alexander-campaign-attempt"
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "aristotle",
@@ -97475,14 +96340,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Inquiry Note Keeper",
-          "traditionTitle": "Keeper of Aristotelian Inquiry Notes",
-          "description": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted.",
-          "achievementId": "fig-aristotle-common",
-          "activityId": "figure-aristotle-claim-common",
-          "workActionId": "fig-aristotle-common-work",
+          "rank": "Uncommon",
+          "title": "Lyceum Copyist",
+          "traditionTitle": "Copyist of Aristotelian Arguments",
+          "achievementId": "fig-aristotle-uncommon",
+          "activityId": "figure-aristotle-claim-uncommon",
+          "workActionId": "fig-aristotle-work-uncommon",
           "workYears": 1,
+          "description": "An annotated comparison is useful work, rather than attendance at a lecture.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -97514,85 +96379,19 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-aristotle-common-work",
+                "action": "fig-aristotle-work-uncommon",
                 "count": 1
               },
               {
                 "type": "capability",
-                "node": "P1"
+                "node": "P3"
               },
               {
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-aristotle-common"
+                  "achievement": "fig-aristotle-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Lyceum Copyist",
-          "traditionTitle": "Copyist of Aristotelian Arguments",
-          "achievementId": "fig-aristotle-uncommon",
-          "activityId": "figure-aristotle-claim-uncommon",
-          "workActionId": "fig-aristotle-work-uncommon",
-          "workYears": 1,
-          "description": "An annotated comparison is useful work, rather than attendance at a lecture.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-aristotle-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "P3"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -97765,9 +96564,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "euclid",
@@ -97794,45 +96591,6 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Diagram Aide",
-          "traditionTitle": "Aide in Geometrical Diagram Studies",
-          "description": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study.",
-          "achievementId": "fig-euclid-common",
-          "activityId": "figure-euclid-claim-common",
-          "workActionId": "fig-euclid-common-work",
-          "workYears": 1,
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-encounter"
-              },
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-encounter"
-              },
-              {
-                "type": "vocation",
-                "action": "fig-euclid-common-work",
-                "count": 1
-              },
-              {
-                "type": "capability",
-                "node": "P3"
-              },
-              {
-                "type": "not",
-                "condition": {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-common"
-                }
-              }
-            ]
-          }
-        },
-        {
           "rank": "Uncommon",
           "title": "Geometrical Copyist",
           "traditionTitle": "Geometrical Copyist",
@@ -97846,36 +96604,27 @@
             "conditions": [
               {
                 "type": "accomplishment",
-                "achievement": "fig-euclid-common"
+                "achievement": "fig-euclid-encounter"
               },
               {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-encounter"
-                  },
-                  {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-encounter"
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-euclid-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "PS6"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-euclid-uncommon"
-                    }
-                  }
-                ]
+                "type": "accomplishment",
+                "achievement": "fig-euclid-encounter"
+              },
+              {
+                "type": "vocation",
+                "action": "fig-euclid-work-uncommon",
+                "count": 1
+              },
+              {
+                "type": "capability",
+                "node": "PS6"
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "accomplishment",
+                  "achievement": "fig-euclid-uncommon"
+                }
               }
             ]
           }
@@ -98021,9 +96770,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "lysippos",
@@ -98060,14 +96807,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Bronze Workshop Aide",
-          "traditionTitle": "Aide in Lysippan Workshop Practice",
-          "description": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken.",
-          "achievementId": "fig-lysippos-common",
-          "activityId": "figure-lysippos-claim-common",
-          "workActionId": "fig-lysippos-common-work",
+          "rank": "Uncommon",
+          "title": "Bronze Workshop Assistant",
+          "traditionTitle": "Assistant in Lysippan Workshop Practice",
+          "achievementId": "fig-lysippos-uncommon",
+          "activityId": "figure-lysippos-claim-uncommon",
+          "workActionId": "fig-lysippos-work-uncommon",
           "workYears": 1,
+          "description": "A model records pose and proportions for the bronze workshop.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -98099,85 +96846,19 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-lysippos-common-work",
+                "action": "fig-lysippos-work-uncommon",
                 "count": 1
               },
               {
                 "type": "capability",
-                "node": "A1"
+                "node": "AS5"
               },
               {
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-lysippos-common"
+                  "achievement": "fig-lysippos-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Bronze Workshop Assistant",
-          "traditionTitle": "Assistant in Lysippan Workshop Practice",
-          "achievementId": "fig-lysippos-uncommon",
-          "activityId": "figure-lysippos-claim-uncommon",
-          "workActionId": "fig-lysippos-work-uncommon",
-          "workYears": 1,
-          "description": "A model records pose and proportions for the bronze workshop.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-lysippos-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "AS5"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -98350,9 +97031,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "pytheas",
@@ -98385,7 +97064,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Expedition Provisioner",
           "traditionTitle": "Reader of Massaliot Voyage Accounts",
           "achievementId": "fig-pytheas-uncommon",
@@ -98455,7 +97134,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Navigation Observer",
           "traditionTitle": "Checker of Northern Navigation Accounts",
           "achievementId": "fig-pytheas-rare",
@@ -98516,7 +97195,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Keeper of the Northern Voyage Log",
           "traditionTitle": "Custodian of Northern Voyage Evidence",
           "achievementId": "fig-pytheas-epic",
@@ -98639,8 +97318,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     },
     {
       "id": "menander",
@@ -98677,14 +97355,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Rehearsal Aide",
-          "traditionTitle": "Aide in New Comedy Rehearsal",
-          "description": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene.",
-          "achievementId": "fig-menander-common",
-          "activityId": "figure-menander-claim-common",
-          "workActionId": "fig-menander-common-work",
+          "rank": "Uncommon",
+          "title": "Stage Copyist",
+          "traditionTitle": "Copyist of New Comedy",
+          "achievementId": "fig-menander-uncommon",
+          "activityId": "figure-menander-claim-uncommon",
+          "workActionId": "fig-menander-work-uncommon",
           "workYears": 1,
+          "description": "A usable dramatic scene and rehearsal notes are the first contribution.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -98716,7 +97394,7 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-menander-common-work",
+                "action": "fig-menander-work-uncommon",
                 "count": 1
               },
               {
@@ -98726,13 +97404,13 @@
                     "type": "skill",
                     "skill": "literacy",
                     "op": "gte",
-                    "value": 16
+                    "value": 32
                   },
                   {
                     "type": "skill",
                     "skill": "oratory",
                     "op": "gte",
-                    "value": 12
+                    "value": 24
                   }
                 ]
               },
@@ -98740,87 +97418,8 @@
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-menander-common"
+                  "achievement": "fig-menander-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Stage Copyist",
-          "traditionTitle": "Copyist of New Comedy",
-          "achievementId": "fig-menander-uncommon",
-          "activityId": "figure-menander-claim-uncommon",
-          "workActionId": "fig-menander-work-uncommon",
-          "workYears": 1,
-          "description": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-menander-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "all",
-                    "conditions": [
-                      {
-                        "type": "skill",
-                        "skill": "literacy",
-                        "op": "gte",
-                        "value": 32
-                      },
-                      {
-                        "type": "skill",
-                        "skill": "oratory",
-                        "op": "gte",
-                        "value": 24
-                      }
-                    ]
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -99004,9 +97603,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "demetrius",
@@ -99043,7 +97640,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Siege Workshop Assistant",
           "traditionTitle": "Reader of Demetrian Siege Accounts",
           "achievementId": "fig-demetrius-uncommon",
@@ -99111,7 +97708,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Siege Engineer",
           "traditionTitle": "Analyst of Demetrian Siege Engineering",
           "achievementId": "fig-demetrius-rare",
@@ -99170,7 +97767,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Director of Siege Works",
           "traditionTitle": "Custodian of Demetrian Siege Methods",
           "achievementId": "fig-demetrius-epic",
@@ -99297,35 +97894,6 @@
         "milestone": "rhodes-captured",
         "title": "Demetrius, captor of Rhodes",
         "alternateHistory": true
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Director of Siege Works",
-        "traditionTitle": "Distinguished Custodian of Demetrian Siege Methods",
-        "description": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-demetrius-legendary-contribution",
-        "activityId": "figure-demetrius-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -99355,7 +97923,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Plant Records Assistant",
           "traditionTitle": "Copyist of Peripatetic Plant Records",
           "achievementId": "fig-theophrastus-uncommon",
@@ -99412,7 +97980,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Comparative Plant Investigator",
           "traditionTitle": "Investigator of Theophrastan Botany",
           "achievementId": "fig-theophrastus-rare",
@@ -99471,7 +98039,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Peripatetic Botanical Scholar",
           "traditionTitle": "Scholar of Theophrastan Plant Inquiry",
           "achievementId": "fig-theophrastus-epic",
@@ -99596,8 +98164,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     },
     {
       "id": "zeno",
@@ -99634,7 +98201,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Student of the Stoa",
           "traditionTitle": "Reader of Early Stoic Arguments",
           "achievementId": "fig-zeno-uncommon",
@@ -99691,7 +98258,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Stoic Discussion Leader",
           "traditionTitle": "Teacher of Stoic Discussion",
           "achievementId": "fig-zeno-rare",
@@ -99752,7 +98319,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Scholar of Stoic Ethics",
           "traditionTitle": "Custodian of Early Stoic Inquiry",
           "achievementId": "fig-zeno-epic",
@@ -99898,35 +98465,6 @@
         "title": "Zeno of Citium, founder of a Stoic school",
         "alternateHistory": false,
         "provisional": true
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Scholar of Stoic Ethics",
-        "traditionTitle": "Distinguished Custodian of Early Stoic Inquiry",
-        "description": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-zeno-legendary-contribution",
-        "activityId": "figure-zeno-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -99964,7 +98502,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Egyptian Administration Clerk",
           "traditionTitle": "Reader of Early Ptolemaic Accounts",
           "achievementId": "fig-ptolemy-uncommon",
@@ -100030,7 +98568,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Ptolemaic Supply Commissioner",
           "traditionTitle": "Investigator of Ptolemaic Administration",
           "achievementId": "fig-ptolemy-rare",
@@ -100087,7 +98625,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Steward of Egyptian Government",
           "traditionTitle": "Custodian of Early Ptolemaic Statecraft",
           "achievementId": "fig-ptolemy-epic",
@@ -100232,35 +98770,6 @@
         "milestone": "ptolemaic-dynasty-founded",
         "title": "Ptolemy I Soter, founder of the Ptolemaic dynasty",
         "alternateHistory": false
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Steward of Egyptian Government",
-        "traditionTitle": "Distinguished Custodian of Early Ptolemaic Statecraft",
-        "description": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-ptolemy-legendary-contribution",
-        "activityId": "figure-ptolemy-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -100298,7 +98807,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Revenue Records Assistant",
           "traditionTitle": "Reader of Cleomenian Revenue Records",
           "achievementId": "fig-cleomenes-uncommon",
@@ -100355,7 +98864,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Grain Supply Auditor",
           "traditionTitle": "Auditor of Macedonian Grain Administration",
           "achievementId": "fig-cleomenes-rare",
@@ -100403,7 +98912,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Steward of Egyptian Grain Accounts",
           "traditionTitle": "Custodian of Egyptian Revenue Evidence",
           "achievementId": "fig-cleomenes-epic",
@@ -100529,8 +99038,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     }
   ]
 }

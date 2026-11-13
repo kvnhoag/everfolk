@@ -1,1 +1,9 @@
 * text=auto eol=lf
+artwork/cards/figure-inner-art-v11/everfolk-inner-art-v11.zip filter=lfs diff=lfs merge=lfs -text
+artwork/cards/figure-inner-art-v12/everfolk-inner-art-v12.zip filter=lfs diff=lfs merge=lfs -text
+artwork/cards/framed-collection-v13/everfolk-framed-collection-v13.zip filter=lfs diff=lfs merge=lfs -text
+artwork/cards/framed-collection-v14/everfolk-framed-collection-v14.zip filter=lfs diff=lfs merge=lfs -text
+artwork/cards/framed-collection-v14/source/icons/*.svg -text
+public/assets/cards/collection-v14/symbols/*.svg -text
+public/fonts/Inter-OFL.txt -text whitespace=-blank-at-eol
+public/fonts/inter-variable-OFL.txt -text whitespace=-blank-at-eol

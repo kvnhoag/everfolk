@@ -1,0 +1,60 @@
+{
+  "slug": "eumenes-parent",
+  "figureId": "eumenes",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Eumenes of Cardia",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 81,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-parent.svg",
+  "fittedArt": "assets/fitted/eumenes-parent.png",
+  "overlaySvg": "source/overlays/eumenes-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+  "master": "masters/eumenes-parent.vectorcraft",
+  "export": "exports/eumenes-parent.png",
+  "thumbnail": "assets/eumenes-parent-thumb.png",
+  "exportSha256": "a4ad426452e9787b3d5813163acb717a1dd9a95cacf07707192bfb58d8559b69",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

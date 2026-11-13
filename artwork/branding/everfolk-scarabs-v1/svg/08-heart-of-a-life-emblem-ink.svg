@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>01 Standalone emblem / ink</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+    <g id="_08_Heart_of_a_Life___standalone_scarab" data-name="08 Heart of a Life / standalone scarab">
+      <polygon id="Raised_foreleg___left" data-name="Raised foreleg / left" points="203.019,159.849 171.623,177.509 138.264,146.113 124.528,100.981 100.981,89.208 89.208,108.83 104.906,163.774 159.849,210.868 203.019,189.283" fill="#284744"/>
+      <polygon id="Raised_foreleg___right" data-name="Raised foreleg / right" points="308.981,159.849 340.377,177.509 373.736,146.113 387.472,100.981 411.019,89.208 422.792,108.83 407.094,163.774 352.151,210.868 308.981,189.283" fill="#284744"/>
+      <polygon id="Middle_leg___left" data-name="Middle leg / left" points="140.226,263.849 99.019,248.151 57.811,269.736 48,295.245 69.585,305.057 89.208,281.509 134.34,291.321" fill="#284744"/>
+      <polygon id="Middle_leg___right" data-name="Middle leg / right" points="371.774,263.849 412.981,248.151 454.189,269.736 464,295.245 442.415,305.057 422.792,281.509 377.66,291.321" fill="#284744"/>
+      <polygon id="Grounded_hindleg___left" data-name="Grounded hindleg / left" points="159.849,336.453 114.717,365.887 99.019,411.019 73.509,424.755 87.245,446.34 120.604,430.642 136.302,385.509 183.396,363.925" fill="#284744"/>
+      <polygon id="Grounded_hindleg___right" data-name="Grounded hindleg / right" points="352.151,336.453 397.283,365.887 412.981,411.019 438.491,424.755 424.755,446.34 391.396,430.642 375.698,385.509 328.604,363.925" fill="#284744"/>
+      <path id="Broad_clypeus_and_head" data-name="Broad clypeus and head" d="M214.792 116.679 C216.101 98.365 223.95 87.245 238.34 83.321 L244.226 65.66 L267.774 65.66 L273.66 83.321 C288.05 87.245 295.899 98.365 297.208 116.679 L289.358 132.377 L222.642 132.377 Z" fill="#284744"/>
+      <path id="Carved_thorax" data-name="Carved thorax" d="M204.981 150.038 C238.994 136.956 273.006 136.956 307.019 150.038 L324.679 175.547 L301.132 193.208 C271.044 184.05 240.956 184.05 210.868 193.208 L187.321 175.547 Z" fill="#284744"/>
+      <path id="Heart-shaped_wing_case___left" data-name="Heart-shaped wing case / left" d="M240.302 216.755 C208.906 181.434 155.925 183.396 128.453 222.642 C93.132 277.585 144.151 352.151 248.151 426.717 L248.151 248.151 C248.151 232.453 246.189 224.604 240.302 216.755 Z" fill="#284744"/>
+      <path id="Heart-shaped_wing_case___right" data-name="Heart-shaped wing case / right" d="M271.698 216.755 C303.094 181.434 356.075 183.396 383.547 222.642 C418.868 277.585 367.849 352.151 263.849 426.717 L263.849 248.151 C263.849 232.453 265.811 224.604 271.698 216.755 Z" fill="#284744"/>
+    </g>
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

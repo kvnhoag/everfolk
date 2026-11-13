@@ -1,0 +1,60 @@
+{
+  "slug": "cleomenes-epic-male",
+  "figureId": "cleomenes",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Steward of Egyptian Grain Accounts",
+  "subtitle": "Cleomenes of Naucratis",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 76,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-epic-male.svg",
+  "fittedArt": "assets/fitted/cleomenes-epic-male.png",
+  "overlaySvg": "source/overlays/cleomenes-epic-male.svg",
+  "titleSize": 42,
+  "sourceArtSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+  "master": "masters/cleomenes-epic-male.vectorcraft",
+  "export": "exports/cleomenes-epic-male.png",
+  "thumbnail": "assets/cleomenes-epic-male-thumb.png",
+  "exportSha256": "76d2b68384a51fb0ddad5f38c5fedac804bcc8259fbb1c9a2c4a4c29eb9036ec",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

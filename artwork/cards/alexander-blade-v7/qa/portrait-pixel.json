@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\source\\alexander-blade-revised.png",
+  "sourceSha256": "478261e87093a7ddc8d25e4d3db09dea95d8b85328f904e2d0174eaed052697c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 33445,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 2,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\assets\\alexander-card-pixel.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-blade-v7\\assets\\alexander-card-pixel.png",
+  "logicalSha256": "d763e6e7cf379b2c11c63935656f6afacf0f4b69b38646ddc0a2f5646a28664a",
+  "outputSha256": "b6c683dceef69b12abcd2fed3243585c3704d18e9ed7dfaff9b0db6185c983d3",
+  "logicalPixelSha256": "aba4ea9105c684ee9497e049015b6e13505c576915ea9014e1222f5de313c775",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

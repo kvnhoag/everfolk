@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-epic-female",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Scholar of Stoic Ethics",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 63,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-epic-female.svg",
+  "fittedArt": "assets/fitted/zeno-epic-female.png",
+  "overlaySvg": "source/overlays/zeno-epic-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "735e92e7d4f915b7ba2d998c018a3128f949575d97b329d1df3539b9a0712b1f",
+  "master": "masters/zeno-epic-female.vectorcraft",
+  "export": "exports/zeno-epic-female.png",
+  "thumbnail": "assets/zeno-epic-female-thumb.png",
+  "exportSha256": "b5736e956b52bb14b36a4abaaa2c89e8e136f436f4c31b4db6a32030a3b84add",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

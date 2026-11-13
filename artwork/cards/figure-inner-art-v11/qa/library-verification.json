@@ -1,0 +1,12 @@
+{
+  "expected": 48,
+  "complete": 48,
+  "uniqueSourceImages": 48,
+  "uniqueFinalImages": 48,
+  "failures": [],
+  "allComplete": true,
+  "sourceHashesVerified": true,
+  "finalHashesVerified": true,
+  "filterMetadataHashesVerified": true,
+  "filterChecks": "Individually verified by the bundled PixelOE scripts; source, coarse, final, face config and coarse metadata hashes independently rechecked by catalog builder."
+}

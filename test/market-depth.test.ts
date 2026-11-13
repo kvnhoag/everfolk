@@ -4,14 +4,17 @@ import assert from "node:assert/strict";
 import { createEngine } from "../src/engine.ts";
 import { demoContext } from "../src/demo/state.ts";
 import { buyForHousehold, executeTrade, marketView, movePrices, rulePrices } from "../src/demo/market.ts";
-import { depthQuote } from "../src/demo/market-depth.ts";
+import { depthQuote, merchantSaleValue, orderValue } from "../src/demo/market-depth.ts";
+import { validateWorld } from "../src/validate.ts";
 import { demoWorld, liveUntil } from "./fixtures/demo/world.ts";
 import type { DemoContext, LifeStateWithDemo, TradeCommand, TradeItem } from "../src/demo/contracts.ts";
 import type { Effect, LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import retainedFive from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 
 const lives4 = shipped as unknown as WorldPack;
+const lives5 = retainedFive as unknown as WorldPack;
 const lives3 = retained as unknown as WorldPack;
 
 const adults = new Map<WorldPack, LifeStateWithDemo>();
@@ -162,4 +165,54 @@ test("lives-4: bringing grain to market in a lean year raises standing with the 
   assert.equal(sell(lives4, 1000, lean).life.demo.reputation, 24);
   assert.equal(sell(lives4, 100, lean).life.demo.reputation, 21);
   assert.equal(sell(lives3, 1000, lean).life.demo.reputation, 21);
+});
+
+test("monotone depth pricing never decreases proceeds or cost with quantity while retaining legacy lives-5 quotes", () => {
+  // Retained lives-5 keeps its original non-monotone 200-slice deterministic behavior for existing save replay
+  const d5 = draft(lives5, life => { life.demo.town.pressure = {}; });
+  assert.deepEqual(
+    [orderValue(lives5.demo!, d5.life.demo, "flax", "sell", 417).total, orderValue(lives5.demo!, d5.life.demo, "flax", "sell", 418).total],
+    [492, 491],
+  );
+  assert.deepEqual(
+    [orderValue(lives5.demo!, d5.life.demo, "grain", "sell", 2768).total, orderValue(lives5.demo!, d5.life.demo, "grain", "sell", 2769).total],
+    [1662, 1661],
+  );
+
+  // Current monotone rule strictly never decreases proceeds or purchase cost across boundaries, pressures & items
+  assert.equal(lives4.demo!.market.depth!.monotoneOrder, true);
+  const maxQ = lives4.demo!.market.maxOrderQuantity;
+  for (const item of ["grain", "flax", "linen", "silver"] as const) {
+    for (const pressure of [-1500, 0, 1500]) {
+      for (const side of ["buy", "sell"] as const) {
+        const state = draft(lives4, life => { life.demo.town.pressure = { [item]: pressure }; }).life.demo;
+        let prev = 0;
+        // Dense sweep around 200-slice boundary & transitions, plus step sweep through maxOrderQuantity
+        const quantities = [
+          ...Array.from({ length: 450 }, (_, i) => i + 1),
+          ...Array.from({ length: 120 }, (_, i) => Math.min(maxQ, 451 + i * 25)),
+          2768, 2769, maxQ,
+        ].filter((q, idx, arr) => q <= maxQ && arr.indexOf(q) === idx).sort((a, b) => a - b);
+        for (const q of quantities) {
+          const total = orderValue(lives4.demo!, state, item, side, q).total;
+          assert.ok(total >= prev, `${item} ${side} @pressure=${pressure}: total(${q})=${total} < prev=${prev}`);
+          prev = total;
+        }
+        // Whole-inventory merchantSaleValue remains monotone through large inventory plateaus
+        if (side === "sell") {
+          let prevWealth = merchantSaleValue(lives4.demo!, state, item, maxQ);
+          for (const largeQ of [maxQ + 1, 20_000, 100_000, 1_000_000_000]) {
+            const w = merchantSaleValue(lives4.demo!, state, item, largeQ);
+            assert.ok(w >= prevWealth, `${item} valuation(${largeQ})=${w} < ${prevWealth}`);
+            prevWealth = w;
+          }
+        }
+      }
+    }
+  }
+
+  // Non-boolean monotoneOrder is rejected by world validation
+  const bad = structuredClone(lives4);
+  (bad.demo!.market.depth as unknown as Record<string, unknown>).monotoneOrder = "yes";
+  assert.throws(() => validateWorld(bad), /monotoneOrder/);
 });

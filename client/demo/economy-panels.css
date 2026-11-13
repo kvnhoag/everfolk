@@ -8,7 +8,7 @@
 
 .demo-economy-title,
 .demo-economy h3 {
-  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  font-family: var(--ef-font-display);
   font-weight: 600;
   margin: 0 0 8px;
   color: #23190f;
@@ -208,7 +208,7 @@
 .demo-deck-header .demo-economy-title {
   margin: 1px 0 0;
   font-size: 22px;
-  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  font-family: var(--ef-font-display);
   color: #fff8e7;
   letter-spacing: -0.01em;
 }
@@ -588,7 +588,7 @@
 .demo-market-top h3 {
   margin: 0;
   font-size: 21px;
-  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  font-family: var(--ef-font-display);
   color: #23190f;
 }
 
@@ -638,7 +638,7 @@
 .demo-price-chart-header h4 {
   margin: 2px 0 0;
   font-size: 16px;
-  font-family: var(--ef-heading, "Libre Caslon Display", Georgia, serif);
+  font-family: var(--ef-font-display);
   color: #23190f;
 }
 

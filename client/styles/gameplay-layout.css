@@ -1,0 +1,22 @@
+/* Main gameplay layout: notifications float at the right edge and the two dashboard columns keep a similar height.
+   Loaded last so it settles earlier rules. */
+
+/* Life events: a toast column fixed at the right edge, outside the flow of the main section. */
+.everfolk-game .event-notification-stack{position:fixed;top:140px;right:16px;z-index:45;width:300px;max-width:calc(100vw - 32px);margin:0;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 160px);overflow-y:auto;pointer-events:none}
+.everfolk-game .event-notification-stack>*{pointer-events:auto;box-shadow:0 10px 26px #1a2a2e33;animation:toast-in .25s ease-out}
+@keyframes toast-in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.everfolk-game .event-notification-stack>*{animation:none}}
+
+/* "Skill learned" notices. */
+.everfolk-game .event-toast.is-skill{border-left:4px solid #3f6b4a}
+.everfolk-game .event-toast-badge.is-skill{background:#3f6b4a;color:#f6efd9}
+
+/* Keep the two dashboard columns close in height: long lists scroll inside their panels. */
+.game-dashboard .life-record-panel .life-event-feed,.game-dashboard .life-record-panel>ol,.game-dashboard .life-record-panel .life-record-list{max-height:240px;overflow-y:auto;overscroll-behavior:contain}
+.life-session-bar{flex-wrap:wrap}
+.life-session-bar .playback-bar.life-clock{flex-wrap:wrap;row-gap:8px;justify-content:flex-end}
+
+/* The yearly action box always reserves three rows of cards, whatever the tab holds. */
+.life-yearly-action-deck .life-action-cards{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,96px);grid-auto-rows:96px}
+.life-yearly-action-deck .life-action-card{height:96px;overflow:hidden}
+.life-yearly-action-deck .life-action-empty{min-height:calc(3 * 96px + 2 * 8px);margin:0}

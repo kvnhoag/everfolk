@@ -3,8 +3,8 @@
   "id": "alexandria",
   "version": "alexandria-lives-9",
   "title": "Alexandria — Historical lives and earned legacies",
-  "description": "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements. Contribution cards stay below the principal figure's earned tier; Epic recognition follows a successful Legendary outcome. Fixed Legendary figure contributions begin with a separate Common project before Uncommon, Rare and Epic work. Household grain and flax reserves, harvests and food requirements use a smaller scale; livestock and crafted goods are earned separately.",
-  "startYear": -350,
+  "description": "Develop real skills, contribute to historical work and earn titles through completed projects. Encounters, traditions and figure-defining achievements have distinct requirements. Lives are born between 400 and 300 BCE, most often in the years that live through Alexander, the founding of Alexandria and the first Ptolemies.",
+  "startYear": -400,
   "maxAge": 100,
   "stats": {
     "health": {
@@ -4403,7 +4403,7 @@
             {
               "type": "year",
               "op": "gte",
-              "value": -350
+              "value": -400
             }
           ]
         },
@@ -6337,7 +6337,7 @@
             {
               "type": "year",
               "op": "gte",
-              "value": -350
+              "value": -400
             }
           ]
         },
@@ -17500,7 +17500,7 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 30
+                "value": 300
               }
             }
           ]
@@ -17590,7 +17590,7 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 5
+                "value": 50
               }
             }
           ]
@@ -17598,7 +17598,7 @@
         "outcomes": [
           {
             "id": "build-well-season",
-            "text": "You pay the well-diggers and send grain to feed them while they cut down through the silt toward clean water. This season's share costs 75 drachmas and 5 measures of grain.",
+            "text": "You pay the well-diggers and send grain to feed them while they cut down through the silt toward clean water. This season's share costs 75 drachmas and 50 measures of grain.",
             "weight": 1,
             "effects": [
               {
@@ -17609,7 +17609,7 @@
                 "type": "demo",
                 "effect": {
                   "kind": "grain",
-                  "delta": -5,
+                  "delta": -50,
                   "cause": "community work"
                 }
               },
@@ -17654,7 +17654,7 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 10
+                "value": 100
               }
             }
           ]
@@ -17662,7 +17662,7 @@
         "outcomes": [
           {
             "id": "build-granary-season",
-            "text": "You pay the brickmakers and send grain for the crew raising the village granary's walls above the flood line. This season's share costs 100 drachmas and 10 measures of grain.",
+            "text": "You pay the brickmakers and send grain for the crew raising the village granary's walls above the flood line. This season's share costs 100 drachmas and 100 measures of grain.",
             "weight": 1,
             "effects": [
               {
@@ -17673,7 +17673,7 @@
                 "type": "demo",
                 "effect": {
                   "kind": "grain",
-                  "delta": -10,
+                  "delta": -100,
                   "cause": "community work"
                 }
               },
@@ -17718,7 +17718,7 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 3
+                "value": 33
               }
             }
           ]
@@ -17726,7 +17726,7 @@
         "outcomes": [
           {
             "id": "build-school-season",
-            "text": "You pay the builders of a schoolroom by the shrine and send grain to feed the teacher who will keep it. This season's share costs 133 drachmas and 3 measures of grain.",
+            "text": "You pay the builders of a schoolroom by the shrine and send grain to feed the teacher who will keep it. This season's share costs 133 drachmas and 33 measures of grain.",
             "weight": 1,
             "effects": [
               {
@@ -17737,7 +17737,7 @@
                 "type": "demo",
                 "effect": {
                   "kind": "grain",
-                  "delta": -3,
+                  "delta": -33,
                   "cause": "community work"
                 }
               },
@@ -17782,7 +17782,7 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 5
+                "value": 50
               }
             }
           ]
@@ -17790,7 +17790,7 @@
         "outcomes": [
           {
             "id": "build-healing-house-season",
-            "text": "You pay the builders of a healing house at the shrine and send grain for the attendants who will tend the sick. This season's share costs 150 drachmas and 5 measures of grain.",
+            "text": "You pay the builders of a healing house at the shrine and send grain for the attendants who will tend the sick. This season's share costs 150 drachmas and 50 measures of grain.",
             "weight": 1,
             "effects": [
               {
@@ -17801,7 +17801,7 @@
                 "type": "demo",
                 "effect": {
                   "kind": "grain",
-                  "delta": -5,
+                  "delta": -50,
                   "cause": "community work"
                 }
               },
@@ -18055,14 +18055,14 @@
       },
       {
         "id": "v-buy-flax",
-        "text": "Buy 1 flax (12 dr)",
+        "text": "Buy 4 flax (12 dr)",
         "category": "career",
         "minAge": 16,
         "usesYearlyActivity": false,
         "outcomes": [
           {
             "id": "v-buy-flax-done",
-            "text": "Buy 1 flax (12 dr)",
+            "text": "Buy 4 flax (12 dr)",
             "weight": 1,
             "effects": [
               {
@@ -19756,7 +19756,7 @@
       },
       {
         "id": "v-buy-flax-seed",
-        "text": "Buy 1 flax seed",
+        "text": "Buy 8 flax seed",
         "category": "career",
         "minAge": 12,
         "usesYearlyActivity": false,
@@ -24101,7 +24101,7 @@
       },
       {
         "id": "v-fig-alexander-work-uncommon",
-        "text": "Account for and deliver a season of campaign stores (2 dr fee, 8 dr paid; consumes 2 grain, 1 papyrus; one work year)",
+        "text": "Account for and deliver a season of campaign stores (2 dr fee, 8 dr paid; consumes 20 grain, 1 papyrus; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -24109,61 +24109,52 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-alexander-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "warfare",
-                      "op": "gte",
-                      "value": 24
-                    },
-                    {
-                      "type": "capability",
-                      "node": "T3"
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-alexander-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 24
+                },
+                {
+                  "type": "capability",
+                  "node": "T3"
+                }
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-alexander-uncommon"
+              }
             }
           ]
         },
@@ -24196,73 +24187,64 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-alexander-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-alexander-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "warfare",
-                      "op": "gte",
-                      "value": 24
-                    },
-                    {
-                      "type": "capability",
-                      "node": "T3"
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-alexander-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-alexander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-alexander-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "skill",
+                  "skill": "warfare",
+                  "op": "gte",
+                  "value": 24
+                },
+                {
+                  "type": "capability",
+                  "node": "T3"
+                }
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-alexander-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-alexander-claim-uncommon-accepted",
-            "text": "A delivered, itemised supply assignment is a contribution; merely joining the army is not. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A delivered, itemised supply assignment is a contribution; merely joining the army is not. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -24275,7 +24257,7 @@
       },
       {
         "id": "v-fig-alexander-work-rare",
-        "text": "Prepare and execute a season of coordinated campaign orders (6 dr fee, 16 dr paid; consumes 4 grain, 2 papyrus, 1 ink; one work year)",
+        "text": "Prepare and execute a season of coordinated campaign orders (6 dr fee, 16 dr paid; consumes 40 grain, 2 papyrus, 1 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -24417,7 +24399,7 @@
       },
       {
         "id": "v-fig-alexander-work-epic",
-        "text": "Command and account for a funded field operation (16 dr fee, 24 dr paid; consumes 6 grain, 2 papyrus, 1 timber; one work year)",
+        "text": "Command and account for a funded field operation (16 dr fee, 24 dr paid; consumes 60 grain, 2 papyrus, 1 timber; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -24559,7 +24541,7 @@
       },
       {
         "id": "v-fig-alexander-capstone-work",
-        "text": "Complete a strategic campaign command and secure its settlement (40 dr fee; consumes 8 grain, 2 papyrus, 2 timber; one work year)",
+        "text": "Complete a strategic campaign command and secure its settlement (40 dr fee; consumes 80 grain, 2 papyrus, 2 timber; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -24886,50 +24868,41 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-aristotle-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "capability",
-                  "node": "P3"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-aristotle-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
+                }
+              ]
+            },
+            {
+              "type": "capability",
+              "node": "P3"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-aristotle-uncommon"
+              }
             }
           ]
         },
@@ -24962,62 +24935,53 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-aristotle-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-aristotle-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "P3"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-aristotle-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-aristotle-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-aristotle-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "P3"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-aristotle-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-aristotle-claim-uncommon-accepted",
-            "text": "An annotated comparison is useful work, rather than attendance at a lecture. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "An annotated comparison is useful work, rather than attendance at a lecture. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -25516,31 +25480,22 @@
           "conditions": [
             {
               "type": "accomplishment",
-              "achievement": "fig-euclid-common"
+              "achievement": "fig-euclid-encounter"
             },
             {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "capability",
-                  "node": "PS6"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-uncommon"
-                  }
-                }
-              ]
+              "type": "accomplishment",
+              "achievement": "fig-euclid-encounter"
+            },
+            {
+              "type": "capability",
+              "node": "PS6"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-euclid-uncommon"
+              }
             }
           ]
         },
@@ -25574,43 +25529,34 @@
           "conditions": [
             {
               "type": "accomplishment",
-              "achievement": "fig-euclid-common"
+              "achievement": "fig-euclid-encounter"
             },
             {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-encounter"
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-euclid-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "PS6"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-uncommon"
-                  }
-                }
-              ]
+              "type": "accomplishment",
+              "achievement": "fig-euclid-encounter"
+            },
+            {
+              "type": "vocation",
+              "action": "fig-euclid-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "PS6"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-euclid-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-euclid-claim-uncommon-accepted",
-            "text": "Careful copying includes the reasons behind the diagram, not merely a finished picture. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Careful copying includes the reasons behind the diagram, not merely a finished picture. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -26131,50 +26077,41 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-lysippos-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "capability",
-                  "node": "AS5"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-lysippos-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
+                }
+              ]
+            },
+            {
+              "type": "capability",
+              "node": "AS5"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-lysippos-uncommon"
+              }
             }
           ]
         },
@@ -26207,62 +26144,53 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-lysippos-common"
-            },
-            {
-              "type": "all",
+              "type": "any",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-lysippos-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "capability",
-                  "node": "AS5"
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-lysippos-uncommon"
-                  }
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
                 }
               ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-lysippos-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-lysippos-work-uncommon",
+              "count": 1
+            },
+            {
+              "type": "capability",
+              "node": "AS5"
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-lysippos-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-lysippos-claim-uncommon-accepted",
-            "text": "A model records pose and proportions for the bronze workshop. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A model records pose and proportions for the bronze workshop. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -26846,7 +26774,7 @@
       },
       {
         "id": "v-fig-pytheas-work-uncommon",
-        "text": "Prepare and reconcile a season of expedition provisions (6 dr fee, 10 dr paid; consumes 2 grain, 1 papyrus, 1 linen; one work year)",
+        "text": "Prepare and reconcile a season of expedition provisions (6 dr fee, 10 dr paid; consumes 20 grain, 1 papyrus, 1 linen; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -26926,7 +26854,7 @@
       },
       {
         "id": "figure-pytheas-claim-uncommon",
-        "text": "Record the Common contribution: Expedition Provisioner",
+        "text": "Record the Uncommon contribution: Expedition Provisioner",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -26993,7 +26921,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-uncommon-accepted",
-            "text": "Paid preparation and a working log are a genuine expedition contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "Paid preparation and a working log are a genuine expedition contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27006,7 +26934,7 @@
       },
       {
         "id": "v-fig-pytheas-work-rare",
-        "text": "Keep and compare a season of navigation and sky observations (10 dr fee, 18 dr paid; consumes 2 grain, 2 papyrus, 1 ink, 1 linen; one work year)",
+        "text": "Keep and compare a season of navigation and sky observations (10 dr fee, 18 dr paid; consumes 20 grain, 2 papyrus, 1 ink, 1 linen; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -27077,7 +27005,7 @@
       },
       {
         "id": "figure-pytheas-claim-rare",
-        "text": "Record the Uncommon contribution: Navigation Observer",
+        "text": "Record the Rare contribution: Navigation Observer",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -27135,7 +27063,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-rare-accepted",
-            "text": "Observations are compared across seasons rather than granting a discovery for one conversation. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Observations are compared across seasons rather than granting a discovery for one conversation. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27219,7 +27147,7 @@
       },
       {
         "id": "figure-pytheas-claim-epic",
-        "text": "Record the Rare contribution: Keeper of the Northern Voyage Log",
+        "text": "Record the Epic contribution: Keeper of the Northern Voyage Log",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -27277,7 +27205,7 @@
         "outcomes": [
           {
             "id": "figure-pytheas-claim-epic-accepted",
-            "text": "The substantial contribution is the retained, tested account and its safe delivery; it does not settle every later geographical identification. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "The substantial contribution is the retained, tested account and its safe delivery; it does not settle every later geographical identification. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -27619,63 +27547,54 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-menander-common"
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
             },
             {
               "type": "all",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 32
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "all",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "literacy",
-                      "op": "gte",
-                      "value": 32
-                    },
-                    {
-                      "type": "skill",
-                      "skill": "oratory",
-                      "op": "gte",
-                      "value": 24
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-menander-uncommon"
-                  }
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 24
                 }
               ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-menander-uncommon"
+              }
             }
           ]
         },
@@ -27708,75 +27627,66 @@
           "type": "all",
           "conditions": [
             {
-              "type": "accomplishment",
-              "achievement": "fig-menander-common"
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "any",
+              "conditions": [
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-encounter"
+                },
+                {
+                  "type": "accomplishment",
+                  "achievement": "fig-menander-tradition"
+                }
+              ]
+            },
+            {
+              "type": "vocation",
+              "action": "fig-menander-work-uncommon",
+              "count": 1
             },
             {
               "type": "all",
               "conditions": [
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
+                  "type": "skill",
+                  "skill": "literacy",
+                  "op": "gte",
+                  "value": 32
                 },
                 {
-                  "type": "any",
-                  "conditions": [
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-encounter"
-                    },
-                    {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-tradition"
-                    }
-                  ]
-                },
-                {
-                  "type": "vocation",
-                  "action": "fig-menander-work-uncommon",
-                  "count": 1
-                },
-                {
-                  "type": "all",
-                  "conditions": [
-                    {
-                      "type": "skill",
-                      "skill": "literacy",
-                      "op": "gte",
-                      "value": 32
-                    },
-                    {
-                      "type": "skill",
-                      "skill": "oratory",
-                      "op": "gte",
-                      "value": 24
-                    }
-                  ]
-                },
-                {
-                  "type": "not",
-                  "condition": {
-                    "type": "accomplishment",
-                    "achievement": "fig-menander-uncommon"
-                  }
+                  "type": "skill",
+                  "skill": "oratory",
+                  "op": "gte",
+                  "value": 24
                 }
               ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "accomplishment",
+                "achievement": "fig-menander-uncommon"
+              }
             }
           ]
         },
         "outcomes": [
           {
             "id": "figure-menander-claim-uncommon-accepted",
-            "text": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution. The completed projects are accepted as an Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "A usable dramatic scene and rehearsal notes are the first contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28456,7 +28366,7 @@
       },
       {
         "id": "figure-demetrius-claim-uncommon",
-        "text": "Record the Common contribution: Siege Workshop Assistant",
+        "text": "Record the Uncommon contribution: Siege Workshop Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28521,7 +28431,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-uncommon-accepted",
-            "text": "Early work establishes a real engineering contribution, without claiming a victory. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "Early work establishes a real engineering contribution, without claiming a victory. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28603,7 +28513,7 @@
       },
       {
         "id": "figure-demetrius-claim-rare",
-        "text": "Record the Uncommon contribution: Siege Engineer",
+        "text": "Record the Rare contribution: Siege Engineer",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28659,7 +28569,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-rare-accepted",
-            "text": "Two seasons of construction and revision establish engineering responsibility. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Two seasons of construction and revision establish engineering responsibility. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -28741,7 +28651,7 @@
       },
       {
         "id": "figure-demetrius-claim-epic",
-        "text": "Record the Rare contribution: Director of Siege Works",
+        "text": "Record the Epic contribution: Director of Siege Works",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -28797,7 +28707,7 @@
         "outcomes": [
           {
             "id": "figure-demetrius-claim-epic-accepted",
-            "text": "Senior contribution requires delivered projects and operational accounting, not merely impressive plans. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "Senior contribution requires delivered projects and operational accounting, not merely impressive plans. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29248,7 +29158,7 @@
       },
       {
         "id": "figure-theophrastus-claim-uncommon",
-        "text": "Record the Common contribution: Plant Records Assistant",
+        "text": "Record the Uncommon contribution: Plant Records Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29302,7 +29212,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-uncommon-accepted",
-            "text": "A real comparative record starts the botanical contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A real comparative record starts the botanical contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29384,7 +29294,7 @@
       },
       {
         "id": "figure-theophrastus-claim-rare",
-        "text": "Record the Uncommon contribution: Comparative Plant Investigator",
+        "text": "Record the Rare contribution: Comparative Plant Investigator",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29440,7 +29350,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-rare-accepted",
-            "text": "Repeated comparison matters more than merely collecting names. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated comparison matters more than merely collecting names. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29522,7 +29432,7 @@
       },
       {
         "id": "figure-theophrastus-claim-epic",
-        "text": "Record the Rare contribution: Peripatetic Botanical Scholar",
+        "text": "Record the Epic contribution: Peripatetic Botanical Scholar",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -29578,7 +29488,7 @@
         "outcomes": [
           {
             "id": "figure-theophrastus-claim-epic-accepted",
-            "text": "A sustained botanical contribution reflects Theophrastus's independent research and school leadership. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "A sustained botanical contribution reflects Theophrastus's independent research and school leadership. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -29961,7 +29871,7 @@
       },
       {
         "id": "figure-zeno-claim-uncommon",
-        "text": "Record the Common contribution: Student of the Stoa",
+        "text": "Record the Uncommon contribution: Student of the Stoa",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30015,7 +29925,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-uncommon-accepted",
-            "text": "A defensible contribution goes beyond attendance or assent. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A defensible contribution goes beyond attendance or assent. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30099,7 +30009,7 @@
       },
       {
         "id": "figure-zeno-claim-rare",
-        "text": "Record the Uncommon contribution: Stoic Discussion Leader",
+        "text": "Record the Rare contribution: Stoic Discussion Leader",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30157,7 +30067,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-rare-accepted",
-            "text": "Repeated teaching must answer objections and preserve its reasons. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated teaching must answer objections and preserve its reasons. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30248,7 +30158,7 @@
       },
       {
         "id": "figure-zeno-claim-epic",
-        "text": "Record the Rare contribution: Scholar of Stoic Ethics",
+        "text": "Record the Epic contribution: Scholar of Stoic Ethics",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30313,7 +30223,7 @@
         "outcomes": [
           {
             "id": "figure-zeno-claim-epic-accepted",
-            "text": "An independent body of inquiry is a major contribution, while founding a school remains a separate outcome. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "An independent body of inquiry is a major contribution, while founding a school remains a separate outcome. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30791,7 +30701,7 @@
       },
       {
         "id": "v-fig-ptolemy-work-uncommon",
-        "text": "Reconcile a season of Egyptian supply and revenue records (4 dr fee, 10 dr paid; consumes 2 grain, 1 papyrus, 1 ink; one work year)",
+        "text": "Reconcile a season of Egyptian supply and revenue records (4 dr fee, 10 dr paid; consumes 20 grain, 1 papyrus, 1 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -30867,7 +30777,7 @@
       },
       {
         "id": "figure-ptolemy-claim-uncommon",
-        "text": "Record the Common contribution: Egyptian Administration Clerk",
+        "text": "Record the Uncommon contribution: Egyptian Administration Clerk",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -30930,7 +30840,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-uncommon-accepted",
-            "text": "A completed account is useful work; holding an administrative title is insufficient. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A completed account is useful work; holding an administrative title is insufficient. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -30943,7 +30853,7 @@
       },
       {
         "id": "v-fig-ptolemy-work-rare",
-        "text": "Deliver and reconcile a season of funded public supply (8 dr fee, 18 dr paid; consumes 4 grain, 2 papyrus, 1 ink; one work year)",
+        "text": "Deliver and reconcile a season of funded public supply (8 dr fee, 18 dr paid; consumes 40 grain, 2 papyrus, 1 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31010,7 +30920,7 @@
       },
       {
         "id": "figure-ptolemy-claim-rare",
-        "text": "Record the Uncommon contribution: Ptolemaic Supply Commissioner",
+        "text": "Record the Rare contribution: Ptolemaic Supply Commissioner",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31064,7 +30974,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-rare-accepted",
-            "text": "Two seasons connect administration to actual funded delivery. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Two seasons connect administration to actual funded delivery. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31077,7 +30987,7 @@
       },
       {
         "id": "v-fig-ptolemy-work-epic",
-        "text": "Maintain an audited public programme and its political agreements (12 dr fee, 24 dr paid; consumes 6 grain, 3 papyrus, 2 ink; one work year)",
+        "text": "Maintain an audited public programme and its political agreements (12 dr fee, 24 dr paid; consumes 60 grain, 3 papyrus, 2 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31155,7 +31065,7 @@
       },
       {
         "id": "figure-ptolemy-claim-epic",
-        "text": "Record the Rare contribution: Steward of Egyptian Government",
+        "text": "Record the Epic contribution: Steward of Egyptian Government",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31220,7 +31130,7 @@
         "outcomes": [
           {
             "id": "figure-ptolemy-claim-epic-accepted",
-            "text": "A major contribution combines operating accounts with workable institutions and support. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "A major contribution combines operating accounts with workable institutions and support. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31233,7 +31143,7 @@
       },
       {
         "id": "v-fig-ptolemy-capstone-work",
-        "text": "Consolidate and audit a sustained programme of Egyptian government (24 dr fee; consumes 8 grain, 4 papyrus, 3 ink; one work year)",
+        "text": "Consolidate and audit a sustained programme of Egyptian government (24 dr fee; consumes 80 grain, 4 papyrus, 3 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31668,7 +31578,7 @@
       },
       {
         "id": "v-fig-cleomenes-work-uncommon",
-        "text": "Reconcile a season of grain purchases, dues and closing stores (3 dr fee, 8 dr paid; consumes 2 grain, 1 papyrus, 1 ink; one work year)",
+        "text": "Reconcile a season of grain purchases, dues and closing stores (3 dr fee, 8 dr paid; consumes 20 grain, 1 papyrus, 1 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31735,7 +31645,7 @@
       },
       {
         "id": "figure-cleomenes-claim-uncommon",
-        "text": "Record the Common contribution: Revenue Records Assistant",
+        "text": "Record the Uncommon contribution: Revenue Records Assistant",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31789,7 +31699,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-uncommon-accepted",
-            "text": "A genuine balanced account starts the contribution. The completed projects are accepted as a Common contribution; no principal figure title is granted by this association alone.",
+            "text": "A genuine balanced account starts the contribution. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31802,7 +31712,7 @@
       },
       {
         "id": "v-fig-cleomenes-work-rare",
-        "text": "Audit and deliver a season of funded grain supply (6 dr fee, 16 dr paid; consumes 4 grain, 2 papyrus, 1 ink; one work year)",
+        "text": "Audit and deliver a season of funded grain supply (6 dr fee, 16 dr paid; consumes 40 grain, 2 papyrus, 1 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31860,7 +31770,7 @@
       },
       {
         "id": "figure-cleomenes-claim-rare",
-        "text": "Record the Uncommon contribution: Grain Supply Auditor",
+        "text": "Record the Rare contribution: Grain Supply Auditor",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -31905,7 +31815,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-rare-accepted",
-            "text": "Repeated delivery and accounting show impact beyond a wealthy balance sheet. The completed projects are accepted as a Uncommon contribution; no principal figure title is granted by this association alone.",
+            "text": "Repeated delivery and accounting show impact beyond a wealthy balance sheet. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -31918,7 +31828,7 @@
       },
       {
         "id": "v-fig-cleomenes-work-epic",
-        "text": "Reconcile a substantial grain-administration programme (10 dr fee, 22 dr paid; consumes 6 grain, 3 papyrus, 2 ink; one work year)",
+        "text": "Reconcile a substantial grain-administration programme (10 dr fee, 22 dr paid; consumes 60 grain, 3 papyrus, 2 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -31985,7 +31895,7 @@
       },
       {
         "id": "figure-cleomenes-claim-epic",
-        "text": "Record the Rare contribution: Steward of Egyptian Grain Accounts",
+        "text": "Record the Epic contribution: Steward of Egyptian Grain Accounts",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": false,
@@ -32039,7 +31949,7 @@
         "outcomes": [
           {
             "id": "figure-cleomenes-claim-epic-accepted",
-            "text": "The senior contribution requires actual supply and public accounting; coercion is not silently praised as relief. The completed projects are accepted as a Rare contribution; no principal figure title is granted by this association alone.",
+            "text": "The senior contribution requires actual supply and public accounting; coercion is not silently praised as relief. The completed projects are accepted as a Epic contribution; no principal figure title is granted by this association alone.",
             "weight": 1,
             "effects": [
               {
@@ -32052,7 +31962,7 @@
       },
       {
         "id": "v-fig-cleomenes-capstone-work",
-        "text": "Complete an audited programme of revenue and grain administration (20 dr fee; consumes 8 grain, 4 papyrus, 2 ink; one work year)",
+        "text": "Complete an audited programme of revenue and grain administration (20 dr fee; consumes 80 grain, 4 papyrus, 2 ink; one work year)",
         "category": "career",
         "minAge": 18,
         "usesYearlyActivity": true,
@@ -32200,808 +32110,6 @@
               {
                 "type": "accomplishment",
                 "achievement": "fig-cleomenes-capstone"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-demetrius-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Demetrius the Besieger's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-demetrius-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-zeno-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Zeno of Citium's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-zeno-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-ptolemy-claim-legendary-contribution",
-        "text": "Record the Epic contribution after Ptolemy I Soter's Legendary achievement",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-ptolemy-claim-legendary-contribution-accepted",
-            "text": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-alexander-common-work",
-        "text": "Sort and tally a small issue of campaign stores (1 dr fee, 4 dr paid; consumes 1 grain, 1 papyrus; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "op": "gte",
-                  "value": 12
-                },
-                {
-                  "type": "capability",
-                  "node": "T1"
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-alexander-common-work-done",
-            "text": "Sort and tally a small issue of campaign stores. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-alexander-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-alexander-claim-common",
-        "text": "Record the Common contribution: Campaign Stores Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-alexander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-alexander-common-work",
-              "count": 1
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "warfare",
-                  "op": "gte",
-                  "value": 12
-                },
-                {
-                  "type": "capability",
-                  "node": "T1"
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-alexander-claim-common-accepted",
-            "text": "A checked tally of a small stores issue establishes useful entry-level campaign work. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-aristotle-common-work",
-        "text": "Organise inquiry notes and check their labels (1 dr fee, 3 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "capability",
-              "node": "P1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-aristotle-common-work-done",
-            "text": "Organise inquiry notes and check their labels. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-aristotle-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-aristotle-claim-common",
-        "text": "Record the Common contribution: Inquiry Note Keeper",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-aristotle-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-aristotle-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "P1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-aristotle-claim-common-accepted",
-            "text": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-euclid-common-work",
-        "text": "Label and check an elementary geometrical diagram (1 dr fee, 4 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "capability",
-              "node": "P3"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-euclid-common-work-done",
-            "text": "Label and check an elementary geometrical diagram. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-euclid-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-euclid-claim-common",
-        "text": "Record the Common contribution: Diagram Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-euclid-encounter"
-            },
-            {
-              "type": "vocation",
-              "action": "fig-euclid-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "P3"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-euclid-claim-common-accepted",
-            "text": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-lysippos-common-work",
-        "text": "Prepare clay and measure a small workshop study (2 dr fee, 5 dr paid; consumes 1 clay, 1 timber; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "capability",
-              "node": "A1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-lysippos-common-work-done",
-            "text": "Prepare clay and measure a small workshop study. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-lysippos-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-lysippos-claim-common",
-        "text": "Record the Common contribution: Bronze Workshop Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-lysippos-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-lysippos-common-work",
-              "count": 1
-            },
-            {
-              "type": "capability",
-              "node": "A1"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-lysippos-claim-common-accepted",
-            "text": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "v-fig-menander-common-work",
-        "text": "Organise scene copies and record rehearsal cues (1 dr fee, 4 dr paid; consumes 1 papyrus, 1 ink; one work year)",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": true,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "literacy",
-                  "op": "gte",
-                  "value": 16
-                },
-                {
-                  "type": "skill",
-                  "skill": "oratory",
-                  "op": "gte",
-                  "value": 12
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "v-fig-menander-common-work-done",
-            "text": "Organise scene copies and record rehearsal cues. The completed work, actual inputs and payment are recorded.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "vocation",
-                "action": "fig-menander-common-work"
-              },
-              {
-                "type": "stat",
-                "stat": "knowledge",
-                "delta": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "figure-menander-claim-common",
-        "text": "Record the Common contribution: Rehearsal Aide",
-        "category": "career",
-        "minAge": 18,
-        "usesYearlyActivity": false,
-        "when": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "any",
-              "conditions": [
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-encounter"
-                },
-                {
-                  "type": "accomplishment",
-                  "achievement": "fig-menander-tradition"
-                }
-              ]
-            },
-            {
-              "type": "vocation",
-              "action": "fig-menander-common-work",
-              "count": 1
-            },
-            {
-              "type": "all",
-              "conditions": [
-                {
-                  "type": "skill",
-                  "skill": "literacy",
-                  "op": "gte",
-                  "value": 16
-                },
-                {
-                  "type": "skill",
-                  "skill": "oratory",
-                  "op": "gte",
-                  "value": 12
-                }
-              ]
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              }
-            }
-          ]
-        },
-        "outcomes": [
-          {
-            "id": "figure-menander-claim-common-accepted",
-            "text": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene. The completed project is accepted as a Common contribution; the principal figure title remains a separate achievement.",
-            "weight": 1,
-            "effects": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
               }
             ]
           }
@@ -36965,7 +36073,7 @@
                   {
                     "type": "year",
                     "op": "gte",
-                    "value": -350
+                    "value": -400
                   }
                 ]
               }
@@ -44245,7 +43353,7 @@
                   "kind": "item",
                   "item": "flax",
                   "op": "gte",
-                  "value": 1
+                  "value": 5
                 }
               },
               {
@@ -44254,7 +43362,7 @@
                   "kind": "item",
                   "item": "grain",
                   "op": "gte",
-                  "value": 10
+                  "value": 100
                 }
               }
             ]
@@ -45568,7 +44676,7 @@
       ],
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "evidence": "fictional",
       "fields": [
@@ -50667,7 +49775,7 @@
               {
                 "type": "year",
                 "op": "gte",
-                "value": -350
+                "value": -400
               },
               {
                 "type": "any",
@@ -52210,7 +51318,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 10
+              "value": 100
             }
           }
         ]
@@ -52682,7 +51790,7 @@
               "kind": "item",
               "item": "grain",
               "op": "lte",
-              "value": 30
+              "value": 300
             }
           }
         ]
@@ -70864,7 +69972,7 @@
       "text": "Carts of grain stand loaded at the granary gate. Whoever leads them is answerable for every measure that reaches the army, and for every measure that does not.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -71450,7 +70558,7 @@
       "text": "Two days out, the road narrows between dunes and broken walls. How you take the next stretch decides how much grain reaches the army.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72262,7 +71370,7 @@
       "text": "A townsperson offers to buy grain from your store at a stated price per measure, paid in drachmas on the spot.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72339,7 +71447,7 @@
       "text": "A townsperson offers you grain now, to be paid for later. The price is added to your household debt.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72416,7 +71524,7 @@
       "text": "A townsperson offers you pay in drachmas to guard a grain convoy on the road. Only a serving soldier can take it.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72497,7 +71605,7 @@
       "text": "The merchant offers you trade goods at a stated price per unit, paid in drachmas.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72574,7 +71682,7 @@
       "text": "The Nile stays low through the flood season and the water never reaches the upper fields. The neighbouring farm expects a poor harvest, and the merchant's grain prices are already rising. Your household must decide how to get through the year.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "demo",
@@ -72622,7 +71730,7 @@
               "kind": "item",
               "item": "grain",
               "op": "lte",
-              "value": 100
+              "value": 1000
             }
           }
         },
@@ -72698,14 +71806,14 @@
         },
         {
           "id": "flood-share-grain",
-          "text": "Share 10 measures of grain with neighbours who have none",
+          "text": "Share 100 measures of grain with neighbours who have none",
           "when": {
             "type": "demo",
             "condition": {
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 30
+              "value": 300
             }
           },
           "outcomes": [
@@ -72718,7 +71826,7 @@
                   "type": "demo",
                   "effect": {
                     "kind": "share-grain",
-                    "quantity": 10
+                    "quantity": 100
                   }
                 },
                 {
@@ -72750,16 +71858,16 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 30
+                "value": 300
               }
             },
-            "text": "Your household has grain enough. Your parents share 10 measures with neighbours who have none, and people in the lane greet your family warmly.",
+            "text": "Your household has grain enough. Your parents share 100 measures with neighbours who have none, and people in the lane greet your family warmly.",
             "effects": [
               {
                 "type": "demo",
                 "effect": {
                   "kind": "share-grain",
-                  "quantity": 10
+                  "quantity": 100
                 }
               },
               {
@@ -72831,7 +71939,7 @@
       "text": "Army officers arrive to raise men and supplies. Every household with someone fit to serve is listed, and the officers will also take provisions or a substitute's fee. Whoever goes, their labour leaves the family plot.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "all",
@@ -72985,14 +72093,14 @@
         },
         {
           "id": "levy-send-provisions",
-          "text": "Send 15 measures of grain to the muster",
+          "text": "Send 150 measures of grain to the muster",
           "when": {
             "type": "demo",
             "condition": {
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 20
+              "value": 200
             }
           },
           "outcomes": [
@@ -73005,7 +72113,7 @@
                   "type": "demo",
                   "effect": {
                     "kind": "grain",
-                    "delta": -15,
+                    "delta": -150,
                     "cause": "provisions sent to the army muster"
                   }
                 },
@@ -73055,16 +72163,16 @@
                 "kind": "item",
                 "item": "grain",
                 "op": "gte",
-                "value": 20
+                "value": 200
               }
             },
-            "text": "Your household sends 15 measures of grain to the muster in place of a son. The jars stand emptier, and the officer marks your family as having given.",
+            "text": "Your household sends 150 measures of grain to the muster in place of a son. The jars stand emptier, and the officer marks your family as having given.",
             "effects": [
               {
                 "type": "demo",
                 "effect": {
                   "kind": "grain",
-                  "delta": -15,
+                  "delta": -150,
                   "cause": "provisions the household sent to the army muster"
                 }
               },
@@ -73130,7 +72238,7 @@
       "text": "After a year of making, a mentor asks how you will handle dust and sharp tools. Better habits protect your health; rushing leaves injuries that linger.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "any",
@@ -73269,7 +72377,7 @@
       "text": "Your written explanation draws on another worker's observation. A colleague asks you to give them credit. The choice affects trust, not the measured result.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "vocation",
@@ -73333,7 +72441,7 @@
       "text": "Families who contributed grain want to see the district accounts. A clear record can build trust, while hiding the figures leaves them doubtful.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "when": {
         "type": "vocation",
@@ -75053,7 +74161,7 @@
           "kind": "item",
           "item": "grain",
           "op": "gte",
-          "value": 40
+          "value": 400
         }
       },
       "stages": [
@@ -75096,7 +74204,7 @@
           "kind": "item",
           "item": "grain",
           "op": "gte",
-          "value": 60
+          "value": 600
         }
       },
       "stages": [
@@ -75165,7 +74273,7 @@
                   "type": "demo",
                   "effect": {
                     "kind": "share-grain",
-                    "quantity": 10
+                    "quantity": 100
                   }
                 },
                 {
@@ -75227,7 +74335,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 30
+              "value": 300
             }
           },
           {
@@ -75254,7 +74362,7 @@
       "choices": [
         {
           "id": "holdings-seed-lending-lend",
-          "text": "Lend 5 measures of seed",
+          "text": "Lend fifty measures of seed",
           "outcomes": [
             {
               "id": "holdings-seed-lending-lend-done",
@@ -75265,7 +74373,7 @@
                   "type": "demo",
                   "effect": {
                     "kind": "share-grain",
-                    "quantity": 5
+                    "quantity": 50
                   }
                 },
                 {
@@ -75313,7 +74421,7 @@
           "kind": "item",
           "item": "flax",
           "op": "gte",
-          "value": 1
+          "value": 10
         }
       },
       "stages": [
@@ -75350,7 +74458,7 @@
           "kind": "item",
           "item": "flax",
           "op": "gte",
-          "value": 1
+          "value": 10
         }
       },
       "stages": [
@@ -76440,7 +75548,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 20
+              "value": 200
             }
           }
         ]
@@ -77112,7 +76220,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77173,7 +76281,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77234,7 +76342,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77295,7 +76403,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77356,7 +76464,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77417,7 +76525,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77478,7 +76586,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77539,7 +76647,7 @@
       "text": "The master you met sends word: there is room beside them this season, if you want to learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -77888,7 +76996,7 @@
       "text": "Recruiters stand in the market offering better pay than in quiet years. The army is short of men, and everyone knows why: some who march out will not come back.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78029,7 +77137,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 20
+              "value": 200
             }
           }
         ]
@@ -78094,7 +77202,7 @@
       "text": "Through the master you met, a city workshop offers to take you on and give you a corner to sleep in. Your family would stay at home.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78181,7 +77289,7 @@
       "text": "A scholar you met offers lodging near the court quarter in return for copying and errands, and time to study.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78412,7 +77520,7 @@
       "text": "Neighbours have noticed how your fields come up. A younger grower asks to work beside you and learn your sowing.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78486,7 +77594,7 @@
       "text": "The village elders ask you to sit with them when the channel shares and sowing days are set.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78554,7 +77662,7 @@
       "text": "People come from other villages to see how you sow. Your name is used when growers argue about the right way.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -78607,7 +77715,7 @@
       "text": "In a lean year your household still ate. A neighbour asks you to show their son how you keep your stores.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78681,7 +77789,7 @@
       "text": "The landholder asks you to advise on how the estate's stores should be kept against bad floods.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78749,7 +77857,7 @@
       "text": "Your stores carried your household through floods that emptied others. The village counts you among its wisest growers.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -78802,7 +77910,7 @@
       "text": "Your cloth is noticed at the market. A girl from the next street asks to learn at your loom.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78876,7 +77984,7 @@
       "text": "The cloth merchants' association invites you to inspect cloth for them before it is sold on.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -78944,7 +78052,7 @@
       "text": "Buyers ask for cloth from your loom by name. You are counted among the finest weavers of the district.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -78997,7 +78105,7 @@
       "text": "Your jars are sound and people say so. A boy asks to sweep your workshop if you will teach him the wheel.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79071,7 +78179,7 @@
       "text": "A workshop master invites you to share his kiln and teach his apprentices.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79139,7 +78247,7 @@
       "text": "Your vessels are copied by other potters. You are counted among the master potters of the district.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -79192,7 +78300,7 @@
       "text": "A carved piece of yours stands where people pass. A young carver asks to hold your tools and learn.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79266,7 +78374,7 @@
       "text": "A temple builder invites you to carve for the new courtyard alongside the yard's masters.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79334,7 +78442,7 @@
       "text": "Your figures are pointed out to visitors. You are counted among the renowned sculptors of the city.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -79387,7 +78495,7 @@
       "text": "Your careful observations are talked about. A student asks to copy your notes and follow your method.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79461,7 +78569,7 @@
       "text": "Scholars near the court invite you to read your observations to them and answer their questions.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79529,7 +78637,7 @@
       "text": "Your work is copied and argued over by other scholars. You are counted among the learned people of the city, whose judgement others ask for.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -79582,7 +78690,7 @@
       "text": "Your fair settling of disputes is remembered. A young clerk asks to learn how you prepare a hearing.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79656,7 +78764,7 @@
       "text": "The district's officials invite you to speak for the district at the next gathering.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79724,7 +78832,7 @@
       "text": "People bring their disputes to you before they go to any office. You are counted among the respected officials of the city.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -79777,7 +78885,7 @@
       "text": "Your accounts always balance and merchants say so. A young porter asks to learn your reckoning.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79851,7 +78959,7 @@
       "text": "A trading house invites you to its table when cargoes are bought and prices set.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -79919,7 +79027,7 @@
       "text": "Your word settles a price. You are counted among the renowned traders of the harbour.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -79972,7 +79080,7 @@
       "text": "Your drill is steady and the officers notice. A new recruit is placed beside you to learn from you.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80046,7 +79154,7 @@
       "text": "The officers invite you to plan the season's exercises with them.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80114,7 +79222,7 @@
       "text": "Soldiers tell stories about your command. You are counted among the renowned soldiers of the garrison.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "mode": "automatic",
       "when": {
@@ -80381,7 +79489,7 @@
       "text": "The king is gathering scholars into a new house of the Muses beside the palace, to be kept at his expense. Word reaches you that those known for careful work are being asked.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80476,7 +79584,7 @@
       "text": "The new house of the Muses and the great collection of books need people who can keep accounts, receive supplies and answer the king's questions. Officials of good name are being asked.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80571,7 +79679,7 @@
       "text": "The king wants the books of every land gathered and copied. The collection is paying for careful hands that can read and copy without error.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 4,
@@ -80677,7 +79785,7 @@
       "text": "The king is settling serving soldiers on crown land: a plot to hold while they stay on the rolls, in place of coin they would be owed. Your name is on the list.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80794,7 +79902,7 @@
       "text": "Men who served and were discharged are being given crown land to settle on, so that the king can call on them again. The scribes have your service on their rolls.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80933,7 +80041,7 @@
       "text": "A royal scribe is measuring crown land along the channel and offering it on lease to growers who can work it. The rent is a share of the harvest, and the first season's seed is to be repaid in grain.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -80974,7 +80082,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 25
+              "value": 250
             }
           },
           {
@@ -81016,7 +80124,7 @@
                   "effect": {
                     "kind": "grain-to",
                     "to": "crown",
-                    "quantity": 12,
+                    "quantity": 120,
                     "cause": "the first season's seed repaid to the crown"
                   }
                 },
@@ -81055,7 +80163,7 @@
       "text": "The scribe comes to count the harvest of the crown plot. The crown's share is a measure of grain, due before the next sowing.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 5,
@@ -81090,7 +80198,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 10
+              "value": 100
             }
           }
         ]
@@ -81119,7 +80227,7 @@
                   "effect": {
                     "kind": "grain-to",
                     "to": "crown",
-                    "quantity": 8,
+                    "quantity": 80,
                     "cause": "the crown's share of the harvest"
                   }
                 },
@@ -81167,7 +80275,7 @@
       "text": "The temple steward has strips of the god's land lying idle. Tenants pay a share of the harvest to the god's store, and are expected to help on festival days.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -81208,7 +80316,7 @@
               "kind": "item",
               "item": "grain",
               "op": "gte",
-              "value": 20
+              "value": 200
             }
           },
           {
@@ -81250,7 +80358,7 @@
                   "effect": {
                     "kind": "grain-to",
                     "to": "temple",
-                    "quantity": 6,
+                    "quantity": 60,
                     "cause": "the god's share on taking a temple lease"
                   }
                 },
@@ -81294,7 +80402,7 @@
       "text": "The crown has put linen weaving under licence: only licensed looms may sell it, and the royal workshop buys what it needs at a fixed price. A licence-holder asks you to weave for him.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -81390,7 +80498,7 @@
       "text": "Oil is now pressed under the crown's licence and sold at the crown's price. The licensed presses need many sound jars and will pay for them.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -81486,7 +80594,7 @@
       "text": "On the island of Pharos the king's builders are raising a great lighthouse for the harbour. They need carvers for the blocks and the figures on its tiers.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 4,
@@ -81582,7 +80690,7 @@
       "text": "Oil and linen are now sold under the crown's licence, and each licensed seller must reckon the crown's share. The houses want agents who can keep those accounts straight.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -81678,7 +80786,7 @@
       "text": "Grain dealers and an estate steward want someone who knows the soil to walk the fields before sowing and say which plots will bear. They will pay for the advice.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -81764,7 +80872,7 @@
       "text": "Families with land ask whether you would teach their sons your way of sowing for a season. They offer a fee.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -81850,7 +80958,7 @@
       "text": "The village asks you to keep the roll of channel shares and settle who clears which stretch. The post carries a small stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -81940,7 +81048,7 @@
       "text": "Your plots have fed the household for years, and someone should know how you read them. You could teach the whole of it to one person.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -82082,7 +81190,7 @@
       "text": "The district keeps a common granary, and its keepers want a grower who can say how much to hold back against a low flood. They pay a fee for the reckoning.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -82168,7 +81276,7 @@
       "text": "Younger households ask you to show them how to keep stores through a lean year, and offer a fee.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -82254,7 +81362,7 @@
       "text": "The elders offer you the keys to the common granary. The post carries a small stipend from the common chest.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -82344,7 +81452,7 @@
       "text": "You have kept your stores through floods that emptied others. You could pass the whole method to one person you trust.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -82486,7 +81594,7 @@
       "text": "A cloth merchant has an order too fine for his own looms. He will pay you to weave it and to show his weavers the pattern.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -82572,7 +81680,7 @@
       "text": "Two girls from the weavers' street are sent to learn at your loom, and their families will pay for it.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -82658,7 +81766,7 @@
       "text": "The cloth merchants ask you to inspect every bolt before it is sold on. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -82748,7 +81856,7 @@
       "text": "Your cloth is known by hand and by eye. Soon no one will weave quite like you, unless you teach one person all of it.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -82890,7 +81998,7 @@
       "text": "A workshop master is short of a steady hand for a large order of fine tableware. He will pay a master's fee for your wheel.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -82976,7 +82084,7 @@
       "text": "Potters in the quarter send their boys to learn the wheel from you for a season, and pay for it.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -83062,7 +82170,7 @@
       "text": "The potters ask you to hold the keys to the common kiln and to settle who fires when. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -83152,7 +82260,7 @@
       "text": "Your vessels are copied, yet the copies lack something. You could teach one person the whole of the craft.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -83294,7 +82402,7 @@
       "text": "A temple builder wants a carved relief for a courtyard wall and will pay a master's fee for it.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -83380,7 +82488,7 @@
       "text": "A carvers' yard sends its young hands to work under you for a season, and pays for the teaching.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -83466,7 +82574,7 @@
       "text": "The stone yard asks you to direct its carvers and judge their work. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -83556,7 +82664,7 @@
       "text": "Your figures stand in places many pass each day. When your hands tire, someone should hold your tools.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -83698,7 +82806,7 @@
       "text": "A wealthy household asks you to cast a calendar for the year and check the steward's reckoning. The fee comes from the teaching fund.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -83784,7 +82892,7 @@
       "text": "Families ask you to take their sons and teach them to reason and to observe. They offer fees.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -83870,7 +82978,7 @@
       "text": "Someone near the court asks you to read and answer questions for the household of the court each season. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -83960,7 +83068,7 @@
       "text": "Your method lives in your notes and in your habits. A student who learned both could carry it further than you can.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -84102,7 +83210,7 @@
       "text": "Two landholders cannot agree on a boundary, and the district asks you to settle it. The fee is paid from the common chest.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -84188,7 +83296,7 @@
       "text": "Young clerks ask you to teach them how to prepare a hearing and keep an honest record, and offer a fee.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -84274,7 +83382,7 @@
       "text": "The district asks you to keep its record of disputes and decrees. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -84364,7 +83472,7 @@
       "text": "People bring their disputes to you before any office. There is a way you hear them, and it could be taught.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -84506,7 +83614,7 @@
       "text": "A trading house wants a reckoner it trusts to read the harbour and set prices for a season's cargoes. It will pay a fee.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -84592,7 +83700,7 @@
       "text": "Young porters and clerks ask to be taught how a price is set, and offer a fee.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -84678,7 +83786,7 @@
       "text": "The harbour asks you to assess the dues on every cargo, fairly. The post carries a stipend.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -84768,7 +83876,7 @@
       "text": "Your word settles prices. You could teach one person how you reckon, so that the habit outlasts you.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -84910,7 +84018,7 @@
       "text": "The officers ask a master to drill a company before the season's march. The fee is paid from the army purse.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 3,
       "cooldownYears": 4,
@@ -84996,7 +84104,7 @@
       "text": "Young soldiers are sent to learn from you for a season, and the army will pay for the teaching.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -85082,7 +84190,7 @@
       "text": "The garrison asks you to take charge of its drill ground. The post carries a stipend from the army purse.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 1,
       "when": {
@@ -85172,7 +84280,7 @@
       "text": "Your drill is steady, and the soldiers know it. Someone could learn to keep the line the way you do.",
       "trigger": {
         "type": "year",
-        "at": -350
+        "at": -400
       },
       "maxOccurrences": 2,
       "cooldownYears": 5,
@@ -85400,7 +84508,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-alexander-credit",
@@ -85473,7 +84585,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-aristotle-first-contribution",
@@ -85567,7 +84683,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-aristotle-credit",
@@ -85640,7 +84759,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-euclid-first-contribution",
@@ -85725,7 +84848,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-euclid-credit",
@@ -85798,7 +84924,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-lysippos-first-contribution",
@@ -85892,7 +85022,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "sculpture"
+      ]
     },
     {
       "id": "fig-story-lysippos-credit",
@@ -85965,7 +85099,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "sculpture"
+      ]
     },
     {
       "id": "fig-story-pytheas-first-contribution",
@@ -86132,7 +85269,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-menander-first-contribution",
@@ -86226,7 +85366,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic"
+      ]
     },
     {
       "id": "fig-story-menander-credit",
@@ -86299,7 +85442,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic"
+      ]
     },
     {
       "id": "fig-story-demetrius-first-contribution",
@@ -86393,7 +85539,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "soldiering"
+      ]
     },
     {
       "id": "fig-story-demetrius-credit",
@@ -86466,7 +85616,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "clothing",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-theophrastus-first-contribution",
@@ -86560,7 +85714,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "farming",
+        "research"
+      ]
     },
     {
       "id": "fig-story-theophrastus-credit",
@@ -86633,7 +85791,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-zeno-first-contribution",
@@ -86727,7 +85888,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research",
+        "civic"
+      ]
     },
     {
       "id": "fig-story-zeno-credit",
@@ -86800,7 +85965,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "research"
+      ]
     },
     {
       "id": "fig-story-ptolemy-first-contribution",
@@ -86894,7 +86062,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "trade"
+      ]
     },
     {
       "id": "fig-story-ptolemy-credit",
@@ -86967,7 +86139,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-cleomenes-first-contribution",
@@ -87061,7 +86236,10 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "trade"
+      ]
     },
     {
       "id": "fig-story-cleomenes-credit",
@@ -87134,7 +86312,11 @@
         "adulthood",
         "later-life"
       ],
-      "scope": "work"
+      "scope": "work",
+      "fields": [
+        "civic",
+        "trade"
+      ]
     }
   ],
   "endings": [
@@ -88437,7 +87619,6 @@
         "achievementIds": [
           "fig-alexander-encounter",
           "fig-alexander-tradition",
-          "fig-alexander-common",
           "fig-alexander-uncommon",
           "fig-alexander-rare",
           "fig-alexander-epic",
@@ -88445,12 +87626,6 @@
           "fig-alexander-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-alexander-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88490,19 +87665,12 @@
         "achievementIds": [
           "fig-aristotle-encounter",
           "fig-aristotle-tradition",
-          "fig-aristotle-common",
           "fig-aristotle-uncommon",
           "fig-aristotle-rare",
           "fig-aristotle-epic",
           "fig-aristotle-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-aristotle-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88541,19 +87709,12 @@
         "jobIds": [],
         "achievementIds": [
           "fig-euclid-encounter",
-          "fig-euclid-common",
           "fig-euclid-uncommon",
           "fig-euclid-rare",
           "fig-euclid-epic",
           "fig-euclid-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-euclid-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88593,19 +87754,12 @@
         "achievementIds": [
           "fig-lysippos-encounter",
           "fig-lysippos-tradition",
-          "fig-lysippos-common",
           "fig-lysippos-uncommon",
           "fig-lysippos-rare",
           "fig-lysippos-epic",
           "fig-lysippos-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-lysippos-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88652,19 +87806,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-pytheas-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-pytheas-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-pytheas-epic"
             ]
@@ -88690,19 +87844,12 @@
         "achievementIds": [
           "fig-menander-encounter",
           "fig-menander-tradition",
-          "fig-menander-common",
           "fig-menander-uncommon",
           "fig-menander-rare",
           "fig-menander-epic",
           "fig-menander-capstone"
         ],
         "stages": [
-          {
-            "title": "Common contribution",
-            "achievementIds": [
-              "fig-menander-common"
-            ]
-          },
           {
             "title": "Uncommon contribution",
             "achievementIds": [
@@ -88747,24 +87894,23 @@
           "fig-demetrius-epic",
           "fig-demetrius-capstone",
           "fig-demetrius-promotion-attempt",
-          "fig-demetrius-promotion",
-          "fig-demetrius-legendary-contribution"
+          "fig-demetrius-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-demetrius-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-demetrius-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-demetrius-epic"
             ]
@@ -88780,12 +87926,6 @@
             "achievementIds": [
               "fig-demetrius-promotion",
               "fig-demetrius-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-demetrius-legendary-contribution"
             ]
           }
         ]
@@ -88810,19 +87950,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-theophrastus-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-theophrastus-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-theophrastus-epic"
             ]
@@ -88853,24 +87993,23 @@
           "fig-zeno-epic",
           "fig-zeno-capstone",
           "fig-zeno-promotion-attempt",
-          "fig-zeno-promotion",
-          "fig-zeno-legendary-contribution"
+          "fig-zeno-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-zeno-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-zeno-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-zeno-epic"
             ]
@@ -88886,12 +88025,6 @@
             "achievementIds": [
               "fig-zeno-promotion",
               "fig-zeno-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-zeno-legendary-contribution"
             ]
           }
         ]
@@ -88914,24 +88047,23 @@
           "fig-ptolemy-epic",
           "fig-ptolemy-capstone",
           "fig-ptolemy-promotion-attempt",
-          "fig-ptolemy-promotion",
-          "fig-ptolemy-legendary-contribution"
+          "fig-ptolemy-promotion"
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-ptolemy-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-ptolemy-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-ptolemy-epic"
             ]
@@ -88947,12 +88079,6 @@
             "achievementIds": [
               "fig-ptolemy-promotion",
               "fig-ptolemy-promotion-attempt"
-            ]
-          },
-          {
-            "title": "Epic contribution after a Legendary outcome",
-            "achievementIds": [
-              "fig-ptolemy-legendary-contribution"
             ]
           }
         ]
@@ -88977,19 +88103,19 @@
         ],
         "stages": [
           {
-            "title": "Common contribution",
+            "title": "Uncommon contribution",
             "achievementIds": [
               "fig-cleomenes-uncommon"
             ]
           },
           {
-            "title": "Uncommon contribution",
+            "title": "Rare contribution",
             "achievementIds": [
               "fig-cleomenes-rare"
             ]
           },
           {
-            "title": "Rare contribution",
+            "title": "Epic contribution",
             "achievementIds": [
               "fig-cleomenes-epic"
             ]
@@ -89704,7 +88830,7 @@
         "id": "fig-menander-uncommon",
         "routeId": "figure-menander",
         "title": "Copyist of New Comedy",
-        "description": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution. The player-facing title depends on whether access was through direct contact or a later tradition.",
+        "description": "A usable dramatic scene and rehearsal notes are the first contribution. The player-facing title depends on whether access was through direct contact or a later tradition.",
         "kind": "ordinary",
         "nameTemplate": "{name}: Copyist of New Comedy",
         "people": [],
@@ -90219,110 +89345,6 @@
         "sourceIds": [
           "figure-source-cleomenes"
         ]
-      },
-      {
-        "id": "fig-demetrius-legendary-contribution",
-        "routeId": "figure-demetrius",
-        "title": "Distinguished Custodian of Demetrian Siege Methods",
-        "description": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Demetrian Siege Methods",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-demetrius"
-        ]
-      },
-      {
-        "id": "fig-zeno-legendary-contribution",
-        "routeId": "figure-zeno",
-        "title": "Distinguished Custodian of Early Stoic Inquiry",
-        "description": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Early Stoic Inquiry",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-zeno"
-        ]
-      },
-      {
-        "id": "fig-ptolemy-legendary-contribution",
-        "routeId": "figure-ptolemy",
-        "title": "Distinguished Custodian of Early Ptolemaic Statecraft",
-        "description": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "kind": "prestige",
-        "nameTemplate": "{name}: Distinguished Custodian of Early Ptolemaic Statecraft",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-ptolemy"
-        ]
-      },
-      {
-        "id": "fig-alexander-common",
-        "routeId": "figure-alexander",
-        "title": "Aide in Macedonian Supply Studies",
-        "description": "A checked tally of a small stores issue establishes useful entry-level campaign work. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Macedonian Supply Studies",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-alexander"
-        ]
-      },
-      {
-        "id": "fig-aristotle-common",
-        "routeId": "figure-aristotle",
-        "title": "Keeper of Aristotelian Inquiry Notes",
-        "description": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Keeper of Aristotelian Inquiry Notes",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-aristotle"
-        ]
-      },
-      {
-        "id": "fig-euclid-common",
-        "routeId": "figure-euclid",
-        "title": "Aide in Geometrical Diagram Studies",
-        "description": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Geometrical Diagram Studies",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-euclid"
-        ]
-      },
-      {
-        "id": "fig-lysippos-common",
-        "routeId": "figure-lysippos",
-        "title": "Aide in Lysippan Workshop Practice",
-        "description": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in Lysippan Workshop Practice",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-lysippos"
-        ]
-      },
-      {
-        "id": "fig-menander-common",
-        "routeId": "figure-menander",
-        "title": "Aide in New Comedy Rehearsal",
-        "description": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene. The player-facing title distinguishes the figure's working circle from a later tradition.",
-        "kind": "ordinary",
-        "nameTemplate": "{name}: Aide in New Comedy Rehearsal",
-        "people": [],
-        "evidence": "historically-inspired",
-        "sourceIds": [
-          "figure-source-menander"
-        ]
       }
     ]
   },
@@ -90618,7 +89640,7 @@
         "text": "Surveyors have marked the streets of Alexander's new city beside Rhakotis. Contractors are hiring for walls, quays and houses, and plots along the new streets are being let to anyone who can pay toward the building.",
         "trigger": {
           "type": "year",
-          "at": -350
+          "at": -400
         },
         "when": {
           "type": "all",
@@ -90804,7 +89826,7 @@
         "text": "A reader back from Athens has copied notes from Aristotle's lectures at the Lyceum: what things are made of, why they change and how to argue about them. He offers to go through them with any young person who can keep up.",
         "trigger": {
           "type": "year",
-          "at": -350
+          "at": -400
         },
         "when": {
           "type": "all",
@@ -90918,7 +89940,7 @@
         "text": "Your family has engaged a tutor trained in Aristotle's school, as Philip of Macedon once engaged Aristotle for his son. The lessons cover reading, argument, the conduct of rulers and keeping a clear head when others lose theirs.",
         "trigger": {
           "type": "year",
-          "at": -350
+          "at": -400
         },
         "when": {
           "type": "all",
@@ -91025,7 +90047,7 @@
         "text": "A teacher following Euclid's method has opened a school near the harbour. Children draw figures in sand trays and must say why each step follows from the last. The fee is small, and some pupils pay in errands.",
         "trigger": {
           "type": "year",
-          "at": -350
+          "at": -400
         },
         "when": {
           "type": "all",
@@ -91116,7 +90138,7 @@
         "text": "Scholars working beside Euclid at the Museum need a capable reader to check figures and copy proofs. The post carries a stipend and use of the collected books, but the work is exacting and careless help is soon dismissed.",
         "trigger": {
           "type": "year",
-          "at": -350
+          "at": -400
         },
         "when": {
           "type": "all",
@@ -91774,11 +90796,11 @@
       "episodeGapYears": 1
     },
     "household": {
-      "startingGrain": 60,
-      "storeCapacity": 150,
+      "startingGrain": 600,
+      "storeCapacity": 1500,
       "plots": 2,
-      "yieldPerPlot": 65,
-      "flaxPerPlot": 12,
+      "yieldPerPlot": 650,
+      "flaxPerPlot": 120,
       "floodFactorBps": {
         "low": 4500,
         "normal": 10000,
@@ -91789,11 +90811,11 @@
       "rentBps": 2000,
       "spoilageBps": 800,
       "overCapacitySpoilageBps": 4000,
-      "adultRation": 24,
+      "adultRation": 240,
       "childRationBps": 5000,
       "animalFeed": {
-        "ox": 12,
-        "donkey": 6
+        "ox": 120,
+        "donkey": 60
       },
       "childHelpAge": 8,
       "childWorkAge": 14,
@@ -91808,7 +90830,7 @@
         "quantity": 2
       },
       "spinBoltsPer100Labour": 10,
-      "dealerExtraCapacity": 150,
+      "dealerExtraCapacity": 1500,
       "reckoningSpoilageCutBpsPerPoint": 50,
       "reckoningSpoilageCutCapBps": 4000,
       "rentOnFlax": true,
@@ -91818,12 +90840,12 @@
     "market": {
       "start": {
         "grower": {
-          "grain": 200,
+          "grain": 2000,
           "cash": 400,
-          "flax": 4
+          "flax": 40
         },
         "merchant": {
-          "grain": 300,
+          "grain": 3000,
           "cash": 4000,
           "goods": {
             "silver": 20,
@@ -91831,14 +90853,14 @@
             "silk": 6,
             "linen": 20
           },
-          "flax": 4,
+          "flax": 40,
           "animals": {
             "ox": 3,
             "donkey": 4
           }
         },
         "army": {
-          "grain": 250,
+          "grain": 2500,
           "purse": 3000
         }
       },
@@ -91856,11 +90878,11 @@
       "priceFloorBps": 5000,
       "priceCeilingBps": 30000,
       "spreadBps": 1000,
-      "targetGrainStock": 300,
+      "targetGrainStock": 3000,
       "armyDemand": {
-        "quiet": 60,
-        "recruiting": 140,
-        "war": 240
+        "quiet": 600,
+        "recruiting": 1400,
+        "war": 2400
       },
       "transportCostBps": {
         "safe": 0,
@@ -91878,10 +90900,10 @@
         "uneasy": 7000,
         "dangerous": 3000
       },
-      "royalAllocation": 250,
-      "maxOrderQuantity": 500,
-      "growerEating": 240,
-      "armyReserve": 250,
+      "royalAllocation": 2500,
+      "maxOrderQuantity": 5000,
+      "growerEating": 2400,
+      "armyReserve": 2500,
       "armyPurseReserve": 1000,
       "growerSpoilageBps": 800,
       "growerReleaseBps": 6000,
@@ -91913,12 +90935,12 @@
         "high": -2500
       },
       "maxAnimals": 3,
-      "minTradeAge": 12,
+      "minTradeAge": 10,
       "fairTradeReputation": 1,
       "depth": {
         "halfUnits": {
-          "grain": 120,
-          "flax": 20,
+          "grain": 1200,
+          "flax": 200,
           "silver": 20,
           "gold": 4,
           "silk": 6,
@@ -91931,8 +90953,9 @@
         "maxFactorBps": 25000,
         "grainAskBps": 7000,
         "grainSpreadBps": 2000,
-        "leanYearMeasuresPerStanding": 25,
-        "leanYearStandingCap": 4
+        "leanYearMeasuresPerStanding": 250,
+        "leanYearStandingCap": 4,
+        "monotoneOrder": true
       }
     },
     "service": {
@@ -91941,9 +90964,9 @@
         "recruiting": 180,
         "war": 260
       },
-      "ration": 24,
+      "ration": 240,
       "escortCooldownYears": 3,
-      "escortCargo": 80,
+      "escortCargo": 800,
       "roadLossBps": {
         "safe": 300,
         "uneasy": 2000,
@@ -91957,28 +90980,28 @@
         "well": {
           "title": "A village well",
           "cash": 150,
-          "grain": 10,
+          "grain": 100,
           "progress": 2,
           "reputation": 6
         },
         "granary": {
           "title": "A village granary",
           "cash": 300,
-          "grain": 30,
+          "grain": 300,
           "progress": 3,
           "reputation": 10
         },
         "school": {
           "title": "A village school",
           "cash": 400,
-          "grain": 10,
+          "grain": 100,
           "progress": 3,
           "reputation": 10
         },
         "healing-house": {
           "title": "A healing house at the shrine",
           "cash": 450,
-          "grain": 15,
+          "grain": 150,
           "progress": 3,
           "reputation": 12
         }
@@ -92023,7 +91046,7 @@
       },
       "offerQuantity": {
         "min": 1,
-        "max": 200
+        "max": 2000
       }
     },
     "availability": {
@@ -92187,22 +91210,22 @@
       "origins": {
         "tenant-farming-household": {
           "grain": {
-            "min": 45,
-            "max": 75
+            "min": 450,
+            "max": 750
           },
           "flax": {
-            "min": 0,
-            "max": 2
+            "min": 5,
+            "max": 20
           },
           "donkey": {
             "min": 0,
-            "max": 0
+            "max": 1
           }
         },
         "soldier-household": {
           "grain": {
-            "min": 25,
-            "max": 45
+            "min": 250,
+            "max": 450
           },
           "silver": {
             "min": 0,
@@ -92211,12 +91234,12 @@
         },
         "estate-household": {
           "grain": {
-            "min": 80,
-            "max": 120
+            "min": 800,
+            "max": 1200
           },
           "flax": {
-            "min": 1,
-            "max": 3
+            "min": 10,
+            "max": 30
           },
           "silver": {
             "min": 1,
@@ -92237,22 +91260,22 @@
         },
         "delta-newcomers": {
           "grain": {
-            "min": 18,
-            "max": 32
+            "min": 180,
+            "max": 320
           },
           "flax": {
             "min": 0,
-            "max": 1
+            "max": 10
           }
         },
         "artisan-household": {
           "grain": {
-            "min": 15,
-            "max": 30
+            "min": 150,
+            "max": 300
           },
           "flax": {
-            "min": 0,
-            "max": 1
+            "min": 5,
+            "max": 15
           },
           "linen": {
             "min": 0,
@@ -92261,8 +91284,8 @@
         },
         "royal-household": {
           "grain": {
-            "min": 60,
-            "max": 90
+            "min": 600,
+            "max": 900
           },
           "silver": {
             "min": 2,
@@ -92278,8 +91301,7 @@
           }
         }
       }
-    },
-    "resourceScaleDivisor": 10
+    }
   },
   "vocations": {
     "materials": {
@@ -93807,7 +92829,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 2,
+          "grain": 20,
           "papyrus": 1
         }
       },
@@ -93823,7 +92845,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 4,
+          "grain": 40,
           "papyrus": 2,
           "ink": 1
         }
@@ -93840,7 +92862,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 6,
+          "grain": 60,
           "papyrus": 2,
           "timber": 1
         }
@@ -93857,7 +92879,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 8,
+          "grain": 80,
           "papyrus": 2,
           "timber": 2
         }
@@ -94201,7 +93223,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 2,
+          "grain": 20,
           "papyrus": 1,
           "linen": 1
         }
@@ -94218,7 +93240,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 2,
+          "grain": 20,
           "papyrus": 2,
           "ink": 1,
           "linen": 1
@@ -94726,7 +93748,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 2,
+          "grain": 20,
           "papyrus": 1,
           "ink": 1
         }
@@ -94743,7 +93765,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 4,
+          "grain": 40,
           "papyrus": 2,
           "ink": 1
         }
@@ -94760,7 +93782,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 6,
+          "grain": 60,
           "papyrus": 3,
           "ink": 2
         }
@@ -94777,7 +93799,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 8,
+          "grain": 80,
           "papyrus": 4,
           "ink": 3
         }
@@ -94846,7 +93868,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 2,
+          "grain": 20,
           "papyrus": 1,
           "ink": 1
         }
@@ -94863,7 +93885,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 4,
+          "grain": 40,
           "papyrus": 2,
           "ink": 1
         }
@@ -94880,7 +93902,7 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 6,
+          "grain": 60,
           "papyrus": 3,
           "ink": 2
         }
@@ -94897,89 +93919,9 @@
         ],
         "practice": false,
         "inputs": {
-          "grain": 8,
+          "grain": 80,
           "papyrus": 4,
           "ink": 2
-        }
-      },
-      "fig-alexander-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "workshop",
-        "primary": "warfare",
-        "supports": [
-          "oratory",
-          "reckoning"
-        ],
-        "practice": false,
-        "inputs": {
-          "grain": 1,
-          "papyrus": 1
-        }
-      },
-      "fig-aristotle-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 3,
-        "payer": "school",
-        "primary": "philosophy",
-        "supports": [
-          "literacy",
-          "reckoning"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
-        }
-      },
-      "fig-euclid-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "council",
-        "primary": "reckoning",
-        "supports": [
-          "literacy",
-          "philosophy"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
-        }
-      },
-      "fig-lysippos-common-work": {
-        "kind": "work",
-        "fee": 2,
-        "pay": 5,
-        "payer": "workshop",
-        "primary": "sculpture",
-        "supports": [
-          "craft",
-          "carving"
-        ],
-        "practice": false,
-        "inputs": {
-          "clay": 1,
-          "timber": 1
-        }
-      },
-      "fig-menander-common-work": {
-        "kind": "work",
-        "fee": 1,
-        "pay": 4,
-        "payer": "school",
-        "primary": "oratory",
-        "supports": [
-          "literacy",
-          "music"
-        ],
-        "practice": false,
-        "inputs": {
-          "papyrus": 1,
-          "ink": 1
         }
       }
     },
@@ -96435,7 +95377,8 @@
         "proof": "Complete a 2-work-year assessment delivering 2 funded orders to 2 distinct buyer accounts; reconcile cash, stock, fees and commitments in both years.",
         "reward": "Qualify for Merchant or Trading-house manager career offers. Unlock an integrated 2-year stock/order/delivery plan within the existing action and visit limits; this grants no free goods, price immunity or personal ownership of employer funds."
       }
-    ]
+    ],
+    "proofFromWork": true
   },
   "lifeStages": {
     "stages": [
@@ -96483,8 +95426,111 @@
     }
   },
   "birthYears": {
-    "from": -350,
-    "to": -300
+    "from": -400,
+    "to": -300,
+    "weights": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      5,
+      5,
+      8,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10,
+      12,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      13,
+      15,
+      15,
+      15,
+      15,
+      15,
+      16,
+      16,
+      16,
+      16,
+      16,
+      17,
+      17,
+      17,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      14,
+      14,
+      13,
+      13,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      9,
+      7,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
   },
   "paths": {
     "fields": {
@@ -97101,14 +96147,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Campaign Stores Aide",
-          "traditionTitle": "Aide in Macedonian Supply Studies",
-          "description": "A checked tally of a small stores issue establishes useful entry-level campaign work.",
-          "achievementId": "fig-alexander-common",
-          "activityId": "figure-alexander-claim-common",
-          "workActionId": "fig-alexander-common-work",
+          "rank": "Uncommon",
+          "title": "Campaign Provisioner",
+          "traditionTitle": "Reader of Macedonian Supply Records",
+          "achievementId": "fig-alexander-uncommon",
+          "activityId": "figure-alexander-claim-uncommon",
+          "workActionId": "fig-alexander-work-uncommon",
           "workYears": 1,
+          "description": "A delivered, itemised supply assignment is a contribution; merely joining the army is not.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -97140,7 +96186,7 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-alexander-common-work",
+                "action": "fig-alexander-work-uncommon",
                 "count": 1
               },
               {
@@ -97150,11 +96196,11 @@
                     "type": "skill",
                     "skill": "warfare",
                     "op": "gte",
-                    "value": 12
+                    "value": 24
                   },
                   {
                     "type": "capability",
-                    "node": "T1"
+                    "node": "T3"
                   }
                 ]
               },
@@ -97162,85 +96208,8 @@
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-alexander-common"
+                  "achievement": "fig-alexander-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Campaign Provisioner",
-          "traditionTitle": "Reader of Macedonian Supply Records",
-          "achievementId": "fig-alexander-uncommon",
-          "activityId": "figure-alexander-claim-uncommon",
-          "workActionId": "fig-alexander-work-uncommon",
-          "workYears": 1,
-          "description": "A delivered, itemised supply assignment is a contribution; merely joining the army is not.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-alexander-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-alexander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-alexander-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "skill",
-                        "skill": "warfare",
-                        "op": "gte",
-                        "value": 24
-                      },
-                      {
-                        "type": "capability",
-                        "node": "T3"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-alexander-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -97441,9 +96410,7 @@
           ]
         },
         "attemptAchievementId": "fig-alexander-campaign-attempt"
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "aristotle",
@@ -97476,14 +96443,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Inquiry Note Keeper",
-          "traditionTitle": "Keeper of Aristotelian Inquiry Notes",
-          "description": "An organised and checked set of inquiry notes assists the school before independent comparison is attempted.",
-          "achievementId": "fig-aristotle-common",
-          "activityId": "figure-aristotle-claim-common",
-          "workActionId": "fig-aristotle-common-work",
+          "rank": "Uncommon",
+          "title": "Lyceum Copyist",
+          "traditionTitle": "Copyist of Aristotelian Arguments",
+          "achievementId": "fig-aristotle-uncommon",
+          "activityId": "figure-aristotle-claim-uncommon",
+          "workActionId": "fig-aristotle-work-uncommon",
           "workYears": 1,
+          "description": "An annotated comparison is useful work, rather than attendance at a lecture.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -97515,85 +96482,19 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-aristotle-common-work",
+                "action": "fig-aristotle-work-uncommon",
                 "count": 1
               },
               {
                 "type": "capability",
-                "node": "P1"
+                "node": "P3"
               },
               {
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-aristotle-common"
+                  "achievement": "fig-aristotle-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Lyceum Copyist",
-          "traditionTitle": "Copyist of Aristotelian Arguments",
-          "achievementId": "fig-aristotle-uncommon",
-          "activityId": "figure-aristotle-claim-uncommon",
-          "workActionId": "fig-aristotle-work-uncommon",
-          "workYears": 1,
-          "description": "An annotated comparison is useful work, rather than attendance at a lecture.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-aristotle-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-aristotle-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-aristotle-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "P3"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-aristotle-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -97766,9 +96667,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "euclid",
@@ -97795,45 +96694,6 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Diagram Aide",
-          "traditionTitle": "Aide in Geometrical Diagram Studies",
-          "description": "A labelled, checked elementary diagram provides a first practical contribution to geometrical study.",
-          "achievementId": "fig-euclid-common",
-          "activityId": "figure-euclid-claim-common",
-          "workActionId": "fig-euclid-common-work",
-          "workYears": 1,
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-encounter"
-              },
-              {
-                "type": "accomplishment",
-                "achievement": "fig-euclid-encounter"
-              },
-              {
-                "type": "vocation",
-                "action": "fig-euclid-common-work",
-                "count": 1
-              },
-              {
-                "type": "capability",
-                "node": "P3"
-              },
-              {
-                "type": "not",
-                "condition": {
-                  "type": "accomplishment",
-                  "achievement": "fig-euclid-common"
-                }
-              }
-            ]
-          }
-        },
-        {
           "rank": "Uncommon",
           "title": "Geometrical Copyist",
           "traditionTitle": "Geometrical Copyist",
@@ -97847,36 +96707,27 @@
             "conditions": [
               {
                 "type": "accomplishment",
-                "achievement": "fig-euclid-common"
+                "achievement": "fig-euclid-encounter"
               },
               {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-encounter"
-                  },
-                  {
-                    "type": "accomplishment",
-                    "achievement": "fig-euclid-encounter"
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-euclid-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "PS6"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-euclid-uncommon"
-                    }
-                  }
-                ]
+                "type": "accomplishment",
+                "achievement": "fig-euclid-encounter"
+              },
+              {
+                "type": "vocation",
+                "action": "fig-euclid-work-uncommon",
+                "count": 1
+              },
+              {
+                "type": "capability",
+                "node": "PS6"
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "accomplishment",
+                  "achievement": "fig-euclid-uncommon"
+                }
               }
             ]
           }
@@ -98022,9 +96873,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "lysippos",
@@ -98061,14 +96910,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Bronze Workshop Aide",
-          "traditionTitle": "Aide in Lysippan Workshop Practice",
-          "description": "Prepared materials and a checked small study support the workshop before a complete measured model is undertaken.",
-          "achievementId": "fig-lysippos-common",
-          "activityId": "figure-lysippos-claim-common",
-          "workActionId": "fig-lysippos-common-work",
+          "rank": "Uncommon",
+          "title": "Bronze Workshop Assistant",
+          "traditionTitle": "Assistant in Lysippan Workshop Practice",
+          "achievementId": "fig-lysippos-uncommon",
+          "activityId": "figure-lysippos-claim-uncommon",
+          "workActionId": "fig-lysippos-work-uncommon",
           "workYears": 1,
+          "description": "A model records pose and proportions for the bronze workshop.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -98100,85 +96949,19 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-lysippos-common-work",
+                "action": "fig-lysippos-work-uncommon",
                 "count": 1
               },
               {
                 "type": "capability",
-                "node": "A1"
+                "node": "AS5"
               },
               {
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-lysippos-common"
+                  "achievement": "fig-lysippos-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Bronze Workshop Assistant",
-          "traditionTitle": "Assistant in Lysippan Workshop Practice",
-          "achievementId": "fig-lysippos-uncommon",
-          "activityId": "figure-lysippos-claim-uncommon",
-          "workActionId": "fig-lysippos-work-uncommon",
-          "workYears": 1,
-          "description": "A model records pose and proportions for the bronze workshop.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-lysippos-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-lysippos-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-lysippos-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "capability",
-                    "node": "AS5"
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-lysippos-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -98351,9 +97134,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "pytheas",
@@ -98386,7 +97167,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Expedition Provisioner",
           "traditionTitle": "Reader of Massaliot Voyage Accounts",
           "achievementId": "fig-pytheas-uncommon",
@@ -98456,7 +97237,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Navigation Observer",
           "traditionTitle": "Checker of Northern Navigation Accounts",
           "achievementId": "fig-pytheas-rare",
@@ -98517,7 +97298,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Keeper of the Northern Voyage Log",
           "traditionTitle": "Custodian of Northern Voyage Evidence",
           "achievementId": "fig-pytheas-epic",
@@ -98640,8 +97421,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     },
     {
       "id": "menander",
@@ -98678,14 +97458,14 @@
       },
       "stages": [
         {
-          "rank": "Common",
-          "title": "Rehearsal Aide",
-          "traditionTitle": "Aide in New Comedy Rehearsal",
-          "description": "Usable scene copies and checked rehearsal cues support a performance before revising a dramatic scene.",
-          "achievementId": "fig-menander-common",
-          "activityId": "figure-menander-claim-common",
-          "workActionId": "fig-menander-common-work",
+          "rank": "Uncommon",
+          "title": "Stage Copyist",
+          "traditionTitle": "Copyist of New Comedy",
+          "achievementId": "fig-menander-uncommon",
+          "activityId": "figure-menander-claim-uncommon",
+          "workActionId": "fig-menander-work-uncommon",
           "workYears": 1,
+          "description": "A usable dramatic scene and rehearsal notes are the first contribution.",
           "requires": {
             "type": "all",
             "conditions": [
@@ -98717,7 +97497,7 @@
               },
               {
                 "type": "vocation",
-                "action": "fig-menander-common-work",
+                "action": "fig-menander-work-uncommon",
                 "count": 1
               },
               {
@@ -98727,13 +97507,13 @@
                     "type": "skill",
                     "skill": "literacy",
                     "op": "gte",
-                    "value": 16
+                    "value": 32
                   },
                   {
                     "type": "skill",
                     "skill": "oratory",
                     "op": "gte",
-                    "value": 12
+                    "value": 24
                   }
                 ]
               },
@@ -98741,87 +97521,8 @@
                 "type": "not",
                 "condition": {
                   "type": "accomplishment",
-                  "achievement": "fig-menander-common"
+                  "achievement": "fig-menander-uncommon"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "rank": "Uncommon",
-          "title": "Stage Copyist",
-          "traditionTitle": "Copyist of New Comedy",
-          "achievementId": "fig-menander-uncommon",
-          "activityId": "figure-menander-claim-uncommon",
-          "workActionId": "fig-menander-work-uncommon",
-          "workYears": 1,
-          "description": "A usable dramatic scene and rehearsal notes build on the initial rehearsal contribution.",
-          "requires": {
-            "type": "all",
-            "conditions": [
-              {
-                "type": "accomplishment",
-                "achievement": "fig-menander-common"
-              },
-              {
-                "type": "all",
-                "conditions": [
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "any",
-                    "conditions": [
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-encounter"
-                      },
-                      {
-                        "type": "accomplishment",
-                        "achievement": "fig-menander-tradition"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "vocation",
-                    "action": "fig-menander-work-uncommon",
-                    "count": 1
-                  },
-                  {
-                    "type": "all",
-                    "conditions": [
-                      {
-                        "type": "skill",
-                        "skill": "literacy",
-                        "op": "gte",
-                        "value": 32
-                      },
-                      {
-                        "type": "skill",
-                        "skill": "oratory",
-                        "op": "gte",
-                        "value": 24
-                      }
-                    ]
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "accomplishment",
-                      "achievement": "fig-menander-uncommon"
-                    }
-                  }
-                ]
               }
             ]
           }
@@ -99005,9 +97706,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal",
-      "contributionStartRank": "Common"
+      }
     },
     {
       "id": "demetrius",
@@ -99044,7 +97743,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Siege Workshop Assistant",
           "traditionTitle": "Reader of Demetrian Siege Accounts",
           "achievementId": "fig-demetrius-uncommon",
@@ -99112,7 +97811,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Siege Engineer",
           "traditionTitle": "Analyst of Demetrian Siege Engineering",
           "achievementId": "fig-demetrius-rare",
@@ -99171,7 +97870,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Director of Siege Works",
           "traditionTitle": "Custodian of Demetrian Siege Methods",
           "achievementId": "fig-demetrius-epic",
@@ -99298,35 +97997,6 @@
         "milestone": "rhodes-captured",
         "title": "Demetrius, captor of Rhodes",
         "alternateHistory": true
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Director of Siege Works",
-        "traditionTitle": "Distinguished Custodian of Demetrian Siege Methods",
-        "description": "The senior contribution receives Epic recognition only after Demetrius the Besieger's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-demetrius-legendary-contribution",
-        "activityId": "figure-demetrius-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-demetrius-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-demetrius-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -99356,7 +98026,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Plant Records Assistant",
           "traditionTitle": "Copyist of Peripatetic Plant Records",
           "achievementId": "fig-theophrastus-uncommon",
@@ -99413,7 +98083,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Comparative Plant Investigator",
           "traditionTitle": "Investigator of Theophrastan Botany",
           "achievementId": "fig-theophrastus-rare",
@@ -99472,7 +98142,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Peripatetic Botanical Scholar",
           "traditionTitle": "Scholar of Theophrastan Plant Inquiry",
           "achievementId": "fig-theophrastus-epic",
@@ -99597,8 +98267,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     },
     {
       "id": "zeno",
@@ -99635,7 +98304,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Student of the Stoa",
           "traditionTitle": "Reader of Early Stoic Arguments",
           "achievementId": "fig-zeno-uncommon",
@@ -99692,7 +98361,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Stoic Discussion Leader",
           "traditionTitle": "Teacher of Stoic Discussion",
           "achievementId": "fig-zeno-rare",
@@ -99753,7 +98422,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Scholar of Stoic Ethics",
           "traditionTitle": "Custodian of Early Stoic Inquiry",
           "achievementId": "fig-zeno-epic",
@@ -99899,35 +98568,6 @@
         "title": "Zeno of Citium, founder of a Stoic school",
         "alternateHistory": false,
         "provisional": true
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Scholar of Stoic Ethics",
-        "traditionTitle": "Distinguished Custodian of Early Stoic Inquiry",
-        "description": "The senior contribution receives Epic recognition only after Zeno of Citium's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-zeno-legendary-contribution",
-        "activityId": "figure-zeno-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-zeno-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-zeno-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -99965,7 +98605,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Egyptian Administration Clerk",
           "traditionTitle": "Reader of Early Ptolemaic Accounts",
           "achievementId": "fig-ptolemy-uncommon",
@@ -100031,7 +98671,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Ptolemaic Supply Commissioner",
           "traditionTitle": "Investigator of Ptolemaic Administration",
           "achievementId": "fig-ptolemy-rare",
@@ -100088,7 +98728,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Steward of Egyptian Government",
           "traditionTitle": "Custodian of Early Ptolemaic Statecraft",
           "achievementId": "fig-ptolemy-epic",
@@ -100233,35 +98873,6 @@
         "milestone": "ptolemaic-dynasty-founded",
         "title": "Ptolemy I Soter, founder of the Ptolemaic dynasty",
         "alternateHistory": false
-      },
-      "contributionTiering": "below-principal",
-      "legendaryContribution": {
-        "rank": "Epic",
-        "title": "Distinguished Steward of Egyptian Government",
-        "traditionTitle": "Distinguished Custodian of Early Ptolemaic Statecraft",
-        "description": "The senior contribution receives Epic recognition only after Ptolemy I Soter's successful Legendary achievement. Earlier Rare contributions remain separately recorded.",
-        "achievementId": "fig-ptolemy-legendary-contribution",
-        "activityId": "figure-ptolemy-claim-legendary-contribution",
-        "requires": {
-          "type": "all",
-          "conditions": [
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-epic"
-            },
-            {
-              "type": "accomplishment",
-              "achievement": "fig-ptolemy-promotion"
-            },
-            {
-              "type": "not",
-              "condition": {
-                "type": "accomplishment",
-                "achievement": "fig-ptolemy-legendary-contribution"
-              }
-            }
-          ]
-        }
       }
     },
     {
@@ -100299,7 +98910,7 @@
       },
       "stages": [
         {
-          "rank": "Common",
+          "rank": "Uncommon",
           "title": "Revenue Records Assistant",
           "traditionTitle": "Reader of Cleomenian Revenue Records",
           "achievementId": "fig-cleomenes-uncommon",
@@ -100356,7 +98967,7 @@
           }
         },
         {
-          "rank": "Uncommon",
+          "rank": "Rare",
           "title": "Grain Supply Auditor",
           "traditionTitle": "Auditor of Macedonian Grain Administration",
           "achievementId": "fig-cleomenes-rare",
@@ -100404,7 +99015,7 @@
           }
         },
         {
-          "rank": "Rare",
+          "rank": "Epic",
           "title": "Steward of Egyptian Grain Accounts",
           "traditionTitle": "Custodian of Egyptian Revenue Evidence",
           "achievementId": "fig-cleomenes-epic",
@@ -100530,8 +99141,7 @@
             }
           ]
         }
-      },
-      "contributionTiering": "below-principal"
+      }
     }
   ]
 }

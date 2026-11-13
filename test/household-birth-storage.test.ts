@@ -4,7 +4,7 @@ import { createEngine } from "../src/engine.ts";
 import { householdView } from "../src/demo/household.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import current from "../worlds/demo/alexandria-lives-9.json" with { type: "json" };
+import current from "../worlds/demo/alexandria-lives-9-wsl-resources.json" with { type: "json" };
 
 const fixture = () => structuredClone(current) as unknown as WorldPack;
 

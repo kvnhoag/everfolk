@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\pytheas-epic.png",
+  "sourceSha256": "0f66ff0c61a4ecc2c70bc72bdf23ec7e0922bcb073b24355121918ae4706381d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\pytheas-epic-coarse.png",
+  "baseSha256": "d6658d8be037f16de22fdf1916df894c06de6a5574d6536fc838597630c67e69",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\pytheas-epic-coarse.json",
+  "baseQaSha256": "0ec51e01d5661197b380545b25f7c983e266ee68538bc26eebca3997f0aadaa4",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\pytheas-epic-face.json",
+  "configSha256": "7903555b6b02ac815cda9670668f500765d341f2bbda125af7ee086d7f4a6f90",
+  "config": {
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "center": [
+          405,
+          310
+        ],
+        "radius": [
+          98,
+          108
+        ]
+      }
+    ],
+    "detail_outline_thickness": 0,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\pytheas-epic-pixel.png",
+  "outputSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "1b8fa8c2e13cc3c746d046da65bbf232de11c518d9dab0598000e75ce75b21a0",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\pytheas-epic-face-mask.png",
+  "maskSha256": "a14941c14476848f59b919237ff9bad809bac85814ce66c76658e11001353675",
+  "maskPixelSha256": "4fa969d66bcc99814e8a3f51d52ac020fc67409771e5935600d9376335af751c",
+  "selectedDetailCells": 774,
+  "retainedCoarseCells": 23726,
+  "affectedPixels": 27864,
+  "changedPixels": 27717,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -21,8 +21,9 @@ export function validateCapabilities(input: unknown, skills: Set<string>, fail: 
     }
     return value as unknown[];
   };
-  const root = object(input,path,["version","nodes"]);
+  const root = object(input,path,["version","nodes","proofFromWork"],["version","nodes"]);
   if (root.version !== 1 && root.version !== 2 && root.version !== 3) fail(path,"unsupported capability version");
+  if (Object.hasOwn(root,"proofFromWork") && (root.proofFromWork !== true || root.version !== 3)) fail(`${path}.proofFromWork`,"proofFromWork must be true on a version 3 graph, or absent");
   const catalog = capabilityCatalog(Number(root.version));
   const nodes = array(root.nodes,catalog.length);
   if (nodes.length !== catalog.length) fail(path,"expected the complete versioned capability graph");

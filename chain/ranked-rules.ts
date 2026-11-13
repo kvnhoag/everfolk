@@ -47,6 +47,14 @@ export function stepCommand(engine: LifeEngine, state: LifeState, command: Comma
     case "delegate":
     case "agent":
       return engine.demo(state, command);
+    case "market-order":
+      return engine.orderMarket(state, command);
+    case "market-cancel":
+      return engine.cancelMarketOrder(state, command.orderId);
+    case "npc-turn":
+    case "npc-answer":
+    case "npc-speech":
+      return engine.npc(state, command);
     default: throw new Error("Unknown command.");
   }
 }

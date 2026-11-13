@@ -11,6 +11,7 @@ import {
 } from "./chain-copy.ts";
 import { chainHref } from "./chain-route.ts";
 import { computeShares } from "./mock-math.ts";
+import { editionLabel } from "./edition-label.ts";
 
 /** Pure view models for "Who shaped your life", "Mint this life?" and the reveal (Task 19). */
 
@@ -108,11 +109,13 @@ const EMBLEM: Record<CareerGroup, string> = {
 export function mintRevealView(result: MintResult, careerGroup?: CareerGroup, details: RevealDetails = {}): MintRevealView {
   const isFigure = result.kind === "figure" && result.figure_id !== null;
   const power = (RARITY_POWER_BPS[result.rarity] ?? RARITY_POWER_BPS[0]) / 10000;
+  const edition = editionLabel(result);
   const rows: LedgerRow[] = [
     { label: "Kind", value: KIND_LABEL[isFigure ? "figure" : "npc"] },
     { label: "Rarity", value: `${rarityLabel(result.rarity)} · influence ×${power}`, detail: "How strongly its deed changes the lives it reaches." },
     { label: "Affection", value: `${result.affection} / 100`, detail: "How often it is drawn into other players' stories." },
   ];
+  if (edition) rows.push({ label: "Edition", value: edition });
   if (details.actionId) rows.push({ label: "Deed", value: actionName(details.actionId), detail: actionDescription(details.actionId) });
   if (details.evidence) rows.push({ label: "Lived", value: lifeSpanLine(details.evidence) });
   const sources = details.evidence?.sources ?? [];
@@ -131,7 +134,7 @@ export function mintRevealView(result: MintResult, careerGroup?: CareerGroup, de
   if (result.stage_title) rows.splice(1, 0, { label: "Stage", value: result.stage_title });
   return {
     title,
-    number: `No. ${result.token_id}`,
+    number: edition ? `Edition ${edition}` : `No. ${result.token_id}`,
     kindLabel: isFigure ? KIND_LABEL.figure : result.stage_id ? "Stage figure" : KIND_LABEL.npc,
     isFigure,
     figureId: isFigure ? result.figure_id : null,

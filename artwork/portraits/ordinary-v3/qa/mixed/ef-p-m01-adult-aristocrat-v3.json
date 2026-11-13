@@ -1,0 +1,93 @@
+{
+  "method": "Regional PixelOE whole-common-cell Bayer selection plus forced eye-critical cells",
+  "gridType": "mixed-grid; no single logical grid",
+  "output": [
+    384,
+    480
+  ],
+  "baseLogical": [
+    128,
+    160
+  ],
+  "detailLogical": [
+    192,
+    240
+  ],
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "detailOutlineThicknessRequired": 0,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "sourceCanvas": [
+    800.0,
+    1000.0
+  ],
+  "coarsePixelSha256": "cdfb67cd74db1ef78847f6de1a86aafd53d9793053fab88ef5082b1b4db225dc",
+  "finePixelSha256": "528187637f7f51bbf2133c8a9d29d3f9605bda83667fb521fe006ac28be1de28",
+  "mixedPixelSha256": "0384d04b69e6fc5c1e92691bbdeb619c30bbbfa7f01b987a5272b5c7fc63cdf4",
+  "maskPixelSha256": "c3c7bc60a09bda73cafca9ea3f33a560d3a117d77056dbc12e83114567e0e47b",
+  "selectedDetailCells": 349,
+  "retainedCoarseCells": 4771,
+  "criticalForcedAdditionalCells": 0,
+  "criticalForcedOutsideEllipseSupportCells": 0,
+  "affectedPixels": 12564,
+  "changedPixels": 12242,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "eyes",
+      "box": [
+        148,
+        75,
+        239,
+        95
+      ],
+      "selectedPixels": 1820,
+      "totalPixels": 1820,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global common-cell origin",
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministicComposition": true,
+  "coarseUnchanged": true,
+  "fineUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false,
+  "paletteQuantization": false,
+  "callerChecksRequired": [
+    "fine PixelOE outline thickness 0",
+    "repeat PixelOE render equality",
+    "source/base/fine/mixed PNG hashes",
+    "PNG write/readback equality"
+  ],
+  "id": "ef-p-m01-adult-aristocrat-v3",
+  "source": "portraits/assembled/ef-p-m01-adult-aristocrat-v3.png",
+  "sourceSha256": "e60c1533aceb2a4dd49e726b786ade198aa19e791d169e7039b35421202c4f22",
+  "coarsePath": "portraits/128x160-s3-t0/ef-p-m01-adult-aristocrat-v3.png",
+  "coarseSha256": "43b6c8b604a264c588d5939fe77e15c0779ff6dd27a78fb5c66cb54b7ecbd199",
+  "coarseQA": "qa/pixels/128x160-s3-t0/ef-p-m01-adult-aristocrat-v3.json",
+  "finePath": "portraits/192x240-s2-t0/ef-p-m01-adult-aristocrat-v3.png",
+  "fineSha256": "3c469f01225da9f89dbba7f3eb6d9d6fdf809401537bfa339cd5789e485e1037",
+  "fineQA": "qa/pixels/192x240-s2-t0/ef-p-m01-adult-aristocrat-v3.json",
+  "outputPath": "portraits/mixed-3px-body-2px-face/ef-p-m01-adult-aristocrat-v3.png",
+  "outputSha256": "0b9005864e2fe7d22f0d302658efc53202db02228814cf5bf85233de9d05ee1d",
+  "maskPath": "qa/regional-masks/ef-p-m01-adult-aristocrat-v3.png",
+  "maskSha256": "6c54f3079fdd01eddcf51e3ae1ed5cb0b2d6505f1c97c2302a47e423df162c40",
+  "configPath": "qa/regions/ef-p-m01-adult-aristocrat-v3.json",
+  "configSha256": "24217629deac844f269934c1b5f9c0a75367e6c8f52b1dce5c8d6bf191b05676",
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "sourceBaseFineFilesUnchanged": true,
+  "uniformLogicalGrid": false,
+  "faceRegionFrom": "measured eye/chin on the complete original model after one uniform whole-canvas scale"
+}

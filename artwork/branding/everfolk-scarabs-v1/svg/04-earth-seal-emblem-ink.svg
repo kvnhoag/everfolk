@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>01 Standalone emblem / ink</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+    <g id="_04_Earth_Seal___standalone_scarab" data-name="04 Earth Seal / standalone scarab">
+      <polygon id="Left_shovel_foreleg" data-name="Left shovel foreleg" points="186.667,204.963 128.889,176.074 92.296,133.704 61.481,118.296 76.889,85.556 119.259,102.889 132.741,141.407 215.556,176.074" fill="#284744"/>
+      <polygon id="Right_shovel_foreleg" data-name="Right shovel foreleg" points="325.333,206.889 383.111,174.148 417.778,133.704 452.444,116.37 437.037,81.704 394.667,99.037 379.259,141.407 296.444,178" fill="#284744"/>
+      <polygon id="Left_middle_leg" data-name="Left middle leg" points="150.074,278.148 98.074,258.889 53.778,272.37 48,301.259 96.148,293.556 144.296,320.519" fill="#284744"/>
+      <polygon id="Right_middle_leg" data-name="Right middle leg" points="361.926,278.148 415.852,255.037 460.148,272.37 464,303.185 415.852,297.407 365.778,320.519" fill="#284744"/>
+      <polygon id="Left_hind_leg" data-name="Left hind leg" points="148.148,355.185 103.852,376.37 86.519,426.444 115.407,441.852 130.815,399.481 184.741,384.074" fill="#284744"/>
+      <polygon id="Right_hind_leg" data-name="Right hind leg" points="363.852,355.185 410.074,380.222 427.407,428.37 398.519,443.778 381.185,401.407 327.259,384.074" fill="#284744"/>
+      <path id="Uneven_clypeus_and_head" data-name="Uneven clypeus and head" d="M207.852 81.704 L230.963 68.222 L257.926 74 L282.963 68.222 L306.074 93.259 L298.37 133.704 C268.84 149.111 239.309 149.111 209.778 133.704 L200.148 104.815 Z" fill="#284744"/>
+      <path id="Broad_carved_thorax" data-name="Broad carved thorax" d="M173.185 174.148 C196.296 161.309 223.901 156.815 256 160.667 C285.531 156.815 313.778 163.235 340.741 179.926 L354.222 216.519 C319.556 228.074 287.457 231.926 257.926 228.074 C223.259 234.494 190.519 231.284 159.704 218.444 Z" fill="#284744"/>
+      <path id="Left_carved_wingcase" data-name="Left carved wingcase" d="M159.704 249.259 C189.235 237.704 216.84 240.272 242.519 256.963 L238.667 439.926 C169.333 426.444 128.889 382.148 130.815 328.222 C133.383 296.123 143.012 269.802 159.704 249.259 Z" fill="#284744"/>
+      <path id="Right_carved_wingcase" data-name="Right carved wingcase" d="M267.556 255.037 C295.802 238.346 325.333 237.062 356.148 251.185 C406.222 334 361.926 420.667 267.556 441.852 Z" fill="#284744"/>
+    </g>
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

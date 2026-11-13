@@ -1,0 +1,81 @@
+{
+  "figureId": "cleomenes",
+  "figureName": "Cleomenes of Naucratis",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Granary Porter",
+  "displayTitle": "Granary Porter",
+  "subtitle": "Hand of the Nile Granaries",
+  "bodyTitle": "Every Sack Accounted For",
+  "bodyText": "A granary porter moves and checks the sacks that fill the storehouse. Honest attention at the doorway gives distant accounts a solid foundation, making the harvest a quantity that officials can actually find.",
+  "sourceRoleSlug": "cleomenes-common",
+  "newArt": true,
+  "sceneBrief": "A plain linen-clothed granary porter checks a tied grain sack at an Egyptian storehouse doorway, humble work setting and simple tally marks.",
+  "slug": "cleomenes-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Granary Porter",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/cleomenes-common-female-pixel.png",
+  "sourceArtSlug": "cleomenes-common-female",
+  "editionLimit": null,
+  "collectionIndex": 93,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/cleomenes.svg",
+    "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A granary porter moves and checks the sacks that fill the",
+    "storehouse. Honest attention at the doorway gives distant",
+    "accounts a solid foundation, making the harvest a quantity",
+    "that officials can actually find."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-common-female.svg",
+  "fittedArt": "assets/fitted/cleomenes-common-female.png",
+  "overlaySvg": "source/overlays/cleomenes-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "1ed2321223c7b9996de29cc881a2ea85b473fc8538c50abdaeaaa6df46b75dc1",
+  "master": "masters/cleomenes-common-female.vectorcraft",
+  "export": "exports/cleomenes-common-female.png",
+  "thumbnail": "assets/cleomenes-common-female-thumb.png",
+  "exportSha256": "2908e51ca2eebd884a6efcd80f286e2e63947b60fa90d026913310c859f2989e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582647,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

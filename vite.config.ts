@@ -16,6 +16,8 @@ export default defineConfig(async () => {
                 // Retain every save-compatible pack without combining their data
                 // into a browser asset above Cloudflare's 25 MiB size limit.
                 groups: [{
+                  test: /[\\/]worlds[\\/].+\.json(?:\?.*)?$/,
+                  priority: 20,
                   name(moduleId: string) {
                     const world = /[\\/]worlds[\\/](.+)\.json(?:\?.*)?$/.exec(moduleId);
                     return world ? `world-${world[1].replace(/[\\/]/g, "-")}` : null;

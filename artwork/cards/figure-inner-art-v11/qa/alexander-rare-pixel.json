@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\alexander-rare.png",
+  "sourceSha256": "7337596cf50239cacc98c4168862e95f74b0beb692d98e15b49666dbda3c226d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\alexander-rare-coarse.png",
+  "baseSha256": "6249afc68325ebd12e61e81a2a4b9a8202733906019e3c04020b5ee428054221",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\alexander-rare-coarse.json",
+  "baseQaSha256": "2030d1a1116dfd7b9912a12947be5873065a5e2e2f8c916948b9d5371c70de59",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\alexander-rare-face.json",
+  "configSha256": "4e98501f935433b391c1f059509a9524df8e95eb69ab57023455387745a9a1cd",
+  "config": {
+    "detail_outline_thickness": 0,
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          117,
+          142
+        ],
+        "center": [
+          349,
+          181
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\alexander-rare-pixel.png",
+  "outputSha256": "964f83769a0c4648127823ba40a6021681687d84e3839a1af960ac805ec5597e",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "7590a3497ec4a8a9e625450d33386d75b503cc42a093d139718ba89b802d12ac",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\alexander-rare-face-mask.png",
+  "maskSha256": "f84aa889ffef2a0b7ece9c31827709a17cda176db5de0ad6aa0316273eef30f0",
+  "maskPixelSha256": "3f756ee3ba215136cf9445a65990eef9868b364a734857d0f2934bdb03e89753",
+  "selectedDetailCells": 1204,
+  "retainedCoarseCells": 23296,
+  "affectedPixels": 43344,
+  "changedPixels": 43092,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

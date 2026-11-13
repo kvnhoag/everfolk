@@ -1,0 +1,60 @@
+{
+  "slug": "menander-uncommon-female",
+  "figureId": "menander",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Stage Copyist",
+  "subtitle": "Menander",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 38,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-uncommon-female.svg",
+  "fittedArt": "assets/fitted/menander-uncommon-female.png",
+  "overlaySvg": "source/overlays/menander-uncommon-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+  "master": "masters/menander-uncommon-female.vectorcraft",
+  "export": "exports/menander-uncommon-female.png",
+  "thumbnail": "assets/menander-uncommon-female-thumb.png",
+  "exportSha256": "7a05f6cc65560815e086e2cc5c85dd52b1f76e46354710784449d192e05613d4",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

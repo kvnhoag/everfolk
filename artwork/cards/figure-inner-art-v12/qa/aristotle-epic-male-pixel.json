@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\aristotle-epic.png",
+  "sourceSha256": "0c14f40d4e5b46e7e017632b7f62a85bb838325b3b480265bba82d6dbc7c0f0c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\aristotle-epic-coarse.png",
+  "baseSha256": "bbd13d6add3a08d2129231bd2f4f6f36fbd94ceb7db653c7a5ab24e3f13f0010",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\aristotle-epic-coarse.json",
+  "baseQaSha256": "a999f5897391ad5262b611b5217080b22e29ceac4eb0834bd7c85e2b9d970aa9",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\aristotle-epic-face.json",
+  "configSha256": "e84a30f36b0f69fbb95bebee40455d3dc337578c125045b606b7af913b4be1e5",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "center": [
+          375,
+          210
+        ],
+        "radius": [
+          105,
+          130
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\aristotle-epic-pixel.png",
+  "outputSha256": "388822a8017504b3202f97d7ffd1b9d6a676f9fe748498dd1d39af37460ef716",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "71784e88664cbc143827201d1a7a2f6567bedac0b690cb096b4b449c4800fa60",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\aristotle-epic-face-mask.png",
+  "maskSha256": "3efe588ccdde650ec09e7817399ee552434a71c44f07489a0283d991dee3097e",
+  "maskPixelSha256": "882e2ebea2810585d99c22c4a5e40bd672a652f5f23cdf3566b5841c3d47f3f0",
+  "selectedDetailCells": 989,
+  "retainedCoarseCells": 23511,
+  "affectedPixels": 35604,
+  "changedPixels": 35427,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

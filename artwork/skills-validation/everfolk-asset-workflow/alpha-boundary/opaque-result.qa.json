@@ -1,0 +1,62 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\alpha-boundary\\opaque-rgba.png",
+  "sourceSha256": "c0efcf595ed01729964d13a042f9885ea9b3841fff60e99d80ac5829e2d4cb9c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "method": "PixelOE legacy CPU: outline prepass + upstream contrast downscale",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "config": {
+    "patch_size": 4,
+    "thickness": 1,
+    "color_matching": true,
+    "palette_colors": null
+  },
+  "configPath": null,
+  "configSha256": null,
+  "paletteSeed": null,
+  "uniqueColors": 26775,
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "scale": 2,
+  "logicalPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\alpha-boundary\\opaque-result.logical.png",
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\alpha-boundary\\opaque-result.png",
+  "logicalSha256": "29e29666b7e49a56b80bac38a276d772726f4a5ae3de6759e319003f8e102dd3",
+  "outputSha256": "bbf2d798435385045833a692c80d6ea31b0f391ebbe8d262054212530c4d0d66",
+  "logicalPixelSha256": "5dcae438fa6f29b71af20a93755fb73703338579b5a6793da4151c859f251493",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

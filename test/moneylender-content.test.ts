@@ -13,6 +13,9 @@ import previous from "../worlds/alexandria-0.20.0.json" with { type: "json" };
 /** Isolate lending from unrelated mortality, income and personal decisions. */
 function fixture(startingWealth = 0): WorldPack {
   const world = structuredClone(current) as WorldPack;
+  // Lending fixtures exercise ordinary household credit for every natal seed.
+  if (world.royalty) world.royalty.originId = "fixture-unselected-royal-origin";
+  if (world.aristocracy) world.aristocracy.originId = "fixture-unselected-estate-origin";
   withoutMarketSignals(world);
   delete world.health!.mortalityCalibration;
   world.health!.incidenceBands.forEach(band => { band.annualProbability = 0; });

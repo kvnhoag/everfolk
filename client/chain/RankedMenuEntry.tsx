@@ -1,16 +1,22 @@
-import { useId } from "react";
-import { rankedEntryView } from "./born-into-model.ts";
-import { useRankedAvailability } from "./chain-backend.ts";
-import { chainHref } from "./chain-route.ts";
+import { useId, useState } from "react";
 import "./ranked-entry.css";
 
-/** Main menu entry for live Weave Mode play or the browser-only practice ledger. */
-export default function RankedMenuEntry() {
-  const noteId = useId();
-  const availability = useRankedAvailability();
-  const view = rankedEntryView(availability);
+/** Selects which mode the player enters from the main menu. */
+export default function RankedMenuEntry({ checked, onChange }: { checked: boolean; onChange(checked: boolean): void }) {
+  const helpId = useId();
+  const [dismissed, setDismissed] = useState(false);
   return <div className="main-menu-ranked">
-    <button type="button" disabled={view.disabled} aria-describedby={noteId} onClick={() => { window.location.hash = "#weave"; }}>{availability === "practice" ? "Practice Weave Mode" : "Weave Mode"}<span aria-hidden="true">→</span></button>
-    <p id={noteId}>{view.note}{(availability === "available" || availability === "practice") && <> <a href={chainHref({ kind: "market" })}>Browse the market</a></>}</p>
+    <button type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}>
+      <span className="weave-switch-track" aria-hidden="true" />
+      Weave Mode
+    </button>
+    <div className="weave-mode-help" data-dismissed={dismissed} onPointerEnter={() => setDismissed(false)}>
+      <button type="button" aria-label="About Weave Mode" aria-describedby={helpId}
+        onFocus={() => setDismissed(false)} onClick={() => setDismissed(false)}
+        onKeyDown={event => { if (event.key === "Escape") setDismissed(true); }}>i</button>
+      <div id={helpId} role="tooltip" className="weave-mode-tooltip">
+        Weave Mode uses a NEAR wallet or email to sign in and play a life recorded on NEAR. Turn it off to play as a guest.
+      </div>
+    </div>
   </div>;
 }

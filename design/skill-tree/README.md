@@ -19,4 +19,4 @@ Engine full-path tests cover the eight mastery endpoints with high-proficiency, 
 
 The current new-birth revision is `alexandria-figures-1`, which extends the retained deep-tree pack with eleven figure-linked development paths and earned titles. Build it with `node scripts/figures/build-world.mjs` after retaining `alexandria-deep-1`. The earlier builder still reproduces the unchanged deep-tree foundation.
 
-The integrated current free-play release is `alexandria-lives-6`, which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.
+The integrated current free-play release is `alexandria-lives-8` (the retained `alexandria-lives-6` is the same on lives-5), which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.

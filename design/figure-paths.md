@@ -1,4 +1,4 @@
-# Historical figure paths · alexandria-lives-6
+# Historical figure paths · alexandria-lives-8
 
 The new free-play revision connects all eleven agreed figures to the existing skill tree, authored work, replay-recorded achievements and earned special titles. Earlier free-play and ranked packs retain their original content. These paths do not alter deployed NFT contracts or the four legacy mintable figure IDs.
 
@@ -67,7 +67,7 @@ Final repository regression result: **1,565 passing / 1,584 total**, with the **
 
 ## Integration with current main
 
-The combined default is `alexandria-lives-6`, built from the unchanged official `alexandria-lives-5`. It retains the attribute atlas, military lane, life stages, district paths and NPC systems while adding the eleven historical paths. Official worlds 1–5 remain byte-for-byte unchanged. The independent 65-node proof engine is preserved under `src/deep-capabilities`, using `alexandria-deep-1` and `alexandria-figures-1`; it does not replace the official numeric capability engine.
+The combined default is `alexandria-lives-8`, built from the `alexandria-lives-7` rules (proof from work, market trade from age 10) by `node scripts/vocations/build-world.mjs`. The retained `alexandria-lives-6` carries the same paths on the unchanged official `alexandria-lives-5`. It retains the attribute atlas, military lane, life stages, district paths and NPC systems while adding the eleven historical paths. Official worlds 1–5 remain byte-for-byte unchanged. The independent 65-node proof engine is preserved under `src/deep-capabilities`, using `alexandria-deep-1` and `alexandria-figures-1`; it does not replace the official numeric capability engine.
 
 ## Integrated release validation
 

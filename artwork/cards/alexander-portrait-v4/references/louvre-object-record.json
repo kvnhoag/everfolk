@@ -1,0 +1,609 @@
+{
+  "arkId": "cl010277962",
+  "url": "https://collections.louvre.fr/ark:/53355/cl010277962",
+  "modified ": "2026-08-11",
+  "title": "Portrait en hermès d'Alexandre, dit \"Alexandre Azara\"",
+  "titleComplement": "",
+  "denominationTitle": [
+    {
+      "type": "Dénomination",
+      "value": "statue (fragment, tête)"
+    },
+    {
+      "type": "Titre",
+      "value": "Portrait en hermès d'Alexandre, dit \"Alexandre Azara\""
+    }
+  ],
+  "displayDateCreated": "Epoque / période : romain impérial\r\n\r\nDate de création/fabrication : 1e moitié Ie s. ap. J.-C. (1 - 50)",
+  "currentLocation": "Sully, [AGER] Salle 341 - Art grec classique et hellénistique (Grèce du Nord), Hors vitrine",
+  "room": "Salle 341, Aile Aile Sully, Niveau 0",
+  "isMuseesNationauxRecuperation": false,
+  "dateCreated": [
+    {
+      "startYear": 1,
+      "endYear": 50,
+      "imprecision": "",
+      "text": "1e moitié Ie s. ap. J.-C.",
+      "type": "Date de création/fabrication",
+      "doubt": ""
+    }
+  ],
+  "creator": [],
+  "objectNumber": [
+    {
+      "value": "MR 405",
+      "type": "Autre numéro d'inventaire"
+    },
+    {
+      "value": "N 1065",
+      "type": "Autre numéro d'inventaire"
+    },
+    {
+      "value": "Ma 436",
+      "type": "Numéro catalogue"
+    }
+  ],
+  "collection": "Département des Antiquités grecques, étrusques et romaines",
+  "printsDrawingsEntity": "",
+  "printsDrawingsCollection": "",
+  "objectType": "",
+  "originalObject": "Alexandre à la lance ; Lysippe ; 4e quart IVe s. av. J.-C.",
+  "printState": "",
+  "description": "Alexandre le Grand (portrait)\r\n\r\nEtat de l'oeuvre : Il manque la partie inférieure du pilier, qui a été retaillé, et la fin de l'inscription, ainsi que le nez, qui a été refait. Des éclats sur les sourcils et les lèvres ont été complétés. L'épiderme est usé.",
+  "inscriptions": "Inscription : \r ; 3 lignes gravées sur la face du pilier\r ; Langue : \r ; grecque\r ; Nature du texte : \r ; légende (contenu du texte->formule diverse)",
+  "namesAndTitles": "",
+  "onomastics": "Alexandre (fils de Philippe, macédonien)",
+  "dimension": [
+    {
+      "type": "Hauteur",
+      "value": "68",
+      "displayDimension": "68 cm",
+      "unit": "cm",
+      "anteriorPrecision": "",
+      "posteriorPrecision": "",
+      "tri": 1,
+      "note": ""
+    },
+    {
+      "type": "Largeur",
+      "value": "32",
+      "displayDimension": "32 cm",
+      "unit": "cm",
+      "anteriorPrecision": "",
+      "posteriorPrecision": "",
+      "tri": 2,
+      "note": ""
+    },
+    {
+      "type": "Epaisseur",
+      "value": "27",
+      "displayDimension": "27 cm",
+      "unit": "cm",
+      "anteriorPrecision": "",
+      "posteriorPrecision": "",
+      "tri": 3,
+      "note": ""
+    }
+  ],
+  "shape": "",
+  "materialsAndTechniques": "Matériau : marbre du Pentélique\r\nTechnique : ronde-bosse (sculpture)",
+  "placeOfCreation": "Italie",
+  "dateOfDiscovery": "1779",
+  "placeOfDiscovery": "Tivoli = Tibur - 1779 (villa des Pisons)",
+  "provenance": "",
+  "historicalContext": [],
+  "objectHistory": "",
+  "jabachInventory": "",
+  "napoleonInventory": "",
+  "previousOwner": [
+    {
+      "value": "Napoléon Ier",
+      "note": "",
+      "role": ""
+    },
+    {
+      "value": "M. Azara, José Nicolas de",
+      "note": "",
+      "role": ", Collectionneur"
+    }
+  ],
+  "acquisitionDetails": [
+    {
+      "mode": "don",
+      "doubt": "",
+      "dates": [
+        {
+          "type": "date d'arrivée au Musée",
+          "value": "1803",
+          "startYear": 1803,
+          "endYear": 1803
+        }
+      ]
+    }
+  ],
+  "ownedBy": "Etat",
+  "heldBy": "Musée du Louvre, Département des Antiquités grecques, étrusques et romaines",
+  "longTermLoanTo": "",
+  "index": {
+    "Mode d'acquisition": [
+      {
+        "value": "don"
+      }
+    ],
+    "denomination": [
+      {
+        "value": "statue"
+      },
+      {
+        "value": "fragment"
+      },
+      {
+        "value": "tête"
+      }
+    ],
+    "material": [
+      {
+        "value": "marbre du Pentélique"
+      }
+    ],
+    "technic": [
+      {
+        "value": "ronde-bosse"
+      }
+    ],
+    "description": [
+      {
+        "value": "portrait"
+      },
+      {
+        "value": "Alexandre le Grand"
+      }
+    ],
+    "inscriptionLanguage": [
+      {
+        "value": "grecque"
+      }
+    ],
+    "originalObject": [
+      {
+        "value": "Alexandre à la lance"
+      },
+      {
+        "value": "Lysippe"
+      },
+      {
+        "value": "4e quart IVe s. av. J.-C."
+      }
+    ],
+    "period": [
+      {
+        "value": "romain impérial"
+      }
+    ],
+    "place": [
+      {
+        "value": "Italie"
+      },
+      {
+        "value": "Tivoli = Tibur"
+      }
+    ],
+    "inscriptionType": [
+      {
+        "value": "légende"
+      }
+    ]
+  },
+  "bibliography": [
+    {
+      "bibliographyRef": "Laugier, Ludovic ; Szewczyk, Martin, Visages. L'art du portrait grec et romain dans les collections du Louvre, Paris, Editions El Viso, 2025",
+      "bibliographyDate": "2025",
+      "bibliographyDetail": "p. 92-98, 115-116, 120, p 97, n°35",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Lambraki-Plaka, Marina ; Laugier, Ludovic ; Fabre, Côme (dir.), A la recherche de l'immortalité : l'art du portrait dans les collections du Louvre, cat. exp. (Athènes, Pinacothèque Nationale, Musée Alexandros Soutzos, 29/11/2021 - 28/03/2022), Athènes, 2021",
+      "bibliographyDate": "2021",
+      "bibliographyDetail": "p. 17, 19, 86, ill. p. 87, n° 18",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Kallos. The Ultimate Beauty, cat. exp. (Musée d'art cycladique, Athènes, du 29 septembre 2021 au 16 janvier 2022), Athènes, 2021",
+      "bibliographyDate": "2021",
+      "bibliographyDetail": "p. 246, 247, fig. 3",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Boschung, Dietrich, Effigies. Ancient Portraiture as Figuration of the Particular, Paderborn, Wilhelm Fink, 2021",
+      "bibliographyDate": "2021",
+      "bibliographyDetail": "p. 149, fig. 81 a-b",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Queyrel, François, La sculpture hellénistique, 2, Royaumes et cités, Paris, Hermann Editeurs, 2020",
+      "bibliographyDate": "2020",
+      "bibliographyDetail": "p. 21-22, 169",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "L'art du portrait dans les collections du Louvre, cat. exp. (Tokyo (Externe, Japon), National Art Center, 2018 ; Osaka (Externe, Japon), Osaka City Museum of Fine Arts, 2018), Tokyo, Nippon Television Network Corporation, 2018",
+      "bibliographyDate": "2018",
+      "bibliographyDetail": "p. 64 (vol. 1) ; 36 (vol. 2), ill. p. 64, n° 29",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Azoulay, Vincent ; Hoff, Ralf von den, « Chapitre VI Dissémination : statues-portraits multiples et diffusion sur d'autres médias », dans Queyrel, François ; Hoff, Ralf von den (dir.), La vie des portraits grecs. Statues-portraits du Ve au Ier siècle av. J.-C. Usages et re-contextualisations, Paris, Hermann, 2017",
+      "bibliographyDate": "2017",
+      "bibliographyDetail": "p. 164-165, fig. 44",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Boschung, Dietrich, « Porträt der späten römischen Republik als Mittel innenpolitischer Konkurrenz », dans Boschung, Dietrich ; Queyrel, François (dir.), Bilder der Macht : das griechische Porträt und seine Verwendung in der antiken Welt, Paderborn, Wilhelm Fink, 2017, pp. 433-448",
+      "bibliographyDate": "2017",
+      "bibliographyDetail": "p. 443, fig. 12",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Corps et âmes : sculpter l'homme et les dieux dans l'Antiquité, cat. exp. (Jublains (France, Mayenne), musée archéologique départemental, 6 juin 2015-31 mars 2016), Gand, Snoeck, 2015",
+      "bibliographyDate": "2015",
+      "bibliographyDetail": "p. 61, 63, fig. 3",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Callataÿ, François de, « L'abbé Leblond (1738-1809) numismate à la lumière de sa correspondance avec Joseph Eckhel », Comptes rendus des séances de l'Académie des Inscriptions et Belles-Lettres (CRAI), 157, 1, 2013, p. 193-230, Disponible sur : &lt;https://doi.org/10.3406/crai.2013.95306&gt; ",
+      "bibliographyDate": "2013",
+      "bibliographyDetail": "p. 206-207, fig. 8",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Descamps-Lequime, Sophie (dir.), Au royaume d'Alexandre le Grand : la Macédoine antique, cat. exp. (Paris, Musée du Louvre, 13 octobre 2011-16 janvier 2012), Paris, Louvre éditions / Somogy, 2011",
+      "bibliographyDate": "2011",
+      "bibliographyDetail": "p. 646-647, pl. p. 646, n° 411",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Holtzmann, Bernard, La sculpture grecque, Paris, Librairie Générale Française, (Le livre de poche, références), 2010",
+      "bibliographyDate": "2010",
+      "bibliographyDetail": "p. 266, n° 76",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Pasquier, Alain ; Martinez, Jean-Luc, 100 chefs-d'oeuvre de la sculpture grecque au Louvre : Musée du Louvre, Département des antiquités grecques, étrusques et romaines, Paris, Louvre éditions / Somogy, 2007",
+      "bibliographyDate": "2007",
+      "bibliographyDetail": "p. 196",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Reinsberg, Carola, « Alexanderbilder in Ägypten », dans Fremdheit - Eigenheit : Ägypten, Griechenland und Rom ; Austausch und Verständnis ; [Symposion des Liebieghauses, Frankfurt am Main vom 28. - 30. November 2002 und 16. - 19. Januar 2003], Stuttgart, Scheufele, 2004, p. 319-340",
+      "bibliographyDate": "2004",
+      "bibliographyDetail": "p. 328-332, ill. 11-12",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Martinez, Jean-Luc, Les antiques du Musée Napoléon. Edition illustrée et commentée des volumes V et VI de l'inventaire du Louvre en 1810, Paris, RMN, 2004",
+      "bibliographyDate": "2004",
+      "bibliographyDetail": "p. 239-240, n° 0441",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Lorenz, Thuri, « Von Alexander dem Grossen zu Mithridates. », Jahreshefte des Österreichischen archäologischen Institutes in Wien, 70, 2001, p. 65-79",
+      "bibliographyDate": "2001",
+      "bibliographyDetail": "p. 71-72, fig. 11",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Dupuy, Marie-Anne (dir.), Dominique–Vivant Denon. L’œil de Napoléon, cat. exp. (Paris, musée du Louvre, 20 octobre 1999 - 17 janvier 2000), Paris, Réunion des musées nationaux, 1999",
+      "bibliographyDate": "1999",
+      "bibliographyDetail": "p. 196, 197, n° 191",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Rolley, Claude, La sculpture grecque. 2. La période classique, Paris, Picard, (\tLes Manuels d'art et d'archéologie antiques), 1999",
+      "bibliographyDate": "1999",
+      "bibliographyDetail": "p. 352, 353, fig. 365",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Reinsberg, Carola, « Alexanderbilder in Ägypten », dans Bol, Peter Cornelis ; Kaminski, Gabriele ; Maderna, Caterina (dir.), Fremdheit - Eigenheit. Ägypten, Griechenland und Rom. Austausch und Verständnis, 1993,",
+      "bibliographyDate": "1993",
+      "bibliographyDetail": "p. 328-332, fig. 11, 12",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Stewart, Andrew F., Faces of power : Alexander's image and Hellenistic politics, Berkeley, Los Angeles, Oxford, University of California Press, (Hellenistic culture and society, 11), 1993",
+      "bibliographyDate": "1993",
+      "bibliographyDetail": "p. 165, 171, 423, fig. 45, 46, n° 1",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Nielsen, Anne Marie, « The mirage of Alexander : a minimalist view », dans Carlsen, Jesper (dir.), Alexander the Great : reality and myth., Roma, L'Erma di Bretschneider, 1993, p. 137-144",
+      "bibliographyDate": "1993",
+      "bibliographyDetail": "p. 138, 139, fig. 1",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Todisco, Luigi, Scultura greca del IV secolo : maestri e scuole di statuaria tra classicità ed ellenismo, 1993",
+      "bibliographyDate": "1993",
+      "bibliographyDetail": "p. 120, fig. 258",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Bernus-Taylor, Marthe (dir.), Portraits du Louvre, choix d'oeuvres dans les collections du Louvre, Le portrait dans la civilisation islamique, cat. exp. (Tokyo, Musée d'art occidental, du 18 septembre au 1er décembre 1991), Paris / Tokyo, RMN ; Asahi Shimbun, 1991",
+      "bibliographyDate": "1991",
+      "bibliographyDetail": "p. 79, n° 26",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Ridgway, Brunilde Sismondo, Hellenistic sculpture, 1, The styles of ca. 331-200 B. C., 1990",
+      "bibliographyDate": "1990",
+      "bibliographyDetail": "p. 123 n. 31, 144",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Neudecker, Richard, Die Skulpturenausstattung römischer Villen in Italien, Mainz am Rhein, Ph. von Zabern, 1988",
+      "bibliographyDate": "1988",
+      "bibliographyDetail": "p. 227, n° 64, 13",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Smith, Roland R. R., Hellenistic royal portraits, Oxford, Clarendon Press, (Oxford monographs on classical archaeology), 1988",
+      "bibliographyDate": "1988",
+      "bibliographyDetail": "p. 155, pl. 1, fig. 1-3, n° 1A",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Pollitt, Jerome Jordan, Art in the Hellenistic age, Cambridge / New York, Cambridge University Press, 1986",
+      "bibliographyDate": "1986",
+      "bibliographyDetail": "p. 21, fig. 7",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "The search for Alexander, cat. exp. (Washington, 16 novembre 1980 - 5 avril 1981 ; Chicago, 14 mai - 7 septembre 1981 ; Boston, 23 octobre 1981 - 10 janvier 1982 ; San Francisco, 19 février - 16 mai 1982), Boston, New York Graphic Society, 1980",
+      "bibliographyDate": "1980",
+      "bibliographyDetail": "p. 99-100, n° 3",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Hekler, Antal, Greek & Roman portraits, 1972",
+      "bibliographyDate": "1972",
+      "bibliographyDetail": "p. 16, pl. 62, B",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Hirmer, Max (dir.), Fuchs, Werner, Die Skulptur der Griechen, 1969",
+      "bibliographyDate": "1969",
+      "bibliographyDetail": "p. 566, 567",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Richter, Gisela Maria Augusta, The portraits of the Greeks, 3, The Hellenistic rulers. Greeks of the Roman period. Bibliography, Londres, Phaidon Press, 1965",
+      "bibliographyDate": "1965",
+      "bibliographyDetail": "p. 255, fig. 1733-1735, n° 1A",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Picard, Charles, Manuel d'archéologie grecque : la sculpture, IV.2, Période classique- IVème siècle, Paris, A. et J. Picard, 1963",
+      "bibliographyDate": "1963",
+      "bibliographyDetail": "p. 729-733, pl. 18, fig. 307",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Charbonneaux, Jean, La sculpture grecque et romaine au Musée du Louvre, 3, Paris, Editions des Musées nationaux, (Collection des Guides du visiteur), 1963",
+      "bibliographyDate": "1963",
+      "bibliographyDetail": "p. 54",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Bieber, Margarete, The Sculpture of the Hellenistic Age, New York, Columbia University Press, 1955",
+      "bibliographyDate": "1955",
+      "bibliographyDetail": "p. 48",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Otto, Walter (dir.), Lippold, Georg, Handbuch der Archäologie im Rahmen des Handbuchs der Altertumswissenschaft. III.1. Die griechische Plastik, Münich, C.H. Beck'sche Verlag, 1950",
+      "bibliographyDate": "1950",
+      "bibliographyDetail": "p. 268, pl. 97.1",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Bieber, Margarete, « Portraits of Alexander the Great », PAPHS, 1949",
+      "bibliographyDate": "1949",
+      "bibliographyDetail": "p. 382, fig. 13-18",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Coche de la Ferté, Etienne, La sculpture grecque et romaine au musée du Louvre : guide du visiteur, Paris, Editions des Musées Nationaux, 1947",
+      "bibliographyDate": "1947",
+      "bibliographyDetail": "p. 32-33, fig. p. 31",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Laurenzi, Luciano, Ritratti greci, 1941",
+      "bibliographyDate": "1941",
+      "bibliographyDetail": "p. 103-104, pl. 14, n° 38",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Johnson, Franklin P., Lysippos, Durham (North Carolina), Duke University Press, 1927",
+      "bibliographyDate": "1927",
+      "bibliographyDetail": "p. 213-216, pl. 43, 44",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Michon, Étienne, « L'Hermès d'Alexandre dit Hermès Azara », Revue archéologique, 7, 1906, p. 79-110",
+      "bibliographyDate": "1906",
+      "bibliographyDetail": "p. 79-110",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Bernoulli, Johann Jacob, Die erhaltenen Darstellungen Alexanders des Grossen : ein Nachtrag zur griechischen Ikonographie, München, F. Bruckmann, 1905, Disponible sur : &lt;https://doi.org/10.11588/diglit.1010&gt; ",
+      "bibliographyDate": "1905",
+      "bibliographyDetail": "p. 21-27, 96, fig. 1, pl. 1, n° K53",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Collignon, Maxime, Lysippe. Études critiques. Les grands artistes, leur vie, leur oeuvre, Paris, librairie Renouard : Henri Laurens, éditeur, 1905",
+      "bibliographyDate": "1905",
+      "bibliographyDetail": "p. 43-47, fig. 9",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Ujfalvy, Károly Jenő, Le type physique d'Alexandre le Grand d'après les auteurs anciens et les documents iconographiques, 1902",
+      "bibliographyDate": "1902",
+      "bibliographyDetail": "p. 77-83, pl. 2, 8, 9",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Fröhner, Wilhelm, Les inscriptions grecques [Musée du Louvre/Département des antiques et de la sculpture moderne], Paris, Charles de Mourgues frères, 1865, Disponible sur : &lt;https://gallica.bnf.fr/ark:/12148/bpt6k6412730m&gt;",
+      "bibliographyDate": "1865",
+      "bibliographyDetail": "p. 156-157, n° 71",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Clarac (de), Frédéric, Musée de sculpture antique et moderne. Planches, 6, Paris, Victor Texier, 1853, Disponible sur : &lt;https://gallica.bnf.fr/ark:/12148/btv1b8626334s/f343.item&gt; ",
+      "bibliographyDate": "1853",
+      "bibliographyDetail": "pl. 1071",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Clarac (de), Frédéric, Musée de sculpture antique et moderne. Texte, 6, Paris, Imprimerie nationale, 1853, Disponible sur : &lt;https://gallica.bnf.fr/ark:/12148/btv1b86263304/f397.item&gt; ",
+      "bibliographyDate": "1853",
+      "bibliographyDetail": "p. 62, n° 2958A",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Clarac (de), Frédéric, Description du musée royal des antiques du Louvre, Paris, Vinchon, 1830, Disponible sur : &lt;https://gallica.bnf.fr/ark:/12148/bpt6k6552349p&gt; ",
+      "bibliographyDate": "1830",
+      "bibliographyDetail": "p. 112, n° 132",
+      "comparison": false
+    },
+    {
+      "bibliographyRef": "Winckelmann, Johann Joachim, Histoire de l'art chez les Anciens, 3 vol., Paris, 1766",
+      "bibliographyDate": "1766",
+      "bibliographyDetail": "p. 286-289, 305, pl. 4, n° 1",
+      "comparison": false
+    }
+  ],
+  "exhibition": [
+    {
+      "value": "Visages. L'art du portrait grec et romain dans les collections du musée du Louvre, Rodez (Externe, France), Musée Fenaille, 07/06/2025 - 02/11/2025 "
+    },
+    {
+      "value": "Alexander the Great : Conquests and Wonders, Naples (Externe, Italie), Museo Archeologico Nazionale, 25/05/2023 - 28/08/2023 "
+    },
+    {
+      "value": "L' Art du portrait dans les collections du Louvre, Athènes (Externe, Grèce), Pinacothèque Nationale, Musée Alexandros Soutzos, 01/12/2021 - 28/03/2022 "
+    },
+    {
+      "value": "L'art du portrait dans les collections du musée du Louvre, Osaka (Externe, Japon), Osaka City Museum of Fine Arts, 22/09/2018 - 14/01/2019, étape d'une exposition itinérante "
+    },
+    {
+      "value": "L'art du portrait dans les collections du musée du Louvre, Tokyo (Externe, Japon), National Art Center, 30/05/2018 - 03/09/2018, étape d'une exposition itinérante "
+    },
+    {
+      "value": "Trésors du Louvre : les arts de la Grèce classique, Macao (Externe, Chine), Macao Museum of Art, 11/04/2008 - 16/07/2008, étape d'une exposition itinérante "
+    },
+    {
+      "value": "Trésors du Louvre : les arts de la Grèce classique, Singapour (Externe, Singapour), National museum of Singapore, 07/12/2007 - 16/03/2008, étape d'une exposition itinérante "
+    },
+    {
+      "value": "Trésors du Louvre : les arts de la Grèce classique, Pékin (Externe, Chine), Musée national de Chine, 11/08/2007 - 09/11/2007, étape d'une exposition itinérante "
+    },
+    {
+      "value": "La Grèce classique au Louvre, Kyoto (Externe, Japon), Municipal Museum of Art, 04/09/2006 - 05/11/2006, étape d'une exposition itinérante "
+    },
+    {
+      "value": "La Grèce classique au Louvre, Tokyo (Externe, Japon), National Museum, 16/06/2006 - 20/08/2006, étape d'une exposition itinérante "
+    },
+    {
+      "value": "Alexander the Great, Kobé (Externe, Japon), Hyogo Prefectural Museum of Art, 18/10/2003 - 22/12/2003 "
+    }
+  ],
+  "relatedWork": [],
+  "image": [
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001132522_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001132522_OG.JPG",
+      "copyright": "© GrandPalaisRmn (musée du Louvre) / Hervé Lewandowski",
+      "type": "",
+      "position": 0
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079045_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079045_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 1
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079046_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079046_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 2
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079047_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079047_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 3
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079048_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079048_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 4
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079049_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079049_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 5
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001079050_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0001079050_OG.JPG",
+      "copyright": "© 2021 Musée du Louvre, Dist. GrandPalaisRmn / Hervé Lewandowski",
+      "type": "",
+      "position": 6
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0000632015_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0000632015_OG.JPG",
+      "copyright": "© 2006 Musée du Louvre, Dist. GrandPalaisRmn / Daniel Lebée/Carine Deambrosis",
+      "type": "",
+      "position": 7
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0000631876_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0000631876_OG.JPG",
+      "copyright": "© 1972 Musée du Louvre, Dist. GrandPalaisRmn / Maurice et Pierre Chuzeville",
+      "type": "",
+      "position": 8
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0000631866_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0000631866_OG.JPG",
+      "copyright": "© 1970 Musée du Louvre, Dist. GrandPalaisRmn / Maurice et Pierre Chuzeville",
+      "type": "",
+      "position": 9
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0000631867_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0000631867_OG.JPG",
+      "copyright": "© 1970 Musée du Louvre, Dist. GrandPalaisRmn / Maurice et Pierre Chuzeville",
+      "type": "",
+      "position": 10
+    },
+    {
+      "urlImage": "https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0000631936_OG.JPG",
+      "urlThumbnail": "https://collections.louvre.fr/media/cache/small/0000000021/0000277962/0000631936_OG.JPG",
+      "copyright": "© Musée du Louvre, Dist. GrandPalaisRmn / Maurice et Pierre Chuzeville",
+      "type": "",
+      "position": 11
+    }
+  ]
+}

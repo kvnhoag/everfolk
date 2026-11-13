@@ -2,7 +2,7 @@ import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
 import FigurePaths from "./FigurePaths.tsx";
 import { vocationInventory } from "../../src/vocations/view.ts";
 import { displayProse } from "../models/display-prose.ts";
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../../src/types.ts";
 import { activityPartnerIds } from "../../src/character.ts";
@@ -10,11 +10,15 @@ import { getSkillImpact } from "../models/skill-impact.ts";
 import { engineForLife } from "../lib/world-session.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import ChoiceImpact from "./ChoiceImpact.tsx";
-import CompactSkillPanel from "./CompactSkillPanel.tsx";
-import CareerEconomyTree from "./CareerEconomyTree.tsx";
 import CapabilityTree from "./CapabilityTree.tsx";
 import WealthPanel from "./WealthPanel.tsx";
+import RoyalCouncil from "./RoyalCouncil.tsx";
+import AristocratEstate from "./AristocratEstate.tsx";
+import { isRoyalLife } from "../../src/royalty.ts";
+import { isAristocratLife, isPrivilegedLife } from "../../src/aristocracy.ts";
+import { personPortraitState } from "../models/portrait-state.ts";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
+import CompactSkillPanel from "./CompactSkillPanel.tsx";
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { careerOpeningNotes } from "../models/career-openings.ts";
 import { occupationBadge } from "../demo/screen.ts";
@@ -25,6 +29,7 @@ import PixelPortrait from "./PixelPortrait.tsx";
 import { relationshipLabels, romanticPartnerLabel, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { familyRelationshipRows, socialRelationshipRows } from "../models/relationship-table.ts";
 import RelationshipTable from "./RelationshipTable.tsx";
+import SectionHelp from "./SectionHelp.tsx";
 import "../styles/birth-avatar.css";
 import "../styles/social-relationships.css";
 import type { CharacterSection } from "../models/character-panel-model.ts";
@@ -134,10 +139,13 @@ function SearchControls({ id, label, placeholder, value, onChange, filter, onFil
 }
 
 /** Personal actions share the simulation's yearly budget and command history. */
-export default function CharacterPanel({ life, world, onActivity, onMarketOrder, onCancelMarketOrder, initialSection = "career" }: {
-  life: LifeState; world: WorldPack; onActivity: (id: string) => void; initialSection?: Section;
+export default function CharacterPanel({ life, world, onActivity, onAssess, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange }: {
+  life: LifeState; world: WorldPack; onActivity: (id: string, options?: { calendarDeadline?: boolean }) => void; onAssess?: (nodeId: string, jobIds: readonly string[]) => void; initialSection?: Section;
+  /** Reports the open tab, so tutorial hints know when the skill tree is on screen. */
+  onSectionChange?: (section: Section) => void;
 } & MarketActions) {
   const [section, setSection] = useState<Section>(initialSection);
+  useEffect(() => { onSectionChange?.(section); }, [section]); // eslint-disable-line react-hooks/exhaustive-deps
   const [jobSearch, setJobSearch] = useState("");
   const [jobAvailability, setJobAvailability] = useState<AvailabilityFilter>("all");
   const [relationshipFilter, setRelationshipFilter] = useState<RelationshipFilter>("all");
@@ -159,8 +167,11 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
   const knownPartners = visibleRelationshipPeople(world, life);
   const visiblePeopleIds = new Set(knownPartners.map(person => person.id));
   const hasRelationships = definition.proceduralPartners ? knownPartners.length > 0 : !definition.requireIntroductions || knownPartners.length > 0;
+  const royal = isRoyalLife(world, life);
+  const aristocrat = isAristocratLife(world, life);
+  const privileged = isPrivilegedLife(world, life);
   const visibleSections = visibleCharacterSections(life, world, hasRelationships);
-  const activeSection = visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
+  const activeSection = privileged && section === "career" ? "wealth" : visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
   // Keep undiscovered people out of the DOM as well as the visible cards.
   const activities = allActivities.filter(activity => activityPartnerIds(activity).every(knowsPartner));
   const currentJob = definition.jobs.find(job => job.id === character.jobId);
@@ -226,7 +237,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
     tabRefs.current[visibleSections[next].id]?.focus();
   }
 
-  return <div className="character-management">
+  // On the Skills tab the tree gets the whole window; health, background and the yearly budget show on the other tabs.
+  return <div className={`character-management${activeSection === "skills" ? " is-skills" : ""}`}>
     <LifeHealthPanel {...props} compact />
     {origin && <details className="character-background"><summary><span>Background</span><strong>{origin.title}</strong></summary><div><span className="character-background-name">{character.name ?? "Damon"}</span><p>{displayProse(origin.text)}</p></div></details>}
     <div className={`character-activity-status${hasActivity ? " activity-spent" : ""}`}>
@@ -234,11 +246,13 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       <p>{budget}</p>
     </div>
     {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{displayProse(recentOutcome)}</p></div>}
-    <div className="character-tabs" role="tablist" aria-label="Life management sections">
+    <div className="character-tabs has-section-help" role="tablist" aria-label="Life management sections">
       {visibleSections.map((item, index) => <button type="button" role="tab" id={`${instanceId}-tab-${item.id}`} aria-selected={activeSection === item.id} aria-controls={`${instanceId}-panel-${item.id}`} tabIndex={activeSection === item.id ? 0 : -1} key={item.id} ref={element => { tabRefs.current[item.id] = element; }} onKeyDown={event => navigateTabs(event, index)} onClick={() => setSection(item.id)}>{item.label}</button>)}
+      <SectionHelp hint="character" />
     </div>
     <div className="character-sections">
       {visibleSections.some(item => item.id === "career") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-career`} aria-labelledby={`${instanceId}-tab-career`} tabIndex={0} hidden={activeSection !== "career"}>
+        <CompactSkillPanel life={life} world={world} activities={activities} />
         <div className="character-section-heading"><span>Career</span><h3>{currentJob?.title ?? "Unemployed"}</h3><p>{displayProse(currentJob?.description ?? "Find work that matches your skills.")}</p></div>
         {life.vocations && <details className="character-background"><summary>Materials and handmade products</summary>
           {Object.values(vocationInventory(life)).some(n => n > 0) ? <ul>{["linen", "flax"].filter(id => (vocationInventory(life)[id] ?? 0) > 0).map(id => <li key={id}>{id} · {vocationInventory(life)[id]}</li>)}{life.vocations.lots.filter(lot => lot.quantity > 0).map(lot => <li key={`${lot.item}-${lot.quality}`}>{lot.item.replaceAll("-", " ")} · {lot.quantity}{world.vocations?.materials[lot.item] ? "" : ` · grade ${lot.quality}`}</li>)}</ul> : <p>No materials or products yet. Buy materials or start a paid apprenticeship under Other work.</p>}
@@ -270,12 +284,10 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         <ActivityList activities={visibleOtherCareer} {...props} />
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
-      <div className="character-section" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
-        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} />}
-        <details className="capability-legacy-reference"><summary>Proficiency &amp; occupation reference</summary>
-          <CompactSkillPanel activities={activities} {...props} />
-          <CareerEconomyTree activities={activities} {...props} />
-        </details>
+      <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
+        <SectionHelp hint="skills" />
+        {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
+        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} />}
       </div>
       {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
         {activeSection === "figures" && <FigurePaths activities={activities} {...props} />}
@@ -283,8 +295,8 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />
       </div>}
-      {world.economy && life.economy && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
-        <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />
+      {(privileged || world.economy && life.economy) && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-wealth`} aria-labelledby={`${instanceId}-tab-wealth`} tabIndex={0} hidden={activeSection !== "wealth"}>
+        {royal ? <RoyalCouncil activities={activities} {...props} /> : aristocrat ? <AristocratEstate activities={activities} {...props} /> : <WealthPanel activities={activities} {...props} onMarketOrder={onMarketOrder} onCancelMarketOrder={onCancelMarketOrder} />}
       </div>}
       {visibleSections.some(item => item.id === "relationships") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-relationships`} aria-labelledby={`${instanceId}-tab-relationships`} tabIndex={0} hidden={activeSection !== "relationships"}>
         <div className="character-section-heading"><span>Relationships</span><h3>{currentRomanceLabel && currentPartner ? `${currentRomanceLabel}: ${currentPartner.name}` : definition.socialRelationships ? "People in your life" : character.relationshipStatus === "divorced" ? "Divorced" : "Single"}</h3><p>{definition.extendedSocialRoles ? "Keep track of friends, teachers, disciples, enemies and the people you love or work with." : definition.socialRelationships ? "Spend time with friends, work with business partners and care for your close relationships." : character.relationshipStatus === "married" ? "Spend time with your spouse or manage your marriage." : character.relationshipStatus === "courting" ? hasBreakupAction ? "Spend time together, propose marriage or end the courtship." : "Spend time together or propose marriage." : "Get to know the people you meet."}</p></div>
@@ -292,7 +304,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
         <RelationshipTable rows={socialRows} world={world} caption="Social relationships" emptyText={adults.length === 0 ? "No social relationships recorded yet. People appear here as friendships, romances and other relationships form." : "No relationships in this group yet."} />
         {shownPeople.length > 0 && <h4 className="relationship-actions-title">Relationship activities</h4>}
         <div className="character-card-list">{shownPeople.map(partner => <article className={`character-detail-card${partner.id === character.partnerId && character.relationshipStatus !== "divorced" ? " current-character-card" : ""}`} key={partner.id}>
-          {"sex" in partner && <PixelPortrait age={life.age + partner.ageOffset} name={partner.name} sex={partner.sex} originId={partner.originId} avatarVariant={partner.avatarVariant} seed={`${life.seed}:${partner.id}`} className="character-person-avatar" />}
+          <PixelPortrait portrait={personPortraitState(world, life, partner)} name={partner.name} className="character-person-avatar" />
           <div className="character-card-heading"><h4>{partner.name}</h4><div className="relationship-tags" aria-label={`Relationship with ${partner.name}`}>{relationshipLabels(world, life, partner.id).length ? relationshipLabels(world, life, partner.id).map(label => <span className="character-status-tag" key={label}>{label}</span>) : <span className="character-status-tag">Contact</span>}</div></div>
           <span className="character-person-meta">Age {life.age + partner.ageOffset} · {partner.occupation}</span><p>{displayProse(partner.description)}</p>
           {character.relationships?.partners[partner.id] && <Closeness lastContactAge={character.relationships.partners[partner.id].lastContactAge} world={world} value={character.relationships.partners[partner.id].closeness} />}

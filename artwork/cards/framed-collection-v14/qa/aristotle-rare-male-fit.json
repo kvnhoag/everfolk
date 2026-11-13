@@ -1,0 +1,81 @@
+{
+  "figureId": "aristotle",
+  "figureName": "Aristotle",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Lyceum Researcher",
+  "displayTitle": "Lyceum Researcher",
+  "subtitle": "Student of Aristotle",
+  "bodyTitle": "Evidence Before Assent",
+  "bodyText": "A researcher gathers observations and compares the accounts of others, bringing particulars before the school. Patient investigation strengthens the argument, ensuring that confident words remain answerable to the world they describe.",
+  "sourceRoleSlug": "aristotle-rare",
+  "newArt": false,
+  "slug": "aristotle-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Lyceum Researcher",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-rare-male-pixel.png",
+  "sourceArtSlug": "aristotle-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 15,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/aristotle.svg",
+    "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A researcher gathers observations and compares the accounts",
+    "of others, bringing particulars before the school. Patient",
+    "investigation strengthens the argument, ensuring that",
+    "confident words remain answerable to the world they",
+    "describe."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-rare-male.svg",
+  "fittedArt": "assets/fitted/aristotle-rare-male.png",
+  "overlaySvg": "source/overlays/aristotle-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+  "master": "masters/aristotle-rare-male.vectorcraft",
+  "export": "exports/aristotle-rare-male.png",
+  "thumbnail": "assets/aristotle-rare-male-thumb.png",
+  "exportSha256": "003ef41baa424423db386d80d4832ab86508b760e8f2f40d71a432fa13368f3e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 581990,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

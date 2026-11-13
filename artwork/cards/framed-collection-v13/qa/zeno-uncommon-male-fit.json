@@ -1,0 +1,60 @@
+{
+  "slug": "zeno-uncommon-male",
+  "figureId": "zeno",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Student of the Stoa",
+  "subtitle": "Zeno of Citium",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 58,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-uncommon-male.svg",
+  "fittedArt": "assets/fitted/zeno-uncommon-male.png",
+  "overlaySvg": "source/overlays/zeno-uncommon-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "08b1c06307efe6dc18a60b9aabac689adc94a8d8b0ccc6b272d3d80062388b08",
+  "master": "masters/zeno-uncommon-male.vectorcraft",
+  "export": "exports/zeno-uncommon-male.png",
+  "thumbnail": "assets/zeno-uncommon-male-thumb.png",
+  "exportSha256": "1e89f32b2bd789809a0625008c750afad43674295a25693095f9a3a2ec539d52",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

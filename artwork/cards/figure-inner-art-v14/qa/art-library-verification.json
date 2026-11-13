@@ -1,0 +1,698 @@
+{
+  "verifiedAt": "2026-11-13T14:08:26.279Z",
+  "libraryId": "everfolk-figure-inner-art-v14",
+  "passed": true,
+  "complete": true,
+  "counts": {
+    "assets": 34,
+    "expected": 34,
+    "rolePairs": 17,
+    "expectedRolePairs": 17,
+    "male": 17,
+    "female": 17
+  },
+  "pending": [],
+  "failures": [],
+  "checks": [
+    {
+      "slug": "alexander-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "alexander-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "aristotle-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "aristotle-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "euclid-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "euclid-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "lysippos-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "lysippos-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "pytheas-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "pytheas-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "menander-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "menander-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": true
+    },
+    {
+      "slug": "demetrius-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "demetrius-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "theophrastus-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "theophrastus-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "zeno-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "zeno-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "ptolemy-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "ptolemy-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "cleomenes-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "cleomenes-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-uncommon-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-uncommon-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-rare-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "nearchus-rare-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-common-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-common-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-uncommon-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-uncommon-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-rare-male",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    },
+    {
+      "slug": "eumenes-rare-female",
+      "passed": true,
+      "sourceSize": [
+        1122,
+        1402
+      ],
+      "finalSize": [
+        840,
+        1050
+      ],
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "coarseHashMatches": true,
+      "qaMetadataHashMatches": true,
+      "faceConfigPresent": true,
+      "outsideMaskChangedPixels": 0,
+      "selectedDetailDifferingPixels": 0,
+      "actualAngleRecorded": false
+    }
+  ]
+}

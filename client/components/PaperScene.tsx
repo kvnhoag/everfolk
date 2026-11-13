@@ -29,8 +29,8 @@ function PixelAtmosphere({ motion, front = false, water = false }: { motion: Mot
   </svg>;
 }
 
-export default function PaperScene({ life, compact, world = engineForLife(life).world, eventVisuals, paused = false, birthReveal = false, dashboard = false }: {
-  life: LifeState; compact: boolean; world?: WorldPack; eventVisuals?: EventVisuals; paused?: boolean; birthReveal?: boolean; dashboard?: boolean;
+export default function PaperScene({ life, compact, world = engineForLife(life).world, eventVisuals, paused = false, birthReveal = false, dashboard = false, persistentPreferences = true }: {
+  life: LifeState; compact: boolean; world?: WorldPack; eventVisuals?: EventVisuals; paused?: boolean; birthReveal?: boolean; dashboard?: boolean; persistentPreferences?: boolean;
 }) {
   const contexts = useMemo(() => {
     // Pending questions belong to the decision dialog. The dashboard scene
@@ -41,7 +41,7 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   const primaryKey = contexts[0]?.key;
   const [selectedKey, setSelectedKey] = useState(primaryKey);
   const scene = contexts.find(context => context.key === selectedKey) ?? contexts[0];
-  const [motionEnabled, setMotionEnabled] = useState(() => { try { return readEverfolkStorage(window.localStorage, MOTION_KEY) !== "off"; } catch { return true; } });
+  const [motionEnabled, setMotionEnabled] = useState(() => { if (!persistentPreferences) return true; try { return readEverfolkStorage(window.localStorage, MOTION_KEY) !== "off"; } catch { return true; } });
   const [reducedMotion, setReducedMotion] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [visible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [inView, setInView] = useState(true);
@@ -67,12 +67,12 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   const toggleMotion = () => {
     const next = !motionEnabled;
     setMotionEnabled(next);
-    try { window.localStorage.setItem(MOTION_KEY, next ? "on" : "off"); } catch { /* The control still works for this visit. */ }
+    if (persistentPreferences) try { window.localStorage.setItem(MOTION_KEY, next ? "on" : "off"); } catch { /* The control still works for this visit. */ }
   };
 
   return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-motion={banner.motion} data-motion-state={motionState}>
     <div className="paper-scene-copy" hidden={dashboard}><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
-    <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.situation}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
+    <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.assetSrc}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
       <img className="life-banner-background" src={banner.assetSrc} alt="" width={240} height={112} fetchPriority="high" />
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
       {actorSrc && <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}><img src={actorSrc} alt="" width={240} height={112} /></div>}

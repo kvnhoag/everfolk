@@ -2,10 +2,16 @@ import { birthYearOf } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
 import { contentFingerprint } from "../../src/random.ts";
 import type { ArchivedLife, StorageLike } from "../types/session.ts";
-import { ARCHIVE_KEY, ARCHIVE_LIMIT, engineForLife, exportLife, presentationKeyFor, sampleEngine, saveKeyFor } from "../lib/world-session.ts";
-import { getNetWorth } from "../../src/economy.ts";
-import { recordWealthObservation } from "../models/society-wealth-data.ts";
-import { readArchivedLives } from "../queries/lives.ts";
+import { ARCHIVE_KEY, ARCHIVE_LIMIT, WEALTH_OBSERVATIONS_KEY, engineForLife, exportLife, presentationKeyFor, sampleEngine, saveKeyFor } from "../lib/world-session.ts";
+import { getAssetValue } from "../../src/economy.ts";
+import {
+  exportWealthObservationsSnapshot,
+  getRecordedWealthObservations,
+  hydrateWealthObservations,
+  recordedLifeIdentity,
+  recordWealthObservation,
+} from "../models/society-wealth-data.ts";
+import { readArchivedLives, readWealthObservations } from "../queries/lives.ts";
 
 export function newLifeSeed(): string {
   return typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
@@ -81,9 +87,34 @@ export function archiveLife(storage: StorageLike, life: LifeState): ArchivedLife
   try { storage.setItem(ARCHIVE_KEY, JSON.stringify(entries)); }
   catch { throw new Error("This life could not be added to the local archive. You can still download it."); }
   try {
-    if (world.economy && life.economy) {
-      recordWealthObservation(world.id, world.version, getNetWorth(world, life));
-    }
+    syncLifeWealthObservation(storage, life);
   } catch { /* Observation recording is advisory and does not fail archive. */ }
   return entries;
+}
+
+function persistWealthObservations(storage: StorageLike): void {
+  try { storage.setItem(WEALTH_OBSERVATIONS_KEY, JSON.stringify(exportWealthObservationsSnapshot())); }
+  catch { /* Observation persistence is advisory and does not fail gameplay or archive. */ }
+}
+
+/** Hydrate persisted recorded-life wealth observations into memory for the current session. */
+export function restoreWealthObservations(storage: StorageLike): void {
+  try { hydrateWealthObservations(readWealthObservations(storage)); }
+  catch { /* Observation hydration is advisory. */ }
+}
+
+/** Record or refresh the current life's wealth observation in memory and storage without duplicating by life identity. */
+export function syncLifeWealthObservation(storage: StorageLike, life: LifeState): void {
+  const world = engineForLife(life).world;
+  if (!world.economy || !life.economy) return;
+  if (getRecordedWealthObservations(world.id, world.version).length === 0) {
+    hydrateWealthObservations(readWealthObservations(storage), { merge: true });
+  }
+  recordWealthObservation(
+    world.id,
+    world.version,
+    life.economy.cash + getAssetValue(world, life),
+    recordedLifeIdentity(life),
+  );
+  persistWealthObservations(storage);
 }

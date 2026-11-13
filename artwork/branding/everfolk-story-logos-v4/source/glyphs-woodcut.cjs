@@ -1,0 +1,25 @@
+// Original drawn capitals for Everfolk. Broad, slightly uneven strokes and
+// flared book-lettering terminals are design choices, not traced font outlines.
+// The enclosed counters in R and O run opposite to their outside contours.
+const letter = (w, d) => ({ w, shapes: [{ d, fill: 'face' }] });
+
+module.exports = {
+  name: 'Hearthcut Capitals',
+  case: 'EVERFOLK',
+  glyphs: {
+    E: letter(71,
+      'M3 2L64 0L67 21L62 20L56 9L28 9L27 43L48 43L54 37L55 63L49 56L27 55L26 91L56 92L66 77L70 78L66 100L1 99L2 95L11 91L13 11L3 7Z'),
+    V: letter(80,
+      'M0 2L33 0L32 5L25 9L46 77L66 12L59 7L59 2L80 3L79 8L74 13L47 99L37 102L8 13L1 8Z'),
+    R: letter(84,
+      'M3 2L43 0C69 -1 80 10 79 27C79 43 68 52 53 55L75 88Q79 94 84 97L82 100L62 99L36 57L28 57L27 89L37 95L36 100L1 99L2 95L11 90L13 11L3 7ZM29 10L28 46L43 46C56 46 64 39 64 27C64 16 57 10 44 10Z'),
+    F: letter(68,
+      'M3 2L63 0L67 23L62 22L56 10L28 9L27 45L47 44L54 38L55 64L49 58L27 57L26 89L39 95L38 100L1 99L2 95L11 91L13 11L3 7Z'),
+    O: letter(86,
+      'M44 0C69 -1 84 19 84 48C85 78 69 100 43 102C16 103 1 82 2 53C1 23 17 1 44 0ZM42 11C26 11 18 27 18 52C18 77 26 92 44 92C60 91 68 74 68 49C68 26 59 10 42 11Z'),
+    L: letter(72,
+      'M3 2L39 0L38 6L28 11L26 91L54 92L66 75L71 76L67 100L1 99L2 94L11 90L13 11L3 7Z'),
+    K: letter(86,
+      'M3 2L38 0L37 6L28 11L27 48L60 14L55 7L56 2L84 3L83 8L74 13L45 45L73 88Q79 95 86 97L84 101L58 99L59 94L61 91L34 57L27 65L26 89L37 95L36 100L1 99L2 95L11 90L13 11L3 7Z'),
+  },
+};

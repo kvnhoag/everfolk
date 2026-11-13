@@ -1,0 +1,80 @@
+{
+  "figureId": "zeno",
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Stoic Discussion Leader",
+  "displayTitle": "Stoic Discussion Leader",
+  "subtitle": "A Steady Voice Beside Zeno",
+  "bodyTitle": "Reason Shared in Public",
+  "bodyText": "A discussion leader brings clarity and patience to the questions gathered beneath the porch. Careful challenge helps others examine their judgments, making philosophy a shared discipline rather than an impressive turn of speech.",
+  "sourceRoleSlug": "zeno-rare",
+  "newArt": false,
+  "slug": "zeno-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Stoic Discussion Leader",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-rare-male-pixel.png",
+  "sourceArtSlug": "zeno-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 78,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A discussion leader brings clarity and patience to the",
+    "questions gathered beneath the porch. Careful challenge",
+    "helps others examine their judgments, making philosophy a",
+    "shared discipline rather than an impressive turn of speech."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-rare-male.svg",
+  "fittedArt": "assets/fitted/zeno-rare-male.png",
+  "overlaySvg": "source/overlays/zeno-rare-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "1ef7163047ea08d8ed31a492998a9f105f2ebf583e1ac84e5130ce15b6e6247a",
+  "master": "masters/zeno-rare-male.vectorcraft",
+  "export": "exports/zeno-rare-male.png",
+  "thumbnail": "assets/zeno-rare-male-thumb.png",
+  "exportSha256": "bbba3c89b77fd5c5b7583f6a96fd8ce1bbe4ba2c36a73a95c68d3cd15f3d1cd5",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582426,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "alexander-rare-male",
+  "figureId": "alexander",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Campaign Staff Officer",
+  "subtitle": "Alexander the Great",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 4,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-rare-male.svg",
+  "fittedArt": "assets/fitted/alexander-rare-male.png",
+  "overlaySvg": "source/overlays/alexander-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "a9d4730cecffb17bc2ec7ec2b854d3c2812b773e544d043d6a1d29c8d4856d29",
+  "master": "masters/alexander-rare-male.vectorcraft",
+  "export": "exports/alexander-rare-male.png",
+  "thumbnail": "assets/alexander-rare-male-thumb.png",
+  "exportSha256": "ad872d8261681a941444a89ad060179e2d84d26c87a55d717bf45c10c1f589d5",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

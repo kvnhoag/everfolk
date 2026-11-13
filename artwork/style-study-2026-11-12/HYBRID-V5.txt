@@ -1,0 +1,52 @@
+EVERFOLK — HYBRID ANIME / CHIAROSCURO / PIXEL STUDY
+12 November 2026
+
+USER REQUEST
+Combine the anime/cartoon visual direction with the aura of the original
+Chiaroscuro portrait, retaining the separate pixel-finishing workflow.
+
+SOURCE REDESIGN
+Built-in image editing used the clean anime scene as the edit target and
+the original Chiaroscuro portrait as a lighting/presence reference.
+The new clean source keeps Alexander's identity cues, pose, simple historical
+clothing, table and harbour composition. The lighting, shadow structure,
+expression and rendering were redesigned at source rather than merely graded.
+
+STYLE RULES FOR THIS CANDIDATE
+Anime: deliberately drawn adult facial features, coherent stylized hair locks,
+clear cloth shapes and selective coloured outlines.
+Chiaroscuro: concentrated warm directional light; sculptural facial planes;
+connected cool brown/jade shadows; edges receding into darkness; quiet dark
+surroundings that leave the eyes, face and hand as the attention hierarchy.
+Intended presence: contained authority, inward thought, watchfulness and a
+trace of human fatigue, rather than a uniform heroic scowl.
+The result intentionally allows more painterly volume than the earlier bright
+cel illustration. The user has not yet approved the balance or pixel strength.
+
+FILES
+source/alexander-anime-chiaroscuro-before-v5.png — new clean hybrid source.
+source/hybrid-anime-chiaroscuro-v5-prompt.txt — exact prompt and reference roles.
+review/hybrid-v5/alexander-hybrid-pixel-bold.png — 320×180 logical, exact6×.
+review/hybrid-v5/alexander-hybrid-pixel-chunky.png — 240×135 logical, exact8×.
+Both exports are1920×1080, with native .logical.png siblings.
+source/build-hybrid-pixeloe-v5.py — reproducible finishing runner.
+qa/hybrid-v5-pixeloe.json — options, versions, source/output hashes and checks.
+masters/anime-chiaroscuro-v5-review.ecproj — editable ArtCraft review image
+layers with hybrid bold visible by default; no body/clothing extraction implied.
+review/hybrid-v5/hybrid-aura-face-comparison.png — prior anime / hybrid bold /
+hybrid chunky in the same image window at100% scale.
+source/build-hybrid-v5-review.cjs — ArtCraft composition rebuild.
+qa/hybrid-v5-review.json — exact RGB preservation and native reopen checks.
+
+FINISH
+Published PixelOE1.0.0, legacy CPU API, contrast-aware downsampling, thickness1,
+source colour matching, contrast1, saturation1, no colour quantization.
+The isolated runtime from the preceding study is reused; no new dependencies.
+The clean source remains unchanged. Repeat renders match; pixel blocks are
+uniform integer replications; both outputs are nonblank and visually reviewed.
+Root recommends bold for review because it preserves the gaze and brow better.
+
+SCOPE
+This is a flattened style study, not an extracted modular character library.
+The historical scene and Alexander likeness are imagined illustrations.
+Card components, rarity rules and minting remain outside this study.

@@ -1,0 +1,219 @@
+{
+  "artboards": [
+    {
+      "height": 512,
+      "name": "01 Standalone emblem / ink",
+      "width": 512,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 512,
+      "name": "02 Standalone emblem / cream",
+      "width": 512,
+      "x": 620,
+      "y": 0
+    },
+    {
+      "height": 820,
+      "name": "03 Stacked signature / cream",
+      "width": 1200,
+      "x": 0,
+      "y": 640
+    },
+    {
+      "height": 380,
+      "name": "04 Horizontal signature / ink",
+      "width": 1400,
+      "x": 0,
+      "y": 1600
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 55,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 06 Upward",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 260,
+        "width": 1220.9880273362417,
+        "x": 95.95311941798916,
+        "y": 1660
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 260,
+            "width": 1220.9880273362417,
+            "x": 95.95311941798916,
+            "y": 1660
+          },
+          "childCount": 2,
+          "id": 79,
+          "kind": "Group",
+          "locked": false,
+          "name": "Upward / horizontal signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 55,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Scarab beside name / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 617.2876989138672,
+        "width": 816.6607729224552,
+        "x": 191.6696135387724,
+        "y": 732
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 617.2876989138672,
+            "width": 816.6607729224552,
+            "x": 191.6696135387724,
+            "y": 732
+          },
+          "childCount": 2,
+          "id": 54,
+          "kind": "Group",
+          "locked": false,
+          "name": "Upward / stacked signature",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 30,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 Scarab and name / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 415.99999999999994,
+        "width": 300.95001786243495,
+        "x": 725.5249910687825,
+        "y": 48
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 415.99999999999994,
+            "width": 300.95001786243495,
+            "x": 725.5249910687825,
+            "y": 48
+          },
+          "childCount": 12,
+          "id": 29,
+          "kind": "Group",
+          "locked": false,
+          "name": "06 Upward / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 16,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Standalone scarab / cream",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 415.99999999999994,
+        "width": 300.9500178624348,
+        "x": 105.52499106878264,
+        "y": 48
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 415.99999999999994,
+            "width": 300.9500178624348,
+            "x": 105.52499106878264,
+            "y": 48
+          },
+          "childCount": 12,
+          "id": 15,
+          "kind": "Group",
+          "locked": false,
+          "name": "06 Upward / standalone scarab",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Standalone scarab / ink",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "children": [],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 79,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#9b553e",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarabs-v1\\masters\\06-upward.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "06-upward.vectorcraft",
+  "tool": "selection",
+  "uid": 19,
+  "units": "Pixels",
+  "rasterImages": 0
+}

@@ -1,10 +1,13 @@
-import { getNetWorth } from "../../src/economy.ts";
+import { getAssetValue, getNetWorth } from "../../src/economy.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { getSocietyWealthData } from "./society-wealth-data.ts";
 import type { SocietyWealthGroup, UniformRoll } from "./society-wealth-data.ts";
 
 export interface WealthComparison {
+  /** Cash and holdings minus debt, shown as total wealth. */
   netWorth: number;
+  /** Cash and holdings before debt: the measure households are ranked by, matching the debt-free reference households. */
+  totalAssets: number;
   /** Percentage of reference households with strictly less wealth. Ties are excluded. */
   percentile: number;
   medianWealth: number;
@@ -98,9 +101,9 @@ function countBelow(group: SocietyWealthGroup, wealth: number, includeEqual = fa
 }
 
 /**
- * Compare current net worth with the retrieved society wealth population.
- * Retrieval currently returns authored starting households as mock data;
- * it is not a measured historical or age-adjusted population.
+ * Compare total household assets with the recorded-life or authored-household
+ * benchmark, preserving net worth separately. The benchmark is neither a
+ * measured historical population nor an age-adjusted comparison.
  * Reads only: no sampling, extra engine starts, or simulation RNG use.
  */
 export function getWealthComparison(world: WorldPack, life: LifeState, explicitObservations?: readonly number[]): WealthComparison | null {
@@ -111,6 +114,7 @@ export function getWealthComparison(world: WorldPack, life: LifeState, explicitO
   const weightBelow = (wealth: number, includeEqual = false) => groups.reduce((sum, group) =>
     sum + group.weight * householdShare(group, wealth, economy.unitsPerPoint, includeEqual), 0);
   const netWorth = getNetWorth(world, life);
+  const totalAssets = life.economy.cash + getAssetValue(world, life);
   let low = Math.min(...groups.map(group => group.wealthAt(0) + group.resources.reduce((sum, roll) => sum + roll.first, 0)));
   let high = Math.max(...groups.map(group => group.wealthAt(group.count - 1) + group.resources.reduce((sum, roll) => sum + roll.first + rollSpan(roll), 0)));
   // Currency amounts are whole numbers. The first amount reaching half the
@@ -122,7 +126,7 @@ export function getWealthComparison(world: WorldPack, life: LifeState, explicitO
     if (weightBelow(middle, true) / totalWeight >= 0.5 - Number.EPSILON) high = middle;
     else low = middle + 1;
   }
-  return { netWorth, percentile: Math.max(0, Math.min(100, weightBelow(netWorth) / totalWeight * 100)), medianWealth: low };
+  return { netWorth, totalAssets, percentile: Math.max(0, Math.min(100, weightBelow(totalAssets) / totalWeight * 100)), medianWealth: low };
 }
 
 export function formatWealthPercentile(percentile: number): string {

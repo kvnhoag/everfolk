@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m02-adult-performance-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m02-adult-performance-v3.png",
+  "sourceSha256": "1fa296d07d06678be1fe1c662f86221119294564738ce8139b564ea777a8f34e",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      192,
+      240
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    192,
+    240
+  ],
+  "scale": 2,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/192x240-s2-t0/ef-p-m02-adult-performance-v3.logical.png",
+  "logicalSha256": "7402ec6351306aaf16b339c92048866c356ffda6f308ff5d1634ecfdbafffa28",
+  "outputPath": "portraits/192x240-s2-t0/ef-p-m02-adult-performance-v3.png",
+  "outputSha256": "aac3ce04e76ab3282b08c86d89c51b3bdff8922f29e057f505191e84525bdece",
+  "logicalPixelSha256": "d9ed7110777f2e5638335ade948440527ba3b9f685270f3ade259a1c234d9d7c",
+  "uniqueColours": 11900,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

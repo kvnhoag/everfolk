@@ -7,6 +7,7 @@ import { contentFingerprint } from "../../src/random.ts";
 import { eventNotificationLifeKey } from "../models/event-notifications.ts";
 import { readSeenEventNotifications, rememberSeenEventNotifications } from "../state/event-notification-store.ts";
 import { useEventNotifications } from "../hooks/useEventNotifications.ts";
+import { learnedThisYear } from "../models/skill-learned-notice.ts";
 import "../styles/event-notifications.css";
 
 interface NotificationItem {
@@ -16,7 +17,7 @@ interface NotificationItem {
   year: number;
   title: string;
   body: string;
-  kind: "decision" | "offer" | "legacy" | "event";
+  kind: "decision" | "offer" | "legacy" | "event" | "skill";
   actionLabel: string;
   onAction(): void;
   onDismiss?: () => void;
@@ -28,7 +29,7 @@ function truncateText(text: string, maxLen = 96): string {
 }
 
 export default function EventNotificationStack({ life, world, decisionEvent, demoView, decisionButtonRef,
-  onOpenDecision, onOpenChronicle, onOpenPeopleTab, visible = true,
+  onOpenDecision, onOpenChronicle = () => {}, onOpenPeopleTab, onOpenSkillTree, onShownChange, visible = true, persistent = true,
 }: {
   life: LifeState;
   world: WorldPack;
@@ -36,14 +37,23 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   demoView?: DemoScreen | null;
   decisionButtonRef?: RefObject<HTMLButtonElement | null>;
   onOpenDecision(): void;
-  onOpenChronicle(): void;
+  onOpenChronicle?(): void;
   onOpenPeopleTab?(): void;
+  onOpenSkillTree?(): void;
+  /** Reports whether any notification is on screen (the tutorial explains them the first time). */
+  onShownChange?(shown: boolean): void;
   visible?: boolean;
+  persistent?: boolean;
 }) {
-  const completed = useEventNotifications(life, world);
+  const completed = useEventNotifications(life, world, true, persistent);
   const lifeKey = eventNotificationLifeKey(life);
-  const [dismissedOffers, setDismissedOffers] = useState(() => new Set(readSeenEventNotifications(lifeKey)));
-  useEffect(() => setDismissedOffers(new Set(readSeenEventNotifications(lifeKey))), [lifeKey]);
+  // Offers and skill notices the player closed stay closed for this life.
+  const [dismissedKeys, setDismissedKeys] = useState(() => new Set(persistent ? readSeenEventNotifications(lifeKey) : []));
+  useEffect(() => setDismissedKeys(new Set(persistent ? readSeenEventNotifications(lifeKey) : [])), [lifeKey, persistent]);
+  const dismissKey = (key: string) => () => {
+    if (persistent) rememberSeenEventNotifications(lifeKey, [key]);
+    setDismissedKeys(previous => new Set(previous).add(key));
+  };
   const items: NotificationItem[] = [];
 
   // Decisions remain actionable until answered; completed notices have their own lifecycle.
@@ -56,22 +66,30 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
     });
   }
 
+  // Skills learned this year, with a direct way into the skill tree.
+  if (onOpenSkillTree) for (const skill of learnedThisYear(life, world)) {
+    if (dismissedKeys.has(skill.key)) continue;
+    items.push({
+      key: skill.key, badge: "Skill learned", age: skill.age, year: skill.year,
+      title: skill.title, body: "A new skill is yours. See what it opens next in the skill tree.",
+      kind: "skill", actionLabel: "Open skill tree →", onAction: onOpenSkillTree, onDismiss: dismissKey(skill.key),
+    });
+  }
+
   if (demoView?.activeOffer) {
     const offer = demoView.activeOffer;
     const key = `offer:${lifeKey}:${life.age}:${contentFingerprint(offer)}`;
-    if (!dismissedOffers.has(key)) items.push({
+    if (!dismissedKeys.has(key)) items.push({
       key, badge: "Contract Offer", age: life.age, year: life.year,
       title: `${offer.role.charAt(0).toUpperCase() + offer.role.slice(1)} offers ${offer.kind.replace("-", " ")}`,
       body: `${offer.quantity} ${offer.item} at ${offer.price} dr each (${offer.total} dr total).`,
-      kind: "offer", actionLabel: "View counterparty →", onAction: () => onOpenPeopleTab?.(),
-      onDismiss: () => {
-        rememberSeenEventNotifications(lifeKey, [key]);
-        setDismissedOffers(previous => new Set(previous).add(key));
-      },
+      kind: "offer", actionLabel: "View counterparty →", onAction: () => onOpenPeopleTab?.(), onDismiss: dismissKey(key),
     });
   }
 
   for (const event of completed.notifications) {
+    // The ending has its own banner at the top of the page.
+    if (event.kind === "ending") continue;
     const granary = event.marker?.actionId === "farming.stock-granary";
     items.push({
       key: event.key, badge: granary ? "Past-Life Granary" : "Life Event", age: event.age, year: event.year,
@@ -81,7 +99,10 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
     });
   }
   const notifications = items.slice(0, 3);
-  if (!visible || !notifications.length) return null;
+  const shown = visible && notifications.length > 0;
+  useEffect(() => { onShownChange?.(shown); }, [shown]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => onShownChange?.(false), []); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!shown) return null;
   return <aside className="event-notification-stack" aria-label="Event notifications" role="region" aria-live="polite" aria-relevant="additions">
     {notifications.map(item => <article key={item.key} className={`event-toast is-${item.kind}`} role={item.kind === "decision" ? "status" : undefined}>
       <div className="event-toast-top">

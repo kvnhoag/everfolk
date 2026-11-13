@@ -560,7 +560,8 @@ test("UTF-8 catalog limits reject otherwise valid large imports before any datab
   // Derive padding from the actual remaining structure, rather than assuming
   // the release's existing story text leaves a particular amount of headroom.
   for (const event of events) event.text = "x";
-  const textLength = 1 + Math.floor((MAX_CATALOG_BYTES * 0.8 - JSON.stringify(draft).length) / events.length);
+  const headroom = MAX_CATALOG_BYTES - JSON.stringify(draft).length;
+  const textLength = 1 + Math.floor(headroom * 0.6 / events.length);
   assert.ok(textLength > 0 && textLength <= 20_000, "padding stays inside the world's text field limit");
   for (const event of events) event.text = "界".repeat(textLength);
   const serialized = JSON.stringify(draft);

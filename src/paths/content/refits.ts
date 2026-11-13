@@ -75,6 +75,15 @@ function lowestStageAge(world: WorldPack, event: LifeEvent): number {
   return Math.min(...event.stages.map(id => world.lifeStages!.stages.find(stage => stage.id === id)!.minAge));
 }
 
+/** Returns a new pack in which every untagged event that teaches or offers a field's skill or job carries those fields (rule 3). */
+export function tagTaughtFields(world: WorldPack): WorldPack {
+  return { ...world, events: world.events.map(event => {
+    if (event.fields) return event;
+    const taught = fieldsTaught(world, event);
+    return taught.length ? { ...event, fields: taught } : event;
+  }) };
+}
+
 /** Returns a new pack whose older events follow the life-paths rules. */
 export function refitEvents(world: WorldPack): WorldPack {
   const interrupts = new Set([world.health?.careDecision, ...Object.values(world.economy?.moneylender?.events ?? {})]);

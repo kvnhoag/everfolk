@@ -1,0 +1,82 @@
+{
+  "slug": "ptolemy-parent",
+  "figureId": "ptolemy",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Ptolemy I Soter",
+  "subtitle": "Founder of a Dynasty",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-parent-pixel.png",
+  "collectionIndex": 82,
+  "owner": null,
+  "figureName": "Ptolemy I Soter",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "diadem-scroll",
+  "bodyTitle": "A Kingdom Secured",
+  "bodyText": "A general of Alexander, Ptolemy secured Egypt after the conqueror's death and later ruled as king. His dynasty made Alexandria a royal capital and endured until the age of Cleopatra.",
+  "sources": [
+    {
+      "title": "Ptolemy I Soter — Digital Egypt, University College London",
+      "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/chronology/ptolemyi.html"
+    }
+  ],
+  "canonicalTitle": "Ptolemy I Soter",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/ptolemy.svg",
+    "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A general of Alexander, Ptolemy secured Egypt after the",
+    "conqueror's death and later ruled as king. His dynasty made",
+    "Alexandria a royal capital and endured until the age of",
+    "Cleopatra."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-parent.svg",
+  "fittedArt": "assets/fitted/ptolemy-parent.png",
+  "overlaySvg": "source/overlays/ptolemy-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+  "master": "masters/ptolemy-parent.vectorcraft",
+  "export": "exports/ptolemy-parent.png",
+  "thumbnail": "assets/ptolemy-parent-thumb.png",
+  "exportSha256": "4a8073531135b0e33fc4d8ae9853386290a7e3c5855eb5becb0bdbf92ffaa7e2",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582444,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

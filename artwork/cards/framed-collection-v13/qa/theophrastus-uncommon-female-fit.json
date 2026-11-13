@@ -1,0 +1,60 @@
+{
+  "slug": "theophrastus-uncommon-female",
+  "figureId": "theophrastus",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Plant Records Assistant",
+  "subtitle": "Theophrastus",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 52,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-uncommon-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-uncommon-female.png",
+  "overlaySvg": "source/overlays/theophrastus-uncommon-female.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "04e2b529485f2afe5a8984871bd4a69c9de71ec9f8bab5c08c07f790e1c606ac",
+  "master": "masters/theophrastus-uncommon-female.vectorcraft",
+  "export": "exports/theophrastus-uncommon-female.png",
+  "thumbnail": "assets/theophrastus-uncommon-female-thumb.png",
+  "exportSha256": "ef0f52523b0e71e7d69456461659a60f1f51596ff19e216d5b8511ea768b9685",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

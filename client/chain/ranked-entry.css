@@ -4,7 +4,7 @@
 .born-into-lines{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .born-into-lines li{font-size:14px;line-height:1.6;padding:10px 12px;background:#fbf5e4;border:1px solid #cdbb95;overflow-wrap:anywhere}
 .draw-beat{max-width:520px}
-.draw-beat-title{font-family:var(--serif,"Courier New",monospace);font-size:18px!important;font-weight:700;line-height:1.35!important}
+.draw-beat-title{font-family:var(--ef-font-display);font-size:18px!important;font-weight:700;line-height:1.35!important}
 .draw-beat.is-waiting .draw-beat-title:after{content:"";display:inline-block;width:8px;height:8px;margin-left:8px;background:#a85e44;animation:draw-beat-blink 1s steps(2) infinite}
 .draw-beat-who{display:grid;gap:6px;justify-items:start;margin:0 0 12px;padding:12px;border:1px solid #cdbb95;background:#fbf5e4}
 .draw-beat-who strong{font-size:14px;overflow-wrap:anywhere}

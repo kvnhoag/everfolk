@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LifeView, MintResult, MintPack as Pack, MintTerms, StageMintResult } from "../../chain/types.ts";
+import { packCardCount } from "../../chain/pack-count.ts";
 import type { OwnersByToken } from "./born-into-model.ts";
 import { errorText } from "./chain-backend.ts";
 import LifeReport from "./LifeReport.tsx";
@@ -9,8 +10,9 @@ import StageAlbum, { StageAlbumReceipt } from "./StageAlbum.tsx";
 import MintRecovery from "./MintRecovery.tsx";
 import MintReveal from "./MintReveal.tsx";
 import { mintRevealView } from "./life-report-model.ts";
+import { resultCardView } from "./nft-card-view.ts";
 import DeclineChoice from "./DeclineChoice.tsx";
-import { DEFAULT_MINT_FEE_YOCTO, REROLL_FEE_YOCTO, formatNear } from "./near-amount.ts";
+import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
 
 /** The part of the ranked session (Task 17) the ending needs. `RankedSession` satisfies it structurally. */
@@ -18,7 +20,7 @@ export interface RankedEndingSession {
   life: LifeView;
   finish(): Promise<SignedEvidence>;
   chooseMint(slot: number): Promise<MintResult>;
-  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  mintStages(signed: SignedEvidence, npcActionId: string, expectedFee?: string, expectedQuoteHash?: string): Promise<StageMintResult>;
   mint(signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   recoverMint(): Promise<MintResult>;
   abandon(): Promise<void>;
@@ -104,7 +106,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
 
   if (stage.kind === "album-recovered") return <StageAlbumReceipt result={stage.result} onClose={onClose} />;
   if (stage.kind === "committed") return <MintRecovery busy={busy} error={error} onRecover={() => { void recover(); }} onBack={onClose} />;
-  if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} onClose={onClose} />;
+  if (stage.kind === "recovered") return <MintReveal view={mintRevealView(stage.result)} affection={stage.result.affection} card={resultCardView(stage.result)} onClose={onClose} />;
   if (stage.kind === "verifying") return <p className="chain-loading" role="status">Checking your life against its record…</p>;
   if (stage.kind === "failed") return <section className="chain-card">
     <h1 tabIndex={-1}>We couldn't check this life</h1>
@@ -112,11 +114,12 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     <div className="chain-actions"><button className="chain-primary" type="button" onClick={() => { setStage({ kind: "verifying" }); setAttempt(value => value + 1); }}>Try again<span aria-hidden="true">→</span></button><button className="chain-secondary" type="button" onClick={onClose}>Back to Everfolk</button></div>
   </section>;
   const evidence = stage.signed.evidence;
+  const cardCount = packCardCount(evidence);
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
   if (evidence.stage_figures?.length) return <StageAlbum signed={stage.signed} contract={contract} practice={practice} walletPath={walletPath}
-    onMint={(action, fee) => session.mintStages(stage.signed, action, fee)} onClose={onClose}
+    onMint={(action, fee, quoteHash) => session.mintStages(stage.signed, action, fee, quoteHash)} onClose={onClose}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }} />;
   return <LifeReport
     walletPath={walletPath}
@@ -128,10 +131,11 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     busy={busy}
     error={error}
     packMode
-    rerollFeeText={formatNear(terms?.reroll_fee ?? REROLL_FEE_YOCTO)}
+    cardCount={cardCount}
     sourceSharePercent={(terms?.source_share_bps ?? 5000) / 100}
     onSelectAction={setSelected}
     onMint={() => { void mint(stage.signed); }}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }}
+    onCloseTooEarly={() => { void closeLife(); }}
   />;
 }

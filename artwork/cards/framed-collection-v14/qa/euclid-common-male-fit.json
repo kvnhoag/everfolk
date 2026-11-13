@@ -1,0 +1,81 @@
+{
+  "figureId": "euclid",
+  "figureName": "Euclid",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Geometry Apprentice",
+  "displayTitle": "Geometry Apprentice",
+  "subtitle": "Learner of the First Principles",
+  "bodyTitle": "The First Clear Line",
+  "bodyText": "A geometry apprentice learns to draw a circle and name what a figure contains. Small acts of precision begin a greater discipline, turning a curious eye toward the certainty of proof.",
+  "sourceRoleSlug": "euclid-common",
+  "newArt": true,
+  "sceneBrief": "A young adult apprentice draws one simple circle with dividers on a wax tablet or sand board, plain linen, modest courtyard.",
+  "slug": "euclid-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Geometry Apprentice",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/euclid-common-male-pixel.png",
+  "sourceArtSlug": "euclid-common-male",
+  "editionLimit": null,
+  "collectionIndex": 20,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/euclid.svg",
+    "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A geometry apprentice learns to draw a circle and name what",
+    "a figure contains. Small acts of precision begin a greater",
+    "discipline, turning a curious eye toward the certainty of",
+    "proof."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-common-male.svg",
+  "fittedArt": "assets/fitted/euclid-common-male.png",
+  "overlaySvg": "source/overlays/euclid-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "2ffa9c276d0173492942d5e57cfebfd4087566ce9eb672bba9e2564f8c1e2b4f",
+  "master": "masters/euclid-common-male.vectorcraft",
+  "export": "exports/euclid-common-male.png",
+  "thumbnail": "assets/euclid-common-male-thumb.png",
+  "exportSha256": "eab3c885db2342a9cc1d939161ad7b0fd4a22e657a4cdcad0770fcf3383eaf1e",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582894,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

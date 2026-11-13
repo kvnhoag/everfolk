@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>05 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_05_Chapter_E___color_device" data-name="05 Chapter E / color device">
+      <polygon id="Chapter_E___element_1" data-name="Chapter E / element 1" points="39.04,33.92 114.56,33.92 114.56,49.28 56.96,49.28 56.96,72.32 99.2,72.32 99.2,87.68 56.96,87.68 56.96,113.28 117.12,113.28 117.12,128.64 39.04,128.64" fill="#24464b"/>
+      <path id="Chapter_E___element_2" data-name="Chapter E / element 2" d="M65.92 56.96 L109.44 56.96 L109.44 63.36 L65.92 63.36 Z M65.92 96.64 L105.6 96.64 L105.6 103.04 L65.92 103.04 Z" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

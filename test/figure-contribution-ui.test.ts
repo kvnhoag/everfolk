@@ -15,7 +15,7 @@ import { legacyFigureCard } from "../client/models/legacy-figure-card.ts";
 import type { LegacyEntry } from "../client/storage/legacy-store.ts";
 import type { AccomplishmentRecord, WorldPack } from "../src/types.ts";
 import type { FigureCardRank } from "../chain/catalog/figure-roster.ts";
-import currentCommon from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import currentCommon from "../worlds/demo/alexandria-lives-8-wsl-contributions.json" with { type: "json" };
 import base from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 
 const hooks = registerHooks({ load(url, context, nextLoad) {

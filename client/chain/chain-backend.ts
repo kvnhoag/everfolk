@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
-import { parseRankedConfig, type RankedAvailability, type RankedConfig } from "./born-into-model.ts";
-import { resolveChainConfig, type ChainConfig } from "./config.ts";
+import { parseRankedConfig, type RankedConfig } from "./born-into-model.ts";
+import { DEFAULT_CHAIN_CONFIG, resolveChainConfig, type ChainConfig } from "./config.ts";
+import { PRACTICE_CONTRACT_ID } from "./practice-verifier.ts";
+import type { RankedSaveScope } from "./ranked-session.ts";
 import { createLivesContract } from "./contract.ts";
-import { createPreviewLedger, PREVIEW_ACCOUNT } from "./preview-ledger.ts";
 import type { AccountProof, ContractCall, LivesContract, WalletSession } from "./types.ts";
 import { accountBalance } from "./rpc.ts";
 import type { EmailSession } from "./email-session.ts";
@@ -14,7 +14,7 @@ import type { EmailSignInFlow } from "./SignInPanel.tsx";
 
 /**
  * Which ledger the ranked screens talk to. "live" = the deployed contract through a wallet loaded on demand;
- * "preview" = the in-memory practice ledger, used while `/api/ranked/config` is unavailable.
+ * Preview backends are used by isolated test screens.
  */
 export interface ChainBackend {
   mode: "live" | "preview";
@@ -24,6 +24,7 @@ export interface ChainBackend {
   walletId: string | null;
   worldVersion: string;
   contractId: string | null;
+  networkId?: string;
   /** The latest confirmed wallet transaction, for an explorer link. */
   lastTransaction: { hash: string; method: string } | null;
   /** Bumps after every confirmed transaction so balances can be read again. */
@@ -68,24 +69,11 @@ let configRequest: Promise<RankedConfig | null> | null = null;
 
 /** Fetched once per page; any error or malformed answer means "unavailable". */
 export function loadRankedConfig(): Promise<RankedConfig | null> {
-  // Local rehearsals explicitly use an isolated ledger, never the configured testnet contract.
-  if (typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname)
-    && new URLSearchParams(window.location.search).get("practice") === "1") return Promise.resolve(null);
   configRequest ??= fetch(CONFIG_PATH, { credentials: "same-origin", cache: "no-store" })
     .then(response => (response.ok ? response.json() : null))
     .then(parseRankedConfig)
     .catch(() => null);
   return configRequest;
-}
-
-export function useRankedAvailability(): RankedAvailability {
-  const [availability, setAvailability] = useState<RankedAvailability>("checking");
-  useEffect(() => {
-    let cancelled = false;
-    void loadRankedConfig().then(config => { if (!cancelled) setAvailability(config ? "available" : "practice"); });
-    return () => { cancelled = true; };
-  }, []);
-  return availability;
 }
 
 /** The router remembers the chosen sign-in method under this key; its presence means a session can be restored. */
@@ -134,21 +122,12 @@ function rememberedWallet(): boolean {
   try { return typeof localStorage !== "undefined" && Boolean(localStorage.getItem(REMEMBERED_WALLET_KEY)); } catch { return false; }
 }
 
-let previewLedger: Promise<LivesContract> | null = null;
 const SIGNED_OUT: SignInState = { method: null, email: null, needsPlayKey: false };
 
-async function createBackend(events: BackendEvents): Promise<BaseBackend> {
+async function createBackend(events: BackendEvents): Promise<BaseBackend | null> {
   // Both configs are fetched together; the sign-in one never fails (no Privy App ID = no email sign-in).
   const [config, signInConfig] = await Promise.all([loadRankedConfig(), loadSignInConfig()]);
-  if (!config) {
-    previewLedger ??= createPreviewLedger();
-    const contract = await previewLedger;
-    events.onAccount(PREVIEW_ACCOUNT, null);
-    return {
-      mode: "preview", contract, worldVersion: DEMO_WORLD_VERSION, contractId: null,
-      connect: async () => events.onAccount(PREVIEW_ACCOUNT, null), disconnect: async () => {}, nearBalance: async () => null,
-    };
-  }
+  if (!config) return null;
   const cfg = resolveChainConfig({ contractId: config.contract_id, rpcUrl: config.rpc_url });
   const { privyAppId } = signInConfig;
   const email = emailOpener(cfg, privyAppId);
@@ -167,7 +146,7 @@ async function createBackend(events: BackendEvents): Promise<BaseBackend> {
   // A returning player stays signed in: load the remembered wallet in the background, without opening it.
   if (rememberedWallet()) void wallet.restore().then(report, () => { /* stay disconnected; Connect still works */ });
   return {
-    mode: "live", contract: createLivesContract(wallet, cfg), worldVersion: config.world_version, contractId: config.contract_id,
+    mode: "live", contract: createLivesContract(wallet, cfg), worldVersion: config.world_version, contractId: config.contract_id, networkId: cfg.networkId,
     connect: async () => { await wallet.signIn(); report(); },
     // The router drops the session before the wallet answers, so the bar shows signed out even if that fails.
     disconnect: async () => { try { await wallet.signOut(); } finally { report(); } },
@@ -201,6 +180,15 @@ export function useChainBackend(): ChainBackend | null {
     const { state, ...who } = account;
     return { ...rest, ...who, lastTransaction, revision, ...(signin ? { signin: { ...signin, ...state } } : {}) };
   }, [base, account, lastTransaction, revision]);
+}
+
+export function backendSaveScope(backend: Pick<ChainBackend, "mode" | "contractId" | "networkId">): RankedSaveScope {
+  const practice = backend.mode === "preview";
+  return {
+    networkId: backend.networkId ?? DEFAULT_CHAIN_CONFIG.networkId,
+    contractId: backend.contractId ?? PRACTICE_CONTRACT_ID,
+    practice,
+  };
 }
 
 export function errorText(cause: unknown, fallback: string): string {

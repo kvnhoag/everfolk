@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\cleomenes-uncommon-female.png",
+  "sourceSha256": "551fc83c918c70d07e1fc23bae2a310b56795bdf10bf44e03479a3a9d1f5f68c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\cleomenes-uncommon-female-coarse.png",
+  "baseSha256": "3dc1e977be5cede0899791e517a767f5b29bd352c1d308c53059b974b563862b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\cleomenes-uncommon-female-coarse.json",
+  "baseQaSha256": "a184300462d284b5ea19039b33c5a01c68f6a6c99b3bdb4d608be695d9985296",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\cleomenes-uncommon-female-face.json",
+  "configSha256": "9fbe3d069ba53d81e9e52e702848c752962486c3aa5e3b67b5d849454cb7122e",
+  "config": {
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "center": [
+          400,
+          249
+        ],
+        "radius": [
+          93,
+          103
+        ]
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\cleomenes-uncommon-female-pixel.png",
+  "outputSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "14a5390b008d0867b6dec9235f6e8bf766fcd99d33fd889ab84dd7fb76206041",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\cleomenes-uncommon-female-face-mask.png",
+  "maskSha256": "e4cacece26104dd35ee5e525f73005974c112c4714689ce05954012cc93292c7",
+  "maskPixelSha256": "173ffd64f290d7d99650ef95169ad7e3b1db7ab8f635d409c6d016f04b5063f0",
+  "selectedDetailCells": 691,
+  "retainedCoarseCells": 23809,
+  "affectedPixels": 24876,
+  "changedPixels": 24660,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

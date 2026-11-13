@@ -3,7 +3,7 @@
 .birth-roll-popover::backdrop{background:#263c36b8;backdrop-filter:blur(3px)}
 .birth-popover-heading{display:flex;justify-content:space-between;gap:22px;padding:25px 28px 18px}
 .birth-popover-eyebrow{font-size:8px;font-weight:600;letter-spacing:1.4px;color:#968063}
-.birth-popover-heading h2{font:400 35px/1.15 var(--serif,Georgia,serif);letter-spacing:-.3px;color:#3d5742;margin:7px 0 8px;outline:none}
+.birth-popover-heading h2{font:400 35px/1.15 var(--ef-font-display);letter-spacing:-.3px;color:#3d5742;margin:7px 0 8px;outline:none}
 .birth-popover-heading p{font-size:12px;line-height:1.7;color:#7a836f;margin:0;max-width:570px}
 .birth-popover-close{display:grid;place-items:center;align-self:flex-start;flex-shrink:0;width:34px;height:34px;border:1px solid #d4dac8;border-radius:50%;background:#eeeee1;color:#74816b;cursor:pointer;font-size:24px;font-weight:300;line-height:1;padding:0}
 .birth-popover-close:hover{background:#e5e9da;color:#3f5b44;border-color:#aebb9e}
@@ -26,3 +26,8 @@ body:has(.birth-roll-popover[open]){overflow:hidden}
 @media(max-width:600px){.birth-roll-popover{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:7px}.birth-popover-heading{padding:20px 18px 15px;gap:12px}.birth-popover-heading h2{font-size:31px}.birth-popover-heading p{font-size:11px}.birth-popover-content{padding:0 13px}.birth-roll-popover .birth-stat-roll{padding:13px}.birth-roll-popover .birth-roll-origin>strong{font-size:11px}.birth-roll-popover .birth-roll-card{padding:12px 10px 9px}.birth-roll-popover .birth-roll-number{font-size:36px;min-height:43px}.birth-popover-footer{position:sticky;bottom:0;z-index:1;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:15px 18px 18px;border-top:1px solid #d9dfcc}.birth-popover-footer>p{max-width:none;font-size:9px}.birth-popover-continue{width:100%;min-height:44px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.birth-roll-popover::backdrop{backdrop-filter:none}}
 @media(max-width:600px){.birth-popover-reborn{width:100%;min-height:44px}}
+/* Keep "Begin life" in view: the stats scroll inside the window while the footer stays put. */
+.birth-roll-popover[open]{overflow:hidden}
+.birth-roll-popover[open] .birth-popover-content{flex:1 1 auto;min-height:0;overflow-y:auto}
+.birth-roll-popover[open] .birth-popover-heading,.birth-roll-popover[open] .birth-popover-footer{flex:none}
+dialog.birth-roll-popover[open] .birth-popover-footer{margin-top:0}

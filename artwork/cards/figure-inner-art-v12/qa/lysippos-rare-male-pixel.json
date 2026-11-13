@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\lysippos-rare-male.png",
+  "sourceSha256": "5b3c70065218e9aa88b6572a0d86abbe983a3a6ff1e89199ea5c9d971769dfdc",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\lysippos-rare-male-coarse.png",
+  "baseSha256": "b588112f6fced975670422293466178d0b249ac9cad7ecd5e35e0a3c68a5fa31",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\lysippos-rare-male-coarse.json",
+  "baseQaSha256": "126ab30fd9c77b2878658906b609336b998a538c4a6f0d568370adcba8512a75",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\lysippos-rare-male-face.json",
+  "configSha256": "286b00321ec4586849e0bef58bfecb3d88bd179abea7be1586859e226c9d0948",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "center": [
+          590,
+          300
+        ],
+        "radius": [
+          90,
+          105
+        ]
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\lysippos-rare-male-pixel.png",
+  "outputSha256": "c01a384720223f13bf87db260c3e55795e9ed675fd7e1cbebdc5a069a8840c9e",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "6be2236a962c088b39d11408e2d71879d7247328cbe648a8ddf7a9516961c089",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\lysippos-rare-male-face-mask.png",
+  "maskSha256": "503ff76a2f6d36a7e9b8aad31975fd3e9bde9362d9775b8cf7fe2b023826d48f",
+  "maskPixelSha256": "b29140d40d3a88bbce552fef6ae6c096ef762fbab8acb4a8519adee13e885e1a",
+  "selectedDetailCells": 681,
+  "retainedCoarseCells": 23819,
+  "affectedPixels": 24516,
+  "changedPixels": 24243,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -8,7 +8,7 @@ import { buildCommonContributionWorld } from "../src/figures/common-contribution
 import { validateWorld } from "../src/validate.ts";
 import type { Condition, WorldPack } from "../src/types.ts";
 import { figureFixture } from "./helpers/figure-path-fixture.ts";
-import numeric from "../worlds/demo/alexandria-lives-7.json" with { type: "json" };
+import numeric from "../worlds/demo/alexandria-lives-7-wsl-contributions.json" with { type: "json" };
 import deep from "../worlds/demo/alexandria-figures-2.json" with { type: "json" };
 
 const fixedLegends = ["alexander", "aristotle", "euclid", "lysippos", "menander"];

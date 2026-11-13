@@ -2,6 +2,8 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import type { Category } from "../../chain/ids.ts";
+import type { EditionSupply } from "../../chain/types.ts";
+import { parseEditionSupply, parseMintResult } from "../../client/chain/wire.ts";
 import type { Draw, LifeView, LivesContract, MintResult, StageMintQuote, StageMintResult, SignedEvidence } from "../../client/chain/types.ts";
 
 const run = promisify(execFile);
@@ -82,14 +84,16 @@ export function createCliContract(contractId: string, accountId: string): LivesC
     stageMintResult,
     retryStageMint,
     stageMintQuote: (lifeId, signed, action) => viewMethod<StageMintQuote>(contractId, "stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: action }),
-    async mintStageFigures(lifeId, signed, action, expectedFee) {
+    async mintStageFigures(lifeId, signed, action, expectedFee, expectedQuoteHash) {
       const completed = await stageMintResult(lifeId); if (completed) return completed;
       const life = await viewMethod<LifeView | null>(contractId, "get_life", { life_id: lifeId });
       if (life?.status === "minting") return retryStageMint(lifeId);
       const args = { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: action };
       const quote = await viewMethod<StageMintQuote>(contractId, "stage_mint_quote", args);
       if (expectedFee !== undefined && expectedFee !== quote.total_fee) throw new Error("Stage prices changed. Refresh before paying.");
-      try { await callMethod(accountId, contractId, "mint_stage_figures", { ...args, signature: signed.signature }, `${quote.total_fee} yoctoNEAR`); }
+      if (expectedQuoteHash !== undefined && expectedQuoteHash !== quote.quote_hash) throw new Error("Stage cards changed. Refresh before paying.");
+      const quoteHash = expectedQuoteHash ?? quote.quote_hash;
+      try { await callMethod(accountId, contractId, "mint_stage_figures", { ...args, signature: signed.signature, ...(quoteHash ? { expected_quote_hash: quoteHash } : {}) }, `${quote.total_fee} yoctoNEAR`); }
       catch (error) { if (!(error instanceof UnconfirmedTransactionError)) throw error; }
       const result = await stageMintResult(lifeId);
       if (!result) throw new Error("The stage album is committed; retry it without another mint fee.");
@@ -103,20 +107,19 @@ export function createCliContract(contractId: string, accountId: string): LivesC
       await callMethod(accountId, contractId, "open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: action }, `${terms.mint_fee} yoctoNEAR`);
       return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
     },
-    async rerollMintSlot(lifeId, slot, fee) {
-      await callMethod(accountId, contractId, "reroll_mint_slot", { life_id: lifeId, slot }, `${fee} yoctoNEAR`);
-      return viewMethod(contractId, "get_mint_pack", { life_id: lifeId });
-    },
     async chooseMintSlot(lifeId, slot) {
       await callMethod(accountId, contractId, "choose_mint_slot", { life_id: lifeId, slot }, "1 yoctoNEAR");
+      const completed = await mintResult(lifeId);
+      if (completed) return completed;
       const tokens = await viewMethod<{ token_id: string; metadata: { extra: string } }[]>(contractId, "nft_tokens_for_owner", { account_id: accountId });
       const token = tokens.find(t => JSON.parse(t.metadata.extra).life_id === lifeId);
       if (!token) throw new Error("The selected card's token could not be found.");
       const extra = JSON.parse(token.metadata.extra) as Omit<MintResult, "token_id">;
-      return { token_id: token.token_id, kind: extra.kind, figure_id: extra.figure_id, rarity: extra.rarity, affection: extra.affection };
+      return parseMintResult({ token_id: token.token_id, ...extra });
     },
     figureCopies: figureId => viewMethod(contractId, "figure_copies", { figure_id: figureId }),
     figureSupply: figureId => viewMethod(contractId, "figure_supply", { figure_id: figureId }),
+    editionSupply: async (editionKey, rarity) => parseEditionSupply(await viewMethod<EditionSupply>(contractId, "edition_supply", { edition_key: editionKey, rarity })),
     async startLife(worldVersion) {
       try {
         await callMethod(accountId, contractId, "start_life", { world_version: worldVersion }, "0 NEAR", "50.0 Tgas");

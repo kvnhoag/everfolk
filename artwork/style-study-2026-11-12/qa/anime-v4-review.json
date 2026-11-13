@@ -1,0 +1,204 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\masters\\anime-pixel-v4-review.ecproj",
+  "output": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\anime-coarser-face-comparison.png",
+  "inputs": [
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "key": "previous",
+      "name": "PREVIOUS — 480×270 / exact 4×",
+      "label": "PREVIOUS / 480×270 / 4×",
+      "sha256": "bbde61c87f73ecb1ff582e1416d43caf8650d5805c1f569d3bfd90b51d0f38ae",
+      "item": 2,
+      "stageLayer": 3,
+      "cropComp": 74
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "key": "bold",
+      "name": "BOLD — 320×180 / exact 6×",
+      "label": "BOLD / 320×180 / 6×",
+      "sha256": "1d8a85089e1c103c1096cb374e50a9f0ce4cad077f2912aa972c2f590fae4a75",
+      "item": 26,
+      "stageLayer": 27,
+      "cropComp": 98
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-chunky.png",
+      "key": "chunky",
+      "name": "CHUNKY — 240×135 / exact 8×",
+      "label": "CHUNKY / 240×135 / 8×",
+      "sha256": "9667471575c13c9e212ec33102106d981196dc5c9fe001663c987eea27613769",
+      "item": 50,
+      "stageLayer": 51,
+      "cropComp": 122
+    }
+  ],
+  "fullStageChecks": [
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-chunky.png",
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  ],
+  "faceChecks": [
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 20,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-bold.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 540,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v4\\alexander-anime-pixel-chunky.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 1060,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  ],
+  "stageComp": {
+    "background": [
+      0.06666667014360428,
+      0.09019608050584793,
+      0.0784313753247261
+    ],
+    "duration": 1,
+    "frameRate": 1,
+    "height": 1080,
+    "id": 1,
+    "layers": [
+      {
+        "blendMode": "Normal",
+        "id": 51,
+        "in": 0,
+        "index": 1,
+        "label": "Lavender",
+        "name": "CHUNKY — 240×135 / exact 8× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 27,
+        "in": 0,
+        "index": 2,
+        "label": "Lavender",
+        "name": "BOLD — 320×180 / exact 6× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": true
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 3,
+        "in": 0,
+        "index": 3,
+        "label": "Lavender",
+        "name": "PREVIOUS — 480×270 / exact 4× / 100%, no additional effects",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      }
+    ],
+    "name": "01 — PIXEL STRENGTH REVIEW / 1920×1080 / toggle named layers",
+    "preserveFrameRate": false,
+    "preserveResolution": false,
+    "resolution": "Auto",
+    "resolutionFactor": null,
+    "width": 1920,
+    "workArea": [
+      0,
+      1
+    ]
+  },
+  "faceComp": 146,
+  "nativeReopenMatches": true,
+  "inputsUnchanged": true
+}

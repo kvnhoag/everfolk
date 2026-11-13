@@ -1,0 +1,158 @@
+{
+  "artboards": [
+    {
+      "height": 340,
+      "name": "15 Primary lockup",
+      "width": 720,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "15 Colour device",
+      "width": 160,
+      "x": 760,
+      "y": 0
+    },
+    {
+      "height": 160,
+      "name": "15 One-colour device",
+      "width": 160,
+      "x": 960,
+      "y": 0
+    },
+    {
+      "height": 340,
+      "name": "15 Reverse lockup",
+      "width": 720,
+      "x": 0,
+      "y": 400
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 19,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / 15 Shared Table",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 200.37937499999998,
+        "width": 246.7587890625,
+        "x": 236.94287109375,
+        "y": 452.48
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ffff4f",
+      "dimImages": null,
+      "id": 19,
+      "kind": "Layer",
+      "locked": false,
+      "name": "04 Reverse lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 84.80000000000001,
+        "width": 87.03999999999996,
+        "x": 996.48,
+        "y": 40.32
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4f4fff",
+      "dimImages": null,
+      "id": 14,
+      "kind": "Layer",
+      "locked": false,
+      "name": "03 One-colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 84.80000000000001,
+        "width": 87.03999999999996,
+        "x": 796.48,
+        "y": 40.32
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 9,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Colour device",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 200.37937499999998,
+        "width": 246.7587890625,
+        "x": 236.94287109375,
+        "y": 52.480000000000004
+      },
+      "childCount": 3,
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Primary lockup / live type",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "childCount": 0,
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 25,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#b58a49",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 4.5
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-logos-2026-11-11\\masters\\15-shared-table.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "15-shared-table.vectorcraft",
+  "tool": "selection",
+  "uid": 38,
+  "units": "Pixels"
+}

@@ -1,4 +1,5 @@
 import { sha256Hex } from "../../chain/hash.ts";
+import { editionLimit } from "../../chain/editions.ts";
 import type { Category } from "../../chain/ids.ts";
 import type { ChainConfig } from "./config.ts";
 import { viewFunction, type FetchLike } from "./rpc.ts";
@@ -8,7 +9,7 @@ import {
 } from "./validate.ts";
 import {
   parseDraw, parseLife, parseListing, parseMintFee, parseMintResult, parseOptionalLife, parseStringList,
-  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parseMarketTerms, parsePoolEntries, parseFigureSupply, parseStageMintQuote, parseStageMintResult,
+  parseTokenStats, parseTokenView, parseYocto, parseMintPack, parseMintTerms, parseMarketTerms, parsePoolEntries, parseFigureSupply, parseStageMintQuote, parseStageMintResult, parseEditionSupply,
 } from "./wire.ts";
 
 const TGAS = 10n ** 12n;
@@ -24,7 +25,6 @@ export const CALL_GAS = {
   mint_stage_figures: gas(300n),
   retry_stage_mint: gas(300n),
   open_mint_pack: gas(250n),
-  reroll_mint_slot: gas(200n),
   choose_mint_slot: gas(250n),
   retry_mint: gas(200n),
   set_action: gas(50n),
@@ -43,7 +43,7 @@ const PAGE = 100;
 
 type Method = keyof typeof CALL_GAS;
 function assertSlot(slot: number) {
-  if (!Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Choose one of the three mint slots.");
+  if (!Number.isInteger(slot) || slot < 0 || slot > 4) throw new Error("Choose one of the available mint slots (1 to 5).");
 }
 
 function accessFor(method: Method, deposit: string): CallAccess {
@@ -180,7 +180,7 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       assertLifeId(lifeId); await assertEvidenceFor(lifeId, signed);
       return parseStageMintQuote(await view("stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: npcActionId }));
     },
-    async mintStageFigures(lifeId, signed, npcActionId, expectedFee) {
+    async mintStageFigures(lifeId, signed, npcActionId, expectedFee, expectedQuoteHash) {
       assertLifeId(lifeId); await assertEvidenceFor(lifeId, signed);
       const completed = await stageMintResult(lifeId);
       if (completed) return completed;
@@ -188,8 +188,10 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       if (life?.status === "minting") return retryStageMint(lifeId);
       const quote = parseStageMintQuote(await view("stage_mint_quote", { life_id: lifeId, evidence_json: signed.evidence_json, npc_action_id: npcActionId }));
       if (expectedFee !== undefined && quote.total_fee !== expectedFee) throw new Error("Stage prices changed as historical supply changed. Refresh prices before paying.");
+      if (expectedQuoteHash !== undefined && quote.quote_hash !== expectedQuoteHash) throw new Error("Stage cards changed as edition supply changed. Review the album before paying.");
+      const quoteHash = expectedQuoteHash ?? quote.quote_hash;
       try {
-        return parseStageMintResult(await call("mint_stage_figures", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, quote.total_fee));
+        return parseStageMintResult(await call("mint_stage_figures", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId, ...(quoteHash === undefined ? {} : { expected_quote_hash: quoteHash }) }, quote.total_fee));
       } catch (error) {
         const landed = await stageMintResult(lifeId).catch(() => null);
         if (landed) return landed;
@@ -215,16 +217,19 @@ export function createLivesContract(wallet: WalletSession, cfg: ChainConfig, dep
       const terms = parseMintTerms(await view("mint_terms", {}));
       return parseMintPack(await call("open_mint_pack", { life_id: lifeId, evidence_json: signed.evidence_json, signature: signed.signature, npc_action_id: npcActionId }, terms.mint_fee));
     },
-    async rerollMintSlot(lifeId, slot, feeYocto) {
-      assertLifeId(lifeId); assertSlot(slot); assertPrice(feeYocto);
-      return parseMintPack(await call("reroll_mint_slot", { life_id: lifeId, slot }, feeYocto));
-    },
     async chooseMintSlot(lifeId, slot) {
       assertLifeId(lifeId); assertSlot(slot);
       return parseMintResult(await call("choose_mint_slot", { life_id: lifeId, slot }, ONE_YOCTO));
     },
     async figureCopies(figureId) { return parsePoolEntries(await view("figure_copies", { figure_id: figureId })); },
     async figureSupply(figureId) { return parseFigureSupply(await view("figure_supply", { figure_id: figureId })); },
+    async editionSupply(editionKey, rarity) {
+      if (typeof editionKey !== "string" || !editionKey.length || editionKey.length > 1024) throw new Error("A card edition key is required.");
+      editionLimit(rarity);
+      const supply = parseEditionSupply(await view("edition_supply", { edition_key: editionKey, rarity }));
+      if (supply.edition_key !== editionKey || supply.rarity !== rarity) throw new Error("The contract returned a different card edition.");
+      return supply;
+    },
     async withdraw() {
       await call("withdraw", {});
     },

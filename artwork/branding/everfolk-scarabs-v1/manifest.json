@@ -1,0 +1,369 @@
+{
+  "name": "Everfolk / ten scarab logo directions",
+  "date": "2026-11-11",
+  "identity": "An independent scarab emblem and independent Everfolk. wordmark; optional stacked and horizontal signatures.",
+  "wordmark": {
+    "font": "Eczar",
+    "weight": 600,
+    "trackingEm": -0.025,
+    "source": "../everfolk-printed-folktale",
+    "artwork": "Original approved outlines, clean small-size treatment, clay terminal period."
+  },
+  "palette": {
+    "olive": "#292c25",
+    "card": "#33372e",
+    "paper": "#f1ead8",
+    "cream": "#e7e0c9",
+    "ink": "#284744",
+    "clay": "#db9c78",
+    "clayInk": "#9b553e",
+    "muted": "#b4b59e",
+    "rule": "#505548",
+    "darkMuted": "#6b7566",
+    "lightCard": "#e8e2d2"
+  },
+  "references": [
+    {
+      "url": "https://www.metmuseum.org/art/collection/search/549272",
+      "role": "Historical basis for becoming and coming into existence; geometry is original."
+    },
+    {
+      "url": "https://www.ubisoft.com/en-us/game/assassins-creed",
+      "role": "Requested identity architecture: independently sufficient emblem and name. No Ubisoft artwork or lettering used."
+    }
+  ],
+  "review": "review/Everfolk-10-Scarab-Directions.png",
+  "concepts": [
+    {
+      "number": 1,
+      "name": "Becoming",
+      "slug": "becoming",
+      "meaning": "A life coming into being; a small creature lifting a new beginning.",
+      "designNotes": "A compact solar scarab with an independent disc, lifted forelegs, broad wingcases and a clear central seam. The disc belongs to the emblem rather than the lettering.",
+      "inkBounds": {
+        "height": 226,
+        "width": 220,
+        "x": 18,
+        "y": 12
+      },
+      "master": "masters/01-becoming.vectorcraft",
+      "proof": "review/01-becoming-proof.png",
+      "variants": [
+        {
+          "svg": "svg/01-becoming-emblem-ink.svg",
+          "png": "png/01-becoming-emblem-ink.png"
+        },
+        {
+          "svg": "svg/01-becoming-emblem-cream.svg",
+          "png": "png/01-becoming-emblem-cream.png"
+        },
+        {
+          "svg": "svg/01-becoming-stacked-cream.svg",
+          "png": "png/01-becoming-stacked-cream.png"
+        },
+        {
+          "svg": "svg/01-becoming-horizontal-ink.svg",
+          "png": "png/01-becoming-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Quiet Amulet",
+      "slug": "quiet-amulet",
+      "meaning": "The value of a single ordinary life, held in a simple enduring form.",
+      "designNotes": "The pure beetle: softly rounded shell, short bent legs and no external ornament. A dense silhouette with generous transparent gaps survives small sizes.",
+      "inkBounds": {
+        "height": 194.07142857142856,
+        "width": 196,
+        "x": 30,
+        "y": 39.92857142857143
+      },
+      "master": "masters/02-quiet-amulet.vectorcraft",
+      "proof": "review/02-quiet-amulet-proof.png",
+      "variants": [
+        {
+          "svg": "svg/02-quiet-amulet-emblem-ink.svg",
+          "png": "png/02-quiet-amulet-emblem-ink.png"
+        },
+        {
+          "svg": "svg/02-quiet-amulet-emblem-cream.svg",
+          "png": "png/02-quiet-amulet-emblem-cream.png"
+        },
+        {
+          "svg": "svg/02-quiet-amulet-stacked-cream.svg",
+          "png": "png/02-quiet-amulet-stacked-cream.png"
+        },
+        {
+          "svg": "svg/02-quiet-amulet-horizontal-ink.svg",
+          "png": "png/02-quiet-amulet-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Crossroads",
+      "slug": "crossroads",
+      "meaning": "A life takes one course while other possibilities branch away.",
+      "designNotes": "A branching transparent channel is built into the shell itself. A small central plate and two heavy wingcases form the Y without added decoration or a background-coloured cutout.",
+      "inkBounds": {
+        "height": 191.5,
+        "width": 220,
+        "x": 18,
+        "y": 47.5
+      },
+      "master": "masters/03-crossroads.vectorcraft",
+      "proof": "review/03-crossroads-proof.png",
+      "variants": [
+        {
+          "svg": "svg/03-crossroads-emblem-ink.svg",
+          "png": "png/03-crossroads-emblem-ink.png"
+        },
+        {
+          "svg": "svg/03-crossroads-emblem-cream.svg",
+          "png": "png/03-crossroads-emblem-cream.png"
+        },
+        {
+          "svg": "svg/03-crossroads-stacked-cream.svg",
+          "png": "png/03-crossroads-stacked-cream.png"
+        },
+        {
+          "svg": "svg/03-crossroads-horizontal-ink.svg",
+          "png": "png/03-crossroads-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Earth Seal",
+      "slug": "earth-seal",
+      "meaning": "An individual life leaves its own imperfect imprint on the world.",
+      "designNotes": "A broad, deliberately uneven scarab with shovel-like front legs and a hand-carved shell. Its asymmetry is structural and remains editable filled geometry, not a distressed raster effect.",
+      "inkBounds": {
+        "height": 195,
+        "width": 216,
+        "x": 20,
+        "y": 39
+      },
+      "master": "masters/04-earth-seal.vectorcraft",
+      "proof": "review/04-earth-seal-proof.png",
+      "variants": [
+        {
+          "svg": "svg/04-earth-seal-emblem-ink.svg",
+          "png": "png/04-earth-seal-emblem-ink.png"
+        },
+        {
+          "svg": "svg/04-earth-seal-emblem-cream.svg",
+          "png": "png/04-earth-seal-emblem-cream.png"
+        },
+        {
+          "svg": "svg/04-earth-seal-stacked-cream.svg",
+          "png": "png/04-earth-seal-stacked-cream.png"
+        },
+        {
+          "svg": "svg/04-earth-seal-horizontal-ink.svg",
+          "png": "png/04-earth-seal-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Dawnwing",
+      "slug": "dawnwing",
+      "meaning": "A life opening outward into a wider world.",
+      "designNotes": "Wide ceremonial silhouette with three broad wing lobes on each side. The restrained divisions are genuine transparent spaces. A compact paired abdomen and six bent legs preserve the beetle reading.",
+      "inkBounds": {
+        "height": 180,
+        "width": 228,
+        "x": 14,
+        "y": 53
+      },
+      "master": "masters/05-dawnwing.vectorcraft",
+      "proof": "review/05-dawnwing-proof.png",
+      "variants": [
+        {
+          "svg": "svg/05-dawnwing-emblem-ink.svg",
+          "png": "png/05-dawnwing-emblem-ink.png"
+        },
+        {
+          "svg": "svg/05-dawnwing-emblem-cream.svg",
+          "png": "png/05-dawnwing-emblem-cream.png"
+        },
+        {
+          "svg": "svg/05-dawnwing-stacked-cream.svg",
+          "png": "png/05-dawnwing-stacked-cream.png"
+        },
+        {
+          "svg": "svg/05-dawnwing-horizontal-ink.svg",
+          "png": "png/05-dawnwing-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Upward",
+      "slug": "upward",
+      "meaning": "Potential, effort and the possibility of becoming.",
+      "designNotes": "Tall, curved wings rise independently like two unfurling blades. The rounded twin peaks and U-shaped opening are deliberately distinct from a pointed hood or triangular crest. Lower legs keep the mark rooted and recognisably insect-like.",
+      "inkBounds": {
+        "height": 216,
+        "width": 156.26250927472572,
+        "x": 49.86874536263713,
+        "y": 18
+      },
+      "master": "masters/06-upward.vectorcraft",
+      "proof": "review/06-upward-proof.png",
+      "variants": [
+        {
+          "svg": "svg/06-upward-emblem-ink.svg",
+          "png": "png/06-upward-emblem-ink.png"
+        },
+        {
+          "svg": "svg/06-upward-emblem-cream.svg",
+          "png": "png/06-upward-emblem-cream.png"
+        },
+        {
+          "svg": "svg/06-upward-stacked-cream.svg",
+          "png": "png/06-upward-stacked-cream.png"
+        },
+        {
+          "svg": "svg/06-upward-horizontal-ink.svg",
+          "png": "png/06-upward-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Unfolding",
+      "slug": "unfolding",
+      "meaning": "A living possibility revealed and protected as a story unfolds.",
+      "designNotes": "Two open shell wings frame a central seed-shaped abdomen. Its interior opening is a true reversed-winding cutout. The six legs and toothed head anchor the abstract germ motif in the scarab form.",
+      "inkBounds": {
+        "height": 176,
+        "width": 182,
+        "x": 37,
+        "y": 44
+      },
+      "master": "masters/07-unfolding.vectorcraft",
+      "proof": "review/07-unfolding-proof.png",
+      "variants": [
+        {
+          "svg": "svg/07-unfolding-emblem-ink.svg",
+          "png": "png/07-unfolding-emblem-ink.png"
+        },
+        {
+          "svg": "svg/07-unfolding-emblem-cream.svg",
+          "png": "png/07-unfolding-emblem-cream.png"
+        },
+        {
+          "svg": "svg/07-unfolding-stacked-cream.svg",
+          "png": "png/07-unfolding-stacked-cream.png"
+        },
+        {
+          "svg": "svg/07-unfolding-horizontal-ink.svg",
+          "png": "png/07-unfolding-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Heart of a Life",
+      "slug": "heart-of-a-life",
+      "meaning": "A life has a human centre: attachment, belonging and the people who give it meaning.",
+      "designNotes": "Two substantial wing-cases create a restrained heart-shaped shell. The head, broad thorax and three pairs of folded legs keep the mark unmistakably a scarab. Its centre seam remains open.",
+      "inkBounds": {
+        "height": 194,
+        "width": 212,
+        "x": 22,
+        "y": 31
+      },
+      "master": "masters/08-heart-of-a-life.vectorcraft",
+      "proof": "review/08-heart-of-a-life-proof.png",
+      "variants": [
+        {
+          "svg": "svg/08-heart-of-a-life-emblem-ink.svg",
+          "png": "png/08-heart-of-a-life-emblem-ink.png"
+        },
+        {
+          "svg": "svg/08-heart-of-a-life-emblem-cream.svg",
+          "png": "png/08-heart-of-a-life-emblem-cream.png"
+        },
+        {
+          "svg": "svg/08-heart-of-a-life-stacked-cream.svg",
+          "png": "png/08-heart-of-a-life-stacked-cream.png"
+        },
+        {
+          "svg": "svg/08-heart-of-a-life-horizontal-ink.svg",
+          "png": "png/08-heart-of-a-life-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "name": "Another Beginning",
+      "slug": "another-beginning",
+      "meaning": "Every new life opens into circumstances and possibilities of its own.",
+      "designNotes": "The negative space between the elytra becomes an open threshold. The opening reaches the outside rather than sitting inside an enclosing badge. Square-ended legs and a tall shell give this scarab an architectural stance.",
+      "inkBounds": {
+        "height": 211,
+        "width": 206,
+        "x": 25,
+        "y": 31
+      },
+      "master": "masters/09-another-beginning.vectorcraft",
+      "proof": "review/09-another-beginning-proof.png",
+      "variants": [
+        {
+          "svg": "svg/09-another-beginning-emblem-ink.svg",
+          "png": "png/09-another-beginning-emblem-ink.png"
+        },
+        {
+          "svg": "svg/09-another-beginning-emblem-cream.svg",
+          "png": "png/09-another-beginning-emblem-cream.png"
+        },
+        {
+          "svg": "svg/09-another-beginning-stacked-cream.svg",
+          "png": "png/09-another-beginning-stacked-cream.png"
+        },
+        {
+          "svg": "svg/09-another-beginning-horizontal-ink.svg",
+          "png": "png/09-another-beginning-horizontal-ink.png"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "name": "Toward the Horizon",
+      "slug": "toward-the-horizon",
+      "meaning": "A small life reaches forward into an open future.",
+      "designNotes": "A low, generous pair of wing-cases rests beneath long, rising forelegs. The arms hold open space rather than a solar disc. Its broad base and open upper silhouette distinguish it from the compact amulet and spread-wing directions.",
+      "inkBounds": {
+        "height": 203,
+        "width": 224,
+        "x": 16,
+        "y": 29
+      },
+      "master": "masters/10-toward-the-horizon.vectorcraft",
+      "proof": "review/10-toward-the-horizon-proof.png",
+      "variants": [
+        {
+          "svg": "svg/10-toward-the-horizon-emblem-ink.svg",
+          "png": "png/10-toward-the-horizon-emblem-ink.png"
+        },
+        {
+          "svg": "svg/10-toward-the-horizon-emblem-cream.svg",
+          "png": "png/10-toward-the-horizon-emblem-cream.png"
+        },
+        {
+          "svg": "svg/10-toward-the-horizon-stacked-cream.svg",
+          "png": "png/10-toward-the-horizon-stacked-cream.png"
+        },
+        {
+          "svg": "svg/10-toward-the-horizon-horizontal-ink.svg",
+          "png": "png/10-toward-the-horizon-horizontal-ink.png"
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}

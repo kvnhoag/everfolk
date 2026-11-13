@@ -1,0 +1,80 @@
+{
+  "figureId": "euclid",
+  "figureName": "Euclid",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Proof Checker",
+  "displayTitle": "Proof Checker",
+  "subtitle": "Keeper of Euclid's Reasoning",
+  "bodyTitle": "No Step Unexamined",
+  "bodyText": "A proof checker questions every inference and tests whether a construction truly follows. This exacting reader guards the chain of reasoning, making an elegant conclusion worthy of the certainty it claims.",
+  "sourceRoleSlug": "euclid-rare",
+  "newArt": false,
+  "slug": "euclid-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Proof Checker",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-male-pixel.png",
+  "sourceArtSlug": "euclid-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 24,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/euclid.svg",
+    "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A proof checker questions every inference and tests whether",
+    "a construction truly follows. This exacting reader guards",
+    "the chain of reasoning, making an elegant conclusion worthy",
+    "of the certainty it claims."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-rare-male.svg",
+  "fittedArt": "assets/fitted/euclid-rare-male.png",
+  "overlaySvg": "source/overlays/euclid-rare-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+  "master": "masters/euclid-rare-male.vectorcraft",
+  "export": "exports/euclid-rare-male.png",
+  "thumbnail": "assets/euclid-rare-male-thumb.png",
+  "exportSha256": "797600c42869ddf6b268f79281b35201e8bbac49fd8eb3d9fb98b9162e466afe",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582846,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

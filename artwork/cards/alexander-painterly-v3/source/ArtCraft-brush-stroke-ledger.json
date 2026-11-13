@@ -1,0 +1,2309 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\source\\alexander-painterly-base.png",
+  "sourceSha256": "2ea3d601d44bb12ea94dbb04abbc77c93793cbfe6f0a9a6cae4aa26476dab463",
+  "dimensions": [
+    1122,
+    1402
+  ],
+  "generatedBase": true,
+  "authoredBrushPass": true,
+  "totalStrokes": 30,
+  "brushLayers": 4,
+  "brushes": {
+    "shadow": {
+      "name": "HL Shadow Bristle",
+      "shape": "roundPoint",
+      "size": 10,
+      "density": 55,
+      "thickness": 18,
+      "opacity": 14,
+      "stiffness": 70,
+      "length": 100
+    },
+    "halftone": {
+      "name": "HL Halftone Bristle",
+      "shape": "roundPoint",
+      "size": 8,
+      "density": 45,
+      "thickness": 14,
+      "opacity": 18,
+      "stiffness": 70,
+      "length": 100
+    },
+    "fold": {
+      "name": "HL Broken Fold Bristle",
+      "shape": "flatFan",
+      "size": 12,
+      "density": 18,
+      "thickness": 12,
+      "opacity": 24,
+      "stiffness": 65,
+      "length": 100
+    },
+    "hair": {
+      "name": "HL Fine Hair Bristle",
+      "shape": "roundPoint",
+      "size": 4,
+      "density": 25,
+      "thickness": 12,
+      "opacity": 18,
+      "stiffness": 80,
+      "length": 100
+    },
+    "eye": {
+      "name": "HL Eye Accent Bristle",
+      "shape": "roundPoint",
+      "size": 2,
+      "density": 70,
+      "thickness": 10,
+      "opacity": 15,
+      "stiffness": 90,
+      "length": 100
+    }
+  },
+  "strokes": [
+    {
+      "index": 1,
+      "layer": "shadow",
+      "description": "Cool cheek-side glaze",
+      "brush": "shadow",
+      "color": "#50584c",
+      "opacity": 18,
+      "width": 8,
+      "points": [
+        [
+          553,
+          404,
+          0.2
+        ],
+        [
+          558,
+          420,
+          0.7
+        ],
+        [
+          557,
+          439,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 4,
+      "layerId": 3
+    },
+    {
+      "index": 2,
+      "layer": "shadow",
+      "description": "Jaw plane transition",
+      "brush": "shadow",
+      "color": "#555a48",
+      "opacity": 18,
+      "width": 10,
+      "points": [
+        [
+          538,
+          470,
+          0.2
+        ],
+        [
+          515,
+          483,
+          0.7
+        ],
+        [
+          483,
+          481,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 5,
+      "layerId": 3
+    },
+    {
+      "index": 3,
+      "layer": "shadow",
+      "description": "Cool right neck turn",
+      "brush": "shadow",
+      "color": "#373f37",
+      "opacity": 18,
+      "width": 14,
+      "points": [
+        [
+          541,
+          499,
+          0.2
+        ],
+        [
+          540,
+          527,
+          0.8
+        ],
+        [
+          533,
+          549,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 6,
+      "layerId": 3
+    },
+    {
+      "index": 4,
+      "layer": "shadow",
+      "description": "Lower neck reflected shadow",
+      "brush": "shadow",
+      "color": "#5a604b",
+      "opacity": 16,
+      "width": 12,
+      "points": [
+        [
+          468,
+          523,
+          0.2
+        ],
+        [
+          483,
+          542,
+          0.7
+        ],
+        [
+          497,
+          557,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 7,
+      "layerId": 3
+    },
+    {
+      "index": 5,
+      "layer": "shadow",
+      "description": "Raised forearm cool turn",
+      "brush": "shadow",
+      "color": "#55594a",
+      "opacity": 16,
+      "width": 10,
+      "points": [
+        [
+          113,
+          390,
+          0.2
+        ],
+        [
+          93,
+          427,
+          0.8
+        ],
+        [
+          77,
+          469,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 8,
+      "layerId": 3
+    },
+    {
+      "index": 6,
+      "layer": "shadow",
+      "description": "Lower lip plane only",
+      "brush": "shadow",
+      "color": "#594f41",
+      "opacity": 12,
+      "width": 5,
+      "points": [
+        [
+          518,
+          450,
+          0.2
+        ],
+        [
+          536,
+          454,
+          0.6
+        ],
+        [
+          549,
+          451,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 9,
+      "layerId": 3
+    },
+    {
+      "index": 7,
+      "layer": "halftone",
+      "description": "Olive cheek halftone",
+      "brush": "halftone",
+      "color": "#8b8f70",
+      "opacity": 20,
+      "width": 9,
+      "points": [
+        [
+          463,
+          405,
+          0.2
+        ],
+        [
+          475,
+          414,
+          0.7
+        ],
+        [
+          482,
+          427,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 11,
+      "layerId": 10
+    },
+    {
+      "index": 8,
+      "layer": "halftone",
+      "description": "Olive-grey neck halftone",
+      "brush": "halftone",
+      "color": "#969477",
+      "opacity": 18,
+      "width": 12,
+      "points": [
+        [
+          479,
+          490,
+          0.2
+        ],
+        [
+          492,
+          516,
+          0.8
+        ],
+        [
+          503,
+          534,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 12,
+      "layerId": 10
+    },
+    {
+      "index": 9,
+      "layer": "halftone",
+      "description": "Ear-side reflected colour",
+      "brush": "halftone",
+      "color": "#9c9575",
+      "opacity": 18,
+      "width": 7,
+      "points": [
+        [
+          443,
+          425,
+          0.2
+        ],
+        [
+          454,
+          445,
+          0.7
+        ],
+        [
+          461,
+          454,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 13,
+      "layerId": 10
+    },
+    {
+      "index": 10,
+      "layer": "halftone",
+      "description": "Small warm nose-plane light",
+      "brush": "halftone",
+      "color": "#cdaa7d",
+      "opacity": 20,
+      "width": 3,
+      "points": [
+        [
+          525,
+          383,
+          0.3
+        ],
+        [
+          527,
+          389,
+          0.65
+        ],
+        [
+          529,
+          395,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 14,
+      "layerId": 10
+    },
+    {
+      "index": 11,
+      "layer": "halftone",
+      "description": "Cheek light below eye, not eyelid",
+      "brush": "halftone",
+      "color": "#b79c79",
+      "opacity": 15,
+      "width": 5,
+      "points": [
+        [
+          474,
+          386,
+          0.2
+        ],
+        [
+          487,
+          390,
+          0.7
+        ],
+        [
+          498,
+          396,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 15,
+      "layerId": 10
+    },
+    {
+      "index": 12,
+      "layer": "halftone",
+      "description": "Broken forehead plane light",
+      "brush": "halftone",
+      "color": "#c9a67f",
+      "opacity": 18,
+      "width": 6,
+      "points": [
+        [
+          486,
+          332,
+          0.2
+        ],
+        [
+          502,
+          337,
+          0.65
+        ],
+        [
+          513,
+          342,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 16,
+      "layerId": 10
+    },
+    {
+      "index": 13,
+      "layer": "halftone",
+      "description": "Raised arm warm/cool transition",
+      "brush": "halftone",
+      "color": "#998e70",
+      "opacity": 18,
+      "width": 9,
+      "points": [
+        [
+          136,
+          349,
+          0.2
+        ],
+        [
+          120,
+          376,
+          0.75
+        ],
+        [
+          107,
+          403,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 17,
+      "layerId": 10
+    },
+    {
+      "index": 14,
+      "layer": "halftone",
+      "description": "Lower neck reflected light",
+      "brush": "halftone",
+      "color": "#aea786",
+      "opacity": 18,
+      "width": 7,
+      "points": [
+        [
+          470,
+          551,
+          0.2
+        ],
+        [
+          483,
+          562,
+          0.65
+        ],
+        [
+          494,
+          566,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 18,
+      "layerId": 10
+    },
+    {
+      "index": 15,
+      "layer": "fold",
+      "description": "Ivory shoulder fold, broken edge",
+      "brush": "fold",
+      "color": "#d7c6a4",
+      "opacity": 28,
+      "width": 12,
+      "points": [
+        [
+          183,
+          540,
+          0.2
+        ],
+        [
+          220,
+          555,
+          0.7
+        ],
+        [
+          254,
+          571,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 20,
+      "layerId": 19
+    },
+    {
+      "index": 16,
+      "layer": "fold",
+      "description": "Upper sleeve diagonal plane",
+      "brush": "fold",
+      "color": "#dfccaf",
+      "opacity": 28,
+      "width": 10,
+      "points": [
+        [
+          244,
+          594,
+          0.2
+        ],
+        [
+          264,
+          616,
+          0.75
+        ],
+        [
+          278,
+          637,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 21,
+      "layerId": 19
+    },
+    {
+      "index": 17,
+      "layer": "fold",
+      "description": "Long turning sleeve fold",
+      "brush": "fold",
+      "color": "#c8bda7",
+      "opacity": 27,
+      "width": 13,
+      "points": [
+        [
+          308,
+          656,
+          0.2
+        ],
+        [
+          294,
+          688,
+          0.8
+        ],
+        [
+          278,
+          714,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 22,
+      "layerId": 19
+    },
+    {
+      "index": 18,
+      "layer": "fold",
+      "description": "Sleeve lower fold crest",
+      "brush": "fold",
+      "color": "#e0ceb2",
+      "opacity": 27,
+      "width": 8,
+      "points": [
+        [
+          259,
+          700,
+          0.2
+        ],
+        [
+          244,
+          729,
+          0.7
+        ],
+        [
+          233,
+          744,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 23,
+      "layerId": 19
+    },
+    {
+      "index": 19,
+      "layer": "fold",
+      "description": "Sleeve underside reflected break",
+      "brush": "fold",
+      "color": "#b8b198",
+      "opacity": 24,
+      "width": 7,
+      "points": [
+        [
+          207,
+          753,
+          0.2
+        ],
+        [
+          224,
+          772,
+          0.7
+        ],
+        [
+          244,
+          787,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 24,
+      "layerId": 19
+    },
+    {
+      "index": 20,
+      "layer": "fold",
+      "description": "Red cloak shoulder ridge",
+      "brush": "fold",
+      "color": "#bd563e",
+      "opacity": 25,
+      "width": 10,
+      "points": [
+        [
+          283,
+          520,
+          0.2
+        ],
+        [
+          312,
+          528,
+          0.75
+        ],
+        [
+          339,
+          540,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 25,
+      "layerId": 19
+    },
+    {
+      "index": 21,
+      "layer": "fold",
+      "description": "Red cloak turn after clasp",
+      "brush": "fold",
+      "color": "#9b4d3b",
+      "opacity": 25,
+      "width": 10,
+      "points": [
+        [
+          470,
+          608,
+          0.2
+        ],
+        [
+          502,
+          624,
+          0.75
+        ],
+        [
+          533,
+          632,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 26,
+      "layerId": 19
+    },
+    {
+      "index": 22,
+      "layer": "fold",
+      "description": "Red cloak right fold break",
+      "brush": "fold",
+      "color": "#8e4434",
+      "opacity": 23,
+      "width": 10,
+      "points": [
+        [
+          550,
+          653,
+          0.2
+        ],
+        [
+          576,
+          673,
+          0.7
+        ],
+        [
+          597,
+          683,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 27,
+      "layerId": 19
+    },
+    {
+      "index": 23,
+      "layer": "fold",
+      "description": "Falling cloak left broken light",
+      "brush": "fold",
+      "color": "#b0523e",
+      "opacity": 25,
+      "width": 12,
+      "points": [
+        [
+          127,
+          868,
+          0.2
+        ],
+        [
+          101,
+          899,
+          0.75
+        ],
+        [
+          83,
+          923,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 28,
+      "layerId": 19
+    },
+    {
+      "index": 24,
+      "layer": "fold",
+      "description": "Lower cloak broken accent",
+      "brush": "fold",
+      "color": "#a94f3d",
+      "opacity": 23,
+      "width": 9,
+      "points": [
+        [
+          128,
+          1050,
+          0.2
+        ],
+        [
+          99,
+          1080,
+          0.75
+        ],
+        [
+          77,
+          1097,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 29,
+      "layerId": 19
+    },
+    {
+      "index": 25,
+      "layer": "fold",
+      "description": "Lower ivory fold crest",
+      "brush": "fold",
+      "color": "#d7c7ac",
+      "opacity": 24,
+      "width": 10,
+      "points": [
+        [
+          215,
+          1176,
+          0.2
+        ],
+        [
+          237,
+          1167,
+          0.7
+        ],
+        [
+          260,
+          1161,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 30,
+      "layerId": 19
+    },
+    {
+      "index": 26,
+      "layer": "fold",
+      "description": "Lower ivory fold direction",
+      "brush": "fold",
+      "color": "#d4c8b2",
+      "opacity": 24,
+      "width": 10,
+      "points": [
+        [
+          157,
+          1225,
+          0.2
+        ],
+        [
+          182,
+          1205,
+          0.7
+        ],
+        [
+          205,
+          1190,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 31,
+      "layerId": 19
+    },
+    {
+      "index": 27,
+      "layer": "fold",
+      "description": "Selected lit hair strand",
+      "brush": "hair",
+      "color": "#ba8e59",
+      "opacity": 22,
+      "width": 4,
+      "points": [
+        [
+          374,
+          321,
+          0.2
+        ],
+        [
+          390,
+          307,
+          0.7
+        ],
+        [
+          414,
+          303,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 32,
+      "layerId": 19
+    },
+    {
+      "index": 28,
+      "layer": "fold",
+      "description": "Selected crown curl light",
+      "brush": "hair",
+      "color": "#c49d66",
+      "opacity": 22,
+      "width": 4,
+      "points": [
+        [
+          458,
+          273,
+          0.2
+        ],
+        [
+          480,
+          269,
+          0.7
+        ],
+        [
+          498,
+          267,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 33,
+      "layerId": 19
+    },
+    {
+      "index": 29,
+      "layer": "eye",
+      "description": "Near existing catchlight only",
+      "brush": "eye",
+      "color": "#c4b99a",
+      "opacity": 12,
+      "width": 0.8,
+      "points": [
+        [
+          486.1,
+          364,
+          0.25
+        ],
+        [
+          486.8,
+          364.1,
+          0.6
+        ],
+        [
+          487.1,
+          364.2,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 35,
+      "layerId": 34
+    },
+    {
+      "index": 30,
+      "layer": "eye",
+      "description": "Far existing catchlight only",
+      "brush": "eye",
+      "color": "#bcb199",
+      "opacity": 10,
+      "width": 0.7,
+      "points": [
+        [
+          552.9,
+          372,
+          0.25
+        ],
+        [
+          553.5,
+          372.1,
+          0.55
+        ],
+        [
+          553.8,
+          372.2,
+          0.2
+        ]
+      ],
+      "blend": "Normal",
+      "objectId": 36,
+      "layerId": 34
+    }
+  ],
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\masters\\Alexander-Painterly-Brushwork.vectorcraft",
+  "overlayPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\assets\\ArtCraft-brush-strokes.png",
+  "compositePath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\source\\alexander-painterly-brushed.png",
+  "warnings": [],
+  "overlayExport": {
+    "bytes": 32394,
+    "format": "png",
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\assets\\ArtCraft-brush-strokes.png",
+    "warnings": []
+  },
+  "nativeStructure": {
+    "artboards": [
+      {
+        "height": 1402,
+        "name": "Artboard 1",
+        "width": 1122,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "colorMode": "Rgb",
+    "currentLayer": 34,
+    "dirty": false,
+    "fileInfoTitle": "Alexander / generated painterly base plus 30 authored bristle strokes",
+    "history": [
+      "Layer Options",
+      "Place",
+      "Layer Options",
+      "New Brush",
+      "New Brush",
+      "New Brush",
+      "New Brush",
+      "New Brush",
+      "New Layer",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "New Layer",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "New Layer",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Object Properties",
+      "New Layer",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Pencil",
+      "Paintbrush",
+      "Stroke",
+      "Object Properties",
+      "Layer Options",
+      "Layer Options"
+    ],
+    "isolation": null,
+    "key": null,
+    "keyGuide": null,
+    "layerRows": [
+      34
+    ],
+    "layers": [
+      {
+        "bounds": {
+          "height": 8.199999999999989,
+          "width": 67.69999999999993,
+          "x": 486.1,
+          "y": 364
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0.19999999999998863,
+              "width": 0.8999999999999773,
+              "x": 552.9,
+              "y": 372
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 36,
+            "kind": "Path",
+            "locked": false,
+            "name": "30 / Far existing catchlight only",
+            "opacity": 0.10000000149011612,
+            "opacityPct": 10,
+            "stroke": "#bcb199",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.35,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 0.19999999999998863,
+              "width": 1,
+              "x": 486.1,
+              "y": 364
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 35,
+            "kind": "Path",
+            "locked": false,
+            "name": "29 / Near existing catchlight only",
+            "opacity": 0.11999999731779099,
+            "opacityPct": 12,
+            "stroke": "#c4b99a",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.4,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ffff4f",
+        "dimImages": null,
+        "id": 34,
+        "kind": "Layer",
+        "locked": false,
+        "name": "40 Eye Accents / tiny existing catchlights only",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 958,
+          "width": 520,
+          "x": 77,
+          "y": 267
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 6,
+              "width": 40,
+              "x": 458,
+              "y": 267
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 33,
+            "kind": "Path",
+            "locked": false,
+            "name": "28 / Selected crown curl light",
+            "opacity": 0.2199999988079071,
+            "opacityPct": 22,
+            "stroke": "#c49d66",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 18,
+              "width": 40,
+              "x": 374,
+              "y": 303
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 32,
+            "kind": "Path",
+            "locked": false,
+            "name": "27 / Selected lit hair strand",
+            "opacity": 0.2199999988079071,
+            "opacityPct": 22,
+            "stroke": "#ba8e59",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 35,
+              "width": 48,
+              "x": 157,
+              "y": 1190
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 31,
+            "kind": "Path",
+            "locked": false,
+            "name": "26 / Lower ivory fold direction",
+            "opacity": 0.23999999463558197,
+            "opacityPct": 24,
+            "stroke": "#d4c8b2",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 15,
+              "width": 45,
+              "x": 215,
+              "y": 1161
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 30,
+            "kind": "Path",
+            "locked": false,
+            "name": "25 / Lower ivory fold crest",
+            "opacity": 0.23999999463558197,
+            "opacityPct": 24,
+            "stroke": "#d7c7ac",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 47,
+              "width": 51,
+              "x": 77,
+              "y": 1050
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 29,
+            "kind": "Path",
+            "locked": false,
+            "name": "24 / Lower cloak broken accent",
+            "opacity": 0.23000000417232513,
+            "opacityPct": 23,
+            "stroke": "#a94f3d",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.75,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 55,
+              "width": 44,
+              "x": 83,
+              "y": 868
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 28,
+            "kind": "Path",
+            "locked": false,
+            "name": "23 / Falling cloak left broken light",
+            "opacity": 0.25,
+            "opacityPct": 25,
+            "stroke": "#b0523e",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 30,
+              "width": 47,
+              "x": 550,
+              "y": 653
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 27,
+            "kind": "Path",
+            "locked": false,
+            "name": "22 / Red cloak right fold break",
+            "opacity": 0.23000000417232513,
+            "opacityPct": 23,
+            "stroke": "#8e4434",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 3,
+            "bounds": {
+              "height": 24,
+              "width": 63,
+              "x": 470,
+              "y": 608
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 26,
+            "kind": "Path",
+            "locked": false,
+            "name": "21 / Red cloak turn after clasp",
+            "opacity": 0.25,
+            "opacityPct": 25,
+            "stroke": "#9b4d3b",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 3,
+            "bounds": {
+              "height": 20,
+              "width": 56,
+              "x": 283,
+              "y": 520
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 25,
+            "kind": "Path",
+            "locked": false,
+            "name": "20 / Red cloak shoulder ridge",
+            "opacity": 0.25,
+            "opacityPct": 25,
+            "stroke": "#bd563e",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 3,
+            "bounds": {
+              "height": 34,
+              "width": 37,
+              "x": 207,
+              "y": 753
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 24,
+            "kind": "Path",
+            "locked": false,
+            "name": "19 / Sleeve underside reflected break",
+            "opacity": 0.23999999463558197,
+            "opacityPct": 24,
+            "stroke": "#b8b198",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.5833333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 44,
+              "width": 26,
+              "x": 233,
+              "y": 700
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 23,
+            "kind": "Path",
+            "locked": false,
+            "name": "18 / Sleeve lower fold crest",
+            "opacity": 0.27000001072883606,
+            "opacityPct": 27,
+            "stroke": "#e0ceb2",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.6666666666666666,
+            "visible": true
+          },
+          {
+            "anchors": 3,
+            "bounds": {
+              "height": 58,
+              "width": 30,
+              "x": 278,
+              "y": 656
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 22,
+            "kind": "Path",
+            "locked": false,
+            "name": "17 / Long turning sleeve fold",
+            "opacity": 0.27000001072883606,
+            "opacityPct": 27,
+            "stroke": "#c8bda7",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.0833333333333333,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 43,
+              "width": 34,
+              "x": 244,
+              "y": 594
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 21,
+            "kind": "Path",
+            "locked": false,
+            "name": "16 / Upper sleeve diagonal plane",
+            "opacity": 0.2800000011920929,
+            "opacityPct": 28,
+            "stroke": "#dfccaf",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8333333333333334,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 31,
+              "width": 71,
+              "x": 183,
+              "y": 540
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 20,
+            "kind": "Path",
+            "locked": false,
+            "name": "15 / Ivory shoulder fold, broken edge",
+            "opacity": 0.2800000011920929,
+            "opacityPct": 28,
+            "stroke": "#d7c6a4",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f4fff",
+        "dimImages": null,
+        "id": 19,
+        "kind": "Layer",
+        "locked": false,
+        "name": "30 Fold Highlights / broken cloth and selected hair accents",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 234,
+          "width": 422,
+          "x": 107,
+          "y": 332
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 15,
+              "width": 24,
+              "x": 470,
+              "y": 551
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 18,
+            "kind": "Path",
+            "locked": false,
+            "name": "14 / Lower neck reflected light",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#aea786",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.875,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 54,
+              "width": 29,
+              "x": 107,
+              "y": 349
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 17,
+            "kind": "Path",
+            "locked": false,
+            "name": "13 / Raised arm warm/cool transition",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#998e70",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.125,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 10,
+              "width": 27,
+              "x": 486,
+              "y": 332
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 16,
+            "kind": "Path",
+            "locked": false,
+            "name": "12 / Broken forehead plane light",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#c9a67f",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.75,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 10,
+              "width": 24,
+              "x": 474,
+              "y": 386
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 15,
+            "kind": "Path",
+            "locked": false,
+            "name": "11 / Cheek light below eye, not eyelid",
+            "opacity": 0.15000000596046448,
+            "opacityPct": 15,
+            "stroke": "#b79c79",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.625,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 12,
+              "width": 4,
+              "x": 525,
+              "y": 383
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 14,
+            "kind": "Path",
+            "locked": false,
+            "name": "10 / Small warm nose-plane light",
+            "opacity": 0.20000000298023224,
+            "opacityPct": 20,
+            "stroke": "#cdaa7d",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.375,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 29,
+              "width": 18,
+              "x": 443,
+              "y": 425
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 13,
+            "kind": "Path",
+            "locked": false,
+            "name": "09 / Ear-side reflected colour",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#9c9575",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.875,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 44,
+              "width": 24,
+              "x": 479,
+              "y": 490
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 12,
+            "kind": "Path",
+            "locked": false,
+            "name": "08 / Olive-grey neck halftone",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#969477",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.5,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 22,
+              "width": 19,
+              "x": 463,
+              "y": 405
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 11,
+            "kind": "Path",
+            "locked": false,
+            "name": "07 / Olive cheek halftone",
+            "opacity": 0.20000000298023224,
+            "opacityPct": 20,
+            "stroke": "#8b8f70",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.125,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4fff4f",
+        "dimImages": null,
+        "id": 10,
+        "kind": "Layer",
+        "locked": false,
+        "name": "20 Halftone / olive-grey reflections and warm planes",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 167,
+          "width": 481.11423449195456,
+          "x": 77,
+          "y": 390
+        },
+        "children": [
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 3.821304308879064,
+              "width": 31,
+              "x": 518,
+              "y": 450
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 9,
+            "kind": "Path",
+            "locked": false,
+            "name": "06 / Lower lip plane only",
+            "opacity": 0.11999999731779099,
+            "opacityPct": 12,
+            "stroke": "#594f41",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.5,
+            "visible": true
+          },
+          {
+            "anchors": 3,
+            "bounds": {
+              "height": 79,
+              "width": 36,
+              "x": 77,
+              "y": 390
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 8,
+            "kind": "Path",
+            "locked": false,
+            "name": "05 / Raised forearm cool turn",
+            "opacity": 0.1599999964237213,
+            "opacityPct": 16,
+            "stroke": "#55594a",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 34,
+              "width": 29,
+              "x": 468,
+              "y": 523
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 7,
+            "kind": "Path",
+            "locked": false,
+            "name": "04 / Lower neck reflected shadow",
+            "opacity": 0.1599999964237213,
+            "opacityPct": 16,
+            "stroke": "#5a604b",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.2,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 50,
+              "width": 8.07621939064245,
+              "x": 533,
+              "y": 499
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 6,
+            "kind": "Path",
+            "locked": false,
+            "name": "03 / Cool right neck turn",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#373f37",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1.4,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 13.660268899775588,
+              "width": 55,
+              "x": 483,
+              "y": 470
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 5,
+            "kind": "Path",
+            "locked": false,
+            "name": "02 / Jaw plane transition",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#555a48",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 1,
+            "visible": true
+          },
+          {
+            "anchors": 2,
+            "bounds": {
+              "height": 35,
+              "width": 5.114234491954562,
+              "x": 553,
+              "y": 404
+            },
+            "closed": false,
+            "fill": "None",
+            "id": 4,
+            "kind": "Path",
+            "locked": false,
+            "name": "01 / Cool cheek-side glaze",
+            "opacity": 0.18000000715255737,
+            "opacityPct": 18,
+            "stroke": "#50584c",
+            "strokeOptions": {
+              "align": "center",
+              "alignDashes": false,
+              "arrowAlign": "extend",
+              "cap": "butt",
+              "dash": null,
+              "dashOffset": 0,
+              "endArrow": null,
+              "gradientMode": "within",
+              "join": "miter",
+              "miterLimit": 10,
+              "profile": "uniform",
+              "startArrow": null,
+              "widthPoints": null
+            },
+            "strokeWidth": 0.8,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#ff4f4f",
+        "dimImages": null,
+        "id": 3,
+        "kind": "Layer",
+        "locked": false,
+        "name": "10 Shadow Glazes / cool face and neck turns",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      },
+      {
+        "bounds": {
+          "height": 1402,
+          "width": 1122,
+          "x": 0,
+          "y": 0
+        },
+        "children": [
+          {
+            "bounds": {
+              "height": 1402,
+              "width": 1122,
+              "x": 0,
+              "y": 0
+            },
+            "fill": "None",
+            "id": 2,
+            "kind": "Image",
+            "locked": false,
+            "name": "alexander-painterly-base.png",
+            "stroke": "None",
+            "strokeWidth": 0,
+            "visible": true
+          }
+        ],
+        "clip": false,
+        "color": "#4f80ff",
+        "dimImages": null,
+        "id": 1,
+        "kind": "Layer",
+        "locked": true,
+        "name": "00 Generated Base / reference-led image, unchanged",
+        "preview": true,
+        "printable": true,
+        "template": false,
+        "visible": true
+      }
+    ],
+    "objects": 36,
+    "paint": {
+      "appearanceItem": null,
+      "fill": "None",
+      "fillActive": false,
+      "stroke": "#bcb199",
+      "strokeWidth": 0.35
+    },
+    "pasteRemembersLayers": false,
+    "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\masters\\Alexander-Painterly-Brushwork.vectorcraft",
+    "redo": [],
+    "revision": 131,
+    "selection": [
+      36
+    ],
+    "selectionBounds": {
+      "height": 0.19999999999998863,
+      "width": 0.8999999999999773,
+      "x": 552.9,
+      "y": 372
+    },
+    "selectionRotation": 0,
+    "target": null,
+    "title": "Alexander-Painterly-Brushwork.vectorcraft",
+    "tool": "selection",
+    "uid": 2,
+    "units": "Pixels"
+  },
+  "qa": {
+    "overlayNonzeroAlphaPixels": 9885,
+    "changedCompositePixels": 8143,
+    "maxOverlayAlpha": 14,
+    "unchangedRegionDifferences": 0,
+    "sourceUnchanged": true,
+    "compositeSha256": "236acfbcb5bb832313cc71920ede16f2e8e0daaca8372328ea2c18080a108d08",
+    "nativeStrokeCount": 30,
+    "nativeLayerCount": 5
+  }
+}

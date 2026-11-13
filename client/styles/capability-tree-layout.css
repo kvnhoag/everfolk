@@ -1,0 +1,20 @@
+/* Skill tree layout and visibility tiers. Loaded after capability-tree.css.
+   The map takes the full width and more height; the selected skill reads below it. */
+.capability-tree{--cap-paper:#f3e7cc}
+.capability-tree .capability-workspace{grid-template-columns:minmax(0,1fr);gap:16px}
+.capability-tree .capability-viewport{height:clamp(480px,72vh,820px);background:#f3e7cc;background-image:radial-gradient(#e6d6b2 1px,transparent 1px);background-size:22px 22px;border-color:#c9b48a}
+.capability-tree .capability-inspector{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 26px;padding:16px 18px;background:#f8eed8;border:1px solid #d9c6a3;border-top:3px solid #5d7057;font-size:13px}
+.capability-tree .capability-inspector>header,.capability-tree .capability-inspector>.capability-detail-meta{grid-column:1/-1}
+.capability-tree .capability-inspector section{margin-top:6px}
+
+/* Three tiers: learned (strongest), learnable skills that exist in this world, and greyed-out skills not yet in the game. */
+.capability-tree .capability-node.tier-learnable{color:#4a3f2c}
+.capability-tree .capability-node.tier-learnable .capability-node-name{color:#3f3626;font-weight:600}
+.capability-tree .capability-node.is-locked .capability-node-shape{fill:#f6ecd3;stroke:#8f7a52;stroke-width:1.75}
+.capability-tree .capability-node.tier-learned .capability-node-name{color:#203f2d;font-weight:700}
+.capability-tree .capability-node.tier-unavailable{opacity:.4;filter:grayscale(1)}
+.capability-tree .capability-node.tier-unavailable .capability-node-name{color:#8d8a80;font-weight:400}
+.capability-tree .capability-node.is-off-path:not(.is-muted){opacity:.72}
+.capability-tree .capability-node.tier-unavailable.is-off-path{opacity:.3}
+.capability-tree .capability-legend .is-unavailable{opacity:.55}
+.character-management.is-skills>.life-health-panel,.character-management.is-skills>.character-background,.character-management.is-skills>.character-activity-status,.character-management.is-skills>.character-recent-outcome{display:none}

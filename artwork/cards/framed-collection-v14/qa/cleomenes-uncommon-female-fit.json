@@ -1,0 +1,80 @@
+{
+  "figureId": "cleomenes",
+  "figureName": "Cleomenes of Naucratis",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Revenue Records Assistant",
+  "displayTitle": "Revenue Records Assistant",
+  "subtitle": "Scribe of the Nile Treasury",
+  "bodyTitle": "The Account Holds Together",
+  "bodyText": "A revenue assistant checks receipts and records the passage of money and grain. Patient accuracy makes the treasury's figures traceable, giving its larger decisions a firmer basis than rumour, pressure, or convenient memory.",
+  "sourceRoleSlug": "cleomenes-uncommon",
+  "newArt": false,
+  "slug": "cleomenes-uncommon-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "uncommon",
+  "rarity": "uncommon",
+  "canonicalTitle": "Revenue Records Assistant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-uncommon-female-pixel.png",
+  "sourceArtSlug": "cleomenes-uncommon-female",
+  "editionLimit": null,
+  "collectionIndex": 95,
+  "gameplayRarity": "uncommon",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/cleomenes.svg",
+    "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "antique bronze, paired rules, leaf corners",
+  "bodySize": 24,
+  "bodyLines": [
+    "A revenue assistant checks receipts and records the passage",
+    "of money and grain. Patient accuracy makes the treasury's",
+    "figures traceable, giving its larger decisions a firmer",
+    "basis than rumour, pressure, or convenient memory."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-uncommon-female.svg",
+  "fittedArt": "assets/fitted/cleomenes-uncommon-female.png",
+  "overlaySvg": "source/overlays/cleomenes-uncommon-female.svg",
+  "titleSize": 58,
+  "sourceArtSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+  "master": "masters/cleomenes-uncommon-female.vectorcraft",
+  "export": "exports/cleomenes-uncommon-female.png",
+  "thumbnail": "assets/cleomenes-uncommon-female-thumb.png",
+  "exportSha256": "642c9661c2601b8bcc7e056f4230340454e544ad082a05151ad86bd3e606f2bc",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582623,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

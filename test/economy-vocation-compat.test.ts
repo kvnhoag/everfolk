@@ -7,7 +7,7 @@ import type { LifeEngine, LifeState, WorldPack } from "../src/types.ts";
 import lives1 from "../worlds/demo/alexandria-lives-1.json" with { type: "json" };
 import lives2 from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import lives3 from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
-import lives4 from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import lives4 from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 
 function ready(engine: LifeEngine, life: LifeState): LifeState {
   while (life.phase === "choice") life = engine.choose(life, engine.getChoices(life)[0].id);

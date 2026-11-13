@@ -1,0 +1,60 @@
+{
+  "slug": "euclid-epic-male",
+  "figureId": "euclid",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Geometer of the Teaching Circle",
+  "subtitle": "Euclid",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 20,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/euclid-epic-male.svg",
+  "fittedArt": "assets/fitted/euclid-epic-male.png",
+  "overlaySvg": "source/overlays/euclid-epic-male.svg",
+  "titleSize": 46,
+  "sourceArtSha256": "42cf2e57719d066b9b755f5ea91daff7210cbc5e81ad265d98bfbca0d252e7f8",
+  "master": "masters/euclid-epic-male.vectorcraft",
+  "export": "exports/euclid-epic-male.png",
+  "thumbnail": "assets/euclid-epic-male-thumb.png",
+  "exportSha256": "0f355b493b170074e5a818d515950ea5765b1444cbf92efd7e70ee2baef2ce26",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

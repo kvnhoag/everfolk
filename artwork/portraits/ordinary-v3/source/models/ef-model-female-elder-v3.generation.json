@@ -1,0 +1,15 @@
+{
+  "id": "ef-model-female-elder-v3",
+  "role": "continuous-whole-person-age-model",
+  "sex": "female",
+  "stage": "elder",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-d7de9eef-c8fe-41a7-8cbb-c91859417d01.png",
+  "promptPath": "source/prompts/ef-model-female-elder-v3-prompt.txt",
+  "referencePaths": [
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+  ],
+  "tool": "built-in image_gen",
+  "transparentRequested": true,
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v3/source/models/ef-model-female-elder-v3.png",
+  "anatomyPolicy": "Generated head, neck, shoulders, torso and arms continuously as one age-appropriate person. No manual head/neck cuts."
+}
