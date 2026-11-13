@@ -87,6 +87,7 @@ import "../styles/printed-folktale.css";
 import { journalKind } from "../models/journal-kind.ts";
 import "../styles/save-recovery.css";
 import "../styles/gameplay-layout.css";
+import "../styles/readable-text.css";
 import TutorialButton from "../components/TutorialButton.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
 import { useTutorial, useTutorialGameContext } from "../hooks/useTutorial.ts";
@@ -112,7 +113,9 @@ import { readHowToPlayAtStart, writeHowToPlayAtStart } from "../storage/how-to-p
 import { NO_TUTORIAL_CONTEXT, PLANTING_HINT_AGE, gameTutorialContext } from "../models/tutorial-triggers.ts";
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
 import { useYearReminder } from "../hooks/useYearReminder.ts";
-import { YEARLY_ACTION_AGE } from "../models/year-reminder.ts";
+import { YEARLY_ACTION_AGE, YEAR_TASK_TARGETS } from "../models/year-reminder.ts";
+import { actionNudge } from "../models/action-nudge.ts";
+import { focusSection } from "../lib/section-flash.ts";
 import YearChecklist, { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 
@@ -209,14 +212,13 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
   const offeredBooster = useRef("");
   const loanWarningsSeen = useRef(new Set<string>());
-  // Tutorial hints read the screen and the life; they never change screens. The clock waits while a tip is open.
+  // Tutorial hints read the screen and the life; they never change screens. The clock waits while a tip is open and
+  // carries on by itself when it closes, so the player never has to find Resume again.
   const tutorial = useTutorial();
   const tipShown = useTipShown();
   // The card pack's moments (18, 40, 60) stop the clock once each, so nobody misses them.
   const [packMoment, setPackMoment] = useState<PackMilestone | null>(null);
   const packMomentsSeen = useRef(new Set<string>());
-  // When a tip closes, the clock stays paused until the player presses Resume, so no year passes while they look around.
-  const tipWasShown = useRef(false);
   const [characterTab, setCharacterTab] = useState<string | null>(null);
   const [notificationShown, setNotificationShown] = useState(false);
   // How to Play opens whenever the game screen starts (unless the player switched that off); the clock waits.
@@ -232,10 +234,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     packMomentsSeen.current.add(key);
     setPackMoment(milestone);
   }, [life.age, life.seed, life.phase, game.hasBegun]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (tipWasShown.current && !tipShown && game.isPlaying) game.pauseLife();
-    tipWasShown.current = tipShown;
-  }, [tipShown]); // eslint-disable-line react-hooks/exhaustive-deps
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
@@ -375,6 +373,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const previousProgressLife = useRef(life);
   const { legacyEntries, legacyNotice } = useLegacyGallery(life, world, game.archivedLives, !game.isPreview);
   const activities = useMemo(() => lifeEngine.getActivities(life), [lifeEngine, life]);
+  // Halfway through the year, an unused action is offered in the pinned bar so the year-end box seldom has to ask.
+  const actionReminder = game.hasBegun && !game.isPreview ? actionNudge(world, life, activities, game.focusId, game.clockProgress) : null;
   const repaymentWarning = loanDeadlineWarning(world, life);
   const requestedLoanChoice = loanRequest?.kind === "choice" ? choices.find(choice => choice.id === loanRequest.id)
     : activities.find(activity => activity.id === loanRequest?.id);
@@ -657,6 +657,11 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options"><button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
           {life.phase === "ready" && <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>}
         </div>
+        {actionReminder && <div className="action-nudge" role="status">
+          <span className="action-nudge-text"><PixelIcon name="hourglass" size={14} />Half of age {life.age} is gone and this year's action is still unused.</span>
+          {actionReminder.focusAction && <button type="button" className="action-nudge-do" onClick={() => requestActivity(actionReminder.focusAction!.id)}>Do: {actionReminder.focusAction.text}</button>}
+          <button type="button" className="action-nudge-choose" onClick={() => focusSection({ selectors: YEAR_TASK_TARGETS.action, label: "Choose this year's action here" })}>Choose an action</button>
+        </div>}
         <SectionHelp hint="time-bar" />
       </section>}
       {game.hasBegun && life.phase !== "ended" && <YearChecklist items={checklist} />}

@@ -23,3 +23,15 @@
 .life-yearly-action-deck .life-action-cards{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,96px);grid-auto-rows:96px}
 .life-yearly-action-deck .life-action-card{height:96px;overflow:hidden}
 .life-yearly-action-deck .life-action-empty{min-height:calc(3 * 96px + 2 * 8px);margin:0}
+/* The time bar stays pinned to the top of the screen, so Resume and the clock are always in reach, whatever scrolled. */
+.everfolk-game .page-shell .life-session-bar{position:sticky;top:0;z-index:35;box-shadow:0 6px 14px #0f262d55}
+/* Anything the game scrolls to stops below the pinned bar instead of under it. */
+html:has(.everfolk-game .life-session-bar){scroll-padding-top:110px}
+/* Halfway through a year with its action unused: one line and two buttons in the pinned time bar. */
+.everfolk-game .life-session-bar .action-nudge{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 10px;border:2px solid #e6c173;background:#2a4a52;color:#fff6dc}
+.action-nudge-text{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:600}
+.action-nudge-do,.action-nudge-choose{font:700 13.5px/1.2 var(--ef-font-body);padding:7px 12px;border:2px solid #e6c173}
+.action-nudge-do{background:#e6c173;color:#1c3238}
+.action-nudge-choose{background:transparent;color:#fff6dc}
+.action-nudge-do:hover{color:#1c3238;background:#f2d58f}
+.action-nudge-choose:hover{color:#f2d58f}

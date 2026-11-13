@@ -19,3 +19,6 @@
 .choice-opportunity-factors{display:flex;flex-wrap:wrap;gap:2px 9px;margin-top:1px}
 .opportunity-help{color:#47714e}
 .opportunity-hinder{color:#a05240}
+/* The purse beside an action's cost: quiet when affordable, plain red when it is not. */
+.choice-cash-note{display:flex;align-items:center;gap:5px;margin-top:5px;font-size:13px;line-height:1.35;font-weight:600;color:#5b5236}
+.choice-cash-note.is-short{color:#9b2f1f}

@@ -125,7 +125,7 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
       title: overCapacity
         ? `Grain: ${screen.household.grain}, over the store's limit of ${screen.household.capacity}. The extra spoils fast; open for what to do.`
         : `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
-    { key: "cash", word: "Cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}` },
+    { key: "cash", word: "Cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}. Cash pays for lessons, tools and market buys, and for food when the store runs short. Paid work and selling at the market bring it in.` },
     { key: "flax", word: "Flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
     { key: "linen", word: "Linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
     { key: "herd", word: "Herd", parts: [{ glyph: "ox", value: String(holdingOf(screen, "ox")) }, { glyph: "donkey", value: String(holdingOf(screen, "donkey")) }],
