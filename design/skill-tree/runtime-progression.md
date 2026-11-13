@@ -62,7 +62,7 @@ Existing supported-branch events are adapted for the new revision: one-event mas
 
 The capability, retained-vocation and household checks pass (108 tests), and the complete TypeScript check passes. Real engine commands reach all eight depth-10 endpoints; saved lives load and replay identically. These mechanics fixtures start with high proficiency and generous resources, so they do not measure normal-life balance. The final wider repository run reports 1,513 passing tests and 19 failures (1,532 total). The remaining failures are in birth-resource, economy, content-version, moneylender/event-priority and legacy UI expectations; none is in the capability suites. This is not a clean repository-wide release check.
 
-The integrated current free-play release is `alexandria-lives-6`, which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.
+The integrated current free-play release is `alexandria-lives-8` (the retained `alexandria-lives-6` is the same on lives-5), which preserves the official numeric attribute/life-stage/path systems and adds the same figure-title metadata. This document describes the independently versioned 65-node proof tree.
 
 ## Integrated release validation
 

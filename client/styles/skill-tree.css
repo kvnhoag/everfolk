@@ -2,15 +2,15 @@
 .detail-dialog:has(.character-section:not([hidden]) .skill-tree){width:min(1140px,calc(100% - 32px));max-width:1140px}
 .detail-dialog.skill-wiki-dialog{width:min(1140px,calc(100% - 32px));max-width:1140px}
 .skill-wiki-link{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--tree-sage);font:inherit;font-size:11px;min-height:36px;padding:8px 0;text-decoration:underline;text-underline-offset:3px}
-.skill-tree-empty h3{font:400 29px/1.3 var(--serif,Georgia,serif);margin:0 0 12px}.skill-tree-empty p{font-size:12px;line-height:1.7;color:var(--tree-muted)}
+.skill-tree-empty h3{font:400 29px/1.3 var(--ef-font-display);margin:0 0 12px}.skill-tree-empty p{font-size:12px;line-height:1.7;color:var(--tree-muted)}
 .skill-tree{--tree-ink:#354d3d;--tree-muted:#69745f;--tree-sage:#52735a;--tree-clay:#a5684c;--tree-line:#d3d5c3;min-width:0;color:var(--tree-ink)}
 .skill-tree-heading{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-bottom:19px}
 .skill-tree-eyebrow{font-size:9px;font-weight:650;letter-spacing:1.2px;text-transform:uppercase;color:#977453}
-.skill-tree-heading h3{font:400 35px/1.2 var(--serif,Georgia,serif);letter-spacing:-.5px;margin:6px 0 8px;color:var(--tree-ink)}
+.skill-tree-heading h3{font:400 35px/1.2 var(--ef-font-display);letter-spacing:-.5px;margin:6px 0 8px;color:var(--tree-ink)}
 .skill-tree-heading p{font-size:12px;line-height:1.7;color:var(--tree-muted);margin:0}
 .skill-tree-tally{text-align:right;flex-shrink:0;border-left:1px solid var(--tree-line);padding-left:23px}
-.skill-tree-tally>strong{font:400 30px/1.1 var(--serif,Georgia,serif);display:block;color:#526d4d;font-variant-numeric:tabular-nums}
-.skill-tree-tally>strong>span{font:400 14px/1.3 var(--serif,Georgia,serif);color:#8c947f}
+.skill-tree-tally>strong{font:400 30px/1.1 var(--ef-font-display);display:block;color:#526d4d;font-variant-numeric:tabular-nums}
+.skill-tree-tally>strong>span{font:400 14px/1.3 var(--ef-font-display);color:#8c947f}
 .skill-tree-tally>span{font-size:10px;color:var(--tree-muted);display:block;margin-top:5px}
 .skill-tree-toolbar{display:flex;gap:18px;align-items:end;justify-content:space-between}
 .skill-tree-search{width:min(285px,100%)}
@@ -32,7 +32,7 @@
 .skill-tree-tier{position:absolute;top:13px;z-index:2;text-align:center;font-size:9px;font-weight:600;letter-spacing:.25px;color:#8c816a;line-height:1.4}
 .skill-tree-branch{position:absolute;left:0;z-index:-2;border-top:1px solid #d8d9c72b;background:#e7e9d92d}
 .skill-tree-branch:nth-of-type(even){background:#efe7d549}
-.skill-tree-branch>span{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:74px;font:700 11px/1.5 var(--serif,monospace);color:#8c775a;overflow-wrap:anywhere}
+.skill-tree-branch>span{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:74px;font:700 11px/1.5 var(--ef-font-display);color:#8c775a;overflow-wrap:anywhere}
 .skill-branch-1>span{color:#6f7f63}.skill-branch-2>span{color:#6f8180}.skill-branch-3>span{color:#84795e}
 .skill-tree-connectors{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:visible;color:#b8bca8}
 .skill-tree-connectors>path{fill:none;stroke:currentColor;stroke-width:1.6;opacity:.8;stroke-linejoin:miter;transition:stroke .18s,opacity .18s}
@@ -68,7 +68,7 @@
 .skill-detail-icon{display:grid;place-items:center;flex-shrink:0;width:34px;height:40px;color:#9b7b55;background:#efe6d5;border-radius:43% 39% 44% 35%}
 .skill-detail-icon svg{width:25px;height:25px}
 .skill-detail-branch{display:block;font-size:9px;line-height:1.4;letter-spacing:.3px;color:#8f8065}
-.skill-detail-title h4{font:400 25px/1.15 var(--serif,Georgia,serif);color:#3f5940;letter-spacing:-.2px;margin:3px 0 0}
+.skill-detail-title h4{font:400 25px/1.15 var(--ef-font-display);color:#3f5940;letter-spacing:-.2px;margin:3px 0 0}
 .skill-detail-state{font-size:9px;text-transform:capitalize;color:#67805b;margin-left:auto;align-self:start;padding:3px 6px;border:1px solid #ced8bf;border-radius:3px;background:#ecf0e2;line-height:1.3}
 .is-locked .skill-detail-state{color:#90764f;border-color:#dccbb1;background:#f2eadb}.is-mastered .skill-detail-state{color:#8c6a38;border-color:#d9c297;background:#f3e8ce}
 .skill-detail-description{font-size:11px;line-height:1.8;color:#6e7760;margin:13px 0 17px}

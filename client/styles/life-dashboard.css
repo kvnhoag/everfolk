@@ -32,7 +32,7 @@
 .game-dashboard .scene-image.paper-scene.dashboard-scene{display:flex;flex-direction:column;gap:0;padding:0;min-height:0;height:auto;border:1px solid var(--line);background:#f5f2e7}
 .game-dashboard .dashboard-scene .paper-illustration-wrap{order:0;width:100%;height:230px;margin:0;align-self:stretch}
 .game-dashboard .dashboard-scene .paper-scene-copy{order:1;width:100%;padding:12px 16px 6px;align-self:stretch}
-.game-dashboard .dashboard-scene .paper-scene-copy h2{font:500 16px/1.5 var(--sans,Arial,sans-serif);letter-spacing:0;margin:3px 0 0}
+.game-dashboard .dashboard-scene .paper-scene-copy h2{font:500 16px/1.5 var(--ef-font-body);letter-spacing:0;margin:3px 0 0}
 .game-dashboard .dashboard-scene .paper-scene-kicker{font-size:8px;letter-spacing:.7px}
 .game-dashboard .dashboard-scene .paper-scene-bottom{order:2;width:100%;margin:0;border:0;padding:0 16px 10px}
 .game-dashboard .dashboard-scene .paper-motion-controls{min-height:22px;justify-content:flex-end}

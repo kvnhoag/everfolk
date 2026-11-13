@@ -79,7 +79,7 @@
   color:#2b2318;
 }
 .event-toast-title{
-  font-family:var(--serif,Georgia,serif);
+  font-family:var(--ef-font-display);
   font-size:14.5px;
   line-height:1.25;
   color:#231c13;

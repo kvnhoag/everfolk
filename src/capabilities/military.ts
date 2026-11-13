@@ -5,6 +5,11 @@ import { hasServiceRole } from "../demo/service-role.ts";
 export const OFFICER_SERVICE_YEARS = 2, GENERAL_SERVICE_YEARS = 5;
 export const MILITARY_QUALIFICATIONS: Record<string,string> = {soldier:"M4",officer:"M7",general:"M10"};
 export const provedServiceYears = (life:LifeState) => new Set((life.capabilities?.military?.service ?? []).filter(r=>r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations).map(r=>r.age)).size;
+/** A service year whose wage and rations were actually paid from the army's purse and granary. */
+export function reconciledServiceYear(life:LifeState,age:number):boolean {
+  const r=life.capabilities?.military?.service.find(item=>item.age===age);
+  return Boolean(r && r.paid===r.wage && r.rations===r.ration && r.purseBefore-r.purseAfter===r.paid && r.grainBefore-r.grainAfter===r.rations);
+}
 export function militaryCareerReason(world:WorldPack,life:LifeState,job:string):string|undefined {
   const capabilities = world.capabilities;
   if(!capabilities || capabilities.version < 2 || !MILITARY_QUALIFICATIONS[job]) return;
@@ -32,6 +37,7 @@ export function settleMilitaryProofs(world:WorldPack,life:LifeState,age:number):
   for(const evidence of life.capabilities.evidence.filter(e=>/^M(?:[5-9]|10)$/.test(e.nodeId)&&e.age===age&&e.data.awaitingService===true)) {
     const valid=Boolean(receipt && receipt.paid===receipt.wage && receipt.rations===receipt.ration && receipt.purseBefore-receipt.purseAfter===receipt.paid && receipt.grainBefore-receipt.grainAfter===receipt.rations);
     Object.assign(evidence.data,{awaitingService:false,qualifies:valid && evidence.data.cashConserved===true,
+      jobId: evidence.data.jobId ?? `${evidence.nodeId.toLowerCase()}-${age}-${evidence.year}-${life.capabilities.evidence.filter(e => e.nodeId === evidence.nodeId && typeof e.data.jobId === "string").length + 1}`,
       serviceRole:receipt?.role ?? 'none',wagePaid:receipt?.paid ?? 0,rationsServed:receipt?.rations ?? 0,
       armyPurseOpening:receipt?.purseBefore ?? 0,armyPurseClosing:receipt?.purseAfter ?? 0,
       armyGrainOpening:receipt?.grainBefore ?? 0,armyGrainClosing:receipt?.grainAfter ?? 0,serviceReconciled:valid});

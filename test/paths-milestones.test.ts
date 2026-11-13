@@ -4,7 +4,7 @@ import { createEngine } from "../src/index.ts";
 import { auditEvents } from "../src/paths/audit.ts";
 import { lifeStageAt } from "../src/life-stages/index.ts";
 import type { LifeEvent, LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
 const engine = createEngine(world);

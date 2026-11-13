@@ -1,5 +1,6 @@
 import { initialCapabilities as initialDeepCapabilities, syncCapabilities as syncDeepCapabilities, recordFarmSettlement, recordAcceptedTrade, protectedGrain } from "./deep-capabilities/runtime.ts";
-import { initialCapabilities, applyCapability, settleCapabilities } from "./capabilities/engine.ts";
+import { initialCapabilities, applyCapability, assessCapabilityJobs, isAssessmentNode, settleCapabilities } from "./capabilities/engine.ts";
+import { recordActivityProof } from "./capabilities/work-proof.ts";
 import { initialVocations, applyVocation } from "./vocations/engine.ts";
 import type {
   ActivityAvailability, Choice, Command, Condition, Effect, InfluenceCommand, InfluenceSource, JournalEntry,
@@ -139,6 +140,17 @@ function mutableSnapshot(state: LifeState): LifeState {
 /** Detached telemetry for record projections; never persisted in saves. */
 export interface JournalObserver { onChange(index: number, changes: Readonly<Record<string, number>>): void }
 
+/** The birth-year offset a roll in [0, 1) lands on, where each year's chance follows its weight. */
+function weightedOffset(weights: readonly number[], roll: number): number {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  let remaining = Math.floor(roll * total);
+  for (let offset = 0; offset < weights.length; offset++) {
+    remaining -= weights[offset];
+    if (remaining < 0) return offset;
+  }
+  return weights.length - 1;
+}
+
 export function createEngine(input: unknown, observer?: JournalObserver): LifeEngine {
   validateWorld(input);
   // Own a detached immutable pack so the caller cannot change rules mid-life.
@@ -254,7 +266,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (Object.hasOwn(state.flags, "parent")) state.flags.parent = state.character.children.length > 0;
   }
 
-  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string, provenance?: { sourceId: string; outcomeId: string }): void {
+  function apply(state: LifeState, effects: readonly Effect[], decisionContext?: string, provenance?: { sourceId: string; outcomeId: string }, options?: { calendarDeadline?: boolean }): void {
     for (const effect of effects) {
       const beforeLoanBalance = effect.type === "loan" ? state.economy?.loan?.balance ?? 0 : 0;
       if (applyEconomyEffect(world, state, effect)) {
@@ -305,7 +317,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
           state.character!.jobId = effect.job; break;
         case "capability": {
           const previous = new Set(Object.keys(state.capabilities?.learned ?? {}));
-          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node));
+          journal(state, "activity", `capability-work-${effect.node.toLowerCase()}`, applyCapability(world, state, effect.node, options));
           for (const id of Object.keys(state.capabilities?.learned ?? {})) if (!previous.has(id)) {
             const node = world.capabilities!.nodes.find(node => node.id === id)!;
             journal(state, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
@@ -797,8 +809,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     };
     if (world.birthYears) {
       // A side stream of the seed, so the life's own random draws are unchanged.
-      const span = world.birthYears.to - world.birthYears.from + 1;
-      state.birthYear = world.birthYears.from + Math.floor(nextRandom(seedToUint32(`${seed}:birth-year`)).value * span);
+      const { from, to, weights } = world.birthYears;
+      const toAstronomical = (y: number) => (y < 0 ? y + 1 : y);
+      const span = toAstronomical(to) - toAstronomical(from) + 1;
+      const roll = nextRandom(seedToUint32(`${seed}:birth-year`)).value;
+      const offset = weights ? weightedOffset(weights, roll) : Math.floor(roll * span);
+      state.birthYear = yearAtAge(from, offset);
       state.year = state.birthYear;
     }
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
@@ -953,7 +969,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
         player: next,
         commands: [],
       };
-      settlePeople(session, previousSnapshot);
+      settlePeople(session, previousSnapshot, world);
       const { player: _p, commands: _c, ...runtime } = session;
       next.npcs = runtime;
     }
@@ -1017,28 +1033,61 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     }));
   }
 
-  function actInto(next: LifeState, activityId: string): void {
+  function actInto(next: LifeState, activityId: string, options?: { calendarDeadline?: boolean }): void {
     assertPlayable(next);
+    if (options !== undefined && (typeof options !== "object" || options === null || Array.isArray(options))) {
+      throw new Error("Invalid activity options.");
+    }
     const activity = activityById.get(activityId);
     if (!activity) throw new Error(`Unknown activity: ${activityId}`);
+    if (options?.calendarDeadline && (next.capabilities?.project || !activity.outcomes.some(o => o.effects.some(e => e.type === "capability" && isAssessmentNode(e.node))))) {
+      throw new Error("A calendar deadline can only be chosen when starting a commission.");
+    }
     const reason = activityReason(world, next, activity, matches);
     if (reason) throw new Error(`Activity is unavailable: ${reason}`);
-    next.commands.push({ type: "act", activity: activityId });
+    next.commands.push(options?.calendarDeadline ? { type: "act", activity: activityId, calendarDeadline: true } : { type: "act", activity: activityId });
     if (activity.usesYearlyActivity !== false) next.character!.lastActivityAge = next.age;
     next.character!.lastActivityAges[activityId] = next.age;
     journal(next, "activity", activity.id, activity.text);
     const outcome = pick(activity.outcomes, candidate => outcomeWeight(world, next, candidate), next);
     journal(next, "outcome", outcome.id, outcome.text);
-    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }));
+    // Proof-from-work worlds: the year's practice proves the next open step, judged before the practice's gains.
+    if (world.capabilities?.proofFromWork) recordActivityProof(world, next, activity.id);
+    recorded(next, next.journal.length - 1, () => apply(next, outcome.effects, `${activity.text} — ${outcome.text}`, { sourceId: activity.id, outcomeId: outcome.id }, options));
     checkEndings(next);
     resolveEvents(next, false);
     if (world.economy?.market) syncEconomyStat(world, next);
   }
 
-  function act(state: LifeState, activityId: string): LifeState {
+  function act(state: LifeState, activityId: string, options?: { calendarDeadline?: boolean }): LifeState {
     assertPlayable(state);
     const next = mutableSnapshot(state);
-    actInto(next, activityId);
+    actInto(next, activityId, options);
+    return freeze(next);
+  }
+
+  function assessInto(next: LifeState, nodeId: string, jobIds: readonly string[]): void {
+    assertPlayable(next);
+    const previous = new Set(Object.keys(next.capabilities?.learned ?? {}));
+    recorded(next, () => next.journal.length - 1, () => {
+      const summary = assessCapabilityJobs(world, next, nodeId, jobIds);
+      next.commands.push({ type: "assess-jobs", nodeId, jobIds: [...jobIds] });
+      journal(next, "activity", `capability-assess-${nodeId.toLowerCase()}`, summary);
+      for (const id of Object.keys(next.capabilities?.learned ?? {})) if (!previous.has(id)) {
+        const node = world.capabilities!.nodes.find(candidate => candidate.id === id)!;
+        journal(next, "event", `capability-earned-${id.toLowerCase()}`, `Learned ${node.title}. ${node.reward}`);
+      }
+      syncEconomyStat(world, next);
+    });
+    checkEndings(next);
+    resolveEvents(next, false);
+    if (world.economy?.market) syncEconomyStat(world, next);
+  }
+
+  function assess(state: LifeState, nodeId: string, jobIds: readonly string[]): LifeState {
+    assertPlayable(state);
+    const next = mutableSnapshot(state);
+    assessInto(next, nodeId, jobIds);
     return freeze(next);
   }
 
@@ -1206,8 +1255,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       if (command.type === "advance" && Object.keys(command).length === 1) advanceInto(state);
       else if (command.type === "choose" && typeof command.choice === "string" && Object.keys(command).length === 2) {
         chooseInto(state, command.choice);
-      } else if (command.type === "act" && typeof command.activity === "string" && Object.keys(command).length === 2) {
-        actInto(state, command.activity);
+      } else if (command.type === "act" && typeof command.activity === "string"
+        && (Object.keys(command).length === 2 || (Object.keys(command).length === 3 && command.calendarDeadline === true))) {
+        actInto(state, command.activity, command.calendarDeadline ? { calendarDeadline: true } : undefined);
+      } else if (command.type === "assess-jobs" && Object.keys(command).length === 3 && typeof command.nodeId === "string"
+        && Array.isArray(command.jobIds) && command.jobIds.every((id: unknown) => typeof id === "string")) {
+        assessInto(state, command.nodeId, command.jobIds);
       } else if (command.type === "avatar" && typeof command.variant === "number" && Object.keys(command).length === 2) {
         const count = state.commands.length;
         chooseAvatarInto(state, command.variant);
@@ -1249,5 +1302,5 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     return replay(saveFile.seed, saveFile.commands);
   }
 
-  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
+  return Object.freeze({ world, fingerprint, start, advance, choose, getChoices, getActivities, act, assess, orderMarket, cancelMarketOrder, chooseAvatar, influence, demo, npc, replay, save, load });
 }

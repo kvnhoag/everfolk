@@ -1,0 +1,14 @@
+# docker compose up -d --build   → http://<server>:8787
+services:
+  everfolk:
+    build: .
+    image: everfolk:latest
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    env_file:
+      - .env.production
+    volumes:
+      - everfolk-data:/data
+volumes:
+  everfolk-data:

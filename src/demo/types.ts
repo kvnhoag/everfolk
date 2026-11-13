@@ -183,6 +183,8 @@ export interface MarketDepthConfig {
   /** Lean-year sales earn one standing per this many measures (at least one), up to the cap. */
   leanYearMeasuresPerStanding: number;
   leanYearStandingCap: number;
+  /** Monotone cumulative order pricing so larger orders never receive lower proceeds or cost. */
+  monotoneOrder?: boolean;
 }
 
 /** Track C: wages, rations, convoy. */

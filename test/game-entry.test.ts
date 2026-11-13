@@ -5,7 +5,8 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import { builtinEngine, exportLife, selectWorldPack } from "../client/lib/world-session.ts";
+import { builtinEngine, engineForLife, exportLife, selectWorldPack, WEALTH_OBSERVATIONS_KEY } from "../client/lib/world-session.ts";
+import { getAssetValue } from "../src/economy.ts";
 import { createSampleLife, persistBirthPresentation, persistLife } from "../client/mutations/lives.ts";
 import type { LifeState } from "../src/types.ts";
 import type { StorageLike } from "../client/types/session.ts";
@@ -34,7 +35,14 @@ function renderSavedLife(life: LifeState, enterGame = false, begun = false) {
   Object.defineProperty(globalThis, "window", { configurable: true, value: { localStorage: storage, matchMedia: () => ({ matches: false }) } });
   try {
     const html = renderToStaticMarkup(createElement(App, { enterGame }));
-    assert.deepEqual([...values], before, "entry must preserve the exact saved life and presentation markers");
+    assert.deepEqual([...values].filter(([key]) => key !== WEALTH_OBSERVATIONS_KEY), before, "entry must preserve the exact saved life and presentation markers");
+    const observations = values.get(WEALTH_OBSERVATIONS_KEY);
+    if (begun || life.phase === "ended") {
+      const world = engineForLife(life).world;
+      assert.deepEqual(JSON.parse(observations ?? "null"), {
+        [`${world.id}::${world.version}`]: { [`${life.worldFingerprint}:${life.seed}`]: Math.round(life.economy!.cash + getAssetValue(world, life)) },
+      }, "restoring a begun or completed life records its household assets once");
+    } else assert.equal(observations, undefined, "an unbegun birth is not a recorded-life benchmark");
     return html;
   } finally {
     if (windowDescriptor) Object.defineProperty(globalThis, "window", windowDescriptor);
@@ -80,5 +88,6 @@ test("explicit loading-screen entry preserves a completed life and opens its sum
   assert.doesNotMatch(html, /<main[^>]*class="ef-home"/);
   assert.match(html, /<div class="everfolk-game">/);
   assert.match(html, /aria-label="Life summary"/);
-  assert.match(html, /Read your life’s chronicle/);
+  assert.match(html, /class="life-ending-banner has-section-help"[^>]*aria-labelledby="life-ending-title"/);
+  assert.match(html, /Read the full chronicle/);
 });

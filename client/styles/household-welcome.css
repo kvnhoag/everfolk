@@ -4,7 +4,7 @@
 .household-welcome-header>span{font-size:9px;font-weight:600;letter-spacing:1.4px;color:#8b795d}
 .household-welcome-content{padding:12px 32px 8px}
 .household-welcome-symbol{display:grid;place-items:center;width:56px;height:56px;margin:0 0 20px;border:1px solid #ced5bf;background:#e8ecde;border-radius:50%;color:#667d54}
-.household-welcome-content h2{margin:0 0 16px;font-family:var(--font-display,var(--serif,Georgia,serif));font-size:34px;font-weight:600;line-height:1.2;letter-spacing:-.025em;color:#3d5742;outline:none}
+.household-welcome-content h2{margin:0 0 16px;font-family:var(--ef-font-display);font-size:34px;font-weight:600;line-height:1.2;letter-spacing:-.025em;color:#3d5742;outline:none}
 .household-welcome-content>p{margin:12px 0;font-size:14px;line-height:1.75;color:#65705b}
 .household-welcome-content>.household-welcome-step{margin:0 0 11px;font-size:10px;line-height:1.5;letter-spacing:.2px;color:#8a826b}
 .household-welcome-house{display:flex;flex-direction:column;gap:8px;margin:22px 0 18px;padding:16px 18px;border:1px solid #cdd5bd;border-radius:4px;background:#e9eddf}

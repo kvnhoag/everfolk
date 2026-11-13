@@ -7,6 +7,7 @@ import PixelIcon from "../components/PixelIcon.tsx";
 import { RESOURCES, type ResourceId } from "./resources.ts";
 import ResourceYearDetails from "./Storehouse.tsx";
 import type { StorehouseRow } from "./storehouse-model.ts";
+import SectionHelp from "../components/SectionHelp.tsx";
 
 interface ResourceBarProps {
   screen: DemoScreen;
@@ -95,7 +96,8 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
   }
 
   return (
-    <section className="aoe-resource-hud" aria-label="Household resources and inventory">
+    <section className="aoe-resource-hud has-section-help" aria-label="Household resources and inventory">
+      <SectionHelp hint="resources" />
       <div className="aoe-resource-bar">
         <div className="aoe-staples" role="list" aria-label="Pinned household resources">
           <button
@@ -184,11 +186,11 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
           >
             <ResourceGlyph id="plots" />
             <span className="aoe-cell-copy">
-              <span className="aoe-cell-label">Plots</span>
+              <span className="aoe-cell-label">Fields</span>
               <strong className="aoe-cell-value">
                 {grainPlots}
-                <small>G</small>/{screen.household.flaxPlots}
-                <small>F</small>
+                <small> grain</small> · {screen.household.flaxPlots}
+                <small> flax</small>
               </strong>
             </span>
           </button>

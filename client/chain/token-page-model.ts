@@ -216,7 +216,7 @@ export function marketRows(listings: readonly Listing[], tokens: Readonly<Record
   });
 }
 
-export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; portraitMedia?: string | null; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
+export interface KeptRow { tokenId: string; href: string; title: string; isFigure: boolean; figureId: FigureId | null; portraitMedia?: string | null; rarity: number; rarityLabel: string; actionName: string; affection: number; emblem: string | null }
 
 /** The signed-in player's own kept lives. */
 export function keptRows(tokens: readonly (TokenView & { token_id: string })[]): KeptRow[] {
@@ -224,7 +224,7 @@ export function keptRows(tokens: readonly (TokenView & { token_id: string })[]):
     const isFigure = token.extra.kind === "figure" && token.extra.figure_id !== null;
     return {
       tokenId: token.token_id, href: chainHref({ kind: "token", tokenId: token.token_id }), title: tokenTitle(token.extra), isFigure,
-      figureId: isFigure ? token.extra.figure_id : null, portraitMedia: token.extra.portrait_media ?? null, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
+      figureId: isFigure ? token.extra.figure_id : null, portraitMedia: token.extra.portrait_media ?? null, rarity: token.extra.rarity, rarityLabel: rarityLabel(token.extra.rarity), actionName: actionName(token.extra.action_id),
       affection: token.extra.affection, emblem: isFigure ? null : careerEmblem(token.extra.career_group),
     };
   });

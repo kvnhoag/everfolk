@@ -28,7 +28,7 @@ function lifeWith(world: WorldPack, cash: number): LifeState {
 
 test("society comparison uses all weighted origins and strictly excludes ties", () => {
   const world = fixture(), life = lifeWith(world, 20);
-  assert.deepEqual(getWealthComparison(world, life), { netWorth: 20, percentile: 50, medianWealth: 10 });
+  assert.deepEqual(getWealthComparison(world, life), { netWorth: 20, totalAssets: 20, percentile: 50, medianWealth: 10 });
   life.originId = "estate";
   assert.equal(getWealthComparison(world, life)!.percentile, 50);
   life.economy!.cash = 10;
@@ -55,7 +55,7 @@ test("ordered origin effects preserve clamps, tied wealth and ending stops", () 
   const gain: Effect = { type: "stat", stat: "wealth", delta: 5 };
   const loss: Effect = { type: "stat", stat: "wealth", delta: -5 };
   world.origins = [origin("clamped", 1, 8, 10, [gain, loss])];
-  assert.deepEqual(getWealthComparison(world, lifeWith(world, 50)), { netWorth: 50, percentile: 0, medianWealth: 50 });
+  assert.deepEqual(getWealthComparison(world, lifeWith(world, 50)), { netWorth: 50, totalAssets: 50, percentile: 0, medianWealth: 50 });
   assert.equal(getWealthComparison(world, lifeWith(world, 51))!.percentile, 100);
   world.origins[0].effects = [loss, gain];
   assert.equal(getWealthComparison(world, lifeWith(world, 90))!.medianWealth, 90);
@@ -68,19 +68,21 @@ test("fractional fixed stats and origin changes round currency exactly like birt
   world.stats.wealth = { label: "Wealth", min: 0, max: 1, initial: 0.1 };
   world.origins = [origin("fractional", 1, undefined, undefined, [{ type: "stat", stat: "wealth", delta: 0.2 }])];
   const life = lifeWith(world, 3);
-  assert.deepEqual(getWealthComparison(world, life), { netWorth: 3, percentile: 0, medianWealth: 3 });
+  assert.deepEqual(getWealthComparison(world, life), { netWorth: 3, totalAssets: 3, percentile: 0, medianWealth: 3 });
 });
 
-test("net worth includes assets and debt and remains uncapped by its backing stat", () => {
+test("household assets set the rank while debt only reduces net worth", () => {
   const world = fixture(), life = lifeWith(world, 20);
   life.stats.wealth = 100;
   assert.equal(getWealthComparison(world, life)!.percentile, 50);
   life.economy!.cash = 50; life.economy!.debt = 30;
-  assert.equal(getWealthComparison(world, life)!.percentile, 50);
+  assert.equal(getWealthComparison(world, life)!.percentile, 75);
+  assert.equal(getWealthComparison(world, life)!.netWorth, 20);
   life.economy!.cash = 20; life.economy!.assets.tools = 1;
-  assert.equal(getWealthComparison(world, life)!.percentile, 50);
+  assert.equal(getWealthComparison(world, life)!.percentile, 75);
+  assert.equal(getWealthComparison(world, life)!.totalAssets, 50);
   life.economy!.cash = 0; life.economy!.assets.tools = 0; life.economy!.debt = 10;
-  assert.deepEqual(getWealthComparison(world, life), { netWorth: -10, percentile: 0, medianWealth: 10 });
+  assert.deepEqual(getWealthComparison(world, life), { netWorth: -10, totalAssets: 0, percentile: 0, medianWealth: 10 });
   life.economy!.cash = 2000; life.economy!.debt = 0;
   assert.equal(getWealthComparison(world, life)!.netWorth, 2000);
   assert.equal(getWealthComparison(world, life)!.percentile, 100);
@@ -151,7 +153,7 @@ test("very wide cash and resource rolls use analytical pair counting", { timeout
 test("subnormal weights retain relative household shares", () => {
   const world = fixture();
   world.origins = [origin("low", Number.MIN_VALUE, 0), origin("high", Number.MIN_VALUE, 10)];
-  assert.deepEqual(getWealthComparison(world, lifeWith(world, 100)), { netWorth: 100, percentile: 50, medianWealth: 0 });
+  assert.deepEqual(getWealthComparison(world, lifeWith(world, 100)), { netWorth: 100, totalAssets: 100, percentile: 50, medianWealth: 0 });
 });
 
 test("comparison preserves the world, state and RNG and leaves legacy scores alone", () => {

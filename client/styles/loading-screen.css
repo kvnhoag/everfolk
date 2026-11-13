@@ -1,5 +1,5 @@
 .storybook-loading {
-  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-family: var(--ef-font-body);
 }
 
 .loading-progress-label {

@@ -56,7 +56,9 @@ function stepCommand(engine: LifeEngine, state: LifeState, cmd: Command): LifeSt
     case "choose":
       return engine.choose(state, cmd.choice);
     case "act":
-      return engine.act(state, cmd.activity);
+      return engine.act(state, cmd.activity, cmd.calendarDeadline ? { calendarDeadline: true } : undefined);
+    case "assess-jobs":
+      return engine.assess(state, cmd.nodeId, cmd.jobIds);
     case "avatar":
       return engine.chooseAvatar(state, cmd.variant);
     case "influence":

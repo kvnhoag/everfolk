@@ -1,7 +1,7 @@
 import { biographyFor } from "./figure-biographies.ts";
 import { deepFreeze } from "./content.ts";
 
-// Figure-linked contribution and capstone paths are implemented for new free-play lives in alexandria-lives-6; retained ranked NFT rules remain separate.
+// Figure-linked contribution and capstone paths are implemented for new free-play lives in alexandria-lives-8 (and the retained alexandria-lives-6); retained ranked NFT rules remain separate.
 /** Agreed roster policy, used by new free-play figure paths. Deployed/retained NFT minting is unchanged. */
 export const FIGURE_RANK_POLICY = deepFreeze([
   { figureId: "alexander", baseRank: "Legendary", maximumRank: "Legendary" },

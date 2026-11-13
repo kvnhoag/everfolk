@@ -10,11 +10,19 @@ import { lifeRecordChanges } from "../client/models/life-record.ts";
 import { visibleRelationshipPeople } from "../client/models/relationship-labels.ts";
 import { entryUsesDefaultLives, startupRefreshesToDefault } from "../client/models/world-entry.ts";
 import { visibleCharacterSections } from "../client/models/character-panel-model.ts";
-import { clearRecordedWealthObservations, recordWealthObservation, getSocietyWealthBenchmarkInfo } from "../client/models/society-wealth-data.ts";
+import { MIN_RECORDED_LIVES, clearRecordedWealthObservations, recordWealthObservation, getSocietyWealthBenchmarkInfo } from "../client/models/society-wealth-data.ts";
 import { getWealthComparison } from "../client/models/wealth-comparison.ts";
 import sample from "../worlds/alexandria-sample.json" with { type: "json" };
+import React from "react";
 import lives2 from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import lives3 from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
+import lives4 from "../worlds/demo/alexandria-lives-4.json" with { type: "json" };
+import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
+import { SELECTED_WORLD_KEY } from "../client/lib/world-selection.ts";
+import { saveKeyFor } from "../client/lib/world-session.ts";
+import { useWorldLibrary } from "../client/hooks/useWorldLibrary.ts";
+import { validateWorld } from "../src/validate.ts";
+import type { WorldPack } from "../src/types.ts";
 
 test("Issue #12: alexandria-lives-1 export loads and restores on clean storage without prior session setup", async () => {
   const pack = await loadLifeWorld("alexandria-lives-1");
@@ -269,17 +277,18 @@ test("Issue #5: Recorded player lives feed society wealth percentiles with revis
   assert.equal(fallbackInfo.kind, "authored-households");
   assert.match(fallbackInfo.description, /starting household distributions/);
 
-  // 2. Record observations for revision 1.0.0
-  recordWealthObservation("world-a", "1.0.0", 100);
-  recordWealthObservation("world-a", "1.0.0", 200);
-  recordWealthObservation("world-a", "1.0.0", 500);
-  recordWealthObservation("world-a", "1.0.0", 1000);
+  // 2. A single finished life is not a society: it must not replace the households
+  //    (one life at -510 dr once ranked an asset-less player "Top <0.1%").
+  recordWealthObservation("world-a", "1.0.0", 0);
+  assert.equal(getSocietyWealthBenchmarkInfo(worldA).kind, "authored-households");
+  clearRecordedWealthObservations();
 
-  // 3. Observations active for revision 1.0.0
+  // 3. Enough recorded lives (the minimum sample) replace the authored households
+  for (let copy = 0; copy < MIN_RECORDED_LIVES / 4; copy++) for (const assets of [100, 200, 500, 1000]) recordWealthObservation("world-a", "1.0.0", assets);
   const infoA = getSocietyWealthBenchmarkInfo(worldA);
   assert.equal(infoA.kind, "recorded-lives");
-  assert.equal(infoA.sampleCount, 4);
-  assert.match(infoA.description, /4 recorded player lives/);
+  assert.equal(infoA.sampleCount, MIN_RECORDED_LIVES);
+  assert.match(infoA.description, new RegExp(`${MIN_RECORDED_LIVES} recorded player lives`));
 
   // 4. Revision isolation: worldB (revision 2.0.0) retains authored fallback
   const infoB = getSocietyWealthBenchmarkInfo(worldB);
@@ -310,6 +319,156 @@ test("Issue #5: Recorded player lives feed society wealth percentiles with revis
 
   // Clean up
   clearRecordedWealthObservations();
+});
+
+test("Issue #14: Custom household worlds stay selected across fresh-life restarts and pending-birth reloads", async () => {
+  const customPack = {
+    ...structuredClone(lives4),
+    id: "custom-household",
+    version: "1",
+  } as unknown as WorldPack;
+  validateWorld(customPack);
+  const customEngine = createEngine(customPack);
+  const pendingBirth = customEngine.start("backlog-custom-household");
+  assert.equal(pendingBirth.age, 0);
+  assert.equal(pendingBirth.worldId, "custom-household");
+
+  const activeCustomWorld = { id: "custom-household", pack: customPack };
+  assert.equal(entryUsesDefaultLives("custom-household", true, activeCustomWorld), false);
+  assert.equal(entryUsesDefaultLives("custom-household", false, activeCustomWorld), false);
+  assert.equal(entryUsesDefaultLives("alexandria", true, { id: "alexandria", pack: lives4 }), true);
+
+  // Even a custom-edited pack or custom world id reusing an official version string stays protected.
+  assert.equal(startupRefreshesToDefault(customPack, false, LIVES_WORLD_VERSION, "custom-household"), false);
+  assert.equal(startupRefreshesToDefault({ ...structuredClone(lives4), title: "Forked Household" }, false, LIVES_WORLD_VERSION, "alexandria"), false);
+  assert.equal(startupRefreshesToDefault(structuredClone(lives4), false, LIVES_WORLD_VERSION, "custom-household"), false);
+  assert.equal(startupRefreshesToDefault(structuredClone(lives4), false, LIVES_WORLD_VERSION, "alexandria"), true);
+  assert.equal(startupRefreshesToDefault(structuredClone(lives4), true, LIVES_WORLD_VERSION, "alexandria"), false);
+
+  const customPublished = {
+    id: "custom-household",
+    revisionId: `pack-${customEngine.fingerprint}`,
+    pack: customPack,
+    routes: [],
+  };
+  const customKey = customEngine.save(pendingBirth);
+  const store = new Map<string, string>([
+    [SELECTED_WORLD_KEY, JSON.stringify(customPublished)],
+    [saveKeyFor(customEngine), customKey],
+  ]);
+  const storageMock: Storage = {
+    get length() { return store.size; },
+    clear() { store.clear(); },
+    getItem(k: string) { return store.get(k) ?? null; },
+    key(i: number) { return [...store.keys()][i] ?? null; },
+    removeItem(k: string) { store.delete(k); },
+    setItem(k: string, v: string) { store.set(k, String(v)); },
+  };
+
+  const originalWindow = (globalThis as { window?: unknown }).window;
+  const originalDocument = (globalThis as { document?: unknown }).document;
+  const originalFetch = globalThis.fetch;
+  const requestedUrls: string[] = [];
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    writable: true,
+    value: { localStorage: storageMock },
+  });
+  Object.defineProperty(globalThis, "document", {
+    configurable: true,
+    writable: true,
+    value: { hidden: false, addEventListener() {}, removeEventListener() {} },
+  });
+  globalThis.fetch = (async (input: RequestInfo | URL) => {
+    const url = typeof input === "string" ? input : String(input);
+    requestedUrls.push(url);
+    if (url === "/api/worlds/custom-household") {
+      return new Response(JSON.stringify(customPublished), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url === "/api/worlds/alexandria-sample") {
+      return new Response(JSON.stringify({ id: "alexandria-sample", revisionId: "pack-sample", pack: sample, routes: [] }), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    return new Response("{}", { status: 404 });
+  }) as typeof fetch;
+
+  const internals = (React as unknown as {
+    __CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE: { H: unknown };
+  }).__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+  const previousDispatcher = internals.H;
+  const states: unknown[] = [];
+  const refs: Array<{ current: unknown }> = [];
+  const effects: Array<{ create: () => void | (() => void); deps: readonly unknown[] | undefined; cleanup?: () => void; pending: boolean }> = [];
+  let mounted = true;
+  let scheduled = false;
+  let hookResult!: ReturnType<typeof useWorldLibrary>;
+
+  const renderHook = () => {
+    let s = 0, r = 0, e = 0;
+    const dispatcher = {
+      useState<S>(init: S | (() => S)): [S, (next: S | ((prev: S) => S)) => void] {
+        const i = s++;
+        if (!(i in states)) states[i] = typeof init === "function" ? (init as () => S)() : init;
+        return [states[i] as S, (next) => {
+          if (!mounted) return;
+          const prev = states[i] as S;
+          const val = typeof next === "function" ? (next as (p: S) => S)(prev) : next;
+          if (!Object.is(prev, val)) {
+            states[i] = val;
+            if (!scheduled) {
+              scheduled = true;
+              queueMicrotask(() => { scheduled = false; if (mounted) renderHook(); });
+            }
+          }
+        }];
+      },
+      useRef<R>(init: R) {
+        const i = r++;
+        if (!(i in refs)) refs[i] = { current: init };
+        return refs[i] as { current: R };
+      },
+      useEffect(create: () => void | (() => void), deps?: readonly unknown[]) {
+        const i = e++;
+        const prev = effects[i];
+        const changed = !prev || deps === undefined || prev.deps === undefined ||
+          deps.length !== prev.deps.length || deps.some((d, idx) => !Object.is(d, prev.deps![idx]));
+        effects[i] = { create, deps, cleanup: prev?.cleanup, pending: changed };
+      },
+    };
+    internals.H = dispatcher;
+    try { hookResult = useWorldLibrary(); } finally { internals.H = previousDispatcher; }
+    for (const fx of effects) {
+      if (!fx.pending) continue;
+      fx.pending = false;
+      fx.cleanup?.();
+      const c = fx.create();
+      fx.cleanup = typeof c === "function" ? c : undefined;
+    }
+  };
+
+  try {
+    renderHook();
+    await new Promise((r) => setTimeout(r, 10));
+    assert.equal(hookResult.active?.world.id, "custom-household", "Unbegun pending birth reload must keep custom household world");
+    assert.equal(hookResult.active?.world.pack.version, "1");
+
+    await hookResult.enterWorld("custom-household", true, pendingBirth);
+    await new Promise((r) => setTimeout(r, 10));
+    assert.equal(hookResult.active?.world.id, "custom-household", "Fresh-life restart must keep custom household world");
+    assert.equal(hookResult.active?.world.pack.version, "1");
+    assert.ok(requestedUrls.includes("/api/worlds/custom-household"));
+
+    await hookResult.enterWorld("alexandria-sample", false);
+    await new Promise((r) => setTimeout(r, 10));
+    assert.equal(hookResult.active?.world.id, "alexandria-sample", "Explicit classic selection still loads alexandria-sample");
+  } finally {
+    mounted = false;
+    for (const fx of effects) fx.cleanup?.();
+    globalThis.fetch = originalFetch;
+    if (originalWindow === undefined) delete (globalThis as { window?: unknown }).window;
+    else Object.defineProperty(globalThis, "window", { configurable: true, writable: true, value: originalWindow });
+    if (originalDocument === undefined) delete (globalThis as { document?: unknown }).document;
+    else Object.defineProperty(globalThis, "document", { configurable: true, writable: true, value: originalDocument });
+  }
 });
 
 

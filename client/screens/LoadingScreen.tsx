@@ -3,6 +3,7 @@
 import { useId } from "react";
 import type { LoadingPhase } from "../types/loading.ts";
 import "../styles/loading-screen.css";
+import { BRAND_TAGLINE } from "../components/EverfolkBrand.tsx";
 
 const phaseLabels: Record<LoadingPhase, string> = {
   opening: "Loading game…",
@@ -22,9 +23,10 @@ export default function LoadingScreen({ phase = "opening", preview = false, prog
   return <main className="storybook-loading" aria-labelledby={titleId} aria-busy={percent < 100}
     style={{ boxSizing: "border-box", minHeight: "100svh", display: "grid", placeItems: "center", padding: "clamp(20px, 5vw, 48px)", background: "#102e37", color: "#e7e0c9" }}>
     <div style={{ width: "min(100%, 680px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-      <h1 id={titleId} style={{ width: "min(78%, 410px)", margin: "0 0 14px" }}>
+      <h1 id={titleId} style={{ width: "min(78%, 410px)", margin: "0 0 10px" }}>
         <img src="/assets/branding/everfolk-wordmark-cream.svg" alt="Everfolk" width={1280} height={291} style={{ display: "block", width: "100%", height: "auto" }} />
       </h1>
+      <p className="everfolk-brand-tagline" style={{ margin: "0 0 18px", color: "#f1cf88", fontSize: 13, fontWeight: 500, letterSpacing: "4px", lineHeight: 1.2, textTransform: "uppercase" }}>{BRAND_TAGLINE}</p>
       <div role="status" aria-live="polite" aria-atomic="true"
         style={{ marginBottom: "clamp(18px, 3vh, 30px)", color: "#ead6b7", fontSize: 14, lineHeight: 1.5 }}>{label}</div>
       <svg viewBox="0 0 240 106" width={240} height={106} style={{ display: "block", width: "100%", height: "auto" }}

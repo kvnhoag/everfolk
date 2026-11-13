@@ -28,7 +28,7 @@ test("overview leads with wealth and society percentile, with cash as a subordin
   assert.match(html, /350 BCE/);
   assert.doesNotMatch(html, /<dt>Cash<\/dt>/);
   assert.match(html, /overview-wealth-label">Total wealth<\/span><strong/);
-  assert.match(html, /overview-wealth-label">Society percentile<\/span><strong/);
+  assert.match(html, /overview-wealth-label">Assets rank among households<\/span><strong/);
   assert.match(html, /<small class="overview-cash-note"[^>]*>Cash available:/);
   for (const [id, definition] of Object.entries(world.stats)) {
     if (id === world.economy?.stat) continue;

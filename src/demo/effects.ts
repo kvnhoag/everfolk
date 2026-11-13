@@ -4,6 +4,7 @@ import type { DemoCondition, DemoContext, DemoEffect } from "./types.ts";
 import { applyConvoy } from "./service.ts";
 import { applyWork, changeReputation, isBuilt } from "./works.ts";
 import { applyOffer } from "./agents.ts";
+import { loseReservedStock } from "../capabilities/work.ts";
 
 function compare(left: number, op: string, right: number): boolean {
   return op === "gte" ? left >= right : op === "lte" ? left <= right : op === "gt" ? left > right : op === "lt" ? left < right : left === right;
@@ -23,13 +24,22 @@ export function applyDemoEffect(ctx: DemoContext, effect: DemoEffect): void {
     case "grain": {
       const next = demo.household.grain + effect.delta;
       demo.household.grain = Math.max(0, next);
+      if (next < 0) loseReservedStock(ctx.life, "grain", -next);
       ctx.journal(`grain-${effect.cause}`, effect.delta >= 0 ? `${effect.delta} measures of grain reach your store (${effect.cause}).` : `${-effect.delta} measures of grain leave your store (${effect.cause}).`);
       break;
     }
     case "item": {
-      if (effect.item === "flax") demo.household.flax = Math.max(0, demo.household.flax + effect.delta);
-      else if (effect.item === "ox" || effect.item === "donkey") demo.household.animals[effect.item] = Math.max(0, demo.household.animals[effect.item] + effect.delta);
-      else demo.goods[effect.item] = Math.max(0, demo.goods[effect.item] + effect.delta);
+      if (effect.item === "flax") {
+        const next = demo.household.flax + effect.delta;
+        demo.household.flax = Math.max(0, next);
+        if (next < 0) loseReservedStock(ctx.life, "flax", -next);
+      } else if (effect.item === "ox" || effect.item === "donkey") {
+        demo.household.animals[effect.item] = Math.max(0, demo.household.animals[effect.item] + effect.delta);
+      } else {
+        const next = demo.goods[effect.item] + effect.delta;
+        demo.goods[effect.item] = Math.max(0, next);
+        if (next < 0) loseReservedStock(ctx.life, effect.item, -next);
+      }
       break;
     }
     case "reputation": changeReputation(ctx, effect.delta, "your choice"); break;
@@ -37,14 +47,17 @@ export function applyDemoEffect(ctx: DemoContext, effect: DemoEffect): void {
     case "share-grain": {
       const shared = Math.min(effect.quantity, demo.household.grain);
       demo.household.grain -= shared;
-      demo.town.grower.grain += shared; // neighbours' households; stays in the town's grain
+      const lostReserved = loseReservedStock(ctx.life, "grain", effect.quantity - shared);
+      demo.town.grower.grain += shared + lostReserved; // neighbours' households; stays in the town's grain
       break;
     }
     case "grain-to": {
       const moved = Math.min(effect.quantity, demo.household.grain);
       demo.household.grain -= moved;
-      if (effect.to === "crown") demo.town.army.grain += moved; else demo.town.grower.grain += moved;
-      ctx.journal(`grain-${effect.cause}`, `${moved} measures of grain go to the ${effect.to === "crown" ? "royal granary" : "temple store"} (${effect.cause}).`);
+      const lostReserved = loseReservedStock(ctx.life, "grain", effect.quantity - moved);
+      const totalMoved = moved + lostReserved;
+      if (effect.to === "crown") demo.town.army.grain += totalMoved; else demo.town.grower.grain += totalMoved;
+      ctx.journal(`grain-${effect.cause}`, `${totalMoved} measures of grain go to the ${effect.to === "crown" ? "royal granary" : "temple store"} (${effect.cause}).`);
       break;
     }
     case "plot": {

@@ -70,13 +70,32 @@ export function clearQuote(def: DemoDefinition, demo: DemoState, item: TradeItem
  */
 export function orderValue(def: DemoDefinition, demo: DemoState, item: TradeItem, side: "buy" | "sell", quantity: number): OrderValue {
   const start = pressureOf(demo, item), sign = side === "sell" ? 1 : -1;
-  const slices = Math.max(1, Math.min(SLICES, quantity));
-  let done = 0, hundredths = 0;
-  for (let index = 0; index < slices; index++) {
-    const units = Math.floor(quantity * (index + 1) / slices) - done;
-    const quote = quoteAt(def, demo, item, start + sign * (done + Math.floor(units / 2)));
-    hundredths += units * (side === "sell" ? quote.bid : quote.ask);
-    done += units;
+  const depth = def.market.depth;
+  let hundredths = 0;
+  if (depth?.monotoneOrder) {
+    // Fixed buckets anchored at `start` ensure increasing quantity never reprices earlier units.
+    const half = Math.max(1, depth.halfUnits[item]);
+    const step = Math.max(1, Math.ceil(half / 2000));
+    for (let offset = 0; offset < quantity; ) {
+      const p = start + sign * offset;
+      const quote = quoteAt(def, demo, item, p);
+      const unitPrice = side === "sell" ? quote.bid : quote.ask;
+      const atPlateau = side === "sell"
+        ? p >= 0 && pressureFactorBps(depth, item, p) <= depth.minFactorBps
+        : p <= 0 && pressureFactorBps(depth, item, p) >= depth.maxFactorBps;
+      const units = atPlateau ? quantity - offset : Math.min(step, quantity - offset);
+      hundredths += units * unitPrice;
+      offset += units;
+    }
+  } else {
+    const slices = Math.max(1, Math.min(SLICES, quantity));
+    let done = 0;
+    for (let index = 0; index < slices; index++) {
+      const units = Math.floor(quantity * (index + 1) / slices) - done;
+      const quote = quoteAt(def, demo, item, start + sign * (done + Math.floor(units / 2)));
+      hundredths += units * (side === "sell" ? quote.bid : quote.ask);
+      done += units;
+    }
   }
   const total = side === "sell" ? Math.floor(hundredths / HUNDREDTHS) : Math.ceil(hundredths / HUNDREDTHS);
   return { total, from: quoteAt(def, demo, item, start), to: quoteAt(def, demo, item, start + sign * quantity) };

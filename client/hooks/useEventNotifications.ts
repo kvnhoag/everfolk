@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
-import { dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, syncEventNotifications } from "../models/event-notifications.ts";
+import { dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, nextExpiryDelay, syncEventNotifications } from "../models/event-notifications.ts";
 import type { EventNotificationState } from "../models/event-notifications.ts";
 import { readSeenEventNotifications, rememberSeenEventNotifications } from "../state/event-notification-store.ts";
 
@@ -19,8 +19,9 @@ export function useEventNotifications(life: LifeState, world: WorldPack, enabled
   }, [persistent, enabled, updates?.lifeKey, updates?.observedKeys]);
   useEffect(() => {
     if (!enabled || !updates?.notifications.length) return;
-    const expiresAt = Math.min(...updates.notifications.map(notification => notification.expiresAt));
-    const timer = window.setTimeout(() => setUpdates(previous => previous && expireEventNotifications(previous, Date.now())), Math.max(0, expiresAt - Date.now()));
+    const delay = nextExpiryDelay(updates.notifications, Date.now());
+    if (delay === null) return;
+    const timer = window.setTimeout(() => setUpdates(previous => previous && expireEventNotifications(previous, Date.now())), delay);
     return () => window.clearTimeout(timer);
   }, [enabled, updates?.notifications]);
   useEffect(() => {

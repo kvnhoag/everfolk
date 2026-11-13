@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { formatYear, yearAtAge } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
+import SectionHelp from "./SectionHelp.tsx";
 
 /** A passive lifetime scale. The Life record owns history navigation. */
 export default function LifeYearRail({ life }: {
@@ -15,7 +16,7 @@ export default function LifeYearRail({ life }: {
     "--life-stop-count": stops.length,
   } as CSSProperties;
 
-  return <section className="life-year-rail" aria-label="Your lifetime" style={style}>
+  return <section className="life-year-rail has-section-help" aria-label="Your lifetime" style={style}>
     <div className="life-year-rail-heading">
       <strong>A life through time</strong>
       <span>Birth {formatYear(birthYear)} · Age {life.age}</span>
@@ -39,5 +40,6 @@ export default function LifeYearRail({ life }: {
         })}
       </ol>
     </div>
+    <SectionHelp hint="rail" placement="edge" />
   </section>;
 }

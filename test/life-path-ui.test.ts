@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-5.json" with { type: "json" };
+import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import retained from "../worlds/demo/alexandria-lives-3.json" with { type: "json" };
 import { visibleCharacterSections } from "../client/models/character-panel-model.ts";
 

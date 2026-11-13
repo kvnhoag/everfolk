@@ -29,9 +29,8 @@
   --cr-linen-wash:#f3ecd8;
   --cr-double:0 0 0 4px #e0d4b5,0 0 0 5px #c4b183,4px 5px 0 4px #bcaa8030;
   --cr-hard:2px 2px 0 #d4c39a;
-  --cr-mono:"Courier New",Consolas,monospace;
 }
 /* The creator's numbered group chip ("01"). Darker olive than the creator's
    #81916d so 9px numerals keep at least 4.5:1 contrast. */
-.cr-index{display:inline-grid;place-items:center;flex-shrink:0;height:20px;min-width:23px;padding:0 4px;background:var(--cr-olive);color:var(--cr-paper);font:700 9px/1 var(--cr-mono);letter-spacing:1px;font-variant-numeric:tabular-nums}
+.cr-index{display:inline-grid;place-items:center;flex-shrink:0;height:20px;min-width:23px;padding:0 4px;background:var(--cr-olive);color:var(--cr-paper);font:700 9px/1 var(--ef-font-numeric);letter-spacing:1px;font-variant-numeric:tabular-nums}
 .cr-state-icon{display:inline-block;flex-shrink:0;width:9px;height:9px}
